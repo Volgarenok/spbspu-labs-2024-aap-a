@@ -10,7 +10,6 @@ out
 *~
 # Test configuration
 .config
-.config.cache
 # Helpers
 update-student-stats.sh
 generate-stats
