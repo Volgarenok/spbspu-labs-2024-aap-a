@@ -1,6 +1,6 @@
 #include <iostream>
 int main()
 {
- std::cout << "demehin.maxim\n";
+  std::cout << "demehin.maxim\n";
 }
-	
+
