@@ -1,6 +1,6 @@
 #include <iostream>
 int main()
 {
-  std::cout << "lanovenlo.ivan\n";
+  std::cout << "lanovenko.ivan\n";
 }
 
