@@ -2,6 +2,7 @@
 
 int main()
 {
-	std::cout << "evstyunichev.konstantin\n";
+  std::cout << "evstyunichev.konstantin\n";
+  return 0;
 }
 
