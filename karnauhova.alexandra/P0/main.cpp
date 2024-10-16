@@ -1,5 +1,6 @@
-#include<iostream>
+#include <iostream>
+
 int main()
 {
-  std::cout<<"karnauhova.alexandra\n";
+  std::cout << "karnauhova.alexandra\n";
 }
