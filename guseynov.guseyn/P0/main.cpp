@@ -1,5 +1,7 @@
 #include<iostream>
+
 int main()
 {
-std::cout << "guseynov.guseyn\n";
+	std::cout << "guseynov.guseyn\n";
 }
+
