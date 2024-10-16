@@ -2,5 +2,5 @@
 
 int main()
 {
- std::cout<<"balashov.dima\n";
+  std::cout << "balashov.dima\n";
 }
