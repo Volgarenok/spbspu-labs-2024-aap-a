@@ -1,7 +1,7 @@
 #include <iostream>
 
 int main() {
-std::cout <<"cherkasov.nikita\n";
+std::cout <<"ccherkasov.nikita\n";
 } 
 
 
