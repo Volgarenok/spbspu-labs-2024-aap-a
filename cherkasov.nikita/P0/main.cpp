@@ -2,7 +2,7 @@
 
 int main()
  {
-	std::cout << "cherkasov.nikita\n";
+  std::cout << "cherkasov.nikita\n";
  } 
 
 
