@@ -5,6 +5,6 @@ namespace demehin
 {
   double f(double x, size_t k, double error);
   double stdf(double x);
-  void output(double left, double right, const double step, const double error, const size_t k);
+  void output(double x, const size_t k, const double error);
 }
 #endif

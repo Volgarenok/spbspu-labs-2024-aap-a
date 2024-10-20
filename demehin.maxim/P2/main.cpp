@@ -19,6 +19,9 @@ int main()
   }
   const double error = 0.001;
   const double step = 0.05;
-  demehin::output(begin, end, step, error, k);
-
+  for(auto i = begin; i < end; i += step)
+  {
+    demehin::output(i, k, error);
+  }
+  demehin::output(end, k, error);
 }
