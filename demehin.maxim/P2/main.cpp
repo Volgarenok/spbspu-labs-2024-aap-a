@@ -15,5 +15,5 @@ int main()
 //  const double error = 0.001;
 //  const double step = 0.05;
 
-
+  std::cout << demehin::stdf(3) << "\n" ;
 }
