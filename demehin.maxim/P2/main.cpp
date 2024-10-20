@@ -12,8 +12,13 @@ int main()
     std::cerr << "Input Error\n";
     return 1;
   }
-//  const double error = 0.001;
-//  const double step = 0.05;
+  if(begin > end)
+  {
+    std::cerr << "Incorrect interval\n";
+    return 1;
+  }
+  const double error = 0.001;
+  const double step = 0.05;
+  demehin::output(begin, end, step, error, k);
 
-  std::cout << demehin::stdf(3) << "\n" ;
 }
