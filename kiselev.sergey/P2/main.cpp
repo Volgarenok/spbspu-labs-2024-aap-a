@@ -1,5 +1,5 @@
 #include "function.h"
-#include <iosteram>
+#include <iostream>
 int main()
 {
   double left = 0.0, right = 0.0;

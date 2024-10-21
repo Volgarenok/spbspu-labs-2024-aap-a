@@ -10,3 +10,4 @@ namespace kiselev
   double sqr_unox(double x);
   void output_table(double number, size_t k, double error);
 }
+#endif
