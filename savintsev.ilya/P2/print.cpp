@@ -9,13 +9,13 @@ savintsev::Interval savintsev::readInterval()
   return new_A;
 }
 
-double savintsev::roundN(double value, int n)
+double savintsev::roundN(double value, size_t n)
 {
   double st = std::pow(10., n);
   return ((value >= 0) ? (std::round(value * st) / st) : (std::round(value * st) / st));
 }
 
-void savintsev::printBorder(int b)
+void savintsev::printBorder(size_t b)
 {
   for (size_t i = 0; i < b; ++i)
   {
@@ -24,7 +24,7 @@ void savintsev::printBorder(int b)
   std::cout << '\n';
 }
 
-void savintsev::printLine(double columnNum, int * w, size_t k)
+void savintsev::printLine(double columnNum, size_t * w, size_t k)
 {
   std::cout << "| ";
   std::cout << std::setw(w[0]) << savintsev::roundN(columnNum, w[0]-2);
@@ -44,11 +44,11 @@ void savintsev::printLine(double columnNum, int * w, size_t k)
   std::cout << "\n";
 }
 
-int savintsev::len(double b, double a)
+size_t savintsev::len(double b, double a)
 {
-  int k = b >= 0 ? 2 : 3;
+  size_t k = b >= 0 ? 2 : 3;
   double ld = a;
-  int li = a;
+  size_t li = a;
   for (; ld != li; ++k)
   {
     ld *= 10.;
@@ -59,11 +59,11 @@ int savintsev::len(double b, double a)
 
 void savintsev::printSheetOfLines(Interval A, size_t k)
 {
-  int w1th = savintsev::len(A.begin,STEP);
-  int w2nd = std::strlen(ERROR_MSG);
-  int w3rd = std::strlen(ERROR_MSG);
-  int width[] = {w1th, w2nd, w3rd};
-  int sumOfWidths = w1th+w2nd+w3rd+10;
+  size_t w1th = savintsev::len(A.begin,STEP);
+  size_t w2nd = std::strlen(ERROR_MSG);
+  size_t w3rd = std::strlen(ERROR_MSG);
+  size_t width[] = {w1th, w2nd, w3rd};
+  size_t sumOfWidths = w1th+w2nd+w3rd+10;
   savintsev::printBorder(sumOfWidths);
   for (double i = A.begin; i < A.end; i += STEP)
   {

@@ -14,11 +14,11 @@ namespace savintsev {
 
   Interval readInterval();
 
-  int len(double b, double a);
-  double roundN(double value, int n);
+  size_t len(double b, double a);
+  double roundN(double value, size_t n);
 
-  void printBorder(int b);
-  void printLine(double columnNum, int * w, size_t k);
+  void printBorder(size_t b);
+  void printLine(double columnNum, size_t * w, size_t k);
   void printSheetOfLines(Interval, size_t k);
 }
 
