@@ -16,12 +16,12 @@ int main()
   if (left > right)
   {
     std::cerr << "Logic error" << "\n";
-    return 2;
+    return 1;
   }
   if ((left < -1 || left > 1) || (right < -1 || right > 1))
   {
     std::cerr << "Out of range Error" << "\n";
-    return 3;
+    return 1;
   }
   tableMaker(left, right, 0.05, k);
 }
