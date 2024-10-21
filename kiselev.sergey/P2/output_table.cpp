@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <stdexcept>
+#include <cstring>
 void output_table(double number, size_t k, double error)
 {
   int prec = std::cout.precision();
