@@ -2,9 +2,6 @@
 #define FUNCTION_H
 #include <cstddef>
 #include <cstring>
-const char* errorm = "<MATH ERROR>";
-const size_t sec_column = std::strlen(errorm);
-const size_t oth_column = 10;
 namespace kiselev
 {
   double f(double x, size_t k, double error);
