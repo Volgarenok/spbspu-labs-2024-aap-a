@@ -23,5 +23,3 @@ double demehin::stdf(double x)
 {
   return exp(x);
 }
-
-
