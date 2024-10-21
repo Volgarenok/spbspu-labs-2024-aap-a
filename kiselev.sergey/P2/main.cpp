@@ -15,6 +15,6 @@ int main()
   const double step = 0.05;
   for (auto i = left; i <= right; i += step)
   {
-    output_table(i, k, error);
+    kiselev::output_table(i, k, error);
   }
 }

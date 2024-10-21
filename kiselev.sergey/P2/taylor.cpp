@@ -1,7 +1,7 @@
 #include "function.h"
 #include <cmath>
 #include <stdexcept>
-double f(double x, size_t k, double error)
+double kiselev::f(double x, size_t k, double error)
 {
   if (error < 0)
   {

@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <stdexcept>
 #include <cstring>
-void output_table(double number, size_t k, double error)
+void kiselev::output_table(double number, size_t k, double error)
 {
   int prec = std::cout.precision();
   std::cout << std::setw(oth_column) << std::fixed;
@@ -11,7 +11,7 @@ void output_table(double number, size_t k, double error)
   std::cout << number << std::setprecision(prec) << "    ";
   try
   {
-    std::cout << std::setw(oth_column) << f(number, k, error) << "    ";
+    std::cout << std::setw(oth_column) << kiselev::f(number, k, error) << "    ";
   }
   catch (std::logic_error& e)
   {
@@ -21,5 +21,5 @@ void output_table(double number, size_t k, double error)
   {
     std::cout << std::setw(sec_column) << "ERROR\n";
   }
-  std::cout << std::setw(oth_column) << sqr_unox(number) << '\n';
+  std::cout << std::setw(oth_column) << kiselev::sqr_unox(number) << '\n';
 }
