@@ -1,13 +1,13 @@
-#include "declarations.hpp"
 #include <cmath>
 #include <stdexcept>
+#include "declarations.hpp"
 
 double abramov::f(double x, size_t k, double error)
 {
   double summand = 1;
   double sum = summand;
   size_t count = 2;
-  for (; count <= k && count<=10; ++count)
+  for (; count <= k && count <= 10; ++count)
   {
     summand = summand * x / (count - 1);
     sum += summand;
@@ -18,7 +18,7 @@ double abramov::f(double x, size_t k, double error)
   }
   if (!(-1 * error <= summand && summand <= error))
   {
-    throw std::logic_error("<MATH ERROR>");
+    throw std::logic_error("<MATH_ERROR>");
   }
   else
   {

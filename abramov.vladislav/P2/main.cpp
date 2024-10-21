@@ -13,7 +13,7 @@ int main()
     std::cerr << "Wrong input!\n";
     return 1;
   }
-  if (k <= 0 || left > right || left <= -1 || right >= 1)
+  if (k<=0 || left > right || left <= -1 || right >= 1)
   {
     std::cerr << "Wrong input!\n";
     return 1;

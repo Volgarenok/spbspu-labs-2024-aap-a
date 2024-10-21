@@ -1,9 +1,9 @@
-#include "declarations.hpp"
 #include <iomanip>
 #include <iostream>
 #include <cstring>
+#include "declarations.hpp"
 
-const char* errmsg = "<MATH_ERROR>";
+const char *errmsg = "<MATH_ERROR>";
 const size_t second_column_width = std::strlen(errmsg);
 const size_t other_columns_width = 10;
 
@@ -16,7 +16,7 @@ void abramov::str_of_table(double x, size_t k, double error)
   {
     std::cout << std::setw(sec_w) << abramov::f(x, k, error);
   }
-  catch (const std::logic_error& e)
+  catch (const std::logic_error &e)
   {
     std::cout << std::setw(sec_w) << e.what();
   }
