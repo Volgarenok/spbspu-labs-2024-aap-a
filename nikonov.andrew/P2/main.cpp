@@ -8,7 +8,7 @@ int main()
   std::cin >> left >> right >> numberMax;
   if (!std::cin || right > 1 || left < -1)
   {
-    std::cerr << "ERROR: incorrect input\n";
+    std::cerr << "ERROR: incorrect input" << "\n";
     return 1;
   }
   for (double x = left; x < right; x += step)
