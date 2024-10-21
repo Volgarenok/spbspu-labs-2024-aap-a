@@ -8,9 +8,9 @@
 #include <cstring>
 namespace nikonov
 {
-    double cos(double x, size_t numberMax, double absError);
-    double stdcos(double x);
-    void stringOupout(double x, double val1, double stdval);
-    void stringOupout(double x, const std::logic_error& e, double stdval);
+  double cos(double x, size_t numberMax, double absError);
+  double stdcos(double x);
+  void stringOupout(double x, double val1, double stdval);
+  void stringOupout(double x, const std::logic_error& e, double stdval);
 }
 #endif
