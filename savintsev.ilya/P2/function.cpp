@@ -2,7 +2,7 @@
 #include "function.h"
 
 double savintsev::f_ExpMPow2X(double x, size_t k, double error)
-{ 
+{
   double interim = 1.;
   double result = interim;
   for (size_t i = 1; i < k; ++i)

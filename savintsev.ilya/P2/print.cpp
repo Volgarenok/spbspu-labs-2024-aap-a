@@ -38,9 +38,9 @@ void savintsev::printLine(double columnNum, int * w, size_t k)
   {
     std::cerr << std::setw(w[1]) << ERROR_MSG;
   }
-  std::cout << " | "; 
+  std::cout << " | ";
   std::cout << std::setw(w[2]) << savintsev::stdf_ExpMPow2X(columnNum);
-  std::cout << " |"; 
+  std::cout << " |";
   std::cout << "\n";
 }
 

@@ -6,7 +6,7 @@
 #define PRINT_H
 
 namespace savintsev {
-  
+
   struct Interval {
   double begin = 0.;
   double end = 0.;
