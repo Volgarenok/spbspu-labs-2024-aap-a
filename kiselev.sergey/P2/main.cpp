@@ -11,4 +11,10 @@ int main()
     std::cerr << "Incorrect input\n";
     return 1;
   }
+  const double error = 0.0052;
+  const double step = 0.05;
+  for (auto i = left; i <= right; i += step)
+  {
+    output_table(i, k, error);
+  }
 }
