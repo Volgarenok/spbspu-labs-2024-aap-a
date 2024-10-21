@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cmath>
 #include "taylor.h"
 
 int main()
