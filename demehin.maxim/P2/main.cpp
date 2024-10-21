@@ -17,6 +17,12 @@ int main()
     std::cerr << "Incorrect interval\n";
     return 1;
   }
+  bool isInDefinitionArea = begin > - 1 && end < 1;
+  if(isInDefinitionArea == 0)
+  {
+    std::cerr << "Out of definition area\n";
+    return 1;
+  }
   const double error = 0.001;
   const double step = 0.05;
   for(auto i = begin; i < end; i += step)

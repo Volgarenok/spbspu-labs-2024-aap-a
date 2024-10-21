@@ -14,7 +14,7 @@ double demehin::f(double x, size_t k, double error)
   }
   if(std::abs(next2) > error)
   {
-    throw std::logic_error("math-error");
+    throw std::logic_error("<MATH ERROR>");
   }
   return result;
 }
