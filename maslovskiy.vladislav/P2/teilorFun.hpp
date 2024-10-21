@@ -2,6 +2,10 @@
 #define TEILOR_FUN_HPP
 
 #include <cstddef>
-double teilorCos(const double& x, const size_t& k);
+
+namespace maslovskiy
+{
+  double teilorCos(const double& x, const size_t& k);
+}
 
 #endif
