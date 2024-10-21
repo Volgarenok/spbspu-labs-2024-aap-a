@@ -10,8 +10,8 @@ int main()
   {
     std::cerr << "ERROR: incorrect input\n";
     return 1;
-  } 
- for (double x = left; x < right; x += step)
+  }
+  for (double x = left; x < right; x += step)
   {
     try
       {
