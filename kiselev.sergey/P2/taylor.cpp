@@ -5,10 +5,10 @@ double kiselev::f(double x, size_t k, double error)
 {
   if (error < 0)
   {
-    throw std::invalid_argument("the margin of error should be positive");
+    throw std::logic_error("the margin of error should be positive");
   }
   if (k <= 0) {
-    throw std::invalid_argument("counts should be positive");
+    throw std::logic_error("counts should be positive");
   }
   double next = 1;
   double result = next;

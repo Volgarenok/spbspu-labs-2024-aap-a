@@ -17,9 +17,5 @@ void kiselev::output_table(double number, size_t k, double error)
   {
     std::cout << std::setw(sec_column) << errorm << "    ";
   }
-  catch (std::invalid_argument& e)
-  {
-    std::cout << std::setw(sec_column) << "ERROR\n";
-  }
   std::cout << std::setw(oth_column) << kiselev::sqr_unox(number) << '\n';
 }
