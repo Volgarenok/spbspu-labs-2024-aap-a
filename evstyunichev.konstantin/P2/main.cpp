@@ -12,7 +12,8 @@ int main()
 
   for(double i = left; i < right; i += step)
   {
-    std::cout << kos::f(i, k, error) << "\n";
+    kos::output(i, k, error);
   }
+  kos::output(right, k, error);
   return 0;
 }
