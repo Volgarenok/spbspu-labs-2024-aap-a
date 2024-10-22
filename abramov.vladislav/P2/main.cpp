@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include "declarations.hpp"
+#include <cmath>
 
 int main()
 {
@@ -22,7 +23,14 @@ int main()
   const double step = 0.05;
   for (auto i = left; i < right; i += step)
   {
-    abramov::str_of_table(i, k, error);
+    if (fabs(i) < 1e-10)
+    {
+      abramov::str_of_table(0, k, error);
+    }
+    else
+    {
+      abramov::str_of_table(i, k, error);
+    }
   }
   abramov::str_of_table(right, k, error);
 }
