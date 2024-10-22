@@ -4,8 +4,8 @@
 #include <iostream>
 #include "taylorsRow.hpp"
 
-void showRow(double, int);
 
-void showTable(double, double, int, double, int);
+void showRow(double, int, size_t, double);
+void showTable(double, double, int, double, int, double);
 
 #endif
