@@ -1,6 +1,8 @@
 #include <stdexcept>
 #include "taylorsRow.hpp"
 
+namespace balashov
+{
 double EXP_X(double x, size_t numberOfTerms, double error)
 {
 	double result = 1;
@@ -15,4 +17,5 @@ double EXP_X(double x, size_t numberOfTerms, double error)
 		throw std::logic_error("math-error");
 	}
 	return result;
+}
 }

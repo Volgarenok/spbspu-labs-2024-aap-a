@@ -3,6 +3,9 @@
 
 #include<iostream>
 
-double EXP_X(double x, size_t numberOfTerms, double error);
+namespace balashov
+{
+  double EXP_X(double x, size_t numberOfTerms, double error);
+}
 
 #endif
