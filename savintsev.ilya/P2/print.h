@@ -17,8 +17,9 @@ namespace savintsev {
   size_t len(double b, double a);
   double roundN(double value, size_t n);
 
-  void printBorder(size_t b);
+  void printBorder(size_t variation, size_t * w);
   void printLine(double columnNum, size_t * w, size_t k);
+  void printLine(size_t * w);
   void printSheetOfLines(Interval, size_t k);
 }
 

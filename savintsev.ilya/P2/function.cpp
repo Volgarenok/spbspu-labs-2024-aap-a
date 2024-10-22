@@ -16,7 +16,6 @@ double savintsev::f_ExpMPow2X(double x, size_t k, double error)
   }
   return result;
 }
-
 double savintsev::stdf_ExpMPow2X(double x)
 {
   return std::exp(-(std::pow(x, 2)));
