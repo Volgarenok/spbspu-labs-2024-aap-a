@@ -1,4 +1,4 @@
-#include <cstddef> 
+#include <cstddef>
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
