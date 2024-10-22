@@ -6,7 +6,7 @@
 
 namespace balashov
 {
-void showRow(double, int, size_t, double);
-void showTable(double, double, int, double, int, double);
+  void showRow(double, int, size_t, double);
+  void showTable(double, double, int, double, int, double);
 }
 #endif
