@@ -6,7 +6,7 @@
 double dribas::taylor(double x, size_t koll, double error) {
   double result = 1.0;
   double member = 0.0;
-  for (int i = 2; koll > i; i += 1) {
+  for (size_t i = 2; i<koll ; i += 1) {
    double l = i;
    member = (((l * (l + 1)) / 2) * x);
    x *= x;
