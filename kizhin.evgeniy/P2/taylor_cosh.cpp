@@ -2,8 +2,7 @@
 
 #include <stdexcept>
 
-double kizhin::computeTaylorCosh(double argument, size_t maxOperands,
-                                 double absoluteError)
+double kizhin::computeTaylorCosh(double argument, size_t maxOperands, double absoluteError)
 {
   if (maxOperands == 0 || absoluteError <= 0) {
     throw std::invalid_argument("Invalid function arguments");

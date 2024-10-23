@@ -3,11 +3,8 @@
 
 #include <cstddef>
 
-namespace kizhin
-{
-
-double computeTaylorCosh(double argument, size_t maxOperands,
-                         double absoluteError);
+namespace kizhin {
+  double computeTaylorCosh(double argument, size_t maxOperands, double absoluteError);
 }
 
 #endif

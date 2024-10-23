@@ -1,7 +1,7 @@
 #include <cmath>
 #include <iostream>
 
-#include "print_table.hpp"
+#include "printing_utils.hpp"
 #include "taylor_cosh.hpp"
 
 int main()
@@ -23,26 +23,24 @@ int main()
     return 1;
   }
   constexpr size_t stepCount = 10;
-  double stepSize = (intervalEnd - intervalStart) / (stepCount - 1);
-  double absoluteError = stepSize / 10.0;
+  const double stepSize = (intervalEnd - intervalStart) / (stepCount - 1);
+  const double absoluteError = stepSize / 10.0;
 
-  using kizhin::computeTaylorCosh;
-  using kizhin::printRow;
   for (size_t i = 0; i < stepCount; ++i) {
-    double argument = intervalStart + i * stepSize;
-    double expectedValue = std::cosh(argument);
+    const double argument = intervalStart + i * stepSize;
+    const double expectedValue = std::cosh(argument);
     double computedValue = 0.0;
     const char* errorMessage = nullptr;
 
     try {
-      computedValue = computeTaylorCosh(argument, maxOperands, absoluteError);
+      computedValue = kizhin::computeTaylorCosh(argument, maxOperands, absoluteError);
     } catch (const std::logic_error&) {
       errorMessage = "<MATH ERROR>";
     }
     if (errorMessage) {
-      printRow(std::cout, argument, errorMessage, expectedValue);
+      kizhin::printRow(std::cout, argument, errorMessage, expectedValue);
     } else {
-      printRow(std::cout, argument, computedValue, expectedValue);
+      kizhin::printRow(std::cout, argument, computedValue, expectedValue);
     }
   }
 }
