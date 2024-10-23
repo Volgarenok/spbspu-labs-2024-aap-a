@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cmath>
 #include <stdexcept>
 #include "header.hpp"
 
