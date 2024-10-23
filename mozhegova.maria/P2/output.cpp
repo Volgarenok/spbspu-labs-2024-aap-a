@@ -1,10 +1,14 @@
 #include <iostream>
 #include <iomanip>
 #include <stdexcept>
+#include <cstring>
 #include "output.h"
 
-void output_row(auto i)
+void output_row(double i, size_t k, double error)
 {
+  const size_t SecColWidth = std::strlen("<MATH ERROR>") + 2;
+  const size_t OtherCol = 8;
+
   std::cout << std::setw(OtherCol) << i << " ";
   try
   {
@@ -18,11 +22,11 @@ void output_row(auto i)
   std::cout << "\n";
 }
 
-void output_table(double left, double right, size_t k)
+void output_table(double left, double right, size_t k, double step, double error)
 {
-  for (auto i = left; i < right; i += step)
+  for (double i = left; i < right; i += step)
   {
-    output_row(i);
+    mozhegova::output_row(i, k, error);
   }
-  output_row(right);
+  mozhegova::output_row(right, k, error);
 }
