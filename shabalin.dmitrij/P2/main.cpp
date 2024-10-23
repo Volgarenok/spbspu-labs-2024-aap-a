@@ -26,5 +26,17 @@ int main()
   std::cin >> left >> right >> k;
   const double error = 0.01;
   const double step = 0.123;
-
+  for (auto i = left; i < right; i += step)
+  {
+    std::cout << i;
+    std::cout << " ";
+    try 
+    {
+      std::cout << f(right, k, error);
+    }
+    catch (std::logic_error & e)
+    {
+      std::cout << e.what();
+    }
+  }
 }
