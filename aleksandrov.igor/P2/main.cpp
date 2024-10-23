@@ -21,7 +21,7 @@ void printString(double i, size_t k, double error)
   }
   try
   {
-    std::cout << std::setw(cw) << std::left << std::setprecision(5) << aleksandrov::sinx_divx(i);
+    std::cout << std::setw(cw) << std::right << std::setprecision(5) << aleksandrov::sinx_divx(i);
   }
   catch (const std::logic_error& e)
   {
@@ -35,6 +35,16 @@ int main()
   double left = 0.0, right = 0.0;
   size_t k = 0;
   std::cin >> left >> right >> k;
+  if (!std::cin)
+  {
+    std::cerr << "Input was incorrect!\n";
+    return 1;
+  }
+  if (left < -1.0 || right > 1.0 || left >= right)
+  {
+    std::cerr << "Interval was set incorrectly!\n";
+    return 1;
+  }
   const double error = 0.069;
   const double step = 0.05;
   for (auto i = left; i < right; i += step)
