@@ -4,12 +4,12 @@
 #include <iostream>
 #include <cstddef>
 #include <stdexcept>
-#include <cmath>
+#include <iomanip>
 
 namespace maslevtsov
 {
-  void stringOutput(double current, size_t k, const double error);
-  void tableOutput(double left, double right, size_t k, const double step, const double error);
+  void stringOutput(double current, size_t numberMax, const double absError);
+  void tableOutput(double left, double right, size_t numberMax, const double step, const double absError);
 }
 
 #endif

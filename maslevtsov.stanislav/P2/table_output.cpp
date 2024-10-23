@@ -1,27 +1,32 @@
 #include "table_output.hpp"
 #include "taylor_series.hpp"
 
-void maslevtsov::stringOutput(double current, size_t k, const double error)
+void maslevtsov::stringOutput(double current, size_t numberMax, const double absError)
 {
+  std::cout << std::setprecision(5);
+  std::cout << std::fixed;
+  std::cout << std::setw(10);
   std::cout << current;
-  std::cout << ' ';
   try
   {
-    std::cout << maslevtsov::taylorSeries(current, k, error);
+    std::cout << std::setw(15);
+    std::cout << maslevtsov::taylorSeries(current, numberMax, absError);
   }
   catch (const std::logic_error &e)
   {
+    std::cout << std::setw(15);
     std::cout << "<MATH ERROR>";
   }
-  std::cout << ' ' << 1 / (sqrt(1 - pow(current, 2)));
+  std::cout << std::setw(10);
+  std::cout << 1 / (sqrt(1 - current * current));
   std::cout << '\n';
 }
 
-void maslevtsov::tableOutput(double left, double right, size_t k, const double step, const double error)
+void maslevtsov::tableOutput(double left, double right, size_t numberMax, const double step, const double absError)
 {
   for (auto i = left; i < right; i += step)
   {
-    maslevtsov::stringOutput(i, k, error);
+    maslevtsov::stringOutput(i, numberMax, absError);
   }
-  maslevtsov::stringOutput(right, k, error);
+  maslevtsov::stringOutput(right, numberMax, absError);
 }
