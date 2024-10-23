@@ -1,5 +1,5 @@
-#ifndef OUTPUT_TABLE_HPP
-#define OUTPUT_TABLE_HPP
+#ifndef PRINTING_UTILS_HPP
+#define PRINTING_UTILS_HPP
 
 #include <ostream>
 
