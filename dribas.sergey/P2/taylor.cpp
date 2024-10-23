@@ -4,11 +4,10 @@
 #include <cstddef>
 
 double dribas::taylor(double x, size_t koll, double error) {
-  double result = 1.0;
-  double member = 0.0;
-  for (size_t i = 2; i<koll ; i += 1) {
-   double l = i;
-   member = (((l * (l + 1)) / 2) * x);
+  double member = 1;
+  double result = member;
+  for (size_t i = 2; i <= koll ; i += 1) {
+   member = (((i * (i + 1)) / 2) * x);
    x *= x;
    if (i % 2 != 0) {
      result += member;
@@ -16,15 +15,16 @@ double dribas::taylor(double x, size_t koll, double error) {
    else {
      result -= member;
    }
-   if ((abs(result - uno_div_cube(x))) < error) {
+   if (std::abs(member) < error) {
      return result;
    }
   }
-  if ((abs(result - uno_div_cube(x))) < error) {
+  if (std::abs(member) < error){
     return result;
   }
   throw std::logic_error("<MATH ERROR>");
 }
+
 double dribas::uno_div_cube(double x) {
   return 1 / (pow(x + 1, 3));
 }

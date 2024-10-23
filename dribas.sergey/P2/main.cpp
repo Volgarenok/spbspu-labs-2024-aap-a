@@ -1,5 +1,7 @@
+
 #include <iostream>
 #include "taylor.hpp"
+#include "outres.hpp"
 #include <cstddef>
 
 int main()
@@ -10,24 +12,20 @@ int main()
   if (!std::cin)
   {
     std::cerr << "ERROR WITH ENTER";
+    std::cerr << "\n";
     return 1;
   }
 
-  if ((left>right)||(left<=-1 || right>=1))
+  if ((left > right)||(left <= -1 || right >= 1))
   {
     std::cerr << "ERROR WITH GAP";
+    std::cerr << "\n";
     return 1;
   }
 
-  const double error = 0.01;
-  const double step = 0.02;
+  const double error = 0.001;
+  const double step = 0.01;
+  dribas::outall(left, right, step, series, error);
 
-  for (auto x = left; x < right; x += step)
-  {
-   double value = dribas::taylor(x,series,error);
-   std::cout << x;
-   std::cout << " " << value;
-   std::cout << " " << dribas::uno_div_cube(x);
-   std::cout <<"\n";
-  }
+  return 0;
 }

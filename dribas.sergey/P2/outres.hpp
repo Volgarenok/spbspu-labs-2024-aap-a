@@ -3,7 +3,11 @@
 #include <cstddef>
 namespace dribas
 {
-  void outall(double x, size_t koll, double error);
-  void outline(double left, double right, double step, size_t koll, double error);
+  void outline(double x, size_t koll,double error,
+    size_t frstclm, size_t scndclm,
+    size_t thrdclm, size_t frclm);
+
+  void outall(double left, double right, double step,
+     size_t koll, double error);
 }
 #endif
