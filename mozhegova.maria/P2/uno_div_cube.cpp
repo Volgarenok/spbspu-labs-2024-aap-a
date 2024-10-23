@@ -4,11 +4,11 @@
 
 double mozhegova::uno_div_cube(double x, size_t k, double error)
 {
-  double next = 1;
+  double next = 1.0;
   double result = next;
-  for (size_t i = 1; i < k; i++)
+  for (size_t i = 0; i < k - 1; i++)
   {
-    next *= ((1 + i) * (2 + i)) / 2 * (- x);
+    next *= (i + 3) * (- x) / (i + 1);
     result += next;
   }
   if (std::abs(next) > error)
