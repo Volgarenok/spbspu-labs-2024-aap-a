@@ -16,7 +16,7 @@ int main()
   }
   for (double i = begin; i <  end; i += STEP){
     double value_Taylor = 0.0 , value_cmath = 0.0;
-    value_cmath = gavrilova::v_cmath(i);  
+    value_cmath = gavrilova::v_cmath(i);
     try{
       value_Taylor = gavrilova::v_taylor(i, nMax, ERROR);
       gavrilova::output_str(i, value_Taylor, value_cmath);

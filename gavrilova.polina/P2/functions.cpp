@@ -1,7 +1,7 @@
 #include "functions.hpp"
 #include <iostream>
 #include <cmath>
-#include <exception> 
+#include <exception>
 double gavrilova::v_taylor (double x, size_t nMax, double error){
   double absError = 0.0, result = 1.0, iTerm = 1.0;
   for (size_t i =1; i < nMax; ++i){
@@ -27,6 +27,6 @@ void gavrilova::output_str(double num, double v_taylor, double v_cmath){
 }
 void gavrilova::output_str(double num, const char * math_error, double v_cmath){
   std::cout << std::fixed;
-  std::cout.precision(12);  
+  std::cout.precision(12);
   std::cout << num << " " << math_error << " " << v_cmath << "\n";
 }
