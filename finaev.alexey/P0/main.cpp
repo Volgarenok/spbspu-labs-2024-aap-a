@@ -1,5 +1,6 @@
 #include <iostream>
+
 int main()
 {
-    std::cout << "finaev.alexey\n";
+  std::cout << "finaev.alexey\n";
 }
