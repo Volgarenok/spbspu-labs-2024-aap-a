@@ -7,9 +7,9 @@
 void mozhegova::output_row(double i, size_t k, double error)
 {
   const size_t SecColWidth = std::strlen("<MATH ERROR>") + 2;
-  const size_t OtherCol = 8;
+  const size_t OtherCol = 12;
 
-  std::cout << std::setw(OtherCol) << i << " ";
+  std::cout << std::setw(OtherCol) << std::fixed << i << " ";
   try
   {
     std::cout << std::setw(SecColWidth) << mozhegova::uno_div_cube(i, k, error);
