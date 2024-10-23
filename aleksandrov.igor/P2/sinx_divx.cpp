@@ -1,6 +1,7 @@
 #include <cmath>
+#include "namespace.h"
 
-double sinx_divx(double x)
+double aleksandrov::sinx_divx(double x)
 {
   return sin(x)/x;
 }

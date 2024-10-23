@@ -1,6 +1,7 @@
 #include <stdexcept>
+#include "namespace.h"
 
-double taylor(double x, size_t k, double error)
+double aleksandrov::taylor(double x, size_t k, double error)
 {
   double next = 1.0;
   double result = next;
