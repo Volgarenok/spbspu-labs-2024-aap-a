@@ -12,27 +12,25 @@ int main()
   }
   for (double x = left; x < right; x += step)
   {
+    double stdval = nikonov::stdcos(x);
     try
       {
         double val = nikonov::cos(x, numberMax, absError);
-        double stdval = nikonov::stdcos(x);
-        nikonov::stringOupout(x, val, stdval);
+        nikonov::stringOutput(x, val, stdval);
       }
       catch(const std::logic_error& e)
       {
-        double stdval = nikonov::stdcos(x);
-        nikonov::stringOupout(x, e, stdval);
+        nikonov::stringOutput(x, e, stdval);
       }
   }
+  double stdval = nikonov::stdcos(right);
   try
   {
     double val = nikonov::cos(right, numberMax, absError);
-    double stdval = nikonov::stdcos(right);
-    nikonov::stringOupout(right, val, stdval);
+    nikonov::stringOutput(right, val, stdval);
   }
   catch(const std::logic_error& e)
   {
-    double stdval = nikonov::stdcos(right);
-    nikonov::stringOupout(right, e, stdval);
+    nikonov::stringOutput(right, e, stdval);
   }
 }

@@ -1,5 +1,5 @@
 #include "funcs.hpp"
-double nikonov::cos(double x, size_t numberMax, double absError)
+double nikonov::cos(const double& x, const size_t& numberMax, const double& absError)
 {
   double next = (x * x) / 2;
   double result = 1 - next;
@@ -21,33 +21,33 @@ double nikonov::cos(double x, size_t numberMax, double absError)
   }
   return result;
 }
-double nikonov::stdcos(double x)
+double nikonov::stdcos(const double& x)
 {
   return std::cos(x);
 }
-void nikonov::stringOupout(double x, double val, double stdval)
+void nikonov::stringOutput(const double& x, const double& val, const double& stdval)
 {
   const char* errmsg = "<MATH ERROR>";
   const size_t snd_col_width = std::strlen(errmsg);
   const size_t oth_col_width = 10;
 
-  std::cout << std::setw(oth_col_width) << x;
+  std::cout << std::fixed << std::setprecision(2) << std::setw(oth_col_width) << x;
   std::cout << " ";
-  std::cout << std::setw(snd_col_width) << val;
+  std::cout << std::setprecision(6) << std::setw(snd_col_width) << val;
   std::cout << " ";
-  std::cout << std::setw(oth_col_width) << stdval;
+  std::cout << std::setprecision(6) << std::setw(oth_col_width) << stdval;
   std::cout << "\n";
 }
-void nikonov::stringOupout(double x, const std::logic_error& e, double stdval)
+void nikonov::stringOutput(const double& x, const std::logic_error& e, const double& stdval)
 {
   const char* errmsg = "<MATH ERROR>";
   const size_t snd_col_width = std::strlen(errmsg);
   const size_t oth_col_width = 10;
 
-  std::cout << std::setw(oth_col_width) << x;
+  std::cout << std::fixed << std::setprecision(2) << std::setw(oth_col_width) << x;
   std::cout << " ";
-  std::cout << std::setw(snd_col_width) << e.what();
+  std::cout << std::setprecision(6) << std::setw(snd_col_width) << e.what();
   std::cout << " ";
-  std::cout << std::setw(oth_col_width) << stdval;
+  std::cout << std::setprecision(6) << std::setw(oth_col_width) << stdval;
   std::cout << "\n";
 }
