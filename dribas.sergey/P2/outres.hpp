@@ -1,5 +1,6 @@
 #ifndef OUTRES_HPP
 #define OUTRES_HPP
+#include <cstddef>
 namespace dribas
 {
   void outall(double x, size_t koll, double error);

@@ -1,6 +1,7 @@
 #include <iomanip>
 #include <cmath>
 #include <iostream>
+#include <cstddef>
 #include "outres.hpp"
 #include "taylor.hpp"
 

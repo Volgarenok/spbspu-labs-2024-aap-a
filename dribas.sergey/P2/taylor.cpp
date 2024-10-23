@@ -1,5 +1,7 @@
 #include <cmath>
 #include "taylor.hpp"
+#include <stdexcept>
+#include <cstddef>
 
 double dribas::taylor(double x, size_t koll, double error) {
   double result = 1.0;
