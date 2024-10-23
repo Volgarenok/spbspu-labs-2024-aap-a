@@ -8,7 +8,6 @@ void mozhegova::output_row(double i, size_t k, double error)
 {
   const size_t SecColWidth = std::strlen("<MATH ERROR>") + 2;
   const size_t OtherCol = 12;
-  
   std::cout.precision(3);
   std::cout << std::setw(OtherCol) << std::fixed << i << " ";
   try
