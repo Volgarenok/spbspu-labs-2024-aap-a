@@ -2,9 +2,9 @@
 #include <iomanip>
 #include <stdexcept>
 #include <cstring>
-#include "output.h"
+#include "output.hpp"
 
-void output_row(double i, size_t k, double error)
+void mozhegova::output_row(double i, size_t k, double error)
 {
   const size_t SecColWidth = std::strlen("<MATH ERROR>") + 2;
   const size_t OtherCol = 8;
@@ -22,7 +22,7 @@ void output_row(double i, size_t k, double error)
   std::cout << "\n";
 }
 
-void output_table(double left, double right, size_t k, double step, double error)
+void mozhegova::output_table(double left, double right, size_t k, double step, double error)
 {
   for (double i = left; i < right; i += step)
   {

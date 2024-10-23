@@ -1,15 +1,7 @@
 #include <iostream>
 #include <cstring>
-#include "output.h"
-#include "uno_div_cube.h"
-
-namespace mozhegova
-{
-  double uno_div_cube(double x, size_t k, double error);
-  double uno_div_cube_cmath(double x);
-  void output_row(double i, size_t k, double error);
-  void output_table(double left, double right, size_t k, double step, double error);
-}
+#include "output.hpp"
+#include "uno_div_cube.hpp"
 
 int main()
 {
