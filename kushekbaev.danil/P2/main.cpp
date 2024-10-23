@@ -24,7 +24,7 @@ int main()
     try
     {
       std::cout << std::setw(snd) << kushekbaev::f(i, max_members, error);
-    } 
+    }
     catch (const std::logic_error & e)
     {
       std::cout << std::setw(snd) << errormsg;
