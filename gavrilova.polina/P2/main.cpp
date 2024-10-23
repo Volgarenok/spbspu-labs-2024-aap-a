@@ -7,6 +7,7 @@ int main()
   size_t nMax = 0;
   const double STEP = 0.05;
   const double ERROR = 0.001;
+  const char STRMATHERROR [15] = "<MATH ERROR>";
 
   std::cin >> begin >> end >> nMax;
   if (!std::cin || (begin < end) || (begin <= -1) || (end >= 1)){
@@ -14,19 +15,21 @@ int main()
   }
   for (auto i = begin; i <  end; i += STEP){
     double value_Taylor = 0.0 , value_cmath = 0.0;
+    value_cmath = gavrilova::v_cmath(i);  
     try{
       value_Taylor = gavrilova::v_taylor(i, nMax, ERROR);
+      gavrilova::output_str(i, value_Taylor, value_cmath);
     } catch (const std::logic_error & e) {
-      std::cout << "<MATH ERROR>";
+      gavrilova::output_str(i, STRMATHERROR, value_cmath)
     }
-    value_cmath = gavrilova::v_cmath(i);
-    gavrilova::output_str(i, value_Taylor, value_cmath);
   }
-  double end_value_Taylor = 0.0
+  double end_value_Taylor = 0.0;
+  double end_value_cmath = 0.0;
+  end)
   try{
-      end_value_Taylor = gavrilova::v_taylor(end, nMax, ERROR);
-    } catch (const std::logic_error & e) {
-      std::cout << "<MATH ERROR>";                                          }
-  gavrilova::output_str(end, v_taylor(end, nMax, ERROR), v_cmath(end));
+    end_value_Taylor = gavrilova::v_taylor(end, nMax, ERROR);
+    gavrilova::output_str(end, end_value_Taylor, end_value_cmath);
+  } catch (const std::logic_error & e) {
+    gavrilova::output_str(end, STRMATHERROR, end_value_cmath);
+  }
 }
-
