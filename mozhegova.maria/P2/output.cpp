@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include "output.h"
 
-void output_row(auto i, double taylor, double cmath)
+void output_row(auto i)
 {
   std::cout << std::setw(OtherCol) << i << " ";
   try
@@ -22,7 +22,7 @@ void output_table(double left, double right, size_t k)
 {
   for (auto i = left; i < right; i += step)
   {
-    output_row(i, taylor, cmath);
+    output_row(i);
   }
-  output_row(right, taylor, cmath);
+  output_row(right);
 }
