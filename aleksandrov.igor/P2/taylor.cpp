@@ -17,4 +17,3 @@ double aleksandrov::taylor(double x, size_t k, double error)
   return result;
 }
 
-
