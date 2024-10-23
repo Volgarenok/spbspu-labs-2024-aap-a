@@ -10,10 +10,12 @@ void aleksandrov::printString(double i, size_t k, double error)
   const char* errorMessage = "<MATH ERROR>";
   const size_t columnWidth = std::strlen(errorMessage);
   size_t cw = columnWidth;
-  std::cout << std::setw(cw) << std::left << std::setprecision(5) << i;
+  std::cout << std::setw(cw) << std::left << std::fixed
+      << std::setprecision(5) << i;
   try
   {
-    std::cout << std::setw(cw) << std::left << std::setprecision(5) << aleksandrov::taylor(i, k, error);
+    std::cout << std::setw(cw) << std::left << std::fixed
+         << std::setprecision(5) << aleksandrov::taylor(i, k, error);
   }
   catch (const std::logic_error& e)
   {
@@ -21,7 +23,8 @@ void aleksandrov::printString(double i, size_t k, double error)
   }
   try
   {
-    std::cout << std::setw(cw) << std::right << std::setprecision(5) << aleksandrov::sinx_divx(i);
+    std::cout << std::setw(cw) << std::right << std::fixed
+         << std::setprecision(5) << aleksandrov::sinx_divx(i);
   }
   catch (const std::logic_error& e)
   {
@@ -45,7 +48,7 @@ int main()
     std::cerr << "Interval was set incorrectly!\n";
     return 1;
   }
-  const double error = 0.069;
+  const double error = 0.0069;
   const double step = 0.05;
   for (auto i = left; i < right; i += step)
   {
