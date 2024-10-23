@@ -40,7 +40,7 @@ int main()
     std::cerr << "Input was incorrect!\n";
     return 1;
   }
-  if (left < -1.0 || right > 1.0 || left >= right)
+  if (left <= -1.0 || right >= 1.0 || left >= right || k <= 0)
   {
     std::cerr << "Interval was set incorrectly!\n";
     return 1;
