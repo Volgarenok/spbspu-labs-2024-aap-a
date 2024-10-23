@@ -5,7 +5,7 @@
 #include <cstring>
 #include "namespace.h"
 
-void printString(double i, size_t k, double error)
+void aleksandrov::printString(double i, size_t k, double error)
 {
   const char* errorMessage = "<MATH ERROR>";
   const size_t columnWidth = std::strlen(errorMessage);
@@ -49,8 +49,8 @@ int main()
   const double step = 0.05;
   for (auto i = left; i < right; i += step)
   {
-    printString(i, k, error);
+    aleksandrov::printString(i, k, error);
   }
-  printString(right, k, error);
+  aleksandrov::printString(right, k, error);
 }
 
