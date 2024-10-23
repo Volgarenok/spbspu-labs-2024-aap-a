@@ -1,7 +1,7 @@
 #include <iomanip>
 #include <cstring>
-#include "f.cpp"
-#include "stdf.cpp"
+#include <iostream>
+#include "header.h"
 
 int main()
 {
