@@ -13,7 +13,7 @@ int main()
     std::cerr << "Not a number\n";
     return 1;
   }
-  if (left  <= -1 || right >= 1)
+  if (left  <= -1 || right >= 1 || right < left)
   {
     std::cerr << "Incorrect interval\n";
     return 1;
