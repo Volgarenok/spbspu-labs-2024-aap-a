@@ -21,5 +21,4 @@ int main()
   }
 
   maslevtsov::tableOutput(left, right, numberMax, step, absError);
-  std::cout << "\n";
 }
