@@ -3,11 +3,11 @@
 
 namespace balashov
 {
-  double EXP_X(double x, size_t numberOfTerms, double error)
+  double EXP_X(double x, size_t numberOfСalculations, double error)
   {
     double result = 1;
     double summand = 1;
-    for (size_t i = 1; i < numberOfTerms; i++)
+    for (size_t i = 1; i < numberOfСalculations; i++)
     {
       summand = (x * summand) / i;
       result += summand;
