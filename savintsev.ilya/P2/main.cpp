@@ -22,11 +22,10 @@ int main()
     std::cerr << "Probably it's (-1;1)?\n";
     return 1;
   }
-  if ((A.begin == A.end) || (A.end - A.begin) < STEP)
+  if (A.begin == A.end)
   {
     std::cerr << "Incorrect data was entered.\n";
     std::cerr << "Make sure the interval is not the point.\n";
-    std::cerr << "Maybe STEP needs to be increased?(constants.cpp)\n";
     return 1;
   }
   if (A.begin > A.end)

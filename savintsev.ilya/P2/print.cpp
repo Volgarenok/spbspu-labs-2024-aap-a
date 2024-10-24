@@ -18,7 +18,7 @@ double savintsev::roundN(double value, size_t n)
 
 void savintsev::printBorder(size_t variation, size_t * w)
 {
-  size_t width = WIDTH_SPACES;
+  size_t width = 10;
   for (size_t i = 0; i < 3; ++i)
     {
       width += w[i];
@@ -49,11 +49,14 @@ void savintsev::printBorder(size_t variation, size_t * w)
 void savintsev::printLine(size_t * w)
 {
   std::cout << "|";
-  printf("%*.*s", static_cast<int>(w[0]+2), static_cast<int>(w[0]+2), "X VALUE");
+  int stc = static_cast<int>(w[0]+2);
+  printf("%*.*s", stc, stc, "X VAL");
   std::cout << "|";
-  printf("%*.*s", static_cast<int>(w[1]+2), static_cast<int>(w[1]+2), "F w/TAYLOR SER");
+  stc = static_cast<int>(w[1]+2);
+  printf("%*.*s", stc, stc, "F w/TAYLORSER");
   std::cout << "|";
-  printf("%*.*s", static_cast<int>(w[2]+2), static_cast<int>(w[2]+2), "F w/CMATH");
+  stc = static_cast<int>(w[2]+2);
+  printf("%*.*s", stc, stc, "F w/CMATH");
   std::cout << "|";
   std::cout << "\n";
 }
@@ -97,17 +100,26 @@ size_t savintsev::len(double b, double a)
 }
 
 void savintsev::printSheetOfLines(Interval A, size_t k)
-{
-  size_t w1th = savintsev::len(A.begin,STEP);
+{ 
+  size_t w1th = 0;
+  {
+    size_t a = savintsev::len(A.begin,STEP);
+    size_t b = savintsev::len(A.begin,std::abs(A.begin));
+    size_t c = savintsev::len(A.begin,std::abs(A.end));
+    a = a > b ? a : b;
+	  a = a > c ? a : c;
+    w1th = a;
+  }
   size_t w2nd = std::strlen(ERROR_MSG);
   size_t w3rd = std::strlen(ERROR_MSG);
   size_t width[] = {w1th, w2nd, w3rd};
   savintsev::printBorder(1, width);
   savintsev::printLine(width);
   savintsev::printBorder(2, width);
-  for (double i = A.begin; i <= A.end; i += STEP)
+  for (double i = A.begin; i < A.end; i += STEP)
   {
     savintsev::printLine(i, width, k);
   }
+  savintsev::printLine(A.end, width, k);
   savintsev::printBorder(1, width);
 }
