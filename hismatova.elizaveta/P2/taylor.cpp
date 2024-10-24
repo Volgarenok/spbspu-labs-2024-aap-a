@@ -1,5 +1,4 @@
 #include "taylor.h"
-#include <cmath>
 
 double hismatova::sinx(const double& x)
 {

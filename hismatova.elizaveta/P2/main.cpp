@@ -1,13 +1,4 @@
-#include <iostream>
-#include <cmath>
-#include <iomanip>
-#include <cstring>
-
-namespace hismatova
-{
-  double f(double x, size_t k, double error);
-  double stdf(double x);
-}
+#include "taylor.h"
 
 int main()
 {

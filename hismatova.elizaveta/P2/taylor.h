@@ -1,6 +1,9 @@
 #ifndef TAYLOR_H
 #define TAYLOR_H
-
+#include <cmath>
+#include <iostream>
+#include <iomanip>
+#include <cstring>
 #include <cstddef>
 
 namespace hismatova
