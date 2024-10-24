@@ -23,7 +23,7 @@ int main()
 		double res = alymova::arctg(i);
 		try
 		{
-			double x = alymova::taylor_row(start, max_summand, error);
+			double x = alymova::taylor_row(i, max_summand, error);
 			alymova::print(i, x, res);
 		}
 		catch (const std::logic_error& e)
