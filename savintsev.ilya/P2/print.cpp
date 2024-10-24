@@ -100,7 +100,7 @@ size_t savintsev::len(double b, double a)
 }
 
 void savintsev::printSheetOfLines(Interval A, size_t k)
-{ 
+{
   size_t w1th = 0;
   {
     size_t a = savintsev::len(A.begin,STEP);
