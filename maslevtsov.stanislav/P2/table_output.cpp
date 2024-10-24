@@ -19,7 +19,7 @@ void maslevtsov::stringOutput(double current, size_t numberMax, const double abs
   }
   std::cout << std::setw(10);
   std::cout << 1 / (sqrt(1 - current * current));
-  std::cout << '\n';
+  std::cout << "\n";
 }
 
 void maslevtsov::tableOutput(double left, double right, size_t numberMax, const double step, const double absError)

@@ -7,7 +7,7 @@
 
 namespace maslevtsov
 {
-  double taylorSeries(double x, size_t numberMax, double absError);
+  double taylorSeries(double x, size_t numberMax, const double absError);
 }
 
 #endif
