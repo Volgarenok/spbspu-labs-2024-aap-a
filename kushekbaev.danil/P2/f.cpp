@@ -1,6 +1,6 @@
+#include "header.hpp"
 #include <iostream>
 #include <stdexcept>
-#include "header.hpp"
 
 double kushekbaev::f(double x, size_t max_members, double error)
 {

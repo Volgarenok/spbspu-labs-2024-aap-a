@@ -1,5 +1,5 @@
-#include <iostream>
 #include "header.hpp"
+#include <iostream>
 
 double kushekbaev::stdf(double x)
 {

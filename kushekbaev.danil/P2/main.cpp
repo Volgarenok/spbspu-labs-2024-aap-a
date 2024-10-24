@@ -10,7 +10,17 @@ int main()
   std::cin >> first_member >> last_member >> max_members;
 
   if (std::cin.fail()) {
-    std::cerr << "Invalid input. Please enter numerical values." << "\n";
+    std::cerr << "Input fail" << "\n";
+    return 1;
+  }
+
+  if (std::cin.bad()) {
+    std::cerr << "Bad input" << "\n";
+    return 1;
+  }
+
+  if (std::cin.eof()) {
+    std::cerr << "EOF" << "\n";
     return 1;
   }
 
