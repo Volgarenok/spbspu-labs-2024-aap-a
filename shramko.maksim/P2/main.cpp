@@ -1,4 +1,5 @@
 #include <iostream>
+#include "table.hpp"
 
 int main()
 {
@@ -11,4 +12,6 @@ int main()
     std::cerr << "Input error\n";
     return 1;
   }
+
+  shramko::table(left, right, k);
 }

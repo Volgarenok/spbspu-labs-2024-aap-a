@@ -1,46 +1,27 @@
-#include "table.h"
-#include "partOfRow.cpp"
-#include <cmath>
 #include <iostream>
+#include <stdexcept>
+#include "table.hpp"
+#include "partOfRow.hpp"
 
-void shramko::table(double left, double right, size_t k)
+namespace shramko
 {
-  const double step = 0.2;
-  const double error = 0,001;
-
-  while (size_t i = left; i < right; i += step)
+  void table(double left, double right, size_t k)
   {
-    double value = shramko::partOfRow(i, k, error)
+    const double step = 1;
+    const double error = 0.001;
 
-    if (i > right)
+    for (size_t i = left; i < right; i += step)
     {
-      return 0;
-    }
-
-    if (i == right)
-    {
-      std::cout << left << " ";
+      std::cout << i << "\t";
       try
       {
-        std::cout << value << " ";
+        std::cout << shramko::partOfRow(i, k, error) << "\t";
       }
-      catch
+      catch (const std::logic_error & e)
       {
-        std::cout << "<MATH ERROR>" << " ";
+        std::cout << "<MATH ERROR>";
       }
-      std::cout << std::sin(left) << "\n";
-      return 0;
+      std::cout << std::sin(i) << "\n";
     }
-
-    std::cout << left << " ";
-    try
-    {
-      std::cout << value << " ";
-    }
-    catch
-    {
-      std::cout << "<MATH ERROR>" << " ";
-    }
-    std::cout << std::sin(left) << "\n";
   }
 }
