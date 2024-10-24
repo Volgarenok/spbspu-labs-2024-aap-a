@@ -67,7 +67,6 @@ void savintsev::printLine(double columnNum, size_t * w, size_t k)
   std::cout << "| ";
   stc = static_cast<int>(w[0]);
   printf("%- *.*g", stc, stc-2, savintsev::roundN(columnNum, w[0]));
-  //std::cout << std::setw(w[0]) << savintsev::roundN(columnNum, w[0]-2);
   std::cout << " | ";
   stc = static_cast<int>(w[1]);
   try
@@ -81,7 +80,6 @@ void savintsev::printLine(double columnNum, size_t * w, size_t k)
   std::cout << " | ";
   stc = static_cast<int>(w[2]);
   printf("%-*.*g", stc, stc-2, savintsev::stdf_ExpMPow2X(columnNum));
-  //std::cout << std::setw(w[2]) << savintsev::stdf_ExpMPow2X(columnNum);
   std::cout << " |";
   std::cout << "\n";
 }
@@ -102,12 +100,14 @@ size_t savintsev::len(double b, double a)
 void savintsev::printSheetOfLines(Interval A, size_t k)
 {
   size_t w1th = 0;
-  size_t a = savintsev::len(A.begin,STEP);
-  size_t b = savintsev::len(A.begin,std::abs(A.begin));
-  size_t c = savintsev::len(A.begin,std::abs(A.end));
-  a = a > b ? a : b;
-	a = a > c ? a : c;
-  w1th = a;
+  {
+    size_t a = savintsev::len(A.begin,STEP);
+    size_t b = savintsev::len(A.begin,std::abs(A.begin));
+    size_t c = savintsev::len(A.begin,std::abs(A.end));
+    a = a > b ? a : b;
+    a = a > c ? a : c;
+    w1th = a;
+  }
   size_t w2nd = std::strlen(ERROR_MSG);
   size_t w3rd = std::strlen(ERROR_MSG);
   size_t width[] = {w1th, w2nd, w3rd};
