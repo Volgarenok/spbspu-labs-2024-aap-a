@@ -12,21 +12,25 @@ int main()
   if (first_member > last_member)
   {
     std::cerr << "First member can`t be more than last";
+    return 1;
   }
 
   if (std::isnan(first_member))
   {
     std::cerr << "First member is NaN";
+    return 1;
   }
 
   if (std::isnan(last_member))
   {
     std::cerr << "Second member is NaN";
+    return 1;
   }
 
   if (std::isnan(max_members))
   {
     std::cerr << "Number of max members is NaN";
+    return 1;
   }
 
   const double error = 0.001;
