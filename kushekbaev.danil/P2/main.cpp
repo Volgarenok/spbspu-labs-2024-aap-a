@@ -13,7 +13,7 @@ int main()
     std::cerr << "Invalid input. Please enter numerical values." << "\n";
     return 1;
   }
- 
+
   if (first_member > last_member)
   {
     std::cerr << "First member can`t be more than last";
