@@ -103,12 +103,12 @@ void savintsev::printSheetOfLines(Interval A, size_t k)
 {
   size_t w1th = 0;
   {
-    size_t a = savintsev::len(A.begin,STEP);
-    size_t b = savintsev::len(A.begin,std::abs(A.begin));
-    size_t c = savintsev::len(A.begin,std::abs(A.end));
-    a = a > b ? a : b;
-	  a = a > c ? a : c;
-    w1th = a;
+  size_t a = savintsev::len(A.begin,STEP);
+  size_t b = savintsev::len(A.begin,std::abs(A.begin));
+  size_t c = savintsev::len(A.begin,std::abs(A.end));
+  a = a > b ? a : b;
+	a = a > c ? a : c;
+  w1th = a;
   }
   size_t w2nd = std::strlen(ERROR_MSG);
   size_t w3rd = std::strlen(ERROR_MSG);
