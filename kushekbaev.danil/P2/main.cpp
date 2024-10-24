@@ -53,15 +53,15 @@ int main()
     std::cout << " " << std::setw(oth) << kushekbaev::stdf(i);
     std::cout << "\n";
   }
-  std::cout << last_member;
+  std::cout << std::setw(oth)  << last_member;
   try
   {
-    std::cout << " " << kushekbaev::f(last_member, max_members, error);
+    std::cout << " " << std::setw(snd) << kushekbaev::f(last_member, max_members, error);
   }
   catch (const std::logic_error & e)
   {
     std::cout << errormsg;
   }
 
-  std::cout << " " << kushekbaev::stdf(last_member) << "\n";
+  std::cout << std::setw(snd-1) << kushekbaev::stdf(last_member) << "\n";
 }
