@@ -9,6 +9,11 @@ int main()
   size_t max_members = 0;
   std::cin >> first_member >> last_member >> max_members;
 
+  if (std::cin.fail()) {
+    std::cerr << "Invalid input. Please enter numerical values." << "\n";
+    return 1;
+  }
+ 
   if (first_member > last_member)
   {
     std::cerr << "First member can`t be more than last";
