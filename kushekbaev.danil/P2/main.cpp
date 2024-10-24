@@ -9,6 +9,26 @@ int main()
   size_t max_members = 0;
   std::cin >> first_member >> last_member >> max_members;
 
+  if (first_member > last_member)
+  {
+    std::cerr << "First member can`t be more than last";
+  }
+
+  if (std::isnan(first_member))
+  {
+    std::cerr << "First member is NaN";
+  }
+
+  if (std::isnan(last_member))
+  {
+    std::cerr << "Second member is NaN";
+  }
+
+  if (std::isnan(max_members))
+  {
+    std::cerr << "Number of max members is NaN";
+  }
+
   const double error = 0.001;
   const double step = 0.05;
   const char * errormsg = "<MATH ERROR>";
