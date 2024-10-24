@@ -35,6 +35,8 @@ int main()
   const char * errormsg = "<MATH ERROR>";
   const size_t second_column_width = std::strlen(errormsg);
   const size_t others_columns = 10;
+  size_t oth = others_columns;
+  size_t snd = second_column_width;
 
   for (auto i = first_member ; i < last_member; i += step)
   {
