@@ -1,9 +1,9 @@
 #include <iostream>
 #include "output.hpp"
-using namespace belobrov;
 
 int main()
 {
+  using namespace belobrov;
 
   double left = 0, right = 0;
   size_t k = 0;
