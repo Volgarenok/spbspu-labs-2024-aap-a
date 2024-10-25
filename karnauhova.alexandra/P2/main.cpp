@@ -33,7 +33,23 @@ double karnauhova::f(double x, size_t k, double error)
   double result = next;
   for (size_t i = 1; i<k;++i)
   {
-  //последовательностть сумма
+    next = 1.0;
+    for (size_t j = 0; j<(i*2+1); ++j)
+    {
+      next*=x;
+    }
+    for (double j = 1; j<(i*2+2); ++j)
+    {
+      next/=j;
+    }
+    if (i%2=0)
+    {
+      result+=next;
+    }
+    else
+    {
+      result-=next;
+    }
   }
   if (std::abs(next) > error)
   {
@@ -41,7 +57,7 @@ double karnauhova::f(double x, size_t k, double error)
   }
   return result;
 }
-double karnauhova::stdf(double)
+double karnauhova::stdf(double x)
 {
-  return 0.0
+  return std::sin(x);
 }
