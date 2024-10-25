@@ -23,6 +23,7 @@ int main()
     std::cerr << "Out of range Error" << "\n";
     return 1;
   }
+
   tableMaker(left, right, 0.05, k);
 }
 
