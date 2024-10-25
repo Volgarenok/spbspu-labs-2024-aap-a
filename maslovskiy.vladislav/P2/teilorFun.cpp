@@ -27,7 +27,7 @@ double maslovskiy::teilorCos(const double& x, const size_t& k)
   }
   if (std::abs(res - std::cos(x)) > error)
   {
-    throw std::logic_error("math-error");
+    throw std::logic_error("<MATH ERROR>");
   }
   return res;
 }

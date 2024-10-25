@@ -7,7 +7,7 @@
 
 void standartiseOut(const double& num)
 {
-  std::cout << std::setw(10) << num;
+  std::cout << std::fixed << std::setprecision(6) << std::setw(10) << num;
 }
 
 void tableOut(const double& num, const size_t& k)
