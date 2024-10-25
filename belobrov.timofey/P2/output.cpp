@@ -21,7 +21,7 @@ void table_out(const double& n, const size_t& k)
     std::cout << " ";
     parameters_output(temp);
     std::cout << " ";
-    parameters_output(ln_result);
+    parameters_output(std::log(x + sqrt(x * x + 1)));
     std::cout << "\n";
   }
   catch(const std::logic_error& e)
@@ -34,7 +34,7 @@ void table_out(const double& n, const size_t& k)
 
 void output(const double& left, const double& right, const double& step, const size_t& k)
 {
-  const double error = 0.001;
+  const double step = 0.05;
   for (double i = left; i < right; i += step)
   {
     table_out(i, k);
