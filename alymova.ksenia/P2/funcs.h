@@ -1,5 +1,6 @@
 #ifndef FUNCS_H
 #define FUNCS_H
+#include <cstddef>
 namespace alymova
 {
   double taylor_row(const double x, const size_t k, const double error);

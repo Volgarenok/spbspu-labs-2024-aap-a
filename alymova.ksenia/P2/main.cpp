@@ -1,10 +1,11 @@
 #include <iostream>
+#include <cstddef>
 #include "funcs.h"
 
 int main()
 {
   double start = 0.0, finish = 0.0;
-  int max_summand = 0;
+  size_t max_summand = 0;
   const double error = 0.0001;
   const double step = 0.05;
   std::cin >> start >> finish >> max_summand;

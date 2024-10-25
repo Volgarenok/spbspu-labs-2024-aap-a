@@ -1,5 +1,6 @@
 #include "funcs.h"
 #include <stdexcept>
+#include <cstddef>
 double alymova::taylor_row(const double x, const size_t k, const double error)
 {
   double summ = x;
