@@ -2,7 +2,7 @@
 #include "funcs.h"
 
 int main()
-{  
+{
 	double start = 0.0, finish = 0.0;
 	int max_summand = 0;
 	const double error = 0.0001;
