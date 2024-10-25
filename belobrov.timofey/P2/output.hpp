@@ -8,4 +8,5 @@ namespace belobrov
   void output(const double& left, const double& right, const double& step, const size_t& k);
 }
 
+
 #endif

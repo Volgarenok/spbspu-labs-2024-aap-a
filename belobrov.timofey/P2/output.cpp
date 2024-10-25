@@ -8,7 +8,7 @@ using namespace belobrov;
 
 void parameters_output(const double& n)
 {
-  std::cout << std::fixed << std::setprecision(6) << std::setw(10) << n; 
+  std::cout << std::fixed << std::setprecision(6) << std::setw(10) << n;
 }
 
 void table_out(const double& n, const size_t& k)
@@ -30,6 +30,7 @@ void table_out(const double& n, const size_t& k)
   }
 
 }
+
 
 void output(const double& left, const double& right, const double& step, const size_t& k)
 {

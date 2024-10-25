@@ -5,8 +5,8 @@ using namespace belobrov;
 int main()
 {
 
-  double left = 0, right = 0; //верхняя и нижняя граница 
-  size_t k = 0; //количество элементов 
+  double left = 0, right = 0;
+  size_t k = 0;
   std::cin >> left >> right >> k;
   if (!std::cin)
   {
