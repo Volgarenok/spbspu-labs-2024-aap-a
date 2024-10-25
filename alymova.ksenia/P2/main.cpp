@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cstddef>
 #include "funcs.h"
-
 int main()
 {
   double start = 0.0, finish = 0.0;
