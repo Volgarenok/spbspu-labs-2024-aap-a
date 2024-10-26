@@ -1,5 +1,5 @@
 #include <iostream>
-#include "arctanTaylor.h"
+#include "arctanTaylor.hpp"
 
 
 int main()
