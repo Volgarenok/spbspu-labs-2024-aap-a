@@ -1,6 +1,7 @@
 #include "petrov_namespace.hpp"
+#include <iostream>
 
-double petrov::caluclateByTailor(double x, size_t k, double error)
+double petrov::calculateByTailor(double x, size_t k, double error)
 {
   double result = x;
   unsigned int count = 1;
