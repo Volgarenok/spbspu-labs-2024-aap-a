@@ -17,7 +17,7 @@ double taylor_arctg(double x, size_t k, double error) {
     int d = 1;
     double c = x;
     double s = x;
-    
+
     while (k-- > 1) {
         c = -c * x * x;
         d += 2;
@@ -29,5 +29,5 @@ double taylor_arctg(double x, size_t k, double error) {
 
     if (!argument_less_abs_1)
         sum = ((x >= 0) ? M_PI_2 : -M_PI_2) - sum;
-    return sum;    
+    return sum;
 }
