@@ -18,7 +18,7 @@ double averenkov::f(double x, int k, double error)
   }
   for (int i = 2; i < k; ++i)
   {
-    next = ( (i - 1) * x * x * next / 2) / (i + 1); 
+    next = ( (i - 1) * x * x * next / 2) / (i + 1);
     if (i % 2 == 0)
     {
       result -= next;
