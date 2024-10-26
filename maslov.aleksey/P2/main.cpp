@@ -3,7 +3,7 @@
 
 int main()
 {
-  const double error = 0.001;
+  const double error = 0.1;
   const double step = 0.05;
   double left = 0.0, right = 0.0;
   size_t k = 0;
@@ -18,8 +18,8 @@ int main()
     std::cerr << "The interval is set incorrectly\n";
     return 1;
   }
-  if ((-1.0 < left && left < 1) &&
-      (-1.0 < right && right < 1))
+  if (!((-1.0 < left && left < 1.0) &&
+  (-1.0 < right && right < 1.0)))
   {
     std::cerr << "The interval is not in the definition area\n";
     return 1;
