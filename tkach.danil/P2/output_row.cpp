@@ -15,5 +15,5 @@ void tkach::output_row(double start, size_t maxkolvo, const double error)
   {
     std::cout << "<MATH ERROR>";
   }
-  std::cout << std::setw(setwx) << std::setprecision(4) << tkach::stdmath(start) << "\n"; 
+  std::cout << std::setw(setwx) << std::setprecision(4) << tkach::stdmath(start) << "\n";
 }
