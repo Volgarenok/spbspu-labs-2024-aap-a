@@ -1,6 +1,7 @@
 #include "taylors_row.hpp"
 
 #include <stdexcept>
+#include <cmath>
 
 double rychkov::calcUnoDivSqr(double x, size_t maxDepth, double requiredAbsError)
 {
@@ -21,4 +22,9 @@ double rychkov::calcUnoDivSqr(double x, size_t maxDepth, double requiredAbsError
     result += temp;
   }
   throw std::runtime_error("<MATH ERROR>");
+}
+
+double rychkov::calcUnoDivSqrWithStd(double x)
+{
+  return 1.0 / std::sqrt(1 - x * x);
 }

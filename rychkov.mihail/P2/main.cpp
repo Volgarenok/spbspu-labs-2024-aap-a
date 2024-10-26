@@ -1,7 +1,8 @@
 #include <iostream>
 #include "taylors_row.hpp"
+#include "print_comparison_table.hpp"
 
 int main()
 {
-  std::cout << rychkov::calcUnoDivSqr(0.5, 5, 1e-2) << '\n';
+  rychkov::comparison::printTable(-0.5, 0.5, 0.05, 8, 5e-3);
 }
