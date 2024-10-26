@@ -1,4 +1,5 @@
 #include <iostream>
+#include "petrov_namespace.hpp"
 
 int main()
 {
@@ -7,4 +8,19 @@ int main()
   std::cin >> start >> end >> max;
   const double abs_error = 0.001;
   const double step = 0.05;
+  for (size_t i = start; i < end; i += step)
+  {
+    std::cout << i;
+    std::cout << " ";
+    std::cout << petrov::calculateByTailor(i, max, abs_error);
+    std::cout << " ";
+    std::cout << petrov::calculateBySTD(i);
+    std::cout << "\n";
+  }
+  std::cout << end;
+  std::cout << " ";
+  std::cout << petrov::calculateByTailor(end, max, abs_error);
+  std::cout << " ";
+  std::cout << petrov::calculateBySTD(end);
+  std::cout << "\n";
 }
