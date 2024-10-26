@@ -12,7 +12,7 @@ int main()
   double right = 0.0;
   int k = 0;
   std::cin >> left >> right >> k;
-  if (!std::cin || left < -1 || right > 1 || left > 1 || right < -1 ) {
+  if (!std::cin || left < -1 || right > 1 || left > 1 || right < -1 || right < left) {
     std::cerr << "INCORRECT INPUT";
     return 1;
   }
