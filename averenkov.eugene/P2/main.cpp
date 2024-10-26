@@ -1,51 +1,24 @@
 #include <iostream>
 #include <cmath>
 #include "functions.h"
-double averenkov::lnf(double x)
-{
-  double result = log(x + sqrt(x * x + 1));
-  return result;
-}
-double averenkov::rightside(double x, size_t k, double error)
-{
-  double next = x;
-  double result = x;
-  if (k == 1)
-  {
-    return x;
-  }
-  for (int i = 2; i < k; ++i)
-  {
-    next = ( (i - 1) * x * x * next / 2) / (i + 1); 
-    if (i % 2 == 0)
-    {
-      result -= next;
-    }
-    else if (i % 2 == 1)
-    {
-      result += next;
-    }
-  }
-  if ((result - averenkov::lnf(x)) > error)
-  {
-    throw "logic_error";
-  }
-  else if ((result - averenkov::lnf(x)) < (0.0 - error))
-  {
-    throw "logic_error";
-  }
-  return result;
-
-}
+#include <iomanip>
+#include <cstring>
 
 int main()
 {
-  try {
-    std::cout << averenkov::rightside(0.5, 3, 0.01) << "\n" << averenkov::rightside(0.6, 10, 0.1) << "\n";
-    std::cout << averenkov::lnf(0.5) << "\n" << averenkov::lnf(0.6) << "\n";
+  const double step = 0.05;
+  const double error = 0.01;
+  double left = 0.0;
+  double right = 0.0;
+  int k = 0;
+  std::cin >> left >> right >> k;
+  if (!std::cin || left < -1 || right > 1 || left > 1 || right < -1 ) {
+    std::cerr << "INCORRECT INPUT";
+    return 1;
   }
-  catch (const char* error_message)
-  {
-    std::cout << "<MATH ERROR>";
-  };
+  for (double i = left; i <= right; i += step) {
+    averenkov::outline(i, k, error);
+    std::cout << "\n";
+  }
+  averenkov::outline(right, k, error);
 }

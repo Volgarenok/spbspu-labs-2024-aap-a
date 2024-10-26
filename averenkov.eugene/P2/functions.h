@@ -2,10 +2,8 @@
 #define FUNCTIONS_H
 namespace averenkov
 {
-  double f(double, size_t, double);
   double lnf(double);
-  double rightside(double, size_t, double);
-  void out();
-  void outline();
+  double f(double, int, double);
+  void outline(double, int, double);
 }
 #endif

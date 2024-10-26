@@ -1,31 +1,54 @@
 #include <iostream>
 #include <cmath>
 #include "functions.h"
+#include <iomanip>
+#include <cstring>
 double averenkov::lnf(double x)
 {
   double result = log(x + sqrt(x * x + 1));
   return result;
 }
-double rightside(double x, size_t k, double error)
+double averenkov::f(double x, int k, double error)
 {
-  double next = 1.0;
+  double next = x;
   double result = x;
-  for (auto i = 1; i < k; i++)
+  if (k == 1)
   {
-    next = ((i - 1) / i) * next * x * x;
+    return x;
+  }
+  for (int i = 2; i < k; ++i)
+  {
+    next = ( (i - 1) * x * x * next / 2) / (i + 1); 
     if (i % 2 == 0)
     {
-      result == result - next;
+      result -= next;
     }
-    else
+    else if (i % 2 == 1)
     {
-      result == result + next;
+      result += next;
     }
   }
+  if ((result - averenkov::lnf(x)) > error)
+  {
+    throw "logic_error";
+  }
+  else if ((result - averenkov::lnf(x)) < (0.0 - error))
+  {
+    throw "logic_error";
+  }
   return result;
+
 }
 
-int main()
+void averenkov::outline(double x, int k, double error)
 {
-  std::cout << averenkov::rightside(3, 2, 0.1) << "\n" << averenkov::rightside(4, 2, 0.1) << "\n";
+  std::cout << std::setw(15) << x;
+  std::cout << std::setw(15) << averenkov::lnf(x) << " ";
+  try {
+    std::cout << std::setw(15) << averenkov::f(x, k, error) << "\n";
+  }
+  catch (const char* error_message)
+  {
+    std::cout << std::setw(15) << "<MATH ERROR>\n";
+  };
 }
