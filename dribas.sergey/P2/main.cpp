@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include "taylor.hpp"
 #include "outres.hpp"
