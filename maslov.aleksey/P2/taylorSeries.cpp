@@ -30,8 +30,7 @@ void maslov::outString(double x, size_t k, double error)
   const size_t othersColumn = 10;
 
   std::cout << std::fixed << std::setprecision(2)
-  << x << std::setw(othersColumn)
-  << " ";
+  << std::setw(othersColumn) << x << " ";
   try
   {
     std::cout << std::setprecision(5)
