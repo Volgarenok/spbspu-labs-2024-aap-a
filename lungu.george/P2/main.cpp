@@ -3,7 +3,7 @@
 #include <cmath>
 #include "Tylor.h"
 int main() {
-    double absError=0.001;
+    double absError=0.0001;
     int numberMax;
     double start, end, step=0.05;
     std::cin >> start >> end >> numberMax;
