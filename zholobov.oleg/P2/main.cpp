@@ -4,8 +4,10 @@
 #include <cstddef>
 #include "taylor_arctg.hpp"
 
-const double absolute_error = 1e-5;
-const int N = 40;
+namespace {
+    const double absolute_error = 1e-5;
+    const int N = 40;
+}
 
 int main() {
     double beg = 0.0;
@@ -23,7 +25,7 @@ int main() {
         double my_res = 0;
         bool error = false;
         try {
-            my_res = taylor_arctg(x, max_n, absolute_error);
+            my_res = zholobov::f(x, max_n, absolute_error);
         }
         catch (std::runtime_error&) {
             error = true;

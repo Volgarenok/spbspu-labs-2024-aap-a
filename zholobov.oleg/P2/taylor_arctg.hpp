@@ -3,6 +3,8 @@
 
 #include <cstddef>
 
-double taylor_arctg(double x, size_t k, double error);
+namespace zholobov {
+    double f(double x, size_t k, double error);
+}
 
 #endif
