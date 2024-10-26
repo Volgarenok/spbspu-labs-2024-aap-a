@@ -2,7 +2,6 @@
 #include <iostream>
 #include <cmath>
 #include "all.h"
-double TeylorRow(double x, size_t k, double error);
 
 int main()
 {
@@ -26,9 +25,18 @@ int main()
   {
     std::cerr << "Incorrect input of interval value\n";
     return 1;
-  } 
-  std::cout <<  end << " " <<  maxkolvo << "\n";
-  std::cout << TeylorRow(start,10,error) << "\n";
-  std::cout << cosh(start) << "\n";
+  }
+  if (start > end)
+  {
+    std::cerr << "Incorrect input of interval: start need to be first\n";
+    return 1;
+  }
+  if (maxkolvo <= 0)
+  {
+    std::cerr << "Incorrect value of number of terms\n";
+    return 1;
+  }
+  tkach::output_table(start, end, maxkolvo, error,  step);
+  tkach::output_row(end, maxkolvo, error);
   return 0;
 }

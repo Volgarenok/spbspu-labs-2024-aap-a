@@ -1,10 +1,10 @@
 #include <iostream>
 #include <cstddef>
 #include "all.h"
-double TeylorRow(double x, size_t k, double error)
+double tkach::teylor_row(double x, size_t k, const double error)
 {
-  double next = 1;
-  double fact = 0;
+  double next = 1.0;
+  double fact = 0.0;
   double sum = next;
   for(size_t i = 1; i < k; ++i)
   {
@@ -12,6 +12,9 @@ double TeylorRow(double x, size_t k, double error)
     sum+=next;
     fact++;
   }
-  std::cout << error << "\n";
+  if (next>error)
+  {
+    throw std::logic_error("math-error");
+  }
   return sum;
 }
