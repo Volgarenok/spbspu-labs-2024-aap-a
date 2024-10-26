@@ -1,5 +1,5 @@
- #include <iostream>
+#include <iostream>
 int main()
 {
-  std::cout << "bocharov.egor\n";
+ std::cout << "bocharov.egor\n";
 }
