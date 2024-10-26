@@ -5,38 +5,41 @@
 #include "output.hpp"
 #include "f_teylor.hpp"
 
-void belobrov::parameters_output(const double& n)
+namespace belobrov
 {
-  std::cout << std::fixed << std::setprecision(6) << std::setw(10) << n;
-}
-
-void belobrov::table_out(const double& n, const size_t& k)
-{
-  try
+  void parameters_output(const double& n)
   {
-    double teylor_result = f_teylor(n,k);
-    double ln_result = std::log(n+std::sqrt(n * n + 1));
-
-    parameters_output(n);
-    std::cout << " ";
-    parameters_output(teylor_result);
-    std::cout << " ";
-    parameters_output(ln_result);
-    std::cout << "\n";
-  }
-  catch(const std::logic_error& e)
-  {
-    std::cerr << e.what() << '\n';
+    std::cout << std::fixed << std::setprecision(6) << std::setw(10) << n;
   }
 
-}
-
-
-void belobrov::output(const double& left, const double& right, const double& step, const size_t& k)
-{
-  for (double i = left; i < right; i += step)
+  void table_out(const double& n, const size_t& k)
   {
-    table_out(i, k);
+    try
+    {
+      double teylor_result = f_teylor(n,k);
+      double ln_result = std::log(n+std::sqrt(n * n + 1));
+
+      parameters_output(n);
+      std::cout << " ";
+      parameters_output(teylor_result);
+      std::cout << " ";
+      parameters_output(ln_result);
+      std::cout << "\n";
+    }
+    catch(const std::logic_error& e)
+    {
+      std::cerr << e.what() << '\n';
+    }
+
   }
-  table_out(right, k);
+
+
+  void output(const double& left, const double& right, const double& step, const size_t& k)
+  {
+    for (double i = left; i < right; i += step)
+    {
+      table_out(i, k);
+    }
+    table_out(right, k);
+  }
 }
