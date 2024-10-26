@@ -4,7 +4,7 @@
 
 double belobrov:: f_teylor(const double& x, const size_t& k)
 {
-    const double error = 0.001;
+    const double error = 0.01;
     double teylor_result = x;
     double z = -1;
     double d_x = x;
