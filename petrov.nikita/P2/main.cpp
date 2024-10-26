@@ -1,5 +1,5 @@
-#include <iostream>
 #include "petrov_namespace.hpp"
+#include <iostream>
 
 int main()
 {
@@ -8,7 +8,7 @@ int main()
   std::cin >> start >> end >> max;
   const double abs_error = 0.001;
   const double step = 0.05;
-  for (size_t i = start; i < end; i += step)
+  for (auto i = start; i < end; i += step)
   {
     std::cout << i;
     std::cout << " ";
