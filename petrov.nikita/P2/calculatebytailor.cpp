@@ -1,5 +1,6 @@
 #include "petrov_namespace.hpp"
 #include <iostream>
+#include <cmath>
 
 double petrov::calculateByTailor(double x, size_t k, double error)
 {
@@ -19,6 +20,10 @@ double petrov::calculateByTailor(double x, size_t k, double error)
       denominator *= j;
     }
     result += numerator / denominator;
+    if (std::abs(numerator / denominator) > error)
+    {
+      throw std::logic_error("math-error");
+    }
   }
   return result;
 }
