@@ -1,14 +1,12 @@
 #include <cstddef>
 #include <iostream>
-#include <cmath>
 #include "all.h"
 
 int main()
 {
   const double error = 0.001;
-  const double step = 0.1;
-  std::cout << step << "\n";
-  double start = 0.0, end = 0.0;
+  const double step = 0.10;
+  double start = 0, end = 0;
   size_t maxkolvo = 0;
   std::cin >> start >> end >> maxkolvo;
   if (std::cin.eof())
@@ -36,7 +34,7 @@ int main()
     std::cerr << "Incorrect value of number of terms\n";
     return 1;
   }
-  tkach::output_table(start, end, maxkolvo, error,  step);
+  tkach::output_table(start, end, maxkolvo, error, step);
   tkach::output_row(end, maxkolvo, error);
   return 0;
 }

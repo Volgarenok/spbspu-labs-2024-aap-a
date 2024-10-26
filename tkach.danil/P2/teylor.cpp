@@ -9,7 +9,7 @@ double tkach::teylor_row(double x, size_t k, const double error)
   for(size_t i = 1; i < k; ++i)
   {
     next *= (x*x)/((i+fact)*(i+1+fact));
-    sum+=next;
+    sum += next;
     fact++;
   }
   if (next>error)
