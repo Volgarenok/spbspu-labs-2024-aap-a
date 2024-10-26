@@ -1,4 +1,4 @@
-#ifndef TAYLOSERIES_HPP
+#ifndef TAYLORSERIES_HPP
 #define TAYLORSERIES_HPP
 #include <cmath>
 #include <iostream>
