@@ -3,8 +3,9 @@
 
 int main()
 {
-  const double error = 0.1;
+  const double error = 0.01;
   const double step = 0.05;
+
   double left = 0.0, right = 0.0;
   size_t k = 0;
   std::cin >> left >> right >> k;
@@ -13,7 +14,7 @@ int main()
     std::cerr << "The input could not be recognized\n";
     return 1;
   }
-  if (left > right)
+  if (left >= right)
   {
     std::cerr << "The interval is set incorrectly\n";
     return 1;

@@ -25,16 +25,24 @@ double maslov::fromTaylor(double x, size_t k, double error)
 
 void maslov::outString(double x, size_t k, double error)
 {
-  std::cout << x << " ";
+  const char * errormsg = "<MATH_ERROR>";
+  const size_t secondColumn = std::strlen(errormsg) + 2;
+  const size_t othersColumn = 10;
+
+  std::cout << std::fixed << std::setprecision(2)
+  << x << std::setw(othersColumn)
+  << " ";
   try
   {
-    std::cout << fromTaylor(x, k, error) << " ";
+    std::cout << std::setprecision(5)
+    << std::setw(secondColumn) << fromTaylor(x, k, error);
   }
   catch (const std::logic_error & e)
   {
-    std::cout << "<MATH_ERROR>";
+    std::cout << std::setw(secondColumn) << "<MATH_ERROR>";
   }
-  std::cout << maslov::fromCMath(x);
+  std::cout << " " << std::setprecision(5)
+  << std::setw(othersColumn) << maslov::fromCMath(x);
   std::cout << "\n";
 }
 

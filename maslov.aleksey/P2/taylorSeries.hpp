@@ -3,6 +3,8 @@
 #include <cmath>
 #include <iostream>
 #include <iomanip>
+#include <stdexcept>
+#include <cstring>
 namespace maslov
 {
   double fromCMath(double x);
