@@ -1,9 +1,8 @@
 #include "f_teylor.hpp"
 #include <cmath>
 #include <stdexcept>
-using namespace belobrov;
 
-double f_taylor(const double& x, const size_t& k)
+double belobrov:: f_teylor(const double& x, const size_t& k)
 {
     const double error = 0.001;
     double teylor_result = x;
@@ -17,7 +16,7 @@ double f_taylor(const double& x, const size_t& k)
         z *= -1;
     }
 
-    double ln_result = log(x + sqrt(x * x + 1));
+    double ln_result = std::log(x + sqrt(x * x + 1));
 
 
     if (std::abs(teylor_result-ln_result) > error)
