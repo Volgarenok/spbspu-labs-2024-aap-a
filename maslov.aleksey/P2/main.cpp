@@ -1,4 +1,7 @@
 #include <iostream>
+#include <cmath>
+
+double f(double x, size_t k, double error);
 
 int main()
 {
@@ -15,10 +18,15 @@ int main()
     std::cerr << "The interval is set incorrectly\n";
     return 1;
   }
-  if ((-1 < left && left < 1) &&
-      (-1 < right && right < 1))
+  if ((-1.0 < left && left < 1) &&
+      (-1.0 < right && right < 1))
   {
     std::cerr << "The interval is not in the definition area\n";
     return 1;
   }
+}
+
+double fromCMath(double x)
+{
+  return exp(pow(-x, 2.0));
 }
