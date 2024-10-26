@@ -1,6 +1,7 @@
 #include <cstddef>
 #include <iostream>
-#include "all.h"
+#include "taylorrow.h"
+#include "tableoutput.h"
 
 int main()
 {
@@ -19,7 +20,7 @@ int main()
     std::cerr << "Incorrect input\n";
     return 1;
   }
-  if ((start<-1) || (start>1) ||  (end>1) || (end<-1))
+  if ((start < -1) || (start > 1) ||  (end > 1) || (end < -1))
   {
     std::cerr << "Incorrect input of interval value\n";
     return 1;
@@ -34,7 +35,7 @@ int main()
     std::cerr << "Incorrect value of number of terms\n";
     return 1;
   }
-  tkach::output_table(start, end, maxkolvo, error, step);
-  tkach::output_row(end, maxkolvo, error);
+  tkach::outputTable(start, end, maxkolvo, error, step);
+  tkach::outputRow(end, maxkolvo, error);
   return 0;
 }

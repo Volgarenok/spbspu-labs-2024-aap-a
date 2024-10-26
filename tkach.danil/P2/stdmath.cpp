@@ -1,7 +1,7 @@
 #include <cmath>
-#include "all.h"
+#include "taylorrow.h"
 
-double tkach::stdmath(double coshx)
+double tkach::stdCosh(double coshx)
 {
   return cosh(coshx);
 }
