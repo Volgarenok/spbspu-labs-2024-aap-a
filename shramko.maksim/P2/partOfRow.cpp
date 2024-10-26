@@ -16,6 +16,7 @@ double shramko::partOfRow(double x, size_t k, double error)
   {
     throw std::logic_error("math-error");
   }
+
   return taylor;
 }
 
