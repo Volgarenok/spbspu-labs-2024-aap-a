@@ -14,7 +14,7 @@ void belobrov::table_out(const double& n, const size_t& k)
 {
   try
   {
-    double teylor_result = f_teylor(n,k)
+    double teylor_result = f_teylor(n,k);
     double ln_result = std::log(n+std::sqrt(n * n + 1));
 
     parameters_output(n);
