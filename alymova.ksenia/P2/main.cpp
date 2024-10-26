@@ -13,7 +13,7 @@ int main()
     std::cerr << "Incorrect input\n";
     return 1;
   }
-  if (start < -1 || finish > 1 || start >= finish)
+  if (start <= -1 || finish >= 1 || start >= finish)
   {
     std::cerr << "Incorrect interval\n";
     return 1;
