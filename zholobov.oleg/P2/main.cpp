@@ -5,7 +5,7 @@
 #include "taylor_arctg.hpp"
 
 const double absolute_error = 1e-5;
-const int N = 20;
+const int N = 40;
 
 int main() {
     double beg = 0.0;
@@ -16,19 +16,24 @@ int main() {
         return 1;
 
     double step = (end - beg) / N;
+    std::cout << std::left << std::setprecision(8);
     for (int i = 0; i < N+1; i++) {
         double x = beg + step * i;
         double std_res = atan(x);
         double my_res = 0;
+        bool error = false;
         try {
             my_res = taylor_arctg(x, max_n, absolute_error);
         }
         catch (std::runtime_error&) {
-            std::cout << std::setprecision(8) << x << " <MATH ERROR> " << std_res << "\n";
-            continue;
+            error = true;
         }
-        std::cout << std::setprecision(8) << x << " " << my_res << " " << std_res << "    " << abs(my_res - std_res) << "\n";
-
+        std::cout << std::setw(12) << x;
+        if (error)
+            std::cout << std::setw(13) << "<MATH ERROR>";
+        else
+            std::cout << std::setw(13) << my_res;
+        std::cout << std_res << "\n";
     }
     return 0;
 }
