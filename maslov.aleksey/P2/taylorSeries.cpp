@@ -48,7 +48,8 @@ void maslov::outString(double x, size_t k, double error)
 void maslov::outTable(double left, double right,
   size_t k, double error, double step)
 {
-  for (double i = left; i < (right - 0.000001); i += step)
+  maslov::outString(left, k, error);
+  for (double i = left + step; i < right - step/2.0; i += step)
   {
     maslov::outString(i, k, error);
   }
