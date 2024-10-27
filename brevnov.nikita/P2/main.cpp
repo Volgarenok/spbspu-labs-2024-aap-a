@@ -24,7 +24,7 @@ int main(){
         } catch(std::logic_error & e){
             std::cout << std::setw(snd) << "<MATH ERROR>";
         }
-        std::cout << " " << std::setw(usu) << brevnov::arctg(i); 
+        std::cout << " " << std::setw(usu) << atan(i); 
         std::cout<< "\n";
     }
     std::cout << std::setw(usu) << right;
@@ -33,6 +33,6 @@ int main(){
     } catch (std::logic_error & e){
         std::cout << std::setw(snd) << "<MATH ERROR>";
     }
-    std::cout << " " << std::setw(usu) << brevnov::arctg(right);
+    std::cout << " " << std::setw(usu) << brevnov::atan(right);
     std::cout << "\n";
 }

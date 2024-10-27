@@ -7,6 +7,5 @@
 #include <cstring>
 namespace brevnov{
     double f(double x, size_t k, double error);
-    double arctg(double x);
 } 
 #endif
