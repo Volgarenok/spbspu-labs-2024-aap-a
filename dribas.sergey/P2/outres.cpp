@@ -7,76 +7,52 @@
 #include "taylor.hpp"
 #include <cstring>
 
-void dribas::outline(double x, size_t koll,double error,
-  size_t frstclm, size_t scndclm, size_t thrdclm)
+void dribas::outline(double x, size_t koll, double error, int sizeclm)
 {
   double roundedX=round(x * 100000) / 100000;
-  double cmathvalue = round(dribas::getUno_div_cube(roundedX) * 100000) / 100000;
-
+  double cmathvalue = round(dribas::getCmathValue(roundedX) * 100000) / 100000;
   try
   {
    double value = round(dribas::getTaylor(roundedX, koll, error) * 100000) / 100000;
 
-   std::cout << std::setw(frstclm) << roundedX;
-   std::cout << std::setw(scndclm) << value;
-   std::cout << std::setw(thrdclm) << cmathvalue;
+   std::cout << std::setw(sizeclm) << roundedX;
+   std::cout << std::setw(sizeclm) << value;
+   std::cout << std::setw(sizeclm) << cmathvalue;
    std::cout << "\n";
   }
-  catch(const std::exception & e)
+  catch (const std::exception & e)
   {
-   std::cerr << std::setw(frstclm) << roundedX;
-   std::cerr << std::setw(scndclm) << e.what();
-   std::cerr << std::setw(thrdclm) << cmathvalue;
+   std::cerr << std::setw(sizeclm) << roundedX;
+   std::cerr << std::setw(sizeclm) << e.what();
+   std::cerr << std::setw(sizeclm) << cmathvalue;
    std::cerr << "\n";
   }
 }
 
-void dribas::outall(double left, double right,
-  double step,size_t koll, double error)
+void dribas::outall(double left, double right, double step, size_t koll, double error)
 {
   const char * xmsg = "X";
   const char * mytaylormsg = "MyTaylorValue";
   const char * cmathmsg = "CmathTaylorValue";
   const size_t space = 2;
 
-  size_t frstclm = std::strlen(xmsg) + space;
-  size_t scndclm = std::strlen(mytaylormsg) + space;
-  size_t thrdclm = std::strlen(cmathmsg) + space;
+  int frstclm = std::strlen(xmsg) + space;
+  int scndclm = std::strlen(mytaylormsg) + space;
+  int thrdclm = std::strlen(cmathmsg) + space;
+  int sizeclm = 0;
 
-  if (frstclm < 10)
-  {
-   std::cout << std::setw(10) << xmsg;
-   frstclm = 10;
-  }
-  else
-  {
-   std::cout << std::setw(frstclm) << xmsg;
-  }
+  frstclm = std::max(10, frstclm);
+  scndclm = std::max(frstclm, scndclm);
+  sizeclm = std::max(scndclm, thrdclm);
 
-  if (scndclm < 10)
-  {
-   std::cout << std::setw(10) << mytaylormsg;
-   scndclm = 10;
-  }
-  else
-  {
-   std::cout << std::setw(scndclm) << mytaylormsg;
-  }
-
-  if (thrdclm < 10)
-  {
-   std::cout << std::setw(10) << cmathmsg;
-   thrdclm = 10;
-  }
-  else
-  {
-   std::cout << std::setw(thrdclm) << cmathmsg;
-   std::cout << "\n";
-  }
+  std::cout << std::setw(sizeclm) << xmsg;
+  std::cout << std::setw(sizeclm) << mytaylormsg;
+  std::cout << std::setw(sizeclm) << cmathmsg;
+  std::cout << "\n";
 
   for (auto i=left; i<right; i+=step)
   {
-   outline(i,koll,error,frstclm,scndclm,thrdclm);
+   outline(i, koll, error, sizeclm);
   }
-  outline(right,koll,error,frstclm,scndclm,thrdclm);
+  outline(right, koll, error, sizeclm);
 }

@@ -33,7 +33,7 @@ double dribas::getTaylor(double x, size_t koll, double error) {
   throw std::logic_error("<MATH ERROR>");
 }
 
-double dribas::getUno_div_cube(double x)
+double dribas::getCmathValue(double x)
 {
-  return 1 / (pow(x + 1, 3));
+  return 1 / (std::pow(x + 1, 3));
 }
