@@ -25,7 +25,7 @@ void rychkov::comparison_utilities::printLine(double x, size_t maxDepth, double 
   constexpr size_t xPrecision = 3;
   constexpr size_t resultPrecision = 4;
   constexpr size_t xColumnWidth = xPrecision + 6;
-  constexpr size_t resultColumnWidth = strlen(errorMessage) + 3;
+  constexpr size_t resultColumnWidth = std::strlen(errorMessage) + 3;
 
   std::cout << std::setw(xColumnWidth) << std::setprecision(xPrecision) << x << ' ';
   std::cout << std::setprecision(resultPrecision) << std::setw(resultColumnWidth);
