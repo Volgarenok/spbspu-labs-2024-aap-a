@@ -22,5 +22,5 @@ int main()
    }
    
    const double error = 0.001;
-   const double step = 0.05;
+   const double step = 0.1;
 }
