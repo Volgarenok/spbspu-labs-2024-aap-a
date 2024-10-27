@@ -2,14 +2,13 @@
 #define COMPARISON_TABLE_HPP
 
 #include <cstddef>
+#include <iostream>
 
 namespace rychkov
 {
-  namespace comparison_utilities
-  {
-    void printTable(double left, double right, double step, size_t maxDepth, double absError);
-    void printLine(double x, size_t maxDepth, double absError);
-  }
+  void printTable(std::ostream& outstream, double left, double right,
+      double step, size_t maxDepth, double absError);
+  void printLine(std::ostream& outstream, double x, size_t maxDepth, double absError);
 }
 
 #endif

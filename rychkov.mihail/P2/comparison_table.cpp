@@ -7,19 +7,19 @@
 
 #include "taylors_series.hpp"
 
-void rychkov::comparison_utilities::printTable(double left, double right,
+void rychkov::printTable(std::ostream& outstream, double left, double right,
     double step, size_t maxDepth, double absError)
 {
-  std::cout << std::fixed;
+  outstream << std::fixed;
   for (double i = left; i <= right - step * 0.1; i += step)
   {
-    printLine(i, maxDepth, absError);
-    std::cout << '\n';
+    printLine(outstream, i, maxDepth, absError);
+    outstream << '\n';
   }
-  printLine(right, maxDepth, absError);
-  std::cout << '\n';
+  printLine(outstream, right, maxDepth, absError);
+  outstream << '\n';
 }
-void rychkov::comparison_utilities::printLine(double x, size_t maxDepth, double absError)
+void rychkov::printLine(std::ostream& outstream, double x, size_t maxDepth, double absError)
 {
   constexpr const char* errorMessage = "<MATH ERROR>";
   constexpr size_t xPrecision = 3;
@@ -27,15 +27,15 @@ void rychkov::comparison_utilities::printLine(double x, size_t maxDepth, double 
   constexpr size_t xColumnWidth = xPrecision + 6;
   constexpr size_t resultColumnWidth = std::strlen(errorMessage) + 3;
 
-  std::cout << std::setw(xColumnWidth) << std::setprecision(xPrecision) << x << ' ';
-  std::cout << std::setprecision(resultPrecision) << std::setw(resultColumnWidth);
+  outstream << std::setw(xColumnWidth) << std::setprecision(xPrecision) << x << ' ';
+  outstream << std::setprecision(resultPrecision) << std::setw(resultColumnWidth);
   try
   {
-    std::cout << rychkov::formulas::calcUnoDivSqr(x, maxDepth, absError) << ' ';
+    outstream << rychkov::formulas::calcUnoDivSqr(x, maxDepth, absError) << ' ';
   }
   catch (const std::runtime_error& e)
   {
-    std::cout << errorMessage << ' ';
+    outstream << errorMessage << ' ';
   }
-  std::cout << std::setw(resultColumnWidth) << rychkov::formulas::calcUnoDivSqrWithStd(x);
+  outstream << std::setw(resultColumnWidth) << rychkov::formulas::calcUnoDivSqrWithStd(x);
 }

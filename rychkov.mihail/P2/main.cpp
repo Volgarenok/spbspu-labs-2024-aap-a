@@ -23,5 +23,5 @@ int main()
 
   constexpr double step = 0.05;
   constexpr double absError = 1e-3;
-  rychkov::comparison_utilities::printTable(left, right, step, depth, absError);
+  rychkov::printTable(std::cout, left, right, step, depth, absError);
 }
