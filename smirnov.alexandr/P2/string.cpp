@@ -4,10 +4,11 @@
 void smirnov::outString(double x, size_t k, double error)
 {
   const char * errormsg = "MATH ERROR";
-  const size_t second_column_width = std::strlen(errormsg);
+  const size_t second_column_width = std::strlen(errormsg) + 2;
   const size_t others_columns = 10;
   size_t snd = second_column_width;
   size_t oth = others_columns;
+  std::cout.precision(3);
   std::cout << std::setw(oth) << std::fixed << x << " ";
   try 
   {
