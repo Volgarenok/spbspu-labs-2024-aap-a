@@ -1,4 +1,5 @@
 #include "brevnov.hpp"
+
 void brevnov::outputing(const double left, const double right, const size_t k)
 {
     const double error = 0.001;
