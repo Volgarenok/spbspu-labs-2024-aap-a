@@ -1,4 +1,4 @@
-#include "function.h"
+#include "taylor.h"
 #include <iostream>
 #include <iomanip>
 #include <stdexcept>

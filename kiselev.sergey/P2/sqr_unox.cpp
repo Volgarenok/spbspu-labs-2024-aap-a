@@ -1,4 +1,4 @@
-#include "function.h"
+#include "taylor.h"
 #include <cmath>
 double kiselev::sqr_unox(double x)
 {
