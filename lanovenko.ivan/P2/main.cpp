@@ -13,7 +13,7 @@ int main()
     std::cerr << "input error\n";
     return 1;
   }
-  if (left <= -1 || right >=1 || left > right)
+  if (left <= -1 || right >= 1 || left > right)
   {
     std::cerr << "input error\n";
     return 1;
