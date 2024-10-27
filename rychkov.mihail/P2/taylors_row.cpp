@@ -3,27 +3,27 @@
 #include <stdexcept>
 #include <cmath>
 
-double rychkov::calcUnoDivSqr(double x, size_t maxDepth, double requiredAbsError)
+double rychkov::formulas::calcUnoDivSqr(double x, size_t maxDepth, double absError)
 {
   double xSqr = x * x;
-  double temp = 1.0;
+  double lastSummand = 1.0;
   double result = 1.0;
   for (size_t i = 0; i < maxDepth; i++)
   {
-    temp *= (i * 2) + 1;
-    temp /= (i * 2) + 2;
-    temp *= xSqr;
+    lastSummand *= (i * 2) + 1;
+    lastSummand /= (i * 2) + 2;
+    lastSummand *= xSqr;
 
-    if (temp < requiredAbsError)
+    if (lastSummand < absError)
     {
       return result;
     }
-    result += temp;
+    result += lastSummand;
   }
-  throw std::runtime_error("required precision of Taylor's row was not reached");
+  throw std::runtime_error("required precision of Taylor's series was not reached");
 }
 
-double rychkov::calcUnoDivSqrWithStd(double x)
+double rychkov::formulas::calcUnoDivSqrWithStd(double x)
 {
   return 1.0 / std::sqrt(1 - x * x);
 }

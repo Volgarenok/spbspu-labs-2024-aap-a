@@ -1,5 +1,4 @@
 #include <iostream>
-#include "taylors_row.hpp"
 #include "print_comparison_table.hpp"
 
 int main()
@@ -18,10 +17,10 @@ int main()
   }
   if ((left <= -1.0) || (right >= 1.0))
   {
-    std::cerr << "interval are not in the domain of the function\n";
+    std::cerr << "interval is not in the domain of the function\n";
     return 1;
   }
   constexpr double step = 0.05;
   constexpr double absError = 1e-3;
-  rychkov::comparison::printTable(left, right, step, depth, absError);
+  rychkov::comparison_utilities::printTable(left, right, step, depth, absError);
 }

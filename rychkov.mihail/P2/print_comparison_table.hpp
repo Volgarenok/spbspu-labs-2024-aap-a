@@ -5,7 +5,7 @@
 
 namespace rychkov
 {
-  namespace comparison
+  namespace comparison_utilities
   {
     void printTable(double left, double right, double step, size_t maxDepth, double absError);
     void printLine(double x, size_t maxDepth, double absError);

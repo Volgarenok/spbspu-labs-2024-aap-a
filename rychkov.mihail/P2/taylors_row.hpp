@@ -5,8 +5,11 @@
 
 namespace rychkov
 {
-  double calcUnoDivSqr(double x, size_t maxDepth, double absError);
-  double calcUnoDivSqrWithStd(double x);
+  namespace formulas
+  {
+    double calcUnoDivSqr(double x, size_t maxDepth, double absError);
+    double calcUnoDivSqrWithStd(double x);
+  }
 }
 
 #endif
