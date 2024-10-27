@@ -15,7 +15,7 @@ int main()
 
   if (!std::cin) 
   {
-    std::cerr << "Bad input" << "\n";
+    std::cerr << "Worst possible input" << "\n";
     return 1;
   } 
 

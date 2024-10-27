@@ -3,7 +3,7 @@
 
 namespace lungu 
 {
-  double TylorFunc(double x, double absError, int numberMax);
+  double TylorFunc(double x, double absError, int numberMax);  //Коммент чтобы что-то поменять
 }
 
 #endif
