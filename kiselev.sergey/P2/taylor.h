@@ -1,7 +1,6 @@
-#ifndef FUNCTION_H
-#define FUNCTION_H
+#ifndef TAYLOR_H
+#define TAYLOR_H
 #include <cstddef>
-#include <cstring>
 namespace kiselev
 {
   double f(double x, size_t k, double error);
