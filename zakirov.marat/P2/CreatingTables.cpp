@@ -17,7 +17,7 @@ void zakirov::tylor_string(double point, size_t addition_depth, const double kEr
   }
 
   double get_point = zakirov::get_atanh(point);
-  std::cout << std::setw(10) << get_point << " ";
+  std::cout << std::setw(10) << get_point << "\n";
 }
 
 

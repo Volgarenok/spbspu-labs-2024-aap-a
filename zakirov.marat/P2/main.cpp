@@ -9,7 +9,7 @@ int main()
 
   if (!std::cin)
   {
-    std::cerr << "<INPUT_ERROR>\n";
+    std::cerr << "<INPUT_ERROR>" << "\n";
     return 1;
   }
 
@@ -18,7 +18,7 @@ int main()
 
   if ((left <= -1) || (right >= 1) || (left > right))
   {
-    std::cerr << "<INTERVAL_ERROR>\n";
+    std::cerr << "<INTERVAL_ERROR>" << "\n";
     return 1;
   }
 

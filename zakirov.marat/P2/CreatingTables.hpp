@@ -6,8 +6,8 @@
 
 namespace zakirov
 {
-  void zakirov::tylor_string(double point, size_t addition_depth, const double error);
-  void zakirov::tylor_table(double left, double right, size_t addition_depth,
+  void tylor_string(double point, size_t addition_depth, const double error);
+  void tylor_table(double left, double right, size_t addition_depth,
   const double kStep, const double kError);
 }
 
