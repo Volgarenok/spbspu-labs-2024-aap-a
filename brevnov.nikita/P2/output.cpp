@@ -18,7 +18,7 @@ void brevnov::outputing(const double left, const double right, const size_t k)
         } 
         catch (std::logic_error & e)
         {
-            std::cout << std::fixed << std::setw(snd) << "<MATH ERROR>";
+            std::cout << std::setw(snd) << "<MATH ERROR>";
         }
         std::cout << " " << std::fixed << std::setw(usu) << atan(i); 
         std::cout<< "\n";
@@ -30,7 +30,7 @@ void brevnov::outputing(const double left, const double right, const size_t k)
     } 
     catch (std::logic_error & e)
     {
-        std::cout << std::fixed << std::setw(snd) << "<MATH ERROR>";
+        std::cout << std::setw(snd) << "<MATH ERROR>";
     }
     std::cout << " " << std::fixed << std::setw(usu) <<atan(right);
     std::cout << "\n";
