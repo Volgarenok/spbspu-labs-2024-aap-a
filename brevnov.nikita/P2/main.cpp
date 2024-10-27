@@ -1,5 +1,3 @@
-#include <stdexcept>
-#include <cmath>
 #include "brevnov.hpp"
 
 int main(){ 
@@ -15,6 +13,7 @@ int main(){
     }
     const double error = 0.001;
     const double step = 0.05;
+    std::cout << std::setw(10);
     for (auto i = left; i < right; i += step){
         std::cout << i;
         std::cout << " ";
