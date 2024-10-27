@@ -7,8 +7,6 @@ double zakirov::find_atanh(double point, size_t addition_depth, const double kEr
   double discarded_term = 0.0;
   for (size_t i = 0; i < addition_depth; ++i)
   {
-    double term = 1.0;
-
     tylor += std::pow(point, num_power)/num_power;
 
     num_power += 2;
