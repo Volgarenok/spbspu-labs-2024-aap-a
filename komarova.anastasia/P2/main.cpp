@@ -1,10 +1,13 @@
 #include <iostream>
+#include <cstddef>
 #include <cmath>
+#include <stdexcept>
+#include "kola.h"
 
 int main()
 {
   double left = 0.0, right = 0.0;
-  size-t k = 0;
+  size_t k = 0;
   std::cin >> left >> right >> k;
   if (!std::cin)
   {
@@ -32,23 +35,25 @@ int main()
 
   for (auto i = left; i < right; i += step)
   {
+    double y = komarova::ln_Teilor(i);
     try
     {
       double value = komarova::Teilor(i, k, error);
-      komarova::output(i, value, komarova::ln_Teilor(i));
+      komarova::output(i, value, y);
     }
     catch (const std::logic_error & e)
     {
-      void komarova::matherr(i, value, komarova::ln_Teilor(i))
+      komarova::matherr(i, y);
     }
   }
+  double g = komarova::ln_Teilor(right);
   try
   {
     double value = komarova::Teilor(right, k, error);
-    komarova::output(right, value, komarova::ln_Teilor(right));
+    komarova::output(right, value, g);
   }
   catch (const std::logic_error & e)
   {
-    void komarova::matherr(right, value, komarova::ln_Teilor(right))
+    komarova::matherr(right, g);
   }
 }

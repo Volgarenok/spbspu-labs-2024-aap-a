@@ -1,4 +1,6 @@
 #include "kola.h"
+#include <cstddef>
+#include <stdexcept>
 
 double komarova::Teilor(double x, const size_t  k, const double error)
 {
