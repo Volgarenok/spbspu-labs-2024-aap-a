@@ -32,7 +32,6 @@ int main(){
     } catch (std::logic_error & e){
         std::cout << "<MATH ERROR>";
     }
-    std::cout << " " << brevnov::f(right, k, error);
     std::cout << " " << brevnov::arctg(right);
     std::cout << "\n";
 }
