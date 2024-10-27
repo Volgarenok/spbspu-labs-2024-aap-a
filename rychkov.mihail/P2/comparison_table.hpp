@@ -2,7 +2,7 @@
 #define COMPARISON_TABLE_HPP
 
 #include <cstddef>
-#include <iostream>
+#include <ostream>
 
 namespace rychkov
 {
