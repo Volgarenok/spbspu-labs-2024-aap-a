@@ -32,7 +32,7 @@ int main()
   }
 
   std::cout << std::fixed << std::setprecision(6);
-  std::cout << std::string(10, ' ') << "X  SUMM  STDfunctionn" << "\n";
+  std::cout << std::string(10, ' ') << "X    SUMM        STDfunctionn" << "\n";
 
   for (double x = start; x <= end; x += step) 
   {
