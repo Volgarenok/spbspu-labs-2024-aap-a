@@ -2,14 +2,20 @@
 
 void sveshnikov::row(double x, size_t k, double error)
 {
-  std::cout << x << " ";
+  const char *errormsg = "<MATH ERROR>";
+  const size_t sec_col_w = std::strlen(errormsg);
+  std::cout << std::fixed;
+  std::cout << std::setw(sec_col_w) << std::setprecision(2) << x;
+  std::cout << " ";
   try
   {
-    std::cout << sveshnikov::taylor(x, k, error);
+    std::cout << std::setw(sec_col_w) << std::setprecision(8) << sveshnikov::taylor(x, k, error);
   }
   catch (const std::logic_error &e)
   {
-    std::cout << "MATH ERROR";
+    std::cout << std::setw(sec_col_w) << "<MATH ERROR>";
   }
-  std::cout << " " << sveshnikov::math(x) << "\n";
+  std::cout << " ";
+  std::cout << std::setw(sec_col_w) << std::setprecision(8) << sveshnikov::math(x);
+  std::cout << "\n";
 }
