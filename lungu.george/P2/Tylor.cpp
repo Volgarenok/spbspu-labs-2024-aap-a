@@ -1,23 +1,21 @@
 #include "Tylor.h"
 #include <cmath>
 #include <stdexcept>
-namespace lungu
-{
-    double TylorFunc(double x, double absError, int numberMax) 
-    {
+namespace lungu {
+    double TylorFunc(double x, double absError, int numberMax) {
         double sum = 1.0; 
         double term = 1.0; 
         int n = 1;
-        do 
-        {
+        do {
             term *= -x * x / (2 * n - 1) / (2 * n); 
             sum += term;
             n++;
-            if (n > numberMax) 
-            {
+            if (n > numberMax) {
                 throw std::runtime_error("Max quantity of operands reached");
             }
-        } while (std::fabs(term) > absError);
-        return sum;
+        } 
+        while (std::fabs(term) > absError);{
+            return sum;
+        }
     }
 }
