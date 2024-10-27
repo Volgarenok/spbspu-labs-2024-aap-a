@@ -9,5 +9,5 @@ namespace brevnov
 {
     double f(const double x, const size_t k, const  double error);
     void outputing(const double left, const double right, const size_t k);
-} 
+}
 #endif
