@@ -1,4 +1,3 @@
-#include <cstddef>
 #include <iostream>
 #include "taylorrow.h"
 #include "tableoutput.h"
@@ -6,7 +5,7 @@
 int main()
 {
   const double error = 0.001;
-  const double step = 0.10;
+  const double step = 0.1;
   double start = 0, end = 0;
   size_t maxkolvo = 0;
   std::cin >> start >> end >> maxkolvo;
