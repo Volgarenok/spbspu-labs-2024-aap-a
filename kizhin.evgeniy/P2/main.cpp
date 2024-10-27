@@ -1,6 +1,5 @@
 #include <cmath>
 #include <iostream>
-
 #include "printing_utils.hpp"
 #include "taylor_cosh.hpp"
 
@@ -42,5 +41,6 @@ int main()
     } else {
       kizhin::printRow(std::cout, argument, computedValue, expectedValue);
     }
+    std::cout << '\n';
   }
 }
