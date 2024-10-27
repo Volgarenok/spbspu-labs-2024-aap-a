@@ -1,12 +1,12 @@
 #include <iostream>
 #include <cstddef>
-#include "funcs.h"
+#include "taylor_table_funcs.h"
 int main()
 {
+  constexpr double error = 0.0001;
+  constexpr double step = 0.05;
   double start = 0.0, finish = 0.0;
   size_t max_summand = 0;
-  const double error = 0.0001;
-  const double step = 0.05;
   std::cin >> start >> finish >> max_summand;
   if (!std::cin.good())
   {
@@ -20,7 +20,7 @@ int main()
   }
   for (double i = start; i < finish; i += step)
   {
-    if (abs(i) < error)
+    if (std::abs(i) < error)
     {
       alymova::print(0, alymova::arctg(0), alymova::taylor_row(0, max_summand, error));
     }
@@ -37,14 +37,17 @@ int main()
         alymova::print_error(i, res);
       }
     }
+    std::cout << "\n";
   }
+  double res = alymova::arctg(finish);
   try
   {
     double x = alymova::taylor_row(finish, max_summand, error);
-    alymova::print(finish, x, alymova::arctg(finish));
+    alymova::print(finish, x, res);
   }
   catch (const std::logic_error& e)
   {
-    alymova::print_error(finish, alymova::arctg(finish));
+    alymova::print_error(finish, res);
   }
+  std::cout << "\n";
 }

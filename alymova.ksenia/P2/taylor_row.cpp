@@ -1,4 +1,4 @@
-#include "funcs.h"
+#include "taylor_table_funcs.h"
 #include <stdexcept>
 #include <cstddef>
 double alymova::taylor_row(const double x, const size_t k, const double error)
@@ -12,7 +12,7 @@ double alymova::taylor_row(const double x, const size_t k, const double error)
     summ += next;
     denom += 2;
   }
-  if (next > error)
+  if (std::abs(next) > error)
   {
     throw std::logic_error("math error");
   }
