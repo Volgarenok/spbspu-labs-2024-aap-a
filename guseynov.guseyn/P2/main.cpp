@@ -18,7 +18,7 @@ int main()
   double right = 0.0;
   size_t k = 0;
   std::cin >> left >> right >> k;
-  if ((!std::cin) or (left < (-0.5)) or (right > 0.5) or (k>10))
+  if ((!std::cin) or (left < (-0.5)) or (right > 0.5) or (k>10) or (left>right))
   {
     return 1;
   };
