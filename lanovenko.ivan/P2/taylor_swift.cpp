@@ -1,7 +1,6 @@
 #include "taylor_swift.h"
 #include <cmath>
 #include <stdexcept>
-
 double lanovenko::f(double x, size_t k, double error)
 {
   if (k <= 0)
