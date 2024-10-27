@@ -33,6 +33,6 @@ int main(){
     } catch (std::logic_error & e){
         std::cout << std::setw(snd) << "<MATH ERROR>";
     }
-    std::cout << " " << std::setw(usu) << brevnov::atan(right);
+    std::cout << " " << std::setw(usu) <<atan(right);
     std::cout << "\n";
 }
