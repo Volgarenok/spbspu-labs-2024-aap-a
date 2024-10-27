@@ -18,6 +18,8 @@ int main()
   }
   const double abs_error = 0.1;
   const double step = 0.05;
+  std::cout.precision(6);
+  std::cout << std::fixed;
   for (auto i = start; i < end; i += step)
   {
     std::cout << i;
