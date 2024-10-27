@@ -6,7 +6,7 @@ int main()
   size_t max_terms_number = 0;
 
   std::cin >> left_border >> right_border >> max_terms_number;
-  if (!std::cin || (left_border < -1) || (right_border > 1))
+  if (!std::cin || (left_border < -1) || (right_border > 1) || (left_border > right_border))
   {
     std::cerr << "Incorrect input!\n";
     return 1;
