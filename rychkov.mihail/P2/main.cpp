@@ -1,5 +1,5 @@
 #include <iostream>
-#include "print_comparison_table.hpp"
+#include "comparison_table.hpp"
 
 int main()
 {
@@ -10,7 +10,7 @@ int main()
     std::cerr << "bad input\n";
     return 1;
   }
-  if (right < left)
+  if (left > right)
   {
     std::cerr << "incorrect interval\n";
     return 1;
@@ -20,6 +20,7 @@ int main()
     std::cerr << "interval is not in the domain of the function\n";
     return 1;
   }
+
   constexpr double step = 0.05;
   constexpr double absError = 1e-3;
   rychkov::comparison_utilities::printTable(left, right, step, depth, absError);

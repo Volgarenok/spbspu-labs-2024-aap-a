@@ -1,5 +1,5 @@
-#ifndef PRINT_COMPARISON_TABLE_HPP
-#define PRINT_COMPARISON_TABLE_HPP
+#ifndef COMPARISON_TABLE_HPP
+#define COMPARISON_TABLE_HPP
 
 #include <cstddef>
 

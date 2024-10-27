@@ -1,5 +1,5 @@
-#ifndef TAYLORS_ROW_HPP
-#define TAYLORS_ROW_HPP
+#ifndef TAYLORS_SERIES_HPP
+#define TAYLORS_SERIES_HPP
 
 #include <cstddef>
 
