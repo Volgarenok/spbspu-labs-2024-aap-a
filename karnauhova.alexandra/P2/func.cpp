@@ -1,4 +1,5 @@
 #include "namespace.hpp"
+
 double karnauhova::f(double x, size_t k, double error)
 {
   double next = x;
@@ -29,10 +30,12 @@ double karnauhova::f(double x, size_t k, double error)
   }
   return result;
 }
+
 double karnauhova::stdf(double x)
 {
   return std::sin(x);
 }
+
 void karnauhova::output_row(double x, size_t k, double error, size_t width)
 {
   std::cout << std::setw(width) << x;
@@ -48,6 +51,7 @@ void karnauhova::output_row(double x, size_t k, double error, size_t width)
   std::cout << std::setw(width) << karnauhova::stdf(x);
   std::cout << "\n";
 }
+
 void karnauhova::output_table(double left, double right, double step, size_t k, double error, size_t width)
 {
   for (auto i = left; i < right; i += step)
