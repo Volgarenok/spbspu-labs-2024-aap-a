@@ -24,6 +24,5 @@ double lanovenko::f(double x, size_t k, double error)
       return sum;
     }
   }
-
-  throw std::logic_error("<MATH ERROR>"); 
+  throw std::logic_error("<MATH ERROR>");
 }
