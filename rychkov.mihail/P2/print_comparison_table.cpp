@@ -9,7 +9,7 @@
 void rychkov::comparison::printTable(double left, double right, double step, size_t maxDepth, double absError)
 {
   std::cout << std::fixed;
-  for(double i = left; i <= right - step/2; i += step)
+  for(double i = left; i <= right - step * 0.1; i += step)
   {
     printLine(i, maxDepth, absError);
   }
@@ -17,18 +17,20 @@ void rychkov::comparison::printTable(double left, double right, double step, siz
 }
 void rychkov::comparison::printLine(double x, size_t maxDepth, double absError)
 {
-  constexpr size_t firstColumnWidth = 8;
-  constexpr size_t secondColumnWidth = 15;
+  constexpr size_t xFieldWidth = 8;
+  constexpr size_t resultFieldWidth = 15;
+  constexpr size_t xFieldPrecision = 2;
+  constexpr size_t resultFieldPrecision = 4;
 
-  std::cout << std::setw(firstColumnWidth) << std::setprecision(2) << x << ' ';
-  std::cout << std::setprecision(4);
+  std::cout << std::setw(xFieldWidth) << std::setprecision(xFieldPrecision) << x << ' ';
+  std::cout << std::setprecision(resultFieldPrecision) << std::setw(resultFieldWidth);
   try
   {
-    std::cout << std::setw(secondColumnWidth) << calcUnoDivSqr(x, maxDepth, absError) << ' ';
+    std::cout << calcUnoDivSqr(x, maxDepth, absError) << ' ';
   }
   catch (const std::runtime_error& e)
   {
-    std::cout << std::setw(secondColumnWidth) << "<MATH ERROR>" << ' ';
+    std::cout << "<MATH ERROR>" << ' ';
   }
-  std::cout << std::setw(secondColumnWidth) << calcUnoDivSqrWithStd(x) << '\n';
+  std::cout << std::setw(resultFieldWidth) << calcUnoDivSqrWithStd(x) << '\n';
 }

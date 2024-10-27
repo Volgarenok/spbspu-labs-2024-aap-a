@@ -5,23 +5,22 @@
 
 double rychkov::calcUnoDivSqr(double x, size_t maxDepth, double requiredAbsError)
 {
+  double xSqr = x * x;
+  double temp = 1.0;
   double result = 1.0;
-  size_t nominator = 1, denominator = 1;
-  double xSqr = x*x, xMultiplier = 1.0;
   for (size_t i = 0; i < maxDepth; i++)
   {
-    nominator *= (i * 2) + 1;
-    denominator *= (i * 2) + 2;
-    xMultiplier *= xSqr;
+    temp *= (i * 2) + 1;
+    temp /= (i * 2) + 2;
+    temp *= xSqr;
 
-    double temp = nominator * xMultiplier / denominator;
     if (temp < requiredAbsError)
     {
       return result;
     }
     result += temp;
   }
-  throw std::runtime_error("<MATH ERROR>");
+  throw std::runtime_error("required precision of Taylor's row was not reached");
 }
 
 double rychkov::calcUnoDivSqrWithStd(double x)
