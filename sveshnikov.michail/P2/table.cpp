@@ -1,5 +1,4 @@
 #include "taylor.hpp"
-
 void sveshnikov::table(double left, double right, size_t k)
 {
   const double error = 0.002;
