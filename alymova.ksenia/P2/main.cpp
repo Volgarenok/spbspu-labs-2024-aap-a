@@ -18,11 +18,17 @@ int main()
     std::cerr << "Incorrect interval\n";
     return 1;
   }
-  for (double i = start; i < finish; i += step)
+  bool flag = false;
+  for (double i = start; flag == false; i += step)
   {
     if (std::abs(i) < error)
     {
       i = 0.0;
+    }
+    if (i == finish || ((std::abs(i - finish)) < step && i > finish))
+    {
+      i = finish;
+      flag = true;
     }
     double res = alymova::arctg(i);
     try
@@ -36,15 +42,4 @@ int main()
     }
     std::cout << "\n";
   }
-  double res = alymova::arctg(finish);
-  try
-  {
-    double x = alymova::taylor_row(finish, max_summand, error);
-    alymova::print(finish, x, res);
-  }
-  catch (const std::logic_error& e)
-  {
-    alymova::print_error(finish, res);
-  }
-  std::cout << "\n";
 }
