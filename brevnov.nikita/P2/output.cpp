@@ -8,7 +8,6 @@ void brevnov::outputing(const double left, const double right, const size_t k)
     const size_t usually_width = 10;
     const size_t usu = usually_width;
     const size_t snd = second_width;
-    const size_t outputlen = 9;
     for (auto i = left; i < right; i += step)
     {
         std::cout << std::setprecision(usu) << std::setw(usu) << i;
