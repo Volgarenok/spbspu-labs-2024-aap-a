@@ -8,7 +8,7 @@ double tkach::coshTaylor(double x, size_t maxkolvo, const double error)
   double sum = next;
   for (size_t i = 1; i < maxkolvo; ++i)
   {
-    next *= (x*x)/((i+fact)*(i+1+fact));
+    next *= (x * x) / ((i + fact) * (i + 1 + fact));
     sum += next;
     fact++;
   }
