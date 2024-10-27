@@ -1,7 +1,7 @@
 #include <iomanip>
 #include <cstring>
 #include <iostream>
-#include "header.hpp"
+#include "taylors_header.hpp"
 
 int main()
 {
@@ -9,61 +9,63 @@ int main()
   size_t max_members = 0;
   std::cin >> first_member >> last_member >> max_members;
 
-  if (std::cin.fail()) {
+  if (std::cin.fail())
+  {
     std::cerr << "Input fail" << "\n";
     return 1;
   }
-
-  if (std::cin.bad()) {
+  
+  if (std::cin.bad())
+  {
     std::cerr << "Bad input" << "\n";
     return 1;
   }
 
-  if (std::cin.eof()) {
+  if (std::cin.eof())
+  {
     std::cerr << "EOF" << "\n";
     return 1;
   }
 
   if (first_member > last_member)
   {
-    std::cerr << "First member can`t be greater than last";
+    std::cerr << "First member can`t be greater than last" << "\n";
     return 1;
   }
-
-  const double error = 0.001;
-  const double step = 0.05;
+  
+  constexpr double error = 0.001;
+  constexpr double step = 0.05;
   const char * errormsg = "<MATH ERROR>";
   const size_t second_column_width = std::strlen(errormsg);
   const size_t others_columns = 10;
-  size_t oth = others_columns;
-  size_t snd = second_column_width;
+  const size_t snd = second_column_width;
+  const size_t oth = others_columns;
 
   for (auto i = first_member ; i < last_member; i += step)
   {
-    size_t oth = others_columns;
     std::cout << std::setw(oth) << i;
     std::cout << " ";
-    size_t snd = second_column_width;
     try
     {
-      std::cout << std::setw(snd) << kushekbaev::f(i, max_members, error);
-    }
+      std::cout << std::setw(snd) << kushekbaev::taylorCalc(i, max_members, error);
+    } 
     catch (const std::logic_error & e)
     {
       std::cout << std::setw(snd) << errormsg;
     }
-    std::cout << " " << std::setw(oth) << kushekbaev::stdf(i);
+    std::cout << " " << std::setw(oth) << kushekbaev::sinhCalc(i);
     std::cout << "\n";
   }
-  std::cout << std::setw(oth)  << last_member;
+
+  std::cout << std::setw(oth) << last_member;
   try
   {
-    std::cout << " " << std::setw(snd) << kushekbaev::f(last_member, max_members, error);
+    std::cout << " " << std::setw(snd) << kushekbaev::taylorCalc(last_member, max_members, error);
   }
   catch (const std::logic_error & e)
   {
     std::cout << errormsg;
   }
 
-  std::cout << std::setw(snd-1) << kushekbaev::stdf(last_member) << "\n";
+  std::cout << std::setw(snd-1) << kushekbaev::sinhCalc(last_member) << "\n";
 }
