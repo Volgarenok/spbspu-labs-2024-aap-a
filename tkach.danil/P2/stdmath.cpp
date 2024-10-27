@@ -3,5 +3,5 @@
 
 double tkach::stdCosh(double coshx)
 {
-  return cosh(coshx);
+  return std::cosh(coshx);
 }

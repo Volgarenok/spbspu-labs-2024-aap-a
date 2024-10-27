@@ -12,7 +12,7 @@ double tkach::coshTaylor(double x, size_t maxkolvo, const double error)
     sum += next;
     fact++;
   }
-  if (next>error)
+  if (std::abs(next)>error)
   {
     throw std::logic_error("math-error");
   }
