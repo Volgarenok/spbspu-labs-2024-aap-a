@@ -12,11 +12,6 @@ int main()
   }
   const double error = 0.002;
   const double step = 0.06;
-
-  for (auto i = left; i < right; i += step)
-  {
-    double value = sveshnikov::taylor(i, k, error);
-    sveshnikov::row(i, value);
-  }
+  sveshnikov::table(left, right, k, error, step);
+  return 0;
 }
-

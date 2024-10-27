@@ -3,11 +3,12 @@
 #include <iostream>
 #include <cstddef>
 #include <stdexcept>
+#include <cmath>
 namespace sveshnikov
 {
   double taylor(double x, size_t k, double error);
   double math(double x);
-  void row(double x, double value);
-  double table();
+  void row(double x, size_t k, double error);
+  double table(double left, double right, size_t k, const double error, const double step);
 }
 #endif

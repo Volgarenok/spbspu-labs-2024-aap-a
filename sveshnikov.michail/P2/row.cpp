@@ -1,7 +1,15 @@
 #include "taylor.hpp"
 
-void row(double x, double value)
+void row(double x, size_t k, double error)
 {
   std::cout << x << " ";
-  std::cout << value << " " << sveshnikov::math(x) << "\n";
+  try
+  {
+    std::cout << sveshnikov::taylor(x, k, error);
+  }
+  catch (const std::logic_error &e)
+  {
+    std::cout << "MATH ERROR";
+  }
+  std::cout << " " << sveshnikov::math(x) << "\n";
 }

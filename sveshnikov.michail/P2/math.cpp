@@ -2,5 +2,5 @@
 
 double sveshnikov::math(double x)
 {
-  return 0.0;
+  return atanh(x);
 }
