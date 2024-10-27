@@ -14,7 +14,7 @@ int main()
     std::cerr << "Input fail" << "\n";
     return 1;
   }
-  
+
   if (std::cin.bad())
   {
     std::cerr << "Bad input" << "\n";
@@ -32,7 +32,7 @@ int main()
     std::cerr << "First member can`t be greater than last" << "\n";
     return 1;
   }
-  
+
   constexpr double error = 0.001;
   constexpr double step = 0.05;
   const char * errormsg = "<MATH ERROR>";
@@ -48,7 +48,7 @@ int main()
     try
     {
       std::cout << std::setw(snd) << kushekbaev::taylorCalc(i, max_members, error);
-    } 
+    }
     catch (const std::logic_error & e)
     {
       std::cout << std::setw(snd) << errormsg;
