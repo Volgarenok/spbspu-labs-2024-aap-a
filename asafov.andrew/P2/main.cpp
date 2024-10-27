@@ -12,15 +12,15 @@ int main()
     std::cin >> left >> right >> numberMax;
 
     if (std::cin.fail()) {
-        std::cerr << "" << '\n';
+        std::cerr << "Input fail" << '\n';
         return 1;
     }
     if (right<left) {
-        std::cerr << "" << '\n';
+        std::cerr << "wrong borders" << '\n';
         return 1;
     }
     if ((right > 1) * (left < -1)) {
-        std::cerr << "" << '\n';
+        std::cerr << "incorrect borders" << '\n';
         return 1;
     }
 
