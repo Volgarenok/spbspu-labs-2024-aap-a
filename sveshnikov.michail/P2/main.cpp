@@ -19,7 +19,7 @@ int main()
   }
   catch (const std::logic_error &e)
   {
-    std::cerr << "ERROR: the interval is incorrect";
+    std::cerr << "ERROR: the interval is incorrect\n";
     return 1;
   }
   sveshnikov::table(left, right, k);
