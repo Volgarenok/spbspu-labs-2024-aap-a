@@ -1,10 +1,11 @@
-#ifndef CREATINGTABLES_HPP
-#define CREATINGTABLES_HPP
+#ifndef FINDINGTYLOR_HPP
+#define FINDINGTYLOR_HPP
+#include <cstddef>
+
 namespace zakirov
 {
-  int find_error();
-  void print_string(double left, double position, double right);
-  void print_table(double left, double position, double right);
-}
+  double zakirov::find_atanh(double point, size_t addition_depth, double error);
+  double zakirov::get_atanh(double point);
+};
 
 #endif
