@@ -9,10 +9,11 @@ int main()
   {
     std::cerr << "ERROR: wrong cin\n";
     return 1;
-  const double step = 0.05;
-  for (size_t i = left; i < right; i += step)
-  {
-    resultsInTable(i, k);
   }
-  resultsInTable(right, k);
+  const double step = 0.05;
+  for (double i = left; i < right; i += step)
+  {
+    hismatova::resultsInTable(i, k);
+  }
+  hismatova::resultsInTable(right, k);
 }

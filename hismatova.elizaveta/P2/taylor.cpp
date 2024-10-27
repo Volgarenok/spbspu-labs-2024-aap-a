@@ -18,7 +18,7 @@ double hismatova::taylorSin(const double& x, const size_t& k)
       sign = -1.0;
     }
     result = result + sign * numer/denomin;
-    denomin = denomin * (demomin + 1) * (denomin + 2);
+    denomin = denomin * (denomin + 1) * (denomin + 2);
     numer = numer * x * x;
   }
   if (std::abs(result - hismatova::sinx(x)) > error)
@@ -27,13 +27,13 @@ double hismatova::taylorSin(const double& x, const size_t& k)
   }
   return result;
 }
-double resultsInTable(const double& x, const size_t& k)
+void resultsInTable(double& x, const size_t& k)
 {
-  res2 = 0;
+  double res2 = 0;
+  const char* errmsg = "<MATH ERROR>";
   try
   {
     res2 = hismatova::taylorSin(x, k);
-    const char* errmsg = "<MATH ERROR>";
     const size_t snd = std::strlen(errmsg);
     const size_t oth = 10;
     std::cout << std::setw(oth) << x;
@@ -45,6 +45,6 @@ double resultsInTable(const double& x, const size_t& k)
   }
   catch (std::logic_error & e)
   {
-    std::cerr < e.what() << "\n";
+    std::cerr << errmsg << std::endl;
   }
 }
