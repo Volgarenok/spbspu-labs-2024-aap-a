@@ -6,4 +6,5 @@ void smirnov::outTable(double left, double right, size_t k, double error, double
   {
     smirnov::outString(i, k, error);
   }
+  smirnov::outString(right, k, error);
 }

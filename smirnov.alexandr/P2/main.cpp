@@ -22,9 +22,9 @@ int main()
      std::cerr << "The interval is not entirely within the scope of the function definition\n";
      return 1;
    }
-   
+
    const double error = 0.001;
    const double step = 0.1;
-   
+
    smirnov::outTable(left, right, k, error, step);
 }

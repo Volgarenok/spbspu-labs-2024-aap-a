@@ -10,7 +10,7 @@ void smirnov::outString(double x, size_t k, double error)
   size_t oth = others_columns;
   std::cout.precision(3);
   std::cout << std::setw(oth) << std::fixed << x << " ";
-  try 
+  try
   {
     std::cout << std::setw(snd) << smirnov::sinTaylor(x, k, error);
   }
