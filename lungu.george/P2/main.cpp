@@ -19,20 +19,16 @@ int main() {
         std::cerr << ("Logic error") << "\n" << "\a";
         return 3;
     }
-
     std::cout << std::fixed << std::setprecision(6);
     std::cout << std::string(10, ' ') << "X\tSUMM\tSTDfunction\n";
-
     for (double x = start; x <= end; x += step) {
         try {
             double calculatedValue = lungu::TylorFunc(x, absError, numberMax);
             double standardValue = std::exp(-x * x); 
-
             std::cout << std::string(10, ' ') << x << "\t" << calculatedValue << "\t" << standardValue << "\n";
         } catch (const std::exception& e) {
             std::cout << std::string(10, ' ') << x << "\tMathError" << "\n";
         }
     }
-
     return 0;
 }
