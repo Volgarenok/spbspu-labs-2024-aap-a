@@ -14,11 +14,9 @@ int main(){
     const double error = 0.001;
     const double step = 0.05;
     const char * errorsum = "<MATH ERROR>";
-    const size_t second_volume_width = std::strlen(errorsum);
-    const size_t other_volume = 10;
+    const size_t snd = std::strlen(errorsum);
+    const size_t usu = 10;
     for (auto i = left; i < right; i += step){
-        const size_t snd = second_volume_width;
-        const size_t usu = other_volume;
         std::cout << std::setw(usu) << i;
         std::cout << " ";
         try{
