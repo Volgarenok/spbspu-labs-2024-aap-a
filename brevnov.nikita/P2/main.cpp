@@ -21,7 +21,7 @@ int main(){
         try{
             std::cout << brevnov::f(i,k,error);
         } catch(std::logic_error & e){
-            std::cout << "<MATH ERROR>\n";
+            std::cout << "<MATH ERROR>";
         }
         std::cout << " " << brevnov::arctg(i); 
         std::cout<< "\n";
