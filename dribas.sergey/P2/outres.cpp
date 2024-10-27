@@ -1,31 +1,26 @@
+#include "outres.hpp"
+#include "taylor.hpp"
 #include <stdexcept>
 #include <iomanip>
 #include <cmath>
 #include <iostream>
 #include <cstddef>
-#include "outres.hpp"
-#include "taylor.hpp"
 #include <cstring>
 
 void dribas::outline(double x, size_t koll, double error, int sizeclm)
 {
   double roundedX=round(x * 100000) / 100000;
   double cmathvalue = round(dribas::getCmathValue(roundedX) * 100000) / 100000;
-  try
-  {
-   double value = round(dribas::getTaylor(roundedX, koll, error) * 100000) / 100000;
+  try{
+    double value = round(dribas::getTaylor(roundedX, koll, error) * 100000) / 100000;
 
-   std::cout << std::setw(sizeclm) << roundedX;
-   std::cout << std::setw(sizeclm) << value;
-   std::cout << std::setw(sizeclm) << cmathvalue;
-   std::cout << "\n";
-  }
-  catch (const std::exception & e)
-  {
-   std::cerr << std::setw(sizeclm) << roundedX;
-   std::cerr << std::setw(sizeclm) << e.what();
-   std::cerr << std::setw(sizeclm) << cmathvalue;
-   std::cerr << "\n";
+    std::cout << std::setw(sizeclm) << roundedX;
+    std::cout << std::setw(sizeclm) << value;
+    std::cout << std::setw(sizeclm) << cmathvalue;
+  }catch (const std::exception & e){
+    std::cerr << std::setw(sizeclm) << roundedX;
+    std::cerr << std::setw(sizeclm) << e.what();
+    std::cerr << std::setw(sizeclm) << cmathvalue;
   }
 }
 
@@ -50,9 +45,10 @@ void dribas::outall(double left, double right, double step, size_t koll, double 
   std::cout << std::setw(sizeclm) << cmathmsg;
   std::cout << "\n";
 
-  for (auto i=left; i<right; i+=step)
-  {
-   outline(i, koll, error, sizeclm);
+  for (auto i = left; i < right; i += step){
+    outline(i, koll, error, sizeclm);
+    std::cout << "\n";
   }
   outline(right, koll, error, sizeclm);
+  std::cout << "\n";
 }
