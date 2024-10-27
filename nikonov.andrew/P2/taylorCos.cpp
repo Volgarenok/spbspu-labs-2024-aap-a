@@ -1,11 +1,15 @@
-#include "funcs.hpp"
+#include "taylorCos.hpp"
+#include <cmath>
+#include <iostream>
+#include <stdexcept>
+#include <iomanip>
 double nikonov::cos(const double& x, const size_t& numberMax, const double& absError)
 {
   double next = (x * x) / 2;
   double result = 1 - next;
   for (size_t i = 1; i < numberMax; i++)
   {
-    next *= x*x/((2*i + 1)*(2*i + 2));
+    next *= (x * x) / ((2 * i + 1) * (2 * i + 2));
     if (i % 2 == 0)
     {
         result += next;
@@ -36,7 +40,6 @@ void nikonov::stringOutput(const double& x, const double& val, const double& std
   std::cout << std::setprecision(6) << std::setw(snd_col_width) << val;
   std::cout << " ";
   std::cout << std::setprecision(6) << std::setw(oth_col_width) << stdval;
-  std::cout << "\n";
 }
 void nikonov::stringOutput(const double& x, const std::logic_error& e, const double& stdval)
 {
@@ -49,5 +52,4 @@ void nikonov::stringOutput(const double& x, const std::logic_error& e, const dou
   std::cout << std::setprecision(6) << std::setw(snd_col_width) << e.what();
   std::cout << " ";
   std::cout << std::setprecision(6) << std::setw(oth_col_width) << stdval;
-  std::cout << "\n";
 }

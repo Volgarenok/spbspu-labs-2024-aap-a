@@ -1,10 +1,8 @@
-#ifndef FUNCS_HPP
-#define FUNCS_HPP
+#ifndef TAYLORCOS_HPP
+#define TAYLORCOS_HPP
 #include <cstddef>
 #include <cmath>
-#include <iostream>
 #include <stdexcept>
-#include <iomanip>
 #include <cstring>
 namespace nikonov
 {

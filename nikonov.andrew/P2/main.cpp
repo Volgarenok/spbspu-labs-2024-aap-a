@@ -1,4 +1,5 @@
-#include "funcs.hpp"
+#include "taylorCos.hpp"
+#include <iostream>
 int main()
 {
   const double step = 0.1, absError = 0.001;
@@ -14,23 +15,27 @@ int main()
   {
     double stdval = nikonov::stdcos(x);
     try
-      {
-        double val = nikonov::cos(x, numberMax, absError);
-        nikonov::stringOutput(x, val, stdval);
-      }
-      catch(const std::logic_error& e)
-      {
-        nikonov::stringOutput(x, e, stdval);
-      }
+    {
+      double val = nikonov::cos(x, numberMax, absError);
+      nikonov::stringOutput(x, val, stdval);
+      std::cout << "\n";
+    }
+    catch (const std::logic_error& e)
+    {
+      nikonov::stringOutput(x, e, stdval);
+      std::cout << "\n";
+    }
   }
   double stdval = nikonov::stdcos(right);
   try
   {
     double val = nikonov::cos(right, numberMax, absError);
     nikonov::stringOutput(right, val, stdval);
+    std::cout << "\n";
   }
-  catch(const std::logic_error& e)
+  catch (const std::logic_error& e)
   {
     nikonov::stringOutput(right, e, stdval);
+    std::cout << "\n";
   }
 }
