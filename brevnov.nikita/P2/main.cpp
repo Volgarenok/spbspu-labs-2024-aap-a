@@ -5,6 +5,10 @@ int main()
     double left = 0.0, right = 0.0;
     size_t k = 0;
     std::cin >> left >> right >> k;
+    if (std::cin.eof())
+    {
+        std::cerr << "Error!End of file!\n";
+    }
     if (std::cin.fail())
     {
         std::cerr << "Input error!\n";
