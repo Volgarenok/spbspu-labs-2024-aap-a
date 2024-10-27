@@ -8,6 +8,7 @@ int main()
     if (std::cin.eof())
     {
         std::cerr << "Error!End of file!\n";
+        return 1;
     }
     if (std::cin.fail())
     {
@@ -17,6 +18,7 @@ int main()
     if ((left>=right) or (std::abs(left)>1) or (std::abs(right)>1))
     {
         std::cerr << "Incorrect input!\n";
+        return 1;
     }
     brevnov::outputing(left, right, k);
     return 0;
