@@ -1,12 +1,9 @@
-#include <iostream>
-#include <iomanip>
 #include "CreatingTables.hpp"
 #include "FindingTylor.hpp"
 
 
 void zakirov::tylor_string(double point, size_t addition_depth, const double kError)
 {
-  
 
   std::cout << std::setw(10) << point << " ";
 
