@@ -16,7 +16,7 @@ void kiselev::output_table(double number, size_t k, double error)
   {
     std::cout << std::setw(oth_column) << kiselev::f(number, k, error) << "    ";
   }
-  catch (std::logic_error& e)
+  catch (std::logic_error &e)
   {
     std::cout << std::setw(sec_column) << errorm << "    ";
   }
