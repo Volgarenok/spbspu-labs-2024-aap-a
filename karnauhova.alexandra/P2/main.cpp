@@ -19,7 +19,7 @@ int main()
   {
     std::cerr << "Incorrect input";
     return 1;
-
+  }
   const double error = 0.001;
   const double step = 0.05;
   karnauhova::output_table(left, right, step, k, error, 13);
