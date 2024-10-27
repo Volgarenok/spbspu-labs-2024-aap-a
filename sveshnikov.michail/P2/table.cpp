@@ -1,6 +1,6 @@
 #include "taylor.hpp"
 
-void table(double left, double right, size_t k, const double error, const double step)
+void sveshnikov::table(double left, double right, size_t k, const double error, const double step)
 {
   for (auto i = left; i < right; i += step)
   {

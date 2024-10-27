@@ -1,6 +1,6 @@
 #include "taylor.hpp"
 
-void row(double x, size_t k, double error)
+void sveshnikov::row(double x, size_t k, double error)
 {
   std::cout << x << " ";
   try

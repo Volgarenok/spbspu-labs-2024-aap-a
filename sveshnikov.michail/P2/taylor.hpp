@@ -9,6 +9,6 @@ namespace sveshnikov
   double taylor(double x, size_t k, double error);
   double math(double x);
   void row(double x, size_t k, double error);
-  double table(double left, double right, size_t k, const double error, const double step);
+  void table(double left, double right, size_t k, const double error, const double step);
 }
 #endif
