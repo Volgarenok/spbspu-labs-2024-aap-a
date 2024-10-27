@@ -1,7 +1,7 @@
 #include "computingFunctions.hpp"
 #include "valuesOutput.hpp"
 
-void krylov::lineOutput(double x, sixe_t max_terms_number, double error)
+void krylov::lineOutput(double x, size_t max_terms_number, double error)
 {
   std::cout << std::setw(12) << std::setprecision(2) << x;
     std::cout << std::fixed;

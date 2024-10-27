@@ -10,7 +10,7 @@ double krylov::f(double x, size_t k, double error)
   {
     int factorial = 1;
     previous_term *= factorial;
-    for (size_t j = 1; j <= previous_factorial_value + 2; j += 1)
+    for (int j = 1; j <= previous_factorial_value + 2; j += 1)
     {
       factorial *= j;
     }
