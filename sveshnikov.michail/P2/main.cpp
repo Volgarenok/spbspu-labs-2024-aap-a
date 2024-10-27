@@ -23,5 +23,6 @@ int main()
     return 1;
   }
   sveshnikov::table(left, right, k);
+  std::cout << "\n";
   return 0;
 }
