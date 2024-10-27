@@ -16,16 +16,7 @@ int main()
   for (auto i = left; i < right; i += step)
   {
     double value = sveshnikov::taylor(i, k, error);
-    std::cout << i << " ";
-    std::cout << value << " " << sveshnikov::math(i) << "\n";
+    sveshnikov::row(i, value);
   }
 }
 
-double sveshnikov::taylor(double x, size_t k, double error)
-{
-  return 0.0;
-}
-double sveshnikov::math(double x)
-{
-  return 0.0;
-}

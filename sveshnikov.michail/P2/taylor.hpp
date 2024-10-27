@@ -7,7 +7,7 @@ namespace sveshnikov
 {
   double taylor(double x, size_t k, double error);
   double math(double x);
-  double row();
+  void row(double x, double value);
   double table();
 }
 #endif
