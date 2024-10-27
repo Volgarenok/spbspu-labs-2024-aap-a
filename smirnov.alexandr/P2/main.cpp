@@ -1,4 +1,6 @@
-#include <iostream>
+#include "TaylorSeries.hpp"
+#include "Table.hpp"
+
 
 int main()
 {
@@ -23,4 +25,6 @@ int main()
    
    const double error = 0.001;
    const double step = 0.1;
+   
+   smirnov::outTable(left, right, k, error, step);
 }

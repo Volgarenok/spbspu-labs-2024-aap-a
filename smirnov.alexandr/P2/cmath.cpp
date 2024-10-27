@@ -1,4 +1,4 @@
-#include "TylerSeries.hpp"
+#include "TaylorSeries.hpp"
 
 double smirnov::sinCmath(double x)
 {

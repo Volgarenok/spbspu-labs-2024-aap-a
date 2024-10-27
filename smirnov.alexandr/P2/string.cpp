@@ -1,10 +1,11 @@
 #include "Table.hpp"
+#include "TaylorSeries.hpp"
 
 void smirnov::outString(double x, size_t k, double error)
 {
   const char * errormsg = "MATH ERROR";
   const size_t second_column_width = std::strlen(errormsg);
-  const others_columns = 10;
+  const size_t others_columns = 10;
   size_t snd = second_column_width;
   size_t oth = others_columns;
   std::cout << std::setw(oth) << std::fixed << x << " ";
