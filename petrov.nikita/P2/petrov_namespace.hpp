@@ -6,5 +6,7 @@ namespace petrov
 {
   double calculateByTailor(double, size_t, double);
   double calculateBySTD(double);
+  void outputTableHeader();
 }
 #endif
+

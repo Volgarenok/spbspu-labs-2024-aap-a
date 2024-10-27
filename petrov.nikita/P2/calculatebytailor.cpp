@@ -27,3 +27,4 @@ double petrov::calculateByTailor(double x, size_t k, double error)
   }
   return result;
 }
+
