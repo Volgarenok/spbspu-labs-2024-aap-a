@@ -1,5 +1,3 @@
-#include <stdexcept>
-#include <cmath>
 #include "brevnov.hpp"
 
 int main(){ 
@@ -15,19 +13,25 @@ int main(){
     }
     const double error = 0.001;
     const double step = 0.05;
+    const char * errorsum = "<MATH ERROR>";
+    std::cout << std::setw(10);
     for (auto i = left; i < right; i += step){
         std::cout << i;
         std::cout << " ";
         try{
             std::cout << brevnov::f(i,k,error);
         } catch(std::logic_error & e){
-            std::cerr << "<MATH ERROR>\n";
+            std::cout << "<MATH ERROR>";
         }
         std::cout << " " << brevnov::arctg(i); 
         std::cout<< "\n";
-        std::cout << right;
-        std::cout << " " << brevnov::f(right, k, error);
-        std::cout << " " << brevnov::arctg(right);
-        std::cout << "\n";
     }
+    std::cout << right;
+    try{
+        std::cout << " " << brevnov::f(right, k, error);
+    } catch (std::logic_error & e){
+        std::cout << "<MATH ERROR>";
+    }
+    std::cout << " " << brevnov::arctg(right);
+    std::cout << "\n";
 }
