@@ -7,8 +7,8 @@
 void tkach::outputRow(double start, size_t maxamount, const double error)
 {
   constexpr size_t setwx = 13, precision_for_second = 4, precision_for_third = 4, precision_for_first = 2;
-  const char *errormsg = "<MATH ERROR>";
-  const size_t error_len = std::strlen(errormsg) + 5;
+  constexpr const char *errormsg = "<MATH ERROR>";
+  constexpr size_t error_len = std::strlen(errormsg) + 5;
   std::cout << std::fixed;
   std::cout << std::setw(setwx) << std::setprecision(precision_for_first) <<  start;
   std::cout << " ";
