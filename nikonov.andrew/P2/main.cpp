@@ -1,8 +1,9 @@
-#include "taylorCos.hpp"
+#include "taylor_cos.hpp"
+#include "taylor_output.hpp"
 #include <iostream>
 int main()
 {
-  const double step = 0.1, absError = 0.001;
+  constexpr double step = 0.1, absError = 0.001;
   double left = 0.0, right = 0.0;
   size_t numberMax = 0;
   std::cin >> left >> right >> numberMax;
