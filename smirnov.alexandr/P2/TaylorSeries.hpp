@@ -5,6 +5,6 @@
 namespace smirnov
 {
    double sinTaylor(double x, size_t k, double error);
-   double sinCmath(double x)
+   double sinCmath(double x);
 }
 #endif
