@@ -15,19 +15,19 @@ void brevnov::outputing(const double left, const double right, const size_t k)
         try
         {
             std::cout << std::fixed << std::setw(snd) << brevnov::f(i,k,error);
-        } 
+        }
         catch (std::logic_error & e)
         {
             std::cout << std::setw(snd) << "<MATH ERROR>";
         }
-        std::cout << " " << std::fixed << std::setw(usu) << atan(i); 
+        std::cout << " " << std::fixed << std::setw(usu) << atan(i);
         std::cout<< "\n";
     }
     std::cout << std::fixed << std::setw(usu) << right;
     try
     {
         std::cout << " " << std::fixed << std::setw(snd) << brevnov::f(right, k, error);
-    } 
+    }
     catch (std::logic_error & e)
     {
         std::cout << std::setw(snd) << "<MATH ERROR>";
