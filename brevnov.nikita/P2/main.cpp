@@ -11,6 +11,6 @@ int main(){
     if ((left>=right)){
         std::cerr << "Incorrect input!\n";
     }
-    output(left, right, k);
+    brevnov::output(left, right, k);
     return 0;
 }
