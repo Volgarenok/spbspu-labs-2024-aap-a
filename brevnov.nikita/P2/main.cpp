@@ -13,6 +13,7 @@ int main(){
     }
     const double error = 0.001;
     const double step = 0.05;
+    const char * errorsum = "<MATH ERROR>";
     std::cout << std::setw(10);
     for (auto i = left; i < right; i += step){
         std::cout << i;
