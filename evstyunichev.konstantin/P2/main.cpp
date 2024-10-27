@@ -13,13 +13,11 @@ int main()
   }
   const double step = 0.2;
   const double error = 0.001;
-
   for (double i = left; i < right; i += step)
   {
     kos::output(i, k, error);
     std::cout << "\n";
   }
-  
   if (left != right)
   {
     kos::output(right, k, error);
