@@ -23,5 +23,4 @@ void tkach::outputRow(double start, size_t maxkolvo, const double error)
     std::cout << " ";
   }
   std::cout << std::setw(setwx) << std::setprecision(precision_for_third) << tkach::stdCosh(start);
-  std::cout << "\n";
 }

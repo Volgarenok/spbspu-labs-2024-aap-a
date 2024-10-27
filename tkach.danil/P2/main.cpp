@@ -36,5 +36,6 @@ int main()
   }
   tkach::outputTable(start, end, maxkolvo, error, step);
   tkach::outputRow(end, maxkolvo, error);
+  std::cout << "\n";
   return 0;
 }
