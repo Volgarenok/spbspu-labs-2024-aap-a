@@ -1,7 +1,7 @@
 #include <iostream>
 #include "tyler_derden.h"
 #include <cstring>
-int main()
+int main
 {
   double left = 0.0, right = 0.0;
   size_t k = 0;
