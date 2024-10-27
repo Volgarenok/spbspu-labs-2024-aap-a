@@ -23,8 +23,6 @@ int main()
         std::cerr << "incorrect borders" << '\n';
         return 1;
     }
-
     asafov::table(left, right, step, numberMax, error);
-    
     return 0;
 }
