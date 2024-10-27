@@ -3,5 +3,4 @@
 namespace lungu {
     double TylorFunc(double x, double absError, int numberMax);
 }
-
 #endif
