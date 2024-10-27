@@ -14,24 +14,27 @@ int main(){
     const double error = 0.001;
     const double step = 0.05;
     const char * errorsum = "<MATH ERROR>";
-    std::cout << std::setw(10);
+    const size_t second_volume_width = std::strlen(errorsum);
+    const size_t other_volume = 10;
     for (auto i = left; i < right; i += step){
-        std::cout << i;
+        size_t snd = second_volume_width;
+        size_t usu = other_volume;
+        std::cout << std::setw(usu) << i;
         std::cout << " ";
         try{
-            std::cout << brevnov::f(i,k,error);
+            std::cout << std::setw(snd) << brevnov::f(i,k,error);
         } catch(std::logic_error & e){
-            std::cout << "<MATH ERROR>";
+            std::cout << std::setw(snd) << "<MATH ERROR>";
         }
-        std::cout << " " << brevnov::arctg(i); 
+        std::cout << " " << std::setw(usu) << brevnov::arctg(i); 
         std::cout<< "\n";
     }
-    std::cout << right;
+    std::cout << std::setw(usu) << right;
     try{
-        std::cout << " " << brevnov::f(right, k, error);
+        std::cout << " " << std::setw(snd) << brevnov::f(right, k, error);
     } catch (std::logic_error & e){
-        std::cout << "<MATH ERROR>";
+        std::cout << std::setw(snd) << "<MATH ERROR>";
     }
-    std::cout << " " << brevnov::arctg(right);
+    std::cout << " " << std::setw(snd) << brevnov::arctg(right);
     std::cout << "\n";
 }
