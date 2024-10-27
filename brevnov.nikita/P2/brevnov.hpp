@@ -7,6 +7,6 @@
 #include <cstring>
 namespace brevnov{
     double f(double x, size_t k, double error);
-    void output(double left, double right, size_t k);
+    void output(const double left, const double right, const size_t k);
 } 
 #endif

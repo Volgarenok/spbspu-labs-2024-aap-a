@@ -1,5 +1,5 @@
 #include "brevnov.hpp"
-void output(double left, double right, size_t k){
+void output(const double left, const double right, const size_t k){
     const double error = 0.001;
     const double step = 0.05;
     const char * errorsum = "<MATH ERROR>";
