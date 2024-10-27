@@ -22,20 +22,17 @@ int main()
   {
     if (std::abs(i) < error)
     {
-      alymova::print(0, alymova::arctg(0), alymova::taylor_row(0, max_summand, error));
+      i = 0.0;
     }
-    else
+    double res = alymova::arctg(i);
+    try
     {
-      double res = alymova::arctg(i);
-      try
-      {
-        double x = alymova::taylor_row(i, max_summand, error);
-        alymova::print(i, x, res);
-      }
-      catch (const std::logic_error& e)
-      {
-        alymova::print_error(i, res);
-      }
+      double x = alymova::taylor_row(i, max_summand, error);
+      alymova::print(i, x, res);
+    }
+    catch (const std::logic_error& e)
+    {
+      alymova::print_error(i, res);
     }
     std::cout << "\n";
   }
