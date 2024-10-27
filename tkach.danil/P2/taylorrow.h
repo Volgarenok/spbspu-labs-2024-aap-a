@@ -2,7 +2,8 @@
 #define TAYLORROW_H
 #include <cstddef>
 
-namespace tkach {
+namespace tkach
+{
   double coshTaylor(double start, size_t maxkolvo, const double error);
   double stdCosh(double coshx);
 }
