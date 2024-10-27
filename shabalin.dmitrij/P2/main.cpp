@@ -10,7 +10,7 @@ double f(double x, size_t k, double error)
 {
   double current_term = x;
   double result = 0.0;
-  for (int i = 1; i < k; ++i)
+  for (size_t i = 1; i < k; ++i)
   {
     current_term *= -x * x / (2 * i) * (2 * i - 1);
     result += current_term;
