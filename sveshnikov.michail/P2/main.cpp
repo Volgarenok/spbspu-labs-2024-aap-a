@@ -10,6 +10,16 @@ int main()
     std::cerr << "ERROR: the input could not be recognized\n";
     return 1;
   }
+  try {
+    if (left <= -1 || right >=1) {
+      throw std::logic_error("the interval is incorrect");
+    }
+  }
+  catch(const std::logic_error &e)
+  {
+    std::cerr << "ERROR: the interval is incorrect";
+    return 1;
+  }
   const double error = 0.002;
   const double step = 0.06;
   sveshnikov::table(left, right, k, error, step);
