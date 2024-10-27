@@ -13,7 +13,7 @@ namespace lungu {
             n++;
 
             if (n > numberMax) {
-                throw std::runtime_error("Max number of operands reached");
+                throw std::runtime_error("Max quantity of operands reached");
             }
         } while (std::fabs(term) > absError);
 
