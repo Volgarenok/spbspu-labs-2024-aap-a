@@ -5,8 +5,9 @@
 #include <stdexcept>
 #include <iomanip>
 #include <cstring>
-namespace brevnov{
-    double f(double x, size_t k, double error);
+namespace brevnov
+{
+    double f(const double x, const size_t k, const  double error);
     void output(const double left, const double right, const size_t k);
 } 
 #endif
