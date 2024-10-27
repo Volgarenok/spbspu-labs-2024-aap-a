@@ -9,8 +9,8 @@ int main()
   const double absError = 0.005;
   const double step = 0.02;
 
-  std::cout << "Enter the numberMax, start, end: ";
-  std::cin >> numberMax >> start >> end;
+  std::cout << "Enter the start, end, numberMax: ";
+  std::cin >> start >> end >> numberMax;
 
   if (std::cin.fail())
   {
