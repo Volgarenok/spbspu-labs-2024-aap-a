@@ -30,7 +30,7 @@ int main(){
     try{
         std::cout << " " << brevnov::f(right, k, error);
     } catch (std::logic_error & e){
-        std::cout << "<MATH ERROR>\n";
+        std::cout << "<MATH ERROR>";
     }
     std::cout << " " << brevnov::f(right, k, error);
     std::cout << " " << brevnov::arctg(right);
