@@ -11,7 +11,7 @@ int main()
   }
   try
   {
-    if (left <= -1 || right >= 1 || (right < left && k >= 0) || (right > left && k <= 0) || (right != left && k == 0))
+    if (left <= -1 || right >= 1 || (right < left) || (right != left && k == 0))
     {
       throw std::logic_error("the interval is incorrect");
     }
