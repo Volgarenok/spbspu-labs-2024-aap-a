@@ -18,5 +18,5 @@ int main()
   }
   const double error = 0.01;
   const double step = 0.123;
-  finalOutput(left, right, step, k, error, 10);
+  shabalin::finalOutput(left, right, step, k, error, 10);
 }

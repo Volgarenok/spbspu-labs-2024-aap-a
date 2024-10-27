@@ -5,7 +5,8 @@
 #include <iostream>
 #include <cmath>
 
-double f(double x, size_t k, double error)
+using namespace shabalin;
+double shabalin::f(double x, size_t k, double error)
 {
   double current_term = x;
   double result = 0.0;
@@ -21,12 +22,12 @@ double f(double x, size_t k, double error)
   return result;
 }
 
-double stdf(double x)
+double shabalin::stdf(double x)
 {
   return std::cos(x);
 }
 
-void output(double x, size_t k, double error, size_t clmn)
+void shabalin::output(double x, size_t k, double error, size_t clmn)
 {
   std::cout << std::setw(clmn) << x;
   std::cout << " ";
@@ -41,7 +42,7 @@ void output(double x, size_t k, double error, size_t clmn)
   std::cout << std::setw(clmn) << stdf(x) << "\n";
 }
 
-void finalOutput(double left, double right, double step, size_t k, double error, size_t clmn)
+void shabalin::finalOutput(double left, double right, double step, size_t k, double error, size_t clmn)
 {
    for (auto i = left; i < right; i += step)
   {
