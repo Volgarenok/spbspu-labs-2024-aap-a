@@ -39,9 +39,16 @@ int main()
     }
     catch (const std::logic_error & e)
     {
-      std::cout << i;
-      std::cout << "MATH ERROR";
-      std::cout << komarova::ln_Teilor(i) << "\n";
+      void komarova::matherr(i, value, komarova::ln_Teilor(i))
     }
+  }
+  try
+  {
+    double value = komarova::Teilor(right, k, error);
+    komarova::output(right, value, komarova::ln_Teilor(right));
+  }
+  catch (const std::logic_error & e)
+  {
+    void komarova::matherr(right, value, komarova::ln_Teilor(right))
   }
 }
