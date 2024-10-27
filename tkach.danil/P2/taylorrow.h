@@ -4,7 +4,7 @@
 
 namespace tkach
 {
-  double coshTaylor(double start, size_t maxkolvo, const double error);
+  double coshTaylor(double start, size_t maxkolvo, double error);
   double stdCosh(double coshx);
 }
 

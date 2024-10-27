@@ -4,8 +4,8 @@
 
 namespace tkach
 {
-  void outputTable(double start, double end, size_t maxkolvo, const double error, const double step);
-  void outputRow(double start, size_t maxkolvo, const double error);
+  void outputTable(double start, double end, size_t maxkolvo, double error, double step);
+  void outputRow(double start, size_t maxkolvo, double error);
 }
 
 #endif
