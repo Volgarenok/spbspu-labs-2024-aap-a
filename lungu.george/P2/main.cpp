@@ -8,7 +8,7 @@ int main() {
     double start, end, step=0.05;
     std::cin >> start >> end >> numberMax;
     if (!std::cin) {
-        std::cerr << ("Bad input") << "\n";
+        std::cerr << ("Worst possible input") << "\n";
         return 1;
     }
     if (step <= 0) {
