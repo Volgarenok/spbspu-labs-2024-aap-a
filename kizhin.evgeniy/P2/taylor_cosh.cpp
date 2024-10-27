@@ -10,7 +10,7 @@ double kizhin::computeTaylorCosh(double argument, size_t maxOperands, double abs
   double current = 1.0;
   double error = 1.0;
 
-  for (size_t i = 0; i < maxOperands; ++i) {
+  for (size_t i = 1; i < maxOperands; ++i) {
     current *= (argument * argument) / (2 * i * (2 * i - 1));
     result += current;
     error = current;
