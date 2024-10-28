@@ -5,8 +5,8 @@ int main()
 {
   double left = 0.0, right = 0.0;
   size_t k = 0;
-  const double error = 0.0029;
-  const double step = 0.1;
+  constexpr double error = 0.0029;
+  constexpr double step = 0.1;
 
   std::cin >> left >> right >> k;
   if (!std::cin)
