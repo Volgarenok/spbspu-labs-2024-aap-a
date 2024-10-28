@@ -1,6 +1,5 @@
-#include <iostream>
-#include <stdexcept>
 #include "taylors_header.hpp"
+#include <stdexcept>
 
 double kushekbaev::taylorCalc(double x, size_t max_members, double error)
 {

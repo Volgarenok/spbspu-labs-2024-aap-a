@@ -1,7 +1,16 @@
-#include <iostream>
-#include "taylors_header.hpp"
+#include "taylors_header.h"
 
-double kushekbaev::sinhCalc(double x)
+double kushekbaev::sinhCalc(double x, double error)
 {
-  return std::sinh(x);
+    double next = x;
+    double result = next;
+    size_t n = 1;
+
+    while (std::abs(next) > 0.001)
+    {
+        next *= x * x / ((2 * n) * (2 * n + 1));
+        result += next;
+        n++ 
+    }
+    return result;
 }
