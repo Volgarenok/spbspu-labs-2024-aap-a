@@ -1,9 +1,9 @@
-#include <stdexcept>
 #include "taylorsRow.hpp"
+#include <stdexcept>
 
 namespace balashov
 {
-  double EXP_X(double x, size_t numberOfСalculations, double error)
+  double expTaylor(double x,const size_t numberOfСalculations,const double error)
   {
     double result = 1;
     double summand = 1;

@@ -1,12 +1,12 @@
 #ifndef TABLE_DISPLAY_HPP
 #define TABLE_DISPLAY_HPP
 
-#include <iostream>
 #include "taylorsRow.hpp"
 
 namespace balashov
 {
-  void showRow(double, int, size_t, double);
-  void showTable(double, double, int, double, int, double);
+  void showRow(double step, size_t numberOfСalculations, double error);
+  void showTable (double minimumIntervalStep, double maximumIntervalStep, int numberOfСalculations,
+    double step, double error);
 }
 #endif

@@ -1,5 +1,5 @@
-#include <cmath>
 #include "tableDisplay.hpp"
+#include <cmath>
 
 int main()
 {
@@ -8,43 +8,43 @@ int main()
   int numberOfСalculations = 0;
   std::cin >> minimumIntervalStep >> maximumIntervalStep >> numberOfСalculations;
 
-  if(std::cin.eof())
+  if (std::cin.eof())
   {
     std::cerr << "Not enough elements\n";
     return 1;
   }
-  else if(std::cin.fail())
+  else if (std::cin.fail())
   {
     std::cerr << "Invalid element\n";
     return 1;
   }
-  else if(minimumIntervalStep < -1 || minimumIntervalStep > 1)
+  else if (minimumIntervalStep < -1 || minimumIntervalStep > 1)
   {
     std::cerr << "The lower limit is set incorrectly\n";
     return 1;
   }
-  else if(maximumIntervalStep < -1 || maximumIntervalStep >1)
+  else if (maximumIntervalStep < -1 || maximumIntervalStep >1)
   {
     std::cerr << "The upper limit is set incorrectly\n";
     return 1;
   }
-  else if(maximumIntervalStep < minimumIntervalStep)
+  else if (maximumIntervalStep < minimumIntervalStep)
   {
    std::cerr << "The lower limit is greater than the upper limit\n";
    return 1;
   }
-  else if(numberOfСalculations <= 0)
+  else if (numberOfСalculations <= 0)
   {
    std::cerr << "number of salculations must be greater than 0\n";
    return 1;
   }
 
-  const double step = 0.05;
-  const int deepShow = 4;
-  const double error = 0.001;
+  constexpr double step = 0.05;
+  constexpr double error = 0.001;
 
-  balashov::showTable(minimumIntervalStep, maximumIntervalStep, numberOfСalculations,
-  step, deepShow, error);
-  balashov::showRow(maximumIntervalStep, deepShow, numberOfСalculations,error);
+  balashov::showTable(minimumIntervalStep, maximumIntervalStep, numberOfСalculations,step, error);
+  std::cout << "\n";
+  balashov::showRow(maximumIntervalStep, numberOfСalculations,error);
+  std::cout << "\n";
   return 0;
 }
