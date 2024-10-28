@@ -18,9 +18,8 @@ int main()
   }
   constexpr double abs_error = 0.1;
   constexpr double step = 0.05;
-  constexpr unsigned int precision = 6;
-  std::cout.precision(precision);
+  std::cout.precision(6);
   std::cout << std::fixed;
-  petrov::outputTable(start, end, max, abs_error, step, precision);
+  petrov::outputTable(start, end, max, abs_error, step);
 }
 
