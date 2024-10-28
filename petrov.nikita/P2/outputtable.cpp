@@ -15,5 +15,6 @@ void petrov::outputTable(double start, double end, size_t max, double error, dou
   petrov::outputFirstColumn(end);
   petrov::outputSecondColumn(end, max, error);
   petrov::outputThirdColumn(end);
+  std::cout << "========================================\n";
 }
 
