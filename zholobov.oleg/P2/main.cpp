@@ -5,8 +5,8 @@
 #include "taylor_arctg.hpp"
 
 namespace {
-  const double absolute_error = 1e-5;
-  const int N = 40;
+  constexpr double absolute_error = 1e-5;
+  constexpr int n = 40;
 }
 
 int main()
@@ -19,9 +19,9 @@ int main()
     return 1;
   }
 
-  double step = (end - beg) / N;
+  double step = (end - beg) / n;
   std::cout << std::left << std::setprecision(8);
-  for (int i = 0; i < N + 1; i++) {
+  for (int i = 0; i < n + 1; i++) {
     double x = beg + step * i;
     double std_res = std::atan(x);
     double my_res = 0;
