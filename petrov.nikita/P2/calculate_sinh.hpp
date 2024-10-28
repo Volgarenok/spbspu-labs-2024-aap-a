@@ -1,5 +1,5 @@
-#ifndef PETROV_NAMESPACE_HPP
-#define PETROV_NAMESPACE_HPP
+#ifndef CALCULATE_SINH_HPP
+#define CALCULATE_SINH_HPP
 #include <iostream>
 
 namespace petrov
