@@ -35,7 +35,7 @@ int main()
     std::cout << std::setw(12) << x;
     if (error) {
       std::cout << std::setw(13) << "<MATH ERROR>";
-    } else { 
+    } else {
       std::cout << std::setw(13) << my_res;
     }
     std::cout << std_res << "\n";
