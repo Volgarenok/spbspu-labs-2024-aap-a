@@ -21,12 +21,7 @@ double shabalin::taylorViaCos(double x, size_t k, double error)
   }
   return result;
 }
-/*
-double shabalin::stdf(double x)
-{
-  return std::cos(x);
-}
-*/
+
 void shabalin::output(double x, size_t k, double error)
 {
   constexpr size_t clmn = 10;
