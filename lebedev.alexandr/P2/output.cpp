@@ -6,19 +6,19 @@
 
 void lebedev::output_raw(double x, size_t k, double error)
 {
-  const size_t SecondColWidth = std::strlen("<MATH ERROR>") + 4;
-  const size_t OtherColWidth = 10;
+  const size_t SecondColumnWidth = std::strlen("<MATH ERROR>") + 4;
+  const size_t OtherColumnsWidth = 10;
   std::cout.precision(3);
-  std::cout << std::setw(OtherColWidth) << std::fixed << x << ' ';
+  std::cout << std::setw(OtherColumnsWidth) << std::fixed << x << ' ';
   try
   {
-    std::cout << std::setw(SecondColWidth) << lebedev::sinus(x, k, error);
+    std::cout << std::setw(SecondColumnWidth) << lebedev::sinus(x, k, error);
   }
   catch (const std::logic_error & e)
   {
-    std::cout << std::setw(SecondColWidth) << "<MATH ERROR>";
+    std::cout << std::setw(SecondColumnWidth) << "<MATH ERROR>";
   }
-  std::cout << ' ' << std::setw(OtherColWidth) << lebedev::sinus_cmath(x);
+  std::cout << ' ' << std::setw(OtherColumnsWidth) << lebedev::sinus_cmath(x);
 }
 
 void lebedev::output_table(double left, double right, size_t k, double error, double step)
