@@ -5,8 +5,8 @@
 
 namespace savintsev
 {
-  double f_ExpMPow2X(double x, size_t k, const double error);
-  double stdf_ExpMPow2X(double x);
+  double expNegPow2xTaylor(double x, size_t k, double error);
+  double expNegPow2xStd(double x);
 }
 
 #endif

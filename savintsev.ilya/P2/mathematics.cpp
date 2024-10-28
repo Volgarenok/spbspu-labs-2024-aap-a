@@ -1,12 +1,12 @@
 #include "mathematics.h"
 
-double savintsev::f_ExpMPow2X(double x, size_t k, const double error)
+double savintsev::expNegPow2xTaylor(double x, size_t k, const double error)
 {
   double interim = 1.;
   double result = interim;
   for (size_t i = 1; i < k; ++i)
   {
-    interim *=  (-(x * x))/i;
+    interim *= (-(x * x)) / i;
     result += interim;
   }
   if (std::abs(interim) > error)
@@ -15,7 +15,8 @@ double savintsev::f_ExpMPow2X(double x, size_t k, const double error)
   }
   return result;
 }
-double savintsev::stdf_ExpMPow2X(double x)
+
+double savintsev::expNegPow2xStd(double x)
 {
   return std::exp(-(std::pow(x, 2)));
 }
