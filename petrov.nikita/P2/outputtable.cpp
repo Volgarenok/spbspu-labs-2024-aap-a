@@ -4,9 +4,9 @@
 void petrov::outputTable(double start, double end, size_t max, double error, double step)
 {
   std::cout << "========================================\n";
-  std::cout << "|    Arg    |  CalcW/Tail  | CalcW/STD |\n";
+  std::cout << "|    Arg    |  CalcW/Tayl  | CalcW/STD |\n";
   std::cout << "========================================\n";
-  for (size_t i = start; i < end; i += step)
+  for (auto i = start; i < end; i += step)
   {
     petrov::outputFirstColumn(i);
     petrov::outputSecondColumn(i, max, error);
