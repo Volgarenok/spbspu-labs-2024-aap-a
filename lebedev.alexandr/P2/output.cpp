@@ -14,12 +14,11 @@ void lebedev::output_raw(double x, size_t k, double error)
   {
     std::cout << std::setw(SecondColWidth) << lebedev::sinus(x, k, error);
   }
-  catch(const std::logic_error & e)
+  catch (const std::logic_error & e)
   {
     std::cout << std::setw(SecondColWidth) << "<MATH ERROR>";
   }
   std::cout << ' ' << std::setw(OtherColWidth) << lebedev::sinus_cmath(x);
-  std::cout << '\n';
 }
 
 void lebedev::output_table(double left, double right, size_t k, double error, double step)
@@ -27,6 +26,8 @@ void lebedev::output_table(double left, double right, size_t k, double error, do
   for (double i = left; i < right; i += step)
   {
     lebedev::output_raw(i, k, error);
+    std::cout << '\n';
   }
   lebedev::output_raw(right, k, error);
+  std::cout << '\n';
 }

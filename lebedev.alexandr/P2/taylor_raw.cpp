@@ -1,4 +1,4 @@
-#include "taylor_swift.hpp"
+#include "taylor_raw.hpp"
 #include <cmath>
 #include <stdexcept>
 
@@ -23,5 +23,5 @@ double lebedev::sinus(double x, size_t k, double error)
 
 double lebedev::sinus_cmath(double x)
 {
-  return sin(x);
+  return std::sin(x);
 }

@@ -1,7 +1,6 @@
-#include <iostream>
-#include "taylor_swift.hpp"
+#include "taylor_raw.hpp"
 #include "output.hpp"
-
+#include <iostream>
 
 int main()
 {
@@ -19,8 +18,8 @@ int main()
     return 1;
   }
 
-  const double step = 0.05;
-  const double error = 0.001;
+  constexpr double step = 0.05;
+  constexpr double error = 0.001;
 
   lebedev::output_table(left, right, k, error, step);
 }
