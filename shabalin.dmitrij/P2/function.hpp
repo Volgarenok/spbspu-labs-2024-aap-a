@@ -4,7 +4,7 @@
 
 namespace shabalin
 {
-  double f(double x, size_t k, double error);
+  double taylorViaCos(double x, size_t k, double error);
   double stdf(double x);
   void output(double x, size_t k, double error);
   void finalOutput(double left, double right, double step, size_t k, double error);

@@ -6,7 +6,7 @@
 #include <cmath>
 
 using namespace shabalin;
-double shabalin::f(double x, size_t k, double error)
+double shabalin::taylorViaCos(double x, size_t k, double error)
 {
   double current_term = x;
   double result = 0.0;
@@ -34,7 +34,7 @@ void shabalin::output(double x, size_t k, double error)
   std::cout << " ";
   try
   {
-    std::cout << std::setw(clmn) << f(x, k, error);
+    std::cout << std::setw(clmn) << shabalin::taylorViaCos(x, k, error);
   }
   catch (const std::logic_error & e)
   {
@@ -47,7 +47,7 @@ void shabalin::finalOutput(double left, double right, double step, size_t k, dou
 {
    for (auto i = left; i < right; i += step)
   {
-    output(i, k, error);
+    shabalin::output(i, k, error);
   }
-  output(right, k, error);
+   shabalin::output(right, k, error);
 }
