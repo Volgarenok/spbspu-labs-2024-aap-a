@@ -4,7 +4,7 @@
 #include <cstddef>
 
 namespace zholobov {
-    double f(double x, size_t k, double error);
+  double arctg_taylor(double x, size_t k, double error);
 }
 
 #endif
