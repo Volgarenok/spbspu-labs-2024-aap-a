@@ -53,7 +53,7 @@ int main()
     {
       std::cout << std::setw(snd) << errormsg;
     }
-    std::cout << " " << std::setw(oth) << kushekbaev::sinhCalc(i);
+    std::cout << " " << std::setw(oth) << kushekbaev::sinhCalc(i, error);
     std::cout << "\n";
   }
 
@@ -67,5 +67,5 @@ int main()
     std::cout << errormsg;
   }
 
-  std::cout << std::setw(snd-1) << kushekbaev::sinhCalc(last_member) << "\n";
+  std::cout << std::setw(snd-1) << kushekbaev::sinhCalc(last_member, error) << "\n";
 }

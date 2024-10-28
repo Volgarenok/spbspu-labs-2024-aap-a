@@ -6,7 +6,7 @@ double kushekbaev::sinhCalc(double x, double error)
     double result = next;
     size_t n = 1;
 
-    while (std::abs(next) > 0.001)
+    while (std::abs(next) > error)
     {
         next *= x * x / ((2 * n) * (2 * n + 1));
         result += next;
