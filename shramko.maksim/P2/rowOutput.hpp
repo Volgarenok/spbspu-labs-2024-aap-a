@@ -1,7 +1,7 @@
 #ifndef ROWOUTPUT_HPP
 #define ROWOUTPUT_HPP
 
-#include <iostream>
+#include <cstddef>
 
 namespace shramko
 {

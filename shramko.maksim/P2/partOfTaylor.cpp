@@ -1,6 +1,5 @@
 #include "partOfTaylor.hpp"
 #include <stdexcept>
-#include <iostream>
 
 double shramko::partOfTaylor(double x, size_t k, double error)
 {
@@ -19,4 +18,3 @@ double shramko::partOfTaylor(double x, size_t k, double error)
 
   return taylor;
 }
-

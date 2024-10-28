@@ -1,5 +1,5 @@
 #include <iostream>
-#include "string.hpp"
+#include "rowOutput.hpp"
 
 int main()
 {
@@ -27,7 +27,7 @@ int main()
 
   for (auto i = left; i < right; i += step)
   {
-    shramko::string(i, k, error);
+    shramko::rowOutput(i, k, error);
   }
-  shramko::string(right, k, error);
+  shramko::rowOutput(right, k, error);
 }

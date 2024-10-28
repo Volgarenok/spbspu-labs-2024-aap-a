@@ -1,7 +1,6 @@
 #ifndef PARTOFTAYLOR_HPP
 #define PARTOFTAYLOR_HPP
 
-#include <iostream>
 #include <cmath>
 
 namespace shramko
