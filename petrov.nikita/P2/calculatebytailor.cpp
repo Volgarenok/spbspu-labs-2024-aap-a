@@ -1,6 +1,7 @@
 #include "calculate_sinh.hpp"
-#include <iostream>
+#include <cstddef>
 #include <cmath>
+#include <stdexcept>
 
 double petrov::calculateByTailor(double x, size_t k, double error)
 {

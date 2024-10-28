@@ -1,6 +1,6 @@
 #ifndef CALCULATE_SINH_HPP
 #define CALCULATE_SINH_HPP
-#include <iostream>
+#include <cstddef>
 
 namespace petrov
 {
