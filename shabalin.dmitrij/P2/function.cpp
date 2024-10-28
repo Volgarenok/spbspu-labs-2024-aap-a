@@ -27,8 +27,9 @@ double shabalin::stdf(double x)
   return std::cos(x);
 }
 
-void shabalin::output(double x, size_t k, double error, size_t clmn)
+void shabalin::output(double x, size_t k, double error)
 {
+  constexpr size_t clmn = 10;
   std::cout << std::setw(clmn) << x;
   std::cout << " ";
   try
@@ -42,11 +43,11 @@ void shabalin::output(double x, size_t k, double error, size_t clmn)
   std::cout << std::setw(clmn) << stdf(x) << "\n";
 }
 
-void shabalin::finalOutput(double left, double right, double step, size_t k, double error, size_t clmn)
+void shabalin::finalOutput(double left, double right, double step, size_t k, double error)
 {
    for (auto i = left; i < right; i += step)
   {
-    output(i, k, error, clmn);
+    output(i, k, error);
   }
-  output(right, k, error, clmn);
+  output(right, k, error);
 }

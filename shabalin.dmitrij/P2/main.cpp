@@ -16,7 +16,7 @@ int main()
     std::cerr << "Incorrect input";
     return 1;
   }
-  const double error = 0.01;
-  const double step = 0.123;
-  shabalin::finalOutput(left, right, step, k, error, 10);
+  constexpr double error = 0.01;
+  constexpr double step = 0.123;
+  shabalin::finalOutput(left, right, step, k, error);
 }
