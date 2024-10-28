@@ -1,5 +1,8 @@
 #include "constants.h"
 
-constexpr double savintsev::ERROR = 0.0001;
-const char * savintsev::ERROR_MSG = "<MATH ERROR>";
-constexpr double savintsev::STEP = 0.01;
+namespace savintsev
+{
+  extern constexpr double ERROR { 0.0001 };
+  extern const char * ERROR_MSG = "<MATH ERROR>";
+  extern constexpr double STEP { 0.01 };
+}

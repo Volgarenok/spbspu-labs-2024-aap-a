@@ -7,4 +7,5 @@ namespace savintsev
   extern const char * ERROR_MSG;
   extern const double STEP;
 }
+
 #endif
