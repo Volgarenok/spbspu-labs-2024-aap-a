@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstring>
 #include "taylor_swift.hpp"
 #include "output.hpp"
 
