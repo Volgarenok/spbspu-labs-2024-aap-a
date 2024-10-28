@@ -4,9 +4,12 @@
 
 namespace petrov
 {
-  double calculateByTailor(double x, size_t max, double error);
+  double calculateByTaylor(double x, size_t max, double error);
   double calculateBySTD(double x);
-  void outputTableHeader();
+  void outputTable(double start, double end, size_t max, double error, double step, double precision);
+  void outputFirstColumn();
+  void outputSecondColumn();
+  void outputThirdColumn();
 }
 #endif
 

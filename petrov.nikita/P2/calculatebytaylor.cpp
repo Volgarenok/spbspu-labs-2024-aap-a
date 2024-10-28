@@ -3,7 +3,7 @@
 #include <cmath>
 #include <stdexcept>
 
-double petrov::calculateByTailor(double x, size_t k, double error)
+double petrov::calculateByTaylor(double x, size_t k, double error)
 {
   double result = x;
   unsigned int count = 1;
