@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <cmath>
 
-void balashov::showRow(const double step, size_t const numberOfСalculations,const double error)
+void balashov::showRow(const double step,const size_t numberOfСalculations,const double error)
 {
   constexpr int deepShow = 5;
   constexpr int deepSetW = 5;
@@ -41,4 +41,3 @@ void balashov::showTable (const double minimumIntervalStep, const double maximum
     showRow(i, numberOfСalculations,error);
   }
 }
-
