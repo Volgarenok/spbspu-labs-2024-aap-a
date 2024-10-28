@@ -1,7 +1,6 @@
-#include <cstddef>
-#include "function.h"
+#include "mathematics.h"
 
-double savintsev::f_ExpMPow2X(double x, size_t k, double error)
+double savintsev::f_ExpMPow2X(double x, size_t k, const double error)
 {
   double interim = 1.;
   double result = interim;

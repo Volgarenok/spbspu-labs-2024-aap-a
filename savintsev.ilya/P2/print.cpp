@@ -1,92 +1,79 @@
 #include "print.h"
-#include "function.h"
+#include <cstring>
+#include <iomanip>
 #include "constants.h"
-#include <cstdio>
+#include "mathematics.h"
 
-savintsev::Interval savintsev::readInterval()
-{
-  savintsev::Interval new_A = {};
-  std::cin >> new_A.begin >> new_A.end;
-  return new_A;
-}
-
-double savintsev::roundN(double value, size_t n)
-{
-  double st = std::pow(10., n);
-  return ((value >= 0) ? (std::round(value * st) / st) : (std::round(value * st) / st));
-}
-
-void savintsev::printBorder(size_t variation, size_t * w)
+void savintsev::printBorderEquals(const size_t * w)
 {
   size_t width = 10;
   for (size_t i = 0; i < 3; ++i)
-    {
-      width += w[i];
-    }
-  switch (variation)
   {
-  case 1:
-    for (size_t i = 0; i < (width); ++i)
-    {
-      std::cout << '=';
-    }
-    std::cout << '\n';
-    break;
-  case 2:
-    for (size_t j = 0; j < 3; ++j)
-    {
-      std::cout << "|";
-      for (size_t i = 0; i < (w[j]+2); ++i)
-      {
-        std::cout << '-';
-      }
-    }
-    std::cout << "|\n";
-    break;
+    width += w[i];
   }
+  for (size_t i = 0; i < (width); ++i)
+  {
+    std::cout << '=';
+  }
+  std::cout << '\n';
 }
 
-void savintsev::printLine(size_t * w)
+void savintsev::printBorderMinusPlus(const size_t * w)
 {
-  std::cout << "|";
-  int stc = static_cast<int>(w[0]+2);
-  printf("%*.*s", stc, stc, "X VAL");
-  std::cout << "|";
-  stc = static_cast<int>(w[1]+2);
-  printf("%*.*s", stc, stc, "F w/TAYLORSER");
-  std::cout << "|";
-  stc = static_cast<int>(w[2]+2);
-  printf("%*.*s", stc, stc, "F w/CMATH");
-  std::cout << "|";
-  std::cout << "\n";
+  for (size_t j = 0; j < 3; ++j)
+  {
+    std::cout << "|";
+    for (size_t i = 0; i < (w[j]+2); ++i)
+    {
+      std::cout << '-';
+    }
+  }
+  std::cout << "|\n";
 }
 
-void savintsev::printLine(double columnNum, size_t * w, size_t k)
+void savintsev::printMathInfo(const size_t * w)
 {
-  int stc = 0;
   std::cout << "| ";
-  stc = static_cast<int>(w[0]);
-  printf("%- *.*g", stc, stc-2, savintsev::roundN(columnNum, w[0]));
+  std::cout << std::setw(w[0]) << "X VAL";
   std::cout << " | ";
-  stc = static_cast<int>(w[1]);
-  try
-  {
-    printf("%-*.*g", stc, stc-2, f_ExpMPow2X(columnNum, k, ERROR));
-  }
-  catch(const std::logic_error& e)
-  {
-    printf("%-*.*s", stc, stc, ERROR_MSG);
-  }
+  std::cout << std::setw(w[1]) << "F w/TAYLORSR";
   std::cout << " | ";
-  stc = static_cast<int>(w[2]);
-  printf("%-*.*g", stc, stc-2, savintsev::stdf_ExpMPow2X(columnNum));
+  std::cout << std::setw(w[2]) << "F w/CMATH";
   std::cout << " |";
   std::cout << "\n";
 }
 
-size_t savintsev::len(double b, double a)
+void savintsev::printMathLine(double colomn, const size_t * w, size_t k)
 {
-  size_t k = b >= 0 ? 2 : 3;
+  std::cout << "| ";
+  std::cout.setf(std::ios::right | std::ios::fixed);
+  std::cout << std::setw(w[0]) << std::setprecision(w[0]-3) << colomn;
+  std::cout << " | ";
+  std::cout.unsetf(std::ios::floatfield | std::ios::adjustfield);
+  std::cout.setf(std::ios::left);
+  try
+  {
+    double value = savintsev::f_ExpMPow2X(colomn, k, savintsev::ERROR);
+    std::cout << std::setw(w[1]) << std::setprecision(w[1]-2) << value;
+  }
+  catch(const std::logic_error& e)
+  {
+    std::cout << savintsev::ERROR_MSG;
+  }
+  std::cout << " | ";
+  {
+    double value = savintsev::stdf_ExpMPow2X(colomn);
+    std::cout << std::setw(w[2]) << std::setprecision(w[2]-2) << value;
+  }
+  std::cout << " |";
+  std::cout.unsetf(std::ios::floatfield | std::ios::adjustfield);
+  std::cout << "\n";
+}
+
+size_t savintsev::lenOfSignedFractionalPart(double a)
+{
+  size_t k = (a >= 0) ? 2 : 3;
+  a = std::abs(a);
   double ld = a;
   size_t li = a;
   for (; ld != li; ++k)
@@ -97,27 +84,28 @@ size_t savintsev::len(double b, double a)
   return k;
 }
 
-void savintsev::printSheetOfLines(Interval A, size_t k)
+void savintsev::printMathSheet(double begin, double end, size_t k)
 {
   size_t w1th = 0;
   {
-    size_t a = savintsev::len(A.begin,STEP);
-    size_t b = savintsev::len(A.begin,std::abs(A.begin));
-    size_t c = savintsev::len(A.begin,std::abs(A.end));
+    size_t a = savintsev::lenOfSignedFractionalPart(savintsev::STEP);
+    size_t b = savintsev::lenOfSignedFractionalPart(begin);
+    size_t c = savintsev::lenOfSignedFractionalPart(end);
     a = a > b ? a : b;
     a = a > c ? a : c;
+    a = a > 5 ? a : 5;
     w1th = a;
   }
-  size_t w2nd = std::strlen(ERROR_MSG);
-  size_t w3rd = std::strlen(ERROR_MSG);
+  size_t w2nd = std::strlen(savintsev::ERROR_MSG);
+  size_t w3rd = std::strlen(savintsev::ERROR_MSG);
   size_t width[] = {w1th, w2nd, w3rd};
-  savintsev::printBorder(1, width);
-  savintsev::printLine(width);
-  savintsev::printBorder(2, width);
-  for (double i = A.begin; i < A.end; i += STEP)
+  savintsev::printBorderEquals(width);
+  savintsev::printMathInfo(width);
+  savintsev::printBorderMinusPlus(width);
+  for (double i = begin; i < end; i += savintsev::STEP)
   {
-    savintsev::printLine(i, width, k);
+    savintsev::printMathLine(i, width, k);
   }
-  savintsev::printLine(A.end, width, k);
-  savintsev::printBorder(1, width);
+  savintsev::printMathLine(end, width, k);
+  savintsev::printBorderEquals(width);
 }
