@@ -8,9 +8,10 @@ double shramko::partOfTaylor(double x, size_t k, double error)
 
   for (size_t i = 1; i < k; i += 2)
   {
-    adding = -(x * x * adding) / ((i + 1) * (i + 2));
+    adding = - (x * x * adding) / ((i + 1) * (i + 2));
     taylor += adding;
   }
+
   if (std::abs(adding) > error)
   {
     throw std::logic_error("math-error");
