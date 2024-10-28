@@ -2,9 +2,10 @@
 #include <iomanip>
 #include <cmath>
 
-void balashov::showRow(double step, size_t numberOfСalculations, double error)
+void balashov::showRow(const double step, size_t const numberOfСalculations,const double error)
 {
   constexpr int deepShow = 5;
+  constexpr int deepSetW = 5;
   double x = 0;
   if ((step + 0.0001 > 0) && (step - 0.0001 < 0))
   {
@@ -15,7 +16,7 @@ void balashov::showRow(double step, size_t numberOfСalculations, double error)
     x = step;
   }
 
-  std::cout << std::setw(5) << x <<  "\t";
+  std::cout << std::setw(deepSetW) << x <<  "\t";
   try
   {
     std::cout << std::setprecision(deepShow) << balashov::expTaylor(x, numberOfСalculations, error);
@@ -27,8 +28,8 @@ void balashov::showRow(double step, size_t numberOfСalculations, double error)
   std::cout << "\t" << exp(x);
 }
 
-void balashov::showTable (const double minimumIntervalStep,const double maximumIntervalStep,
-   int numberOfСalculations,const double step,const double error)
+void balashov::showTable (const double minimumIntervalStep, const double maximumIntervalStep,
+   int numberOfСalculations, const double step, const double error)
 {
   if(minimumIntervalStep < maximumIntervalStep)
   {
