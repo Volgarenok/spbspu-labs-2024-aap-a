@@ -2,7 +2,7 @@
 #define PRINT_H
 #include <iostream>
 
-namespace savintsev 
+namespace savintsev
 {
   size_t calcWidth(const double * p);
   void printMathInfo(const size_t * w);

@@ -5,8 +5,8 @@
 
 namespace savintsev
 {
-  double expNegPow2xTaylor(double x, size_t k, double error);
-  double expNegPow2xStd(double x);
+  double calcFuncTaylor(double x, size_t k, double error);
+  double calcFuncStd(double x);
 }
 
 #endif

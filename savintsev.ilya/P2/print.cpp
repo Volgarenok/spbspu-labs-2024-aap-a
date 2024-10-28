@@ -53,7 +53,7 @@ void savintsev::printMathLine(double x, const size_t * w, size_t k)
   std::cout.setf(std::ios::left);
   try
   {
-    std::cout << std::setw(w[1]) << savintsev::expNegPow2xTaylor(x, k, savintsev::ERROR);
+    std::cout << std::setw(w[1]) << savintsev::calcFuncTaylor(x, k, savintsev::ERROR);
   }
   catch(const std::logic_error& e)
   {
@@ -61,7 +61,7 @@ void savintsev::printMathLine(double x, const size_t * w, size_t k)
   }
   std::cout << " | ";
   std::cout.precision(w[2] - 2);
-  std::cout << std::setw(w[2]) << savintsev::expNegPow2xStd(x);
+  std::cout << std::setw(w[2]) << savintsev::calcFuncStd(x);
   std::cout << " |";
   std::cout.unsetf(std::ios::floatfield | std::ios::adjustfield);
   std::cout << "\n";
