@@ -11,12 +11,11 @@ int main()
     std::cerr << "Input error" << "\n";
     return 1;
   }
-  if ((left > right) or (left < -1) or (right > 1))
+  if ((left > right) | (left < -1) | (right > 1))
   {
     std::cerr << "Incorrect input";
     return 1;
   }
-  constexpr double error = 0.01;
-  constexpr double step = 0.123;
+  constexpr double error = 0.01, step = 0.123;
   shabalin::finalOutput(left, right, step, k, error);
 }

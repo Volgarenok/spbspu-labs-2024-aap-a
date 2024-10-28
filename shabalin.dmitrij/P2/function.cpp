@@ -6,6 +6,7 @@
 #include <cmath>
 
 using namespace shabalin;
+
 double shabalin::taylorViaCos(double x, size_t k, double error)
 {
   double current_term = x;
