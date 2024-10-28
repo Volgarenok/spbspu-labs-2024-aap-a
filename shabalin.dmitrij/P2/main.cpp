@@ -13,7 +13,7 @@ int main()
   }
   if ((left > right) | (left < -1) | (right > 1))
   {
-    std::cerr << "Incorrect input";
+    std::cerr << "Incorrect input" << "\n";
     return 1;
   }
   constexpr double error = 0.01, step = 0.123;

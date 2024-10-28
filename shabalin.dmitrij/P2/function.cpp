@@ -1,9 +1,8 @@
-#include "function.hpp"
-#include <stdexcept>
 #include <iomanip>
 #include <cstring>
 #include <iostream>
 #include <cmath>
+#include "function.hpp"
 
 using namespace shabalin;
 
@@ -22,12 +21,12 @@ double shabalin::taylorViaCos(double x, size_t k, double error)
   }
   return result;
 }
-
+/*
 double shabalin::stdf(double x)
 {
   return std::cos(x);
 }
-
+*/
 void shabalin::output(double x, size_t k, double error)
 {
   constexpr size_t clmn = 10;
@@ -41,7 +40,7 @@ void shabalin::output(double x, size_t k, double error)
   {
     std::cout << std::setw(clmn) << e.what();
   }
-  std::cout << std::setw(clmn) << stdf(x) << "\n";
+  std::cout << std::setw(clmn) << std::cos(x) << "\n";
 }
 
 void shabalin::finalOutput(double left, double right, double step, size_t k, double error)
