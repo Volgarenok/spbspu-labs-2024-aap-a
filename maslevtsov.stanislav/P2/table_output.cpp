@@ -1,3 +1,6 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
 #include "table_output.hpp"
 #include "taylor_series.hpp"
 
@@ -18,7 +21,7 @@ void maslevtsov::stringOutput(double current, size_t numberMax, const double abs
     std::cout << "<MATH ERROR>";
   }
   std::cout << std::setw(10);
-  std::cout << 1 / (sqrt(1 - current * current));
+  std::cout << 1 / (std::sqrt(1 - current * current));
   std::cout << "\n";
 }
 
