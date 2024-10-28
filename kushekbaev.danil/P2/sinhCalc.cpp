@@ -1,4 +1,4 @@
-#include "taylors_header.h"
+#include "taylors_header.hpp"
 
 double kushekbaev::sinhCalc(double x, double error)
 {
