@@ -27,7 +27,7 @@ double hismatova::taylorSin(const double& x, const size_t& k)
   }
   return result;
 }
-void resultsInTable(double& x, const size_t& k)
+void hismatova::resultsInTable(const double& x, const size_t& k)
 {
   double res2 = 0;
   const char* errmsg = "<MATH ERROR>";
