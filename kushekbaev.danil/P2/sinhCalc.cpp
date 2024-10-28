@@ -10,7 +10,7 @@ double kushekbaev::sinhCalc(double x, double error)
     {
         next *= x * x / ((2 * n) * (2 * n + 1));
         result += next;
-        n++ 
+        n++;
     }
     return result;
 }
