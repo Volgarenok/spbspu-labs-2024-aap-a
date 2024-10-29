@@ -18,7 +18,7 @@ double maslov::fromTaylor(double x, size_t k, double error)
   for (size_t i = 1; i < k; i++)
   {
     a += 1.0;
-    next *= (x * x)/(-a);
+    next *= (x * x) / (-a);
     result += next;
   }
   if (std::abs(result - fromCMath(x)) > error)
