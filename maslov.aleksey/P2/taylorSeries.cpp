@@ -1,8 +1,13 @@
 #include "taylorSeries.hpp"
+#include <cmath>
+#include <iostream>
+#include <iomanip>
+#include <stdexcept>
+#include <cstring>
 
 double maslov::fromCMath(double x)
 {
-  return exp(pow(-x, 2.0));
+  return std::exp(std::pow(-x, 2.0));
 }
 
 double maslov::fromTaylor(double x, size_t k, double error)
@@ -27,7 +32,7 @@ void maslov::outString(double x, size_t k, double error)
 {
   const char * errormsg = "<MATH_ERROR>";
   const size_t secondColumn = std::strlen(errormsg) + 2;
-  const size_t othersColumn = 10;
+  constexpr size_t othersColumn = 10;
 
   std::cout << std::fixed << std::setprecision(2)
   << std::setw(othersColumn) << x << " ";
@@ -42,16 +47,18 @@ void maslov::outString(double x, size_t k, double error)
   }
   std::cout << " " << std::setprecision(5)
   << std::setw(othersColumn) << maslov::fromCMath(x);
-  std::cout << "\n";
 }
 
 void maslov::outTable(double left, double right,
-  size_t k, double error, double step)
+    size_t k, double error, double step)
 {
   maslov::outString(left, k, error);
-  for (double i = left + step; i < right - step/2.0; i += step)
+  std::cout << "\n";
+  for (double i = left + step; i < right - step / 2.0; i += step)
   {
     maslov::outString(i, k, error);
+    std::cout << "\n";
   }
   maslov::outString(right, k, error);
+  std::cout << "\n";
 }
