@@ -16,7 +16,7 @@ double averenkov::f(double x, size_t k, double error)
   {
     return x;
   }
-  for (auto i = 2; i < k; ++i)
+  for (size_t i = 2; i < k; ++i)
   {
     next = ((i - 1) * x * x * next / 2) / (i + 1);
     if (i % 2 == 0)
