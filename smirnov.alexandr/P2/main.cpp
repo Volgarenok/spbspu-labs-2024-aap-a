@@ -23,8 +23,8 @@ int main()
      return 1;
    }
 
-   const double error = 0.001;
-   const double step = 0.1;
+   constexpr double error = 0.001;
+   constexpr double step = 0.1;
 
    smirnov::outTable(left, right, k, error, step);
 }
