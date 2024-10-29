@@ -1,5 +1,4 @@
 #include <stdexcept>
-#include <iostream>
 #ifndef FUNC_HPP
 #define FUNC_HPP
 namespace karnauhova
