@@ -1,6 +1,6 @@
-#include <iostream>
-#include "tyler_derden.h"
+#include "tyler_row.h"
 #include <cstring>
+#include <iostream>
 
 int main()
 {
@@ -19,8 +19,8 @@ int main()
     return 1;
   }
 
-  const double error = 0.001;
-  const double step = 0.05;
+  constexpr double error = 0.001;
+  constexpr double step = 0.05;
 
   finaev::final_output(left, right, k, error, step);
 }
