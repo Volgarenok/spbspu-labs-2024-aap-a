@@ -30,4 +30,5 @@ void mozhegova::output_table(double left, double right, size_t k, double step, d
     std::cout << "\n";
   }
   mozhegova::output_row(right, k, error);
+  std::cout << "\n";
 }

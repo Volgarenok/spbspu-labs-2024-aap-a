@@ -20,5 +20,5 @@ double mozhegova::uno_div_cube(double x, size_t k, double error)
 
 double mozhegova::uno_div_cube_cmath(double x)
 {
-  return 1 / pow(1.0 + x, 3.0);
+  return 1 / std::pow(1.0 + x, 3.0);
 }
