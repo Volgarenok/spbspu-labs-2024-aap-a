@@ -2,5 +2,5 @@
 
 double smirnov::sinCmath(double x)
 {
-  return sin(x);
+  return std::sin(x);
 }
