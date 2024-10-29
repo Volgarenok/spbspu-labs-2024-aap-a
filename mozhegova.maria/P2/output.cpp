@@ -1,8 +1,9 @@
+#include "output.hpp"
 #include <iostream>
 #include <iomanip>
 #include <stdexcept>
 #include <cstring>
-#include "output.hpp"
+#include "uno_div_cube.hpp"
 
 void mozhegova::output_row(double i, size_t k, double error)
 {
@@ -19,7 +20,6 @@ void mozhegova::output_row(double i, size_t k, double error)
     std::cout << std::setw(SecColWidth) << "<MATH ERROR>";
   }
   std::cout << " " << std::setw(OtherCol) << mozhegova::uno_div_cube_cmath(i);
-  std::cout << "\n";
 }
 
 void mozhegova::output_table(double left, double right, size_t k, double step, double error)
@@ -27,6 +27,7 @@ void mozhegova::output_table(double left, double right, size_t k, double step, d
   for (double i = left; i < right; i += step)
   {
     mozhegova::output_row(i, k, error);
+    std::cout << "\n";
   }
   mozhegova::output_row(right, k, error);
 }

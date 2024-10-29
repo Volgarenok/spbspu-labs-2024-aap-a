@@ -19,8 +19,8 @@ int main()
     return 1;
   }
 
-  const double step = 0.05;
-  const double error = 0.001;
+  constexpr double step = 0.05;
+  constexpr double error = 0.001;
 
   mozhegova::output_table(left, right, k, step, error);
 }
