@@ -1,5 +1,6 @@
 #ifndef FNAMES_H
 #define FNAMES_H
+#include <cstring>
 namespace averenkov
 {
   double lnf(double);
