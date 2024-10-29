@@ -5,8 +5,8 @@
 
 void demehin::output(double x, const size_t k, const double error)
 {
-  const size_t column_width = 15;
-  size_t c = column_width;
+  constexpr size_t column_width = 15;
+  constexpr size_t c = column_width;
   std::cout << std::setw(c);
   std::cout << x << " ";
   try
@@ -14,7 +14,7 @@ void demehin::output(double x, const size_t k, const double error)
     std::cout << std::setw(c);
     std::cout << demehin::f(x, k, error);
   }
-  catch(const std::logic_error & e)
+  catch (const std::logic_error & e)
   {
     std::cout << "<MATH ERROR>";
   }
