@@ -1,21 +1,25 @@
+#include <iostream>
+#include <stdexcept>
+#include <cmath>
+#include <iomanip>
 #include "namespace.hpp"
 
 double karnauhova::f(double x, size_t k, double error)
 {
   double next = x;
   double result = next;
-  for (size_t i = 1; i < k;++i)
+  for (size_t i = 1; i < k; ++i)
   {
     next = 1.0;
-    for (size_t j = 0; j < (i*2+1); ++j)
+    for (size_t j = 0; j < (i * 2 + 1); ++j)
     {
-      next*=x;
+      next *= x;
     }
-    for (double j = 1; j < (i*2+2); ++j)
+    for (double j = 1; j < (i * 2 + 2); ++j)
     {
-      next/=j;
+      next /= j;
     }
-    if (i%2 == 0)
+    if (i % 2 == 0)
     {
       result += next;
     }
@@ -49,7 +53,6 @@ void karnauhova::output_row(double x, size_t k, double error, size_t width)
     std::cout << std::setw(width) << "<MATH ERROR>";
   }
   std::cout << std::setw(width) << karnauhova::stdf(x);
-  std::cout << "\n";
 }
 
 void karnauhova::output_table(double left, double right, double step, size_t k, double error, size_t width)

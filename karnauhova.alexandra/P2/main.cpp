@@ -1,8 +1,4 @@
 #include <iostream>
-#include <stdexcept>
-#include <cmath>
-#include <iomanip>
-#include <cstring>
 #include "namespace.hpp"
 
 int main()
@@ -20,7 +16,8 @@ int main()
     std::cerr << "Incorrect input";
     return 1;
   }
-  const double error = 0.001;
-  const double step = 0.05;
+  constexpr double error = 0.001;
+  constexpr double step = 0.05;
   karnauhova::output_table(left, right, step, k, error, 13);
+  std::cout<<"\n";
 }
