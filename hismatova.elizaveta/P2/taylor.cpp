@@ -8,18 +8,18 @@ double hismatova::taylorSin(const double& x, const size_t& k)
 {
   const double error = 0.001;
   double result = x;
-  double numer = x * x * x;
-  double denomin = 6.0;
+  double numer = result;
+  double denomin = 1.0;
   for (size_t i = 1; i < k; i++)
   {
+    numer = numer * x * x;
+    denomin = denomin * (2 * i) * (2 * i + 1);
     double sign = 1.0;
     if (i % 2 != 0)
     {
       sign = -1.0;
     }
     result = result + sign * numer/denomin;
-    denomin = denomin * (denomin + 1) * (denomin + 2);
-    numer = numer * x * x;
   }
   if (std::abs(result - hismatova::sinx(x)) > error)
   {
