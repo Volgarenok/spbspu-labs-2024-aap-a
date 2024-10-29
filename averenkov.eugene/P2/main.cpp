@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cmath>
-#include "functions.h"
 #include <iomanip>
 #include <cstring>
+#include "fnames.h"
 
 int main()
 {
@@ -10,7 +10,7 @@ int main()
   const double error = 0.01;
   double left = 0.0;
   double right = 0.0;
-  int k = 0;
+  size_t k = 0;
   std::cin >> left >> right >> k;
   if (!std::cin || left < -1 || right > 1 || left > 1 || right < -1 || right < left) {
     std::cerr << "INCORRECT INPUT";
