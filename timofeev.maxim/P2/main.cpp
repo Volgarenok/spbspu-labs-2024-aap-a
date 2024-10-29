@@ -12,22 +12,19 @@ int main()
   std::cout << "Enter the start, end, number_max: ";
   std::cin >> start >> end >> number_max;
 
-  if (std::cin.fail())
-  {
+  if (std::cin.fail()) {
     std::cerr << "inpur error" << "\n";
     return 1;
   }
 
-  if (numberMax <= 0)
-  {
-    std::cerr << "The maximum number of terms must be a positive integer" << "\n";
-    return 11;
+  if (number_max <= 0) {
+    std::cerr << "inout error" << "\n";
+    return 1;
   }
 
-  if (start >= end)
-  {
-    std::cerr << "The beginning of the interval should be less than the end of the interval" << "\n";
-    return -1;
+  if (start >= end) {
+    std::cerr << "input error" << "\n";
+    return 1;
   }
 
   timofeev::matrix_output(start, end, number_max, abs_error, step);
