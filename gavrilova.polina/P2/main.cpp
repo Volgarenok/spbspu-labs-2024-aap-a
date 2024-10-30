@@ -20,7 +20,7 @@ int main()
     try {
       value_Taylor = gavrilova::v_taylor(i, nMax, ERROR);
       gavrilova::output_str(i, value_Taylor, value_cmath);
-      std::cout << "\n";  
+      std::cout << "\n";
     } catch (const std::logic_error & e) {
       gavrilova::output_str(i, STRMATHERROR, value_cmath);
       std::cout << "\n";
