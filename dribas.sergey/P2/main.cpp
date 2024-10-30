@@ -19,8 +19,8 @@ int main()
     return 1;
   }
 
-  const double error = 0.001;
-  const double step = 0.01;
+  constexpr double error = 0.001;
+  constexpr double step = 0.01;
   dribas::outall(left, right, step, series, error);
 
   return 0;

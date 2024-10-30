@@ -11,11 +11,11 @@ void dribas::outline(double x, size_t koll, double error, int sizeclm)
   double cmathvalue = dribas::getCmathValue(x);
   try{
     double value = dribas::getTaylor(x, koll, error);
-    std::cout << std::setw(sizeclm) << std::setprecision(3) << std::fixed << x;
+    std::cout << std::setw(sizeclm) << std::setprecision(2) << std::fixed << x;
     std::cout << std::setw(sizeclm) << std::setprecision(6) << std::fixed << value;
     std::cout << std::setw(sizeclm) << std::setprecision(6) << std::fixed << cmathvalue;
   }catch (const std::exception & e){
-    std::cerr << std::setw(sizeclm) << std::setprecision(3) << std::fixed << x;
+    std::cerr << std::setw(sizeclm) << std::setprecision(2) << std::fixed << x;
     std::cerr << std::setw(sizeclm) << e.what();
     std::cerr << std::setw(sizeclm) << std::setprecision(6) << std::fixed << cmathvalue;
   }
