@@ -1,5 +1,6 @@
 #include <iostream>
-#include "func.hpp"
+#include "count_sin.hpp"
+#include "create_table.hpp"
 
 int main()
 {

@@ -1,4 +1,5 @@
-#include "func.hpp"
+#include "create_table.hpp"
+#include "count_sin.hpp"
 #include <iostream>
 #include <iomanip>
 #include <stdexcept>

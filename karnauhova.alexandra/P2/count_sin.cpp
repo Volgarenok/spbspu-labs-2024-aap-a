@@ -1,7 +1,5 @@
-#include "func.hpp"
-#include <iostream>
+#include "count_sin.hpp"
 #include <cmath>
-#include <iomanip>
 #include <stdexcept>
 
 double karnauhova::f(double x, size_t k, double error)
