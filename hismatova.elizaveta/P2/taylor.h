@@ -4,9 +4,9 @@
 
 namespace hismatova
 {
-  double taylorSin(const double& x, const size_t& k);
-  void resultsInTable(const double& x, const size_t& k);
-  double sinx(const double& x);
+  double taylorSin(const double x, const size_t k);
+  void resultsInTable(const double x, const size_t k);
+  double sinx(const double x);
 }
 
 #endif

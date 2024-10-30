@@ -3,13 +3,14 @@
 #include <cmath>
 #include <cstring>
 #include <iomanip>
+#include <stdexcept>
 
 const char* errmsg = "<MATH ERROR>";
-double hismatova::sinx(const double& x)
+double hismatova::sinx(const double x)
 {
   return std::sin(x);
 }
-double hismatova::taylorSin(const double& x, const size_t& k)
+double hismatova::taylorSin(const double x, const size_t k)
 {
   const double error = 0.001;
   double result = x;
@@ -32,7 +33,7 @@ double hismatova::taylorSin(const double& x, const size_t& k)
   }
   return result;
 }
-void hismatova::resultsInTable(const double& x, const size_t& k)
+void hismatova::resultsInTable(const double x, const size_t k)
 {
   double res2 = 0;
   try
@@ -46,7 +47,7 @@ void hismatova::resultsInTable(const double& x, const size_t& k)
     std::cout << " ";
     std::cout << std::setw(oth) << hismatova::sinx(x);
   }
-  catch (std::logic_error & e)
+  catch (const std::logic_error& e)
   {
     std::cerr << e.what() << "\n";
   }
