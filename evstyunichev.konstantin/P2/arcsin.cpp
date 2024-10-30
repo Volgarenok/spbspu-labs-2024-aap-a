@@ -5,7 +5,7 @@
 
 double evstyunichev::arcsin(double x, size_t k, double error)
 {
-  constexpr char *errmsg = "<MATH ERROR>";
+  const char *errmsg = "<MATH ERROR>";
   double last = x, ans = x;
   for (size_t i = 1; i < k; i++)
   {
