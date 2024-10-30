@@ -1,6 +1,6 @@
 #ifndef OUTPUT_HPP
 #define OUTPUT_HPP
-#include "taylor_raw.hpp"
+#include "cstddef"
 
 namespace lebedev
 {

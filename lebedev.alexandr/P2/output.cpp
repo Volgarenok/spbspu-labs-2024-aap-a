@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <cstring>
 #include <iostream>
+#include "taylor_raw.hpp"
 
 void lebedev::output_raw(double x, size_t k, double error)
 {
