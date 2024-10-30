@@ -1,6 +1,5 @@
-#include "arctanTaylor.h"
 #include <iostream>
-
+#include "arctanTaylor.h"
 int main()
 {
   double start = 0;
@@ -30,6 +29,6 @@ int main()
     return 1;
   }
 
-  timofeev::matrix_output(start, end, number_max, abs_error, step);
+  timofeev::print_matrix(start, end, number_max, abs_error, step);
   return 0;
 }

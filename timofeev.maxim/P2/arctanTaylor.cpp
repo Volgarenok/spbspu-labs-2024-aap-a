@@ -1,7 +1,7 @@
 #include "arctanTaylor.h"
 #include <iostream>
 #include <stdexcept>
-double timofeev::arctan_taylor(double x, double abs_error, size_t number_max)
+double timofeev::cal_arctan_taylor(double x, double abs_error, size_t number_max)
 {
   double term = x;
   double sum = term;
