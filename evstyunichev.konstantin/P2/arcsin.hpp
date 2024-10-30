@@ -1,6 +1,6 @@
 #ifndef ARCSIN_HPP
 #define ARCSIN_HPP
-#include <stddef.h>
+#include <cstddef>
 namespace evstyunichev
 {
   double arcsin(double, size_t, double);
