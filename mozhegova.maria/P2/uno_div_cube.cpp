@@ -8,7 +8,7 @@ double mozhegova::uno_div_cube(double x, size_t k, double error)
   double result = next;
   for (size_t i = 0; i < k - 1; i++)
   {
-    next *= (i + 3) * (- x) / (i + 1);
+    next *= (i + 3) * (-x) / (i + 1);
     result += next;
   }
   if (std::abs(next) > error)
