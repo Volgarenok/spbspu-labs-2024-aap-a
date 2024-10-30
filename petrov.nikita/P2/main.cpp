@@ -1,5 +1,5 @@
-#include "calculate_sinh.hpp"
 #include <iostream>
+#include "calculate_sinh.hpp"
 
 int main()
 {
