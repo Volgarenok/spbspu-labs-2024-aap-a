@@ -5,23 +5,20 @@
 
 double dribas::getTaylor(double x, size_t count, double error)
 {
-  double member = 1;
+  double member = 0;
   double result = member;
 
-  for (size_t i = 2; i <= count ; i += 1) {
+  for (size_t i = 1; i <= count ; i += 1) {
     member = (((i * ( i + 1)) / 2) * x);
     x *= x;
-    if (i % 2 != 0){
+    if (i % 2 != 0) {
       result += member;
-    }else{
+    } else {
       result -= member;
     }
-    if (std::abs(member) < error){
+    if (std::abs(member) < error) {
       return result;
     }
-  }
-  if (std::abs(member) < error){
-    return result;
   }
   throw std::logic_error("<MATH ERROR>");
 }
