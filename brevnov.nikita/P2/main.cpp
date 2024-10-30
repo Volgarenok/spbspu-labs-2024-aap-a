@@ -15,7 +15,7 @@ int main()
     std::cerr << "Input error!\n";
     return 1;
   }
-  if (left>=right)
+  if ((left >= right) || (std::abs(left) > 1) || (std::abs(right) > 1))
   {
     std::cerr << "Incorrect input!\n";
     return 1;
