@@ -1,4 +1,6 @@
-#include "TaylorSeries.hpp"
+#include "taylorSeries.hpp"
+#include <cmath>
+#include <stdexcept>
 
 double smirnov::sinTaylor(double x, size_t k, double error)
 {
