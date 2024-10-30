@@ -1,4 +1,5 @@
 #include "taylorsRow.hpp"
+#include <iostream>
 #include <stdexcept>
 
 double balashov::expTaylor(const double x, const size_t numberOfСalculations, const double error)

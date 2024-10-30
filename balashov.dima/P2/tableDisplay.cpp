@@ -1,6 +1,7 @@
 #include "tableDisplay.hpp"
 #include <iomanip>
 #include <cmath>
+#include <iostream>
 
 void balashov::showRow(const double step, const size_t numberOfСalculations, const double error)
 {
@@ -21,7 +22,7 @@ void balashov::showRow(const double step, const size_t numberOfСalculations, co
   std::cout << std::setw(deepSetW) << x <<  "\t";
   try
   {
-    std::cout << std::setprecision(deepShow) << balashov::expTaylor(x, numberOfСalculations, error);
+    std::cout << std::setprecision(deepShow) << expTaylor(x, numberOfСalculations, error);
   }
   catch (const std::logic_error & e)
   {
@@ -30,17 +31,19 @@ void balashov::showRow(const double step, const size_t numberOfСalculations, co
   std::cout << "\t" << exp(x);
 }
 
-void balashov::showTable (const double minimumIntervalStep, const double maximumIntervalStep,
+void balashov::showTable(const double minimumIntervalStep, const double maximumIntervalStep,
    const int numberOfСalculations, const double step, const double error)
 {
   constexpr double errorRate = 0.00001;
-  if(minimumIntervalStep < maximumIntervalStep)
+  if (minimumIntervalStep < maximumIntervalStep)
   {
     showRow(minimumIntervalStep, numberOfСalculations, error);
   }
   for (double i = minimumIntervalStep + step; i < maximumIntervalStep + errorRate; i += step)
   {
     std::cout << "\n";
-    showRow(i, numberOfСalculations,error);
+    showRow(i, numberOfСalculations, error);
   }
+  std::cout << "\n";
+  showRow(maximumIntervalStep, numberOfСalculations, error);
 }

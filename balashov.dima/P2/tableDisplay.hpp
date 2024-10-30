@@ -2,7 +2,6 @@
 #define TABLE_DISPLAY_HPP
 
 #include "taylorsRow.hpp"
-#include <iostream>
 
 namespace balashov
 {

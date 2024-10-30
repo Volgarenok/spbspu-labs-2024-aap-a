@@ -1,3 +1,4 @@
+#include <iostream>
 #include <cmath>
 #include "tableDisplay.hpp"
 
@@ -43,8 +44,6 @@ int main()
   constexpr double error = 0.001;
 
   balashov::showTable(minimumIntervalStep, maximumIntervalStep, numberOfСalculations,step, error);
-  std::cout << "\n";
-  balashov::showRow(maximumIntervalStep, numberOfСalculations,error);
   std::cout << "\n";
   return 0;
 }
