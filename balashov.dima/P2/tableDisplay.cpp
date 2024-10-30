@@ -4,10 +4,12 @@
 
 void balashov::showRow(const double step,const size_t numberOfСalculations,const double error)
 {
+  constexpr double errorRate = 0.00001;
   constexpr int deepShow = 5;
   constexpr int deepSetW = 5;
   double x = 0;
-  if ((step + 0.0001 > 0) && (step - 0.0001 < 0))
+
+  if ((step + errorRate > 0) && (step - errorRate < 0))
   {
     x = 0;
   }
@@ -35,7 +37,7 @@ void balashov::showTable (const double minimumIntervalStep, const double maximum
   {
     showRow(minimumIntervalStep, numberOfСalculations,error);
   }
-  for (double i = minimumIntervalStep + step; i < maximumIntervalStep; i += step)
+  for (double i = minimumIntervalStep + step; i < maximumIntervalStep + errorRate; i += step)
   {
     std::cout << "\n";
     showRow(i, numberOfСalculations,error);
