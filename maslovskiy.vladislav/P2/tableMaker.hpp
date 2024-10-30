@@ -5,7 +5,7 @@
 
 namespace maslovskiy
 {
-  void tableMaker(const double& left, const double& right, const double& step, const size_t& k);
+  void tableMaker(const double left, const double right, const double step, const size_t k, const double error);
 }
 
 #endif
