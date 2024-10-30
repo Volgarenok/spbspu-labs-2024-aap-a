@@ -3,5 +3,5 @@
 
 double finaev::basesqrt(double x)
 {
-  return sqrt(1 + x);
+  return std::sqrt(1 + x);
 }

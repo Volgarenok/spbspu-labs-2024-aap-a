@@ -1,6 +1,6 @@
 #include "tyler_row.h"
-#include <iomanip>
 #include <iostream>
+#include <iomanip>
 #include <cstring>
 #include <stdexcept>
 

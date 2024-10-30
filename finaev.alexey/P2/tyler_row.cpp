@@ -18,7 +18,7 @@ double finaev::fsqrt(double x, size_t k, double error)
   res += el;
   for (size_t i = 2; i < k; i++)
   {
-    el *= ((2*i-3)/(2*i)) * x * (-1);
+    el *= ((2 * i - 3) / (2 * i)) * x * (-1);
     res += el;
     if (std::abs(el) <= error)
     {

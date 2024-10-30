@@ -1,6 +1,6 @@
-#include "tyler_row.h"
-#include <cstring>
 #include <iostream>
+#include <cstring>
+#include "tyler_row.h"
 
 int main()
 {
