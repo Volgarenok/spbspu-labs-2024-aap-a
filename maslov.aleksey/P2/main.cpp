@@ -18,9 +18,9 @@ int main()
     std::cerr << "The interval is set incorrectly\n";
     return 1;
   }
-  bool isLeft = -1.0 < left && left < 1.0;
-  bool isRight = -1.0 < right && right < 1.0;
-  if (!(isLeft && isRight))
+  bool check = -1.0 < left && left < 1.0;
+  check = check && (-1.0 < right && right < 1.0);
+  if (!check)
   {
     std::cerr << "The interval is not in the definition area\n";
     return 1;
