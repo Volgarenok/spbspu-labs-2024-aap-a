@@ -1,6 +1,6 @@
-#include "TaylorSeries.hpp"
-#include "Table.hpp"
-
+#include "taylorSeries.hpp"
+#include "table.hpp"
+#include <iostream>
 
 int main()
 {

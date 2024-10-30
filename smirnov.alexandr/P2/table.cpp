@@ -1,9 +1,9 @@
 #include "table.hpp"
 #include "taylorSeries.hpp"
 #include <iostream>
-#include <iomamip>
+#include <iomanip>
 #include <cstring>
-#include <ctexcept>
+#include <stdexcept>
 
 void smirnov::outString(double x, size_t k, double error)
 {
