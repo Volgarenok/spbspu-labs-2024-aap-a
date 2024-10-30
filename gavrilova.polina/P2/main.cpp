@@ -1,6 +1,6 @@
-#include "tailor_series.hpp"
 #include <iostream>
 #include <cmath>
+#include "tailor_series.hpp"
 
 int main()
 {
