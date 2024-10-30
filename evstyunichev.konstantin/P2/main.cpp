@@ -11,17 +11,14 @@ int main()
     std::cerr << "input error\n";
     return 1;
   }
-  const double step = 0.2;
-  const double error = 0.001;
+  constexpr double step = 0.2;
+  constexpr double error = 0.001;
   for (double i = left; i < right; i += step)
   {
-    kos::output(i, k, error);
+    evstyunichev::output(i, k, error);
     std::cout << "\n";
   }
-  if (left != right)
-  {
-    kos::output(right, k, error);
-    std::cout << "\n";
-  }
+  evstyunichev::output(right, k, error);
+  std::cout << "\n";
   return 0;
 }

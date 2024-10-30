@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <cmath>
 
-double kos::arcsin(double x, size_t k, double error)
+double evstyunichev::arcsin(double x, size_t k, double error)
 {
   const char *errmsg = "<MATH ERROR>";
   double last = x, ans = x;
@@ -19,22 +19,22 @@ double kos::arcsin(double x, size_t k, double error)
   return ans;
 }
 
-double kos::stdarcsin(double x)
+double evstyunichev::stdarcsin(double x)
 {
   return std::asin(x);
 }
 
-void kos::output(double x, size_t k, double error)
+void evstyunichev::output(double x, size_t k, double error)
 {
   const size_t field_size = 12;
   std::cout << std::setw(field_size) << x << "    ";
   try
   {
-    std::cout << std::setw(field_size) << kos::arcsin(x, k, error);
+    std::cout << std::setw(field_size) << evstyunichev::arcsin(x, k, error);
   }
   catch (const std::logic_error & e)
   {
     std::cout << std::setw(field_size) << e.what();
   }
-  std::cout << std::setw(field_size) << kos::stdarcsin(x);
+  std::cout << std::setw(field_size) << evstyunichev::stdarcsin(x);
 }

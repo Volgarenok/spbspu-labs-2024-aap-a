@@ -1,7 +1,7 @@
 #ifndef ARCSIN_HPP
 #define ARCSIN_HPP
-#include <iostream>
-namespace kos
+#include <stddef.h>
+namespace evstyunichev
 {
   double arcsin(double, size_t, double);
   double stdarcsin(double);
