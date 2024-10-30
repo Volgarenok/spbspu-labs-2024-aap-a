@@ -1,4 +1,4 @@
-#include "taylor_swift.h"
+#include "taylorseries.h"
 #include <iostream>
 #include <cstring>
 
@@ -19,9 +19,9 @@ int main()
     return 1;
   }
 
-  const double error = 0.001;
-  const double step = 0.05;
+  constexpr double error = 0.001;
+  constexpr double step = 0.05;
 
-  lanovenko::laststro(left, right, k, error, step);
+  lanovenko::table(left, right, k, error, step);
 }
 
