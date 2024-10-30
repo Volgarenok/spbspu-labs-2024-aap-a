@@ -1,7 +1,7 @@
-#include "taylor_swift.h"
+#include "taylorseries.h"
 #include <cmath>
 
 double lanovenko::sqruno(double x)
 {
- return pow(1+x, 0.5);
+ return std::pow(1 + x, 0.5);
 }
