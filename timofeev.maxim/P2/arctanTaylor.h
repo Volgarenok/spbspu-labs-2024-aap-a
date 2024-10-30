@@ -1,7 +1,6 @@
 #ifndef ARCTAN_TAYLOR_H
 #define ARCTAN_TAYLOR_H
 #include <cstddef>
-#include <cmath>
 namespace timofeev
 {
   double cal_arctan_taylor(double x, double abs_error, size_t number_max);
