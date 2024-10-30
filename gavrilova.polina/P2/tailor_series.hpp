@@ -1,6 +1,7 @@
+#include <iostream>
 #ifndef TAYLORSERIES_HPP
 #define TAYLORSERIES_HPP
-#include <iostream>
+
 namespace gavrilova
 {
   double v_taylor(double x, size_t nMax, double error);

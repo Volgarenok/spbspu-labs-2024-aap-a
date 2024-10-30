@@ -1,7 +1,7 @@
-#include "taylor_series.hpp"
-
+#include "tailor_series.hpp"
+#include <iostream>
 #include <cmath>
-#include <exception>
+
 double gavrilova::v_taylor(double x, size_t nMax, double error)
 {
   double absError = 0.0, result = 1.0, iTerm = 1.0;

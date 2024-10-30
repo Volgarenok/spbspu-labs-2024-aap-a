@@ -1,5 +1,5 @@
 #include <iostream>
-#include "functions.hpp"
+#include "tailor_series.hpp"
 #include <cmath>
 
 int main()
