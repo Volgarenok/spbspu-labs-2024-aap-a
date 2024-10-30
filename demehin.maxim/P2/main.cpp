@@ -19,7 +19,7 @@ int main()
   }
 
   bool isInDefinitionArea = begin > -1 && end < 1;
-  if (isInDefinitionArea == false)
+  if (!isInDefinitionArea)
   {
     std::cerr << "Out of definition area\n";
     return 1;
