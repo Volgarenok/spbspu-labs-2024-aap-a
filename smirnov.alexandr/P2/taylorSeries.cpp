@@ -17,3 +17,8 @@ double smirnov::sinTaylor(double x, size_t k, double error)
   }
   return result;
 }
+
+double smirnov::sinCmath(double x)
+{
+  return std::sin(x);
+}
