@@ -8,7 +8,7 @@ double brevnov::f(const double x, const size_t k, const double error)
   for (size_t i = 1; i < k; ++i)
   {
     next = (std::pow(-1, i) * pow(x, 2 * i + 1) ) / (2 * i + 1);
-    result +=next;
+    result += next;
   }
   if (std::abs(next) - std::abs(atan(x)) > error)
   {

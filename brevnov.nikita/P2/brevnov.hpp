@@ -8,4 +8,3 @@ namespace brevnov
   void tablecheck(double i, const size_t k, const double error);
 } 
 #endif
-

@@ -1,7 +1,7 @@
 #include "brevnov.hpp"
 
 int main()
-{ 
+{
   double left = 0.0, right = 0.0;
   size_t k = 0;
   std::cin >> left >> right >> k;
@@ -15,7 +15,7 @@ int main()
     std::cerr << "Input error!\n";
     return 1;
   }
-  if ((left>=right) or (std::abs(left)>1) or (std::abs(right)>1))
+  if ((left >= right) || (std::abs(left) > 1) || (std::abs(right) > 1))
   {
     std::cerr << "Incorrect input!\n";
     return 1;
