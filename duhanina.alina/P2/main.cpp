@@ -1,5 +1,5 @@
+#include "titletaylor.h"
 #include <iostream>
-#include "namespaces.h"
 
 int main()
 {
@@ -18,8 +18,8 @@ int main()
     return 1;
   }
 
-  const double error = 0.001;
-  const double step = 0.1;
+  constexpr double error = 0.001;
+  constexpr double step = 0.1;
   for (auto i = left; i < right; i += step)
   {
     duhanina::output(i, k, error);
