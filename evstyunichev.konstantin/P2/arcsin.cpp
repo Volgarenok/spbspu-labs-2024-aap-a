@@ -5,7 +5,7 @@
 
 double evstyunichev::arcsin(double x, size_t k, double error)
 {
-  const char *errmsg = "<MATH ERROR>";
+  constexpr char *errmsg = "<MATH ERROR>";
   double last = x, ans = x;
   for (size_t i = 1; i < k; i++)
   {
@@ -26,7 +26,7 @@ double evstyunichev::stdarcsin(double x)
 
 void evstyunichev::output(double x, size_t k, double error)
 {
-  const size_t field_size = 12;
+  constexpr size_t field_size = 12;
   std::cout << std::setw(field_size) << x << "    ";
   try
   {
