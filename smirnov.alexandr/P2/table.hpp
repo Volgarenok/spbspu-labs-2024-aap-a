@@ -1,9 +1,7 @@
 #ifndef TABLE_HPP
 #define TABLE_HPP
-#include <cstring>
-#include <iomanip>
-#include <iostream>
-#include <stdexcept>
+#include <ctddef>
+
 namespace smirnov
 {
   void outString(double x, size_t k, double error);
