@@ -1,7 +1,7 @@
+#include "taylor.hpp"
 #include <cmath>
 #include <stdexcept>
 #include <cstddef>
-#include "taylor.hpp"
 
 double dribas::getTaylor(double x, size_t count, double error)
 {

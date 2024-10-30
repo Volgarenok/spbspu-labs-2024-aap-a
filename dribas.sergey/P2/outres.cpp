@@ -1,9 +1,9 @@
+#include "outres.hpp"
 #include <stdexcept>
 #include <iomanip>
 #include <iostream>
 #include <cstddef>
 #include <cstring>
-#include "outres.hpp"
 #include "taylor.hpp"
 
 void dribas::outline(double x, size_t count, double error, int sizeclm)
