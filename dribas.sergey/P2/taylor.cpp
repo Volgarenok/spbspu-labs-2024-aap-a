@@ -1,14 +1,14 @@
-#include "taylor.hpp"
 #include <cmath>
 #include <stdexcept>
 #include <cstddef>
+#include "taylor.hpp"
 
-double dribas::getTaylor(double x, size_t koll, double error)
+double dribas::getTaylor(double x, size_t count, double error)
 {
   double member = 1;
   double result = member;
 
-  for (size_t i = 2; i <= koll ; i += 1){
+  for (size_t i = 2; i <= count ; i += 1) {
     member = (((i * ( i + 1)) / 2) * x);
     x *= x;
     if (i % 2 != 0){
