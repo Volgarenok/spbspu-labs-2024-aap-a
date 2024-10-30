@@ -4,7 +4,7 @@
 #include <iomanip>
 #include "taylorrow.h"
 
-void tkach::outputRow(double start, size_t maxamount, const double error)
+void tkach::outputRow(const double start, const size_t maxamount, const double error)
 {
   constexpr size_t setwx = 13, precision_for_second = 4, precision_for_third = 4, precision_for_first = 2;
   constexpr const char *errormsg = "<MATH ERROR>";

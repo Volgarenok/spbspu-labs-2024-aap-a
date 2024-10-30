@@ -1,7 +1,7 @@
 #include "taylorrow.h"
 #include <stdexcept>
 
-double tkach::coshTaylor(double x, size_t maxamount, const double error)
+double tkach::coshTaylor(const double x, const size_t maxamount, const double error)
 {
   double next = 1.0;
   double fact = 0.0;
