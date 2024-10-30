@@ -1,8 +1,9 @@
-#include "functions.hpp"
-#include <iostream>
+#include "taylor_series.hpp"
+
 #include <cmath>
 #include <exception>
-double gavrilova::v_taylor (double x, size_t nMax, double error){
+double gavrilova::v_taylor(double x, size_t nMax, double error)
+{
   double absError = 0.0, result = 1.0, iTerm = 1.0;
   for (size_t i =1; i < nMax; ++i){
     iTerm = iTerm * (-1) * x;
@@ -15,18 +16,23 @@ double gavrilova::v_taylor (double x, size_t nMax, double error){
   throw std::logic_error("!!!");
 }
 
-double gavrilova::v_cmath (double x){
+double gavrilova::v_cmath(double x)
+{
   double result = 0.0;
-  result = 1.0/pow(1+x, 3.0);
+  result = 1.0/std::pow(1+x, 3.0);
   return result;
 }
-void gavrilova::output_str(double num, double v_taylor, double v_cmath){
+
+void gavrilova::output_str(double num, double v_taylor, double v_cmath)
+{
   std::cout << std::fixed;
   std::cout.precision(12);
-  std::cout << num << " " << v_taylor << " " << v_cmath << "\n";
+  std::cout << num << " " << v_taylor << " " << v_cmath;
 }
-void gavrilova::output_str(double num, const char * math_error, double v_cmath){
+
+void gavrilova::output_str(double num, const char * math_error, double v_cmath)
+{
   std::cout << std::fixed;
   std::cout.precision(12);
-  std::cout << num << " " << math_error << " " << v_cmath << "\n";
+  std::cout << num << " " << math_error << " " << v_cmath;
 }
