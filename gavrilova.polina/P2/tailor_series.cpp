@@ -19,7 +19,7 @@ double gavrilova::v_taylor(double x, size_t nMax, double error)
 double gavrilova::v_cmath(double x)
 {
   double result = 0.0;
-  result = 1.0/std::pow(1 + x, 3.0);
+  result = 1.0 / std::pow(1 + x, 3.0);
   return result;
 }
 
