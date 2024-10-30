@@ -5,11 +5,11 @@
 
 double dribas::getTaylor(double x, size_t count, double error)
 {
-  double member = 0;
+  double member = 0.0;
   double result = member;
 
   for (size_t i = 1; i <= count ; i += 1) {
-    member = (((i * ( i + 1)) / 2) * x);
+    member = (((i * (i + 1)) / 2) * x);
     x *= x;
     if (i % 2 != 0) {
       result += member;
