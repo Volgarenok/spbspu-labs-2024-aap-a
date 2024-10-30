@@ -1,6 +1,7 @@
 #ifndef TAYLOR_H
 #define TAYLOR_H
 #include <cstddef>
+
 namespace demehin
 {
   double f(double x, size_t k, double error);
@@ -8,3 +9,4 @@ namespace demehin
   void output(double x, size_t k, double error);
 }
 #endif
+

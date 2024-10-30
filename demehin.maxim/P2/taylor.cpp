@@ -9,7 +9,7 @@ double demehin::f(double x, size_t k, double error)
   double result = next1 + next2;
   for (size_t i = 2; i < k; ++i)
   {
-    next2 = (next2 * x)/i;
+    next2 = (next2 * x) / i;
     result += next2;
   }
   if (std::abs(next2) > error)
