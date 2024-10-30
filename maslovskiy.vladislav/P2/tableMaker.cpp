@@ -3,7 +3,6 @@
 #include <cmath>
 #include <stdexcept>
 #include <iomanip>
-#include "teilorFun.hpp"
 
 void standartiseOut(const double num)
 {
