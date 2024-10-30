@@ -31,7 +31,7 @@ void balashov::showRow(const double step, const size_t numberOfСalculations, co
 }
 
 void balashov::showTable (const double minimumIntervalStep, const double maximumIntervalStep,
-   int numberOfСalculations, const double step, const double error)
+   const int numberOfСalculations, const double step, const double error)
 {
   constexpr double errorRate = 0.00001;
   if(minimumIntervalStep < maximumIntervalStep)
