@@ -3,13 +3,13 @@
 #include <iomanip>
 #include <cmath>
 
-void tablecheck(size_t i, const size_t k, const double error)
+void brevnov::tablecheck(double i, const size_t k, const double error)
 {
-  constexpr char * errorsum = "<MATH ERROR>";
-  constexpr size_t second_width = std::strlen(errorsum);
+  const char * errorsum = "<MATH ERROR>";
+  const size_t second_width = std::strlen(errorsum);
   constexpr size_t usually_width = 10;
   constexpr size_t usu = usually_width;
-  constexpr size_t snd = second_width;
+  const size_t snd = second_width;
   std::cout << std::fixed << std::setw(usu) << i;
   std::cout << " ";
   try
