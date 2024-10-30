@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <cmath>
 #include <iostream>
+#include "taylorsRow.hpp"
 
 void balashov::showRow(const double step, const size_t numberOfСalculations, const double error)
 {

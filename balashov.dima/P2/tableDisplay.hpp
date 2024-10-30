@@ -1,7 +1,7 @@
 #ifndef TABLE_DISPLAY_HPP
 #define TABLE_DISPLAY_HPP
 
-#include "taylorsRow.hpp"
+#include <cstddef>
 
 namespace balashov
 {
