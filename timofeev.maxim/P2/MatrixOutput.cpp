@@ -8,7 +8,8 @@ void timofeev::matrix_output(double start, double end, size_t number_max, double
 {
   const char * er_math = "<MATH ERROR>";
   const size_t dlina_er = std::strlen(er_math);
-  for (double x = start; x < end; x += step) {
+  for (double x = start; x < end; x += step)
+  {
     std::cout << std::setw(dlina_er) << x;
     try
     {

@@ -12,17 +12,20 @@ int main()
   std::cout << "Enter the start, end, number_max: ";
   std::cin >> start >> end >> number_max;
 
-  if (std::cin.fail()) {
+  if (std::cin.fail())
+  {
     std::cerr << "inpur error" << "\n";
     return 1;
   }
 
-  if (number_max <= 0) {
+  if (number_max <= 0)
+  {
     std::cerr << "inout error" << "\n";
     return 1;
   }
 
-  if (start >= end) {
+  if (start >= end)
+  {
     std::cerr << "input error" << "\n";
     return 1;
   }
