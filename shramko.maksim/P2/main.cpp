@@ -32,7 +32,9 @@ int main()
   for (auto i = left; i < right; i += step)
   {
     shramko::rowOutput(i, k, error);
+    std::cout << "\n";
   }
 
   shramko::rowOutput(right, k, error);
+  std::cout << "\n";
 }

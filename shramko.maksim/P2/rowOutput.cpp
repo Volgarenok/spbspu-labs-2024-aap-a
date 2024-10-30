@@ -22,5 +22,4 @@ void shramko::rowOutput(double i, size_t k, double error)
 
   std::cout << std::setw(width) << std::left << std::fixed << std::setprecision(7) << std::sin(i);
 
-  std::cout << "\n";
 }
