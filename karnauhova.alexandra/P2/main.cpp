@@ -1,5 +1,5 @@
 #include <iostream>
-#include "namespace.hpp"
+#include "func.hpp"
 
 int main()
 {
@@ -18,6 +18,6 @@ int main()
   }
   constexpr double error = 0.001;
   constexpr double step = 0.05;
-  karnauhova::output_table(left, right, step, k, error, 13);
-  std::cout<<"\n";
+  constexpr size_t width = 13;
+  karnauhova::output_table(left, right, step, k, error, width);
 }
