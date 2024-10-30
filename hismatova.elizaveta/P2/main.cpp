@@ -1,4 +1,6 @@
 #include "taylor.h"
+#include <iostream>
+
 
 int main()
 {
@@ -10,9 +12,10 @@ int main()
     std::cerr << "ERROR: wrong cin\n";
     return 1;
   }
-  const double step = 0.05;
+  constexpr double step = 0.05;
   for (double i = left; i <= right; i += step)
   {
     hismatova::resultsInTable(i, k);
+    std::cout << "\n";
   }
 }

@@ -1,5 +1,10 @@
 #include "taylor.h"
+#include <iostream>
+#include <cmath>
+#include <cstring>
+#include <iomanip>
 
+const char* errmsg = "<MATH ERROR>";
 double hismatova::sinx(const double& x)
 {
   return std::sin(x);
@@ -23,14 +28,13 @@ double hismatova::taylorSin(const double& x, const size_t& k)
   }
   if (std::abs(result - hismatova::sinx(x)) > error)
   {
-    throw std::logic_error("<MATH ERROR>");
+    throw std::logic_error(errmsg);
   }
   return result;
 }
 void hismatova::resultsInTable(const double& x, const size_t& k)
 {
   double res2 = 0;
-  const char* errmsg = "<MATH ERROR>";
   try
   {
     res2 = hismatova::taylorSin(x, k);
@@ -41,10 +45,9 @@ void hismatova::resultsInTable(const double& x, const size_t& k)
     std::cout << std::setw(snd) << res2;
     std::cout << " ";
     std::cout << std::setw(oth) << hismatova::sinx(x);
-    std::cout << "\n";
   }
   catch (std::logic_error & e)
   {
-    std::cerr << errmsg << std::endl;
+    std::cerr << e.what() << "\n";
   }
 }
