@@ -1,5 +1,6 @@
-#include "computingFunctions.hpp"
-#include "valuesOutput.hpp"
+#include <iostream>
+#include "computeValues.hpp"
+#include "outputValues.hpp"
 int main()
 {
   double left_border = 0.0, right_border = 0.0;
@@ -11,7 +12,7 @@ int main()
     std::cerr << "Incorrect input!\n";
     return 1;
   }
-  const double error = 0.001;
-  const double step = 0.05;
+  constexpr double error = 0.001;
+  constexpr double step = 0.05;
   krylov::tableOutput(left_border, right_border, max_terms_number, step, error);
 }
