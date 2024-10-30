@@ -1,6 +1,6 @@
-#include <iostream>
 #ifndef TAYLORSERIES_HPP
 #define TAYLORSERIES_HPP
+#include <cstddef>
 
 namespace gavrilova
 {

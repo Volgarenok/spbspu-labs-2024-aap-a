@@ -5,11 +5,11 @@
 double gavrilova::v_taylor(double x, size_t nMax, double error)
 {
   double absError = 0.0, result = 1.0, iTerm = 1.0;
-  for (size_t i =1; i < nMax; ++i){
+  for (size_t i = 1; i < nMax; ++i) {
     iTerm = iTerm * (-1) * x;
-    absError = iTerm * (i+1) * (i+2) / 2;
+    absError = iTerm * (i + 1) * (i + 2) / 2;
     result += absError;
-    if (std::abs(absError) <= error){
+    if (std::abs(absError) <= error) {
       return result;
     }
   }
@@ -19,7 +19,7 @@ double gavrilova::v_taylor(double x, size_t nMax, double error)
 double gavrilova::v_cmath(double x)
 {
   double result = 0.0;
-  result = 1.0/std::pow(1+x, 3.0);
+  result = 1.0/std::pow(1 + x, 3.0);
   return result;
 }
 
