@@ -36,7 +36,7 @@ void guseynov::printLineTaylor(double current, size_t k, double error)
   try
   {
     std::cout << std::setw(20) << std::setprecision(6) << guseynov::calculateUsingTaylorSeries(current, k, error);
-    std::cout << std::setw(20) << std::setprecision(6) << atan(current);
+    std::cout << std::setw(20) << std::setprecision(6) << std::atan(current);
   }
   catch (const std::logic_error & e)
   {
