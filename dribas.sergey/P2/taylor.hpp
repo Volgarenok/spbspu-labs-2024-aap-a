@@ -1,4 +1,3 @@
-
 #ifndef TAYLOR_HPP
 #define TAYLOR_HPP
 #include <cstddef>
