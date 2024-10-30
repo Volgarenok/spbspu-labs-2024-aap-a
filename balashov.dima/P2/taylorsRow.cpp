@@ -1,7 +1,7 @@
 #include "taylorsRow.hpp"
 #include <stdexcept>
 
-double balashov::expTaylor(const double x,const size_t numberOfСalculations,const double error)
+double balashov::expTaylor(const double x, const size_t numberOfСalculations, const double error)
 {
   double result = 1;
   double summand = 1;

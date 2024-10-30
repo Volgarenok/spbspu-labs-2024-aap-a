@@ -1,7 +1,7 @@
 #ifndef TAYLORS_ROW_HPP
 #define TAYLORS_ROW_HPP
 
-#include <iostream>
+#include <cstddef>
 
 namespace balashov
 {

@@ -1,5 +1,5 @@
-#include "tableDisplay.hpp"
 #include <cmath>
+#include "tableDisplay.hpp"
 
 int main()
 {
@@ -23,7 +23,7 @@ int main()
     std::cerr << "The lower limit is set incorrectly\n";
     return 1;
   }
-  else if (maximumIntervalStep < -1 || maximumIntervalStep >1)
+  else if (maximumIntervalStep < -1 || maximumIntervalStep > 1)
   {
     std::cerr << "The upper limit is set incorrectly\n";
     return 1;
