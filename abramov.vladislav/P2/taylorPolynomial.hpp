@@ -1,5 +1,5 @@
-#ifndef taylorPolynomial_HPP
-#define taylorPolynomial_HPP
+#ifndef TAYLORPOLYNOMIAL_HPP
+#define TAYLORPOLYNOMIAL_HPP
 #include <cstddef>
 namespace abramov
 {
