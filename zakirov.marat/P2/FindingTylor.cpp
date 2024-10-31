@@ -1,7 +1,4 @@
 #include "FindingTylor.hpp"
-#include <cstddef>
-#include <stdexcept>
-#include <cmath>
 
 double zakirov::find_atanh(double point, size_t addition_depth, const double kError)
 {

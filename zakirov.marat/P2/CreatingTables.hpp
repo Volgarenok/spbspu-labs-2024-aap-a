@@ -1,5 +1,8 @@
 #ifndef CREATINGTABLES_HPP
 #define CREATINGTABLES_HPP
+#include <cstddef>
+#include <iostream>
+#include <iomanip>
 
 namespace zakirov
 {
