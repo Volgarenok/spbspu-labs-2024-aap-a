@@ -3,5 +3,5 @@
 
 double sveshnikov::math(double x)
 {
-  return atanh(x);
+  return std::atanh(x);
 }
