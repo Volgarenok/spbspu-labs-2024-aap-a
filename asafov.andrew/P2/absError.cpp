@@ -1,4 +1,5 @@
 #include "func.h"
+#include <cstddef>
 
 namespace asafov {
     double absError(double x, std::size_t k)
