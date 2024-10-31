@@ -1,6 +1,6 @@
 #include <iostream>
-#include "computeValues.hpp"
-#include "outputValues.hpp"
+#include "calculateMathValues.hpp"
+#include "outputTable.hpp"
 int main()
 {
   double left_border = 0.0, right_border = 0.0;
