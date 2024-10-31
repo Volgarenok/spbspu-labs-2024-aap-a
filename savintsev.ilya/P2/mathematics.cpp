@@ -1,6 +1,8 @@
 #include "mathematics.h"
+#include <cmath>
+#include <stdexcept>
 
-double savintsev::calcFuncTaylor(double x, size_t k, const double error)
+double savintsev::calcFuncTaylor(double x, size_t k, double error)
 {
   double interim = 1.;
   double result = interim;

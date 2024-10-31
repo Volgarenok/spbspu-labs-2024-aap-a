@@ -1,7 +1,6 @@
 #ifndef MATHEMATICS_H
 #define MATHEMATICS_H
-#include <cmath>
-#include <stdexcept>
+#include <cstddef>
 
 namespace savintsev
 {

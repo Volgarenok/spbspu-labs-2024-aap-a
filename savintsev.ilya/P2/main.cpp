@@ -1,4 +1,5 @@
-#include "print.h"
+#include <iostream>
+#include "printingmath.h"
 
 int main()
 {
