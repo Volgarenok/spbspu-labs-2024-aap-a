@@ -1,6 +1,5 @@
 #include "func.h"
 #include <iostream>
-#include <cmath>
 
 int main()
 {
