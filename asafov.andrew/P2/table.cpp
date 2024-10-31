@@ -21,7 +21,7 @@ namespace asafov {
                 return;
             }
             (i < 0) ? (std::cout << std::fixed << "|") : (std::cout << std::fixed << "| ");
-            std::cout << std::fixed << i << " | " << value << " | " << std::exp(-1.0 * i * i) << " | \n";
+            std::cout << std::fixed << i << " | " << value << " | " << exp(-1.0 * i * i) << " | \n";
         }
         double value = 0;
         try {
@@ -31,7 +31,7 @@ namespace asafov {
             std::cout << "<MATH ERROR>";
         }
         (right < 0) ? (std::cout << std::fixed << "|") : (std::cout << std::fixed << "| ");
-        std::cout << std::fixed << right << " | " << value << " | " << std::exp(-1.0 * right * right) << " | \n";
+        std::cout << std::fixed << right << " | " << value << " | " << exp(-1.0 * right * right) << " | \n";
         for (int i = 0; i < 34; i++)
         {
             std::cout << '-';
