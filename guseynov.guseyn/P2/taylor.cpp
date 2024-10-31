@@ -22,7 +22,7 @@ double guseynov::calculateUsingTaylorSeries(double x, size_t k, double error)
       return result;
     };
   };
-    throw std::logic_error("math error");
+  throw std::logic_error("math error");
 }
 
 void guseynov::printLineForTaylor(double current, size_t k, double error)
@@ -42,7 +42,7 @@ void guseynov::printLineForTaylor(double current, size_t k, double error)
 
 void guseynov::printTableForTaylor(double left, double right, size_t k, double step, double error)
 {
-  for (double i = left; i < right; i+=step)
+  for (double i = left; i < right; i += step)
   {
     printLineForTaylor(i, k, error);
     std::cout << "\n";
