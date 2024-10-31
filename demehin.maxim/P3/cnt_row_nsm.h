@@ -3,7 +3,7 @@
 
 namespace demehin
 {
-  getCountRowNsm(int* t, int k);
+  int getCountRowNsm(int* t, int k);
 }
-
+#endif
 
