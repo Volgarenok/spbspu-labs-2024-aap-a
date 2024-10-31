@@ -11,7 +11,7 @@ int main()
 
     double left = -1;
     double right = 1;
-    std::size_t numberMax = 2;
+    size_t numberMax = 2;
 
     std::cin >> left >> right >> numberMax;
 
