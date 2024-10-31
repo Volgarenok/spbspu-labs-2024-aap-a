@@ -1,16 +1,18 @@
 #include "FindingTylor.hpp"
+#include <cmath>
+#include <stdexcept>
 
-double zakirov::find_atanh(double point, size_t addition_depth, const double kError)
+double zakirov::find_atanh(double point, size_t addition_depth, double kError)
 {
   int num_power = 1.0;
   double tylor = 0.0;
   double discarded_term = 0.0;
   for (size_t i = 0; i < addition_depth; ++i)
   {
-    tylor += std::pow(point, num_power)/num_power;
+    tylor += std::pow(point, num_power) / num_power;
 
     num_power += 2;
-    discarded_term = std::pow(point, num_power)/num_power;
+    discarded_term = std::pow(point, num_power) / num_power;
   }
 
   if (std::abs(discarded_term) > kError)

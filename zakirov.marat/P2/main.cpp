@@ -1,6 +1,6 @@
+#include <iostream>
 #include "FindingTylor.hpp"
 #include "CreatingTables.hpp"
-#include <iostream>
 
 int main()
 {
