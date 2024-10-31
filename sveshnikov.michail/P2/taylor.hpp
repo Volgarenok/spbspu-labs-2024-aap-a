@@ -1,11 +1,7 @@
 #ifndef TAYLOR_HPP
 #define TAYLOR_HPP
-#include <iostream>
 #include <cstddef>
-#include <stdexcept>
-#include <cmath>
-#include <iomanip>
-#include <cstring>
+
 namespace sveshnikov
 {
   double taylor(double x, size_t k, double error);

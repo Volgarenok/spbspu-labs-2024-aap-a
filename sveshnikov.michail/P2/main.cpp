@@ -1,4 +1,6 @@
 #include "taylor.hpp"
+#include <iostream>
+
 int main()
 {
   double left = 0.0, right = 0.0;
@@ -9,19 +11,11 @@ int main()
     std::cerr << "ERROR: the input could not be recognized\n";
     return 1;
   }
-  try
-  {
-    if (left <= -1 || right >= 1 || (right < left) || (right != left && k == 0))
-    {
-      throw std::logic_error("the interval is incorrect");
-    }
-  }
-  catch (const std::logic_error &e)
+  if (left <= -1 || right >= 1 || (right < left) || (right != left && k == 0))
   {
     std::cerr << "ERROR: the interval is incorrect\n";
     return 1;
   }
   sveshnikov::table(left, right, k);
-  std::cout << "\n";
   return 0;
 }

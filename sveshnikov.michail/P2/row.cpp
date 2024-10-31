@@ -1,4 +1,9 @@
 #include "taylor.hpp"
+#include <iostream>
+#include <stdexcept>
+#include <iomanip>
+#include <cstring>
+
 void sveshnikov::row(double x, size_t k, double error)
 {
   const char *errormsg = "<MATH ERROR>";
@@ -17,5 +22,4 @@ void sveshnikov::row(double x, size_t k, double error)
   std::cout << " ";
   std::cout << std::setw(sec_col_w) << std::setprecision(8) << sveshnikov::math(x);
   std::cout << std::defaultfloat;
-  std::cout << "\n";
 }
