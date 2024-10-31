@@ -1,4 +1,6 @@
-#include "header.h"
+#include "func.h"
+#include <iostream>
+#include <cmath>
 
 int main()
 {
@@ -11,15 +13,18 @@ int main()
 
     std::cin >> left >> right >> numberMax;
 
-    if (std::cin.fail()) {
+    if (std::cin.fail())
+    {
         std::cerr << "Input fail" << '\n';
         return 1;
     }
-    if (right<left) {
+    if (right < left)
+    {
         std::cerr << "wrong borders" << '\n';
         return 1;
     }
-    if ((right > 1) or (left < -1)) {
+    if ((right > 1) or (left < -1))
+    {
         std::cerr << "incorrect borders" << '\n';
         return 1;
     }
