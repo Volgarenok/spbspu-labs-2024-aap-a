@@ -22,11 +22,7 @@ double guseynov::calculateUsingTaylorSeries(double x, size_t k, double error)
       return result;
     };
   };
-  if (std::abs(current * sign * (-1) / (divider - 2)) > error)
-  {
     throw std::logic_error("math error");
-  };
-  return result;
 }
 
 void guseynov::printLineForTaylor(double current, size_t k, double error)
