@@ -1,7 +1,5 @@
 #include "func.h"
 #include <stdexcept>
-#include <cstddef>
-#include <cstdlib>
 
 namespace asafov {
     double expNegPow2x(double x, size_t k, double error)

@@ -1,8 +1,6 @@
 #include "func.h"
 #include <iostream>
 #include <cmath>
-#include <cstddef>
-#include <cstdlib>
 
 int main()
 {
