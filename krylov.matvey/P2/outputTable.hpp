@@ -1,5 +1,5 @@
-#ifndef OUTPUTVALUES_HPP
-#define OUTPUTVALUES_HPP
+#ifndef OUTPUTTABLE_HPP
+#define OUTPUTTABLE_HPP
 
 #include <cstddef>
 

@@ -1,6 +1,6 @@
+#include "calculateMathValues.hpp"
 #include <cmath>
 #include <stdexcept>
-#include "computeValues.hpp"
 
 double krylov::f(double x, size_t k, double error)
 {
@@ -13,16 +13,8 @@ double krylov::f(double x, size_t k, double error)
   {
     divider = divider * (factor + 1) * (factor + 2);
     current_term = (previous_term * x * x) / divider;
-    if (i % 2 == 0)
-    {
-      result += current_term;
-      previous_term = current_term;
-    }
-    else
-    {
-      result -= current_term;
-      previous_term = current_term;
-    }
+    (i % 2 == 0) ? (result += current_term) : (result -= current_term);
+    previous_term = current_term;
     factor += 2;
   }
   if (std::abs(previous_term) > error)

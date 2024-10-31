@@ -1,8 +1,8 @@
+#include "outputTable.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <iomanip>
-#include "computeValues.hpp"
-#include "outputValues.hpp"
+#include "calculateMathValues.hpp"
 
 void krylov::lineOutput(double x, size_t max_terms_number, double error)
 {

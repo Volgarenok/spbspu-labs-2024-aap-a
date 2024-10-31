@@ -1,5 +1,5 @@
-#ifndef COMPUTEVALUES_HPP
-#define COMPUTEVALUES_HPP
+#ifndef CALCULATEMATHVALUES_HPP
+#define CALCULATEMATHVALUES_HPP
 
 #include <cstddef>
 
