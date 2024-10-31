@@ -4,7 +4,7 @@
 #include <cstddef>
 namespace nikonov
 {
-  void stringOutput(const double& x, const double& val, const double& stdval);
-  void stringOutput(const double& x, const std::logic_error& e, const double& stdval);
+  void stringOutput(double x, double val, double stdval);
+  void stringOutput(double x, const std::logic_error& e, double stdval);
 }
 #endif

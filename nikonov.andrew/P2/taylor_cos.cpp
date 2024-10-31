@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <cstring>
-double nikonov::cos(const double& x, const size_t& numberMax, const double& absError)
+double nikonov::cos(double x, size_t numberMax, double absError)
 {
   double next = (x * x) / 2;
   double result = 1 - next;
@@ -24,7 +24,7 @@ double nikonov::cos(const double& x, const size_t& numberMax, const double& absE
   }
   return result;
 }
-double nikonov::stdcos(const double& x)
+double nikonov::stdcos(double x)
 {
   return std::cos(x);
 }

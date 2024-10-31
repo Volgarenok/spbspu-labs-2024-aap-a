@@ -1,6 +1,6 @@
+#include <iostream>
 #include "taylor_cos.hpp"
 #include "taylor_output.hpp"
-#include <iostream>
 int main()
 {
   constexpr double step = 0.1, absError = 0.001;

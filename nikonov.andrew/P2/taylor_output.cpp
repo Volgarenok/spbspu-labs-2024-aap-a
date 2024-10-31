@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <cstddef>
 #include <cstring>
-void nikonov::stringOutput(const double& x, const double& val, const double& stdval)
+void nikonov::stringOutput(double x, double val, double stdval)
 {
   constexpr size_t oth_col_width = 10;
   constexpr const char* errmsg = "<MATH ERROR>";
@@ -14,7 +14,7 @@ void nikonov::stringOutput(const double& x, const double& val, const double& std
   std::cout << " ";
   std::cout << std::setprecision(6) << std::setw(oth_col_width) << stdval;
 }
-void nikonov::stringOutput(const double& x, const std::logic_error& e, const double& stdval)
+void nikonov::stringOutput(double x, const std::logic_error& e, double stdval)
 {
   constexpr size_t oth_col_width = 10;
   constexpr const char* errmsg = "<MATH ERROR>";
