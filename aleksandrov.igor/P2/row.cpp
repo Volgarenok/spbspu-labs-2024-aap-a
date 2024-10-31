@@ -1,5 +1,9 @@
 #include "row.h"
+#include <iostream>
 #include <stdexcept>
+#include <iomanip>
+#include <cstring>
+#include "taylor.h"
 
 void aleksandrov::printRow(double i, size_t k, double error)
 {

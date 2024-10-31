@@ -1,7 +1,4 @@
 #include <iostream>
-#include <stdexcept>
-#include <iomanip>
-#include <cstring>
 #include "taylor.h"
 #include "row.h"
 
