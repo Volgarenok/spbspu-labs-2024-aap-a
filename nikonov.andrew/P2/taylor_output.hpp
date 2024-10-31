@@ -6,5 +6,6 @@ namespace nikonov
 {
   void stringOutput(double x, double val, double stdval);
   void stringOutput(double x, const std::logic_error& e, double stdval);
+  void uni_output(double x, double val, double stdval, bool e = 0);
 }
 #endif
