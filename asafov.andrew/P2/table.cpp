@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <cstddef>
+#include <cstdlib>
 
 namespace asafov {
     void table(double left, double right, double step, std::size_t numberMax, double error)
