@@ -1,4 +1,4 @@
-#include "printingmath.h"
+#include "interactterminal.h"
 #include <cstring>
 #include <iomanip>
 #include <iostream>
@@ -11,33 +11,20 @@ namespace savintsev
   extern constexpr double STEP = 0.01;
 }
 
-void savintsev::printBorderEquals(Triple w)
+size_t savintsev::Triple::get(size_t i)
 {
-  size_t width = 10;
-  width += w.x + w.y + w.z;
-  for (size_t i = 0; i < (width); ++i)
-  {
-    std::cout << '=';
-  }
-  std::cout << '\n';
+  return (i == 0) ? x : (i == 1 ? y : z);
 }
 
 void savintsev::printBorderMinusPlus(Triple w)
 {
-  std::cout << "|";
-  for (size_t i = 0; i < (w.x + 2); ++i)
+  for (size_t j = 0; j < 3; j++)
   {
-    std::cout << '-';
-  }
-  std::cout << "|";
-  for (size_t i = 0; i < (w.y + 2); ++i)
-  {
-    std::cout << '-';
-  }
-  std::cout << "|";
-  for (size_t i = 0; i < (w.z + 2); ++i)
-  {
-    std::cout << '-';
+    std::cout << "|";
+    for (size_t i = 0; i < (w.get(j) + 2); ++i)
+    {
+      std::cout << '-';
+    }
   }
   std::cout << "|\n";
 }
@@ -107,7 +94,7 @@ void savintsev::printMathSheet(double begin, double end, size_t k)
   }
   widths.y = std::strlen(savintsev::ERROR_MSG);
   widths.z = std::strlen(savintsev::ERROR_MSG);
-  savintsev::printBorderEquals(widths);
+  savintsev::printBorderMinusPlus(widths);
   savintsev::printMathInfo(widths);
   savintsev::printBorderMinusPlus(widths);
   for (double i = begin; i < end; i += savintsev::STEP)
@@ -115,5 +102,5 @@ void savintsev::printMathSheet(double begin, double end, size_t k)
     savintsev::printMathLine(i, widths, k);
   }
   savintsev::printMathLine(end, widths, k);
-  savintsev::printBorderEquals(widths);
+  savintsev::printBorderMinusPlus(widths);
 }

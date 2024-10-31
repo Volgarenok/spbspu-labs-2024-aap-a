@@ -1,5 +1,5 @@
 #include <iostream>
-#include "printingmath.h"
+#include "interactterminal.h"
 
 int main()
 {
