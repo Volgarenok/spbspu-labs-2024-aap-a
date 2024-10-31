@@ -42,7 +42,7 @@ void guseynov::printLineForTaylor(double current, size_t k, double error)
 
 void guseynov::printTableForTaylor(double left, double right, size_t k, double step, double error)
 {
-  for (double i = left; i < right; i += step)
+  for (double i = left; i < (right - 0.25 * step); i += step)
   {
     printLineForTaylor(i, k, error);
     std::cout << "\n";
