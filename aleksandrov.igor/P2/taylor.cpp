@@ -1,5 +1,6 @@
-#include "TaylorAndStringFuncs.h"
+#include "taylor.h"
 #include <stdexcept>
+#include <cmath>
 
 double aleksandrov::taylor(double x, size_t k, double error)
 {
@@ -16,4 +17,14 @@ double aleksandrov::taylor(double x, size_t k, double error)
   }
   return result;
 }
+
+double aleksandrov::sinxDivx(double x)
+{
+  if (std::abs(x) < 1e-7)
+  {
+    return 1.0;
+  }
+  return std::sin(x)/x;
+}
+
 
