@@ -35,6 +35,7 @@ int main(int argc, char** argv)
     std::cout << "File text is invalid\n";
     return 2;
   }
+  outputStream << m << ' ' << n;
   size_t readCounter = 0;
   switch (num)
   {
@@ -47,19 +48,29 @@ int main(int argc, char** argv)
       return 2;
     }
     savintsev::transformMtx(table, m, n);
+    if (m * n != 0)
+    {
+      outputStream << ' ';
+    }
     savintsev::outputMtx(outputStream, table, m, n);
     break;
   }
   case 2:
   {
-    int* table = new int[n * m];
+    int * table = new int[n * m];
     if (!savintsev::inputMtx(inputStream, table, m, n, readCounter))
     {
       std::cout << "File text is invalid\n";
+      delete[] table;
       return 2;
     }
     savintsev::transformMtx(table, m, n);
+    if (m * n != 0)
+    {
+      outputStream << ' ';
+    }
     savintsev::outputMtx(outputStream, table, m, n);
+    delete[] table;
     break;
   }
   default:
