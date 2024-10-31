@@ -1,8 +1,8 @@
+#include "taylor_series.hpp"
 #include <stdexcept>
 #include <cmath>
-#include "taylor_series.hpp"
 
-double maslevtsov::taylorSeries(double x, size_t numberMax, const double absError)
+double maslevtsov::taylorSeries(double x, size_t numberMax, double absError)
 {
   double next = 1.0;
   double n = 1.0;

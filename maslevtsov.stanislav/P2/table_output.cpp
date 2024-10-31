@@ -1,10 +1,10 @@
+#include "table_output.hpp"
 #include <iostream>
 #include <iomanip>
 #include <cmath>
-#include "table_output.hpp"
 #include "taylor_series.hpp"
 
-void maslevtsov::stringOutput(double current, size_t numberMax, const double absError)
+void maslevtsov::stringOutput(double current, size_t numberMax, double absError)
 {
   std::cout << std::setprecision(5);
   std::cout << std::fixed;
@@ -25,7 +25,7 @@ void maslevtsov::stringOutput(double current, size_t numberMax, const double abs
   std::cout << "\n";
 }
 
-void maslevtsov::tableOutput(double left, double right, size_t numberMax, const double step, const double absError)
+void maslevtsov::tableOutput(double left, double right, size_t numberMax, double step, double absError)
 {
   for (auto i = left; i < right; i += step)
   {
