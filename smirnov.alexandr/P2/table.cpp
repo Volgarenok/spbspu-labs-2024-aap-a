@@ -1,11 +1,11 @@
-#include "table.hpp"
-#include "taylorSeries.hpp"
 #include <iostream>
 #include <iomanip>
 #include <cstring>
 #include <stdexcept>
+#include "table.hpp"
+#include "taylorSeries.hpp"
 
-void smirnov::outString(double x, size_t k, double error)
+void smirnov::outRow(double x, size_t k, double error)
 {
   constexpr const char * errormsg = "MATH ERROR";
   constexpr size_t second_column_width = std::strlen(errormsg) + 2;
@@ -16,20 +16,22 @@ void smirnov::outString(double x, size_t k, double error)
   std::cout << std::setw(oth) << std::fixed << x << " ";
   try
   {
-    std::cout << std::setw(snd) << smirnov::sinTaylor(x, k, error);
+    std::cout << std::setw(snd) << sinTaylor(x, k, error);
   }
   catch (const std::logic_error & e)
   {
     std::cout << std::setw(snd) << "<MATH ERROR>";
   }
-  std::cout << " " << std::setw(oth) << smirnov::sinCmath(x) << "\n";
+  std::cout << " " << std::setw(oth) << sinCmath(x);
 }
 
 void smirnov::outTable(double left, double right, size_t k, double error, double step)
 {
   for (double i = left; i < right; i += step)
   {
-    smirnov::outString(i, k, error);
+    outRow(i, k, error);
+    std::cout << "\n";
   }
-  smirnov::outString(right, k, error);
+  outRow(right, k, error);
+  std::cout << "\n";
 }
