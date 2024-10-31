@@ -3,7 +3,7 @@
 #include <iostream>
 
 namespace asafov {
-    void table(double left, double right, double step, size_t numberMax, double error)
+    void table(double left, double right, double step, std::size_t numberMax, double error)
     {
         for (int i = 0; i < 34; i++)
         {
