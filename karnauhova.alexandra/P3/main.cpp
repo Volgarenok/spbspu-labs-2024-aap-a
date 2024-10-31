@@ -4,12 +4,14 @@
 #include <cctype>
 #include <cstddef>
 int* ct_table(size_t m,size_t n);
-std::istream & input_matrix(std::istream & in, int * t, size_t m, size_t n)
+//std::istream &
+int* input_matrix(std::istream & in, int * t, size_t m, size_t n)
 {
   for (size_t i = 0; i < (m * n); ++i)
   {
     in >> t[i];
   }
+  return t;
 }
 int main(int argc, char ** argv)
 {
@@ -50,6 +52,7 @@ int main(int argc, char ** argv)
   int m = 0,n = 0;
   input >> m >> n;
   std::cout << m << n << "\n";
+  int* t = nullptr;
   if (way == 2)
   {
     int* t = ct_table(m,n);
@@ -58,6 +61,8 @@ int main(int argc, char ** argv)
   {
     int* t = fix_matrix;
   }
+  std::cout<<input_matrix(input, t, m, n);
+  std::cout<<t;
 }
 int* ct_table(size_t m,size_t n){
   int* matrix = nullptr;
@@ -71,4 +76,60 @@ int* ct_table(size_t m,size_t n){
     throw;
   }
   return matrix;
+}
+
+int* smooth_matrix(int* t,size_t m,size_t n)
+{
+  
+  float sum = 0;
+  size_t k = 0;
+  size_t count = 0;
+  for (size_t i = 0; i < m; ++i)
+  {
+    for (size_t j = 0; j < n; ++j)
+    {
+      if (j != 0)
+      {
+        sum += t[j - 1 + k];
+        count+=1;
+        if (i != 0)
+        {
+          sum += t[j + k - n - 1];
+          count+=1;
+        }
+        if (i != (m - 1))
+        {
+          sum += t[j + k + n - 1];
+          count+=1;
+        }
+      }
+      if (j != (n - 1))
+      {
+        sum += t[j + 1 + k];
+        count+=1;
+        if (i != 0)
+        {
+          sum += t[j + k - n + 1];
+          count+=1;
+        }
+        if (i != (m - 1))
+        {
+          sum += t[j + k + n + 1];
+          count+=1;
+        }
+      }
+      if (i != 0)
+      {
+        sum += t[j + k - n];
+        count+=1;
+      }
+      if (i != (m - 1))
+      {
+        sum += t[j + k + n];
+        count+=1;
+      }
+    }
+    k += n
+  }
+  
 }
