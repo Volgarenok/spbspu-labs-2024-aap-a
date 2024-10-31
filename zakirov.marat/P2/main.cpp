@@ -1,5 +1,6 @@
 #include "FindingTylor.hpp"
 #include "CreatingTables.hpp"
+#include <iostream>
 
 int main()
 {
@@ -13,8 +14,8 @@ int main()
     return 1;
   }
 
-  const double kError = 0.001;
-  const double kStep = 0.05;
+  constexpr double kError = 0.001;
+  constexpr double kStep = 0.05;
 
   if ((left <= -1) || (right >= 1) || (left > right))
   {

@@ -1,7 +1,10 @@
 #include "CreatingTables.hpp"
 #include "FindingTylor.hpp"
+#include <cstddef>
+#include <iostream>
+#include <iomanip>
 
-void zakirov::tylor_string(double point, size_t addition_depth, const double kError)
+void zakirov::tylor_string(double point, size_t addition_depth, const double &kError)
 {
 
   std::cout << std::setw(10) << point << " ";
@@ -11,7 +14,7 @@ void zakirov::tylor_string(double point, size_t addition_depth, const double kEr
     double find_point = zakirov::find_atanh(point, addition_depth, kError);
     std::cout << std::setw(12) << find_point << " ";
   }
-  catch(const std::logic_error &e)
+  catch (const std::logic_error &e)
   {
     std::cout << std::setw(12) << "<MATH_ERROR>" << " ";
   }
@@ -22,7 +25,7 @@ void zakirov::tylor_string(double point, size_t addition_depth, const double kEr
 
 
 void zakirov::tylor_table(double left, double right, size_t addition_depth,
-const double kStep, const double kError)
+    const double &kStep, const double &kError)
 {
   for (double i = left; i < right; i += kStep)
   {

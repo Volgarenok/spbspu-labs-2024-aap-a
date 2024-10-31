@@ -1,8 +1,5 @@
 #ifndef FINDINGTYLOR_HPP
 #define FINDINGTYLOR_HPP
-#include <cstddef>
-#include <stdexcept>
-#include <cmath>
 
 namespace zakirov
 {
