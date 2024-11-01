@@ -18,7 +18,6 @@ int main()
     std::cerr << "Incorrect interval\n";
     return 1;
   }
-  bool flag = false;
   for (double i = start; i < finish; i += step)
   {
     if (std::abs(i) < error)
