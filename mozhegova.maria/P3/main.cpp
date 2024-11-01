@@ -1,4 +1,5 @@
 #include <iostream>
+#include "matrix.hpp"
 
 int main(int argc, char ** argv)
 {
@@ -22,4 +23,17 @@ int main(int argc, char ** argv)
     std::cerr << "First parameter is not a number\n";
     return 1;
   }
+
+  size_t m = 0, n = 0;
+  int ** t = nullptr;
+  try
+  {
+    t = mozhegova::createMatrix(m, n);
+  }
+  catch(const std::bad_alloc & e)
+  {
+    std::cerr << "Out of memory\n";
+    return 2;
+  }
+  
 }
