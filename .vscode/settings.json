@@ -1,0 +1,9 @@
+{
+  "makefile.launchConfigurations": [
+    {
+      "cwd": "/home/danil/spbspu-labs-2024-aap-a/out/tkach.danil/P2",
+      "binaryPath": "/home/danil/spbspu-labs-2024-aap-a/out/tkach.danil/P2/lab",
+      "binaryArgs": []
+    }
+  ]
+}
