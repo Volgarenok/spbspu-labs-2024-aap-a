@@ -1,4 +1,6 @@
 #include <cstddef>
+#include <cstring>
+#include <fstream>
 #include <iostream>
 int main(int argc, char** argv)
 {
@@ -21,9 +23,13 @@ int main(int argc, char** argv)
     std::cerr << "Not enough arguments\n";
     return 1;
   }
-  if (argc > 4)
+  else if (argc > 4)
   {
     std::cerr << "To many arguments\n";
   }
+  char* inFile = argv[2];
+  std::ifstream input(inFile);
+  char* outFile = argv[3];
+  std::ofstream output(outFile);
 }
 
