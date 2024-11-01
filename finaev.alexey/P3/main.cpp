@@ -49,23 +49,24 @@ int main(int argc, char ** argv)
   if (num == 1)
   {
     int matrix[10000];
-    if(!input_matrix(std::cin, matrix, size_matrix))
+    if(!input_matrix(input, matrix, size_matrix))
     {
       std::cerr << "Fail input" << "\n";
       return 2;
     }
-    output_matrix(std::cout, matrix, strk, stl);
+    output_matrix(output, matrix, strk, stl);
   }
-  if (num == 2)
+  else
   {
     int *dynamic_matrix = new int[size_matrix];
-    if(!input_matrix(std::cin, dynamic_matrix, size_matrix))
+    if(!input_matrix(input, dynamic_matrix, size_matrix))
     {
       delete[] dynamic_matrix;
       std::cerr << "Fail input" << "\n";
       return 2;
     }
-    output_matrix(std::cout, dynamic_matrix, strk, stl);
+    output_matrix(output, dynamic_matrix, strk, stl);
     delete[] dynamic_matrix;
   }
+  return 0;
 }
