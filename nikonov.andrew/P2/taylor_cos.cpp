@@ -9,7 +9,7 @@ double nikonov::cos(double x, size_t numberMax, double absError)
   for (size_t i = 1; i < numberMax; i++)
   {
     next *= (x * x) / ((2 * i + 1) * (2 * i + 2));
-    result += (i % 2 == 0 ? next : next * -1);
+    result += (i % 2? next : next * -1);
   }
   if (std::abs(next) > absError)
   {
