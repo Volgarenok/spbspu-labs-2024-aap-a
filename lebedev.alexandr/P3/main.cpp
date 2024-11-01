@@ -33,12 +33,7 @@ int main(int argc, char** argv)
   std::ifstream inputFile(argv[2]);
   size_t m = 0, n = 0;
   inputFile >> m >> n;
-  if (!inputFile)
-  {
-    std::cerr << "Incorrect data in the file!\n";
-    return 2;
-  }
-  if (n != m)
+  if (!inputFile || n != m)
   {
     std::cerr << "Incorrect dimensions of the matrix!\n";
     return 2;
