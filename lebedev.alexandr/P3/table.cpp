@@ -13,3 +13,17 @@ bool isNumbers(char* t)
   }
   return true;
 }
+
+void inputTable(std::istream& inputFile, int* arr, size_t size)
+{
+
+}
+
+void outputTable(std::ostream& outputFile, int* arr, size_t size)
+{
+  outputFile << arr[0];
+  for (size_t i = 1; i < size; ++i)
+  {
+    outputFile << ' ' << arr[i];
+  }
+}
