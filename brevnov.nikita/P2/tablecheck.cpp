@@ -16,7 +16,7 @@ void brevnov::tablecheck(double i, const size_t k, const double error)
   {
     std::cout << std::fixed << std::setw(snd) << brevnov::f(i,k,error);
   }
-  catch (std::logic_error & e)
+  catch (const std::logic_error & e)
   {
     std::cout << std::setw(snd) << "<MATH ERROR>";
   }
