@@ -1,6 +1,6 @@
 #ifndef SINH_TAYLOR_CALCULATOR_H
 #define SINH_TAYLOR_CALCULATOR_H
-#include <cmath>
+#include <cstddef>
 
 namespace kushekbaev
 {

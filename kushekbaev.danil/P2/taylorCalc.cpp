@@ -1,7 +1,8 @@
 #include "sinh_taylor_calculator.hpp"
 #include <stdexcept>
+#include <cmath>
 
-double kushekbaev::sinhCalc(double x, double error)
+double kushekbaev::taylorCalc(double x, double error)
 {
   double next = x;
   double result = next;
