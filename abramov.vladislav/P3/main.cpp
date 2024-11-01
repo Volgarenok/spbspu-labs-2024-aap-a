@@ -26,11 +26,12 @@ int main(int argc, char **argv)
   size_t m = 0;
   size_t n = 0;
   size_t read = 0;
+  size_t count = 0;
   if (atoi(argv[1]) == 1)
   {
     input >> m >> n;
     abramov::input_matrix(input, nums, m, n, read);
-    abramov::output_matrix(output, nums, m, n);
+    abramov::output_matrix(output, abramov::toSquare(nums, m, n, count), count);
   }
   else if (atoi(argv[2]) == 2)
   {
@@ -46,6 +47,6 @@ int main(int argc, char **argv)
       return 2;
     }
     abramov::input_matrix(input, matrix, m, n, read);
-    abramov::output_matrix(output, matrix, m, n);
+    abramov::output_matrix(output, abramov::toSquare(matrix, m, n, count), count);
   }
 }
