@@ -41,13 +41,13 @@ int main(int argc, char** argv)
   }
 
   std::ofstream outputFile(argv[3]);
+  const size_t size = (m * n);
+
   if (num == 1)
   {
-    const size_t size = (m * n);
-    size_t c = 0;
     int arr[size];
 
-    if(!inputTable(inputFile, arr, m))
+    if(!inputTable(inputFile, arr, size))
     {
       std::cerr << "Incorrect data in the file!\n";
       return 2;
@@ -55,6 +55,21 @@ int main(int argc, char** argv)
 
     outputTable(outputFile, arr, m);
     outputFile << '\n';
+  }
+  else
+  {
+    int* arr = new int[size];
+
+    if (!inputTable(inputFile, arr, size))
+    {
+      std::cerr << "Incorrect data in the file!\n";
+      delete[] arr;
+      return 2;
+    }
+
+    outputTable(outputFile, arr, m);
+    outputFile << '\n';
+    delete[] arr;
   }
   return 0;
 }

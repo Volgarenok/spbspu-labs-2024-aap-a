@@ -38,7 +38,7 @@ void outputTable(std::ostream& outputFile, int* arr, size_t m)
       }
     }
   }
-  if (flag)
+  if (flag && m > 1)
   {
     outputFile << "true";
   }
