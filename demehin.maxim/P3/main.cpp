@@ -24,6 +24,7 @@ int main(int argc, char** argv)
   size_t m = 0, n = 0, k = 0;
   input >> m >> n;
   k = m * n;
+  int* matrix = nullptr;
   try
   {
     matrix = demehin::alloc(k, c);
