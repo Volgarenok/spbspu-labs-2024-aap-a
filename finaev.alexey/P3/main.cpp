@@ -39,7 +39,7 @@ int main(int argc, char ** argv)
   size_t size_matrix = 0;
   std::ifstream input(argv[2]);
   input >> strk >> stl;
-  if (!input)
+  if (!input || stl < 3)
   {
     std::cerr << "Not a matrix" << "\n";
     return 2;
