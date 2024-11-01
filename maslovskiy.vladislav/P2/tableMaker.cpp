@@ -22,7 +22,7 @@ void tableOut(double num, size_t k, double error)
     std::cout << " ";
     standartiseOut(std::cos(num));
   }
-  catch(const std::logic_error& e)
+  catch (const std::logic_error& e)
   {
     std::cerr << e.what() << '\n';
   }
