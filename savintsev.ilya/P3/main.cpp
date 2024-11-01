@@ -3,7 +3,7 @@
 #include "mymath.h"
 #include "matrix.h"
 
-int main(int argc, char** argv)
+int main(int argc, char ** argv)
 {
   if (argc != 4)
   {
@@ -48,10 +48,7 @@ int main(int argc, char** argv)
       return 2;
     }
     savintsev::transformMtx(table, m, n);
-    if (m * n != 0)
-    {
-      outputStream << ' ';
-    }
+    outputStream << (m * n == 0 ? "" : " ");
     savintsev::outputMtx(outputStream, table, m, n);
     break;
   }
@@ -65,10 +62,7 @@ int main(int argc, char** argv)
       return 2;
     }
     savintsev::transformMtx(table, m, n);
-    if (m * n != 0)
-    {
-      outputStream << ' ';
-    }
+    outputStream << (m * n == 0 ? "" : " ");
     savintsev::outputMtx(outputStream, table, m, n);
     delete[] table;
     break;

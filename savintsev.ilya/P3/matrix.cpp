@@ -3,7 +3,7 @@
 
 namespace savintsev
 {
-  std::istream& inputMtx(std::istream& in, int* t, size_t m, size_t n, size_t& count)
+  std::istream & inputMtx(std::istream & in, int * t, size_t m, size_t n, size_t & count)
   {
     for (size_t i = 0; i < (m * n); ++i)
     {
@@ -13,19 +13,19 @@ namespace savintsev
     return in;
   }
 
-  void outputMtx(std::ostream& out, int* t, size_t m, size_t n)
+  void outputMtx(std::ostream & out, int * t, size_t m, size_t n)
   {
+    for (size_t i = 0; (i + 1) < (m * n); ++i)
+    {
+      out << t[i] << ' ';
+    }
     if (m * n != 0)
     {
-      for (size_t i = 0; (i + 1) < (m * n); ++i)
-      {
-        out << t[i] << ' ';
-      }
       out << t[m * n - 1];
     }
   }
 
-  void transformMtx(int* t, size_t m, size_t n)
+  void transformMtx(int * t, size_t m, size_t n)
   {
     size_t mMid = m / 2 + m % 2;
     size_t nMid = n / 2 + n % 2;
