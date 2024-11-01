@@ -37,9 +37,9 @@ int main()
   constexpr double step = 0.05;
   const char * errormsg = "<MATH ERROR>";
   const size_t second_column_width = std::strlen(errormsg);
-  const size_t others_columns = 10;
+  constexpr size_t others_columns = 10;
   const size_t snd = second_column_width;
-  const size_t oth = others_columns;
+  constexpr size_t oth = others_columns;
 
   for (auto i = first_member ; i < last_member; i += step)
   {
