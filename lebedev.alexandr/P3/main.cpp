@@ -40,7 +40,7 @@ int main(int argc, char** argv)
   }
   if (n != m)
   {
-    std::cerr << "Incorrect dimentions of the matrix!\n";
+    std::cerr << "Incorrect dimensions of the matrix!\n";
     return 2;
   }
 
