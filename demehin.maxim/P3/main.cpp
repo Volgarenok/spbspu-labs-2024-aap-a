@@ -3,13 +3,13 @@
 
 int main(int argc, char** argv)
 {
-  int k = argc;
-  std::cout << argv[1] << "\n";
+  int l = argc;
+
   std::ifstream input(argv[1]);
-  int a = 0;
-  input >> a;
-  std::cout << a << "\n";
-  std::cout << k << "\n";
+  int m = 0, n = 0, k = 0;
+  input >> m >> n;
+  k = m * n;
+  std::cout << l << "\n";
 }
 
 
