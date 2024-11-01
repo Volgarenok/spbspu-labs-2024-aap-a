@@ -14,16 +14,36 @@ bool isNumbers(char* t)
   return true;
 }
 
-void inputTable(std::istream& inputFile, int* arr, size_t size)
+std::istream& inputTable(std::istream& inputFile, int* arr, size_t size)
 {
-
+  for (size_t i = 0; i < size; ++i)
+  {
+    inputFile >> arr[i];
+  }
+  return inputFile;
 }
 
-void outputTable(std::ostream& outputFile, int* arr, size_t size)
+void outputTable(std::ostream& outputFile, int* arr, size_t m)
 {
-  outputFile << arr[0];
-  for (size_t i = 1; i < size; ++i)
+  size_t size = m * m;
+  bool flag = true;
+  for (size_t i = 0; i < m; ++i)
   {
-    outputFile << ' ' << arr[i];
+    for (size_t j = i + 1; j < m; ++j)
+    {
+      if (arr[i * m + j] != 0)
+      {
+        flag = false;
+        break;
+      }
+    }
+  }
+  if (flag)
+  {
+    outputFile << "true";
+  }
+  else
+  {
+    outputFile << "false";
   }
 }

@@ -3,6 +3,6 @@
 #include <fstream>
 
 bool isNumbers(char* t);
-void inputTable(std::istream& inputFile, int* arr, size_t size);
-void outputTable(std::ostream& outputFile, int* arr, size_t size);
+std::istream& inputTable(std::istream& inputFile, int* arr, size_t size);
+void outputTable(std::ostream& outputFile, int* arr, size_t m);
 #endif
