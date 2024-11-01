@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 
-double maslovskiy::teilorCos(const double x, const size_t k, const double error)
+double maslovskiy::teilorCos(double x, size_t k, double error)
 {
   double next = 1;
   double res = next;

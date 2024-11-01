@@ -8,7 +8,8 @@ int main()
   double left = 0, right = 0;
   size_t k = 0;
   std::cin >> left >> right >> k;
-  const double error = default_error;
+  constexpr double error = 0.001;
+  constexpr double step = 0.05;
   if (!std::cin)
   {
     std::cerr << "Bad input" << "\n";
@@ -25,7 +26,7 @@ int main()
     return 1;
   }
 
-  tableMaker(left, right, 0.05, k, error);
+  tableMaker(left, right, step, k, error);
   std::cout << "\n";
 }
 

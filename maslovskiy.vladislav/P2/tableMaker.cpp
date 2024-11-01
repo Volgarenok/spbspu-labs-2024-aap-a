@@ -4,12 +4,12 @@
 #include <stdexcept>
 #include <iomanip>
 
-void standartiseOut(const double num)
+void standartiseOut(double num)
 {
   std::cout << std::fixed << std::setprecision(6) << std::setw(10) << num;
 }
 
-void tableOut(const double num, const size_t k, const double error)
+void tableOut(double num, size_t k, double error)
 {
   try
   {
@@ -27,7 +27,7 @@ void tableOut(const double num, const size_t k, const double error)
   }
 }
 
-void maslovskiy::tableMaker(const double left, const double right, const double step, const size_t k, const double error)
+void maslovskiy::tableMaker(double left, double right, double step, size_t k, double error)
 {
   for (double i = left; i < right; i += step)
   {

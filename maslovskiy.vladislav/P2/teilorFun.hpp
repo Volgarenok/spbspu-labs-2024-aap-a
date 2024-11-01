@@ -5,8 +5,7 @@
 
 namespace maslovskiy
 {
-  constexpr double default_error = 0.001;
-  double teilorCos(const double x, const size_t k, const double error);
+  double teilorCos(double x, size_t k, double error);
 }
 
 #endif
