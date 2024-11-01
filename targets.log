@@ -1,0 +1,5007 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 4.3
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Wed Oct 23 09:42:42 2024
+
+# Variables
+
+# environment
+GDK_BACKEND = x11
+# environment
+MEMORY_PRESSURE_WRITE = c29tZSAyMDAwMDAgMjAwMDAwMAA=
+# environment
+LC_ALL = C
+# environment
+GNOME_SHELL_SESSION_MODE = ubuntu
+# makefile (from 'Makefile', line 7)
+BOOST_LOCATION := 
+# makefile (from 'Makefile', line 51)
+common_include = $(if $(wildcard $(call student,$(1))/common),-I$(call student,$(1))/common -I$(call student,$(1))/common/include)
+# environment
+SNAP_LAUNCHER_ARCH_TRIPLET = x86_64-linux-gnu
+# environment
+LC_NAME = ru_RU.UTF-8
+# environment
+LC_NUMERIC = ru_RU.UTF-8
+# environment
+VSCODE_CRASH_REPORTER_PROCESS_TYPE = extensionHost
+# environment
+VSCODE_CWD = /home/mash/spbspu-labs-2024-aap-a
+# environment
+LC_ADDRESS = ru_RU.UTF-8
+# default
+MAKE_COMMAND := make
+# makefile (from 'Makefile', line 32)
+labs := abramov.vladislav/P0  aleksandrov.igor/P0  alymova.ksenia/P0  averenkov.eugene/P0  balashov.dima/P0  belobrov.timofey/P0  brevnov.nikita/P0  cherkasov.nikita/P0  demehin.maxim/P0  dobsov.sergey/P0  dribas.sergey/P0    duhanina.alina/P0  evstyunichev.konstantin/P0  gavrilova.polina/P0  guseynov.guseyn/P0  hismatova.elizaveta/P0  karnauhova.alexandra/P0  kiselev.sergey/P0  kizhin.evgeniy/P0  komarova.anastasia/P0  krylov.matvey/P0  kushekbaev.danil/P0  lanovenko.ivan/P0  lebedev.alexandr/P0  maslevtsov.stanislav/P0  maslov.aleksey/P0  maslovskiy.vladislav/P0  mozhegova.maria/P0 mozhegova.maria/P2  nikonov.andrew/P0  petrov.nikita/P0  rychkov.mihail/P0  savintsev.ilya/P0  shabalin.dmitrij/P0  sharifullina.sofia/P0  shramko.maksim/P0  smirnov.alexandr/P0  sveshnikov.michail/P0    tkach.danil/P0  zakirov.marat/P0  zholobov.oleg/P0 
+# environment
+QT_ACCESSIBILITY = 1
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+SNAP_INSTANCE_NAME = code
+# makefile (from 'Makefile', line 31)
+students := abramov.vladislav aleksandrov.igor alymova.ksenia averenkov.eugene balashov.dima belobrov.timofey brevnov.nikita cherkasov.nikita demehin.maxim dobsov.sergey dribas.sergey dryrun.log duhanina.alina evstyunichev.konstantin gavrilova.polina guseynov.guseyn hismatova.elizaveta karnauhova.alexandra kiselev.sergey kizhin.evgeniy komarova.anastasia krylov.matvey kushekbaev.danil lanovenko.ivan lebedev.alexandr maslevtsov.stanislav maslov.aleksey maslovskiy.vladislav mozhegova.maria nikonov.andrew petrov.nikita rychkov.mihail savintsev.ilya shabalin.dmitrij sharifullina.sofia shramko.maksim smirnov.alexandr sveshnikov.michail targets.log tkach.danil zakirov.marat zholobov.oleg
+# environment
+GDK_PIXBUF_MODULEDIR = /snap/code/172/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# environment
+PWD = /home/mash/spbspu-labs-2024-aap-a
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+XDG_DATA_DIRS = /home/mash/snap/code/172/.local/share:/home/mash/snap/code/172:/snap/code/172/usr/share:/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# environment
+SNAP_EUID = 1000
+# environment
+OLDPWD = /home/mash
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_CODE_CACHE_PATH = /home/mash/.config/Code/CachedData/384ff7382de624fb94dbaf6da11977bba1ecd427
+# environment
+LANG = C
+# environment
+XAUTHORITY = /run/user/1000/.mutter-Xwaylandauth.AV35V2
+# default
+.LOADED := 
+# default
+.INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
+# environment
+MEMORY_PRESSURE_WATCH = /sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@wayland.service/memory.pressure
+# environment
+GNOME_TERMINAL_SERVICE = :1.118
+# makefile
+MAKEFLAGS = pqrR
+# makefile (from 'Makefile', line 34)
+student = $(word 1,$(subst /, ,$(1)))
+# makefile
+CURDIR := /home/mash/spbspu-labs-2024-aap-a
+# environment
+ 
+LESSOPEN = | /usr/bin/lesspipe %s
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MFLAGS = -pqrR
+# environment
+SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
+# default
+.SHELLFLAGS := -c
+# environment
+WAYLAND_DISPLAY = wayland-0
+# environment
+XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+XDG_SESSION_DESKTOP = ubuntu
+# makefile (from 'out/mozhegova.maria/P0/main.d', line 1)
+MAKEFILE_LIST := Makefile out/mozhegova.maria/P0/main.d
+# automatic
+@F = $(notdir $@)
+# makefile (from 'Makefile', line 10)
+hidecmd := @
+# environment
+VSCODE_PID = 3912
+# environment
+XDG_SESSION_TYPE = wayland
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+SESSION_MANAGER = local/ubunto:@/tmp/.ICE-unix/1950,unix/ubunto:/tmp/.ICE-unix/1950
+# automatic
+*F = $(notdir $*)
+# makefile (from 'Makefile', line 17)
+system := Linux
+# makefile (from 'Makefile', line 44)
+lab_test_objects = $(patsubst %.cpp,out/%.o,$(call lab_test_sources,$(1)) $(call lab_common_tests,$(call student,$(1))))
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1000/bus
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"userLocale":"ru","osLocale":"ru-ru","resolvedLanguage":"ru","defaultMessagesFile":"/snap/code/172/usr/share/code/resources/app/out/nls.messages.json","languagePack":{"translationsConfigFile":"/home/mash/.config/Code/clp/36285dfe29a2b6466921db94512945bf.ru/tcf.json","messagesFile":"/home/mash/.config/Code/clp/36285dfe29a2b6466921db94512945bf.ru/384ff7382de624fb94dbaf6da11977bba1ecd427/nls.messages.json","corruptMarkerFile":"/home/mash/.config/Code/clp/36285dfe29a2b6466921db94512945bf.ru/corrupted.info"},"locale":"ru","availableLanguages":{"*":"ru"},"_languagePackId":"36285dfe29a2b6466921db94512945bf.ru","_languagePackSupport":true,"_translationsConfigFile":"/home/mash/.config/Code/clp/36285dfe29a2b6466921db94512945bf.ru/tcf.json","_cacheRoot":"/home/mash/.config/Code/clp/36285dfe29a2b6466921db94512945bf.ru","_resolvedLanguagePackCoreLocation":"/home/mash/.config/Code/clp/36285dfe29a2b6466921db94512945bf.ru/384ff7382de624fb94dbaf6da11977bba1ecd427","_corruptedFile":"/home/mash/.config/Code/clp/36285dfe29a2b6466921db94512945bf.ru/corrupted.info"}
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# environment
+GTK_PATH = /snap/code/172/usr/lib/x86_64-linux-gnu/gtk-3.0
+# environment
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+# makefile
+SHELL = /bin/sh
+# default
+MAKECMDGOALS := all
+# environment
+XMODIFIERS = @im=ibus
+# makefile (from 'Makefile', line 47)
+objects := out/abramov.vladislav/P0/main.o out/aleksandrov.igor/P0/main.o out/alymova.ksenia/P0/main.o out/averenkov.eugene/P0/main.o out/balashov.dima/P0/main.o out/belobrov.timofey/P0/main.o out/brevnov.nikita/P0/main.o out/cherkasov.nikita/P0/main.o out/demehin.maxim/P0/main.o out/dobsov.sergey/P0/main.o out/dribas.sergey/P0/main.o out/duhanina.alina/P0/main.o out/evstyunichev.konstantin/P0/main.o out/gavrilova.polina/P0/main.o out/guseynov.guseyn/P0/main.o out/hismatova.elizaveta/P0/main.o out/karnauhova.alexandra/P0/main.o out/kiselev.sergey/P0/main.o out/kizhin.evgeniy/P0/main.o out/komarova.anastasia/P0/main.o out/krylov.matvey/P0/main.o out/kushekbaev.danil/P0/main.o out/lanovenko.ivan/P0/main.o out/lebedev.alexandr/P0/main.o out/maslevtsov.stanislav/P0/main.o out/maslov.aleksey/P0/main.o out/maslovskiy.vladislav/P0/main.o out/mozhegova.maria/P0/main.o out/mozhegova.maria/P2/main.o out/nikonov.andrew/P0/main.o out/petrov.nikita/P0/main.o out/rychkov.mihail/P0/main.o out/savintsev.ilya/P0/main.o out/shabalin.dmitrij/P0/main.o out/sharifullina.sofia/P0/main.o out/shramko.maksim/P0/main.o out/smirnov.alexandr/P0/main.o out/sveshnikov.michail/P0/main.o out/tkach.danil/P0/main.o out/zakirov.marat/P0/main.o out/zholobov.oleg/P0/main.o
+# environment
+SHLVL = 1
+# environment
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/0f448315_0526_4e76_8a29_ce7219e2160f
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+SNAP_COOKIE = O3kOP0eP-hTF1uxx7BWV02RqzFNQzugcVbSgupUMUJvSLhoYPrzJ
+# environment
+PATH = /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+# default
+MAKEFILES := 
+# environment
+LANGUAGE = ru_RU:en
+# environment
+LC_MONETARY = ru_RU.UTF-8
+# automatic
+^F = $(notdir $^)
+# makefile (from 'Makefile', line 45)
+lab_header_checks = $(addprefix out/,$(addsuffix .header,$(call lab_headers,$(1)) $(call lab_common_headers,$(call student,$(1)))))
+# makefile (from 'Makefile', line 48)
+test_objects := 
+# environment
+SNAP_USER_COMMON = /home/mash/snap/code/common
+# makefile (from 'Makefile', line 39)
+lab_common_sources = $(if $(wildcard $(1)/common),$(filter-out $(1)/common/test-%.cpp,$(wildcard $(1)/common/*.cpp)))
+# environment
+LC_TIME = ru_RU.UTF-8
+# environment
+SNAP = /snap/code/172
+# environment
+SNAP_REVISION = 172
+# environment
+SNAP_REAL_HOME = /home/mash
+# makefile (from 'Makefile', line 41)
+lab_common_headers = $(if $(wildcard $(1)/common),$(wildcard $(1)/common/*.h) $(wildcard $(1)/common/*.hpp) $(wildcard $(1)/common/*.hxx))
+# environment
+USERNAME = mash
+# environment
+GNOME_SETUP_DISPLAY = :1
+# environment
+LC_TELEPHONE = ru_RU.UTF-8
+# environment
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# automatic
+?F = $(notdir $?)
+# makefile (from 'Makefile', line 43)
+lab_objects = $(patsubst %.cpp,out/%.o,$(call lab_sources,$(1)) $(call lab_common_sources,$(call student,$(1))))
+# environment
+GTK_IM_MODULE_FILE = /home/mash/snap/code/common/.cache/immodules/immodules.cache
+# makefile (from 'Makefile', line 49)
+header_checks := 
+# environment
+XDG_CURRENT_DESKTOP = Unity
+# makefile (from 'Makefile', line 28)
+TIMEOUT_CMD := timeout
+# environment
+LS_COLORS = rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:
+# automatic
++F = $(notdir $+)
+# environment
+DESKTOP_SESSION = ubuntu
+# makefile (from 'Makefile', line 40)
+lab_common_tests = $(if $(wildcard $(1)/common),$(wildcard $(1)/common/test-*.cpp))
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
+# environment
+LOCPATH = /snap/code/172/usr/lib/locale
+# 'override' directive
+GNUMAKEFLAGS := 
+# makefile (from 'Makefile', line 36)
+lab_test_sources = $(wildcard $(1)/test-*.cpp)
+# environment
+XDG_DATA_DIRS_VSCODE_SNAP_ORIG = /usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# environment
+LOGNAME = mash
+# makefile (from 'Makefile', line 20)
+CPPFLAGS = -Wall -Wextra -Werror -Wno-missing-field-initializers -Werror=vla -Wold-style-cast $(if $(BOOST_LOCATION),-isystem $(BOOST_LOCATION)) -std=c++14
+# environment
+SNAP_ARCH = amd64
+# makefile
+.DEFAULT_GOAL := all
+# environment
+SYSTEMD_EXEC_PID = 1997
+# environment
+DISPLAY = :0
+# environment
+USER = mash
+# environment
+GTK_MODULES = gail:atk-bridge
+# default
+MAKE_VERSION := 4.3
+# 'override' directive
+.SHELLSTATUS := 0
+# environment
+SNAP_DATA = /var/snap/code/172
+# environment
+SNAP_CONTEXT = O3kOP0eP-hTF1uxx7BWV02RqzFNQzugcVbSgupUMUJvSLhoYPrzJ
+# environment
+DEBUGINFOD_URLS = https://debuginfod.ubuntu.com 
+# environment
+LC_MEASUREMENT = ru_RU.UTF-8
+# environment
+LC_PAPER = ru_RU.UTF-8
+# environment
+XDG_RUNTIME_DIR = /run/user/1000
+# environment
+SNAP_UID = 1000
+# environment
+COLORTERM = truecolor
+# environment
+XDG_CONFIG_DIRS_VSCODE_SNAP_ORIG = /etc/xdg/xdg-ubuntu:/etc/xdg
+# environment
+GDK_PIXBUF_MODULE_FILE = /home/mash/snap/code/common/.cache/gdk-pixbuf-loaders.cache
+# environment
+GIO_MODULE_DIR = /home/mash/snap/code/common/.cache/gio-modules
+# environment
+XDG_SESSION_CLASS = user
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+GSM_SKIP_SSH_AGENT_WORKAROUND = true
+# environment
+HOME = /home/mash
+# environment
+QT_IM_MODULE = ibus
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+VSCODE_IPC_HOOK = /run/user/1000/vscode-ab1fcbca-1.94-main.sock
+# environment
+TERM = xterm-256color
+# environment
+GTK_EXE_PREFIX = /snap/code/172/usr
+# environment
+SNAP_NAME = code
+# environment
+GSETTINGS_SCHEMA_DIR = /home/mash/snap/code/172/.local/share/glib-2.0/schemas
+# environment
+IM_CONFIG_PHASE = 1
+# environment
+PAPERSIZE = a4
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# environment
+SNAP_VERSION = 384ff738
+# default
+SUFFIXES := 
+# environment
+VSCODE_CLI = 1
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# makefile (from 'Makefile', line 38)
+lab_headers = $(wildcard $(1)/*.h) $(wildcard $(1)/*.hpp) $(wildcard $(1)/*.hxx)
+# environment
+VTE_VERSION = 7600
+# environment
+SNAP_COMMON = /var/snap/code/common
+# makefile (from 'Makefile', line 15)
+CXXFLAGS = -g
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# environment
+SNAP_USER_DATA = /home/mash/snap/code/172
+# environment
+XDG_MENU_PREFIX = gnome-
+# makefile (from 'Makefile', line 37)
+lab_sources = $(filter-out $(1)/test-%,$(wildcard $(1)/*.cpp))
+# environment
+GDMSESSION = ubuntu
+# environment
+LC_IDENTIFICATION = ru_RU.UTF-8
+# environment
+SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
+# variable set hash-table stats:
+# Load=157/1024=15%, Rehash=0, Collisions=429/1942=22%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# lanovenko.ivan (device 2050, inode 657443): 3 files, no impossibilities.
+# dribas.sergey/P0 (device 2050, inode 657287): 3 files, no impossibilities.
+# balashov.dima (device 2050, inode 657271): 3 files, no impossibilities.
+# hismatova.elizaveta (device 2050, inode 657366): 3 files, no impossibilities.
+# out/averenkov.eugene/P0: could not be stat'd.
+# guseynov.guseyn/P0 (device 2050, inode 657300): 3 files, no impossibilities.
+# out/demehin.maxim/P0: could not be stat'd.
+# out/shabalin.dmitrij/P0: could not be stat'd.
+# kiselev.sergey/P0 (device 2050, inode 657429): 3 files, no impossibilities.
+# out/komarova.anastasia/P0: could not be stat'd.
+# out/balashov.dima/P0: could not be stat'd.
+# dobsov.sergey (device 2050, inode 572025): 3 files, no impossibilities.
+# tkach.danil (device 2050, inode 657482): 3 files, no impossibilities.
+# out/rychkov.mihail/P0: could not be stat'd.
+# out/kushekbaev.danil/P0: could not be stat'd.
+# zholobov.oleg (device 2050, inode 657488): 3 files, no impossibilities.
+# out/abramov.vladislav/P0: could not be stat'd.
+# aleksandrov.igor (device 2050, inode 657262): 3 files, no impossibilities.
+# out/gavrilova.polina/P0: could not be stat'd.
+# maslov.aleksey (device 2050, inode 573554): 3 files, no impossibilities.
+# karnauhova.alexandra (device 2050, inode 657425): 3 files, no impossibilities.
+# averenkov.eugene/P0 (device 2050, inode 657269): 3 files, no impossibilities.
+# maslevtsov.stanislav/P0 (device 2050, inode 657450): 3 files, no impossibilities.
+# demehin.maxim (device 2050, inode 657283): 3 files, no impossibilities.
+# out/kiselev.sergey/P0: could not be stat'd.
+# evstyunichev.konstantin (device 2050, inode 657292): 3 files, no impossibilities.
+# out/sveshnikov.michail/P0: could not be stat'd.
+# out/tkach.danil/P0: could not be stat'd.
+ 
+# out/belobrov.timofey/P0: could not be stat'd.
+# lebedev.alexandr (device 2050, inode 657446): 3 files, no impossibilities.
+# kizhin.evgeniy/P0 (device 2050, inode 657432): 3 files, no impossibilities.
+# sharifullina.sofia/P0 (device 2050, inode 657471): 3 files, no impossibilities.
+# targets.log (device 2050, inode 533673): could not be opened.
+# evstyunichev.konstantin/P0 (device 2050, inode 657293): 3 files, no impossibilities.
+# out/maslov.aleksey/P0: could not be stat'd.
+# komarova.anastasia/P0 (device 2050, inode 657435): 3 files, no impossibilities.
+# out/zakirov.marat/P0: could not be stat'd.
+# belobrov.timofey/P0 (device 2050, inode 657275): 3 files, no impossibilities.
+# cherkasov.nikita/P0 (device 2050, inode 657281): 3 files, no impossibilities.
+# smirnov.alexandr/P0 (device 2050, inode 657477): 3 files, no impossibilities.
+# out/duhanina.alina/P0: could not be stat'd.
+# duhanina.alina (device 2050, inode 657289): 3 files, no impossibilities.
+# komarova.anastasia (device 2050, inode 657434): 3 files, no impossibilities.
+# petrov.nikita (device 2050, inode 657461): 3 files, no impossibilities.
+# out/zholobov.oleg/P0: could not be stat'd.
+# demehin.maxim/P0 (device 2050, inode 657284): 3 files, no impossibilities.
+# dribas.sergey (device 2050, inode 657286): 3 files, no impossibilities.
+# maslevtsov.stanislav (device 2050, inode 657449): 3 files, no impossibilities.
+# out/dobsov.sergey/P0: could not be stat'd.
+# kushekbaev.danil (device 2050, inode 657440): 3 files, no impossibilities.
+# krylov.matvey/P0 (device 2050, inode 657438): 3 files, no impossibilities.
+# out/krylov.matvey/P0: could not be stat'd.
+# kizhin.evgeniy (device 2050, inode 657431): 3 files, no impossibilities.
+# balashov.dima/P0 (device 2050, inode 657272): 3 files, no impossibilities.
+# duhanina.alina/P0 (device 2050, inode 657290): 3 files, no impossibilities.
+# out/dribas.sergey/P0: could not be stat'd.
+# guseynov.guseyn (device 2050, inode 657298): 3 files, no impossibilities.
+# out/mozhegova.maria/P2: could not be stat'd.
+# kushekbaev.danil/P0 (device 2050, inode 657441): 3 files, no impossibilities.
+# gavrilova.polina/P0 (device 2050, inode 657296): 3 files, no impossibilities.
+# out/maslovskiy.vladislav/P0: could not be stat'd.
+# . (device 2050, inode 567991): 51 files, no impossibilities.
+# maslovskiy.vladislav (device 2050, inode 657452): 3 files, no impossibilities.
+# out/sharifullina.sofia/P0: could not be stat'd.
+# kiselev.sergey (device 2050, inode 657428): 3 files, no impossibilities.
+# out/petrov.nikita/P0: could not be stat'd.
+# petrov.nikita/P0 (device 2050, inode 657462): 3 files, no impossibilities.
+# brevnov.nikita (device 2050, inode 657277): 3 files, no impossibilities.
+# dobsov.sergey/P0 (device 2050, inode 572026): 3 files, no impossibilities.
+# out/guseynov.guseyn/P0: could not be stat'd.
+# abramov.vladislav (device 2050, inode 656992): 3 files, no impossibilities.
+# cherkasov.nikita (device 2050, inode 657280): 3 files, no impossibilities.
+# gavrilova.polina (device 2050, inode 657295): 3 files, no impossibilities.
+# brevnov.nikita/P0 (device 2050, inode 657278): 3 files, no impossibilities.
+# out/kizhin.evgeniy/P0: could not be stat'd.
+# out/maslevtsov.stanislav/P0: could not be stat'd.
+# out/nikonov.andrew/P0: could not be stat'd.
+# zakirov.marat (device 2050, inode 657485): 3 files, no impossibilities.
+# aleksandrov.igor/P0 (device 2050, inode 657263): 3 files, no impossibilities.
+# out/hismatova.elizaveta/P0: could not be stat'd.
+# out/cherkasov.nikita/P0: could not be stat'd.
+# out/savintsev.ilya/P0: could not be stat'd.
+# krylov.matvey (device 2050, inode 657437): 3 files, no impossibilities.
+# dryrun.log (device 2050, inode 533382): could not be opened.
+# tkach.danil/P0 (device 2050, inode 657483): 3 files, no impossibilities.
+# sveshnikov.michail/P0 (device 2050, inode 657480): 3 files, no impossibilities.
+# mozhegova.maria (device 2050, inode 657455): 4 files, no impossibilities.
+# savintsev.ilya (device 2050, inode 573557): 3 files, no impossibilities.
+# zakirov.marat/P0 (device 2050, inode 657486): 3 files, no impossibilities.
+# smirnov.alexandr (device 2050, inode 657476): 3 files, no impossibilities.
+# karnauhova.alexandra/P0 (device 2050, inode 657426): 3 files, no impossibilities.
+# shramko.maksim (device 2050, inode 657473): 3 files, no impossibilities.
+# alymova.ksenia/P0 (device 2050, inode 657266): 3 files, no impossibilities.
+# out/lebedev.alexandr/P0: could not be stat'd.
+# out/evstyunichev.konstantin/P0: could not be stat'd.
+# averenkov.eugene (device 2050, inode 657268): 3 files, no impossibilities.
+# lanovenko.ivan/P0 (device 2050, inode 657444): 3 files, no impossibilities.
+# sharifullina.sofia (device 2050, inode 657470): 3 files, no impossibilities.
+# mozhegova.maria/P2 (device 2050, inode 657493): 3 files, no impossibilities.
+# out/lanovenko.ivan/P0: could not be stat'd.
+# alymova.ksenia (device 2050, inode 657265): 3 files, no impossibilities.
+# shramko.maksim/P0 (device 2050, inode 657474): 3 files, no impossibilities.
+# nikonov.andrew/P0 (device 2050, inode 657459): 3 files, no impossibilities.
+# belobrov.timofey (device 2050, inode 657274): 3 files, no impossibilities.
+# rychkov.mihail (device 2050, inode 657464): 3 files, no impossibilities.
+# rychkov.mihail/P0 (device 2050, inode 657465): 3 files, no impossibilities.
+# out/aleksandrov.igor/P0: could not be stat'd.
+# abramov.vladislav/P0 (device 2050, inode 657250): 3 files, no impossibilities.
+# sveshnikov.michail (device 2050, inode 657479): 3 files, no impossibilities.
+# mozhegova.maria/P0 (device 2050, inode 657456): 3 files, no impossibilities.
+# zholobov.oleg/P0 (device 2050, inode 657489): 3 files, no impossibilities.
+# out/mozhegova.maria/P0 (device 2050, inode 572045): No files, no impossibilities so far.
+# hismatova.elizaveta/P0 (device 2050, inode 657421): 3 files, no impossibilities.
+# savintsev.ilya/P0 (device 2050, inode 573558): 3 files, no impossibilities.
+# shabalin.dmitrij/P0 (device 2050, inode 657468): 3 files, no impossibilities.
+# out/karnauhova.alexandra/P0: could not be stat'd.
+# out/smirnov.alexandr/P0: could not be stat'd.
+# shabalin.dmitrij (device 2050, inode 657467): 3 files, no impossibilities.
+# out/shramko.maksim/P0: could not be stat'd.
+# out/brevnov.nikita/P0: could not be stat'd.
+# out/alymova.ksenia/P0: could not be stat'd.
+# lebedev.alexandr/P0 (device 2050, inode 657447): 3 files, no impossibilities.
+# maslovskiy.vladislav/P0 (device 2050, inode 657453): 3 files, no impossibilities.
+# maslov.aleksey/P0 (device 2050, inode 573555): 3 files, no impossibilities.
+# nikonov.andrew (device 2050, inode 657458): 3 files, no impossibilities.
+
+# 295 files, no impossibilities in 125 directories.
+
+# Implicit Rules
+
+out/%/lab: $(call lab_objects,%) $(call lab_header_checks,%) | $(@D)/.dir
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/%/test-lab: $(call lab_test_objects,%) $(call lab_objects,%) | $(@D)/.dir
+#  recipe to execute (from 'Makefile', line 75):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/test-lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %/main.o,$^)
+
+%/.dir:
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# 3 implicit rules, 0 (0.0%) terminal.
+# Files
+
+build-nikonov.andrew/P0: out/nikonov.andrew/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'nikonov.andrew/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+build-mozhegova.maria/P2: out/mozhegova.maria/P2/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'mozhegova.maria/P2'
+#  File is an intermediate prerequisite.
+ 
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+out/maslevtsov.stanislav/P0/lab: out/maslevtsov.stanislav/P0/main.o | out/maslevtsov.stanislav/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'maslevtsov.stanislav/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/maslevtsov.stanislav/P0/lab
+# automatic
+# * := maslevtsov.stanislav/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/aleksandrov.igor/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/aleksandrov.igor/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+out/dribas.sergey/P0/main.o: dribas.sergey/P0/main.cpp | out/dribas.sergey/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'dribas.sergey/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/dribas.sergey/P0/main.o
+# automatic
+# * := dribas.sergey/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+# Not a target:
+nikonov.andrew/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.184147711
+#  File has not been updated.
+
+out/lebedev.alexandr/P0/main.o: lebedev.alexandr/P0/main.cpp | out/lebedev.alexandr/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'lebedev.alexandr/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/lebedev.alexandr/P0/main.o
+# automatic
+# * := lebedev.alexandr/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+# Not a target:
+out/aleksandrov.igor/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+test-shabalin.dmitrij/P0: out/shabalin.dmitrij/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'shabalin.dmitrij/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/karnauhova.alexandra/P0/lab: out/karnauhova.alexandra/P0/main.o | out/karnauhova.alexandra/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'karnauhova.alexandra/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/karnauhova.alexandra/P0/lab
+# automatic
+# * := karnauhova.alexandra/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/nikonov.andrew/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/nikonov.andrew/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+out/hismatova.elizaveta/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/hismatova.elizaveta/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+build-abramov.vladislav/P0: out/abramov.vladislav/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'abramov.vladislav/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/21=0%
+
+ 
+out/dribas.sergey/P0/lab: out/dribas.sergey/P0/main.o | out/dribas.sergey/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'dribas.sergey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/dribas.sergey/P0/lab
+# automatic
+# * := dribas.sergey/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+build-averenkov.eugene/P0: out/averenkov.eugene/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'averenkov.eugene/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+out/maslevtsov.stanislav/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/maslevtsov.stanislav/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+out/krylov.matvey/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/krylov.matvey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+run-kizhin.evgeniy/P0: out/kizhin.evgeniy/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'kizhin.evgeniy/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+run-sveshnikov.michail/P0: out/sveshnikov.michail/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'sveshnikov.michail/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+out/hismatova.elizaveta/P0/lab: out/hismatova.elizaveta/P0/main.o | out/hismatova.elizaveta/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'hismatova.elizaveta/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/hismatova.elizaveta/P0/lab
+# automatic
+# * := hismatova.elizaveta/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/petrov.nikita/P0/main.o: petrov.nikita/P0/main.cpp | out/petrov.nikita/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'petrov.nikita/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/petrov.nikita/P0/main.o
+# automatic
+# * := petrov.nikita/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+# Not a target:
+out/abramov.vladislav/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+build-lebedev.alexandr/P0: out/lebedev.alexandr/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'lebedev.alexandr/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+test-sharifullina.sofia/P0: out/sharifullina.sofia/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'sharifullina.sofia/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+build-aleksandrov.igor/P0: out/aleksandrov.igor/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'aleksandrov.igor/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+out/averenkov.eugene/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/averenkov.eugene/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# Not a target:
+sveshnikov.michail/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.186147429
+#  File has not been updated.
+
+# Not a target:
+out/kiselev.sergey/P0/test-lab:
+#  Implicit rule search has not been done.
+ 
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/karnauhova.alexandra/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/karnauhova.alexandra/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+build-maslovskiy.vladislav/P0: out/maslovskiy.vladislav/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'maslovskiy.vladislav/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+out/evstyunichev.konstantin/P0/lab: out/evstyunichev.konstantin/P0/main.o | out/evstyunichev.konstantin/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'evstyunichev.konstantin/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/evstyunichev.konstantin/P0/lab
+# automatic
+# * := evstyunichev.konstantin/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+# Not a target:
+kizhin.evgeniy/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.181148135
+#  File has not been updated.
+
+run-evstyunichev.konstantin/P0: out/evstyunichev.konstantin/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'evstyunichev.konstantin/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+out/dribas.sergey/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/dribas.sergey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+out/averenkov.eugene/P0/main.o: averenkov.eugene/P0/main.cpp | out/averenkov.eugene/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'averenkov.eugene/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/averenkov.eugene/P0/main.o
+# automatic
+# * := averenkov.eugene/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+run-krylov.matvey/P0: out/krylov.matvey/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'krylov.matvey/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+out/balashov.dima/P0/main.o: balashov.dima/P0/main.cpp | out/balashov.dima/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'balashov.dima/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/balashov.dima/P0/main.o
+# automatic
+# * := balashov.dima/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+run-savintsev.ilya/P0: out/savintsev.ilya/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'savintsev.ilya/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# Not a target:
+maslov.aleksey/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-16 18:15:08.729637638
+#  File has not been updated.
+
+# Not a target:
+balashov.dima/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.180148277
+#  File has not been updated.
+
+# Not a target:
+out/evstyunichev.konstantin/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+test-hismatova.elizaveta/P0: out/hismatova.elizaveta/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'hismatova.elizaveta/P0'
+ 
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/rychkov.mihail/P0/lab: out/rychkov.mihail/P0/main.o | out/rychkov.mihail/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'rychkov.mihail/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/rychkov.mihail/P0/lab
+# automatic
+# * := rychkov.mihail/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/abramov.vladislav/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/abramov.vladislav/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := out/abramov.vladislav/P0/.dir
+# automatic
+# * := out/abramov.vladislav/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/14=7%
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+out/komarova.anastasia/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/komarova.anastasia/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# Not a target:
+out/maslov.aleksey/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/sharifullina.sofia/P0/lab: out/sharifullina.sofia/P0/main.o | out/sharifullina.sofia/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'sharifullina.sofia/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/sharifullina.sofia/P0/lab
+# automatic
+# * := sharifullina.sofia/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+# Not a target:
+zholobov.oleg/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.186147429
+#  File has not been updated.
+
+# Not a target:
+averenkov.eugene/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.180148277
+#  File has not been updated.
+
+# Not a target:
+smirnov.alexandr/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.186147429
+#  File has not been updated.
+
+# Not a target:
+rychkov.mihail/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.184147711
+#  File has not been updated.
+
+# Not a target:
+out/sharifullina.sofia/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+run-rychkov.mihail/P0: out/rychkov.mihail/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'rychkov.mihail/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+test-belobrov.timofey/P0: out/belobrov.timofey/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'belobrov.timofey/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/zholobov.oleg/P0/main.o: zholobov.oleg/P0/main.cpp | out/zholobov.oleg/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'zholobov.oleg/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/zholobov.oleg/P0/main.o
+# automatic
+# * := zholobov.oleg/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+ 
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+out/smirnov.alexandr/P0/lab: out/smirnov.alexandr/P0/main.o | out/smirnov.alexandr/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'smirnov.alexandr/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/smirnov.alexandr/P0/lab
+# automatic
+# * := smirnov.alexandr/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+build-cherkasov.nikita/P0: out/cherkasov.nikita/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'cherkasov.nikita/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+# Not a target:
+out/krylov.matvey/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+aleksandrov.igor/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.179148418
+#  File has not been updated.
+
+out/dobsov.sergey/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/dobsov.sergey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# Not a target:
+out/alymova.ksenia/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/kiselev.sergey/P0/main.o: kiselev.sergey/P0/main.cpp | out/kiselev.sergey/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'kiselev.sergey/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/kiselev.sergey/P0/main.o
+# automatic
+# * := kiselev.sergey/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+out/zakirov.marat/P0/lab: out/zakirov.marat/P0/main.o | out/zakirov.marat/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'zakirov.marat/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/zakirov.marat/P0/lab
+# automatic
+# * := zakirov.marat/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+build-duhanina.alina/P0: out/duhanina.alina/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'duhanina.alina/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+test-abramov.vladislav/P0: out/abramov.vladislav/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'abramov.vladislav/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+run-hismatova.elizaveta/P0: out/hismatova.elizaveta/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'hismatova.elizaveta/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# Not a target:
+out/zholobov.oleg/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/mozhegova.maria/P0/lab: out/mozhegova.maria/P0/main.o | out/mozhegova.maria/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'mozhegova.maria/P0'
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-15 00:22:18.8475393
+#  File has not been updated.
+# automatic
+# @ := out/mozhegova.maria/P0/lab
+# automatic
+# * := mozhegova.maria/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+ 
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+# Not a target:
+karnauhova.alexandra/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.181148135
+#  File has not been updated.
+
+out/tkach.danil/P0/main.o: tkach.danil/P0/main.cpp | out/tkach.danil/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'tkach.danil/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/tkach.danil/P0/main.o
+# automatic
+# * := tkach.danil/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+run-petrov.nikita/P0: out/petrov.nikita/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'petrov.nikita/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# Not a target:
+out/maslevtsov.stanislav/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/komarova.anastasia/P0/main.o: komarova.anastasia/P0/main.cpp | out/komarova.anastasia/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'komarova.anastasia/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/komarova.anastasia/P0/main.o
+# automatic
+# * := komarova.anastasia/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+test-maslevtsov.stanislav/P0: out/maslevtsov.stanislav/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'maslevtsov.stanislav/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+run-maslovskiy.vladislav/P0: out/maslovskiy.vladislav/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'maslovskiy.vladislav/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# Not a target:
+mozhegova.maria/P0/main.cpp:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+out/mozhegova.maria/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+build-sveshnikov.michail/P0: out/sveshnikov.michail/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'sveshnikov.michail/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+# Not a target:
+shabalin.dmitrij/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.184147711
+#  File has not been updated.
+
+# Not a target:
+krylov.matvey/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.182147994
+#  File has not been updated.
+
+labs:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 56):
+	@echo $(labs)
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2024-10-14 23:29:09.218631973
+#  File has been updated.
+#  Successfully updated.
+
+ 
+build-savintsev.ilya/P0: out/savintsev.ilya/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'savintsev.ilya/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+build-krylov.matvey/P0: out/krylov.matvey/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'krylov.matvey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+test-kizhin.evgeniy/P0: out/kizhin.evgeniy/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'kizhin.evgeniy/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+test-dribas.sergey/P0: out/dribas.sergey/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'dribas.sergey/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+test-karnauhova.alexandra/P0: out/karnauhova.alexandra/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'karnauhova.alexandra/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/krylov.matvey/P0/lab: out/krylov.matvey/P0/main.o | out/krylov.matvey/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'krylov.matvey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/krylov.matvey/P0/lab
+# automatic
+# * := krylov.matvey/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+test-demehin.maxim/P0: out/demehin.maxim/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'demehin.maxim/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/gavrilova.polina/P0/lab: out/gavrilova.polina/P0/main.o | out/gavrilova.polina/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'gavrilova.polina/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/gavrilova.polina/P0/lab
+# automatic
+# * := gavrilova.polina/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+test-maslovskiy.vladislav/P0: out/maslovskiy.vladislav/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'maslovskiy.vladislav/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/demehin.maxim/P0/lab: out/demehin.maxim/P0/main.o | out/demehin.maxim/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'demehin.maxim/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/demehin.maxim/P0/lab
+# automatic
+# * := demehin.maxim/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+run-lebedev.alexandr/P0: out/lebedev.alexandr/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'lebedev.alexandr/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+ 
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+test-kushekbaev.danil/P0: out/kushekbaev.danil/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'kushekbaev.danil/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/brevnov.nikita/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/brevnov.nikita/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# Not a target:
+out/mozhegova.maria/P0/main.d:
+#  Implicit rule search has been done.
+#  Last modified 2024-10-15 00:22:18.70051336
+#  File has been updated.
+#  Successfully updated.
+
+build-karnauhova.alexandra/P0: out/karnauhova.alexandra/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'karnauhova.alexandra/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+# Not a target:
+out/balashov.dima/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/aleksandrov.igor/P0/main.o: aleksandrov.igor/P0/main.cpp | out/aleksandrov.igor/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'aleksandrov.igor/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/aleksandrov.igor/P0/main.o
+# automatic
+# * := aleksandrov.igor/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+out/petrov.nikita/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/petrov.nikita/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+out/lanovenko.ivan/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/lanovenko.ivan/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# Not a target:
+cherkasov.nikita/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.180148277
+#  File has not been updated.
+
+run-mozhegova.maria/P2: out/mozhegova.maria/P2/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'mozhegova.maria/P2'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+build-balashov.dima/P0: out/balashov.dima/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'balashov.dima/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+build-belobrov.timofey/P0: out/belobrov.timofey/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'belobrov.timofey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+out/balashov.dima/P0/lab: out/balashov.dima/P0/main.o | out/balashov.dima/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'balashov.dima/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/balashov.dima/P0/lab
+# automatic
+# * := balashov.dima/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/duhanina.alina/P0/lab: out/duhanina.alina/P0/main.o | out/duhanina.alina/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'duhanina.alina/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/duhanina.alina/P0/lab
+# automatic
+# * := duhanina.alina/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/kushekbaev.danil/P0/main.o: kushekbaev.danil/P0/main.cpp | out/kushekbaev.danil/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'kushekbaev.danil/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/kushekbaev.danil/P0/main.o
+# automatic
+# * := kushekbaev.danil/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+test-nikonov.andrew/P0: out/nikonov.andrew/P0/test-lab
+#  Implicit rule search has not been done.
+ 
+#  Implicit/static pattern stem: 'nikonov.andrew/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+test-shramko.maksim/P0: out/shramko.maksim/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'shramko.maksim/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+# Not a target:
+demehin.maxim/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.180148277
+#  File has not been updated.
+
+out/shabalin.dmitrij/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/shabalin.dmitrij/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# Not a target:
+gavrilova.polina/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.181148135
+#  File has not been updated.
+
+run-brevnov.nikita/P0: out/brevnov.nikita/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'brevnov.nikita/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 62):
+	rm -rf out
+
+out/lanovenko.ivan/P0/lab: out/lanovenko.ivan/P0/main.o | out/lanovenko.ivan/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'lanovenko.ivan/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/lanovenko.ivan/P0/lab
+# automatic
+# * := lanovenko.ivan/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+run-balashov.dima/P0: out/balashov.dima/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'balashov.dima/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+test-mozhegova.maria/P2: out/mozhegova.maria/P2/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'mozhegova.maria/P2'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+build-dobsov.sergey/P0: out/dobsov.sergey/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'dobsov.sergey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+test-rychkov.mihail/P0: out/rychkov.mihail/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'rychkov.mihail/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/dobsov.sergey/P0/lab: out/dobsov.sergey/P0/main.o | out/dobsov.sergey/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'dobsov.sergey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/dobsov.sergey/P0/lab
+# automatic
+# * := dobsov.sergey/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+run-tkach.danil/P0: out/tkach.danil/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'tkach.danil/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+test-sveshnikov.michail/P0: out/sveshnikov.michail/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'sveshnikov.michail/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/dobsov.sergey/P0/main.o: dobsov.sergey/P0/main.cpp | out/dobsov.sergey/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'dobsov.sergey/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/dobsov.sergey/P0/main.o
+# automatic
+# * := dobsov.sergey/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+out/averenkov.eugene/P0/lab: out/averenkov.eugene/P0/main.o | out/averenkov.eugene/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'averenkov.eugene/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/averenkov.eugene/P0/lab
+# automatic
+# * := averenkov.eugene/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+run-gavrilova.polina/P0: out/gavrilova.polina/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'gavrilova.polina/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+test-averenkov.eugene/P0: out/averenkov.eugene/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'averenkov.eugene/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/shabalin.dmitrij/P0/main.o: shabalin.dmitrij/P0/main.cpp | out/shabalin.dmitrij/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'shabalin.dmitrij/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/shabalin.dmitrij/P0/main.o
+# automatic
+# * := shabalin.dmitrij/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+ 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+out/abramov.vladislav/P0/main.o: abramov.vladislav/P0/main.cpp | out/abramov.vladislav/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'abramov.vladislav/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := out/abramov.vladislav/P0/main.o
+# automatic
+# * := abramov.vladislav/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/16=6%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+run-zholobov.oleg/P0: out/zholobov.oleg/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'zholobov.oleg/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# Not a target:
+out/tkach.danil/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+out/nikonov.andrew/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+out/belobrov.timofey/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/komarova.anastasia/P0/lab: out/komarova.anastasia/P0/main.o | out/komarova.anastasia/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'komarova.anastasia/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/komarova.anastasia/P0/lab
+# automatic
+# * := komarova.anastasia/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+build-gavrilova.polina/P0: out/gavrilova.polina/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'gavrilova.polina/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+run-nikonov.andrew/P0: out/nikonov.andrew/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'nikonov.andrew/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# Not a target:
+out/maslovskiy.vladislav/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/mozhegova.maria/P2/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/mozhegova.maria/P2'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+out/balashov.dima/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/balashov.dima/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+out/kiselev.sergey/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/kiselev.sergey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+run-karnauhova.alexandra/P0: out/karnauhova.alexandra/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'karnauhova.alexandra/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+out/shramko.maksim/P0/main.o: shramko.maksim/P0/main.cpp | out/shramko.maksim/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'shramko.maksim/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/shramko.maksim/P0/main.o
+# automatic
+# * := shramko.maksim/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+out/alymova.ksenia/P0/lab: out/alymova.ksenia/P0/main.o | out/alymova.ksenia/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'alymova.ksenia/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/alymova.ksenia/P0/lab
+# automatic
+# * := alymova.ksenia/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/evstyunichev.konstantin/P0/main.o: evstyunichev.konstantin/P0/main.cpp | out/evstyunichev.konstantin/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'evstyunichev.konstantin/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/evstyunichev.konstantin/P0/main.o
+# automatic
+# * := evstyunichev.konstantin/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+ 
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+out/kushekbaev.danil/P0/lab: out/kushekbaev.danil/P0/main.o | out/kushekbaev.danil/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'kushekbaev.danil/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/kushekbaev.danil/P0/lab
+# automatic
+# * := kushekbaev.danil/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/hismatova.elizaveta/P0/main.o: hismatova.elizaveta/P0/main.cpp | out/hismatova.elizaveta/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'hismatova.elizaveta/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/hismatova.elizaveta/P0/main.o
+# automatic
+# * := hismatova.elizaveta/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+# Not a target:
+dribas.sergey/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.180148277
+#  File has not been updated.
+
+test-brevnov.nikita/P0: out/brevnov.nikita/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'brevnov.nikita/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+# Not a target:
+out/guseynov.guseyn/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+evstyunichev.konstantin/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.181148135
+#  File has not been updated.
+
+out/maslovskiy.vladislav/P0/main.o: maslovskiy.vladislav/P0/main.cpp | out/maslovskiy.vladislav/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'maslovskiy.vladislav/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/maslovskiy.vladislav/P0/main.o
+# automatic
+# * := maslovskiy.vladislav/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+build-kushekbaev.danil/P0: out/kushekbaev.danil/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'kushekbaev.danil/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+run-kiselev.sergey/P0: out/kiselev.sergey/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'kiselev.sergey/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# Not a target:
+out/lanovenko.ivan/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+test-maslov.aleksey/P0: out/maslov.aleksey/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'maslov.aleksey/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+ 
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/nikonov.andrew/P0/lab: out/nikonov.andrew/P0/main.o | out/nikonov.andrew/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'nikonov.andrew/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/nikonov.andrew/P0/lab
+# automatic
+# * := nikonov.andrew/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/kizhin.evgeniy/P0/main.o: kizhin.evgeniy/P0/main.cpp | out/kizhin.evgeniy/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'kizhin.evgeniy/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/kizhin.evgeniy/P0/main.o
+# automatic
+# * := kizhin.evgeniy/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+test-mozhegova.maria/P0: out/mozhegova.maria/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'mozhegova.maria/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/duhanina.alina/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/duhanina.alina/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+out/belobrov.timofey/P0/lab: out/belobrov.timofey/P0/main.o | out/belobrov.timofey/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'belobrov.timofey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/belobrov.timofey/P0/lab
+# automatic
+# * := belobrov.timofey/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/maslovskiy.vladislav/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/maslovskiy.vladislav/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# Not a target:
+abramov.vladislav/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.179148418
+#  File has been updated.
+#  Successfully updated.
+
+run-sharifullina.sofia/P0: out/sharifullina.sofia/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'sharifullina.sofia/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# Not a target:
+shramko.maksim/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.186147429
+#  File has not been updated.
+
+test-petrov.nikita/P0: out/petrov.nikita/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'petrov.nikita/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+ 
+out/kiselev.sergey/P0/lab: out/kiselev.sergey/P0/main.o | out/kiselev.sergey/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'kiselev.sergey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/kiselev.sergey/P0/lab
+# automatic
+# * := kiselev.sergey/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/smirnov.alexandr/P0/main.o: smirnov.alexandr/P0/main.cpp | out/smirnov.alexandr/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'smirnov.alexandr/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/smirnov.alexandr/P0/main.o
+# automatic
+# * := smirnov.alexandr/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+build-brevnov.nikita/P0: out/brevnov.nikita/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'brevnov.nikita/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+# Not a target:
+savintsev.ilya/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-16 18:15:08.729637638
+#  File has not been updated.
+
+build-shabalin.dmitrij/P0: out/shabalin.dmitrij/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'shabalin.dmitrij/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+# Not a target:
+dobsov.sergey/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-14 23:29:09.218631973
+#  File has not been updated.
+
+out/guseynov.guseyn/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/guseynov.guseyn/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+build-shramko.maksim/P0: out/shramko.maksim/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'shramko.maksim/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+out/sveshnikov.michail/P0/.dir:
+ 
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/sveshnikov.michail/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+test-alymova.ksenia/P0: out/alymova.ksenia/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'alymova.ksenia/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+build-evstyunichev.konstantin/P0: out/evstyunichev.konstantin/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'evstyunichev.konstantin/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+build-hismatova.elizaveta/P0: out/hismatova.elizaveta/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'hismatova.elizaveta/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+# Not a target:
+petrov.nikita/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.184147711
+#  File has not been updated.
+
+# Not a target:
+lanovenko.ivan/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.182147994
+#  File has not been updated.
+
+out/kizhin.evgeniy/P0/lab: out/kizhin.evgeniy/P0/main.o | out/kizhin.evgeniy/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'kizhin.evgeniy/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/kizhin.evgeniy/P0/lab
+# automatic
+# * := kizhin.evgeniy/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/lebedev.alexandr/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/lebedev.alexandr/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+build-petrov.nikita/P0: out/petrov.nikita/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'petrov.nikita/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+out/cherkasov.nikita/P0/main.o: cherkasov.nikita/P0/main.cpp | out/cherkasov.nikita/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'cherkasov.nikita/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/cherkasov.nikita/P0/main.o
+# automatic
+# * := cherkasov.nikita/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+ 
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+run-kushekbaev.danil/P0: out/kushekbaev.danil/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'kushekbaev.danil/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+out/sveshnikov.michail/P0/lab: out/sveshnikov.michail/P0/main.o | out/sveshnikov.michail/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'sveshnikov.michail/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/sveshnikov.michail/P0/lab
+# automatic
+# * := sveshnikov.michail/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+run-smirnov.alexandr/P0: out/smirnov.alexandr/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'smirnov.alexandr/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+test-krylov.matvey/P0: out/krylov.matvey/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'krylov.matvey/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/mozhegova.maria/P2/main.o: mozhegova.maria/P2/main.cpp | out/mozhegova.maria/P2/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'mozhegova.maria/P2/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/mozhegova.maria/P2/main.o
+# automatic
+# * := mozhegova.maria/P2/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+run-averenkov.eugene/P0: out/averenkov.eugene/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'averenkov.eugene/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+run-belobrov.timofey/P0: out/belobrov.timofey/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'belobrov.timofey/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+out/lebedev.alexandr/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+run-lanovenko.ivan/P0: out/lanovenko.ivan/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'lanovenko.ivan/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# Not a target:
+out/demehin.maxim/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/smirnov.alexandr/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/smirnov.alexandr/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# Not a target:
+out/averenkov.eugene/P0/test-lab:
+#  Implicit rule search has not been done.
+ 
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+test-cherkasov.nikita/P0: out/cherkasov.nikita/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'cherkasov.nikita/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+build-zholobov.oleg/P0: out/zholobov.oleg/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'zholobov.oleg/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+all: build-abramov.vladislav/P0 build-aleksandrov.igor/P0 build-alymova.ksenia/P0 build-averenkov.eugene/P0 build-balashov.dima/P0 build-belobrov.timofey/P0 build-brevnov.nikita/P0 build-cherkasov.nikita/P0 build-demehin.maxim/P0 build-dobsov.sergey/P0 build-dribas.sergey/P0 build-duhanina.alina/P0 build-evstyunichev.konstantin/P0 build-gavrilova.polina/P0 build-guseynov.guseyn/P0 build-hismatova.elizaveta/P0 build-karnauhova.alexandra/P0 build-kiselev.sergey/P0 build-kizhin.evgeniy/P0 build-komarova.anastasia/P0 build-krylov.matvey/P0 build-kushekbaev.danil/P0 build-lanovenko.ivan/P0 build-lebedev.alexandr/P0 build-maslevtsov.stanislav/P0 build-maslov.aleksey/P0 build-maslovskiy.vladislav/P0 build-mozhegova.maria/P0 build-mozhegova.maria/P2 build-nikonov.andrew/P0 build-petrov.nikita/P0 build-rychkov.mihail/P0 build-savintsev.ilya/P0 build-shabalin.dmitrij/P0 build-sharifullina.sofia/P0 build-shramko.maksim/P0 build-smirnov.alexandr/P0 build-sveshnikov.michail/P0 build-tkach.danil/P0 build-zakirov.marat/P0 build-zholobov.oleg/P0
+#  Phony target (prerequisite of .PHONY).
+#  Command line target.
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/701=0%
+
+out/savintsev.ilya/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/savintsev.ilya/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+test-savintsev.ilya/P0: out/savintsev.ilya/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'savintsev.ilya/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+# Not a target:
+out/shramko.maksim/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/shramko.maksim/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/shramko.maksim/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+test-komarova.anastasia/P0: out/komarova.anastasia/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'komarova.anastasia/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+run-zakirov.marat/P0: out/zakirov.marat/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'zakirov.marat/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+run-duhanina.alina/P0: out/duhanina.alina/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'duhanina.alina/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# Not a target:
+out/smirnov.alexandr/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+test-evstyunichev.konstantin/P0: out/evstyunichev.konstantin/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'evstyunichev.konstantin/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+# Not a target:
+komarova.anastasia/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.181148135
+#  File has not been updated.
+
+out/zakirov.marat/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/zakirov.marat/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# Not a target:
+out/komarova.anastasia/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/alymova.ksenia/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/alymova.ksenia/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# Not a target:
+out/dribas.sergey/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/brevnov.nikita/P0/lab: out/brevnov.nikita/P0/main.o | out/brevnov.nikita/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'brevnov.nikita/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/brevnov.nikita/P0/lab
+# automatic
+# * := brevnov.nikita/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+ 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/tkach.danil/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/tkach.danil/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# Not a target:
+out/hismatova.elizaveta/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+build-mozhegova.maria/P0: out/mozhegova.maria/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'mozhegova.maria/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+build-tkach.danil/P0: out/tkach.danil/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'tkach.danil/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+out/alymova.ksenia/P0/main.o: alymova.ksenia/P0/main.cpp | out/alymova.ksenia/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'alymova.ksenia/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/alymova.ksenia/P0/main.o
+# automatic
+# * := alymova.ksenia/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+test-lanovenko.ivan/P0: out/lanovenko.ivan/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'lanovenko.ivan/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+# Not a target:
+kushekbaev.danil/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.182147994
+#  File has not been updated.
+
+out/maslov.aleksey/P0/main.o: maslov.aleksey/P0/main.cpp | out/maslov.aleksey/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'maslov.aleksey/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/maslov.aleksey/P0/main.o
+# automatic
+# * := maslov.aleksey/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+run-alymova.ksenia/P0: out/alymova.ksenia/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'alymova.ksenia/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+test-dobsov.sergey/P0: out/dobsov.sergey/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'dobsov.sergey/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/rychkov.mihail/P0/main.o: rychkov.mihail/P0/main.cpp | out/rychkov.mihail/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'rychkov.mihail/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/rychkov.mihail/P0/main.o
+# automatic
+# * := rychkov.mihail/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+ 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+out/maslov.aleksey/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/maslov.aleksey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+out/lebedev.alexandr/P0/lab: out/lebedev.alexandr/P0/main.o | out/lebedev.alexandr/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'lebedev.alexandr/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/lebedev.alexandr/P0/lab
+# automatic
+# * := lebedev.alexandr/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/sharifullina.sofia/P0/main.o: sharifullina.sofia/P0/main.cpp | out/sharifullina.sofia/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'sharifullina.sofia/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/sharifullina.sofia/P0/main.o
+# automatic
+# * := sharifullina.sofia/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+# Not a target:
+duhanina.alina/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.180148277
+#  File has not been updated.
+
+# Not a target:
+alymova.ksenia/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.179148418
+#  File has not been updated.
+
+# Not a target:
+out/kizhin.evgeniy/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+build-demehin.maxim/P0: out/demehin.maxim/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'demehin.maxim/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+build-smirnov.alexandr/P0: out/smirnov.alexandr/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'smirnov.alexandr/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+test-tkach.danil/P0: out/tkach.danil/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'tkach.danil/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+# Not a target:
+maslovskiy.vladislav/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.183147853
+#  File has not been updated.
+ 
+
+out/savintsev.ilya/P0/lab: out/savintsev.ilya/P0/main.o | out/savintsev.ilya/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'savintsev.ilya/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/savintsev.ilya/P0/lab
+# automatic
+# * := savintsev.ilya/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+test-zakirov.marat/P0: out/zakirov.marat/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'zakirov.marat/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+build-dribas.sergey/P0: out/dribas.sergey/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'dribas.sergey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+run-shramko.maksim/P0: out/shramko.maksim/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'shramko.maksim/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+build-sharifullina.sofia/P0: out/sharifullina.sofia/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'sharifullina.sofia/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+test-kiselev.sergey/P0: out/kiselev.sergey/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'kiselev.sergey/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+# Not a target:
+out/zakirov.marat/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+build-alymova.ksenia/P0: out/alymova.ksenia/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'alymova.ksenia/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+# Not a target:
+out/dobsov.sergey/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/kushekbaev.danil/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/kushekbaev.danil/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+out/mozhegova.maria/P0/main.o: mozhegova.maria/P0/main.cpp mozhegova.maria/P0/main.cpp | out/mozhegova.maria/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'mozhegova.maria/P0/main'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+# automatic
+# @ := out/mozhegova.maria/P0/main.o
+# automatic
+# * := mozhegova.maria/P0/main
+# automatic
+# < := 
+# automatic
+# + := mozhegova.maria/P0/main.cpp
+# automatic
+# % := 
+# automatic
+# ^ := mozhegova.maria/P0/main.cpp
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+# Not a target:
+out/brevnov.nikita/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+run-shabalin.dmitrij/P0: out/shabalin.dmitrij/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'shabalin.dmitrij/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+ 
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+build-kiselev.sergey/P0: out/kiselev.sergey/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'kiselev.sergey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+build-maslov.aleksey/P0: out/maslov.aleksey/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'maslov.aleksey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+run-aleksandrov.igor/P0: out/aleksandrov.igor/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'aleksandrov.igor/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# Not a target:
+out/rychkov.mihail/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/demehin.maxim/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/demehin.maxim/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+out/shabalin.dmitrij/P0/lab: out/shabalin.dmitrij/P0/main.o | out/shabalin.dmitrij/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'shabalin.dmitrij/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/shabalin.dmitrij/P0/lab
+# automatic
+# * := shabalin.dmitrij/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+build-maslevtsov.stanislav/P0: out/maslevtsov.stanislav/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'maslevtsov.stanislav/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+out/cherkasov.nikita/P0/lab: out/cherkasov.nikita/P0/main.o | out/cherkasov.nikita/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'cherkasov.nikita/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/cherkasov.nikita/P0/lab
+# automatic
+# * := cherkasov.nikita/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/gavrilova.polina/P0/main.o: gavrilova.polina/P0/main.cpp | out/gavrilova.polina/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'gavrilova.polina/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/gavrilova.polina/P0/main.o
+# automatic
+# * := gavrilova.polina/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+run-abramov.vladislav/P0: out/abramov.vladislav/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'abramov.vladislav/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# Not a target:
+sharifullina.sofia/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.184147711
+#  File has not been updated.
+
+run-cherkasov.nikita/P0: out/cherkasov.nikita/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'cherkasov.nikita/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+ 
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+test-smirnov.alexandr/P0: out/smirnov.alexandr/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'smirnov.alexandr/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/duhanina.alina/P0/main.o: duhanina.alina/P0/main.cpp | out/duhanina.alina/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'duhanina.alina/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/duhanina.alina/P0/main.o
+# automatic
+# * := duhanina.alina/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+out/sveshnikov.michail/P0/main.o: sveshnikov.michail/P0/main.cpp | out/sveshnikov.michail/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'sveshnikov.michail/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/sveshnikov.michail/P0/main.o
+# automatic
+# * := sveshnikov.michail/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+out/belobrov.timofey/P0/main.o: belobrov.timofey/P0/main.cpp | out/belobrov.timofey/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'belobrov.timofey/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/belobrov.timofey/P0/main.o
+# automatic
+# * := belobrov.timofey/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+run-maslevtsov.stanislav/P0: out/maslevtsov.stanislav/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'maslevtsov.stanislav/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+out/maslov.aleksey/P0/lab: out/maslov.aleksey/P0/main.o | out/maslov.aleksey/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'maslov.aleksey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/maslov.aleksey/P0/lab
+# automatic
+# * := maslov.aleksey/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/kizhin.evgeniy/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/kizhin.evgeniy/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# Not a target:
+kiselev.sergey/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+ 
+#  Last modified 2024-10-22 11:49:39.181148135
+#  File has not been updated.
+
+test-aleksandrov.igor/P0: out/aleksandrov.igor/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'aleksandrov.igor/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/petrov.nikita/P0/lab: out/petrov.nikita/P0/main.o | out/petrov.nikita/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'petrov.nikita/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/petrov.nikita/P0/lab
+# automatic
+# * := petrov.nikita/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+test-balashov.dima/P0: out/balashov.dima/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'balashov.dima/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+build-kizhin.evgeniy/P0: out/kizhin.evgeniy/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'kizhin.evgeniy/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+out/sharifullina.sofia/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/sharifullina.sofia/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# Not a target:
+maslevtsov.stanislav/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.182147994
+#  File has not been updated.
+
+# Not a target:
+out/shabalin.dmitrij/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/cherkasov.nikita/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/cherkasov.nikita/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+out/zakirov.marat/P0/main.o: zakirov.marat/P0/main.cpp | out/zakirov.marat/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'zakirov.marat/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/zakirov.marat/P0/main.o
+# automatic
+# * := zakirov.marat/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+out/guseynov.guseyn/P0/lab: out/guseynov.guseyn/P0/main.o | out/guseynov.guseyn/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'guseynov.guseyn/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/guseynov.guseyn/P0/lab
+# automatic
+# * := guseynov.guseyn/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/karnauhova.alexandra/P0/main.o: karnauhova.alexandra/P0/main.cpp | out/karnauhova.alexandra/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'karnauhova.alexandra/P0/main'
+ 
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/karnauhova.alexandra/P0/main.o
+# automatic
+# * := karnauhova.alexandra/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+# Not a target:
+out/karnauhova.alexandra/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+guseynov.guseyn/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.181148135
+#  File has not been updated.
+
+out/maslevtsov.stanislav/P0/main.o: maslevtsov.stanislav/P0/main.cpp | out/maslevtsov.stanislav/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'maslevtsov.stanislav/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/maslevtsov.stanislav/P0/main.o
+# automatic
+# * := maslevtsov.stanislav/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+# Not a target:
+out/mozhegova.maria/P2/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+belobrov.timofey/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.180148277
+#  File has not been updated.
+
+.SECONDARY:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+out/sveshnikov.michail/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/maslovskiy.vladislav/P0/lab: out/maslovskiy.vladislav/P0/main.o | out/maslovskiy.vladislav/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'maslovskiy.vladislav/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/maslovskiy.vladislav/P0/lab
+# automatic
+# * := maslovskiy.vladislav/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/mozhegova.maria/P2/lab: out/mozhegova.maria/P2/main.o | out/mozhegova.maria/P2/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'mozhegova.maria/P2'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/mozhegova.maria/P2/lab
+# automatic
+# * := mozhegova.maria/P2
+# automatic
+ 
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+.SECONDEXPANSION:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+out/gavrilova.polina/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/nikonov.andrew/P0/main.o: nikonov.andrew/P0/main.cpp | out/nikonov.andrew/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'nikonov.andrew/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/nikonov.andrew/P0/main.o
+# automatic
+# * := nikonov.andrew/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+out/gavrilova.polina/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/gavrilova.polina/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# Not a target:
+hismatova.elizaveta/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.181148135
+#  File has not been updated.
+
+run-demehin.maxim/P0: out/demehin.maxim/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'demehin.maxim/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+build-zakirov.marat/P0: out/zakirov.marat/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'zakirov.marat/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+test-lebedev.alexandr/P0: out/lebedev.alexandr/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'lebedev.alexandr/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/belobrov.timofey/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/belobrov.timofey/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+test-duhanina.alina/P0: out/duhanina.alina/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'duhanina.alina/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+test-guseynov.guseyn/P0: out/guseynov.guseyn/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'guseynov.guseyn/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+run-dobsov.sergey/P0: out/dobsov.sergey/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'dobsov.sergey/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+ 
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+out/shramko.maksim/P0/lab: out/shramko.maksim/P0/main.o | out/shramko.maksim/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'shramko.maksim/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/shramko.maksim/P0/lab
+# automatic
+# * := shramko.maksim/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+out/zholobov.oleg/P0/lab: out/zholobov.oleg/P0/main.o | out/zholobov.oleg/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'zholobov.oleg/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/zholobov.oleg/P0/lab
+# automatic
+# * := zholobov.oleg/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+run-guseynov.guseyn/P0: out/guseynov.guseyn/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'guseynov.guseyn/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+test-gavrilova.polina/P0: out/gavrilova.polina/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'gavrilova.polina/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+# Not a target:
+lebedev.alexandr/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.182147994
+#  File has not been updated.
+
+# Not a target:
+out/cherkasov.nikita/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/guseynov.guseyn/P0/main.o: guseynov.guseyn/P0/main.cpp | out/guseynov.guseyn/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'guseynov.guseyn/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/guseynov.guseyn/P0/main.o
+# automatic
+# * := guseynov.guseyn/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+out/zholobov.oleg/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/zholobov.oleg/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+run-maslov.aleksey/P0: out/maslov.aleksey/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'maslov.aleksey/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# Not a target:
+out/petrov.nikita/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+build-rychkov.mihail/P0: out/rychkov.mihail/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'rychkov.mihail/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+out/brevnov.nikita/P0/main.o: brevnov.nikita/P0/main.cpp | out/brevnov.nikita/P0/.dir
+ 
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'brevnov.nikita/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/brevnov.nikita/P0/main.o
+# automatic
+# * := brevnov.nikita/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+run-mozhegova.maria/P0: out/mozhegova.maria/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'mozhegova.maria/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+out/savintsev.ilya/P0/main.o: savintsev.ilya/P0/main.cpp | out/savintsev.ilya/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'savintsev.ilya/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/savintsev.ilya/P0/main.o
+# automatic
+# * := savintsev.ilya/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+out/lanovenko.ivan/P0/main.o: lanovenko.ivan/P0/main.cpp | out/lanovenko.ivan/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'lanovenko.ivan/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/lanovenko.ivan/P0/main.o
+# automatic
+# * := lanovenko.ivan/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+out/aleksandrov.igor/P0/lab: out/aleksandrov.igor/P0/main.o | out/aleksandrov.igor/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'aleksandrov.igor/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/aleksandrov.igor/P0/lab
+# automatic
+# * := aleksandrov.igor/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+.PHONY: all labs clean
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/abramov.vladislav/P0/lab: out/abramov.vladislav/P0/main.o | out/abramov.vladislav/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'abramov.vladislav/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := out/abramov.vladislav/P0/lab
+# automatic
+# * := abramov.vladislav/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+ 
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/33=82%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+run-dribas.sergey/P0: out/dribas.sergey/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'dribas.sergey/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# Not a target:
+out/duhanina.alina/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+build-guseynov.guseyn/P0: out/guseynov.guseyn/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'guseynov.guseyn/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+test-zholobov.oleg/P0: out/zholobov.oleg/P0/test-lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'zholobov.oleg/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 67):
+	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
+	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
+
+out/tkach.danil/P0/lab: out/tkach.danil/P0/main.o | out/tkach.danil/P0/.dir
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'tkach.danil/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/tkach.danil/P0/lab
+# automatic
+# * := tkach.danil/P0
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=27/29=93%
+#  recipe to execute (from 'Makefile', line 71):
+	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@ $(filter-out %.header,$^)
+
+# Not a target:
+out/savintsev.ilya/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+out/krylov.matvey/P0/main.o: krylov.matvey/P0/main.cpp | out/krylov.matvey/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'krylov.matvey/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/krylov.matvey/P0/main.o
+# automatic
+# * := krylov.matvey/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+# Not a target:
+tkach.danil/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.186147429
+#  File has not been updated.
+
+out/demehin.maxim/P0/main.o: demehin.maxim/P0/main.cpp | out/demehin.maxim/P0/.dir
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'demehin.maxim/P0/main'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# automatic
+# @ := out/demehin.maxim/P0/main.o
+# automatic
+# * := demehin.maxim/P0/main
+# automatic
+# < := 
+# automatic
+# + := 
+# automatic
+# % := 
+# automatic
+# ^ := 
+# automatic
+ 
+# ? := 
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=1/12=8%
+#  recipe to execute (from 'Makefile', line 83):
+	$(if $(SILENT),,@echo [C++ ] $<)
+	$(hidecmd)$(CXX) $(CPPFLAGS) $(CXXFLAGS) -MMD -MP -c $(call common_include,$<) -o $@ $<
+
+# Not a target:
+mozhegova.maria/P2/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-23 09:39:31.667708599
+#  File has not been updated.
+
+# Not a target:
+zakirov.marat/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.186147429
+#  File has not been updated.
+
+out/rychkov.mihail/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/rychkov.mihail/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+# Not a target:
+brevnov.nikita/P0/main.cpp:
+#  Implicit rule search has been done.
+#  File is an intermediate prerequisite.
+#  Last modified 2024-10-22 11:49:39.180148277
+#  File has not been updated.
+
+out/evstyunichev.konstantin/P0/.dir:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'out/evstyunichev.konstantin/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
+	@mkdir -p $(@D) && touch $@
+
+build-lanovenko.ivan/P0: out/lanovenko.ivan/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'lanovenko.ivan/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+# Not a target:
+out/kushekbaev.danil/P0/test-lab:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+out/mozhegova.maria/P0/.dir:
+#  Implicit rule search has not been done.
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+
+build-komarova.anastasia/P0: out/komarova.anastasia/P0/lab
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'komarova.anastasia/P0'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/17=0%
+
+run-komarova.anastasia/P0: out/komarova.anastasia/P0/lab
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: 'komarova.anastasia/P0'
+#  File is an intermediate prerequisite.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 59):
+	@$(FAULT_INJECTION_CONFIG) $(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(ARGS)
+
+# files hash-table stats:
+# Load=338/1024=33%, Rehash=0, Collisions=176/890=20%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 2 (1) / strings = 523 / storage = 12725 B / avg = 24 B
+# current buf: size = 8162 B / used = 4571 B / count = 175 / avg = 26 B
+# other used: total = 8154 B / count = 348 / avg = 23 B
+# other free: total = 8 B / max = 8 B / min = 8 B / avg = 8 B
+
+# strcache performance: lookups = 1441 / hit rate = 63%
+# hash-table stats:
+# Load=523/8192=6%, Rehash=0, Collisions=36/1441=2%
+# Finished Make data base on Wed Oct 23 09:42:42 2024
+
+ 
