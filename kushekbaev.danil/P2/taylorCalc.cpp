@@ -2,17 +2,21 @@
 #include <stdexcept>
 #include <cmath>
 
-double kushekbaev::taylorCalc(double x, double error)
+double kushekbaev::taylorCalc(double x, size_t max_members, double error)
 {
   double next = x;
   double result = next;
-  size_t n = 1;
+  double x_squared = x * x;
 
-  while (std::abs(next) > error)
+  for (size_t i = 1; i < max_members; i++)
   {
-    next *= x * x / ((2 * n) * (2 * n + 1));
+    next *= x_squared / (2 * i * (2 * i + 1));
     result += next;
-    n++;
+  }
+
+  if (std::abs(next) > error)
+  {
+    throw std::logic_error("math-error");
   }
   return result;
 }
