@@ -27,7 +27,6 @@ int main(int argc, char ** argv)
       return 1;
     }
   }
-  return true;
   char* endptr;
   num = std::strtol(str, &endptr, 10);
   if (num != 1 && num != 2)
