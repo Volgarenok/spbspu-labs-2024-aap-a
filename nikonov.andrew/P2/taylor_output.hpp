@@ -2,10 +2,11 @@
 #define TAYLOR_OUTPUT_HPP
 #include <stdexcept>
 #include <cstddef>
+#include <iostream>
 namespace nikonov
 {
-  void stringOutput(double x, double val, double stdval);
-  void stringOutput(double x, const std::logic_error& e, double stdval);
-  void uni_output(double x, double val, double stdval, bool e = 0);
+  void stringOutput(double x, double numberMax, double absError);
+  std::ostream& setWidth(std::ostream& out, size_t num, size_t col_width);
+  void table_output(double left, double right, double step, double numberMax, double absError);
 }
 #endif
