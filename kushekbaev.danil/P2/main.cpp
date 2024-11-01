@@ -1,7 +1,7 @@
 #include <iomanip>
 #include <cstring>
 #include <iostream>
-#include "taylors_header.hpp"
+#include "sinh_taylor_calculator.hpp"
 
 int main()
 {

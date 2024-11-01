@@ -1,18 +1,17 @@
-#include "taylors_header.hpp"
+#include "sinh_taylor_calculator.hpp"
 #include <stdexcept>
 
-double kushekbaev::taylorCalc(double x, size_t max_members, double error)
+double kushekbaev::sinhCalc(double x, double error)
 {
   double next = x;
   double result = next;
-  for (size_t i = 1; i < max_members; ++i)
+  size_t n = 1;
+
+  while (std::abs(next) > error)
   {
-    next *= std::pow(x, 2*i+1)/(std::tgamma(2*i+2));
+    next *= x * x / ((2 * n) * (2 * n + 1));
     result += next;
-  }
-  if (std::abs(next) > error)
-  {
-    throw std::logic_error("math-error");
+    n++;
   }
   return result;
 }
