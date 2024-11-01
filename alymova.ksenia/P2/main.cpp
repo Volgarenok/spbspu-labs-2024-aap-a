@@ -28,5 +28,5 @@ int main()
     std::cout << "\n";
   }
   alymova::print_row(finish, max_summand, error);
-    std::cout << "\n";
+  std::cout << "\n";
 }
