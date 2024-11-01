@@ -40,12 +40,11 @@ int main(int argc, char** argv)
   }
 
   std::ofstream outputFile(argv[3]);
-  const size_t M = m;
-  const size_t size = (M * M);
+  const size_t size = (m * n);
 
   if (num == 1)
   {
-    int arr[size];
+    int arr[10000];
 
     if(!inputTable(inputFile, arr, size))
     {
