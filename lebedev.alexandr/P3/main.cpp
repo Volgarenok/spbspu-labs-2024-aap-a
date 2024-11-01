@@ -40,7 +40,8 @@ int main(int argc, char** argv)
   }
 
   std::ofstream outputFile(argv[3]);
-  const size_t size = (m * n);
+  const size_t M = m;
+  const size_t size = (M * M);
 
   if (num == 1)
   {
