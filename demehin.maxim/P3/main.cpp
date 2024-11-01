@@ -21,10 +21,9 @@ int main(int argc, char** argv)
   std::cout << f << "\n";
   std::cout << c << "\n";
   std::ifstream input(argv[2]);
-  int m = 0, n = 0, k = 0;
+  size_t m = 0, n = 0, k = 0;
   input >> m >> n;
   k = m * n;
-  int* matrix = nullptr;
   try
   {
     matrix = demehin::alloc(k, c);
@@ -34,7 +33,8 @@ int main(int argc, char** argv)
     std::cerr << "Out of memory\n";
     return 1;
   }
-
+  size_t read = 0;
+  demehin::input_matrix(input, matrix, k, read);
   std::cout << k << "\n";
 }
 
