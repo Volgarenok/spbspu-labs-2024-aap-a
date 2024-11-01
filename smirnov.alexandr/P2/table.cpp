@@ -1,8 +1,8 @@
+#include "table.hpp"
 #include <iostream>
 #include <iomanip>
 #include <cstring>
 #include <stdexcept>
-#include "table.hpp"
 #include "taylorSeries.hpp"
 
 void smirnov::outRow(double x, size_t k, double error)
