@@ -11,14 +11,9 @@ int main(int argc, char ** argv)
     std::cerr << "Too many arguments" << "\n";
     return 1;
   }
-  else if (argc == 0)
+  else if (argc < 4)
   {
     std::cerr << "Not enough arguments" << "\n";
-    return 1;
-  }
-  else if (argc < 3)
-  {
-    std::cerr << "Too few arguments" << "\n";
     return 1;
   }
   long int num = 0;
@@ -41,10 +36,10 @@ int main(int argc, char ** argv)
     return 2;
   }
   size_matrix = strk * stl;
-  int matrix[10000];
-  std::ofstream output(argv[2]);
+  std::ofstream output(argv[3]);
   if (num == 1)
   {
+    int matrix[10000];
     input_matrix(std::cin, matrix, size_matrix);
     output_matrix(std::cout, matrix, strk, stl);
   }
