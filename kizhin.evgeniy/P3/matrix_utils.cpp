@@ -1,13 +1,13 @@
 #include "matrix_utils.hpp"
+#include "memory_modes.hpp"
 #include <new>
 
-int* kizhin::allocateMatrix(size_t rows, size_t columns, int mode)
+int* kizhin::allocateMatrix(size_t rows, size_t columns, MemoryMode mode)
 {
-  if (mode == 1) {
+  if (mode == MemoryMode::freeStore) {
     return new (std::nothrow) int[rows * columns];
-  } else if (mode == 2) {
-    constexpr size_t stackArrayLenght = 1000;
-    static int stackArray[stackArrayLenght];
+  } else if (mode == MemoryMode::stack) {
+    static int stackArray[stackMemorySize];
     return stackArray;
   } else {
     return nullptr;
@@ -35,9 +35,12 @@ bool kizhin::isLocalMinimum(
     return false;
   }
   constexpr size_t neighborsCount = 4;
-  int neighbors[neighborsCount] = { matrix[(row - 1) * columns + column],
-    matrix[(row + 1) * columns + column], matrix[row * columns + column - 1],
-    matrix[row * columns + column + 1] };
+  int neighbors[neighborsCount] = {
+    matrix[(row - 1) * columns + column],
+    matrix[(row + 1) * columns + column],
+    matrix[row * columns + column - 1],
+    matrix[row * columns + column + 1],
+  };
   int tmp = matrix[row * columns + column];
   for (size_t i = 0; i < neighborsCount; ++i) {
     if (tmp >= neighbors[i]) {
