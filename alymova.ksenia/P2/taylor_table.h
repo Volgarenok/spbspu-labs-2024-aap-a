@@ -1,5 +1,5 @@
-#ifndef TAYLOR_TABLE_FUNCS_H
-#define TAYLOR_TABLE_FUNCS_H
+#ifndef TAYLOR_TABLE_H
+#define TAYLOR_TABLE_H
 #include <cstddef>
 namespace alymova
 {
