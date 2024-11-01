@@ -2,7 +2,6 @@
 #define TABLE_MAKER_HPP
 
 #include <cstddef>
-#include "teilorFun.hpp"
 
 namespace maslovskiy
 {
