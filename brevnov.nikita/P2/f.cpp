@@ -3,14 +3,12 @@
 
 double brevnov::f(const double x, const size_t k, const double error)
 {
-  double next = x;
-  double result = next;
+  double result = x;
   for (size_t i = 1; i < k; ++i)
   {
-    next = (std::pow(-1, i) * pow(x, 2 * i + 1)) / (2 * i + 1);
-    result += next;
+    result += (std::pow(-1, i) * std::pow(x, 2 * i + 1)) / (2 * i + 1);
   }
-  if (std::abs(next) - std::abs(atan(x)) > error)
+  if (std::abs(result) - std::abs(std::atan(x)) > error)
   {
     throw std::logic_error("math-error");
   }
