@@ -1,5 +1,6 @@
 #include "matrix.h"
 #include <iostream>
+#include "mymath.h"
 
 namespace savintsev
 {
@@ -29,7 +30,7 @@ namespace savintsev
   {
     size_t mMid = m / 2 + m % 2;
     size_t nMid = n / 2 + n % 2;
-    for (size_t k = 0; k < (mMid > nMid ? nMid : mMid); ++k)
+    for (size_t k = 0; k < minSizet(mMid, nMid); ++k)
     {
       for (size_t i = k; i < (m - k); ++i)
       {

@@ -12,10 +12,6 @@ int main(int argc, char ** argv)
       std::cerr << "Too many arguments\n";
       return 1;
     }
-    else if (argc == 1)
-    {
-      return 0;
-    }
     std::cerr << "Not enough arguments\n";
     return 1;
   }
