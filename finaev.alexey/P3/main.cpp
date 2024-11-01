@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
+#include <cstring>
 #include "input_matrix.h"
 #include "output_matrix.h"
 
@@ -18,6 +19,15 @@ int main(int argc, char ** argv)
   }
   long int num = 0;
   const char *str = argv[1];
+  for (size_t i = 0; i < strlen(str); i++)
+  {
+    if (str[i] < '0' || str[i] > '9')
+    {
+      std::cerr << "First parameter is not a number" << "\n";
+      return 1;
+    }
+  }
+  return true;
   char* endptr;
   num = std::strtol(str, &endptr, 10);
   if (num != 1 && num != 2)
