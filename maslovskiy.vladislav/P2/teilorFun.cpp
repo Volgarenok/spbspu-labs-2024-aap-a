@@ -15,7 +15,7 @@ double maslovskiy::teilorCos(double x, size_t k, double error)
     next = sign * xPow / xFact;
     xFact = xFact * (xFact + 1) * (xFact + 2);
     res += next;
-    sign*= -1;
+    sign *= -1;
   }
   if (std::abs(res - std::cos(x)) > error)
   {
