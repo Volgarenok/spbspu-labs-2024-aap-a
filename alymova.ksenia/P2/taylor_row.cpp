@@ -1,7 +1,7 @@
-#include "taylor_table_funcs.h"
+#include "taylor_table.h"
 #include <stdexcept>
 #include <cstddef>
-double alymova::taylor_row(const double x, const size_t k, const double error)
+double alymova::taylor_row(double x, size_t k, double error)
 {
   double summ = x;
   double next = x;

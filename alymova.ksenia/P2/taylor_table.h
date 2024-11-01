@@ -7,5 +7,6 @@ namespace alymova
   double arctg(double x);
   void print(double x, double taylor, double math_func);
   void print_error(double x, double math_func);
+  void print_row(double x, int max_summand, double error);
 }
 #endif

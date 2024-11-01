@@ -1,6 +1,6 @@
-#include "taylor_table_funcs.h"
+#include "taylor_table.h"
 #include <cmath>
-double alymova::arctg(const double x)
+double alymova::arctg(double x)
 {
   return std::atan(x);
 }
