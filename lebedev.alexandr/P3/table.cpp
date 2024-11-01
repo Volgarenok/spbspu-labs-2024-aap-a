@@ -25,7 +25,6 @@ std::istream& inputTable(std::istream& inputFile, int* arr, size_t size)
 
 void outputTable(std::ostream& outputFile, int* arr, size_t m)
 {
-  size_t size = m * m;
   bool flag = true;
   for (size_t i = 0; i < m; ++i)
   {

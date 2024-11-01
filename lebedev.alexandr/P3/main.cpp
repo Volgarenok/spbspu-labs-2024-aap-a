@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstdlib>
-#include <cstring>
 #include <fstream>
 #include "table.hpp"
 
@@ -16,7 +15,7 @@ int main(int argc, char** argv)
     std::cerr << "Too many arguments!\n";
     return 1;
   }
-  
+
   char* t = argv[1];
   if (!isNumbers(t))
   {
@@ -37,6 +36,11 @@ int main(int argc, char** argv)
   if (!inputFile)
   {
     std::cerr << "Incorrect data in the file!\n";
+    return 2;
+  }
+  if (n != m)
+  {
+    std::cerr << "Incorrect dimentions of the matrix!\n";
     return 2;
   }
 
