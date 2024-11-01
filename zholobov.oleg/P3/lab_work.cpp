@@ -16,13 +16,20 @@ namespace {
   }
 
   int do_lab_work_stack(std::ifstream& ifs, size_t rows, size_t cols) {
+    size_t elements_number = rows * cols;
+    if (elements_number == 0) {
+      return 0;
+    }
     int matrix[10000] = {0};
-    read_matrix(ifs, matrix, rows * cols);
+    read_matrix(ifs, matrix, elements_number);
     return calc_min_sum_mdg(matrix, rows, cols);
   }
 
   int do_lab_work_dynamic(std::ifstream& ifs, size_t rows, size_t cols) {
     size_t elements_number = rows * cols;
+    if (elements_number == 0) {
+      return 0;
+    }
     int* matrix = new int[elements_number]{};
     try {
       read_matrix(ifs, matrix, elements_number);
