@@ -11,11 +11,10 @@ int main(int argc, char ** argv)
     std::cerr << "Incorrect amount of data entered" << "\n";
     return 1;
   }
-  int num = 0;
   char * ch = argv[1];
   if (!duhanina::isDig(ch))
   {
-    std::cerr << "Not a number";
+    std::cerr << "Not a number" << "\n";
     return 1;
   }
   int num = atoi(ch);
