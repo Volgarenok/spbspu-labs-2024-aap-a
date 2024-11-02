@@ -2,6 +2,7 @@
 #define MATRIX_HPP
 
 #include <cstddef>
+#include <istream>
 
 namespace mozhegova
 {

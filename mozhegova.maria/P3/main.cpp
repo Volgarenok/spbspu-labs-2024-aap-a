@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <cstring>
 #include "matrix.hpp"
 
 int main(int argc, char ** argv)
@@ -14,7 +15,7 @@ int main(int argc, char ** argv)
     std::cerr << "Too many arguments\n";
     return 1;
   }
-  if (mozhegova::isNumber(argv[1]) && argv[1] != "1" && argv[1] != "2")
+  if (mozhegova::isNumber(argv[1]) && std::strcmp(argv[1], "1") != 0 && std::strcmp(argv[1], "2") != 0)
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
@@ -46,7 +47,7 @@ int main(int argc, char ** argv)
   }
 
   int * v = nullptr;
-  if (argv[1] == "1")
+  if (std::strcmp(argv[1], "1") == 0)
   {
     int arr[10000] = {};
     v = arr;
@@ -59,4 +60,5 @@ int main(int argc, char ** argv)
 
   std::ofstream output(argv[3]);
   output << mozhegova::uppTriMtx(v, m, n) << "\n";
+  delete[] v;
 }
