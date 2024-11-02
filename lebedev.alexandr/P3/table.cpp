@@ -1,15 +1,22 @@
 #include "table.hpp"
-#include <cstring>
-
 
 bool isNumbers(char* t)
 {
-  for (size_t i = 0; i < strlen(t); ++i)
+  // for (size_t i = 0; i < strlen(t); ++i)
+  // {
+  //   if (t[i] > '9' || t[i] < '0')
+  //   {
+  //     return false;
+  //   }
+  // }
+  size_t i = 0;
+  while (t[i] != '\0')
   {
-    if (t[i] > '9' || t[i] < '0')
+    if (t[i] < '0' || t[i] > '9')
     {
       return false;
     }
+    ++i;
   }
   return true;
 }
