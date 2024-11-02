@@ -51,7 +51,8 @@ int main(int argc, char** argv)
   if (argv[1][0] == 1)
   {
     int mtrx[10000] = {0};
-    if (!shramko::inputMtrx(finput, mtrx, cnt_row, cnt_col))
+    int read = 0;
+    if (!shramko::inputMtrx(finput, mtrx, cnt_row, cnt_col, read) || read != cnt_row * cnt_col)
     {
       std::cerr << "ERROR!\n";
       return 2;
@@ -72,7 +73,8 @@ int main(int argc, char** argv)
       std::cerr << "Out of memory\n";
       return 1;
     }
-    if (!shramko::inputMtrx(finput, mtrx, cnt_row, cnt_col))
+    int read = 0;
+    if (!shramko::inputMtrx(finput, mtrx, cnt_row, cnt_col, read) || read != cnt_row * cnt_col)
     {
       delete[] mtrx;
       std::cerr << "ERROR!\n";
