@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include "periphery.h"
 
 int main(int argc, char** argv)
 {
@@ -14,26 +15,22 @@ int main(int argc, char** argv)
     constexpr int arraySize = 10000;
     int array[arraySize] = {};
     input >> array[0];
-    output << array[0];
     for (int i = 1; i < size; ++i)
     {
       input >> array[i];
-      output << " " << array[i];
     }
-    output << "\n";
+    periphery(output, array, m, n);
   }
   else if (argv[1][0] == '2')
   {
     int *array = nullptr;
     array = new int[size];
     input >> array[0];
-    output << array[0];
     for (int i = 1; i < size; ++i)
     {
       input >> array[i];
-      output << " " << array[i];
     }
-    output << "\n";
+    periphery(output, array, m, n);
     delete[] array;
   }
   else
