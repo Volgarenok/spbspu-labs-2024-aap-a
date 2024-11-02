@@ -32,7 +32,7 @@ int main(int argc, char ** argv)
   }
   size_t m = 0, n = 0;
   input >> m >> n;
-  if (!(input >> m >> n) || m == 0 || n == 0)
+  if (!(input >> m >> n))
   {
     std::cerr << "Invalid table size data" << "\n";
     return 2;
