@@ -74,12 +74,6 @@ int main(int argc, char** argv)
       delete[] dynArray;
       return 2;
     }
-    if (!kiselev::inputMatrix(input, dynArray, rows, columns, count_read).good())
-    {
-      std::cerr << "Incorrect matrix\n";
-      delete[] dynArray;
-      return 2;
-    }
     number_element = kiselev::saddleElement(dynArray, rows, columns);
     delete[] dynArray;
   }

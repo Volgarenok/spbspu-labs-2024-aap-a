@@ -6,7 +6,6 @@ std::istream& kiselev::inputMatrix(
   {
     for (size_t j = 0; j < n; ++j)
     {
-      in >> array[i * n + j];
       if (!(in >> array[i * n + j]))
       {
         return in;
