@@ -51,6 +51,7 @@ int main(int argc, char **argv)
     }
     abramov::transform_Matrix(new_mtx, count);
     abramov::output_Matrix(output, abramov::toSquare(nums, m, n, count), count);
+    delete[] new_mtx;
   }
   else if (atoi(argv[1]) == 2)
   {
@@ -86,5 +87,7 @@ int main(int argc, char **argv)
     }
     abramov::transform_Matrix(new_mtx, count);
     abramov::output_Matrix(output, new_mtx, count);
+    delete[] matrix;
+    delete[] new_mtx;
   }
 }
