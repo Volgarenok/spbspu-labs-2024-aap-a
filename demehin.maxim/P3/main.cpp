@@ -68,17 +68,23 @@ int main(int argc, char** argv)
     if (!demehin::input_matrix(input, matrix2, k, read) && m != 0)
     {
       std::cerr << "Impossible to build matrix\n";
+      delete[] matrix2;
       return 2;
     }
   }
   if (read != k)
   {
     std::cerr << "Impossible to build matrix due incorrect number of elements\n";
+    if (c == 2)
+    {
+      delete[] matrix2;
+    }
     return 2;
   }
   if (!std::cin)
   {
     std::cerr << "Impossible to build matrix due incorrect element\n";
+    delete[] matrix2;
     return 2;
   }
   if (c == 1)
@@ -92,6 +98,7 @@ int main(int argc, char** argv)
     std::cout << demehin::cnt_row_nsm(matrix2, m, n) << "\n";
     std::ofstream output(argv[3]);
     output << demehin::cnt_row_nsm(matrix2, m, n);
+    delete[] matrix2;
   }
 }
 
