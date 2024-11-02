@@ -60,7 +60,7 @@ int main(int argc, char** argv)
     int mtrx[10000] = {0};
     try
     {
-      if (!shramko::inputMtrx(finput, mtrx, cnt_row, cnt_col, sizeMtr))
+      if (!shramko::inputMtrx(finput, mtrx, sizeMtr))
       {
         std::cerr << "ERROR!\n";
         return 2;
@@ -90,7 +90,7 @@ int main(int argc, char** argv)
 
     try
     {
-      if (!shramko::inputMtrx(finput, mtrx, cnt_row, cnt_col, sizeMtr))
+      if (!shramko::inputMtrx(finput, mtrx, sizeMtr))
       {
         delete[] mtrx;
         std::cerr << "ERROR!\n";
