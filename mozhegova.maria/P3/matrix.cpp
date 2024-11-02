@@ -5,9 +5,9 @@
 
 bool mozhegova::isNumber(const char * str)
 {
-  for (size_t i = 0; i < strlen(str); i++)
+  for (size_t i = 0; i < std::strlen(str); i++)
   {
-    if (!isdigit(str[i]))
+    if (!std::isdigit(str[i]))
     {
       return false;
     }
