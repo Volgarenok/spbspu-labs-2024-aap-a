@@ -1,3 +1,4 @@
+#include <cstddef>
 #include <cstring>
 #include <fstream>
 #include <iostream>
@@ -28,7 +29,7 @@ int main(int argc, char** argv)
     return 1;
   }
   char* inFile = argv[2];
-  int count_read = 0;
+  size_t count_read = 0;
   std::ifstream input(inFile);
   if (!input.is_open())
   {
@@ -42,7 +43,11 @@ int main(int argc, char** argv)
   {
     int fixed_array[10000] = {};
     kiselev::inputMatrix(input, fixed_array, m, n, count_read);
-
+    if (count_read != m * n)
+    {
+      std::cerr << "There are not enough elements for the array\n";
+      return 2;
+    }
     number_element = kiselev::saddleElement(fixed_array, m, n);
   }
   if (argv[1][0] == '2')
@@ -53,7 +58,7 @@ int main(int argc, char** argv)
       din_array = new int[m * n];
       kiselev::inputMatrix(input, din_array, m, n, count_read);
     }
-    catch (std::bad_alloc& e)
+    catch (const std::bad_alloc& e)
     {
       std::cerr << "Out of memory\n";
       delete[] din_array;
@@ -62,6 +67,13 @@ int main(int argc, char** argv)
     if (!kiselev::inputMatrix(input, din_array, m, n, count_read))
     {
       std::cerr << "Incorrect matrix\n";
+      delete[] din_array;
+      return 2;
+    }
+    if (count_read != m * n)
+    {
+      std::cerr << "There are not enough elements for the array\n";
+      delete[] din_array;
       return 2;
     }
     number_element = kiselev::saddleElement(din_array, m, n);
