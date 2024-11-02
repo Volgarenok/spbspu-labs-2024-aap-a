@@ -22,7 +22,7 @@ int main(int argc, char ** argv)
     std::cerr << "First parameter is not a number\n";
     return 1;
   }
-  if(!(taskNumber == 1 || taskNumber == 2))
+  if (!(taskNumber == 1 || taskNumber == 2))
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
@@ -36,13 +36,13 @@ int main(int argc, char ** argv)
 
   if (!input)
   {
-    std::cerr << "Rows or columns not a number\n";
+    std::cerr << "Rows or columns are not a number\n";
     return 2;
   }
   if (rows <= 0 || columns <= 0)
   {
-    std::cerr << "Matrix cannot be created\n";
-    return 2;
+    output << rows << " " << columns << "\n";
+    return 0;
   }
 
   size_t read = 0;
@@ -57,7 +57,13 @@ int main(int argc, char ** argv)
     return 1;
   }
 
-  maslov::inputMatrix(input, matrix, rows, columns, read);
+  if (!maslov::inputMatrix(input, matrix, rows, columns, read))
+  {
+    std::cerr << "Elements are not a number\n";
+    return 2;
+  }
+
+  size_t result = 0;
 
   if (taskNumber == 1)
   {
@@ -66,6 +72,11 @@ int main(int argc, char ** argv)
     int * staticArray = maslov::convert(matrix, rows,
         columns, array);
     maslov::destroyMatrix(matrix,rows);
+        for (size_t i = 0; i < rows * columns; i++)
+    {
+      std::cout << staticArray[i] << "\n";
+    } 
+    result = maslov::cntLocMax(staticArray, rows, columns); 
   }
   else
   {
@@ -73,6 +84,13 @@ int main(int argc, char ** argv)
     int * array = new int[arraySize];
     int * dynamicArray = maslov::convert(matrix,
         rows, columns, array);
+    for (size_t i = 0; i < rows * columns; i++)
+    {
+      std::cout << dynamicArray[i] << "\n";
+    }    
+    maslov::destroyMatrix(matrix,rows);
+    result = maslov::cntLocMax(dynamicArray, rows, columns);
+    delete[] dynamicArray; 
   }
-  // maslov::outputMatrix(output);
+  output << result << "\n";
 }

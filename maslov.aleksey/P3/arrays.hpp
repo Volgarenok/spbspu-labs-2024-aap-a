@@ -12,8 +12,7 @@ namespace maslov
   void destroyMatrix(int** theMatrix, size_t rows);
   std::istream & inputMatrix(std::istream & in, int** matrix,
       size_t rows, size_t columns, size_t & read);
-  //int cntLocMax();
-  // void outputMatrix(std::ostream &out);
+  size_t cntLocMax(int * array, size_t rows, size_t columns);
 }
 
 #endif

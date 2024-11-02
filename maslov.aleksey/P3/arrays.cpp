@@ -55,4 +55,24 @@ int** maslov::createMatrix(size_t rows, size_t columns)
   return matrix;
 }
 
-// void maslov::outputMatrix(std::ostream &out);
+size_t maslov::cntLocMax(int * array, size_t rows, size_t columns)
+{
+  const size_t arraySize = rows * columns;
+  size_t count = 0;
+  for (size_t i = 1; i < rows - 1; i++)
+  {
+    for (size_t j = 1; j < columns - 1; j++)
+    {
+      int current = i * columns + j;
+      bool isLocalMaximum = array[current] > array[current + 1];
+      isLocalMaximum = isLocalMaximum && (array[current] > array[current - 1]);
+      isLocalMaximum = isLocalMaximum && (array[current] > array[current - columns]);
+      isLocalMaximum = isLocalMaximum && (array[current] > array[current + columns]);
+      if (isLocalMaximum)
+      {
+        count++;
+      }
+    }
+  }
+  return count;
+}
