@@ -21,4 +21,5 @@ bool dribas::checkEnter(char ** argv, int argc, long int& secondArg)
     std::cerr << "First parameter is out of range\n";
     return 0;
   }
+  return 1;
 }

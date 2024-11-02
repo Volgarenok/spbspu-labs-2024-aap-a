@@ -1,10 +1,11 @@
 #include <iostream>
 #include <fstream>
-#include <string>
+#include <istream>
 #include <cstddef>
+#include <stdexcept>
 #include "is3Angle.hpp"
-#include "makeMatrix.hpp"
 #include "checkEnter.hpp"
+#include "enterMTX.hpp"
 
 int main(int argc, char ** argv)
 {
@@ -17,15 +18,40 @@ int main(int argc, char ** argv)
 
   size_t m = 0, n = 0;
   input >> m >> n;
-  if (!input || m == 0 || n == 0) {
+  if (!input) {
     std::cerr << "Error with matrix's size\n";
     return 2;
   }
   int * mtx = nullptr;
-  if (!dribas::makeMatrix(secondArg, mtx, m, n)) {
-    std::cerr << "Error with create matrix\n";
+  if (secondArg == 1) {
+    int redmtx[10000] = {};
+    mtx = redmtx;
+  }
+  if (secondArg == 2) {
+    try {
+      mtx = new int[m*n];
+   } catch(const std::bad_alloc & e) {
+     std::cerr << "Error with make matrix\n";
+     return 2;
+   }
+  }
+  size_t readed = 0;
+  dribas::enterMTX(input, mtx, m, n, readed);
+  if (input && readed == m * n){
+    if (dribas::is3Angle(mtx, m, n)) {
+      output << "true" << "\n";
+    } else {
+      output << "false" << "\n";
+    }
+  } else {
+    std::cerr << "Error with enter\n";
+    if (secondArg == 2) {
+      delete[] mtx;
+    }
     return 2;
   }
-
+  if (secondArg == 2) {
+    delete[] mtx;
+  }
   return 0;
 }

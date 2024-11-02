@@ -4,7 +4,7 @@
 
 namespace dribas
 {
-  bool is3Angle(int* matrix, size_t size);
+  bool is3Angle(int* matrix, size_t M, size_t N);
 }
 
 #endif
