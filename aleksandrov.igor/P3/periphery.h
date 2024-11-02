@@ -2,6 +2,10 @@
 #define PERIPHERY_H
 #include <fstream>
 #include <cstddef>
-void periphery(std::ofstream& output, int* array, size_t m, size_t n);
+
+namespace aleksandrov
+{
+  void periphery(int* array, size_t m, size_t n);
+}
 #endif
 
