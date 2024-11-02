@@ -1,11 +1,11 @@
 #include <iostream>
 #include <fstream>
+#include "cnt_row_nsm.h"
 #include "matrix_funcs.h"
 
 int main(int argc, char** argv)
 {
   int l = argc;
-  std::cout << l << "\n";
   if (l < 4)
   {
     std::cerr << "Not enough arguments\n";
@@ -19,7 +19,6 @@ int main(int argc, char** argv)
 
   char* f = argv[1];
   int c = *f - '0';
-  std::cout << c << "\n";
   if (f[0] < 48 || f[0] > 57)
   {
     std::cerr << "First parameter is not a number\n";
@@ -30,8 +29,6 @@ int main(int argc, char** argv)
     std::cerr << "First parameter is out of range\n";
     return 1;
   }
-  std::cout << f << "\n";
-  std::cout << c << "\n";
   std::ifstream input(argv[2]);
   size_t m = 0, n = 0, k = 0;
   input >> m >> n;
@@ -55,10 +52,14 @@ int main(int argc, char** argv)
   if(!std::cin)
   if (read != k)
   {
-    std::cerr << "Impossible to build matrix\n";
+    std::cerr << "Impossible to build matrix due incorrect element\n";
     return 2;
   }
-  std::cout << k << "\n";
+  std::cout << demehin::cnt_row_nsm(matrix, n, m ) << "\n";
+  for (size_t i = 0; i < k; ++i)
+  {
+    std::cout << matrix[i] << "\n";
+  }
 }
 
 
