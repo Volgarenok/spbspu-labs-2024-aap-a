@@ -60,6 +60,7 @@ int main(int argc, char** argv)
   {
     std::cout << matrix[i] << "\n";
   }
+  std::ofstream output(argv[3]);
 }
 
 
