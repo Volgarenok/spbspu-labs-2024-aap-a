@@ -46,19 +46,56 @@ int main(int argc, char ** argv)
   }
   std::cout << m << n << "\n";
   int * t = nullptr;
-  try
+  if (way == 2)
   {
-    t = karnauhova::ct_matrix(m, n, way);;
+    try
+    {
+      t = karnauhova::ct_matrix(m, n);;
+    }
+    catch(const std::bad_alloc & e)
+    {
+      std::cerr<<"Out of memory\n";
+      return 1;
+    };
   }
-  catch(const std::bad_alloc & e){
-    std::cerr<<"Out of memory\n";
-    return 1;
-  };
+  else
+  {
+    t[10000] = {};
+  }
   karnauhova::input_matrix(input, t, m, n, read);
+  if (karnauhova::input_matrix(input, t, m, n, read) && m == 0)
+  {
+      std::cerr << "File text is invalid\n";
+      if (way == 2)
+      {
+        delete[] t;
+      }
+      return 2;
+  }
   if (read < (m * n))
   {
     std::cerr << "Incorrect matrix\n";
+    if (way == 2)
+    {
+      delete[] t;
+    }
     return 2;
   }
-  std::cout<<t;
+  float* t2 = nullptr;
+  try
+  {
+    t2 =  karnauhova::smooth_matrix(t, m, n);
+   }
+   catch(const std::bad_alloc & e)
+   {
+     std::cerr<<"Out of memory\n";
+     return 1;
+   }
+  std::ofstream output(argv[3]);
+  karnauhova::output_matrix(output, t2, m, n);
+  if (way == 2)
+  {
+    delete[] t;
+  }
+  delete[] t2;
 }

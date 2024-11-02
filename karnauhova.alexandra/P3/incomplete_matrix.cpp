@@ -1,11 +1,21 @@
 #include "incomplete_matrix.hpp"
+#include <new>
 
-int* karnauhova::smooth_matrix(int* t,size_t m,size_t n)
+float* karnauhova::smooth_matrix(int* t,size_t m,size_t n)
 {
-  int* n_mtx[100000] = {};
-  float sum = 0;
+  float* n_mtx = nullptr;
+  try
+  {
+    n_mtx = new float[m*n];
+  }
+  catch (const std::bad_alloc &e)
+  {
+    delete[] n_mtx;
+    throw;
+  }
+  int sum = 0;
   size_t k = 0;
-  size_t count = 0;
+  float count = 0;
   for (size_t i = 0; i < m; ++i)
   {
     for (size_t j = 0; j < n; ++j)
@@ -54,9 +64,5 @@ int* karnauhova::smooth_matrix(int* t,size_t m,size_t n)
     }
     k += n;
   }
-  for (size_t i = 0; i < (m * n); i++)
-  {
-    t[i] = n_mtx[i];
-  }
-  return t;
+  return n_mtx;
 }

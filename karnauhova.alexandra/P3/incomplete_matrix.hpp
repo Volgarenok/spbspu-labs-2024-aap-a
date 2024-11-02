@@ -3,7 +3,7 @@
 #include <cstddef>
 namespace karnauhova
 {
-  int* smooth_matrix(int* t,size_t m,size_t n);
+  float* smooth_matrix(int* t,size_t m,size_t n);
 }
 #endif
 
