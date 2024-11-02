@@ -1,21 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
-#include <cctype>
 #include <cstddef>
-int* ct_table(size_t m,size_t n);
-//std::istream &
-int* input_matrix(std::istream & in, int * t, size_t m, size_t n)
-{
-  for (size_t i = 0; i < (m * n); ++i)
-  {
-    in >> t[i];
-  }
-  return t;
-}
+#include "create_matrix.hpp"
+#include "incomplete_matrix.hpp"
+#include "input_output.hpp"
+
 int main(int argc, char ** argv)
 {
-  int fix_matrix[10000] = {};
   if (argc < 4)
   {
     std::cerr << "Not enough arguments\n";
@@ -26,21 +18,11 @@ int main(int argc, char ** argv)
     std::cerr << "Too many arguments\n";
     return 1;
   }
-  char * number = argv[1];
-  if (!isdigit(number[0]))
+  char* str = argv[1];
+  if (!std::isdigit(str[0]))
   {
-    std::cerr << "First parameter is not a number\n";
+    std::cerr << "First parameter is not suitable\n";
     return 1;
-  }
-  size_t x = 1;
-  while (number[x]!='\0')
-  {
-    if (!isdigit(number[x]))
-    {
-      std::cerr << "First parameter is not a number\n";
-      return 1;
-    }
-    x++;
   }
   const int way = std::atoi(argv[1]);
   if (way > 2 | way < 1)
@@ -49,87 +31,34 @@ int main(int argc, char ** argv)
     return 1;
   }
   std::ifstream input(argv[2]);
-  int m = 0,n = 0;
+  size_t read = 0;
+  int m = 0, n = 0;
   input >> m >> n;
+  if (!input)
+  {
+    std::cerr << "File text is invalid\n";
+    return 2;
+  }
+  if (m != n)
+  {
+    std::cerr << "Non-square matrix\n";
+    return 2;
+  }
   std::cout << m << n << "\n";
-  int* t = nullptr;
-  if (way == 2)
-  {
-    int* t = ct_table(m,n);
-  }
-  else
-  {
-    int* t = fix_matrix;
-  }
-  std::cout<<input_matrix(input, t, m, n);
-  std::cout<<t;
-}
-int* ct_table(size_t m,size_t n){
-  int* matrix = nullptr;
+  int * t = nullptr;
   try
   {
-    matrix = new int[m*n];
+    t = karnauhova::ct_matrix(m, n, way);;
   }
-  catch(const std::bad_alloc &e)
+  catch(const std::bad_alloc & e){
+    std::cerr<<"Out of memory\n";
+    return 1;
+  };
+  karnauhova::input_matrix(input, t, m, n, read);
+  if (read < (m * n))
   {
-    delete[] matrix;
-    throw;
+    std::cerr << "Incorrect matrix\n";
+    return 2;
   }
-  return matrix;
-}
-
-int* smooth_matrix(int* t,size_t m,size_t n)
-{
-  
-  float sum = 0;
-  size_t k = 0;
-  size_t count = 0;
-  for (size_t i = 0; i < m; ++i)
-  {
-    for (size_t j = 0; j < n; ++j)
-    {
-      if (j != 0)
-      {
-        sum += t[j - 1 + k];
-        count+=1;
-        if (i != 0)
-        {
-          sum += t[j + k - n - 1];
-          count+=1;
-        }
-        if (i != (m - 1))
-        {
-          sum += t[j + k + n - 1];
-          count+=1;
-        }
-      }
-      if (j != (n - 1))
-      {
-        sum += t[j + 1 + k];
-        count+=1;
-        if (i != 0)
-        {
-          sum += t[j + k - n + 1];
-          count+=1;
-        }
-        if (i != (m - 1))
-        {
-          sum += t[j + k + n + 1];
-          count+=1;
-        }
-      }
-      if (i != 0)
-      {
-        sum += t[j + k - n];
-        count+=1;
-      }
-      if (i != (m - 1))
-      {
-        sum += t[j + k + n];
-        count+=1;
-      }
-    }
-    k += n
-  }
-  
+  std::cout<<t;
 }
