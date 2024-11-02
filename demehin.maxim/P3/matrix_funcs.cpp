@@ -18,10 +18,7 @@ std::istream & demehin::input_matrix(std::istream & in, int* t, size_t k, size_t
 {
   for (size_t i = 0; i < k; ++i)
   {
-    if (!(in >> t[i]))
-    {
-      throw std::logic_error("read fail");
-    }
+    in >> t[i];
     ++read;
   }
   return in;
