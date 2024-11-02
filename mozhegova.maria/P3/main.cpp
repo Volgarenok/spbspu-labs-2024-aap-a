@@ -43,6 +43,7 @@ int main(int argc, char ** argv)
   if (!mozhegova::inputMatrix(input, t, m, n, read))
   {
     std::cerr << "Invalid matrix element\n";
+    mozhegova::destroy(t, m);
     return 2;
   }
 

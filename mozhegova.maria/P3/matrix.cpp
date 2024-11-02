@@ -28,7 +28,7 @@ int ** mozhegova::createMatrix(size_t m, size_t n)
   }
   catch(const std::bad_alloc & e)
   {
-    mozhegova::destroy(t,created);
+    mozhegova::destroy(t, created);
     throw;
   }
   return t;
