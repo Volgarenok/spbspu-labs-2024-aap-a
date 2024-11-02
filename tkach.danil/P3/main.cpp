@@ -118,8 +118,8 @@ int main(int argc, char** argv)
   }
   else
   {
-      output << 0.0 << "\n";
-      return 1;
+      std::cerr << "ERROR: Invalid input\n";
+      return 2;
   }
   if (!input)
     {
