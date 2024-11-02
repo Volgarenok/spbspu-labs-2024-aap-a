@@ -1,4 +1,4 @@
-#include "fun.h"
+#include "taylor.h"
 #include <iostream>
 #include <cmath>
 #include <stdexcept>

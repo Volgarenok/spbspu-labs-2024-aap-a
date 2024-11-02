@@ -1,6 +1,6 @@
 #include <iostream>
+#include "taylor.h"
 #include <stdexcept>
-#include "fun.h"
 #include <cstring>
 
 int main()
