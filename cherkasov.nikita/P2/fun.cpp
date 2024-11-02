@@ -28,7 +28,7 @@ namespace cherkasov
   {
     std::cerr << "<MATH ERROR>" << "\n";
   }
-  void table(double x, double getTaylor_value, double get_exp_value, size_t col_width, size_t others_columns)
+  void get_table(double x, double getTaylor_value, double get_exp_value, size_t col_width, size_t others_columns)
   {
     std::cout.width(others_columns);
     std::cout << x << " ";
