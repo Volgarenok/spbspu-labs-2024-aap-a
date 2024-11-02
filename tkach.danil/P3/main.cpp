@@ -3,8 +3,7 @@
 #include "filemtx.h"
 #include "mtxlogic.h"
 
-
-int main(int argc, char ** argv) 
+int main(int argc, char ** argv)
 {
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
@@ -30,7 +29,6 @@ int main(int argc, char ** argv)
       }
     }
   }
-  
   if (flag == 0)
   {
     std::cerr << "First parameter is not a number\n";
@@ -46,7 +44,7 @@ int main(int argc, char ** argv)
     }
   }
   size_t str = 0, stl = 0;
-  if ((input >> str >> stl).good()) 
+  if ((input >> str >> stl).good())
   {
     if (stl < str)
     {
@@ -56,7 +54,7 @@ int main(int argc, char ** argv)
     {
       stl = str;
     }
-    if (id == 1) 
+    if (id == 1)
     {
       int mtx[10000];
       if (!(tkach::inputMtx(input, mtx, str)).good())
@@ -77,7 +75,7 @@ int main(int argc, char ** argv)
       tkach::outputMtx(output, mtx2, str);
       output << "\n";
     }
-    else if (id == 2) 
+    else if (id == 2)
     {
       int* mtx = nullptr;
       try 

@@ -13,7 +13,7 @@ double* tkach::createMtx2(const int* const mtx, const size_t str)
     delete[] mtx2;
     throw;
   }
-  for (size_t i = 0; i < str; ++i) 
+  for (size_t i = 0; i < str; ++i)
   {
     for (size_t j = 0; j < str; ++j)
     {
