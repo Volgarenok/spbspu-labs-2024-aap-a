@@ -50,8 +50,19 @@ int main(int argc, char **argv)
       return 2;
     }
     abramov::transform_Matrix(new_mtx, count);
-    abramov::output_Matrix(output, abramov::toSquare(nums, m, n, count), count);
+    int *matrix = nullptr;
+    try
+    {
+      matrix = abramov::toSquare(nums, m, n, count);
+    }
+    catch (const std::bad_alloc &e)
+    {
+      std::cerr << "Memory fail\n";
+      return 2;
+    }
+    abramov::output_Matrix(output, matrix, count);
     delete[] new_mtx;
+    delete[] matrix;
   }
   else if (atoi(argv[1]) == 2)
   {
