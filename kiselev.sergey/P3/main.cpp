@@ -70,7 +70,8 @@ int main(int argc, char** argv)
   }
   char* outFile = argv[3];
   std::ofstream output(outFile);
-  output << "The number of elements read: " << count_read << "\n" if (count_read == m * n)
+  output << "The number of elements read: " << count_read << "\n";
+  if (count_read == m * n)
   {
     output << "Number of saddle elements: " << number_element << "\n";
   }
