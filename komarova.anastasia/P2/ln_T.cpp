@@ -1,7 +1,7 @@
-#include "kola.h"
+#include "tableTeilor.h"
 #include <cmath>
 
-double komarova::ln_Teilor(double x)
+double komarova::lnTeilor(double x)
 {
-  return log(x + sqrt(x*x +1));
+  return std::log(x + sqrt((x * x) + 1));
 }

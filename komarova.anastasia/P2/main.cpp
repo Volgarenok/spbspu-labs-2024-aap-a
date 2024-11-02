@@ -1,8 +1,7 @@
 #include <iostream>
 #include <cstddef>
-#include <cmath>
 #include <stdexcept>
-#include "kola.h"
+#include "tableTeilor.h"
 
 int main()
 {
@@ -14,12 +13,12 @@ int main()
     std::cerr << "Input is incorrect \n";
     return 1;
   }
-  if ((left <= -1.0) or (left >= 1.0))
+  if ((left <= -1.0) || (left >= 1.0))
   {
     std::cerr << "incorrect left \n";
     return 1;
   }
-  if ((right >= 1.0) or (right <= -1.0))
+  if ((right >= 1.0) || (right <= -1.0))
   {
     std::cerr << "incorrect right \n";
     return 1;
@@ -30,15 +29,15 @@ int main()
     return 1;
   }
 
-  const double error = 0.001;
-  const double step = 0.02;
+  constexpr double error = 0.001;
+  constexpr double step = 0.02;
 
   for (auto i = left; i < right; i += step)
   {
-    double y = komarova::ln_Teilor(i);
+    double y = komarova::lnTeilor(i);
     try
     {
-      double value = komarova::Teilor(i, k, error);
+      double value = komarova::teilor(i, k, error);
       komarova::output(i, value, y);
     }
     catch (const std::logic_error & e)
@@ -46,10 +45,10 @@ int main()
       komarova::matherr(i, y);
     }
   }
-  double g = komarova::ln_Teilor(right);
+  double g = komarova::lnTeilor(right);
   try
   {
-    double value = komarova::Teilor(right, k, error);
+    double value = komarova::teilor(right, k, error);
     komarova::output(right, value, g);
   }
   catch (const std::logic_error & e)
@@ -57,4 +56,3 @@ int main()
     komarova::matherr(right, g);
   }
 }
-//check
