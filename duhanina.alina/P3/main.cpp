@@ -47,7 +47,10 @@ int main(int argc, char ** argv)
       std::cerr << "Invalid input" << "\n";
       return 2;
     }
-    duhanina::outputAnswer(output, table, m, n);
+    if (input && read == m * n)
+    {
+      output << duhanina::outputAnswer(table, m, n) << "\n";
+    }
   }
   else
   {
@@ -68,7 +71,10 @@ int main(int argc, char ** argv)
       delete[] table;
       return 2;
     }
-    duhanina::outputAnswer(output, table, m, n);
+    if (input && read == m * n)
+    {
+      output << duhanina::outputAnswer(table, m, n) << "\n";
+    }
     delete[] table;
   }
   return 0;
