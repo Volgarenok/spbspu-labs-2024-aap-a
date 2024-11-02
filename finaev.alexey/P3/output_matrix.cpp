@@ -8,7 +8,7 @@ void output_matrix(std::ostream & out, int * matrix, size_t strk, size_t stl)
   {
     for (size_t j = 1; j < (stl - 1); j++)
     {
-      if (matrix[i*strk + j - 1] < matrix[i*strk + j] && matrix[i*strk + j + 1] < matrix[i*strk + j])
+      if (matrix[i * strk + j - 1] < matrix[i * strk + j] && matrix[i * strk + j + 1] < matrix[i * strk + j])
       {
         res += 1;
       }
