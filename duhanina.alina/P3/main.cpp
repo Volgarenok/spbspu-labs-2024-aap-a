@@ -41,7 +41,7 @@ int main(int argc, char ** argv)
   {
     int table[1000];
     duhanina::inputMatrix(input, table, m, n);
-    if (!(duhanina::inputMatrix(input, table, m, n))
+    if (!(duhanina::inputMatrix(input, table, m, n)))
     {
       std::cerr << "Invalid input" << "\n";
       return 2;
@@ -61,7 +61,7 @@ int main(int argc, char ** argv)
       return 1;
     }
     duhanina::inputMatrix(input, table, m, n);
-    if (!(duhanina::inputMatrix(input, table, m, n)) && m != 0)
+    if (!(duhanina::inputMatrix(input, table, m, n)))
     {
       std::cerr << "Invalid input" << "\n";
       delete[] table;
