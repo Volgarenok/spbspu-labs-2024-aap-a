@@ -88,5 +88,6 @@ int main(int argc, char** argv)
   char* outFile = argv[3];
   std::ofstream output(outFile);
   output << "Number of saddle elements: " << number_element << "\n";
+  return 0;
 }
 
