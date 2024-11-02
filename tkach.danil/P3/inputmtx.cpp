@@ -6,7 +6,7 @@ std::istream & tkach::inputMtx(std::istream & in, int* const mtx1, const size_t 
   {
     for (size_t j = 0; j < str; ++j)
     {
-      in >> mtx1[i*str+j];
+      in >> mtx1[i * str + j];
     }
   }
   return in;

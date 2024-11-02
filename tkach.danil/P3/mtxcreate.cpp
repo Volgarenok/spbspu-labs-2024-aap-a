@@ -52,7 +52,7 @@ double* tkach::createMtx2(const int* const mtx, const size_t str)
               }
             }
           double sr = sum / num;
-          mtx2[i * str + j]=sr;
+          mtx2[i * str + j] = sr;
       }
   }
   return mtx2;
