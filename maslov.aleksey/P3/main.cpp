@@ -75,8 +75,8 @@ int main(int argc, char ** argv)
         for (size_t i = 0; i < rows * columns; i++)
     {
       std::cout << staticArray[i] << "\n";
-    } 
-    result = maslov::cntLocMax(staticArray, rows, columns); 
+    }
+    result = maslov::cntLocMax(staticArray, rows, columns);
   }
   else
   {
@@ -87,10 +87,10 @@ int main(int argc, char ** argv)
     for (size_t i = 0; i < rows * columns; i++)
     {
       std::cout << dynamicArray[i] << "\n";
-    }    
+    }
     maslov::destroyMatrix(matrix,rows);
     result = maslov::cntLocMax(dynamicArray, rows, columns);
-    delete[] dynamicArray; 
+    delete[] dynamicArray;
   }
   output << result << "\n";
 }

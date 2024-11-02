@@ -57,7 +57,6 @@ int** maslov::createMatrix(size_t rows, size_t columns)
 
 size_t maslov::cntLocMax(int * array, size_t rows, size_t columns)
 {
-  const size_t arraySize = rows * columns;
   size_t count = 0;
   for (size_t i = 1; i < rows - 1; i++)
   {
