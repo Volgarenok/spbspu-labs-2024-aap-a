@@ -84,6 +84,7 @@ int main(int argc, char** argv)
       return 2;
     }
     number_element = kiselev::saddleElement(din_array, m, n);
+    delete[] din_array;
   }
   char* outFile = argv[3];
   std::ofstream output(outFile);
