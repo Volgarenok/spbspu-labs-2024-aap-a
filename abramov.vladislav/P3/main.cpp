@@ -29,13 +29,36 @@ int main(int argc, char **argv)
   size_t count = 0;
   if (atoi(argv[1]) == 1)
   {
-    input >> m >> n;
-    abramov::input_matrix(input, nums, m, n, read);
-    abramov::output_matrix(output, abramov::toSquare(nums, m, n, count), count);
+    if(!(input >> m >> n))
+    {
+      std::cerr << "Wrong input!\n";
+      return 1;
+    }
+    if (!abramov::input_Matrix(input, nums, m, n, read) || read!=m*n)
+    {
+      std::cerr << "Wrong input!\n";
+      return 1;
+    }
+    int *new_mtx = nullptr;
+    try
+    {
+      new_mtx = abramov::toSquare(nums, m, n, count);
+    }
+    catch (const std::bad_alloc &e)
+    {
+      std::cerr << "Memory fail\n";
+      return 2;
+    }
+    abramov::transform_Matrix(new_mtx, count);
+    abramov::output_Matrix(output, abramov::toSquare(nums, m, n, count), count);
   }
-  else if (atoi(argv[2]) == 2)
+  else if (atoi(argv[1]) == 2)
   {
-    input >> m >> n;
+    if(!(input >> m >> n))
+    {
+      std::cerr << "Wrong input!\n";
+      return 1;
+    }
     int *matrix = nullptr;
     try
     {
@@ -46,7 +69,22 @@ int main(int argc, char **argv)
       std::cerr << "Memory fail\n";
       return 2;
     }
-    abramov::input_matrix(input, matrix, m, n, read);
-    abramov::output_matrix(output, abramov::toSquare(matrix, m, n, count), count);
+    if (!abramov::input_Matrix(input, matrix, m, n, read) || read!=n*m)
+    {
+      std::cerr << "Wrong input!\n";
+      return 1;
+    }
+    int *new_mtx = nullptr;
+    try
+    {
+      new_mtx = abramov::toSquare(matrix, m, n, count);
+    }
+    catch (const std::bad_alloc &e)
+    {
+      std::cerr << "Memory fail\n";
+      return 2;
+    }
+    abramov::transform_Matrix(new_mtx, count);
+    abramov::output_Matrix(output, new_mtx, count);
   }
 }
