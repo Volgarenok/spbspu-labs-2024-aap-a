@@ -14,7 +14,7 @@ int main(int argc, char ** argv)
   int num = 0;
   try
   {
-    num = std::stoi(argv[1]);
+    num = std::stoi(argv[1][0]);
   }
   catch (const std::logic_error & e)
   {
