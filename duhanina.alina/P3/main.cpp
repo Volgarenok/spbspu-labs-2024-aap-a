@@ -24,7 +24,7 @@ int main(int argc, char ** argv)
   if (num != 1 || num != 2)
   {
     std::cerr << "Invalid value num" << "\n";
-    return 2;
+    return 1;
   }
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
