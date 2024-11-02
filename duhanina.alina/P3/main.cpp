@@ -58,7 +58,7 @@ int main(int argc, char ** argv)
     {
       table = new int[m * n];
     }
-    catch (const std::alloc & e)
+    catch (const std::bad_alloc & e)
     {
       std::cerr << "Error memory";
       return 1;
