@@ -8,19 +8,24 @@ int main(int argc, char ** argv)
 {
   if (argc != 4)
   {
+    if (argc > 4)
+    {
+      std::cerr << "Too many arguments" << "\n";
+    return 1;
+    }
     std::cerr << "Incorrect amount of data entered" << "\n";
     return 1;
   }
   char * ch = argv[1];
   if (!duhanina::isDig(ch))
   {
-    std::cerr << "Not a number" << "\n";
+    std::cerr << "First parameter is not a number" << "\n";
     return 1;
   }
   int num = atoi(ch);
   if (!(num == 1 || num == 2))
   {
-    std::cerr << "Invalid value num" << "\n";
+    std::cerr << "First parameter is out of range" << "\n";
     return 1;
   }
   std::ifstream input(argv[2]);
