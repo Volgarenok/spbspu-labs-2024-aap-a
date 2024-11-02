@@ -45,13 +45,18 @@ int main(int argc, char ** argv)
     return 2;
   }
 
+  int * v = nullptr;
   if (argv[1] == "1")
   {
     int arr[10000] = {};
-    int * v = arr;
+    v = arr;
   }
   else
   {
-    int * v = mozhegova::convert(t, m, n);
+    v = mozhegova::convert(t, m, n);
   }
+  mozhegova::destroy(t, m);
+
+  std::ofstream output(argv[3]);
+  output << mozhegova::uppTriMtx(v, m, n) << "\n";
 }

@@ -76,3 +76,24 @@ int * mozhegova::convert(int ** t, size_t m, size_t n)
   }
   return v;
 }
+
+bool mozhegova::uppTriMtx(int * v, size_t m, size_t n)
+{
+  if (m != n)
+  {
+    return false;
+  }
+  size_t step = 0;
+  for (size_t k = m + 1; k < n * m; k += m + 1)
+  {
+    step++;
+    for (size_t i = 0; i < step; i++)
+    {
+      if (v[k - i] != 0)
+      {
+        return false;
+      }
+    }
+  }
+  return true;
+}
