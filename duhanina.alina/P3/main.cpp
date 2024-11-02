@@ -1,44 +1,8 @@
+#include "titleMatrix.h"
 #include <iostream>
 #include <fstream>
-
-
-std::istream & inputMatrix(std::istream & in, int * t, size_t m, size_t n)
-{
-  size_t size_table = n * m;
-  for (size_t i = 0; i < size_table; ++i)
-  {
-    in >> t[i];
-  }
-  return in;
-}
-
-
-void output(std::ostream & out, int * t, size_t m, size_t n)
-{
-  int max_count_diag = m + n - 1;
-  int sums[max_count_diag] = {0};
-  int diag_count[max_count_diag] = {0};
-  for (size_t i = 0; i < m; ++i)
-  {
-    for (size_t j = 0; j < m; ++j)
-    {
-      int index_diag = j - (m - i - 1);
-      sums[index_diag] += table[i * n + j];
-      diag_count[index_diag]++;
-    }
-  }
-int min_sum = std::numeric_limits<int>::max();
-for (size_t i = 0; i < max_count_diag; ++i)
-{
-  if (diag_count[i] > 0 && sums[i] < min_sum)
-  {
-    min_sum = sums[i];
-  }
-}
-std::ofstream output(argv[3]);
-output << min_sum << "\n";
-}
-
+#include <string>
+#include <stdexcept>
 
 int main(int argc, char ** argv)
 {
@@ -63,6 +27,7 @@ int main(int argc, char ** argv)
     return 1;
   }
   std::ifstream input(argv[2]);
+  std::ofstream output(argv[3]);
   size_t m = 0, n = 0;
   input >> m >> n;
   if (!(input >> m >> n) || m == 0 || n == 0)
@@ -73,28 +38,26 @@ int main(int argc, char ** argv)
   if (num == 1)
   {
     int table[1000];
-    inputMatrix(input, table, m, n);
-    if (!(input_matrix(input, table, m, n)))
+    duhanina::inputMatrix(input, table, m, n);
+    if (!(duhanina::inputMatrix(input, table, m, n)))
     {
       std::cerr << "Invalid input" << "\n";
       return 2;
     }
-    outputMatrix(output, table, m, n);
+    duhanina::outputAnswer(output, table, m, n);
   }
   else
   {
     int * table = new int[m * n];
-    input_matrix(input, table, m, n);
-    if (!(input_matrix(input, table, m, n)))
+    duhanina::inputMatrix(input, table, m, n);
+    if (!(duhanina::inputMatrix(input, table, m, n)))
     {
       std::cerr << "Invalid input" << "\n";
       delete[] table;
       return 2;
     }
-    outputMatrix(output, table, m, n);
+    duhanina::outputAnswer(output, table, m, n);
     delete[] table;
   }
   return 0;
 }
-
-
