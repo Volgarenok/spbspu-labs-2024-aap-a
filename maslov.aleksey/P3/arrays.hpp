@@ -6,13 +6,13 @@
 
 namespace maslov
 {
-  int * convert(const int* const* matrix, size_t rows,
-      size_t columns, int * array);
-  int** createMatrix(size_t rows, size_t columns);
-  void destroyMatrix(int** theMatrix, size_t rows);
-  std::istream & inputMatrix(std::istream & in, int** matrix,
-      size_t rows, size_t columns, size_t & read);
-  size_t cntLocMax(int * array, size_t rows, size_t columns);
+  int *convert(const int *const *matrix, size_t rows,
+      size_t columns, int *array);
+  int **createMatrix(size_t rows, size_t columns);
+  void destroyMatrix(int **theMatrix, size_t rows);
+  std::istream &inputMatrix(std::istream &in, int **matrix,
+      size_t rows, size_t columns, size_t &read);
+  size_t findLocalMaximum(int *array, size_t rows, size_t columns);
 }
 
 #endif

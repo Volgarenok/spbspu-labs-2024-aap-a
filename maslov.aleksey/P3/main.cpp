@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include "arrays.hpp"
 
-int main(int argc, char ** argv)
+int main(int argc, char **argv)
 {
   if (argc < 4)
   {
@@ -15,8 +15,8 @@ int main(int argc, char ** argv)
     std::cerr << "Too many arguments\n";
     return 1;
   }
-  char* endptr = nullptr;
-  long taskNumber = std::strtol(argv[1], &endptr, 10);
+  char *endptr = nullptr;
+  const long taskNumber = std::strtol(argv[1], &endptr, 10);
   if (*endptr != '\0')
   {
     std::cerr << "First parameter is not a number\n";
@@ -27,13 +27,10 @@ int main(int argc, char ** argv)
     std::cerr << "First parameter is out of range\n";
     return 1;
   }
-
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
-
   size_t rows = 0, columns = 0;
   input >> rows >> columns;
-
   if (!input)
   {
     std::cerr << "Rows or columns are not a number\n";
@@ -44,46 +41,41 @@ int main(int argc, char ** argv)
     output << rows << " " << columns << "\n";
     return 0;
   }
-
   size_t read = 0;
-  int ** matrix = nullptr;
+  int **matrix = nullptr;
   try
   {
     matrix = maslov::createMatrix(rows,columns);
   }
-  catch(const std::bad_alloc & e)
+  catch (const std::bad_alloc &e)
   {
     std::cerr << "Out of memory\n";
     return 1;
   }
-
   if (!maslov::inputMatrix(input, matrix, rows, columns, read))
   {
     std::cerr << "Elements are not a number or not enough\n";
     maslov::destroyMatrix(matrix, rows);
     return 2;
   }
-
   size_t result = 0;
-
   if (taskNumber == 1)
   {
     constexpr size_t max_size = 10000;
     int array[max_size] = {};
-    int * staticArray = maslov::convert(matrix, rows,
+    int *staticArray = maslov::convert(matrix, rows,
         columns, array);
-    maslov::destroyMatrix(matrix,rows);
-    result = maslov::cntLocMax(staticArray, rows, columns);
+    result = maslov::findLocalMaximum(staticArray, rows, columns);
   }
   else
   {
     const size_t arraySize = rows * columns;
-    int * array = new int[arraySize];
-    int * dynamicArray = maslov::convert(matrix,
+    int *array = new int[arraySize];
+    int *dynamicArray = maslov::convert(matrix,
         rows, columns, array);
-    maslov::destroyMatrix(matrix,rows);
-    result = maslov::cntLocMax(dynamicArray, rows, columns);
+    result = maslov::findLocalMaximum(dynamicArray, rows, columns);
     delete[] dynamicArray;
   }
+  maslov::destroyMatrix(matrix, rows);
   output << result << "\n";
 }
