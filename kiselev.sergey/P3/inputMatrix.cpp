@@ -1,6 +1,6 @@
 #include "inputMatrix.h"
 #include <stdexcept>
-void kiselev::inputMatrix(std::ifstream& in, char* array, size_t m, size_t n)
+void kiselev::inputMatrix(std::ifstream& in, int* array, size_t m, size_t n)
 {
   if (in.good())
   {
