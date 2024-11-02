@@ -3,15 +3,16 @@
 
 void kizhin::checkArgumentsCount(int argc)
 {
-  if (argc < 4) {
-    throw std::logic_error("Too few arguments: expected 4");
+  constexpr int expected = 4;
+  if (argc < expected) {
+    throw std::logic_error("Too few arguments");
   }
-  if (argc > 4) {
-    throw std::logic_error("Too many arguments: expected 4");
+  if (argc > expected) {
+    throw std::logic_error("Too many arguments");
   }
 }
 
-kizhin::MemoryMode kizhin::parseProgrammMode(const char* string)
+kizhin::MemoryMode kizhin::parseProgramMode(const char* string)
 {
   if (string == nullptr || string[0] == '\0' || string[1] != '\0') {
     throw std::logic_error("Program mode must be a single character");
