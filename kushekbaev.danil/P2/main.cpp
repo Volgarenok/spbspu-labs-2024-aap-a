@@ -35,10 +35,10 @@ int main()
 
   constexpr double error = 0.001;
   constexpr double step = 0.05;
-  const char * errormsg = "<MATH ERROR>";
-  const size_t second_column_width = std::strlen(errormsg);
+  constexpr const char * errormsg = "<MATH ERROR>";
+  constexpr size_t second_column_width = std::strlen(errormsg);
   constexpr size_t others_columns = 10;
-  const size_t snd = second_column_width;
+  constexpr size_t snd = second_column_width;
   constexpr size_t oth = others_columns;
 
   for (auto i = first_member ; i < last_member; i += step)
@@ -53,7 +53,7 @@ int main()
     {
       std::cout << std::setw(snd) << errormsg;
     }
-    std::cout << " " << std::setw(oth) << kushekbaev::sinhCalc(i, error);
+    std::cout << " " << std::setw(oth) << kushekbaev::sinhCalc(i);
     std::cout << "\n";
   }
 
@@ -66,6 +66,5 @@ int main()
   {
     std::cout << errormsg;
   }
-
-  std::cout << std::setw(snd-1) << kushekbaev::sinhCalc(last_member, error) << "\n";
+  std::cout << std::setw(snd - 1) << kushekbaev::sinhCalc(last_member) << "\n";
 }
