@@ -46,19 +46,19 @@ int main(int argc, char ** argv)
     return 2;
   }
 
+  std::ofstream output(argv[3]);
   int * v = nullptr;
   if (std::strcmp(argv[1], "1") == 0)
   {
     int arr[10000] = {};
     v = arr;
+    output << mozhegova::uppTriMtx(v, m, n) << "\n";
   }
   else
   {
     v = mozhegova::convert(t, m, n);
+    output << mozhegova::uppTriMtx(v, m, n) << "\n";
+  delete[] v;
   }
   mozhegova::destroy(t, m);
-
-  std::ofstream output(argv[3]);
-  output << mozhegova::uppTriMtx(v, m, n) << "\n";
-  delete[] v;
 }
