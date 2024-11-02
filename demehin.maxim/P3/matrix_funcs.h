@@ -5,7 +5,7 @@
 
 namespace demehin
 {
-  int* alloc(size_t k, int c);
+  int* alloc(size_t k);
   std::istream & input_matrix(std::istream & in, int* t, size_t k, size_t & read);
 }
 #endif

@@ -1,16 +1,9 @@
 #include "matrix_funcs.h"
 
-int* demehin::alloc(size_t k, int c)
+int* demehin::alloc(size_t k)
 {
   int* matrix = nullptr;
-  if (c == 1)
-  {
-    matrix[10000] = {};
-  }
-  else if (c == 2)
-  {
-    matrix = new int[k];
-  }
+  matrix = new int[k];
   return matrix;
 }
 

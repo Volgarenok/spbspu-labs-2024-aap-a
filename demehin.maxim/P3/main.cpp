@@ -29,38 +29,70 @@ int main(int argc, char** argv)
     std::cerr << "First parameter is out of range\n";
     return 1;
   }
+
   std::ifstream input(argv[2]);
   size_t m = 0, n = 0, k = 0;
   input >> m >> n;
-  k = m * n;
-  int* matrix = nullptr;
-  try
-  {
-    matrix = demehin::alloc(k, c);
-  }
-  catch (const std::bad_alloc & e)
-  {
-    std::cerr << "Out of memory\n";
-    return 1;
-  }
-  size_t read = 0;
-  if(!demehin::input_matrix(input, matrix, k, read) && m != 0)
+  if (!input)
   {
     std::cerr << "Impossible to build matrix\n";
     return 2;
   }
-  if(!std::cin)
+
+  k = m * n;
+  int* matrix2 = nullptr;
+  if (c == 2)
+  {
+    try
+    {
+      matrix2 = demehin::alloc(k);
+    }
+    catch (const std::bad_alloc & e)
+    {
+      std::cerr << "Out of memory\n";
+      return 1;
+    }
+  }
+  int matrix1[10000] = {};
+  size_t read = 0;
+  if (c == 1)
+  {
+    if (!demehin::input_matrix(input, matrix1, k, read) && m != 0)
+    {
+      std::cerr << "Impossible to build matrix\n";
+      return 2;
+    }
+  }
+  else
+  {
+    if (!demehin::input_matrix(input, matrix2, k, read) && m != 0)
+    {
+      std::cerr << "Impossible to build matrix\n";
+      return 2;
+    }
+  }
   if (read != k)
+  {
+    std::cerr << "Impossible to build matrix due incorrect number of elements\n";
+    return 2;
+  }
+  if (!std::cin)
   {
     std::cerr << "Impossible to build matrix due incorrect element\n";
     return 2;
   }
-  std::cout << demehin::cnt_row_nsm(matrix, n, m ) << "\n";
-  for (size_t i = 0; i < k; ++i)
+  if (c == 1)
   {
-    std::cout << matrix[i] << "\n";
+    std::cout << demehin::cnt_row_nsm(matrix1, m, n) << "\n";
+    std::ofstream output(argv[3]);
+    output << demehin::cnt_row_nsm(matrix1, m, n);
   }
-  std::ofstream output(argv[3]);
+  else
+  {
+    std::cout << demehin::cnt_row_nsm(matrix2, m, n) << "\n";
+    std::ofstream output(argv[3]);
+    output << demehin::cnt_row_nsm(matrix2, m, n);
+  }
 }
 
 
