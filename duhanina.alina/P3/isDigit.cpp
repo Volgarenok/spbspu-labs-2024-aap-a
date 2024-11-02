@@ -1,6 +1,6 @@
 #include "titleMatrix.h"
 
-bool duhanina::isDig(char * t)
+bool duhanina::isDig(char * ch)
 {
   size_t i = 0;
   while (ch[i] != "\0")
