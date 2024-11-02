@@ -61,3 +61,18 @@ std::istream & inputMatrix(std::istream & in, int ** t, size_t m, size_t n, size
   }
   return in;
 }
+
+int * mozhegova::convert(int ** t, size_t m, size_t n)
+{
+  int * v = new int[n * m];
+  size_t k = 0;
+  for (size_t i = 0; i < m; i++)
+  {
+    for (size_t j = 0; j < 0; j++)
+    {
+      v[k] = t[i][j];
+      k++;
+    }
+  }
+  return v;
+}

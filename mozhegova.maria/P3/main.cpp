@@ -44,4 +44,14 @@ int main(int argc, char ** argv)
     std::cerr << "Invalid matrix element\n";
     return 2;
   }
+
+  if (argv[1] == "1")
+  {
+    int arr[10000] = {};
+    int * v = arr;
+  }
+  else
+  {
+    int * v = mozhegova::convert(t, m, n);
+  }
 }
