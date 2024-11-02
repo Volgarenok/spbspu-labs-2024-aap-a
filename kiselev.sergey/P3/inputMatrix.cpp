@@ -1,4 +1,5 @@
 #include "inputMatrix.h"
+#include <stdexcept>
 void kiselev::inputMatrix(std::ifstream& in, char* array, size_t m, size_t n)
 {
   if (in.good())
@@ -10,5 +11,13 @@ void kiselev::inputMatrix(std::ifstream& in, char* array, size_t m, size_t n)
         in >> array[i * n + j];
       }
     }
+  }
+  else if (in.eof())
+  {
+    throw std::logic_error("The file is empty\n");
+  }
+  else
+  {
+    throw std::invalid_argument("The contents are not a two-dimensional array\n");
   }
 }
