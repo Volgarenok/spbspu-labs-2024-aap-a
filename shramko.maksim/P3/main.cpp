@@ -42,21 +42,21 @@ int main(int argc, char** argv)
   std::ifstream finput(argv[2]);
   std::ofstream foutput(argv[3]);
 
-  size_t count_rows = 0;
-  size_t count_coloumns = 0;
+  size_t cnt_row = 0;
+  size_t cnt_col = 0;
 
-  finput >> count_rows >> count_coloumns;
+  finput >> cnt_row >> cnt_col;
 
   if (argv[1][0] == 1)
   {
     int mtrx[10000] = {0};
-    if (!shramko::inputMtrx(finput, mtrx, count_rows, count_coloumns))
+    if (!shramko::inputMtrx(finput, mtrx, cnt_row, cnt_col))
     {
       std::cerr << "ERROR!\n";
       return 2;
     }
 
-    foutput << shramko::countGoodColoumns(mtrx, count_rows, count_coloumns) << "\n";
+    foutput << shramko::countGoodColoumns(mtrx, cnt_row, cnt_col) << "\n";
   }
 
   else if (argv[1][0] == 2)
@@ -64,22 +64,23 @@ int main(int argc, char** argv)
     int* mtrx = nullptr;
     try
     {
-      mtrx = new int[count_rows * count_coloumns];
+      mtrx = new int[cnt_row * cnt_col];
     }
     catch (const std::bad_alloc & e)
     {
       std::cerr << "Out of memory\n";
       return 1;
     }
-    if (!shramko::inputMtrx(finput, mtrx, count_rows, count_coloumns))
+    if (!shramko::inputMtrx(finput, mtrx, cnt_row, cnt_col))
     {
       delete[] mtrx;
       std::cerr << "ERROR!\n";
       return 2;
     }
 
-    foutput << shramko::countGoodColoumns(mtrx, count_rows, count_coloumns) << "\n";
+    foutput << shramko::countGoodColoumns(mtrx, cnt_row, cnt_col) << "\n";
 
     delete[] mtrx;
   }
 }
+

@@ -1,10 +1,10 @@
 #include "inputMtrx.hpp"
 
-std::istream & shramko::matrixInput(std::istream & in, int* mtrx, size_t count_rows, size_t count_columns)
+std::istream & shramko::inputMtrx(std::istream & in, int* mtrx, size_t cnt_row, size_t cnt_col)
 {
-  for (size_t i = 0; i < (count_rows * count_coloumns); ++i)
+  for (size_t i = 0; i < (cnt_row * cnt_col); ++i)
   {
-    in >> matrix[i];
+    in >> mtrx[i];
   }
   return in;
 }

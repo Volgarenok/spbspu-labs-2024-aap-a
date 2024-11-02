@@ -5,7 +5,7 @@
 
 namespace shramko
 {
-  std::istream & inputMtrx(std::istream & in, int* mtrx, size_t count_rows, size_t count_coloumns);
+  std::istream & inputMtrx(std::istream & in, int* mtrx, size_t cnt_row, size_t cnt_col);
 }
 
 #endif
