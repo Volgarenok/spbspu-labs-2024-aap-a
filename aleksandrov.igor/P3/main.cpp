@@ -28,19 +28,17 @@ int main(int argc, char** argv)
       return 1;
     }
   }
-  
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
   int m = 0, n = 0;
   input >> m >> n;
   const int size = m * n;
-  
   if (atoi(argv[1]) == 1)
   {
     constexpr int arraySize = 10000;
     int array[arraySize] = {};
-    size_t read = 0;
-    if (!aleksandrov::inputMatrix(input, array, size, read))
+    int read = 0;
+    if (!aleksandrov::inputMatrix(input, array, size, read) || read != size)
     {
       std::cerr << "ERROR: Input was incorrect!\n";
       return 2;
@@ -60,8 +58,8 @@ int main(int argc, char** argv)
       std::cerr << "ERROR: Out of memory!\n";
       return 1;
     }
-    size_t read = 0;
-    if (!aleksandrov::inputMatrix(input, array, size, read))
+    int read = 0;
+    if (!aleksandrov::inputMatrix(input, array, size, read) || read != size)
     {
       std::cerr << "ERROR: Input was incorrect!\n";
       delete[] array;

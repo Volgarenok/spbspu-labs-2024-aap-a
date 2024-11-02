@@ -5,7 +5,7 @@
 
 namespace aleksandrov
 {
-  std::istream& inputMatrix(std::istream& input, int* array, size_t size, size_t& read);
+  std::istream& inputMatrix(std::istream& input, int* array, size_t size, int& read);
   void outputMatrix(std::ostream& output, int* array, size_t m, size_t n);
 }
 #endif

@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-std::istream& aleksandrov::inputMatrix(std::istream& input, int* array, size_t size, size_t& read)
+std::istream& aleksandrov::inputMatrix(std::istream& input, int* array, size_t size, int& read)
 {
   for (size_t i = 0; i < size; ++i)
   {
