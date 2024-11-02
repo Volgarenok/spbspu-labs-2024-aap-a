@@ -1,26 +1,31 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstddef>
+#include "is3Angle.hpp"
+#include "makeMatrix.hpp"
+#include "checkEnter.hpp"
 
 int main(int argc, char ** argv)
 {
-  if (argc < 4) {
-    std::cerr << "Not enough arguments\n";
+  long int secondArg = -1;
+  if (!dribas::checkEnter(argv, argc, secondArg)) {
     return 1;
   }
-  if (argc > 4) {
-    std::cerr << "Too many arguments\n";
-    return 1;
+  std::ifstream input(argv[2]);
+  std::ofstream output(argv[3]);
+
+  size_t m = 0, n = 0;
+  input >> m >> n;
+  if (!input || m == 0 || n == 0) {
+    std::cerr << "Error with matrix's size\n";
+    return 2;
   }
-  char *endptr = nullptr;
-  int firstArg = std::strtol(argv[1], &endptr, 10);
-  if (*endptr != '\0') {
-    std::cerr << "First parameter is not a number\n";
-    return 1;
+  int * mtx = nullptr;
+  if (!dribas::makeMatrix(secondArg, mtx, m, n)) {
+    std::cerr << "Error with create matrix\n";
+    return 2;
   }
-  if (firstArg > 2 || firstArg < 1) {
-    std::cerr << "First parameter is out of range\n";
-    return 1;
-  }
- std::cout << "all is good!\n";
+
+  return 0;
 }
