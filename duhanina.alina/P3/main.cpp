@@ -42,11 +42,11 @@ int main(int argc, char ** argv)
   {
     int table[1000];
     duhanina::inputMatrix(input, table, m, n, read);
-/*    if (!(duhanina::inputMatrix(input, table, m, n, read)))
+    if (!(duhanina::inputMatrix(input, table, m, n, read)))
     {
       std::cerr << "Invalid input" << "\n";
       return 2;
-    }*/
+    }
     if (input && read == m * n)
     {
       output << duhanina::outputAnswer(table, m, n) << "\n";
@@ -65,12 +65,12 @@ int main(int argc, char ** argv)
       return 1;
     }
     duhanina::inputMatrix(input, table, m, n, read);
-   /* if (!(duhanina::inputMatrix(input, table, m, n, read)))
+    if (!(duhanina::inputMatrix(input, table, m, n, read)))
     {
       std::cerr << "Invalid input" << "\n";
       delete[] table;
       return 2;
-    }*/
+    }
     if (input && read == m * n)
     {
       output << duhanina::outputAnswer(table, m, n) << "\n";
