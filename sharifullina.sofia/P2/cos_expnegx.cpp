@@ -1,0 +1,44 @@
+#include "cos_expnegx.h"
+#include <cmath>
+#include <stdexcept>
+
+double sharifullina::cos(double x, size_t k, double error)
+{
+    double next = (x * x) / 2;
+    double result = 1 - next;
+    for (size_t i = 1; i < k - 1; ++i)
+    {
+        next *= (x * x) / ((2 * i + 1) * (2 * i + 2));
+        result += (i % 2 ? next : next * -1);
+    }
+    if (std::abs(next) > error)
+    {
+        throw std::logic_error("MATH_ERROR");
+    }
+    return result;
+}
+double sharifullina::expnegx(double x, size_t k, double error)
+{
+    double next = (x * x) / 2;
+    double result = 1 - next;
+    for (size_t i = 1; i < k - 1; ++i)
+    {
+        next *= x / i;
+        result += next;
+    }
+    if (std::abs(next) > error)
+    {
+        throw std::logic_error("MATH_ERROR");
+    }
+    return result;
+}
+
+double sharifullina::cos_cmath(double x)
+{
+    return std::cos(x);
+}
+
+double sharifullina::expnegx_cmath(double x)
+{
+    return std::expnegx(x);
+}
