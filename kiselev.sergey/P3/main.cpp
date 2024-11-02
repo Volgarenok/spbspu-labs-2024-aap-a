@@ -1,7 +1,6 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
-#include <stdexcept>
 #include "checkFirst.h"
 #include "inputMatrix.h"
 #include "saddleElement.h"
@@ -71,10 +70,7 @@ int main(int argc, char** argv)
   char* outFile = argv[3];
   std::ofstream output(outFile);
   output << "The number of elements read: " << count_read << "\n";
-  if (count_read == m * n)
-  {
-    output << "Number of saddle elements: " << number_element << "\n";
-  }
+  output << "Number of saddle elements: " << number_element << "\n";
   return 0;
 }
 
