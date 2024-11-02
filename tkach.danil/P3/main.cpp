@@ -5,11 +5,6 @@
 
 int main(int argc, char** argv)
 {
-  std::ifstream input(argv[2]);
-  std::ofstream output(argv[3]);
-  char * s = argv[1];
-  int flag = 1;
-  int id = 0;
   if (argc < 4)
   {
     std::cerr << "Not enough arguments\n";
@@ -18,7 +13,13 @@ int main(int argc, char** argv)
   else if (argc > 4)
   {
     std::cerr << "Too many arguments\n";
+    return 1;
   }
+  std::ifstream input(argv[2]);
+  std::ofstream output(argv[3]);
+  char * s = argv[1];
+  int flag = 1;
+  int id = 0;
   for (size_t i = 0; s[i] != '\0'; i++)
   {
     if (!((s[i] >= '0') && (s[i] <= '9')))
@@ -44,8 +45,8 @@ int main(int argc, char** argv)
     }
   }
   size_t str = 0, stl = 0;
-  if ((input >> str >> stl).good())
-  {
+  if (!(input >> str >> stl).eof())
+  {  
     if (stl < str)
     {
       str = stl;
@@ -57,7 +58,7 @@ int main(int argc, char** argv)
     if (id == 1)
     {
       int mtx[10000];
-      if (!(tkach::inputMtx(input, mtx, str)).good())
+      if (!(tkach::inputMtx(input, mtx, str)))
       {
         std::cerr << "ERROR: Invalid input\n";
         return 2;
@@ -88,7 +89,7 @@ int main(int argc, char** argv)
         std::cerr << "Out of memory\n";
         return 1;
       }
-      if (!(tkach::inputMtx(input, mtx, str)).good())
+      if (!(tkach::inputMtx(input, mtx, str)))
       {
         delete[] mtx;
         std::cerr << "ERROR: Invalid input\n";
@@ -117,7 +118,13 @@ int main(int argc, char** argv)
   }
   else
   {
-    std::cerr << "ERROR: No needed information\n";
-    return 1;
+      output << 0.0 << "\n";
+      return 1;
   }
+  if (!input)
+    {
+      std::cerr << "ERROR: incorrect str/stl value\n";
+      return 1;
+    }
+  return 0;
 }
