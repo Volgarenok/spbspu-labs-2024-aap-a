@@ -1,6 +1,6 @@
 #include "matrix_functions.hpp"
 
-std::istream & matrixInput(std::istream & in, int * matrix, size_t nRows, size_t nColumns)
+std::istream & maslevtsov::matrixInput(std::istream & in, int * matrix, size_t nRows, size_t nColumns)
 {
   for (size_t i = 0; i < nRows * nColumns; ++i)
   {
@@ -9,7 +9,7 @@ std::istream & matrixInput(std::istream & in, int * matrix, size_t nRows, size_t
   return in;
 }
 
-size_t getNumberOfRequiredColumns(const int * const matrix, size_t nRows, size_t nColumns)
+size_t maslevtsov::getNumberOfRequiredColumns(const int * const matrix, size_t nRows, size_t nColumns)
 {
   size_t result = 0;
 

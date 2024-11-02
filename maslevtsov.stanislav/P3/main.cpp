@@ -31,17 +31,18 @@ int main(int argc, char ** argv)
   std::ifstream finput(argv[2]);
   std::ofstream foutput(argv[3]);
   size_t nRows = 0, nColumns = 0;
+  finput >> nRows >> nColumns;
 
   if (argv[1][0] == '1')
   {
     int matrix[10000] = {0};
-    if (!(matrixInput(finput, matrix, nRows, nColumns)))
+    if (!maslevtsov::matrixInput(finput, matrix, nRows, nColumns))
     {
       std::cerr << "Error: incorrect input\n";
       return 2;
     }
 
-    foutput << getNumberOfRequiredColumns(matrix, nRows, nColumns);
+    foutput << maslevtsov::getNumberOfRequiredColumns(matrix, nRows, nColumns);
     foutput << '\n';
   }
   else if (argv[1][0] == '2')
@@ -51,20 +52,19 @@ int main(int argc, char ** argv)
     {
       matrix = new int[nRows * nColumns];
     }
-    catch (const std::bad_alloc &e)
+    catch (const std::bad_alloc & e)
     {
       std::cerr << "Error: memory not allocated for matrix\n";
       return 1;
     }
-    matrixInput(finput, matrix, nRows, nColumns);
-    if (!(matrixInput(finput, matrix, nRows, nColumns)))
+    if (!maslevtsov::matrixInput(finput, matrix, nRows, nColumns))
     {
       std::cerr << "Error: incorrect input\n";
       delete[] matrix;
       return 2;
     }
 
-    foutput << getNumberOfRequiredColumns(matrix, nRows, nColumns);
+    foutput << maslevtsov::getNumberOfRequiredColumns(matrix, nRows, nColumns);
     foutput << '\n';
 
     delete[] matrix;
