@@ -1,5 +1,9 @@
 #include <iostream>
-#include <cdtring>
+#include <fstream>
+#include <cstring>
+#include <stdexcept>
+#include "inputMtrx.hpp"
+#include "countGoodColoumns.hpp"
 
 int main(int argc, char** argv)
 {
@@ -33,5 +37,49 @@ int main(int argc, char** argv)
       std::cerr << "First parameter is not a number\n";
       return 1;
     }
+  }
+
+  std::ifstream finput(argv[2]);
+  std::ofstream foutput(argv[3]);
+
+  size_t count_rows = 0;
+  size_t count_coloumns = 0;
+
+  finput >> count_rows >> count_coloumns;
+
+  if (argv[1][0] == "1")
+  {
+    int mtrx[10000] = {0};
+    if (!shramko::inputMtrx(finput, mtrx, count_rows, count_coloumns))
+    {
+      std::cerr << "ERROR!\n";
+      return 2;
+    }
+
+    foutput << shramko::countGoodColoumns(mtrx, count_rows, count_coloumns) << "\n";
+  }
+
+  else if (argv[1][0] == "2")
+  {
+    int* mtrx = nullptr;
+    try
+    {
+      mtrx = new int[count_rows * count_coloumns];
+    }
+    catch (const std::bad_alloc & e)
+    {
+      std::cerr << "Out of memory\n";
+      return 1;
+    }
+    if (!shramko::inputMtrx(finput, mtrx, count_rows, count_coloumns))
+    {
+      delete[] mtrx;
+      std::cerr << "ERROR!\n";
+      return 2;
+    }
+
+    foutput << shramko::countGoodColoumns(mtrx, count_rows, count_coloumns) << "\n";
+
+    delete[] mtrx;
   }
 }
