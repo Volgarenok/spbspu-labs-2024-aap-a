@@ -1,5 +1,6 @@
 #include "checkFirst.h"
 #include "inputMatrix.h"
+#include "saddleElement.h"
 #include <cstring>
 #include <fstream>
 #include <iostream>
@@ -53,6 +54,7 @@ int main(int argc, char** argv)
       std::cerr << e.what();
       return 2;
     }
+    int number_element = kiselev::saddleElement(fixed_array, m, n);
   }
   if (argv[1][0] == '2')
   {
@@ -80,8 +82,10 @@ int main(int argc, char** argv)
       delete[] din_array;
       return 2;
     }
+    int number_element = kiselev::saddleElement(din_array, m, n);
   }
   char* outFile = argv[3];
   std::ofstream output(outFile);
+  output << "Number of saddle elements: " << number_element << "\n";
 }
 
