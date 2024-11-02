@@ -24,7 +24,7 @@ int main(int argc, char** argv)
     std::cerr << "First parameter is not a number\n";
     return 1;
   }
-  if (f[1] != '\0')
+  if (f[1] != '\0' || (c > 2))
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
@@ -44,7 +44,7 @@ int main(int argc, char** argv)
     return 1;
   }
   size_t read = 0;
-  if(!demehin::input_matrix(input, matrix, k, read))
+  if(!demehin::input_matrix(input, matrix, k, read) && m != 0)
   {
     std::cerr << "Impossible to build matrix\n";
     return 2;
