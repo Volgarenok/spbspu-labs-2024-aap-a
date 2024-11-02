@@ -63,9 +63,9 @@ int main(int argc, char **argv)
   {
     constexpr size_t max_size = 10000;
     int array[max_size] = {};
-    int *staticArray = maslov::convert(matrix, rows,
+    int *fixedLengthArray = maslov::convert(matrix, rows,
         columns, array);
-    result = maslov::findLocalMaximum(staticArray, rows, columns);
+    result = maslov::findLocalMaximum(fixedLengthArray, rows, columns);
   }
   else
   {
