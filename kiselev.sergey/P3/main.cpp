@@ -40,7 +40,7 @@ int main(int argc, char** argv)
   int number_element = 0;
   if (argv[1][0] == '1')
   {
-    int fixed_array[m * n];
+    int fixed_array[10000] = {};
     try
     {
       kiselev::inputMatrix(input, fixed_array, m, n);
