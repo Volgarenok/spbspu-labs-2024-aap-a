@@ -4,7 +4,7 @@
 double* tkach::createMtx2(const int* const mtx, const size_t str)
 {
   double* mtx2 = nullptr;
-  try 
+  try
   {
     mtx2 = new double[str * str];
   }

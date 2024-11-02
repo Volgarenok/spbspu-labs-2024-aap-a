@@ -3,7 +3,7 @@
 #include "filemtx.h"
 #include "mtxlogic.h"
 
-int main(int argc, char ** argv)
+int main(int argc, char** argv)
 {
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
@@ -78,7 +78,7 @@ int main(int argc, char ** argv)
     else if (id == 2)
     {
       int* mtx = nullptr;
-      try 
+      try
       {
         mtx = new int[str * str];
       }
@@ -90,6 +90,7 @@ int main(int argc, char ** argv)
       }
       if (!(tkach::inputMtx(input, mtx, str)).good())
       {
+        delete[] mtx;
         std::cerr << "ERROR: Invalid input\n";
         return 2;
       }
@@ -97,9 +98,11 @@ int main(int argc, char ** argv)
       try
       {
         mtx2 = tkach::createMtx2(mtx, str);
+        delete[] mtx;
       }
       catch(const std::bad_alloc & e)
       {
+        delete[] mtx;
         std::cerr << "Out of memory\n";
         return 2;
       }
