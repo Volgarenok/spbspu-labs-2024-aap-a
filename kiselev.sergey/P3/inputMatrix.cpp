@@ -7,7 +7,11 @@ std::istream& kiselev::inputMatrix(
     for (size_t j = 0; j < n; ++j)
     {
       in >> array[i * n + j];
-      count_read += in.good();
+      if (!(in >> array[i * n + j]))
+      {
+        return in;
+      }
+      ++count_read;
     }
   }
   return in;

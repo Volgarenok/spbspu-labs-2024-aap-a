@@ -36,7 +36,7 @@ int main(int argc, char** argv)
   }
   size_t rows = 0, columns = 0;
   input >> rows >> columns;
-  if (!(input >> rows >> columns))
+  if (input.fail())
   {
     std::cerr << "Incorrect parameters\n";
     return 2;
