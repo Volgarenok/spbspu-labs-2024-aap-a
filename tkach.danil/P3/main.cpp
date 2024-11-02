@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "inputmtx.h"
+#include "filemtx.h"
 #include "mtxlogic.h"
 
 
@@ -74,11 +74,7 @@ int main(int argc, char ** argv)
         std::cerr << "Out of memory\n";
         return 2;
       }
-      output << mtx2[0];
-      for(size_t i = 1; i < str*str; ++i)
-      {
-        output << " " <<  mtx2[i];
-      }
+      tkach::outputMtx(output, mtx2, str);
       output << "\n";
     }
     else if (id == 2) 
@@ -99,6 +95,18 @@ int main(int argc, char ** argv)
         std::cerr << "ERROR: Invalid input\n";
         return 2;
       }
+      double* mtx2 = nullptr;
+      try
+      {
+        mtx2 = tkach::createMtx2(mtx, str);
+      }
+      catch(const std::bad_alloc & e)
+      {
+        std::cerr << "Out of memory\n";
+        return 2;
+      }
+      tkach::outputMtx(output, mtx2, str);
+      output << "\n";
     }
     else
     {

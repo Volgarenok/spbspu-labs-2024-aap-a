@@ -1,4 +1,4 @@
-#include "inputmtx.h"
+#include "filemtx.h"
 
 std::istream & tkach::inputMtx(std::istream & in, int* const mtx1, const size_t str)
 {

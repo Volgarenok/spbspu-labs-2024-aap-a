@@ -3,9 +3,9 @@
 
 #include <cstddef>
 
-namespace tkach 
+namespace tkach
 {
-  double* createMtx2(int* mtx, size_t str);
+  double* createMtx2(const int* mtx, size_t str);
 }
 
 #endif
