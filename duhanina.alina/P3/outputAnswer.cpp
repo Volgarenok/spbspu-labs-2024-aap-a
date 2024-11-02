@@ -26,4 +26,6 @@ void duhanina::outputAnswer(std::ostream & out, int * t, size_t m, size_t n)
     }
   }
   out << min_sum << "\n";
+  delete[] sums;
+  delete[] diag_count;
 }
