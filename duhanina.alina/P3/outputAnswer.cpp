@@ -3,7 +3,7 @@
 #include <limits>
 #include <cstring>
 
-void duhanina::outputAnswer(std::ostream & out, int * t, size_t m, size_t n, size_ t & read)
+void duhanina::outputAnswer(std::ostream & out, int * t, size_t m, size_t n)
 {
   int max_count_diag = m + n - 1;
   int * sums = new int[max_count_diag];
@@ -25,13 +25,5 @@ void duhanina::outputAnswer(std::ostream & out, int * t, size_t m, size_t n, siz
       min_sum = sums[i];
     }
   }
-  if (read == m * n)
-  {
-    out << min_sum << "\n";
-  }
-  else
-  {
-    std::cerr << "Error enter";
-    return 2;
-  }
+  out << min_sum << "\n";
 }

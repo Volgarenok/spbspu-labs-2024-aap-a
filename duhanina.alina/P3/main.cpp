@@ -35,19 +35,18 @@ int main(int argc, char ** argv)
     std::cerr << "Impossible to construct a matrix";
     return 2;
   }
-  size_t read = 0;
   size_t m = 0, n = 0;
   input >> m >> n;
   if (num == 1)
   {
     int table[1000];
-    duhanina::inputMatrix(input, table, m, n, read);
-    if (!(duhanina::inputMatrix(input, table, m, n, read)) && m != 0)
+    duhanina::inputMatrix(input, table, m, n);
+    if (!(duhanina::inputMatrix(input, table, m, n)) && m != 0)
     {
       std::cerr << "Invalid input" << "\n";
       return 2;
     }
-    duhanina::outputAnswer(output, table, m, n, read);
+    duhanina::outputAnswer(output, table, m, n);
   }
   else
   {
@@ -61,14 +60,14 @@ int main(int argc, char ** argv)
       std::cerr << "Error memory";
       return 1;
     }
-    duhanina::inputMatrix(input, table, m, n, read);
-    if (!(duhanina::inputMatrix(input, table, m, n, read)) && m != 0)
+    duhanina::inputMatrix(input, table, m, n);
+    if (!(duhanina::inputMatrix(input, table, m, n)) && m != 0)
     {
       std::cerr << "Invalid input" << "\n";
       delete[] table;
       return 2;
     }
-    duhanina::outputAnswer(output, table, m, n, read);
+    duhanina::outputAnswer(output, table, m, n);
     delete[] table;
   }
   return 0;
