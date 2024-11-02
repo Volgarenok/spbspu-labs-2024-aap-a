@@ -25,7 +25,7 @@ int duhanina::outputAnswer(int * t, size_t m, size_t n)
       min_sum = sums[i];
     }
   }
-  return min_sum;
   delete[] sums;
   delete[] diag_count;
+  return min_sum;
 }
