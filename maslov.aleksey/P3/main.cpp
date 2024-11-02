@@ -59,12 +59,12 @@ int main(int argc, char ** argv)
 
   if (!maslov::inputMatrix(input, matrix, rows, columns, read))
   {
-    std::cerr << "Elements are not a number\n";
+    std::cerr << "Elements are not a number or not enough\n";
+    maslov::destroyMatrix(matrix, rows);
     return 2;
   }
 
   size_t result = 0;
-  taskNumber = std::atoi(argv[1]);
 
   if (taskNumber == 1)
   {
