@@ -1,5 +1,6 @@
 #include "incomplete_matrix.hpp"
 #include <new>
+#include <cmath>
 
 float* karnauhova::smooth_matrix(int* t,size_t m,size_t n)
 {
@@ -60,7 +61,7 @@ float* karnauhova::smooth_matrix(int* t,size_t m,size_t n)
         sum += t[j + k + n];
         count+=1;
       }
-    n_mtx[j+k] = sum/count;
+    n_mtx[j+k] = round(sum/count * 10) / 10;;
     }
     k += n;
   }

@@ -44,7 +44,6 @@ int main(int argc, char ** argv)
     std::cerr << "Non-square matrix\n";
     return 2;
   }
-  std::cout << m << n << "\n";
   int * t = nullptr;
   if (way == 2)
   {
@@ -92,7 +91,9 @@ int main(int argc, char ** argv)
      return 1;
    }
   std::ofstream output(argv[3]);
+  output << m << " " << n << " ";
   karnauhova::output_matrix(output, t2, m, n);
+  output << "\n";
   if (way == 2)
   {
     delete[] t;
