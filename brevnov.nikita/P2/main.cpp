@@ -1,4 +1,4 @@
-#include "brevnov.hpp"
+#include "function.hpp"
 
 int main()
 {
