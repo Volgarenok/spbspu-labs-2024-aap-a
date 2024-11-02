@@ -1,10 +1,10 @@
-#include "checkFirst.h"
-#include "inputMatrix.h"
-#include "saddleElement.h"
 #include <cstring>
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
+#include "checkFirst.h"
+#include "inputMatrix.h"
+#include "saddleElement.h"
 int main(int argc, char** argv)
 {
   if (argc < 4)
@@ -29,6 +29,7 @@ int main(int argc, char** argv)
     return 1;
   }
   char* inFile = argv[2];
+  int count_read = 0;
   std::ifstream input(inFile);
   if (!input.is_open())
   {
@@ -41,20 +42,8 @@ int main(int argc, char** argv)
   if (argv[1][0] == '1')
   {
     int fixed_array[10000] = {};
-    try
-    {
-      kiselev::inputMatrix(input, fixed_array, m, n);
-    }
-    catch (const std::invalid_argument& e)
-    {
-      std::cerr << e.what();
-      return 2;
-    }
-    catch (const std::logic_error& e)
-    {
-      std::cerr << e.what();
-      return 2;
-    }
+    kiselev::inputMatrix(input, fixed_array, m, n, count_read);
+
     number_element = kiselev::saddleElement(fixed_array, m, n);
   }
   if (argv[1][0] == '2')
@@ -63,7 +52,7 @@ int main(int argc, char** argv)
     try
     {
       din_array = new int[m * n];
-      kiselev::inputMatrix(input, din_array, m, n);
+      kiselev::inputMatrix(input, din_array, m, n, count_read);
     }
     catch (std::bad_alloc& e)
     {
@@ -71,16 +60,9 @@ int main(int argc, char** argv)
       delete[] din_array;
       return 2;
     }
-    catch (const std::invalid_argument& e)
+    if (!kiselev::inputMatrix(input, din_array, m, n, count_read))
     {
-      std::cerr << e.what();
-      delete[] din_array;
-      return 2;
-    }
-    catch (const std::logic_error& e)
-    {
-      std::cerr << e.what();
-      delete[] din_array;
+      std::cerr << "Incorrect matrix\n";
       return 2;
     }
     number_element = kiselev::saddleElement(din_array, m, n);
@@ -88,7 +70,10 @@ int main(int argc, char** argv)
   }
   char* outFile = argv[3];
   std::ofstream output(outFile);
-  output << "Number of saddle elements: " << number_element << "\n";
+  output << "The number of elements read: " << count_read << "\n" if (count_read == m * n)
+  {
+    output << "Number of saddle elements: " << number_element << "\n";
+  }
   return 0;
 }
 

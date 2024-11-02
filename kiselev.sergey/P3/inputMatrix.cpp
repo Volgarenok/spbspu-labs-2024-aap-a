@@ -1,6 +1,6 @@
 #include "inputMatrix.h"
-#include <stdexcept>
-void kiselev::inputMatrix(std::ifstream& in, int* array, size_t m, size_t n)
+std::istream& kiselev::inputMatrix(
+    std::istream& in, int* array, size_t m, size_t n, int& count_read)
 {
   if (in.good())
   {
@@ -9,15 +9,9 @@ void kiselev::inputMatrix(std::ifstream& in, int* array, size_t m, size_t n)
       for (size_t j = 0; j < n; ++j)
       {
         in >> array[i * n + j];
+        count_read++;
       }
     }
   }
-  else if (in.eof())
-  {
-    throw std::logic_error("The file is empty\n");
-  }
-  else
-  {
-    throw std::invalid_argument("The contents are not a two-dimensional array\n");
-  }
+  return in;
 }
