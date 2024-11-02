@@ -46,7 +46,7 @@ int main(int argc, char** argv)
   }
   size_t str = 0, stl = 0;
   if (!(input >> str >> stl).eof())
-  {  
+  {
     if (stl < str)
     {
       str = stl;
