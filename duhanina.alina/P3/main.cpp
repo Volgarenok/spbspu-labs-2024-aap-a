@@ -30,7 +30,7 @@ int main(int argc, char ** argv)
   std::ofstream output(argv[3]);
   if (!input)
   {
-    std::cerr << "Empty";
+    std::cerr << "Impossible to construct a matrix";
     return 2;
   }
   size_t m = 0, n = 0;
@@ -44,7 +44,7 @@ int main(int argc, char ** argv)
   {
     int table[1000];
     duhanina::inputMatrix(input, table, m, n);
-    if (!(duhanina::inputMatrix(input, table, m, n)))
+    if (!(duhanina::inputMatrix(input, table, m, n)) && m != 0)
     {
       std::cerr << "Invalid input" << "\n";
       return 2;
@@ -64,7 +64,7 @@ int main(int argc, char ** argv)
       return 1;
     }
     duhanina::inputMatrix(input, table, m, n);
-    if (!(duhanina::inputMatrix(input, table, m, n)))
+    if (!(duhanina::inputMatrix(input, table, m, n)) && m != 0)
     {
       std::cerr << "Invalid input" << "\n";
       delete[] table;
