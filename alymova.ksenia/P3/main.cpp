@@ -57,4 +57,9 @@ int main(int argc, char** argv)
       std::cout << "\n";
     }
   }
+  else
+  {
+    std::cerr << "Input matrix fail\n";
+    return 2;
+  }
 }
