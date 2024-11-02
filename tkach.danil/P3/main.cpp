@@ -45,86 +45,58 @@ int main(int argc, char** argv)
     }
   }
   size_t str = 0, stl = 0;
-  if (!(input >> str >> stl).eof())
+  input >> str >> stl;
+  if (stl < str)
   {
-    if (stl < str)
-    {
-      str = stl;
-    }
-    else
-    {
-      stl = str;
-    }
-    if (id == 1)
-    {
-      int mtx[10000];
-      if (!(tkach::inputMtx(input, mtx, str)))
-      {
-        std::cerr << "ERROR: Invalid input\n";
-        return 2;
-      }
-      double* mtx2 = nullptr;
-      try
-      {
-        mtx2 = tkach::createMtx2(mtx, str);
-      }
-      catch(const std::bad_alloc & e)
-      {
-        std::cerr << "Out of memory\n";
-        return 2;
-      }
-      tkach::outputMtx(output, mtx2, str);
-      output << "\n";
-    }
-    else if (id == 2)
-    {
-      int* mtx = nullptr;
-      try
-      {
-        mtx = new int[str * str];
-      }
-      catch(const std::bad_alloc & e)
-      {
-        delete[] mtx;
-        std::cerr << "Out of memory\n";
-        return 1;
-      }
-      if (!(tkach::inputMtx(input, mtx, str)))
-      {
-        delete[] mtx;
-        std::cerr << "ERROR: Invalid input\n";
-        return 2;
-      }
-      double* mtx2 = nullptr;
-      try
-      {
-        mtx2 = tkach::createMtx2(mtx, str);
-        delete[] mtx;
-      }
-      catch(const std::bad_alloc & e)
-      {
-        delete[] mtx;
-        std::cerr << "Out of memory\n";
-        return 2;
-      }
-      tkach::outputMtx(output, mtx2, str);
-      output << "\n";
-    }
-    else
-    {
-      std::cerr << "First parameter is out of range\n";
-      return 1;
-    }
+    str = stl;
   }
   else
   {
+    stl = str;
+  }
+  if (id == 1)
+  {
+    int mtx[10000];
+    if (!(tkach::inputMtx(input, mtx, str)))
+    {
       std::cerr << "ERROR: Invalid input\n";
       return 2;
+    }
+    tkach::outputMtx(output, tkach::createMtx2(mtx, str), str);
+    output << "\n";
   }
-  if (!input)
+  else if (id == 2)
+  {
+    int* mtx = nullptr;
+    try
     {
-      std::cerr << "ERROR: incorrect str/stl value\n";
+      mtx = new int[str * str];
+    }
+    catch(const std::bad_alloc & e)
+    {
+      delete[] mtx;
+      std::cerr << "Out of memory\n";
       return 1;
     }
+    if (!(tkach::inputMtx(input, mtx, str)))
+    {
+      delete[] mtx;
+      std::cerr << "ERROR: Invalid input\n";
+      return 2;
+    }
+    tkach::outputMtx(output, tkach::createMtx2(mtx, str), str);
+    output << "\n";
+    delete[] mtx;
+  }
+  else
+  {
+    std::cerr << "First parameter is out of range\n";
+    return 1;
+  }
+  if (!input.good())
+  {
+    std::cerr << "ERROR: incorrect str/stl value\n";
+    return 1;
+  }
   return 0;
 }
