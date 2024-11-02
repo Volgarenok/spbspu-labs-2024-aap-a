@@ -5,7 +5,7 @@
 
 namespace tkach
 {
-  double* createMtx2(const int* mtx, size_t str);
+  double* createMtx2(const int* mtx, size_t str, size_t stl);
 }
 
 #endif

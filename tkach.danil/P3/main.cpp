@@ -46,23 +46,20 @@ int main(int argc, char** argv)
   }
   size_t str = 0, stl = 0;
   input >> str >> stl;
-  if (stl < str)
+  if (!input)
   {
-    str = stl;
-  }
-  else
-  {
-    stl = str;
+    std::cerr << "ERROR: incorrect str/stl value\n";
+    return 1;
   }
   if (id == 1)
   {
-    int mtx[10000];
-    if (!(tkach::inputMtx(input, mtx, str)))
+    int mtx[10000] = {0};
+    if (!(tkach::inputMtx(input, mtx, str, stl)))
     {
       std::cerr << "ERROR: Invalid input\n";
       return 2;
     }
-    tkach::outputMtx(output, tkach::createMtx2(mtx, str), str);
+    tkach::outputMtx(output, tkach::createMtx2(mtx, str, stl), str, stl);
     output << "\n";
   }
   else if (id == 2)
@@ -70,7 +67,7 @@ int main(int argc, char** argv)
     int* mtx = nullptr;
     try
     {
-      mtx = new int[str * str];
+      mtx = new int[str * stl];
     }
     catch(const std::bad_alloc & e)
     {
@@ -78,24 +75,19 @@ int main(int argc, char** argv)
       std::cerr << "Out of memory\n";
       return 1;
     }
-    if (!(tkach::inputMtx(input, mtx, str)))
+    if (!(tkach::inputMtx(input, mtx, str, stl)))
     {
       delete[] mtx;
       std::cerr << "ERROR: Invalid input\n";
       return 2;
     }
-    tkach::outputMtx(output, tkach::createMtx2(mtx, str), str);
+    tkach::outputMtx(output, tkach::createMtx2(mtx, str, stl), stl, stl);
     output << "\n";
     delete[] mtx;
   }
   else
   {
     std::cerr << "First parameter is out of range\n";
-    return 1;
-  }
-  if (!input.good())
-  {
-    std::cerr << "ERROR: incorrect str/stl value\n";
     return 1;
   }
   return 0;
