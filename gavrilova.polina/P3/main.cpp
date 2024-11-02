@@ -51,6 +51,7 @@ int main(int argc, char ** argv)
     if (input && read == m*n){
       output << isUpperTriangMtx(mtx2, m, n) << "\n";
     } else {
+      delete [] mtx2;
       return 2;
     }
   }
