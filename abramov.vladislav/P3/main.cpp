@@ -58,6 +58,7 @@ int main(int argc, char **argv)
     catch (const std::bad_alloc &e)
     {
       std::cerr << "Memory fail\n";
+      delete[] matrix;
       return 2;
     }
     abramov::output_Matrix(output, matrix, count);
@@ -84,6 +85,7 @@ int main(int argc, char **argv)
     if (!abramov::input_Matrix(input, matrix, m, n, read) || read!=n*m)
     {
       std::cerr << "Wrong input!\n";
+      delete[] matrix;
       return 1;
     }
     int *new_mtx = nullptr;
