@@ -1,5 +1,5 @@
 #include <iostream>
-#include "taylor.h"
+#include "taylor_fun.h"
 #include <stdexcept>
 #include <cstring>
 
