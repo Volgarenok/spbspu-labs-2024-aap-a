@@ -17,7 +17,7 @@ double belobrov:: f_teylor(const double x, const size_t k)
     z *= -1;
   }
 
-  double ln_result = std::log(x + sqrt(x * x + 1));
+  double ln_result = std::log(x + std::sqrt(x * x + 1));
 
   if (std::abs(teylor_result - ln_result) > error)
   {
