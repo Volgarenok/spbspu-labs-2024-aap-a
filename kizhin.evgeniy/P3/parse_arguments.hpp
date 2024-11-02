@@ -1,12 +1,10 @@
 #ifndef PARSE_ARGUMENTS_HPP
 #define PARSE_ARGUMENTS_HPP
 
-#include "memory_modes.hpp"
-#include <ostream>
+#include "memory_utils.hpp"
 
 namespace kizhin {
-  void parseArguments(std::ostream& errorStream, int argc, char* const* argv,
-      MemoryMode* programMode, char** inputFile, char** outputFile);
+  void checkArgumentsCount(int argc);
   MemoryMode parseProgrammMode(const char*);
 }
 

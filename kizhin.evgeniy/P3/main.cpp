@@ -1,53 +1,52 @@
-#include "exit_codes.hpp"
-#include "io_utils.hpp"
 #include "matrix_utils.hpp"
-#include "memory_modes.hpp"
+#include "memory_utils.hpp"
 #include "parse_arguments.hpp"
-#include <cstddef>
 #include <fstream>
+#include <iostream>
 
 int main(int argc, char** argv)
 {
-  char* inputFile = nullptr;
-  char* outputFile = nullptr;
-  kizhin::MemoryMode mode = kizhin::MemoryMode::null;
-  kizhin::parseArguments(std::cerr, argc, argv, &mode, &inputFile, &outputFile);
+  enum class ExitCode { failArguments = 1, failFile = 2 };
 
-  std::ifstream in(inputFile);
+  kizhin::MemoryMode mode = kizhin::MemoryMode::null;
+  char* fileIn = nullptr;
+  char* fileOut = nullptr;
+  try {
+    kizhin::checkArgumentsCount(argc);
+    mode = kizhin::parseProgrammMode(argv[1]);
+    fileIn = argv[2];
+    fileOut = argv[3];
+  } catch (const std::logic_error& error) {
+    std::cerr << error.what() << '\n';
+    return static_cast<int>(ExitCode::failArguments);
+  }
+
+  std::ifstream in(fileIn);
   if (!in.is_open()) {
-    std::cerr << "Can't open file to read\n";
-    return static_cast<int>(kizhin::ExitCode::failFile);
+    std::cerr << "Can't open file: " << fileIn << '\n';
+    return static_cast<int>(ExitCode::failFile);
   }
   size_t rows = 0;
   size_t columns = 0;
-  if (!kizhin::readMatrixDimensions(in, &rows, &columns)) {
-    std::cerr << "Can't read dimensions from file\n";
-    return static_cast<int>(kizhin::ExitCode::failFile);
-  }
 
-  int* matrix = kizhin::allocateMatrix(rows, columns, mode);
-  if (matrix == nullptr) {
-    std::cerr << "Can't allocate memory\n";
-    return static_cast<int>(kizhin::ExitCode::failFile);
-  }
-  if (!kizhin::readArrayValues(in, matrix, rows * columns)) {
-    std::cerr << "Can't read matrix values from file\n";
-    return static_cast<int>(kizhin::ExitCode::failFile);
+  in >> rows >> columns;
+  int* matrix = kizhin::allocateArray(rows * columns, mode);
+  kizhin::readArrayValues(in, matrix, rows * columns);
+  if (!in.good()) {
+    std::cerr << "Error during reading matrix from file\n";
+    in.close();
+    kizhin::deallocateArray(matrix, mode);
+    return static_cast<int>(ExitCode::failFile);
   }
   in.close();
 
-  std::ofstream out(outputFile);
+  std::ofstream out(fileOut);
   if (!out.is_open()) {
-    std::cerr << "Can't open file to write\n";
-    return static_cast<int>(kizhin::ExitCode::failFile);
+    std::cerr << "Can't open file: " << fileOut << '\n';
+    kizhin::deallocateArray(matrix, mode);
+    return static_cast<int>(ExitCode::failFile);
   }
-  size_t localMinimumCount = kizhin::countLocalMinimums(matrix, rows, columns);
-  if (!kizhin::writeResultToFile(out, localMinimumCount)) {
-    std::cerr << "Error during file writing\n";
-    return static_cast<int>(kizhin::ExitCode::failFile);
-  }
+  out << kizhin::countLocalMinimums(matrix, rows, columns);
   out.close();
-  if (mode == kizhin::MemoryMode::freeStore) {
-    delete[] matrix;
-  }
+  kizhin::deallocateArray(matrix, mode);
 }

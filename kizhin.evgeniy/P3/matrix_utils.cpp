@@ -1,23 +1,11 @@
 #include "matrix_utils.hpp"
-#include "memory_modes.hpp"
-#include <new>
 
-int* kizhin::allocateMatrix(size_t rows, size_t columns, MemoryMode mode)
-{
-  if (mode == MemoryMode::freeStore) {
-    return new (std::nothrow) int[rows * columns];
-  } else if (mode == MemoryMode::stack) {
-    static int stackArray[stackMemorySize];
-    return stackArray;
-  } else {
-    return nullptr;
-  }
-}
-
-size_t kizhin::countLocalMinimums(
-    const int* matrix, size_t rows, size_t columns)
+size_t kizhin::countLocalMinimums(const int* matrix, size_t rows, size_t columns)
 {
   size_t count = 0;
+  if (rows * columns == 0 || matrix == nullptr) {
+    return count;
+  }
   for (size_t i = 1; i < rows - 1; ++i) {
     for (size_t j = 1; j < columns - 1; ++j) {
       count += isLocalMinimum(matrix, i, j, rows, columns);
@@ -50,3 +38,13 @@ bool kizhin::isLocalMinimum(
   return true;
 }
 
+std::istream& kizhin::readArrayValues(std::istream& in, int* array, size_t size)
+{
+  if (array == nullptr || size == 0) {
+    return in;
+  }
+  for (size_t i = 0; i < size; ++i) {
+    in >> array[i];
+  }
+  return in;
+}
