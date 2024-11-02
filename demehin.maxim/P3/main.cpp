@@ -17,7 +17,7 @@ int main(int argc, char** argv)
   }
 
   char* first_arg = argv[1];
-  int c = *f - '0';
+  int c = *first_arg - '0';
   if (first_arg[0] < 48 || first_arg[0] > 57)
   {
     std::cerr << "First parameter is not a number\n";
