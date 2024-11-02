@@ -37,6 +37,7 @@ int main(int argc, char** argv)
   }
   size_t m = 0, n = 0;
   input >> m >> n;
+  int number_element = 0;
   if (argv[1][0] == '1')
   {
     int fixed_array[m * n];
@@ -54,7 +55,7 @@ int main(int argc, char** argv)
       std::cerr << e.what();
       return 2;
     }
-    int number_element = kiselev::saddleElement(fixed_array, m, n);
+    number_element = kiselev::saddleElement(fixed_array, m, n);
   }
   if (argv[1][0] == '2')
   {
@@ -82,7 +83,7 @@ int main(int argc, char** argv)
       delete[] din_array;
       return 2;
     }
-    int number_element = kiselev::saddleElement(din_array, m, n);
+    number_element = kiselev::saddleElement(din_array, m, n);
   }
   char* outFile = argv[3];
   std::ofstream output(outFile);
