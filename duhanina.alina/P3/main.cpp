@@ -28,6 +28,11 @@ int main(int argc, char ** argv)
   }
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
+  if (!input)
+  {
+    std::cerr << "Empty";
+    return 2;
+  }
   size_t m = 0, n = 0;
   input >> m >> n;
   if (!(input >> m >> n) || m == 0 || n == 0)
@@ -48,7 +53,16 @@ int main(int argc, char ** argv)
   }
   else
   {
-    int * table = new int[m * n];
+    int * table = nullptr;
+    try
+    {
+      table = new int[m * n];
+    }
+    catch (const std::alloc & e)
+    {
+      std::cerr << "Error memory";
+      return 1;
+    }
     duhanina::inputMatrix(input, table, m, n);
     if (!(duhanina::inputMatrix(input, table, m, n)))
     {
