@@ -1,6 +1,5 @@
 #include "checkFirst.h"
-#include "cctype"
-#include "stddef.h"
+#include <cctype>
 #include <cstring>
 
 bool kiselev::checkFirst(char* argv)

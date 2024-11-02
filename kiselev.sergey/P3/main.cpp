@@ -1,4 +1,3 @@
-#include <cstddef>
 #include <cstring>
 #include <fstream>
 #include <iostream>
@@ -24,7 +23,6 @@ int main(int argc, char** argv)
   }
   else if (argv[1][1] != '\0' || (argv[1][0] != '1' && argv[1][0] != '2'))
   {
-
     std::cerr << "First parameter is out of range\n";
     return 1;
   }
@@ -36,48 +34,54 @@ int main(int argc, char** argv)
     std::cerr << "The file cannot be opened\n";
     return 1;
   }
-  size_t m = 0, n = 0;
-  input >> m >> n;
+  size_t rows = 0, columns = 0;
+  input >> rows >> columns;
+  if (!(input >> rows >> columns))
+  {
+    std::cerr << "Incorrect parameters\n";
+    return 2;
+  }
   int number_element = 0;
   if (argv[1][0] == '1')
   {
-    int fixed_array[10000] = {};
-    kiselev::inputMatrix(input, fixed_array, m, n, count_read);
-    if (count_read != m * n)
+    constexpr size_t length = 10000;
+    int fixed_array[length];
+    kiselev::inputMatrix(input, fixed_array, rows, columns, count_read);
+    if (count_read != rows * columns)
     {
       std::cerr << "There are not enough elements for the array\n";
       return 2;
     }
-    number_element = kiselev::saddleElement(fixed_array, m, n);
+    number_element = kiselev::saddleElement(fixed_array, rows, columns);
   }
   if (argv[1][0] == '2')
   {
-    int* din_array = nullptr;
+    int* dynArray = nullptr;
     try
     {
-      din_array = new int[m * n];
-      kiselev::inputMatrix(input, din_array, m, n, count_read);
+      dynArray = new int[rows * columns];
+      kiselev::inputMatrix(input, dynArray, rows, columns, count_read);
     }
     catch (const std::bad_alloc& e)
     {
       std::cerr << "Out of memory\n";
-      delete[] din_array;
+      delete[] dynArray;
       return 2;
     }
-    if (!kiselev::inputMatrix(input, din_array, m, n, count_read))
-    {
-      std::cerr << "Incorrect matrix\n";
-      delete[] din_array;
-      return 2;
-    }
-    if (count_read != m * n)
+    if (count_read != rows * columns)
     {
       std::cerr << "There are not enough elements for the array\n";
-      delete[] din_array;
+      delete[] dynArray;
       return 2;
     }
-    number_element = kiselev::saddleElement(din_array, m, n);
-    delete[] din_array;
+    if (!kiselev::inputMatrix(input, dynArray, rows, columns, count_read).good())
+    {
+      std::cerr << "Incorrect matrix\n";
+      delete[] dynArray;
+      return 2;
+    }
+    number_element = kiselev::saddleElement(dynArray, rows, columns);
+    delete[] dynArray;
   }
   char* outFile = argv[3];
   std::ofstream output(outFile);
