@@ -47,7 +47,7 @@ int main(int argc, char** argv)
   size_t cnt_col = 0;
 
   finput >> cnt_row >> cnt_col;
-  if (!input)
+  if (!finput)
   {
     std::cerr << "Input error\n";
     return 2;
