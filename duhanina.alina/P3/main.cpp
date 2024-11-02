@@ -18,7 +18,7 @@ int main(int argc, char ** argv)
     return 1;
   }
   int num = atoi(ch);
-  if (num != 1 || num != 2)
+  if (num < 1 || num > 2)
   {
     std::cerr << "Invalid value num" << "\n";
     return 1;
