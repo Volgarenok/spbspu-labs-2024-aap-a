@@ -64,6 +64,7 @@ int main(int argc, char ** argv)
   }
 
   size_t result = 0;
+  taskNumber = std::atoi(argv[1]);
 
   if (taskNumber == 1)
   {
