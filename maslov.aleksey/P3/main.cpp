@@ -31,25 +31,25 @@ int main(int argc, char ** argv)
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
 
-  size_t m = 0, n = 0;
-  input >> m >> n;
+  size_t rows = 0, columns = 0;
+  input >> rows >> columns;
 
   if (!input)
   {
     std::cerr << "Rows or columns not a number\n";
     return 2;
   }
-  if (m == 0 || n == 0)
+  if (rows <= 0 || columns <= 0)
   {
     std::cerr << "Matrix cannot be created\n";
     return 2;
   }
 
   size_t read = 0;
-  int ** t = nullptr;
+  int ** matrix = nullptr;
   try
   {
-    t = maslov::createMatrix(m,n);
+    matrix = maslov::createMatrix(rows,columns);
   }
   catch(const std::bad_alloc & e)
   {
@@ -57,30 +57,22 @@ int main(int argc, char ** argv)
     return 1;
   }
 
-  maslov::inputMatrix(input, t, m, n, read);
+  maslov::inputMatrix(input, matrix, rows, columns, read);
 
   if (taskNumber == 1)
   {
     constexpr size_t max_size = 10000;
     int array[max_size] = {};
-    int * staticArray = maslov::convert(t, m, n, array);
-    maslov::destroyMatrix(t,m);
-    for (size_t i = 0; i < n * m; i++)
-    {
-      std::cout << staticArray[i] << " ";
-    }
-    std::cout << "\n";
+    int * staticArray = maslov::convert(matrix, rows,
+        columns, array);
+    maslov::destroyMatrix(matrix,rows);
   }
   else
   {
-    const size_t arraySize = m * n;
+    const size_t arraySize = rows * columns;
     int * array = new int[arraySize];
-    int * dynamicArray = maslov::convert(t, m, n, array);
-    for (size_t i = 0; i < arraySize; i++)
-    {
-      std::cout << dynamicArray[i] << " ";
-    }
-    std::cout << "\n";
+    int * dynamicArray = maslov::convert(matrix,
+        rows, columns, array);
   }
   // maslov::outputMatrix(output);
 }

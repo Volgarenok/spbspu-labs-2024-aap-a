@@ -6,11 +6,12 @@
 
 namespace maslov
 {
-  int * convert(const int* const* t, size_t m, size_t n, int * array);
-  int** createMatrix(size_t m, size_t n);
-  void destroyMatrix(int** theMatrix, size_t m);
-  std::istream & inputMatrix(std::istream & in, 
-      int** t, size_t m, size_t n, size_t & read);
+  int * convert(const int* const* matrix, size_t rows,
+      size_t columns, int * array);
+  int** createMatrix(size_t rows, size_t columns);
+  void destroyMatrix(int** theMatrix, size_t rows);
+  std::istream & inputMatrix(std::istream & in, int** matrix,
+      size_t rows, size_t columns, size_t & read);
   //int cntLocMax();
   // void outputMatrix(std::ostream &out);
 }
