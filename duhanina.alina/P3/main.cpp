@@ -12,15 +12,13 @@ int main(int argc, char ** argv)
     return 1;
   }
   int num = 0;
-  try
+  char * ch = argv[1];
+  if (!duhanina::isDig(ch))
   {
-    num = std::stoi(argv[1][0]);
-  }
-  catch (const std::logic_error & e)
-  {
-    std::cerr << "Invalid num" << "\n";
+    std::cerr << "Not a number";
     return 1;
   }
+  int num = atoi(ch);
   if (num != 1 || num != 2)
   {
     std::cerr << "Invalid value num" << "\n";
