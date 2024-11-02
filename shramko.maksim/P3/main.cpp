@@ -22,7 +22,7 @@ int main(int argc, char** argv)
   const char* str = argv[1];
   char* pEnd;
   long int number = 0;
-  number = str::strtol(str, &pEnd, 10)
+  number = std::strtoul(str, &pEnd, 10);
 
   if (number != 1 && number != 2)
   {
@@ -32,7 +32,7 @@ int main(int argc, char** argv)
 
   for (size_t i = 0; i < strlen(str); ++i)
   {
-    if (str[i] < "0" || str[i] > "9")
+    if (str[i] < 0 || str[i] > 9)
     {
       std::cerr << "First parameter is not a number\n";
       return 1;
@@ -47,7 +47,7 @@ int main(int argc, char** argv)
 
   finput >> count_rows >> count_coloumns;
 
-  if (argv[1][0] == "1")
+  if (argv[1][0] == 1)
   {
     int mtrx[10000] = {0};
     if (!shramko::inputMtrx(finput, mtrx, count_rows, count_coloumns))
@@ -59,7 +59,7 @@ int main(int argc, char** argv)
     foutput << shramko::countGoodColoumns(mtrx, count_rows, count_coloumns) << "\n";
   }
 
-  else if (argv[1][0] == "2")
+  else if (argv[1][0] == 2)
   {
     int* mtrx = nullptr;
     try
