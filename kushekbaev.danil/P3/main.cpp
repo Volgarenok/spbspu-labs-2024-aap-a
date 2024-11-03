@@ -2,7 +2,12 @@
 #include <iostream>
 #include <fstream>
 
-int main() {
+int main(int argc, char * argv[]) {
+  if (argc < 3)
+  {
+    return 0;
+  }
+
   const std::string input_file = "input.txt";
   const std::string output_file = "output.txt";
   std::ifstream infile(input_file);
