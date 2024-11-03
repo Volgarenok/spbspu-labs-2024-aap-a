@@ -75,7 +75,7 @@ int main(int argc, char ** argv)
   }
   else
   {
-    if (!karnauhova::input_matrix(input, t, m, n, read))
+    if (!karnauhova::input_matrix(input, t1, m, n, read))
     {
       std::cerr << "File text is invalid\n";
       return 2;
