@@ -12,12 +12,12 @@ int main()
   infile >> rows >> columns;
   if (rows != rows)
   {
-    std::cerr << "Number of rows is NaN"
+    std::cerr << "Number of rows is NaN" << "\n";
     return 1;
   }
   if (columns != columns)
   {
-    std::cerr << "Number of columns is NaN"
+    std::cerr << "Number of columns is NaN" << "\n";
     return 1;
   }
 
@@ -33,7 +33,7 @@ int main()
 
   std::ofstream outfile(output_file);
 
-  outfile << saddle_points << std::endl;
+  outfile << saddle_points << "\n";
 
   outfile.close();
   kushekbaev::deleteMatrix(matrix);
