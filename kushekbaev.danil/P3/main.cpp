@@ -10,7 +10,6 @@ int main() {
   size_t rows = 0, columns = 0;
   infile >> rows >> columns;
 
-  std::ifstream infile(input_file);
   if (!infile)
   {
     std::cerr << "Error while opening input file" << "\n";
@@ -34,8 +33,6 @@ int main() {
     kushekbaev::deleteMatrix(matrix);
     return 1;
   }
-
-  std::ofstream outfile(output_file);
 
   outfile << saddle_points << "\n";
 
