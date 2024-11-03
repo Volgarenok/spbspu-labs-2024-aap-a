@@ -65,7 +65,7 @@ int main(int argc, char ** argv)
   }
   else
   {
-    t[10000] = {};
+    t[10000] = {0};
   }
   karnauhova::input_matrix(input, t, m, n, read);
   if (!karnauhova::input_matrix(input, t, m, n, read))
