@@ -3,7 +3,7 @@
 size_t shramko::countGoodColoumns(const int* mtrx, size_t cnt_row, size_t cnt_col)
 {
   size_t answer = 0;
-  for (size_t i = 1; i < cnt_col; ++i)
+  for (size_t i = 0; i < cnt_col; ++i)
   {
     bool breakPoint = true;
     for (size_t j = 1; j < cnt_row; ++j)
