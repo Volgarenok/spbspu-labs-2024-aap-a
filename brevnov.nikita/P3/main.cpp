@@ -62,8 +62,16 @@ int main(int argc, char ** argv)
   if (!(member == m * n))
   {
     std::cerr << "Error matrix input\n";
+    if (parameter == 2)
+    {
+      delete[] mtx;
+    }
     return 2;
   }
   output << brevnov::osed_fun(mtx, m, n);
+  if (parameter == 2)
+  {
+    delete[] mtx;
+  }
   return 0;
 }
