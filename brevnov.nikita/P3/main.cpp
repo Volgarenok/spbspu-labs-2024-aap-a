@@ -5,6 +5,8 @@
 
 int main(int argc, char ** argv) 
 {
+  int long long m = -1, n = -1;
+  int parameter = 0;
   if (argc < 4)
   {
     std::cerr << "Not enough arguments\n";
@@ -15,7 +17,6 @@ int main(int argc, char ** argv)
     std::cerr << "Too many arguments\n";
     return 1;
   }
-  int parameter = 0;
   parametr = argv[1];
   if (!(parametr))
   {
@@ -28,7 +29,7 @@ int main(int argc, char ** argv)
     return 1;
   }
   std::ifstream input(argv[2]);
-  int long long m = -1, n = -1;
+  std::ofstream output(argv[3]);
   input >> m >> n;
   if (input.eof())
   {
@@ -40,8 +41,28 @@ int main(int argc, char ** argv)
     std::cerr << "Non-correct matrix parameters\n";
     return 2;
   }
-  input_matrix(input);
-  std::ofstream output(argv[3]);
-  output << a;
-  int ** t = alloc(m, n);
+  if (parametr == 1)
+  {
+    int * t[m*n]={};
+  }
+  else
+  {
+    try
+    {
+      int * t = malloc(m, n);
+    }
+    catch(const std::bad_alloc& e)
+    {
+      std::cerr << "Not enough memory\n";
+      return 2;
+    }
+  }
+  int member = input_matrix(input, t, m, n);
+  if (!(member == m * n))
+  {
+    std::cerr << "Error matrix input\n";
+    return 2;
+  }
+  output << osedfun(t, m, n);
+  return 0;
 }

@@ -1,17 +1,26 @@
 #include "matrix.hpp"
 
-void brevnov::input_matrix(std::istream & in, int ** t, size_t m, size_t n)
+int  brevnov::input_matrix(std::istream & in, int * t, size_t m, size_t n)
 {
-  for (size_t i = 0; i < m; ++i)
+  int member = 0;
+  for (size_t i = 0; i < m * n ; ++i)
   {
-    for (size_t j = 0; j < n; ++j)
+    if (!(in >> t[i]))
     {
-      in >> t[i][j];
+      return member;
+    }
+    else
+    {
+      ++member;
     }
   }
+  return member;
 }
 
-int ** brevnov::alloc(size_t m, size_t n)
+int * brevnov::alloc(size_t m, size_t n)
 {
-  
+  int * t = nullptr;
+  t = new int[m * n];
+  return t;
 }
+
