@@ -6,18 +6,15 @@
 
 int main(int argc, char ** argv)
 {
-  if (argс != 4)
+  if (argc > 4)
   {
-    if (argc > 4)
-    {
-      std::cerr << "too many argv\n";
-      return 1;
-    }
-    else
-    {
-      std::cerr << "not enough argv\n";
-      return 1;
-    }
+    std::cerr << "too many argv\n";
+    return 1;
+  }
+  else if (argc < 4)
+  {
+    std::cerr << "not enough argv\n";
+    return 1;
   }
   for (size_t i = 0; argv[1][i] != '\0'; i++)
   {
