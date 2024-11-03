@@ -1,11 +1,11 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 #include <cstddef>
+#include <istream>
 namespace alymova
 {
-  int* create_dynamic(size_t rows, size_t cols);
-  void create_static(int* matrix);
-  void destroy(int* matrix);
+  std::istream& input_matrix(std::istream& input, int* const matrix, size_t& rows, size_t& cols, size_t& read);
+  void print_matrix(std::ostream& output, const int* const matrix, size_t read);
   void change_matrix(int* const matrix, size_t rows, size_t cols);
 }
 #endif

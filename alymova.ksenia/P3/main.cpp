@@ -20,45 +20,55 @@ int main(int argc, char** argv)
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
   size_t rows = 0, cols = 0;
-  if (alymova::input_size(input, rows, cols).good())
+  input >> rows >> cols;
+  if (!(input.good()))
   {
-    int* matrix = nullptr;
-    if (num == 2)
+    std::cerr << "Input fail\n";
+    return 2;
+  }
+  size_t read = 0;
+  if (num == 1)
+  {
+    constexpr size_t static_size = 10000;
+    int matrix[static_size] = {0};
+    if (!(alymova::input_matrix(input, matrix, rows, cols, read)).good() || read < rows * cols)
     {
-      try
-      {
-        matrix = alymova::create_dynamic(rows, cols);
-      }
-      catch (const std::bad_alloc& e)
-      {
-        alymova::destroy(matrix);
-        std::cerr << "Memory not allocated for array\n";
-        return 1;
-      }
-    }
-    if (num == 1)
-    {
-      int mtx[10000] = {0};
-      matrix = mtx;
-    }
-    size_t read = 0;
-    if (!(alymova::input_matrix(input, matrix, rows, cols, read).good()) || read < (rows * cols))
-    {
-      if (num == 2)
-      {
-        alymova::destroy(matrix);
-      }
+      std::cerr << "Input failed\n";
       return 2;
     }
     alymova::change_matrix(matrix, rows, cols);
     if (output.good())
     {
-      alymova::print_matrix(output, matrix, rows, cols);
+      alymova::print_matrix(output, matrix, read);
       std::cout << "\n";
     }
   }
-  else
+  if (num == 2)
   {
-    return 2;
+    int* matrix = nullptr;
+    try
+    {
+      matrix = new int[rows * cols]; 
+    }
+    catch(const std::bad_alloc& e)
+    {
+      delete[] matrix;
+      std::cerr << "Memory not allocated for array\n";
+      return 1;
+    }
+    if (!(alymova::input_matrix(input, matrix, rows, cols, read)).good() || read < rows * cols)
+    {
+      delete[] matrix;
+      std::cerr << "Input failed\n";
+      return 2;
+    }
+    alymova::change_matrix(matrix, rows, cols);
+    if (output.good())
+    {
+      alymova::print_matrix(output, matrix, read);
+      std::cout << "\n";
+    }
+    delete[] matrix;
   }
+  return 0;
 }
