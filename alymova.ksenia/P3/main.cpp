@@ -27,10 +27,10 @@ int main(int argc, char** argv)
   input >> rows >> cols;
   if(input.eof())
   {
-    std::cerr << "Input fail\n";
+    std::cerr << "Input size fail\n";
     return 2;
   }
-  if (!(input.good()))
+  if (!(input))
   {
     int check_num = alymova::check_size(rows, cols);
     if (check_num == 1)
