@@ -25,25 +25,6 @@ int main(int argc, char** argv)
   }
   size_t rows = 0, cols = 0;
   input >> rows >> cols;
-  if (!(input))
-  {
-    int check_num = alymova::check_size(rows, cols);
-    if (check_num == 1)
-    {
-      output << rows << " " << cols;
-      return 0;
-    }
-    else if(check_num == 2)
-    {
-      std::cerr << "Input fail\n";
-      return 2;
-    }
-  }
-  if(input.eof())
-  {
-    std::cerr << "Input size fail\n";
-    return 2;
-  }
   if (num == 1)
   {
     constexpr size_t static_size = 10000;
