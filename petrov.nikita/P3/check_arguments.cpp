@@ -28,7 +28,7 @@ int petrov::check_arguments(int argc, char ** argv)
       return 1;
     }
   }
-  if (std::atoi(argv[1]) != 1 || std::atoi(argv[1]) != 2)
+  if (std::atoi(argv[1]) != 1 && std::atoi(argv[1]) != 2)
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
