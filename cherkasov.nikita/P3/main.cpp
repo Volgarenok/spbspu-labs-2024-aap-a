@@ -1,29 +1,31 @@
-#include <iosteram>
-#include <fctream>
+#include <iostream>
+#include "processing_matrix.h"
+#include <fstream>
+#include <cstdlib>
+#include <cstring>
 
-void input_matrix(std::istream & in, int ** t, size_t m, size_t n, size_t & read);
+int main(int argc, char* argv[])
 {
-// надо посчитать сколько считаллось элементов
-  for (size_t i = 0; i < m; ++i)
+  if (argc != 4)
   {
-    for (size_t j = 0; j < n; ++j)
-    {
-      in >> t[i][j];
-    }
+    std::cerr << "Error: Invalid number of arguments." << "\n";
+    return 1;
   }
-  return in;
-}
-
-int ** alloc(size_t m, size_t n);
-
-int main (int argc, char ** argv)
-{
-  for (int i = 0; i < argc; ++i)
+  char * endptr;
+  long num = strtol(argv[1], &endptr, 10);
+  if (*endptr != '\0' || num < 1 || num > 2)
   {
-    std::cout << argv[i] << "\n";
+    std::cerr << "Error: First parameter is not a valid number or out of range." << "\n";
+    return 1;
   }
-  size_t m = 2, n = 3;
-  int ** t = alloc(m, n);
-  
-  if (input_matrix(std::cin, t, m, n, read))
+  std::string inputFile = argv[2];
+  std::string outputFile = argv[3];
+  if (num == 1) {
+  cherkasov::processFixedSizeArray(inputFile, outputFile);
+  }
+  else if (num == 2)
+  {
+  cherkasov::processDynamicArray(inputFile, outputFile);
+  }
+  return 0;
 }
