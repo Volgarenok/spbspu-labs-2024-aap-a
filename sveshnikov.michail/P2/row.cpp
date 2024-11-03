@@ -1,8 +1,8 @@
-#include "taylor.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <iomanip>
 #include <cstring>
+#include "taylor.hpp"
 
 void sveshnikov::row(double x, size_t k, double error)
 {

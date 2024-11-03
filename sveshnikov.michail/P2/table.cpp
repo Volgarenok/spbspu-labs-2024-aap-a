@@ -1,5 +1,5 @@
-#include "taylor.hpp"
 #include <iostream>
+#include "taylor.hpp"
 
 void sveshnikov::table(double left, double right, size_t k)
 {

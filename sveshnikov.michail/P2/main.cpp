@@ -1,5 +1,5 @@
-#include "taylor.hpp"
 #include <iostream>
+#include "taylor.hpp"
 
 int main()
 {

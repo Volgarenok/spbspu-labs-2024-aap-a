@@ -1,5 +1,5 @@
-#include "taylor.hpp"
 #include <cmath>
+#include "taylor.hpp"
 
 double sveshnikov::math(double x)
 {
