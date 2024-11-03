@@ -14,7 +14,7 @@ int main(int argc, char ** argv)
   size_t columns = 0;
   size_t rows = 0;
   file_input >> columns >> rows;
-  if (argv[1] == "1" || argv[1] == "+1")
+  if (argv[1][0] == '1')
   {
     const int size = 10000;
     int mtx[size] = {0};
