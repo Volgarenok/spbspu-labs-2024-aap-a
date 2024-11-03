@@ -30,12 +30,7 @@ int main(int argc, char ** argv)
   size_t m = 0;
   size_t n = 0;
   in_par >> m >> n;
-  if (!in_par || in_par.eof())
-  {
-    std::cerr << "wrong arguments\n";
-    return 1;
-  }
-  if (m == 0 || n == 0)
+  if (!in_par || in_par.eof() || (m == 0 || n == 0))
   {
     out_par << "0\n";
     return 0;
@@ -69,4 +64,5 @@ int main(int argc, char ** argv)
      std::cerr << "first argv is wrong\n";
      return 1;
   }
+  return 0;
 }
