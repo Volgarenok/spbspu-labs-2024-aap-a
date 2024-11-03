@@ -26,10 +26,9 @@ int main(int argc, char ** argv)
     transformMatrix(arr, m, n, 1, m);
     printMatrix(output, arr, m, n);
   }
-  else 
+  else
   {
     int* arr = new int[m * n];
-    readMatrix(input, arr, m, n, read);
     if (!readMatrix(input, arr, m, n, read))
     {
       std::cerr << "ERROR: incorrect input\n";
