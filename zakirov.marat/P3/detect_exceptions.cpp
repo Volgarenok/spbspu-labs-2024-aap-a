@@ -25,9 +25,10 @@ bool check_arg(int m_argc, char ** m_argv)
       }
       ++len;
     }
-    if (!(m_argv[1] == "+1" || m_argv[1] == "+2" || m_argv[1] == "1" || m_argv[1] == "2"))
+
+    if (!((m_argv[1][0] == '1' || m_argv[1][0] == '2') && letter == 0))
     {
-      if (letter == 0 || (letter == 1 && (m_argv[1][0] == '-' || m_argv[1][0] == '+')))
+      if (letter == 0 || (letter == 1 && m_argv[1][0] == '-'))
       {
         std::cerr << "First parameter is out of range" << "\n";
         return false;
