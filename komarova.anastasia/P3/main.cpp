@@ -70,9 +70,18 @@ int main(int argc, char ** argv)
   if (atoi(st) == 2)
   {
     int* array_2 = new int[size_arr];
-    komarova::input_m(input, array_2, size_arr);
-    komarova::checktri(output, array_2, m);
-    delete[] array_2;
+    if (!(komarova::input_m(input, array_2, size_arr)))
+    {
+      delete[] array_2;
+      std::cerr << "Input fail \n";
+      return 2;
+    }
+    else
+    {
+      komarova::input_m(input, array_2, size_arr);
+      komarova::checktri(output, array_2, m);
+      delete[] array_2;
+    }
   }
 }
 //check
