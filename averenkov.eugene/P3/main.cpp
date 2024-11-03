@@ -40,7 +40,7 @@ int main(int argc, char** argv) {
     {
       matrix = new int*[m];
     }
-    catch (const std::bad__alloc & e)
+    catch (const std::bad_alloc & e)
     {
       std::cerr << "Memory error\n";
       return 1;
