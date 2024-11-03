@@ -13,7 +13,6 @@ int krylov::getColumnWithMaxEquals(int *matrix, size_t rows, size_t columns)
 {
   int maxColumnWithEquals = 0;
   int maxSeriesEqualElements = 0;
-
   for (size_t i = 0; i < columns; i++)
   {
     int currentAmountEquals = 0;
@@ -30,6 +29,5 @@ int krylov::getColumnWithMaxEquals(int *matrix, size_t rows, size_t columns)
       }
     }
   }
-
   return maxColumnWithEquals;
 }
