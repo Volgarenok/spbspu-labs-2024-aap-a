@@ -1,8 +1,7 @@
 #include "memory_utils.hpp"
 #include <stdexcept>
 
-int* kizhin::allocateArray(
-    size_t size, int* stackBuffer, size_t stackSize, MemoryMode mode)
+int* kizhin::allocateArray(size_t size, int* stackBuffer, size_t stackSize, MemoryMode mode)
 {
   if (size == 0) {
     return nullptr;

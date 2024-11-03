@@ -12,16 +12,16 @@ void kizhin::checkArgumentsCount(int argc)
   }
 }
 
-kizhin::MemoryMode kizhin::parseProgramMode(const char* string)
+kizhin::MemoryMode kizhin::parseMemoryMode(const char* firstArgument)
 {
-  if (string == nullptr || string[0] == '\0' || string[1] != '\0') {
-    throw std::logic_error("Program mode must be a single character");
+  if (firstArgument == nullptr || firstArgument[0] == '\0' || firstArgument[1] != '\0') {
+    throw std::logic_error("Memory mode must be a single character");
   }
-  if (string[0] == '1') {
+  if (firstArgument[0] == '1') {
     return MemoryMode::stack;
   }
-  if (string[0] == '2') {
+  if (firstArgument[0] == '2') {
     return MemoryMode::freeStore;
   }
-  throw std::logic_error("Promgram mode must be '1' or '2'");
+  throw std::logic_error("Memory mode must be '1' or '2'");
 }

@@ -5,7 +5,7 @@
 
 namespace kizhin {
   void checkArgumentsCount(int argc);
-  MemoryMode parseProgramMode(const char*);
+  MemoryMode parseMemoryMode(const char*);
 }
 
 #endif

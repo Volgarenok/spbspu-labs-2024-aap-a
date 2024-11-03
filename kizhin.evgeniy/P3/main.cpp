@@ -1,46 +1,51 @@
 #include <fstream>
 #include <iostream>
 #include "matrix_utils.hpp"
-#include "memory_utils.hpp"
 #include "parse_arguments.hpp"
 
 int main(int argc, char** argv)
 {
-  enum ExitCode { failArguments = 1, failFile = 2 };
   kizhin::MemoryMode mode;
-  char* fileIn = nullptr;
-  char* fileOut = nullptr;
   try {
     kizhin::checkArgumentsCount(argc);
-    mode = kizhin::parseProgramMode(argv[1]);
-    fileIn = argv[2];
-    fileOut = argv[3];
+    mode = kizhin::parseMemoryMode(argv[1]);
   } catch (const std::logic_error& error) {
     std::cerr << error.what() << '\n';
-    return failArguments;
+    return 1;
   }
+  const char* inputFilePath = argv[2];
+  const char* outputFilePath = argv[3];
 
   constexpr size_t stackSize = 10'000;
   static int stackBuffer[stackSize];
   int* matrix = nullptr;
   try {
-    std::ifstream in(fileIn);
+    std::ifstream in(inputFilePath);
     if (!in.is_open()) {
-      throw std::runtime_error("Failed to open input file");
+      throw std::logic_error("Failed to open input file");
     }
-    matrix = kizhin::initializeMatrix(in, stackBuffer, stackSize, mode);
-    in.close();
+    int rows = 0;
+    int columns = 0;
+    if (!(in >> rows >> columns) || rows < 0 || columns < 0) {
+      throw std::logic_error("Failed to read matrix dimensions");
+    }
+    const size_t size = rows * columns;
+    matrix = kizhin::allocateArray(size + 2, stackBuffer, stackSize, mode);
+    matrix[0] = rows;
+    matrix[1] = columns;
+    if (!kizhin::readArrayValues(in, matrix + 2, size)) {
+      throw std::logic_error("Failed to read matrix values");
+    }
 
-    std::ofstream out(fileOut);
+    std::ofstream out(outputFilePath);
     if (!out.is_open()) {
-      throw std::runtime_error("Failed to open ouput file");
+      throw std::logic_error("Failed to open ouput file");
     }
-    out << kizhin::countLocalMinimums(matrix);
-    out.close();
+    out << kizhin::countLocalMaximums(matrix);
   } catch (const std::exception& error) {
     kizhin::deallocateArray(matrix, mode);
     std::cerr << error.what() << '\n';
-    return failFile;
+    return 2;
   }
   kizhin::deallocateArray(matrix, mode);
 }
