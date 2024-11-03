@@ -62,11 +62,13 @@ int main(int argc, char ** argv)
       if ((number_of_rows == 0 && rows_length != 0) || (number_of_rows != 0 && rows_length == 0))
       {
         std::cerr << "Error: Invalid data\n";
+        delete[] ptr_matrix;
         return 2;
       }
       else if (!petrov::input_matrix_dynamic(input, ptr_matrix, number_of_rows, rows_length))
       {
         std::cerr << "Error: Invalid data\n";
+        delete[] ptr_matrix;
         return 2;
       }
     }
