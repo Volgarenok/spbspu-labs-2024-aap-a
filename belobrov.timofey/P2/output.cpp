@@ -12,7 +12,7 @@ namespace belobrov
     std::cout << std::fixed << std::setprecision(6) << std::setw(10) << n;
   }
 
-  void table_out(double n, size_t k, double error)
+  void table_out(double n, size_t k)
   {
     try
     {

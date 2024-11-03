@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 
-double belobrov:: f_teylor(double x, size_t k)
+double belobrov:: f_teylor(double x, size_t k, double error)
 {
   double teylor_result = x;
   double z = -1;
