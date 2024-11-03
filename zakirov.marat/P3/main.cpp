@@ -23,8 +23,7 @@ int main(int argc, char ** argv)
   {
     const int size = 10000;
     int mtx[size] = {0};
-    std::istream & input = zakirov::input_mtx(file_input, mtx, columns, rows);
-    if (!input)
+    if (!zakirov::input_mtx(file_input, mtx, columns, rows))
     {
       std::cerr << "The input is incorrect" << "\n";
       return 2;
@@ -45,8 +44,7 @@ int main(int argc, char ** argv)
       delete[] mtx;
       return 1;
     }
-    std::istream & input = zakirov::input_mtx(file_input, mtx, columns, rows);
-    if (!input)
+    if (!zakirov::input_mtx(file_input, mtx, columns, rows))
     {
       std::cerr << "The input is incorrect" << "\n";
       delete[] mtx;
