@@ -16,6 +16,7 @@ int main(int argc, char ** argv)
   file_input >> columns >> rows;
   if (columns == 0 || rows == 0)
   {
+    file_output << "0" << " " << "0" << "\n";
     return 0;
   }
 
