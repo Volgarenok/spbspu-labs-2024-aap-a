@@ -3,12 +3,12 @@
 
 bool zakirov::check_arg(int m_argc, char ** m_argv)
 {
-  if (m_argc < 3)
+  if (m_argc < 4)
   {
     std::cerr << "Not enought arguments" << "\n";
     return false;
   }
-  else if (m_argc > 3)
+  else if (m_argc > 4)
   {
     std::cerr << "Too many arguments" << "\n";
     return false;
