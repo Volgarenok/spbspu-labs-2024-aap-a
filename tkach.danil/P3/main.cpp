@@ -10,45 +10,36 @@ int main(int argc, char** argv)
     std::cerr << "Not enough arguments\n";
     return 1;
   }
-  else if (argc > 4)
+  if (argc > 4)
   {
     std::cerr << "Too many arguments\n";
     return 1;
   }
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
-  char * s = argv[1];
-  int flag = 1;
+  char * number = argv[1];
   int id = 0;
-  for (size_t i = 0; s[i] != '\0'; i++)
-  {
-    if (!((s[i] >= '0') && (s[i] <= '9')))
-    {
-      if (s[i] != '-' && (i != 0))
-      {
-        flag = 0;
-      }
-    }
-  }
-  if (flag == 0)
+  if (!(tkach::isNumber(number)))
   {
     std::cerr << "First parameter is not a number\n";
     return 1;
   }
-  else
+  id = atoi(number);
+  if ((id != 1) && (id != 2))
   {
-    id = atoi(s);
-    if ((id != 1) && (id != 2))
-    {
-      std::cerr << "First parameter is out of range\n";
-      return 1;
-    }
+    std::cerr << "First parameter is out of range\n";
+    return 1;
   }
   size_t str = 0, stl = 0;
   input >> str >> stl;
   if (!input)
   {
     std::cerr << "ERROR: incorrect str/stl value\n";
+    return 1;
+  }
+  if (str == 1 && stl == 1)
+  {
+    std::cerr << "ERROR: no other elements\n";
     return 1;
   }
   if (id == 1)
@@ -84,11 +75,6 @@ int main(int argc, char** argv)
     tkach::outputMtx(output, tkach::createMtx2(mtx, str, stl), stl, stl);
     output << "\n";
     delete[] mtx;
-  }
-  else
-  {
-    std::cerr << "First parameter is out of range\n";
-    return 1;
   }
   return 0;
 }
