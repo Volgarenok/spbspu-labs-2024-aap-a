@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cmath>
+#include "output.hpp"
+#include "cos_expnegx"
 
 namespace sharifullina
 int  main()
@@ -19,6 +21,8 @@ int  main()
     return 1;
   }
 
-  const double error = 0.001;
-  const double step = 0.05;
+  constexpr double error = 0.001;
+  constexpr double step = 0.05;
+
+sharifullina::output_table(left, right, k, step, error);
 }
