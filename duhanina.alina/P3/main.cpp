@@ -33,7 +33,7 @@ int main(int argc, char ** argv)
   input.seekg(0, std::ios::end);
   if (input.tellg() == 0)
   {
-    std::cerr << "File is empty";
+    std::cerr << "File is empty" << "\n";
     return 0;
   }
   input.seekg(0, std::ios::beg);
@@ -51,7 +51,7 @@ int main(int argc, char ** argv)
   }
   if (num == 1)
   {
-    int table[1000];
+    int table[10000] = {};
     duhanina::inputMatrix(input, table, m, n, read);
     if (!(duhanina::inputMatrix(input, table, m, n, read)))
     {
@@ -62,8 +62,13 @@ int main(int argc, char ** argv)
     {
       output << duhanina::outputAnswer(table, m, n) << "\n";
     }
+    else
+    {
+      std::cerr << "Not enough" << "\n";
+      return 2;
+    }
   }
-  else
+  else if (num == 2)
   {
     int * table = nullptr;
     try
@@ -85,6 +90,11 @@ int main(int argc, char ** argv)
     if (input && read == m * n)
     {
       output << duhanina::outputAnswer(table, m, n) << "\n";
+    }
+    else 
+    {
+      std::cerr << "Not enough" << "\n";
+      return 2;
     }
     delete[] table;
   }
