@@ -8,9 +8,9 @@ int main(int argc, char ** argv) {
     std::cerr << "Not enough arguments" << "\n";
     return 1;
   }
+  std::string input_filename = argv[1];
+  std::string output_filename = argv[2];
 
-  const std::string input_file = "input.txt";
-  const std::string output_file = "output.txt";
   std::ifstream infile(input_file);
 
   size_t rows = 0, columns = 0;
