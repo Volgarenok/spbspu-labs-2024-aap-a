@@ -21,17 +21,16 @@ int main(int argc, char** argv)
   std::ofstream output(argv[3]);
   size_t rows = 0, cols = 0;
   input >> rows >> cols;
-  if (!(input))
+  if (!input)
   {
     std::cerr << "Input fail\n";
     return 2;
   }
-  size_t read = 0;
   if (num == 1)
   {
     constexpr size_t static_size = 10000;
     int matrix[static_size] = {0};
-    if (!((alymova::input_matrix(input, matrix, rows, cols, read))) || read < rows * cols)
+    if (!(alymova::input_matrix(input, matrix, rows, cols)))
     {
       std::cerr << "Input failed\n";
       return 2;
@@ -39,7 +38,7 @@ int main(int argc, char** argv)
     alymova::change_matrix(matrix, rows, cols);
     if (output.good())
     {
-      alymova::print_matrix(output, matrix, read);
+      alymova::print_matrix(output, matrix, rows, cols);
       std::cout << "\n";
     }
   }
@@ -56,7 +55,7 @@ int main(int argc, char** argv)
       std::cerr << "Memory not allocated for array\n";
       return 1;
     }
-    if (!((alymova::input_matrix(input, matrix, rows, cols, read)).good()) || read < rows * cols)
+    if (!(alymova::input_matrix(input, matrix, rows, cols)))
     {
       delete[] matrix;
       std::cerr << "Input failed\n";
@@ -65,7 +64,7 @@ int main(int argc, char** argv)
     alymova::change_matrix(matrix, rows, cols);
     if (output.good())
     {
-      alymova::print_matrix(output, matrix, read);
+      alymova::print_matrix(output, matrix, rows, cols);
       std::cout << "\n";
     }
     delete[] matrix;
