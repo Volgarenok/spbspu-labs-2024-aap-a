@@ -24,8 +24,8 @@ int krylov::getColumnWithMaxEquals(int *matrix, size_t rows, size_t columns)
       }
       if (currentAmountEquals > maxSeriesEqualElements)
       {
-	maxSeriesEqualElements = currentAmountEquals;
-	maxColumnWithEquals = i + 1;
+        maxSeriesEqualElements = currentAmountEquals;
+        maxColumnWithEquals = i + 1;
       }
     }
   }
