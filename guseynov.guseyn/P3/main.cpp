@@ -36,7 +36,7 @@ int main(int argc, char ** argv)
   size_t general = m * n;
   size_t read = 0;
   int *arr = nullptr;
-  if (argv[1] == "1")
+  if (argv[1][0] == 1)
   {
     int arr[10000];
   }
