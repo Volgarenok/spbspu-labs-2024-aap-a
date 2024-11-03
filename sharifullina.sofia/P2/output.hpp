@@ -1,7 +1,7 @@
-#ifndef OUTPUT_H
-#define OUTPUT_H
+#ifndef OUTPUT_HPP
+#define OUTPUT_HPP
 #include <cstddef>
-#include "cos_expnegx.h"
+#include "cos_expnegx.hpp"
 
 namespace sharifullina
 {
