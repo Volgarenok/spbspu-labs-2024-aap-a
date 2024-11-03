@@ -6,6 +6,10 @@ std::istream & zakirov::input_mtx(std::istream & in, int * mtx, size_t columns, 
   for (size_t i = 0; i < columns * rows; ++i)
   {
     in >> mtx[i];
+    if (in.eof())
+    {
+      return in;
+    }
   }
   return in;
 }
