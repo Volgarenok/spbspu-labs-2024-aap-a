@@ -35,6 +35,11 @@ int main(int argc, char ** argv)
     std::cerr << "wrong arguments\n";
     return 1;
   }
+  if (m == 0 || n == 0)
+  {
+    out_par << "0\n";
+    return 0;
+  }
   out_par << m << " " << n << "\n";
   size_t read = 0;
   if (parametr == 1)
