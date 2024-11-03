@@ -6,14 +6,9 @@
 
 int main(int argc, char ** argv)
 {
-  if (argc > 4)
+  if (argc != 4)
   {
-    std::cerr << "too many argv\n";
-    return 1;
-  }
-  else if (argc < 4)
-  {
-    std::cerr << "not enough argv\n";
+    std::cerr << "wrong count of argc\n";
     return 1;
   }
   for (size_t i = 0; argv[1][i] != '\0'; i++)
@@ -35,7 +30,7 @@ int main(int argc, char ** argv)
   size_t m = 0;
   size_t n = 0;
   in_par >> m >> n;
-  if (!in_par || in_par.eof() || (m == 0 || n == 0))
+  if (!in_par || (m == 0 || n == 0))
   {
     out_par << "0\n";
     return 1;
@@ -55,6 +50,11 @@ int main(int argc, char ** argv)
       std::cerr << "input matrix failed\n";
       return 1;
     }
+    if (read < m * n)
+    {
+      std::cerr << "not enough elements\n";
+      return 1;
+    }
     hismatova::output_result(out_par, matrix, m, n);
   }
   else if (parametr == 2)
@@ -63,6 +63,12 @@ int main(int argc, char ** argv)
     if (!hismatova::input_matrix(in_par, matrix, m, n, read))
     {
       std::cerr << "input matrix failed\n";
+      delete[] matrix;
+      return 1;
+    }
+    if (read < m * n)
+    {
+      std::cerr << "not enough elements\n";
       delete[] matrix;
       return 1;
     }
