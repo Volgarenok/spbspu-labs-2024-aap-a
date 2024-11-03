@@ -1,13 +1,13 @@
+#include "fnames.h"
 #include <iostream>
 #include <cmath>
 #include <iomanip>
 #include <cstring>
-#include "fnames.h"
 
 int main()
 {
-  const double step = 0.05;
-  const double error = 0.01;
+  constexpr double step = 0.05;
+  constexpr double error = 0.01;
   double left = 0.0;
   double right = 0.0;
   size_t k = 0;
@@ -18,7 +18,7 @@ int main()
   }
   for (double i = left; i <= right; i += step) {
     averenkov::outline(i, k, error);
-    std::cout << "\n";
+    std::cout << "\0";
   }
   averenkov::outline(right, k, error);
 }

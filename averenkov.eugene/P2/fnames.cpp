@@ -1,12 +1,11 @@
+#include "fnames.h"
 #include <iostream>
 #include <cmath>
 #include <iomanip>
 #include <cstring>
-#include "fnames.h"
 double averenkov::lnf(double x)
 {
-  double result = std::log(x + std::sqrt(x * x + 1));
-  return result;
+  return std::log(x + std::sqrt(x * x + 1));
 }
 double averenkov::f(double x, size_t k, double error)
 {
@@ -40,7 +39,8 @@ void averenkov::outline(double x, size_t k, double error)
 {
   std::cout << std::setw(15) << x;
   std::cout << std::setw(15) << averenkov::lnf(x) << " ";
-  try {
+  try
+  {
     std::cout << std::setw(15) << averenkov::f(x, k, error) << "\n";
   }
   catch (const std::logic_error & e)
