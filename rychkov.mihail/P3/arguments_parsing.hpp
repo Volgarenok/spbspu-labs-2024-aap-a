@@ -3,7 +3,7 @@
 
 namespace rychkov
 {
-  void parseArguments(int argc, char** argv, int& testMode);
+  int parseArguments(int argc, char** argv, int& testMode);
 }
 
 #endif

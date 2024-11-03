@@ -8,8 +8,12 @@
 
 int main(int argc, char** argv)
 {
-  int testMode = argv[1][0] - '0';
-  rychkov::parseArguments(argc, argv, testMode);
+  int testMode = 0;
+  int parsngErrCode = rychkov::parseArguments(argc, argv, testMode);
+  if (parsngErrCode != 0)
+  {
+    return parsngErrCode;
+  }
 
   std::ifstream in(argv[2]);
   if (!in.is_open())
