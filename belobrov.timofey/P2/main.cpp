@@ -27,7 +27,7 @@ int main()
   }
 
   output(left, right, 0.05, k);
-
+  std::cout << "\n";
   return 0;
 }
 

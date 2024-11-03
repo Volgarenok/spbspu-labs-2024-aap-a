@@ -24,7 +24,6 @@ namespace belobrov
       parameters_output(teylor_result);
       std::cout << " ";
       parameters_output(ln_result);
-      std::cout << "\n";
     }
     catch (const std::logic_error& e)
     {
