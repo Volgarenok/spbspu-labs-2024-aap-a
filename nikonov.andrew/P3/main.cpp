@@ -22,7 +22,7 @@ int main(int argc, char ** argv)
       std::cerr << "ERROR: incorrect input\n";
       return 2;
     }
-    nikonov::transformMatrix(arr, m, n, 1, m);
+    nikonov::transformMatrix(arr, m, n, 1);
     nikonov::printMatrix(output, arr, m, n);
   }
   else
@@ -43,7 +43,7 @@ int main(int argc, char ** argv)
       delete[] arr;
       return 2;
     }
-    nikonov::transformMatrix(arr, m, n, 1, m);
+    nikonov::transformMatrix(arr, m, n, 1);
     nikonov::printMatrix(output, arr, m, n);
     delete[] arr;
   }

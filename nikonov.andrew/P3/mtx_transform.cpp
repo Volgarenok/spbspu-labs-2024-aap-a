@@ -52,8 +52,9 @@ void nikonov::printMatrix(std::ostream& output, int* mtx, size_t m, size_t n)
     output << " " << mtx[i];
   }
 }
-void nikonov::transformMatrix(int* mtx, size_t m, size_t n, size_t decreaser, size_t vertMove)
+void nikonov::transformMatrix(int* mtx, size_t m, size_t n, size_t decreaser)
 {
+  size_t vertMove = n;
   size_t currentIndex = m * n - n;
   while (m > 0 && n > 0)
   {
