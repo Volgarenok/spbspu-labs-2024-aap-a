@@ -6,6 +6,7 @@ int main(int argc, char ** argv)
   int long long m = -1, n = -1;
   int parameter = 0;
   char * forptr = nullptr;
+  int helpmas[10000] = {};
   if (argc < 4)
   {
     std::cerr << "Not enough arguments\n";
@@ -43,8 +44,7 @@ int main(int argc, char ** argv)
   int * mtx = nullptr;
   if (parameter == 1)
   {
-    int help[10000] = {};
-    mtx = help;
+    mtx = helpmas;
   }
   else
   {
