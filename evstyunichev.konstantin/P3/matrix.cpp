@@ -8,22 +8,21 @@ size_t cstring_len(char* s)
   return len;
 }
 
-std::istream & input(std::istream & in, int* arr, size_t m, size_t n, size_t &read)
+std::istream & input(std::istream & fin, int* arr, size_t m, size_t n, size_t &read)
 {
   int num = 0;
   for (size_t i = 0; i < m; i++)
   {
     for (size_t j = 0; j < n; j++)
     {
-      in >> num;
-      if (in.good())
+      if (fin >> num)
       {
         read++;
       }
-      arr[i * n + j] = n;
+      arr[i * n + j] = num;
     }
   }
-  return in;
+  return fin;
 }
 
 bool isRowNsm(int* arr, size_t i, size_t n)
@@ -47,4 +46,14 @@ size_t CntRowsNsm(int* arr, size_t m, size_t n)
     ans += isRowNsm(arr, i, n);
   }
   return ans;
+}
+
+void ddel(int* arr, int num)
+{
+  constexpr int dinamic_flag = 2;
+  if (num == dinamic_flag)
+  {
+    delete[] arr;
+  }
+  return;
 }

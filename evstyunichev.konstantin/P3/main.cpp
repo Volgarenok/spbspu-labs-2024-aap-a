@@ -1,66 +1,29 @@
 #include <iostream>
 #include <fstream>
-
-size_t cstring_len(char* s)
-{
-  size_t len = 0;
-  for (; s[len] != 0; len++);
-  return len;
-}
-
-std::istream & input(std::istream & in, int* arr, size_t m, size_t n, size_t &read)
-{
-  int num = 0;
-  for (size_t i = 0; i < m; i++)
-  {
-    for (size_t j = 0; j < n; j++)
-    {
-      in >> num;
-      if (in.good())
-      {
-        read++;
-      }
-      arr[i * n + j] = n;
-    }
-  }
-  return in;
-}
-
-bool isRowNsm(int* arr, size_t i, size_t n)
-{
-  bool isNsm = true;
-  for(size_t j = 1; j < n; j++)
-  {
-    if (arr[i * n + j] == arr[i * n + j - 1])
-    {
-      isNsm = 0;
-    }
-  }
-  return isNsm;
-}
-
-size_t CntRowsNsm(int* arr, size_t m, size_t n)
-{
-  size_t ans = 0;
-  for (size_t i = 0; i < m; i++)
-  {
-    ans += isRowNsm(arr, i, n);
-  }
-  return ans;
-}
+#include "matrix.hpp"
 
 int main(int argc, char** argv)
 {
   constexpr size_t StaticArrSize = 1e4;
-  if(argc != 4)
+  if (argc < 4)
   {
-    std::cerr << "bad\n";
+    std::cerr << "Not enough arguments\n";
+    return 1;
+  }
+  else if (argc > 4)
+  {
+    std::cerr << "Too many arguments\n";
     return 1;
   }
   std::ifstream fin(argv[2]);
   std::ofstream fout(argv[3]);
   size_t m = 0, n = 0;
   fin >> m >> n;
+  if (!fin)
+  {
+    std::cout << "((\n";
+    return 1;
+  }
   if ((cstring_len(argv[1]) == 1))
   {
     int num = 0;
@@ -78,24 +41,31 @@ int main(int argc, char** argv)
       }
       catch(const std::exception& e)
       {
-        std::cerr << e.what() << '\n';
-        delete[] arr;
+        std::cerr << e.what() << "\n";
+        ddel(arr, num);
         return 1;
       }
     }
     else
     {
+      std::cerr << "out of range\n";
       return 1;
     }
     size_t read = 0;
-    if ((input(fin, arr, m, n, read).good()))
+    if (input(fin, arr, m, n, read) && (read == n * m))
     {
       std::cout << CntRowsNsm(arr, m, n) << "\n";
     }
-    if(num == 2)
+    else
     {
-      delete[] arr;
+      ddel(arr, num);
+      return 2;
     }
+    ddel(arr, num);
+  }
+  else
+  {
+    std::cout << "is not 1 or 2\n";
   }
   return 0;
 }
