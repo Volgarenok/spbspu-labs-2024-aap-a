@@ -41,7 +41,7 @@ int main()
   constexpr size_t snd = second_column_width;
   constexpr size_t oth = others_columns;
 
-  for (auto i = first_member ; i < last_member; i += step)
+  for (auto i = first_member; i < last_member; i += step)
   {
     kushekbaev::printWidth(std::cout, oth, i);
     std::cout << " ";
