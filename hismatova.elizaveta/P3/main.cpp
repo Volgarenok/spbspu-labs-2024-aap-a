@@ -32,7 +32,7 @@ int main(int argc, char ** argv)
   in_par >> m >> n;
   if (!in_par || m == 0 || n == 0)
   {
-    std::cerr << "0 matrix\n";
+    std::cerr << "wrong m|n\n";
     return 1;
   }
   out_par << m << " " << n << "\n";
@@ -55,6 +55,11 @@ int main(int argc, char ** argv)
       std::cerr << "not enough elements\n";
       return 1;
     }
+    if (m == 0 || n == 0)
+    {
+      std::cerr << "empty array\n";
+      return 1;
+    }
     hismatova::output_result(out_par, matrix, m, n);
   }
   else if (parametr == 2)
@@ -70,6 +75,11 @@ int main(int argc, char ** argv)
     {
       std::cerr << "not enough elements\n";
       delete[] matrix;
+      return 1;
+    }
+    if (m == 0 || n == 0 || matrix == nullptr)
+    {
+      std::cerr << "empty matrix\n";
       return 1;
     }
     hismatova::output_result(out_par, matrix, m, n);
