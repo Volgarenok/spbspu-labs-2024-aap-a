@@ -1,9 +1,9 @@
-#include "matrix_processing.h"
+#include "processing_matrix.h"
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
 
-void cherkasov::processFixedMatrix(const std::string& inputFile, const std::string& outputFile)
+void cherkasov::processFixedMatrix(const std::string & inputFile, const std::string & outputFile)
 {
   std::ifstream inFile(inputFile);
   if (!inFile)
