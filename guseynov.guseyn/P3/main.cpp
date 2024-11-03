@@ -13,7 +13,7 @@ int main(int argc, char ** argv)
   }
   catch (const std::logic_error & e)
   {
-    std::cerr << e;
+    std::cerr << e.what();
     return 1;
   }
   char a = ' ';
@@ -28,7 +28,7 @@ int main(int argc, char ** argv)
   }
   catch (const std::logic_error &e)
   {
-    std::cerr << e;
+    std::cerr << e.what();
     return 1;
   }
   size_t m = static_cast < size_t > (a);
