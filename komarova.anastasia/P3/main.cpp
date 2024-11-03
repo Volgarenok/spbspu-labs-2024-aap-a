@@ -53,6 +53,7 @@ int main(int argc, char ** argv)
     int* array_2 = new int[size_arr];
     komarova::input_m(input, array_2, size_arr);
     komarova::checktri(output, array_2, m);
+    delete[] array_2;
   }
 }
 //check
