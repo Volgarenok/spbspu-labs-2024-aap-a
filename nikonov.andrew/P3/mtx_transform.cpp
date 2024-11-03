@@ -56,8 +56,14 @@ void nikonov::transformMatrix(int* mtx, size_t m, size_t n, size_t decreaser)
 {
   size_t vertMove = n;
   size_t currentIndex = m * n - n;
+  
   while (m > 0 && n > 0)
   {
+    if (m == 1 || n == 1)
+    {
+      mtx[currentIndex] -= decreaser;
+      break;
+    }
     for (size_t moveUp = 0; moveUp < m - 1; ++moveUp)
     {
       mtx[currentIndex] -= decreaser;
@@ -84,7 +90,14 @@ void nikonov::transformMatrix(int* mtx, size_t m, size_t n, size_t decreaser)
     }
     currentIndex -= vertMove;
     ++currentIndex;
-    --m;
-    --n;
+    if (m == 2 || n == 2)
+    {
+      break;
+    }
+    else
+    {
+      m -= 2;
+      n -= 2;
+    }
   }
 }
