@@ -5,12 +5,12 @@ bool check_arg(int m_argc, char ** m_argv)
 {
   if (m_argc < 3)
   {
-    std::cerr << "Not enought arguments";
+    std::cerr << "Not enought arguments" << "\n";
     return false;
   }
   else if (m_argc > 3)
   {
-    std::cerr << "Too many arguments";
+    std::cerr << "Too many arguments" << "\n";
     return false;
   }
   else
@@ -29,12 +29,12 @@ bool check_arg(int m_argc, char ** m_argv)
     {
       if (letter == 0 || (letter == 1 && (m_argv[1][0] == '-' || m_argv[1][0] == '+')))
       {
-        std::cerr << "First parameter is out of range";
+        std::cerr << "First parameter is out of range" << "\n";
         return false;
       }
       else
       {
-        std::cerr << "First parameter is not a number";
+        std::cerr << "First parameter is not a number" << "\n";
         return false;
       }
     }

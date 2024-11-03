@@ -9,7 +9,7 @@ std::istream & zakirov::input_mtx(std::istream & in, int * mtx, size_t columns, 
   return in;
 }
 
-int * transform_mtx(int const * base_mtx, int * new_mtx, size_t columns, size_t rows)
+void zakirov::transform_mtx(int const * base_mtx, int * new_mtx, size_t columns, size_t rows)
 {
   int subtrahend = 1;
   size_t columns_step = columns - 1;
@@ -53,6 +53,20 @@ int * transform_mtx(int const * base_mtx, int * new_mtx, size_t columns, size_t 
     }
     columns_step -= 1;
   }
+}
 
-  return new_mtx;
+void zakirov::output_mtx(std::ostream & out, int * mtx, size_t columns, size_t rows)
+{
+  out << mtx[0] << " ";
+  for (size_t i = 1; i < columns*rows; ++ i)
+  {
+    if (i % rows == 0)
+    {
+      out << mtx[i] << "\n";
+    }
+    else
+    {
+      out << mtx[i] << " ";
+    }
+  }
 }
