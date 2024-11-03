@@ -31,7 +31,7 @@ int main(int argc, char** argv)
   {
     constexpr size_t static_size = 10000;
     int matrix[static_size] = {0};
-    if (!(alymova::input_matrix(input, matrix, rows, cols, read)).good() || read < rows * cols)
+    if (!((alymova::input_matrix(input, matrix, rows, cols, read)).good()) || read < rows * cols)
     {
       std::cerr << "Input failed\n";
       return 2;
@@ -56,7 +56,7 @@ int main(int argc, char** argv)
       std::cerr << "Memory not allocated for array\n";
       return 1;
     }
-    if (!(alymova::input_matrix(input, matrix, rows, cols, read)).good() || read < rows * cols)
+    if (!((alymova::input_matrix(input, matrix, rows, cols, read)).good()) || read < rows * cols)
     {
       delete[] matrix;
       std::cerr << "Input failed\n";
