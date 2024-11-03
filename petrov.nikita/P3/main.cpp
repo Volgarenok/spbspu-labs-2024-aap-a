@@ -17,7 +17,11 @@ int main(int argc, char ** argv)
     input >> rows_length;
     int matrix[10000] = {0};
     int * ptr_matrix = matrix;
-    petrov::input_matrix_static(input, ptr_matrix, number_of_rows, rows_length);
+    if (!petrov::input_matrix_static(input, ptr_matrix, number_of_rows, rows_length))
+    {
+      std::cerr << "Error: Invalid data\n";
+      return 2;
+    }
     for (size_t i = 0; i < number_of_rows * rows_length; i++)
     {
       std::clog << matrix[i];
@@ -32,7 +36,11 @@ int main(int argc, char ** argv)
     try
     {
       ptr_matrix = new int[number_of_rows * rows_length];
-      petrov::input_matrix_dynamic(input, ptr_matrix, number_of_rows, rows_length);
+      if (!petrov::input_matrix_dynamic(input, ptr_matrix, number_of_rows, rows_length))
+      {
+        std::cerr << "Error: Invalid data\n";
+        return 2;
+      }
     }
     catch (const std::bad_alloc & e)
     {
