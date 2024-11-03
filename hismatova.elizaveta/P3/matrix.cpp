@@ -45,7 +45,6 @@ int hismatova::find_longest(int * matrix, size_t m, size_t n)
   }
   return ans;
 }
-
 bool hismatova::is_digit(char c)
 {
   return (c >= '0' && c <= '9');
