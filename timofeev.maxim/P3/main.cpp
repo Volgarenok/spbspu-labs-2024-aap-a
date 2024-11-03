@@ -15,6 +15,7 @@ int main(int argc, char** argv)
     std::cerr << "Not enough arguments\n";
     return 1;
   }
+
   long int num = 0;
   const char* str = argv[1];
   for (size_t i = 0; str[i] != '\0'; i++)
@@ -25,11 +26,13 @@ int main(int argc, char** argv)
       return 1;
     }
   }
-  if (num != 1 && num != 2)
+
+  if (num < 1 || num > 2)
   {
     std::cerr << "First parametr is out of range\n";
     return 1;
   }
+
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
   size_t line = 0;
