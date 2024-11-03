@@ -25,7 +25,7 @@ int main(int argc, char ** argv)
     return 1;
   }
   const int way = std::atoi(argv[1]);
-  if (way > 2 | way < 1)
+  if ((way > 2) | (way < 1))
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
@@ -77,7 +77,7 @@ int main(int argc, char ** argv)
       }
       return 2;
   }
-  if (read < (m * n))
+  if ((read / m) < n)
   {
     std::cerr << "Incorrect matrix\n";
     if (way == 2)
