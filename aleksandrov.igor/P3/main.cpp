@@ -17,14 +17,14 @@ int main(int argc, char** argv)
   }
   else
   {
-    if (!std::atoi(argv[1]))
+    if (!std::atoi(argv[1]) || argv[1][1] != '\0')
     {
-      std::cerr << "ERROR: First parameter is not an integer number!\n";
+      std::cerr << "First parameter is not an integer!\n";
       return 1;
     }
     else if (std::atoi(argv[1]) != 1 && std::atoi(argv[1]) != 2)
     {
-      std::cerr << "ERROR: First parameter is out of range!\n";
+      std::cerr << "First parameter is out of range!\n";
       return 1;
     }
   }
