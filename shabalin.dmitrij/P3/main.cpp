@@ -1,6 +1,55 @@
+#include <fstream>
 #include <iostream>
 
-int main()
+int main(int argc, char *argv[])
 {
-  return 0;
+  if (argc != 4)
+  {
+    std::cerr << "Error in command line arguments" << "\n";
+    return 1;
+  }
+
+  char * analysEnd = nullptr;
+  size_t task = std::strtoll(argv[1], std::addressof(analysEnd), 10);
+
+  if (*analysEnd != '\0')
+  {
+    std::cerr << "Invalid first argument" << "\n";
+    return 1;
+  }
+
+  if (!((task == 2) || (task == 1)))
+  {
+    std::cerr << "Number of task is out of range" << "\n";
+    return 2;
+  }
+
+  std::ifstream input(argv[2]);
+  if (!input)
+  {
+    std::cerr << "Cannot read a number" << "\n";
+    return 2;
+  }
+
+  std::ofstream output(argv[3]);
+  if (!output)
+  {
+    std::cerr << "Error: Output file is not open" << "\n";
+    return 2;
+  }
+
+  size_t rows = 0;
+  size_t cols = 0;
+
+  if (!(input >> rows) || !(input >> cols))
+  {
+    std::cerr << "Can't read rows or columns" << "\n";
+    return 2;
+  }
+
+  if ((rows == 0 && cols == 0))
+  {
+    std::cout << "Null matrix" << "\n";
+    return 0;
+  }
 }
