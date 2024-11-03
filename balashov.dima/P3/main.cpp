@@ -5,12 +5,12 @@
 
 int main(int argc, char** argv)
 {
-  if (argc < 4)
+  if(argc < 4)
   {
     std::cerr << "Not enough arguments\n";
     return 1;
   }
-  if (argc > 4)
+  if(argc > 4)
   {
     std::cerr << "Too many arguments\n";
     return 1;
@@ -20,29 +20,29 @@ int main(int argc, char** argv)
   char * pEnd = nullptr;
   const long arrayType = std::strtol(argv[1], &pEnd, 10);
 
-  if (*pEnd != '\0')
+  if(*pEnd != '\0')
   {
     std::cerr << "First parameter is not a number\n";
     return 1;
   }
-  if ((arrayType == 1 || arrayType == 2) == false)
+  if((arrayType == 1 || arrayType == 2) == false)
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
   }
   int columns = 0, rows = 0;
   input >> columns >> rows;
-  if (!input)
+  if(!input)
   {
     std::cerr << "Rows or columns are not a number\n";
     return 2;
   }
-  if (columns < 0 || rows < 0)
+  if(columns < 0 || rows < 0)
   {
     std::cerr << "Rows and columns must be greater than 0\n";
     return 2;
   }
-  if (rows <= 0 || columns <= 0)
+  if(rows <= 0 || columns <= 0)
   {
     output << "0\n";
     return 0;
