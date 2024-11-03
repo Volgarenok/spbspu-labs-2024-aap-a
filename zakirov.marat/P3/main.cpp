@@ -14,6 +14,15 @@ int main(int argc, char ** argv)
   size_t columns = 0;
   size_t rows = 0;
   file_input >> columns >> rows;
+  if (!file_input)
+  {
+    std::cerr << "The input is incorrect" << "\n";
+    return 2;
+  }
+  else if (file_input.eof())
+  {
+    std::cerr << "Empty file" << "\n";
+  }
   if (columns == 0 || rows == 0)
   {
     file_output << "0" << " " << "0" << "\n";
@@ -22,7 +31,7 @@ int main(int argc, char ** argv)
 
   if (argv[1][0] == '1')
   {
-    const int size = 10000;
+    constexpr int size = 10000;
     int mtx[size] = {0};
     if (!zakirov::input_mtx(file_input, mtx, columns, rows))
     {
