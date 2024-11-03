@@ -1,5 +1,6 @@
 #ifndef BRAIN_H
 #define BRAIN_H
+#include <cstddef>
 namespace bocharov
 {
   double f(double x, size_t k, double error);
