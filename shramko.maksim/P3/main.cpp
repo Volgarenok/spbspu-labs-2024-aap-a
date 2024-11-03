@@ -59,21 +59,12 @@ int main(int argc, char** argv)
   if (argv[1][0] == 1)
   {
     int mtrx[10000];
-    try
+    if (!shramko::inputMtrx(finput, mtrx, sizeMtr))
     {
-      if (!shramko::inputMtrx(finput, mtrx, sizeMtr))
-      {
-        std::cerr << "ERROR!\n";
-        return 2;
-      }
-
-      foutput << shramko::countGoodColoumns(mtrx, cnt_row, cnt_col) << "\n";
-    }
-    catch (const std::exception& e)
-    {
-      std::cerr << "Data error\n";
+      std::cerr << "ERROR!\n";
       return 2;
     }
+    foutput << shramko::countGoodColoumns(mtrx, cnt_row, cnt_col) << "\n";
   }
 
   else
@@ -89,24 +80,15 @@ int main(int argc, char** argv)
       return 1;
     }
 
-    try
+    if (!shramko::inputMtrx(finput, mtrx, sizeMtr))
     {
-      if (!shramko::inputMtrx(finput, mtrx, sizeMtr))
-      {
-        delete[] mtrx;
-        std::cerr << "ERROR!\n";
-        return 2;
-      }
-
-      foutput << shramko::countGoodColoumns(mtrx, cnt_row, cnt_col) << "\n";
       delete[] mtrx;
-    }
-    catch (const std::exception& e)
-    {
-      std::cerr << "Data error\n";
-      delete[] mtrx;
+      std::cerr << "ERROR!\n";
       return 2;
     }
+
+    foutput << shramko::countGoodColoumns(mtrx, cnt_row, cnt_col) << "\n";
+    delete[] mtrx;
   }
   return 0;
 }
