@@ -15,15 +15,6 @@ std::istream & inputMtx(std::istream &in, int *arr, size_t general, size_t & rea
   return in;
 }
 
-void outputMtx(std::ostream &out, const int *arr, size_t m, size_t n, size_t general)
-{
-  out << m << " " << n;
-  for (size_t i = 0; i < general; i++)
-  {
-    out << " " << arr[i];
-  }
-}
-
 size_t searchNumLogMin(const int *arr, size_t general)
 {
   int min = std::numeric_limits < int >::max();

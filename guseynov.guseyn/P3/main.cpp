@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
-#include <cstddef>
+#include <cstring>
 
-#include "mtxprotection.hpp"
+#include "cmdprotection.hpp"
 #include "matrix.hpp"
 
 int main(int argc, char **argv)
@@ -16,43 +16,41 @@ int main(int argc, char **argv)
     std::cerr << e.what();
     return 1;
   }
-  char a = ' ';
-  char b = ' ';
+  size_t m = 0;
+  size_t n = 0;
   std::ifstream inf(argv[2]);
   std::ifstream outf(argv[3]);
-  inf >> a >> b;
-  try
+  inf >> n >> m;
+  if (!inf)
   {
-    mtxRangeProtection(a, b);
+    return 2;
   }
-  catch (const std::logic_error &e)
-  {
-    std::cerr << e.what();
-    return 1;
-  }
-  size_t m = static_cast < size_t > (a);
-  size_t n = static_cast < size_t > (b);
   size_t general = m * n;
   size_t read = 0;
-  int *arr = nullptr;
   if (argv[1][0] == 1)
   {
     int arr[10000];
+    if (!inputMtx(inf, arr, general, read) || (read != general))
+    {
+      return 2;
+    }
+    outf << searchNumLogMin(arr, general) << "\n";
   }
   else
   {
+    int *arr = nullptr;
     try
     {
-      int *arr = new int(general);
+      arr = new int[general];
     }
     catch (const std::logic_error &e)
     {
       return 2;
     }
+    if (!inputMtx(inf, arr, general, read) || (read != general))
+    {
+      return 2;
+    }
+    outf << searchNumLogMin(arr, general) << "\n";
   }
-  if (!inputMtx(inf, arr, general, read) || (read != general))
-  {
-    return 2;
-  }
-  outf << searchNumLogMin(arr, general) << "\n";
 }
