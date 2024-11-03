@@ -9,15 +9,10 @@ void shabalin::spiralDecrease(int *matrix, size_t rows, size_t cols)
   for (size_t k = 1; k < rows * cols; ++k)
   {
     matrix[i * cols + j] = k;
-    (i == rowBegin && j < cols - colEnd - 1) ? ++j : (j == cols - colEnd - 1 && i < rows - rowEnd - 1)
-    ? ++i : (i == rows - rowEnd - 1 && j > colBegin) ? --j : --i;
-    if ((i == rowBegin + 1) && (j == colBegin) && (colBegin != cols - colEnd - 1))
-    {
-      ++rowBegin;
-      ++rowEnd;
-      ++colBegin;
-      ++colEnd;
-    }
+    (i == rowBegin && j < cols - colEnd - 1) ? ++j :
+    (j == cols - colEnd - 1 && i < rows - rowEnd - 1) ? ++i :
+    (i == rows - rowEnd - 1 && j > colBegin) ? --j : --i;
+    (colBegin <= colEnd) ? ++colBegin : (rowBegin <= rowEnd) ? --rowEnd : throw;
   }
   return;
 }
