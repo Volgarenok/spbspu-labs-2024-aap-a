@@ -4,18 +4,9 @@
 
 int main(int argc, char ** argv)
 { 
-  if (argc != 4)
+  if (petrov::check_arguments(argc, argv) == 1)
   {
-    if (argc < 4)
-    {
-      std::cerr << "Not enough arguments\n";
-      return 1;
-    }
-    else if (argc > 4)
-    {
-      std::cerr << "Too much arguments\n";
-      return 1;
-    }
+    return 1;
   }
   std::ifstream input(argv[2]);
   if (argv[1][0] == '1')
