@@ -17,7 +17,7 @@ int main(int argc, char** argv)
   }
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
-  char * number = argv[1];
+  const char * number = argv[1];
   int id = 0;
   if (!(tkach::isNumber(number)))
   {
