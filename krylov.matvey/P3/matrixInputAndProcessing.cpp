@@ -1,6 +1,4 @@
 #include "matrixInputAndProcessing.hpp"
-#include <iostream>
-#include <fstream>
 
 std::istream & krylov::inputMatrix(std::istream & in, int * matrix, size_t rows, size_t columns)
 {
@@ -11,10 +9,11 @@ std::istream & krylov::inputMatrix(std::istream & in, int * matrix, size_t rows,
   return in;
 }
 
-int krylov::getColumnWithMaxEquals(int * matrix, size_t rows, size_t columns)
+int krylov::getColumnWithMaxEquals(int *matrix, size_t rows, size_t columns)
 {
   int maxColumnWithEquals = 0;
   int maxSeriesEqualElements = 0;
+
   for (size_t i = 0; i < columns; i++)
   {
     int currentAmountEquals = 0;
@@ -31,5 +30,6 @@ int krylov::getColumnWithMaxEquals(int * matrix, size_t rows, size_t columns)
       }
     }
   }
+
   return maxColumnWithEquals;
 }
