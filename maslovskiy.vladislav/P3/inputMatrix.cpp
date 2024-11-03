@@ -12,5 +12,3 @@ void maslovskiy::inputMatrix(std::istream &in, int *matrix, size_t matrixSize)
     throw std::logic_error("Incorrect matrix");
   }
 }
-
-
