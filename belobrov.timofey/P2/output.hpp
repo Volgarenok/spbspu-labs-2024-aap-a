@@ -4,9 +4,9 @@
 
 namespace belobrov
 {
-  void output(const double left, const double right, const double step, const size_t k);
-  void table_out(const double n, const size_t k);
-  void parametres_output(const double n);
+  void output(double left, double right, double step, size_t k);
+  void table_out(double n, size_t k);
+  void parametres_output(double n);
 }
 
 #endif

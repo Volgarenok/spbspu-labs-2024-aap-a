@@ -4,7 +4,7 @@
 
 namespace belobrov
 {
-  double f_teylor(const double x, const size_t k);
+  double f_teylor(double x, size_t k);
 }
 
 #endif

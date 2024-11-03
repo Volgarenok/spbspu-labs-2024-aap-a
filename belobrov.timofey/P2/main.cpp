@@ -9,6 +9,8 @@ int main()
   double right = 0;
   size_t k = 0;
   std::cin >> left >> right >> k;
+  constexpr double step = 0.05;
+  constexpr double error = 0.01;
 
   if (!std::cin)
   {
@@ -26,7 +28,7 @@ int main()
     return 1;
   }
 
-  output(left, right, 0.05, k);
+  output(left, right, step, k);
   std::cout << "\n";
 }
 
