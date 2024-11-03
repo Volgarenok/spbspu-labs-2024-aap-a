@@ -1,5 +1,7 @@
 #include <fstream>
 #include <iostream>
+#include "iomatrix.hpp"
+#include "matrix_operations.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -52,4 +54,63 @@ int main(int argc, char *argv[])
     std::cout << "Null matrix" << "\n";
     return 0;
   }
+
+  size_t countOfElements = rows * cols;
+
+  int tempMatrix[10000] = {};
+  double tempSmoothedMatrix[10000] = {};
+
+  int *matrix = nullptr;
+  double *smoothedMatrix = nullptr;
+
+  using namespace shabalin;
+
+  if (task == 1)
+  {
+    matrix = tempMatrix;
+    smoothedMatrix = tempSmoothedMatrix;
+  }
+  else if (task == 2)
+  {
+    try
+    {
+      matrix = new int[countOfElements];
+      smoothedMatrix = new double[countOfElements];
+    }
+    catch (const std::bad_alloc &e)
+    {
+      std::cerr << "Error" << e.what() << "\n";
+      delete[] matrix;
+      delete[] smoothedMatrix;
+      return 2;
+    }
+  }
+
+  try
+  {
+    shabalin::matrixInput(input, matrix, countOfElements);
+    shabalin::spiralDecrease(matrix, rows, cols);
+    shabalin::matrixOutput(output, matrix, rows, cols);
+    if (!output)
+    {
+      throw std::logic_error("Error of output");
+    }
+  }
+  catch (const std::exception &e)
+  {
+    std::cerr << e.what() << '\n';
+    if (task == 2)
+    {
+      delete[] matrix;
+      delete[] smoothedMatrix;
+    }
+    return 2;
+  }
+
+  if (task == 2)
+  {
+    delete[] matrix;
+    delete[] smoothedMatrix;
+  }
+  return 0;
 }

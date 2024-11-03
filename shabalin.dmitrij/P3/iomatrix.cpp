@@ -13,19 +13,20 @@ void shabalin::matrixInput(std::istream &input, int *matrix, size_t countOfEleme
   }
 }
 
-void shabalin::matrixOutput(std::ostream &output, const double *matrix, size_t rows, size_t cols)
+void shabalin::matrixOutput(std::ostream &output, int *matrix, size_t rows, size_t cols)
 {
-  if (!(output << rows << ' ' << cols))
+  if (rows == 0 && cols == 0)
   {
-    throw std::logic_error("Can't output the result");
+    output << "0 0";
+    return;
   }
-  output << std::fixed;
-  output.precision(1);
-  for (size_t i = 0; i < rows * cols; ++i)
+  else if ((!rows) && (!cols))
   {
-    if (!(output << ' ' << matrix[i]))
-    {
-      throw std::logic_error("Can't output the result");
-    }
+    throw std::invalid_argument("Such matrix can not exist");
   }
+  for (size_t i = 0; i < rows * cols - 1; i++)
+  {
+    output << matrix[i] << ' ';
+  }
+  output << matrix[rows * cols - 1];
 }
