@@ -33,3 +33,11 @@ double sharifullina::exp_negx(double x, size_t k, double error)
     }
     return result;
 }
+double sharifullina::cos_cmath(double x)
+{
+    return std::cos(x);
+}
+double sharifullina::exp_negx_cmath(double x)
+{
+    return std::exp(-x);
+}

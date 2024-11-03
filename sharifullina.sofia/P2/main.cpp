@@ -1,9 +1,8 @@
 #include <iostream>
 #include <cmath>
 #include "output.hpp"
-#include "cos_expnegx"
+#include "cos_expnegx.hpp"
 
-namespace sharifullina
 int  main()
 {
   double  left = 0.0, right = 0.0;
@@ -12,7 +11,7 @@ int  main()
 
   if (!std::cin)
   {
-    std::cerr << "Not a number\";
+    std::cerr << "Not a number\n";
     return 1;
   }
   if (left <= -1 || right >= 1 || left > right)

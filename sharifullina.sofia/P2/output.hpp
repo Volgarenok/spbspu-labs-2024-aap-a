@@ -5,7 +5,7 @@
 
 namespace sharifullina
 {
-  void output_row(auto i, double taylor, double cmath);
-  void output_table(double left, double right, size_t k);
+  void output_row(double i, size_t k, double error);
+  void output_table(double left, double right, size_t k, double step, double error);
 }
 #endif
