@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
   {
     try
     {
-      int * t = malloc(m, n);
+      int * t = brevnov::malloc(m, n);
     }
     catch(const std::bad_alloc& e)
     {
@@ -57,12 +57,12 @@ int main(int argc, char ** argv)
       return 2;
     }
   }
-  int member = input_matrix(input, t, m, n);
+  int member = brevnov::input_matrix(input, t, m, n);
   if (!(member == m * n))
   {
     std::cerr << "Error matrix input\n";
     return 2;
   }
-  output << osedfun(t, m, n);
+  output << brevnov::osedfun(t, m, n);
   return 0;
 }

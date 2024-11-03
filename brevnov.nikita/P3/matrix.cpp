@@ -23,4 +23,3 @@ int * brevnov::alloc(size_t m, size_t n)
   t = new int[m * n];
   return t;
 }
-
