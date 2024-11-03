@@ -35,22 +35,38 @@ int main(int argc, char** argv) {
   if (std::atoi(argv[1]) == 1)
   {
     int arr[10000];
-    matrix = new int*[m];
+    try
+    {
+      matrix = new int*[m];
+    }
+    catch (const std::bad__alloc & e)
+    {
+      std::cerr << "Memory error\n";
+      return 1;
+    }
     for (size_t i = 0; i < m; ++i) {
       matrix[i] = &arr[i * n];
     }
   } else {
-      matrix = new int*[m];
+      try
+      {
+        matrix = new int*[m];
+      }
+      catch (const std::bad_alloc & e)
+      {
+        std::cerr << "Memory error\n";
+        return 1;
+      }
       for (size_t i = 0; i < m; ++i) {
         matrix[i] = new int[n];
       }
     }
   size_t read = 0;
   if (!averenkov::input_matrix(input, matrix, m, n, read) || read != m * n) {
-    std::cerr << "Read fail\n";
     if (std::atoi(argv[1]) == 2) {
         averenkov::destroy(matrix, m);
     }
+    std::cerr << "Read fail\n";
     return 2;
   }
   output << averenkov::num_col_lsr(matrix, m, n) << " ";
