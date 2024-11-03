@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 
+#include "get_max_sum_sdg.hpp"
+
 int main(int argc, char** argv)
 {
   if (argc < 4)
@@ -37,6 +39,8 @@ int main(int argc, char** argv)
     in.close();
     return 1;
   }
+
+  int staticMatrix[10'000];
 
   in.close();
   out.close();
