@@ -19,12 +19,25 @@ int main(int argc, char** argv)
   }
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
+  if (!output)
+  {
+    return 2;
+  }
   size_t rows = 0, cols = 0;
   input >> rows >> cols;
-  if (!input)
+  if (!(input.good()))
   {
-    std::cerr << "Input fail\n";
-    return 2;
+    int check_num = alymova::check_size(rows, cols);
+    if (check_num == 1)
+    {
+      output << rows << " " << cols;
+      return 0;
+    }
+    else if(check_num == 2)
+    {
+      std::cerr << "Input fail\n";
+      return 2;
+    }
   }
   if (num == 1)
   {
@@ -36,11 +49,8 @@ int main(int argc, char** argv)
       return 2;
     }
     alymova::change_matrix(matrix, rows, cols);
-    if (output.good())
-    {
-      alymova::print_matrix(output, matrix, rows, cols);
-      std::cout << "\n";
-    }
+    alymova::print_matrix(output, matrix, rows, cols);
+    std::cout << "\n";
   }
   if (num == 2)
   {
@@ -62,11 +72,8 @@ int main(int argc, char** argv)
       return 2;
     }
     alymova::change_matrix(matrix, rows, cols);
-    if (output.good())
-    {
-      alymova::print_matrix(output, matrix, rows, cols);
-      std::cout << "\n";
-    }
+    alymova::print_matrix(output, matrix, rows, cols);
+    std::cout << "\n";
     delete[] matrix;
   }
   return 0;
