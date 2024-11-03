@@ -1,7 +1,6 @@
 #ifndef MATRIXINPUTANDPROCESSING_HPP
 #define MATRIXINPUTANDPROCESSING_HPP
 
-#include <fstream>
 #include <iostream>
 namespace krylov
 {
