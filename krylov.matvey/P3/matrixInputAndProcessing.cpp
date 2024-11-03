@@ -20,7 +20,7 @@ int krylov::getColumnWithMaxEquals(int * matrix, size_t rows, size_t columns)
     int currentAmountEquals = 0;
     for (size_t j = 1; i < rows; i++)
     {
-      if (matrix[i + columns * j] == matrix[i + columns * (j-1)])
+      if (matrix[i + columns * j] == matrix[i + columns * (j - 1)])
       {
         currentAmountEquals++;
       }
@@ -33,4 +33,3 @@ int krylov::getColumnWithMaxEquals(int * matrix, size_t rows, size_t columns)
   }
   return maxColumnWithEquals;
 }
-
