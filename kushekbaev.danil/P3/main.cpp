@@ -5,7 +5,8 @@
 int main(int argc, char ** argv) {
   if (argc < 3)
   {
-    return 0;
+    std::cerr << "Not enough arguments" << "\n";
+    return 1;
   }
 
   const std::string input_file = "input.txt";
