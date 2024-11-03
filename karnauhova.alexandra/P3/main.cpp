@@ -63,18 +63,23 @@ int main(int argc, char ** argv)
       return 1;
     };
   }
+  int t1[10000] = {0}
+  if (way == 2)
+  {
+    if (!karnauhova::input_matrix(input, t, m, n, read))
+    {
+        std::cerr << "File text is invalid\n";
+          delete[] t;
+        return 2;
+    }
+  }
   else
   {
-   t[10000] = {0};
-  }
-  if (!karnauhova::input_matrix(input, t, m, n, read))
-  {
+    if (!karnauhova::input_matrix(input, t, m, n, read))
+    {
       std::cerr << "File text is invalid\n";
-      if (way == 2)
-      {
-        delete[] t;
-      }
       return 2;
+    }
   }
   if ((read / m) < n)
   {
@@ -88,7 +93,14 @@ int main(int argc, char ** argv)
   float* t2 = nullptr;
   try
   {
-    t2 =  karnauhova::smooth_matrix(t, m, n);
+    if (way == 2)
+    {
+      t2 =  karnauhova::smooth_matrix(t, m, n);
+    }
+    else
+    {
+      t2 =  karnauhova::smooth_matrix(t1, m, n);
+    }
    }
    catch(const std::bad_alloc & e)
    {
@@ -98,10 +110,7 @@ int main(int argc, char ** argv)
   output << m << " " << n << " ";
   karnauhova::output_matrix(output, t2, m, n);
   output << "\n";
-  if (way == 2)
-  {
-    delete[] t;
-  }
+  delete[] t;
   delete[] t2;
   return 0;
 }
