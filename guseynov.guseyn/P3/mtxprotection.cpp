@@ -29,14 +29,14 @@ void mtxElementProtection(char a)
 {
   if ((a < "0") or (a > "9"))
   {
-    throw std::logic_error("Element matrix is not a number")
+    throw std::logic_error("This is not a number")
   }
   int max = std::numeric_limits < int >::max();
   int min = std::numeric_limits < int >::min();
   int num = static_cast < int > (a)
   if (num > max) or (num < min))
   {
-    throw std::logic_error("Element matrix is very big number")
+    throw std::logic_error("Out of memory")
   }
 }
 
@@ -47,7 +47,11 @@ void mtxRangeProtection(char a, char b)
   int max = std::numeric_limits < int >::max();
   int num1 = static_cast < int > (a)
   int num2 = static_cast < int > (b)
-  if ((num1 > max / num2) or (num2 > max / num1))
+  if ((num1 == 0) || (num2 == 0))
+  {
+    throw std::logic_error("This is not a matrix")
+  }
+  if ((num1 > max / num2) || (num2 > max / num1))
   {
     throw std::logic_error("Out of memory")
   }
