@@ -28,6 +28,7 @@ int main(int argc, char ** argv)
   if (!in_par)
   {
     std::cerr << "failed to open input file\n";
+    return 1;
   }
   std::ofstream out_par(argv[3]);
   const int parametr = atoi(argv[1]);
@@ -43,6 +44,11 @@ int main(int argc, char ** argv)
   size_t read = 0;
   if (parametr == 1)
   {
+    if (m * n > 1000)
+    {
+      std::cerr << "too many elements\n";
+      return 1;
+    }
     int matrix[1000];
     if (!hismatova::input_matrix(in_par, matrix, m, n, read))
     {
