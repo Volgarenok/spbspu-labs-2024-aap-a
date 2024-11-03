@@ -1,5 +1,5 @@
-#ifndef COS_EXPNEGX_H
-#define COS_EXPNEGX_H
+#ifndef COS_EXPNEGX_HPP
+#define COS_EXPNEGX_HPP
 #include <cstddef>
 
 namespace sharifullina
