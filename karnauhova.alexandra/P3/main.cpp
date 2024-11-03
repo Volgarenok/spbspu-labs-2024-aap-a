@@ -50,9 +50,9 @@ int main(int argc, char ** argv)
     output << m << " " << n << " ";
     return 0;
   }
+  int * t = nullptr;
   if (way == 2)
   {
-    int * t = nullptr;
     try
     {
       t = karnauhova::ct_matrix(m, n);;
@@ -65,7 +65,7 @@ int main(int argc, char ** argv)
   }
   else
   {
-   int t[10000] = {0};
+   t[10000] = {0};
   }
   karnauhova::input_matrix(input, t, m, n, read);
   if (!karnauhova::input_matrix(input, t, m, n, read))
