@@ -3,7 +3,7 @@
 #include <fstream>
 #include <cstdlib>
 
-void processFixedMatrix(const std::string& inputFile, const std::string& outputFile)
+void cherkasov::processFixedMatrix(const std::string& inputFile, const std::string& outputFile)
 {
   std::ifstream inFile(inputFile);
   if (!inFile)
@@ -50,7 +50,7 @@ void processFixedMatrix(const std::string& inputFile, const std::string& outputF
   outFile << count << "\n";
   outFile.close();
   }
-void processDynamicMatrix(const std::string& inputFile, const std::string& outputFile)
+void cherkasov::processDynamicMatrix(const std::string& inputFile, const std::string& outputFile)
 {
   std::ifstream inFile(inputFile);
   if (!inFile)
