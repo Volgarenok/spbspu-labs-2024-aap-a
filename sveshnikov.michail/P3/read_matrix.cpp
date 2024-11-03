@@ -7,4 +7,5 @@ std::istream &sveshnikov::read_matrix(std::istream &in, int *matrix, size_t num_
     in >> matrix[read];
     read++;
   }
+  return in;
 }
