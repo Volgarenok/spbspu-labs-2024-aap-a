@@ -2,8 +2,7 @@
 
 std::istream & shramko::inputMtrx(std::istream & in, int* mtrx, size_t sizeMtrx)
 {
-  size_t dataCnt = 0;
-  for (size_t i = 0; i < sizeMtr; ++i)
+  for (size_t i = 0; i < sizeMtrx; ++i)
   {
     in >> mtrx[i];
   }
