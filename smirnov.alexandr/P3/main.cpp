@@ -29,12 +29,13 @@ int main(int argc, char ** argv)
     }
   }
   std::ifstream input(argv[2]);
-  std::ofstream output(argv[3]);
-  int rows, cols;
+  size_t rows = 0;
+  size_t columns = 0;
   input >> rows >> cols;
   if (input.fail())
   {
     std::cerr << "Invalid matrix dimensions\n";
     return 2;
   }
+  std::ofstream output(argv[3]);
 }
