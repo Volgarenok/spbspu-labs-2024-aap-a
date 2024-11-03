@@ -1,6 +1,5 @@
-#include "matrix.hpp"
+#include "cnt_nzr_dig.hpp"
 
-void write_matrix(std::ostream & out) 
+void sveshnikov::write_matrix(std::ostream &out)
 {
-  
 }

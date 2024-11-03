@@ -1,6 +1,6 @@
-#include "matrix.hpp"
+#include "cnt_nzr_dig.hpp"
 
-void read_matrix(std::istream & in) 
+void sveshnikov::read_matrix(std::istream &in, int *matrix, size_t m, size_t n)
 {
-
+  
 }
