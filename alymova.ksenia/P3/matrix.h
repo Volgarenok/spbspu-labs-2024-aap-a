@@ -4,7 +4,7 @@
 #include <istream>
 namespace alymova
 {
-  std::istream& input_matrix(std::istream& input, int* const matrix, size_t& const rows, size_t& const cols);
+  std::istream& input_matrix(std::istream& input, int* const matrix, size_t& rows, size_t& cols);
   void print_matrix(std::ostream& output, const int* const matrix, size_t rows, size_t cols);
   void change_matrix(int* const matrix, size_t rows, size_t cols);
 }
