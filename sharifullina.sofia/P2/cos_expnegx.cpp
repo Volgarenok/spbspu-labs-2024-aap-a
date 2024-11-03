@@ -1,6 +1,7 @@
-#include "cos_expnegx.h"
+#include "cos_expnegx.hpp"
 #include <cmath>
 #include <stdexcept>
+
 
 double sharifullina::cos(double x, size_t k, double error)
 {
@@ -17,13 +18,13 @@ double sharifullina::cos(double x, size_t k, double error)
     }
     return result;
 }
-double sharifullina::expnegx(double x, size_t k, double error)
+double sharifullina::exp_negx(double x, size_t k, double error)
 {
-    double next = (x * x) / 2;
-    double result = 1 - next;
-    for (size_t i = 1; i < k - 1; ++i)
+    double next = -1 * x;
+    double result = 1 + next;
+    for (size_t i = 0; i < k - 2; ++i)
     {
-        next *= x / i;
+        next *= -1 * (x / (i + 2));
         result += next;
     }
     if (std::abs(next) > error)
@@ -35,10 +36,10 @@ double sharifullina::expnegx(double x, size_t k, double error)
 
 double sharifullina::cos_cmath(double x)
 {
-    return std::cos(x);
+    return sharifullina::cos(x);
 }
 
-double sharifullina::expnegx_cmath(double x)
+double sharifullina::exp_negx_cmath(double x)
 {
-    return std::expnegx(x);
+    return sharifullina::exp_negx(x);
 }
