@@ -17,19 +17,20 @@ int main(int argc, char** argv)
   }
 
   long int num = 0;
-  const char* str = argv[1];
-  for (size_t i = 0; str[i] != '\0'; i++)
+  const char *type_check = argv[1];
+  for (size_t i = 0; i < strlen(type_check); i++)
   {
-    if (str[i] < '0' || str[i] > '9')
+    if (type_check[i] < '0' || type_check[i] > '9')
     {
-      std::cerr << "First parameter is not a number\n";
+      std::cerr << "First parameter is not a number" << "\n";
       return 1;
     }
   }
-
-  if (num < 1 || num > 2)
+  char* endptr;
+  num = std::strtol(type_check, &endptr, 10);
+  if (num != 1 && num != 2)
   {
-    std::cerr << "First parametr is out of range\n";
+    std::cerr << "First parameter is out of range" << "\n";
     return 1;
   }
 
