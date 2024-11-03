@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include "matrixInputAndProcessing.hpp"
 
 int main(int argc, char ** argv)
 {
@@ -28,4 +29,32 @@ int main(int argc, char ** argv)
   }
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
+  size_t rows = 0, columns = 0;
+  input >> rows >> columns;
+
+  if (argv[1][0] == '1')
+  {
+    int matrix[10000] = {0};
+    if (!krylov::inputMatrix(input, matrix, rows, columns))
+    {
+      std::cerr << "Error: incorrect matrix!\n";
+      return 2;
+    }
+    output << krylov::getColumnWithMaxEquals(matrix, rows, columns);
+    output << '\n';
+  }
+  else if (argv[1][0] == '2')
+  {
+    int * matrix = new int[rows * columns];
+    if (!krylov::inputMatrix(input, matrix, rows, columns))
+    {
+      std::cerr << "Error: incorrect matrix!\n";
+      delete[] matrix;
+      return 2;
+    }
+
+    output << krylov::getColumnWithMaxEquals(matrix, rows, columns);
+    output << '\n';
+    delete[] matrix;
+  }
 }
