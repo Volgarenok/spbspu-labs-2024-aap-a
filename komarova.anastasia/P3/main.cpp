@@ -30,11 +30,16 @@ int main(int argc, char ** argv)
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
 
+  if (!output)
+  {
+    return 2;
+  }
+
   int m = 0, n = 0;
   input >> m >> n;
   if (!input)
   {
-    std::cerr << "Not enough arguments\n";
+    std::cerr << "Incorrect input\n";
     return 2;
   }
   if (m != n)
