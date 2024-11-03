@@ -2,6 +2,7 @@
 #include <cctype>
 #include <cstdlib>
 #include <fstream>
+#include "matrix.hpp"
 
 int main(int argc, char ** argv)
 {
@@ -29,35 +30,40 @@ int main(int argc, char ** argv)
     }
   }
   std::ifstream input(argv[2]);
-  size_t rows = 0;
-  size_t columns = 0;
-  input >> rows >> cols;
+  int rows = 0;
+  int columns = 0;
+  input >> rows >> columns;
   if (input.fail())
   {
     std::cerr << "Invalid matrix dimensions\n";
     return 2;
   }
-  std::ofstream output(argv[3]);
+  int ** matrix;
   if (num == 1)
   {
-    int matrix[10000] = {0}
-    if (!smirnov::inputMatrix(input, matrix, rows, columns))
+    if (rows * columns > 10000)
     {
-      std::cerr << "Incorrect data\n";
+      std::cerr << "Matrix size exceeds limit\n";
       return 2;
     }
-    output << smirnov::processMatrix(matrix, rows, columns) << "\n";
+    static int fixedMatrix[100][100];
+    matrix = fixedMatrix;
   }
   else
   {
-    int * matrix = new int[rows * columns];
-    if (!smirnov::inputMatrix(input, matrix, rows, columns))
+    matrix = new int * [rows];
+    for (int i = 0; i < rows; i++)
     {
-      std::cerr << "Incorrect data\n";
-      delete[] matrix;
-      return 2;
+      matrix[i] = new int[columns];
     }
-  output << smirnov::processMatrix(matrix, rows, columns) << "\n";
-  delete[] matrix;
+  }
+  for (int i = 0; i < rows; ++i) {
+    for (int j = 0; j < cols; ++j) {
+       if (!(input >> matrix[i][j])) {
+         cerr << "Invalid matrix data" << endl;
+           return 2;
+       }
+    }
   }
 }
+
