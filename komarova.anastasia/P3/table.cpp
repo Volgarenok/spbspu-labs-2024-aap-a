@@ -36,10 +36,11 @@ void komarova::checktri(std::ostream& output, int * arr, int m)
   }
 }
 
-void komarova::input_m(std::istream& input, int * array, int size_arr)
+std::istream& komarova::input_m(std::istream& input, int * array, int size_arr)
 {
   for (int i = 0; i < size_arr; ++i)
     {
       input >> array[i];
     }
+  return input;
 }
