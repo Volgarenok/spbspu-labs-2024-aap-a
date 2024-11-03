@@ -31,6 +31,7 @@ int main(int argc, char ** argv)
     return 1;
   }
   std::ifstream input(argv[2]);
+  std::ofstream output(argv[3]);
   size_t read = 0;
   int m = 0, n = 0;
   input >> m >> n;
@@ -43,6 +44,11 @@ int main(int argc, char ** argv)
   {
     std::cerr << "Non-square matrix\n";
     return 2;
+  }
+  if (m == 0 && n == 0)
+  {
+    output << m << " " << n << " ";
+    return 0;
   }
   int * t = nullptr;
   if (way == 2)
@@ -90,7 +96,6 @@ int main(int argc, char ** argv)
      std::cerr<<"Out of memory\n";
      return 1;
    }
-  std::ofstream output(argv[3]);
   output << m << " " << n << " ";
   karnauhova::output_matrix(output, t2, m, n);
   output << "\n";
