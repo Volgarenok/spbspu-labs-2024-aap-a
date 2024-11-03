@@ -1,4 +1,5 @@
 #include "mtx_work.hpp"
+#include <iostream>
 
 std::istream & zakirov::input_mtx(std::istream & in, int * mtx, size_t columns, size_t rows)
 {
