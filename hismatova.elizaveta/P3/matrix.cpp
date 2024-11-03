@@ -32,7 +32,7 @@ int hismatova::find_longest(int * matrix, size_t m, size_t n)
     for (size_t j = 0; j < n; j++)
     {
       count = 1;
-      int vr = j + 1;
+      size_t vr = j + 1;
       while (vr < n && matrix[i * n + vr] == matrix[i * n + j])
       {
         count++;
