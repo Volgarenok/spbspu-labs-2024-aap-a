@@ -76,6 +76,7 @@ int main(int argc, char ** argv)
       return 3;
     }
     output << petrov::process_matrix_data(ptr_matrix, number_of_rows, rows_length);
+    delete[] ptr_matrix;
   }
 }
 
