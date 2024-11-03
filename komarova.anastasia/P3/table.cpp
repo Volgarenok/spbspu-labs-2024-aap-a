@@ -1,4 +1,5 @@
 #include "table.h"
+#include <fstream>
 
 bool komarova::nechislo(char * st)
 {
@@ -11,7 +12,7 @@ bool komarova::nechislo(char * st)
   }
   return false;
 }
-void komarova::checktri(std::ostream & output, int * arr, int m)
+void komarova::checktri(std::ostream& output, int * arr, int m)
 {
   bool k = true;
   for (int i = 0; i < m; ++i)
@@ -35,11 +36,10 @@ void komarova::checktri(std::ostream & output, int * arr, int m)
   }
 }
 
-void komarova::input_m(std::istream & input, int * array, int size_m)
+void komarova::input_m(std::istream& input, int * array, int size_arr)
 {
   for (int i = 0; i < size_arr; ++i)
     {
       input >> array[i];
     }
-  return input;
 }

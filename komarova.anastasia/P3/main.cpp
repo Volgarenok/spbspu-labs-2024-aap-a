@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 #include "table.h"
 
 int main(int argc, char ** argv)
@@ -15,12 +16,12 @@ int main(int argc, char ** argv)
     return 1;
   }
   char * st = argv[1];
-  if komarova::nechislo(st)
+  if (komarova::nechislo(st))
   {
     std::cout << "First parameter is not a number \n";
     return 1;
   }
-  if ((st != "2") && (st != "1"))
+  if ((atoi(st) > 2) || (atoi(st) < 1))
   {
     std::cerr << "First parameter is out of range \n";
     return 1;
@@ -45,17 +46,12 @@ int main(int argc, char ** argv)
   {
     int array_1[10000] = {};
     komarova::input_m(input, array_1, size_arr);
-    if (komarova::checktri(array_1, m) == true)
-    {
-      output << "true";
-    }
-    else
-    {
-      output << "false";
-    }
+    komarova::checktri(output, array_1, m);
   }
   if (st == "2")
   {
     int* array_2 = new int[size_arr];
     komarova::input_m(input, array_2, size_arr);
+    komarova::checktri(output, array_2, m);
+  }
 }
