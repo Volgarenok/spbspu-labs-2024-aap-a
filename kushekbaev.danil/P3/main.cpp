@@ -1,8 +1,4 @@
 #include "kushekbaev_matrix.hpp"
-#include "createMatrix.cpp"
-#include "deleteMatrix.cpp"
-#include "getElement.cpp"
-#include "countSaddlePoints.cpp"
 #include <iostream>
 #include <fstream>
 

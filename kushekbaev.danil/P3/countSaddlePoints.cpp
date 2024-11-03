@@ -7,12 +7,12 @@ int kushekbaev::countSaddlePoints(int * matrix, size_t rows, size_t columns)
   {
     for (size_t j = 0; i < columns; j++)
     {
-      int element = kushekbaev::getElement(matrix, rows, columns, i, j);
+      int element = kushekbaev::getElement(matrix, columns, i, j);
 
       bool is_min_in_row = true;
       for (size_t z = 0; z < columns; z++)
       {
-        if (kushekbaev::getElement(matrix, rows, columns, i, z) < element)
+        if (kushekbaev::getElement(matrix, columns, i, z) < element)
         {
           is_min_in_row = false;
           break;
@@ -22,7 +22,7 @@ int kushekbaev::countSaddlePoints(int * matrix, size_t rows, size_t columns)
       bool is_max_in_column = true;
       for (size_t z = 0; z < rows; z++)
       {
-        if (kushekbaev::getElement(matrix, rows, columns, j, z) > element)
+        if (kushekbaev::getElement(matrix, columns, j, z) > element)
         {
           is_max_in_column = false;
           break;
