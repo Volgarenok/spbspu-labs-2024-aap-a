@@ -6,7 +6,7 @@ int main(int argc, char ** argv) {
   if (argc < 3)
   {
     std::cerr << "Not enough arguments" << "\n";
-    return 1;
+    return 2;
   }
   std::string input_filename = argv[2];
   std::string output_filename = argv[3];
@@ -24,8 +24,7 @@ int main(int argc, char ** argv) {
 
   if (!(infile >> rows >> columns))
   {
-    std::cerr << "Error reading matrix dimensions" << "\n";
-    return 1;
+    return 0;
   }
 
   int* matrix = kushekbaev::createMatrix(rows, columns);
