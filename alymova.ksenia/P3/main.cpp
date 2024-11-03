@@ -42,7 +42,7 @@ int main(int argc, char** argv)
       matrix = mtx;
     }
     size_t read = 0;
-    if (!(alymova::input_matrix(input, matrix, rows, cols, read)) || read < (rows * cols))
+    if (!(alymova::input_matrix(input, matrix, rows, cols, read).good()) || read < (rows * cols))
     {
       if (num == 2)
       {
