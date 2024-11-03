@@ -1,7 +1,6 @@
 #ifndef STREAM_HPP
 #define STREAM_HPP
 
-#include <iostream>
 #include <fstream>
 
 namespace balashov

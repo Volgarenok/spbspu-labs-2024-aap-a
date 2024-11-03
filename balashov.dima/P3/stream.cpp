@@ -1,7 +1,4 @@
 #include "stream.hpp"
-#include <iostream>
-#include <fstream>
-#include <iomanip>
 
 namespace balashov
 {

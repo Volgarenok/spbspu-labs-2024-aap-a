@@ -1,5 +1,4 @@
-#include <iostream>
-#include <fstream>
+#include "iostream"
 #include <cstdlib>
 #include "stream.hpp"
 #include "matrixProcessing.hpp"
@@ -57,7 +56,7 @@ int main(int argc, char** argv)
       std::cerr << "ERROR: Invalid input\n";
       return 2;
     }
-    output << balashov::minSumSideDiagonal(matrix, columns, rows);
+    output << balashov::minSumSideDiagonal(matrix, columns, rows) << "\n";
   }
   else if(arrayType == 2)
   {
@@ -79,7 +78,7 @@ int main(int argc, char** argv)
       std::cerr << "ERROR: Invalid input\n";
       return 2;
     }
-    output << balashov::minSumSideDiagonal(matrix, columns, rows);
+    output << balashov::minSumSideDiagonal(matrix, columns, rows) << "\n";
     delete[] matrix;
   }
 return 0;
