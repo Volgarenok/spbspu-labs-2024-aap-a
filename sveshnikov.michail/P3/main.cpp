@@ -38,12 +38,12 @@ int main(int argc, char **argv)
     if (!sveshnikov::read_matrix(input, matrix1, num_rows, num_columns, read))
     {
       std::cerr << "ERROR: It cannot be interpreted as a two-dimensional array\n";
-      return 1;
+      return 2;
     }
     if (read != num_rows * num_columns)
     {
-      std::cerr << "ERROR: First parameter is  is out of range\n";
-      return 1;
+      std::cerr << "ERROR: It cannot be interpreted as a two-dimensional array\n";
+      return 2;
     }
     num_diagonal = sveshnikov::cnt_nzr_dig(matrix1, num_rows, num_columns);
   }
@@ -55,13 +55,13 @@ int main(int argc, char **argv)
     {
       std::cerr << "ERROR: It cannot be interpreted as a two-dimensional array\n";
       delete[] matrix2;
-      return 1;
+      return 2;
     }
     if (read != num_rows * num_columns)
     {
-      std::cerr << "ERROR: First parameter is  is out of range\n";
+      std::cerr << "ERROR: It cannot be interpreted as a two-dimensional array\n";
       delete[] matrix2;
-      return 1;
+      return 2;
     }
     delete[] matrix2;
     num_diagonal = sveshnikov::cnt_nzr_dig(matrix2, num_rows, num_columns);
@@ -73,4 +73,5 @@ int main(int argc, char **argv)
   }
   std::ofstream output(argv[3]);
   output << num_diagonal;
+  output << "\n";
 }
