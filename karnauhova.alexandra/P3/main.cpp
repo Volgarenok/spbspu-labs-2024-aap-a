@@ -63,13 +63,13 @@ int main(int argc, char ** argv)
       return 1;
     };
   }
-  int t1[10000] = {0}
+  int t1[10000] = {0};
   if (way == 2)
   {
     if (!karnauhova::input_matrix(input, t, m, n, read))
     {
         std::cerr << "File text is invalid\n";
-          delete[] t;
+        delete[] t;
         return 2;
     }
   }
