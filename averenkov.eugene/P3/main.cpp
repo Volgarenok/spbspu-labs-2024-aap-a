@@ -42,6 +42,7 @@ int main(int argc, char** argv) {
     }
     catch (const std::bad_alloc & e)
     {
+      delete[] matrix;
       std::cerr << "Memory error\n";
       return 1;
     }
@@ -55,6 +56,7 @@ int main(int argc, char** argv) {
       }
       catch (const std::bad_alloc & e)
       {
+        delete[] matrix;
         std::cerr << "Memory error\n";
         return 1;
       }
