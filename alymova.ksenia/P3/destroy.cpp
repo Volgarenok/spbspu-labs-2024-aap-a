@@ -1,5 +1,5 @@
 #include "matrix.h"
-void destroy(int* matrix)
+void alymova::destroy(int* matrix)
 {
   delete[] matrix;
 }

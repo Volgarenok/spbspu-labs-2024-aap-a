@@ -1,6 +1,7 @@
 #include "cmd_parameters.h"
 #include <cstdlib>
 #include <stdexcept>
+#include <cstddef>
 int alymova::check_num(const char* const argv1)
 {
   constexpr int ascii_0 = 48;
