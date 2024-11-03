@@ -2,14 +2,15 @@
 #include <iostream>
 #include <fstream>
 
-int main()
-{
+int main() {
   const std::string input_file = "input.txt";
   const std::string output_file = "output.txt";
   std::ifstream infile(input_file);
 
   size_t rows = 0, columns = 0;
   infile >> rows >> columns;
+
+  std::ifstream infile(input_file);
   if (!infile)
   {
     std::cerr << "Error while opening input file" << "\n";
@@ -21,18 +22,15 @@ int main()
   for (size_t i = 0; i < rows * columns; ++i) {
     infile >> matrix[i];
   }
-  int* matrix = kushekbaev::createMatrix(rows, columns);
-
-  for (size_t i = 0; i < rows * columns; ++i) {
-      infile >> matrix[i];
-  }
 
   infile.close();
 
   int saddle_points = kushekbaev::countSaddlePoints(matrix, rows, columns);
+
+  std::ofstream outfile(output_file);
   if (!outfile)
   {
-    std::cerr << "Error while opening outpur file " << "\n";
+    std::cerr << "Error while opening output file" << "\n";
     kushekbaev::deleteMatrix(matrix);
     return 1;
   }
@@ -43,6 +41,7 @@ int main()
 
   outfile.close();
   kushekbaev::deleteMatrix(matrix);
+  std::cout << saddle_points;
 
   return 0;
 }
