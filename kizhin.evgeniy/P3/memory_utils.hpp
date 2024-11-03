@@ -5,9 +5,7 @@
 
 namespace kizhin {
   enum class MemoryMode { stack = 1, freeStore = 2 };
-  constexpr size_t stackMemorySize = 10000;
-
-  int* allocateArray(size_t, MemoryMode);
+  int* allocateArray(size_t, int* stackBuffer, size_t stackSize, MemoryMode);
   void deallocateArray(int*, MemoryMode);
 }
 
