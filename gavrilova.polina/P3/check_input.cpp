@@ -23,7 +23,7 @@ bool checkFirstArgument(unsigned long int num, char * end)
   } else if (num == 0) {
     std::cerr << "First parametr is not a number" << "\n";
     return 0;
-  } else if (end){
+  } else if (*end != 0){
     std::cerr << "First parametr is not a number" << "\n";
     return 0;
   } else {
