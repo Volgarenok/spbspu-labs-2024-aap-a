@@ -5,13 +5,13 @@
 #include "mtxprotection.hpp"
 #include "matrix.hpp"
 
-int main(int argc, char ** argv)
+int main(int argc, char **argv)
 {
   try
   {
     cmdProtection(argc, argv);
   }
-  catch (const std::logic_error & e)
+  catch (const std::logic_error &e)
   {
     std::cerr << e.what();
     return 1;
@@ -19,8 +19,7 @@ int main(int argc, char ** argv)
   char a = ' ';
   char b = ' ';
   std::ifstream inf(argv[2]);
-  std::ifstream outf;
-  outf.open(argv[3]);
+  std::ifstream outf(argv[3]);
   inf >> a >> b;
   try
   {
@@ -46,16 +45,14 @@ int main(int argc, char ** argv)
     {
       int *arr = new int(general);
     }
-    catch (const std::logic_error & e)
+    catch (const std::logic_error &e)
     {
       return 2;
     }
   }
-  if (!inputMtx(inf, arr, general, read))
+  if (!inputMtx(inf, arr, general, read) || (read != general))
   {
     return 2;
   }
-  inf.close();
   outf << searchNumLogMin(arr, general) << "\n";
-  outf.close();
 }
