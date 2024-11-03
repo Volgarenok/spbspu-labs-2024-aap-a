@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -57,8 +56,16 @@ int main(int argc, char ** argv)
   if (atoi(st) == 1)
   {
     int array_1[10000] = {};
-    komarova::input_m(input, array_1, size_arr);
-    komarova::checktri(output, array_1, m);
+    if (!(komarova::input_m(input, array_1, size_arr)))
+    {
+      std::cerr << "Input fail \n";
+      return 2;
+    }
+    else
+    {
+      komarova::input_m(input, array_1, size_arr);
+      komarova::checktri(output, array_1, m);
+    }
   }
   if (atoi(st) == 2)
   {
