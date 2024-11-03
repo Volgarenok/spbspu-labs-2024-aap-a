@@ -40,6 +40,11 @@ int main(int argc, char ** argv)
     std::cerr << "File text is invalid\n";
     return 1;
   }
+  if (m != n)
+  {
+    std::cerr << "Non-square matrix\n";
+    return 1;
+  }
   if (m == 0 && n == 0)
   {
     output << m << " " << n << " ";
@@ -62,7 +67,6 @@ int main(int argc, char ** argv)
   {
    t[10000] = {0};
   }
-  karnauhova::input_matrix(input, t, m, n, read);
   if (!karnauhova::input_matrix(input, t, m, n, read))
   {
       std::cerr << "File text is invalid\n";
