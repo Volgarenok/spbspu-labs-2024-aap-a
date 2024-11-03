@@ -28,7 +28,7 @@ int rychkov::getSumOfSdgWithCell(int* matrix, size_t height, size_t width, size_
     basisX -= basisY;
     basisY = 0;
   }
-  
+
   int result = 0;
   for (; (basisY < height) && (basisX < width); basisY++, basisX++)
   {

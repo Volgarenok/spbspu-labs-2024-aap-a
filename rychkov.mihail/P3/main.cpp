@@ -47,7 +47,7 @@ int main(int argc, char** argv)
   if (!(in >> height >> width))
   {
     std::cerr << "failed to read matrix size\n";
-    return 1;
+    return 2;
   }
 
   constexpr size_t staticMatrixSize = 10'000;
@@ -77,7 +77,7 @@ int main(int argc, char** argv)
       return 1;
     }
   }
-  
+
   size_t wereRead = 0;
   if (!rychkov::getMatrix(in, matrix, height, width, wereRead))
   {
@@ -88,7 +88,7 @@ int main(int argc, char** argv)
     {
       delete[] matrix;
     }
-    return 1;
+    return 2;
   }
   std::cout << rychkov::getMaxSumSdg(matrix, height, width) << '\n';
 
