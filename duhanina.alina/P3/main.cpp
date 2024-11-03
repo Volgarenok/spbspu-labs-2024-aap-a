@@ -30,7 +30,7 @@ int main(int argc, char ** argv)
   }
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
-  input.seekg(0, std::ios::end);
+/*  input.seekg(0, std::ios::end);
   if (input.tellg() == 0)
   {
     std::cerr << "File is empty" << "\n";
@@ -41,8 +41,7 @@ int main(int argc, char ** argv)
   {
     std::cerr << "Impossible to construct a matrix" << "\n";
     return 2;
-  }
-  size_t read = 0;
+  }*/
   size_t m = 0, n = 0;
   input >> m >> n;
   if (m * n == 0)
@@ -51,25 +50,19 @@ int main(int argc, char ** argv)
   }
   if (num == 1)
   {
+    size_t read = 0;
     int table[10000] = {};
     duhanina::inputMatrix(input, table, m, n, read);
-    if (!duhanina::inputMatrix(input, table, m, n, read))
+    if (!duhanina::inputMatrix(input, table, m, n, read) || read != m * n)
     {
       std::cerr << "Invalid input" << "\n";
       return 2;
     }
-    if (input && read == m * n)
-    {
-      output << duhanina::outputAnswer(table, m, n) << "\n";
-    }
-    else
-    {
-      std::cerr << "Not enough" << "\n";
-      return 2;
-    }
+    output << duhanina::outputAnswer(table, m, n) << "\n";
   }
   else if (num == 2)
   {
+    size_t read = 0;
     int * table = nullptr;
     try
     {
@@ -81,21 +74,13 @@ int main(int argc, char ** argv)
       return 1;
     }
     duhanina::inputMatrix(input, table, m, n, read);
-    if (!duhanina::inputMatrix(input, table, m, n, read))
+    if (!duhanina::inputMatrix(input, table, m, n, read) || read != m * n)
     {
       std::cerr << "Invalid input" << "\n";
       delete[] table;
       return 2;
     }
-    if (input && read == m * n)
-    {
-      output << duhanina::outputAnswer(table, m, n) << "\n";
-    }
-    else
-    {
-      std::cerr << "Not enough" << "\n";
-      return 2;
-    }
+    output << duhanina::outputAnswer(table, m, n) << "\n";
     delete[] table;
   }
   return 0;
