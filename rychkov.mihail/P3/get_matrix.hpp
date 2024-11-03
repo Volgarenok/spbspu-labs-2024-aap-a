@@ -6,7 +6,7 @@
 
 namespace rychkov
 {
-  int getMatrix(std::istream& inpStream, int* matrix, size_t height, size_t width);
+  std::istream& getMatrix(std::istream& inpStream, int* matrix, size_t height, size_t width, size_t& wereRead);
 }
 
 #endif

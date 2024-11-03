@@ -1,12 +1,17 @@
 #include "get_matrix.hpp"
 
-int rychkov::getMatrix(std::istream& inpStream, int* matrix, size_t height, size_t width)
+#include <iostream>
+
+std::istream& rychkov::getMatrix(std::istream& inpStream, int* matrix, size_t height, size_t width, size_t& wereRead)
 {
   for (size_t i = 0; i < height * width; i++)
   {
     if (!(inpStream >> matrix[i]))
     {
-      return i;
+      wereRead = i;
+      return inpStream;
     }
   }
+  wereRead = height * width;
+  return inpStream;
 }
