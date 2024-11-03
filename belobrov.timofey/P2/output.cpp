@@ -31,7 +31,7 @@ namespace belobrov
     }
   }
 
-  void output(double left, double right, double step, size_t k, double output)
+  void output(double left, double right, double step, size_t k, double error)
   {
     for (double i = left; i < right; i += step)
     {
