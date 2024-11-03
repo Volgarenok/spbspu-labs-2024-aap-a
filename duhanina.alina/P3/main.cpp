@@ -30,11 +30,13 @@ int main(int argc, char ** argv)
   }
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
+  input.seekg(0, std::ios::end);
   if (input.tellg() == 0)
   {
     std::cerr << "File is empty";
     return 0;
   }
+  input.seekg(0, std::ios::beg);
   if (!input)
   {
     std::cerr << "Impossible to construct a matrix" << "\n";
