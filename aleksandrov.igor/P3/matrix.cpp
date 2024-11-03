@@ -1,11 +1,10 @@
 #include "matrix.h"
 
-std::istream& aleksandrov::inputMatrix(std::istream& input, int* array, size_t size, int& read)
+std::istream& aleksandrov::inputMatrix(std::istream& input, int* array, size_t m, size_t n)
 {
-  for (size_t i = 0; i < size; ++i)
+  for (size_t i = 0; i < m * n; ++i)
   {
     input >> array[i];
-    ++read;
   }
   return input;
 }
@@ -26,3 +25,4 @@ void aleksandrov::outputMatrix(std::ostream& output, int* array, size_t m, size_
     output << "\n";
   }
 }
+

@@ -17,28 +17,28 @@ int main(int argc, char** argv)
   }
   else
   {
-    if (!atoi(argv[1]))
+    if (!std::atoi(argv[1]))
     {
       std::cerr << "ERROR: First parameter is not an integer number!\n";
       return 1;
     }
-    else if (atoi(argv[1]) != 1 && atoi(argv[1]) != 2)
+    else if (std::atoi(argv[1]) != 1 && std::atoi(argv[1]) != 2)
     {
       std::cerr << "ERROR: First parameter is out of range!\n";
       return 1;
     }
   }
+
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
   int m = 0, n = 0;
   input >> m >> n;
-  const int size = m * n;
-  if (atoi(argv[1]) == 1)
+
+  if (std::atoi(argv[1]) == 1)
   {
     constexpr int arraySize = 10000;
     int array[arraySize] = {};
-    int read = 0;
-    if (!aleksandrov::inputMatrix(input, array, size, read) || read != size)
+    if (!aleksandrov::inputMatrix(input, array, m, n))
     {
       std::cerr << "ERROR: Input was incorrect!\n";
       return 2;
@@ -46,20 +46,19 @@ int main(int argc, char** argv)
     aleksandrov::periphery(array, m, n);
     aleksandrov::outputMatrix(output, array, m, n);
   }
-  else if (atoi(argv[1]) == 2)
+  else if (std::atoi(argv[1]) == 2)
   {
     int* array = nullptr;
     try
     {
-      array = new int[size];
+      array = new int[m * n];
     }
     catch (const std::bad_alloc& e)
     {
       std::cerr << "ERROR: Out of memory!\n";
       return 1;
     }
-    int read = 0;
-    if (!aleksandrov::inputMatrix(input, array, size, read) || read != size)
+    if (!aleksandrov::inputMatrix(input, array, m, n))
     {
       std::cerr << "ERROR: Input was incorrect!\n";
       delete[] array;
@@ -70,3 +69,4 @@ int main(int argc, char** argv)
     delete[] array;
   }
 }
+
