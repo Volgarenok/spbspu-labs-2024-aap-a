@@ -1,12 +1,10 @@
 #include "matrix.hpp"
-#include <iostream>
-#include <fstream>
-
 
 int main(int argc, char ** argv) 
 {
   int long long m = -1, n = -1;
   int parameter = 0;
+  char * forptr = nullptr;
   if (argc < 4)
   {
     std::cerr << "Not enough arguments\n";
@@ -17,13 +15,13 @@ int main(int argc, char ** argv)
     std::cerr << "Too many arguments\n";
     return 1;
   }
-  parametr = argv[1];
-  if (!(parametr))
+  parameter = std::strtol(argv[1], &forptr, 10);
+  if (!(parameter))
   {
     std::cerr << "First parameter is not a number\n";
     return 1;
   }
-  if ((parametr < 1) || (parametr > 2))
+  if ((parameter < 1) || (parameter > 2))
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
@@ -41,15 +39,17 @@ int main(int argc, char ** argv)
     std::cerr << "Non-correct matrix parameters\n";
     return 2;
   }
-  if (parametr == 1)
+  int * mtx = nullptr;
+  if (parameter == 1)
   {
-    int * t[m*n]={};
+    int help[10000] = {};
+    mtx = help;
   }
   else
   {
     try
     {
-      int * t = brevnov::malloc(m, n);
+      mtx = brevnov::alloc(m, n);
     }
     catch(const std::bad_alloc& e)
     {
@@ -57,12 +57,12 @@ int main(int argc, char ** argv)
       return 2;
     }
   }
-  int member = brevnov::input_matrix(input, t, m, n);
+  int member = brevnov::input_matrix(input, mtx, m, n);
   if (!(member == m * n))
   {
     std::cerr << "Error matrix input\n";
     return 2;
   }
-  output << brevnov::osedfun(t, m, n);
+  output << brevnov::osed_fun(mtx, m, n);
   return 0;
 }

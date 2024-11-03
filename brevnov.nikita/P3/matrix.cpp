@@ -1,6 +1,6 @@
 #include "matrix.hpp"
 
-int  brevnov::input_matrix(std::istream & in, int * t, size_t m, size_t n)
+int  brevnov::input_matrix(std::ifstream & in, int * t, size_t m, size_t n)
 {
   int member = 0;
   for (size_t i = 0; i < m * n ; ++i)

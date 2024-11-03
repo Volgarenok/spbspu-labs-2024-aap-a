@@ -5,7 +5,7 @@ int brevnov::osed_fun(const int * t, size_t m, size_t n)
   int otvet = 0; 
   for (size_t i = 0; i < m; i++)
   {
-    int min_mem = brevnov::find_index_min(t, n, i);
+    size_t min_mem = brevnov::find_index_min(t, n, i);
     if (i == (brevnov::find_index_max(t, m, n, min_mem)))
     {
       otvet++;
@@ -14,10 +14,10 @@ int brevnov::osed_fun(const int * t, size_t m, size_t n)
   return otvet;
 }
 
-int brevnov::find_index_min(const int * t, size_t n, size_t i)
+size_t brevnov::find_index_min(const int * t, size_t n, size_t i)
 {
   int min_mem = t[i * n];
-  int min_index = 0;
+  size_t min_index = 0;
   for (size_t j = 1; j < n; ++j)
   {
     if (min_mem > t[i * n + j])
@@ -29,11 +29,11 @@ int brevnov::find_index_min(const int * t, size_t n, size_t i)
   return min_index;
 }
 
-int brevnov::find_index_max(const int * t, size_t m, size_t n, int min_mem)
+size_t brevnov::find_index_max(const int * t, size_t m, size_t n, int min_mem)
 {
   int max_mem = t[min_mem];
-  int max_index = 0;
-  fot (size_t j = 1; j < m; ++j)
+  size_t max_index = 0;
+  for (size_t j = 1; j < m; ++j)
   {
     if (max_mem < t[j * n + min_mem])
     {
