@@ -9,7 +9,7 @@ std::istream & zakirov::input_mtx(std::istream & in, int * mtx, size_t columns, 
   return in;
 }
 
-void zakirov::transform_mtx(int const * base_mtx, int * new_mtx, size_t columns, size_t rows)
+void zakirov::transform_mtx(int * mtx, size_t columns, size_t rows)
 {
   int subtrahend = 1;
   size_t columns_step = columns - 1;
@@ -17,7 +17,7 @@ void zakirov::transform_mtx(int const * base_mtx, int * new_mtx, size_t columns,
   size_t location = columns * 2;
   for (size_t i = 0; i != columns_step; ++i)
     {
-      new_mtx[location] = base_mtx[location] - subtrahend;
+      mtx[location] = mtx[location] - subtrahend;
       subtrahend += 1;
       location -= columns;
     }
@@ -26,28 +26,28 @@ void zakirov::transform_mtx(int const * base_mtx, int * new_mtx, size_t columns,
   {
     for (size_t i = 0; i != rows_step; ++i)
     {
-      new_mtx[location] = base_mtx[location] - subtrahend;
+      mtx[location] = mtx[location] - subtrahend;
       subtrahend += 1;
       location += 1;
     }
     rows_step -= 1;
     for (size_t i = 0; i != columns_step; ++i)
     {
-      new_mtx[location] = base_mtx[location] - subtrahend;
+      mtx[location] = mtx[location] - subtrahend;
       subtrahend += 1;
       location += columns;
     }
     columns_step -= 1;
     for (size_t i = 0; i != rows_step; ++i)
     {
-      new_mtx[location] = base_mtx[location] - subtrahend;
+      mtx[location] = mtx[location] - subtrahend;
       subtrahend += 1;
       location -= 1;
     }
     rows_step -= 1;
     for (size_t i = 0; i != columns_step; ++i)
     {
-      new_mtx[location] = base_mtx[location] - subtrahend;
+      mtx[location] = mtx[location] - subtrahend;
       subtrahend += 1;
       location -= columns;
     }
@@ -69,4 +69,5 @@ void zakirov::output_mtx(std::ostream & out, int * mtx, size_t columns, size_t r
       out << mtx[i] << " ";
     }
   }
+  out << "\n";
 }
