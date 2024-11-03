@@ -55,3 +55,4 @@ int main(int argc, char ** argv)
     komarova::checktri(output, array_2, m);
   }
 }
+//check
