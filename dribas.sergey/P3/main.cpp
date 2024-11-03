@@ -29,7 +29,7 @@ int main(int argc, char ** argv)
   }
   if (secondArg == 2) {
     try {
-      mtx = new int[m*n];
+      mtx = new int[m * n];
    } catch(const std::bad_alloc & e) {
      std::cerr << "Error with make matrix\n";
      return 2;

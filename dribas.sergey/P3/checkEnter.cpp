@@ -1,7 +1,7 @@
 #include "checkEnter.hpp"
 #include <iostream>
 
-bool dribas::checkEnter(char ** argv, int argc, long int& secondArg)
+bool dribas::checkEnter(char* const* const argv, int argc, long int& secondArg)
 {
   if (argc < 4) {
     std::cerr << "Not enough arguments\n";

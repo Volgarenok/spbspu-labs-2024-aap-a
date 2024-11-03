@@ -3,6 +3,7 @@
 
 namespace dribas
 {
-  bool checkEnter(char ** argv, int argc, long int& secondArg);
+  bool checkEnter(char* const* const argv, int argc, long int& secondArg);
 }
+
 #endif

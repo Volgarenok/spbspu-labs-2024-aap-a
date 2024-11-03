@@ -7,7 +7,6 @@ bool dribas::is3Angle(int* matrix, size_t M, size_t N)
     return false;
   }
   bool res2 = true, res1 = true;
-
   for (size_t i = 0; i < M; i += 1) {
     for (size_t j = i * M + (i + 1); j < (i + 1) * M; j += 1) {
       if (matrix[j] != 0) {
@@ -25,6 +24,5 @@ bool dribas::is3Angle(int* matrix, size_t M, size_t N)
     }
   }
   res2 = res2||res1;
-
   return res2;
 }
