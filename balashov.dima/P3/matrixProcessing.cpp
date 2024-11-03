@@ -2,9 +2,9 @@
 
 namespace balashov
 {
-  double minSumSideDiagonal(int matrix[], size_t column, size_t row)
+  int minSumSideDiagonal(int matrix[], size_t column, size_t row)
   {
-    double minSumSideDiagonals = matrix[0];
+    int minSumSideDiagonals = matrix[0];
     for (size_t i = 0; i < column; ++i)
     {
       for (size_t j = 0; j < row; ++j)
@@ -24,10 +24,10 @@ namespace balashov
     return minSumSideDiagonals;
   }
 
-  double diagonalCalculation(int matrix[], int columnNow, size_t columnMax,
+  int diagonalCalculation(int matrix[], int columnNow, size_t columnMax,
     int rowNow, size_t rowMax)
   {
-    double sumDiagonal = 0;
+    int sumDiagonal = 0;
     while (rowNow >= 0 && columnNow < static_cast<int>(columnMax))
     {
       sumDiagonal += matrix[columnNow * rowMax  + rowNow];

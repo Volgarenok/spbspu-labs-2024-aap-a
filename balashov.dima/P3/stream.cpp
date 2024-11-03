@@ -17,15 +17,4 @@ namespace balashov
     }
     return in;
   }
-
-  void outputMtx(std::ostream & out, const int * matrix, size_t column, size_t row)
-  {
-    out << column << " " << row;
-    out << std::fixed;
-    out << std::setprecision(1);
-    for (size_t i = 0; i < column * row; ++i)
-    {
-      out << " " << matrix[i];
-    }
-  }
 }
