@@ -10,14 +10,7 @@ int main()
   double right = 0.0;
   size_t k = 0;
   std::cin >> left >> right >> k;
-  if (!std::cin)
-  {
-    return 1;
-  }
-  bool protectionmin = left <= -1.0;
-  bool protectionmax = right >= 1.0;
-  bool protectionlogic = left > right;
-  if (protectionmin or protectionmax or protectionlogic)
+  if ((!std::cin) || (left <= -1.0) || (right >= 1.0) || (left > right))
   {
     return 1;
   }
