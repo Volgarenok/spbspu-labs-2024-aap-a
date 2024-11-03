@@ -12,7 +12,7 @@ int main(int argc, char ** argv)
   }
   char * end;
   unsigned long int num = std::strtoul(argv[1], &end, 10);
-  if (!checkFirstArgument(num)) {
+  if (!checkFirstArgument(num, end)) {
     return 1;
   }
 

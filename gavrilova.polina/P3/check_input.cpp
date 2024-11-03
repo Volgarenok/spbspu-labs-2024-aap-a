@@ -15,7 +15,7 @@ bool checkNumOfArguments(int argc)
   }
 }
 
-bool checkFirstArgument(unsigned long int num)
+bool checkFirstArgument(unsigned long int num, char * end)
 {
   if (num > 3) {
     std::cerr << "First parametr is out of range" << "\n";
@@ -23,7 +23,11 @@ bool checkFirstArgument(unsigned long int num)
   } else if (num == 0) {
     std::cerr << "First parametr is not a number" << "\n";
     return 0;
+  } else if (end){
+    std::cerr << "First parametr is not a number" << "\n";
+    return 0;
   } else {
     return 1;
+
   }
 }
