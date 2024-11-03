@@ -34,7 +34,7 @@ int main(int argc, char ** argv)
   input >> m >> n;
   if (!input)
   {
-    std::cerr << "Incorrect input\n";
+    std::cerr << "Not enough arguments\n";
     return 2;
   }
   if (m != n)
