@@ -10,6 +10,16 @@ int main()
 
   size_t rows = 0, columns = 0;
   infile >> rows >> columns;
+  if (rows != rows)
+  {
+    std::cerr << "Number of rows is NaN"
+    return 1;
+  }
+  if (columns != columns)
+  {
+    std::cerr << "Number of columns is NaN"
+    return 1;
+  }
 
   int* matrix = kushekbaev::createMatrix(rows, columns);
 
