@@ -1,4 +1,4 @@
-#include <iostream>
+#include "iostream"
 #include <cstdlib>
 #include "stream.hpp"
 #include "matrixProcessing.hpp"
@@ -48,10 +48,10 @@ int main(int argc, char** argv)
     return 0;
   }
   size_t read = 0;
-  if (arrayType == 1)
+  if(arrayType == 1)
   {
     int matrix[1000] = {};
-    if (!(balashov::inputMatrix(input, matrix, columns, rows, read)))
+    if(!(balashov::inputMatrix(input, matrix, columns, rows, read)))
     {
       std::cerr << "ERROR: Invalid input\n";
       return 2;
@@ -65,14 +65,14 @@ int main(int argc, char** argv)
     {
       matrix = new int[columns * rows];
     }
-    catch (const std::bad_alloc & e)
+    catch(const std::bad_alloc & e)
     {
       delete[] matrix;
       std::cerr << "Out of memory\n";
       return 2;
     }
 
-    if (!(balashov::inputMatrix(input, matrix, columns, rows, read)))
+    if(!(balashov::inputMatrix(input, matrix, columns, rows, read)))
     {
       delete[] matrix;
       std::cerr << "ERROR: Invalid input\n";
