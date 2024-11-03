@@ -37,7 +37,7 @@ void sharifullina::output_row(double i, size_t k, double error)
     }
 
     std::cout << " " << std::setw(WidthOfCol) << sharifullina::cos_cmath(i);
-    
+
     std::cout << " " << std::setw(WidthOfCol) << sharifullina::exp_negx_cmath(i);
 
     std::cout << " " << std::setw(WidthOfCol) << sharifullina::exp_negx_cmath(i) + cos_cmath(i);
