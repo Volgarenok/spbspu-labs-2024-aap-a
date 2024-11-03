@@ -12,7 +12,7 @@ double sharifullina::cos(double x, size_t k, double error)
         next *= (x * x) / ((2 * i + 1) * (2 * i + 2));
         result += (i % 2 ? next : next * -1);
     }
-    if (std::abs(next) > error)
+    if (std::abs(result - cos_cmath(x)) > error)
     {
         throw std::logic_error("MATH_ERROR");
     }
@@ -27,7 +27,7 @@ double sharifullina::exp_negx(double x, size_t k, double error)
         next *= -1 * (x / (i + 2));
         result += next;
     }
-    if (std::abs(next) > error)
+    if (std::abs(result - exp_negx_cmath(x)) > error)
     {
         throw std::logic_error("MATH_ERROR");
     }
