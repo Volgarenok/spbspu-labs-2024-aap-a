@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <cstring>
 
-int main(int argc, char* argv[])
+int main(int argc, char * argv[])
 {
   if (argc != 4)
   {
@@ -18,14 +18,15 @@ int main(int argc, char* argv[])
     std::cerr << "Error: First parameter is not a valid number or out of range." << "\n";
     return 1;
   }
-  std::string inputFile = argv[2];
-  std::string outputFile = argv[3];
-  if (num == 1) {
-  cherkasov::processFixedSizeArray(inputFile, outputFile);
-  }
-  else if (num == 2)
-  {
-  cherkasov::processDynamicArray(inputFile, outputFile);
-  }
+    std::string inputFile = argv[2];
+    std::string outputFile = argv[3];
+    if (num == 1)
+    {
+      cherkasov::processFixedMatrix(inputFile, outputFile);
+    }
+      else if (num == 2)
+      {
+        cherkasov::processDynamicMatrix(inputFile, outputFile);
+      }
   return 0;
 }
