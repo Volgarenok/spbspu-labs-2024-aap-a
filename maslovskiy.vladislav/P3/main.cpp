@@ -77,9 +77,9 @@ int main(int argc, char** argv)
     std::cerr << e.what() << "\n";
     return 2;
   }
-std::ofstream output(argv[3]);
-output << cntCol << "\n";
-if (num == 2)
+  std::ofstream output(argv[3]);
+  output << cntCol << "\n";
+  if (num == 2)
   {
     delete [] dynamicMatrix;
   }
