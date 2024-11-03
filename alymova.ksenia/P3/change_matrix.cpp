@@ -1,33 +1,33 @@
 #include "matrix.h"
 void alymova::change_matrix(int* const matrix, size_t rows, size_t cols)
 {
-  size_t Ibeg = rows - 1, Ifin = rows - 1, Jbeg = 0, Jfin = 0, i = rows - 1, j = 0;
+  size_t ibegin = rows - 1, ifinish = rows - 1, jbegin = 0, jfinish = 0, i = rows - 1, j = 0;
   int k = 1;
   while (k < rows * cols)
   {
     matrix[i * j + j + 1] = k;
-    if (i == Ibeg && j < cols - Jfin - 1)
+    if (i == ibegin && j < cols - jfinish - 1)
     {
       ++j;
     }
-    else if (j == cols - Jfin - 1 && i > rows - Ifin - 1)
+    else if (j == cols - jfinish - 1 && i > rows - ifinish - 1)
     {
       --i;
     }
-    else if (i == rows - Ifin - 1 && j > Jbeg)
+    else if (i == rows - ifinish - 1 && j > jbegin)
     {
       --j;
     }
-    else if (j == Jbeg && i < Ibeg)
+    else if (j == jbegin && i < ibegin)
     {
       ++i;
     }
-    if ((i == Ibeg - 1) && (j == Jbeg) && (Jbeg != cols - Jfin - 1))
+    if ((i == ibegin - 1) && (j == jbegin) && (jbegin != cols - jfinish - 1))
     {
-      --Ibeg;
-      --Ifin;
-      ++Jbeg;
-      ++Jfin;
+      --ibegin;
+      --ifinish;
+      ++jbegin;
+      ++jfinish;
     }
     ++k;
   }
