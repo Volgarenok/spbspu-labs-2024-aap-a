@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <new>
 
 #include "sum_sdg.hpp"
 #include "get_matrix.hpp"
