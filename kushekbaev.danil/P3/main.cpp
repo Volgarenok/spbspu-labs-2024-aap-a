@@ -11,7 +11,7 @@ int main(int argc, char ** argv) {
   std::string input_filename = argv[1];
   std::string output_filename = argv[2];
 
-  std::ifstream infile(input_file);
+  std::ifstream infile(input_filename);
 
   size_t rows = 0, columns = 0;
   infile >> rows >> columns;
@@ -32,7 +32,7 @@ int main(int argc, char ** argv) {
 
   int saddle_points = kushekbaev::countSaddlePoints(matrix, rows, columns);
 
-  std::ofstream outfile(output_file);
+  std::ofstream outfile(output_filename);
   if (!outfile)
   {
     std::cerr << "Error while opening output file" << "\n";
