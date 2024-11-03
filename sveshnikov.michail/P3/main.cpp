@@ -31,7 +31,7 @@ int main(int argc, char **argv)
   input >> num_rows >> num_columns;
   size_t read = 0;
   size_t num_diagonal = 0;
-  if (argv[1][0] == '1' && argv[1][1] == '\0')
+  if (argv[1][0] == '1')
   {
     const int LEN = 10000;
     int matrix1[LEN] = {};
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
     }
     num_diagonal = sveshnikov::cnt_nzr_dig(matrix1, num_rows, num_columns);
   }
-  else if (argv[1][0] == '2' && argv[1][1] == '\0')
+  else if (argv[1][0] == '2')
   {
     size_t len = num_columns * num_rows;
     int *matrix2 = new int[len];
@@ -63,13 +63,8 @@ int main(int argc, char **argv)
       delete[] matrix2;
       return 2;
     }
-    delete[] matrix2;
     num_diagonal = sveshnikov::cnt_nzr_dig(matrix2, num_rows, num_columns);
-  }
-  else
-  {
-    std::cerr << "ERROR: First parameter is out of range\n";
-    return 1;
+    delete[] matrix2;
   }
   std::ofstream output(argv[3]);
   output << num_diagonal;
