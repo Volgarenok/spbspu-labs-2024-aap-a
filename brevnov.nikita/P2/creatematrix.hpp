@@ -1,6 +1,6 @@
 #ifndef CREATEMATRIX_HPP
 #define CREATEMATRIX_HPP
-#include <istream>
+#include <iostream>
 namespace brevnov
 {
   void outputing(double left, double right, size_t k);
