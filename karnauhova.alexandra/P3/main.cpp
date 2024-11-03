@@ -38,12 +38,12 @@ int main(int argc, char ** argv)
   if (!input)
   {
     std::cerr << "File text is invalid\n";
-    return 2;
+    return 1;
   }
   if (m != n)
   {
     std::cerr << "Non-square matrix\n";
-    return 2;
+    return 1;
   }
   if (m == 0 && n == 0)
   {
@@ -68,7 +68,7 @@ int main(int argc, char ** argv)
     t[10000] = {};
   }
   karnauhova::input_matrix(input, t, m, n, read);
-  if (karnauhova::input_matrix(input, t, m, n, read) && m == 0)
+  if (!karnauhova::input_matrix(input, t, m, n, read))
   {
       std::cerr << "File text is invalid\n";
       if (way == 2)
@@ -84,7 +84,7 @@ int main(int argc, char ** argv)
     {
       delete[] t;
     }
-    return 2;
+    return 1;
   }
   float* t2 = nullptr;
   try
