@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 
-int main(int argc) {
+int main(int argc, char ** argv) {
   if (argc < 3)
   {
     return 0;
@@ -39,11 +39,10 @@ int main(int argc) {
     return 1;
   }
 
-  outfile << saddle_points << "\n";
+  outfile << saddle_points << argv[saddle_points] << "\n";
 
   outfile.close();
   kushekbaev::deleteMatrix(matrix);
-  std::cout << saddle_points;
 
   return 0;
 }
