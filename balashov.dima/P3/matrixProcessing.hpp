@@ -1,6 +1,8 @@
 #ifndef MATRIX_PROCESSING_HPP
 #define MATRIX_PROCESSING_HPP
 
+#include <iostream>
+#include <fstream>
 #include <cstddef>
 
 namespace balashov
@@ -10,4 +12,4 @@ namespace balashov
     int rowNow, size_t rowMax);
 }
 
-#endif 
+#endif

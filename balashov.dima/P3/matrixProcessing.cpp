@@ -1,12 +1,13 @@
 #include "matrixProcessing.hpp"
+
 namespace balashov
 {
   double minSumSideDiagonal(int matrix[], size_t column, size_t row)
   {
     double minSumSideDiagonals = matrix[0];
-    for (size_t i = 0; i < column; i++)
+    for (size_t i = 0; i < column; ++i)
     {
-      for (size_t j = 0; j < row; j++)
+      for (size_t j = 0; j < row; ++j)
       {
         bool isSideDiagonal = (j + 1 == row) && (i == 0);
         bool isParallelSideDiagonal = (j + 1 == row) || (i == 0);
@@ -36,3 +37,4 @@ namespace balashov
     return sumDiagonal;
   }
 }
+
