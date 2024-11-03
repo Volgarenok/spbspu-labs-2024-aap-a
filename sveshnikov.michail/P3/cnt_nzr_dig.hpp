@@ -4,7 +4,7 @@
 #include <fstream>
 namespace sveshnikov
 {
-  void read_matrix(std::istream &in, int *matrix, constexpr size_t len);
+  std::istream & read_matrix(std::istream &in, int *matrix, size_t num_rows, size_t num_columns, size_t & read);
   void write_matrix(std::ostream &out);
   int cnt_nzr_dig();
 }
