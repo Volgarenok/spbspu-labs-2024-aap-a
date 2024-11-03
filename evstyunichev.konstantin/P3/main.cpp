@@ -31,13 +31,15 @@ int main(int argc, char** argv)
     int* arr = nullptr;
     if (num == 1)
     {
-      int arr[StaticArrSize];
+      int static_arr[StaticArrSize];
+      arr = static_arr;
     }
     else if(num == 2)
     {
       try
       {
-        int* arr = new int[m * n];
+        int* d_arr = new int[m * n];
+        arr = d_arr;
       }
       catch(const std::exception& e)
       {
