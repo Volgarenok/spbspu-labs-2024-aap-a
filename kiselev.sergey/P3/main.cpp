@@ -49,7 +49,7 @@ int main(int argc, char** argv)
     kiselev::inputMatrix(input, fixed_array, rows, columns, count_read);
     if (count_read != rows * columns)
     {
-      std::cerr << "There are not enough elements for the array\n";
+      std::cerr << "Incorrect matrix\n";
       return 2;
     }
     number_element = kiselev::saddleElement(fixed_array, rows, columns);
@@ -70,7 +70,7 @@ int main(int argc, char** argv)
     }
     if (count_read != rows * columns)
     {
-      std::cerr << "There are not enough elements for the array\n";
+      std::cerr << "Incorrect matrix\n";
       delete[] dynArray;
       return 2;
     }
