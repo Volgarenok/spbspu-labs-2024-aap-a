@@ -38,7 +38,8 @@ int main(int argc, char** argv)
     }
     if (num == 1)
     {
-      alymova::create_static(matrix);
+      int mtx[10000] = {0};
+      matrix = mtx;
     }
     size_t read = 0;
     if (!(alymova::input_matrix(input, matrix, rows, cols, read)) || read < (rows * cols))
