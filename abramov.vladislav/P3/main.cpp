@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <cstring>
 #include "matrix.hpp"
 
 int main(int argc, char **argv)
@@ -13,6 +14,11 @@ int main(int argc, char **argv)
   if (argc < 4)
   {
     std::cerr << "Not enough arguments\n";
+    return 1;
+  }
+  if (strlen(argv[1]) != 1 || ((strlen(argv[1]) == 1) && !(atoi(argv[1]))))
+  {
+    std::cerr << "First parameter is not a number\n";
     return 1;
   }
   if (atoi(argv[1]) > 2 || atoi(argv[1]) < 1)
@@ -50,20 +56,8 @@ int main(int argc, char **argv)
       return 2;
     }
     abramov::transform_Matrix(new_mtx, count);
-    int *matrix = nullptr;
-    try
-    {
-      matrix = abramov::toSquare(nums, m, n, count);
-    }
-    catch (const std::bad_alloc &e)
-    {
-      std::cerr << "Memory fail\n";
-      delete[] matrix;
-      return 2;
-    }
-    abramov::output_Matrix(output, matrix, count);
+    abramov::output_Matrix(output, new_mtx, count);
     delete[] new_mtx;
-    delete[] matrix;
   }
   else if (atoi(argv[1]) == 2)
   {
