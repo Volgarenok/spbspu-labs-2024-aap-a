@@ -33,7 +33,7 @@ int main(int argc, char ** argv)
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
   size_t read = 0;
-  int m = 0, n = 0;
+  size_t m = 0, n = 0;
   input >> m >> n;
   if (!input)
   {
