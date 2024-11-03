@@ -29,6 +29,7 @@ int main(int argc, char** argv)
       return 1;
     }
   }
+  return true;
 
   char* pEnd;
   long int number = 0;
