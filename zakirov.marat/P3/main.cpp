@@ -14,6 +14,11 @@ int main(int argc, char ** argv)
   size_t columns = 0;
   size_t rows = 0;
   file_input >> columns >> rows;
+  if (columns == 0 || rows == 0)
+  {
+    return 0;
+  }
+
   if (argv[1][0] == '1')
   {
     const int size = 10000;
