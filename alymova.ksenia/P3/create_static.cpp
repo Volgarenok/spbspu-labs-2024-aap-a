@@ -1,7 +1,7 @@
 #include "matrix.h"
 #include <cstddef>
-int* alymova::create_static(size_t rows, size_t cols)
+void alymova::create_static(int* matrix)
 {
-  int matrix[10000] = {0};
-  return matrix;
+  int mtx[10000] = {0};
+  matrix = mtx;
 }
