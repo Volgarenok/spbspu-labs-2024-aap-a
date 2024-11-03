@@ -21,7 +21,7 @@ int main(int argc, char** argv)
   std::ofstream output(argv[3]);
   size_t rows = 0, cols = 0;
   input >> rows >> cols;
-  if (!(input.good()))
+  if (!(input))
   {
     std::cerr << "Input fail\n";
     return 2;
@@ -31,7 +31,7 @@ int main(int argc, char** argv)
   {
     constexpr size_t static_size = 10000;
     int matrix[static_size] = {0};
-    if (!((alymova::input_matrix(input, matrix, rows, cols, read)).good()) || read < rows * cols)
+    if (!((alymova::input_matrix(input, matrix, rows, cols, read))) || read < rows * cols)
     {
       std::cerr << "Input failed\n";
       return 2;
