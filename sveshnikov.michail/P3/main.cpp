@@ -27,12 +27,12 @@ int main(int argc, char **argv)
   }
   std::ifstream input(argv[2]);
   size_t num_rows = 0, num_columns = 0;
-  input >> num_rows, num_columns;
+  input >> num_rows >> num_columns;
   size_t read = 0;
   size_t num_diagonal = 0;
   if (argv[1][0] == '1' && argv[1][0] == '\0')
   {
-    const size_t LEN = num_columns * num_rows;
+    const int LEN = num_columns * num_rows;
     int matrix1[LEN] = {};
     if (!sveshnikov::read_matrix(std::cin, matrix1, num_rows, num_columns, read))
     {
