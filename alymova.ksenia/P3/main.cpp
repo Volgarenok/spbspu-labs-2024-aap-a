@@ -25,11 +25,6 @@ int main(int argc, char** argv)
   }
   size_t rows = 0, cols = 0;
   input >> rows >> cols;
-  if(input.eof())
-  {
-    std::cerr << "Input size fail\n";
-    return 2;
-  }
   if (!(input))
   {
     int check_num = alymova::check_size(rows, cols);
@@ -43,6 +38,11 @@ int main(int argc, char** argv)
       std::cerr << "Input fail\n";
       return 2;
     }
+  }
+  if(input.eof())
+  {
+    std::cerr << "Input size fail\n";
+    return 2;
   }
   if (num == 1)
   {
