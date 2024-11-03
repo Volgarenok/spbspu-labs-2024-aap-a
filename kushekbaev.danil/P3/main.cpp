@@ -8,8 +8,8 @@ int main(int argc, char ** argv) {
     std::cerr << "Not enough arguments" << "\n";
     return 1;
   }
-  std::string input_filename = argv[1];
-  std::string output_filename = argv[2];
+  std::string input_filename = argv[2];
+  std::string output_filename = argv[3];
 
   std::ifstream infile(input_filename);
 
@@ -40,7 +40,7 @@ int main(int argc, char ** argv) {
     return 1;
   }
 
-  outfile << saddle_points << argv[saddle_points] << "\n";
+  outfile << saddle_points << "\n";
 
   outfile.close();
   kushekbaev::deleteMatrix(matrix);
