@@ -9,10 +9,10 @@
 int main(int argc, char** argv)
 {
   int testMode = 0;
-  int parsngErrCode = rychkov::parseArguments(argc, argv, testMode);
-  if (parsngErrCode != 0)
+  int parsingErrCode = rychkov::parseArguments(std::cerr, argc, argv, testMode);
+  if (parsingErrCode != 0)
   {
-    return parsngErrCode;
+    return parsingErrCode;
   }
 
   std::ifstream in(argv[2]);

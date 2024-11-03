@@ -2,26 +2,26 @@
 
 #include <iostream>
 
-int rychkov::parseArguments(int argc, char** argv, int& testMode)
+int rychkov::parseArguments(std::ostream& errStream, int argc, char** argv, int& testMode)
 {
   if (argc < 4)
   {
-    std::cerr << "not enough arguments\n";
+    errStream << "not enough arguments\n";
     return 1;
   }
   if (argc > 4)
   {
-    std::cerr << "too many arguments\n";
+    errStream << "too many arguments\n";
     return 1;
   }
   if (*argv[1] == '\0')
   {
-    std::cerr << "first argument is empty\n";
+    errStream << "first argument is empty\n";
     return 1;
   }
   if ((argv[1][1] != '\0') || ((argv[1][0] != '1') && (argv[1][0] != '2')))
   {
-    std::cerr << "first argument is not a number of a task\n";
+    errStream << "first argument is not a number of a task\n";
     return 1;
   }
   testMode = argv[1][0] - '0';
