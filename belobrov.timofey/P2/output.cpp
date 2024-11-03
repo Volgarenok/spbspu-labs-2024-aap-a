@@ -12,7 +12,7 @@ namespace belobrov
     std::cout << std::fixed << std::setprecision(6) << std::setw(10) << n;
   }
 
-  void table_out(double n, size_t k)
+  void table_out(double n, size_t k, double error)
   {
     try
     {
@@ -31,7 +31,7 @@ namespace belobrov
     }
   }
 
-  void output(double left, double right, double step, size_t k)
+  void output(double left, double right, double step, size_t k, double error)
   {
     for (double i = left; i < right; i += step)
     {
