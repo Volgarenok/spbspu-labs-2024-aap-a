@@ -3,46 +3,40 @@
 
 void shabalin::spiralDecrease(int *matrix, size_t rows, size_t cols)
 {
-  size_t left = 0, right = cols - 1, top = 0, bottom = rows - 1;
-  int decreaseValue = 1;
-  int count = 0;
+  size_t k = 1;
+  size_t i = 0;
+  size_t j = 0;
+  size_t rowBegin = 0, rowEnd = 0, colBegin = 0, colEnd = 0;
 
-  while (left <= right && top <= bottom)
+  while (k <= rows * cols)
   {
-    for (size_t i = left; i <= right; ++i)
+    matrix[i * cols + j] = k;
+    if (i == rowBegin && j < cols - colEnd - 1)
     {
-      matrix[top * cols + i] -= decreaseValue;
-      decreaseValue++;
-      count++;
+      ++j;
     }
-    top++;
-    for (size_t i = top; i <= bottom; ++i)
+    else if (j == cols - colEnd - 1 && i < rows - rowEnd - 1)
     {
-      matrix[i * cols + right] -= decreaseValue;
-      decreaseValue++;
-      count++;
+      ++i;
     }
-    right--;
-    if (top <= bottom)
+    else if (i == rows - rowEnd - 1 && j > colBegin)
     {
-      for (size_t i = right; i >= left; --i)
-      {
-        matrix[bottom * cols + i] -= decreaseValue;
-        decreaseValue++;
-        count++;
-      }
-      bottom--;
+     --j;
     }
-    if (left <= right)
+    else
     {
-      for (size_t i = bottom; i >= top; --i)
-      {
-        matrix[i * cols + left] -= decreaseValue;
-        decreaseValue++;
-        count++;
-      }
-      left++;
+     --i;
     }
+
+    if ((i == rowBegin + 1) && (j == colBegin) && (colBegin != cols - colEnd - 1))
+    {
+      ++rowBegin;
+      ++rowEnd;
+      ++colBegin;
+      ++colEnd;
+    }
+    ++k;
   }
+
   return;
 }
