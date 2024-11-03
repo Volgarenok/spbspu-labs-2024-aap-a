@@ -5,8 +5,8 @@
 namespace belobrov
 {
   void output(double left, double right, double step, size_t k, double error);
-  void table_out(double n, size_t k);
-  void parametres_output(double n);
+  void table_out(double n, size_t k, double error);
+  void parameters_output(double n);
 }
 
 #endif
