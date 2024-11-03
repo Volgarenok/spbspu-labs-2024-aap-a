@@ -6,7 +6,7 @@
 int main(int argc, char* argv[]) {
     try {
         if (argc != 4) {
-            throw std::invalid_argument("Using: " + std::string(argv[0]) + " num input output");
+            throw std::invalid_argument("Curently using: " + std::string(argv[0]) + " num input output");
         }
         const int num = std::stoi(argv[1]);
         const std::string inputFileName = argv[2];
