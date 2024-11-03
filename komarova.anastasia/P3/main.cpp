@@ -7,23 +7,23 @@ int main(int argc, char ** argv)
 {
   if (argc > 4)
   {
-    std::cerr << "Too many arguments \n";
+    std::cerr << "Too many arguments\n";
     return 1;
   }
   if (argc < 4)
   {
-    std::cerr << "Not enough arguments \n";
+    std::cerr << "Not enough arguments\n";
     return 1;
   }
   char * st = argv[1];
   if (komarova::nechislo(st))
   {
-    std::cout << "First parameter is not a number \n";
+    std::cout << "First parameter is not a number\n";
     return 1;
   }
   if ((atoi(st) > 2) || (atoi(st) < 1))
   {
-    std::cerr << "First parameter is out of range \n";
+    std::cerr << "First parameter is out of range\n";
     return 1;
   }
 
@@ -34,7 +34,7 @@ int main(int argc, char ** argv)
   input >> m >> n;
   if (!input)
   {
-    std::cerr << "Incorrect input \n";
+    std::cerr << "Incorrect input\n";
     return 2;
   }
   if (m != n)
