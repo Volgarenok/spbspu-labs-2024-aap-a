@@ -91,7 +91,7 @@ int main(int argc, char ** argv)
     {
       output << duhanina::outputAnswer(table, m, n) << "\n";
     }
-    else 
+    else
     {
       std::cerr << "Not enough" << "\n";
       return 2;
