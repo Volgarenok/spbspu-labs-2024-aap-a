@@ -1,6 +1,6 @@
 #ifndef CREATEMATRIX_HPP
 #define CREATEMATRIX_HPP
-#include <iostream>
+#include "teylor.hpp"
 namespace brevnov
 {
   void outputing(double left, double right, size_t k);
