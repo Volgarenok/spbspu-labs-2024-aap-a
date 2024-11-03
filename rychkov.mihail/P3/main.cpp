@@ -4,30 +4,12 @@
 
 #include "sum_sdg.hpp"
 #include "get_matrix.hpp"
+#include "arguments_parsing.hpp"
 
 int main(int argc, char** argv)
 {
-  if (argc < 4)
-  {
-    std::cerr << "not enough arguments\n";
-    return 1;
-  }
-  if (argc > 4)
-  {
-    std::cerr << "too many arguments\n";
-    return 1;
-  }
-  if (*argv[1] == '\0')
-  {
-    std::cerr << "first argument is empty\n";
-    return 1;
-  }
-  if ((argv[1][1] != '\0') || ((argv[1][0] != '1') && (argv[1][0] != '2')))
-  {
-    std::cerr << "first argument is not a number of a task\n";
-    return 1;
-  }
-  int taskNumber = argv[1][0] - '0';
+  int testMode = argv[1][0] - '0';
+  rychkov::parseArguments(argc, argv, testMode);
 
   std::ifstream in(argv[2]);
   if (!in.is_open())
@@ -39,7 +21,6 @@ int main(int argc, char** argv)
   if (!out.is_open())
   {
     std::cerr << "failed to open output file\n";
-    in.close();
     return 1;
   }
 
@@ -53,7 +34,7 @@ int main(int argc, char** argv)
   constexpr size_t staticMatrixSize = 10'000;
   int staticMatrix[staticMatrixSize];
   int* matrix = staticMatrix;
-  if (taskNumber == 2)
+  if (testMode == 2)
   {
     try
     {
@@ -62,8 +43,6 @@ int main(int argc, char** argv)
     catch (const std::bad_alloc& e)
     {
       std::cerr << "failed to allocate memory\n";
-      in.close();
-      out.close();
       return 2;
     }
   }
@@ -72,8 +51,6 @@ int main(int argc, char** argv)
     if(height * width > staticMatrixSize)
     {
       std::cerr << "matrix size is too big for task 1\n";
-      in.close();
-      out.close();
       return 1;
     }
   }
@@ -82,9 +59,7 @@ int main(int argc, char** argv)
   if (!rychkov::getMatrix(in, matrix, height, width, wereRead))
   {
     std::cerr << "failed to read matrix\n";
-    in.close();
-    out.close();
-    if (taskNumber == 2)
+    if (testMode == 2)
     {
       delete[] matrix;
     }
@@ -92,9 +67,7 @@ int main(int argc, char** argv)
   }
   std::cout << rychkov::getMaxSumSdg(matrix, height, width) << '\n';
 
-  in.close();
-  out.close();
-  if (taskNumber == 2)
+  if (testMode == 2)
   {
     delete[] matrix;
   }
