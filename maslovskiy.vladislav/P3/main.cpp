@@ -2,53 +2,12 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-
-void inputMatrix(std::istream &in, int *matrix, size_t matrixSize)
-{
-  for (size_t i = 0; i < matrixSize; ++i)
-  {
-    in >> matrix[i];
-  }
-  if (!in)
-  {
-    throw std::logic_error("Incorrect matrix");
-  }
-}
-void outMatrix(int *matrix, size_t rows, size_t cols)
-{
-  for (size_t i = 0; i < rows; ++i)
-  {
-    for(size_t j = 0; j < cols; ++j)
-    {
-      std::cout << matrix[i * cols + j] << ' ';
-    }
-    std::cout << '\n';
-  }
-}
-int countNoDuplicates(int *matrix, size_t rows, size_t cols)
-{
-  int count = 0;
-  for (size_t j = 0; j < cols; ++j)
-  {
-    bool hasDupl = false;
-    for (size_t i = 1; i < rows; ++i)
-    {
-      if (matrix[i * cols + j] == matrix[(i - 1) * cols + j])
-      {
-        hasDupl = true;
-        break;
-      }
-    }
-    if (!hasDupl)
-    {
-      ++count;
-    }
-  }
-  return count;
-}
+#include "countInMtx.hpp"
+#include "inputMatrix.hpp"
 
 int main(int argc, char** argv)
 {
+  using namespace maslovskiy;
   long long num = 0;
   int cntCol = 0;
   try
@@ -91,7 +50,6 @@ int main(int argc, char** argv)
     if (num == 1)
     {
       inputMatrix(in, matrix, matrixSize);
-      outMatrix(matrix, rows, cols);
       cntCol = countNoDuplicates(matrix, rows, cols);
     }
     if (num == 2)
@@ -102,7 +60,6 @@ int main(int argc, char** argv)
         dynamicMatrix[i] = 0;
       }
       inputMatrix(in, dynamicMatrix, matrixSize);
-      outMatrix(dynamicMatrix, rows, cols);
       cntCol = countNoDuplicates(dynamicMatrix, rows, cols);
     }
   }
@@ -111,7 +68,7 @@ int main(int argc, char** argv)
     std::cerr << "Cannot allocate memory for matrix\n";
     return 2;
   }
-  catch (std::exception)
+  catch (const std::exception &e)
   {
     if (num == 2)
     {
