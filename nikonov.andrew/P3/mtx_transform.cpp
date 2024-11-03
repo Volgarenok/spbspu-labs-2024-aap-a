@@ -42,51 +42,66 @@ std::istream& readMatrix(std::istream& input, int* mtx, size_t m, size_t n, size
 }
 void printMatrix(std::ostream& output, int* mtx, size_t m, size_t n)
 {
-  if (m > 0){
+  if (m > 0 && n > 0)
+  {
     output << mtx[0];
+  }
+  else
+  {
+    output << 0 << " " << 0;
   }
   for (size_t i = 1; i < m * n; ++i)
   {
-    if (i % n == 0)
-    {
-      output << "\n";
-    }
-    else 
-    {
-      output << " ";
-    }
-    output << mtx[i];
+    output << " " << mtx[i];
   }
 }
-void transformMatrix(int* mtx, size_t m, size_t n, size_t decreaser)
+void transformMatrix(int* mtx, size_t m, size_t n, size_t decreaser, size_t vertMove)
 {
-  if (n == 0 || m == 0)
+  if (n > 0 && m > 0)
   {
-    size_t startIndex = m * n - n + 1;
-    for (size_t moveUp = m; moveUp > 0; moveUp -= 1)
+    size_t currentIndex = m * n - n + 1;
+    for (size_t moveUp = 0; moveUp < m && n > 0 && m > 0; ++moveUp)
     {
-      mtx[startIndex] -= decreaser;
+      mtx[currentIndex] -= decreaser;
       ++decreaser;
-      startIndex -= 3;
+      if (moveUp != m - 1) 
+      {
+        currentIndex -= vertMove;
+      }
     }
-    for (size_t moveRight = n; moveRight > 0; moveRight -= 1)
+    currentIndex += 1;
+    --n;
+    for (size_t moveRight = 0; moveRight < n && n > 0 && m > 0; ++moveRight)
     {
-      mtx[startIndex] -= decreaser;
+      mtx[currentIndex] -= decreaser;
       ++decreaser;
-      startIndex += 1;
+      if (moveRight != n - 1)
+      {
+        currentIndex += 1;
+      }
     }
-    for (size_t moveDown = m; moveDown > 0; moveDown -= 1)
+    currentIndex += vertMove;
+    --m;
+    for (size_t moveDown = 0; moveDown < m && n > 0 && m > 0; ++moveDown)
     {
-      mtx[startIndex] -= decreaser;
+      mtx[currentIndex] -= decreaser;
       ++decreaser;
-      startIndex += 3;
+      if (moveDown != m - 1)
+      {
+        currentIndex += vertMove;
+      }
     }
-    for (size_t moveLeft = n; moveLeft > 0; moveLeft -= 1)
+    currentIndex -= 1;
+    --n;
+    for (size_t moveLeft = 0; moveLeft < n && n > 0 && m > 0; ++moveLeft)
     {
-      mtx[startIndex] -= decreaser;
+      mtx[currentIndex] -= decreaser;
       ++decreaser;
-      startIndex -= 1;
+      if (moveLeft != n - 1) 
+      {
+        currentIndex -= 1;
+      }
     }
-    transformMatrix(mtx, m - 1, n - 1, decreaser);
+    transformMatrix(mtx, m - 1, n - 1, decreaser, m);
   }
 }

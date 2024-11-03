@@ -23,6 +23,7 @@ int main(int argc, char ** argv)
       std::cerr << "ERROR: incorrect input\n";
       return 2;
     }
+    transformMatrix(arr, m, n, 1, m);
     printMatrix(output, arr, m, n);
   }
   else 
@@ -35,6 +36,7 @@ int main(int argc, char ** argv)
       delete[] arr;
       return 2;
     }
+    transformMatrix(arr, m, n, 1, m);
     printMatrix(output, arr, m, n);
     delete[] arr;
   }
