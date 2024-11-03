@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
-bool inputCheck(int argc, char** argv)
+bool nikonov::inputCheck(int argc, char** argv)
 {
   if (argc < 4)
   {
@@ -25,7 +25,7 @@ bool inputCheck(int argc, char** argv)
   }
   return 1;
 }
-std::istream& readMatrix(std::istream& input, int* mtx, size_t m, size_t n, size_t& read)
+std::istream& nikonov::readMatrix(std::istream& input, int* mtx, size_t m, size_t n, size_t& read)
 {
   for (size_t i = 0; i < m * n; ++i)
   {
@@ -33,14 +33,11 @@ std::istream& readMatrix(std::istream& input, int* mtx, size_t m, size_t n, size
     {
       return input;
     }
-    else
-    {
-      ++read;
-    }
+    ++read;
   }
   return input;
 }
-void printMatrix(std::ostream& output, int* mtx, size_t m, size_t n)
+void nikonov::printMatrix(std::ostream& output, int* mtx, size_t m, size_t n)
 {
   if (m > 0 && n > 0)
   {
@@ -55,7 +52,7 @@ void printMatrix(std::ostream& output, int* mtx, size_t m, size_t n)
     output << " " << mtx[i];
   }
 }
-void transformMatrix(int* mtx, size_t m, size_t n, size_t decreaser, size_t vertMove)
+void nikonov::transformMatrix(int* mtx, size_t m, size_t n, size_t decreaser, size_t vertMove)
 {
   size_t currentIndex = m * n - n;
   while (m > 0 && n > 0)
@@ -84,7 +81,8 @@ void transformMatrix(int* mtx, size_t m, size_t n, size_t decreaser, size_t vert
       ++decreaser;
       currentIndex -= 1;
     }
-    currentIndex -= (vertMove - 1);
+    currentIndex -= vertMove;
+    ++currentIndex;
     --m;
     --n;
   }

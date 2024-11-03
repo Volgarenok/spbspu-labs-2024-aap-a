@@ -2,10 +2,9 @@
 #include <fstream>
 #include <cstdlib>
 #include "mtx_transform.hpp"
-
 int main(int argc, char ** argv)
 {
-  if (!inputCheck(argc, argv)){
+  if (!nikonov::inputCheck(argc, argv)){
     return 1;
   }
   std::ifstream input(argv[2]);
@@ -18,25 +17,34 @@ int main(int argc, char ** argv)
   if (atoi(argv[1]) == 1)
   {
     int arr[10000] = { 0 };
-    if (!readMatrix(input, arr, m, n, read))
+    if (!nikonov::readMatrix(input, arr, m, n, read))
     {
       std::cerr << "ERROR: incorrect input\n";
       return 2;
     }
-    transformMatrix(arr, m, n, 1, m);
-    printMatrix(output, arr, m, n);
+    nikonov::transformMatrix(arr, m, n, 1, m);
+    nikonov::printMatrix(output, arr, m, n);
   }
   else
   {
-    int* arr = new int[m * n];
-    if (!readMatrix(input, arr, m, n, read))
+    int* arr = nullptr;
+    try
+    {
+      arr = new int[m * n];
+    }
+    catch (const std::bad_alloc& e)
+    {
+      std::cerr << "ERROR: " << e.what() << "\n";
+      return 1;
+    }
+    if (!nikonov::readMatrix(input, arr, m, n, read))
     {
       std::cerr << "ERROR: incorrect input\n";
       delete[] arr;
       return 2;
     }
-    transformMatrix(arr, m, n, 1, m);
-    printMatrix(output, arr, m, n);
+    nikonov::transformMatrix(arr, m, n, 1, m);
+    nikonov::printMatrix(output, arr, m, n);
     delete[] arr;
   }
 }
