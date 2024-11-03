@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
@@ -32,6 +33,12 @@ int main(int argc, char ** argv)
 
   if (!output)
   {
+    return 2;
+  }
+
+  if (input.eof())
+  {
+    std::cerr << "Input fail \n";
     return 2;
   }
 
