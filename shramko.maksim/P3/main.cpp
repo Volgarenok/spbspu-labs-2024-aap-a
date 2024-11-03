@@ -58,7 +58,7 @@ int main(int argc, char** argv)
 
   if (argv[1][0] == 1)
   {
-    int mtrx[10000] = {0};
+    int mtrx[10000];
     try
     {
       if (!shramko::inputMtrx(finput, mtrx, sizeMtr))
@@ -76,7 +76,7 @@ int main(int argc, char** argv)
     }
   }
 
-  else if (argv[1][0] == 2)
+  else
   {
     int* mtrx = nullptr;
     try
@@ -108,4 +108,5 @@ int main(int argc, char** argv)
       return 2;
     }
   }
+  return 0;
 }
