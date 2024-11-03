@@ -8,9 +8,12 @@ int main(int argc, char ** argv)
   {
     return 1;
   }
-
   std::ifstream file_input(argv[2]);
   std::ofstream file_output(argv[3]);
+  if (file_input.eof())
+  {
+    std::cerr << "Empty file" << "\n";
+  }
   size_t columns = 0;
   size_t rows = 0;
   file_input >> columns >> rows;
@@ -19,11 +22,7 @@ int main(int argc, char ** argv)
     std::cerr << "The input is incorrect" << "\n";
     return 2;
   }
-  else if (file_input.eof())
-  {
-    std::cerr << "Empty file" << "\n";
-  }
-  if (columns == 0 || rows == 0)
+  else if (columns == 0 || rows == 0)
   {
     file_output << "0" << " " << "0" << "\n";
     return 0;
