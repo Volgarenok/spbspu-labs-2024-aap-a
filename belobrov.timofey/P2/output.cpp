@@ -16,7 +16,7 @@ namespace belobrov
   {
     try
     {
-      double teylor_result = f_teylor(n,k);
+      double teylor_result = f_teylor(n,k,error);
       double ln_result = std::log(n+std::sqrt(n * n + 1));
 
       parameters_output(n);
@@ -31,7 +31,7 @@ namespace belobrov
     }
   }
 
-  void output(double left, double right, double step, size_t k, double error)
+  void output(double left, double right, double step, size_t k)
   {
     for (double i = left; i < right; i += step)
     {

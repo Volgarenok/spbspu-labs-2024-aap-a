@@ -28,7 +28,7 @@ int main()
     return 1;
   }
 
-  output(left, right, step, k, error);
+  output(left, right, step, k);
   std::cout << "\n";
 }
 
