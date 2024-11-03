@@ -17,9 +17,3 @@ int main()
    bocharov::table(i, k, error);
   }
 }
-
-
-double bocharov::f(double x, size_t k, double error)
-{
-  return 0;
-}
