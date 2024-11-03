@@ -38,6 +38,10 @@ int main(int argc, char ** argv)
   size_t read = 0;
   size_t m = 0, n = 0;
   input >> m >> n;
+  if (m * n == 0)
+  {
+    return 0;
+  }
   if (num == 1)
   {
     int table[1000];
