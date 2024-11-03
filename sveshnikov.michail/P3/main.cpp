@@ -1,3 +1,4 @@
+#include <iostream>
 #include "cnt_nzr_dig.hpp"
 
 int main(int argc, char **argv)
@@ -32,13 +33,8 @@ int main(int argc, char **argv)
   size_t num_diagonal = 0;
   if (argv[1][0] == '1' && argv[1][0] == '\0')
   {
-    const int LEN = num_columns * num_rows;
+    const int LEN = 10000;
     int matrix1[LEN] = {};
-    if (!sveshnikov::read_matrix(std::cin, matrix1, num_rows, num_columns, read))
-    {
-      std::cerr << "ERROR: It cannot be interpreted as a two-dimensional array\n";
-      return 1;
-    }
     if (!sveshnikov::read_matrix(input, matrix1, num_rows, num_columns, read))
     {
       std::cerr << "ERROR: It cannot be interpreted as a two-dimensional array\n";
@@ -55,21 +51,19 @@ int main(int argc, char **argv)
   {
     size_t len = num_columns * num_rows;
     int *matrix2 = new int[len];
-    if (!sveshnikov::read_matrix(std::cin, matrix2, num_rows, num_columns, read))
-    {
-      std::cerr << "ERROR: It cannot be interpreted as a two-dimensional array\n";
-      return 1;
-    }
     if (!sveshnikov::read_matrix(input, matrix2, num_rows, num_columns, read))
     {
       std::cerr << "ERROR: It cannot be interpreted as a two-dimensional array\n";
+      delete[] matrix2;
       return 1;
     }
     if (read != num_rows * num_columns)
     {
       std::cerr << "ERROR: First parameter is  is out of range\n";
+      delete[] matrix2;
       return 1;
     }
+    delete[] matrix2;
     num_diagonal = sveshnikov::cnt_nzr_dig(matrix2, num_rows, num_columns);
   }
   else

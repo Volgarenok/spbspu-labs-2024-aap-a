@@ -1,6 +1,6 @@
 #ifndef CNT_NZR_DIG_HPP
 #define CNT_NZR_DIG_HPP
-#include <iostream>
+#include <cstddef>
 #include <fstream>
 namespace sveshnikov
 {
