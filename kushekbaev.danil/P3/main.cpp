@@ -10,17 +10,17 @@ int main()
 
   size_t rows = 0, columns = 0;
   infile >> rows >> columns;
-  if (rows != rows)
+  if (!infile)
   {
-    std::cerr << "Number of rows is NaN" << "\n";
-    return 1;
-  }
-  if (columns != columns)
-  {
-    std::cerr << "Number of columns is NaN" << "\n";
+    std::cerr << "Error while opening input file" << "\n";
     return 1;
   }
 
+  int* matrix = kushekbaev::createMatrix(rows, columns);
+
+  for (size_t i = 0; i < rows * columns; ++i) {
+    infile >> matrix[i];
+  }
   int* matrix = kushekbaev::createMatrix(rows, columns);
 
   for (size_t i = 0; i < rows * columns; ++i) {
@@ -30,6 +30,12 @@ int main()
   infile.close();
 
   int saddle_points = kushekbaev::countSaddlePoints(matrix, rows, columns);
+  if (!outfile)
+  {
+    std::cerr << "Error while opening outpur file " << "\n";
+    kushekbaev::deleteMatrix(matrix);
+    return 1;
+  }
 
   std::ofstream outfile(output_file);
 
