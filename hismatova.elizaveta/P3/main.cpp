@@ -6,15 +6,18 @@
 
 int main(int argc, char ** argv)
 {
-  if (argc > 4)
+  if (argv != 4)
   {
-    std::cerr << "too many argv\n";
-    return 1;
-  }
-  if (argc < 4)
-  {
-    std::cerr << "not enough argv\n";
-    return 1;
+    if (argc > 4)
+    {
+      std::cerr << "too many argv\n";
+      return 1;
+    }
+    else
+    {
+      std::cerr << "not enough argv\n";
+      return 1;
+    }
   }
   for (size_t i = 0; argv[1][i] != '\0'; i++)
   {
@@ -25,6 +28,10 @@ int main(int argc, char ** argv)
     }
   }
   std::ifstream in_par(argv[2]);
+  if (!in_par)
+  {
+    std::cerr << "failed to open input file\n";
+  }
   std::ofstream out_par(argv[3]);
   const int parametr = atoi(argv[1]);
   size_t m = 0;
@@ -33,7 +40,7 @@ int main(int argc, char ** argv)
   if (!in_par || in_par.eof() || (m == 0 || n == 0))
   {
     out_par << "0\n";
-    return 0;
+    return 1;
   }
   out_par << m << " " << n << "\n";
   size_t read = 0;
