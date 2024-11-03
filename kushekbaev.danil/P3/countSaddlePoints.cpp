@@ -5,14 +5,14 @@ int kushekbaev::countSaddlePoints(int * matrix, size_t rows, size_t columns)
   int count = 0;
   for (size_t i = 0; i < rows; i++)
   {
-    for (size_t j = 0; i < columns; j++)
+    for (size_t j = 0; j < columns; j++)
     {
       int element = kushekbaev::getElement(matrix, columns, i, j);
 
       bool is_min_in_row = true;
       for (size_t z = 0; z < columns; z++)
       {
-        if (kushekbaev::getElement(matrix, columns, i, z) < element)
+        if (kushekbaev::getElement(matrix, columns, z, j) < element)
         {
           is_min_in_row = false;
           break;
