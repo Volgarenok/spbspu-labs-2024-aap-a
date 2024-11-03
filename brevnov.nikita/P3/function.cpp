@@ -2,7 +2,7 @@
 
 int brevnov::osed_fun(const int * t, size_t m, size_t n)
 {
-  int otvet = 0; 
+  int otvet = 0;
   for (size_t i = 0; i < m; i++)
   {
     size_t min_mem = brevnov::find_index_min(t, n, i);

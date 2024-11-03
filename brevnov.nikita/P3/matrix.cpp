@@ -1,4 +1,5 @@
 #include "matrix.hpp"
+#include <fstream>
 
 int  brevnov::input_matrix(std::ifstream & in, int * t, size_t m, size_t n)
 {
