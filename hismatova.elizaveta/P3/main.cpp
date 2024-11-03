@@ -30,9 +30,9 @@ int main(int argc, char ** argv)
   size_t m = 0;
   size_t n = 0;
   in_par >> m >> n;
-  if (!in_par || (m == 0 || n == 0))
+  if (!in_par || m == 0 || n == 0)
   {
-    out_par << "0\n";
+    std::cerr << "0 matrix\n";
     return 1;
   }
   out_par << m << " " << n << "\n";
