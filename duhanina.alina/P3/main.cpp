@@ -30,6 +30,11 @@ int main(int argc, char ** argv)
   }
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
+  if (input.tellg() == 0)
+  {
+    std::cerr << "File is empty";
+    return 0;
+  }
   if (!input)
   {
     std::cerr << "Impossible to construct a matrix" << "\n";
