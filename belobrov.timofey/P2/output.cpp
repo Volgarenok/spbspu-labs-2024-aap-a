@@ -36,6 +36,7 @@ namespace belobrov
     for (double i = left; i < right; i += step)
     {
       table_out(i, k);
+      std::cout << "\n";
     }
     table_out(right, k);
   }
