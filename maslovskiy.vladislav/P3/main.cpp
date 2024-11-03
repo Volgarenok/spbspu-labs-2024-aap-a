@@ -50,6 +50,7 @@ int countNoDuplicates(int *matrix, size_t rows, size_t cols)
 int main(int argc, char** argv)
 {
   long long num = 0;
+  int cntCol = 0;
   try
   {
     if (argc != 4)
@@ -84,27 +85,45 @@ int main(int argc, char** argv)
   }
   size_t matrixSize = cols * rows;
   int matrix[10000] = {0};
+  int *dynamicMatrix = nullptr;
   try
   {
     if (num == 1)
     {
       inputMatrix(in, matrix, matrixSize);
       outMatrix(matrix, rows, cols);
-      countNoDuplicates(matrix, rows, cols);
+      cntCol = countNoDuplicates(matrix, rows, cols);
     }
     if (num == 2)
     {
-      int *dynamicMatrix = new int[matrixSize];
+      dynamicMatrix = new int [matrixSize];
+      for (size_t i = 0; i < matrixSize; ++i)
+      {
+        dynamicMatrix[i] = 0;
+      }
       inputMatrix(in, dynamicMatrix, matrixSize);
-      countNoDuplicates(matrix, rows, cols);
+      outMatrix(dynamicMatrix, rows, cols);
+      cntCol = countNoDuplicates(dynamicMatrix, rows, cols);
     }
   }
-  catch (std::logic_error &e)
+  catch (const std::bad_alloc &e)
   {
-    std::cerr << e.what() << '\n';
-    return 3;
+    std::cerr << "Cannot allocate memory for matrix\n";
+    return 2;
   }
-int cntCol = countNoDuplicates(matrix, rows, cols);
+  catch (std::exception)
+  {
+    if (num == 2)
+    {
+      delete [] dynamicMatrix;
+    }
+    std::cerr << e.what() << "\n";
+    return 2;
+  }
 std::ofstream output(argv[3]);
 output << cntCol << "\n";
+if (num == 2)
+  {
+    delete [] dynamicMatrix;
+  }
 }
