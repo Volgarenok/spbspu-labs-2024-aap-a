@@ -6,7 +6,7 @@
 
 int main(int argc, char ** argv)
 {
-  if (argv != 4)
+  if (argс != 4)
   {
     if (argc > 4)
     {
