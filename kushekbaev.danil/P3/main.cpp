@@ -22,8 +22,6 @@ int main(int argc, char ** argv) {
     return 1;
   }
 
-  size_t rows = 0, columns = 0;
-
   if (!(infile >> rows >> columns))
   {
     std::cerr << "Error reading matrix dimensions" << "\n";
@@ -46,8 +44,6 @@ int main(int argc, char ** argv) {
         return 1;
     }
   }
-
-  int* matrix = kushekbaev::createMatrix(rows, columns);
 
   for (size_t i = 0; i < rows * columns; ++i) {
     infile >> matrix[i];
