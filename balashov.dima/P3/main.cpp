@@ -42,7 +42,7 @@ int main(int argc, char** argv)
     std::cerr << "Rows and columns must be greater than 0\n";
     return 2;
   }
-  if (rows <= 0 || columns <= 0)
+  if (rows == 0 || columns == 0)
   {
     output << "0\n";
     return 0;
