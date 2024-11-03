@@ -3,9 +3,12 @@
 
 std::istream & zakirov::input_mtx(std::istream & in, int * mtx, size_t columns, size_t rows)
 {
-  for (size_t i = 0; i < columns*rows; ++i)
+  for (size_t i = 0; i < columns * rows; ++i)
   {
-    in >> mtx[i];
+    if(!(in >> mtx[i]))
+    {
+      return in;
+    }
   }
   return in;
 }

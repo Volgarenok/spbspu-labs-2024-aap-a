@@ -42,14 +42,15 @@ int main(int argc, char ** argv)
     catch (const std::bad_alloc &e)
     {
       std::cout << "Not enough memory" << "\n";
+      delete[] mtx;
       return 1;
     }
     std::istream & input = zakirov::input_mtx(file_input, mtx, columns, rows);
     if (!input)
     {
       std::cerr << "The input is incorrect" << "\n";
-      return 2;
       delete[] mtx;
+      return 2;
     }
     zakirov::transform_mtx(mtx, columns, rows);
     zakirov::output_mtx(file_output, mtx, columns, rows);
