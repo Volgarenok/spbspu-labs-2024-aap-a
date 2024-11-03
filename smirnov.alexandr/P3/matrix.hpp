@@ -4,7 +4,7 @@
 
 namespace smirnov
 {
-  void processMatrix(std::ostream & output,int * matrix, int rows, int columns);
+  void processMatrix(int * matrix, int rows, int columns);
   std::istream & inputMatrix(std::istream & input, int * matrix, size_t rows, size_t columns);
 }
 #endif

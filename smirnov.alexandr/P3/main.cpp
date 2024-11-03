@@ -38,4 +38,26 @@ int main(int argc, char ** argv)
     return 2;
   }
   std::ofstream output(argv[3]);
+  if (num == 1)
+  {
+    int matrix[10000] = {0}
+    if (!smirnov::inputMatrix(input, matrix, rows, columns))
+    {
+      std::cerr << "Incorrect data\n";
+      return 2;
+    }
+    output << smirnov::processMatrix(matrix, rows, columns) << "\n";
+  }
+  else
+  {
+    int * matrix = new int[rows * columns];
+    if (!smirnov::inputMatrix(input, matrix, rows, columns))
+    {
+      std::cerr << "Incorrect data\n";
+      delete[] matrix;
+      return 2;
+    }
+  output << smirnov::processMatrix(matrix, rows, columns) << "\n";
+  delete[] matrix;
+  }
 }
