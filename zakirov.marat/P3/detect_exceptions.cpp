@@ -1,7 +1,7 @@
 #include "detect_exceptions.hpp"
 #include <iostream>
 
-bool check_arg(int m_argc, char ** m_argv)
+bool zakirov::check_arg(int m_argc, char ** m_argv)
 {
   if (m_argc < 3)
   {
