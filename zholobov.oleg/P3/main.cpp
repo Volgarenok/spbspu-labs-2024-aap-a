@@ -4,7 +4,8 @@
 #include "lab_work.hpp"
 #include "min_sum_mdg.hpp"
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
   if (argc < 4) {
     std::cerr << "Not enough arguments\n";
     return 1;
@@ -12,9 +13,9 @@ int main(int argc, char** argv) {
     std::cerr << "Too many arguments\n";
     return 1;
   }
-  size_t pos = 0;
   int num = 0;
   try {
+    size_t pos = 0;
     num = std::stoi(argv[1], &pos);
     if (pos < std::strlen(argv[1])) {
       throw std::invalid_argument("Invalid argument");

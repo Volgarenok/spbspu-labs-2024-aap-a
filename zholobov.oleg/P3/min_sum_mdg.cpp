@@ -3,7 +3,8 @@
 #include <algorithm>
 #include <limits>
 
-int calc_min_sum_mdg(const int* matrix, size_t rows, size_t cols) {
+int calc_min_sum_mdg(const int* matrix, size_t rows, size_t cols)
+{
   const int* start_elem = matrix;
   size_t anti_diagonal_n = std::min(rows, cols);
   int min_sum = std::numeric_limits<int>::max();
