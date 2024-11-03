@@ -43,28 +43,14 @@ int main()
 
   for (auto i = first_member ; i < last_member; i += step)
   {
-    std::cout << std::setw(oth) << i;
+    kushekbaev::printWidth(std::cout, oth, i);
     std::cout << " ";
-    try
-    {
-      std::cout << std::setw(snd) << kushekbaev::taylorCalc(i, max_members, error);
-    }
-    catch (const std::logic_error & e)
-    {
-      std::cout << std::setw(snd) << errormsg;
-    }
-    std::cout << " " << std::setw(oth) << kushekbaev::sinhCalc(i);
+    kushekbaev::printResult(i, snd, oth, max_members, error);
     std::cout << "\n";
   }
 
   std::cout << std::setw(oth) << last_member;
-  try
-  {
-    std::cout << " " << std::setw(snd) << kushekbaev::taylorCalc(last_member, max_members, error);
-  }
-  catch (const std::logic_error & e)
-  {
-    std::cout << errormsg;
-  }
-  std::cout << std::setw(snd - 1) << kushekbaev::sinhCalc(last_member) << "\n";
+  std::cout << " " << std::setw(snd) << kushekbaev::taylorCalc(last_member, max_members, error);
+  std::cout << " " << std::setw(oth) << kushekbaev::sinhCalc(last_member);
+  std::cout << "\n";
 }
