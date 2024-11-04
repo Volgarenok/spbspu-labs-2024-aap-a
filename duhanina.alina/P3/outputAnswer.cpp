@@ -5,14 +5,14 @@
 
 int duhanina::outputAnswer(int * t, size_t m, size_t n)
 {
-  int max_count_diag = m + n - 1;
+  size_t max_count_diag = m + n - 1;
   int min_sum = std::numeric_limits<int>::max();
   for (size_t sum = 0; sum < max_count_diag; ++sum)
   {
     int current_sum = 0;
     for (size_t i = 0; i < m; ++i)
     {
-      int j = sum - i;
+      size_t j = sum - i;
       if (j >= 0 && j < n)
       {
         current_sum += t[i * n + j];
