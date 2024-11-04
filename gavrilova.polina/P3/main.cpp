@@ -54,5 +54,6 @@ int main(int argc, char ** argv)
       delete [] mtx2;
       return 2;
     }
+    delete [] mtx2;
   }
 }
