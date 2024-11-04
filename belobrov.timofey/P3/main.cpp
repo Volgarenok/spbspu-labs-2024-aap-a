@@ -37,13 +37,15 @@ int main(int argc, char** argv)
   size_t rows = 0, cols = 0;
   inputFile >> rows >> cols;
   if (!inputFile && inputFile.eof()) {
-    return 0;
+    std::cerr << "Error: Input file is empty\n";
+    return 2;
   }
 
   if (rows == 0 && cols == 0)
   {
     std::ofstream outputFile(argv[3]);
     outputFile << "0 0\n";
+    return 0;
   }
 
   if (rows == 0 || cols == 0)
