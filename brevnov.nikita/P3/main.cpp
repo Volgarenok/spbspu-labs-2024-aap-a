@@ -1,12 +1,12 @@
 #include <fstream>
 #include "matrix.hpp"
 #include "find_osed.hpp"
-
+#include "intcheck.hpp"
 
 int main(int argc, char ** argv)
 {
   int long long m = -1, n = -1;
-  int testmode = -1;
+  int testmode = 0;
   int auxiliary_array[10000] = {};
   if (argc < 4)
   {
@@ -18,9 +18,11 @@ int main(int argc, char ** argv)
     std::cerr << "Too many arguments\n";
     return 1;
   }
-  char * forptr = nullptr;
-  testmode = std::strtol(argv[1], &forptr, 10);
-  if (testmode == -1)
+  try
+  {
+    testmode = brevnov::intcheck(argv[1]);
+  }
+  catch (const std::invalid_argument& e)
   {
     std::cerr << "First parameter is not a number\n";
     return 1;

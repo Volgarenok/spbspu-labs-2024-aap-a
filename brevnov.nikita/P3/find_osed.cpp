@@ -31,7 +31,7 @@ size_t brevnov::find_index_min(const int * t, size_t n, size_t i)
 
 size_t brevnov::find_index_max(const int * t, size_t m, size_t n, int min_member)
 {
-  int max_member = t[min_mem];
+  int max_member = t[min_member];
   size_t max_index = 0;
   for (size_t j = 1; j < m; ++j)
   {
