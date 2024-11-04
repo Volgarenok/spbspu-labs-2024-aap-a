@@ -6,7 +6,7 @@ std::istream & duhanina::inputMatrix(std::istream & in, int * t, size_t m, size_
   size_t size_table = n * m;
   for (size_t i = 0; i < size_table; ++i)
   {
-    if (!(in >> matrix[i]))
+    if (!(in >> t[i]))
     {
       ++read;
     }
