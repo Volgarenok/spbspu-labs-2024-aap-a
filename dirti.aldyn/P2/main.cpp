@@ -19,8 +19,9 @@ int main()
   }
   const double error = 0.001;
   const double step = 0.05;
-  for (auto i = left; i < right; i += step)
+  for (double i = left; i < right - step / 2.0 ; i += step)
   {
     dirti::output(i, k, error);
   }
+  dirti::output(right, k, error);
 }

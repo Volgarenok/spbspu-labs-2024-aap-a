@@ -2,6 +2,8 @@
 #include <cmath>
 #include <iostream>
 #include <stdexcept>
+#include <iomanip>
+#include <cstring>
 
 double dirti::math(double x)
 {
@@ -28,17 +30,20 @@ double dirti::taylor(double x, size_t k, double error)
 
 void dirti::output(double x, size_t k, double error)
 {
-  std::cout << x;
+  const char * errormsg = "<MATH_ERROR>";
+  const size_t scnd = std::strlen(errormsg);
+  const size_t oth = 10;
+  std::cout << std::fixed << std::setprecision(2) << std::setw(oth) << x;
   std::cout << " ";
   try
   {
-    std::cout << dirti::taylor(x, k, error);
+    std::cout << std::fixed << std::setprecision(3) << std::setw(scnd) << dirti::taylor(x, k, error);
   }
   catch (const std::logic_error & e)
   {
-    std::cout << "<MATH_ERROR>";
+    std::cout << std::setw(scnd) << "<MATH_ERROR>";
   }
   std::cout << " ";
-  std::cout << dirti::math(x);
+  std::cout << std::fixed << std::setprecision(3) << std::setw(oth) << dirti::math(x);
   std::cout << "\n";
 }
