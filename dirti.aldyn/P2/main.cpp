@@ -1,3 +1,4 @@
+#include "taylor_functions.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <cmath>
@@ -20,6 +21,6 @@ int main()
   const double step = 0.05;
   for (auto i = left; i < right; i += step)
   {
-    output();
+    dirti::output(i, k, error);
   }
 }
