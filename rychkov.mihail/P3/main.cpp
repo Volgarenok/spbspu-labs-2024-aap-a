@@ -51,7 +51,7 @@ int main(int argc, char** argv)
   }
   else
   {
-    if(height * width > staticMatrixSize)
+    if (height * width > staticMatrixSize)
     {
       std::cerr << "matrix size is too big for task 1\n";
       return 1;

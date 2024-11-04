@@ -18,7 +18,7 @@ int rychkov::getMaxSumSdg(int* matrix, size_t height, size_t width)
 
 int rychkov::getSumOfSdgWithCell(int* matrix, size_t height, size_t width, size_t basisY, size_t basisX)
 {
-  if(basisY >= basisX)
+  if (basisY >= basisX)
   {
     basisY -= basisX;
     basisX = 0;
