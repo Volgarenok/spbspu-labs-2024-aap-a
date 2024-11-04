@@ -1,7 +1,7 @@
 #include "memory_utils.hpp"
 #include <stdexcept>
 
-int* kizhin::allocateArray(size_t size, int* stackBuffer, size_t stackSize, MemoryMode mode)
+int* kizhin::allocateArray(size_t size, int* stackBuffer, MemoryMode mode)
 {
   if (size == 0) {
     return nullptr;
@@ -9,7 +9,7 @@ int* kizhin::allocateArray(size_t size, int* stackBuffer, size_t stackSize, Memo
   if (mode == MemoryMode::freeStore) {
     return new int[size];
   }
-  if (mode == MemoryMode::stack && size <= stackSize) {
+  if (mode == MemoryMode::stack && size <= stackBufferSize) {
     return stackBuffer;
   }
   throw std::logic_error("Invalid memory allocation request");

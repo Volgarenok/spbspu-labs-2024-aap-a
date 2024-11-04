@@ -5,47 +5,46 @@
 
 int main(int argc, char** argv)
 {
-  kizhin::MemoryMode mode;
+  kizhin::MemoryMode memoryMode;
   try {
     kizhin::checkArgumentsCount(argc);
-    mode = kizhin::parseMemoryMode(argv[1]);
-  } catch (const std::logic_error& error) {
-    std::cerr << error.what() << '\n';
+    memoryMode = kizhin::parseMemoryMode(argv[1]);
+  } catch (const std::logic_error& ex) {
+    std::cerr << ex.what() << '\n';
     return 1;
   }
   const char* inputFilePath = argv[2];
   const char* outputFilePath = argv[3];
 
-  constexpr size_t stackSize = 10'000;
-  static int stackBuffer[stackSize];
   int* matrix = nullptr;
   try {
     std::ifstream in(inputFilePath);
-    if (!in.is_open()) {
+    if (!in) {
       throw std::logic_error("Failed to open input file");
     }
     int rows = 0;
     int columns = 0;
-    if (!(in >> rows >> columns) || rows < 0 || columns < 0) {
+    if (!(in >> rows >> columns).good() || rows < 0 || columns < 0) {
       throw std::logic_error("Failed to read matrix dimensions");
     }
+    int stackBuffer[kizhin::stackBufferSize];
     const size_t size = rows * columns;
-    matrix = kizhin::allocateArray(size + 2, stackBuffer, stackSize, mode);
+    matrix = kizhin::allocateArray(size + 2, stackBuffer, memoryMode);
     matrix[0] = rows;
     matrix[1] = columns;
-    if (!kizhin::readArrayValues(in, matrix + 2, size)) {
+    if (!kizhin::readArrayValues(in, matrix + 2, size).good()) {
       throw std::logic_error("Failed to read matrix values");
     }
 
     std::ofstream out(outputFilePath);
-    if (!out.is_open()) {
+    if (!out) {
       throw std::logic_error("Failed to open ouput file");
     }
     out << kizhin::countLocalMaximums(matrix);
-  } catch (const std::exception& error) {
-    kizhin::deallocateArray(matrix, mode);
-    std::cerr << error.what() << '\n';
+  } catch (const std::exception& ex) {
+    kizhin::deallocateArray(matrix, memoryMode);
+    std::cerr << ex.what() << '\n';
     return 2;
   }
-  kizhin::deallocateArray(matrix, mode);
+  kizhin::deallocateArray(matrix, memoryMode);
 }
