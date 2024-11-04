@@ -50,7 +50,16 @@ int main(int argc, char **argv)
   else if (argv[1][0] == '2')
   {
     size_t len = num_columns * num_rows;
-    int *matrix2 = new int[len];
+    int *matrix2 = nullptr;
+    try
+    {
+      int *matrix2 = new int[len];
+    }
+    catch (const std::bad_alloc &e)
+    {
+      std::cerr << "ERROR: Memory Allocation: " << e.what() << "\n";
+      return 2;
+    }
     if (!sveshnikov::read_matrix(input, matrix2, num_rows, num_columns, read))
     {
       std::cerr << "ERROR: It cannot be interpreted as a two-dimensional array\n";
