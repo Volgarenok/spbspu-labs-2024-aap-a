@@ -2,7 +2,6 @@
 #include <cctype>
 #include <cstdlib>
 #include <fstream>
-#include "matrix.hpp"
 
 int main(int argc, char ** argv)
 {
@@ -29,41 +28,22 @@ int main(int argc, char ** argv)
       std::cerr << "First parameter is not a number\n";
     }
   }
-  std::ifstream input(argv[2]);
-  int rows = 0;
-  int columns = 0;
-  input >> rows >> columns;
-  if (input.fail())
+  std::ifstream input();
+  size_t rows = 0;
+  size_t cols = 0;
+  input >> rows >> cols;
+  if (!input || rows <= 0 || cols <= 0)
   {
     std::cerr << "Invalid matrix dimensions\n";
-    return 2;
   }
-  int ** matrix;
+  if (rows * cols > 10000)
+  {
+    std::cerr << "The size of the matrix is exceeded\n";
+  }
   if (num == 1)
   {
-    if (rows * columns > 10000)
-    {
-      std::cerr << "Matrix size exceeds limit\n";
-      return 2;
-    }
-    static int fixedMatrix[100][100];
-    matrix = fixedMatrix;
-  }
-  else
-  {
-    matrix = new int * [rows];
-    for (int i = 0; i < rows; i++)
-    {
-      matrix[i] = new int[columns];
-    }
-  }
-  for (int i = 0; i < rows; ++i) {
-    for (int j = 0; j < cols; ++j) {
-       if (!(input >> matrix[i][j])) {
-         cerr << "Invalid matrix data" << endl;
-           return 2;
-       }
-    }
+    constexpr size_t size = 10000;
+    int matrix[size] = {0};
   }
 }
 
