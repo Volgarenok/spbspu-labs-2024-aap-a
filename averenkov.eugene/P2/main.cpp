@@ -1,8 +1,8 @@
-#include "taylor.h"
 #include <iostream>
 #include <cmath>
 #include <iomanip>
 #include <cstring>
+#include "taylor.h"
 
 int main()
 {
@@ -12,11 +12,13 @@ int main()
   double right = 0.0;
   size_t k = 0;
   std::cin >> left >> right >> k;
-  if (!std::cin || left < -1 || right > 1 || left > 1 || right < -1 || right < left) {
+  if (!std::cin || left < -1 || right > 1 || left > 1 || right < -1 || right < left)
+  {
     std::cerr << "INCORRECT INPUT";
     return 1;
   }
-  for (double i = left; i <= right; i += step) {
+  for (double i = left; i <= right; i += step)
+  {
     averenkov::outline(i, k, error);
     std::cout << "\n";
   }
