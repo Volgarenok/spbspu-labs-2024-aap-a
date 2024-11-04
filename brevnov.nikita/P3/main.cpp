@@ -1,13 +1,13 @@
-#include "matrix.hpp"
-#include "osedfun.hpp"
 #include <fstream>
+#include "matrix.hpp"
+#include "find_osed.hpp"
+
 
 int main(int argc, char ** argv)
 {
   int long long m = -1, n = -1;
-  int parameter = 0;
-  char * forptr = nullptr;
-  int helpmas[10000] = {};
+  int testmode = -1;
+  int auxiliary_array[10000] = {};
   if (argc < 4)
   {
     std::cerr << "Not enough arguments\n";
@@ -18,13 +18,14 @@ int main(int argc, char ** argv)
     std::cerr << "Too many arguments\n";
     return 1;
   }
-  parameter = std::strtol(argv[1], &forptr, 10);
-  if (!(parameter))
+  char * forptr = nullptr;
+  testmode = std::strtol(argv[1], &forptr, 10);
+  if (testmode == -1)
   {
     std::cerr << "First parameter is not a number\n";
     return 1;
   }
-  if ((parameter < 1) || (parameter > 2))
+  if ((testmode < 1) || (testmode > 2))
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
@@ -39,24 +40,19 @@ int main(int argc, char ** argv)
   }
   if ((m < 0) || (n < 0))
   {
-    std::cerr << "Non-correct matrix parameters\n";
+    std::cerr << "Non-correct matrix parameter\n";
     return 2;
   }
-  if ((m == 0) || (n == 0))
-  {
-    output << "0";
-    return 0;
-  }
   int * mtx = nullptr;
-  if (parameter == 1)
+  if (testmode == 1)
   {
-    mtx = helpmas;
+    mtx = auxiliary_array;
   }
   else
   {
     try
     {
-      mtx = brevnov::alloc(m, n);
+      mtx = new int[m*n];
     }
     catch(const std::bad_alloc& e)
     {
@@ -64,18 +60,19 @@ int main(int argc, char ** argv)
       return 2;
     }
   }
-  int member = brevnov::input_matrix(input, mtx, m, n);
-  if (!(member == m * n))
+  int saved_values = brevnov::input_matrix(input, mtx, m, n);
+  if (saved_values != m * n)
   {
     std::cerr << "Error matrix input\n";
-    if (parameter == 2)
+    if (testmode == 2)
     {
       delete[] mtx;
     }
     return 2;
   }
-  output << brevnov::osed_fun(mtx, m, n);
-  if (parameter == 2)
+  output << brevnov::find_osed(mtx, m, n);
+  output << "\n";
+  if (testmode == 2)
   {
     delete[] mtx;
   }
