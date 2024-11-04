@@ -13,14 +13,14 @@ int main(int argc, char ** argv) {
 
   std::ifstream infile(input_filename);
 
-  size_t rows = 0, columns = 0;
-  infile >> rows >> columns;
-
   if (!infile)
   {
     std::cerr << "Error while opening input file" << "\n";
     return 1;
   }
+
+  size_t rows = 0, columns = 0;
+  infile >> rows >> columns;
 
   std::string line;
   if (!std::getline(infile, line))
@@ -50,21 +50,6 @@ int main(int argc, char ** argv) {
         kushekbaev::deleteMatrix(matrix);
         return 1;
     }
-  }
-
-  size_t elements_read = 0;
-  for (size_t i = 0; i < rows * columns; ++i)
-  {
-    if (infile >> matrix[i])
-    {
-      elements_read++;
-    }
-  }
-
-  if (elements_read < rows * columns)
-  {
-    std::cerr << "Not enough data in input file for matrix" << "\n";
-    return 1;
   }
 
   infile.close();
