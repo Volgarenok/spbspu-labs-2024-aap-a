@@ -22,6 +22,12 @@ int main(int argc, char ** argv) {
     return 1;
   }
 
+  if (infile.peek() == std::ifstream::traits_type::eof())
+  {
+    std::cout << "Input file is empty" << "\n";
+    return 0;
+  }
+
   if (!(infile >> rows >> columns))
   {
     return 0;
@@ -49,6 +55,21 @@ int main(int argc, char ** argv) {
     infile >> matrix[i];
     std::cerr << "Not enough data in input file for matrix" << "\n";
     kushekbaev::deleteMatrix(matrix);
+    return 1;
+  }
+
+  size_t elements_read = 0;
+  for (size_t i = 0; i < rows * columns; ++i)
+  {
+    if (infile >> matrix[i])
+    {
+      elements_read++;
+    }
+  }
+
+  if (elements_read < rows * columns)
+  {
+    std::cerr << "Not enough data in input file for matrix" << "\n";
     return 1;
   }
 
