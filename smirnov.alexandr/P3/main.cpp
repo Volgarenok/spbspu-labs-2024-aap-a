@@ -44,6 +44,36 @@ int main(int argc, char ** argv)
   {
     constexpr size_t size = 10000;
     int matrix[size] = {0};
+    if (!smirnov::inputMatrix(input, matrix, rows, columns))
+    {
+      std::cerr << "Input error\n";
+      return 2;
+    }
+    smirnov::processMatrix(matrix, rows, columns);
+    smirnov::outputMatrix(output, matrix, rows, columns);
+  }
+  else
+  {
+    int * matrix = nullptr;
+    try
+    {
+      matrix = new int[rows * columns];
+    }
+    catch (const std::bad_alloc & e)
+    {
+      std::cerr << "Out of memory\n";
+      delete[] matrix
+      return 1;
+    }
+    if (!smirnov::inputMatrix(input, matrix, rows, columns))
+    {
+      std::cerr << "Input error\n";
+      delete[] matrix;
+      return 2;
+    }
+    smirnov::processMatrix(matrix, rows, columns);
+    smirnov::outputMatrix(output, matrix, rows, columns);
+    delete[] matrix;
   }
 }
 
