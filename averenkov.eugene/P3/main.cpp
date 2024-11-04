@@ -40,7 +40,7 @@ int main(int argc, char** argv)
     {
       if (std::atoi(argv[1]) == 2)
       {
-        averenkov::destroy(matrix, m);
+        delete[] matrix;
       }
       std::cerr << "Read fail\n";
       return 2;
@@ -50,7 +50,7 @@ int main(int argc, char** argv)
     averenkov::output_matrix(output, matrix, m, n);
     if (std::atoi(argv[1]) == 2)
     {
-      averenkov::destroy(matrix, m);
+      delete[] matrix;
     }
   }
   else

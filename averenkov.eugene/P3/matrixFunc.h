@@ -4,10 +4,9 @@
 #include <istream>
 
 namespace averenkov {
-  std::istream& input_matrix(std::istream& in, int* t, size_t rows, size_t cols, size_t& read);
-  size_t num_col_lsr(int* t, size_t rows, size_t cols);
-  void destroy(int* t, size_t rows);
-  void output_matrix(std::ostream& out, int* t, size_t rows, size_t cols);
+  std::istream& input_matrix(std::istream& in, int* matrix, size_t m, size_t n, size_t& read);
+  size_t num_col_lsr(int* matrix, size_t m, size_t n);
+  void output_matrix(std::ostream& out, int* matrix, size_t m, size_t n);
 }
 
 #endif
