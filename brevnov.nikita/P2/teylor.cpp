@@ -1,5 +1,6 @@
 #include "teylor.hpp"
 #include <cmath>
+#include <stdexcept>
 
 double brevnov::f(const double x, size_t k, double error)
 {
