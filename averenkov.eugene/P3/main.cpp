@@ -8,17 +8,17 @@ int main(int argc, char** argv)
 {
   if (argc < 4)
   {
-    std::cerr << "Not enough arguments\n";
+    std::cerr << "not enough arguments\n";
     return 1;
   }
   if (argc > 4)
   {
-    std::cerr << "Too many arguments\n";
+    std::cerr << "too many arguments\n";
     return 1;
   }
   if (std::strlen(argv[1]) != 1 || !std::atoi(argv[1]))
   {
-    std::cerr << "First pararmetr is not a number\n";
+    std::cerr << "first pararmetr is not a number\n";
     return 1;
   }
 
@@ -34,35 +34,54 @@ int main(int argc, char** argv)
   input >> n;
   if (std::atoi(argv[1]) == 1)
   {
-    int arr[10000] = {};
-  } else
+    int matrix[10000] = { 0 };
+    size_t read = 0;
+    if (!averenkov::input_matrix(input, matrix, m, n, read) || read != m * n)
     {
-      int * matrix = nullptr;
-      try
-      }
-        matrix = new int*[m];
-      }
-      catch (const std::bad_alloc & e)
+      if (std::atoi(argv[1]) == 2)
       {
-        std::cerr << "Memory error\n";
-        return 1;
+        averenkov::destroy(matrix, m);
       }
-  size_t read = 0;
-  if (!averenkov::input_matrix(input, matrix, m, n, read) || read != m * n)
-  {
-    if(std::atoi(argv[1]) == 2)
+      std::cerr << "Read fail\n";
+      return 2;
+    }
+    output << averenkov::num_col_lsr(matrix, m, n) << " ";
+    output << m << " " << n << " ";
+    averenkov::output_matrix(output, matrix, m, n);
+    if (std::atoi(argv[1]) == 2)
     {
       averenkov::destroy(matrix, m);
     }
-    std::cerr << "Read fail\n";
-    return 2;
   }
-  output << averenkov::num_col_lsr(matrix, m, n) << " ";
-  output << m << " " << n << " ";
-  averenkov::output_matrix(output, matrix, m, n);
-  if(std::atoi(argv[1]) == 2)
+  else
   {
-    averenkov::destroy(matrix, m);
+    int* matrix = nullptr;
+    try
+    {
+      matrix = new int[m * n];
+    }
+    catch (const std::bad_alloc& e)
+    {
+      std::cerr << "Memory error\n";
+      return 1;
+    }
+    size_t read = 0;
+    if (!averenkov::input_matrix(input, matrix, m, n, read) || read != m * n)
+    {
+      if (std::atoi(argv[1]) == 2)
+      {
+        delete[] matrix;
+      }
+      std::cerr << "Read fail\n";
+      return 2;
+    }
+    output << averenkov::num_col_lsr(matrix, m, n) << " ";
+    output << m << " " << n << " ";
+    averenkov::output_matrix(output, matrix, m, n);
+    if (std::atoi(argv[1]) == 2)
+    {
+      delete[] matrix;
+    }
   }
   return 0;
 }
