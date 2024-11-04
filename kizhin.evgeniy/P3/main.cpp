@@ -24,7 +24,7 @@ int main(int argc, char** argv)
     }
     int rows = 0;
     int columns = 0;
-    if (!((in >> rows >> columns).good()) || rows < 0 || columns < 0) {
+    if (!(in >> rows >> columns) || rows < 0 || columns < 0) {
       throw std::logic_error("Failed to read matrix dimensions");
     }
     int stackBuffer[kizhin::stackBufferSize];
@@ -32,7 +32,7 @@ int main(int argc, char** argv)
     matrix = kizhin::allocateArray(size + 2, stackBuffer, memoryMode);
     matrix[0] = rows;
     matrix[1] = columns;
-    if (!(kizhin::readArrayValues(in, matrix + 2, size).good())) {
+    if (!kizhin::readArrayValues(in, matrix + 2, size)) {
       throw std::logic_error("Failed to read matrix values");
     }
 
