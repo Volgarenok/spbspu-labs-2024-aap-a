@@ -8,6 +8,5 @@ namespace nikonov
   std::istream& readMatrix(std::istream& input, int* mtx, size_t m, size_t n, size_t& read);
   void printMatrix(std::ostream& output, int* mtx, size_t m, size_t n);
   void transformMatrix(int* mtx, size_t m, size_t n);
-  int* array(size_t m, size_t n);
 }
 #endif
