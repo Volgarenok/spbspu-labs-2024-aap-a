@@ -37,23 +37,23 @@ int main(int argc, char ** argv)
   if (num == 1)
   {
     int matrix[10000];
-    if (!input_matrix(input, matrix, matrixsize))
+    if (!lanovenko::input_matrix(input, matrix, matrixsize))
     {
       std::cerr << "Fail input" << '\n';
       return 2;
     }
-    output_matrix (output, matrix, rows, cols);
+    lanovenko::output_matrix(output, matrix, rows, cols);
   }
   else
   {
     int *dmatrix = new int[matrixsize];
-    if(!input_matrix(input, dmatrix, matrixsize))
+    if(!lanovenko::input_matrix(input, dmatrix, matrixsize))
     {
       delete[] dmatrix;
       std::cerr << "Fail input" << '\n';
       return 2;
     }
-    output_matrix (output, dmatrix, rows, cols);
+    lanovenko::output_matrix(output, dmatrix, rows, cols);
     delete[] dmatrix;
   }
   return 0;
