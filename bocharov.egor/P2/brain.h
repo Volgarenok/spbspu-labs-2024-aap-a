@@ -4,8 +4,10 @@
 namespace bocharov
 {
   double f(double x, size_t k, double error);
+  double f2(double x, size_t k, double error);
   double sqrt1_x(double x);
   bool intervals(double left, double right);
-  void table(double number, size_t k, double error); 
+  void table(double number, size_t k, double error);
+  double ln(double x);
 }
-#endif 
+#endif
