@@ -35,15 +35,16 @@ int main(int argc, char ** argv) {
   infile.seekg(0);
 
   std::string line;
-  if (!std::getline(infile, line))
+  if (!std::getline(infile, line) or line.empty())
   {
     std::cout << "Error reading line from file" << "\n";
     return 0;
   }
 
-  if (!(infile >> rows >> columns))
+  std::istringstream iss(line);
+  if (!(iss >> rows >> columns))
   {
-    std::cout << "Error getting rows and columns from file" << "\n";
+    std::cout << "Not enough data for rows and columns" << "\n";
     return 0;
   }
 
