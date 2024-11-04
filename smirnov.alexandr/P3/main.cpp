@@ -38,6 +38,7 @@ int main(int argc, char ** argv)
     std::cerr << "Invalid matrix dimensions\n";
     return 2;
   }
+  std::ofstream output(argv[3]);
   if (num == 1)
   {
     constexpr size_t size = 10000;
