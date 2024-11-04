@@ -43,6 +43,7 @@ int main(int argc, char ** argv) {
 
   if (!(infile >> rows >> columns))
   {
+    std::cerr << "Error getting rows and columns fron file" << "\n";
     return 0;
   }
 
