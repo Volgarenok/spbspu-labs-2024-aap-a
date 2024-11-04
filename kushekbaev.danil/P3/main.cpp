@@ -44,8 +44,12 @@ int main(int argc, char ** argv) {
     }
   }
 
-  for (size_t i = 0; i < rows * columns; ++i) {
+  for (size_t i = 0; i < rows * columns; ++i)
+  {
     infile >> matrix[i];
+    std::cerr << "Not enough data in input file for matrix" << "\n";
+    kushekbaev::deleteMatrix(matrix);
+    return 1;
   }
 
   infile.close();
