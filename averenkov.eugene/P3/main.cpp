@@ -35,7 +35,7 @@ int main(int argc, char** argv)
   int** matrix = nullptr;
   if (std::atoi(argv[1]) == 1)
   {
-    int matrix[10000];
+    int matrix[10000] = {};
   } else
     {
       matrix = new int*[m];

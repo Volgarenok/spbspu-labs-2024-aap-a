@@ -10,7 +10,7 @@ std::istream& averenkov::input_matrix(std::istream& in, int** t, size_t m, size_
     {
       if (in >> t[i][j])
       {
-        ++read
+        ++read;
       }
     }
   }
