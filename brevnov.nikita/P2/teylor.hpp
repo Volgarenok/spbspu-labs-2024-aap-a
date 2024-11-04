@@ -3,6 +3,6 @@
 #include <cstddef>
 namespace brevnov
 {
-  double f(const double x, size_t k, double error);
+  double f(double x, size_t k, double error);
 }
 #endif

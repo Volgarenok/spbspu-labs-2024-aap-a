@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 
-double brevnov::f(const double x, size_t k, double error)
+double brevnov::f(double x, size_t k, double error)
 {
   double result = x;
   for (size_t i = 1; i < k; ++i)
