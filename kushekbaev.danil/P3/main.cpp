@@ -25,8 +25,8 @@ int main(int argc, char ** argv) {
   std::string line;
   if (!std::getline(infile, line))
   {
-    std::cout << "Input file is empty" << "\n";
-    return 0;
+    std::cerr << "Input file is empty" << "\n";
+    return 1;
   }
   infile.seekg(0);
 
