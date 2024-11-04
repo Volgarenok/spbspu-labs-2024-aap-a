@@ -1,6 +1,7 @@
 #include "kushekbaev_matrix.hpp"
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 int main(int argc, char ** argv) {
   if (argc < 4)
