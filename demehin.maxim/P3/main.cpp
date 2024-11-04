@@ -88,16 +88,13 @@ int main(int argc, char** argv)
     return 2;
   }
 
+  std::ofstream output(argv[3]);
   if (c == 1)
   {
-    std::cout << demehin::cnt_row_nsm(matrix1, m, n) << "\n";
-    std::ofstream output(argv[3]);
     output << demehin::cnt_row_nsm(matrix1, m, n);
   }
   else
   {
-    std::cout << demehin::cnt_row_nsm(matrix2, m, n) << "\n";
-    std::ofstream output(argv[3]);
     output << demehin::cnt_row_nsm(matrix2, m, n);
     delete[] matrix2;
   }
