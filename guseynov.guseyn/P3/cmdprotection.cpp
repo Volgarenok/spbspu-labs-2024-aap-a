@@ -13,7 +13,7 @@ void cmdProtection(int argc, char **argv)
   {
     throw std::logic_error("Not enough arguments");
   }
-  if ((argv[1] < "0") or (argv[1] > "9"))
+  if ((argv[1][0] < '0') or (argv[1][0] > '9'))
   {
     throw std::logic_error("First parameter is not a number");
   }

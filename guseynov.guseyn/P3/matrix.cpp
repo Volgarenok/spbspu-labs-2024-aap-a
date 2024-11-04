@@ -1,6 +1,7 @@
 #include "matrix.hpp"
 
 #include <limits>
+#include <iostream>
 
 std::istream & inputMtx(std::istream &in, int *arr, size_t general, size_t & read)
 {
