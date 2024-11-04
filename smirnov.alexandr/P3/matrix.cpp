@@ -48,3 +48,26 @@ void smirnov::processMatrix(int * matrix, size_t rows, size_t columns)
     }
     layer++;
 }
+
+void smirnov::outputMatrix(std::ostream & output, int * matrix, size_t rows, size_t columns)
+{
+  output << matrix[0] << " ";
+  for (size_t i = 1; i < rows * columns; ++i)
+  {
+    if (i % rows == 0)
+    {
+      output << matrix[i] << "\n";
+    }
+    else
+    {
+      output << matrix[i] << " ";
+    }
+  }
+  output << "\n";
+}
+
+
+
+
+
+
