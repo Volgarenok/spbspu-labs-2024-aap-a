@@ -8,11 +8,10 @@ std::istream& averenkov::input_matrix(std::istream& in, int** t, size_t m, size_
   {
     for (size_t j = 0; j < n; ++j)
     {
-      if (!(in >> t[i][j]))
+      if (in >> t[i][j])
       {
-        return in;
+        ++read
       }
-      ++read;
     }
   }
   return in;

@@ -35,31 +35,10 @@ int main(int argc, char** argv)
   int** matrix = nullptr;
   if (std::atoi(argv[1]) == 1)
   {
-    int arr[10000];
-    try
-    {
-      matrix = new int*[m];
-    }
-    catch (const std::bad_alloc & e)
-    {
-      std::cerr << "Memory error\n";
-      return 1;
-    }
-    for (size_t i = 0; i < m; ++i)
-    {
-      matrix[i] = &arr[i * n];
-    }
+    int matrix[10000];
   } else
     {
-      try
-      {
-        matrix = new int*[m];
-      }
-      catch (const std::bad_alloc & e)
-      {
-        std::cerr << "Memory error\n";
-        return 1;
-      }
+      matrix = new int*[m];
       for (size_t i = 0; i < m; ++i)
       {
         matrix[i] = new int[n];
@@ -71,10 +50,7 @@ int main(int argc, char** argv)
     if(std::atoi(argv[1]) == 2)
     {
       averenkov::destroy(matrix, m);
-    } else
-      {
-        delete matrix;
-      }
+    }
     std::cerr << "Read fail\n";
     return 2;
   }
