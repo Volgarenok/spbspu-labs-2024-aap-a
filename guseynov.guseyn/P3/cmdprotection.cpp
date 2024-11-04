@@ -13,13 +13,8 @@ void guseynov::cmdProtection(int argc, char **argv)
   {
     throw std::logic_error("Not enough arguments");
   }
-  if ((argv[1][0] < '0') or (argv[1][0] > '9'))
+  if ((argv[1][1] != '\0') || ((argv[1][0] != '1') && (argv[1][0] != '2')))
   {
-    throw std::logic_error("First parameter is not a number");
-  }
-  int num = static_cast < int > (argv[1][0]);
-  if ((num < 1) or (num > 2))
-  {
-    throw std::logic_error("First parameter is out of range");
+    throw std::logic_error("First parameter is not a number of a task");
   }
 }
