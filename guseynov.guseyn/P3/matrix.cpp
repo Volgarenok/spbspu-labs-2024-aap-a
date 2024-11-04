@@ -7,8 +7,7 @@ std::istream & guseynov::inputMtx(std::istream &in, int *arr, size_t general, si
 {
   for (size_t i = 0; i < general; i++)
   {
-    in >> arr[i];
-    if (in.good())
+    if (in >> arr[i])
     {
       read++;
     }
