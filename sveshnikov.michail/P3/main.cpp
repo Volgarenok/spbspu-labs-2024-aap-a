@@ -53,7 +53,7 @@ int main(int argc, char **argv)
     int *matrix2 = nullptr;
     try
     {
-      int *matrix2 = new int[len];
+      matrix2 = new int[len];
     }
     catch (const std::bad_alloc &e)
     {
