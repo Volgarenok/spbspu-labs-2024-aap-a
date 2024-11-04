@@ -43,8 +43,8 @@ int main(int argc, char ** argv) {
 
   if (!(infile >> rows >> columns))
   {
-    std::cerr << "Error getting rows and columns fron file" << "\n";
-    return 0;
+    std::cerr << "Error getting rows and columns from file" << "\n";
+    return 1;
   }
 
   int* matrix = kushekbaev::createMatrix(rows, columns);
