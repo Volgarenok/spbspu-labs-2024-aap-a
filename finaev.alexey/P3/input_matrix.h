@@ -4,6 +4,9 @@
 #include <istream>
 #include <cstddef>
 
-std::istream& input_matrix(std::istream & in, int *matrix, size_t size_matrix);
+namespace finaev
+{
+  std::istream& input_matrix(std::istream & in, int *matrix, size_t size_matrix);
+}
 
 #endif

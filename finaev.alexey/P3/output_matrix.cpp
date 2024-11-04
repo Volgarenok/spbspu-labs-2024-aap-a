@@ -1,7 +1,7 @@
 #include "output_matrix.h"
 #include <iostream>
 
-void output_matrix(std::ostream & out, int * matrix, size_t strk, size_t stl)
+void finaev::output_matrix(std::ostream & out, int * matrix, size_t strk, size_t stl)
 {
   int res = 0;
   for (size_t i = 0; i < strk; i++)

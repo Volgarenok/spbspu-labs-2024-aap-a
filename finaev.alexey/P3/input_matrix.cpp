@@ -1,7 +1,7 @@
 #include "input_matrix.h"
 #include <stdexcept>
 
-std::istream& input_matrix(std::istream & in, int *matrix, size_t size_matrix)
+std::istream& finaev::input_matrix(std::istream & in, int *matrix, size_t size_matrix)
 {
   for (size_t i = 0; i < size_matrix; i++)
   {

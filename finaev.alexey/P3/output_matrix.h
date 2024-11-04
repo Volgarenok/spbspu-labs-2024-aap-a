@@ -4,6 +4,9 @@
 #include <ostream>
 #include <cstddef>
 
-void output_matrix(std::ostream & out, int *matrix, size_t strk, size_t stl);
+namespace finaev
+{
+  void output_matrix(std::ostream & out, int *matrix, size_t strk, size_t stl);
+}
 
 #endif
