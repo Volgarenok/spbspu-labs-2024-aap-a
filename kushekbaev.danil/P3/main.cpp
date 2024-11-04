@@ -26,12 +26,6 @@ int main(int argc, char ** argv) {
     return 1;
   }
 
-  if (rows == 0 or columns == 0)
-  {
-    std::cerr << "Input file is empty or has invalid dimensions" << "\n";
-    return 1;
-  }
-
   infile.seekg(0, std::ios::end);
   if (infile.tellg() == 0)
   {
