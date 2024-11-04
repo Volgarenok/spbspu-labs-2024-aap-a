@@ -1,5 +1,6 @@
 #ifndef TAYLOR_FUN_H
 #define TAYLOR_FUN_H
+
 #include <cstddef>
 
 namespace cherkasov

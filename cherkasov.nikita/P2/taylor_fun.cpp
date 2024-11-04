@@ -9,6 +9,7 @@ namespace cherkasov
   {
     double next = 1;
     double result = next;
+
     for (size_t i = 1; i < k; ++i)
     {
       next *= x/i;
@@ -17,7 +18,9 @@ namespace cherkasov
       {
         return result - x;
       }
+
     }
+
     throw std::logic_error("math-error");
   }
   double get_exp(double x)
@@ -53,6 +56,7 @@ namespace cherkasov
       std::cout << "\n";
       return;
     }
+
       double exp_value = cherkasov::get_exp(x);
       cherkasov::get_table(x, taylor_value, exp_value, col_width, others_columns);
   }
