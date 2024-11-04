@@ -1,7 +1,7 @@
 #include "output_matrix.h"
 #include <iostream>
 
-void output_matrix(std::ostream& out, int* matrix, size_t rows, size_t cols)
+void lanovenko::output_matrix(std::ostream& out, int* matrix, size_t rows, size_t cols)
 {
   size_t count = 1;
   size_t i = 0, j = 0;
