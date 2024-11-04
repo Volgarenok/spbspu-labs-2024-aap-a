@@ -34,7 +34,7 @@ int main(int argc, char ** argv)
   if (input.tellg() == 0)
   {
     std::cerr << "File is empty" << "\n";
-    return 0;
+    return 2;
   }
   input.seekg(0, std::ios::beg);
   if (!input)
