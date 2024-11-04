@@ -1,5 +1,5 @@
-#ifndef MATRIX_HPP
-#define MATRIX_HPP
+#ifndef OSEDFUN_HPP
+#define OSEDFUN_HPP
 #include <iostream>
 
 namespace brevnov
