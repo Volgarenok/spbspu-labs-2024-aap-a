@@ -1,5 +1,5 @@
-#ifndef READING_FILES
-#define READING_FILES
+#ifndef CMD_PARAMETERS_H
+#define CMD_PARAMETERS_H
 #include <cstddef>
 #include <istream>
 namespace alymova
