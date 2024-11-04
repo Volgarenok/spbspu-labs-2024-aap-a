@@ -43,7 +43,7 @@ int main(int argc, char** argv)
   if (rows == 0 && cols == 0)
   {
     std::ofstream outputFile(argv[3]);
-    outputFile << "0 0\n"
+    outputFile << "0 0\n";
   }
 
   if (rows == 0 || cols == 0)
