@@ -36,7 +36,7 @@ int main(int argc, char** argv)
 
   size_t rows = 0, cols = 0;
   inputFile >> rows >> cols;
-  if (!inputFile  rows == 0 || cols == 0) {
+  if (!inputFile || rows == 0 || cols == 0) {
     std::cerr << "Error: Invalid matrix dimensions\n";
     return 2;
   }
