@@ -44,7 +44,7 @@ int main(int argc, char ** argv)
   }
   if ((m == 0) || (n == 0))
   {
-    output << "0";
+    output << false;
     return 0;
   }
   int * mtx = nullptr;
