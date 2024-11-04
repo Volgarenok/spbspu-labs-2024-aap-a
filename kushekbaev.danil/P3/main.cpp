@@ -22,11 +22,13 @@ int main(int argc, char ** argv) {
     return 1;
   }
 
-  if (infile.peek() == std::ifstream::traits_type::eof())
+  std::string line;
+  if (!std::getline(infile, line))
   {
     std::cout << "Input file is empty" << "\n";
     return 0;
   }
+  infile.seekg(0);
 
   if (!(infile >> rows >> columns))
   {
