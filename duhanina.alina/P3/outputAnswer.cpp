@@ -10,9 +10,9 @@ int duhanina::outputAnswer(int * t, size_t m, size_t n)
   int * diag_count = new int[max_count_diag];
   for (size_t i = 0; i < m; ++i)
   {
-    for (size_t j = 0; j < m; ++j)
+    for (size_t j = 0; j < n; ++j)
     {
-      int index_diag = j - (m - i - 1);
+      int index_diag = j - (m - i - 1) + 2;
       sums[index_diag] += t[i * n + j];
       diag_count[index_diag]++;
     }
