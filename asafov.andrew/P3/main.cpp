@@ -1,102 +1,53 @@
 #include <iostream>
 #include <fstream>
-
-void autoMatrixHandler(char input[],char output[]) {
-    int mtx[10000] = {};
-    std::ifstream fin(input);
-    int n = 0;
-    fin >> n;
-    int m = 0;
-    fin >> m;
-    
-    for (int i = 0; i < n*m; i++) {
-        fin >> mtx[i];
-    }
-    fin.close();
-    int count = 1;
-    
-    int e = n;
-    int r = m;
-    int a = -1;
-    while (e * r != 0)
-    {
-        for (int i = 0; i < r; i++)
-        {
-            a++;
-            mtx[a] -= count;
-            count++;
-        }
-        if (e * r == 0)
-        {
-            break;
-        }
-        e--;
-        for (int i = 0; i < e; i++)
-        {
-            a += m;
-            mtx[a] -= count;
-            count++; 
-        }
-        if (e * r == 0)
-        {
-            break;
-        }
-        r--;
-        for (int i = 0; i < r; i++)
-        {
-            a--;
-            mtx[a] -= count;
-            count++;
-        }
-        if (e * r == 0)
-        {
-            break;
-        }
-        e--;
-        for (int i = 0; i < e; i++)
-        {
-            a -= m;
-            mtx[a] -= count;
-            count++;
-        }
-        if (e * r == 0)
-        {
-            break;
-        }
-        r--;
-    }
-    std::ofstream fout(output);
-    fout << n << ' ' << m << ' ';
-    for (int i = 0; i < n * m; i++) {
-        fout << mtx[i] << ' ';
-    }
-}
-
-void dynamicalMatrixHandler(char input[],char output[]) {
-    std::ifstream fin(input);
-    int n = 0;
-    fin >> n;
-    int m = 0;
-    fin >> m;
-    fin.close();
-    
-    int* mtx = new int[m * n];
-
-    for (int i = 0; i < n * m; i++) {
-        fin >> mtx[i];
-    }
-    
-}
+#include "func.h"
 
 int main(int argc, char** argv)
 {
-    if (argv[0] == "1")
+    if (argc < 2) {
+        std::cerr << "Not enough arguments";
+        return 1;
+    }
+    else if (argc > 2) {
+        std::cerr << "Too many arguments";
+        return 1;
+    }
+    else if (argv[0] == "1")
     {
-        autoMatrixHandler(argv[1], argv[2]);
+        int mtx[10000] = {};
+        int a[2] = {};
+        try
+        {
+            matrixAutoInitialization(mtx, argv[1], a[0], a[1]);
+        }
+        catch (std::logic_error)
+        {
+            return 2;
+        }
+        matrixHandling(mtx, a[0], a[1]);
+        matrixPush(mtx, argv[2], a[0], a[1]);
     }
     else if (argv[0] == "2")
     {
-        dynamicalMatrixHandler(argv[1], argv[2]);
+        int* mtx = nullptr;
+        int a[2] = {};
+        try
+        {
+            matrixDynamicInitialization(mtx, argv[1], a[0], a[1]);
+        }
+        catch (std::logic_error)
+        {
+            delete[] mtx;
+            return 2;
+        }
+        matrixHandling(mtx, a[0], a[1]);
+        matrixPush(mtx, argv[2], a[0], a[1]);
+        delete[] mtx;
+    }
+    else
+    {
+        std::cerr << "First parameter is not a number";
+        return 1;
     }
     return 0;
 }
