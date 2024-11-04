@@ -22,7 +22,7 @@ int main()
         std::cerr << "wrong borders" << '\n';
         return 1;
     }
-    if ((right > 1) or (left < -1))
+    if ((right > 1) || (left < -1))
     {
         std::cerr << "incorrect borders" << '\n';
         return 1;
