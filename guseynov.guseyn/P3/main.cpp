@@ -35,10 +35,6 @@ int main(int argc, char** argv)
     return 2;
   }
   size_t general = m * n;
-  if (general == 0)
-  {
-    return 2;
-  }
   size_t read = 0;
   if (argv[1][0] == '1')
   {
