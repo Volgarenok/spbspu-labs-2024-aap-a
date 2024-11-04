@@ -32,18 +32,21 @@ int main(int argc, char** argv)
   size_t m = 0, n = 0;
   input >> m;
   input >> n;
-  int** matrix = nullptr;
   if (std::atoi(argv[1]) == 1)
   {
-    int matrix[10000] = {};
+    int arr[10000] = {};
   } else
     {
-      matrix = new int*[m];
-      for (size_t i = 0; i < m; ++i)
-      {
-        matrix[i] = new int[n];
+      int * matrix = nullptr;
+      try
       }
-    }
+        matrix = new int*[m];
+      }
+      catch (const std::bad_alloc & e)
+      {
+        std::cerr << "Memory error\n";
+        return 1;
+      }
   size_t read = 0;
   if (!averenkov::input_matrix(input, matrix, m, n, read) || read != m * n)
   {
