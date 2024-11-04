@@ -1,48 +1,50 @@
 #include "matrix.hpp"
 #include <cstddef>
 
-std::istream & smirnov::inputMatrix(std::istream & input, int * matrix, size_t rows, size_t columns)
+std::istream & smirnov::inputMatrix(std::istream & input, int * matrix, size_t rows, size_t cols)
 {
-  for (size_t i = 0; i < rows * columns; i++)
+  for (size_t i = 0; i < rows * cols; ++i)
   {
-    input >> matrix[i]
+    input >> matrix[i];
   }
   return input;
 }
 
-void smirnov::processMatrix(int * matrix, int rows, int cols)
+void smirnov::processMatrix(int * matrix, size_t rows, size_t columns)
 {
-  int layer = 0;
-  int increment = 1;
-  while (layer < (min(rows, cols) + 1) / 2)
+  int row_start = 0;
+  int row_end = rows - 1;
+  int cols_start = 0;
+  int cols_end = cols - 1;
+  int k = 1;
+  int index = 0;
+  while (row_start <= row_end && col_start <= col_end)
   {
-    for (size_t j = layer; j < cols - layer; ++j)
+    for (size_t i = col_start; i <= col_end && index < rows * columns; ++i)
     {
-      matrix[layer][j] += increment;
+      matrix[index++] -= k++;
     }
-    increment++;
-    for (int i = layer + 1; i < rows - layer; ++i)
+    row_start++;
+    for (size_t j = row_start; j <= row_end && index < rows * columns; ++j)
     {
-      matrix[i][cols - layer - 1] += increment;
+      matrix[index++] -= k++;
     }
-    increment++;
-    if (rows - layer - 1 > layer)
+    col_end--;
+    if (row_start <= row_end)
     {
-      for (int j = cols - layer - 1; j >= layer; --j)
+      for (size_t i = col_end; i >= col_start && index < rows * columns; --i)
       {
-        matrix[rows - layer - 1][j] += increment;
+        matrix[index++] -= k++;
       }
-      increment++;
+      row_end--;
     }
-    if (cols - layer - 1 > layer)
+    if (col_start <= col_end)
     {
-      for (int i = rows - layer - 2; i > layer; --i)
+      for (size_t j = row_end; j > row_start; --j)
       {
-        matrix[i][layer] += increment;
+        matrix[index++] -= k++;
       }
-      increment++;
+      col_start++;
     }
     layer++;
-  }
-  return layer;
 }
