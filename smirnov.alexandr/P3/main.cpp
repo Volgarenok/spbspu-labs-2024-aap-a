@@ -33,15 +33,11 @@ int main(int argc, char ** argv)
   size_t rows = 0;
   size_t columns = 0;
   input >> rows >> columns;
-  if (!input || rows <= 0 || columns <= 0)
+  if (!input)
   {
     std::cerr << "Invalid matrix dimensions\n";
+    return 2;
   }
-  if (rows * columns > 10000)
-  {
-    std::cerr << "The size of the matrix is exceeded\n";
-  }
-  std::ofstream output(argv[3]);
   if (num == 1)
   {
     constexpr size_t size = 10000;
