@@ -17,50 +17,50 @@ double* tkach::createMtx2(const int* const mtx, const size_t str, const size_t s
   {
     for (size_t j = 0; j < stl; ++j)
     {
-        double num = 0, sum = 0, sr = 0;
-        if (i > 0)
-        {
-            num++;
-            sum += mtx[i * stl + j - stl];
-            if (j > 0)
-            {
-                num++;
-                sum += mtx[i * stl + j - stl - 1];
-            }
-            if (j + 1 < stl)
-            {
-                num++;
-                sum += mtx[i * stl + j - stl + 1];
-            }
-        }
+      double num = 0, sum = 0, sr = 0;
+      if (i > 0)
+      {
+        num++;
+        sum += mtx[i * stl + j - stl];
         if (j > 0)
         {
-            num++;
-            sum += mtx[ i * stl + j - 1];
+          num++;
+          sum += mtx[i * stl + j - stl - 1];
         }
         if (j + 1 < stl)
         {
-            num++;
-            sum += mtx[i * stl + j + 1];
+          num++;
+          sum += mtx[i * stl + j - stl + 1];
         }
-        if (i < str - 1)
+      }
+      if (j > 0)
+      {
+        num++;
+        sum += mtx[ i * stl + j - 1];
+      }
+      if (j + 1 < stl)
+      {
+        num++;
+        sum += mtx[i * stl + j + 1];
+      }
+      if (i < str - 1)
+      {
+        num++;
+        sum += mtx[i * stl + j + stl];
+        if (j > 0)
         {
           num++;
-          sum += mtx[i * stl + j + stl];
-          if (j > 0)
-          {
-              num++;
-              sum += mtx[i * stl + j + stl - 1];
-          }
-          if (j + 1 < stl)
-          {
-              num++;
-              sum += mtx[i * stl + j + stl + 1];
-          }
+          sum += mtx[i * stl + j + stl - 1];
         }
-        sr = sum / num;
-        mtx2[i * stl + j] = sr;
+        if (j + 1 < stl)
+        {
+          num++;
+          sum += mtx[i * stl + j + stl + 1];
+        }
+      }
+      sr = sum / num;
+      mtx2[i * stl + j] = sr;
     }
-}
+  }
   return mtx2;
 }
