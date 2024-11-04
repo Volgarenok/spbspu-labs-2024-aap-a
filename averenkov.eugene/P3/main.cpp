@@ -5,7 +5,8 @@
 #include <cstring>
 #include <stdexcept>
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
   if (argc < 4)
   {
     std::cerr << "Not enough arguments\n";
@@ -45,10 +46,12 @@ int main(int argc, char** argv) {
       std::cerr << "Memory error\n";
       return 1;
     }
-    for (size_t i = 0; i < m; ++i) {
+    for (size_t i = 0; i < m; ++i)
+    {
       matrix[i] = &arr[i * n];
     }
-  } else {
+  } else
+    {
       try
       {
         matrix = new int*[m];
@@ -58,13 +61,14 @@ int main(int argc, char** argv) {
         std::cerr << "Memory error\n";
         return 1;
       }
-      for (size_t i = 0; i < m; ++i) {
+      for (size_t i = 0; i < m; ++i)
+      {
         matrix[i] = new int[n];
       }
     }
   size_t read = 0;
-  if (!averenkov::input_matrix(input, matrix, m, n, read) || read != m * n) {
-    averenkov::destroy(matrix, m);
+  if (!averenkov::input_matrix(input, matrix, m, n, read) || read != m * n)
+  {
     std::cerr << "Read fail\n";
     return 2;
   }
