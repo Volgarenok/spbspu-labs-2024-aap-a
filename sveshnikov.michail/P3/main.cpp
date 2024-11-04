@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include "cnt_nzr_dig.hpp"
 
 int main(int argc, char **argv)
