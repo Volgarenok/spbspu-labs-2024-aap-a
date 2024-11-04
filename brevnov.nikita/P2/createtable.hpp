@@ -1,5 +1,5 @@
-#ifndef CREATEMATRIX_HPP
-#define CREATEMATRIX_HPP
+#ifndef CREATETABLE_HPP
+#define CREATETABLE_HPP
 #include "teylor.hpp"
 namespace brevnov
 {
