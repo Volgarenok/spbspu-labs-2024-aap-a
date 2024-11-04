@@ -13,12 +13,12 @@ std::istream & smirnov::inputMatrix(std::istream & input, int * matrix, size_t r
 
 void smirnov::processMatrix(int * matrix, size_t rows, size_t columns)
 {
-  int row_start = 0;
-  int row_end = rows - 1;
-  int cols_start = 0;
-  int cols_end = cols - 1;
+  size_t row_start = 0;
+  size_t row_end = rows - 1;
+  size_t col_start = 0;
+  size_t col_end = columns - 1;
   int k = 1;
-  int index = 0;
+  size_t index = 0;
   while (row_start <= row_end && col_start <= col_end)
   {
     for (size_t i = col_start; i <= col_end && index < rows * columns; ++i)
@@ -47,7 +47,7 @@ void smirnov::processMatrix(int * matrix, size_t rows, size_t columns)
       }
       col_start++;
     }
-    layer++;
+  }
 }
 
 void smirnov::outputMatrix(std::ostream & output, int * matrix, size_t rows, size_t columns)
