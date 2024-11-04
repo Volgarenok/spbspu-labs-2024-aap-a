@@ -67,7 +67,7 @@ int main(int argc, char** argv)
   }
   else
   {
-    std::cout << "is not 1 or 2\n";
+    std::cout << "is not 1 or 2 btw\n";
   }
   return 0;
 }
