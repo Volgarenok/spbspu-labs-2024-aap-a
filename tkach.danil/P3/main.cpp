@@ -72,7 +72,7 @@ int main(int argc, char** argv)
       std::cerr << "ERROR: Invalid input\n";
       return 2;
     }
-    tkach::outputMtx(output, tkach::createMtx2(mtx, str, stl), stl, stl);
+    tkach::outputMtx(output, tkach::createMtx2(mtx, str, stl), str, stl);
     output << "\n";
     delete[] mtx;
   }
