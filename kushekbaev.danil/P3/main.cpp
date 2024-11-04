@@ -20,14 +20,6 @@ int main(int argc, char ** argv) {
     return 1;
   }
 
-  std::istringstream iss(line);
-  size_t rows = 0, columns = 0;
-  if (!(iss >> rows >> columns))
-  {
-    std::cerr << "Error reading matrix dimensions" << "\n";
-    return 1;
-  }
-
   infile.seekg(0, std::ios::end);
   if (infile.tellg() == 0)
   {
@@ -43,6 +35,14 @@ int main(int argc, char ** argv) {
     return 0;
   }
 
+  std::istringstream iss(line);
+  size_t rows = 0, columns = 0;
+
+  if (!(iss >> rows >> columns))
+  {
+    std::cerr << "Error reading matrix dimensions" << "\n";
+    return 1;
+  }
   std::istringstream isst(line);
   if (!(isst >> rows >> columns))
   {
