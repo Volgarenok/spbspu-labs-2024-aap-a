@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <cstring>
 #include <iomanip>
+#include "teylor.hpp"
 
 void brevnov::outputing(double left, double right, size_t k)
 {
