@@ -62,7 +62,7 @@ int main(int argc, char **argv)
   if (taskNumber == 1)
   {
     constexpr size_t max_size = 10000;
-    int array[max_size] = {};
+    static int array[max_size] = {};
     int *fixedLengthArray = maslov::convert(matrix, rows,
         columns, array);
     result = maslov::findLocalMaximum(fixedLengthArray, rows, columns);
