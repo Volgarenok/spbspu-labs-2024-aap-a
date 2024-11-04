@@ -46,6 +46,7 @@ int main(int argc, char ** argv)
   input >> m >> n;
   if (m * n == 0)
   {
+    output << "0\n";
     return 0;
   }
   if (num == 1)
