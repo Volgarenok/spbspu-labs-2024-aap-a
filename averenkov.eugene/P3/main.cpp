@@ -64,9 +64,7 @@ int main(int argc, char** argv) {
     }
   size_t read = 0;
   if (!averenkov::input_matrix(input, matrix, m, n, read) || read != m * n) {
-    if (std::atoi(argv[1]) == 2) {
-        averenkov::destroy(matrix, m);
-    }
+    averenkov::destroy(matrix, m);
     std::cerr << "Read fail\n";
     return 2;
   }
