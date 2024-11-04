@@ -1,31 +1,24 @@
-#include "titleMatrix.h"
-#include <iostream>
 #include <limits>
+#include <algorithm>
 #include <cstring>
+#include "titleMatrix.h"
 
 int duhanina::outputAnswer(int * t, size_t m, size_t n)
 {
   int max_count_diag = m + n - 1;
-  int * sums = new int[max_count_diag];
-  int * diag_count = new int[max_count_diag];
-  for (size_t i = 0; i < m; ++i)
-  {
-    for (size_t j = 0; j < n; ++j)
-    {
-      int index_diag = j - (m - i - 1) + 2;
-      sums[index_diag] += t[i * n + j];
-      diag_count[index_diag]++;
-    }
-  }
   int min_sum = std::numeric_limits<int>::max();
-  for (int i = 0; i < max_count_diag; ++i)
+  for (size_t sum = 0; sum < max_count_diag; ++sum)
   {
-    if (diag_count[i] > 0 && sums[i] < min_sum)
+    int current_sum = 0;
+    for (size_t i = 0; i < m; ++i)
     {
-      min_sum = sums[i];
+      int j = sum - i;
+      if (j >= 0 && j < n)
+      {
+        current_sum += t[i * n + j];
+      }
     }
+    min_sum = std::min(min_sum, current_sum);
   }
-  delete[] sums;
-  delete[] diag_count;
   return min_sum;
 }

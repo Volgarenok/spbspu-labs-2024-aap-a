@@ -1,8 +1,8 @@
-#include "titleMatrix.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <stdexcept>
+#include "titleMatrix.h"
 
 int main(int argc, char ** argv)
 {
