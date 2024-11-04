@@ -3,7 +3,7 @@
 #include <limits>
 #include <iostream>
 
-std::istream & guseynov::inputMtx(std::istream &in, int *arr, size_t general, size_t & read)
+std::istream & guseynov::inputMtx(std::istream &in, int *arr, size_t general, size_t& read)
 {
   for (size_t i = 0; i < general; i++)
   {
