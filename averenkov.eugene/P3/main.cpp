@@ -73,9 +73,6 @@ int main(int argc, char** argv) {
   output << averenkov::num_col_lsr(matrix, m, n) << " ";
   output << m << " " << n << " ";
   averenkov::output_matrix(output, matrix, m, n);
-  if (std::atoi(argv[1]) == 2)
-  {
-    averenkov::destroy(matrix, m);
-  }
+  averenkov::destroy(matrix, m);
   return 0;
 }
