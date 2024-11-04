@@ -69,12 +69,19 @@ int main(int argc, char** argv)
   size_t read = 0;
   if (!averenkov::input_matrix(input, matrix, m, n, read) || read != m * n)
   {
+    averenkov::destroy(matrix, m);
     std::cerr << "Read fail\n";
     return 2;
   }
   output << averenkov::num_col_lsr(matrix, m, n) << " ";
   output << m << " " << n << " ";
   averenkov::output_matrix(output, matrix, m, n);
-  averenkov::destroy(matrix, m);
+  if(std::atoi(argv[1]) == 1)
+  {
+    delete matrix;
+  } else
+    {
+      averenkov::destroy(matrix, m);
+    }
   return 0;
 }
