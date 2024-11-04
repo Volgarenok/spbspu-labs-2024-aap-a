@@ -24,7 +24,7 @@ int main(int argc, char** argv)
     std::cout << "((\n";
     return 1;
   }
-  if ((cstring_len(argv[1]) == 1))
+  if ((evstyunichev::cstring_len(argv[1]) == 1))
   {
     int num = 0;
     num = atoi(argv[1]);
@@ -44,7 +44,7 @@ int main(int argc, char** argv)
       catch(const std::exception& e)
       {
         std::cerr << e.what() << "\n";
-        ddel(arr, num);
+        evstyunichev::ddel(arr, num);
         return 1;
       }
     }
@@ -54,16 +54,16 @@ int main(int argc, char** argv)
       return 1;
     }
     size_t read = 0;
-    if (input(fin, arr, m, n, read) && (read == n * m))
+    if (evstyunichev::input(fin, arr, m, n, read) && (read == n * m))
     {
-      std::cout << CntRowsNsm(arr, m, n) << "\n";
+      std::cout << evstyunichev::CntRowsNsm(arr, m, n) << "\n";
     }
     else
     {
-      ddel(arr, num);
+      evstyunichev::ddel(arr, num);
       return 2;
     }
-    ddel(arr, num);
+    evstyunichev::ddel(arr, num);
   }
   else
   {

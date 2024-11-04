@@ -1,14 +1,14 @@
 #include "matrix.hpp"
 #include <iostream>
 
-size_t cstring_len(char* s)
+size_t evstyunichev::cstring_len(char* s)
 {
   size_t len = 0;
   for (; s[len] != 0; len++);
   return len;
 }
 
-std::istream & input(std::istream & fin, int* arr, size_t m, size_t n, size_t &read)
+std::istream & evstyunichev::input(std::istream & fin, int* arr, size_t m, size_t n, size_t &read)
 {
   int num = 0;
   for (size_t i = 0; i < m; i++)
@@ -25,7 +25,7 @@ std::istream & input(std::istream & fin, int* arr, size_t m, size_t n, size_t &r
   return fin;
 }
 
-bool isRowNsm(int* arr, size_t i, size_t n)
+bool evstyunichev::isRowNsm(int* arr, size_t i, size_t n)
 {
   bool isNsm = true;
   for(size_t j = 1; j < n; j++)
@@ -38,17 +38,17 @@ bool isRowNsm(int* arr, size_t i, size_t n)
   return isNsm;
 }
 
-size_t CntRowsNsm(int* arr, size_t m, size_t n)
+size_t evstyunichev::CntRowsNsm(int* arr, size_t m, size_t n)
 {
   size_t ans = 0;
   for (size_t i = 0; i < m; i++)
   {
-    ans += isRowNsm(arr, i, n);
+    ans += evstyunichev::isRowNsm(arr, i, n);
   }
   return ans;
 }
 
-void ddel(int* arr, int num)
+void evstyunichev::ddel(int* arr, int num)
 {
   constexpr int dinamic_flag = 2;
   if (num == dinamic_flag)
