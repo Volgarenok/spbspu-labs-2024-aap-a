@@ -22,13 +22,20 @@ int main(int argc, char ** argv) {
   size_t rows = 0, columns = 0;
   infile >> rows >> columns;
 
-  std::string line;
-  if (!std::getline(infile, line))
+  infile.seekg(0, std::ios::end);
+  if (infile.tellg() == 0)
   {
     std::cerr << "Input file is empty" << "\n";
     return 1;
   }
   infile.seekg(0);
+
+  std::string line;
+  if (!std::getline(infile, line))
+  {
+    std::cout << "Error reading line from file" << "\n";
+    return 0;
+  }
 
   if (!(infile >> rows >> columns))
   {
