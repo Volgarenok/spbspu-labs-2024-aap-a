@@ -43,8 +43,12 @@ int main(int argc, char** argv)
   size_t read = 0;
   if (argv[1][0] == '1')
   {
+    if (general > 10000)
+    {
+      return 2;
+    }
     int arr[10000];
-    if (!(guseynov::inputMtx(input, arr, general, read)) || (read != general))
+    if ((!guseynov::inputMtx(input, arr, general, read)) || (read != general))
     {
       return 2;
     }
@@ -57,11 +61,11 @@ int main(int argc, char** argv)
     {
       arr = new int[general];
     }
-    catch (const std::logic_error &e)
+    catch (const std::bad_alloc& e)
     {
       return 2;
     }
-    if (!(guseynov::inputMtx(input, arr, general, read)) || (read != general))
+    if ((!guseynov::inputMtx(input, arr, general, read)) || (read != general))
     {
       delete[] arr;
       return 2;
