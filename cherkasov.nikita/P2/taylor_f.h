@@ -1,5 +1,5 @@
-#ifndef TAYLOR_FUN_H
-#define TAYLOR_FUN_H
+#ifndef TAYLOR_F_H
+#define TAYLOR_F_H
 
 #include <cstddef>
 

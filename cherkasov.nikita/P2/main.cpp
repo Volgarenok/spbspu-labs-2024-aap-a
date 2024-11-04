@@ -1,5 +1,5 @@
 #include <iostream>
-#include "taylor_fun.h"
+#include "taylor_f.h"
 #include <stdexcept>
 #include <cstring>
 
@@ -13,6 +13,7 @@ int main()
   const size_t col_width = std::strlen(errormsg);
   const size_t others_columns = 10;
   std::cout << "Enter the begining and end the interval and max number:\n";
+
   if (!(std::cin >> left >> right >> k))
   {
     std::cerr << "Input error. Exiting.\n";
@@ -23,9 +24,11 @@ int main()
     std::cerr << "check interval boundaries.\n";
     return 1;
   }
+
   for (double x = left; x <= right; x += step)
   {
     cherkasov::processValue(x, k, error, col_width, others_columns);
   }
+
     return 0;
 }

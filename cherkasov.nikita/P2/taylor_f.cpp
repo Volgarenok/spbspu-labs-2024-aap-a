@@ -1,4 +1,4 @@
-#include "taylor_fun.h"
+#include "taylor_f.h"
 #include <iostream>
 #include <cmath>
 #include <stdexcept>
@@ -14,6 +14,7 @@ namespace cherkasov
     {
       next *= x/i;
       result += next;
+
       if (std::abs(next) < error)
       {
         return result - x;
@@ -60,4 +61,5 @@ namespace cherkasov
       double exp_value = cherkasov::get_exp(x);
       cherkasov::get_table(x, taylor_value, exp_value, col_width, others_columns);
   }
+
 }
