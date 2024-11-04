@@ -1,3 +1,6 @@
+#include <iostream>
+#include <stdexcept>
+#include <cmath>
 int main()
 {
   double left = 0.0, right = 0.0;
@@ -12,5 +15,11 @@ int main()
   {
     std::cerr << "Wrong input\n";
     return 1;
+  }
+  const double error = 0.001;
+  const double step = 0.05;
+  for (auto i = left; i < right; i += step)
+  {
+    output();
   }
 }
