@@ -1,4 +1,4 @@
-#include "matrix.hpp"
+#include "osedfun.hpp"
 
 int brevnov::osed_fun(const int * t, size_t m, size_t n)
 {

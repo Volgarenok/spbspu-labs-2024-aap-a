@@ -1,4 +1,5 @@
 #include "matrix.hpp"
+#include "osedfun.hpp"
 #include <fstream>
 
 int main(int argc, char ** argv)
@@ -40,6 +41,11 @@ int main(int argc, char ** argv)
   {
     std::cerr << "Non-correct matrix parameters\n";
     return 2;
+  }
+  if ((m == 0) || (n == 0))
+  {
+    output << "0";
+    return 0;
   }
   int * mtx = nullptr;
   if (parameter == 1)
