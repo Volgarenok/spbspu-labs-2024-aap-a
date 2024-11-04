@@ -20,8 +20,9 @@ int main(int argc, char ** argv) {
     return 1;
   }
 
+  std::istringstream iss(line);
   size_t rows = 0, columns = 0;
-  if (!(infile >> rows >> columns))
+  if (!(iss >> rows >> columns))
   {
     std::cerr << "Error reading matrix dimensions" << "\n";
     return 1;
@@ -42,8 +43,8 @@ int main(int argc, char ** argv) {
     return 0;
   }
 
-  std::istringstream iss(line);
-  if (!(iss >> rows >> columns))
+  std::istringstream isst(line);
+  if (!(isst >> rows >> columns))
   {
     std::cout << "Not enough data for rows and columns" << "\n";
     return 0;
