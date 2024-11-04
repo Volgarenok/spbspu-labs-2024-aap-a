@@ -4,7 +4,6 @@
 #include <cstdlib>
 #include <cstring>
 #include <stdexcept>
-
 int main(int argc, char** argv)
 {
   if (argc < 4)
