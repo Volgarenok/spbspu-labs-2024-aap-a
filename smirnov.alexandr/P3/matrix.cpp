@@ -52,19 +52,14 @@ void smirnov::processMatrix(int * matrix, size_t rows, size_t columns)
 
 void smirnov::outputMatrix(std::ostream & output, int * matrix, size_t rows, size_t columns)
 {
-  output << matrix[0] << " ";
-  for (size_t i = 1; i < rows * columns; ++i)
+  for (size_t i = 0; i < rows; ++i)
   {
-    if (i % rows == 0)
+    for (size_t j = 0; j < columns; ++j)
     {
-      output << matrix[i] << "\n";
+      output << matrix[i * columns + j] << " ";
     }
-    else
-    {
-      output << matrix[i] << " ";
-    }
-  }
   output << "\n";
+  }
 }
 
 
