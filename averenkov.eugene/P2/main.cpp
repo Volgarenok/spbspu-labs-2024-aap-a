@@ -1,4 +1,4 @@
-#include "fnames.h"
+#include "taylor.h"
 #include <iostream>
 #include <cmath>
 #include <iomanip>
@@ -18,7 +18,8 @@ int main()
   }
   for (double i = left; i <= right; i += step) {
     averenkov::outline(i, k, error);
-    std::cout << "\0";
+    std::cout << "\n";
   }
   averenkov::outline(right, k, error);
+  std::cout << "\n";
 }
