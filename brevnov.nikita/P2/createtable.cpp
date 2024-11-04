@@ -1,5 +1,5 @@
 #include "createtable.hpp"
-#include <istream>
+#include <iostream>
 #include <cmath>
 #include <stdexcept>
 #include <cstring>
