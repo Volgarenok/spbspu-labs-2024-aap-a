@@ -2,7 +2,7 @@
 
 #include <stdexcept>
 
-void cmdProtection(int argc, char **argv)
+void guseynov::cmdProtection(int argc, char **argv)
 {
   constexpr int tasknum = 4;
   if (argc > tasknum)

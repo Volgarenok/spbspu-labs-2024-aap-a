@@ -3,7 +3,7 @@
 #include <limits>
 #include <iostream>
 
-std::istream & inputMtx(std::istream &in, int *arr, size_t general, size_t & read)
+std::istream & guseynov::inputMtx(std::istream &in, int *arr, size_t general, size_t & read)
 {
   for (size_t i = 0; i < general; i++)
   {
@@ -16,7 +16,7 @@ std::istream & inputMtx(std::istream &in, int *arr, size_t general, size_t & rea
   return in;
 }
 
-size_t searchNumLogMin(const int *arr, size_t general)
+size_t guseynov::searchNumLogMin(const int *arr, size_t general)
 {
   int min = std::numeric_limits < int >::max();
   size_t res = 0;

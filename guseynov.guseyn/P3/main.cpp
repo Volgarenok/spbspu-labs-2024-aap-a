@@ -4,7 +4,7 @@
 #include "cmdprotection.hpp"
 #include "matrix.hpp"
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   try
   {
@@ -24,7 +24,7 @@ int main(int argc, char **argv)
     return 1;
   }
   std::ofstream output(argv[3]);
-   if (!output.is_open())
+  if (!output.is_open())
   {
     std::cerr << "failed to open file";
     return 1;
@@ -58,8 +58,10 @@ int main(int argc, char **argv)
     }
     if (!(guseynov::inputMtx(input, arr, general, read)) || (read != general))
     {
+      delete[] arr;
       return 2;
     }
     output << guseynov::searchNumLogMin(arr, general) << "\n";
+    delete[] arr;
   }
 }
