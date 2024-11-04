@@ -35,6 +35,11 @@ int main(int argc, char** argv)
     return 2;
   }
   size_t general = m * n;
+  if (general == 0)
+  {
+    output << "0\n";
+    return 0;
+  }
   size_t read = 0;
   if (argv[1][0] == '1')
   {
@@ -43,7 +48,7 @@ int main(int argc, char** argv)
     {
       return 2;
     }
-    output << guseynov::searchNumLogMin(arr, general) << "\n";
+    output << guseynov::searchNumLocMin(arr, general) << "\n";
   }
   else
   {
@@ -61,7 +66,7 @@ int main(int argc, char** argv)
       delete[] arr;
       return 2;
     }
-    output << guseynov::searchNumLogMin(arr, general) << "\n";
+    output << guseynov::searchNumLocMin(arr, general) << "\n";
     delete[] arr;
   }
   return 0;
