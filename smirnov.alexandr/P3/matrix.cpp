@@ -1,5 +1,6 @@
 #include "matrix.hpp"
 #include <cstddef>
+#include <iostream>
 
 std::istream & smirnov::inputMatrix(std::istream & input, int * matrix, size_t rows, size_t cols)
 {

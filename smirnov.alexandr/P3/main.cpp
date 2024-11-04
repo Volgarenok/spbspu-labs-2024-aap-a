@@ -2,6 +2,7 @@
 #include <cctype>
 #include <cstdlib>
 #include <fstream>
+#include "matrix.hpp"
 
 int main(int argc, char ** argv)
 {
@@ -28,18 +29,19 @@ int main(int argc, char ** argv)
       std::cerr << "First parameter is not a number\n";
     }
   }
-  std::ifstream input();
+  std::ifstream input(argv[2]);
   size_t rows = 0;
-  size_t cols = 0;
-  input >> rows >> cols;
-  if (!input || rows <= 0 || cols <= 0)
+  size_t columns = 0;
+  input >> rows >> columns;
+  if (!input || rows <= 0 || columns <= 0)
   {
     std::cerr << "Invalid matrix dimensions\n";
   }
-  if (rows * cols > 10000)
+  if (rows * columns > 10000)
   {
     std::cerr << "The size of the matrix is exceeded\n";
   }
+  std::ofstream output(argv[3]);
   if (num == 1)
   {
     constexpr size_t size = 10000;
@@ -62,7 +64,7 @@ int main(int argc, char ** argv)
     catch (const std::bad_alloc & e)
     {
       std::cerr << "Out of memory\n";
-      delete[] matrix
+      delete[] matrix;
       return 1;
     }
     if (!smirnov::inputMatrix(input, matrix, rows, columns))
