@@ -1,6 +1,5 @@
 #ifndef TEYLOR_HPP
 #define TEYLOR_HPP
-#include <iostream>
 namespace brevnov
 {
   double f(const double x, size_t k, double error);
