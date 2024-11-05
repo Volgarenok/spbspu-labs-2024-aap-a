@@ -2,12 +2,12 @@
 #include <new>
 #include <cmath>
 
-float* karnauhova::smooth_matrix(int* t,size_t m,size_t n)
+float* karnauhova::smooth_matrix(int* t, size_t m, size_t n)
 {
   float* n_mtx = nullptr;
   try
   {
-    n_mtx = new float[m*n];
+    n_mtx = new float[m * n];
   }
   catch (const std::bad_alloc &e)
   {
@@ -26,44 +26,44 @@ float* karnauhova::smooth_matrix(int* t,size_t m,size_t n)
       if (j > 0)
       {
         sum += t[j - 1 + k];
-        count+=1;
+        count += 1;
         if (i > 0)
         {
           sum += t[j + k - n - 1];
-          count+=1;
+          count += 1;
         }
         if (i < (m - 1))
         {
           sum += t[j + k + n - 1];
-          count+=1;
+          count += 1;
         }
       }
       if (j < (n - 1))
       {
         sum += t[j + 1 + k];
-        count+=1;
+        count += 1;
         if (i > 0)
         {
           sum += t[j + k - n + 1];
-          count+=1;
+          count += 1;
         }
         if (i < (m - 1))
         {
           sum += t[j + k + n + 1];
-          count+=1;
+          count += 1;
         }
       }
       if (i > 0)
       {
         sum += t[j + k - n];
-        count+=1;
+        count += 1;
       }
       if (i < (m - 1))
       {
         sum += t[j + k + n];
-        count+=1;
+        count += 1;
       }
-    n_mtx[j+k] = round(sum/count * 10) / 10;;
+    n_mtx[j + k] = round(sum / count * 10) / 10;;
     }
     k += n;
   }

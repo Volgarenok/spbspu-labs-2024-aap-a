@@ -2,7 +2,6 @@
 #include <fstream>
 #include <cstdlib>
 #include <cstddef>
-#include "create_matrix.hpp"
 #include "incomplete_matrix.hpp"
 #include "input_output.hpp"
 
@@ -55,7 +54,7 @@ int main(int argc, char ** argv)
   {
     try
     {
-      t = karnauhova::ct_matrix(m, n);;
+      t = new int[m * n];
     }
     catch(const std::bad_alloc & e)
     {
