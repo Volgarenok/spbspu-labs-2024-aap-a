@@ -24,14 +24,17 @@ namespace cherkasov
 
     throw std::logic_error("math-error");
   }
+
   double get_exp(double x)
   {
     return std::exp(x) - x;
   }
+
   void generating_exception()
   {
     std::cerr << "<MATH ERROR>" << "\n";
   }
+
   void get_table(double x, double getTaylor_value, double get_exp_value, size_t col_width, size_t others_columns)
   {
     std::cout.width(others_columns);
@@ -41,6 +44,7 @@ namespace cherkasov
     std::cout.width(others_columns);
     std::cout << get_exp_value << "\n";
   }
+
   void processValue(double x, size_t k, double error, size_t col_width, size_t others_columns)
   {
     double taylor_value;
