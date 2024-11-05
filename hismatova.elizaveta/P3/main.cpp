@@ -32,8 +32,8 @@ int main(int argc, char ** argv)
   in_par >> m >> n;
   if (!in_par)
   {
-     std::cout << "wrong file\n";
-     return 1;
+    std::cout << "wrong file\n";
+    return 1;
   }
   out_par << m << " " << n << "\n";
   size_t read = 0;
@@ -77,8 +77,8 @@ int main(int argc, char ** argv)
   }
   else
   {
-     std::cerr << "first argv is wrong\n";
-     return 1;
+    std::cerr << "first argv is wrong\n";
+    return 1;
   }
   return 0;
 }

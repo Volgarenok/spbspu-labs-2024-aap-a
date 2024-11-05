@@ -19,7 +19,7 @@ std::istream & hismatova::input_matrix(std::istream & in, int * matrix, size_t m
 
 void hismatova::output_result(std::ostream & out, int * matrix, size_t m, size_t n)
 {
-    out << hismatova::find_longest(matrix, m, n) << "\n";
+  out << hismatova::find_longest(matrix, m, n) << "\n";
 }
 
 int hismatova::find_longest(int * matrix, size_t m, size_t n)
@@ -45,6 +45,7 @@ int hismatova::find_longest(int * matrix, size_t m, size_t n)
   }
   return ans;
 }
+
 bool hismatova::is_digit(char c)
 {
   return (c >= '0' && c <= '9');
