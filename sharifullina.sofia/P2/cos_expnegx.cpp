@@ -8,12 +8,12 @@ double sharifullina::cos(double x, size_t k, double error)
   double result = 1 - next;
   for (size_t i = 1; i < k - 1; ++i)
   {
-     next *= (x * x) / ((2 * i + 1) * (2 * i + 2));
-     result += (i % 2 ? next : next * -1);
+    next *= (x * x) / ((2 * i + 1) * (2 * i + 2));
+    result += (i % 2 ? next : next * -1);
   }
   if (std::abs(result - cos_cmath(x)) > error)
   {
-     throw std::logic_error("MATH_ERROR");
+    throw std::logic_error("MATH_ERROR");
   }
   return result;
 }
