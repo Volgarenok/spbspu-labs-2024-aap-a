@@ -1,4 +1,10 @@
+#include "dynamicstrings.h"
+#include <iostream>
+
 int main()
 {
-  return 0;
+  char * line = nullptr;
+  line = savintsev::inputEndlessString(std::cin, '\n');
+  std::cout << line << '\n';
+  delete[] line;
 }
