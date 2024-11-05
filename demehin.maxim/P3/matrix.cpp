@@ -1,4 +1,4 @@
-#include "matrix_funcs.h"
+#include "matrix.h"
 
 int* demehin::alloc(size_t k)
 {

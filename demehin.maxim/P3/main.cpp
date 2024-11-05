@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "cnt_row_nsm.h"
-#include "matrix_funcs.h"
+#include "matrix.h"
 
 int main(int argc, char** argv)
 {

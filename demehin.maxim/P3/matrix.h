@@ -1,5 +1,5 @@
-#ifndef MATRIX_FUNCS_H
-#define MATRIX_FUNCS_H
+#ifndef MATRIX_H
+#define MATRIX_H
 
 #include <cstddef>
 #include <iostream>
