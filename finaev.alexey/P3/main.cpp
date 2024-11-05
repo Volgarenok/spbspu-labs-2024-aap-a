@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
   if (num == 1)
   {
     int matrix[10000];
-    if(!finaev::input_matrix(input, matrix, size_matrix))
+    if (!finaev::input_matrix(input, matrix, size_matrix))
     {
       std::cerr << "Fail input" << "\n";
       return 2;
@@ -59,7 +59,7 @@ int main(int argc, char ** argv)
   else
   {
     int *dynamic_matrix = new int[size_matrix];
-    if(!finaev::input_matrix(input, dynamic_matrix, size_matrix))
+    if (!finaev::input_matrix(input, dynamic_matrix, size_matrix))
     {
       delete[] dynamic_matrix;
       std::cerr << "Fail input" << "\n";
