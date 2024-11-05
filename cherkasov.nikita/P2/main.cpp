@@ -1,7 +1,7 @@
 #include <iostream>
-#include "taylor_f.h"
 #include <stdexcept>
 #include <cstring>
+#include "taylor_f.h"
 
 int main()
 {
@@ -30,5 +30,5 @@ int main()
     cherkasov::processValue(x, k, error, col_width, others_columns);
   }
 
-    return 0;
+  return 0;
 }
