@@ -11,7 +11,7 @@ int main()
   {
     str = alymova::create(size);
   }
-  catch(const std::overflow_error& e)
+  catch (const std::overflow_error& e)
   {
     free(str);
     std::cerr << e.what() << '\n';
@@ -31,7 +31,7 @@ int main()
       {
         str = alymova::increase_string(str, size);
       }
-      catch(const std::overflow_error& e)
+      catch (const std::overflow_error& e)
       {
         free(str);
         std::cerr << e.what() << '\n';
@@ -41,6 +41,7 @@ int main()
   }
   if (size_now == 0)
   {
+    free(str);
     std::cerr << "Empty string\n";
     return 1;
   }
