@@ -27,6 +27,7 @@ char * savintsev::inputEndlessString(std::istream & in, char endChar)
         return t;
       }
     }
+    t[i] = '0';
     in >> std::noskipws >> t[i];
     if (t[i] == endChar)
     {
@@ -35,6 +36,11 @@ char * savintsev::inputEndlessString(std::istream & in, char endChar)
     ++i;
   }
   t[i + 1] = '\0';
+  if (!in)
+  {
+    delete[] t;
+    return nullptr;
+  }
   return t;
 }
 
