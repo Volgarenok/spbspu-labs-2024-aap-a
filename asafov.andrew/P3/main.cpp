@@ -26,6 +26,7 @@ int main(int argc, char** argv)
         }
         matrixHandling(mtx, a[0], a[1]);
         matrixPush(mtx, argv[2], a[0], a[1]);
+        matrixPush(matrixHandlingSanctions(mtx, a[0], a[1]), argv[2]);
     }
     else if (argv[0] == "2")
     {
@@ -42,6 +43,7 @@ int main(int argc, char** argv)
         }
         matrixHandling(mtx, a[0], a[1]);
         matrixPush(mtx, argv[2], a[0], a[1]);
+        matrixPush(matrixHandlingSanctions(mtx, a[0], a[1]), argv[2]);
         delete[] mtx;
     }
     else

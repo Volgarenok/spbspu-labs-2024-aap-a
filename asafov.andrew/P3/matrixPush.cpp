@@ -1,4 +1,4 @@
-#include <fstream>
+clude <fstream>
 #include "func.h"
 
 void matrixPush(int* mtx, char* output, int n, int m)
@@ -8,4 +8,5 @@ void matrixPush(int* mtx, char* output, int n, int m)
     for (int i = 0; i < n * m; i++) {
         fout << mtx[i] << ' ';
     }
+    fout.close();
 }
