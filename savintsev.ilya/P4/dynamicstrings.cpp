@@ -62,7 +62,10 @@ size_t savintsev::getNumIdenticalInRow(char * c)
   size_t k = 0;
   for (size_t i = 0; c[i] != '\0'; ++i)
   {
-    k = (c[i] == c[i + 1] ? ++k : k);
+    if (c[i] == c[i + 1])
+    {
+      ++k;
+    }
   }
   return k;
 }
