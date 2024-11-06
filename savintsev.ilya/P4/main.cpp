@@ -5,6 +5,6 @@ int main()
 {
   char * line = nullptr;
   line = savintsev::inputEndlessString(std::cin, '\n');
-  std::cout << line << '\n';
+  std::cout << savintsev::getNumIdenticalInRow(line) << '\n';
   delete[] line;
 }

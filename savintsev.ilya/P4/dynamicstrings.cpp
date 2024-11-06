@@ -56,3 +56,13 @@ char * savintsev::increaseStringSize(char * old, size_t new_size)
   delete[] old;
   return created;
 }
+
+size_t savintsev::getNumIdenticalInRow(char * c)
+{
+  size_t k = 0;
+  for (size_t i = 0; c[i] != '\0'; ++i)
+  {
+    k = (c[i] == c[i + 1] ? ++k : k);
+  }
+  return k;
+}
