@@ -39,6 +39,11 @@ int main()
       }
     }
   }
+  if (size_now == 0)
+  {
+    std::cerr << "Empty string\n";
+    return 1;
+  }
   str[size_now] = '\0';
   str = alymova::upper_string(str);
   std::cout << str << "\n";
