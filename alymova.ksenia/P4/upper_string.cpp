@@ -1,4 +1,4 @@
-#include "string.h"
+#include "dynamic_string.h"
 #include <cctype>
 #include <cstddef>
 char* alymova::upper_string(char* str)

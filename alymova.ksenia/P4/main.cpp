@@ -1,17 +1,22 @@
 #include <iostream>
 #include <stdexcept>
-#include "string.h"
+#include <cstddef>
+#include "dynamic_string.h"
 int main()
 {
   size_t size = 10;
-  char* str = reinterpret_cast< char* >(malloc((size + 1) * sizeof(char)));
-  if (str == nullptr)
+  constexpr int ratio = 2;
+  char* str = nullptr;
+  try
+  {
+    str = alymova::create(size);
+  }
+  catch(const std::overflow_error& e)
   {
     free(str);
-    std::cerr << "Error: memory not allocate for string\n";
+    std::cerr << e.what() << '\n';
     return 1;
   }
-  str[size] = '\0';
   char next = '\0';
   size_t size_now = 0;
   std::cin >> std::noskipws;
@@ -21,17 +26,20 @@ int main()
     size_now += 1;
     if (size_now == size)
     {
-      size *= 2;
+      size *= ratio;
       try
       {
-        str = alymova::increase(str, size);
+        str = alymova::increase_string(str, size);
       }
       catch(const std::overflow_error& e)
       {
+        free(str);
         std::cerr << e.what() << '\n';
+        return 1;
       }
     }
   }
+  str[size_now] = '\0';
   str = alymova::upper_string(str);
   std::cout << str << "\n";
   free(str);
