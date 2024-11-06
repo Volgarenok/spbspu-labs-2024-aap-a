@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstring>
 #include <cctype>
-#include <stdlib.h>
+#include <cstdlib>
 
 int petrov::check_arguments(int argc, char ** argv)
 {
