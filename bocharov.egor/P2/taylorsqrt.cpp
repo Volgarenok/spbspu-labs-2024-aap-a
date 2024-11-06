@@ -29,6 +29,6 @@ double bocharov::f(double x, size_t k, double error)
   {
     throw std::logic_error("Math error");
   }
-  return resultat; 
+  return resultat;
 }
 
