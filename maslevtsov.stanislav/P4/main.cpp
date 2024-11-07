@@ -20,13 +20,29 @@ std::size_t isSameSymbols(const char* const str1, const char* const str2)
   return 0;
 }
 
+char* getline(std::istream& in, char* string, size_t capacity, char stop)
+{
+  char symbol = '\0';
+  std::size_t stringIndex = 0;
+  constexpr std::size_t stringCapacity = 10;
+
+  std::noskipws(in);
+  while ((in >> symbol) && (symbol != stop))
+  {
+    if (stringIndex == stringCapacity)
+    {}
+    string[stringIndex++] = symbol;
+  }
+  std::skipws(in);
+
+  return string;
+}
+
 int main()
 {
   constexpr char constString[25] = "~9R hg,3hX i%htQ/K*Y.35T";
-  char symbol = '\0';
-  constexpr std::size_t stringCapacity = 10;
-  std::size_t stringIndex = 0;
   char* dynamicString = nullptr;
+  constexpr std::size_t stringCapacity = 10;
 
   try
   {
@@ -38,14 +54,7 @@ int main()
     return 1;
   }
 
-  std::noskipws(std::cin);
-  while ((std::cin >> symbol) && (symbol != '\n'))
-  {
-    if (stringIndex == stringCapacity)
-    {}
-     dynamicString[stringIndex] = symbol;
-  }
-  std::skipws(std::cin);
+  getline(std::cin, dynamicString, stringCapacity, '\n');
 
   std::cout << isSameSymbols(constString, dynamicString);
   std::cout << '\n';
