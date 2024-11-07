@@ -14,6 +14,36 @@ std::istream& averenkov::input_matrix(std::istream& in, int* t, size_t m, size_t
   return in;
 }
 
+int averenkov::max_sum_sdg(int* t, size_t m, size_t n)
+{
+  int max = 0;
+  for (size_t start_col = 1; start_col < n; ++start_col)
+  {
+    int sum = 0;
+    for (size_t i = 0, j = start_col; i < m && j < n; ++i, ++j)
+    {
+      sum += t[i * n + j];
+    }
+      if(sum > max)
+      {
+        max = sum;
+      }
+  }
+  for (size_t start_row = 1; start_row < m; ++start_row)
+  {
+    int sum = 0;
+    for (size_t i = start_row, j = 0; i < m && j < n; ++i, ++j)
+    {
+      sum += t[i * n + j];
+    }
+    if(sum > max)
+    {
+      max = sum;
+    }
+  }
+  return max;
+}
+
 size_t averenkov::num_col_lsr(int* t, size_t m, size_t n)
 {
   size_t longest_id = 0;

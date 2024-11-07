@@ -1,7 +1,6 @@
 #include "matrixFunc.h"
 #include <iostream>
 #include <fstream>
-#include <cstdlib>
 #include <stdexcept>
 #include <cstring>
 int main(int argc, char** argv)
@@ -44,6 +43,10 @@ int main(int argc, char** argv)
     output << averenkov::num_col_lsr(matrix, m, n) << " ";
     output << m << " " << n << " ";
     averenkov::output_matrix(output, matrix, m, n);
+    output << "\n";
+    output << averenkov::max_sum_sdg(matrix, m, n) << " ";
+    output << m << " " << n << " ";
+    averenkov::output_matrix(output, matrix, m, n);
   }
   else
   {
@@ -70,10 +73,11 @@ int main(int argc, char** argv)
     output << averenkov::num_col_lsr(matrix, m, n) << " ";
     output << m << " " << n << " ";
     averenkov::output_matrix(output, matrix, m, n);
-    if (std::atoi(argv[1]) == 2)
-    {
-      delete[] matrix;
-    }
+    output << "\n";
+    output << averenkov::max_sum_sdg(matrix, m, n) << " ";
+    output << m << " " << n << " ";
+    averenkov::output_matrix(output, matrix, m, n);
+    delete[] matrix;
   }
   return 0;
 }
