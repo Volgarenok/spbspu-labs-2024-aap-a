@@ -1,8 +1,9 @@
-#include "matrixFunc.h"
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
 #include <cstring>
+#include "matrixFunc.h"
+
 int main(int argc, char** argv)
 {
   if (argc < 4)
