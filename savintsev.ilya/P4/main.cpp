@@ -4,7 +4,7 @@
 int main()
 {
   char * line = nullptr;
-  line = savintsev::inputEndlessString(std::cin, '\0');
+  line = savintsev::inputEndlessString(std::cin, '\n');
   if (line == nullptr)
   {
     std::cerr << "Input error\n";
