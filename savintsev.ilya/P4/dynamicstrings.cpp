@@ -10,7 +10,6 @@ namespace savintsev
 char * savintsev::inputEndlessString(std::istream & in)
 {
   size_t memory = savintsev::MEMSIZE;
-  char endChar = '\0';
   char * t = new char[memory];
   size_t i = 0;
   while (true)
@@ -29,7 +28,7 @@ char * savintsev::inputEndlessString(std::istream & in)
       }
     }
     in >> std::noskipws >> t[i];
-    if (t[i] == endChar)
+    if (in.eof())
     {
       break;
     }
