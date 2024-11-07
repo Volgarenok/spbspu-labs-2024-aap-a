@@ -14,7 +14,7 @@ size_t shramko::countGoodColoumns(const int* mtrx, size_t cnt_row, size_t cnt_co
         break;
       }
     }
-    if (breakPoint == true)
+    if (breakPoint)
     {
       ++answer;
     }
