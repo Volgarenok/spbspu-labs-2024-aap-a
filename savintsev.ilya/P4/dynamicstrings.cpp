@@ -7,9 +7,10 @@ namespace savintsev
   constexpr size_t MEMSIZE = 5;
 }
 
-char * savintsev::inputEndlessString(std::istream & in, char endChar)
+char * savintsev::inputEndlessString(std::istream & in)
 {
   size_t memory = savintsev::MEMSIZE;
+  char endChar = '\0';
   char * t = new char[memory];
   size_t i = 0;
   while (true)
@@ -35,25 +36,12 @@ char * savintsev::inputEndlessString(std::istream & in, char endChar)
     ++i;
   }
   t[i + 1] = '\0';
-  if (!in.good())
-  {
-    delete[] t;
-    return nullptr;
-  }
   return t;
 }
 
 char * savintsev::increaseStringSize(char * old, size_t new_size)
 {
-  char * created = nullptr;
-  try
-  {
-    created = new char[new_size];
-  }
-  catch (const std::bad_alloc & e)
-  {
-    throw;
-  }
+  char * created = new char[new_size];
   for (size_t i = 0; old[i] != '\0'; ++i)
   {
     created[i] = old[i];
