@@ -28,6 +28,9 @@ int main()
 
     for (auto i = left; i < right; i += step)
     {
-
+        ivanova::Output(i, max, error);
+        std::cout << '\n';
     }
+    ivanova::Output(right, max, error);
+    std::cout << "\n";
 }
