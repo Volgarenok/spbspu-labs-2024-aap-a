@@ -1,11 +1,12 @@
 #include <fstream>
+#include <cstddef>
 #include "matrix.hpp"
 #include "find_osed.hpp"
 #include "intcheck.hpp"
 
 int main(int argc, char ** argv)
 {
-  int long long m = -1, n = -1;
+  ptrdiff_t m = -1, n = -1;
   int testmode = 0;
   int auxiliary_array[10000] = {};
   if (argc < 4)
