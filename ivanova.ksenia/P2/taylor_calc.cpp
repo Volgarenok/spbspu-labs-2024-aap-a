@@ -11,6 +11,7 @@ double ivanova::factorial(int n)
     }
     return rslt;
 }
+
 double ivanova::arctg(double x, size_t k, double error)
 {
     double next = x;

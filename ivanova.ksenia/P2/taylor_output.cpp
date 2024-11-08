@@ -3,8 +3,6 @@
 #include <iomanip>
 #include <cstring>
 
-
-
 void ivanova::Output(double x, size_t k, double error)
 {
     const size_t MathErr = std::strlen("<MATH ERROR>") + 3;
@@ -36,6 +34,4 @@ void ivanova::Output(double x, size_t k, double error)
     std::cout << " " << std::setw(Cols) << ivanova::stdExp(x);
     std::cout << " " << std::setw(Cols) << ivanova::stdArctg(x);
     std::cout << " " << std::setw(Cols) << ivanova::stdExp(x) + stdArctg(x);
-
-
 }

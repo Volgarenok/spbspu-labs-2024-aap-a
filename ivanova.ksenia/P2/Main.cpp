@@ -5,7 +5,6 @@
 
 int main()
 {
-
     const double error = 0.042;
     const double step = 0.05;
     double left = 0.0, right = 0.0;
