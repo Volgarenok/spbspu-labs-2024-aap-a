@@ -6,15 +6,11 @@ int main()
 {
   size_t size = 10;
   constexpr int ratio = 2;
-  char* str = nullptr;
-  try
-  {
-    str = alymova::create(size);
-  }
-  catch (const std::overflow_error& e)
+  char* str = alymova::create(size);
+  if (str == nullptr)
   {
     free(str);
-    std::cerr << e.what() << '\n';
+    std::cerr << "Error: memory not allocate for string\n";
     return 1;
   }
   char next = '\0';
@@ -27,16 +23,15 @@ int main()
     if (size_now == size)
     {
       size *= ratio;
-      try
-      {
-        str = alymova::increase_string(str, size);
-      }
-      catch (const std::overflow_error& e)
+      char* str_new = alymova::create(size);
+      if (str_new == nullptr)
       {
         free(str);
-        std::cerr << e.what() << '\n';
+        free(str_new);
+        std::cerr << "Error: memory not allocate for string\n";
         return 1;
       }
+      str = alymova::increase_string(str, str_new, size);
     }
   }
   if (size_now == 0)

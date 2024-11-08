@@ -4,7 +4,7 @@
 namespace alymova
 {
   char* create(size_t size);
-  char* increase_string(char* str, size_t size);
+  char* increase_string(char* str, char* size_new, size_t size);
   char* upper_string(char* str);
 }
 #endif
