@@ -62,7 +62,6 @@ int main(int argc, char** argv)
     }
     catch(const std::bad_alloc & e)
     {
-      delete[] mtx;
       std::cerr << "Out of memory\n";
       return 1;
     }

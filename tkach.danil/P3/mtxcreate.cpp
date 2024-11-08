@@ -10,7 +10,6 @@ double* tkach::createMtx2(const int* const mtx, const size_t str, const size_t s
   }
   catch (const std::bad_alloc & e)
   {
-    delete[] mtx2;
     return nullptr;
   }
   for (size_t i = 0; i < str; ++i)
