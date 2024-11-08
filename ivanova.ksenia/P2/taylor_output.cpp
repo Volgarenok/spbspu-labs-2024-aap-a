@@ -1,7 +1,7 @@
-#include "taylor.h"
 #include <iostream>
 #include <iomanip>
 #include <cstring>
+#include "taylor.h"
 
 void ivanova::Output(double x, size_t k, double error)
 {
