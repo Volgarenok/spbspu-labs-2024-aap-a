@@ -31,7 +31,7 @@ int main()
         std::cerr << "Error: memory not allocate for string\n";
         return 1;
       }
-      str = alymova::increase_string(str, str_new, size);
+      str = alymova::increase_string(str, str_new);
     }
   }
   if (size_now == 0)
