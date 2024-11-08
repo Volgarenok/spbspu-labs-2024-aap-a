@@ -1,5 +1,5 @@
-#ifndef FUNCTION_HPP
-#define FUNCTION_HPP
+#ifndef TAYLORCALC_HPP
+#define TAYLORCALC_HPP
 #include <cstddef>
 
 namespace shabalin
