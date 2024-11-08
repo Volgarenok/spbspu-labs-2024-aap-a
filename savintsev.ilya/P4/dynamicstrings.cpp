@@ -4,37 +4,33 @@
 
 namespace savintsev
 {
-  constexpr size_t MEMSIZE = 5;
+  constexpr size_t MEMORY_SIZE = 5;
 }
 
 char * savintsev::inputEndlessString(std::istream & in)
 {
-  size_t memory = savintsev::MEMSIZE;
-  char * t = new char[memory];
+  size_t capacity = savintsev::MEMORY_SIZE;
+  char * t = new char[capacity];
   size_t i = 0;
-  while (true)
+  while (!in.eof())
   {
-    if (i == (memory - 1))
+    if (i == (capacity - 1))
     {
       t[i] = '\0';
-      memory += memory;
+      capacity += capacity;
       try
       {
-        t = savintsev::increaseStringSize(t, memory);
+        t = savintsev::increaseStringSize(t, capacity);
       }
       catch (const std::bad_alloc & e)
       {
-        return t;
+        delete[] t;
+        return nullptr;
       }
     }
-    in >> std::noskipws >> t[i];
-    if (in.eof())
-    {
-      break;
-    }
-    ++i;
+    in >> std::noskipws >> t[i++];
   }
-  t[i + 1] = '\0';
+  t[i - 1] = '\0';
   return t;
 }
 
@@ -51,6 +47,10 @@ char * savintsev::increaseStringSize(char * old, size_t new_size)
 
 size_t savintsev::getNumIdenticalInRow(char * c)
 {
+  if (c == nullptr)
+  {
+    return 0;
+  }
   size_t k = 0;
   for (size_t i = 0; c[i] != '\0'; ++i)
   {
