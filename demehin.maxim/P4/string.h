@@ -4,7 +4,7 @@
 
 namespace demehin
 {
-  char* inputString(std::istream& in, char stop);
+  char* copyString(char* str, size_t size);
 }
 
 #endif
