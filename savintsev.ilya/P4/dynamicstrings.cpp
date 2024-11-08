@@ -4,13 +4,21 @@
 
 namespace savintsev
 {
-  constexpr size_t MEMORY_SIZE = 5;
+  constexpr size_t MEMORY_SIZE = 8;
 }
 
-char * savintsev::inputEndlessString(std::istream & in)
+char * savintsev::inputEndlessStr(std::istream & in)
 {
   size_t capacity = savintsev::MEMORY_SIZE;
-  char * t = new char[capacity];
+  char * t = nullptr;
+  try
+  {
+    t = allocMemoryStr(capacity);
+  }
+  catch (const std::bad_alloc & e)
+  {
+    return nullptr;
+  }
   size_t i = 0;
   while (!in.eof())
   {
@@ -20,7 +28,7 @@ char * savintsev::inputEndlessString(std::istream & in)
       capacity += capacity;
       try
       {
-        t = savintsev::increaseStringSize(t, capacity);
+        t = savintsev::increaseStrSize(t, capacity);
       }
       catch (const std::bad_alloc & e)
       {
@@ -34,7 +42,7 @@ char * savintsev::inputEndlessString(std::istream & in)
   return t;
 }
 
-char * savintsev::increaseStringSize(char * old, size_t new_size)
+char * savintsev::increaseStrSize(char * old, size_t new_size)
 {
   char * created = new char[new_size];
   for (size_t i = 0; old[i] != '\0'; ++i)
@@ -45,13 +53,17 @@ char * savintsev::increaseStringSize(char * old, size_t new_size)
   return created;
 }
 
-size_t savintsev::getNumIdenticalInRow(char * c)
+int savintsev::getNumIdenticalInRow(char * c)
 {
   if (c == nullptr)
   {
-    return 0;
+    return -1;
   }
-  size_t k = 0;
+  if (c[0] == '\0')
+  {
+    return -1;
+  }
+  int k = 0;
   for (size_t i = 0; c[i] != '\0'; ++i)
   {
     if (c[i] == c[i + 1])
@@ -60,4 +72,10 @@ size_t savintsev::getNumIdenticalInRow(char * c)
     }
   }
   return k;
+}
+
+char * savintsev::allocMemoryStr(size_t cap)
+{
+  char * t = new char[cap];
+  return t;
 }
