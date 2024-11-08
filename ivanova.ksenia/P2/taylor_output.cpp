@@ -3,6 +3,8 @@
 #include <iomanip>
 #include <cstring>
 
+
+
 void ivanova::Output(double x, size_t k, double error)
 {
     const size_t MathErr = std::strlen("<MATH ERROR>") + 3;
