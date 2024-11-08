@@ -44,7 +44,7 @@ int main(int argc, char** argv)
   {
     try
     {
-      matrix2 = demehin::alloc(k);
+      matrix2 = new int[k];
     }
     catch (const std::bad_alloc & e)
     {
