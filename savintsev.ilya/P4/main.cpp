@@ -13,6 +13,7 @@ int main()
   if (line[0] == '\0')
   {
     std::cerr << "No characters to convert\n";
+    delete[] line;
     return 1;
   }
   std::cout << savintsev::getNumIdenticalInRow(line) << '\n';
