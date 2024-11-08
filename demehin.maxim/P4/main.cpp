@@ -4,7 +4,8 @@
 
 int main()
 {
-  size_t max_size = 100;
+  char base_str[] = 'strok_lit';
+  size_t max_size = 5;
   char* str = nullptr;
   try
   {

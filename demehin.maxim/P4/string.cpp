@@ -22,3 +22,7 @@ char* demehin::copyString(char* str, size_t size)
   return new_str;
 }
 
+char* (char* str, char* base_str)
+{
+  size_t i = 0;
+}
