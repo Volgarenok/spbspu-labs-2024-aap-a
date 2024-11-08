@@ -53,17 +53,13 @@ char * savintsev::increaseStrSize(char * old, size_t new_size)
   return created;
 }
 
-int savintsev::getNumIdenticalInRow(char * c)
+size_t savintsev::getNumIdenticalInRow(char * c)
 {
   if (c == nullptr)
   {
-    return -1;
+    return 0;
   }
-  if (c[0] == '\0')
-  {
-    return -1;
-  }
-  int k = 0;
+  size_t k = 0;
   for (size_t i = 0; c[i] != '\0'; ++i)
   {
     if (c[i] == c[i + 1])

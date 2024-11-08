@@ -10,12 +10,11 @@ int main()
     std::cerr << "Failure to allocate memory\n";
     return 1;
   }
-  int k = savintsev::getNumIdenticalInRow(line);
-  if (k == -1)
+  if (line[0] == '\0')
   {
     std::cerr << "No characters to convert\n";
     return 1;
   }
-  std::cout << k << '\n';
+  std::cout << savintsev::getNumIdenticalInRow(line) << '\n';
   delete[] line;
 }
