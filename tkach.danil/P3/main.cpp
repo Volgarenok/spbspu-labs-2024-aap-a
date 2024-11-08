@@ -60,7 +60,7 @@ int main(int argc, char** argv)
     {
       mtx = new int[str * stl];
     }
-    catch(const std::bad_alloc & e)
+    catch (const std::bad_alloc & e)
     {
       std::cerr << "Out of memory\n";
       return 1;
