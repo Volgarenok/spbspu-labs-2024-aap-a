@@ -44,6 +44,11 @@ int main()
   //char final_str[128] = {};
 
   ustr = demehin::getUniqueSymbols(str, ustr);
+  int i = 0;
+  while (ustr[i] != '\0')
+  {
+    std::cout << ustr[i++] << '\n';
+  }
   std::cout << ustr << '\n';
   std::cout << str << '\n';
   delete[] str;

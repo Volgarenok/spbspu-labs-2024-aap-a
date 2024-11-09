@@ -32,10 +32,9 @@ char* demehin::copyString(char* str, size_t size)
 char* demehin::getUniqueSymbols(char* str, char* ustr)
 {
   size_t iter = 0;
-
+  size_t unique_size = 0;
   while (str[iter] != '\0')
   {
-    size_t unique_size = 0;
     bool isUnique = true;
 
     for (size_t i = 0; i < 128; ++i)
@@ -49,7 +48,7 @@ char* demehin::getUniqueSymbols(char* str, char* ustr)
 
     if (isUnique)
     {
-      ustr[unique_size] = str[iter];
+      ustr[unique_size++] = str[iter];
     }
     iter += 1;
   }
