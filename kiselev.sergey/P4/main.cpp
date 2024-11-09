@@ -1,27 +1,31 @@
 #include <ios>
 #include <iostream>
-#include "transferArray.h"
+#include <stdexcept>
+#include "resizeArray.h"
 int main()
 {
-  size_t k = 3;
-  char* arr = static_cast<char*>(malloc(k * sizeof(char)));
+  size_t length = 3;
+  char* arr = static_cast<char*>(malloc(length * sizeof(char)));
   size_t count = 0;
   std::noskipws(std::cin);
-  for (size_t j = 0; j != '\n'; ++j)
+  while (arr[count] != '\n')
   {
-    if (count >= k - 1)
+    if (count >= length - 1)
     {
-      size_t m = k;
-      k += 5;
-      char* arr2 = static_cast<char*>(malloc(k * sizeof(char)));
-      kiselev::transferArr(arr2, arr, m);
-      free(arr);
-      char* arr = static_cast<char*>(malloc(k * sizeof(char)));
-      kiselev::transferArr(arr, arr2, m);
-      free(arr2);
+      size_t timeLenght = length;
+      length += 5;
+      try
+      {
+        arr = kiselev::resizeArr(arr, length, timeLenght);
+      }
+      catch (const std::logic_error& e)
+      {
+        std::cerr << "Out of memory\n";
+        free(arr);
+        return 1;
+      }
     }
-    std::cin >> arr[j];
-    if (!std::cin >> arr[j])
+    if (!(std::cin >> arr))
     {
       std::cerr << "Incorrect input\n";
       return 1;
