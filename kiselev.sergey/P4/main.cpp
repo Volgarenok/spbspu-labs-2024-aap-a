@@ -7,6 +7,11 @@ int main()
 {
   size_t length = 3;
   char* arr = static_cast<char*>(malloc(length * sizeof(char)));
+  if (arr == nullptr)
+  {
+    std::cerr << "Out of memory\n";
+    return 1;
+  }
   size_t count = 0;
   std::noskipws(std::cin);
   if (!std::cin >> arr[count])
