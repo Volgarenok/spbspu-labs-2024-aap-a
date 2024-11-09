@@ -1,6 +1,7 @@
 #ifndef WORKWITHSTRING_HPP
 #define WORKWITHSTRING_HPP
 #include <iostream>
+#include <cstddef>
 namespace guseyn
 {
   char * inputLine(std::istream & in, char stop);
