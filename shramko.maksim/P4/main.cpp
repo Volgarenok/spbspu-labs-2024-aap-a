@@ -29,9 +29,9 @@ int main()
       if (new_str == nullptr)
       {
         std::cerr << "Memory error!\n";
-	free(str);
-	free(new_str);
-	return 1;
+        free(str);
+        free(new_str);
+        return 1;
       }
       str = new_str;
     }
