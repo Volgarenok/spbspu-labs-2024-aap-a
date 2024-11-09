@@ -12,10 +12,6 @@ char * guseyn::inputLine(std::istream & in, char stop)
   size_t size = 0;
   arr = static_cast < char* > (malloc(min));
   arrcopy = static_cast < char* > (malloc(min));
-  if ((arr == NULL) || (arrcopy == NULL))
-  {
-    exit(1);
-  }
   std::noskipws(in);
   while ((c != stop) && (in >> c))
   {
