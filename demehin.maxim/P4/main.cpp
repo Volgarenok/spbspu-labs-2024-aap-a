@@ -4,9 +4,11 @@
 
 int main()
 {
-  char base_str[] = 'strok_lit';
+  //const char base_str[] = "strok_lit";
   size_t max_size = 5;
   char* str = nullptr;
+  char* ustr = nullptr;
+  ustr = new char[128];
   try
   {
     str = new char[max_size];
@@ -39,8 +41,10 @@ int main()
     str[size++] = temp;
   }
 
+  //char final_str[128] = {};
 
-
+  ustr = demehin::getUniqueSymbols(str, ustr);
+  std::cout << ustr << '\n';
   std::cout << str << '\n';
   delete[] str;
 }

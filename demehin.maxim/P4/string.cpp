@@ -22,7 +22,37 @@ char* demehin::copyString(char* str, size_t size)
   return new_str;
 }
 
-char* (char* str, char* base_str)
+//char* (char* str, char* base_str, char* final_str)
+//{
+  //size_t iter1 = 0;
+  //size_t iter2 = 0;
+  //size_t iter3 = 0;
+//}
+
+char* demehin::getUniqueSymbols(char* str, char* ustr)
 {
-  size_t i = 0;
+  size_t iter = 0;
+
+  while (str[iter] != '\0')
+  {
+    size_t unique_size = 0;
+    bool isUnique = true;
+
+    for (size_t i = 0; i < 128; ++i)
+    {
+      if (str[iter] == str[i] && iter != i)
+      {
+        isUnique = false;
+        break;
+      }
+    }
+
+    if (isUnique)
+    {
+      ustr[unique_size] = str[iter];
+    }
+    iter += 1;
+  }
+
+  return ustr;
 }
