@@ -8,4 +8,5 @@ void printLine(char* line)
     std::cout << line[iter];
     ++iter;
   }
+  std::cout << "\n";
 }
