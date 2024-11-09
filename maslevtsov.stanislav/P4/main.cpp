@@ -5,7 +5,7 @@ int main()
 {
   constexpr char constString[25] = "~9R hg,3hX i%htQ/K*Y.35T";
   char* dynamicString = nullptr;
-  constexpr std::size_t stringCapacity = 10;
+  std::size_t stringCapacity = 10;
 
   try
   {

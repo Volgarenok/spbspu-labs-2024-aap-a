@@ -35,18 +35,15 @@ void maslevtsov::expandString(char* string, std::size_t& capacity)
 
 std::size_t maslevtsov::isSameSymbols(const char *const str1, const char *const str2)
 {
-  std::size_t counterArray[256] = {0};
-
   for (std::size_t i = 0; str1[i] != '\0'; ++i)
   {
-    ++counterArray[str1[i]];
-  }
-  for (std::size_t i = 0; str2[i] != '\0'; ++i)
-  {
-    if (counterArray[str2[i]])
+    for (std::size_t j = 0; str2[j] != '\0'; ++j)
     {
-      return 1;
-      break;
+      if (str1[i] == str2[j])
+      {
+        return 1;
+        break;
+      }
     }
   }
 
