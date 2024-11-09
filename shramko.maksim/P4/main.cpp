@@ -2,6 +2,7 @@
 #include <ios>
 #include <cstddef>
 #include <fstream>
+#include "functions.hpp"
 
 int main()
 {
@@ -17,7 +18,7 @@ int main()
 	size_t current_size = 0;
 	char c = '\n';
 
-	std::noskipsw(std::cin);
+	std::noskipws(std::cin);
 	while ((std::cin >> c) && (c != '\n'))
 	{
 		if (current_size == memory)
@@ -25,13 +26,17 @@ int main()
 			constexpr size_t multiplier = 2;
 			memory *= multiplier;
 			char* new_str = shramko::createBiggerStrMemory(memory, str);
-			free(str)
+			if (new_str == nullptr)
+			{
+				return 1;
+			}
+			free(str);
 			str = new_str;
-			free(new_str)
+			free(new_str);
 		}
 		str[current_size++] = c;
 	}
-	std::skipsw(std::cin);
+	std::skipws(std::cin);
 
 	if (current_size == 0)
 	{
@@ -41,6 +46,5 @@ int main()
 	}
 
 	std::cout << shramko::countConsecutiveIdenticalSymbols(str) << '\n';
-	free(str)
-	free(new_str)
+	free(str);
 }

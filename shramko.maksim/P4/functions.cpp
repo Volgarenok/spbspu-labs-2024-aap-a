@@ -1,5 +1,6 @@
 #include "functions.hpp"
 #include <cstdlib>
+#include <iostream>
 
 char* shramko::createBiggerStrMemory(size_t memory, char* str)
 {
@@ -9,7 +10,7 @@ char* shramko::createBiggerStrMemory(size_t memory, char* str)
 		std::cerr << "Creating bigger memory error!\n";
 		free(str);
 		free(new_str);
-		return 1;
+		return nullptr;
 	}
 
 	for (size_t i = 0; str[i] != '\n'; i++)
