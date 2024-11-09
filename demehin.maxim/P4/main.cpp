@@ -1,7 +1,7 @@
 #include "string.h"
 #include <iostream>
 #include <ios>
-
+/
 int main()
 {
   constexpr char stop = '\n';
