@@ -1,6 +1,20 @@
 #include "string_functions.hpp"
 #include <stdexcept>
 
+char* maslevtsov::expandString(char* string, std::size_t& capacity)
+{
+  capacity *= 2;
+  char* newString = new char[capacity];
+
+  for (std::size_t i = 0; string[i] != '\0'; ++i)
+  {
+    newString[i] = string[i];
+  }
+  delete[] string;
+
+  return newString;
+}
+
 char* maslevtsov::getline(std::istream& in)
 {
   std::size_t stringCapacity = 32;
@@ -13,11 +27,10 @@ char* maslevtsov::getline(std::istream& in)
   {
     return nullptr;
   }
-  char symbol = '\0';
   std::size_t stringIndex = 0;
 
   std::noskipws(in);
-  while ((in >> symbol) && (symbol != '\n'))
+  while (!in.eof())
   {
     if (stringIndex == stringCapacity - 1)
     {
@@ -32,26 +45,12 @@ char* maslevtsov::getline(std::istream& in)
         return nullptr;
       }
     }
-    string[stringIndex++] = symbol;
+    in >> string[stringIndex++];
   }
   std::skipws(in);
-  string[stringIndex] = '\0';
+  string[stringIndex - 1] = '\0';
 
   return string;
-}
-
-char* maslevtsov::expandString(char* string, std::size_t& capacity)
-{
-  capacity *= 2;
-  char* newString = new char[capacity];
-
-  for (std::size_t i = 0; string[i] != '\0'; ++i)
-  {
-    newString[i] = string[i];
-  }
-  delete[] string;
-
-  return newString;
 }
 
 std::size_t maslevtsov::isSameSymbols(const char* const str1, const char* const str2)
