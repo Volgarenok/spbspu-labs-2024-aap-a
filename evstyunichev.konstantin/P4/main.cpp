@@ -20,5 +20,4 @@ int main()
   evstyunichev::output(str, std::cout);
   std::cout << '\n';
   delete[] str;
-  return 0;
 }
