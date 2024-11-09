@@ -4,12 +4,11 @@
 
 int main()
 {
-  std::size_t max = 2;
-  constexpr const int coef = 2;
+  std::size_t maxSize = 2;
   char* str = nullptr;
   try
   {
-    str = new char[max + 1];
+    str = new char[maxSize + 1];
   }
   catch (const std::bad_alloc& e)
   {
@@ -17,6 +16,7 @@ int main()
     delete[] str;
     return 1;
   }
+
   std::size_t size = 0;
   char c = '\0';
   std::noskipws(std::cin);
@@ -28,13 +28,14 @@ int main()
       delete[] str;
       return 1;
     }
-    if (size == max)
+    if (size == maxSize)
     {
-      max += coef;
+      constexpr const int coef = 2;
+      maxSize += coef;
       char* newStr = nullptr;
       try
       {
-        newStr = new char[max + 1];
+        newStr = new char[maxSize + 1];
       }
       catch (const std::bad_alloc& e)
       {
@@ -43,7 +44,7 @@ int main()
         delete[] str;
         return 1;
       }
-      for (size_t i = 0; i < max; ++i)
+      for (size_t i = 0; i < maxSize; ++i)
       {
         newStr[i] = str[i];
       }
@@ -53,6 +54,6 @@ int main()
     str[size++] = c;
   }
   std::skipws(std::cin);
-  std::cout << latinRemove(str, size) << "\n";
+  std::cout << aleksandrov::latinRemove(str, size) << "\n";
 }
 

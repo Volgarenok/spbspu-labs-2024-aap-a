@@ -1,7 +1,6 @@
 #include "latinRemove.h"
-#include <cstddef>
 
-char* latinRemove(char* str, int size)
+char* aleksandrov::latinRemove(char* str, int size)
 {
   for (int i = 0; i < size; )
   {

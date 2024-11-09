@@ -3,7 +3,10 @@
 
 #include <cctype>
 
-char* latinRemove(char* str, int size);
+namespace aleksandrov
+{
+  char* latinRemove(char* str, int size);
+}
 
 #endif
 
