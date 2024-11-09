@@ -3,7 +3,7 @@
 #include <cstddef>
 namespace kiselev
 {
-  char* transferArr(char* arr, char* fromArr, size_t k);
+  void transferArr(char* arr, char* fromArr, size_t k);
 }
 #endif
 
