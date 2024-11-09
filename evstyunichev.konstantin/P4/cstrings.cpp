@@ -40,7 +40,7 @@ void evstyunichev::getstring(char *str, std::istream &in, char end)
 
 int evstyunichev::isgl(char c)
 {
-  char good[] = {"aeiouy"};
+  char good[] = {"aeiouyAEIOUY"};
   int flag = 0;
   for (size_t i = 0; i < 6; i++)
   {
