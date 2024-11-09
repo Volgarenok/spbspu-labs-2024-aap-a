@@ -3,8 +3,8 @@
 #include <iostream>
 namespace evstyunichev
 {
-  void getstring(char *, std::istream &, char);
-  void string_resize(char *, size_t);
+  int getstring(char *, std::istream &, char);
+  int string_resize(char *, size_t);
   void RMV_VOW(char *);
   int isgl(char);
   void output(char *, std::ostream &);

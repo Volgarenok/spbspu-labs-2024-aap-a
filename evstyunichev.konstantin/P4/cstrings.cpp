@@ -4,25 +4,33 @@
 
 constexpr size_t default_size = 256;
 
-void evstyunichev::string_resize(char *s, size_t sz)
+int evstyunichev::string_resize(char *s, size_t sz)
 {
-  char *temp = new char[sz + 1];
-  size_t i = 0;
-  while (s[i])
+  try
   {
-    temp[i] = s[i];
-    i++;
+    char *temp = new char[sz + 1];
+    size_t i = 0;
+    while (s[i])
+    {
+      temp[i] = s[i];
+      i++;
+    }
+    delete[] s;
+    s = temp;
+    return 1;
   }
-  delete[] s;
-  s = temp;
-  return;
+  catch(const std::bad_alloc& e)
+  {
+    return 0;
+  }
 }
 
 
-void evstyunichev::getstring(char *str, std::istream &in, char end)
+int evstyunichev::getstring(char *str, std::istream &in, char end)
 {
   size_t sz = 0, mx = default_size;
-  string_resize(str, mx);
+  int res = 1;
+  res = string_resize(str, mx);
   std::noskipws(in);
   unsigned char c = 0;
   while ((in >> c) && (c != end))
@@ -31,11 +39,11 @@ void evstyunichev::getstring(char *str, std::istream &in, char end)
     if(sz > mx)
     {
       mx *= 2;
-      string_resize(str, mx);
+      res = string_resize(str, mx);
     }
     str[sz - 1] = c;
   }
-  return;
+  return res;
 }
 
 int evstyunichev::isgl(char c)
@@ -71,7 +79,7 @@ void evstyunichev::RMV_VOW(char *str)
   return;
 }
 
-void output(char *str, std::ostream &out)
+void evstyunichev::output(char *str, std::ostream &out)
 {
   size_t i = 0;
   while (str[i])

@@ -6,13 +6,8 @@ int main()
 {
   char *str = new char[1];
   str[0] = 0;
-  try
+  if(!(evstyunichev::getstring(str, std::cin, '\n')))
   {
-    evstyunichev::getstring(str, std::cin, '\n');
-  }
-  catch(const std::exception &e)
-  {
-    std::cerr << e.what() << '\n';
     delete[] str;
     return 1;
   }
