@@ -7,5 +7,6 @@ namespace evstyunichev
   void string_resize(char *, size_t);
   void RMV_VOW(char *);
   int isgl(char);
+  void output(char *, std::ostream &);
 }
 #endif

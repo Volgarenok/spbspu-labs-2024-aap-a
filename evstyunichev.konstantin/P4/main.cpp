@@ -17,7 +17,8 @@ int main()
     return 1;
   }
   evstyunichev::RMV_VOW(str);
-  std::cout << str << '\n';
+  evstyunichev::output(str, std::cout);
+  std::cout << '\n';
   delete[] str;
   return 0;
 }

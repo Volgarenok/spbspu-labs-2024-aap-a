@@ -70,3 +70,12 @@ void evstyunichev::RMV_VOW(char *str)
   }
   return;
 }
+
+void output(char *str, std::ostream &out)
+{
+  size_t i = 0;
+  while (str[i])
+  {
+    out << str[i++];
+  }
+}
