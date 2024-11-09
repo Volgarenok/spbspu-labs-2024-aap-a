@@ -8,7 +8,7 @@ int main()
   char* str = nullptr;
   try
   {
-    str = new char[maxSize + 1];
+    str = new char[maxSize + 1]{};
   }
   catch (const std::bad_alloc& e)
   {
@@ -35,7 +35,7 @@ int main()
       char* newStr = nullptr;
       try
       {
-        newStr = new char[maxSize + 1];
+        newStr = new char[maxSize + 1]{};
       }
       catch (const std::bad_alloc& e)
       {
@@ -55,5 +55,6 @@ int main()
   }
   std::skipws(std::cin);
   std::cout << aleksandrov::latinRemove(str, size) << "\n";
+  delete[] str;
 }
 
