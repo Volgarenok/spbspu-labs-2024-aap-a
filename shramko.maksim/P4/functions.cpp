@@ -1,7 +1,7 @@
 #include "functions.hpp"
 #include <cstdlib>
 
-char* shramko::createBiggerStrMemory(memory, str)
+char* shramko::createBiggerStrMemory(size_t memory, char* str)
 {
 	char* new_str = reinterpret_cast< char* >(malloc((memory + 1) * sizeof(char)));
 	if (new_str == nullptr)
@@ -18,4 +18,17 @@ char* shramko::createBiggerStrMemory(memory, str)
 	}
 
 	return new_str;
+}
+
+size_t shramko::countConsecutiveIdenticalSymbols(char* str)
+{
+	size_t result = 0;
+	for (size_t i = 0; str[i] != '\n'; i++)
+	{
+		if (str[i] == str[i + 1])
+		{
+			result++;
+		}
+	}
+	return result;
 }

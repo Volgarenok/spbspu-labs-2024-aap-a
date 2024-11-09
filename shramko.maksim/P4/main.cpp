@@ -39,4 +39,8 @@ int main()
 		free(str);
 		return 1;
 	}
+
+	std::cout << shramko::countConsecutiveIdenticalSymbols(str) << '\n';
+	free(str)
+	free(new_str)
 }

@@ -3,7 +3,8 @@
 
 namespase shramko
 {
-	createBiggerStrMemory(size_t memory, char* str);
+	char* createBiggerStrMemory(size_t memory, char* str);
+	size_t countСonsecutiveIdenticalSymbols(char* str);
 }
 
 #endif
