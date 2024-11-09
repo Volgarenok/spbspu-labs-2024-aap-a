@@ -23,4 +23,5 @@ int main()
   }
   add_digit_symb(firstLine, secondLine);
   printLine(firstLine);
+  free(firstLine);
 }

@@ -11,8 +11,7 @@ char* getLine(size_t& capacity)
   }
   char elem = ' ';
   size_t cnt = 0;
-  std::noskipws(std::cin);
-  while (std::cin >> elem && elem != '\n' && elem != ' ')
+  while (std::cin >> std::noskipws >> elem && elem != '\n')
   {
     if (cnt == capacity)
     {
@@ -24,6 +23,10 @@ char* getLine(size_t& capacity)
     }
     line[cnt] = elem;
     ++cnt;
+  }
+  if (!std::cin)
+  {
+    return nullptr;
   }
   std::skipws(std::cin);
   line[cnt] = '\0';
