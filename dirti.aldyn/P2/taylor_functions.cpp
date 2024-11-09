@@ -7,19 +7,17 @@
 
 double dirti::math(double x)
 {
-  return std::exp(-1 * (x * x));
+  return std::asin(x);
 }
 
 double dirti::taylor(double x, size_t k, double error)
 {
-  double result = 1.0;
-  double num = 1.0;
-  double factorial = 1.0;
-  for (size_t i = 1; i < k; ++i)
+  double result = x;
+  double num = x;
+  for (double i = 1.0; i < (k * 2.0 - 2.0); i += 2.0)
   {
-    num = num * x * x * (-1);
-    factorial *= i;
-    result += (num/factorial);
+    num *= (i / (i + 1)) * (i / (i + 2)) * pow(x, 2.0);
+    result += num;
   }
   if (!(result <= math(x) + error && result >= math(x) - error))
   {
