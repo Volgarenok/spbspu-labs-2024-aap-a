@@ -1,60 +1,63 @@
 #include <lineinput.hpp>
 #include <iostream>
 #include <memory>
-#include <exception>
-char* getLine(std::istream input, size_t size)
+#include <cstddef>
+char* getLine(size_t& capacity)
 {
-  size_t capacity = size + 1;
-  char* line = nullptr;
-  try
+  char* line = reinterpret_cast<char*>(malloc(capacity));
+  if (line == nullptr)
   {
-    char* line = reinterpret_cast<char*>(malloc(capacity));
+    return nullptr;
   }
-  catch (std::bad_alloc())
-  {
-    throw;
-  }
-  char elem = '\n';
+  char elem = ' ';
   size_t cnt = 0;
-  while (input >> elem && elem != '\n')
+  std::noskipws(std::cin);
+  while (std::cin >> elem && elem != '\n' && elem != ' ')
   {
-    if (cnt == size)
+    if (cnt == capacity)
     {
-      line[cnt + 1] = '\n';
-      try
+      line = reallocate(line, capacity);
+      if (line == nullptr)
       {
-        line = reallocate(line, capacity);
-      }
-      catch (std::bad_alloc())
-      {
-        throw;
+        return nullptr;
       }
     }
     line[cnt] = elem;
     ++cnt;
   }
-  if (!input)
-  {
-    free(line);
-    throw std::logic_error("ERROR: not a value\n");
-  }
-  line[cnt + 1] = '\n';
+  std::skipws(std::cin);
+  line[cnt] = '\0';
   return line;
 }
-char* reallocate(char* line, size_t capacity)
+char* reallocate(char* line, size_t& capacity)
 {
-  size_t capacity = capacity * 2;
-  char* newline = nullptr;
-  try
+  capacity = capacity * 2;
+  char* newline = reinterpret_cast<char*>(malloc(capacity));
+  if (newline == nullptr)
   {
-    char* newline = reinterpret_cast<char*>(malloc(capacity));
-  }
-  catch (std::bad_alloc())
-  {
-    throw;
+    free(line);
+    return nullptr;
   }
   size_t newcnt = 0;
-  while (line[newcnt] != '\n')
+  while (line[newcnt] != '\0')
+  {
+    newline[newcnt] = line[newcnt];
+    ++newcnt;
+  }
+  free(line);
+  return newline;
+}
+char* reallocate(char* line, size_t& capacity, size_t addSize)
+{
+  capacity = capacity + addSize;
+  char* newline = reinterpret_cast<char*>(malloc(capacity));
+  if (newline == nullptr)
+  {
+    free(line);
+    return nullptr;
+  }
+  size_t newcnt = 0;
+  while (line[newcnt] != '\0')
   {
     newline[newcnt] = line[newcnt];
     ++newcnt;

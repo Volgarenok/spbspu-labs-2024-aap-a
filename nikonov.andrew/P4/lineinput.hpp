@@ -2,6 +2,7 @@
 #define LINEINPUT_HPP
 #include <iostream>
 #include <cstddef>
-char* getLine(std::istream input, size_t size);
-char* reallocate(char* line, size_t capacity);
+char* getLine(size_t size);
+char* reallocate(char* line, size_t& capacity);
+char* reallocate(char* line, size_t& capacity, size_t addSize);
 #endif
