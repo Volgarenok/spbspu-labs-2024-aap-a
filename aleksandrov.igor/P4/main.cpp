@@ -20,8 +20,9 @@ int main()
   std::size_t size = 0;
   char c = '\0';
   std::noskipws(std::cin);
-  while ((std::cin >> c) && (c != '\n'))
+  while (c != '\n')
   {
+    std::cin >> c;
     if (!std::cin)
     {
       std::cerr << "ERROR: Input was incorrect!\n";
@@ -44,7 +45,7 @@ int main()
         delete[] str;
         return 1;
       }
-      for (size_t i = 0; i < maxSize; ++i)
+      for (size_t i = 0; i < maxSize - coef; ++i)
       {
         newStr[i] = str[i];
       }
