@@ -1,7 +1,7 @@
 #include "string.h"
 #include <iostream>
 #include <ios>
-/
+
 int main()
 {
   constexpr char stop = '\n';
@@ -11,46 +11,25 @@ int main()
   char* ustr1 = nullptr;
   char* ustr2 = nullptr;
   char* final_str = nullptr;
-  final_str = new char[askii_size];
-  ustr1 = new char[askii_size];
-  ustr2 = new char[askii_size];
-  try
+
+ try
   {
     str = new char[max_size];
+    ustr1 = new char[askii_size];
+    ustr2 = new char[askii_size];
+    final_str = new char[askii_size];
   }
   catch (const std::bad_alloc& e)
   {
     std::cerr << "Out of memory\n";
+    delete[] ustr1;
+    delete[] ustr2;
+    delete[] final_str;
+    delete[] str;
     return 1;
   }
 
-//  size_t size = 0;
-//  char temp = '\0';
   std::noskipws(std::cin);
-
-//  while ((std::cin >> temp) && (temp != '\n'))
-//  {
-//    if (size == max_size)
-//    {
-//      max_size *= 2;
-//      try
-//      {
-//        str = demehin::copyString(str, max_size);
-//      }
-//      catch (const std::bad_alloc& e)
-//      {
-//        std::cerr << "Out of memory\n";
-//        return 1;
-//      }
-//    }
-//    str[size++] = temp;
-//  }
-//  if (!std::cin)
-//  {
-//    std::cerr << "Input error\n";
-//    return 1;
-//  }
-
   try
   {
     str = demehin::getString(std::cin, stop, str, max_size);
@@ -73,4 +52,5 @@ int main()
   delete[] ustr1;
   delete[] str;
   delete[] ustr2;
+  delete[] final_str;
 }
