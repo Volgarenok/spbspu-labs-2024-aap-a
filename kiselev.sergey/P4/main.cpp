@@ -9,6 +9,13 @@ int main()
   char* arr = static_cast<char*>(malloc(length * sizeof(char)));
   size_t count = 0;
   std::noskipws(std::cin);
+  if (!std::cin >> arr[count])
+  {
+    std::cerr << "Incorrect input\n";
+    free(arr);
+    return 1;
+  }
+  count++;
   while (arr[count] != '\n')
   {
     if (count >= length - 1)
