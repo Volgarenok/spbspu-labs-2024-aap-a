@@ -10,8 +10,22 @@ char * rm_digits (const char * original, char * new_str)
     }
     ++j;
   }
+  return new_str;
 }
 
 int main()
 {
+  size_t n = 0;
+  char * first_str = nullptr;
+  //input + узнать сколько символов
+  char * result_str = nullptr;
+  try {
+    result_str = new char [n];
+  } catch (const std::bad_alloc & e) {
+    std::cerr << "Memory error.";
+    return 1;
+  }
+
+  rm_digits(first_str, result_str);
+  std::cout << result_str;
 }
