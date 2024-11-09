@@ -11,3 +11,12 @@ int  brevnov::input_matrix(std::ifstream & in, int * t, size_t m, size_t n)
   }
   return m*n;
 }
+
+void brevnov::output_matrix(std::ofstream & out, int * t, size_t m, size_t n)
+{
+  out << t[i];
+  for (size_t i = 1; i < m * n; ++i)
+  {
+    out << " " << t[i];
+  }
+}

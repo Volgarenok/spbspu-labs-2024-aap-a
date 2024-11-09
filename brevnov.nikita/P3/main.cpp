@@ -2,6 +2,7 @@
 #include <cstddef>
 #include "matrix.hpp"
 #include "find_osed.hpp"
+#include "fll_inc_wav.hpp"
 #include "intcheck.hpp"
 
 int main(int argc, char ** argv)
@@ -74,6 +75,9 @@ int main(int argc, char ** argv)
     return 2;
   }
   output << brevnov::find_osed(mtx, m, n);
+  output << "\n";
+  brevnov::fll_inc_wav(t, m, n);
+  brevnov::output_matrix(output, t, m, n);
   output << "\n";
   if (testmode == 2)
   {
