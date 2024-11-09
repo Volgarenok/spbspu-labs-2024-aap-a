@@ -3,8 +3,9 @@
 void printLine(char* line)
 {
   size_t iter = 0;
-  while (line[iter] != '\n')
+  while (line[iter] != '\0')
   {
     std::cout << line[iter];
+    ++iter;
   }
 }

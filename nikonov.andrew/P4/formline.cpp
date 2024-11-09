@@ -3,22 +3,17 @@
 #include <cctype>
 #include <iostream>
 #include <exception>
-size_t cntDigit(char* str)
+size_t cntDgt(char* str)
 {
-  char elem = ' ';
   size_t cnt = 0;
   size_t iter = 0;
-  while (std::cin >> elem && elem != '\0')
+  while (str[iter] != '\0')
   {
     if (std::isdigit(str[iter]))
     {
       ++cnt;
     }
     ++iter;
-  }
-  if (!std::cin)
-  {
-    throw std::logic_error("Error: not a value");
   }
   return cnt;
 }

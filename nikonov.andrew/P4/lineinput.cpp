@@ -1,4 +1,4 @@
-#include <lineinput.hpp>
+#include "lineinput.hpp"
 #include <iostream>
 #include <memory>
 #include <cstddef>
@@ -44,6 +44,7 @@ char* reallocate(char* line, size_t& capacity)
     newline[newcnt] = line[newcnt];
     ++newcnt;
   }
+  newline[newcnt] = '\0';
   free(line);
   return newline;
 }

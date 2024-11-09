@@ -2,6 +2,7 @@
 #include <cctype>
 #include <cstddef>
 #include "lineinput.hpp"
+#include "lineoutput.hpp"
 #include "formline.hpp"
 int main()
 {
@@ -21,4 +22,5 @@ int main()
     return 1;
   }
   add_digit_symb(firstLine, secondLine);
+  printLine(firstLine);
 }
