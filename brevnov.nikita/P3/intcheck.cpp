@@ -1,5 +1,5 @@
 #include "intcheck.hpp"
-#include <iostream>
+#include <cstddef>
 #include <string>
 
 int brevnov::intcheck(char * input)

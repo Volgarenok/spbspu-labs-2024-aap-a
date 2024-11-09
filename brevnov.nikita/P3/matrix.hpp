@@ -1,6 +1,6 @@
 #ifndef MATRIX_HPP
 #define MATRIX_HPP
-#include <iosfwd>
+#include <cstddef>
 #include <fstream>
 
 namespace brevnov

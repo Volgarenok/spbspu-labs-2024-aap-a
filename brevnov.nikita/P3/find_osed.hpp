@@ -1,6 +1,6 @@
 #ifndef FIND_OSED_HPP
 #define FIND_OSED_HPP
-#include <iostream>
+#include <cstddef>
 
 namespace brevnov
 {
