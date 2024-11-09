@@ -3,21 +3,18 @@
 
 int main()
 {
-  constexpr char constString[25] = "~9R hg,3hX i%htQ/K*Y.35T";
-  char* dynamicString = nullptr;
-  std::size_t stringCapacity = 10;
-
-  try
+  constexpr char constString[25] = "~9R hg,3hX i%htQ/K*Y.35\0";
+  char* dynamicString = maslevtsov::getline(std::cin);
+  if (dynamicString == nullptr)
   {
-    dynamicString = new char[stringCapacity + 1];
-  }
-  catch(const std::bad_alloc& e)
-  {
-    std::cerr << e.what() << '\n';
+    std::cerr << "Error: memory not allocated\n";
     return 1;
   }
-
-  maslevtsov::getline(std::cin, dynamicString, stringCapacity, '\n');
+  if (dynamicString[0] == '\0')
+  {
+    std::cerr << "Error: input is empty\n";
+    return 1;
+  }
 
   std::cout << maslevtsov::isSameSymbols(constString, dynamicString);
   std::cout << '\n';

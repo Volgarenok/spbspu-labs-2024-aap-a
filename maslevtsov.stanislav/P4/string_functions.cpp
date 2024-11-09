@@ -1,26 +1,46 @@
 #include "string_functions.hpp"
+#include <stdexcept>
 
-char* maslevtsov::getline(std::istream& in, char* string, std::size_t capacity, char stop)
+char* maslevtsov::getline(std::istream& in)
 {
+  std::size_t stringCapacity = 32;
+  char* string = nullptr;
+  try
+  {
+    string = new char[stringCapacity];
+  }
+  catch (const std::bad_alloc& e)
+  {
+    return nullptr;
+  }
   char symbol = '\0';
   std::size_t stringIndex = 0;
 
   std::noskipws(in);
-  while ((in >> symbol) && (symbol != stop))
+  while ((in >> symbol) && (symbol != '\n'))
   {
-    if (stringIndex == capacity)
+    if (stringIndex == stringCapacity - 1)
     {
       string[stringIndex] = '\0';
-      maslevtsov::expandString(string, capacity);
+      try
+      {
+        string = maslevtsov::expandString(string, stringCapacity);
+      }
+      catch (const std::bad_alloc& e)
+      {
+        delete[] string;
+        return nullptr;
+      }
     }
     string[stringIndex++] = symbol;
   }
   std::skipws(in);
+  string[stringIndex] = '\0';
 
   return string;
 }
 
-void maslevtsov::expandString(char* string, std::size_t& capacity)
+char* maslevtsov::expandString(char* string, std::size_t& capacity)
 {
   capacity *= 2;
   char* newString = new char[capacity];
@@ -30,10 +50,11 @@ void maslevtsov::expandString(char* string, std::size_t& capacity)
     newString[i] = string[i];
   }
   delete[] string;
-  string = newString;
+
+  return newString;
 }
 
-std::size_t maslevtsov::isSameSymbols(const char *const str1, const char *const str2)
+std::size_t maslevtsov::isSameSymbols(const char* const str1, const char* const str2)
 {
   for (std::size_t i = 0; str1[i] != '\0'; ++i)
   {
