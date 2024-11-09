@@ -4,11 +4,15 @@
 
 int main()
 {
-  //const char base_str[] = "strok_lit";
+  char base_str[] = "strok_lit";
   size_t max_size = 5;
   char* str = nullptr;
-  char* ustr = nullptr;
-  ustr = new char[128];
+  char* ustr1 = nullptr;
+  char* ustr2 = nullptr;
+  char* final_str = nullptr;
+  final_str = new char[128];
+  ustr1 = new char[128];
+  ustr2 = new char[128];
   try
   {
     str = new char[max_size];
@@ -41,15 +45,17 @@ int main()
     str[size++] = temp;
   }
 
-  //char final_str[128] = {};
+  
 
-  ustr = demehin::getUniqueSymbols(str, ustr);
-  int i = 0;
-  while (ustr[i] != '\0')
-  {
-    std::cout << ustr[i++] << '\n';
-  }
-  std::cout << ustr << '\n';
-  std::cout << str << '\n';
+  ustr1 = demehin::getUniqueSymbols(str, ustr1);
+  ustr2 = demehin::getUniqueSymbols(base_str, ustr2);
+  final_str = demehin::unc_sym(ustr1, ustr2, final_str);
+  std::cout << ustr1 << '\n';
+  std::cout << ustr2 << '\n';
+  std::cout << final_str << '\n';
+
+
+  delete[] ustr1;
   delete[] str;
+  delete[] ustr2;
 }
