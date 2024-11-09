@@ -5,8 +5,8 @@
 
 namespace shramko
 {
-	char* createBiggerStrMemory(size_t memory, char* str);
-	size_t countConsecutiveIdenticalSymbols(char* str);
+  char* createBiggerStrMemory(size_t memory, char* str);
+  size_t countConsecutiveIdenticalSymbols(char* str);
 }
 
 #endif
