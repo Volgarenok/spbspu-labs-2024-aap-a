@@ -5,26 +5,26 @@
 char* shramko::createBiggerStrMemory(size_t memory, char* str)
 {
 	char* new_str = reinterpret_cast< char* >(malloc((memory + 1) * sizeof(char)));
-	if (new_str == nullptr)
-	{
-		std::cerr << "Creating bigger memory error!\n";
-		free(str);
-		free(new_str);
-		return nullptr;
-	}
 
-	for (size_t i = 0; str[i] != '\n'; i++)
+	for (size_t i = 0; str[i] != '\0'; i++)
 	{
 		new_str[i] = str[i];
 	}
-
+	free(str);
+	new_str[memory] = '\0';
 	return new_str;
 }
 
 size_t shramko::countConsecutiveIdenticalSymbols(char* str)
 {
 	size_t result = 0;
-	for (size_t i = 0; str[i] != '\n'; i++)
+
+	if (str == nullptr)
+	{
+		return 0;
+	}
+
+	for (size_t i = 0; str[i] != '\0'; i++)
 	{
 		if (str[i] == str[i + 1])
 		{
