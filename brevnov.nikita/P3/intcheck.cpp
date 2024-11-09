@@ -1,6 +1,7 @@
 #include "intcheck.hpp"
 #include <cstddef>
 #include <string>
+#include <stdexcept>
 
 int brevnov::intcheck(char * input)
 {

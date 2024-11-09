@@ -77,8 +77,8 @@ int main(int argc, char ** argv)
   }
   output << brevnov::find_osed(mtx, m, n);
   output << "\n";
-  brevnov::fll_inc_wav(t, m, n);
-  brevnov::output_matrix(output, t, m, n);
+  brevnov::fll_inc_wav(mtx, m, n);
+  brevnov::output_matrix(output, mtx, m, n);
   output << "\n";
   if (testmode == 2)
   {
