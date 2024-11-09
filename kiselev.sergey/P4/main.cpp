@@ -29,6 +29,7 @@ int main()
     if (!(std::cin >> arr))
     {
       std::cerr << "Incorrect input\n";
+      free(arr);
       return 1;
     }
     count++;
@@ -39,11 +40,13 @@ int main()
   if (kiselev::identicalChar(arr, secondArr, length, secondLength) == 1)
   {
     std::cout << "There are identical characters\n";
+    free(arr);
     return 1;
   }
   else
   {
     std::cout << "There are no identical characters\n";
+    free(arr);
     return 0;
   }
 }
