@@ -1,5 +1,5 @@
 #include "identicalChar.h"
-int kiselev::identicalChar(char* arr1, char* arr2, size_t lenght1, size_t lenght2)
+int kiselev::identicalChar(char* arr1, const char* arr2, size_t lenght1, size_t lenght2)
 {
   for (size_t i = 0; i < lenght2; ++i)
   {

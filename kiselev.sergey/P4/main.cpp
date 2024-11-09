@@ -1,6 +1,7 @@
 #include <ios>
 #include <iostream>
 #include <stdexcept>
+#include "identicalChar.h"
 #include "resizeArray.h"
 int main()
 {
@@ -33,4 +34,16 @@ int main()
     count++;
   }
   std::skipws(std::cin);
+  const size_t secondLength = 3;
+  const char secondArr[secondLength] = { 'a', 'b', 's' };
+  if (kiselev::identicalChar(arr, secondArr, length, secondLength) == 1)
+  {
+    std::cout << "There are identical characters\n";
+    return 1;
+  }
+  else
+  {
+    std::cout << "There are no identical characters\n";
+    return 0;
+  }
 }
