@@ -14,22 +14,22 @@ int main()
   }
   size_t count = 0;
   std::noskipws(std::cin);
-  if (!std::cin >> arr[count])
+  if (!(std::cin >> arr[count]))
   {
     std::cerr << "Incorrect input\n";
     free(arr);
     return 1;
   }
-  count++;
   while (arr[count] != '\n')
   {
-    if (count >= length - 1)
+    count++;
+    if (count == length)
     {
-      size_t timeLenght = length;
+      size_t timeLength = length;
       length += 5;
       try
       {
-        arr = kiselev::resizeArr(arr, length, timeLenght);
+        arr = kiselev::resizeArr(arr, length, timeLength);
       }
       catch (const std::logic_error& e)
       {
@@ -38,14 +38,14 @@ int main()
         return 1;
       }
     }
-    if (!(std::cin >> arr))
+    if (!(std::cin >> arr[count]))
     {
       std::cerr << "Incorrect input\n";
       free(arr);
       return 1;
     }
-    count++;
   }
+  arr[count] = '\0';
   std::skipws(std::cin);
   const size_t secondLength = 3;
   const char secondArr[secondLength] = { 'a', 'b', 's' };
