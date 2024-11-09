@@ -13,7 +13,7 @@ int main()
     std::cerr << "ERROR: imposible to getLine\n";
     return 1;
   }
-  constexpr char* secondLine = "aF1 df145\0";
+  char secondLine[] = "aF1 df145\0";
   firstLine = reallocate(firstLine, capacity, cntDgt(firstLine));
   if (!firstLine)
   {
