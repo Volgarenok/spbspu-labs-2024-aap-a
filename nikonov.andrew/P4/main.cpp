@@ -15,13 +15,18 @@ int main()
     return 1;
   }
   char secondLine[] = "aF1 df145\0";
+  std::cout << "before any changes\n";
+  printLine(firstLine);
   firstLine = reallocate(firstLine, capacity, cntDgt(firstLine));
+  std::cout << "after reallocfunc\n";
+  printLine(firstLine);
   if (!firstLine)
   {
     std::cerr << "ERROR: bad alloc\n";
     return 1;
   }
   add_digit_symb(firstLine, secondLine);
+  std::cout << "after addfunc\n";
   printLine(firstLine);
   free(firstLine);
 }

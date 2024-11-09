@@ -20,7 +20,7 @@ size_t cntDgt(char* str)
 void add_digit_symb(char* firstStr, char* secondStr)
 {
   size_t iter1 = 0;
-  while (secondStr[iter1] != '\0')
+  while (firstStr[iter1] != '\0')
   {
     ++iter1;
   }
