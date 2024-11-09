@@ -3,7 +3,7 @@
 
 char* latinRemove(char* str, int size)
 {
-  for (int i = 0; i < size; ++i)
+  for (int i = 0; i < size; )
   {
     if (std::isalpha(str[i]))
     {
