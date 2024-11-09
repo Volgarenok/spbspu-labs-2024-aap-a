@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ios>
+#include "latinRemove.h"
 
 int main()
 {
@@ -27,6 +28,6 @@ int main()
     str[size++] = c;
   }
   std::skipws(std::cin);
-  std::cout << str << "\n";
+  std::cout << latinRemove(str, size) << "\n";
 }
 
