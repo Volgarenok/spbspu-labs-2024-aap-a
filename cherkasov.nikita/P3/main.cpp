@@ -28,19 +28,32 @@ int main(int argc, char* argv[])
   {
     return 2;
   }
-    int result = cherkasov::processMatrix(matrix, rows, cols);
+
+  if (rows == 0 || cols == 0)
+  {
     std::ofstream outFile(outputFile);
     if (!outFile)
     {
       std::cerr << "Error: Cannot open output file.\n";
-      cherkasov::freeMatrix(matrix, rows);
       return 3;
     }
+      outFile << 0 << "\n";
+      outFile.close();
+      return 0;
+  }
 
-    outFile << result << "\n";
-    outFile.close();
+  int result = cherkasov::processMatrix(matrix, rows, cols);
+  std::ofstream outFile(outputFile);
+  if (!outFile)
+  {
+    std::cerr << "Error: Cannot open output file.\n";
+    cherkasov::freeMatrix(matrix, rows);
+    return 3;
+  }
+
+  outFile << result << "\n";
+  outFile.close();
 
   cherkasov::freeMatrix(matrix, rows);
   return 0;
 }
-

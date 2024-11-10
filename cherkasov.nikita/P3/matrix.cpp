@@ -19,6 +19,12 @@ bool cherkasov::readMatrix(const char* inputFile, int**& matrix, int& rows, int&
      return false;
   }
 
+  if (rows == 0 || cols == 0)
+  {
+    matrix = nullptr;
+    return true;
+  }
+
   int totalElements = rows * cols;
   if (useFixedArray && totalElements > MAX_SIZE)
   {
