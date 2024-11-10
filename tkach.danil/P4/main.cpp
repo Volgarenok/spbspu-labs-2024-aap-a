@@ -4,7 +4,7 @@
 
 int main()
 {
-  size_t capacity = 7;
+  size_t capacity = 2;
   char* str = nullptr;
   str = reinterpret_cast<char*>(malloc(sizeof(char) * (capacity)));
   if (str == nullptr)
@@ -14,17 +14,23 @@ int main()
   }
   try
   {
-    if (!tkach::inputStr(std::cin, str, capacity).good())
+    if (!tkach::inputStr(std::cin, str, capacity).eof())
     {
       free(str);
       std::cerr << "Error: input error\n";
       return 1;
     }
   }
-  catch (const std::bad_alloc & e)
+  catch (const std::bad_alloc& e)
   {
     free(str);
     std::cerr << "Error: not enough memory\n";
+    return 1;
+  }
+  if (str[0] == '\0')
+  {
+    free(str);
+    std::cerr << "Error: input error - empty str\n";
     return 1;
   }
   char* str2 = nullptr;
@@ -36,7 +42,7 @@ int main()
     std::cerr << "Error: not enough memory\n";
     return 1;
   }
-  std::cout << str2 << "\n";
+  tkach::outputStr(str2);
   free(str);
   free(str2);
   return 0;
