@@ -22,12 +22,13 @@ char* karnauhova::input_string(std::istream& in, char end)
   }
   for (size_t i = 1; (in>>str[i]) && (str[i] != end); i++)
     {
-      if ((str[i + 1] != end) && (i + 1) >= (n - 1))
+      if (i >= (n - 1))
       {
         n = n * 2;
         char* str1 = reinterpret_cast< char* >(malloc(sizeof(char) * n));
         if (str1 == nullptr)
         {
+          free(str);
           throw std::logic_error("out of memory");
         }
         for (size_t j = 0; j < (n / 2); j++)
@@ -38,6 +39,7 @@ char* karnauhova::input_string(std::istream& in, char end)
         str = str1;
       }
     }
+    str[n] = '0';
     std::skipws(in);
     return str;
 }
