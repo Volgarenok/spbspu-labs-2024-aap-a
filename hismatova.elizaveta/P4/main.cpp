@@ -1,20 +1,24 @@
 #include "fu_string.h"
+#include <iostream>
+#include <cstdlib>
+#include <cstddef>
+#include "fu_string.h"
 
 int main()
 {
-  char str1 = hismatova::getline();
-  char str2 = hismatoba::getline();
-  if (str1 == nullptr || str2 == nullptr)
+  char str1[100];
+  char str2[100];
+  std::cin.getline(str1, sizeof(str1));
+  std::cin.getline(str2, sizeof(str2));
+  char* result = hismatova::uniqueChar(str1, str2);
+  if (result != nullptr)
   {
-    std::cerr << "run without input\n";
-    return 1;
+    std::cout << result << "\n";
+    free(result);
   }
-  char * res = hismatova::uniqueChar(str1, str2);
-  if (res != nullptr)
+  else
   {
-    std::cout << res << "\n";
-    free(res);
+    std::cerr << "result is nullptr\n";
   }
-  free(str1);
-  free(str2);
+  return 0;
 }
