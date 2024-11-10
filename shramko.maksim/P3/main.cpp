@@ -38,7 +38,7 @@ int main(int argc, char** argv)
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
   input >> cnt_row >> cnt_col;
-  if (!input)
+  if (!input || innput.eof())
   {
     std::cerr << "Input error\n";
     return 2;
