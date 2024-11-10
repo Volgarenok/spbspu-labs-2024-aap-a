@@ -1,4 +1,4 @@
-#include "string_functions.hpp"
+#include "string_processing.hpp"
 #include <stdexcept>
 
 char* maslevtsov::expandString(char* string, std::size_t& capacity)

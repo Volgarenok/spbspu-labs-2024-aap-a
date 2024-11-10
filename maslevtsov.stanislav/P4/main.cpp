@@ -1,5 +1,5 @@
 #include <iostream>
-#include "string_functions.hpp"
+#include "string_processing.hpp"
 
 int main()
 {

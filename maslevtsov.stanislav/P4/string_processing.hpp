@@ -1,5 +1,5 @@
-#ifndef STRING_FUNCTIONS_HPP
-#define STRING_FUNCTIONS_HPP
+#ifndef STRING_PROCESSING_HPP
+#define STRING_PROCESSING_HPP
 
 #include <iostream>
 
