@@ -21,11 +21,12 @@ int main(int argc, char** argv)
   }
 
   int number = std::atoi(argv[1]);
-  if (!std::atoi(argv[1]) || argv[1][1] != '\n')
+  if (argv[1][0] != '1' || argv[1][0] != '2' || argv[1][1] != '\n')
   {
-    std::cerr << "First parameter is not a number\n";
+    std::cerr << "First parameter is not the right number\n";
     return 1;
   }
+
   if (number != 1 && number != 2)
   {
     std::cerr << "First parameter is out of range\n";
