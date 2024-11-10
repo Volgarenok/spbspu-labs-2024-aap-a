@@ -20,7 +20,8 @@ char* karnauhova::input_string(std::istream& in, char end)
   {
     throw std::logic_error("Error in create string");
   }
-  for (size_t i = 1; (in>>str[i]) && (str[i] != end); i++)
+  size_t i = 1;
+  while ((in>>str[i]) && (str[i] != end))
     {
       if (i >= (n))
       {
@@ -38,6 +39,7 @@ char* karnauhova::input_string(std::istream& in, char end)
         free(str);
         str = str1;
       }
+      i++;
     }
     std::skipws(in);
     return str;
