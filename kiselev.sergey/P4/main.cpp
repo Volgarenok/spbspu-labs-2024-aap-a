@@ -40,9 +40,9 @@ int main()
   }
   arr[count] = '\0';
   std::skipws(std::cin);
-  const size_t secondLength = 3;
-  const char secondArr[secondLength] = { 'a', 'b', 's' };
-  int countIdentical = kiselev::identicalChar(arr, secondArr, length, secondLength);
+  constexpr size_t secondLength = 4;
+  const char secondArr[secondLength] = "abs";
+  size_t countIdentical = kiselev::identicalChar(arr, secondArr, length, secondLength);
   std::cout << "Identical character: " << countIdentical << "\n";
   free(arr);
   return 0;
