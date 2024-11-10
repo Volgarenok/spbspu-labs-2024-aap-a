@@ -4,40 +4,40 @@
 char * mozhegova::inputString(std::istream & in, char stop)
 {
   size_t length = 10;
-  char * str = nullptr;
-  try
+  char * str = new char [length + 1];
+  if (!str)
   {
-    str = new char [length];
+    return nullptr;
   }
-  catch(const std::bad_alloc & e)
-  {
-    throw;
-  }
+  size_t size = 0;
   char next = '\0';
-  std::noskipws(std::cin);
-  for (size_t size = 0; (std::cin >> next) && (next != stop); size++)
+  std::noskipws(in);
+  while ((in >> next) && (next != stop))
   {
     if (size == length)
     {
-      str = mozhegova::changeSize(str, length);
+      char * newstr = mozhegova::changeSize(str, length);
+      if (newstr == nullptr)
+      {
+        delete[] str;
+        return nullptr;
+      }
+      str = newstr;
+      length += 10;
     }
-    str[size] = next;
+    str[size++] = next;
   }
-  std::skipws(std::cin);
+  str[size + 1] = '\0';
+  std::skipws(in);
   return str;
 }
 
 char * mozhegova::changeSize(char * nowstr, size_t length)
 {
-  char * newstr = nullptr;
-  try
+  char * newstr = new char [length + 10];
+  if (!newstr)
   {
-    newstr = new char [length + 10];
-  }
-  catch(const std::bad_alloc & e)
-  {
-    delete[] nowstr;
-    throw;
+    return nullptr;
   }
   for (size_t i = 0; i < length; i++)
   {
@@ -49,14 +49,20 @@ char * mozhegova::changeSize(char * nowstr, size_t length)
 
 char * mozhegova::spcRmv(char * str)
 {
-  for (size_t i = 0; str[i] != '\n'; i++)
+  size_t i = 0;
+  while (str[i] != '\0')
   {
-    if (std::isspace(str[i]) && std::isspace(str[i + 1]))
+    if ((std::isspace(str[i]) && std::isspace(str[i + 1])) ||
+    std::isspace(str[0]) || (std::isspace(str[i]) && str[i + 1] == '\0'))
     {
-      for (size_t j = i + 1; j != '\n'; j++)
+      for (size_t j = i; str[j] != '\0'; j++)
       {
-        str[j - 1] = str[j];
+        str[j] = str[j + 1];
       }
+    }
+    else
+    {
+      i++;
     }
   }
   return str;
