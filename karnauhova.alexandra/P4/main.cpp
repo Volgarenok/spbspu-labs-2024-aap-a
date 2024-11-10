@@ -14,11 +14,6 @@ int main()
     std::cerr << "Error: out of memory\n";
     return 1;
   }
-  if (t[0] == end)
-  {
-    std::cerr << "Error: empty string\n";
-    return 1;
-  }
   std::cout << karnauhova::dubl_char(t) << "\n";
   free(t);
   return 0;

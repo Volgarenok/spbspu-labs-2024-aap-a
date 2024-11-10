@@ -5,19 +5,24 @@
 char* karnauhova::input_string(std::istream& in, char end)
 {
   size_t n = 20;
-  char* str = reinterpret_cast< char* >(malloc(sizeof(char) * n));
+  char* str = nullptr;
+  str = reinterpret_cast< char* >(malloc(sizeof(char) * n));
   if (str == nullptr)
-    {
-      throw std::logic_error("out of memory");
-    }
+  {
+    throw std::logic_error("out of memory");
+  }
+  std::noskipws(in);
   if (!in)
   {
     throw std::logic_error("Error in create string");
   }
-  std::noskipws(in);
-  for (size_t i = 0; (in>>str[i]) && (str[i] != end); i++)
+  if ((in>>str[0]) && (str[0] == end))
+  {
+    throw std::logic_error("Error in create string");
+  }
+  for (size_t i = 1; (in>>str[i]) && (str[i] != end); i++)
     {
-      if ((str[i + 1] != '\0') && (i + 1) >= 19)
+      if ((str[i + 1] != end) && (i + 1) >= (n - 1))
       {
         n = n * 2;
         char* str1 = reinterpret_cast< char* >(malloc(sizeof(char) * n));
