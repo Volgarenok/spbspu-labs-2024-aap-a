@@ -1,7 +1,6 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
-#include "checkFirst.h"
 #include "inputMatrix.h"
 #include "saddleElement.h"
 int main(int argc, char** argv)
@@ -14,11 +13,6 @@ int main(int argc, char** argv)
   else if (argc > 4)
   {
     std::cerr << "To many arguments\n";
-    return 1;
-  }
-  else if (!kiselev::checkFirst(argv[1]))
-  {
-    std::cerr << "First parameter is not a number\n";
     return 1;
   }
   else if (argv[1][1] != '\0' || (argv[1][0] != '1' && argv[1][0] != '2'))
