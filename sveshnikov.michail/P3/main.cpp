@@ -31,7 +31,7 @@ int main(int argc, char **argv)
   size_t num_rows = 0, num_columns = 0;
   input >> num_rows >> num_columns;
   size_t read = 0;
-  size_t num_diagonal = 0;
+  int num_diagonal = 0;
   if (argv[1][0] == '1')
   {
     const int LEN = 10000;
