@@ -4,8 +4,8 @@
 
 namespace hismatova
 {
-  char * getline();
-  char * uniqueChar(char * str1, char * str2);
+  char getline();
+  char uniqueChar(char str1, char str2);
 }
 
 #endif
