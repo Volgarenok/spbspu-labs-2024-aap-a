@@ -1,32 +1,46 @@
 #include <iostream>
-#include "processing_matrix.h"
 #include <fstream>
 #include <cstdlib>
-#include <cstring>
+#include "matrix.h"
 
-int main(int argc, char * argv[])
+int main(int argc, char* argv[])
 {
   if (argc != 4)
   {
-    std::cerr << "Error: Invalid number of arguments." << "\n";
+    std::cerr << "Error: Invalid number of arguments.\n";
     return 1;
   }
-  char * endptr;
-  long num = strtol(argv[1], &endptr, 10);
-  if (*endptr != '\0' || num < 1 || num > 2)
+
+  int num = std::atoi(argv[1]);
+  if (num != 1 && num != 2)
   {
-    std::cerr << "Error: First parameter is not a valid number or out of range." << "\n";
+    std::cerr << "Error: Invalid task number.\n";
     return 1;
   }
-    std::string inputFile = argv[2];
-    std::string outputFile = argv[3];
-    if (num == 1)
+
+  const char* inputFile = argv[2];
+  const char* outputFile = argv[3];
+  int rows, cols;
+  int** matrix = nullptr;
+  bool useFixedArray = (num == 1);
+
+  if (!cherkasov::readMatrix(inputFile, matrix, rows, cols, useFixedArray))
+  {
+    return 2;
+  }
+    int result = cherkasov::processMatrix(matrix, rows, cols);
+    std::ofstream outFile(outputFile);
+    if (!outFile)
     {
-      cherkasov::processFixedMatrix(inputFile, outputFile);
+      std::cerr << "Error: Cannot open output file.\n";
+      cherkasov::freeMatrix(matrix, rows);
+      return 3;
     }
-      else if (num == 2)
-      {
-        cherkasov::processDynamicMatrix(inputFile, outputFile);
-      }
+
+    outFile << result << "\n";
+    outFile.close();
+
+  cherkasov::freeMatrix(matrix, rows);
   return 0;
 }
+
