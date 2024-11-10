@@ -50,6 +50,8 @@ int main(int argc, char ** argv)
     }
     smirnov::lft_top_clk(matrix, rows, columns);
     smirnov::lft_top_clkOutput(output, matrix, rows, columns);
+    smirnov::lwr_tri_mtx(matrix, rows, columns);
+    smirnov::lwr_tri_mtxOutput(output, matrix, rows, columns);
   }
   else
   {
@@ -72,7 +74,8 @@ int main(int argc, char ** argv)
     }
     smirnov::lft_top_clk(matrix, rows, columns);
     smirnov::lft_top_clkOutput(output, matrix, rows, columns);
+    smirnov::lwr_tri_mtx(matrix, rows, columns);
+    smirnov::lwr_tri_mtxOutput(output, matrix, rows, columns);
     delete[] matrix;
   }
 }
-
