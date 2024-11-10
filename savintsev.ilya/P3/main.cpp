@@ -31,7 +31,7 @@ int main(int argc, char ** argv)
   inputStream >> m >> n;
   if (!inputStream)
   {
-    std::cout << "File text is invalid\n";
+    std::cerr << "File text is invalid\n";
     return 2;
   }
   outputStream << m << ' ' << n;
@@ -40,13 +40,22 @@ int main(int argc, char ** argv)
   case 1:
   {
     int table[10000];
-    savintsev::processMtx(inputStream, outputStream, table, m, n);
+    if (savintsev::processMtx(inputStream, outputStream, table, m, n))
+    {
+      std::cerr << "File text is invalid\n";
+      return 1;
+    }
     break;
   }
   case 2:
   {
     int * table = new int[n * m];
-    savintsev::processMtx(inputStream, outputStream, table, m, n);
+    if (savintsev::processMtx(inputStream, outputStream, table, m, n))
+    {
+      std::cerr << "File text is invalid\n";
+      delete[] table;
+      return 1;
+    }
     delete[] table;
     break;
   }

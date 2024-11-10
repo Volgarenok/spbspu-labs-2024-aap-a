@@ -39,14 +39,14 @@ void savintsev::transformMtx(int * t, size_t m, size_t n)
   }
 }
 
-void savintsev::processMtx(std::istream & in, std::ostream & out, int * table, int m, int n)
+size_t savintsev::processMtx(std::istream & in, std::ostream & out, int * table, int m, int n)
 {
     if (!savintsev::inputMtx(in, table, m, n))
     {
-        std::cout << "File text is invalid\n";
-        return;
+        return 1;
     }
     savintsev::transformMtx(table, m, n);
     out << (m * n == 0 ? "" : " ");
     savintsev::outputMtx(out, table, m, n);
+    return 0;
 }
