@@ -63,11 +63,13 @@ int main(int argc, char **argv)
     }
     catch (const std::bad_alloc &e)
     {
+      delete[] array;
       std::cerr << "Out of memory\n";
       return 1;
     }
     if (!maslov::inputMatrix(input, array, rows, columns, read))
     {
+      delete[] array;
       std::cerr << "Elements are not a number or not enough\n";
       return 2;
     }
