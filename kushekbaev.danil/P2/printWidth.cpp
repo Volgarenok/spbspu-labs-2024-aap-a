@@ -3,5 +3,5 @@
 
 void kushekbaev::printWidth(std::ostream &os, size_t width, double value)
 {
-    os << std::setw(width) << value;
+  os << std::setw(width) << value;
 }
