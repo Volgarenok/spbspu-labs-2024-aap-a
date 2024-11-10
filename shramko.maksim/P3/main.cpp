@@ -21,7 +21,7 @@ int main(int argc, char** argv)
   }
 
   int number = std::atoi(argv[1]);
-  if (argv[1][0] != '1' || argv[1][0] != '2' || argv[1][1] != '\n')
+  if (argv[1][0] != '1' || argv[1][0] != '2' || argv[1][1] != '\0')
   {
     std::cerr << "First parameter is not the right number\n";
     return 1;
