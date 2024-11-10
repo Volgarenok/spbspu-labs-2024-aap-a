@@ -2,7 +2,7 @@
 #include <fstream>
 #include <cstdlib>
 #include "mtx_transform.hpp"
-namespace nikonov 
+namespace nikonov
 {
   bool inputCheck(int argc, char** argv)
   {
@@ -37,37 +37,37 @@ int main(int argc, char ** argv)
   input >> m;
   input >> n;
   size_t read = 0;
+  int* arrUni = nullptr;
   if (std::atoi(argv[1]) == 1)
   {
     int arr[10000] = { 0 };
-    if (!nikonov::readMatrix(input, arr, m, n, read))
-    {
-      std::cerr << "ERROR: incorrect input\n";
-      return 2;
-    }
-    nikonov::spiralMtxReduction(arr, m, n);
-    nikonov::printMatrix(output, arr, m, n);
+    arrUni = arr;
   }
   else
   {
-    int* arr = nullptr;
     try
     {
-      arr = new int[m * n];
+      arrUni = new int[m * n];
     }
     catch (const std::bad_alloc& e)
     {
       std::cerr << "ERROR: " << e.what() << "\n";
       return 1;
     }
-    if (!nikonov::readMatrix(input, arr, m, n, read))
+  }
+  if (!nikonov::readMatrix(input, arrUni, m, n, read))
+  {
+    std::cerr << "ERROR: incorrect input\n";
+    if (std::atoi(argv[1]) == 2)
     {
-      std::cerr << "ERROR: incorrect input\n";
-      delete[] arr;
-      return 2;
+      delete[] arrUni;
     }
-    nikonov::spiralMtxReduction(arr, m, n);
-    nikonov::printMatrix(output, arr, m, n);
-    delete[] arr;
+    return 2;
+  }
+  nikonov::spiralMtxReduction(arrUni, m, n);
+  nikonov::printMatrix(output, arrUni, m, n);
+  if (std::atoi(argv[1]) == 2)
+  {
+    delete[] arrUni;
   }
 }
