@@ -55,6 +55,7 @@ int main()
     str[size++] = c;
   }
   std::skipws(std::cin);
+  str[size] = '\0';
   std::cout << aleksandrov::latinRemove(str, size) << "\n";
   delete[] str;
 }
