@@ -19,5 +19,7 @@ int main()
   }
   brevnov::finding_common_elements(std::cout, first_line, second_line);
   std::cout << "\n";
+  delete[] first_line;
+  delete[] second_line;
   return 0;
 }
