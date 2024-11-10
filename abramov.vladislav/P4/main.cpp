@@ -13,6 +13,12 @@ int main()
     std::cerr << "Memory fail\n";
     return 2;
   }
+  if (str1[0] == '\0')
+  {
+    std::cerr << "Incorrect input\n"
+    delete[] str1;
+    return 1;
+  }
   str1 = abramov::unionStrs(str1, str2);
   size_t i = 0;
   while (str[i] != '\0')
