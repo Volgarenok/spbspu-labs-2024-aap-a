@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
       return 2;
     }
     smirnov::lft_top_clk(matrix, rows, columns);
-    smirnov::outputMatrix(output, matrix, rows, columns);
+    smirnov::lft_top_clkOutput(output, matrix, rows, columns);
   }
   else
   {
@@ -71,7 +71,7 @@ int main(int argc, char ** argv)
       return 2;
     }
     smirnov::lft_top_clk(matrix, rows, columns);
-    smirnov::outputMatrix(output, matrix, rows, columns);
+    smirnov::lft_top_clkOutput(output, matrix, rows, columns);
     delete[] matrix;
   }
 }

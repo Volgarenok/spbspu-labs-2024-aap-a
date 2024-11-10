@@ -62,7 +62,7 @@ void smirnov::lft_top_clk(int * matrix, size_t rows, size_t columns)
   }
 }
 
-bool smirnov::lwr_tri_mtx(int * matrix, size_t rows)
+bool smirnov::lwr_tri_mtx(int * matrix, size_t rows, size_t columns)
 {
   if (rows != columns)
   {
@@ -98,12 +98,12 @@ void smirnov::lft_top_clkOutput(std::ostream & output, int * matrix, size_t rows
 
 void smirnov::lwr_tri_mtxOutput(std::ostream & output, int * matrix, size_t rows, size_t columns)
 {
-  if (lwr_tri_mtxOutput(matrix, rows, columns))
+  if (lwr_tri_mtx(matrix, rows, columns))
   {
-    std::cout << "true";
+    output << "true";
   }
   else
   {
-    std::cout << "false";
+    output << "false";
   }
 }
