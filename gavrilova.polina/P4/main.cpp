@@ -17,7 +17,19 @@ int main()
 {
   size_t n = 0;
   char * first_str = nullptr;
-  //input + узнать сколько символов
+  char c = "\0";
+  size_t k = 0;
+//!!!!!!!!!!
+  while ((std::cin << c) || c != "\n") {
+    for (size_t i = 0; c != "\n" || i < K; ++i) {
+      first_str[i + K*k] = c;
+      ++n;
+    if (c != "\n") {
+      ++k;
+      char * temp = first_str;
+      
+      
+//input + узнать сколько символов
   char * result_str = nullptr;
   try {
     result_str = new char [n];
