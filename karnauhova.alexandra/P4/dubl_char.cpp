@@ -1,6 +1,6 @@
-#include "dubl_char.cpp"
+#include "dubl_char.hpp"
 #include <cstddef>
-int dubl_char(char* str)
+int karnauhova::dubl_char(char* str)
 {
   int asci[127] = {0};
   for (size_t i = 0; str[i] != '\0'; i++)

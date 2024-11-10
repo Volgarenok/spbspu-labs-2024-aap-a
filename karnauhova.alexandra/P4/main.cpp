@@ -3,14 +3,15 @@
 #include <iostream>
 int main()
 {
+  char* t = nullptr;
   try
   {
-    char* t = karnauhova::input_string(std::cin, '\n');
+    t = karnauhova::input_string(std::cin, '\n');
   }
-  catche (const std::bad_alloc &e)
+  catch (const std::bad_alloc &e)
   {
     std::cerr << "Error: out of memory";
     return 1;
   }
-  std::cout << dubl_char(t) << "\n";
+  std::cout << karnauhova::dubl_char(t) << "\n";
 }
