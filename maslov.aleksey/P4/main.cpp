@@ -3,9 +3,14 @@
 
 int main()
 {
-  char * string1 = maslov::inputLine(std::cin, '\n');
-  if (string1 == nullptr)
+  char * string1 = nullptr;
+  try
   {
+    char * string1 = maslov::inputLine(std::cin, '\n');
+  }
+  catch (const std::bad_alloc & e)
+  {
+    std::cerr << "Out of memory\n";
     return 1;
   }
   const char * string2 = "abc"; //изменить на более сложный

@@ -1,7 +1,6 @@
 #ifndef STRINGMANIPULATOR_HPP
 #define STRINGMANIPULATOR_HPP
 
-#include <cstddef>
 #include <iostream>
 
 namespace maslov
