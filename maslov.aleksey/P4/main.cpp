@@ -1,1 +1,6 @@
-int main() {}
+#include <iostream>
+#include "stringManipulator.hpp"
+
+int main()
+{
+}
