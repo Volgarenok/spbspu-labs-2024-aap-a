@@ -18,7 +18,7 @@ int main()
     free(arr);
     return 1;
   }
-  while (arr[memorySize] != '\n')
+  while (arr[length] != '\n')
   {
     length++;
     if (length == memorySize)
