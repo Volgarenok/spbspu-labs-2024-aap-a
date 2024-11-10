@@ -1,7 +1,6 @@
 #include "output_matrix.h"
-#include <iostream>
 
-void finaev::output_matrix(std::ostream & out, int * matrix, size_t strk, size_t stl)
+int finaev::kol_loc_max(int * matrix, size_t strk, size_t stl)
 {
   int res = 0;
   for (size_t i = 0; i < strk; i++)
@@ -14,5 +13,12 @@ void finaev::output_matrix(std::ostream & out, int * matrix, size_t strk, size_t
       }
     }
   }
+  return res;
+}
+
+void finaev::output_matrix(std::ostream & out, int * matrix, size_t strk, size_t stl)
+{
+  int res = 0;
+  res = kol_loc_max(matrix, strk, stl);
   out << res << "\n";
 }

@@ -19,6 +19,7 @@ int main(int argc, char ** argv)
   }
   long int num = 0;
   const char *str = argv[1];
+  char* endptr = nullptr;
   for (size_t i = 0; i < strlen(str); i++)
   {
     if (str[i] < '0' || str[i] > '9')
@@ -27,8 +28,7 @@ int main(int argc, char ** argv)
       return 1;
     }
   }
-  char* endptr;
-  num = std::strtol(str, &endptr, 10);
+  num = std::strtol(str, std::addressof(endptr), 10);
   if (num != 1 && num != 2)
   {
     std::cerr << "First parameter is out of range" << "\n";
@@ -48,25 +48,16 @@ int main(int argc, char ** argv)
   std::ofstream output(argv[3]);
   if (num == 1)
   {
-    int matrix[10000];
-    if (!finaev::input_matrix(input, matrix, size_matrix))
-    {
-      std::cerr << "Fail input" << "\n";
-      return 2;
-    }
-    finaev::output_matrix(output, matrix, strk, stl);
+    size_matrix = 10000;
   }
-  else
+  int *dynamic_matrix = new int[size_matrix];
+  if (!finaev::input_matrix(input, dynamic_matrix, size_matrix))
   {
-    int *dynamic_matrix = new int[size_matrix];
-    if (!finaev::input_matrix(input, dynamic_matrix, size_matrix))
-    {
-      delete[] dynamic_matrix;
-      std::cerr << "Fail input" << "\n";
-      return 2;
-    }
-    finaev::output_matrix(output, dynamic_matrix, strk, stl);
     delete[] dynamic_matrix;
+    std::cerr << "Fail input" << "\n";
+    return 2;
   }
+  finaev::output_matrix(output, dynamic_matrix, strk, stl);
+  delete[] dynamic_matrix;
   return 0;
 }
