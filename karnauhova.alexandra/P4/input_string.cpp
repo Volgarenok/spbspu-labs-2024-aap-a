@@ -12,14 +12,11 @@ char* karnauhova::input_string(std::istream& in, char end)
     throw std::logic_error("out of memory");
   }
   std::noskipws(in);
-  if (!in)
-  {
-    throw std::logic_error("Error in create string");
-  }
   char x = 0;
   in >> x;
   if (x == end)
   {
+    free(str)
     throw std::logic_error("Error in create string");
   }
   str[0] = x;
