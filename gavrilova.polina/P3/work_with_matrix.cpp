@@ -25,10 +25,10 @@ int gavrilova::output_matrix(std::ostream & out, std::istream & in, const int * 
     return 1;
   } else if (in && read == m * n && num == 2) {
     out << gavrilova::isUpperTriangMtx(mtx, m, n) << "\n";
-    delete [] mtx;
+    delete[] mtx;
     return 1;
   } else if (num == 2) {
-    delete [] mtx;
+    delete[] mtx;
   }
   return 0;
 }
