@@ -22,7 +22,7 @@ char* karnauhova::input_string(std::istream& in, char end)
   }
   for (size_t i = 1; (in>>str[i]) && (str[i] != end); i++)
     {
-      if (i >= (n - 1))
+      if (i >= (n))
       {
         n = n * 2;
         char* str1 = reinterpret_cast< char* >(malloc(sizeof(char) * n));
@@ -39,7 +39,6 @@ char* karnauhova::input_string(std::istream& in, char end)
         str = str1;
       }
     }
-    str[n] = end;
     std::skipws(in);
     return str;
 }
