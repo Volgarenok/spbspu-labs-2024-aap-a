@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <fstream>
 #include <cstddef>
-char* karnauhova::input_string(std::ifstream & in)
+char* karnauhova::input_string(std::istream& in, char end)
 {
   size_t n = 20;
   char* str = reinterpret_cast< char* >(malloc(sizeof(char) * n));
@@ -11,7 +11,7 @@ char* karnauhova::input_string(std::ifstream & in)
       throw std::logic_error("out of memory");
     }
   std::noskipws(in);
-  for (size_t i = 0; (in>>str[i]) && (str[i] != '\0'); i++)
+  for (size_t i = 0; (in>>str[i]) && (str[i] != end); i++)
     {
       if ((str[i + 1] != '\0') && (i + 1) >= 19)
       {
@@ -26,7 +26,7 @@ char* karnauhova::input_string(std::ifstream & in)
           str1[j] = str[j];
         }
         free(str);
-        char* str = str1;
+        str = str1;
       }
     }
     std::skipws(in);

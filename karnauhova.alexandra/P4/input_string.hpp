@@ -4,6 +4,6 @@
 
 namespace karnauhova
 {
-  char* input_string(std::ifstream & in);
+  char* input_string(std::istream & in, char end);
 }
 #endif
