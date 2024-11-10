@@ -39,7 +39,6 @@ int main()
       }
       str[current_size++] = c;
     }
-    str[current_size - 1] = '\0';
   }
   std::skipws(std::cin);
 
