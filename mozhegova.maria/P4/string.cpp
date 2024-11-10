@@ -14,7 +14,7 @@ char * mozhegova::inputString(std::istream & in, char stop)
   }
   char next = '\0';
   std::noskipws(std::cin);
-  for (size_t size = 0; (std::cin >> next) && (next != '\n'); size++)
+  for (size_t size = 0; (std::cin >> next) && (next != stop); size++)
   {
     if (size == length)
     {
