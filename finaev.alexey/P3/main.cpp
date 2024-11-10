@@ -20,14 +20,6 @@ int main(int argc, char ** argv)
   long int num = 0;
   const char *str = argv[1];
   char* endptr = nullptr;
-  for (size_t i = 0; i < strlen(str); i++)
-  {
-    if (str[i] < '0' || str[i] > '9')
-    {
-      std::cerr << "First parameter is not a number" << "\n";
-      return 1;
-    }
-  }
   num = std::strtol(str, std::addressof(endptr), 10);
   if (num != 1 && num != 2)
   {
@@ -48,16 +40,22 @@ int main(int argc, char ** argv)
   std::ofstream output(argv[3]);
   if (num == 1)
   {
-    size_matrix = 10000;
+    int matrix[10000];
   }
-  int *dynamic_matrix = new int[size_matrix];
-  if (!finaev::input_matrix(input, dynamic_matrix, size_matrix))
+  int *matrix = new int[size_matrix];
+  if (!finaev::input_matrix(input, matrix, size_matrix))
   {
-    delete[] dynamic_matrix;
+    if (num == 2)
+    {
+      delete[] matrix;
+    }
     std::cerr << "Fail input" << "\n";
     return 2;
   }
-  finaev::output_matrix(output, dynamic_matrix, strk, stl);
-  delete[] dynamic_matrix;
+  finaev::output_matrix(output, matrix, strk, stl);
+  if (num == 2)
+  {
+    delete[] matrix;
+  }
   return 0;
 }
