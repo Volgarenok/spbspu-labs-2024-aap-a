@@ -7,6 +7,5 @@ std::istream & shramko::inputMtrx(std::istream & in, int* mtrx, size_t sizeMtrx,
     in >> mtrx[i];
     read_count++;
   }
-
   return in;
 }
