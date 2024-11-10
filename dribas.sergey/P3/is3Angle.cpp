@@ -1,7 +1,7 @@
 #include "is3Angle.hpp"
 #include <cstddef>
 
-bool dribas::is3Angle(int* matrix, size_t M, size_t N)
+bool dribas::is3Angle(int* const matrix, size_t M, size_t N)
 {
   if (M == 1 || M != N || M == 0) {
     return false;
@@ -23,6 +23,6 @@ bool dribas::is3Angle(int* matrix, size_t M, size_t N)
       }
     }
   }
-  res2 = res2||res1;
+  res2 = res2 || res1;
   return res2;
 }
