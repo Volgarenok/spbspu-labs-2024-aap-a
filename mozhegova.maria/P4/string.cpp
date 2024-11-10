@@ -1,4 +1,5 @@
 #include "string.hpp"
+#include <cctype>
 
 char * mozhegova::inputString(std::istream & in, char stop)
 {
@@ -44,4 +45,19 @@ char * mozhegova::changeSize(char * nowstr, size_t length)
   }
   delete[] nowstr;
   return newstr;
+}
+
+char * mozhegova::spcRmv(char * str)
+{
+  for (size_t i = 0; str[i] != '\n'; i++)
+  {
+    if (std::isspace(str[i]) && std::isspace(str[i + 1]))
+    {
+      for (size_t j = i + 1; j != '\n'; j++)
+      {
+        str[j - 1] = str[j];
+      }
+    }
+  }
+  return str;
 }
