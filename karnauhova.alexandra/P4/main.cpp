@@ -9,7 +9,7 @@ int main()
   {
     t = karnauhova::input_string(std::cin, end);
   }
-  catch (const std::bad_alloc &e)
+  catch (const std::logic_error &e)
   {
     std::cerr << "Error: out of memory\n";
     return 1;

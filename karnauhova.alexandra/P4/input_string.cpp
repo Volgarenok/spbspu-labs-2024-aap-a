@@ -39,7 +39,7 @@ char* karnauhova::input_string(std::istream& in, char end)
         str = str1;
       }
     }
-    str[n] = '0';
+    str[n] = end;
     std::skipws(in);
     return str;
 }
