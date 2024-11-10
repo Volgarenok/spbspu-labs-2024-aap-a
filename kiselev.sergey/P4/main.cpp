@@ -44,5 +44,6 @@ int main()
   const char secondArr[secondLength] = { 'a', 'b', 's' };
   int countIdentical = kiselev::identicalChar(arr, secondArr, length, secondLength);
   std::cout << "Identical character: " << countIdentical << "\n";
+  free(arr);
   return 0;
 }
