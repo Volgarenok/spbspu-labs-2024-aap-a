@@ -1,6 +1,7 @@
 #include "strfunc.h"
 #include <iostream>
-void tkach::inputStr(std::istream& in, char*& str, size_t& capacity)
+
+std::istream& tkach::inputStr(std::istream& in, char*& str, size_t& capacity)
 {
   size_t i = 0;
   char symbol = '\0';
@@ -16,4 +17,5 @@ void tkach::inputStr(std::istream& in, char*& str, size_t& capacity)
     }
     str[i++] = symbol;
   }
+  return in;
 }
