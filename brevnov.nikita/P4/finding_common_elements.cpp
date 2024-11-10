@@ -1,4 +1,5 @@
 #include "finding_common_elements.hpp"
+#include <cstddef>
 
 void brevnov::finding_common_elements(char * first_line, char * second_line)
 {
