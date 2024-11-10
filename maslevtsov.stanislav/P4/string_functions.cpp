@@ -17,7 +17,7 @@ char* maslevtsov::expandString(char* string, std::size_t& capacity)
 
 char* maslevtsov::getline(std::istream& in)
 {
-  std::size_t stringCapacity = 32;
+  std::size_t stringCapacity = 4;
   char* string = nullptr;
   try
   {
@@ -28,9 +28,10 @@ char* maslevtsov::getline(std::istream& in)
     return nullptr;
   }
   std::size_t stringIndex = 0;
+  char symbol = '\0';
 
   std::noskipws(in);
-  while (!in.eof())
+  while ((in >> symbol) && (!in.eof()))
   {
     if (stringIndex == stringCapacity - 1)
     {
@@ -45,10 +46,10 @@ char* maslevtsov::getline(std::istream& in)
         return nullptr;
       }
     }
-    in >> string[stringIndex++];
+    string[stringIndex++] = symbol;
   }
   std::skipws(in);
-  string[stringIndex - 1] = '\0';
+  string[stringIndex] = '\0';
 
   return string;
 }
