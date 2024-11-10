@@ -58,14 +58,9 @@ int main(int argc, char** argv)
         }
         result = zholobov::calc_min_sum_mdg(matrix, rows, cols);
         delete[] matrix;
-      } else {
-        throw std::invalid_argument("First parameter is invalid. It should be either 1 or 2");
       }
       output_file << result;
     }
-  } catch (const std::invalid_argument& e) {
-    std::cerr << "Exception: " << e.what() << "\n";
-    return 1;
   } catch (const std::exception& e) {
     std::cerr << "Exception: " << e.what() << "\n";
     return 2;
