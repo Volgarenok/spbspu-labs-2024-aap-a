@@ -39,8 +39,14 @@ int main(int argc, char ** argv)
     mtx = temp;
   }
   gavrilova::input_matrix(input, mtx, m, n, read);
-  if (!gavrilova::output_matrix(output, input, mtx, read, m, n, num)) {
+  if (!gavrilova::output_matrix(output, input, mtx, read, m, n)) {
+    if (num == 2) {
+      delete[] mtx;
+    }
     return 2;
+  }
+  if (num == 2) {
+    delete[] mtx;
   }
 }
 
