@@ -21,21 +21,25 @@ int main()
   std::noskipws(std::cin);
   while ((std::cin >> c) && (c != '\n'))
   {
-    if (current_size == memory)
+    while (!(EOF))
     {
-      constexpr size_t multiplier = 2;
-      memory *= multiplier;
-      char* new_str = shramko::createBiggerStrMemory(memory, str);
-      if (new_str == nullptr)
+      if (current_size == memory)
       {
-        std::cerr << "Memory error!\n";
-        free(str);
-        free(new_str);
-        return 1;
+        constexpr size_t multiplier = 2;
+        memory *= multiplier;
+        char* new_str = shramko::createBiggerStrMemory(memory, str);
+        if (new_str == nullptr)
+        {
+          std::cerr << "Memory error!\n";
+          free(str);
+          free(new_str);
+          return 1;
+        }
+        str = new_str;
       }
-      str = new_str;
+      str[current_size++] = c;
     }
-    str[current_size++] = c;
+    str[current_size - 1] = '\0';
   }
   std::skipws(std::cin);
 

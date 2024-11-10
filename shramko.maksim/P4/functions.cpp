@@ -24,11 +24,11 @@ size_t shramko::countConsecutiveIdenticalSymbols(char* str)
     return 0;
   }
 
-  for (size_t i = 0; str[i] != '\0'; i++)
+  for (size_t i = 0; str[i] != '\0'; ++i)
   {
     if (str[i] == str[i + 1])
     {
-      result++;
+      ++result;
     }
   }
   return result;
