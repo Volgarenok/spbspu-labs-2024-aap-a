@@ -4,7 +4,7 @@
 
 namespace hismatova
 {
-  char* uniqueChar(const char* str1, const char* str2);
+  char* uniqueChar(char* str1, char* str2);
 }
 
 #endif
