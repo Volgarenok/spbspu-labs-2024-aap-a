@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-int rychkov::parseArguments(std::ostream& errStream, int argc, char** argv, int& testMode)
+int rychkov::parseArguments(std::ostream& errStream, int argc, const char*const* argv, int& testMode)
 {
   if (argc < 4)
   {

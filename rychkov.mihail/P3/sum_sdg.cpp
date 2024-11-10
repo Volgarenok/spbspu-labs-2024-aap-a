@@ -1,6 +1,6 @@
 #include "sum_sdg.hpp"
 
-int rychkov::getMaxSumSdg(int* matrix, size_t height, size_t width)
+int rychkov::getMaxSumSdg(const int* matrix, size_t height, size_t width)
 {
   int result = getSumOfSdgWithCell(matrix, height, width, 0, 0);
   for (size_t i = 1; i < height; i++)
@@ -16,7 +16,7 @@ int rychkov::getMaxSumSdg(int* matrix, size_t height, size_t width)
   return result;
 }
 
-int rychkov::getSumOfSdgWithCell(int* matrix, size_t height, size_t width, size_t basisY, size_t basisX)
+int rychkov::getSumOfSdgWithCell(const int* matrix, size_t height, size_t width, size_t basisY, size_t basisX)
 {
   if (basisY >= basisX)
   {

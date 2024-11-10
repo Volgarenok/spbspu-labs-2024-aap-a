@@ -5,8 +5,8 @@
 
 namespace rychkov
 {
-  int getMaxSumSdg(int* matrix, size_t height, size_t width);
-  int getSumOfSdgWithCell(int* matrix, size_t height, size_t width, size_t basisY, size_t basisX);
+  int getMaxSumSdg(const int* matrix, size_t height, size_t width);
+  int getSumOfSdgWithCell(const int* matrix, size_t height, size_t width, size_t basisY, size_t basisX);
 }
 
 #endif

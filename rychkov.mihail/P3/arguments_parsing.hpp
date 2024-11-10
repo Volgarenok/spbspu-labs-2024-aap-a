@@ -5,7 +5,7 @@
 
 namespace rychkov
 {
-  int parseArguments(std::ostream& errStream, int argc, char** argv, int& testMode);
+  int parseArguments(std::ostream& errStream, int argc, const char*const* argv, int& testMode);
 }
 
 #endif
