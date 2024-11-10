@@ -1,7 +1,7 @@
 #include "stringManipulator.hpp"
 #include <cstddef>
 
-char * maslov::inputLine(std::istream & in, char stop)
+char * maslov::inputLine(std::istream & in, const char stop)
 {
   size_t capacity = 10;
   char * string = new char[capacity];
