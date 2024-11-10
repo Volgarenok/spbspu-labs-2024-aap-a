@@ -13,7 +13,7 @@ bool cherkasov::readMatrix(const char* inputFile, int**& matrix, int& rows, int&
     return false;
   }
 
-  if (!(inFile >> rows >> cols) || rows <= 0 || cols <= 0)
+  if (!(inFile >> rows >> cols) || rows < 0 || cols < 0)
   {
     std::cerr << "Error: Invalid matrix format or dimensions.\n";
      return false;
