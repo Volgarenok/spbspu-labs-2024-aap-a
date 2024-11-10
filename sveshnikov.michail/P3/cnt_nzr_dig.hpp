@@ -4,7 +4,8 @@
 #include <fstream>
 namespace sveshnikov
 {
+  int process_matrix(std::istream &in, int *matrix, size_t num_rows, size_t num_columns, size_t &read);
   std::istream &read_matrix(std::istream &in, int *matrix, size_t num_rows, size_t num_columns, size_t &read);
-  size_t cnt_nzr_dig(int *matrix, size_t num_rows, size_t num_columns);
+  int cnt_nzr_dig(int *matrix, size_t num_rows, size_t num_columns);
 }
 #endif
