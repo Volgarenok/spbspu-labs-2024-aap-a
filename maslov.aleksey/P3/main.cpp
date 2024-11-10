@@ -42,7 +42,6 @@ int main(int argc, char **argv)
     return 0;
   }
   size_t read = 0;
-  
   if (taskNumber == 1)
   {
     constexpr size_t max_size = 10000;
