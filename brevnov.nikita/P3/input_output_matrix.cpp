@@ -1,4 +1,4 @@
-#include "matrix.hpp"
+#include "input_output_matrix.hpp"
 
 int  brevnov::input_matrix(std::ifstream & in, int * t, size_t m, size_t n)
 {

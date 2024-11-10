@@ -1,5 +1,5 @@
-#ifndef MATRIX_HPP
-#define MATRIX_HPP
+#ifndef INPUT_OUPUT_MATRIX_HPP
+#define INPUT_OUPUT_MATRIX_HPP
 #include <cstddef>
 #include <fstream>
 
