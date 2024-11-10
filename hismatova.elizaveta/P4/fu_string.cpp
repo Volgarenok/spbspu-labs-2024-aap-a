@@ -2,21 +2,6 @@
 #include <cstdlib>
 #include <cstring>
 
-char* hismatova::remakeString(char* str, size_t size2)
-{
-  char* str2 = reinterpret_cast<char*>(malloc(size2 * sizeof(char)));
-  if (str2 == nullptr)
-  {
-    free(str);
-    return nullptr;
-  }
-  for (size_t i = 0; str[i] != '\0'; i++)
-  {
-    str2[i] = str[i];
-  }
-  return str2;
-}
-
 char* hismatova::uniqueChar(const char* str1, const char* str2)
 {
   bool arr[256] = {0};
