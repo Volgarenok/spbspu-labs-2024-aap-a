@@ -1,5 +1,4 @@
 #include "count_columns.h"
-
 namespace lungu {
     int countColumnsWithoutConsecutiveDuplicates(int** matrix, int rows, int cols) {
         int count = 0;
