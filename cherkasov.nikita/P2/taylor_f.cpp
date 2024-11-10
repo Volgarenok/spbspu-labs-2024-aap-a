@@ -3,64 +3,62 @@
 #include <cmath>
 #include <stdexcept>
 
-namespace cherkasov
+double cherkasov::getTaylor(double x, size_t k, double error)
 {
-  double getTaylor(double x, size_t k, double error)
-  {
-    double next = 1;
-    double result = next;
+  double next = 1;
+  double result = next;
 
-    for (size_t i = 1; i < k; ++i)
+  for (size_t i = 1; i < k; ++i)
+  {
+    next *= x / i;
+    result += next;
+
+    if (std::abs(next) < error)
     {
-      next *= x/i;
-      result += next;
-
-      if (std::abs(next) < error)
-      {
-        return result - x;
-      }
+      return result - x;
     }
-
-    throw std::logic_error("math-error");
   }
 
-  double get_exp(double x)
-  {
-    return std::exp(x) - x;
-  }
+  throw std::logic_error("math-error");
+}
 
-  void generating_exception()
-  {
-    std::cerr << "<MATH ERROR>" << "\n";
-  }
+double cherkasov::getExp(double x)
+{
+  return std::exp(x) - x;
+}
 
-  void get_table(double x, double getTaylor_value, double get_exp_value, size_t col_width, size_t others_columns)
-  {
-    std::cout.width(others_columns);
-    std::cout << x << " ";
-    std::cout.width(col_width);
-    std::cout << getTaylor_value << " ";
-    std::cout.width(others_columns);
-    std::cout << get_exp_value << "\n";
-  }
+void cherkasov::generatingException()
+{
+  std::cerr << "<MATH ERROR>" << "\n";
+}
 
-  void processValue(double x, size_t k, double error, size_t col_width, size_t others_columns)
+void cherkasov::getTable(double x, double taylor_value, double exp_value, size_t column_width, size_t other_columns)
+{
+  std::cout.width(other_columns);
+  std::cout << x << " ";
+  std::cout.width(column_width);
+  std::cout << taylor_value << " ";
+  std::cout.width(other_columns);
+  std::cout << exp_value << "\n";
+}
+
+void cherkasov::processValue(double x, size_t k, double error, size_t column_width, size_t other_columns)
+{
+  double taylor_value;
+  try
   {
-    double taylor_value;
-    try
-    {
-      taylor_value = cherkasov::getTaylor(x, k, error);
-    }
+    taylor_value = cherkasov::getTaylor(x, k, error);
+  }
     catch (const std::logic_error&)
     {
-      cherkasov::generating_exception();
+      cherkasov::generatingException();
       std::cout << " ";
-      std::cout.width(others_columns);
-      std::cout << cherkasov::get_exp(x);
+      std::cout.width(other_columns);
+      std::cout << cherkasov::getExp(x);
       std::cout << "\n";
       return;
     }
-    double exp_value = cherkasov::get_exp(x);
-    cherkasov::get_table(x, taylor_value, exp_value, col_width, others_columns);
-  }
+
+  double exp_value = cherkasov::getExp(x);
+  cherkasov::getTable(x, taylor_value, exp_value, column_width, other_columns);
 }
