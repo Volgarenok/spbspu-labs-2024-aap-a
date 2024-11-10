@@ -15,13 +15,13 @@ int main()
   }
   if (str1[0] == '\0')
   {
-    std::cerr << "Incorrect input\n"
+    std::cerr << "Incorrect input\n";
     delete[] str1;
     return 1;
   }
   str1 = abramov::unionStrs(str1, str2);
   size_t i = 0;
-  while (str[i] != '\0')
+  while (str1[i] != '\0')
   {
     std::cout << str1[i];
     ++i;

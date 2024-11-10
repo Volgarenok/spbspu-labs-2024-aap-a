@@ -36,7 +36,7 @@ char *abramov::unionStrs(char *destination, char *source)
   size_t k = 0;
   while (destination[i] != '\0' && source[i] != '\0')
   {
-    str[k++] = destrination[i];
+    str[k++] = destination[i];
     str[k++] = source[i];
     ++i;
   }
