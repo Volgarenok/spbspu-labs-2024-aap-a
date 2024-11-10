@@ -26,7 +26,7 @@ int main(int argc, char ** argv)
   size_t read = 0;
 
   int * mtx = nullptr;
-  if (num == 1) {
+  if (num == 2) {
     int * temp = nullptr;
     try {
       temp = new int [m*n];
@@ -34,7 +34,7 @@ int main(int argc, char ** argv)
       return 1;
     }
     mtx = temp;
-  } else if (num == 2) {
+  } else if (num == 1) {
     int temp[10000] = {};
     mtx = temp;
   }
