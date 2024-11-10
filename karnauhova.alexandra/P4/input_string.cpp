@@ -16,7 +16,7 @@ char* karnauhova::input_string(std::istream& in, char end)
   in >> x;
   if (x == end)
   {
-    free(str)
+    free(str);
     throw std::logic_error("Error in create string");
   }
   str[0] = x;
