@@ -6,7 +6,7 @@ int main()
   char * string1 = nullptr;
   try
   {
-    char * string1 = maslov::inputLine(std::cin, '\n');
+    string1 = maslov::inputLine(std::cin, '\n');
   }
   catch (const std::bad_alloc & e)
   {

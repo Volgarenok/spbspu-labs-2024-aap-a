@@ -1,7 +1,7 @@
 #include "stringManipulator.hpp"
 #include <cstddef>
 
-char * inputLine(std::istream & in, char stop)
+char * maslov::inputLine(std::istream & in, char stop)
 {
   size_t capacity = 10;
   char * string = nullptr;
@@ -43,4 +43,7 @@ char * inputLine(std::istream & in, char stop)
     string[length++] = ch;
   }
   string[length] = '\0';
+  return string;
 }
+
+char * maslov::excludeCharacters(const char * str1, const char * str2);
