@@ -35,7 +35,7 @@ int main(int argc, char ** argv)
     }
     mtx = temp;
   } else if (num == 1) {
-    int temp[10000] = {};
+    static int temp[10000] = {};
     mtx = temp;
   }
   gavrilova::input_matrix(input, mtx, m, n, read);
