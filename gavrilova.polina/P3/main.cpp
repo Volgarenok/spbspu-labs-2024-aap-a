@@ -25,33 +25,23 @@ int main(int argc, char ** argv)
 
   size_t read = 0;
 
+  int * mtx = nullptr;
   if (num == 1) {
-
-    int mtx1[10000] = {};
-
-    gavrilova::input_matrix(input, mtx1, m, n, read);
-    if (input && read == m*n){
-      output << gavrilova::isUpperTriangMtx(mtx1, m, n) << "\n";
-    } else {
-      return 2;
-    }
-
-  } else if (num == 2) {
-
-    int * mtx2 = nullptr;
+    int * temp = nullptr;
     try {
-      mtx2 = new int [m*n];
+      temp = new int [m*n];
     } catch (const std::bad_alloc & e) {
       return 1;
     }
-
-    gavrilova::input_matrix(input, mtx2, m, n, read);
-    if (input && read == m*n){
-      output << gavrilova::isUpperTriangMtx(mtx2, m, n) << "\n";
-    } else {
-      delete [] mtx2;
-      return 2;
-    }
-    delete [] mtx2;
+    mtx = temp;
+  } else if (num == 2) {
+    int temp[10000] = {};
+    mtx = temp;
+  }
+  gavrilova::input_matrix(input, mtx, m, n, read);
+  if (!gavrilova::output_matrix(output, input, mtx, read, m, n, num)) {
+    return 2;
   }
 }
+
+
