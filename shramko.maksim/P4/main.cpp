@@ -6,7 +6,7 @@
 
 int main()
 {
-  size_t memory = 4;
+  size_t memory = 10;
   char* str = reinterpret_cast< char* >(malloc((memory + 1) * sizeof(char)));
   if (str == nullptr)
   {
@@ -21,24 +21,21 @@ int main()
   std::noskipws(std::cin);
   while ((std::cin >> c) && (c != '\n'))
   {
-    while (!(std::cin.eof()))
+    if (current_size == memory)
     {
-      if (current_size == memory)
+      constexpr size_t multiplier = 2;
+      memory *= multiplier;
+      char* new_str = shramko::createBiggerStrMemory(memory, str);
+      if (new_str == nullptr)
       {
-        constexpr size_t multiplier = 2;
-        memory *= multiplier;
-        char* new_str = shramko::createBiggerStrMemory(memory, str);
-        if (new_str == nullptr)
-        {
-          std::cerr << "Memory error!\n";
-          free(str);
-          free(new_str);
-          return 1;
-        }
-        str = new_str;
+        std::cerr << "Memory error!\n";
+        free(str);
+        free(new_str);
+        return 1;
       }
-      str[current_size++] = c;
+      str = new_str;
     }
+    str[current_size++] = c;
   }
   std::skipws(std::cin);
 
