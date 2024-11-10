@@ -13,7 +13,7 @@ int main()
 
   bool hasCommonChars = false;
 
-  for (size_t  i = 0; i < size1; i++)
+  for (size_t i = 0; i < size1; i++)
   {
     for (size_t j = 0; j < size2; j++)
     {
