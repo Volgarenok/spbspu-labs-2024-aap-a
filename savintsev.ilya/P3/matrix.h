@@ -5,9 +5,10 @@
 
 namespace savintsev
 {
-  std::istream & inputMtx(std::istream & in, int * t, size_t m, size_t n, size_t & count);
-  void outputMtx(std::ostream & out, int * t, size_t m, size_t n);
+  std::istream & inputMtx(std::istream & in, int * t, size_t m, size_t n);
+  void outputMtx(std::ostream & out, const int * t, size_t m, size_t n);
   void transformMtx(int * t, size_t m, size_t n);
+  void processMtx(std::istream & in, std::ostream & out, int * table, int m, int n);
 }
 
 #endif
