@@ -7,14 +7,14 @@ char * brevnov::getline(std::istream& in, char stop)
   std::size_t current_size = 0;
   char c = '\0';
   std::noskipws(in);
-  while ((in >> c) && (c != '\n'))
+  while ((in >> c) && (c != stop))
   {
     if (max_size == current_size)
     {
       line = brevnov::newmemory(line, max_size);
-      maxsize += 50;
+      max_size += 50;
     }
-    line[current_size++] = с;
+    line[current_size++] = c;
   }
   std::skipws(in);
   return line;

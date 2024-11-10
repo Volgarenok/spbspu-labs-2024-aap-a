@@ -1,7 +1,7 @@
 #include "finding_common_elements.hpp"
-#include <cstddef>
+#include <iostream>
 
-void brevnov::finding_common_elements(char * first_line, char * second_line)
+void brevnov::finding_common_elements(std::ostream& out, char * first_line, char * second_line)
 {
   std::size_t element_of_first = 0;
   while (first_line[element_of_first] != 0)
@@ -12,7 +12,7 @@ void brevnov::finding_common_elements(char * first_line, char * second_line)
       if (first_line[element_of_first] == second_line[element_of_second])
       {
         second_line[element_of_second] = '\n';
-        std::cout << first_line[element_of_first];
+        out << first_line[element_of_first];
         break;
       }
       element_of_second++;
