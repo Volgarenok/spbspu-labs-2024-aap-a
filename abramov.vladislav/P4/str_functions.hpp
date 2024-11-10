@@ -6,3 +6,4 @@ namespace abramov
   char *getStr(std::istream &in);
   char *unionStrs(char *destination, char *source);
 }
+#endif
