@@ -3,7 +3,7 @@
 #include <cstring>
 #include <stdexcept>
 #include "inputMtrx.hpp"
-#include "countGoodColoumns.hpp"
+#include "countColoumnsWithNonRepeatingNumbers.hpp"
 
 int main(int argc, char** argv)
 {
