@@ -1,8 +1,8 @@
-#include "input_matrix.hpp"
+#include "upptri.hpp"
 #include <cstddef>
 #include <istream>
 
-std::istream & input_matrix(std::istream & in, int * mtx, size_t m, size_t n, size_t & read){
+std::istream & gavrilova::input_matrix(std::istream & in, int * mtx, size_t m, size_t n, size_t & read){
   if (m == 0 || n == 0) {
     return in;
   }

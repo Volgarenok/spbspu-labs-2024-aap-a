@@ -1,6 +1,6 @@
 #include "upptri.hpp"
 
-bool isUpperTriangMtx (int * mtx, size_t m, size_t n)
+bool gavrilova::isUpperTriangMtx(int * mtx, size_t m, size_t n)
 {
   bool result = true;
   if (m != n) {

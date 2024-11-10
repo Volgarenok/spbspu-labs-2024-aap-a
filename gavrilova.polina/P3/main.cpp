@@ -1,18 +1,16 @@
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
-#include "check_input.hpp"
-#include "input_matrix.hpp"
 #include "upptri.hpp"
 
 int main(int argc, char ** argv)
 {
-  if (!checkNumOfArguments(argc)) {
+  if (!gavrilova::checkNumOfArguments(argc)) {
     return 1;
   }
   char * end;
   unsigned long int num = std::strtoul(argv[1], &end, 10);
-  if (!checkFirstArgument(num, end)) {
+  if (!gavrilova::checkFirstArgument(num, end)) {
     return 1;
   }
 
@@ -31,9 +29,9 @@ int main(int argc, char ** argv)
 
     int mtx1[10000] = {};
 
-    input_matrix(input, mtx1, m, n, read);
+    gavrilova::input_matrix(input, mtx1, m, n, read);
     if (input && read == m*n){
-      output << isUpperTriangMtx(mtx1, m, n) << "\n";
+      output << gavrilova::isUpperTriangMtx(mtx1, m, n) << "\n";
     } else {
       return 2;
     }
@@ -47,9 +45,9 @@ int main(int argc, char ** argv)
       return 1;
     }
 
-    input_matrix(input, mtx2, m, n, read);
+    gavrilova::input_matrix(input, mtx2, m, n, read);
     if (input && read == m*n){
-      output << isUpperTriangMtx(mtx2, m, n) << "\n";
+      output << gavrilova::isUpperTriangMtx(mtx2, m, n) << "\n";
     } else {
       delete [] mtx2;
       return 2;
