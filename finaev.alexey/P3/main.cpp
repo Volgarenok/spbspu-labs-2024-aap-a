@@ -40,7 +40,18 @@ int main(int argc, char ** argv)
   std::ofstream output(argv[3]);
   int static_matrix[10000];
   int *matrix = static_matrix;
-  matrix = new int[size_matrix];
+  if (num == 2)
+  {
+    matrix = new int[size_matrix];
+  }
+  if (num == 1)
+  {
+    if (size_matrix > 10000)
+    {
+      std::cerr << "matrix so big\n";
+      return 1;
+    }
+  }
   if (!finaev::input_matrix(input, matrix, size_matrix))
   {
     if (num == 2)
