@@ -21,6 +21,11 @@ namespace nikonov
       std::cerr << "First parameter is not a number\n";
       return 0;
     }
+    if (argv[1][0] != '1' || argv[1][0] != '2')
+    {
+      std::cerr << "First parameter is not a correct number\n";
+      return 0;
+    }
     return 1;
   }
 }
