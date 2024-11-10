@@ -54,7 +54,10 @@ int main(int argc, char** argv)
     std::ofstream output(outFile);
     output << "The number of elements read: " << count_read << "\n";
     output << "Number of saddle elements: " << number_element << "\n";
-    delete[] matrix;
+    if (argv[1][0] == '2')
+    {
+      delete[] matrix;
+    }
     return 0;
   }
   catch (const std::bad_alloc& e)
