@@ -11,11 +11,10 @@ void finaev::MEMcpy(void* new_a, void* a, size_t n)
   }
 }
 
-char* finaev::increase_str(char* a, size_t old_dl, size_t new_dl)
+char* finaev::increase_str(char* a, char* new_a, size_t old_dl, size_t new_dl)
 {
-  char* new_a = (malloc((size + 1) * sizeof(char)));
-  MEMcpy(new_a, a, old_dl);
-  delete[] a;
+  finaev::MEMcpy(new_a, a, old_dl);
+  free(a);
   a = new_a;
   return a;
 }
