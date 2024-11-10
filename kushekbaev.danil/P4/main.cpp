@@ -11,6 +11,14 @@ int main()
 
   char * str2 = kushekbaev::readInputArray(size2, max);
 
+  if (str1 == nullptr || str2 == nullptr || size1 == 0 || size2 == 0)
+  {
+    std::cerr << "Failed input";
+    delete[] str1;
+    delete[] str2;
+    return 1;
+  }
+
   bool hasCommonChars = false;
 
   for (size_t i = 0; i < size1; i++)
