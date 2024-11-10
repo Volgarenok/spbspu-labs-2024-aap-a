@@ -48,7 +48,7 @@ int main(int argc, char ** argv)
       std::cerr << "Input error\n";
       return 2;
     }
-    smirnov::processMatrix(matrix, rows, columns);
+    smirnov::lft_top_clk(matrix, rows, columns);
     smirnov::outputMatrix(output, matrix, rows, columns);
   }
   else
@@ -70,7 +70,7 @@ int main(int argc, char ** argv)
       delete[] matrix;
       return 2;
     }
-    smirnov::processMatrix(matrix, rows, columns);
+    smirnov::lft_top_clk(matrix, rows, columns);
     smirnov::outputMatrix(output, matrix, rows, columns);
     delete[] matrix;
   }
