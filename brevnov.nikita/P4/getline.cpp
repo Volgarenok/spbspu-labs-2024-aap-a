@@ -1,3 +1,5 @@
+#include "getline.hpp"
+
 char * brevnov::getline(std::istream& in, char stop)
 {
   std::size_t max_size = 50;
@@ -7,8 +9,24 @@ char * brevnov::getline(std::istream& in, char stop)
   std::noskipws(in);
   while ((in >> c) && (c != '\n'))
   {
-    
+    if (max_size == current_size)
+    {
+      line = brevnov::newmemory(line, max_size);
+      maxsize += 50;
+    }
+    line[current_size++] = с;
   }
   std::skipws(in);
   return line;
+}
+
+char * brevnov::newmemory(char * line, std::size_t max_size)
+{
+  char * new_line = new char[max_size + 51];
+  for (std::size_t i = 0; i < max_size; ++i)
+  {
+    new_line[i] = line[i];
+  }
+  delete[] line;
+  return new_line;
 }
