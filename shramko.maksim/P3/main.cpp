@@ -38,7 +38,7 @@ int main(int argc, char** argv)
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
   input >> cnt_row >> cnt_col;
-  if (!input || input.eof())
+  if (!input)
   {
     std::cerr << "Input error\n";
     return 2;
@@ -60,7 +60,12 @@ int main(int argc, char** argv)
       return 1;
     }
 
-  if(!shramko::inputMtrx(input, mtrx, sizeMtrx))
+  size_t read_count = 0;
+  if(read_count != sizeMtrx)
+  {
+    std::cerr << "Matrix data error!\n";
+  }
+  else if(!shramko::inputMtrx(input, mtrx, sizeMtrx))
   {
     delete[] mtrx;
     std::cerr << "ERROR!\n";
