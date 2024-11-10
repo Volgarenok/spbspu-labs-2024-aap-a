@@ -42,40 +42,38 @@ int main(int argc, char **argv)
     return 0;
   }
   size_t read = 0;
-  int **matrix = nullptr;
-  try
-  {
-    matrix = maslov::createMatrix(rows,columns);
-  }
-  catch (const std::bad_alloc &e)
-  {
-    std::cerr << "Out of memory\n";
-    return 1;
-  }
-  if (!maslov::inputMatrix(input, matrix, rows, columns, read))
-  {
-    std::cerr << "Elements are not a number or not enough\n";
-    maslov::destroyMatrix(matrix, rows);
-    return 2;
-  }
-  size_t result = 0;
+  
   if (taskNumber == 1)
   {
     constexpr size_t max_size = 10000;
     int array[max_size] = {};
-    int *fixedLengthArray = maslov::convert(matrix, rows,
-        columns, array);
-    result = maslov::findLocalMaximum(fixedLengthArray, rows, columns);
+    if (!maslov::inputMatrix(input, array, rows, columns, read))
+    {
+      std::cerr << "Elements are not a number or not enough\n";
+      return 2;
+    }
+    output << maslov::findLocalMaximum(array, rows, columns);
   }
   else
   {
     const size_t arraySize = rows * columns;
-    int *array = new int[arraySize];
-    int *dynamicArray = maslov::convert(matrix,
-        rows, columns, array);
-    result = maslov::findLocalMaximum(dynamicArray, rows, columns);
-    delete[] dynamicArray;
+    int *array = nullptr;
+    try
+    {
+      array = new int[arraySize];
+    }
+    catch (const std::bad_alloc &e)
+    {
+      std::cerr << "Out of memory\n";
+      return 1;
+    }
+    if (!maslov::inputMatrix(input, array, rows, columns, read))
+    {
+      std::cerr << "Elements are not a number or not enough\n";
+      return 2;
+    }
+    output << maslov::findLocalMaximum(array, rows, columns);
+    delete[] array;
   }
-  maslov::destroyMatrix(matrix, rows);
-  output << result << "\n";
+  output << "\n";
 }
