@@ -29,14 +29,60 @@ char * zakirov::get_line(std::istream & in, char * line, size_t start, size_t fi
     start += 1;
     for (; start < finish; ++start)
     {
-      line[start] = '\n';
+      line[start] = '\0';
     }
   }
 
   return line;
 }
 
-char * zakirov::change_line(char * line, char stop)
+char * change_line(char * line)
 {
+  char alphabet[52];
+  size_t location = 0;
+  for (char i = 65; i < 91; ++i)
+  {
+    alphabet[location] = i;
+    location += 1;
+  }
 
+  for (char i = 97; i < 123; ++i)
+  {
+    alphabet[location] = i;
+    location += 1;
+  }
+
+  location = 0;
+  for (size_t i = 0; i < 26; ++i)
+  {
+    while(line[location] != '\0')
+    {
+      if (line[location] == alphabet[i] || line[location] == alphabet[i + 26])
+      {
+        alphabet[i] = 32;
+        alphabet[i + 26] = 32;
+      }
+
+      location += 1;
+    }
+
+    location = 0;
+  }
+
+  for (size_t i = 26; i < 52; ++i)
+  {
+    if (alphabet[i] != 32)
+    {
+      line[location] = alphabet[i];
+      location += 1;
+    }
+  }
+
+  while (line[location] != '\0')
+  {
+    line[location]  = '\0';
+    location += 1;
+  }
+
+  return line;
 }

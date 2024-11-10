@@ -5,7 +5,7 @@
 int main()
 {
   size_t start = 1, finish = 1;
-  constexpr size_t step = 15;
+  constexpr size_t step = 25;
   char last_symbol = '\0';
   std::cin >> last_symbol;
   char * line = (char *)malloc(sizeof(char));
@@ -36,7 +36,7 @@ int main()
     last_symbol = line[finish - 1];
   }
 
-  char * answer = zakirov::change_line(line, '\n');
+  char * answer = zakirov::change_line(line);
   size_t location = 0;
   while (answer[location] != '\0')
   {
