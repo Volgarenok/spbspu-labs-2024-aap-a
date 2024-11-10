@@ -63,9 +63,11 @@ int main(int argc, char** argv)
   size_t read_count = 0;
   if(read_count != sizeMtrx)
   {
+    delete[] mtrx;
     std::cerr << "Matrix data error!\n";
+    return 2;
   }
-  else if(!shramko::inputMtrx(input, mtrx, sizeMtrx))
+  else if(!shramko::inputMtrx(input, mtrx, sizeMtrx, read_count))
   {
     delete[] mtrx;
     std::cerr << "ERROR!\n";
