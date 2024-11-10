@@ -2,7 +2,7 @@
 #include "upptri.hpp"
 #include <iostream>
 
-bool gavrilova::checkNumOfArguments(int argc)
+int gavrilova::checkNumOfArguments(int argc)
 {
   if (argc > 4) {
     std::cerr << "Too many arguments" << "\n";
@@ -15,7 +15,7 @@ bool gavrilova::checkNumOfArguments(int argc)
   }
 }
 
-bool gavrilova::checkFirstArgument(unsigned long int num, char * end)
+int gavrilova::checkFirstArgument(unsigned long int num, const char * end)
 {
   if (num > 3) {
     std::cerr << "First parametr is out of range" << "\n";
