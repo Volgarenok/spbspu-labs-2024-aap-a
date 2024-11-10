@@ -19,7 +19,7 @@ int main()
   char c = '\0';
 
   std::noskipws(std::cin);
-  while ((std::cin >> c) && (c != '\n'))
+  while ((std::cin >> c) && (c != '\0'))
   {
     if (current_size == memory)
     {
@@ -45,6 +45,7 @@ int main()
     free(str);
     return 1;
   }
+  str[current_size] = '\0';
 
   std::cout << shramko::countConsecutiveIdenticalSymbols(str) << '\n';
   free(str);
