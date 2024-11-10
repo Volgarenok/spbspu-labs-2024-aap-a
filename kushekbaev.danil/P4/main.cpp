@@ -34,7 +34,7 @@ int main()
       if (hasCommonChars) break;
     }
 
-    std::cout << (hasCommonChars ? 1 : 0) << "\n";
+    std::cout << hasCommonChars << "\n";
 
   delete[] str1;
   delete[] str2;
