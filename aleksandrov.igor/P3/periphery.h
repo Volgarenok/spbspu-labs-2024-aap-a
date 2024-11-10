@@ -1,7 +1,6 @@
 #ifndef PERIPHERY_H
 #define PERIPHERY_H
 
-#include <fstream>
 #include <cstddef>
 
 namespace aleksandrov
