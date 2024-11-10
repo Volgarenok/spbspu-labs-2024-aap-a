@@ -29,7 +29,7 @@ char *abramov::getStr(std::istream &in)
   return str;
 }
 
-char *abramov::unionStrs(char *destination, char *source)
+char *abramov::unionStrs(char *destination, const char *source)
 {
   char str[32768] = "\0";
   size_t i = 0;
