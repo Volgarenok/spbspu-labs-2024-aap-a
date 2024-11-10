@@ -9,7 +9,7 @@ int main()
     size_t max = 0;
 
     std::cout << "Enter the start,end of the calculation interval and maximum numbers:";
-    std::cin >> left >> right >> max; 
+    std::cin >> left >> right >> max;
 
     if (std::cin.fail())
     {
