@@ -1,7 +1,8 @@
-#include "taylor_functions.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <cmath>
+#include "taylor.hpp"
+
 int main()
 {
   double left = 0.0, right = 0.0;
@@ -22,6 +23,8 @@ int main()
   for (double i = left; i < right - step / 2.0 ; i += step)
   {
     dirti::output(i, k, error);
+    std::cout << "\n";
   }
   dirti::output(right, k, error);
+  std::cout << "\n";
 }
