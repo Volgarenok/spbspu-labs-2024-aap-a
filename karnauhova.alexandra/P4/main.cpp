@@ -12,6 +12,7 @@ int main()
   catch (const std::logic_error &e)
   {
     std::cerr << "Error: out of memory\n";
+    free(t);
     return 1;
   }
   std::cout << karnauhova::dubl_char(t) << "\n";
