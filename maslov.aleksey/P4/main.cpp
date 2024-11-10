@@ -13,7 +13,7 @@ int main()
     std::cerr << "Out of memory\n";
     return 1;
   }
-  const char * string2 = "abc"; //изменить на более сложный
+  const char * string2 = "#f_haRt&$.j)~-+*:@3x";
   std::cout << maslov::excludeCharacters(string1, string2) << "\n";
   delete[] string1;
 }
