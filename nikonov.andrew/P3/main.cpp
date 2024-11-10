@@ -2,9 +2,32 @@
 #include <fstream>
 #include <cstdlib>
 #include "mtx_transform.hpp"
+namespace nikonov 
+{
+  bool inputCheck(int argc, char** argv)
+  {
+    if (argc < 4)
+    {
+      std::cerr << "Not enough arguments\n";
+      return 0;
+    }
+    else if (argc > 4)
+    {
+      std::cerr << "Too many arguments\n";
+      return 0;
+    }
+    if (!std::atoi(argv[1]) || argv[1][1] != '\0')
+    {
+      std::cerr << "First parameter is not a number\n";
+      return 0;
+    }
+    return 1;
+  }
+}
 int main(int argc, char ** argv)
 {
-  if (!nikonov::inputCheck(argc, argv)){
+  if (!nikonov::inputCheck(argc, argv))
+  {
     return 1;
   }
   std::ifstream input(argv[2]);
@@ -14,7 +37,7 @@ int main(int argc, char ** argv)
   input >> m;
   input >> n;
   size_t read = 0;
-  if (atoi(argv[1]) == 1)
+  if (std::atoi(argv[1]) == 1)
   {
     int arr[10000] = { 0 };
     if (!nikonov::readMatrix(input, arr, m, n, read))
@@ -22,7 +45,7 @@ int main(int argc, char ** argv)
       std::cerr << "ERROR: incorrect input\n";
       return 2;
     }
-    nikonov::transformMatrix(arr, m, n);
+    nikonov::spiralMtxReduction(arr, m, n);
     nikonov::printMatrix(output, arr, m, n);
   }
   else
@@ -43,7 +66,7 @@ int main(int argc, char ** argv)
       delete[] arr;
       return 2;
     }
-    nikonov::transformMatrix(arr, m, n);
+    nikonov::spiralMtxReduction(arr, m, n);
     nikonov::printMatrix(output, arr, m, n);
     delete[] arr;
   }
