@@ -7,7 +7,7 @@ char * maslov::inputLine(std::istream & in, char stop)
   char * string = nullptr;
   try
   {
-    string = new char[capacity] + 1;
+    string = new char[capacity];
   }
   catch (const std::bad_alloc & e)
   {
@@ -19,7 +19,7 @@ char * maslov::inputLine(std::istream & in, char stop)
   in >> std::noskipws;
   while (in >> ch && ch != stop)
   {
-    if (length >= capacity)
+    if (length >= capacity - 1)
     {
       capacity *= 2;
       char * newString = nullptr;
@@ -46,4 +46,28 @@ char * maslov::inputLine(std::istream & in, char stop)
   return string;
 }
 
-char * maslov::excludeCharacters(const char * str1, const char * str2);
+char * maslov::excludeCharacters(char * str1, const char * str2)
+{
+  char * original = str1;
+  char * result = str1;
+  while (*str1)
+  {
+    const char * ptr2 = str2;
+    bool found = false;
+    while (*ptr2)
+    {
+      if (*str1 == *ptr2)
+      {
+        found = true;
+      }
+      ptr2++;
+    }
+    if (!found)
+    {
+      *result++ = *str1;
+    }
+    str1++;
+  }
+  *result = '\0';
+  return original;
+}
