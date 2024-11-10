@@ -54,7 +54,7 @@ char * maslov::excludeCharacters(char * str1, const char * str2)
   {
     const char * ptr2 = str2;
     bool found = false;
-    while (*ptr2)
+    while (*ptr2 && !found)
     {
       if (*str1 == *ptr2)
       {
