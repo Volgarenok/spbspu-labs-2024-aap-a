@@ -19,6 +19,7 @@ int main()
   else
   {
     std::cerr << "result is nullptr\n";
+    return 1;
   }
   return 0;
 }
