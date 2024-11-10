@@ -3,29 +3,29 @@
 #include "resizeArray.h"
 int main()
 {
-  size_t length = 3;
-  char* arr = static_cast<char*>(malloc(length * sizeof(char)));
+  size_t memorySize = 3;
+  char* arr = static_cast<char*>(malloc(memorySize * sizeof(char)));
   if (arr == nullptr)
   {
     std::cerr << "Out of memory\n";
     return 1;
   }
-  size_t count = 0;
+  size_t length = 0;
   std::noskipws(std::cin);
-  if (!(std::cin >> arr[count]))
+  if (!(std::cin >> arr[length]))
   {
     std::cerr << "Incorrect input\n";
     free(arr);
     return 1;
   }
-  while (arr[count] != '\n')
+  while (arr[memorySize] != '\n')
   {
-    count++;
-    if (count == length)
+    length++;
+    if (length == memorySize)
     {
-      size_t timeLength = length;
-      length += 5;
-      arr = kiselev::resizeArr(arr, length, timeLength);
+      size_t timeLength = memorySize;
+      memorySize += 5;
+      arr = kiselev::resizeArr(arr, memorySize, timeLength);
       if (arr == nullptr)
       {
         std::cerr << "Out of memory\n";
@@ -33,16 +33,15 @@ int main()
         return 1;
       }
     }
-    if (!(std::cin >> arr[count]))
+    if (!(std::cin >> arr[length]))
     {
       break;
     }
   }
-  arr[count] = '\0';
+  arr[length] = '\0';
   std::skipws(std::cin);
-  constexpr size_t secondLength = 4;
-  const char secondArr[secondLength] = "abs";
-  size_t countIdentical = kiselev::identicalChar(arr, secondArr, length, secondLength);
+  const char secondArr[] = "abs";
+  size_t countIdentical = kiselev::identicalChar(arr, secondArr);
   std::cout << "Identical character: " << countIdentical << "\n";
   free(arr);
   return 0;
