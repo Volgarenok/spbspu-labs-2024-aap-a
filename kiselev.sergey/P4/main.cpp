@@ -1,6 +1,4 @@
-#include <ios>
 #include <iostream>
-#include <stdexcept>
 #include "identicalChar.h"
 #include "resizeArray.h"
 int main()
@@ -27,11 +25,8 @@ int main()
     {
       size_t timeLength = length;
       length += 5;
-      try
-      {
-        arr = kiselev::resizeArr(arr, length, timeLength);
-      }
-      catch (const std::logic_error& e)
+      arr = kiselev::resizeArr(arr, length, timeLength);
+      if (arr == nullptr)
       {
         std::cerr << "Out of memory\n";
         free(arr);
@@ -40,9 +35,7 @@ int main()
     }
     if (!(std::cin >> arr[count]))
     {
-      std::cerr << "Incorrect input\n";
-      free(arr);
-      return 1;
+      break;
     }
   }
   arr[count] = '\0';
