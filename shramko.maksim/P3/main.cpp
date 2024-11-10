@@ -53,12 +53,12 @@ int main(int argc, char** argv)
     return 2;
   }
 
-  size_t sizeMtr = cnt_row * cnt_col;
+  size_t sizeMtrx = cnt_row * cnt_col;
 
   if (argv[1][0] == 1)
   {
     int mtrx[10000];
-    if (!shramko::inputMtrx(input, mtrx, sizeMtr))
+    if (!shramko::inputMtrx(input, mtrx, sizeMtrx))
     {
       std::cerr << "ERROR!\n";
       return 2;
@@ -79,7 +79,7 @@ int main(int argc, char** argv)
       return 1;
     }
 
-    if (!shramko::inputMtrx(input, mtrx, sizeMtr))
+    if (!shramko::inputMtrx(input, mtrx, sizeMtrx))
     {
       delete[] mtrx;
       std::cerr << "ERROR!\n";
