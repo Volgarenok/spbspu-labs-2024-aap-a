@@ -10,6 +10,10 @@ char* karnauhova::input_string(std::istream& in, char end)
     {
       throw std::logic_error("out of memory");
     }
+  if (!in)
+  {
+    throw std::logic_error("Error in create string");
+  }
   std::noskipws(in);
   for (size_t i = 0; (in>>str[i]) && (str[i] != end); i++)
     {

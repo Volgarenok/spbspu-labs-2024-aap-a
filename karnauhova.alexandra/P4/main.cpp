@@ -4,7 +4,7 @@
 int main()
 {
   char* t = nullptr;
-  constexpr char end = '\n';
+  constexpr char end = '\0';
   try
   {
     t = karnauhova::input_string(std::cin, end);
@@ -20,4 +20,6 @@ int main()
     return 1;
   }
   std::cout << karnauhova::dubl_char(t) << "\n";
+  free(t);
+  return 0;
 }
