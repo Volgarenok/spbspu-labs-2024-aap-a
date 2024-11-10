@@ -4,7 +4,6 @@
 #include "spiral_decrement.h"
 #include "savetofile.h"
 #include "count_columns.h"
-
 int main(int argc, char* argv[]) {
     try {
         if (argc != 4) {
