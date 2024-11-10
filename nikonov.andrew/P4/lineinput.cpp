@@ -68,7 +68,6 @@ char* reallocate(char* line, size_t& capacity, size_t addSize)
     newline[newcnt] = line[newcnt];
     ++newcnt;
   }
-  newline[newcnt] = '\0';
   free(line);
   return newline;
 }
