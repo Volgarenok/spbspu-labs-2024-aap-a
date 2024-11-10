@@ -42,7 +42,7 @@ int main()
     std::cerr << "Error: not enough memory\n";
     return 1;
   }
-  tkach::outputStr(str2);
+  tkach::outputStr(std::cout, str2);
   free(str);
   free(str2);
   return 0;
