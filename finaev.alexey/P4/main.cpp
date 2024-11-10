@@ -29,7 +29,7 @@ int main()
         std::cerr << "Error increase!\n";
         return 1;
       }
-      str = finaev::increase_str(str, new_str, dl, dl * 2);
+      str = finaev::increase_str(str, new_str, dl);
       dl *= 2;
     }
     str[tk_dl++] = c;
