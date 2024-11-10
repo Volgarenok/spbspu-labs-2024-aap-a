@@ -13,7 +13,7 @@ int main()
 
   if (str1 == nullptr || str2 == nullptr || size1 == 0 || size2 == 0)
   {
-    std::cerr << "Failed input";
+    std::cerr << "Failed input" << "\n";
     delete[] str1;
     delete[] str2;
     return 1;
@@ -34,7 +34,7 @@ int main()
       if (hasCommonChars) break;
     }
 
-    std::cout << (hasCommonChars ? 1 : 0) << std::endl;
+    std::cout << (hasCommonChars ? 1 : 0) << "\n";
 
   delete[] str1;
   delete[] str2;
