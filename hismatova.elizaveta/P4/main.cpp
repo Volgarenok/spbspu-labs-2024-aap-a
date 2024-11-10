@@ -10,7 +10,7 @@ int main()
   char str2[100];
   std::cin.getline(str1, sizeof(str1));
   std::cin.getline(str2, sizeof(str2));
-  if (str1[0] == '\0' || str2[0] == '\0')
+  if (str1[0] == '\0' && str2[0] == '\0')
   {
     std::cerr << "empty strings\n";
     return 1;
