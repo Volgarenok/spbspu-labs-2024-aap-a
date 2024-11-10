@@ -8,13 +8,8 @@ int main()
     std::cerr << "Out of memory\n";
     return 1;
   }
-  for (size_t i = 0; i != '\n'; i++)
-  {
-    std::cout << str[i];
-  }
-  std::cout << '\n';
   char * result = mozhegova::spcRmv(str);
-  for (size_t i = 0; i != '\n'; i++)
+  for (size_t i = 0; result[i] != '\0'; i++)
   {
     std::cout << result[i];
   }

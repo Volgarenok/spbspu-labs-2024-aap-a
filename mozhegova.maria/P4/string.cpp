@@ -27,7 +27,7 @@ char * mozhegova::inputString(std::istream & in, char stop)
     }
     str[size++] = next;
   }
-  str[size + 1] = '\0';
+  str[size] = '\0';
   std::skipws(in);
   return str;
 }
