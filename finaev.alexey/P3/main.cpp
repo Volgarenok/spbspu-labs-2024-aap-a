@@ -38,11 +38,9 @@ int main(int argc, char ** argv)
   }
   size_matrix = strk * stl;
   std::ofstream output(argv[3]);
-  if (num == 1)
-  {
-    int matrix[10000];
-  }
-  int *matrix = new int[size_matrix];
+  int static_matrix[10000];
+  int *matrix = static_matrix;
+  matrix = new int[size_matrix];
   if (!finaev::input_matrix(input, matrix, size_matrix))
   {
     if (num == 2)
