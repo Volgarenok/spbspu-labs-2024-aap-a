@@ -43,6 +43,7 @@ int main(int argc, char** argv)
   }
 
   size_t sizeMtrx = cnt_row * cnt_col;
+  size_t read_count = 0;
   constexpr size_t statMtrxSize = 10000;
   int statMtrx[statMtrxSize];
   int* mtrx = statMtrx;
@@ -59,7 +60,6 @@ int main(int argc, char** argv)
     }
   }
 
-  size_t read_count = 0;
   if(!shramko::inputMtrx(input, mtrx, sizeMtrx, read_count))
   {
     delete[] mtrx;
