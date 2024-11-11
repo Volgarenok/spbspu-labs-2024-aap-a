@@ -67,7 +67,7 @@ int main(int argc, char** argv)
     return 2;
   }
 
-  if((read_count + 1) != sizeMtrx)
+  if(read_count != sizeMtrx)
   {
     delete[] mtrx;
     std::cerr << "Matrix data error!\n";
@@ -77,4 +77,5 @@ int main(int argc, char** argv)
   std::ofstream output(argv[3]);
   output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
   delete[] mtrx;
+  return 0;
 }
