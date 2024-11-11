@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <stdexcept>
 #include "spiral_decrement.h"
 #include "savetofile.h"
 #include "count_columns.h"
@@ -22,19 +23,13 @@ int main(int argc, char* argv[]) {
         int rows, cols;
         inFile >> rows >> cols;
 
-        // Проверка на пустой файл
         if (inFile.eof() || rows <= 0 || cols <= 0) {
-            std::ofstream outFile(outputFileName);
-            if (outFile) {
-                outFile << "Размеры матрицы: 0 0" << std::endl;
-            }
-            return 0; // Завершаем программу с кодом 0
+            throw std::runtime_error("File is empty or contains invalid dimensions.");
         }
 
         int** matrix = nullptr;
 
         if (num == 1) {
-            // Проверка на достаточность данных для фиксированного массива
             if (rows <= 0 || cols <= 0) {
                 throw std::runtime_error("Недостаточно данных для создания фиксированного массива.");
             }
@@ -52,22 +47,12 @@ int main(int argc, char* argv[]) {
                 }
             }
 
-            // Если массив пуст, выводим код 0
-            if (fixedRows == 0 || fixedCols == 0) {
-                std::ofstream outFile(outputFileName);
-                if (outFile) {
-                    outFile << "Размеры матрицы: 0 0" << std::endl;
-                }
-                return 0; // Завершаем программу с кодом 0
-            }
-
         } else if (num == 2) {
             matrix = new int*[rows];
             for (int i = 0; i < rows; ++i) {
                 matrix[i] = new int[cols];
             }
 
-            // Чтение данных в динамический массив
             for (int i = 0; i < rows; ++i) {
                 for (int j = 0; j < cols; ++j) {
                     if (!(inFile >> matrix[i][j])) {
@@ -76,14 +61,6 @@ int main(int argc, char* argv[]) {
                 }
             }
 
-            // Проверка на пустой динамический массив
-            if (rows == 0 || cols == 0) {
-                std::ofstream outFile(outputFileName);
-                if (outFile) {
-                    outFile << "Размеры матрицы: 0 0" << std::endl;
-                }
-                return 0; // Завершаем программу с кодом 0
-            }
         } else {
             throw std::invalid_argument("Invalid value for num. Use 1 for fixed array or 2 for dynamic array.");
         }
@@ -103,7 +80,6 @@ int main(int argc, char* argv[]) {
             throw std::runtime_error("Error during file writing!");
         }
 
-        // Освобождение памяти
         for (int i = 0; i < rows; ++i) {
             delete[] matrix[i];
         }
@@ -111,7 +87,8 @@ int main(int argc, char* argv[]) {
 
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
-        return 1;
+        return 2;
     }
     return 0;
 }
+
