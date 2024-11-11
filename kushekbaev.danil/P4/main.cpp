@@ -11,7 +11,7 @@ int main()
 
   char * str2 = kushekbaev::readInputArray(size2, max);
 
-  if (str1 == nullptr || str2 == nullptr || size1 == 0 || size2 == 0)
+  if (size1 == 0 and size2 == 0)
   {
     std::cerr << "Failed input" << "\n";
     delete[] str1;
