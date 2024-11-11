@@ -4,7 +4,7 @@
 
 int main()
 {
-  std::size_t maxSize = 2;
+  size_t maxSize = 10;
   char* str = nullptr;
   try
   {
@@ -17,7 +17,7 @@ int main()
     return 1;
   }
 
-  std::size_t size = 0;
+  size_t size = 0;
   char c = '\0';
   std::noskipws(std::cin);
   while (c != '\n')
