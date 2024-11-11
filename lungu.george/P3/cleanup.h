@@ -1,7 +1,9 @@
-#ifndef "CLEANUP_H"
-#define "CLEANUP_H"
-namespace lungu {
+#ifndef CLEANUP_H
+#define CLEANUP_H
 
-  void cleanup(int** matrix, int rows);
+namespace lungu {
+    void cleanup(int** matrix, int rows);
 }
+
 #endif
+
