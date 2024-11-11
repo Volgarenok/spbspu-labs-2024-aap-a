@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <cctype>
 #include "cnt_row_nsm.h"
 #include "matrix.h"
 
@@ -18,7 +19,8 @@ int main(int argc, char** argv)
 
   char* first_arg = argv[1];
   int c = *first_arg - '0';
-  if (first_arg[0] < 48 || first_arg[0] > 57)
+  bool isDigit = std::isdigit(first_arg[0]);
+  if (!isDigit)
   {
     std::cerr << "First parameter is not a number\n";
     return 1;

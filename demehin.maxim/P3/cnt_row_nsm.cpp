@@ -1,7 +1,7 @@
 #include "cnt_row_nsm.h"
 #include <cstddef>
 
-int demehin::cnt_row_nsm(int* t, size_t m, size_t n)
+int demehin::cnt_row_nsm(const int* t, const size_t m, const size_t n)
 {
   size_t k = n * m;
   if (k == 0)
