@@ -1,6 +1,6 @@
+#include "taylor.h"
 #include <iostream>
 #include <cmath>
-#include "taylor.h"
 
 double ivanova::factorial(int n)
 {

@@ -1,8 +1,8 @@
+#include "taylor.h"
 #include <iostream>
 #include <iomanip>
 #include <stdexcept>
 #include <cstring>
-#include "taylor.h"
 
 void ivanova::Output(double x, size_t k, double error)
 {
@@ -10,7 +10,7 @@ void ivanova::Output(double x, size_t k, double error)
     const size_t Cols = 11;
     try
     {
-        std::cout << std::setw(MathErr) << ivanova::exp(x, k, error);
+        std::cout << std::setw(MathErr) << exp(x, k, error);
     }
     catch(const std::logic_error & e)
     {
@@ -18,7 +18,7 @@ void ivanova::Output(double x, size_t k, double error)
     }
     try
     {
-        std::cout << std::setw(MathErr) << ivanova::arctg(x, k, error);
+        std::cout << std::setw(MathErr) << arctg(x, k, error);
     }
     catch (const std::logic_error& e)
     {
@@ -26,13 +26,13 @@ void ivanova::Output(double x, size_t k, double error)
     }
     try
     {
-        std::cout << std::setw(MathErr) << ivanova::exp(x, k, error) + ivanova::arctg(x, k, error);
+        std::cout << std::setw(MathErr) << exp(x, k, error) + arctg(x, k, error);
     }
     catch (const std::logic_error& e)
     {
         std::cout << std::setw(MathErr) << "<MATH ERROR>";
     }
-    std::cout << " " << std::setw(Cols) << ivanova::stdExp(x);
-    std::cout << " " << std::setw(Cols) << ivanova::stdArctg(x);
-    std::cout << " " << std::setw(Cols) << ivanova::stdExp(x) + stdArctg(x);
+    std::cout << " " << std::setw(Cols) << stdExp(x);
+    std::cout << " " << std::setw(Cols) << stdArctg(x);
+    std::cout << " " << std::setw(Cols) << stdExp(x) + stdArctg(x);
 }
