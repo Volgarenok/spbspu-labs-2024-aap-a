@@ -23,15 +23,17 @@ int main(int argc, char* argv[]) {
         int rows, cols;
         inFile >> rows >> cols;
 
+        // Проверка на пустой файл
         if (inFile.eof() || rows <= 0 || cols <= 0) {
-            throw std::runtime_error("File is empty or contains invalid dimensions.");
+            return 0; // Возвращаем нулевой код выхода для пустого массива
         }
 
         int** matrix = nullptr;
 
         if (num == 1) {
+            // Проверка на достаточность данных для фиксированного массива
             if (rows <= 0 || cols <= 0) {
-                throw std::runtime_error("Недостаточно данных для создания фиксированного массива.");
+                return 0; // Возвращаем нулевой код выхода
             }
 
             const int fixedRows = rows;
@@ -53,6 +55,7 @@ int main(int argc, char* argv[]) {
                 matrix[i] = new int[cols];
             }
 
+            // Чтение данных в динамический массив
             for (int i = 0; i < rows; ++i) {
                 for (int j = 0; j < cols; ++j) {
                     if (!(inFile >> matrix[i][j])) {
@@ -80,6 +83,7 @@ int main(int argc, char* argv[]) {
             throw std::runtime_error("Error during file writing!");
         }
 
+        // Освобождение памяти
         for (int i = 0; i < rows; ++i) {
             delete[] matrix[i];
         }
@@ -87,7 +91,7 @@ int main(int argc, char* argv[]) {
 
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
-        return 2;
+        return 2; // Возвращаем код ошибки 2 для обозначения проблем с входными данными
     }
     return 0;
 }
