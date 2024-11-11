@@ -15,6 +15,7 @@ int main()
   }
   catch (const std::bad_alloc & e)
   {
+    delete[] istr;
     std::cerr << "No memory" << '\n';
     return 1;
   }
