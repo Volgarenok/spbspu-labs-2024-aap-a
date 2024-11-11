@@ -3,6 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void guseyn::copyarr(const char *arr, char *arrcopy, size_t size)
+{
+  for (size_t i = 0; i < size; i++)
+  {
+    arrcopy[i] = arr[i];
+  }
+}
+
 char * guseyn::inputLine(std::istream & in, char stop)
 {
   char *arr = nullptr;
@@ -19,15 +27,15 @@ char * guseyn::inputLine(std::istream & in, char stop)
     if (size == min)
     {
       min += 10;
-      arrcopy = arr;
+      guseyn::copyarr(arr, arrcopy, size);
       arr = static_cast < char* > (malloc(min));
-      arr = arrcopy;
+      guseyn::copyarr(arrcopy, arr, size);
       arrcopy = static_cast < char* > (malloc(min));
     }
   }
-  arrcopy = arr;
+  guseyn::copyarr(arr, arrcopy, size);
   arr = static_cast < char* > (malloc(size++));
-  arr = arrcopy;
+  guseyn::copyarr(arrcopy, arr, (size-1));
   arr[size] = '\n';
   return arr;
 }
