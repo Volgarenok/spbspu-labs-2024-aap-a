@@ -4,6 +4,7 @@
 #include "spiral_decrement.h"
 #include "savetofile.h"
 #include "count_columns.h"
+
 int main(int argc, char* argv[]) {
     try {
         if (argc != 4) {
@@ -20,12 +21,24 @@ int main(int argc, char* argv[]) {
 
         int rows, cols;
         inFile >> rows >> cols;
-        if (inFile.eof()) {
-            throw std::runtime_error("Input file is empty!");
+
+        // Проверка на пустой файл
+        if (inFile.eof() || rows <= 0 || cols <= 0) {
+            std::ofstream outFile(outputFileName);
+            if (outFile) {
+                outFile << "Размеры матрицы: 0 0" << std::endl;
+            }
+            return 0; // Завершаем программу с кодом 0
         }
+
         int** matrix = nullptr;
 
         if (num == 1) {
+            // Проверка на достаточность данных для фиксированного массива
+            if (rows <= 0 || cols <= 0) {
+                throw std::runtime_error("Недостаточно данных для создания фиксированного массива.");
+            }
+
             const int fixedRows = rows;
             const int fixedCols = cols;
             matrix = new int*[fixedRows];
@@ -39,8 +52,14 @@ int main(int argc, char* argv[]) {
                 }
             }
 
-            rows = fixedRows;
-            cols = fixedCols;
+            // Если массив пуст, выводим код 0
+            if (fixedRows == 0 || fixedCols == 0) {
+                std::ofstream outFile(outputFileName);
+                if (outFile) {
+                    outFile << "Размеры матрицы: 0 0" << std::endl;
+                }
+                return 0; // Завершаем программу с кодом 0
+            }
 
         } else if (num == 2) {
             matrix = new int*[rows];
@@ -48,15 +67,29 @@ int main(int argc, char* argv[]) {
                 matrix[i] = new int[cols];
             }
 
+            // Чтение данных в динамический массив
             for (int i = 0; i < rows; ++i) {
                 for (int j = 0; j < cols; ++j) {
+                    if (!(inFile >> matrix[i][j])) {
+                        throw std::runtime_error("Недостаточно данных для динамического массива.");
+                    }
                 }
+            }
+
+            // Проверка на пустой динамический массив
+            if (rows == 0 || cols == 0) {
+                std::ofstream outFile(outputFileName);
+                if (outFile) {
+                    outFile << "Размеры матрицы: 0 0" << std::endl;
+                }
+                return 0; // Завершаем программу с кодом 0
             }
         } else {
             throw std::invalid_argument("Invalid value for num. Use 1 for fixed array or 2 for dynamic array.");
         }
 
         inFile.close();
+
         lungu::spiralDecrement(matrix, rows, cols);
         int count = lungu::countColumnsWithoutConsecutiveDuplicates(matrix, rows, cols);
 
@@ -70,6 +103,7 @@ int main(int argc, char* argv[]) {
             throw std::runtime_error("Error during file writing!");
         }
 
+        // Освобождение памяти
         for (int i = 0; i < rows; ++i) {
             delete[] matrix[i];
         }
