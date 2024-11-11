@@ -1,7 +1,6 @@
 #include <iostream>
 #include "spiral_decrement.h"
 namespace lungu {
-
 void spiralDecrement(int** const matrix, const int rows, const int cols) {
     int top = 0;
     int bottom = rows - 1;
@@ -31,6 +30,5 @@ void spiralDecrement(int** const matrix, const int rows, const int cols) {
         }
     }
 }
-
 }
 

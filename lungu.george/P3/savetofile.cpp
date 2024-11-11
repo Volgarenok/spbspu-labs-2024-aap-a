@@ -2,7 +2,6 @@
 #include <fstream>
 #include "savetofile.h"
 namespace lungu {
-
 void saveToFile(int** matrix, int rows, int cols, const std::string& outputFileName) {
     std::ofstream outFile(outputFileName);
     if (!outFile) {
@@ -17,5 +16,4 @@ void saveToFile(int** matrix, int rows, int cols, const std::string& outputFileN
     }
     outFile.close();
 }
-
 }
