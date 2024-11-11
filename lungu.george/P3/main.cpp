@@ -10,7 +10,8 @@ int main(int argc, char* argv[]) {
     try {
         if (argc != 4) {
             throw std::invalid_argument("Using: " + std::string(argv[0]) + " num input output");
-        }x
+        }
+
         const int num = std::stoi(argv[1]);
         const std::string inputFileName = argv[2];
         const std::string outputFileName = argv[3];
@@ -23,14 +24,12 @@ int main(int argc, char* argv[]) {
         int rows, cols;
         inFile >> rows >> cols;
 
-        // Проверка на пустой файл
         if (inFile.eof()) {
-            return 2; // Возвращаем ненулевой код выхода для пустого файла
+            return 2;
         }
 
-        // Проверка на корректность размеров массива
         if (rows <= 0 || cols <= 0) {
-            return 2; // Возвращаем ненулевой код выхода для некорректного массива
+            return 2;
         }
 
         int** matrix = nullptr;
@@ -41,11 +40,10 @@ int main(int argc, char* argv[]) {
                 matrix[i] = new int[cols];
             }
 
-            // Проверка на достаточность данных для статического массива
             for (int i = 0; i < rows; ++i) {
                 for (int j = 0; j < cols; ++j) {
                     if (!(inFile >> matrix[i][j])) {
-                        throw std::runtime_error("Недостаточно данных для статического массива.");
+                        throw std::runtime_error("Not enough data");
                     }
                 }
             }
@@ -56,11 +54,10 @@ int main(int argc, char* argv[]) {
                 matrix[i] = new int[cols];
             }
 
-            // Чтение данных в динамический массив
             for (int i = 0; i < rows; ++i) {
                 for (int j = 0; j < cols; ++j) {
                     if (!(inFile >> matrix[i][j])) {
-                        throw std::runtime_error("Недостаточно данных для динамического массива.");
+                        throw std::runtime_error("Not enough data");
                     }
                 }
             }
@@ -84,7 +81,6 @@ int main(int argc, char* argv[]) {
             throw std::runtime_error("Error during file writing!");
         }
 
-        // Освобождение памяти
         for (int i = 0; i < rows; ++i) {
             delete[] matrix[i];
         }
@@ -92,7 +88,7 @@ int main(int argc, char* argv[]) {
 
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
-        return 2; // Возвращаем код ошибки 2 для обозначения проблем с входными данными
+        return 2;
     }
     return 0;
 }
