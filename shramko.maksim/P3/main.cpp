@@ -66,7 +66,7 @@ int main(int argc, char** argv)
     return 2;
   }
 
-  if(read_count != sizeMtrx)
+  if((read_count + 1) != sizeMtrx)
   {
     delete[] mtrx;
     std::cerr << "Matrix data error!\n";
