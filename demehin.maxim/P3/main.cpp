@@ -1,4 +1,3 @@
-#include <iostream>
 #include <fstream>
 #include <cctype>
 #include "cnt_row_nsm.h"
