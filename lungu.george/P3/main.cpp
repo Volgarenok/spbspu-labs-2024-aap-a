@@ -8,6 +8,8 @@
 
 int main(int argc, char* argv[]) {
     int** matrix = nullptr;
+    int rows = 0;
+    int cols = 0;
     try {
         if (argc != 4) {
             throw std::invalid_argument("Using: " + std::string(argv[0]) + " num input output");
