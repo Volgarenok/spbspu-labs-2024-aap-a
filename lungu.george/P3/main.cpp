@@ -8,21 +8,22 @@
 
 int main(int argc, char* argv[]) {
     int** matrix = nullptr;
+    int rows = 0;
+    int cols = 0;
+
     try {
-        if (argc != 4) {
-            throw std::invalid_argument("Using: " + std::string(argv[0]) + " num input output");
+        if (argc != 3) {
+            throw std::invalid_argument("Using: " + std::string(argv[0]) + " input output");
         }
 
-        const int num = std::stoi(argv[1]);
-        const std::string inputFileName = argv[2];
-        const std::string outputFileName = argv[3];
+        const std::string inputFileName = argv[1];
+        const std::string outputFileName = argv[2];
 
         std::ifstream inFile(inputFileName);
         if (!inFile) {
             throw std::runtime_error("Error during file unpacking!");
         }
 
-        int rows, cols;
         inFile >> rows >> cols;
 
         if (rows <= 0 || cols <= 0) {
@@ -59,6 +60,7 @@ int main(int argc, char* argv[]) {
 
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
+
         if (matrix) {
             for (int i = 0; i < rows; ++i) {
                 delete[] matrix[i];
