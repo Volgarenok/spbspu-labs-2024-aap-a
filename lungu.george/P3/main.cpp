@@ -4,12 +4,7 @@
 #include "spiral_decrement.h"
 #include "savetofile.h"
 #include "count_columns.h"
-#include "cleanup.h"
-
 int main(int argc, char* argv[]) {
-    int** matrix = nullptr;
-    int rows = 0;
-    int cols = 0;
     try {
         if (argc != 4) {
             throw std::invalid_argument("Using: " + std::string(argv[0]) + " num input output");
@@ -25,31 +20,14 @@ int main(int argc, char* argv[]) {
 
         int rows, cols;
         inFile >> rows >> cols;
-
-        if (inFile.eof() || (rows == 0 || cols == 0)) {
-            std::ofstream outFile(outputFileName);
-            if (outFile) {
-                outFile << "0 0" << std::endl;
-            }
-            return 0;
+        if (inFile.eof()) {
+            throw std::runtime_error("Input file is empty!");
         }
-
-        if (num == 2 && inFile.peek() == EOF) {
-            std::ofstream outFile(outputFileName);
-            if (outFile) {
-            }
-            return 0;
-        }
+        int** matrix = nullptr;
 
         if (num == 1) {
-            static const int fixedRows = 5;
-            static const int fixedCols = 5;
-
-            if (rows > fixedRows || cols > fixedCols) {
-                throw std::runtime_error("Not enough data" +
-                    std::to_string(fixedRows) + "x" + std::to_string(fixedCols));
-            }
-
+            const int fixedRows = rows;
+            const int fixedCols = cols;
             matrix = new int*[fixedRows];
             for (int i = 0; i < fixedRows; ++i) {
                 matrix[i] = new int[fixedCols];
@@ -72,9 +50,6 @@ int main(int argc, char* argv[]) {
 
             for (int i = 0; i < rows; ++i) {
                 for (int j = 0; j < cols; ++j) {
-                    if (!(inFile >> matrix[i][j])) {
-                        throw std::runtime_error("Not enough data for dynamic array");
-                    }
                 }
             }
         } else {
@@ -82,7 +57,6 @@ int main(int argc, char* argv[]) {
         }
 
         inFile.close();
-
         lungu::spiralDecrement(matrix, rows, cols);
         int count = lungu::countColumnsWithoutConsecutiveDuplicates(matrix, rows, cols);
 
@@ -91,15 +65,19 @@ int main(int argc, char* argv[]) {
         std::ofstream outFile(outputFileName, std::ios_base::app);
         if (outFile) {
             outFile << count << std::endl;
+            outFile.close();
         } else {
             throw std::runtime_error("Error during file writing!");
         }
+
+        for (int i = 0; i < rows; ++i) {
+            delete[] matrix[i];
+        }
+        delete[] matrix;
+
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
     }
-
-    lungu::cleanup(matrix, rows);
-
     return 0;
 }
-
