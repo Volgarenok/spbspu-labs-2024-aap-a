@@ -27,7 +27,7 @@ bool mozhegova::uppTriMtx(int * v, size_t m, size_t n)
   for (size_t k = m + 1; k < n * m; k += m + 1)
   {
     step++;
-    for (size_t i = 0; i < step; i++)
+    for (size_t i = 1; i <= step; i++)
     {
       if (v[k - i] != 0)
       {

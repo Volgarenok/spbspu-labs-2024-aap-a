@@ -54,7 +54,14 @@ int main(int argc, char ** argv)
     }
     return 2;
   }
-  output << mozhegova::uppTriMtx(arr, m, n) << "\n";
+  if (mozhegova::uppTriMtx(arr, m, n))
+  {
+    output << "true\n";
+  }
+  else
+  {
+    output << "false\n";
+  }
   if (std::strcmp(argv[1], "2") == 0)
   {
     delete[] arr;
