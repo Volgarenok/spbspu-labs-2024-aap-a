@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <cstddef>
 #include "input_output_matrix.hpp"
 #include "find_osed.hpp"
 #include "fll_inc_wav.hpp"
@@ -8,7 +7,7 @@
 
 int main(int argc, char ** argv)
 {
-  ptrdiff_t m = -1, n = -1;
+  int long long m = -1, n = -1;
   int testmode = 0;
   int auxiliary_array[10000] = {};
   if (argc < 4)
