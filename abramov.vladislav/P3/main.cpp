@@ -42,7 +42,7 @@ int main(int argc, char **argv)
       std::cerr << "Wrong input!\n";
       return 1;
     }
-    if (!abramov::inputMatrix(input, nums, m, n, read) || read!=m*n)
+    if (!abramov::inputMatrix(input, nums, m, n, read) || read != m * n)
     {
       std::cerr << "Wrong input!\n";
       return 1;
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
       std::cerr << "Memory fail\n";
       return 2;
     }
-    if (!abramov::inputMatrix(input, matrix, m, n, read) || read!=n*m)
+    if (!abramov::inputMatrix(input, matrix, m, n, read) || read != n * m)
     {
       std::cerr << "Wrong input!\n";
       delete[] matrix;
