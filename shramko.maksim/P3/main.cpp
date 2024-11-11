@@ -32,8 +32,6 @@ int main(int argc, char** argv)
     std::cerr << "First parameter is out of range\n";
     return 1;
   }
-  return true;
-
 
   size_t cnt_col = 0, cnt_row = 0;
   std::ifstream input(argv[2]);
@@ -79,5 +77,4 @@ int main(int argc, char** argv)
   std::ofstream output(argv[3]);
   output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
   delete[] mtrx;
-  return 0;
 }
