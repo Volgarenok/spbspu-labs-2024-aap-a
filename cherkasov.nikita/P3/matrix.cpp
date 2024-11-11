@@ -105,3 +105,20 @@ void cherkasov::freeMatrix(int** matrix, int rows)
   }
     delete[] matrix;
 }
+
+bool cherkasov::lowerTriangul(int** matrix, int rows, int cols)
+{
+  for (int i = 0; i < rows; ++i)
+  {
+    for (int j = i + 1; j < cols; ++j)
+    {
+      if (matrix[i][j] != 0)
+      {
+        return false;
+      }
+    }
+  }
+
+    return true;
+}
+
