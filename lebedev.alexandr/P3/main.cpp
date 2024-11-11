@@ -15,15 +15,17 @@ int main(int argc, char** argv)
     std::cerr << "Too many arguments!\n";
     return 1;
   }
-
-  char* t = argv[1];
-  if (!isNumbers(t))
+  
+  for (size_t i = 0; argv[1][i] != '\0'; ++i)
   {
-    std::cerr << "First parameter is not a number!\n";
-    return 1;
+    if (argv[1][i] < '0' || argv[1][i] > '9')
+    {
+      std::cerr << "First parametr is not a number!\n";
+      return 1;
+    }
   }
 
-  int num = atoi(t);
+  int num = std::atoi(argv[1]);
   if (num < 1 || num > 2)
   {
     std::cerr << "First parameter is out of range!\n";
@@ -40,34 +42,36 @@ int main(int argc, char** argv)
   }
 
   std::ofstream outputFile(argv[3]);
-  const size_t size = (m * n);
+  constexpr size_t staticSize = 10000;
+  int staticArr[staticSize];
+  int* arr = staticArr;
 
-  if (num == 1)
+  if (num == 2)
   {
-    int arr[10000];
-
-    if(!inputTable(inputFile, arr, size))
+    try
     {
-      std::cerr << "Incorrect data in the file!\n";
+      arr = new int[m * n];
+    }
+    catch(std::bad_alloc& e)
+    {
+      std::cerr << "Memory allocation error!\n";
       return 2;
     }
-
-    outputTable(outputFile, arr, m);
-    outputFile << '\n';
   }
-  else
+
+  if (!lebedev::input(inputFile, arr, m))
   {
-    int* arr = new int[size];
-
-    if (!inputTable(inputFile, arr, size))
+    std::cerr << "Incorrect data in the file\n";
+    if (num == 2)
     {
-      std::cerr << "Incorrect data in the file!\n";
       delete[] arr;
-      return 2;
     }
-
-    outputTable(outputFile, arr, m);
-    outputFile << '\n';
+    return 2;
+  }
+  
+  lebedev::output(outputFile, arr, m);
+  if (num == 2)
+  {
     delete[] arr;
   }
   return 0;
