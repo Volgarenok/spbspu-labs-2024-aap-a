@@ -5,7 +5,7 @@ int main()
 {
   if(!std::cin)
   {
-    std::cerr << "No input";
+    std::cerr << "No input" << '\n';
     return 1;
   }
   char* istr = nullptr;
