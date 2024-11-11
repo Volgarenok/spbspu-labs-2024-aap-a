@@ -10,8 +10,7 @@ int main(int argc, char* argv[]) {
     try {
         if (argc != 4) {
             throw std::invalid_argument("Using: " + std::string(argv[0]) + " num input output");
-        }
-        
+        }x
         const int num = std::stoi(argv[1]);
         const std::string inputFileName = argv[2];
         const std::string outputFileName = argv[3];
