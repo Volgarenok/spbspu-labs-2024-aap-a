@@ -1,6 +1,6 @@
 #include "matrix.hpp"
 
-std::istream& abramov::input_Matrix(std::istream &in, int *mtx, size_t m, size_t n, size_t &read)
+std::istream& abramov::inputMatrix(std::istream &in, int *mtx, size_t m, size_t n, size_t &read)
 {
   for (size_t i = 0; i < m * n; ++i)
   {
@@ -43,7 +43,7 @@ int *abramov::toSquare(int *mtx, size_t m, size_t n, size_t &count)
   return matrix;
 }
 
-void abramov::transform_Matrix(int *mtx, size_t count)
+void abramov::transformMatrix(int *mtx, size_t count)
 {
   int iBegin = count;
   int iEnd = 0;
@@ -77,7 +77,7 @@ void abramov::transform_Matrix(int *mtx, size_t count)
   }
 }
 
-void abramov::output_Matrix(std::ostream &out, int *mtx, size_t m)
+void abramov::outputMatrix(std::ostream &out, int *mtx, size_t m)
 {
   out << m << " " << m << " ";
   for (size_t i = 0; i < m * m; ++i)

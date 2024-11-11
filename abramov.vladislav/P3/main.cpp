@@ -42,7 +42,7 @@ int main(int argc, char **argv)
       std::cerr << "Wrong input!\n";
       return 1;
     }
-    if (!abramov::input_Matrix(input, nums, m, n, read) || read!=m*n)
+    if (!abramov::inputMatrix(input, nums, m, n, read) || read!=m*n)
     {
       std::cerr << "Wrong input!\n";
       return 1;
@@ -57,8 +57,8 @@ int main(int argc, char **argv)
       std::cerr << "Memory fail\n";
       return 2;
     }
-    abramov::transform_Matrix(new_mtx, count);
-    abramov::output_Matrix(output, new_mtx, count);
+    abramov::transformMatrix(new_mtx, count);
+    abramov::outputMatrix(output, new_mtx, count);
     delete[] new_mtx;
   }
   else if (atoi(argv[1]) == 2)
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
       std::cerr << "Memory fail\n";
       return 2;
     }
-    if (!abramov::input_Matrix(input, matrix, m, n, read) || read!=n*m)
+    if (!abramov::inputMatrix(input, matrix, m, n, read) || read!=n*m)
     {
       std::cerr << "Wrong input!\n";
       delete[] matrix;
@@ -94,8 +94,8 @@ int main(int argc, char **argv)
       std::cerr << "Memory fail\n";
       return 2;
     }
-    abramov::transform_Matrix(new_mtx, count);
-    abramov::output_Matrix(output, new_mtx, count);
+    abramov::transformMatrix(new_mtx, count);
+    abramov::outputMatrix(output, new_mtx, count);
     delete[] matrix;
     delete[] new_mtx;
   }
