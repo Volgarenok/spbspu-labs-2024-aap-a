@@ -37,10 +37,11 @@ char * guseyn::inputLine(std::istream & in, char stop)
   arr = static_cast < char* > (malloc(size++));
   guseyn::copyarr(arrcopy, arr, (size-1));
   arr[size] = '\n';
+  free(arrcopy);
   return arr;
 }
 
-size_t guseyn::identifyUniqueChar(char *inputString, char *uniqueChars, size_t num)
+size_t guseyn::identifyUniqueChar(const char *inputString, const char *uniqueChars, size_t num)
 {
   bool *check;
   size_t res = 0;
