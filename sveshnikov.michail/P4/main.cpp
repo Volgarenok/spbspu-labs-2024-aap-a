@@ -8,7 +8,7 @@ int main()
   char *str = new char[len];
   char *new_str = nullptr;
   std::noskipws(std::cin);
-  sveshnikov::build_str(std::cin, str, len);
+  sveshnikov::read_str(std::cin, str, len);
   char *new_str = new char[len];
   new_str = sveshnikov::rep_sym(str, new_str);
   std::skipws(std::cin);

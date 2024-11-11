@@ -5,8 +5,8 @@
 
 namespace sveshnikov
 {
-  char * rep_sym(const char *str, char *new_str);
-  std::istream &build_str(std::istream &in, char *str, size_t len);
-  char * memory_alloc(char *str, size_t len);
+  char *rep_sym(const char *str, char *new_str);
+  std::istream &read_str(std::istream &in, char *str, size_t len);
+  char *memory_alloc(char *str, size_t len);
 }
-#endif 
+#endif

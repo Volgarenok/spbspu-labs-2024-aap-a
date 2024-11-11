@@ -1,7 +1,7 @@
 #include "rep_sym.hpp"
 #include <iostream>
 
-char * sveshnikov::memory_alloc(char *str, size_t len)
+char *sveshnikov::memory_alloc(char *str, size_t len)
 {
   len += 100;
   char *longer_str = nullptr;
