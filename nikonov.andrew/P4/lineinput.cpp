@@ -15,7 +15,7 @@ char* getLine(size_t& capacity)
   {
     if (cnt == capacity - 1)
     {
-      line[cnt + 1] = '\0';
+      line[cnt] = '\0';
       line = reallocate(line, capacity);
       if (line == nullptr)
       {

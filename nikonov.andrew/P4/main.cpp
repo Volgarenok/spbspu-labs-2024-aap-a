@@ -15,9 +15,7 @@ int main()
     return 1;
   }
   char secondLine[] = "aF1 df145\0";
-  printLine(firstLine);
   firstLine = reallocate(firstLine, capacity, cntDgt(firstLine));
-  printLine(firstLine);
   if (!firstLine)
   {
     std::cerr << "ERROR: bad alloc\n";
