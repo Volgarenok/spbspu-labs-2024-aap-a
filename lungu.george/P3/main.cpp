@@ -11,6 +11,7 @@ int main(int argc, char* argv[]) {
         if (argc != 4) {
             throw std::invalid_argument("Using: " + std::string(argv[0]) + " num input output");
         }
+        
         const int num = std::stoi(argv[1]);
         const std::string inputFileName = argv[2];
         const std::string outputFileName = argv[3];
@@ -24,28 +25,29 @@ int main(int argc, char* argv[]) {
         inFile >> rows >> cols;
 
         // Проверка на пустой файл
-        if (inFile.eof() || rows <= 0 || cols <= 0) {
-            return 0; // Возвращаем нулевой код выхода для пустого массива
+        if (inFile.eof()) {
+            return 2; // Возвращаем ненулевой код выхода для пустого файла
+        }
+
+        // Проверка на корректность размеров массива
+        if (rows <= 0 || cols <= 0) {
+            return 2; // Возвращаем ненулевой код выхода для некорректного массива
         }
 
         int** matrix = nullptr;
 
         if (num == 1) {
-            // Проверка на достаточность данных для фиксированного массива
-            if (rows <= 0 || cols <= 0) {
-                return 0; // Возвращаем нулевой код выхода
+            matrix = new int*[rows];
+            for (int i = 0; i < rows; ++i) {
+                matrix[i] = new int[cols];
             }
 
-            const int fixedRows = rows;
-            const int fixedCols = cols;
-            matrix = new int*[fixedRows];
-            for (int i = 0; i < fixedRows; ++i) {
-                matrix[i] = new int[fixedCols];
-            }
-
-            for (int i = 0; i < fixedRows; ++i) {
-                for (int j = 0; j < fixedCols; ++j) {
-                    matrix[i][j] = (i * fixedCols) + j + 1;
+            // Проверка на достаточность данных для статического массива
+            for (int i = 0; i < rows; ++i) {
+                for (int j = 0; j < cols; ++j) {
+                    if (!(inFile >> matrix[i][j])) {
+                        throw std::runtime_error("Недостаточно данных для статического массива.");
+                    }
                 }
             }
 
