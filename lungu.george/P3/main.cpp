@@ -7,6 +7,7 @@
 #include "count_columns.h"
 
 int main(int argc, char* argv[]) {
+    int** matrix = nullptr;
     try {
         if (argc != 4) {
             throw std::invalid_argument("Using: " + std::string(argv[0]) + " num input output");
@@ -24,46 +25,21 @@ int main(int argc, char* argv[]) {
         int rows, cols;
         inFile >> rows >> cols;
 
-        if (inFile.eof()) {
-            return 2;
-        }
-
         if (rows <= 0 || cols <= 0) {
-            return 2;
+            return 0;
         }
 
-        int** matrix = nullptr;
+        matrix = new int*[rows];
+        for (int i = 0; i < rows; ++i) {
+            matrix[i] = new int[cols];
+        }
 
-        if (num == 1) {
-            matrix = new int*[rows];
-            for (int i = 0; i < rows; ++i) {
-                matrix[i] = new int[cols];
-            }
-
-            for (int i = 0; i < rows; ++i) {
-                for (int j = 0; j < cols; ++j) {
-                    if (!(inFile >> matrix[i][j])) {
-                        throw std::runtime_error("Not enough data");
-                    }
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                if (!(inFile >> matrix[i][j])) {
+                    throw std::runtime_error("Not enough data");
                 }
             }
-
-        } else if (num == 2) {
-            matrix = new int*[rows];
-            for (int i = 0; i < rows; ++i) {
-                matrix[i] = new int[cols];
-            }
-
-            for (int i = 0; i < rows; ++i) {
-                for (int j = 0; j < cols; ++j) {
-                    if (!(inFile >> matrix[i][j])) {
-                        throw std::runtime_error("Not enough data");
-                    }
-                }
-            }
-
-        } else {
-            throw std::invalid_argument("Invalid value for num. Use 1 for fixed array or 2 for dynamic array.");
         }
 
         inFile.close();
@@ -81,15 +57,23 @@ int main(int argc, char* argv[]) {
             throw std::runtime_error("Error during file writing!");
         }
 
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        if (matrix) {
+            for (int i = 0; i < rows; ++i) {
+                delete[] matrix[i];
+            }
+            delete[] matrix;
+        }
+        return 2;
+    }
+    if (matrix) {
         for (int i = 0; i < rows; ++i) {
             delete[] matrix[i];
         }
         delete[] matrix;
-
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-        return 2;
     }
+
     return 0;
 }
 
