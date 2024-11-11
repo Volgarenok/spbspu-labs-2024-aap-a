@@ -12,7 +12,7 @@ char* lanovenko::inputstring(std::istream& in, const char stop)
   catch (const std::bad_alloc & e)
   {
     delete[] str;
-    throw;
+    throw std::logic_error("Out of memory\n");
   }
 
   size_t quantity = 0;
@@ -20,6 +20,10 @@ char* lanovenko::inputstring(std::istream& in, const char stop)
   in >> std::noskipws;
   while (in >> c && c != stop)
   {
+    if(!isalpha(c))
+    {
+      throw std::logic_error("Not a letter");
+    }
     if (quantity >= capacity - 1)
     {
       capacity *= 2;
@@ -32,7 +36,7 @@ char* lanovenko::inputstring(std::istream& in, const char stop)
       {
         delete[] new_str;
         delete[] str;
-        throw;
+        throw std::logic_error("Out of memory\n");
       }
       for (size_t i = 0; i < quantity; i++)
       {
