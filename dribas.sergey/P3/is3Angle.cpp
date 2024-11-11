@@ -3,19 +3,22 @@
 
 bool dribas::checkLine(int const* matrix, size_t M, size_t N, int variaty, size_t target)
 {
-  size_t result = 0;
-
-  if (variaty == 1){
-    for (size_t i = M; matrix[i] != 0 || i == N; i += 1){
-      result += 1;
+  size_t count = 0;
+  if (variaty == 1) {
+    for (size_t i = M; matrix[i] == 0 && i <= N; i += 1) {
+      count += 1;
     }
   }
-  if (variaty == 2){
-    for (size_t i = N; matrix[i] != 0 || i == M; i -= 1){
-      result += 1;
+  if (variaty == 2) {
+    for (size_t i = N; matrix[i] == 0 && M <= i; i -= 1) {
+      count += 1;
     }
   }
-  return result>=target;
+  if (count >= target) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 bool dribas::is3Angle(int const* matrix, size_t M, size_t N)
@@ -27,7 +30,7 @@ bool dribas::is3Angle(int const* matrix, size_t M, size_t N)
   for (int variaty = 1; variaty < 3; variaty += 1){
     bool preresult = true;
     for (size_t i = 0; i < M; i += 1){
-      preresult = preresult && dribas::checkLine(matrix,i * M, (i + 1) * M, variaty, M-1-i);
+      preresult = preresult && dribas::checkLine(matrix, i * M, ((i + 1) * M) - 1, variaty, M - 1 - i);
     }
     result = result || preresult;
   }
