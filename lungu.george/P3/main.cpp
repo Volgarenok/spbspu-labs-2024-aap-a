@@ -36,6 +36,14 @@ int main(int argc, char* argv[]) {
             }
             return 0;
         }
+        if (inFile.peek() == EOF) {
+            std::ofstream outFile(outputFileName);
+            if (outFile) {
+                outFile << "Размеры матрицы: " << rows << " " << cols << std::endl;
+                outFile.close();
+            }
+            return 0;
+        }
 
         int** matrix = nullptr;
 
