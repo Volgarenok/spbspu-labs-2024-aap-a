@@ -47,6 +47,12 @@ int main(int argc, char ** argv)
     std::cerr << "Non-correct matrix parameter\n";
     return 2;
   }
+  if ((m == 0) || (n == 0))
+  {
+    output << "0\n";
+    output << "0 0\n";
+    return 0;
+  }
   int * mtx = nullptr;
   if (testmode == 1)
   {
