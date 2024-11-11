@@ -19,22 +19,8 @@ int main()
     return 1;
   }
 
-  bool hasCommonChars = false;
-
-  for (size_t i = 0; i < size1; i++)
-  {
-    for (size_t j = 0; j < size2; j++)
-    {
-      if (str1[i] == str2[j])
-      {
-        hasCommonChars = true;
-        break;
-      }
-    }
-      if (hasCommonChars) break;
-    }
-
-    std::cout << hasCommonChars << "\n";
+  int result = kushekbaev::hasCommonChars(str1, size1, str2, size2);
+  std::cout << result << "\n";
 
   delete[] str1;
   delete[] str2;
