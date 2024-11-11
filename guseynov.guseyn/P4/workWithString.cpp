@@ -34,8 +34,8 @@ char * guseyn::inputLine(std::istream & in, char stop)
     }
   }
   guseyn::copyarr(arr, arrcopy, size);
-  arr = static_cast < char* > (malloc(size++));
-  guseyn::copyarr(arrcopy, arr, (size-1));
+  arr = static_cast < char* > (malloc(size+1));
+  guseyn::copyarr(arrcopy, arr, (size));
   arr[size] = '\n';
   free(arrcopy);
   return arr;
