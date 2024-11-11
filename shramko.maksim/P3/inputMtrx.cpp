@@ -5,10 +5,11 @@ std::istream & shramko::inputMtrx(std::istream & in, int* mtrx, size_t sizeMtrx,
   for (size_t i = 0; i < sizeMtrx; ++i)
   {
     in >> mtrx[i];
-    if (in)
+    if (!in)
     {
-      read_count++;
+      exit(96);
     }
+    read_count++;
   }
   return in;
 }
