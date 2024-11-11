@@ -1,5 +1,4 @@
 #include "rep_sym.hpp"
-#include <iostream>
 
 char *sveshnikov::memory_alloc(char *str, std::size_t *len)
 {

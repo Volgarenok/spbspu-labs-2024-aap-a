@@ -1,5 +1,3 @@
-#include <iostream>
-#include <ios>
 #include "rep_sym.hpp"
 
 int main()
@@ -15,7 +13,6 @@ int main()
     std::cerr << "ERROR: BAD_ALLOC! " << e.what() << '\n';
     return 1;
   }
-  std::noskipws(std::cin);
   str = sveshnikov::read_str(std::cin, str, &len);
   if (str == nullptr)
   {
@@ -39,7 +36,6 @@ int main()
     std::cout << new_str[i];
   }
   std::cout << "\n";
-  std::skipws(std::cin);
   delete[] str;
   delete[] new_str;
   return 0;
