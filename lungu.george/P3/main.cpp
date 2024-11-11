@@ -86,7 +86,7 @@ int main(int argc, char* argv[]) {
 
         lungu::saveToFile(matrix, rows, cols, outputFileName);
 
-        std::ofstream outFile(outputFileName, std::ios_base::app); 
+        std::ofstream outFile(outputFileName, std::ios_base::app);
         if (outFile) {
             outFile << count << std::endl;
         } else {
