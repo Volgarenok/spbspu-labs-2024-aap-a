@@ -1,4 +1,4 @@
-##ifndef "CLEANUP_H"
+#ifndef "CLEANUP_H"
 #define "CLEANUP_H"
 namespace lungu {
 
