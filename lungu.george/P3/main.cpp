@@ -4,6 +4,7 @@
 #include "spiral_decrement.h"
 #include "savetofile.h"
 #include "count_columns.h"
+
 int main(int argc, char* argv[]) {
     try {
         if (argc != 4) {
@@ -21,11 +22,31 @@ int main(int argc, char* argv[]) {
         int rows, cols;
         inFile >> rows >> cols;
 
+        if (inFile.eof()) {
+            throw std::runtime_error("Input file is empty!");
+        }
+
+        if (rows == 0 || cols == 0) {
+            std::ofstream outFile(outputFileName);
+            if (outFile) {
+                outFile << "0 0" << std::endl;
+                outFile.close();
+            } else {
+                throw std::runtime_error("Error during file writing!");
+            }
+            return 0;
+        }
+
         int** matrix = nullptr;
 
         if (num == 1) {
-            const int fixedRows = rows;
-            const int fixedCols = cols;
+            static const int fixedRows = 5;
+            static const int fixedCols = 5;
+            if (rows < fixedRows || cols < fixedCols) {
+                throw std::runtime_error("Not enough data for static array " +
+                    std::to_string(fixedRows) + "x" + std::to_string(fixedCols));
+            }
+
             matrix = new int*[fixedRows];
             for (int i = 0; i < fixedRows; ++i) {
                 matrix[i] = new int[fixedCols];
@@ -49,7 +70,7 @@ int main(int argc, char* argv[]) {
             for (int i = 0; i < rows; ++i) {
                 for (int j = 0; j < cols; ++j) {
                     if (!(inFile >> matrix[i][j])) {
-                        throw std::runtime_error("Error during matrix reading!");
+                        throw std::runtime_error("Not enough data for dynamic array ");
                     }
                 }
             }
@@ -58,10 +79,12 @@ int main(int argc, char* argv[]) {
         }
 
         inFile.close();
+
         lungu::spiralDecrement(matrix, rows, cols);
         int count = lungu::countColumnsWithoutConsecutiveDuplicates(matrix, rows, cols);
 
         lungu::saveToFile(matrix, rows, cols, outputFileName);
+
 
         std::ofstream outFile(outputFileName, std::ios_base::app);
         if (outFile) {
@@ -82,5 +105,3 @@ int main(int argc, char* argv[]) {
     }
     return 0;
 }
-
-
