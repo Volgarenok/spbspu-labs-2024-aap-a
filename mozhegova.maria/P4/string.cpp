@@ -4,8 +4,12 @@
 char * mozhegova::inputString(std::istream & in, char stop)
 {
   size_t length = 10;
-  char * str = new char [length + 1];
-  if (!str)
+  char * str = nullptr;
+  try
+  {
+    str = new char [length + 1];
+  }
+  catch(const std::bad_alloc & e)
   {
     return nullptr;
   }
@@ -34,8 +38,12 @@ char * mozhegova::inputString(std::istream & in, char stop)
 
 char * mozhegova::changeSize(char * nowstr, size_t length)
 {
-  char * newstr = new char [length + 10];
-  if (!newstr)
+  char * newstr = nullptr;
+  try
+  {
+    newstr = new char [length + 10];
+  }
+  catch(const std::bad_alloc & e)
   {
     return nullptr;
   }

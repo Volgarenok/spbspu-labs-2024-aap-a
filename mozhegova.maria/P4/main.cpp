@@ -8,6 +8,12 @@ int main()
     std::cerr << "Out of memory\n";
     return 1;
   }
+  if (str[0] == '\0')
+  {
+    delete[] str;
+    std::cerr << "Empty input\n";
+    return 1;
+  }
   char * result = mozhegova::spcRmv(str);
   for (size_t i = 0; result[i] != '\0'; i++)
   {
