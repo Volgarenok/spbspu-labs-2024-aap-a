@@ -4,8 +4,10 @@
 #include "spiral_decrement.h"
 #include "savetofile.h"
 #include "count_columns.h"
+#include "cleanup.h"
 
 int main(int argc, char* argv[]) {
+    int** matrix = nullptr;
     try {
         if (argc != 4) {
             throw std::invalid_argument("Using: " + std::string(argv[0]) + " num input output");
@@ -22,36 +24,27 @@ int main(int argc, char* argv[]) {
         int rows, cols;
         inFile >> rows >> cols;
 
-        if (inFile.eof()) {
-            throw std::runtime_error("Input file is empty!");
-        }
-
-        if (rows == 0 || cols == 0) {
+        if (inFile.eof() || (rows == 0 || cols == 0)) {
             std::ofstream outFile(outputFileName);
             if (outFile) {
                 outFile << "0 0" << std::endl;
-                outFile.close();
-            } else {
-                throw std::runtime_error("Error during file writing!");
             }
             return 0;
         }
-        if (inFile.peek() == EOF) {
+
+        if (num == 2 && inFile.peek() == EOF) {
             std::ofstream outFile(outputFileName);
             if (outFile) {
-                outFile << "Размеры матрицы: " << rows << " " << cols << std::endl;
-                outFile.close();
             }
             return 0;
         }
 
-        int** matrix = nullptr;
-
         if (num == 1) {
-            const int fixedRows = 5;
-            const int fixedCols = 5;
+            static const int fixedRows = 5;
+            static const int fixedCols = 5;
+
             if (rows > fixedRows || cols > fixedCols) {
-                throw std::runtime_error("Not enough data for static array " +
+                throw std::runtime_error("Not enough data" +
                     std::to_string(fixedRows) + "x" + std::to_string(fixedCols));
             }
 
@@ -60,11 +53,14 @@ int main(int argc, char* argv[]) {
                 matrix[i] = new int[fixedCols];
             }
 
-            for (int i = 0; i < rows; ++i) {
-                for (int j = 0; j < cols; ++j) {
-                    matrix[i][j] = (i * cols) + j + 1;
+            for (int i = 0; i < fixedRows; ++i) {
+                for (int j = 0; j < fixedCols; ++j) {
+                    matrix[i][j] = (i * fixedCols) + j + 1;
                 }
-           }
+            }
+
+            rows = fixedRows;
+            cols = fixedCols;
 
         } else if (num == 2) {
             matrix = new int*[rows];
@@ -75,7 +71,7 @@ int main(int argc, char* argv[]) {
             for (int i = 0; i < rows; ++i) {
                 for (int j = 0; j < cols; ++j) {
                     if (!(inFile >> matrix[i][j])) {
-                        throw std::runtime_error("Not enough data for dynamic array ");
+                        throw std::runtime_error("Not enough data for dynamic array");
                     }
                 }
             }
@@ -90,23 +86,18 @@ int main(int argc, char* argv[]) {
 
         lungu::saveToFile(matrix, rows, cols, outputFileName);
 
-
-        std::ofstream outFile(outputFileName, std::ios_base::app);
+        std::ofstream outFile(outputFileName, std::ios_base::app); 
         if (outFile) {
             outFile << count << std::endl;
-            outFile.close();
         } else {
             throw std::runtime_error("Error during file writing!");
         }
-
-        for (int i = 0; i < rows; ++i) {
-            delete[] matrix[i];
-        }
-        delete[] matrix;
-
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
-        return 1;
     }
+
+    lungu::cleanup(matrix, rows);
+
     return 0;
 }
+
