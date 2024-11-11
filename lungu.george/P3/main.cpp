@@ -40,9 +40,9 @@ int main(int argc, char* argv[]) {
         int** matrix = nullptr;
 
         if (num == 1) {
-            static const int fixedRows = 5;
-            static const int fixedCols = 5;
-            if (rows < fixedRows || cols < fixedCols) {
+            const int fixedRows = 5;
+            const int fixedCols = 5;
+            if (rows > fixedRows || cols > fixedCols) {
                 throw std::runtime_error("Not enough data for static array " +
                     std::to_string(fixedRows) + "x" + std::to_string(fixedCols));
             }
@@ -52,14 +52,11 @@ int main(int argc, char* argv[]) {
                 matrix[i] = new int[fixedCols];
             }
 
-            for (int i = 0; i < fixedRows; ++i) {
-                for (int j = 0; j < fixedCols; ++j) {
-                    matrix[i][j] = (i * fixedCols) + j + 1;
+            for (int i = 0; i < rows; ++i) {
+                for (int j = 0; j < cols; ++j) {
+                    matrix[i][j] = (i * cols) + j + 1;
                 }
-            }
-
-            rows = fixedRows;
-            cols = fixedCols;
+           }
 
         } else if (num == 2) {
             matrix = new int*[rows];
