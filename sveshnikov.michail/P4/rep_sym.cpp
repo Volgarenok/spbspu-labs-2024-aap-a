@@ -3,12 +3,12 @@
 char *sveshnikov::rep_sym(const char *str, char *new_str)
 {
   std::size_t count = 0;
-  for (std::size_t i = 0; str[i + 1] != '\n'; i++)
+  for (std::size_t i = 0; str[i] != '\0'; i++)
   {
-    std::size_t j = i, k = 1, povtor = 0;
-    while (str[k] != '\n' || str[i] != str[k - 1])
+    std::size_t j = i + 1, k = 0, povtor = 0;
+    while (new_str[k] != '\0' && str[i] != new_str[k] && povtor != 1)
     {
-      if (str[i] != str[k - 1])
+      if (str[i] == new_str[k + 1])
       {
         povtor = 1;
       }
@@ -16,16 +16,24 @@ char *sveshnikov::rep_sym(const char *str, char *new_str)
     }
     if (povtor == 0)
     {
-      while (str[j] != '\n' || str[i] != str[j])
+      if (str[i] == str[j])
+      {
+        new_str[count] = str[i];
+        new_str[count + 1] = '\0';
+        count++;
+      }
+      while (str[j] != '\0' && str[i] != str[j])
       {
         if (str[i] == str[j + 1])
         {
           new_str[count] = str[i];
+          new_str[count + 1] = '\0';
           count++;
         }
         j++;
       }
     }
   }
+  new_str[count] = '\0';
   return new_str;
 }
