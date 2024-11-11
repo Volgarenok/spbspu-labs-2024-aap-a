@@ -28,8 +28,8 @@ int zholobov::calc_min_sum_mdg(const int* matrix, size_t rows, size_t cols)
 {
   const int* start_elem = matrix;
   size_t anti_diagonal_n = std::min(rows, cols);
-  int min_sum = std::numeric_limits< int >::max();
-  for (size_t i = 0; i < cols; i++, start_elem++) {
+  int min_sum = *start_elem;
+  for (size_t i = 1; i < cols; i++, start_elem++) {
     if (i == anti_diagonal_n - 1) {
       continue;
     }
