@@ -26,7 +26,7 @@ double* tkach::createMtx2(const int* const mtx, const size_t row_size, const siz
       if (j > 0)
       {
         num++;
-        sum += mtx[ i * column_size + j - 1];
+        sum += mtx[i * column_size + j - 1];
       }
       if (j + 1 < column_size)
       {

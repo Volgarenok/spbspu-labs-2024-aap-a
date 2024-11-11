@@ -18,7 +18,7 @@ int main(int argc, char** argv)
   const char * number = argv[1];
   int id = 0;
   id = std::atoi(number);
-  if (((id != 1) && (id != 2)))
+  if ((id != 1) && (id != 2))
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
