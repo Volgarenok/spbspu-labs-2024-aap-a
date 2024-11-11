@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <fstream>
-#include "table.hpp"
+#include "matrix.hpp"
 
 int main(int argc, char** argv)
 {
@@ -15,7 +15,7 @@ int main(int argc, char** argv)
     std::cerr << "Too many arguments!\n";
     return 1;
   }
-  
+
   for (size_t i = 0; argv[1][i] != '\0'; ++i)
   {
     if (argv[1][i] < '0' || argv[1][i] > '9')
@@ -68,7 +68,7 @@ int main(int argc, char** argv)
     }
     return 2;
   }
-  
+
   lebedev::output(outputFile, arr, m);
   if (num == 2)
   {
