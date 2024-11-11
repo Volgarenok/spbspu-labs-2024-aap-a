@@ -59,6 +59,7 @@ int main(int argc, char** argv)
       std::cerr << "Out of memory\n";
       return 1;
     }
+  }
 
   size_t read_count = 0;
   if(!shramko::inputMtrx(input, mtrx, sizeMtrx, read_count))
@@ -78,6 +79,5 @@ int main(int argc, char** argv)
   std::ofstream output(argv[3]);
   output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
   delete[] mtrx;
-  }
   return 0;
 }
