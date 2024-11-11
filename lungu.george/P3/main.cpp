@@ -26,20 +26,17 @@ int main(int argc, char* argv[]) {
         int** matrix = nullptr;
         const int fixedRows = 5;
         const int fixedCols = 5;
-        if (num == 1) {
+        if (num == 1 && rows <= fixedRows && cols <= fixedCols) {
             matrix = new int*[fixedRows];
             for (int i = 0; i < fixedRows; ++i) {
                 matrix[i] = new int[fixedCols];
             }
 
-            for (int i = 0; i < fixedRows; ++i) {
-                for (int j = 0; j < fixedCols; ++j) {
-                    matrix[i][j] = (i * fixedCols) + j + 1;
+            for (int i = 0; i < rows; ++i) {
+                for (int j = 0; j < cols; ++j) {
+                    matrix[i][j] = (i * cols) + j + 1;
                 }
             }
-
-            rows = fixedRows;
-            cols = fixedCols;
 
         } else if (num == 2) {
             matrix = new int*[rows];
