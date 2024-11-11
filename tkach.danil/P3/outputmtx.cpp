@@ -2,19 +2,13 @@
 #include <iostream>
 #include <iomanip>
 
-void tkach::outputMtx(std::ostream & out, const double* const mtx, const size_t str, const size_t stl)
+void tkach::outputMtx(std::ostream & out, const double* const mtx, const size_t row_size, const size_t column_size)
 {
-  if (mtx == nullptr)
-  {
-    std::cerr << "Out of memory\n";
-    return;
-  }
-  out << str << " " << stl;
+  out << row_size << " " << column_size;
   out << std::fixed;
   out << std::setprecision(1);
-  for (size_t i = 0; i < str * stl; ++i)
+  for (size_t i = 0; i < row_size * column_size; ++i)
   {
     out << " " << mtx[i];
   }
-  delete[] mtx;
 }

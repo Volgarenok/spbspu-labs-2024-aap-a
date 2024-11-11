@@ -5,8 +5,7 @@
 
 namespace tkach
 {
-  double* createMtx2(const int* mtx, size_t str, size_t stl);
-  bool isNumber(const char * number);
+  double* createMtx2(const int* mtx, size_t row_size, size_t column_size);
 }
 
 #endif
