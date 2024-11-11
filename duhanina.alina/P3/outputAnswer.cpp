@@ -1,9 +1,9 @@
+#include "functionMatrix.h"
 #include <limits>
 #include <algorithm>
 #include <cstring>
-#include "titleMatrix.h"
 
-int duhanina::outputAnswer(int * t, size_t m, size_t n)
+int duhanina::minSumMdg(const int * t, size_t m, size_t n)
 {
   int n_int = static_cast<int>(n);
   size_t max_count_diag = m + n - 1;
