@@ -42,5 +42,23 @@ char *inputOfString(std::istream &input, size_t &sizeOfString)
 
 int main()
 {
+  char *inputString = nullptr;
+  size_t stringSize = 10;
+  try
+  {
+    inputString = inputOfString(std::cin, stringSize);
+    if (inputString[0] == '\0')
+    {
+      free(inputString);
+      std::cerr << "Error" << "\n";
+      return 1;
+    }
+  }
+  catch (const std::logic_error &e)
+  {
+    std::cerr << "Error: " << e.what() << "\n";
+    return 1;
+  }
+  free(inputString);
   return 0;
 }
