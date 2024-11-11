@@ -16,12 +16,14 @@ int main(int argc, char **argv)
     std::cerr << "Not enough arguments\n";
     return 1;
   }
-  if (strlen(argv[1]) != 1 || ((strlen(argv[1]) == 1) && !(atoi(argv[1]))))
+  const size_t len_argv1 = std::strlen(argv[1]);
+  const int int_argv1 = std::atoi(argv[1]);
+  if (len_argv1 != 1 || ((len_argv1 == 1) && !(atoi(argv[1]))))
   {
     std::cerr << "First parameter is not a number\n";
     return 1;
   }
-  if (atoi(argv[1]) > 2 || atoi(argv[1]) < 1)
+  if (int_argv1 > 2 || int_argv1 < 1)
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
