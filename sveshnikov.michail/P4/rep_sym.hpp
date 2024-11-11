@@ -5,7 +5,7 @@
 
 namespace sveshnikov
 {
-  char * rep_sym_hpp(std::istream &in, char stop);
-  std::istream &read_str(std::istream &in, char *matrix);
+  char * rep_sym(char *str, char *new_str);
+  std::istream &build_str(std::istream &in, char *str);
 }
 #endif 

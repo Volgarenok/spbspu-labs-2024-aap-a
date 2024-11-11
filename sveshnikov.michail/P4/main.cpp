@@ -1,11 +1,13 @@
 #include <iostream>
 #include <ios>
+#include "rep_sym.hpp"
 
 int main()
 {
   std::size_t len = 100;
-  char * str = new char[len+1];
-  char * new_str = nullptr;
+  char *str = new char[len];
+  char *new_str = nullptr;
+  char *longer_str = nullptr;
   std::size_t size = 0;
   char c = '\0';
   std::noskipws(std::cin);
@@ -13,26 +15,27 @@ int main()
   {
     if (size == len)
     {
-      //выделить новую память большего объёма
-      // - может генерироваться исключение
-      // перенести данные из старого массива
-      // удалить старый массив
+      len += 100;
+      try
+      {
+        longer_str = new char[len];
+      }
+      catch (const std::bad_alloc &e)
+      {
+        std::cerr << e.what() << '\n';
+        return 1;
+      }
+      for (std::size_t i = 0; i < len - 100; i++)
+      {
+        longer_str[i] = str[i];
+      }
+      delete[] str;
+      str = longer_str;
     }
     str[size++] = c;
   }
-  new_str = sveshnikov::rep_sym_hpp(std::cin, c)
-  // задание варианта
-
+  char *new_str = new char[len];
+  new_str = sveshnikov::rep_sym(str, new_str);
   std::skipws(std::cin);
-
-}
-
-std::istream &sveshnikov::read_str(std::istream &in, char *matrix)
-{
-  for (size_t i = 0; std::cin != '\n'; i++)
-  {
-    in >> matrix[read];
-    read++;
-  }
-  return in;
+  return 0;
 }
