@@ -3,6 +3,11 @@
 
 int main()
 {
+  if(!std::cin)
+  {
+    std::cerr << "No input";
+    return 2;
+  }
   char* istr = nullptr;
   try
   {
