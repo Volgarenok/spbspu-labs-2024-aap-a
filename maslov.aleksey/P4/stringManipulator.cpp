@@ -4,11 +4,15 @@
 char * maslov::inputLine(std::istream & in, const char stop)
 {
   size_t capacity = 10;
-  char * string = new char[capacity];
-  if (!string)
+  char * string = nullptr;
+  try
+  {
+    string = new char[capacity];
+  }
+  catch (const std::bad_alloc & e)
   {
     delete[] string;
-    return nullptr;
+    throw;
   }
   size_t length = 0;
   char ch = '\0';
@@ -18,12 +22,16 @@ char * maslov::inputLine(std::istream & in, const char stop)
     if (length >= capacity - 1)
     {
       capacity *= 2;
-      char * newString = new char[capacity];
-      if (!newString)
+      char * newString = nullptr;
+      try
+      {
+        newString = new char[capacity];
+      }
+      catch (const std::bad_alloc & e)
       {
         delete[] newString;
         delete[] string;
-        return nullptr;
+        throw;
       }
       for (size_t i = 0; i < length; ++i)
       {
