@@ -1,18 +1,63 @@
 #include "output_matrix.h"
 #include <iostream>
 
-void timofeev::output_matrix(std::ostream& out, int* matrix, size_t strk, size_t stl)
+
+void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t stl)
 {
-  int res = 0;
-  for (size_t i = 0; i < strk; i++)
+  std::string* values = new std::string[strk + stl - 1];
+  char* new_matrix = nullptr;
+  try
   {
-    for (size_t j = 1; j < (stl - 1); j++)
+    new_matrix = new char[(strk * stl) + ((stl - 1) * stl)];
+  }
+  catch (const std::bad_alloc& e)
+  {
+    std::cerr << "Out of memory\n";
+  }
+  for (size_t i = 0; i < strk * stl; i++)
+  {
+    new_matrix[i] = matrix[i + 2];
+  }
+  int n = 1;
+  size_t count = 0;
+  for (size_t i = 0; i < (strk + stl - 1); i++)
+  {
+    int col = 0;
+    int icur = i;
+    std::string diag;
+    for (size_t j = (stl -1); (j >= 0) && (col <= i) && (col < stl); j--)
     {
-      if (matrix[i * strk + j - 1] > matrix[i * strk + j] && matrix[i * strk + j + 1] > matrix[i * strk + j])
+      int jcur = j;
+      if (icur * stl + jcur < (strk * stl))
       {
-        res += 1;
+        char di_el = static_cast<char>(new_matrix[(icur * stl) + jcur]);
+        diag += di_el;
+      }
+      icur--;
+      jcur--;
+      col++;
+    }
+    n++;
+    values[count] = diag;
+    count++;
+  }
+  size_t mtr = 0;
+  for (size_t i = 0; i < count; i++)
+  {
+    for (size_t j = 0; j < count && j != i; j++)
+    {
+      if (values[i] == values[j])
+      {
+        mtr += 1;
       }
     }
   }
-  out << res << "\n";
+  if (mtr > 0)
+  {
+    out << "the matrix contains diagonals with equal values\n";
+  }
+  else
+  {
+    out << "the matrix doesn't contains diagonals with equal values\n";
+  }
 }

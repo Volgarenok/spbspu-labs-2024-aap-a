@@ -3,9 +3,10 @@
 
 #include <ostream>
 #include <cstddef>
+#include <cmath>
 
 namespace timofeev
 {
-  void output_matrix(std::ostream& out, int* matrix, size_t strk, size_t stl);
+  void check_diag(std::ostream& out, int* matrix, size_t strk, size_t stl);
 }
 #endif

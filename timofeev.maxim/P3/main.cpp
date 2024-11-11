@@ -55,7 +55,7 @@ int main(int argc, char** argv)
       std::cerr << "Fail input\n";
       return 2;
     }
-    timofeev::output_matrix(output, matrix, line, column);
+    timofeev::check_diag(output, matrix, line, column);
   }
   else if (num == 2)
   {
@@ -75,7 +75,7 @@ int main(int argc, char** argv)
       std::cerr << "Fail input\n";
       return 2;
     }
-    timofeev::output_matrix(output, dmatrix, line, column);
+    timofeev::check_diag(output, dmatrix, line, column);
     delete[] dmatrix;
   }
   return 0;
