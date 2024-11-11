@@ -2,8 +2,12 @@
 
 int main()
 {
-  char * str = mozhegova::inputString(std::cin, '\n');
-  if (str == nullptr)
+  char * str = nullptr;
+  try
+  {
+    str = mozhegova::inputString(std::cin, '\n');
+  }
+  catch(const std::exception& e)
   {
     std::cerr << "Out of memory\n";
     return 1;
