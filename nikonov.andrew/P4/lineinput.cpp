@@ -9,13 +9,16 @@ char* getLine(size_t& capacity)
   {
     return nullptr;
   }
+  for (size_t i = 0; i < capacity; ++i)
+  {
+    line[i] = '\0';
+  }
   char elem = ' ';
   size_t cnt = 0;
   while (std::cin >> std::noskipws >> elem && elem != '\n')
   {
     if (cnt == capacity - 1)
     {
-      line[cnt] = '\0';
       line = reallocate(line, capacity);
       if (line == nullptr)
       {
@@ -31,7 +34,6 @@ char* getLine(size_t& capacity)
     return nullptr;
   }
   std::skipws(std::cin);
-  line[cnt] = '\0';
   return line;
 }
 char* reallocate(char* line, size_t& capacity)
@@ -49,7 +51,10 @@ char* reallocate(char* line, size_t& capacity)
     newline[newcnt] = line[newcnt];
     ++newcnt;
   }
-  newline[newcnt] = '\0';
+  for (size_t i = newcnt; i < capacity; ++i)
+  {
+    newline[i] = '\0';
+  }
   free(line);
   return newline;
 }
@@ -68,7 +73,10 @@ char* reallocate(char* line, size_t& capacity, size_t addSize)
     newline[newcnt] = line[newcnt];
     ++newcnt;
   }
-  newline[newcnt] = '\0';
+  for (size_t i = newcnt; i < capacity; ++i)
+  {
+    newline[i] = '\0';
+  }
   free(line);
   return newline;
 }
