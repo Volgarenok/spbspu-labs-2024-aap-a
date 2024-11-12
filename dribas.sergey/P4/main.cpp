@@ -14,7 +14,11 @@ int main()
   }
   arr[arrsize - 1] = '\0';
   std::noskipws(std::cin);
-  size_t i = 0;
+  std::cin >> arr[0];
+  if (!std::cin) {
+    return 1;
+  }
+  size_t i = 1;
   for (; arr[i-1] != '\n'; i += 1) {
     if (i == arrsize) {
       arrsize += 10;
@@ -28,7 +32,7 @@ int main()
     if (!std::cin) {
       std::cerr << "ERROR WITH ENTER!!!\n";
       free(arr);
-      return 2;
+      return 1;
     }
   }
   std::cout << dribas::checkChar(arr);
