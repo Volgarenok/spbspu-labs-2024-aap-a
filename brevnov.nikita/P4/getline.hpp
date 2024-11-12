@@ -5,6 +5,6 @@
 namespace brevnov
 {
   char * getline(std::istream& in, char stop);
-  char * newmemory(char * line, std::size_t max_size);
+  char * newmemory(char * line, std::size_t max_size, std::size_t plus_size);
 }
 #endif

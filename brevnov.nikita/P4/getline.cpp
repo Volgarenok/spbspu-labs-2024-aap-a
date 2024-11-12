@@ -2,6 +2,7 @@
 
 char * brevnov::getline(std::istream& in, char stop)
 {
+  constexpr std::size_t plus_size = 50;
   std::size_t max_size = 50;
   char * line = new char[max_size + 1];
   std::size_t current_size = 0;
@@ -12,7 +13,7 @@ char * brevnov::getline(std::istream& in, char stop)
     if (max_size == current_size)
     {
       line = brevnov::newmemory(line, max_size);
-      max_size += 50;
+      max_size += plus_size;
     }
     line[current_size++] = c;
   }
@@ -21,9 +22,9 @@ char * brevnov::getline(std::istream& in, char stop)
   return line;
 }
 
-char * brevnov::newmemory(char * line, std::size_t max_size)
+char * brevnov::newmemory(char * line, std::size_t max_size, std::size_t plus_size)
 {
-  char * new_line = new char[max_size + 51];
+  char * new_line = new char[max_size + plus_size + 1];
   for (std::size_t i = 0; i < max_size; ++i)
   {
     new_line[i] = line[i];
