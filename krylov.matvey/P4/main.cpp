@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <iostream>
 #include "processLine.hpp"
 
@@ -17,3 +18,7 @@ int main()
     return 1;
   }
 }
+=======
+int main()
+{}
+>>>>>>> master
