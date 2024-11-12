@@ -3,12 +3,8 @@
 
 int main()
 {
-  char * string1 = nullptr;
-  try
-  {
-    string1 = maslov::inputLine(std::cin, '\n');
-  }
-  catch (const std::bad_alloc & e)
+  char * string1 = maslov::inputLine(std::cin, '\n');
+  if (string1 == nullptr)
   {
     std::cerr << "Out of memory\n";
     return 1;

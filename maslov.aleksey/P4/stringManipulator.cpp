@@ -12,7 +12,7 @@ char * maslov::inputLine(std::istream & in, const char stop)
   catch (const std::bad_alloc & e)
   {
     delete[] string;
-    throw;
+    return nullptr;
   }
   size_t length = 0;
   char ch = '\0';
@@ -31,7 +31,7 @@ char * maslov::inputLine(std::istream & in, const char stop)
       {
         delete[] newString;
         delete[] string;
-        throw;
+        return nullptr;
       }
       for (size_t i = 0; i < length; ++i)
       {
