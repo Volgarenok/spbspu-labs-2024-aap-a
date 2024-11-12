@@ -4,18 +4,12 @@
 int main()
 {
   const char first_line[] = "abs";
-  char* second_line = nullptr;
-  try
+  char* second_line = timofeev::input_line(std::in);
+  if (second_line == nullptr)
   {
-    second_line = timofeev::input_line(std::cin);
-  }
-  catch (const std::bad_alloc& e)
-  {
-    std::cerr << ("Memory error");
     free(second_line);
     return 1;
   }
-
   if (second_line[0] == '\0')
   {
     std::cerr << "Empty input";
