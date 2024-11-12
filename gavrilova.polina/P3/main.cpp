@@ -5,12 +5,12 @@
 
 int main(int argc, char ** argv)
 {
-  if (!gavrilova::checkNumOfArguments(argc)) {
+  if (gavrilova::checkNumOfArguments(argc)) {
     return 1;
   }
   char * end;
   unsigned long int num = std::strtoul(argv[1], &end, 10);
-  if (!gavrilova::checkFirstArgument(num, end)) {
+  if (gavrilova::checkFirstArgument(num, end)) {
     return 1;
   }
 
@@ -55,12 +55,12 @@ int gavrilova::checkNumOfArguments(int argc)
 {
   if (argc > 4) {
     std::cerr << "Too many arguments" << "\n";
-    return 0;
+    return 1;
   } else if (argc < 4) {
     std::cerr << "Not enough arguments" << "\n";
-    return 0;
-  } else {
     return 1;
+  } else {
+    return 0;
   }
 }
 
@@ -68,15 +68,15 @@ int gavrilova::checkFirstArgument(unsigned long int num, const char * end)
 {
   if (num > 3) {
     std::cerr << "First parametr is out of range" << "\n";
-    return 0;
+    return 1;
   } else if (num == 0) {
     std::cerr << "First parametr is not a number" << "\n";
-    return 0;
+    return 1;
   } else if (*end != 0){
     std::cerr << "First parametr is not a number" << "\n";
-    return 0;
-  } else {
     return 1;
+  } else {
+    return 0;
 
   }
 }
