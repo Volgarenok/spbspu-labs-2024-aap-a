@@ -1,5 +1,21 @@
 #include <iostream>
 
+bool checkSymbol(char symbol)
+{
+  const char* list = "aeiouAEIOU";
+  bool flag = true;
+  while (*list != '\0')
+  {
+    if (symbol == *list)
+    {
+      flag = false;
+      break;
+    }
+    ++list;
+  }
+  return flag;
+}
+
 char *inputOfString(std::istream &input, size_t &sizeOfString)
 {
   char someCharacter = 0;
