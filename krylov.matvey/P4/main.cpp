@@ -1,7 +1,6 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 #include <iostream>
 #include "processLine.hpp"
+#include "replaceLetters.hpp"
 
 int main()
 {
@@ -14,16 +13,12 @@ int main()
   }
   if (line[0] == '\0')
   {
-    std::cerr << "No characters to convert\n";
+    std::cerr << "The line is empty!\n";
     delete[] line;
     return 1;
   }
+  char oldSubstring = 'c';
+  char newSubstring = 'b';
+  std::cout << krylov::replaceLetters(line, oldSubstring, newSubstring);
+  delete[] line;
 }
-=======
-int main()
-{}
->>>>>>> master
-=======
-int main()
-{}
->>>>>>> master
