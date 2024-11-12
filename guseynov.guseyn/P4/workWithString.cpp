@@ -8,7 +8,7 @@ char * guseyn::newarr(char *arr, size_t size)
 {
   char *newarr = static_cast < char* > (malloc(size+1));
 
-  for (size_t i = 0; arr[i] != '\0'; i++)
+  for (size_t i = 0; i < size; i++)
   {
     newarr[i] = arr[i];
   }

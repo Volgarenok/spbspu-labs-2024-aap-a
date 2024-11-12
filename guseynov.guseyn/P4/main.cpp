@@ -10,6 +10,10 @@ int main()
   size_t min = 10;
   size_t size = 0;
   arr = static_cast < char* > (malloc(min));
+  if (arr == nullptr)
+  {
+    return 1;
+  }
   std::noskipws(std::cin);
   while ((std::cin >> c) && (c != '\n'))
   {
@@ -20,11 +24,12 @@ int main()
       arr = guseyn::newarr(arr, min);
     }
   }
-  arr = guseyn::newarr(arr, size);
   if (!std::cin)
   {
+    free(arr);
     return 1;
   }
+  arr = guseyn::newarr(arr, size);
   if (arr == nullptr)
   {
     return 1;
