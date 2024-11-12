@@ -4,6 +4,11 @@
 char * zakirov::expand_line(char * regular_line, size_t real_lenght, size_t add_length)
 {
   char * expand_line = static_cast<char *>(malloc((sizeof(char) * real_lenght) + (sizeof(char) * add_length)));
+  if (expand_line == nullptr)
+  {
+    return expand_line;
+  }
+
   for (size_t i = 0; i < real_lenght; ++i)
   {
     expand_line[i] = regular_line[i];
@@ -63,8 +68,10 @@ void zakirov::change_line(char * line)
       }
       location += 1;
     }
+    
     location = 0;
   }
+
   for (size_t i = 26; i < 52; ++i)
   {
     if (alphabet[i] != 32)
@@ -73,6 +80,7 @@ void zakirov::change_line(char * line)
       location += 1;
     }
   }
+
   while (line[location] != '\0')
   {
     line[location]  = '\0';

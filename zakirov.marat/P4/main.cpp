@@ -5,7 +5,7 @@
 int main()
 {
   size_t start = 1, finish = 1;
-  constexpr size_t step = 15;
+  constexpr size_t step = 25;
   char last_symbol = '\0';
   std::cin >> last_symbol;
   char * line = static_cast<char *>(malloc(sizeof(char)));
@@ -29,6 +29,7 @@ int main()
     if (line == nullptr)
     {
       std::cerr << "ERROR: Out of memory" << '\n';
+      free(line);
       return 1;
     }
 
