@@ -76,10 +76,7 @@ int main(int argc, char **argv)
       if (!abramov::inputMatrix(input, matrix, m, n, read) || read != n * m)
       {
         std::cerr << "Wrong input!\n";
-        if (matrix != nullptr)
-        {
-          delete[] matrix;
-        }
+        delete[] matrix;
         return 1;
       }
       new_mtx = abramov::toSquare(matrix, m, n, count);
@@ -87,14 +84,8 @@ int main(int argc, char **argv)
     catch (const std::bad_alloc &e)
     {
       std::cerr << "Memory fail\n";
-      if (matrix != nullptr)
-      {
-        delete[] matrix;
-      }
-      if (new_mtx != nullptr)
-      {
-        delete[] new_mtx;
-      }
+      delete[] matrix;
+      delete[] new_mtx;
       return 2;
     }
     abramov::transformMatrix(new_mtx, count);
