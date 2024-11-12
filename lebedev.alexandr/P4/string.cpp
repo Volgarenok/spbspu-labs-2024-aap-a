@@ -49,7 +49,30 @@ char* lebedev::getLine(std::istream& in, char endChar)
     in >> std::noskipws >> ch;
     size++;
   }
+
+  if (!in)
+  {
+    return nullptr;
+  }
   
   str[size] = '\0';
   return str;
+}
+
+void lebedev::removeVowels(char* str)
+{
+  size_t i = 0;
+  char vowels[10] = { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
+  while (str[i] != '\0')
+  {
+    for (size_t j = 0; j < 10; ++j)
+    {
+      if (str[i] == vowels[j])
+      {
+        lebedev::removeElement(str, i);
+        break;
+      }
+    }
+    ++i;
+  }
 }

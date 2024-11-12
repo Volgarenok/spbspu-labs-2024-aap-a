@@ -7,5 +7,6 @@ namespace lebedev
 {
   void removeElement(char* str, size_t num);
   char* getLine(std::istream& in, char endChar);
+  void removeVowels(char* str);
 }
 #endif
