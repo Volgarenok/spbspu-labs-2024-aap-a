@@ -1,4 +1,5 @@
 #include <iostream>
+#include "processLine.hpp"
 
 int main()
 {
