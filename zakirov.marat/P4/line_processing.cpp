@@ -29,7 +29,7 @@ char * zakirov::get_line(std::istream & in, char * line, size_t start, size_t fi
     start += 1;
     for (; start < finish; ++start)
     {
-      line[start] = '\n';
+      line[start] = '\0';
     }
   }
 
