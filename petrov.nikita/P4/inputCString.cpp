@@ -5,6 +5,7 @@
 char * petrov::inputCSring(char * string, size_t & length)
 {
   char * temp_string = nullptr;
+  string = nullptr;
   try
   {
     string = new char[1];

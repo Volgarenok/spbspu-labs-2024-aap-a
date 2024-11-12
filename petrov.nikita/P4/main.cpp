@@ -14,6 +14,7 @@ int main()
     cstring_1 = petrov::inputCSring(cstring_1, length_1);
     if (!std::cin || std::cin.eof() || cstring_1[0] == '\n')
     {
+      delete[] cstring_1;
       std::cerr << "ERROR: Invalid value\n";
       return 1;
     }
