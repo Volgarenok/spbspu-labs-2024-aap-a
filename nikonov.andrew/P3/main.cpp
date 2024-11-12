@@ -43,10 +43,10 @@ int main(int argc, char ** argv)
   input >> n;
   size_t read = 0;
   int* arrUni = nullptr;
+  int stackBuffer[1000] = { 0 };
   if (std::atoi(argv[1]) == 1)
   {
-    int arr[10000] = { 0 };
-    arrUni = arr;
+    arrUni = stackBuffer;
   }
   else
   {
