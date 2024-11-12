@@ -6,7 +6,16 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
 {
   size_t sum_dig = strk + stl - 1;
   size_t sum_el = (strk * stl) + ((stl - 1) * stl);
-  std::string* values = new std::string[sum_dig];
+  std::string* values = nullptr;
+  try
+  {
+    values = new std::string[sum_dig]
+  }
+  catch(const std::bad_alloc& e)
+  {
+    delete[] values;
+    std::cerr << "Out of memory\n";
+  }
   char* new_matrix = nullptr;
   try
   {
@@ -14,6 +23,7 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
   }
   catch (const std::bad_alloc& e)
   {
+    delete[] new_matrix;
     std::cerr << "Out of memory\n";
   }
   for (size_t i = 0; i < strk * stl; i++)
@@ -41,6 +51,7 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
     values[count] = diag;
     count++;
   }
+  delete[] new_matrix;
   size_t mtr = 0;
   for (size_t i = 0; i < count; i++)
   {
@@ -52,6 +63,7 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
       }
     }
   }
+  delete[] values;
   if (mtr > 0)
   {
     out << "the matrix contains diagonals with equal values\n";
