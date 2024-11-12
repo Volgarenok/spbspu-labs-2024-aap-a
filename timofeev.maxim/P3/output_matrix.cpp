@@ -9,7 +9,7 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
   std::string* values = nullptr;
   try
   {
-    values = new std::string[sum_dig];
+    values = new std::string[sum_dig]{};
   }
   catch(const std::bad_alloc& e)
   {
