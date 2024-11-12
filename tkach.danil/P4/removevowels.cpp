@@ -17,8 +17,7 @@ void tkach::getStrWithRemovedVowels(const char* str, char* str2)
     }
     if (flag == 1)
     {
-      str2[numberforstr2] = str[i];
-      numberforstr2++;
+      str2[numberforstr2++] = str[i];
     }
   }
   str2[numberforstr2] = '\0';

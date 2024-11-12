@@ -1,16 +1,20 @@
 #include "strfunc.h"
 
-std::istream& tkach::inputStr(std::istream& in, char*& str, size_t& capacity)
+char* tkach::inputStr(std::istream& in, char* str, size_t& capacity)
 {
   size_t i = 0;
   char symbol = '\0';
   in >> std::noskipws;
-  while(in >> symbol)
+  while(in >> symbol && symbol != '\n')
   {
     if (i + 1 == capacity)
     {
       str[i] = '\0';
-      if (tkach::getMemoryForStr(str, capacity) == 1)
+      try
+      {
+        str = tkach::getMemoryForStr(str, capacity);
+      }
+      catch (const std::bad_alloc& e)
       {
         throw;
       }
@@ -18,5 +22,5 @@ std::istream& tkach::inputStr(std::istream& in, char*& str, size_t& capacity)
     str[i++] = symbol;
   }
   str[i] = '\0';
-  return in;
+  return str;
 }

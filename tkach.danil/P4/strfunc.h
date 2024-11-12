@@ -5,8 +5,8 @@
 #include <fstream>
 
 namespace tkach {
-  int getMemoryForStr(char*& s, size_t& capacity);
-  std::istream& inputStr(std::istream& in, char*& str, size_t& capacity);
+  char* getMemoryForStr(char* str, size_t& capacity);
+  char* inputStr(std::istream& in, char* str, size_t& capacity);
   void outputStr(std::ostream & out, const char* const str);
 }
 

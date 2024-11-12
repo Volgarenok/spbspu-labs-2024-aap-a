@@ -14,17 +14,18 @@ int main()
   }
   try
   {
-    if (!tkach::inputStr(std::cin, str, capacity).eof())
-    {
-      free(str);
-      std::cerr << "Error: input error\n";
-      return 1;
-    }
+    str = tkach::inputStr(std::cin, str, capacity);
   }
   catch (const std::bad_alloc& e)
   {
     free(str);
     std::cerr << "Error: not enough memory\n";
+    return 1;
+  }
+  if (!std::cin)
+  {
+    free(str);
+    std::cerr << "Error: invalid input\n";
     return 1;
   }
   if (str[0] == '\0')
@@ -43,6 +44,7 @@ int main()
     return 1;
   }
   tkach::outputStr(std::cout, str2);
+  std::cout << "\n";
   free(str);
   free(str2);
   return 0;
