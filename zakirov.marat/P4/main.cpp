@@ -41,6 +41,7 @@ int main()
   while (answer[location] != '\0')
   {
     std::cout << answer[location];
+    location += 1;
   }
 
   std::cout << '\n';
