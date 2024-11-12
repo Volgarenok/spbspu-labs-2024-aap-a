@@ -4,7 +4,7 @@ char *shabalin::inputOfString(std::istream &input, size_t &sizeOfString)
 {
   char someCharacter = 0;
   size_t index = 0;
-  char *initialString = reinterpret_cast<char *>(malloc(sizeof(char) * sizeOfString));
+  char *initialString = reinterpret_cast< char* >(malloc(sizeof(char) * sizeOfString));
 
   if (!initialString)
   {
@@ -18,7 +18,7 @@ char *shabalin::inputOfString(std::istream &input, size_t &sizeOfString)
     if (index == sizeOfString - 1)
     {
       sizeOfString *= 2;
-      char *intermediateString = reinterpret_cast<char *>(realloc(initialString, sizeof(char) * sizeOfString));
+      char *intermediateString = reinterpret_cast< char* >(realloc(initialString, sizeof(char) * sizeOfString));
       if (!intermediateString)
       {
         free(initialString);
