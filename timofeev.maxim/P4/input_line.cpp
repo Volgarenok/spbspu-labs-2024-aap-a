@@ -14,7 +14,7 @@ char* timofeev::input_line(std::istream& in)
     {
       try
       {
-        line = timofeev::boost_size(line, capacity); 
+        line = timofeev::boost_size(line, capacity);
       }
       catch (const std::bad_alloc& e)
       {
