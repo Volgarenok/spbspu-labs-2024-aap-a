@@ -12,7 +12,7 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
   }
   catch(const std::bad_alloc& e)
   {
-    std::cerr << "Out of memory\n"
+    std::cerr << "Out of memory\n";
   }
   char* new_matrix = nullptr;
   try
