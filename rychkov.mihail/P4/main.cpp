@@ -2,6 +2,7 @@
 
 #include "memf.hpp"
 #include "string_input.hpp"
+#include "string_analysis.hpp"
 
 int main()
 {
@@ -41,6 +42,20 @@ int main()
     str = reallocatedStr;
     strLength = newSize;
   }
-  std::cout << str << '\n';
+  
+  if (*str == '\0')
+  {
+    std::cerr << "there is no string in stdin\n";
+    return 1;
+  }
+
+  if (rychkov::findDigitsRepeatsCount(str) != 0)
+  {
+    std::cout << "entered string has repeated digits\n";
+  }
+  else
+  {
+    std::cout << "entered string has no repeated digits\n";
+  }
   free(str);
 }
