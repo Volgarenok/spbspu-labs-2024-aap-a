@@ -2,10 +2,24 @@
 
 #include <cstring>
 #include <cstdlib>
+#include <istream>
 
 char* read_string(std::istream& input)
 {
-  return "AbC aBc";
+  constexpr size_t buf_size = 101;
+  char buf[buf_size];
+  char* str = (char*)std::malloc(1);
+  *str = 0;
+  size_t str_length = 0;
+  do {
+    input.clear();
+    input.getline(buf, buf_size);
+    size_t count = (size_t)input.gcount();
+    str_length += count;
+    str = (char*)std::realloc(str, str_length);
+    std::strcat(str, buf);
+  } while(!input);
+  return str;
 }
 
 char* exc_snd(const char* str, const char* excl_chars)
