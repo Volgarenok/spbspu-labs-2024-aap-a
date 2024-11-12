@@ -36,7 +36,7 @@ int main()
     last_symbol = line[finish - 1];
   }
 
-  char * answer = zakirov::change_line(line, '\n');
+  char * answer = zakirov::change_line(line);
   size_t location = 0;
   while (answer[location] != '\0')
   {
