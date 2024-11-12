@@ -6,7 +6,7 @@
 
 int main()
 {
-  size_t arrsize = 0;
+  size_t arrsize = 1;
   char* arr = static_cast < char* >(malloc(sizeof(char) * arrsize));
   if (arr == nullptr) {
     std::cerr << "ERROR WITH MEMORY!!\n";
