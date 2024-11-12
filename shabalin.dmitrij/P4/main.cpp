@@ -39,7 +39,7 @@ char *inputOfString(std::istream &input, size_t &sizeOfString)
 {
   char someCharacter = 0;
   size_t index = 0;
-  char *initialString = (char *)malloc(sizeOfString * sizeof(char));
+  char *initialString = reinterpret_cast< char* >(malloc(sizeof(char) * sizeOfString));
   input >> std::noskipws;
 
   while (input >> someCharacter)
@@ -54,7 +54,7 @@ char *inputOfString(std::istream &input, size_t &sizeOfString)
       try
       {
         sizeOfString *= 2;
-        char *intermediateString = (char *)malloc(sizeOfString * sizeof(char));
+        char *intermediateString = reinterpret_cast< char* >(malloc(sizeof(char) * sizeOfString));
         for (size_t i = 0; i < index; ++i)
         {
           intermediateString[i] = initialString[i];
