@@ -2,43 +2,19 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <cstdlib>
 
-void guseyn::copyarr(const char *arr, char *arrcopy, size_t size)
+char * guseyn::newarr(char *arr, size_t size)
 {
-  for (size_t i = 0; i < size; i++)
-  {
-    arrcopy[i] = arr[i];
-  }
-}
+  char *newarr = static_cast < char* > (malloc(size+1));
 
-char * guseyn::inputLine(std::istream & in, char stop)
-{
-  char *arr = nullptr;
-  char *arrcopy = nullptr;
-  char c = '\0';
-  size_t min = 10;
-  size_t size = 0;
-  arr = static_cast < char* > (malloc(min));
-  arrcopy = static_cast < char* > (malloc(min));
-  std::noskipws(in);
-  while ((c != stop) && (in >> c))
+  for (size_t i = 0; arr[i] != '\0'; i++)
   {
-    arr[size++] = c;
-    if (size == min)
-    {
-      min += 10;
-      guseyn::copyarr(arr, arrcopy, size);
-      arr = static_cast < char* > (malloc(min));
-      guseyn::copyarr(arrcopy, arr, size);
-      arrcopy = static_cast < char* > (malloc(min));
-    }
+    newarr[i] = arr[i];
   }
-  guseyn::copyarr(arr, arrcopy, size);
-  arr = static_cast < char* > (malloc(size+1));
-  guseyn::copyarr(arrcopy, arr, (size));
-  arr[size] = '\n';
-  free(arrcopy);
-  return arr;
+  free(arr);
+  newarr[size] = '\0';
+  return newarr;
 }
 
 size_t guseyn::identifyUniqueChar(const char *inputString, const char *uniqueChars, size_t num)
@@ -46,12 +22,12 @@ size_t guseyn::identifyUniqueChar(const char *inputString, const char *uniqueCha
   bool *check;
   size_t res = 0;
   size_t current = 0;
-  check = reinterpret_cast< bool* > (malloc(num));
+  check = reinterpret_cast < bool* > (malloc((num) * sizeof(bool)));
   for (size_t i = 0; i < num; i++)
   {
     check[i] = true;
   }
-  while (inputString[current++] != '\n')
+  while (inputString[current++] != '\0')
   {
     for (size_t j = 0; j < num; j++)
     {

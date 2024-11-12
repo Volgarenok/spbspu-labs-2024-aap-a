@@ -1,11 +1,11 @@
 #ifndef WORKWITHSTRING_HPP
 #define WORKWITHSTRING_HPP
-#include <iostream>
+
 #include <cstddef>
+
 namespace guseyn
 {
-  void copyarr(const char *arr, char *arrcopy, size_t size);
-  char * inputLine(std::istream & in, char stop);
+  char * newarr(char *arr, size_t size);
   size_t identifyUniqueChar(const char *inputString, const char *uniqueChars, size_t num);
 }
 #endif
