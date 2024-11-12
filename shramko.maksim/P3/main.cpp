@@ -50,16 +50,15 @@ int main(int argc, char** argv)
       std::cerr << "Out of memory\n";
       return 1;
     }
+  }
 
   if(!shramko::inputMtrx(input, mtrx, sizeMtrx))
   {
     std::cerr << "ERROR!\n";
-    delete[] mtrx;
     return 2;
   }
 
   std::ofstream output(argv[3]);
   output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
   delete[] mtrx;
-  }
 }
