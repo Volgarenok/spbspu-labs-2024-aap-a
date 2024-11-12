@@ -1,5 +1,5 @@
 #include "string.h"
-//
+
 char* demehin::copyString(const char* str, size_t size)
 {
   size_t temp_size = 0;
@@ -38,6 +38,7 @@ char* demehin::getUniqueSymbols(const char* str, char* ustr)
     }
     iterator1 += 1;
   }
+  ustr[iterator1] = '\0';
   return ustr;
 }
 
@@ -60,6 +61,7 @@ char* demehin::unc_sym(const char* str, const char* base_str, char* final_str)
 
     iterator1 += 1;
   }
+  final_str[iterator1] = '\0';
   return final_str;
 }
 
@@ -78,5 +80,6 @@ char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size
     }
     str[size++] = temp;
   }
+  str[size] = '\0';
   return str;
 }
