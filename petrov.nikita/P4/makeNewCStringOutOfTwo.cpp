@@ -49,4 +49,5 @@ char * petrov::makeNewCStringOutOfTwo(char * new_cstring, const char * string_1,
   }
   delete[] numbers;
   return new_cstring;
+  delete[] new_cstring;
 }

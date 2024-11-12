@@ -51,4 +51,5 @@ char * petrov::inputCSring(char * string, size_t & length)
   }
   delete[] temp_string;
   return string;
+  delete[] string;
 }
