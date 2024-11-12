@@ -9,7 +9,7 @@ char* timofeev::input_line(std::istream& in)
   {
     line = add_memory(capacity);
   }
-  catch(const std::bad::alloc& e)
+  catch(const std::bad_alloc& e)
   {
     return nullptr;
   }
