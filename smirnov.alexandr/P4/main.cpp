@@ -17,4 +17,6 @@ int main()
     return 1;
   }
   const char * str2 = "def ";
+  std::cout << smirnov::uniString(str1, str2) << "\n";
+  delete[] str1;
 }
