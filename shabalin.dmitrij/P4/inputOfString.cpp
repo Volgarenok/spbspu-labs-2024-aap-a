@@ -1,6 +1,6 @@
 #include "inputOfString.h"
 
-char *inputOfString(std::istream &input, size_t &sizeOfString)
+char *shabalin::inputOfString(std::istream &input, size_t &sizeOfString)
 {
   char someCharacter = 0;
   size_t index = 0;
