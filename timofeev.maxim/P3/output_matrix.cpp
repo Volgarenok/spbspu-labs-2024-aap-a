@@ -9,7 +9,7 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
   std::string* values = nullptr;
   try
   {
-    values = new std::string[sum_dig]{"0"};
+    values = new std::string[sum_dig]{'\0'};
   }
   catch(const std::bad_alloc& e)
   {
@@ -19,16 +19,16 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
   char* new_matrix = nullptr;
   try
   {
-    new_matrix = new char[sum_el];
+    new_matrix = new char[sum_el]{'\0'};
   }
   catch (const std::bad_alloc& e)
   {
     delete[] new_matrix;
     std::cerr << "Out of memory\n";
   }
-  for (size_t i = 0; i < strk * stl; i++)
+  for (size_t i = 2; i < strk * stl; i++)
   {
-    new_matrix[i] = matrix[i + 2];
+    new_matrix[i - 2] = matrix[i];
   }
   size_t count = 0;
   for (size_t i = 0; i < (strk + stl - 1); i++)
