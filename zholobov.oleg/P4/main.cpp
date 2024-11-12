@@ -1,5 +1,5 @@
-#include "exc_snd.hpp"
 #include <iostream>
+#include "exc_snd.hpp"
 
 constexpr char exclude_characters[] = "abc";
 

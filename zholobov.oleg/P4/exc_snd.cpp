@@ -1,7 +1,6 @@
 #include "exc_snd.hpp"
-
-#include <cstring>
 #include <cstdlib>
+#include <cstring>
 #include <istream>
 
 char* zholobov::read_string(std::istream& input)
@@ -18,7 +17,7 @@ char* zholobov::read_string(std::istream& input)
     str_length += count;
     str = (char*)std::realloc(str, str_length);
     std::strcat(str, buf);
-  } while(!input);
+  } while (!input);
   return str;
 }
 
