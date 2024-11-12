@@ -12,7 +12,7 @@ char * brevnov::getline(std::istream& in, char stop)
   {
     if (max_size == current_size)
     {
-      line = brevnov::newmemory(line, max_size);
+      line = brevnov::newmemory(line, max_size, plus_size);
       max_size += plus_size;
     }
     line[current_size++] = c;
