@@ -20,14 +20,9 @@ int main()
       return 1;
     }
   }
-  catch (const std::logic_error &e)
-  {
-    std::cerr << "Error: " << e.what() << "\n";
-    return 1;
-  }
   catch (const std::bad_alloc &e)
   {
-    std::cerr << "Error: Memory allocation failed\n";
+    std::cerr << "Error: " << e.what() << "\n";
     return 1;
   }
   removeVowels(inputString);
