@@ -5,7 +5,7 @@
 
 namespace rychkov
 {
-  size_t findDigitsRepeatsCount(char* str);
+  size_t findDigitsRepeatsCount(const char* str);
 }
 
 #endif

@@ -2,7 +2,7 @@
 
 #include <cctype>
 
-size_t rychkov::findDigitsRepeatsCount(char* str)
+size_t rychkov::findDigitsRepeatsCount(const char* str)
 {
   size_t digitsRepeats[10]{0};
   while (*str != '\0')

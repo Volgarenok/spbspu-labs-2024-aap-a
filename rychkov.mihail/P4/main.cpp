@@ -11,7 +11,7 @@ int main()
   if (!str)
   {
     std::cerr << "failed to allocate string\n";
-    return 2;
+    return 1;
   }
   str[0] = '\0';
   size_t strLength = startStringLength;
@@ -37,7 +37,7 @@ int main()
     {
       std::cerr << "failed to reallocate string\n";
       free(str);
-      return 2;
+      return 1;
     }
     str = reallocatedStr;
     strLength = newSize;
@@ -50,13 +50,6 @@ int main()
     return 1;
   }
 
-  if (rychkov::findDigitsRepeatsCount(str) != 0)
-  {
-    std::cout << "entered string has repeated digits\n";
-  }
-  else
-  {
-    std::cout << "entered string has no repeated digits\n";
-  }
+  std::cout << (rychkov::findDigitsRepeatsCount(str) != 0 ? 1 : 0) << '\n';
   free(str);
 }
