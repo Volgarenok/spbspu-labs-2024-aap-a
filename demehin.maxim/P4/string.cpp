@@ -1,5 +1,5 @@
 #include "string.h"
-
+//
 char* demehin::copyString(const char* str, size_t size)
 {
   size_t temp_size = 0;
