@@ -13,6 +13,9 @@ int main()
     std::cerr << "ERROR WITH MEMORY!!\n";
     return 1;
   }
+  for (size_t i = 0; i < arrsize; i += 1) {
+    arr[i] = '0';
+  }
   arr[arrsize - 1] = '\0';
   std::noskipws(std::cin);
   std::cin >> letter;

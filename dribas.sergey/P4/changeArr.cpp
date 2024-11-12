@@ -9,8 +9,10 @@ char* dribas::changeArr(char* oldarr, size_t newsize)
     free(oldarr);
     return nullptr;
   }
-  size_t lastchar = newsize - 1;
-  newarr[lastchar] = '\0';
+  for (size_t i = 0; i < newsize; i += 1) {
+    newarr[i] = '0';
+  }
+  newarr[newsize - 1] = '\0';
   for (size_t i = 0; oldarr[i] != '\0'; i += 1) {
     newarr[i] = oldarr[i];
   }
