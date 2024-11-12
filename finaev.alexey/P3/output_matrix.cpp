@@ -16,7 +16,7 @@ int finaev::kol_loc_max(const int * matrix, size_t strk, size_t stl)
   return res;
 }
 
-void finaev::output_matrix(std::ostream & out,const int * matrix, size_t strk, size_t stl)
+void finaev::output_matrix(std::ostream & out, const int * matrix, size_t strk, size_t stl)
 {
   int res = 0;
   res = kol_loc_max(matrix, strk, stl);
