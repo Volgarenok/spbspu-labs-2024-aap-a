@@ -47,5 +47,6 @@ char * petrov::makeNewCStringOutOfTwo(char * new_cstring, const char * string_1,
     }
     throw;
   }
+  delete[] numbers;
   return new_cstring;
 }
