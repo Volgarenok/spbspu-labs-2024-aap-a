@@ -1,9 +1,10 @@
 #include "rep_sym.hpp"
 #include <ios>
 
-char *sveshnikov::read_str(std::istream &in, char *str, std::size_t *len)
+char *sveshnikov::read_str(std::istream &in, std::size_t *len)
 {
   std::size_t size = 0;
+  char *str = nullptr;
   char c = '\0';
   std::noskipws(in);
   while ((std::cin >> c) && (c != '\n'))

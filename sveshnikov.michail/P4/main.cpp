@@ -2,24 +2,14 @@
 
 int main()
 {
-  std::size_t len = 100;
-  char *str = nullptr;
-  try
-  {
-    str = new char[len];
-  }
-  catch (const std::bad_alloc &e)
-  {
-    std::cerr << "ERROR: BAD_ALLOC! " << e.what() << '\n';
-    return 1;
-  }
-  if (sveshnikov::read_str(std::cin, str, &len) == nullptr)
+  std::size_t len = 0;
+  char *str = sveshnikov::read_str(std::cin, &len);
+  if (str == nullptr)
   {
     delete[] str;
     std::cerr << "ERROR: BAD_ALLOC!\n";
     return 1;
   }
-  str = sveshnikov::read_str(std::cin, str, &len);
   char *new_str = nullptr;
   try
   {
