@@ -8,7 +8,10 @@ int main(){
   size_t lenght = 0;
 
   lab::pull(str, lenght);
-
+  if(lenght == 0)
+  {
+    return 1;
+  }
   int count = lab::countUniqLetters(str, lenght);
   std::cout<<count<<'\n';
 
