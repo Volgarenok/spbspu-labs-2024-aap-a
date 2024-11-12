@@ -36,7 +36,6 @@ int main(int argc, char** argv)
   }
 
   size_t sizeMtrx = cnt_row * cnt_col;
-  size_t read_count = 0;
   constexpr size_t statMtrxSize = 10000;
   int statMtrx[statMtrxSize];
   int* mtrx = statMtrx;
@@ -52,17 +51,10 @@ int main(int argc, char** argv)
       return 1;
     }
 
-  if(!shramko::inputMtrx(input, mtrx, sizeMtrx, read_count))
+  if(!shramko::inputMtrx(input, mtrx, sizeMtrx))
   {
-    delete[] mtrx;
     std::cerr << "ERROR!\n";
-    return 2;
-  }
-
-  if(read_count != sizeMtrx)
-  {
     delete[] mtrx;
-    std::cerr << "Matrix data error!\n";
     return 2;
   }
 

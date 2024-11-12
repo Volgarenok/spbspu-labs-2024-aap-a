@@ -1,15 +1,10 @@
 #include "inputMtrx.hpp"
 
-std::istream & shramko::inputMtrx(std::istream & in, int* mtrx, size_t sizeMtrx, size_t& read_count)
+std::istream & shramko::inputMtrx(std::istream & in, int* mtrx, size_t sizeMtrx)
 {
-  for (size_t i = 0; i < sizeMtrx; ++i)
+  for (size_t i = 0; i < sizeMtrx; i++)
   {
     in >> mtrx[i];
-    if (!in)
-    {
-      exit(96);
-    }
-    read_count++;
   }
   return in;
 }
