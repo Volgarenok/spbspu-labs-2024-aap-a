@@ -11,13 +11,13 @@ int main()
   catch (const std::bad_alloc &e)
   {
     std::cerr << "ERROR: BAD_ALLOC! " << e.what() << '\n';
-    delete[] str;
     return 1;
   }
   str = sveshnikov::read_str(std::cin, str, &len);
   if (str == nullptr)
   {
     std::cerr << "ERROR: BAD_ALLOC!\n";
+    delete[] str;
     return 1;
   }
   char *new_str = nullptr;
@@ -29,7 +29,6 @@ int main()
   {
     std::cerr << "ERROR: BAD_ALLOC! " << e.what() << '\n';
     delete[] str;
-    delete[] new_str;
     return 1;
   }
   new_str = sveshnikov::rep_sym(str, new_str);
