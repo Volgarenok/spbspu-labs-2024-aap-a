@@ -45,4 +45,25 @@ char * smirnov::getLine(std::istream & in, char stop)
   std::skipws(in);
   return str;
 }
+
+char * smirnov::uniString(char * str1, const char * str2)
+{
+  char* ptr1 = str1;
+  const char* ptr2 = str2;
+  char* result = str1;
+  while (*ptr1 != '0' && *ptr2 != '0')
+  {
+    *result++ = *ptr1++;
+    *result++ = *ptr2++;
+  }
+  while (*ptr1 != '0')
+  {
+    *result++ = *ptr1++;
+  }
+  while (*ptr2 != '0')
+  {
+    *result++ = *ptr2++;
+  }
+  *result = '0';
+  return result;
 }
