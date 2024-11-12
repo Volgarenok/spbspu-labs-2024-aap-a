@@ -1,8 +1,6 @@
 #include "removeVowels.h"
 #include "inputOfString.h"
-#include <cstdio>
 #include <iostream>
-#include <cstring>
 #include <stdexcept>
 
 int main()
@@ -12,7 +10,7 @@ int main()
 
   try
   {
-    inputString = inputOfString(std::cin, stringSize);
+    inputString = shabalin::inputOfString(std::cin, stringSize);
     if (inputString[0] == '\0')
     {
       free(inputString);
@@ -25,7 +23,7 @@ int main()
     std::cerr << "Error: " << e.what() << "\n";
     return 1;
   }
-  removeVowels(inputString);
+  shabalin::removeVowels(inputString);
   std::cout << inputString << "\n";
 
   free(inputString);

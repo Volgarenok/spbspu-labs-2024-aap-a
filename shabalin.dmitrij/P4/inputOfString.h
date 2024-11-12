@@ -3,6 +3,9 @@
 #include <cstddef>
 #include <iostream>
 
-char *inputOfString(std::istream &input, size_t &sizeOfString);
+namespace shabalin
+{
+  char *inputOfString(std::istream &input, size_t &sizeOfString);
+}
 
 #endif
