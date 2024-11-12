@@ -1,16 +1,10 @@
 #include "processLine.hpp"
-#include <cstddef>
 #include <iostream>
-
-namespace krylov
-{
-  constexpr size_t memorySize = 52;
-}
 
 char * krylov::inputLine(std::istream & in)
 {
   char * array = nullptr;
-  size_t capacity = krylov::memorySize;
+  size_t capacity = 52;
   try
   {
     array = krylov::allocMemory(capacity);

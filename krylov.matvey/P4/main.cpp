@@ -17,8 +17,8 @@ int main()
     delete[] line;
     return 1;
   }
-  char oldSubstring = 'c';
-  char newSubstring = 'b';
+  constexpr char oldSubstring = 'c';
+  constexpr char newSubstring = 'b';
   std::cout << krylov::replaceLetters(line, oldSubstring, newSubstring);
   std::cout << "\n";
   delete[] line;
