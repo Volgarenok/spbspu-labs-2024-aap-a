@@ -1,20 +1,9 @@
 #include <cstdio>
 #include <iostream>
 
-bool checkSymbol(char symbol)
+bool checkSymbol(char c)
 {
-  const char *list = "aeiouAEIOU";
-  bool flag = true;
-  while (*list != '\0')
-  {
-    if (symbol == *list)
-    {
-      flag = false;
-      break;
-    }
-    ++list;
-  }
-  return flag;
+  return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'y';
 }
 
 char* removeVowels(char *string)
