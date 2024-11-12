@@ -1,22 +1,38 @@
 #include "string.h"
+#include <stdexcept>
 
 char* demehin::copyString(const char* str, size_t size)
 {
+  if (str == nullptr)
+  {
+    return nullptr;
+  }
   size_t temp_size = 0;
   char* new_str = nullptr;
-  new_str = new char[size];
-
+  try
+  {
+    new_str = new char[size];
+  }
+  catch (std::bad_alloc& e)
+  {
+    throw;
+  }
   while (str[temp_size] != '\0')
   {
     new_str[temp_size] = str[temp_size];
     temp_size += 1;
   }
   delete [] str;
+  new_str[temp_size] = '\0';
   return new_str;
 }
 
 char* demehin::getUniqueSymbols(const char* str, char* ustr)
 {
+  if (str == nullptr)
+  {
+    return nullptr;
+  }
   size_t iterator1 = 0;
   size_t unique_size = 0;
   while (str[iterator1] != '\0')
@@ -67,6 +83,10 @@ char* demehin::unc_sym(const char* str, const char* base_str, char* final_str)
 
 char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size)
 {
+  if (str == nullptr)
+  {
+    return nullptr;
+  }
   size_t size = 0;
   char temp = '\0';
   std::noskipws(in);
@@ -76,7 +96,14 @@ char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size
     if (size == max_size)
     {
       max_size *= 2;
-      str = demehin::copyString(str, max_size);
+      try
+      {
+        str = demehin::copyString(str, max_size);
+      }
+      catch (const std::bad_alloc& e)
+      {
+        throw;
+      }
     }
     str[size++] = temp;
   }
