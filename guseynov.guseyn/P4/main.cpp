@@ -8,6 +8,7 @@ int main()
   const size_t num = 26;
   char c = '\n';
   size_t min = 10;
+  size_t step = 10;
   size_t size = 0;
   arr = static_cast < char* > (malloc(min));
   if (arr == nullptr)
@@ -20,8 +21,8 @@ int main()
     arr[size++] = c;
     if (size == min)
     {
-      min += 10;
-      arr = guseyn::newarr(arr, min);
+      arr = guseyn::newarr(arr, min, step);
+      min += step;
     }
   }
   if (!std::cin)
@@ -29,7 +30,7 @@ int main()
     free(arr);
     return 1;
   }
-  arr = guseyn::newarr(arr, size);
+  arr = guseyn::newarr(arr, size, 0);
   if (arr == nullptr)
   {
     return 1;

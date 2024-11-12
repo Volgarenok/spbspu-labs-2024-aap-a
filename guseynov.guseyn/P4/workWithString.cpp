@@ -4,16 +4,16 @@
 #include <stdlib.h>
 #include <cstdlib>
 
-char * guseyn::newarr(char *arr, size_t size)
+char * guseyn::newarr(char *arr, size_t size, size_t step)
 {
-  char *newarr = static_cast < char* > (malloc(size+1));
+  char *newarr = static_cast < char* > (malloc(size+step+1));
 
   for (size_t i = 0; i < size; i++)
   {
     newarr[i] = arr[i];
   }
   free(arr);
-  newarr[size] = '\0';
+  newarr[size+step] = '\0';
   return newarr;
 }
 
