@@ -1,7 +1,7 @@
 #include "making_new_cstring.hpp"
 #include <cctype>
 
-char * petrov::makeNewCStringOutOfTwo(char * new_cstring, const char * string_1, const char * string_2, 
+char * petrov::makeNewCStringOutOfTwo(char * new_cstring, const char * string_1, const char * string_2,
                                       const size_t length_1, const size_t length_2)
 {
   size_t number_of_numbers = 0;
@@ -37,7 +37,7 @@ char * petrov::makeNewCStringOutOfTwo(char * new_cstring, const char * string_1,
       new_cstring[i] = numbers[j];
       i++;
     }
-    new_cstring[i] = '\0'; 
+    new_cstring[i] = '\0';
   }
   catch(const std::bad_alloc & e)
   {

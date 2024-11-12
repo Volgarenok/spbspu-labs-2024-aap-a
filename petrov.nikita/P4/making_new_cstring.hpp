@@ -2,7 +2,7 @@
 #define MAKING_NEW_STRING_HPP
 #include <iostream>
 
-namespace petrov 
+namespace petrov
 {
   char * inputCSring(char * string, size_t & length);
   char * makeNewCStringOutOfTwo(char * new_cstring, const char * string_1, const char * string_2,
