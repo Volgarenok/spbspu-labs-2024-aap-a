@@ -27,14 +27,14 @@ int lab::countUniqLetters(const char* string, size_t length)
       int a = 0;
       for(size_t j =0; j < length; j++)
       {
-        if (string[i] - 'A' + 'a' == newstring[j])
+        if (string[i] - 32 == newstring[j])
         {
           a++;
         }
       }
       if (a==0)
       {
-        newstring[count] = string[i] - 'A' + 'a';
+        newstring[count] = string[i] - 32;
         count++;
       }
     }
