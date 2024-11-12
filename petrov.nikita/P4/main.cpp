@@ -23,11 +23,5 @@ int main()
     std::cerr << "ERROR: Out of memory\n";
     return 1;
   }
-  size_t i = 0;
-  while (new_cstring[i] != '\0')
-  {
-    std::cout << new_cstring[i];
-    i++;
-  }
-  std::cout << "\n";
+  petrov::outputNewCString(new_cstring);
 }

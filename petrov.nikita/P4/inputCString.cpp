@@ -1,5 +1,6 @@
 #include "making_new_cstring.hpp"
 #include <iostream>
+#include <exception>
 
 std::istream & petrov::inputCSring(std::istream & in, char *& string, size_t & length)
 {
@@ -44,11 +45,5 @@ std::istream & petrov::inputCSring(std::istream & in, char *& string, size_t & l
     }
     throw;
   }
-  std::clog << length << "\n"; // Check for length_1 here
-  for (size_t j = 0; j < length; j++)
-  {
-    std::clog << string[j]; // Check for string_1 input
-  }
-  std::clog << "\n";
   return in;
 }
