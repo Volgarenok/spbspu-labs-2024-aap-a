@@ -15,7 +15,7 @@ int main()
     if (!std::cin || cstring_1[0] == '\n')
     {
       std::cerr << "ERROR: Invalid value\n";
-      return 2;
+      return 1;
     }
     new_cstring = petrov::makeNewCStringOutOfTwo(new_cstring, cstring_1, cstring_2, length_1, length_2);
   }
