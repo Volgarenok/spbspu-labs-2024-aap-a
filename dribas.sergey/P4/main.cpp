@@ -16,11 +16,11 @@ int main()
   std::noskipws(std::cin);
   size_t i = 0;
   for (; arr[i-1] != '\n'; i += 1) {
-    if (i == arrsize - 1) {
+    if (i == arrsize) {
       arrsize += 10;
       arr = dribas::changeArr(arr, arrsize);
       if (arr == nullptr) {
-        std::cerr << "ERROR WITH MEMORY!!\n";
+        std::cerr << "Error with memory!!\n";
         return 1;
       }
     }
@@ -32,5 +32,7 @@ int main()
     }
   }
   std::cout << dribas::checkChar(arr);
+  std::cout << '\n';
+  free(arr);
   return 0;
 }

@@ -11,7 +11,7 @@ char* dribas::changeArr(char* oldarr, size_t newsize)
   }
   newarr[newsize - 1] = '\0';
   for (size_t i = 0; oldarr[i] != '\0'; i += 1) {
-    oldarr[i] = newarr[i];
+    newarr[i] = oldarr[i];
   }
   free(oldarr);
   return newarr;
