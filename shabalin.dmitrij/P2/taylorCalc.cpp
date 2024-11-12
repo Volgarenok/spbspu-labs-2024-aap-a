@@ -41,6 +41,8 @@ void shabalin::finalOutput(double left, double right, double step, size_t k, dou
   for (auto i = left; i < right; i += step)
   {
     shabalin::output(i, k, error);
+    std::cout << "\n";
   }
   shabalin::output(right, k, error);
+  std::cout << "\n";
 }
