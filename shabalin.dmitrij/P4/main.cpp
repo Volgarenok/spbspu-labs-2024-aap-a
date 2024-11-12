@@ -1,27 +1,23 @@
 #include <cstdio>
 #include <iostream>
+#include <string>
 
 bool checkSymbol(char c)
 {
   return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'y';
 }
 
-char* removeVowels(char *string)
+char* removeVowels(char *in, char *dest)
 {
-  char *begin = string;
-  char *result = string;
-  while (*string != '\0')
+  for (auto i = source; *i != '\0'; i++)
   {
-    if (checkSymbol(*string))
+    if (!checkSymbol(*i))
     {
-      *result = *string;
-      ++result;
+      *dest = *i;
+      dest++;
     }
-    ++string;
   }
-  *result = '\0';
-
-  return begin;
+  *dest = '\0';
 }
 
 char *inputOfString(std::istream &input, size_t &sizeOfString)
@@ -68,6 +64,7 @@ int main()
 {
   char *inputString = nullptr;
   size_t stringSize = 10;
+  char *result = nullptr;
   try
   {
     inputString = inputOfString(std::cin, stringSize);
@@ -83,8 +80,19 @@ int main()
     std::cerr << "Error: " << e.what() << "\n";
     return 1;
   }
-  removeVowels(inputString);
-  std::cout << inputString << "\n";
+  try
+  {
+    result = reinterpret_cast< char* >(malloc(sizeof(char) * stringSize));
+  }
+  catch (const std::bad_alloc &e)
+  {
+    free(inputString);
+    free(result);
+    std::cerr << e.what() << "\n";
+    return 1;
+  }
+  removeVowels(inputString, result);
+  std::cout << result << "\n";
   free(inputString);
   return 0;
 }
