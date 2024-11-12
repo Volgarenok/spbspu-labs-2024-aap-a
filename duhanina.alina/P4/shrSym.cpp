@@ -2,7 +2,7 @@
 #include <cctype>
 #include <cstddef>
 
-void duhanina::shrSym(const char* str, char*& result, size_t resC)
+void duhanina::shrSym(const char* str, char*& result)
 {
   bool isPresent[26] = {false};
   for (size_t i = 0; str[i] != '\0'; ++i)
