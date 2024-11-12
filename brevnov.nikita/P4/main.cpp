@@ -19,6 +19,7 @@ int main()
   if (first_line[0] == 0)
   {
     std::cerr << "Empty input \n";
+    delete[] first_line;
     return 1;
   }
   brevnov::finding_common_elements(std::cout, first_line, second_line);
