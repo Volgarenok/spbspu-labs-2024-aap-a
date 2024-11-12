@@ -9,6 +9,7 @@ char * petrov::inputCSring(char * string, size_t & length)
   try
   {
     string = new char[1];
+    string[0] = '0';
     size_t i = 0;
     std::cin >> string[i];
     if (string[i] == '\n' || std::cin.eof())
