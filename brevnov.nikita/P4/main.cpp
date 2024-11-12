@@ -21,7 +21,7 @@ int main()
     std::cerr << "Empty input \n";
     return 1;
   }
-  second_line = "abc_ef"
+  second_line = "abc_ef";
   brevnov::finding_common_elements(std::cout, first_line, second_line);
   std::cout << "\n";
   delete[] first_line;
