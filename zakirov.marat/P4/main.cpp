@@ -8,7 +8,7 @@ int main()
   constexpr size_t step = 15;
   char last_symbol = '\0';
   std::cin >> last_symbol;
-  char * line = (char *)malloc(sizeof(char));
+  char * line = static_cast<char *>(malloc(sizeof(char)));
   if (last_symbol == '\0')
   {
     std::cerr << "ERROR: Empty line" << '\n';
