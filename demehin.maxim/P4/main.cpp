@@ -13,7 +13,7 @@ int main()
 
  try
   {
-    str = new char[max_size];
+    str = new char[max_size + 1];
     ustr1 = new char[askii_size];
     ustr2 = new char[askii_size];
     final_str = new char[askii_size];
@@ -43,8 +43,6 @@ int main()
   ustr1 = demehin::getUniqueSymbols(str, ustr1);
   ustr2 = demehin::getUniqueSymbols(base_str, ustr2);
   final_str = demehin::unc_sym(ustr1, ustr2, final_str);
-  std::cout << ustr1 << '\n';
-  std::cout << ustr2 << '\n';
   std::cout << final_str << '\n';
 
   delete[] ustr1;
