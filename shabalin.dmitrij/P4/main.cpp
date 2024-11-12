@@ -1,15 +1,14 @@
 #include <cstdio>
 #include <iostream>
-#include <string>
 
 bool checkSymbol(char c)
 {
   return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'y';
 }
 
-char* removeVowels(char *in, char *dest)
+void removeVowels(char *in, char *dest)
 {
-  for (auto i = source; *i != '\0'; i++)
+  for (auto i = in; *i != '\0'; i++)
   {
     if (!checkSymbol(*i))
     {
