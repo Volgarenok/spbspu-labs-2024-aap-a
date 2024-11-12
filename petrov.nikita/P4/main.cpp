@@ -6,7 +6,7 @@ int main()
   char * cstring_1 = nullptr;
   const char cstring_2[10] = "kf 1 lsa7";
   size_t length_1 = 0;
-  const size_t length_2 = sizeof(cstring_2) / sizeof(char);
+  const size_t length_2 = sizeof(cstring_2) / sizeof(char) - 1;
   std::noskipws(std::cin);
   char * new_cstring = nullptr;
   try
@@ -27,6 +27,7 @@ int main()
   while (new_cstring[i] != '\0')
   {
     std::cout << new_cstring[i];
+    i++;
   }
   std::cout << "\n";
 }
