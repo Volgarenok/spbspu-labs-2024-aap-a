@@ -12,11 +12,13 @@ int main()
   if (last_symbol == '\0')
   {
     std::cerr << "ERROR: Empty line" << '\n';
+    free(line);
     return 1;
   }
   else if (line == nullptr)
   {
     std::cerr << "ERROR: Out of memory" << '\n';
+    free(line);
     return 1;
   }
 
