@@ -16,7 +16,7 @@ int main()
     return 1;
   }
 
-  if (second_line[0] = '\0')
+  if (second_line[0] == '\0')
   {
     std::cerr << "Empty input";
     free(second_line);

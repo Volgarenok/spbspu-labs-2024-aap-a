@@ -10,7 +10,7 @@ char* timofeev::input_line(std::istream& in)
   std::noskipws(in);
   while((in >> cur_sym) && (cur_sym != '\n'))
   {
-    if (cur_writing_lit = capacity)
+    if (cur_writing_lit == capacity)
     {
       try
       {
