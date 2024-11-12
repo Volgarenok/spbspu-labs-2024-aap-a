@@ -39,11 +39,15 @@ int main()
     return 1;
   }
 
-  if (str[0] == '\0')
+  if (str == nullptr)
   {
-    std::cerr << "Zero arguments\n";
+    delete[] ustr1;
+    delete[] str;
+    delete[] ustr2;
+    delete[] final_str;
     return 1;
   }
+
 
   char base_str[] = "abc ef";
   ustr1 = demehin::getUniqueSymbols(str, ustr1);

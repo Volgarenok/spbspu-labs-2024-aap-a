@@ -107,6 +107,10 @@ char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size
     }
     str[size++] = temp;
   }
+  if (size == 0)
+  {
+    return nullptr;
+  }
   str[size] = '\0';
   return str;
 }
