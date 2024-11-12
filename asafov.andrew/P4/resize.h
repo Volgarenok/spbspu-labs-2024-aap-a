@@ -1,6 +1,6 @@
 #ifndef RESIZE_H
 #define RESIZE_H
-#include <cstdef>
+#include <cstddef>
 
 namespace lab
 {
