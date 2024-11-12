@@ -12,7 +12,7 @@ int main()
   try
   {
     cstring_1 = petrov::inputCSring(cstring_1, length_1);
-    if (!std::cin || cstring_1[0] == '\n')
+    if (!std::cin || std::cin.eof() || cstring_1[0] == '\n')
     {
       std::cerr << "ERROR: Invalid value\n";
       return 1;

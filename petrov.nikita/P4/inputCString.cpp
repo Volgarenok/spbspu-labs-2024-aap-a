@@ -10,7 +10,7 @@ char * petrov::inputCSring(char * string, size_t & length)
     string = new char[1];
     size_t i = 0;
     std::cin >> string[i];
-    if (string[i] == '\n')
+    if (string[i] == '\n' || std::cin.eof())
     {
       return string;
     }
@@ -33,6 +33,10 @@ char * petrov::inputCSring(char * string, size_t & length)
       temp_string = nullptr;
       std::cin >> string[i];
       i++;
+      if (std::cin.eof())
+      {
+        return string;
+      }
     }
     string[i - 1] = '\0';
     length = i - 1;
