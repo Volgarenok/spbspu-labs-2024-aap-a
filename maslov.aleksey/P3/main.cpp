@@ -41,40 +41,36 @@ int main(int argc, char **argv)
     output << rows << " " << columns << "\n";
     return 0;
   }
-  size_t read = 0;
-  if (taskNumber == 1)
-  {
-    constexpr size_t max_size = 10000;
-    int array[max_size] = {};
-    if (!maslov::inputMatrix(input, array, rows, columns, read))
-    {
-      std::cerr << "Elements are not a number or not enough\n";
-      return 2;
-    }
-    output << maslov::findLocalMaximum(array, rows, columns);
-  }
-  else
+  constexpr size_t maxSize = 10000;
+  int fixedLengthArray[maxSize] = {};
+  int *array = fixedLengthArray;
+  if (taskNumber == 2)
   {
     const size_t arraySize = rows * columns;
-    int *array = nullptr;
     try
     {
       array = new int[arraySize];
     }
     catch (const std::bad_alloc &e)
     {
-      delete[] array;
       std::cerr << "Out of memory\n";
       return 1;
     }
-    if (!maslov::inputMatrix(input, array, rows, columns, read))
+  }
+  size_t read = 0;
+  if (!maslov::inputMatrix(input, array, rows, columns, read))
+  {
+    std::cerr << "Elements are not a number or not enough\n";
+    if (taskNumber == 2)
     {
       delete[] array;
-      std::cerr << "Elements are not a number or not enough\n";
-      return 2;
     }
-    output << maslov::findLocalMaximum(array, rows, columns);
+    return 2;
+  }
+  output << maslov::findLocalMaximum(array, rows, columns);
+  output << "\n";
+  if (taskNumber == 2)
+  {
     delete[] array;
   }
-  output << "\n";
 }
