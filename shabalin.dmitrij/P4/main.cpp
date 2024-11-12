@@ -1,8 +1,9 @@
+#include <cstdio>
 #include <iostream>
 
 bool checkSymbol(char symbol)
 {
-  const char* list = "aeiouAEIOU";
+  const char *list = "aeiouAEIOU";
   bool flag = true;
   while (*list != '\0')
   {
@@ -14,6 +15,24 @@ bool checkSymbol(char symbol)
     ++list;
   }
   return flag;
+}
+
+char* removeVowels(char *string)
+{
+  char *begin = string;
+  char *result = string;
+  while (*string != '\0')
+  {
+    if (checkSymbol(*string))
+    {
+      *result = *string;
+      ++result;
+    }
+    ++string;
+  }
+  *result = '\0';
+
+  return begin;
 }
 
 char *inputOfString(std::istream &input, size_t &sizeOfString)
@@ -75,6 +94,8 @@ int main()
     std::cerr << "Error: " << e.what() << "\n";
     return 1;
   }
+  removeVowels(inputString);
+  std::cout << inputString << "\n";
   free(inputString);
   return 0;
 }
