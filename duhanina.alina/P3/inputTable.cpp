@@ -1,5 +1,5 @@
+#include "functionMatrix.h"
 #include <iostream>
-#include "titleMatrix.h"
 
 std::istream & duhanina::inputMatrix(std::istream & in, int * t, size_t m, size_t n, size_t & read)
 {

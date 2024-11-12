@@ -1,8 +1,8 @@
+#include "functionMatrix.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <stdexcept>
-#include "titleMatrix.h"
 
 int main(int argc, char ** argv)
 {
@@ -16,13 +16,15 @@ int main(int argc, char ** argv)
     std::cerr << "Incorrect amount of data entered" << "\n";
     return 1;
   }
-  char * ch = argv[1];
-  if (!duhanina::isDig(ch))
+  for (size_t i = 0; argv[1][i] != '\0'; i++)
   {
-    std::cerr << "First parameter is not a number" << "\n";
-    return 1;
+    if (argv[1][i] < '0' || argv[1][i] > '9')
+    {
+      std::cerr << "First parameter is not a number\n";
+      return 1;
+    }
   }
-  int num = atoi(ch);
+  int num = std::atoi(argv[1]);
   if (!(num == 1 || num == 2))
   {
     std::cerr << "First parameter is out of range" << "\n";
@@ -30,40 +32,27 @@ int main(int argc, char ** argv)
   }
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
-  input.seekg(0, std::ios::end);
-  if (input.tellg() == 0)
+  size_t m = 0, n = 0;
+  input >> m >> n;
+   if (!input)
   {
     std::cerr << "File is empty" << "\n";
     return 2;
   }
-  input.seekg(0, std::ios::beg);
-  if (!input)
-  {
-    std::cerr << "Impossible to construct a matrix" << "\n";
-    return 2;
-  }
-  size_t m = 0, n = 0;
-  input >> m >> n;
   if (m * n == 0)
   {
     output << "0\n";
     return 0;
   }
+  size_t read = 0;
+  int * table = nullptr;
   if (num == 1)
   {
-    size_t read = 0;
-    int table[10000] = {0};
-    if (!duhanina::inputMatrix(input, table, m, n, read) || read != (m * n))
-    {
-      std::cerr << "Invalid input" << "\n";
-      return 2;
-    }
-    output << duhanina::outputAnswer(table, m, n) << "\n";
+    int matrix[10000] = {0};
+    table = matrix;
   }
   else if (num == 2)
   {
-    size_t read = 0;
-    int * table = nullptr;
     try
     {
       table = new int[m * n];
@@ -73,13 +62,19 @@ int main(int argc, char ** argv)
       std::cerr << "Error memory" << "\n";
       return 1;
     }
-    if (!duhanina::inputMatrix(input, table, m, n, read) || read != (m * n))
+  }
+  if (!duhanina::inputMatrix(input, table, m, n, read) || read != (m * n))
+  {
+    std::cerr << "Invalid input" << "\n";
+    if (num == 2)
     {
-      std::cerr << "Invalid input" << "\n";
       delete[] table;
-      return 2;
     }
-    output << duhanina::outputAnswer(table, m, n) << "\n";
+    return 2;
+  }
+  output << duhanina::minSumMdg(table, m, n) << "\n";
+  if (num == 2)
+  {
     delete[] table;
   }
   return 0;
