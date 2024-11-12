@@ -5,6 +5,7 @@
 
 namespace maslovskiy
 {
-  size_t countNoDuplicates(int *matrix, size_t rows, size_t cols);
+  size_t countNoDuplicates(const int *matrix, size_t rows, size_t cols);
 }
+
 #endif
