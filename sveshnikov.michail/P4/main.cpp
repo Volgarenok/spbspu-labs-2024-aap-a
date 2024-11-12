@@ -13,13 +13,13 @@ int main()
     std::cerr << "ERROR: BAD_ALLOC! " << e.what() << '\n';
     return 1;
   }
-  str = sveshnikov::read_str(std::cin, str, &len);
-  if (str == nullptr)
+  if (sveshnikov::read_str(std::cin, str, &len) == nullptr)
   {
-    std::cerr << "ERROR: BAD_ALLOC!\n";
     delete[] str;
+    std::cerr << "ERROR: BAD_ALLOC!\n";
     return 1;
   }
+  str = sveshnikov::read_str(std::cin, str, &len);
   char *new_str = nullptr;
   try
   {
