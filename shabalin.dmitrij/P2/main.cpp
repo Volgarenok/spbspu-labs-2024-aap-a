@@ -1,5 +1,5 @@
 #include <iostream>
-#include "function.hpp"
+#include "taylorCalc.hpp"
 
 int main()
 {
@@ -11,7 +11,7 @@ int main()
     std::cerr << "Input error" << "\n";
     return 1;
   }
-  if ((left > right) | (left < -1) | (right > 1))
+  if ((left > right) || (left < -1) || (right > 1))
   {
     std::cerr << "Incorrect input" << "\n";
     return 1;

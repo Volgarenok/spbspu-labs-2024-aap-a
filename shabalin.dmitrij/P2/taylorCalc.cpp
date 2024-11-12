@@ -1,10 +1,8 @@
+#include "taylorCalc.hpp"
 #include <iomanip>
 #include <cstring>
 #include <iostream>
 #include <cmath>
-#include "function.hpp"
-
-using namespace shabalin;
 
 double shabalin::taylorViaCos(double x, size_t k, double error)
 {
@@ -35,14 +33,16 @@ void shabalin::output(double x, size_t k, double error)
   {
     std::cout << std::setw(clmn) << e.what();
   }
-  std::cout << std::setw(clmn) << std::cos(x) << "\n";
+  std::cout << std::setw(clmn) << std::cos(x);
 }
 
 void shabalin::finalOutput(double left, double right, double step, size_t k, double error)
 {
-   for (auto i = left; i < right; i += step)
+  for (auto i = left; i < right; i += step)
   {
     shabalin::output(i, k, error);
+    std::cout << "\n";
   }
-   shabalin::output(right, k, error);
+  shabalin::output(right, k, error);
+  std::cout << "\n";
 }
