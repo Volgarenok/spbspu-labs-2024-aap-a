@@ -16,7 +16,7 @@ char * brevnov::getline(std::istream& in, char stop)
     }
     line[current_size++] = c;
   }
-  line[current_size++] = 0;
+  line[current_size] = 0;
   std::skipws(in);
   return line;
 }

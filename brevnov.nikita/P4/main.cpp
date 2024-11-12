@@ -18,7 +18,7 @@ int main()
   }
   if (first_line[0] == 0)
   {
-    std::cerr << "Empty input \n";
+    std::cerr << "Empty input\n";
     delete[] first_line;
     return 1;
   }

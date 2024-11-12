@@ -20,4 +20,3 @@ void brevnov::finding_common_elements(std::ostream& out, char * first_line, char
     element_of_first++;
   }
 }
-
