@@ -4,7 +4,7 @@
 int main()
 {
   const char first_line[] = "abs";
-  char* second_line = timofeev::input_line(std::in);
+  char* second_line = timofeev::input_line(std::cin);
   if (second_line == nullptr)
   {
     free(second_line);
