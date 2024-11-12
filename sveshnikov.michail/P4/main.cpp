@@ -22,7 +22,7 @@ int main()
   char *new_str = nullptr;
   try
   {
-    new_str = new char[len];
+    new_str = new char[len]{'\0'};
   }
   catch (const std::bad_alloc &e)
   {

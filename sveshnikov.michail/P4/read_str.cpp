@@ -18,6 +18,10 @@ char *sveshnikov::read_str(std::istream &in, char *str, std::size_t *len)
     }
     str[size++] = c;
   }
+  if (!std::cin)
+  {
+    return nullptr;
+  }
   str[size] = '\0';
   std::skipws(std::cin);
   return str;
