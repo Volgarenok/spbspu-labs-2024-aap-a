@@ -1,3 +1,5 @@
+#include "functions.hpp"
+
 int main()
 {
   char * str1 = nullptr;
@@ -6,7 +8,7 @@ int main()
     str1 = smirnov::getLine(std::cin, '\n');
   }
   catch (const std::bad_alloc & e)
-  }
+  {
     std::cerr << "Out of memory\n";
     return 1;
   }
