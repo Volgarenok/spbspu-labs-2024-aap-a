@@ -1,17 +1,10 @@
 #include "string.h"
 
-char* demehin::copyString(char* str, size_t size)
+char* demehin::copyString(const char* str, size_t size)
 {
   size_t temp_size = 0;
   char* new_str = nullptr;
-  try
-  {
-    new_str = new char[size];
-  }
-  catch (std::bad_alloc& e)
-  {
-    throw;
-  }
+  new_str = new char[size];
 
   while (str[temp_size] != '\0')
   {
@@ -22,51 +15,50 @@ char* demehin::copyString(char* str, size_t size)
   return new_str;
 }
 
-char* demehin::getUniqueSymbols(char* str, char* ustr)
+char* demehin::getUniqueSymbols(const char* str, char* ustr)
 {
-  size_t iter1 = 0;
+  size_t iterator1 = 0;
   size_t unique_size = 0;
-  while (str[iter1] != '\0')
+  while (str[iterator1] != '\0')
   {
     bool isUnique = true;
-    size_t iter2 = 0;
-    while (ustr[iter2] != '\0')
+    size_t iterator2 = 0;
+    while (ustr[iterator2] != '\0')
     {
-      if (str[iter1] == ustr[iter2])
+      if (str[iterator1] == ustr[iterator2])
       {
         isUnique = false;
         break;
       }
-      iter2 += 1;
+      iterator2 += 1;
     }
     if (isUnique)
     {
-      ustr[unique_size++] = str[iter1];
+      ustr[unique_size++] = str[iterator1];
     }
-    iter1 += 1;
+    iterator1 += 1;
   }
   return ustr;
 }
 
-char* demehin::unc_sym(char* str, char* base_str, char* final_str)
+char* demehin::unc_sym(const char* str, const char* base_str, char* final_str)
 {
-  size_t iter1 = 0;
+  size_t iterator1 = 0;
   size_t final_size = 0;
-  while (str[iter1] != '\0')
+  while (str[iterator1] != '\0')
   {
-    size_t iter2 = 0;
-    while (base_str[iter2] != '\0')
+    size_t iterator2 = 0;
+    while (base_str[iterator2] != '\0')
     {
-      if (str[iter1] == base_str[iter2])
+      if (str[iterator1] == base_str[iterator2])
       {
-        final_str[final_size++] = str[iter1];
+        final_str[final_size++] = str[iterator1];
         break;
       }
-      iter2 += 1;
-
+      iterator2 += 1;
     }
 
-    iter1 += 1;
+    iterator1 += 1;
   }
   return final_str;
 }
@@ -82,14 +74,7 @@ char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size
     if (size == max_size)
     {
       max_size *= 2;
-      try
-      {
-        str = demehin::copyString(str, max_size);
-      }
-      catch (const std::bad_alloc& e)
-      {
-        throw;
-      }
+      str = demehin::copyString(str, max_size);
     }
     str[size++] = temp;
   }

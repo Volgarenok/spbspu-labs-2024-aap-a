@@ -1,5 +1,4 @@
 #include "string.h"
-#include <iostream>
 #include <ios>
 
 int main()
@@ -47,7 +46,6 @@ int main()
   std::cout << ustr1 << '\n';
   std::cout << ustr2 << '\n';
   std::cout << final_str << '\n';
-
 
   delete[] ustr1;
   delete[] str;
