@@ -2,14 +2,14 @@
 #include <iostream>
 #include <exception>
 
-std::istream & petrov::inputCSring(std::istream & in, char *& string, size_t & length)
+char * petrov::inputCSring(char * string, size_t & length)
 {
   char * temp_string = nullptr;
   try
   {
     string = new char[1];
     size_t i = 0;
-    in >> string[i];
+    std::cin >> string[i];
     i++;
     while (string[i - 1] != '\n')
     {
@@ -27,7 +27,7 @@ std::istream & petrov::inputCSring(std::istream & in, char *& string, size_t & l
       }
       delete[] temp_string;
       temp_string = nullptr;
-      in >> string[i];
+      std::cin >> string[i];
       i++;
     }
     string[i - 1] = '\0';
@@ -45,5 +45,5 @@ std::istream & petrov::inputCSring(std::istream & in, char *& string, size_t & l
     }
     throw;
   }
-  return in;
+  return string;
 }

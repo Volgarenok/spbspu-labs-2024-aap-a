@@ -1,7 +1,7 @@
 #include "making_new_cstring.hpp"
 #include <cctype>
 
-void petrov::makeNewCStringOutOfTwo(char *& new_cstring, const char * string_1, const char * string_2, const size_t length_1, const size_t length_2)
+char * petrov::makeNewCStringOutOfTwo(char * new_cstring, const char * string_1, const char * string_2, const size_t length_1, const size_t length_2)
 {
   size_t number_of_numbers = 0;
   for (size_t i = 0; i < length_2; i++)
@@ -46,5 +46,5 @@ void petrov::makeNewCStringOutOfTwo(char *& new_cstring, const char * string_1, 
     }
     throw;
   }
+  return new_cstring;
 }
-
