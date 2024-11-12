@@ -6,7 +6,7 @@
 
 int main()
 {
-  size_t arrsize = 10;
+  size_t arrsize = 0;
   char* arr = static_cast < char* >(malloc(sizeof(char) * arrsize));
   if (arr == nullptr) {
     std::cerr << "ERROR WITH MEMORY!!\n";
@@ -21,7 +21,7 @@ int main()
   size_t i = 1;
   for (; arr[i-1] != '\n'; i += 1) {
     if (i == arrsize) {
-      arrsize += 10;
+      arrsize += 1;
       arr = dribas::changeArr(arr, arrsize);
       if (arr == nullptr) {
         std::cerr << "Error with memory!!\n";
