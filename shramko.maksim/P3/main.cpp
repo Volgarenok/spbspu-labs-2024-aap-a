@@ -51,8 +51,7 @@ int main(int argc, char** argv)
       return 1;
     }
   }
-
-  if(!shramko::inputMtrx(input, mtrx, sizeMtrx))
+  else if(!shramko::inputMtrx(input, mtrx, sizeMtrx))
   {
     std::cerr << "ERROR!\n";
     return 2;
