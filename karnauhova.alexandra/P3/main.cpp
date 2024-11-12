@@ -23,8 +23,13 @@ int main(int argc, char ** argv)
     std::cerr << "First parameter is not suitable\n";
     return 1;
   }
+  else if (str[1] != '\0')
+  {
+    std::cerr << "First parameter is not suitable\n";
+    return 1;
+  }
   const int way = std::atoi(argv[1]);
-  if ((way > 2) | (way < 1))
+  if ((way > 2) || (way < 1))
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
@@ -83,10 +88,7 @@ int main(int argc, char ** argv)
   if ((read / m) < n)
   {
     std::cerr << "Incorrect matrix\n";
-    if (way == 2)
-    {
-      delete[] t;
-    }
+    delete[] t;
     return 1;
   }
   float* t2 = nullptr;
@@ -101,9 +103,9 @@ int main(int argc, char ** argv)
       t2 =  karnauhova::smooth_matrix(t1, m, n);
     }
    }
-   catch(const std::bad_alloc & e)
+   catch (const std::bad_alloc & e)
    {
-     std::cerr<<"Out of memory\n";
+     std::cerr << "Out of memory\n";
      return 1;
    }
   output << m << " " << n << " ";
