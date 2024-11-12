@@ -46,6 +46,7 @@ int main()
   if (*str == '\0')
   {
     std::cerr << "there is no string in stdin\n";
+    free(str);
     return 1;
   }
 
