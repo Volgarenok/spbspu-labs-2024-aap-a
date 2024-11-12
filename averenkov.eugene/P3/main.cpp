@@ -71,5 +71,9 @@ int main(int argc, char** argv)
   output << averenkov::max_sum_sdg(matrix, m, n) << " ";
   output << m << " " << n << " ";
   averenkov::output_matrix(output, matrix, m, n);
+  if(std::atoi(argv[1]) == 2)
+  {
+    delete[] matrix;
+  }
   return 0;
 }
