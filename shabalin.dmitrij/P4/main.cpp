@@ -1,6 +1,8 @@
 #include "removeVowels.h"
 #include "inputOfString.h"
+#include <cstdio>
 #include <iostream>
+#include <cstring>
 #include <stdexcept>
 
 int main()
