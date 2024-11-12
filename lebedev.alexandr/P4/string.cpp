@@ -54,7 +54,7 @@ char* lebedev::getLine(std::istream& in, char endChar)
   {
     return nullptr;
   }
-  
+
   str[size] = '\0';
   return str;
 }
