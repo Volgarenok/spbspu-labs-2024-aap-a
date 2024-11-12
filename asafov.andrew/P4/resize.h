@@ -3,7 +3,7 @@
 
 namespace lab
 {
-    char* resize(char* string, const size_t lenght);
+  char* resize(char* string, const size_t lenght);
 }
 
 #endif

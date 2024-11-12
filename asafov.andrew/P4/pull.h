@@ -3,7 +3,7 @@
 
 namespace lab
 {
-    void pull(char*& a, size_t& lenght);
+  void pull(char*& a, size_t& lenght);
 }
 
 #endif
