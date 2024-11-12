@@ -18,14 +18,13 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
   {
     new_matrix[i] = matrix[i + 2];
   }
-  int n = 1;
   size_t count = 0;
   for (size_t i = 0; i < (strk + stl - 1); i++)
   {
-    int col = 0;
+    size_t col = 0;
     int icur = i;
     std::string diag;
-    for (size_t j = (stl -1); (j >= 0) && (col <= i) && (col < stl); j--)
+    for (size_t j = (stl -1); (col <= i) && (col < stl); j--)
     {
       int jcur = j;
       if (icur * stl + jcur < (strk * stl))
@@ -37,7 +36,6 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
       jcur--;
       col++;
     }
-    n++;
     values[count] = diag;
     count++;
   }
