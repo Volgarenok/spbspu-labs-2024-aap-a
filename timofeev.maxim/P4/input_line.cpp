@@ -12,16 +12,7 @@ char* timofeev::input_line(std::istream& in)
   {
     if (cur_writing_lit == capacity)
     {
-      try
-      {
-        line = timofeev::boost_size(line, capacity);
-      }
-      catch (const std::bad_alloc& e)
-      {
-        std::cerr << "Memory error";
-        return nullptr;
-        free(line);
-      }
+      line = timofeev::boost_size(line, capacity);
     }
     line[cur_writing_lit++] = cur_sym;
   }
