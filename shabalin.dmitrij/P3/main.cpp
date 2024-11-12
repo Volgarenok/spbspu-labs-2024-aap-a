@@ -57,30 +57,25 @@ int main(int argc, char *argv[])
   size_t countOfElements = rows * cols;
 
   int tempMatrix[10000] = {};
-  double tempSmoothedMatrix[10000] = {};
 
   int *matrix = nullptr;
-  double *smoothedMatrix = nullptr;
 
   using namespace shabalin;
 
   if (task == 1)
   {
     matrix = tempMatrix;
-    smoothedMatrix = tempSmoothedMatrix;
   }
   else if (task == 2)
   {
     try
     {
       matrix = new int[countOfElements];
-      smoothedMatrix = new double[countOfElements];
     }
     catch (const std::bad_alloc &e)
     {
       std::cerr << "Error" << e.what() << "\n";
       delete[] matrix;
-      delete[] smoothedMatrix;
       return 2;
     }
   }
@@ -100,7 +95,6 @@ int main(int argc, char *argv[])
     if (task == 2)
     {
       delete[] matrix;
-      delete[] smoothedMatrix;
     }
     return 2;
   }
@@ -108,7 +102,6 @@ int main(int argc, char *argv[])
   if (task == 2)
   {
     delete[] matrix;
-    delete[] smoothedMatrix;
   }
   return 0;
 }
