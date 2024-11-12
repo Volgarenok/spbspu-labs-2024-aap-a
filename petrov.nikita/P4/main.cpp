@@ -17,7 +17,7 @@ int main()
       std::cerr << "ERROR: Invalid value\n";
       return 2;
     }
-    new_cstring = petrov::makeNewCStringOutOfTwo(new_cstring, cstring_1, cstring_2, length_1, length_2); 
+    new_cstring = petrov::makeNewCStringOutOfTwo(new_cstring, cstring_1, cstring_2, length_1, length_2);
   }
   catch (const std::bad_alloc & e)
   {
