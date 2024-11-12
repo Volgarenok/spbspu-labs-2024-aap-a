@@ -20,6 +20,7 @@ size_t rychkov::getline(std::istream& inpStream, char* buf, size_t bufLen, char 
   if(bufLen != 0)
   {
     buf[bufLen - 1] = '\0';
+    return bufLen - 1;
   }
-  return bufLen - 1;
+  return 0;
 }
