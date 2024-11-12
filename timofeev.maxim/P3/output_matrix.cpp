@@ -35,7 +35,7 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
   {
     size_t col = 0;
     int icur = i;
-    std::string diag;
+    char diag;
     for (size_t j = (stl -1); (col <= i) && (col < stl); j--)
     {
       int jcur = j;
