@@ -23,14 +23,14 @@ char *inputOfString(std::istream &input, size_t &sizeOfString)
 {
   char someCharacter = 0;
   size_t index = 0;
-  char *initialString = reinterpret_cast< char* >(malloc(sizeof(char) * sizeOfString));
+  char *initialString = new char[sizeOfString];
   input >> std::noskipws;
 
   while (input >> someCharacter)
   {
     if (!input)
     {
-      free(initialString);
+      delete[] initialString;
       throw std::logic_error("Input error");
     }
     if (index == sizeOfString - 1)
@@ -38,18 +38,18 @@ char *inputOfString(std::istream &input, size_t &sizeOfString)
       try
       {
         sizeOfString *= 2;
-        char *intermediateString = reinterpret_cast< char* >(malloc(sizeof(char) * sizeOfString));
+        char *intermediateString = new char[sizeOfString];
         for (size_t i = 0; i < index; ++i)
         {
           intermediateString[i] = initialString[i];
         }
 
-        free(initialString);
+        delete[] initialString;
         initialString = intermediateString;
       }
       catch (std::bad_alloc &e)
       {
-        free(initialString);
+        delete[] initialString;
         throw;
       }
     }
@@ -69,7 +69,7 @@ int main()
     inputString = inputOfString(std::cin, stringSize);
     if (inputString[0] == '\0')
     {
-      free(inputString);
+      delete[] inputString;
       std::cerr << "Error" << "\n";
       return 1;
     }
@@ -81,17 +81,17 @@ int main()
   }
   try
   {
-    result = reinterpret_cast< char* >(malloc(sizeof(char) * stringSize));
+    result = new char[stringSize];
   }
   catch (const std::bad_alloc &e)
   {
-    free(inputString);
-    free(result);
+    delete[] inputString;
+    delete[] result;
     std::cerr << e.what() << "\n";
     return 1;
   }
   removeVowels(inputString, result);
   std::cout << result << "\n";
-  free(inputString);
+  delete[] inputString;
   return 0;
 }
