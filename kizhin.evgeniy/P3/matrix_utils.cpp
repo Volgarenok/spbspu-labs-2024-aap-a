@@ -1,13 +1,13 @@
 #include "matrix_utils.hpp"
 
-std::istream& kizhin::readArrayValues(std::istream& in, int* array, size_t size)
+size_t kizhin::readArrayValues(std::istream& in, int* array, size_t size)
 {
   for (size_t i = 0; i < size; ++i) {
     if (!(in >> array[i])) {
-      return in;
+      return i;
     }
   }
-  return in;
+  return size;
 }
 
 size_t kizhin::countLocalMaximums(const int* matrix)

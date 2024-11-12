@@ -27,12 +27,13 @@ int main(int argc, char** argv)
     if (!(in >> rows >> columns) || rows < 0 || columns < 0) {
       throw std::logic_error("Failed to read matrix dimensions");
     }
-    int stackBuffer[kizhin::stackBufferSize];
+    constexpr size_t stackBufferSize = 10'000;
+    int stackBuffer[stackBufferSize];
     const size_t size = rows * columns;
-    matrix = kizhin::allocateArray(size + 2, stackBuffer, memoryMode);
+    matrix = memoryMode == kizhin::MemoryMode::stack ? stackBuffer : new int[size + 2];
     matrix[0] = rows;
     matrix[1] = columns;
-    if (!kizhin::readArrayValues(in, matrix + 2, size)) {
+    if (kizhin::readArrayValues(in, matrix + 2, size) != size) {
       throw std::logic_error("Failed to read matrix values");
     }
 
@@ -42,9 +43,13 @@ int main(int argc, char** argv)
     }
     out << kizhin::countLocalMaximums(matrix);
   } catch (const std::exception& ex) {
-    kizhin::deallocateArray(matrix, memoryMode);
+    if (memoryMode == kizhin::MemoryMode::freeStore) {
+      delete[] matrix;
+    }
     std::cerr << ex.what() << '\n';
     return 2;
   }
-  kizhin::deallocateArray(matrix, memoryMode);
+  if (memoryMode == kizhin::MemoryMode::freeStore) {
+    delete[] matrix;
+  }
 }
