@@ -28,7 +28,7 @@ char* hismatova::uniqueChar(char* str1, char* str2)
       count++;
     }
   }
-  char *result = reinterpret_cast<char*>(malloc(count + 1));
+  char* result = reinterpret_cast<char*>(malloc(count + 1));
   if (result == nullptr)
   {
     return nullptr;
@@ -46,7 +46,7 @@ char* hismatova::uniqueChar(char* str1, char* str2)
 }
 int hismatova::getLine(char** str)
 {
-  size_t n = 100;
+  size_t n = 256;
   *str = reinterpret_cast<char*>(malloc(sizeof(char) * n));
   if (*str == nullptr) {
     std::cerr << "out of memory\n";
@@ -58,12 +58,6 @@ int hismatova::getLine(char** str)
     c = std::cin.get();
     if (c == '\n' || c == EOF)
     {
-      if (length == 0 && c == EOF)
-      {
-        free(*str);
-        *str = nullptr;
-        return 0;
-      }
       break;
     }
     if (length + 1 >= n)
