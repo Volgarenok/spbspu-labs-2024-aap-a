@@ -1,5 +1,5 @@
-#include <iostream>
 #include <fstream>
+#include <cctype>
 #include "cnt_row_nsm.h"
 #include "matrix.h"
 
@@ -18,7 +18,8 @@ int main(int argc, char** argv)
 
   char* first_arg = argv[1];
   int c = *first_arg - '0';
-  if (first_arg[0] < 48 || first_arg[0] > 57)
+  bool isDigit = std::isdigit(first_arg[0]);
+  if (!isDigit)
   {
     std::cerr << "First parameter is not a number\n";
     return 1;
@@ -30,7 +31,7 @@ int main(int argc, char** argv)
   }
 
   std::ifstream input(argv[2]);
-  size_t m = 0, n = 0, k = 0;
+  size_t m = 0, n = 0;
   input >> m >> n;
   if (!input)
   {
@@ -38,8 +39,12 @@ int main(int argc, char** argv)
     return 2;
   }
 
-  k = m * n;
+  size_t k = m * n;
   int* matrix2 = nullptr;
+  int matrix1[10000] = {};
+  size_t read = 0;
+  char error_msg[] = "Impossible to build matrix\n";
+
   if (c == 2)
   {
     try
@@ -51,39 +56,32 @@ int main(int argc, char** argv)
       std::cerr << "Out of memory\n";
       return 1;
     }
-  }
-  int matrix1[10000] = {};
-  size_t read = 0;
-  if (c == 1)
-  {
-    if (!demehin::input_matrix(input, matrix1, k, read) && m != 0)
+    if (!demehin::input_matrix(input, matrix2, k, read) && m != 0)
     {
-      std::cerr << "Impossible to build matrix\n";
+      std::cerr << error_msg;
+      delete[] matrix2;
       return 2;
     }
   }
   else
   {
-    if (!demehin::input_matrix(input, matrix2, k, read) && m != 0)
+    if (!demehin::input_matrix(input, matrix1, k, read) && m != 0)
     {
-      std::cerr << "Impossible to build matrix\n";
-      delete[] matrix2;
+      std::cerr << error_msg;
       return 2;
     }
   }
 
   if (read != k)
   {
-    std::cerr << "Impossible to build matrix due incorrect number of elements\n";
-    if (c == 2)
-    {
-      delete[] matrix2;
-    }
+    std::cerr << error_msg;
+    delete[] matrix2;
     return 2;
   }
+
   if (!std::cin)
   {
-    std::cerr << "Impossible to build matrix due incorrect element\n";
+    std::cerr << error_msg;
     delete[] matrix2;
     return 2;
   }
