@@ -28,7 +28,7 @@ int main()
     if (!std::cin) {
       std::cerr << "ERROR WITH ENTER!!!\n";
       free(arr);
-      return 1;
+      return 2;
     }
   }
   std::cout << dribas::checkChar(arr);
