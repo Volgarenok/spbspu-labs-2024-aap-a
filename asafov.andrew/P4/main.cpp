@@ -10,6 +10,7 @@ int main(){
   lab::pull(str, lenght);
   if(lenght == 0)
   {
+    delete[] str;
     return 1;
   }
   int count = lab::countUniqLetters(str, lenght);
