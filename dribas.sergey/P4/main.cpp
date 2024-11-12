@@ -25,7 +25,9 @@ int main()
     std::cin >> arr[i];
     if (!std::cin) {
       std::cerr << "ERROR WITH ENTER!!!\n";
+      free(arr);
       return 1;
     }
+  }
   return 0;
 }
