@@ -6,7 +6,8 @@
 
 int main()
 {
-  size_t arrsize = 1;
+  size_t arrsize = 5;
+  char letter = 0;
   char* arr = static_cast < char* >(malloc(sizeof(char) * arrsize));
   if (arr == nullptr) {
     std::cerr << "ERROR WITH MEMORY!!\n";
@@ -14,12 +15,18 @@ int main()
   }
   arr[arrsize - 1] = '\0';
   std::noskipws(std::cin);
-  std::cin >> arr[0];
+  std::cin >> letter;
   if (!std::cin) {
+    free(arr);
     return 1;
   }
+  if (letter == '\n') {
+    std::cout << "0\n";
+    free(arr);
+    return 0;
+  }
   size_t i = 1;
-  for (; arr[i-1] != '\n'; i += 1) {
+  for (; letter != '\n'; i += 1) {
     if (i == arrsize) {
       arrsize += 1;
       arr = dribas::changeArr(arr, arrsize);
@@ -28,7 +35,8 @@ int main()
         return 1;
       }
     }
-    std::cin >> arr[i];
+    arr[i] = letter;
+    std::cin >> letter;
     if (!std::cin) {
       std::cerr << "ERROR WITH ENTER!!!\n";
       free(arr);
