@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <istream>
 
-char* read_string(std::istream& input)
+char* zholobov::read_string(std::istream& input)
 {
   constexpr size_t buf_size = 101;
   char buf[buf_size];
@@ -22,7 +22,7 @@ char* read_string(std::istream& input)
   return str;
 }
 
-char* exc_snd(const char* str, const char* excl_chars)
+char* zholobov::exc_snd(const char* str, const char* excl_chars)
 {
   size_t len = std::strlen(str);
   char* new_str = (char*)std::malloc(len + 1);
