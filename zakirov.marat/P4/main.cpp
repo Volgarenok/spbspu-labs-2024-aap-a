@@ -36,13 +36,14 @@ int main()
     last_symbol = line[finish - 1];
   }
 
-  char * answer = zakirov::change_line(line);
+  zakirov::change_line(line);
   size_t location = 0;
-  while (answer[location] != '\0')
+  while (line[location] != '\0')
   {
-    std::cout << answer[location];
+    std::cout << line[location];
     location += 1;
   }
 
   std::cout << '\n';
+  free(line);
 }

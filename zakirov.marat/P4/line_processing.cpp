@@ -36,7 +36,7 @@ char * zakirov::get_line(std::istream & in, char * line, size_t start, size_t fi
   return line;
 }
 
-char * zakirov::change_line(char * line)
+void zakirov::change_line(char * line)
 {
   char alphabet[52];
   size_t location = 0;
@@ -78,5 +78,4 @@ char * zakirov::change_line(char * line)
     line[location]  = '\0';
     location += 1;
   }
-  return line;
 }
