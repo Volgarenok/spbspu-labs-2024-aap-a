@@ -4,7 +4,7 @@
 #include <fstream>
 #include "countInMtx.hpp"
 #include "inputMatrix.hpp"
-
+#include "hasDuplicatesInColumn.hpp"
 int main(int argc, char** argv)
 {
   using namespace maslovskiy;
