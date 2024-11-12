@@ -12,6 +12,7 @@ char * smirnov::getLine(std::istream & in, char stop)
   }
   catch (const std::bad_alloc & e)
   {
+    delete[] str;
     throw std::logic_error("Out of memory\n");
   }
   size_t size = 0;
@@ -30,6 +31,8 @@ char * smirnov::getLine(std::istream & in, char stop)
       }
       catch (const std::bad_alloc & e)
       {
+        delete[] new_str;
+        delete[] str;
         throw std::logic_error("Out of memory\n");
       }
       for (size_t i = 0; i < capacity; ++i)
@@ -42,11 +45,11 @@ char * smirnov::getLine(std::istream & in, char stop)
     str[size++] = c;
   }
   str[size] = '\0';
-  std::skipws(in);
+  in >> std::skipws;
   return str;
 }
 
-char * smirnov::uniString(char * str1, const char * str2)
+void smirnov::uniString(char * str1, const char * str2)
 {
   char* ptr1 = str1;
   const char* ptr2 = str2;
@@ -65,5 +68,4 @@ char * smirnov::uniString(char * str1, const char * str2)
     *result++ = *ptr2++;
   }
   *result = '0';
-  return result;
 }

@@ -6,6 +6,6 @@
 namespace smirnov
 {
   char * getLine(std::istream & in, char stop);
-  char * uniString(char * str1, const char * str2);
+  void uniString(char * str1, const char * str2);
 }
 #endif
