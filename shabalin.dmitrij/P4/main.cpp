@@ -1,36 +1,51 @@
 #include <cstdio>
 #include <iostream>
 
-bool checkSymbol(char c)
+bool checkSymbol(char symbol)
 {
-  return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'y';
+  const char *list = "aeiouAEIOU";
+  bool f = true;
+  while (*list != '\0')
+  {
+    if (symbol == *list)
+    {
+      f = false;
+      break;
+    }
+    ++list;
+  }
+  return f;
 }
 
-void removeVowels(char *in, char *dest)
+char* removeVowels(char *string)
 {
-  for (auto i = in; *i != '\0'; i++)
+  char *begin = string;
+  char *result = string;
+  while (*string != '\0')
   {
-    if (!checkSymbol(*i))
+    if (checkSymbol(*string))
     {
-      *dest = *i;
-      dest++;
+      *result = *string;
+      ++result;
     }
+    ++string;
   }
-  *dest = '\0';
+  return begin;
 }
 
 char *inputOfString(std::istream &input, size_t &sizeOfString)
 {
   char someCharacter = 0;
   size_t index = 0;
-  char *initialString = new char[sizeOfString];
+  char *initialString = reinterpret_cast< char* >(malloc(sizeof(char) * sizeOfString));
+  //char *initialString = new char[sizeOfString];
   input >> std::noskipws;
 
   while (input >> someCharacter)
   {
     if (!input)
     {
-      delete[] initialString;
+      free(initialString);
       throw std::logic_error("Input error");
     }
     if (index == sizeOfString - 1)
@@ -38,18 +53,17 @@ char *inputOfString(std::istream &input, size_t &sizeOfString)
       try
       {
         sizeOfString *= 2;
-        char *intermediateString = new char[sizeOfString];
+        char *intermediateString = reinterpret_cast< char* >(malloc(sizeof(char) * sizeOfString));
         for (size_t i = 0; i < index; ++i)
         {
           intermediateString[i] = initialString[i];
         }
-
-        delete[] initialString;
+        free(initialString);
         initialString = intermediateString;
       }
       catch (std::bad_alloc &e)
       {
-        delete[] initialString;
+        free(initialString);
         throw;
       }
     }
@@ -63,13 +77,12 @@ int main()
 {
   char *inputString = nullptr;
   size_t stringSize = 10;
-  char *result = nullptr;
   try
   {
     inputString = inputOfString(std::cin, stringSize);
     if (inputString[0] == '\0')
     {
-      delete[] inputString;
+      free(inputString);
       std::cerr << "Error" << "\n";
       return 1;
     }
@@ -79,19 +92,8 @@ int main()
     std::cerr << "Error: " << e.what() << "\n";
     return 1;
   }
-  try
-  {
-    result = new char[stringSize];
-  }
-  catch (const std::bad_alloc &e)
-  {
-    delete[] inputString;
-    delete[] result;
-    std::cerr << e.what() << "\n";
-    return 1;
-  }
-  removeVowels(inputString, result);
-  std::cout << result << "\n";
-  delete[] inputString;
+  removeVowels(inputString);
+  std::cout << inputString << "\n";
+  free(inputString);
   return 0;
 }
