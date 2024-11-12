@@ -6,10 +6,10 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
 {
   size_t sum_dig = strk + stl - 1;
   size_t sum_el = (strk * stl) + ((stl - 1) * stl);
-  std::string* values = nullptr;
+  char* values = nullptr;
   try
   {
-    values = new std::string[sum_dig]{'\0'};
+    values = new char[sum_dig]{'\0'};
   }
   catch(const std::bad_alloc& e)
   {
