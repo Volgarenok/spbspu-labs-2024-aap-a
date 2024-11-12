@@ -4,11 +4,13 @@
 
 void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t stl)
 {
-  std::string* values = new std::string[strk + stl - 1];
+  size_t sum_dig = strk + stl - 1;
+  size_t sum_el = (strk * stl) + ((stl - 1) * stl);
+  std::string* values = new std::string[sum_dig];
   char* new_matrix = nullptr;
   try
   {
-    new_matrix = new char[(strk * stl) + ((stl - 1) * stl)];
+    new_matrix = new char[sum_el];
   }
   catch (const std::bad_alloc& e)
   {
