@@ -20,5 +20,6 @@ int main()
   char oldSubstring = 'c';
   char newSubstring = 'b';
   std::cout << krylov::replaceLetters(line, oldSubstring, newSubstring);
+  std::cout << "\n";
   delete[] line;
 }

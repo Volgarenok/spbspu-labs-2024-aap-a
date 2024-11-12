@@ -13,13 +13,14 @@ char * krylov::inputLine(std::istream & in)
   size_t capacity = krylov::memorySize;
   try
   {
-    array = allocMemory(capacity);
+    array = krylov::allocMemory(capacity);
   }
   catch (const std::bad_alloc & e)
   {
     return nullptr;
   }
   size_t currentElementIndex = 0;
+  std::noskipws(in);
   while (!in.eof())
   {
     if (currentElementIndex == (capacity - 1))
@@ -36,8 +37,9 @@ char * krylov::inputLine(std::istream & in)
         return nullptr;
       }
     }
-    in >> std::noskipws >> array[currentElementIndex++];
+    in >> array[currentElementIndex++];
   }
+  std::skipws(in);
   array[currentElementIndex - 1] = '\0';
   return array;
 }
@@ -50,7 +52,7 @@ char * krylov::allocMemory(size_t capacity)
 
 char * krylov::replaceArray(char * oldArray, size_t newCapacity)
 {
-  char * newArray = new char[newCapacity];
+  char * newArray = krylov::allocMemory(newCapacity);
   for (size_t i = 0; oldArray[i] != '\0'; i++)
   {
     newArray[i] = oldArray[i];
