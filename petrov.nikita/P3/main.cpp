@@ -33,38 +33,34 @@ int main(int argc, const char ** argv)
     std::cerr << "Error: Invalid data\n";
     return 2;
   }
-  if (std::atoi(argv[1]) == 1)
+  int matrix[10000] = {0};
+  int * ptr_matrix = matrix;
+  int check_varuable = std::atoi(argv[1]);
+  if (check_varuable == 2)
   {
-    int matrix[10000] = {0};
-    int * ptr_matrix = matrix;
-    if (!petrov::inputMatrix(input, ptr_matrix, number_of_rows, rows_length))
-    {
-      std::cerr << "Error: Invalid data\n";
-      return 2;
-    }
-    output << petrov::countNotZeroDiagonals(ptr_matrix, number_of_rows, rows_length);
-  }
-  else
-  {
-    int * ptr_matrix = nullptr;
+    ptr_matrix = nullptr;
     try
     {
       ptr_matrix = new int[number_of_rows * rows_length];
-      if (!petrov::inputMatrix(input, ptr_matrix, number_of_rows, rows_length))
-      {
-        std::cerr << "Error: Invalid data\n";
-        delete[] ptr_matrix;
-        return 2;
-      }
     }
     catch (const std::bad_alloc & e)
     {
       std::cerr << "Out of memory\n";
       return 3;
     }
-    output << petrov::countNotZeroDiagonals(ptr_matrix, number_of_rows, rows_length);
-    delete[] ptr_matrix;
   }
+  if ((!petrov::inputMatrix(input, ptr_matrix, number_of_rows, rows_length)) && (check_varuable == 2))
+  {
+    std::cerr << "Error: Invalid data\n";
+    delete[] ptr_matrix;
+    return 2;
+  }
+  else if ((!input) && (check_varuable == 1))
+  {
+    std::cerr << "Error: Invalid data\n";
+    return 2;
+  }
+  output << petrov::countNotZeroDiagonals(ptr_matrix, number_of_rows, rows_length);
 }
 
 int checkArguments(int argc, const char ** argv)
