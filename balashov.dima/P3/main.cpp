@@ -66,14 +66,17 @@ int main(int argc, char** argv)
             delete[] matrixDynamic;
             delete[] matrix;
             std::cerr << "Out of memory\n";
-            return 1;
+            return 2;
         }
         matrix = matrixDynamic;
     }
     if (!(balashov::inputMatrix(input, matrix, columns, rows, read)))
     {
         std::cerr << "Invalid input\n";
-        delete[] matrix;
+        if (arrayType == 2)
+        {
+          delete[] matrix;
+        }
         return 2;
     }
     output << balashov::calculateMinSumSideDiagonal(matrix, columns, rows) << "\n";
