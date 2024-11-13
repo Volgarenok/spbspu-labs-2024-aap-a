@@ -7,7 +7,7 @@ size_t rychkov::findDigitsRepeatsCount(const char* str)
   size_t digitsRepeats[10]{0};
   while (*str != '\0')
   {
-    if(std::isdigit(*str))
+    if (std::isdigit(*str))
     {
       digitsRepeats[*str - '0']++;
     }

@@ -7,7 +7,7 @@
 int main()
 {
   constexpr size_t startStringLength = 7;
-  char* str = reinterpret_cast<char*>(malloc(startStringLength * sizeof(char)));
+  char* str = reinterpret_cast< char* >(malloc(startStringLength * sizeof(char)));
   if (!str)
   {
     std::cerr << "failed to allocate string\n";
@@ -17,18 +17,10 @@ int main()
   size_t strLength = startStringLength;
 
   size_t wPoint = 0;
-  while (true)
+  size_t wereRead = 0;
+  while (rychkov::getline(std::cin, str + wPoint, strLength - wPoint, '\n', &wereRead)
+      && (wereRead == strLength - wPoint - 1))
   {
-    size_t wereRead = rychkov::getline(std::cin, str + wPoint, strLength - wPoint);
-    if (std::cin.eof() || ((wereRead < strLength - wPoint - 1) && std::cin.good()))
-    {
-      break;
-    }
-    if (!std::cin)
-    {
-      std::cerr << "Failed to read string\n";
-      return 1;
-    }
     wPoint = strLength - 1;
 
     size_t newSize = 2 * strLength + 1;
@@ -42,7 +34,11 @@ int main()
     str = reallocatedStr;
     strLength = newSize;
   }
-
+  if (std::cin.fail())
+  {
+    std::cerr << "Failed to read string\n";
+    return 1;
+  }
   if (*str == '\0')
   {
     std::cerr << "there is no string in stdin\n";

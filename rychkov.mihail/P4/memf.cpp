@@ -4,7 +4,7 @@
 
 char* rychkov::realloc(char* arr, size_t oldLen, size_t newLen)
 {
-  char* result = reinterpret_cast<char*>(malloc(newLen * sizeof(char)));
+  char* result = reinterpret_cast< char* >(malloc(newLen * sizeof(char)));
   if (!result || !arr)
   {
     return result;

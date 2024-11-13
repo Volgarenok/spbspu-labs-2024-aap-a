@@ -6,7 +6,7 @@
 
 namespace rychkov
 {
-  size_t getline(std::istream& inpStream, char* buf, size_t bufLen, char endChar = '\n');
+  std::istream& getline(std::istream& inpStream, char* buf, size_t bufLen, char endChar = '\n', size_t* wereRead = nullptr);
 }
 
 #endif
