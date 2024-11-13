@@ -24,7 +24,7 @@ int main()
   }
   char help_array[7] = {};
   char * answer = help_array;
-  answer = brevnov::finding_common_elements(answer, first_line, second_line);
+  brevnov::finding_common_elements(answer, first_line, second_line);
   std::size_t i = 0;
   while (answer[i] != 0)
   {
