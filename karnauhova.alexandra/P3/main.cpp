@@ -84,7 +84,7 @@ int main(int argc, char ** argv)
     delete[] t;
     if (way == 2)
     {
-      delete[mtx];
+      delete[] mtx;
     }
     return 2;
   }
@@ -94,7 +94,7 @@ int main(int argc, char ** argv)
     delete[] t;
     if (way == 2)
     {
-      delete[mtx];
+      delete[] mtx;
     }
     return 1;
   }
@@ -109,7 +109,7 @@ int main(int argc, char ** argv)
     delete[] t;
     if (way == 2)
     {
-      delete[mtx];
+      delete[] mtx;
     }
     return 1;
   }
@@ -120,7 +120,7 @@ int main(int argc, char ** argv)
   delete[] t2;
   if (way == 2)
   {
-    delete[mtx];
+    delete[] mtx;
   }
   return 0;
 }
