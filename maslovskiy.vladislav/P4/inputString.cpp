@@ -1,5 +1,6 @@
 #include "inputString.hpp"
 #include "resizeString.hpp"
+#include <cstdlib>
 char* inputString(std::istream &in)
 {
   const size_t iterSize = 100;
@@ -19,16 +20,16 @@ char* inputString(std::istream &in)
       char *temp = resizeString(str, strSize, iterSize);
       if (temp == nullptr)
       {
-        throw std::bad_alloc("incorrect memory allocation")
+        throw std::bad_alloc();
       }
       strSize += iterSize;
       free(str);
       str = temp;
     }
   }
-  temp[i] = ch;
+  str[i] = ch;
   ++i;
-  temp[i] = '\0';
+  str[i] = '\0';
   in >> std::skipws;
   return str;
 }

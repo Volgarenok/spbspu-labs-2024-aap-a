@@ -1,13 +1,15 @@
-#include <iostream>
 #include "inputString.hpp"
 #include "mergeStrs.hpp"
+#include <cstdlib>
+#include <iostream>
+
 int main()
 {
   char *str1 = nullptr;
   const char *str2 = "246789";
   try
   {
-   char *str1 = inputString(std::cin);
+   str1 = inputString(std::cin);
   }
   catch (const std::bad_alloc &)
   {

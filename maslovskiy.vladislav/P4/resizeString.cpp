@@ -1,5 +1,5 @@
 #include "resizeString.hpp"
-
+#include <cstdlib>
 char* resizeString(const char *str, size_t strSize, size_t iterSize)
 {
   char *resized = static_cast<char*>(malloc(sizeof(char) * (strSize + iterSize)));
@@ -7,6 +7,6 @@ char* resizeString(const char *str, size_t strSize, size_t iterSize)
   {
     resized[i] = str[i];
   }
-  resized[size + iterSize] = '\0';
+  resized[strSize + iterSize] = '\0';
   return resized;
 }

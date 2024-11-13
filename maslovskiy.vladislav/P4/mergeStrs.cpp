@@ -3,7 +3,7 @@
 void mergeStrs(char *res, const char *first, const char *second)
 {
   size_t i = 0;
-  for (; first[i] != '\0' && second[i] != '\0'; ++i)
+  for (;first[i] != '\0' && second[i] != '\0'; ++i)
   {
     res[i * 2] = first[i];
     res[i * 2 + 1] = second[i];
