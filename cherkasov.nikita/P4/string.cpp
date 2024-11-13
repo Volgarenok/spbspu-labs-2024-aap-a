@@ -1,7 +1,6 @@
 #include "string.h"
 #include <iostream>
 #include <cstring>
-#include <cctype>
 #include <new>
 
 char * cherkasov::getString(const char * input, std::size_t size) noexcept
