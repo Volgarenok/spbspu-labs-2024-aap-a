@@ -1,9 +1,8 @@
 #include "incomplete_matrix.hpp"
 #include <new>
 
-float* karnauhova::smooth_matrix(const int* t, size_t m, size_t n)
+void karnauhova::smooth_matrix(const int* t, float* n_mtx, size_t m, size_t n)
 {
-  float* n_mtx = new float[m * n];
   int sum = 0;
   size_t k = 0;
   float count = 0;
@@ -57,5 +56,4 @@ float* karnauhova::smooth_matrix(const int* t, size_t m, size_t n)
     }
     k += n;
   }
-  return n_mtx;
 }

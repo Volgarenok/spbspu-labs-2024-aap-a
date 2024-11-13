@@ -18,12 +18,7 @@ int main(int argc, char ** argv)
     return 1;
   }
   char* str = argv[1];
-  if (!std::isdigit(str[0]))
-  {
-    std::cerr << "First parameter is not suitable\n";
-    return 1;
-  }
-  else if (str[1] != '\0')
+  if ((!std::isdigit(str[0])) || (str[1] != '\0'))
   {
     std::cerr << "First parameter is not suitable\n";
     return 1;
@@ -51,25 +46,37 @@ int main(int argc, char ** argv)
   }
   if (m == 0 && n == 0)
   {
-    output << m << " " << n << " ";
+    output << m << " " << n << "\n";
     return 0;
   }
-  int * t = nullptr;
+  int* t = nullptr;
+  float* t2 = nullptr;
+  try
+  {
+    t2 = new float[m*n];
+  }
+  catch (const std::bad_alloc & e)
+  {
+    std::cerr << "Out of memory\n";
+    delete[] t2;
+    return 1;
+  }
+  int* mtx = nullptr;
   if (way == 2)
   {
     try
     {
       t = new int[m * n];
     }
-    catch(const std::bad_alloc & e)
+    catch (const std::bad_alloc & e)
     {
       std::cerr<<"Out of memory\n";
+      delete[] t;
+      delete[] t2;
       return 1;
-    };
+    }
   }
   int t1[10000] = {0};
-  float* t2 = nullptr;
-  int* mtx = nullptr;
   if (way == 2)
   {
     mtx = t;
@@ -90,17 +97,7 @@ int main(int argc, char ** argv)
     delete[] t;
     return 1;
   }
-  try
-  {
-    t2 =  karnauhova::smooth_matrix(mtx, m, n);
-  }
-  catch (const std::bad_alloc & e)
-  {
-    std::cerr << "Out of memory\n";
-    delete[] t2;
-    delete[] t;
-    return 1;
-  }
+  karnauhova::smooth_matrix(t, t2, m, n);
   output << m << " " << n << " ";
   karnauhova::output_matrix(output, t2, m, n);
   output << "\n";
