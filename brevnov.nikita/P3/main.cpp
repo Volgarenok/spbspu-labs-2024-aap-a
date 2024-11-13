@@ -1,9 +1,28 @@
 #include <iostream>
 #include <fstream>
 #include "input_output_matrix.hpp"
-#include "find_osed.hpp"
+#include "find_saddle_number.hpp"
 #include "fll_inc_wav.hpp"
-#include "intcheck.hpp"
+
+namespace brevnov
+{
+  int intcheck(char * input)
+  {
+    bool convertible = true;
+    if ((input[0] == '1' || input[0] == '2') && input[1] == 0)
+    {
+      convertible = true;
+    }
+    if (convertible)
+    {
+      return std::atoi(input);
+    }
+    else
+    {
+      throw std::invalid_argument("Incorrect input");
+    }
+  }
+}
 
 int main(int argc, char ** argv)
 {
@@ -79,7 +98,7 @@ int main(int argc, char ** argv)
     delete[] help_array;
     return 2;
   }
-  output << brevnov::find_osed(mtx, m, n);
+  output << brevnov::find_saddle_number(mtx, m, n);
   output << "\n";
   brevnov::fll_inc_wav(mtx, m, n);
   brevnov::output_matrix(output, mtx, m, n);

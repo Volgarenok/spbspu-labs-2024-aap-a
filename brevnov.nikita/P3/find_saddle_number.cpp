@@ -1,4 +1,4 @@
-#include "find_osed.hpp"
+#include "find_saddle_number.hpp"
 
 size_t find_index_min(const int * t, size_t n, size_t i)
 {
@@ -30,7 +30,7 @@ size_t find_index_max(const int * t, size_t m, size_t n, int min_member)
   return max_index;
 }
 
-int brevnov::find_osed(const int * t, size_t m, size_t n)
+int brevnov::find_saddle_number(const int * t, size_t m, size_t n)
 {
   int answer = 0;
   for (size_t i = 0; i < m; i++)
