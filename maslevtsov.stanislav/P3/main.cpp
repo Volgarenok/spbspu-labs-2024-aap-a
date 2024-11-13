@@ -14,9 +14,10 @@ int main(int argc, char** argv)
     std::cerr << "Error: too many arguments in command\n";
     return 1;
   }
-  if ((argv[1][0] == '1' || argv[1][0] == '2') && argv[1][1] == '\0')
+  if (argv[1][1] != '\0' || argv[1][0] != '1' && argv[1][0] != '2')
   {
     std::cerr << "Error: first argument of command must be 1 or 2";
+    return 1;
   }
 
   std::ifstream finput(argv[2]);
