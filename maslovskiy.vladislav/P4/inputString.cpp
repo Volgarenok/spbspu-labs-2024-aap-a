@@ -3,7 +3,7 @@
 #include <cstdlib>
 char* inputString(std::istream &in)
 {
-  const size_t iterSize = 100;
+  const size_t iterSize = 10;
   size_t strSize = iterSize;
   char *str = static_cast<char*>(malloc(sizeof(char) * iterSize));
   char ch = 0;
@@ -26,9 +26,9 @@ char* inputString(std::istream &in)
       free(str);
       str = temp;
     }
+    str[i] = ch;
+    ++i;
   }
-  str[i] = ch;
-  ++i;
   str[i] = '\0';
   in >> std::skipws;
   return str;
