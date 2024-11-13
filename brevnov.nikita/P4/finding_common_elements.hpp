@@ -3,6 +3,6 @@
 #include <ostream>
 namespace brevnov
 {
-  void finding_common_elements(std::ostream& out, char * first_line, char * second_line);
+  char * finding_common_elements(char * answer, char * first_line, char * second_line);
 }
 #endif
