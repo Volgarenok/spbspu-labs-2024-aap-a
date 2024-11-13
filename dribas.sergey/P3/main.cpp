@@ -49,9 +49,9 @@ int main(int argc, char ** argv)
   }
   int* mtx = nullptr;
   int* dynamicmtx = nullptr;
-  int staticmtx[10000] = {};
+  int fixedmtx[10000] = {};
   if (secondArg == 1) {
-    mtx = staticmtx;
+    mtx = fixedmtx;
   }
   if (secondArg == 2) {
     try {
@@ -62,15 +62,11 @@ int main(int argc, char ** argv)
     }
     mtx = dynamicmtx;
   }
-  size_t readed = 0;
-  dribas::enterMTX(input, mtx, m, n, readed);
+  size_t read = 0;
+  dribas::enterMTX(input, mtx, m, n, read);
   std::ofstream output(argv[3]);
-  if (input && readed == m * n){
-    if (dribas::is3Angle(mtx, m, n)) {
-      output << "true" << "\n";
-    } else {
-      output << "false" << "\n";
-    }
+  if (input && read == m * n){
+    output << std::boolalpha << dribas::is3Angle(mtx, m, n) << "\n";
   } else {
     std::cerr << "Error with enter\n";
     delete[] dynamicmtx;

@@ -1,7 +1,7 @@
 #include "is3Angle.hpp"
 #include <cstddef>
 
-bool dribas::checkLine(const int* matrix, size_t M, size_t N, int variaty, size_t target)
+bool checkLine(const int* matrix, size_t M, size_t N, int variaty, size_t target)
 {
   size_t count = 0;
   if (variaty == 1) {
@@ -30,7 +30,7 @@ bool dribas::is3Angle(const int* matrix, size_t M, size_t N)
   for (int variaty = 1; variaty < 3; variaty += 1){
     bool preresult = true;
     for (size_t i = 0; i < M; i += 1){
-      preresult = preresult && dribas::checkLine(matrix, i * M, ((i + 1) * M) - 1, variaty, M - 1 - i);
+      preresult = preresult && checkLine(matrix, i * M, ((i + 1) * M) - 1, variaty, M - 1 - i);
     }
     result = result || preresult;
   }
