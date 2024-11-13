@@ -73,8 +73,8 @@ int main(int argc, char** argv)
     if (!(balashov::inputMatrix(input, matrix, columns, rows, read)))
     {
         std::cerr << "Invalid input\n";
-        return 2;
         delete[] matrix;
+        return 2;
     }
     output << balashov::calculateMinSumSideDiagonal(matrix, columns, rows) << "\n";
     delete[] matrix;
