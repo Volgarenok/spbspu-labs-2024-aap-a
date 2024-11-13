@@ -60,6 +60,10 @@ int main(int argc, const char ** argv)
     return 2;
   }
   output << petrov::countNotZeroDiagonals(ptr_matrix, number_of_rows, rows_length);
+  if (check_varuable == 2)
+  {
+    delete[] ptr_matrix;
+  }
 }
 
 int checkArguments(int argc, const char ** argv)
