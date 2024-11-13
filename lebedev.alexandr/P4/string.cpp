@@ -2,7 +2,7 @@
 
 void lebedev::removeElement(char* str, size_t num)
 {
-  size_t i = 0;
+  size_t i = num;
   while(str[i] != '\0')
   {
     str[i] = str[i + 1];
