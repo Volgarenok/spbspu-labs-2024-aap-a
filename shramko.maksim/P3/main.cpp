@@ -60,12 +60,14 @@ int main(int argc, char** argv)
     }
     output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
   }
-  else if(!shramko::inputMtrx(input, mtrx, sizeMtrx))
+  else if (argv[1][0] == '1')
   {
-    std::cerr << "Sta error!\n";
-    return 2;
+    if(!shramko::inputMtrx(input, mtrx, sizeMtrx))
+    {
+      delete[] mtrx;
+      std::cerr << "Sta error!\n";
+      return 2;
+    }
+    output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
   }
-
-  output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
-  delete[] mtrx;
 }
