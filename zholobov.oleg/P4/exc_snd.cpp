@@ -5,19 +5,30 @@
 
 char* zholobov::read_string(std::istream& input)
 {
-  constexpr size_t buf_size = 101;
+  constexpr size_t buf_size = 16;
   char buf[buf_size];
-  char* str = (char*)std::malloc(1);
-  *str = 0;
+  size_t buf_pos = 0;
+  char* str = static_cast< char* >(std::malloc(1));
   size_t str_length = 0;
-  do {
-    input.clear();
-    input.getline(buf, buf_size);
-    size_t count = (size_t)input.gcount();
-    str_length += count;
-    str = (char*)std::realloc(str, str_length);
-    std::strcat(str, buf);
-  } while (!input);
+  char c = '\0';
+  std::noskipws(input);
+  while ((input >> c) && (c != '\n')) {
+    buf[buf_pos++] = c;
+    if (buf_pos == buf_size) {
+      str = static_cast< char* >(std::realloc(str, str_length + buf_size));
+      for (size_t i = 0; i < buf_size; ++i, ++str_length) {
+        str[str_length] = buf[i];
+      }
+      buf_pos = 0;
+    }
+  }
+  if (c == '\n') {
+    str = static_cast< char* >(std::realloc(str, str_length + buf_pos + 1));
+    for (size_t i = 0; i < buf_pos; ++i, ++str_length) {
+      str[str_length] = buf[i];
+    }
+    str[str_length] = '\0';
+  }
   return str;
 }
 
