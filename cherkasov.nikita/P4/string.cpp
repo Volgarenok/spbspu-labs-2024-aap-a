@@ -43,3 +43,60 @@ char * cherkasov::getString(const char * input, std::size_t size) noexcept
     return result;
 }
 
+char * cherkasov::inpputLine(std::istream & in)
+{
+  char * array = nullptr;
+  size_t container = 69;
+  try
+  {
+    array = cherkasov::allocMemor(container);
+    }
+      catch (const std::bad_alloc & e)
+      {
+        return nullptr;
+      }
+
+  size_t currentElement = 0;
+  std::noskipws(in);
+  while (!in.eof())
+  {
+    if (currentElement == (container - 1))
+    {
+      array[currentElement] = '\0';
+      container *= 3;
+      try
+      {
+        array = cherkasov::leghtArray(array, container);
+      }
+        catch (const std::bad_alloc & e)
+        {
+          delete[] array;
+          return nullptr;
+        }
+
+  }
+    in >> array[currentElement++];
+    }
+      std::skipws(in);
+      array[currentElement - 1] = '\0';
+      return array;
+}
+
+char * cherkasov::allocMemor(size_t container)
+{
+  char * array = new char[container];
+  return array;
+}
+
+char * cherkasov::leghtArray(char * oldArray, size_t newContainer)
+{
+  char * newArray = cherkasov::allocMemor(newContainer);
+  for (size_t i = 0; oldArray[i] != '\0'; i++)
+  {
+    newArray[i] = oldArray[i];
+  }
+    delete[] oldArray;
+    return newArray;
+}
+
+

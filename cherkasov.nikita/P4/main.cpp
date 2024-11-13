@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstddef>
+#include <cstring>
 #include <ios>
 #include "string.h"
 
@@ -7,48 +8,36 @@ int main()
 {
   try
   {
-    constexpr std::size_t max = 25;
-    char str[max + 1] = {};
-    std::size_t size = 0;
-    char c = '\0';
-    std::noskipws(std::cin);
-    while ((std::cin >> c) && (c != '\n') && (size < max))
+    char * line = cherkasov::inpputLine(std::cin);
+    if (line == nullptr)
     {
-      str[size++] = c;
+      std::cerr << "Memory allocation fail\n";
+      return 1;
     }
-      std::skipws(std::cin);
 
-  if (std::cin.bad())
+  if (line[0] == '\0')
   {
-    std::cerr << "ERROR: entry data\n";
+    std::cerr << "The line is empty!\n";
+    delete[] line;
     return 1;
   }
 
-  if (size == 0)
-  {
-  std::cerr << "ERROR: empty string\n";
-  return 1;
-  }
+  std::size_t size = std::strlen(line);
+  char * result = cherkasov::getString(line, size);
 
-  if (size > max)
-  {
-    std::cerr << "ERROR: the string exceeds the maximum size\n";
-    return 1;
-  }
-
-  char * result = cherkasov::getString(str, size);
   if (result)
   {
     std::cout << result << "\n";
     delete[] result;
   }
 
- }
-   catch (const std::exception & e)
-   {
-     std::cerr << "An exception has occurred: " << e.what() << "\n";
-     return 1;
-   }
+  delete[] line;
+  }
+    catch (const std::exception& e)
+    {
+      std::cerr << "An exception " << e.what() << "\n";
+      return 1;
 
-    return 0;
+  return 0;
+}
 }
