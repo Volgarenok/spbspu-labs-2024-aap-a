@@ -4,7 +4,7 @@
 #include <cctype>
 #include <cstdlib>
 
-int petrov::check_arguments(int argc, char ** argv)
+int petrov::check_arguments(int argc, const char ** argv)
 {
   if (argc != 4)
   {

@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "process_the_matrix.hpp"
 
-int main(int argc, char ** argv)
+int main(int argc, const char ** argv)
 {
   if (petrov::check_arguments(argc, argv) == 1)
   {
