@@ -47,6 +47,9 @@ char* zholobov::read_string(std::istream& input)
 
 char* zholobov::exc_snd(const char* str, const char* excl_chars)
 {
+  if (str == nullptr) {
+    return nullptr;
+  }
   size_t len = std::strlen(str);
   char* new_str = static_cast< char* >(std::malloc(len + 1));
   if (new_str == nullptr) {
