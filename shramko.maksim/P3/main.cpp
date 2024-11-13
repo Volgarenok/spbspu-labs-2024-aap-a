@@ -64,7 +64,6 @@ int main(int argc, char** argv)
   {
     if(!shramko::inputMtrx(input, mtrx, sizeMtrx))
     {
-      delete[] mtrx;
       std::cerr << "Sta error!\n";
       return 2;
     }
