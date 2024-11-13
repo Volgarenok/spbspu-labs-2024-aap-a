@@ -73,7 +73,6 @@ int main(int argc, char** argv)
     if (!(balashov::inputMatrix(input, matrix, columns, rows, read)))
     {
         std::cerr << "Invalid input\n";
-        matrix = nullptr;
         delete[] matrix;
         return 2;
     }
