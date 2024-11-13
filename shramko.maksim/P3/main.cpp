@@ -59,6 +59,7 @@ int main(int argc, char** argv)
       return 2;
     }
     output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
+    delete[] mtrx;
   }
   else if (argv[1][0] == '1')
   {
