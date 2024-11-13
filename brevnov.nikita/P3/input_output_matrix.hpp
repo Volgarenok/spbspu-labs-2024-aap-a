@@ -5,7 +5,7 @@
 
 namespace brevnov
 {
-  int input_matrix(std::ifstream & in, int * t, size_t m, size_t n);
-  void output_matrix(std::ofstream & out, int * t, size_t m, size_t n);
+  int input_matrix(std::istream & in, int * t, size_t m, size_t n);
+  void output_matrix(std::ostream & out, int * t, size_t m, size_t n);
 }
 #endif

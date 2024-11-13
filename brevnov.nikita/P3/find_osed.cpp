@@ -1,20 +1,6 @@
 #include "find_osed.hpp"
 
-int brevnov::find_osed(const int * t, size_t m, size_t n)
-{
-  int answer = 0;
-  for (size_t i = 0; i < m; i++)
-  {
-    size_t min_member = brevnov::find_index_min(t, n, i);
-    if (i == (brevnov::find_index_max(t, m, n, min_member)))
-    {
-      answer++;
-    }
-  }
-  return answer;
-}
-
-size_t brevnov::find_index_min(const int * t, size_t n, size_t i)
+size_t find_index_min(const int * t, size_t n, size_t i)
 {
   int min_member = t[i * n];
   size_t min_index = 0;
@@ -29,7 +15,7 @@ size_t brevnov::find_index_min(const int * t, size_t n, size_t i)
   return min_index;
 }
 
-size_t brevnov::find_index_max(const int * t, size_t m, size_t n, int min_member)
+size_t find_index_max(const int * t, size_t m, size_t n, int min_member)
 {
   int max_member = t[min_member];
   size_t max_index = 0;
@@ -42,4 +28,18 @@ size_t brevnov::find_index_max(const int * t, size_t m, size_t n, int min_member
     }
   }
   return max_index;
+}
+
+int brevnov::find_osed(const int * t, size_t m, size_t n)
+{
+  int answer = 0;
+  for (size_t i = 0; i < m; i++)
+  {
+    size_t min_member = find_index_min(t, n, i);
+    if (i == (find_index_max(t, m, n, min_member)))
+    {
+      answer++;
+    }
+  }
+  return answer;
 }

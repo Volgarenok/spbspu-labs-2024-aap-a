@@ -6,15 +6,9 @@
 int brevnov::intcheck(char * input)
 {
   bool convertible = true;
-  size_t i = 0;
-  while (input[i] != 0)
+  if ((input[0] == '1' || input[0] == '2') && input[1] == 0)
   {
-    if (!std::isdigit(input[i]))
-    {
-      convertible = false;
-      break;
-    }
-    ++i;
+    convertible = true;
   }
   if (convertible)
   {

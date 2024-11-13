@@ -54,6 +54,7 @@ int main(int argc, char ** argv)
     return 0;
   }
   int * mtx = nullptr;
+  int * help_array = nullptr;
   if (testmode == 1)
   {
     mtx = auxiliary_array;
@@ -63,8 +64,9 @@ int main(int argc, char ** argv)
     try
     {
       mtx = new int[m*n];
+      help_array = mtx;
     }
-    catch(const std::bad_alloc& e)
+    catch (const std::bad_alloc& e)
     {
       std::cerr << "Not enough memory\n";
       return 2;
@@ -74,10 +76,7 @@ int main(int argc, char ** argv)
   if (saved_values != m * n)
   {
     std::cerr << "Error matrix input\n";
-    if (testmode == 2)
-    {
-      delete[] mtx;
-    }
+    delete[] help_array;
     return 2;
   }
   output << brevnov::find_osed(mtx, m, n);
@@ -85,9 +84,6 @@ int main(int argc, char ** argv)
   brevnov::fll_inc_wav(mtx, m, n);
   brevnov::output_matrix(output, mtx, m, n);
   output << "\n";
-  if (testmode == 2)
-  {
-    delete[] mtx;
-  }
+  delete[] help_array;
   return 0;
 }
