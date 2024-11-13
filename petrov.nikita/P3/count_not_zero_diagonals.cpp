@@ -1,6 +1,6 @@
 #include "process_the_matrix.hpp"
 
-int petrov::process_matrix_data(int * ptr_matrix, size_t number_of_rows, size_t rows_length)
+int petrov::countNotZeroDiagonals(int * ptr_matrix, size_t number_of_rows, size_t rows_length)
 {
   size_t required_number = 0;
   if (number_of_rows != rows_length)

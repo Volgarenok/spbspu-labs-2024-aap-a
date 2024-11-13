@@ -5,7 +5,7 @@
 
 int main(int argc, const char ** argv)
 {
-  if (petrov::check_arguments(argc, argv) == 1)
+  if (petrov::checkArguments(argc, argv) == 1)
   {
     return 1;
   }
@@ -33,12 +33,12 @@ int main(int argc, const char ** argv)
         std::cerr << "Error: Invalid data\n";
         return 2;
       }
-    else if (!petrov::input_matrix(input, ptr_matrix, number_of_rows, rows_length))
+    else if (!petrov::inputMatrix(input, ptr_matrix, number_of_rows, rows_length))
     {
       std::cerr << "Error: Invalid data\n";
       return 2;
     }
-    output << petrov::process_matrix_data(ptr_matrix, number_of_rows, rows_length);
+    output << petrov::countNotZeroDiagonals(ptr_matrix, number_of_rows, rows_length);
   }
   else
   {
@@ -65,7 +65,7 @@ int main(int argc, const char ** argv)
         delete[] ptr_matrix;
         return 2;
       }
-      else if (!petrov::input_matrix(input, ptr_matrix, number_of_rows, rows_length))
+      else if (!petrov::inputMatrix(input, ptr_matrix, number_of_rows, rows_length))
       {
         std::cerr << "Error: Invalid data\n";
         delete[] ptr_matrix;
@@ -77,7 +77,7 @@ int main(int argc, const char ** argv)
       std::cerr << "Out of memory\n";
       return 3;
     }
-    output << petrov::process_matrix_data(ptr_matrix, number_of_rows, rows_length);
+    output << petrov::countNotZeroDiagonals(ptr_matrix, number_of_rows, rows_length);
     delete[] ptr_matrix;
   }
 }
