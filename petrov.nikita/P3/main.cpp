@@ -33,7 +33,7 @@ int main(int argc, const char ** argv)
         std::cerr << "Error: Invalid data\n";
         return 2;
       }
-    else if (!petrov::input_matrix_static(input, ptr_matrix, number_of_rows, rows_length))
+    else if (!petrov::input_matrix(input, ptr_matrix, number_of_rows, rows_length))
     {
       std::cerr << "Error: Invalid data\n";
       return 2;
@@ -65,7 +65,7 @@ int main(int argc, const char ** argv)
         delete[] ptr_matrix;
         return 2;
       }
-      else if (!petrov::input_matrix_dynamic(input, ptr_matrix, number_of_rows, rows_length))
+      else if (!petrov::input_matrix(input, ptr_matrix, number_of_rows, rows_length))
       {
         std::cerr << "Error: Invalid data\n";
         delete[] ptr_matrix;
