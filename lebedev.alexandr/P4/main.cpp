@@ -8,16 +8,16 @@ int main()
   {
     str = lebedev::getLine(std::cin, '\n');
   }
-  catch(std::bad_alloc& e)
+  catch (const std::bad_alloc& e)
   {
     std::cerr << "Memory allocation error!\n";
     return 2;
   }
-  if (str == nullptr)
-  {
-    std::cerr << "Incorrect input!\n";
-    return 2;
-  }
+  // if (str == nullptr)
+  // {
+  //   std::cerr << "Incorrect input!\n";
+  //   return 2;
+  // }
 
   lebedev::removeVowels(str);
   std::cout << str << '\n';

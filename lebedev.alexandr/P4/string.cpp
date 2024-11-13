@@ -1,26 +1,15 @@
 #include "string.hpp"
 
-void lebedev::removeElement(char* str, size_t num)
-{
-  size_t i = num;
-  while(str[i] != '\0')
-  {
-    str[i] = str[i + 1];
-    ++i;
-  }
-}
-
 char* lebedev::getLine(std::istream& in, char endChar)
 {
   size_t capacity = 10;
-  size_t size = 0;
   char* str = new char[capacity];
+  size_t i = 0;
+  char ch;
 
-  char ch = ' ';
-  in >> std::noskipws >> ch;
-  while (ch != endChar)
+  while (in.get(ch) && ch != endChar)
   {
-    if (size >= capacity - 1)
+    if (i >= (capacity - 1))
     {
       capacity *= 2;
       char* newStr = nullptr;
@@ -28,51 +17,49 @@ char* lebedev::getLine(std::istream& in, char endChar)
       {
         newStr = new char[capacity];
       }
-      catch(std::bad_alloc& e)
+      catch (const std::bad_alloc& e)
       {
-        delete[] newStr;
         delete[] str;
         throw;
       }
 
-      size_t i = 0;
-      while (str[i] != '\0')
+      for (size_t j = 0; j < i; ++j)
       {
-        newStr[i] = str[i];
+        newStr[j] = str[j];
       }
-
       delete[] str;
       str = newStr;
     }
-
-    str[size] = ch;
-    in >> std::noskipws >> ch;
-    size++;
+    str[i++] = ch;
   }
 
-  if (!in)
-  {
-    return nullptr;
-  }
-
-  str[size] = '\0';
+  str[i] = '\0';
   return str;
 }
 
 void lebedev::removeVowels(char* str)
 {
-  size_t i = 0;
-  char vowels[10] = { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
+  int i = 0, j = 0;
+  const char vowels[] = "aeiouAEIOU";
+
   while (str[i] != '\0')
   {
-    for (size_t j = 0; j < 10; ++j)
+    bool isVowel = false;
+    for (int k = 0; vowels[k] != '\0'; ++k)
     {
-      if (str[i] == vowels[j])
+      if (str[i] == vowels[k])
       {
-        lebedev::removeElement(str, i);
+        isVowel = true;
         break;
       }
     }
-    ++i;
+
+    if (!isVowel)
+    {
+      str[j++] = str[i];
+    }
+    i++;
   }
+
+  str[j] = '\0';
 }
