@@ -48,35 +48,29 @@ int main(int argc, char** argv)
         return 0;
     }
     size_t read = 0;
-    int* matrix = nullptr;
-    if (arrayType == 1)
+    int matrixStatic[1000] = {};
+    int* matrix = matrixStatic;
+    int* pointerToDelete = nullptr;
+    if (arrayType == 2)
     {
-        int matrixStatic[1000] = {};
-        matrix = matrixStatic;
-    }
-    else if (arrayType == 2)
-    {
-        int* matrixDynamic = nullptr;
-        try
-        {
-            matrixDynamic = new int[columns * rows];
-        }
-        catch (const std::bad_alloc& e)
-        {
-            delete[] matrixDynamic;
-            delete[] matrix;
-            std::cerr << "Out of memory\n";
-            return 2;
-        }
-        matrix = matrixDynamic;
+      try
+      {
+        matrix = new int[columns * rows];
+        pointerToDelete = matrix;
+      }
+      catch (const std::bad_alloc& e)
+      {
+        delete[] pointerToDelete;
+        std::cerr << "Out of memory\n";
+        return 2;
+      }
     }
     if (!(balashov::inputMatrix(input, matrix, columns, rows, read)))
     {
         std::cerr << "Invalid input\n";
-        matrix = nullptr;
-        delete[] matrix;
+        delete[] pointerToDelete;
         return 2;
     }
     output << balashov::calculateMinSumSideDiagonal(matrix, columns, rows) << "\n";
-    delete[] matrix;
+    delete[] pointerToDelete;
 }
