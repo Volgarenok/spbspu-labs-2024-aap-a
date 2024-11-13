@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <cstring>
 #include <cctype>
 #include <cstdlib>
 #include "process_the_matrix.hpp"
@@ -78,19 +77,21 @@ int checkArguments(int argc, const char ** argv)
       return 1;
     }
   }
-  size_t size_of_first_argument = std::strlen(argv[1]);
-  for (size_t i = 0; i < size_of_first_argument; i++)
-  {
-    if (std::isdigit(argv[1][i]) == false)
-    {
-      std::cerr << "First parameter is not a number\n";
-      return 1;
-    }
-  }
   int check_varuable = std::atoi(argv[1]);
-  if (check_varuable != 1 && check_varuable != 2)
+  size_t len_check_var = 0;
+  size_t i = 0;
+  while (argv[1][i] != '\0')
   {
-    std::cerr << "First parameter is out of range\n";
+    len_check_var++;
+    if (len_check_var > 1)
+    {
+      break;
+    }
+    i++;
+  }
+  if ((check_varuable != 1 && check_varuable != 2) || len_check_var > 1)
+  {
+    std::cerr << "First parameter is out of range OR First parameter is not a number\n";
     return 1;
   }
   return 0;
