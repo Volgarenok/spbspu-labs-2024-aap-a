@@ -44,19 +44,19 @@ int main(const int argc, const char* const * const argv)
   int* mtx = fixmtx;
   int* memorypointer = nullptr;
   double* mtx2 = nullptr;
-  if (id == 2)
+  try
   {
-    try
+    if (id == 2) 
     {
       mtx = new int[row_size * column_size];
       memorypointer = mtx;
-      mtx2 = new double[row_size * column_size];
     }
-    catch (const std::bad_alloc & e)
-    {
-      std::cerr << "Out of memory\n";
-      return 1;
-    }
+    mtx2 = new double[row_size * column_size];
+  }
+  catch (const std::bad_alloc & e)
+  {
+    std::cerr << "Out of memory\n";
+    return 1;
   }
   if (!(tkach::inputMtx(input, mtx, row_size, column_size)))
   {
