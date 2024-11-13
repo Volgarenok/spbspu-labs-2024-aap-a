@@ -37,6 +37,7 @@ int main()
   if (std::cin.fail())
   {
     std::cerr << "Failed to read string\n";
+    free(str);
     return 1;
   }
   if (*str == '\0')
