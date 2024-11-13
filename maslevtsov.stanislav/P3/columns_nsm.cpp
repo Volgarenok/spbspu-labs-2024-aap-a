@@ -1,13 +1,4 @@
-#include "matrix_functions.hpp"
-
-std::istream& maslevtsov::matrixInput(std::istream& in, int* matrix, size_t nRows, size_t nColumns)
-{
-  for (size_t i = 0; i < nRows * nColumns; ++i)
-  {
-    in >> matrix[i];
-  }
-  return in;
-}
+#include "columns_nsm.hpp"
 
 bool maslevtsov::isSameElements(const int* const matrix, size_t nRows, size_t nColumns, size_t iColumns)
 {

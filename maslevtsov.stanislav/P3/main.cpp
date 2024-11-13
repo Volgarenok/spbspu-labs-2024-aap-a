@@ -1,6 +1,7 @@
 #include <fstream>
 #include <stdexcept>
-#include "matrix_functions.hpp"
+#include "input_matrix.hpp"
+#include "columns_nsm.hpp"
 
 int main(int argc, char** argv)
 {
@@ -40,7 +41,7 @@ int main(int argc, char** argv)
     }
   }
 
-  if (!maslevtsov::matrixInput(finput, matrix, nRows, nColumns))
+  if (!maslevtsov::inputMatrix(finput, matrix, nRows, nColumns))
   {
     std::cerr << "Error: incorrect input\n";
     if (argv[1][0] == '2')
