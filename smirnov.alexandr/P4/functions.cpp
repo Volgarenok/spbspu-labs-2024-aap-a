@@ -49,7 +49,7 @@ char * smirnov::getLine(std::istream & in, char stop)
   return str;
 }
 
-char * smirnov::uniString(const char * str1, const char * str2)
+char * smirnov::uniString(char * str1, const char * str2)
 {
   size_t len1 = strlen(str1);
   size_t len2 = strlen(str2);
@@ -72,5 +72,10 @@ char * smirnov::uniString(const char * str1, const char * str2)
     result[k++] = str2[j++];
   }
   result[k] = '0';
-  return result;
+  for (size_t z = 0; z < k + 1; ++z)
+  {
+    str1[z] = result[z];
+  }
+  delete[] result;
+  return str1;
 }
