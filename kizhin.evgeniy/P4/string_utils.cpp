@@ -47,11 +47,11 @@ void kizhin::removeLatinLetters(char* destination, const char* source)
     return;
   }
   size_t k = 0;
-  for (size_t i = 0; source[i] != '\0'; ++i, ++k) {
+  for (size_t i = 0; source[i] != '\0'; ++i) {
     bool isUpperCase = source[i] >= 'A' && source[i] <= 'Z';
-    bool isLowerCase = source[i] >= 'a' && source[i] <= 'z';
+    bool isLowerCase = !isUpperCase && source[i] >= 'a' && source[i] <= 'z';
     if (!(isUpperCase) && !(isLowerCase)) {
-      destination[k] = source[i];
+      destination[k++] = source[i];
     }
   }
   destination[k] = '\0';
