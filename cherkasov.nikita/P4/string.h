@@ -5,6 +5,5 @@
 namespace cherkasov
 {
   char * getString(const char* input, std::size_t size) noexcept;
-  
 }
 #endif
