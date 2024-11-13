@@ -1,23 +1,35 @@
 #include "process_the_matrix.hpp"
 
+size_t defineRequiredNumber(size_t number_of_rows, size_t rows_length);
+int makeCalculactions(int * ptr_matrix, size_t required_number);
+
 int petrov::countNotZeroDiagonals(int * ptr_matrix, size_t number_of_rows, size_t rows_length)
 {
-  size_t required_number = 0;
-  if (number_of_rows != rows_length)
+  size_t required_number = defineRequiredNumber(number_of_rows, rows_length);
+  return makeCalculactions(ptr_matrix, required_number);
+}
+
+size_t defineRequiredNumber(size_t number_of_rows, size_t rows_length)
+{
+    if (number_of_rows != rows_length)
   {
     if (rows_length < number_of_rows)
     {
-      required_number = rows_length;
+      return rows_length;
     }
     else
     {
-      required_number = number_of_rows;
+      return number_of_rows;
     }
   }
   else
   {
-    required_number = number_of_rows;
+    return number_of_rows;
   }
+}
+
+int makeCalculactions(int * ptr_matrix, size_t required_number)
+{
   if (required_number > 1)
   {
     size_t iterations = 1;
