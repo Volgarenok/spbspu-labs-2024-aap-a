@@ -3,7 +3,7 @@
 
 float* karnauhova::smooth_matrix(int* t, size_t m, size_t n)
 {
-  n_mtx = new float[m * n];
+  float* n_mtx = new float[m * n];
   int sum = 0;
   size_t k = 0;
   float count = 0;
