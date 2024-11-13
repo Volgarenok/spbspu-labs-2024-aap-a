@@ -43,7 +43,7 @@ int main(int argc, char** argv)
     {
       dynamicArr = new int[m * n];
     }
-    catch(std::bad_alloc& e)
+    catch (const std::bad_alloc& e)
     {
       std::cerr << "Memory allocation error!\n";
       return 2;
@@ -58,6 +58,7 @@ int main(int argc, char** argv)
   if (!lebedev::input(inputFile, arr, m))
   {
     std::cerr << "Incorrect data in the file\n";
+    delete[] dynamicArr;
     return 2;
   }
 
