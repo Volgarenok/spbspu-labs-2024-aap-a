@@ -1,5 +1,5 @@
-#ifndef FNAMES_H
-#define FNAMES_H
+#ifndef TAYLOR_H
+#define TAYLOR_H
 #include <cstring>
 namespace averenkov
 {
