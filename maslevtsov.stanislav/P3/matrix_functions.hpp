@@ -5,8 +5,9 @@
 
 namespace maslevtsov
 {
-  std::istream & matrixInput(std::istream & in, int * matrix, size_t nRows, size_t nColumns);
-  size_t getNumberOfRequiredColumns(const int * const matrix, size_t nRows, size_t nColumns);
+  std::istream& matrixInput(std::istream& in, int* matrix, size_t nRows, size_t nColumns);
+  bool isSameElements(const int* const matrix, size_t nRows, size_t nColumns, size_t iColumns);
+  size_t countColumnsNSM(const int* const matrix, size_t nRows, size_t nColumns);
 }
 
 #endif

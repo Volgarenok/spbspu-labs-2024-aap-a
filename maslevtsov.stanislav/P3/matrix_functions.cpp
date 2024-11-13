@@ -1,6 +1,6 @@
 #include "matrix_functions.hpp"
 
-std::istream & maslevtsov::matrixInput(std::istream & in, int * matrix, size_t nRows, size_t nColumns)
+std::istream& maslevtsov::matrixInput(std::istream& in, int* matrix, size_t nRows, size_t nColumns)
 {
   for (size_t i = 0; i < nRows * nColumns; ++i)
   {
@@ -9,26 +9,26 @@ std::istream & maslevtsov::matrixInput(std::istream & in, int * matrix, size_t n
   return in;
 }
 
-size_t maslevtsov::getNumberOfRequiredColumns(const int * const matrix, size_t nRows, size_t nColumns)
+bool maslevtsov::isSameElements(const int* const matrix, size_t nRows, size_t nColumns, size_t iColumns)
 {
-  size_t result = 0;
-
-  for (size_t i = 0; i < nColumns; ++i)
+  for (size_t j = 1; j < nRows; ++j)
   {
-    bool flag = true;
-    for (size_t j = 1; j < nRows; ++j)
+    if (matrix[(j - 1) * nColumns + iColumns] == matrix[j * nColumns + iColumns])
     {
-      if (matrix[(j - 1) * nColumns + i] == matrix[j * nColumns + i])
-      {
-        flag = false;
-        break;
-      }
-    }
-    if (flag)
-    {
-      ++result;
+      return false;
     }
   }
+  return true;
+}
 
-  return result;
+size_t maslevtsov::countColumnsNSM(const int* const matrix, size_t nRows, size_t nColumns)
+{
+  for (size_t i = 0; i < nColumns; ++i)
+  {
+    if (isSameElements(matrix, nRows, nColumns, i))
+    {
+      return 1;
+    }
+  }
+  return 0;
 }

@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include "matrix_functions.hpp"
 
-int main(int argc, char ** argv)
+int main(int argc, char** argv)
 {
   if (argc < 4)
   {
@@ -14,18 +14,9 @@ int main(int argc, char ** argv)
     std::cerr << "Error: too many arguments in command\n";
     return 1;
   }
-  for (size_t i = 0; argv[1][i] != '\0'; ++i)
+  if ((argv[1][0] == '1' || argv[1][0] == '2') && argv[1][1] == '\0')
   {
-    if (argv[1][i] > '9' || argv[1][i] < '0')
-    {
-      std::cerr << "Error: first argument of command is not a positive number\n";
-      return 1;
-    }
-    if (i > 0 || argv[1][0] > '2' || argv[1][0] < '1')
-    {
-      std::cerr << "Error: first argument of command is out of range\n";
-      return 1;
-    }
+    std::cerr << "Error: first argument of command must be 1 or 2";
   }
 
   std::ifstream finput(argv[2]);
@@ -42,17 +33,17 @@ int main(int argc, char ** argv)
       return 2;
     }
 
-    foutput << maslevtsov::getNumberOfRequiredColumns(matrix, nRows, nColumns);
+    foutput << maslevtsov::countColumnsNSM(matrix, nRows, nColumns);
     foutput << '\n';
   }
   else if (argv[1][0] == '2')
   {
-    int * matrix = nullptr;
+    int* matrix = nullptr;
     try
     {
       matrix = new int[nRows * nColumns];
     }
-    catch (const std::bad_alloc & e)
+    catch (const std::bad_alloc& e)
     {
       std::cerr << "Error: memory not allocated for matrix\n";
       return 1;
@@ -64,7 +55,7 @@ int main(int argc, char ** argv)
       return 2;
     }
 
-    foutput << maslevtsov::getNumberOfRequiredColumns(matrix, nRows, nColumns);
+    foutput << maslevtsov::countColumnsNSM(matrix, nRows, nColumns);
     foutput << '\n';
 
     delete[] matrix;
