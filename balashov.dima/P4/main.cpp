@@ -7,6 +7,7 @@ int main()
   char * line = reinterpret_cast<char*>(malloc(sizeof(char) * (capacity)));
   if (line == nullptr)
   {
+    free(line);
     std::cerr << "Memory was not allocated\n";
     return 1;
   }
