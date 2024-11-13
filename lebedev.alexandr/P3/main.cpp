@@ -16,21 +16,12 @@ int main(int argc, char** argv)
     return 1;
   }
 
-  for (size_t i = 0; argv[1][i] != '\0'; ++i)
+  if (argv[1][1] != '\0' || (argv[1][0] != '1' && argv[1][0] != '2'))
   {
-    if (argv[1][i] < '0' || argv[1][i] > '9')
-    {
-      std::cerr << "First parametr is not a number!\n";
-      return 1;
-    }
-  }
-
-  int num = std::atoi(argv[1]);
-  if (num < 1 || num > 2)
-  {
-    std::cerr << "First parameter is out of range!\n";
+    std::cerr << "Incorrect first parameter!\n";
     return 1;
   }
+  int num = std::atoi(argv[1]);
 
   std::ifstream inputFile(argv[2]);
   size_t m = 0, n = 0;
@@ -41,38 +32,46 @@ int main(int argc, char** argv)
     return 2;
   }
 
-  std::ofstream outputFile(argv[3]);
-  constexpr size_t staticSize = 10000;
-  int staticArr[staticSize];
-  int* arr = staticArr;
+  constexpr size_t fixedSize = 10000;
+  int fixedArr[fixedSize];
+  int* dynamicArr = nullptr;
+  int* arr = nullptr;
 
   if (num == 2)
   {
     try
     {
-      arr = new int[m * n];
+      dynamicArr = new int[m * n];
     }
     catch(std::bad_alloc& e)
     {
       std::cerr << "Memory allocation error!\n";
       return 2;
     }
+    arr = dynamicArr;
+  }
+  else
+  {
+    arr = fixedArr;
   }
 
   if (!lebedev::input(inputFile, arr, m))
   {
     std::cerr << "Incorrect data in the file\n";
-    if (num == 2)
-    {
-      delete[] arr;
-    }
     return 2;
   }
 
-  lebedev::output(outputFile, arr, m);
-  if (num == 2)
+  
+  std::ofstream outputFile(argv[3]);
+  if (lebedev::lwrTriMtx(arr, m))
   {
-    delete[] arr;
+    outputFile << "true\n";
   }
+  else
+  {
+    outputFile << "false\n";
+  }
+
+  delete[] dynamicArr;
   return 0;
 }

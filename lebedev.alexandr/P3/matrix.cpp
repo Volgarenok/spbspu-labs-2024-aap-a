@@ -9,7 +9,7 @@ std::istream& lebedev::input(std::istream& inputFile, int* arr, size_t m)
   return inputFile;
 }
 
-void lebedev::output(std::ostream& outputFile, const int* arr, size_t m)
+bool lebedev::lwrTriMtx(const int* arr, size_t m)
 {
   bool flag = true;
   for (size_t i = 0; i < m; ++i)
@@ -23,12 +23,6 @@ void lebedev::output(std::ostream& outputFile, const int* arr, size_t m)
       }
     }
   }
-  if (flag && m > 1)
-  {
-    outputFile << "true" << '\n';
-  }
-  else
-  {
-    outputFile << "false" << '\n';
-  }
+  
+  return flag;
 }
