@@ -57,6 +57,9 @@ char* zholobov::read_string(std::istream& input)
       str[str_pos] = buf[i];
     }
     str[str_pos] = '\0';
+  } else {
+    free(str);
+    str = nullptr;
   }
   return str;
 }
