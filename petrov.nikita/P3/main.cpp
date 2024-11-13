@@ -33,10 +33,10 @@ int main(int argc, const char ** argv)
     int matrix[10000] = {0};
     int * ptr_matrix = matrix;
     if ((number_of_rows == 0 && rows_length != 0) || (number_of_rows != 0 && rows_length == 0))
-      {
-        std::cerr << "Error: Invalid data\n";
-        return 2;
-      }
+    {
+      std::cerr << "Error: Invalid data\n";
+      return 2;
+    }
     else if (!petrov::inputMatrix(input, ptr_matrix, number_of_rows, rows_length))
     {
       std::cerr << "Error: Invalid data\n";
