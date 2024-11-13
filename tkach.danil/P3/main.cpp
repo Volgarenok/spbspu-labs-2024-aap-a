@@ -55,12 +55,14 @@ int main(const int argc, const char* const * const argv)
   }
   catch (const std::bad_alloc & e)
   {
+    delete[] memorypointer;
     std::cerr << "Out of memory\n";
     return 1;
   }
   if (!(tkach::inputMtx(input, mtx, row_size, column_size)))
   {
     delete[] memorypointer;
+    delete[] mtx2;
     std::cerr << "ERROR: Invalid input\n";
     return 2;
   }
