@@ -3,7 +3,7 @@
 #include "filemtx.h"
 #include "mtxlogic.h"
 
-int main(int argc, char** argv)
+int main(int argc, const char** argv)
 {
   if (argc < 4)
   {
@@ -23,7 +23,7 @@ int main(int argc, char** argv)
     std::cerr << "First parameter is out of range\n";
     return 1;
   }
-  else if (argv[1][1] != '\0')
+  if (argv[1][1] != '\0')
   {
     size_t i = 1;
     while (argv[1][i] == ' ')
