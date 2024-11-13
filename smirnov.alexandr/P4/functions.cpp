@@ -1,6 +1,6 @@
 #include "functions.hpp"
-#include <cctype>
 #include <cstddef>
+#include <cstring>
 
 char * smirnov::getLine(std::istream & in, char stop)
 {
@@ -49,23 +49,28 @@ char * smirnov::getLine(std::istream & in, char stop)
   return str;
 }
 
-void smirnov::uniString(char * str1, const char * str2)
+char * smirnov::uniString(const char * str1, const char * str2)
 {
-  char* ptr1 = str1;
-  const char* ptr2 = str2;
-  char* result = str1;
-  while (*ptr1 != '0' && *ptr2 != '0')
+  size_t len1 = strlen(str1);
+  size_t len2 = strlen(str2);
+  size_t resultLen = len1 + len2;
+  char * result = new char[resultLen + 1];
+  size_t i = 0;
+  size_t j = 0;
+  size_t k = 0;
+  while (i < len1 && j < len2)
   {
-    *result++ = *ptr1++;
-    *result++ = *ptr2++;
+    result[k++] = str1[i++];
+    result[k++] = str2[j++];
   }
-  while (*ptr1 != '0')
+  while (i < len1)
   {
-    *result++ = *ptr1++;
+    result[k++] = str1[i++];
   }
-  while (*ptr2 != '0')
+  while (j < len2)
   {
-    *result++ = *ptr2++;
+    result[k++] = str2[j++];
   }
-  *result = '0';
+  result[k] = '0';
+  return result;
 }
