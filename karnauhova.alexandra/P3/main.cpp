@@ -99,7 +99,7 @@ int main(int argc, char ** argv)
     delete[] t2;
     return 1;
   }
-  karnauhova::smooth_matrix(t, t2, m, n);
+  karnauhova::smooth_matrix(mtx, t2, m, n);
   output << m << " " << n << " ";
   karnauhova::output_matrix(output, t2, m, n);
   output << "\n";
