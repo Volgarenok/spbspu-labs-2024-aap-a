@@ -31,11 +31,12 @@ char* balashov::increaseSizeLine(char* lineStart, size_t& capacity)
   char* newLine = reinterpret_cast<char*>(malloc(sizeof(char) * capacity));
   if (newLine == nullptr)
   {
-  throw;
+    free(newLine);
+    throw;
   }
   for (size_t i = 0; i < capacityBefore; ++i)
   {
-  newLine[i] = lineStart[i];
+    newLine[i] = lineStart[i];
   }
   free(lineStart);
   return newLine;
@@ -48,6 +49,7 @@ char* balashov::enteringLine(size_t& capacity)
   char* line = reinterpret_cast<char*>(malloc(sizeof(char) * capacity));
   if (line == nullptr)
   {
+    free(line);
     throw;
   }
   std::noskipws(std::cin);
@@ -60,13 +62,14 @@ char* balashov::enteringLine(size_t& capacity)
       {
         line = increaseSizeLine(line, capacity);
        }
-       catch (...)
-       {
-         throw;
-       }
-     }
-   }
-   line[sizeLine] = '\0';
-   std::skipws(std::cin);
-   return line;
+      catch (...)
+      {
+        free(line);
+        throw;
+      }
+    }
+  }
+  line[sizeLine] = '\0';
+  std::skipws(std::cin);
+  return line;
 }
