@@ -4,7 +4,7 @@
 #include <cctype>
 #include <new>
 
-char * cherkasov::getString(const char* input, std::size_t size) noexcept
+char * cherkasov::getString(const char * input, std::size_t size) noexcept
 {
   if (size == 0) return nullptr;
   int counts[256] = {0};
@@ -43,3 +43,4 @@ char * cherkasov::getString(const char* input, std::size_t size) noexcept
 
     return result;
 }
+

@@ -1,13 +1,13 @@
 #include <iostream>
 #include <cstddef>
 #include <ios>
-#include <string.h>
+#include "string.h"
 
 int main()
 {
   try
   {
-    constexpr std::size_t max = 10;
+    constexpr std::size_t max = 25;
     char str[max + 1] = {};
     std::size_t size = 0;
     char c = '\0';
@@ -20,19 +20,19 @@ int main()
 
   if (std::cin.bad())
   {
-    std::cerr << "Ошибка ввода данных\n";
+    std::cerr << "ERROR: entry data\n";
     return 1;
   }
 
   if (size == 0)
   {
-  std::cerr << "Ошибка: пустая строка\n";
+  std::cerr << "ERROR: empty string\n";
   return 1;
   }
 
   if (size > max)
   {
-    std::cerr << "Ошибка: строка превышает максимальный размер\n";
+    std::cerr << "ERROR: the string exceeds the maximum size\n";
     return 1;
   }
 
@@ -46,7 +46,7 @@ int main()
  }
    catch (const std::exception & e)
    {
-     std::cerr << "Произошло исключение: " << e.what() << "\n";
+     std::cerr << "An exception has occurred: " << e.what() << "\n";
      return 1;
    }
 
