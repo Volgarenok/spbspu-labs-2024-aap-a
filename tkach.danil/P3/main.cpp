@@ -1,7 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <cstring>
-#include <cctype>
 #include "filemtx.h"
 #include "mtxlogic.h"
 
@@ -20,17 +18,9 @@ int main(int argc, const char** argv)
   const char * number = argv[1];
   int id = 0;
   id = std::atoi(number);
-  for(size_t i = 0; i < std::strlen(argv[1]); ++i)
+  if (((id != 1) && (id != 2)) || (argv[1][1] != '\0'))
   {
-    if (!std::isdigit(argv[1][i]))
-    {
-       std::cerr << "First parameter is not a number\n";
-      return 1;
-    }
-  }
-  if ((id != 1) && (id != 2))
-  {
-    std::cerr << "First parameter is out of range\n";
+    std::cerr << "First parameter is wrong\n";
     return 1;
   }
   std::ifstream input(argv[2]);
