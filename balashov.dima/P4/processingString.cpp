@@ -13,7 +13,7 @@ char* balashov::removeSpaces(char* line)
     }
     else
     {
-      if ((line[i + 1] != ' ') && (numberSymbolOfNewLine != 0) && !(line[i + 1] == '\0'))
+      if ((line[i + 1] != ' ') && (numberSymbolOfNewLine != 0) && (line[i + 1] != '\0'))
       {
         line[numberSymbolOfNewLine++] = line[i];
       }
