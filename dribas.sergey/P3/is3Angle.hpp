@@ -4,8 +4,8 @@
 
 namespace dribas
 {
-  bool checkLine(int const* matrix, size_t M, size_t N, int variaty, size_t target);
-  bool is3Angle(int const* matrix, size_t M, size_t N);
+  bool checkLine(const int* matrix, size_t M, size_t N, int variaty, size_t target);
+  bool is3Angle(const int* matrix, size_t M, size_t N);
 }
 
 #endif
