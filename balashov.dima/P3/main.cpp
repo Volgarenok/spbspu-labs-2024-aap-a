@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
-#include "stream.h"
-#include "matrixProcessing.h"
+#include "stream.hpp"
+#include "matrixProcessing.hpp"
 
 int main(int argc, char** argv)
 {
