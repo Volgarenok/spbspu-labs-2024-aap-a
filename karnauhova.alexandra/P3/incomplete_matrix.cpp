@@ -3,15 +3,7 @@
 
 float* karnauhova::smooth_matrix(int* t, size_t m, size_t n)
 {
-  float* n_mtx = nullptr;
-  try
-  {
-    n_mtx = new float[m * n];
-  }
-  catch (const std::bad_alloc &e)
-  {
-    throw;
-  }
+  n_mtx = new float[m * n];
   int sum = 0;
   size_t k = 0;
   float count = 0;
@@ -61,7 +53,7 @@ float* karnauhova::smooth_matrix(int* t, size_t m, size_t n)
         sum += t[j + k + n];
         count += 1;
       }
-    n_mtx[j + k] = sum / count;
+      n_mtx[j + k] = sum / count;
     }
     k += n;
   }

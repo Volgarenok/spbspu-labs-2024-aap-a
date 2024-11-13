@@ -68,50 +68,59 @@ int main(int argc, char ** argv)
     };
   }
   int t1[10000] = {0};
+  float* t2 = nullptr;
+  int* mtx = nullptr;
   if (way == 2)
   {
-    if (!karnauhova::input_matrix(input, t, m, n, read))
-    {
-        std::cerr << "File text is invalid\n";
-        delete[] t;
-        return 2;
-    }
+    mtx = t;
   }
   else
   {
-    if (!karnauhova::input_matrix(input, t1, m, n, read))
+    mtx = t1;
+  }
+  if (!karnauhova::input_matrix(input, mtx, m, n, read))
+  {
+    std::cerr << "File text is invalid\n";
+    delete[] t;
+    if (way == 2)
     {
-      std::cerr << "File text is invalid\n";
-      return 2;
+      delete[mtx];
     }
+    return 2;
   }
   if ((read / m) < n)
   {
     std::cerr << "Incorrect matrix\n";
     delete[] t;
-    return 1;
-  }
-  float* t2 = nullptr;
-  try
-  {
     if (way == 2)
     {
-      t2 =  karnauhova::smooth_matrix(t, m, n);
+      delete[mtx];
     }
-    else
+    return 1;
+  }
+  try
+  {
+    t2 =  karnauhova::smooth_matrix(mtx, m, n);
+  }
+  catch (const std::bad_alloc & e)
+  {
+    std::cerr << "Out of memory\n";
+    delete[] t2;
+    delete[] t;
+    if (way == 2)
     {
-      t2 =  karnauhova::smooth_matrix(t1, m, n);
+      delete[mtx];
     }
-   }
-   catch (const std::bad_alloc & e)
-   {
-     std::cerr << "Out of memory\n";
-     return 1;
-   }
+    return 1;
+  }
   output << m << " " << n << " ";
   karnauhova::output_matrix(output, t2, m, n);
   output << "\n";
   delete[] t;
   delete[] t2;
+  if (way == 2)
+  {
+    delete[mtx];
+  }
   return 0;
 }
