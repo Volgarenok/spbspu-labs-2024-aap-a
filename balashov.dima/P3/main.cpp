@@ -66,7 +66,7 @@ int main(int argc, char** argv)
             delete[] matrixDynamic;
             delete[] matrix;
             std::cerr << "Out of memory\n";
-            return 2;
+            return 1;
         }
         matrix = matrixDynamic;
     }
