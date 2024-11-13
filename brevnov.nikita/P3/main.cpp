@@ -63,7 +63,7 @@ int main(int argc, char ** argv)
   {
     try
     {
-      mtx = new int[m*n];
+      mtx = new int[m * n];
       help_array = mtx;
     }
     catch (const std::bad_alloc& e)
