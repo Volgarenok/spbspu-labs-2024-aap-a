@@ -29,8 +29,8 @@ int kiselev::saddleElement(const int* array, size_t m, size_t n)
     for (size_t j = 0; j < n; ++j)
     {
       bool min = isMinInRow(array, n, i, j);
-      bool max = isMaxInColumn(array, m, n, i, j);
-      if (min && max)
+      bool minAndMax = min && isMaxInColumn(array, m, n, i, j);
+      if (minAndMax)
       {
         count++;
       }

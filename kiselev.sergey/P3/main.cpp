@@ -17,7 +17,7 @@ int main(int argc, char** argv)
     std::cerr << "To many arguments\n";
     return 1;
   }
-  else if (argv[1][1] != '\0' || (argv[1][0] != '1' && argv[1][0] != '2'))
+  else if ((argv[1][0] != '1' && argv[1][0] != '2') || argv[1][1] != '\0')
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
@@ -38,12 +38,13 @@ int main(int argc, char** argv)
     return 2;
   }
   int number_element = 0;
-  int* matrix = nullptr;
+  int* dynMatrix = nullptr;
   constexpr size_t length = 100000;
   int fixedArray[length];
   try
   {
-    matrix = argv[1][0] == '1' ? fixedArray : new int[rows * columns];
+    dynMatrix = argv[1][0] == '1' ? nullptr : new int[rows * columns];
+    int* matrix = argv[1][0] == '2' ? dynMatrix : fixedArray;
     kiselev::inputMatrix(input, matrix, rows, columns, count_read);
     if (count_read != rows * columns)
     {
@@ -54,10 +55,7 @@ int main(int argc, char** argv)
     std::ofstream output(outFile);
     output << "The number of elements read: " << count_read << "\n";
     output << "Number of saddle elements: " << number_element << "\n";
-    if (argv[1][0] == '2')
-    {
-      delete[] matrix;
-    }
+    delete[] dynMatrix;
     return 0;
   }
   catch (const std::bad_alloc& e)
@@ -68,10 +66,7 @@ int main(int argc, char** argv)
   catch (const std::logic_error& e)
   {
     std::cerr << "Incorrect input matrix\n";
-    if (argv[1][0] == '2')
-    {
-      delete[] matrix;
-    }
+    delete[] dynMatrix;
     return 2;
   }
 }
