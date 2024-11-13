@@ -3,6 +3,10 @@
 #include <iomanip>
 #include <cstring>
 #include "taylor.h"
+<<<<<<< HEAD
+=======
+
+>>>>>>> averenkov.eugene/P3
 int main()
 {
   constexpr double step = 0.05;
