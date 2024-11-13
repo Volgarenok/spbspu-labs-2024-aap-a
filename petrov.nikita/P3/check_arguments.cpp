@@ -28,7 +28,8 @@ int petrov::check_arguments(int argc, const char ** argv)
       return 1;
     }
   }
-  if (std::atoi(argv[1]) != 1 && std::atoi(argv[1]) != 2)
+  int check_varuable = std::atoi(argv[1]);
+  if (check_varuable != 1 && check_varuable != 2)
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
