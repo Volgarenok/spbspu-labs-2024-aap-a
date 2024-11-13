@@ -53,7 +53,7 @@ int main(int argc, char ** argv)
   float* t2 = nullptr;
   try
   {
-    t2 = new float[m*n];
+    t2 = new float[m * n];
   }
   catch (const std::bad_alloc & e)
   {
@@ -89,12 +89,14 @@ int main(int argc, char ** argv)
   {
     std::cerr << "File text is invalid\n";
     delete[] t;
+    delete[] t2;
     return 2;
   }
   if ((read / m) < n)
   {
     std::cerr << "Incorrect matrix\n";
     delete[] t;
+    delete[] t2;
     return 1;
   }
   karnauhova::smooth_matrix(t, t2, m, n);
