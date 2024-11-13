@@ -6,7 +6,7 @@ int main()
 {
   size_t capacity = 2;
   char* str = nullptr;
-  str = reinterpret_cast<char*>(malloc(sizeof(char) * (capacity)));
+  str = reinterpret_cast< char* >(malloc(sizeof(char) * (capacity)));
   if (str == nullptr)
   {
     std::cerr << "Error: not enough memory\n";
@@ -32,7 +32,7 @@ int main()
     return 1;
   }
   char* str2 = nullptr;
-  str2 = reinterpret_cast<char*>(malloc(sizeof(char) * (capacity)));
+  str2 = reinterpret_cast< char* >(malloc(sizeof(char) * (capacity)));
   tkach::getStrWithRemovedVowels(str, str2);
   if (str2 == nullptr)
   {

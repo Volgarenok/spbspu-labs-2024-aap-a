@@ -4,7 +4,7 @@
 char* tkach::getMemoryForStr(char* str, size_t& capacity)
 {
   capacity += 1;
-  char* newStr = static_cast<char*>(malloc(sizeof(char) * capacity));
+  char* newStr = static_cast< char* >(malloc(sizeof(char) * capacity));
   if (newStr == nullptr)
   {
     free(str);
