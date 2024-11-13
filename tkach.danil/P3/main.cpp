@@ -46,7 +46,7 @@ int main(const int argc, const char* const * const argv)
   double* mtx2 = nullptr;
   try
   {
-    if (id == 2) 
+    if (id == 2)
     {
       mtx = new int[row_size * column_size];
       memorypointer = mtx;
