@@ -25,21 +25,10 @@ int main(int argc, char** argv)
   size_t nRows = 0, nColumns = 0;
   finput >> nRows >> nColumns;
 
-  if (argv[1][0] == '1')
+  int staticMatrix[10000] = {0};
+  int* matrix = staticMatrix;
+  if (argv[1][0] == '2')
   {
-    int matrix[10000] = {0};
-    if (!maslevtsov::matrixInput(finput, matrix, nRows, nColumns))
-    {
-      std::cerr << "Error: incorrect input\n";
-      return 2;
-    }
-
-    foutput << maslevtsov::countColumnsNSM(matrix, nRows, nColumns);
-    foutput << '\n';
-  }
-  else if (argv[1][0] == '2')
-  {
-    int* matrix = nullptr;
     try
     {
       matrix = new int[nRows * nColumns];
@@ -49,16 +38,23 @@ int main(int argc, char** argv)
       std::cerr << "Error: memory not allocated for matrix\n";
       return 1;
     }
-    if (!maslevtsov::matrixInput(finput, matrix, nRows, nColumns))
+  }
+
+  if (!maslevtsov::matrixInput(finput, matrix, nRows, nColumns))
+  {
+    std::cerr << "Error: incorrect input\n";
+    if (argv[1][0] == '2')
     {
-      std::cerr << "Error: incorrect input\n";
       delete[] matrix;
-      return 2;
     }
+    return 2;
+  }
 
-    foutput << maslevtsov::countColumnsNSM(matrix, nRows, nColumns);
-    foutput << '\n';
+  foutput << maslevtsov::countColumnsNSM(matrix, nRows, nColumns);
+  foutput << '\n';
 
+  if (argv[1][0] == '2')
+  {
     delete[] matrix;
   }
 }
