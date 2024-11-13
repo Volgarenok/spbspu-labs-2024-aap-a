@@ -2,7 +2,9 @@
 #define INPUT_STRING_HPP
 
 #include <istream>
-
-char* inputString(std::istream &in);
+namespace maslovskiy
+{
+  char* inputString(std::istream &in);
+}
 
 #endif

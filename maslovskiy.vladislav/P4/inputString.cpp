@@ -1,7 +1,7 @@
 #include "inputString.hpp"
 #include "resizeString.hpp"
 #include <cstdlib>
-char* inputString(std::istream &in)
+char* maslovskiy::inputString(std::istream &in)
 {
   const size_t iterSize = 10;
   size_t strSize = iterSize;

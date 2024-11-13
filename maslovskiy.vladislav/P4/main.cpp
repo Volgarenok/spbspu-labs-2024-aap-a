@@ -5,6 +5,7 @@
 
 int main()
 {
+  using namespace maslovskiy;
   char *str1 = nullptr;
   const char *str2 = "246789";
   try
