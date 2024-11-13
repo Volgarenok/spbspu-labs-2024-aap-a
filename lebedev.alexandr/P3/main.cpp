@@ -61,7 +61,6 @@ int main(int argc, char** argv)
     return 2;
   }
 
-  
   std::ofstream outputFile(argv[3]);
   if (lebedev::lwrTriMtx(arr, m))
   {

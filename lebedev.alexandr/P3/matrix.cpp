@@ -23,6 +23,6 @@ bool lebedev::lwrTriMtx(const int* arr, size_t m)
       }
     }
   }
-  
+
   return flag;
 }
