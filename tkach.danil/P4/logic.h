@@ -5,7 +5,7 @@
 
 namespace tkach
 {
-  void getStrWithRemovedVowels(const char* str, char* str2);
+  size_t getStrWithRemovedVowels(const char* str, char* str2);
 }
 
 #endif

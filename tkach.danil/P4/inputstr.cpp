@@ -10,13 +10,10 @@ char* tkach::inputStr(std::istream& in, char* str, size_t& capacity)
     if (i + 1 == capacity)
     {
       str[i] = '\0';
-      try
+      str = tkach::getMemoryForStr(str, capacity);
+      if (str == nullptr)
       {
-        str = tkach::getMemoryForStr(str, capacity);
-      }
-      catch (const std::bad_alloc& e)
-      {
-        throw;
+        return nullptr;
       }
     }
     str[i++] = symbol;

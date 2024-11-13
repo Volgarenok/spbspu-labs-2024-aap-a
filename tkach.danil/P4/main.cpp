@@ -12,13 +12,10 @@ int main()
     std::cerr << "Error: not enough memory\n";
     return 1;
   }
-  try
+
+  str = tkach::inputStr(std::cin, str, capacity);
+  if (str == nullptr)
   {
-    str = tkach::inputStr(std::cin, str, capacity);
-  }
-  catch (const std::bad_alloc& e)
-  {
-    free(str);
     std::cerr << "Error: not enough memory\n";
     return 1;
   }
@@ -43,8 +40,7 @@ int main()
     std::cerr << "Error: not enough memory\n";
     return 1;
   }
-  tkach::outputStr(std::cout, str2);
-  std::cout << "\n";
+  std::cout << str2 << "\n";
   free(str);
   free(str2);
   return 0;

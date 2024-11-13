@@ -4,10 +4,10 @@
 #include <cstddef>
 #include <fstream>
 
-namespace tkach {
+namespace tkach
+{
   char* getMemoryForStr(char* str, size_t& capacity);
   char* inputStr(std::istream& in, char* str, size_t& capacity);
-  void outputStr(std::ostream & out, const char* const str);
 }
 
 #endif
