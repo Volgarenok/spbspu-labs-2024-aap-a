@@ -22,7 +22,7 @@ char* inputString(std::istream &in)
         throw std::bad_alloc("incorrect memory allocation")
       }
       strSize += iterSize;
-      free(str)
+      free(str);
       str = temp;
     }
   }
