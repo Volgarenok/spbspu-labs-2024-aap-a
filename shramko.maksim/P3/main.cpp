@@ -39,6 +39,7 @@ int main(int argc, char** argv)
   constexpr size_t statMtrxSize = 10000;
   int statMtrx[statMtrxSize];
   int* mtrx = statMtrx;
+  std::ofstream output(argv[3]);
   if (argv[1][0] == '2')
   {
     try
@@ -47,17 +48,24 @@ int main(int argc, char** argv)
     }
     catch (const std::bad_alloc & e)
     {
+      delete[] mtrx;
       std::cerr << "Out of memory\n";
-      return 1;
+      return 2;
     }
+    if (!shramko::inputMtrx(input, mtrx, sizeMtrx))
+    {
+      delete[] mtrx;
+      std::cerr << "Dyn error!\n";
+      return 2;
+    }
+    output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
   }
   else if(!shramko::inputMtrx(input, mtrx, sizeMtrx))
   {
-    std::cerr << "ERROR!\n";
+    std::cerr << "Sta error!\n";
     return 2;
   }
 
-  std::ofstream output(argv[3]);
   output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
   delete[] mtrx;
 }
