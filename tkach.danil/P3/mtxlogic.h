@@ -5,7 +5,7 @@
 
 namespace tkach
 {
-  double* createMtx2(const int* mtx, size_t row_size, size_t column_size);
+  double* buildNewMtxWithAverageElements(const int* mtx, size_t row_size, size_t column_size);
 }
 
 #endif

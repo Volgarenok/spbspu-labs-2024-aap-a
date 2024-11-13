@@ -1,6 +1,6 @@
 #include "mtxlogic.h"
 
-double* tkach::createMtx2(const int* const mtx, const size_t row_size, const size_t column_size)
+double* tkach::buildNewMtxWithAverageElements(const int* const mtx, const size_t row_size, const size_t column_size)
 {
   double* mtx2 = new double[row_size * column_size];
   for (size_t i = 0; i < row_size; ++i)

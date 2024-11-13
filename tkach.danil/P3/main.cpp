@@ -46,7 +46,6 @@ int main(int argc, const char** argv)
     std::cerr << "ERROR: no other elements\n";
     return 1;
   }
-  double* mtx2 = nullptr;
   int fixmtx[10000] = {0};
   int* mtx = fixmtx;
   if (id == 2)
@@ -70,9 +69,10 @@ int main(int argc, const char** argv)
     std::cerr << "ERROR: Invalid input\n";
     return 2;
   }
+  double* mtx2 = nullptr;
   try
   {
-    mtx2 = tkach::createMtx2(mtx, row_size, column_size);
+    mtx2 = tkach::buildNewMtxWithAverageElements(mtx, row_size, column_size);
   }
   catch (const std::bad_alloc& e)
   {
