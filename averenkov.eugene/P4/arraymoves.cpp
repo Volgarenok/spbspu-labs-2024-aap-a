@@ -14,14 +14,14 @@ char* averenkov::newArray(char* first, char* second)
   return second;
 }
 
-char* averenkov::stringInput(std::istream & in, char* str)
+char* averenkov::stringInput(std::istream& in, char* str)
 {
   size_t max = 10;
   const size_t n = 2;
   size_t size = 0;
   char c = '\0';
-  std::noskipws(std::cin);
-  while ((std::cin >> c) && (c != '\n'))
+  std::noskipws(in);
+  while ((in >> c) && (c != '\n'))
   {
     if (size == max)
     {
@@ -42,7 +42,7 @@ char* averenkov::stringInput(std::istream & in, char* str)
     }
     size++;
   }
-  std::skipws(std::cin);
+  std::skipws(in);
   return str;
 }
 
