@@ -82,20 +82,12 @@ int main(int argc, char ** argv)
   {
     std::cerr << "File text is invalid\n";
     delete[] t;
-    if (way == 2)
-    {
-      delete[] mtx;
-    }
     return 2;
   }
   if ((read / m) < n)
   {
     std::cerr << "Incorrect matrix\n";
     delete[] t;
-    if (way == 2)
-    {
-      delete[] mtx;
-    }
     return 1;
   }
   try
@@ -107,10 +99,6 @@ int main(int argc, char ** argv)
     std::cerr << "Out of memory\n";
     delete[] t2;
     delete[] t;
-    if (way == 2)
-    {
-      delete[] mtx;
-    }
     return 1;
   }
   output << m << " " << n << " ";
@@ -118,9 +106,5 @@ int main(int argc, char ** argv)
   output << "\n";
   delete[] t;
   delete[] t2;
-  if (way == 2)
-  {
-    delete[] mtx;
-  }
   return 0;
 }
