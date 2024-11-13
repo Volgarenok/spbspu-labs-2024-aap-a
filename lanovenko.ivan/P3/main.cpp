@@ -1,9 +1,9 @@
 #include <iostream>
-#include "input_matrix.h"
-#include "output_matrix.h"
 #include <cstdlib>
 #include <fstream>
 #include <cstring>
+#include "input_matrix.h"
+#include "output_matrix.h"
 int main(int argc, char ** argv)
 {
   if (argc > 4)
@@ -16,7 +16,7 @@ int main(int argc, char ** argv)
     std::cerr << "Not enough arguments" << '\n';
     return 1;
   }
-  int num = atoi(argv[1]);
+  int num = std::atoi(argv[1]);
   if (num == 0)
   {
     std::cerr << "Fist name is not a number" << '\n';
@@ -42,7 +42,7 @@ int main(int argc, char ** argv)
       std::cerr << "Fail input" << '\n';
       return 2;
     }
-    lanovenko::output_matrix(output, matrix, rows, cols);
+    lanovenko::output_LFT_TOP_CLK(output, matrix, rows, cols);
   }
   else
   {
@@ -53,8 +53,7 @@ int main(int argc, char ** argv)
       std::cerr << "Fail input" << '\n';
       return 2;
     }
-    lanovenko::output_matrix(output, dmatrix, rows, cols);
+    lanovenko::output_LFT_TOP_CLK(output, dmatrix, rows, cols);
     delete[] dmatrix;
   }
-  return 0;
 }
