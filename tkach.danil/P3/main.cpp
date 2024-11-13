@@ -3,7 +3,7 @@
 #include "filemtx.h"
 #include "mtxlogic.h"
 
-int main(int argc, const char** argv)
+int main(const int argc, const char* const * const argv)
 {
   if (argc < 4)
   {
@@ -16,8 +16,12 @@ int main(int argc, const char** argv)
     return 1;
   }
   const char * number = argv[1];
-  int id = 0;
-  id = std::atoi(number);
+  int id = std::atoi(number);
+  if (argv[1][0] == '\0')
+  {
+    std::cerr << "First parameter is empty\n";
+    return 1;
+  }
   if (((id != 1) && (id != 2)) || (argv[1][1] != '\0'))
   {
     std::cerr << "First parameter is wrong\n";
@@ -38,11 +42,15 @@ int main(int argc, const char** argv)
   }
   int fixmtx[10000] = {0};
   int* mtx = fixmtx;
+  int* memorypointer = nullptr;
+  double* mtx2 = nullptr;
   if (id == 2)
   {
     try
     {
       mtx = new int[row_size * column_size];
+      memorypointer = mtx;
+      mtx2 = new double[row_size * column_size];
     }
     catch (const std::bad_alloc & e)
     {
@@ -52,34 +60,15 @@ int main(int argc, const char** argv)
   }
   if (!(tkach::inputMtx(input, mtx, row_size, column_size)))
   {
-    if (id == 2)
-    {
-      delete[] mtx;
-    }
+    delete[] memorypointer;
     std::cerr << "ERROR: Invalid input\n";
     return 2;
   }
-  double* mtx2 = nullptr;
-  try
-  {
-    mtx2 = tkach::buildNewMtxWithAverageElements(mtx, row_size, column_size);
-  }
-  catch (const std::bad_alloc& e)
-  {
-    if (id == 2)
-    {
-      delete[] mtx;
-    }
-    std::cerr << "Out of memory\n";
-    return 1;
-  }
+  tkach::buildNewMtxWithAverageElements(mtx, mtx2, row_size, column_size);
   std::ofstream output(argv[3]);
   tkach::outputMtx(output, mtx2, row_size, column_size);
   output << "\n";
-  if (id == 2)
-  {
-    delete[] mtx;
-  }
+  delete[] memorypointer;
   delete[] mtx2;
   return 0;
 }
