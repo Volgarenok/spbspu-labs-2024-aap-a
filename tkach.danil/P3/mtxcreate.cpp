@@ -2,7 +2,6 @@
 
 void tkach::buildNewMtxWithAverageElements(const int* const mtx, double* const mtx2, const size_t row_size, const size_t column_size)
 {
-  double* mtx2 = new double[row_size * column_size];
   for (size_t i = 0; i < row_size; ++i)
   {
     for (size_t j = 0; j < column_size; ++j)
