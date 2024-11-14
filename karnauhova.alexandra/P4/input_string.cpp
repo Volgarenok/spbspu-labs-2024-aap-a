@@ -7,6 +7,10 @@ char* karnauhova::input_string(std::istream& in, char end)
   size_t n = 20;
   char* str = nullptr;
   str = reinterpret_cast< char* >(malloc(sizeof(char) * n));
+  if (str == nullptr)
+  {
+    return str;
+  }
   std::noskipws(in);
   char x = 0;
   in >> x;
