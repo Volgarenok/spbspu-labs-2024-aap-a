@@ -15,7 +15,7 @@ int main(int argc, char ** argv)
     return 1;
   }
 
-  if (argv[1][1] != '\0' || !std::isdigit(argv[1][0]))
+  if (!std::isdigit(argv[1][0]) || argv[1][1] != '\0')
   {
     std::cerr << "First parameter is not correct\n";
     return 1;
