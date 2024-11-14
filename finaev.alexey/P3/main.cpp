@@ -19,7 +19,7 @@ int main(int argc, char ** argv)
   }
   if (argv[1][1] != '\0' || (argv[1][0] != '1' && argv[1][0] != '2'))
   {
-    std::cerr << "false first parameter" << "\n";
+    std::cerr << "False first parameter" << "\n";
     return 1;
   }
   const char *str = argv[1];
@@ -36,8 +36,13 @@ int main(int argc, char ** argv)
     std::cerr << "Not a matrix" << "\n";
     return 2;
   }
-  size_matrix = strk * stl;
   std::ofstream output(argv[3]);
+    if (strk <= 0 || stl <= 0)
+    {
+      output << strk << " " << stl << "\n";
+      return 0;
+    }
+  size_matrix = strk * stl;
   int fixed_matrix[10000];
   int *dynamic_matrix = nullptr;
   int *matrix = nullptr;
@@ -63,7 +68,8 @@ int main(int argc, char ** argv)
     std::cerr << "Fail input" << "\n";
     return 2;
   }
-  output << finaev::quantity_loc_max(matrix, strk, stl) << "\n";
+  int res = finaev::quantity_loc_max(matrix, strk, stl);
+  output << res << "\n";
   delete[] matrix;
   return 0;
 }
