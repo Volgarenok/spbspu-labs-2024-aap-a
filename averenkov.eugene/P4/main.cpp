@@ -19,6 +19,12 @@ int main()
     std::cerr << "Out of memory\n";
     return 1;
   }
+  if (str2 == nullptr)
+  {
+    free(str2);
+    std::cerr << "Out of memory\n";
+    return 1;
+  }
   str1 = averenkov::stringInput(std::cin, str1);
   str2 = averenkov::stringInput(std::cin, str2);
   std::cout << averenkov::latTwo(str1, str2) << "\n";
