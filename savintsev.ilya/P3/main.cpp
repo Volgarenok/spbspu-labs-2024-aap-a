@@ -20,11 +20,14 @@ int main(int argc, char ** argv)
     std::cerr << "First parameter is not correct\n";
     return 1;
   }
-
   const int num = std::atoi(argv[1]);
+  if (num != 1 && num != 2)
+  {
+    std::cerr << "First parameter is out of range\n";
+    return 1;
+  }
   std::ifstream inputStream(argv[2]);
   std::ofstream outputStream(argv[3]);
-
   size_t m = 0, n = 0;
   inputStream >> m >> n;
   if (!inputStream)
@@ -57,8 +60,5 @@ int main(int argc, char ** argv)
     delete[] table;
     break;
   }
-  default:
-    std::cerr << "First parameter is out of range\n";
-    return 1;
   }
 }
