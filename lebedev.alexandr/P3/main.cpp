@@ -16,6 +16,11 @@ int main(int argc, char** argv)
     return 1;
   }
 
+  if (argv[1][0] == '\0')
+  {
+    std::cerr << "First parameter is empty\n";
+    return 1;
+  }
   if (argv[1][1] != '\0' || (argv[1][0] != '1' && argv[1][0] != '2'))
   {
     std::cerr << "Incorrect first parameter!\n";
@@ -63,14 +68,7 @@ int main(int argc, char** argv)
   }
 
   std::ofstream outputFile(argv[3]);
-  if (lebedev::lwrTriMtx(arr, m))
-  {
-    outputFile << "true\n";
-  }
-  else
-  {
-    outputFile << "false\n";
-  }
+  outputFile << std::boolalpha << lebedev::lwrTriMtx(arr, m) << "\n";
 
   delete[] dynamicArr;
   return 0;
