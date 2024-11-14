@@ -15,14 +15,8 @@ int main()
   }
   arr[arrsize - 1] = '\0';
   std::noskipws(std::cin);
-  std::cin >> letter;
-  if (!std::cin) {
-    free(arr);
-    return 1;
-  }
-  if (letter == '\n') {
-    std::cout << "0\n";
-    free(arr);
+  if (std::cin >> letter == '\n') {
+    std::cout << '0';
     return 0;
   }
   size_t i = 1;
