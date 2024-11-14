@@ -25,7 +25,7 @@ double value = 0;
     std::cout << "<MATH ERROR>";
   }
   (x < 0) ? (std::cout << std::fixed << "|") : (std::cout << std::fixed << "| ");
-  std::cout << std::fixed << x << " | " << value << " | " << std::exp(-1.0 * right * right) << " | \n";
+  std::cout << std::fixed << x << " | " << value << " | " << std::exp(-1.0 * x * x) << " | \n";
 }
 
 void asafov::output(double left, double right, double step, size_t numberMax, double error)
