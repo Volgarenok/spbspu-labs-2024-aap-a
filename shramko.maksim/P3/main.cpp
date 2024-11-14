@@ -36,9 +36,9 @@ int main(int argc, char** argv)
   }
 
   size_t sizeMtrx = cnt_row * cnt_col;
-  constexpr size_t statMtrxSize = 10000;
-  int statMtrx[statMtrxSize];
-  int* mtrx = statMtrx;
+  constexpr size_t fixedMtrxSize = 10000;
+  int fixedMtrx[fixedMtrxSize];
+  int* mtrx = fixedMtrx;
   std::ofstream output(argv[3]);
   if (argv[1][0] == '2')
   {
@@ -65,7 +65,7 @@ int main(int argc, char** argv)
   {
     if (!shramko::inputMtrx(input, mtrx, sizeMtrx))
     {
-      std::cerr << "Sta error!\n";
+      std::cerr << "Fix error!\n";
       return 2;
     }
     output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
