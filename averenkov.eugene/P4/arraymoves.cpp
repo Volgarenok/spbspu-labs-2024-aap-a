@@ -34,6 +34,10 @@ char* averenkov::stringInput(std::istream& in, char* str)
       }
       str_new[size * n] = '\0';
       str = averenkov::newArray(str, str_new);
+      if (str == nullptr)
+      {
+        free (str)
+      }
       max *= n;
       str[size] = c;
     }
