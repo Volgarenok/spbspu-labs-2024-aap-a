@@ -66,9 +66,10 @@ int main(int argc, char ** argv)
   if (!finaev::input_matrix(input, matrix, size_matrix))
   {
     std::cerr << "Fail input" << "\n";
+    delete[] dynamic_matrix;
     return 2;
   }
   output << finaev::quantity_loc_max(matrix, strk, stl) << "\n";
-  delete[] matrix;
+  delete[] dynamic_matrix;
   return 0;
 }
