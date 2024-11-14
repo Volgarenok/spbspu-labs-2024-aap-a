@@ -43,12 +43,14 @@ int main(int argc, char ** argv)
   constexpr int size = 10000;
   int const_mtx[size] = {0};
   int * mtx = const_mtx;
+  int * d_mtx = nullptr;
   if (argv[1][0] == '2')
   {
 
     try
     {
       mtx = new int[columns * rows];
+      int * d_mtx = mtx;
     }
     catch (const std::bad_alloc &e)
     {
@@ -57,14 +59,12 @@ int main(int argc, char ** argv)
       return 1;
     }
   }
+  else 
 
   if (!zakirov::input_mtx(file_input, mtx, columns, rows))
   {
     std::cerr << "The input is incorrect" << "\n";
-    if (argv[1][0] == '2')
-    {
-      delete[] mtx;
-    }
+    delete d_mtx;
     return 2;
   }
 
@@ -75,8 +75,5 @@ int main(int argc, char ** argv)
   }
   std::cout << '\n';
 
-  if (argv[1][0] == '2')
-  {
-    delete[] mtx;
-  }
+  delete d_mtx;
 }
