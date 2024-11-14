@@ -1,5 +1,6 @@
 #include "arraymoves.h"
 #include <memory>
+#include <stdexcept>
 #include <iostream>
 #include <cstring>
 #include <cctype>
@@ -74,6 +75,10 @@ char* averenkov::latTwo(const char* str1, const char* str2)
     }
   }
   char* result = reinterpret_cast<char*> (malloc(sizeof(char) * (length + 1)));
+  if (result == nullptr)
+  {
+    return nullptr;
+  }
   size_t n = 0;
   for (int i = 0; i < 26; i++) {
     if (found[i] == 1)
