@@ -39,35 +39,27 @@ int main(const int argc, const char** argv)
   constexpr size_t fixedMtrxSize = 10000;
   int fixedMtrx[fixedMtrxSize];
   int* mtrx = fixedMtrx;
-  std::ofstream output(argv[3]);
-  if (argv[1][0] == '2')
+  try
   {
-    try
+    if (argv[1][0] == '2')
     {
       mtrx = new int[sizeMtrx];
     }
-    catch (const std::bad_alloc & e)
-    {
-      delete[] mtrx;
-      std::cerr << "Out of memory\n";
-      return 2;
-    }
-    if (!shramko::inputMtrx(input, mtrx, sizeMtrx))
-    {
-      delete[] mtrx;
-      std::cerr << "Dyn error!\n";
-      return 2;
-    }
-    output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
-    delete[] mtrx;
   }
-  else if (argv[1][0] == '1')
+  catch (const std::bad_alloc & e)
   {
-    if (!shramko::inputMtrx(input, mtrx, sizeMtrx))
-    {
-      std::cerr << "Fix error!\n";
-      return 2;
-    }
-    output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
+    delete[] mtrx;
+    std::cerr << "Out of memory\n";
+    return 2;
   }
+
+  if (!shramko::inputMtrx(input, mtrx, sizeMtrx))
+  {
+    delete[] mtrx;
+    std::cerr << "Second input error!\n";
+    return 2;
+  }
+  std::ofstream output(argv[3]);
+  output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
+  delete[] mtrx;
 }
