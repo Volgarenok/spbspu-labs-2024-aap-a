@@ -50,12 +50,12 @@ int main(int argc, char** argv)
   if (!maslevtsov::inputMatrix(finput, matrix, nRows, nColumns))
   {
     std::cerr << "Error: incorrect input\n";
-    delete[] matrix;
+    delete[] dynamicArray;
     return 2;
   }
 
   foutput << maslevtsov::countColumnsNSM(matrix, nRows, nColumns);
   foutput << '\n';
 
-  delete[] matrix;
+  delete[] dynamicArray;
 }
