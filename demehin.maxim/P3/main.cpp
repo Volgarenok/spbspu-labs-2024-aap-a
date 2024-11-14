@@ -34,9 +34,10 @@ int main(int argc, char** argv)
   std::ifstream input(argv[2]);
   size_t m = 0, n = 0;
   input >> m >> n;
+  char error_msg[] = "Impossible to build matrix\n";
   if (!input)
   {
-    std::cerr << "Impossible to build matrix\n";
+    std::cerr << error_msg;
     return 2;
   }
 
@@ -51,10 +52,10 @@ int main(int argc, char** argv)
     std::cerr << "Out of memory\n";
     return 1;
   }
+
   int matrix1[10000] = {};
   int* final_matrix = nullptr;
   size_t read = 0;
-  char error_msg[] = "Impossible to build matrix\n";
 
   if (c == 2)
   {
