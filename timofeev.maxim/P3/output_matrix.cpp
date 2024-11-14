@@ -1,10 +1,10 @@
 #include "output_matrix.h"
+#include "make_array.h"
 #include <iostream>
 
 
 void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t stl)
 {
-  size_t sum_dig = strk + stl - 1;
   size_t sum_el = (strk * stl) + ((stl - 1) * stl);
   int* values = make_array(sum_el);
   size_t count = 0;
@@ -12,7 +12,6 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
   {
     size_t col = 0;
     int icur = i;
-    int diag = 0;
     for (size_t j = (stl -1); (col <= i) && (col < stl); j--)
     {
       int jcur = j;

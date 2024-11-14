@@ -3,7 +3,7 @@
 
 namespace timofeev
 {
-  int* make_array(int capacity)
+  int* make_array(int capacity);
 }
 
 #endif
