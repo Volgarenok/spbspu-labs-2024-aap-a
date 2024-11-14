@@ -8,19 +8,19 @@ namespace alymova
 {
   void check_argc(int argc)
   {
-    if (argc-1 > 3)
+    if (argc - 1 > 3)
     {
       throw std::logic_error("Too many arguments");
     }
-    if (argc-1 < 3)
+    if (argc - 1 < 3)
     {
-      throw std::logic_error("Not  enough  arguments");
+      throw std::logic_error("Not enough arguments");
     }
   }
   long int check_num(const char* const argv1)
   {
     char* endptr = nullptr;
-    long int num = std::strtol(argv1, &endptr, 10);
+    long int num = std::strtol(argv1, std::addressof(endptr), 10);
     if (*endptr != '\0')
     {
       throw std::logic_error("First parameter is not a number");
@@ -59,12 +59,12 @@ int main(int argc, char** argv)
     return 2;
   }
   constexpr size_t static_size = 10000;
-  int matrix_static[static_size] = {};
+  int matrix_fixed[static_size] = {};
   int* matrix = nullptr;
   int* matrix_dynamic = nullptr;
   if (num == 1)
   {
-    matrix = matrix_static;
+    matrix = matrix_fixed;
   }
   else
   {
