@@ -4,7 +4,7 @@
 #include <cmath>
 #include "countExpNegPow2x.h"
 
-void makeLine(int a, char b)
+void asafov::makeLine(int a, char b)
 {
   for (int i = 0; i < a; i++)
   {
@@ -13,7 +13,7 @@ void makeLine(int a, char b)
   std::cout << '\n';
 }
 
-void writeLine(double x, size_t k, double error)
+void asafov::writeLine(double x, size_t k, double error)
 {
   double value = 0;
   try
