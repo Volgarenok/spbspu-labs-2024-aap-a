@@ -40,16 +40,13 @@ int main(int argc, char ** argv)
     return 0;
   }
 
-  constexpr int size = 10000;
-  int const_mtx[size] = {0};
-  int * mtx = const_mtx;
+  int c_mtx[10000] = {0};
   int * d_mtx = nullptr;
   if (argv[1][0] == '2')
   {
     try
     {
-      mtx = new int[columns * rows];
-      int * d_mtx = mtx;
+      d_mtx = new int[columns * rows];
     }
     catch (const std::bad_alloc &e)
     {
@@ -59,17 +56,19 @@ int main(int argc, char ** argv)
     }
   }
 
-  if (!zakirov::input_mtx(file_input, mtx, columns, rows))
+  int * r_mtx = argv[1][0] == '1' ? c_mtx : d_mtx;
+
+  if (!zakirov::input_mtx(file_input, r_mtx, columns, rows))
   {
     std::cerr << "The input is incorrect" << "\n";
     delete d_mtx;
     return 2;
   }
 
-  zakirov::mtx_spiral_decrease(mtx, columns, rows);
+  zakirov::mtx_spiral_decrease(r_mtx, columns, rows);
   for (size_t i = 0; i < rows * columns; ++i)
   {
-    std::cout << mtx[i] << ' ';
+    std::cout << r_mtx[i] << ' ';
   }
   std::cout << '\n';
 
