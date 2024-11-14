@@ -28,7 +28,6 @@ int main(int argc, char **argv)
     return 1;
   }
   std::ifstream input(argv[2]);
-  std::ofstream output(argv[3]);
   size_t rows = 0, columns = 0;
   input >> rows >> columns;
   if (!input)
@@ -36,46 +35,38 @@ int main(int argc, char **argv)
     std::cerr << "Rows or columns are not a number\n";
     return 2;
   }
+  std::ofstream output(argv[3]);
   if (rows <= 0 || columns <= 0)
   {
     output << rows << " " << columns << "\n";
     return 0;
   }
-  size_t read = 0;
-  int **matrix = nullptr;
-  try
-  {
-    matrix = maslov::createMatrix(rows,columns);
-  }
-  catch (const std::bad_alloc &e)
-  {
-    std::cerr << "Out of memory\n";
-    return 1;
-  }
-  if (!maslov::inputMatrix(input, matrix, rows, columns, read))
-  {
-    std::cerr << "Elements are not a number or not enough\n";
-    maslov::destroyMatrix(matrix, rows);
-    return 2;
-  }
-  size_t result = 0;
-  if (taskNumber == 1)
-  {
-    constexpr size_t max_size = 10000;
-    int array[max_size] = {};
-    int *fixedLengthArray = maslov::convert(matrix, rows,
-        columns, array);
-    result = maslov::findLocalMaximum(fixedLengthArray, rows, columns);
-  }
-  else
+  constexpr size_t maxSize = 10000;
+  int fixedLengthArray[maxSize] = {};
+  int *dynamicArrayPtr = nullptr;
+  int *arrayPtr = fixedLengthArray;
+  if (taskNumber == 2)
   {
     const size_t arraySize = rows * columns;
-    int *array = new int[arraySize];
-    int *dynamicArray = maslov::convert(matrix,
-        rows, columns, array);
-    result = maslov::findLocalMaximum(dynamicArray, rows, columns);
-    delete[] dynamicArray;
+    try
+    {
+      dynamicArrayPtr = new int[arraySize];
+    }
+    catch (const std::bad_alloc &e)
+    {
+      std::cerr << "Out of memory\n";
+      return 1;
+    }
+    arrayPtr = dynamicArrayPtr;
   }
-  maslov::destroyMatrix(matrix, rows);
-  output << result << "\n";
+  size_t read = 0;
+  if (!maslov::inputMatrix(input, arrayPtr, rows, columns, read))
+  {
+    std::cerr << "Elements are not a number or not enough\n";
+    delete[] dynamicArrayPtr;
+    return 1;
+  }
+  output << maslov::findLocalMaximum(arrayPtr, rows, columns);
+  output << "\n";
+  delete[] dynamicArrayPtr;
 }
