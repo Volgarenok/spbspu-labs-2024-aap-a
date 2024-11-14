@@ -25,7 +25,17 @@ int main()
     return 1;
   }
   str1 = averenkov::stringInput(std::cin, str1);
+  if(str1 == nullptr)
+  {
+    free(str1);
+    std::cerr << "Out of memory\n"
+  }
   str2 = averenkov::stringInput(std::cin, str2);
+  if(str2 == nullptr)
+  {
+    free(str2);
+    std::cerr << "Out of memory\n"
+  }
   char* result = averenkov::latTwo(str1, str2);
   std::cout << result << "\n";
   free(str1);
