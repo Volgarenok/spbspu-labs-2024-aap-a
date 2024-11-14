@@ -57,14 +57,8 @@ int main(int argc, char** argv)
   int* final_matrix = nullptr;
   size_t read = 0;
 
-  if (c == 2)
-  {
-    final_matrix = matrix2;
-  }
-  else
-  {
-    final_matrix = matrix1;
-  }
+
+  final_matrix = (c == 2) ? matrix2 : matrix1;
 
   if (!demehin::input_matrix(input, final_matrix, k, read) && m != 0)
   {
