@@ -1,35 +1,24 @@
+#include "output.h"
 #include <stdexcept>
 #include <iostream>
 #include <cmath>
 #include "countExpNegPow2x.h"
-#include "output.h"
 
-void asafov::output(double left, double right, double step, size_t numberMax, double error)
+void asafov::makeLine(int a, char b)
 {
-  for (int i = 0; i < 34; i++)
+  for (int i = 0; i < a; i++)
   {
-    std::cout << '_';
+    std::cout << b;
   }
   std::cout << '\n';
-  for (double i = left; i < right; i += step)
-  {
-    double value = 0;
-    try
-    {
-      value = countExpNegPow2x(i, numberMax, error);
-    }
-    catch (const std::logic_error& e)
-    {
-      std::cout << "<MATH ERROR>";
-      return;
-    }
-    (i < 0) ? (std::cout << std::fixed << "|") : (std::cout << std::fixed << "| ");
-    std::cout << std::fixed << i << " | " << value << " | " << std::exp(-1.0 * i * i) << " | \n";
-  }
-  double value = 0;
+}
+
+void asafov::writeLine(double x, size_t k, double error)
+{
+double value = 0;
   try
   {
-    value = countExpNegPow2x(right, numberMax, error);
+    value = countExpNegPow2x(x, k, error);
   }
   catch (const std::logic_error& e)
   {
@@ -37,9 +26,16 @@ void asafov::output(double left, double right, double step, size_t numberMax, do
   }
   (right < 0) ? (std::cout << std::fixed << "|") : (std::cout << std::fixed << "| ");
   std::cout << std::fixed << right << " | " << value << " | " << std::exp(-1.0 * right * right) << " | \n";
-  for (int i = 0; i < 34; i++)
-  {
-    std::cout << '-';
-  }
+}
+
+void asafov::output(double left, double right, double step, size_t numberMax, double error)
+{
+  asafov::makeLine(34, '=');
   std::cout << '\n';
+  for (double i = left; i < right; i += step)
+  {
+    asafov::writeLine(i, numberMax, error);
+  }
+  asafov::writeLine(right, numberMax, error);
+  asafov::makeLine(34, '=');
 }
