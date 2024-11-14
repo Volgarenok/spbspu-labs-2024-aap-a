@@ -44,7 +44,7 @@ int main(int argc, char **argv)
   constexpr size_t maxSize = 10000;
   int fixedLengthArray[maxSize] = {};
   int *dynamicArrayPtr = nullptr;
-  int *arrayPtr = nullptr;
+  int *arrayPtr = fixedLengthArray;
   if (taskNumber == 2)
   {
     const size_t arraySize = rows * columns;
@@ -59,15 +59,12 @@ int main(int argc, char **argv)
     }
     arrayPtr = dynamicArrayPtr;
   }
-  else
-  {
-    arrayPtr = fixedLengthArray;
-  }
   size_t read = 0;
   if (!maslov::inputMatrix(input, arrayPtr, rows, columns, read))
   {
     std::cerr << "Elements are not a number or not enough\n";
     delete[] dynamicArrayPtr;
+    return 1;
   }
   output << maslov::findLocalMaximum(arrayPtr, rows, columns);
   output << "\n";
