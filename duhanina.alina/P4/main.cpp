@@ -21,8 +21,8 @@ int main()
         delete[] str;
         return 1;
       }
-      str = duhanina::createNewArray(str, newStr);
-      str[size] = '\0';
+      newStr = duhanina::createNewArray(str, newStr);
+      str = newStr;
     }
     str[index++] = c;
   }
