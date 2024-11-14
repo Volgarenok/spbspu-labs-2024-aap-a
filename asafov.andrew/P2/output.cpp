@@ -31,7 +31,6 @@ double value = 0;
 void asafov::output(double left, double right, double step, size_t numberMax, double error)
 {
   asafov::makeLine(34, '=');
-  std::cout << '\n';
   for (double i = left; i < right; i += step)
   {
     asafov::writeLine(i, numberMax, error);
