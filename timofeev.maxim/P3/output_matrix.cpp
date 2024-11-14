@@ -36,7 +36,7 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
       }
     }
   }
-  free(values);
+  delete[] values;
   if (mtr > 0)
   {
     out << "the matrix contains diagonals with equal values\n";
