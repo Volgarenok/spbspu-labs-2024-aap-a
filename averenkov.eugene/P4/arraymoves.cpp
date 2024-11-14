@@ -30,7 +30,7 @@ char* averenkov::stringInput(std::istream& in, char* str)
       if(str_new == nullptr)
       {
         free(str_new);
-        return str;
+        return nullptr;
       }
       str_new[size * n] = '\0';
       str = averenkov::newArray(str, str_new);
