@@ -44,7 +44,7 @@ int main(int argc, char **argv)
   constexpr size_t maxSize = 10000;
   int fixedLengthArray[maxSize] = {};
   int *dynamicArrayPtr = nullptr;
-  int *arrayPtr = fixedLengthArray;
+  int *arrayPtr = nullptr;
   if (taskNumber == 2)
   {
     const size_t arraySize = rows * columns;
@@ -58,6 +58,10 @@ int main(int argc, char **argv)
       return 1;
     }
     arrayPtr = dynamicArrayPtr;
+  }
+  else
+  {
+    arrayPtr = fixedLengthArray;
   }
   size_t read = 0;
   if (!maslov::inputMatrix(input, arrayPtr, rows, columns, read))
