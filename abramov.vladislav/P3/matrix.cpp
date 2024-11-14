@@ -43,7 +43,7 @@ int *abramov::toSquare(int *mtx, size_t m, size_t n, size_t &count)
   return matrix;
 }
 
-void abramov::transformMatrix(int *mtx, size_t count)
+void abramov::spiralChangeMatrix(int *mtx, size_t count)
 {
   int iBegin = count;
   int iEnd = 0;

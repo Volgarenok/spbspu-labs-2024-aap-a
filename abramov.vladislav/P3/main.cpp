@@ -82,7 +82,7 @@ int main(int argc, char **argv)
     }
   }
   std::ofstream output(argv[3]);
-  abramov::transformMatrix(new_mtx, count);
+  abramov::spiralChangeMatrix(new_mtx, count);
   abramov::outputMatrix(output, new_mtx, count);
   delete[] matrix;
   delete[] new_mtx;
