@@ -12,7 +12,6 @@ int main()
     std::cerr << "Error: not enough memory\n";
     return 1;
   }
-
   str = tkach::inputStr(std::cin, str, capacity);
   if (str == nullptr)
   {
@@ -33,13 +32,13 @@ int main()
   }
   char* str2 = nullptr;
   str2 = reinterpret_cast< char* >(malloc(sizeof(char) * (capacity)));
-  tkach::getStrWithRemovedVowels(str, str2);
   if (str2 == nullptr)
   {
     free(str);
     std::cerr << "Error: not enough memory\n";
     return 1;
   }
+  tkach::getStrWithRemovedVowels(str, str2);
   std::cout << str2 << "\n";
   free(str);
   free(str2);
