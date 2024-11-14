@@ -77,7 +77,7 @@ char* averenkov::latTwo(const char* str1, const char* str2)
   char* result = reinterpret_cast<char*> (malloc(sizeof(char) * (length + 1)));
   if (result == nullptr)
   {
-    throw std::bad_alloc(); //извините, по-другому не придумал
+    return nullptr;
   }
   size_t n = 0;
   for (int i = 0; i < 26; i++) {
