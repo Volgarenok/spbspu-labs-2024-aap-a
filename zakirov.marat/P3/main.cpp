@@ -72,7 +72,7 @@ int main(int argc, char ** argv)
     std::cout << mtx[i] << ' ';
   }
   std::cout << '\n';
-  
+
   if (argv[1][0] == '2')
   {
     delete[] mtx;
