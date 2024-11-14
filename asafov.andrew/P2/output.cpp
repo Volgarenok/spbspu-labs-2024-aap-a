@@ -13,12 +13,12 @@ void asafov::makeLine(int a, char b)
   std::cout << '\n';
 }
 
-void asafov::writeLine(double x, size_t k, double error)
+void writeLine(double x, size_t k, double error)
 {
-double value = 0;
+  double value = 0;
   try
   {
-    value = countExpNegPow2x(x, k, error);
+    value = asafov::countExpNegPow2x(x, k, error);
   }
   catch (const std::logic_error& e)
   {
@@ -30,11 +30,11 @@ double value = 0;
 
 void asafov::output(double left, double right, double step, size_t numberMax, double error)
 {
-  asafov::makeLine(34, '=');
+  makeLine(34, '=');
   for (double i = left; i < right; i += step)
   {
-    asafov::writeLine(i, numberMax, error);
+    writeLine(i, numberMax, error);
   }
-  asafov::writeLine(right, numberMax, error);
-  asafov::makeLine(34, '=');
+  writeLine(right, numberMax, error);
+  makeLine(34, '=');
 }

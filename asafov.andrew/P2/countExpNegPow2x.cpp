@@ -3,14 +3,14 @@
 
 double asafov::countExpNegPow2x(double x, size_t k, double error)
 {
-  double ch = 1;
+  double term = 1;
   double result = 0;
   for (size_t i = 1; i <= k; i++)
   {
-    result += ch;
-    ch *= (-1) * x * x / i;
+    result += term;
+    term *= (-1) * x * x / i;
   }
-  if (ch > error)
+  if (term > error)
   {
     throw std::logic_error("math-error");
   }
