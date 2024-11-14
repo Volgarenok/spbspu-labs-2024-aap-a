@@ -1,4 +1,5 @@
 #include "functionStr.h"
+#include <cstddef>
 
 char* duhanina::createNewArray(char* array, char* new_array)
 {
