@@ -1,6 +1,7 @@
-#include<iostream>
+#include <iostream>
 
 int main()
 {
-   std::cout <<"beshimow.meylis\n";
+  std::cout << "beshimow.meylis\n";
 }
+
