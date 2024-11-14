@@ -10,6 +10,10 @@ char* karnauhova::input_string(std::istream& in, char end)
   std::noskipws(in);
   char x = 0;
   in >> x;
+  if (x == end)
+  {
+    return str;
+  }
   str[0] = x;
   size_t i = 1;
   while ((in >> x) && (x != end))
@@ -24,6 +28,7 @@ char* karnauhova::input_string(std::istream& in, char end)
         }
         free(str);
         str = str1;
+        free(str1);
       }
       str[i] = x;
       i++;
