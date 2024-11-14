@@ -4,9 +4,8 @@
 
 namespace savintsev
 {
-  char * inputEndlessStr(std::istream & in);
-  char * increaseStrSize(char * old, size_t m);
-  char * allocMemoryStr(size_t capacity);
+  char * inputNewlineTerminatedStr(std::istream & in);
+  char * createEnlargedCopiedStr(char * old, size_t m);
   size_t getNumIdenticalInRow(char * c);
 }
 

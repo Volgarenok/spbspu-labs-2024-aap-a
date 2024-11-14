@@ -7,20 +7,20 @@ namespace savintsev
   constexpr size_t MEMORY_SIZE = 8;
 }
 
-char * savintsev::inputEndlessStr(std::istream & in)
+char * savintsev::inputNewlineTerminatedStr(std::istream & in)
 {
   size_t capacity = savintsev::MEMORY_SIZE;
   char * t = nullptr;
   try
   {
-    t = allocMemoryStr(capacity);
+    t = new char[capacity];
   }
   catch (const std::bad_alloc & e)
   {
     return nullptr;
   }
   size_t i = 0;
-  while (!in.eof())
+  while (true)
   {
     if (i == (capacity - 1))
     {
@@ -28,7 +28,9 @@ char * savintsev::inputEndlessStr(std::istream & in)
       capacity += capacity;
       try
       {
-        t = savintsev::increaseStrSize(t, capacity);
+        char * new_t = savintsev::createEnlargedCopiedStr(t, capacity);
+        delete[] t;
+        t = new_t;
       }
       catch (const std::bad_alloc & e)
       {
@@ -37,19 +39,22 @@ char * savintsev::inputEndlessStr(std::istream & in)
       }
     }
     in >> std::noskipws >> t[i++];
+    if (t[i - 1] == '\n')
+    {
+      break;
+    }
   }
   t[i - 1] = '\0';
   return t;
 }
 
-char * savintsev::increaseStrSize(char * old, size_t new_size)
+char * savintsev::createEnlargedCopiedStr(char * old, size_t new_size)
 {
   char * created = new char[new_size];
   for (size_t i = 0; old[i] != '\0'; ++i)
   {
     created[i] = old[i];
   }
-  delete[] old;
   return created;
 }
 
@@ -68,10 +73,4 @@ size_t savintsev::getNumIdenticalInRow(char * c)
     }
   }
   return k;
-}
-
-char * savintsev::allocMemoryStr(size_t cap)
-{
-  char * t = new char[cap];
-  return t;
 }

@@ -3,8 +3,7 @@
 
 int main()
 {
-  char * line = nullptr;
-  line = savintsev::inputEndlessStr(std::cin);
+  char * line = savintsev::inputNewlineTerminatedStr(std::cin);
   if (line == nullptr)
   {
     std::cerr << "Failure to allocate memory\n";
