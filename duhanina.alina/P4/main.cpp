@@ -21,10 +21,10 @@ int main()
     {
       size *= 2;
       char* newStr = new char[size + 1];
-      if (str_new == nullptr)
+      if (newStr == nullptr)
       {
         delete[] str;
-        delete[] str_new;
+        delete[] newStr;
         std::cerr << "Error memory\n";
         return 1;
       }
