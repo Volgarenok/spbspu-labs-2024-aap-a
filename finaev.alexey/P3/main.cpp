@@ -50,7 +50,7 @@ int main(int argc, char ** argv)
   {
     try
     {
-      dynamic_matrix = new int[size_matrix]; 
+      dynamic_matrix = new int[size_matrix];
     }
     catch (const std::bad_alloc& e)
     {
@@ -68,8 +68,7 @@ int main(int argc, char ** argv)
     std::cerr << "Fail input" << "\n";
     return 2;
   }
-  int res = finaev::quantity_loc_max(matrix, strk, stl);
-  output << res << "\n";
+  output << finaev::quantity_loc_max(matrix, strk, stl) << "\n";
   delete[] matrix;
   return 0;
 }
