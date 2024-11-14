@@ -6,7 +6,7 @@
 void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t stl)
 {
   int sum_el = (strk * stl) + ((stl - 1) * stl);
-  int* values = make_array(sum_el);
+  int* values = timofeev::make_array(sum_el);
   size_t count = 0;
   for (size_t i = 0; i < (strk + stl - 1); i++)
   {
