@@ -20,7 +20,7 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
     return nullptr;
   }
   size_t i = 0;
-  while (true)
+  while (in.good())
   {
     if (i == (capacity - 1))
     {
