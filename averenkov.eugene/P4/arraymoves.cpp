@@ -1,5 +1,6 @@
 #include "arraymoves.h"
 #include <memory>
+#include <stdexcept>
 #include <iostream>
 #include <cstring>
 #include <cctype>
@@ -76,9 +77,7 @@ char* averenkov::latTwo(const char* str1, const char* str2)
   char* result = reinterpret_cast<char*> (malloc(sizeof(char) * (length + 1)));
   if (result == nullptr)
   {
-    free(result);
-    std::cerr << "Out of memory\n";
-    return str1; //подскажите как лучше сделать всё-таки?
+    throw std::bad_alloc(); //извините, по-другому не придумал
   }
   size_t n = 0;
   for (int i = 0; i < 26; i++) {
