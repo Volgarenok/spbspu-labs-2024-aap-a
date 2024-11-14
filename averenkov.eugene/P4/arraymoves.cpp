@@ -36,7 +36,7 @@ char* averenkov::stringInput(std::istream& in, char* str)
       str = averenkov::newArray(str, str_new);
       if (str == nullptr)
       {
-        free (str)
+        free (str);
       }
       max *= n;
       str[size] = c;
