@@ -36,7 +36,7 @@ int main(int argc, char ** argv)
     return 1;
   }
   std::ifstream input(argv[2]);
-  std::ofstream output(argv[3]);
+
   size_t m = 0;
   size_t n = 0;
   input >> m;
@@ -70,6 +70,7 @@ int main(int argc, char ** argv)
     return 2;
   }
   nikonov::spiralMtxReduction(arrUni, m, n);
+  std::ofstream output(argv[3]);
   nikonov::printMatrix(output, arrUni, m, n);
   if (std::atoi(argv[1]) == 2)
   {
