@@ -27,7 +27,8 @@ int main()
   }
   str1 = averenkov::stringInput(std::cin, str1);
   str2 = averenkov::stringInput(std::cin, str2);
-  result = averenkov::latTwo(str1, str2) << "\n";
+  char* result = averenkov::latTwo(str1, str2);
+  std::cout << result << "\n";
   free(str1);
   free(str2);
   free(result);
