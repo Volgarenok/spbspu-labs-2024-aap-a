@@ -14,13 +14,11 @@ int main(int argc, char ** argv)
     std::cerr << "Not enough arguments\n";
     return 1;
   }
-  for (size_t i = 0; argv[1][i] != '\0'; ++i)
+
+  if (argv[1][1] != '\0' || !std::isdigit(argv[1][0]))
   {
-    if (!std::isdigit(argv[1][i]))
-    {
-      std::cerr << "First parameter is not a number\n";
-      return 1;
-    }
+    std::cerr << "First parameter is not correct\n";
+    return 1;
   }
 
   const int num = std::atoi(argv[1]);

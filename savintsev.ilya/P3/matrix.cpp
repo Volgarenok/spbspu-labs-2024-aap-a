@@ -23,7 +23,7 @@ void savintsev::outputMtx(std::ostream & out, const int * t, size_t m, size_t n)
   }
 }
 
-void savintsev::transformMtx(int * t, size_t m, size_t n)
+void savintsev::spiralIncreaseMtx(int * t, size_t m, size_t n)
 {
   size_t mMid = m / 2 + m % 2;
   size_t nMid = n / 2 + n % 2;
@@ -41,12 +41,12 @@ void savintsev::transformMtx(int * t, size_t m, size_t n)
 
 size_t savintsev::processMtx(std::istream & in, std::ostream & out, int * table, int m, int n)
 {
-    if (!savintsev::inputMtx(in, table, m, n))
-    {
-        return 1;
-    }
-    savintsev::transformMtx(table, m, n);
-    out << (m * n == 0 ? "" : " ");
-    savintsev::outputMtx(out, table, m, n);
-    return 0;
+  if (!inputMtx(in, table, m, n))
+  {
+    return 1;
+  }
+  spiralIncreaseMtx(table, m, n);
+  out << (m * n == 0 ? "" : " ");
+  outputMtx(out, table, m, n);
+  return 0;
 }
