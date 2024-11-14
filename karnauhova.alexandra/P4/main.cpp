@@ -1,17 +1,14 @@
+#include <iostream>
 #include "dubl_char.hpp"
 #include "input_string.hpp"
-#include <iostream>
+
 int main()
 {
-  char* t = nullptr;
   constexpr char end = '\0';
-  try
+  char* t = karnauhova::input_string(std::cin, end);
+  if (t == nullptr)
   {
-    t = karnauhova::input_string(std::cin, end);
-  }
-  catch (const std::logic_error &e)
-  {
-    std::cerr << "Error: out of memory\n";
+    std::cerr << "Error with input\n";
     return 1;
   }
   std::cout << karnauhova::dubl_char(t) << "\n";

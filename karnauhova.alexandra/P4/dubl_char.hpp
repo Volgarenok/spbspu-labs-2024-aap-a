@@ -3,6 +3,6 @@
 
 namespace karnauhova
 {
-  int dubl_char(char* str);
+  int dubl_char(const char* str);
 }
 #endif
