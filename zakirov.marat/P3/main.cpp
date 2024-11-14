@@ -13,7 +13,7 @@ int main(int argc, char ** argv)
     std::cerr << "Too many arguments" << "\n";
     return 1;
   }
-  else if ((argv[1][0] != '1' && argv[1][0] != '2') || argv != '\0')
+  else if ((argv[1][0] != '1' && argv[1][0] != '2') || argv[1][1] != '\0')
   {
     std::cerr << "First argument isn't 1 or 2";
     return 1;
