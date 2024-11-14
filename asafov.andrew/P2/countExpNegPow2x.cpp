@@ -3,7 +3,7 @@
 
 double asafov::countExpNegPow2x(double x, size_t k, double error)
 {
-  double ch = 1
+  double ch = 1;
   double result = 0;
   for (size_t i = 1; i <= k; i++)
   {
