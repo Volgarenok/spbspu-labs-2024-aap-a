@@ -16,38 +16,40 @@ int main(int argc, char **argv)
     std::cerr << "Not enough arguments\n";
     return 1;
   }
-  const size_t len_argv1 = std::strlen(argv[1]);
   const int int_argv1 = std::atoi(argv[1]);
-  if (len_argv1 != 1 || ((len_argv1 == 1) && !(atoi(argv[1]))))
+  if (std::atoi(argv[1]))
   {
-    std::cerr << "First parameter is not a number\n";
-    return 1;
+    if (int_argv1 > 2 || int_argv1 < 1)
+    {
+      std::cerr << "First parameter is out of range\n";
+      return 1;
+    }
   }
-  if (int_argv1 > 2 || int_argv1 < 1)
+  else
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
   }
   std::ifstream input(argv[2]);
-  std::ofstream output(argv[3]);
-  int nums[10000] = {};
   size_t m = 0;
   size_t n = 0;
+  if (!(input >> m >> n))
+  {
+    std::cerr << "Wrong input\n";
+    return 1;
+  }
   size_t read = 0;
   size_t count = 0;
-  if (atoi(argv[1]) == 1)
+  int *matrix = nullptr;
+  int *new_mtx = nullptr;
+  if (int_argv1 == 1)
   {
-    if(!(input >> m >> n))
-    {
-      std::cerr << "Wrong input!\n";
-      return 1;
-    }
+    int nums[10000] = {};
     if (!abramov::inputMatrix(input, nums, m, n, read) || read != m * n)
     {
-      std::cerr << "Wrong input!\n";
+      std::cerr << "Wrong input\n";
       return 1;
     }
-    int *new_mtx = nullptr;
     try
     {
       new_mtx = abramov::toSquare(nums, m, n, count);
@@ -57,25 +59,15 @@ int main(int argc, char **argv)
       std::cerr << "Memory fail\n";
       return 2;
     }
-    abramov::transformMatrix(new_mtx, count);
-    abramov::outputMatrix(output, new_mtx, count);
-    delete[] new_mtx;
   }
-  else if (atoi(argv[1]) == 2)
+  if (int_argv1 == 2)
   {
-    if(!(input >> m >> n))
-    {
-      std::cerr << "Wrong input!\n";
-      return 1;
-    }
-    int *matrix = nullptr;
-    int *new_mtx = nullptr;
     try
     {
       matrix = new int[m * n];
-      if (!abramov::inputMatrix(input, matrix, m, n, read) || read != n * m)
+      if (!abramov::inputMatrix(input, matrix, m, n, read) || read != m * n)
       {
-        std::cerr << "Wrong input!\n";
+        std::cerr << "Wrong input\n";
         delete[] matrix;
         return 1;
       }
@@ -88,9 +80,10 @@ int main(int argc, char **argv)
       delete[] new_mtx;
       return 2;
     }
-    abramov::transformMatrix(new_mtx, count);
-    abramov::outputMatrix(output, new_mtx, count);
-    delete[] matrix;
-    delete[] new_mtx;
   }
+  std::ofstream output(argv[3]);
+  abramov::transformMatrix(new_mtx, count);
+  abramov::outputMatrix(output, new_mtx, count);
+  delete[] matrix;
+  delete[] new_mtx;
 }
