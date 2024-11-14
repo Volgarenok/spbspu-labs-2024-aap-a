@@ -40,14 +40,12 @@ int main(int argc, char ** argv)
     return 0;
   }
 
-  int * mtx = nullptr;
-  if (argv[1][0] == '1')
+  constexpr int size = 10000;
+  int const_mtx[size] = {0};
+  int * mtx = const_mtx;
+  if (argv[1][0] == '2')
   {
-    constexpr int size = 10000;
-    int mtx[size] = {0};
-  }
-  else
-  {
+
     try
     {
       mtx = new int[columns * rows];
@@ -63,6 +61,10 @@ int main(int argc, char ** argv)
   if (!zakirov::input_mtx(file_input, mtx, columns, rows))
   {
     std::cerr << "The input is incorrect" << "\n";
+    if (argv[1][0] == '2')
+    {
+      delete[] mtx;
+    }
     return 2;
   }
 
