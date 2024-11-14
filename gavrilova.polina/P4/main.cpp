@@ -23,10 +23,13 @@ int main()
     std::cerr << "Memory errorr\n";
     return 1;
   }
-  char c = '\0';
+  char c;
   size_t len = 0;
   std::noskipws(std::cin);
-  while ((std::cin) && c != '\n') {
+  while ((std::cin >> c)) {
+    if (c == '\n'){
+      break;
+    }
     if (len < K - 1) {
       first_str[len++] = c;
     } else {
@@ -47,6 +50,11 @@ int main()
     }
   }
   first_str[len] = '\0';
+
+  if (!std::cin){
+    std::cerr << "Not input\n";
+    return 1;
+  }
 
   char * result_str = nullptr;
   try {
