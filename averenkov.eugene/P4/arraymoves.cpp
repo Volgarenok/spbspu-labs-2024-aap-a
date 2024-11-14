@@ -27,12 +27,12 @@ char* averenkov::stringInput(std::istream& in, char* str)
     if (size == max)
     {
       char* str_new = reinterpret_cast<char*> (malloc(((size * n) + 1) * sizeof(char)));
-      str_new[size * n] = '\0';
       if(str_new == nullptr)
       {
         free(str_new);
         return str;
       }
+      str_new[size * n] = '\0';
       str = averenkov::newArray(str, str_new);
       max *= n;
       str[size] = c;
