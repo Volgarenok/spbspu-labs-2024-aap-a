@@ -77,14 +77,7 @@ int main(int argc, char ** argv)
     }
   }
   int t1[10000] = {0};
-  if (way == 2)
-  {
-    mtx = t;
-  }
-  else
-  {
-    mtx = t1;
-  }
+  mtx = (way == 2) ? t : t1;
   if (!karnauhova::input_matrix(input, mtx, m, n, read))
   {
     std::cerr << "File text is invalid\n";
