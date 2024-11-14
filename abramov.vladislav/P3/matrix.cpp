@@ -52,37 +52,37 @@ void abramov::transformMatrix(int *mtx, size_t count)
   size_t amount = count * count;
   int value = 0;
   size_t counter = 0;
-  while(counter < amount)
+  while (counter < amount)
   {
-    for(int i = --iBegin; i >= iEnd; --i)
+    for (int i = --iBegin; i >= iEnd; --i)
     {
-    ++counter;
-    mtx[i * count + jBegin] -= ++value;
+      ++counter;
+      mtx[i * count + jBegin] -= ++value;
     }
-    for(int i = ++jBegin; i < jEnd; ++i)
+    for (int i = ++jBegin; i < jEnd; ++i)
     {
-    ++counter;
-    mtx[iEnd * count + i] -= ++value;
+      ++counter;
+      mtx[iEnd * count + i] -= ++value;
     }
-    for(int i = ++iEnd; i < iBegin; ++i)
+    for (int i = ++iEnd; i < iBegin; ++i)
     {
-    ++counter;
-    mtx[i * count + jEnd - 1] -= ++value;
+      ++counter;
+      mtx[i * count + jEnd - 1] -= ++value;
     }
-    for(int i = --jEnd; i >= jBegin; --i)
+    for (int i = --jEnd; i >= jBegin; --i)
     {
-    ++counter;
-    mtx[iBegin * count + i] -= ++value;
+      ++counter;
+      mtx[iBegin * count + i] -= ++value;
     }
   }
 }
 
-void abramov::outputMatrix(std::ostream &out, int *mtx, size_t m)
+void abramov::outputMatrix(std::ostream &out, const int *mtx, size_t m)
 {
-  out << m << " " << m << " ";
+  out << m << " " << m;
   for (size_t i = 0; i < m * m; ++i)
   {
-    out << mtx[i] << " ";
+    out << " " << mtx[i];
   }
   out << "\n";
 }
