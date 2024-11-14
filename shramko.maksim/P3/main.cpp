@@ -63,7 +63,7 @@ int main(int argc, char** argv)
   }
   else if (argv[1][0] == '1')
   {
-    if(!shramko::inputMtrx(input, mtrx, sizeMtrx))
+    if (!shramko::inputMtrx(input, mtrx, sizeMtrx))
     {
       std::cerr << "Sta error!\n";
       return 2;

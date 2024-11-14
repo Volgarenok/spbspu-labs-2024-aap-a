@@ -6,7 +6,7 @@ size_t shramko::countColoumnsWithNonRepeatingNumbers(const int* mtrx, size_t cnt
   size_t answer = 0;
   for (size_t i = 0; i < cnt_col; ++i)
   {
-    if(!(shramko::isNonRepeatingNumbers(mtrx, i, cnt_col, cnt_row)))
+    if (!(shramko::isNonRepeatingNumbers(mtrx, i, cnt_col, cnt_row)))
     {
       break;
     }
