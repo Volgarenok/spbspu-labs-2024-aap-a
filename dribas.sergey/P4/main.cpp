@@ -15,14 +15,15 @@ int main()
   }
   arr[arrsize - 1] = '\0';
   std::noskipws(std::cin);
-  if (std::cin >> letter == '\n') {
+  std::cin >>letter;
+  if (letter == '\n') {
     std::cout << '0';
     return 0;
   }
   size_t i = 1;
   for (; letter != '\n'; i += 1) {
     if (i == arrsize) {
-      arrsize += 1;
+      arrsize += 10;
       arr = dribas::changeArr(arr, arrsize);
       if (arr == nullptr) {
         std::cerr << "Error with memory!!\n";
@@ -37,7 +38,7 @@ int main()
       return 1;
     }
   }
-  arr[i] = '\0';
+  arr[i+1] = '\0';
   std::cout << dribas::checkChar(arr);
   std::cout << '\n';
   free(arr);

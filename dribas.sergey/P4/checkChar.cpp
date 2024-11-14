@@ -14,8 +14,8 @@ size_t dribas::checkChar(const char* str)
   for (size_t i = 1; str[i] != '\0'; i += 1) {
     if (isalpha(str[i])) {
       bool check = true;
-      for (int j = i - 1; j > 0; j -= 1) {
-        if (str[i] == str[j] || !(isalpha(str[i]))) {
+      for (int j = i - 1; j > -1; j -= 1) {
+        if (str[i] == str[j]) {
           check = false;
           break;
         }
