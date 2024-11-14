@@ -17,7 +17,7 @@ int main(int argc, char ** argv)
     std::cerr << "Not enough arguments" << "\n";
     return 1;
   }
-  if (argv[1] == '\0' || (argv[1] != '1' && argv[1] != '2'))
+  if (argv[1][1] != '\0' || (argv[1][0] != '1' && argv[1][0] != '2'))
   {
     std::cerr << "false first parameter" << "\n";
     return 1;
@@ -57,6 +57,7 @@ int main(int argc, char ** argv)
   else
   {
     matrix = fixed_matrix;
+  }
   if (!finaev::input_matrix(input, matrix, size_matrix))
   {
     std::cerr << "Fail input" << "\n";

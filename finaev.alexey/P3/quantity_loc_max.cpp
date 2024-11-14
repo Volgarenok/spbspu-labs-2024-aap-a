@@ -34,6 +34,6 @@ int finaev::quantity_loc_max(const int* matrix, size_t strk, size_t stl)
         }
       }
     }
-    return res;
   }
+  return res;
 }
