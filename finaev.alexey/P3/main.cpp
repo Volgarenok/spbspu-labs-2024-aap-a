@@ -63,7 +63,7 @@ int main(int argc, char ** argv)
     std::cerr << "Fail input" << "\n";
     return 2;
   }
-  output << finaev::quantity_loc_max(matrix, strk, stl);
+  output << finaev::quantity_loc_max(matrix, strk, stl) << "\n";
   delete[] matrix;
   return 0;
 }
