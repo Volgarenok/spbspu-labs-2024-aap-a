@@ -53,6 +53,7 @@ int main()
 
   if (!std::cin){
     std::cerr << "Not input\n";
+    delete[] first_str;
     return 1;
   }
 
