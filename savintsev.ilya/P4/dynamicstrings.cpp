@@ -48,6 +48,7 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
   }
   if (!in.good())
   {
+    delete[] t;
     return nullptr;
   }
   t[i - 1] = '\0';
