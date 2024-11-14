@@ -1,7 +1,8 @@
 #include <stdexcept>
 #include <iostream>
 #include <cmath>
-#include "func.hpp"
+#include "countExpNegPow2x.h"
+#include "output.h"
 
 void asafov::output(double left, double right, double step, size_t numberMax, double error)
 {

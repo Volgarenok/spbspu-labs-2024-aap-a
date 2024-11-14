@@ -1,5 +1,5 @@
 #include <iostream>
-#include "func.hpp"
+#include "output.h"
 
 int main()
 {

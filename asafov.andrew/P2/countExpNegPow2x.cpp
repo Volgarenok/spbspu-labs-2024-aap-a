@@ -1,5 +1,6 @@
 #include <stdexcept>
-#include "func.hpp"
+#include "countAbsoluteError.h"
+#include "countExpNegPow2x.h"
 
 double asafov::countExpNegPow2x(double x, size_t k, double error)
 {

@@ -1,4 +1,4 @@
-#include "func.hpp"
+#include "countAbsoluteError.h"
 
 double asafov::countAbsoluteError(double x, size_t k)
 {
