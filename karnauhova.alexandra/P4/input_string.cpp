@@ -12,6 +12,7 @@ char* karnauhova::input_string(std::istream& in, char end)
   in >> x;
   if (x == end)
   {
+    str = nullptr;
     return str;
   }
   str[0] = x;
@@ -28,7 +29,6 @@ char* karnauhova::input_string(std::istream& in, char end)
         }
         free(str);
         str = str1;
-        free(str1);
       }
       str[i] = x;
       i++;
