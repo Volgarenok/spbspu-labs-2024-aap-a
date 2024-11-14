@@ -20,6 +20,7 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
     return nullptr;
   }
   size_t i = 0;
+  char buffer = 'a';
   while (in.good())
   {
     if (i == (capacity - 1))
@@ -38,11 +39,16 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
         return nullptr;
       }
     }
-    in >> std::noskipws >> t[i++];
-    if (t[i - 1] == '\n')
+    in >> std::noskipws >> buffer;
+    t[i++] = buffer;
+    if (buffer == '\n')
     {
       break;
     }
+  }
+  if (!in.good())
+  {
+    return nullptr;
   }
   t[i - 1] = '\0';
   return t;
