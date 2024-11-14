@@ -22,13 +22,9 @@ int main()
         return 1;
       }
       str = duhanina::createNewArray(str, newStr);
+      str[size] = '\0';
     }
     str[index++] = c;
-  }
-  if(!std::cin)
-  {
-    std::cerr << "Error input\n";
-    return 1;
   }
   str[index] = '\0';
   if(str[0] == '\0')
