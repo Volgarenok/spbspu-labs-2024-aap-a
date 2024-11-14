@@ -46,7 +46,6 @@ int main(int argc, char ** argv)
   int * d_mtx = nullptr;
   if (argv[1][0] == '2')
   {
-
     try
     {
       mtx = new int[columns * rows];
@@ -55,11 +54,10 @@ int main(int argc, char ** argv)
     catch (const std::bad_alloc &e)
     {
       std::cout << "Not enough memory" << "\n";
-      delete[] mtx;
+      delete[] d_mtx;
       return 1;
     }
   }
-  else 
 
   if (!zakirov::input_mtx(file_input, mtx, columns, rows))
   {
