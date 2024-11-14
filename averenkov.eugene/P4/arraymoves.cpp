@@ -53,6 +53,14 @@ char* averenkov::stringInput(std::istream& in, char* str)
 
 char* averenkov::latTwo(const char* str1, const char* str2)
 {
+  if (str1 == nullptr)
+  {
+    return nullptr;
+  }
+  if (str2 == nullptr)
+  {
+    return nullptr;
+  }
   int found[26] = {0};
   size_t length = 0;
   for (size_t i = 0; str1[i] != '\0'; i++)
