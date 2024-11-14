@@ -10,7 +10,7 @@ char * maslov::inputLine(std::istream & in, const char stop)
   in >> std::noskipws;
   while (in >> ch && ch != stop)
   {
-    if (length >= capacity - 1)
+    if (length == capacity - 1)
     {
       capacity *= 2;
       char * newString = nullptr;
