@@ -10,7 +10,7 @@ double asafov::countExpNegPow2x(double x, size_t k, double error)
     result += ch;
     ch *= (-1) * x * x / i;
   }
-  if (countAbsoluteError(x, k) > error)
+  if (ch > error)
   {
     throw std::logic_error("math-error");
   }
