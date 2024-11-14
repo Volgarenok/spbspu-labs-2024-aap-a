@@ -3,16 +3,7 @@
 #include <iomanip>
 #include <cstring>
 #include "taylor.h"
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> averenkov.eugene/P4
-=======
-=======
-
->>>>>>> averenkov.eugene/P3
->>>>>>> averenkov.eugene/P3
 int main()
 {
   constexpr double step = 0.05;
