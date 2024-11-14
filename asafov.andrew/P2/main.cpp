@@ -26,6 +26,6 @@ int main()
     std::cerr << "incorrect borders" << '\n';
     return 1;
   }
-  asafov::output(left, right, step, numberMax);
+  asafov::output(left, right, step, numberMax, error);
   return 0;
 }

@@ -24,7 +24,7 @@ double value = 0;
   {
     std::cout << "<MATH ERROR>";
   }
-  (right < 0) ? (std::cout << std::fixed << "|") : (std::cout << std::fixed << "| ");
+  (value < 0) ? (std::cout << std::fixed << "|") : (std::cout << std::fixed << "| ");
   std::cout << std::fixed << right << " | " << value << " | " << std::exp(-1.0 * right * right) << " | \n";
 }
 
