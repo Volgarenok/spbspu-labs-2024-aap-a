@@ -4,7 +4,7 @@
 #include <cmath>
 #include "countExpNegPow2x.h"
 
-void asafov::makeLine(int a, char b)
+void makeLine(int a, char b)
 {
   for (int i = 0; i < a; i++)
   {
