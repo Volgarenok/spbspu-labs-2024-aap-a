@@ -1,8 +1,8 @@
+#include "matrixAutoInitiallization.hpp"
 #include <fstream>
 #include <stdexcept>
-#include "func.hpp"
 
-void matrixAutoInitialization(int* mtx, char* input, int& n, int& m)
+void asafov::matrixAutoInitialization(int* mtx, char* input, int& n, int& m)
 {
   std::ifstream fin(input);
   fin >> n;

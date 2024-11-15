@@ -1,8 +1,8 @@
+#include "matrixDynamicInitiallization.hpp"
 #include <fstream>
 #include <stdexcept>
-#include "func.hpp"
 
-void matrixDynamicInitialization(int* mtx, char* input, int& n, int& m)
+void asafov::matrixDynamicInitialization(int* mtx, char* input, int& n, int& m)
 {
   std::ifstream fin(input);
   fin >> n;

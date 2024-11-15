@@ -1,5 +1,9 @@
 #include <iostream>
 #include <fstream>
+#include <stdexcept>
+#include "matrixAutoInitiallization.hpp"
+#include "matrixDynamicInitiallization.hpp"
+
 #include "func.hpp"
 
 int main(int argc, char** argv)
@@ -18,14 +22,12 @@ int main(int argc, char** argv)
     int a[2] = {};
     try
     {
-      matrixAutoInitialization(mtx, argv[1], a[0], a[1]);
+      asafov::matrixAutoInitialization(mtx, argv[1], a[0], a[1]);
     }
     catch (std::logic_error)
     {
       return 2;
     }
-    matrixHandling(mtx, a[0], a[1]);
-    matrixPush(mtx, argv[2], a[0], a[1]);
     matrixPush(matrixHandlingSanctions(mtx, a[0], a[1]), argv[2]);
   }
   else if (argv[0] == "2")
@@ -34,15 +36,13 @@ int main(int argc, char** argv)
     int a[2] = {};
     try
     {
-      matrixDynamicInitialization(mtx, argv[1], a[0], a[1]);
+      asafov::matrixDynamicInitialization(mtx, argv[1], a[0], a[1]);
     }
     catch (std::logic_error)
     {
       delete[] mtx;
       return 2;
     }
-    matrixHandling(mtx, a[0], a[1]);
-    matrixPush(mtx, argv[2], a[0], a[1]);
     matrixPush(matrixHandlingSanctions(mtx, a[0], a[1]), argv[2]);
     delete[] mtx;
   }
