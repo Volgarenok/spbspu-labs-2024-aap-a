@@ -61,6 +61,10 @@ char* averenkov::latTwo(const char* str1, const char* str2)
   size_t length = 0;
   for (size_t i = 0; str1[i] != '\0'; i++)
   {
+    if(str1[i] == nullptr)
+    {
+      return nullptr;
+    }
     char ch = std::tolower(str1[i]);
     if (ch >= 'a' && ch <= 'z')
     {
