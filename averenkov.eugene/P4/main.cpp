@@ -33,20 +33,29 @@ int main()
   {
     free(str1);
     free(str2);
-    std::cerr << "Error: " << e.what() << "\n";
+    std::cerr << "Error" << e.what() << "\n";
     return 1;
   }
   char* result = nullptr;
-  result = averenkov::latTwo(str1, str2);
-  if (result == nullptr)
+  try
   {
+    result = averenkov::latTwo(str1, str2);
+    if (!result)
+    {
+      std::cerr << "Out of memory in latTwo\n";
+      free(str1);
+      free(str2);
+      return 1;
+    }
+    std::cout << result << "\n";
     free(result);
-    std::cerr << "Out of memory\n";
-    return 1;
   }
-  std::cout << result << "\n";
+  catch (const std::bad_alloc& e)
+  {
+    std::cerr << "error\n";
+  }
   free(str1);
   free(str2);
-  free(result);
   return 0;
 }
+
