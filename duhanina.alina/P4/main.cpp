@@ -1,6 +1,6 @@
-#include "functionStr.h"
 #include <iostream>
 #include <cstddef>
+#include "actionsStr.h"
 
 int main()
 {

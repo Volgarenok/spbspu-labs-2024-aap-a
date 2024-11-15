@@ -1,5 +1,5 @@
-#ifndef FUNCTIONSTR_H
-#define FUNCTIONSTR_H
+#ifndef ACTIONSSTR_H
+#define ACTIONSSTR_H
 #include <iostream>
 #include <cstddef>
 
