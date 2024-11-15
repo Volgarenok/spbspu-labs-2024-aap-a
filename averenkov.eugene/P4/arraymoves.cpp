@@ -57,6 +57,14 @@ char* averenkov::latTwo(const char* str1, const char* str2)
   {
     return nullptr;
   }
+  if (strlen(str1) == 0 || strlen(str2) == 0) {
+    char* result = static_cast<char*>(malloc(1));
+    if (!result) {
+        return nullptr;
+    }
+    result[0] = '\0';
+    return result;
+  }
   int found[26] = {0};
   size_t length = 0;
   for (size_t i = 0; str1[i] != '\0'; ++i)
