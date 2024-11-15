@@ -53,23 +53,24 @@ char* averenkov::stringInput(std::istream& in, char* str)
   return str;
 }
 
-char* averenkov::latTwo(const char* str1, const char* str2) {
-    if (!str1 || !str2) {
-        return nullptr;
+char* averenkov::latTwo(const char* str1, const char* str2)
+{
+  if (!str1 || !str2)
+  {
+    return nullptr;
+  }
+  if (std::strlen(str1) == 0 || std::strlen(str2) == 0)
+  {
+    char* result = static_cast<char*>(malloc(1));
+    if (!result)
+    {
+      return nullptr;
     }
-
-    if (*str1 == '\0' || *str2 == '\0') {
-        char* result = static_cast<char*>(malloc(1));
-        if (!result) {
-            return nullptr;
-        }
-        result[0] = '\0';
-        return result;
-    }
-
+    result[0] = '\0';
+    return result;
+  }
     int found[26] = {0};
     size_t length = 0;
-
     for (size_t i = 0; str1[i] != '\0'; ++i) {
         char ch = str1[i];
         if (std::isalpha(static_cast<unsigned char>(ch))) {
