@@ -15,7 +15,8 @@ int main(int argc, char ** argv)
     std::cerr << "Too many arguments\n";
     return 1;
   }
-  if (std::strcmp(argv[1], "1") != 0 && std::strcmp(argv[1], "2") != 0)
+  int num = std::atoi(argv[1]);
+  if (num == 1 && num == 2)
   {
     std::cerr << "First parameter is out of range or not a number\n";
     return 1;
@@ -28,8 +29,9 @@ int main(int argc, char ** argv)
   std::ofstream output(argv[3]);
 
   int * arr = nullptr;
-  int v[10000];
-  if (std::strcmp(argv[1], "1") == 0)
+  int v[10000] = {};
+  int * dynamicArr = nullptr;
+  if (num == 1)
   {
     arr = v;
   }
@@ -37,21 +39,19 @@ int main(int argc, char ** argv)
   {
     try
     {
-      arr = new int[m * n];
+      dynamicArr = new int[m * n];
     }
-    catch(const std::bad_alloc & e)
+    catch (const std::bad_alloc & e)
     {
       std::cerr << "Out of memory\n";
       return 2;
     }
+    arr = dynamicArr;
   }
   if (!mozhegova::inputMatrix(input, arr, m, n, read))
   {
     std::cerr << "Invalid matrix element\n";
-    if (std::strcmp(argv[1], "2") == 0)
-    {
-      delete[] arr;
-    }
+    delete[] dynamicArr;
     return 2;
   }
   if (mozhegova::uppTriMtx(arr, m, n))
@@ -62,8 +62,5 @@ int main(int argc, char ** argv)
   {
     output << "false\n";
   }
-  if (std::strcmp(argv[1], "2") == 0)
-  {
-    delete[] arr;
-  }
+  delete[] dynamicArr;
 }

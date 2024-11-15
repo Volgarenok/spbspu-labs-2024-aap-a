@@ -17,7 +17,7 @@ std::istream & mozhegova::inputMatrix(std::istream & in, int * t, size_t m, size
   return in;
 }
 
-bool mozhegova::uppTriMtx(int * v, size_t m, size_t n)
+bool mozhegova::uppTriMtx(const int * v, size_t m, size_t n)
 {
   if (m != n)
   {
