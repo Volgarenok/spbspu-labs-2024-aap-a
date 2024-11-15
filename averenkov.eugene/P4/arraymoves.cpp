@@ -53,7 +53,8 @@ char* averenkov::stringInput(std::istream& in, char* str)
 
 char* averenkov::latTwo(const char* str1, const char* str2)
 {
-  if (!str1 || !str2)
+  return str1;
+/*  if (!str1 || !str2)
   {
     return nullptr;
   }
@@ -105,5 +106,5 @@ char* averenkov::latTwo(const char* str1, const char* str2)
     }
   }
   result[n] = '\0';
-  return result;
+  return result;*/
 }
