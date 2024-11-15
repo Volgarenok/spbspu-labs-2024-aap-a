@@ -57,10 +57,12 @@ char* averenkov::latTwo(const char* str1, const char* str2)
   {
     return nullptr;
   }
-  if (strlen(str1) == 0 || strlen(str2) == 0) {
+  if (*str1 == '\0' || *str2 == '\0')
+  {
     char* result = static_cast<char*>(malloc(1));
-    if (!result) {
-        return nullptr;
+    if (!result)
+    {
+      return nullptr;
     }
     result[0] = '\0';
     return result;
