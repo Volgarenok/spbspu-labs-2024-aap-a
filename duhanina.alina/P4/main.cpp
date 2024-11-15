@@ -30,6 +30,7 @@ int main()
       }
       newStr = duhanina::createNewArray(str, newStr);
       str = newStr;
+      delete[] newStr;
     }
     str[index++] = c;
   }
