@@ -2,7 +2,7 @@
 #include <iostream>
 #include <memory>
 #include <cstddef>
-char* getLine(size_t& capacity)
+char* nikonov::getLine(size_t& capacity)
 {
   char* line = reinterpret_cast<char*>(malloc(capacity));
   if (line == nullptr)
@@ -36,7 +36,7 @@ char* getLine(size_t& capacity)
   std::skipws(std::cin);
   return line;
 }
-char* reallocate(char* line, size_t& capacity)
+char* nikonov::reallocate(char* line, size_t& capacity)
 {
   capacity = capacity * 2;
   char* newline = reinterpret_cast<char*>(malloc(capacity));
@@ -58,7 +58,7 @@ char* reallocate(char* line, size_t& capacity)
   free(line);
   return newline;
 }
-char* reallocate(char* line, size_t& capacity, size_t addSize)
+char* nikonov::reallocate(char* line, size_t& capacity, size_t addSize)
 {
   capacity = capacity + addSize;
   char* newline = reinterpret_cast<char*>(malloc(capacity));

@@ -1,6 +1,8 @@
 #ifndef LINEOUPUT_HPP
 #define LINEOUPUT_HPP
-#include <iostream>
 #include <cstddef>
-void printLine(char* line);
-#endif
+namespace nikonov
+{
+  void printLine(const char* line);
+  #endif
+}

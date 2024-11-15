@@ -1,9 +1,7 @@
 #include "formline.hpp"
 #include <cstddef>
 #include <cctype>
-#include <iostream>
-#include <exception>
-size_t cntDgt(char* str)
+size_t nikonov::cntDgt(const char* str)
 {
   size_t cnt = 0;
   size_t iter = 0;
@@ -17,7 +15,7 @@ size_t cntDgt(char* str)
   }
   return cnt;
 }
-void add_digit_symb(char* firstStr, char* secondStr)
+void nikonov::add_digit_symb(char* firstStr, const char* secondStr)
 {
   size_t iter1 = 0;
   while (firstStr[iter1] != '\0')

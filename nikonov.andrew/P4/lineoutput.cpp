@@ -1,6 +1,6 @@
 #include "lineoutput.hpp"
 #include <iostream>
-void printLine(char* line)
+void nikonov::printLine(const char* line)
 {
   size_t iter = 0;
   while (line[iter] != '\0')
