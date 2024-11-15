@@ -51,7 +51,7 @@ char* averenkov::stringInput(std::istream& in, char* str)
   return str;
 }
 
-char* averenkov::latTwo(const char* str1, const char* str2)
+char* averenkov::latTwo(char* str1, char* str2)
 {
   if (!str1 || !str2)
   {
@@ -61,10 +61,6 @@ char* averenkov::latTwo(const char* str1, const char* str2)
   size_t length = 0;
   for (size_t i = 0; str1[i] != '\0'; i++)
   {
-    if(str1[i] == nullptr)
-    {
-      return nullptr;
-    }
     char ch = std::tolower(str1[i]);
     if (ch >= 'a' && ch <= 'z')
     {
