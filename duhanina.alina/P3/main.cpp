@@ -53,7 +53,7 @@ int main(int argc, char ** argv)
   {
     try
     {
-      matrix = new int[m * n];
+      dyn_mtx = new int[m * n];
       matrix = dyn_mtx;
     }
     catch (const std::bad_alloc & e)
