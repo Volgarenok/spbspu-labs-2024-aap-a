@@ -6,26 +6,37 @@
 int main()
 {
   size_t max = 10;
-  char* str1 = reinterpret_cast<char*> (malloc(sizeof(char) * (max + 1)));
-  char* str2 = reinterpret_cast<char*> (malloc(sizeof(char) * (max + 1)));
-  str1 = averenkov::stringInput(std::cin, str1);
-  str2 = averenkov::stringInput(std::cin, str2);
-  if (str1 == nullptr)
+  char* str1 = nullptr;
+  char* str2 = nullptr;
+  try
   {
-    if(str2 == nullptr)
+    str1 = reinterpret_cast<char*> (malloc(sizeof(char) * (max + 1)));
+    str2 = reinterpret_cast<char*> (malloc(sizeof(char) * (max + 1)));
+    str1 = averenkov::stringInput(std::cin, str1);
+    str2 = averenkov::stringInput(std::cin, str2);
+    if (str1 == nullptr)
+    {
+      if(str2 == nullptr)
+      {
+        free(str2);
+      }
+      free(str1);
+      std::cerr << "Out of memory\n";
+      return 1;
+    }
+    if (str2 == nullptr)
     {
       free(str2);
+      std::cerr << "Out of memory\n";
+      return 1;
     }
-    free(str1);
-    std::cerr << "Out of memory\n";
-    return 1;
   }
-  if (str2 == nullptr)
+  catch (const std::bad_alloc &e)
   {
-    free(str2);
-    std::cerr << "Out of memory\n";
+    std::cerr << "Error: " << e.what() << "\n";
     return 1;
   }
+
   char* result = averenkov::latTwo(str1, str2);
   if (result == nullptr)
   {
