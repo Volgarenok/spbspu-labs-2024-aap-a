@@ -8,7 +8,7 @@ int main()
   char* str = nullptr;
   try
   {
-    char* str = new char[size + 1];
+    str = new char[size + 1];
   }
   catch (const std::bad_alloc& e)
   {
@@ -26,7 +26,7 @@ int main()
       char* newStr = nullptr;
       try
       {
-        char* newStr = new char[size + 1];
+        newStr = new char[size + 1];
       }
       catch (const std::bad_alloc& e)
       {
