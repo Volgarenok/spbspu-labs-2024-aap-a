@@ -53,8 +53,7 @@ char* averenkov::stringInput(std::istream& in, char* str)
 
 char* averenkov::latTwo(const char* str1, const char* str2)
 {
-  return str1;
-/*  if (!str1 || !str2)
+  if (!str1 || !str2)
   {
     return nullptr;
   }
@@ -70,20 +69,26 @@ char* averenkov::latTwo(const char* str1, const char* str2)
   }
   int found[26] = {0};
   size_t length = 0;
-  for (size_t i = 0; str1[i] != '\0'; ++i)
-  {
-    char ch = std::tolower(static_cast<unsigned char>(str1[i]));
-    if (ch >= 'a' && ch <= 'z')
+  for (size_t i = 0; str1[i] != '\0'; ++i) {
+    char ch = str1[i];
+    if (std::isalpha(static_cast<unsigned char>(ch)))
     {
-      found[ch - 'a'] = 1;
+      ch = std::tolower(static_cast<unsigned char>(ch));
+      if (ch >= 'a' && ch <= 'z')
+      {
+        found[ch - 'a'] = 1;
+      }
     }
   }
-  for (size_t i = 0; str2[i] != '\0'; i++)
-  {
-    char ch = std::tolower(static_cast<unsigned char>(str2[i]));
-    if (ch >= 'a' && ch <= 'z')
+  for (size_t i = 0; str2[i] != '\0'; ++i) {
+    char ch = str2[i];
+    if (std::isalpha(static_cast<unsigned char>(ch)))
     {
-      found[ch - 'a'] = 1;
+      ch = std::tolower(static_cast<unsigned char>(ch));
+      if (ch >= 'a' && ch <= 'z')
+      {
+        found[ch - 'a'] = 1;
+      }
     }
   }
   for (int i = 0; i < 26; i++) {
@@ -106,5 +111,5 @@ char* averenkov::latTwo(const char* str1, const char* str2)
     }
   }
   result[n] = '\0';
-  return result;*/
+  return result;
 }
