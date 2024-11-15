@@ -59,26 +59,17 @@ char* averenkov::latTwo(const char* str1, const char* str2)
   }
   int found[26] = {0};
   size_t length = 0;
-  for (size_t i = 0; str1[i] != '\0'; i++)
+  for (size_t i = 0; str1[i] != '\0'; ++i)
   {
-    if (str1[i] == '\0')
-    {
-      std::cout << "BILO";
-    }
-    char ch = std::tolower(str1[i]);
+    char ch = std::tolower(static_cast<unsigned char>(str1[i]));
     if (ch >= 'a' && ch <= 'z')
     {
       found[ch - 'a'] = 1;
     }
   }
-
   for (size_t i = 0; str2[i] != '\0'; i++)
   {
-    if (str1[i] == '\0')
-    {
-      std::cout << "BILO";
-    }
-    char ch = std::tolower(str2[i]);
+    char ch = std::tolower(static_cast<unsigned char>(str2[i]));
     if (ch >= 'a' && ch <= 'z')
     {
       found[ch - 'a'] = 1;
