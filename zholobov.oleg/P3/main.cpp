@@ -15,7 +15,7 @@ int main(int argc, char** argv)
   long num = 0;
   try {
     char* endptr = nullptr;
-    num = std::strtol(argv[1], &endptr, 10);
+    num = std::strtol(argv[1], std::addressof(endptr), 10);
     if (*endptr != 0) {
       throw std::runtime_error("Not a number");
     }
@@ -39,28 +39,30 @@ int main(int argc, char** argv)
       throw std::runtime_error("Wrong data in input file");
     }
     std::ofstream output_file(argv[3]);
+    int matrix[10000] = {0};
+    int* matrix_ptr = nullptr;
     size_t elements_number = rows * cols;
     int result = 0;
-    if (elements_number == 0) {
-      output_file << "0";
-    } else {
+    if (elements_number > 0) {
       if (num == 1) {
-        int matrix[10000] = {0};
-        zholobov::read_matrix(input_file, matrix, elements_number);
-        result = zholobov::calc_min_sum_mdg(matrix, rows, cols);
+        matrix_ptr = matrix;
       } else if (num == 2) {
-        int* matrix = new int[elements_number]{};
-        try {
-          zholobov::read_matrix(input_file, matrix, elements_number);
-        } catch (const std::exception&) {
-          delete[] matrix;
-          throw;
-        }
-        result = zholobov::calc_min_sum_mdg(matrix, rows, cols);
-        delete[] matrix;
+        matrix_ptr = new int[elements_number]{};
       }
-      output_file << result;
+      try {
+        zholobov::read_matrix(input_file, matrix_ptr, elements_number);
+      } catch (const std::exception&) {
+        if (num == 2) {
+          delete[] matrix_ptr;
+        }
+        throw;
+      }
+      result = zholobov::calc_min_sum_mdg(matrix_ptr, rows, cols);
+      if (num == 2) {
+        delete[] matrix_ptr;
+      }
     }
+    output_file << result;
   } catch (const std::exception& e) {
     std::cerr << "Exception: " << e.what() << "\n";
     return 2;
