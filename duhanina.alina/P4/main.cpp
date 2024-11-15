@@ -5,12 +5,15 @@
 int main()
 {
   size_t size = 20;
-  char* str = new char[size + 1];
-  if (str == nullptr)
+  char* str = nullptr;
+  try
   {
-    delete[] str;
-    std::cerr << "Error memory\n";
-    return 1;
+    char* str = new char[size + 1];
+  }
+  catch (const std::bad_alloc& e)
+  {
+  std::cerr << "Error memory\n";
+  return 1;
   }
   str[size] = '\0';
   char c = '\0';
@@ -20,7 +23,16 @@ int main()
     if (index >= (size - 1))
     {
       size *= 2;
-      char* newStr = new char[size + 1];
+      char* newStr = nullptr;
+      try
+      {
+        char* newStr = new char[size + 1];
+      }
+      catch (const std::bad_alloc& e)
+      {
+        std::cerr << "Error memory\n";
+        return 1;
+      }
       if (newStr == nullptr)
       {
         delete[] str;
@@ -30,7 +42,6 @@ int main()
       }
       newStr = duhanina::createNewArray(str, newStr);
       str = newStr;
-      delete[] newStr;
     }
     str[index++] = c;
   }
