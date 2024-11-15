@@ -18,11 +18,3 @@ std::istream & gavrilova::input_matrix(std::istream & in, int * mtx, size_t m, s
   }
   return in;
 }
-int gavrilova::output_matrix(std::ostream & out, std::istream & in, const int * mtx, size_t read, size_t m, size_t n)
-{
-  if (in && read == m * n) {
-    out << gavrilova::isUpperTriangMtx(mtx, m, n) << "\n";
-    return 1;
-  }
-  return 0;
-}
