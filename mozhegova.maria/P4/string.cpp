@@ -44,27 +44,6 @@ char * mozhegova::changeSize(char * nowstr, size_t length)
   return newstr;
 }
 
-// char * mozhegova::spcRmv(char * str)
-// {
-//   size_t i = 0;
-//   while (str[i] != '\0')
-//   {
-//     if ((std::isspace(str[i]) && std::isspace(str[i + 1])) ||
-//     std::isspace(str[0]) || (std::isspace(str[i]) && str[i + 1] == '\0'))
-//     {
-//       for (size_t j = i; str[j] != '\0'; j++)
-//       {
-//         str[j] = str[j + 1];
-//       }
-//     }
-//     else
-//     {
-//       i++;
-//     }
-//   }
-//   return str;
-// }
-
 char * mozhegova::spcRmv(char * str)
 {
   size_t i = 0;
