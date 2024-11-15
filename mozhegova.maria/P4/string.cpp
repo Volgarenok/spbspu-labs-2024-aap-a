@@ -5,14 +5,7 @@ char * mozhegova::inputString(std::istream & in, char stop)
 {
   size_t length = 10;
   char * str = nullptr;
-  try
-  {
-    str = new char [length + 1];
-  }
-  catch(const std::bad_alloc & e)
-  {
-    throw;
-  }
+  str = new char [length + 1];
   size_t size = 0;
   char next = '\0';
   std::noskipws(in);
@@ -51,23 +44,47 @@ char * mozhegova::changeSize(char * nowstr, size_t length)
   return newstr;
 }
 
+// char * mozhegova::spcRmv(char * str)
+// {
+//   size_t i = 0;
+//   while (str[i] != '\0')
+//   {
+//     if ((std::isspace(str[i]) && std::isspace(str[i + 1])) ||
+//     std::isspace(str[0]) || (std::isspace(str[i]) && str[i + 1] == '\0'))
+//     {
+//       for (size_t j = i; str[j] != '\0'; j++)
+//       {
+//         str[j] = str[j + 1];
+//       }
+//     }
+//     else
+//     {
+//       i++;
+//     }
+//   }
+//   return str;
+// }
+
 char * mozhegova::spcRmv(char * str)
 {
   size_t i = 0;
+  size_t j = 0;
   while (str[i] != '\0')
   {
-    if ((std::isspace(str[i]) && std::isspace(str[i + 1])) ||
-    std::isspace(str[0]) || (std::isspace(str[i]) && str[i + 1] == '\0'))
+    if (!std::isspace(str[i]))
     {
-      for (size_t j = i; str[j] != '\0'; j++)
-      {
-        str[j] = str[j + 1];
-      }
+      str[j++] = str[i];
     }
-    else
+    else if (j > 0 && !std::isspace(str[j - 1]))
     {
-      i++;
+      str[j++] = ' ';
     }
+    i++;
   }
+  if (j > 0 && std::isspace(str[j - 1]))
+  {
+    j--;
+  }
+  str[j] = '\0';
   return str;
 }
