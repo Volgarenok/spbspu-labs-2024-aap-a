@@ -1,28 +1,25 @@
-#include "functionMatrix.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <stdexcept>
+#include "actionsMatrix.h"
 
 int main(int argc, char ** argv)
 {
-  if (argc != 4)
+  if (argc > 4)
   {
-    if (argc > 4)
-    {
-      std::cerr << "Too many arguments" << "\n";
-    return 1;
-    }
-    std::cerr << "Incorrect amount of data entered" << "\n";
+    std::cerr << "Too many arguments" << "\n";
     return 1;
   }
-  for (size_t i = 0; argv[1][i] != '\0'; i++)
+  if (argc < 4)
   {
-    if (argv[1][i] < '0' || argv[1][i] > '9')
-    {
-      std::cerr << "First parameter is not a number\n";
-      return 1;
-    }
+    std::cerr << "Few arguments" << "\n";
+    return 1;
+  }
+  if (!std::isdigit(argv[1][0]) || argv[1][1] != '\0')
+  {
+    std::cerr << "First parameter is not a number\n";
+    return 1;
   }
   int num = std::atoi(argv[1]);
   if (!(num == 1 || num == 2))
@@ -45,37 +42,37 @@ int main(int argc, char ** argv)
     return 0;
   }
   size_t read = 0;
-  int * table = nullptr;
+  int stat_mtx[10000] = {};
+  int * matrix = nullptr;
+  int * dyn_mtx = nullptr;
   if (num == 1)
   {
-    int matrix[10000] = {0};
-    table = matrix;
+    matrix = stat_mtx;
   }
   else if (num == 2)
   {
     try
     {
-      table = new int[m * n];
+      matrix = new int[m * n];
+      matrix = dyn_mtx;
     }
     catch (const std::bad_alloc & e)
     {
+      delete[] dyn_mtx;
       std::cerr << "Error memory" << "\n";
       return 1;
     }
   }
-  if (!duhanina::inputMatrix(input, table, m, n, read) || read != (m * n))
+  if (!duhanina::inputMatrix(input, matrix, m, n, read) || read != (m * n))
   {
     std::cerr << "Invalid input" << "\n";
-    if (num == 2)
-    {
-      delete[] table;
-    }
+    delete[] dyn_mtx;
     return 2;
   }
-  output << duhanina::minSumMdg(table, m, n) << "\n";
+  output << duhanina::minSumMdg(matrix, m, n) << "\n";
   if (num == 2)
   {
-    delete[] table;
+    delete[] dyn_mtx;
   }
   return 0;
 }

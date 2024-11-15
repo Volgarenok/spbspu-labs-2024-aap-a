@@ -1,5 +1,5 @@
-#ifndef FUNCTIONMATRIX_H
-#define FUNCTIONMATRIX_H
+#ifndef ACTIONSMATRIX_H
+#define ACTIONSMATRIX_H
 #include <iostream>
 
 namespace duhanina
