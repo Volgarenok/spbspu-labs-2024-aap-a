@@ -38,6 +38,7 @@ char* averenkov::stringInput(std::istream& in, char* str)
       if (str == nullptr)
       {
         free (str);
+        return nullptr;
       }
       max *= n;
       str[size] = c;
