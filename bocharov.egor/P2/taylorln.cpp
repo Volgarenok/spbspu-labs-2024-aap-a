@@ -28,7 +28,7 @@ double bocharov::f2(double x, size_t k, double error)
     {
       result += next;
     }
-    else if (std::abs(sled) > error)
+    else if (std::abs(next) > error)
     {
       throw std::logic_error("Math error");
     }

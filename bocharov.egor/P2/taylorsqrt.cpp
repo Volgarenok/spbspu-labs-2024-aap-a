@@ -12,7 +12,7 @@ double bocharov::f(double x, size_t k, double error)
     throw std::logic_error("The absolute error must be a positive number.");
   }
   double next = 1;
-  double result = sled;
+  double result = next;
   for (size_t i = 2; i < k; i++)
   {
     if (i % 2 != 0)
@@ -25,7 +25,7 @@ double bocharov::f(double x, size_t k, double error)
     }
     result += next;
   }
-  if (std::abs(sled) > error)
+  if (std::abs(next) > error)
   {
     throw std::logic_error("Math error");
   }
