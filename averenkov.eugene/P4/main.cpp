@@ -37,7 +37,8 @@ int main()
     return 1;
   }
 
-  char* result = averenkov::latTwo(str1, str2);
+  char* result = nullptr;
+  result = averenkov::latTwo(str1, str2);
   if (result == nullptr)
   {
     free(result);
