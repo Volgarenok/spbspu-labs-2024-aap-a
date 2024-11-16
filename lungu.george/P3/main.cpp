@@ -10,6 +10,10 @@ int main(int argc, char* argv[]) {
     int num = 0;
     const int fixedRows = 5;
     const int fixedCols = 5;
+
+    int rows = 0;
+    int cols = 0;
+
     try {
         if (argc != 4) {
             throw std::invalid_argument("Using: " + std::string(argv[0]) + " num input output");
@@ -24,14 +28,10 @@ int main(int argc, char* argv[]) {
             throw std::runtime_error("Error during file unpacking!");
         }
 
-        int rows, cols;
         inFile >> rows >> cols;
         if (inFile.fail()) {
             throw std::runtime_error("Error reading dimensions from input file!");
         }
-
-        const int fixedRows = 5;
-        const int fixedCols = 5;
 
         if (num == 1) {
             if (rows > fixedRows || cols > fixedCols) {
@@ -42,6 +42,7 @@ int main(int argc, char* argv[]) {
             for (int i = 0; i < fixedRows; ++i) {
                 matrix[i] = new int[fixedCols]();
             }
+
             for (int i = 0; i < rows; ++i) {
                 for (int j = 0; j < cols; ++j) {
                     if (!(inFile >> matrix[i][j])) {
@@ -83,8 +84,6 @@ int main(int argc, char* argv[]) {
         }
 
     } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-
         if (matrix) {
             if (num == 1) {
                 for (int i = 0; i < fixedRows; ++i) {
@@ -100,6 +99,8 @@ int main(int argc, char* argv[]) {
         }
         return 2;
     }
+
+
     if (matrix) {
         if (num == 1) {
             for (int i = 0; i < fixedRows; ++i) {
@@ -116,4 +117,5 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
+
 
