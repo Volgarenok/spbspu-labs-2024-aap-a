@@ -34,6 +34,7 @@ int main(int argc, char* argv[]) {
             if (rows > fixedRows || cols > fixedCols) {
                 throw std::invalid_argument("For num = 1, rows and cols must be less than or equal to 5.");
             }
+
             matrix = new int*[fixedRows];
             for (int i = 0; i < fixedRows; ++i) {
                 matrix[i] = new int[fixedCols]();
@@ -41,7 +42,13 @@ int main(int argc, char* argv[]) {
 
             for (int i = 0; i < rows; ++i) {
                 for (int j = 0; j < cols; ++j) {
-                    matrix[i][j] = (i * cols) + j + 1;
+                    if (!(inFile >> matrix[i][j])) {
+                        for (int k = 0; k <= i; ++k) {
+                            delete[] matrix[k];
+                        }
+                        delete[] matrix;
+                        throw std::runtime_error("Error: Not enough data in the input file for static array!");
+                    }
                 }
             }
 
