@@ -1,6 +1,6 @@
 #include "identicalChar.h"
 #include <cstddef>
-size_t kiselev::identicalChar(char* arr1, const char* arr2)
+size_t kiselev::identicalChar(const char* arr1, const char* arr2)
 {
   if (arr1 == nullptr || arr2 == nullptr)
   {
