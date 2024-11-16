@@ -70,8 +70,12 @@ int main()
     final_str[i] = temp_str[i];
   }
   final_str[final_size] = '\0';
-
-  std::cout << final_str << "\n";
+  size_t iter = 0;
+  while (final_str[iter] != '\0')
+  {
+    std::cout << final_str[iter++];
+  }
+  std::cout << '\n';
 
   delete[] temp_str;
   delete[] str;
