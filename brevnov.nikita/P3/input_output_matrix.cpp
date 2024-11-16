@@ -12,7 +12,7 @@ int  brevnov::input_matrix(std::istream & in, int * t, size_t m, size_t n)
   return m * n;
 }
 
-void brevnov::output_matrix(std::ostream & out, int * t, size_t m, size_t n)
+void brevnov::output_matrix(std::ostream & out, const int * t, size_t m, size_t n)
 {
   out << m << " " << n;
   if ((m != 0) && (n != 0))
