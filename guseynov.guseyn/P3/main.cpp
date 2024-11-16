@@ -17,6 +17,7 @@ int main(int argc, const char** argv)
     std::cerr << e.what();
     return 1;
   }
+  constexpr int stcSize = 10000;
   size_t m = 0;
   size_t n = 0;
   std::ifstream input(argv[2]);
@@ -42,7 +43,8 @@ int main(int argc, const char** argv)
     output << "0\n";
     return 0;
   }
-  int *arr = nullptr;
+  int arrStatic[stcSize];
+  int *arr = arrStatic;
   size_t read = 0;
   if (argv[1][0] == '1')
   {
@@ -50,7 +52,6 @@ int main(int argc, const char** argv)
     {
       return 2;
     }
-    int arr[10000];
   }
   else
   {
@@ -63,14 +64,14 @@ int main(int argc, const char** argv)
       return 2;
     }
   }
-    if ((!guseynov::inputMtx(input, arr, generalLength, read)) || (read != generalLength))
+  if ((!guseynov::inputMtx(input, arr, generalLength, read)) || (read != generalLength))
+  {
+    if (argv[1][0] == '2')
     {
-      if (argv[1][0] == '2')
-      {
-        delete[] arr;
-      }
-      return 2;
+      delete[] arr;
     }
+    return 2;
+  }
   output << guseynov::searchNumLocMin(arr, generalLength) << "\n";
   if (argv[1][0] == '2')
   {
