@@ -1,5 +1,5 @@
 #include "brain.h"
 double bocharov::sumf2(double number)
 {
-  return bocharov::sqrt1_x(number) + bocharov::ln(number);
+  return bocharov::sqrtln(number, 0) + bocharov::sqrtln(number, 1);
 }
