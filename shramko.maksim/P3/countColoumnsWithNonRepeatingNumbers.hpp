@@ -5,7 +5,7 @@
 
 namespace shramko
 {
-  size_t countColoumnsWithNonRepeatingNumbers(const int * const mtrx, size_t cnt_row, size_t cnt_col);
+  size_t countColoumnsWithNonRepeatingNumbers(const int * const mtrx, const size_t cnt_row, const size_t cnt_col);
 }
 
 #endif
