@@ -1,7 +1,8 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
-#include "checkFirst.h"
+#include <new>
+#include <stdexcept>
 #include "inputMatrix.h"
 #include "saddleElement.h"
 int main(int argc, char** argv)
@@ -16,12 +17,7 @@ int main(int argc, char** argv)
     std::cerr << "To many arguments\n";
     return 1;
   }
-  else if (!kiselev::checkFirst(argv[1]))
-  {
-    std::cerr << "First parameter is not a number\n";
-    return 1;
-  }
-  else if (argv[1][1] != '\0' || (argv[1][0] != '1' && argv[1][0] != '2'))
+  else if ((argv[1][0] != '1' && argv[1][0] != '2') || argv[1][1] != '\0')
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
@@ -42,45 +38,35 @@ int main(int argc, char** argv)
     return 2;
   }
   int number_element = 0;
-  if (argv[1][0] == '1')
+  int* dynMatrix = nullptr;
+  constexpr size_t length = 100000;
+  int fixedArray[length];
+  try
   {
-    constexpr size_t length = 10000;
-    int fixed_array[length];
-    kiselev::inputMatrix(input, fixed_array, rows, columns, count_read);
+    dynMatrix = argv[1][0] == '1' ? nullptr : new int[rows * columns];
+    int* matrix = argv[1][0] == '2' ? dynMatrix : fixedArray;
+    kiselev::inputMatrix(input, matrix, rows, columns, count_read);
     if (count_read != rows * columns)
     {
-      std::cerr << "Incorrect matrix\n";
-      return 2;
+      throw std::logic_error("Incorrected matrix");
     }
-    number_element = kiselev::saddleElement(fixed_array, rows, columns);
+    number_element = kiselev::saddleElement(matrix, rows, columns);
+    const char* outFile = argv[3];
+    std::ofstream output(outFile);
+    output << "The number of elements read: " << count_read << "\n";
+    output << "Number of saddle elements: " << number_element << "\n";
+    delete[] dynMatrix;
+    return 0;
   }
-  if (argv[1][0] == '2')
+  catch (const std::bad_alloc& e)
   {
-    int* dynArray = nullptr;
-    try
-    {
-      dynArray = new int[rows * columns];
-      kiselev::inputMatrix(input, dynArray, rows, columns, count_read);
-    }
-    catch (const std::bad_alloc& e)
-    {
-      std::cerr << "Out of memory\n";
-      delete[] dynArray;
-      return 2;
-    }
-    if (count_read != rows * columns)
-    {
-      std::cerr << "Incorrect matrix\n";
-      delete[] dynArray;
-      return 2;
-    }
-    number_element = kiselev::saddleElement(dynArray, rows, columns);
-    delete[] dynArray;
+    std::cerr << "Out of memory\n";
+    return 2;
   }
-  char* outFile = argv[3];
-  std::ofstream output(outFile);
-  output << "The number of elements read: " << count_read << "\n";
-  output << "Number of saddle elements: " << number_element << "\n";
-  return 0;
+  catch (const std::logic_error& e)
+  {
+    std::cerr << "Incorrect input matrix\n";
+    delete[] dynMatrix;
+    return 2;
+  }
 }
-
