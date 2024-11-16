@@ -18,7 +18,7 @@ size_t shramko::countColoumnsWithNonRepeatingNumbers(const int* mtrx, const size
   return answer;
 }
 
-bool shramko::isNonRepeatingNumbers(const int* const mtrx, const size_t i, const size_t cnt_col, const size_t cnt_row)
+bool shramko::isNonRepeatingNumbers(const int* mtrx, const size_t i, const size_t cnt_col, const size_t cnt_row)
 {
   bool is_non_repeating = true;
   {
