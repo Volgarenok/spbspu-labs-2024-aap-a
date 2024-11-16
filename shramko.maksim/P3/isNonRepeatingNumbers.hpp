@@ -5,7 +5,7 @@
 
 namespace shramko
 {
-  bool isNonRepeatingNumbers(const int* mtrx, size_t i, size_t cnt_col, size_t cnt_row);
+  bool isNonRepeatingNumbers(const int* mtrx, size_t i, const size_t cnt_col, const size_t cnt_row);
 }
 
 #endif
