@@ -5,6 +5,7 @@
 
 int main(int argc, char** argv)
 {
+  size_t arg1 = 0;
   if (argc > 4)
   {
     std::cerr << "ERROR: Too many arguments!\n";
@@ -17,56 +18,57 @@ int main(int argc, char** argv)
   }
   else
   {
-    if (!std::atoi(argv[1]) || argv[1][1] != '\0')
+    for (size_t i = 0; argv[1][i] != '\0'; ++i)
     {
-      std::cerr << "First parameter is not an integer!\n";
-      return 1;
+      if (!std::isdigit(argv[1][i]))
+      {
+        std::cerr << "ERROR: First parameter is not an integer!\n";
+        return 1;
+      }
     }
-    else if (std::atoi(argv[1]) != 1 && std::atoi(argv[1]) != 2)
+    arg1 = atoi(argv[1]);
+    if (arg1 != 1 && arg1 != 2)
     {
-      std::cerr << "First parameter is out of range!\n";
+      std::cerr << "ERROR: First parameter is out of range!\n";
       return 1;
     }
   }
 
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
-  int m = 0, n = 0;
+  size_t m = 0, n = 0;
   input >> m >> n;
 
-  if (std::atoi(argv[1]) == 1)
+  constexpr size_t arraySize = 10000;
+  int arrayStatic[arraySize] = {};
+  int* arrayDynamic = nullptr;
+  int* array = nullptr;
+  if (arg1 == 1)
   {
-    constexpr int arraySize = 10000;
-    int array[arraySize] = {};
-    if (!aleksandrov::inputMatrix(input, array, m, n))
-    {
-      std::cerr << "ERROR: Input was incorrect!\n";
-      return 2;
-    }
-    aleksandrov::periphery(array, m, n);
-    aleksandrov::outputMatrix(output, array, m, n);
+    array = arrayStatic;
   }
-  else if (std::atoi(argv[1]) == 2)
+  else if (arg1 == 2)
   {
-    int* array = nullptr;
     try
     {
-      array = new int[m * n];
+      arrayDynamic = new int[m * n];
+      array = arrayDynamic;
     }
     catch (const std::bad_alloc& e)
     {
       std::cerr << "ERROR: Out of memory!\n";
+      delete[] arrayDynamic;
       return 1;
     }
-    if (!aleksandrov::inputMatrix(input, array, m, n))
-    {
-      std::cerr << "ERROR: Input was incorrect!\n";
-      delete[] array;
-      return 2;
-    }
-    aleksandrov::periphery(array, m, n);
-    aleksandrov::outputMatrix(output, array, m, n);
-    delete[] array;
   }
+  if (!aleksandrov::inputMatrix(input, array, m, n))
+  {
+    std::cerr << "ERROR: Input was incorrect!\n";
+    delete[] arrayDynamic;
+    return 2;
+  }
+  aleksandrov::periphery(array, m, n);
+  aleksandrov::outputMatrix(output, array, m, n);
+  delete[] arrayDynamic;
 }
 
