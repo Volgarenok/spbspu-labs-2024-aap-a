@@ -4,9 +4,9 @@
 #include <cstdlib>
 #include "process_the_matrix.hpp"
 
-int checkArguments(const int argc, const char ** argv);
+int checkArguments(const int argc, const char * const * argv);
 
-int main(const int argc, const char ** argv)
+int main(int argc, const char * const * argv)
 {
   if (checkArguments(argc, argv) == 1)
   {
@@ -65,7 +65,7 @@ int main(const int argc, const char ** argv)
   }
 }
 
-int checkArguments(const int argc, const char ** argv)
+int checkArguments(const int argc, const char * const * argv)
 {
   if (argc != 4)
   {
