@@ -40,40 +40,35 @@ int main(int argc, char ** argv)
   }
 
   int s_mtx[10000] = {0};
-  int* mtx = s_mtx;
+  int * d_mtx = nullptr;
   if (argv[1][0] == '2')
   {
     try
     {
-      mtx = new int[columns * rows];
+      d_mtx = new int[columns * rows];
     }
     catch (const std::bad_alloc &e)
     {
       std::cout << "Not enough memory" << "\n";
-      delete[] mtx;
+      delete[] d_mtx;
       return 1;
     }
   }
 
-  if (!zakirov::input_mtx(file_input, mtx, columns, rows))
+  int * u_mtx = (argv[1][0] == '1') ? s_mtx : d_mtx;
+  if (!zakirov::input_mtx(file_input, u_mtx, columns, rows))
   {
     std::cerr << "The input is incorrect" << "\n";
-    if (argv[1][0] == '2')
-    {
-      delete[] mtx;
-    }
+    delete[] d_mtx;
     return 2;
   }
 
-  zakirov::mtx_spiral_decrease(mtx, columns, rows);
+  zakirov::mtx_spiral_decrease(u_mtx, columns, rows);
   for (size_t i = 0; i < rows * columns; ++i)
   {
-    std::cout << mtx[i] << ' ';
+    std::cout << u_mtx[i] << ' ';
   }
-  std::cout << '\n';
 
-  if (argv[1][0] == '2')
-  {
-    delete[] mtx;
-  }
+  std::cout << '\n';
+  delete[] d_mtx;
 }
