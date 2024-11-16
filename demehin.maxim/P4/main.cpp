@@ -7,17 +7,18 @@ int main()
   constexpr size_t askii_size = 128;
   size_t max_size = 100;
   char* str = nullptr;
-  char* final_str = nullptr;
+  char* temp_str = nullptr;
+
 
  try
   {
     str = new char[max_size];
-    final_str = new char[askii_size];
+    temp_str = new char[askii_size];
   }
   catch (const std::bad_alloc& e)
   {
     std::cerr << "Out of memory\n";
-    delete[] final_str;
+    delete[] temp_str;
     delete[] str;
     return 1;
   }
@@ -31,14 +32,14 @@ int main()
   {
     std::cerr << "Out of memory\n";
     delete[] str;
-    delete[] final_str;
+    delete[] temp_str;
     return 1;
   }
 
   if (str == nullptr)
   {
     delete[] str;
-    delete[] final_str;
+    delete[] temp_str;
     return 1;
   }
 
@@ -48,9 +49,31 @@ int main()
   char ustr2[askii_size] = {};
   demehin::getUniqueSymbols(str, ustr1);
   demehin::getUniqueSymbols(base_str, ustr2);
-  demehin::unc_sym(ustr1, ustr2, final_str);
-  std::cout << final_str << '\n';
+  size_t final_size = 0;
+  final_size = demehin::unc_sym(ustr1, ustr2, temp_str);
 
+  char* final_str = nullptr;
+  try
+  {
+    final_str = new char[final_size + 1];
+  }
+  catch (std::bad_alloc & e)
+  {
+    std::cerr << "Out of memory\n";
+    delete[] final_str;
+    delete[] str;
+    return 1;
+  }
+
+  for (size_t i = 0; i < final_size; ++ i)
+  {
+    final_str[i] = temp_str[i];
+  }
+  final_str[final_size] = '\0';
+
+  std::cout << final_str << "\n";
+
+  delete[] temp_str;
   delete[] str;
   delete[] final_str;
 }

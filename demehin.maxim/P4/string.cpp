@@ -40,7 +40,7 @@ void demehin::getUniqueSymbols(const char* str, char* ustr)
   }
 }
 
-void demehin::unc_sym(const char* str, const char* base_str, char* final_str)
+size_t demehin::unc_sym(const char* str, const char* base_str, char* final_str)
 {
   size_t iterator1 = 0;
   size_t final_size = 0;
@@ -60,6 +60,7 @@ void demehin::unc_sym(const char* str, const char* base_str, char* final_str)
     iterator1 += 1;
   }
   final_str[iterator1] = '\0';
+  return iterator1;
 }
 
 char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size)
