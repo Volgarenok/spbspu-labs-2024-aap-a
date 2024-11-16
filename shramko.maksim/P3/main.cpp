@@ -36,30 +36,32 @@ int main(const int argc, const char** argv)
   }
 
   size_t sizeMtrx = cnt_row * cnt_col;
-  constexpr size_t fixedMtrxSize = 10000;
-  int fixedMtrx[fixedMtrxSize];
+  int fixedMtrx[10000] = {};
   int* mtrx = fixedMtrx;
-  try
+  int* ptr = nullptr;
+  if (argv[1][0] == '2')
   {
-    if (argv[1][0] == '2')
+    try
     {
       mtrx = new int[sizeMtrx];
+      ptr = mtrx;
     }
-  }
-  catch (const std::bad_alloc & e)
-  {
-    delete[] mtrx;
-    std::cerr << "Out of memory\n";
-    return 2;
+    catch (const std::bad_alloc& e)
+    {
+      delete[] ptr;
+      std::cerr << "Out of memory\n";
+      return 2;
+    }
   }
 
   if (!shramko::inputMtrx(input, mtrx, sizeMtrx))
   {
-    delete[] mtrx;
-    std::cerr << "Second input error!\n";
+    delete[] ptr;
+    std::cerr << "Input error!\n";
     return 2;
   }
+
   std::ofstream output(argv[3]);
   output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
-  delete[] mtrx;
+  delete[] ptr;
 }
