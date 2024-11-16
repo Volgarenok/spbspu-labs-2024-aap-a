@@ -1,14 +1,16 @@
 #include <iostream>
 #include <fstream>
+#include <stdexcept>
 
-#include "cmdprotection.hpp"
 #include "matrix.hpp"
 
-int main(int argc, char** argv)
+void cmdProtection(int argc, const char **argv);
+
+int main(int argc, const char** argv)
 {
   try
   {
-    guseynov::cmdProtection(argc, argv);
+    cmdProtection(argc, argv);
   }
   catch (const std::logic_error &e)
   {
@@ -34,44 +36,62 @@ int main(int argc, char** argv)
   {
     return 2;
   }
-  size_t general = m * n;
-  if (general == 0)
+  size_t generalLength = m * n;
+  if (generalLength == 0)
   {
     output << "0\n";
     return 0;
   }
+  int *arr = nullptr;
   size_t read = 0;
   if (argv[1][0] == '1')
   {
-    if (general > 10000)
+    if (generalLength > 10000)
     {
       return 2;
     }
     int arr[10000];
-    if ((!guseynov::inputMtx(input, arr, general, read)) || (read != general))
-    {
-      return 2;
-    }
-    output << guseynov::searchNumLocMin(arr, general) << "\n";
   }
   else
   {
-    int *arr = nullptr;
     try
     {
-      arr = new int[general];
+      arr = new int[generalLength];
     }
     catch (const std::bad_alloc& e)
     {
       return 2;
     }
-    if ((!guseynov::inputMtx(input, arr, general, read)) || (read != general))
+  }
+    if ((!guseynov::inputMtx(input, arr, generalLength, read)) || (read != generalLength))
     {
-      delete[] arr;
+      if (argv[1][0] == '2')
+      {
+        delete[] arr;
+      }
       return 2;
     }
-    output << guseynov::searchNumLocMin(arr, general) << "\n";
+  output << guseynov::searchNumLocMin(arr, generalLength) << "\n";
+  if (argv[1][0] == '2')
+  {
     delete[] arr;
   }
   return 0;
+}
+
+void cmdProtection(int argc, const char **argv)
+{
+  constexpr int tasknum = 4;
+  if (argc > tasknum)
+  {
+    throw std::logic_error("Too many arguments");
+  }
+  if (argc < tasknum)
+  {
+    throw std::logic_error("Not enough arguments");
+  }
+  if ((argv[1][1] != '\0') || ((argv[1][0] != '1') && (argv[1][0] != '2')))
+  {
+    throw std::logic_error("First parameter is not a number of a task");
+  }
 }
