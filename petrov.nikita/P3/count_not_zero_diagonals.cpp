@@ -1,17 +1,17 @@
 #include "process_the_matrix.hpp"
 
-size_t defineRequiredNumber(size_t number_of_rows, size_t rows_length);
-int makeCalculactions(int * ptr_matrix, size_t required_number);
+size_t getMatrixDiagonalLimit(size_t number_of_rows, size_t rows_length);
+int countNotZeroDiagonalsUsing(int * ptr_matrix, size_t required_number);
 
 int petrov::countNotZeroDiagonals(int * ptr_matrix, size_t number_of_rows, size_t rows_length)
 {
-  size_t required_number = defineRequiredNumber(number_of_rows, rows_length);
-  return makeCalculactions(ptr_matrix, required_number);
+  size_t matrix_diagonal_limit = getMatrixDiagonalLimit(number_of_rows, rows_length);
+  return countNotZeroDiagonalsUsing(ptr_matrix, matrix_diagonal_limit);
 }
 
-size_t defineRequiredNumber(size_t number_of_rows, size_t rows_length)
+size_t getMatrixDiagonalLimit(size_t number_of_rows, size_t rows_length)
 {
-    if (number_of_rows != rows_length)
+  if (number_of_rows != rows_length)
   {
     if (rows_length < number_of_rows)
     {
@@ -28,12 +28,12 @@ size_t defineRequiredNumber(size_t number_of_rows, size_t rows_length)
   }
 }
 
-int makeCalculactions(int * ptr_matrix, size_t required_number)
+int countNotZeroDiagonalsUsing(int * ptr_matrix, size_t matrix_diagonal_limit)
 {
-  if (required_number > 1)
+  if (matrix_diagonal_limit > 1)
   {
     size_t iterations = 1;
-    for (size_t i = 2; i < required_number; i++)
+    for (size_t i = 2; i < matrix_diagonal_limit; i++)
     {
       iterations += 2;
     }
@@ -42,10 +42,10 @@ int makeCalculactions(int * ptr_matrix, size_t required_number)
     for (size_t part_1 = 0; part_1 <= iterations / 2; part_1++)
     {
       size_t i = 0;
-      size_t j = required_number - minus;
-      for (; j < required_number; j++)
+      size_t j = matrix_diagonal_limit - minus;
+      for (; j < matrix_diagonal_limit; j++)
       {
-        if (ptr_matrix[i * required_number + j] == 0)
+        if (ptr_matrix[i * matrix_diagonal_limit + j] == 0)
         {
           count_with_zero++;
           break;
@@ -59,9 +59,9 @@ int makeCalculactions(int * ptr_matrix, size_t required_number)
     {
       size_t i = 0 + plus;
       size_t j = 0;
-      for (; i < required_number; i++)
+      for (; i < matrix_diagonal_limit; i++)
       {
-        if (ptr_matrix[i * required_number + j] == 0)
+        if (ptr_matrix[i * matrix_diagonal_limit + j] == 0)
         {
           count_with_zero++;
           break;

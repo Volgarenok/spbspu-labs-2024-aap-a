@@ -4,9 +4,9 @@
 #include <cstdlib>
 #include "process_the_matrix.hpp"
 
-int checkArguments(int argc, const char ** argv);
+int checkArguments(const int argc, const char ** argv);
 
-int main(int argc, const char ** argv)
+int main(const int argc, const char ** argv)
 {
   if (checkArguments(argc, argv) == 1)
   {
@@ -37,7 +37,6 @@ int main(int argc, const char ** argv)
   int check_varuable = std::atoi(argv[1]);
   if (check_varuable == 2)
   {
-    ptr_matrix = nullptr;
     try
     {
       ptr_matrix = new int[number_of_rows * rows_length];
@@ -66,7 +65,7 @@ int main(int argc, const char ** argv)
   }
 }
 
-int checkArguments(int argc, const char ** argv)
+int checkArguments(const int argc, const char ** argv)
 {
   if (argc != 4)
   {
@@ -82,18 +81,7 @@ int checkArguments(int argc, const char ** argv)
     }
   }
   int check_varuable = std::atoi(argv[1]);
-  size_t len_check_var = 0;
-  size_t i = 0;
-  while (argv[1][i] != '\0')
-  {
-    len_check_var++;
-    if (len_check_var > 1)
-    {
-      break;
-    }
-    i++;
-  }
-  if ((check_varuable != 1 && check_varuable != 2) || len_check_var > 1)
+  if ((check_varuable != 1 && check_varuable != 2) || argv[1][1] != '\0')
   {
     std::cerr << "First parameter is out of range OR First parameter is not a number\n";
     return 1;
