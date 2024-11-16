@@ -7,12 +7,15 @@
 
 int main(int argc, char* argv[]) {
     int** matrix = nullptr;
+    int num = 0;
+    const int fixedRows = 5;
+    const int fixedCols = 5;
     try {
         if (argc != 4) {
             throw std::invalid_argument("Using: " + std::string(argv[0]) + " num input output");
         }
 
-        const int num = std::stoi(argv[1]);
+        num = std::stoi(argv[1]);
         const std::string inputFileName = argv[2];
         const std::string outputFileName = argv[3];
 
