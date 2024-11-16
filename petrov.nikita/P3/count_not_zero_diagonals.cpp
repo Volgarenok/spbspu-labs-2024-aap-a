@@ -1,12 +1,12 @@
 #include "process_the_matrix.hpp"
 
 size_t getMatrixDiagonalLimit(size_t number_of_rows, size_t rows_length);
-int countNotZeroDiagonalsUsing(int * ptr_matrix, size_t required_number);
+int countNotZeroDiagonalsUsingMatrixDiagonalLimit(int * ptr_matrix, size_t required_number);
 
 int petrov::countNotZeroDiagonals(int * ptr_matrix, size_t number_of_rows, size_t rows_length)
 {
   size_t matrix_diagonal_limit = getMatrixDiagonalLimit(number_of_rows, rows_length);
-  return countNotZeroDiagonalsUsing(ptr_matrix, matrix_diagonal_limit);
+  return countNotZeroDiagonalsUsingMatrixDiagonalLimit(ptr_matrix, matrix_diagonal_limit);
 }
 
 size_t getMatrixDiagonalLimit(size_t number_of_rows, size_t rows_length)
@@ -28,7 +28,7 @@ size_t getMatrixDiagonalLimit(size_t number_of_rows, size_t rows_length)
   }
 }
 
-int countNotZeroDiagonalsUsing(int * ptr_matrix, size_t matrix_diagonal_limit)
+int countNotZeroDiagonalsUsingMatrixDiagonalLimit(int * ptr_matrix, size_t matrix_diagonal_limit)
 {
   if (matrix_diagonal_limit > 1)
   {
