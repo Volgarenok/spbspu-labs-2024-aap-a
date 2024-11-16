@@ -17,7 +17,7 @@ int main(int argc, char **argv)
     return 1;
   }
   const int int_argv1 = std::atoi(argv[1]);
-  if (std::atoi(argv[1]))
+  if (int_argv1)
   {
     if (int_argv1 > 2 || int_argv1 < 1)
     {
@@ -27,7 +27,7 @@ int main(int argc, char **argv)
   }
   else
   {
-    std::cerr << "First parameter is out of range\n";
+    std::cerr << "First parameter is out of range or zero-argument\n";
     return 1;
   }
   std::ifstream input(argv[2]);
