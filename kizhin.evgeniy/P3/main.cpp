@@ -16,7 +16,7 @@ int main(int argc, char** argv)
   const char* inputFilePath = argv[2];
   const char* outputFilePath = argv[3];
 
-  int* matrix = nullptr;
+  int* memoryFreeStore = nullptr;
   try {
     std::ifstream in(inputFilePath);
     if (!in) {
@@ -30,7 +30,8 @@ int main(int argc, char** argv)
     constexpr size_t stackBufferSize = 10'000;
     int stackBuffer[stackBufferSize];
     const size_t size = rows * columns;
-    matrix = memoryMode == kizhin::MemoryMode::stack ? stackBuffer : new int[size + 2];
+    memoryFreeStore = memoryMode == kizhin::MemoryMode::stack ? nullptr : new int[size + 2];
+    int* matrix = memoryMode == kizhin::MemoryMode::stack ? stackBuffer : memoryFreeStore;
     matrix[0] = rows;
     matrix[1] = columns;
     if (kizhin::readArrayValues(in, matrix + 2, size) != size) {
@@ -43,13 +44,9 @@ int main(int argc, char** argv)
     }
     out << kizhin::countLocalMaximums(matrix);
   } catch (const std::exception& ex) {
-    if (memoryMode == kizhin::MemoryMode::freeStore) {
-      delete[] matrix;
-    }
+    delete[] memoryFreeStore;
     std::cerr << ex.what() << '\n';
     return 2;
   }
-  if (memoryMode == kizhin::MemoryMode::freeStore) {
-    delete[] matrix;
-  }
+  delete[] memoryFreeStore;
 }
