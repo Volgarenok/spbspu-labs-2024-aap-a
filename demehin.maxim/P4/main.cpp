@@ -13,10 +13,10 @@ int main()
 
  try
   {
-    str = new char[max_size + 1];
-    ustr1 = new char[askii_size + 1];
-    ustr2 = new char[askii_size + 1];
-    final_str = new char[askii_size + 1];
+    str = new char[max_size];
+    ustr1 = new char[askii_size];
+    ustr2 = new char[askii_size];
+    final_str = new char[askii_size];
   }
   catch (const std::bad_alloc& e)
   {
