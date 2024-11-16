@@ -50,11 +50,10 @@ int main(int argc, char* argv[]) {
             for (int i = 0; i < rows; ++i) {
                 matrix[i] = new int[cols];
             }
-
             for (int i = 0; i < rows; ++i) {
                 for (int j = 0; j < cols; ++j) {
                     if (!(inFile >> matrix[i][j])) {
-                        throw std::runtime_error("Error during matrix reading!");
+                        throw std::runtime_error("Error: Not enough data in the input file!");
                     }
                 }
             }
