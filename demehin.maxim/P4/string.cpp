@@ -89,7 +89,7 @@ char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size
 
     if (size + 1 == max_size)
     {
-      str[max_size] = '\0';
+      str[max_size - 1] = '\0';
       max_size *= 2;
       str = demehin::copyString(str, max_size);
     }
