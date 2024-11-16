@@ -15,12 +15,8 @@ char* demehin::copyString(const char* str, size_t size)
   return new_str;
 }
 
-char* demehin::getUniqueSymbols(const char* str, char* ustr)
+void demehin::getUniqueSymbols(const char* str, char* ustr)
 {
-  if (str == nullptr)
-  {
-    return nullptr;
-  }
   size_t iterator1 = 0;
   size_t unique_size = 0;
   while (str[iterator1] != '\0')
@@ -42,8 +38,6 @@ char* demehin::getUniqueSymbols(const char* str, char* ustr)
     }
     iterator1 += 1;
   }
-  ustr[iterator1] = '\0';
-  return ustr;
 }
 
 char* demehin::unc_sym(const char* str, const char* base_str, char* final_str)
