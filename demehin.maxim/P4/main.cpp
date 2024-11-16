@@ -30,6 +30,8 @@ int main()
   catch (const std::bad_alloc& e)
   {
     std::cerr << "Out of memory\n";
+    delete[] str;
+    delete[] final_str;
     return 1;
   }
 
@@ -46,7 +48,7 @@ int main()
   char ustr2[askii_size] = {};
   demehin::getUniqueSymbols(str, ustr1);
   demehin::getUniqueSymbols(base_str, ustr2);
-  final_str = demehin::unc_sym(ustr1, ustr2, final_str);
+  demehin::unc_sym(ustr1, ustr2, final_str);
   std::cout << final_str << '\n';
 
   delete[] str;
