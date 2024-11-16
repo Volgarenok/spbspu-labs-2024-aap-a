@@ -6,6 +6,7 @@
 #include "count_columns.h"
 
 int main(int argc, char* argv[]) {
+    int** matrix = nullptr;
     try {
         if (argc != 4) {
             throw std::invalid_argument("Using: " + std::string(argv[0]) + " num input output");
@@ -26,7 +27,6 @@ int main(int argc, char* argv[]) {
             throw std::runtime_error("Error reading dimensions from input file!");
         }
 
-        int** matrix = nullptr;
         const int fixedRows = 5;
         const int fixedCols = 5;
 
@@ -39,14 +39,9 @@ int main(int argc, char* argv[]) {
             for (int i = 0; i < fixedRows; ++i) {
                 matrix[i] = new int[fixedCols]();
             }
-
             for (int i = 0; i < rows; ++i) {
                 for (int j = 0; j < cols; ++j) {
                     if (!(inFile >> matrix[i][j])) {
-                        for (int k = 0; k <= i; ++k) {
-                            delete[] matrix[k];
-                        }
-                        delete[] matrix;
                         throw std::runtime_error("Error: Not enough data in the input file for static array!");
                     }
                 }
@@ -57,13 +52,10 @@ int main(int argc, char* argv[]) {
             for (int i = 0; i < rows; ++i) {
                 matrix[i] = new int[cols];
             }
+
             for (int i = 0; i < rows; ++i) {
                 for (int j = 0; j < cols; ++j) {
                     if (!(inFile >> matrix[i][j])) {
-                        for (int k = 0; k <= i; ++k) {
-                            delete[] matrix[k];
-                        }
-                        delete[] matrix;
                         throw std::runtime_error("Error: Not enough data in the input file!");
                     }
                 }
@@ -87,6 +79,25 @@ int main(int argc, char* argv[]) {
             throw std::runtime_error("Error during file writing!");
         }
 
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+
+        if (matrix) {
+            if (num == 1) {
+                for (int i = 0; i < fixedRows; ++i) {
+                    delete[] matrix[i];
+                }
+                delete[] matrix;
+            } else if (num == 2) {
+                for (int i = 0; i < rows; ++i) {
+                    delete[] matrix[i];
+                }
+                delete[] matrix;
+            }
+        }
+        return 2;
+    }
+    if (matrix) {
         if (num == 1) {
             for (int i = 0; i < fixedRows; ++i) {
                 delete[] matrix[i];
@@ -98,11 +109,8 @@ int main(int argc, char* argv[]) {
             }
             delete[] matrix;
         }
-
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-        return 1;
     }
+
     return 0;
 }
 
