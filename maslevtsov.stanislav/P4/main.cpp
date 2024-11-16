@@ -7,7 +7,7 @@ int main()
   char* dynamicString = nullptr;
   try
   {
-    char* dynamicString = maslevtsov::getline(std::cin);
+    dynamicString = maslevtsov::getline(std::cin);
   }
   catch (const std::bad_alloc& e)
   {
