@@ -53,6 +53,10 @@ int main(int argc, char* argv[]) {
             for (int i = 0; i < rows; ++i) {
                 for (int j = 0; j < cols; ++j) {
                     if (!(inFile >> matrix[i][j])) {
+                        for (int k = 0; k <= i; ++k) {
+                            delete[] matrix[k];
+                        }
+                        delete[] matrix;
                         throw std::runtime_error("Error: Not enough data in the input file!");
                     }
                 }
@@ -94,3 +98,4 @@ int main(int argc, char* argv[]) {
     }
     return 0;
 }
+
