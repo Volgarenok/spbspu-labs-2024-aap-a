@@ -1,10 +1,9 @@
 #include "string_processing.hpp"
 #include <stdexcept>
 
-char* maslevtsov::expandString(char* string, std::size_t& capacity)
+char* maslevtsov::expandString(char* string, std::size_t capacity)
 {
   char* newString = new char[capacity];
-  capacity *= 2;
 
   for (std::size_t i = 0; string[i] != '\0'; ++i)
   {
@@ -17,7 +16,7 @@ char* maslevtsov::expandString(char* string, std::size_t& capacity)
 
 char* maslevtsov::getline(std::istream& in)
 {
-  std::size_t stringCapacity = 4;
+  std::size_t stringCapacity = 32;
   char* string = new char[stringCapacity];
   std::size_t stringIndex = 0;
   char symbol = '\0';
@@ -30,7 +29,7 @@ char* maslevtsov::getline(std::istream& in)
       string[stringIndex] = '\0';
       try
       {
-        string = maslevtsov::expandString(string, stringCapacity);
+        string = maslevtsov::expandString(string, stringCapacity *= 2);
       }
       catch (const std::bad_alloc& e)
       {
