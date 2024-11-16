@@ -93,7 +93,6 @@ char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size
     }
     if (size == max_size)
     {
-      str[max_size] = '\0';
       max_size *= 2;
       try
       {
@@ -103,6 +102,7 @@ char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size
       {
         throw;
       }
+      str[max_size] = '\0';
     }
     str[size++] = temp;
   }
@@ -110,6 +110,5 @@ char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size
   {
     return nullptr;
   }
-  str[size] = '\0';
   return str;
 }
