@@ -19,17 +19,16 @@ int main(int argc, char ** argv)
     return 1;
   }
 
+  size_t columns = 0;
+  size_t rows = 0;
   std::ifstream file_input(argv[2]);
   std::ofstream file_output(argv[3]);
+  file_input >> columns >> rows;
   if (file_input.eof())
   {
     std::cerr << "Empty file" << "\n";
   }
-
-  size_t columns = 0;
-  size_t rows = 0;
-  file_input >> columns >> rows;
-  if (!file_input)
+  else if (!file_input)
   {
     std::cerr << "The input is incorrect" << "\n";
     return 2;
@@ -40,8 +39,8 @@ int main(int argc, char ** argv)
     return 0;
   }
 
-  int s_Mtx[10000] = {0};
-  int* mtx = s_Mtx;
+  int s_mtx[10000] = {0};
+  int* mtx = s_mtx;
   if (argv[1][0] == '2')
   {
     try
