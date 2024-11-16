@@ -3,8 +3,8 @@
 
 char* maslevtsov::expandString(char* string, std::size_t& capacity)
 {
-  capacity *= 2;
   char* newString = new char[capacity];
+  capacity *= 2;
 
   for (std::size_t i = 0; string[i] != '\0'; ++i)
   {
@@ -18,15 +18,7 @@ char* maslevtsov::expandString(char* string, std::size_t& capacity)
 char* maslevtsov::getline(std::istream& in)
 {
   std::size_t stringCapacity = 4;
-  char* string = nullptr;
-  try
-  {
-    string = new char[stringCapacity];
-  }
-  catch (const std::bad_alloc& e)
-  {
-    return nullptr;
-  }
+  char* string = new char[stringCapacity];
   std::size_t stringIndex = 0;
   char symbol = '\0';
 
@@ -43,7 +35,7 @@ char* maslevtsov::getline(std::istream& in)
       catch (const std::bad_alloc& e)
       {
         delete[] string;
-        return nullptr;
+        throw;
       }
     }
     string[stringIndex++] = symbol;
@@ -63,10 +55,8 @@ std::size_t maslevtsov::isSameSymbols(const char* const str1, const char* const 
       if (str1[i] == str2[j])
       {
         return 1;
-        break;
       }
     }
   }
-
   return 0;
 }
