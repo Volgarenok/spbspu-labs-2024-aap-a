@@ -18,15 +18,12 @@ int main(int argc, char** argv)
   }
   else
   {
-    for (size_t i = 0; argv[1][i] != '\0'; ++i)
+    if (!std::isdigit(argv[1][0]) || argv[1][1] != '\0')
     {
-      if (!std::isdigit(argv[1][i]))
-      {
-        std::cerr << "ERROR: First parameter is not an integer!\n";
-        return 1;
-      }
+      std::cerr << "ERROR: First parameter is incorrect!\n";
+      return 1;
     }
-    arg1 = atoi(argv[1]);
+    arg1 = std::atoi(argv[1]);
     if (arg1 != 1 && arg1 != 2)
     {
       std::cerr << "ERROR: First parameter is out of range!\n";
@@ -40,12 +37,12 @@ int main(int argc, char** argv)
   input >> m >> n;
 
   constexpr size_t arraySize = 10000;
-  int arrayStatic[arraySize] = {};
+  int arrayFixed[arraySize] = {};
   int* arrayDynamic = nullptr;
   int* array = nullptr;
   if (arg1 == 1)
   {
-    array = arrayStatic;
+    array = arrayFixed;
   }
   else if (arg1 == 2)
   {

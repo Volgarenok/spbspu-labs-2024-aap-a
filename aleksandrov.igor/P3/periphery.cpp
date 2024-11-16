@@ -25,6 +25,7 @@ void aleksandrov::periphery(int* array, size_t m, size_t n)
     q1++;
     q2--;
     count++;
-  } while (p1 <= p2 && q1 <= q2 && p1 < m && q1 < n);
+  }
+  while (p1 <= p2 && q1 <= q2 && p1 < m && q1 < n);
 }
 
