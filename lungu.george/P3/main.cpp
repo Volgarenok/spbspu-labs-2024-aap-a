@@ -4,6 +4,7 @@
 #include "spiral_decrement.h"
 #include "savetofile.h"
 #include "count_columns.h"
+
 int main(int argc, char* argv[]) {
     try {
         if (argc != 4) {
@@ -23,13 +24,19 @@ int main(int argc, char* argv[]) {
         if (inFile.eof()) {
             throw std::runtime_error("Input file is empty!");
         }
+
         int** matrix = nullptr;
-        const int fixedRows = 5;
-        const int fixedCols = 5;
-        if (num == 1 && rows <= fixedRows && cols <= fixedCols) {
+
+        if (num == 1) {
+            const int fixedRows = 5;
+            const int fixedCols = 5;
+            if (rows > fixedRows || cols > fixedCols) {
+                throw std::invalid_argument("For num = 1, rows and cols must be less than or equal to 5.");
+            }
+
             matrix = new int*[fixedRows];
             for (int i = 0; i < fixedRows; ++i) {
-                matrix[i] = new int[fixedCols];
+                matrix[i] = new int[fixedCols]{0};
             }
 
             for (int i = 0; i < rows; ++i) {
@@ -56,9 +63,9 @@ int main(int argc, char* argv[]) {
         }
 
         inFile.close();
+
         lungu::spiralDecrement(matrix, rows, cols);
         int count = lungu::countColumnsWithoutConsecutiveDuplicates(matrix, rows, cols);
-
         lungu::saveToFile(matrix, rows, cols, outputFileName);
 
         std::ofstream outFile(outputFileName, std::ios_base::app);
@@ -69,7 +76,7 @@ int main(int argc, char* argv[]) {
             throw std::runtime_error("Error during file writing!");
         }
 
-        for (int i = 0; i < rows; ++i) {
+        for (int i = 0; i < (num == 1 ? 5 : rows); ++i) {
             delete[] matrix[i];
         }
         delete[] matrix;
