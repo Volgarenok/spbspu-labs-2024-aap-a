@@ -59,8 +59,8 @@ size_t demehin::unc_sym(const char* str, const char* base_str, char* final_str)
 
     iterator1 += 1;
   }
-  final_str[iterator1] = '\0';
-  return iterator1;
+  final_str[final_size] = '\0';
+  return final_size;
 }
 
 char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size)
