@@ -18,7 +18,8 @@ double ivanova::arctg(double x, size_t k, double error)
     double result = next;
     for (size_t i = 1; i < k; ++i)
     {
-        next = pow(x, 2 * i + 1) * pow(x, 2 * i + 1) / (2 * i + 1);
+        next *= x * x;
+        next /= (2 * i) * (2 * i + 1);
         result += next;
     }
     if (std::abs(next) > error)
@@ -35,11 +36,11 @@ double ivanova::stdArctg(double x)
 
 double ivanova::exp(double x, size_t k, double error)
 {
-    double next = x;
+    double next = 1;
     double result = next;
     for (size_t i = 1; i < k; ++i)
     {
-        next = pow(x, i) / factorial(i);
+        next *= x / i;
         result += next;
     }
     if (std::abs(next) > error)
