@@ -14,8 +14,8 @@ int main()
  try
   {
     str = new char[max_size];
-    ustr1 = new char[askii_size];
-    ustr2 = new char[askii_size];
+    ustr1 = new char[askii_size + 1];
+    ustr2 = new char[askii_size + 1];
     final_str = new char[askii_size];
   }
   catch (const std::bad_alloc& e)
@@ -50,6 +50,8 @@ int main()
 
 
   char base_str[] = "abc ef";
+  ustr1[askii_size] = '\0';
+  ustr2[askii_size] = '\0';
   ustr1 = demehin::getUniqueSymbols(str, ustr1);
   ustr2 = demehin::getUniqueSymbols(base_str, ustr2);
   final_str = demehin::unc_sym(ustr1, ustr2, final_str);
