@@ -4,11 +4,13 @@
 #include "spiral_decrement.h"
 #include "savetofile.h"
 #include "count_columns.h"
+
 int main(int argc, char* argv[]) {
     try {
         if (argc != 4) {
             throw std::invalid_argument("Using: " + std::string(argv[0]) + " num input output");
         }
+
         const int num = std::stoi(argv[1]);
         const std::string inputFileName = argv[2];
         const std::string outputFileName = argv[3];
@@ -20,22 +22,21 @@ int main(int argc, char* argv[]) {
 
         int rows, cols;
         inFile >> rows >> cols;
-        if (inFile.eof()) {
-            throw std::runtime_error("Input file is empty!");
+        if (inFile.fail()) {
+            throw std::runtime_error("Error reading dimensions from input file!");
         }
 
         int** matrix = nullptr;
+        const int fixedRows = 5;
+        const int fixedCols = 5;
 
         if (num == 1) {
-            const int fixedRows = 5;
-            const int fixedCols = 5;
             if (rows > fixedRows || cols > fixedCols) {
                 throw std::invalid_argument("For num = 1, rows and cols must be less than or equal to 5.");
             }
-
             matrix = new int*[fixedRows];
             for (int i = 0; i < fixedRows; ++i) {
-                matrix[i] = new int[fixedCols]{0};
+                matrix[i] = new int[fixedCols]();
             }
 
             for (int i = 0; i < rows; ++i) {
@@ -65,6 +66,7 @@ int main(int argc, char* argv[]) {
 
         lungu::spiralDecrement(matrix, rows, cols);
         int count = lungu::countColumnsWithoutConsecutiveDuplicates(matrix, rows, cols);
+
         lungu::saveToFile(matrix, rows, cols, outputFileName);
 
         std::ofstream outFile(outputFileName, std::ios_base::app);
@@ -75,10 +77,17 @@ int main(int argc, char* argv[]) {
             throw std::runtime_error("Error during file writing!");
         }
 
-        for (int i = 0; i < (num == 1 ? 5 : rows); ++i) {
-            delete[] matrix[i];
+        if (num == 1) {
+            for (int i = 0; i < fixedRows; ++i) {
+                delete[] matrix[i];
+            }
+            delete[] matrix;
+        } else if (num == 2) {
+            for (int i = 0; i < rows; ++i) {
+                delete[] matrix[i];
+            }
+            delete[] matrix;
         }
-        delete[] matrix;
 
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
