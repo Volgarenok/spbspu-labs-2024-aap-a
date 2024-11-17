@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
   int** matrix = cherkasov::readMatrix(inputFile, rows, cols, useFixedArray);
   if (!matrix && (rows == 0 || cols == 0))
   {
-    return 2;
+    return 0;
   }
 
   if (!matrix)
