@@ -11,7 +11,7 @@ void sharifullina::output_row(double i, size_t k, double error)
   const size_t WidthOfCol = 12;
   std::cout.precision(3);
   std::cout << std::setw(WidthOfCol) << std::fixed << i << " ";
-    for (size_t j = 0; j < 3; j++)
+    for (size_t j = 0; j < 4; j++)
     {
       try
       {
@@ -24,7 +24,7 @@ void sharifullina::output_row(double i, size_t k, double error)
     }
   std::cout << " " << std::setw(WidthOfCol) << cos_cmath(i);
   std::cout << " " << std::setw(WidthOfCol) << exp_negx_cmath(i);
-  std::cout << " " << std::setw(WidthOfCol) << cos_and_negx_cma(i);
+  std::cout << " " << std::setw(WidthOfCol) << cos_and_negx_cma(i, k, error);
 }
 
 void sharifullina::output_table(double left, double right, size_t k, double step, double error)

@@ -38,7 +38,7 @@ double sharifullina::cos_and_exp(double x, size_t k, double error)
   return cos(x, k, error) + exp_negx(x, k, error);
 }
 
-double sharifullina::cos_and_exp_cma(double x)
+double sharifullina::cos_and_exp_cma(double x, size_t k, double error)
 {
     return cos_cmath(x) + exp_negx_cmath(x);
 }
@@ -50,4 +50,4 @@ double sharifullina::exp_negx_cmath(double x)
 {
   return std::exp(-x);
 }
-sharifullina::FuncPtr sharifullina::funcs[] = {sharifullina::cos, sharifullina::exp_negx, sharifullina::cos_and_exp};
+sharifullina::FuncPtr sharifullina::funcs[] = {sharifullina::cos, sharifullina::exp_negx, sharifullina::cos_and_exp, sharifullina::cos_and_exp_cma};
