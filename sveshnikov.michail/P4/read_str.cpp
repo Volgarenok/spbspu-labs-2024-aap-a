@@ -1,5 +1,6 @@
 #include "rep_sym.hpp"
 #include <ios>
+#include <stdexcept>
 
 char *sveshnikov::read_str(std::istream &in, char *str, std::size_t *len)
 {
@@ -10,17 +11,20 @@ char *sveshnikov::read_str(std::istream &in, char *str, std::size_t *len)
   {
     if (size == *len)
     {
-      str = sveshnikov::memory_alloc(str, len);
-      if (str == nullptr)
+      try
       {
-        return nullptr;
+        str = sveshnikov::memory_alloc(str, len);
+      }
+      catch (const std::bad_alloc &e)
+      {
+        throw;
       }
     }
     str[size++] = c;
   }
   if (!std::cin)
   {
-    return nullptr;
+    throw std::istream::failure("ERROR: can not read");
   }
   str[size] = '\0';
   std::skipws(std::cin);

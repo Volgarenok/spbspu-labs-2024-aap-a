@@ -1,4 +1,5 @@
 #include "rep_sym.hpp"
+#include <stdexcept>
 
 char *sveshnikov::memory_alloc(char *str, std::size_t *len)
 {
@@ -10,9 +11,7 @@ char *sveshnikov::memory_alloc(char *str, std::size_t *len)
   }
   catch (const std::bad_alloc &e)
   {
-    std::cerr << e.what() << '\n';
-    delete[] str;
-    return nullptr;
+    throw;
   }
   for (std::size_t i = 0; i < *len - 100; i++)
   {

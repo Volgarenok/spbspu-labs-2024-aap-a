@@ -1,4 +1,5 @@
 #include "rep_sym.hpp"
+#include <stdexcept>
 
 int main()
 {
@@ -7,23 +8,24 @@ int main()
   try
   {
     str = new char[len];
+    str = sveshnikov::read_str(std::cin, str, &len);
   }
   catch (const std::bad_alloc &e)
   {
     std::cerr << "ERROR: BAD_ALLOC! " << e.what() << '\n';
-    return 1;
-  }
-  if (sveshnikov::read_str(std::cin, str, &len) == nullptr)
-  {
     delete[] str;
-    std::cerr << "ERROR: BAD_ALLOC!\n";
     return 1;
   }
-  str = sveshnikov::read_str(std::cin, str, &len);
+  catch (const std::istream::failure &e)
+  {
+    std::cerr << "ERROR: CAN NOT READ " << e.what() << '\n';
+    delete[] str;
+    return 1;
+  }
   char *new_str = nullptr;
   try
   {
-    new_str = new char[len]{'\0'};
+    new_str = new char[len + 1]{'\0'};
   }
   catch (const std::bad_alloc &e)
   {
