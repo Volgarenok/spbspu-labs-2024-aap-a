@@ -12,7 +12,7 @@ int main()
   }
   const double error = 0.001;
   const double step = 0.05;
-  for (auto i = left; i < right; i+=step)
+  for (auto i = left; i < right; i += step)
   {
     bocharov::table(i, k, error);
   }
