@@ -1,4 +1,4 @@
-#include "actionsMatrix.h"
+#include "inputMtx.h"
 #include <iostream>
 
 std::istream & duhanina::inputMatrix(std::istream & in, int * t, size_t m, size_t n, size_t & read)

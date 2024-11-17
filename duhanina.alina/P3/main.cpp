@@ -2,7 +2,8 @@
 #include <fstream>
 #include <string>
 #include <stdexcept>
-#include "actionsMatrix.h"
+#include "inputMtx.h"
+#include "minSumMdg.h"
 
 int main(int argc, char ** argv)
 {
@@ -31,7 +32,7 @@ int main(int argc, char ** argv)
   std::ofstream output(argv[3]);
   size_t m = 0, n = 0;
   input >> m >> n;
-   if (!input)
+  if (!input)
   {
     std::cerr << "File is empty" << "\n";
     return 2;
@@ -70,9 +71,6 @@ int main(int argc, char ** argv)
     return 2;
   }
   output << duhanina::minSumMdg(matrix, m, n) << "\n";
-  if (num == 2)
-  {
-    delete[] dyn_mtx;
-  }
+  delete[] dyn_mtx;
   return 0;
 }
