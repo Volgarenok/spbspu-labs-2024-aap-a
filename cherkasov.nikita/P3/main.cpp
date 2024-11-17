@@ -31,7 +31,6 @@ int main(int argc, char* argv[])
     {
        return 0;
     }
-      std::cerr << "Error: Invalid matrix format or dimensions.\n";
       return 2;
   }
 
