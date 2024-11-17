@@ -39,33 +39,24 @@ char * smirnov::getLine(std::istream & in, char stop)
   return str;
 }
 
-char * smirnov::uniString(char * str1, const char * str2)
+char * smirnov::uniString(const char * str1, const char * str2)
 {
-  size_t len1 = strlen(str1);
-  size_t len2 = strlen(str2);
-  size_t resultLen = len1 + len2;
-  char * result = new char[resultLen + 1];
-  size_t i = 0;
-  size_t j = 0;
-  size_t k = 0;
-  while (i < len1 && j < len2)
+  size_t length1 = strlen(str1);
+  size_t length2 = strlen(str2);
+  size_t maxLength = length1 + length2;
+  char * result = new char[maxLength + 1];
+  size_t index = 0;
+  for (size_t i = 0; i < std::max(length1, length2); ++i)
   {
-    result[k++] = str1[i++];
-    result[k++] = str2[j++];
+    if (i < length1)
+    {
+      result[index++] = str1[i];
+    }
+    if (i < length2)
+    {
+      result[index++] = str2[i];
+    }
   }
-  while (i < len1)
-  {
-    result[k++] = str1[i++];
-  }
-  while (j < len2)
-  {
-    result[k++] = str2[j++];
-  }
-  result[k] = '0';
-  for (size_t z = 0; z < k + 1; ++z)
-  {
-    str1[z] = result[z];
-  }
-  delete[] result;
-  return str1;
+  result[index] = '\0';
+  return result;
 }

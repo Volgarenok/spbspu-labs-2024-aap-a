@@ -19,6 +19,7 @@ int main()
     std::cerr << "Error: empty string\n";
     return 1;
   }
-  std::cout << smirnov::uniString(str1, str2) << "\n";
-  delete[] str1;
+  char * string = smirnov::uniString(str1, str2);
+  std::cout << string << "\n";
+  delete[] string;
 }
