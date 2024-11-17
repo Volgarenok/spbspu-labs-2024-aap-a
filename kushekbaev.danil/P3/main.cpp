@@ -36,7 +36,7 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    int* matrix = kushekbaev::createMatrix(rows, columns);
+    int* matrix = new int [rows * columns];
     if (!matrix)
     {
         std::cerr << "Error allocating memory for matrix" << "\n";
@@ -67,10 +67,10 @@ int main(int argc, char **argv)
     catch (const std::runtime_error& e)
     {
         std::cerr << e.what() << "\n";
-        kushekbaev::deleteMatrix(matrix);
+        delete[] matrix;
         return 1;
     }
 
-    kushekbaev::deleteMatrix(matrix);
+    delete[] matrix;
     return 0;
 }
