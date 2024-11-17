@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
   if (!matrix && (rows == 0 || cols == 0))
   {
     std::cerr << "Error: Empty input file or invalid matrix format or dimensions.\n";
-    return 0;
+    return 2;
   }
 
   if (!matrix)
