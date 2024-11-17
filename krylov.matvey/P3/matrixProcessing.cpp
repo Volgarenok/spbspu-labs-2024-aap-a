@@ -2,10 +2,10 @@
 
 namespace krylov
 {
-  size_t countEqualsInColumn(const int* const matrix, size_t rows, size_t columns, size_t currentColumn);
+  size_t countEqualsInColumn(const int* matrix, size_t rows, size_t columns, size_t currentColumn);
 }
 
-size_t krylov::countEqualsInColumn(const int* const matrix, size_t rows, size_t columns, size_t currentColumn)
+size_t krylov::countEqualsInColumn(const int* matrix, size_t rows, size_t columns, size_t currentColumn)
 {
   size_t currentAmountEquals = 0;
   for (size_t j = 1; j < rows; j++)
@@ -31,7 +31,7 @@ std::istream & krylov::inputMatrix(std::istream & in, int* matrix, size_t rows, 
   return in;
 }
 
-size_t krylov::getColumnWithMaxEquals(const int* const matrix, size_t rows, size_t columns)
+size_t krylov::getColumnWithMaxEquals(const int* matrix, size_t rows, size_t columns)
 {
   size_t columnWithMaxSeriesEquals = 0;
   size_t maxSeriesEqualElements = 0;
