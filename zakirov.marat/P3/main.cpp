@@ -1,21 +1,31 @@
 #include <fstream>
 #include "mtx_work.hpp"
 
-int main(int argc, char ** argv)
+bool check_arg(int m_argc, char const * const * m_argv)
 {
-  if (argc < 4)
+  if (m_argc < 4)
   {
     std::cerr << "Not enought arguments" << "\n";
-    return 1;
+    return true;
   }
-  else if (argc > 4)
+  else if (m_argc > 4)
   {
     std::cerr << "Too many arguments" << "\n";
-    return 1;
+    return true;
   }
-  else if ((argv[1][0] != '1' && argv[1][0] != '2') || argv[1][1] != '\0')
+  else if ((m_argv[1][0] != '1' && m_argv[1][0] != '2') || m_argv[1][1] != '\0')
   {
     std::cerr << "First argument isn't 1 or 2";
+    return true;
+  }
+
+  return false;
+}
+
+int main(int argc, char ** argv)
+{
+  if (check_arg(argc, argv))
+  {
     return 1;
   }
 
@@ -64,11 +74,6 @@ int main(int argc, char ** argv)
   }
 
   zakirov::mtx_spiral_decrease(u_mtx, columns, rows);
-  for (size_t i = 0; i < rows * columns; ++i)
-  {
-    file_output << u_mtx[i] << ' ';
-  }
-
-  file_output << '\n';
+  zakirov::output_mtx(file_output, u_mtx, columns, rows);
   delete[] d_mtx;
 }
