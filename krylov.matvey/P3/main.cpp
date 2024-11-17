@@ -23,29 +23,25 @@ int main(int argc, char ** argv)
   std::ofstream output(argv[3]);
   size_t rows = 0, columns = 0;
   input >> rows >> columns;
-  int *matrix = nullptr;
-  int staticArray[10000] = {0};
+  int* matrix = nullptr;
+  int* dynamicArray = nullptr;
+  int fixedArray[10000] = {0};
   if (argv[1][0] == '1')
   {
-    matrix = staticArray;
+    matrix = fixedArray;
   }
   else if (argv[1][0] == '2')
   {
-    matrix = new int[rows * columns];
+    dynamicArray = new int[rows * columns];
+    matrix = dynamicArray;
   }
   if (!krylov::inputMatrix(input, matrix, rows, columns))
   {
     std::cerr << "Error: incorrect matrix!\n";
-    if (argv[1][0] == '2')
-    {
-      delete[] matrix;
-    }
+    delete[] dynamicArray;
     return 2;
   }
   output << krylov::getColumnWithMaxEquals(matrix, rows, columns);
   output << '\n';
-  if (argv[1][0] == '2')
-  {
-    delete[] matrix;
-  }
+  delete[] dynamicArray;
 }
