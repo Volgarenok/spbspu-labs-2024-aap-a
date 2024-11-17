@@ -31,7 +31,7 @@ int main(int argc, char** argv)
     }
     asafov::matrixPush(asafov::matrixHandlingSanctions(mtx, a[0], a[1]), argv[2]);
   }
-  else if ((argv[0], "2")!=0)
+  else if (strcmp(argv[0], "2")!=0)
   {
     int* mtx = nullptr;
     int a[2] = {};
