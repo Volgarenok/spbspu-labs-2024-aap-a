@@ -4,10 +4,8 @@
 
 namespace petrov
 {
-  int check_arguments(int argc, char ** argv);
-  std::istream & input_matrix_static(std::istream & in, int * ptr_matrix, size_t number_of_rows, size_t rows_length);
-  std::istream & input_matrix_dynamic(std::istream & in, int * ptr_matrix, size_t number_of_rows, size_t rows_length);
-  int process_matrix_data(int * ptr_matrix, size_t number_of_rows, size_t rows_length);
+  std::istream & inputMatrix(std::istream & in, int * ptr_matrix, size_t number_of_rows, size_t rows_length);
+  size_t countNotZeroDiagonals(const int * ptr_matrix, const size_t number_of_rows, const size_t rows_length);
 }
 #endif
 
