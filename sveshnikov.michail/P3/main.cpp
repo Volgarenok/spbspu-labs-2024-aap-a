@@ -20,9 +20,8 @@ int main(int argc, char **argv)
     return 1;
   }
   std::ifstream input(argv[2]);
-  size_t num_rows = 0, num_columns = 0, read = 0;
+  size_t num_rows = 0, num_columns = 0, num_diagonal = 0, read = 0;
   input >> num_rows >> num_columns;
-  int num_diagonal = 0;
   if (argv[1][0] == '1')
   {
     const int LEN = 10000;
@@ -64,7 +63,7 @@ int main(int argc, char **argv)
   output << "\n";
 }
 
-int sveshnikov::process_matrix(std::istream &in, int *matrix, size_t num_rows, size_t num_columns, size_t &read)
+size_t sveshnikov::process_matrix(std::istream &in, int *matrix, size_t num_rows, size_t num_columns, size_t &read)
 {
   if (!sveshnikov::read_matrix(in, matrix, num_rows, num_columns, read) || read != num_rows * num_columns)
   {
