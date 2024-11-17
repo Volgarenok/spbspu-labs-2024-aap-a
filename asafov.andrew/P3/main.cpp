@@ -3,8 +3,8 @@
 #include <stdexcept>
 #include "matrixAutoInitiallization.hpp"
 #include "matrixDynamicInitiallization.hpp"
-
-#include "func.hpp"
+#include "matrixPush.hpp"
+#include "matrixHandling.hpp"
 
 int main(int argc, char** argv)
 {
@@ -28,7 +28,7 @@ int main(int argc, char** argv)
     {
       return 2;
     }
-    matrixPush(matrixHandlingSanctions(mtx, a[0], a[1]), argv[2]);
+    asafov::matrixPush(asafov::matrixHandlingSanctions(mtx, a[0], a[1]), argv[2]);
   }
   else if (argv[0] == "2")
   {
@@ -43,7 +43,7 @@ int main(int argc, char** argv)
       delete[] mtx;
       return 2;
     }
-    matrixPush(matrixHandlingSanctions(mtx, a[0], a[1]), argv[2]);
+    asafov::matrixPush(asafov::matrixHandlingSanctions(mtx, a[0], a[1]), argv[2]);
     delete[] mtx;
   }
   else
