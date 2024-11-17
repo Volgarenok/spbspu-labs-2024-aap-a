@@ -47,7 +47,7 @@ int** cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, b
       {
         std::cerr << "Error: Invalid matrix format.\n";
         for (size_t k = 0; k <= i; ++k)
-          delete[] matrix[k];
+        delete[] matrix[k];
         delete[] matrix;
         return nullptr;
       }
