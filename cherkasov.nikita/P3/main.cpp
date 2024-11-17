@@ -24,19 +24,14 @@ int main(int argc, char* argv[])
   const char* outputFile = argv[3];
   size_t rows = 0, cols = 0;
   bool useFixedArray = (num == 1);
+  int** matrix = nullptr;
 
-  int** matrix = cherkasov::readMatrix(inputFile, rows, cols, useFixedArray);
-  if (!matrix)
+  int result = cherkasov::readMatrix(inputFile, rows, cols, useFixedArray, &matrix);
+  if (result != 0)
   {
-    if (rows == 0 && cols == 0)
-    {
-       return 0;
-    }
-    std::cerr << "Error: Invalid matrix format or dimensions.\n";
-    return 2;
+    return result;
   }
-
-  int result = cherkasov::processMatrix(matrix, rows, cols);
+  int processResult = cherkasov::processMatrix(matrix, rows, cols);
   bool isLowerTriangular = cherkasov::lowerTriangul(matrix, rows, cols);
   std::ofstream outFile(outputFile);
   if (!outFile)
@@ -46,7 +41,7 @@ int main(int argc, char* argv[])
     return 3;
   }
 
-  outFile << "Result: " << result << "\n";
+  outFile << "Result: " << processResult << "\n";
   if (isLowerTriangular)
   {
     outFile << "The matrix is lower triangular.\n";

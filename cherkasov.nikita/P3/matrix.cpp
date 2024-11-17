@@ -4,27 +4,27 @@
 
 constexpr size_t max = 1000;
 
-int** cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, bool useFixedArray)
+int cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, bool useFixedArray,int*** matrix)
 {
   std::ifstream inFile(inputFile);
   if (!inFile)
   {
     std::cerr << "Error: Cannot open input file.\n";
     rows = cols = 0;
-    return nullptr;
+    return 2;
   }
 
   if (inFile.peek() == std::ifstream::traits_type::eof())
   {
     rows = cols  = 0;
-    return nullptr;
+    return 0;
   }
 
   if (!(inFile >> rows >> cols) || rows <= 0 || cols <= 0)
   {
     std::cerr << "Error: Invalid matrix format or dimensions.\n";
     rows = cols = 0;
-    return nullptr;
+    return 1;
   }
 
   const size_t totalElements = rows * cols;
@@ -32,33 +32,33 @@ int** cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, b
   {
     std::cerr << "Error: Matrix size exceeds fixed array limit.\n";
     rows = cols = 0;
-    return nullptr;
+    return 1;
   }
 
-  int** matrix = new int*[rows];
+  *matrix = new int*[rows];
   for (size_t i = 0; i < rows; ++i)
   {
-    matrix[i] = new int[cols];
+   (*matrix)[i] = new int[cols];
   }
 
   for (size_t i = 0; i < rows; ++i)
   {
     for (size_t j = 0; j < cols; ++j)
     {
-      if (!(inFile >> matrix[i][j]))
+      if (!(inFile >> (*matrix)[i][j]))
       {
         std::cerr << "Error: Invalid matrix format.\n";
         for (size_t k = 0; k <= i; ++k)
         {
-          delete[] matrix[k];
+          delete[] (*matrix)[k];
         }
-          delete[] matrix;
-          return nullptr;
+          delete[] *matrix;
+          return 2;
       }
     }
   }
 
-  return matrix;
+  return 0;
 }
 
 int cherkasov::processMatrix(int** matrix, size_t rows, size_t cols)
