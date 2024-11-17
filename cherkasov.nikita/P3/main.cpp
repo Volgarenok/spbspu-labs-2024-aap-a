@@ -1,6 +1,6 @@
 #include <iostream>
-#include <fstream>
 #include <cstdlib>
+#include <fstream>
 #include "matrix.h"
 
 int main(int argc, char* argv[])
@@ -11,20 +11,21 @@ int main(int argc, char* argv[])
     return 1;
   }
 
-  int num = std::atoi(argv[1]);
-  if (num != 1 && num != 2)
+  const std::string taskNumStr = argv[1];
+  if (taskNumStr != "1" && taskNumStr != "2")
   {
     std::cerr << "Error: Invalid task number.\n";
     return 1;
   }
 
+  int num = std::atoi(argv[1]);
   const char* inputFile = argv[2];
   const char* outputFile = argv[3];
-  int rows, cols;
-  int** matrix = nullptr;
+  size_t rows, cols;
   bool useFixedArray = (num == 1);
 
-  if (!cherkasov::readMatrix(inputFile, matrix, rows, cols, useFixedArray))
+  int** matrix = cherkasov::readMatrix(inputFile, rows, cols, useFixedArray);
+  if (matrix == nullptr)
   {
     return 2;
   }
@@ -37,12 +38,12 @@ int main(int argc, char* argv[])
       std::cerr << "Error: Cannot open output file.\n";
       return 3;
     }
-      outFile << 0 << "\n";
-      outFile.close();
-      return 0;
+    outFile << 0 << "\n";
+    return 0;
   }
 
   int result = cherkasov::processMatrix(matrix, rows, cols);
+  bool isLowerTriangular = cherkasov::lowerTriangul(matrix, rows, cols);
   std::ofstream outFile(outputFile);
   if (!outFile)
   {
@@ -51,9 +52,17 @@ int main(int argc, char* argv[])
     return 3;
   }
 
-  outFile << result << "\n";
-  outFile.close();
+  outFile << "Result: " << result << "\n";
+  if (isLowerTriangular)
+  {
+    outFile << "The matrix is lower triangular.\n";
+  }
+  else
+  {
+    outFile << "The matrix is not lower triangular.\n";
+  }
 
   cherkasov::freeMatrix(matrix, rows);
   return 0;
 }
+

@@ -2,61 +2,66 @@
 #include <iostream>
 #include <fstream>
 
-const int MAX_SIZE = 10000;
+constexpr size_t max = 1000;
 
-bool cherkasov::readMatrix(const char* inputFile, int**& matrix, int& rows, int& cols, bool useFixedArray)
+int** cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, bool useFixedArray)
 {
   std::ifstream inFile(inputFile);
   if (!inFile)
   {
     std::cerr << "Error: Cannot open input file.\n";
-    return false;
+    return nullptr;
   }
 
-  if (!(inFile >> rows >> cols) || rows < 0 || cols < 0)
+  if (!(inFile >> rows >> cols) || rows <= 0 || cols <= 0)
   {
     std::cerr << "Error: Invalid matrix format or dimensions.\n";
-     return false;
+    return nullptr;
   }
 
   if (rows == 0 || cols == 0)
   {
-    matrix = nullptr;
-    return true;
+    return nullptr;
   }
 
-  int totalElements = rows * cols;
-  if (useFixedArray && totalElements > MAX_SIZE)
+  const size_t totalElements = rows * cols;
+  if (useFixedArray && totalElements > max)
   {
     std::cerr << "Error: Matrix size exceeds fixed array limit.\n";
-    return false;
+    return nullptr;
   }
 
-  matrix = new int* [rows];
-  for (int i = 0; i < rows; ++i)
+  int** matrix = new int*[rows];
+  for (size_t i = 0; i < rows; ++i)
   {
     matrix[i] = new int[cols];
-    for (int j = 0; j < cols; ++j)
+  }
+
+  for (size_t i = 0; i < rows; ++i)
+  {
+    for (size_t j = 0; j < cols; ++j)
     {
       if (!(inFile >> matrix[i][j]))
       {
         std::cerr << "Error: Invalid matrix format.\n";
-        for (int k = 0; k <= i; ++k) delete[] matrix[k];
+        for (size_t k = 0; k <= i; ++k)
+        delete[] matrix[k];
         delete[] matrix;
-        return false;
+        return nullptr;
       }
     }
   }
 
-  return true;
+  return matrix;
 }
 
-int cherkasov::processMatrix(int** matrix, int rows, int cols)
+int cherkasov::processMatrix(int** matrix, size_t rows, size_t cols)
 {
   int count = 0;
-  int minDim = std::min(rows, cols);
+  size_t minDim = std::min(rows, cols);
   bool hasZero = false;
-  for (int i = 0; i < minDim; ++i)
+
+  for (size_t i = 0; i < minDim; ++i)
   {
     if (matrix[i][i] == 0)
     {
@@ -64,12 +69,13 @@ int cherkasov::processMatrix(int** matrix, int rows, int cols)
       break;
     }
   }
+
   if (!hasZero) count++;
 
-  for (int k = 1; k < rows; ++k)
+  for (size_t k = 1; k < rows; ++k)
   {
     hasZero = false;
-    for (int i = k, j = 0; i < rows && j < cols; ++i, ++j)
+    for (size_t i = k, j = 0; i < rows && j < cols; ++i, ++j)
     {
       if (matrix[i][j] == 0)
       {
@@ -77,13 +83,13 @@ int cherkasov::processMatrix(int** matrix, int rows, int cols)
         break;
       }
     }
-      if (!hasZero) count++;
+    if (!hasZero) count++;
   }
 
-  for (int k = 1; k < cols; ++k)
+  for (size_t k = 1; k < cols; ++k)
   {
     hasZero = false;
-    for (int i = 0, j = k; i < rows && j < cols; ++i, ++j)
+    for (size_t i = 0, j = k; i < rows && j < cols; ++i, ++j)
     {
       if (matrix[i][j] == 0)
       {
@@ -91,26 +97,27 @@ int cherkasov::processMatrix(int** matrix, int rows, int cols)
         break;
       }
     }
-      if (!hasZero) count++;
+    if (!hasZero) count++;
   }
 
   return count;
 }
 
-void cherkasov::freeMatrix(int** matrix, int rows)
+void cherkasov::freeMatrix(int** matrix, size_t rows)
 {
-  for (int i = 0; i < rows; ++i)
+  for (size_t i = 0; i < rows; ++i)
   {
     delete[] matrix[i];
   }
-    delete[] matrix;
+  delete[] matrix;
+
 }
 
-bool cherkasov::lowerTriangul(int** matrix, int rows, int cols)
+bool cherkasov::lowerTriangul(int** matrix, size_t rows, size_t cols)
 {
-  for (int i = 0; i < rows; ++i)
+  for (size_t i = 0; i < rows; ++i)
   {
-    for (int j = i + 1; j < cols; ++j)
+    for (size_t j = i + 1; j < cols; ++j)
     {
       if (matrix[i][j] != 0)
       {
@@ -119,6 +126,6 @@ bool cherkasov::lowerTriangul(int** matrix, int rows, int cols)
     }
   }
 
-    return true;
+  return true;
 }
 
