@@ -1,5 +1,5 @@
-#ifndef TAYLOR_FUNCTIONS_HPP
-#define TAYLOR_FUNCTIONS_HPP
+#ifndef TAYLOR_HPP
+#define TAYLOR_HPP
 #include <cstddef>
 
 namespace dirti
