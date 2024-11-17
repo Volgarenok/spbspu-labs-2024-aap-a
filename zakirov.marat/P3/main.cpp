@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
     }
     catch (const std::bad_alloc &e)
     {
-      std::cout << "Not enough memory" << "\n";
+      std::cerr << "Not enough memory" << "\n";
       delete[] d_mtx;
       return 1;
     }
@@ -66,9 +66,9 @@ int main(int argc, char ** argv)
   zakirov::mtx_spiral_decrease(u_mtx, columns, rows);
   for (size_t i = 0; i < rows * columns; ++i)
   {
-    std::cout << u_mtx[i] << ' ';
+    file_output << u_mtx[i] << ' ';
   }
 
-  std::cout << '\n';
+  file_output << '\n';
   delete[] d_mtx;
 }
