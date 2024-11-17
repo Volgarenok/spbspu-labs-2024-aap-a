@@ -20,9 +20,13 @@ int cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, boo
     return 0;
   }
 
-  if (!(inFile >> rows >> cols) || rows <= 0 || cols <= 0)
+  if (!(inFile >> rows >> cols))
   {
-    rows = cols = 0;
+    return 1;
+  }
+
+  if (rows == 0 && cols == 0)
+  {
     return 0;
   }
 
