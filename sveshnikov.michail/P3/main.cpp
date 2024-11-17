@@ -48,6 +48,7 @@ int main(int argc, char **argv)
     catch (const std::bad_alloc &e)
     {
       std::cerr << "ERROR: Memory Allocation: " << e.what() << "\n";
+      delete[] matrix2;
       return 2;
     }
     catch (const std::istream::failure &e)
