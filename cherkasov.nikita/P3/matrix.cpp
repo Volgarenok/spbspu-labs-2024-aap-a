@@ -14,13 +14,11 @@ int** cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, b
     return nullptr;
   }
 
-  inputFile.seekg(0, std::ios::end);
-  if (inputFile.tellg() == 0)
+  if (inFile.peek() == std::ifstream::traits_type::eof())
   {
-    std::cerr << "Error: Empty file.\n";
+    rows = cols  = 0;
     return nullptr;
   }
-    inputFile.seekg(0, std::ios::beg);
 
   if (!(inFile >> rows >> cols) || rows <= 0 || cols <= 0)
   {
