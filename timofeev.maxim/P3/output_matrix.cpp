@@ -14,7 +14,6 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
   {
     size_t col = 0;
     int icur = i;
-    int diag = 0;
     for (size_t j = (stl - 1); (col <= i) && (col < stl); j--)
     {
       int jcur = j;
@@ -68,8 +67,7 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
       }
     }
   }
-  delete[] values;Fix them up in the work tree, and then use 'git add/rm <file>'
-hint: as appropriate to mark resolution and make a commit.
+  delete[] values;
   if (fine_check > 0)
   {
     std::cout << "the matrix contains diagonals with equal values\n";
