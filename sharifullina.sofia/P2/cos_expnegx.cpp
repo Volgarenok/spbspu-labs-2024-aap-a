@@ -51,4 +51,3 @@ double sharifullina::exp_negx_cmath(double x)
   return std::exp(-x);
 }
 sharifullina::FuncPtr sharifullina::funcs[] = {sharifullina::cos, sharifullina::exp_negx, sharifullina::cos_and_exp};
-

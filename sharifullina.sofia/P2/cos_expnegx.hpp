@@ -14,5 +14,4 @@ namespace sharifullina
   using FuncPtr = double(*)(double, size_t, double);
   extern FuncPtr funcs[];
 }
-
 #endif
