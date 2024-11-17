@@ -73,6 +73,7 @@ int main(int argc, char ** argv)
   gavrilova::input_matrix(input, mtx, m, n, read);
 
   if (read != m*n) {
+    delete[] mtx;
     return 1;
   }
 
