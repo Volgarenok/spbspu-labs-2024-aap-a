@@ -29,7 +29,7 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
     max_short_diag = col - 1;
     max_diag = col;
   }
-  int hip = 0;
+  size_t hip = 0;
   size_t fine_check = 0;
   while (hip < max_short_diag)
   {
@@ -70,10 +70,10 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
   delete[] values;
   if (fine_check > 0)
   {
-    std::cout << "the matrix contains diagonals with equal values\n";
+    out << "the matrix contains diagonals with equal values\n";
   }
   else
   {
-    std::cout << "the matrix doesn't contains diagonals with equal values\n";
+    out << "the matrix doesn't contains diagonals with equal values\n";
   }
 }
