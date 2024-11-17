@@ -1,5 +1,24 @@
 #include "matrix.hpp"
 
+const char *abramov::isCorrect(char *str, int &int_argv1)
+{
+  size_t i = 0;
+  int_argv1 = std::atoi(str);
+  if (str[1] != '\0' && !std::isdigit(str[1]))
+  {
+    return "First parameter is not a number\n"
+  }
+  else if (str[1] != '\0' && std::isdigit(str[1]))
+  {
+    return "First parameter is out of range or not a number\n";
+  }
+  else if (str[1] == '\0' && (int_argv1 > 2 || int_argv1 < 1))
+  {
+    return "First parameter is out of range\n";
+  }
+  return "\0";
+}
+
 std::istream& abramov::inputMatrix(std::istream &in, int *mtx, size_t m, size_t n, size_t &read)
 {
   for (size_t i = 0; i < m * n; ++i)
@@ -12,35 +31,64 @@ std::istream& abramov::inputMatrix(std::istream &in, int *mtx, size_t m, size_t 
   return in;
 }
 
-int *abramov::toSquare(int *mtx, size_t m, size_t n, size_t &count)
+int *abramov::fillMatrix(int *mtx, size_t m, size_t n, size_t &count)
 {
   int *matrix = nullptr;
+  try
+  {
+    matrix = new int[m * n];
+  }
+  catch (const std::bad_alloc &e)
+  {
+    throw;
+  }
   size_t k = 0;
-  if (n >= m)
+  for (size_t i = 0; i < m; ++i)
   {
-    matrix = new int[m * m];
-    for (size_t i = 0; i < m; ++i)
+    for (size_t j = 0; j < m; ++j)
     {
-      for (size_t j = 0; j < m; ++j)
-      {
-        matrix[k++] = mtx[n * i + j];
-      }
+      matrix[k++] = mtx[n * i + j];
     }
-    count = m;
   }
-  else
-  {
-    matrix = new int [n * n];
-    for (size_t i = 0; i < n; ++i)
-    {
-      for (size_t j = 0; j < n; ++j)
-      {
-        matrix[k++] = mtx[n * i + j];
-      }
-    }
-    count = n;
-  }
+  count = m;
   return matrix;
+}
+
+int *abramov::toSquare(int *mtx, size_t m, size_t n, size_t &count)
+{
+  try
+  {
+    if (n >= m)
+    {
+      return abramov::fillMatrix(mtx, m, n, count);
+    }
+    else
+    {
+      return abramov::fillMatrix(mtx, n, n, count);
+    }
+  }
+  catch (const std::bad_alloc &e)
+  {
+    throw;
+  }
+}
+
+int *abramov::getMatrix(std::istream &in, int *matrix, size_t m, size_t n, size_t &read, size_t &count)
+{
+  if (!abramov::inputMatrix(in, matrix, m, n, read) || read != m * n)
+  {
+    throw "Wrong input\n";
+  }
+  int *new_mtx = nullptr;
+  try
+  {
+    new_mtx = abramov::toSquare(matrix, m, n, count);
+  }
+  catch (const std::bad_alloc &e)
+  {
+    throw "Memory fail\n";
+  }
+  return new_mtx;
 }
 
 void abramov::spiralChangeMatrix(int *mtx, size_t count)
