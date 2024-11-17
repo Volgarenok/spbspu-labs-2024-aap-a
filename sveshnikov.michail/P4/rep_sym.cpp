@@ -5,7 +5,7 @@ char *sveshnikov::rep_sym(const char *str, char *new_str)
   std::size_t count = 0;
   for (std::size_t i = 0; str[i] != '\0'; i++)
   {
-    std::size_t j = 1, k = 0, povtor = 0;
+    std::size_t j = 0, k = 0, povtor = 0;
     if (str[i] == new_str[k])
     {
       povtor = 1;
@@ -20,24 +20,21 @@ char *sveshnikov::rep_sym(const char *str, char *new_str)
     }
     if (povtor == 0)
     {
-      if (str[i] == str[0] && i != j)
+      if (str[i] == str[j])
       {
         new_str[count] = str[i];
         new_str[count + 1] = '\0';
         count++;
       }
-      else
+      while (str[j] != '\0' && str[i] != str[j])
       {
-        while (str[j] != '\0' && str[i] != str[j - 1])
+        if (str[i] == str[j + 1])
         {
-          if (str[i] == str[j] && i != j)
-          {
-            new_str[count] = str[i];
-            new_str[count + 1] = '\0';
-            count++;
-          }
-          j++;
+          new_str[count] = str[i];
+          new_str[count + 1] = '\0';
+          count++;
         }
+        j++;
       }
     }
   }
