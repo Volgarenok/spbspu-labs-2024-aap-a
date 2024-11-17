@@ -19,12 +19,6 @@ int main()
     std::cerr << "Error: empty string\n";
     return 1;
   }
-  str1 = smirnov::uniString(str1, str2);
-  size_t i = 0;
-  while (str1[i] != '\0')
-  {
-    std::cout << str1[i++];
-  }
-  std::cout << "\n";
+  std::cout << smirnov::uniString(str1, str2) << "\n";
   delete[] str1;
 }
