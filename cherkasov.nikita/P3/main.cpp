@@ -29,11 +29,10 @@ int main(int argc, char* argv[])
   {
     if (rows == 0 && cols == 0)
     {
-       std::cerr << "Error : Empty or invalid matrix format.\n";
-       return 2;
+       return 0;
     }
 
-    return 0;
+    return 2;
   }
 
   int result = cherkasov::processMatrix(matrix, rows, cols);
