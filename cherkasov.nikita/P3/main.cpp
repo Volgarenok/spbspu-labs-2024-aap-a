@@ -11,26 +11,14 @@ int main(int argc, char* argv[])
     return 1;
   }
 
-  const std::string taskNumStr = argv[1];
-  if (taskNumStr != "1" && taskNumStr != "2")
-  {
-    std::cerr << "Error: Invalid task number.\n";
-    return 1;
-  }
-
   int num = std::atoi(argv[1]);
   const char* inputFile = argv[2];
   const char* outputFile = argv[3];
-  size_t rows, cols;
+  size_t rows = 0, cols = 0;
   bool useFixedArray = (num == 1);
 
   int** matrix = cherkasov::readMatrix(inputFile, rows, cols, useFixedArray);
-  if (matrix == nullptr)
-  {
-    return 2;
-  }
-
-  if (rows == 0 || cols == 0)
+  if (matrix == nullptr && (rows == 0 || cols == 0))
   {
     std::ofstream outFile(outputFile);
     if (!outFile)
@@ -38,8 +26,9 @@ int main(int argc, char* argv[])
       std::cerr << "Error: Cannot open output file.\n";
       return 3;
     }
-    outFile << 0 << "\n";
-    return 0;
+
+  outFile << 0 << "\n";
+  return 0;
   }
 
   int result = cherkasov::processMatrix(matrix, rows, cols);
@@ -65,4 +54,3 @@ int main(int argc, char* argv[])
   cherkasov::freeMatrix(matrix, rows);
   return 0;
 }
-
