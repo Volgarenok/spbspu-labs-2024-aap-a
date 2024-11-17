@@ -12,7 +12,7 @@ namespace sharifullina
   }
   double cos_cmath(double x);
   double exp_negx_cmath(double x);
-  double cos_and_exp_cmath(double x)
+  double cos_and_exp_cma(double x)
   {
     return cos_cmath(x) + exp_negx_cmath(x);
   }
