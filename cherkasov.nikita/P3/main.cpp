@@ -3,6 +3,7 @@
 #include <fstream>
 #include "matrix.h"
 
+
 int main(int argc, char* argv[])
 {
   if (argc != 4)
@@ -22,8 +23,8 @@ int main(int argc, char* argv[])
   const char* outputFile = argv[3];
   size_t rows = 0, cols = 0;
   bool useFixedArray = (num == 1);
-
   int** matrix = cherkasov::readMatrix(inputFile, rows, cols, useFixedArray);
+
   if (!matrix && (rows == 0 || cols == 0))
   {
     std::ofstream outFile(outputFile);
@@ -38,6 +39,7 @@ int main(int argc, char* argv[])
 
   if (!matrix)
   {
+    std::cerr << "Error: Invalid matrix format or dimensions.\n";
     return 2;
   }
 
