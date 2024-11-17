@@ -2,7 +2,6 @@
 #include <cmath>
 #include <stdexcept>
 
-using namespace sharifullina;
 double sharifullina::cos(double x, size_t k, double error)
 {
   double next = (x * x) / 2;
