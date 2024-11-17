@@ -1,13 +1,10 @@
-#include "brain.h"
+#include "taylor.h"
 #include <cmath>
-double bocharov::sqrtln(double x, bool y)
+double bocharov::sqrt1_x(double x)
 {
-  if (y == 0)
-  {
-    return std::sqrt(1 + x);
-  }
-  else
-  {
-    return std::log(x + std::sqrt(x * x + 1));
-  }
+  return std::sqrt(1 + x);
+}
+double bocharov::lnf(double x)
+{
+  return std::log(x + std::sqrt(x * x + 1));
 }

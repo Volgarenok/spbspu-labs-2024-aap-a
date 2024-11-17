@@ -1,4 +1,4 @@
-#include "brain.h"
+#include "taylor.h"
 #include <iostream>
 #include <iomanip>
 #include <cstring>
@@ -18,7 +18,7 @@ void bocharov::table(double number, size_t k, double error)
       std::cout << std::setw(15) << "Math error";
     }
   }
-  std::cout << std::setw(15) << bocharov::sqrtln(number, 0);
-  std::cout << std::setw(15) << bocharov::sqrtln(number, 1);
+  std::cout << std::setw(15) << bocharov::sqrt1_x(number);
+  std::cout << std::setw(15) << bocharov::lnf(number);
   std::cout << std::setw(15) << bocharov::sumf2(number) << "\n";
 }

@@ -1,11 +1,12 @@
-#ifndef BRAIN_H
-#define BRAIN_H
+#ifndef TAYLOR_H
+#define TAYLOR_H
 #include <cstddef>
 namespace bocharov
 {
   double f(double x, size_t k, double error);
   double f2(double x, size_t k, double error);
-  double sqrtln(double x, bool y);
+  double sqrt1_x(double x);
+  double lnf(double x);
   bool intervals(double left, double right);
   void table(double number, size_t k, double error);
   double sumf(double number, size_t k, double error);

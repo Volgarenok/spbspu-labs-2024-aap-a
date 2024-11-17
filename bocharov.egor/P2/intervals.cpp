@@ -1,4 +1,4 @@
-#include "brain.h"
+#include "taylor.h"
 bool bocharov:: intervals(double left, double right)
 {
   bool sect = left <= -1 || left >= 1;
