@@ -2,11 +2,10 @@
 
 const char *abramov::isCorrect(char *str, int &int_argv1)
 {
-  size_t i = 0;
   int_argv1 = std::atoi(str);
   if (str[1] != '\0' && !std::isdigit(str[1]))
   {
-    return "First parameter is not a number\n"
+    return "First parameter is not a number\n";
   }
   else if (str[1] != '\0' && std::isdigit(str[1]))
   {

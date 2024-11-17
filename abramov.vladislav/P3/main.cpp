@@ -16,18 +16,11 @@ int main(int argc, char **argv)
     std::cerr << "Not enough arguments\n";
     return 1;
   }
-  const int int_argv1 = std::atoi(argv[1]);
-  if (int_argv1)
+  int int_argv1 = 0;
+  const char *correct = abramov::isCorrect(argv[1], int_argv1);
+  if (correct[0] != '\0')
   {
-    if (int_argv1 > 2 || int_argv1 < 1)
-    {
-      std::cerr << "First parameter is out of range\n";
-      return 1;
-    }
-  }
-  else
-  {
-    std::cerr << "First parameter is out of range or zero-argument\n";
+    std::cerr << correct;
     return 1;
   }
   std::ifstream input(argv[2]);
@@ -41,45 +34,39 @@ int main(int argc, char **argv)
   size_t read = 0;
   size_t count = 0;
   int *matrix = nullptr;
-  int *new_mtx = nullptr;
-  if (int_argv1 == 1)
+  try
   {
-    int nums[10000] = {};
-    if (!abramov::inputMatrix(input, nums, m, n, read) || read != m * n)
+    matrix = new int[m * n];
+  }
+  catch (const std::bad_alloc &e)
+  {
+    std::cerr << "Memory fail\n";
+    return 2;
+  }
+  int *new_mtx = nullptr;
+  int nums[10000] = {};
+  try
+  {
+    if (int_argv1 == 1)
     {
-      std::cerr << "Wrong input\n";
-      return 1;
+      new_mtx = abramov::getMatrix(input, nums, m, n, read, count);
     }
-    try
+    else if (int_argv1 == 2)
     {
-      new_mtx = abramov::toSquare(nums, m, n, count);
-    }
-    catch (const std::bad_alloc &e)
-    {
-      std::cerr << "Memory fail\n";
-      return 2;
+      new_mtx = abramov::getMatrix(input, matrix, m, n, read, count);
     }
   }
-  if (int_argv1 == 2)
+  catch (const char *e)
   {
-    try
-    {
-      matrix = new int[m * n];
-      if (!abramov::inputMatrix(input, matrix, m, n, read) || read != m * n)
-      {
-        std::cerr << "Wrong input\n";
-        delete[] matrix;
-        return 1;
-      }
-      new_mtx = abramov::toSquare(matrix, m, n, count);
-    }
-    catch (const std::bad_alloc &e)
-    {
-      std::cerr << "Memory fail\n";
-      delete[] matrix;
-      delete[] new_mtx;
-      return 2;
-    }
+    std::cerr << e;
+    delete[] matrix;
+    return 1;
+  }
+  catch (const std::bad_alloc &e)
+  {
+    std::cerr << e.what();
+    delete[] matrix;
+    return 2;
   }
   std::ofstream output(argv[3]);
   abramov::spiralChangeMatrix(new_mtx, count);
