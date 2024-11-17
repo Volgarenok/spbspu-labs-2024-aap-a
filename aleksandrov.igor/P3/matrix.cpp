@@ -9,7 +9,7 @@ std::istream& aleksandrov::inputMatrix(std::istream& input, int* array, size_t m
   return input;
 }
 
-void aleksandrov::outputMatrix(std::ostream& output, const int* const array, size_t m, size_t n)
+void aleksandrov::outputMatrix(std::ostream& output, const int* array, size_t m, size_t n)
 {
   if (m == 0 || n == 0)
   {
