@@ -65,22 +65,12 @@ size_t demehin::unc_sym(const char* str, const char* base_str, char* final_str)
 
 char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size)
 {
-  if (str == nullptr)
-  {
-    return nullptr;
-  }
+
   size_t size = 0;
   char temp = '\0';
   std::noskipws(in);
-
   while ((in >> temp) && (temp != stop))
   {
-    if (in.eof())
-    {
-      str[size] = '\0';
-      return str;
-    }
-
     if (size + 1 == max_size)
     {
       str[max_size - 1] = '\0';

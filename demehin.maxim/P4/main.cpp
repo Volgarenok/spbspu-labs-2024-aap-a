@@ -9,7 +9,6 @@ int main()
   char* str = nullptr;
   char* temp_str = nullptr;
 
-
  try
   {
     str = new char[max_size];
@@ -23,7 +22,7 @@ int main()
     return 1;
   }
 
-  std::noskipws(std::cin);
+  str[0] = '\0';
   try
   {
     str = demehin::getString(std::cin, stop, str, max_size);
@@ -36,12 +35,13 @@ int main()
     return 1;
   }
 
-  if (str == nullptr)
-  {
-    delete[] str;
-    delete[] temp_str;
-    return 1;
-  }
+   if (str[0] == '\0')
+   {
+     std::cerr << "Empty string\n";
+     delete[] str;
+     delete[] temp_str;
+     return 1;
+   }
 
 
   char base_str[] = "abc ef";
