@@ -27,6 +27,7 @@ int main(int argc, char* argv[])
   int** matrix = cherkasov::readMatrix(inputFile, rows, cols, useFixedArray);
   if (!matrix && (rows == 0 || cols == 0))
   {
+    std::cerr << "Error: Empty input file or invalid matrix format or dimensions.\n";
     return 0;
   }
 
