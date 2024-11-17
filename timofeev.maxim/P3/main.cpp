@@ -47,6 +47,11 @@ int main(int argc, char** argv)
     return 2;
   }
   matrix_size = line * column;
+  if (matrix_size == 0)
+  {
+    std::cerr << "Empty array";
+    return 2; 
+  }
   if (num == 1)
   {
     int matrix[10000];
