@@ -2,6 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 
+using namespace sharifullina;
 double sharifullina::cos(double x, size_t k, double error)
 {
   double next = (x * x) / 2;
@@ -50,4 +51,4 @@ double sharifullina::exp_negx_cmath(double x)
 {
   return std::exp(-x);
 }
-sharifullina::FuncPtr sharifullina::funcs[] = {sharifullina::cos, sharifullina::exp_negx, sharifullina::cos_and_exp, sharifullina::cos_and_exp_cma};
+FuncPtr funcs[] = {cos, exp_negx, cos_and_exp, cos_and_exp_cma};
