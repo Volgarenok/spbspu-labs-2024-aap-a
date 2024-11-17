@@ -50,7 +50,7 @@ int main(int argc, char** argv)
   if (matrix_size == 0)
   {
     std::cerr << "Empty array";
-    return 2; 
+    return 2;
   }
   if (num == 1)
   {
