@@ -33,7 +33,7 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
   size_t fine_check = 0;
   while (hip < max_short_diag)
   {
-    int match = 0;
+    size_t match = 0;
     for (size_t i = 0; i < hip + 1; i++)
     {
       if (values[(hip * (hip + 1)) / 2 + i] == values[sum_el - 1 - ((hip * (hip + 1)) / 2) - hip + i])
