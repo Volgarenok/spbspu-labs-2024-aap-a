@@ -22,9 +22,8 @@ int cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, boo
 
   if (!(inFile >> rows >> cols) || rows <= 0 || cols <= 0)
   {
-    std::cerr << "Error: Invalid matrix format or dimensions.\n";
     rows = cols = 0;
-    return 1;
+    return 0;
   }
 
   const size_t totalElements = rows * cols;
@@ -47,13 +46,12 @@ int cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, boo
     {
       if (!(inFile >> (*matrix)[i][j]))
       {
-        std::cerr << "Error: Invalid matrix format.\n";
         for (size_t k = 0; k <= i; ++k)
         {
           delete[] (*matrix)[k];
         }
           delete[] *matrix;
-          return 1;
+          return 0;
       }
     }
   }
