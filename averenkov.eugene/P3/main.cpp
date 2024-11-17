@@ -26,7 +26,6 @@ int main(int argc, char** argv)
       return 1;
     }
   }
-
   if (std::strcmp(argv[1], "1") != 0 && std::strcmp(argv[1], "2") != 0)
   {
     std::cerr << "First parameter is out of range\n";
@@ -42,22 +41,23 @@ int main(int argc, char** argv)
   {
     int static_matrix[10000] = { 0 };
     matrix = static_matrix;
-  } else
+  }
+  else
+  {
+    try
     {
-      try
-      {
-        matrix = new int[m * n];
-      }
-      catch (const std::bad_alloc& e)
-      {
-        std::cerr << "Memory error\n";
-        return 1;
-      }
+      matrix = new int[m * n];
     }
+    catch (const std::bad_alloc& e)
+    {
+      std::cerr << "Memory error\n";
+      return 1;
+    }
+  }
   size_t read = 0;
   if (!averenkov::input_matrix(input, matrix, m, n, read) || read != m * n)
   {
-  if (std::atoi(argv[1]) == 2)
+    if (std::atoi(argv[1]) == 2)
     {
       delete[] matrix;
     }
@@ -71,7 +71,7 @@ int main(int argc, char** argv)
   output << averenkov::max_sum_sdg(matrix, m, n) << " ";
   output << m << " " << n << " ";
   averenkov::output_matrix(output, matrix, m, n);
-  if(std::atoi(argv[1]) == 2)
+  if (std::atoi(argv[1]) == 2)
   {
     delete[] matrix;
   }
