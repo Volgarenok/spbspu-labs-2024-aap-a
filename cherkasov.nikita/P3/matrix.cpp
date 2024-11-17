@@ -15,7 +15,6 @@ int** cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, b
 
   if (inFile.peek() == std::ifstream::traits_type::eof())
   {
-    std::cerr << "Error: Empty input file.\n";
     return nullptr;
   }
 
@@ -23,7 +22,6 @@ int** cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, b
   {
     if (inFile.eof())
     {
-      std::cerr << "Error: Empty input file.\n";
       return nullptr;
     }
     rows = 0;
@@ -33,7 +31,6 @@ int** cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, b
 
   if (rows <= 0 || cols <= 0)
   {
-    std::cerr << "Error: Invalid matrix format or dimensions.\n";
     return nullptr;
   }
 
