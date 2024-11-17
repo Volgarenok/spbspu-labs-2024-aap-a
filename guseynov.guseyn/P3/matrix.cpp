@@ -17,7 +17,7 @@ std::istream & guseynov::inputMtx(std::istream &in, int *arr, size_t generalLeng
 
 size_t guseynov::searchNumLocMin(const int *arr, size_t generalLength)
 {
-  int min = std::numeric_limits <int>::max();
+  int min = std::numeric_limits< int >::max();
   size_t res = 0;
   for (size_t i = 1; i < generalLength - 1; i++)
   {
