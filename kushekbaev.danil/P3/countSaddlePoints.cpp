@@ -17,7 +17,7 @@ bool kushekbaev::isMinInRow(int* matrix, size_t columns, size_t row, int element
   return true;
 }
 
-bool kushekbaev::isMaxInColumn (int* matrix, size_t rows, size_t columns, size_t column, int element)
+bool kushekbaev::isMaxInColumn(int* matrix, size_t rows, size_t columns, size_t column, int element)
 {
   for (size_t z = 0; z < rows; z++)
   {
