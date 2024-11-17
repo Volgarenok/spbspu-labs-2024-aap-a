@@ -22,6 +22,8 @@ int** cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, b
   {
     if (inFile.eof())
     {
+      rows = 0;
+      cols = 0;
       return nullptr;
     }
     rows = 0;

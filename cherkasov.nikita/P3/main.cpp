@@ -25,15 +25,14 @@ int main(int argc, char* argv[])
   bool useFixedArray = (num == 1);
 
   int** matrix = cherkasov::readMatrix(inputFile, rows, cols, useFixedArray);
-  if (!matrix && (rows == 0 || cols == 0))
-  {
-    std::cerr << "Error: Empty input file or invalid matrix format or dimensions.\n";
-    return 2;
-  }
-
   if (!matrix)
   {
-    return 2;
+    if (rows == 0 && cols == 0)
+    {
+       return 0;
+    }
+      std::cerr << "Error: Invalid matrix format or dimensions.\n";
+      return 2;
   }
 
   int result = cherkasov::processMatrix(matrix, rows, cols);
