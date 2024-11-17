@@ -1,6 +1,4 @@
 #include <iostream>
-#include <stdexcept>
-#include <cmath>
 #include "taylor.hpp"
 
 int main()

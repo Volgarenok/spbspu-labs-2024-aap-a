@@ -1,9 +1,7 @@
-#include <cmath>
+#include "taylor.hpp"
 #include <iostream>
-#include <stdexcept>
 #include <iomanip>
 #include <cstring>
-#include "taylor.hpp"
 
 double dirti::arcsin_math(double x)
 {

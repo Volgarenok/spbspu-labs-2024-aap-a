@@ -1,6 +1,8 @@
 #ifndef TAYLOR_HPP
 #define TAYLOR_HPP
 #include <cstddef>
+#include <cmath>
+#include <stdexcept>
 
 namespace dirti
 {
