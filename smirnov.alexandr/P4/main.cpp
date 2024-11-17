@@ -2,6 +2,7 @@
 
 int main()
 {
+  const char * str2 = "def ";
   char * str1 = nullptr;
   try
   {
@@ -18,7 +19,12 @@ int main()
     std::cerr << "Error: empty string\n";
     return 1;
   }
-  const char * str2 = "def ";
-  std::cout << smirnov::uniString(str1, str2) << "\n";
+  str1 = smirnov::uniString(str1, str2);
+  size_t i = 0;
+  while (str1[i] != '\0')
+  {
+    std::cout << str1[i++];
+  }
+  std::cout << "\n";
   delete[] str1;
 }

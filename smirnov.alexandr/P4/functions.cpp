@@ -5,23 +5,14 @@
 char * smirnov::getLine(std::istream & in, char stop)
 {
   constexpr size_t max = 10;
-  char * str = nullptr;
-  try
-  {
-    str = new char [max + 1];
-  }
-  catch (const std::bad_alloc & e)
-  {
-    delete[] str;
-    throw std::logic_error("Out of memory\n");
-  }
+  char * str = new char[max + 1];
   size_t size = 0;
   char c = '\0';
   size_t capacity = max;
-  in >> std::noskipws;
+  std::noskipws(in);
   while (in >> c && c != stop)
   {
-    if (size == capacity)
+    if (size == capacity - 1)
     {
       capacity *= 2;
       char * new_str = nullptr;
@@ -31,11 +22,10 @@ char * smirnov::getLine(std::istream & in, char stop)
       }
       catch (const std::bad_alloc & e)
       {
-        delete[] new_str;
         delete[] str;
         throw std::logic_error("Out of memory\n");
       }
-      for (size_t i = 0; i < capacity; ++i)
+      for (size_t i = 0; i < size; ++i)
       {
         new_str[i] = str[i];
       }
@@ -45,7 +35,7 @@ char * smirnov::getLine(std::istream & in, char stop)
     str[size++] = c;
   }
   str[size] = '\0';
-  in >> std::skipws;
+  std::skipws(in);
   return str;
 }
 
