@@ -15,6 +15,11 @@ int** cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, b
 
   if (!(inFile >> rows >> cols))
   {
+    if (inFile.eof())
+    {
+      std::cerr << "Error: Empty input file.\n";
+      return nullptr;
+    }
     rows = 0;
     cols = 0;
     return nullptr;
