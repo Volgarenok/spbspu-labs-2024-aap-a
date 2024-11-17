@@ -10,18 +10,20 @@ int** cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, b
   if (!inFile)
   {
     std::cerr << "Error: Cannot open input file.\n";
+    rows = cols = 0;
     return nullptr;
   }
 
   if (inFile.peek() == std::ifstream::traits_type::eof())
   {
-    std::cerr << "Error: Empty file.\n";
+    rows = cols = 0;
     return nullptr;
   }
 
   if (!(inFile >> rows >> cols) || rows <= 0 || cols <= 0)
   {
     std::cerr << "Error: Invalid matrix format or dimensions.\n";
+    rows = cols = 0;
     return nullptr;
  }
 
@@ -29,6 +31,7 @@ int** cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, b
   if (useFixedArray && totalElements > max)
   {
     std::cerr << "Error: Matrix size exceeds fixed array limit.\n";
+    rows = cols = 0;
     return nullptr;
   }
 
