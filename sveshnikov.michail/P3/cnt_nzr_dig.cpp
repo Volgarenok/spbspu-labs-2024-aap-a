@@ -1,8 +1,8 @@
 #include "cnt_nzr_dig.hpp"
 
-int sveshnikov::cnt_nzr_dig(int *matrix, size_t num_rows, size_t num_columns)
+size_t sveshnikov::cnt_nzr_dig(int *matrix, size_t num_rows, size_t num_columns)
 {
-  int num_diagonal = 0;
+  size_t num_diagonal = 0;
   for (size_t i = 0; i < num_rows; i++)
   {
     size_t count_zero = 0;
