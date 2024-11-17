@@ -12,7 +12,7 @@ char * smirnov::getLine(std::istream & in, char stop)
   std::noskipws(in);
   while (in >> c && c != stop)
   {
-    if (size == capacity - 1)
+    if (size == capacity)
     {
       capacity *= 2;
       char * new_str = nullptr;
@@ -37,6 +37,7 @@ char * smirnov::getLine(std::istream & in, char stop)
   str[size] = '\0';
   std::skipws(in);
   return str;
+  delete[] str;
 }
 
 char * smirnov::uniString(const char * str1, const char * str2)

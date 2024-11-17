@@ -22,4 +22,5 @@ int main()
   char * string = smirnov::uniString(str1, str2);
   std::cout << string << "\n";
   delete[] string;
+  delete[] str1;
 }
