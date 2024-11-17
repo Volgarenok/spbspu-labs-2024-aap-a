@@ -13,6 +13,12 @@ int** cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, b
     return nullptr;
   }
 
+  if (inFile.peek() == std::ifstream::traits_type::eof())
+  {
+    std::cerr << "Error: Empty input file.\n";
+    return nullptr;
+  }
+
   if (!(inFile >> rows >> cols))
   {
     if (inFile.eof())

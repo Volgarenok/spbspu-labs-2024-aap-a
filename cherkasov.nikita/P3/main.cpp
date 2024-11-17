@@ -28,14 +28,7 @@ int main(int argc, char* argv[])
   int** matrix = cherkasov::readMatrix(inputFile, rows, cols, useFixedArray);
   if (!matrix && (rows == 0 || cols == 0))
   {
-    std::ofstream outFile(outputFile);
-    if (!outFile)
-    {
-      std::cerr << "Error: Cannot open output file.\n";
-      return 3;
-    }
-    outFile << 0 << "\n";
-    return 0;
+    return 2;
   }
 
   if (!matrix)
