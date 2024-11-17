@@ -11,7 +11,7 @@ int cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, boo
   {
     std::cerr << "Error: Cannot open input file.\n";
     rows = cols = 0;
-    return 2;
+    return 1;
   }
 
   if (inFile.peek() == std::ifstream::traits_type::eof())
@@ -53,7 +53,7 @@ int cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, boo
           delete[] (*matrix)[k];
         }
           delete[] *matrix;
-          return 2;
+          return 1;
       }
     }
   }

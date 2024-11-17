@@ -31,6 +31,12 @@ int main(int argc, char* argv[])
   {
     return result;
   }
+
+  if (rows == 0 && cols == 0)
+  {
+    return 0;
+  }
+
   int processResult = cherkasov::processMatrix(matrix, rows, cols);
   bool isLowerTriangular = cherkasov::lowerTriangul(matrix, rows, cols);
   std::ofstream outFile(outputFile);
@@ -38,7 +44,7 @@ int main(int argc, char* argv[])
   {
     std::cerr << "Error: Cannot open output file.\n";
     cherkasov::freeMatrix(matrix, rows);
-    return 3;
+    return 1;
   }
 
   outFile << "Result: " << processResult << "\n";
