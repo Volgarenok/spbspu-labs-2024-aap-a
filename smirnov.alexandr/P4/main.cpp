@@ -2,7 +2,6 @@
 
 int main()
 {
-  const char * str2 = "def ";
   char * str1 = nullptr;
   try
   {
@@ -13,12 +12,13 @@ int main()
     std::cerr << "Out of memory\n";
     return 1;
   }
-  if (str1[0] == '\n')
+  if (str1[0] == '\0')
   {
     delete[] str1;
     std::cerr << "Error: empty string\n";
     return 1;
   }
+  const char * str2 = "def ";
   char * string = smirnov::uniString(str1, str2);
   std::cout << string << "\n";
   delete[] string;
