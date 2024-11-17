@@ -49,8 +49,8 @@ int main(int argc, char** argv)
   matrix_size = line * column;
   if (matrix_size == 0)
   {
-    std::cerr << "Empty array";
-    return 2;
+    output << line << column;
+    return 0;
   }
   if (num == 1)
   {
