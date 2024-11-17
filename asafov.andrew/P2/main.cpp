@@ -1,5 +1,5 @@
-#include "func.hpp"
 #include <iostream>
+#include "output.h"
 
 int main()
 {
@@ -21,11 +21,11 @@ int main()
     std::cerr << "wrong borders" << '\n';
     return 1;
   }
-  if ((right > 1) || (left < -1))
+  if (right > 1 || left < -1)
   {
     std::cerr << "incorrect borders" << '\n';
     return 1;
   }
-  asafov::table(left, right, step, numberMax, error);
+  asafov::output(left, right, step, numberMax, error);
   return 0;
 }
