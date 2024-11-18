@@ -43,6 +43,8 @@ int main()
       std::cerr << "Out of memory during input\n";
       return 1;
     }
+    free(str2);
+    str2 = newStr2;
     if (newStr2[0] == '\0')
     {
       free(newStr2);
@@ -50,9 +52,6 @@ int main()
       std::cerr << "Error: Empty string input for second string\n";
       return 1;
     }
-
-    free(str2);
-    str2 = newStr2;
     char* result = averenkov::latTwo(str1, str2);
     if (!result)
     {
