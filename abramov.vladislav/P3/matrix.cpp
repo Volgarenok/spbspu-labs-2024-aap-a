@@ -2,6 +2,10 @@
 
 const char *abramov::isCorrect(char *str, int &int_argv1)
 {
+  if (str[0] == '\0')
+  {
+    return "Fisrt parameter is not a number\n";
+  }
   int_argv1 = std::atoi(str);
   if (str[1] != '\0' && !std::isdigit(str[1]))
   {
@@ -30,17 +34,10 @@ std::istream& abramov::inputMatrix(std::istream &in, int *mtx, size_t m, size_t 
   return in;
 }
 
-int *abramov::fillMatrix(int *mtx, size_t m, size_t n, size_t &count)
+int *abramov::fillMatrix(const int *mtx, size_t m, size_t n, size_t &count)
 {
   int *matrix = nullptr;
-  try
-  {
-    matrix = new int[m * n];
-  }
-  catch (const std::bad_alloc &e)
-  {
-    throw;
-  }
+  matrix = new int[m * n];
   size_t k = 0;
   for (size_t i = 0; i < m; ++i)
   {
@@ -53,22 +50,15 @@ int *abramov::fillMatrix(int *mtx, size_t m, size_t n, size_t &count)
   return matrix;
 }
 
-int *abramov::toSquare(int *mtx, size_t m, size_t n, size_t &count)
+int *abramov::toSquare(const int *mtx, size_t m, size_t n, size_t &count)
 {
-  try
+  if (n >= m)
   {
-    if (n >= m)
-    {
-      return abramov::fillMatrix(mtx, m, n, count);
-    }
-    else
-    {
-      return abramov::fillMatrix(mtx, n, n, count);
-    }
+    return abramov::fillMatrix(mtx, m, n, count);
   }
-  catch (const std::bad_alloc &e)
+  else
   {
-    throw;
+    return abramov::fillMatrix(mtx, n, n, count);
   }
 }
 
@@ -79,14 +69,7 @@ int *abramov::getMatrix(std::istream &in, int *matrix, size_t m, size_t n, size_
     throw "Wrong input\n";
   }
   int *new_mtx = nullptr;
-  try
-  {
-    new_mtx = abramov::toSquare(matrix, m, n, count);
-  }
-  catch (const std::bad_alloc &e)
-  {
-    throw "Memory fail\n";
-  }
+  new_mtx = abramov::toSquare(matrix, m, n, count);
   return new_mtx;
 }
 
