@@ -1,6 +1,6 @@
 #ifndef MINSUMMDG_H
 #define MINSUMMDG_H
-#include <iostream>
+#include <cstddef>
 
 namespace duhanina
 {
