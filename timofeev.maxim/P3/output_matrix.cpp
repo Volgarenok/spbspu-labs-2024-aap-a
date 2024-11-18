@@ -47,9 +47,9 @@ void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t st
     }
     hip++;
   }
-  for (size_t i = max_diag * (max_diag - 1) / 2; i < sum_el - (max_diag * (max_diag + 1) / 2) - 1; i += 3)
+  for (size_t i = max_diag * (max_diag - 1) / 2; i < sum_el - (max_diag * (max_diag + 1) / 2) - 1; i += max_diag)
   {
-    for (size_t j = i + max_diag; j < sum_el - (max_diag * (max_diag - 1) / 2) - 1; j += 3)
+    for (size_t j = i + max_diag; j < sum_el - (max_diag * (max_diag - 1) / 2) - 1; j += max_diag)
     {
       size_t k = 0;
       size_t same_el = 0;
