@@ -17,34 +17,34 @@ int main(int argc, char** argv)
     std::cerr << "Too many arguments";
     return 1;
   }
-  else if (strcmp(argv[0], "1")!=0)
+  else if (strcmp(argv[1], "1")!=0)
   {
     int mtx[10000] = {};
     int a[2] = {};
     try
     {
-      asafov::matrixAutoInitialization(mtx, argv[1], a[0], a[1]);
+      asafov::matrixAutoInitialization(mtx, argv[2], a[0], a[1]);
     }
     catch (const std::logic_error & e)
     {
       return 2;
     }
-    asafov::matrixPush(asafov::matrixHandlingSanctions(mtx, a[0], a[1]), argv[2]);
+    asafov::matrixPush(asafov::matrixHandlingSanctions(mtx, a[0], a[1]), argv[3]);
   }
-  else if (strcmp(argv[0], "2")!=0)
+  else if (strcmp(argv[1], "2")!=0)
   {
     int* mtx = nullptr;
     int a[2] = {};
     try
     {
-      asafov::matrixDynamicInitialization(mtx, argv[1], a[0], a[1]);
+      asafov::matrixDynamicInitialization(mtx, argv[2], a[0], a[1]);
     }
     catch (const std::logic_error & e)
     {
       delete[] mtx;
       return 2;
     }
-    asafov::matrixPush(asafov::matrixHandlingSanctions(mtx, a[0], a[1]), argv[2]);
+    asafov::matrixPush(asafov::matrixHandlingSanctions(mtx, a[0], a[1]), argv[3]);
     delete[] mtx;
   }
   else

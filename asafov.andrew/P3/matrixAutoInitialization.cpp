@@ -11,6 +11,7 @@ void asafov::matrixAutoInitialization(int* mtx, char* input, int& n, int& m)
     fin >> mtx[i];
     if (fin.fail() || fin.eof()) {
       throw std::logic_error("err");
+      fin.close();
     }
   }
   fin.close();
