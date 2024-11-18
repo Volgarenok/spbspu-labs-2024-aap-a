@@ -1,4 +1,4 @@
-#include "functions.h"
+#include "string_conversion.h"
 
 int finaev::is_repeat(char* str, size_t dl)
 {
