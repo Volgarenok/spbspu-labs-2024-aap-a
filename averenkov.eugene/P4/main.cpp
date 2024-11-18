@@ -20,7 +20,7 @@ int main()
     char* newStr1 = averenkov::stringInput(std::cin, str1);
     if (!newStr1)
     {
-      free(str1);
+      free(newStr1);
       free(str2);
       std::cerr << "Out of memory during input\n";
       return 1;
@@ -28,7 +28,7 @@ int main()
     if (newStr1[0] == '\0')
     {
       std::cerr << "Empty string\n";
-      free(str1);
+      free(newStr1);
       free(str2);
       return 1;
     }
@@ -45,8 +45,8 @@ int main()
     if (newStr2[0] == '\0')
     {
       std::cerr << "Empty string\n";
+      free(newStr2);
       free(str1);
-      free(str2);
       return 1;
     }
     free(str2);
