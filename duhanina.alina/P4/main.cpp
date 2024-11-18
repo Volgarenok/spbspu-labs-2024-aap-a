@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstddef>
-#include "actionsStr.h"
+#include "createArray.h"
+#include "shrSym.h"
 
 int main()
 {

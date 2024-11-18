@@ -1,4 +1,4 @@
-#include "actionsStr.h"
+#include "createArray.h"
 #include <cstddef>
 
 char* duhanina::createNewArray(char* array, char* new_array)
