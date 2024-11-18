@@ -70,20 +70,18 @@ int main(int argc, char ** argv)
     mtx = temp;
   }
 
-  gavrilova::input_matrix(input, mtx, m, n, read, num);
+  gavrilova::input_matrix(input, mtx, m, n, read);
 
-  if (!input || !input.eof()) {
+  if ((!input || !input.eof()) && num == 2) {
     delete[] mtx;
     return 1;
   }
 
   output << gavrilova::isUpperTriangMtx(mtx, m, n) << "\n";
 
-  if (num == 1) {
-    mtx = nullptr;
+  if (num == 2){
+    delete[] mtx;
   }
-
-  delete[] mtx;
 }
 
 
