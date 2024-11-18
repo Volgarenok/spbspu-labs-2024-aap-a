@@ -82,6 +82,10 @@ char* averenkov::latTwo(const char* str1, const char* str2)
       }
     }
   }
+  else
+  {
+    free(str1);
+  }
   if(str2[0] != '\0')
   {
     for (size_t i = 0; str2[i] != '\0'; ++i)
@@ -96,6 +100,10 @@ char* averenkov::latTwo(const char* str1, const char* str2)
         }
       }
     }
+  }
+  else
+  {
+    free(str2);
   }
   for (int i = 0; i < 26; ++i)
   {
