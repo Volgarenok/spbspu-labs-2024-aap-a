@@ -44,7 +44,8 @@ int main(const int argc, const char** argv)
     return 0;
   }
   int arrFixed[fixedSize];
-  int *arr = arrFixed;
+  int *arr = nullptr;
+  int *arrCopy = nullptr;
   size_t read = 0;
   if (argv[1][0] == '1')
   {
@@ -52,12 +53,14 @@ int main(const int argc, const char** argv)
     {
       return 2;
     }
+  arr = arrFixed;
   }
   else
   {
     try
     {
       arr = new int[generalLength];
+      arrCopy = arr;
     }
     catch (const std::bad_alloc& e)
     {
@@ -70,7 +73,7 @@ int main(const int argc, const char** argv)
     return 2;
   }
   output << guseynov::searchNumLocMin(arr, generalLength) << "\n";
-  delete[] arr;
+  delete[] arrCopy;
   return 0;
 }
 
