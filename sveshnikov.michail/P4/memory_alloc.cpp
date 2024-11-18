@@ -17,6 +17,5 @@ char *sveshnikov::memory_alloc(char *str, std::size_t *len)
   {
     longer_str[i] = str[i];
   }
-  delete[] str;
   return longer_str;
 }
