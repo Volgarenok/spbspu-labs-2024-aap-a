@@ -73,10 +73,11 @@ int main()
   size_t iter = 0;
   while (final_str[iter] != '\0')
   {
-    std::cout << final_str[iter++];
+    iter++;
+    //std::cout << final_str[iter++];
   }
-  std::cout << '\n';
-
+ // std::cout << '\n';
+  std::cout << temp_str << '\n';
   delete[] temp_str;
   delete[] str;
   delete[] final_str;
