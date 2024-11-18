@@ -30,7 +30,7 @@ int main(int argc, char **argv)
     {
       num_diagonal = sveshnikov::process_matrix(input, matrix1, num_rows, num_columns, read);
     }
-    catch (const std::istream::failure &e)
+    catch (const std::logic_error &e)
     {
       std::cerr << "ERROR: Can not read: " << e.what() << "\n";
       return 2;
@@ -51,7 +51,7 @@ int main(int argc, char **argv)
       delete[] matrix2;
       return 2;
     }
-    catch (const std::istream::failure &e)
+    catch (const std::logic_error &e)
     {
       std::cerr << "ERROR: Can not read: " << e.what() << "\n";
       delete[] matrix2;
@@ -68,8 +68,7 @@ size_t sveshnikov::process_matrix(std::istream &in, int *matrix, size_t num_rows
 {
   if (!sveshnikov::read_matrix(in, matrix, num_rows, num_columns, read) || read != num_rows * num_columns)
   {
-    std::cerr << "ERROR: It cannot be interpreted as a two-dimensional array\n";
-    throw std::istream::failure("ERROR: can not read");
+    throw std::logic_error("ERROR: can not read");
   }
   return sveshnikov::cnt_nzr_dig(matrix, num_rows, num_columns);
 }
