@@ -1,5 +1,5 @@
 #include <iostream>
-#include "dynamicstrings.h"
+#include <dynamicstrings.h>
 
 int main()
 {
