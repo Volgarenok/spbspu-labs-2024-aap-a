@@ -13,8 +13,8 @@ int main()
   }
   catch (const std::bad_alloc& e)
   {
-  std::cerr << "Error memory\n";
-  return 1;
+    std::cerr << "Error memory\n";
+    return 1;
   }
   str[size] = '\0';
   char c = '\0';
