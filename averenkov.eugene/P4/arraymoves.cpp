@@ -25,7 +25,7 @@ char* averenkov::stringInput(std::istream& in, char* str)
   std::noskipws(in);
   while ((in >> c) && (c != '\n'))
   {
-    if (size == max)
+    if (size == max - 1)
     {
       char* str_new = reinterpret_cast<char*> (malloc(((size * n) + 1) * sizeof(char)));
       if(str_new == nullptr)
@@ -69,18 +69,20 @@ char* averenkov::latTwo(const char* str1, const char* str2)
     result[0] = '\0';
     return result;
   }
-    int found[26] = {0};
-    size_t length = 0;
-    for (size_t i = 0; str1[i] != '\0'; ++i) {
-        char ch = str1[i];
-        if (std::isalpha(static_cast<unsigned char>(ch))) {
-            ch = std::tolower(static_cast<unsigned char>(ch));
-            if (ch >= 'a' && ch <= 'z') {
-                found[ch - 'a'] = 1;
-            }
-        }
+  int found[26] = {0};
+  size_t length = 0;
+  for (size_t i = 0; str1[i] != '\0'; ++i)
+  {
+    char ch = str1[i];
+    if (std::isalpha(static_cast<unsigned char>(ch)))
+    {
+      ch = std::tolower(static_cast<unsigned char>(ch));
+      if (ch >= 'a' && ch <= 'z')
+      {
+        found[ch - 'a'] = 1;
+      }
     }
-
+  }
 
     for (size_t i = 0; str2[i] != '\0'; ++i) {
         char ch = str2[i];

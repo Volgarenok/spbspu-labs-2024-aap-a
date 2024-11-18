@@ -40,13 +40,13 @@ int main()
   try
   {
     result = averenkov::latTwo(str1, str2);
-    if (!result)
+   /* if (!result)
     {
       std::cerr << "Out of memory in latTwo\n";
       free(str1);
       free(str2);
       return 1;
-    }
+    }*/
     std::cout << result << "\n";
     free(result);
   }
