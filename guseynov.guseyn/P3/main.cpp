@@ -69,7 +69,7 @@ int main(const int argc, const char** argv)
   }
   if ((!guseynov::inputMtx(input, arr, generalLength, read)) || (read != generalLength))
   {
-    delete[] arr;
+    delete[] arrCopy;
     return 2;
   }
   output << guseynov::searchNumLocMin(arr, generalLength) << "\n";
