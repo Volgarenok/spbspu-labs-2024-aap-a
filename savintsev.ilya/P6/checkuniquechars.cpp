@@ -22,7 +22,7 @@ bool savintsev::isUnsignedInteger(const char * s, int & pos)
 
 bool savintsev::isIdentifier(const char * s, int & pos)
 {
-  if (isOneOfTheLetters(s[pos])) 
+  if (isOneOfTheLetters(s[pos]))
   {
     pos++;
     return true;
