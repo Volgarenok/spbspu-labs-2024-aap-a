@@ -4,7 +4,7 @@
 
 namespace dribas
 {
-  size_t checkChar(const char*);
+  size_t checkChar(const char* str);
 }
 
 #endif

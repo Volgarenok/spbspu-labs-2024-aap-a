@@ -1,6 +1,4 @@
-#include <cstddef>
 #include <iostream>
-#include <ios>
 #include "enterStr.hpp"
 #include "checkChar.hpp"
 
