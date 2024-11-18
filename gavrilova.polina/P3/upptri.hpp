@@ -4,7 +4,7 @@
 #include <cstddef>
 namespace gavrilova
 {
-  std::istream & input_matrix(std::istream & in, int * mtx, size_t m, size_t n, size_t & read);
+  std::istream & input_matrix(std::istream & in, int * mtx, size_t m, size_t n, size_t & read, unsigned long int num);
   bool isUpperTriangMtx(const int * mtx, size_t m, size_t n);
 }
 #endif

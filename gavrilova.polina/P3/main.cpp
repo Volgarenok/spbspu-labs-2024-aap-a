@@ -70,12 +70,9 @@ int main(int argc, char ** argv)
     mtx = temp;
   }
 
-  gavrilova::input_matrix(input, mtx, m, n, read);
+  gavrilova::input_matrix(input, mtx, m, n, read, num);
 
-  if (num == 1 && (!read || !input)){
-    mtx = nullptr;
-  }
-  if (!read || !input) {
+  if (!input || input.eof()) {
     delete[] mtx;
     return 1;
   }

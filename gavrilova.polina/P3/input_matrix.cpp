@@ -2,7 +2,7 @@
 #include <cstddef>
 #include <istream>
 
-std::istream & gavrilova::input_matrix(std::istream & in, int * mtx, size_t m, size_t n, size_t & read)
+std::istream & gavrilova::input_matrix(std::istream & in, int * mtx, size_t m, size_t n, size_t & read, unsigned long int num)
 {
   if (m == 0 || n == 0) {
     return in;
@@ -16,9 +16,8 @@ std::istream & gavrilova::input_matrix(std::istream & in, int * mtx, size_t m, s
       }
     }
   }
-  if (read != m * n) {
-    read = 0;
+  if ((!in || in.eof()) && num == 1) {
+    mtx = nullptr;
   }
-
   return in;
 }
