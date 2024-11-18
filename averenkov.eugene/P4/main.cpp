@@ -25,13 +25,6 @@ int main()
       std::cerr << "Out of memory during input\n";
       return 1;
     }
-    if (newStr1[0] == '\0')
-    {
-      free(newStr1);
-      free(str2);
-      std::cerr << "Error: Empty string input for first string\n";
-      return 1;
-    }
     free(str1);
     str1 = newStr1;
     char* newStr2 = averenkov::stringInput(std::cin, str2);
@@ -42,11 +35,11 @@ int main()
       std::cerr << "Out of memory during input\n";
       return 1;
     }
-    if (newStr2[0] == '\0')
+    if (newStr1[0] == '\0' && newStr2[0] == '\0')
     {
       free(newStr2);
-      free(str1);
-      std::cerr << "Error: Empty string input for second string\n";
+      free(newStr1);
+      std::cerr << "Error: Empty string input\n";
       return 1;
     }
     free(str2);
