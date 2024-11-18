@@ -4,7 +4,7 @@
 
 #include "matrix.hpp"
 
-void cmdProtection(int argc, const char **argv);
+void cmdProtection(const int argc, const char **argv);
 
 int main(const int argc, const char** argv)
 {
@@ -45,7 +45,6 @@ int main(const int argc, const char** argv)
   }
   int arrFixed[fixedSize];
   int *arr = arrFixed;
-  bool itIsDynamic = false;
   size_t read = 0;
   if (argv[1][0] == '1')
   {
@@ -64,25 +63,18 @@ int main(const int argc, const char** argv)
     {
       return 2;
     }
-    itIsDynamic = true;
   }
   if ((!guseynov::inputMtx(input, arr, generalLength, read)) || (read != generalLength))
   {
-    if (itIsDynamic)
-    {
-      delete[] arr;
-    }
+    delete[] arr;
     return 2;
   }
   output << guseynov::searchNumLocMin(arr, generalLength) << "\n";
-  if (itIsDynamic)
-  {
-    delete[] arr;
-  }
+  delete[] arr;
   return 0;
 }
 
-void cmdProtection(int argc, const char **argv)
+void cmdProtection(const int argc, const char **argv)
 {
   constexpr int tasknum = 4;
   if (argc > tasknum)
