@@ -72,7 +72,7 @@ int main(int argc, char ** argv)
 
   gavrilova::input_matrix(input, mtx, m, n, read, num);
 
-  if (!input || input.eof()) {
+  if (!input || !input.eof()) {
     delete[] mtx;
     return 1;
   }

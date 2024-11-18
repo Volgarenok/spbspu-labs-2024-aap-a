@@ -16,7 +16,7 @@ std::istream & gavrilova::input_matrix(std::istream & in, int * mtx, size_t m, s
       }
     }
   }
-  if ((!in || in.eof()) && num == 1) {
+  if ((!in || !in.eof()) && num == 1) {
     mtx = nullptr;
   }
   return in;
