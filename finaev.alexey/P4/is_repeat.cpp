@@ -4,9 +4,12 @@ int finaev::is_repeat(char* str, size_t dl)
 {
   for (size_t i = 0; i < (dl - 1); i++)
   {
-    if (str[i] == str[i + 1])
+    for (size_t j = i + 1; j < dl; j++)
     {
-      return 1;
+      if (str[i] == str[j])
+      {
+        return 1;
+      }
     }
   }
   return 0;
