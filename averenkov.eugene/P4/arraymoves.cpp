@@ -16,6 +16,7 @@ char* averenkov::stringInput(std::istream& in, char* str)
   str = reinterpret_cast<char*>(malloc(max * sizeof(char)));
   if (str == nullptr)
   {
+    free(str);
     return nullptr;
   }
   while ((in >> c) && (c != '\n'))
