@@ -72,16 +72,20 @@ int main(int argc, char ** argv)
 
   gavrilova::input_matrix(input, mtx, m, n, read);
 
-  if (read != m*n) {
+  if (num == 1 && !read){
+    mtx = nullptr;
+  }
+  if (!read) {
     delete[] mtx;
     return 1;
   }
 
   output << gavrilova::isUpperTriangMtx(mtx, m, n) << "\n";
 
-  if (num == 1){
+  if (num == 1) {
     mtx = nullptr;
   }
+
   delete[] mtx;
 }
 

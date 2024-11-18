@@ -16,5 +16,9 @@ std::istream & gavrilova::input_matrix(std::istream & in, int * mtx, size_t m, s
       }
     }
   }
+  if (read != m * n) {
+    read = 0;
+  }
+
   return in;
 }
