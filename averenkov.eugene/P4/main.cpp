@@ -37,6 +37,11 @@ int main()
     }
     free(str2);
     str2 = newStr2;
+    if(str1[0] == '\0' || str2[0] == '\0')
+    {
+      std::cerr << "Empty string";
+      return 1;
+    }
     char* result = averenkov::latTwo(str1, str2);
     if (!result)
     {
