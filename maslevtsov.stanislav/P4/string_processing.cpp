@@ -9,7 +9,6 @@ char* maslevtsov::expandString(char* string, std::size_t capacity)
   {
     newString[i] = string[i];
   }
-  delete[] string;
 
   return newString;
 }
@@ -27,15 +26,18 @@ char* maslevtsov::getline(std::istream& in)
     if (stringIndex == stringCapacity - 1)
     {
       string[stringIndex] = '\0';
+      char* expandedString = nullptr;
       try
       {
-        string = maslevtsov::expandString(string, stringCapacity *= 2);
+        expandedString = maslevtsov::expandString(string, stringCapacity *= 2);
       }
       catch (const std::bad_alloc& e)
       {
         delete[] string;
         throw;
       }
+      delete[] string;
+      string = expandedString;
     }
     string[stringIndex++] = symbol;
   }
