@@ -1,5 +1,5 @@
 #include <iostream>
-#include <arrays_input>
+#include <arrays_input.hpp>
 #include "recursion.hpp"
 
 int main()
