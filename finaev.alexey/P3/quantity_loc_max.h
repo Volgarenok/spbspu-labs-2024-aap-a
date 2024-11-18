@@ -1,7 +1,6 @@
 #ifndef QUANTITY_LOC_MAX_H
 #define QUANTITY_LOC_MAX_H
 
-#include <ostream>
 #include <cstddef>
 
 namespace finaev

@@ -17,6 +17,11 @@ int main(int argc, char ** argv)
     std::cerr << "Not enough arguments" << "\n";
     return 1;
   }
+  if (*argv[1] == '\0')
+  {
+    std::cerr  << "First paremeter is empty" << "\n";
+    return 1;
+  }
   if (argv[1][1] != '\0' || (argv[1][0] != '1' && argv[1][0] != '2'))
   {
     std::cerr << "False first parameter" << "\n";
@@ -37,11 +42,11 @@ int main(int argc, char ** argv)
     return 2;
   }
   std::ofstream output(argv[3]);
-    if (strk <= 0 || stl <= 0)
-    {
-      output << strk << " " << stl << "\n";
-      return 0;
-    }
+  if (strk <= 0 || stl <= 0)
+  {
+    output << strk << " " << stl << "\n";
+    return 0;
+  }
   size_matrix = strk * stl;
   int fixed_matrix[10000];
   int *dynamic_matrix = nullptr;
