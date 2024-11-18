@@ -5,7 +5,7 @@
 void bocharov::table(double number, size_t k, double error)
 {
   const int n = 3;
-  double (*taylorf_ptrs[])(double, size_t, double) = {bocharov::f, bocharov::f2, bocharov::sumf};
+  double (*taylorf_ptrs[])(double, size_t, double) = {f, f2, sumf};
   std::cout << std::setw(15) << number;
   for (size_t i = 0; i < n; i++)
   {
@@ -18,7 +18,7 @@ void bocharov::table(double number, size_t k, double error)
       std::cout << std::setw(15) << "Math error";
     }
   }
-  std::cout << std::setw(15) << bocharov::sqrt1_x(number);
-  std::cout << std::setw(15) << bocharov::lnf(number);
-  std::cout << std::setw(15) << bocharov::sumf2(number) << "\n";
+  std::cout << std::setw(15) << sqrt1_x(number);
+  std::cout << std::setw(15) << lnf(number);
+  std::cout << std::setw(15) << sumf2(number) << "\n";
 }
