@@ -14,7 +14,7 @@ char *sveshnikov::read_str(std::istream &in, char *str, std::size_t *len)
       try
       {
         char *new_str = str;
-        new_str = sveshnikov::memory_alloc(str, len);
+        new_str = memory_alloc(str, len);
         delete[] str;
         str = new_str;
       }

@@ -1,5 +1,5 @@
-#include "rep_sym.hpp"
 #include <stdexcept>
+#include "rep_sym.hpp"
 
 int main()
 {
@@ -18,7 +18,7 @@ int main()
   }
   catch (const std::istream::failure &e)
   {
-    std::cerr << "ERROR: CAN NOT READ " << e.what() << '\n';
+    std::cerr << "ERROR: CAN NOT READ! " << e.what() << '\n';
     delete[] str;
     return 1;
   }
