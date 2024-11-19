@@ -17,7 +17,7 @@ int main(int argc, char ** argv)
     std::cerr << "Not enough arguments" << "\n";
     return 1;
   }
-  if (*argv[1] == '\0')
+  if (argv[1][0] == '\0')
   {
     std::cerr  << "First paremeter is empty" << "\n";
     return 1;
