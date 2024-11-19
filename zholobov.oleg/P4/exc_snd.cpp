@@ -22,7 +22,7 @@ static char* my_realloc(char* p, size_t current_size, size_t new_size)
 
 char* zholobov::read_string(std::istream& input)
 {
-  constexpr size_t buf_size = 3;
+  constexpr size_t buf_size = 32;
   char buf[buf_size];
   size_t buf_pos = 0;
   char* str = nullptr;
