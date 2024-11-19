@@ -88,7 +88,7 @@ void cmdProtection(const int argc, const char **argv)
   {
     throw std::logic_error("Not enough arguments");
   }
-  if (*argv[1] == '\0')
+  if (argv[1][0] == '\0')
   {
     throw std::logic_error("First argument is empty");
   }
