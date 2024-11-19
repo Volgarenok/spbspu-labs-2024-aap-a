@@ -5,7 +5,8 @@
 
 namespace finaev
 {
-  int quantity_loc_max(const int *matrix, size_t strk, size_t stl);
+  bool is_loc_max(const int *a, size_t stl, size_t i, size_t j);
+  size_t quantity_loc_max(const int *matrix, size_t strk, size_t stl);
 }
 
 #endif

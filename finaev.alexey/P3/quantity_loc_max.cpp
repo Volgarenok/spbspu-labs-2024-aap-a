@@ -1,37 +1,21 @@
 #include "quantity_loc_max.h"
 
-int finaev::quantity_loc_max(const int* matrix, size_t strk, size_t stl)
+bool finaev::is_loc_max(const int* a, size_t stl, size_t i, size_t j)
 {
-  int res = 0;
-  int temp = 0;
+  size_t t = i * stl + j;
+  return (a[t] > a[t - 1] && a[t] > a[t + 1] && a[t] > a[t - stl - 1] && a[t] > a[t - stl] && a[t] > a[t - stl + 1] && a[t] > a[t + stl - 1] && a[t] > a[t + stl] && a[t] > a[t + stl + 1]);
+}
+
+size_t finaev::quantity_loc_max(const int* matrix, size_t strk, size_t stl)
+{
+  size_t res = 0;
   for (size_t i = 1; i < strk - 1; i++)
   {
     for (size_t j = 1; j < stl - 1; j++)
     {
-      for (size_t z = stl - 1; z <= strk + 1; z++)
+      if (is_loc_max(matrix, stl, i, j) == true)
       {
-        if (matrix[i * stl + j] <= matrix[i * stl + j - z])
-        {
-          break;
-        }
-        if (matrix[i * stl + j] <= matrix[i * stl + j + z])
-        {
-          break;
-        }
-        if (matrix[i * stl + j] <= matrix[i * stl + j - 1])
-        {
-          break;
-        }
-        if (matrix[i * stl + j] <= matrix[i * stl + j + 1])
-        {
-          break;
-        }
-        temp++;
-        if (temp == 3)
-        {
-          res++;
-          temp = 0;
-        }
+        res++;
       }
     }
   }
