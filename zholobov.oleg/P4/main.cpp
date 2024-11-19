@@ -12,7 +12,7 @@ int main()
   }
   char* result = zholobov::exc_snd(str, exclude_characters);
   std::cout << result << "\n";
-  free(result);
-  free(str);
+  std::free(result);
+  std::free(str);
   return 0;
 }
