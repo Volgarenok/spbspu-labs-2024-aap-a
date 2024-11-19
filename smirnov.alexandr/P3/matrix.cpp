@@ -93,7 +93,7 @@ void smirnov::lft_top_clkOutput(std::ostream & output, int * matrix, size_t rows
     {
       output << " " << matrix[i * columns + j];
     }
-  output << "\n";
+    output << "\n";
   }
 }
 

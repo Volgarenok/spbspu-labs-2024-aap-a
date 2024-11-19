@@ -22,13 +22,6 @@ int main(int argc, char ** argv)
     std::cerr << "First parameter is out of range\n";
     return 1;
   }
-  for (int i = 0; argv[1][i] != '\0'; ++i)
-  {
-    if (!std::isdigit(argv[1][i]))
-    {
-      std::cerr << "First parameter is not a number\n";
-    }
-  }
   std::ifstream input(argv[2]);
   size_t rows = 0;
   size_t columns = 0;
