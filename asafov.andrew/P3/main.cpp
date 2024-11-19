@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
+#include <cstring>
 #include "matrixAutoInitiallization.hpp"
 #include "matrixDynamicInitiallization.hpp"
 #include "matrixPush.hpp"
@@ -16,7 +17,7 @@ int main(int argc, char** argv)
     std::cerr << "Too many arguments";
     return 1;
   }
-  else if (argv[1][0] == '1')
+  else if (strcmp(argv[1], "1")==0)
   {
     int mtx[10000] = {};
     int a[2] = {};
@@ -30,7 +31,7 @@ int main(int argc, char** argv)
     }
     asafov::matrixPush(asafov::matrixHandlingSanctions(mtx, a[0], a[1]), argv[3]);
   }
-  else if (argv[1][0] == '2')
+  else if (strcmp(argv[1], "2")==0)
   {
     int* mtx = nullptr;
     int a[2] = {};
