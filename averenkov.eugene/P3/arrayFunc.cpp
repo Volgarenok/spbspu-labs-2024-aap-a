@@ -77,12 +77,22 @@ size_t averenkov::num_col_lsr(const int* t, size_t m, size_t n)
   return longest_id;
 }
 
-
-void averenkov::output_matrix(std::ostream& out, const int* t, size_t m, size_t n)
+void averenkov::output_matrix(std::ostream& output, const int* t, size_t m, size_t n)
 {
   for (size_t i = 1; i < m * n; ++i)
   {
-    out << t[0];
-    out << " " << t[i];
+    output << t[0];
+    output << " " << t[i];
   }
+}
+
+void averenkov::output_answer(std::ostream& output, const int* t, size_t m, size_t n)
+{
+  output << averenkov::num_col_lsr(t, m, n) << " ";
+  output << m << " " << n << " ";
+  averenkov::output_matrix(output, t, m, n);
+  output << "\n";
+  output << averenkov::max_sum_sdg(t, m, n) << " ";
+  output << m << " " << n << " ";
+  averenkov::output_matrix(output, t, m, n);
 }

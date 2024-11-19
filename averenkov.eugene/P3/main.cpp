@@ -18,7 +18,7 @@ int main(int argc, char** argv)
     std::cerr << "too many arguments\n";
     return 1;
   }
-  for (size_t i = 0; argv[1][i] != '\0'; i++)
+/*  for (size_t i = 0; argv[1][i] != '\0'; i++)
   {
     if (argv[1][i] < '0' || argv[1][i] > '9')
     {
@@ -26,6 +26,9 @@ int main(int argc, char** argv)
       return 1;
     }
   }
+  if (isdigit(argv[1][0])
+*/
+
   if (std::strcmp(argv[1], "1") != 0 && std::strcmp(argv[1], "2") != 0)
   {
     std::cerr << "First parameter is out of range\n";
@@ -33,20 +36,22 @@ int main(int argc, char** argv)
   }
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
-  size_t m = 0, n = 0;
+  size_t m = 0, n = 0, read = 0;
   input >> m;
   input >> n;
   int* matrix = nullptr;
+  int* dynarray = nullptr;
   if (std::atoi(argv[1]) == 1)
   {
-    int static_matrix[10000] = { 0 };
-    matrix = static_matrix;
+    int statarray[10000] = { 0 };
+    matrix == statarray;
   }
   else
   {
     try
     {
-      matrix = new int[m * n];
+      dynarray = new int[m * n];
+      matrix == dynarray;
     }
     catch (const std::bad_alloc& e)
     {
@@ -54,27 +59,12 @@ int main(int argc, char** argv)
       return 1;
     }
   }
-  size_t read = 0;
   if (!averenkov::input_matrix(input, matrix, m, n, read) || read != m * n)
   {
-    if (std::atoi(argv[1]) == 2)
-    {
-      delete[] matrix;
-    }
     std::cerr << "Read fail\n";
     return 2;
   }
-  output << averenkov::num_col_lsr(matrix, m, n) << " ";
-  output << m << " " << n << " ";
-  averenkov::output_matrix(output, matrix, m, n);
-  output << "\n";
-  output << averenkov::max_sum_sdg(matrix, m, n) << " ";
-  output << m << " " << n << " ";
-  averenkov::output_matrix(output, matrix, m, n);
-  if (std::atoi(argv[1]) == 2)
-  {
-    delete[] matrix;
-  }
+  averenkov::output_answer(output, matrix, m, n);
   return 0;
 }
 
