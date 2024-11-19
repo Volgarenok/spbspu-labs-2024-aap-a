@@ -4,7 +4,7 @@
 
 #include "matrix.hpp"
 
-void cmdProtection(const int argc, const char **argv);
+void cmdProtection(int argc, const char **argv);
 
 int main(const int argc, const char** argv)
 {
