@@ -56,9 +56,9 @@ int main(int argc, char **argv)
       new_mtx = abramov::getMatrix(input, matrix, m, n, read, count);
     }
   }
-  catch (const char *e)
+  catch (const std::invalid_argument &e)
   {
-    std::cerr << e;
+    std::cerr << e.what();
     delete[] matrix;
     return 1;
   }

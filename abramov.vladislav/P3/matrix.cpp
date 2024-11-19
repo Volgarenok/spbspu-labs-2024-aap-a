@@ -66,7 +66,7 @@ int *abramov::getMatrix(std::istream &in, int *matrix, size_t m, size_t n, size_
 {
   if (!abramov::inputMatrix(in, matrix, m, n, read) || read != m * n)
   {
-    throw "Wrong input\n";
+    throw std::invalid_argument("Wrong input\n");
   }
   int *new_mtx = nullptr;
   new_mtx = abramov::toSquare(matrix, m, n, count);
