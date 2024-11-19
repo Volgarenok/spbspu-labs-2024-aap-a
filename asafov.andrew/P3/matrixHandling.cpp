@@ -61,10 +61,10 @@ int asafov::matrixHandlingSanctions(int* mtx, size_t n, size_t m)
   int maxCount = 0;
   int maxMaxCount = 0;
   int c = 0;
-  int i = 0;
+  size_t i = 0;
   for (; i < m; i++)
   {
-    for (int e = 0; e < n-1; e++)
+    for (size_t e = 0; e < n-1; e++)
     {
       if (mtx[e * m + i] == mtx[(e + 1) * m + i])
       {
