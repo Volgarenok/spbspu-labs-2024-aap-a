@@ -1,7 +1,5 @@
 #include "matrix.h"
-
 #include <iostream>
-#include <fstream>
 
 std::istream & hismatova::input_matrix(std::istream & in, int * matrix, size_t m, size_t n, size_t & read)
 {
@@ -17,7 +15,7 @@ std::istream & hismatova::input_matrix(std::istream & in, int * matrix, size_t m
   return in;
 }
 
-int hismatova::find_longest(int* const matrix, size_t m, size_t n)
+int hismatova::find_longest(const int* const matrix, size_t m, size_t n)
 {
   int ans = 0;
   int count = 1;

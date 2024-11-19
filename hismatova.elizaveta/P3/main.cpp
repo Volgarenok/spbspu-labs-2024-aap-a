@@ -1,8 +1,7 @@
-#include "matrix.h"
-
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include "matrix.h"
 
 int main(int argc, char ** argv)
 {
@@ -11,7 +10,8 @@ int main(int argc, char ** argv)
     std::cerr << "wrong count of argc\n";
     return 1;
   }
-  if (!(argv[1][0] == 1 || argv[1][0] != 2))
+  int parametr = std::atoi(argv[1]);
+  if ((parametr != 1 && parametr != 2) || argv[1][1] != '\0')
   {
     std::cerr << "first argv is wrong\n";
     return 1;
@@ -23,7 +23,6 @@ int main(int argc, char ** argv)
     return 1;
   }
   std::ofstream out_par(argv[3]);
-  const int parametr = std::atoi(argv[1]);
   size_t m = 0;
   size_t n = 0;
   in_par >> m >> n;
@@ -35,14 +34,15 @@ int main(int argc, char ** argv)
   out_par << m << " " << n << "\n";
   size_t read = 0;
   int* matrix = nullptr;
+  int matrix1[10000] = {0};
   if (parametr == 1)
   {
-    if (m * n > 1000)
+    if (m * n > 10000)
     {
       std::cerr << "too many elements\n";
       return 1;
     }
-    matrix = new int[1000];
+    matrix = matrix1;
   }
   else
   {
