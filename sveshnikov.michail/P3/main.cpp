@@ -2,6 +2,8 @@
 #include <stdexcept>
 #include "cnt_nzr_dig.hpp"
 
+size_t process_matrix(std::istream &in, int *matrix, size_t num_rows, size_t num_columns, size_t &read);
+
 int main(int argc, char **argv)
 {
   if (argc < 4)
@@ -32,7 +34,7 @@ int main(int argc, char **argv)
     }
     catch (const std::logic_error &e)
     {
-      std::cerr << "ERROR: Can not read: " << e.what() << "\n";
+      std::cerr << "ERROR: Can not read input stream: " << e.what() << "\n";
       return 2;
     }
   }
@@ -62,6 +64,7 @@ int main(int argc, char **argv)
   std::ofstream output(argv[3]);
   output << num_diagonal;
   output << "\n";
+  return 0;
 }
 
 size_t process_matrix(std::istream &in, int *matrix, size_t num_rows, size_t num_columns, size_t &read)
