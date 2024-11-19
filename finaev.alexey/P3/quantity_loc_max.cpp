@@ -3,7 +3,10 @@
 bool finaev::is_loc_max(const int* a, size_t stl, size_t i, size_t j)
 {
   size_t t = i * stl + j;
-  return (a[t] > a[t - 1] && a[t] > a[t + 1] && a[t] > a[t - stl - 1] && a[t] > a[t - stl] && a[t] > a[t - stl + 1] && a[t] > a[t + stl - 1] && a[t] > a[t + stl] && a[t] > a[t + stl + 1]);
+  bool is_loc_max = (a[t] > a[t - 1]) && (a[t] > a[t + 1]);
+  is_loc_max = is_loc_max && (a[t] > a[t - stl - 1]) && (a[t] > a[t - stl]) && (a[t] > a[t - stl + 1]);
+  is_loc_max = is_loc_max && (a[t] > a[t + stl - 1]) && (a[t] > a[t + stl]) && (a[t] > a[t + stl + 1]);
+  return is_loc_max;
 }
 
 size_t finaev::quantity_loc_max(const int* matrix, size_t strk, size_t stl)
