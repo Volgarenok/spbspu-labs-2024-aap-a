@@ -60,6 +60,7 @@ int main(int argc, char** argv)
     if (!averenkov::input_matrix(input, matrix, m, n, read) || read != m * n)
     {
       std::cerr << "Read fail\n";
+      delete[] dynarray;
       return 2;
     }
     averenkov::output_answer(output, matrix, m, n);

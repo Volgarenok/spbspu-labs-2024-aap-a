@@ -79,6 +79,10 @@ size_t averenkov::num_col_lsr(const int* t, size_t m, size_t n)
 
 void averenkov::output_matrix(std::ostream& output, const int* t, size_t m, size_t n)
 {
+  if(m == 0 && n == 0)
+  {
+    return;
+  }
   output << t[0];
   for (size_t i = 1; i < m * n; ++i)
   {
