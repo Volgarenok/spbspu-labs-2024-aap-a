@@ -44,14 +44,14 @@ int main(int argc, char** argv)
   if (std::atoi(argv[1]) == 1)
   {
     int statarray[10000] = { 0 };
-    matrix == statarray;
+    matrix = statarray;
   }
   else
   {
     try
     {
       dynarray = new int[m * n];
-      matrix == dynarray;
+      matrix = dynarray;
     }
     catch (const std::bad_alloc& e)
     {
