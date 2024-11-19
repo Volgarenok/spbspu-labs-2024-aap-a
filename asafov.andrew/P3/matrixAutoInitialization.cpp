@@ -2,7 +2,7 @@
 #include <fstream>
 #include <stdexcept>
 
-void asafov::matrixAutoInitialization(int* mtx, char* input, int& n, int& m)
+void asafov::matrixAutoInitialization(int* mtx, char* input, size_t& n, size_t& m)
 {
   std::ifstream fin(input);
   fin >> n;

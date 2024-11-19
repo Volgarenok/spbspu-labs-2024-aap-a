@@ -1,6 +1,6 @@
 #include "matrixHandling.hpp"
 
-void asafov::matrixHandling(int* mtx, int n, int m)
+void asafov::matrixHandling(int* mtx, size_t n, size_t m)
 {
   int count = 1;
   int e = n;
@@ -55,7 +55,7 @@ void asafov::matrixHandling(int* mtx, int n, int m)
   }
 }
 
-int asafov::matrixHandlingSanctions(int* mtx, int n, int m)
+int asafov::matrixHandlingSanctions(int* mtx, size_t n, size_t m)
 {
   int count = 0;
   int maxCount = 0;

@@ -20,7 +20,7 @@ int main(int argc, char** argv)
   else if (strcmp(argv[1], "1")==0)
   {
     int mtx[10000] = {};
-    int a[2] = {};
+    size_t a[2] = {};
     try
     {
       asafov::matrixAutoInitialization(mtx, argv[2], a[0], a[1]);
@@ -34,7 +34,7 @@ int main(int argc, char** argv)
   else if (strcmp(argv[1], "2")==0)
   {
     int* mtx = nullptr;
-    int a[2] = {};
+    size_t a[2] = {};
     try
     {
       asafov::matrixDynamicInitialization(mtx, argv[2], a[0], a[1]);
