@@ -77,7 +77,7 @@ int main(const int argc, const char** argv)
   return 0;
 }
 
-void cmdProtection(const int argc, const char **argv)
+void cmdProtection(int argc, const char **argv)
 {
   constexpr int tasknum = 4;
   if (argc > tasknum)
