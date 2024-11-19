@@ -15,8 +15,9 @@ int main(int argc, char ** argv)
     std::cerr << "Too many arguments\n";
     return 1;
   }
-  int num = std::atoi(argv[1]);
-  if (num == 1 && num == 2)
+  int numIsOne = std::strcmp(argv[1], "1");
+  int numIsTwo = std::strcmp(argv[1], "2");
+  if (numIsOne != 0 && numIsTwo != 0)
   {
     std::cerr << "First parameter is out of range or not a number\n";
     return 1;
@@ -26,12 +27,11 @@ int main(int argc, char ** argv)
   size_t m = 0, n = 0;
   input >> m >> n;
   size_t read = 0;
-  std::ofstream output(argv[3]);
 
   int * arr = nullptr;
   int v[10000] = {};
   int * dynamicArr = nullptr;
-  if (num == 1)
+  if (numIsOne == 0)
   {
     arr = v;
   }
@@ -54,13 +54,7 @@ int main(int argc, char ** argv)
     delete[] dynamicArr;
     return 2;
   }
-  if (mozhegova::uppTriMtx(arr, m, n))
-  {
-    output << "true\n";
-  }
-  else
-  {
-    output << "false\n";
-  }
+  std::ofstream output(argv[3]);
+  output << std::boolalpha << mozhegova::uppTriMtx(arr, m, n) << '\n';
   delete[] dynamicArr;
 }
