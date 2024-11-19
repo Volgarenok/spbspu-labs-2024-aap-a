@@ -5,12 +5,12 @@
 int main()
 {
   char *arr = nullptr;
-  const size_t num = 26;
-  char c = '\n';
-  size_t min = 10;
-  size_t step = 10;
-  size_t size = 0;
-  arr = static_cast < char* > (malloc(min));
+  constexpr size_t numOfLetters = 26;
+  char c = '\0';
+  size_t reserved = 10;
+  constexpr size_t step = 10;
+  size_t wPoint = 0;
+  arr = static_cast<char*>(malloc(reserved));
   if (arr == nullptr)
   {
     return 1;
@@ -18,11 +18,11 @@ int main()
   std::noskipws(std::cin);
   while ((std::cin >> c) && (c != '\n'))
   {
-    arr[size++] = c;
-    if (size == min)
+    arr[wPoint++] = c;
+    if (wPoint == reserved)
     {
-      arr = guseyn::newarr(arr, min, step);
-      min += step;
+      arr = guseynov::getNewArr(arr, reserved, step);
+      reserved += step;
     }
   }
   if (!std::cin)
@@ -30,15 +30,15 @@ int main()
     free(arr);
     return 1;
   }
-  arr = guseyn::newarr(arr, size, 0);
+  arr = guseynov::getNewArr(arr, wPoint, 0);
   if (arr == nullptr)
   {
     return 1;
   }
-  char uniqueChars[num] = {'a', 'b', 'c', 'd','e', 'f', 'g', 'h', 'i',
+  char uniqueChars[numOfLetters] = {'a', 'b', 'c', 'd','e', 'f', 'g', 'h', 'i',
   'j', 'k', 'l','m', 'n', 'o', 'p', 'q', 'r',
   's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-  std::cout << guseyn::identifyUniqueChar(arr, uniqueChars, num) << "\n";
+  std::cout << guseynov::identifyUniqueChar(arr, uniqueChars, numOfLetters) << "\n";
   free(arr);
   return 0;
 }

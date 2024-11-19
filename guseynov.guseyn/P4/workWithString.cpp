@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <cstdlib>
 
-char * guseyn::newarr(char *arr, size_t size, size_t step)
+char * guseynov::getNewArr(char *arr, size_t size, size_t step)
 {
-  char *newarr = static_cast < char* > (malloc(size+step+1));
+  char *newarr = static_cast<char*>(malloc(size+step+1));
 
   for (size_t i = 0; i < size; i++)
   {
@@ -17,27 +17,25 @@ char * guseyn::newarr(char *arr, size_t size, size_t step)
   return newarr;
 }
 
-size_t guseyn::identifyUniqueChar(const char *inputString, const char *uniqueChars, size_t num)
+size_t guseynov::identifyUniqueChar(const char *inputString, const char *uniqueChars, size_t num)
 {
-  bool *check;
-  size_t res = 0;
-  size_t current = 0;
-  check = reinterpret_cast < bool* > (malloc((num) * sizeof(bool)));
+  bool used[num] = {};
   for (size_t i = 0; i < num; i++)
   {
-    check[i] = true;
+    used[i] = true;
   }
+  size_t current = 0;
+  size_t res = 0;
   while (inputString[current++] != '\0')
   {
     for (size_t j = 0; j < num; j++)
     {
-      if ((check[j]) && (inputString[current] == uniqueChars[j]))
+      if ((used[j]) && (inputString[current] == uniqueChars[j]))
       {
-        check[j] = false;
+        used[j] = false;
         res++;
       }
     }
   }
-  free(check);
   return res;
 }
