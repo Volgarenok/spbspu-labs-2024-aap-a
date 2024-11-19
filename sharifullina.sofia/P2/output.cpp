@@ -11,17 +11,23 @@ void sharifullina::output_row(double i, size_t k, double error)
   const size_t WidthOfCol = 12;
   std::cout.precision(3);
   std::cout << std::setw(WidthOfCol) << std::fixed << i << " ";
-    for (size_t j = 0; j < 3; j++)
+  FuncPtr funcs[] =
+  {
+    sharifullina::cos,
+    sharifullina::exp_negx,
+    sharifullina::cos_and_exp
+  };
+  for (size_t j = 0; j < 3; j++)
+  {
+    try
     {
-      try
-      {
-        std::cout << std::setw(WidthOfMathErr) << funcs[j](i, k, error);
-      }
-      catch (const std::logic_error& e)
-      {
-        std::cout << std::setw(WidthOfMathErr) << "<MATH ERROR>";
-      }
+      std::cout << std::setw(WidthOfMathErr) << funcs[j](i, k, error);
     }
+    catch (const std::logic_error& e)
+    {
+      std::cout << std::setw(WidthOfMathErr) << "<MATH ERROR>";
+    }
+  }
   std::cout << " " << std::setw(WidthOfCol) << cos_cmath(i);
   std::cout << " " << std::setw(WidthOfCol) << exp_negx_cmath(i);
   std::cout << " " << std::setw(WidthOfCol) << cos_and_exp_cma(i);

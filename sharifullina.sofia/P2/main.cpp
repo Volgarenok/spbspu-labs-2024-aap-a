@@ -23,5 +23,5 @@ int  main()
   constexpr double error = 0.001;
   constexpr double step = 0.05;
 
-sharifullina::output_table(left, right, k, step, error);
+  sharifullina::output_table(left, right, k, step, error);
 }
