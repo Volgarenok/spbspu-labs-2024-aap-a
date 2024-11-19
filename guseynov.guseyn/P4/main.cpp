@@ -6,31 +6,8 @@ int main()
 {
   char *arr = nullptr;
   constexpr size_t numOfLetters = 26;
-  char c = '\0';
-  size_t reserved = 10;
-  constexpr size_t step = 10;
-  size_t wPoint = 0;
-  arr = static_cast<char*>(malloc(reserved));
-  if (arr == nullptr)
-  {
-    return 1;
-  }
-  std::noskipws(std::cin);
-  while ((std::cin >> c) && (c != '\n'))
-  {
-    arr[wPoint++] = c;
-    if (wPoint == reserved)
-    {
-      arr = guseynov::getNewArr(arr, reserved, step);
-      reserved += step;
-    }
-  }
-  if (!std::cin)
-  {
-    free(arr);
-    return 1;
-  }
-  arr = guseynov::getNewArr(arr, wPoint, 0);
+  constexpr char stop = '\n';
+  arr = guseynov::getLine(std::cin, stop);
   if (arr == nullptr)
   {
     return 1;
