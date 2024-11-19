@@ -4,11 +4,10 @@
 
 namespace ivanova
 {
-    double arctg(double x, size_t k, double error);
-    double exp(double x, size_t k, double error);
-    double stdArctg(double x);
-    double stdExp(double x);
-    double factorial(int n);
-    void Output(double x, size_t k, double error);
+  double arctg(double x, size_t k, double error);
+  double exp(double x, size_t k, double error);
+  double std_arctg(double x);
+  double std_exp(double x);
+  void output(double x, size_t k, double error);
 }
 #endif
