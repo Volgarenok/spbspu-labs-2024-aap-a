@@ -28,7 +28,7 @@ int main(int argc, char **argv)
     int matrix1[LEN] = {};
     try
     {
-      num_diagonal = sveshnikov::process_matrix(input, matrix1, num_rows, num_columns, read);
+      num_diagonal = process_matrix(input, matrix1, num_rows, num_columns, read);
     }
     catch (const std::logic_error &e)
     {
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     try
     {
       matrix2 = new int[len];
-      num_diagonal = sveshnikov::process_matrix(input, matrix2, num_rows, num_columns, read);
+      num_diagonal = process_matrix(input, matrix2, num_rows, num_columns, read);
     }
     catch (const std::bad_alloc &e)
     {
@@ -64,7 +64,7 @@ int main(int argc, char **argv)
   output << "\n";
 }
 
-size_t sveshnikov::process_matrix(std::istream &in, int *matrix, size_t num_rows, size_t num_columns, size_t &read)
+size_t process_matrix(std::istream &in, int *matrix, size_t num_rows, size_t num_columns, size_t &read)
 {
   if (!sveshnikov::read_matrix(in, matrix, num_rows, num_columns, read) || read != num_rows * num_columns)
   {
