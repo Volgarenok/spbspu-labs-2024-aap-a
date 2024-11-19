@@ -51,16 +51,25 @@ int main(int argc, char ** argv)
   if (!hismatova::input_matrix(in_par, matrix, m, n, read))
   {
     std::cerr << "input matrix failed\n";
-    delete[] matrix;
+    if (parametr == 2)
+    {
+      delete[] matrix;
+    }
     return 1;
   }
   if (read < m * n)
   {
     std::cerr << "not enough elements\n";
-    delete[] matrix;
+    if (parametr == 2)
+    {
+      delete[] matrix;
+    }
     return 1;
   }
   out_par << hismatova::find_longest(matrix, m, n) << "\n";
-  delete[] matrix;
+  if (parametr == 2)
+  {
+    delete[] matrix;
+  }
   return 0;
 }
