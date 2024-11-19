@@ -2,6 +2,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <cstring>
+#include <cstddef>
 #include "matrixAutoInitiallization.hpp"
 #include "matrixDynamicInitiallization.hpp"
 #include "matrixPush.hpp"
