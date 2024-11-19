@@ -1,4 +1,4 @@
-#include "functionMatrix.h"
+#include "minSumMdg.h"
 #include <algorithm>
 #include <cstring>
 
