@@ -11,7 +11,7 @@ std::istream & smirnov::inputMatrix(std::istream & input, int * matrix, size_t r
   return input;
 }
 
-void smirnov::lft_top_clk(int * matrix, size_t rows, size_t columns)
+void smirnov::decrementSpiral(int * matrix, size_t rows, size_t columns)
 {
   size_t row_end = rows;
   size_t col_end = columns;
@@ -62,7 +62,7 @@ void smirnov::lft_top_clk(int * matrix, size_t rows, size_t columns)
   }
 }
 
-bool smirnov::lwr_tri_mtx(int * matrix, size_t rows, size_t columns)
+bool smirnov::getLowerTriangularMatrix(int * matrix, size_t rows, size_t columns)
 {
   if (rows != columns)
   {
@@ -84,7 +84,7 @@ bool smirnov::lwr_tri_mtx(int * matrix, size_t rows, size_t columns)
   }
 }
 
-void smirnov::lft_top_clkOutput(std::ostream & output, int * matrix, size_t rows, size_t columns)
+void smirnov::outputSpiral(std::ostream & output, int * matrix, size_t rows, size_t columns)
 {
   for (size_t i = 0; i < rows; ++i)
   {
@@ -97,7 +97,7 @@ void smirnov::lft_top_clkOutput(std::ostream & output, int * matrix, size_t rows
   }
 }
 
-void smirnov::lwr_tri_mtxOutput(std::ostream & output, int * matrix, size_t rows, size_t columns)
+void smirnov::outputLowerTriangularMatrix(std::ostream & output, int * matrix, size_t rows, size_t columns)
 {
   if (lwr_tri_mtx(matrix, rows, columns))
   {
