@@ -12,7 +12,7 @@ int main()
   {
     return 1;
   }
-  char uniqueChars[numOfLetters] = {'a', 'b', 'c', 'd','e', 'f', 'g', 'h', 'i',
+  constexpr char uniqueChars[numOfLetters] = {'a', 'b', 'c', 'd','e', 'f', 'g', 'h', 'i',
   'j', 'k', 'l','m', 'n', 'o', 'p', 'q', 'r',
   's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
   std::cout << guseynov::identifyUniqueChar(arr, uniqueChars, numOfLetters) << "\n";

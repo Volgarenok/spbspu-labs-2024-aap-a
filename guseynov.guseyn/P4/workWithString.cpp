@@ -44,9 +44,10 @@ char * guseynov::getLine(std::istream & in, char stop)
   return arr;
 }
 
-size_t guseynov::identifyUniqueChar(const char *inputString, const char *uniqueChars, size_t num)
+size_t guseynov::identifyUniqueChar(const char *inputString, const char *uniqueChars, const size_t num)
 {
-  bool used[num] = {};
+  bool *used = nullptr;
+  used = static_cast<bool*>(malloc(num));
   for (size_t i = 0; i < num; i++)
   {
     used[i] = true;
@@ -64,5 +65,6 @@ size_t guseynov::identifyUniqueChar(const char *inputString, const char *uniqueC
       }
     }
   }
+  free(used);
   return res;
 }
