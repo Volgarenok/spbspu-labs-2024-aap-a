@@ -39,6 +39,7 @@ int main()
     {
       free(newStr2);
       free(newStr1);
+      free(str2);
       std::cerr << "Error: Empty string input\n";
       return 1;
     }
