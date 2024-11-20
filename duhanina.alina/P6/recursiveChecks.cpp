@@ -1,61 +1,64 @@
-#include <ctype>
+#include "recursiveChecks.h"
+#include <cctype>
+#include <cstring>
 
-bool isSign(char c)
+bool duhanina::isSign(char c)
 {
   return c == '+' || c == '-';
 }
 
-bool isUnsignedInt(const char* str, int& index)
+bool duhanina::isUnsignedInt(const char* str, size_t& index)
 {
   if (!std::isdigit(str[index]))
   {
-     return false;
+    return false;
   }
   index++;
   if (std::isdigit(str[index]))
   {
-    return isUnsignedInt(str, index);
+    return duhanina::isUnsignedInt(str, index);
   }
   return true;
 }
 
-bool isMantissa(const char* str, int& index)
+bool duhanina::isMantissa(const char* str, size_t& index)
 {
   if (str[index] == '.')
   {
     index++;
-    return isUnsignedInt(str, index);
+    return duhanina::isUnsignedInt(str, index);
   }
-  return isUnsignedInt(str, index);
+  return duhanina::isUnsignedInt(str, index);
 }
 
-bool isOrder(const char* str, int& index)
+bool duhanina::isOrder(const char* str, size_t& index)
 {
   if (str[index] != 'E')
   {
     return false;
   }
   index++;
-  if (isSign(str[index]))
+  if (duhanina::isSign(str[index]))
   {
     index++;
   }
-  return isUnsignedInt(str, index);
+  return duhanina::isUnsignedInt(str, index);
 }
 
-bool isReal(const char* str, int index = 0)
+bool duhanina::isReal(const char* str)
 {
-  if (isSign(str[index]))
+  size_t index = 0;
+  if (duhanina::isSign(str[index]))
   {
     index++;
   }
-  if (!isMantissa(str, index))
+  if (!duhanina::isMantissa(str, index))
   {
-     return false;
+    return false;
   }
   if (str[index] == '\0')
   {
     return true;
   }
-  return isOrder(str, index) && str[index] == '\0';
+  return duhanina::isOrder(str, index) && str[index] == '\0';
 }
