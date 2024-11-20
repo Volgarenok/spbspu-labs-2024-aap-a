@@ -75,6 +75,8 @@ int main(int argc, char ** argv)
   if ((!input || input.eof()) && num == 2) {
     delete[] mtx;
     return 1;
+  } else if ((!input || input.eof()) && num == 1) {
+    return 1;
   }
 
   output << gavrilova::isUpperTriangMtx(mtx, m, n) << "\n";
