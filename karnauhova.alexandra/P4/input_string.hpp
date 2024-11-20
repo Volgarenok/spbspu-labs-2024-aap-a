@@ -1,6 +1,6 @@
 #ifndef INPUT_STRING_HPP
 #define INPUT_STRING_HPP
-#include <fstream>
+#include <iostream>
 
 namespace karnauhova
 {

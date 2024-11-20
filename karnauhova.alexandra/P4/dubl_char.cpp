@@ -2,14 +2,17 @@
 #include <cstddef>
 int karnauhova::dubl_char(const char* str)
 {
-  int asci[127] = {0};
+  char k = 0;
   for (size_t i = 0; str[i] != '\0'; i++)
   {
-    if (asci[int(str[i])] == 1)
+    k = str[i];
+    for (size_t j = (i + 1); str[j] != '\0'; j++)
     {
-      return 1;
+      if (str[j] == k)
+      {
+        return 1;
+      }
     }
-    asci[int(str[i])] += 1;
   }
   return 0;
 }

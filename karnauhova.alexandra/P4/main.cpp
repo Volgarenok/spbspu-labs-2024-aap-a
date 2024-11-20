@@ -9,7 +9,6 @@ int main()
   if (t == nullptr)
   {
     std::cerr << "Error with input\n";
-    free(t);
     return 1;
   }
   std::cout << karnauhova::dubl_char(t) << "\n";
