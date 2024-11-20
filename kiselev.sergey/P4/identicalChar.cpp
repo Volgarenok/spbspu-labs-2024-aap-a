@@ -7,15 +7,17 @@ size_t kiselev::identicalChar(const char* arr1, const char* arr2)
     return 0;
   }
   size_t quantity = 0;
-  for (size_t i = 0; arr2[i] != '\0'; ++i)
+  while (*arr2 != '\0')
   {
-    for (size_t j = 0; arr1[j] != '\0'; ++j)
+    while (*arr1 != '\0')
     {
-      if (arr1[j] == arr2[i])
+      if (*arr1 == *arr2)
       {
         quantity++;
       }
+      arr1++;
     }
+    arr2++;
   }
   return quantity;
 }
