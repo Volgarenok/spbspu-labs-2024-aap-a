@@ -2,23 +2,20 @@
 #include <iostream>
 
 void brevnov::finding_common_elements(char * answer, char * first_line, char * second_line)
-{
-  std::size_t element_of_first = 0;
-  std::size_t count_of_common = 0;
-  while (first_line[element_of_first] != 0)
+{ 
+  while (*first_line != 0)
   {
-    std::size_t element_of_second = 0;
-    while (second_line[element_of_second] != 0)
+    while (*second_line != 0)
     {
-      if (first_line[element_of_first] == second_line[element_of_second])
+      if (*first_line == *second_line)
       {
-        second_line[element_of_second] = '\n';
-        answer[count_of_common] = first_line[element_of_first];
-        count_of_common++;
+        *second_line = '\n';
+        *answer = *first_line;
+        answer++;
         break;
       }
-      element_of_second++;
+      second_line++;
     }
-    element_of_first++;
+    first_line++;
   }
 }
