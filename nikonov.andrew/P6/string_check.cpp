@@ -1,5 +1,5 @@
 #include "string_check.hpp"
-const char* is_float(const char* str)
+const char* nikonov::is_float(const char* str)
 {
   auto next = nikonov::is_mantissa(str);
   if (!next)
@@ -41,9 +41,9 @@ const char* nikonov::is_numb(const char* str)
   auto next = nikonov::is_digit(str);
   if (next)
   {
-    return nikonov::is_numb(str + 1);
+    return nikonov::is_numb(next);
   }
-  return str;
+  return nullptr;
 }
 const char* nikonov::is_mantissa(const char* str)
 {
@@ -60,7 +60,7 @@ const char* nikonov::is_mantissa(const char* str)
   {
     return nikonov::is_numb(next + 1);
   }
-  return next;
+  return nullptr;
 }
 const char* nikonov::is_order(const char* str)
 {
@@ -73,9 +73,9 @@ const char* nikonov::is_order(const char* str)
     auto next = nikonov::is_sign(str + 1);
     if (!next)
     {
-      return nikonov::is_numb(str + 1);
+      next = str + 1;
     }
     return nikonov::is_numb(next);
   }
-  return str;
+  return nullptr;
 }
