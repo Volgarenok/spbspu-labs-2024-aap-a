@@ -1,8 +1,7 @@
 #include <iostream>
 #include <cctype>
 #include <cstddef>
-#include "lineinput.hpp"
-#include "lineoutput.hpp"
+#include <line_utils.hpp>
 #include "formline.hpp"
 int main()
 {

@@ -1,4 +1,4 @@
-#include "lineinput.hpp"
+#include "line_utils.hpp"
 #include <iostream>
 #include <memory>
 #include <cstddef>
@@ -79,4 +79,14 @@ char* nikonov::reallocate(char* line, size_t& capacity, size_t addSize)
   }
   free(line);
   return newline;
+}
+void nikonov::printLine(const char* line)
+{
+  size_t iter = 0;
+  while (line[iter] != '\0')
+  {
+    std::cout << line[iter];
+    ++iter;
+  }
+  std::cout << "\n";
 }
