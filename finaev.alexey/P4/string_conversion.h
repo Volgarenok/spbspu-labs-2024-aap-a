@@ -1,13 +1,14 @@
 #ifndef STRING_CONVERSION_H
 #define STRING_CONVERSION_H
 #include <cstddef>
+#include <fstream>
 
 namespace finaev
 {
-  void MEMcpy(char* new_a, char* a, size_t n);
-  char* increase_str(char* a, char* new_a, size_t old_dl);
-  char* creature_str(size_t dl);
-  int is_repeat(char* str, size_t dl);
+  void MEMcpy(char* new_a, const char* a);
+  char* creature_empty_str(size_t dl);
+  char* fill_str(std::istream& in);
+  int is_repeat(const char* str);
 }
 
 #endif
