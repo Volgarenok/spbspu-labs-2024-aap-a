@@ -16,6 +16,7 @@ int main()
   if (!std::cin)
   {
     std::cerr << "Incorrect input!\n";
+    delete[] str;
     return 1;
   }
   lebedev::removeVowels(str);
