@@ -19,5 +19,6 @@ int main()
   {
     std::cout << "false\n";
   }
+  delete[] str;
   return 0;
 }
