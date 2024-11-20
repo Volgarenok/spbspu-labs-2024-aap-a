@@ -48,8 +48,8 @@ int main(int argc, char** argv)
     return 0;
   }
   size_t read = 0;
-  int matrixStatic[1000] = {};
-  int* matrix = matrixStatic;
+  int matrixFixed[1000] = {};
+  int* matrix = matrixFixed;
   int* pointerToDelete = nullptr;
   if (arrayType == 2)
   {

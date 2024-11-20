@@ -9,7 +9,7 @@ int balashov::calculateMinSumSideDiagonal(const int matrix[], size_t column, siz
     {
       bool isSideDiagonal = (j + 1 == row) && (i == 0);
       bool isParallelSideDiagonal = (j + 1 == row) || (i == 0);
-      if (!isParallelSideDiagonal && isSideDiagonal)
+      if (isParallelSideDiagonal && !isSideDiagonal)
       {
         int sumDiagonalNow = сalculationDiagonal(matrix, i, column, j, row);
         if (minSumSideDiagonals > sumDiagonalNow)
