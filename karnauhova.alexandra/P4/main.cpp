@@ -11,7 +11,7 @@ int main()
     std::cerr << "Error with input\n";
     return 1;
   }
-  if (t[0] == '\0')
+  if (t[0] == end)
   {
     std::cerr << "Empty string\n";
     return 1;
