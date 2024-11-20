@@ -1,27 +1,29 @@
-#include "logic.h"
+#include "removevowels.h"
+
+bool tkach::isVowel(const char* str)
+{
+  constexpr char str3[] = "eyuioaEYUIOA";
+  for(size_t i = 0; str3[i] != '\0'; ++i)
+  {
+    if (*str == str3[i])
+    {
+      return true;
+    }
+  }
+  return false;
+}
 
 size_t tkach::getStrWithRemovedVowels(const char* str, char* str2)
 {
-  constexpr char str3[] = "eyuioaEYUIOA";
-  size_t numberforstr2 = 0;
+  char* str2pointer = str2;
   size_t amountofdeleted = 0;
   for (size_t i = 0; str[i] != '\0'; ++i)
   {
-    int flag = 1;
-    for (size_t j = 0; str3[j] != '\0'; ++j)
+    if (!isVowel((str + i)))
     {
-      if (str[i] == str3[j])
-      {
-        flag = 0;
-        amountofdeleted++;
-        break;
-      }
-    }
-    if (flag == 1)
-    {
-      str2[numberforstr2++] = str[i];
+      *(str2pointer++) = str[i];
     }
   }
-  str2[numberforstr2] = '\0';
+  *(str2pointer) = '\0';
   return amountofdeleted;
 }

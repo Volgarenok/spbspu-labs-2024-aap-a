@@ -1,18 +1,11 @@
 #include <iostream>
 #include "strfunc.h"
-#include "logic.h"
+#include "removevowels.h"
 
 int main()
 {
   size_t capacity = 2;
-  char* str = nullptr;
-  str = reinterpret_cast< char* >(malloc(sizeof(char) * (capacity)));
-  if (str == nullptr)
-  {
-    std::cerr << "Error: not enough memory\n";
-    return 1;
-  }
-  str = tkach::inputStr(std::cin, str, capacity);
+  char* str = tkach::inputStr(std::cin, capacity);
   if (str == nullptr)
   {
     std::cerr << "Error: not enough memory\n";
@@ -30,8 +23,7 @@ int main()
     std::cerr << "Error: input error - empty str\n";
     return 1;
   }
-  char* str2 = nullptr;
-  str2 = reinterpret_cast< char* >(malloc(sizeof(char) * (capacity)));
+  char* str2 = reinterpret_cast< char* >(malloc(sizeof(char) * (capacity)));
   if (str2 == nullptr)
   {
     free(str);

@@ -1,7 +1,12 @@
 #include "strfunc.h"
 
-char* tkach::inputStr(std::istream& in, char* str, size_t& capacity)
+char* tkach::inputStr(std::istream& in, size_t& capacity)
 {
+  char* str = reinterpret_cast< char* >(malloc(sizeof(char) * (capacity)));
+  if (str == nullptr)
+  {
+    return nullptr;
+  }
   size_t str_length = 0;
   char symbol = '\0';
   in >> std::noskipws;
@@ -10,11 +15,13 @@ char* tkach::inputStr(std::istream& in, char* str, size_t& capacity)
     if (str_length + 1 == capacity)
     {
       str[str_length] = '\0';
-      str = tkach::getMemoryForStr(str, capacity);
-      if (str == nullptr)
+      char* newStr = tkach::getMemoryForStr(str, capacity);
+      free(str);
+      if (newStr == nullptr)
       {
         return nullptr;
       }
+      str = newStr;
     }
     str[str_length++] = symbol;
   }
