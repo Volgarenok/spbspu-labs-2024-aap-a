@@ -16,12 +16,12 @@ int main(int argc, char ** argv)
     return 1;
   }
   char * st = argv[1];
-  if (komarova::nechislo(st))
+  if (komarova::notanum(st))
   {
     std::cout << "First parameter is not a number\n";
     return 1;
   }
-  if ((atoi(st) > 2) || (atoi(st) < 1))
+  if ((std::atoi(st) > 2) || (std::atoi(st) < 1))
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
@@ -41,7 +41,7 @@ int main(int argc, char ** argv)
     return 2;
   }
 
-  int m = 0, n = 0;
+  size_t m = 0, n = 0;
   input >> m >> n;
   if (!input)
   {
@@ -52,7 +52,7 @@ int main(int argc, char ** argv)
   {
     return 2;
   }
-  const int size_arr = m * n;
+  size_t size_arr = m * n;
   if (atoi(st) == 1)
   {
     int array_1[10000] = {};
@@ -84,4 +84,3 @@ int main(int argc, char ** argv)
     }
   }
 }
-//check

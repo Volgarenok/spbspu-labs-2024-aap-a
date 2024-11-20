@@ -1,9 +1,9 @@
 #include "table.h"
 #include <fstream>
 
-bool komarova::nechislo(char * st)
+bool komarova::notanum(char * st)
 {
-  for (int i = 0; st[i] != '\0'; ++i)
+  for (size_t i = 0; st[i] != '\0'; ++i)
   {
     if (st[i] < '0' || st[i] > '9')
     {
@@ -12,12 +12,12 @@ bool komarova::nechislo(char * st)
   }
   return false;
 }
-void komarova::checktri(std::ostream& output, int * arr, int m)
+void komarova::checktri(std::ostream& output, int * arr, size_t m)
 {
   bool k = true;
-  for (int i = 0; i < m; ++i)
+  for (size_t i = 0; i < m; ++i)
   {
-    for (int j = i + 1; j < m; ++j)
+    for (size_t j = i + 1; j < m; ++j)
     {
       if (arr[(i * m) + j] != 0)
       {
@@ -27,18 +27,18 @@ void komarova::checktri(std::ostream& output, int * arr, int m)
     }
   }
   if ((k == true) && (m > 1))
-    {
-      output << "true";
-    }
+  {
+    output << "true";
+  }
   else
   {
     output << "false";
   }
 }
 
-std::istream& komarova::input_m(std::istream& input, int * array, int size_arr)
+std::istream& komarova::input_m(std::istream& input, int * array, size_t size_arr)
 {
-  for (int i = 0; i < size_arr; ++i)
+  for (size_t i = 0; i < size_arr; ++i)
     {
       input >> array[i];
     }
