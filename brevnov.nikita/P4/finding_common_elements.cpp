@@ -1,7 +1,7 @@
 #include "finding_common_elements.hpp"
 #include <iostream>
 
-void brevnov::finding_common_elements(char * answer, char * first_line, char * second_line)
+void brevnov::finding_common_elements(char * answer, const char * first_line, char * second_line)
 { 
   while (*first_line != 0)
   {
