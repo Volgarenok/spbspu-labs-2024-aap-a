@@ -2,6 +2,8 @@
 #include <iostream>
 #include <cstdlib>
 #include "arraymoves.h"
+#include <dynamicinput.h>
+
 int main()
 {
   size_t max = 10;
