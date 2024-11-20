@@ -9,38 +9,36 @@ char* finaev::creature_empty_str(size_t dl)
   return str;
 }
 
-char* finaev::fill_str(std::istream& in)
+char* finaev::fill_str(std::istream& in, char* str)
 {
   size_t dl = 10;
-  char* str = finaev::creature_empty_str(dl);
-  if (str == nullptr)
-  {
-    return nullptr;
-  }
   size_t tk_dl = 0;
-  char c = '\0';
+  char c;
   std::noskipws(in);
   while ((in >> c) && (c != '\n'))
   {
     if (tk_dl == dl)
     {
-      char* new_str = finaev::creature_empty_str(dl * 2);
+      dl = dl * 2;
+      char* new_str = nullptr;
+      new_str = finaev::creature_empty_str(dl);
       if (new_str == nullptr)
       {
         free(str);
         return nullptr;
       }
-      finaev::MEMcpy(new_str, str);
+      MEMcpy(new_str, str, tk_dl);
+      free(str);
       str = new_str;
-      free(new_str);
-      dl *= 2;
     }
-    str[tk_dl++] = c;
+    str[tk_dl] = c;
+    tk_dl++;
   }
   if (tk_dl == 0)
   {
     free(str);
     return nullptr;
   }
+  str[tk_dl] = '\0';
   return str;
 }
