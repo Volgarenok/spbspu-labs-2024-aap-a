@@ -3,7 +3,7 @@
 #include <fstream>
 #include <cstring>
 #include "input_matrix.h"
-#include "output_matrix.h"
+#include "quantity_loc_max.h"
 
 int main(int argc, char ** argv)
 {
@@ -17,23 +17,20 @@ int main(int argc, char ** argv)
     std::cerr << "Not enough arguments" << "\n";
     return 1;
   }
-  long int num = 0;
-  const char *str = argv[1];
-  for (size_t i = 0; i < strlen(str); i++)
+  if (argv[1][0] == '\0')
   {
-    if (str[i] < '0' || str[i] > '9')
-    {
-      std::cerr << "First parameter is not a number" << "\n";
-      return 1;
-    }
-  }
-  char* endptr;
-  num = std::strtol(str, &endptr, 10);
-  if (num != 1 && num != 2)
-  {
-    std::cerr << "First parameter is out of range" << "\n";
+    std::cerr  << "First paremeter is empty" << "\n";
     return 1;
   }
+  if (argv[1][1] != '\0' || (argv[1][0] != '1' && argv[1][0] != '2'))
+  {
+    std::cerr << "False first parameter" << "\n";
+    return 1;
+  }
+  const char *str = argv[1];
+  char* endptr = nullptr;
+  long int num = 0;
+  num = std::strtol(str, std::addressof(endptr), 10);
   size_t strk = 0;
   size_t stl = 0;
   size_t size_matrix = 0;
@@ -44,29 +41,40 @@ int main(int argc, char ** argv)
     std::cerr << "Not a matrix" << "\n";
     return 2;
   }
-  size_matrix = strk * stl;
   std::ofstream output(argv[3]);
-  if (num == 1)
+  if (strk <= 0 || stl <= 0)
   {
-    int matrix[10000];
-    if (!finaev::input_matrix(input, matrix, size_matrix))
+    output << strk << " " << stl << "\n";
+    return 0;
+  }
+  size_matrix = strk * stl;
+  int fixed_matrix[10000];
+  int *dynamic_matrix = nullptr;
+  int *matrix = nullptr;
+  if (num == 2)
+  {
+    try
     {
-      std::cerr << "Fail input" << "\n";
+      dynamic_matrix = new int[size_matrix];
+    }
+    catch (const std::bad_alloc& e)
+    {
+      std::cerr << "Error memory alloc" << "\n";
       return 2;
     }
-    finaev::output_matrix(output, matrix, strk, stl);
+    matrix = dynamic_matrix;
   }
   else
   {
-    int *dynamic_matrix = new int[size_matrix];
-    if (!finaev::input_matrix(input, dynamic_matrix, size_matrix))
-    {
-      delete[] dynamic_matrix;
-      std::cerr << "Fail input" << "\n";
-      return 2;
-    }
-    finaev::output_matrix(output, dynamic_matrix, strk, stl);
-    delete[] dynamic_matrix;
+    matrix = fixed_matrix;
   }
+  if (!finaev::input_matrix(input, matrix, size_matrix))
+  {
+    std::cerr << "Fail input" << "\n";
+    delete[] dynamic_matrix;
+    return 2;
+  }
+  output << finaev::quantity_loc_max(matrix, strk, stl) << "\n";
+  delete[] dynamic_matrix;
   return 0;
 }
