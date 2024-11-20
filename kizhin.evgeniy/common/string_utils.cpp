@@ -4,7 +4,7 @@
 char* kizhin::readString(std::istream& is)
 {
   size_t capacity = 4;
-  char* inputString = static_cast<char*>(malloc(sizeof(char) * capacity));
+  char* inputString = static_cast< char* >(malloc(sizeof(char) * capacity));
   if (!inputString) {
     return inputString;
   }
@@ -29,31 +29,15 @@ char* kizhin::readString(std::istream& is)
 
 char* kizhin::expandString(const char* source, size_t newSize)
 {
-  char* expandedString = static_cast<char*>(malloc(newSize * sizeof(char)));
+  char* expandedString = static_cast< char* >(malloc(newSize * sizeof(char)));
   if (!expandedString) {
     return expandedString;
   }
-  size_t i = 0;
-  for (; source[i] != '\0'; ++i) {
-    expandedString[i] = source[i];
+  char* k = expandedString;
+  for (const char* i = source; *i != '\0'; ++i, ++k) {
+    *k = *i;
   }
-  expandedString[i] = '\0';
+  *k = '\0';
   return expandedString;
-}
-
-void kizhin::removeLatinLetters(char* destination, const char* source)
-{
-  if (destination == nullptr || source == nullptr) {
-    return;
-  }
-  size_t k = 0;
-  for (size_t i = 0; source[i] != '\0'; ++i) {
-    bool isUpperCase = source[i] >= 'A' && source[i] <= 'Z';
-    bool isLowerCase = !isUpperCase && source[i] >= 'a' && source[i] <= 'z';
-    if (!(isUpperCase) && !(isLowerCase)) {
-      destination[k++] = source[i];
-    }
-  }
-  destination[k] = '\0';
 }
 

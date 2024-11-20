@@ -6,7 +6,6 @@
 namespace kizhin {
   char* readString(std::istream&);
   char* expandString(const char*, size_t newSize);
-  void removeLatinLetters(char*, const char*);
 }
 
 #endif
