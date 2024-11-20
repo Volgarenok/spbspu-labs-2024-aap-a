@@ -1,14 +1,32 @@
 #include <iostream>
 #include <fstream>
-#include <cstddef>
-#include "matrix.hpp"
-#include "find_osed.hpp"
+#include "input_output_matrix.hpp"
+#include "find_saddle_number.hpp"
 #include "fll_inc_wav.hpp"
-#include "intcheck.hpp"
+
+namespace brevnov
+{
+  int intcheck(char * input)
+  {
+    bool convertible = true;
+    if ((input[0] == '1' || input[0] == '2') && input[1] == 0)
+    {
+      convertible = true;
+    }
+    if (convertible)
+    {
+      return std::atoi(input);
+    }
+    else
+    {
+      throw std::invalid_argument("Incorrect input");
+    }
+  }
+}
 
 int main(int argc, char ** argv)
 {
-  ptrdiff_t m = -1, n = -1;
+  int long long m = -1, n = -1;
   int testmode = 0;
   int auxiliary_array[10000] = {};
   if (argc < 4)
@@ -48,7 +66,14 @@ int main(int argc, char ** argv)
     std::cerr << "Non-correct matrix parameter\n";
     return 2;
   }
+  if ((m == 0) || (n == 0))
+  {
+    output << "0\n";
+    output << "0 0\n";
+    return 0;
+  }
   int * mtx = nullptr;
+  int * help_array = nullptr;
   if (testmode == 1)
   {
     mtx = auxiliary_array;
@@ -57,9 +82,10 @@ int main(int argc, char ** argv)
   {
     try
     {
-      mtx = new int[m*n];
+      mtx = new int[m * n];
+      help_array = mtx;
     }
-    catch(const std::bad_alloc& e)
+    catch (const std::bad_alloc& e)
     {
       std::cerr << "Not enough memory\n";
       return 2;
@@ -69,20 +95,14 @@ int main(int argc, char ** argv)
   if (saved_values != m * n)
   {
     std::cerr << "Error matrix input\n";
-    if (testmode == 2)
-    {
-      delete[] mtx;
-    }
+    delete[] help_array;
     return 2;
   }
-  output << brevnov::find_osed(mtx, m, n);
+  output << brevnov::find_saddle_number(mtx, m, n);
   output << "\n";
   brevnov::fll_inc_wav(mtx, m, n);
   brevnov::output_matrix(output, mtx, m, n);
   output << "\n";
-  if (testmode == 2)
-  {
-    delete[] mtx;
-  }
+  delete[] help_array;
   return 0;
 }

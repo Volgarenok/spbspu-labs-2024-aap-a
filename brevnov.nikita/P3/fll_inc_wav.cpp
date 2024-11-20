@@ -2,15 +2,7 @@
 
 void brevnov::fll_inc_wav(int * t, size_t m, size_t n)
 {
-  size_t maxstep = 0;
-  if (m > n)
-  {
-    maxstep = n / 2 + n % 2;
-  }
-  else
-  {
-    maxstep = m / 2 + m % 2;
-  }
+  size_t maxstep = m > n ? n / 2 + n % 2 : m / 2 + m % 2;
   for (size_t step = 0; step < maxstep; ++step)
   {
     for (size_t i = step; i < m - step; ++i)
