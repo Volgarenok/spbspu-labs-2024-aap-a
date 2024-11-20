@@ -29,6 +29,7 @@ char* karnauhova::input_string(std::istream& in, char end)
       char* str1 = reinterpret_cast< char* >(malloc(sizeof(char) * n));
       if (str1 == nullptr)
       {
+        free(str);
         return str1;
       }
       for (size_t j = 0; j < (n / 2); j++)
