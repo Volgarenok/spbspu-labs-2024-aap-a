@@ -1,7 +1,7 @@
-#include <iostream>
-#include <stdexcept>
-#include <cstddef>
 #include <dynamic_string.h>
+#include <iostream>
+#include <ios>
+#include "recursion_string.hpp"
 
 int main()
 {
@@ -22,14 +22,7 @@ int main()
     std::cerr << "Error: memory not allocate for string\n";
     return 1;
   }
-  if (size_now == 0)
-  {
-    free(str);
-    std::cerr << "Empty string\n";
-    return 1;
-  }
   str[size_now] = '\0';
-  str = alymova::upper_string(str);
-  std::cout << str << "\n";
+  std::cout << std::boolalpha << alymova::is_double(str) << "\n";
   free(str);
 }
