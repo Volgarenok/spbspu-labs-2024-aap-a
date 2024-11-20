@@ -15,6 +15,7 @@ char* karnauhova::input_string(std::istream& in, char end)
   in >> x;
   if (x == end)
   {
+    str[0] = '/0';
     return str;
   }
   str[0] = x;
