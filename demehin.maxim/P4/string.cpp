@@ -1,23 +1,32 @@
 #include "string.h"
 #include <stdexcept>
 
-char* demehin::copyString(const char* str, size_t size)
+char* demehin::copyString(char* str, size_t size)
 {
   size_t temp_size = 0;
   char* new_str = nullptr;
-  new_str = new char[size];
+  try
+  {
+    new_str = new char[size];
+  }
+  catch (const std::bad_alloc& e)
+  {
+    return str;
+  }
   while (str[temp_size] != '\0')
   {
     new_str[temp_size] = str[temp_size];
     temp_size += 1;
   }
-  delete [] str;
+  delete[] str;
   return new_str;
 }
 
 
 char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size)
 {
+  str = new char[max_size];
+  str[0] = '\0';
   size_t size = 0;
   char temp = '\0';
   std::noskipws(in);
