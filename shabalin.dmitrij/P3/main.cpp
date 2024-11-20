@@ -57,10 +57,7 @@ int main(int argc, char *argv[])
   size_t countOfElements = rows * cols;
 
   int tempMatrix[10000] = {};
-
   int *matrix = nullptr;
-
-  using namespace shabalin;
 
   if (task == 1)
   {
