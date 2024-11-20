@@ -50,7 +50,7 @@ int main()
   demehin::getUniqueSymbols(str, ustr1);
   demehin::getUniqueSymbols(base_str, ustr2);
   demehin::unc_sym(ustr1, ustr2, final_str);
-
+  std::cout << ustr1 << '\n';
   std::cout << final_str << '\n';
   delete[] str;
   delete[] final_str;

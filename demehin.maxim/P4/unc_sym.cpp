@@ -1,48 +1,47 @@
 #include "string.h"
 
-void demehin::getUniqueSymbols(const char* str, char* ustr)
+void demehin::getUniqueSymbols(char* str, char* ustr)
 {
-  size_t iterator1 = 0;
-  size_t unique_size = 0;
-  while (str[iterator1] != '\0')
+  char* orig_ustr = ustr;
+  while (*(str) != '\0')
   {
     bool isUnique = true;
-    size_t iterator2 = 0;
-    while (ustr[iterator2] != '\0')
+    char* temp_ustr = orig_ustr;
+    while (*(temp_ustr) != '\0')
     {
-      if (str[iterator1] == ustr[iterator2])
+      if (*str == *temp_ustr)
       {
         isUnique = false;
         break;
       }
-      iterator2 += 1;
+      temp_ustr++;
     }
     if (isUnique)
     {
-      ustr[unique_size++] = str[iterator1];
+      *(ustr) = *(str);
+      ustr++;
     }
-    iterator1 += 1;
+    str++;
   }
+  *ustr = '\0';
 }
 
-void demehin::unc_sym(const char* str, const char* base_str, char* final_str)
+void demehin::unc_sym(char* str, char* base_str, char* final_str)
 {
-  size_t iterator1 = 0;
-  size_t final_size = 0;
-  while (str[iterator1] != '\0')
+  char* orig_base = base_str;
+  while (*(str) != '\0')
   {
-    size_t iterator2 = 0;
-    while (base_str[iterator2] != '\0')
+    char* temp_base = orig_base;
+    while (*(temp_base) != '\0')
     {
-      if (str[iterator1] == base_str[iterator2])
+      if (*str == *temp_base)
       {
-        final_str[final_size++] = str[iterator1];
+        *(final_str++) = *str;
         break;
       }
-      iterator2 += 1;
+      temp_base++;
     }
-
-    iterator1 += 1;
+    str++;
   }
-  final_str[final_size] = '\0';
+  *final_str = '\0';
 }
