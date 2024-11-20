@@ -56,7 +56,7 @@ void zakirov::mtx_spiral_decrease(int * mtx, size_t columns, size_t rows)
   }
 }
 
-void zakirov::output_mtx(std::ostream & out, const int * const mtx, size_t columns, size_t rows)
+void zakirov::output_mtx(std::ostream & out, int const * mtx, size_t columns, size_t rows)
 {
   for (size_t i = 0; i < columns * rows; i += rows)
   {
