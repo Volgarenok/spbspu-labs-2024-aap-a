@@ -2,7 +2,7 @@
 #include <iostream>
 
 void brevnov::finding_common_elements(char * answer, const char * first_line, char * second_line)
-{ 
+{
   while (*first_line != 0)
   {
     while (*second_line != 0)
