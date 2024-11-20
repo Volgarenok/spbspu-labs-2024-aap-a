@@ -18,7 +18,7 @@ int main(int argc, char** argv)
     std::cerr << "too many arguments\n";
     return 1;
   }
-  if (!isdigit(argv[1][0]))
+  if (!std::isdigit(argv[1][0]))
   {
     std::cerr << "not a number or beyond the limit\n";
     return 1;
