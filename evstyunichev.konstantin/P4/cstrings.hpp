@@ -3,10 +3,12 @@
 #include <iostream>
 namespace evstyunichev
 {
-  int getstring(char *, std::istream &, char);
-  int string_resize(char *, size_t);
+  int GetString(char *, std::istream &, char);
+  int StringResize(char *, size_t);
   void RMV_VOW(char *);
-  int isgl(char);
-  void output(char *, std::ostream &);
+  int IsVowel(char);
+  void Output(char *, std::ostream &);
+  size_t CntNotVowel(char *);
+  char * Create(size_t);
 }
 #endif

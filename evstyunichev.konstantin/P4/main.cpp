@@ -6,13 +6,16 @@ int main()
 {
   char *str = new char[1];
   str[0] = 0;
-  if(!(evstyunichev::getstring(str, std::cin, '\n')))
+  if (!(evstyunichev::GetString(str, std::cin, '\n')))
   {
     delete[] str;
     return 1;
   }
-  evstyunichev::RMV_VOW(str);
-  evstyunichev::output(str, std::cout);
+  size_t sz = evstyunichev::CntNotVowel(str);
+  char *str2 = nullptr;
+  int flag = StringResize(str2, sz);
+  flag = evstyunichev::RMV_VOW(str, str2);
+  evstyunichev::Output(str, std::cout);
   std::cout << '\n';
   delete[] str;
 }
