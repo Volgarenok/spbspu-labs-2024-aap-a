@@ -40,7 +40,7 @@ double sharifullina::cos_and_exp(double x, size_t k, double error)
 
 double sharifullina::cos_and_exp_cma(double x)
 {
-    return cos_cmath(x) + exp_negx_cmath(x);
+  return cos_cmath(x) + exp_negx_cmath(x);
 }
 double sharifullina::cos_cmath(double x)
 {

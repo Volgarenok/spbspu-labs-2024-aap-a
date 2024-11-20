@@ -11,6 +11,7 @@ void sharifullina::output_row(double i, size_t k, double error)
   const size_t WidthOfCol = 12;
   std::cout.precision(3);
   std::cout << std::setw(WidthOfCol) << std::fixed << i << " ";
+  using FuncPtr = double(*)(double, size_t, double);
   FuncPtr funcs[] =
   {
     sharifullina::cos,
