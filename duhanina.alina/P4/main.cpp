@@ -2,55 +2,15 @@
 #include <cstddef>
 #include "createArray.h"
 #include "shrSym.h"
+#include "inputStr.h"
 
 int main()
 {
-  size_t size = 20;
-  char* str = nullptr;
-  try
+  char* str = duhanina::inputStr(std::cin);
+  if (str == nullptr)
   {
-    str = new char[size + 1] {0};
-  }
-  catch (const std::bad_alloc& e)
-  {
-    std::cerr << "Error memory\n";
-    return 1;
-  }
-  str[size] = '\0';
-  char c = '\0';
-  size_t index = 0;
-  while (std::cin >> c && c != '\n')
-  {
-    if (index >= (size - 1))
-    {
-      size *= 2;
-      char* newStr = nullptr;
-      try
-      {
-        newStr = new char[size + 1] {0};
-      }
-      catch (const std::bad_alloc& e)
-      {
-        std::cerr << "Error memory\n";
-        return 1;
-      }
-      if (newStr == nullptr)
-      {
-        delete[] str;
-        delete[] newStr;
-        std::cerr << "Error memory\n";
-        return 1;
-      }
-      newStr = duhanina::createNewArray(str, newStr);
-      str = newStr;
-    }
-    str[index++] = c;
-  }
-  str[index] = '\0';
-  if(str[0] == '\0')
-  {
+    std::cerr << "Error";
     delete[] str;
-    std::cerr << "Empty string\n";
     return 1;
   }
   char* missing = new char[27];
