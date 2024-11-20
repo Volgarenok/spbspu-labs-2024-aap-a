@@ -1,14 +1,14 @@
 #include <iostream>
 #include <cstddef>
-#include "shrSym.h"
 #include <inputStr.h>
+#include "shrSym.h"
 
 int main()
 {
   char* str = duhanina::inputStr(std::cin);
   if (str == nullptr)
   {
-    std::cerr << "Error";
+    std::cerr << "Error\n";
     delete[] str;
     return 1;
   }
