@@ -1,4 +1,5 @@
 #include "arrays_reading.hpp"
+#include <arrays_input.hpp>
 #include <iostream>
 
 int main()
