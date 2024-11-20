@@ -15,15 +15,13 @@ char* karnauhova::input_string(std::istream& in, char end)
   in >> x;
   if (x == end)
   {
-    free(str);
-    str = nullptr;
     return str;
   }
   str[0] = x;
   size_t i = 1;
   while ((in >> x) && (x != end))
   {
-    if (i >= (n))
+    if (i >= n)
     {
       n = n * 2;
       char* str1 = reinterpret_cast< char* >(malloc(sizeof(char) * n));
