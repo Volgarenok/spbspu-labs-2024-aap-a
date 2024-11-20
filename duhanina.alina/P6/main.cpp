@@ -11,7 +11,7 @@ int main()
     delete[] str;
     return 1;
   }
-  if (isReal(str))
+  if (duhanina::isReal(str))
   {
     std::cout << "true\n";
   }
