@@ -28,20 +28,27 @@ void demehin::getUniqueSymbols(char* str, char* ustr)
 
 void demehin::unc_sym(char* str, char* base_str, char* final_str)
 {
-  char* orig_base = base_str;
-  while (*(str) != '\0')
+  constexpr size_t askii_size = 128;
+  char ustr1[askii_size] = {};
+  char ustr2[askii_size] = {};
+  demehin::getUniqueSymbols(str, ustr1);
+  demehin::getUniqueSymbols(base_str, ustr2);
+  char* ptr1 = ustr1;
+  char* ptr2 = ustr2;
+  char* orig_base = ptr2;
+  while (*(ptr1) != '\0')
   {
     char* temp_base = orig_base;
     while (*(temp_base) != '\0')
     {
-      if (*str == *temp_base)
+      if (*ptr1 == *temp_base)
       {
-        *(final_str++) = *str;
+        *(final_str++) = *ptr1;
         break;
       }
       temp_base++;
     }
-    str++;
+    ptr1++;
   }
   *final_str = '\0';
 }
