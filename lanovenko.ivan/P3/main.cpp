@@ -3,8 +3,8 @@
 #include <fstream>
 #include <cstring>
 #include "input_matrix.h"
-#include "output_matrix.h"
-int main(int argc, char ** argv)
+#include "modification_matrix.h"
+int main(int argc, char** argv)
 {
   if (argc > 4)
   {
@@ -16,10 +16,10 @@ int main(int argc, char ** argv)
     std::cerr << "Not enough arguments" << '\n';
     return 1;
   }
-  int num = std::atoi(argv[1]);
-  if (num == 0)
+  int num = argv[1][0];
+  if ((argv[1][0] != '2' && argv[1][0] != '1') || argv[1][1] != '\0')
   {
-    std::cerr << "Fist name is not a number" << '\n';
+    std::cerr << "First parametr is not a number" << '\n';
     return 1;
   }
   size_t rows = 0;
@@ -34,27 +34,38 @@ int main(int argc, char ** argv)
   }
   matrixsize = rows * cols;
   std::ofstream output(argv[3]);
-  if (num == 1)
+  int fixedmatrix[10000]{};
+  int* matrix = fixedmatrix;
+  int* pointertodelete = nullptr;
+  if (num == 2)
   {
-    int matrix[10000];
-    if (!lanovenko::input_matrix(input, matrix, matrixsize))
+    try
     {
-      std::cerr << "Fail input" << '\n';
+      matrix = new int[matrixsize];
+      pointertodelete = matrix;
+    }
+    catch (const std::bad_alloc & e)
+    {
+      delete[] pointertodelete;
+      std::cerr << "Out of memory" << '\n';
       return 2;
     }
-    lanovenko::output_LFT_TOP_CLK(output, matrix, rows, cols);
   }
-  else
+
+  if(!lanovenko::input_matrix(input, matrix, matrixsize))
   {
-    int *dmatrix = new int[matrixsize];
-    if(!lanovenko::input_matrix(input, dmatrix, matrixsize))
-    {
-      delete[] dmatrix;
-      std::cerr << "Fail input" << '\n';
-      return 2;
-    }
-    lanovenko::output_LFT_TOP_CLK(output, dmatrix, rows, cols);
-    delete[] dmatrix;
+    std::cerr << "Input fail" << '\n';
+    return 2;
   }
+  lanovenko::changeto_LFT_TOP_CLK(matrix, rows, cols);
+  for (size_t r = 0; r < rows; ++r)
+  {
+    for (size_t c = 0; c < cols; ++c)
+    {
+      output << matrix[r * cols + c] << " ";
+    }
+    output << '\n';
+  }
+  delete[] pointertodelete;
   return 0;
 }
