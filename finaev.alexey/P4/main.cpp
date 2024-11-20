@@ -6,14 +6,7 @@
 int main()
 {
   char* str = nullptr;
-  size_t dl = 10;
-  str = finaev::creature_empty_str(dl);
-  if (str == nullptr)
-  {
-    std::cerr << "Error create!\n";
-    return 1;
-  }
-  str = finaev::fill_str(std::cin, str);
+  str = finaev::fill_str(std::cin);
   if (str == nullptr)
   {
     std::cerr << "error create!\n";

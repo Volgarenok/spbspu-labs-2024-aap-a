@@ -9,9 +9,15 @@ char* finaev::creature_empty_str(size_t dl)
   return str;
 }
 
-char* finaev::fill_str(std::istream& in, char* str)
+char* finaev::fill_str(std::istream& in)
 {
   size_t dl = 10;
+  char* str = nullptr;
+  str = creature_empty_str(dl);
+  if (str == nullptr)
+  {
+    return nullptr;
+  }
   size_t tk_dl = 0;
   char c;
   std::noskipws(in);
