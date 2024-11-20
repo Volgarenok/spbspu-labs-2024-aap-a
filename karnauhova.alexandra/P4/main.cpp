@@ -14,6 +14,7 @@ int main()
   if (t[0] == end)
   {
     std::cerr << "Empty string\n";
+    free(t);
     return 1;
   }
   std::cout << karnauhova::dubl_char(t) << "\n";
