@@ -18,7 +18,6 @@ char* demehin::copyString(const char* str, size_t size)
 
 char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size)
 {
-
   size_t size = 0;
   char temp = '\0';
   std::noskipws(in);

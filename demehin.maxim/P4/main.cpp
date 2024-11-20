@@ -1,5 +1,5 @@
-#include "string.h"
 #include <ios>
+#include "string.h"
 
 int main()
 {
@@ -35,13 +35,13 @@ int main()
     return 1;
   }
 
-   if (str[0] == '\0')
-   {
-     std::cerr << "Empty string\n";
-     delete[] str;
-     delete[] final_str;
-     return 1;
-   }
+  if (str[0] == '\0')
+  {
+    std::cerr << "Empty string\n";
+    delete[] str;
+    delete[] final_str;
+    return 1;
+  }
 
 
   char base_str[] = "abc ef";
