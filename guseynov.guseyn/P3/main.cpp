@@ -4,9 +4,9 @@
 
 #include "matrix.hpp"
 
-void cmdProtection(int argc, const char **argv);
+void cmdProtection(int argc, const char* const* argv);
 
-int main(const int argc, const char** argv)
+int main(int argc, const char* const* argv)
 {
   try
   {
@@ -77,7 +77,7 @@ int main(const int argc, const char** argv)
   return 0;
 }
 
-void cmdProtection(int argc, const char **argv)
+void cmdProtection(int argc, const char* const* argv)
 {
   constexpr int tasknum = 4;
   if (argc > tasknum)
