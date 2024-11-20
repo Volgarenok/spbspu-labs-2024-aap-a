@@ -1,8 +1,7 @@
 #include <iostream>
 #include <cstddef>
-#include "createArray.h"
 #include "shrSym.h"
-#include "inputStr.h"
+#include <inputStr.h>
 
 int main()
 {
