@@ -2,7 +2,6 @@
 #include <iostream>
 #include <cstdlib>
 #include "arraymoves.h"
-
 int main()
 {
   size_t max = 10;
