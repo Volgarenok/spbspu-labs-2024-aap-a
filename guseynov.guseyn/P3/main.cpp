@@ -53,7 +53,7 @@ int main(int argc, const char* const* argv)
     {
       return 2;
     }
-  arr = arrFixed;
+    arr = arrFixed;
   }
   else
   {
