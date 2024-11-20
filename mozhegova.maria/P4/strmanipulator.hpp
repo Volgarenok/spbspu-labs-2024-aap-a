@@ -1,5 +1,5 @@
-#ifndef STRING_HPP
-#define STRING_HPP
+#ifndef STRMANIPULATOR_HPP
+#define STRMANIPULATOR_HPP
 
 #include <iostream>
 

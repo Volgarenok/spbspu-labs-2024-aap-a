@@ -1,5 +1,5 @@
 #include <iostream>
-#include "string.hpp"
+#include "strmanipulator.hpp"
 
 int main()
 {
@@ -8,7 +8,7 @@ int main()
   {
     str = mozhegova::inputString(std::cin, '\n');
   }
-  catch(const std::exception& e)
+  catch (const std::exception& e)
   {
     std::cerr << "Out of memory\n";
     return 1;
@@ -19,11 +19,6 @@ int main()
     std::cerr << "Empty input\n";
     return 1;
   }
-  char * result = mozhegova::spcRmv(str);
-  for (size_t i = 0; result[i] != '\0'; i++)
-  {
-    std::cout << result[i];
-  }
-  std::cout << '\n';
+  std::cout << mozhegova::spcRmv(str) << '\n';
   delete[] str;
 }
