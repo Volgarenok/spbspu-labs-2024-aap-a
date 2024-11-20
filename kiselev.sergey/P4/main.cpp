@@ -29,7 +29,6 @@ int main()
       if (arr == nullptr)
       {
         std::cerr << "Out of memory\n";
-        free(arr);
         return 1;
       }
     }
