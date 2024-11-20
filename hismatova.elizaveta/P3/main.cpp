@@ -34,6 +34,7 @@ int main(int argc, char ** argv)
   out_par << m << " " << n << "\n";
   size_t read = 0;
   int* matrix = nullptr;
+  int* dynamic_matrix = nullptr;
   int matrix1[10000] = {0};
   if (parametr == 1)
   {
@@ -46,30 +47,22 @@ int main(int argc, char ** argv)
   }
   else
   {
-    matrix = new int[m * n];
+    dynamic_matrix = new int[m * n];
+    matrix = dynamic_matrix;
   }
   if (!hismatova::input_matrix(in_par, matrix, m, n, read))
   {
     std::cerr << "input matrix failed\n";
-    if (parametr == 2)
-    {
-      delete[] matrix;
-    }
+    delete[] dynamic_matrix;
     return 1;
   }
   if (read < m * n)
   {
     std::cerr << "not enough elements\n";
-    if (parametr == 2)
-    {
-      delete[] matrix;
-    }
+    delete[] dynamic_matrix;
     return 1;
   }
   out_par << hismatova::find_longest(matrix, m, n) << "\n";
-  if (parametr == 2)
-  {
-    delete[] matrix;
-  }
+  delete[] dynamic_matrix;
   return 0;
 }
