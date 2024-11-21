@@ -6,16 +6,11 @@ int main()
 {
   size_t size = 10;
   constexpr int ratio = 2;
-  char* str = alymova::create(size);
-  if (str == nullptr)
-  {
-    std::cerr << "Error: memory not allocate for string\n";
-    return 1;
-  }
   size_t size_now = 0;
   char delim = '\n';
+  char* str = nullptr;
   std::cin >> std::noskipws;
-  str = alymova::get_string(str, size, size_now, ratio, delim);
+  str = alymova::get_string(size, size_now, ratio, delim);
   if (str == nullptr)
   {
     std::cerr << "Error: memory not allocate for string\n";
@@ -28,7 +23,15 @@ int main()
     return 1;
   }
   str[size_now] = '\0';
-  str = alymova::upper_string(str);
-  std::cout << str << "\n";
+  char* str_res = reinterpret_cast< char* >(malloc((size_now + 1) * sizeof(char)));
+  if (str_res == nullptr)
+  {
+    std::cerr << "Error: memory not allocate for string\n";
+    return 1;
+  }
+  str_res[size_now] = '\0';
+  str_res = alymova::upper_string(str, str_res);
+  std::cout << str_res << "\n";
   free(str);
+  free(str_res);
 }
