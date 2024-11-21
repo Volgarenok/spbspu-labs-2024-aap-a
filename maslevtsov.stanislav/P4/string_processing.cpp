@@ -1,13 +1,13 @@
 #include "string_processing.hpp"
 #include <stdexcept>
 
-char* maslevtsov::expandString(char* string, std::size_t capacity)
+char* maslevtsov::expandString(const char* string, std::size_t capacity)
 {
   char* newString = new char[capacity];
-
-  for (std::size_t i = 0; string[i] != '\0'; ++i)
+  char* j = newString;
+  for (const char* i = string; *i != '\0'; ++i, ++j)
   {
-    newString[i] = string[i];
+    *j = *i;
   }
 
   return newString;
@@ -29,7 +29,7 @@ char* maslevtsov::getline(std::istream& in)
       char* expandedString = nullptr;
       try
       {
-        expandedString = maslevtsov::expandString(string, stringCapacity *= 2);
+        expandedString = expandString(string, stringCapacity *= 2);
       }
       catch (const std::bad_alloc& e)
       {
@@ -47,13 +47,13 @@ char* maslevtsov::getline(std::istream& in)
   return string;
 }
 
-std::size_t maslevtsov::isSameSymbols(const char* const str1, const char* const str2)
+int maslevtsov::isSameSymbols(const char* str1, const char* str2)
 {
-  for (std::size_t i = 0; str1[i] != '\0'; ++i)
+  for (const char* i = str1; *i != '\0'; ++i)
   {
-    for (std::size_t j = 0; str2[j] != '\0'; ++j)
+    for (const char* j = str2; *j != '\0'; ++j)
     {
-      if (str1[i] == str2[j])
+      if (*i == *j)
       {
         return 1;
       }
