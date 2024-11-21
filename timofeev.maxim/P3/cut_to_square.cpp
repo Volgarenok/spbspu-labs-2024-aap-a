@@ -12,6 +12,7 @@ int* timofeev::cut_to_square(const int* matrix, size_t strk, size_t stl)
     {
       new_mtx[i] = matrix[i];
     }
+    delete[] new_mtx;
     return new_mtx;
   }
   else
@@ -28,6 +29,7 @@ int* timofeev::cut_to_square(const int* matrix, size_t strk, size_t stl)
         ind++;
       }
     }
+    delete[] new_mtx;
     return new_mtx;
   }
 }
