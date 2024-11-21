@@ -15,13 +15,13 @@ int main(int argc, char **argv)
   std::string output_filename = argv[3];
 
   std::ifstream infile(input_filename);
-  if (!infile.is_open())
+  if (!infile)
   {
     std::cerr << "Error while opening input file" << "\n";
     return 1;
   }
 
-  char ch;
+  char ch = 0;
   if (!(infile >> ch))
   {
     std::cerr << "Input file is empty" << "\n";
