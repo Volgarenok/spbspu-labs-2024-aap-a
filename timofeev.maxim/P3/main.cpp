@@ -18,9 +18,6 @@ int main(int argc, char** argv)
     std::cerr << "Not enough arguments\n";
     return 1;
   }
-
-  long int num = 0;
-  const char *type_check = argv[1];
   int num = std::atoi(argv[1]);
   if (num != 1 && num != 2)
   {
