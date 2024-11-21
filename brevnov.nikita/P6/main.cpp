@@ -1,7 +1,7 @@
 #include <ios>
 #include <iostream>
 #include "isexpression.hpp"
-#include "geline.hpp"
+#include "getline.hpp"
 
 int main()
 {
@@ -23,5 +23,6 @@ int main()
     return 1;
   }
   std::cout << std::boolalpha << brevnov::isExpression(line) << "\n";
+  delete[] line;
   return 0;
 }
