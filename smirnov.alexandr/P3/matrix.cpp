@@ -2,9 +2,9 @@
 #include <cstddef>
 #include <iostream>
 
-std::istream & smirnov::inputMatrix(std::istream & input, int * matrix, size_t rows, size_t columns)
+std::istream & smirnov::inputMatrix(std::istream & input, int * matrix, size_t sizeMatrix)
 {
-  for (size_t i = 0; i < rows * columns; ++i)
+  for (size_t i = 0; i < sizeMatrix; ++i)
   {
     input >> matrix[i];
   }
@@ -84,27 +84,12 @@ bool smirnov::getLowerTriangularMatrix(int * matrix, size_t rows, size_t columns
   }
 }
 
-void smirnov::outputSpiral(std::ostream & output, int * matrix, size_t rows, size_t columns)
+void smirnov::outputSpiral(std::ostream & output, int * matrix, size_t sizeMatrix)
 {
-  for (size_t i = 0; i < rows; ++i)
+  output << matrix[0];
+  for (size_t i = 1; i < sizeMatrix; ++i)
   {
-    output << matrix[i * columns];
-    for (size_t j = 1; j < columns; ++j)
-    {
-      output << " " << matrix[i * columns + j];
-    }
-    output << "\n";
+    output << " " << matrix[i];
   }
 }
 
-void smirnov::outputLowerTriangularMatrix(std::ostream & output, int * matrix, size_t rows, size_t columns)
-{
-  if (lwr_tri_mtx(matrix, rows, columns))
-  {
-    output << "true";
-  }
-  else
-  {
-    output << "false";
-  }
-}
