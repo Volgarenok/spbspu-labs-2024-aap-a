@@ -17,7 +17,7 @@ char * brevnov::getline(std::istream& in, char stop)
       {
         newline = brevnov::newmemory(line, max_size, plus_size);
       }
-      catch(const std::bad_alloc& e)
+      catch (const std::bad_alloc& e)
       {
         delete[] line;
         throw;
