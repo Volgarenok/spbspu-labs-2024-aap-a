@@ -1,5 +1,5 @@
-#ifndef KUSHEKBAEV_MATRIX
-#define KUSHEKBAEV_MATRIX
+#ifndef COUNT_SADDLE_POINT
+#define COUNT_SADDLE_POINT
 #include <cstddef>
 
 namespace kushekbaev

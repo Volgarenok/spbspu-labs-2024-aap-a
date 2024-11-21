@@ -1,4 +1,4 @@
-#include "kushekbaev_matrix.hpp"
+#include "count_saddle_point.hpp"
 
 int & kushekbaev::getElement(int * matrix, size_t columns, size_t row, size_t column)
 {
