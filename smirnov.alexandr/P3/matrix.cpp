@@ -93,3 +93,11 @@ void smirnov::outputSpiral(std::ostream & output, int * matrix, size_t sizeMatri
   }
 }
 
+void smirnov::outputFunctions(std::ostream & output, int * matrix, size_t rows, size_t columns, size_t sizeMatrix)
+{
+  output << std::boolalpha << smirnov::getLowerTriangularMatrix(matrix, rows, columns) << "\n";
+  output << rows << " " << columns << " ";
+  smirnov::decrementSpiral(matrix, rows, columns);
+  smirnov::outputSpiral(output, matrix, sizeMatrix);
+  output << "\n";
+}
