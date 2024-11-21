@@ -7,6 +7,7 @@ int main() {
   if(input[0] == '\0')
   {
     std::cerr << "Empty string";
+    free(input);
     return 1;
   }
   if (input == nullptr)
