@@ -1,4 +1,3 @@
-#include "fu_string.h"
 #include <iostream>
 #include <cstdlib>
 #include <cstddef>
