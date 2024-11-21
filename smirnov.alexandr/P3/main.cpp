@@ -17,7 +17,7 @@ int main(int argc, char ** argv)
     return 1;
   }
   int num = std::atoi(argv[1]);
-  if (num != 1 && num != 2)
+  if ((num != 1 && num != 2) || argv[1][1] != '\0')
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
@@ -32,43 +32,38 @@ int main(int argc, char ** argv)
     return 2;
   }
   std::ofstream output(argv[3]);
+  size_t sizeMatrix = rows * columns;
+  constexpr size_t size = 10000;
+  int fixedMatrix[size] = {0};
+  int * dynamicMatrix = nullptr;
+  int * matrix = nullptr;
   if (num == 1)
   {
-    constexpr size_t size = 10000;
-    int matrix[size] = {0};
-    if (!smirnov::inputMatrix(input, matrix, rows, columns))
+    if (sizeMatrix > 10000)
     {
-      std::cerr << "Input error\n";
-      return 2;
+      std::cerr << "Too many matrix elements\n";
+      return 1;
     }
-    smirnov::lft_top_clk(matrix, rows, columns);
-    smirnov::lft_top_clkOutput(output, matrix, rows, columns);
-    smirnov::lwr_tri_mtx(matrix, rows, columns);
-    smirnov::lwr_tri_mtxOutput(output, matrix, rows, columns);
+    matrix = fixedMatrix;
   }
   else
   {
-    int * matrix = nullptr;
     try
     {
-      matrix = new int[rows * columns];
+      dynamicMatrix = new int[sizeMatrix];
+      matrix = dynamicMatrix;
     }
     catch (const std::bad_alloc & e)
     {
+      delete[] dynamicMatrix;
       std::cerr << "Out of memory\n";
-      delete[] matrix;
-      return 1;
-    }
-    if (!smirnov::inputMatrix(input, matrix, rows, columns))
-    {
-      std::cerr << "Input error\n";
-      delete[] matrix;
       return 2;
     }
-    smirnov::lft_top_clk(matrix, rows, columns);
-    smirnov::lft_top_clkOutput(output, matrix, rows, columns);
-    smirnov::lwr_tri_mtx(matrix, rows, columns);
-    smirnov::lwr_tri_mtxOutput(output, matrix, rows, columns);
-    delete[] matrix;
+  }
+  if (!smirnov::inputMatrix(input, matrix, sizeMatrix))
+  {
+    delete[] dynamicMatrix;
+    std::cerr << "Input error\n";
+    return 1;
   }
 }
