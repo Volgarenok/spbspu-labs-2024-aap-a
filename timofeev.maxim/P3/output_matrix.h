@@ -5,7 +5,7 @@
 
 namespace timofeev
 {
-  int check_diag(int* matrix, size_t size);
+  int check_diag(const int* matrix, size_t size);
 }
 
 #endif

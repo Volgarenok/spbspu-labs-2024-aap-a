@@ -1,7 +1,7 @@
 #include "output_matrix.h"
 #include <iostream>
 
-int check_diag(int* matrix, size_t size)
+int timofeev::check_diag(const int* matrix, size_t size)
 {
   const size_t move = size - 1;
   size_t diag = size;
