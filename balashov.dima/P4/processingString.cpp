@@ -32,7 +32,7 @@ char* balashov::increaseSizeLine(char* lineStart, size_t& capacity)
   if (newLine == nullptr)
   {
     free(newLine);
-    throw;
+    return nullptr;
   }
   for (size_t i = 0; i < capacityBefore; ++i)
   {
@@ -58,14 +58,10 @@ char* balashov::enteringLine(size_t& capacity)
     line[sizeLine++] = symbol;
     if (sizeLine == capacity)
     {
-      try
-      {
-        line = increaseSizeLine(line, capacity);
-       }
-      catch (...)
+      if(line = increaseSizeLine(line, capacity)
       {
         free(line);
-        throw;
+        return nullptr;
       }
     }
   }
