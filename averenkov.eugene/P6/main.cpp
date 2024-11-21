@@ -17,11 +17,11 @@ int main() {
   }
   const char* ptr = input;
   if (averenkov::hasExpression(ptr) && *ptr == '\0') {
-    std::cout << "TRUE\n";
+    std::cout << "true\n";
   }
   else
   {
-    std::cout << "FALSE\n";
+    std::cout << "false\n";
   }
   free(input);
   return 0;
