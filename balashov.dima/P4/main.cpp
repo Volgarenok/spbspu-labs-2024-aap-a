@@ -4,8 +4,7 @@
 int main()
 {
   size_t capacity = 5;
-  char * line = reinterpret_cast<char*>(malloc(sizeof(char) * (capacity)));
-  line = balashov::enteringLine(capacity);
+  char * line = balashov::enteringLine(capacity);
   if(line == nullptr)
   {
     free(line);
