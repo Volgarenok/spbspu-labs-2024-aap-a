@@ -1,9 +1,9 @@
 #include "fu_string.h"
+#include <iostream>
 #include <cstdlib>
 #include <cstring>
-#include <iostream>
 
-char* hismatova::uniqueChar(char* str1, char* str2)
+char* hismatova::uniqueChar(const char* str1, const char* str2)
 {
   bool arr[256] = {0};
   size_t count = 0;

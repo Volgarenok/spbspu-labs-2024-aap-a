@@ -5,7 +5,7 @@
 namespace hismatova
 {
   int getLine(char** str);
-  char* uniqueChar(char* str1, char* str2);
+  char* uniqueChar(const char* str1, const char* str2);
 }
 
 #endif
