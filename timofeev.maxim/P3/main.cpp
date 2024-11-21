@@ -75,7 +75,7 @@ int main(int argc, char** argv)
       std::cerr << "Out of memory\n";
       return 1;
     }
-    if (!timofeev::input_matrix(input, matrix, matrix_size))
+    if (!timofeev::input_matrix(input, dmatrix, matrix_size))
     {
       delete[] dmatrix;
       std::cerr << "Fail input\n";

@@ -1,7 +1,7 @@
 #include "cut_to_square.h"
 #include <iostream>
 
-int* cut_to_square(const int* matrix, size_t strk, size_t stl)
+int* timofeev::cut_to_square(const int* matrix, size_t strk, size_t stl)
 {
   if (stl <= strk)
   {
@@ -12,8 +12,8 @@ int* cut_to_square(const int* matrix, size_t strk, size_t stl)
     {
       new_mtx[i] = matrix[i];
     }
+    return new_mtx;
   }
-  return new_mtx;
   else
   {
     size_t capacity = strk * strk;

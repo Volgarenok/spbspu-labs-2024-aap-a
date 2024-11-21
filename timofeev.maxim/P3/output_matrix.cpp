@@ -3,7 +3,6 @@
 
 int check_diag(const int* matrix, size_t size)
 {
-  size_t capacity = size * size;
   const size_t move = size - 1;
   size_t diag = size;
   for (size_t i = 1; i < size; i++)
