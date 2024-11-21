@@ -50,7 +50,7 @@ char* balashov::enteringLine(size_t& capacity)
   if (line == nullptr)
   {
     free(line);
-    throw;
+    return nullptr;
   }
   std::noskipws(std::cin);
   while ((std::cin >> symbol) && (symbol != '\n'))
@@ -58,7 +58,8 @@ char* balashov::enteringLine(size_t& capacity)
     line[sizeLine++] = symbol;
     if (sizeLine == capacity)
     {
-      if(line = increaseSizeLine(line, capacity)
+      line = increaseSizeLine(line, capacity);
+      if(line == nullptr)
       {
         free(line);
         return nullptr;
