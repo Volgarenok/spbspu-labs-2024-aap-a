@@ -22,6 +22,12 @@ int main()
     std::cerr << "Error: memory not allocate for string\n";
     return 1;
   }
+  if (size_now == 0)
+  {
+    std::cerr << "Empty string\n";
+    free(str);
+    return 1;
+  }
   str[size_now] = '\0';
   std::cout << std::boolalpha << alymova::is_double(str) << "\n";
   free(str);
