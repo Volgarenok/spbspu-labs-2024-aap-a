@@ -48,6 +48,7 @@ char* alymova::get_string(size_t& size, size_t& size_now, int ratio, char delim)
         free(str);
         return nullptr;
       }
+      str_new[size] = '\0';
       str_new = alymova::copy_string(str, str_new);
       free(str);
       str = str_new;
