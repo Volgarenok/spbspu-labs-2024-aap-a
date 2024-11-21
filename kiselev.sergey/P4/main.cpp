@@ -4,7 +4,7 @@
 int main()
 {
   char* string = kiselev::inputString();
-  if (!string)
+  if (string == nullptr)
   {
     std::cerr << "Failed string reading\n";
   }

@@ -1,13 +1,13 @@
 #include "inputString.h"
 #include <iostream>
-char* kiselev::resizeArr(char* array, size_t length, size_t length2)
+char* kiselev::resizeArr(char* array, size_t newLength, size_t pastLength)
 {
-  char* arr2 = static_cast< char* >(malloc(length * sizeof(char)));
+  char* arr2 = static_cast< char* >(malloc(newLength * sizeof(char)));
   if (arr2 == nullptr)
   {
-    return nullptr;
+    return arr2;
   }
-  for (size_t i = 0; i < length2; ++i)
+  for (size_t i = 0; i < pastLength; ++i)
   {
     arr2[i] = array[i];
   }
@@ -36,8 +36,9 @@ char* kiselev::inputString()
     {
       size_t timeLength = memorySize;
       memorySize += 5;
-      free(arr);
+      char* timeArray = arr;
       arr = kiselev::resizeArr(arr, memorySize, timeLength);
+      free(timeArray);
       if (arr == nullptr)
       {
         std::cerr << "Out of memory\n";
