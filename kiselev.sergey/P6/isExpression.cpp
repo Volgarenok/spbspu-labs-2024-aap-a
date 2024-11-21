@@ -19,7 +19,14 @@ const char* isZ(const char* string)
 {
   return isSymbol(string, 'z');
 }
-
+const char* isNullor(const char* string)
+{
+  return isSymbol(string, '0');
+}
+const char* isOne(const char* string)
+{
+  return isSymbol(string, '1');
+}
 bool kiselev::isExpression(const char* string)
 {
   return true;
