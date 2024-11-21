@@ -63,7 +63,14 @@ int main(int argc, char** argv)
       return 2;
     }
     timofeev::cut_to_square(matrix, line, column);
-    timofeev::check_diag(matrix, size);
+    if (timofeev::check_diag(matrix, size))
+    {
+      output << "The matrix contains diagonals with equal values";
+    }
+    else
+    {
+      output << "The matrix doesn't contain diagonals with equal values";
+    }
   }
   else if (num == 2)
   {
@@ -84,7 +91,14 @@ int main(int argc, char** argv)
       return 2;
     }
     timofeev::cut_to_square(dmatrix, line, column);
-    timofeev::check_diag(dmatrix, size);
+    if (timofeev::check_diag(dmatrix, size))
+    {
+      output << "The matrix contains diagonals with equal values";
+    }
+    else
+    {
+      output << "The matrix doesn't contain diagonals with equal values";
+    }
     delete[] dmatrix;
   }
   return 0;
