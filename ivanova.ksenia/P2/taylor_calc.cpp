@@ -1,5 +1,5 @@
 #include "taylor.h"
-#include <iostream>
+#include <stdexcept>
 #include <cmath>
 
 double ivanova::arctg(double x, size_t k, double error)
