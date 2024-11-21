@@ -41,6 +41,7 @@ int main(int argc, char** argv)
   size_t column = 0;
   size_t matrix_size = 0;
   input >> line >> column;
+  size_t size = (column <= line) ? column : line;
   if (!input)
   {
     std::cerr << "Not a matrix\n";
@@ -60,7 +61,7 @@ int main(int argc, char** argv)
       std::cerr << "Fail input\n";
       return 2;
     }
-    timofeev::check_diag(output, matrix, line, column);
+    timofeev::check_diag(matrix, size);
   }
   else if (num == 2)
   {
@@ -74,13 +75,13 @@ int main(int argc, char** argv)
       std::cerr << "Out of memory\n";
       return 1;
     }
-    if (!timofeev::input_matrix(input, dmatrix, matrix_size))
+    if (!timofeev::input_matrix(input, matrix, matrix_size))
     {
       delete[] dmatrix;
       std::cerr << "Fail input\n";
       return 2;
     }
-    timofeev::check_diag(output, dmatrix, line, column);
+    timofeev::check_diag(dmatrix, size);
     delete[] dmatrix;
   }
   return 0;

@@ -1,79 +1,30 @@
 #include "output_matrix.h"
-#include "make_array.h"
 #include <iostream>
 
-
-void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t stl)
+int check_diag(const int* matrix, size_t size)
 {
-  int sum_el = (strk * stl);
-  int* values = make_array(sum_el);
-  size_t count = 0;
-  size_t max_short_diag = 0;
-  size_t max_diag = 0;
-  for (size_t i = 0; i < (strk + stl - 1); i++)
+  size_t capacity = size * size;
+  const size_t move = size - 1;
+  size_t diag = size;
+  for (size_t i = 1; i < size; i++)
   {
-    size_t col = 0;
-    int icur = i;
-    for (size_t j = (stl - 1); (col <= i) && (col < stl); j--)
+    diag--;
+    size_t left_in_diag = diag;
+    size_t check_el = i;
+    size_t fine_check = 0;
+    while (left_in_diag > 0)
     {
-      int jcur = j;
-      if (icur * stl + jcur < (strk * stl))
+      if (matrix[check_el] == matrix[(check_el + (move * i))])
       {
-        values[count] = matrix[(icur * stl + jcur)];
-        count++;
+        check_el += size + 1;
+        fine_check++;
       }
-      icur--;
-      jcur--;
-      col++;
+      left_in_diag--;
     }
-    max_short_diag = col - 1;
-    max_diag = col;
-  }
-  size_t hip = 0;
-  size_t fine_check = 0;
-  while (hip < max_short_diag)
-  {
-    size_t match = 0;
-    for (size_t i = 0; i < hip + 1; i++)
+    if (fine_check == diag)
     {
-      if (values[(hip * (hip + 1)) / 2 + i] == values[sum_el - 1 - ((hip * (hip + 1)) / 2) - hip + i])
-      {
-        match++;
-      }
-    }
-    if (match == hip + 1)
-    {
-      fine_check += 1;
-    }
-    hip++;
-  }
-  for (size_t i = max_diag * (max_diag - 1) / 2; i < sum_el - (max_diag * (max_diag + 1) / 2) - 1; i += max_diag)
-  {
-    for (size_t j = i + max_diag; j < sum_el - (max_diag * (max_diag - 1) / 2) - 1; j += max_diag)
-    {
-      size_t k = 0;
-      size_t same_el = 0;
-      while (k < max_diag)
-      {
-        if (values[i + k] == values[j + k])
-        {
-          same_el += 1;
-        }
-        k++;
-      }
-      if (same_el == max_diag)
-      {
-        fine_check += 1;
-      }
+      return 1;
     }
   }
-  delete[] values;
-  if (fine_check > 0)
-  {
-    out << "the matrix contains diagonals with equal values\n";
-  }
-  else
-  {
-    out << "the matrix doesn't contains diagonals with equal values\n";
-  }
+  return 0;
 }
