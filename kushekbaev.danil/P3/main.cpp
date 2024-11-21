@@ -21,13 +21,12 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  infile.seekg(0, std::ios::end);
-  if (infile.tellg() == 0)
+  char ch;
+  if (!(infile >> ch))
   {
     std::cerr << "Input file is empty" << "\n";
     return 1;
   }
-  infile.seekg(0);
 
   size_t rows = 0, columns = 0;
   if (!(infile >> rows >> columns))
@@ -52,7 +51,6 @@ int main(int argc, char **argv)
          throw std::runtime_error("Error reading matrix data");
        }
     }
-  infile.close();
 
   int saddle_points = kushekbaev::countSaddlePoints(matrix, rows, columns);
 
