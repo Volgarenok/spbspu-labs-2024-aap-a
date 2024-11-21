@@ -1,9 +1,10 @@
-#include "input_matrix.h"
-#include "output_matrix.h"
-#include "cut_to_square.h"
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <cstdlib>
+#include "input_matrix.h"
+#include "output_matrix.h"
+#include "cut_to_square.h"
 
 int main(int argc, char** argv)
 {
@@ -20,19 +21,10 @@ int main(int argc, char** argv)
 
   long int num = 0;
   const char *type_check = argv[1];
-  for (size_t i = 0; i < strlen(type_check); i++)
-  {
-    if (type_check[i] < '0' || type_check[i] > '9')
-    {
-      std::cerr << "First parameter is not a number" << "\n";
-      return 1;
-    }
-  }
-  char* endptr;
-  num = std::strtol(type_check, &endptr, 10);
+  int num = std::atoi(argv[1]);
   if (num != 1 && num != 2)
   {
-    std::cerr << "First parameter is out of range" << "\n";
+    std::cerr << "First parameter is out of range\n";
     return 1;
   }
 
