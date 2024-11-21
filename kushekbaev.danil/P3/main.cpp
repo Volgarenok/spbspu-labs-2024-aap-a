@@ -24,7 +24,7 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  if (input.eof())
+  if (infile.eof())
   {
     std::cerr << "Not enough elements in file" << "\n";
     return 1;
