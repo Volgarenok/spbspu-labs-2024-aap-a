@@ -15,10 +15,26 @@ int main(int argc, char **argv)
   std::string output_filename = argv[3];
 
   std::ifstream infile(input_filename);
+  size_t rows = 0, columns = 0;
+  std::cin >> rows >> columns;
+
   if (!infile)
   {
     std::cerr << "Error while opening input file" << "\n";
     return 1;
+  }
+
+  if (input.eof())
+  {
+    std::cerr << "Not enough elements in file" << "\n";
+    return 1;
+  }
+
+  if (rows == 0 && columns == 0)
+  {
+    std::ofstream outfile(output_filename);
+    outfile << "0" << "\n";
+    return 0;
   }
 
   char ch = 0;
@@ -28,7 +44,6 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  size_t rows = 0, columns = 0;
   if (!(infile >> rows >> columns))
   {
     std::cerr << "Error reading matrix dimensions" << "\n";
@@ -60,7 +75,6 @@ int main(int argc, char **argv)
     throw std::runtime_error("Error while opening output file");
   }
   outfile << saddle_points << "\n";
-  outfile.close();
   }
   catch (const std::runtime_error& e)
   {
