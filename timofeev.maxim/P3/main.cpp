@@ -1,5 +1,6 @@
 #include "input_matrix.h"
 #include "output_matrix.h"
+#include "cut_to_square"
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -61,6 +62,7 @@ int main(int argc, char** argv)
       std::cerr << "Fail input\n";
       return 2;
     }
+    timofeev::cut_to_square(matrix, line, column);
     timofeev::check_diag(matrix, size);
   }
   else if (num == 2)
@@ -81,8 +83,10 @@ int main(int argc, char** argv)
       std::cerr << "Fail input\n";
       return 2;
     }
+    timofeev::cut_to_square(dmatrix, line, column);
     timofeev::check_diag(dmatrix, size);
     delete[] dmatrix;
   }
   return 0;
 }
+size_t size = (stl <= strk) ? stl : strk;
