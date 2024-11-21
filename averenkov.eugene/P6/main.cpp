@@ -4,7 +4,7 @@
 int main() {
   char* input = nullptr;
   input = averenkov::stringInput(std::cin, input);
-  if(input[0] = '\0')
+  if(input[0] == '\0')
   {
     std::cerr << "Empty string";
     return 1;
