@@ -7,8 +7,10 @@ std::istream & dirti::input_matrix(std::istream & in, int * t, size_t m, size_t 
   {
     for (size_t j = 0; j < n; ++j)
     {
-      in >> t[n * i + j];
-      ++read;
+      if (in >> t[n * i + j])
+      {
+        ++read;
+      }
     }
   }
   return in;

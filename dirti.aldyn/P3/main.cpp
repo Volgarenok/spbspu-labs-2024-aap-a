@@ -54,8 +54,23 @@ int main(int argc, char ** argv)
       return 2;
     }
   }
+  dirti::input_matrix(input, matrix, m, n, read);
+  if (read != m * n)
+  {
+    std::cerr << "Incorrect values of matrix";
+    if (num == 2)
+    {
+      delete[] matrix;
+    }
+    return 2;
+  }
   
   
   //...
   std::ofstream output(argv[3]);
+  
+  if (num == 2)
+  {
+    delete[] matrix;
+  }
 }
