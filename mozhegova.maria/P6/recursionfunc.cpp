@@ -6,5 +6,14 @@ const char * mozhegova::hasLetter(const char * str)
   {
     return str;
   }
-  return (*str >= 'A' and *str <= 'E') ? (str + 1) : nullptr;
+  return (*str >= 'A' && *str <= 'E') ? (str + 1) : nullptr;
+}
+
+const char * mozhegova::hasNumber(const char * str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  return (*str >= '0' && *str <= '9') ? (str + 1) : nullptr;
 }
