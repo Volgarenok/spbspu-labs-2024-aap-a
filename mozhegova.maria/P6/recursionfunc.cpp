@@ -81,3 +81,25 @@ const char * mozhegova::hasTerm(const char * str)
   }
   return next;
 }
+
+const char * mozhegova::hasExpression(const char * str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  auto next = mozhegova::hasTerm(str);
+  next = mozhegova::isSymbol(next, '+');
+  auto continues = mozhegova::hasExpression(next);
+  if (next && continues)
+  {
+    return continues;
+  }
+  next = mozhegova::isSymbol(next, '-');
+  auto continues = mozhegova::hasExpression(next);
+  if (next && continues)
+  {
+    return continues;
+  }
+  return next;
+}
