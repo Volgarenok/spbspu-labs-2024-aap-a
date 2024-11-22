@@ -19,13 +19,10 @@ const char* isZ(const char* string)
 {
   return isSymbol(string, 'z');
 }
-const char* isNull(const char* string)
+const char* isNullorOne(const char* string)
 {
-  return isSymbol(string, '0');
-}
-const char* isOne(const char* string)
-{
-  return isSymbol(string, '1');
+  auto next = isSymbol(string, '0');
+  return next ? next : isSymbol(string, '1');
 }
 const char* isID(const char* string)
 {
@@ -44,6 +41,19 @@ const char* isID(const char* string)
     return next;
   }
   next = isZ(string);
+  return next;
+}
+const char* isUnsignedNumber(const char* string)
+{
+  if (!string)
+  {
+    return string;
+  }
+  auto next = isNullorOne(string);
+  if (auto continues = isUnsignedNumber(next))
+  {
+    return continues;
+  }
   return next;
 }
 bool kiselev::isExpression(const char* string)
