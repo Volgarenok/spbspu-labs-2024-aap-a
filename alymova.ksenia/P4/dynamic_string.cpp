@@ -5,7 +5,7 @@
 #include <cstdlib>
 char* alymova::copy_string(const char* str, size_t end, char* str_new)
 {
-  char* ptr_new = str_new; 
+  char* ptr_new = str_new;
   const char* ptr = str;
   for (; ptr != (str + end); ptr++)
   {
