@@ -19,7 +19,7 @@ const char* isZ(const char* string)
 {
   return isSymbol(string, 'z');
 }
-const char* isNullor(const char* string)
+const char* isNull(const char* string)
 {
   return isSymbol(string, '0');
 }
@@ -27,8 +27,26 @@ const char* isOne(const char* string)
 {
   return isSymbol(string, '1');
 }
+const char* isID(const char* string)
+{
+  if (!string)
+  {
+    return string;
+  }
+  auto next = isX(string);
+  if (next)
+  {
+    return next;
+  }
+  next = isY(string);
+  if (next)
+  {
+    return next;
+  }
+  next = isZ(string);
+  return next;
+}
 bool kiselev::isExpression(const char* string)
 {
   return true;
 }
-
