@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+
 
 int main(int argc, char ** argv)
 {
@@ -6,4 +8,7 @@ int main(int argc, char ** argv)
   {
     std::cout << argv[i] << "\n";
   }
+  std::ifstream input(argv[2]);
+  //...
+  std::ofstream output(argv[3]);
 }
