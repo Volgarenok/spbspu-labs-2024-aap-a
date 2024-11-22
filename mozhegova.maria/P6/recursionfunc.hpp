@@ -9,7 +9,7 @@ namespace mozhegova
   const char * hasUnsignedInt(const char * str);
   const char * hasFactor(const char * str);
   const char * hasTerm(const char * str);
-  bool isExpression(const char * str);
+  const char * hasExpression(const char * str);
 }
 
 #endif

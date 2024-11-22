@@ -36,3 +36,23 @@ const char * mozhegova::hasUnsignedInt(const char * str)
   }
   return next;
 }
+
+const char * mozhegova::hasFactor(const char * str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  auto next = mozhegova::hasUnsignedInt(str);
+  if (next)
+  {
+    return next;
+  }
+  next = mozhegova::hasIdentifier(str);
+  if (next)
+  {
+    return next;
+  }
+  next = mozhegova::hasExpression(str);
+  return next;
+}
