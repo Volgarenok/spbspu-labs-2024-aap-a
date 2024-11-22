@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include "input_matrix.hpp"
 
 
 int main(int argc, char ** argv)
