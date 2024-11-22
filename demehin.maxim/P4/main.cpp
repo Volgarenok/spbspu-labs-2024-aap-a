@@ -1,5 +1,5 @@
 #include <ios>
-#include "string.h"
+#include <string.h>
 
 int main()
 {
@@ -39,6 +39,7 @@ int main()
   }
   char base_str[] = "abc ef";
   demehin::unc_sym(str, base_str, final_str);
+  std::cout << base_str << '\n';
   std::cout << final_str << '\n';
   delete[] str;
   delete[] final_str;
