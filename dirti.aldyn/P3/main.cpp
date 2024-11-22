@@ -21,7 +21,12 @@ int main(int argc, char ** argv)
     return 1;
   }
   
-  std::cout << argv[1] << "\n";
+  
+  if ((argv[1][0] != '1' && argv[1][0] != '2') || argv[1][1] != '\0')
+  {
+    std::cerr << "First parameter is not suitable" << "\n";
+    return 1;
+  }
   
   std::ifstream input(argv[2]);
   //...
