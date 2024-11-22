@@ -34,8 +34,21 @@ const char* maslevtsov::hasDigit(const char* str)
   return next;
 }
 
+const char* maslevtsov::hasUnsignedInt(const char* str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  auto next = hasDigit(str);
+  if (auto continues = hasSymbol(str, 'u'))
+  {
+    return continues;
+  }
+  return next;
+}
+
 bool maslevtsov::isRealNumber(const char* str)
 {
-  ++str;
   return false;
 }
