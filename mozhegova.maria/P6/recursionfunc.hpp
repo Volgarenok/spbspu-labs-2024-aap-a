@@ -3,6 +3,7 @@
 
 namespace mozhegova
 {
+  const char * isSymbol(const char * str, const char c);
   const char * hasLetter(const char * str);
   const char * hasNumber(const char * str);
   const char * hasIdentifier(const char * str);

@@ -1,5 +1,14 @@
 #include "recursionfunc.hpp"
 
+const char * mozhegova::isSymbol(const char * str, const char c)
+{
+  if (!str)
+  {
+    return str;
+  }
+  return (*str == c) ? (str + 1) : nullptr;
+}
+
 const char * mozhegova::hasLetter(const char * str)
 {
   if (!str)
@@ -54,5 +63,21 @@ const char * mozhegova::hasFactor(const char * str)
     return next;
   }
   next = mozhegova::hasExpression(str);
+  return next;
+}
+
+const char * mozhegova::hasTerm(const char * str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  auto next = mozhegova::hasFactor(str);
+  next = mozhegova::isSymbol(next, '*');
+  auto continues = mozhegova::hasTerm(next);
+  if (next && continues)
+  {
+    return continues;
+  }
   return next;
 }
