@@ -3,7 +3,7 @@
 
 int main()
 {
-  const char first_line[] = "abs";
+  const char first_line[] = "abfs";
   char* second_line = timofeev::input_line(std::cin);
   if (second_line == nullptr)
   {
