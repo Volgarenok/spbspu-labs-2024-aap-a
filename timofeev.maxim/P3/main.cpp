@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
-#include <cstring>
 #include <cstdlib>
+#include <cstring>
 #include "input_matrix.h"
 #include "output_matrix.h"
 #include "cut_to_square.h"
