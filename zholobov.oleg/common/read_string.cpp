@@ -1,6 +1,6 @@
 #include "read_string.hpp"
 #include <istream>
-#include "my_realloc.hpp" 
+#include "my_realloc.hpp"
 
 char* zholobov::read_string(std::istream& input)
 {
