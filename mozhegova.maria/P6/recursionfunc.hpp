@@ -11,6 +11,7 @@ namespace mozhegova
   const char * hasFactor(const char * str);
   const char * hasTerm(const char * str);
   const char * hasExpression(const char * str);
+  bool isExpression(const char * str);
 }
 
 #endif

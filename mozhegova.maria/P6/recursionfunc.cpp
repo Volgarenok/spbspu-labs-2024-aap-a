@@ -96,10 +96,15 @@ const char * mozhegova::hasExpression(const char * str)
     return continues;
   }
   next = mozhegova::isSymbol(next, '-');
-  auto continues = mozhegova::hasExpression(next);
+  continues = mozhegova::hasExpression(next);
   if (next && continues)
   {
     return continues;
   }
   return next;
+}
+
+bool mozhegova::isExpression(const char * str)
+{
+  return mozhegova::hasExpression(str) != nullptr;
 }
