@@ -5,8 +5,8 @@
 
 namespace maslevtsov
 {
-  char* maslevtsov::expandString(const char* string, std::size_t capacity);
-  char* maslevtsov::getline(std::istream& in);
+  char* expandString(const char* string, std::size_t capacity);
+  char* getline(std::istream& in);
 }
 
 #endif

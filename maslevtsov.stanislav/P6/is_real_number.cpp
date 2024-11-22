@@ -36,5 +36,6 @@ const char* maslevtsov::hasDigit(const char* str)
 
 bool maslevtsov::isRealNumber(const char* str)
 {
+  ++str;
   return false;
 }
