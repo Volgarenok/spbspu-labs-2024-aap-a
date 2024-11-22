@@ -1,4 +1,5 @@
 #include <iostream>
+#include <read_string.hpp>
 #include "exc_snd.hpp"
 
 constexpr char exclude_characters[] = "abc";
