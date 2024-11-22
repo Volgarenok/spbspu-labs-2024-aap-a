@@ -30,7 +30,7 @@ int main()
     return 1;
   }
   str_res[size_now] = '\0';
-  str_res = alymova::upper_string(str, str_res);
+  str_res = alymova::upper_string(str, size_now, str_res);
   std::cout << str_res << "\n";
   free(str);
   free(str_res);

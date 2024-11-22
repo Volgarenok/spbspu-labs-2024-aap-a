@@ -3,26 +3,32 @@
 #include <stdexcept>
 #include <cstddef>
 #include <cstdlib>
-char* alymova::copy_string(const char* str, char* str_new)
+char* alymova::copy_string(const char* str, size_t end, char* str_new)
 {
-  for (size_t i = 0; str[i] != '\0'; i++)
+  char* ptr_new = str_new; 
+  const char* ptr = str;
+  for (; ptr != (str + end); ptr++)
   {
-    str_new[i] = str[i];
+    *ptr_new = *ptr;
+    ptr_new += 1;
   }
   return str_new;
 }
-char* alymova::upper_string(const char* str, char* str_res)
+char* alymova::upper_string(const char* str, size_t end, char* str_res)
 {
-  for (size_t i = 0; str[i] != '\0'; i++)
+  char* ptr_res = str_res;
+  const char* ptr = str;
+  for (; ptr != (str + end); ptr++)
   {
-    if (std::islower(str[i]))
+    if (std::islower(*ptr))
     {
-      str_res[i] = static_cast< char >(std::toupper(str[i]));
+      *ptr_res = static_cast< char >(std::toupper(*ptr));
     }
     else
     {
-      str_res[i] = str[i];
+      *ptr_res = *ptr;
     }
+    ptr_res += 1;
   }
   return str_res;
 }
@@ -49,7 +55,7 @@ char* alymova::get_string(size_t& size, size_t& size_now, int ratio, char delim)
         return nullptr;
       }
       str_new[size] = '\0';
-      str_new = alymova::copy_string(str, str_new);
+      str_new = alymova::copy_string(str, size / ratio, str_new);
       free(str);
       str = str_new;
     }
