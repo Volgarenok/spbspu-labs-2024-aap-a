@@ -11,9 +11,30 @@ const char* maslevtsov::hasSymbol(const char* str, char symbol)
 
 const char* maslevtsov::hasSign(const char* str)
 {
-  const char* next = hasSymbol(str, '+');
+  auto next = hasSymbol(str, '+');
   return next ? next : hasSymbol(str, '-');
 }
 
+const char* maslevtsov::hasDigit(const char* str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  auto next = hasSymbol(str, '0');
+  constexpr char digits[11] = "0123456789";
+  for (const char* i = digits + 1; *i != '\0'; ++i)
+  {
+    next = hasSymbol(str, *i);
+    if (next)
+    {
+      return next;
+    }
+  }
+  return next;
+}
+
 bool maslevtsov::isRealNumber(const char* str)
-{}
+{
+  return false;
+}

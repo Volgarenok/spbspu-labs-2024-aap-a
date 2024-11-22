@@ -5,6 +5,7 @@ namespace maslevtsov
 {
   const char* hasSymbol(const char* str, char symbol);
   const char* hasSign(const char* str);
+  const char* hasDigit(const char* str);
   bool isRealNumber(const char* str);
 }
 
