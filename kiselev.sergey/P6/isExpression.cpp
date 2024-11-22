@@ -1,5 +1,6 @@
 #include "isExpression.h"
-const char* isSymbol(const char* string, const char s)
+const char* hasExpression(const char* string);
+const char* hasSymbol(const char* string, const char s)
 {
   if (!string)
   {
@@ -7,54 +8,77 @@ const char* isSymbol(const char* string, const char s)
   }
   return (*string == s) ? (string + 1) : nullptr;
 }
-const char* isX(const char* string)
+const char* hasX(const char* string)
 {
-  return isSymbol(string, 'x');
+  return hasSymbol(string, 'x');
 }
-const char* isY(const char* string)
+const char* hasY(const char* string)
 {
-  return isSymbol(string, 'y');
+  return hasSymbol(string, 'y');
 }
-const char* isZ(const char* string)
+const char* hasZ(const char* string)
 {
-  return isSymbol(string, 'z');
+  return hasSymbol(string, 'z');
 }
-const char* isNullorOne(const char* string)
+const char* hasNullorOne(const char* string)
 {
-  auto next = isSymbol(string, '0');
-  return next ? next : isSymbol(string, '1');
+  auto next = hasSymbol(string, '0');
+  return next ? next : hasSymbol(string, '1');
 }
-const char* isID(const char* string)
+const char* hasID(const char* string)
 {
   if (!string)
   {
     return string;
   }
-  auto next = isX(string);
+  auto next = hasX(string);
   if (next)
   {
     return next;
   }
-  next = isY(string);
+  next = hasY(string);
   if (next)
   {
     return next;
   }
-  next = isZ(string);
+  next = hasZ(string);
   return next;
 }
-const char* isUnsignedNumber(const char* string)
+const char* hasUnsignedNumber(const char* string)
 {
   if (!string)
   {
     return string;
   }
-  auto next = isNullorOne(string);
-  if (auto continues = isUnsignedNumber(next))
+  auto next = hasNullorOne(string);
+  if (auto continues = hasUnsignedNumber(next))
   {
     return continues;
   }
   return next;
+}
+const char* hasMultiplier(const char* string)
+{
+  if (!string)
+  {
+    return string;
+  }
+  auto next = hasUnsignedNumber(string);
+  if (next)
+  {
+    return next;
+  }
+  next = hasID(string);
+  if (next)
+  {
+    return next;
+  }
+  next = hasExpression(string);
+  return next;
+}
+const char* hasExpression(const char* string)
+{
+  return string;
 }
 bool kiselev::isExpression(const char* string)
 {
