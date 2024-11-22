@@ -1,5 +1,5 @@
 #include "str_functions.hpp"
-
+#include <getString.hpp>
 int main()
 {
   constexpr const char *str2 = "def ";
