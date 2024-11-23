@@ -7,6 +7,7 @@ int main()
   if (string == nullptr || string[0] == '\0')
   {
     std::cerr << "Failed string reading\n";
+    free(string);
     return 1;
   }
   const char secondString[] = "abs";
