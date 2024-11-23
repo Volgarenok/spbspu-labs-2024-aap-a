@@ -1,4 +1,6 @@
 #include <string.h>
+#include <ios>
+#include "vocab.h"
 
 int main()
 {
@@ -16,4 +18,8 @@ int main()
     delete[] str;
     return 1;
   }
+
+  std::cout << std::boolalpha << (demehin::isExpr(str) != nullptr) << "\n";
+  delete[] str;
+
 }
