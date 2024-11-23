@@ -17,6 +17,8 @@ int main()
   catch (const std::bad_alloc &e)
   {
     std::cerr << "Memory fail\n";
+    delete[] str1;
+    delete[] destination;
     return 2;
   }
   if (str1 == nullptr)
@@ -28,6 +30,7 @@ int main()
   {
     std::cerr << "Incorrect input\n";
     delete[] str1;
+    delete[] destination;
     return 1;
   }
   destination = abramov::unionStrs(destination, str1, str2);
