@@ -9,6 +9,7 @@ int main()
   first_str = inputStr(std::cin, len);
   if (!first_str) {
     std::cerr << "Memory or input error";
+    return 1;
   }
 
   char * result_str = nullptr;
