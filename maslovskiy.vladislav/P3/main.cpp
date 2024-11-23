@@ -6,7 +6,6 @@
 #include "countInMtx.hpp"
 #include "inputMatrix.hpp"
 #include "hasDuplicatesInColumn.hpp"
-
 int main(int argc, char** argv)
 {
   using namespace maslovskiy;
@@ -69,10 +68,6 @@ int main(int argc, char** argv)
       cntCol = countNoDuplicates(matrix, rows, cols);
     }
     std::ofstream output(argv[3]);
-    if (!output)
-    {
-      throw std::logic_error("Cannot open output file");
-    }
     output << cntCol << "\n";
   }
   catch (const std::bad_alloc &e)
