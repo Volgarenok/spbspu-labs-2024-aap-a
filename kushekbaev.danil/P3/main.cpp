@@ -61,7 +61,7 @@ int main(int argc, char **argv)
         std::cerr << "Not enough elements in file\n";
         break;
       }
-      else
+      else if (!"0")
       {
         std::cerr << "Error reading element " << i << "\n";
         delete[] matrix;
