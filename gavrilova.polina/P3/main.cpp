@@ -3,6 +3,39 @@
 #include <fstream>
 #include "upptri.hpp"
 
+
+=======
+namespace gavrilova {
+  int checkNumOfArguments(int argc)
+  {
+    if (argc > 4) {
+      std::cerr << "Too many arguments" << "\n";
+      return 1;
+    } else if (argc < 4) {
+      std::cerr << "Not enough arguments" << "\n";
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  int checkFirstArgument(unsigned long int num, const char * end)
+  {
+    if (num > 3) {
+      std::cerr << "First parametr is out of range" << "\n";
+      return 1;
+    } else if (num == 0) {
+      std::cerr << "First parametr is not a number" << "\n";
+      return 1;
+    } else if (*end != 0){
+      std::cerr << "First parametr is not a number" << "\n";
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+}
+
 int main(int argc, char ** argv)
 {
   if (gavrilova::checkNumOfArguments(argc)) {
@@ -26,6 +59,9 @@ int main(int argc, char ** argv)
   size_t read = 0;
 
   int * mtx = nullptr;
+
+  int temp[10000] = {};
+  
   if (num == 2) {
     int * temp = nullptr;
     try {
@@ -35,6 +71,7 @@ int main(int argc, char ** argv)
     }
     mtx = temp;
   } else if (num == 1) {
+
     static int temp[10000] = {};
     mtx = temp;
   }
@@ -80,3 +117,23 @@ int gavrilova::checkFirstArgument(unsigned long int num, const char * end)
 
   }
 }
+    mtx = temp;
+  }
+
+  gavrilova::input_matrix(input, mtx, m, n, read);
+
+  if ((!input || input.eof()) && num == 2) {
+    delete[] mtx;
+    return 1;
+  } else if ((!input || input.eof()) && num == 1) {
+    return 1;
+  }
+
+  output << gavrilova::isUpperTriangMtx(mtx, m, n) << "\n";
+
+  if (num == 2){
+    delete[] mtx;
+  }
+}
+
+
