@@ -7,7 +7,6 @@ int main()
 {
   size_t size = 10;
   constexpr int ratio = 2;
-  char* str = nullptr;
   size_t size_now = 0;
   char delim = '\n';
   char* str = nullptr;
@@ -25,9 +24,6 @@ int main()
     return 1;
   }
   str[size_now] = '\0';
-  char str_res[size_now + 1] = {};
-  str_res[size_now] = '\0';
-  str_res = alymova::upper_string(str, str_res);
   char* str_res = reinterpret_cast< char* >(malloc((size_now + 1) * sizeof(char)));
   if (str_res == nullptr)
   {
