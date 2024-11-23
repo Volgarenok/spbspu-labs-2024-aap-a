@@ -72,6 +72,7 @@ int main(int argc, char** argv)
     delete[] matrixPointer;
     return 2;
   }
+  std::ofstream output(argv[3]);
+  output << cntCol << "\n";
   delete[] matrixPointer;
-  return 0;
 }
