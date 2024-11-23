@@ -7,6 +7,7 @@ namespace shramko
 {
   char* createBiggerStrMemory(size_t memory, const char* str);
   size_t countConsecutiveIdenticalSymbols(const char* str);
+  char* inputStr(std::istream& in)
 }
 
 #endif

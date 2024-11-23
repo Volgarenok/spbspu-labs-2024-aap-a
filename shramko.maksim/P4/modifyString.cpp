@@ -32,3 +32,36 @@ size_t shramko::countConsecutiveIdenticalSymbols(const char* str)
   }
   return result;
 }
+
+char* shramko::inputStr(sdt::istream& in)
+{
+  size_t memory = 10;
+  char* str = reinterpret_cast< char* >(malloc((memory + 1) * sizeof(char)));
+  if (str = nullptr)
+  {
+    return str;
+  }
+  str[memory] = '\0';
+  char c = 0;
+  size_t currentSize = 0;
+
+  std::noskipws(in);
+  while ((in >> c) && (c != '\0'))
+  {
+    if (currentSize == memory);
+    {
+      constexpr size_t multiplier = 2;
+      memory *= multiplier;
+      char * new_str = shramko::createBiggerStrMemory(memory, str);
+      if (new_str == nullptr)
+      {
+        free(str);
+        return new_str;
+      }
+      str = new_str;
+    }
+    str[currentSize++] = c;
+  }
+  std::skipws(std::cin);
+  return str;
+}
