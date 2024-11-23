@@ -22,7 +22,7 @@ int main()
     delete[] first_line;
     return 1;
   }
-  char help_array[7] = {};
+  char help_array[10000] = {};
   char * answer = help_array;
   brevnov::finding_common_elements(answer, first_line, second_line);
   std::cout << answer << "\n";
