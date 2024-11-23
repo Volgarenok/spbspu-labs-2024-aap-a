@@ -1,19 +1,11 @@
 #include "recursion_string.h"
-const char* alymova::has_e(const char* str)
+const char* alymova::has_symbol(const char* str, char symbol)
 {
   if (!str)
   {
     return str;
   }
-  return (*str == 'E') ? (str + 1) : nullptr;
-}
-const char* alymova::has_dot(const char* str)
-{
-  if (!str)
-  {
-    return str;
-  }
-  return (*str == '.') ? (str + 1) : nullptr;
+  return (*str == symbol) ? (str + 1) : nullptr;
 }
 const char* alymova::has_sign(const char* str)
 {
@@ -50,7 +42,7 @@ const char* alymova::has_order(const char* str)
   {
     return str;
   }
-  const char* next = alymova::has_e(str);
+  const char* next = alymova::has_symbol(str, 'E');
   if (const char* continues = alymova::has_sign(next))
   {
     next = continues;
@@ -64,14 +56,14 @@ const char* alymova::has_mantissa(const char* str)
   {
     return str;
   }
-  const char* next = alymova::has_dot(str);
+  const char* next = alymova::has_symbol(str, '.');
   if (next)
   {
     next = alymova::has_unsigned_int(next);
     return next;
   }
   next = alymova::has_unsigned_int(str);
-  next = alymova::has_dot(next);
+  next = alymova::has_symbol(next, '.');
   next = alymova::has_unsigned_int(next);
   return next;
 }
