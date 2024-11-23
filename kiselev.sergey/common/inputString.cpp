@@ -23,14 +23,14 @@ char* kiselev::inputString(std::istream& input, const char end)
   }
   size_t length = 0;
   std::noskipws(input);
-  arr[length] = '\0';
-  while (arr[length] != end)
+  while (true)
   {
-    if (!(input >> arr[length]))
+    char symbol = {};
+    if (!(input >> arr[length]) || symbol == end)
     {
       break;
     }
-    length++;
+    arr[length++] = symbol;
     if (length == memorySize)
     {
       size_t temporaryLength = memorySize;
