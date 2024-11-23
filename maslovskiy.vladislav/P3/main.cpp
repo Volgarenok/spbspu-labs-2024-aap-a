@@ -38,26 +38,26 @@ int main(int argc, char** argv)
   size_t cols = 0;
   std::ifstream in(argv[2]);
   in >> rows >> cols;
-  size_t matrixSize = cols * rows; 
-  int matrix[10000] = {0}; 
-  int *matrixPointer = nullptr; 
-  try 
-  { 
-    if (num == 1) 
+  size_t matrixSize = cols * rows;
+  int matrix[10000] = {0};
+  int *matrixPointer = nullptr;
+  try
+  {
+    if (num == 1)
     {
-      matrixPointer = matrix; 
-    } 
-    if (num == 2) 
-    { 
-      matrixPointer = new int [matrixSize]; 
-    } 
-    inputMatrix(in, matrixPointer , matrixSize); 
-    if (!in) 
-    { 
-      delete[] matrixPointer; 
-      std::cerr << "Not enough data to fill the matrix\n"; 
-      return 2; 
-    } 
+      matrixPointer = matrix;
+    }
+    if (num == 2)
+    {
+      matrixPointer = new int [matrixSize];
+    }
+    inputMatrix(in, matrixPointer , matrixSize);
+    if (!in)
+    {
+      delete[] matrixPointer;
+      std::cerr << "Not enough data to fill the matrix\n";
+      return 2;
+    }
     cntCol = countNoDuplicates(matrixPointer, rows, cols);
   }
   catch (const std::bad_alloc &e)
