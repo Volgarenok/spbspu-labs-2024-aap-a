@@ -1,6 +1,6 @@
 #include "inputString.h"
 #include <iostream>
-char* kiselev::resizeArr(char* array, size_t newLength, size_t pastLength)
+char* kiselev::resizeArr(const char* array, size_t newLength, size_t pastLength)
 {
   char* arr2 = static_cast< char* >(malloc(newLength * sizeof(char)));
   if (arr2 == nullptr)
@@ -13,7 +13,7 @@ char* kiselev::resizeArr(char* array, size_t newLength, size_t pastLength)
   }
   return arr2;
 }
-char* kiselev::inputString()
+char* kiselev::inputString(std::istream& input, const char end)
 {
   size_t memorySize = 3;
   char* arr = static_cast< char* >(malloc(memorySize * sizeof(char)));
@@ -22,30 +22,25 @@ char* kiselev::inputString()
     return arr;
   }
   size_t length = 0;
-  std::noskipws(std::cin);
-  if (!(std::cin >> arr[length]))
-  {
-    std::cerr << "Incorrect input\n";
-    free(arr);
-    return nullptr;
-  }
-  while (arr[length] != '\n')
+  std::noskipws(input);
+  arr[length] = '\0';
+  while (arr[length] != end)
   {
     length++;
     if (length == memorySize)
     {
-      size_t timeLength = memorySize;
+      size_t temporaryLength = memorySize;
       memorySize += 5;
-      char* timeArray = arr;
-      arr = kiselev::resizeArr(arr, memorySize, timeLength);
-      free(timeArray);
+      char* temporaryArray = arr;
+      arr = kiselev::resizeArr(arr, memorySize, temporaryLength);
+      free(temporaryArray);
       if (arr == nullptr)
       {
         std::cerr << "Out of memory\n";
         return arr;
       }
     }
-    if (!(std::cin >> arr[length]))
+    if (!(input >> arr[length]))
     {
       break;
     }

@@ -1,9 +1,9 @@
 #ifndef INPUTSTRING_H
 #define INPUTSTRING_H
-#include <cstddef>
+#include <iostream>
 namespace kiselev
 {
-  char* resizeArr(char* array, size_t newLength, size_t pastLength);
-  char* inputString();
+  char* resizeArr(const char* array, size_t newLength, size_t pastLength);
+  char* inputString(std::istream& input, const char end);
 }
 #endif
