@@ -1,4 +1,5 @@
 #include "recursionfunc.hpp"
+#include <iostream>
 
 const char * mozhegova::isSymbol(const char * str, const char c)
 {
@@ -62,7 +63,9 @@ const char * mozhegova::hasFactor(const char * str)
   {
     return next;
   }
-  next = mozhegova::hasExpression(str);
+  next = mozhegova::isSymbol(str, '(');
+  next = mozhegova::hasExpression(next);
+  next = mozhegova::isSymbol(next, ')');
   return next;
 }
 
@@ -73,11 +76,12 @@ const char * mozhegova::hasTerm(const char * str)
     return str;
   }
   auto next = mozhegova::hasFactor(str);
-  next = mozhegova::isSymbol(next, '*');
-  auto continues = mozhegova::hasTerm(next);
-  if (next && continues)
+  if (auto next2 = mozhegova::isSymbol(next, '*'))
   {
-    return continues;
+    if (auto continues = mozhegova::hasTerm(next2))
+    {
+      return continues;
+    }
   }
   return next;
 }
@@ -89,22 +93,25 @@ const char * mozhegova::hasExpression(const char * str)
     return str;
   }
   auto next = mozhegova::hasTerm(str);
-  next = mozhegova::isSymbol(next, '+');
-  auto continues = mozhegova::hasExpression(next);
-  if (next && continues)
+  if (auto next2 = mozhegova::isSymbol(next, '+'))
   {
-    return continues;
+    if (auto continues = mozhegova::hasExpression(next2))
+    {
+      return continues;
+    }
   }
-  next = mozhegova::isSymbol(next, '-');
-  continues = mozhegova::hasExpression(next);
-  if (next && continues)
+  else if (auto next2 = mozhegova::isSymbol(next, '-'))
   {
-    return continues;
+    if (auto continues = mozhegova::hasExpression(next2))
+    {
+      return continues;
+    }
   }
   return next;
 }
 
 bool mozhegova::isExpression(const char * str)
 {
-  return mozhegova::hasExpression(str) != nullptr;
+  auto next = mozhegova::hasExpression(str);
+  return next && (*next == '\0');
 }
