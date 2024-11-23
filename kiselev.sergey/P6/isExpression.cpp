@@ -22,8 +22,8 @@ const char* hasZ(const char* string)
 }
 const char* hasNullorOne(const char* string)
 {
-  auto next = hasSymbol(string, '0');
-  return next ? next : hasSymbol(string, '1');
+  auto next = hasSymbol(string, '1');
+  return next ? next : hasSymbol(string, '0');
 }
 const char* hasID(const char* string)
 {
@@ -51,6 +51,10 @@ const char* hasUnsignedNumber(const char* string)
     return string;
   }
   auto next = hasNullorOne(string);
+  if (!next)
+  {
+    return nullptr;
+  }
   if (auto continues = hasUnsignedNumber(next))
   {
     return continues;
@@ -91,46 +95,44 @@ const char* hasTerm(const char* string)
   {
     return string;
   }
-  if (*string == '(')
+  auto next = hasMultiplier(string);
+  if (!next)
   {
-    string++;
-    auto next = hasMultiplier(string);
-    if (next)
-    {
-      if (*next == '+')
-      {
-        next++;
-        if (!hasTerm(next))
-        {
-          return nullptr;
-        }
-        else
-        {
-          if (*next == ')')
-          {
-            return next;
-          }
-          else
-          {
-            return nullptr;
-          }
-        }
-      }
-      return nullptr;
-    }
     return next;
   }
-  auto next = hasMultiplier(string);
-  if (next)
+  if (*next == '*')
   {
-    if (*next == '+')
+    next++;
+    auto continues = hasTerm(next);
+    if (!continues)
     {
-      if (auto countinues = hasTerm(next))
-      {
-        return countinues;
-      }
+      return nullptr;
     }
-    return next;
+    return continues;
+  }
+  if (*next == '(')
+  {
+    next++;
+    auto continues = hasMultiplier(next);
+    if (!continues)
+    {
+      return nullptr;
+    }
+    if (*continues == '+')
+    {
+      continues++;
+      auto nextTerm = hasTerm(continues);
+      if (!nextTerm || *nextTerm != ')')
+      {
+        return nullptr;
+      }
+      return nextTerm + 1;
+    }
+    if (*next != ')')
+    {
+      return nullptr;
+    }
+    return continues + 1;
   }
   return next;
 }
@@ -146,11 +148,8 @@ const char* hasExpression(const char* string)
     if (*next == '+' || *next == '-')
     {
       next++;
-      if (auto continues = hasExpression(next))
-      {
-        return continues;
-      }
-      return nullptr;
+      auto continues = hasExpression(next);
+      return continues;
     }
   }
   return next;
