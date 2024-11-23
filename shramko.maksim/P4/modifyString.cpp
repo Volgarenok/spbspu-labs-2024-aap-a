@@ -40,18 +40,24 @@ char* shramko::inputStr(std::istream& in)
   {
     return str;
   }
-  str[memory] = '\0';
-  char c = 0;
-  size_t currentSize = 0;
 
+  char c = 0;
+  str[memory] = c;
+  size_t currentSize = 0;
   std::noskipws(in);
+  in >> c;
+  if (c == '\n')
+  {
+    return str;
+  }
+
   while ((in >> c) && (c != '\0'))
   {
     if (currentSize == memory)
     {
       constexpr size_t multiplier = 2;
       memory *= multiplier;
-      char * new_str = shramko::createBiggerStrMemory(memory, str);
+      char* new_str = shramko::createBiggerStrMemory(memory, str);
       if (new_str == nullptr)
       {
         free(str);
