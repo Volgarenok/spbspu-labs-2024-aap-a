@@ -9,6 +9,10 @@
 int main(int argc, char** argv)
 {
   using namespace maslovskiy;
+  const size_t static_size = 10000;
+  int matrix_fixed[static_size] = {};
+  int* matrix = nullptr;
+  int* matrix_dynamic = nullptr;
   long long num = 0;
   int cntCol = 0;
   try
@@ -39,41 +43,40 @@ int main(int argc, char** argv)
   std::ifstream in(argv[2]);
   in >> rows >> cols;
   size_t matrixSize = cols * rows;
-  int matrix[10000] = {0};
-  int *matrixPointer = nullptr;
   try
   {
     if (num == 1)
     {
-      matrixPointer = matrix;
+      matrix = matrix_fixed;
     }
-    if (num == 2)
+    else
     {
-      matrixPointer = new int[matrixSize];
+      matrix_dynamic = new int[matrixSize];
+      matrix = matrix_dynamic;
     }
-    inputMatrix(in, matrixPointer , matrixSize);
+    inputMatrix(in, matrix, matrixSize);
     if (!in)
     {
       std::cerr << "Not enough data to fill the matrix\n";
-      delete[] matrixPointer;
+      delete[] matrix_dynamic;
       return 2;
     }
-    cntCol = countNoDuplicates(matrixPointer, rows, cols);
+    cntCol = countNoDuplicates(matrix, rows, cols);
   }
   catch (const std::bad_alloc &e)
   {
     std::cerr << "Cannot allocate memory for matrix\n";
-    delete[] matrixPointer;
+    delete[] matrix_dynamic;
     return 2;
   }
   catch (const std::exception &e)
   {
     std::cerr << e.what() << "\n";
-    delete[] matrixPointer;
+    delete[] matrix_dynamic;
     return 2;
   }
   std::ofstream output(argv[3]);
-  output << cntCol << "\n";
-  delete[] matrixPointer;
+  output << cntCol << "\n"
+  delete[] matrix_dynamic;
   return 0;
 }
