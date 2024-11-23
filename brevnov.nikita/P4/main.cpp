@@ -5,7 +5,7 @@
 int main()
 {
   constexpr char stop = '\n';
-  constexpr size_t size_of_second = 7; 
+  constexpr size_t size_of_second = 7;
   char * first_line = nullptr;
   char second_line[size_of_second] = "abc ef";
   try
