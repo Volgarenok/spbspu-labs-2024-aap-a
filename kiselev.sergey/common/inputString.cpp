@@ -40,7 +40,6 @@ char* kiselev::inputString(std::istream& input, const char end)
       free(temporaryArray);
       if (arr == nullptr)
       {
-        std::cerr << "Out of memory\n";
         return arr;
       }
     }

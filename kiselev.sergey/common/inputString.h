@@ -4,6 +4,6 @@
 namespace kiselev
 {
   char* resizeArr(const char* array, size_t newLength, size_t pastLength);
-  char* inputString(std::istream& input, const char end);
+  char* inputString(std::istream& input, char end);
 }
 #endif
