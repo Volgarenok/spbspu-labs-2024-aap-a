@@ -63,15 +63,15 @@ int main(int argc, char** argv)
   catch (const std::bad_alloc &e)
   {
     std::cerr << "Cannot allocate memory for matrix\n";
-    delete[] dynamicMatrix;
+    delete[] matrixPointer;
     return 2;
   }
   catch (const std::exception &e)
   {
     std::cerr << e.what() << "\n";
-    delete[] dynamicMatrix;
+    delete[] matrixPointer;
     return 2;
   }
-  delete[] dynamicMatrix;
+  delete[] matrixPointer;
   return 0;
 }
