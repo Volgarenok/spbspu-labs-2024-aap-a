@@ -10,6 +10,6 @@ int main()
     std::cerr << "Failed string reading\n";
     return 1;
   }
-  std::cout << std::boolalpha << kiselev::isExpression(string);
+  std::cout << std::boolalpha << kiselev::isExpression(string) << "\n";
   return 0;
 }
