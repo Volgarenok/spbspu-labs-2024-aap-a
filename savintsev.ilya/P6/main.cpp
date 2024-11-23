@@ -1,5 +1,5 @@
 #include <iostream>
-#include <dynamicstrings.h>
+#include <newlineterminatedstr.h>
 #include "checkuniquechars.h"
 
 int main()
