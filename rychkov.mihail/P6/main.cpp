@@ -3,5 +3,5 @@
 
 int main()
 {
-
+  std::cout << std::boolalpha << isEquasion("1+(x+1)");
 }

@@ -1,13 +1,13 @@
 #ifndef IS_EQUASION_CPP
 #define IS_EQUASION_CPP
 
-bool isEquasion(const char** str);
-bool hasEquasion(const char** str);
-bool hasMultiplicationEquasion(const char** str);
-bool hasMultiplier(const char** str);
-bool hasUnsignedInt(const char** str);
-bool hasVariable(const char** str);
-bool hasVariableLiteral(const char** str);
-bool hasBinaryDigit(const char** str);
+bool isEquasion(const char* str);
+bool skipEquasion(const char** str);
+bool skipMultiplicationEquasion(const char** str);
+bool skipMultiplier(const char** str);
+bool skipVariable(const char** str);
+bool skipVariableLiteral(const char** str);
+bool skipUnsignedInt(const char** str);
+bool skipBinaryDigit(const char** str);
 
 #endif
