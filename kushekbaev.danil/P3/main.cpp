@@ -16,7 +16,6 @@ int main(int argc, char **argv)
 
   std::ifstream infile(input_filename);
   size_t rows = 0, columns = 0;
-  std::cin >> rows >> columns;
 
   if (!infile)
   {
