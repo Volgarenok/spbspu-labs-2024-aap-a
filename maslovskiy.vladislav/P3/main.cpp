@@ -10,9 +10,9 @@ int main(int argc, char** argv)
 {
   using namespace maslovskiy;
   const size_t static_size = 10000;
-  int matrix_fixed[static_size] = {};
-  int* matrix = nullptr;
-  int* matrix_dynamic = nullptr;
+  int matrixFixed[static_size] = {};
+  int *matrix = nullptr;
+  int *matrixDynamic = nullptr;
   long long num = 0;
   int cntCol = 0;
   try
@@ -47,18 +47,18 @@ int main(int argc, char** argv)
   {
     if (num == 1)
     {
-      matrix = matrix_fixed;
+      matrix = matrixFixed;
     }
     else
     {
-      matrix_dynamic = new int[matrixSize];
-      matrix = matrix_dynamic;
+      matrixDynamic = new int[matrixSize];
+      matrix = matrixDynamic;
     }
     inputMatrix(in, matrix, matrixSize);
     if (!in)
     {
       std::cerr << "Not enough data to fill the matrix\n";
-      delete[] matrix_dynamic;
+      delete[] matrixDynamic;
       return 2;
     }
     cntCol = countNoDuplicates(matrix, rows, cols);
@@ -66,17 +66,17 @@ int main(int argc, char** argv)
   catch (const std::bad_alloc &e)
   {
     std::cerr << "Cannot allocate memory for matrix\n";
-    delete[] matrix_dynamic;
+    delete[] matrixDynamic;
     return 2;
   }
   catch (const std::exception &e)
   {
     std::cerr << e.what() << "\n";
-    delete[] matrix_dynamic;
+    delete[] matrixDynamic;
     return 2;
   }
   std::ofstream output(argv[3]);
   output << cntCol << "\n";
-  delete[] matrix_dynamic;
+  delete[] matrixDynamic;
   return 0;
 }
