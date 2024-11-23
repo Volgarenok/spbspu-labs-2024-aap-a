@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <memory>
 #include "countInMtx.hpp"
 #include "inputMatrix.hpp"
 #include "hasDuplicatesInColumn.hpp"
@@ -18,7 +19,7 @@ int main(int argc, char** argv)
     }
     const char *str = argv[1];
     char *str_end = nullptr;
-    num = std::strtoll(str, &str_end, 10);
+    num = std::strtoll(str, std::addressof(str_end), 10);
     if (*str_end != '\0' || num == 0)
     {
       throw std::logic_error("Can not parse value");
@@ -55,10 +56,6 @@ int main(int argc, char** argv)
     if (num == 2)
     {
       dynamicMatrix = new int [matrixSize];
-      for (size_t i = 0; i < matrixSize; ++i)
-      {
-        dynamicMatrix[i] = 0;
-      }
       inputMatrix(in, dynamicMatrix, matrixSize);
       cntCol = countNoDuplicates(dynamicMatrix, rows, cols);
     }
@@ -70,17 +67,11 @@ int main(int argc, char** argv)
   }
   catch (const std::exception &e)
   {
-    if (num == 2)
-    {
-      delete [] dynamicMatrix;
-    }
+    delete [] dynamicMatrix;
     std::cerr << e.what() << "\n";
     return 2;
   }
   std::ofstream output(argv[3]);
   output << cntCol << "\n";
-  if (num == 2)
-  {
-    delete [] dynamicMatrix;
-  }
+  delete [] dynamicMatrix;
 }

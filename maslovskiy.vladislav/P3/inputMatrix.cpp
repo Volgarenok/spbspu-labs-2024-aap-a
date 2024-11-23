@@ -7,8 +7,4 @@ void maslovskiy::inputMatrix(std::istream &in, int *matrix, size_t matrixSize)
   {
     in >> matrix[i];
   }
-  if (!in)
-  {
-    throw std::logic_error("Incorrect matrix");
-  }
 }
