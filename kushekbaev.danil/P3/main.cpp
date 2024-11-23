@@ -29,6 +29,12 @@ int main(int argc, char **argv)
     return 1;
   }
 
+  if (infile.fail())
+  {
+    std::cerr << "Failed input" << "\n";
+    return 1;
+  }
+
   char ch = 0;
   if (!(infile >> ch))
   {
@@ -72,19 +78,6 @@ int main(int argc, char **argv)
     delete[] matrix;
     return 1;
   }
-  catch (const std::bad_alloc& e)
-  {
-    std::cerr << "Out of memory" << "\n";
-    delete[] matrix;
-    return 2;
-  }
-  catch (const std::logic_error& e)
-  {
-    std::cerr << "Incorrect input matrix" << "\n";
-    delete[] matrix;
-    return 2;
-  }
-
   delete[] matrix;
   return 0;
 }
