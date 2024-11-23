@@ -1,4 +1,3 @@
-#include <ios>
 #include <iostream>
 #include <inputString.h>
 #include "isExpression.h"
@@ -8,6 +7,7 @@ int main()
   if (!string || string[0] == '\0')
   {
     std::cerr << "Failed string reading\n";
+    free(string);
     return 1;
   }
   std::cout << std::boolalpha << kiselev::isExpression(string) << "\n";
