@@ -39,25 +39,23 @@ int main(int argc, char **argv)
 
   if (!(infile >> rows >> columns))
   {
-    std::cout << "0" << "\n";
+    std::ofstream outfile(output_filename);
+    outfile << "0" << "\n";
     return 0;
   }
 
   int* matrix = new int [rows * columns];
-  if (!matrix)
-  {
-    std::cerr << "Error allocating memory for matrix" << "\n";
-    return 1;
-  }
 
   try
   {
     for (size_t i = 0; i < rows * columns; i++)
     {
       if (!(infile >> matrix[i]))
-       {
-         throw std::runtime_error("Error reading matrix data");
-       }
+      {
+        std::cerr << "Not enough elements in file" << "\n";
+        delete[] matrix;
+        return 1;
+      }
     }
 
   int saddle_points = kushekbaev::countSaddlePoints(matrix, rows, columns);
