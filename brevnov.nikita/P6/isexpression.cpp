@@ -82,10 +82,10 @@ const char * brevnov::hasTerm(const char * str)
     }
   } 
   auto next = brevnov::hasMultiplier(str);
-  /* if (*next == '*')
+  if (*next == '*')
   {
     return brevnov::hasTerm(next + 1);
-  }  */
+  }
   return next;
 }
 
