@@ -1,6 +1,5 @@
 #include "modifyString.hpp"
 #include <cstdlib>
-#include <iostream>
 
 char* shramko::createBiggerStrMemory(size_t memory, const char* str)
 {

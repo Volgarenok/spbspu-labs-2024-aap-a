@@ -2,6 +2,7 @@
 #define MODIFYSTRING_HPP
 
 #include <cstddef>
+#include <iostream>
 
 namespace shramko
 {
