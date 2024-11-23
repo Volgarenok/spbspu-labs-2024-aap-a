@@ -17,6 +17,6 @@ int main()
     return 1;
   }
   int pos = 0;
-  std::cout << savintsev::isExpression(line, pos) << '\n';
+  std::cout << std::boolalpha << savintsev::isExpression(line, pos) << '\n';
   return 0;
 }
