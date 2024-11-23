@@ -27,6 +27,7 @@ int main()
   char* str_res = reinterpret_cast< char* >(malloc((size_now + 1) * sizeof(char)));
   if (str_res == nullptr)
   {
+    free(str);
     std::cerr << "Error: memory not allocate for string\n";
     return 1;
   }
