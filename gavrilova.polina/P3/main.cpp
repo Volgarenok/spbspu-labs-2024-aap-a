@@ -60,7 +60,7 @@ int main(int argc, char ** argv)
   int * mtx = nullptr;
 
   int temp[10000] = {};
- 
+
   if (num == 2) {
     int * temp = nullptr;
     try {
@@ -107,5 +107,3 @@ int main(int argc, char ** argv)
     delete[] mtx;
   }
 }
-
-
