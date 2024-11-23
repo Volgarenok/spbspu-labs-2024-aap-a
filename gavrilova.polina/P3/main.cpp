@@ -3,6 +3,7 @@
 #include <fstream>
 #include "upptri.hpp"
 
+
 namespace gavrilova {
   int checkNumOfArguments(int argc)
   {
@@ -57,7 +58,9 @@ int main(int argc, char ** argv)
   size_t read = 0;
 
   int * mtx = nullptr;
+
   int temp[10000] = {};
+ 
   if (num == 2) {
     int * temp = nullptr;
     try {
@@ -67,6 +70,7 @@ int main(int argc, char ** argv)
     }
     mtx = temp;
   } else if (num == 1) {
+    static int temp[10000] = {};
     mtx = temp;
   }
 
@@ -85,3 +89,23 @@ int main(int argc, char ** argv)
     delete[] mtx;
   }
 }
+    mtx = temp;
+  }
+
+  gavrilova::input_matrix(input, mtx, m, n, read);
+
+  if ((!input || input.eof()) && num == 2) {
+    delete[] mtx;
+    return 1;
+  } else if ((!input || input.eof()) && num == 1) {
+    return 1;
+  }
+
+  output << gavrilova::isUpperTriangMtx(mtx, m, n) << "\n";
+
+  if (num == 2){
+    delete[] mtx;
+  }
+}
+
+
