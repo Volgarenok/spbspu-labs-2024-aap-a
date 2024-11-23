@@ -13,17 +13,17 @@ int main(int argc, char* argv[])
   }
 
   char* endptr;
-  int num = std::strtol(argv[1], &endptr, 10);
-  if (*endptr != '\0' || (num != 1 && num != 2))
+  int taskNumber = std::strtol(argv[1], &endptr, 10);
+  if (*endptr != '\0' || (taskNumber != 1 && taskNumber != 2))
   {
-    std::cerr << "Error: Invalid task number.\n";
+    std::cerr << "Error: Invalid task number. Use 1 or 2.\n";
     return 1;
   }
 
   const char* inputFile = argv[2];
   const char* outputFile = argv[3];
   size_t rows = 0, cols = 0;
-  bool useFixedArray = (num == 1);
+  bool useFixedArray = (taskNumber == 1);
   int** matrix = nullptr;
 
   int result = cherkasov::readMatrix(inputFile, rows, cols, useFixedArray, &matrix);
@@ -32,13 +32,13 @@ int main(int argc, char* argv[])
     return result;
   }
 
-  if (rows == 0 && cols == 0)
+  if (rows == 0 || cols == 0)
   {
     return 0;
   }
 
   int processResult = cherkasov::processMatrix(matrix, rows, cols);
-  bool isLowerTriangular = cherkasov::lowerTriangul(matrix, rows, cols);
+  bool isLowerTriangular = cherkasov::lowerTriangul(const_cast<const int**>(matrix), rows, cols);
   std::ofstream outFile(outputFile);
   if (!outFile)
   {
@@ -58,5 +58,6 @@ int main(int argc, char* argv[])
   }
 
   cherkasov::freeMatrix(matrix, rows);
+
   return 0;
 }
