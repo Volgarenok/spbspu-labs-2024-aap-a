@@ -81,7 +81,7 @@ int main(int argc, char ** argv)
 
   output << gavrilova::isUpperTriangMtx(mtx, m, n) << "\n";
 
-  if (num == 2){
+  if (num == 2) {
     delete[] mtx;
   }
 }
