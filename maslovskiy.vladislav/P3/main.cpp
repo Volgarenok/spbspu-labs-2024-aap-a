@@ -39,34 +39,16 @@ int main(int argc, char** argv)
   std::ifstream in(argv[2]);
   in >> rows >> cols;
   if (!in)
-  {
-    std::cerr << "Can not read size of matrix" << '\n';
-    return 2;
-  }
-  size_t matrixSize = cols * rows;
-  int matrix[10000] = {0};
-  int *matrixPointer = nullptr;
-  try
-  {
-    if (num == 1)
     {
-      matrixPointer = matrix;
-    }
-    if (num == 2)
-    {
-      matrixPointer = new int [matrixSize];
-    }
-    inputMatrix(in, matrixPointer , matrixSize);
-    if (!in)
-    {
-      if (num == 2)
-      {
-        delete[] matrixPointer;
-      }
+      delete[] matrixPointer;
       std::cerr << "Not enough data to fill the matrix\n";
       return 2;
     }
-    cntCol = countNoDuplicates(matrixPointer, rows, cols);
+    int cntCol = countNoDuplicates(matrixPointer, rows, cols);
+    std::ofstream output(argv[3]);
+    output << cntCol << "\n";
+
+    delete[] matrixPointer;
   }
   catch (const std::bad_alloc &e)
   {
@@ -75,17 +57,8 @@ int main(int argc, char** argv)
   }
   catch (const std::exception &e)
   {
-    if (num == 2)
-    {
-      delete [] matrixPointer;
-    }
+    delete[] matrixPointer;
     std::cerr << e.what() << "\n";
     return 2;
-  }
-  std::ofstream output(argv[3]);
-  output << cntCol << "\n";
-  if (num ==2)
-  {
-    delete [] matrixPointer;
   }
 }
