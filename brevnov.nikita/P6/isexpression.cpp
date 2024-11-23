@@ -37,10 +37,11 @@ const char * brevnov::hasMultiplier(const char * str)
   }
   if (*str == '(')
   {
-    auto bracket = brevnov::hasExpression(str + 1);
+    str++;
+    auto bracket = brevnov::hasExpression(str);
     if (*bracket == ')')
     {
-      return (str + 1);
+      return (bracket + 1);
     }
     else
     {
@@ -63,7 +64,8 @@ const char * brevnov::hasTerm(const char * str)
   }
   if (*str == '(')
   {
-    auto bracket = brevnov::hasMultiplier(str + 1);
+    str++;
+    auto bracket = brevnov::hasMultiplier(str);
     if (*bracket == '+')
     {
       bracket = brevnov::hasTerm(bracket + 1);
@@ -84,8 +86,9 @@ const char * brevnov::hasTerm(const char * str)
   auto next = brevnov::hasMultiplier(str);
   if (*next == '*')
   {
-    return brevnov::hasTerm(next + 1);
-  }
+    next++;
+    return brevnov::hasTerm(next);
+  } 
   return next;
 }
 
