@@ -68,7 +68,6 @@ size_t m = 0, n = 0;
     }
     mtx = temp;
   } else if (num == 1) {
-    static int temp[10000] = {};
     mtx = temp;
   }
 
