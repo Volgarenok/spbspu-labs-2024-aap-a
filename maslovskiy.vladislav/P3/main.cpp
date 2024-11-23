@@ -38,37 +38,27 @@ int main(int argc, char** argv)
   size_t cols = 0;
   std::ifstream in(argv[2]);
   in >> rows >> cols;
-  if (!in)
-  {
-    std::cerr << "Cannot read size of matrix\n";
-    return 2;
-  }
-  size_t matrixSize = rows * cols;
-  int matrix[10000] = {0};
-  int* dynamicMatrix = nullptr;
-  try
-  {
-    if (num == 2)
+  size_t matrixSize = cols * rows; 
+  int matrix[10000] = {0}; 
+  int *matrixPointer = nullptr; 
+  try 
+  { 
+    if (num == 1) 
     {
-      dynamicMatrix = new int[matrixSize];
-      inputMatrix(in, dynamicMatrix, matrixSize);
-      if (!in)
-      {
-        throw std::logic_error("Not enough data to fill the matrix");
-      }
-      cntCol = countNoDuplicates(dynamicMatrix, rows, cols);
-    }
-    else
-    {
-      inputMatrix(in, matrix, matrixSize);
-      if (!in)
-      {
-        throw std::logic_error("Not enough data to fill the matrix");
-      }
-      cntCol = countNoDuplicates(matrix, rows, cols);
-    }
-    std::ofstream output(argv[3]);
-    output << cntCol << "\n";
+      matrixPointer = matrix; 
+    } 
+    if (num == 2) 
+    { 
+      matrixPointer = new int [matrixSize]; 
+    } 
+    inputMatrix(in, matrixPointer , matrixSize); 
+    if (!in) 
+    { 
+      delete[] matrixPointer; 
+      std::cerr << "Not enough data to fill the matrix\n"; 
+      return 2; 
+    } 
+    cntCol = countNoDuplicates(matrixPointer, rows, cols);
   }
   catch (const std::bad_alloc &e)
   {
