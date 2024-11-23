@@ -1,21 +1,20 @@
 #include "reform.h"
 #include <cstddef>
 #include <cctype>
-char* alymova::upper_string(const char* str, size_t end, char* str_res)
+char* alymova::upper_string(const char* str, char* str_res)
 {
   char* ptr_res = str_res;
-  const char* ptr = str;
-  for (; ptr != (str + end); ptr++)
+  for (; *str != '\0'; str++)
   {
-    if (std::islower(*ptr))
+    if (std::islower(*str))
     {
-      *ptr_res = static_cast< char >(std::toupper(*ptr));
+      *ptr_res = static_cast< char >(std::toupper(*str));
     }
     else
     {
-      *ptr_res = *ptr;
+      *ptr_res = *str;
     }
-    ptr_res += 1;
+    ptr_res++;
   }
   return str_res;
 }

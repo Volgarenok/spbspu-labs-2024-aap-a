@@ -1,5 +1,6 @@
 #include "dynamic_string.h"
 #include <iostream>
+#include <istream>
 #include <stdexcept>
 #include <cstddef>
 #include <cstdlib>
@@ -10,37 +11,44 @@ char* alymova::copy_string(const char* str, size_t end, char* str_new)
   for (; ptr != (str + end); ptr++)
   {
     *ptr_new = *ptr;
-    ptr_new += 1;
+    ptr_new++;
   }
   return str_new;
 }
-char* alymova::get_string(size_t& size, size_t& size_now, int ratio, char delim)
+char* alymova::get_string(std::istream& in, size_t& capacity, size_t& size, int ratio, char delim)
 {
-  char* str = reinterpret_cast< char* >(malloc((size + 1) * sizeof(char)));
+  if (capacity == 0 || size >= capacity || ratio <= 1)
+  {
+    return nullptr;
+  }
+  char* str = reinterpret_cast< char* >(malloc((capacity + 1) * sizeof(char)));
   if (str == nullptr)
   {
     return nullptr;
   }
-  str[size] = '\0';
+  str[capacity] = '\0';
   char next = '\0';
-  while ((std::cin >> next) && (next != delim))
+  in >> std::noskipws;
+  while ((in >> next) && (next != delim))
   {
-    str[size_now] = next;
-    size_now += 1;
-    if (size_now == size)
+    str[size] = next;
+    size += 1;
+    if (size == capacity)
     {
-      size *= ratio;
-      char* str_new = reinterpret_cast< char* >(malloc((size + 1) * sizeof(char)));
+      capacity *= ratio;
+      char* str_new = reinterpret_cast< char* >(malloc((capacity + 1) * sizeof(char)));
       if (str_new == nullptr)
       {
+        capacity = size;
         free(str);
         return nullptr;
       }
-      str_new[size] = '\0';
-      str_new = alymova::copy_string(str, size / ratio, str_new);
+      str_new[capacity] = '\0';
+      str_new = copy_string(str, size, str_new);
       free(str);
       str = str_new;
     }
   }
+  str[size] = '\0';
   return str;
 }
