@@ -76,7 +76,7 @@ int main(int argc, char** argv)
     return 2;
   }
   std::ofstream output(argv[3]);
-  output << cntCol << "\n"
+  output << cntCol << "\n";
   delete[] matrix_dynamic;
   return 0;
 }
