@@ -49,7 +49,7 @@ int main(int argc, char ** argv)
   std::ifstream input (argv[2]);
   std::ofstream output (argv[3]);
 
-  size_t m = 0, n = 0;
+size_t m = 0, n = 0;
   input >> m >> n;
   if (!input) {
     return 2;
@@ -58,9 +58,7 @@ int main(int argc, char ** argv)
   size_t read = 0;
 
   int * mtx = nullptr;
-
   int temp[10000] = {};
-
   if (num == 2) {
     int * temp = nullptr;
     try {
@@ -71,24 +69,6 @@ int main(int argc, char ** argv)
     mtx = temp;
   } else if (num == 1) {
     static int temp[10000] = {};
-    mtx = temp;
-  }
-
-  gavrilova::input_matrix(input, mtx, m, n, read);
-
-  if ((!input || input.eof()) && num == 2) {
-    delete[] mtx;
-    return 1;
-  } else if ((!input || input.eof()) && num == 1) {
-    return 1;
-  }
-
-  output << gavrilova::isUpperTriangMtx(mtx, m, n) << "\n";
-
-  if (num == 2){
-    delete[] mtx;
-  }
-}
     mtx = temp;
   }
 
