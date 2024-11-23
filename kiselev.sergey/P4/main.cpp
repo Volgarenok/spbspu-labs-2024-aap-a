@@ -1,5 +1,5 @@
-#include <inputString.h>
 #include <iostream>
+#include <inputString.h>
 #include "identicalChar.h"
 int main()
 {
