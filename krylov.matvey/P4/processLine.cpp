@@ -15,7 +15,7 @@ char * krylov::inputLine(std::istream & in)
   }
   size_t currentElementIndex = 0;
   std::noskipws(in);
-  while (!in.eof())
+  while (!in.eof() && array[currentElementIndex] != '\n')
   {
     if (currentElementIndex == (capacity - 1))
     {
