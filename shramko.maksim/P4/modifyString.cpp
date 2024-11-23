@@ -31,7 +31,7 @@ char* shramko::inputStr(std::istream& in)
 {
   size_t memory = 10;
   char* str = reinterpret_cast< char* >(malloc((memory + 1) * sizeof(char)));
-  str = {'a'};
+  str = {};
   if (str == nullptr)
   {
     return str;
@@ -49,7 +49,7 @@ char* shramko::inputStr(std::istream& in)
       constexpr size_t multiplier = 2;
       memory *= multiplier;
       char* new_str = shramko::createBiggerStrMemory(memory, str);
-      new_str = {'a'};
+      new_str = {};
       free(str);
       if (new_str == nullptr)
       {
