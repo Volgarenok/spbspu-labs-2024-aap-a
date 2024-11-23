@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <iostream>
 
-char* shramko::createBiggerStrMemory(size_t memory, char* str)
+char* shramko::createBiggerStrMemory(size_t memory, const char* str)
 {
   char* new_str = reinterpret_cast< char* >(malloc((memory + 1) * sizeof(char)));
 
@@ -15,7 +15,7 @@ char* shramko::createBiggerStrMemory(size_t memory, char* str)
   return new_str;
 }
 
-size_t shramko::countConsecutiveIdenticalSymbols(char* str)
+size_t shramko::countConsecutiveIdenticalSymbols(const char* str)
 {
   size_t result = 0;
 
