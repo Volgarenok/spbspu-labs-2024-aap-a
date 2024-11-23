@@ -10,7 +10,6 @@
 int main(int argc, char** argv)
 {
   using namespace maslovskiy;
-
   long long num = 0;
   int cntCol = 0;
   try
@@ -19,7 +18,6 @@ int main(int argc, char** argv)
     {
       throw std::logic_error("Wrong number of parameters");
     }
-
     const char *str = argv[1];
     char *str_end = nullptr;
     num = std::strtoll(str, std::addressof(str_end), 10);
@@ -27,7 +25,6 @@ int main(int argc, char** argv)
     {
       throw std::logic_error("Cannot parse value");
     }
-
     if (num != 1 && num != 2)
     {
       throw std::logic_error("Incorrect parameter");
@@ -38,7 +35,6 @@ int main(int argc, char** argv)
     std::cerr << e.what() << "\n";
     return 1;
   }
-
   size_t rows = 0;
   size_t cols = 0;
   std::ifstream in(argv[2]);
@@ -48,11 +44,9 @@ int main(int argc, char** argv)
     std::cerr << "Cannot read size of matrix\n";
     return 2;
   }
-
   size_t matrixSize = rows * cols;
-  int matrix[10000] = {0}; // Для статического массива
+  int matrix[10000] = {0};
   int* dynamicMatrix = nullptr;
-
   try
   {
     if (num == 2)
@@ -74,7 +68,6 @@ int main(int argc, char** argv)
       }
       cntCol = countNoDuplicates(matrix, rows, cols);
     }
-
     std::ofstream output(argv[3]);
     if (!output)
     {
@@ -85,19 +78,15 @@ int main(int argc, char** argv)
   catch (const std::bad_alloc &e)
   {
     std::cerr << "Cannot allocate memory for matrix\n";
-    delete[] dynamicMatrix; // Удаляем динамическую память, если она была выделена
+    delete[] dynamicMatrix;
     return 2;
   }
   catch (const std::exception &e)
   {
     std::cerr << e.what() << "\n";
-    delete[] dynamicMatrix; // Удаляем динамическую память, если она была выделена
+    delete[] dynamicMatrix;
     return 2;
   }
-
-  delete[] dynamicMatrix; // Удаляем динамическую память, если она была выделена
+  delete[] dynamicMatrix;
   return 0;
 }
-
-
-
