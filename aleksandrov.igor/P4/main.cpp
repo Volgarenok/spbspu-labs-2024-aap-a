@@ -1,14 +1,14 @@
 #include <iostream>
-#include <ios>
+#include "getString.h"
 #include "latinRemove.h"
 
 int main()
 {
-  size_t maxSize = 10;
   char* str = nullptr;
+  size_t strSize = 0;
   try
   {
-    str = new char[maxSize + 1]{};
+    str = aleksandrov::getString(std::cin, strSize);
   }
   catch (const std::bad_alloc& e)
   {
@@ -16,47 +16,13 @@ int main()
     delete[] str;
     return 1;
   }
-
-  size_t size = 0;
-  char c = '\0';
-  std::noskipws(std::cin);
-  while (c != '\n')
+  catch (const std::logic_error& e)
   {
-    std::cin >> c;
-    if (!std::cin)
-    {
-      std::cerr << "ERROR: Input was incorrect!\n";
-      delete[] str;
-      return 1;
-    }
-    if (size == maxSize)
-    {
-      constexpr const int coef = 2;
-      maxSize += coef;
-      char* newStr = nullptr;
-      try
-      {
-        newStr = new char[maxSize + 1]{};
-      }
-      catch (const std::bad_alloc& e)
-      {
-        std::cerr << "ERROR: Out of memory!\n";
-        delete[] newStr;
-        delete[] str;
-        return 1;
-      }
-      for (size_t i = 0; i < maxSize - coef; ++i)
-      {
-        newStr[i] = str[i];
-      }
-      delete[] str;
-      str = newStr;
-    }
-    str[size++] = c;
+    std::cerr << e.what();
+    delete[] str;
+    return 1;
   }
-  std::skipws(std::cin);
-  str[size] = '\0';
-  std::cout << aleksandrov::latinRemove(str, size) << "\n";
+  std::cout << aleksandrov::latinRemove(str, strSize) << "\n";
   delete[] str;
 }
 
