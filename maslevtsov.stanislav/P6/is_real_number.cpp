@@ -67,7 +67,35 @@ const char* maslevtsov::hasOrder(const char* str)
   return next;
 }
 
+const char* maslevtsov::hasMantissa(const char* str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  auto next = hasUnsignedInt(str);
+  next = hasSymbol(next, '.');
+  return hasUnsignedInt(next);
+}
+
+const char* maslevtsov::hasRealNumber(const char* str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  auto next = hasSign(str);
+  if (next)
+  {
+    next = hasMantissa(next);
+    return hasOrder(next);
+  }
+  next = hasMantissa(next);
+  return hasOrder(next);
+}
+
 bool maslevtsov::isRealNumber(const char* str)
 {
-  return false;
+  auto next = hasRealNumber(str);
+  return next && (*next == '\0');
 }
