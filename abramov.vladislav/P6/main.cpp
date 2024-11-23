@@ -14,6 +14,6 @@ int main()
     std::cerr << "Memory fail\n";
     return 2;
   }
-  std::cout << abramov::isReal(str) << "\n";
+  std::cout << std::boolalpha << abramov::isReal(str) << "\n";
   delete[] str;
 }
