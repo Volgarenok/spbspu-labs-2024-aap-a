@@ -1,4 +1,4 @@
-#include "string.h"
+#include "string_utils.h"
 #include <stdexcept>
 
 char* demehin::copyString(char* str, size_t size)
@@ -23,8 +23,9 @@ char* demehin::copyString(char* str, size_t size)
 }
 
 
-char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size)
+char* demehin::getString(std::istream& in, char stop, size_t max_size)
 {
+  char* str = nullptr;
   str = new char[max_size];
   str[0] = '\0';
   size_t size = 0;
@@ -36,7 +37,7 @@ char* demehin::getString(std::istream& in, char stop, char* str, size_t max_size
     {
       str[max_size - 1] = '\0';
       max_size *= 2;
-      str = demehin::copyString(str, max_size);
+      str = copyString(str, max_size);
     }
     str[size++] = temp;
   }

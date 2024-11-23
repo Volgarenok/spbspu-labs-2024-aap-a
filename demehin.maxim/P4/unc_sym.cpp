@@ -1,4 +1,4 @@
-#include "string.h"
+#include "unc_sym.h"
 
 void demehin::getUniqueSymbols(char* str, char* ustr)
 {
@@ -31,8 +31,8 @@ void demehin::unc_sym(char* str, char* base_str, char* final_str)
   constexpr size_t askii_size = 128;
   char ustr1[askii_size] = {};
   char ustr2[askii_size] = {};
-  demehin::getUniqueSymbols(str, ustr1);
-  demehin::getUniqueSymbols(base_str, ustr2);
+  getUniqueSymbols(str, ustr1);
+  getUniqueSymbols(base_str, ustr2);
   char* ptr1 = ustr1;
   char* ptr2 = ustr2;
   char* orig_base = ptr2;

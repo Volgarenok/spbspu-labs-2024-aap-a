@@ -1,5 +1,6 @@
 #include <ios>
-#include <string.h>
+#include <string_utils.h>
+#include "unc_sym.h"
 
 int main()
 {
@@ -9,7 +10,7 @@ int main()
 
   try
   {
-    str = demehin::getString(std::cin, stop, str, max_size);
+    str = demehin::getString(std::cin, stop, max_size);
   }
   catch (const std::bad_alloc& e)
   {

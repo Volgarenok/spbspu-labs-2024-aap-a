@@ -1,12 +1,10 @@
-#ifndef STRING_H
-#define STRING_H
+#ifndef UNC_SYM_H
+#define UNC_SYM_H
 #include <iostream>
 
 namespace demehin
 {
-  char* copyString(char* str, size_t size);
   void getUniqueSymbols(char* str, char* ustr);
-  char* getString(std::istream& in, char stop, char* str, size_t max_size);
   void unc_sym(char* str, char* base_str, char* final_str);
 }
 
