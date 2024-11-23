@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cctype>
+#include <inputStr.hpp>
 
 char * rm_digits (const char * original, char * new_str)
 {
@@ -15,46 +16,9 @@ char * rm_digits (const char * original, char * new_str)
 
 int main()
 {
-  char * first_str = nullptr;
-  constexpr int K = 100;
-  try {
-    first_str = new char [K];
-  } catch (const std::bad_alloc & e) {
-    std::cerr << "Memory errorr\n";
-    return 1;
-  }
-  char c;
-  size_t len = 0;
-  std::noskipws(std::cin);
-  while ((std::cin >> c)) {
-    if (c == '\n'){
-      break;
-    }
-    if (len < K - 1) {
-      first_str[len++] = c;
-    } else {
-      char * temp = nullptr;
-      try {
-        temp = new char [len + K];
-      } catch (const std::bad_alloc & e) {
-        std::cerr << "Memory errorr\n";
-        delete[] first_str;
-        return 1;
-      }
-      for (size_t i = 0; i < len; ++i) {
-        temp[i] = first_str[i];
-      }
-      delete[] first_str;
-      first_str = temp;
-      first_str[len++] = c;
-    }
-  }
-  first_str[len] = '\0';
-
-  if (!std::cin){
-    std::cerr << "Not input\n";
-    delete[] first_str;
-    return 1;
+  first_str = inputStr(std::cin);
+  if (!first_str) {
+    std::cerr << "Memory or input error";
   }
 
   char * result_str = nullptr;
