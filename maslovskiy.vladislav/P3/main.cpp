@@ -51,12 +51,23 @@ int main(int argc, char** argv)
     if (num == 1)
     {
       inputMatrix(in, matrix, matrixSize);
+      if (!in)
+      {
+        std::cerr << "Not enough data to fill the matrix\n";
+        return 2;
+      }
       cntCol = countNoDuplicates(matrix, rows, cols);
     }
     if (num == 2)
     {
       dynamicMatrix = new int [matrixSize];
       inputMatrix(in, dynamicMatrix, matrixSize);
+      if (!in)
+      {
+        delete[] dynamicMatrix;
+        std::cerr << "Not enough data to fill the matrix\n";
+        return 2;
+      }
       cntCol = countNoDuplicates(dynamicMatrix, rows, cols);
     }
   }
