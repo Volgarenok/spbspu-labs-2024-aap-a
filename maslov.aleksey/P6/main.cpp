@@ -1,6 +1,5 @@
 #include <iostream>
 #include <stringInput.hpp>
-#include <ios>
 #include "grammarChecker.hpp"
 
 int main()
@@ -15,6 +14,7 @@ int main()
     std::cerr << "Out of memory\n";
     return 1;
   }
+  std::cout << std::boolalpha;
   std::cout << maslov::isExpression(string) << "\n";
   delete[] string;
 }
