@@ -1,5 +1,4 @@
 #include "isexpression.hpp"
-#include <iostream>
 
 const char * brevnov::isLetter(const char * str)
 {
@@ -88,7 +87,7 @@ const char * brevnov::hasTerm(const char * str)
   {
     next++;
     return brevnov::hasTerm(next);
-  } 
+  }
   return next;
 }
 
