@@ -1,5 +1,6 @@
 #include <iostream>
-#include <dynamicstrings.h>
+#include <newlineterminatedstr.h>
+#include "dynamicstrings.h"
 
 int main()
 {
