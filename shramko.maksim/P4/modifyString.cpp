@@ -10,7 +10,6 @@ char* shramko::createBiggerStrMemory(size_t memory, const char* str)
   {
     new_str[i] = str[i];
   }
-  free(str);
   new_str[memory] = '\0';
   return new_str;
 }
