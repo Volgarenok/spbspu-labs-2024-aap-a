@@ -26,6 +26,10 @@ char* kiselev::inputString(std::istream& input, const char end)
   arr[length] = '\0';
   while (arr[length] != end)
   {
+    if (!(input >> arr[length]))
+    {
+      break;
+    }
     length++;
     if (length == memorySize)
     {
@@ -39,10 +43,6 @@ char* kiselev::inputString(std::istream& input, const char end)
         std::cerr << "Out of memory\n";
         return arr;
       }
-    }
-    if (!(input >> arr[length]))
-    {
-      break;
     }
   }
   arr[length] = '\0';
