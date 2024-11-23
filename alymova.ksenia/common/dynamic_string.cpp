@@ -1,7 +1,6 @@
 #include "dynamic_string.h"
 #include <iostream>
 #include <istream>
-#include <stdexcept>
 #include <cstddef>
 #include <cstdlib>
 char* alymova::copy_string(const char* str, size_t end, char* str_new)

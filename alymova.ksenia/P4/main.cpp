@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdexcept>
 #include <cstddef>
 #include <dynamic_string.h>
 #include "reform.h"
