@@ -6,13 +6,13 @@ int main()
 {
   constexpr int ratio = 2;
   size_t capacity = 10, size = 0;
-  char* str = alymova::get_string(size, size_now, ratio, '\n');
+  char* str = alymova::get_string(std::cin, capacity, size, ratio, '\n');
   if (str == nullptr)
   {
     std::cerr << "Error: memory not allocate for string\n";
     return 1;
   }
-  if (size_now == 0)
+  if (size == 0)
   {
     free(str);
     std::cerr << "Empty string\n";
