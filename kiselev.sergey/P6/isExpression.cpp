@@ -73,7 +73,71 @@ const char* hasMultiplier(const char* string)
   {
     return next;
   }
-  next = hasExpression(string);
+  if (*next == '(')
+  {
+    next++;
+    next = hasExpression(string);
+    if (next)
+    {
+      next++;
+      if (*next == ')')
+      {
+        return next;
+      }
+    }
+  }
+  return next;
+}
+const char* hasTerm(const char* string)
+{
+  if (!string)
+  {
+    return string;
+  }
+  if (*string == '(')
+  {
+    string++;
+    auto next = hasMultiplier(string);
+    if (next)
+    {
+      next++;
+      if (*next == '+')
+      {
+        next++;
+        if (!hasTerm(next))
+        {
+          return nullptr;
+        }
+        else
+        {
+          next++;
+          if (*next == ')')
+          {
+            return next;
+          }
+          else
+          {
+            return nullptr;
+          }
+        }
+      }
+      return nullptr;
+    }
+    return next;
+  }
+  auto next = hasMultiplier(string);
+  if (next)
+  {
+    next++;
+    if (*next == '+')
+    {
+      if (auto countinues = hasTerm(next))
+      {
+        return countinues;
+      }
+    }
+    return next;
+  }
   return next;
 }
 const char* hasExpression(const char* string)
