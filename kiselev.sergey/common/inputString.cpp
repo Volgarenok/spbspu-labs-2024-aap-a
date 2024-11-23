@@ -13,7 +13,7 @@ char* kiselev::resizeArr(const char* array, size_t newLength, size_t pastLength)
   }
   return arr2;
 }
-char* kiselev::inputString(std::istream& input, const char end)
+char* kiselev::inputString(std::istream& input, char end)
 {
   size_t memorySize = 3;
   char* arr = static_cast< char* >(malloc(memorySize * sizeof(char)));
