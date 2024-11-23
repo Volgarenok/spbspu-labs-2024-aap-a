@@ -1,5 +1,5 @@
-#include <iostream>
 #include <stdexcept>
+#include <iostream>
 #include <cstddef>
 #include <dynamic_string.h>
 #include "reform.h"
