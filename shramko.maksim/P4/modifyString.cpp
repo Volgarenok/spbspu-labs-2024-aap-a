@@ -43,10 +43,10 @@ char* shramko::inputStr(std::istream& in)
 
   char c = 0;
   str[memory] = c;
-  size_t currentSize = 0;
+  size_t currentSize = 1;
   std::noskipws(in);
   in >> c;
-  if (c == '\n')
+  if (c == '\0')
   {
     return str;
   }
@@ -68,6 +68,6 @@ char* shramko::inputStr(std::istream& in)
     }
     str[currentSize++] = c;
   }
-  std::skipws(std::cin);
+  std::skipws(in);
   return str;
 }
