@@ -53,15 +53,28 @@ int main(int argc, char **argv)
 
   try
   {
+    size_t count_read = 0;
     for (size_t i = 0; i < rows * columns; i++)
     {
-      if (!(infile >> matrix[i]))
+      if (infile.eof())
       {
-        std::cerr << "Not enough elements in file" << "\n";
+        std::cerr << "Not enough elements in file\n";
+        break;
+      }
+      else
+      {
+        std::cerr << "Error reading element " << i << "\n";
         delete[] matrix;
         return 1;
       }
     }
+
+  if (count_read != rows * columns)
+  {
+    std::cerr << "Expected " << (rows * columns) << " elements, but read only " << count_read << "\n";
+    delete[] matrix;
+    return 1;
+  }
 
   int saddle_points = kushekbaev::countSaddlePoints(matrix, rows, columns);
 
