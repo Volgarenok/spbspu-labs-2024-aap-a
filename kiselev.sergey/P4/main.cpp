@@ -3,7 +3,7 @@
 #include "identicalChar.h"
 int main()
 {
-  char* string = kiselev::inputString();
+  char* string = kiselev::inputString(std::cin, '\n');
   if (string == nullptr || string[0] == '\0')
   {
     std::cerr << "Failed string reading\n";
