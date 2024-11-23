@@ -4,8 +4,8 @@
 
 namespace demehin
 {
-  void getUniqueSymbols(char* str, char* ustr);
-  void unc_sym(char* str, char* base_str, char* final_str);
+  void getUniqueSymbols(const char* str, char* ustr);
+  void unc_sym(const char* first_str, const char* second_str, char* final_str);
 }
 
 #endif
