@@ -80,7 +80,7 @@ const char * brevnov::hasTerm(const char * str)
     {
       return nullptr;
     }
-  } 
+  }
   auto next = brevnov::hasMultiplier(str);
   if (*next == '*')
   {
@@ -99,7 +99,7 @@ const char * brevnov::hasExpression(const char * str)
   if (*next == '+' || *next == '-')
   {
     return brevnov::hasExpression(next + 1);
-  } 
+  }
   return next;
 }
 
