@@ -2,7 +2,7 @@
 #include <ios>
 #include <cstddef>
 #include <fstream>
-#include "functions.hpp"
+#include "modifyString.hpp"
 
 int main()
 {
