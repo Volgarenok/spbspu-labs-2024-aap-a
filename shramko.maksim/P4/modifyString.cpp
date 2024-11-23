@@ -5,7 +5,7 @@ char* shramko::createBiggerStrMemory(size_t memory, const char* str)
 {
   char* new_str = reinterpret_cast< char* >(malloc((memory + 1) * sizeof(char)));
 
-  for (size_t i = 0; str[i] != '\0'; ++i)
+  for (size_t i = 0; i < memory0; i++)
   {
     new_str[i] = str[i];
   }
@@ -42,8 +42,8 @@ char* shramko::inputStr(std::istream& in)
   }
 
   char c = '\0';
-  str[memory] = c;
-  size_t currentSize = 1;
+  str[0] = c;
+  size_t currentSize = 0;
 
   std::noskipws(in);
   while ((in >> c) && (c != '\0'))
@@ -61,7 +61,8 @@ char* shramko::inputStr(std::istream& in)
       free(str);
       str = new_str;
     }
-    str[currentSize++] = c;
+    str[currentSize] = c;
+    currentSize++;
   }
   std::skipws(in);
   return str;
