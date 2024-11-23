@@ -1,4 +1,4 @@
-#include "dynamicstrings.h"
+#include "newlineterminatedstr.h"
 #include <cstddef>
 #include <iostream>
 
@@ -55,7 +55,7 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
   return t;
 }
 
-char * savintsev::createEnlargedCopiedStr(char * old, size_t new_size)
+char * savintsev::createEnlargedCopiedStr(const char * old, size_t new_size)
 {
   char * created = new char[new_size];
   for (size_t i = 0; old[i] != '\0'; ++i)
@@ -63,21 +63,4 @@ char * savintsev::createEnlargedCopiedStr(char * old, size_t new_size)
     created[i] = old[i];
   }
   return created;
-}
-
-size_t savintsev::getNumIdenticalInRow(char * c)
-{
-  if (c == nullptr)
-  {
-    return 0;
-  }
-  size_t k = 0;
-  for (size_t i = 0; c[i] != '\0'; ++i)
-  {
-    if (c[i] == c[i + 1])
-    {
-      ++k;
-    }
-  }
-  return k;
 }
