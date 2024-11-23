@@ -22,7 +22,7 @@ const char* hasZ(const char* string)
 }
 const char* hasNullorOne(const char* string)
 {
-  auto next = hasSymbol(string, '1');
+  const char* next = hasSymbol(string, '1');
   return next ? next : hasSymbol(string, '0');
 }
 const char* hasID(const char* string)
@@ -31,7 +31,7 @@ const char* hasID(const char* string)
   {
     return string;
   }
-  auto next = hasX(string);
+  const char* next = hasX(string);
   if (next)
   {
     return next;
@@ -50,12 +50,12 @@ const char* hasUnsignedNumber(const char* string)
   {
     return string;
   }
-  auto next = hasNullorOne(string);
+  const char* next = hasNullorOne(string);
   if (!next)
   {
     return nullptr;
   }
-  if (auto continues = hasUnsignedNumber(next))
+  if (const char* continues = hasUnsignedNumber(next))
   {
     return continues;
   }
@@ -67,7 +67,7 @@ const char* hasMultiplier(const char* string)
   {
     return string;
   }
-  auto next = hasUnsignedNumber(string);
+  const char* next = hasUnsignedNumber(string);
   if (next)
   {
     return next;
@@ -95,7 +95,7 @@ const char* hasTerm(const char* string)
   {
     return string;
   }
-  auto next = hasMultiplier(string);
+  const char* next = hasMultiplier(string);
   if (!next)
   {
     return next;
@@ -103,7 +103,7 @@ const char* hasTerm(const char* string)
   if (*next == '*')
   {
     next++;
-    auto continues = hasTerm(next);
+    const char* continues = hasTerm(next);
     if (!continues)
     {
       return nullptr;
@@ -113,7 +113,7 @@ const char* hasTerm(const char* string)
   if (*next == '(')
   {
     next++;
-    auto continues = hasMultiplier(next);
+    const char* continues = hasMultiplier(next);
     if (!continues)
     {
       return nullptr;
@@ -121,7 +121,7 @@ const char* hasTerm(const char* string)
     if (*continues == '+')
     {
       continues++;
-      auto nextTerm = hasTerm(continues);
+      const char* nextTerm = hasTerm(continues);
       if (!nextTerm || *nextTerm != ')')
       {
         return nullptr;
@@ -142,13 +142,13 @@ const char* hasExpression(const char* string)
   {
     return string;
   }
-  auto next = hasTerm(string);
+  const char* next = hasTerm(string);
   if (next)
   {
     if (*next == '+' || *next == '-')
     {
       next++;
-      auto continues = hasExpression(next);
+      const char* continues = hasExpression(next);
       return continues;
     }
   }
@@ -156,6 +156,6 @@ const char* hasExpression(const char* string)
 }
 bool kiselev::isExpression(const char* string)
 {
-  auto next = hasExpression(string);
+  const char* next = hasExpression(string);
   return next && (*next == '\0');
 }
