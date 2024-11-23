@@ -9,7 +9,6 @@ int main()
   char* str = shramko::inputStr(std::cin);
   if (str == nullptr)
   {
-    free(str);
     std::cerr << "Main error!\n";
     return 1;
   }
