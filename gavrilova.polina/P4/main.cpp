@@ -1,11 +1,12 @@
 #include <iostream>
-#include <cctype>
 #include <inputStr.hpp>
 #include "rm_digits.hpp"
 
 int main()
 {
-  first_str = inputStr(std::cin);
+  char* first_str = nullptr;
+  size_t len = 0;
+  first_str = inputStr(std::cin, len);
   if (!first_str) {
     std::cerr << "Memory or input error";
   }

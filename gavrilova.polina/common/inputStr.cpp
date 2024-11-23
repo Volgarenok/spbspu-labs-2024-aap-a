@@ -1,7 +1,7 @@
 #include "inputStr.hpp"
 #include <istream>
 
-char* inputStr(std::istream& in)
+char* inputStr(std::istream& in, size_t & len)
 {
   char* result_str = nullptr;
   constexpr int K = 100;
@@ -11,7 +11,6 @@ char* inputStr(std::istream& in)
     return nullptr;
   }
   char c;
-  size_t len = 0;
   in >> std::noskipws;
   while ((in >> c)) {
     if (c == '\n'){
