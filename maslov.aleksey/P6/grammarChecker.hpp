@@ -7,7 +7,8 @@ namespace maslov
   const char * maslov::hasMultiplier(const char * str);
   const char * maslov::hasTerm(const char * str);
   const char * maslov::hasIdentifier(const char * str);
-  const char * maslov::isDigit(const char * str);
-  const char * maslov::isLetter(const char * str);
+  const char * maslov::hasDigit(const char * str);
+  const char * maslov::hasLetter(const char * str);
+  const char * maslov::hasUnsignedInteger(const char * str);
 }
 #endif
