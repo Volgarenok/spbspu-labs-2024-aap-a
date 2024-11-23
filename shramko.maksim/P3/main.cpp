@@ -2,10 +2,11 @@
 #include <fstream>
 #include <cstring>
 #include <stdexcept>
+#include <cstdlib>
 #include "inputMtrx.hpp"
-#include "countGoodColoumns.hpp"
+#include "countColoumnsWithNonRepeatingNumbers.hpp"
 
-int main(int argc, char** argv)
+int main(const int argc, const char** argv)
 {
   if (argc < 4)
   {
@@ -19,33 +20,14 @@ int main(int argc, char** argv)
     return 1;
   }
 
-  const char* str = argv[1];
-
-  for (size_t i = 0; i < strlen(str); i++)
+  if ((argv[1][0] != '1' && argv[1][0] != '2') || (argv[1][1] != '\0'))
   {
-    if (str[i] < '0' || str[i] > '9')
-    {
-      std::cerr << "First parameter is not a number\n";
-      return 1;
-    }
-  }
-
-  char* pEnd;
-  long int number = 0;
-  number = std::strtol(str, &pEnd, 10);
-
-  if (number != 1 && number != 2)
-  {
-    std::cerr << "First parameter is out of range\n";
+    std::cerr << "First parameter is not the right number\n";
     return 1;
   }
 
+  size_t cnt_col = 0, cnt_row = 0;
   std::ifstream input(argv[2]);
-  std::ofstream output(argv[3]);
-
-  size_t cnt_row = 0;
-  size_t cnt_col = 0;
-
   input >> cnt_row >> cnt_col;
   if (!input)
   {
@@ -53,41 +35,33 @@ int main(int argc, char** argv)
     return 2;
   }
 
-  size_t sizeMtr = cnt_row * cnt_col;
-
-  if (argv[1][0] == 1)
+  size_t sizeMtrx = cnt_row * cnt_col;
+  int fixedMtrx[10000] = {};
+  int* mtrx = fixedMtrx;
+  int* ptr = nullptr;
+  if (argv[1][0] == '2')
   {
-    int mtrx[10000];
-    if (!shramko::inputMtrx(input, mtrx, sizeMtr))
-    {
-      std::cerr << "ERROR!\n";
-      return 2;
-    }
-    output << shramko::countGoodColoumns(mtrx, cnt_row, cnt_col) << "\n";
-  }
-
-  else
-  {
-    int* mtrx = nullptr;
     try
     {
-      mtrx = new int[cnt_row * cnt_col];
+      mtrx = new int[sizeMtrx];
+      ptr = mtrx;
     }
-    catch (const std::bad_alloc & e)
+    catch (const std::bad_alloc& e)
     {
+      delete[] ptr;
       std::cerr << "Out of memory\n";
-      return 1;
-    }
-
-    if (!shramko::inputMtrx(input, mtrx, sizeMtr))
-    {
-      delete[] mtrx;
-      std::cerr << "ERROR!\n";
       return 2;
     }
-
-    output << shramko::countGoodColoumns(mtrx, cnt_row, cnt_col) << "\n";
-    delete[] mtrx;
   }
-  return 0;
+
+  if (!shramko::inputMtrx(input, mtrx, sizeMtrx))
+  {
+    delete[] ptr;
+    std::cerr << "Input error!\n";
+    return 2;
+  }
+
+  std::ofstream output(argv[3]);
+  output << shramko::countColoumnsWithNonRepeatingNumbers(mtrx, cnt_row, cnt_col) << "\n";
+  delete[] ptr;
 }
