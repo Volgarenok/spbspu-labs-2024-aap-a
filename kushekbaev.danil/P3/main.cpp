@@ -30,13 +30,6 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  if (rows == 0 && columns == 0)
-  {
-    std::ofstream outfile(output_filename);
-    outfile << "0" << "\n";
-    return 0;
-  }
-
   char ch = 0;
   if (!(infile >> ch))
   {
@@ -46,8 +39,8 @@ int main(int argc, char **argv)
 
   if (!(infile >> rows >> columns))
   {
-    std::cerr << "Error reading matrix dimensions" << "\n";
-    return 1;
+    std::cout << "0" << "\n";
+    return 0;
   }
 
   int* matrix = new int [rows * columns];
