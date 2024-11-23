@@ -59,7 +59,7 @@ int main(int argc, char** argv)
     inputMatrix(in, matrixPointer , matrixSize);
     if (!in)
     {
-      if (num ==2)
+      if (num == 2)
       {
         delete[] matrixPointer;
       }
@@ -75,11 +75,17 @@ int main(int argc, char** argv)
   }
   catch (const std::exception &e)
   {
-    delete [] matrixPointer;
+    if (num == 2)
+    {
+      delete [] matrixPointer;
+    }
     std::cerr << e.what() << "\n";
     return 2;
   }
   std::ofstream output(argv[3]);
   output << cntCol << "\n";
-  delete [] matrixPointer;
+  if (num ==2)
+  {
+    delete [] matrixPointer;
+  }
 }
