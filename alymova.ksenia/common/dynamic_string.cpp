@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <cstddef>
 #include <cstdlib>
+<<<<<<< HEAD
 /*char* alymova::create(size_t size)
 {
   char* str = reinterpret_cast< char* >(malloc((size + 1) * sizeof(char)));
@@ -16,15 +17,29 @@
 char* alymova::copy_string(const char* str, char* str_new)
 {
   for (size_t i = 0; str[i] != '\0'; i++)
+=======
+char* alymova::copy_string(const char* str, size_t end, char* str_new)
+{
+  char* ptr_new = str_new;
+  const char* ptr = str;
+  for (; ptr != (str + end); ptr++)
+>>>>>>> alymova.ksenia/P4
   {
-    str_new[i] = str[i];
+    *ptr_new = *ptr;
+    ptr_new += 1;
   }
   return str_new;
 }
+<<<<<<< HEAD
 char* alymova::upper_string(const char* str, char* str_res)
+=======
+char* alymova::get_string(size_t& size, size_t& size_now, int ratio, char delim)
+>>>>>>> alymova.ksenia/P4
 {
-  for (size_t i = 0; str[i] != '\0'; i++)
+  char* str = reinterpret_cast< char* >(malloc((size + 1) * sizeof(char)));
+  if (str == nullptr)
   {
+<<<<<<< HEAD
     if (std::islower(str[i]))
     {
       str_res[i] = static_cast< char >(std::toupper(str[i]));
@@ -43,6 +58,10 @@ char* alymova::get_string(size_t& size, size_t& size_now, int ratio, char delim)
   {
     return nullptr;
   }
+=======
+    return nullptr;
+  }
+>>>>>>> alymova.ksenia/P4
   str[size] = '\0';
   char next = '\0';
   while ((std::cin >> next) && (next != delim))
@@ -59,7 +78,11 @@ char* alymova::get_string(size_t& size, size_t& size_now, int ratio, char delim)
         return nullptr;
       }
       str_new[size] = '\0';
+<<<<<<< HEAD
       str_new = alymova::copy_string(str, str_new);
+=======
+      str_new = alymova::copy_string(str, size / ratio, str_new);
+>>>>>>> alymova.ksenia/P4
       free(str);
       str = str_new;
     }
