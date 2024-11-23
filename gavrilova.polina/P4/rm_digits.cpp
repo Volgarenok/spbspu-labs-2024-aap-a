@@ -1,5 +1,6 @@
 #include "rm_digits.hpp"
 #include <cstddef>
+#include <cctype>
 
 char * rm_digits (const char * original, char * new_str)
 {

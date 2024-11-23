@@ -1,4 +1,6 @@
 #ifndef INPUTSTR_H
 #define INPUTSTR_H
-char* inputStr(std::istream & in);
+#include <istream>
+#include <cstddef>
+char* inputStr(std::istream& in, size_t & len);
 #endif
