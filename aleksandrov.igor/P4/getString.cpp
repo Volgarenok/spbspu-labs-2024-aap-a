@@ -25,10 +25,6 @@ char* aleksandrov::getString(std::istream& input, size_t& strSize)
     str[strSize++] = c;
   }
   std::skipws(input);
-  if (!input && c != '\n')
-  {
-    throw std::logic_error("ERROR: Input was incorrect!\n");
-  }
   str[strSize] = '\0';
   return str;
 }

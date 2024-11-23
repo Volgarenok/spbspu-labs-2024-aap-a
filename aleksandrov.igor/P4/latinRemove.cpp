@@ -1,4 +1,5 @@
 #include "latinRemove.h"
+#include <cctype>
 
 char* aleksandrov::latinRemove(char* str, int size)
 {
