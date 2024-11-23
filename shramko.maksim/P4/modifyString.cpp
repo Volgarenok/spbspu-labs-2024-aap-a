@@ -61,8 +61,11 @@ char* shramko::inputStr(std::istream& in)
       free(str);
       str = new_str;
     }
-    str[currentSize] = c;
-    currentSize++;
+    str[currentSize++] = c;
+    if (c == '\n')
+    {
+      break;
+    }
   }
   std::skipws(in);
   return str;
