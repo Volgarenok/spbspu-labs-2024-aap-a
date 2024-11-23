@@ -49,13 +49,13 @@ int main(int argc, char** argv)
     }
     if (num == 2)
     {
-      matrixPointer = new int [matrixSize];
+      matrixPointer = new int[matrixSize];
     }
     inputMatrix(in, matrixPointer , matrixSize);
     if (!in)
     {
-      delete[] matrixPointer;
       std::cerr << "Not enough data to fill the matrix\n";
+      delete[] matrixPointer;
       return 2;
     }
     cntCol = countNoDuplicates(matrixPointer, rows, cols);
@@ -75,4 +75,5 @@ int main(int argc, char** argv)
   std::ofstream output(argv[3]);
   output << cntCol << "\n";
   delete[] matrixPointer;
+  return 0;
 }
