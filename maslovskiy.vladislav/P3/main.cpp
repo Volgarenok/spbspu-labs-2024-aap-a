@@ -45,31 +45,28 @@ int main(int argc, char** argv)
   }
   size_t matrixSize = cols * rows;
   int matrix[10000] = {0};
-  int *dynamicMatrix = nullptr;
+  int *matrixPointer = nullptr;
   try
   {
     if (num == 1)
     {
-      inputMatrix(in, matrix, matrixSize);
-      if (!in)
-      {
-        std::cerr << "Not enough data to fill the matrix\n";
-        return 2;
-      }
-      cntCol = countNoDuplicates(matrix, rows, cols);
+      matrixPointer = matrix;
     }
     if (num == 2)
     {
-      dynamicMatrix = new int [matrixSize];
-      inputMatrix(in, dynamicMatrix, matrixSize);
-      if (!in)
-      {
-        delete[] dynamicMatrix;
-        std::cerr << "Not enough data to fill the matrix\n";
-        return 2;
-      }
-      cntCol = countNoDuplicates(dynamicMatrix, rows, cols);
+      matrixPointer = new int [matrixSize];
     }
+    inputMatrix(in, matrixPointer , matrixSize);
+    if (!in)
+    {
+      if (num ==2)
+      {
+        delete[] matrixPointer;
+      }
+      std::cerr << "Not enough data to fill the matrix\n";
+      return 2;
+    }
+    cntCol = countNoDuplicates(matrixPointer, rows, cols);
   }
   catch (const std::bad_alloc &e)
   {
@@ -78,11 +75,11 @@ int main(int argc, char** argv)
   }
   catch (const std::exception &e)
   {
-    delete [] dynamicMatrix;
+    delete [] matrixPointer;
     std::cerr << e.what() << "\n";
     return 2;
   }
   std::ofstream output(argv[3]);
   output << cntCol << "\n";
-  delete [] dynamicMatrix;
+  delete [] matrixPointer;
 }
