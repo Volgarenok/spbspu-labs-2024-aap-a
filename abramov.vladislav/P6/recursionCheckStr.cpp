@@ -34,7 +34,11 @@ const char *abramov::hasUnsignedNumber(const char *str)
     return str;
   }
   auto next = abramov::isDigit(str);
-  if (auto continues = abramov::isDigit(next))
+  if (!next)
+  {
+    return next;
+  }
+  if (auto continues = abramov::hasUnsignedNumber(next))
   {
     return continues;
   }
@@ -48,7 +52,15 @@ const char *abramov::hasOrder(const char *str)
     return str;
   }
   auto next = abramov::isSymbol(str, 'E');
+  if (!next)
+  {
+    return next;
+  }
   next = abramov::isSign(next);
+  if (!next)
+  {
+    return next;
+  }
   next = abramov::hasUnsignedNumber(next);
   return next;
 }
@@ -60,6 +72,10 @@ const char *abramov::hasMantissa(const char *str)
     return str;
   }
   auto next = abramov::hasUnsignedNumber(str);
+  if (!next)
+  {
+    return next;
+  }
   if (*next=='.')
   {
     return abramov::hasUnsignedNumber(next+1);
