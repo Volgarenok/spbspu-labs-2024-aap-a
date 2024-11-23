@@ -25,6 +25,11 @@ const char * brevnov::hasUint(const char * str)
     return nullptr;
   }
   auto next = brevnov::isDigit(str);
+  auto continues = brevnov::isDigit(next);
+  if (continues)
+  {
+    return brevnov::hasUint(continues);
+  }
   return next;
 }
 
@@ -100,7 +105,8 @@ const char * brevnov::hasExpression(const char * str)
   auto next = brevnov::hasTerm(str);
   if (*next == '+' || *next == '-')
   {
-    return brevnov::hasExpression(next + 1);
+    next++;
+    return brevnov::hasExpression(next);
   }
   return next;
 }
