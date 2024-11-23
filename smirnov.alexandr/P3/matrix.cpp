@@ -62,7 +62,7 @@ void smirnov::decrementSpiral(int * matrix, size_t rows, size_t columns)
   }
 }
 
-bool smirnov::getLowerTriangularMatrix(int * matrix, size_t rows, size_t columns)
+bool smirnov::checkLowerTriangularMatrix(const int * matrix, size_t rows, size_t columns)
 {
   if (rows != columns || rows == 0 || columns == 0)
   {
@@ -84,7 +84,7 @@ bool smirnov::getLowerTriangularMatrix(int * matrix, size_t rows, size_t columns
   }
 }
 
-void smirnov::outputSpiral(std::ostream & output, int * matrix, size_t rows, size_t columns)
+void smirnov::outputMatrix(std::ostream & output, const int * matrix, size_t rows, size_t columns)
 {
   if (rows == 0 || columns == 0)
   {
@@ -100,11 +100,11 @@ void smirnov::outputSpiral(std::ostream & output, int * matrix, size_t rows, siz
   }
 }
 
-void smirnov::outputFunctions(std::ostream & output, int * matrix, size_t rows, size_t columns)
+void smirnov::outputResult(std::ostream & output, int * matrix, size_t rows, size_t columns)
 {
-  output << std::boolalpha << smirnov::getLowerTriangularMatrix(matrix, rows, columns) << "\n";
+  output << std::boolalpha << smirnov::checkLowerTriangularMatrix(matrix, rows, columns) << "\n";
   output << rows << " " << columns << " ";
   smirnov::decrementSpiral(matrix, rows, columns);
-  smirnov::outputSpiral(output, matrix, rows, columns);
+  smirnov::outputMatrix(output, matrix, rows, columns);
   output << "\n";
 }

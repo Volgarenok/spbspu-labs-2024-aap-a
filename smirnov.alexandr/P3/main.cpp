@@ -66,6 +66,6 @@ int main(int argc, char ** argv)
     std::cerr << "Input error\n";
     return 1;
   }
-  smirnov::outputFunctions(output, matrix, rows, columns);
+  smirnov::outputResult(output, matrix, rows, columns);
   delete[] dynamicMatrix;
 }
