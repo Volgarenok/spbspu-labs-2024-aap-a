@@ -10,5 +10,6 @@ namespace maslov
   const char * maslov::hasDigit(const char * str);
   const char * maslov::hasLetter(const char * str);
   const char * maslov::hasUnsignedInteger(const char * str);
+  const char * maslov::hasSymbol(const char * str, char c);
 }
 #endif

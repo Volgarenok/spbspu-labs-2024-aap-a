@@ -5,7 +5,6 @@ bool maslov::isExpression(const char * str)
   auto next = hasExpression(str);
   return next && (*next == '\0');
 }
-
 const char * maslov::hasExpression(const char * str)
 {
   if (!str)
@@ -19,6 +18,26 @@ const char * maslov::hasMultiplier(const char * str)
   {
     return str;
   }
+  auto next = maslov::hasUnsignedInteger(str);
+  if (next)
+  {
+    return next;
+  }
+  next = maslov::hasIdentifier(str);
+  if (next)
+  {
+    return next;
+  }
+  next = maslov::hasSymbol(str, '(');
+  if (next)
+  {
+    auto afterNext = maslov::hasExpression(next);
+    if (afterNext && maslov::hasSymbol(afterNext, ')'));
+    {
+    return afterNext + 1;
+    }
+  }
+  return next;
 }
 const char * maslov::hasTerm(const char * str)
 {
@@ -66,4 +85,12 @@ const char * maslov::hasUnsignedInteger(const char * str)
     return continues;
   }
   return next;
+}
+const char * maslov::hasSymbol(const char * str, char c)
+{
+  if (!str)
+  {
+    return str;
+  }
+  return (*str == c) ? (str + 1) : nullptr;
 }
