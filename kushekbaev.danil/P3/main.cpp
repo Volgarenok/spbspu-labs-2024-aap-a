@@ -67,6 +67,7 @@ int main(int argc, char **argv)
         delete[] matrix;
         return 1;
       }
+    count_read++;
     }
 
   if (count_read != rows * columns)
