@@ -11,5 +11,6 @@ int main()
     return 1;
   }
   std::cout << std::boolalpha << kiselev::isExpression(string) << "\n";
+  free(string);
   return 0;
 }
