@@ -23,10 +23,14 @@ char* kiselev::inputString(std::istream& input, const char end)
   }
   size_t length = 0;
   std::noskipws(input);
-  arr[length] = '\0';
-  while (arr[length] != end)
+  while (true)
   {
-    length++;
+    char symbol = {};
+    if (!(input >> symbol) || symbol == end)
+    {
+      break;
+    }
+    arr[length++] = symbol;
     if (length == memorySize)
     {
       size_t temporaryLength = memorySize;
@@ -39,10 +43,6 @@ char* kiselev::inputString(std::istream& input, const char end)
         std::cerr << "Out of memory\n";
         return arr;
       }
-    }
-    if (!(input >> arr[length]))
-    {
-      break;
     }
   }
   arr[length] = '\0';
