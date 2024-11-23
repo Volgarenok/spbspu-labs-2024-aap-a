@@ -14,7 +14,16 @@ char *abramov::getStr(std::istream &in)
     if (size == new_max)
     {
       new_max *= 2;
-      char *new_str = new char[new_max + 1];
+      char* new_str = nullptr;
+      try
+      {
+        new_str = new char[new_max + 1];
+      }
+      catch (const std::bad_alloc &e)
+      {
+        delete[] str;
+        return nullptr;
+      }
       for (size_t i = 0; i < new_max / 2; ++i)
       {
         new_str[i] = str[i];
