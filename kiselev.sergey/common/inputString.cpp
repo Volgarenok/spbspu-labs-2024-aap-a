@@ -26,7 +26,7 @@ char* kiselev::inputString(std::istream& input, const char end)
   while (true)
   {
     char symbol = {};
-    if (!(input >> arr[length]) || symbol == end)
+    if (!(input >> symbol) || symbol == end)
     {
       break;
     }
