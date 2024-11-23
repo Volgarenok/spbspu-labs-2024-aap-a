@@ -36,7 +36,7 @@ const char* demehin::hasExpr(const char* str)
       }
     }
   }
-  return str;
+  return nullptr;
 }
 
 const char* demehin::hasMultiplAndTerm(const char* str)
