@@ -79,7 +79,6 @@ const char* hasMultiplier(const char* string)
     next = hasExpression(string);
     if (next)
     {
-      next++;
       if (*next == ')')
       {
         return next;
@@ -100,7 +99,6 @@ const char* hasTerm(const char* string)
     auto next = hasMultiplier(string);
     if (next)
     {
-      next++;
       if (*next == '+')
       {
         next++;
@@ -110,7 +108,6 @@ const char* hasTerm(const char* string)
         }
         else
         {
-          next++;
           if (*next == ')')
           {
             return next;
@@ -128,7 +125,6 @@ const char* hasTerm(const char* string)
   auto next = hasMultiplier(string);
   if (next)
   {
-    next++;
     if (*next == '+')
     {
       if (auto countinues = hasTerm(next))
@@ -142,9 +138,24 @@ const char* hasTerm(const char* string)
 }
 const char* hasExpression(const char* string)
 {
-  return string;
+  if (!string)
+  {
+    return string;
+  }
+  auto next = hasTerm(string);
+  if (*(next + 1) == '+' || *(next + 1) == '-')
+  {
+    next++;
+    if (auto continues = hasExpression(next))
+    {
+      return continues;
+    }
+    return nullptr;
+  }
+  return next;
 }
 bool kiselev::isExpression(const char* string)
 {
-  return true;
+  auto next = hasExpression(string);
+  return next && (*next == '\0');
 }
