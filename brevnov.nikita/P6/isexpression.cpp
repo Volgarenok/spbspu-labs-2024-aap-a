@@ -1,4 +1,5 @@
 #include "isexpression.hpp"
+#include <iostream>
 
 const char * brevnov::isLetter(const char * str)
 {
@@ -34,6 +35,18 @@ const char * brevnov::hasMultiplier(const char * str)
   {
     return str;
   }
+  if (*str == '(')
+  {
+    auto bracket = brevnov::hasExpression(str + 1);
+    if (*bracket == ')')
+    {
+      return (str + 1);
+    }
+    else
+    {
+      return nullptr;
+    }
+  }
   auto next = brevnov::hasUint(str);
   if (next)
   {
@@ -48,11 +61,31 @@ const char * brevnov::hasTerm(const char * str)
   {
     return str;
   }
-  auto next = brevnov::hasMultiplier(str);
-  if (brevnov::hasMultiplier(next))
+  if (*str == '(')
   {
-    return brevnov::hasTerm(next);
-  }
+    auto bracket = brevnov::hasMultiplier(str + 1);
+    if (*bracket == '+')
+    {
+      bracket = brevnov::hasTerm(bracket + 1);
+      if (*bracket == ')')
+      {
+        return (bracket + 1);
+      }
+      else
+      {
+        return nullptr;
+      }
+    }
+    else
+    {
+      return nullptr;
+    }
+  } 
+  auto next = brevnov::hasMultiplier(str);
+  /* if (*next == '*')
+  {
+    return brevnov::hasTerm(next + 1);
+  }  */
   return next;
 }
 
@@ -63,10 +96,10 @@ const char * brevnov::hasExpression(const char * str)
     return str;
   }
   auto next = brevnov::hasTerm(str);
-  if (auto continues = brevnov::hasExpression(next))
+  if (*next == '+' || *next == '-')
   {
-    return continues;
-  }
+    return brevnov::hasExpression(next + 1);
+  } 
   return next;
 }
 
