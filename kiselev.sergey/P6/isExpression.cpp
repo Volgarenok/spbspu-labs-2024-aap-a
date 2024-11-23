@@ -1,6 +1,6 @@
 #include "isExpression.h"
 const char* hasExpression(const char* string);
-const char* hasSymbol(const char* string, const char s)
+const char* hasSymbol(const char* string, char s)
 {
   if (!string)
   {
