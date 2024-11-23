@@ -49,7 +49,7 @@ int main(int argc, char **argv)
     return 0;
   }
 
-  int* matrix = new int [rows * columns];
+  int* matrix = new int [rows * columns]();
 
   try
   {
