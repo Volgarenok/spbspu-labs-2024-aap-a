@@ -5,10 +5,10 @@
 
 namespace finaev
 {
-  void MEMcpy(char* new_str, const char* str, size_t dl);
-  char* creature_empty_str(size_t dl);
-  char* fill_str(std::istream& in);
-  int is_repeat(const char* str);
+  void transferStr(char* new_str, const char* str, size_t length);
+  char* creatureStr(size_t capacity);
+  char* fillStr(std::istream& in);
+  int isRepeat(const char* str);
 }
 
 #endif

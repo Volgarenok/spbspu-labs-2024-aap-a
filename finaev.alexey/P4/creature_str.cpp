@@ -2,49 +2,41 @@
 #include <cstdlib>
 #include <cstddef>
 
-char* finaev::creature_empty_str(size_t dl)
+char* finaev::creatureStr(size_t capacity)
 {
-  char* str = reinterpret_cast< char* >(malloc((dl + 1) * sizeof(char)));
-  str[dl] = '\0';
+  char* str = reinterpret_cast< char* >(malloc((capacity + 1) * sizeof(char)));
   return str;
 }
 
-char* finaev::fill_str(std::istream& in)
+char* finaev::fillStr(std::istream& in)
 {
-  size_t dl = 10;
-  char* str = nullptr;
-  str = creature_empty_str(dl);
+  size_t capacity = 10;
+  char* str = finaev::creatureStr(capacity);
   if (str == nullptr)
   {
     return nullptr;
   }
-  size_t tk_dl = 0;
-  char c;
+  size_t length = 0;
+  char c = '\0';
   std::noskipws(in);
   while ((in >> c) && (c != '\n'))
   {
-    if (tk_dl == dl)
+    if (length == capacity)
     {
-      dl = dl * 2;
-      char* new_str = nullptr;
-      new_str = finaev::creature_empty_str(dl);
+      capacity *= 2;
+      char* new_str = finaev::creatureStr(capacity);
       if (new_str == nullptr)
       {
         free(str);
         return nullptr;
       }
-      MEMcpy(new_str, str, tk_dl);
+      transferStr(new_str, str, length);
       free(str);
       str = new_str;
     }
-    str[tk_dl] = c;
-    tk_dl++;
+    str[length++] = c;
   }
-  if (tk_dl == 0)
-  {
-    free(str);
-    return nullptr;
-  }
-  str[tk_dl] = '\0';
+  str[length] = '\0';
+  std::skipws(in);
   return str;
 }
