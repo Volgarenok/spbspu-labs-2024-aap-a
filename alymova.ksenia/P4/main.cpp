@@ -1,7 +1,8 @@
 #include <iostream>
 #include <stdexcept>
 #include <cstddef>
-#include "dynamic_string.h"
+#include <dynamic_string.h>
+#include "reform.h"
 int main()
 {
   size_t size = 10;

@@ -14,24 +14,6 @@ char* alymova::copy_string(const char* str, size_t end, char* str_new)
   }
   return str_new;
 }
-char* alymova::upper_string(const char* str, size_t end, char* str_res)
-{
-  char* ptr_res = str_res;
-  const char* ptr = str;
-  for (; ptr != (str + end); ptr++)
-  {
-    if (std::islower(*ptr))
-    {
-      *ptr_res = static_cast< char >(std::toupper(*ptr));
-    }
-    else
-    {
-      *ptr_res = *ptr;
-    }
-    ptr_res += 1;
-  }
-  return str_res;
-}
 char* alymova::get_string(size_t& size, size_t& size_now, int ratio, char delim)
 {
   char* str = reinterpret_cast< char* >(malloc((size + 1) * sizeof(char)));
