@@ -5,8 +5,9 @@
 int main()
 {
   constexpr char stop = '\n';
+  constexpr size_t size_of_second = 7; 
   char * first_line = nullptr;
-  char second_line[] = "abc ef";
+  char second_line[size_of_second] = "abc ef";
   try
   {
     first_line = brevnov::getline(std::cin, stop);
@@ -22,7 +23,7 @@ int main()
     delete[] first_line;
     return 1;
   }
-  char help_array[10000] = {};
+  char help_array[size_of_second] = {};
   char * answer = help_array;
   brevnov::finding_common_elements(answer, first_line, second_line);
   std::cout << answer << "\n";
