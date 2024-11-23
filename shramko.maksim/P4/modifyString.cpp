@@ -58,6 +58,7 @@ char* shramko::inputStr(std::istream& in)
         free(str);
         return new_str;
       }
+      free(str);
       str = new_str;
     }
     str[currentSize] = c;
