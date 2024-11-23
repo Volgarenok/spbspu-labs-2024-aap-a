@@ -36,7 +36,7 @@ char* shramko::inputStr(std::istream& in)
 {
   size_t memory = 10;
   char* str = reinterpret_cast< char* >(malloc((memory + 1) * sizeof(char)));
-  if (str = nullptr)
+  if (str == nullptr)
   {
     return str;
   }
@@ -47,7 +47,7 @@ char* shramko::inputStr(std::istream& in)
   std::noskipws(in);
   while ((in >> c) && (c != '\0'))
   {
-    if (currentSize == memory);
+    if (currentSize == memory)
     {
       constexpr size_t multiplier = 2;
       memory *= multiplier;
