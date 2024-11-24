@@ -4,15 +4,7 @@
 
 bool tkach::isNeededSymbol(const char* symbol)
 {
-  constexpr char string_needed_symbols[] = "abcde";
-  for (size_t i = 0; i < 5; ++i)
-  {
-    if (*symbol == string_needed_symbols[i])
-    {
-      return true;
-    }
-  }
-  return false;
+  return (*symbol >= 'a' && *symbol <= 'e');
 }
 
 bool tkach::isDigit(const char** str)
