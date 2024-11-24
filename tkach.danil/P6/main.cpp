@@ -11,12 +11,6 @@ int main()
     std::cerr << "Error: not enough memory\n";
     return 1;
   }
-  if (!std::cin)
-  {
-    free(str);
-    std::cerr << "Error: invalid input\n";
-    return 1;
-  }
   if (str[0] == '\0')
   {
     free(str);
