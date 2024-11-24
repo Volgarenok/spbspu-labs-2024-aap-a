@@ -19,13 +19,22 @@ int main()
     delete[] str;
     return 1;
   }
-  std::size_t len_new_str = 0;
+  std::size_t len = 0;
   for (char *i = str; *i != '\0'; i++)
   {
-    len_new_str++;
+    len++;
   }
-  const int LEN = len_new_str;
-  char new_str[LEN] = {};
+  char *new_str = nullptr;
+  try
+  {
+    new_str = new char[len + 1]{'\0'};
+  }
+  catch (const std::bad_alloc &e)
+  {
+    std::cerr << "ERROR: BAD_ALLOC! " << e.what() << '\n';
+    delete[] str;
+    return 1;
+  }
   std::cout << sveshnikov::rep_sym(str, new_str) << "\n";
   delete[] str;
   return 0;
