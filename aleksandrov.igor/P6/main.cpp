@@ -6,10 +6,9 @@
 int main()
 {
   char* str = nullptr;
-  size_t strSize = 0;
   try
   {
-    str = aleksandrov::getString(std::cin, strSize);
+    str = aleksandrov::getString(std::cin);
   }
   catch (const std::bad_alloc& e)
   {
