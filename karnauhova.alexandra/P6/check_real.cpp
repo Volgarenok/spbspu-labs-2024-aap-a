@@ -71,7 +71,7 @@ const char * karnauhova::is_mantis(const char * str)
     cont = karnauhova::is_unsigned_int(cont);
     return cont;
   }
-  return nullptr;
+  return next;
 }
 
 const char * karnauhova::has_real(const char * str)
