@@ -74,7 +74,6 @@ const char * maslov::hasTerm(const char * str)
     }
     next = maslov::hasTerm(next);
     next = maslov::hasSymbol(next, ')');
-    return next;
   }
   return next;
 }
@@ -92,8 +91,8 @@ const char * maslov::hasDigit(const char * str)
   {
     return str;
   }
-  bool check = (*str >= '0') && (*str <= '9');
-  return check ? (str + 1) : nullptr;
+  bool checkDigit = (*str >= '0') && (*str <= '9');
+  return checkDigit ? (str + 1) : nullptr;
 }
 const char * maslov::hasLetter(const char * str)
 {
@@ -101,9 +100,9 @@ const char * maslov::hasLetter(const char * str)
   {
     return str;
   }
-  bool check = (*str >= 'a') && (*str <= 'f');
-  check = check || ((*str >= 'x') && (*str <= 'z'));
-  return check ? (str + 1) : nullptr;
+  bool checkLetter = (*str >= 'a') && (*str <= 'f');
+  checkLetter = checkLetter || ((*str >= 'x') && (*str <= 'z'));
+  return checkLetter ? (str + 1) : nullptr;
 }
 const char * maslov::hasUnsignedInteger(const char * str)
 {
