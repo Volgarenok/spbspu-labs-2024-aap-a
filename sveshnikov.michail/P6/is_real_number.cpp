@@ -2,21 +2,49 @@
 
 bool isRealNumber(const char *str)
 {
+  if (!str)
+  {
+    return str;
+  }
 }
 
 const char *isMantissa(const char *str)
 {
+  if (!str)
+  {
+    return str;
+  }
 }
 
-const char *isOrder(const char *str)
+const char *sveshnikov::isOrder(const char *str)
 {
+  if (!str)
+  {
+    return str;
+  }
+  if (*str == 'E')
+  {
+    str++;
+  }
+  else
+  {
+    return nullptr;
+  }
+  const char *next = isSign(str);
+  return isUnsignedInteger(next);
 }
 
-const char *isUnsignedInteger(const char *str)
+const char *sveshnikov::isUnsignedInteger(const char *str)
 {
+  if (!str)
+  {
+    return str;
+  }
+  const char *next = isDigit(str);
+  return isUnsignedInteger(next);
 }
 
-const char *isDigit(const char *str)
+const char *sveshnikov::isDigit(const char *str)
 {
   if (!str)
   {
@@ -25,7 +53,7 @@ const char *isDigit(const char *str)
   return (*str >= '0' || *str <= '9') ? (str + 1) : nullptr;
 }
 
-const char *isSign(const char *str)
+const char *sveshnikov::isSign(const char *str)
 {
   if (!str)
   {
