@@ -1,4 +1,5 @@
 #include "recursion.hpp"
+#include <cctype>
 
 const char * has_expression(const char * str);
 
@@ -8,7 +9,7 @@ const char * has_character(const char * str, char c)
   {
     return nullptr;
   }
-  return (*str == c) ? (str+1) : nullptr;
+  return (*str == c) ? (str + 1) : nullptr;
 }
 
 const char * has_digit(const char * str)
@@ -36,25 +37,22 @@ const char * has_unsigned_int(const char * str)
   {
     return nullptr;
   }
-
   return has_unsigned_int(next);
 }
 
 const char * has_multiplier(const char * str)
 {
-    if (!str)
-    {
-        return nullptr;
-    }
-
-    auto next = has_unsigned_int(str);
-    if (next)
-    {
-        return next;
-    }
-
-    next = has_expression(str);
+  if (!str)
+  {
+    return nullptr;
+  }
+  const char * next = has_unsigned_int(str);
+  if (next)
+  {
     return next;
+  }
+  next = has_expression(str);
+  return next;
 }
 
 const char * has_parentheses(const char * str)
@@ -68,7 +66,7 @@ const char * has_parentheses(const char * str)
   {
     return next + 1;
   }
-  return next;
+  return nullptr;
 }
 
 const char * has_term(const char * str)
@@ -82,7 +80,6 @@ const char * has_term(const char * str)
   {
     return nullptr;
   }
-
   const char * hchar_next = has_character(next, '*');
   if (hchar_next)
   {
@@ -97,13 +94,11 @@ const char * has_expression(const char * str)
   {
     return nullptr;
   }
-
   const char * next = has_term(str);
   if (!next)
   {
     return nullptr;
   }
-
   const char * plus_next = has_character(next, '+');
   if (plus_next)
   {
@@ -113,7 +108,6 @@ const char * has_expression(const char * str)
       return has_expression(term_next);
     }
   }
-
   const char * minus_next = has_character(next, '-');
   if (minus_next)
   {
@@ -123,7 +117,6 @@ const char * has_expression(const char * str)
       return has_expression(term_next);
     }
   }
-
   const char * parentheses_next = has_parentheses(next);
   if (parentheses_next)
   {
