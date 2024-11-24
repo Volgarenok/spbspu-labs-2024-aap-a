@@ -1,12 +1,13 @@
 #include "search_repeats.hpp"
 
-char *sveshnikov::memory_alloc(char *str, std::size_t len)
+char *sveshnikov::memory_alloc(const char *str, std::size_t len)
 {
-  char *longer_str = nullptr;
-  longer_str = new char[len];
-  for (std::size_t i = 0; i < len - 100; i++)
+  char *longer_str = new char[len];
+  char *element = longer_str;
+  for (const char *i = str; *i != '\0'; i++)
   {
-    longer_str[i] = str[i];
+    *element = *i;
+    element++;
   }
   return longer_str;
 }

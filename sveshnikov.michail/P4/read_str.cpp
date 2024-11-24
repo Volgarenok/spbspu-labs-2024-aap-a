@@ -10,13 +10,14 @@ char *sveshnikov::read_str(std::istream &in)
   std::noskipws(in);
   while ((std::cin >> c) && (c != '\n'))
   {
-    if (size == max_len)
+    if (size == max_len - 1)
     {
       max_len += 100;
+      str[size] = '\0';
       char *new_str = nullptr;
       try
       {
-        new_str = memory_alloc(new_str, max_len);
+        new_str = memory_alloc(str, max_len);
       }
       catch (const std::bad_alloc &e)
       {

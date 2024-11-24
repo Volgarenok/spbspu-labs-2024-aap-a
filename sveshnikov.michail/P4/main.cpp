@@ -27,12 +27,12 @@ int main()
   char *new_str = nullptr;
   try
   {
-    new_str = new char[len + 1]{'\0'};
+    new_str = new char[len + 1];
+    new_str[0] = '\0';
   }
   catch (const std::bad_alloc &e)
   {
     std::cerr << "ERROR: BAD_ALLOC! " << e.what() << '\n';
-    delete[] new_str;
     delete[] str;
     return 1;
   }

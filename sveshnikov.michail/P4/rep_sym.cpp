@@ -23,6 +23,7 @@ char *sveshnikov::rep_sym(const char *str, char *new_str)
         if (*i == *j && i != j)
         {
           *next = *i;
+          *(next + 1) = '\0';
           repetition = 1;
           next++;
         }
