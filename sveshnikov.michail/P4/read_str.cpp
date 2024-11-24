@@ -13,10 +13,15 @@ char *sveshnikov::read_str(std::istream &in, char *str, std::size_t *len)
     {
       try
       {
-        char *new_str = str;
-        new_str = memory_alloc(str, len);
+        *len += 100;
+        char *longer_str = nullptr;
+        longer_str = new char[*len];
+        for (std::size_t i = 0; i < *len - 100; i++)
+        {
+          longer_str[i] = str[i];
+        }
         delete[] str;
-        str = new_str;
+        str = longer_str;
       }
       catch (const std::bad_alloc &e)
       {
