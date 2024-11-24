@@ -5,7 +5,7 @@ const char * karnauhova::is_sign(const char * str)
 {
   if (!str)
   {
-    return nullptr;
+    return str;
   }
   return (*str == '+' || *str == '-') ? (str + 1) : nullptr;
 }
@@ -14,7 +14,7 @@ const char * karnauhova::is_number(const char * str)
 {
   if (!str)
   {
-    return nullptr;
+    return str;
   }
   return (std::isdigit(*str)) ? (str + 1) : nullptr;
 }
@@ -28,7 +28,7 @@ const char * karnauhova::is_unsigned_int(const char * str)
   auto next = karnauhova::is_number(str);
   if (!next)
   {
-    return next;
+    return nullptr;
   }
   if (auto continues = is_unsigned_int(next))
   {
@@ -86,7 +86,7 @@ const char * karnauhova::has_real(const char * str)
     next = karnauhova::is_mantis(next);
     if (!next)
     {
-      return next;
+      return nullptr;
     }
     next = karnauhova::is_manner(next);
     return next;
@@ -94,7 +94,7 @@ const char * karnauhova::has_real(const char * str)
     auto next = karnauhova::is_mantis(str);
     if (!next)
     {
-      return next;
+      return nullptr;
     }
     next = karnauhova::is_manner(next);
     return next;
