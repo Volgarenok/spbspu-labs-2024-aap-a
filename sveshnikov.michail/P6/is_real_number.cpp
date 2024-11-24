@@ -1,6 +1,6 @@
 #include "is_real_number.hpp"
 
-bool isRealNumber(const char *str)
+bool sveshnikov::isRealNumber(const char *str)
 {
   if (!str)
   {
@@ -8,12 +8,22 @@ bool isRealNumber(const char *str)
   }
 }
 
-const char *isMantissa(const char *str)
+const char *sveshnikov::isMantissa(const char *str)
 {
   if (!str)
   {
     return str;
   }
+  const char *next = isUnsignedInteger(str);
+  if (*str == '.')
+  {
+    str++;
+  }
+  else
+  {
+    return nullptr;
+  }
+  return isUnsignedInteger(str);
 }
 
 const char *sveshnikov::isOrder(const char *str)
