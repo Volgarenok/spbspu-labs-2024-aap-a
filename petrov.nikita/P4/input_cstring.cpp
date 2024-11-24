@@ -14,6 +14,7 @@ char * petrov::inputCString(std::istream & in, size_t & capacity)
   {
     throw;
   }
+  string[0] = '0';
   in >> string[0];
   if (string[0] == '\n' || std::cin.eof())
   {
@@ -36,6 +37,7 @@ char * petrov::inputCString(std::istream & in, size_t & capacity)
       if (i == 3)
       delete[] string;
       string = temp_string;
+      temp_string = nullptr;
       in >> string[i - 2];
       string[i - 1] = '\0';
       if ((i - 1) > capacity)
