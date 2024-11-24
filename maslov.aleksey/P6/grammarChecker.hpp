@@ -1,5 +1,6 @@
 #ifndef GRAMMARCHECKER_HPP
 #define GRAMMARCHECKER_HPP
+
 namespace maslov
 {
   bool isExpression(const char * str);
@@ -12,4 +13,5 @@ namespace maslov
   const char * hasUnsignedInteger(const char * str);
   const char * hasSymbol(const char * str, char c);
 }
+
 #endif
