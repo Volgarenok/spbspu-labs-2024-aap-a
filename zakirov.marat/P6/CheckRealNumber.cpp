@@ -45,17 +45,17 @@ const char * check_uinteger(const char * line)
 	}
 
 	auto next = zakirov::check_integer(line);
-	if (next)
-	{
-		return zakirov::check_uinteger(next);
-	}
-	else
+	if (!next)
 	{
 		return zakirov::check_integer(line);
 	}
+	else
+	{
+		return zakirov::check_uinteger(next);
+	}
 }
 
-const char * check_sinteger(const char * line)
+const char * zakirov::check_sinteger(const char * line)
 {
 	if (!line)
   {
@@ -73,3 +73,17 @@ const char * check_sinteger(const char * line)
 	}
 }
 
+const char * zakirov::check_order(const char * line)
+{
+	if (!line)
+  {
+    return line;
+  }
+
+	auto next = compare_literals(line, 'E');
+	if (!next)
+	{
+		return next;
+	}
+	return check_sinteger(next);
+}
