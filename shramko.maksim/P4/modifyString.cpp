@@ -45,7 +45,7 @@ char* shramko::inputStr(std::istream& in)
   size_t currentSize = 0;
 
   std::noskipws(in);
-  while ((in >> c) && (c != '\0'))
+  while ((in >> c) && (c != '\n'))
   {
     if (currentSize == memory)
     {
@@ -59,12 +59,9 @@ char* shramko::inputStr(std::istream& in)
       }
       str = new_str;
     }
-    str[currentSize] = c;
-    if (c == '\n')
-    {
-      break;
-    }
+    str[currentSize++] = c;
   }
   std::skipws(in);
+  str[currentSize] = c;
   return str;
 }
