@@ -6,40 +6,35 @@ const char * has_character(const char * str, char c)
 {
   if (!str)
   {
-    return str;
+    return nullptr;
   }
   return (*str == c) ? (str+1) : nullptr;
 }
 
 const char * has_digit(const char * str)
 {
-  return has_character(str, '0') ? str + 1 :
-        has_character(str, '1') ? str + 1 :
-        has_character(str, '2') ? str + 1 :
-        has_character(str, '3') ? str + 1 :
-        has_character(str, '4') ? str + 1 :
-        has_character(str, '5') ? str + 1 :
-        has_character(str, '6') ? str + 1 :
-        has_character(str, '7') ? str + 1 :
-        has_character(str, '8') ? str + 1 :
-        has_character(str, '9') ? str + 1 :
-        has_character(str, 'A') ? str + 1 :
-        has_character(str, 'B') ? str + 1 :
-        has_character(str, 'C') ? str + 1 :
-        has_character(str, 'D') ? str + 1 :
-        has_character(str, 'E') ? str + 1 : nullptr;
+  if (!str)
+  {
+    return nullptr;
+  }
+  char c = *str;
+  if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'E'))
+  {
+    return str + 1;
+  }
+  return nullptr;
 }
 
 const char * has_unsigned_int(const char * str)
 {
   if (!str)
   {
-    return str;
+    return nullptr;
   }
   const char * next = has_digit(str);
   if (!next)
   {
-    return str;
+    return nullptr;
   }
 
   return has_unsigned_int(next);
@@ -49,7 +44,7 @@ const char * has_multiplier(const char * str)
 {
     if (!str)
     {
-        return str;
+        return nullptr;
     }
 
     auto next = has_unsigned_int(str);
@@ -80,12 +75,12 @@ const char * has_term(const char * str)
 {
   if (!str)
   {
-    return str;
+    return nullptr;
   }
   const char * next = has_multiplier(str);
   if (!next)
   {
-    return str;
+    return nullptr;
   }
 
   const char * hchar_next = has_character(next, '*');
@@ -100,13 +95,13 @@ const char * has_expression(const char * str)
 {
   if (!str)
   {
-    return str;
+    return nullptr;
   }
 
   const char * next = has_term(str);
   if (!next)
   {
-    return str;
+    return nullptr;
   }
 
   const char * plus_next = has_character(next, '+');
