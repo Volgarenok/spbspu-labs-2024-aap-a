@@ -1,5 +1,5 @@
-#ifndef MATRIXUTILS_HPP
-#define MATRIXUTILS_HPP
+#ifndef MATRIXTRANSFORM_HPP
+#define MATRIXTRANSFORM_HPP
 
 #include <cstddef>
 
