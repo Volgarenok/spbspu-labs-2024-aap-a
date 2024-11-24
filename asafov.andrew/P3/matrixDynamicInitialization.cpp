@@ -11,7 +11,7 @@ int* asafov::initializationMatrixDynamic(std::istream& in, unsigned long long& n
   if (in.fail() || in.eof()) {
     throw std::logic_error("err");
   }
-  mtx = new int[n * m];
+  int* mtx = new int[n * m];
   for (size_t i = 0; i < n * m; i++) {
     in >> mtx[i];
     if (in.fail() || in.eof()) {
