@@ -4,6 +4,34 @@
 #include <cstddef>
 #include <stdexcept>
 #include <cstdlib>
+namespace bocharov
+{
+  void check_argc(int argc)
+  {
+    if (argc - 1 > 3)
+    {
+      throw std::logic_error("Too many arguments");
+    }
+    if (argc - 1 < 3)
+    {
+      throw std::logic_error("Not enough arguments");
+    }
+  }
+  long int check_number(const char* const argv1)
+  {
+    char* endptr = nullptr;
+    long int number = std::strtol(argv1, std::addressof(endptr), 10);
+    if (*endptr != '\0')
+    {
+      throw std::logic_error("First parameter is not a number");
+    }
+    else if (number < 1 || number > 2)
+    {
+      throw std::logic_error("First parameter is out of range");
+    }
+    return number;
+  }
+}
 int main(int argc, char ** argv)
 {
   long int number = 0;
@@ -21,14 +49,14 @@ int main(int argc, char ** argv)
   std::ofstream output(argv[3]);
   if (!output)
   {
-    return 1;
+    return 2;
   }
   size_t rows = 0, cols = 0;
   input  >> rows >> cols;
   if (!input.good())
   {
     std::cerr << "Input size fail\n";
-    return 1;
+    return 2;
   }
   const size_t fixed_size = 10000;
   int fixed_matrix[fixed_size] = {};
@@ -56,7 +84,7 @@ int main(int argc, char ** argv)
   {
     delete[] dynamic_matrix;
     std::cerr << "Input error\n";
-    return 1;
+    return 2;
   }
   bocharov::matrix_replace(final_matrix, rows, cols);
   bocharov::output_matrix(output, final_matrix, rows, cols);
