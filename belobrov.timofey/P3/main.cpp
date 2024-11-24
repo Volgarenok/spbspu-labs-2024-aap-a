@@ -67,7 +67,7 @@ int main(int argc, char** argv)
       processMatrix(inputFile, argv[3], fixedMatrix, rows, cols);
     } else {
       matrix = new int[rows * cols];
-      processMatrix(inputFile, argv[3], fixedMatrix, rows, cols);
+      processMatrix(inputFile, argv[3], matrix, rows, cols);
       delete[] matrix;
     }
   } catch (const std::bad_alloc&) {

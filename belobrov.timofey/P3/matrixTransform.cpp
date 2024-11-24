@@ -1,4 +1,4 @@
-#include "matrixUtils.hpp"
+#include "matrixTransform.hpp"
 #include <algorithm>
 
 void belobrov::transformMatrix(int* matrix, size_t rows, size_t cols) {
