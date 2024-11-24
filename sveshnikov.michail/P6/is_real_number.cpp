@@ -34,11 +34,11 @@ const char *sveshnikov::hasMantissa(const char *str)
   {
     return continues;
   }
-  if (const char *continues = hasSymbol(str, 'E'))
+  if (const char *continues = hasUnsignedInteger(str))
   {
     return continues;
   }
-  return hasUnsignedInteger(str);
+  return str + 1;
 }
 
 const char *sveshnikov::hasOrder(const char *str)
