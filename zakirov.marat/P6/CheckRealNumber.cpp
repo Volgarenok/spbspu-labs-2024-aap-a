@@ -36,3 +36,40 @@ const char * zakirov::check_integer(const char * line)
 
 	return (* line >= '0' && * line <= '9') ? (line + 1) : nullptr;
 }
+
+const char * check_uinteger(const char * line)
+{
+	if (!line)
+	{
+		return line;
+	}
+
+	auto next = zakirov::check_integer(line);
+	if (next)
+	{
+		return zakirov::check_uinteger(next);
+	}
+	else
+	{
+		return zakirov::check_integer(line);
+	}
+}
+
+const char * check_sinteger(const char * line)
+{
+	if (!line)
+  {
+    return line;
+  }
+
+	auto next = zakirov::check_sign(line);
+	if (!next)
+	{
+		return zakirov::check_uinteger(line);
+	}
+	else
+	{
+		return zakirov::check_uinteger(next);
+	}
+}
+
