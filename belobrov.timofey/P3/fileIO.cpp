@@ -18,7 +18,9 @@ void belobrov::saveMatrix(const std::string& filename, const int *matrix, size_t
   outFile << rows << " " << cols << "\n";
   for (size_t i = 0; i < rows; ++i) {
     for (size_t j = 0; j < cols; ++j) {
-      outFile << matrix[i * cols + j] << " ";
+      outFile << matrix[i * cols + j];
+      if (j < cols - 1){
+	outFile << " ";
     }
     outFile << "\n";
   }
