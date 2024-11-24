@@ -16,11 +16,7 @@ const char * karnauhova::is_number(const char * str)
   {
     return str;
   }
-  if (std::isdigit(*str))
-  {
-    return (str + 1);
-  }
-  return nullptr;
+  return ('0' <= *str && *str <= '9') ? (str + 1) : nullptr;
 }
 
 const char * karnauhova::is_unsigned_int(const char * str)
