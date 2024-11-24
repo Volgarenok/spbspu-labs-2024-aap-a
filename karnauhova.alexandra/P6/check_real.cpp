@@ -48,7 +48,7 @@ const char * karnauhova::is_manner(const char * str)
   {
     return str;
   }
-  const char * next = is_symbol(str, 'E');
+  const char * next = karnauhova::is_symbol(str, 'E');
   next = karnauhova::is_sign(next);
   next = karnauhova::is_unsigned_int(next);
   return next;
@@ -60,13 +60,13 @@ const char * karnauhova::is_mantis(const char * str)
   {
     return str;
   }
-  if (const char * next = is_symbol(str, '.'))
+  if (const char * next = karnauhova::is_symbol(str, '.'))
   {
     next = karnauhova::is_unsigned_int(next);
     return next;
   }
   const char * next = karnauhova::is_unsigned_int(str);
-  if (const char * cont = is_symbol(next, '.'))
+  if (const char * cont = karnauhova::is_symbol(next, '.'))
   {
     cont = karnauhova::is_unsigned_int(cont);
     return cont;
