@@ -6,7 +6,7 @@
 
 namespace guseynov
 {
-  char * getLine(std::istream & in, char stop);
+  char * getLine(std::istream & in);
   char * getNewArr(char *arr, size_t size, size_t step);
   size_t identifyUniqueChar(const char *inputString);
 }

@@ -17,8 +17,9 @@ char * guseynov::getNewArr(char *arr, size_t size, size_t step)
   return newarr;
 }
 
-char * guseynov::getLine(std::istream & in, char stop)
+char * guseynov::getLine(std::istream & in)
 {
+  constexpr char stop = '\n';
   char *arr = nullptr;
   size_t reserved = 10;
   constexpr size_t step = 10;

@@ -1,5 +1,7 @@
-#include "guseynov::is_double.hpp"
-yy
+#include "is_double.hpp"
+
+#include <cstddef>
+
 const char * guseynov::isSymbol(const char * str, char c)
 {
   if (!str)
@@ -30,7 +32,7 @@ const char * guseynov::isNum(const char * str)
   {
     return str;
   }
-  return ((*str >= '0') || (*str <= '9')) ? (str + 1) : nullptr;
+  return ((*str >= '0') && (*str <= '9')) ? (str + 1) : nullptr;
 }
 
 const char * guseynov::isUnsignNum(const char * str)
@@ -40,7 +42,8 @@ const char * guseynov::isUnsignNum(const char * str)
     return str;
   }
   auto next = guseynov::isNum(str);
-  if (auto continues = guseynov::isUnsignNum(next))
+  auto continues = guseynov::isUnsignNum(next);
+  if (continues)
   {
     return continues;
   }
@@ -53,7 +56,8 @@ const char * guseynov::isOrder(const char * str)
   {
     return str;
   }
-  if (auto next = guseynov::isSymbol(str, 'E'))
+  auto next = guseynov::isSymbol(str, 'E');
+  if (!next)
   {
     return nullptr;
   }
@@ -65,7 +69,7 @@ const char * guseynov::isOrder(const char * str)
   return next;
 }
 
-const char * guseynov::isMantguseynov::is(const char * str)
+const char * guseynov::isMantis(const char * str)
 {
   if (!str)
   {
@@ -89,9 +93,9 @@ bool guseynov::isDouble(const char * str)
   auto next = guseynov::isSign(str);
   if (!next)
   {
-    i = 1;
+    i++;
   }
-  next = guseynov::isMantguseynov::is(str + i);
+  next = guseynov::isMantis(str + i);
   if (guseynov::isOrder(next))
   {
     return true;
