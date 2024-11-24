@@ -1,4 +1,4 @@
-#include "string.hpp"
+#include "myOwnString.hpp"
 
 char* lebedev::getLine(std::istream& in, char endChar)
 {
