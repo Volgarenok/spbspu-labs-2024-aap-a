@@ -32,3 +32,58 @@ const char * is_unsigned_int(const char * str)
   }
   return next;
 }
+
+const char * is_manner(const char * str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  if (str* == 'E')
+  {
+    auto next = is_sign((str + 1));
+    next = is_unsigned_int(next);
+    return next;
+  }
+  return nullptr;
+}
+const char * is_mantis(const char * str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  if (str* == ".")
+  {
+    auto next = is_unsigned_int((str + 1));
+    return next;
+  }
+  else
+  {
+    auto next = is_unsigned_int(str);
+    if (next* == ".")
+    {
+      next = is_unsigned_int(str);
+      return next;
+    }
+    return next;
+  }
+  return nullptr;
+}
+
+bool char * is_real(const char * str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  if (auto next = is_number(str))
+  {
+    next = is_mantis(next);
+    next = is_manner(next);
+    return next && (*next == '\0');
+  }
+    next = is_mantis(next);
+    next = is_manner(next);
+    return next && (*next == '\0');
+}
