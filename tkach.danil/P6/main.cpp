@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stringinput.hpp>
 #include "isexpression.h"
 
 int main()
