@@ -7,10 +7,6 @@ const char * karnauhova::is_sign(const char * str)
   {
     return str;
   }
-  if (*str == '\0')
-  {
-    return nullptr;
-  }
   return (*str == '+' || *str == '-') ? (str + 1) : nullptr;
 }
 
@@ -19,10 +15,6 @@ const char * karnauhova::is_number(const char * str)
   if (!str)
   {
     return str;
-  }
-  if (*str == '\0')
-  {
-    return nullptr;
   }
   return (std::isdigit(*str) != 0) ? (str + 1) : nullptr;
 }
