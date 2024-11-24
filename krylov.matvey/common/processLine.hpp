@@ -4,8 +4,8 @@
 
 namespace krylov
 {
-  char * inputLine(std::istream & in);
-  char * replaceArray(char * oldArray, size_t newCapacity);
+  char * inLine(std::istream & in);
+  char * resizeArray(char * oldArray, size_t newCapacity);
 }
 
 #endif
