@@ -5,10 +5,9 @@
 int main()
 {
   char* str = nullptr;
-  size_t strSize = 0;
   try
   {
-    str = aleksandrov::getString(std::cin, strSize);
+    str = aleksandrov::getString(std::cin);
   }
   catch (const std::bad_alloc& e)
   {
@@ -22,7 +21,13 @@ int main()
     delete[] str;
     return 1;
   }
-  std::cout << aleksandrov::latinRemove(str, strSize) << "\n";
+  if (str[0] == '\0')
+  {
+    std::cerr << "ERROR: Input was incorrect!\n";
+    delete[] str;
+    return 1;
+  }
+  std::cout << aleksandrov::latinRemove(str) << "\n";
   delete[] str;
 }
 

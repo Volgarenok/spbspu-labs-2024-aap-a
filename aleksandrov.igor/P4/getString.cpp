@@ -1,9 +1,25 @@
 #include "getString.h"
+#include <iostream>
+#include <ios>
+#include <cstddef>
 
-char* aleksandrov::getString(std::istream& input, size_t& strSize)
+char* aleksandrov::copyString(const char* str, size_t newStrSize)
 {
-  size_t maxSize = 10;
-  constexpr const int coef = 2;
+  char* newStr = nullptr;
+  newStr = new char[newStrSize];
+  for (size_t i = 0; i != '\0'; ++i)
+  {
+    newStr[i] = str[i];
+  }
+  delete[] str;
+  return newStr;
+}
+
+char* aleksandrov::getString(std::istream& input)
+{
+  size_t maxSize = 16;
+  size_t strSize = 0;
+  constexpr const int coef = 16;
   char* str = nullptr;
   str = new char[maxSize + 1];
   char c = '\0';
@@ -13,14 +29,7 @@ char* aleksandrov::getString(std::istream& input, size_t& strSize)
     if (strSize == maxSize)
     {
       maxSize += coef;
-      char* newStr = nullptr;
-      newStr = new char[maxSize + 1];
-      for (size_t i = 0; i < maxSize - coef; ++i)
-      {
-        newStr[i] = str[i];
-      }
-      delete[] str;
-      str = newStr;
+      str = aleksandrov::copyString(str, maxSize);
     }
     str[strSize++] = c;
   }

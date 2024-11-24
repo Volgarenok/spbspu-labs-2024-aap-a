@@ -1,12 +1,13 @@
 #ifndef GETSTRING_H
 #define GETSTRING_H
 
-#include <iostream>
 #include <ios>
+#include <cstddef>
 
 namespace aleksandrov
 {
-  char* getString(std::istream& input, size_t& maxSize);
+  char* getString(std::istream& input);
+  char* copyString(const char* str, size_t newStrSize);
 }
 
 #endif

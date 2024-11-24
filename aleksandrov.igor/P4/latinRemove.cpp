@@ -1,23 +1,17 @@
 #include "latinRemove.h"
 #include <cctype>
 
-char* aleksandrov::latinRemove(char* str, int size)
+char* aleksandrov::latinRemove(char* str)
 {
-  for (int i = 0; i < size; )
+  int j = 0;
+  for (int i = 0; str[i] != '\0'; ++i)
   {
-    if (std::isalpha(str[i]))
+    if (!std::isalpha(str[i]))
     {
-      for (int j = i; j < size - 1; ++j)
-      {
-        str[j] = str[j + 1];
-      }
-      str[--size] = '\0';
-    }
-    else
-    {
-      ++i;
+      str[j++] = str[i];
     }
   }
+  str[j] = '\0';
   return str;
 }
 
