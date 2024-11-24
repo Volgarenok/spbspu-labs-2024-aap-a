@@ -54,29 +54,15 @@ int main(int argc, char **argv)
     std::cout << "0";
   }
 
-  int* matrix = new int [rows * columns]();
+  int* matrix = new int [rows * columns];
 
   size_t count = 0;
-  for (size_t i = 0; i < rows * columns; i++)
+  for (size_t i = 0; i < (rows * columns); i++)
   {
     if (infile.eof())
     {
       std::cerr << "Not enough elements in file" << "\n";
       std::cout << "not enough elements in file";
-      delete[] matrix;
-      return 1;
-    }
-    if (infile.bad())
-    {
-      std::cerr << "Bad input";
-      std::cout << "Bad";
-      delete[] matrix;
-      return 1;
-    }
-    if (infile.fail())
-    {
-      std::cerr << "Fail input";
-      std::cout << "Fail";
       delete[] matrix;
       return 1;
     }
