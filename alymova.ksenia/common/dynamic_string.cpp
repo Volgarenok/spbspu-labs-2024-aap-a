@@ -1,8 +1,8 @@
 #include "dynamic_string.h"
-#include <iostream>
 #include <istream>
 #include <cstddef>
 #include <cstdlib>
+#include <iomanip>
 char* alymova::copy_string(const char* str, size_t end, char* str_new)
 {
   char* ptr_new = str_new;
@@ -49,5 +49,6 @@ char* alymova::get_string(std::istream& in, size_t& capacity, size_t& size, int 
     }
   }
   str[size] = '\0';
+  in >> std::skipws;
   return str;
 }
