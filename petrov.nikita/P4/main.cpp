@@ -25,7 +25,7 @@ int main()
     std::cerr << "ERROR: Out of memory\n";
     return 1;
   }
-  petrov::outputNewCString(new_cstring);
+  std::cout << new_cstring << "\n";
   delete[] cstring_1;
   delete[] new_cstring;
 }
