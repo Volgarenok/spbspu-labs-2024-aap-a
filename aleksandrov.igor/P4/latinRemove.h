@@ -3,7 +3,7 @@
 
 namespace aleksandrov
 {
-  char* latinRemove(char* str, int size);
+  char* latinRemove(char* str);
 }
 
 #endif
