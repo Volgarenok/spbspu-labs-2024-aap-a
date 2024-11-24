@@ -3,5 +3,7 @@
 namespace sveshnikov
 {
   bool isRealNumber(const char *str);
+  const char *isSign(const char *str);
+  const char *isDigit(const char *str);
 }
 #endif
