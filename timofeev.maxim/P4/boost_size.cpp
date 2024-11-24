@@ -10,6 +10,5 @@ char* timofeev::boost_size(char* value_line, size_t capacity)
     new_line[i] = value_line[i];
   }
   new_line[new_capacity] = '\0';
-  free(value_line);
   return new_line;
 }

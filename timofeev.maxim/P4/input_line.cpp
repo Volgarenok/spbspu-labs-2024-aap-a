@@ -29,7 +29,7 @@ char* timofeev::input_line(std::istream& in)
   {
     std::cerr << "Memory error";
     free(line);
-    return nullptr;
+    return line;
   }
   std::skipws(in);
   return line;
