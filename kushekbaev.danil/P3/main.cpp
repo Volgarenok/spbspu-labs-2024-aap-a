@@ -21,18 +21,21 @@ int main(int argc, char **argv)
   {
     std::cerr << "Error while opening input file" << "\n";
     return 1;
+    std::cout << "infile error";
   }
 
   if (infile.eof())
   {
     std::cerr << "Not enough elements in file" << "\n";
     return 1;
+    std::cout << "infile eof";
   }
 
   if (infile.fail())
   {
     std::cerr << "Failed input" << "\n";
     return 1;
+    std::cout << "infile fail";
   }
 
   char ch = 0;
@@ -47,6 +50,7 @@ int main(int argc, char **argv)
     std::ofstream outfile(output_filename);
     outfile << "0" << "\n";
     return 0;
+    std::cout << "0";
   }
 
   int* matrix = new int [rows * columns]();
@@ -93,5 +97,6 @@ int main(int argc, char **argv)
     return 1;
   }
   delete[] matrix;
+  std::cout << "good";
   return 0;
 }
