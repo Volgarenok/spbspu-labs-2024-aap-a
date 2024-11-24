@@ -31,12 +31,6 @@ char* timofeev::input_line(std::istream& in)
     free(line);
     return nullptr;
   }
-  if (line[0] == '\0')
-  {
-    std::cerr << "Empty input";
-    free(line);
-    return nullptr;
-  }
   std::skipws(in);
   return line;
 }
