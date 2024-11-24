@@ -33,7 +33,7 @@ char* timofeev::input_line(std::istream& in)
     }
     line[cur_writing_lit++] = cur_sym;
   }
-  if (second_line[0] == '\0')
+  if (line[0] == '\0')
   {
     std::cerr << "Empty input";
     free(second_line);
