@@ -1,60 +1,67 @@
 #include "is_real_number.hpp"
 
-bool sveshnikov::isRealNumber(const char *str)
+const char *sveshnikov::hasRealNumber(const char *str)
 {
   if (!str)
   {
     return str;
   }
+  if (const char *continues = hasSign(str))
+  {
+    return continues;
+  }
+  const char *next = hasMantissa(str);
+  next = hasMantissa(str);
+  next = hasOrder(str);
 }
 
-const char *sveshnikov::isMantissa(const char *str)
+const char *sveshnikov::hasMantissa(const char *str)
 {
   if (!str)
   {
     return str;
   }
-  const char *next = isUnsignedInteger(str);
-  if (*str == '.')
+  if (const char *continues = hasUnsignedInteger(str))
   {
-    str++;
+    return continues;
   }
-  else
+  if (const char *continues = hasSymbol(str, 'E'))
   {
-    return nullptr;
+    return continues;
   }
-  return isUnsignedInteger(str);
+  if (const char *continues = hasSymbol(str, 'E'))
+  {
+    return continues;
+  }
+  return hasUnsignedInteger(str);
 }
 
-const char *sveshnikov::isOrder(const char *str)
+const char *sveshnikov::hasOrder(const char *str)
 {
   if (!str)
   {
     return str;
   }
-  if (*str == 'E')
-  {
-    str++;
-  }
-  else
-  {
-    return nullptr;
-  }
-  const char *next = isSign(str);
-  return isUnsignedInteger(next);
+  const char *next = hasSymbol(str, 'E');
+  next = hasSign(str);
+  return hasUnsignedInteger(next);
 }
 
-const char *sveshnikov::isUnsignedInteger(const char *str)
+const char *sveshnikov::hasUnsignedInteger(const char *str)
 {
   if (!str)
   {
     return str;
   }
-  const char *next = isDigit(str);
-  return isUnsignedInteger(next);
+  const char *next = hasDigit(str);
+  if (const char *continues = hasDigit(str))
+  {
+    return continues;
+  }
+  return next;
 }
 
-const char *sveshnikov::isDigit(const char *str)
+const char *sveshnikov::hasDigit(const char *str)
 {
   if (!str)
   {
@@ -63,11 +70,17 @@ const char *sveshnikov::isDigit(const char *str)
   return (*str >= '0' || *str <= '9') ? (str + 1) : nullptr;
 }
 
-const char *sveshnikov::isSign(const char *str)
+const char *sveshnikov::hasSign(const char *str)
+{
+  const char *next = hasSymbol(str, '+');
+  return next ? next : hasSymbol(str, '-');
+}
+
+const char *sveshnikov::hasSymbol(const char *str, const char c)
 {
   if (!str)
   {
     return str;
   }
-  return (*str == '+' || *str == '-') ? (str + 1) : nullptr;
+  return (*str == c) ? (str + 1) : nullptr;
 }
