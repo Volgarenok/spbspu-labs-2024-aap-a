@@ -22,7 +22,7 @@ int main(int argc, char** argv)
   else if (std::strcmp(argv[1], "1")==0)
   {
     int mtx[10000] = {};
-    size_t a[2] = {};
+    unsigned long long a[2] = {0, 0};
     std::ifstream fin(argv[2]);
     try
     {
@@ -38,7 +38,7 @@ int main(int argc, char** argv)
   else if (std::strcmp(argv[1], "2")==0)
   {
     int* mtx = nullptr;
-    size_t a[2] = {};
+    unsigned long long a[2] = {0, 0};
     std::ifstream fin(argv[2]);
     try
     {
