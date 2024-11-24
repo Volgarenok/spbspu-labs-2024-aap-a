@@ -5,7 +5,7 @@ char* shramko::createBiggerStrMemory(size_t memory, const char* str)
 {
   char* new_str = reinterpret_cast< char* >(malloc((memory + 1) * sizeof(char)));
 
-  for (size_t i = 0; i < str[i] != '\n'; ++i)
+  for (size_t i = 0; str[i] != '\n'; ++i)
   {
     new_str[i] = str[i];
   }
