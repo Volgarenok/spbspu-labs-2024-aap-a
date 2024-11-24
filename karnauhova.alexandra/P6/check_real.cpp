@@ -1,6 +1,15 @@
 #include "check_real.hpp"
 #include <cctype>
 
+const char* karnauhova::is_symbol(const char* str, char symbol)
+{
+  if (!str)
+  {
+    return str;
+  }
+  return (*str == symbol) ? (str + 1) : nullptr;
+}
+
 const char * karnauhova::is_sign(const char * str)
 {
   if (!str)
@@ -39,36 +48,28 @@ const char * karnauhova::is_manner(const char * str)
   {
     return str;
   }
-  if (*str == 'E')
-  {
-    str = (str + 1);
-    const char * next = karnauhova::is_sign(str);
-    next = karnauhova::is_unsigned_int(next);
-    return next;
-  }
-  return nullptr;
+  const char * next = is_symbol(str, 'E');
+  next = karnauhova::is_sign(next);
+  next = karnauhova::is_unsigned_int(next);
+  return next;
 }
+
 const char * karnauhova::is_mantis(const char * str)
 {
   if (!str)
   {
     return str;
   }
-  if (*str == '.')
+  if (const char * next = is_symbol(str, '.'))
   {
-    str = (str + 1);
-    const char * next = karnauhova::is_unsigned_int(str);
+    next = karnauhova::is_unsigned_int(next);
     return next;
   }
-  else
+  const char * next = karnauhova::is_unsigned_int(str);
+  if (const char * cont = is_symbol(next, '.'))
   {
-    const char * next = karnauhova::is_unsigned_int(str);
-    if (next && *next == '.')
-    {
-      next = karnauhova::is_unsigned_int(next + 1);
-      return next ? next : nullptr;
-    }
-    return next;
+    cont = karnauhova::is_unsigned_int(cont);
+    return cont;
   }
   return nullptr;
 }
