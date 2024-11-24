@@ -9,5 +9,6 @@ int main()
     std::cin >> size1;
     char * s1 = kushekbaev::readInputArray(size1, max);
     std::cout << kushekbaev::isValidExpression(s1) << "\n";
+    delete[] s1;
     return 0;
 }
