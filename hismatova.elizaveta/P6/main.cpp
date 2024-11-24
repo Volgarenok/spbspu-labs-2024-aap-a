@@ -11,7 +11,7 @@ int main()
     std::cerr << "get line failed!\n";
     return 1;
   }
-  if (str == nullptr)
+  if (str == nullptr || std::strlen(str) == 0)
   {
     std::cerr << "no string\n";
     return 1;

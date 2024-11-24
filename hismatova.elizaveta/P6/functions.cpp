@@ -4,7 +4,7 @@ bool hismatova::isValidString(const char* str, size_t& position)
 {
   if (isTerm(str, position))
   {
-    while (str[position] == '+')
+    while (str[position] == '+' || str[position] == '-')
     {
       position++;
       if (!isTerm(str, position))
@@ -20,7 +20,7 @@ const char* hismatova::isTerm(const char* str, size_t& position)
 {
   if (isMultiplier(str, position))
   {
-    while (str[position] == '*')
+    while (str[position] == '*' || str[position] == '-')
     {
       position++;
       if (!isMultiplier(str, position))
