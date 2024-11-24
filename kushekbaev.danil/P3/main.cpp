@@ -54,12 +54,12 @@ int main(int argc, char **argv)
     std::cout << "0";
   }
 
-  int* matrix = new int [rows * columns];
+  int* matrix = new int [rows * columns]();
 
   size_t count = 0;
   for (size_t i = 0; i < (rows * columns); i++)
   {
-    if (infile.eof())
+    if (!(infile >> matrix[i]))
     {
       std::cerr << "Not enough elements in file" << "\n";
       std::cout << "not enough elements in file";
