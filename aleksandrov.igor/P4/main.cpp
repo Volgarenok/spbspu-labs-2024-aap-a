@@ -12,13 +12,6 @@ int main()
   catch (const std::bad_alloc& e)
   {
     std::cerr << "ERROR: Out of memory!\n";
-    delete[] str;
-    return 1;
-  }
-  catch (const std::logic_error& e)
-  {
-    std::cerr << e.what();
-    delete[] str;
     return 1;
   }
   if (str[0] == '\0')
