@@ -1,5 +1,6 @@
 #include <iostream>
 #include <processLine.hpp>
+#include "checkLineOnFloat.hpp"
 
 int main()
 {
@@ -15,4 +16,8 @@ int main()
     delete[] line;
     return 1;
   }
+  std::cout << std::boolalpha << krylov::isFloatNumber(line);
+  std::cout << '\n';
+
+  delete[] line;
 }
