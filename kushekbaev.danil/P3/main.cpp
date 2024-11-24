@@ -43,6 +43,7 @@ int main(int argc, char **argv)
   {
     std::cerr << "Input file is empty" << "\n";
     return 1;
+    std::cout << "empty file";
   }
 
   if (!(infile >> rows) || !(infile >> columns))
@@ -62,7 +63,8 @@ int main(int argc, char **argv)
     {
       if (infile.eof())
       {
-        std::cerr << "Not enough elements in file\n";
+        std::cerr << "Not enough elements in file" << "\n";
+        std::cout << "not enough elements in file";
         break;
       }
     count++;
@@ -71,6 +73,7 @@ int main(int argc, char **argv)
   if (count != rows * columns)
   {
     std::cerr << "Expected " << (rows * columns) << " elements, but read only " << count << "\n";
+    std::cout << "EXPECT THE UNEXPECTABLE";
     delete[] matrix;
     return 1;
   }
@@ -87,6 +90,7 @@ int main(int argc, char **argv)
   catch (const std::runtime_error& e)
   {
     std::cerr << e.what() << "\n";
+    std::cout << "runtime";
     delete[] matrix;
     return 1;
   }
