@@ -3,49 +3,54 @@
 #include <stdexcept>
 #include <cstring>
 #include <cstddef>
-#include "matrixAutoInitiallization.hpp"
-#include "matrixDynamicInitiallization.hpp"
-#include "matrixPush.hpp"
+#include "matrixInitiallization.hpp"
+#include "matrixOutput.hpp"
 #include "matrixHandling.hpp"
 
 int main(int argc, char** argv)
 {
-  if (argc < 4) {
+  if (argc < 4)
+  {
     std::cerr << "Not enough arguments";
     return 1;
   }
-    else if (argc > 4) {
+  else if (argc > 4)
+  {
     std::cerr << "Too many arguments";
     return 1;
   }
-  else if (strcmp(argv[1], "1")==0)
+  else if (std::strcmp(argv[1], "1")==0)
   {
     int mtx[10000] = {};
     size_t a[2] = {};
+    std::ifstream fin(argv[2]);
     try
     {
-      asafov::matrixAutoInitialization(mtx, argv[2], a[0], a[1]);
+      asafov::initializationMatrixAuto(fin, mtx, a[0], a[1]);
     }
     catch (const std::logic_error & e)
     {
       return 2;
     }
-    asafov::matrixPush(asafov::matrixHandlingSanctions(mtx, a[0], a[1]), argv[3]);
+    std::ofstream fout(argv[3]);
+    fout << asafov::handle_num_col_lsr(mtx, a[0], a[1]);
   }
-  else if (strcmp(argv[1], "2")==0)
+  else if (std::strcmp(argv[1], "2")==0)
   {
     int* mtx = nullptr;
     size_t a[2] = {};
+    std::ifstream fin(argv[2]);
     try
     {
-      asafov::matrixDynamicInitialization(mtx, argv[2], a[0], a[1]);
+      asafov::initializationMatrixDynamic(fin, mtx, a[0], a[1]);
     }
     catch (const std::logic_error & e)
     {
       delete[] mtx;
       return 2;
     }
-    asafov::matrixPush(asafov::matrixHandlingSanctions(mtx, a[0], a[1]), argv[3]);
+    std::ofstream fout(argv[3]);
+    fout << asafov::handle_num_col_lsr(mtx, a[0], a[1]);
     delete[] mtx;
   }
   else

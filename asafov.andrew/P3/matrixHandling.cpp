@@ -1,6 +1,6 @@
 #include "matrixHandling.hpp"
 
-void asafov::matrixHandling(int* mtx, size_t n, size_t m)
+void asafov::handle_lft_top_clk(int*& mtx, const unsigned long long n, const unsigned long long m)
 {
   int count = 1;
   int e = n;
@@ -55,7 +55,7 @@ void asafov::matrixHandling(int* mtx, size_t n, size_t m)
   }
 }
 
-int asafov::matrixHandlingSanctions(int* mtx, size_t n, size_t m)
+int asafov::handle_num_col_lsr(const int* mtx, const unsigned long long n, const unsigned long long m)
 {
   int count = 0;
   int maxCount = 0;
