@@ -18,6 +18,7 @@ int main()
   else if (line == nullptr)
   {
     std::cerr << "ERROR: Out of memory" << '\n';
+    free(line);
     return 1;
   }
 
@@ -28,6 +29,7 @@ int main()
     if (line == nullptr)
     {
       std::cerr << "ERROR: Out of memory" << '\n';
+      free(line);
       return 1;
     }
 
