@@ -1,5 +1,4 @@
 #include "dynamic_string.h"
-#include <iostream>
 #include <istream>
 #include <cstddef>
 #include <cstdlib>
@@ -49,5 +48,6 @@ char* alymova::get_string(std::istream& in, size_t& capacity, size_t& size, int 
     }
   }
   str[size] = '\0';
+  in >> std::skipws;
   return str;
 }

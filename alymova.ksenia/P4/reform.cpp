@@ -1,5 +1,4 @@
 #include "reform.h"
-#include <cstddef>
 #include <cctype>
 char* alymova::upper_string(const char* str, char* str_res)
 {
