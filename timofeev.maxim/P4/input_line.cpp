@@ -25,6 +25,12 @@ char* timofeev::input_line(std::istream& in)
     }
     line[cur_writing_lit++] = cur_sym;
   }
+  if (line == nullptr)
+  {
+    std::cerr << "Memory error";
+    free(line);
+    return nullptr;
+  }
   if (line[0] == '\0')
   {
     std::cerr << "Empty input";
