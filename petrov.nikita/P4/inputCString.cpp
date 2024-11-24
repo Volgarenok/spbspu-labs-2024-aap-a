@@ -2,54 +2,63 @@
 #include <iostream>
 #include <exception>
 
-char * petrov::inputCSring(char * string, size_t & length)
+char * petrov::inputCString(char * string, size_t & capacity)
 {
   char * temp_string = nullptr;
-  string = nullptr;
   try
   {
-    string = new char[1];
-    string[0] = '0';
-    size_t i = 0;
-    std::cin >> string[i];
-    if (string[i] == '\n' || std::cin.eof())
+    string = new char[2];
+    std::cin >> string[0];
+    if (string[0] == '\n' || std::cin.eof())
     {
       return string;
-      delete[] string;
     }
-    i++;
-    while (string[i - 1] != '\n')
+    string[1] = '\0';
+    size_t i = 2;
+    while (string[i - 2] != '\n')
     {
       temp_string = new char[i];
-      for (size_t j = 0; j < i; j++)
+      size_t j = 0;
+      while (string[j] != '\0')
       {
         temp_string[j] = string[j];
+        j++;
       }
+      temp_string[j] = '\0';
       delete[] string;
       string = nullptr;
-      string = new char[i + 1];
-      for (size_t j = 0; j < i; j++)
+      i++;
+      string = new char[i];
+      j = 0;
+      while (temp_string[j] != '\0')
       {
         string[j] = temp_string[j];
+        j++;
       }
       delete[] temp_string;
       temp_string = nullptr;
-      std::cin >> string[i];
-      i++;
+      std::cin >> string[i - 2];
+      string[i - 1] = '\0';
+      if ((i - 1) > capacity)
+      {
+        capacity++;
+      } 
       if (std::cin.eof())
       {
+        std::cout << "\n";
         return string;
-        delete[] string;
       }
     }
-    string[i - 1] = '\0';
-    length = i - 1;
+    string[i - 2] = '\0';
+    delete[] temp_string;
+    return string;
   }
   catch(const std::bad_alloc & e)
   {
     if (temp_string == nullptr && string != nullptr)
     {
       delete[] string;
+      string = nullptr;
     }
     else if (string == nullptr && temp_string != nullptr)
     {
@@ -57,7 +66,4 @@ char * petrov::inputCSring(char * string, size_t & length)
     }
     throw;
   }
-  delete[] temp_string;
-  return string;
-  delete[] string;
 }
