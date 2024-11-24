@@ -26,10 +26,6 @@ const char * karnauhova::is_unsigned_int(const char * str)
     return str;
   }
   auto next = karnauhova::is_number(str);
-  if (!next)
-  {
-    return nullptr;
-  }
   if (auto continues = is_unsigned_int(next))
   {
     return continues;
@@ -46,6 +42,10 @@ const char * karnauhova::is_manner(const char * str)
   if (*str == 'E')
   {
     auto next = karnauhova::is_sign((str + 1));
+    if (!next)
+    {
+      return nullptr;
+    }
     next = karnauhova::is_unsigned_int(next);
     return next;
   }
