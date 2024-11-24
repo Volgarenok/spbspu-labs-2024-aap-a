@@ -1,12 +1,12 @@
-#include "rep_sym.hpp"
+#include "search_repeats.hpp"
 
 char *sveshnikov::rep_sym(const char *str, char *new_str)
 {
-  char * next = new_str;
-  for (const char * i = str; *i != '\0'; i++)
+  char *next = new_str;
+  for (const char *i = str; *i != '\0'; i++)
   {
-    const char * j = str;
-    char * k = new_str;
+    const char *j = str;
+    char *k = new_str;
     std::size_t repetition = 0;
     while (*k != '\0' && repetition != 1)
     {

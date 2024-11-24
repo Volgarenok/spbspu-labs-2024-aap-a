@@ -1,45 +1,32 @@
 #include <stdexcept>
-#include "rep_sym.hpp"
+#include "search_repeats.hpp"
 
 int main()
 {
-  std::size_t len = 100;
   char *str = nullptr;
   try
   {
-    str = new char[len];
-    str = sveshnikov::read_str(std::cin, str, &len);
+    str = sveshnikov::read_str(std::cin);
   }
   catch (const std::bad_alloc &e)
   {
     std::cerr << "ERROR: BAD_ALLOC! " << e.what() << '\n';
+    return 1;
+  }
+  if (str[0] == '\0')
+  {
+    std::cerr << "ERROR: EMPTY INPUT\n";
     delete[] str;
     return 1;
   }
-  catch (const std::istream::failure &e)
+  std::size_t len_new_str = 0;
+  for (char *i = str; *i != '\0'; i++)
   {
-    std::cerr << "ERROR: CAN NOT READ! " << e.what() << '\n';
-    delete[] str;
-    return 1;
+    len_new_str++;
   }
-  char *new_str = nullptr;
-  try
-  {
-    new_str = new char[len + 1]{'\0'};
-  }
-  catch (const std::bad_alloc &e)
-  {
-    std::cerr << "ERROR: BAD_ALLOC! " << e.what() << '\n';
-    delete[] str;
-    return 1;
-  }
-  new_str = sveshnikov::rep_sym(str, new_str);
-  for (std::size_t i = 0; new_str[i] != '\0'; i++)
-  {
-    std::cout << new_str[i];
-  }
-  std::cout << "\n";
+  const int LEN = len_new_str;
+  char new_str[LEN] = {};
+  std::cout << sveshnikov::rep_sym(str, new_str) << "\n";
   delete[] str;
-  delete[] new_str;
   return 0;
 }
