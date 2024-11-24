@@ -2,27 +2,29 @@
 
 char *sveshnikov::rep_sym(const char *str, char *new_str)
 {
-  std::size_t count = 0;
-  for (std::size_t i = 0; str[i] != '\0'; i++)
+  char * next = new_str;
+  for (const char * i = str; *i != '\0'; i++)
   {
-    std::size_t j = 0, k = 0, povtor = 0;
-    while (new_str[k] != '\0' && povtor != 1)
+    const char * j = str;
+    char * k = new_str;
+    std::size_t repetition = 0;
+    while (*k != '\0' && repetition != 1)
     {
-      if (str[i] == new_str[k])
+      if (*i == *k)
       {
-        povtor = 1;
+        repetition = 1;
       }
       k++;
     }
-    if (povtor == 0)
+    if (repetition == 0)
     {
-      while (str[j] != '\0' && povtor != 1)
+      while (*j != '\0' && repetition != 1)
       {
-        if (str[i] == str[j] && i != j)
+        if (*i == *j && i != j)
         {
-          new_str[count] = str[i];
-          povtor = 1;
-          count++;
+          *next = *i;
+          repetition = 1;
+          next++;
         }
         j++;
       }
