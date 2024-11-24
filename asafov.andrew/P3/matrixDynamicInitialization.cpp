@@ -1,7 +1,7 @@
 #include "matrixInitiallization.hpp"
 #include <stdexcept>
 
-void asafov::initializationMatrixDynamic(std::istream& in, int* mtx, unsigned long long& n, unsigned long long& m)
+int* asafov::initializationMatrixDynamic(std::istream& in, unsigned long long& n, unsigned long long& m)
 {
   in >> n;
   if (in.fail() || in.eof()) {
@@ -18,4 +18,5 @@ void asafov::initializationMatrixDynamic(std::istream& in, int* mtx, unsigned lo
       throw std::logic_error("err");
     }
   }
+  return mtx;
 }
