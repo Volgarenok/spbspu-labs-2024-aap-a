@@ -1,6 +1,7 @@
 #include "CheckRealNumber.hpp"
 
-char * zakirov::compare_literals(char * line, char literal){
+const char * zakirov::compare_literals(const char * line, char literal)
+{
 	  if (!line)
   	{
     	return line;
@@ -8,3 +9,14 @@ char * zakirov::compare_literals(char * line, char literal){
 		return (* line == literal) ? (line + 1) : nullptr;
 }
 
+const char * zakirov::check_sign(const char * line)
+{
+	if (compare_literals(line, '+') || compare_literals(line, '-'))
+	{
+		return line + 1;
+	}
+	else
+	{
+		return nullptr;
+	}
+}
