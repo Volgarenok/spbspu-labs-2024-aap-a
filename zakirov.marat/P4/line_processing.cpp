@@ -68,7 +68,6 @@ void zakirov::change_line(char * line)
       }
       location += 1;
     }
-    
     location = 0;
   }
 
