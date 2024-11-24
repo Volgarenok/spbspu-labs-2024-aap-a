@@ -56,7 +56,7 @@ int main(int argc, char ** argv)
   {
     delete[] dynamic_matrix;
     std::cerr << "Input error\n";
-    return 2;
+    return 1;
   }
   bocharov::matrix_replace(final_matrix, rows, cols);
   bocharov::output_matrix(output, final_matrix, rows, cols);
