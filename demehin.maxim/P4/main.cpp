@@ -15,7 +15,6 @@ int main()
   catch (const std::bad_alloc& e)
   {
     std::cerr << "Out of memory\n";
-    delete[] first_str;
     return 1;
   }
 
