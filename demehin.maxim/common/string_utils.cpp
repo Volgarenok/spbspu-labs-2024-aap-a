@@ -38,8 +38,7 @@ char* demehin::getString(std::istream& in, char stop, size_t max_size)
       }
       catch (const std::bad_alloc& e)
       {
-        delete[] str;
-        throw std::bad_alloc();
+        return str;
       }
 
       delete[] str;
