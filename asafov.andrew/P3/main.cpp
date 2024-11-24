@@ -42,7 +42,7 @@ int main(int argc, char** argv)
     std::ifstream fin(argv[2]);
     try
     {
-      asafov::initializationMatrixDynamic(fin, mtx, a[0], a[1]);
+      asafov::initializationMatrixDynamic(fin, &mtx, a[0], a[1]);
     }
     catch (const std::logic_error & e)
     {
