@@ -21,14 +21,14 @@ int main(int argc, char ** argv)
   std::ofstream output(argv[3]);
   if (!output)
   {
-    return 2;
+    return 1;
   }
   size_t rows = 0, cols = 0;
   input  >> rows >> cols;
   if (!input.good())
   {
     std::cerr << "Input size fail\n";
-    return 2;
+    return 1;
   }
   const size_t fixed_size = 10000;
   int fixed_matrix[fixed_size] = {};
