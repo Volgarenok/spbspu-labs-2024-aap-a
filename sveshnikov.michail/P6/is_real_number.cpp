@@ -1,5 +1,11 @@
 #include "is_real_number.hpp"
 
+bool sveshnikov::isRealNumber(const char *str)
+{
+  const char *next = hasRealNumber(str);
+  return next && (*next == '\0');
+}
+
 const char *sveshnikov::hasRealNumber(const char *str)
 {
   if (!str)
@@ -11,8 +17,7 @@ const char *sveshnikov::hasRealNumber(const char *str)
     return continues;
   }
   const char *next = hasMantissa(str);
-  next = hasMantissa(str);
-  next = hasOrder(str);
+  return hasOrder(next);
 }
 
 const char *sveshnikov::hasMantissa(const char *str)

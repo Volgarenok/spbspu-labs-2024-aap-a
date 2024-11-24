@@ -3,7 +3,7 @@
 
 namespace sveshnikov
 {
-  const char *sveshnikov::hasSymbol(const char *str, const char c);
+  const char *hasSymbol(const char *str, const char c);
   const char *hasSign(const char *str);
   const char *hasDigit(const char *str);
   const char *hasUnsignedInteger(const char *str);
