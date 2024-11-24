@@ -4,9 +4,19 @@
 int main()
 {
   const char first_line[] = "abs";
-  char* second_line = timofeev::input_line(std::cin);
+  char* second_line = nullptr;
+  try
+  {
+    second_line = timofeev::input_line(std::cin);
+  }
+  catch(const std::bad_alloc& e)
+  {
+    std::error << ("Bad output\n");
+    free(second_line);
+    return 1;
   if (second_line == nullptr)
   {
+    std::error << ("Bad output");
     free(second_line);
     return 1;
   }
