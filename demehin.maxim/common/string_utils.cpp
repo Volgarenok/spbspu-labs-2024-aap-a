@@ -4,15 +4,12 @@
 char* demehin::copyString(char* str, size_t size)
 {
   size_t temp_size = 0;
-  char* new_str = nullptr;
-  try
+  char* new_str = new char[size];
+  if (!new_str)
   {
-    new_str = new char[size];
+    throw std::bad_alloc();
   }
-  catch (const std::bad_alloc& e)
-  {
-    return nullptr;
-  }
+
   while (str[temp_size] != '\0')
   {
     new_str[temp_size] = str[temp_size];
@@ -37,12 +34,7 @@ char* demehin::getString(std::istream& in, char stop, size_t max_size)
     {
       str[max_size - 1] = '\0';
       max_size *= 2;
-      char* temp_str = str;
       str = copyString(str, max_size);
-      if (!str)
-      {
-        return temp_str;
-      }
     }
     str[size++] = temp;
   }
