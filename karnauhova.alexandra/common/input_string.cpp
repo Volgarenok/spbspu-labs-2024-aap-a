@@ -21,7 +21,7 @@ char* karnauhova::input_string(std::istream& in, char end)
   size_t i = 1;
   while ((in >> x) && (x != end))
   {
-    if (i >= n)
+    if ((i + 1) >= n)
     {
       n = n * 2;
       char* str1 = reinterpret_cast< char* >(malloc(sizeof(char) * n));
