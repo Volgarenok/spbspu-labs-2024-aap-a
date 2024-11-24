@@ -65,18 +65,20 @@ int main(int argc, char **argv)
   int* matrix = new int [rows * columns]();
 
   size_t count = 0;
-  for (size_t i = 0; i < (rows * columns); i++)
+  for (size_t row = 0; row < rows; row++)
   {
-    if (!(infile >> matrix[i]))
+    for (size_t col = 0; col < columns; col++)
     {
-      std::cerr << "Not enough elements in file" << "\n";
-      std::cout << "not enough elements in file";
-      delete[] matrix;
-      return 1;
+      if (!(infile >> matrix[count]))
+      {
+        std::cerr << "Not enough elements in file at row " << row << ", column " << col << "\n";
+        std::cout << "Not enough elements in file at row " << row << ", column " << col << "\n";
+        delete[] matrix;
+        return 1;
+      }
+      count++;
     }
-  count++;
   }
-
   if (count != (rows * columns))
   {
     std::cerr << "Expected " << (rows * columns) << " elements, but read only " << count << "\n";
