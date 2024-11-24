@@ -56,19 +56,17 @@ int main(int argc, char **argv)
 
   int* matrix = new int [rows * columns]();
 
-  try
+  size_t count = 0;
+  for (size_t i = 0; i < rows * columns; i++)
   {
-    size_t count = 0;
-    for (size_t i = 0; i < rows * columns; i++)
+    if (infile.eof())
     {
-      if (infile.eof())
-      {
-        std::cerr << "Not enough elements in file" << "\n";
-        std::cout << "not enough elements in file";
-        break;
-      }
-    count++;
+      std::cerr << "Not enough elements in file" << "\n";
+      std::cout << "not enough elements in file";
+      break;
     }
+  count++;
+  }
 
   if (count != rows * columns)
   {
@@ -83,17 +81,12 @@ int main(int argc, char **argv)
   std::ofstream outfile(output_filename);
   if (!outfile.is_open())
   {
-    throw std::runtime_error("Error while opening output file");
-  }
-  outfile << saddle_points << "\n";
-  }
-  catch (const std::runtime_error& e)
-  {
-    std::cerr << e.what() << "\n";
-    std::cout << "runtime";
+    std::cerr << "Error while opening output file" << "\n";
     delete[] matrix;
     return 1;
   }
+  outfile << saddle_points << "\n";
+
   delete[] matrix;
   std::cout << "good";
   return 0;
