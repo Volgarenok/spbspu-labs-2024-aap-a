@@ -4,8 +4,7 @@
 char * mozhegova::inputString(std::istream & in, char stop)
 {
   size_t length = 10;
-  char * str = nullptr;
-  str = new char [length + 1];
+  char * str = new char [length + 1];
   size_t size = 0;
   char next = '\0';
   std::noskipws(in);
@@ -34,7 +33,7 @@ char * mozhegova::inputString(std::istream & in, char stop)
   return str;
 }
 
-char * mozhegova::changeSize(char * currentstr, size_t length)
+char * mozhegova::changeSize(const char * currentstr, size_t length)
 {
   char * newstr = new char [length + 10];
   for (size_t i = 0; i < length; i++)
