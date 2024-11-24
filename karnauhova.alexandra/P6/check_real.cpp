@@ -3,7 +3,11 @@
 
 const char * karnauhova::is_sign(const char * str)
 {
-  if (!str || (*str == '\0'))
+  if (!str)
+  {
+    return str;
+  }
+  if (*str == '\0')
   {
     return nullptr;
   }
@@ -12,7 +16,11 @@ const char * karnauhova::is_sign(const char * str)
 
 const char * karnauhova::is_number(const char * str)
 {
-  if (!str || (*str == '\0'))
+  if (!str)
+  {
+    return str;
+  }
+  if (*str == '\0')
   {
     return nullptr;
   }
