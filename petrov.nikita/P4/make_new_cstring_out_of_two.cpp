@@ -3,7 +3,7 @@
 #include <cctype>
 #include <exception>
 
-char * petrov::makeNewCStringOutOfTwo(char * new_cstring, const char * string_1, const char * string_2, const size_t capacity)
+char * petrov::makeNewCStringOutOfTwo(const char * string_1, const char * string_2, const size_t capacity)
 {
   size_t number_of_numbers = 0;
   size_t i = 0;
@@ -16,6 +16,7 @@ char * petrov::makeNewCStringOutOfTwo(char * new_cstring, const char * string_1,
     i++;
   }
   char * numbers = nullptr;
+  char * new_cstring = nullptr;
   try
   {
     numbers = new char[number_of_numbers + 1];
@@ -31,9 +32,16 @@ char * petrov::makeNewCStringOutOfTwo(char * new_cstring, const char * string_1,
       j++;
     }
     numbers[i] = '\0';
-    i = 0;
-    j = 0;
+  }
+  catch (const std::bad_alloc & e)
+  {
+    throw;
+  }
+  try
+  {
     new_cstring = new char[capacity + number_of_numbers];
+    size_t i = 0;
+    size_t j = 0;
     while (string_1[j] != '\0')
     {
       new_cstring[i] = string_1[j];
@@ -53,10 +61,7 @@ char * petrov::makeNewCStringOutOfTwo(char * new_cstring, const char * string_1,
   }
   catch(const std::bad_alloc & e)
   {
-    if (numbers != nullptr)
-    {
-      delete[] numbers;
-    }
+    delete[] numbers;
     throw;
   }
 }
