@@ -1,5 +1,5 @@
-#ifndef STRFUNC_H
-#define STRFUNC_H
+#ifndef STRINGINPUTWITHMEMORYADDITION_H
+#define STRINGINPUTWITHMEMORYADDITION_H
 
 #include <cstddef>
 #include <fstream>

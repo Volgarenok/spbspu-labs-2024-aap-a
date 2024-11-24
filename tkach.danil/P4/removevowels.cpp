@@ -2,10 +2,10 @@
 
 bool tkach::isVowel(const char* str)
 {
-  constexpr char str3[] = "eyuioaEYUIOA";
-  for(size_t i = 0; str3[i] != '\0'; ++i)
+  constexpr char str_of_all_vowels[] = "eyuioaEYUIOA";
+  for(const char* str_pointer = str_of_all_vowels; (*str_pointer) != '\0'; str_pointer++)
   {
-    if (*str == str3[i])
+    if (*str == *str_pointer)
     {
       return true;
     }
@@ -15,15 +15,19 @@ bool tkach::isVowel(const char* str)
 
 size_t tkach::getStrWithRemovedVowels(const char* str, char* str2)
 {
-  char* str2pointer = str2;
-  size_t amountofdeleted = 0;
-  for (size_t i = 0; str[i] != '\0'; ++i)
+  char* str_pointer2 = str2;
+  size_t amount_of_deleted = 0;
+  for (const char* str_pointer1 = str; (*str_pointer1) != '\0'; str_pointer1++)
   {
-    if (!isVowel((str + i)))
+    if (!isVowel(str_pointer1))
     {
-      *(str2pointer++) = str[i];
+      *(str_pointer2++) = *str_pointer1;
+    }
+    else
+    {
+      amount_of_deleted ++;
     }
   }
-  *(str2pointer) = '\0';
-  return amountofdeleted;
+  *(str_pointer2) = '\0';
+  return amount_of_deleted;
 }

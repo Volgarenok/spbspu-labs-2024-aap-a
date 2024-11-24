@@ -1,17 +1,16 @@
-#include "strfunc.h"
-#include <iostream>
+#include "stringinputwithmemoryaddition.h"
 
 char* tkach::getMemoryForStr(const char* str, size_t& capacity)
 {
-  capacity *= 2;
-  char* newStr = static_cast< char* >(malloc(sizeof(char) * capacity));
-  if (newStr == nullptr)
+  char* new_str = static_cast< char* >(malloc(capacity * 2));
+  if (new_str == nullptr)
   {
     return nullptr;
   }
+  capacity *= 2;
   for (size_t i = 0; str[i] != '\0'; ++i)
   {
-    newStr[i] = str[i];
+    new_str[i] = str[i];
   }
-  return newStr;
+  return new_str;
 }

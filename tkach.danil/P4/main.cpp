@@ -1,5 +1,5 @@
 #include <iostream>
-#include "strfunc.h"
+#include "stringinputwithmemoryaddition.h"
 #include "removevowels.h"
 
 int main()
@@ -23,16 +23,16 @@ int main()
     std::cerr << "Error: input error - empty str\n";
     return 1;
   }
-  char* str2 = reinterpret_cast< char* >(malloc(sizeof(char) * (capacity)));
-  if (str2 == nullptr)
+  char* str_with_removed_vowels = reinterpret_cast< char* >(malloc(capacity));
+  if (str_with_removed_vowels == nullptr)
   {
     free(str);
     std::cerr << "Error: not enough memory\n";
     return 1;
   }
-  tkach::getStrWithRemovedVowels(str, str2);
-  std::cout << str2 << "\n";
+  tkach::getStrWithRemovedVowels(str, str_with_removed_vowels);
+  std::cout << str_with_removed_vowels << "\n";
   free(str);
-  free(str2);
+  free(str_with_removed_vowels);
   return 0;
 }

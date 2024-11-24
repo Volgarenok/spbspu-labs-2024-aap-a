@@ -1,8 +1,8 @@
-#include "strfunc.h"
+#include "stringinputwithmemoryaddition.h"
 
 char* tkach::inputStr(std::istream& in, size_t& capacity)
 {
-  char* str = reinterpret_cast< char* >(malloc(sizeof(char) * (capacity)));
+  char* str = reinterpret_cast< char* >(malloc(capacity));
   if (str == nullptr)
   {
     return nullptr;
@@ -15,7 +15,7 @@ char* tkach::inputStr(std::istream& in, size_t& capacity)
     if (str_length + 1 == capacity)
     {
       str[str_length] = '\0';
-      char* newStr = tkach::getMemoryForStr(str, capacity);
+      char* newStr = getMemoryForStr(str, capacity);
       free(str);
       if (newStr == nullptr)
       {
