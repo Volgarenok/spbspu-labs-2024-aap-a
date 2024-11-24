@@ -11,12 +11,13 @@ int main()
   }
   catch(const std::bad_alloc& e)
   {
-    std::error << ("Bad output\n");
+    std::cerr << ("Bad output\n");
     free(second_line);
     return 1;
+  }
   if (second_line == nullptr)
   {
-    std::error << ("Bad output");
+    std::cerr << ("Bad output");
     free(second_line);
     return 1;
   }
