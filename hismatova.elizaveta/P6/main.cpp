@@ -21,4 +21,5 @@ int main()
     std::cout << "false\n";
   }
   free(str);
+  return 0;
 }
