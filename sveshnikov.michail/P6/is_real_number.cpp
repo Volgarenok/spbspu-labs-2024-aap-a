@@ -27,5 +27,9 @@ const char * isDigit(const char *str)
 
 const char * isSign(const char *str)
 {
-
+  if (!str)
+  {
+    return str;
+  }
+  return (*str == '+' || *str == '-') ? (str +1) : nullptr;
 }
