@@ -108,5 +108,4 @@ void smirnov::outputResult(std::ostream & output, int * matrix, size_t rows, siz
   output << rows << " " << columns << "\n";
   decrementSpiral(matrix, rows, columns);
   outputMatrix(output, matrix, rows, columns);
-  output << "\n";
 }
