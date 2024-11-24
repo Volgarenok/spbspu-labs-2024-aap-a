@@ -32,10 +32,12 @@ int main()
   catch (const std::bad_alloc &e)
   {
     std::cerr << "ERROR: BAD_ALLOC! " << e.what() << '\n';
+    delete[] new_str;
     delete[] str;
     return 1;
   }
   std::cout << sveshnikov::rep_sym(str, new_str) << "\n";
+  delete[] new_str;
   delete[] str;
   return 0;
 }
