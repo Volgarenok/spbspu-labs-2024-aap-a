@@ -50,7 +50,7 @@ int main(int argc, char **argv)
   {
     std::ofstream outfile(output_filename);
     outfile << "0" << "\n";
-    return 0;
+    return 1;
     std::cout << "0";
   }
 
