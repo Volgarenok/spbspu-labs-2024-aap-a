@@ -2,6 +2,7 @@
 #define CHECK_REAL_HPP
 namespace karnauhova
 {
+  const char * has_real(const char * str);
   const char * is_sign(const char * str);
   const char * is_unsigned_int(const char * str);
   const char * is_number(const char * str);

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 #include <input_string.hpp>
 #include "check_real.hpp"
 int main()
@@ -16,5 +17,6 @@ int main()
     free(t);
     return 1;
   }
-  std::cout << karnauhova::is_real(t) << "\n";
+  std::cout << std::boolalpha << karnauhova::is_real(t) << "\n";
+  free(t);
 }

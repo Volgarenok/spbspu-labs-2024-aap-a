@@ -5,7 +5,7 @@ const char * karnauhova::is_sign(const char * str)
 {
   if (!str)
   {
-    return str;
+    return nullptr;
   }
   return (*str == '+' || *str == '-') ? (str + 1) : nullptr;
 }
@@ -14,7 +14,7 @@ const char * karnauhova::is_number(const char * str)
 {
   if (!str)
   {
-    return str;
+    return nullptr;
   }
   return (std::isdigit(*str)) ? (str + 1) : nullptr;
 }
@@ -26,7 +26,11 @@ const char * karnauhova::is_unsigned_int(const char * str)
     return str;
   }
   auto next = karnauhova::is_number(str);
-  if (auto continues = karnauhova::is_unsigned_int(str))
+  if (!next)
+  {
+    return next;
+  }
+  if (auto continues = is_unsigned_int(next))
   {
     return continues;
   }
@@ -61,17 +65,17 @@ const char * karnauhova::is_mantis(const char * str)
   else
   {
     auto next = karnauhova::is_unsigned_int(str);
-    if (*next == '.')
+    if (next && *next == '.')
     {
-      next = karnauhova::is_unsigned_int(str);
-      return next;
+      next = karnauhova::is_unsigned_int(next + 1);
+      return next ? next : nullptr;
     }
     return next;
   }
   return nullptr;
 }
 
-bool karnauhova::is_real(const char * str)
+const char * karnauhova::has_real(const char * str)
 {
   if (!str)
   {
@@ -80,10 +84,24 @@ bool karnauhova::is_real(const char * str)
   if (auto next = karnauhova::is_sign(str))
   {
     next = karnauhova::is_mantis(next);
+    if (!next)
+    {
+      return next;
+    }
     next = karnauhova::is_manner(next);
-    return next && (*next == '\0');
+    return next;
   }
     auto next = karnauhova::is_mantis(str);
+    if (!next)
+    {
+      return next;
+    }
     next = karnauhova::is_manner(next);
-    return next && (*next == '\0');
+    return next;
+}
+
+bool karnauhova::is_real(const char * str)
+{
+  auto next = has_real(str);
+  return next && (*next == '\0');
 }
