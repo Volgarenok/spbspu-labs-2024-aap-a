@@ -42,7 +42,7 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  if (!(infile >> rows >> columns))
+  if (!(infile >> rows) || !(infile >> columns))
   {
     std::ofstream outfile(output_filename);
     outfile << "0" << "\n";
@@ -53,7 +53,7 @@ int main(int argc, char **argv)
 
   try
   {
-    size_t count_read = 0;
+    size_t count = 0;
     for (size_t i = 0; i < rows * columns; i++)
     {
       if (infile.eof())
@@ -67,12 +67,12 @@ int main(int argc, char **argv)
         delete[] matrix;
         return 1;
       }
-    count_read++;
+    count++;
     }
 
-  if (count_read != rows * columns)
+  if (count != rows * columns)
   {
-    std::cerr << "Expected " << (rows * columns) << " elements, but read only " << count_read << "\n";
+    std::cerr << "Expected " << (rows * columns) << " elements, but read only " << count << "\n";
     delete[] matrix;
     return 1;
   }
