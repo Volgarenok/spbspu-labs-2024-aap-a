@@ -2,10 +2,10 @@
 #include "pull.h"
 #include "resize.h"
 
-void lab::pull(char*& a, size_t& lenght)
+char* asafov::inputString(unsigned long long& lenght)
 {
-  size_t count = 8;
-  a = new char[count];
+  unsigned long long count = 8;
+  char* a = new char[count];
   char g = 0;
   while (!std::cin.eof())
   {
@@ -20,7 +20,8 @@ void lab::pull(char*& a, size_t& lenght)
     if (count == 0)
     {
       count = 8;
-      a = lab::resize(a, lenght);
+      a = asafov::resize(a, lenght);
     }
   }
+  return a;
 }

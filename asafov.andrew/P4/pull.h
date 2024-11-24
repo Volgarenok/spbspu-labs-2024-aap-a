@@ -2,9 +2,9 @@
 #define PULL_H
 #include <cstddef>
 
-namespace lab
+namespace asafov
 {
-  void pull(char*& a, size_t& lenght);
+  char* inputString(unsigned long long& lenght);
 }
 
 #endif
