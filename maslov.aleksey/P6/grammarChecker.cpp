@@ -17,11 +17,11 @@ const char * maslov::hasExpression(const char * str)
   if (nextMinus || nextPlus)
   {
     next++;
-  }
-  if (auto continues = hasExpression(next))
+    if (auto continues = hasExpression(next))
     {
       return continues;
     }
+  }
   return next;
 }
 const char * maslov::hasMultiplier(const char * str)
@@ -30,7 +30,16 @@ const char * maslov::hasMultiplier(const char * str)
   {
     return str;
   }
-  auto next = maslov::hasUnsignedInteger(str);
+  auto next = maslov::hasSymbol(str, '(');
+  if (next)
+  {
+    auto afterNext = maslov::hasExpression(next);
+    if (afterNext && maslov::hasSymbol(afterNext, ')'))
+    {
+      return afterNext + 1;
+    }
+  }
+  next = maslov::hasUnsignedInteger(str);
   if (next)
   {
     return next;
@@ -39,15 +48,6 @@ const char * maslov::hasMultiplier(const char * str)
   if (next)
   {
     return next;
-  }
-  next = maslov::hasSymbol(str, '(');
-  if (next)
-  {
-    auto afterNext = maslov::hasExpression(next);
-    if (afterNext && maslov::hasSymbol(afterNext, ')'))
-    {
-      return afterNext + 1;
-    }
   }
   return next;
 }
@@ -63,14 +63,19 @@ const char * maslov::hasTerm(const char * str)
     return next;
   }
   next = maslov::hasSymbol(str, '(');
-  next = maslov::hasMultiplier(next);
-  auto nextMultiplication = maslov::hasSymbol(next, '*');
-  auto nextDivision = maslov::hasSymbol(next, '/');
-  if (nextDivision || nextMultiplication)
+  if (next)
   {
-    next++;
+    next = maslov::hasMultiplier(next);
+    auto nextMultiplication = maslov::hasSymbol(next, '*');
+    auto nextDivision = maslov::hasSymbol(next, '/');
+    if (nextDivision || nextMultiplication)
+    {
+      next++;
+    }
+    next = maslov::hasTerm(next);
+    next = maslov::hasSymbol(next, ')');
+    return next;
   }
-  next = maslov::hasSymbol(str, ')');
   return next;
 }
 const char * maslov::hasIdentifier(const char * str)
