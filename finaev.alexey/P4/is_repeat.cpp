@@ -1,6 +1,6 @@
 #include "string_conversion.h"
 
-int finaev::isRepeat(const char* str)
+int finaev::checkRepeat(const char* str)
 {
   const char* str_ptr1 = str;
   const char* str_ptr2 = nullptr;

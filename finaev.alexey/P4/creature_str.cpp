@@ -2,16 +2,10 @@
 #include <cstdlib>
 #include <cstddef>
 
-char* finaev::creatureStr(size_t capacity)
-{
-  char* str = reinterpret_cast< char* >(malloc((capacity + 1) * sizeof(char)));
-  return str;
-}
-
 char* finaev::fillStr(std::istream& in)
 {
   size_t capacity = 10;
-  char* str = finaev::creatureStr(capacity);
+  char* str = reinterpret_cast< char* >(malloc((capacity + 1) * sizeof(char)));
   if (str == nullptr)
   {
     return nullptr;
@@ -24,7 +18,7 @@ char* finaev::fillStr(std::istream& in)
     if (length == capacity)
     {
       capacity *= 2;
-      char* new_str = finaev::creatureStr(capacity);
+      char* new_str = reinterpret_cast< char* >(malloc((capacity + 1) * sizeof(char)));
       if (new_str == nullptr)
       {
         free(str);

@@ -17,8 +17,6 @@ int main()
     std::cerr << "empty string!\n";
     return 1;
   }
-  int res = 2;
-  res = finaev::isRepeat(str);
-  std::cout << res << "\n";
+  std::cout << finaev::checkRepeat(str) << "\n";
   free(str);
 }
