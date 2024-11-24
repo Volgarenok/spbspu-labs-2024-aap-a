@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <getline.hpp>
 #include "search_repeats.hpp"
 
 int main()

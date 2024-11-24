@@ -1,4 +1,5 @@
 #include "search_repeats.hpp"
+#include <cstddef>
 
 char *sveshnikov::rep_sym(const char *str, char *new_str)
 {
