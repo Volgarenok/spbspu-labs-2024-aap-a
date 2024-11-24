@@ -39,6 +39,7 @@ char* karnauhova::input_string(std::istream& in, char end)
     }
     str[i] = x;
     i++;
+    str[i+1] = '\0';
   }
   std::skipws(in);
   return str;
