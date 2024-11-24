@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "workWithString.hpp"
+#include <workWithString.hpp>
 
 int main()
 {
