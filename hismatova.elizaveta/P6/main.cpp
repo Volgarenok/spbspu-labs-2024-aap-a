@@ -11,6 +11,11 @@ int main()
     std::cerr << "get line failed!\n";
     return 1;
   }
+  if (str == nullptr)
+  {
+    std::cerr << "no string\n";
+    return 1;
+  }
   size_t position = 0;
   if (hismatova::isValidString(str, position) && position == std::strlen(str))
   {
