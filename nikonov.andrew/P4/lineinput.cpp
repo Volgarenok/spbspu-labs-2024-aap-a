@@ -61,7 +61,6 @@ char* nikonov::reallocate(char* line, size_t& capacity, int addSizeOptional)
     *(newline + newcnt) = *(line + newcnt);
     ++newcnt;
   }
-  
   for (size_t i = newcnt; i < tempCapacity; ++i)
   {
     *(newline + i) = '\0';
