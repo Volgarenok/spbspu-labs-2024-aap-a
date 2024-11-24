@@ -5,6 +5,11 @@
 int main()
 {
   char *str = nullptr;
+  if (std::cin.eof())
+  {
+    std::cerr << "Empty input\n";
+    return 1;
+  }
   try
   {
     str = abramov::getStr(std::cin);
