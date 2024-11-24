@@ -37,7 +37,7 @@ const char* hismatova::isMultiplier(const char* str, size_t& position)
   const char* result = isUnsignedInt(str, position);
   if (result == nullptr)
   {
-    result = isIdentificator(str);
+    result = isIdentificator(str, position);
   }
   return result;
 }
@@ -45,7 +45,8 @@ const char* hismatova::isUnsignedInt(const char* str, size_t& position)
 {
   if (isDigit(str[position]))
   {
-    while (isDigit(str[position]))
+    position++;
+    while (str[position] && isDigit(str[position]))
     {
       position++;
     }
@@ -53,10 +54,11 @@ const char* hismatova::isUnsignedInt(const char* str, size_t& position)
   }
   return nullptr;
 }
-const char* hismatova::isIdentificator(const char* str)
+const char* hismatova::isIdentificator(const char* str, size_t& position)
 {
-  if (isLetter(str[0]))
+  if (isLetter(str[position]))
   {
+    position++;
     return str;
   }
   return nullptr;
