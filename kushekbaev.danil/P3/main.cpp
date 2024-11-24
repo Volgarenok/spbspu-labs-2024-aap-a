@@ -50,7 +50,15 @@ int main(int argc, char **argv)
   {
     std::ofstream outfile(output_filename);
     outfile << "0" << "\n";
-    return 1;
+    return 0;
+    std::cout << "0";
+  }
+
+  if (rows == 0 || columns == 0)
+  {
+    std::ofstream outfile(output_filename);
+    outfile << "0" << "\n";
+    return 0;
     std::cout << "0";
   }
 
