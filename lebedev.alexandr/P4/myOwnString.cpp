@@ -1,8 +1,7 @@
 #include "myOwnString.hpp"
 
-char* lebedev::getLine(std::istream& in, char endChar)
+char* lebedev::getLine(std::istream& in, size_t& capacity, char endChar)
 {
-  size_t capacity = 10;
   char* str = new char[capacity];
   size_t i = 0;
   char ch;
@@ -37,29 +36,28 @@ char* lebedev::getLine(std::istream& in, char endChar)
   return str;
 }
 
-void lebedev::removeVowels(char* str)
+bool lebedev::isVowel(const char c)
 {
-  int i = 0, j = 0;
   const char vowels[] = "aeiouAEIOU";
-
-  while (str[i] != '\0')
+  for (size_t i = 0; vowels[i] != '\0'; ++i)
   {
-    bool isVowel = false;
-    for (int k = 0; vowels[k] != '\0'; ++k)
+    if (c == vowels[i])
     {
-      if (str[i] == vowels[k])
-      {
-        isVowel = true;
-        break;
-      }
+      return true;
     }
-
-    if (!isVowel)
-    {
-      str[j++] = str[i];
-    }
-    i++;
   }
+  return false;
+}
 
-  str[j] = '\0';
+void lebedev::removeVowels(const char* str, char* str_without_vowels)
+{
+  char* pointer2 = str_without_vowels;
+  for (const char* pointer1 = str; (*pointer1) != '\0'; pointer1++)
+  {
+    if (!isVowel(*pointer1))
+    {
+      *(pointer2++) = *pointer1;
+    }
+  }
+  *pointer2 = '\0';
 }
