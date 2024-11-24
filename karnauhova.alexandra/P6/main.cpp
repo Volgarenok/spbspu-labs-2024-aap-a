@@ -16,5 +16,5 @@ int main()
     free(t);
     return 1;
   }
-  std::cout << (karnauhova::is_real(t) != nullptr) << "\n";
+  std::cout << karnauhova::is_real(t) << "\n";
 }
