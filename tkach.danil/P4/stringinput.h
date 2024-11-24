@@ -1,5 +1,5 @@
-#ifndef STRINGINPUTWITHMEMORYADDITION_H
-#define STRINGINPUTWITHMEMORYADDITION_H
+#ifndef STRINGINPUT_H
+#define STRINGINPUT_H
 
 #include <cstddef>
 #include <fstream>
