@@ -22,11 +22,12 @@ char * petrov::inputCString(std::istream & in, size_t & capacity)
   }
   string[1] = '\0';
   size_t i = 2;
+  char * temp_string = nullptr;
   try
   {
     while (string[i - 2] != '\n')
     {
-      char * temp_string = new char[++i];
+      temp_string = new char[++i];
       size_t j = 0;
       while (string[j] != '\0')
       {
@@ -34,10 +35,8 @@ char * petrov::inputCString(std::istream & in, size_t & capacity)
         j++;
       }
       temp_string[j] = '\0';
-      if (i == 3)
       delete[] string;
       string = temp_string;
-      temp_string = nullptr;
       in >> string[i - 2];
       string[i - 1] = '\0';
       if ((i - 1) > capacity)
