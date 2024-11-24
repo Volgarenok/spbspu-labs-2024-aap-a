@@ -10,9 +10,8 @@ int main()
     std::cerr << "Failed to read input string\n";
     return 1;
   }
-  char* result = zholobov::exc_snd(str, exclude_characters);
+  char* result = zholobov::exc_snd(str, str, exclude_characters);
   std::cout << result << "\n";
-  std::free(result);
   std::free(str);
   return 0;
 }
