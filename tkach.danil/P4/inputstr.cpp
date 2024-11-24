@@ -1,4 +1,4 @@
-#include "stringinputwithmemoryaddition.h"
+#include "stringinput.h"
 
 char* tkach::inputStr(std::istream& in, size_t& capacity)
 {
@@ -10,7 +10,7 @@ char* tkach::inputStr(std::istream& in, size_t& capacity)
   size_t str_length = 0;
   char symbol = '\0';
   in >> std::noskipws;
-  while(in >> symbol && symbol != '\n')
+  while (in >> symbol && symbol != '\n')
   {
     if (str_length + 1 == capacity)
     {

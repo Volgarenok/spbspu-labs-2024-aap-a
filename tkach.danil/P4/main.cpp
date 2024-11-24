@@ -1,5 +1,5 @@
 #include <iostream>
-#include "stringinputwithmemoryaddition.h"
+#include "stringinput.h"
 #include "removevowels.h"
 
 int main()
