@@ -42,7 +42,7 @@ char * petrov::inputCString(char * string, size_t & capacity)
       if ((i - 1) > capacity)
       {
         capacity++;
-      } 
+      }
       if (std::cin.eof())
       {
         std::cout << "\n";
