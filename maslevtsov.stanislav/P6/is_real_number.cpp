@@ -49,10 +49,9 @@ const char* maslevtsov::hasOrder(const char* str)
     return str;
   }
   auto next = hasSymbol(str, 'E');
-  next = hasSign(next);
-  if (next)
+  if (auto signCheck = hasSign(next))
   {
-    return hasUnsignedInt(next);
+    return hasUnsignedInt(signCheck);
   }
   return hasUnsignedInt(next);
 }
@@ -74,16 +73,13 @@ const char* maslevtsov::hasRealNumber(const char* str)
   {
     return str;
   }
-  if (auto next = hasSign(str))
+  if (auto signCheck = hasSign(str))
   {
-    next = hasMantissa(next);
+    auto next = hasMantissa(signCheck);
     return hasOrder(next);
   }
-  else
-  {
-    next = hasMantissa(next);
-    return hasOrder(next);
-  }
+  auto next = hasMantissa(str);
+  return hasOrder(next);
 }
 
 bool maslevtsov::isRealNumber(const char* str)
