@@ -15,7 +15,7 @@ int* asafov::initializationMatrixDynamic(std::istream& in, unsigned long long& n
   for (size_t i = 0; i < n * m; i++) {
     in >> mtx[i];
     if (in.fail() || in.eof()) {
-      delete mtx[];
+      delete[] mtx;
       throw std::logic_error("err");
     }
   }
