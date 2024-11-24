@@ -2,12 +2,12 @@
 
 const char * zakirov::compare_literals(const char * line, char literal)
 {
-	  if (!line)
-  	{
-    	return line;
-  	}
+	if (!line)
+  {
+    return line;
+  }
 
-		return (* line == literal) ? (line + 1) : nullptr;
+	return (* line == literal) ? (line + 1) : nullptr;
 }
 
 const char * zakirov::check_sign(const char * line)
@@ -32,7 +32,7 @@ const char * zakirov::check_integer(const char * line)
 	if (!line)
   {
     return line;
-  }
+	}
 
 	return (* line >= '0' && * line <= '9') ? (line + 1) : nullptr;
 }
