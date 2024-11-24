@@ -6,7 +6,7 @@
 int main()
 {
   char* str = nullptr;
-  if (hismatova::getLine(&str))
+  if (hismatova::get_line(&str))
   {
     std::cerr << "get line failed!\n";
     return 1;

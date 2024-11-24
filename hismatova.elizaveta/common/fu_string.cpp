@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <cstring>
 
-int hismatova::getLine(char** str)
+int hismatova::get_line(char** str)
 {
   size_t n = 256;
   *str = reinterpret_cast<char*>(malloc(sizeof(char) * n));

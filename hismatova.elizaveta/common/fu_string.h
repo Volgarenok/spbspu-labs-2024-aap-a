@@ -4,7 +4,7 @@
 
 namespace hismatova
 {
-  int getLine(char** str);
+  int get_line(char** str);
 }
 
 #endif
