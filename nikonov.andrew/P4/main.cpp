@@ -13,7 +13,7 @@ int main()
     return 1;
   }
   char secondLine[] = "50ftw34r_3n8in33r1n8\0";
-  firstLine = nikonov::reallocate(firstLine, capacity);
+  firstLine = nikonov::reallocate(firstLine, capacity, 10);
   if (!firstLine)
   {
     std::cerr << "ERROR: bad alloc\n";
