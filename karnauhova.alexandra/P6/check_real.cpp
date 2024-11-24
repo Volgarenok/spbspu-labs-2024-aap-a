@@ -3,18 +3,18 @@
 
 const char * karnauhova::is_sign(const char * str)
 {
-  if (!str)
+  if (!str || *str == '\0')
   {
-    return str;
+    return nullptr;
   }
   return (*str == '+' || *str == '-') ? (str + 1) : nullptr;
 }
 
 const char * karnauhova::is_number(const char * str)
 {
-  if (!str)
+  if (!str|| *str == '\0')
   {
-    return str;
+    return nullptr;
   }
   return (std::isdigit(*str)) ? (str + 1) : nullptr;
 }
