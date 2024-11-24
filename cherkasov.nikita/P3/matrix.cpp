@@ -60,14 +60,14 @@ int cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, boo
     return 1;
   }
 
-  if (createMatrix(rows, cols, matrix) != 0)
+  if (cherkasov::createMatrix(rows, cols, matrix) != 0)
   {
     return 1;
   }
 
-  if (fillMatrix(inFile, rows, cols, *matrix) != 0)
+  if (cherkasov::fillMatrix(inFile, rows, cols, *matrix) != 0)
   {
-    freeMatrix(*matrix, rows);
+    cherkasov::freeMatrix(*matrix, rows);
     return 1;
   }
 
