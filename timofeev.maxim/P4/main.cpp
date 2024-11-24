@@ -10,12 +10,6 @@ int main()
     free(second_line);
     return 1;
   }
-  if (second_line[0] == '\0')
-  {
-    std::cerr << "Empty input";
-    free(second_line);
-    return 1;
-  }
   std::cout << timofeev::same_symbols(first_line, second_line);
   free(second_line);
 }
