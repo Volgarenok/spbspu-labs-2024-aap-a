@@ -24,10 +24,11 @@ int main()
   line[0] = last_symbol;
   while (last_symbol != '\0')
   {
-    zakirov::expand_line(line, finish, step);
-    if (line == nullptr)
+    char * expanded_line = zakirov::expand_line(line, finish, step);
+    if (expanded_line == nullptr)
     {
       std::cerr << "ERROR: Out of memory" << '\n';
+      free(line);
       return 1;
     }
 
@@ -35,8 +36,9 @@ int main()
     zakirov::get_line(std::cin, line, start, finish);
     start += step;
     last_symbol = line[finish - 1];
+    line = expanded_line;
   }
-
+  
   zakirov::change_line(line);
   size_t location = 0;
   while (line[location] != '\0')
