@@ -8,6 +8,7 @@ char * petrov::inputCString(char * string, size_t & capacity)
   try
   {
     string = new char[2];
+    string[0] = '0';
     std::cin >> string[0];
     if (string[0] == '\n' || std::cin.eof())
     {
