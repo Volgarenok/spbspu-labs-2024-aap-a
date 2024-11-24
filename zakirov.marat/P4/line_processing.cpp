@@ -45,12 +45,12 @@ void zakirov::change_line(char * line)
 {
   char alphabet[52];
   size_t location = 0;
-  for (char i = 65; i < 91; ++i)
+  for (char i = 'A'; i <= 'Z'; ++i)
   {
     alphabet[location] = i;
     location += 1;
   }
-  for (char i = 97; i < 123; ++i)
+  for (char i = 'a'; i <= 'z'; ++i)
   {
     alphabet[location] = i;
     location += 1;
