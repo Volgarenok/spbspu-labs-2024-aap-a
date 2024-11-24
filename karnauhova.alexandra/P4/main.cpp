@@ -1,6 +1,6 @@
 #include <iostream>
+#include <input_string.hpp>
 #include "dubl_char.hpp"
-#include "input_string.hpp"
 
 int main()
 {
