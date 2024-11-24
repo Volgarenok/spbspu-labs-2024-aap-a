@@ -2,12 +2,18 @@
 #include <fstream>
 #include <stdexcept>
 #include "fileIO.hpp"
-#include "matrixUtils.hpp"
+#include "matrixTransform.hpp"
+
+using namespace belobrov;
+void processMatrix(std::istream& inputFile, const char* outputFile, int* matrix, size_t rows, size_t cols)
+{
+  loadMatrix(inputFile, matrix, rows, cols);
+  transformMatrix(matrix, rows, cols);
+  saveMatrix(outputFile, matrix, rows, cols);
+}
 
 int main(int argc, char** argv)
 {
-  using namespace belobrov;
-
   if (argc != 4) {
     std::cerr << "Incorrect number of arguments\n";
     return 1;
@@ -58,14 +64,10 @@ int main(int argc, char** argv)
   try {
     if (mode == 1) {
       int fixedMatrix[10000];
-      loadMatrix(inputFile, fixedMatrix, rows, cols);
-      transformMatrix(fixedMatrix, rows, cols);
-      saveMatrix(argv[3], fixedMatrix, rows, cols);
+      processMatrix(inputFile, argv[3], fixedMatrix, rows, cols);
     } else {
       matrix = new int[rows * cols];
-      loadMatrix(inputFile, matrix, rows, cols);
-      transformMatrix(matrix, rows, cols);
-      saveMatrix(argv[3], matrix, rows, cols);
+      processMatrix(inputFile, argv[3], fixedMatrix, rows, cols);
       delete[] matrix;
     }
   } catch (const std::bad_alloc&) {
