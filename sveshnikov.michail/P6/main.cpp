@@ -1,11 +1,7 @@
 #include <iostream>
 #include <ios>
 #include <getline.hpp>
-
-bool isRealNumber(const char *str)
-{
-  
-}
+#include "is_real_number.hpp"
 
 int main()
 {
@@ -25,5 +21,5 @@ int main()
     delete[] str;
     return 1;
   }
-  std::cout << std::boolalpha << isRealNumber(str) << "\n";
+  std::cout << std::boolalpha << sveshnikov::isRealNumber(str) << "\n";
 }
