@@ -5,11 +5,6 @@
 int main()
 {
   char *str = nullptr;
-  if (std::cin.eof())
-  {
-    std::cerr << "Empty input\n";
-    return 1;
-  }
   try
   {
     str = abramov::getStr(std::cin);
@@ -27,6 +22,7 @@ int main()
   if (str[0]=='\0')
   {
     std::cerr << "Empty input";
+    delete[] str;
     return 1;
   }
   std::cout << std::boolalpha << abramov::isReal(str) << "\n";
