@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <resize_line.hpp>
 #include "line_processing.hpp"
 
 int main()
