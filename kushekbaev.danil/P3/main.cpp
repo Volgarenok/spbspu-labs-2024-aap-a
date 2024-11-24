@@ -21,21 +21,6 @@ int main(int argc, char **argv)
   {
     std::cerr << "Error while opening input file" << "\n";
     return 1;
-    std::cout << "infile error";
-  }
-
-  if (infile.eof())
-  {
-    std::cerr << "Not enough elements in file" << "\n";
-    return 1;
-    std::cout << "infile eof";
-  }
-
-  if (infile.fail())
-  {
-    std::cerr << "Failed input" << "\n";
-    return 1;
-    std::cout << "infile fail";
   }
 
   char ch = 0;
@@ -43,15 +28,12 @@ int main(int argc, char **argv)
   {
     std::cerr << "Input file is empty" << "\n";
     return 1;
-    std::cout << "empty file";
   }
 
   if (!(infile >> rows) || !(infile >> columns))
   {
-    std::ofstream outfile(output_filename);
-    outfile << "0" << "\n";
-    return 0;
-    std::cout << "0";
+    std::cerr << "Not enough elements in file to read rows and columns" << "\n";
+    return 1;
   }
 
   if (rows == 0 || columns == 0)
@@ -59,12 +41,11 @@ int main(int argc, char **argv)
     std::ofstream outfile(output_filename);
     outfile << "0" << "\n";
     return 0;
-    std::cout << "0";
   }
 
-  int* matrix = new int [rows * columns]();
-
+  int* matrix = new int[rows * columns]();
   size_t count = 0;
+
   for (size_t row = 0; row < rows; row++)
   {
     for (size_t col = 0; col < columns; col++)
@@ -72,17 +53,16 @@ int main(int argc, char **argv)
       if (!(infile >> matrix[count]))
       {
         std::cerr << "Not enough elements in file at row " << row << ", column " << col << "\n";
-        std::cout << "Not enough elements in file at row " << row << ", column " << col << "\n";
         delete[] matrix;
         return 1;
       }
       count++;
     }
   }
+
   if (count != (rows * columns))
   {
     std::cerr << "Expected " << (rows * columns) << " elements, but read only " << count << "\n";
-    std::cout << "EXPECT THE UNEXPECTABLE";
     delete[] matrix;
     return 1;
   }
@@ -99,6 +79,5 @@ int main(int argc, char **argv)
   outfile << saddle_points << "\n";
 
   delete[] matrix;
-  std::cout << "good";
   return 0;
 }
