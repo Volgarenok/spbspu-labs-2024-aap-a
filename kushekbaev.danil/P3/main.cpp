@@ -63,12 +63,27 @@ int main(int argc, char **argv)
     {
       std::cerr << "Not enough elements in file" << "\n";
       std::cout << "not enough elements in file";
-      break;
+      delete[] matrix;
+      return 1;
+    }
+    if (infile.bad())
+    {
+      std::cerr << "Bad input";
+      std::cout << "Bad";
+      delete[] matrix;
+      return 1;
+    }
+    if (infile.fail())
+    {
+      std::cerr << "Fail input";
+      std::cout << "Fail";
+      delete[] matrix;
+      return 1;
     }
   count++;
   }
 
-  if (count != rows * columns)
+  if (count != (rows * columns))
   {
     std::cerr << "Expected " << (rows * columns) << " elements, but read only " << count << "\n";
     std::cout << "EXPECT THE UNEXPECTABLE";
