@@ -22,7 +22,7 @@ int main()
     return 1;
   }
 
-  std::cout << maslevtsov::isRealNumber(dynamicString);
+  std::cout << std::boolalpha << maslevtsov::isRealNumber(dynamicString);
   std::cout << '\n';
 
   delete[] dynamicString;
