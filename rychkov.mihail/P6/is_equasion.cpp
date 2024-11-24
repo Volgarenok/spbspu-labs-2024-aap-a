@@ -1,11 +1,11 @@
 #include "is_equasion.hpp"
 
-bool isEquasion(const char* str)
+bool rychkov::isEquasion(const char* str)
 {
   return skipEquasion(&str) && (*str == '\0');
 }
 
-bool skipEquasion(const char** str)
+bool rychkov::skipEquasion(const char** str)
 {
   if (skipMultiplicationEquasion(str))
   {
@@ -23,7 +23,7 @@ bool skipEquasion(const char** str)
   return false;
 }
 
-bool skipMultiplicationEquasion(const char** str)
+bool rychkov::skipMultiplicationEquasion(const char** str)
 {
   const char* temp = *str;
   if ((*(temp++) == '(') && skipMultiplier(&temp) && (*(temp++) == '+')
@@ -48,7 +48,7 @@ bool skipMultiplicationEquasion(const char** str)
   return false;
 }
 
-bool skipMultiplier(const char** str)
+bool rychkov::skipMultiplier(const char** str)
 {
   const char* temp = *str;
   if ((*(temp++) == '(') && skipEquasion(&temp) && (*(temp++) == ')'))
@@ -59,11 +59,11 @@ bool skipMultiplier(const char** str)
   return skipUnsignedInt(str) || skipVariable(str);
 }
 
-bool skipVariable(const char** str)
+bool rychkov::skipVariable(const char** str)
 {
   return skipVariableLiteral(str);
 }
-bool skipVariableLiteral(const char** str)
+bool rychkov::skipVariableLiteral(const char** str)
 {
   if ((**str == 'x') || (**str == 'y') || (**str == 'y'))
   {
@@ -73,7 +73,7 @@ bool skipVariableLiteral(const char** str)
   return false;
 }
 
-bool skipUnsignedInt(const char** str)
+bool rychkov::skipUnsignedInt(const char** str)
 {
   if (skipBinaryDigit(str))
   {
@@ -82,7 +82,7 @@ bool skipUnsignedInt(const char** str)
   }
   return false;
 }
-bool skipBinaryDigit(const char** str)
+bool rychkov::skipBinaryDigit(const char** str)
 {
   if ((**str == '0') || (**str == '1'))
   {
