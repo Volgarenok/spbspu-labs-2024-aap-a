@@ -1,6 +1,14 @@
-#include "string_conversion.h"
+#include "create_str.h"
 #include <cstdlib>
 #include <cstddef>
+
+void finaev::transferStr(char* new_str, const char* str, size_t length)
+{
+  for (size_t i = 0; i < length; i++)
+  {
+    new_str[i] = str[i];
+  }
+}
 
 char* finaev::fillStr(std::istream& in)
 {
