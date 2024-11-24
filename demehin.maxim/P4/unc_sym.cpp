@@ -1,6 +1,6 @@
 #include "unc_sym.h"
 
-void demehin::getUniqueSymbols(const char* str, char* ustr)
+void getUniqueSymbols(const char* str, char* ustr)
 {
   char* orig_ustr = ustr;
   while (*(str) != '\0')
