@@ -14,6 +14,7 @@ int main()
   if (str == nullptr || std::strlen(str) == 0)
   {
     std::cerr << "no string\n";
+    free(str);
     return 1;
   }
   size_t position = 0;
