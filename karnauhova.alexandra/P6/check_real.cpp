@@ -42,10 +42,6 @@ const char * karnauhova::is_manner(const char * str)
   if (*str == 'E')
   {
     const char * next = karnauhova::is_sign((str + 1));
-    if (!next)
-    {
-      return nullptr;
-    }
     next = karnauhova::is_unsigned_int(next);
     return next;
   }
@@ -84,18 +80,10 @@ const char * karnauhova::has_real(const char * str)
   if (const char * next = karnauhova::is_sign(str))
   {
     next = karnauhova::is_mantis(next);
-    if (!next)
-    {
-      return nullptr;
-    }
     next = karnauhova::is_manner(next);
     return next;
   }
     const char * next = karnauhova::is_mantis(str);
-    if (!next)
-    {
-      return nullptr;
-    }
     next = karnauhova::is_manner(next);
     return next;
 }
