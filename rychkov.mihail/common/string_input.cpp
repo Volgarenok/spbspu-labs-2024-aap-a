@@ -14,6 +14,12 @@ std::istream& rychkov::getline(std::istream& inpStream, char* buf, size_t bufLen
     if (!(inpStream >> buf[i]) || (buf[i] == endChar))
     {
       inpStream.flags(savedInpStreamState);
+      if (inpStream.eof())
+      {
+        inpStream.clear();
+        inpStream.setstate(std::ios_base::eofbit);
+      }
+
       buf[i] = '\0';
       if (wereRead)
       {
