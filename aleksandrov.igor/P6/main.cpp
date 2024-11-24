@@ -23,6 +23,6 @@ int main()
     delete[] str;
     return 1;
   }
-  std::cout << aleksandrov::isFloatLiteral(str) << "\n";
+  std::cout << std::boolalpha << aleksandrov::isFloatLiteral(str) << "\n";
   delete[] str;
 }
