@@ -92,19 +92,21 @@ void smirnov::outputMatrix(std::ostream & output, const int * matrix, size_t row
   }
   else
   {
-    output << matrix[0];
-    for (size_t i = 1; i < rows * columns; ++i)
-    {
-      output << " " << matrix[i];
+    for (size_t i = 0; i < rows; ++i) {
+      output << matrix[i * columns];
+      for (size_t j = 1; j < columns; ++j) {
+        output << " " << matrix[i * columns + j];
+      }
+      output << "\n";
     }
   }
 }
 
 void smirnov::outputResult(std::ostream & output, int * matrix, size_t rows, size_t columns)
 {
-  output << std::boolalpha << smirnov::checkLowerTriangularMatrix(matrix, rows, columns) << "\n";
-  output << rows << " " << columns << " ";
-  smirnov::decrementSpiral(matrix, rows, columns);
-  smirnov::outputMatrix(output, matrix, rows, columns);
+  output << std::boolalpha << checkLowerTriangularMatrix(matrix, rows, columns) << "\n";
+  output << rows << " " << columns << "\n";
+  decrementSpiral(matrix, rows, columns);
+  outputMatrix(output, matrix, rows, columns);
   output << "\n";
 }
