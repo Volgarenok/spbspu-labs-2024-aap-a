@@ -1,19 +1,30 @@
-#include "is_equasion.hpp"
+#include "is_polinomial.hpp"
 
-bool rychkov::isEquasion(const char* str)
+namespace rychkov
 {
-  return skipEquasion(&str) && (*str == '\0');
+  bool skipPolinomial(const char** str);
+  bool skipMultiplicationPolinomial(const char** str);
+  bool skipMultiplier(const char** str);
+  bool skipVariable(const char** str);
+  bool skipVariableLiteral(const char** str);
+  bool skipUnsignedInt(const char** str);
+  bool skipBinaryDigit(const char** str);
 }
 
-bool rychkov::skipEquasion(const char** str)
+bool rychkov::isPolinomial(const char* str)
 {
-  if (skipMultiplicationEquasion(str))
+  return skipPolinomial(&str) && (*str == '\0');
+}
+
+bool rychkov::skipPolinomial(const char** str)
+{
+  if (skipMultiplicationPolinomial(str))
   {
     const char* temp = *str;
     if ((*temp == '+') || (*temp == '-'))
     {
       temp++;
-      if (skipEquasion(&temp))
+      if (skipPolinomial(&temp))
       {
         *str = temp;
       }
@@ -23,11 +34,11 @@ bool rychkov::skipEquasion(const char** str)
   return false;
 }
 
-bool rychkov::skipMultiplicationEquasion(const char** str)
+bool rychkov::skipMultiplicationPolinomial(const char** str)
 {
   const char* temp = *str;
   if ((*(temp++) == '(') && skipMultiplier(&temp) && (*(temp++) == '+')
-      && skipMultiplicationEquasion(&temp) && (*(temp++) == ')'))
+      && skipMultiplicationPolinomial(&temp) && (*(temp++) == ')'))
   {
     *str = temp;
     return true;
@@ -38,7 +49,7 @@ bool rychkov::skipMultiplicationEquasion(const char** str)
     if (**str == '*')
     {
       temp = *str + 1;
-      if (skipMultiplicationEquasion(&temp))
+      if (skipMultiplicationPolinomial(&temp))
       {
         *str = temp;
       }
@@ -51,7 +62,7 @@ bool rychkov::skipMultiplicationEquasion(const char** str)
 bool rychkov::skipMultiplier(const char** str)
 {
   const char* temp = *str;
-  if ((*(temp++) == '(') && skipEquasion(&temp) && (*(temp++) == ')'))
+  if ((*(temp++) == '(') && skipPolinomial(&temp) && (*(temp++) == ')'))
   {
     *str = temp;
     return true;
@@ -65,7 +76,7 @@ bool rychkov::skipVariable(const char** str)
 }
 bool rychkov::skipVariableLiteral(const char** str)
 {
-  if ((**str == 'x') || (**str == 'y') || (**str == 'y'))
+  if ((**str == 'x') || (**str == 'y') || (**str == 'z'))
   {
     (*str)++;
     return true;

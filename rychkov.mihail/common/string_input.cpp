@@ -54,7 +54,7 @@ char* rychkov::getline(std::istream& inpStream, char endChar, size_t* wereRead)
   }
 
   size_t wPoint = 0;
-  while (rychkov::getline(std::cin, str + wPoint, strLength - wPoint, '\n', wereRead)
+  while (rychkov::getline(std::cin, str + wPoint, strLength - wPoint, endChar, wereRead)
       && (*wereRead == strLength - wPoint - 1))
   {
     wPoint = strLength - 1;

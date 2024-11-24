@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include <memf.hpp>
 #include <string_input.hpp>
 
 #include "string_analysis.hpp"
@@ -15,15 +14,9 @@ int main()
     free(str);
     return 1;
   }
-  if (std::cin.eof())
-  {
-    std::cerr << "there is no input string\n";
-    free(str);
-    return 1;
-  }
   if (*str == '\0')
   {
-    std::cerr << "Input string is empty\n";
+    std::cerr << "There is no input string\n";
     free(str);
     return 1;
   }
