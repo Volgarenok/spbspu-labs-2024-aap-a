@@ -93,6 +93,10 @@ const char * karnauhova::has_real(const char * str)
 
 bool karnauhova::is_real(const char * str)
 {
+   if (!str)
+  {
+    return false;
+  }
   const char * next = has_real(str);
   return next && (*next == '\0');
 }
