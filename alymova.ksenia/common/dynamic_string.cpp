@@ -2,7 +2,6 @@
 #include <istream>
 #include <cstddef>
 #include <cstdlib>
-#include <iomanip>
 char* alymova::copy_string(const char* str, size_t end, char* str_new)
 {
   char* ptr_new = str_new;
