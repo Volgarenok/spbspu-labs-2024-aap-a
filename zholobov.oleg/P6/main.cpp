@@ -11,6 +11,7 @@ int main()
   }
   if (*str == '\0') {
     std::cerr << "Empty string was entered\n";
+    std::free(str);
     return 1;
   }
   std::cout << std::boolalpha << zholobov::is_match_pattern(str) << "\n";
