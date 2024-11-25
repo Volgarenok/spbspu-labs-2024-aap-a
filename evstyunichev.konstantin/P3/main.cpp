@@ -19,9 +19,9 @@ int main(int argc, char **argv)
   std::ofstream fout(argv[3]);
   size_t n = 0, m = 0;
   fin >> n >> m;
-  if (!fin)
+  if (fin.fail())
   {
-    std::cout << "((\n";
+    std::cerr << "fail\n";
     return 1;
   }
   int p = 0;
@@ -56,11 +56,6 @@ int main(int argc, char **argv)
   if (evstyunichev::Input(fin, arr, n, m, read) && (read == n * m) && (read))
   {
     fout << evstyunichev::CntRowsNsm(arr, n, m) << "\n";
-  }
-  else
-  {
-    delete[] d_arr;
-    return 2;
   }
   delete[] d_arr;
   return 0;
