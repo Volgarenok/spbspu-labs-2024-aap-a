@@ -8,7 +8,8 @@
     {
       for (j = 1; j < (n - 1); ++j)
       {
-        if (matrix[i * n + j] < matrix[i * n + j - 1] && matrix[i * n +j] < matrix[i * n + j + 1] && matrix[i * n + j] < matrix[(i - 1) * n + j] && matrix[i * n + j] < matrix[(i + 1) * n + j])
+        size_t t = i * n + j;
+        if (matrix[t] < matrix[t - 1] && matrix[t] < matrix[t + 1] && matrix[t] < matrix[t - n] && matrix[t] < matrix[t + n])
         {
           ++num;
         }
