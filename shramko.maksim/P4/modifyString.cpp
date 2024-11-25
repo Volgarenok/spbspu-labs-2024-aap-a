@@ -52,6 +52,7 @@ char* shramko::inputStr(std::istream& in)
     {
       constexpr size_t multiplier = 2;
       memory *= multiplier;
+      str[currentSize] = '\0';
       char* new_str = shramko::createBiggerStrMemory(memory, str);
       free(str);
       if (new_str == nullptr)
