@@ -4,16 +4,16 @@
 #include "matrix.h"
 void bocharov::check_argc(int argc)
   {
-    if (argc - 1 > 3)
+    if (argc > 4)
     {
       throw std::logic_error("Too many arguments");
     }
-    if (argc - 1 < 3)
+    if (argc < 4)
     {
       throw std::logic_error("Not enough arguments");
     }
   }
-long int bocharov::check_number(const char* const argv1)
+long int bocharov::check_number(const char * const argv1)
   {
     char* endptr = nullptr;
     long int number = std::strtol(argv1, std::addressof(endptr), 10);

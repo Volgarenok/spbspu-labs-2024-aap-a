@@ -1,11 +1,14 @@
 #include "matrix.h"
 #include <istream>
 #include <cstddef>
-std::istream & bocharov::input_matrix(std::istream & in, int * const t,  size_t m, size_t n)
+std::istream & bocharov::input_matrix(std::istream & in, int * const matrix,  size_t rows, size_t cols, size_t & read)
 {
-  for (size_t i = 0; i < (m * n) && in.good(); i++)
+  for (size_t i = 0; i < (rows * cols) && in.good(); i++)
   {
-    in >> t[i];
+    if (in >> matrix[i])
+    {
+      read++;
+    }
   }
   return in;
 }

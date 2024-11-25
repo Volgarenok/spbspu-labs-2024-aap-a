@@ -18,48 +18,68 @@ int main(int argc, char ** argv)
     return 1;
   }
   std::ifstream input(argv[2]);
-  std::ofstream output(argv[3]);
-  if (!output)
+  if (!input.is_open())
   {
-    return 2;
+    std::cerr << "Failed to open input file\n";
+    return 1;
+  }
+  std::ofstream output(argv[3]);
+  if (!output.is_open())
+  {
+    std::cerr << "Failed to open output file\n";
+    return 1;
   }
   size_t rows = 0, cols = 0;
   input  >> rows >> cols;
-  if (!input.good())
+  if (!input)
   {
     std::cerr << "Input size fail\n";
     return 2;
   }
-  const size_t fixed_size = 10000;
+  constexpr size_t fixed_size = 10000;
+  size_t genrlLength = rows * cols;
+  if (genrlLength > fixed_size)
+  {
+    output << "0" << " " << "0";
+    output << "0\n";
+    return 0;
+  }
   int fixed_matrix[fixed_size] = {};
-  int * final_matrix = nullptr;
+  int * matrix = nullptr;
   int * dynamic_matrix = nullptr;
+  size_t read = 0;
   if (number == 1)
   {
-    final_matrix = fixed_matrix;
+    if (genrlLength > fixed_size)
+    {
+      std::cerr << "The matrix is too large\n";
+      return 2;
+    }
+    matrix = fixed_matrix;
   }
   else
   {
     try
     {
-      dynamic_matrix = new int[rows * cols];
-      final_matrix = dynamic_matrix;
+      dynamic_matrix = new int[genrlLength];
+      matrix = dynamic_matrix;
     }
     catch (const std::bad_alloc & e)
     {
       delete[] dynamic_matrix;
       std::cerr << "No memory is allocated for the array\n";
-      return 1;
+      return 2;
     }
   }
-  if (!(bocharov::input_matrix(input, final_matrix, rows, cols)))
+  if (!(bocharov::input_matrix(input, matrix, rows, cols, read)) || (read != genrlLenght))
   {
     delete[] dynamic_matrix;
     std::cerr << "Input error\n";
     return 2;
   }
-  bocharov::matrix_replace(final_matrix, rows, cols);
-  bocharov::output_matrix(output, final_matrix, rows, cols);
+  bocharov::matrix_replace(matrix, rows, cols);
+  bocharov::output_matrix(output, matrix, rows, cols);
   std::cout << "\n";
   delete[] dynamic_matrix;
+  return 0;
 }

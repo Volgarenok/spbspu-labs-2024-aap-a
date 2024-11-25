@@ -1,10 +1,6 @@
 #include "matrix.h"
 void bocharov::matrix_replace(int * const matrix, size_t rows, size_t cols)
 {
-  if (rows <= 0 || cols <= 0)
-  {
-    return;
-  }
   size_t ibegin = rows - 1, ifinish = 0, jbegin = 0, jfinish = cols - 1, i = rows - 1, j = 0;
   size_t changed = 1;
   int k = 1;
@@ -32,7 +28,8 @@ void bocharov::matrix_replace(int * const matrix, size_t rows, size_t cols)
       --ibegin;
       ++ifinish;
       ++jbegin;
-      ++jfinish;
+      --jfinish;
+      ++j;
     }
     ++k;
     ++changed;
