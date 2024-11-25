@@ -11,7 +11,7 @@ int main()
     str1 = abramov::getStr(std::cin);
     if (str1 != nullptr)
     {
-      destination = new char [std::strlen(str1) + std::strlen(str2)];
+      destination = new char [std::strlen(str1) + std::strlen(str2) + 1];
     }
   }
   catch (const std::bad_alloc &e)
