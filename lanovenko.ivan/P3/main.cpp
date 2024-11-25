@@ -16,12 +16,16 @@ int main(int argc, char** argv)
     std::cerr << "Not enough arguments" << '\n';
     return 1;
   }
-  int num = argv[1][0];
+
   if ((argv[1][0] != '2' && argv[1][0] != '1') || argv[1][1] != '\0')
   {
     std::cerr << "First parametr is not a number" << '\n';
     return 1;
   }
+  const char *str = argv[1];
+  char* endptr = nullptr;
+  long int num = 0;
+  num = std::strtol(str, std::addressof(endptr), 10);
   size_t rows = 0;
   size_t cols = 0;
   size_t matrixsize = 0;
@@ -46,7 +50,6 @@ int main(int argc, char** argv)
     }
     catch (const std::bad_alloc & e)
     {
-      delete[] pointertodelete;
       std::cerr << "Out of memory" << '\n';
       return 2;
     }
@@ -57,12 +60,15 @@ int main(int argc, char** argv)
     std::cerr << "Input fail" << '\n';
     return 2;
   }
-  lanovenko::changeto_LFT_TOP_CLK(matrix, rows, cols);
+  lanovenko::editMatrix(matrix, rows, cols);
   for (size_t r = 0; r < rows; ++r)
   {
     for (size_t c = 0; c < cols; ++c)
     {
-      output << matrix[r * cols + c] << " ";
+      if(r != cols - 1)
+      {
+        output << matrix[r * cols + c] << " ";
+      }
     }
     output << '\n';
   }
