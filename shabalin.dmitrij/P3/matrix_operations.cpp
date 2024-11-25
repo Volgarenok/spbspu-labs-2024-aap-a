@@ -1,5 +1,4 @@
 #include "matrix_operations.hpp"
-#include <istream>
 
 void shabalin::spiralDecrease(int *matrix, size_t rows, size_t cols)
 {

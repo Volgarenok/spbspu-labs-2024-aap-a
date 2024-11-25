@@ -78,9 +78,9 @@ int main(int argc, char *argv[])
   }
   try
   {
-    shabalin::matrixInput(input, matrix, countOfElements);
+    shabalin::inputMatrix(input, matrix, countOfElements);
     shabalin::spiralDecrease(matrix, rows, cols);
-    shabalin::matrixOutput(output, matrix, rows, cols);
+    shabalin::outputMatrix(output, matrix, rows, cols);
     if (!output)
     {
       throw std::logic_error("Error of output");

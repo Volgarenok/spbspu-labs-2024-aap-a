@@ -1,8 +1,7 @@
 #include "iomatrix.hpp"
-#include <fstream>
 #include <stdexcept>
 
-void shabalin::matrixInput(std::istream &input, int *matrix, size_t countOfElements)
+void shabalin::inputMatrix(std::istream &input, int *matrix, size_t countOfElements)
 {
   for (size_t i = 0; i < countOfElements; ++i)
   {
@@ -13,7 +12,7 @@ void shabalin::matrixInput(std::istream &input, int *matrix, size_t countOfEleme
   }
 }
 
-void shabalin::matrixOutput(std::ostream &output, int *matrix, size_t rows, size_t cols)
+void shabalin::outputMatrix(std::ostream &output, int *matrix, size_t rows, size_t cols)
 {
   if (rows == 0 && cols == 0)
   {
