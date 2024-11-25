@@ -61,8 +61,7 @@ int main(int argc, char ** argv)
   {
     try
     {
-      dynamic_matrix = new int[genrlLength];
-      matrix = dynamic_matrix;
+      matrix = new int[genrlLength];
     }
     catch (const std::bad_alloc & e)
     {
@@ -78,7 +77,8 @@ int main(int argc, char ** argv)
     return 2;
   }
   bocharov::matrix_replace(matrix, rows, cols);
-  bocharov::output_matrix(output, matrix, rows, cols);
+  result = bocharov::NumLocMax(matrix, rows, cols);
+  bocharov::output_matrix(output, matrix, rows, cols, result);
   std::cout << "\n";
   delete[] dynamic_matrix;
   return 0;
