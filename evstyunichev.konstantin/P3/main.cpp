@@ -57,6 +57,12 @@ int main(int argc, char **argv)
   {
     fout << evstyunichev::CntRowsNsm(arr, n, m) << "\n";
   }
+  else
+  {
+    std::cerr << "bad input\n";
+    delete[] d_arr;
+    return 2;
+  }
   delete[] d_arr;
   return 0;
 }
