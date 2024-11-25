@@ -59,7 +59,7 @@ int main(int argc, char **argv)
   }
   else
   {
-    std::cerr << "bad input\n";
+    std::cout << "bad input\n";
     delete[] d_arr;
     return 2;
   }
