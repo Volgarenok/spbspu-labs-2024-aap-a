@@ -1,4 +1,14 @@
 #include "recursion_string.h"
+#include <cctype>
+namespace alymova
+{
+  const char* has_symbol(const char* str, char symbol);
+  const char* has_sign(const char* str);
+  const char* has_number(const char* str);
+  const char* has_unsigned_int(const char* str);
+  const char* has_order(const char* str);
+  const char* has_mantissa(const char* str);
+}
 const char* alymova::has_symbol(const char* str, char symbol)
 {
   if (!str)
@@ -13,7 +23,7 @@ const char* alymova::has_sign(const char* str)
   {
     return str;
   }
-  return (*str == '+' || *str == '-') ? (str + 1) : nullptr;
+  return (has_symbol(str, '+') || has_symbol(str, '-')) ? (str + 1) : nullptr;
 }
 const char* alymova::has_number(const char* str)
 {
@@ -21,7 +31,7 @@ const char* alymova::has_number(const char* str)
   {
     return str;
   }
-  return ('0' <= *str && *str <= '9') ? (str + 1) : nullptr;
+  return (std::isdigit(*str)) ? (str + 1) : nullptr;
 }
 const char* alymova::has_unsigned_int(const char* str)
 {
