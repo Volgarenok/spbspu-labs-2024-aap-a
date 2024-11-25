@@ -11,6 +11,7 @@ char* timofeev::input_line(std::istream& in)
     return nullptr;
   }
   line[capacity] = '\0';
+  line[0] = 'а';
   in >> line[0];
   if (line[0] == '\0' || std::cin.eof())
   {
