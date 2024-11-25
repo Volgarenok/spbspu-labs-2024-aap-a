@@ -39,7 +39,7 @@ const char * finaev::hasUnsignedInt(const char* str)
     return str;
   }
   auto next = finaev::hasDigit(str);
-  if (auto continues = finaev::hasUnsignedInt(str))
+  if (auto continues = finaev::hasUnsignedInt(next))
   {
     return continues;
   }
@@ -63,8 +63,8 @@ const char * finaev::hasFactor(const char* str)
     return next;
   }
   next = finaev::isSymbol(str, '(');
-  next = finaev::hasExpression(str);
-  next = finaev::isSymbol(str, ')');
+  next = finaev::hasExpression(next);
+  next = finaev::isSymbol(next, ')');
   return next;
 }
 
@@ -75,9 +75,9 @@ const char * finaev::hasTerm(const char* str)
     return str;
   }
   auto next = finaev::hasFactor(str);
-  if (auto continues = finaev::isSymbol(str, '*'))
+  if (auto continues = finaev::isSymbol(next, '*'))
   {
-    continues = finaev::hasTerm(str);
+    continues = finaev::hasTerm(continues);
     return continues;
   }
   return next;
@@ -90,14 +90,14 @@ const char * finaev::hasExpression(const char* str)
     return str;
   }
   auto next = finaev::hasTerm(str);
-  if (auto continues = finaev::isSymbol(str, '+'))
+  if (auto continues = finaev::isSymbol(next, '+'))
   {
-   continues = finaev::hasExpression(str);
+   continues = finaev::hasExpression(continues);
    return continues;
   }
-  else if (auto continues = finaev::isSymbol(str, '-'))
+  else if (auto continues = finaev::isSymbol(next, '-'))
   {
-   continues = finaev::hasExpression(str);
+   continues = finaev::hasExpression(continues);
    return continues;
   }
   return next;
@@ -105,5 +105,5 @@ const char * finaev::hasExpression(const char* str)
 
 bool finaev::checkStr(const char * str)
 {
-  return (hasExpression(str) != nullptr);
+  return (finaev::hasExpression(str) != nullptr);
 }
