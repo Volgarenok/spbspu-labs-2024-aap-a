@@ -4,7 +4,13 @@
 char* timofeev::input_line(std::istream& in)
 {
   size_t capacity = 40;
-  char* line = reinterpret_cast<char*>(malloc(sizeof(char) * capacity));
+  char* line = reinterpret_cast<char*>(malloc(sizeof(char) * (capacity + 1)));
+  if (line == nullptr)
+  {
+    free(line);
+    return nullptr;
+  }
+  line[capacity] = '\0';
   size_t cur_writing_lit = 0;
   char cur_sym = '\0';
   std::noskipws(in);
@@ -24,12 +30,6 @@ char* timofeev::input_line(std::istream& in)
       }
     }
     line[cur_writing_lit++] = cur_sym;
-  }
-  if (line == nullptr)
-  {
-    std::cerr << "Memory error";
-    free(line);
-    return line;
   }
   std::skipws(in);
   return line;

@@ -5,6 +5,11 @@ char* timofeev::boost_size(char* value_line, size_t capacity)
 {
   int new_capacity = capacity + 10;
   char* new_line = reinterpret_cast<char*>(malloc(sizeof(char) * (new_capacity+1)));
+  if (new_line == nullptr)
+  {
+    free(new_line);
+    return nullptr;
+  }
   for (size_t i = 0; i < capacity; i++)
   {
     new_line[i] = value_line[i];
