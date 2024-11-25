@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include "input_matrix.hpp"
 #include "matrix_checking.hpp"
+#include "local_min.hpp"
 
 
 int main(int argc, char ** argv)
@@ -39,48 +40,41 @@ int main(int argc, char ** argv)
     std::cerr << "Input is incorrect" << "\n";
     return 2;
   }
+  int * matrix = nullptr;
+  int * dyn_matrix = nullptr;
   if (num == 1)
   {
     int matrix[10000] = {};
   }
-  if (num == 2)
+  else
   {
     try
     {
-      int * matrix = new int[m * n];
+      dyn_matrix = new int[m * n];
+      matrix = dyn_matrix;
     }
     catch (const std::bad_alloc & e)
     {
-      delete[] matrix;
       std::cerr << "Out of memory" << "\n";
       return 2;
     }
   }
   dirti::input_matrix(input, matrix, m, n, read);
-  if (read != m * n)
+  if (read != (m * n))
   {
-    std::cerr << "Incorrect values of matrix";
-    if (num == 2)
-    {
-      delete[] matrix;
-    }
+    std::cerr << "Incorrect values of matrix" << "\n";
+    delete[] dyn_matrix;
     return 2;
   }
   if (!(dirti::matrix_checking(matrix, m, n)))
   {
-    std::cerr << "Matrix does not suit condition";
-    if (num == 2)
-    {
-      delete[] matrix;
-    }
+    std::cerr << "Matrix does not suit condition" << "n";
+    delete[] dyn_matrix;
     return 2;
   }
   
   std::ofstream output(argv[3]);
-  output << dirti::local_min(matrix) << "\n";
-  if (num == 2)
-  {
-    delete[] matrix;
-  }
+  output << dirti::local_min(matrix, m, n) << "\n";
+  delete[] dyn_matrix;
   return 0;
 }
