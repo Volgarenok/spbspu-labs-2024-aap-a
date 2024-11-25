@@ -1,6 +1,6 @@
 #include "modification_matrix.h"
 
-void lanovenko::changeto_LFT_TOP_CLK(int* matrix, size_t rows, size_t cols)
+void lanovenko::editMatrix(int* matrix, size_t rows, size_t cols)
 {
   size_t count = 1;
   size_t i = 0, j = 0;
