@@ -7,7 +7,6 @@ int main()
   size_t capacity = 1;
   const char cstring_2[10] = "ls)2)!19 ";
   char * new_cstring = nullptr;
-  char * numbers = nullptr;
   try
   {
     cstring_1 = petrov::inputCString(std::cin, capacity);
@@ -17,9 +16,9 @@ int main()
       std::cerr << "ERROR: Invalid value\n";
       return 1;
     }
-    numbers = petrov::makeNumberArray(cstring_2, capacity);
+    capacity += sizeof(cstring_2) / sizeof(char) - 1;
     new_cstring = petrov::allocateMemoryForNewCString(capacity);
-    new_cstring = petrov::makeNewCStringOutOfTwo(new_cstring, cstring_1, numbers);
+    new_cstring = petrov::makeNewCStringOutOfTwo(new_cstring, cstring_1, cstring_2);
   }
   catch (const std::bad_alloc & e)
   {
@@ -27,16 +26,10 @@ int main()
     {
       delete[] cstring_1;
     }
-    else if (numbers != nullptr)
-    {
-      delete[] cstring_1;
-      delete[] numbers;
-    }
     std::cerr << "ERROR: Out of memory\n";
     return 1;
   }
   std::cout << new_cstring << "\n";
   delete[] cstring_1;
-  delete[] numbers;
   delete[] new_cstring;
 }

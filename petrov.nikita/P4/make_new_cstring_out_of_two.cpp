@@ -1,7 +1,8 @@
 #include "making_new_cstring.hpp"
 #include <cstddef>
+#include <cctype>
 
-char * petrov::makeNewCStringOutOfTwo(char * new_cstring, const char * string_1, const char * numbers)
+char * petrov::makeNewCStringOutOfTwo(char * new_cstring, const char * string_1, const char * string_2)
 {
   size_t i = 0;
   size_t j = 0;
@@ -12,10 +13,13 @@ char * petrov::makeNewCStringOutOfTwo(char * new_cstring, const char * string_1,
     j++;
   }
   j = 0;
-  while (numbers[j] != '\0')
+  while (string_2[j] != '\0')
   {
-    new_cstring[i] = numbers[j];
-    i++;
+    if (std::isdigit(string_2[j]))
+    {
+      new_cstring[i] = string_2[j];
+      i++;
+    }
     j++;
   }
   new_cstring[i] = '\0';
