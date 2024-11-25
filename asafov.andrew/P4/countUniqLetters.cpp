@@ -1,7 +1,7 @@
 #include <cctype>
 #include "countUniqLetters.h"
 
-int lab::countUniqLetters(const char* string, size_t length)
+int asafov::countUniqLetters(const char* string, size_t length)
 {
   char* newstring = new char[length];
   int count = 0;
