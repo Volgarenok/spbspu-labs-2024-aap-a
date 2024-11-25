@@ -1,4 +1,16 @@
 #include "is_real_number.hpp"
+#include <cctype>
+
+namespace maslevtsov
+{
+  const char* hasSymbol(const char* str, char symbol);
+  const char* hasSign(const char* str);
+  const char* hasDigit(const char* str);
+  const char* hasUnsignedInt(const char* str);
+  const char* hasOrder(const char* str);
+  const char* hasMantissa(const char* str);
+  const char* hasRealNumber(const char* str);
+}
 
 const char* maslevtsov::hasSymbol(const char* str, char symbol)
 {
@@ -25,7 +37,7 @@ const char* maslevtsov::hasDigit(const char* str)
   {
     return str;
   }
-  return (*str >= '0' && *str <= '9') ? (str + 1) : nullptr;
+  return (std::isdigit(*str)) ? (str + 1) : nullptr;
 }
 
 const char* maslevtsov::hasUnsignedInt(const char* str)
