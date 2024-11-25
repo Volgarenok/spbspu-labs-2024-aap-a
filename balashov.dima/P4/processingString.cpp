@@ -56,7 +56,7 @@ char* balashov::enteringLine(std::istream & in, size_t & capacity)
   {
     return nullptr;
   }
-  std::noskipws(std::cin);
+  std::noskipws(in);
   while ((in >> symbol) && (symbol != '\n'))
   {
     line[sizeLine++] = symbol;
