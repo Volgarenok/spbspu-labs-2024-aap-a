@@ -1,7 +1,7 @@
 #include "strinput.h"
 #include <cstddef>
 #include <cstring>
-char* lanovenko::inputstring(std::istream& in, const char stop)
+char* lanovenko::input_string(std::istream& in, const char stop)
 {
   size_t capacity = 1;
   char* str = new char[capacity];
@@ -20,10 +20,6 @@ char* lanovenko::inputstring(std::istream& in, const char stop)
   in >> std::noskipws;
   while (in >> c && c != stop)
   {
-    if(!isalpha(c))
-    {
-      throw std::logic_error("Not a letter");
-    }
     if (quantity >= capacity - 1)
     {
       capacity *= 2;
