@@ -88,4 +88,17 @@ const char * zakirov::check_order(const char * line)
   return check_sinteger(next);
 }
 
+const char * check_mantissa(const char * line)
+{
+  if (!line)
+  {
+    return line;
+  }
 
+  auto next = zakirov::compare_literals(line, '.');
+  if (!next)
+  {
+    return zakirov::check_uinteger(line);
+  }
+  return zakirov::check_uinteger(next);
+}
