@@ -3,6 +3,7 @@
 #include <cstring>
 #include <cstdlib>
 #include "input_matrix.hpp"
+#include "matrix_checking.hpp"
 
 
 int main(int argc, char ** argv)
@@ -65,10 +66,21 @@ int main(int argc, char ** argv)
     return 2;
   }
   
+  if (!(matrix_checking(matrix, m, n)))
+  {
+    std::cerr << "Matrix does not suit condition";
+    if (num == 2)
+    {
+      delete[] matrix;
+    }
+    return 2;
+  }
+  
   
   //...
   std::ofstream output(argv[3]);
   
+  //...
   if (num == 2)
   {
     delete[] matrix;
