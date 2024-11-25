@@ -1,4 +1,3 @@
-#include <iostream>
 #include "processingString.hpp"
 
 int main()

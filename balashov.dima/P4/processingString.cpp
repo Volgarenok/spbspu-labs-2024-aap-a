@@ -1,25 +1,33 @@
 #include "processingString.hpp"
 #include <cmath>
 
-char* balashov::removeSpaces(char* line)
+char* balashov::removeSpaces(char * line)
 {
-  int numberSymbolOfNewLine = 0;
-  for (int i = 0; line[i] != '\0'; ++i)
+  char* lineWithoutSpaces = line;
+  char* pointerToChange = line;
+  bool spaceLastSymbol = false;
+  bool isFirstSymbol = true;
+  while (*line != '\0')
   {
-    if (line[i] != ' ')
+    if (*line != ' ')
     {
-      line[numberSymbolOfNewLine++] = line[i];
+      *pointerToChange++ = *line;
+      spaceLastSymbol = false;
+      isFirstSymbol = false;
     }
-    else
+    else if (!spaceLastSymbol && !isFirstSymbol)
     {
-      if ((line[i + 1] != ' ') && (numberSymbolOfNewLine != 0) && (line[i + 1] != '\0'))
-      {
-        line[numberSymbolOfNewLine++] = line[i];
-      }
+      *pointerToChange++ = ' ';
+      spaceLastSymbol = true;
     }
+    line++;
   }
-  line[numberSymbolOfNewLine] = '\0';
-  return line;
+  if (spaceLastSymbol && !isFirstSymbol)
+  {
+    pointerToChange--;
+  }
+  *pointerToChange = '\0';
+  return lineWithoutSpaces;
 }
 
 char* balashov::increaseSizeLine(char* lineStart, size_t& capacity)
