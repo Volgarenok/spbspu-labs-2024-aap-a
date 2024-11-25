@@ -44,7 +44,6 @@ int main()
 
   char second_str[] = "abc ef";
   demehin::unc_sym(first_str, second_str, final_str);
-  std::cout << second_str << '\n';
   std::cout << final_str << '\n';
   delete[] first_str;
   delete[] final_str;
