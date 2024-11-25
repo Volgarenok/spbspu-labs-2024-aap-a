@@ -23,4 +23,5 @@ int main()
   }
   std::cout << std::boolalpha << sveshnikov::isRealNumber(str) << "\n";
   delete[] str;
+  return 0;
 }

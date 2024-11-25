@@ -14,7 +14,8 @@ const char *sveshnikov::hasRealNumber(const char *str)
   }
   if (const char *continues = hasSign(str))
   {
-    return continues;
+    const char *next = hasMantissa(continues);
+    return hasOrder(next);
   }
   const char *next = hasMantissa(str);
   return hasOrder(next);
@@ -28,17 +29,17 @@ const char *sveshnikov::hasMantissa(const char *str)
   }
   if (const char *continues = hasUnsignedInteger(str))
   {
+    if (const char *continues2 = hasSymbol(continues, '.'))
+    {
+      return hasUnsignedInteger(continues2);
+    }
     return continues;
   }
-  if (const char *continues = hasSymbol(str, 'E'))
+  if (const char *continues = hasSymbol(str, '.'))
   {
-    return continues;
+    return hasUnsignedInteger(continues);
   }
-  if (const char *continues = hasUnsignedInteger(str))
-  {
-    return continues;
-  }
-  return str + 1;
+  return nullptr;
 }
 
 const char *sveshnikov::hasOrder(const char *str)
@@ -48,7 +49,7 @@ const char *sveshnikov::hasOrder(const char *str)
     return str;
   }
   const char *next = hasSymbol(str, 'E');
-  next = hasSign(str);
+  next = hasSign(next);
   return hasUnsignedInteger(next);
 }
 
@@ -59,7 +60,7 @@ const char *sveshnikov::hasUnsignedInteger(const char *str)
     return str;
   }
   const char *next = hasDigit(str);
-  if (const char *continues = hasDigit(str))
+  if (const char *continues = hasUnsignedInteger(next))
   {
     return continues;
   }
@@ -72,7 +73,7 @@ const char *sveshnikov::hasDigit(const char *str)
   {
     return str;
   }
-  return (*str >= '0' || *str <= '9') ? (str + 1) : nullptr;
+  return (*str >= '0' && *str <= '9') ? (str + 1) : nullptr;
 }
 
 const char *sveshnikov::hasSign(const char *str)
