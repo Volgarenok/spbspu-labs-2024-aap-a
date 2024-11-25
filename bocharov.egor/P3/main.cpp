@@ -37,10 +37,9 @@ int main(int argc, char ** argv)
     return 2;
   }
   constexpr size_t fixed_size = 10000;
-  size_t genrlLength = rows * cols;
-  if (genrlLength > fixed_size)
+  if ((rows * cols) > fixed_size)
   {
-    output << "0" << " " << "0";
+    output << rows << " " << cols;
     output << "0\n";
     return 0;
   }
@@ -50,7 +49,7 @@ int main(int argc, char ** argv)
   size_t read = 0;
   if (number == 1)
   {
-    if (genrlLength > fixed_size)
+    if ((rows * cols) > fixed_size)
     {
       std::cerr << "The matrix is too large\n";
       return 2;
@@ -61,7 +60,7 @@ int main(int argc, char ** argv)
   {
     try
     {
-      dynamic_matrix = new int[genrlLength];
+      dynamic_matrix = new int[rows * cols];
       matrix = dynamic_matrix;
     }
     catch (const std::bad_alloc & e)
