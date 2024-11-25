@@ -14,7 +14,7 @@ int main()
     std::cerr << "Out of memory\n";
     return 1;
   }
-  if(str1[0] = '\0')
+  if(str1[0] == '\0')
   {
     free(str1);
     std::cerr << "Empty input\n";
