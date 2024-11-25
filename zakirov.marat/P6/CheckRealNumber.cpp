@@ -88,7 +88,7 @@ const char * zakirov::check_order(const char * line)
   return check_sinteger(next);
 }
 
-const char * check_mantissa(const char * line)
+const char * zakirov::check_mantissa(const char * line)
 {
   if (!line)
   {
@@ -101,4 +101,24 @@ const char * check_mantissa(const char * line)
     return zakirov::check_uinteger(line);
   }
   return zakirov::check_uinteger(next);
+}
+
+const char * check_real(const char * line)
+{
+  if (!line)
+  {
+    return line;
+  }
+
+  auto next = zakirov::check_sign(line);
+  if (!next)
+  {
+    auto middle = zakirov::check_mantissa(line);
+    return zakirov::check_order(middle);
+  }
+  else
+  {
+    auto middle = zakirov::check_mantissa(next);
+    return zakirov::check_order(middle);
+  }
 }
