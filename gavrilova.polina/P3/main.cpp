@@ -74,13 +74,13 @@ int main(int argc, char ** argv)
   gavrilova::input_matrix(input, mtx, m, n, read);
 
   if (!input || input.eof()) {
-    delete[] mtx;
+    delete[] temp2;
     return 1;
   }
 
   output << gavrilova::isUpperTriangMtx(mtx, m, n) << "\n";
 
-  delete[] mtx;
+  delete[] temp2;
 
 }
 
