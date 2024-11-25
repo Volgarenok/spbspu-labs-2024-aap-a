@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cctype>
 #include <cstddef>
-#include "lineinput.hpp"
+#include <dynamicArray.hpp>
 #include "formline.hpp"
 int main()
 {
@@ -16,10 +16,12 @@ int main()
   firstLine = nikonov::reallocate(firstLine, capacity, 10);
   if (!firstLine)
   {
-    std::cerr << "ERROR: bad alloc\n";
     return 1;
   }
   nikonov::add_digit_symb(firstLine, secondLine);
   std::cout << firstLine << '\n';
-  free(firstLine);
+  if (firstLine)
+  {
+    free(firstLine);
+  }
 }
