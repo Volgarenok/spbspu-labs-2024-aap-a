@@ -8,10 +8,6 @@
 
 int main(int argc, char ** argv)
 {
-  for (int i = 0; i < argc; ++i)
-  {
-    std::cout << argv[i] << "\n";
-  }
   if (argc < 4)
   {
     std::cerr << "Not enough arguments" << "\n";
@@ -70,7 +66,6 @@ int main(int argc, char ** argv)
     }
     return 2;
   }
-  
   if (!(dirti::matrix_checking(matrix, m, n)))
   {
     std::cerr << "Matrix does not suit condition";
@@ -81,13 +76,8 @@ int main(int argc, char ** argv)
     return 2;
   }
   
-  
-  
-  //...
   std::ofstream output(argv[3]);
-  
   output << dirti::local_min(matrix) << "\n";
-  //...
   if (num == 2)
   {
     delete[] matrix;
