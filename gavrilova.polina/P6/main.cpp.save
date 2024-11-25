@@ -1,0 +1,9 @@
+#include <iostream>
+#include <inputStr>
+
+int main()
+{
+  char*  string = nullptr;
+  size_t len = 0;
+  string = inputStr(string, len);
+}
