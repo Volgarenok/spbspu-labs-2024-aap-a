@@ -33,6 +33,11 @@ int main(int argc, char ** argv)
   size_t read = 0;
   std::ifstream input(argv[2]);
   input >> m >> n;
+  if (m == 0 && n == 0)
+  {
+    std::cout << 0 << " " << 0 << "\n";
+    return 0;
+  }
   if (!input)
   {
     std::cerr << "Input is incorrect" << "\n";
@@ -66,7 +71,7 @@ int main(int argc, char ** argv)
     return 2;
   }
   
-  if (!(matrix_checking(matrix, m, n)))
+  if (!(dirti::matrix_checking(matrix, m, n)))
   {
     std::cerr << "Matrix does not suit condition";
     if (num == 2)
@@ -77,12 +82,15 @@ int main(int argc, char ** argv)
   }
   
   
+  
   //...
   std::ofstream output(argv[3]);
   
+  output << dirti::local_min(matrix) << "\n";
   //...
   if (num == 2)
   {
     delete[] matrix;
   }
+  return 0;
 }
