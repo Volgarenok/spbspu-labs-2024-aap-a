@@ -66,7 +66,7 @@ int main(int argc, char ** argv)
     }
   if (num == 1) {
     mtx = temp1;
-    delete[] temp1;
+    delete[] temp2;
   } else if (num == 2) {
     mtx = temp2;
   }
