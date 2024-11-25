@@ -8,7 +8,7 @@ void asafov::handleLftTopClk(int*& mtx, const unsigned long long n, const unsign
   unsigned long long a = -1;
   while (e * r != 0)
   {
-    for (int i = 0; i < r; i++)
+    for (unsigned long long i = 0; i < r; i++)
     {
       a++;
       mtx[a] -= count;
@@ -19,7 +19,7 @@ void asafov::handleLftTopClk(int*& mtx, const unsigned long long n, const unsign
       break;
     }
     e--;
-    for (int i = 0; i < e; i++)
+    for (unsigned long long i = 0; i < e; i++)
     {
       a += m;
       mtx[a] -= count;
@@ -30,7 +30,7 @@ void asafov::handleLftTopClk(int*& mtx, const unsigned long long n, const unsign
       break;
     }
     r--;
-    for (int i = 0; i < r; i++)
+    for (unsigned long long i = 0; i < r; i++)
     {
       a--;
       mtx[a] -= count;
@@ -41,7 +41,7 @@ void asafov::handleLftTopClk(int*& mtx, const unsigned long long n, const unsign
       break;
     }
     e--;
-    for (int i = 0; i < e; i++)
+    for (unsigned long long i = 0; i < e; i++)
     {
       a -= m;
       mtx[a] -= count;
