@@ -1,7 +1,7 @@
 #ifndef PROCESSING_STRING_HPP
 #define PROCESSING_STRING_HPP
 
-#include<cstddef>
+#include <cstddef>
 
 namespace balashov
 {

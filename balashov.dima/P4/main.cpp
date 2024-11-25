@@ -5,9 +5,8 @@ int main()
 {
   size_t capacity = 5;
   char * line = balashov::enteringLine(capacity);
-  if(line == nullptr)
+  if (line == nullptr)
   {
-    free(line);
     std::cerr << "Memory was not allocated\n";
     return 1;
   }
