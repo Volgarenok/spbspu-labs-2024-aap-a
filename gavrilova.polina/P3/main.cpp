@@ -57,18 +57,18 @@ int main(int argc, char ** argv)
   size_t read = 0;
 
   int * mtx = nullptr;
-  int temp[10000] = {};
-
-  if (num == 2) {
-    int * temp = nullptr;
-    try {
-      temp = new int [m*n];
+  int temp1[10000] = {};
+  int * temp2 = nullptr;
+  try {
+      temp2 = new int [m*n];
     } catch (const std::bad_alloc & e) {
       return 1;
     }
-    mtx = temp;
-  } else if (num == 1) {
-    mtx = temp;
+  if (num == 1) {
+    mtx = temp1;
+    delete[] temp1;
+  } else if (num == 2) {
+    mtx = temp2;
   }
 
   gavrilova::input_matrix(input, mtx, m, n, read);
@@ -83,3 +83,4 @@ int main(int argc, char ** argv)
   delete[] mtx;
 
 }
+
