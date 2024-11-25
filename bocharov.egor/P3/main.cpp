@@ -61,7 +61,8 @@ int main(int argc, char ** argv)
   {
     try
     {
-      matrix = new int[genrlLength];
+      dynamic_matrix = new int[genrlLength];
+      matrix = dynamic_matrix;
     }
     catch (const std::bad_alloc & e)
     {
