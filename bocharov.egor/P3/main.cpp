@@ -71,7 +71,7 @@ int main(int argc, char ** argv)
       return 2;
     }
   }
-  if (!(bocharov::input_matrix(input, matrix, rows, cols, read)) || (read != genrlLenght))
+  if (!(bocharov::input_matrix(input, matrix, rows, cols, read)) || (read != (rows * cols)))
   {
     delete[] dynamic_matrix;
     std::cerr << "Input error\n";
