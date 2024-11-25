@@ -56,12 +56,14 @@ char* balashov::enteringLine(size_t& capacity)
     line[sizeLine++] = symbol;
     if (sizeLine == capacity)
     {
-      line = increaseSizeLine(line, capacity);
-      if (line == nullptr)
+      char * newLine = nullptr;
+      newLine = increaseSizeLine(line, capacity);
+      free(line);
+      if (newLine == nullptr)
       {
-        free(line);
         return nullptr;
       }
+      line = newLine;
     }
   }
   line[sizeLine] = '\0';
