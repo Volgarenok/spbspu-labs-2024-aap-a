@@ -50,7 +50,6 @@ int main(int argc, char** argv)
       if (fin.fail() || fin.eof()) {
         throw std::logic_error("err");
       }
-      
       asafov::initializationMatrix(fin, mtx, a[0], a[1]);
     }
     catch (const std::logic_error & e)
