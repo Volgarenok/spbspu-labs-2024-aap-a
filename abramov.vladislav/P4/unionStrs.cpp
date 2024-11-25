@@ -11,13 +11,19 @@ char *abramov::unionStrs(char *destination, const char *str1, const char *str2)
     destination[k++] = str2[i];
     ++i;
   }
-  while (str1[i] != '\0')
+  if (str1[i] == '\0')
   {
-    destination[k++] = str1[i++];
+    while (str2[i] != '\0')
+    {
+      destination[k++] = str2[i++];
+    }
   }
-  while (str2[i] != '\0')
+  else
   {
-    destination[k++] = str2[i++];
+    while (str1[i] != '\0')
+    {
+      destination[k++] = str1[i++];
+    }
   }
   destination[k] = '\0';
   return destination;
