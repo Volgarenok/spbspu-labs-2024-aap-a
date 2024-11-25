@@ -3,6 +3,6 @@
 #include <istream>
 namespace lanovenko
 {
-  char* inputstring(std::istream& in, const char stop);
+  char* input_string(std::istream& in, const char stop);
 }
 #endif
