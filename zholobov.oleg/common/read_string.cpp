@@ -12,11 +12,7 @@ char* zholobov::read_string(std::istream& input)
   char c = '\0';
   std::noskipws(input);
   do {
-    if (!(input >> c)) {
-      std::free(str);
-      return nullptr;
-    }
-    if (c == '\n') {
+    if (!(input >> c) || (c == '\n')) {
       c = '\0';
     }
     buf[buf_pos++] = c;
