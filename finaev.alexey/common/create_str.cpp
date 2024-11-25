@@ -29,6 +29,7 @@ char* finaev::fillStr(std::istream& in)
       char* new_str = reinterpret_cast< char* >(malloc((capacity + 1) * sizeof(char)));
       if (new_str == nullptr)
       {
+        std::skipws(in);
         free(str);
         return nullptr;
       }
