@@ -1,6 +1,5 @@
 #ifndef MATRIX_OUTPUT_H
 #define MATRIX_OUTPUT_H
-#include <cstddef>
 #include <fstream>
 namespace asafov
 {

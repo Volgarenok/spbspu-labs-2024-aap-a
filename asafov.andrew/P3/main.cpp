@@ -19,30 +19,39 @@ int main(int argc, char** argv)
     std::cerr << "Too many arguments";
     return 1;
   }
-  else if (std::strcmp(argv[1], "1")==0)
+  else if (argv[1][0] == '1' && argv[1][1] == 0)
   {
     int mtx[10000] = {};
     unsigned long long a[2] = {0, 0};
     std::ifstream fin(argv[2]);
     try
     {
-      asafov::initializationMatrixAuto(fin, mtx, a[0], a[1]);
+      asafov::initializationMatrix(fin, mtx, a[0], a[1]);
     }
     catch (const std::logic_error & e)
     {
       return 2;
     }
     std::ofstream fout(argv[3]);
-    fout << asafov::handle_num_col_lsr(mtx, a[0], a[1]);
+    fout << asafov::handleNumColLsr(mtx, a[0], a[1]);
   }
-  else if (std::strcmp(argv[1], "2")==0)
+  else if (argv[1][0] == '2' && argv[1][1] == 0)
   {
     int* mtx = nullptr;
     unsigned long long a[2] = {0, 0};
     std::ifstream fin(argv[2]);
     try
     {
-      mtx = asafov::initializationMatrixDynamic(fin, a[0], a[1]);
+      fin >> a[0];
+      if (fin.fail() || fin.eof()) {
+        throw std::logic_error("err");
+      }
+      fin >> a[1];
+      if (fin.fail() || fin.eof()) {
+        throw std::logic_error("err");
+      }
+      
+      asafov::initializationMatrix(fin, mtx, a[0], a[1]);
     }
     catch (const std::logic_error & e)
     {
@@ -50,7 +59,7 @@ int main(int argc, char** argv)
       return 2;
     }
     std::ofstream fout(argv[3]);
-    fout << asafov::handle_num_col_lsr(mtx, a[0], a[1]);
+    fout << asafov::handleNumColLsr(mtx, a[0], a[1]);
     delete[] mtx;
   }
   else
