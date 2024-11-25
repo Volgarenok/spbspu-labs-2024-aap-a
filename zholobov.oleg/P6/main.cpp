@@ -9,6 +9,10 @@ int main()
     std::cerr << "Failed to read input string\n";
     return 1;
   }
+  if (*str == '\0') {
+    std::cerr << "Empty string was entered\n";
+    return 1;
+  }
   std::cout << std::boolalpha << zholobov::is_match_pattern(str) << "\n";
   std::free(str);
 }
