@@ -3,8 +3,6 @@
 #include <istream>
 namespace averenkov
 {
-  char* stringInput(std::istream& in, char* str);
+  char* stringInput(std::istream& in);
 }
-
-
 #endif

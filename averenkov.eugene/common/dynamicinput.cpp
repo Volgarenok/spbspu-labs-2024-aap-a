@@ -4,17 +4,18 @@
 #include <memory>
 #include <stdexcept>
 
-char* averenkov::stringInput(std::istream& in, char* str)
+char* averenkov::stringInput(std::istream& in)
 {
   size_t max = 10;
   const size_t n = 2;
   size_t size = 0;
   char c = '\0';
   in >> std::noskipws;
-  str = reinterpret_cast<char*>(malloc(max * sizeof(char)));
+  char * str = reinterpret_cast< char* >(malloc(max));
   if (str == nullptr)
   {
     free(str);
+    in >> std::skipws;
     return nullptr;
   }
   while ((in >> c) && (c != '\n'))
@@ -22,10 +23,11 @@ char* averenkov::stringInput(std::istream& in, char* str)
     if (size == max)
     {
       size_t new_size = max * n;
-      char* str_new = reinterpret_cast<char*>(realloc(str, new_size * sizeof(char)));
+      char* str_new = reinterpret_cast< char* >(realloc(str, new_size));
       if (str_new == nullptr)
       {
         free(str);
+        in >> std::skipws;
         return nullptr;
       }
       str = str_new;
@@ -34,16 +36,6 @@ char* averenkov::stringInput(std::istream& in, char* str)
     str[size++] = c;
   }
   in >> std::skipws;
-  if (size == max)
-  {
-    char* str_new = reinterpret_cast<char*>(realloc(str, (max + 1) * sizeof(char)));
-    if (str_new == nullptr)
-    {
-      free(str);
-      return nullptr;
-    }
-    str = str_new;
-  }
   str[size] = '\0';
   return str;
 }
