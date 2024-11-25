@@ -37,7 +37,7 @@ int main(int argc, char ** argv)
     return 2;
   }
   constexpr size_t fixed_size = 10000;
-  if ((rows * cols) > fixed_size)
+  if ((rows * cols) == 0)
   {
     output << rows << " " << cols;
     output << "0\n";
