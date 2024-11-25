@@ -53,7 +53,7 @@ int main(int argc, char **argv)
     }
   }
   size_t read = 0;
-  if (evstyunichev::Input(fin, arr, n, m, read) && (read == n * m) && (read))
+  if (evstyunichev::Input(fin, arr, n, m, read) && (read == n * m))
   {
     fout << evstyunichev::CntRowsNsm(arr, n, m) << "\n";
   }
