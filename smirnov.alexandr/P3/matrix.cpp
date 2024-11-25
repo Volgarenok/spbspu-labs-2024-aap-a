@@ -92,9 +92,11 @@ void smirnov::outputMatrix(std::ostream & output, const int * matrix, size_t row
   }
   else
   {
-    for (size_t i = 0; i < rows; ++i) {
+    for (size_t i = 0; i < rows; ++i)
+    {
       output << matrix[i * columns];
-      for (size_t j = 1; j < columns; ++j) {
+      for (size_t j = 1; j < columns; ++j)
+      {
         output << " " << matrix[i * columns + j];
       }
       output << "\n";
