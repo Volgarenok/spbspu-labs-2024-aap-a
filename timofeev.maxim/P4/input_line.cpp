@@ -11,7 +11,13 @@ char* timofeev::input_line(std::istream& in)
     return nullptr;
   }
   line[capacity] = '\0';
-  size_t cur_writing_lit = 0;
+  in >> line[0];
+  if (line[0] == '\0' || std::cin.eof())
+  {
+    free(line);
+    return nullptr;
+  }
+  size_t cur_writing_lit = 1;
   char cur_sym = '\0';
   std::noskipws(in);
   while((in >> cur_sym) && (cur_sym != '\n'))
