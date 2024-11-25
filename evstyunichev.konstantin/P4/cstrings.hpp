@@ -1,5 +1,5 @@
-#ifndef CSTRINGS_HPP
-#define CSTRINGS_HPP
+#ifndef CSTRING_HPP
+#define CSTRING_HPP
 #include <iostream>
 namespace evstyunichev
 {

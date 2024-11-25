@@ -19,7 +19,7 @@ int evstyunichev::StringResize(char *s, size_t sz)
     s = temp;
     return 1;
   }
-  catch(const std::bad_alloc& e)
+  catch(const std::bad_alloc &e)
   {
     return 0;
   }

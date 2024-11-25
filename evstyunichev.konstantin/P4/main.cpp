@@ -1,6 +1,6 @@
-#include "cstrings.hpp"
 #include <iostream>
 #include <stdexcept>
+#include "cstrings.hpp"
 
 int main()
 {
