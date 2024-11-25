@@ -54,6 +54,7 @@ char * petrov::inputCString(std::istream & in, size_t & capacity)
   catch (const std::bad_alloc & e)
   {
     delete[] string;
+    string = nullptr;
     throw;
   }
 }
