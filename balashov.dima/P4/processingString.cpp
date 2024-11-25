@@ -1,5 +1,4 @@
 #include "processingString.hpp"
-#include <iostream>
 #include <cmath>
 
 char* balashov::removeSpaces(char* line)
@@ -40,18 +39,17 @@ char* balashov::increaseSizeLine(char* lineStart, size_t& capacity)
   return newLine;
 }
 
-char* balashov::enteringLine(size_t& capacity)
+char* balashov::enteringLine(std::istream & in, size_t & capacity)
 {
   char symbol = '\0';
   size_t sizeLine = 0;
   char* line = reinterpret_cast< char* >(malloc(capacity));
   if (line == nullptr)
   {
-    free(line);
     return nullptr;
   }
   std::noskipws(std::cin);
-  while ((std::cin >> symbol) && (symbol != '\n'))
+  while ((in >> symbol) && (symbol != '\n'))
   {
     line[sizeLine++] = symbol;
     if (sizeLine == capacity)
@@ -61,12 +59,13 @@ char* balashov::enteringLine(size_t& capacity)
       free(line);
       if (newLine == nullptr)
       {
+        std::skipws(in);
         return nullptr;
       }
       line = newLine;
     }
   }
   line[sizeLine] = '\0';
-  std::skipws(std::cin);
+  std::skipws(in);
   return line;
 }

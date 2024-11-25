@@ -4,7 +4,7 @@
 int main()
 {
   size_t capacity = 5;
-  char * line = balashov::enteringLine(capacity);
+  char * line = balashov::enteringLine(std::cin, capacity);
   if (line == nullptr)
   {
     std::cerr << "Memory was not allocated\n";
