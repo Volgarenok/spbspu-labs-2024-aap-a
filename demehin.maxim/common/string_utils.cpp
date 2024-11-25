@@ -1,7 +1,7 @@
 #include "string_utils.h"
 #include <stdexcept>
 
-char* demehin::copyString(char* str, size_t size)
+char* demehin::copyString(const char* str, size_t size)
 {
   size_t temp_size = 0;
   char* new_str = new char[size];
@@ -9,7 +9,7 @@ char* demehin::copyString(char* str, size_t size)
   while (str[temp_size] != '\0')
   {
     new_str[temp_size] = str[temp_size];
-    temp_size += 1;
+    temp_size++;
   }
   return new_str;
 }
@@ -39,6 +39,7 @@ char* demehin::getString(std::istream& in, char stop, size_t max_size)
       catch (const std::bad_alloc& e)
       {
         return str;
+        throw std::runtime_error("string expansion failed");
       }
 
       delete[] str;

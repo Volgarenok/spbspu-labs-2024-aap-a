@@ -17,6 +17,10 @@ int main()
     std::cerr << "Out of memory\n";
     return 1;
   }
+  catch (const std::runtime_error& e)
+  {
+    std::cerr << e.what() << "\n";
+  }
 
   if (first_str[0] == '\0')
   {
