@@ -12,4 +12,5 @@ int main()
     return 1;
   }
   std::cout << std::boolalpha << gavrilova::is_expression(str) << "\n";
+  delete[] str;
 }
