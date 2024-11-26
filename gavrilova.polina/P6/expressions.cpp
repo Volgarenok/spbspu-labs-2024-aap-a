@@ -75,6 +75,7 @@ const char * gavrilova::has_term(const char * str)
   if (next && !gavrilova::is_symbol(next,"*")) {
     return next;
   }
+  next = gavrilova::is_symbol(next,"*");
   if (next) {
     auto continues = gavrilova::has_term(next);
     if (continues) {
@@ -98,8 +99,11 @@ const char * gavrilova::has_expression (const char *  str)
     return nullptr;
   }
   auto next = gavrilova::has_term(str);
-  next = gavrilova::is_symbol(next, "-+");
-  next = gavrilova::has_expression(next);
+  auto continiues = gavrilova::is_symbol(next, "-+");
+  if (!continiues) {
+    return next;
+  }
+  next = gavrilova::has_expression(continiues);
   return next;
 }
 
