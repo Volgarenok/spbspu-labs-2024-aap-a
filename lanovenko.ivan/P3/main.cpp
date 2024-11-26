@@ -22,7 +22,7 @@ int main(int argc, char** argv)
     std::cerr << "First parametr is not a number" << '\n';
     return 1;
   }
-  const char *str = argv[1];
+  const char* str = argv[1];
   char* endptr = nullptr;
   long int num = 0;
   num = std::strtol(str, std::addressof(endptr), 10);
@@ -65,9 +65,13 @@ int main(int argc, char** argv)
   {
     for (size_t c = 0; c < cols; ++c)
     {
-      if(r != cols - 1)
+      if (c < cols - 1)
       {
-        output << matrix[r * cols + c] << " ";
+        output << matrix[r * cols + c] << ' ';
+      }
+      else
+      {
+        output << matrix[r * cols + c];
       }
     }
     output << '\n';
