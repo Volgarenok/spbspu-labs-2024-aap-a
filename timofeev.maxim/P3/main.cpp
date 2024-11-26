@@ -1,8 +1,10 @@
-#include "input_matrix.h"
-#include "output_matrix.h"
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 #include <cstring>
+#include "input_matrix.h"
+#include "output_matrix.h"
+#include "cut_to_square.h"
 
 int main(int argc, char** argv)
 {
@@ -16,22 +18,10 @@ int main(int argc, char** argv)
     std::cerr << "Not enough arguments\n";
     return 1;
   }
-
-  long int num = 0;
-  const char *type_check = argv[1];
-  for (size_t i = 0; i < strlen(type_check); i++)
-  {
-    if (type_check[i] < '0' || type_check[i] > '9')
-    {
-      std::cerr << "First parameter is not a number" << "\n";
-      return 1;
-    }
-  }
-  char* endptr;
-  num = std::strtol(type_check, &endptr, 10);
+  int num = std::atoi(argv[1]);
   if (num != 1 && num != 2)
   {
-    std::cerr << "First parameter is out of range" << "\n";
+    std::cerr << "First parameter is out of range\n";
     return 1;
   }
 
@@ -41,12 +31,18 @@ int main(int argc, char** argv)
   size_t column = 0;
   size_t matrix_size = 0;
   input >> line >> column;
+  size_t size = (column <= line) ? column : line;
   if (!input)
   {
     std::cerr << "Not a matrix\n";
     return 2;
   }
   matrix_size = line * column;
+  if (matrix_size == 0)
+  {
+    output << line << column;
+    return 0;
+  }
   if (num == 1)
   {
     int matrix[10000];
@@ -55,7 +51,15 @@ int main(int argc, char** argv)
       std::cerr << "Fail input\n";
       return 2;
     }
-    timofeev::check_diag(output, matrix, line, column);
+    timofeev::cut_to_square(matrix, line, column);
+    if (timofeev::check_diag(matrix, size))
+    {
+      output << "The matrix contains diagonals with equal values";
+    }
+    else
+    {
+      output << "The matrix doesn't contain diagonals with equal values";
+    }
   }
   else if (num == 2)
   {
@@ -75,7 +79,15 @@ int main(int argc, char** argv)
       std::cerr << "Fail input\n";
       return 2;
     }
-    timofeev::check_diag(output, dmatrix, line, column);
+    timofeev::cut_to_square(dmatrix, line, column);
+    if (timofeev::check_diag(dmatrix, size))
+    {
+      output << "The matrix contains diagonals with equal values";
+    }
+    else
+    {
+      output << "The matrix doesn't contain diagonals with equal values";
+    }
     delete[] dmatrix;
   }
   return 0;

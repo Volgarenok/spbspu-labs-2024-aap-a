@@ -1,57 +1,29 @@
 #include "output_matrix.h"
 #include <iostream>
 
-
-void timofeev::check_diag(std::ostream& out, int* matrix, size_t strk, size_t stl)
+int timofeev::check_diag(const int* matrix, size_t size)
 {
-  size_t sum_dig = strk + stl - 1;
-  size_t sum_el = (strk * stl) + ((stl - 1) * stl);
-  char* values = static_cast<char*>(malloc(sizeof(char) * sum_dig));
-  char* new_matrix = static_cast<char*>(malloc(sizeof(char) * sum_el));
-  for (size_t i = 2; i < strk * stl; i++)
+  const size_t move = size - 1;
+  size_t diag = size;
+  for (size_t i = 1; i < size; i++)
   {
-    new_matrix[i - 2] = matrix[i];
-  }
-  size_t count = 0;
-  for (size_t i = 0; i < (strk + stl - 1); i++)
-  {
-    size_t col = 0;
-    int icur = i;
-    char diag;
-    for (size_t j = (stl -1); (col <= i) && (col < stl); j--)
+    diag--;
+    size_t left_in_diag = diag;
+    size_t check_el = i;
+    size_t fine_check = 0;
+    while (left_in_diag > 0)
     {
-      int jcur = j;
-      if (icur * stl + jcur < (strk * stl))
+      if (matrix[check_el] == matrix[(check_el + (move * i))])
       {
-        char di_el = static_cast<char>(new_matrix[(icur * stl) + jcur]);
-        diag += di_el;
+        check_el += size + 1;
+        fine_check++;
       }
-      icur--;
-      jcur--;
-      col++;
+      left_in_diag--;
     }
-    values[count] = diag;
-    count++;
-  }
-  free(new_matrix);
-  size_t mtr = 0;
-  for (size_t i = 0; i < count; i++)
-  {
-    for (size_t j = 0; j < count && j != i; j++)
+    if (fine_check == diag)
     {
-      if (values[i] == values[j])
-      {
-        mtr += 1;
-      }
+      return 1;
     }
   }
-  free(values);
-  if (mtr > 0)
-  {
-    out << "the matrix contains diagonals with equal values\n";
-  }
-  else
-  {
-    out << "the matrix doesn't contains diagonals with equal values\n";
-  }
+  return 0;
 }
