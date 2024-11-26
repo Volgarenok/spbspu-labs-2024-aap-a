@@ -18,7 +18,7 @@ char* duhanina::inputStr(std::istream& in)
   char* str = nullptr;
   try
   {
-    str = new char[size + 1] {0};
+    str = new char[size + 1];
   }
   catch (const std::bad_alloc& e)
   {
@@ -29,7 +29,7 @@ char* duhanina::inputStr(std::istream& in)
   in >> std::noskipws;
   while (in >> c && c != '\n')
   {
-    if (index == (size - 1))
+    if (index == size)
     {
       str[size] = '\0';
       size *= 2;
