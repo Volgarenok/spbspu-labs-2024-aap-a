@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstddef>
 
-char* duhanina::createNewArray(char* array, char* new_array)
+char* duhanina::strcpy(char* array, char* new_array)
 {
   size_t i = 0;
   for (i = 0; array[i] != '\0'; ++i)
@@ -10,7 +10,6 @@ char* duhanina::createNewArray(char* array, char* new_array)
     new_array[i] = array[i];
   }
   new_array[i] = '\0';
-  delete[] array;
   return new_array;
 }
 
@@ -18,15 +17,7 @@ char* duhanina::createNewArray(char* array, char* new_array)
 char* duhanina::inputStr(std::istream& in)
 {
   size_t size = 20;
-  char* str = nullptr;
-  try
-  {
-    str = new char[size + 1] {0};
-  }
-  catch (const std::bad_alloc& e)
-  {
-    return nullptr;
-  }
+  char* str = new char[size + 1];
   str[size] = '\0';
   char c = '\0';
   size_t index = 0;
@@ -39,29 +30,20 @@ char* duhanina::inputStr(std::istream& in)
       char* newStr = nullptr;
       try
       {
-        newStr = new char[size + 1] {0};
+        newStr = new char[size + 1];
       }
       catch (const std::bad_alloc& e)
       {
-        return nullptr;
-      }
-      if (newStr == nullptr)
-      {
         delete[] str;
-        delete[] newStr;
-        return nullptr;
+        throw;
       }
-      newStr = duhanina::createNewArray(str, newStr);
+      newStr = duhanina::strcpy(str, newStr);
+      delete[] str;
       str = newStr;
     }
-    in >> std::skipws;
     str[index++] = c;
   }
   str[index] = '\0';
-  if(str[0] == '\0')
-  {
-    delete[] str;
-    return nullptr;
-  }
+  in >> std::skipws;
   return str;
 }

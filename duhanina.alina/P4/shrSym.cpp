@@ -2,31 +2,24 @@
 #include <cctype>
 #include <cstddef>
 
-void duhanina::shrSym(const char* str, char*& result)
+void duhanina::shrSym(const char* str, char* missing)
 {
-  bool isPresent[26] = {false};
-  for (size_t i = 0; str[i] != '\0'; ++i)
-  {
-    if (std::isalpha(str[i]))
-    {
-      isPresent[std::tolower(str[i]) - 'a'] = true;
-    }
-  }
-  size_t countMissing = 0;
-  for (size_t i = 0; i < 26; ++i)
-  {
-    if (!isPresent[i])
-    {
-      ++countMissing;
-    }
-  }
   size_t index = 0;
-  for (size_t i = 0; i < 26; ++i)
+  for (char c = 'a'; c <= 'z'; c++)
   {
-    if (!isPresent[i])
+    bool present = false;
+    for (size_t i = 0; str[i] != '\0'; ++i)
     {
-      result[index++] = 'a' + i;
+      if (std::isalpha(str[i]) && std::tolower(str[i]) == c)
+      {
+        present = true;
+        break;
+      }
+    }
+    if (!present)
+    {
+      missing[index++] = c;
     }
   }
-  result[index] = '\0';
+  missing[index] = '\0';
 }

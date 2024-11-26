@@ -3,7 +3,7 @@
 
 namespace duhanina
 {
-  void shrSym(const char* str, char*& result);
+  void shrSym(const char* str, char* missing);
 }
 
 #endif
