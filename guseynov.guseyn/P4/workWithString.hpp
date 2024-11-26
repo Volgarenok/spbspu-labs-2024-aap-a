@@ -6,8 +6,8 @@
 
 namespace guseynov
 {
-  char * getLine(std::istream & in, char stop);
-  char * getNewArr(char *arr, size_t size, size_t step);
-  size_t identifyUniqueChar(const char *inputString);
+  char * getLine(std::istream & in, size_t & stringLength);
+  char * expandMatrix(char *arr, size_t size, size_t step);
+  size_t determiningNumOfLetters(const char *inputString, size_t stringLength);
 }
 #endif
