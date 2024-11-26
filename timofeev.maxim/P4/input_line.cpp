@@ -27,7 +27,7 @@ char* timofeev::input_line(std::istream& in)
     {
       try
       {
-        new_line = timofeev::boost_size(line, capacity);
+        char* new_line = timofeev::boost_size(line, capacity);
         free(line);
         line = new_line;
       }
