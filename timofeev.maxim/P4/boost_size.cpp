@@ -9,10 +9,5 @@ char* timofeev::boost_size(char* value_line, size_t capacity)
     free(new_line);
     return nullptr;
   }
-  for (size_t i = 0; value_line[i] != '\0'; i++)
-  {
-    new_line[i] = value_line[i];
-  }
-  free(new_line);
   return new_line;
 }

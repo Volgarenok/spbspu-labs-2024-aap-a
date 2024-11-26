@@ -25,18 +25,15 @@ char* timofeev::input_line(std::istream& in)
   {
     if (cur_writing_lit == capacity)
     {
-      try
+      constexpr size_t memory_boost = 10;
+      size_t new_capacity = capacity + memory_boost;
+      char* new_line = timofeev::boost_size(line, capacity);
+      for (size_t i = 0; i < cur_writing_sym; i++)
       {
-        char* new_line = timofeev::boost_size(line, capacity);
-        free(line);
-        line = new_line;
+        new_line[i] = line[i];
       }
-      catch(const std::bad_alloc& e)
-      {
-        free(line);
-        std::cerr << "Out of memory\n";
-        return nullptr;
-      }
+      free(line);
+      line = new_line;
     }
     line[cur_writing_lit++] = cur_sym;
   }
