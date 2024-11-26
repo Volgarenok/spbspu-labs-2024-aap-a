@@ -5,14 +5,10 @@
 
 int main()
 {
-  char* str = nullptr;
-  try
+  char* str = duhanina::inputStr(std::cin);
+  if (str == nullptr)
   {
-    str = duhanina::inputStr(std::cin);
-  }
-  catch (const std::bad_alloc& e)
-  {
-    std::cerr << "Memory error\n";
+    std::cerr << "Memory\n";
     return 1;
   }
   if (str[0] == '\0')
