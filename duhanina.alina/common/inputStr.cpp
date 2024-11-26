@@ -30,7 +30,7 @@ char* duhanina::inputStr(std::istream& in)
       char* newStr = nullptr;
       try
       {
-        newStr = new char[size + 1];
+        newStr = new char[size + 1] {0};
       }
       catch (const std::bad_alloc& e)
       {
