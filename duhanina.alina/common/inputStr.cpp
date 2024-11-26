@@ -9,7 +9,6 @@ char* duhanina::strcpy(char* array, char* new_array)
   {
     new_array[i] = array[i];
   }
-  new_array[i] = '\0';
   return new_array;
 }
 
@@ -26,14 +25,14 @@ char* duhanina::inputStr(std::istream& in)
   {
     return nullptr;
   }
-  str[size] = '\0';
   char c = '\0';
   size_t index = 0;
   in >> std::noskipws;
   while (in >> c && c != '\n')
   {
-    if (index >= (size - 1))
+    if (index == (size - 1))
     {
+      str[size] = '\0';
       size *= 2;
       char* newStr = nullptr;
       try
@@ -55,3 +54,4 @@ char* duhanina::inputStr(std::istream& in)
   in >> std::skipws;
   return str;
 }
+
