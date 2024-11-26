@@ -26,7 +26,7 @@ char* timofeev::input_line(std::istream& in)
     if (cur_writing_lit == capacity)
     {
       constexpr size_t memory_boost = 10;
-      size_t new_capacity = capacity + memory_boost;
+      capacity += memory_boost;
       char* new_line = timofeev::boost_size(capacity);
       for (size_t i = 0; i < cur_writing_lit; i++)
       {
