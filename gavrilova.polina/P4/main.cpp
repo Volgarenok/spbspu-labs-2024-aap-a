@@ -6,6 +6,7 @@ int main()
 {
   size_t len = 0;
   char* first_str = inputStr(std::cin, len);
+
   if (!first_str) {
     std::cerr << "Memory or input error\n";
     return 1;
