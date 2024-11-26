@@ -7,7 +7,7 @@ int main()
 {
   size_t len = 0;
   const char* str = inputStr(std::cin, len);
-  if (!str || len == 0) {
+  if (!str || str[0] == '\0') {
     std::cerr << "Wrong input!" << "\n";
     return 1;
   }
