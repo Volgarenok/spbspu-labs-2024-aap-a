@@ -1,10 +1,11 @@
 #include "functions.h"
+#include <cctype>
 
 bool hismatova::isValidString(const char* str, size_t& position)
 {
   if (isTerm(str, position))
   {
-    while (str[position] == '+' || str[position] == '-')
+    while (str[position] == '+')
     {
       position++;
       if (!isTerm(str, position))
@@ -20,7 +21,7 @@ const char* hismatova::isTerm(const char* str, size_t& position)
 {
   if (isMultiplier(str, position))
   {
-    while (str[position] == '*' || str[position] == '-')
+    while (str[position] == '*')
     {
       position++;
       if (!isMultiplier(str, position))
@@ -34,6 +35,22 @@ const char* hismatova::isTerm(const char* str, size_t& position)
 }
 const char* hismatova::isMultiplier(const char* str, size_t& position)
 {
+  if (isDeterm(str, position))
+  {
+    while (str[position] == '-')
+    {
+      position++;
+      if (!isDeterm(str, position))
+      {
+        return nullptr;
+      }
+    }
+    return str;
+  }
+  return nullptr;
+}
+const char* hismatova::isDeterm(const char* str, size_t& position)
+{
   const char* result = isUnsignedInt(str, position);
   if (result == nullptr)
   {
@@ -43,10 +60,10 @@ const char* hismatova::isMultiplier(const char* str, size_t& position)
 }
 const char* hismatova::isUnsignedInt(const char* str, size_t& position)
 {
-  if (isDigit(str[position]))
+  if (std::isdigit(str[position]))
   {
     position++;
-    while (str[position] && isDigit(str[position]))
+    while (str[position] && isdigit(str[position]))
     {
       position++;
     }
@@ -62,10 +79,6 @@ const char* hismatova::isIdentificator(const char* str, size_t& position)
     return str;
   }
   return nullptr;
-}
-bool hismatova::isDigit(char c)
-{
-  return c >= '0' && c <= '9';
 }
 bool hismatova::isLetter(char c)
 {
