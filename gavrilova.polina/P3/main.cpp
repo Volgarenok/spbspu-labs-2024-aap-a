@@ -61,9 +61,10 @@ int main(int argc, char ** argv)
   int * temp2 = nullptr;
   try {
       temp2 = new int [m*n];
-    } catch (const std::bad_alloc & e) {
+  } catch (const std::bad_alloc & e) {
       return 1;
-    }
+  }
+
   if (num == 1) {
     mtx = temp1;
   } else if (num == 2) {
@@ -72,7 +73,7 @@ int main(int argc, char ** argv)
 
   gavrilova::input_matrix(input, mtx, m, n, read);
 
-  if (!input || input.eof()) {
+  if (!input || input.eof() || read != m * n) {
     delete[] temp2;
     return 1;
   }
