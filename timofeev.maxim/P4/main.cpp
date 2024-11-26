@@ -22,5 +22,6 @@ int main()
     return 1;
   }
   std::cout << timofeev::same_symbols(first_line, second_line);
+  free(second_line);
   return 0;
 }
