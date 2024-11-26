@@ -12,14 +12,13 @@ char* duhanina::strcpy(char* array, char* new_array)
   return new_array;
 }
 
-
 char* duhanina::inputStr(std::istream& in)
 {
   size_t size = 20;
   char* str = nullptr;
   try
   {
-    str = new char[size + 1];
+    str = new char[size + 1] {0};
   }
   catch (const std::bad_alloc& e)
   {
