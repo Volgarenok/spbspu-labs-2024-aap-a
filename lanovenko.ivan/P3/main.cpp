@@ -55,8 +55,9 @@ int main(int argc, char** argv)
     }
   }
 
-  if(!lanovenko::input_matrix(input, matrix, matrixsize))
+  if (!lanovenko::input_matrix(input, matrix, matrixsize))
   {
+    delete[] pointertodelete;
     std::cerr << "Input fail" << '\n';
     return 2;
   }
