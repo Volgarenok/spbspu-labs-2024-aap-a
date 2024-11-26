@@ -17,7 +17,7 @@ char* duhanina::strcpy(char* array, char* new_array)
 char* duhanina::inputStr(std::istream& in)
 {
   size_t size = 20;
-  char* str = new char[size + 1];
+  char* str = new char[size + 1] {0};
   str[size] = '\0';
   char c = '\0';
   size_t index = 0;
