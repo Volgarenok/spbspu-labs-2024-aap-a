@@ -39,6 +39,5 @@ char* timofeev::input_line(std::istream& in)
   }
   line[cur_writing_lit] = '\0';
   std::skipws(in);
-  free(line);
   return line;
 }
