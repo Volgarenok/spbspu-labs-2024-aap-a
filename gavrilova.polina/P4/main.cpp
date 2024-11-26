@@ -4,24 +4,23 @@
 
 int main()
 {
-  char* first_str = nullptr;
   size_t len = 0;
-  first_str = inputStr(std::cin, len);
+  char* first_str = inputStr(std::cin, len);
   if (!first_str) {
-    std::cerr << "Memory or input error";
+    std::cerr << "Memory or input error\n";
     return 1;
   }
 
-  char * result_str = nullptr;
+  char* result_str = nullptr;
   try {
-    result_str = new char [len+1];
+    result_str = new char[len + 1];
   } catch (const std::bad_alloc & e) {
-    std::cerr << "Memory error.";
+    std::cerr << "Memory error\n";
     delete[] first_str;
     return 1;
   }
 
-  rm_digits(first_str, result_str);
+  gavrilova::rm_digits(first_str, result_str, len);
   std::cout << result_str << "\n";
   delete[] result_str;
   delete[] first_str;
