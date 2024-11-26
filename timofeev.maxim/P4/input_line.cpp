@@ -27,7 +27,9 @@ char* timofeev::input_line(std::istream& in)
     {
       try
       {
-        line = timofeev::boost_size(line, capacity);
+        new_line = timofeev::boost_size(line, capacity);
+        free(line);
+        line = new_line;
       }
       catch(const std::bad_alloc& e)
       {
@@ -39,5 +41,6 @@ char* timofeev::input_line(std::istream& in)
     line[cur_writing_lit++] = cur_sym;
   }
   std::skipws(in);
+  free(line);
   return line;
 }
