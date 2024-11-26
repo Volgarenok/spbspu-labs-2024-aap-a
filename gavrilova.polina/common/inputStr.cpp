@@ -40,6 +40,5 @@ char* inputStr(std::istream& in, size_t & len)
     delete[] result_str;
     return nullptr;
   }
-
   return result_str;
 }
