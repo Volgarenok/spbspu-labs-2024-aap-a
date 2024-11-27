@@ -7,9 +7,9 @@ int main()
   size_t max = 10;
   size_t size = 0;
 
-  const char * str1 = kushekbaev::readInputArray(std::cin, \0, size1, max);
+  const char * str1 = kushekbaev::readInputArray(std::cin, "\0", size, max);
 
-  const char * str2 = "string literal" << "\n";
+  const char * str2 = "string literal";
 
   if (size == 0)
   {
@@ -19,7 +19,7 @@ int main()
     return 1;
   }
 
-  std::cout << kushekbaev::hasCommonChars(str1, size, str2) << "\n";
+  std::cout << kushekbaev::hasCommonChars(str1, str2, strlen(str1), strlen(str2)) << "\n";
 
   delete[] str1;
   delete[] str2;

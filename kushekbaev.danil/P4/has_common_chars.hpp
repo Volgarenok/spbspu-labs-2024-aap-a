@@ -4,7 +4,7 @@
 
 namespace kushekbaev
 {
-  int hasCommonChars(const char* str1, size_t size1, const char* str2, size_t size2);
+  int hasCommonChars(const char* str1, const char* str2, size_t size);
 }
 
 #endif
