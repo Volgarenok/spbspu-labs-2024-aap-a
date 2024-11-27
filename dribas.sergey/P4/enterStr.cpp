@@ -32,10 +32,11 @@ char* dribas::enterStr(std::istream & input)
     if (!input) {
       free(str);
       std::cerr << "ERROR WITH INPUT!!!\n";
-      return str;
+      return nullptr;
     } else {
       size += 1;
-      char* newstr = static_cast< char* >(malloc(size * sizeof(char)));
+      char* newstr = nullptr;
+      newstr = static_cast< char* >(malloc(size * sizeof(char)));
       if (!newstr) {
         free(str);
         std::cerr << "ERROR WITH MEMORY!!\n";
