@@ -7,7 +7,7 @@ char* kushekbaev::readInputArray(std::istream& input, char stop, size_t& size, s
     size = 0;
 
     std::noskipws(std::cin);
-    while ((input > stop) && (stop != '\n'))
+    while ((input >> stop) && (stop != '\n'))
     {
       if (size == max)
       {
@@ -23,7 +23,7 @@ char* kushekbaev::readInputArray(std::istream& input, char stop, size_t& size, s
       str[size++] = stop;
     }
     str[size] = '\0';
-    std::skipws(std::cin)
+    std::skipws(std::cin);
   }
   catch (const std::bad_alloc& e)
   {
