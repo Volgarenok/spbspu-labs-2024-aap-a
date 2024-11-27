@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 #include "functions.hpp"
 
 int main()
@@ -26,4 +24,3 @@ int main()
   delete[] string;
   delete[] str1;
 }
->>>>>>> parent of ed58d6f6e (Fix error)
