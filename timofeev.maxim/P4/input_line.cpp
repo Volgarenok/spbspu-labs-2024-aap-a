@@ -13,7 +13,7 @@ char* timofeev::input_line(std::istream& in)
   line[capacity] = '\0';
   line[0] = '0';
   in >> line[0];
-  if (line[0] == '\0')
+  if (line[0] == '\0' || std::cin.eof())
   {
     free(line);
     return nullptr;
