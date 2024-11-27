@@ -28,7 +28,7 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
       }
       line = extendedline;
     }
-    line[cnt] = elem;
+    *(line + cnt) = elem;
     ++cnt;
   }
   if (!input)
