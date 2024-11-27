@@ -1,6 +1,17 @@
 #include "check_str.h"
 
-const char * finaev::isSymbol(const char * str, const char a)
+namespace finaev
+{
+  const char * isSymbol(const char * str, char a);
+  const char * hasLetter(const char * str);
+  const char * hasDigit(const char * str);
+  const char * hasId(const char* str);
+  const char * hasUnsignedInt(const char* str);
+  const char * hasFactor(const char* str);
+  const char * hasTerm(const char* str);
+}
+
+const char * finaev::isSymbol(const char * str, char a)
 {
   if (!str)
   {
@@ -29,7 +40,7 @@ const char * finaev::hasDigit(const char * str)
 
 const char * finaev::hasId(const char* str)
 {
-  return finaev::hasLetter(str);
+  return hasLetter(str);
 }
 
 const char * finaev::hasUnsignedInt(const char* str)
