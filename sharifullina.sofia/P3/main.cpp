@@ -45,13 +45,13 @@ int main(int argc, char ** argv)
     try
     {
       dynamicArr = new int[m * n];
+      array = dynamicArr;
     }
     catch (const std::bad_alloc &e)
     {
       std::cerr << "Out of memory\n";
       return 1;
     }
-    array = dynamicArr;
   }
   if (!sharifullina::inputMatrix(input, array, m, n, read))
   {
@@ -61,6 +61,6 @@ int main(int argc, char ** argv)
   }
   output << sharifullina::countLocMax(array, m, n);
   output << sharifullina::countMaxSumMdg(array, m, n);
-  output << "\n"
+  output << "\n";
   delete[] dynamicArr;
 }
