@@ -5,9 +5,9 @@
 
 int main()
 {
-  char *str1 = nullptr;
+  char *str1 = hismatova::getLine(std::cin);
   const char *str2 = "abc";
-  if (hismatova::getLine(std::cin, &str1) == 1)
+  if (str1 == nullptr)
   {
     std::cerr << "error in reading first line\n";
     return 1;
@@ -18,18 +18,9 @@ int main()
     free(str1);
     return 1;
   }
-  char* result = hismatova::uniqueChar(str1, str2);
-  if (result != nullptr)
-  {
-    std::cout << result << "\n";
-    free(result);
-  }
-  else
-  {
-    std::cerr << "result is nullptr\n";
-    free(str1);
-    return 1;
-  }
+  char result[128] = {0};
+  hismatova::uniqueChar(str1, str2, result);
+  std::cout << result << "\n";
   free(str1);
   return 0;
 }

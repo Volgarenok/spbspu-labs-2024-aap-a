@@ -4,10 +4,9 @@
 #include <cstring>
 #include <cctype>
 
-char* hismatova::uniqueChar(const char* str1, const char* str2)
+void hismatova::uniqueChar(const char* str1, const char* str2, char* result)
 {
   bool arr[128] = {0};
-  size_t count = 0;
   for (size_t i = 0; str1[i] != '\0'; ++i)
   {
     int ascii1 = static_cast< int >(str1[i]);
@@ -32,18 +31,6 @@ char* hismatova::uniqueChar(const char* str1, const char* str2)
       arr[ascii2 + 32] = true;
     }
   }
-  for (size_t i = 0; i < 128; ++i)
-  {
-    if (arr[i])
-    {
-      count++;
-    }
-  }
-  char* result = reinterpret_cast< char* >(malloc(count + 1));
-  if (result == nullptr)
-  {
-    return nullptr;
-  }
   size_t ind = 0;
   for (size_t i = 0; i < 128; ++i)
   {
@@ -53,16 +40,14 @@ char* hismatova::uniqueChar(const char* str1, const char* str2)
     }
   }
   result[ind] = '\0';
-  return result;
 }
-int hismatova::getLine(std::istream& input, char** str)
+char* hismatova::getLine(std::istream& input)
 {
   size_t n = 500;
-  *str = reinterpret_cast< char* >(malloc(sizeof(char) * n));
-  if (*str == nullptr)
+  char *str = reinterpret_cast< char* >(malloc(sizeof(char) * n));
+  if (str == nullptr)
   {
-    std::cerr << "out of memory\n";
-    return 1;
+    return nullptr;
   }
   size_t length = 0;
   int c = 0;
@@ -70,11 +55,11 @@ int hismatova::getLine(std::istream& input, char** str)
   {
     if (length + 1 >= n)
     {
-      std::cerr << "string is too long\n";
-      return 1;
+      free(str);
+      return nullptr;
     }
-    (*str)[length++] = static_cast< char >(c);
+    str[length++] = static_cast< char >(c);
   }
-  (*str)[length] = '\0';
-  return 0;
+  str[length] = '\0';
+  return str;
 }

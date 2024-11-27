@@ -5,8 +5,8 @@
 
 namespace hismatova
 {
-  int getLine(std::istream& input, char** str);
-  char* uniqueChar(const char* str1, const char* str2);
+  char* getLine(std::istream& input);
+  void uniqueChar(const char* str1, const char* str2, char* result);
 }
 
 #endif
