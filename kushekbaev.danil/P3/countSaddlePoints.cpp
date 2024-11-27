@@ -52,3 +52,4 @@ int kushekbaev::countSaddlePoints(int * matrix, size_t rows, size_t columns)
     }
   }
 return count;
+}
