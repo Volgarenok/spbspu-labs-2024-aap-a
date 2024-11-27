@@ -47,7 +47,7 @@ int main(int argc, char** argv)
     output << line << column;
     return 0;
   }
-  int matrix[10000];
+  int* matrix[10000];
   int* dmatrix = nullptr;
   if (num == 2)
   {
@@ -66,7 +66,7 @@ int main(int argc, char** argv)
   {
     std::cerr << "Fail input\n";
     return 2;
-    delete[] dmatrix
+    delete[] dmatrix;
   }
   timofeev::cut_to_square(matrix, line, column);
   if (timofeev::check_diag(matrix, size))
