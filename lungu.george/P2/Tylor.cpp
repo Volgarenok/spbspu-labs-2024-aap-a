@@ -2,8 +2,10 @@
 #include <cmath>
 #include <stdexcept>
 
-namespace lungu {
-  double TylorFunc(double x, double absError, int numberMax) {
+namespace lungu
+{
+  double func_Tylor(double x, double absError, int numberMax)
+{
     double sum = 1.0;
     double term = 1.0;
     int n = 1;
