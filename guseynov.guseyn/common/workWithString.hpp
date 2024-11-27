@@ -7,7 +7,7 @@
 namespace guseynov
 {
   char * getLine(std::istream & in, size_t & stringLength);
-  char * expandMatrix(char *arr, size_t size, size_t step);
+  char * expandMassive(char *arr, size_t size, size_t step);
   size_t determiningNumOfLetters(const char *inputString, size_t stringLength);
 }
 #endif
