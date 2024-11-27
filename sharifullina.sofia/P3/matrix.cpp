@@ -32,11 +32,11 @@ size_t sharifullina::countLocMax(const int * t, size_t m, size_t n)
 int sharifullina::countMaxSumMdg(const int * t, size_t m, size_t n)
 {
   int maxSum = std::numeric_limits<int>::min();
-    for (int col = n - 1; col >= 0; --col)
+    for (size_t col = n - 1; col >= 0; --col)
     {
       int sum = 0;
-      int startCol = col;
-      int startRow = 0;
+      size_t startCol = col;
+      size_t startRow = 0;
       while (startCol < n && startRow < m)
       {
         sum += t[startRow][startCol];
@@ -48,8 +48,8 @@ int sharifullina::countMaxSumMdg(const int * t, size_t m, size_t n)
     for (int row = 1; row < m; ++row)
     {
       int sum = 0;
-      int startRow = row;
-      int startCol = 0;
+      size_t startRow = row;
+      size_t startCol = 0;
       while (startRow < m && startCol < n)
       {
         sum += t[startRow][startCol];

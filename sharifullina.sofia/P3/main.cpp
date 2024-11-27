@@ -31,7 +31,7 @@ int main(int argc, char ** argv)
 
   int fixedLengthArr[1000] = {};
   int * dynamicArr = nullptr;
-  int * array = fixedLenghtArray;
+  int * array = fixedLenghtArr;
   if (num == 2)
   {
     try
@@ -47,7 +47,7 @@ int main(int argc, char ** argv)
   }
   if (!sharifullina::inputMatrix(input, array, m, n, read))
   {
-    std::cerr << "Invalid matrix element\n"
+    std::cerr << "Invalid matrix element\n";
     delete[] dynamicArr;
     return 1;
   }
