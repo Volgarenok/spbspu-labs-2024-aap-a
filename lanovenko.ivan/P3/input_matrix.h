@@ -5,6 +5,6 @@
 
 namespace lanovenko
 {
-  std::istream& input_matrix(std::istream & in, int * matrix, size_t sizematrix);
+  std::istream& input_matrix(std::istream& in, int* matrix, size_t sizematrix);
 }
 #endif
