@@ -21,7 +21,7 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
   }
   size_t i = 0;
   char buffer = 'a';
-  while (true)
+  while (!in.eof())
   {
     if (i == (capacity - 1))
     {
