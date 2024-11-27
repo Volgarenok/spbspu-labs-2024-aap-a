@@ -24,13 +24,34 @@ int main(int argc, char ** argv)
     return 1;
   }
   std::ifstream input(argv[2]);
-  size_t rows = 0;
-  size_t columns = 0;
-  input >> rows >> columns;
-  if (!input)
+  size_t m = 0;
+  size_t n = 0;
+  input >> m >> n;
+  size_t read = 0;
+
+  int fixedLengthArr[1000] = {};
+  int * dynamicArr = nullptr;
+  int * array = fixedLenghtArray;
+  if (num == 2)
   {
-    std::cerr << "Rows or columns are not a number\n";
-    return 2;
+    try
+    {
+      dynamicArr = new int[m * n];
+    }
+    catch (const std::bad_alloc &e)
+    {
+      std::cerr << "Out of memory\n";
+      return 1;
+    }
+    array = dynamicArr;
   }
-  std::ofstream output(argv[3]);
+  if (!sharifullina::inputMatrix(input, array, m, n, read))
+  {
+    std::cerr << "Invalid matrix element\n"
+    delete[] dynamicArr;
+    return 1;
+  }
+  output << sharifullina::countLocMax(array, m, n);
+  output << "\n"
+  delete[] dynamicArr;
 }
