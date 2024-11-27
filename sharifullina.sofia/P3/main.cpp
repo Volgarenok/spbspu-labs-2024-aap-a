@@ -16,13 +16,9 @@ int main(int argc, char ** argv)
     std::cerr << "Too many arguments\n";
     return 1;
   }
-  int num = std::strtol(argv[1]);
-  if (num != 1 && num != 2)
-  {
-    std::cerr << "First parameter is out of range\n";
-    return 1;
-  }
-  if (argv[1][1] != '\0')
+  char* end;
+  long num = std::strtol(argv[1], &end, 10);
+  if (*end != '\0' || (num != 1 && num != 2))
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
@@ -33,9 +29,17 @@ int main(int argc, char ** argv)
   input >> m >> n;
   size_t read = 0;
 
+  std::ofstream output(argv[3]);
+  if (!output.is_open())
+  {
+    std::cerr << "Failed to open output file\n";
+    delete[] dynamicArr;
+    return 1;
+  }
+
   int fixedLengthArr[1000] = {};
   int * dynamicArr = nullptr;
-  int * array = fixedLenghtArr;
+  int * array = fixedLengthArr;
   if (num == 2)
   {
     try

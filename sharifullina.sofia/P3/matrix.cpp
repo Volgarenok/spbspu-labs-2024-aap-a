@@ -20,11 +20,11 @@ size_t sharifullina::countLocMax(const int * t, size_t m, size_t n)
     for (size_t j = 1; j < n - 1; j++)
     {
       int current = t[i * n + j];
-        if (current > t[(i - 1) * n + j] && current > t[(i + 1) * n + j] &&
+      if (current > t[(i - 1) * n + j] && current > t[(i + 1) * n + j] &&
           current > t[i * n + (j - 1)] && current > t[i * n + (j + 1)])
-          {
-            k++;
-          }
+      {
+        k++;
+      }
     }
   }
   return k;
