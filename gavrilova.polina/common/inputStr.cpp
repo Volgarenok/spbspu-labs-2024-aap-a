@@ -13,9 +13,9 @@ char* inputStr(std::istream& in, size_t & len)
   char c;
   in >> std::noskipws;
   while ((in >> c)) {
-    if (c == '\n'){
-      break;
-    }
+//    if (c == '\n'){
+//      break;
+//    }
     if (len < K - 1) {
       result_str[len++] = c;
     } else {
