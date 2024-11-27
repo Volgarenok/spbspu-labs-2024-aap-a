@@ -17,10 +17,7 @@ const char * maslov::hasExpression(const char * str)
   if (nextMinus || nextPlus)
   {
     next++;
-    if (auto continues = hasExpression(next))
-    {
-      return continues;
-    }
+    next = hasExpression(next);
   }
   return next;
 }
