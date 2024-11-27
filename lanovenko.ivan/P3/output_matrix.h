@@ -5,6 +5,6 @@
 
 namespace lanovenko
 {
-  void output_LFT_TOP_CLK(std::ostream & out, int* matrix, size_t rows, size_t cols);
+  void output_matrix(std::ostream & out, int *matrix, size_t rows, size_t cols);
 }
 #endif
