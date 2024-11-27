@@ -1,6 +1,17 @@
 #include "recursionfunc.hpp"
 #include <iostream>
 
+namespace mozhegova
+{
+  const char * isSymbol(const char * str, const char c);
+  const char * hasLetter(const char * str);
+  const char * hasNumber(const char * str);
+  const char * hasIdentifier(const char * str);
+  const char * hasUnsignedInt(const char * str);
+  const char * hasFactor(const char * str);
+  const char * hasTerm(const char * str);
+}
+
 const char * mozhegova::isSymbol(const char * str, const char c)
 {
   if (!str)
@@ -30,7 +41,7 @@ const char * mozhegova::hasNumber(const char * str)
 
 const char * mozhegova::hasIdentifier(const char * str)
 {
-  return mozhegova::hasLetter(str);
+  return hasLetter(str);
 }
 
 const char * mozhegova::hasUnsignedInt(const char * str)
@@ -39,8 +50,8 @@ const char * mozhegova::hasUnsignedInt(const char * str)
   {
     return str;
   }
-  auto next = mozhegova::hasNumber(str);
-  if (auto continues = mozhegova::hasUnsignedInt(next))
+  auto next = hasNumber(str);
+  if (auto continues = hasUnsignedInt(next))
   {
     return continues;
   }
@@ -53,19 +64,19 @@ const char * mozhegova::hasFactor(const char * str)
   {
     return str;
   }
-  auto next = mozhegova::hasUnsignedInt(str);
+  auto next = hasUnsignedInt(str);
   if (next)
   {
     return next;
   }
-  next = mozhegova::hasIdentifier(str);
+  next = hasIdentifier(str);
   if (next)
   {
     return next;
   }
-  next = mozhegova::isSymbol(str, '(');
-  next = mozhegova::hasExpression(next);
-  next = mozhegova::isSymbol(next, ')');
+  next = isSymbol(str, '(');
+  next = hasExpression(next);
+  next = isSymbol(next, ')');
   return next;
 }
 
@@ -75,10 +86,10 @@ const char * mozhegova::hasTerm(const char * str)
   {
     return str;
   }
-  auto next = mozhegova::hasFactor(str);
-  if (auto next2 = mozhegova::isSymbol(next, '*'))
+  auto next = hasFactor(str);
+  if (auto next2 = isSymbol(next, '*'))
   {
-    if (auto continues = mozhegova::hasTerm(next2))
+    if (auto continues = hasTerm(next2))
     {
       return continues;
     }
@@ -92,17 +103,17 @@ const char * mozhegova::hasExpression(const char * str)
   {
     return str;
   }
-  auto next = mozhegova::hasTerm(str);
-  if (auto next2 = mozhegova::isSymbol(next, '+'))
+  auto next = hasTerm(str);
+  if (auto next2 = isSymbol(next, '+'))
   {
-    if (auto continues = mozhegova::hasExpression(next2))
+    if (auto continues = hasExpression(next2))
     {
       return continues;
     }
   }
-  else if (auto next2 = mozhegova::isSymbol(next, '-'))
+  else if (auto next2 = isSymbol(next, '-'))
   {
-    if (auto continues = mozhegova::hasExpression(next2))
+    if (auto continues = hasExpression(next2))
     {
       return continues;
     }
@@ -112,6 +123,6 @@ const char * mozhegova::hasExpression(const char * str)
 
 bool mozhegova::isExpression(const char * str)
 {
-  auto next = mozhegova::hasExpression(str);
+  auto next = hasExpression(str);
   return next && (*next == '\0');
 }
