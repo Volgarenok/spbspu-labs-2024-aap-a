@@ -31,7 +31,7 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
     *(line + index) = elem;
     ++index;
   }
-  if (!input.eof())
+  if (*line == '\n')
   {
     free(line);
     return nullptr;
