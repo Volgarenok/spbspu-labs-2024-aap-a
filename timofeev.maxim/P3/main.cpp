@@ -71,8 +71,8 @@ int main(int argc, char** argv)
   if (!timofeev::input_matrix(input, matrix, matrix_size))
   {
     std::cerr << "Fail input\n";
-    return 2;
     delete[] dmatrix;
+    return 2;
   }
   timofeev::cut_to_square(matrix, line, column);
   if (timofeev::check_diag(matrix, size))
