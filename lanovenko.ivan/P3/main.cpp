@@ -3,8 +3,8 @@
 #include <fstream>
 #include <cstring>
 #include "input_matrix.h"
-#include "modification_matrix.h"
-int main(int argc, char** argv)
+#include "output_matrix.h"
+int main(int argc, char ** argv)
 {
   if (argc > 4)
   {
@@ -16,16 +16,12 @@ int main(int argc, char** argv)
     std::cerr << "Not enough arguments" << '\n';
     return 1;
   }
-
-  if ((argv[1][0] != '2' && argv[1][0] != '1') || argv[1][1] != '\0')
+  int num = std::atoi(argv[1]);
+  if (num == 0)
   {
-    std::cerr << "First parametr is not a number" << '\n';
+    std::cerr << "Fist name is not a number" << '\n';
     return 1;
   }
-  const char* str = argv[1];
-  char* endptr = nullptr;
-  long int num = 0;
-  num = std::strtol(str, std::addressof(endptr), 10);
   size_t rows = 0;
   size_t cols = 0;
   size_t matrixsize = 0;
@@ -38,45 +34,26 @@ int main(int argc, char** argv)
   }
   matrixsize = rows * cols;
   std::ofstream output(argv[3]);
-  int fixedmatrix[10000]{};
-  int* matrix = fixedmatrix;
-  int* pointertodelete = nullptr;
-  if (num == 2)
+  if (num == 1)
   {
-    try
+    int matrix[10000];
+    if (!lanovenko::input_matrix(input, matrix, matrixsize))
     {
-      matrix = new int[matrixsize];
-      pointertodelete = matrix;
-    }
-    catch (const std::bad_alloc & e)
-    {
-      std::cerr << "Out of memory" << '\n';
+      std::cerr << "Fail input" << '\n';
       return 2;
     }
+    lanovenko::output_LFT_TOP_CLK(output, matrix, rows, cols);
   }
-
-  if (!lanovenko::input_matrix(input, matrix, matrixsize))
+  else
   {
-    delete[] pointertodelete;
-    std::cerr << "Input fail" << '\n';
-    return 2;
-  }
-  lanovenko::editMatrix(matrix, rows, cols);
-  for (size_t r = 0; r < rows; ++r)
-  {
-    for (size_t c = 0; c < cols; ++c)
+    int *dmatrix = new int[matrixsize];
+    if(!lanovenko::input_matrix(input, dmatrix, matrixsize))
     {
-      if (c < cols - 1)
-      {
-        output << matrix[r * cols + c] << ' ';
-      }
-      else
-      {
-        output << matrix[r * cols + c];
-      }
+      delete[] dmatrix;
+      std::cerr << "Fail input" << '\n';
+      return 2;
     }
-    output << '\n';
+    lanovenko::output_LFT_TOP_CLK(output, dmatrix, rows, cols);
+    delete[] dmatrix;
   }
-  delete[] pointertodelete;
-  return 0;
 }

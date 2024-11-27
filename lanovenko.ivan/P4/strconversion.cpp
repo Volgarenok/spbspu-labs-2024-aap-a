@@ -4,7 +4,7 @@
 char* lanovenko::inputstring(std::istream& in, const char stop)
 {
   size_t capacity = 1;
-  char* str = nullptr;
+  char* str = new char[capacity];
   try
   {
     str = new char[capacity];
@@ -14,14 +14,14 @@ char* lanovenko::inputstring(std::istream& in, const char stop)
     delete[] str;
     throw std::logic_error("Out of memory\n");
   }
+
   size_t quantity = 0;
   char c = '\0';
   in >> std::noskipws;
   while (in >> c && c != stop)
   {
-    if (!isalpha(c))
+    if(!isalpha(c))
     {
-      delete[] str;
       throw std::logic_error("Not a letter");
     }
     if (quantity >= capacity - 1)
