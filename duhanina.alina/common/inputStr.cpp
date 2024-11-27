@@ -53,3 +53,4 @@ char* duhanina::inputStr(std::istream& in)
   in >> std::skipws;
   return str;
 }
+
