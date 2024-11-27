@@ -14,11 +14,11 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
     *(line + i) = '\0';
   }
   char elem = ' ';
-  size_t cnt = 0;
+  size_t index = 0;
   std::noskipws(input);
   while ((input >> elem) && (elem != '\n'))
   {
-    if (cnt == capacity - 1)
+    if (*line == '\0')
     {
       char* extendedline = reallocate(line, capacity);
       if (extendedline == nullptr)
@@ -28,8 +28,8 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
       }
       line = extendedline;
     }
-    *(line + cnt) = elem;
-    ++cnt;
+    *(line + index) = elem;
+    ++index;
   }
   if (!input)
   {
