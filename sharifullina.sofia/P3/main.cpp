@@ -30,15 +30,15 @@ int main(int argc, char ** argv)
   input >> m >> n;
   size_t read = 0;
 
-  if (!(input >> m >> n))
+  if (!input)
   {
-    std::cerr << "Failed to read matrix dimensions\n";
-    return 1;
+    std::cerr << "Rows or columns are not a number\n";
+    return 2;
   }
   if (m == 0 || n == 0)
   {
     std::cerr << "Matrix dimensions cannot be zero\n";
-    return 1;
+    return 0;
   }
 
   int fixedLengthArr[1000] = {};
@@ -64,6 +64,7 @@ int main(int argc, char ** argv)
     delete[] dynamicArr;
     return 1;
   }
+  size_t read = 0;
   if (!sharifullina::inputMatrix(input, array, m, n, read))
   {
     std::cerr << "Invalid matrix element\n";
