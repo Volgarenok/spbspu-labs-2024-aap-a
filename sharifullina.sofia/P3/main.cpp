@@ -52,6 +52,7 @@ int main(int argc, char ** argv)
     return 1;
   }
   output << sharifullina::countLocMax(array, m, n);
+  output << sharifullina::countMaxSumMdg(array, m, n);
   output << "\n"
   delete[] dynamicArr;
 }
