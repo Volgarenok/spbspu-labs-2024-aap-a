@@ -6,8 +6,7 @@ int* timofeev::cut_to_square(const int* matrix, size_t strk, size_t stl)
   if (stl <= strk)
   {
     size_t capacity = stl * stl;
-    int* new_mtx = nullptr;
-    new_mtx = new int[capacity];
+    int* new_mtx = new int[capacity];
     for (size_t i = 0; i < capacity; i++)
     {
       new_mtx[i] = matrix[i];

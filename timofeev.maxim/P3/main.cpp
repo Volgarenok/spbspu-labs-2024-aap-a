@@ -18,6 +18,10 @@ int main(int argc, char** argv)
     std::cerr << "Not enough arguments\n";
     return 1;
   }
+  if (argv[1][1] != '\0')
+  {
+    std::cerr << "First parametr is not a number";
+  }
   int num = std::atoi(argv[1]);
   if (num != 1 && num != 2)
   {
@@ -43,27 +47,10 @@ int main(int argc, char** argv)
     output << line << column;
     return 0;
   }
-  if (num == 1)
+  int matrix[10000];
+  int* dmatrix = nullptr;
+  if (num == 2)
   {
-    int matrix[10000];
-    if (!timofeev::input_matrix(input, matrix, matrix_size))
-    {
-      std::cerr << "Fail input\n";
-      return 2;
-    }
-    timofeev::cut_to_square(matrix, line, column);
-    if (timofeev::check_diag(matrix, size))
-    {
-      output << "The matrix contains diagonals with equal values";
-    }
-    else
-    {
-      output << "The matrix doesn't contain diagonals with equal values";
-    }
-  }
-  else if (num == 2)
-  {
-    int* dmatrix = nullptr;
     try
     {
       dmatrix = new int[matrix_size];
@@ -73,22 +60,23 @@ int main(int argc, char** argv)
       std::cerr << "Out of memory\n";
       return 1;
     }
-    if (!timofeev::input_matrix(input, dmatrix, matrix_size))
-    {
-      delete[] dmatrix;
-      std::cerr << "Fail input\n";
-      return 2;
-    }
-    timofeev::cut_to_square(dmatrix, line, column);
-    if (timofeev::check_diag(dmatrix, size))
-    {
-      output << "The matrix contains diagonals with equal values";
-    }
-    else
-    {
-      output << "The matrix doesn't contain diagonals with equal values";
-    }
-    delete[] dmatrix;
+    matrix = dmatrix;
   }
+  if (!timofeev::input_matrix(input, matrix, matrix_size))
+  {
+    std::cerr << "Fail input\n";
+    return 2;
+    delete[] dmatrix
+  }
+  timofeev::cut_to_square(matrix, line, column);
+  if (timofeev::check_diag(matrix, size))
+  {
+    output << "The matrix contains diagonals with equal values";
+  }
+  else
+  {
+    output << "The matrix doesn't contain diagonals with equal values";
+  }
+  delete[] dmatrix;
   return 0;
 }
