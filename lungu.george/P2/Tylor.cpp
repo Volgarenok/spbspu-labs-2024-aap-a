@@ -1,6 +1,7 @@
 #include "Tylor.h"
 #include <cmath>
 #include <stdexcept>
+
 namespace lungu
 {
   double func_Tylor(double x, double absError, int numberMax)
