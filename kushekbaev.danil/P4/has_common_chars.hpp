@@ -1,5 +1,5 @@
-#ifndef ARRAYS_READING
-#define ARRAYS_READING
+#ifndef HAS_COMMON_CHARS_HPP
+#define HAS_COMMON_CHARS_HPP
 #include <cstddef>
 
 namespace kushekbaev

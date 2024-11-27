@@ -1,5 +1,5 @@
-#ifndef ARRAYS_INPUT
-#define ARRAYS_INPUT
+#ifndef READ_INPUT_ARRAY_HPP
+#define READ_INPUT_ARRAY_HPP
 #include <cstddef>
 
 namespace kushekbaev
