@@ -59,6 +59,7 @@ int main(int argc, char** argv)
     catch (const std::bad_alloc& e)
     {
       std::cerr << "Out of memory\n";
+      delete[] dmatrix;
       return 1;
     }
     matrix = dmatrix;
