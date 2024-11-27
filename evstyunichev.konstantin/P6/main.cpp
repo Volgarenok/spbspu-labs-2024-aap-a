@@ -3,7 +3,7 @@
 
 int main()
 {
-  char str1[] = "21*25**a";
-  std::cout << (bool)evstyunichev::IsTermCorrect(str1) << '\n';
+  char str1[] = "(1488*a)*b";
+  std::cout << (bool)evstyunichev::IsExpressionCorrect(str1) << '\n';
   return 0;
 }

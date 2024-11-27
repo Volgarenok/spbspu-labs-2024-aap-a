@@ -29,20 +29,67 @@ const char * evstyunichev::IsTermCorrect(const char *p, int prev)
   {
     return nullptr;
   }
-  int cur = (p != IsFactorCorrect(p));
-  if (cur)
+  if (IsBasicSymbol(*p))
   {
-    return IsTermCorrect(IsFactorCorrect(p), 1);
+    return IsTermCorrect(IsFactorCorrect(p), 0);
   }
-  if (!prev)
+  if (*p == '(')
+  {
+    p++;
+    p = IsExpressionCorrect(p, 1, 1);
+    if (!p)
+    {
+      return p;
+    }
+    if (*p != ')')
+    {
+      return nullptr;
+    }
+    p++;
+    return IsTermCorrect(p, 0);
+  }
+  if (prev)
   {
     return nullptr;
   }
-  if (*p != '*')
+  if (*p == '*')
+  {
+    return IsTermCorrect(++p);
+  }
+  return p;
+}
+
+const char * evstyunichev::IsExpressionCorrect(const char *p, int prev, bool OpenFlag)
+{
+  if (p == nullptr)
+  {
+    return nullptr;
+  }
+  if (IsBasicSymbol(*p))
+  {
+    return IsExpressionCorrect(IsTermCorrect(p), 0, OpenFlag);
+  }
+  if (*p == '(')
+  {
+    return IsTermCorrect(p);
+  }
+  if (prev)
+  {
+    return nullptr;
+  }
+  if (IsSign(*p))
+  {
+    return IsExpressionCorrect(++p, 1, OpenFlag);
+  }
+  if (*p == 0)
   {
     return p;
   }
-  return IsTermCorrect(++p);
+  if (OpenFlag && (*p == ')'))
+  {
+    return p;
+  }
+  return nullptr;
 }
 
 bool evstyunichev::IsLetter(char c)
@@ -58,4 +105,9 @@ bool evstyunichev::IsDigit(char c)
 bool evstyunichev::IsBasicSymbol(char c)
 {
   return (evstyunichev::IsDigit(c) || evstyunichev::IsLetter(c));
+}
+
+bool evstyunichev::IsSign(char c)
+{
+  return ((c == '+') || (c == '-'));
 }
