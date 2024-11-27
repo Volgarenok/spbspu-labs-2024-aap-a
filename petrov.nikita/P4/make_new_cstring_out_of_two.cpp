@@ -2,7 +2,7 @@
 #include <cstddef>
 #include <cctype>
 
-char * petrov::makeNewCStringOutOfTwo(char * new_cstring, const char * string_1, const char * string_2)
+char * petrov::makeNewCStringByAddingNumbersFromSecondCStringToFirst(char * new_cstring, const char * string_1, const char * string_2)
 {
   size_t i = 0;
   size_t j = 0;

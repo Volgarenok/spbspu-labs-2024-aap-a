@@ -5,7 +5,6 @@
 namespace petrov
 {
   char * inputCString(std::istream & in, size_t & capacity);
-  char * allocateMemoryForNewCString(const size_t capacity);
-  char * makeNewCStringOutOfTwo(char * new_cstring, const char * string_1, const char * string_2);
+  char * makeNewCStringByAddingNumbersFromSecondCStringToFirst(char * new_cstring, const char * string_1, const char * string_2);
 }
 #endif

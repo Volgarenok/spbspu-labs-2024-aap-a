@@ -12,12 +12,14 @@ char * petrov::inputCString(std::istream & in, size_t & capacity)
   }
   catch (const std::bad_alloc & e)
   {
+    std::skipws(in);
     throw;
   }
   string[0] = '0';
   in >> string[0];
   if (string[0] == '\n' || std::cin.eof())
   {
+    std::skipws(in);
     return string;
   }
   string[1] = '\0';
@@ -45,14 +47,17 @@ char * petrov::inputCString(std::istream & in, size_t & capacity)
       }
       if (in.eof())
       {
+        std::skipws(in);
         return string;
       }
     }
     string[i - 2] = '\0';
+    std::skipws(in);
     return string;
   }
   catch (const std::bad_alloc & e)
   {
+    std::skipws(in);
     delete[] string;
     throw;
   }

@@ -17,15 +17,12 @@ int main()
       return 1;
     }
     capacity += sizeof(cstring_2) / sizeof(char) - 1;
-    new_cstring = petrov::allocateMemoryForNewCString(capacity);
-    new_cstring = petrov::makeNewCStringOutOfTwo(new_cstring, cstring_1, cstring_2);
+    new_cstring = new char[capacity + 1];
+    new_cstring = petrov::makeNewCStringByAddingNumbersFromSecondCStringToFirst(new_cstring, cstring_1, cstring_2);
   }
   catch (const std::bad_alloc & e)
   {
-    if (cstring_1 != nullptr)
-    {
-      delete[] cstring_1;
-    }
+    delete[] cstring_1;
     std::cerr << "ERROR: Out of memory\n";
     return 1;
   }
