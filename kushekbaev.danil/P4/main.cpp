@@ -1,6 +1,5 @@
 #include <iostream>
-#include <istream>
-#include <arrays_input.hpp>
+#include <read_input_array.hpp>
 #include "has_common_chars.hpp"
 
 int main()
