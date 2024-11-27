@@ -3,7 +3,6 @@
 #include <cstring>
 char* lanovenko::input_string(std::istream& in, const char stop)
 {
-  int a = 10;
   size_t capacity = 1;
   char* str = new char[capacity];
   try
