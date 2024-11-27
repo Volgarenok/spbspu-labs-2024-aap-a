@@ -47,7 +47,8 @@ int main(int argc, char** argv)
     output << line << column;
     return 0;
   }
-  int* matrix[10000];
+  int* matrix = nullptr;
+  int smatrix[10000];
   int* dmatrix = nullptr;
   if (num == 2)
   {
@@ -61,6 +62,10 @@ int main(int argc, char** argv)
       return 1;
     }
     matrix = dmatrix;
+  }
+  else
+  {
+    matrix = smatrix;
   }
   if (!timofeev::input_matrix(input, matrix, matrix_size))
   {
