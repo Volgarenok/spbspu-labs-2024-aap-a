@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <cmath>
 #include "Tylor.h"
+
 int main() {
   constexpr double absError = 0.001;
   size_t numberMax = 0;
