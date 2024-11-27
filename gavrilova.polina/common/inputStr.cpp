@@ -36,7 +36,7 @@ char* inputStr(std::istream& in, size_t & len)
   }
   result_str[len] = '\0';
 
-  if (!in) {
+  if (!in || !in.eof()) {
     delete[] result_str;
     return nullptr;
   }
