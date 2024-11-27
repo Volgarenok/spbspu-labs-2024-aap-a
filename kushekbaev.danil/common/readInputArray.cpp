@@ -8,7 +8,6 @@ char* kushekbaev::readInputArray(std::istream& input, char stop, size_t& size, s
   {
     char* str = new char[max + 1];
     size = 0;
-
     std::noskipws(std::cin);
     while ((input > stop) && (stop != '\n'))
     {
