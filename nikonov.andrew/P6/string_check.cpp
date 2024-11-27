@@ -38,6 +38,10 @@ const char* nikonov::is_numb(const char* str)
   {
     return nullptr;
   }
+  if (*str == '\0' || *str == 'e' || *str == 'E' || *str == '.')
+  {
+    return str;
+  }
   auto next = nikonov::is_digit(str);
   if (next)
   {
@@ -68,7 +72,7 @@ const char* nikonov::is_order(const char* str)
   {
     return nullptr;
   }
-  if (*str == 'e' || *str == 'E')
+  if (*str == 'E')
   {
     auto next = nikonov::is_sign(str + 1);
     if (!next)
@@ -76,6 +80,10 @@ const char* nikonov::is_order(const char* str)
       next = str + 1;
     }
     return nikonov::is_numb(next);
+  }
+  else if (*str == 'e')
+  {
+    return nikonov::is_numb(str + 1);
   }
   return nullptr;
 }
