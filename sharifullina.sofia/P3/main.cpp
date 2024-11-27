@@ -1,4 +1,8 @@
 #include <iostream>
+#include <fstream>
+#include <cstring>
+#include <cstdlib>
+#include "matrix.hpp"
 
 int main(int argc, char ** argv)
 {
