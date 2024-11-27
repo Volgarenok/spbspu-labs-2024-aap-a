@@ -34,12 +34,13 @@ char* balashov::increaseSizeLine(const char* lineStart, size_t& capacity)
 {
   const double sizeIncreaseFactor = 1.4;
   size_t capacityBefore = capacity;
-  capacity = std::ceil(capacityBefore * sizeIncreaseFactor);
-  char* newLine = reinterpret_cast< char* >(malloc(capacity));
+  size_t temporaryСapacity = std::ceil(capacityBefore * sizeIncreaseFactor);
+  char* newLine = reinterpret_cast< char* >(malloc(temporaryСapacity));
   if (newLine == nullptr)
   {
     return nullptr;
   }
+  capacity = temporaryСapacity;
   for (size_t i = 0; i < capacityBefore; ++i)
   {
     newLine[i] = lineStart[i];
