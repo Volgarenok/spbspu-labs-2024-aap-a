@@ -10,7 +10,6 @@ char* swapStr(char* oldstr, char* newstr) {
     oldptr++;
     newptr++;
   }
-  newptr++;
   *newptr = '\0';
   return newstr;
 }
