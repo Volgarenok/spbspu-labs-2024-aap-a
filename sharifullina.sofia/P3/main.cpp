@@ -29,14 +29,6 @@ int main(int argc, char ** argv)
   input >> m >> n;
   size_t read = 0;
 
-  std::ofstream output(argv[3]);
-  if (!output.is_open())
-  {
-    std::cerr << "Failed to open output file\n";
-    delete[] dynamicArr;
-    return 1;
-  }
-
   int fixedLengthArr[1000] = {};
   int * dynamicArr = nullptr;
   int * array = fixedLengthArr;
@@ -52,6 +44,13 @@ int main(int argc, char ** argv)
       std::cerr << "Out of memory\n";
       return 1;
     }
+  }
+  std::ofstream output(argv[3]);
+  if (!output.is_open())
+  {
+    std::cerr << "Failed to open output file\n";
+    delete[] dynamicArr;
+    return 1;
   }
   if (!sharifullina::inputMatrix(input, array, m, n, read))
   {
