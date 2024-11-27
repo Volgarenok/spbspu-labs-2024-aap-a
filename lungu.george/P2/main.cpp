@@ -2,7 +2,6 @@
 #include <iomanip>
 #include <cmath>
 #include "Tylor.h"
-
 int main() {
   const double absError = 0.001;
   int numberMax;

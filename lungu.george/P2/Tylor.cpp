@@ -1,7 +1,6 @@
 #include "Tylor.h"
 #include <cmath>
 #include <stdexcept>
-
 namespace lungu {
   double TylorFunc(double x, double absError, int numberMax) {
     double sum = 1.0;
