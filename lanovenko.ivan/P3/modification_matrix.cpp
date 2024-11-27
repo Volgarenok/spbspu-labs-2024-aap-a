@@ -1,7 +1,6 @@
-#include "output_matrix.h"
-#include <iostream>
+#include "modification_matrix.h"
 
-void lanovenko::output_matrix(std::ostream& out, int* matrix, size_t rows, size_t cols)
+void lanovenko::editMatrix(int* matrix, size_t rows, size_t cols)
 {
   size_t count = 1;
   size_t i = 0, j = 0;
@@ -37,13 +36,5 @@ void lanovenko::output_matrix(std::ostream& out, int* matrix, size_t rows, size_
     }
 
     ++count;
-  }
-  for (size_t r = 0; r < rows; ++r)
-  {
-    for (size_t c = 0; c < cols; ++c)
-    {
-      out << matrix[r * cols + c] << " ";
-    }
-    out << '\n';
   }
 }
