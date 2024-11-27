@@ -30,6 +30,11 @@ int main(int argc, char ** argv)
   input >> m >> n;
   size_t read = 0;
 
+  if (!(input >> m >> n))
+  {
+    std::cerr << "Failed to read matrix dimensions\n";
+    return 1;
+  }
   if (m == 0 || n == 0)
   {
     std::cerr << "Matrix dimensions cannot be zero\n";
@@ -52,11 +57,6 @@ int main(int argc, char ** argv)
       return 1;
     }
   }
-  if (!input)
-    {
-      std::cerr << "Failed to read matrix dimensions\n";
-      return 1;
-    }
   std::ofstream output(argv[3]);
   if (!output.is_open())
   {
