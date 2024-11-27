@@ -1,4 +1,11 @@
-#include "kushekbaev_matrix.hpp"
+#include "count_saddle_point.hpp"
+
+namespace kushekbaev
+{
+  int & getElement(int * matrix, size_t columns, size_t row, size_t column);
+  bool isMinInRow(int* matrix, size_t columns, size_t row, int element);
+  bool isMaxInColumn(int* matrix, size_t rows, size_t columns, size_t column, int element);
+}
 
 int & kushekbaev::getElement(int * matrix, size_t columns, size_t row, size_t column)
 {
@@ -9,7 +16,7 @@ bool kushekbaev::isMinInRow(int* matrix, size_t columns, size_t row, int element
 {
   for (size_t z = 0; z < columns; z++)
   {
-    if (kushekbaev::getElement(matrix, columns, row, z) < element)
+    if (getElement(matrix, columns, row, z) < element)
     {
       return false;
     }
@@ -21,7 +28,7 @@ bool kushekbaev::isMaxInColumn(int* matrix, size_t rows, size_t columns, size_t 
 {
   for (size_t z = 0; z < rows; z++)
   {
-    if (kushekbaev::getElement(matrix, columns, z, column) > element)
+    if (getElement(matrix, columns, z, column) > element)
     {
       return false;
     }
@@ -36,17 +43,13 @@ int kushekbaev::countSaddlePoints(int * matrix, size_t rows, size_t columns)
   {
     for (size_t j = 0; j < columns; j++)
     {
-      int element = kushekbaev::getElement(matrix, columns, i, j);
+      int element = getElement(matrix, columns, i, j);
 
-      bool is_min_in_row = isMinInRow(matrix, columns, i, element);
-
-      bool is_max_in_column = isMaxInColumn(matrix, rows, columns, j, element);
-
-      if (is_min_in_row && is_max_in_column)
+      if (isMinInRow(matrix, columns, i, element) && isMaxInColumn(matrix, rows, columns, j, element))
       {
         count++;
       }
     }
   }
-  return count;
+return count;
 }
