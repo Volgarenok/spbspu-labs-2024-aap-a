@@ -1,9 +1,8 @@
 #include "formline.hpp"
-#include <cstddef>
 #include <cctype>
 void nikonov::add_digit_symb(char* firstStr, const char* secondStr)
 {
-  while (true)
+  while (firstStr && secondStr)
   {
     if (*(firstStr) != '\0')
     {

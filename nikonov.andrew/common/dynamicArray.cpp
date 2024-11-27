@@ -41,18 +41,21 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
 }
 void nikonov::transferLine(char* oldLine, char* newLine)
 {
-  while (*oldLine != '\0')
+  if (oldLine && newLine)
   {
-    *newLine = *oldLine;
-    ++oldLine;
-    ++newLine;
+    while (*oldLine != '\0')
+    {
+      *newLine = *oldLine;
+      ++oldLine;
+      ++newLine;
+    }
   }
 }
 char* nikonov::reallocate(char* line, size_t& capacity, int addSizeOptional)
 {
   char* newline = nullptr;
   size_t tempCapacity = 0;
-  if (addSizeOptional == -1)
+  if (addSizeOptional == -2)
   {
     size_t c = 2;
     tempCapacity = capacity * c;
@@ -67,7 +70,7 @@ char* nikonov::reallocate(char* line, size_t& capacity, int addSizeOptional)
   {
     return nullptr;
   }
-  for (size_t i = 0; i < capacity; ++i)
+  for (size_t i = 0; i < tempCapacity; ++i)
   {
     *(newline + i) = '\0';
   }

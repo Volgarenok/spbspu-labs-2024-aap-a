@@ -5,8 +5,7 @@
 namespace nikonov
 {
   char* getLine(std::istream& input, size_t& capacity);
-  void fillLine(char* line, char what = '\0');
   void transferLine(char* oldLine, char* newLine);
-  char* reallocate(char* line, size_t& capacity, int addSizeOptional = -1);
+  char* reallocate(char* line, size_t& capacity, int addSizeOptional = -2);
 }
 #endif
