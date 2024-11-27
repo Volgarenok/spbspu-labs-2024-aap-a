@@ -30,7 +30,7 @@ char* balashov::removeSpaces(char * line)
   return lineWithoutSpaces;
 }
 
-char* balashov::increaseSizeLine(char* lineStart, size_t& capacity)
+char* balashov::increaseSizeLine(const char* lineStart, size_t& capacity)
 {
   const double sizeIncreaseFactor = 1.4;
   size_t capacityBefore = capacity;
