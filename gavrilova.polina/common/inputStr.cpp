@@ -12,10 +12,10 @@ char* inputStr(std::istream& in, size_t & len)
   }
   char c;
   in >> std::noskipws;
-  while ((in >> c)) {
-//    if (c == '\n'){
-//      break;
-//    }
+  while ((in >> c) || in.eof()) {
+    if (c == '\n'){
+      break;
+    }
     if (len < K - 1) {
       result_str[len++] = c;
     } else {
@@ -36,9 +36,10 @@ char* inputStr(std::istream& in, size_t & len)
   }
   result_str[len] = '\0';
 
-  if (!in || !in.eof()) {
+  if (!in) {
     delete[] result_str;
     return nullptr;
   }
+
   return result_str;
 }
