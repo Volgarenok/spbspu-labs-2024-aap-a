@@ -32,7 +32,7 @@ char* kushekbaev::readInputArray(std::istream& input, char stop, size_t& size, s
   {
     std::cerr << "Error allocating memory";
     delete[] str;
-    return 1;
+    char* str = nullptr;
   }
   return str;
 }
