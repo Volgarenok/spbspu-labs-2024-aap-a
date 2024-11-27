@@ -18,5 +18,6 @@ int main()
   }
   int pos = 0;
   std::cout << std::boolalpha << savintsev::isExpression(line, pos) << '\n';
+  delete[] line;
   return 0;
 }
