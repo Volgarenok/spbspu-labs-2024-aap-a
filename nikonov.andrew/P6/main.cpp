@@ -11,11 +11,11 @@ int main()
   }
   if (!nikonov::is_float(arr))
   {
-    std::cout << "false\n";
+    std::cout << "TRUE\n";
   }
   else
   {
-    std::cout << "true\n";
+    std::cout << "FALSE\n";
   }
   free(arr);
   return 0;
