@@ -3,14 +3,11 @@
 #include <cstddef>
 
 char* swapStr(char* oldstr, char* newstr) {
-  char* oldptr = oldstr;
-  char* newptr = newstr;
-  while(*oldptr != '\0') {
-    *newptr  = *oldptr;
-    oldptr++;
-    newptr++;
+  size_t i = 0;
+  for(; *(oldstr+i) != '\0'; i++) {
+    *(newstr+i) = *(oldstr+i);
   }
-  *newptr = '\0';
+  *(newstr + i + 1) = '\0';
   return newstr;
 }
 
@@ -45,9 +42,10 @@ char* dribas::enterStr(std::istream & input)
       newstr = swapStr(str, newstr);
       free(str);
       str = newstr;
-      str[size - 2] = enter;
+      *(newstr + size - 2) = enter;
       input >> enter;
     }
   }
+  std::skipws(input);
   return str;
 }
