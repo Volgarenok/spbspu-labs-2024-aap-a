@@ -29,16 +29,10 @@ int main(int argc, char ** argv)
   size_t n = 0;
   input >> m >> n;
   size_t read = 0;
-
-  if (!input)
-  {
-    std::cerr << "Rows or columns are not a number\n";
-    return 2;
-  }
   if (m == 0 || n == 0)
   {
     std::cerr << "Matrix dimensions cannot be zero\n";
-    return 0;
+    return 1;
   }
 
   int fixedLengthArr[1000] = {};
@@ -53,10 +47,15 @@ int main(int argc, char ** argv)
     }
     catch (const std::bad_alloc &e)
      {
-      std::cerr << "Out of memory\n";
+       std::cerr << "Out of memory\n";
       return 1;
     }
   }
+  if (!input)
+    {
+      std::cerr << "Failed to read matrix dimensions\n";
+      return 1;
+    }
   std::ofstream output(argv[3]);
   if (!output.is_open())
   {
@@ -64,7 +63,6 @@ int main(int argc, char ** argv)
     delete[] dynamicArr;
     return 1;
   }
-  size_t read = 0;
   if (!sharifullina::inputMatrix(input, array, m, n, read))
   {
     std::cerr << "Invalid matrix element\n";
