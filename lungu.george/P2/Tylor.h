@@ -2,7 +2,7 @@
 #define TYLOR_H
 
 namespace lungu {
-  double TylorFunc(double x, double absError, int numberMax);
+  double func_Tylor(double x, double absError, int numberMax);
 }
 
 #endif

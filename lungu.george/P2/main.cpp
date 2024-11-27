@@ -4,8 +4,8 @@
 #include "Tylor.h"
 
 int main() {
-  const double absError = 0.001;
-  int numberMax;
+  constexpr double absError = 0.001;
+  size_t numberMax = 0;
   double start = 0.0;
   double end = 0.0;
   const double step = 0.05;
@@ -24,18 +24,18 @@ int main() {
   }
 
   std::cout << std::fixed << std::setprecision(6);
-  std::cout << std::string(10, ' ') << "X    SUMM        STDfunctionn" << "\n";
+  std::cout << std::string(10, ' ') << "X\tSUMM\tSTDfunctionn" << "\n";
 
   for (double x = start; x <= end; x += step) {
     try {
-      double calculatedValue = lungu::TylorFunc(x, absError, numberMax);
+      double calculatedValue = lungu::func_Tylor(x, absError, numberMax);
       double standardValue = std::exp(-x * x);
 
-      std::cout << std::string(10, ' ') << x << "   "
-                << calculatedValue << "   "
-                << standardValue << "\n";
+      std::cout << std::string(10, ' ') << x << "\t";
+      std::cout << calculatedValue << "\t";
+      std::cout << standardValue << "\n";
     } catch (const std::exception& e) {
-      std::cout << std::string(10, ' ') << x << "   MathError" << "\n";
+      std::cout << std::string(10, ' ') << x << "\tMathError" << "\n";
     }
   }
 
