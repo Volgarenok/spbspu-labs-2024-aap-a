@@ -1,9 +1,9 @@
 #ifndef ENTERSTR_HPP
 #define ENTERSTR_HPP
-
+#include <iostream>
 namespace dribas
 {
-  void enterStr(char*& str);
+  char* enterStr(std::istream & input);
 }
 
 #endif

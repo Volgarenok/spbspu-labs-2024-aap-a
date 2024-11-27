@@ -1,15 +1,14 @@
 #include <iostream>
 #include "enterStr.hpp"
-#include "checkChar.hpp"
+#include "difLat.hpp"
 
 int main()
 {
-  char* str = nullptr;
-  dribas::enterStr(str);
-  if (str == nullptr) {
+  char* str = dribas::enterStr(std::cin);
+  if (!str) {
     return 1;
   }
-  std::cout << dribas::checkChar(str);
+  std::cout << dribas::difLat(str);
   std::cout << '\n';
   free(str);
   return 0;
