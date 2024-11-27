@@ -18,7 +18,7 @@ int main()
     }
     capacity += sizeof(cstring_2) / sizeof(char) - 1;
     new_cstring = new char[capacity + 1];
-    new_cstring = petrov::makeNewCStringByAddingNumbersFromSecondCStringToFirst(new_cstring, cstring_1, cstring_2);
+    new_cstring = petrov::combineFirstCStrAndDigitsFromSecond(new_cstring, cstring_1, cstring_2);
   }
   catch (const std::bad_alloc & e)
   {
