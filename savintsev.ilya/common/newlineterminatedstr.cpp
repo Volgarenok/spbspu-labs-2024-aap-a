@@ -4,7 +4,7 @@
 
 namespace savintsev
 {
-  constexpr size_t MEMORY_SIZE = 8;
+  constexpr size_t MEMORY_SIZE = 40;
 }
 
 char * savintsev::inputNewlineTerminatedStr(std::istream & in)
