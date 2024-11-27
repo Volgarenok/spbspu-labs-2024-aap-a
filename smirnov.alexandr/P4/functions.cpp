@@ -48,7 +48,7 @@ char * smirnov::uniString(const char * str1, const char * str2)
   size_t index = 0;
   for (size_t i = 0; i < std::max(length1, length2); ++i)
   {
-  if (i < length1)
+    if (i < length1)
     {
       result[index++] = str1[i];
     }
