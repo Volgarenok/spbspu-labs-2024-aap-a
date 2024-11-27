@@ -13,7 +13,7 @@ int main()
     std::cerr << "Out of memory\n";
     return 1;
   }
-  if (str1[0] == '\n')
+  if (str1[0] == '\0')
   {
     delete[] str1;
     std::cerr << "Error: empty string\n";
