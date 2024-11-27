@@ -24,11 +24,6 @@ int main(int argc, char ** argv)
     return 1;
   }
 
-  if (!input)
-    {
-        std::cerr << "Failed to read matrix dimensions\n";
-        return 1;
-    }
   std::ifstream input(argv[2]);
   size_t m = 0;
   size_t n = 0;
@@ -52,11 +47,16 @@ int main(int argc, char ** argv)
       array = dynamicArr;
     }
     catch (const std::bad_alloc &e)
-    {
+     {
       std::cerr << "Out of memory\n";
       return 1;
     }
   }
+  if (!input)
+    {
+      std::cerr << "Failed to read matrix dimensions\n";
+      return 1;
+    }
   std::ofstream output(argv[3]);
   if (!output.is_open())
   {
