@@ -3,8 +3,8 @@
 #include "string_check.hpp"
 int main()
 {
-  size_t capacity = 1;
-  const char* arr = nikonov::getLine(std::cin, capacity);
+  size_t capacity = 10;
+  char* arr = nikonov::getLine(std::cin, capacity);
   if (!arr)
   {
     return 1;
@@ -17,4 +17,6 @@ int main()
   {
     std::cout << "true\n";
   }
+  free(arr);
+  return 0;
 }

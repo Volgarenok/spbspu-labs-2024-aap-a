@@ -77,7 +77,7 @@ const char* nikonov::is_order(const char* str)
     auto next = nikonov::is_sign(str + 1);
     if (!next)
     {
-      next = str + 1;
+      return nullptr;
     }
     return nikonov::is_numb(next);
   }
