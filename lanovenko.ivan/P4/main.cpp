@@ -27,5 +27,4 @@ int main()
   }
   std::cout << lanovenko::transformationstr(istr) << '\n';
   delete[] istr;
-  int b = 10;
 }
