@@ -1,4 +1,5 @@
 #include <iostream>
+#include <istream>
 #include <arrays_input.hpp>
 #include "has_common_chars.hpp"
 
@@ -7,7 +8,7 @@ int main()
   size_t max = 10;
   size_t size = 0;
 
-  char * str1 = kushekbaev::readInputArray(std::cin, \0, size1, max);
+  const char * str1 = kushekbaev::readInputArray(std::cin, \0, size1, max);
 
   const char * str2 = "string literal" << "\n";
 
