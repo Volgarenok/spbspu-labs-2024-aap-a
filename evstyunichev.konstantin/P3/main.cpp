@@ -30,12 +30,12 @@ int main(int argc, char **argv)
     std::cerr << "is not 1 or 2 btw\n";
     return 1;
   }
-  int *arr = nullptr, *dArr = nullptr;
+  int *dArr = nullptr;
   size_t read = 0;
   if (num == 1)
   {
     int staticArr[staticArrSize];
-    if (!evstyunichev::solve(fin, fout, staticArr, n, m, read))
+    if (!evstyunichev::solve_print(fin, fout, staticArr, n, m, read))
     {
       std::cerr << "bad input\n";
       return 2;
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
     try
     {
       dArr = new int[n * m];
-      if (!evstyunichev::solve(fin, fout, dArr, n, m, read))
+      if (!evstyunichev::solve_print(fin, fout, dArr, n, m, read))
       {
         std::cerr << "bad input\n";
         delete[] dArr;

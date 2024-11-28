@@ -7,7 +7,7 @@ namespace evstyunichev
   std::istream & input(std::istream &, int *, size_t, size_t, size_t &);
   bool is_row_nsm(int *, size_t, size_t);
   size_t cnt_rows_nsm(int *, size_t, size_t);
-  bool solve(std::istream &, std::ostream &, int *, size_t, size_t, size_t &);
+  bool solve_print(std::istream &, std::ostream &, int *, size_t, size_t, size_t &);
   void output(std::ostream &, int *, size_t, size_t);
 }
 #endif

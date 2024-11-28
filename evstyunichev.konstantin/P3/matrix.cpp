@@ -58,7 +58,7 @@ size_t evstyunichev::cnt_rows_nsm(int *arr, size_t n, size_t m)
   return ans;
 }
 
-bool evstyunichev::solve(std::istream &fin, std::ostream &fout, int *arr, size_t n, size_t m, size_t &read)
+bool evstyunichev::solve_print(std::istream &fin, std::ostream &fout, int *arr, size_t n, size_t m, size_t &read)
 {
   if (input(fin, arr, n, m, read) && (read == n * m))
   {
