@@ -1,12 +1,12 @@
 #include "string_check.hpp"
-const char* nikonov::is_float(const char* str)
+bool nikonov::is_float(const char* str)
 {
   auto next = nikonov::is_mantissa(str);
   if (!next)
   {
-    return nullptr;
+    return false;
   }
-  return nikonov::is_order(next);
+  return true;
 }
 const char* nikonov::is_sign(const char* str)
 {

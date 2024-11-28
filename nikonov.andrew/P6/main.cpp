@@ -9,14 +9,7 @@ int main()
   {
     return 1;
   }
-  if (!nikonov::is_float(arr))
-  {
-    std::cout << "FALSE\n";
-  }
-  else
-  {
-    std::cout << "TRUE\n";
-  }
+  std::cout << std::boolalpha << nikonov::is_float(arr) << '\n';
   free(arr);
   return 0;
 }
