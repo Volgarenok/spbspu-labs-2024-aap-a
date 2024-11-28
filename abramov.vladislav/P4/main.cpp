@@ -12,7 +12,7 @@ int main()
     std::cerr << "Memory fail\n";
     return 2;
   }
-  if (str1[0] == '0')
+  if (str1[0] == '\0')
   {
     std::cerr << "Incorrect input\n";
     delete[] str1;
