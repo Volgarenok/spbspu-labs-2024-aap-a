@@ -31,7 +31,7 @@ char *abramov::getStr(std::istream &in, size_t &size_of_str)
       {
         delete[] str;
         std::skipws(in);
-        return str;
+        return nullptr;
       }
       for (size_t i = 0; i < new_max / 2; ++i)
       {
