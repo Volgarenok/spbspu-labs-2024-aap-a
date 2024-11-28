@@ -1,5 +1,5 @@
 #include "matrix.h"
-#include <iostream>
+#include <fstream>
 
 std::istream & ivanova::input_matrix(std::istream & in, int * t, size_t m, size_t n, size_t & read)
 {
@@ -21,7 +21,7 @@ size_t ivanova::num_col_lsr(const int * t, size_t m, size_t n)
   size_t col  = 0;
   for (size_t i = 0; i < m; i++)
   {
-    for (size_t j = 0; j < n - 1; j++)
+    for (size_t j = 0; j < n; j++)
     {
       if (t[j * m + i] == t[(j + 1) * m + i])
       {
@@ -45,5 +45,30 @@ size_t ivanova::num_col_lsr(const int * t, size_t m, size_t n)
 
 size_t ivanova::min_sum_mdg(const int * t, size_t m, size_t n)
 {
-    //zavtra......
+  size_t absoluteMin = 0;
+  for (size_t diagCols = n - 2; diagCols < n; diagCols--)
+  {
+    size_t minSum = 0;
+    for (size_t i = 0, j = diagCols; i < m && j < n; i++, j--)
+    {
+      minSum += t[i * n + j];
+    }
+    if (absoluteMin > minSum)
+    {
+      absoluteMin = minSum;
+    }
+  }
+  for (size_t diagRows = 1; diagRows < m; diagRows++)
+  {
+    size_t minSum = 0;
+    for (size_t i = diagRows, j = n - 1; i < m && j < n; i++, j--)
+    {
+      minSum += t[i * n + j];
+    }
+    if (absoluteMin > minSum)
+    {
+      absoluteMin = minSum;
+    }
+  }
+  return absoluteMin;
 }
