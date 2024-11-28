@@ -29,7 +29,7 @@ int main(int argc, char **argv)
   }
 
   infile.close();
-  if (!infile.close())
+  if (infile.is_open())
   {
     std::cerr << "Error while closing input file" << "\n";
     return 1;

@@ -12,7 +12,7 @@ int & kushekbaev::getElement(int * matrix, const size_t columns, const size_t ro
   return matrix[row * columns + column];
 }
 
-bool kushekbaev::isMinInRow(const int* matrix, const size_t columns,
+bool kushekbaev::isMinInRow(int* matrix, const size_t columns,
  const size_t row, const int element)
 {
   for (size_t z = 0; z < columns; z++)
@@ -25,7 +25,7 @@ bool kushekbaev::isMinInRow(const int* matrix, const size_t columns,
   return true;
 }
 
-bool kushekbaev::isMaxInColumn(const int* matrix, const size_t rows,
+bool kushekbaev::isMaxInColumn(int* matrix, const size_t rows,
  const size_t columns, const size_t column, int element)
 {
   for (size_t z = 0; z < rows; z++)
