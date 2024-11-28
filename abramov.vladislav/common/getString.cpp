@@ -1,7 +1,7 @@
 #include "getString.hpp"
 #include <cstddef>
 
-char *abramov::getStr(std::istream &in)
+char *abramov::getStr(std::istream &in, size_t &size_of_str)
 {
   constexpr size_t max = 20;
   char c = '\0';
@@ -43,6 +43,7 @@ char *abramov::getStr(std::istream &in)
     str[size++] = c;
   }
   str[size] = '\0';
+  size_of_str = size;
   std::skipws(in);
   return str;
 }
