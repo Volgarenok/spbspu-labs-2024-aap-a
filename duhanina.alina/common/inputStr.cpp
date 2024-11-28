@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstddef>
 
-char* duhanina::strcpy(char* array, char* new_array)
+char* duhanina::strcpy(const char* array, char* new_array)
 {
   size_t i = 0;
   for (i = 0; array[i] != '\0'; ++i)
@@ -22,6 +22,7 @@ char* duhanina::inputStr(std::istream& in)
   }
   catch (const std::bad_alloc& e)
   {
+    in >> std::skipws;
     return nullptr;
   }
   char c = '\0';
@@ -40,6 +41,7 @@ char* duhanina::inputStr(std::istream& in)
       }
       catch (const std::bad_alloc& e)
       {
+        in >> std::skipws;
         delete[] str;
         throw;
       }
