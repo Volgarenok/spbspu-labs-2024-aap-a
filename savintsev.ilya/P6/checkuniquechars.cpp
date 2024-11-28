@@ -1,12 +1,27 @@
 #include "checkuniquechars.h"
-#include <iostream>
+#include <cctype>
+#include <cstring>
 
-bool savintsev::isOneOfTheLetters(char c)
+bool isOneOfTheLetters(char c);
+bool isUnsignedInteger(const char * s, size_t & pos);
+bool isMultiplier(const char * s, size_t & pos);
+bool isTerm(const char * s, size_t & pos);
+bool isIdentifier(const char * s, size_t & pos);
+
+bool isOneOfTheLetters(char c)
 {
-  return ((c >= 97 && c <= 102) || (c >= 120 && c <= 122));
+  const char * letters = "abcdefxyz";
+  for (size_t i = 0; i < std::strlen(letters); ++i)
+  {
+    if (c == letters[i])
+    {
+      return true;
+    }
+  }
+  return false;
 }
 
-bool savintsev::isUnsignedInteger(const char * s, int & pos)
+bool isUnsignedInteger(const char * s, size_t & pos)
 {
   if (!s[pos] || !std::isdigit(s[pos]))
   {
@@ -20,7 +35,7 @@ bool savintsev::isUnsignedInteger(const char * s, int & pos)
   return isUnsignedInteger(s, pos);
 }
 
-bool savintsev::isIdentifier(const char * s, int & pos)
+bool isIdentifier(const char * s, size_t & pos)
 {
   if (isOneOfTheLetters(s[pos]))
   {
@@ -30,7 +45,7 @@ bool savintsev::isIdentifier(const char * s, int & pos)
   return false;
 }
 
-bool savintsev::isMultiplier(const char * s, int & pos)
+bool isMultiplier(const char * s, size_t & pos)
 {
   int start = pos;
   if (isUnsignedInteger(s, pos) || isIdentifier(s, pos))
@@ -40,7 +55,7 @@ bool savintsev::isMultiplier(const char * s, int & pos)
   if (s[pos] == '(')
   {
     pos++;
-    if (isExpression(s, pos) && s[pos] == ')')
+    if (savintsev::isExpression(s, pos) && s[pos] == ')')
     {
       pos++;
       return true;
@@ -50,7 +65,7 @@ bool savintsev::isMultiplier(const char * s, int & pos)
   return false;
 }
 
-bool savintsev::isTerm(const char * s, int & pos)
+bool isTerm(const char * s, size_t & pos)
 {
   int start = pos;
   if (isMultiplier(s, pos))
@@ -77,7 +92,7 @@ bool savintsev::isTerm(const char * s, int & pos)
   return false;
 }
 
-bool savintsev::isExpression(const char * s, int & pos)
+bool savintsev::isExpression(const char * s, size_t & pos)
 {
   int start = pos;
   if (isTerm(s, pos))
