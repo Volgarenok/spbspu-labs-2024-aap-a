@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include "matrix.h"
 
 int main(int argc, char ** argv)
 {
@@ -19,7 +20,7 @@ int main(int argc, char ** argv)
     return 1;
   }
 
-  if ((argv[1][0] != '1' && argv[1][0] != '2') || argv[1][1] != '\0')
+  if ((argv[1][0] != '1' && argv[1][0] != '2'))
   {
     std::cerr << "First parameter is must be 1 or 2!" << '\n';
     return 1;
@@ -42,7 +43,8 @@ int main(int argc, char ** argv)
 
   int fixArr[10000] = {0};
   int * matrix = nullptr;
-  int * dinamArr = nullptr;
+  int * dynamArr = nullptr;
+  size_t read = 0;
 
   if (argv[1][0] == '1')
   {
@@ -52,18 +54,24 @@ int main(int argc, char ** argv)
   {
     try
     {
-      dinamArr = new int[m * n];
-      matrix = dinamArr;
+      dynamArr = new int[m * n];
+      matrix = dynamArr;
     }
     catch(const std::bad_alloc & e)
     {
-      delete[] dinamArr;
+      delete[] dynamArr;
       std::cerr << "Out of memory!" << '\n';
       return 1;
     }
   }
+  if (!ivanova::input_matrix(input, matrix, m, n, read) || read != (m * n))
+  {
+    delete[] dynamArr;
+    std::cerr << "Invalid input" << "\n";
+    return 2;
+  }
 
-  output << //funtions
-  output << //funtions2
-  delete[] dinamArr;
+  output << ivanova::num_col_lsr(matrix, m, n);
+  output << ivanova::min_sum_mdg(matrix, m, n);
+  delete[] dynamArr;
 }
