@@ -13,6 +13,7 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
   {
     *(line + i) = '\0';
   }
+  *(line + capacity - 1) = '\0';
   char elem = ' ';
   size_t index = 0;
   std::noskipws(input);
@@ -20,10 +21,11 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
   {
     if (index == capacity - 1)
     {
-      char* extendedline = reallocate(line, capacity);
+      char* extendedline = reallocate(line, capacity, 2);
       if (extendedline == nullptr)
       {
         free(line);
+        std::skipws(input);
         return nullptr;
       }
       line = extendedline;
@@ -34,12 +36,13 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
   if (!input)
   {
     free(line);
+    std::skipws(input);
     return nullptr;
   }
   std::skipws(input);
   return line;
 }
-void nikonov::transferLine(char* oldLine, char* newLine)
+void nikonov::transferLine(const char* oldLine, char* newLine)
 {
   if (oldLine && newLine)
   {
@@ -51,21 +54,12 @@ void nikonov::transferLine(char* oldLine, char* newLine)
     }
   }
 }
-char* nikonov::reallocate(char* line, size_t& capacity, int addSizeOptional)
+char* nikonov::reallocate(char* line, size_t& capacity, int k, int addSizeOptional)
 {
   char* newline = nullptr;
   size_t tempCapacity = 0;
-  if (addSizeOptional == -2)
-  {
-    size_t c = 2;
-    tempCapacity = capacity * c;
-    newline = reinterpret_cast< char* >(malloc(tempCapacity));
-  }
-  else
-  {
-    tempCapacity = capacity + addSizeOptional;
-    newline = reinterpret_cast< char* >(malloc(tempCapacity));
-  }
+  tempCapacity = capacity * k + addSizeOptional;
+  newline = reinterpret_cast< char* >(malloc(tempCapacity));
   if (newline == nullptr)
   {
     return nullptr;
@@ -74,7 +68,7 @@ char* nikonov::reallocate(char* line, size_t& capacity, int addSizeOptional)
   {
     *(newline + i) = '\0';
   }
-  nikonov::transferLine(line, newline);
+  transferLine(line, newline);
   free(line);
   capacity = tempCapacity;
   return newline;

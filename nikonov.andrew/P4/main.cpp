@@ -13,15 +13,12 @@ int main()
     return 1;
   }
   char secondLine[] = "50ftw34r_3n8in33r1n8\0";
-  firstLine = nikonov::reallocate(firstLine, capacity, 10);
+  firstLine = nikonov::reallocate(firstLine, capacity, 1, 10);
   if (!firstLine)
   {
     return 1;
   }
-  nikonov::add_digit_symb(firstLine, secondLine);
+  nikonov::dgt_snd(firstLine, secondLine);
   std::cout << firstLine << '\n';
-  if (firstLine)
-  {
-    free(firstLine);
-  }
+  free(firstLine);
 }
