@@ -2,12 +2,23 @@
 #include <cctype>
 #include <cstddef>
 
-bool isNeededSymbol(const char* symbol)
+namespace tkach
+{
+  bool isNeededSymbol(const char* symbol);
+  bool isDigit(const char** str);
+  bool isSymbol(const char** str);
+  bool hasId(const char** str);
+  bool hasNumber(const char** str);
+  bool hasMultiplier(const char** str);
+  bool hasTerm(const char** str);
+}
+
+bool tkach::isNeededSymbol(const char* symbol)
 {
   return (*symbol >= 'a' && *symbol <= 'e');
 }
 
-bool isDigit(const char** str)
+bool tkach::isDigit(const char** str)
 {
   if (std::isdigit(**str))
   {
@@ -17,7 +28,7 @@ bool isDigit(const char** str)
   return false;
 }
 
-bool isSymbol(const char** str)
+bool tkach::isSymbol(const char** str)
 {
   if (isNeededSymbol(*str))
   {
@@ -27,12 +38,12 @@ bool isSymbol(const char** str)
   return false;
 }
 
-bool hasId(const char** str)
+bool tkach::hasId(const char** str)
 {
   return isSymbol(str);
 }
 
-bool hasNumber(const char** str)
+bool tkach::hasNumber(const char** str)
 {
   bool result = isDigit(str);
   if (result)
@@ -42,12 +53,12 @@ bool hasNumber(const char** str)
   return result;
 }
 
-bool hasMultiplier(const char** str)
+bool tkach::hasMultiplier(const char** str)
 {
   return hasNumber(str) || hasId(str);
 }
 
-bool hasTerm(const char** str)
+bool tkach::hasTerm(const char** str)
 {
   if (hasMultiplier(str))
   {
