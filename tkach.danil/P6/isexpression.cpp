@@ -74,7 +74,7 @@ namespace
 
 bool tkach::hasExpression(const char** str)
 {
-  if (::hasTerm(str))
+  if (hasTerm(str))
   {
     if ((**str == '+') || (**str == '-'))
     {
