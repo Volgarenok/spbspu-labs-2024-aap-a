@@ -9,11 +9,6 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
   {
     return nullptr;
   }
-  for (size_t i = 0; i < capacity; ++i)
-  {
-    *(line + i) = '\0';
-  }
-  *(line + capacity - 1) = '\0';
   char elem = ' ';
   size_t index = 0;
   std::noskipws(input);
@@ -21,6 +16,7 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
   {
     if (index == capacity - 1)
     {
+      *(line + index) = '\0';
       char* extendedline = reallocate(line, capacity, 2);
       if (extendedline == nullptr)
       {
@@ -33,6 +29,7 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
     *(line + index) = elem;
     ++index;
   }
+  *(line + index) = '\0';
   if (!input)
   {
     free(line);
@@ -52,6 +49,7 @@ void nikonov::transferLine(const char* oldLine, char* newLine)
       ++oldLine;
       ++newLine;
     }
+    *newLine = '\0';
   }
 }
 char* nikonov::reallocate(char* line, size_t& capacity, int k, int addSizeOptional)
@@ -63,10 +61,6 @@ char* nikonov::reallocate(char* line, size_t& capacity, int k, int addSizeOption
   if (newline == nullptr)
   {
     return nullptr;
-  }
-  for (size_t i = 0; i < tempCapacity; ++i)
-  {
-    *(newline + i) = '\0';
   }
   transferLine(line, newline);
   free(line);
