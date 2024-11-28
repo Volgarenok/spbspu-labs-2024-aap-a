@@ -1,5 +1,5 @@
 #include <iostream>
-#include "enterStr.hpp"
+#include <enterStr.hpp>
 #include "difLat.hpp"
 
 int main()
