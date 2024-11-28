@@ -31,7 +31,7 @@ std::istream & evstyunichev::input(std::istream &fin, int *arr, size_t n, size_t
       }
       else
       {
-        num = 0;
+        return fin;
       }
       arr[i * m + j] = num;
     }
@@ -42,7 +42,7 @@ std::istream & evstyunichev::input(std::istream &fin, int *arr, size_t n, size_t
 bool evstyunichev::is_row_nsm(const int *arr, const size_t i, const size_t m)
 {
   bool isNsm = m;
-  for(size_t j = 1; j < m; j++)
+  for (size_t j = 1; j < m; j++)
   {
     if (arr[i * m + j] == arr[i * m + j - 1])
     {
