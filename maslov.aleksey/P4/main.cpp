@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stringInput.hpp>
 #include "stringManipulator.hpp"
 
 int main()

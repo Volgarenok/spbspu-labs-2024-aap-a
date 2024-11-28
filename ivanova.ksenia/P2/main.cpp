@@ -3,8 +3,8 @@
 
 int main()
 {
-  const double error = 0.042;
-  const double step = 0.05;
+  constexpr double error = 0.042;
+  constexpr double step = 0.05;
   double left = 0.0, right = 0.0;
   size_t max = 0;
   std::cout << "Enter the start,end of the calculation interval and maximum numbers:";
