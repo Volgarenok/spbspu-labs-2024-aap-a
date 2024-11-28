@@ -20,7 +20,7 @@ int main(int argc, char** argv)
   }
   if (argv[1][0] == '\0')
   {
-    std::cerr << "Firts parametr is empty\n"
+    std::cerr << "Firts parametr is empty\n";
     return 1;
   }
   if (argv[1][1] != '\0')
