@@ -149,6 +149,7 @@ namespace
     {
       if (hasSymbol(next, '+') != nullptr || hasSymbol(next, '-') != nullptr)
       {
+        next++;
         const char* continues = hasExpression(next);
         return continues;
       }
