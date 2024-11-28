@@ -1,7 +1,7 @@
 #include "cut_to_square.h"
 #include <iostream>
 
-int* timofeev::cut_to_square(const int* matrix, size_t strk, size_t stl)
+int* timofeev::cut_to_square(const int* matrix, std::size_t strk, std::size_t stl)
 {
   if (stl <= strk)
   {
