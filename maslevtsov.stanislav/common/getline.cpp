@@ -21,7 +21,7 @@ char* maslevtsov::getline(std::istream& in)
   char symbol = '\0';
 
   std::noskipws(in);
-  while ((in >> symbol) && (!in.eof()))
+  while ((in >> symbol) && (symbol != '\n'))
   {
     if (stringIndex == stringCapacity - 1)
     {
