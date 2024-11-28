@@ -1,5 +1,6 @@
-#include "functions.h"
 #include <iostream>
+#include "functions.h"
+#include <all_for_input.h>
 
 int main()
 {
