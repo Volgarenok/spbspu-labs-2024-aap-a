@@ -1,30 +1,23 @@
 #include "formline.hpp"
 #include <cctype>
-void nikonov::add_digit_symb(char* firstStr, const char* secondStr)
+void nikonov::dgt_snd(char* firstStr, const char* secondStr)
 {
-  while (firstStr && secondStr)
+  while (*(firstStr) != '\0')
   {
-    if (*(firstStr) != '\0')
+    ++firstStr;
+  }
+  while (*secondStr != '\0')
+  {
+    if (std::isdigit(*secondStr))
     {
+      *(firstStr) = *(secondStr);
+      ++secondStr;
       ++firstStr;
-      continue;
     }
     else
     {
-      if (*secondStr == '\0')
-      {
-        return;
-      }
-      else if (std::isdigit(*secondStr))
-      {
-        *(firstStr) = *(secondStr);
-        ++secondStr;
-        ++firstStr;
-      }
-      else
-      {
-        ++secondStr;
-      }
+      ++secondStr;
     }
   }
+  *firstStr = '\0';
 }

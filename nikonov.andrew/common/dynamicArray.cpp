@@ -9,10 +9,6 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
   {
     return nullptr;
   }
-  for (size_t i = 0; i < capacity; ++i)
-  {
-    *(line + i) = '\0';
-  }
   char elem = ' ';
   size_t index = 0;
   std::noskipws(input);
@@ -20,10 +16,12 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
   {
     if (index == capacity - 1)
     {
-      char* extendedline = reallocate(line, capacity);
+      *(line + index) = '\0';
+      char* extendedline = reallocate(line, capacity, 2);
       if (extendedline == nullptr)
       {
         free(line);
+        std::skipws(input);
         return nullptr;
       }
       line = extendedline;
@@ -31,15 +29,17 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
     *(line + index) = elem;
     ++index;
   }
-  if (*line == '\0')
+  *(line + index) = '\0';
+  if (!input)
   {
     free(line);
+    std::skipws(input);
     return nullptr;
   }
   std::skipws(input);
   return line;
 }
-void nikonov::transferLine(char* oldLine, char* newLine)
+void nikonov::transferLine(const char* oldLine, char* newLine)
 {
   if (oldLine && newLine)
   {
@@ -49,32 +49,20 @@ void nikonov::transferLine(char* oldLine, char* newLine)
       ++oldLine;
       ++newLine;
     }
+    *newLine = '\0';
   }
 }
-char* nikonov::reallocate(char* line, size_t& capacity, int addSizeOptional)
+char* nikonov::reallocate(char* line, size_t& capacity, int k, int addSizeOptional)
 {
   char* newline = nullptr;
   size_t tempCapacity = 0;
-  if (addSizeOptional == -2)
-  {
-    size_t c = 2;
-    tempCapacity = capacity * c;
-    newline = reinterpret_cast< char* >(malloc(tempCapacity));
-  }
-  else
-  {
-    tempCapacity = capacity + addSizeOptional;
-    newline = reinterpret_cast< char* >(malloc(tempCapacity));
-  }
+  tempCapacity = capacity * k + addSizeOptional;
+  newline = reinterpret_cast< char* >(malloc(tempCapacity));
   if (newline == nullptr)
   {
     return nullptr;
   }
-  for (size_t i = 0; i < tempCapacity; ++i)
-  {
-    *(newline + i) = '\0';
-  }
-  nikonov::transferLine(line, newline);
+  transferLine(line, newline);
   free(line);
   capacity = tempCapacity;
   return newline;
