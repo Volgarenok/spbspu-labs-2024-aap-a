@@ -24,8 +24,8 @@ int main(int argc, char **argv)
   char firstChar;
   if (!(infile >> firstChar))
   {
-    std::cerr << "Input file is empty" << "\n";
-    return 1;
+    std::cout << "Input file is empty" << "\n";
+    return 0;
   }
   size_t rows = 0, columns = 0;
   if (!(infile >> rows >> columns))
