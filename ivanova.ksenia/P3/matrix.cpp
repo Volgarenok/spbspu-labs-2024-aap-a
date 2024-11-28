@@ -15,12 +15,12 @@ std::istream & ivanova::input_matrix(std::istream & in, int * t, size_t m, size_
 
 size_t ivanova::num_col_lsr(const int * t, size_t m, size_t n)
 {
-  size_t count = 0;
   size_t max = 0;
   size_t result = 0;
   size_t col  = 0;
-  for (size_t i = 0; i < m; i++)
+  for (size_t i = 1; i < m; i++)
   {
+    size_t count = 1;
     for (size_t j = 0; j < n; j++)
     {
       if (t[j * m + i] == t[(j + 1) * m + i])
@@ -30,7 +30,7 @@ size_t ivanova::num_col_lsr(const int * t, size_t m, size_t n)
       else
       {
         max = count;
-        count = 0;
+        count = 1;
       }
     }
     max = count;
