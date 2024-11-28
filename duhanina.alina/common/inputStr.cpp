@@ -22,7 +22,6 @@ char* duhanina::inputStr(std::istream& in)
   }
   catch (const std::bad_alloc& e)
   {
-    in >> std::skipws;
     return nullptr;
   }
   char c = '\0';
