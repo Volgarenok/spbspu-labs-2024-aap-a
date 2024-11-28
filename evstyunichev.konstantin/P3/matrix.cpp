@@ -29,6 +29,10 @@ std::istream & evstyunichev::input(std::istream &fin, int *arr, size_t n, size_t
       {
         read++;
       }
+      else
+      {
+        num = 0;
+      }
       arr[i * m + j] = num;
     }
   }
