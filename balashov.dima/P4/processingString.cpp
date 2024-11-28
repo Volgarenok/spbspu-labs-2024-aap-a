@@ -63,8 +63,7 @@ char* balashov::enteringLine(std::istream & in, size_t & capacity)
     line[sizeLine++] = symbol;
     if (sizeLine == capacity)
     {
-      char * newLine = nullptr;
-      newLine = increaseSizeLine(line, capacity);
+      char * newLine = increaseSizeLine(line, capacity);
       free(line);
       if (newLine == nullptr)
       {
