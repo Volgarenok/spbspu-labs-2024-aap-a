@@ -1,6 +1,6 @@
 #ifndef CUT_TO_SQUARE_H
 #define CUT_TO_SQUARE_H
-#include <iostream>
+#include <cstddef>
 
 namespace timofeev
 {

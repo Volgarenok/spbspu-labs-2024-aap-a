@@ -18,9 +18,15 @@ int main(int argc, char** argv)
     std::cerr << "Not enough arguments\n";
     return 1;
   }
+  if (argv[1][0] == '\0')
+  {
+    std::cerr << "Firts parametr is empty\n";
+    return 1;
+  }
   if (argv[1][1] != '\0')
   {
-    std::cerr << "First parametr is not a number";
+    std::cerr << "First parametr is not a number\n";
+    return 1;
   }
   int num = std::atoi(argv[1]);
   if (num != 1 && num != 2)
