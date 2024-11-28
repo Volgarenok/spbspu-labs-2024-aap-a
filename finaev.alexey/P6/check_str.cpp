@@ -1,4 +1,5 @@
 #include "check_str.h"
+#include <cctype>
 
 namespace finaev
 {
@@ -35,7 +36,7 @@ const char * finaev::hasDigit(const char * str)
   {
     return str;
   }
-  return (*str >= '0' && *str <= '9') ? (str + 1) : nullptr;
+  return (std::isdigit(*str) == true) ? (str + 1) : nullptr;
 }
 
 const char * finaev::hasId(const char* str)
@@ -49,8 +50,8 @@ const char * finaev::hasUnsignedInt(const char* str)
   {
     return str;
   }
-  auto next = finaev::hasDigit(str);
-  if (auto continues = finaev::hasUnsignedInt(next))
+  auto next = hasDigit(str);
+  if (auto continues = hasUnsignedInt(next))
   {
     return continues;
   }
@@ -63,19 +64,19 @@ const char * finaev::hasFactor(const char* str)
   {
     return str;
   }
-  auto next = finaev::hasUnsignedInt(str);
+  auto next = hasUnsignedInt(str);
   if (next)
   {
     return next;
   }
-  next = finaev::hasId(str);
+  next = hasId(str);
   if (next)
   {
     return next;
   }
-  next = finaev::isSymbol(str, '(');
-  next = finaev::hasExpression(next);
-  next = finaev::isSymbol(next, ')');
+  next = isSymbol(str, '(');
+  next = hasExpression(next);
+  next = isSymbol(next, ')');
   return next;
 }
 
@@ -85,10 +86,10 @@ const char * finaev::hasTerm(const char* str)
   {
     return str;
   }
-  auto next = finaev::hasFactor(str);
-  if (auto continues = finaev::isSymbol(next, '*'))
+  auto next = hasFactor(str);
+  if (auto continues = isSymbol(next, '*'))
   {
-    continues = finaev::hasTerm(continues);
+    continues = hasTerm(continues);
     return continues;
   }
   return next;
@@ -100,15 +101,15 @@ const char * finaev::hasExpression(const char* str)
   {
     return str;
   }
-  auto next = finaev::hasTerm(str);
-  if (auto continues = finaev::isSymbol(next, '+'))
+  auto next = hasTerm(str);
+  if (auto continues = isSymbol(next, '+'))
   {
-   continues = finaev::hasExpression(continues);
+   continues = hasExpression(continues);
    return continues;
   }
-  else if (auto continues = finaev::isSymbol(next, '-'))
+  else if (auto continues = isSymbol(next, '-'))
   {
-   continues = finaev::hasExpression(continues);
+   continues = hasExpression(continues);
    return continues;
   }
   return next;
@@ -116,5 +117,5 @@ const char * finaev::hasExpression(const char* str)
 
 bool finaev::checkStr(const char * str)
 {
-  return (finaev::hasExpression(str) != nullptr);
+  return (hasExpression(str) != nullptr);
 }
