@@ -3,8 +3,8 @@
 namespace kushekbaev
 {
   int & getElement(int* matrix, const size_t columns, const size_t row, const size_t column);
-  bool isMinInRow(const int* matrix, const size_t columns, const size_t row, const int element);
-  bool isMaxInColumn(const int* matrix, const size_t rows, const size_t columns, const size_t column, const int element);
+  bool isMinInRow(int* matrix, const size_t columns, const size_t row, const int element);
+  bool isMaxInColumn(int* matrix, const size_t rows, const size_t columns, const size_t column, const int element);
 }
 
 int & kushekbaev::getElement(int * matrix, const size_t columns, const size_t row, const size_t column)
