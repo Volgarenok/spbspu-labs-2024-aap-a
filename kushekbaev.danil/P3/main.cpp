@@ -28,6 +28,15 @@ int main(int argc, char **argv)
     return 1;
   }
 
+  infile.close();
+  infile.open(input_filename);
+
+  if (!infile.is_open())
+  {
+    std::cerr << "Error while reopening input file" << "\n";
+    return 1;
+  }
+
   size_t rows = 0, columns = 0;
   if (!(infile >> rows >> columns))
   {
