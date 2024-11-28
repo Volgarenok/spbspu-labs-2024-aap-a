@@ -15,7 +15,7 @@ int main()
   if (str1[0] == '0')
   {
     std::cerr << "Incorrect input\n";
-    delete[] str;
+    delete[] str1;
     return 1;
   }
   char *destination = nullptr;
