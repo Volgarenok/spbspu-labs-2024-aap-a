@@ -4,7 +4,7 @@
 
 int main(int argc, char **argv)
 {
-  constexpr size_t StaticArrSize = 1e4;
+  constexpr size_t staticArrSize = 1e4;
   if (argc < 4)
   {
     std::cerr << "Not enough arguments\n";
@@ -24,45 +24,41 @@ int main(int argc, char **argv)
     std::cerr << "fail\n";
     return 1;
   }
-  int p = 0;
-  p = evstyunichev::CastToDigit(argv[1]);
-  if (!p)
+  int num = evstyunichev::cast_to_digit(argv[1]);
+  if (!num)
   {
     std::cerr << "is not 1 or 2 btw\n";
     return 1;
   }
-  int num = p;
-  int *arr = nullptr, *d_arr = nullptr;
+  int *arr = nullptr, *dArr = nullptr;
+  size_t read = 0;
   if (num == 1)
   {
-    static int static_arr[StaticArrSize];
-    arr = static_arr;
+    int staticArr[staticArrSize];
+    if (!evstyunichev::solve(fin, fout, staticArr, n, m, read))
+    {
+      std::cerr << "bad input\n";
+      return 2;
+    }
   }
-  else if(num == 2)
+  else if (num == 2)
   {
     try
     {
-      d_arr = new int[n * m];
-      arr = d_arr;
+      dArr = new int[n * m];
+      if (!evstyunichev::solve(fin, fout, dArr, n, m, read))
+      {
+        std::cerr << "bad input\n";
+        delete[] dArr;
+        return 2;
+      }
+      delete[] dArr;
     }
     catch (const std::exception& e)
     {
       std::cerr << e.what() << "\n";
-      delete[] d_arr;
       return 1;
     }
   }
-  size_t read = 0;
-  if (evstyunichev::Input(fin, arr, n, m, read) && (read == n * m))
-  {
-    fout << evstyunichev::CntRowsNsm(arr, n, m) << "\n";
-  }
-  else
-  {
-    std::cout << "bad input\n";
-    delete[] d_arr;
-    return 2;
-  }
-  delete[] d_arr;
   return 0;
 }

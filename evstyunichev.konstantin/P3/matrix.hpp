@@ -3,9 +3,11 @@
 #include <iostream>
 namespace evstyunichev
 {
-  int CastToDigit(char *);
-  std::istream & Input(std::istream &fin, int *arr, size_t m, size_t n, size_t &read);
-  bool IsRowNsm(int *arr, size_t i, size_t n);
-  size_t CntRowsNsm(int *arr, size_t m, size_t n);
+  int cast_to_digit(char *);
+  std::istream & input(std::istream &, int *, size_t, size_t, size_t &);
+  bool is_row_nsm(int *, size_t, size_t);
+  size_t cnt_rows_nsm(int *, size_t, size_t);
+  bool solve(std::istream &, std::ostream &, int *, size_t, size_t, size_t &);
+  void output(std::ostream &, int *, size_t, size_t);
 }
 #endif
