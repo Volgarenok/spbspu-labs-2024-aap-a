@@ -24,14 +24,15 @@ int main(int argc, char **argv)
   char firstChar;
   if (!(infile >> firstChar))
   {
-    std::cout << "Input file is empty" << "\n";
-    return 0;
+    std::cerr << "Input file is empty" << "\n";
+    return 1;
   }
+
   size_t rows = 0, columns = 0;
   if (!(infile >> rows >> columns))
   {
-    std::cerr << "Error reading matrix dimensions" << "\n";
-    return 1;
+    std::cout << "Error reading matrix dimensions" << "\n";
+    return 0;
   }
 
   int* matrix = new int [rows * columns];
