@@ -3,11 +3,7 @@
 
 int main()
 {
-  if(!std::cin)
-  {
-    std::cerr << "No input" << '\n';
-    return 1;
-  }
+
   char* istr = nullptr;
   try
   {
@@ -15,7 +11,6 @@ int main()
   }
   catch (const std::bad_alloc & e)
   {
-    delete[] istr;
     std::cerr << "No memory" << '\n';
     return 1;
   }
