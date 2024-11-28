@@ -1,7 +1,7 @@
 #ifndef OUTPUT_MATRIX_H
 #define OUTPUT_MATRIX_H
 
-#include <iostream>
+#include <cstddef>
 
 namespace timofeev
 {

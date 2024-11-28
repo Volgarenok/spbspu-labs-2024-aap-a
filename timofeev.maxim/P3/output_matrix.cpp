@@ -1,5 +1,4 @@
 #include "output_matrix.h"
-#include <iostream>
 
 int timofeev::check_diag(const int* matrix, size_t size)
 {
