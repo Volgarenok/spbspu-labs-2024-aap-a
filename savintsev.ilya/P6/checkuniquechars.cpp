@@ -10,7 +10,6 @@ bool isIdentifier(const char * s, size_t & pos);
 
 bool isOneOfTheLetters(char c)
 {
-  /*
   const char * letters = "abcdefxyz";
   for (size_t i = 0; i < std::strlen(letters); ++i)
   {
@@ -20,8 +19,6 @@ bool isOneOfTheLetters(char c)
     }
   }
   return false;
-  */
-  return ((c >= 97 && c <= 102) || (c >= 120 && c <= 122));
 }
 
 bool isUnsignedInteger(const char * s, size_t & pos)
