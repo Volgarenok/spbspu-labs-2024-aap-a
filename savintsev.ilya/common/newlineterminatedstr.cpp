@@ -21,7 +21,7 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
   }
   size_t i = 0;
   char buffer = 'a';
-  while (!in.eof())
+  while (in.good())
   {
     if (i == (capacity - 1))
     {
@@ -46,11 +46,11 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
       break;
     }
   }
-  //if (!in.good())
-  //{
-  //  delete[] t;
-  //  return nullptr;
-  //}
+  if (!in.good())
+  {
+    delete[] t;
+    return nullptr;
+  }
   t[i - 1] = '\0';
   return t;
 }
