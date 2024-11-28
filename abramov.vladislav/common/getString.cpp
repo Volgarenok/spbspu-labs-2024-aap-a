@@ -1,11 +1,19 @@
 #include "getString.hpp"
 #include <cstddef>
 
-char *abramov::getStr(std::istream &in)
+char *abramov::getStr(std::istream &in, size_t &size_of_str)
 {
   constexpr size_t max = 20;
   char c = '\0';
-  char *str = new char[max + 1];
+  char *str = nullptr;
+  try
+  {
+    str = new char[max + 1];
+  }
+  catch (const std::bad_alloc &e)
+  {
+    return nullptr;
+  }
   size_t new_max = max;
   size_t size = 0;
   std::noskipws(in);
@@ -22,7 +30,8 @@ char *abramov::getStr(std::istream &in)
       catch (const std::bad_alloc &e)
       {
         delete[] str;
-        return nullptr;
+        std::skipws(in);
+        return str;
       }
       for (size_t i = 0; i < new_max / 2; ++i)
       {
@@ -34,6 +43,7 @@ char *abramov::getStr(std::istream &in)
     str[size++] = c;
   }
   str[size] = '\0';
+  size_of_str = size;
   std::skipws(in);
   return str;
 }
