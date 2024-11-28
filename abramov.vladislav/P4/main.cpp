@@ -1,6 +1,6 @@
 #include <cstring>
-#include "unionStrs.hpp"
 #include <getString.hpp>
+#include "unionStrs.hpp"
 int main()
 {
   constexpr const char *str2 = "def ";

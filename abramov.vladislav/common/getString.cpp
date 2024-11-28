@@ -5,7 +5,15 @@ char *abramov::getStr(std::istream &in)
 {
   constexpr size_t max = 20;
   char c = '\0';
-  char *str = new char[max + 1];
+  char *str = nullptr;
+  try
+  {
+    str = new char[max + 1];
+  }
+  catch (const std::bad_alloc &e)
+  {
+    return nullptr;
+  }
   size_t new_max = max;
   size_t size = 0;
   std::noskipws(in);
@@ -22,7 +30,8 @@ char *abramov::getStr(std::istream &in)
       catch (const std::bad_alloc &e)
       {
         delete[] str;
-        return nullptr;
+        std::skipws(in);
+        return str;
       }
       for (size_t i = 0; i < new_max / 2; ++i)
       {
