@@ -1,5 +1,5 @@
 #include <strinput.hpp>
-#include "strmanipulator.hpp"
+#include "recursionfunc.hpp"
 
 int main()
 {
@@ -19,6 +19,6 @@ int main()
     std::cerr << "Empty input\n";
     return 1;
   }
-  std::cout << mozhegova::spcRmv(str) << '\n';
+  std::cout << std::boolalpha << mozhegova::isExpression(str) << "\n";
   delete[] str;
 }
