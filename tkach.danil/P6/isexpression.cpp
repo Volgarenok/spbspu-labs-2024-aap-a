@@ -29,7 +29,7 @@ namespace
 
   bool isSymbol(const char** str)
   {
-    if (::isNeededSymbol(*str))
+    if (isNeededSymbol(*str))
     {
       ++(*str);
       return true;
