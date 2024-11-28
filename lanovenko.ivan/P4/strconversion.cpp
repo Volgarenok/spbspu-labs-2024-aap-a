@@ -1,29 +1,16 @@
 #include "strconversion.h"
+#include <iostream>
 #include <cstddef>
 #include <cstring>
 char* lanovenko::inputstring(std::istream& in, const char stop)
 {
-  size_t capacity = 1;
-  char* str = nullptr;
-  try
-  {
-    str = new char[capacity];
-  }
-  catch (const std::bad_alloc & e)
-  {
-    delete[] str;
-    throw std::logic_error("Out of memory\n");
-  }
+  size_t capacity = 10;
+  char* str = new char[capacity];
   size_t quantity = 0;
   char c = '\0';
   in >> std::noskipws;
   while (in >> c && c != stop)
   {
-    if (!isalpha(c))
-    {
-      delete[] str;
-      throw std::logic_error("Not a letter");
-    }
     if (quantity >= capacity - 1)
     {
       capacity *= 2;
@@ -34,9 +21,8 @@ char* lanovenko::inputstring(std::istream& in, const char stop)
       }
       catch (const std::bad_alloc & e)
       {
-        delete[] new_str;
         delete[] str;
-        throw std::logic_error("Out of memory\n");
+        throw;
       }
       for (size_t i = 0; i < quantity; i++)
       {
