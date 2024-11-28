@@ -2,12 +2,11 @@
 
 #include <string_input.hpp>
 
-#include "string_analysis.hpp"
+#include "is_polinomial.hpp"
 
 int main()
 {
   char* str = rychkov::getline(std::cin);
-
   if (std::cin.fail())
   {
     std::cerr << "Failed to read string\n";
@@ -21,6 +20,6 @@ int main()
     return 1;
   }
 
-  std::cout << (rychkov::findDigitsRepeatsCount(str) != 0 ? 1 : 0) << '\n';
+  std::cout << std::boolalpha << rychkov::isPolinomial(str) << '\n';
   free(str);
 }
