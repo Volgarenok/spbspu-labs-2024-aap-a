@@ -35,7 +35,7 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  infile.open();
+  infile.open(input_filename);
   if (!infile.is_open())
   {
     std::cerr << "Error while reopening input file" << "\n";
