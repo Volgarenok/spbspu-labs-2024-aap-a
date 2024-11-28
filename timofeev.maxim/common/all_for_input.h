@@ -11,4 +11,4 @@ namespace timofeev
   char* input_line(std::istream& in);
 }
 
-#define
+#endif
