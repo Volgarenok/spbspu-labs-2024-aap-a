@@ -4,7 +4,7 @@
 
 namespace duhanina
 {
-  char* strcpy(char* array, char* new_array);
+  char* strcpy(const char* array, char* new_array);
   char* inputStr(std::istream& in);
 }
 
