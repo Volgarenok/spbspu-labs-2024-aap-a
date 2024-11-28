@@ -36,7 +36,7 @@ const char * finaev::hasDigit(const char * str)
   {
     return str;
   }
-  return (std::isdigit(*str) == true) ? (str + 1) : nullptr;
+  return (std::isdigit(*str)) ? (str + 1) : nullptr;
 }
 
 const char * finaev::hasId(const char* str)
