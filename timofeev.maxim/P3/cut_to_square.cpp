@@ -17,8 +17,7 @@ int* timofeev::cut_to_square(const int* matrix, size_t strk, size_t stl)
   else
   {
     size_t capacity = strk * strk;
-    int* new_mtx = nullptr;
-    new_mtx = new int[capacity];
+    int* new_mtx = new int[capacity];
     size_t ind = 0;
     for (size_t i = 0; i <  strk * stl; i += stl)
     {
