@@ -23,20 +23,22 @@ int main(int argc, char ** argv)
     std::cerr << "First parameter is out of range\n";
     return 1;
   }
-
   std::ifstream input(argv[2]);
   size_t m = 0;
   size_t n = 0;
   input >> m >> n;
   size_t read = 0;
-
+  if (input.fail())
+  {
+    std::cerr << "Failed to read matrix dimensions\n";
+    return 1;
+  }
   std::ofstream output(argv[3]);
   if (m == 0 || n == 0)
   {
     output << m << " " << n << "\n";
     return 0;
   }
-
   int fixedLengthArr[1000] = {};
   int * dynamicArr = nullptr;
   int * array = fixedLengthArr;
