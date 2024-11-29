@@ -40,7 +40,7 @@ int main()
     start += step;
     last_symbol = expanded_line[finish - 1];
   }
-  
+
   for (size_t i = 0; i < finish; ++i)
   {
     std::cout << line[i];
