@@ -41,12 +41,6 @@ int main()
     last_symbol = expanded_line[finish - 1];
   }
 
-  for (size_t i = 0; i < finish; ++i)
-  {
-    std::cout << line[i];
-  }
-  std::cout << '\n';
-
   zakirov::change_line(line);
   size_t location = 0;
   while (line[location] != '\0')
