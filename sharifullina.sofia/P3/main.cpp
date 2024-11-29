@@ -32,7 +32,7 @@ int main(int argc, char ** argv)
   if (m == 0 || n == 0)
   {
     std::cerr << "Matrix dimensions cannot be zero\n";
-    return 1;
+    return 0;
   }
 
   int fixedLengthArr[1000] = {};
