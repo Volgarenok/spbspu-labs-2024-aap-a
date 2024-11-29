@@ -77,8 +77,8 @@ int main(int argc, char ** argv)
     return 2;
   }
   size_t result = 0;
-  bocharov::matrix_replace(matrix, rows, cols);
-  result = bocharov::NumLocMax(matrix, rows, cols);
+  bocharov::change_matrix(matrix, rows, cols);
+  result = bocharov::find_local_maximum(matrix, rows, cols);
   bocharov::output_matrix(output, matrix, rows, cols, result);
   std::cout << "\n";
   delete[] dynamic_matrix;
