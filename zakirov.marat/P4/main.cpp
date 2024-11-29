@@ -5,20 +5,20 @@
 
 int main()
 {
+  constexpr size_t step = 1;
   size_t start = 1, finish = 1;
-  constexpr size_t step = 25;
+  char * line = static_cast<char *>(malloc(sizeof(char)));
   char last_symbol = '\0';
   std::cin >> last_symbol;
-  char * line = static_cast<char *>(malloc(sizeof(char)));
-  if (last_symbol == '\0')
+  if (line == nullptr)
+  {
+    std::cerr << "ERROR: Out of memory" << '\n';
+    return 1;
+  }
+  else  if (last_symbol == '\0')
   {
     std::cerr << "ERROR: Empty line" << '\n';
     free(line);
-    return 1;
-  }
-  else if (line == nullptr)
-  {
-    std::cerr << "ERROR: Out of memory" << '\n';
     return 1;
   }
 
@@ -26,6 +26,7 @@ int main()
   while (last_symbol != '\0')
   {
     char * expanded_line = zakirov::expand_line(line, finish, step);
+    finish += step;
     if (expanded_line == nullptr)
     {
       std::cerr << "ERROR: Out of memory" << '\n';
@@ -33,12 +34,18 @@ int main()
       return 1;
     }
 
-    finish += step;
-    zakirov::get_line(std::cin, line, start, finish);
-    start += step;
-    last_symbol = line[finish - 1];
+    zakirov::get_line(std::cin, expanded_line, start, finish);
+    free(line);
     line = expanded_line;
+    start += step;
+    last_symbol = expanded_line[finish - 1];
   }
+  
+  for (size_t i = 0; i < finish; ++i)
+  {
+    std::cout << line[i];
+  }
+  std::cout << '\n';
 
   zakirov::change_line(line);
   size_t location = 0;

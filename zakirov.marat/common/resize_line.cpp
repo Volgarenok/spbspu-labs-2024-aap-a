@@ -1,7 +1,7 @@
 #include "resize_line.hpp"
 #include <iostream>
 
-char * zakirov::expand_line(char * regular_line, size_t real_lenght, size_t add_length)
+char * zakirov::expand_line(char const * regular_line, size_t real_lenght, size_t add_length)
 {
   char * expanded_line = static_cast<char *>(malloc((sizeof(char) * real_lenght) + (sizeof(char) * add_length)));
   if (expanded_line == nullptr)
@@ -24,6 +24,10 @@ void zakirov::get_line(std::istream & in, char * line, size_t start, size_t fini
     in >> line[start];
     if (line[start] == '\0')
     {
+      for (; start < finish; ++start)
+      {
+        line[start] = '\0';
+      }
       break;
     }
   }
