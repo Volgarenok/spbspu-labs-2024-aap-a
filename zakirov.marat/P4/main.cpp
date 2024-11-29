@@ -5,7 +5,7 @@
 
 int main()
 {
-  constexpr size_t step = 1;
+  constexpr size_t step = 26;
   size_t start = 1, finish = 1;
   char * line = static_cast<char *>(malloc(sizeof(char)));
   char last_symbol = '\0';
