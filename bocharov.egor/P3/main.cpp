@@ -1,9 +1,6 @@
-#include "matrix.h"
 #include <iostream>
 #include <fstream>
-#include <cstddef>
-#include <stdexcept>
-#include <cstdlib>
+#include "matrix.h"
 int main(int argc, char ** argv)
 {
   long int number = 0;

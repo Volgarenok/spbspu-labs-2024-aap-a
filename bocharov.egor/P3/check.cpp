@@ -1,7 +1,7 @@
+#include "matrix.h"
 #include <cstddef>
 #include <stdexcept>
 #include <cstdlib>
-#include "matrix.h"
 void bocharov::check_argc(int argc)
   {
     if (argc - 1 > 3)
