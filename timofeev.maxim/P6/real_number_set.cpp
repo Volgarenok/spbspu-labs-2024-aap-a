@@ -15,7 +15,7 @@ const char * timofeev::has_sign(const char * str)
   {
     return str;
   }
-  return (is_symbol(str, '+') || is_symbol(str, '-') ? (str + 1) : nullptr;
+  return (is_symbol(str, '+') || is_symbol(str, '-')) ? (str + 1) : nullptr;
 }
 
 const char * timofeev::has_digit(const char * str)
@@ -33,8 +33,8 @@ const char * timofeev::has_unsigned_int(const char * str)
   {
     return str;
   }
-  auto next = is_digit(str);
-  if(auto continues = is_digit(next))
+  auto next = has_digit(str);
+  if(auto continues = has_digit(next))
   {
     return continues;
   }
@@ -48,7 +48,7 @@ const char * timofeev::has_e(const char * str)
   {
     return str;
   }
-  return (is_symbol(str, 'E') || is_symbol(str, 'e') ? (str + 1) : nullptr;
+  return (is_symbol(str, 'E') || is_symbol(str, 'e')) ? (str + 1) : nullptr;
 }
 
 const char * timofeev::has_order(const char * str)
@@ -72,7 +72,7 @@ const char * timofeev::has_mantissa(const char * str)
     return str;
   }
   auto next = str;
-  if (auto continues = has_unsigned_int(next);
+  if (auto continues = has_unsigned_int(next)
   {
     auto next = continues;
   }

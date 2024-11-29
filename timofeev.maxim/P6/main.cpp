@@ -4,7 +4,7 @@
 
 int main()
 {
-  сhar* line = nullptr;
+  char* line = nullptr;
   try
   {
     line = timofeev::input_line(std::cin);
