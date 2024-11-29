@@ -31,7 +31,7 @@ int main(int argc, char ** argv)
   size_t read = 0;
   if (m == 0 || n == 0)
   {
-    std::cerr << "Matrix dimensions cannot be zero\n";
+    output << m << " " << n << "\n";
     return 0;
   }
 
