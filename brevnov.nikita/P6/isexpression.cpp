@@ -1,7 +1,7 @@
 #include "isexpression.hpp"
 #include <iostream>
 
-const char * classbrevnov::isLetter(const char * str)
+static const char * brevnov::isLetter(const char * str)
 {
   if (!str)
   {
@@ -10,7 +10,7 @@ const char * classbrevnov::isLetter(const char * str)
   return ((*str == 'x') || (*str == 'y') || (*str == 'z')) ? (str + 1) : nullptr;
 }
 
-const char * classbrevnov::isDigit(const char * str)
+static const char * brevnov::isDigit(const char * str)
 {
   if (!str)
   {
@@ -19,16 +19,16 @@ const char * classbrevnov::isDigit(const char * str)
   return ((*str == '1') || (*str == '0')) ? (str + 1) : nullptr;
 }
 
-const char * classbrevnov::hasUint(const char * str)
+static const char * brevnov::hasUint(const char * str)
 {
   if (!str)
   {
     return nullptr;
   }
-  auto next = classbrevnov::isDigit(str);
+  auto next = brevnov::isDigit(str);
   if (next)
   {
-    auto continues = classbrevnov::hasUint(next);
+    auto continues = brevnov::hasUint(next);
     if (continues)
     {
       return continues;
@@ -41,7 +41,7 @@ const char * classbrevnov::hasUint(const char * str)
   return next;
 }
 
-const char * classbrevnov::hasMultiplier(const char * str)
+static const char * brevnov::hasMultiplier(const char * str)
 {
   if (!str)
   {
@@ -50,7 +50,7 @@ const char * classbrevnov::hasMultiplier(const char * str)
   if (*str == '(')
   {
     str++;
-    auto bracket = classbrevnov::hasExpression(str);
+    auto bracket = brevnov::hasExpression(str);
     if (!bracket)
     {
       return bracket;
@@ -64,32 +64,32 @@ const char * classbrevnov::hasMultiplier(const char * str)
       return nullptr;
     }
   }
-  auto next = classbrevnov::hasUint(str);
+  auto next = brevnov::hasUint(str);
   if (next)
   {
     return next;
   }
-  return classbrevnov::isLetter(str);
+  return brevnov::isLetter(str);
 }
 
-const char * classbrevnov::hasTerm(const char * str)
+static const char * brevnov::hasTerm(const char * str)
 {
   if (!str)
   {
     return str;
   }
-  auto next = classbrevnov::hasMultiplier(str);
+  auto next = brevnov::hasMultiplier(str);
   if (*str == '(')
   {
     str++;
-    auto bracket = classbrevnov::hasMultiplier(str);
+    auto bracket = brevnov::hasMultiplier(str);
     if (!bracket)
     {
       return nullptr;
     }
     if (*bracket == '+')
     {
-      next = classbrevnov::hasTerm(bracket + 1);
+      next = brevnov::hasTerm(bracket + 1);
       if (!next)
       {
         return nullptr;
@@ -115,18 +115,18 @@ const char * classbrevnov::hasTerm(const char * str)
   if (*next == '*')
   {
     next++;
-    return classbrevnov::hasTerm(next);
+    return brevnov::hasTerm(next);
   }
   return next;
 }
 
-const char * classbrevnov::hasExpression(const char * str)
+static const char * brevnov::hasExpression(const char * str)
 {
   if (!str)
   {
     return str;
   }
-  auto next = classbrevnov::hasTerm(str);
+  auto next = brevnov::hasTerm(str);
   if (!next)
   {
     return next;
@@ -134,13 +134,13 @@ const char * classbrevnov::hasExpression(const char * str)
   if (*next == '+' || *next == '-')
   {
     next++;
-    return classbrevnov::hasExpression(next);
+    return brevnov::hasExpression(next);
   }
   return next;
 }
 
-bool classbrevnov::isExpression(const char * str)
+static bool brevnov::isExpression(const char * str)
 {
-  auto next = classbrevnov::hasExpression(str);
+  auto next = brevnov::hasExpression(str);
   return next && (*next == '\0');
 }
