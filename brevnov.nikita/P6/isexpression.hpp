@@ -10,5 +10,5 @@ class classbrevnov
   const char * hasMultiplier(const char * str);
   const char * hasTerm(const char * str);
   bool isUint(const char * str);
-}
+};
 #endif
