@@ -50,7 +50,7 @@ const char * hasMultiplier(const char * str)
   if (*str == '(')
   {
     str++;
-    auto bracket = hasExpression(str);
+    auto bracket = brevnov::hasExpression(str);
     if (!bracket)
     {
       return bracket;
