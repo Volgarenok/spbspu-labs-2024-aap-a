@@ -5,7 +5,7 @@
 
 namespace belobrov
 {
-  void transformMatrix(int *matrix, size_t rows, size_t cols);
+  void incrementMatrixLayers(int *matrix, size_t rows, size_t cols);
 }
 
 #endif

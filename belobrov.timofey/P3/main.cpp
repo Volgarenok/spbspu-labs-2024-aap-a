@@ -8,13 +8,13 @@ void processMatrix(std::istream& inputFile, const char* outputFile, int* matrix,
 {
   using namespace belobrov;
   loadMatrix(inputFile, matrix, rows, cols);
-  transformMatrix(matrix, rows, cols);
+  incrementMatrixLayers(matrix, rows, cols);
   saveMatrix(outputFile, matrix, rows, cols);
 }
 
 int main(int argc, char** argv)
 {
-  using namespace belobov;
+  using namespace belobrov;
   if (argc != 4) {
     std::cerr << "Incorrect number of arguments\n";
     return 1;

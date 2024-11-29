@@ -1,7 +1,7 @@
 #include "matrixTransform.hpp"
 #include <algorithm>
 
-void belobrov::transformMatrix(int* matrix, size_t rows, size_t cols) {
+void belobrov::incrementMatrixLayers(int* matrix, size_t rows, size_t cols) {
   size_t layers = std::min(rows, cols) / 2;
 
   for (size_t layer = 0; layer < layers; ++layer) {
