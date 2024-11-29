@@ -1,4 +1,4 @@
-#include "functions.hpp"
+#include "unionString.hpp"
 #include <cstddef>
 
 char * smirnov::getLine(std::istream & in, const char stop)

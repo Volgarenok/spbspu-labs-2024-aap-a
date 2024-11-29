@@ -1,5 +1,5 @@
-#ifndef FUNCTIONS_HPP
-#define FUNCTIONS_HPP
+#ifndef UNIONSTRING_HPP
+#define UNIONSTRING_HPP
 #include <iostream>
 
 namespace smirnov

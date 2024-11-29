@@ -1,4 +1,4 @@
-#include "functions.hpp"
+#include "unionString.hpp"
 
 int main()
 {
