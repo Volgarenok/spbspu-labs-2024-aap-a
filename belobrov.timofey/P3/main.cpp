@@ -4,9 +4,9 @@
 #include "fileIO.hpp"
 #include "matrixTransform.hpp"
 
-using namespace belobrov;
 void processMatrix(std::istream& inputFile, const char* outputFile, int* matrix, size_t rows, size_t cols)
 {
+  using namespace belobrov;
   loadMatrix(inputFile, matrix, rows, cols);
   transformMatrix(matrix, rows, cols);
   saveMatrix(outputFile, matrix, rows, cols);
@@ -14,6 +14,7 @@ void processMatrix(std::istream& inputFile, const char* outputFile, int* matrix,
 
 int main(int argc, char** argv)
 {
+  using namespace belobov;
   if (argc != 4) {
     std::cerr << "Incorrect number of arguments\n";
     return 1;
