@@ -3,8 +3,9 @@
 
 void zakirov::change_line(char * line)
 {
-  char big_letters[26];
-  char small_letters[26];
+  constexpr size_t alphabet_lenght = 26;
+  char big_letters[alphabet_lenght];
+  char small_letters[alphabet_lenght];
   size_t location = 0;
   for (char i = 'A'; i <= 'Z'; ++i)
   {
@@ -22,15 +23,9 @@ void zakirov::change_line(char * line)
   location = 0;
   while (line[location] != '\0')
   {
-    for (size_t i = 0; i < 26; ++i)
+    for (size_t i = 0; i < alphabet_lenght; ++i)
     {
-      if (line[location] == big_letters[i])
-      {
-        big_letters[i] = ' ';
-        small_letters[i] = ' ';
-        break;
-      }
-      else if (line[location] == small_letters[i])
+      if (line[location] == big_letters[i] || line[location] == small_letters[i])
       {
         big_letters[i] = ' ';
         small_letters[i] = ' ';
@@ -41,7 +36,7 @@ void zakirov::change_line(char * line)
   }
 
   location = 0;
-  for (size_t i = 0; i < 26; ++i)
+  for (size_t i = 0; i < alphabet_lenght; ++i)
   {
     if (small_letters[i] != ' ')
     {
