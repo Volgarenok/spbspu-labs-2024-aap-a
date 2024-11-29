@@ -31,7 +31,7 @@ char *sveshnikov::read_str(std::istream &in, std::size_t &len)
     str[size++] = c;
   }
   str[size] = '\0';
-  *len = size;
+  len = size;
   std::skipws(std::cin);
   return str;
 }
