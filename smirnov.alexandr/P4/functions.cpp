@@ -2,10 +2,10 @@
 #include <cstddef>
 #include <cstring>
 
-char * smirnov::getLine(std::istream & in, char stop)
+char * smirnov::getLine(std::istream & in, const char stop)
 {
   constexpr size_t max = 10;
-  char * str = new char[max + 1];
+  char * str = new char[max];
   size_t size = 0;
   char c = '\0';
   size_t capacity = max;
@@ -18,12 +18,12 @@ char * smirnov::getLine(std::istream & in, char stop)
       char * new_str = nullptr;
       try
       {
-        new_str = new char[capacity + 1];
+        new_str = new char[capacity];
       }
       catch (const std::bad_alloc & e)
       {
         delete[] str;
-        throw std::logic_error("Out of memory\n");
+        throw;
       }
       for (size_t i = 0; i < size; ++i)
       {
@@ -35,28 +35,27 @@ char * smirnov::getLine(std::istream & in, char stop)
     str[size++] = c;
   }
   str[size] = '\0';
-  std::skipws(in);
   return str;
 }
 
-char * smirnov::uniString(const char * str1, const char * str2)
+char * smirnov::uniString(char * result_str, const char * str1, const char * str2)
 {
-  size_t length1 = strlen(str1);
-  size_t length2 = strlen(str2);
-  size_t maxLength = length1 + length2;
-  char * result = new char[maxLength + 1];
-  size_t index = 0;
-  for (size_t i = 0; i < std::max(length1, length2); ++i)
+  char * resultPtr = result_str;
+  const char * ptr1 = str1;
+  const char * ptr2 = str2;
+  while (*ptr1 != '\0' && *ptr2 != '\0')
   {
-    if (i < length1)
-    {
-      result[index++] = str1[i];
-    }
-    if (i < length2)
-    {
-      result[index++] = str2[i];
-    }
+    *resultPtr++ = *ptr1++;
+    *resultPtr++ = *ptr2++;
   }
-  result[index] = '\0';
-  return result;
+  while (*ptr1 != '\0')
+  {
+    *resultPtr++ = *ptr1++;
+  }
+  while (*ptr2 != '\0')
+  {
+    *resultPtr++ = *ptr2++;
+  }
+  *resultPtr = '\0';
+  return result_str;
 }
