@@ -1,24 +1,17 @@
 #include <iostream>
 
 #include <workWithString.hpp>
+#include "det_Num_Of_Letters.hpp"
 
 int main()
 {
   char *arr = nullptr;
-  size_t stringLength = 0;
-  try
-  {
-    arr = guseynov::getLine(std::cin, stringLength);
-  }
-  catch(std::bad_alloc & e)
-  {
-    return 1;
-  }
+  arr = guseynov::getLine(std::cin);
   if (arr == nullptr)
   {
     return 1;
   }
-  std::cout << guseynov::determiningNumOfLetters(arr, stringLength) << "\n";
+  std::cout << guseynov::determiningNumOfLetters(arr) << "\n";
   free(arr);
   return 0;
 }
