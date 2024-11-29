@@ -1,4 +1,3 @@
-#include <ios>
 #include <iostream>
 #include "isexpression.hpp"
 #include "getline.hpp"
@@ -11,7 +10,7 @@ int main()
   {
     line = brevnov::getline(std::cin, stop);
   }
-  catch(const std::bad_alloc& e)
+  catch (const std::bad_alloc& e)
   {
     std::cerr << "Not enough memory\n";
     return 1;
@@ -22,7 +21,7 @@ int main()
     delete[] line;
     return 1;
   }
-  std::cout << std::boolalpha << brevnov::isExpression(line) << "\n";
+  std::cout << std::boolalpha << classbrevnov::isExpression(line) << "\n";
   delete[] line;
   return 0;
 }

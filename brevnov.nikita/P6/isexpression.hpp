@@ -1,6 +1,6 @@
 #ifndef ISEXPRESSION_HPP
 #define ISEXPRESSION_HPP
-namespace brevnov
+class classbrevnov
 {
   bool isExpression(const char * str);
   const char * hasExpression(const char * str);
