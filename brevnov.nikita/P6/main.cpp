@@ -1,6 +1,6 @@
 #include <iostream>
+#include <getline.hpp>
 #include "isexpression.hpp"
-#include "getline.hpp"
 
 int main()
 {
@@ -21,7 +21,7 @@ int main()
     delete[] line;
     return 1;
   }
-  std::cout << std::boolalpha << classbrevnov::isExpression(line) << "\n";
+  std::cout << std::boolalpha << brevnov::isExpression(line) << "\n";
   delete[] line;
   return 0;
 }
