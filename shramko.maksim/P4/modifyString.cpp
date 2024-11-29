@@ -4,18 +4,21 @@
 char* shramko::createBiggerStrMemory(size_t memory, const char* str)
 {
   char* new_str = reinterpret_cast< char* >(malloc((memory + 1) * sizeof(char)));
+  if (str = nullptr)
+  {
+    return new_str;
+  }
 
-  for (size_t i = 0; str[i] != '\0'; ++i)
+  for (size_t i = 0; str[i] != '\0'; i++)
   {
     new_str[i] = str[i];
   }
-  new_str[memory] = '\0';
   return new_str;
 }
 
 size_t shramko::countConsecutiveIdenticalSymbols(const char* str)
 {
-  if (str == nullptr)
+  if (str = nullptr)
   {
     return 0;
   }
@@ -39,15 +42,12 @@ char* shramko::inputStr(std::istream& in)
   {
     return str;
   }
-
   char c = '\0';
-  str[0] = c;
   size_t currentSize = 0;
-
   std::noskipws(in);
   while ((in >> c) && (c != '\n'))
   {
-    str[currentSize] = c;
+    str[currentSize++] = c;
     if (currentSize == memory)
     {
       constexpr size_t multiplier = 2;
@@ -55,14 +55,10 @@ char* shramko::inputStr(std::istream& in)
       str[currentSize] = '\0';
       char* new_str = shramko::createBiggerStrMemory(memory, str);
       free(str);
-      if (new_str == nullptr)
-      {
-        return new_str;
-      }
       str = new_str;
     }
   }
+  str[currentSize] = '\0';
   std::skipws(in);
-  str[currentSize++] = '\0';
   return str;
 }
