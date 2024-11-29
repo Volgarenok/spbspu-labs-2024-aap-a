@@ -1,6 +1,5 @@
-#ifndef MATRIX_HPP
-#define MATRIX_HPP
-#include <cstddef>
+#ifndef FUNCTIONS_HPP
+#define FUNCTIONS_HPP
 #include <iostream>
 
 namespace smirnov

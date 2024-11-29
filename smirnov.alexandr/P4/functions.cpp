@@ -1,6 +1,5 @@
 #include "functions.hpp"
 #include <cstddef>
-#include <cstring>
 
 char * smirnov::getLine(std::istream & in, const char stop)
 {
