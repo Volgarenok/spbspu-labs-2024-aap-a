@@ -19,16 +19,21 @@ char * zakirov::expand_line(char const * regular_line, size_t real_lenght, size_
 
 void zakirov::get_line(std::istream & in, char * line, size_t start, size_t finish)
 {
+  char temporary_symbol = '\0';
   for (; start < finish; ++start)
   {
-    in >> line[start];
-    if (line[start] == '\0' || line[start] == '\n')
+    in >> temporary_symbol;
+    if (temporary_symbol == '\0' || temporary_symbol == '\n')
     {
       for (; start < finish; ++start)
       {
         line[start] = '\0';
       }
       break;
+    }
+    else
+    {
+    line[start] = temporary_symbol;
     }
   }
 }
