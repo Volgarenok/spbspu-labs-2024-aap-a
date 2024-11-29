@@ -8,7 +8,7 @@ int main()
   std::size_t len = 0;
   try
   {
-    str = sveshnikov::read_str(std::cin, &len);
+    str = sveshnikov::read_str(std::cin, len);
   }
   catch (const std::bad_alloc &e)
   {

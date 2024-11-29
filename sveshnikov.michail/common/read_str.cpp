@@ -2,7 +2,7 @@
 #include <ios>
 #include <stdexcept>
 
-char *sveshnikov::read_str(std::istream &in, std::size_t * len)
+char *sveshnikov::read_str(std::istream &in, std::size_t &len)
 {
   std::size_t max_len = 100, size = 0;
   char *str = new char[max_len];
