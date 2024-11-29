@@ -18,7 +18,7 @@ char* shramko::createBiggerStrMemory(size_t memory, const char* str)
 
 size_t shramko::countConsecutiveIdenticalSymbols(const char* str)
 {
-  if (str = nullptr)
+  if (str == nullptr)
   {
     return 0;
   }
