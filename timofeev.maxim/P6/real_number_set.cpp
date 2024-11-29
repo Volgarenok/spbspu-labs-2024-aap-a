@@ -74,7 +74,7 @@ const char * timofeev::has_mantissa(const char * str)
   auto next = str;
   if (auto continues = has_unsigned_int(next))
   {
-    auto next = continues;
+    next = continues;
   }
   next = is_symbol(next, '.');
   return has_unsigned_int(next);
