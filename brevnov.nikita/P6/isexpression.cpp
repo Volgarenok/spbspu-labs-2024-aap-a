@@ -1,7 +1,7 @@
 #include "isexpression.hpp"
 #include <iostream>
 
-static const char * brevnov::isLetter(const char * str)
+const char * brevnov::isLetter(const char * str)
 {
   if (!str)
   {
@@ -10,7 +10,7 @@ static const char * brevnov::isLetter(const char * str)
   return ((*str == 'x') || (*str == 'y') || (*str == 'z')) ? (str + 1) : nullptr;
 }
 
-static const char * brevnov::isDigit(const char * str)
+const char * brevnov::isDigit(const char * str)
 {
   if (!str)
   {
@@ -19,7 +19,7 @@ static const char * brevnov::isDigit(const char * str)
   return ((*str == '1') || (*str == '0')) ? (str + 1) : nullptr;
 }
 
-static const char * brevnov::hasUint(const char * str)
+const char * brevnov::hasUint(const char * str)
 {
   if (!str)
   {
@@ -41,7 +41,7 @@ static const char * brevnov::hasUint(const char * str)
   return next;
 }
 
-static const char * brevnov::hasMultiplier(const char * str)
+const char * brevnov::hasMultiplier(const char * str)
 {
   if (!str)
   {
@@ -72,7 +72,7 @@ static const char * brevnov::hasMultiplier(const char * str)
   return brevnov::isLetter(str);
 }
 
-static const char * brevnov::hasTerm(const char * str)
+const char * brevnov::hasTerm(const char * str)
 {
   if (!str)
   {
@@ -120,7 +120,7 @@ static const char * brevnov::hasTerm(const char * str)
   return next;
 }
 
-static const char * brevnov::hasExpression(const char * str)
+const char * brevnov::hasExpression(const char * str)
 {
   if (!str)
   {
@@ -139,7 +139,7 @@ static const char * brevnov::hasExpression(const char * str)
   return next;
 }
 
-static bool brevnov::isExpression(const char * str)
+bool brevnov::isExpression(const char * str)
 {
   auto next = brevnov::hasExpression(str);
   return next && (*next == '\0');
