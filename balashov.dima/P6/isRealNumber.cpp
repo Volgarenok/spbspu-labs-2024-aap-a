@@ -13,87 +13,87 @@ namespace balashov
 
 const char* balashov::hasSymbol(const char* str, char symbol)
 {
-	if (!str)
-	{
-		return str;
-	}
-	return (*str == symbol) ? (str + 1) : nullptr;
+  if (!str)
+  {
+    return str;
+  }
+  return (*str == symbol) ? (str + 1) : nullptr;
 }
 
 const char* balashov::hasFigure(const char * str)
 {
-	if (!str)
-	{
-		return str;
-	}
-	return ('0' <= *str && *str <= '9')  ? (str + 1) : nullptr;
+  if (!str)
+  {
+    return str;
+  }
+  return ('0' <= *str && *str <= '9')  ? (str + 1) : nullptr;
 }
 
 const char* balashov::hasUnsigned(const char* str)
 {
-	if (!str)
-	{
-		return str;
-	}
-	auto next = hasFigure(str);
-	if (auto continues = hasUnsigned(next))
-	{
-		return continues;
-	}
-	return next;
+  if (!str)
+  {
+    return str;
+  }
+  auto next = hasFigure(str);
+  if (auto continues = hasUnsigned(next))
+  {
+    return continues;
+  }
+  return next;
 }
 const char * balashov::hasSign(const char * str)
 {
-	if (!str)
-	{
-		return str;
-	}
-	auto next = hasSymbol(str, '-');
-	return next ? next : hasSymbol(str, '+');
+  if (!str)
+  {
+    return str;
+  }
+  auto next = hasSymbol(str, '-');
+  return next ? next : hasSymbol(str, '+');
 }
 
 
 const char* balashov::hasOrder(const char* str)
 {
-	if (!str)
-	{
-		return str;
-	}
-	auto next = hasSymbol(str,'E');
-	if (auto continues = hasSign(next))
-	{
-		return hasUnsigned(continues);
-	}
-	return hasUnsigned(next);
+  if (!str)
+  {
+    return str;
+  }
+  auto next = hasSymbol(str,'E');
+  if (auto continues = hasSign(next))
+  {
+    return hasUnsigned(continues);
+  }
+  return hasUnsigned(next);
 }
 
 const char* balashov::hasMantissa(const char* str)
 {
-	if (!str)
-	{
-		return str;
-	}
-	auto next = hasSymbol(str, '.');
-	return hasUnsigned(next);
+  if (!str)
+  {
+    return str;
+  }
+  auto next = hasSymbol(str, '.');
+  return hasUnsigned(next);
 }
 
 const char* balashov::hasFloatingPointLiteral(const char* str)
 {
-	if (!str)
-	{
-		return str;
-	}
-	if (auto next = hasSign(str))
-	{
-		auto continues = hasMantissa(next);
-		return hasOrder(continues);
-	}
-	auto continues = hasMantissa(str);
-	return hasOrder(continues);
+  if (!str)
+  {
+    return str;
+  }
+  if (auto next = hasSign(str))
+  {
+    auto continues = hasMantissa(next);
+    return hasOrder(continues);
+  }
+  auto continues = hasMantissa(str);
+  return hasOrder(continues);
 }
 
 bool balashov::isFloatingPointLiteral(const char* str)
 {
-	auto next = hasFloatingPointLiteral(str);
-	return next && (*next == '\0');
+  auto next = hasFloatingPointLiteral(str);
+  return next && (*next == '\0');
 }
