@@ -1,5 +1,5 @@
 #include <iostream>
-#include <stdlib.h>
+#include <cstdlib>
 #include <resize_line.hpp>
 #include "line_processing.hpp"
 
@@ -20,13 +20,6 @@ int main()
   }
 
   zakirov::change_line(line);
-  size_t location = 0;
-  while (line[location] != '\0')
-  {
-    std::cout << line[location];
-    location += 1;
-  }
-
-  std::cout << '\n';
+  std::cout << line << '\n';
   free(line);
 }
