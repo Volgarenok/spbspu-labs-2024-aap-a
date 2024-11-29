@@ -16,7 +16,7 @@ char* demehin::copyString(const char* str, size_t size)
 }
 
 
-void demehin::getString(std::istream& in, char** str, char stop, size_t max_size)
+std::istream& demehin::getString(std::istream& in, char** str, char stop, size_t max_size, size_t& read)
 {
   *str = new char[max_size];
   (*str)[0] = '\0';
@@ -38,14 +38,18 @@ void demehin::getString(std::istream& in, char** str, char stop, size_t max_size
       }
       catch (const std::bad_alloc& e)
       {
-        throw std::runtime_error("string expansion failed");
+        std::skipws(in);
+        throw;
       }
 
       delete[] *str;
       *str = new_str;
     }
     (*str)[size++] = temp;
+    read++;
   }
 
   (*str)[size] = '\0';
+  std::skipws(in);
+  return in;
 }

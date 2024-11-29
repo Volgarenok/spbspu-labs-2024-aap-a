@@ -6,23 +6,32 @@ int main()
 {
   constexpr char stop = '\n';
   constexpr size_t max_size = 100;
+  size_t read = 0;
 
   char* first_str = nullptr;
   try
   {
-    demehin::getString(std::cin, &first_str, stop, max_size);
+    if (!demehin::getString(std::cin, &first_str, stop, max_size, read))
+    {
+      std::cerr << "istream error\n";
+      delete[] first_str;
+      return 1;
+    }
   }
   catch (const std::bad_alloc& e)
   {
-    std::cerr << "Out of memory\n";
-    return 1;
-  }
-  catch (const std::runtime_error& e)
-  {
-    std::cerr << e.what() << "\n";
+    if (read == 0)
+    {
+      std::cerr << "Out of memory\n";
+      return 1;
+    }
+    else
+    {
+      std::cerr << "String expansion failed\n";
+    }
   }
 
-  if (first_str[0] == '\0')
+  if (read == 0)
   {
     std::cerr << "Empty string\n";
     delete[] first_str;

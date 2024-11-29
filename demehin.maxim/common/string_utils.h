@@ -5,7 +5,7 @@
 namespace demehin
 {
   char* copyString(const char* str, size_t size);
-  void getString(std::istream& in, char** str, char stop, size_t max_size);
+  std::istream& getString(std::istream& in, char** str, char stop, size_t max_size, size_t& read);
 }
 
 #endif
