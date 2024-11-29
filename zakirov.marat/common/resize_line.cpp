@@ -22,11 +22,11 @@ void zakirov::get_line(std::istream & in, char * line, size_t start, size_t fini
   for (; start < finish; ++start)
   {
     in >> line[start];
-    if (line[start] == '\n')
+    if (line[start] == '\0' || line[start] == '\n')
     {
       for (; start < finish; ++start)
       {
-        line[start] = '\n';
+        line[start] = '\0';
       }
       break;
     }

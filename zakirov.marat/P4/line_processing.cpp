@@ -20,7 +20,7 @@ void zakirov::change_line(char * line)
   }
 
   location = 0;
-  while (line[location] != '\n')
+  while (line[location] != '\0')
   {
     for (size_t i = 0; i < 26; ++i)
     {
@@ -49,5 +49,5 @@ void zakirov::change_line(char * line)
       location += 1;
     }
   }
-  line[location] = '\n';
+  line[location] = '\0';
 }
