@@ -9,7 +9,6 @@ void belobrov::loadMatrix(std::istream& in, int *matrix, size_t rows, size_t col
     }
   }
 }
-
 void belobrov::saveMatrix(const std::string& filename, const int *matrix, size_t rows, size_t cols) {
   std::ofstream outFile(filename);
   if (!outFile) {
