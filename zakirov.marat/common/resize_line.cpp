@@ -1,7 +1,7 @@
 #include "resize_line.hpp"
 #include <iostream>
 
-char * zakirov::expand_line(char * regular_line, size_t real_lenght, size_t add_length)
+char * zakirov::expand_line(char const * regular_line, size_t real_lenght, size_t add_length)
 {
   char * expanded_line = static_cast<char *>(malloc((sizeof(char) * real_lenght) + (sizeof(char) * add_length)));
   if (expanded_line == nullptr)
