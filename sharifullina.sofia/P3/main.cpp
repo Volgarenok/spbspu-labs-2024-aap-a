@@ -29,11 +29,6 @@ int main(int argc, char ** argv)
   size_t n = 0;
   input >> m >> n;
   size_t read = 0;
-  if (m == 0 || n == 0)
-  {
-    output << m << " " << n << "\n";
-    return 0;
-  }
 
   int fixedLengthArr[1000] = {};
   int * dynamicArr = nullptr;
@@ -62,6 +57,11 @@ int main(int argc, char ** argv)
     std::cerr << "Failed to open output file\n";
     delete[] dynamicArr;
     return 1;
+  }
+  if (m == 0 || n == 0)
+  {
+    output << m << " " << n << "\n";
+    return 0;
   }
   if (!sharifullina::inputMatrix(input, array, m, n, read))
   {
