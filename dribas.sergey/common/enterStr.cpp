@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstddef>
 
-char* displacementStr(char* oldstr, char* newstr) {
+char* swapStr(char* oldstr, char* newstr) {
   size_t i = 0;
   for(; *(oldstr+i) != '\0'; i++) {
     *(newstr+i) = *(oldstr+i);
@@ -22,14 +22,13 @@ char* dribas::enterStr(std::istream & input)
   if (!str) {
     return str;
   }
-  *str = lastSymbol;
+  str[0] = lastSymbol;
   std::noskipws(input);
   input >> enter;
   while (enter != lastStrSymbol) {
     if (!input) {
       free(str);
       std::cerr << "ERROR WITH INPUT!!!\n";
-      std::skipws(input);
       return nullptr;
     } else {
       size += 1;
@@ -38,10 +37,9 @@ char* dribas::enterStr(std::istream & input)
       if (!newstr) {
         free(str);
         std::cerr << "ERROR WITH MEMORY!!\n";
-        std::skipws(input);
         return newstr;
       }
-      newstr = displacementStr(str, newstr);
+      newstr = swapStr(str, newstr);
       free(str);
       str = newstr;
       *(newstr + size - 2) = enter;
