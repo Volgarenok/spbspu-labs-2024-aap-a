@@ -1,12 +1,5 @@
-#include "tcab.h"
-
-const char* hasExpr(const char* str);
-const char* hasTerm(const char* str);
-const char* hasMulti(const char* str);
-const char* hasUInt(const char* str);
-const char* hasIdent(const char* str);
-const char* hasLetter(const char* str);
-const char* hasNumber(const char* str);
+#include "is_expr.h"
+#include "vocabs.h"
 
 const char* isSymbol(const char* str, char c)
 {
