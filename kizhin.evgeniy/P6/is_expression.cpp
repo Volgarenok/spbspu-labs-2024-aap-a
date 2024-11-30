@@ -5,8 +5,9 @@ namespace kizhin {
   const char* isExpressionImpl(const char* position);
   const char* isTerm(const char* position);
   const char* isFactor(const char* position);
-  const char* isIdentifier(const char* position);
   const char* isNumber(const char* position);
+  const char* isIdentifier(const char* position);
+  const char* isIdentifier(const char* position, const char* valid);
 }
 
 bool kizhin::isExpression(const char* string)
@@ -54,22 +55,28 @@ const char* kizhin::isFactor(const char* position)
   return isIdentifier(position);
 }
 
-const char* kizhin::isIdentifier(const char* position)
-{
-  const char* valid = "abcxyz";
-  for (const char* i = valid; *i != '\0'; ++i) {
-    if (*position == *i) {
-      return ++position;
-    }
-  }
-  return nullptr;
-}
-
 const char* kizhin::isNumber(const char* position)
 {
   if (!std::isdigit(*position)) {
     return nullptr;
   }
   return isNumber(position + 1) ? position + 1 : position;
+}
+
+const char* kizhin::isIdentifier(const char* position)
+{
+  const char* valid = "abcxyz";
+  return isIdentifier(position, valid);
+}
+
+const char* kizhin::isIdentifier(const char* position, const char* valid)
+{
+  if (*valid == '\0') {
+    return nullptr;
+  }
+  if (*position == *valid) {
+    return ++position;
+  }
+  return isIdentifier(position, ++valid);
 }
 
