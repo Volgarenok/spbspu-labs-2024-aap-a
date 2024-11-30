@@ -9,7 +9,7 @@ int main()
   try
   {
     maybe_real_number = petrov::inputCString(std::cin, capacity);
-    if (!std::cin || std::cin.eof() || maybe_real_number[0] == '\n')
+    if (!std::cin || maybe_real_number[0] == '\n')
     {
       delete[] maybe_real_number;
       std::cerr << "ERROR: Invalid value\n";
