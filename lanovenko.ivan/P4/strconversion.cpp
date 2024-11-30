@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstddef>
 #include <cstring>
-char* lanovenko::inputstring(std::istream& in, const char stop)
+char* lanovenko::inputStr(std::istream& in, const char stop)
 {
   size_t capacity = 10;
   char* str = new char[capacity];
@@ -38,7 +38,7 @@ char* lanovenko::inputstring(std::istream& in, const char stop)
   return str;
 }
 
-char* lanovenko::transformationstr(char* str)
+char* lanovenko::transformationStr(char* str)
 {
   bool present[26] = { false };
   int len = strlen(str);
