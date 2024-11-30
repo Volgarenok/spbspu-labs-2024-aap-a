@@ -9,7 +9,7 @@ namespace kushekbaev
   bool isMaxInColumn(const int* matrix, const size_t rows, const size_t columns, const size_t column, const int element);
 }
 
-const int & kushekbaev::getElement(const int* matrix const size_t columns, const size_t row, const size_t column)
+const int & kushekbaev::getElement(const int* matrix, const size_t columns, const size_t row, const size_t column)
 {
   return matrix[row * columns + column];
 }
