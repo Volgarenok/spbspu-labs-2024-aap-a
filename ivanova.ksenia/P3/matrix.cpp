@@ -21,7 +21,7 @@ size_t ivanova::num_col_lsr(const int * t, size_t m, size_t n)
   for (size_t i = 0; i < m; i++)
   {
     size_t count = 1;
-    for (size_t j = 0; j < n - 1; j++)
+    for (size_t j = 1; j < n; j++)
     {
       if (t[j * n + i] == t[(j - 1) * n + i])
       {
