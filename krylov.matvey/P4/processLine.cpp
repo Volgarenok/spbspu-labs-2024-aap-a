@@ -7,7 +7,7 @@ char* krylov::inputLine(std::istream & in)
   size_t capacity = 52;
   try
   {
-    array = new char[capacity];;
+    array = new char[capacity];
   }
   catch (const std::bad_alloc& e)
   {
@@ -24,7 +24,6 @@ char* krylov::inputLine(std::istream & in)
       array = replaceArray(array, capacity);
       if (array == nullptr)
       {
-        delete[] array;
         return nullptr;
       }
     }
@@ -44,6 +43,7 @@ char* krylov::replaceArray(char * oldArray, size_t newCapacity)
   }
   catch (const std::bad_alloc& e)
   {
+    delete[] oldArray;
     return nullptr;
   }
   for (size_t i = 0; oldArray[i] != '\0'; i++)
