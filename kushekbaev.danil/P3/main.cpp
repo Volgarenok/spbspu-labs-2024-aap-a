@@ -21,7 +21,7 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  char first_char = 0;
+  const char first_char = 0;
   if (!(infile >> first_char))
   {
     std::cerr << "Input file is empty" << "\n";
