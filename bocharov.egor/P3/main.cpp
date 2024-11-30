@@ -73,10 +73,9 @@ int main(int argc, char ** argv)
     std::cerr << "Input error\n";
     return 2;
   }
-  size_t result = 0;
   bocharov::change_matrix(matrix, rows, cols);
-  result = bocharov::find_local_maximum(matrix, rows, cols);
-  bocharov::output_matrix(output, matrix, rows, cols, result);
+  bocharov::output_matrix(output, matrix, rows, cols);
+  output << bocharov::find_local_maximum(matrix, rows, cols) << "\n";
   std::cout << "\n";
   delete[] dynamic_matrix;
   return 0;

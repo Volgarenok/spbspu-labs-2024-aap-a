@@ -2,8 +2,7 @@
 void bocharov::change_matrix(int * const matrix, size_t rows, size_t cols)
 {
   size_t ibegin = rows - 1, ifinish = 0, jbegin = 0, jfinish = cols - 1, i = rows - 1, j = 0;
-  size_t changed = 1;
-  int k = 1;
+  size_t changed = 1, k = 1;
   while (changed < rows * cols + 1)
   {
     matrix[i * cols + j] += k;
