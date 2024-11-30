@@ -7,7 +7,7 @@ int main()
 {
   size_t max = 10;
   size_t size = 0;
-  char* stop = '\0';
+  char stop = '\0';
 
   const char * str1 = kushekbaev::readInputArray(std::cin, stop, size, max);
 

@@ -1,7 +1,7 @@
 #include <iostream>
 #include "read_input_array.hpp"
 
-char* kushekbaev::readInputArray(std::istream& input, char* stop, size_t& size, size_t& max)
+char* kushekbaev::readInputArray(std::istream& input, char stop, size_t& size, size_t& max)
 {
   char* str = nullptr;
   try
