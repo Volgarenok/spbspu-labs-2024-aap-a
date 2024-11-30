@@ -8,6 +8,12 @@ int main()
   try
   {
     real_number = petrov::inputCString(std::cin, capacity);
+    if (!std::cin || std::cin.eof() || real_number[0] == '\n')
+    {
+      delete[] real_number;
+      std::cerr << "ERROR: Invalid value\n";
+      return 1;
+    }
     std::clog << real_number;
   }
   catch (const std::bad_alloc & e)
@@ -15,4 +21,5 @@ int main()
     std::cerr << "ERROR: Out of memory\n";
     return 1;
   }
+  delete[] real_number;
 }
