@@ -54,6 +54,8 @@ char * guseynov::getLine(std::istream & in)
     free(arr);
     return nullptr;
   }
-  return expandMassive(arr, stringLength, 0);
+  copyarr = expandMassive(arr, stringLength, 0);
+  free(arr);
+  return copyarr;
 }
 
