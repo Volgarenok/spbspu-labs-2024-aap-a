@@ -22,7 +22,7 @@ char* krylov::inputLine(std::istream & in)
       array[currentElementIndex] = '\0';
       capacity *= 3;
       array = replaceArray(array, capacity);
-      if (!array)
+      if (array == nullptr)
       {
         return nullptr;
       }
