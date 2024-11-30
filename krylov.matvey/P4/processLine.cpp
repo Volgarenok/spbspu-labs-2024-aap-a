@@ -1,7 +1,7 @@
 #include "processLine.hpp"
 #include <iostream>
 
-char* krylov::inputLine(std::istream & in)
+char* krylov::inputLine(std::istream& in)
 {
   char* array = nullptr;
   size_t capacity = 52;
@@ -34,7 +34,7 @@ char* krylov::inputLine(std::istream & in)
   return array;
 }
 
-char* krylov::replaceArray(char * oldArray, size_t newCapacity)
+char* krylov::replaceArray(char* oldArray, size_t newCapacity)
 {
   char* newArray = nullptr;
   try
@@ -50,6 +50,6 @@ char* krylov::replaceArray(char * oldArray, size_t newCapacity)
   {
     newArray[i] = oldArray[i];
   }
+  delete[] oldArray
   return newArray;
 }
-
