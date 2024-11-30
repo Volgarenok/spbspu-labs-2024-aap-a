@@ -22,10 +22,10 @@ void zakirov::get_segment(std::istream & in, char * line, size_t start, size_t f
   for (; start < finish; ++start)
   {
     in >> line[start];
-    if (line[start] == '\0' || line[start] == '\n')
+    if (in.eof())
     {
       line[start] = '\0';
-      return;
+      break;
     }
   }
 }
