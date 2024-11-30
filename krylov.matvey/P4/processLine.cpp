@@ -50,6 +50,6 @@ char* krylov::replaceArray(char* oldArray, size_t newCapacity)
   {
     newArray[i] = oldArray[i];
   }
-  delete[] oldArray
+  delete[] oldArray;
   return newArray;
 }
