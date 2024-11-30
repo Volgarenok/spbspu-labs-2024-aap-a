@@ -9,7 +9,7 @@ char* kushekbaev::readInputArray(std::istream& input, char stop, size_t& size, s
     char* str = new char[max + 1];
     size = 0;
 
-    std::noskipws(std::cin);
+    input >> std::noskipws;
     while ((input >> stop) && (stop != '\n'))
     {
       if (size == max)
@@ -26,12 +26,13 @@ char* kushekbaev::readInputArray(std::istream& input, char stop, size_t& size, s
       str[size++] = stop;
     }
     str[size] = '\0';
-    std::skipws(std::cin);
+    input >> std::skipws;
   }
   catch (const std::bad_alloc& e)
   {
     std::cerr << "Error allocating memory";
-    char* str = nullptr;
+    delete[] str;
+    str = nullptr;
     return str;
   }
   return str;
