@@ -1,7 +1,7 @@
-#include "inputString.hpp"
-#include "mergeStrs.hpp"
 #include <cstdlib>
 #include <iostream>
+#include <inputString.hpp>
+#include "mergeStrs.hpp"
 
 int main()
 {
