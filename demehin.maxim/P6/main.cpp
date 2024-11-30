@@ -32,13 +32,6 @@ int main()
     }
   }
 
-    if (str[0] == '\0')
-  {
-    std::cerr << "Empty string\n";
-    delete[] str;
-    return 1;
-  }
-
   std::cout << std::boolalpha << (demehin::isExpr(str) != nullptr) << "\n";
   delete[] str;
 
