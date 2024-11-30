@@ -1,7 +1,7 @@
 #include "unionString.hpp"
 #include <cstddef>
 
-char * smirnov::getLine(std::istream & in, const char stop)
+char * smirnov::getLine(std::istream & in, char stop)
 {
   constexpr size_t max = 10;
   char * str = new char[max];
@@ -22,6 +22,7 @@ char * smirnov::getLine(std::istream & in, const char stop)
       catch (const std::bad_alloc & e)
       {
         delete[] str;
+        std::skipws(in);
         throw;
       }
       for (size_t i = 0; i < size; ++i)
@@ -34,6 +35,7 @@ char * smirnov::getLine(std::istream & in, const char stop)
     str[size++] = c;
   }
   str[size] = '\0';
+  std::skipws(in);
   return str;
 }
 
