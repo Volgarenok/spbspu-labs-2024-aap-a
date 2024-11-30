@@ -1,13 +1,13 @@
 #include "processLine.hpp"
 #include <iostream>
 
-char * krylov::inputLine(std::istream & in)
+char* krylov::inputLine(std::istream& in)
 {
-  char * array = nullptr;
+  char* array = nullptr;
   size_t capacity = 52;
-  try
+try
   {
-    array = new char[capacity];;
+    array = new char[capacity];
   }
   catch (const std::bad_alloc& e)
   {
@@ -21,13 +21,9 @@ char * krylov::inputLine(std::istream & in)
     {
       array[currentElementIndex] = '\0';
       capacity *= 3;
-      try
+      array = replaceArray(array, capacity);
+      if (array == nullptr)
       {
-        array = krylov::replaceArray(array, capacity);
-      }
-      catch (const std::bad_alloc & e)
-      {
-        delete[] array;
         return nullptr;
       }
     }
@@ -38,9 +34,18 @@ char * krylov::inputLine(std::istream & in)
   return array;
 }
 
-char * krylov::replaceArray(char * oldArray, size_t newCapacity)
+char* krylov::replaceArray(char* oldArray, size_t newCapacity)
 {
-  char * newArray = new char[newCapacity];;
+  char* newArray = nullptr;
+  try
+  {
+    newArray = new char[newCapacity];
+  }
+  catch (const std::bad_alloc& e)
+  {
+    delete[] oldArray;
+    return nullptr;
+  }
   for (size_t i = 0; oldArray[i] != '\0'; i++)
   {
     newArray[i] = oldArray[i];
@@ -48,4 +53,3 @@ char * krylov::replaceArray(char * oldArray, size_t newCapacity)
   delete[] oldArray;
   return newArray;
 }
-
