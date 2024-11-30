@@ -32,7 +32,7 @@ int main()
     }
   }
 
-    if (read == 0)
+    if (str[0] == '\0')
   {
     std::cerr << "Empty string\n";
     delete[] str;
