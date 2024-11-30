@@ -12,12 +12,7 @@ int main()
 
   try
   {
-    if (!demehin::getString(std::cin, &str, stop, max_size, read))
-    {
-      std::cerr << "input error\n";
-      delete[] str;
-      return 1;
-    }
+    demehin::getString(std::cin, &str, stop, max_size, read);
   }
   catch (const std::bad_alloc& e)
   {
@@ -30,6 +25,13 @@ int main()
     {
       std::cerr << "String expansion failed\n";
     }
+  }
+
+  if (read == 0)
+  {
+    std::cerr << "Emty string\n";
+    delete[] str;
+    return 1;
   }
 
   std::cout << std::boolalpha << (demehin::isExpr(str) != nullptr) << "\n";
