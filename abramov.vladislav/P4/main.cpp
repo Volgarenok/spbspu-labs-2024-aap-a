@@ -4,9 +4,8 @@
 int main()
 {
   constexpr const char *str2 = "def ";
-  char *str1 = nullptr;
   size_t size_of_str1 = 0;
-  str1 = abramov::getStr(std::cin, size_of_str1);
+  char *str1 = abramov::getStr(std::cin, size_of_str1);
   if (str1 == nullptr)
   {
     std::cerr << "Memory fail\n";
