@@ -33,7 +33,7 @@ char* averenkov::stringInput(std::istream& in)
     {
       str[max] = '\0';
       max = max * n;
-      char * new_str = reinterpret_cast< char* >(malloc(max));
+      char * new_str = reinterpret_cast< char* >(malloc(max + 1));
       if (new_str == nullptr)
       {
         free(str);
