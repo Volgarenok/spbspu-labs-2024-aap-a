@@ -13,7 +13,7 @@ char* inputStr(std::istream& in, size_t & len)
   char c;
   in >> std::noskipws;
   while ((in >> c)) {
-    if (c == '\n' || !in.eof()){
+    if (c == '\n' || in.eof()){
       break;
     }
     if (len < K - 1) {
