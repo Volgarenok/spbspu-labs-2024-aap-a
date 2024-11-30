@@ -1,38 +1,30 @@
-#include "inputString.hpp"
-#include "mergeStrs.hpp"
 #include <cstdlib>
 #include <iostream>
-
+#include "inputString.hpp"
+#include "mergeStrs.hpp"
 int main()
 {
   using namespace maslovskiy;
   char *str1 = nullptr;
   const char *str2 = "246789";
-  try
+  str1 = inputString(std::cin);
+  if (str1 == nullptr)
   {
-   str1 = inputString(std::cin);
-  }
-  catch (const std::bad_alloc &)
-  {
-    std::cerr << "incorrect memory allocation\n";
+    std::cerr << "Memory allocation failed for input string\n";
     return 1;
   }
   if (*str1 == '\0')
   {
     free(str1);
-    std::cerr << "input string is null\n";
+    std::cerr << "Input string is null\n";
     return 2;
   }
-  char * united = nullptr;
-  try
-  {
-    united = static_cast<char*>(malloc(sizeof(char) * 512));
-  }
-  catch (const std::bad_alloc &)
+  constexpr size_t newSize = 512;
+  char *united = static_cast<char*>(malloc(sizeof(char) * newSize));
+  if (united == nullptr)
   {
     free(str1);
-    free(united);
-    std::cerr << "Cannot create new strings\n";
+    std::cerr << "Cannot allocate memory for united string\n";
     return 3;
   }
   mergeStrs(united, str1, str2);
