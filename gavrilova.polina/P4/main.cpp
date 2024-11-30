@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <inputStr.hpp>
 #include "rm_digits.hpp"
@@ -8,11 +9,12 @@ int main()
   char* first_str = inputStr(std::cin, len);
 
   if (!first_str) {
-    std::cerr << "Memory or input error\n";
+    std::cerr << "Memory error\n";
     return 1;
   }
   if (first_str[0] == '\0') {
     std::cerr << "Empty string\n";
+    delete[] first_str;
     return 1;
   }
 
