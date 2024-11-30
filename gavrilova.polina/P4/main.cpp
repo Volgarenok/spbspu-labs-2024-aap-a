@@ -7,7 +7,7 @@ int main()
   size_t len = 0;
   char* first_str = inputStr(std::cin, len);
 
-  if (!first_str) {
+  if (!first_str || str[0] == '\0') {
     std::cerr << "Memory or input error\n";
     return 1;
   }
