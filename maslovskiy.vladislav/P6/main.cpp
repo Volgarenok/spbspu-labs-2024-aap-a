@@ -6,6 +6,7 @@ bool isSign(char c)
 int main()
 {
   auto a = "-1.23456789E9234";
+  std::cout << "Test" << "\n";
   std::cout << std::boolalpha << isDouble(a) << "\n";
 }
 
