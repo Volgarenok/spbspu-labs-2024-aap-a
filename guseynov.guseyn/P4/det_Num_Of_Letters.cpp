@@ -9,7 +9,7 @@ size_t guseynov::determiningNumOfLetters(const char *inputString)
   size_t i = 0;
   while (inputString[i++] != '\0')
   {
-    if (isalpha(inputString[i - 1]))
+    if (isalpha (inputString[i - 1]))
     {
       for (size_t j = 0; j < (i - 1); j++)
       {

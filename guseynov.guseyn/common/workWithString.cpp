@@ -5,7 +5,7 @@
 
 char * guseynov::expandMassive(char *arr, size_t & size, size_t step)
 {
-  char *newarr = reinterpret_cast< char* >(malloc(sizeof(char)*(size + step + 1)));
+  char *newarr = reinterpret_cast< char* >(malloc(size + step + 1));
   if (newarr != nullptr)
   {
     for (size_t i = 0; i < size; i++)
@@ -22,7 +22,7 @@ char * guseynov::getLine(std::istream & in)
   size_t reserved = 10;
   size_t stringLength = 0;
   constexpr size_t step = 10;
-  char *arr = reinterpret_cast< char* >(malloc(sizeof(char)*(reserved)));
+  char *arr = reinterpret_cast< char* >(malloc(reserved));
   if (!arr)
   {
     return arr;
