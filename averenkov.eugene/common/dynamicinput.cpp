@@ -7,7 +7,7 @@
 char* averenkov::arrayresize(char* str, size_t size)
 {
   char* str_new = reinterpret_cast< char* >(malloc(size));
-  for (size_t i = 0; i < size; ++i)
+  for (size_t i = 0; str[i] != '\0'; ++i)
   {
     str_new[i] = str[i];
   }
