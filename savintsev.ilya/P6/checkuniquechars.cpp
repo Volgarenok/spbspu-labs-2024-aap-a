@@ -2,110 +2,122 @@
 #include <cctype>
 #include <cstring>
 
-namespace savintsev
+namespace
 {
-bool isOneOfTheLetters(char c);
-bool isUnsignedInteger(const char * s, size_t & pos);
-bool isMultiplier(const char * s, size_t & pos);
-bool isTerm(const char * s, size_t & pos);
-bool isIdentifier(const char * s, size_t & pos);
-}
+  bool isOneOfTheLettersEnc(char c, const char * letters);
+  bool isUnsignedIntegerEnc(const char * s, size_t & pos);
+  bool isMultiplierEnc(const char * s, size_t & pos);
+  bool isTermEnc(const char * s, size_t & pos);
+  bool isIdentifierEnc(const char * s, size_t & pos);
+  bool isExpressionEnc(const char * s, size_t & pos);
 
-bool savintsev::isOneOfTheLetters(char c)
-{
-  const char * letters = "abcdefxyz";
-  return std::strchr(letters, c) != nullptr;
-}
-
-bool savintsev::isUnsignedInteger(const char * s, size_t & pos)
-{
-  if (!s[pos] || !std::isdigit(s[pos]))
+  bool isOneOfTheLettersEnc(char c, const char * letters)
   {
-    return false;
-  }
-  pos++;
-  if (!s[pos] || !std::isdigit(s[pos]))
-  {
-    return true;
-  }
-  return isUnsignedInteger(s, pos);
-}
-
-bool savintsev::isIdentifier(const char * s, size_t & pos)
-{
-  if (isOneOfTheLetters(s[pos]))
-  {
-    pos++;
-    return true;
-  }
-  return false;
-}
-
-bool savintsev::isMultiplier(const char * s, size_t & pos)
-{
-  size_t start = pos;
-  if (isUnsignedInteger(s, pos) || isIdentifier(s, pos))
-  {
-    return true;
-  }
-  if (s[pos] == '(')
-  {
-    pos++;
-    if (savintsev::isExpression(s, pos) && s[pos] == ')')
+    if (*letters == '\0')
     {
-      pos++;
+      return false;
+    }
+    if (*letters == c)
+    {
       return true;
     }
+    return isOneOfTheLettersEnc(c, letters + 1);
   }
-  pos = start;
-  return false;
-}
 
-bool savintsev::isTerm(const char * s, size_t & pos)
-{
-  size_t start = pos;
-  if (isMultiplier(s, pos))
+  bool isUnsignedIntegerEnc(const char * s, size_t & pos)
   {
-    return true;
-  }
-  if (s[pos] == '(')
-  {
-    pos++;
-    if (isMultiplier(s, pos))
+    if (!std::isdigit(s[pos]))
     {
-      if (s[pos] == '*' || s[pos] == '/')
-      {
-        pos++;
-        if (isTerm(s, pos) && s[pos] == ')')
-        {
-          pos++;
-          return true;
-        }
-      }
+      return false;
     }
-  }
-  pos = start;
-  return false;
-}
-
-bool savintsev::isExpression(const char * s, size_t & pos)
-{
-  size_t start = pos;
-  if (isTerm(s, pos))
-  {
-    return true;
-  }
-  if (isTerm(s, pos))
-  {
-    if (s[pos] == '+' || s[pos] == '-')
+    ++pos;
+    if (!std::isdigit(s[pos]))
     {
-      pos++;
-      if (isExpression(s, pos))
+      return true;
+    }
+    return isUnsignedIntegerEnc(s, pos);
+  }
+
+  bool isIdentifierEnc(const char * s, size_t & pos)
+  {
+    const char * letters = "abcdefxyz";
+    if (isOneOfTheLettersEnc(s[pos], letters))
+    {
+      ++pos;
+      return true;
+    }
+    return false;
+  }
+
+  bool isMultiplierEnc(const char * s, size_t & pos)
+  {
+    size_t start = pos;
+    if (isUnsignedIntegerEnc(s, pos) || isIdentifierEnc(s, pos))
+    {
+      return true;
+    }
+    if (s[pos] == '(')
+    {
+      ++pos;
+      if (isExpressionEnc(s, pos) && s[pos] == ')')
       {
+        ++pos;
         return true;
       }
     }
+    pos = start;
+    return false;
   }
-  pos = start;
-  return false;
+
+  bool isTermEnc(const char * s, size_t & pos)
+  {
+    size_t start = pos;
+    if (isMultiplierEnc(s, pos))
+    {
+      return true;
+    }
+    if (s[pos] == '(')
+    {
+      ++pos;
+      if (isMultiplierEnc(s, pos))
+      {
+        if (s[pos] == '*' || s[pos] == '/')
+        {
+          ++pos;
+          if (isTermEnc(s, pos) && s[pos] == ')')
+          {
+            ++pos;
+            return true;
+          }
+        }
+      }
+    }
+    pos = start;
+    return false;
+  }
+
+  bool isExpressionEnc(const char * s, size_t & pos)
+  {
+    size_t start = pos;
+    if (isTermEnc(s, pos))
+    {
+      if (s[pos] == '+' || s[pos] == '-')
+      {
+        ++pos;
+        if (isExpressionEnc(s, pos))
+        {
+          return true;
+        }
+      }
+      return true;
+    }
+    pos = start;
+    return false;
+  }
+}
+
+bool savintsev::isExpression(const char * s)
+{
+  size_t pos = 0;
+  return isExpressionEnc(s, pos) && s[pos] == '\0';
 }

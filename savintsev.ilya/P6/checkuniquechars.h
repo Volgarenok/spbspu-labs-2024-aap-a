@@ -4,7 +4,7 @@
 
 namespace savintsev
 {
-  bool isExpression(const char * s, size_t & pos);
+  bool isExpression(const char * s);
 }
 
 #endif

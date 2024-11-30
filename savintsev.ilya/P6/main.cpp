@@ -16,8 +16,8 @@ int main()
     delete[] line;
     return 1;
   }
-  size_t pos = 0;
-  std::cout << std::boolalpha << savintsev::isExpression(line, pos) << '\n';
+  
+  std::cout << std::boolalpha << savintsev::isExpression(line) << '\n';
   delete[] line;
   return 0;
 }
