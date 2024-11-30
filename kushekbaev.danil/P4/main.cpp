@@ -17,13 +17,11 @@ int main()
   {
     std::cerr << "Failed input" << "\n";
     delete[] str1;
-    delete[] str2;
     return 1;
   }
 
   std::cout << kushekbaev::hasCommonChars(str1, str2, strlen(str1), strlen(str2)) << "\n";
 
   delete[] str1;
-  delete[] str2;
   return 0;
 }
