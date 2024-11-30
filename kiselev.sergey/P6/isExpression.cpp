@@ -79,13 +79,12 @@ namespace
     {
       return next;
     }
-    if (*string == '(')
+    if ((string = hasSymbol(string, '(')))
     {
-      string++;
       next = hasExpression(string);
-      if (next && *next == ')')
+      if ((next = hasSymbol(next, ')')))
       {
-        return next + 1;
+        return next;
       }
       return nullptr;
     }
@@ -102,39 +101,36 @@ namespace
     {
       return next;
     }
-    if (*next == '*')
+    if (const char* next2 = hasSymbol(next, '*'))
     {
-      next++;
-      const char* continues = hasTerm(next);
+      const char* continues = hasTerm(next2);
       if (!continues)
       {
         return nullptr;
       }
       return continues;
     }
-    if (*next == '(')
+    if (const char* next3 = hasSymbol(next, '('))
     {
-      next++;
-      const char* continues = hasMultiplier(next);
+      const char* continues = hasMultiplier(next3);
       if (!continues)
       {
         return nullptr;
       }
-      if (*continues == '+')
+      if (const char* continues2 = hasSymbol(continues, '+'))
       {
-        continues++;
-        const char* nextTerm = hasTerm(continues);
-        if (!nextTerm || *nextTerm != ')')
+        const char* nextTerm = hasTerm(continues2);
+        if (!nextTerm || !hasSymbol(nextTerm, ')'))
         {
           return nullptr;
         }
-        return nextTerm + 1;
+        return nextTerm;
       }
-      if (*next != ')')
+      if (!hasSymbol(next, ')'))
       {
         return nullptr;
       }
-      return continues + 1;
+      return continues;
     }
     return next;
   }
@@ -147,11 +143,13 @@ namespace
     const char* next = hasTerm(string);
     if (next)
     {
-      if (hasSymbol(next, '+') != nullptr || hasSymbol(next, '-') != nullptr)
+      if (const char* next2 = hasSymbol(next, '+'))
       {
-        next++;
-        const char* continues = hasExpression(next);
-        return continues;
+        return hasExpression(next2);
+      }
+      else if (const char* next2 = hasSymbol(next, '-'))
+      {
+        return hasExpression(next2);
       }
     }
     return next;
@@ -160,5 +158,6 @@ namespace
 bool kiselev::isExpression(const char* string)
 {
   const char* next = hasExpression(string);
-  return next && (*next == '\0');
+  return next && (hasSymbol(next, '\0'));
 }
+
