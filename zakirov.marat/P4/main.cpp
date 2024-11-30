@@ -6,7 +6,6 @@
 int main()
 {
   constexpr size_t step = 1;
-  size_t init_size = 1;
   char * line = zakirov::get_line(std::cin, step);
   if (line == nullptr)
   {
