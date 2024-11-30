@@ -30,12 +30,16 @@ char * guseynov::getLine(std::istream & in)
   char c = '\0';
   constexpr char stop = '\n';
   std::noskipws(in);
+  char *copyarr = nullptr;
   while ((in >> c) && (c != stop))
   {
     arr[stringLength++] = c;
     if (stringLength == reserved)
     {
-      arr = expandMassive(arr, reserved, step);
+      copyarr = expandMassive(arr, reserved, step);
+      free(arr);
+      arr = expandMassive(copyarr, reserved, step);
+      free(copyarr);
       reserved += step;
       if (!arr)
       {
@@ -50,7 +54,6 @@ char * guseynov::getLine(std::istream & in)
     free(arr);
     return nullptr;
   }
-  arr = expandMassive(arr, stringLength, 0);
-  return arr;
+  return expandMassive(arr, stringLength, 0);
 }
 
