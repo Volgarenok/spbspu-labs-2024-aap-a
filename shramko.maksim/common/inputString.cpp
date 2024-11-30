@@ -1,4 +1,4 @@
-#include "modifyString.hpp"
+#include "inputString.hpp"
 #include <cstdlib>
 
 char* shramko::createBiggerStrMemory(size_t memory, const char* str)
@@ -14,24 +14,6 @@ char* shramko::createBiggerStrMemory(size_t memory, const char* str)
     new_str[i] = str[i];
   }
   return new_str;
-}
-
-size_t shramko::countConsecutiveIdenticalSymbols(const char* str)
-{
-  if (str == nullptr)
-  {
-    return 0;
-  }
-
-  size_t result = 0;
-  for (size_t i = 0; str[i] != '\0'; ++i)
-  {
-    if (str[i] == str[i + 1])
-    {
-      ++result;
-    }
-  }
-  return result;
 }
 
 char* shramko::inputStr(std::istream& in)
