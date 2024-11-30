@@ -65,7 +65,6 @@ int main(int argc, char **argv)
         throw std::runtime_error("Error reading matrix data\n");
       }
     }
-    infile.close();
 
     int saddle_points = kushekbaev::countSaddlePoints(matrix, rows, columns);
 
@@ -75,7 +74,6 @@ int main(int argc, char **argv)
       throw std::runtime_error("Error while opening output file\n");
     }
     outfile << saddle_points << "\n";
-    outfile.close();
   }
   catch (const std::runtime_error& e)
   {
@@ -93,6 +91,8 @@ int main(int argc, char **argv)
     delete[] matrix;
     return 1;
   }
+
+  outfile << saddle_points << "\n";
   delete[] matrix;
   return 0;
 }
