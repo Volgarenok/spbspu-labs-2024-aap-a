@@ -25,7 +25,7 @@ void zakirov::get_segment(std::istream & in, char * line, size_t start, size_t f
     if (line[start] == '\0' || line[start] == '\n')
     {
       line[start] = '\0';
-      break;
+      return;
     }
   }
 }
