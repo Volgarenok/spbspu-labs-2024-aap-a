@@ -1,27 +1,30 @@
 #include "matrix.h"
-#include <limits>
 size_t bocharov::find_local_maximum(const int * matrix, size_t rows, size_t cols)
 {
-  int max = std::numeric_limits< int >::min();
   size_t result = 0;
-  for (size_t i = 1; i < (rows * cols) - 1; i++)
+  for (size_t i = 1; i < rows - 1; i++)
   {
-    if ((matrix[i] >= max) && (matrix[i - 1] < matrix[i]) && (matrix[i + 1] < matrix[i]))
+    for (size_t j = 1; j < cols - 1; j++)
     {
-      if(matrix[i] == max)
+      size_t number = i * cols + j;
+      int current = matrix[number];
+      int left = matrix[number - 1];
+      int right = matrix[number + 1];
+      int up = matrix[number - cols];
+      int down = matrix[number + cols];
+      int diagonalupleft = matrix[number - cols - 1];
+      int diagonalupright = matrix[number - cols + 1];
+      int diagonaldownleft = matrix[number + cols - 1];
+      int diagonaldownright = matrix[number + cols + 1];
+      bool localmax = (current > left) && (current > right);
+      localmax = localmax && ((current > up) && (current < down));
+      localmax = localmax && ((current > diagonalupleft) && (current > diagonalupright));
+      localmax = localmax && ((current > diagonaldownleft) && (current > diagonaldownright));
+      if (localmax)
       {
         result++;
       }
-      else
-      {
-        result = 1;
-        max = matrix[i];
-      }
     }
-  }
-  if ((result + 2) == rows * cols)
-  {
-    return 0;
   }
   return result;
 }
