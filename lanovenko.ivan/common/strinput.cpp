@@ -3,18 +3,8 @@
 #include <cstring>
 char* lanovenko::input_string(std::istream& in, const char stop)
 {
-  size_t capacity = 1;
+  size_t capacity = 10;
   char* str = new char[capacity];
-  try
-  {
-    str = new char[capacity];
-  }
-  catch (const std::bad_alloc & e)
-  {
-    delete[] str;
-    throw std::logic_error("Out of memory\n");
-  }
-
   size_t quantity = 0;
   char c = '\0';
   in >> std::noskipws;
@@ -30,16 +20,15 @@ char* lanovenko::input_string(std::istream& in, const char stop)
       }
       catch (const std::bad_alloc & e)
       {
-        delete[] new_str;
         delete[] str;
-        throw std::logic_error("Out of memory\n");
+        throw;
       }
       for (size_t i = 0; i < quantity; i++)
       {
         new_str[i] = str[i];
       }
       delete[] str;
-       str = new_str;
+      str = new_str;
     }
     str[quantity++] = c;
   }
