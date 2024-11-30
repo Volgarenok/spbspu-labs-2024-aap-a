@@ -21,8 +21,8 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  char firstChar = 0;
-  if (!(infile >> firstChar))
+  char first_char = 0;
+  if (!(infile >> first_char))
   {
     std::cerr << "Input file is empty" << "\n";
     return 1;
@@ -93,8 +93,6 @@ int main(int argc, char **argv)
     delete[] matrix;
     return 1;
   }
-  outfile << saddle_points << "\n";
-
   delete[] matrix;
   return 0;
 }
