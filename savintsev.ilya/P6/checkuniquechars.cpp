@@ -2,26 +2,22 @@
 #include <cctype>
 #include <cstring>
 
+namespace savintsev
+{
 bool isOneOfTheLetters(char c);
 bool isUnsignedInteger(const char * s, size_t & pos);
 bool isMultiplier(const char * s, size_t & pos);
 bool isTerm(const char * s, size_t & pos);
 bool isIdentifier(const char * s, size_t & pos);
-
-bool isOneOfTheLetters(char c)
-{
-  const char * letters = "abcdefxyz";
-  for (size_t i = 0; i < std::strlen(letters); ++i)
-  {
-    if (c == letters[i])
-    {
-      return true;
-    }
-  }
-  return false;
 }
 
-bool isUnsignedInteger(const char * s, size_t & pos)
+bool savintsev::isOneOfTheLetters(char c)
+{
+  const char * letters = "abcdefxyz";
+  return std::strchr(letters, c) != nullptr;
+}
+
+bool savintsev::isUnsignedInteger(const char * s, size_t & pos)
 {
   if (!s[pos] || !std::isdigit(s[pos]))
   {
@@ -35,7 +31,7 @@ bool isUnsignedInteger(const char * s, size_t & pos)
   return isUnsignedInteger(s, pos);
 }
 
-bool isIdentifier(const char * s, size_t & pos)
+bool savintsev::isIdentifier(const char * s, size_t & pos)
 {
   if (isOneOfTheLetters(s[pos]))
   {
@@ -45,9 +41,9 @@ bool isIdentifier(const char * s, size_t & pos)
   return false;
 }
 
-bool isMultiplier(const char * s, size_t & pos)
+bool savintsev::isMultiplier(const char * s, size_t & pos)
 {
-  int start = pos;
+  size_t start = pos;
   if (isUnsignedInteger(s, pos) || isIdentifier(s, pos))
   {
     return true;
@@ -65,9 +61,9 @@ bool isMultiplier(const char * s, size_t & pos)
   return false;
 }
 
-bool isTerm(const char * s, size_t & pos)
+bool savintsev::isTerm(const char * s, size_t & pos)
 {
-  int start = pos;
+  size_t start = pos;
   if (isMultiplier(s, pos))
   {
     return true;
@@ -94,7 +90,7 @@ bool isTerm(const char * s, size_t & pos)
 
 bool savintsev::isExpression(const char * s, size_t & pos)
 {
-  int start = pos;
+  size_t start = pos;
   if (isTerm(s, pos))
   {
     return true;
