@@ -3,7 +3,7 @@
 const char* hasExpr(const char* str);
 const char* hasTerm(const char* str);
 const char* hasMulti(const char* str);
-const char* hasUint(const char* str);
+const char* hasUInt(const char* str);
 const char* hasIdent(const char* str);
 const char* hasLetter(const char* str);
 const char* hasNumber(const char* str);
@@ -11,7 +11,11 @@ const char* hasNumber(const char* str);
 bool demehin::isExpression(const char* str)
 {
   auto next = hasExpr(str);
-  return next && (*next == '\0');
+  if (!next)
+  {
+    return false;
+  }
+  return true;
 }
 
 const char* hasLetter(const char* str)
@@ -40,35 +44,50 @@ const char* hasIdent(const char* str)
 {
   if (!str)
   {
-    return nullptr;
+    return str;
   }
   return hasLetter(str);
 }
 
-const char* hasUint(const char* str)
+const char* hasUInt(const char* str)
 {
-  if (!hasNumber(str))
+  if (!str)
   {
-    return nullptr;
+    return str;
   }
-
-  return hasUint(str + 1);
+  auto next = hasNumber(str);
+  if (next)
+  {
+    auto continues = hasUInt(next);
+    if (continues)
+    {
+      return continues;
+    }
+  }
+  return next;
 }
 
 
 const char* hasExpr(const char* str)
 {
-  auto term = hasTerm(str);
-  if (!term)
+  if (!str)
   {
-    return term;
+    return str;
   }
-
-  if (*term == '+' || *term == '-')
+  auto next = hasTerm(str);
+  if (next)
   {
-    return hasExpr(term + 1);
+    if (*(next + 1) == '+' || *(next + 1) == '-')
+    {
+      next++;
+      auto continues = hasExpr(next);
+      if (continues)
+      {
+        return continues;
+      }
+    }
   }
-  return term;
+  return next;
 }
 
 const char* hasMulti(const char* str)
@@ -77,13 +96,7 @@ const char* hasMulti(const char* str)
   {
     return str;
   }
-  auto next = hasUint(str);
-  if (next)
-  {
-    return next;
-  }
-
-  next = hasIdent(str);
+  auto next = hasUInt(str);
   if (next)
   {
     return next;
@@ -91,10 +104,11 @@ const char* hasMulti(const char* str)
 
   if (*str == '(')
   {
-    auto expr = hasExpr(str + 1);
-    if (expr && *expr == ')')
+    str++;
+    next = hasExpr(str);
+    if (*next == ')')
     {
-      return expr + 1;
+      return next;
     }
     return nullptr;
   }
@@ -103,17 +117,24 @@ const char* hasMulti(const char* str)
 
 const char* hasTerm(const char* str)
 {
-  auto mult = hasMulti(str);
-  if (!mult)
+  if (!str)
   {
-    return mult;
+    return str;
   }
-
-  if (*mult == '*')
+  auto next = hasMulti(str);
+  if (next)
   {
-    return hasTerm(mult + 1);
+    if (*(next + 1) == '*')
+    {
+      next++;
+      auto continues = hasTerm(next);
+      if (continues)
+      {
+        return continues;
+      }
+    }
   }
-  return mult;
+  return next;
 }
 
 
