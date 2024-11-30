@@ -9,11 +9,17 @@ int main()
   try
   {
     maybe_real_number = petrov::inputCString(std::cin, capacity);
+    if (maybe_real_number[0] == '\n')
+    {
+      delete[] maybe_real_number;
+      std::cerr << "ERROR: Empty input\n";
+      return 1;
+    }
   }
   catch (const std::bad_alloc & e)
   {
     std::cerr << "ERROR: Out of memory\n";
-    return 1;
+    return 2;
   }
   std::cout << std::boolalpha << petrov::isRealNumber(maybe_real_number) << "\n";
   delete[] maybe_real_number;
