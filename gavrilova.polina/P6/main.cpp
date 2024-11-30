@@ -9,6 +9,7 @@ int main()
   const char* str = inputStr(std::cin, len);
   if (!str || str[0] == '\0') {
     std::cerr << "Wrong input!" << "\n";
+    delete[] str;
     return 1;
   }
   std::cout << std::boolalpha << gavrilova::is_expression(str) << "\n";
