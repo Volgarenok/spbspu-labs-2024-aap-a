@@ -4,6 +4,6 @@
 
 namespace lanovenko
 {
-  void editMatrix(int* matrix, size_t rows, size_t cols);
+  void editToSpiral(int* matrix, size_t rows, size_t cols);
 }
 #endif
