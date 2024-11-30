@@ -11,6 +11,10 @@ int main()
     std::cerr << "Memory or input error\n";
     return 1;
   }
+  if (first_str[0] == '\0') {
+    std::cerr << "Empty string\n";
+    return 1;
+  }
 
   char* result_str = nullptr;
   try {
