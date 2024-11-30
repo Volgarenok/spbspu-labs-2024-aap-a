@@ -8,7 +8,7 @@ namespace bocharov
   void output_matrix(std::ostream & out, const int * matrix, size_t rows, size_t cols);
   void change_matrix(int * matrix, size_t rows, size_t cols);
   void check_argc(int argc);
-  long int check_number(char * argv1);
+  long int check_number(const char * argv1);
   size_t find_local_maximum(const int * matrix, size_t rows, size_t cols);
 }
 #endif

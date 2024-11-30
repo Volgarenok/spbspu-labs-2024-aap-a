@@ -13,7 +13,7 @@ void bocharov::check_argc(int argc)
     throw std::logic_error("Not enough arguments");
   }
 }
-long int bocharov::check_number(char * argv1)
+long int bocharov::check_number(const char * argv1)
 {
   char * endptr = nullptr;
   long int number = std::strtol(argv1, std::addressof(endptr), 10);
