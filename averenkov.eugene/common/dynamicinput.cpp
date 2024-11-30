@@ -4,6 +4,17 @@
 #include <memory>
 #include <stdexcept>
 
+char* averenkov::arrayresize(char* str, size_t size)
+{
+  char* str_new = reinterpret_cast< char* >(malloc(size));
+  for (size_t i = 0; i < size; ++i)
+  {
+    str_new[i] = str[i];
+  }
+  free(str);
+  return str_new;
+}
+
 char* averenkov::stringInput(std::istream& in)
 {
   size_t max = 10;
@@ -22,20 +33,14 @@ char* averenkov::stringInput(std::istream& in)
   {
     if (size == max)
     {
-      size_t new_size = max * n;
-      char* str_new = reinterpret_cast< char* >(malloc(new_size));
-      for (size_t i = 0; i < max && i < new_size; ++i)
-      {
-        str_new[i] = str[i];
-      }
-      if (str_new == nullptr)
+      max = max * n;
+      str = averenkov::arrayresize(str, max);
+      if (str == nullptr)
       {
         free(str);
         in >> std::skipws;
         return nullptr;
       }
-      str = str_new;
-      max = new_size;
     }
     str[size++] = c;
   }
