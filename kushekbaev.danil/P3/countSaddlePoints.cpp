@@ -45,7 +45,6 @@ int kushekbaev::countSaddlePoints(const int* matrix, const size_t rows, const si
     for (size_t j = 0; j < columns; j++)
     {
       int element = getElement(matrix, columns, i, j);
-
       if (isMinInRow(matrix, columns, i, element) && isMaxInColumn(matrix, rows, columns, j, element))
       {
         count++;

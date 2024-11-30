@@ -21,7 +21,7 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  const char first_char = 0;
+  char first_char = 0;
   if (!(infile >> first_char))
   {
     std::cerr << "Input file is empty" << "\n";
@@ -60,7 +60,7 @@ int main(int argc, char **argv)
 
   try
   {
-    for (size_t i = 0; i < rows * columns; i++)
+    for (size_t i = 0; i < (rows * columns); i++)
     {
       if (!(infile >> matrix[i]))
       {
@@ -89,7 +89,7 @@ int main(int argc, char **argv)
   std::ofstream outfile(output_filename);
   if (!outfile.is_open())
   {
-    std::cerr << "Error while opening output file\n";
+    std::cerr << "Error while opening output file" << "\n";
     delete[] matrix;
     return 1;
   }
