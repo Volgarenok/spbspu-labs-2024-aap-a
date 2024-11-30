@@ -7,6 +7,6 @@
 namespace guseynov
 {
   char * getLine(std::istream & in);
-  void expandMassive(char *arr, size_t & size, size_t step);
+  char * expandMassive(char *arr, size_t & size, size_t step);
 }
 #endif
