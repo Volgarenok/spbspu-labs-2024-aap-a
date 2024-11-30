@@ -8,14 +8,19 @@ const char* hasIdent(const char* str);
 const char* hasLetter(const char* str);
 const char* hasNumber(const char* str);
 
+const char* isSymbol(const char* str, char c)
+{
+  if (!str)
+  {
+    return str;
+  }
+  return (*str == c) ? (str + 1) : nullptr;
+}
+
 bool demehin::isExpression(const char* str)
 {
   auto next = hasExpr(str);
-  if (!next)
-  {
-    return false;
-  }
-  return true;
+  return next && (*next == '\0');
 }
 
 const char* hasLetter(const char* str)
@@ -56,13 +61,9 @@ const char* hasUInt(const char* str)
     return str;
   }
   auto next = hasNumber(str);
-  if (next)
+  if (auto continues = hasUInt(next))
   {
-    auto continues = hasUInt(next);
-    if (continues)
-    {
-      return continues;
-    }
+    return continues;
   }
   return next;
 }
@@ -75,17 +76,15 @@ const char* hasExpr(const char* str)
     return str;
   }
   auto next = hasTerm(str);
-  if (next)
+  if (auto continues = isSymbol(next, '+'))
   {
-    if (*(next + 1) == '+' || *(next + 1) == '-')
-    {
-      next++;
-      auto continues = hasExpr(next);
-      if (continues)
-      {
-        return continues;
-      }
-    }
+    continues = hasExpr(continues);
+    return continues;
+  }
+  if (auto continues = isSymbol(next, '-'))
+  {
+    continues = hasExpr(continues);
+    return continues;
   }
   return next;
 }
@@ -101,18 +100,15 @@ const char* hasMulti(const char* str)
   {
     return next;
   }
-
-  if (*str == '(')
+  next = hasIdent(str);
+  if (next)
   {
-    str++;
-    next = hasExpr(str);
-    if (*next == ')')
-    {
-      return next;
-    }
-    return nullptr;
+    return next;
   }
-  return nullptr;
+  next = isSymbol(str, '(');
+  next = hasExpr(next);
+  next = isSymbol(next, ')');
+  return next;
 }
 
 const char* hasTerm(const char* str)
@@ -122,23 +118,13 @@ const char* hasTerm(const char* str)
     return str;
   }
   auto next = hasMulti(str);
-  if (next)
+  if (auto continues = isSymbol(next, '*'))
   {
-    if (*(next + 1) == '*')
-    {
-      next++;
-      auto continues = hasTerm(next);
-      if (continues)
-      {
-        return continues;
-      }
-    }
+    continues = hasTerm(continues);
+    return continues;
   }
   return next;
 }
-
-
-
 
 
 
