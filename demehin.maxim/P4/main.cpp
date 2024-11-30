@@ -1,27 +1,40 @@
 #include <ios>
-#include <string.h>
+#include <string_utils.h>
+#include "unc_sym.h"
 
 int main()
 {
   constexpr char stop = '\n';
   constexpr size_t max_size = 100;
-  char* str = nullptr;
+  size_t read = 0;
 
+  char* first_str = nullptr;
   try
   {
-    str = demehin::getString(std::cin, stop, str, max_size);
+    if (!demehin::getString(std::cin, &first_str, stop, max_size, read))
+    {
+      std::cerr << "istream error\n";
+      delete[] first_str;
+      return 1;
+    }
   }
   catch (const std::bad_alloc& e)
   {
-    std::cerr << "Out of memory\n";
-    delete[] str;
-    return 1;
+    if (read == 0)
+    {
+      std::cerr << "Out of memory\n";
+      return 1;
+    }
+    else
+    {
+      std::cerr << "String expansion failed\n";
+    }
   }
 
-  if (str[0] == '\0')
+  if (read == 0)
   {
     std::cerr << "Empty string\n";
-    delete[] str;
+    delete[] first_str;
     return 1;
   }
 
@@ -34,13 +47,13 @@ int main()
   catch (const std::bad_alloc& e)
   {
     std::cerr << "Out of memory\n";
-    delete[] str;
+    delete[] first_str;
     return 1;
   }
-  char base_str[] = "abc ef";
-  demehin::unc_sym(str, base_str, final_str);
-  std::cout << base_str << '\n';
+
+  char second_str[] = "abc ef";
+  demehin::unc_sym(first_str, second_str, final_str);
   std::cout << final_str << '\n';
-  delete[] str;
+  delete[] first_str;
   delete[] final_str;
 }
