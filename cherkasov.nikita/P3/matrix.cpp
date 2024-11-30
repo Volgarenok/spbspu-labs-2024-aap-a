@@ -107,5 +107,5 @@ bool cherkasov::lowerTriangul(const int* matrix, size_t rows, size_t cols)
       }
     }
   }
-    return true;
+  return true;
 }
