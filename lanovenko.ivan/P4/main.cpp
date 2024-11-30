@@ -7,7 +7,7 @@ int main()
   char* istr = nullptr;
   try
   {
-    istr = lanovenko::inputstring(std::cin, '\n');
+    istr = lanovenko::inputStr(std::cin, '\n');
   }
   catch (const std::bad_alloc & e)
   {
@@ -20,6 +20,6 @@ int main()
     std::cerr << "Empty string" << '\n';
     return 1;
   }
-  std::cout << lanovenko::transformationstr(istr) << '\n';
+  std::cout << lanovenko::transformationStr(istr) << '\n';
   delete[] istr;
 }
