@@ -61,7 +61,7 @@ int main(int argc, char** argv)
     std::cerr << "Input fail" << '\n';
     return 2;
   }
-  lanovenko::editMatrix(matrix, rows, cols);
+  lanovenko::editToSpiral(matrix, rows, cols);
   for (size_t r = 0; r < rows; ++r)
   {
     for (size_t c = 0; c < cols; ++c)
