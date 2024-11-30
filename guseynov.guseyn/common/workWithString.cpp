@@ -58,4 +58,3 @@ char * guseynov::getLine(std::istream & in)
   free(arr);
   return copyarr;
 }
-
