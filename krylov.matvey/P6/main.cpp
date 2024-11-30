@@ -4,7 +4,7 @@
 
 int main()
 {
-  char * line = krylov::inLine(std::cin);
+  char * line = krylov::inputLine(std::cin);
   if (line == nullptr)
   {
     std::cerr << "Memory allocation failure!\n";
