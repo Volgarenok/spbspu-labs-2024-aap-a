@@ -17,7 +17,7 @@ const char * zakirov::check_sign(const char * line)
     return line;
   }
 
-  if (compare_literals(line, '+') || compare_literals(line, '-'))
+  if (zakirov::compare_literals(line, '+') || zakirov::compare_literals(line, '-'))
   {
     return line + 1;
   }
@@ -37,7 +37,7 @@ const char * zakirov::check_integer(const char * line)
   return (* line >= '0' && * line <= '9') ? (line + 1) : nullptr;
 }
 
-const char * check_uinteger(const char * line)
+const char * zakirov::check_uinteger(const char * line)
 {
   if (!line)
   {
@@ -80,12 +80,12 @@ const char * zakirov::check_order(const char * line)
     return line;
   }
 
-  auto next = compare_literals(line, 'E');
+  auto next = zakirov::compare_literals(line, 'E');
   if (!next)
   {
     return next;
   }
-  return check_sinteger(next);
+  return zakirov::check_sinteger(next);
 }
 
 const char * zakirov::check_mantissa(const char * line)
