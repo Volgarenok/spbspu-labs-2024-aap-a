@@ -5,17 +5,7 @@
 int main()
 {
   const char first_line[] = "abs";
-  char* second_line = nullptr;
-  try
-  {
-    second_line = timofeev::input_line(std::cin);
-  }
-  catch(const std::bad_alloc& e)
-  {
-    std::cerr << ("Bad output\n");
-    free(second_line);
-    return 1;
-  }
+  char* second_line = timofeev::input_line(std::cin);
   if (second_line == nullptr)
   {
     std::cerr << ("Bad output");
