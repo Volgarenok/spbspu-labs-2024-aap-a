@@ -103,7 +103,7 @@ const char * zakirov::check_mantissa(const char * line)
   return zakirov::check_uinteger(next);
 }
 
-const char * check_real(const char * line)
+bool zakirov::check_real(const char * line)
 {
   if (!line)
   {

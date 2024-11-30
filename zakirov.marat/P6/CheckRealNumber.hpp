@@ -9,7 +9,7 @@ namespace zakirov
   const char * check_sinteger(const char * line);
   const char * check_order(const char * line);
   const char * check_mantissa(const char * line);
-  const char * check_real(const char * line);
+  bool check_real(const char * line);
 }
 
 #endif
