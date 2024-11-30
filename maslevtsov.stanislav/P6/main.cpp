@@ -1,10 +1,10 @@
 #include <iostream>
+#include <stdexcept>
 #include <getline.hpp>
-#include "string_processing.hpp"
+#include "is_real_number.hpp"
 
 int main()
 {
-  constexpr char constString[25] = "~9R hg,3hX i%htQ/K*Y.35T";
   char* dynamicString = nullptr;
   try
   {
@@ -12,7 +12,7 @@ int main()
   }
   catch (const std::bad_alloc& e)
   {
-    std::cerr << "Error: memory not allocated\n";
+    std::cerr << e.what() << '\n';
     return 1;
   }
   if (dynamicString[0] == '\0')
@@ -22,7 +22,7 @@ int main()
     return 1;
   }
 
-  std::cout << maslevtsov::isSameSymbols(constString, dynamicString);
+  std::cout << std::boolalpha << maslevtsov::isRealNumber(dynamicString);
   std::cout << '\n';
 
   delete[] dynamicString;
