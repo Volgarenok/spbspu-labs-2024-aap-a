@@ -1,5 +1,6 @@
-#include <string.h>
+#include <string_utils.h>
 #include <ios>
+#include <iostream>
 #include "vocab.h"
 
 int main()
@@ -7,19 +8,31 @@ int main()
   char* str = nullptr;
   constexpr size_t max_size = 100;
   constexpr char stop = '\n';
+  size_t read = 0;
 
   try
   {
-    str = demehin::getString(std::cin, stop, str, max_size);
+    if (!demehin::getString(std::cin, &str, stop, max_size, read))
+    {
+      std::cerr << "input error\n";
+      delete[] str;
+      return 1;
+    }
   }
   catch (const std::bad_alloc& e)
   {
-    std::cerr << "Out of memory\n";
-    delete[] str;
-    return 1;
+    if (read == 0)
+    {
+      std::cerr << "Out of memory\n";
+      return 1;
+    }
+    else
+    {
+      std::cerr << "String expansion failed\n";
+    }
   }
 
-    if (str[0] == '\0')
+    if (read == 0)
   {
     std::cerr << "Empty string\n";
     delete[] str;
