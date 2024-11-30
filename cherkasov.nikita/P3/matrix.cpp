@@ -12,23 +12,23 @@ int cherkasov::readMatrix(const char* inputFile, size_t& rows, size_t& cols, boo
     rows = cols = 0;
     return 1;
   }
-    if (!(inFile >> rows >> cols))
-    {
-      std::cerr << "Error: Failed to read matrix dimensions.\n";
-      return 1;
-    }
-      if (rows == 0 || cols == 0)
-      {
-        return 0;
-      }
-        const size_t totalElements = rows * cols;
-        if (useFixedArray && totalElements > max)
-        {
-          std::cerr << "Error: Matrix size exceeds fixed array limit.\n";
-          rows = 0;
-          cols = 0;
-          return 1;
-        }
+  if (!(inFile >> rows >> cols))
+  {
+    std::cerr << "Error: Failed to read matrix dimensions.\n";
+    return 1;
+  }
+  if (rows == 0 || cols == 0)
+  {
+    return 0;
+  }
+  const size_t totalElements = rows * cols;
+  if (useFixedArray && totalElements > max)
+  {
+    std::cerr << "Error: Matrix size exceeds fixed array limit.\n";
+    rows = 0;
+    cols = 0;
+    return 1;
+  }
 
   for (size_t i = 0; i < totalElements; ++i)
   {
@@ -58,22 +58,23 @@ int cherkasov::processMatrix(const int* matrix, size_t rows, size_t cols)
   {
     count++;
   }
-    for (size_t k = 1; k < rows; ++k)
+
+  for (size_t k = 1; k < rows; ++k)
+  {
+    hasZero = false;
+    for (size_t i = k, j = 0; i < rows && j < cols; ++i, ++j)
     {
-      hasZero = false;
-      for (size_t i = k, j = 0; i < rows && j < cols; ++i, ++j)
+      if (matrix[i * cols + j] == 0)
       {
-        if (matrix[i * cols + j] == 0)
-        {
-          hasZero = true;
-           break;
-        }
+        hasZero = true;
+        break;
       }
-        if (!hasZero)
-        {
-          count++;
-        }
-     }
+    }
+    if (!hasZero)
+    {
+      count++;
+    }
+  }
 
   for (size_t k = 1; k < cols; ++k)
   {
@@ -86,10 +87,10 @@ int cherkasov::processMatrix(const int* matrix, size_t rows, size_t cols)
         break;
       }
     }
-      if (!hasZero)
-      {
-        count++;
-      }
+    if (!hasZero)
+    {
+      count++;
+    }
   }
   return count;
 }
