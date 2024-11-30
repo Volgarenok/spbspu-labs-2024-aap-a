@@ -21,7 +21,7 @@ int main()
     free(line);
     return 1;
   }
-  std::cout << timofeev::is_real_number(line) << "\n";
+  std::cout << std::boolalpha << timofeev::is_real_number(line) << "\n";
   free(line);
   return 0;
 }
