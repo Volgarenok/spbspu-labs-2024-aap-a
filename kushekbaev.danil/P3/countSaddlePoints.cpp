@@ -1,7 +1,6 @@
 #include <iostream>
 #include "count_saddle_point.hpp"
 
-
 namespace kushekbaev
 {
   const int & getElement(const int* matrix, const size_t columns, const size_t row, const size_t column);

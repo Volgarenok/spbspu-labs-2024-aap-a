@@ -49,12 +49,14 @@ int main(int argc, char **argv)
     return 0;
   }
 
-  int* matrix = new int[rows * columns];
+  int* matrix = new int[rows * columns]();
   if (!matrix)
   {
     std::cerr << "Error allocating memory for matrix" << "\n";
     return 1;
   }
+
+  int saddle_points = 0;
 
   try
   {
@@ -66,7 +68,7 @@ int main(int argc, char **argv)
       }
     }
 
-    int saddle_points = kushekbaev::countSaddlePoints(matrix, rows, columns);
+    saddle_points = kushekbaev::countSaddlePoints(matrix, rows, columns);
 
     std::ofstream outfile(output_filename);
     if (!outfile.is_open())
@@ -82,7 +84,7 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  int saddle_points = kushekbaev::countSaddlePoints(matrix, rows, columns);
+  saddle_points = kushekbaev::countSaddlePoints(matrix, rows, columns);
 
   std::ofstream outfile(output_filename);
   if (!outfile.is_open())
