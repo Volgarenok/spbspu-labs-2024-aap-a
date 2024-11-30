@@ -34,7 +34,7 @@ int main()
     return 1;
   }
 
-  std::cout << std::boolalpha << (demehin::isExpr(str) != nullptr) << "\n";
+  std::cout << std::boolalpha << demehin::isExpression(str) << "\n";
   delete[] str;
 
 }

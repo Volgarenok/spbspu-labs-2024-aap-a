@@ -28,7 +28,7 @@ const char* demehin::hasExpr(const char* str)
   if (*(str) == '(')
   {
     str++;
-    if (auto next = demehin::isExpr(str))
+    if (auto next = demehin::hasAnyExpr(str))
     {
       if (*next == ')')
       {
@@ -85,7 +85,7 @@ const char* demehin::hasTermPlusExpr(const char* str)
   {
     if (*(next++) == '+')
     {
-      if(isExpr(next))
+      if(hasAnyExpr(next))
       {
         return next;
       }
@@ -105,7 +105,7 @@ const char* demehin::hasTermMinusExpr(const char* str)
   {
     if (*(next++) == '-')
     {
-      if(isExpr(next))
+      if(hasAnyExpr(next))
       {
         return next;
       }
@@ -114,7 +114,7 @@ const char* demehin::hasTermMinusExpr(const char* str)
   return nullptr;
 }
 
-const char* demehin::isExpr(const char* str)
+const char* demehin::hasAnyExpr(const char* str)
 {
   if (!str)
   {
@@ -130,6 +130,12 @@ const char* demehin::isExpr(const char* str)
     return continues;
   }
   return next;
+}
+
+bool demehin::isExpression(const char* str)
+{
+  const char* next = hasAnyExpr(str);
+  return next; // && (*next == '\0');
 }
 
 
