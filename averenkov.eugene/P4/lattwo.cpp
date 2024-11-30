@@ -4,35 +4,28 @@
 #include <cctype>
 #include <cstdlib>
 
+bool hasChar(const char* str, char ch)
+{
+  for (const char* p = str; *p != '\0'; ++p)
+  {
+    if (std::isalpha(static_cast< unsigned char >(*p)) && std::tolower(static_cast< unsigned char >(*p)) == ch)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+
 void averenkov::latTwo(const char* str1, const char* str2, char* result)
 {
   size_t n = 0;
   for (char ch = 'a'; ch <= 'z'; ++ch)
   {
-    bool found = false;
-    for (const char* p = str1; *p != '\0'; ++p)
-    {
-      if (std::isalpha(static_cast<unsigned char>(*p)) && std::tolower(static_cast<unsigned char>(*p)) == ch)
-      {
-        found = true;
-        break;
-      }
-    }
-    if (!found)
-    {
-      for (const char* p = str2; *p != '\0'; ++p)
-      {
-        if (std::isalpha(static_cast<unsigned char>(*p)) && std::tolower(static_cast<unsigned char>(*p)) == ch)
-        {
-          found = true;
-          break;
-        }
-      }
-    }
-    if (found)
+    if (hasChar(str1, ch) || hasChar(str2, ch))
     {
       result[n++] = ch;
     }
   }
   result[n] = '\0';
 }
+
