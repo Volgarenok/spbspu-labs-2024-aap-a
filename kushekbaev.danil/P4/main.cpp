@@ -13,7 +13,7 @@ int main()
 
   const char * str2 = "string literal";
 
-  if (size == 0)
+  if (size == 0 || str1 == nullptr)
   {
     std::cerr << "Failed input" << "\n";
     delete[] str1;

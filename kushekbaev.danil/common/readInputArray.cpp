@@ -6,7 +6,7 @@ char* kushekbaev::readInputArray(std::istream& input, char stop, size_t& size, s
   char* str = nullptr;
   try
   {
-    char* str = new char[max + 1];
+    str = new char[max + 1];
     size = 0;
 
     input >> std::noskipws;
@@ -32,8 +32,7 @@ char* kushekbaev::readInputArray(std::istream& input, char stop, size_t& size, s
   {
     std::cerr << "Error allocating memory";
     delete[] str;
-    char* str = nullptr;
-    return str;
-  }
+    str = nullptr;
+   }
   return str;
 }
