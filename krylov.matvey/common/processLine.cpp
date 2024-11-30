@@ -5,7 +5,7 @@ char* krylov::inputLine(std::istream& in)
 {
   char* array = nullptr;
   size_t capacity = 52;
-  try
+try
   {
     array = new char[capacity];
   }

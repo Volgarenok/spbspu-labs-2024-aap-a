@@ -1,5 +1,5 @@
 #include <iostream>
-#include "processLine.hpp"
+#include <processLine.hpp>
 #include "replaceLetters.hpp"
 
 int main()
