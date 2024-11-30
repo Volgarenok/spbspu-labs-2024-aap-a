@@ -21,7 +21,7 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  char firstChar;
+  char firstChar = 0;
   if (!(infile >> firstChar))
   {
     std::cerr << "Input file is empty" << "\n";
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
     {
       if (!(infile >> matrix[i]))
       {
-        throw std::runtime_error("Error reading matrix data");
+        throw std::runtime_error("Error reading matrix data\n");
       }
     }
     infile.close();
@@ -72,7 +72,7 @@ int main(int argc, char **argv)
     std::ofstream outfile(output_filename);
     if (!outfile.is_open())
     {
-      throw std::runtime_error("Error while opening output file");
+      throw std::runtime_error("Error while opening output file\n");
     }
     outfile << saddle_points << "\n";
     outfile.close();
