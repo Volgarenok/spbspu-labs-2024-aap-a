@@ -3,6 +3,10 @@
 
 char * petrov::hasSign(char * str)
 {
+  if (!str)
+  {
+    return str;
+  }
   if ((*str == '+' || *str == '-') && str != nullptr)
   {
     str++;
