@@ -1,25 +1,26 @@
 #include <iostream>
 #include <input_cstring.hpp>
+#include "is_real_number.hpp"
 
 int main()
 {
-  char * real_number = nullptr;
+  char * maybe_real_number = nullptr;
   size_t capacity = 1;
   try
   {
-    real_number = petrov::inputCString(std::cin, capacity);
-    if (!std::cin || std::cin.eof() || real_number[0] == '\n')
+    maybe_real_number = petrov::inputCString(std::cin, capacity);
+    if (!std::cin || std::cin.eof() || maybe_real_number[0] == '\n')
     {
-      delete[] real_number;
+      delete[] maybe_real_number;
       std::cerr << "ERROR: Invalid value\n";
       return 1;
     }
-    std::clog << real_number;
   }
   catch (const std::bad_alloc & e)
   {
     std::cerr << "ERROR: Out of memory\n";
     return 1;
   }
-  delete[] real_number;
+  std::cout << std::boolalpha << petrov::isRealNumber(maybe_real_number) << "\n";
+  delete[] maybe_real_number;
 }
