@@ -16,7 +16,6 @@ int main()
     delete[] line;
     return 1;
   }
-  
   std::cout << std::boolalpha << savintsev::isExpression(line) << '\n';
   delete[] line;
   return 0;
