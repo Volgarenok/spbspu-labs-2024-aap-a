@@ -29,22 +29,15 @@ int main(int argc, char* argv[])
   int* matrix = (useFixedArray ? fixedArray : nullptr);
   try
   {
-    if (!useFixedArray)
+    if (taskNumber == 1)
     {
-      matrix = new int[max];
+      matrix = fixedArray;
     }
-
-  if (taskNumber == 2)
-  {
-    dynamicArray = new int[max];
-    matrix = dynamicArray;
-  }
-
-  if (cherkasov::readMatrix(inputFile, rows, cols, taskNumber == 1, matrix) != 0)
-  {
-    delete[] dynamicArray;
-    return 1;
-  }
+      else
+      {
+        dynamicArray = new int[max];
+        matrix = dynamicArray;
+      }
 
   int result = cherkasov::readMatrix(inputFile, rows, cols, useFixedArray, matrix);
   if (result != 0)
