@@ -1,5 +1,5 @@
 #include "real_number_set.h"
-#include <cstdlib>
+#include <cctype>
 
 const char * timofeev::is_symbol(const char * str, char a)
 {
