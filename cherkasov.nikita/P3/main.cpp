@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
     int taskNumber = std::strtol(argv[1], &endptr, 10);
     if (*endptr != '\0' || (taskNumber != 1 && taskNumber != 2))
     {
-      std::cerr << "Error: Invalid task number. Use 1 or 2.\n";
+      std::cerr << "Error: Invalid task number.\n";
       return 1;
     }
 
@@ -33,6 +33,18 @@ int main(int argc, char* argv[])
     {
       matrix = new int[max];
     }
+
+  if (taskNumber == 2)
+  {
+    dynamicArray = new int[max];
+    matrix = dynamicArray;
+  }
+
+  if (cherkasov::readMatrix(inputFile, rows, cols, taskNumber == 1, matrix) != 0)
+  {
+    delete[] dynamicArray;
+    return 1;
+  }
 
   int result = cherkasov::readMatrix(inputFile, rows, cols, useFixedArray, matrix);
   if (result != 0)
