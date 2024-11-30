@@ -27,6 +27,7 @@ char* maslovskiy::inputString(std::istream &in)
       char *temp = resizeString(str, strSize, iterSize);
       if (temp == nullptr)
       {
+        free(str);
         std::cerr << "Error: memory not allocated for string or incorrect parameters\n";
         return nullptr;
       }

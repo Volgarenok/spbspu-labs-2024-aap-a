@@ -20,7 +20,7 @@ int main()
     return 2;
   }
   constexpr size_t newSize = 512;
-  char *united = static_cast<char*>(malloc(sizeof(char) * newSize));
+  char *united = static_cast< char* >(malloc(sizeof(char) * newSize));
   if (united == nullptr)
   {
     free(str1);
@@ -28,11 +28,7 @@ int main()
     return 3;
   }
   mergeStrs(united, str1, str2);
-  for (size_t i = 0; united[i] != '\0'; i++)
-  {
-    std::cout << united[i];
-  }
-  std::cout << '\n';
+  std::cout << united << '\n';
   free(str1);
   free(united);
 }
