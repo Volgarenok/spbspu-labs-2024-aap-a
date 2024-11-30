@@ -1,6 +1,7 @@
 #include "resizeString.hpp"
 #include <cstdlib>
 #include <new>
+#include <iostream>
 
 char* maslovskiy::resizeString(const char *str, size_t strSize, size_t iterSize)
 {
@@ -8,7 +9,7 @@ char* maslovskiy::resizeString(const char *str, size_t strSize, size_t iterSize)
   if (resized == nullptr)
   {
     std::cerr << "Error: memory not allocate for string or incorrect parameters\n";
-    return 1;
+    return nullptr;
   }
   for (size_t i = 0; i < strSize; ++i)
   {
