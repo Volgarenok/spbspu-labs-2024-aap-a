@@ -56,6 +56,7 @@ namespace
     {
       return nullptr;
     }
+    auto next2 = is_sign(next);
     if (next2 != nullptr)
     {
       next = next2;
@@ -95,7 +96,6 @@ namespace
       next = is_E(str);
       return next;
     }
-    return next;
   }
 }
 
