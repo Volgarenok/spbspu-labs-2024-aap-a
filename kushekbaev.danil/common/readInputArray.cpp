@@ -4,12 +4,12 @@
 char* kushekbaev::readInputArray(std::istream& input)
 {
   size_t max = 10;
+  size_t size = 0;
   char stop = '\0';
   char* str = nullptr;
   try
   {
     str = new char[max + 1];
-    size_t size = 0;
     input >> std::noskipws;
     while ((input >> stop) && (stop != '\n'))
     {
@@ -35,6 +35,10 @@ char* kushekbaev::readInputArray(std::istream& input)
     input >> std::skipws;
     delete[] str;
     str = nullptr;
+  }
+  if (size == 0)
+  {
+    str == nullptr
   }
   return str;
 }
