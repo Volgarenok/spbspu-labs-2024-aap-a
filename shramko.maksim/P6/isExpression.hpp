@@ -13,7 +13,7 @@ namespace shramko
   const char* has_multi(const char* str);
   const char* has_term(const char* str);
   const char* has_expression(const char* str);
-  const char* is_expression(const char* str);
+  bool is_expression(const char* str);
 }
 
 #endif
