@@ -21,9 +21,15 @@ try
     {
       array[currentElementIndex] = '\0';
       capacity *= 3;
-      array = replaceArray(array, capacity);
-      if (array == nullptr)
+      try
       {
+        char* newArray = replaceArray(array, capacity);
+        delete[] array;
+        array = newArray;
+      }
+      catch (const std::bad_alloc& e)
+      {
+        delete[] array;
         return nullptr;
       }
     }
@@ -36,20 +42,10 @@ try
 
 char* krylov::replaceArray(char* oldArray, size_t newCapacity)
 {
-  char* newArray = nullptr;
-  try
-  {
-    newArray = new char[newCapacity];
-  }
-  catch (const std::bad_alloc& e)
-  {
-    delete[] oldArray;
-    return nullptr;
-  }
+  char* newArray = new char[newCapacity];
   for (size_t i = 0; oldArray[i] != '\0'; i++)
   {
     newArray[i] = oldArray[i];
   }
-  delete[] oldArray;
   return newArray;
 }
