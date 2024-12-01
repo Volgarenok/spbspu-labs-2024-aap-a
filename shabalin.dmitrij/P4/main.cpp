@@ -9,7 +9,6 @@ int main()
 {
   constexpr char end = '\n';
   char *inputString = nullptr;
-  size_t stringSize = 10;
   inputString = shabalin::inputOfString(std::cin, end);
   if (inputString == nullptr)
   {
