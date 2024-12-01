@@ -38,8 +38,7 @@ char * guseynov::getLine(std::istream & in)
     {
       copyarr = expandMassive(arr, reserved, step);
       free(arr);
-      arr = expandMassive(copyarr, reserved, step);
-      free(copyarr);
+      arr = copyarr;
       reserved += step;
       if (!arr)
       {
