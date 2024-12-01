@@ -58,7 +58,6 @@ int main(int argc, char *argv[])
 
   int tempMatrix[10000] = {};
   int *matrix = nullptr;
-  int *dynamicMatrix = nullptr;
 
   if (task == 1)
   {
