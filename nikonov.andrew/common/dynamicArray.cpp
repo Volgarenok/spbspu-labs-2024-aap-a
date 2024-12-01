@@ -52,12 +52,10 @@ void nikonov::transferLine(const char* oldLine, char* newLine)
     *newLine = '\0';
   }
 }
-char* nikonov::reallocate(char* line, size_t& capacity, int k, int addSizeOptional)
+char* nikonov::reallocate(char* line, size_t& capacity, size_t k, size_t addSizeOptional)
 {
-  char* newline = nullptr;
-  size_t tempCapacity = 0;
-  tempCapacity = capacity * k + addSizeOptional;
-  newline = reinterpret_cast< char* >(malloc(tempCapacity));
+  size_t tempCapacity = capacity * k + addSizeOptional;
+  char* newline = reinterpret_cast< char* >(malloc(tempCapacity));
   if (newline == nullptr)
   {
     return nullptr;

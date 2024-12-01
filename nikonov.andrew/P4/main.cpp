@@ -13,12 +13,13 @@ int main()
     return 1;
   }
   char secondLine[] = "50ftw34r_3n8in33r1n8\0";
-  firstLine = nikonov::reallocate(firstLine, capacity, 1, 10);
-  if (!firstLine)
+  char* extended_firstLine = nikonov::reallocate(firstLine, capacity, 1, 10);
+  if (!extended_firstLine)
   {
+    free(firstLine);
     return 1;
   }
-  nikonov::dgt_snd(firstLine, secondLine);
-  std::cout << firstLine << '\n';
-  free(firstLine);
+  nikonov::dgt_snd(extended_firstLine, secondLine);
+  std::cout << extended_firstLine << '\n';
+  free(extended_firstLine);
 }
