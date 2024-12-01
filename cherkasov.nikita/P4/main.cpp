@@ -1,43 +1,32 @@
 #include <iostream>
-#include <cstddef>
 #include <cstring>
-#include <ios>
-#include "string.h"
+#include <getLine.h>
+#include "newLetter.h"
 
-int main()
-{
-  try
+int main() {
+  char* input = cherkasov::inputLine(std::cin);
+  if (!input)
   {
-    char * line = cherkasov::inpputLine(std::cin);
-    if (line == nullptr)
-    {
-      std::cerr << "Memory allocation fail\n";
-      return 1;
-    }
-
-  if (line[0] == '\0')
-  {
-    std::cerr << "The line is empty!\n";
-    delete[] line;
+    std::cerr << "Memory allocation failure!\n";
     return 1;
   }
-
-  std::size_t size = std::strlen(line);
-  char * result = cherkasov::getString(line, size);
-
-  if (result)
+  if (input[0] == '\0')
   {
+    std::cerr << "The line is empty!\n";
+    delete[] input;
+    return 1;
+  }
+  const char oldstring = 'c';
+  const char newstring = 'b';
+  char* result = cherkasov::newLetter(input, oldstring, newstring);
+  if (!result)
+  {
+    std::cerr << "error in memory allocation.\n";
+    delete[] input;
+    return 1;
+  }
     std::cout << result << "\n";
+    delete[] input;
     delete[] result;
-  }
-
-  delete[] line;
-  }
-    catch (const std::exception& e)
-    {
-      std::cerr << "An exception " << e.what() << "\n";
-      return 1;
-
-  return 0;
-}
+    return 0;
 }
