@@ -2,11 +2,12 @@
 #include <iostream>
 #include <fstream>
 
-const int MAX_SIZE = 10000;
+const int max = 10000;
 
 bool cherkasov::readMatrix(const char* inputFile, int**& matrix, int& rows, int& cols, bool useFixedArray)
+constexpr size_t max = 1000;
+int cherkasov::readMatrix(std::istream& inFile, size_t& rows, size_t& cols, int* matrix)
 {
-  std::ifstream inFile(inputFile);
   if (!inFile)
   {
     std::cerr << "Error: Cannot open input file.\n";
@@ -26,7 +27,9 @@ bool cherkasov::readMatrix(const char* inputFile, int**& matrix, int& rows, int&
   }
 
   int totalElements = rows * cols;
-  if (useFixedArray && totalElements > MAX_SIZE)
+  if (useFixedArray && totalElements > max)
+  const size_t totalElements = rows * cols;
+  if (totalElements > max)
   {
     std::cerr << "Error: Matrix size exceeds fixed array limit.\n";
     return false;
@@ -34,6 +37,7 @@ bool cherkasov::readMatrix(const char* inputFile, int**& matrix, int& rows, int&
 
   matrix = new int* [rows];
   for (int i = 0; i < rows; ++i)
+  for (size_t i = 0; i < totalElements; ++i)
   {
     matrix[i] = new int[cols];
     for (int j = 0; j < cols; ++j)
@@ -52,6 +56,7 @@ bool cherkasov::readMatrix(const char* inputFile, int**& matrix, int& rows, int&
 }
 
 int cherkasov::processMatrix(int** matrix, int rows, int cols)
+int cherkasov::processMatrix(const int* matrix, size_t rows, size_t cols)
 {
   int count = 0;
   int minDim = std::min(rows, cols);
@@ -67,6 +72,11 @@ int cherkasov::processMatrix(int** matrix, int rows, int cols)
   if (!hasZero) count++;
 
   for (int k = 1; k < rows; ++k)
+  if (!hasZero)
+  {
+    count++;
+  }
+  for (size_t k = 1; k < rows; ++k)
   {
     hasZero = false;
     for (int i = k, j = 0; i < rows && j < cols; ++i, ++j)
@@ -81,6 +91,7 @@ int cherkasov::processMatrix(int** matrix, int rows, int cols)
   }
 
   for (int k = 1; k < cols; ++k)
+  for (size_t k = 1; k < cols; ++k)
   {
     hasZero = false;
     for (int i = 0, j = k; i < rows && j < cols; ++i, ++j)
@@ -98,6 +109,7 @@ int cherkasov::processMatrix(int** matrix, int rows, int cols)
 }
 
 void cherkasov::freeMatrix(int** matrix, int rows)
+bool cherkasov::isLowerTriangular(const int* matrix, size_t rows, size_t cols)
 {
   for (int i = 0; i < rows; ++i)
   {
