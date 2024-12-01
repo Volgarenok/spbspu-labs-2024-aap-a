@@ -40,17 +40,17 @@ char* cherkasov::inputLine(std::istream& in)
 
 char* cherkasov::newArrray(char* oldArray, size_t newCapacity)
 {
-  char* cherkasov::newArrray = new (std::nothrow) char[newCapacity];
-  if (!newArrray)
+  char* newArray = new (std::nothrow) char[newCapacity];
+  if (!newArray)
   {
     delete[] oldArray;
     std::cerr << "Error: Fail to allocate memory.\n";
-    std::exit(1);
+    return nullptr;
     }
   for (size_t i = 0; oldArray[i] != '\0'; ++i)
   {
-    newArrray[i] = oldArray[i];
+    newArray[i] = oldArray[i];
   }
   delete[] oldArray;
-  return newArrray;
+  return newArray;
 }
