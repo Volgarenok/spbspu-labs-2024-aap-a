@@ -1,7 +1,7 @@
 #include "line_processing.hpp"
 #include <iostream>
 
-void zakirov::change_line(char * line)
+void zakirov::get_missing_letters(char * line)
 {
   constexpr size_t alphabet_lenght = 26;
   char big_letters[alphabet_lenght];

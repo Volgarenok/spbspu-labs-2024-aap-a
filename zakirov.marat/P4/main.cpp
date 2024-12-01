@@ -19,7 +19,7 @@ int main()
     return 1;
   }
 
-  zakirov::change_line(line);
+  zakirov::get_missing_letters(line);
   std::cout << line << '\n';
   free(line);
 }
