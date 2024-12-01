@@ -23,7 +23,6 @@ char* averenkov::stringInput(std::istream& in)
   char * str = reinterpret_cast< char* >(malloc(max + 1));
   if (str == nullptr)
   {
-    free(str);
     in >> std::skipws;
     return nullptr;
   }
