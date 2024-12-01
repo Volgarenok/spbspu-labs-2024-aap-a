@@ -58,6 +58,7 @@ int main(int argc, char *argv[])
 
   int tempMatrix[10000] = {};
   int *matrix = nullptr;
+  int *dynamicMatrix = nullptr;
 
   if (task == 1)
   {
@@ -67,12 +68,12 @@ int main(int argc, char *argv[])
   {
     try
     {
-      matrix = new int[countOfElements];
+      dynamicMatrix = new int[countOfElements];
     }
     catch (const std::bad_alloc &e)
     {
       std::cerr << "Error" << e.what() << "\n";
-      delete[] matrix;
+      delete[] dynamicMatrix;
       return 2;
     }
   }
@@ -89,13 +90,10 @@ int main(int argc, char *argv[])
   catch (const std::exception &e)
   {
     std::cerr << e.what() << '\n';
-    if (task == 2)
-    {
-      delete[] matrix;
-    }
+    delete[] dynamicMatrix;
     return 2;
   }
 
-  delete[] matrix;
+  delete[] dynamicMatrix;
   return 0;
 }
