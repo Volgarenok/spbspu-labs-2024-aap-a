@@ -8,12 +8,20 @@ bool cherkasov::isValidInput(const char* input)
   {
     return false;
   }
-  for (const char* ptr = input; *ptr != '\0'; ++ptr)
+  size_t length = 0;
+  while (input[length] != '\0')
   {
-    if (!std::isprint(*ptr))
+    if (!std::isprint(input[length]))
     {
       return false;
     }
+    ++length;
   }
+  const size_t maxLength = 100;
+  if (length > maxLength)
+  {
+    return false;
+  }
+
   return true;
 }
