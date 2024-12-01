@@ -20,6 +20,7 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
       char* extendedline = reallocate(line, capacity, 2);
       if (extendedline == nullptr)
       {
+        free(line);
         std::skipws(input);
         return nullptr;
       }
@@ -57,7 +58,6 @@ char* nikonov::reallocate(char* line, size_t& capacity, size_t k, size_t addSize
   char* newline = reinterpret_cast< char* >(malloc(tempCapacity));
   if (newline == nullptr)
   {
-    free(line);
     return nullptr;
   }
   transferLine(line, newline);
