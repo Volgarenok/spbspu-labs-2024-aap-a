@@ -73,7 +73,7 @@ bool isMaxInColumn(
   return true;
 }
 
-int countSaddlePoints(
+int kushekbaev::countSaddlePoints(
   const int* matrix,
   const size_t rows,
   const size_t columns
