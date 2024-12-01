@@ -2,6 +2,7 @@
 #include <cstring>
 #include <getLine.h>
 #include "newLetter.h"
+#include "validInput.h"
 
 int main()
 {
@@ -11,15 +12,14 @@ int main()
     std::cerr << "Memory allocation failure!\n";
     return 1;
   }
-  if (input[0] == '\0')
+  if (!isValidInput(input))
   {
-    std::cerr << "The line is empty!\n";
     delete[] input;
-    return 1;
+    return 0;
   }
-  const char oldstring = 'c';
-  const char newstring = 'b';
-  char* result = cherkasov::newLetter(input, oldstring, newstring);
+  const char oldChar = 'c';
+  const char newChar = 'b';
+  char* result = cherkasov::newLetter(input, oldChar, newChar);
   if (!result)
   {
     std::cerr << "error in memory allocation.\n";

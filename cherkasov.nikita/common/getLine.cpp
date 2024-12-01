@@ -16,24 +16,19 @@ char* cherkasov::inputLine(std::istream& in)
   std::noskipws(in);
   while (in.get(ch) && ch != '\n')
   {
-    if (in.fail())
-    {
-      std::cerr << "Error: Input stream failure.\n";
-      delete[] buffer;
-      return nullptr;
-    }
-    buffer[length++] = ch;
-    if (length >= capacity)
+    if (length + 1 >= capacity)
     {
       size_t newCapacity = capacity * 2;
       char* newBuffer = cherkasov::newArray(buffer, newCapacity);
       if (!newBuffer)
       {
+        delete[] buffer;
         return nullptr;
       }
-    buffer = newBuffer;
-    capacity = newCapacity;
+     buffer = newBuffer;
+     capacity = newCapacity;
     }
+  buffer[length++] = ch;
   }
   buffer[length] = '\0';
   return buffer;
@@ -49,6 +44,7 @@ char* cherkasov::newArray(char* oldArray, size_t newCapacity)
     return nullptr;
     }
   std::strcpy(newArray, oldArray);
+  newArray[newCapacity - 1] = '\0';
   delete[] oldArray;
   return newArray;
 }
