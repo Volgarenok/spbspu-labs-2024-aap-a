@@ -1,5 +1,12 @@
 #include "is_real_number.hpp"
 
+const char *hasSymbol(const char *str, const char c);
+const char *hasSign(const char *str);
+const char *hasDigit(const char *str);
+const char *hasUnsignedInteger(const char *str);
+const char *hasOrder(const char *str);
+const char *hasMantissa(const char *str);
+
 bool sveshnikov::isRealNumber(const char *str)
 {
   const char *next = hasRealNumber(str);
@@ -21,7 +28,7 @@ const char *sveshnikov::hasRealNumber(const char *str)
   return hasOrder(next);
 }
 
-const char *sveshnikov::hasMantissa(const char *str)
+const char *hasMantissa(const char *str)
 {
   if (!str)
   {
@@ -42,7 +49,7 @@ const char *sveshnikov::hasMantissa(const char *str)
   return nullptr;
 }
 
-const char *sveshnikov::hasOrder(const char *str)
+const char *hasOrder(const char *str)
 {
   if (!str)
   {
@@ -53,7 +60,7 @@ const char *sveshnikov::hasOrder(const char *str)
   return hasUnsignedInteger(next);
 }
 
-const char *sveshnikov::hasUnsignedInteger(const char *str)
+const char *hasUnsignedInteger(const char *str)
 {
   if (!str)
   {
@@ -67,7 +74,7 @@ const char *sveshnikov::hasUnsignedInteger(const char *str)
   return next;
 }
 
-const char *sveshnikov::hasDigit(const char *str)
+const char *hasDigit(const char *str)
 {
   if (!str)
   {
@@ -76,13 +83,13 @@ const char *sveshnikov::hasDigit(const char *str)
   return (*str >= '0' && *str <= '9') ? (str + 1) : nullptr;
 }
 
-const char *sveshnikov::hasSign(const char *str)
+const char *hasSign(const char *str)
 {
   const char *next = hasSymbol(str, '+');
   return next ? next : hasSymbol(str, '-');
 }
 
-const char *sveshnikov::hasSymbol(const char *str, const char c)
+const char *hasSymbol(const char *str, const char c)
 {
   if (!str)
   {
