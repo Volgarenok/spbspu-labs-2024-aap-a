@@ -1,5 +1,4 @@
-#include "functions.h"
-#include <iostream>
+#include "has_sam_set.h"
 
 int timofeev::same_symbols(const char* first_line, const char* second_line)
 {
