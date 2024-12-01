@@ -6,8 +6,8 @@
 int main()
 {
   const char end = '\n';
-  char *t = shabalin::inputOfString(std::cin, end);
-  if (t == nullptr)
+  char *c = shabalin::inputOfString(std::cin, end);
+  if (c == nullptr)
   {
     std::cerr << "Error with input\n";
     return 1;

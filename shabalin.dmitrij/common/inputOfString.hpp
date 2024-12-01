@@ -5,7 +5,7 @@
 
 namespace shabalin
 {
-  char *inputOfString(std::istream &input, size_t &sizeOfString);
+  char *inputOfString(std::istream &input, char end);
 }
 
 #endif
