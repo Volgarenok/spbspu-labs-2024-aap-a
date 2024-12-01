@@ -5,8 +5,8 @@
 #include <fstream>
 namespace cherkasov
 {
-  int readMatrix(const char* inputFile, size_t& rows, size_t& cols, bool useFixedArray, int* matrix);
+  bool readMatrix(std::istream& in, size_t& rows, size_t& cols, int* matrix);
   int processMatrix(const int* matrix, size_t rows, size_t cols);
-  bool lowerTriangul(const int* matrix, size_t rows, size_t cols);
+  bool lowerTriangular(const int* matrix, size_t rows, size_t cols);
 }
 #endif
