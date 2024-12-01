@@ -38,9 +38,9 @@ char* cherkasov::inputLine(std::istream& in)
   return buffer;
 }
 
-char* newArrray(char* oldArray, size_t newCapacity)
+char* cherkasov::newArrray(char* oldArray, size_t newCapacity)
 {
-  char* newArrray = new (std::nothrow) char[newCapacity];
+  char* cherkasov::newArrray = new (std::nothrow) char[newCapacity];
   if (!newArrray)
   {
     delete[] oldArray;
