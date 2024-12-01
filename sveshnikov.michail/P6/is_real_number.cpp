@@ -1,11 +1,14 @@
 #include "is_real_number.hpp"
 
-const char *hasSymbol(const char *str, const char c);
-const char *hasSign(const char *str);
-const char *hasDigit(const char *str);
-const char *hasUnsignedInteger(const char *str);
-const char *hasOrder(const char *str);
-const char *hasMantissa(const char *str);
+namespace sveshnikov
+{
+  const char *hasSymbol(const char *str, const char c);
+  const char *hasSign(const char *str);
+  const char *hasDigit(const char *str);
+  const char *hasUnsignedInteger(const char *str);
+  const char *hasOrder(const char *str);
+  const char *hasMantissa(const char *str);
+}
 
 bool sveshnikov::isRealNumber(const char *str)
 {
