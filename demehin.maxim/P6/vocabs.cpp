@@ -1,5 +1,5 @@
-#include <cctype>
 #include "is_expr.h"
+#include <cctype>
 
 namespace
 {
