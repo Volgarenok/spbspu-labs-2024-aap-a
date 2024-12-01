@@ -71,16 +71,13 @@ const char * smirnov::isMantissa(const char * string)
   {
     return string;
   }
-  if (*string == '.')
+  auto next = string;
+  if (auto continues = isUnsignedInt(next))
   {
-    return isUnsignedInt(string + 1);
+    next = continues;
   }
-  auto next = isUnsignedInt(string);
-  if (next && *next == '.')
-  {
-    return isUnsignedInt(next + 1);
-  }
-  return string;
+  next = isSymbol(next, '.');
+  return isUnsignedInt(next);
 }
 
 bool smirnov::isFloatNumber(const char * string)
@@ -89,11 +86,10 @@ bool smirnov::isFloatNumber(const char * string)
   {
     return string;
   }
-  const char * next = isSign(string);
-  next = isMantissa(next);
-  if (next && *next == 'E')
+  auto next = isSign(string);
+  if (auto continues = isMantissa(next))
   {
-    next = isOrder(next + 1);
+    return isOrder(continues);
   }
-  return next && (*next == '\0');
+  return isOrder(next);
 }
