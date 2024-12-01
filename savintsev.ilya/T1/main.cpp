@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <string>
 #include <newlineterminatedstr.h>
 #include "base-types.hpp"
 #include "rectangle.hpp"
@@ -33,6 +34,13 @@ int main()
         ++wordsCounter;
         std::cout << token << '\n';
         token = std::strtok(nullptr, separator);
+        //std::cout << token << '\n';
+        //double num = std::strtod(token, NULL);
+        //if (!num)
+        //{
+        //  std::to_string(num) == token
+        //  if ()
+        //}
       }
       return 0;
     }
