@@ -34,6 +34,7 @@ int main()
   }
     std::cout << result << "\n";
     delete[] input;
-    delete[] result;
-    return 0;
+
+  delete[] result;
+  return 0;
 }
