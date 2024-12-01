@@ -5,7 +5,7 @@ bool averenkov::hasDigit(char c)
   return c >= '0' && c <= '9';
 }
 
-bool averenkov::hasUnsignedInt(const char*& str)
+bool averenkov::hasUnsignedInt(const char* str)
 {
   const char* start = str;
   if (hasDigit(*str))
@@ -25,7 +25,7 @@ bool averenkov::hasLetter(char c)
   return (c >= 'a' && c <= 'z');
 }
 
-bool averenkov::hasIdentifier(const char*& str)
+bool averenkov::hasIdentifier(const char* str)
 {
   if (hasLetter(*str))
   {
@@ -35,7 +35,7 @@ bool averenkov::hasIdentifier(const char*& str)
   return false;
 }
 
-bool averenkov::hasExpression(const char*& str)
+bool averenkov::hasExpression(const char* str)
 {
   const char* start = str;
   if (hasTerm(str)) {
@@ -53,7 +53,7 @@ bool averenkov::hasExpression(const char*& str)
   return false;
 }
 
-bool averenkov::hasFactor(const char*& str)
+bool averenkov::hasFactor(const char* str)
 {
   const char* start = str;
   if (hasUnsignedInt(str))
@@ -79,7 +79,7 @@ bool averenkov::hasFactor(const char*& str)
   return false;
 }
 
-bool averenkov::hasTerm(const char*& str)
+bool averenkov::hasTerm(const char* str)
 {
   const char* start = str;
   if (hasFactor(str))
