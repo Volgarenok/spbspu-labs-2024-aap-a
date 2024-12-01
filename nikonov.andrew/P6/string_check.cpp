@@ -9,7 +9,7 @@ namespace nikonov
 }
 bool nikonov::is_float(const char* str)
 {
-  auto next = nikonov::is_mantissa(str);
+  auto next = is_mantissa(str);
   if (!next)
   {
     return false;
@@ -50,10 +50,10 @@ const char* nikonov::is_numb(const char* str)
   {
     return str;
   }
-  auto next = nikonov::is_digit(str);
+  auto next = is_digit(str);
   if (next)
   {
-    return nikonov::is_numb(next);
+    return is_numb(next);
   }
   return nullptr;
 }
@@ -65,12 +65,12 @@ const char* nikonov::is_mantissa(const char* str)
   }
   if (*str == '.')
   {
-    return nikonov::is_numb(str + 1);
+    return is_numb(str + 1);
   }
-  auto next = nikonov::is_numb(str);
+  auto next = is_numb(str);
   if (next && *next == '.')
   {
-    return nikonov::is_numb(next + 1);
+    return is_numb(next + 1);
   }
   return nullptr;
 }
@@ -82,16 +82,16 @@ const char* nikonov::is_order(const char* str)
   }
   if (*str == 'E')
   {
-    auto next = nikonov::is_sign(str + 1);
+    auto next = is_sign(str + 1);
     if (!next)
     {
       return nullptr;
     }
-    return nikonov::is_numb(next);
+    return is_numb(next);
   }
   else if (*str == 'e')
   {
-    return nikonov::is_numb(str + 1);
+    return is_numb(str + 1);
   }
   return nullptr;
 }
