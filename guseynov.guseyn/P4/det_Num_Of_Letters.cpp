@@ -6,14 +6,13 @@ size_t guseynov::determiningNumOfLetters(const char *inputString)
 {
   size_t res = 0;
   size_t f = 0;
-  size_t i = 0;
-  while (inputString[i++] != '\0')
+  for (size_t i = 0; inputString[i] != '\0'; i++)
   {
-    if (isalpha (inputString[i - 1]))
+    if (isalpha(inputString[i]))
     {
-      for (size_t j = 0; j < (i - 1); j++)
+      for (size_t j = 0; j < i; j++)
       {
-        if (inputString[j] == inputString[i - 1])
+        if (inputString[j] == inputString[i])
         {
           f = 1;
         }
