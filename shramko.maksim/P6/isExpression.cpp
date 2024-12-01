@@ -57,12 +57,11 @@ namespace
 
   const char* has_unsigned_int(const char* str)
   {
-    const char* i = *str;
     if (!str)
     {
       return str;
     }
-    const char* following = has_zero_or_one(str);
+    const char* following = has_one_or_zero(str);
     if (!following)
     {
       return nullptr;
@@ -129,7 +128,7 @@ namespace
       {
         return nullptr;
       }
-      if (const char* scnd_next = has_symbol(next, '+')
+      if (const char* scnd_next = has_symbol(next, '+'))
       {
         const char* next_term = has_term(scnd_next)
         if (!next_term || !has_symbol(next_term, ')'))
