@@ -3,7 +3,7 @@
 #include <fstream>
 
 constexpr size_t max = 1000;
-int cherkasov::readMatrix(std::istream& inFile, size_t& rows, size_t& cols, bool useFixedArray, int* matrix)
+int cherkasov::readMatrix(std::istream& inFile, size_t& rows, size_t& cols, int* matrix)
 {
   if (!inFile)
   {
@@ -21,7 +21,7 @@ int cherkasov::readMatrix(std::istream& inFile, size_t& rows, size_t& cols, bool
     return 0;
   }
   const size_t totalElements = rows * cols;
-  if (useFixedArray && totalElements > max)
+  if (totalElements > max)
   {
     std::cerr << "Error: Matrix size exceeds fixed array limit.\n";
     rows = 0;
@@ -89,7 +89,7 @@ int cherkasov::processMatrix(const int* matrix, size_t rows, size_t cols)
   }
   return count;
 }
-bool cherkasov::lowerTriangular(const int* matrix, size_t rows, size_t cols)
+bool cherkasov::isLowerTriangular(const int* matrix, size_t rows, size_t cols)
 {
   for (size_t i = 0; i < rows; ++i)
   {

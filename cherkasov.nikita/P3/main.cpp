@@ -43,14 +43,14 @@ int main(int argc, char* argv[])
       dynamicArray = new int[max];
       matrix = dynamicArray;
     }
-  int result = cherkasov::readMatrix(inputFile, rows, cols, useFixedArray, matrix);
+  int result = cherkasov::readMatrix(inputFile, rows, cols,  matrix);
   if (result != 0)
   {
     delete[] dynamicArray;
     return result;
   }
   int processResult = cherkasov::processMatrix(matrix, rows, cols);
-  bool isLowerTriangular = cherkasov::lowerTriangular(matrix, rows, cols);
+  bool isLowerTriangular = cherkasov::isLowerTriangular(matrix, rows, cols);
   std::ofstream outFile(outputFile);
   if (!outFile)
   {
