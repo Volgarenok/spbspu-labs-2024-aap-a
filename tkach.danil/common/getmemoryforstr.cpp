@@ -1,4 +1,4 @@
-#include "stringinput.h"
+#include <stringinput.hpp>
 
 char* tkach::getMemoryForStr(const char* str, size_t& capacity)
 {

@@ -5,7 +5,7 @@
 
 namespace sveshnikov
 {
-  char *read_str(std::istream &in);
+  char *read_str(std::istream &in, std::size_t &len);
   char *memory_alloc(const char *str, std::size_t len);
 }
 #endif

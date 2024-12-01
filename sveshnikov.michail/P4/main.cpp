@@ -5,9 +5,10 @@
 int main()
 {
   char *str = nullptr;
+  std::size_t len = 0;
   try
   {
-    str = sveshnikov::read_str(std::cin);
+    str = sveshnikov::read_str(std::cin, len);
   }
   catch (const std::bad_alloc &e)
   {
@@ -19,11 +20,6 @@ int main()
     std::cerr << "ERROR: EMPTY INPUT\n";
     delete[] str;
     return 1;
-  }
-  std::size_t len = 0;
-  for (char *i = str; *i != '\0'; i++)
-  {
-    len++;
   }
   char *new_str = nullptr;
   try
