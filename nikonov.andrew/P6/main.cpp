@@ -5,7 +5,7 @@ int main()
 {
   size_t capacity = 10;
   char* arr = nikonov::getLine(std::cin, capacity);
-  if (!arr)
+  if (!arr || *arr == '\0')
   {
     return 1;
   }

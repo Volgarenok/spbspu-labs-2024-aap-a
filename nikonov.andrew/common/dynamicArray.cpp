@@ -30,7 +30,7 @@ char* nikonov::getLine(std::istream& input, size_t& capacity)
     ++index;
   }
   *(line + index) = '\0';
-  if (!input.eof() && !input)
+  if (!input)
   {
     free(line);
     std::skipws(input);
