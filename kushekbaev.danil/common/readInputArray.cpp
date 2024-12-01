@@ -1,9 +1,10 @@
 #include "read_input_array.hpp"
 #include <iostream>
 
-char* kushekbaev::readInputArray(std::istream& input, char stop)
+char* kushekbaev::readInputArray(std::istream& input)
 {
   size_t max = 10;
+  char stop = '\0';
   char* str = nullptr;
   try
   {

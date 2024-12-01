@@ -5,9 +5,7 @@
 
 int main()
 {
-  char stop = '\0';
-
-  const char * str1 = kushekbaev::readInputArray(std::cin, stop);
+  const char * str1 = kushekbaev::readInputArray(std::cin);
 
   const char * str2 = "string literal";
 

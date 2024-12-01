@@ -5,6 +5,6 @@
 
 namespace kushekbaev
 {
-  char* readInputArray(std::istream& input, char stop);
+  char* readInputArray(std::istream& input);
 }
 #endif
