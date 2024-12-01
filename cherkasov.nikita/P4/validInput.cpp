@@ -1,5 +1,6 @@
 #include "validInput.h"
 #include <iostream>
+#include <cctype>
 
 bool cherkasov::isValidInput(const char* input)
 {
