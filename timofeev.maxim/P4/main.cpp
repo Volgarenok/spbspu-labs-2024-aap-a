@@ -1,10 +1,5 @@
 #include <iostream>
-<<<<<<< HEAD
-#include "functions.h"
-#include <all_for_input.h>
-=======
 #include "has_sam_set.h"
->>>>>>> master
 
 int main()
 {

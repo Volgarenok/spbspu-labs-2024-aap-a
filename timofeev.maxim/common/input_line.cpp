@@ -1,9 +1,5 @@
-<<<<<<< HEAD:timofeev.maxim/common/input_line.cpp
-#include "all_for_input.h"
-=======
 #include "has_sam_set.h"
 #include <iostream>
->>>>>>> master:timofeev.maxim/P4/input_line.cpp
 
 char* timofeev::input_line(std::istream& in)
 {
