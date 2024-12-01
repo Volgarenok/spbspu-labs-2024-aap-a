@@ -59,7 +59,6 @@ int main()
       delete[] line;
       continue;
     }
-    
     token = std::strtok(line, separator);
     is_error_now = false;
     if (!std::strcmp(token, "RECTANGLE"))
