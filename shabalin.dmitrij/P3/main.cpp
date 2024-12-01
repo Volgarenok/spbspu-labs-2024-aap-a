@@ -89,16 +89,10 @@ int main(int argc, char *argv[])
   catch (const std::exception &e)
   {
     std::cerr << e.what() << '\n';
-    if (task == 2)
-    {
-      delete[] matrix;
-    }
+    delete[] matrix;
     return 2;
   }
 
-  if (task == 2)
-  {
-    delete[] matrix;
-  }
+  delete[] matrix;
   return 0;
 }
