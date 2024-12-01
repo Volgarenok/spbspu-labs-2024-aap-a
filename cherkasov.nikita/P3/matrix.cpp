@@ -38,7 +38,7 @@ int cherkasov::readMatrix(std::istream& inFile, size_t& rows, size_t& cols, int*
   }
   return 0;
 }
-int cherkasov::processMatrix(const int* matrix, size_t rows, size_t cols)
+int cherkasov::countNonZeroDiagonals(const int* matrix, size_t rows, size_t cols)
 {
   int count = 0;
   size_t minDim = std::min(rows, cols);
@@ -89,7 +89,7 @@ int cherkasov::processMatrix(const int* matrix, size_t rows, size_t cols)
   }
   return count;
 }
-bool cherkasov::isLowerTriangular(const int* matrix, size_t rows, size_t cols)
+bool cherkasov::isMatrixLowerTriangular(const int* matrix, size_t rows, size_t cols)
 {
   for (size_t i = 0; i < rows; ++i)
   {
