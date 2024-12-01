@@ -2,7 +2,7 @@
 
 bool shramko::has_zero_or_one(const char** str)
 {
-  if ((**srt == '0') || (**str == '1'))
+  if ((**str == '0') || (**str == '1'))
   {
     (*str)++;
     return true;

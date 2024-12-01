@@ -4,7 +4,7 @@
 
 int main()
 {
-  char* str = shramko::inputString(std::cin);
+  char* str = shramko::inputStr(std::cin);
   if (str == nullptr)
   {
     std::cerr << "String error!\n";

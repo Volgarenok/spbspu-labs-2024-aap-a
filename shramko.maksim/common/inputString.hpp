@@ -6,7 +6,7 @@
 
 namespace shramko
 {
-  char* createBiggerMemory(size_t memory, const char* str);
+  char* createBiggerStrMemory(size_t memory, const char* str);
   char* inputStr(std::istream& in);
 }
 
