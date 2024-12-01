@@ -109,6 +109,7 @@ int main()
     }
     else
     {
+      is_error_was = true;
       delete[] line;
       continue;
     }

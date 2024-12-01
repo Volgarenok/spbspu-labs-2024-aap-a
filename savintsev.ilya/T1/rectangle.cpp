@@ -34,4 +34,7 @@ void savintsev::Rectangle::move(double x, double y)
 }
 
 void savintsev::Rectangle::scale(point_t, double k)
-{}
+{
+  //zaglushka
+  k = k + 1;
+}
