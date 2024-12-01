@@ -15,15 +15,7 @@ int main() {
     std::cerr << "Memory error\n";
     return 1;
   }
-  const char* ptr = input;
-  if(averenkov::hasExpression(ptr) && *ptr == '\0')
-  {
-    std::cout << "true\n";
-  }
-  else
-  {
-    std::cout << "false\n";
-  }
+  std::cout << std::boolalpha << averenkov::hasValidExpression(input) << "\n";
   free(input);
   return 0;
 }

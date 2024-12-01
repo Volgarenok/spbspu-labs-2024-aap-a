@@ -1,109 +1,109 @@
 #include "recfunc.h"
+#include <iostream>
+#include <cctype>
 
 namespace averenkov
 {
-  bool hasTerm(const char* str);
-  bool hasFactor(const char* str);
-  bool hasUnsignedInt(const char* str);
-  bool hasIdentifier(const char* str);
   bool hasDigit(char c);
   bool hasLetter(char c);
+  bool hasUnsignedInt(const char* str, size_t& index);
+  bool hasIdentifier(const char* str, size_t& index);
+  bool hasFactor(const char* str, size_t& index);
+  bool hasTerm(const char* str, size_t& index);
+  bool hasExpression(const char* str, size_t& index);
 }
 
 bool averenkov::hasDigit(char c)
 {
   return c >= '0' && c <= '9';
 }
-
-bool averenkov::hasUnsignedInt(const char* str)
-{
-  const char* start = str;
-  if (hasDigit(*str))
-  {
-    while (hasDigit(*str))
-    {
-      ++str;
-    }
-    return true;
-  }
-  str = start;
-  return false;
-}
-
 bool averenkov::hasLetter(char c)
 {
   return (c >= 'a' && c <= 'z');
 }
-
-bool averenkov::hasIdentifier(const char* str)
+bool averenkov::hasUnsignedInt(const char* str, size_t& index)
 {
-  if (hasLetter(*str))
+  if (!averenkov::hasDigit(str[index]))
   {
-    ++str;
+    return false;
+  }
+  index++;
+ return str[index] == '\0' || averenkov::hasUnsignedInt(str, index);
+}
+bool averenkov::hasIdentifier(const char* str, size_t& index)
+{
+  if (averenkov::hasLetter(str[index]))
+  {
+    index++;
     return true;
   }
   return false;
 }
-
-bool averenkov::hasExpression(const char* str)
+bool averenkov::hasFactor(const char* str, size_t& index)
 {
-  const char* start = str;
-  if (hasTerm(str)) {
-    while (*str == '+' || *str == '-')
+  size_t start = index;
+  if (averenkov::hasUnsignedInt(str, index))
+  {
+     return true;
+  }
+  index = start;
+  if (averenkov::hasIdentifier(str, index))
+  {
+    return true;
+  }
+  index = start;
+  if (str[index] == '(')
+  {
+    index++;
+    if (averenkov::hasExpression(str, index) && str[index] == ')')
     {
-      ++str;
-      if (!hasTerm(str))
-      {
-        str = start;
-        return false;
-      }
-    }
-    return true;
-  }
-  return false;
-}
-
-bool averenkov::hasFactor(const char* str)
-{
-  const char* start = str;
-  if (hasUnsignedInt(str))
-  {
-    return true;
-  }
-  str = start;
-  if (hasIdentifier(str))
-  {
-    return true;
-  }
-  str = start;
-  if (*str == '(')
-  {
-    ++str;
-    if (hasExpression(str) && *str == ')')
-    {
-      ++str;
+      index++;
       return true;
     }
   }
-  str = start;
+  index = start;
   return false;
 }
 
-bool averenkov::hasTerm(const char* str)
+bool averenkov::hasTerm(const char* str, size_t& index)
 {
-  const char* start = str;
-  if (hasFactor(str))
+  if (!averenkov::hasFactor(str, index))
   {
-    while (*str == '*' || *str == '/')
+     return false;
+  }
+  if (str[index] == '*' || str[index] == '/')
+  {
+    index++;
+    return averenkov::hasTerm(str, index);
+  }
+  return true;
+}
+
+bool averenkov::hasExpression(const char* str, size_t& index)
+{
+  size_t start = index;
+  if (!averenkov::hasTerm(str, index))
+  {
+    return false;
+  }
+  while (str[index] == '+' || str[index] == '-')
+  {
+    index++;
+    if (!averenkov::hasTerm(str, index))
     {
-      ++str;
-      if (!hasFactor(str))
-      {
-        str = start;
-        return false;
-      }
+      index = start;
+      return false;
     }
+  }
+  return true;
+}
+bool averenkov::hasValidExpression(const char* str)
+{
+  size_t index = 0;
+  if (averenkov::hasExpression(str, index) && str[index] == '\0')
+  {
     return true;
   }
   return false;
 }
+

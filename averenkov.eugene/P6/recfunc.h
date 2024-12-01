@@ -3,7 +3,7 @@
 
 namespace averenkov
 {
-  bool hasExpression(const char* str);
+  bool hasValidExpression(const char* str);
 }
 
 #endif
