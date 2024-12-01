@@ -18,6 +18,6 @@ int main()
     return 1;
   }
 
-  std::cout << std::boolalpha << is_expression(str) << '\n';
+  std::cout << std::boolalpha << shramko::is_expression(str) << '\n';
   free(str);
 }

@@ -168,7 +168,7 @@ namespace
   }
 }
 
-bool is_expression(const char* str)
+bool shramko::is_expression(const char* str)
 {
   const char* next = has_expression(str);
   return next && (has_symbol(next, '\0'));
