@@ -1,7 +1,16 @@
 #include "isexpression.hpp"
 #include <iostream>
+namespace brevnov
+{
+  const char * isLetter(const char * str);
+  const char * isDigit(const char * str);
+  const char * hasUint(const char * str);
+  const char * hasMultiplier(const char * str);
+  const char * hasTerm(const char * str);
+  const char * hasExpression(const char * str);
+}
 
-const char * isLetter(const char * str)
+const char * brevnov::isLetter(const char * str)
 {
   if (!str)
   {
@@ -10,7 +19,7 @@ const char * isLetter(const char * str)
   return ((*str == 'x') || (*str == 'y') || (*str == 'z')) ? (str + 1) : nullptr;
 }
 
-const char * isDigit(const char * str)
+const char * brevnov::isDigit(const char * str)
 {
   if (!str)
   {
@@ -19,7 +28,7 @@ const char * isDigit(const char * str)
   return ((*str == '1') || (*str == '0')) ? (str + 1) : nullptr;
 }
 
-const char * hasUint(const char * str)
+const char * brevnov::hasUint(const char * str)
 {
   if (!str)
   {
@@ -41,7 +50,7 @@ const char * hasUint(const char * str)
   return next;
 }
 
-const char * hasMultiplier(const char * str)
+const char * brevnov::hasMultiplier(const char * str)
 {
   if (!str)
   {
@@ -50,7 +59,7 @@ const char * hasMultiplier(const char * str)
   if (*str == '(')
   {
     str++;
-    auto bracket = brevnov::hasExpression(str);
+    auto bracket = hasExpression(str);
     if (!bracket)
     {
       return bracket;
@@ -72,7 +81,7 @@ const char * hasMultiplier(const char * str)
   return isLetter(str);
 }
 
-const char * hasTerm(const char * str)
+const char * brevnov::hasTerm(const char * str)
 {
   if (!str)
   {
@@ -120,7 +129,7 @@ const char * hasTerm(const char * str)
   return next;
 }
 
-const char * hasExpression(const char * str)
+const char * brevnov::hasExpression(const char * str)
 {
   if (!str)
   {
@@ -141,6 +150,6 @@ const char * hasExpression(const char * str)
 
 bool brevnov::isExpression(const char * str)
 {
-  auto next = hasExpression(str);
+  auto next = brevnov::hasExpression(str);
   return next && (*next == '\0');
 }
