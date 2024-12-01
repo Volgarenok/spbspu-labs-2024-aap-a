@@ -10,7 +10,7 @@ namespace
     {
       return str;
     }
-    return (*str == s) ? (str++) : nullptr;
+    return (*str == s) ? (str + 1) : nullptr;
   }
 
   const char* has_x(const char* str)
@@ -121,16 +121,16 @@ namespace
       }
       return next;
     }
-    if (const char* ay_nextFol = has_symbol(str, '('))
+    if (const char* ay_nextFol = has_symbol(following, '('))
     {
       const char* next = has_multi(ay_nextFol);
       if (!next)
       {
         return nullptr;
       }
-      if (const char* scnd_next = has_symbol(next, '+'))
+      if (const char* next2 = has_symbol(next, '+'))
       {
-        const char* next_term = has_term(scnd_next);
+        const char* next_term = has_term(next2);
         if (!next_term || !has_symbol(next_term, ')'))
         {
           return nullptr;
@@ -141,7 +141,7 @@ namespace
       {
         return nullptr;
       }
-      return ay_nextFol;
+      return next;
     }
     return following;
   }
