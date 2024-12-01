@@ -92,7 +92,7 @@ namespace
     if ((str = has_symbol(str, '(')))
     {
       next = has_expression(str);
-      if ((next = has_symbol(str, ')')))
+      if ((next = has_symbol(next, ')')))
       {
         return next;
       }
