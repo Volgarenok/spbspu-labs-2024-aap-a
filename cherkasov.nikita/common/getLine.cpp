@@ -52,10 +52,18 @@ char* cherkasov::newArray(char* oldArray, size_t newCapacity)
   }
   if (oldArray)
   {
-    size_t oldLength = (oldArray[0] != '\0') ? std::strlen(oldArray) : 0;
-    std::strncpy(newArray, oldArray, oldLength);
+    size_t oldLength = 0;
+    while (oldArray[oldLength] != '\0' && oldLength < newCapacity - 1)
+    {
+      newArray[oldLength] = oldArray[oldLength];
+      oldLength++;
+    }
     newArray[oldLength] = '\0';
+    delete[] oldArray;
   }
-  delete[] oldArray;
+  else
+  {
+    newArray[0] = '\0';
+  }
   return newArray;
 }
