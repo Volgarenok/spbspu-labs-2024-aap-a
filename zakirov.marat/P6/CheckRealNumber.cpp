@@ -44,14 +44,15 @@ const char * zakirov::check_uinteger(const char * line)
     return line;
   }
 
-  auto next = zakirov::check_integer(line);
-  if (!next)
+  auto middle = zakirov::check_integer(line);
+  auto next = zakirov::check_uinteger(middle);
+  if (next)
   {
-    return zakirov::check_integer(line);
+    return next;
   }
   else
   {
-    return zakirov::check_uinteger(next);
+    return middle;
   }
 }
 
