@@ -1,6 +1,6 @@
 #include "inputString.h"
 #include <iostream>
-char* kiselev::resizeArr(const char* array, size_t newLength, size_t pastLength)
+char* resizeArr(const char* array, size_t newLength, size_t pastLength)
 {
   char* arr2 = static_cast< char* >(malloc(newLength * sizeof(char)));
   if (arr2 == nullptr)
@@ -36,7 +36,7 @@ char* kiselev::inputString(std::istream& input, char end)
       size_t temporaryLength = memorySize;
       memorySize += 5;
       char* temporaryArray = arr;
-      arr = kiselev::resizeArr(arr, memorySize, temporaryLength);
+      arr = resizeArr(arr, memorySize, temporaryLength);
       free(temporaryArray);
       if (arr == nullptr)
       {
