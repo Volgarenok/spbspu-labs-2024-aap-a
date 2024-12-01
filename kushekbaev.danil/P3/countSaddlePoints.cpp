@@ -28,9 +28,9 @@ namespace kushekbaev
 
 const int & kushekbaev::getElement(
   const int* matrix,
-  const size_t columns,
-  const size_t row,
-  const size_t column
+  size_t columns,
+  size_t row,
+  size_t column
 )
 {
   return matrix[row * columns + column];
@@ -38,9 +38,9 @@ const int & kushekbaev::getElement(
 
 bool kushekbaev::isMinInRow(
   const int* matrix,
-  const size_t columns,
-  const size_t row,
-  const int element
+  size_t columns,
+  size_t row,
+  int element
 )
 {
   for (size_t z = 0; z < columns; z++)
@@ -56,10 +56,10 @@ bool kushekbaev::isMinInRow(
 
 bool kushekbaev::isMaxInColumn(
   const int* matrix,
-  const size_t rows,
-  const size_t columns,
-  const size_t column,
-  const int element
+  size_t rows,
+  size_t columns,
+  size_t column,
+  int element
 )
 {
   for (size_t z = 0; z < rows; z++)
@@ -75,8 +75,8 @@ bool kushekbaev::isMaxInColumn(
 
 int kushekbaev::countSaddlePoints(
   const int* matrix,
-  const size_t rows,
-  const size_t columns
+  size_t rows,
+  size_t columns
 )
 {
   int count = 0;
