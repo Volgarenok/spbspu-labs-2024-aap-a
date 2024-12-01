@@ -4,21 +4,21 @@
 namespace kushekbaev
 {
   const int & getElement(
-    const int* matrix,
+    int* matrix,
     const size_t columns,
     const size_t row,
     const size_t column
   );
 
   bool isMinInRow(
-    const int* matrix,
+    int* matrix,
     const size_t columns,
     const size_t row,
     const int element
   );
 
   bool isMaxInColumn(
-    const int* matrix,
+    int* matrix,
     const size_t rows,
     const size_t columns,
     const size_t column,
