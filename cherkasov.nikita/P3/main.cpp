@@ -1,6 +1,6 @@
 #include <iostream>
-#include <fstream>
 #include <cstdlib>
+#include <fstream>
 #include <cstring>
 #include "matrix.h"
 
@@ -18,56 +18,63 @@ int main(int argc, char* argv[])
     std::cerr << "Error: Invalid task number.\n";
     return 1;
   }
-  const char* inputFile = argv[2];
+  const char* inFile = argv[2];
   const char* outputFile = argv[3];
-  size_t rows = 0;
-  size_t cols = 0;
+  size_t rows = 0, cols = 0;
+  bool useFixedArray = (taskNumber == 1);
   constexpr size_t max = 1000;
   int fixedArray[max] = {0};
-  int* matrix = nullptr;
-
+  int* dynamicArray = nullptr;
+  int* matrix = (useFixedArray ? fixedArray : nullptr);
   try
   {
-  if (taskNumber == 1)
+    std::ifstream inputFile(inFile);
+    if (!inputFile)
+    {
+      std::cerr << "Error: Cannot open input file.\n";
+      return 1;
+    }
+    if (taskNumber == 1)
+    {
+      matrix = fixedArray;
+    }
+    else
+    {
+      dynamicArray = new int[max];
+      matrix = dynamicArray;
+    }
+  int result = cherkasov::readMatrix(inputFile, rows, cols, useFixedArray, matrix);
+  if (result != 0)
   {
-    matrix = fixedArray;
-  }
-  else
-  {
-    matrix = new int[max]();
-  }
-  std::ifstream inFile(inputFile);
-  if (!inFile)
-  {
-    std::cerr << "Error: Cannot open input file.\n";
-    delete[] matrix;
-    return 1;
-  }
-  if (!cherkasov::readMatrix(inFile, rows, cols, matrix))
-  {
-    std::cerr << "Error: Invalid matrix data.\n";
-    delete[] matrix;
-    return 1;
+    delete[] dynamicArray;
+    return result;
   }
   int processResult = cherkasov::processMatrix(matrix, rows, cols);
-  bool lowerTriangular = cherkasov::lowerTriangular(matrix, rows, cols);
+  bool isLowerTriangular = cherkasov::lowerTriangular(matrix, rows, cols);
   std::ofstream outFile(outputFile);
   if (!outFile)
   {
     std::cerr << "Error: Cannot open output file.\n";
-    delete[] matrix;
+    delete[] dynamicArray;
     return 1;
   }
     outFile << "Result: " << processResult << "\n";
-    outFile << (lowerTriangular ? "The matrix is lower triangular.\n"
-                                   : "The matrix is not lower triangular.\n");
-  delete[] matrix;
-  return 0;
+    if (isLowerTriangular)
+    {
+      outFile << "The matrix is lower triangular.\n";
+    }
+    else
+    {
+      outFile << "The matrix is not lower triangular.\n";
+    }
   }
   catch (const std::bad_alloc&)
   {
     std::cerr << "Error: Out of memory.\n";
-    delete[] matrix;
+    delete[] dynamicArray;
     return 1;
   }
+  delete[] dynamicArray;
+  return 0;
 }
+
