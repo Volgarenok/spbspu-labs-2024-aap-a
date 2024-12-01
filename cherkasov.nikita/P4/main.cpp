@@ -3,7 +3,8 @@
 #include <getLine.h>
 #include "newLetter.h"
 
-int main() {
+int main()
+{
   char* input = cherkasov::inputLine(std::cin);
   if (!input)
   {

@@ -1,6 +1,6 @@
 #include "getLine.h"
 #include <iostream>
-#include <new>
+#include <cstring>
 
 char* cherkasov::inputLine(std::istream& in)
 {
@@ -26,7 +26,7 @@ char* cherkasov::inputLine(std::istream& in)
     if (length >= capacity)
     {
       size_t newCapacity = capacity * 2;
-      char* newBuffer = newArrray(buffer, newCapacity);
+      char* newBuffer = cherkasov::newArray(buffer, newCapacity);
       if (!newBuffer)
       {
         return nullptr;
@@ -39,7 +39,7 @@ char* cherkasov::inputLine(std::istream& in)
   return buffer;
 }
 
-char* cherkasov::newArrray(char* oldArray, size_t newCapacity)
+char* cherkasov::newArray(char* oldArray, size_t newCapacity)
 {
   char* newArray = new (std::nothrow) char[newCapacity];
   if (!newArray)
@@ -48,10 +48,7 @@ char* cherkasov::newArrray(char* oldArray, size_t newCapacity)
     std::cerr << "Error: Fail to allocate memory.\n";
     return nullptr;
     }
-  for (size_t i = 0; oldArray[i] != '\0'; ++i)
-  {
-    newArray[i] = oldArray[i];
-  }
+  std::strcpy(newArray, oldArray);
   delete[] oldArray;
   return newArray;
 }
