@@ -19,7 +19,7 @@ char *shabalin::removeVowels(char *string)
   char *result = string;
   for (char *current = string; *current != '\0'; ++current)
   {
-    if (shabalin::checkSymbol(*current))
+    if (checkSymbol(*current))
     {
       *result++ = *current;
     }
