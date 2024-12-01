@@ -1,4 +1,5 @@
 #include "isExpression.hpp"
+
 namespace
 {
   const char* has_expression(const char* str);
@@ -44,12 +45,12 @@ namespace
     if (following)
     {
       return following;
-    {
+    }
     following = has_y(str);
     if (following)
     {
       return following;
-    {
+    }
     following = has_z(str);
     return following;
   }
