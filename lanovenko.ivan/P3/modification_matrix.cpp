@@ -38,3 +38,4 @@ void lanovenko::editToSpiral(int* matrix, size_t rows, size_t cols)
     ++count;
   }
 }
+
