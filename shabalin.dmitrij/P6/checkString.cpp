@@ -100,7 +100,7 @@ namespace
 }
 
 bool shabalin::func(const char * str)
-{ 
+{
   if (!str)
   {
     return false;
