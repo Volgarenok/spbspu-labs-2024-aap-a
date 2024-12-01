@@ -1,5 +1,5 @@
-#ifndef STRING_HPP
-#define STRING_HPP
+#ifndef RMV_VOW_HPP
+#define RMV_VOW_HPP
 #include <cstddef>
 #include <fstream>
 

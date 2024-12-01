@@ -1,4 +1,4 @@
-#include "myOwnString.hpp"
+#include "rmv_vow.hpp"
 
 char* lebedev::getLine(std::istream& in, size_t& capacity, char endChar)
 {

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "myOwnString.hpp"
+#include "rmv_vow.hpp"
 
 int main()
 {
