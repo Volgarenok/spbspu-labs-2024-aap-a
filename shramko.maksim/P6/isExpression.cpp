@@ -121,7 +121,7 @@ namespace
       }
       return proceed;
     }
-    if (const char* next_trh = has_symbol(following, '('))
+    if (const char* next_trh = has_symbol(next, '('))
     {
       const char* proceed = has_multi(next_trh);
       if (!proceed)
@@ -130,7 +130,7 @@ namespace
       }
       if (const char* proceed_two = has_symbol(proceed, '+'))
       {
-        const char* next_term = has_term(proceed2);
+        const char* next_term = has_term(proceed_two);
         if (!next_term || !has_symbol(next_term, ')'))
         {
           return nullptr;
