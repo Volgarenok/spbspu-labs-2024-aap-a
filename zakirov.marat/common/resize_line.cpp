@@ -1,5 +1,5 @@
 #include "resize_line.hpp"
-#include <iostream>
+#include <cstddef>
 
 char * zakirov::expand_line(char const * regular_line, size_t real_lenght, size_t add_length)
 {
@@ -34,6 +34,10 @@ char * zakirov::get_line(std::istream & in, size_t step)
 {
   size_t start = 1, finish = 1;
   char * line = static_cast< char * >(malloc(sizeof(char)));
+  if (line == nullptr)
+  {
+    return line;
+  }
   char last_symbol = '\0';
   in >> last_symbol;
   line[0] = last_symbol;
