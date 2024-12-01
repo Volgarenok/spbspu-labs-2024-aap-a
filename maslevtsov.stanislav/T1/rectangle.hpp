@@ -3,17 +3,20 @@
 
 #include "shape.hpp"
 
-struct Rectangle: Shape
+namespace maslevtsov
 {
-public:
-  double getArea() override;
-  rectangle_t getFrameRect() override;
-  rectangle_t move(point_t pnt) override;
-  rectangle_t move(double dx, double dy) override;
-  rectangle_t scale(double k) override;
+  struct Rectangle: Shape
+  {
+  public:
+    double getArea() override;
+    rectangle_t getFrameRect() override;
+    void move(point_t pnt) override;
+    void move(double dx, double dy) override;
+    void scale(double k) override;
 
-private:
-  rectangle_t rect_;
-};
+  private:
+    rectangle_t rect_;
+  };
+}
 
 #endif
