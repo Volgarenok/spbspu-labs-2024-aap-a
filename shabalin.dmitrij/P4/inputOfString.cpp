@@ -24,6 +24,11 @@ char *shabalin::inputOfString(std::istream &input, char end)
     {
       sizeOfString *= 2;
       char *intermediateString = reinterpret_cast< char* >(malloc(sizeOfString));
+      if (intermediateString == nullptr)
+      {
+        free(initialString);
+        return intermediateString;
+      }
       if (!intermediateString)
       {
         free(initialString);
