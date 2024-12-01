@@ -8,8 +8,7 @@
 
 int main()
 {
-  char *arr = nullptr;
-  arr = guseynov::getLine(std::cin);
+  char *arr = guseynov::getLine(std::cin);
   if (arr == nullptr)
   {
     return 1;
