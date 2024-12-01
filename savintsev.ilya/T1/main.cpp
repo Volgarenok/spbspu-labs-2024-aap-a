@@ -6,8 +6,12 @@
 #include "rectangle.hpp"
 
 //CONCAVE COMPLEXQUAD
+namespace savintsev
+{
+  bool readDescription(double * numbers, size_t amt, const char * sep, bool &erw, bool &ern);
+}
 
-bool readDescription(double * numbers, size_t amt, const char * sep, bool &erw, bool &ern)
+bool savintsev::readDescription(double * numbers, size_t amt, const char * sep, bool &erw, bool &ern)
 {
   char * pEnd = nullptr;
   char * token = nullptr;
@@ -52,7 +56,6 @@ int main()
     }
     if (line[0] == '\0')
     {
-      //std::cerr << "One of the lines is empty\n";
       delete[] line;
       continue;
     }
@@ -62,28 +65,41 @@ int main()
     if (!std::strcmp(token, "RECTANGLE"))
     {
       double numbers[4] = {0., 0., 0., 0.};
-      if (!readDescription(numbers, 4, separator, is_error_was, is_error_now))
+      if (!savintsev::readDescription(numbers, 4, separator, is_error_was, is_error_now))
       {
         delete[] line;
         continue;
       }
       std::cout << "class\n";
-      point_t p1 = {numbers[0], numbers[1]};
-      point_t p2 = {numbers[2], numbers[3]};
+      savintsev::point_t p1 = {numbers[0], numbers[1]};
+      savintsev::point_t p2 = {numbers[2], numbers[3]};
       p1.x = p2.x;
       p2.x = p1.x;
+      savintsev::Rectangle debil(p1, p2);
       delete[] line;
       continue;
     }
     if (!std::strcmp(token, "CONCAVE"))
     {
       double numbers[8] = {0., 0., 0., 0., 0., 0., 0., 0.};
-      if (!readDescription(numbers, 8, separator, is_error_was, is_error_now))
+      if (!savintsev::readDescription(numbers, 8, separator, is_error_was, is_error_now))
       {
         delete[] line;
         continue;
       }
       std::cout << "KRUTAKk!111\n";
+      delete[] line;
+      continue;
+    }
+    if (!std::strcmp(token, "COMPLEXQUAD"))
+    {
+      double numbers[8] = {0., 0., 0., 0., 0., 0., 0., 0.};
+      if (!savintsev::readDescription(numbers, 8, separator, is_error_was, is_error_now))
+      {
+        delete[] line;
+        continue;
+      }
+      std::cout << "SO COOL!!!1111!\n";
       delete[] line;
       continue;
     }
@@ -100,6 +116,6 @@ int main()
   }
   if (is_error_was)
   {
-    std::cout << "BILA EROR\n";
+    std::cerr << "BILA EROR\n";
   }
 }
