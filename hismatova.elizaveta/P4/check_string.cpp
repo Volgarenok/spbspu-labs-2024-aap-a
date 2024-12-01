@@ -16,7 +16,7 @@ void hismatova::uniqueChar(const char* str1, const char* str2, char* result)
     }
     if (std::isupper(str1[i]))
     {
-      arr[ascii1 + 32] = true;
+      arr[std::tolower(str1[i])] = true;
     }
   }
   for (size_t i = 0; str2[i] != '\0'; ++i)
@@ -28,7 +28,7 @@ void hismatova::uniqueChar(const char* str1, const char* str2, char* result)
     }
     if (std::isupper(str2[i]))
     {
-      arr[ascii2 + 32] = true;
+      arr[std::tolower(str2[i])] = true;
     }
   }
   size_t ind = 0;
