@@ -4,142 +4,79 @@
 
 namespace averenkov
 {
-  bool hasDigit(char c);
-  bool hasLetter(char c);
-  bool hasUnsignedInt(const char* str, size_t& index);
-  bool hasIdentifier(const char* str, size_t& index);
-  bool hasRealNumber(const char* str, size_t& index);
-  bool hasFactor(const char* str, size_t& index);
-  bool hasTerm(const char* str, size_t& index);
-  bool hasExpression(const char* str, size_t& index);
+  bool hasExpression(char* str, size_t& index);
+  bool hasTerm(char* str, size_t& index);
+  bool hasFactor(char* str, size_t& index);
 }
 
-bool averenkov::hasDigit(char c)
+bool averenkov:hasExpession(char* str, size_t& index)
 {
-  return c >= '0' && c <= '9';
-}
-bool averenkov::hasLetter(char c)
-{
-  return (c >= 'a' && c <= 'z');
-}
-bool averenkov::hasUnsignedInt(const char* str, size_t& index)
-{
-  if (!averenkov::hasDigit(str[index]))
-  {
-    return false;
-  }
-  index++;
- return str[index] == '\0' || averenkov::hasUnsignedInt(str, index);
-}
-bool averenkov::hasIdentifier(const char* str, size_t& index)
-{
-  if (averenkov::hasLetter(str[index]))
-  {
-    index++;
-    return true;
-  }
-  return false;
-}
-bool averenkov::hasRealNumber(const char* str, size_t& index)
-{
-  if (str[index] == '+' || str[index] == '-')
-  {
-    index++;
-  }
-  if (!averenkov::hasUnsignedInt(str, index))
-  {
-    return false;
-  }
-  if (str[index] == '.')
-  {
-    index++;
-    if (!averenkov::hasUnsignedInt(str, index))
-    {
-      return false;
-    }
-  }
-  if (str[index] == 'E' || str[index] == 'e')
-  {
-    index++;
-    if (str[index] == '+' || str[index] == '-')
-    {
-      index++;
-    }
-    if (!averenkov::hasUnsignedInt(str, index))
-    {
-      return false;
-    }
-  }
-  return true;
-}
-bool averenkov::hasFactor(const char* str, size_t& index)
-{
-  size_t start = index;
-  if (hasRealNumber(str, index))
-  {
-    return true;
-  }
-  if (averenkov::hasUnsignedInt(str, index))
-  {
-     return true;
-  }
-  index = start;
-  if (averenkov::hasIdentifier(str, index))
-  {
-    return true;
-  }
-  index = start;
-  if (str[index] == '(')
-  {
-    index++;
-    if (averenkov::hasExpression(str, index) && str[index] == ')')
-    {
-      index++;
-      return true;
-    }
-  }
-  index = start;
-  return false;
-}
-
-bool averenkov::hasTerm(const char* str, size_t& index)
-{
-  if (!averenkov::hasFactor(str, index))
-  {
-     return false;
-  }
-  if (str[index] == '*' || str[index] == '/')
-  {
-    index++;
-    return averenkov::hasTerm(str, index);
-  }
-  return true;
-}
-
-bool averenkov::hasExpression(const char* str, size_t& index)
-{
-  size_t start = index;
-  if (!averenkov::hasTerm(str, index))
+  if (!averenkov:hasTerm(str, index))
   {
     return false;
   }
   while (str[index] == '+' || str[index] == '-')
   {
     index++;
-    if (!averenkov::hasTerm(str, index))
+    if (!averenkov:hasExpession(str, index))
     {
-      index = start;
       return false;
     }
   }
   return true;
 }
-bool averenkov::hasValidExpression(const char* str)
+
+bool averenkov:hasTerm(char* str, size_t& index)
+{
+  if (!averenkov::hasFactor(str, index))
+  {
+    return false;
+  }
+  while (str[index] == '*' || str[index] == '/')
+  {
+    index++;
+    if (!averenkov:hasTerm(str, index))
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool averenkov::hasFactor(char* str, size_t& index)
+{
+  if (str[index] == '(')
+  {
+    index++;
+    if (!averenkov:hasExpession(str, index))
+    {
+      return false;
+    }
+    if (str[index] == ')')
+    {
+      index++;
+      return true;
+    }
+    return false;
+  }
+  else if (isdigit(str[index]))
+  {
+    while (isdigit(str[index]))
+    {
+      index++;
+    }
+    return true;
+  }
+  return false;
+}
+
+bool averenkov::parse(char* str)
 {
   size_t index = 0;
-  if (averenkov::hasExpression(str, index) && str[index] == '\0')
+  if (averenkov:hasExpession(str, index) && str[index] == '\0')
   {
     return true;
   }
   return false;
 }
+

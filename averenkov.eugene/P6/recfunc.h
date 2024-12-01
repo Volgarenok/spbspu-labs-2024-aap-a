@@ -3,7 +3,8 @@
 
 namespace averenkov
 {
-  bool hasValidExpression(const char* str);
+  bool parse(char* str);
 }
+
 
 #endif
