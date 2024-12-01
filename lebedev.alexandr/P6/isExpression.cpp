@@ -40,3 +40,41 @@ bool hasNumber(const char** str)
   }
   return result;
 }
+
+bool hasMultiplier(const char** str)
+{
+  return hasNumber(str) || hasID(str);
+}
+
+bool hasTerm(const char** str)
+{
+  if (hasMultiplier(str))
+  {
+    if (**str == '*' || **str == '/')
+    {
+      (*str)++;
+      return hasTerm(str);
+    }
+    return true;
+  }
+  return false;
+}
+
+bool lebedev::hasExpression(const char** str)
+{
+  if (hasTerm(str))
+  {
+    if ((**str == '+') || (**str == '-'))
+    {
+      (*str)++;
+      return hasExpression(str);
+    }
+    return true;
+  }
+  return false;
+}
+
+bool lebedev::isExpression(const char* str)
+{
+  return (hasExpression(&str) && (*str == '\0'));
+}
