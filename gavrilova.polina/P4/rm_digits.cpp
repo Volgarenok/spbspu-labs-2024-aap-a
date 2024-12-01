@@ -2,7 +2,7 @@
 #include <cstddef>
 #include <cctype>
 
-char* gavrilova::rm_digits (const char* original, char* new_str, size_t len)
+char* gavrilova::rm_digits(const char* original, char* new_str, size_t len)
 {
   if (original == nullptr || new_str == nullptr) {
     return nullptr;

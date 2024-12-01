@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <inputStr.hpp>
 #include "rm_digits.hpp"
