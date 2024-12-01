@@ -17,6 +17,12 @@ int main()
     delete[] input;
     return 0;
   }
+  if (input[0] == '\0')
+  {
+    std::cerr << "The line is empty!\n";
+    delete[] input;
+    return 1;
+  }
   const char oldChar = 'c';
   const char newChar = 'b';
   char* result = cherkasov::newLetter(input, oldChar, newChar);

@@ -28,7 +28,13 @@ char* cherkasov::inputLine(std::istream& in)
      buffer = newBuffer;
      capacity = newCapacity;
     }
-  buffer[length++] = ch;
+    buffer[length++] = ch;
+    if (length == 0)
+    {
+      std::cerr << "Error: Empty input.\n";
+      delete[] buffer;
+      return nullptr;
+    }
   }
   buffer[length] = '\0';
   return buffer;
@@ -43,7 +49,7 @@ char* cherkasov::newArray(char* oldArray, size_t newCapacity)
     std::cerr << "Error: Fail to allocate memory.\n";
     return nullptr;
     }
-  std::strcpy(newArray, oldArray);
+  std::strncpy(newArray, oldArray, newCapacity - 1);
   newArray[newCapacity - 1] = '\0';
   delete[] oldArray;
   return newArray;
