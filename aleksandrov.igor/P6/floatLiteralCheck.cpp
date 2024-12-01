@@ -1,7 +1,17 @@
 #include "floatLiteralCheck.h"
 #include <cctype>
 
-const char* aleksandrov::isSymbol(const char* str, const char c)
+namespace aleksandrov
+{
+  const char* isSymbol(const char* str, char c);
+  const char* isSign(const char* str);
+  const char* isDigit(const char* str);
+  const char* isUnsignedInt(const char* str);
+  const char* isNumberOrder(const char* str);
+  const char* isMantissa(const char* str);
+}
+
+const char* aleksandrov::isSymbol(const char* str, char c)
 {
   return (*str == c) ? (str + 1) : nullptr;
 }
