@@ -7,6 +7,7 @@ namespace averenkov
   bool hasExpression(char* str, size_t& index);
   bool hasTerm(char* str, size_t& index);
   bool hasFactor(char* str, size_t& index);
+  bool hasNumber(char* str, size_t& index);
 }
 
 bool averenkov::hasExpression(char* str, size_t& index)
@@ -43,31 +44,51 @@ bool averenkov::hasTerm(char* str, size_t& index)
   return true;
 }
 
-bool averenkov::hasFactor(char* str, size_t& index)
-{
-  if (str[index] == '(')
+bool averenkov::hasNumber(char* str, size_t& index) {
+  bool hasDigits = false;
+  if (str[index] == '+' || str[index] == '-')
   {
     index++;
-    if (!averenkov::hasExpression(str, index))
-    {
-      return false;
-    }
-    if (str[index] == ')')
-    {
-      index++;
-      return true;
-    }
-    return false;
   }
-  else if (isdigit(str[index]))
+  while (std::isdigit(str[index]))
   {
-    while (isdigit(str[index]))
+    index++;
+    hasDigits = true;
+  }
+  if (str[index] == '.')
+  {
+    index++;
+    while (std::isdigit(str[index]))
+    {
+      index++;
+      hasDigits = true;
+    }
+  }
+  if ((str[index] == 'e' || str[index] == 'E') && hasDigits)
+  {
+    index++;
+    if (str[index] == '+' || str[index] == '-')
     {
       index++;
     }
+    hasDigits = false;
+    while (std::isdigit(str[index]))
+    {
+      index++;
+      hasDigits = true;
+    }
+  }
+  return hasDigits;
+}
+
+bool averenkov::hasFactor(char* str, size_t& index)
+{
+  if (std::isalpha(str[index]))
+  {
+    index++;
     return true;
   }
-  return false;
+  return averenkov::hasNumber(str, index);
 }
 
 bool averenkov::parse(char* str)
