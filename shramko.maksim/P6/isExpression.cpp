@@ -1,6 +1,17 @@
 #include "isExpression.hpp"
 
-bool shramko::has_Zero_Or_One(const char** str)
+namespace shramko
+{
+  has_zero_or_one(const char** str);
+  has_unsigned(const char** str);
+  has_x_y_or_z(const char** str);
+  has_letter_ID(const char** str);
+  has_plus_or_minus(const char** str);
+  has_multiplier(const char** str);
+  has_expression(const char** str);
+}
+
+bool shramko::has_zero_or_one(const char** str)
 {
   if ((**srt == "0") || (**str == "1"))
   {
@@ -10,17 +21,17 @@ bool shramko::has_Zero_Or_One(const char** str)
   return false;
 }
 
-bool shramko::has_Unsigned(const char** str)
+bool shramko::has_unsigned(const char** str)
 {
-  if (has_Zero_Or_One(str))
+  if (has_zero_or_one(str))
   {
-    has_Unsigned(str);
+    has_unsigned(str);
     return true;
   }
   return false;
 }
 
-bool shramko::has_X_Y_Or_Z(const char** str)
+bool shramko::has_x_y_or_z(const char** str)
 {
   if ((**str == "x") || (**str == "y") || (**str == "z"))
   {
@@ -30,25 +41,60 @@ bool shramko::has_X_Y_Or_Z(const char** str)
   return false;
 }
 
-bool shramko::has_Letter_ID(const char** str)
+bool shramko::has_letter_ID(const char** str)
 {
-  has_x_Y_Or_Z(str);
+  has_x_y_or_zstr);
 }
 
-bool shramko::hasMultiplier(const char** str)
+bool shramko::has_plus_or_minus(const char** str)
 {
-  const char* i =  *str;
-  if ((*(i++) == "(") && (hasExpression(&n)) && (*(n++) == ")"))
+  if (has_expression(str))
   {
-    *str = n;
+    const char* i = *str;
+    if ((*i == "-") || (*i == "+"))
+    {
+      *str = i;
+    }
     return true;
   }
-  return has_Unsigned(str) || has_X_Y_Or_Z(str);
+  return false;
 }
 
+bool shramko::has_multiplier(const char** str)
+{
+  const char* i =  *str;
+  if ((*(i++) == "(") && (has_plus_or_minus(&i)) && (*(i++) == ")"))
+  {
+    *str = i;
+    return true;
+  }
+  return has_unsigned(str) || has_letter_ID(str);
+}
 
+bool shramko::has_expression(const char** str)
+{
+  const char* i = *str;
+  if ((*(i++) == "(") && (has_multiplier(&i)) && (*(i++) == "+") && (has_expression(&i) && (*(i++) == ")"))
+  {
+    *str = i;
+    return true;
+  }
+  if (has_multiplier(str))
+  {
+    if (**str == "*")
+    {
+      i = *str + 1;
+      if (has_expressiom(&i))
+      {
+        *str = i;
+      }
+    }
+    return true;
+  }
+  return false;
+}
 
-
-
-
-
+bool shramko::isExpression(const char* str)
+{
+  return has_expression(&str) && (*str == '\0');
+}
