@@ -14,12 +14,7 @@ void shabalin::inputMatrix(std::istream &input, int *matrix, size_t countOfEleme
 
 void shabalin::outputMatrix(std::ostream &output, const int *matrix, size_t rows, size_t cols)
 {
-  if (rows == 0 && cols == 0)
-  {
-    output << "0 0";
-    return;
-  }
-  else if ((!rows) && (!cols))
+  if ((!rows) && (!cols))
   {
     throw std::invalid_argument("Such matrix can not exist");
   }
