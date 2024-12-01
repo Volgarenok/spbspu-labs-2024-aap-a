@@ -1,5 +1,5 @@
 #include "resize_line.hpp"
-#include <iostream>
+#include <cstddef>
 
 char * zakirov::expand_line(char const * regular_line, size_t real_lenght, size_t add_length)
 {
