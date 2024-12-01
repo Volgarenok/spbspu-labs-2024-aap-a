@@ -32,7 +32,7 @@ bool shramko::has_x_y_or_z(const char** str)
 
 bool shramko::has_letter_ID(const char** str)
 {
-  has_x_y_or_z(str);
+  return has_x_y_or_z(str);
 }
 
 bool shramko::has_plus_or_minus(const char** str)
@@ -40,9 +40,13 @@ bool shramko::has_plus_or_minus(const char** str)
   if (has_expression(str))
   {
     const char* i = *str;
-    if ((*i == '-') || (*i == '+'))
+    if ((*i == '+') || (*i == '-'))
     {
-      *str = i;
+      i++;
+      if (has_plus_or_minus(&i))
+      {
+        *str = i;
+      }
     }
     return true;
   }
@@ -85,5 +89,5 @@ bool shramko::has_expression(const char** str)
 
 bool shramko::isExpression(const char* str)
 {
-  return has_expression(&str) && (*str == '\0');
+  return has_plus_or_minus(&str) && (*str == '\0');
 }
