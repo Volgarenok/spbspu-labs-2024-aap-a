@@ -30,8 +30,8 @@ namespace
 
   const char* has_one_or_zero(const char* str)
   {
-    const char* following = has_symbol(str, '1');
-    return following ? following : has_symbol(str, '0');
+    const char* next = has_symbol(str, '1');
+    return next ? next : has_symbol(str, '0');
   }
 
   const char* has_following_id(const char* str)
@@ -41,18 +41,18 @@ namespace
       return str;
     }
 
-    const char* following = has_x(str);
-    if (following)
+    const char* next = has_x(str);
+    if (next)
     {
-      return following;
+      return next;
     }
-    following = has_y(str);
-    if (following)
+    next = has_y(str);
+    if (next)
     {
-      return following;
+      return next;
     }
-    following = has_z(str);
-    return following;
+    next = has_z(str);
+    return next;
   }
 
   const char* has_unsigned_int(const char* str)
@@ -61,16 +61,16 @@ namespace
     {
       return str;
     }
-    const char* following = has_one_or_zero(str);
-    if (!following)
+    const char* next = has_one_or_zero(str);
+    if (!next)
     {
       return nullptr;
     }
-    if (const char* proceed = has_unsigned_int(following))
+    if (const char* proceed = has_unsigned_int(next))
     {
       return proceed;
     }
-    return following;
+    return next;
   }
 
   const char* has_multi(const char* str)
@@ -79,22 +79,22 @@ namespace
     {
       return str;
     }
-    const char* following = has_unsigned_int(str);
-    if (following)
+    const char* next = has_unsigned_int(str);
+    if (next)
     {
-      return following;
+      return next;
     }
-    following = has_following_id(str);
-    if (following)
+    next = has_following_id(str);
+    if (next)
     {
-      return following;
+      return next;
     }
     if ((str = has_symbol(str, '(')))
     {
-      following = has_expression(str);
-      if ((following = has_symbol(str, ')')))
+      next = has_expression(str);
+      if ((next = has_symbol(str, ')')))
       {
-        return following;
+        return next;
       }
       return nullptr;
     }
@@ -107,43 +107,43 @@ namespace
     {
       return str;
     }
-    const char* following = has_multi(str);
-    if (!following)
+    const char* next = has_multi(str);
+    if (!next)
     {
-      return following;
-    }
-    if (const char* nextFol = has_symbol(following, '*'))
-    {
-      const char* next = has_term(nextFol);
-      if (!next)
-      {
-        return nullptr;
-      }
       return next;
     }
-    if (const char* ay_nextFol = has_symbol(following, '('))
+    if (const char* next_two = has_symbol(next, '*'))
     {
-      const char* next = has_multi(ay_nextFol);
-      if (!next)
+      const char* proceed = has_term(next_two);
+      if (!proceed)
       {
         return nullptr;
       }
-      if (const char* next2 = has_symbol(next, '+'))
+      return proceed;
+    }
+    if (const char* next_trh = has_symbol(following, '('))
+    {
+      const char* proceed = has_multi(next_trh);
+      if (!proceed)
       {
-        const char* next_term = has_term(next2);
+        return nullptr;
+      }
+      if (const char* proceed_two = has_symbol(proceed, '+'))
+      {
+        const char* next_term = has_term(proceed2);
         if (!next_term || !has_symbol(next_term, ')'))
         {
           return nullptr;
         }
         return next_term;
       }
-      if (!has_symbol(following, ')'))
+      if (!has_symbol(next, ')'))
       {
         return nullptr;
       }
-      return next;
+      return proceed;
     }
-    return following;
+    return next;
   }
 
   const char* has_expression(const char* str)
@@ -152,19 +152,19 @@ namespace
     {
       return str;
     }
-    const char* following = has_term(str);
-    if (following)
+    const char* next = has_term(str);
+    if (next)
     {
-      if (const char* nextFol = has_symbol(following, '+'))
+      if (const char* next_two = has_symbol(next, '+'))
       {
-        return has_expression(nextFol);
+        return has_expression(next_two);
       }
-      else if (const char* nextFol = has_symbol(following, '-'))
+      else if (const char* next_two = has_symbol(next, '-'))
       {
-        return has_expression(nextFol);
+        return has_expression(next_two);
       }
     }
-    return following;
+    return next;
   }
 }
 
