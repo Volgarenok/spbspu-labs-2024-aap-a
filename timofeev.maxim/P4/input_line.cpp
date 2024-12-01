@@ -4,7 +4,7 @@
 char* timofeev::input_line(std::istream& in)
 {
   size_t capacity = 40;
-  char* line = reinterpret_cast< char* >(malloc(sizeof(char) * (capacity + 1)));
+  char* line = reinterpret_cast< char* >(malloc(capacity + 1));
   if (line == nullptr)
   {
     return nullptr;
