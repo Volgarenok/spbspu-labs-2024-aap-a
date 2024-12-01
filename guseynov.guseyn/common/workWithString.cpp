@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <exception>
 
-char * guseynov::expandMassive(const char *arr, size_t & size, size_t step)
+char * guseynov::expandMassive(const char *arr, size_t &size, size_t step)
 {
   char *newarr = reinterpret_cast< char* >(malloc(size + step + 1));
   if (newarr != nullptr)
