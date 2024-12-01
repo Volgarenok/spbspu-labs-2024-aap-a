@@ -1,6 +1,5 @@
 #include "checkString.hpp"
 #include <cctype>
-
 namespace
 {
   const char *is_sign(const char *str)
