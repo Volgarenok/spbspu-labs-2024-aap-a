@@ -8,6 +8,7 @@ namespace averenkov
   bool hasLetter(char c);
   bool hasUnsignedInt(const char* str, size_t& index);
   bool hasIdentifier(const char* str, size_t& index);
+  bool hasRealNumber(const char* str, size_t& index);
   bool hasFactor(const char* str, size_t& index);
   bool hasTerm(const char* str, size_t& index);
   bool hasExpression(const char* str, size_t& index);
@@ -39,9 +40,45 @@ bool averenkov::hasIdentifier(const char* str, size_t& index)
   }
   return false;
 }
+bool averenkov::hasRealNumber(const char* str, size_t& index)
+{
+  if (str[index] == '+' || str[index] == '-')
+  {
+    index++;
+  }
+  if (!averenkov::hasUnsignedInt(str, index))
+  {
+    return false;
+  }
+  if (str[index] == '.')
+  {
+    index++;
+    if (!averenkov::hasUnsignedInt(str, index))
+    {
+      return false;
+    }
+  }
+  if (str[index] == 'E' || str[index] == 'e')
+  {
+    index++;
+    if (str[index] == '+' || str[index] == '-')
+    {
+      index++;
+    }
+    if (!averenkov::hasUnsignedInt(str, index))
+    {
+      return false;
+    }
+  }
+  return true;
+}
 bool averenkov::hasFactor(const char* str, size_t& index)
 {
   size_t start = index;
+  if (hasRealNumber(str, index))
+  {
+    return true;
+  }
   if (averenkov::hasUnsignedInt(str, index))
   {
      return true;
@@ -106,4 +143,3 @@ bool averenkov::hasValidExpression(const char* str)
   }
   return false;
 }
-
