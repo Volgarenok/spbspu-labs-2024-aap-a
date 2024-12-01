@@ -68,18 +68,17 @@ int main(int argc, char *argv[])
   {
     try
     {
-      dynamicMatrix = new int[countOfElements];
+      matrix = new int[countOfElements];
     }
     catch (const std::bad_alloc &e)
     {
       std::cerr << "Error" << e.what() << "\n";
-      delete[] dynamicMatrix;
+      delete[] matrix;
       return 2;
     }
   }
   try
   {
-    matrix = dynamicMatrix;
     shabalin::inputMatrix(input, matrix, countOfElements);
     shabalin::spiralDecrease(matrix, rows, cols);
     shabalin::outputMatrix(output, matrix, rows, cols);
@@ -91,11 +90,15 @@ int main(int argc, char *argv[])
   catch (const std::exception &e)
   {
     std::cerr << e.what() << '\n';
-    delete[] dynamicMatrix;
-    delete[] matrix;
+    if (task == 2)
+    {
+      delete[] matrix;
+    }
     return 2;
   }
-  delete[] matrix;
-  delete[] dynamicMatrix;
+  if (task == 2)
+  {
+    delete[] matrix;
+  }
   return 0;
 }
