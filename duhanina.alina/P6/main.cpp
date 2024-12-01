@@ -16,14 +16,7 @@ int main()
     delete[] str;
     return 1;
   }
-  if (duhanina::isReal(str))
-  {
-    std::cout << "true\n";
-  }
-  else
-  {
-    std::cout << "false\n";
-  }
+  std::cout << std::boolalpha << duhanina::isReal(str) << "\n";
   delete[] str;
   return 0;
 }

@@ -2,6 +2,14 @@
 #include <cctype>
 #include <cstring>
 
+namespace duhanina
+{
+  bool isSign(char c);
+  bool isUnsignedInt(const char* str, size_t& index);
+  bool isMantissa(const char* str, size_t& index);
+  bool isOrder(const char* str, size_t& index);
+}
+
 bool duhanina::isSign(char c)
 {
   return c == '+' || c == '-';
@@ -16,7 +24,7 @@ bool duhanina::isUnsignedInt(const char* str, size_t& index)
   index++;
   if (std::isdigit(str[index]))
   {
-    return duhanina::isUnsignedInt(str, index);
+    return isUnsignedInt(str, index);
   }
   return true;
 }
@@ -26,9 +34,9 @@ bool duhanina::isMantissa(const char* str, size_t& index)
   if (str[index] == '.')
   {
     index++;
-    return duhanina::isUnsignedInt(str, index);
+    return isUnsignedInt(str, index);
   }
-  return duhanina::isUnsignedInt(str, index);
+  return isUnsignedInt(str, index);
 }
 
 bool duhanina::isOrder(const char* str, size_t& index)
@@ -38,21 +46,21 @@ bool duhanina::isOrder(const char* str, size_t& index)
     return false;
   }
   index++;
-  if (duhanina::isSign(str[index]))
+  if (isSign(str[index]))
   {
     index++;
   }
-  return duhanina::isUnsignedInt(str, index);
+  return isUnsignedInt(str, index);
 }
 
 bool duhanina::isReal(const char* str)
 {
   size_t index = 0;
-  if (duhanina::isSign(str[index]))
+  if (isSign(str[index]))
   {
     index++;
   }
-  if (!duhanina::isMantissa(str, index))
+  if (!isMantissa(str, index))
   {
     return false;
   }
@@ -60,5 +68,5 @@ bool duhanina::isReal(const char* str)
   {
     return true;
   }
-  return duhanina::isOrder(str, index) && str[index] == '\0';
+  return isOrder(str, index) && str[index] == '\0';
 }
