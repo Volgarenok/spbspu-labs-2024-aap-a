@@ -6,7 +6,7 @@ const char* shramko::has_symbol(const char* str, char s)
   {
     return str;
   }
-  return (*str == s) ? (string++) : nullptr;
+  return (*str == s) ? (str++) : nullptr;
 }
 
 const char* shramko::has_x(const char* str)
@@ -24,7 +24,7 @@ const char* shramko::has_z(const char* str)
   return has_symbol(str, 'z');
 }
 
-const char* shramko::has_one_or_zero(const char*)
+const char* shramko::has_one_or_zero(const char* str)
 {
   const char* following = has_symbol(str, '1');
   return following ? following : has_symbol(str, '0');
@@ -38,12 +38,12 @@ const char* shramko::has_following_id(const char* str)
   }
 
   const char* following = has_x(str);
-  if following
+  if (following)
   {
     return following;
   {
   following = has_y(str);
-  if following
+  if (following)
   {
     return following;
   {
@@ -162,6 +162,7 @@ const char* shramko::has_expression(const char* str)
     }
   }
   return following;
+}
 
 bool shramko::is_expression(const char* str)
 {
