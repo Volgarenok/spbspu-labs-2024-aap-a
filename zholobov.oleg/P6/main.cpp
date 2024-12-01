@@ -1,6 +1,6 @@
 #include <iostream>
 #include <read_string.hpp>
-#include "is_match_pattern.hpp"
+#include "is_match_real.hpp"
 
 int main()
 {
@@ -14,6 +14,6 @@ int main()
     std::free(str);
     return 1;
   }
-  std::cout << std::boolalpha << zholobov::is_match_pattern(str) << "\n";
+  std::cout << std::boolalpha << zholobov::is_match_real(str) << "\n";
   std::free(str);
 }

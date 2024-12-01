@@ -1,6 +1,6 @@
 #include "read_string.hpp"
 #include <istream>
-#include "my_realloc.hpp"
+#include <realloc_memory.hpp>
 
 char* zholobov::read_string(std::istream& input)
 {
@@ -17,7 +17,7 @@ char* zholobov::read_string(std::istream& input)
     }
     buf[buf_pos++] = c;
     if ((buf_pos == buf_size) || (c == '\0')) {
-      char* new_str = my_realloc(str, str_pos, str_pos + buf_pos);
+      char* new_str = realloc_memory(str, str_pos, str_pos + buf_pos);
       if (new_str == nullptr) {
         std::free(str);
         return nullptr;

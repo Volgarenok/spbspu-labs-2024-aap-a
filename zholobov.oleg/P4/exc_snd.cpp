@@ -1,7 +1,6 @@
 #include "exc_snd.hpp"
 #include <cstdlib>
 #include <cstring>
-#include <my_realloc.hpp>
 
 char* zholobov::exc_snd(char* dst, const char* src, const char* excl_chars)
 {

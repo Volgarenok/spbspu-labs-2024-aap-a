@@ -1,4 +1,4 @@
-#include "is_match_pattern.hpp"
+#include "is_match_real.hpp"
 
 namespace {
 
@@ -75,7 +75,7 @@ namespace {
 
 }
 
-bool zholobov::is_match_pattern(const char* str)
+bool zholobov::is_match_real(const char* str)
 {
   auto next = is_real(str);
   return ((next != nullptr) && (*next == '\0'));
