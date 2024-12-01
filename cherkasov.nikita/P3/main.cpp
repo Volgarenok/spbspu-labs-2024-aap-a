@@ -59,14 +59,16 @@ int main(int argc, char* argv[])
       dynamicArray = new int[max];
       matrix = dynamicArray;
     }
+
   int result = cherkasov::readMatrix(inputFile, rows, cols,  matrix);
   if (result != 0)
   {
     delete[] dynamicArray;
     return result;
   }
-  int processResult = cherkasov::processMatrix(matrix, rows, cols);
-  bool isLowerTriangular = cherkasov::isLowerTriangular(matrix, rows, cols);
+
+  int processResult = cherkasov::countNonZeroDiagonals(matrix, rows, cols);
+  bool isMatrixLowerTriangular = cherkasov::isMatrixLowerTriangular(matrix, rows, cols);
   std::ofstream outFile(outputFile);
   if (!outFile)
   {
@@ -79,6 +81,21 @@ int main(int argc, char* argv[])
   outFile.close();
 
   cherkasov::freeMatrix(matrix, rows);
-  return 0;
-}
-
+    outFile << "Result: " << processResult << "\n";
+    if (isMatrixLowerTriangular)
+    {
+      outFile << "The matrix is lower triangular.\n";
+    }
+    else
+    {
+      outFile << "The matrix is not lower triangular.\n";
+    }
+  }
+  catch (const std::bad_alloc&)
+  {
+    std::cerr << "Error: Out of memory.\n";
+    delete[] dynamicArray;
+    return 1;
+  }
+  delete[] dynamicArray;
+  return 0
