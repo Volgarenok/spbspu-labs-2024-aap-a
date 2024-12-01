@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-#include <string>
+#include <iomanip>
 #include <newlineterminatedstr.h>
 #include "base-types.hpp"
 #include "rectangle.hpp"
@@ -10,6 +10,8 @@ int main()
   char * line = nullptr;
   const char * separator = " ";
   char * token = nullptr;
+  bool is_error_was = false;
+  bool is_error_now = false;
   while (!std::cin.eof())
   {
     line = savintsev::inputNewlineTerminatedStr(std::cin);
@@ -20,34 +22,54 @@ int main()
     }
     if (line[0] == '\0')
     {
-      std::cerr << "One of the lines is empty\n";
+      //std::cerr << "One of the lines is empty\n";
       delete[] line;
-      return 1;
+      continue;
     }
-    size_t wordsCounter = 0;
+    char * pEnd = nullptr;
     token = std::strtok(line, separator);
-    ++wordsCounter;
+    is_error_now = false;
     if (!std::strcmp(token, "RECTANGLE"))
     {
-      while (token)
+      double numbers[4] = {0., 0., 0., 0.};
+      for (size_t i = 0; i < 4; ++i)
       {
-        ++wordsCounter;
-        std::cout << token << '\n';
         token = std::strtok(nullptr, separator);
-        //std::cout << token << '\n';
-        //double num = std::strtod(token, NULL);
-        //if (!num)
-        //{
-        //  std::to_string(num) == token
-        //  if ()
-        //}
+        if (!token)
+        {
+          is_error_now = true;
+          is_error_was = true;
+          break;
+        }
+        numbers[i] = std::strtod(token, &pEnd);
+        if (*pEnd != '\0')
+        {
+          is_error_now = true;
+          is_error_was = true;
+          break;
+        }
       }
-      return 0;
+      if (std::strtok(nullptr, separator) || is_error_now)
+      {
+        delete[] line;
+        continue;
+      }
+      std::cout << "ZAEBOK\n";
+      point_t p1 = {numbers[0], numbers[1]};
+      point_t p2 = {numbers[2], numbers[3]};
+      p1.x = p2.x;
+      p2.x = p1.x;
+      delete[] line;
+      continue;
     }
     else
     {
-      std::cerr << "Wrong shape\n";
-      return 3;
+      delete[] line;
+      continue;
     }
+  }
+  if (is_error_was)
+  {
+    std::cout << "BILA EROR\n";
   }
 }
