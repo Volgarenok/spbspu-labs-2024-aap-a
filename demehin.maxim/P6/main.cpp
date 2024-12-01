@@ -1,7 +1,6 @@
 #include <string_utils.h>
 #include <ios>
 #include <iostream>
-#include "vocabs.h"
 #include "is_expr.h"
 
 int main()
