@@ -1,8 +1,6 @@
 #include "lattwo.h"
-#include <memory>
-#include <cstring>
 #include <cctype>
-#include <cstdlib>
+#include <cstddef>
 
 bool hasChar(const char* str, char ch)
 {

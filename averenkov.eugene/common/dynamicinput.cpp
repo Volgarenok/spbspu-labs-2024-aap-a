@@ -4,7 +4,7 @@
 #include <memory>
 #include <stdexcept>
 
-char* averenkov::arrayresize(const char* str, char* new_str)
+char* averenkov::stringcopy(const char* str, char* new_str)
 {
   for (size_t i = 0; str[i] != '\0'; ++i)
   {
@@ -37,11 +37,10 @@ char* averenkov::stringInput(std::istream& in)
       if (new_str == nullptr)
       {
         free(str);
-        free(new_str);
         in >> std::skipws;
         return nullptr;
       }
-      new_str = averenkov::arrayresize(str, new_str);
+      new_str = averenkov::stringcopy(str, new_str);
       free(str);
       str = new_str;
     }
