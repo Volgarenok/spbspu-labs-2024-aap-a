@@ -21,12 +21,6 @@ int main()
     delete[] str;
     return 1;
   }
-  if (str[0] == '\0')
-  {
-    std::cerr << "ERROR: empty string!\n";
-    delete[] str;
-    return 1;
-  }
 
   std::cout << std::boolalpha;
   std::cout << lebedev::isExpression(str) << '\n';
