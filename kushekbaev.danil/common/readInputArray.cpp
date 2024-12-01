@@ -38,7 +38,7 @@ char* kushekbaev::readInputArray(std::istream& input)
   }
   if (size == 0)
   {
-    str == nullptr
+    str == nullptr;
   }
   return str;
 }
