@@ -4,21 +4,21 @@
 namespace kushekbaev
 {
   const int & getElement(
-    int* matrix,
+    const int* matrix,
     size_t columns,
     size_t row,
     size_t column
   );
 
   bool isMinInRow(
-    int* matrix,
+    const int* matrix,
     size_t columns,
     size_t row,
     int element
   );
 
   bool isMaxInColumn(
-    int* matrix,
+    const int* matrix,
     size_t rows,
     size_t columns,
     size_t column,
@@ -26,7 +26,7 @@ namespace kushekbaev
   );
 }
 
-const int & getElement(
+const int & kushekbaev::getElement(
   const int* matrix,
   const size_t columns,
   const size_t row,
@@ -36,7 +36,7 @@ const int & getElement(
   return matrix[row * columns + column];
 }
 
-bool isMinInRow(
+bool kushekbaev::isMinInRow(
   const int* matrix,
   const size_t columns,
   const size_t row,
@@ -54,7 +54,7 @@ bool isMinInRow(
   return true;
 }
 
-bool isMaxInColumn(
+bool kushekbaev::isMaxInColumn(
   const int* matrix,
   const size_t rows,
   const size_t columns,
