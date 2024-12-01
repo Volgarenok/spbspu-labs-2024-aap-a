@@ -130,7 +130,7 @@ namespace
       }
       if (const char* scnd_next = has_symbol(next, '+'))
       {
-        const char* next_term = has_term(scnd_next)
+        const char* next_term = has_term(scnd_next);
         if (!next_term || !has_symbol(next_term, ')'))
         {
           return nullptr;
