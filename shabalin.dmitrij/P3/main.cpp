@@ -79,6 +79,7 @@ int main(int argc, char *argv[])
   }
   try
   {
+    matrix = dynamicMatrix;
     shabalin::inputMatrix(input, matrix, countOfElements);
     shabalin::spiralDecrease(matrix, rows, cols);
     shabalin::outputMatrix(output, matrix, rows, cols);
@@ -91,9 +92,10 @@ int main(int argc, char *argv[])
   {
     std::cerr << e.what() << '\n';
     delete[] dynamicMatrix;
+    delete[] matrix;
     return 2;
   }
-
+  delete[] matrix;
   delete[] dynamicMatrix;
   return 0;
 }
