@@ -4,7 +4,11 @@
 
 namespace kushekbaev
 {
-  int countSaddlePoints(const int* matrix, const size_t rows, const size_t columns);
+  int countSaddlePoints(
+    const int* matrix,
+    const size_t rows,
+    const size_t columns
+  );
 }
 
 #endif

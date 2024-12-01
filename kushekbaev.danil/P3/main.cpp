@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include "count_saddle_point.hpp"
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
   if (argc < 4)
   {
@@ -42,11 +42,12 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  size_t rows = 0, columns = 0;
+  size_t rows = 0;
+  size_t columns = 0;
   if (!(infile >> rows >> columns))
   {
-    std::cout << "Error reading matrix dimensions" << "\n";
-    return 0;
+    std::cerr << "Error reading matrix dimensions" << "\n";
+    return 1;
   }
 
   int* matrix = new int[rows * columns]();
@@ -75,6 +76,7 @@ int main(int argc, char **argv)
     {
       throw std::runtime_error("Error while opening output file\n");
     }
+
     outfile << saddle_points << "\n";
   }
   catch (const std::runtime_error& e)
@@ -84,17 +86,6 @@ int main(int argc, char **argv)
     return 1;
   }
 
-  saddle_points = kushekbaev::countSaddlePoints(matrix, rows, columns);
-
-  std::ofstream outfile(output_filename);
-  if (!outfile.is_open())
-  {
-    std::cerr << "Error while opening output file" << "\n";
-    delete[] matrix;
-    return 1;
-  }
-
-  outfile << saddle_points << "\n";
   delete[] matrix;
   return 0;
 }
