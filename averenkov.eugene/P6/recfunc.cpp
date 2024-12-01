@@ -1,5 +1,15 @@
 #include "recfunc.h"
 
+namespace averenkov
+{
+  bool hasTerm(const char* str);
+  bool hasFactor(const char* str);
+  bool hasUnsignedInt(const char* str);
+  bool hasIdentifier(const char* str);
+  bool hasDigit(char c);
+  bool hasLetter(char c);
+}
+
 bool averenkov::hasDigit(char c)
 {
   return c >= '0' && c <= '9';

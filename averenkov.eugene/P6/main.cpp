@@ -3,7 +3,7 @@
 #include "recfunc.h"
 int main() {
   char* input = nullptr;
-  input = averenkov::stringInput(std::cin, input);
+  input = averenkov::stringInput(std::cin);
   if(input[0] == '\0')
   {
     std::cerr << "Empty string";
@@ -16,7 +16,8 @@ int main() {
     return 1;
   }
   const char* ptr = input;
-  if (averenkov::hasExpression(ptr) && *ptr == '\0') {
+  if(averenkov::hasExpression(ptr) && *ptr == '\0')
+  {
     std::cout << "true\n";
   }
   else
