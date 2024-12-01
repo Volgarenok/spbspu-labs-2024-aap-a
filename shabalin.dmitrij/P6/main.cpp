@@ -12,12 +12,12 @@ int main()
     std::cerr << "Error with input\n";
     return 1;
   }
-  if (t[0] == '\0')
+  if (c[0] == '\0')
   {
     std::cerr << "Empty string\n";
-    free(t);
+    free(c);
     return 1;
   }
   std::cout << std::boolalpha << shabalin::func(t) << '\n';
-  free(t);
+  free(c);
 }

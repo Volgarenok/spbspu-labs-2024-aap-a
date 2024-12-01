@@ -1,5 +1,5 @@
-#include "checkString.hpp" 
-#include <cctype> 
+#include "checkString.hpp"
+#include <cctype>
 
 namespace
 {
@@ -108,4 +108,3 @@ bool shabalin::func(const char * str)
   const char *next = is_real(str);
   return next && (*next == '\0');
 }
-
