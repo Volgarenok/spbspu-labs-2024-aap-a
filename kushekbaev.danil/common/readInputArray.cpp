@@ -27,6 +27,12 @@ char* kushekbaev::readInputArray(std::istream& input)
       str[size++] = stop;
     }
     str[size] = '\0';
+
+    if (size == 0)
+    {
+      str = nullptr;
+    }
+
     input >> std::skipws;
   }
   catch (const std::bad_alloc& e)
@@ -34,10 +40,6 @@ char* kushekbaev::readInputArray(std::istream& input)
     std::cerr << "Error allocating memory";
     input >> std::skipws;
     delete[] str;
-    str = nullptr;
-  }
-  if (size == 0)
-  {
     str = nullptr;
   }
   return str;
