@@ -1,5 +1,9 @@
 #include "rectangle.hpp"
 
+maslevtsov::Rectangle::Rectangle(rectangle_t rect):
+  rect_(rect)
+{}
+
 double maslevtsov::Rectangle::getArea()
 {
   return rect_.width * rect_.height;

@@ -8,6 +8,7 @@ namespace maslevtsov
   struct Rectangle: Shape
   {
   public:
+    Rectangle(rectangle_t rect);
     double getArea() override;
     rectangle_t getFrameRect() override;
     void move(point_t pnt) override;
