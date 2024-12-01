@@ -1,20 +1,24 @@
+<<<<<<< HEAD:timofeev.maxim/common/input_line.cpp
 #include "all_for_input.h"
+=======
+#include "has_sam_set.h"
+#include <iostream>
+>>>>>>> master:timofeev.maxim/P4/input_line.cpp
 
 char* timofeev::input_line(std::istream& in)
 {
   size_t capacity = 40;
-  char* line = reinterpret_cast<char*>(malloc(sizeof(char) * (capacity + 1)));
+  char* line = reinterpret_cast< char* >(malloc(capacity + 1));
   if (line == nullptr)
   {
-    free(line);
     return nullptr;
   }
-  line[capacity] = '\0';
   line[0] = '0';
   in >> line[0];
   if (line[0] == '\0' || std::cin.eof())
   {
     free(line);
+    std::skipws(in);
     return nullptr;
   }
   size_t cur_writing_lit = 1;
@@ -26,7 +30,13 @@ char* timofeev::input_line(std::istream& in)
     {
       constexpr size_t memory_boost = 10;
       capacity += memory_boost;
-      char* new_line = timofeev::boost_size(capacity);
+      char* new_line = reinterpret_cast< char* >(malloc(capacity + 1));;
+      if (new_line == nullptr)
+      {
+        free(line);
+        std::skipws(in);
+        return nullptr;
+      }
       for (size_t i = 0; i < cur_writing_lit; i++)
       {
         new_line[i] = line[i];
