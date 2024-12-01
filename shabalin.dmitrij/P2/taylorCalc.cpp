@@ -33,7 +33,7 @@ void shabalin::output(double x, size_t k, double error)
   {
     std::cout << std::setw(clmn) << e.what();
   }
-  std::cout << std::setw(clmn) << std::cos(x) << "\n";
+  std::cout << std::setw(clmn) << std::cos(x);
 }
 
 void shabalin::finalOutput(double left, double right, double step, size_t k, double error)
@@ -41,6 +41,8 @@ void shabalin::finalOutput(double left, double right, double step, size_t k, dou
   for (auto i = left; i < right; i += step)
   {
     shabalin::output(i, k, error);
+    std::cout << "\n";
   }
   shabalin::output(right, k, error);
+  std::cout << "\n";
 }
