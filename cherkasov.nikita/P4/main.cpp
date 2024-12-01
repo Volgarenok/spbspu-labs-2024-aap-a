@@ -12,7 +12,7 @@ int main()
     std::cerr << "Memory allocation failure!\n";
     return 1;
   }
-  if (!isValidInput(input))
+  if (!cherkasov::isValidInput(input))
   {
     delete[] input;
     return 0;
