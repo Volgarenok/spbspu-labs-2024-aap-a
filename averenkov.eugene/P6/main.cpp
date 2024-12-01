@@ -1,6 +1,7 @@
 #include <iostream>
 #include <dynamicinput.h>
 #include "recfunc.h"
+
 int main() {
   char* input = nullptr;
   input = averenkov::stringInput(std::cin);
