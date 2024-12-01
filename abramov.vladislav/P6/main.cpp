@@ -1,6 +1,6 @@
 #include <iostream>
 #include <getString.hpp>
-#include "recursionCheckStr.hpp"
+#include "recursiveCheckStr.hpp"
 
 int main()
 {
