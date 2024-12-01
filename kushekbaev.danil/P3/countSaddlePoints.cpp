@@ -1,18 +1,47 @@
+#include <iostream>
 #include "count_saddle_point.hpp"
 
 namespace kushekbaev
 {
-  int & getElement(int * matrix, size_t columns, size_t row, size_t column);
-  bool isMinInRow(int* matrix, size_t columns, size_t row, int element);
-  bool isMaxInColumn(int* matrix, size_t rows, size_t columns, size_t column, int element);
+  const int & getElement(
+    const int* matrix,
+    size_t columns,
+    size_t row,
+    size_t column
+  );
+
+  bool isMinInRow(
+    const int* matrix,
+    size_t columns,
+    size_t row,
+    int element
+  );
+
+  bool isMaxInColumn(
+    const int* matrix,
+    size_t rows,
+    size_t columns,
+    size_t column,
+    int element
+  );
 }
 
-int & kushekbaev::getElement(int * matrix, size_t columns, size_t row, size_t column)
+const int & kushekbaev::getElement(
+  const int* matrix,
+  size_t columns,
+  size_t row,
+  size_t column
+)
 {
   return matrix[row * columns + column];
 }
 
-bool kushekbaev::isMinInRow(int* matrix, size_t columns, size_t row, int element)
+bool kushekbaev::isMinInRow(
+  const int* matrix,
+  size_t columns,
+  size_t row,
+  int element
+)
 {
   for (size_t z = 0; z < columns; z++)
   {
@@ -21,10 +50,17 @@ bool kushekbaev::isMinInRow(int* matrix, size_t columns, size_t row, int element
       return false;
     }
   }
+
   return true;
 }
 
-bool kushekbaev::isMaxInColumn(int* matrix, size_t rows, size_t columns, size_t column, int element)
+bool kushekbaev::isMaxInColumn(
+  const int* matrix,
+  size_t rows,
+  size_t columns,
+  size_t column,
+  int element
+)
 {
   for (size_t z = 0; z < rows; z++)
   {
@@ -33,24 +69,30 @@ bool kushekbaev::isMaxInColumn(int* matrix, size_t rows, size_t columns, size_t 
       return false;
     }
   }
+
   return true;
 }
 
-int kushekbaev::countSaddlePoints(int * matrix, size_t rows, size_t columns)
+int kushekbaev::countSaddlePoints(
+  const int* matrix,
+  size_t rows,
+  size_t columns
+)
 {
   int count = 0;
+
   for (size_t i = 0; i < rows; i++)
   {
     for (size_t j = 0; j < columns; j++)
     {
-      int element = getElement(matrix, columns, i, j);
+      const int element = getElement(matrix, columns, i, j);
 
-      if (is_min_in_row = isMinInRow(matrix, columns, i, element) &&
-is_max_in_column = isMaxInColumn(matrix, rows, columns, j, element);)
+      if (isMinInRow(matrix, columns, i, element) && isMaxInColumn(matrix, rows, columns, j, element))
       {
         count++;
       }
     }
   }
+
   return count;
 }
