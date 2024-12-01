@@ -1,5 +1,4 @@
 #include "isexpression.hpp"
-#include <iostream>
 namespace brevnov
 {
   const char * isLetter(const char * str);
@@ -150,6 +149,6 @@ const char * brevnov::hasExpression(const char * str)
 
 bool brevnov::isExpression(const char * str)
 {
-  auto next = brevnov::hasExpression(str);
+  auto next = hasExpression(str);
   return next && (*next == '\0');
 }
