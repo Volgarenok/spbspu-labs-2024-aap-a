@@ -30,6 +30,7 @@ char* kushekbaev::readInputArray(std::istream& input)
 
     if (size == 0)
     {
+      delete[] str;
       str = nullptr;
     }
 
