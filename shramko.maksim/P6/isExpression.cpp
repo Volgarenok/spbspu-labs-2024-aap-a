@@ -1,19 +1,8 @@
 #include "isExpression.hpp"
 
-namespace shramko
-{
-  has_zero_or_one(const char** str);
-  has_unsigned(const char** str);
-  has_x_y_or_z(const char** str);
-  has_letter_ID(const char** str);
-  has_plus_or_minus(const char** str);
-  has_multiplier(const char** str);
-  has_expression(const char** str);
-}
-
 bool shramko::has_zero_or_one(const char** str)
 {
-  if ((**srt == "0") || (**str == "1"))
+  if ((**srt == '0') || (**str == '1'))
   {
     (*str)++;
     return true;
@@ -33,7 +22,7 @@ bool shramko::has_unsigned(const char** str)
 
 bool shramko::has_x_y_or_z(const char** str)
 {
-  if ((**str == "x") || (**str == "y") || (**str == "z"))
+  if ((**str == 'x') || (**str == 'y') || (**str == 'z'))
   {
     (*str)++;
     return true;
@@ -43,7 +32,7 @@ bool shramko::has_x_y_or_z(const char** str)
 
 bool shramko::has_letter_ID(const char** str)
 {
-  has_x_y_or_zstr);
+  has_x_y_or_z(str);
 }
 
 bool shramko::has_plus_or_minus(const char** str)
@@ -51,7 +40,7 @@ bool shramko::has_plus_or_minus(const char** str)
   if (has_expression(str))
   {
     const char* i = *str;
-    if ((*i == "-") || (*i == "+"))
+    if ((*i == '-') || (*i == '+'))
     {
       *str = i;
     }
@@ -63,7 +52,7 @@ bool shramko::has_plus_or_minus(const char** str)
 bool shramko::has_multiplier(const char** str)
 {
   const char* i =  *str;
-  if ((*(i++) == "(") && (has_plus_or_minus(&i)) && (*(i++) == ")"))
+  if ((*(i++) == '(') && (has_plus_or_minus(&i)) && (*(i++) == ')'))
   {
     *str = i;
     return true;
@@ -74,14 +63,14 @@ bool shramko::has_multiplier(const char** str)
 bool shramko::has_expression(const char** str)
 {
   const char* i = *str;
-  if ((*(i++) == "(") && (has_multiplier(&i)) && (*(i++) == "+") && (has_expression(&i) && (*(i++) == ")"))
+  if ((*(i++) == '(') && (has_multiplier(&i)) && (*(i++) == '+') && (has_expression(&i) && (*(i++) == ')'))
   {
     *str = i;
     return true;
   }
   if (has_multiplier(str))
   {
-    if (**str == "*")
+    if (**str == '*')
     {
       i = *str + 1;
       if (has_expressiom(&i))
