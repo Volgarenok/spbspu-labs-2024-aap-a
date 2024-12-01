@@ -54,11 +54,11 @@ char* shramko::inputStr(std::istream& in)
       memory *= multiplier;
       str[currentSize] = '\0';
       char* new_str = shramko::createBiggerStrMemory(memory, str);
+      free(str);
       if (new_str == nullptr)
       {
         return new_str;
       }
-      free(str);
       str = new_str;
     }
   }
