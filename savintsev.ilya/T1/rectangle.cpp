@@ -1,10 +1,18 @@
 #include "rectangle.hpp"
 #include <cmath>
+#include <stdexcept>
 
-savintsev::Rectangle::Rectangle(point_t pLL, point_t pUR) :
-  pLowLeft_(pLL),
-  pUpRight_(pUR)
-{}
+savintsev::Rectangle::Rectangle(point_t lhs, point_t rhs)
+{
+  if (lhs.x >= rhs.x || lhs.y >= rhs.y)
+  {
+    throw std::invalid_argument("ERROR: Invalid argumets for Rectangle");
+  }
+  this->pLowLeft_.x = lhs.x;
+  this->pLowLeft_.y = lhs.y;
+  this->pUpRight_.x = rhs.x;
+  this->pUpRight_.y = rhs.y;
+}
 
 double savintsev::Rectangle::getArea() const
 {
@@ -33,8 +41,13 @@ void savintsev::Rectangle::move(double x, double y)
   this->pUpRight_ = {this->pUpRight_.x + x, this->pUpRight_.y + y};
 }
 
-void savintsev::Rectangle::scale(point_t, double k)
+void savintsev::Rectangle::scale(double k)
 {
-  //zaglushka
-  k = k + 1;
+  if (k <= 0)
+  {
+    return;
+  }
+  point_t center = this->getFrameRect().pos;
+  this->pLowLeft_ = {center.x - (center.x - pLowLeft_.x) * k, center.y - (center.y - pLowLeft_.y) * k};
+  this->pUpRight_ = {center.x + (pUpRight_.x - center.x) * k, center.y + (pUpRight_.y - center.y) * k};
 }

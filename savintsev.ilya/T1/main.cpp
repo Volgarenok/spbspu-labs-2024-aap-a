@@ -109,13 +109,12 @@ int main()
     }
     else
     {
-      is_error_was = true;
       delete[] line;
       continue;
     }
   }
   if (is_error_was)
   {
-    std::cerr << "BILA EROR\n";
+    std::cerr << "WARNING: Some shapes were ignored because they were described incorrectly\n";
   }
 }
