@@ -18,5 +18,6 @@ int main()
     return 1;
   }
 
-  std::cout << zakirov::check_real(line) << '\n';
+  std::cout << std::boolalpha << zakirov::check_real(line) << '\n';
+  free(line);
 }
