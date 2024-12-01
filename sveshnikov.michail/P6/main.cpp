@@ -6,9 +6,10 @@
 int main()
 {
   char *str = nullptr;
+  std::size_t len = 0;
   try
   {
-    str = sveshnikov::read_str(std::cin);
+    str = sveshnikov::read_str(std::cin, len);
   }
   catch (const std::bad_alloc &e)
   {
