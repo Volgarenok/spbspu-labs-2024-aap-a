@@ -1,5 +1,6 @@
 #include "getLine.h"
 #include <iostream>
+#include <new>
 
 char* cherkasov::inputLine(std::istream& in)
 {
