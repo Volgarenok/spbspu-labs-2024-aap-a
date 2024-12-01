@@ -1,3 +1,5 @@
+#include <iostream>
+#include <getLine.hpp>
 #include "unionString.hpp"
 
 int main()
