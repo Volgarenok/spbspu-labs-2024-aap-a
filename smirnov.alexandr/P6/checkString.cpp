@@ -1,7 +1,9 @@
+#include "checkString.hpp"
+
 namespace smirnov
 {
   const char * isSymbol(const char * string, char c);
-  const char * isSigh(const char * string);
+  const char * isSign(const char * string);
   const char * isNumber(const char * string);
   const char * isUnsignedInt(const char * string);
   const char * isOrder(const char * string);
@@ -81,3 +83,17 @@ const char * smirnov::isMantissa(const char * string)
   return string;
 }
 
+bool smirnov::isFloatNumber(const char * string)
+{
+  if (!string)
+  {
+    return string;
+  }
+  const char * next = isSign(string);
+  next = isMantissa(next);
+  if (next && *next == 'E')
+  {
+    next = isOrder(next + 1);
+  }
+  return next && (*next == '\0');
+}

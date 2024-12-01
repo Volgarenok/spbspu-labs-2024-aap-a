@@ -1,5 +1,6 @@
 #include <iostream>
 #include <getLine.hpp>
+#include "checkString.hpp"
 
 int main()
 {
@@ -19,5 +20,6 @@ int main()
     std::cerr << "Error: empty string\n";
     return 1;
   }
+  std::cout << std::boolalpha << smirnov::isFloatNumber(string) << "\n";
   delete[] string;
 }
