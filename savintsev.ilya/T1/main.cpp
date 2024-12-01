@@ -5,6 +5,36 @@
 #include "base-types.hpp"
 #include "rectangle.hpp"
 
+//CONCAVE COMPLEXQUAD
+
+bool readDescription(double * numbers, size_t amt, const char * sep, bool &erw, bool &ern)
+{
+  char * pEnd = nullptr;
+  char * token = nullptr;
+  for (size_t i = 0; i < amt; ++i)
+  {
+    token = std::strtok(nullptr, sep);
+    if (!token)
+    {
+      ern = true;
+      erw = true;
+      break;
+    }
+    numbers[i] = std::strtod(token, &pEnd);
+    if (*pEnd != '\0')
+    {
+      ern = true;
+      erw = true;
+      break;
+    }
+  }
+  if (std::strtok(nullptr, sep) || ern)
+  {
+    return false;
+  }
+  return true;
+}
+
 int main()
 {
   char * line = nullptr;
@@ -26,41 +56,41 @@ int main()
       delete[] line;
       continue;
     }
-    char * pEnd = nullptr;
+    
     token = std::strtok(line, separator);
     is_error_now = false;
     if (!std::strcmp(token, "RECTANGLE"))
     {
       double numbers[4] = {0., 0., 0., 0.};
-      for (size_t i = 0; i < 4; ++i)
-      {
-        token = std::strtok(nullptr, separator);
-        if (!token)
-        {
-          is_error_now = true;
-          is_error_was = true;
-          break;
-        }
-        numbers[i] = std::strtod(token, &pEnd);
-        if (*pEnd != '\0')
-        {
-          is_error_now = true;
-          is_error_was = true;
-          break;
-        }
-      }
-      if (std::strtok(nullptr, separator) || is_error_now)
+      if (!readDescription(numbers, 4, separator, is_error_was, is_error_now))
       {
         delete[] line;
         continue;
       }
-      std::cout << "ZAEBOK\n";
+      std::cout << "class\n";
       point_t p1 = {numbers[0], numbers[1]};
       point_t p2 = {numbers[2], numbers[3]};
       p1.x = p2.x;
       p2.x = p1.x;
       delete[] line;
       continue;
+    }
+    if (!std::strcmp(token, "CONCAVE"))
+    {
+      double numbers[8] = {0., 0., 0., 0., 0., 0., 0., 0.};
+      if (!readDescription(numbers, 8, separator, is_error_was, is_error_now))
+      {
+        delete[] line;
+        continue;
+      }
+      std::cout << "KRUTAKk!111\n";
+      delete[] line;
+      continue;
+    }
+    if (!std::strcmp(token, "SCALE"))
+    {
+      delete[] line;
+      break;
     }
     else
     {
