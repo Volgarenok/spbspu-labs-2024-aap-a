@@ -15,10 +15,9 @@ int main()
     std::cerr << "Memory allocation error!\n";
     return 2;
   }
-  if (!std::cin)
+  if (str[0] == '\0')
   {
-    std::cerr << "Incorrect input!\n";
-    delete[] str;
+    std::cerr << "ERROR: empty string!\n";
     return 1;
   }
 
