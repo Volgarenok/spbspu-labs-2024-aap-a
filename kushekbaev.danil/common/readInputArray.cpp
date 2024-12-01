@@ -1,8 +1,9 @@
-#include <iostream>
 #include "read_input_array.hpp"
+#include <iostream>
 
-char* kushekbaev::readInputArray(std::istream& input, char stop, size_t& size, size_t& max)
+char* kushekbaev::readInputArray(std::istream& input, char stop)
 {
+  size_t max = 10;
   char* str = nullptr;
   try
   {
@@ -30,8 +31,9 @@ char* kushekbaev::readInputArray(std::istream& input, char stop, size_t& size, s
   catch (const std::bad_alloc& e)
   {
     std::cerr << "Error allocating memory";
+    input >> std::skipws;
     delete[] str;
     str = nullptr;
-   }
+  }
   return str;
 }

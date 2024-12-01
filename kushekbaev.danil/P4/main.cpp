@@ -5,15 +5,13 @@
 
 int main()
 {
-  size_t max = 10;
-  size_t size = 0;
   char stop = '\0';
 
-  const char * str1 = kushekbaev::readInputArray(std::cin, stop, size, max);
+  const char * str1 = kushekbaev::readInputArray(std::cin, stop);
 
   const char * str2 = "string literal";
 
-  if (size == 0 || str1 == nullptr)
+  if (str1 == nullptr)
   {
     std::cerr << "Failed input" << "\n";
     delete[] str1;
