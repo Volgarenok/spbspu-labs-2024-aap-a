@@ -9,16 +9,16 @@ namespace averenkov
   bool hasFactor(char* str, size_t& index);
 }
 
-bool averenkov:hasExpession(char* str, size_t& index)
+bool averenkov::hasExpression(char* str, size_t& index)
 {
-  if (!averenkov:hasTerm(str, index))
+  if (!averenkov::hasTerm(str, index))
   {
     return false;
   }
   while (str[index] == '+' || str[index] == '-')
   {
     index++;
-    if (!averenkov:hasExpession(str, index))
+    if (!averenkov::hasExpression(str, index))
     {
       return false;
     }
@@ -26,7 +26,7 @@ bool averenkov:hasExpession(char* str, size_t& index)
   return true;
 }
 
-bool averenkov:hasTerm(char* str, size_t& index)
+bool averenkov::hasTerm(char* str, size_t& index)
 {
   if (!averenkov::hasFactor(str, index))
   {
@@ -35,7 +35,7 @@ bool averenkov:hasTerm(char* str, size_t& index)
   while (str[index] == '*' || str[index] == '/')
   {
     index++;
-    if (!averenkov:hasTerm(str, index))
+    if (!averenkov::hasTerm(str, index))
     {
       return false;
     }
@@ -48,7 +48,7 @@ bool averenkov::hasFactor(char* str, size_t& index)
   if (str[index] == '(')
   {
     index++;
-    if (!averenkov:hasExpession(str, index))
+    if (!averenkov::hasExpression(str, index))
     {
       return false;
     }
@@ -73,7 +73,7 @@ bool averenkov::hasFactor(char* str, size_t& index)
 bool averenkov::parse(char* str)
 {
   size_t index = 0;
-  if (averenkov:hasExpession(str, index) && str[index] == '\0')
+  if (averenkov::hasExpression(str, index) && str[index] == '\0')
   {
     return true;
   }
