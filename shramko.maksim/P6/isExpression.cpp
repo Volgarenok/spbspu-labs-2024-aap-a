@@ -1,93 +1,170 @@
 #include "isExpression.hpp"
 
-bool shramko::has_zero_or_one(const char** str)
+const char* shramko::has_symbol(const char* str, char s)
 {
-  if ((**str == '0') || (**str == '1'))
+  if (!str)
   {
-    (*str)++;
-    return true;
+    return str;
   }
-  return false;
+  return (*str == s) ? (string++) : nullptr;
 }
 
-bool shramko::has_unsigned(const char** str)
+const char* shramko::has_x(const char* str)
 {
-  if (has_zero_or_one(str))
+  return has_symbol(str, 'x');
+}
+
+const char* shramko::has_y(const char* str)
+{
+  return has_symbol(str, 'y');
+}
+
+const char* shramko::has_z(const char* str)
+{
+  return has_symbol(str, 'z');
+}
+
+const char* shramko::has_one_or_zero(const char*)
+{
+  const char* following = has_symbol(str, '1');
+  return following ? following : has_symbol(str, '0');
+}
+
+const char* shramko::has_following_id(const char* str)
+{
+  if (!str)
   {
-    has_unsigned(str);
-    return true;
+    return str;
   }
-  return false;
-}
 
-bool shramko::has_x_y_or_z(const char** str)
-{
-  if ((**str == 'x') || (**str == 'y') || (**str == 'z'))
+  const char* following = has_x(str);
+  if following
   {
-    (*str)++;
-    return true;
-  }
-  return false;
-}
-
-bool shramko::has_letter_ID(const char** str)
-{
-  return has_x_y_or_z(str);
-}
-
-bool shramko::has_plus_or_minus(const char** str)
-{
-  if (has_expression(str))
+    return following;
   {
-    const char* i = *str;
-    if ((*i == '+') || (*i == '-'))
-    {
-      i++;
-      if (has_plus_or_minus(&i))
-      {
-        *str = i;
-      }
-    }
-    return true;
-  }
-  return false;
-}
-
-bool shramko::has_multiplier(const char** str)
-{
-  const char* i =  *str;
-  if ((*(i++) == '(') && (has_plus_or_minus(&i)) && (*(i++) == ')'))
+  following = has_y(str);
+  if following
   {
-    *str = i;
-    return true;
-  }
-  return has_unsigned(str) || has_letter_ID(str);
+    return following;
+  {
+  following = has_z(str);
+  return following;
 }
 
-bool shramko::has_expression(const char** str)
+const char* shramko::has_unsigned_int(const char* str)
 {
   const char* i = *str;
-  if ((*(i++) == '(') && (has_multiplier(&i)) && (*(i++) == '+') && (has_expression(&i) && (*(i++) == ')'))
+  if (!str)
   {
-    *str = i;
-    return true;
+    return str;
   }
-  if (has_multiplier(str))
+  const char* following = has_zero_or_one(str);
+  if (!following)
   {
-    if (**str == '*')
-    {
-      i = *str + 1;
-      if (has_expressiom(&i))
-      {
-        *str = i;
-      }
-    }
-    return true;
+    return nullptr;
   }
-  return false;
+  if (const char* proceed = has_unsigned_int(following))
+  {
+    return proceed;
+  }
+  return following;
 }
 
-bool shramko::isExpression(const char* str)
+const char* shramko::has_multi(const char* str)
 {
-  return has_plus_or_minus(&str) && (*str == '\0');
+  if (!str)
+  {
+    return str
+  }
+  const char* following = has_unsigned_int(str);
+  if (following)
+  {
+    return following;
+  }
+  following = has_following_id(str);
+  if (following)
+  {
+    return following;
+  }
+  if ((str = has_symbol(str, '(')))
+  {
+    following = has_expression(str);
+    if ((following = has_symbol(str, ')')))
+    {
+      return following;
+    }
+    return nullptr;
+  }
+  return nullptr;
+}
+
+const char* shramko::has_term(const char* str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  const char* following = has_multi(str);
+  if (!following)
+  {
+    return following;
+  }
+  if (const char* nextFol = has_symbol(following, '*'))
+  {
+    const char* next = has_term(nextFol);
+    if (!next)
+    {
+      return nullptr;
+    }
+    return next;
+  }
+  if (const char* ay_nextFol = has_symbol(str, '('))
+  {
+    const char* next = has_multi(ay_nextFol);
+    if (!next)
+    {
+      return nullptr;
+    }
+    if (const char* scnd_next = has_symbol(next, '+')
+    {
+      const char* next_term = has_term(scnd_next)
+      if (!next_term || !has_symbol(next_term, ')'))
+      {
+        return nullptr;
+      }
+      return next_term;
+    }
+    if (!has_symbol(following, ')'))
+    {
+      return nullptr;
+    }
+    return ay_nextFol;
+  }
+  return following;
+}
+
+const char* shramko::has_expression(const char* str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  const char* following = has_term(str);
+  if (following)
+  {
+    if (const char* nextFol = has_symbol(following, '+'))
+    {
+      return has_expression(nextFol);
+    }
+    else if (const char* nextFol = has_symbol(following, '-'))
+    {
+      return has_expression(nextFol)
+    }
+  }
+  return following;
+
+bool shramko::is_expression(const char* str)
+{
+  const char* next = has_expression(str);
+  return next && (has_symbol(next, '\0'));
 }

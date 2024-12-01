@@ -3,14 +3,17 @@
 
 namespace shramko
 {
-  bool isExpression(const char* str);
-  bool has_zero_or_one(const char** str);
-  bool has_unsigned(const char** str);
-  bool has_x_y_or_z(const char** str);
-  bool has_letter_ID(const char** str);
-  bool has_plus_or_minus(const char** str);
-  bool has_multiplier(const char** str);
-  bool has_expression(const char** str);
+  const char* has_symbol(const char* str, char s);
+  const char* has_x(const char* str);
+  const char* has_y(const char* str);
+  const char* has_z(const char* str);
+  const char* has_one_or_zero(const char* str);
+  const char* has_following_id(const char* str);
+  const char* has_unsigned_int(const char* str);
+  const char* has_multi(const char* str);
+  const char* has_term(const char* str);
+  const char* has_expression(const char* str);
+  const char* is_expression(const char* str);
 }
 
 #endif
