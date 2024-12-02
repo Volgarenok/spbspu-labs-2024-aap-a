@@ -13,6 +13,20 @@ const char *hasDigit(const char *str)
   }
   return isdigit(*str) ? (str + 1) : nullptr;
 }
+const char *hasNumbers(const char *str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  auto next = hasDigit(str);
+  if (auto continues = hasNumbers(next))
+  {
+    return continues;
+  }
+  return next;
+}
+
 int main()
 {
   auto a = "-1.23456789E9234";
