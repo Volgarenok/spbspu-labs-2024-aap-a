@@ -12,6 +12,7 @@ int main()
     std::cerr << "nostring\n";
     return 1;
   }
+
   std::cout << std::boolalpha << dribas::isValidString(str) << '\n';
   return 0;
 }
