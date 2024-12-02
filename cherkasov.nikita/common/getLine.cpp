@@ -65,13 +65,14 @@ char* cherkasov::newArray(char* oldArray, size_t newCapacity)
   char* newArray = new char[newCapacity];
   if (oldArray)
   {
-    size_t oldLength = 0;
+    size_t oldLength = nullptr;
     while (oldArray[oldLength] != '\0' && oldLength < newCapacity - 1)
     {
       newArray[oldLength] = oldArray[oldLength];
       oldLength++;
     }
       newArray[oldLength] = '\0';
+      delete[] oldArray;
   }
    else
   {
