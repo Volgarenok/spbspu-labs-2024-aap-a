@@ -2,58 +2,74 @@
 #include <iostream>
 #include <ios>
 
-constexpr size_t default_size = 256;
+constexpr size_t default_size = 20;
 
-void evstyunichev::copy(char *str1, char *str2)
+void evstyunichev::copy(const char *str1, char *str2)
 {
-  if (!str1)
+  if (!str1 || !str2)
   {
     return;
   }
-  for (size_t i = 0; str1[i] && str2[i]; i++)
+  size_t i = 0;
+  for (; str1[i]; i++)
   {
     str2[i] = str1[i];
   }
   return;
 }
 
-char * evstyunichev::resize_str(size_t sz, char *str)
+char * evstyunichev::resize_str(const size_t sz, const char *old)
 {
+  char *temp = nullptr;
   try
   {
-    char *temp = new char[sz + 1];
-    size_t i = 0;
-    copy(str, temp);
-    delete[] str;
-    return temp;
+    temp = new char[sz + 1];
+    copy(old, temp);
+    delete[] old;
   }
   catch(const std::bad_alloc &e)
   {
     return nullptr;
   }
+  return temp;
 }
 
-char * evstyunichev::get_string(std::istream &in, char end)
+char * evstyunichev::get_string(std::istream &in, const char end)
 {
-  size_t sz = 0, mx = default_size;
+  size_t mx = default_size;
   char *str = resize_str(mx);
-  bool res = str;
+  if (!str)
+  {
+    return nullptr;
+  }
   std::noskipws(in);
   char c = 0;
+  size_t sz = 0;
   while ((in >> c) && (c != end))
   {
     sz++;
     if(sz > mx)
     {
+      char *temp = nullptr;
       mx *= 2;
-      str = resize_str(mx, str);
+      temp = resize_str(mx, str);
+      if (!temp)
+      {
+        delete[] str;
+        return temp;
+      }
+      str = temp;
+    }
+    if (!str)
+    {
+      return str;
     }
     str[sz - 1] = c;
   }
   return str;
 }
 
-int evstyunichev::is_vowel(char c)
+int evstyunichev::is_vowel(const char c)
 {
   char good[] = {"aeiouyAEIOUY"};
   int flag = 0;
@@ -67,7 +83,7 @@ int evstyunichev::is_vowel(char c)
   return flag;
 }
 
-size_t evstyunichev::cnt_not_vowel(char *str)
+size_t evstyunichev::cnt_not_vowel(const char *str)
 {
   size_t ans = 0, i = 0;
   while (str[i])
@@ -78,12 +94,12 @@ size_t evstyunichev::cnt_not_vowel(char *str)
     }
     i++;
   }
-  return ans + 1;
+  return ans;
 }
 
-int evstyunichev::rmv_vow(char *str1, char *str2)
+int evstyunichev::rmv_vow(const char *str1, char *str2)
 {
-  if (!str2)
+  if (!str2 || !str1)
   {
     return 0;
   }
@@ -101,7 +117,7 @@ int evstyunichev::rmv_vow(char *str1, char *str2)
   return 1;
 }
 
-void evstyunichev::output(char *str, std::ostream &out)
+void evstyunichev::output(const char *str, std::ostream &out)
 {
   size_t i = 0;
   while (str[i])
@@ -110,7 +126,7 @@ void evstyunichev::output(char *str, std::ostream &out)
   }
 }
 
-char * evstyunichev::create(size_t sz)
+char * evstyunichev::create(const size_t sz)
 {
   char *str2 = nullptr;
   try

@@ -13,7 +13,7 @@ int main()
   char * str2 = evstyunichev::resize_str(sz);
   if (evstyunichev::rmv_vow(str1, str2))
   {
-    evstyunichev::output(str2, std::cout);
+    std::cout << str2;
     std::cout << '\n';
   }
   else
