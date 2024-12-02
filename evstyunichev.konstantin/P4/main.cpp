@@ -4,7 +4,7 @@
 
 int main()
 {
-  char * str1 = evstyunichev::get_string(std::cin, '\n');
+  char * str1 = evstyunichev::get_string(std::cin);
   if (!str1)
   {
     return 1;
