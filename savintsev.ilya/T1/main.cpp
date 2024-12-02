@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <iomanip>
 #include <newlineterminatedstr.h>
 #include <lrgcpy.hpp>
 #include "base-types.hpp"
@@ -69,13 +70,13 @@ int main()
   ShapeList = new savintsev::Shape * [capac];
   savintsev::point_t scaleC = {0, 0};
   double scaleK = 0.;
-  while (!std::cin.eof())
+  while (true)
   {
     delete[] line;
     line = savintsev::inputNewlineTerminatedStr(std::cin);
-    if (line == nullptr)
+    if (line == nullptr || std::cin.eof())
     {
-      std::cerr << "ERROR: Memory full\n";
+      std::cerr << "ERROR: Memory full OR EOF\n";
       return 2;
     }
     if (line[0] == '\0')
@@ -87,7 +88,7 @@ int main()
     {
       if (scaleK > 0)
       {
-        std::cout.precision(2);
+        std::setprecision(2);
         savintsev::point_t lL = {0., 0.}, uR = {0., 0.};
         savintsev::rectangle_t rect = {0., 0., {0., 0.}};
         double sumArea = 0.;
@@ -119,6 +120,10 @@ int main()
           std::cout << ' ' << lL.x << ' ' << lL.y << ' ' << uR.x << ' ' << uR.y;
         }
         std::cout << '\n';
+      }
+      else
+      {
+        continue;
       }
       delete[] line;
       delete[] ShapeList;
