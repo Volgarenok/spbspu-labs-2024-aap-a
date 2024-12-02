@@ -39,3 +39,14 @@ void savintsev::printSumAreaAndBorders(std::ostream & out, Shape ** rhs, size_t 
   }
   out << '\n';
 }
+
+void savintsev::destroyShapes(Shape ** rhs, size_t amt)
+{
+  {
+    for (size_t i = 0; i < amt; ++i)
+    {
+      delete rhs[i];
+    }
+    delete[] rhs;
+  }
+}

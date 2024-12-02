@@ -98,7 +98,7 @@ int main()
         continue;
       }
       delete[] line;
-      delete[] ShapeList;
+      savintsev::destroyShapes(ShapeList, amtOfShapes);
       break;
     }
     if (result == -1)
@@ -115,14 +115,14 @@ int main()
       try
       {
         savintsev::Shape ** newList = savintsev::createAmpCpyAny(ShapeList, capac, capac + capac);
-        delete[] ShapeList;
+        savintsev::destroyShapes(ShapeList, amtOfShapes);
         ShapeList = newList;
         capac += capac;
       }
       catch (const std::bad_alloc & e)
       {
         delete[] line;
-        delete[] ShapeList;
+        savintsev::destroyShapes(ShapeList, amtOfShapes);
         std::cerr << "ERROR: Memory full\n";
         return 3;
       }
