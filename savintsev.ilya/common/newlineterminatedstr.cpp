@@ -5,7 +5,7 @@
 
 namespace savintsev
 {
-  constexpr size_t MEMORY_SIZE = 20;
+  constexpr size_t MEMORY_SIZE = 5;
 }
 
 char * savintsev::inputNewlineTerminatedStr(std::istream & in)
@@ -27,12 +27,12 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
     if (i == (capacity - 1))
     {
       t[i] = '\0';
-      capacity += capacity;
       try
       {
-        char * new_t = createAmpCpyAny(t, capacity - capacity, capacity);
+        char * new_t = createAmpCpyAny(t, capacity, capacity + capacity);
         delete[] t;
         t = new_t;
+        capacity += capacity;
       }
       catch (const std::bad_alloc & e)
       {

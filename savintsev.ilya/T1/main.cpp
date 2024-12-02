@@ -1,119 +1,116 @@
 #include <iostream>
 #include <cstring>
-#include <iomanip>
 #include <newlineterminatedstr.h>
+#include <lrgcpy.hpp>
 #include "base-types.hpp"
 #include "rectangle.hpp"
 
 //CONCAVE COMPLEXQUAD
 namespace savintsev
 {
-  bool readDescription(double * numbers, size_t amt, const char * sep, bool &erw, bool &ern);
+  int actWithShpByDesc(char * desc, Shape ** rhs, size_t & amt);
 }
 
-bool savintsev::readDescription(double * numbers, size_t amt, const char * sep, bool &erw, bool &ern)
+namespace
 {
-  char * pEnd = nullptr;
-  char * token = nullptr;
-  for (size_t i = 0; i < amt; ++i)
+  void readDblfromDesc(double * numbers, size_t amt);
+
+  void readDblfromDesc(double * numbers, size_t amt)
   {
-    token = std::strtok(nullptr, sep);
-    if (!token)
+    char * token = nullptr;
+    for (size_t i = 0; i < amt; ++i)
     {
-      ern = true;
-      erw = true;
-      break;
-    }
-    numbers[i] = std::strtod(token, &pEnd);
-    if (*pEnd != '\0')
-    {
-      ern = true;
-      erw = true;
-      break;
+      token = std::strtok(nullptr, " ");
+      if (!token)
+      {
+        break;
+      }
+      numbers[i] = std::atof(token);
     }
   }
-  if (std::strtok(nullptr, sep) || ern)
+}
+
+int savintsev::actWithShpByDesc(char * desc, Shape ** rhs, size_t & amt)
+{
+  char * token = std::strtok(desc, " ");
+  if (!std::strcmp(token, "RECTANGLE"))
   {
-    return false;
+    double numbers[4] = {0., 0., 0., 0.};
+    readDblfromDesc(numbers, 4);
+    try
+    {
+      Rectangle * Rect = new Rectangle({numbers[0], numbers[1]}, {numbers[2], numbers[3]});
+      rhs[amt++] = Rect;
+    }
+    catch (const std::invalid_argument & e)
+    {
+      return 2;
+    }
+    return 0;
   }
-  return true;
+  if (!std::strcmp(token, "SCALE"))
+  {
+    return 1;
+  }
+  return -1;
 }
 
 int main()
 {
   char * line = nullptr;
-  const char * separator = " ";
-  char * token = nullptr;
-  bool is_error_was = false;
-  bool is_error_now = false;
+  bool was_error = false;
+  size_t capac = 10;
+  size_t amtOfShapes = 0;
+  savintsev::Shape ** ShapeList = nullptr;
+  ShapeList = new savintsev::Shape * [capac];
   while (!std::cin.eof())
   {
+    delete[] line;
     line = savintsev::inputNewlineTerminatedStr(std::cin);
     if (line == nullptr)
     {
-      std::cerr << "Failed to allocate memory or EOF\n";
-      return 1;
+      std::cerr << "ERROR: Memory full\n";
+      return 2;
     }
     if (line[0] == '\0')
     {
-      delete[] line;
       continue;
     }
-    token = std::strtok(line, separator);
-    is_error_now = false;
-    if (!std::strcmp(token, "RECTANGLE"))
-    {
-      double numbers[4] = {0., 0., 0., 0.};
-      if (!savintsev::readDescription(numbers, 4, separator, is_error_was, is_error_now))
-      {
-        delete[] line;
-        continue;
-      }
-      std::cout << "class\n";
-      savintsev::point_t p1 = {numbers[0], numbers[1]};
-      savintsev::point_t p2 = {numbers[2], numbers[3]};
-      p1.x = p2.x;
-      p2.x = p1.x;
-      savintsev::Rectangle debil(p1, p2);
-      delete[] line;
-      continue;
-    }
-    if (!std::strcmp(token, "CONCAVE"))
-    {
-      double numbers[8] = {0., 0., 0., 0., 0., 0., 0., 0.};
-      if (!savintsev::readDescription(numbers, 8, separator, is_error_was, is_error_now))
-      {
-        delete[] line;
-        continue;
-      }
-      std::cout << "KRUTAKk!111\n";
-      delete[] line;
-      continue;
-    }
-    if (!std::strcmp(token, "COMPLEXQUAD"))
-    {
-      double numbers[8] = {0., 0., 0., 0., 0., 0., 0., 0.};
-      if (!savintsev::readDescription(numbers, 8, separator, is_error_was, is_error_now))
-      {
-        delete[] line;
-        continue;
-      }
-      std::cout << "SO COOL!!!1111!\n";
-      delete[] line;
-      continue;
-    }
-    if (!std::strcmp(token, "SCALE"))
+    int result = savintsev::actWithShpByDesc(line, ShapeList, amtOfShapes);
+    if (result == 1)
     {
       delete[] line;
+      delete[] ShapeList;
       break;
     }
-    else
+    if (result == -1)
     {
-      delete[] line;
       continue;
     }
+    if (result == 2)
+    {
+      was_error = true;
+      continue;
+    }
+    if (amtOfShapes == capac)
+    {
+      try
+      {
+        savintsev::Shape ** newList = savintsev::createAmpCpyAny(ShapeList, capac, capac + capac);
+        delete[] ShapeList;
+        ShapeList = newList;
+        capac += capac;
+      }
+      catch (const std::bad_alloc & e)
+      {
+        delete[] line;
+        delete[] ShapeList;
+        std::cerr << "ERROR: Memory full\n";
+        return 3;
+      }
+    }
   }
-  if (is_error_was)
+  if (was_error)
   {
     std::cerr << "WARNING: Some shapes were ignored because they were described incorrectly\n";
   }
