@@ -22,6 +22,15 @@ bool savintsev::isPointInTriangle(point_t t1, point_t t2, point_t t3, point_t p)
   return false;
 }
 
+bool savintsev::isTriangle(point_t p1, point_t p2, point_t p3)
+{
+  double l1 = getLength(p1, p2);
+  double l2 = getLength(p2, p3);
+  double l3 = getLength(p3, p1);
+  double largest = std::fmax(l1, std::fmax(l2, l3));
+  return largest < (l1 + l2 + l3 - largest);
+}
+
 savintsev::point_t savintsev::findLinesIntersect(point_t m1, point_t m2, point_t n1, point_t n2, bool * finded)
 {
   double a1 = m2.y - m1.y;

@@ -4,8 +4,8 @@
 savintsev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4)
 {
   bool wasFounded = true;
-  findLinesIntersect(p1, p2, p3, p4, &wasFounded);
-  if (!wasFounded)
+  point_t center = findLinesIntersect(p1, p2, p3, p4, &wasFounded);
+  if (!wasFounded || !isTriangle(p1, p4, center) || !isTriangle(p2, p3, center))
   {
     throw std::invalid_argument("ERROR: Invalid argumets for Complexquad");
   }
@@ -27,7 +27,7 @@ savintsev::rectangle_t savintsev::Complexquad::getFrameRect() const
   double mostRight = std::fmax(std::fmax(p1_.x, p2_.x), std::fmax(p3_.x, p4_.x));
   double mostLow = std::fmin(std::fmin(p1_.y, p2_.y), std::fmin(p3_.y, p4_.y));
   double mostHigh = std::fmax(std::fmax(p1_.y, p2_.y), std::fmax(p3_.y, p4_.y));
-  point_t center = findLinesIntersect(p1_, p2_, p3_, p4_, nullptr);
+  point_t center = {mostLeft + (mostRight - mostLeft) / 2, mostLow + (mostHigh - mostLow) / 2};
   return {mostRight - mostLeft, mostHigh - mostLow, center};
 }
 

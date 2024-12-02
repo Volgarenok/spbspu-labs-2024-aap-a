@@ -3,11 +3,7 @@
 
 savintsev::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4)
 {
-  double l1 = getLength(p1, p2);
-  double l2 = getLength(p2, p3);
-  double l3 = getLength(p3, p1);
-  double largest = std::fmax(l1, std::fmax(l2, l3));
-  if (largest >= (l1 + l2 + l3 - largest) || !isPointInTriangle(p1, p2, p3, p4))
+  if (!isTriangle(p1, p2, p3) || !isPointInTriangle(p1, p2, p3, p4))
   {
     throw std::invalid_argument("ERROR: Invalid argumets for Concave");
   }
@@ -28,7 +24,8 @@ savintsev::rectangle_t savintsev::Concave::getFrameRect() const
   double mostRight = std::fmax(p1_.x, std::fmax(p2_.x, p3_.x));
   double mostLow = std::fmin(p1_.y, std::fmin(p2_.y, p3_.y));
   double mostHigh = std::fmax(p1_.y, std::fmax(p2_.y, p3_.y));
-  return {mostRight - mostLeft, mostHigh - mostLow, p4_};
+  point_t center = {mostLeft + (mostRight - mostLeft) / 2, mostLow + (mostHigh - mostLow) / 2};
+  return {mostRight - mostLeft, mostHigh - mostLow, center};
 }
 
 void savintsev::Concave::move(point_t p)
