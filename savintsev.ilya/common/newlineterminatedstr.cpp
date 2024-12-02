@@ -4,11 +4,7 @@
 
 namespace savintsev
 {
-<<<<<<< HEAD
   constexpr size_t MEMORY_SIZE = 40;
-=======
-  constexpr size_t MEMORY_SIZE = 8;
->>>>>>> parent of f7ab4f9b (Revert "Merge branch 'dribas.sergey/P6' into dribas.sergey/P4")
 }
 
 char * savintsev::inputNewlineTerminatedStr(std::istream & in)
@@ -25,11 +21,7 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
   }
   size_t i = 0;
   char buffer = 'a';
-<<<<<<< HEAD
   while (!in.eof())
-=======
-  while (in.good())
->>>>>>> parent of f7ab4f9b (Revert "Merge branch 'dribas.sergey/P6' into dribas.sergey/P4")
   {
     if (i == (capacity - 1))
     {
@@ -54,14 +46,6 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
       break;
     }
   }
-<<<<<<< HEAD
-=======
-  if (!in.good())
-  {
-    delete[] t;
-    return nullptr;
-  }
->>>>>>> parent of f7ab4f9b (Revert "Merge branch 'dribas.sergey/P6' into dribas.sergey/P4")
   t[i - 1] = '\0';
   return t;
 }

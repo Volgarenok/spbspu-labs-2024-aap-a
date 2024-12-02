@@ -1,8 +1,5 @@
 #include <iostream>
-<<<<<<< HEAD
 #include <getline.hpp>
-=======
->>>>>>> parent of f7ab4f9b (Revert "Merge branch 'dribas.sergey/P6' into dribas.sergey/P4")
 #include "string_processing.hpp"
 
 int main()
