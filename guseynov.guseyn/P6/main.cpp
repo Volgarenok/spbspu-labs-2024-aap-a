@@ -5,9 +5,12 @@
 int main()
 {
   char * str = guseynov::getLine(std::cin);
-  if (*str == '\0')
+  if (str == nullptr)
   {
-    std::cerr << "fail read\n";
+    return 1;
+  }
+  if (str[0] == '\0')
+  {
     return 1;
   }
   std::cout << std::boolalpha << guseynov::isDouble(str) << "\n";
