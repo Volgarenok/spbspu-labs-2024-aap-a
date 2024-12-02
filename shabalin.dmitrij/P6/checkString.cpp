@@ -96,7 +96,6 @@ namespace
       return next;
     }
   }
-  return;
 }
 
 bool shabalin::func(const char * str)
