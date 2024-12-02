@@ -72,18 +72,17 @@ char* cherkasov::newArray(char* oldArray, size_t newCapacity)
       oldLength++;
     }
       newArray[oldLength] = '\0';
+  }
+   else
+  {
+    newArray[0] = '\0';
+  }
+    return newArray;
+  }
+    catch (const std::bad_alloc& e)
+    {
+      std::cerr << "Error: Memory allocation failed: " << e.what() << "\n";
       delete[] oldArray;
-      }
-      else
-      {
-        newArray[0] = '\0';
-      }
-        return newArray;
-      }
-      catch (const std::bad_alloc& e)
-      {
-        std::cerr << "Error: Memory allocation failed: " << e.what() << "\n";
-        delete[] oldArray;
-        throw;
-      }
+      throw;
+    }
 }

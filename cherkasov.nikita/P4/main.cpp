@@ -6,22 +6,25 @@
 
 int main()
 {
-  char* input = cherkasov::inputLine(std::cin);
+  char* input = nullptr;
+  try
+  {
+    input = cherkasov::inputLine(std::cin);
+  }
+  catch (const std::exception& e)
+  {
+    std::cerr << "Unhandled exception: " << e.what() << "\n";
+     return 1;
+  }
   if (!input)
   {
-    std::cerr << "Memory allocation failure!\n";
+    std::cerr << "Memory allocation failure or empty input!\n";
     return 1;
   }
   if (!cherkasov::isValidInput(input))
   {
     delete[] input;
     return 0;
-  }
-  if (input[0] == '\0')
-  {
-    std::cerr << "The line is empty!\n";
-    delete[] input;
-    return 1;
   }
   const char oldChar = 'c';
   const char newChar = 'b';
@@ -33,7 +36,7 @@ int main()
     return 1;
   }
     std::cout << result << "\n";
-    delete[] input;
-    delete[] result;
+  delete[] input;
+  delete[] result;
   return 0;
 }
