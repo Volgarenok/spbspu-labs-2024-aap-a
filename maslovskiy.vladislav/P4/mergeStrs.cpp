@@ -1,23 +1,21 @@
 #include "mergeStrs.hpp"
 
+void fillStr(char *res, const char *str)
+{
+  while (*str != '\0')
+  {
+    *res = *str;
+    ++res;
+    ++str;
+  }
+  *res = '\0';
+}
 void maslovskiy::mergeStrs(char *res, const char *first, const char *second)
 {
-  size_t i = 0;
-  for (;first[i] != '\0' && second[i] != '\0'; ++i)
+  while (*first != '\0' && *second != '\0')
   {
-    res[i * 2] = first[i];
-    res[i * 2 + 1] = second[i];
+    *res++ = *first++;
+    *res++ = *second++;
   }
-  const char *temp = first[i] != '\0' ? first : second;
-  fillStr(res, temp, i);
-}
-void maslovskiy::fillStr(char *res, const char *str, size_t pos)
-{
-  size_t i = 0;
-  for (i = pos * 2; str[pos] != '\0'; ++i)
-  {
-    res[i] = str[pos];
-    ++pos;
-  }
-  res[i] = '\0';
+  fillStr(res, (*first != '\0') ? first : second);
 }

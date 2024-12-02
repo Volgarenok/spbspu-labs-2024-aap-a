@@ -1,6 +1,8 @@
 #include "inputString.hpp"
 #include "resizeString.hpp"
 #include <cstdlib>
+#include <iostream>
+
 char* maslovskiy::inputString(std::istream &in)
 {
   const size_t iterSize = 10;
@@ -8,7 +10,8 @@ char* maslovskiy::inputString(std::istream &in)
   char *str = static_cast<char*>(malloc(sizeof(char) * iterSize));
   if (str == nullptr)
   {
-    throw std::bad_alloc();
+    std::cerr << "Error: memory not allocated for string or incorrect parameters\n";
+    return nullptr;
   }
   char ch = 0;
   size_t i = 0;
@@ -24,7 +27,9 @@ char* maslovskiy::inputString(std::istream &in)
       char *temp = resizeString(str, strSize, iterSize);
       if (temp == nullptr)
       {
-        throw std::bad_alloc();
+        free(str);
+        std::cerr << "Error: memory not allocated for string or incorrect parameters\n";
+        return nullptr;
       }
       strSize += iterSize;
       free(str);
