@@ -25,18 +25,10 @@ int main(int argc, char** argv)
     unsigned long long a[2] = {0, 0};
     std::ifstream fin(argv[2]);
     fin >> a[0];
-    if (fin.fail() || fin.eof())
-    {
-      return 1;
-    }
     fin >> a[1];
-    if (fin.fail() || fin.eof())
-    {
-      return 1;
-    }
     try
     {
-      asafov::initializationMatrix(fin, mtx, a[0], a[1]);
+      asafov::initializeMatrix(fin, mtx, a[0], a[1]);
     }
     catch (const std::logic_error & e)
     {
@@ -47,23 +39,18 @@ int main(int argc, char** argv)
   }
   else if (argv[1][0] == '2')
   {
-    int* mtx = nullptr;
     unsigned long long a[2] = {0, 0};
     std::ifstream fin(argv[2]);
     fin >> a[0];
-    if (fin.fail() || fin.eof())
-    {
-      return 1;
-    }
     fin >> a[1];
     if (fin.fail() || fin.eof())
     {
       return 1;
     }
-    mtx = new int[a[0]*a[1]];
+    int* mtx = new int[a[0] * a[1]];
     try
     {
-      asafov::initializationMatrix(fin, mtx, a[0], a[1]);
+      asafov::initializeMatrix(fin, mtx, a[0], a[1]);
     }
     catch (const std::logic_error & e)
     {
