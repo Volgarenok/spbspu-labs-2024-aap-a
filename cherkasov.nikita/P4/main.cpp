@@ -23,7 +23,6 @@ int main()
   }
   if (!cherkasov::isValidInput(input))
   {
-    std::cerr << "Error: Invalid input.\n";
     delete[] input;
     return 0;
   }
