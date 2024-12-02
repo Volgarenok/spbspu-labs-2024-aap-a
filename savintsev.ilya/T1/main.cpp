@@ -61,7 +61,6 @@ int savintsev::actWithShpByDesc(char * desc, Shape ** rhs, size_t & amt, point_t
     }
     catch (const std::invalid_argument & e)
     {
-      std::cout << "ERROR\n";
       return 2;
     }
     return 0;
