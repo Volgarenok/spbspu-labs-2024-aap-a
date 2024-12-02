@@ -3,12 +3,18 @@
 #include "recursionString.hpp"
 int main()
 {
-  char *str1 = maslovskiy::inputString(std::cin);
-  if (!str1)
+  char *str = maslovskiy::inputString(std::cin);
+  if (str == nullptr)
   {
-    std::cerr << "Error: memory not allocate for string\n";
+    std::cerr << "Memory allocation failed for input string\n";
     return 1;
   }
-  std::cout << std::boolalpha << maslovskiy::isDouble(str1) << "\n";
-  free(str1);
+  if (*str == '\0')
+  {
+    free(str);
+    std::cerr << "Input string is null\n";
+    return 2;
+  }
+  std::cout << std::boolalpha << maslovskiy::isDouble(str) << "\n";
+  free(str);
 }
