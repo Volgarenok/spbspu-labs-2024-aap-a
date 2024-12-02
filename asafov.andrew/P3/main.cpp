@@ -26,6 +26,10 @@ int main(int argc, char** argv)
     std::ifstream fin(argv[2]);
     fin >> a[0];
     fin >> a[1];
+    if (fin.fail() || fin.eof())
+    {
+      return 1;
+    }
     try
     {
       asafov::initializeMatrix(fin, mtx, a[0], a[1]);
