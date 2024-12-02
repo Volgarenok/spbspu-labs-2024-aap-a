@@ -17,7 +17,7 @@ int main()
     free(c);
     return 1;
   }
-  std::cout << std::boolalpha << shabalin::func(t) << '\n';
+  std::cout << std::boolalpha << shabalin::func(c) << '\n';
   free(c);
 }
 
