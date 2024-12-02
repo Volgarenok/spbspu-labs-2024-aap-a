@@ -59,13 +59,20 @@ const char *hasExponent(const char *str)
   next = hasNumbers(next);
   return next;
 }
-
+bool isDouble(const char *str)
+{
+  auto next = str;
+  if (auto continues = hasSign(next))
+  {
+    next = continues;
+  }
+  next = hasMantissa(next);
+  next = hasExponent(next);
+  return *next == '\0' && next;
+}
 int main()
 {
   auto a = "-1.23456789E9234";
   std::cout << "Test" << "\n";
   std::cout << std::boolalpha << isDouble(a) << "\n";
 }
-
-
-
