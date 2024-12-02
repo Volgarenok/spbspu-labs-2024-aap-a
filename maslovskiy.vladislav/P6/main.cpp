@@ -4,7 +4,7 @@
 int main()
 {
   char *str1 = maslovskiy::inputString(std::cin);
-  if (str1 == nullptr)
+  if (!str1)
   {
     std::cerr << "Error: memory not allocate for string\n";
     return 1;
