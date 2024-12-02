@@ -1,4 +1,5 @@
 #include <iostream>
+#include <getline.hpp>
 #include "string_processing.hpp"
 
 int main()
