@@ -1,5 +1,5 @@
 #include "checkString.hpp"
-#include <cctype>
+
 namespace
 {
   const char *is_sign(const char *str)
@@ -107,3 +107,4 @@ bool shabalin::func(const char * str)
   const char *next = is_real(str);
   return next && (*next == '\0');
 }
+
