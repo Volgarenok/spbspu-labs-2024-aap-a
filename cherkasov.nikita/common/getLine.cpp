@@ -2,48 +2,41 @@
 #include <iostream>
 #include <cstring>
 #include <istream>
+#include <stdexcept>
 
-char* cherkasov::inputLine(std::istream& in)
+char* newArray(char* oldArray, size_t newCapacity)
 {
-  size_t capacity = 13;
-  size_t length = 0;
-  char* buffer = new (std::nothrow) char[capacity]();
-  if (!buffer)
+  try
   {
-    std::cerr << "Error: Faile to allocate memory.\n";
-    return nullptr;
-  }
-  char ch;
-  std::noskipws(in);
-  while (in.get(ch) && ch != '\n')
+  char* newArray = new char[newCapacity];
+  if (oldArray)
   {
-    if (length + 1 >= capacity)
+    size_t oldLength = 0;
+    while (oldArray[oldLength] != '\0' && oldLength < newCapacity - 1)
     {
-      size_t newCapacity = capacity * 2;
-      char* newBuffer = cherkasov::newArray(buffer, newCapacity);
-      if (!newBuffer)
-      {
-        delete[] buffer;
-        return nullptr;
-      }
-     buffer = newBuffer;
-     capacity = newCapacity;
+      newArray[oldLength] = oldArray[oldLength];
+      oldLength++;
     }
-    buffer[length++] = ch;
-  }
-  if (length == 0 && !in.eof())
-  {
-    std::cerr << "Error: Empty input.\n";
-    delete[] buffer;
-    return nullptr;
-  }
-  buffer[length] = '\0';
-  return buffer;
+      newArray[oldLength] = '\0';
+      delete[] oldArray;
+      }
+      else
+      {
+        newArray[0] = '\0';
+      }
+        return newArray;
+      }
+      catch (const std::bad_alloc& e)
+      {
+        std::cerr << "Error: Memory allocation failed: " << e.what() << "\n";
+        delete[] oldArray;
+        throw;
+      }
 }
 
 char* cherkasov::newArray(char* oldArray, size_t newCapacity)
 {
-  char* newArray = new (std::nothrow) char[newCapacity];
+  char* newArray = new (std::nothrow) char[newCapacity]();
   if (!newArray)
   {
     delete[] oldArray;
@@ -56,14 +49,10 @@ char* cherkasov::newArray(char* oldArray, size_t newCapacity)
     while (oldArray[oldLength] != '\0' && oldLength < newCapacity - 1)
     {
       newArray[oldLength] = oldArray[oldLength];
-      oldLength++;
+      ++oldLength;
     }
-    newArray[oldLength] = '\0';
-    delete[] oldArray;
-  }
-  else
-  {
-    newArray[0] = '\0';
+      newArray[oldLength] = '\0';
+      delete[] oldArray;
   }
   return newArray;
 }
