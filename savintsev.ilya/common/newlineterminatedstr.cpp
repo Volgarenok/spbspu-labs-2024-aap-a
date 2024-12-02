@@ -1,10 +1,11 @@
 #include "newlineterminatedstr.h"
 #include <cstddef>
 #include <iostream>
+#include "lrgcpy.hpp"
 
 namespace savintsev
 {
-  constexpr size_t MEMORY_SIZE = 40;
+  constexpr size_t MEMORY_SIZE = 20;
 }
 
 char * savintsev::inputNewlineTerminatedStr(std::istream & in)
@@ -29,7 +30,7 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
       capacity += capacity;
       try
       {
-        char * new_t = savintsev::createEnlargedCopiedStr(t, capacity);
+        char * new_t = createAmpCpyAny(t, capacity - capacity, capacity);
         delete[] t;
         t = new_t;
       }
@@ -48,14 +49,4 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
   }
   t[i - 1] = '\0';
   return t;
-}
-
-char * savintsev::createEnlargedCopiedStr(const char * old, size_t new_size)
-{
-  char * created = new char[new_size];
-  for (size_t i = 0; old[i] != '\0'; ++i)
-  {
-    created[i] = old[i];
-  }
-  return created;
 }
