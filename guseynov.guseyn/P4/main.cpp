@@ -1,10 +1,7 @@
 #include <iostream>
 
 #include <workWithString.hpp>
-<<<<<<< HEAD
-=======
 #include "det_Num_Of_Letters.hpp"
->>>>>>> guseynov.guseyn/P4
 
 int main()
 {
