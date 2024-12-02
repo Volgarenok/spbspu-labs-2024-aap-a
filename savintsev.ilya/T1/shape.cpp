@@ -7,10 +7,12 @@ void savintsev::scaleRelativeTo(Shape * rhs, point_t p, double k)
   {
     return;
   }
-  point_t center = rhs->getFrameRect().pos;
-  point_t new_center = {(center.x - p.x) * k + p.x, (center.y - p.y) * k + p.y};
-  rhs->move(new_center);
+  point_t jointFirst = rhs->getFrameRect().pos;
+  rhs->move(p);
+  point_t jointSecond = rhs->getFrameRect().pos;
+  point_t vector = {(jointSecond.x - jointFirst.x) * k, (jointSecond.y - jointFirst.y) * k};
   rhs->scale(k);
+  rhs->move(-vector.x, -vector.y);
 }
 
 void savintsev::scaleAllRelativeTo(Shape ** rhs, size_t amt, point_t p, double k)
