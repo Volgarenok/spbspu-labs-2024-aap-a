@@ -4,12 +4,12 @@
 
 int main()
 {
-  const char * str = guseynov::getLine(std::cin);
+  char * str = guseynov::getLine(std::cin);
   if (!str)
   {
     return 1;
   }
   std::cout << std::boolalpha << guseynov::isDouble(str) << "\n";
-  free(str);x
+  free(str);
   return 0;
 }
