@@ -1,6 +1,6 @@
 #include <cstdlib>
 #include <iostream>
-#include "inputString.hpp"
+#include <getline>
 #include "mergeStrs.hpp"
 int main()
 {
