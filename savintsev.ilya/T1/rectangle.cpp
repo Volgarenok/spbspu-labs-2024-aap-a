@@ -28,7 +28,7 @@ savintsev::rectangle_t savintsev::Rectangle::getFrameRect() const
 
 void savintsev::Rectangle::move(point_t p)
 {
-  point_t center = this->getFrameRect().pos;
+  point_t center = getFrameRect().pos;
   double moveByX = p.x - center.x;
   double moveByY = p.y - center.y;
   this->pLowLeft_ = {pLowLeft_.x + moveByX, pLowLeft_.y + moveByY};
@@ -47,7 +47,7 @@ void savintsev::Rectangle::scale(double k)
   {
     return;
   }
-  point_t center = this->getFrameRect().pos;
+  point_t center = getFrameRect().pos;
   this->pLowLeft_ = {center.x - (center.x - pLowLeft_.x) * k, center.y - (center.y - pLowLeft_.y) * k};
   this->pUpRight_ = {center.x + (pUpRight_.x - center.x) * k, center.y + (pUpRight_.y - center.y) * k};
 }

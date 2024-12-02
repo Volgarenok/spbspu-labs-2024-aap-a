@@ -19,16 +19,7 @@ savintsev::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4)
 
 double savintsev::Concave::getArea() const
 {
-  double l1 = getLength(p1_, p2_);
-  double l2 = getLength(p2_, p3_);
-  double l3 = getLength(p3_, p1_);
-  double per = (l1 + l2 + l3) / 2.;
-  double sqbig = std::sqrt(per * (per - l1) * (per - l2) * (per - l3));
-  l1 = getLength(p2_, p3_);
-  l2 = getLength(p3_, p4_);
-  l3 = getLength(p4_, p2_);
-  per = (l1 + l2 + l3) / 2.;
-  return sqbig - std::sqrt(per * (per - l1) * (per - l2) * (per - l3));
+  return getTriangleArea(p1_, p2_, p3_) - getTriangleArea(p2_, p3_, p4_);
 }
 
 savintsev::rectangle_t savintsev::Concave::getFrameRect() const

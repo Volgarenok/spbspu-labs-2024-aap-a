@@ -21,3 +21,41 @@ bool savintsev::isPointInTriangle(point_t t1, point_t t2, point_t t3, point_t p)
   }
   return false;
 }
+
+savintsev::point_t savintsev::findLinesIntersect(point_t m1, point_t m2, point_t n1, point_t n2, bool * finded)
+{
+  double a1 = m2.y - m1.y;
+  double b1 = m1.x - m2.x;
+  double c1 = a1 * (m1.x) + b1 * (m1.y);
+  double a2 = n2.y - n1.y;
+  double b2 = n1.x - n2.x;
+  double c2 = a2 * (n1.x) + b2 * (n1.y);
+  double determinant = a1 * b2 - a2 * b1;
+  if (determinant == 0)
+  {
+    if (finded != nullptr)
+    {
+      *finded = false;
+    }
+    return {0., 0.};
+  }
+  else
+  {
+    double x = (b2 * c1 - b1 * c2) / determinant;
+    double y = (a1 * c2 - a2 * c1) / determinant;
+    if (finded != nullptr)
+    {
+      *finded = true;
+    }
+    return {x, y};
+  }
+}
+
+double savintsev::getTriangleArea(point_t p1, point_t p2, point_t p3)
+{
+  double l1 = getLength(p1, p2);
+  double l2 = getLength(p2, p3);
+  double l3 = getLength(p3, p1);
+  double per = (l1 + l2 + l3) / 2.;
+  return std::sqrt(per * (per - l1) * (per - l2) * (per - l3));
+}
