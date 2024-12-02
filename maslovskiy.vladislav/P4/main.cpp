@@ -1,13 +1,7 @@
 #include <cstdlib>
 #include <iostream>
-<<<<<<< HEAD
-#include <inputString.hpp>
-#include "mergeStrs.hpp"
-
-=======
 #include "inputString.hpp"
 #include "mergeStrs.hpp"
->>>>>>> maslovskiy.vladislav/P4
 int main()
 {
   using namespace maslovskiy;
