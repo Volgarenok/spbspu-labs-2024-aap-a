@@ -1,5 +1,7 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
+#include <cstddef>
+#include <iostream>
 #include "base-types.hpp"
 
 namespace savintsev
@@ -16,5 +18,8 @@ namespace savintsev
   };
 
   void scaleRelativeTo(Shape * rhs, point_t p, double k);
+  void scaleAllRelativeTo(Shape ** rhs, size_t amt, point_t p, double k);
+  void printSumAreaAndBorders(std::ostream & out, Shape ** rhs, size_t amt);
+
 }
 #endif

@@ -89,37 +89,9 @@ int main()
       if (scaleK > 0)
       {
         std::setprecision(2);
-        savintsev::point_t lL = {0., 0.}, uR = {0., 0.};
-        savintsev::rectangle_t rect = {0., 0., {0., 0.}};
-        double sumArea = 0.;
-        for (size_t i = 0; i < amtOfShapes; ++i)
-        {
-          sumArea += ShapeList[i]->getArea();
-        }
-        std::cout << sumArea;
-        for (size_t i = 0; i < amtOfShapes; ++i)
-        {
-          rect = ShapeList[i]->getFrameRect();
-          lL = {rect.pos.x - rect.width / 2, rect.pos.y - rect.height / 2};
-          uR = {rect.pos.x + rect.width / 2, rect.pos.y + rect.height / 2};
-          std::cout << ' ' << lL.x << ' ' << lL.y << ' ' << uR.x << ' ' << uR.y;
-        }
-        std::cout << '\n';
-        sumArea = 0.;
-        for (size_t i = 0; i < amtOfShapes; ++i)
-        {
-          savintsev::scaleRelativeTo(ShapeList[i], scaleC, scaleK);
-          sumArea += ShapeList[i]->getArea();
-        }
-        std::cout << sumArea;
-        for (size_t i = 0; i < amtOfShapes; ++i)
-        {
-          rect = ShapeList[i]->getFrameRect();
-          lL = {rect.pos.x - rect.width / 2, rect.pos.y - rect.height / 2};
-          uR = {rect.pos.x + rect.width / 2, rect.pos.y + rect.height / 2};
-          std::cout << ' ' << lL.x << ' ' << lL.y << ' ' << uR.x << ' ' << uR.y;
-        }
-        std::cout << '\n';
+        savintsev::printSumAreaAndBorders(std::cout, ShapeList, amtOfShapes);
+        savintsev::scaleAllRelativeTo(ShapeList, amtOfShapes, scaleC, scaleK);
+        savintsev::printSumAreaAndBorders(std::cout, ShapeList, amtOfShapes);
       }
       else
       {
