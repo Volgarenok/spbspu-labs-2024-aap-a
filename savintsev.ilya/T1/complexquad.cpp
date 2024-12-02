@@ -33,7 +33,7 @@ savintsev::rectangle_t savintsev::Complexquad::getFrameRect() const
 
 void savintsev::Complexquad::move(point_t p)
 {
-  point_t center = getFrameRect().pos;
+  point_t center = findLinesIntersect(p1_, p2_, p3_, p4_, nullptr);
   double moveByX = p.x - center.x;
   double moveByY = p.y - center.y;
   this->p1_ = {p1_.x + moveByX, p1_.y + moveByY};
@@ -56,7 +56,7 @@ void savintsev::Complexquad::scale(double k)
   {
     return;
   }
-  point_t center = getFrameRect().pos;
+  point_t center = findLinesIntersect(p1_, p2_, p3_, p4_, nullptr);
   this->p1_ = {center.x - (center.x - p1_.x) * k, center.y - (center.y - p1_.y) * k};
   this->p2_ = {center.x - (center.x - p2_.x) * k, center.y - (center.y - p2_.y) * k};
   this->p3_ = {center.x - (center.x - p3_.x) * k, center.y - (center.y - p3_.y) * k};
