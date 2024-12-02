@@ -19,7 +19,7 @@ int main(int argc, char** argv)
     std::cerr << "Too many arguments";
     return 1;
   }
-  else if (argv[1][0] == '1')
+  else if (argv[1][0] == '1' && argv[1][1] == 0)
   {
     int mtx[10000] = {};
     unsigned long long a[2] = {0, 0};
@@ -37,7 +37,7 @@ int main(int argc, char** argv)
     std::ofstream fout(argv[3]);
     fout << asafov::handleNumColLsr(mtx, a[0], a[1]);
   }
-  else if (argv[1][0] == '2')
+  else if (argv[1][0] == '2' && argv[1][1] == 0)
   {
     unsigned long long a[2] = {0, 0};
     std::ifstream fin(argv[2]);
