@@ -66,13 +66,9 @@ const char * guseynov::isOrder(const char * str)
   {
     return nullptr;
   }
-  if (!guseynov::isSign(next))
+  if (guseynov::isSign(next))
   {
   next = guseynov::isUnsignNum(next);
-  }
-  else
-  {
-    next = guseynov::isUnsignNum(next + 1);
   }
   return next;
 }
