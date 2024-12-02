@@ -21,7 +21,11 @@ char* karnauhova::input_string(std::istream& in, char end)
   size_t i = 1;
   while ((in >> x) && (x != end))
   {
+<<<<<<< HEAD
     if ((i + 1) >= n)
+=======
+    if (i >= n)
+>>>>>>> parent of f7ab4f9b (Revert "Merge branch 'dribas.sergey/P6' into dribas.sergey/P4")
     {
       n = n * 2;
       char* str1 = reinterpret_cast< char* >(malloc(sizeof(char) * n));
@@ -38,7 +42,10 @@ char* karnauhova::input_string(std::istream& in, char end)
       str = str1;
     }
     str[i] = x;
+<<<<<<< HEAD
     str[i + 1] = '\0';
+=======
+>>>>>>> parent of f7ab4f9b (Revert "Merge branch 'dribas.sergey/P6' into dribas.sergey/P4")
     i++;
   }
   std::skipws(in);

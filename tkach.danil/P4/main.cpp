@@ -1,5 +1,9 @@
 #include <iostream>
+<<<<<<< HEAD
 #include <stringinput.hpp>
+=======
+#include "stringinput.h"
+>>>>>>> parent of f7ab4f9b (Revert "Merge branch 'dribas.sergey/P6' into dribas.sergey/P4")
 #include "removevowels.h"
 
 int main()
