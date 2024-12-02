@@ -1,85 +1,89 @@
 #include "is_real_number.hpp"
-#include <cstddef>
+#include <cctype>
 
-char * petrov::hasSign(char * str)
+namespace
 {
-  if (!str)
+  const char * hasSign(const char * str);
+  const char * hasSymbol(const char * str, const char symbol);
+  const char * hasDigit(const char * str);
+  const char * hasUnsignedInt(const char * str);
+  const char * hasSignificand(const char * str);
+  const char * hasOrderOfMagnitude(const char * str);
+  
+  const char * hasSign(const char * str)
   {
+    if (!str)
+    {
+      return str;
+    }
+    if ((*str == '+' || *str == '-') && str != nullptr)
+    {
+      str++;
+    }
     return str;
   }
-  if ((*str == '+' || *str == '-') && str != nullptr)
+
+  const char * hasSymbol(const char * str, const char symbol)
   {
-    str++;
+    return (*str == symbol) ? ++str : nullptr;
   }
-  return str;
-}
 
-char * petrov::hasSymbol(char * str, const char symbol)
-{
-  return (*str == symbol) ? ++str : nullptr;
-}
-
-char * petrov::hasDigit(char * str)
-{
-  char numbers[11] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '\0'};
-  size_t i = 0;
-  while (numbers[i] != '\0')
+  const char * hasDigit(const char * str)
   {
-    if (*str == numbers[i])
+    if (std::isdigit(*str))
     {
       return ++str;
     }
-    i++;
+    return nullptr;
   }
-  return nullptr;
+
+  const char * hasUnsignedInt(const char * str)
+  {
+    if (!str)
+    {
+      return str;
+    }
+    auto next = hasDigit(str);
+    if (auto continues = hasUnsignedInt(next))
+    {
+      return continues;
+    }
+    return next;
+  }
+
+  const char * hasSignificand(const char * str)
+  {
+    if (!str)
+    {
+      return str;
+    }
+    auto next = hasSign(str);
+    next = hasSymbol(next, '.');
+    next = hasUnsignedInt(next);
+    return next;
+  }
+
+  const char * hasOrderOfMagnitude(const char * str)
+  {
+    if (!str)
+    {
+      return str;
+    }
+    auto next = hasSymbol(str, 'E');
+    next = hasSign(next);
+    next = hasUnsignedInt(next);
+    return next;
+  }
 }
 
-char * petrov::hasUnsignedInt(char * str)
+const char * petrov::hasRealNumber(const char * str)
 {
-  if (!str)
-  {
-    return str;
-  }
-  auto next = petrov::hasDigit(str);
-  if (auto continues = petrov::hasUnsignedInt(next))
-  {
-    return continues;
-  }
+  auto next = hasSignificand(str);
+  next = hasOrderOfMagnitude(next);
   return next;
 }
 
-char * petrov::hasSignificand(char * str)
-{
-  if (!str)
-  {
-    return str;
-  }
-  auto next = petrov::hasSign(str);
-  next = petrov::hasSymbol(next, '.');
-  next = petrov::hasUnsignedInt(next);
-  return next;
-}
-
-char * petrov::hasOrderOfMagnitude(char * str)
-{
-  if (!str)
-  {
-    return str;
-  }
-  auto next = petrov::hasSymbol(str, 'E');
-  next = petrov::hasSign(next);
-  next = petrov::hasUnsignedInt(next);
-  return next;
-}
-
-char * petrov::hasRealNumber(char * str)
-{
-  auto next = petrov::hasSignificand(str);
-  next = petrov::hasOrderOfMagnitude(next);
-  return next;
-}
-
-bool petrov::isRealNumber(char * str)
+bool petrov::isRealNumber(const char * str)
 {
   auto next = hasRealNumber(str);
   return next && (*next == '\0');
