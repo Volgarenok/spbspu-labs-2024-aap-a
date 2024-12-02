@@ -93,6 +93,13 @@ int main()
     int result = savintsev::actWithShpByDesc(line, ShapeList, amtOfShapes, scaleC, scaleK);
     if (result == 1)
     {
+      if (!amtOfShapes)
+      {
+        delete[] line;
+        savintsev::destroyShapes(ShapeList, amtOfShapes);
+        std::cerr << "ERROR: No shapes\n";
+        return 2;
+      }
       if (scaleK > 0)
       {
         savintsev::printSumAreaAndBorders(std::cout, ShapeList, amtOfShapes);
