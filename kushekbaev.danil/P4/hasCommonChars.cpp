@@ -1,12 +1,12 @@
-#include "arrays_reading.hpp"
+#include "has_common_chars.hpp"
 
-int kushekbaev::hasCommonChars(const char* str1, size_t size1, const char* str2, size_t size2)
+int kushekbaev::hasCommonChars(const char* str1, const char* str2, size_t size, size_t size_string_literal)
 {
-  for (size_t i = 0; i < size1; i++)
+  for (const char* i = str1; i < str1 + size; i++)
   {
-    for (size_t j = 0; j < size2; j++)
+    for (const char* j = str2; j < str2 + size_string_literal; j++)
     {
-      if (str1[i] == str2[j])
+      if (*i == *j)
       {
         return 1;
       }

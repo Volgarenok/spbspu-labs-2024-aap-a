@@ -1,28 +1,23 @@
-#include "arrays_reading.hpp"
+#include <cstring>
 #include <iostream>
+#include <read_input_array.hpp>
+#include "has_common_chars.hpp"
 
 int main()
 {
-  size_t max = 10;
-  size_t size1 = 0;
-  size_t size2 = 0;
+  const char * str1 = kushekbaev::readInputArray(std::cin);
 
-  char * str1 = kushekbaev::readInputArray(size1, max);
+  const char * str2 = "string literal";
 
-  char * str2 = kushekbaev::readInputArray(size2, max);
-
-  if (size1 == 0 and size2 == 0)
+  if (str1 == nullptr)
   {
     std::cerr << "Failed input" << "\n";
     delete[] str1;
-    delete[] str2;
     return 1;
   }
 
-  int result = kushekbaev::hasCommonChars(str1, size1, str2, size2);
-  std::cout << result << "\n";
+  std::cout << kushekbaev::hasCommonChars(str1, str2, strlen(str1), strlen(str2)) << "\n";
 
   delete[] str1;
-  delete[] str2;
   return 0;
 }
