@@ -24,7 +24,6 @@ const char* maslovskiy::hasDigit(const char* str)
   }
   return isdigit(*str) ? (str + 1) : nullptr;
 }
-
 const char* maslovskiy::hasChar(const char* str, char c)
 {
   if (!str || *str == '\0')
@@ -33,7 +32,6 @@ const char* maslovskiy::hasChar(const char* str, char c)
   }
   return *str == c ? (str + 1) : nullptr;
 }
-
 const char* maslovskiy::hasSign(const char* str)
 {
   if (!str || *str == '\0')
@@ -48,7 +46,6 @@ const char* maslovskiy::hasNumbers(const char* str)
   {
     return nullptr;
   }
-
   const char* next = maslovskiy::hasDigit(str);
   if (!next)
   {
@@ -60,7 +57,6 @@ const char* maslovskiy::hasNumbers(const char* str)
   }
   return next;
 }
-
 const char* maslovskiy::hasMantissa(const char* str)
 {
   if (!str || *str == '\0')
@@ -72,7 +68,6 @@ const char* maslovskiy::hasMantissa(const char* str)
   {
     return nullptr;
   }
-
   if (*next == '.')
   {
     next++;
@@ -91,7 +86,6 @@ const char* maslovskiy::hasExponent(const char* str)
   {
     return str;
   }
-
   next = maslovskiy::hasSign(next);
   next = maslovskiy::hasNumbers(next);
   return next;
