@@ -86,6 +86,10 @@ int evstyunichev::is_vowel(const char c)
 size_t evstyunichev::cnt_not_vowel(const char *str)
 {
   size_t ans = 0, i = 0;
+  if (!str)
+  {
+    return ans;
+  }
   while (str[i])
   {
     if (!is_vowel(str[i]))
