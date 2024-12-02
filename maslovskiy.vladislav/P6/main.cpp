@@ -1,7 +1,17 @@
 #include <iostream>
+#include <cctype>
+
 bool isSign(char c)
 {
   return (c == '+') || (c == '-');
+}
+const char *hasDigit(const char *str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  return isdigit(*str) ? (str + 1) : nullptr;
 }
 int main()
 {
