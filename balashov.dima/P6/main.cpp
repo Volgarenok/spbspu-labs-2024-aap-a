@@ -16,7 +16,7 @@ int main()
     std::cerr << "The absence of a line\n";
     return 1;
   }
-  std::cout << balashov::isFloatingPointLiteral(line) << "\n";
+  std::cout << std::boolalpha << balashov::isFloatingPointLiteral(line) << "\n";
   free(line);
   return 0;
 }
