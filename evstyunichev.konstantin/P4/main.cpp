@@ -4,18 +4,22 @@
 
 int main()
 {
-  char *str = new char[1];
-  str[0] = 0;
-  if (!(evstyunichev::GetString(str, std::cin, '\n')))
+  char * str1 = evstyunichev::get_string(std::cin, '\n');
+  if (!str1)
   {
-    delete[] str;
     return 1;
   }
-  size_t sz = evstyunichev::CntNotVowel(str);
-  char *str2 = nullptr;
-  int flag = StringResize(str2, sz);
-  flag = evstyunichev::RMV_VOW(str, str2);
-  evstyunichev::Output(str, std::cout);
-  std::cout << '\n';
-  delete[] str;
+  size_t sz = evstyunichev::cnt_not_vowel(str1);
+  char * str2 = evstyunichev::resize_str(sz);
+  if (evstyunichev::rmv_vow(str1, str2))
+  {
+    evstyunichev::output(str2, std::cout);
+    std::cout << '\n';
+  }
+  else
+  {
+    return 1;
+  }
+  delete[] str1;
+  delete[] str2;
 }

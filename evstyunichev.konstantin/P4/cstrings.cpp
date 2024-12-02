@@ -4,49 +4,56 @@
 
 constexpr size_t default_size = 256;
 
-int evstyunichev::StringResize(char *s, size_t sz)
+void evstyunichev::copy(char *str1, char *str2)
+{
+  if (!str1)
+  {
+    return;
+  }
+  for (size_t i = 0; str1[i] && str2[i]; i++)
+  {
+    str2[i] = str1[i];
+  }
+  return;
+}
+
+char * evstyunichev::resize_str(size_t sz, char *str)
 {
   try
   {
     char *temp = new char[sz + 1];
     size_t i = 0;
-    while (s[i])
-    {
-      temp[i] = s[i];
-      i++;
-    }
-    delete[] s;
-    s = temp;
-    return 1;
+    copy(str, temp);
+    delete[] str;
+    return temp;
   }
   catch(const std::bad_alloc &e)
   {
-    return 0;
+    return nullptr;
   }
 }
 
-
-int evstyunichev::GetString(char *str, std::istream &in, char end)
+char * evstyunichev::get_string(std::istream &in, char end)
 {
   size_t sz = 0, mx = default_size;
-  int res = 1;
-  res = StringResize(str, mx);
+  char *str = resize_str(mx);
+  bool res = str;
   std::noskipws(in);
-  unsigned char c = 0;
+  char c = 0;
   while ((in >> c) && (c != end))
   {
     sz++;
     if(sz > mx)
     {
       mx *= 2;
-      res = StringResize(str, mx);
+      str = resize_str(mx, str);
     }
     str[sz - 1] = c;
   }
-  return res;
+  return str;
 }
 
-int evstyunichev::IsVowel(char c)
+int evstyunichev::is_vowel(char c)
 {
   char good[] = {"aeiouyAEIOUY"};
   int flag = 0;
@@ -60,12 +67,12 @@ int evstyunichev::IsVowel(char c)
   return flag;
 }
 
-size_t evstyunichev::CntNotVowel(char *str)
+size_t evstyunichev::cnt_not_vowel(char *str)
 {
   size_t ans = 0, i = 0;
   while (str[i])
   {
-    if (!IsVowel(str[i]))
+    if (!is_vowel(str[i]))
     {
       ans++;
     }
@@ -74,12 +81,16 @@ size_t evstyunichev::CntNotVowel(char *str)
   return ans + 1;
 }
 
-void evstyunichev::RMV_VOW(char *str1, char *str2)
+int evstyunichev::rmv_vow(char *str1, char *str2)
 {
+  if (!str2)
+  {
+    return 0;
+  }
   size_t i = 0, cur = 0;
   while (str1[i])
   {
-    if (!IsVowel(str1[i]))
+    if (!is_vowel(str1[i]))
     {
       str2[cur] = str1[i];
       cur++;
@@ -87,10 +98,10 @@ void evstyunichev::RMV_VOW(char *str1, char *str2)
     i++;
   }
   str2[cur] = 0;
-  return;
+  return 1;
 }
 
-void evstyunichev::Output(char *str, std::ostream &out)
+void evstyunichev::output(char *str, std::ostream &out)
 {
   size_t i = 0;
   while (str[i])
@@ -99,15 +110,15 @@ void evstyunichev::Output(char *str, std::ostream &out)
   }
 }
 
-char * evstyunichev::Create(size_t sz)
+char * evstyunichev::create(size_t sz)
 {
+  char *str2 = nullptr;
   try
   {
     char *str2 = new char[sz + 1];
   }
-  catch (std::bad_alloc() &e)
+  catch (const std::bad_alloc &e)
   {
-    delete[] str2;
     str2 = nullptr;
   }
   return str2;
