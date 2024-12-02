@@ -4,7 +4,7 @@
 
 int main(int argc, char **argv)
 {
-  constexpr size_t staticArrSize = 1e4;
+  constexpr size_t fixedArrSize = 1e4;
   if (argc < 4)
   {
     std::cerr << "Not enough arguments\n";
@@ -34,8 +34,8 @@ int main(int argc, char **argv)
   size_t read = 0;
   if (num == 1)
   {
-    int staticArr[staticArrSize];
-    if (!evstyunichev::solve_print(fin, fout, staticArr, n, m, read))
+    int fixedArr[fixedArrSize];
+    if (!evstyunichev::solve_print(fin, fout, fixedArr, n, m, read))
     {
       std::cerr << "bad input\n";
       return 2;
