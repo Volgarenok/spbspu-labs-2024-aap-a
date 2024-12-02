@@ -12,6 +12,12 @@ int main()
     std::cerr << "ERROR: imposible to getLine\n";
     return 1;
   }
+  if (*firstLine == '\0')
+  {
+    std::cerr << "ERROR: an empty input\n";
+    free(firstLine);
+    return 2;
+  }
   char secondLine[] = "50ftw34r_3n8in33r1n8\0";
   char* extended_firstLine = nikonov::reallocate(firstLine, capacity, 1, 10);
   if (!extended_firstLine)
