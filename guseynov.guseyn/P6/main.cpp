@@ -6,4 +6,6 @@ int main()
 {
   const char * str = guseynov::getLine(std::cin);
   std::cout << std::boolalpha << guseynov::isDouble(str) << "\n";
+  free(str);x
+  return 0;
 }
