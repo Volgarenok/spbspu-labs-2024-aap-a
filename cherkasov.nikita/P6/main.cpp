@@ -9,7 +9,7 @@ int main()
   char* inputString = nullptr;
   try
   {
-    inputString = cherkasov::readInput(std::cin);
+    inputString = cherkasov::readLine(std::cin);
   }
   catch (const std::bad_alloc& e)
   {
