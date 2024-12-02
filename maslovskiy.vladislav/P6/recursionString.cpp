@@ -14,70 +14,104 @@ namespace maslovskiy
 }
 bool maslovskiy::isSign(char c)
 {
-  return (c == '+') || (c == '-');
+  return c == '+' || c == '-';
 }
-const char *maslovskiy::hasDigit(const char *str)
+const char* maslovskiy::hasDigit(const char* str)
 {
-  if (!str)
+  if (!str || *str == '\0')
   {
-    return str;
+    return nullptr;
   }
   return isdigit(*str) ? (str + 1) : nullptr;
 }
-const char *maslovskiy::hasChar(const char *str, char c)
+
+const char* maslovskiy::hasChar(const char* str, char c)
 {
-  if (!str)
+  if (!str || *str == '\0')
   {
-    return str;
+    return nullptr;
   }
   return *str == c ? (str + 1) : nullptr;
 }
-const char *maslovskiy::hasSign (const char *str)
+
+const char* maslovskiy::hasSign(const char* str)
 {
-  if (!str)
+  if (!str || *str == '\0')
+  {
+    return nullptr;
+  }
+  return maslovskiy::isSign(*str) ? (str + 1) : str;
+}
+const char* maslovskiy::hasNumbers(const char* str)
+{
+  if (!str || *str == '\0')
+  {
+    return nullptr;
+  }
+
+  const char* next = maslovskiy::hasDigit(str);
+  if (!next)
+  {
+    return nullptr;
+  }
+  while (next && isdigit(*next))
+  {
+    next++;
+  }
+  return next;
+}
+
+const char* maslovskiy::hasMantissa(const char* str)
+{
+  if (!str || *str == '\0')
+  {
+    return nullptr;
+  }
+  const char* next = maslovskiy::hasNumbers(str);
+  if (!next)
+  {
+    return nullptr;
+  }
+
+  if (*next == '.')
+  {
+    next++;
+    next = maslovskiy::hasNumbers(next);
+  }
+  return next;
+}
+const char* maslovskiy::hasExponent(const char* str)
+{
+  if (!str || *str == '\0')
+  {
+    return nullptr;
+  }
+  const char* next = maslovskiy::hasChar(str, 'E');
+  if (!next)
   {
     return str;
   }
-  return isSign(*str) ? (str + 1) : nullptr;
-}
-const char *maslovskiy::hasNumbers(const char *str)
-{
-  if (!str)
-  {
-    return str;
-  }
-  auto next = maslovskiy::hasDigit(str);
-  if (auto continues = maslovskiy::hasNumbers(next))
-  {
-    return continues;
-  }
-  return next;
-}
-const char *maslovskiy::hasMantissa(const char *str)
-{
-  auto next = maslovskiy::hasDigit(str);
-  next = maslovskiy::hasChar(next, '.');
+
+  next = maslovskiy::hasSign(next);
   next = maslovskiy::hasNumbers(next);
   return next;
 }
-const char *maslovskiy::hasExponent(const char *str)
+bool maslovskiy::isDouble(const char* str)
 {
-  auto next = maslovskiy::hasChar(str, 'E');
-  if (auto continues = maslovskiy::hasSign(next))
+  if (!str || *str == '\0')
   {
-    next = continues;
+    return false;
   }
-  next = maslovskiy::hasNumbers(next);
-  return next;
-}
-bool maslovskiy::isDouble(const char *str)
-{
-  auto next = str;
-  if (auto continues = maslovskiy::hasSign(next))
+  const char* next = maslovskiy::hasSign(str);
+  if (!next)
   {
-    next = continues;
+    return false;
   }
   next = maslovskiy::hasMantissa(next);
+  if (!next)
+  {
+    return false;
+  }
   next = maslovskiy::hasExponent(next);
-  return *next == '\0' && next;
+  return next && *next == '\0';
 }
