@@ -17,5 +17,6 @@ namespace savintsev
   };
 
   double getLength(point_t lhs, point_t rhs);
+  bool isPointInTriangle(point_t t1, point_t t2, point_t t3, point_t p);
 }
 #endif

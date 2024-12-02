@@ -5,6 +5,7 @@
 #include <lrgcpy.hpp>
 #include "base-types.hpp"
 #include "rectangle.hpp"
+#include "concave.hpp"
 
 //CONCAVE COMPLEXQUAD
 namespace savintsev
@@ -45,6 +46,22 @@ int savintsev::actWithShpByDesc(char * desc, Shape ** rhs, size_t & amt, point_t
     }
     catch (const std::invalid_argument & e)
     {
+      return 2;
+    }
+    return 0;
+  }
+  if (!std::strcmp(token, "CONCAVE"))
+  {
+    double n[8] = {0., 0., 0., 0., 0., 0., 0., 0.};
+    readDblfromDesc(n, 8);
+    try
+    {
+      Concave * Conc = new Concave({n[0], n[1]}, {n[2], n[3]}, {n[4], n[5]}, {n[6], n[7]});
+      rhs[amt++] = Conc;
+    }
+    catch (const std::invalid_argument & e)
+    {
+      std::cout << "ERROR\n";
       return 2;
     }
     return 0;

@@ -31,14 +31,14 @@ void savintsev::Rectangle::move(point_t p)
   point_t center = this->getFrameRect().pos;
   double moveByX = p.x - center.x;
   double moveByY = p.y - center.y;
-  this->pLowLeft_ = {this->pLowLeft_.x + moveByX, this->pLowLeft_.y + moveByY};
-  this->pUpRight_ = {this->pUpRight_.x + moveByX, this->pUpRight_.y + moveByY};
+  this->pLowLeft_ = {pLowLeft_.x + moveByX, pLowLeft_.y + moveByY};
+  this->pUpRight_ = {pUpRight_.x + moveByX, pUpRight_.y + moveByY};
 }
 
 void savintsev::Rectangle::move(double x, double y)
 {
-  this->pLowLeft_ = {this->pLowLeft_.x + x, this->pLowLeft_.y + y};
-  this->pUpRight_ = {this->pUpRight_.x + x, this->pUpRight_.y + y};
+  this->pLowLeft_ = {pLowLeft_.x + x, pLowLeft_.y + y};
+  this->pUpRight_ = {pUpRight_.x + x, pUpRight_.y + y};
 }
 
 void savintsev::Rectangle::scale(double k)
