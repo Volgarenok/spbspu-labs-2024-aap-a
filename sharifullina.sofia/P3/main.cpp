@@ -16,7 +16,7 @@ int main(int argc, char ** argv)
     std::cerr << "Too many arguments\n";
     return 1;
   }
-  char* end;
+  char* end = nullptr;
   long num = std::strtol(argv[1], &end, 10);
   if (*end != '\0' || (num != 1 && num != 2))
   {
@@ -72,7 +72,7 @@ int main(int argc, char ** argv)
     delete[] dynamicArr;
     return 1;
   }
-  output << sharifullina::countLocMax(array, m, n);
+  output << sharifullina::countLocMax(array, m, n) << " ";
   output << sharifullina::countMaxSumMdg(array, m, n);
   output << "\n";
   delete[] dynamicArr;
