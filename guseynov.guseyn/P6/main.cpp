@@ -10,11 +10,6 @@ int main()
     std::cerr << "Fail to read\n";
     return 1;
   }
-  if (*str == '\0') {
-    std::cerr << "Fail \n";
-    std::free(str);
-    return 1;
-  }
   std::cout << std::boolalpha << guseynov::isDouble(str) << "\n";
   free(str);
   return 0;
