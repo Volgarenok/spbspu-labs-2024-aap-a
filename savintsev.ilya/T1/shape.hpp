@@ -14,5 +14,7 @@ namespace savintsev
     virtual void move(double x, double y) = 0;
     virtual void scale(double k) = 0;
   };
+
+  void scaleRelativeTo(Shape * rhs, point_t p, double k);
 }
 #endif
