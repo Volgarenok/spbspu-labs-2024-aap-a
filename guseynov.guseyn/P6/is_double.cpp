@@ -24,6 +24,10 @@ const char * guseynov::isSign(const char * str)
     return next;
   }
   next = guseynov::isSymbol(str, '-');
+  if (!next)
+  {
+    return str;
+  }
   return next;
 }
 
