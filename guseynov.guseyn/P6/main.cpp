@@ -7,11 +7,11 @@ int main()
   char * str = guseynov::getLine(std::cin);
   if (str == nullptr)
   {
-    std::cerr << "Fail\n";
+    std::cerr << "Fail to read\n";
     return 1;
   }
   if (*str == '\0') {
-    std::cerr << "Fail\n";
+    std::cerr << "Fail \n";
     std::free(str);
     return 1;
   }
