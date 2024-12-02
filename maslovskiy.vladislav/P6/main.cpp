@@ -13,6 +13,22 @@ const char *hasDigit(const char *str)
   }
   return isdigit(*str) ? (str + 1) : nullptr;
 }
+const char *hasChar(const char *str, char c)
+{
+  if (!str)
+  {
+    return str;
+  }
+  return *str == c ? (str + 1) : nullptr;
+}
+const char *hasSign (const char *str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  return isSign(*str) ? (str + 1) : nullptr;
+}
 const char *hasNumbers(const char *str)
 {
   if (!str)
