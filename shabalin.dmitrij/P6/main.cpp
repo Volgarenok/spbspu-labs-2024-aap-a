@@ -20,3 +20,4 @@ int main()
   std::cout << std::boolalpha << shabalin::func(t) << '\n';
   free(c);
 }
+
