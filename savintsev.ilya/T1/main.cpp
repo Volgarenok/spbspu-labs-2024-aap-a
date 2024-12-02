@@ -74,9 +74,16 @@ int main()
   {
     delete[] line;
     line = savintsev::inputNewlineTerminatedStr(std::cin);
-    if (line == nullptr || std::cin.eof())
+    if (line == nullptr)
     {
-      std::cerr << "ERROR: Memory full OR EOF\n";
+      std::cerr << "ERROR: Memory full\n";
+      return 2;
+    }
+    if (std::cin.eof())
+    {
+      delete[] line;
+      savintsev::destroyShapes(ShapeList, amtOfShapes);
+      std::cerr << "ERROR: EOF is not implemented\n";
       return 2;
     }
     if (line[0] == '\0')
@@ -88,7 +95,6 @@ int main()
     {
       if (scaleK > 0)
       {
-        std::setprecision(2);
         savintsev::printSumAreaAndBorders(std::cout, ShapeList, amtOfShapes);
         savintsev::scaleAllRelativeTo(ShapeList, amtOfShapes, scaleC, scaleK);
         savintsev::printSumAreaAndBorders(std::cout, ShapeList, amtOfShapes);

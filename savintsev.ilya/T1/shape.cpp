@@ -1,4 +1,5 @@
 #include "shape.hpp"
+#include <iomanip>
 
 void savintsev::scaleRelativeTo(Shape * rhs, point_t p, double k)
 {
@@ -29,7 +30,7 @@ void savintsev::printSumAreaAndBorders(std::ostream & out, Shape ** rhs, size_t 
   {
     sumArea += rhs[i]->getArea();
   }
-  out << sumArea;
+  out << std::fixed << std::setprecision(1) << sumArea;
   for (size_t i = 0; i < amt; ++i)
   {
     rect = rhs[i]->getFrameRect();
