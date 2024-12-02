@@ -1,5 +1,5 @@
-#include "isRealNumber.hpp"
 #include <inputString.hpp>
+#include "isRealNumber.hpp"
 
 int main()
 {
