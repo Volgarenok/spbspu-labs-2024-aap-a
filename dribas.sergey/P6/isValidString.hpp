@@ -2,6 +2,6 @@
 #define ISVALIDSTRING_HPP
 namespace dribas
 {
-  bool isRealString(const char* string);
+  bool isValidString(const char* string);
 }
-#ifndef
+#endif
