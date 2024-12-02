@@ -5,39 +5,17 @@
 
 const char * guseynov::isSymbol(const char * str, char c)
 {
-  if (!str)
-  {
-    return str;
-  }
-  return (*str == c) ? (str + 1) : nullptr;
+  return ((str != nullptr) && (*str == c)) ? (str + 1) : nullptr;
 }
 
 const char * guseynov::isSign(const char * str)
 {
-  if (!str)
-  {
-    return str;
-  }
-  auto next = guseynov::isSymbol(str, '+');
-  if (next)
-  {
-    return next;
-  }
-  next = guseynov::isSymbol(str, '-');
-  if (!next)
-  {
-    return str;
-  }
-  return next;
+  return ((str != nullptr) && ((*str == '+') || (*str == '-'))) ? (str + 1) : nullptr;
 }
 
 const char * guseynov::isNum(const char * str)
 {
-  if (!str)
-  {
-    return str;
-  }
-  return (std::isdigit(*str)) ? (str + 1) : nullptr;
+  return ((str != nullptr) && (std::isdigit(*str))) ? (str + 1) : nullptr;
 }
 
 const char * guseynov::isUnsignNum(const char * str)
@@ -66,10 +44,12 @@ const char * guseynov::isOrder(const char * str)
   {
     return nullptr;
   }
-  if (guseynov::isSign(next))
+  auto contine = guseynov::isSign(next);
+  if (contine != nullptr)
   {
-  next = guseynov::isUnsignNum(next);
+  next = contine;
   }
+  next = guseynov::isUnsignNum(next);
   return next;
 }
 
@@ -93,13 +73,12 @@ bool guseynov::isDouble(const char * str)
   {
     return false;
   }
-  size_t i = 0;
   auto next = guseynov::isSign(str);
   if (!next)
   {
-    i++;
+    next = str;
   }
-  next = guseynov::isMantis(str + i);
+  next = guseynov::isMantis(next);
   if (guseynov::isOrder(next))
   {
     return true;
