@@ -9,7 +9,7 @@ namespace
   const char * hasUnsignedInt(const char * str);
   const char * hasSignificand(const char * str);
   const char * hasOrderOfMagnitude(const char * str);
-  
+
   const char * hasSign(const char * str)
   {
     if (!str)
