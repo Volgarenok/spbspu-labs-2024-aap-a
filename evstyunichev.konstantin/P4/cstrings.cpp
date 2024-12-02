@@ -125,17 +125,3 @@ void evstyunichev::output(const char *str, std::ostream &out)
     out << str[i++];
   }
 }
-
-char * evstyunichev::create(const size_t sz)
-{
-  char *str2 = nullptr;
-  try
-  {
-    char *str2 = new char[sz + 1];
-  }
-  catch (const std::bad_alloc &e)
-  {
-    str2 = nullptr;
-  }
-  return str2;
-}
