@@ -18,10 +18,5 @@ bool cherkasov::isValidInput(const char* input)
     ++length;
   }
   const size_t maxLength = 100;
-  if (length > maxLength)
-  {
-    return false;
-  }
-
-  return true;
+  return length <= maxLength;
 }

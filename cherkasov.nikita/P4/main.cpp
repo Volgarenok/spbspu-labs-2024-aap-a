@@ -23,12 +23,23 @@ int main()
   }
   if (!cherkasov::isValidInput(input))
   {
+    std::cerr << "Error: Invalid input.\n";
     delete[] input;
     return 0;
   }
   const char oldChar = 'c';
   const char newChar = 'b';
-  char* result = cherkasov::newLetter(input, oldChar, newChar);
+  char* result = nullptr;
+  try
+  {
+    result = cherkasov::newLetter(input, oldChar, newChar);
+  }
+  catch (const std::exception& e)
+  {
+    std::cerr << "string error:" << e.what() << "\n";
+    delete[] input;
+    return 1;
+  }
   if (!result)
   {
     std::cerr << "Error in memory allocation.\n";
