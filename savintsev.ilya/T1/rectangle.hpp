@@ -4,7 +4,7 @@
 
 namespace savintsev
 {
-  class Rectangle : Shape
+  class Rectangle : public Shape
   {
   public:
     Rectangle(point_t lhs, point_t rhs);
