@@ -1,8 +1,6 @@
 #include <iostream>
 #include <read_string.hpp>
-#include "exc_snd.hpp"
-
-constexpr char exclude_characters[] = "abc";
+#include "is_match_real.hpp"
 
 int main()
 {
@@ -16,8 +14,6 @@ int main()
     std::free(str);
     return 1;
   }
-  char* result = zholobov::exc_snd(str, str, exclude_characters);
-  std::cout << result << "\n";
+  std::cout << std::boolalpha << zholobov::is_match_real(str) << "\n";
   std::free(str);
-  return 0;
 }
