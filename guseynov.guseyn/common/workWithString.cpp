@@ -19,9 +19,9 @@ char * guseynov::expandMassive(const char *arr, size_t &size, size_t step)
 
 char * guseynov::getLine(std::istream & in)
 {
-  size_t reserved = 10;
+  size_t reserved = 100;
   size_t stringLength = 0;
-  constexpr size_t step = 10;
+  constexpr size_t step = 100;
   char *arr = reinterpret_cast< char* >(malloc(reserved));
   if (!arr)
   {
