@@ -28,13 +28,12 @@ int main()
   char* result = cherkasov::newLetter(input, oldChar, newChar);
   if (!result)
   {
-    std::cerr << "error in memory allocation.\n";
+    std::cerr << "Error in memory allocation.\n";
     delete[] input;
     return 1;
   }
     std::cout << result << "\n";
     delete[] input;
-
-  delete[] result;
+    delete[] result;
   return 0;
 }
