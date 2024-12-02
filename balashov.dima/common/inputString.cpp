@@ -1,4 +1,4 @@
-#include "processingString.hpp"
+#include "inputString.hpp"
 #include <cmath>
 
 char* balashov::increaseSizeLine(const char* lineStart, size_t& capacity)
@@ -18,7 +18,6 @@ char* balashov::increaseSizeLine(const char* lineStart, size_t& capacity)
   }
   return newLine;
 }
-
 char* balashov::enteringLine(std::istream & in, size_t & capacity)
 {
   char symbol = '\0';

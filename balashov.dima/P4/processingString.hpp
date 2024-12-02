@@ -6,8 +6,6 @@
 
 namespace balashov
 {
-  char* increaseSizeLine(const char* lineStart, size_t& capacity);
-  char* enteringLine(std::istream & in, size_t & capacity);
+  char* removeSpaces(char* line);
 }
-
 #endif
