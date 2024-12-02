@@ -5,7 +5,7 @@
 int main()
 {
   char * str = guseynov::getLine(std::cin);
-  if (!str)
+  if (str == nullptr)
   {
     return 1;
   }

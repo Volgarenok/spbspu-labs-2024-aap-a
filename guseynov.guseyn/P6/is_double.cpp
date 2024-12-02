@@ -1,6 +1,7 @@
 #include "is_double.hpp"
 
 #include <cstddef>
+#include <cctype>
 
 const char * guseynov::isSymbol(const char * str, char c)
 {
@@ -32,7 +33,7 @@ const char * guseynov::isNum(const char * str)
   {
     return str;
   }
-  return ((*str >= '0') && (*str <= '9')) ? (str + 1) : nullptr;
+  return (std::isdigit(*str)) ? (str + 1) : nullptr;
 }
 
 const char * guseynov::isUnsignNum(const char * str)
@@ -61,11 +62,14 @@ const char * guseynov::isOrder(const char * str)
   {
     return nullptr;
   }
-  if (guseynov::isSign(next))
+  if (!guseynov::isSign(next))
   {
-  next = guseynov::isUnsignNum(next + 1);
-  }
   next = guseynov::isUnsignNum(next);
+  }
+  else
+  {
+    next = guseynov::isUnsignNum(next + 1);
+  }
   return next;
 }
 
