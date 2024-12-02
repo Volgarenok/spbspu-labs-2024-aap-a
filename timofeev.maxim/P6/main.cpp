@@ -4,20 +4,10 @@
 
 int main()
 {
-  char* line = nullptr;
-  try
-  {
-    line = timofeev::input_line(std::cin);
-  }
-  catch(const std::bad_alloc& e)
-  {
-    std::cerr << ("Bad output\n");
-    free(line);
-    return 1;
-  }
+  char* line = timofeev::input_line(std::cin);
   if (line == nullptr)
   {
-    std::cerr << ("Bad output\n");
+    std::cerr << "Bad output\n";
     free(line);
     return 1;
   }
