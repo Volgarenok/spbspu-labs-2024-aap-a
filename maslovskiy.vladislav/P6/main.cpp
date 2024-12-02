@@ -42,6 +42,23 @@ const char *hasNumbers(const char *str)
   }
   return next;
 }
+const char *hasMantissa(const char *str)
+{
+  auto next = hasDigit(str);
+  next = hasChar(next, '.');
+  next = hasNumbers(next);
+  return next;
+}
+const char *hasExponent(const char *str)
+{
+  auto next = hasChar(str, 'E');
+  if (auto continues = hasSign(next))
+  {
+    next = continues;
+  }
+  next = hasNumbers(next);
+  return next;
+}
 
 int main()
 {
