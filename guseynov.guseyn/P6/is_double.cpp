@@ -14,7 +14,7 @@ const char * guseynov::isSign(const char * str)
 
 bool guseynov::isDigit(char c)
 {
-  static int i;
+  static int i = 0;
   if ((c != i) && (i != 9))
   {
     i++;
@@ -24,6 +24,7 @@ bool guseynov::isDigit(char c)
   {
     if (c == i)
     {
+      i = 0;
       return true;
     }
     if (i == 9)
