@@ -1,16 +1,11 @@
 #include <iostream>
 #include <cstring>
-#include "fu_string.h"
+#include "check_string.h"
 #include "functions.h"
 
 int main()
 {
-  char* str = nullptr;
-  if (hismatova::get_line(&str))
-  {
-    std::cerr << "get line failed!\n";
-    return 1;
-  }
+  char* str = hismatova::get_line(std::cin);
   if (str == nullptr || std::strlen(str) == 0)
   {
     std::cerr << "no string\n";
