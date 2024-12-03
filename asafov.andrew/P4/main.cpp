@@ -2,8 +2,8 @@
 #include "stringFunctions.hpp"
 #include "inputString.hpp"
 
-int main(){
-  
+int main()
+{
   size_t lenght = 0;
   char* str = asafov::inputString(lenght);
   if(lenght == 0)
