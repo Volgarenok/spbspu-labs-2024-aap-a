@@ -1,6 +1,6 @@
 #include <iostream>
-#include "pull.h"
-#include "resize.h"
+#include "inputString.hpp"
+#include "resize.hpp"
 
 char* asafov::inputString(unsigned long long& lenght)
 {

@@ -1,6 +1,6 @@
 #ifndef STRING_FUNCTIONS_HPP
 #define STRING_FUNCTIONS_HPP
-using size_t = unsigned long long;
+#include <cstddef>
 namespace asafov
 {
   bool isLetter(char ch);

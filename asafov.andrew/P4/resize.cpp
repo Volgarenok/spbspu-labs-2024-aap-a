@@ -1,4 +1,4 @@
-#include "resize.h"
+#include "resize.hpp"
 
 char* asafov::resize(char* string, const unsigned long long lenght) {
   char* new_string = new char[lenght + 8];
