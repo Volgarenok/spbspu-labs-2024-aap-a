@@ -1,6 +1,7 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
+#include <istream>
 #include "base-types.hpp"
 
 namespace maslevtsov
@@ -15,6 +16,8 @@ namespace maslevtsov
     virtual void move(double dx, double dy) = 0;
     virtual void scale(double k) = 0;
   };
+
+  Shape* makeShape(std::istream& in);
 }
 
 #endif

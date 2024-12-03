@@ -5,7 +5,7 @@
 
 namespace maslevtsov
 {
-  struct Rectangle: Shape
+  struct Rectangle: public Shape
   {
   public:
     Rectangle(point_t bottomLeft, point_t topRight);
