@@ -16,6 +16,10 @@ const char * guseynov::isSign(const char * str)
 bool guseynov::isDigit(char c)
 {
   int k = c - '0';
+  if ((k/10) != 0)
+  {
+    return false;
+  }
   static int i = 0;
   if ((k != i) && (k != 9))
   {
