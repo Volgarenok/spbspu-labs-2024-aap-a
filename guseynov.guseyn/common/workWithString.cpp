@@ -48,11 +48,6 @@ char * guseynov::getLine(std::istream & in)
     }
   }
   std::skipws(in);
-  if (!in)
-  {
-    free(arr);
-    return nullptr;
-  }
   copyarr = expandMassive(arr, stringLength, 0);
   free(arr);
   return copyarr;
