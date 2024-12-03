@@ -18,6 +18,7 @@ namespace maslevtsov
   };
 
   Shape* makeShape(std::istream& in);
+  void scale(Shape* shape, point_t pnt, double k);
 }
 
 #endif

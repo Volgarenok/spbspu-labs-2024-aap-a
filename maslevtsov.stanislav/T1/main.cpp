@@ -4,6 +4,7 @@
 
 int main()
 {
+  double areaSummary = 0;
   while (!std::cin.eof())
   {
     maslevtsov::Shape* shape = nullptr;
@@ -15,6 +16,8 @@ int main()
     {
       std::cerr << "Figure is not supported\n";
     }
-    std::cout << std::fixed << std::setprecision(1) << shape->getArea() << '\n';
+    areaSummary += shape->getArea();
   }
+
+  std::cout << std::fixed << std::setprecision(1) << areaSummary << '\n';
 }
