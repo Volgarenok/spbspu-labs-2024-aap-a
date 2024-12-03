@@ -28,7 +28,6 @@ char* dribas::enterStr(std::istream & input)
   while (enter != lastStrSymbol) {
     if (!input) {
       free(str);
-      std::cerr << "ERROR WITH INPUT!!!\n";
       std::skipws(input);
       return nullptr;
     } else {
@@ -36,7 +35,6 @@ char* dribas::enterStr(std::istream & input)
       char* newstr = static_cast< char* >(malloc(size * sizeof(char)));
       if (!newstr) {
         free(str);
-        std::cerr << "ERROR WITH MEMORY!!\n";
         std::skipws(input);
         return newstr;
       }
