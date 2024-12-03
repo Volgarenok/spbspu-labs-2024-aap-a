@@ -3,6 +3,7 @@
 
 namespace guseynov
 {
+  bool isDigit(char c);
   const char * isSymbol(const char * str, char c);
   const char * isSign(const char * str);
   const char * isNum(const char * str);
