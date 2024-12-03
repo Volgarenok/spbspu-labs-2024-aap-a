@@ -57,16 +57,16 @@ int main(int argc, char ** argv)
   size_t read = 0;
 
   int * mtx = nullptr;
-  int static_arr[10000] = {};
+  int fixed_arr[10000] = {};
   int * dynamic_arr = nullptr;
   try {
     dynamic_arr = new int [m * n];
   } catch (const std::bad_alloc & e) {
-      return 1;
+    return 1;
   }
 
   if (num == 1) {
-    mtx = static_arr;
+    mtx = fixed_arr;
   } else if (num == 2) {
     mtx = dynamic_arr;
   }

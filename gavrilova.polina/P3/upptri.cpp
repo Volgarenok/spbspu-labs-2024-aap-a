@@ -1,7 +1,7 @@
 #include "upptri.hpp"
 namespace gavrilova
 {
-  bool is_need_element(size_t i, size_t j, const int * mtx, size_t n);
+  bool is_upper_triangle_mtx_element(size_t i, size_t j, const int * mtx, size_t n);
 }
 bool gavrilova::isUpperTriangMtx(const int * mtx, size_t m, size_t n)
 {
@@ -19,7 +19,7 @@ bool gavrilova::isUpperTriangMtx(const int * mtx, size_t m, size_t n)
   return result;
 }
 
-bool gavrilova::is_need_element(size_t i, size_t j, const int * mtx, size_t n)
+bool gavrilova::is_upper_triangle_mtx_element(size_t i, size_t j, const int * mtx, size_t n)
 {
   return ((j < i && !mtx[i * n + j]) || (j >= i));
 }
