@@ -11,6 +11,7 @@ int main()
   }
   if (str[0] == '\0')
   {
+    free(str);
     return 1;
   }
   std::cout << std::boolalpha << guseynov::isDouble(str) << "\n";
