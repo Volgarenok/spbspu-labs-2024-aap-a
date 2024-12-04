@@ -48,4 +48,6 @@ int main()
     maslevtsov::outputShapes(std::cout, shapes, shapeIndex);
     std::cout << '\n';
   }
+
+  maslevtsov::clearShapes(shapes, shapeIndex);
 }
