@@ -1,4 +1,3 @@
-#include <iostream>
 #include <iomanip>
 #include "rectangle.hpp"
 
@@ -6,15 +5,21 @@ int main()
 {
   maslevtsov::Shape* shapes[10'000] = {nullptr};
   std::size_t shapeIndex = 0;
-  bool isIgnoredShapes = false;
-  bool isImplementedShapes = false;
+  bool isIgnoredShapes = false, isImplementedShapes = false;
+  std::string argument = "";
+  double scalePntX = 0, scalePntY = 0, scaleK = 0;
 
-  while (!std::cin.eof())
+  while (std::cin >> argument && !std::cin.eof())
   {
+    if (argument == "SCALE")
+    {
+      std::cin >> scalePntX >> scalePntY >> scaleK;
+      continue;
+    }
     maslevtsov::Shape* shape = nullptr;
     try
     {
-      shape = maslevtsov::makeShape(std::cin);
+      shape = maslevtsov::makeShape(std::cin, argument);
     }
     catch (const std::bad_alloc& e)
     {
@@ -42,7 +47,7 @@ int main()
     std::cout << ' ';
     maslevtsov::outputShapes(std::cout, shapes, shapeIndex);
     std::cout << '\n';
-    maslevtsov::scale(shapes[0], {0.0, 0.0}, 2.0);
+    maslevtsov::scaleShapes(shapes, {scalePntX, scalePntY}, scaleK, shapeIndex);
     maslevtsov::outputAreaSum(std::cout, shapes, shapeIndex);
     std::cout << ' ';
     maslevtsov::outputShapes(std::cout, shapes, shapeIndex);

@@ -18,8 +18,9 @@ namespace maslevtsov
   };
 
   void clearShapes(Shape** shapes, std::size_t border);
-  Shape* makeShape(std::istream& in);
+  Shape* makeShape(std::istream& in, std::string figureName);
   void scale(Shape* shape, point_t pnt, double k);
+  void scaleShapes(Shape** shapes, point_t pnt, double k, std::size_t border);
   void outputAreaSum(std::ostream& out, const Shape* const* shapes, std::size_t border);
   void outputShapes(std::ostream& out, const Shape* const* shapes, std::size_t border);
 }

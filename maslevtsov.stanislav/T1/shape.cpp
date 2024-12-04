@@ -10,11 +10,8 @@ void maslevtsov::clearShapes(Shape** shapes, std::size_t border)
   }
 }
 
-maslevtsov::Shape* maslevtsov::makeShape(std::istream& in)
+maslevtsov::Shape* maslevtsov::makeShape(std::istream& in, std::string figureName)
 {
-  std::string figureName = "";
-  in >> figureName;
-
   if (figureName == "RECTANGLE")
   {
     double bottomLeftX = 0, bottomLeftY = 0, topRightX = 0, topRightY = 0;
@@ -33,6 +30,14 @@ void maslevtsov::scale(Shape* shape, point_t pnt, double k)
   point_t offset{(frameCenterAfter.x - frameCenterBefore.x) * k, (frameCenterAfter.y - frameCenterBefore.y) * k};
   shape->scale(k);
   shape->move(-offset.x, -offset.y);
+}
+
+void maslevtsov::scaleShapes(Shape** shapes, point_t pnt, double k, std::size_t border)
+{
+  for (std::size_t i = 0; i < border; ++i)
+  {
+    scale(shapes[i], pnt, k);
+  }
 }
 
 void maslevtsov::outputAreaSum(std::ostream& out, const Shape* const* shapes, std::size_t border)
