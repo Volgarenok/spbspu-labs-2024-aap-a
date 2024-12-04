@@ -4,11 +4,13 @@ namespace kiselev
 {
   class point_t
   {
+  public:
     double x;
     double y;
   };
-  class rectagle_t
+  class rectangle_t
   {
+  public:
     double width;
     double height;
     point_t pos;
