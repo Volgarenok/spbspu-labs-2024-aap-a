@@ -5,7 +5,7 @@
 
 namespace demehin
 {
-  class Rectangle: Shape
+  class Rectangle: public Shape
   {
   public:
     double getArea() const override;
