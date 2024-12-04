@@ -46,8 +46,7 @@ namespace abramov
 
   void Rectangle::move(point_t p)
   {
-    rectangle_t frame_rect = getFrameRect();
-    point_t center = frame_rect.pos;
+    point_t center = getFrameRect().pos;
     double dx = p.x - center.x;
     double dy = p.y - center.y;
     move(dx, dy);
@@ -55,7 +54,13 @@ namespace abramov
 
   void Rectangle::scale(double k)
   {
-    
+    double newWidth = (pRightUpper.x - pLeftLower.x) * k;
+    double newHeigth = (pRightUpper.y - pLeftLower.y) * k;
+    point_t center = getFrameRect().pos;
+    pRightUpper.x = center.x + newWidth / 2;
+    pRightUpper.y = center.y + newHeigth / 2;
+    pLeftLower.x = center.x - newWidth / 2;
+    pLeftLower.y = center.y - newWidth / 2;
   }
 
 }
