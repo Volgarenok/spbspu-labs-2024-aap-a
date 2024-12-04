@@ -11,23 +11,27 @@ double demehin::Rectangle::getArea() const
 
 demehin::rectangle_t demehin::Rectangle::getFrameRect() const
 {
-  double diag_x = rt_.x_ - lb_.x_;
-  double diag_y = rt_.y_ - lb_.y_;
+
+  //double diag_x = rt_.x_ - lb_.x_;
+  //double diag_y = rt_.y_ - lb_.y_;
+  double width = std::sqrt((rt_.y_ - lb_.y_) * (rt_.y_ - lb_.y_));
+  double height = std::sqrt((rt_.x_ - lb_.x_) * (rt_.x_ - lb_.x_));
   rectangle_t frame_rect;
-  frame_rect.pos_.x_ = diag_x / 2;
-  frame_rect.pos_.y_ = diag_y / 2;
-  frame_rect.height_ = std::sqrt((rt_.y_ - lb_.y_) * (rt_.y_ - lb_.y_));
-  frame_rect.width_ = std::sqrt((rt_.x_ - lb_.x_) * (rt_.x_ - lb_.x_));
+  frame_rect.pos_.x_ = rt_.x_ - width / 2;
+  frame_rect.pos_.y_ = rt_.y_ - height / 2;
+  frame_rect.height_ = height;
+  frame_rect.width_ = width;
   return frame_rect;
 }
 
 void demehin::Rectangle::move(point_t s)
 {
-  double diag_x = rt_.x_ - lb_.x_;
-  double diag_y = rt_.y_ - lb_.y_;
+
   point_t centre;
-  centre.x_ = diag_x / 2;
-  centre.y_ = diag_y / 2;
+  double width = std::sqrt((rt_.y_ - lb_.y_) * (rt_.y_ - lb_.y_));
+  double height = std::sqrt((rt_.x_ - lb_.x_) * (rt_.x_ - lb_.x_));
+  centre.x_ = rt_.x_ - width / 2;
+  centre.y_ = rt_.y_ - height / 2;
   double difference_x = s.x_ - centre.x_;
   double difference_y = s.y_ - centre.y_;
   rt_.x_ += difference_x;
