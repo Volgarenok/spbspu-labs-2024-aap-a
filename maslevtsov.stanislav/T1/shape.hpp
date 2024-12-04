@@ -1,7 +1,7 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
-#include <istream>
+#include <iostream>
 #include "base-types.hpp"
 
 namespace maslevtsov
@@ -17,8 +17,9 @@ namespace maslevtsov
     virtual void scale(double k) = 0;
   };
 
-  Shape* makeShape(std::istream& in);
+  // Shape* makeShape(std::istream& in);
   void scale(Shape* shape, point_t pnt, double k);
+  void outputShapes(std::ostream& out, const Shape* const* shapes, std::size_t border);
 }
 
 #endif
