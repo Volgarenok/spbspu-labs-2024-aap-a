@@ -1,9 +1,15 @@
 #include "rectangle.hpp"
+#include <stdexcept>
 
-maslevtsov::Rectangle::Rectangle(point_t bottomLeft, point_t topRight):
-  bottomLeft_(bottomLeft),
-  topRight_(topRight)
-{}
+maslevtsov::Rectangle::Rectangle(point_t bottomLeft, point_t topRight)
+{
+  if (topRight.x <= bottomLeft.x || topRight.y <= bottomLeft.y)
+  {
+    throw std::logic_error("incorrect coordinates");
+  }
+  bottomLeft_ = bottomLeft;
+  topRight_ = topRight;
+}
 
 double maslevtsov::Rectangle::getArea() const
 {

@@ -1,5 +1,6 @@
 #include "shape.hpp"
 #include <string>
+#include <stdexcept>
 #include "rectangle.hpp"
 
 void maslevtsov::clearShapes(Shape** shapes, std::size_t border)
@@ -16,7 +17,8 @@ maslevtsov::Shape* maslevtsov::makeShape(std::istream& in, std::string figureNam
   {
     double bottomLeftX = 0, bottomLeftY = 0, topRightX = 0, topRightY = 0;
     in >> bottomLeftX >> bottomLeftY >> topRightX >> topRightY;
-    Rectangle* rect = new Rectangle({bottomLeftX, bottomLeftY}, {topRightX, topRightY});
+    Rectangle* rect = nullptr;
+    rect = new Rectangle({bottomLeftX, bottomLeftY}, {topRightX, topRightY});
     return rect;
   }
   throw std::logic_error("not supported");
@@ -24,6 +26,10 @@ maslevtsov::Shape* maslevtsov::makeShape(std::istream& in, std::string figureNam
 
 void maslevtsov::scale(Shape* shape, point_t pnt, double k)
 {
+  if (k <= 0)
+  {
+    throw std::logic_error("invalid coefficient");
+  }
   point_t frameCenterBefore = shape->getFrameRect().pos;
   shape->move(pnt);
   point_t frameCenterAfter = shape->getFrameRect().pos;
@@ -59,5 +65,9 @@ void maslevtsov::outputShapes(std::ostream& out, const Shape* const* shapes, std
     point_t topRight{rect.pos.x + rect.width / 2, rect.pos.y + rect.height / 2};
     out << bottomLeft.x << ' ' << bottomLeft.y;
     out << ' ' << topRight.x << ' ' << topRight.y;
+    if (border > 1)
+    {
+      out << ' ';
+    }
   }
 }

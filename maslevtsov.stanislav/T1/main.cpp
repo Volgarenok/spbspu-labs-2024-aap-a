@@ -1,4 +1,5 @@
 #include <iomanip>
+#include <stdexcept>
 #include "rectangle.hpp"
 
 int main()
@@ -38,7 +39,7 @@ int main()
 
   if (isIgnoredShapes)
   {
-    std::cerr << "Some unsupported shapes has been ignored\n";
+    std::cerr << "Some shapes were ignored\n";
   }
   if (isImplementedShapes)
   {
@@ -47,7 +48,16 @@ int main()
     std::cout << ' ';
     maslevtsov::outputShapes(std::cout, shapes, shapeIndex);
     std::cout << '\n';
-    maslevtsov::scaleShapes(shapes, {scalePntX, scalePntY}, scaleK, shapeIndex);
+    try
+    {
+      maslevtsov::scaleShapes(shapes, {scalePntX, scalePntY}, scaleK, shapeIndex);
+    }
+    catch (const std::logic_error& e)
+    {
+      std::cerr << "Error: fail in scaling\n";
+      maslevtsov::clearShapes(shapes, shapeIndex);
+      return 1;
+    }
     maslevtsov::outputAreaSum(std::cout, shapes, shapeIndex);
     std::cout << ' ';
     maslevtsov::outputShapes(std::cout, shapes, shapeIndex);
