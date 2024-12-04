@@ -4,33 +4,37 @@
 
 int main()
 {
-  double areaSummary = 0;
   maslevtsov::Shape* shapes[10'000] = {nullptr};
   std::size_t shapeIndex = 0;
   bool isIgnoredShapes = false;
-  std::string figureName = "";
 
-  while (std::cin >> figureName && !std::cin.eof())
+  while (!std::cin.eof())
   {
-    if (figureName == "RECTANGLE")
+    maslevtsov::Shape* shape = nullptr;
+    try
     {
-      double bottomLeftX = 0, bottomLeftY = 0, topRightX = 0, topRightY = 0;
-      std::cin >> bottomLeftX >> bottomLeftY >> topRightX >> topRightY;
-      maslevtsov::Rectangle* rect = new maslevtsov::Rectangle({bottomLeftX, bottomLeftY}, {topRightX, topRightY});
-      areaSummary += rect->getArea();
-      shapes[shapeIndex++] = rect;
+      shape = maslevtsov::makeShape(std::cin);
     }
-    else
+    catch (const std::logic_error& e)
     {
       isIgnoredShapes = true;
+      continue;
     }
+    shapes[shapeIndex++] = shape;
   }
 
   if (isIgnoredShapes)
   {
     std::cerr << "Some unsupported shapes has been ignored\n";
   }
-  std::cout << std::fixed << std::setprecision(1) << areaSummary;
+  std::cout << std::fixed << std::setprecision(1);
+  maslevtsov::outputAreaSum(std::cout, shapes, shapeIndex);
+  std::cout << ' ';
+  maslevtsov::outputShapes(std::cout, shapes, shapeIndex);
+  std::cout << '\n';
+  maslevtsov::scale(shapes[0], {0.0, 0.0}, 2.0);
+  maslevtsov::outputAreaSum(std::cout, shapes, shapeIndex);
+  std::cout << ' ';
   maslevtsov::outputShapes(std::cout, shapes, shapeIndex);
   std::cout << '\n';
 }

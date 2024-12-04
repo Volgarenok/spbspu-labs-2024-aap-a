@@ -22,8 +22,8 @@ maslevtsov::rectangle_t maslevtsov::Rectangle::getFrameRect() const
 
 void maslevtsov::Rectangle::move(point_t pnt)
 {
-  double movedX = getFrameRect().pos.x - pnt.x;
-  double movedY = getFrameRect().pos.y - pnt.y;
+  double movedX = pnt.x - getFrameRect().pos.x;
+  double movedY = pnt.y - getFrameRect().pos.y;
   bottomLeft_.x += movedX;
   bottomLeft_.y += movedY;
   topRight_.x += movedX;
@@ -40,10 +40,9 @@ void maslevtsov::Rectangle::move(double dx, double dy)
 
 void maslevtsov::Rectangle::scale(double k)
 {
-  double scaledX = (getFrameRect().pos.x - bottomLeft_.x) * k - (getFrameRect().pos.x - bottomLeft_.x);
-  double scaledY = (getFrameRect().pos.y - bottomLeft_.y) * k - (getFrameRect().pos.y - bottomLeft_.y);
-  bottomLeft_.x -= scaledX;
-  bottomLeft_.y += scaledY;
-  topRight_.x -= scaledX;
-  topRight_.y += scaledY;
+  point_t frameCenter = getFrameRect().pos;
+  bottomLeft_ = {
+    frameCenter.x - (frameCenter.x - bottomLeft_.x) * k, frameCenter.y - (frameCenter.y - bottomLeft_.y) * k};
+  topRight_ = {
+    frameCenter.x + (topRight_.x - frameCenter.x) * k, frameCenter.y + (topRight_.y - frameCenter.y) * k};
 }

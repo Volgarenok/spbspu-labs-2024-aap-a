@@ -17,8 +17,9 @@ namespace maslevtsov
     virtual void scale(double k) = 0;
   };
 
-  // Shape* makeShape(std::istream& in);
+  Shape* makeShape(std::istream& in);
   void scale(Shape* shape, point_t pnt, double k);
+  void outputAreaSum(std::ostream& out, const Shape* const* shapes, std::size_t border);
   void outputShapes(std::ostream& out, const Shape* const* shapes, std::size_t border);
 }
 
