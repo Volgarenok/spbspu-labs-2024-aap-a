@@ -4,6 +4,24 @@
 #include <string>
 #include "base_types.hpp"
 
+namespace
+{
+  void makeIsoScale(demehin::Shape* shapes[], size_t shp_cnt, double scale_k, demehin::point_t scale_pt)
+  {
+    for (size_t i = 0; i < shp_cnt; i++)
+    {
+      demehin::rectangle_t old_fr_rect = shapes[i]->getFrameRect();
+      shapes[i]->move(scale_pt);
+      demehin::rectangle_t new_fr_rect = shapes[i]->getFrameRect();
+      demehin::point_t move_vector;
+      move_vector.x_ = (new_fr_rect.pos_.x_ - old_fr_rect.pos_.x_) / scale_k;
+      move_vector.y_ = (new_fr_rect.pos_.y_ - old_fr_rect.pos_.y_) / scale_k;
+      shapes[i]->scale(scale_k);
+      shapes[i]->move(move_vector.x_, move_vector.y_);
+    }
+  }
+}
+
 int main()
 {
   demehin::Shape * shapes[10000] = {};
@@ -44,21 +62,20 @@ int main()
     }
   }
 
-
-
-  for (size_t i = 0; i < shp_cnt; i++)
-  {
-    demehin::rectangle_t old_fr_rect = shapes[i]->getFrameRect();
-    shapes[i]->move(scale_pt);
-    demehin::rectangle_t new_fr_rect = shapes[i]->getFrameRect();
-    demehin::point_t move_vector;
-    move_vector.x_ = (new_fr_rect.pos_.x_ - old_fr_rect.pos_.x_) / scale_k;
-    move_vector.y_ = (new_fr_rect.pos_.y_ - old_fr_rect.pos_.y_) / scale_k;
-    shapes[i]->scale(scale_k);
-    shapes[i]->move(move_vector.x_, move_vector.y_);
-    std::cout << old_fr_rect.pos_.x_ << "\n";
-    std::cout << new_fr_rect.pos_.x_ << "\n";
-  }
+  //double old_sum_area = 0;
+  //double new_sum_area = 0;
+  //for (size_t i = 0; i < shp_cnt; i++)
+  //{
+    //demehin::rectangle_t old_fr_rect = shapes[i]->getFrameRect();
+    //shapes[i]->move(scale_pt);
+    //demehin::rectangle_t new_fr_rect = shapes[i]->getFrameRect();
+    //demehin::point_t move_vector;
+    //move_vector.x_ = (new_fr_rect.pos_.x_ - old_fr_rect.pos_.x_) / scale_k;
+    //move_vector.y_ = (new_fr_rect.pos_.y_ - old_fr_rect.pos_.y_) / scale_k;
+    //shapes[i]->scale(scale_k);
+    //shapes[i]->move(move_vector.x_, move_vector.y_);
+  //}
+  makeIsoScale(shapes, shp_cnt, scale_k, scale_pt);
 
   for (size_t i = 0; i < shp_cnt; i++)
   {
@@ -69,7 +86,6 @@ int main()
     fr_rt.y_ = fr_rect.pos_.y_ + fr_rect.height_ / 2;
     fr_lb.x_ = fr_rect.pos_.x_ - fr_rect.width_ / 2;
     fr_lb.y_ = fr_rect.pos_.y_ - fr_rect.width_ / 2;
-    std::cout << fr_rect.pos_.x_ << "\n";
     std::cout << shapes[i]->getArea() << " " << fr_lb.x_ << " " << fr_lb.y_ << " " << fr_rt.x_ << " " << fr_rt.y_ << "\n";
   }
 }
