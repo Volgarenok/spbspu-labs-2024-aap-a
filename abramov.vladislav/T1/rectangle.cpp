@@ -1,6 +1,11 @@
 #include "rectangle.hpp"
+#include <stdexcept>
+#include "shape.hpp"
+#include "base-types.hpp"
 
-abramov::Rectangle::Rectangle(double x1, double y1, double x2, double y2)
+namespace abramov
+{
+Rectangle::Rectangle(double x1, double y1, double x2, double y2)
 {
   if (x1 >= x2 || y1 >= y2)
   {
@@ -12,22 +17,26 @@ abramov::Rectangle::Rectangle(double x1, double y1, double x2, double y2)
   pRightUpper.y = y2;
 }
 
-double abramov::Rectangle::getArea()
+double Rectangle::getArea() const
 {
   return (pRightUpper.x - pLeftLower.x) * (pRightUpper.y - pLeftLower.y);
 }
 
-rectangle_t abramov::Rectangle::getFrameRect()
+rectangle_t Rectangle::getFrameRect() const
 {
-  double width = pRightUpper.x - pLeftLower.x;
-  double height = pRightUpper.y - pLeftLower.y;
   double x = (pRightUpper.x + pLeftLower.x) / 2;
   double y = (pRightUpper.y + pLeftLower.y) / 2;
-  point_t pos = point_t(x, y);
-  return rectangle_t(x, y, pos);
+  point_t pos;
+  pos.x = x;
+  pos.y = y;
+  rectangle_t frame_rect;
+  frame_rect.width = x;
+  frame_rect.height = y;
+  frame_rect.pos = pos;
+  return frame_rect;
 }
 
-void abramov::Rectangle::Move(double dx, double dy)
+void Rectangle::move(double dx, double dy)
 {
   pRightUpper.x += dx;
   pRightUpper.y += dy;
@@ -35,7 +44,7 @@ void abramov::Rectangle::Move(double dx, double dy)
   pLeftLower.y += dy;
 }
 
-void abramov::Rectangle::Move(point_t p)
+void Rectangle::move(point_t p)
 {
   rectangle_t frame_rect = getFrameRect();
   point_t center = frame_rect.pos;
@@ -44,7 +53,8 @@ void abramov::Rectangle::Move(point_t p)
   move(dx, dy);
 }
 
-void abramov::Rectangle::Scale(double k)
+void Rectangle::scale(double k)
 {
-  
+  k = 0;
+}
 }
