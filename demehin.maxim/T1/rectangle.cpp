@@ -32,12 +32,16 @@ void demehin::Rectangle::move(point_t s)
   double difference_y = s.y_ - centre.y_;
   rt_.x_ += difference_x;
   rt_.y_ += difference_y;
+  lb_.x_ += difference_x;
+  lb_.y_ += difference_y;
 }
 
 void demehin::Rectangle::move(double x, double y)
 {
   rt_.x_ += x;
   rt_.y_ += y;
+  lb_.x_ += x;
+  lb_.y_ += y;
 }
 
 void demehin::Rectangle::scale(double k)

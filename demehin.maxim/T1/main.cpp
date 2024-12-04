@@ -2,11 +2,14 @@
 #include "rectangle.hpp"
 #include "shape.hpp"
 #include <string>
+#include "base_types.hpp"
 
 int main()
 {
   demehin::Shape * shapes[10000] = {};
   size_t shp_cnt = 0;
+  double scale_k = 0;
+  //demehin::point_t scale_pt;
 
   std::string shape_name;
   while (std::cin >> shape_name)
@@ -30,7 +33,13 @@ int main()
     }
     else if (shape_name == "SCALE")
     {
-      std::cout << "end\n";
+      //double x = 0;
+      //double y = 0;
+      //std::cin >> x;
+      //std::cin >> y;
+      std::cin >> scale_k;
+      //scale_pt.x_ = x;
+      //scale_pt.y_ = y;
       break;
     }
   }
@@ -38,7 +47,9 @@ int main()
 
   for (size_t i = 0; i < shp_cnt; i++)
   {
+    shapes[i]->scale(scale_k);
     std::cout << shapes[i]->getArea() << "\n";
   }
+
 
 }
