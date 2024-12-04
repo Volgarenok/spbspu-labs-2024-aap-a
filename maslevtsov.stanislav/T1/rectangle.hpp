@@ -19,6 +19,8 @@ namespace maslevtsov
     point_t bottomLeft_;
     point_t topRight_;
   };
+
+  Rectangle* makeRectangle(std::istream& in);
 }
 
 #endif

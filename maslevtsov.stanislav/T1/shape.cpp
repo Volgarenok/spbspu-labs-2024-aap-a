@@ -15,11 +15,7 @@ maslevtsov::Shape* maslevtsov::makeShape(std::istream& in, std::string figureNam
 {
   if (figureName == "RECTANGLE")
   {
-    double bottomLeftX = 0, bottomLeftY = 0, topRightX = 0, topRightY = 0;
-    in >> bottomLeftX >> bottomLeftY >> topRightX >> topRightY;
-    Rectangle* rect = nullptr;
-    rect = new Rectangle({bottomLeftX, bottomLeftY}, {topRightX, topRightY});
-    return rect;
+    return makeRectangle(in);
   }
   throw std::logic_error("not supported");
 }

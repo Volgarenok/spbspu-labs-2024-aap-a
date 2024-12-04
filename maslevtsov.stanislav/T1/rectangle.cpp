@@ -49,6 +49,14 @@ void maslevtsov::Rectangle::scale(double k)
   point_t frameCenter = getFrameRect().pos;
   bottomLeft_ = {
     frameCenter.x - (frameCenter.x - bottomLeft_.x) * k, frameCenter.y - (frameCenter.y - bottomLeft_.y) * k};
-  topRight_ = {
-    frameCenter.x + (topRight_.x - frameCenter.x) * k, frameCenter.y + (topRight_.y - frameCenter.y) * k};
+  topRight_ = {frameCenter.x + (topRight_.x - frameCenter.x) * k, frameCenter.y + (topRight_.y - frameCenter.y) * k};
+}
+
+maslevtsov::Rectangle* maslevtsov::makeRectangle(std::istream& in)
+{
+  double bottomLeftX = 0, bottomLeftY = 0, topRightX = 0, topRightY = 0;
+  in >> bottomLeftX >> bottomLeftY >> topRightX >> topRightY;
+  Rectangle* rect = nullptr;
+  rect = new Rectangle({bottomLeftX, bottomLeftY}, {topRightX, topRightY});
+  return rect;
 }

@@ -2,6 +2,7 @@
 #define SHAPE_HPP
 
 #include <iostream>
+#include <string>
 #include "base-types.hpp"
 
 namespace maslevtsov
