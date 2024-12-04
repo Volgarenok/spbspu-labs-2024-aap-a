@@ -6,7 +6,7 @@ int main()
 {
   maslevtsov::Shape* shapes[10'000] = {nullptr};
   std::size_t shapeIndex = 0;
-  bool isIgnoredShapes = false, isImplementedShapes = false;
+  bool isIgnoredShapes = false, isImplementedShapes = false, isScale = false;
   std::string argument = "";
   double scalePntX = 0, scalePntY = 0, scaleK = 0;
 
@@ -14,6 +14,7 @@ int main()
   {
     if (argument == "SCALE")
     {
+      isScale = true;
       std::cin >> scalePntX >> scalePntY >> scaleK;
       continue;
     }
@@ -62,6 +63,12 @@ int main()
     std::cout << ' ';
     maslevtsov::outputShapes(std::cout, shapes, shapeIndex);
     std::cout << '\n';
+  }
+  else if (isScale)
+  {
+    std::cerr << "Error: nothing to scale\n";
+    maslevtsov::clearShapes(shapes, shapeIndex);
+    return 1;
   }
 
   maslevtsov::clearShapes(shapes, shapeIndex);
