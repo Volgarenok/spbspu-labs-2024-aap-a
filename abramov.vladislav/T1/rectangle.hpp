@@ -8,7 +8,7 @@ namespace abramov
   {
   Rectangle(double x1, double y1, double x2, double y2);
   double getArea() const override;
-  void getFrameRect() const override;
+  rectangle_t getFrameRect() const override;
   void move(point_t p) override;
   void move(double dx, double dy) override;
   void scale(double k) override;
