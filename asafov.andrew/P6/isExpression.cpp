@@ -1,97 +1,120 @@
 #include "isExpression.hpp"
 
-unsigned char isExpression(char* string, unsigned long long pos, unsigned long long lenght, unsigned char step)
+bool isBetween(char term1, char term2, char term3)
 {
-    unsigned long long len = 0;
-    if(step == 0)
+    if(term1 == term2)
     {
-        for(unsigned long long i = pos; i < lenght; i++)
-        {
-            if(string[i] == '+' || string[i] == '-')
-            {
-                if(isExpression(string, i-len,i, 1)!=1)
-                {
-                    return 2;
-                }
-                len=0;
-            }
-            else
-            {
-                len++;
-            }
-        }
-        if(isExpression(string, lenght - len, lenght, 1)!=1)
-        {
-            return 2;
-        }
-        return 1;
+        return true;
     }
-    else if(step == 1)
+    else if(term2 == term3)
     {
-        len=0;
-        for(unsigned long long i = pos; i < lenght; i++)
-        {
-            if(string[i] == '*')
-            {
-                if(isExpression(string, i-len,i, 2)!=1)
-                {
-                    return 2;
-                }
-                len=0;
-            }
-            else
-            {
-                len++;
-            }
-            if(isExpression(string, lenght - len, lenght, 2)!=1)
-            {
-                return 2;
-            }
-            return 1;
-        }
+        return false;
     }
-    else if(step == 2)
+    term2++;
+    isBetween(term1, term2, term3);
+}
+
+bool isDigit(char term)
+{
+    if(isBetween(term, '0', '9'))
     {
-        if(isExpression(string, lenght, lenght, 3)!=1)
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool isLetter(char term)
+{
+    if(isBetween(term, 'a', 'z'))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool asafov::isExpression(char* string, unsigned long long pos, unsigned long long length)
+{
+    if(isDigit(string[pos]))
+    {
+        if(isDigit(string[pos + 1]))
         {
-            for(unsigned long long i = pos; i < lenght; i++)
-            {
-                if(isExpression(string, i, i, 4)!=1)
-                {
-                    return 2;
-                }
-            }
+            return isExpression(string, pos + 1, length);
+        }
+        else if(isLetter(string[pos + 1]))
+        {
+            return isExpression(string, pos + 1, length);
+        }
+        else if(string[pos + 1]=='*')
+        {
+            return isExpression(string, pos + 1, length);
+        }
+        else if(string[pos + 1]=='+' || string[pos + 1]=='-')
+        {
+            return isExpression(string, pos + 1, length);
+        }
+        else if(pos + 1 == length)
+        {
+            return true;
         }
         else
         {
-            return 2;
+            return false;
         }
-        return 1;
     }
-    else if(step==3)
+    else if(isLetter(string[pos]))
     {
-        if(string[lenght-1] >= 'a' && string[lenght-1] <= 'e')
+        if(string[pos + 1]=='*')
         {
-            return 1;
+            return isExpression(string, pos + 1, length);
         }
-        else if(string[lenght] >=0 && string[lenght] <=9)
+        else if(string[pos + 1]=='+' || string[pos + 1]=='-')
         {
-            return 1;
+            return isExpression(string, pos + 1, length);
+        }
+        else if(pos + 1 == length)
+        {
+            return true;
         }
         else
         {
-            return 2;
+            return false;
         }
     }
-    else if(step==4)
+    else if(string[pos] == '*')
     {
-        if(string[lenght] >=0 && string[lenght] <=9)
+        if(isDigit(string[pos + 1]))
         {
-            return 1;
+            return isExpression(string, pos + 1, length);
+        }
+        else if(isLetter(string[pos + 1]))
+        {
+            return isExpression(string, pos + 1, length);
         }
         else
         {
-            return 2;
+            return false;
         }
     }
+    else if(string[pos] == '+' || string[pos]=='-')
+    {
+        if(isDigit(string[pos + 1]))
+        {
+            return isExpression(string, pos + 1, length);
+        }
+        else if(isLetter(string[pos + 1]))
+        {
+            return isExpression(string, pos + 1, length);
+        }
+        else
+        {
+            return false;
+        }
+    }
+    return true;
 }

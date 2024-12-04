@@ -1,8 +1,8 @@
-#ifndef ISEXPRESSION_HPP
-#define ISEXPRESSION_HPP
+#ifndef IS_EXPRESSION_HPP
+#define IS_EXPRESSION_HPP
 namespace asafov
 {
-    int isExpression(char* string, unsigned long long pos, unsigned long long lenght, unsigned char step);
+    bool isExpression(char* string, unsigned long long pos, unsigned long long length);
 }
 
 #endif
