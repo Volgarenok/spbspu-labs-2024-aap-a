@@ -2,6 +2,14 @@
 #include <string>
 #include "rectangle.hpp"
 
+void maslevtsov::clearShapes(Shape** shapes, std::size_t border)
+{
+  for (std::size_t i = 0; i < border; ++i)
+  {
+    delete shapes[i];
+  }
+}
+
 maslevtsov::Shape* maslevtsov::makeShape(std::istream& in)
 {
   std::string figureName = "";
