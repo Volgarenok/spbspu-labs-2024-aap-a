@@ -14,10 +14,10 @@ namespace abramov
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    point_t A;
-    point_t B;
-    point_t C;
-    point_t D;
+    point_t A_;
+    point_t B_;
+    point_t C_;
+    point_t D_;
   };
 }
 #endif
