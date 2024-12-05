@@ -7,7 +7,7 @@ namespace abramov
 {
   struct Square: Shape
   {
-    Square(double x, double y, double len);
+    Square(point_t p, double len);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;

@@ -2,12 +2,9 @@
 
 namespace abramov
 {
-  Square::Square(double x, double y, double len)
-  {
-    pLeftLower.x = x;
-    pLeftLower.y = y;
-    len_ = len;
-  }
+  Square::Square(point_t p, double len):
+  pLeftLower(p), len_(len)
+  {}
 
   double Square::getArea() const
   {
