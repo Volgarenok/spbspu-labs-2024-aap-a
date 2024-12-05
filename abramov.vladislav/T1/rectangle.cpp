@@ -5,16 +5,14 @@
 
 namespace abramov
 {
-  Rectangle::Rectangle(double x1, double y1, double x2, double y2)
+  Rectangle::Rectangle(point_t p1, point_t p2)
   {
-    if (x1 >= x2 || y1 >= y2)
+    if (p1.x >= p2.x || p1.y >= p2.y)
     {
       throw std::logic_error("Impossible to build a rectangle");
     }
-    pLeftLower.x = x1;
-    pLeftLower.y = y1;
-    pRightUpper.x = x2;
-    pRightUpper.y = y2;
+    pLeftLower = p1;
+    pRightUpper = p2;
   }
 
   double Rectangle::getArea() const
