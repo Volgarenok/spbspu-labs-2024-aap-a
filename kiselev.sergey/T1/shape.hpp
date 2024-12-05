@@ -1,5 +1,6 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
+#include <cstddef>
 #include "base-types.hpp"
 namespace kiselev
 {
@@ -13,6 +14,7 @@ namespace kiselev
     virtual void scale(double k) = 0;
     virtual ~Shape() = default;
   };
+  void destroyShapePtr(Shape** shapes, size_t count);
 }
 #endif
 
