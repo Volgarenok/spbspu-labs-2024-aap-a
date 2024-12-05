@@ -3,7 +3,7 @@
 namespace abramov
 {
   Square::Square(point_t p, double len):
-  pLeftLower(p), len_(len)
+  pLeftLower_(p), len_(len)
   {}
 
   double Square::getArea() const
@@ -14,8 +14,8 @@ namespace abramov
   rectangle_t Square::getFrameRect() const
   {
     point_t pos;
-    pos.x = pLeftLower.x + len_ / 2;
-    pos.y = pLeftLower.y + len_ / 2;
+    pos.x = pLeftLower_.x + len_ / 2;
+    pos.y = pLeftLower_.y + len_ / 2;
     rectangle_t frame_rect;
     frame_rect.height = len_;
     frame_rect.width = len_;
@@ -25,8 +25,8 @@ namespace abramov
 
   void Square::move(double dx, double dy)
   {
-    pLeftLower.x += dx;
-    pLeftLower.y += dy;
+    pLeftLower_.x += dx;
+    pLeftLower_.y += dy;
   }
 
   void Square::move(point_t p)
@@ -40,7 +40,7 @@ namespace abramov
   void Square::scale(double k)
   {
     len_ *= k;
-    pLeftLower.x += len_ / 2 * (k - 1);
-    pLeftLower.y += len_ / 2 * (k - 1);
+    pLeftLower_.x += len_ / 2 * (k - 1);
+    pLeftLower_.y += len_ / 2 * (k - 1);
   }
 }

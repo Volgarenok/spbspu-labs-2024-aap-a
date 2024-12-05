@@ -4,6 +4,7 @@
 #include "shape.hpp"
 #include "rectangle.hpp"
 #include "square.hpp"
+#include "complexquad.hpp"
 
 int main()
 {

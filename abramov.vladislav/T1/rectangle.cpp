@@ -11,19 +11,19 @@ namespace abramov
     {
       throw std::logic_error("Impossible to build a rectangle");
     }
-    pLeftLower = p1;
-    pRightUpper = p2;
+    pLeftLower_ = p1;
+    pRightUpper_ = p2;
   }
 
   double Rectangle::getArea() const
   {
-    return (pRightUpper.x - pLeftLower.x) * (pRightUpper.y - pLeftLower.y);
+    return (pRightUpper_.x - pLeftLower_.x) * (pRightUpper_.y - pLeftLower_.y);
   }
 
   rectangle_t Rectangle::getFrameRect() const
   {
-    double x = (pRightUpper.x + pLeftLower.x) / 2;
-    double y = (pRightUpper.y + pLeftLower.y) / 2;
+    double x = (pRightUpper_.x + pLeftLower_.x) / 2;
+    double y = (pRightUpper_.y + pLeftLower_.y) / 2;
     point_t pos;
     pos.x = x;
     pos.y = y;
@@ -36,10 +36,10 @@ namespace abramov
 
   void Rectangle::move(double dx, double dy)
   {
-    pRightUpper.x += dx;
-    pRightUpper.y += dy;
-    pLeftLower.x += dx;
-    pLeftLower.y += dy;
+    pRightUpper_.x += dx;
+    pRightUpper_.y += dy;
+    pLeftLower_.x += dx;
+    pLeftLower_.y += dy;
   }
 
   void Rectangle::move(point_t p)
@@ -52,13 +52,12 @@ namespace abramov
 
   void Rectangle::scale(double k)
   {
-    double newWidth = (pRightUpper.x - pLeftLower.x) * k;
-    double newHeigth = (pRightUpper.y - pLeftLower.y) * k;
+    double newWidth = (pRightUpper_.x - pLeftLower_.x) * k;
+    double newHeigth = (pRightUpper_.y - pLeftLower_.y) * k;
     point_t center = getFrameRect().pos;
-    pRightUpper.x = center.x + newWidth / 2;
-    pRightUpper.y = center.y + newHeigth / 2;
-    pLeftLower.x = center.x - newWidth / 2;
-    pLeftLower.y = center.y - newWidth / 2;
+    pRightUpper_.x = center.x + newWidth / 2;
+    pRightUpper_.y = center.y + newHeigth / 2;
+    pLeftLower_.x = center.x - newWidth / 2;
+    pLeftLower_.y = center.y - newWidth / 2;
   }
-
 }

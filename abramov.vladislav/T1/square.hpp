@@ -14,7 +14,7 @@ namespace abramov
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    point_t pLeftLower;
+    point_t pLeftLower_;
     double len_;
   };
 }
