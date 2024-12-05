@@ -12,7 +12,7 @@ int main()
       std::cerr << "Dry run";
       return 1;
     }
-    char * s1 = kushekbaev::readInputArray(size1, max);
+    char * s1 = kushekbaev::readInputArray(std::cin);
     std::cout << kushekbaev::isValidExpression(s1) << "\n";
     delete[] s1;
     return 0;
