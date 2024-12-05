@@ -5,6 +5,7 @@ char* kushekbaev::readInputArray(std::istream& input)
 {
   size_t max = 10;
   size_t size = 0;
+
   char stop = '\0';
   char* str = nullptr;
   try

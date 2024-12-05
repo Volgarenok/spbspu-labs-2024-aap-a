@@ -1,7 +1,7 @@
 #ifndef READ_INPUT_ARRAY_HPP
 #define READ_INPUT_ARRAY_HPP
-#include <cstddef>
 #include <istream>
+#include <cstddef>
 
 namespace kushekbaev
 {
