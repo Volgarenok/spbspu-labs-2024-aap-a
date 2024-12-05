@@ -14,12 +14,7 @@ kiselev::rectangle_t kiselev::Rectangle::getFrameRect() const
 {
   double centreForX = leftDown_.x + (rightUp_.x - leftDown_.x) / 2;
   double centreForY = leftDown_.y + (rightUp_.y - leftDown_.y) / 2;
-  rectangle_t b;
-  b.width = rightUp_.x - leftDown_.x;
-  b.height = rightUp_.y - leftDown_.y;
-  b.pos.x = centreForX;
-  b.pos.y = centreForY;
-  return b;
+  return { rightUp_.x - leftDown_.x, rightUp_.y - leftDown_.y, { centreForX, centreForY } };
 }
 void kiselev::Rectangle::move(point_t a)
 {
