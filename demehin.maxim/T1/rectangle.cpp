@@ -2,6 +2,14 @@
 #include "base_types.hpp"
 #include <cmath>
 
+demehin::Rectangle::Rectangle(double lbx, double lby, double rtx, double rty)
+{
+  lb_.x_ = lbx;
+  lb_.y_ = lby;
+  rt_.x_ = rtx;
+  rt_.y_ = rty;
+}
+
 double demehin::Rectangle::getArea() const
 {
   double len_h = std::sqrt((rt_.y_ - lb_.y_) * (rt_.y_ - lb_.y_));
