@@ -5,7 +5,6 @@
 int main()
 {
     size_t size1 = 0;
-    size_t max = 10;
     std::cin >> size1;
     if (size1 == 0)
     {
