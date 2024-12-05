@@ -1,5 +1,8 @@
 #ifndef SQUARE_HPP
 #define SQUARE_HPP
+#include "base-types.hpp"
+#include "shape.hpp"
+
 namespace abramov
 {
   struct Square: Shape
@@ -8,12 +11,12 @@ namespace abramov
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;
-    void (move double dx, double dy) override;
+    void move(double dx, double dy) override;
     void scale(double k) override;
   private:
     point_t pLeftLower;
-    double len;
-  }
+    double len_;
+  };
 }
 #endif
 
