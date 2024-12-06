@@ -118,3 +118,11 @@ int savintsev::actWithShpByDesc(char * desc, Shape ** rhs, size_t & amt, point_t
   }
   return -1;
 }
+
+void savintsev::destroyArray(Shape ** rhs, size_t amt)
+{
+  for (size_t i = 0; i < amt; ++i)
+  {
+    delete rhs[i];
+  }
+}

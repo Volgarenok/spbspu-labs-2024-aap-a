@@ -18,10 +18,12 @@ int main()
     if (line == nullptr)
     {
       std::cerr << "ERROR: Memory full\n";
+      savintsev::destroyArray(ShapeList, amtOfShapes);
       return 2;
     }
     if (std::cin.eof())
     {
+      savintsev::destroyArray(ShapeList, amtOfShapes);
       delete[] line;
       std::cerr << "ERROR: EOF is not implemented\n";
       return 2;
@@ -44,12 +46,14 @@ int main()
     if (amtOfShapes == capac)
     {
       std::cerr << "ERROR: Memory full\n";
+      savintsev::destroyArray(ShapeList, amtOfShapes);
       delete[] line;
       return 2;
     }
     was_error = (result == 2) ? true : was_error;
     continue;
   }
+  savintsev::destroyArray(ShapeList, amtOfShapes);
   if (was_error)
   {
     std::cerr << "WARNING: Some shapes were ignored because they were described incorrectly\n";
