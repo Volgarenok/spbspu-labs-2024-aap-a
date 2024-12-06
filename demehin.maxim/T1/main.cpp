@@ -4,6 +4,7 @@
 #include <string>
 #include "base_types.hpp"
 #include <iomanip>
+#include "ring.hpp"
 
 namespace
 {
@@ -65,10 +66,17 @@ int main()
   size_t shp_cnt = 0;
   double scale_k = 0;
   demehin::point_t scale_pt;
+  bool is_incorrect_shp = false;
 
   std::string shape_name;
-  while (std::cin >> shape_name)
+  while (true)
   {
+    std::cin >> shape_name;
+    if (std::cin.eof())
+    {
+      std::cerr << "error: eof\n";
+      return 1;
+    }
     if (shape_name == "RECTANGLE")
     {
       double lbx = 0, lby = 0;
@@ -77,9 +85,27 @@ int main()
       std::cin >> lby;
       std::cin >> rtx;
       std::cin >> rty;
+      if (lbx >= rtx || lby >= rty)
+      {
+        is_incorrect_shp = true;
+        continue;
+      }
       demehin::Rectangle* rect = new demehin::Rectangle(lbx, lby, rtx, rty);
       std::cout << rect->getArea() << "\n";
       shapes[shp_cnt++] = rect;
+      shape_name = "";
+    }
+    else if (shape_name == "RING")
+    {
+      double cent_x = 0, cent_y = 0, out_r = 0, in_r = 0;
+      std::cin >> cent_x >> cent_y >> out_r >> in_r;
+      if (out_r < in_r || out_r <= 0 || in_r <= 0)
+      {
+        is_incorrect_shp = true;
+        continue;
+      }
+      demehin::Ring* ring = new demehin::Ring(cent_x, cent_y, out_r, in_r);
+      shapes[shp_cnt++] = ring;
       shape_name = "";
     }
     else if (shape_name == "SCALE")
@@ -121,6 +147,11 @@ int main()
   sum_area = getFrRectAreaSum(shapes, shp_cnt);
   std::cout << sum_area << " ";
   printFrRectCords(shapes, shp_cnt);
+  if (is_incorrect_shp)
+  {
+    std::cerr << "Incorrect shape\n";
+  }
+
 
   //for (size_t i = 0; i < shp_cnt; i++)
   //{
