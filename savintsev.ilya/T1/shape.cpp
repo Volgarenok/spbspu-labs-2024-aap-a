@@ -1,5 +1,9 @@
 #include "shape.hpp"
+#include <cstring>
 #include <iomanip>
+#include "rectangle.hpp"
+#include "concave.hpp"
+#include "complexquad.hpp"
 
 void savintsev::scaleRelativeTo(Shape * rhs, point_t p, double k)
 {
@@ -43,13 +47,74 @@ void savintsev::printSumAreaAndBorders(std::ostream & out, Shape ** rhs, size_t 
   out << '\n';
 }
 
-void savintsev::destroyShapes(Shape ** rhs, size_t amt)
+namespace
 {
+  void readDblfromDesc(double * numbers, size_t amt);
+
+  void readDblfromDesc(double * numbers, size_t amt)
   {
+    char * token = nullptr;
     for (size_t i = 0; i < amt; ++i)
     {
-      delete rhs[i];
+      token = std::strtok(nullptr, " ");
+      if (!token)
+      {
+        break;
+      }
+      numbers[i] = std::atof(token);
     }
-    delete[] rhs;
   }
+}
+
+int savintsev::actWithShpByDesc(char * desc, Shape ** rhs, size_t & amt, point_t & p, double & k)
+{
+  if (desc[0] == '\0')
+  {
+    return -1;
+  }
+  char * token = std::strtok(desc, " ");
+  try
+  {
+    if (!std::strcmp(token, "RECTANGLE"))
+    {
+      double numbers[4] = {0., 0., 0., 0.};
+      readDblfromDesc(numbers, 4);
+      Rectangle * Rect = new Rectangle({numbers[0], numbers[1]}, {numbers[2], numbers[3]});
+      rhs[amt++] = Rect;
+      return 0;
+    }
+    if (!std::strcmp(token, "CONCAVE"))
+    {
+      double n[8] = {0., 0., 0., 0., 0., 0., 0., 0.};
+      readDblfromDesc(n, 8);
+      Concave * Conc = new Concave({n[0], n[1]}, {n[2], n[3]}, {n[4], n[5]}, {n[6], n[7]});
+      rhs[amt++] = Conc;
+      return 0;
+    }
+    if (!std::strcmp(token, "COMPLEXQUAD"))
+    {
+      double n[8] = {0., 0., 0., 0., 0., 0., 0., 0.};
+      readDblfromDesc(n, 8);
+      Complexquad * Comp = new Complexquad({n[0], n[1]}, {n[2], n[3]}, {n[4], n[5]}, {n[6], n[7]});
+      rhs[amt++] = Comp;
+      return 0;
+    }
+  }
+  catch (const std::invalid_argument & e)
+  {
+    return 2;
+  }
+  if (!std::strcmp(token, "SCALE"))
+  {
+    double numbers[3] = {0., 0., 0.};
+    readDblfromDesc(numbers, 3);
+    if (numbers[2] <= 0)
+    {
+      return -1;
+    }
+    p = {numbers[0], numbers[1]};
+    k = numbers[2];
+    return 1;
+  }
+  return -1;
 }
