@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include <cmath>
+ #include <cmath>
 #include "Tylor.h"
 
 int main() {
@@ -8,7 +8,7 @@ int main() {
   size_t numberMax = 0;
   double start = 0.0;
   double end = 0.0;
-  const double step = 0.05;
+  constexpr double step = 0.05;
 
   std::cin >> start >> end >> numberMax;
 
