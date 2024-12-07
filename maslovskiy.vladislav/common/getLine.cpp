@@ -1,60 +1,55 @@
 #include "getLine.hpp"
-#include <cstdlib>
 #include <iostream>
-#include <new>
+#include <cstdlib>
 
-char* maslovskiy::resizeString(const char *str, size_t strSize, size_t iterSize)
+char* maslovskiy::getLine(std::istream& input, size_t& capacity)
 {
-  char *resized = static_cast<char*>(malloc(sizeof(char) * (strSize + iterSize + 1)));
-  if (resized == nullptr)
+  char* line = reinterpret_cast<char*>(malloc(capacity));
+  if (!line)
   {
-    std::cerr << "Error: memory not allocate for string or incorrect parameters\n";
     return nullptr;
   }
-  for (size_t i = 0; i < strSize; ++i)
+  char ch = ' ';
+  size_t index = 0;
+  input >> std::noskipws;
+  while (input >> ch && ch != '\n')
   {
-    resized[i] = str[i];
-  }
-  resized[strSize + iterSize] = '\0';
-  return resized;
-}
-
-char* maslovskiy::inputString(std::istream &in)
-{
-  const size_t iterSize = 10;
-  size_t strSize = iterSize;
-  char *str = static_cast<char*>(malloc(sizeof(char) * iterSize));
-  if (str == nullptr)
-  {
-    std::cerr << "Error: memory not allocated for string or incorrect parameters\n";
-    return nullptr;
-  }
-  char ch = 0;
-  size_t i = 0;
-  in >> std::noskipws;
-  while (in >> ch)
-  {
-    if (ch == '\n')
+    if (index == capacity - 1)
     {
-      break;
-    }
-    if (i == strSize)
-    {
-      char *temp = resizeString(str, strSize, iterSize);
-      if (temp == nullptr)
+      char* extendedLine = reallocate(line, capacity, 2);
+      if (!extendedLine)
       {
-        free(str);
-        std::cerr << "Error: memory not allocated for string or incorrect parameters\n";
+        free(line);
         return nullptr;
       }
-      strSize += iterSize;
-      free(str);
-      str = temp;
+      line = extendedLine;
     }
-    str[i] = ch;
-    ++i;
+    line[index++] = ch;
   }
-  str[i] = '\0';
-  in >> std::skipws;
-  return str;
+  line[index] = '\0';
+
+  if (!input.eof() && !input)
+  {
+    free(line);
+    return nullptr;
+  }
+
+  return line;
+}
+
+char* maslovskiy::reallocate(char* line, size_t& capacity, size_t factor, size_t addSizeOptional)
+{
+  size_t newCapacity = capacity * factor + addSizeOptional;
+  char* newLine = reinterpret_cast<char*>(malloc(newCapacity));
+  if (!newLine)
+  {
+    return nullptr;
+  }
+  for (size_t i = 0; i < capacity; ++i)
+  {
+    newLine[i] = line[i];
+  }
+  free(line);
+  capacity = newCapacity;
+  return newLine;
 }

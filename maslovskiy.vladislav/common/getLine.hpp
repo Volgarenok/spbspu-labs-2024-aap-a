@@ -6,8 +6,8 @@
 
 namespace maslovskiy
 {
-  char* inputString(std::istream &in);
-  char* resizeString(const char *str, size_t strSize, size_t iterSize);
+  char* getLine(std::istream& input, size_t &capacity);
+  char* reallocate(char* line, size_t &capacity, size_t factor, size_t addSizeOptional = 0);
 }
 
 #endif
