@@ -73,7 +73,7 @@ const char * has_term(const char * str)
     return nullptr;
   }
   const char * next = has_multiplier(str);
-  if (const char * hchar_next = has_character(next, '*')
+  if (const char * next = has_character(next, '*'))
   {
     if (const char * continues = has_term(hchar_next)
     {
@@ -90,7 +90,7 @@ const char * has_expression(const char * str)
     return nullptr;
   }
   const char * next = has_term(str);
-  if (const char * plus_next = has_character(next, '+')
+  if (const char * plus_next = has_character(next, '+'))
   {
     if (const char * continues = has_expression(plus_next))
     {
