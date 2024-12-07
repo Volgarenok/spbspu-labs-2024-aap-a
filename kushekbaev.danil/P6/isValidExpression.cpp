@@ -89,7 +89,7 @@ const char * kushekbaev::hasTerm(const char * str)
     return str;
   }
   const char * next = hasMultiplier(str);
-  if (const char * hchar_next = hasSymbol(next, '*'))
+  if (const char * hchar_next = hasCharacter(next, '*'))
   {
     if (const char * continues = hasTerm(hchar_next))
     {
