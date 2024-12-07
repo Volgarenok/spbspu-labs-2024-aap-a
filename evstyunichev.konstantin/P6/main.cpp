@@ -13,6 +13,7 @@ int main()
   if (!str1[0])
   {
     std::cerr << "zero input\n";
+    delete[] str1;
     return 1;
   }
   bool flag = (evstyunichev::is_expression_correct(str1) != nullptr);
