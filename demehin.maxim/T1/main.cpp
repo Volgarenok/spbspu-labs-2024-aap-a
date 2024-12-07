@@ -42,16 +42,16 @@ namespace
     rty = fr_rect.pos.y + fr_rect.height / 2;
   }
 
-  void printFrRectCords(demehin::Shape* shapes[], size_t shp_cnt)
+  void printFrRectCords(std::ostream& out, demehin::Shape* shapes[], size_t shp_cnt)
   {
     for (size_t i = 0; i < shp_cnt; i++)
     {
       double lbx = 0, lby = 0, rtx = 0, rty = 0;
       demehin::rectangle_t fr_rect = shapes[i]->getFrameRect();
       getFrRectCords(fr_rect, lbx, lby, rtx, rty);
-      std::cout << lbx << " " << lby << " " << rtx << " " << rty << " ";
+      out << lbx << " " << lby << " " << rtx << " " << rty << " ";
     }
-    std::cout << "\n";
+    out << "\n";
   }
 
   void free_shapes(demehin::Shape** shapes, size_t shp_cnt)
@@ -213,13 +213,13 @@ int main()
 
   double sum_area = getAreaSum(shapes, shp_cnt);
   std::cout << std::fixed << std::setprecision(1) << sum_area << " ";
-  printFrRectCords(shapes, shp_cnt);
+  printFrRectCords(std::cout, shapes, shp_cnt);
 
   makeIsoScale(shapes, shp_cnt, scale_k, scale_pt);
 
   sum_area = getAreaSum(shapes, shp_cnt);
   std::cout << sum_area << " ";
-  printFrRectCords(shapes, shp_cnt);
+  printFrRectCords(std::cout, shapes, shp_cnt);
 
   free_shapes(shapes, shp_cnt);
 }
