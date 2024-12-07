@@ -4,18 +4,18 @@
 
 constexpr size_t default_size = 20;
 
-void evstyunichev::copy(const char *str1, char *str2)
+size_t evstyunichev::copy(const char *str1, char *str2)
 {
-  if (!str1 || !str2)
-  {
-    return;
-  }
   size_t i = 0;
-  for (; str1[i]; i++)
+  if (!str1)
+  {
+    return i;
+  }
+  for (; str1[i] != '\0'; i++)
   {
     str2[i] = str1[i];
   }
-  return;
+  return i;
 }
 
 char * evstyunichev::resize_str(const size_t sz, const char *old)
@@ -24,10 +24,11 @@ char * evstyunichev::resize_str(const size_t sz, const char *old)
   try
   {
     temp = new char[sz + 1];
-    copy(old, temp);
+    size_t cnt = copy(old, temp);
+    temp[cnt] = 0;
     delete[] old;
   }
-  catch(const std::bad_alloc &e)
+  catch (const std::bad_alloc &e)
   {
     return nullptr;
   }
@@ -50,9 +51,9 @@ char * evstyunichev::get_string(std::istream &in, const char end)
     sz++;
     if(sz > mx)
     {
-      char *temp = nullptr;
+      str[sz - 1] = 0;
       mx *= 2;
-      temp = resize_str(mx, str);
+      char *temp = resize_str(mx, str);
       if (!temp)
       {
         delete[] str;
@@ -66,6 +67,7 @@ char * evstyunichev::get_string(std::istream &in, const char end)
     }
     str[sz - 1] = c;
   }
+  str[sz] = 0;
   return str;
 }
 
@@ -73,7 +75,7 @@ int evstyunichev::is_vowel(const char c)
 {
   char good[] = {"aeiouyAEIOUY"};
   int flag = 0;
-  for (size_t i = 0; i < 6; i++)
+  for (size_t i = 0; i < 12; i++)
   {
     if (c == good[i])
     {
