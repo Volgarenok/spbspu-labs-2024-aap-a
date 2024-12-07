@@ -4,7 +4,7 @@
 int main()
 {
   const char* str = dribas::enterStr(std::cin);
-  if (str ==nullptr) {
+  if (str == nullptr) {
     std::cerr << "error\n";
     return 1;
   }
@@ -13,5 +13,6 @@ int main()
     return 1;
   }
   std::cout << std::boolalpha << dribas::isValidString(str) << '\n';
+  free(str);
   return 0;
 }
