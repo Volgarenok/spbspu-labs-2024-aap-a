@@ -4,70 +4,54 @@
 #include <istream>
 #include <stdexcept>
 
-char* cherkasov::newArray(char* oldArray, size_t newCapacity)
+char* cherkasov::newArray(const char* oldArray, size_t newCapacity)
 {
-  char* newArray = nullptr;
-  try
+  char* newArray = new (std::nothrow) char[newCapacity];
+  if (!newArray)
   {
-    newArray = new char[newCapacity]();
-    if (oldArray)
-    {
-      size_t oldLength = 0;
-      while (oldArray[oldLength] != '\0' && oldLength < newCapacity - 1)
-      {
-        newArray[oldLength] = oldArray[oldLength];
-        ++oldLength;
-      }
-        newArray[oldLength] = '\0';
-        delete[] oldArray;
-    }
-      return newArray;
+    return nullptr;
   }
-  catch (const std::bad_alloc&)
+  if (oldArray)
   {
-    delete[] oldArray;
-    throw;
+    std::strncpy(newArray, oldArray, newCapacity - 1);
+    newArray[newCapacity - 1] = '\0';
   }
+    return newArray;
 }
 
 char* cherkasov::inputLine(std::istream& in)
 {
   size_t capacity = 13;
   size_t length = 0;
-  char* buffer = nullptr;
-  try
+  char* buffer = new (std::nothrow) char[capacity];
+  if (!buffer)
   {
-    buffer = new char[capacity]();
+    throw std::bad_alloc();
   }
-  catch (const std::bad_alloc& e)
-  {
-    std::cerr << "Memory allocation error: " << e.what() << "\n";
-    throw;
-  }
-  char ch;
+  char ch = '\0';
   in >> std::noskipws;
-  try
+  while (in.get(ch) && ch != '\n')
   {
-    while (in.get(ch) && ch != '\n') {
     if (length + 1 >= capacity)
     {
       size_t newCapacity = capacity * 2;
-      buffer = newArray(buffer, newCapacity);
-      capacity = newCapacity;
+      char* temp = newArray(buffer, newCapacity);
+      if (!temp)
+      {
+        delete[] buffer;
+        throw std::bad_alloc();
+      }
+        buffer = temp;
+        capacity = newCapacity;
     }
       buffer[length++] = ch;
-    }
-    if (length == 0 && in.eof())
-    {
-      delete[] buffer;
-      return nullptr;
-    }
-      buffer[length] = '\0';
-      return buffer;
   }
-  catch (...)
+  if (length == 0 && in.eof())
   {
     delete[] buffer;
-    throw;
+    return nullptr;
   }
+
+  buffer[length] = '\0';
+  return buffer;
 }
