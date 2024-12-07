@@ -19,15 +19,17 @@ char* cherkasov::newArray(char* oldArray, size_t newCapacity)
         ++oldLength;
       }
         newArray[oldLength] = '\0';
-        delete[] oldArray;
     }
       return newArray;
   }
   catch (const std::bad_alloc&)
   {
-    delete[] oldArray;
+    delete[] newArray;
     throw;
   }
+
+  delete[] oldArray;
+  return newArray;
 }
 
 char* cherkasov::inputLine(std::istream& in)
@@ -48,13 +50,23 @@ char* cherkasov::inputLine(std::istream& in)
   in >> std::noskipws;
   try
   {
-    while (in.get(ch) && ch != '\n') {
-    if (length + 1 >= capacity)
+    while (in.get(ch) && ch != '\n')
     {
-      size_t newCapacity = capacity * 2;
-      buffer = newArray(buffer, newCapacity);
-      capacity = newCapacity;
-    }
+      if (length + 1 >= capacity)
+      {
+        size_t newCapacity = capacity * 2;
+        char* newBuffer = nullptr;
+        try
+        {
+          newBuffer = newArray(buffer, newCapacity);
+        }
+        catch (...)
+        {
+          throw;
+        }
+        buffer = newBuffer;
+        capacity = newCapacity;
+      }
       buffer[length++] = ch;
     }
     if (length == 0 && in.eof())
@@ -62,8 +74,8 @@ char* cherkasov::inputLine(std::istream& in)
       delete[] buffer;
       return nullptr;
     }
-      buffer[length] = '\0';
-      return buffer;
+    buffer[length] = '\0';
+    return buffer;
   }
   catch (...)
   {

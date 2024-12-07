@@ -6,46 +6,30 @@
 
 int main()
 {
-  char* input = nullptr;
-  try
-  {
-    input = cherkasov::inputLine(std::cin);
-  }
-  catch (const std::exception& e)
-  {
-    std::cerr << "Unhandled exception: " << e.what() << "\n";
-     return 1;
-  }
+  char* input = cherkasov::inputLine(std::cin);
   if (!input)
   {
-    std::cerr << "Memory allocation failure or empty input!\n";
+    std::cerr << "Failed to read input or memory allocation error.\n";
     return 1;
   }
   if (!cherkasov::isValidInput(input))
   {
+    std::cerr << "Invalid input provided.\n";
     delete[] input;
     return 0;
   }
   const char oldChar = 'c';
   const char newChar = 'b';
   char* result = nullptr;
-  try
-  {
-    result = cherkasov::newLetter(input, oldChar, newChar);
-  }
-  catch (const std::exception& e)
-  {
-    std::cerr << "string error:" << e.what() << "\n";
-    delete[] input;
-    return 1;
-  }
+  result = new char[std::strlen(input) + 1];
   if (!result)
   {
-    std::cerr << "Error in memory allocation.\n";
+    std::cerr << "Memory allocation error for result buffer.\n";
     delete[] input;
     return 1;
   }
-    std::cout << result << "\n";
+  cherkasov::newLetter(result, input, oldChar, newChar);
+  std::cout << result << "\n";
   delete[] input;
   delete[] result;
   return 0;

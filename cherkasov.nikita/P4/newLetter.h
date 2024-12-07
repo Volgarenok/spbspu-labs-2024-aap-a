@@ -3,6 +3,6 @@
 
 namespace cherkasov
 {
-  char* newLetter(char* array, char oldChar, char newChar);
+  void newLetter(char* result, const char* array, char oldChar, char newChar);
 }
 #endif

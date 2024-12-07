@@ -2,31 +2,20 @@
 #include <cstddef>
 #include <cstring>
 #include <iostream>
-#include <cstdlib>
 
-char* cherkasov::newLetter(char* array, char oldChar, char newChar)
+void cherkasov::newLetter(char* result, const char* array, char oldChar, char newChar)
 {
-  if (!array)
+  if (!array || !result)
   {
-    std::cerr << "Error: the input line is empty.\n";
-    return nullptr;
+    std::cerr << "Error: invalid input pointers.\n";
+    return;
   }
-  try
+  const char* src = array;
+  char* dest = result;
+  while (*src)
   {
-    char* result = new char[std::strlen(array) + 1];
-    const char* src = array;
-    char* dest = result;
-    while (*src)
-    {
-      *dest++ = (*src == oldChar) ? newChar : *src;
-      ++src;
-    }
+    *dest++ = (*src == oldChar) ? newChar : *src;
+    ++src;
+  }
     *dest = '\0';
-    return result;
-  }
-  catch (const std::bad_alloc& e)
-  {
-    std::cerr << "Memory allocation error: " << e.what() << "\n";
-    return nullptr;
-  }
 }
