@@ -11,18 +11,27 @@ int main()
   kiselev::Shape* shapes[1000] = {};
   size_t countShape = 0;
   std::string titleShape;
+  bool isIncorrectScale = false;
   try
   {
     while (std::cin >> titleShape)
     {
       if (titleShape == "RECTANGLE")
       {
-        shapes[countShape++] = kiselev::make_rectangle(std::cin);
+        try
+        {
+          shapes[countShape++] = kiselev::make_rectangle(std::cin);
+        }
+        catch (const std::invalid_argument& e)
+        {
+          isIncorrectScale = true;
+        }
         titleShape = "";
       }
       else if (std::cin.eof())
       {
         std::cerr << "The input ended with eof\n";
+        kiselev::destroyShapePtr(shapes, countShape);
         return 1;
       }
       else if (titleShape == "SCALE")
@@ -41,16 +50,16 @@ int main()
       {
         continue;
       }
-      else
-      {
-        char* unusedCoordinates = kiselev::inputString(std::cin, '\n');
-        if (!unusedCoordinates)
-        {
-          return 1;
-        }
-        free(unusedCoordinates);
-        titleShape = "";
-      }
+      titleShape = "";
+    }
+    if (isIncorrectScale)
+    {
+      std::cerr << "There was an error in the description of the scale\n";
+    }
+    if (countShape == 0)
+    {
+      std::cerr << "The scales were not passed\n";
+      return 1;
     }
   }
   catch (const std::logic_error& e)
@@ -63,6 +72,7 @@ int main()
   {
     std::cerr << "Memory was not allocated\n";
     kiselev::destroyShapePtr(shapes, countShape);
+    return 1;
   }
   kiselev::destroyShapePtr(shapes, countShape);
   return 0;
