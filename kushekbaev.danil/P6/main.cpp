@@ -1,8 +1,6 @@
 #include <iostream>
 #include <read_input_array.hpp>
 #include "recursion.hpp"
-#include <sstream>
-
 
 int main()
 {
