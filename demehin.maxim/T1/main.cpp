@@ -189,7 +189,7 @@ int main()
       while (std::cin.peek() != '\n')
       {
         std::cin >> vertex[n].x >> vertex[n].y;
-        ++n;
+        n++;
       }
       if (n < 3 || hasSameVertex(n, vertex))
       {
