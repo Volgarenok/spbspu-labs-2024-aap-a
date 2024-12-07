@@ -1,10 +1,12 @@
 #include <iostream>
 #include <read_input_array.hpp>
 #include "recursion.hpp"
+#include <sstream>
+
 
 int main()
 {
-  char * stest = "2*B*(A+4)";
+  std::istringstream input("33*a*d*21+e*c*742-b*2+1");
   char * s1 = nullptr;
   try
   {
@@ -27,7 +29,6 @@ int main()
     return 1;
   }
   std::cout << kushekbaev::isValidExpression(s1) << "\n";
-  std::cout << kushekbaev::isValidExpression(stest) << "\n";
   delete[] s1;
   return 0;
 }
