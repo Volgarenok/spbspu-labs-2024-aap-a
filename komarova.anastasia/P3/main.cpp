@@ -16,7 +16,7 @@ int main(int argc, char ** argv)
     return 1;
   }
   char * st = argv[1];
-  if (!(komarova::isanum(const char * st)))
+  if (!(komarova::isanum(char * st)))
   {
     std::cout << "First parameter is not a number\n";
     return 1;
