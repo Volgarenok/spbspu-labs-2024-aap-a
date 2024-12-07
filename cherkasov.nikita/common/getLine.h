@@ -4,6 +4,7 @@
 
 namespace cherkasov
 {
+  void copyArray(const char* src, char* dest, size_t length);
   char* inputLine(std::istream& in);
 }
 

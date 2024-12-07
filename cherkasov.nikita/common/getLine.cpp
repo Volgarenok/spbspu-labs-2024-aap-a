@@ -1,29 +1,46 @@
 #include "getLine.h"
 #include <iostream>
+#include <stdexcept>
+
+void cherkasov::copyArray(const char* src, char* dest, size_t length)
+{
+  for (size_t i = 0; i < length; ++i)
+  {
+    dest[i] = src[i];
+  }
+}
 
 char* cherkasov::inputLine(std::istream& in)
 {
   size_t capacity = 21;
   size_t length = 0;
-  char* buffer = new char[capacity];
-  if (!buffer)
+  char* buffer = nullptr;
+  try
+  {
+    buffer = new char[capacity];
+  }
+  catch (const std::bad_alloc&)
   {
     return nullptr;
   }
   char ch = '\0';
   in >> std::noskipws;
-  while (in.get(ch) && ch != '\n')
+  while (in >> ch && ch != '\n')
   {
     if (length + 1 >= capacity)
     {
       size_t newCapacity = capacity * 2;
-      char* newBuffer = new char[newCapacity];
-      if (!newBuffer)
+      char* newBuffer = nullptr;
+      try
+      {
+        newBuffer = new char[newCapacity];
+      }
+      catch (const std::bad_alloc&)
       {
         delete[] buffer;
         return nullptr;
       }
-        std::copy(buffer, buffer + length, newBuffer);
+        cherkasov::copyArray(buffer, newBuffer, length);
         delete[] buffer;
         buffer = newBuffer;
         capacity = newCapacity;
@@ -38,3 +55,4 @@ char* cherkasov::inputLine(std::istream& in)
     buffer[length] = '\0';
     return buffer;
 }
+
