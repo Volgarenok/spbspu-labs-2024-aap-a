@@ -2,12 +2,12 @@
 #define RECURSION_HPP
 namespace evstyunichev
 {
-  const char * IsFactorCorrect(const char *, int prev = 3);
-  const char * IsTermCorrect(const char *, int prev = 1);
-  const char * IsExpressionCorrect(const char *, int prev = 1, bool OpenFlag = 0);
-  bool IsDigit(char, char cur = '0');
-  bool IsLetter(char, char cur = 'a');
-  bool IsSign(char);
-  bool IsBasicSymbol(char);
+  const char * is_factor_correct(const char *, int prev = 3);
+  const char * is_term_correct(const char *, int prev = 1);
+  const char * is_expression_correct(const char *, int prev = 1, bool OpenFlag = 0);
+  bool is_digit(char, char cur = '0');
+  bool is_letter(char, char cur = 'a');
+  bool is_sign(char);
+  bool is_basic_symbol(char);
 }
 #endif

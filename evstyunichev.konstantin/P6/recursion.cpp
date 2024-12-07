@@ -1,14 +1,14 @@
 #include "recursion.hpp"
 #include <iostream>
-const char * evstyunichev::IsFactorCorrect(const char *p, int prev)
+const char * evstyunichev::is_factor_correct(const char *p, int prev)
 {
   if (p == nullptr) return nullptr;
   int cur = 4;
-  if (evstyunichev::IsLetter(*p))
+  if (evstyunichev::is_letter(*p))
   {
     cur = (prev == 3);
   }
-  if (evstyunichev::IsDigit(*p))
+  if (evstyunichev::is_digit(*p))
   {
     cur = 2 & prev;
   }
@@ -18,25 +18,25 @@ const char * evstyunichev::IsFactorCorrect(const char *p, int prev)
   }
   if (cur)
   {
-    return evstyunichev::IsFactorCorrect(++p, cur);
+    return evstyunichev::is_factor_correct(++p, cur);
   }
   return nullptr;
 }
 
-const char * evstyunichev::IsTermCorrect(const char *p, int prev)
+const char * evstyunichev::is_term_correct(const char *p, int prev)
 {
   if (p == nullptr)
   {
     return nullptr;
   }
-  if (IsBasicSymbol(*p))
+  if (is_basic_symbol(*p))
   {
-    return IsTermCorrect(IsFactorCorrect(p), 0);
+    return is_term_correct(is_factor_correct(p), 0);
   }
   if (*p == '(')
   {
     p++;
-    p = IsExpressionCorrect(p, 1, 1);
+    p = is_expression_correct(p, 1, 1);
     if (!p)
     {
       return p;
@@ -46,7 +46,7 @@ const char * evstyunichev::IsTermCorrect(const char *p, int prev)
       return nullptr;
     }
     p++;
-    return IsTermCorrect(p, 0);
+    return is_term_correct(p, 0);
   }
   if (prev)
   {
@@ -54,32 +54,32 @@ const char * evstyunichev::IsTermCorrect(const char *p, int prev)
   }
   if (*p == '*')
   {
-    return IsTermCorrect(++p);
+    return is_term_correct(++p);
   }
   return p;
 }
 
-const char * evstyunichev::IsExpressionCorrect(const char *p, int prev, bool OpenFlag)
+const char * evstyunichev::is_expression_correct(const char *p, int prev, bool OpenFlag)
 {
   if (p == nullptr)
   {
     return nullptr;
   }
-  if (IsBasicSymbol(*p))
+  if (is_basic_symbol(*p))
   {
-    return IsExpressionCorrect(IsTermCorrect(p), 0, OpenFlag);
+    return is_expression_correct(is_term_correct(p), 0, OpenFlag);
   }
   if (*p == '(')
   {
-    return IsTermCorrect(p);
+    return is_term_correct(p);
   }
   if (prev)
   {
     return nullptr;
   }
-  if (IsSign(*p))
+  if (is_sign(*p))
   {
-    return IsExpressionCorrect(++p, 1, OpenFlag);
+    return is_expression_correct(++p, 1, OpenFlag);
   }
   if (*p == 0)
   {
@@ -92,7 +92,7 @@ const char * evstyunichev::IsExpressionCorrect(const char *p, int prev, bool Ope
   return nullptr;
 }
 
-bool evstyunichev::IsLetter(char c, char cur)
+bool evstyunichev::is_letter(char c, char cur)
 {
   if (cur == 'z' + 1)
   {
@@ -104,12 +104,12 @@ bool evstyunichev::IsLetter(char c, char cur)
   }
   if (cur == 'f')
   {
-    IsLetter(c, 'x');
+    is_letter(c, 'x');
   }
-  return IsLetter(c, cur + 1);
+  return is_letter(c, cur + 1);
 }
 
-bool evstyunichev::IsDigit(char c, char cur)
+bool evstyunichev::is_digit(char c, char cur)
 {
   if (cur == '9' + 1)
   {
@@ -119,15 +119,15 @@ bool evstyunichev::IsDigit(char c, char cur)
   {
     return 1;
   }
-  return IsDigit(c, cur + 1);
+  return is_digit(c, cur + 1);
 }
 
-bool evstyunichev::IsBasicSymbol(char c)
+bool evstyunichev::is_basic_symbol(char c)
 {
-  return (evstyunichev::IsDigit(c) || evstyunichev::IsLetter(c));
+  return (evstyunichev::is_digit(c) || evstyunichev::is_letter(c));
 }
 
-bool evstyunichev::IsSign(char c)
+bool evstyunichev::is_sign(char c)
 {
   return ((c == '+') || (c == '-'));
 }
