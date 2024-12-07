@@ -13,14 +13,14 @@ namespace
 {
     for (size_t i = 0; i < shp_cnt; i++)
     {
-        //demehin::rectangle_t old_fr_rect = shapes[i]->getFrameRect();
+        demehin::point_t orig_pt = shapes[i]->getFrameRect().pos;
         shapes[i]->move(scale_pt);
-        shapes[i]->scale(scale_k);
-        demehin::rectangle_t new_fr_rect = shapes[i]->getFrameRect();
+        demehin::point_t new_pt = shapes[i]->getFrameRect().pos;
         demehin::point_t move_vector;
-        move_vector.x = scale_pt.x - new_fr_rect.pos.x;
-        move_vector.y = scale_pt.y - new_fr_rect.pos.y;
-        shapes[i]->move(move_vector.x, move_vector.y);
+        move_vector.x = (new_pt.x - orig_pt.x) * scale_k;
+        move_vector.y = (new_pt.y - orig_pt.y) * scale_k;
+        shapes[i]->scale(scale_k);
+        shapes[i]->move(move_vector.x * -1, move_vector.y * -1);
     }
 }
 
