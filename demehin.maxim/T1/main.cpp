@@ -200,4 +200,6 @@ int main()
   {
     std::cerr << "Incorrect shape\n";
   }
+
+  free_shapes(shapes, shp_cnt);
 }
