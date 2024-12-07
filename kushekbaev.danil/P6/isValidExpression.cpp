@@ -37,7 +37,7 @@ const char * has_unsigned_int(const char * str)
   {
     return nullptr;
   }
-  return has_unsigned_int(next);
+  return next;
 }
 
 const char * has_multiplier(const char * str)
