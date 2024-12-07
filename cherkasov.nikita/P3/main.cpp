@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
       matrix = dynamicArray;
     }
 
-  int result = cherkasov::readMatrix(inputFile, rows, cols,matrix);
+  int result = cherkasov::readMatrix(inputFile, rows, cols,  matrix);
   if (result != 0)
   {
     delete[] dynamicArray;
