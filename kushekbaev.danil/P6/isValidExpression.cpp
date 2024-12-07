@@ -14,7 +14,7 @@ namespace kushekbaev
 
 const char * kushekbaev::hasCharacter(const char * str, char c)
 {
-  if (!str)
+  if (!str || *str == '\0')
   {
     return str;
   }
@@ -23,7 +23,7 @@ const char * kushekbaev::hasCharacter(const char * str, char c)
 
 const char * kushekbaev::hasLetter(const char * str)
 {
-  if (!str)
+  if (!str || *str == '\0')
   {
     return str;
   }
