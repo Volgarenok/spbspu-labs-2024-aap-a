@@ -40,7 +40,7 @@ double dirti::e_taylor(double x, size_t k, double error)
     factorial *= i;
     result += (num/factorial);
   }
-  if (std::abs(result) - std::abs(e_math(x)) > error)
+  if (num > error)
   {
     throw std::logic_error("math-error");
   }
