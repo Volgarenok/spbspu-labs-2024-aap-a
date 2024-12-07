@@ -3,7 +3,6 @@
 #include <fstream>
 #include "upptri.hpp"
 
-
 namespace gavrilova {
   int checkNumOfArguments(int argc)
   {
