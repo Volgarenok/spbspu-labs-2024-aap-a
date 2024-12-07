@@ -9,6 +9,6 @@ namespace evstyunichev
   int is_vowel(char);
   void output(const char *, std::ostream &);
   size_t cnt_not_vowel(const char *);
-  void copy(const char *, char *);
+  size_t copy(const char *, char *);
 }
 #endif

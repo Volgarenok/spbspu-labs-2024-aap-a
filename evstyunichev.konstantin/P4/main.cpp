@@ -9,11 +9,12 @@ int main()
   {
     return 1;
   }
-  if (str1[0] == '\0')
+  if (!str1[0])
   {
     std::cerr << "zero input\n";
     return 1;
   }
+  char *str2 = nullptr;
   size_t sz = evstyunichev::cnt_not_vowel(str1);
   char * str2 = evstyunichev::resize_str(sz);
   if (evstyunichev::rmv_vow(str1, str2))
@@ -25,6 +26,6 @@ int main()
   {
     return 1;
   }
-  delete[] str1;
   delete[] str2;
+  delete[] str1;
 }
