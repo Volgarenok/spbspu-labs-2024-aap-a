@@ -40,14 +40,14 @@ int main(int argc, char ** argv)
   if (gavrilova::checkNumOfArguments(argc)) {
     return 1;
   }
-  char * end;
+  char * end = nullptr;
   unsigned long int num = std::strtoul(argv[1], &end, 10);
   if (gavrilova::checkFirstArgument(num, end)) {
     return 1;
   }
 
-  std::ifstream input (argv[2]);
-  std::ofstream output (argv[3]);
+  std::ifstream input(argv[2]);
+  std::ofstream output(argv[3]);
 
 size_t m = 0, n = 0;
   input >> m >> n;
@@ -58,31 +58,30 @@ size_t m = 0, n = 0;
   size_t read = 0;
 
   int * mtx = nullptr;
-  int temp[10000] = {};
-  if (num == 2) {
-    int * temp = nullptr;
-    try {
-      temp = new int [m*n];
-    } catch (const std::bad_alloc & e) {
-      return 1;
-    }
-    mtx = temp;
-  } else if (num == 1) {
-    mtx = temp;
+  int fixed_arr[10000] = {};
+  int * dynamic_arr = nullptr;
+  try {
+    dynamic_arr = new int [m * n];
+  } catch (const std::bad_alloc & e) {
+    return 1;
+  }
+
+  if (num == 1) {
+    mtx = fixed_arr;
+  } else if (num == 2) {
+    mtx = dynamic_arr;
   }
 
   gavrilova::input_matrix(input, mtx, m, n, read);
 
-  if ((!input || input.eof()) && num == 2) {
-    delete[] mtx;
-    return 1;
-  } else if ((!input || input.eof()) && num == 1) {
+  if (!input || input.eof() || read != m * n) {
+    delete[] dynamic_arr;
     return 1;
   }
 
   output << gavrilova::isUpperTriangMtx(mtx, m, n) << "\n";
 
-  if (num == 2){
-    delete[] mtx;
-  }
+  delete[] dynamic_arr;
+
 }
+
