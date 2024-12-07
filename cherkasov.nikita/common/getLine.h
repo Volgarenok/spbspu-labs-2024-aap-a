@@ -6,7 +6,7 @@
 namespace cherkasov
 {
   char* inputLine(std::istream& in);
-  char* newArray(const char* oldArray, size_t newCapasity);
+  char* newArray(char* oldArray, size_t newCapasity);
 }
 
 #endif
