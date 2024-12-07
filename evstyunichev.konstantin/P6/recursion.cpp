@@ -92,14 +92,34 @@ const char * evstyunichev::IsExpressionCorrect(const char *p, int prev, bool Ope
   return nullptr;
 }
 
-bool evstyunichev::IsLetter(char c)
+bool evstyunichev::IsLetter(char c, char cur)
 {
-  return (('a' <= c) && (c <= 'f') || ('x' <= c) && (c <= 'z'));
+  if (cur == 'z' + 1)
+  {
+    return 0;
+  }
+  if (cur == c)
+  {
+    return 1;
+  }
+  if (cur == 'f')
+  {
+    IsLetter(c, 'x');
+  }
+  return IsLetter(c, cur + 1);
 }
 
-bool evstyunichev::IsDigit(char c)
+bool evstyunichev::IsDigit(char c, char cur)
 {
-  return (('0' <= c) && (c <= '9'));
+  if (cur == '9' + 1)
+  {
+    return 0;
+  }
+  if (cur == c)
+  {
+    return 1;
+  }
+  return IsDigit(c, cur + 1);
 }
 
 bool evstyunichev::IsBasicSymbol(char c)
