@@ -49,7 +49,7 @@ namespace
       double lbx = 0, lby = 0, rtx = 0, rty = 0;
       demehin::rectangle_t fr_rect = shapes[i]->getFrameRect();
       getFrRectCords(fr_rect, lbx, lby, rtx, rty);
-      out << lbx << " " << lby << " " << rtx << " " << rty << " ";
+      out << " " << lbx << " " << lby << " " << rtx << " " << rty;
     }
     out << "\n";
   }
@@ -212,13 +212,13 @@ int main()
 
 
   double sum_area = getAreaSum(shapes, shp_cnt);
-  std::cout << std::fixed << std::setprecision(1) << sum_area << " ";
+  std::cout << std::fixed << std::setprecision(1) << sum_area;
   printFrRectCords(std::cout, shapes, shp_cnt);
 
   makeIsoScale(shapes, shp_cnt, scale_k, scale_pt);
 
   sum_area = getAreaSum(shapes, shp_cnt);
-  std::cout << sum_area << " ";
+  std::cout << sum_area;
   printFrRectCords(std::cout, shapes, shp_cnt);
 
   free_shapes(shapes, shp_cnt);
