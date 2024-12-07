@@ -10,14 +10,10 @@ char* inputStr(std::istream& in, size_t & len)
   } catch (const std::bad_alloc & e) {
     return nullptr;
   }
-  char c;
+  char c = '\0';
   in >> std::noskipws;
   while ((in >> c)) {
-<<<<<<< HEAD
-  if (c == '\n' || in.eof()){
-=======
     if (c == '\n' || in.eof()){
->>>>>>> gavrilova.polina/P4
       break;
     }
     if (len < K - 1) {
