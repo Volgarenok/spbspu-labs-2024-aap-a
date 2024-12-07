@@ -5,8 +5,10 @@
 int main()
 {
   char * str1 = evstyunichev::get_string(std::cin);
-  if (!str1)
+  if (str1 && !str1[0])
   {
+    std::cerr << "zero input\n";
+    delete[] str1;
     return 1;
   }
   size_t sz = evstyunichev::cnt_not_vowel(str1);
@@ -18,6 +20,7 @@ int main()
   }
   else
   {
+    std::cerr << "error\n";
     return 1;
   }
   delete[] str2;
