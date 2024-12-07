@@ -4,7 +4,7 @@
 
 int main()
 {
-  char * stest = "2*B*(A+4)"
+  char * stest = "2*B*(A+4)";
   char * s1 = nullptr;
   try
   {
