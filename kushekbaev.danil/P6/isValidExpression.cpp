@@ -46,12 +46,9 @@ const char * kushekbaev::hasUnsignedInt(const char * str)
     return str;
   }
   const char * next = hasNumber(str);
-  if (next)
+  if (const char * continues = hasUnsignedInt(next))
   {
-    while (const char * continues = hasNumber(next))
-    {
-      next = continues;
-    }
+    return continues;
   }
   return next;
 }
@@ -92,19 +89,14 @@ const char * kushekbaev::hasTerm(const char * str)
     return str;
   }
   const char * next = hasMultiplier(str);
-  if (next)
+  if (const char * hchar_next = hasSymbol(next, '*'))
   {
-    while (const char * hchar_next = hasCharacter(next, '*'))
+    if (const char * continues = hasTerm(hchar_next))
     {
-      next = hasMultiplier(hchar_next);
-      if (!next)
-      {
-        return nullptr;
-      }
+      return continues;
     }
-    return next;
   }
-  return nullptr;
+  return next;
 }
 
 const char * kushekbaev::hasExpression(const char * str)
