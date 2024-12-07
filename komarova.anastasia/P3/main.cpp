@@ -16,12 +16,13 @@ int main(int argc, char ** argv)
     return 1;
   }
   char * st = argv[1];
-  if (komarova::notanum(st))
+  if (!(komarova::isanum(const char * st)))
   {
     std::cout << "First parameter is not a number\n";
     return 1;
   }
-  if ((std::atoi(st) > 2) || (std::atoi(st) < 1))
+  int h = std::atoi(st);
+  if ((h > 2) || (h < 1))
   {
     std::cerr << "First parameter is out of range\n";
     return 1;
@@ -52,35 +53,43 @@ int main(int argc, char ** argv)
   {
     return 2;
   }
+
   size_t size_arr = m * n;
-  if (std::atoi(st) == 1)
+  int array_1[10000] = {};
+  int * array = nullptr;
+  int * array_2 = nullptr;
+
+  if (h == 1)
   {
-    int array_1[10000] = {};
-    if (!(komarova::input_m(input, array_1, size_arr)))
-    {
-      std::cerr << "Input fail \n";
-      return 2;
-    }
-    else
-    {
-      komarova::input_m(input, array_1, size_arr);
-      komarova::checktri(output, array_1, m);
-    }
+    array = array_1;
   }
-  if (std::atoi(st) == 2)
+  if (h == 2)
   {
-    int* array_2 = new int[size_arr];
-    if (!(komarova::input_m(input, array_2, size_arr)))
+    try
+    {
+      array_2 = new int[size_arr];
+      array = array_2;
+    }
+    catch (const std::bad_alloc & e)
     {
       delete[] array_2;
-      std::cerr << "Input fail \n";
-      return 2;
-    }
-    else
-    {
-      komarova::input_m(input, array_2, size_arr);
-      komarova::checktri(output, array_2, m);
-      delete[] array_2;
+      std::cerr << "We're do not have memory for you, sorry \n";
+      return 1;
     }
   }
+  if (!(komarova::input_m(input, array, size_arr)))
+  {
+    delete[] array_2;
+    std::cerr << "Input fail \n";
+    return 2;
+  }
+  if ((komarova::checktri(array, m) == true) && (m > 1))
+  {
+    output << "true";
+  }
+  else
+  {
+    output << "false";
+  }
+  delete[] array_2;
 }
