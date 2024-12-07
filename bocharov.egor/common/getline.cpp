@@ -28,7 +28,7 @@ char * bocharov::getline(std::istream & in)
       char * extended_string = nullptr;
       try
       {
-        extended_string = extend_the_string(string, stringCapacity *= 2);
+        extended_string = extend_the_string(string, capacity *= 2);
       }
       catch (const std::bad_alloc & e)
       {
