@@ -205,6 +205,12 @@ int main()
     return 1;
   }
 
+  if (is_incorrect_shp)
+  {
+    std::cerr << "Incorrect shape\n";
+  }
+
+
   double sum_area = getAreaSum(shapes, shp_cnt);
   std::cout << std::fixed << std::setprecision(1) << sum_area << " ";
   printFrRectCords(shapes, shp_cnt);
@@ -214,11 +220,6 @@ int main()
   sum_area = getAreaSum(shapes, shp_cnt);
   std::cout << sum_area << " ";
   printFrRectCords(shapes, shp_cnt);
-
-  if (is_incorrect_shp)
-  {
-    std::cerr << "Incorrect shape\n";
-  }
 
   free_shapes(shapes, shp_cnt);
 }
