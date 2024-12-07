@@ -79,3 +79,4 @@ int main(int argc, char* argv[])
   delete[] dynamicArray;
   return 0;
 }
+-
