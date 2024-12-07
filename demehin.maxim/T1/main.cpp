@@ -5,6 +5,7 @@
 #include "base_types.hpp"
 #include <iomanip>
 #include "ring.hpp"
+#include "polygon.hpp"
 
 namespace
 {
@@ -58,6 +59,14 @@ namespace
     }
     std::cout << "\n";
   }
+
+  void free_shapes(demehin::Shape** shapes, size_t shp_cnt)
+  {
+    for (size_t i = 0; i < shp_cnt; i++)
+    {
+      delete shapes[i];
+    }
+  }
 }
 
 int main()
@@ -90,11 +99,20 @@ int main()
         is_incorrect_shp = true;
         continue;
       }
-      demehin::Rectangle* rect = new demehin::Rectangle(lbx, lby, rtx, rty);
-      std::cout << rect->getArea() << "\n";
-      shapes[shp_cnt++] = rect;
+
+      try
+      {
+        shapes[shp_cnt++] = new demehin::Rectangle(lbx, lby, rtx, rty);
+      }
+      catch (std::bad_alloc& e)
+      {
+        free_shapes(shapes, shp_cnt);
+        std::cerr << "bad alloc\n";
+        return 1;
+      }
       shape_name = "";
     }
+
     else if (shape_name == "RING")
     {
       double cent_x = 0, cent_y = 0, out_r = 0, in_r = 0;
@@ -104,10 +122,49 @@ int main()
         is_incorrect_shp = true;
         continue;
       }
-      demehin::Ring* ring = new demehin::Ring(cent_x, cent_y, out_r, in_r);
-      shapes[shp_cnt++] = ring;
+
+      try
+      {
+        shapes[shp_cnt++] = new demehin::Ring(cent_x, cent_y, out_r, in_r);
+      }
+      catch (std::bad_alloc& e)
+      {
+        free_shapes(shapes, shp_cnt);
+        std::cerr << "bad alloc\n";
+        return 1;
+      }
+
       shape_name = "";
     }
+
+    else if (shape_name == "POLYGON")
+    {
+      size_t n = 0;
+      demehin::point_t vertex[10000];
+      while (std::cin.peek() != '\n')
+      {
+        std::cin >> vertex[n].x_ >> vertex[n].y_;
+        ++n;
+      }
+      if (n < 3)
+      {
+        is_incorrect_shp = true;
+        continue;
+      }
+
+      try
+      {
+        shapes[shp_cnt++] = new demehin::Polygon(n, vertex);
+      }
+      catch (std::bad_alloc& e)
+      {
+        free_shapes(shapes, shp_cnt);
+        std::cerr << "bad alloc\n";
+        return 1;
+      }
+      shape_name = "";
+    }
+
     else if (shape_name == "SCALE")
     {
       double x = 0;
@@ -115,25 +172,16 @@ int main()
       std::cin >> x;
       std::cin >> y;
       std::cin >> scale_k;
+      if (scale_k < 0)
+      {
+        std::cerr << "Incorrect scale\n";
+        return 1;
+      }
       scale_pt.x_ = x;
       scale_pt.y_ = y;
       break;
     }
   }
-
-  //double old_sum_area = 0;
-  //double new_sum_area = 0;
-  //for (size_t i = 0; i < shp_cnt; i++)
-  //{
-    //demehin::rectangle_t old_fr_rect = shapes[i]->getFrameRect();
-    //shapes[i]->move(scale_pt);
-    //demehin::rectangle_t new_fr_rect = shapes[i]->getFrameRect();
-    //demehin::point_t move_vector;
-    //move_vector.x_ = (new_fr_rect.pos_.x_ - old_fr_rect.pos_.x_) / scale_k;
-    //move_vector.y_ = (new_fr_rect.pos_.y_ - old_fr_rect.pos_.y_) / scale_k;
-    //shapes[i]->scale(scale_k);
-    //shapes[i]->move(move_vector.x_, move_vector.y_);
-  //}
 
   std::cout << std::fixed;
   std::cout << std::setprecision(1);
@@ -147,21 +195,9 @@ int main()
   sum_area = getFrRectAreaSum(shapes, shp_cnt);
   std::cout << sum_area << " ";
   printFrRectCords(shapes, shp_cnt);
+
   if (is_incorrect_shp)
   {
     std::cerr << "Incorrect shape\n";
   }
-
-
-  //for (size_t i = 0; i < shp_cnt; i++)
-  //{
-    //demehin::point_t fr_lb;
-    //demehin::point_t fr_rt;
-    //demehin::rectangle_t fr_rect = shapes[i]->getFrameRect();
-    //fr_rt.x_ = fr_rect.pos_.x_ + fr_rect.width_ / 2;
-    //fr_rt.y_ = fr_rect.pos_.y_ + fr_rect.height_ / 2;
-    //fr_lb.x_ = fr_rect.pos_.x_ - fr_rect.width_ / 2;
-    //fr_lb.y_ = fr_rect.pos_.y_ - fr_rect.width_ / 2;
-    //std::cout << shapes[i]->getArea() << " " << fr_lb.x_ << " " << fr_lb.y_ << " " << fr_rt.x_ << " " << fr_rt.y_ << "\n";
-  //}
 }
