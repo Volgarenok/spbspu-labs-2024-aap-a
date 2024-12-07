@@ -52,6 +52,12 @@ void maslevtsov::Rectangle::scale(double k)
   topRight_ = {frameCenter.x + (topRight_.x - frameCenter.x) * k, frameCenter.y + (topRight_.y - frameCenter.y) * k};
 }
 
+// maslevtsov::Rectangle* maslevtsov::makeRectangle(const double* arguments)
+// {
+//   Rectangle* rect = new Rectangle({arguments[0], arguments[1]}, {arguments[2], arguments[3]});
+//   return rect;
+// }
+
 maslevtsov::Rectangle* maslevtsov::makeRectangle(std::istream& in)
 {
   double bottomLeftX = 0, bottomLeftY = 0, topRightX = 0, topRightY = 0;
