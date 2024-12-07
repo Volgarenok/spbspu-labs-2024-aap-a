@@ -74,15 +74,14 @@ char * evstyunichev::get_string(std::istream &in, const char end)
 int evstyunichev::is_vowel(const char c)
 {
   char good[] = {"aeiouyAEIOUY"};
-  int flag = 0;
   for (size_t i = 0; i < 12; i++)
   {
     if (c == good[i])
     {
-      flag = 1;
+      return 1;
     }
   }
-  return flag;
+  return 0;
 }
 
 size_t evstyunichev::cnt_not_vowel(const char *str)
