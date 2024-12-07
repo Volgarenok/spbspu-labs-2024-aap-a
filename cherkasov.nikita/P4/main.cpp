@@ -1,34 +1,43 @@
 #include <iostream>
-#include <cstring>
 #include <getLine.h>
 #include "newLetter.h"
-#include "validInput.h"
 
 int main()
 {
   char* input = cherkasov::inputLine(std::cin);
   if (!input)
   {
-    std::cerr << "Failed to read input or memory allocation error.\n";
+    std::cerr << "Error: Failed to read input or allocation failure.\n";
     return 1;
   }
-  if (!cherkasov::isValidInput(input))
+  size_t length = 0;
+  constexpr size_t maxLength = 1000;
+  bool isValid = true;
+  while (input[length] != '\0')
   {
-    std::cerr << "Invalid input provided.\n";
-    delete[] input;
-    return 0;
+    if (!std::isprint(input[length]))
+    {
+      isValid = false;
+      break;
+    }
+      ++length;
   }
-  const char oldChar = 'c';
-  const char newChar = 'b';
-  char* result = nullptr;
-  result = new char[std::strlen(input) + 1];
+  if (!isValid || length > maxLength)
+  {
+    delete[] input;
+    std::cerr << "Error: Invalid or too long input.\n";
+    return 1;
+  }
+  constexpr char oldChar = 'c';
+  constexpr char newChar = 'b';
+  char* result = new char[length + 1];
   if (!result)
   {
-    std::cerr << "Memory allocation error for result buffer.\n";
     delete[] input;
+    std::cerr << "Error: Memory allocation failed.\n";
     return 1;
   }
-  cherkasov::newLetter(result, input, oldChar, newChar);
+  cherkasov::newLetter(input, result, oldChar, newChar);
   std::cout << result << "\n";
   delete[] input;
   delete[] result;

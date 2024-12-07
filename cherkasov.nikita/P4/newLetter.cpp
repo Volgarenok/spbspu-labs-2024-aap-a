@@ -1,21 +1,16 @@
 #include "newLetter.h"
-#include <cstddef>
 #include <cstring>
-#include <iostream>
 
-void cherkasov::newLetter(char* result, const char* array, char oldChar, char newChar)
+void cherkasov::newLetter(const char* array, char* result, char oldChar, char newChar)
 {
   if (!array || !result)
   {
-    std::cerr << "Error: invalid input pointers.\n";
     return;
   }
-  const char* src = array;
-  char* dest = result;
-  while (*src)
+  while (*array)
   {
-    *dest++ = (*src == oldChar) ? newChar : *src;
-    ++src;
+    *result++ = (*array == oldChar) ? newChar : *array;
+    ++array;
   }
-    *dest = '\0';
+    *result = '\0';
 }
