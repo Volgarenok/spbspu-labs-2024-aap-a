@@ -1,5 +1,4 @@
 #include "rectangle.hpp"
-#include "base-types.hpp"
 #include <cmath>
 
 demehin::Rectangle::Rectangle(double lbx, double lby, double rtx, double rty)
@@ -19,9 +18,6 @@ double demehin::Rectangle::getArea() const
 
 demehin::rectangle_t demehin::Rectangle::getFrameRect() const
 {
-
-  //double diag_x = rt_.x_ - lb_.x_;
-  //double diag_y = rt_.y_ - lb_.y_;
   double width = std::sqrt((rt_.y_ - lb_.y_) * (rt_.y_ - lb_.y_));
   double height = std::sqrt((rt_.x_ - lb_.x_) * (rt_.x_ - lb_.x_));
   rectangle_t frame_rect;

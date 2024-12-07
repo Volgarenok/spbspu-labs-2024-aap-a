@@ -1,6 +1,5 @@
 #include "polygon.hpp"
 #include <cmath>
-#include "base-types.hpp"
 
 demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
   vrtx_cnt_(vrtx_cnt)
