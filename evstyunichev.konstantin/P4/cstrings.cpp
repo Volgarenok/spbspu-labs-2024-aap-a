@@ -49,7 +49,7 @@ char * evstyunichev::get_string(std::istream &in, const char end)
   while ((in >> c) && (c != end))
   {
     sz++;
-    if(sz > mx)
+    if (sz > mx)
     {
       str[sz - 1] = 0;
       mx *= 2;
@@ -120,13 +120,4 @@ int evstyunichev::rmv_vow(const char *str1, char *str2)
   }
   str2[cur] = 0;
   return 1;
-}
-
-void evstyunichev::output(const char *str, std::ostream &out)
-{
-  size_t i = 0;
-  while (str[i])
-  {
-    out << str[i++];
-  }
 }
