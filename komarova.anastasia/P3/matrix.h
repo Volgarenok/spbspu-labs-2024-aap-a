@@ -1,5 +1,5 @@
-#ifndef TABLE_H
-#define TABLE_H
+#ifndef MATRIX_H
+#define MATRIX_H
 #include <cstddef>
 #include <fstream>
 

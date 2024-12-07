@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
-#include "table.h"
+#include "matrix.h"
 
 int main(int argc, char ** argv)
 {

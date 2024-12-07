@@ -1,4 +1,4 @@
-#include "table.h"
+#include "matrix.h"
 #include <fstream>
 
 bool komarova::isanum(const char * st)
