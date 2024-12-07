@@ -1,107 +1,144 @@
 #include "CheckRealNumber.hpp"
+#include <cctype>
 
-const char * zakirov::compare_literals(const char * line, char literal)
+namespace
 {
-  if (!line)
+  const char * compare_literals(const char * line, char literal);
+  const char * check_sign(const char * line);
+  const char * check_integer(const char * line);
+  const char * check_uinteger(const char * line);
+  const char * check_sinteger(const char * line);
+  const char * check_order(const char * line);
+  const char * check_mantissa(const char * line);
+  const char * check_end(const char * line);
+
+  const char * compare_literals(const char * line, char literal)
   {
-    return line;
+    if (!line)
+    {
+      return line;
+    }
+
+    if (std::isdigit(* line))
+    {
+      return nullptr;
+    }
+    else
+    {
+      return ++line;
+    }
   }
 
-  return (* line == literal) ? (line + 1) : nullptr;
-}
+  const char * check_sign(const char * line)
+  {
+    if (!line)
+    {
+      return line;
+    }
 
-const char * zakirov::check_sign(const char * line)
-{
-  if (!line)
-  {
-    return line;
-  }
-
-  if (zakirov::compare_literals(line, '+') || zakirov::compare_literals(line, '-'))
-  {
-    return line + 1;
-  }
-  else
-  {
-    return nullptr;
-  }
-}
-
-const char * zakirov::check_integer(const char * line)
-{
-  if (!line)
-  {
-    return line;
+    if (compare_literals(line, '+') || compare_literals(line, '-'))
+    {
+      return ++line;
+    }
+    else
+    {
+      return nullptr;
+    }
   }
 
-  return (* line >= '0' && * line <= '9') ? (line + 1) : nullptr;
-}
+  const char * check_integer(const char * line)
+  {
+    if (!line)
+    {
+      return line;
+    }
 
-const char * zakirov::check_uinteger(const char * line)
-{
-  if (!line)
-  {
-    return line;
-  }
-
-  auto middle = zakirov::check_integer(line);
-  auto next = zakirov::check_uinteger(middle);
-  if (next)
-  {
-    return next;
-  }
-  else
-  {
-    return middle;
-  }
-}
-
-const char * zakirov::check_sinteger(const char * line)
-{
-  if (!line)
-  {
-    return line;
+    return std::isdigit(* line) ? ++line : nullptr;
   }
 
-  auto next = zakirov::check_sign(line);
-  if (!next)
+  const char * check_uinteger(const char * line)
   {
-    return zakirov::check_uinteger(line);
-  }
-  else
-  {
-    return zakirov::check_uinteger(next);
-  }
-}
+    if (!line)
+    {
+      return line;
+    }
 
-const char * zakirov::check_order(const char * line)
-{
-  if (!line)
-  {
-    return line;
-  }
-
-  auto next = zakirov::compare_literals(line, 'E');
-  if (!next)
-  {
-    return next;
-  }
-  return zakirov::check_sinteger(next);
-}
-
-const char * zakirov::check_mantissa(const char * line)
-{
-  if (!line)
-  {
-    return line;
+    auto middle = check_integer(line);
+    auto next = check_uinteger(middle);
+    if (next)
+    {
+      return next;
+    }
+    else
+    {
+      return middle;
+    }
   }
 
-  auto next = zakirov::compare_literals(line, '.');
-  if (!next)
+  const char * check_sinteger(const char * line)
   {
-    return zakirov::check_uinteger(line);
+    if (!line)
+    {
+      return line;
+    }
+
+    auto next = check_sign(line);
+    if (!next)
+    {
+      return check_uinteger(line);
+    }
+    else
+    {
+      return check_uinteger(next);
+    }
   }
-  return zakirov::check_uinteger(next);
+
+  const char * check_order(const char * line)
+  {
+    if (!line)
+    {
+      return line;
+    }
+
+    auto next = compare_literals(line, 'E');
+    if (!next)
+    {
+      return next;
+    }
+    return check_sinteger(next);
+  }
+
+  const char * check_mantissa(const char * line)
+  {
+    if (!line)
+    {
+      return line;
+    }
+
+    auto next = compare_literals(line, '.');
+    if (!next)
+    {
+      return check_uinteger(line);
+    }
+    return check_uinteger(next);
+  }
+
+  const char * check_end(const char * line)
+  {
+    if (!line)
+    {
+      return line;
+    }
+
+    if(* line == '\0')
+    {
+      return line;
+    }
+    else
+    {
+      return nullptr;
+    }
+  }
 }
 
 bool zakirov::check_real(const char * line)
@@ -111,15 +148,17 @@ bool zakirov::check_real(const char * line)
     return line;
   }
 
-  auto next = zakirov::check_sign(line);
+  auto next = check_sign(line);
   if (!next)
   {
-    auto middle = zakirov::check_mantissa(line);
-    return zakirov::check_order(middle);
+    auto middle = check_mantissa(line);
+    auto full = check_order(middle);
+    return check_end(full);
   }
   else
   {
-    auto middle = zakirov::check_mantissa(next);
-    return zakirov::check_order(middle);
+    auto middle = check_mantissa(next);
+    auto full = check_order(middle);
+    return check_end(full);
   }
 }
