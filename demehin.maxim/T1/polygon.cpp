@@ -18,7 +18,7 @@ double demehin::Polygon::getArea() const
     size_t j = (i + 1) % vrtx_cnt_;
     area += (vertex_[i].x * vertex_[j].y - vertex_[j].x * vertex_[i].y);
   }
-  return std::abs(area);
+  return std::abs(area) / 2.0;
   //const double PI = 3.1415;
   //point_t side_vector;
   //side_vector.x = vertex_[1].x - vertex_[0].x;
