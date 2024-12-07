@@ -45,8 +45,8 @@ const char * kushekbaev::hasUnsignedInt(const char * str)
   {
     return str;
   }
-  const char * next = hasNumber(str);
-  if (const char * continues = hasUnsignedInt(next))
+  auto next = hasNumber(str);
+  if (auto continues = hasUnsignedInt(next))
   {
     return continues;
   }
@@ -59,7 +59,7 @@ const char * kushekbaev::hasMultiplier(const char * str)
   {
     return str;
   }
-  const char * next = hasUnsignedInt(str);
+  auto next = hasUnsignedInt(str);
   if (next)
   {
     return next;
@@ -81,10 +81,10 @@ const char * kushekbaev::hasTerm(const char * str)
   {
     return str;
   }
-  const char * next = hasMultiplier(str);
-  if (const char * hchar_next = hasCharacter(next, '*'))
+  auto next = hasMultiplier(str);
+  if (auto hchar_next = hasCharacter(next, '*'))
   {
-    if (const char * continues = hasTerm(hchar_next))
+    if (auto continues = hasTerm(hchar_next))
     {
       return continues;
     }
@@ -98,17 +98,17 @@ const char * kushekbaev::hasExpression(const char * str)
   {
     return str;
   }
-  const char * next = hasTerm(str);
-  if (const char * next_plus = hasCharacter(next, '+'))
+  auto next = hasTerm(str);
+  if (auto next_plus = hasCharacter(next, '+'))
   {
-    if (const char * continues = hasExpression(next_plus))
+    if (auto continues = hasExpression(next_plus))
     {
       return continues;
     }
   }
-  else if (const char * next_minus = hasCharacter(next, '-'))
+  else if (auto next_minus = hasCharacter(next, '-'))
   {
-    if (const char * continues = hasExpression(next_minus))
+    if (auto continues = hasExpression(next_minus))
     {
       return continues;
     }
