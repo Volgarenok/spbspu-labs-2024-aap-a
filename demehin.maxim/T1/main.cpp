@@ -17,16 +17,16 @@ namespace
       shapes[i]->move(scale_pt);
       demehin::rectangle_t new_fr_rect = shapes[i]->getFrameRect();
       demehin::point_t move_vector;
-      move_vector.x_ = (new_fr_rect.pos_.x_ - old_fr_rect.pos_.x_) / scale_k;
-      move_vector.y_ = (new_fr_rect.pos_.y_ - old_fr_rect.pos_.y_) / scale_k;
+      move_vector.x = (new_fr_rect.pos.x - old_fr_rect.pos.x) / scale_k;
+      move_vector.y = (new_fr_rect.pos.y - old_fr_rect.pos.y) / scale_k;
       shapes[i]->scale(scale_k);
-      shapes[i]->move(move_vector.x_, move_vector.y_);
+      shapes[i]->move(move_vector.x, move_vector.y);
     }
   }
 
   double getFrRectArea(const demehin::rectangle_t& fr_rect)
   {
-    return fr_rect.width_ * fr_rect.height_;
+    return fr_rect.width * fr_rect.height;
   }
 
   double getFrRectAreaSum(demehin::Shape* shapes[], size_t shp_cnt)
@@ -42,10 +42,10 @@ namespace
 
   void getFrRectCords(demehin::rectangle_t& fr_rect, double& lbx, double& lby, double& rtx, double& rty)
   {
-    lbx = fr_rect.pos_.x_ - fr_rect.width_ / 2;
-    lby = fr_rect.pos_.y_ - fr_rect.height_ / 2;
-    rtx = fr_rect.pos_.x_ + fr_rect.width_ / 2;
-    rty = fr_rect.pos_.y_ + fr_rect.height_ / 2;
+    lbx = fr_rect.pos.x - fr_rect.width / 2;
+    lby = fr_rect.pos.y - fr_rect.height / 2;
+    rtx = fr_rect.pos.x + fr_rect.width / 2;
+    rty = fr_rect.pos.y + fr_rect.height / 2;
   }
 
   void printFrRectCords(demehin::Shape* shapes[], size_t shp_cnt)
@@ -143,7 +143,7 @@ int main()
       demehin::point_t vertex[10000];
       while (std::cin.peek() != '\n')
       {
-        std::cin >> vertex[n].x_ >> vertex[n].y_;
+        std::cin >> vertex[n].x >> vertex[n].y;
         ++n;
       }
       if (n < 3)
@@ -177,8 +177,8 @@ int main()
         std::cerr << "Incorrect scale\n";
         return 1;
       }
-      scale_pt.x_ = x;
-      scale_pt.y_ = y;
+      scale_pt.x = x;
+      scale_pt.y = y;
       break;
     }
   }

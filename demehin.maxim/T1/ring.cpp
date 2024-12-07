@@ -3,8 +3,8 @@
 demehin::Ring::Ring(double cent_x, double cent_y, double out_r, double in_r):
   in_r_(in_r), out_r_(out_r)
 {
-  center_.x_ = cent_x;
-  center_.y_ = cent_y;
+  center_.x = cent_x;
+  center_.y = cent_y;
 }
 
 double demehin::Ring::getArea() const
@@ -16,9 +16,9 @@ double demehin::Ring::getArea() const
 demehin::rectangle_t demehin::Ring::getFrameRect() const
 {
   rectangle_t fr_rect;
-  fr_rect.pos_ = center_;
-  fr_rect.width_ = 2 * out_r_;
-  fr_rect.height_ = 2 * out_r_;
+  fr_rect.pos = center_;
+  fr_rect.width = 2 * out_r_;
+  fr_rect.height = 2 * out_r_;
   return fr_rect;
 }
 
@@ -29,8 +29,8 @@ void demehin::Ring::move(point_t s)
 
 void demehin::Ring::move(double x, double y)
 {
-  center_.x_ += x;
-  center_.y_ += y;
+  center_.x += x;
+  center_.y += y;
 }
 
 void demehin::Ring::scale(double k)
