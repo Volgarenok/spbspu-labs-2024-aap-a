@@ -1,5 +1,5 @@
 #include <iostream>
-#include <cstrings.hpp>
+#include <input_string.hpp>
 #include "recursion.hpp"
 
 int main()
