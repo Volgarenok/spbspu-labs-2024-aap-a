@@ -114,27 +114,21 @@ const char * kushekbaev::hasExpression(const char * str)
     return str;
   }
   const char * next = hasTerm(str);
-  if (next)
+  if (const char * next_plus = hasCharacter(next, '+'))
   {
-    while (const char * plus_next = hasCharacter(next, '+'))
+    if (const char * continues = hasExpression(next_plus))
     {
-      next = hasTerm(plus_next);
-      if (!next)
-      {
-        return nullptr;
-      }
+      return continues;
     }
-    while (const char * minus_next = hasCharacter(next, '-'))
-    {
-      next = hasTerm(minus_next);
-      if (!next)
-      {
-        return nullptr;
-      }
-    }
-    return next;
   }
-  return nullptr;
+  else if (const char * next_minus = isCharacter(next, '-'))
+  {
+    if (const char * continues = hasExpression(next_minus))
+    {
+      return continues;
+    }
+  }
+  return next;
 }
 
 bool kushekbaev::isValidExpression(const char * str)
