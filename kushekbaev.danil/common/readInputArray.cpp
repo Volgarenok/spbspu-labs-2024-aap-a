@@ -38,7 +38,6 @@ char* kushekbaev::readInputArray(std::istream& input)
   }
   catch (const std::bad_alloc& e)
   {
-    std::cerr << "Error allocating memory";
     input >> std::skipws;
     delete[] str;
     str = nullptr;

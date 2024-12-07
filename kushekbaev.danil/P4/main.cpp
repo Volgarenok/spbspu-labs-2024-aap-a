@@ -16,7 +16,7 @@ int main()
     return 1;
   }
 
-  std::cout << kushekbaev::hasCommonChars(str1, str2, strlen(str1), strlen(str2)) << "\n";
+  std::cout << kushekbaev::hasCommonChars(str1, str2) << "\n";
 
   delete[] str1;
   return 0;
