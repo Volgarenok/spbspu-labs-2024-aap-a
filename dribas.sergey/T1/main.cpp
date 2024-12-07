@@ -22,8 +22,8 @@ int main()
   }
   else if (std::cin.fail()) {
     std::cout << "Fail\n";
+    clearStr(stack, stackSize);
   }
-  clearStr(stack, stackSize);
 }
 
 
