@@ -24,18 +24,27 @@ namespace
     }
   }
 
-  double getFrRectArea(const demehin::rectangle_t& fr_rect)
-  {
-    return fr_rect.width * fr_rect.height;
-  }
+  //double getFrRectArea(const demehin::rectangle_t& fr_rect)
+  //{
+    //return fr_rect.width * fr_rect.height;
+  //}
 
-  double getFrRectAreaSum(demehin::Shape* shapes[], size_t shp_cnt)
+  //double getFrRectAreaSum(demehin::Shape* shapes[], size_t shp_cnt)
+  //{
+    //double area_sum = 0;
+    //for (size_t i = 0; i < shp_cnt; ++i)
+    //{
+      //demehin::rectangle_t fr_rect = shapes[i]->getFrameRect();
+      //area_sum += getFrRectArea(fr_rect);
+    //}
+    //return area_sum;
+
+  double getAreaSum(demehin::Shape* shapes[], size_t shp_cnt)
   {
     double area_sum = 0;
     for (size_t i = 0; i < shp_cnt; i++)
     {
-      demehin::rectangle_t fr_rect = shapes[i]->getFrameRect();
-      area_sum += getFrRectArea(fr_rect);
+      area_sum += shapes[i]->getArea();
     }
     return area_sum;
   }
@@ -196,6 +205,7 @@ int main()
       if (scale_k < 0)
       {
         std::cerr << "Incorrect scale\n";
+        free_shapes(shapes, shp_cnt);
         return 1;
       }
       scale_pt.x = x;
@@ -213,13 +223,13 @@ int main()
   std::cout << std::fixed;
   std::cout << std::setprecision(1);
   std::cout << std::showpoint;
-  double sum_area = getFrRectAreaSum(shapes, shp_cnt);
+  double sum_area = getAreaSum(shapes, shp_cnt);
   std::cout << sum_area << " ";
   printFrRectCords(shapes, shp_cnt);
 
   makeIsoScale(shapes, shp_cnt, scale_k, scale_pt);
 
-  sum_area = getFrRectAreaSum(shapes, shp_cnt);
+  sum_area = getAreaSum(shapes, shp_cnt);
   std::cout << sum_area << " ";
   printFrRectCords(shapes, shp_cnt);
 
