@@ -70,16 +70,9 @@ const char * kushekbaev::hasMultiplier(const char * str)
     return next;
   }
   next = hasCharacter(str, '(');
-  if (next)
-  {
-    next = hasExpression(next);
-    if (next)
-    {
-      next = hasCharacter(next, ')');
-      return next;
-    }
-  }
-  return nullptr;
+  next = hasExpression(next);
+  next = hasCharacter(next, ')');
+  return next;
 }
 
 const char * kushekbaev::hasTerm(const char * str)
