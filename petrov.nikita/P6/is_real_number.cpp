@@ -4,7 +4,7 @@
 namespace
 {
   const char * hasSign(const char * str);
-  const char * hasSymbol(const char * str, const char symbol);
+  const char * hasSymbol(const char * str, char symbol);
   const char * hasDigit(const char * str);
   const char * hasUnsignedInt(const char * str);
   const char * hasSignificand(const char * str);
@@ -16,14 +16,14 @@ namespace
     {
       return str;
     }
-    if ((*str == '+' || *str == '-') && str != nullptr)
+    if (*str == '+' || *str == '-')
     {
       str++;
     }
     return str;
   }
 
-  const char * hasSymbol(const char * str, const char symbol)
+  const char * hasSymbol(const char * str, char symbol)
   {
     return (*str == symbol) ? ++str : nullptr;
   }
