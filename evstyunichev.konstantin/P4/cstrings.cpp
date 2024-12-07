@@ -2,7 +2,7 @@
 #include <iostream>
 #include <ios>
 
-constexpr size_t default_size = 8;
+constexpr size_t default_size = 20;
 
 size_t evstyunichev::copy(const char *str1, char *str2)
 {
@@ -67,6 +67,7 @@ char * evstyunichev::get_string(std::istream &in, const char end)
     }
     str[sz - 1] = c;
   }
+  str[sz] = 0;
   return str;
 }
 
