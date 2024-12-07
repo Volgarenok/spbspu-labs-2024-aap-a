@@ -1,5 +1,4 @@
 #include "recursionString.hpp"
-#include <iostream>
 #include <cctype>
 
 namespace maslovskiy
@@ -22,7 +21,7 @@ const char* maslovskiy::hasDigit(const char* str)
   {
     return nullptr;
   }
-  return isdigit(*str) ? (str + 1) : nullptr;
+  return (std::isdigit(*str)) ? (str + 1) : nullptr;
 }
 const char* maslovskiy::hasChar(const char* str, char c)
 {
@@ -38,7 +37,7 @@ const char* maslovskiy::hasSign(const char* str)
   {
     return nullptr;
   }
-  return maslovskiy::isSign(*str) ? (str + 1) : str;
+  return isSign(*str) ? (str + 1) : str;
 }
 const char* maslovskiy::hasNumbers(const char* str)
 {
