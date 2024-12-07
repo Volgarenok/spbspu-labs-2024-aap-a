@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-#include "getLine.h"
+#include <getLine.h>
 #include "newLetter.h"
 #include "validInput.h"
 
