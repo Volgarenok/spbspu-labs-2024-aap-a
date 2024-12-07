@@ -1,4 +1,4 @@
-#include "all_for_input.h"
+#include "input_line.h"
 #include <iostream>
 
 char* timofeev::input_line(std::istream& in)
