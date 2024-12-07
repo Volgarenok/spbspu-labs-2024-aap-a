@@ -10,7 +10,7 @@ int main()
     std::cerr << "error\n";
     return 1;
   }
-  if (str1 && !str1[0])
+  if (!str1[0])
   {
     std::cerr << "zero input\n";
     return 1;
