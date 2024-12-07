@@ -16,7 +16,6 @@ int main(int argc, char ** argv)
     return 1;
   }
   const char* st = argv[1];
-  int h = std::atoi(st);
   long int numer = 0;
   try
   {
@@ -59,11 +58,11 @@ int main(int argc, char ** argv)
   int * array = nullptr;
   int * array_2 = nullptr;
 
-  if (h == 1)
+  if (numer == 1)
   {
     array = array_1;
   }
-  if (h == 2)
+  if (numer == 2)
   {
     try
     {
