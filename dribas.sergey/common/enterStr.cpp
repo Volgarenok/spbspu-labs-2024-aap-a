@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstddef>
 
-char* displacementStr(char* oldstr, char* newstr) {
+char* displacementStr(char* const oldstr, char* const newstr) {
   size_t i = 0;
   for(; *(oldstr + i) != '\0'; i++) {
     *(newstr + i) = *(oldstr + i);
