@@ -5,7 +5,7 @@
 
 namespace dirti
 {
-  std::istream & input_matrix(std::istream & in, int * t, size_t m, size_t n, size_t & read);
+  std::istream & input_matrix(std::istream & in, int *& t, size_t m, size_t n, size_t & read);
 }
 
 #endif
