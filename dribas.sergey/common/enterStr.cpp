@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstddef>
 
-char* displacementStr(char* const oldstr, char* const newstr) {
+char* displacementStr(const char* oldstr, char* newstr) {
   size_t i = 0;
   for(; *(oldstr + i) != '\0'; i++) {
     *(newstr + i) = *(oldstr + i);
@@ -31,7 +31,7 @@ char* dribas::enterStr(std::istream & input)
       std::skipws(input);
       return nullptr;
     } else {
-      size += 1;
+      size++;
       char* newstr = static_cast< char* >(malloc(size * sizeof(char)));
       if (!newstr) {
         free(str);
@@ -48,3 +48,4 @@ char* dribas::enterStr(std::istream & input)
   std::skipws(input);
   return str;
 }
+
