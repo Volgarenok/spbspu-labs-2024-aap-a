@@ -5,8 +5,6 @@
 #include "input_matrix.hpp"
 #include "matrix_checking.hpp"
 #include "local_min.hpp"
-
-
 int main(int argc, char ** argv)
 {
   if (argc < 4)
