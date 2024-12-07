@@ -10,19 +10,34 @@
 namespace
 {
   void makeIsoScale(demehin::Shape* shapes[], size_t shp_cnt, double scale_k, demehin::point_t& scale_pt)
-  {
+{
     for (size_t i = 0; i < shp_cnt; i++)
     {
-      demehin::rectangle_t old_fr_rect = shapes[i]->getFrameRect();
-      shapes[i]->move(scale_pt);
-      demehin::rectangle_t new_fr_rect = shapes[i]->getFrameRect();
-      demehin::point_t move_vector;
-      move_vector.x = (new_fr_rect.pos.x - old_fr_rect.pos.x) / scale_k;
-      move_vector.y = (new_fr_rect.pos.y - old_fr_rect.pos.y) / scale_k;
-      shapes[i]->scale(scale_k);
-      shapes[i]->move(move_vector.x, move_vector.y);
+        //demehin::rectangle_t old_fr_rect = shapes[i]->getFrameRect();
+        shapes[i]->move(scale_pt);
+        shapes[i]->scale(scale_k);
+        demehin::rectangle_t new_fr_rect = shapes[i]->getFrameRect();
+        demehin::point_t move_vector;
+        move_vector.x = scale_pt.x - new_fr_rect.pos.x;
+        move_vector.y = scale_pt.y - new_fr_rect.pos.y;
+        shapes[i]->move(move_vector.x, move_vector.y);
     }
-  }
+}
+
+  //void makeIsoScale(demehin::Shape* shapes[], size_t shp_cnt, double scale_k, demehin::point_t& scale_pt)
+  //{
+    //for (size_t i = 0; i < shp_cnt; i++)
+    //{
+      //demehin::rectangle_t old_fr_rect = shapes[i]->getFrameRect();
+      //shapes[i]->move(scale_pt);
+      //demehin::rectangle_t new_fr_rect = shapes[i]->getFrameRect();
+      //demehin::point_t move_vector;
+      //move_vector.x = (new_fr_rect.pos.x - old_fr_rect.pos.x) / scale_k;
+      //move_vector.y = (new_fr_rect.pos.y - old_fr_rect.pos.y) / scale_k;
+      //shapes[i]->scale(scale_k);
+      //shapes[i]->move(move_vector.x, move_vector.y);
+    //}
+  //}
 
   //double getFrRectArea(const demehin::rectangle_t& fr_rect)
   //{
