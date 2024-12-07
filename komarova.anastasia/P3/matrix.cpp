@@ -4,6 +4,7 @@
 bool komarova::isanum(const char* st)
 {
   char* endptr = nullptr;
+  long int numer = std::strtol(st, std::addressof(endptr), 10);
   if (*endptr != '\0')
   {
     return false;
