@@ -206,13 +206,13 @@ int main()
   }
 
   double sum_area = getAreaSum(shapes, shp_cnt);
-  std::cout << std::fixed << std::setprecision(1) << sum_area << " ";
+  std::cout << std::fixed << std::setprecision(1) << "    " << sum_area << " ";
   printFrRectCords(shapes, shp_cnt);
 
   makeIsoScale(shapes, shp_cnt, scale_k, scale_pt);
 
   sum_area = getAreaSum(shapes, shp_cnt);
-  std::cout << sum_area << " ";
+  std::cout << "    " << sum_area << " ";
   printFrRectCords(shapes, shp_cnt);
 
   if (is_incorrect_shp)
