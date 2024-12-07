@@ -16,6 +16,7 @@ int main(int argc, char ** argv)
     return 1;
   }
   const char* st = argv[1];
+  int h = std::atoi(st);
   long int numer = 0;
   try
   {
