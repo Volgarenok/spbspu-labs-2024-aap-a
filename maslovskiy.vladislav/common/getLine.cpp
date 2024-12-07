@@ -27,13 +27,11 @@ char* maslovskiy::getLine(std::istream& input, size_t& capacity)
     line[index++] = ch;
   }
   line[index] = '\0';
-
   if (!input.eof() && !input)
   {
     free(line);
     return nullptr;
   }
-
   return line;
 }
 

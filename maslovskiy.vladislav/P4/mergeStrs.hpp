@@ -1,10 +1,9 @@
 #ifndef MERGE_STRS_HPP
 #define MERGE_STRS_HPP
 
-#include <cstddef>
 namespace maslovskiy
 {
-  void mergeStrs(char *result, const char *first, const char *second);
+  char* mergeStrs(const char* first, const char* second);
 }
 
 #endif
