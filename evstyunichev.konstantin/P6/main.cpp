@@ -17,5 +17,6 @@ int main()
   }
   bool flag = (evstyunichev::is_expression_correct(str1) != nullptr);
   std::cout << std::boolalpha << flag << '\n';
+  delete[] str1;
   return 0;
 }
