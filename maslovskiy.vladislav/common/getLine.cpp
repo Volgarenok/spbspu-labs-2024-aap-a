@@ -4,7 +4,7 @@
 
 char* maslovskiy::getLine(std::istream& input, size_t& capacity)
 {
-  char* line = reinterpret_cast<char*>(malloc(capacity));
+  char* line = reinterpret_cast< char* >(malloc(capacity));
   if (!line)
   {
     return nullptr;
@@ -38,7 +38,7 @@ char* maslovskiy::getLine(std::istream& input, size_t& capacity)
 char* maslovskiy::reallocate(char* line, size_t& capacity, size_t factor, size_t addSizeOptional)
 {
   size_t newCapacity = capacity * factor + addSizeOptional;
-  char* newLine = reinterpret_cast<char*>(malloc(newCapacity));
+  char* newLine = reinterpret_cast< char* >(malloc(newCapacity));
   if (!newLine)
   {
     return nullptr;
