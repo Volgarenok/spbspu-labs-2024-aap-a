@@ -16,15 +16,14 @@ int main(int argc, char ** argv)
     return 1;
   }
   const char* st = argv[1];
-  if (!(komarova::isanum(st)))
+  long int numer = 0;
+  try
   {
-    std::cout << "First parameter is not a number\n";
-    return 1;
+    numer = komarova::notanum(st);
   }
-  int h = std::atoi(st);
-  if ((h > 2) || (h < 1))
+  catch(const std::logic_error & e)
   {
-    std::cerr << "First parameter is out of range\n";
+    std::cout << e.what() << "\n";
     return 1;
   }
 

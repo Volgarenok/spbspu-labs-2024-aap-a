@@ -1,15 +1,19 @@
 #include "matrix.h"
 #include <fstream>
 
-bool komarova::isanum(const char* st)
+long int komarova::notanum(const char* st)
 {
   char* endptr = nullptr;
   long int numer = std::strtol(st, std::addressof(endptr), 10);
   if (*endptr != '\0')
   {
-    return false;
+    throw std::logic_error("First parameter is not a number");
   }
-  return true;
+  else if ((numer > 2) || (numer < 1))
+  {
+    throw std::logic_error("First parameter is out of range");
+  }
+  return numer;
 }
 bool komarova::checktri(const int * arr, size_t m)
 {

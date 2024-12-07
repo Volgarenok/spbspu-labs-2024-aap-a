@@ -5,7 +5,7 @@
 
 namespace komarova
 {
-  bool isanum(const char* st);
+  bool notanum(const char* st);
   bool checktri(const int * arr, size_t m);
   std::istream& input_m(std::istream & input, int * array, size_t size_m);
 }
