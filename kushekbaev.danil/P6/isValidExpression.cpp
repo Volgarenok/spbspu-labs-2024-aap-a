@@ -75,7 +75,7 @@ const char * has_term(const char * str)
   const char * next = has_multiplier(str);
   if (const char * next = has_character(next, '*'))
   {
-    if (const char * continues = has_term(hchar_next)
+    if (const char * continues = has_term(next))
     {
       return continues;
     }
@@ -97,7 +97,7 @@ const char * has_expression(const char * str)
       return continues;
     }
   }
-  else if (const char * minus_next = has_character(next, '-')
+  else if (const char * minus_next = has_character(next, '-'))
   {
     if (const char * continues = has_expression(minus_next))
     {
