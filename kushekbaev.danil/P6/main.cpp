@@ -25,7 +25,7 @@ int main()
     std::cerr << "Dry run" << "\n";
     return 1;
   }
-  std::cout << kushekbaev::isValidExpression(s1) << "\n";
+  std::cout << std::boolalpha << kushekbaev::isValidExpression(s1) << "\n";
   delete[] s1;
   return 0;
 }
