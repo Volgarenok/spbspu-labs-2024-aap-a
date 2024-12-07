@@ -6,7 +6,7 @@
 
 char* cherkasov::newArray(const char* oldArray, size_t newCapacity)
 {
-  char* newArray = new (std::nothrow) char[newCapacity];
+  char* newArray = new (std::nothrow) char[newCapacity]();
   if (!newArray)
   {
     return nullptr;
