@@ -18,7 +18,7 @@ const char * kushekbaev::hasCharacter(const char * str, char c)
   {
     return str;
   }
-  return (*str == c) ? (str + 1) : nullptr;
+  return (*str == c) ? (str + 1) : hasCharacter(str + 1, c);
 }
 
 const char * kushekbaev::hasLetter(const char * str)
@@ -27,7 +27,7 @@ const char * kushekbaev::hasLetter(const char * str)
   {
     return str;
   }
-  return (*str >= 'A' && *str <= 'E') ? (str + 1) : nullptr;
+  return (*str >= 'A' && *str <= 'E') ? (str + 1) : hasLetter(str + 1);
 }
 
 const char * kushekbaev::hasNumber(const char * str)
