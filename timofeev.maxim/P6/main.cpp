@@ -1,6 +1,6 @@
 #include <iostream>
+#include <input_line.h>
 #include "real_number_set.h"
-#include <all_for_input.h>
 
 int main()
 {

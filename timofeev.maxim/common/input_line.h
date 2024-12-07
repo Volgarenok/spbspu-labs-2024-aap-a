@@ -7,7 +7,6 @@
 
 namespace timofeev
 {
-  char* boost_size(size_t capacity);
   char* input_line(std::istream& in);
 }
 
