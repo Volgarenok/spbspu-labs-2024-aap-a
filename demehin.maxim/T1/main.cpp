@@ -67,6 +67,26 @@ namespace
       delete shapes[i];
     }
   }
+
+  bool areEqualPts(demehin::point_t p1, demehin::point_t p2)
+  {
+    return p1.x == p2.x && p1.y == p2.y;
+  }
+
+  bool hasSameVertex(size_t n, demehin::point_t* vertex)
+  {
+    for (size_t i = 0; i < n; i++)
+    {
+      for (size_t j = i + 1; j < n; j++)
+      {
+        if (areEqualPts(vertex[i], vertex[j]))
+        {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 }
 
 int main()
@@ -84,6 +104,7 @@ int main()
     if (std::cin.eof())
     {
       std::cerr << "error: eof\n";
+      free_shapes(shapes, shp_cnt);
       return 1;
     }
     if (shape_name == "RECTANGLE")
@@ -146,7 +167,7 @@ int main()
         std::cin >> vertex[n].x >> vertex[n].y;
         ++n;
       }
-      if (n < 3)
+      if (n < 3 || hasSameVertex(n, vertex))
       {
         is_incorrect_shp = true;
         continue;
@@ -181,6 +202,12 @@ int main()
       scale_pt.y = y;
       break;
     }
+  }
+
+  if (shp_cnt == 0)
+  {
+    std::cerr << "no shapes\n";
+    return 1;
   }
 
   std::cout << std::fixed;
