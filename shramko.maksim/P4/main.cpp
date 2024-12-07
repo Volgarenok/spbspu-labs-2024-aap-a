@@ -2,7 +2,8 @@
 #include <ios>
 #include <cstddef>
 #include <fstream>
-#include "modifyString.hpp"
+#include <inputString.hpp>
+#include "countConsecutiveIdenticalSymbols.hpp"
 
 int main()
 {
