@@ -1,13 +1,12 @@
-#ifndef MODIFYSTRING_HPP
-#define MODIFYSTRING_HPP
+#ifndef INPUTSTRING_HPP
+#define INPUTSTRING_HPP
 
 #include <cstddef>
-#include <iostream>
+#include <istream>
 
 namespace shramko
 {
   char* createBiggerStrMemory(size_t memory, const char* str);
-  size_t countConsecutiveIdenticalSymbols(const char* str);
   char* inputStr(std::istream& in);
 }
 
