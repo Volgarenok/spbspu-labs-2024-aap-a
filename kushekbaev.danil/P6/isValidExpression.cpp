@@ -16,7 +16,7 @@ const char * kushekbaev::hasCharacter(const char * str, char c)
 {
   if (!str || *str == '\0')
   {
-    return str;
+    return nullptr;
   }
   return (*str == c) ? (str + 1) : hasCharacter(str + 1, c);
 }
@@ -34,7 +34,7 @@ const char * kushekbaev::hasNumber(const char * str)
 {
   if (!str)
   {
-    return str;
+    return nullptr;
   }
   return (*str >= '0' && *str <= '9') ? (str + 1) : nullptr;
 }
