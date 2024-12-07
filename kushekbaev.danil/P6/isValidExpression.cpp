@@ -121,7 +121,7 @@ const char * kushekbaev::hasExpression(const char * str)
       return continues;
     }
   }
-  else if (const char * next_minus = isCharacter(next, '-'))
+  else if (const char * next_minus = hasCharacter(next, '-'))
   {
     if (const char * continues = hasExpression(next_minus))
     {
