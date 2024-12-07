@@ -19,13 +19,13 @@ namespace
       return line;
     }
 
-    if (std::isdigit(* line))
+    if (* line == literal)
     {
-      return nullptr;
+      return ++line;
     }
     else
     {
-      return ++line;
+      return nullptr;
     }
   }
 
@@ -53,7 +53,14 @@ namespace
       return line;
     }
 
-    return std::isdigit(* line) ? ++line : nullptr;
+    if (std::isdigit(* line))
+    {
+      return ++line;
+    }
+    else
+    {
+      return nullptr;
+    }
   }
 
   const char * check_uinteger(const char * line)
