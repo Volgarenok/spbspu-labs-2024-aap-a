@@ -16,7 +16,7 @@ const char * has_letter(const char * str)
 {
   if (!str)
   {
-    return nullptr
+    return nullptr;
   }
   return (*str >= 'A' && *str <= 'E') ? (str + 1) : nullptr;
 }
@@ -27,7 +27,7 @@ const char * has_number(const char * str)
   {
     return nullptr;
   }
-  return ((c >= '0' && c <= '9') ? (str + 1) : nullptr;
+  return (*str >= '0' && *str <= '9') ? (str + 1) : nullptr;
 }
 
 const char * has_unsigned_int(const char * str)
