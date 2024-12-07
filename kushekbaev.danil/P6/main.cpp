@@ -6,7 +6,6 @@
 
 int main()
 {
-  std::istringstream input("5*B*(A-2)+C*(D-E)-4*7");
   char * s1 = nullptr;
   try
   {
