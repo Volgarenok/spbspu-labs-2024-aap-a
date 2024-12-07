@@ -15,6 +15,7 @@ int main()
     std::cerr << "zero input\n";
     return 1;
   }
-  std::cout << std::boolalpha << (bool)evstyunichev::IsExpressionCorrect(str1) << '\n';
+  bool flag = (evstyunichev::IsExpressionCorrect(str1) != nullptr);
+  std::cout << std::boolalpha << flag << '\n';
   return 0;
 }
