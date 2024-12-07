@@ -12,18 +12,22 @@ const char * has_character(const char * str, char c)
   return (*str == c) ? (str + 1) : nullptr;
 }
 
-const char * has_digit(const char * str)
+const char * has_letter(const char * str)
+{
+  if (!str)
+  {
+    return nullptr
+  }
+  return (*str >= 'A' && *str <= 'E') ? (str + 1) : nullptr;
+}
+
+const char * has_number(const char * str)
 {
   if (!str)
   {
     return nullptr;
   }
-  char c = *str;
-  if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'E'))
-  {
-    return str + 1;
-  }
-  return nullptr;
+  return ((c >= '0' && c <= '9') ? (str + 1) : nullptr;
 }
 
 const char * has_unsigned_int(const char * str)
@@ -32,7 +36,7 @@ const char * has_unsigned_int(const char * str)
   {
     return nullptr;
   }
-  const char * next = has_digit(str);
+  const char * next = has_number(str);
   if (!next)
   {
     return nullptr;
@@ -128,5 +132,5 @@ const char * has_expression(const char * str)
 bool kushekbaev::isValidExpression(const char * str)
 {
   const char * next = has_expression(str);
-  return next && *next == '\0';
+  return next && (*next == '\0');
 }
