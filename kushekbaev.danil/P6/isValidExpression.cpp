@@ -73,7 +73,7 @@ const char * has_term(const char * str)
     return nullptr;
   }
   const char * next = has_multiplier(str);
-  if (const char * next = has_character(next, '*'))
+  if (next && has_character(next, '*'))
   {
     if (const char * continues = has_term(next))
     {
