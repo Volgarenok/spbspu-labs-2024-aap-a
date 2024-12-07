@@ -13,7 +13,11 @@ char* inputStr(std::istream& in, size_t & len)
   char c;
   in >> std::noskipws;
   while ((in >> c)) {
+<<<<<<< HEAD
   if (c == '\n' || in.eof()){
+=======
+    if (c == '\n' || in.eof()){
+>>>>>>> gavrilova.polina/P4
       break;
     }
     if (len < K - 1) {
