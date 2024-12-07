@@ -1,4 +1,4 @@
-#include "has_sam_set.h"
+#include "input_line.h"
 #include <iostream>
 
 char* timofeev::input_line(std::istream& in)
