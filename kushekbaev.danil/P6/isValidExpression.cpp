@@ -44,7 +44,7 @@ const char * has_unsigned_int(const char * str)
   return next;
 }
 
-const char * has_nultiplier(const char * str)
+const char * has_multiplier(const char * str)
 {
   if (!str)
   {
@@ -60,9 +60,9 @@ const char * has_nultiplier(const char * str)
   {
     return nullptr;
   }
-  next = isSymbol(str, '(');
+  next = has_character(str, '(');
   next = has_expression(next);
-  next = isSymbol(str, ')');
+  next = has_character(str, ')');
   return next;
 }
 
@@ -73,7 +73,7 @@ const char * has_term(const char * str)
     return nullptr;
   }
   const char * next = has_multiplier(str);
-  if (const char * hchar_next = isSymbol(next, '*')
+  if (const char * hchar_next = has_character(next, '*')
   {
     if (const char * continues = has_term(hchar_next)
     {
@@ -112,3 +112,4 @@ bool kushekbaev::isValidExpression(const char * str)
   const char * next = has_expression(str);
   return next && (*next == '\0');
 }
+
