@@ -7,7 +7,6 @@ namespace evstyunichev
   char * resize_str(size_t, const char *old = nullptr);
   int rmv_vow(const char *, char *);
   int is_vowel(char);
-  void output(const char *, std::ostream &);
   size_t cnt_not_vowel(const char *);
   size_t copy(const char *, char *);
 }

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <input_cstring.hpp>
 #include "making_new_cstring.hpp"
 
 int main()
