@@ -4,15 +4,23 @@
 
 int main()
 {
-    size_t size1 = 0;
-    std::cin >> size1;
-    if (size1 == 0)
-    {
-      std::cerr << "Dry run";
-      return 1;
-    }
-    char * s1 = kushekbaev::readInputArray(std::cin);
-    std::cout << kushekbaev::isValidExpression(s1) << "\n";
+  char * s1 = nullptr;
+  try
+  {
+    s1 = kushekbaev::readInputArray(std::cin);
+  }
+  catch (const std::exception& e)
+  {
+    std::cerr << "Out of memory" << "\n";
+    return 1;
+  }
+  if (s1[0] == '\0')
+  {
     delete[] s1;
-    return 0;
+    std::cerr << "Dry run" << "\n";
+    return 1;
+  }
+  std::cout << kushekbaev::isValidExpression(s1) << "\n";
+  delete[] s1;
+  return 0;
 }

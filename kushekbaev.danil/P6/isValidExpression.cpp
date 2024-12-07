@@ -1,9 +1,18 @@
 #include "recursion.hpp"
 #include <cctype>
 
-const char * has_expression(const char * str);
+namespace kushekbaev
+{
+  const char * hasCharacter(const char * str, char c);
+  const char * hasLetter(const char * str);
+  const char * hasNumber(const char * str);
+  const char * hasUnsignedInt(const char * str);
+  const char * hasMultiplier(const char * str);
+  const char * hasTerm(const char * str);
+  const char * hasExpression(const char * str);
+}
 
-const char * has_character(const char * str, char c)
+const char * kushekbaev::hasCharacter(const char * str, char c)
 {
   if (!str)
   {
@@ -12,7 +21,7 @@ const char * has_character(const char * str, char c)
   return (*str == c) ? (str + 1) : nullptr;
 }
 
-const char * has_letter(const char * str)
+const char * kushekbaev::hasLetter(const char * str)
 {
   if (!str)
   {
@@ -21,7 +30,7 @@ const char * has_letter(const char * str)
   return (*str >= 'A' && *str <= 'E') ? (str + 1) : nullptr;
 }
 
-const char * has_number(const char * str)
+const char * kushekbaev::hasNumber(const char * str)
 {
   if (!str)
   {
@@ -30,86 +39,106 @@ const char * has_number(const char * str)
   return (*str >= '0' && *str <= '9') ? (str + 1) : nullptr;
 }
 
-const char * has_unsigned_int(const char * str)
+const char * kushekbaev::hasUnsignedInt(const char * str)
 {
   if (!str)
   {
     return str;
   }
-  const char * next = has_number(str);
-  if (const char * continues = has_unsigned_int(next))
+  const char * next = hasNumber(str);
+  if (next)
   {
-    return continues;
-  }
-  return next;
-}
-
-const char * has_multiplier(const char * str)
-{
-  if (!str)
-  {
-    return str;
-  }
-  const char * next = has_unsigned_int(str);
-  if (!next)
-  {
-    return str;
-  }
-  next = has_letter(str);
-  if (!next)
-  {
-    return str;
-  }
-  next = has_character(str, '(');
-  next = has_expression(next);
-  next = has_character(str, ')');
-  return next;
-}
-
-const char * has_term(const char * str)
-{
-  if (!str)
-  {
-    return str;
-  }
-  const char * next = has_multiplier(str);
-  if (const char * hchar_next = has_character(next, '*'))
-  {
-    if (const char * continues = has_term(hchar_next))
+    while (const char * continues = hasNumber(next))
     {
-      return continues;
+      next = continues;
     }
   }
   return next;
 }
 
-const char * has_expression(const char * str)
+const char * kushekbaev::hasMultiplier(const char * str)
 {
   if (!str)
   {
     return str;
   }
-  const char * next = has_term(str);
-  if (const char * plus_next = has_character(next, '+'))
+  const char * next = hasUnsignedInt(str);
+  if (next)
   {
-    if (const char * continues = has_expression(plus_next))
+    return next;
+  }
+  next = hasLetter(str);
+  if (next)
+  {
+    return next;
+  }
+  next = hasCharacter(str, '(');
+  if (next)
+  {
+    next = hasExpression(next);
+    if (next)
     {
-      return continues;
+      next = hasCharacter(next, ')');
+      return next;
     }
   }
-  else if (const char * minus_next = has_character(next, '-'))
+  return nullptr;
+}
+
+const char * kushekbaev::hasTerm(const char * str)
+{
+  if (!str)
   {
-    if (const char * continues = has_expression(minus_next))
-    {
-      return continues;
-    }
+    return str;
   }
-  return next;
+  const char * next = hasMultiplier(str);
+  if (next)
+  {
+    while (const char * hchar_next = hasCharacter(next, '*'))
+    {
+      next = hasMultiplier(hchar_next);
+      if (!next)
+      {
+        return nullptr;
+      }
+    }
+    return next;
+  }
+  return nullptr;
+}
+
+const char * kushekbaev::hasExpression(const char * str)
+{
+  if (!str)
+  {
+    return str;
+  }
+  const char * next = hasTerm(str);
+  if (next)
+  {
+    while (const char * plus_next = hasCharacter(next, '+'))
+    {
+      next = hasTerm(plus_next);
+      if (!next)
+      {
+        return nullptr;
+      }
+    }
+    while (const char * minus_next = hasCharacter(next, '-'))
+    {
+      next = hasTerm(minus_next);
+      if (!next)
+      {
+        return nullptr;
+      }
+    }
+    return next;
+  }
+  return nullptr;
 }
 
 bool kushekbaev::isValidExpression(const char * str)
 {
-  const char * next = has_expression(str);
+  const char * next = hasExpression(str);
   return next && (*next == '\0');
 }
-
