@@ -37,9 +37,9 @@ const char * has_unsigned_int(const char * str)
     return str;
   }
   const char * next = has_number(str);
-  if (!next)
+  if (const char * continues = has_unsigned_int(next))
   {
-    return str;
+    return continues;
   }
   return next;
 }
