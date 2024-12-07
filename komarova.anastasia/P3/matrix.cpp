@@ -1,7 +1,7 @@
 #include "matrix.h"
 #include <fstream>
 
-bool komarova::isanum(const char * st)
+bool komarova::isanum(const char* st)
 {
   char* endptr = nullptr;
   if (*endptr != '\0')

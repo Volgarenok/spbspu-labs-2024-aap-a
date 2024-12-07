@@ -15,8 +15,8 @@ int main(int argc, char ** argv)
     std::cerr << "Not enough arguments\n";
     return 1;
   }
-  char * st = argv[1];
-  if (!(komarova::isanum(char * st)))
+  const char* st = argv[1];
+  if (!(komarova::isanum(st)))
   {
     std::cout << "First parameter is not a number\n";
     return 1;
