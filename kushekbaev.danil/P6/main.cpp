@@ -4,6 +4,7 @@
 
 int main()
 {
+  char * stest = "2*B*(A+4)"
   char * s1 = nullptr;
   try
   {
@@ -26,6 +27,7 @@ int main()
     return 1;
   }
   std::cout << kushekbaev::isValidExpression(s1) << "\n";
+  std::cout << kushekbaev::isValidExpression(stest) << "\n";
   delete[] s1;
   return 0;
 }
