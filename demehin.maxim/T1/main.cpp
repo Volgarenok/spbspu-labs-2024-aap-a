@@ -24,36 +24,6 @@ namespace
     }
 }
 
-  //void makeIsoScale(demehin::Shape* shapes[], size_t shp_cnt, double scale_k, demehin::point_t& scale_pt)
-  //{
-    //for (size_t i = 0; i < shp_cnt; i++)
-    //{
-      //demehin::rectangle_t old_fr_rect = shapes[i]->getFrameRect();
-      //shapes[i]->move(scale_pt);
-      //demehin::rectangle_t new_fr_rect = shapes[i]->getFrameRect();
-      //demehin::point_t move_vector;
-      //move_vector.x = (new_fr_rect.pos.x - old_fr_rect.pos.x) / scale_k;
-      //move_vector.y = (new_fr_rect.pos.y - old_fr_rect.pos.y) / scale_k;
-      //shapes[i]->scale(scale_k);
-      //shapes[i]->move(move_vector.x, move_vector.y);
-    //}
-  //}
-
-  //double getFrRectArea(const demehin::rectangle_t& fr_rect)
-  //{
-    //return fr_rect.width * fr_rect.height;
-  //}
-
-  //double getFrRectAreaSum(demehin::Shape* shapes[], size_t shp_cnt)
-  //{
-    //double area_sum = 0;
-    //for (size_t i = 0; i < shp_cnt; ++i)
-    //{
-      //demehin::rectangle_t fr_rect = shapes[i]->getFrameRect();
-      //area_sum += getFrRectArea(fr_rect);
-    //}
-    //return area_sum;
-
   double getAreaSum(demehin::Shape* shapes[], size_t shp_cnt)
   {
     double area_sum = 0;
@@ -235,11 +205,8 @@ int main()
     return 1;
   }
 
-  std::cout << std::fixed;
-  std::cout << std::setprecision(1);
-  std::cout << std::showpoint;
   double sum_area = getAreaSum(shapes, shp_cnt);
-  std::cout << sum_area << " ";
+  std::cout << std::fixed << std::setprecision(1) << sum_area << " ";
   printFrRectCords(shapes, shp_cnt);
 
   makeIsoScale(shapes, shp_cnt, scale_k, scale_pt);
