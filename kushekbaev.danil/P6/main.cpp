@@ -14,6 +14,11 @@ int main()
     std::cerr << "Out of memory" << "\n";
     return 1;
   }
+  if (s1 == nullptr)
+  {
+    std::cerr << "Failed to allocate memory\n";
+    return 1;
+  }
   if (s1[0] == '\0')
   {
     delete[] s1;
