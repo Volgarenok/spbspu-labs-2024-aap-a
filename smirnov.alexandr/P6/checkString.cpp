@@ -1,4 +1,5 @@
 #include "checkString.hpp"
+#include <cctype>
 
 namespace smirnov
 {
@@ -34,7 +35,7 @@ const char * smirnov::isNumber(const char * string)
   {
     return string;
   }
-  return (*string >= '0' && *string <= '9') ? (string + 1) : nullptr;
+  return (std::isdigit(*string)) ? (string + 1) : nullptr;
 }
 
 const char * smirnov::isUnsignedInt(const char * string)
