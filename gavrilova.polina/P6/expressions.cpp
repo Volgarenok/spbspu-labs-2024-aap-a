@@ -19,7 +19,6 @@ const char * gavrilova::has_identificator(const char * str)
   if (!str) {
     return nullptr;
   }
-
   return gavrilova::is_symbol(str, "xyz");
 }
 
