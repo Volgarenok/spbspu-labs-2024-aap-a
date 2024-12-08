@@ -2,7 +2,7 @@
 
 namespace
 {
-  const char * is_factor_correct(const char *, int prev = 3);
+  const char * is_factor_correct(const char *, int prevState = 3);
   const char * is_term_correct(const char *, bool prev = 1);
   const char * is_expression_correct(const char *, bool prev = 1, bool isBracketOpened = 0);
   bool is_letter(char, char cur = 'a');
@@ -10,7 +10,7 @@ namespace
   bool is_basic_symbol(char);
   bool is_sign(char);
 
-  const char * is_factor_correct(const char *p, int prev)
+  const char * is_factor_correct(const char *p, int prevState)
   {
     if (p == nullptr)
     {
@@ -19,11 +19,11 @@ namespace
     int cur = 4;
     if (is_letter(*p))
     {
-      cur = (prev == 3);
+      cur = (prevState == 3);
     }
     if (is_digit(*p))
     {
-      cur = 2 & prev;
+      cur = 2 & prevState;
     }
     if (cur & 4)
     {
