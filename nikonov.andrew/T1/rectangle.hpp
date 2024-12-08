@@ -4,14 +4,16 @@
 #include "shape.hpp"
 namespace nikonov
 {
-  struct Rectangle: Shape
+  class Rectangle: public Shape
   {
+  public:
     Rectangle(point_t lbp, point_t rtp);
     float getArea() const override;
     nikonov::rectangle_t getFrameRect() const override;
     void move(point_t a) override;
     void move(float x, float y) override;
     void scale(float k) override;
+  private:
     point_t lbp_, rtp_;
   };
 }

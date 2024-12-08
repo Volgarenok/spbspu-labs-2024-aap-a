@@ -4,9 +4,11 @@
 #include <string>
 #include "shape.hpp"
 #include "rectangle.hpp"
+#include "diamond.hpp"
 namespace nikonov
 {
   nikonov::Shape* make_shape(std::string name, float nums[]);
   nikonov::Rectangle* make_rectangle(float nums[]);
+  nikonov::Diamond* nikonov::make_diamond(float nums[]);
 }
 #endif
