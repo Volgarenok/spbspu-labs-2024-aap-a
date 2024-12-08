@@ -9,11 +9,11 @@ namespace guseynov
   {
   public:
     Rectangle(point_t leftLowP, point_t rightHighP);
-    double getArea();
-    rectangle_t getFrameRect();
-    void move(point_t pos);
-    void move(double x, double y);
-    void scale(double k);
+    double getArea() const override;
+    rectangle_t getFrameRect() const override;
+    void move(point_t pos) override;
+    void move(double x, double y) override;
+    void scale(double k) override;
   private:
     point_t leftLowP_;
     point_t rightHighP_;
