@@ -9,7 +9,7 @@
 
 namespace
 {
-  void makeIsoScale(demehin::Shape* shapes[], size_t shp_cnt, double scale_k, demehin::point_t& scale_pt)
+  void makeIsoScale(demehin::Shape** shapes, size_t shp_cnt, double scale_k, demehin::point_t& scale_pt)
 {
     for (size_t i = 0; i < shp_cnt; i++)
     {
