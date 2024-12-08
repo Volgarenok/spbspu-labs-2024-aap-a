@@ -16,7 +16,7 @@ char * sharifullina::inputString(std::istream & in, char stop)
       {
         newstr = new char[capacity]
       }
-      catch
+      catch (const std::bad_alloc & e)
       {
         delete[] str;
         std::skipws(in);
