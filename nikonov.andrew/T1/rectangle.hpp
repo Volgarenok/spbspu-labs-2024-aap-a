@@ -12,9 +12,9 @@ namespace nikonov
     void move(point_t a) override;
     void move(float x, float y) override;
     void scale(float k) override;
+    rectangle_t frameRect;
     float width_, height_;
     point_t pos_;
-    rectangle_t frameRect;
   };
 }
 #endif

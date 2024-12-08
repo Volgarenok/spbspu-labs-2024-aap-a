@@ -1,8 +1,8 @@
 #include "rectangle.hpp"
 #include "base-types.hpp"
 nikonov::Rectangle::Rectangle(point_t lbp, point_t rtp):
-  frameRect(lbp, rtp), 
-  width_(frameRect.width_), 
+  frameRect(lbp, rtp),
+  width_(frameRect.width_),
   height_(frameRect.height_),
   pos_(frameRect.pos_)
 {}

@@ -2,7 +2,7 @@
 #define BASE_TYPES_HPP
 namespace nikonov
 {
-  struct point_t 
+  struct point_t
   {
     point_t();
     point_t(float x, float y);
