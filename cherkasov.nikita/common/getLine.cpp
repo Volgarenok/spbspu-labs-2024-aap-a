@@ -52,7 +52,7 @@ char* cherkasov::inputLine(std::istream& in, size_t& length)
     delete[] buffer;
     return nullptr;
   }
-    buffer[length] = '\0';
-    return buffer;
+  buffer[length] = '\0';
+  return buffer;
 }
 

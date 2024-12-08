@@ -26,7 +26,6 @@ int main()
   }
     cherkasov::replaceChar(input, result, oldChar, newChar);
     std::cout << result << "\n";
-
   delete[] input;
   delete[] result;
   return 0;
