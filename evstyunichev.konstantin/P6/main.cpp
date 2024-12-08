@@ -1,6 +1,6 @@
 #include <iostream>
 #include <input_string.hpp>
-#include "recursion.hpp"
+#include "expression_check.hpp"
 
 int main()
 {
@@ -16,8 +16,7 @@ int main()
     delete[] str1;
     return 1;
   }
-  bool flag = (evstyunichev::is_expression_correct(str1) != nullptr);
-  std::cout << std::boolalpha << flag << '\n';
+  std::cout << std::boolalpha << evstyunichev::check_expression(str1) << '\n';
   delete[] str1;
   return 0;
 }
