@@ -38,6 +38,10 @@ const char * kushekbaev::hasLetterRecursive(const char * str, const char * lette
 {
   if (letters[index] == '\0')
   {
+    if (*str == '\0')
+    {
+      return nullptr;
+    }
     return hasLetter(str + 1);
   }
 
@@ -64,9 +68,12 @@ const char * kushekbaev::hasNumberRecursive(const char * str, const char * numbe
 {
   if (numbers[index] == '\0')
   {
+    if (*str == '\0')
+    {
+      return nullptr;
+    }
     return hasNumber(str + 1);
   }
-
   if (*str == numbers[index])
   {
     return str + 1;
