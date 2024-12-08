@@ -18,8 +18,8 @@ double demehin::Rectangle::getArea() const
 
 demehin::rectangle_t demehin::Rectangle::getFrameRect() const
 {
-  double width = std::abs(rt_.x - lb_.x);
-  double height = std::abs(rt_.y - lb_.y);
+  double width = rt_.x - lb_.x;
+  double height = rt_.y - lb_.y;
   rectangle_t frame_rect;
   frame_rect.pos.x = lb_.x + width / 2.0;
   frame_rect.pos.y = lb_.y + height / 2.0;
@@ -32,8 +32,8 @@ void demehin::Rectangle::move(point_t s)
 {
 
   point_t centre;
-  double width = std::sqrt((rt_.y - lb_.y) * (rt_.y - lb_.y));
-  double height = std::sqrt((rt_.x - lb_.x) * (rt_.x - lb_.x));
+  double width = rt_.x - lb_.x;
+  double height = rt_.y - lb_.y;
   centre.x = rt_.x - width / 2;
   centre.y = rt_.y - height / 2;
   double difference_x = s.x - centre.x;
