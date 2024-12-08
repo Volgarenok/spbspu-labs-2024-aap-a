@@ -1,5 +1,6 @@
 #include <cctype>
 #include <cstddef>
+#include <iomanip>
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -30,6 +31,19 @@ namespace
       shapes[i]->move(-vector.x, -vector.y);
     }
   }
+  void printCoordinatesRect(kiselev::Shape** shapes, size_t countShape)
+  {
+    for (size_t i = 0; i < countShape; ++i)
+    {
+      kiselev::rectangle_t rect = shapes[i]->getFrameRect();
+      double leftDownX = rect.pos.x - rect.width / 2;
+      double leftDownY = rect.pos.y - rect.height / 2;
+      double rightUpX = rect.pos.x + rect.width / 2;
+      double rightUpY = rect.pos.y + rect.height / 2;
+      std::cout << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
+    }
+    std::cout << "\n";
+  }
 }
 int main()
 {
@@ -37,6 +51,8 @@ int main()
   size_t countShape = 0;
   std::string titleShape;
   bool isIncorrectScale = false;
+  kiselev::point_t scale;
+  double ratio = 0;
   try
   {
     while (std::cin >> titleShape)
@@ -85,8 +101,7 @@ int main()
       }
       else if (titleShape == "SCALE")
       {
-        kiselev::point_t scale = kiselev::make_scale(std::cin);
-        double ratio = 0;
+        scale = kiselev::make_scale(std::cin);
         std::cin >> ratio;
         if (ratio <= 0)
         {
@@ -106,6 +121,13 @@ int main()
       std::cerr << "The scales were not passed\n";
       return 1;
     }
+    std::cout << std::fixed << std::setprecision(1) << getSumArea(shapes, countShape);
+    printCoordinatesRect(shapes, countShape);
+    scaleForShapes(shapes, countShape, scale, ratio);
+    std::cout << getSumArea(shapes, countShape);
+    printCoordinatesRect(shapes, countShape);
+    kiselev::destroyShapePtr(shapes, countShape);
+    return 0;
   }
   catch (const std::logic_error& e)
   {
@@ -119,6 +141,4 @@ int main()
     kiselev::destroyShapePtr(shapes, countShape);
     return 1;
   }
-  kiselev::destroyShapePtr(shapes, countShape);
-  return 0;
 }
