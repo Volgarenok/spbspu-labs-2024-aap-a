@@ -1,4 +1,4 @@
-#include <iostream>
+#include <strinput.hpp>
 #include "strmanipulator.hpp"
 
 int main()
