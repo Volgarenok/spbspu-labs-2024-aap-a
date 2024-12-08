@@ -4,7 +4,8 @@
 
 int main()
 {
-  char* input = cherkasov::inputLine(std::cin);
+  size_t length = 0;
+  char* input = cherkasov::inputLine(std::cin, length);
   if (!input)
   {
     std::cerr << "Error: Failed to read input or allocation failure.\n";
@@ -12,11 +13,6 @@ int main()
   }
   constexpr char oldChar = 'c';
   constexpr char newChar = 'b';
-  size_t length = 0;
-  while (input[length] != '\0')
-  {
-    ++length;
-  }
   char* result = nullptr;
   try
   {

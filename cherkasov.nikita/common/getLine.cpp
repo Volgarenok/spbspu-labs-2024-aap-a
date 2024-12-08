@@ -10,10 +10,10 @@ void cherkasov::copyArray(const char* src, char* dest, size_t length)
   }
 }
 
-char* cherkasov::inputLine(std::istream& in)
+char* cherkasov::inputLine(std::istream& in, size_t& length)
 {
   size_t capacity = 21;
-  size_t length = 0;
+  length = 0;
   char* buffer = nullptr;
   try
   {
