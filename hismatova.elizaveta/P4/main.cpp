@@ -1,11 +1,12 @@
 #include <iostream>
 #include <cstdlib>
 #include <cstddef>
+#include <get_string.h>
 #include "check_string.h"
 
 int main()
 {
-  char *str1 = hismatova::getLine(std::cin);
+  char *str1 = hismatova::get_line(std::cin);
   const char *str2 = "abc";
   if (str1 == nullptr)
   {
