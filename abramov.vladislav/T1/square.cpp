@@ -39,8 +39,9 @@ namespace abramov
 
   void Square::scale(double k)
   {
+    double dx = (k - 1) * len_ / 2;
+    pLeftLower_.x -= dx;
+    pLeftLower_.y -= dx;
     len_ *= k;
-    pLeftLower_.x += len_ / 2 * (k - 1);
-    pLeftLower_.y += len_ / 2 * (k - 1);
   }
 }

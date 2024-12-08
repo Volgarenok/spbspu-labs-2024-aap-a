@@ -12,7 +12,7 @@ namespace abramov
     std::cout << x1 << " " << y1 << " ";
     std::cout << x2 << " " << y2 << " ";
   }
-  void scaleRectangle(Shape *r, point_t p, double k)
+  void scaleFigure(Shape *r, point_t p, double k)
   {
     point_t pos1 = r->getFrameRect().pos;
     r->move(p);

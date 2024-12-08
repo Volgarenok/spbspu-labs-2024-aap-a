@@ -6,6 +6,6 @@
 namespace abramov
 {
   void printFrameRectCoords(const rectangle_t &r);
-  void scaleRectangle(Shape *r, point_t p, double k);
+  void scaleFigure(Shape *r, point_t p, double k);
 }
 #endif
