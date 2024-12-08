@@ -20,7 +20,7 @@ int main()
     std::cerr << "Empty input\n";
     return 1;
   }
-  std::cout << sharifullina::shrSym(firstLine, str) << '\n';
-  std::cout << sharifullina::uniTwo(firstLine, str) << '\n';
+  std::cout << sharifullina::shrSym(res, firstLine, str) << '\n';
+  std::cout << sharifullina::uniTwo(res, firstLine, str) << '\n';
   delete[] str;
 }
