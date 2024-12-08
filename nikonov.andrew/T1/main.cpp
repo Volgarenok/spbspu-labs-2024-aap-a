@@ -4,18 +4,41 @@
 #include "fabric.hpp"
 int main()
 {
-  std::string name = "";
-  std::cin >> name;
-  float nums[4] = { 0 };
-  for (size_t i = 0; i < 4; ++i)
+  std::string name = " ";
+  nikonov::Shape* shapeCollection[10000] = { nullptr };
+  size_t n = 0, cnt = 0, noncorrect = 0;
+  while (std::cin >> name && name != "SCALE")
   {
-    std::cin >> nums[i];
+    if (name == "RECTANGLE")
+    {
+      n = 4;
+    }
+    else if (name == "TRIANGLE" || name == "DIAMOND")
+    {
+      n = 6;
+    }
+    float* nums = new float[n];
+    for (size_t i = 0; i < n; ++i)
+    {
+      std::cin >> nums[i];
+    }
+    if (!std::cin)
+    {
+      delete[] nums;
+      std::cin.clear();
+      ++noncorrect;
+      continue;
+    }
+    nikonov::Shape* newElem = nikonov::make_shape(name, nums);
+    if (newElem != nullptr)
+    {
+      shapeCollection[cnt] = newElem;
+      ++cnt;
+    }
+    delete[] nums;
   }
-  if (!std::cin)
+  for (size_t i = 0; i < cnt; ++i)
   {
-    std::cerr << "ERROR: not a value\n";
+    delete shapeCollection[i];
   }
-  nikonov::Shape* testRec = nikonov::make_shape(name, nums);
-  std::cout << testRec->getArea();
-  delete testRec;
 }

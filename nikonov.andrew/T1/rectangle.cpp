@@ -1,4 +1,5 @@
 #include "rectangle.hpp"
+#include <iostream>
 #include "base-types.hpp"
 nikonov::Rectangle::Rectangle(point_t lbp, point_t rtp):
   frameRect(lbp, rtp),
@@ -25,6 +26,11 @@ void nikonov::Rectangle::move(float x, float y)
 }
 void nikonov::Rectangle::scale(float k)
 {
+  if (k <= 0)
+  {
+    std::cerr << "Scale denied: k must be more than zero\n";
+    return;
+  }
   width_ *= k;
   height_ *= k;
 }
