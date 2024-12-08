@@ -29,8 +29,9 @@ const char * kushekbaev::hasLetter(const char * str)
   {
     return nullptr;
   }
+  int index = 0;
   char letters[] = {'A', 'B', 'C', 'D', 'E', '\0'};
-  return hasLetterRecursive(str, letters, 0);
+  return hasLetterRecursive(str, letters, index);
 }
 
 const char * kushekbaev::hasLetterRecursive(const char * str, const char * letters, int index)
@@ -54,8 +55,9 @@ const char * kushekbaev::hasNumber(const char * str)
   {
     return nullptr;
   }
+  int index = 0;
   char numbers[] = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '\0'};
-  return hasNumberRecursive(str, numbers, 0);
+  return hasNumberRecursive(str, numbers, index);
 }
 
 const char * kushekbaev::hasNumberRecursive(const char * str, const char * numbers, int index)
