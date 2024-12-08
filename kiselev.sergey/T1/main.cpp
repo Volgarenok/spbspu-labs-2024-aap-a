@@ -21,7 +21,7 @@ namespace
   }
   void scaleForShapes(kiselev::Shape** shapes, size_t countShape, kiselev::point_t scale, double ratio)
   {
-    for (size_t i = 0; i < 0; ++i)
+    for (size_t i = 0; i < countShape; ++i)
     {
       kiselev::point_t beforeScale = shapes[i]->getFrameRect().pos;
       shapes[i]->move(scale);
@@ -67,7 +67,6 @@ int main()
         {
           isIncorrectScale = true;
         }
-        titleShape = "";
       }
       else if (titleShape == "DIAMOND")
       {
@@ -79,7 +78,6 @@ int main()
         {
           isIncorrectScale = true;
         }
-        titleShape = "";
       }
       else if (titleShape == "COMPLEXQUAD")
       {
@@ -91,7 +89,6 @@ int main()
         {
           isIncorrectScale = true;
         }
-        titleShape = "";
       }
       else if (std::cin.eof())
       {
@@ -106,11 +103,11 @@ int main()
         if (ratio <= 0)
         {
           std::cerr << "Incorrect ratio\n";
+          kiselev::destroyShapePtr(shapes, countShape);
           return 1;
         }
         break;
       }
-      titleShape = "";
     }
     if (isIncorrectScale)
     {
