@@ -5,9 +5,10 @@ int main()
 {
   constexpr char secondstring[25] = "ahgm032uOqZni,dR(#@ )!.e";
   char * firststring = nullptr;
+  char symbol = '\0';
   try
   {
-    firststring = bocharov::getline(std::cin);
+    firststring = bocharov::getline(std::cin, symbol);
   }
   catch (const std::bad_alloc & e)
   {
@@ -21,9 +22,9 @@ int main()
     return 1;
   }
   char result[27];
-  bocharov::connect_the_lines(firststring, secondstring, result);
+  bocharov::merge_lines(firststring, secondstring, result);
   std::cout << result << "\n";
-  std::cout << bocharov::checking_symbols(firststring, secondstring);
+  std::cout << bocharov::symbols_comparison(firststring, secondstring);
   std::cout << "\n";
   delete[] firststring;
 }

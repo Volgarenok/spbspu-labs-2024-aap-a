@@ -1,7 +1,7 @@
 #include "processing.h"
 #include <cctype>
 #include <cstddef>
-int bocharov::checking_symbols(const char * string1, const char * string2)
+int bocharov::symbols_comparison(const char * string1, const char * string2)
 {
   for (const char * i = string1; *i != '\0'; ++i)
   {
@@ -16,7 +16,7 @@ int bocharov::checking_symbols(const char * string1, const char * string2)
   return 0;
 }
 
-bool bocharov::has_char(const char * string, char ch)
+bool has_char(const char * string, char ch)
 {
   for (const char * p = string; *p != '\0'; ++p)
   {
@@ -28,7 +28,7 @@ bool bocharov::has_char(const char * string, char ch)
   return false;
 }
 
-void bocharov::connect_the_lines(const char * string1, const char * string2, char * result)
+void bocharov::merge_lines(const char * string1, const char * string2, char * result)
 {
   size_t n = 0;
   for (char ch = 'a'; ch <= 'z'; ++ch)
