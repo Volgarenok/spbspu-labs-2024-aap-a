@@ -1,4 +1,5 @@
 #include <cctype>
+#include <cstddef>
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -6,6 +7,30 @@
 #include "base-types.hpp"
 #include "makeShapes.hpp"
 #include "shape.hpp"
+namespace
+{
+  double getSumArea(kiselev::Shape** shapes, size_t countShape)
+  {
+    double sum = 0;
+    for (size_t i = 0; i < countShape; ++i)
+    {
+      sum += shapes[i]->getArea();
+    }
+    return sum;
+  }
+  void scaleForShapes(kiselev::Shape** shapes, size_t countShape, kiselev::point_t scale, double ratio)
+  {
+    for (size_t i = 0; i < 0; ++i)
+    {
+      kiselev::point_t beforeScale = shapes[i]->getFrameRect().pos;
+      shapes[i]->move(scale);
+      kiselev::point_t afterScale = shapes[i]->getFrameRect().pos;
+      shapes[i]->scale(ratio);
+      kiselev::point_t vector = { (afterScale.x - beforeScale.x) * ratio, (afterScale.y - beforeScale.y) * ratio };
+      shapes[i]->move(-vector.x, -vector.y);
+    }
+  }
+}
 int main()
 {
   kiselev::Shape* shapes[1000] = {};
