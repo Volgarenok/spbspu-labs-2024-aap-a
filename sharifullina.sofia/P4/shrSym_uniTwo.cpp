@@ -36,11 +36,24 @@ char * sharifullina::inputString(std::istream & in, char stop)
   return str;
 }
 
-char * sharifullina::shrSym(const char * str1, const char * str2)
+char * sharifullina::shrSym(char * res, const char * str1, const char * str2)
 {
   
 }
-char * sharifullina::uniTwo(const char * str1, const char * str2)
+char * sharifullina::uniTwo(char * res, const char * str1, const char * str2)
 {
-  
+  while (*str1 != '\0' && *str2 != '\0')
+  {
+    *res++ = *str1++;
+    *res++ = *str2++;
+  }
+  while (*str1 != '\0')
+  {
+    *res++ = *first++;
+  }
+  while (*str2 != '\0')
+  {
+    *res++ = *str2++;
+  }
+  *res = '\0';
 }
