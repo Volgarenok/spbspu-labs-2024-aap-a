@@ -81,7 +81,6 @@ namespace abramov
     center.y = y;
     return center;
   }
-
   void ComplexQuad::move(point_t p)
   {
     point_t center = getCenterComplexQuad();
