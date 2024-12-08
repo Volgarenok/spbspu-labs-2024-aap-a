@@ -9,7 +9,7 @@ namespace
 {
   const char * is_factor_correct(const char *p, int prev = 3)
   {
-    if (p == nullptr) 
+    if (p == nullptr)
     {
       return nullptr;
     }
