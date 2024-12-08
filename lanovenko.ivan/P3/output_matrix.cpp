@@ -1,6 +1,6 @@
 #include "output_matrix.h"
 
-void lanovenko::outputMatrix(std::ostream& output, int* matrix, size_t rows, size_t cols)
+void lanovenko::outputMatrix(std::ostream& output, const int* matrix, size_t rows, size_t cols)
 {
   for (size_t i = 0; i < rows; i++)
   {
