@@ -1,4 +1,5 @@
 #include "expression_check.hpp"
+#include "expression_anon.hpp"
 
 bool evstyunichev::check_expression(const char *str)
 {
@@ -7,14 +8,6 @@ bool evstyunichev::check_expression(const char *str)
 
 namespace
 {
-  const char * is_factor_correct(const char *, int prev = 3);
-  const char * is_term_correct(const char *, int prev = 1);
-  const char * is_expression_correct(const char *, int prev = 1, bool OpenFlag = 0);
-  bool is_letter(char, char cur = 'a');
-  bool is_digit(char, char cur = '0');
-  bool is_basic_symbol(char);
-  bool is_sign(char);
-
   const char * is_factor_correct(const char *p, int prev)
   {
     if (p == nullptr)
