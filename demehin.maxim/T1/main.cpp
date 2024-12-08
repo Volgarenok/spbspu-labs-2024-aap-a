@@ -197,6 +197,7 @@ int main()
       scale_pt.y = y;
       break;
     }
+    shape_name = "";
   }
 
   if (shp_cnt == 0)
