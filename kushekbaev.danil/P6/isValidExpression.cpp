@@ -30,7 +30,7 @@ const char * kushekbaev::hasLetter(const char * str)
     return nullptr;
   }
   char letters[] = {'A', 'B', 'C', 'D', 'E'};
-  return hasLetterRecursive(str, letters, index);
+  return hasLetterRecursive(str, letters, 0);
 }
 
 const char * kushekbaev::hasLetterRecursive(const char * str, const char * letters, int index)
