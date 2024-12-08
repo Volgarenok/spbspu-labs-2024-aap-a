@@ -4,7 +4,7 @@
 #include <cstddef>
 namespace lanovenko
 {
-  void outputMatrix(std::ostream& output, int* matrix, size_t rows, size_t cols);
+  void outputMatrix(std::ostream& output, const int* matrix, size_t rows, size_t cols);
 }
 
 #endif
