@@ -1,6 +1,6 @@
 #include <iostream>
 #include <getLine.h>
-#include "newLetter.h"
+#include "replaceChar.h"
 
 int main()
 {
@@ -28,7 +28,7 @@ int main()
     std::cerr << "Error: Memory allocation failed.\n";
     return 1;
   }
-    cherkasov::newLetter(input, result, oldChar, newChar);
+    cherkasov::replaceChar(input, result, oldChar, newChar);
     std::cout << result << "\n";
 
   delete[] input;

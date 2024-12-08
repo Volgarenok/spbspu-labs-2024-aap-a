@@ -1,7 +1,6 @@
-#include "newLetter.h"
-#include <cstring>
+#include "replaceChar.h"
 
-void cherkasov::newLetter(const char* array, char* result, char oldChar, char newChar)
+void cherkasov::replaceChar(const char* array, char* result, char oldChar, char newChar)
 {
   if (!array || !result)
   {
