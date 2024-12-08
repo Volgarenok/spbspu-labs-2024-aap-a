@@ -13,7 +13,7 @@ namespace
   double getSumArea(kiselev::Shape** shapes, size_t countShape)
   {
     double sum = 0;
-    for (size_t i = 0; i < countShape; ++i)
+    for (size_t i = 0; i < countShape; i++)
     {
       sum += shapes[i]->getArea();
     }
@@ -33,7 +33,7 @@ namespace
   }
   void printCoordinatesRect(kiselev::Shape** shapes, size_t countShape)
   {
-    for (size_t i = 0; i < countShape; ++i)
+    for (size_t i = 0; i < countShape; i++)
     {
       kiselev::rectangle_t rect = shapes[i]->getFrameRect();
       double leftDownX = rect.pos.x - rect.width / 2;
