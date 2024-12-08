@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstring>
-#include "check_string.h"
-#include "functions.h"
+#include <check_string.h>
+#include "suitable_string.h"
 
 int main()
 {

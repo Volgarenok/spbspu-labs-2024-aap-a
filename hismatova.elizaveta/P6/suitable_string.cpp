@@ -1,4 +1,4 @@
-#include "functions.h"
+#include "suitable_string.h"
 #include <cctype>
 
 namespace hismatova
