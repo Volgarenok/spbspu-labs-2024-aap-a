@@ -6,7 +6,8 @@
 
 int main()
 {
-  char *str1 = hismatova::get_line(std::cin);
+  size_t length = 0;
+  char *str1 = hismatova::get_line(std::cin, length);
   const char *str2 = "abc";
   if (str1 == nullptr)
   {
