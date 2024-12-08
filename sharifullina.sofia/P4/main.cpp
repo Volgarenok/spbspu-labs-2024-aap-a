@@ -3,6 +3,7 @@
 
 int main()
 {
+  const char firstLine[] = "pupupu";
   char * str = nullptr;
   try
   {
@@ -19,7 +20,7 @@ int main()
     std::cerr << "Empty input\n";
     return 1;
   }
-  std::cout << sharifullina::shrSym(res, str1, str2) << '\n';
-  std::cout << sharifullina::uniTwo(res, str1, str2) << '\n';
+  std::cout << sharifullina::shrSym(firstLine, str) << '\n';
+  std::cout << sharifullina::uniTwo(firstLine, str) << '\n';
   delete[] str;
 }
