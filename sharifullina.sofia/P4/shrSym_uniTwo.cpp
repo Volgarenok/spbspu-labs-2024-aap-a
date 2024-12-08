@@ -85,7 +85,7 @@ char * sharifullina::uniTwo(const char * str1, const char * str2)
   {
     length2++;
   }
-  char *res = new char[lenght1 + lenght2 + 1];
+  char *res = new char[length1 + length2 + 1];
   char *ptr = res;
   while (*str1 != '\0' && *str2 != '\0')
   {
