@@ -28,6 +28,18 @@ int main()
         }
         titleShape = "";
       }
+      else if (titleShape == "DIAMOND")
+      {
+        try
+        {
+          shapes[countShape++] = kiselev::make_diamond(std::cin);
+        }
+        catch (const std::invalid_argument& e)
+        {
+          isIncorrectScale = true;
+        }
+        titleShape = "";
+      }
       else if (std::cin.eof())
       {
         std::cerr << "The input ended with eof\n";
@@ -45,10 +57,6 @@ int main()
           return 1;
         }
         break;
-      }
-      else if (titleShape.empty())
-      {
-        continue;
       }
       titleShape = "";
     }
