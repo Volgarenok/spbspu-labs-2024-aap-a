@@ -4,13 +4,8 @@
 int main()
 {
   char* str = dribas::enterStr(std::cin);
-  if (str == nullptr) {
-    std::cerr << "error\n";
-    return 1;
-  }
-  if (str[0] == '\0') {
-    std::cerr << "nostring\n";
-    free(str);
+  if (!str) {
+    std::cerr  << "memory not allocated\n";
     return 1;
   }
   std::cout << std::boolalpha << dribas::isValidString(str) << '\n';
