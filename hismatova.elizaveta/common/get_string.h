@@ -1,5 +1,5 @@
-#ifndef CHECK_STRING_H
-#define CHECK_STRING_H
+#ifndef GET_STRING_H
+#define GET_STRING_H
 #include <iostream>
 #include <cstddef>
 

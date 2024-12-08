@@ -1,5 +1,5 @@
-#ifndef FUNCTIONS_H
-#define FUNCTIONS_H
+#ifndef SUITABLE_STRING_H
+#define SUITABLE_STRING_H
 #include <cstddef>
 
 namespace hismatova

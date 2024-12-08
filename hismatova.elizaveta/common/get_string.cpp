@@ -1,4 +1,4 @@
-#include "check_string.h"
+#include "get_string.h"
 #include <iostream>
 #include <cstdlib>
 #include <cstring>

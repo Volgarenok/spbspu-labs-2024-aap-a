@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstring>
-#include <check_string.h>
+#include <get_string.h>
 #include "suitable_string.h"
 
 int main()
