@@ -7,8 +7,8 @@ int cherkasov::readMatrix(std::istream& inFile, size_t& rows, size_t& cols, int*
 {
   if (!inFile)
   {
- std::cerr << "Error: Cannot open input file.\n";
- rows = cols = 0;
+    std::cerr << "Error: Cannot open input file.\n";
+    rows = cols = 0;
     return 1;
   }
   if (!(inFile >> rows >> cols))

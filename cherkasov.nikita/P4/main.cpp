@@ -1,50 +1,30 @@
 #include <iostream>
-#include <cstring>
 #include <getLine.h>
-#include "newLetter.h"
-#include "validInput.h"
+#include "replaceChar.h"
 
 int main()
 {
-  char* input = nullptr;
-  try
-  {
-    input = cherkasov::inputLine(std::cin);
-  }
-  catch (const std::exception& e)
-  {
-    std::cerr << "Unhandled exception: " << e.what() << "\n";
-     return 1;
-  }
+  size_t length = 0;
+  char* input = cherkasov::inputLine(std::cin, length);
   if (!input)
   {
-    std::cerr << "Memory allocation failure or empty input!\n";
+    std::cerr << "Error: Failed to read input or allocation failure.\n";
     return 1;
   }
-  if (!cherkasov::isValidInput(input))
-  {
-    delete[] input;
-    return 0;
-  }
-  const char oldChar = 'c';
-  const char newChar = 'b';
+  constexpr char oldChar = 'c';
+  constexpr char newChar = 'b';
   char* result = nullptr;
   try
   {
-    result = cherkasov::newLetter(input, oldChar, newChar);
+    result = new char[length + 1];
   }
-  catch (const std::exception& e)
+  catch (const std::bad_alloc&)
   {
-    std::cerr << "string error:" << e.what() << "\n";
     delete[] input;
+    std::cerr << "Error: Memory allocation failed.\n";
     return 1;
   }
-  if (!result)
-  {
-    std::cerr << "Error in memory allocation.\n";
-    delete[] input;
-    return 1;
-  }
+    cherkasov::replaceChar(input, result, oldChar, newChar);
     std::cout << result << "\n";
   delete[] input;
   delete[] result;
