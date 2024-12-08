@@ -7,6 +7,7 @@ namespace guseynov
 {
   class Shape
   {
+  public:
     virtual double getArea();
     virtual rectangle_t getFrameRect();
     virtual void move(point_t pos);
