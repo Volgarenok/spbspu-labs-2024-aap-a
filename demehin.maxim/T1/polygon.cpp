@@ -19,13 +19,6 @@ double demehin::Polygon::getArea() const
     area += (vertex_[i].x * vertex_[j].y - vertex_[j].x * vertex_[i].y);
   }
   return std::abs(area) / 2.0;
-  //const double PI = 3.1415;
-  //point_t side_vector;
-  //side_vector.x = vertex_[1].x - vertex_[0].x;
-  //side_vector.y = vertex_[1].y - vertex_[0].y;
-  //double side  = sqrt(side_vector.x * side_vector.x + side_vector.y * side_vector.y);
-  //double area = vrtx_cnt_ * side * side / (4 * std::tan(180 * PI / vrtx_cnt_));
-  //return area;
 }
 
 demehin::rectangle_t demehin::Polygon::getFrameRect() const

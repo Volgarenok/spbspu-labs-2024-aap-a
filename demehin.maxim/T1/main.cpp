@@ -1,9 +1,9 @@
 #include <iostream>
+#include <string>
+#include <iomanip>
 #include "rectangle.hpp"
 #include "shape.hpp"
-#include <string>
 #include "base-types.hpp"
-#include <iomanip>
 #include "ring.hpp"
 #include "polygon.hpp"
 
