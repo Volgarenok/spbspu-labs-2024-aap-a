@@ -19,9 +19,9 @@ int main(int argc, char ** argv)
   long int numer = 0;
   try
   {
-    numer = komarova::notanum(st);
+    long int numer = komarova::notanum(st);
   }
-  catch(const std::logic_error & e)
+  catch (const std::logic_error & e)
   {
     std::cout << e.what() << "\n";
     return 1;
