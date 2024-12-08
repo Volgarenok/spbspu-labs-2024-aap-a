@@ -22,14 +22,12 @@ namespace abramov
 
   rectangle_t Rectangle::getFrameRect() const
   {
-    double x = (pRightUpper_.x + pLeftLower_.x) / 2;
-    double y = (pRightUpper_.y + pLeftLower_.y) / 2;
     point_t pos;
-    pos.x = x;
-    pos.y = y;
+    pos.x = (pRightUpper_.x + pLeftLower_.x) / 2;
+    pos.y = (pRightUpper_.y + pLeftLower_.y) / 2;
     rectangle_t frame_rect;
-    frame_rect.width = x;
-    frame_rect.height = y;
+    frame_rect.width = pRightUpper_.x - pLeftLower_.x;
+    frame_rect.height = pRightUpper_.y - pLeftLower_.y;
     frame_rect.pos = pos;
     return frame_rect;
   }
