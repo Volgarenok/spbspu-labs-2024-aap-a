@@ -19,7 +19,7 @@ int main(int argc, char ** argv)
   long int numer = 0;
   try
   {
-    long int numer = komarova::notanum(st);
+    numer = komarova::notanum(st);
   }
   catch (const std::logic_error & e)
   {
