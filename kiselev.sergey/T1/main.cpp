@@ -61,7 +61,8 @@ int main()
       {
         try
         {
-          shapes[countShape++] = kiselev::make_rectangle(std::cin);
+          shapes[countShape] = kiselev::make_rectangle(std::cin);
+          countShape++;
         }
         catch (const std::invalid_argument& e)
         {
@@ -72,7 +73,8 @@ int main()
       {
         try
         {
-          shapes[countShape++] = kiselev::make_diamond(std::cin);
+          shapes[countShape] = kiselev::make_diamond(std::cin);
+          countShape++;
         }
         catch (const std::invalid_argument& e)
         {
@@ -83,7 +85,8 @@ int main()
       {
         try
         {
-          shapes[countShape++] = kiselev::make_complexquad(std::cin);
+          shapes[countShape] = kiselev::make_complexquad(std::cin);
+          countShape++;
         }
         catch (const std::invalid_argument& e)
         {
