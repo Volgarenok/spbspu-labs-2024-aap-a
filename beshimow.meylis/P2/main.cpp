@@ -37,3 +37,4 @@ int main()
 
   beshimow::rowOutput(right, k, error);
   std::cout << "\n";
+}
