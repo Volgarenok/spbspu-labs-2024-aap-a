@@ -24,8 +24,8 @@ int main()
     std::cerr << "Error: Memory allocation failed.\n";
     return 1;
   }
-    cherkasov::replaceChar(input, result, oldChar, newChar);
-    std::cout << result << "\n";
+  cherkasov::replaceChar(input, result, oldChar, newChar);
+  std::cout << result << "\n";
   delete[] input;
   delete[] result;
   return 0;

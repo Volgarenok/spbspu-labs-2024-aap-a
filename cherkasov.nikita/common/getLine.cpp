@@ -40,12 +40,12 @@ char* cherkasov::inputLine(std::istream& in, size_t& length)
         delete[] buffer;
         return nullptr;
       }
-        cherkasov::copyArray(buffer, newBuffer, length);
-        delete[] buffer;
-        buffer = newBuffer;
-        capacity = newCapacity;
+      cherkasov::copyArray(buffer, newBuffer, length);
+      delete[] buffer;
+      buffer = newBuffer;
+      capacity = newCapacity;
     }
-      buffer[length++] = ch;
+    buffer[length++] = ch;
   }
   if (length == 0 && in.eof())
   {
