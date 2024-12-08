@@ -137,7 +137,7 @@ namespace
       return line;
     }
 
-    if(* line == '\0')
+    if (* line == '\0')
     {
       return line;
     }
