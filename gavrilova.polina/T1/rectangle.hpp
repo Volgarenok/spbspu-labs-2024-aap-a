@@ -3,6 +3,7 @@
 #include "shape.hpp"
 namespace gavrilova {
   class Rectangle : public Shape {
+  public:
     Rectangle(point_t pBottomLeft, point_t pTopRigh);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
