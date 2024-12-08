@@ -3,6 +3,8 @@
 
 namespace kushekbaev
 {
+  const char * hasNumberRecursive(const char * str, const char * numbers, int index);
+  const char * hasLetterRecursive(const char * str, const char * letters, int index);
   const char * hasCharacter(const char * str, char c);
   const char * hasLetter(const char * str);
   const char * hasNumber(const char * str);
@@ -28,14 +30,22 @@ const char * kushekbaev::hasLetter(const char * str)
     return nullptr;
   }
   char letters[] = {'A', 'B', 'C', 'D', 'E'};
-  for (char letter : letters)
+  return hasLetterRecursive(str, letters, index);
+}
+
+const char * kushekbaev::hasLetterRecursive(const char * str, const char * letters, int index)
+{
+  if (letters[index] == '\0')
   {
-    if (*str == letter)
-    {
-      return str + 1;
-    }
+    return hasLetter(str + 1);
   }
-  return hasLetter(str+1);
+
+  if (*str == letters[index])
+  {
+    return str + 1;
+  }
+
+  return hasLetterRecursive(str, letters, index + 1);
 }
 
 const char * kushekbaev::hasNumber(const char * str)
@@ -45,16 +55,23 @@ const char * kushekbaev::hasNumber(const char * str)
     return nullptr;
   }
   char numbers[] = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
-  for (char number : numbers)
-  {
-    if (*str == number)
-    {
-      return str + 1;
-    }
-  }
-  return hasNumber(str+1);
+  return hasNumberRecursive(str, numbers, 0);
 }
 
+const char * kushekbaev::hasNumberRecursive(const char * str, const char * numbers, int index)
+{
+  if (numbers[index] == '\0')
+  {
+    return hasNumber(str + 1);
+  }
+
+  if (*str == numbers[index])
+  {
+    return str + 1;
+  }
+
+  return hasNumberRecursive(str, numbers, index + 1);
+}
 const char * kushekbaev::hasUnsignedInt(const char * str)
 {
   if (!str)
