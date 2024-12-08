@@ -11,5 +11,5 @@ void cherkasov::replaceChar(const char* array, char* result, char oldChar, char 
     *result++ = (*array == oldChar) ? newChar : *array;
     ++array;
   }
-    *result = '\0';
+  *result = '\0';
 }
