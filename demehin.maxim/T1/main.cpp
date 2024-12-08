@@ -24,7 +24,7 @@ namespace
     }
 }
 
-  double getAreaSum(demehin::Shape* shapes[], size_t shp_cnt)
+  double getAreaSum(demehin::Shape** shapes, size_t shp_cnt)
   {
     double area_sum = 0;
     for (size_t i = 0; i < shp_cnt; i++)
