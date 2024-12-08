@@ -3,15 +3,16 @@
 #include <cstdlib>
 #include <cstring>
 
-char* hismatova::get_line(std::istream& input)
+char* hismatova::get_line(std::istream& input, size_t& length)
 {
   size_t n = 500;
   char *str = reinterpret_cast< char* >(malloc(sizeof(char) * n));
   if (str == nullptr)
   {
+    length = 0;
     return nullptr;
   }
-  size_t length = 0;
+  length = 0;
   char c;
   while (input.get(c))
   {
@@ -26,6 +27,7 @@ char* hismatova::get_line(std::istream& input)
       if (newStr == nullptr)
       {
         free(str);
+        length = 0;
         return nullptr;
       }
       for (size_t i = 0; i < length; i++)

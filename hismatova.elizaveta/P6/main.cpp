@@ -5,7 +5,8 @@
 
 int main()
 {
-  char* str = hismatova::get_line(std::cin);
+  size_t length = 0;
+  char* str = hismatova::get_line(std::cin, length);
   if (str == nullptr || std::strlen(str) == 0)
   {
     std::cerr << "no string\n";

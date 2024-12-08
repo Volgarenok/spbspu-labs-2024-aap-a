@@ -5,7 +5,7 @@
 
 namespace hismatova
 {
-  char* get_line(std::istream& input);
+  char* get_line(std::istream& input, size_t& length);
 }
 
 #endif
