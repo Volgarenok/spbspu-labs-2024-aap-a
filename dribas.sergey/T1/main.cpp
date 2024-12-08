@@ -11,8 +11,8 @@ int main()
   //string = enterStr();
   constexpr size_t stackSize = 1000;
   char * stack[stackSize] = {} ;
-  for (size_t i = 0; char* str = dribas::enterStr(std::cin); i++) {
-    *(stack + i) = str;
+  for (size_t i = 0; (std::cin) && i < stackSize; i++) {
+    *(stack + i) = dribas::enterStr(std::cin);
   }
   for (size_t i = 0; *(stack + i) != nullptr; i++) {
     std::cout << *(stack + i) << '\n';

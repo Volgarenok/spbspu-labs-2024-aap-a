@@ -7,11 +7,11 @@ namespace dribas
     double x_;
     double y_;
   };
-  struct Rectange_t
+  struct Rectangle_t
   {
     double width_;
     double height_;
-    double pos_;
+    Point_t pos_;
   };
 }
 #endif
