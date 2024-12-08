@@ -12,14 +12,6 @@ namespace dribas
   const char* isExpression(const char* string);
 }
 
-const char* dribas::isChar(const char* string, char symbol)
-{
-  if (!string) {
-    return string;
-  }
-  return (*string == symbol) ? (string + 1) : nullptr;
-}
-
 const char* dribas::isLetter(const char* string)
 {
   if (!string) {
@@ -27,7 +19,7 @@ const char* dribas::isLetter(const char* string)
   }
   char letter[9] = {'a', 'b', 'c', 'd', 'e', 'f', 'x', 'y', 'z'};
   for (size_t i = 0; i < 9; i++) {
-    if (dribas::isChar(string, letter[i])) {
+    if (letter[i] == *string) {
       return (string + 1);
     }
   }
@@ -59,11 +51,10 @@ const char* dribas::isMultiplier(const char* string)
   if (!string) {
     return string;
   }
-  auto next = dribas::isUnsignInt(string);
-  if (auto countinues = dribas::isLetter(next)) {
-    return countinues;
+  if (dribas::isUnsignInt(string)) {
+    return dribas::isUnsignInt(string);
   }
-  return next;
+  return dribas::isLetter(string);
 }
 
 const char* dribas::isTerm(const char* string)
@@ -86,7 +77,7 @@ const char* dribas::isTerm(const char* string)
 const char* dribas::isExpression(const char* string)
 {
   if (!string) {
-    return string;
+    return nullptr;
   }
   if (*string == '\0') {
     return string;
