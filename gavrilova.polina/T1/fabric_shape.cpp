@@ -5,7 +5,7 @@
 #include "base-types.hpp"
 #include "rectangle.hpp"
 #include "shape.hpp"
-
+//, point_t & center, double koef
 gavrilova::Shape * gavrilova::fabric_shape(std::istream& in) {
   size_t len = 0;
   char * line = inputStr(in, len);

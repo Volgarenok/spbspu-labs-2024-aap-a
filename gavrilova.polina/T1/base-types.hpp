@@ -12,6 +12,7 @@ namespace gavrilova {
     double height;
     point_t pos;
   };
+
 }
 
 #endif
