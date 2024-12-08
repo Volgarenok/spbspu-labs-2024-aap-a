@@ -19,7 +19,7 @@ namespace
       return line;
     }
 
-    if (* line == literal)
+    if (*line == literal)
     {
       return ++line;
     }
@@ -53,7 +53,7 @@ namespace
       return line;
     }
 
-    if (std::isdigit(* line))
+    if (std::isdigit(*line))
     {
       return ++line;
     }
@@ -137,7 +137,7 @@ namespace
       return line;
     }
 
-    if (* line == '\0')
+    if (*line == '\0')
     {
       return line;
     }
