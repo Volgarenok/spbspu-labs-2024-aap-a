@@ -27,7 +27,15 @@ const char * kushekbaev::hasLetter(const char * str)
   {
     return nullptr;
   }
-  return (*str >= 'A' && *str <= 'E') ? (str + 1) : hasLetter(str + 1);
+  char letters[] = {'A', 'B', 'C', 'D', 'E'};
+  for (char letter : letters)
+  {
+    if (*str == letter)
+    {
+      return str + 1;
+    }
+  }
+  return hasLetter(str+1);
 }
 
 const char * kushekbaev::hasNumber(const char * str)
@@ -36,7 +44,15 @@ const char * kushekbaev::hasNumber(const char * str)
   {
     return nullptr;
   }
-  return (*str >= '0' && *str <= '9') ? (str + 1) : nullptr;
+  char numbers[] = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
+  for (char number : numbers)
+  {
+    if (*str == number)
+    {
+      return str + 1;
+    }
+  }
+  return hasNumber(str+1);
 }
 
 const char * kushekbaev::hasUnsignedInt(const char * str)
