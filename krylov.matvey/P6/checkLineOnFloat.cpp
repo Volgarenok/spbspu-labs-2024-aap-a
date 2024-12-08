@@ -1,71 +1,81 @@
 #include "checkLineOnFloat.hpp"
 #include <cctype>
 
-const char* krylov::hasSymbol(const char* line, char symbol)
+namespace
 {
-  if (!line)
-  {
-    return line;
-  }
-  return (*line == symbol) ? (line + 1) : nullptr;
-}
+  const char* hasSymbol(const char* str, char symbol);
+  const char* hasSign(const char* str);
+  const char* hasDigit(const char* str);
+  const char* hasUnsignedInt(const char* str);
+  const char* hasOrderOfMagnitude(const char* str);
+  const char* hasMantissa(const char* str);
 
-const char* krylov::hasSign(const char* line)
-{
-  if (!line)
+  const char* hasSymbol(const char* line, char symbol)
   {
-    return line;
+    if (!line)
+    {
+      return line;
+    }
+    return (*line == symbol) ? (line + 1) : nullptr;
   }
-  auto next = hasSymbol(line, '+');
-  return next ? next : hasSymbol(line, '-');
-}
 
-const char* krylov::hasDigit(const char* line)
-{
-  if (!line)
+  const char* hasSign(const char* line)
   {
-    return line;
+    if (!line)
+    {
+      return line;
+    }
+    auto next = hasSymbol(line, '+');
+    return next ? next : hasSymbol(line, '-');
   }
-  return std::isdigit(*line) ? (line + 1) : nullptr;
-}
 
-const char* krylov::hasUnsignedInt(const char* line)
-{
-  if (!line)
+  const char* hasDigit(const char* line)
   {
-    return line;
+    if (!line)
+    {
+      return line;
+    }
+    return std::isdigit(*line) ? (line + 1) : nullptr;
   }
-  auto next = hasDigit(line);
-  if (auto continues = hasUnsignedInt(next))
-  {
-    return continues;
-  }
-  return next;
-}
 
-const char* krylov::hasOrderOfMagnitude(const char* line)
-{
-  if (!line)
+  const char* hasUnsignedInt(const char* line)
   {
-    return line;
+    if (!line)
+    {
+      return line;
+    }
+    auto next = hasDigit(line);
+    if (auto continues = hasUnsignedInt(next))
+    {
+      return continues;
+    }
+    return next;
   }
-  auto next = hasSymbol(line, 'E');
-  if (auto signCheck = hasSign(next))
-  {
-    return hasUnsignedInt(signCheck);
-  }
-  return hasUnsignedInt(next);
-}
 
-const char* krylov::hasMantissa(const char* line)
-{
-  if (!line)
+  const char* hasOrderOfMagnitude(const char* line)
   {
-    return line;
+    if (!line)
+    {
+      return line;
+    }
+    auto next = hasSymbol(line, 'E');
+    if (auto signCheck = hasSign(next))
+    {
+      return hasUnsignedInt(signCheck);
+    }
+    return hasUnsignedInt(next);
   }
-  auto next = hasUnsignedInt(line);
-  next = hasSymbol(next, '.');
-  return hasUnsignedInt(next);
+
+  const char* hasMantissa(const char* line)
+  {
+    if (!line)
+    {
+      return line;
+    }
+    auto next = hasUnsignedInt(line);
+    next = hasSymbol(next, '.');
+    return hasUnsignedInt(next);
+  }
 }
 
 bool krylov::isFloatNumber(const char* line)
