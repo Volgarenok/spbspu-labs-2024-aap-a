@@ -7,7 +7,15 @@ bool evstyunichev::check_expression(const char *str)
 
 namespace
 {
-  const char * is_factor_correct(const char *p, int prev = 3)
+  const char * is_factor_correct(const char *, int prev = 3);
+  const char * is_term_correct(const char *, int prev = 1);
+  const char * is_expression_correct(const char *, int prev = 1, bool OpenFlag = 0);
+  bool is_letter(char, char cur = 'a');
+  bool is_digit(char, char cur = '0');
+  bool is_basic_symbol(char);
+  bool is_sign(char);
+
+  const char * is_factor_correct(const char *p, int prev)
   {
     if (p == nullptr)
     {
@@ -33,8 +41,7 @@ namespace
     return nullptr;
   }
 
-
-  const char * is_term_correct(const char *p, int prev = 1)
+  const char * is_term_correct(const char *p, int prev)
   {
     if (p == nullptr)
     {
@@ -70,7 +77,7 @@ namespace
     return p;
   }
 
-  const char * is_expression_correct(const char *p, int prev = 1, bool OpenFlag = 0)
+  const char * is_expression_correct(const char *p, int prev, bool OpenFlag)
   {
     if (p == nullptr)
     {
@@ -103,7 +110,7 @@ namespace
     return nullptr;
   }
 
-  bool is_letter(char c, char cur = 'a')
+  bool is_letter(char c, char cur)
   {
     if (cur == 'z' + 1)
     {
@@ -120,7 +127,7 @@ namespace
     return is_letter(c, cur + 1);
   }
 
-  bool is_digit(char c, char cur = '0')
+  bool is_digit(char c, char cur)
   {
     if (cur == '9' + 1)
     {
