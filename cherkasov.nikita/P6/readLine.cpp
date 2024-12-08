@@ -5,5 +5,6 @@
 
 char* cherkasov::readLine(std::istream& inputStream)
 {
-  return cherkasov::inputLine(inputStream);
+  size_t length = 0;
+  return cherkasov::inputLine(inputStream, length);
 }
