@@ -104,7 +104,15 @@ namespace abramov
 
   void ComplexQuad::scale(double k)
   {
-    double kk = k;
-    kk += k;
+    point_t O = getCenterComplexQuad();
+    const double dk = k - 1;
+    A_.x += (O.x - A_.x) * dk;
+    A_.y += (O.y - A_.y) * dk;
+    B_.x += (O.x - B_.x) * dk;
+    B_.y += (O.y - B_.y) * dk;
+    C_.x += (O.x - C_.x) * dk;
+    C_.y += (O.y - C_.y) * dk;
+    D_.x += (O.x - D_.x) * dk;
+    D_.y += (O.x - D_.y) * dk;
   }
 }
