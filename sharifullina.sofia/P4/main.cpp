@@ -21,5 +21,6 @@ int main()
   }
   std::cout << sharifullina::shrSym(res, str1, str2) << '\n';
   std::cout << sharifullina::uniTwo(res, str1, str2) << '\n';
-  delete[] str1;
+  delete[] str;
+
 }
