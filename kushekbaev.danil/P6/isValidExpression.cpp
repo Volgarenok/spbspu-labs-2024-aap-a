@@ -25,7 +25,7 @@ const char * kushekbaev::hasLetter(const char * str)
 {
   if (!str || *str == '\0')
   {
-    return str;
+    return nullptr;
   }
   return (*str >= 'A' && *str <= 'E') ? (str + 1) : hasLetter(str + 1);
 }
