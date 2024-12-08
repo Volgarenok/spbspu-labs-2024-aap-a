@@ -38,7 +38,38 @@ char * sharifullina::inputString(std::istream & in, char stop)
 
 char * sharifullina::shrSym(char * res, const char * str1, const char * str2)
 {
-  
+  bool lettersFound[26] = { false };
+  for (const char *ptr = str1; *ptr != '\0'; ++ptr)
+  {
+    if (*ptr >= 'a' && *ptr <= 'z')
+    {
+      lettersFound[*ptr - 'a'] = true;
+    }
+    else if (*ptr >= 'A' && *ptr <= 'Z')
+    {
+      lettersFound[*ptr - 'A'] = true;
+    }
+  }
+  for (const char *ptr = str2; *ptr != '\0'; ++ptr)
+  {
+    if (*ptr >= 'a' && *ptr <= 'z')
+    {
+      lettersFound[*ptr - 'a'] = true;
+    }
+    else if (*ptr >= 'A' && *ptr <= 'Z')
+    {
+      lettersFound[*ptr - 'A'] = true;
+    }
+  }
+  for (size_t i = 0; i < 26; ++i)
+  {
+    if (!lettersFound[i])
+    {
+      *res++ = 'a' + i;
+    }
+  }
+  *res = '\0';
+  return res;
 }
 char * sharifullina::uniTwo(char * res, const char * str1, const char * str2)
 {
