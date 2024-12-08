@@ -4,7 +4,7 @@ namespace
 {
   const char * is_factor_correct(const char *, int prev = 3);
   const char * is_term_correct(const char *, bool prev = 1);
-  const char * is_expression_correct(const char *, bool prev = 1, bool OpenFlag = 0);
+  const char * is_expression_correct(const char *, bool prev = 1, bool isBracketOpened = 0);
   bool is_letter(char, char cur = 'a');
   bool is_digit(char, char cur = '0');
   bool is_basic_symbol(char);
@@ -38,9 +38,9 @@ namespace
 
   const char * is_term_correct(const char *p, bool prev)
   {
-    if (p == nullptr)
+    if (!p)
     {
-      return nullptr;
+      return p;
     }
     if (is_basic_symbol(*p))
     {
@@ -72,7 +72,7 @@ namespace
     return p;
   }
 
-  const char * is_expression_correct(const char *p, bool prev, bool OpenFlag)
+  const char * is_expression_correct(const char *p, bool prev, bool isBracketOpened)
   {
     if (p == nullptr)
     {
@@ -80,7 +80,7 @@ namespace
     }
     if (is_basic_symbol(*p))
     {
-      return is_expression_correct(is_term_correct(p), 0, OpenFlag);
+      return is_expression_correct(is_term_correct(p), 0, isBracketOpened);
     }
     if (*p == '(')
     {
@@ -92,13 +92,13 @@ namespace
     }
     if (is_sign(*p))
     {
-      return is_expression_correct(++p, 1, OpenFlag);
+      return is_expression_correct(++p, 1, isBracketOpened);
     }
     if (*p == 0)
     {
       return p;
     }
-    if (OpenFlag && (*p == ')'))
+    if (isBracketOpened && (*p == ')'))
     {
       return p;
     }
