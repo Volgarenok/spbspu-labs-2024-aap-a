@@ -4,6 +4,9 @@
 int main()
 {
   char* str = dribas::enterStr(std::cin);
+  if (std::cin.eof()) {
+    return 0;
+  }
   if (!str) {
     return 1;
   }
