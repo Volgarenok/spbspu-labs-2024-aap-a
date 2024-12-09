@@ -122,7 +122,7 @@ kiselev::Complexquad* kiselev::make_complexquad(std::istream& input)
   point_t p4 = { x4, y4 };
   bool isIntersect = true;
   point_t centre = pointInter(p1, p2, p3, p4, isIntersect);
-  if (!isTriangle(p1, p4, centre) || !isTriangle(p2, p3, centre) || !isIntersect)
+  if (!isTriangle(p1, p4, centre) || !isTriangle(p2, p3, centre) || !isIntersect || (p4.x > p1.x && p3.x > p1.x))
   {
     throw std::invalid_argument("");
   }
