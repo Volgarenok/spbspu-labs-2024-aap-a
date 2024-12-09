@@ -88,6 +88,7 @@ int main()
         std::cin >> x >> y >> k;
         if (k <= 0)
         {
+          abramov::deleteShapes(shapes, i);
           std::cerr << "Wrong scale command\n";
           return 1;
         }
