@@ -62,6 +62,27 @@ int main()
           shapes[i++] = new abramov::Square(p, len);
         }
       }
+      if (s1 == "COMPLEXQUAD")
+      {
+        double x3 = 0;
+        double y3 = 0;
+        double x4 = 0;
+        double y4 = 0;
+        std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
+        abramov::point_t p1;
+        abramov::point_t p2;
+        abramov::point_t p3;
+        abramov::point_t p4;
+        p1.x = x1;
+        p1.y = y1;
+        p2.x = x2;
+        p2.y = y2;
+        p3.x = x3;
+        p3.y = y3;
+        p4.x = x4;
+        p4.y = y4;
+        shapes[i++] = new abramov::ComplexQuad(p1, p2, p3, p4);
+      }
       if (s1 == "SCALE")
       {
         std::cin >> x >> y >> k;
