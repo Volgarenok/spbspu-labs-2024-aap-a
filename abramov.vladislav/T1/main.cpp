@@ -137,4 +137,8 @@ int main()
   {
     std::cerr << "There was bad figure\n";
   }
+  for (size_t j = 0; j < i; ++j)
+  {
+    delete shapes[i];
+  }
 }
