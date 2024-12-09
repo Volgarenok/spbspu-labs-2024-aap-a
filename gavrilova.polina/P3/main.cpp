@@ -3,6 +3,7 @@
 #include <fstream>
 #include "upptri.hpp"
 
+
 namespace gavrilova {
   int checkNumOfArguments(int argc)
   {
@@ -48,7 +49,7 @@ int main(int argc, char ** argv)
   std::ifstream input(argv[2]);
   std::ofstream output(argv[3]);
 
-  size_t m = 0, n = 0;
+size_t m = 0, n = 0;
   input >> m >> n;
   if (!input) {
     return 2;
