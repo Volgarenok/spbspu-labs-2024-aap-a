@@ -32,6 +32,7 @@ int asafov::countUniqLetters(const char* string, size_t length)
       }
     }
   }
+  delete[] newstring;
   return count;
 }
 
