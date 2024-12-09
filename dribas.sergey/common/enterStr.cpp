@@ -25,7 +25,7 @@ char* dribas::enterStr(std::istream & input)
   *str = lastSymbol;
   std::noskipws(input);
   input >> enter;
-  while (enter != lastStrSymbol && !input.eof()) {
+  while (enter != lastStrSymbol) {
     if (!input && !input.eof()) {
       free(str);
       std::skipws(input);
