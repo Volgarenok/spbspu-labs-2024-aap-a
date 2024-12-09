@@ -1,7 +1,7 @@
 #include "inputStr.hpp"
 #include <istream>
 
-char* inputStr(std::istream& in, size_t & len)
+char* gavrilova::inputStr(std::istream& in, size_t & len)
 {
   char* result_str = nullptr;
   constexpr int K = 100;
