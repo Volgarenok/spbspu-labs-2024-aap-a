@@ -1,7 +1,7 @@
 #include "string.h"
 #include <cstddef>
 
-char frequentSymbol(const char* string)
+char ivanova::frequentSymbol(const char* string)
 {
   size_t count = 0;
   size_t max = 0;
@@ -24,7 +24,7 @@ char frequentSymbol(const char* string)
   return maxSym;
 }
 
-void twoFrequentSymbol(const char* string, char* dest)
+void ivanova::twoFrequentSymbol(const char* string, char* dest)
 {
   size_t count = 0;
   size_t max1 = 0, max2 = 0;
