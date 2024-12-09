@@ -5,11 +5,13 @@
 char* ivanova::getLine(std::istream& in)
 {
   size_t size = 10;
-  char* string = new char[size++];
-  char sym = '\0';
   size_t max = 0;
+  char* string = new char[size];
+  char sym = '\0';
   char* nstring = nullptr;
+
   in >> std::noskipws;
+  
   while((in >> sym) && (sym != '\n'))
   {
     if (max == size - 1)
@@ -19,19 +21,19 @@ char* ivanova::getLine(std::istream& in)
       try
       {
         nstring = ivanova::moreSpace(string, size);
+        delete[] string;
+        string = nstring;
       }
       catch(const std::bad_alloc& e)
       {
         delete[] string;
         throw;
       }
-      delete[] string;
-      string = nstring;
     }
-    string[size++] = sym;
+    string[max++] = sym;
   }
-  std::skipws(in);
-  string[size] = '\0';
+
+  string[max] = '\0';
   return string;
 }
 
