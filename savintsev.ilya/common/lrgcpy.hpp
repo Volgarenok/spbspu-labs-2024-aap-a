@@ -8,9 +8,17 @@ namespace savintsev
   T * createAmpCpyAny(const T * old, size_t old_size, size_t new_size)
   {
     T * created = new T[new_size];
-    for (size_t i = 0; i < old_size; ++i)
+    try
     {
-      created[i] = old[i];
+      for (size_t i = 0; i < old_size; ++i)
+      {
+        created[i] = old[i];
+      }
+    }
+    catch (...)
+    {
+      delete created;
+      return nullptr;
     }
     return created;
   }

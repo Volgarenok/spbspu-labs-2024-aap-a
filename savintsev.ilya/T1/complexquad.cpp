@@ -1,18 +1,18 @@
 #include "complexquad.hpp"
 #include <cmath>
 
-savintsev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4)
+savintsev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4) :
+  p1_(p1),
+  p2_(p2),
+  p3_(p3),
+  p4_(p4)
 {
   bool wasFounded = true;
-  point_t center = findLinesIntersect(p1, p2, p3, p4, &wasFounded);
-  if (!wasFounded || !isTriangle(p1, p4, center) || !isTriangle(p2, p3, center))
+  point_t center = findLinesIntersect(p1_, p2_, p3_, p4_, &wasFounded);
+  if (!wasFounded || !isTriangle(p1_, p4_, center) || !isTriangle(p2_, p3_, center))
   {
     throw std::invalid_argument("ERROR: Invalid argumets for Complexquad");
   }
-  this->p1_ = p1;
-  this->p2_ = p2;
-  this->p3_ = p3;
-  this->p4_ = p4;
 }
 
 double savintsev::Complexquad::getArea() const

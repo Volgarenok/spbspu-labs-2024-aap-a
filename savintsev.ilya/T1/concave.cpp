@@ -1,16 +1,16 @@
 #include "concave.hpp"
 #include <cmath>
 
-savintsev::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4)
+savintsev::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4) :
+  p1_(p1),
+  p2_(p2),
+  p3_(p3),
+  p4_(p4)
 {
-  if (!isTriangle(p1, p2, p3) || !isPointInTriangle(p1, p2, p3, p4))
+  if (!isTriangle(p1_, p2_, p3_) || !isPointInTriangle(p1_, p2_, p3_, p4_))
   {
     throw std::invalid_argument("ERROR: Invalid argumets for Concave");
   }
-  this->p1_ = p1;
-  this->p2_ = p2;
-  this->p3_ = p3;
-  this->p4_ = p4;
 }
 
 double savintsev::Concave::getArea() const

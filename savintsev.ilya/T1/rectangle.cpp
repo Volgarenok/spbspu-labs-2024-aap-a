@@ -2,16 +2,14 @@
 #include <cmath>
 #include <stdexcept>
 
-savintsev::Rectangle::Rectangle(point_t lhs, point_t rhs)
+savintsev::Rectangle::Rectangle(point_t lhs, point_t rhs) :
+  pLowLeft_(lhs),
+  pUpRight_(rhs)
 {
-  if (lhs.x >= rhs.x || lhs.y >= rhs.y)
+  if (pLowLeft_.x >= pUpRight_.x || pLowLeft_.y >= pUpRight_.y)
   {
     throw std::invalid_argument("ERROR: Invalid argumets for Rectangle");
   }
-  this->pLowLeft_.x = lhs.x;
-  this->pLowLeft_.y = lhs.y;
-  this->pUpRight_.x = rhs.x;
-  this->pUpRight_.y = rhs.y;
 }
 
 double savintsev::Rectangle::getArea() const
