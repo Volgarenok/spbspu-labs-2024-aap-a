@@ -17,7 +17,6 @@ char* ivanova::getLine(std::istream& in)
     if (max == size - 1)
     {
       size += 10;
-      string[size] = '\0';
       try
       {
         nstring = ivanova::moreSpace(string, size);
