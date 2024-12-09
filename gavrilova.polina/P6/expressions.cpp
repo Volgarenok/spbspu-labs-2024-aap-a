@@ -1,6 +1,16 @@
 #include <iostream>
 #include "expressions.hpp"
 
+namespace gavrilova {
+  const char * is_symbol(const char * str, const  char * c);
+  const char * has_identificator(const char * str);
+  const char * has_digit(const char * str);
+  const char * has_unsigned_int(const char * str);
+  const char * has_multiplyer(const char * str);
+  const char * has_term(const char * str);
+  const char * has_expression (const char *  str);
+}
+
 const char * gavrilova::is_symbol(const char * str, const  char * c)
 {
   if (!str) {
