@@ -12,6 +12,14 @@ nikonov::Shape* nikonov::make_shape(std::string name, float nums[])
   }
   else if (name == "DIAMOND")
   {
+    return make_diamond(nums);
+  }
+  else if (name == "TRIANGLE")
+  {
+    return nullptr;
+  }
+  else
+  {
     return nullptr;
   }
 }
