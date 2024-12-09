@@ -20,7 +20,7 @@ int main(int argc, char ** argv)
     return 1;
   }
 
-  if ((argv[1][0] != '1' && argv[1][0] != '2'))
+  if (argv[1][0] != '1' && argv[1][0] != '2')
   {
     std::cerr << "First parameter is must be 1 or 2!" << '\n';
     return 1;
@@ -57,7 +57,7 @@ int main(int argc, char ** argv)
       dynamArr = new int[m * n];
       matrix = dynamArr;
     }
-    catch(const std::bad_alloc & e)
+    catch (const std::bad_alloc & e)
     {
       delete[] dynamArr;
       std::cerr << "Out of memory!" << '\n';
@@ -71,7 +71,8 @@ int main(int argc, char ** argv)
     return 2;
   }
 
-  output << ivanova::num_col_lsr(matrix, m, n);
-  output << ivanova::min_sum_mdg(matrix, m, n);
+  output << ivanova::num_col_lsr(matrix, m, n) << '\n';
+
+  output << ivanova::min_sum_mdg(matrix, m, n) << '\n';
   delete[] dynamArr;
 }
