@@ -5,10 +5,10 @@ int main()
 {
   char* str = dribas::enterStr(std::cin);
   if (std::cin.eof()) {
-    return 0;
+    return 1;
   }
   if (!str) {
-    return 1;
+    return 0;
   }
   std::cout << std::boolalpha << dribas::isValidString(str) << '\n';
   free(str);
