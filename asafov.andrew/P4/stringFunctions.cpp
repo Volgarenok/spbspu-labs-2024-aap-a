@@ -15,7 +15,7 @@ int asafov::countUniqLetters(const char* string, size_t length)
   size_t count = 0;
   for(size_t i = 0; i < length; i++)
   {
-    if(isLetter(alphabet[i]))
+    if(isLetter(string[i]))
     {
       for(int j = 0; j < 26; j++)
       {
@@ -47,7 +47,7 @@ char* asafov::getUnusedLetters(const char* string, size_t length)
   size_t count = 0;
   for(size_t i = 0; i < length; i++)
   {
-    if(isLetter(alphabet[i]))
+    if(isLetter(string[i]))
     {
       for(int j = 0; j < 26; j++)
       {
