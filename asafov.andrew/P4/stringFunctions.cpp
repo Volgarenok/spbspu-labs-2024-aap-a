@@ -11,28 +11,33 @@ bool asafov::isLetter(char ch)
 
 int asafov::countUniqLetters(const char* string, size_t length)
 {
-  char* newstring = new char[length];
-  int count = 0;
-  for (size_t i = 0; i < length; i++)
+  char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
+  size_t count = 0;
+  for(size_t i = 0; i < length; i++)
   {
-    if(isLetter(string[i]))
+    if(isLetter(alphabet[i]))
     {
-      int a = 0;
-      for(size_t j =0; j < length; j++)
+      for(int j = 0; j < 26; j++)
       {
-        if (string[i] == newstring[j] || (string[i] - 32) == newstring[j])
+        if(string[i] == alphabet[j] || (string[i]-32) == alphabet[j])
         {
-          a++;
+          alphabet[j] = 0;
+          count++;
         }
-      }
-      if (a==0)
-      {
-        newstring[count] = string[i];
-        count++;
       }
     }
   }
-  delete[] newstring;
+  char* unusedLetters = new char[count+1];
+  count = 0;
+  for(size_t i = 0; i < 26; i++)
+  {
+    if(alphabet[i]!=0)
+    {
+      unusedLetters[count]=alphabet[i];
+      count++;
+    }
+  }
+  delete[] unusedLetters;
   return count;
 }
 
