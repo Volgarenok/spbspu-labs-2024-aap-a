@@ -5,7 +5,7 @@
 int main()
 {
   size_t len = 0;
-  char* first_str = inputStr(std::cin, len);
+  char* first_str = gavrilova::inputStr(std::cin, len);
 
   if (!first_str) {
     std::cerr << "Memory error\n";
@@ -26,7 +26,7 @@ int main()
     return 1;
   }
 
-  gavrilova::rm_digits(first_str, result_str, len);
+  gavrilova::rm_digits(first_str, result_str);
   std::cout << result_str << "\n";
   delete[] result_str;
   delete[] first_str;
