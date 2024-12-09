@@ -4,8 +4,8 @@
 
 namespace kushekbaev
 {
-  const char * hasNumberRecursive(const char * str, const char * numbers, int index);
-  const char * hasLetterRecursive(const char * str, const char * letters, int index);
+  const char * hasNumberRecursive(const char * str, const char * numbers, size_t index);
+  const char * hasLetterRecursive(const char * str, const char * letters, size_t index);
   const char * hasCharacter(const char * str, char c);
   const char * hasLetter(const char * str);
   const char * hasNumber(const char * str);
