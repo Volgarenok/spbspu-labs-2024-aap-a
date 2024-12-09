@@ -39,9 +39,10 @@ char* ivanova::getLine(std::istream& in)
 char* ivanova::moreSpace(const char* string, size_t newSize)
 {
   char* nstring = new char[newSize];
-  for (size_t i = 0; i < newSize - 1; ++i)
+  for (size_t i = 0; i < newSize - 1 && string[i] != '\0'; ++i)
   {
     nstring[i] = string[i];
   }
+  nstring[newSize - 1] = '\0';
   return nstring;
 }
