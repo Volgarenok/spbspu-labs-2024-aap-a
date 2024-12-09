@@ -10,7 +10,7 @@ namespace abramov
     double x2 = r.pos.x + r.width / 2;
     double y2 = r.pos.y + r.height / 2;
     std::cout << x1 << " " << y1 << " ";
-    std::cout << x2 << " " << y2 << " ";
+    std::cout << x2 << " " << y2;
   }
   void scaleFigure(Shape *r, point_t p, double k)
   {

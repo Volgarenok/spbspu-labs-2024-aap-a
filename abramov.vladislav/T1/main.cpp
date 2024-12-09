@@ -99,6 +99,11 @@ int main()
     std::cerr << "Memory fail\n";
     return 2;
   }
+  if (i == 0)
+  {
+    std::cerr << "There is no figures\n";
+    return 1;
+  }
   if (k <= 0)
   {
     std::cerr << "There is no scale command\n";
@@ -115,11 +120,13 @@ int main()
   abramov::point_t p;
   p.x = x;
   p.y = y;
-  for (size_t j = 0; j < i; ++j)
+  for (size_t j = 0; j < i - 1; ++j)
   {
     abramov::printFrameRectCoords(rects[j]);
+    std::cout << " ";
     abramov::scaleFigure(shapes[j], p, k);
   }
+  abramov::printFrameRectCoords(rects[i - 1]);
   std::cout << "\n";
   s = 0;
   for (size_t j = 0; j < i; ++j)
@@ -128,10 +135,12 @@ int main()
     rects[j] = shapes[j]->getFrameRect();
   }
   std::cout << s << " ";
-  for (size_t j = 0; j < i; ++j)
+  for (size_t j = 0; j < i - 1; ++j)
   {
     abramov::printFrameRectCoords(rects[j]);
+    std::cout << " ";
   }
+  abramov::printFrameRectCoords(rects[i - 1]);
   std::cout << "\n";
   if (wrong_figure == true)
   {
