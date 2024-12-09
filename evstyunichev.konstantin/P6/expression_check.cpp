@@ -117,7 +117,7 @@ namespace
     }
     if (cur == 'f')
     {
-      is_letter(c, 'x');
+      return is_letter(c, 'x');
     }
     return is_letter(c, cur + 1);
   }
