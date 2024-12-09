@@ -127,6 +127,7 @@ int main()
     abramov::scaleFigure(shapes[j], p, k);
   }
   abramov::printFrameRectCoords(rects[i - 1]);
+  abramov::scaleFigure(shapes[i - 1], p, k);
   std::cout << "\n";
   s = 0;
   for (size_t j = 0; j < i; ++j)
