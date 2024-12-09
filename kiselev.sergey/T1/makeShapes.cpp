@@ -25,8 +25,8 @@ namespace
     double C1 = p1.x * A1 + p1.y * B1;
     double A2 = p4.y - p3.y;
     double B2 = p4.x - p3.x;
-    double C2 = p3.x * A2 + p3.y * B2;
-    double determiner = A1 * B2 - B1 * B2;
+    double C2 = p3.x * (A2) + p3.y * (B2);
+    double determiner = A1 * B2 - B1 * A2;
     if (determiner == 0)
     {
       isIntersect = false;
