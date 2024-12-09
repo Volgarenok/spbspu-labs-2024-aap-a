@@ -10,11 +10,11 @@ namespace gavrilova {
     void move(point_t p) override;
     void move(double difX, double difY) override;
     void scale(double k) override;
+    point_t getCenter();
   private:
     point_t A_;
     point_t B_;
     point_t C_;
-    point_t center_;
   };
   bool isTriangle(point_t A, point_t B, point_t C);
   double getDistance(point_t A, point_t B);

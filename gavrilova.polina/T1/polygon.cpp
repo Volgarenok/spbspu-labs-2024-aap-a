@@ -3,10 +3,10 @@
 #include <cmath>
 #include <iostream>
 
-gavrilova::Polygon::Triangle(size_t size, point_t * verteces)
-{
-  //не забыть про центр
-}
+gavrilova::Polygon::Polygon(size_t size, point_t * verteces):
+size_(size), verteces_(verteces)
+{}
+
 double gavrilova::Polygon::getArea() const
 {
   double S = 0;
@@ -15,8 +15,8 @@ double gavrilova::Polygon::getArea() const
     sum1 += (verteces_[i].x * verteces_[i+1].y);
     sum2 += (verteces_[i].y * verteces_[i+1].x);
   }
-  sum1 += (verteces_[size_ - 1].x * verteces_[0].y)
-  sum2 += (verteces_[size_ - 1].y * verteces_[0].x)
+  sum1 += (verteces_[size_ - 1].x * verteces_[0].y);
+  sum2 += (verteces_[size_ - 1].y * verteces_[0].x);
   S = (sum1 - sum2) / 2;
   return S;
 }
@@ -36,30 +36,34 @@ gavrilova::rectangle_t gavrilova::Polygon::getFrameRect() const {
   return resultRect;
 }
 void gavrilova::Polygon::move(point_t p) {
-  double difX = p.x - center_.x;
-  double difY = p.y - center_.y;
-  A_.x += difX;
-  A_.y += difY;
-  B_.x += difX;
-  B_.y += difY;
-  C_.x += difX;
-  C_.y += difY;
-  center_.x = p.x;
-  center_.y = p.y;
+  point_t center = getCenter();
+  double difX = p.x - center.x;
+  double difY = p.y - center.y;
+  for (size_t i = 1; i < size_; ++i) {
+    verteces_[i].x += difX;
+    verteces_[i].y += difY;
+  }
 }
-void gavrilova::Triangle::move(double difX, double difY) {
-  A_.x += difX;
-  A_.y += difY;
-  B_.x += difX;
-  B_.y += difY;
-  C_.x += difX;
-  C_.y += difY;
+void gavrilova::Polygon::move(double difX, double difY) {
+  for (size_t i = 1; i < size_; ++i) {
+    verteces_[i].x += difX;
+    verteces_[i].y += difY;
+  }
 }
-void gavrilova::Triangle::scale(double k) {
-  A_.x = center_.x - (center_.x - A_.x) / 2 * k;
-  A_.y = center_.y - (center_.y - A_.y) / 2 * k;
-  B_.x = center_.x - (center_.x - B_.x) / 2 * k;
-  B_.y = center_.y - (center_.y - B_.y) / 2 * k;
-  C_.x = center_.x - (center_.x - C_.x) / 2 * k;
-  C_.y = center_.y - (center_.y - C_.y) / 2 * k;
+void gavrilova::Polygon::scale(double k) {
+  point_t center = getCenter();
+  for (size_t i = 1; i < size_; ++i) {
+    verteces_[i].x = center.x - (center.x - verteces_[i].x) / 2 * k;
+    verteces_[i].y = center.y - (center.y - verteces_[i].y) / 2 * k;
+  }
+}
+gavrilova::point_t gavrilova::Polygon::getCenter() {
+  double xC = 0, yC = 0;
+  for (size_t i = 0; i <size_; ++i) {
+    xC += verteces_[i].x;
+    yC += verteces_[i].y;
+  }
+  xC /= size_;
+  yC /= size_;
+  return {xC, yC};
 }
