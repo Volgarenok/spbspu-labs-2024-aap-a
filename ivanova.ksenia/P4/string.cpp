@@ -6,7 +6,7 @@ char* ivanova::getLine(std::istream& in)
 {
   size_t size = 10;
   size_t max = 0;
-  char* string = new char[size];
+  char* string = new char[size + 1];
   char sym = '\0';
   char* nstring = nullptr;
 
@@ -38,12 +38,12 @@ char* ivanova::getLine(std::istream& in)
 
 char* ivanova::moreSpace(const char* string, size_t newSize)
 {
-  char* nstring = new char[newSize];
-  for (size_t i = 0; i < newSize - 1; ++i)
+  char* nstring = new char[newSize + 1];
+  for (size_t i = 0; i < newSize; ++i)
   {
     if (string[i] == '\0') break;
     nstring[i] = string[i];
   }
-  nstring[newSize - 1] = '\0';
+  nstring[newSize] = '\0';
   return nstring;
 }
