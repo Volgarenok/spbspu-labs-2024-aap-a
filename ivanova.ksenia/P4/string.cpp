@@ -11,7 +11,7 @@ char* ivanova::getLine(std::istream& in)
   char* nstring = nullptr;
 
   in >> std::noskipws;
-  
+
   while((in >> sym) && (sym != '\n'))
   {
     if (max == size - 1)
