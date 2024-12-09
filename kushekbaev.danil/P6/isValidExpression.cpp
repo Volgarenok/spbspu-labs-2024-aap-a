@@ -1,4 +1,4 @@
-#include "recursion.hpp"
+#include "is_valid_expression.hpp"
 #include <cctype>
 
 namespace kushekbaev
@@ -29,12 +29,12 @@ const char * kushekbaev::hasLetter(const char * str)
   {
     return nullptr;
   }
-  int index = 0;
+  size_t index = 0;
   char letters[] = {'A', 'B', 'C', 'D', 'E', '\0'};
   return hasLetterRecursive(str, letters, index);
 }
 
-const char * kushekbaev::hasLetterRecursive(const char * str, const char * letters, int index)
+const char * kushekbaev::hasLetterRecursive(const char * str, const char * letters, size_t index)
 {
   if (letters[index] == '\0')
   {
@@ -59,12 +59,12 @@ const char * kushekbaev::hasNumber(const char * str)
   {
     return nullptr;
   }
-  int index = 0;
+  size_t index = 0;
   char numbers[] = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '\0'};
   return hasNumberRecursive(str, numbers, index);
 }
 
-const char * kushekbaev::hasNumberRecursive(const char * str, const char * numbers, int index)
+const char * kushekbaev::hasNumberRecursive(const char * str, const char * numbers, size_t index)
 {
   if (numbers[index] == '\0')
   {
