@@ -11,7 +11,8 @@ int main()
     delete[] str;
     return 1;
   }
-  int count = asafov::countUniqLetters(str, lenght);
+  int count = 0;
+  count = asafov::countUniqLetters(str, lenght);
   std::cout<<count<<'\n';
   char* unusedLetters = asafov::getUnusedLetters(str, lenght);
   for(unsigned long long i = 0; unusedLetters[i] != 0; i++)

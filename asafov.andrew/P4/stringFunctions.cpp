@@ -20,7 +20,7 @@ int asafov::countUniqLetters(const char* string, size_t length)
       int a = 0;
       for(size_t j =0; j < length; j++)
       {
-        if (string[i] == newstring[j] || string[i-32] == newstring[j])
+        if (string[i] == newstring[j] || (string[i] - 32) == newstring[j])
         {
           a++;
         }
