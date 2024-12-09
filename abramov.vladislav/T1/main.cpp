@@ -96,16 +96,19 @@ int main()
   }
   catch (const std::bad_alloc &e)
   {
+    abramov::deleteShapes(shapes, i);
     std::cerr << "Memory fail\n";
     return 2;
   }
   if (i == 0)
   {
+    abramov::deleteShapes(shapes, i);
     std::cerr << "There is no figures\n";
     return 1;
   }
   if (k <= 0)
   {
+    abramov::deleteShapes(shapes, i);
     std::cerr << "There is no scale command\n";
     return 1;
   }
@@ -147,8 +150,5 @@ int main()
   {
     std::cerr << "There was bad figure\n";
   }
-  for (size_t j = 0; j < i; ++j)
-  {
-    delete shapes[j];
-  }
+  abramov::deleteShapes(shapes, i);
 }
