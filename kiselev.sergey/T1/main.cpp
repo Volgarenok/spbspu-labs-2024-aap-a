@@ -26,8 +26,8 @@ namespace
       kiselev::point_t beforeScale = shapes[i]->getFrameRect().pos;
       shapes[i]->move(scale);
       kiselev::point_t afterScale = shapes[i]->getFrameRect().pos;
-      shapes[i]->scale(ratio);
       kiselev::point_t vector = { (afterScale.x - beforeScale.x) * ratio, (afterScale.y - beforeScale.y) * ratio };
+      shapes[i]->scale(ratio);
       shapes[i]->move(-vector.x, -vector.y);
     }
   }

@@ -8,16 +8,20 @@ kiselev::Diamond::Diamond(kiselev::point_t center, kiselev::point_t pVertical, p
 }
 double kiselev::Diamond::getArea() const
 {
-  return std::fabs((center_.x - pHorizontal_.x) * (center_.y - pVertical_.y) * 4);
+  return std::fabs((center_.x - pHorizontal_.x) * (center_.y - pVertical_.y) * 2);
 }
 kiselev::rectangle_t kiselev::Diamond::getFrameRect() const
 {
-  return { std::fabs((center_.x - pHorizontal_.x)), std::fabs((center_.y - pVertical_.y) * 2), center_ };
+  return { std::fabs((center_.x - pHorizontal_.x)) * 2, std::fabs((center_.y - pVertical_.y) * 2), center_ };
 }
 void kiselev::Diamond::move(double dx, double dy)
 {
   center_.x += dx;
-  center_.x += dy;
+  center_.y += dy;
+  pVertical_.x += dx;
+  pVertical_.y += dy;
+  pHorizontal_.x += dx;
+  pHorizontal_.y += dy;
 }
 void kiselev::Diamond::move(kiselev::point_t a)
 {
@@ -32,6 +36,6 @@ void kiselev::Diamond::move(kiselev::point_t a)
 void kiselev::Diamond::scale(double k)
 {
   pVertical_.y = center_.y + (pVertical_.y - center_.y) * k;
-  pHorizontal_.x = center_.x + (pVertical_.x - center_.x) * k;
+  pHorizontal_.x = center_.x + (pHorizontal_.x - center_.x) * k;
 }
 
