@@ -1,11 +1,12 @@
 #include <iostream>
 #include <dynamicinput.h>
-#include "recfunc.h"
+#include "parseexpr.h"
 
-int main() {
+int main()
+{
   char* input = nullptr;
   input = averenkov::stringInput(std::cin);
-  if(input[0] == '\0')
+  if (input[0] == '\0')
   {
     std::cerr << "Empty string";
     free(input);
@@ -16,7 +17,7 @@ int main() {
     std::cerr << "Memory error\n";
     return 1;
   }
-  std::cout << std::boolalpha << averenkov::parse(input) << "\n";
+  std::cout << std::boolalpha << averenkov::hasParseExpression(input) << "\n";
   free(input);
   return 0;
 }

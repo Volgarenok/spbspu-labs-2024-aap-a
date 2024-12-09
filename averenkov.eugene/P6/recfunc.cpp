@@ -1,16 +1,16 @@
-#include "recfunc.h"
-#include <iostream>
+#include "parseexpr.h"
 #include <cctype>
+#include <cstddef>
 
 namespace averenkov
 {
-  bool hasExpression(char* str, size_t& index);
-  bool hasTerm(char* str, size_t& index);
-  bool hasFactor(char* str, size_t& index);
-  bool hasNumber(char* str, size_t& index);
+  bool hasExpression(const char* str, size_t& index);
+  bool hasTerm(const char* str, size_t& index);
+  bool hasFactor(const char* str, size_t& index);
+  bool hasNumber(const char* str, size_t& index);
 }
 
-bool averenkov::hasExpression(char* str, size_t& index)
+bool averenkov::hasExpression(const char* str, size_t& index)
 {
   if (!averenkov::hasTerm(str, index))
   {
@@ -27,24 +27,22 @@ bool averenkov::hasExpression(char* str, size_t& index)
   return true;
 }
 
-bool averenkov::hasTerm(char* str, size_t& index)
+bool averenkov::hasTerm(const char* str, size_t& index)
 {
   if (!averenkov::hasFactor(str, index))
   {
     return false;
   }
-  while (str[index] == '*' || str[index] == '/')
+  if (str[index] == '*' || str[index] == '/')
   {
     index++;
-    if (!averenkov::hasTerm(str, index))
-    {
-      return false;
-    }
+    return averenkov::hasTerm(str, index);
   }
   return true;
 }
 
-bool averenkov::hasNumber(char* str, size_t& index) {
+bool averenkov::hasNumber(const char* str, size_t& index)
+{
   bool hasDigits = false;
   if (str[index] == '+' || str[index] == '-')
   {
@@ -81,7 +79,7 @@ bool averenkov::hasNumber(char* str, size_t& index) {
   return hasDigits;
 }
 
-bool averenkov::hasFactor(char* str, size_t& index)
+bool averenkov::hasFactor(const char* str, size_t& index)
 {
   if (std::isalpha(str[index]))
   {
@@ -91,7 +89,7 @@ bool averenkov::hasFactor(char* str, size_t& index)
   return averenkov::hasNumber(str, index);
 }
 
-bool averenkov::parse(char* str)
+bool averenkov::hasParseExpression(const char* str)
 {
   size_t index = 0;
   if (averenkov::hasExpression(str, index) && str[index] == '\0')
