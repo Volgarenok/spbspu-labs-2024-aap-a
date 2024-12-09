@@ -46,7 +46,7 @@ char* asafov::getUnusedLetters(const char* string, size_t length)
     {
       for(int j = 0; j < 26; j++)
       {
-        if(string[i] == alphabet[j] || (string[i-]-32) == alphabet[j])
+        if(string[i] == alphabet[j] || (string[i]-32) == alphabet[j])
         {
           alphabet[j] = 0;
           count++;
