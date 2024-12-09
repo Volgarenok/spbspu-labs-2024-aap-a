@@ -28,7 +28,7 @@ namespace abramov
 
   void deleteShapes(Shape **x, size_t i)
   {
-    for (size_t j = 0; i < j; ++j)
+    for (size_t j = 0; j < i; ++j)
     {
       delete x[j];
     }
