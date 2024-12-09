@@ -10,8 +10,10 @@ int main()
     delete[] string;
     return 1;
   }
-  std::cout << ivanova::/дайте вариант/(string) << '\n';
-  std::cout << ivanova::/дайте вариант/(string) << '\n';
+  char dest[3] = {};
+  ivanova::twoFrequentSymbol(string, dest);
+  std::cout << ivanova::frequentSymbol(string) << '\n';
+  std::cout << dest << '\n';
   delete[] string;
   return 0;
 }
