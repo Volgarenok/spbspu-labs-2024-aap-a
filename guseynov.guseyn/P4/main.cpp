@@ -10,6 +10,11 @@ int main()
   {
     return 1;
   }
+  if (arr[0] == '\0')
+  {
+    free(arr);
+    return 1;
+  }
   std::cout << guseynov::determiningNumOfLetters(arr) << "\n";
   free(arr);
   return 0;
