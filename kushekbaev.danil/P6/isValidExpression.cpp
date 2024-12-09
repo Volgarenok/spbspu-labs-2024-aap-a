@@ -1,5 +1,6 @@
 #include "is_valid_expression.hpp"
 #include <cctype>
+#include <cstddef>
 
 namespace kushekbaev
 {
