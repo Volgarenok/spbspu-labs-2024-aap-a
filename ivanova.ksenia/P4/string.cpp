@@ -41,6 +41,7 @@ char* ivanova::moreSpace(const char* string, size_t newSize)
   char* nstring = new char[newSize];
   for (size_t i = 0; i < newSize - 1; ++i)
   {
+    if (string[i] == '\0') break;
     nstring[i] = string[i];
   }
   nstring[newSize - 1] = '\0';
