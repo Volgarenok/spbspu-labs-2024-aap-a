@@ -9,11 +9,11 @@ namespace tkach
   {
   public:
     Ring(point_t center, double outer_radius, double inner_radius);
-    double getArea() const noexcept override;
-    rectangle_t getFrameRect() const noexcept;
-    void move(double add_to_x, double add_to_y) noexcept override;
-    void move(point_t point_to_move) noexcept override;
-    void scale(double multiplier) noexcept override;
+    double getArea() const override;
+    rectangle_t getFrameRect() const;
+    void move(double add_to_x, double add_to_y) override;
+    void move(point_t point_to_move) override;
+    void scale(double multiplier) override;
   private:
     point_t center_;
     double outer_radius_;

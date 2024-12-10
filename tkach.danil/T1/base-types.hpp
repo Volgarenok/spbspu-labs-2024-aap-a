@@ -1,7 +1,7 @@
 #ifndef BASE_TYPES_HPP
 #define BASE_TYPES_HPP
 
-namespace tkach 
+namespace tkach
 {
   struct point_t
   {

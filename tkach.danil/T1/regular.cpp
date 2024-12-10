@@ -10,7 +10,7 @@ namespace tkach
   }
   bool isEqualPoints(point_t point1, point_t point2)
   {
-    if (point1.x == point2.x && point1.y == point2.y) 
+    if (point1.x == point2.x && point1.y == point2.y)
     {
       return true;
     }
@@ -28,7 +28,10 @@ namespace tkach
     }
   }
 }
-tkach::Regular::Regular(point_t first_point, point_t second_point, point_t third_point)
+tkach::Regular::Regular(point_t first_point, point_t second_point, point_t third_point):
+  first_point_(first_point),
+  second_point_(second_point),
+  third_point_(third_point)
 {
   double first_side = getDist(first_point, second_point);
   double second_side = getDist(second_point, third_point);
@@ -42,11 +45,8 @@ tkach::Regular::Regular(point_t first_point, point_t second_point, point_t third
   {
     throw std::logic_error("Triangle doesn`t exist");
   }
-  first_point_ = first_point;
-  second_point_ = second_point;
-  third_point_ = third_point;
 }
-double tkach::Regular::getArea() const noexcept
+double tkach::Regular::getArea() const
 {
   double first_side = getDist(first_point_, second_point_);
   double second_side = getDist(second_point_, third_point_);
@@ -54,7 +54,7 @@ double tkach::Regular::getArea() const noexcept
   getMaxSide(first_side, second_side, third_side);
   return (second_side * third_side * 2.0 * M_PI / asin(third_side * second_side * 2.0 / (first_side * first_side)));
 }
-tkach::rectangle_t tkach::Regular::getFrameRect() const noexcept
+tkach::rectangle_t tkach::Regular::getFrameRect() const
 {
   double first_side = getDist(first_point_, second_point_);
   double second_side = getDist(second_point_, third_point_);
@@ -67,16 +67,16 @@ tkach::rectangle_t tkach::Regular::getFrameRect() const noexcept
   frame_rect.pos.y = first_point_.y;
   return frame_rect;
 }
-void tkach::Regular::move(double add_to_x, double add_to_y) noexcept
+void tkach::Regular::move(double add_to_x, double add_to_y)
 {
   first_point_.x += add_to_x;
   first_point_.y += add_to_y;
 }
-void tkach::Regular::move(point_t point_to_move) noexcept
+void tkach::Regular::move(point_t point_to_move)
 {
   first_point_ = point_to_move;
 }
-void tkach::Regular::scale(double multiplier) noexcept
+void tkach::Regular::scale(double multiplier)
 {
   second_point_.x = first_point_.x + (second_point_.x - first_point_.x) * multiplier;
   second_point_.y = first_point_.y + (second_point_.y - first_point_.y) * multiplier;
