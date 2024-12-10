@@ -10,7 +10,8 @@
 #include <cstring>
 #include <cmath>
 
-int main() {
+int main()
+{
   averenkov::Shape* shapes[10000];
   size_t shapeCount = 0;
   bool hasErrors = false;
@@ -59,7 +60,7 @@ int main() {
         averenkov::point_t a;
         averenkov::point_t b;
         averenkov::point_t c;
-        if(!(line >> a.x >> a.y >> b.x >> b.y >> c.x >> c.y))
+        if (!(line >> a.x >> a.y >> b.x >> b.y >> c.x >> c.y))
         {
           throw std::invalid_argument("Invalid DIAMOND");
         }
@@ -90,7 +91,8 @@ int main() {
     free(input);
   }
 
-  if (std::cin.eof() && shapeCount == 0) {
+  if (std::cin.eof() && shapeCount == 0)
+  {
     std::cerr << "No scale\n";
     return 1;
   }
