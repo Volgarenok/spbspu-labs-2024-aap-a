@@ -1,5 +1,6 @@
 #include "isExpression.hpp"
 #include <cctype>
+#include <memory>
 
 bool correctSymbol(const char* c)
 {
@@ -76,5 +77,5 @@ bool lebedev::hasExpression(const char** str)
 
 bool lebedev::isExpression(const char* str)
 {
-  return (hasExpression(&str) && (*str == '\0'));
+  return (hasExpression(std::addressof(str)) && (*str == '\0'));
 }
