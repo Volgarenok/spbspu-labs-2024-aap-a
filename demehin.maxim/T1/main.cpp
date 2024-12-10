@@ -197,20 +197,20 @@ int main()
       if (isBadPolygon)
       {
         is_incorrect_shp = true;
+        delete[] vrt;
         continue;
       }
       try
       {
         shapes[shp_cnt++] = new demehin::Polygon(cord_cnt, vrt);
+        delete[] vrt;
       }
       catch (std::bad_alloc& e)
       {
         free_shapes(shapes, shp_cnt);
-        delete[] vrt;
         std::cerr << "bad alloc\n";
         return 1;
       }
-      delete[] vrt;
       shape_name = "";
     }
     //else if (shape_name == "POLYGON")
