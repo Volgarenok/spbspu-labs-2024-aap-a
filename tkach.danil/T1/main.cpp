@@ -14,7 +14,6 @@ namespace
       {
         delete[] shape_array[i];
       }
-      delete[] shape_array;
   }
   double getTotalArea(tkach::Shape** shape_array, size_t counter_of_shapes)
   {
@@ -65,15 +64,15 @@ int main()
   while(true)
   {
     std::cin >> shape_name;
-    if (shape_name.empty())
-    {
-      continue;
-    }
     if (std::cin.eof())
     {
       deleteShapes(shapes_array, counter_of_shapes);
       std::cerr << "Error: not enough arguments\n";
       return 1;
+    }
+    if (shape_name.empty())
+    {
+      continue;
     }
     if (shape_name == "RECTANGLE")
     {
