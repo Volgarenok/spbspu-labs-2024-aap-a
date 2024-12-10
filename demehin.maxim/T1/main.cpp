@@ -10,7 +10,7 @@
 namespace
 {
   void makeIsoScale(demehin::Shape** shapes, size_t shp_cnt, double scale_k, demehin::point_t& scale_pt)
-{
+  {
     for (size_t i = 0; i < shp_cnt; i++)
     {
         demehin::point_t orig_pt = shapes[i]->getFrameRect().pos;
@@ -22,7 +22,7 @@ namespace
         shapes[i]->scale(scale_k);
         shapes[i]->move(move_vector.x * -1, move_vector.y * -1);
     }
-}
+  }
 
   double getAreaSum(demehin::Shape** shapes, size_t shp_cnt)
   {
@@ -42,7 +42,7 @@ namespace
     rty = fr_rect.pos.y + fr_rect.height / 2;
   }
 
-  void printFrRectCords(std::ostream& out, demehin::Shape* shapes[], size_t shp_cnt)
+  void printFrRectCords(std::ostream& out, demehin::Shape** shapes, size_t shp_cnt)
   {
     for (size_t i = 0; i < shp_cnt; i++)
     {
@@ -81,6 +81,32 @@ namespace
     }
     return false;
   }
+
+  void inputPolygonCords(std::istream& in, demehin::point_t** pts, size_t max_size, size_t& cord_cnt)
+  {
+    *pts = new demehin::point_t[max_size];
+    size_t size = 0;
+    while (std::cin.peek() != '\n')
+    {
+      if (size >= max_size)
+      {
+        max_size *= 2;
+        demehin::point_t* new_pts = new demehin::point_t[size];
+        for (size_t i = 0; i < size; i++)
+        {
+          new_pts[i].x = (*pts)[i].x;
+          new_pts[i].y = (*pts)[i].y;
+        }
+        delete[] *pts;
+        *pts = new_pts;
+      }
+      demehin::point_t vrt;
+      in >> vrt.x >> vrt.y;
+      (*pts)[size++] = vrt;
+      cord_cnt++;
+    }
+  }
+
 }
 
 int main()
@@ -90,6 +116,7 @@ int main()
   double scale_k = 0;
   demehin::point_t scale_pt;
   bool is_incorrect_shp = false;
+  constexpr size_t max_size = 100;
 
   std::string shape_name;
   while (true)
@@ -154,22 +181,27 @@ int main()
 
     else if (shape_name == "POLYGON")
     {
-      size_t n = 0;
-      demehin::point_t vertex[10000];
-      while (std::cin.peek() != '\n')
+      demehin::point_t* vrt = nullptr;
+      size_t cord_cnt = 0;
+      try
       {
-        std::cin >> vertex[n].x >> vertex[n].y;
-        n++;
+        inputPolygonCords(std::cin, &vrt, max_size, cord_cnt);
       }
-      if (n < 3 || hasSameVertex(n, vertex))
+      catch (std::bad_alloc& e)
+      {
+        free_shapes(shapes, shp_cnt);
+        std::cerr << "bad alloc\n";
+        return 1;
+      }
+      bool isBadPolygon = cord_cnt < 3 || hasSameVertex(cord_cnt, vrt);
+      if (isBadPolygon)
       {
         is_incorrect_shp = true;
         continue;
       }
-
       try
       {
-        shapes[shp_cnt++] = new demehin::Polygon(n, vertex);
+        shapes[shp_cnt++] = new demehin::Polygon(cord_cnt, vrt);
       }
       catch (std::bad_alloc& e)
       {
@@ -179,6 +211,33 @@ int main()
       }
       shape_name = "";
     }
+    //else if (shape_name == "POLYGON")
+    //{
+      //size_t n = 0;
+      //demehin::point_t vertex[10000];
+      //while (std::cin.peek() != '\n')
+      //{
+        //std::cin >> vertex[n].x >> vertex[n].y;
+        //n++;
+      //}
+      //if (n < 3 || hasSameVertex(n, vertex))
+      //{
+        //is_incorrect_shp = true;
+        //continue;
+      //}
+
+      //try
+      //{
+        //shapes[shp_cnt++] = new demehin::Polygon(n, vertex);
+      //}
+      //catch (std::bad_alloc& e)
+      //{
+        //free_shapes(shapes, shp_cnt);
+        //std::cerr << "bad alloc\n";
+        //return 1;
+      //}
+      //shape_name = "";
+    //}
 
     else if (shape_name == "SCALE")
     {

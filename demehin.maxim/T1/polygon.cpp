@@ -1,14 +1,14 @@
 #include "polygon.hpp"
 #include <cmath>
 
-demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
-  vrtx_cnt_(vrtx_cnt)
+demehin::Polygon::~Polygon()
 {
-  for (size_t i = 0; i < vrtx_cnt; i++)
-  {
-    vertex_[i] = vertex[i];
-  }
+  delete[] vertex_;
 }
+
+demehin::Polygon::Polygon(size_t vrtx_cnt, point_t* vertex):
+  vrtx_cnt_(vrtx_cnt), vertex_(vertex)
+{}
 
 double demehin::Polygon::getArea() const
 {
