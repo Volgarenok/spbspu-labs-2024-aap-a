@@ -3,7 +3,10 @@
 
 demehin::Polygon::~Polygon()
 {
-  delete[] vertex_;
+  if (vertex_ != nullptr)
+  {
+    delete[] vertex_;
+  }
 }
 
 demehin::Polygon::Polygon(size_t vrtx_cnt, point_t* vertex):
