@@ -91,7 +91,16 @@ namespace
       if (size >= max_size)
       {
         max_size *= 2;
-        demehin::point_t* new_pts = new demehin::point_t[size];
+        demehin::point_t* new_pts = nullptr;
+        try
+        {
+          new_pts = new demehin::point_t[size];
+        }
+        catch (std::bad_alloc& e)
+        {
+          delete[] *pts;
+          throw;
+        }
         for (size_t i = 0; i < size; i++)
         {
           new_pts[i].x = (*pts)[i].x;
@@ -197,6 +206,7 @@ int main()
       if (isBadPolygon)
       {
         is_incorrect_shp = true;
+        delete[] vrt;
         continue;
       }
       try
@@ -206,10 +216,12 @@ int main()
       catch (std::bad_alloc& e)
       {
         free_shapes(shapes, shp_cnt);
+        delete[] vrt;
         std::cerr << "bad alloc\n";
         return 1;
       }
       shape_name = "";
+      delete[] vrt;
     }
     //else if (shape_name == "POLYGON")
     //{
