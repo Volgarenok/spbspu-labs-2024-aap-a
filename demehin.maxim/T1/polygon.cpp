@@ -7,7 +7,7 @@ demehin::Polygon::~Polygon()
 }
 
 demehin::Polygon::Polygon(size_t vrtx_cnt, point_t* vertex):
-  vrtx_cnt_(vrtx_cnt), vertex_(nullptr)
+  vrtx_cnt_(vrtx_cnt), vertex_(new point_t[vrtx_cnt])
 {
   for (size_t i = 0; i < vrtx_cnt; i++)
   {
