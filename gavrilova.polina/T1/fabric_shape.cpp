@@ -8,7 +8,7 @@
 #include "polygon.hpp"
 #include "shape.hpp"
 #include <iostream>
-//
+
 namespace {
   bool hasSameVerteces(gavrilova::point_t * verteces, size_t size) {
     for (size_t i = 0; i < size; ++i) {
@@ -44,7 +44,7 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
       parametrsDbl[i] = std::atof(parametrsStr[i]);
     }
     Rectangle * R = new Rectangle({parametrsDbl[0], parametrsDbl[1]}, {parametrsDbl[2], parametrsDbl[3]});
-    return R; 
+    return R;
   } else if (!std::strcmp(shapeType, "TRIANGLE")) {
     if (nSpaces != 6) {
       throw std::logic_error("Invalid number of arguments for triangle");
@@ -113,5 +113,4 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
     koef = std::atof(koefStr);
   }
   return nullptr;
-  
 }
