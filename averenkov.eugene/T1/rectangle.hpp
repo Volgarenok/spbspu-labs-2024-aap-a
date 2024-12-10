@@ -1,6 +1,5 @@
 #ifndef RECTANGLE
 #define RECTANGLE
-
 #include "shape.hpp"
 
 namespace averenkov
