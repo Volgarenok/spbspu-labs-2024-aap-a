@@ -223,33 +223,6 @@ int main()
       shape_name = "";
       delete[] vrt;
     }
-    //else if (shape_name == "POLYGON")
-    //{
-      //size_t n = 0;
-      //demehin::point_t vertex[10000];
-      //while (std::cin.peek() != '\n')
-      //{
-        //std::cin >> vertex[n].x >> vertex[n].y;
-        //n++;
-      //}
-      //if (n < 3 || hasSameVertex(n, vertex))
-      //{
-        //is_incorrect_shp = true;
-        //continue;
-      //}
-
-      //try
-      //{
-        //shapes[shp_cnt++] = new demehin::Polygon(n, vertex);
-      //}
-      //catch (std::bad_alloc& e)
-      //{
-        //free_shapes(shapes, shp_cnt);
-        //std::cerr << "bad alloc\n";
-        //return 1;
-      //}
-      //shape_name = "";
-    //}
 
     else if (shape_name == "SCALE")
     {
