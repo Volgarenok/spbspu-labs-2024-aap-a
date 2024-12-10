@@ -3,15 +3,17 @@
 
 demehin::Polygon::~Polygon()
 {
-  if (vertex_ != nullptr)
-  {
-    delete[] vertex_;
-  }
+  delete[] vertex_;
 }
 
 demehin::Polygon::Polygon(size_t vrtx_cnt, point_t* vertex):
-  vrtx_cnt_(vrtx_cnt), vertex_(vertex)
-{}
+  vrtx_cnt_(vrtx_cnt), vertex_(nullptr)
+{
+  for (size_t i = 0; i < vrtx_cnt; i++)
+  {
+    vertex_[i] = vertex[i];
+  }
+}
 
 double demehin::Polygon::getArea() const
 {
