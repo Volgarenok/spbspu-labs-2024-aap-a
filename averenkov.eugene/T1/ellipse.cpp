@@ -1,6 +1,7 @@
 #include "ellipse.hpp"
 
-averenkov::Ellipse::Ellipse(averenkov::point_t center_, double radius_v_, double radius_h_) : center(center_), radius_v(radius_v_), radius_h(radius_h_)
+averenkov::Ellipse::Ellipse(averenkov::point_t center_, double radius_v_, double radius_h_)
+ : center(center_), radius_v(radius_v_), radius_h(radius_h_)
 {
 }
 
