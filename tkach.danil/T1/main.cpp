@@ -160,5 +160,6 @@ int main()
   std::cout << getTotalArea(shapes_array, counter_of_shapes) << "\n";
   printCoordinatesOfFrameRect(shapes_array, counter_of_shapes);
   std::cout << "\n";
+  deleteShapes(shapes_array, counter_of_shapes);
   return 0;
 }
