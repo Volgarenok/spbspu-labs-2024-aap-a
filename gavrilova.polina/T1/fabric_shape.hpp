@@ -3,6 +3,6 @@
 #include <istream>
 #include "shape.hpp"
 namespace gavrilova {
-  Shape * fabric_shape(std::istream & in);
+  Shape * fabric_shape(std::istream & in, point_t & center, double koef, size_t nError);
 } 
 #endif

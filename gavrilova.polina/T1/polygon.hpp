@@ -5,6 +5,7 @@
 namespace gavrilova {
   class Polygon : public Shape {
   public:
+    ~Polygon();
     Polygon(size_t size, point_t * verteces);
     double getArea() const override;
     rectangle_t getFrameRect() const override;

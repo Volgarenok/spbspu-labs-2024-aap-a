@@ -6,6 +6,9 @@
 gavrilova::Polygon::Polygon(size_t size, point_t * verteces):
 size_(size), verteces_(verteces)
 {}
+gavrilova::Polygon::~Polygon() {
+  delete[] verteces_;
+}
 
 double gavrilova::Polygon::getArea() const
 {
@@ -17,7 +20,7 @@ double gavrilova::Polygon::getArea() const
   }
   sum1 += (verteces_[size_ - 1].x * verteces_[0].y);
   sum2 += (verteces_[size_ - 1].y * verteces_[0].x);
-  S = (sum1 - sum2) / 2;
+  S = abs(sum1 - sum2) / 2;
   return S;
 }
 gavrilova::rectangle_t gavrilova::Polygon::getFrameRect() const {
