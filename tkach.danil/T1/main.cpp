@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <stringinput.hpp>
 #include "regular.hpp"
 #include "shape.hpp"
 #include "ring.hpp"
@@ -9,6 +8,14 @@
 
 namespace
 {
+  void deleteShapes(tkach::Shape** shape_array, size_t counter_of_shapes)
+  {
+      for(size_t i = 0; i < counter_of_shapes; ++i)
+      {
+        delete[] shape_array[i];
+      }
+      delete[] shape_array;
+  }
   double getTotalArea(tkach::Shape** shape_array, size_t counter_of_shapes)
   {
     double sum = 0;
@@ -64,6 +71,7 @@ int main()
     }
     if (std::cin.eof())
     {
+      deleteShapes(shapes_array, counter_of_shapes);
       std::cerr << "Error: not enough arguments\n";
       return 1;
     }
@@ -78,6 +86,7 @@ int main()
       }
       catch(const std::bad_alloc& e)
       {
+        deleteShapes(shapes_array, counter_of_shapes);
         std::cerr << "Not enough memory\n";
         return 1;
       }
@@ -97,6 +106,7 @@ int main()
       }
       catch(const std::bad_alloc& e)
       {
+        deleteShapes(shapes_array, counter_of_shapes);
         std::cerr << "Not enough memory\n";
         return 1;
       }
@@ -117,6 +127,7 @@ int main()
       }
       catch(const std::bad_alloc& e)
       {
+        deleteShapes(shapes_array, counter_of_shapes);
         std::cerr << "Not enough memory\n";
         return 1;
       }
@@ -131,6 +142,7 @@ int main()
       std::cin >> scale_coef;
       if (scale_coef <= 0)
       {
+        deleteShapes(shapes_array, counter_of_shapes);
         std::cerr << "Error: sacle coefficent need to be bigger than 0\n";
         return 1;
       }
