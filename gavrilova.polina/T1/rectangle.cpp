@@ -36,3 +36,4 @@ void gavrilova::Rectangle::scale(double k) {
   pTopRight_.x = center.x + getFrameRect().width / 2 * k;
   pTopRight_.y = center.y + getFrameRect().height / 2 * k;
 }
+
