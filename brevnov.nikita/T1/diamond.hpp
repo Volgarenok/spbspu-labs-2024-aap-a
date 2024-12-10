@@ -1,13 +1,13 @@
 #ifndef DIAMOND_HPP
 #define DIAMOND_HPP
-#include "shape.hpp""
+#include "shape.hpp"
 class Ellipse: public Shape
 {
 public:
   double getArea();
   rectangle getFrameRect();
-  void move(point_t k);
-  void move(double x, double y);
+  void move(point_t new_centre);
+  void move(double dx, double dy);
   void scale(double n);
 private:
   point_t a;

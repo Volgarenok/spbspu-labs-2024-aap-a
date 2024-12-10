@@ -7,7 +7,7 @@ namespace brevnov
     double x;
     double y;
   };
-  struct rectangle
+  struct rectangle_t
   {
     double width;
     double height;
