@@ -1,19 +1,21 @@
 #ifndef ELLIPSE_HPP
 #define ELLIPSE_HPP
 #include "shape.hpp"
-class Ellipse: public Shape
+namespace brevnov
 {
-public:
-  double getArea();
-  rectangle getFrameRect();
-  void move(point_t new_centre);
-  void move(double dx, double dy);
-  void scale(double n);
-private:
-  point_t a;
-  point_t b;
-  point_t c;
-  point_t d;
-  rectangle base_rectangle;
-};
+  class Ellipse: public Shape
+  {
+  public:
+    Ellipse(point_t center, double r1, double r2);
+    double getArea();
+    rectangle getFrameRect();
+    void move(point_t new_centre);
+    void move(double dx, double dy);
+    void scale(double n);
+  private:
+    point_t center;
+    double r1;
+    double r2;
+  };
+}
 #endif

@@ -1,4 +1,5 @@
 #include "rectangle.hpp"
+#include <stdexcept>
 
 brevnov::Rectangle(point_t left, point_t right) : left(left), right(right) {}
 
