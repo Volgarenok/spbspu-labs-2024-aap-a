@@ -14,7 +14,7 @@ namespace {
     for (size_t i = 0; i < size; ++i) {
       for (size_t j = 0; j < size; ++j) {
         if (verteces[i].x == verteces[j].x && verteces[i].y == verteces[j].y && i != j) {
-          std::cout << verteces[i].x << " " << verteces[j].x << " " << verteces[i].y << " " << verteces[j].y << "\n";
+          //std::cout << verteces[i].x << " " << verteces[j].x << " " << verteces[i].y << " " << verteces[j].y << "\n";
           return true;
         }
       }
@@ -44,6 +44,9 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
   size_t len = 0;
   size_t nSpaces = 0;
   char * line = inputStr(in, len, nSpaces);
+  if (!line || line[0] == '\0') {
+    return nullptr;
+  }
   char * shapeType = strtok(line, " ");
 
   if (!std::strcmp(shapeType, "RECTANGLE")) {
@@ -62,7 +65,9 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
     cntr = make_verteces(cntr, 1);
     center = *cntr;
     char * koefStr = strtok(nullptr, " ");
+    
     koef = std::atof(koefStr);
+    std::cout << "KOEF =" << koef << "\n";
   }
   return nullptr;
 }
@@ -126,6 +131,7 @@ gavrilova::Polygon* gavrilova::make_polygon(size_t & nSpaces, size_t & nError) {
   try {
     P = new Polygon(nPoints, verteces);
   } catch (const std::bad_alloc & e) {
+    delete[] verteces;
     ++nError;
     return nullptr;
   }

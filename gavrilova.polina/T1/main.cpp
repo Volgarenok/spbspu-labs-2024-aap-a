@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <inputStr.hpp>
 #include "fabric_shape.hpp"
 namespace gavrilova {
   void scaleShape(Shape & shape, point_t center, double k) {
@@ -16,33 +15,37 @@ namespace gavrilova {
 }
 int main()
 {
-  gavrilova::Shape * Shapes[1000];
+  gavrilova::Shape * Shapes[1000] = {nullptr};
   gavrilova::point_t center{0,0};
   double koef = -1;
   size_t nShapes = 0;
   size_t nError = 0;
   size_t commonAreaBefore = 0;
 
-  while (!std::cin.eof()) {
+  while (!std::cin.eof() && std::cin) {
     try {
       Shapes[nShapes] = gavrilova::fabric_shape(std::cin, center, koef, nError);
     } catch (...) {
-      std::cerr << "Error in creating shape";
+      //std::cerr << Error in creating shape;
       return 1;
     }
+    std::cout << "!!\n";
     if (Shapes[nShapes]) {
       commonAreaBefore += Shapes[nShapes]->getArea();
-      ++nShapes;
-    } else {
-      std::cerr << "I don't know this shape";
     }
+    ++nShapes;
+    std::cout << "nShapes = " << nShapes << "\n";
   }
   if (koef <= 0) {
-    std::cerr << "ERROR";
+    std::cerr << "ERROR\n";
     return 1;
   }
   for (size_t i = 0; i < nShapes; ++i) {
-    gavrilova::scaleShape(*Shapes[nShapes], center, koef);
+    gavrilova::scaleShape(*(Shapes[i]), center, koef);
   }
-
+  //std::cout << Форма отмасштабирована\n;
+   for (size_t i = 0; i < nShapes; ++i) {
+       delete Shapes[i]; 
+   }
 }
+
