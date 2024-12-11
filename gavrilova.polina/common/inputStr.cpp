@@ -38,3 +38,4 @@ char* gavrilova::inputStr(std::istream& in, size_t & len)
 
   return result_str;
 }
+
