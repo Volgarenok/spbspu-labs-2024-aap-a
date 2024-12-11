@@ -8,7 +8,7 @@
 #include "polygon.hpp"
 #include "shape.hpp"
 #include <iostream>
-
+#include <cstddef>
 namespace {
   bool hasSameVerteces(gavrilova::point_t * verteces, size_t size) {
     for (size_t i = 0; i < size; ++i) {
@@ -21,96 +21,114 @@ namespace {
     }
     return false;
   }
+  gavrilova::point_t * make_verteces(gavrilova::point_t * verteces, size_t n) {
+  for (size_t i = 0; i < n; ++i) {
+    char * xStr = strtok(nullptr, " ");
+    char * yStr = strtok(nullptr, " ");
+    double x = std::atof(xStr);
+    double y = std::atof(yStr);
+    verteces[i] = {x, y};
+  }
+  return verteces;
 }
-gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t & center, double koef, size_t nError) {
-  ++koef;
+
+}
+namespace gavrilova
+{
+  Rectangle* make_rectangle(size_t & nSpaces, size_t & nError);
+  Triangle* make_triangle(size_t & nSpaces, size_t & nError);
+  Polygon* make_polygon(size_t & nSpaces, size_t & nError);
+}
+
+gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t & center, double & koef, size_t & nError) {
   size_t len = 0;
   size_t nSpaces = 0;
   char * line = inputStr(in, len, nSpaces);
   char * shapeType = strtok(line, " ");
-  if (!std::strcmp(shapeType, "RECTANGLE")) {
-    if (nSpaces != 4) {
-      throw std::logic_error("Invalid number of arguments for rectangle");
-      ++nError;
-      return nullptr;
-    }
-    char * pBottomLeftX = strtok(nullptr, " ");
-    char * pBottomLeftY = strtok(nullptr, " ");
-    char * pTopRightX = strtok(nullptr, " ");
-    char * pTopRightY = strtok(nullptr, " ");
-    char * parametrsStr[4] = {pBottomLeftX, pBottomLeftY, pTopRightX, pTopRightY};
-    double parametrsDbl[4] = {};
-    for (int i = 0; i < 4;++i){
-      parametrsDbl[i] = std::atof(parametrsStr[i]);
-    }
-    Rectangle * R = new Rectangle({parametrsDbl[0], parametrsDbl[1]}, {parametrsDbl[2], parametrsDbl[3]});
-    return R;
-  } else if (!std::strcmp(shapeType, "TRIANGLE")) {
-    if (nSpaces != 6) {
-      throw std::logic_error("Invalid number of arguments for triangle");
-      ++nError;
-      return nullptr;
-    }
-    char * parametrsStr[6] = {};
-    double parametrsDbl[6] = {};
-    for (int i = 0; i < 6; ++i) {
-      parametrsStr[i] = strtok(nullptr, " ");
-      parametrsDbl[i] = std::atof(parametrsStr[i]);
-    }
-    point_t a{parametrsDbl[0], parametrsDbl[1]}, b{parametrsDbl[2], parametrsDbl[3]}, c{parametrsDbl[4], parametrsDbl[5]};
-    Triangle * T = new Triangle(a, b, c);
-    return T;
-  } else if (!std::strcmp(shapeType, "POLYGON")) {
-    if (nSpaces < 6 || nSpaces % 2 != 0) {
-      throw std::logic_error("Invalid number of arguments for polygon");
-      ++nError;
-      return nullptr;
-    }
-    size_t nPoints = nSpaces / 2;
-    double * parametrsDbl = nullptr;
-    char ** parametrsStr = nullptr;
-    point_t * verteces = nullptr;
-    try {
-      parametrsDbl = new double[nPoints * 2];
-      parametrsStr = new char *[nPoints * 2];
-      verteces = new point_t[nPoints];
-    } catch (...) {
-      delete[] parametrsDbl;
-      delete[] parametrsStr;
-      delete[] verteces;
-      throw;
-    }
-    for (size_t i = 0; i < nPoints; ++i) {
-      parametrsStr[i*2] = strtok(nullptr, " ");
-      parametrsDbl[i*2] = std::atof(parametrsStr[i*2]);
-      parametrsStr[i*2+1] = strtok(nullptr, " ");
-      parametrsDbl[i*2+1] = std::atof(parametrsStr[i*2+1]);
-      verteces[i] = {parametrsDbl[i*2], parametrsDbl[i*2+1]};
-      std::cout << verteces[i].x << " " << verteces[i].y << "\n";
-    }
-    delete[] parametrsDbl;
-    delete[] parametrsStr;
-    if (!hasSameVerteces(verteces, nPoints)) {
-      try {
-        Polygon * P = new Polygon(nPoints, verteces);
-        return P;
-      } catch (...) {
-        delete[] verteces;
-        throw;
-      }
-    } else {
-      delete[] verteces;
-      ++nError;
-      throw std::logic_error("There are the same points");
-    }
 
-  } else if (!std::strcmp(shapeType, "SCALE"))  {
-    char * cXStr = strtok(nullptr, " ");
-    char * cYStr = strtok(nullptr, " ");
+  if (!std::strcmp(shapeType, "RECTANGLE")) {
+    return make_rectangle(nSpaces, nError);
+  } else if (!std::strcmp(shapeType, "TRIANGLE")) {
+    return make_triangle(nSpaces, nError);
+  } else if (!std::strcmp(shapeType, "POLYGON")) {
+    return make_polygon(nSpaces, nError);
+  } else if (!std::strcmp(shapeType, "SCALE")) {
+    point_t * cntr = nullptr;
+    try {
+      cntr = new point_t;
+    } catch(const std::bad_alloc & e) {
+      return nullptr;
+    }
+    cntr = make_verteces(cntr, 1);
+    center = *cntr;
     char * koefStr = strtok(nullptr, " ");
-    center.x = std::atof(cXStr);
-    center.y = std::atof(cYStr);
     koef = std::atof(koefStr);
   }
   return nullptr;
 }
+
+gavrilova::Rectangle* gavrilova::make_rectangle(size_t & nSpaces, size_t & nError) {
+  if (nSpaces != 4) {
+    ++nError;
+    return nullptr;
+  }
+  point_t * verteces = nullptr;
+  point_t arr[2] = {};
+  verteces = arr;
+  verteces = make_verteces(verteces, 2);
+  Rectangle * R = nullptr;
+  try {
+    R = new Rectangle({verteces[0], verteces[1]});
+  } catch(const std::bad_alloc & e) {
+    ++nError;
+    return nullptr;
+  }
+  return R;
+}
+
+gavrilova::Triangle* gavrilova::make_triangle(size_t & nSpaces, size_t & nError) {
+  if (nSpaces != 6) {
+    ++nError;
+    return nullptr;
+  }
+  point_t * verteces = nullptr;
+  point_t arr[3] = {};
+  verteces = arr;
+  verteces = make_verteces(verteces, 3);
+  Triangle * T = nullptr;
+  try {
+    T = new Triangle(verteces[0], verteces[1], verteces[2]);
+  } catch(const std::bad_alloc & e) {
+    ++nError;
+    return nullptr;
+  }
+  return T;
+}
+gavrilova::Polygon* gavrilova::make_polygon(size_t & nSpaces, size_t & nError) {
+  if (nSpaces < 6 || nSpaces % 2 != 0) {
+    ++nError;
+    return nullptr;
+  }
+  size_t nPoints = nSpaces / 2;
+  point_t * verteces = nullptr;
+  try {
+    verteces = new point_t[nPoints];
+  } catch (const std::bad_alloc & e) {
+    ++nError;
+    return nullptr;
+  }
+  verteces = make_verteces(verteces, nPoints);
+  if (hasSameVerteces(verteces, nPoints)) {
+    ++nError;
+    return nullptr;
+  }
+  Polygon * P = nullptr;
+  try {
+    P = new Polygon(nPoints, verteces);
+  } catch (const std::bad_alloc & e) {
+    ++nError;
+    return nullptr;
+  }
+  return P;
+}
+
