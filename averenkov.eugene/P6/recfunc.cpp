@@ -10,6 +10,7 @@ namespace averenkov
   bool hasNumber(const char* str, size_t& index);
 }
 
+
 bool averenkov::hasExpression(const char* str, size_t& index)
 {
   if (!averenkov::hasTerm(str, index))
@@ -36,6 +37,30 @@ bool averenkov::hasTerm(const char* str, size_t& index)
     return averenkov::hasTerm(str, index);
   }
   return true;
+}
+
+bool averenkov::hasFactor(const char* str, size_t& index)
+{
+  if (str[index] == '(')
+  {
+    index++;
+    if (!averenkov::hasExpression(str, index))
+    {
+      return false;
+    }
+    if (str[index] != ')')
+    {
+      return false;
+    }
+    index++;
+    return true;
+  }
+  if (std::isalpha(str[index]))
+  {
+    index++;
+    return true;
+  }
+  return averenkov::hasNumber(str, index);
 }
 
 bool averenkov::hasNumber(const char* str, size_t& index)
@@ -77,30 +102,6 @@ bool averenkov::hasNumber(const char* str, size_t& index)
     return false;
   }
   return hasDigits;
-}
-
-bool averenkov::hasFactor(const char* str, size_t& index)
-{
-  if (str[index] == '(')
-  {
-    index++;
-    if (!averenkov::hasExpression(str, index))
-    {
-      return false;
-    }
-    if (str[index] != ')')
-    {
-      return false;
-    }
-    index++;
-    return true;
-  }
-  if (std::isalpha(str[index]))
-  {
-    index++;
-    return true;
-  }
-  return averenkov::hasNumber(str, index);
 }
 
 bool averenkov::isReal(const char* str)
