@@ -17,7 +17,7 @@ int main()
     std::cerr << "Memory error\n";
     return 1;
   }
-  std::cout << std::boolalpha << averenkov::hasParseExpression(input) << "\n";
+  std::cout << std::boolalpha << averenkov::isReal(input) << "\n";
   free(input);
   return 0;
 }

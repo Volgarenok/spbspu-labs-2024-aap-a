@@ -16,13 +16,10 @@ bool averenkov::hasExpression(const char* str, size_t& index)
   {
     return false;
   }
-  while (str[index] == '+' || str[index] == '-')
+  if (str[index] == '+' || str[index] == '-')
   {
     index++;
-    if (!averenkov::hasExpression(str, index))
-    {
-      return false;
-    }
+    return averenkov::hasExpression(str, index);
   }
   return true;
 }
@@ -43,40 +40,42 @@ bool averenkov::hasTerm(const char* str, size_t& index)
 
 bool averenkov::hasNumber(const char* str, size_t& index)
 {
-  bool hasDigits = false;
   if (str[index] == '+' || str[index] == '-')
   {
     index++;
   }
-  while (std::isdigit(str[index]))
+  if (std::isdigit(str[index]))
   {
     index++;
-    hasDigits = true;
+    return averenkov::hasNumber(str, index);
   }
+
   if (str[index] == '.')
   {
     index++;
-    while (std::isdigit(str[index]))
+    if (std::isdigit(str[index]))
     {
       index++;
-      hasDigits = true;
+      return averenkov::hasNumber(str, index);
     }
+    return false;
   }
-  if ((str[index] == 'e' || str[index] == 'E') && hasDigits)
+
+  if ((str[index] == 'e' || str[index] == 'E'))
   {
     index++;
     if (str[index] == '+' || str[index] == '-')
     {
       index++;
     }
-    hasDigits = false;
-    while (std::isdigit(str[index]))
+    if (std::isdigit(str[index]))
     {
       index++;
-      hasDigits = true;
+      return averenkov::hasNumber(str, index);
     }
+    return false;
   }
-  return hasDigits;
+  return false;
 }
 
 bool averenkov::hasFactor(const char* str, size_t& index)
@@ -89,7 +88,7 @@ bool averenkov::hasFactor(const char* str, size_t& index)
   return averenkov::hasNumber(str, index);
 }
 
-bool averenkov::hasParseExpression(const char* str)
+bool averenkov::isReal(const char* str)
 {
   size_t index = 0;
   if (averenkov::hasExpression(str, index) && str[index] == '\0')
