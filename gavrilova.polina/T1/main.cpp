@@ -45,7 +45,7 @@ int main()
   }
   //std::cout << Форма отмасштабирована\n;
    for (size_t i = 0; i < nShapes; ++i) {
-       delete Shapes[i]; 
+       delete Shapes[i];
    }
 }
 

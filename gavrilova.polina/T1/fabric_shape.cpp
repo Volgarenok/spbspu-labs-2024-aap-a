@@ -65,7 +65,6 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
     cntr = make_verteces(cntr, 1);
     center = *cntr;
     char * koefStr = strtok(nullptr, " ");
-    
     koef = std::atof(koefStr);
     std::cout << "KOEF =" << koef << "\n";
   }
