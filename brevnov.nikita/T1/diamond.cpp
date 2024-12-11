@@ -15,8 +15,8 @@ rectangle brevnov::Diamond::getFrameRect()
 {
   rectangle_t result;
   result.pos = center;
-  result.width = std::fabs(horizontal.x - center.x);
-  result.height = std::fabs(vertical.y - center.y);
+  result.width = std::fabs(horizontal.x - center.x) * 2;
+  result.height = std::fabs(vertical.y - center.y) * 2;
   return result;
 }
 

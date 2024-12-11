@@ -15,8 +15,8 @@ rectangle brevnov::Ellipse::getFrameRect()
 {
   rectangle_t result;
   result.pos = center;
-  result.width = r1 / 2.0;
-  result.height = r2 / 2.0;
+  result.width = r1 * 2;
+  result.height = r2 * 2;
   return result;
 }
 
