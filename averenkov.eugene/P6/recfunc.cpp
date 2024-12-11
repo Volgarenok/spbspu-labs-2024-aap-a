@@ -44,24 +44,25 @@ bool averenkov::hasNumber(const char* str, size_t& index)
   {
     index++;
   }
+  bool hasDigits = false;
   if (std::isdigit(str[index]))
   {
+    hasDigits = true;
     index++;
     return averenkov::hasNumber(str, index);
   }
-
   if (str[index] == '.')
   {
     index++;
     if (std::isdigit(str[index]))
     {
+      hasDigits = true;
       index++;
       return averenkov::hasNumber(str, index);
     }
     return false;
   }
-
-  if ((str[index] == 'e' || str[index] == 'E'))
+  if ((str[index] == 'e' || str[index] == 'E') && hasDigits)
   {
     index++;
     if (str[index] == '+' || str[index] == '-')
@@ -75,11 +76,25 @@ bool averenkov::hasNumber(const char* str, size_t& index)
     }
     return false;
   }
-  return false;
+  return hasDigits;
 }
 
 bool averenkov::hasFactor(const char* str, size_t& index)
 {
+  if (str[index] == '(')
+  {
+    index++;
+    if (!averenkov::hasExpression(str, index))
+    {
+      return false;
+    }
+    if (str[index] != ')')
+    {
+      return false;
+    }
+    index++;
+    return true;
+  }
   if (std::isalpha(str[index]))
   {
     index++;
