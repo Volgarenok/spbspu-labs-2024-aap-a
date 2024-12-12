@@ -4,7 +4,7 @@
 
 int main()
 {
-  const char* input = averenkov::stringInput(std::cin);
+  char* input = averenkov::stringInput(std::cin);
   if (input[0] == '\0')
   {
     std::cerr << "Empty string";
