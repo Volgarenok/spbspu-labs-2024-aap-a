@@ -97,4 +97,4 @@ int main()
     brevnov::destroy_shape(shapes, count_of_shape);
     return 1;
   }
-} 
+}

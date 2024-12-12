@@ -4,7 +4,7 @@
 #include "base-types.hpp"
 namespace brevnov
 {
-  class Shape 
+  class Shape
   {
     virtual double getArea() = 0;
     virtual rectangle getFrameRect() = 0;
