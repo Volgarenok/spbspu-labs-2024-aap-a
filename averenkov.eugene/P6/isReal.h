@@ -3,7 +3,7 @@
 
 namespace averenkov
 {
-  bool hasParseExpression(const char* str);
+  bool isReal(const char* str);
 }
 
 
