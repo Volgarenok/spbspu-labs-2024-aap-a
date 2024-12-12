@@ -11,7 +11,7 @@ double brevnov::Diamond::getArea()
   return (std::fabs((horizontal.x - center.x) * (vertical.y - center.y) * 2))
 }
 
-rectangle brevnov::Diamond::getFrameRect()
+rectangle_t brevnov::Diamond::getFrameRect()
 {
   rectangle_t result;
   result.pos = center;

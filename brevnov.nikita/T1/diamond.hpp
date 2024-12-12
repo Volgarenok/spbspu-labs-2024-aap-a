@@ -8,7 +8,7 @@ namespace brevnov
   public:
     Diamond(point_t center, point_t horizontal, point_t vertical);
     double getArea();
-    rectangle getFrameRect();
+    rectangle_t getFrameRect();
     void move(point_t new_centre);
     void move(double dx, double dy);
     void scale(double n);

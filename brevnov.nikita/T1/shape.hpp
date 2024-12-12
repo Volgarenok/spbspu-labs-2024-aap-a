@@ -1,13 +1,13 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
-#include <istream>
+#include <iostream>
 #include "base-types.hpp"
 namespace brevnov
 {
   class Shape
   {
     virtual double getArea() = 0;
-    virtual rectangle getFrameRect() = 0;
+    virtual rectangle_t getFrameRect() = 0;
     virtual void move(point_t new_centre) = 0;
     virtual void move(double dx, double dy) = 0;
     virtual void scale(double n) = 0;

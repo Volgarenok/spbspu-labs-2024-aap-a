@@ -8,7 +8,7 @@ double brevnov::Rectangle::getArea()
   return (right.x - left.x) * (right.y - left.y)
 }
 
-rectangle brevnov::Rectangle::getFrameRect()
+rectangle_t brevnov::Rectangle::getFrameRect()
 {
   rectangle_t result;
   result.width = right.x - left.x;
