@@ -26,7 +26,7 @@ const char* balashov::hasFigure(const char * str)
   {
     return str;
   }
-  return ('0' <= *str && *str <= '9')  ? (str + 1) : nullptr;
+  return std::isdigit(*str) ? (str + 1) : nullptr;
 }
 
 const char* balashov::hasUnsigned(const char* str)
@@ -51,7 +51,6 @@ const char * balashov::hasSign(const char * str)
   auto next = hasSymbol(str, '-');
   return next ? next : hasSymbol(str, '+');
 }
-
 
 const char* balashov::hasOrder(const char* str)
 {
