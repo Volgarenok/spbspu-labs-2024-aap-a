@@ -13,7 +13,7 @@ namespace maslovskiy
 }
 bool maslovskiy::isSign(char c)
 {
-  return c== '+' || c == '-';
+  return c == '+' || c == '-';
 }
 const char* maslovskiy::hasDigit(const char* str)
 {
