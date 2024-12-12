@@ -1,7 +1,7 @@
 #include "ellipse.hpp"
 #include <cmath>
 
-brevnov::Ellipse(point_t center, double r1, double r2): center(center), r1(r1), r2(r2)
+brevnov::Ellipse::Ellipse(point_t center, double r1, double r2): center(center), r1(r1), r2(r2)
 {
 }
 

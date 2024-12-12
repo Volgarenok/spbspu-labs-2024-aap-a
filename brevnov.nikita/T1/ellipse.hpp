@@ -3,7 +3,7 @@
 #include "shape.hpp"
 namespace brevnov
 {
-  class Ellipse: public Shape
+  class Ellipse : public Shape
   {
   public:
     Ellipse(point_t center, double r1, double r2);

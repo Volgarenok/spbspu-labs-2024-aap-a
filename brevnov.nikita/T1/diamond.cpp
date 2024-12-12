@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 
-brevnov::Diamond(point_t center, point_t horizontal, point_t vertical) : center(center), horizontal(horizontal), vertical(vertical)
+brevnov::Diamond::Diamond(point_t center, point_t horizontal, point_t vertical) : center(center), horizontal(horizontal), vertical(vertical)
 {
 }
 
