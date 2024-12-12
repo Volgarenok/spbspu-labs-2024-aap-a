@@ -1,6 +1,6 @@
 #include <iostream>
 #include <dynamicinput.h>
-#include "parseexpr.h"
+#include "isReal.h"
 
 int main()
 {
@@ -8,6 +8,7 @@ int main()
   if (input[0] == '\0')
   {
     std::cerr << "Empty string";
+    free(input);
     return 1;
   }
   if (input == nullptr)
@@ -16,5 +17,6 @@ int main()
     return 1;
   }
   std::cout << std::boolalpha << averenkov::isReal(input) << "\n";
+  free(input);
   return 0;
 }

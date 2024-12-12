@@ -14,7 +14,8 @@ namespace averenkov
 
 bool averenkov::isSumb(const char* str, size_t& index)
 {
-  if (str[index] != 'a' && str[index] != 'b' && str[index] != 'c' && str[index] != 'd' && str[index] != 'e' && str[index] != 'f' && str[index] != 'x' && str[index] != 'y' && str[index] != 'z' )
+  if (str[index] != 'a' && str[index] != 'b' && str[index] != 'c' && str[index] != 'd' && str[index] != 'e'
+ && str[index] != 'f' && str[index] != 'x' && str[index] != 'y' && str[index] != 'z' )
   {
     return false;
   }
