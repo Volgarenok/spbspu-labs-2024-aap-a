@@ -69,30 +69,22 @@ const char* hismatova::isDeterm(const char* str, size_t& position)
 
 const char* hismatova::isUnsignedInt(const char* str, size_t& position)
 {
-  if (std::isdigit(str[position]))
+  if (std::isdigit(str[position]) || isLetter(str[position]))
   {
     position++;
-    while (std::isdigit(str[position]))
-    {
-      position++;
-    }
-    return str;
+    return isUnsignedInt(str, position);
   }
-  return nullptr;
+  return position > 0 ? str : nullptr;
 }
 
 const char* hismatova::isIdentificator(const char* str, size_t& position)
 {
-  if (isLetter(str[position]))
+  if (isLetter(str[position]) || std::isdigit(str[position]))
   {
     position++;
-    while (isLetter(str[position]) || std::isdigit(str[position]))
-    {
-      position++;
-    }
-    return str;
+    return isIdentificator(str, position);
   }
-  return nullptr;
+  return position > 0 ? str : nullptr;
 }
 
 bool hismatova::isLetter(char c)

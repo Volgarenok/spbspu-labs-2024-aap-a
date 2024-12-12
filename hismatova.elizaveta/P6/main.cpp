@@ -14,14 +14,8 @@ int main()
     return 1;
   }
   size_t position = 0;
-  if (hismatova::isValidString(str, position) && position == length)
-  {
-    std::cout << "true\n";
-  }
-  else
-  {
-    std::cout << "false\n";
-  }
+  std::cout << std::boolalpha;
+  std::cout << (hismatova::isValidString(str, position) && position == length);
   free(str);
   return 0;
 }
