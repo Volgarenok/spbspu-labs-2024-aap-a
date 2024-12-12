@@ -8,10 +8,10 @@ brevnov::Diamond::Diamond(point_t center, point_t horizontal, point_t vertical) 
 
 double brevnov::Diamond::getArea()
 {
-  return (std::fabs((horizontal.x - center.x) * (vertical.y - center.y) * 2))
+  return (std::fabs((horizontal.x - center.x) * (vertical.y - center.y) * 2));
 }
 
-rectangle_t brevnov::Diamond::getFrameRect()
+brevnov::rectangle_t brevnov::Diamond::getFrameRect()
 {
   rectangle_t result;
   result.pos = center;

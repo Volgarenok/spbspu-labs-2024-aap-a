@@ -11,7 +11,7 @@ double brevnov::Ellipse::getArea()
   return p * r1 * r2;
 }
 
-rectangle_t brevnov::Ellipse::getFrameRect()
+brevnov::rectangle_t brevnov::Ellipse::getFrameRect()
 {
   rectangle_t result;
   result.pos = center;

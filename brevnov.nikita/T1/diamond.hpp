@@ -15,7 +15,7 @@ namespace brevnov
     void scale(double n);
   private:
     point_t center;
-    point_t horizantal;
+    point_t horizontal;
     point_t vertical;
   };
 }
