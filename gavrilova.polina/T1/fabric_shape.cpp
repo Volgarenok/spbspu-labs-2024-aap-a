@@ -35,9 +35,9 @@ namespace {
 }
 namespace gavrilova
 {
-  Rectangle* make_rectangle(size_t & nSpaces, size_t & nError);
-  Triangle* make_triangle(size_t & nSpaces, size_t & nError);
-  Polygon* make_polygon(size_t & nSpaces, size_t & nError);
+  Rectangle* make_rectangle(char * line, size_t & nSpaces, size_t & nError);
+  Triangle* make_triangle(char * line, size_t & nSpaces, size_t & nError);
+  Polygon* make_polygon(char * line, size_t & nSpaces, size_t & nError);
 }
 
 gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t & center, double & koef, size_t & nError) {
@@ -51,11 +51,11 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
   char * shapeType = strtok(line, " ");
 
   if (!std::strcmp(shapeType, "RECTANGLE")) {
-    return make_rectangle(nSpaces, nError);
+    return make_rectangle(char * line, nSpaces, nError);
   } else if (!std::strcmp(shapeType, "TRIANGLE")) {
-    return make_triangle(nSpaces, nError);
+    return make_triangle(char * line, nSpaces, nError);
   } else if (!std::strcmp(shapeType, "POLYGON")) {
-    return make_polygon(nSpaces, nError);
+    return make_polygon(char * line, nSpaces, nError);
   } else if (!std::strcmp(shapeType, "SCALE")) {
     point_t * cntr = nullptr;
     try {
@@ -74,9 +74,10 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
   return nullptr;
 }
 
-gavrilova::Rectangle* gavrilova::make_rectangle(size_t & nSpaces, size_t & nError) {
+gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, size_t & nError) {
   if (nSpaces != 4) {
     ++nError;
+    delete[] line;
     return nullptr;
   }
   point_t * verteces = nullptr;
@@ -88,14 +89,17 @@ gavrilova::Rectangle* gavrilova::make_rectangle(size_t & nSpaces, size_t & nErro
     R = new Rectangle({verteces[0], verteces[1]});
   } catch(const std::bad_alloc & e) {
     ++nError;
+    delete[] line;
     return nullptr;
   }
+  delete[] line;
   return R;
 }
 
-gavrilova::Triangle* gavrilova::make_triangle(size_t & nSpaces, size_t & nError) {
+gavrilova::Triangle* gavrilova::make_triangle(char * line, size_t & nSpaces, size_t & nError) {
   if (nSpaces != 6) {
     ++nError;
+    delete[] line;
     return nullptr;
   }
   point_t * verteces = nullptr;
@@ -107,13 +111,16 @@ gavrilova::Triangle* gavrilova::make_triangle(size_t & nSpaces, size_t & nError)
     T = new Triangle(verteces[0], verteces[1], verteces[2]);
   } catch(const std::bad_alloc & e) {
     ++nError;
+    delete[] line;
     return nullptr;
   }
+  delete[] line;
   return T;
 }
-gavrilova::Polygon* gavrilova::make_polygon(size_t & nSpaces, size_t & nError) {
+gavrilova::Polygon* gavrilova::make_polygon(char * line, size_t & nSpaces, size_t & nError) {
   if (nSpaces < 6 || nSpaces % 2 != 0) {
     ++nError;
+    delete[] line;
     return nullptr;
   }
   size_t nPoints = nSpaces / 2;
@@ -122,11 +129,13 @@ gavrilova::Polygon* gavrilova::make_polygon(size_t & nSpaces, size_t & nError) {
     verteces = new point_t[nPoints];
   } catch (const std::bad_alloc & e) {
     ++nError;
+    delete[] line;
     return nullptr;
   }
   verteces = make_verteces(verteces, nPoints);
   if (hasSameVerteces(verteces, nPoints)) {
     ++nError;
+    delete[] line;
     return nullptr;
   }
   Polygon * P = nullptr;
@@ -134,9 +143,11 @@ gavrilova::Polygon* gavrilova::make_polygon(size_t & nSpaces, size_t & nError) {
     P = new Polygon(nPoints, verteces);
   } catch (const std::bad_alloc & e) {
     delete[] verteces;
+    delete[] line;
     ++nError;
     return nullptr;
   }
+  delete[] line;
   return P;
 }
 
