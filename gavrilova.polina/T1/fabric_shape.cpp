@@ -57,15 +57,10 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
   } else if (!std::strcmp(shapeType, "POLYGON")) {
     return make_polygon(line, nSpaces, nError);
   } else if (!std::strcmp(shapeType, "SCALE")) {
-    point_t * cntr = nullptr;
-    try {
-      cntr = new point_t;
-    } catch(const std::bad_alloc & e) {
-      delete[] line;
-      return nullptr;
-    }
-    cntr = make_verteces(cntr, 1);
-    center = *cntr;
+    char * cXStr = strtok(nullptr, " ");
+    char * cYStr = strtok(nullptr, " ");
+    center.x = std::atof(cXStr);
+    center.y = std::atof(cYStr);
     char * koefStr = strtok(nullptr, " ");
     koef = std::atof(koefStr);
     std::cout << "KOEF =" << koef << "\n";
@@ -84,15 +79,14 @@ gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, s
   point_t arr[2] = {};
   verteces = arr;
   verteces = make_verteces(verteces, 2);
+  delete[] line;
   Rectangle * R = nullptr;
   try {
     R = new Rectangle({verteces[0], verteces[1]});
   } catch(const std::bad_alloc & e) {
     ++nError;
-    delete[] line;
     return nullptr;
   }
-  delete[] line;
   return R;
 }
 
@@ -106,15 +100,14 @@ gavrilova::Triangle* gavrilova::make_triangle(char * line, size_t & nSpaces, siz
   point_t arr[3] = {};
   verteces = arr;
   verteces = make_verteces(verteces, 3);
+  delete[] line;
   Triangle * T = nullptr;
   try {
     T = new Triangle(verteces[0], verteces[1], verteces[2]);
   } catch(const std::bad_alloc & e) {
     ++nError;
-    delete[] line;
     return nullptr;
   }
-  delete[] line;
   return T;
 }
 gavrilova::Polygon* gavrilova::make_polygon(char * line, size_t & nSpaces, size_t & nError) {
@@ -133,9 +126,9 @@ gavrilova::Polygon* gavrilova::make_polygon(char * line, size_t & nSpaces, size_
     return nullptr;
   }
   verteces = make_verteces(verteces, nPoints);
+  delete[] line;
   if (hasSameVerteces(verteces, nPoints)) {
     ++nError;
-    delete[] line;
     return nullptr;
   }
   Polygon * P = nullptr;
@@ -143,11 +136,9 @@ gavrilova::Polygon* gavrilova::make_polygon(char * line, size_t & nSpaces, size_
     P = new Polygon(nPoints, verteces);
   } catch (const std::bad_alloc & e) {
     delete[] verteces;
-    delete[] line;
     ++nError;
     return nullptr;
   }
-  delete[] line;
   return P;
 }
 
