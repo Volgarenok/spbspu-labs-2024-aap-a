@@ -5,7 +5,7 @@ brevnov::Rectangle::Rectangle(point_t left, point_t right) : left(left), right(r
 
 double brevnov::Rectangle::getArea()
 {
-  return (right.x - left.x) * (right.y - left.y)
+  return (right.x - left.x) * (right.y - left.y);
 }
 
 brevnov::rectangle_t brevnov::Rectangle::getFrameRect()
@@ -20,8 +20,8 @@ brevnov::rectangle_t brevnov::Rectangle::getFrameRect()
 void brevnov::Rectangle::move(point_t new_centre)
 {
   point_t old_centre = getFrameRect().pos;
-  dx = new_centre.x - old_centre.x;
-  dy = new_centre.y - old_centre.y;
+  double dx = new_centre.x - old_centre.x;
+  double dy = new_centre.y - old_centre.y;
   move(dx, dy);
 }
 
