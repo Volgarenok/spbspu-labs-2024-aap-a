@@ -43,8 +43,9 @@ namespace gavrilova
 gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t & center, double & koef, size_t & nError) {
   size_t len = 0;
   size_t nSpaces = 0;
-  char * line = inputStr(in, len, nSpaces);
+  const char * line = inputStr(in, len, nSpaces);
   if (!line || line[0] == '\0') {
+    delete[] line;
     return nullptr;
   }
   char * shapeType = strtok(line, " ");
