@@ -1,4 +1,4 @@
-#include "shape.cpp"
+#include "shape.hpp"
 
 void brevnov::destroy_shape(Shape** shapes, size_t count)
 {
