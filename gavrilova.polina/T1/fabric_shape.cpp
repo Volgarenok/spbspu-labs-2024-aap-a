@@ -60,6 +60,7 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
     try {
       cntr = new point_t;
     } catch(const std::bad_alloc & e) {
+      delete[] line;
       return nullptr;
     }
     cntr = make_verteces(cntr, 1);
@@ -68,6 +69,7 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
     koef = std::atof(koefStr);
     std::cout << "KOEF =" << koef << "\n";
   }
+  delete[] line;
   return nullptr;
 }
 

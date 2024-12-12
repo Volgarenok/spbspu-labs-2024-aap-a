@@ -7,7 +7,7 @@ char* gavrilova::inputStr(std::istream& in, size_t & len, size_t & nSpaces)
   char* result_str = nullptr;
   constexpr int K = 100;
   try {
-    result_str = new char [K];
+    result_str = new char[K];
   } catch (const std::bad_alloc & e) {
     return nullptr;
   }

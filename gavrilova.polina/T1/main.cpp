@@ -2,11 +2,10 @@
 #include <string>
 #include "fabric_shape.hpp"
 namespace gavrilova {
-  void scaleShape(Shape & shape, point_t center, double k) {
+  void scaleShape(Shape & shape, const point_t & center, double k) {
     point_t pos1 = shape.getFrameRect().pos;
-    shape.move(center);
-    double difX = shape.getFrameRect().pos.x - pos1.x;
-    double difY = shape.getFrameRect().pos.y - pos1.y;
+    double difX = center.x - pos1.x;
+    double difY = center.y - pos1.y;
     shape.scale(k);
     difX *= k;
     difY *= k;
@@ -32,8 +31,10 @@ int main()
     std::cout << "!!\n";
     if (Shapes[nShapes]) {
       commonAreaBefore += Shapes[nShapes]->getArea();
+      ++nShapes;
+    } else if (koef > 0) {
+      break;
     }
-    ++nShapes;
     std::cout << "nShapes = " << nShapes << "\n";
   }
   if (koef <= 0) {
