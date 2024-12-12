@@ -15,7 +15,7 @@ int main()
   }
   size_t position = 0;
   std::cout << std::boolalpha;
-  std::cout << (hismatova::isValidString(str, position) && position == length);
+  std::cout << (hismatova::isValidString(str, position) && position == length) << "\n";
   free(str);
   return 0;
 }
