@@ -6,6 +6,7 @@ namespace brevnov
 {
   class Shape
   {
+  public:
     virtual double getArea() = 0;
     virtual rectangle_t getFrameRect() = 0;
     virtual void move(point_t new_centre) = 0;
