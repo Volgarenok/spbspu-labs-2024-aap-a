@@ -17,11 +17,9 @@ const char* dribas::isLetter(const char* string)
   if (!string) {
     return string;
   }
-  char letter[9] = {'a', 'b', 'c', 'd', 'e', 'f', 'x', 'y', 'z'};
-  for (size_t i = 0; i < 9; i++) {
-    if (letter[i] == *string) {
-      return (string + 1);
-    }
+  if (*string == 'a' || *string == 'b' || *string == 'c' || *string == 'd' || *string == 'e'
+    || *string == 'f' || *string == 'x' || *string == 'y' || *string == 'z') {
+      return string + 1;
   }
   return nullptr;
 }
@@ -39,8 +37,8 @@ const char* dribas::isUnsignInt(const char* string)
   if (!string) {
     return string;
   }
-  const char* next = dribas::isNumber(string);
-  if (const char* countinues = dribas::isUnsignInt(next)) {
+  const char* next = isNumber(string);
+  if (const char* countinues = isUnsignInt(next)) {
     return countinues;
   }
   return next;
@@ -51,10 +49,10 @@ const char* dribas::isMultiplier(const char* string)
   if (!string) {
     return string;
   }
-  if (dribas::isUnsignInt(string)) {
-    return dribas::isUnsignInt(string);
+  if (isUnsignInt(string)) {
+    return isUnsignInt(string);
   }
-  return dribas::isLetter(string);
+  return isLetter(string);
 }
 
 const char* dribas::isTerm(const char* string)
@@ -62,13 +60,13 @@ const char* dribas::isTerm(const char* string)
   if (!string) {
     return string;
   }
-  auto next = dribas::isMultiplier(string);
+  const char * next = isMultiplier(string);
   if (!next) {
     return next;
   }
   if (*next == '*' || *next == '/') {
     next++;
-    auto countinies = dribas::isTerm(next);
+    auto countinies = isTerm(next);
     return countinies;
   }
   return next;
@@ -82,18 +80,18 @@ const char* dribas::isExpression(const char* string)
   if (*string == '\0') {
     return string;
   }
-  auto next = dribas::isTerm(string);
+  auto next = isTerm(string);
   if (!next) {
     return next;
   }
   if (*next == '+' || *next == '-') {
     next++;
-    auto countinies = dribas::isExpression(next);
+    auto countinies = isExpression(next);
     return countinies;
   }
   return next;
 }
 bool dribas::isValidString(const char* string)
 {
-  return (dribas::isExpression(string)) != nullptr;
+  return (isExpression(string)) != nullptr;
 }
