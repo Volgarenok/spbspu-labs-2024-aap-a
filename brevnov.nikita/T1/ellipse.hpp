@@ -7,6 +7,7 @@ namespace brevnov
   {
   public:
     Ellipse(point_t center, double r1, double r2);
+    ~Ellipse();
     double getArea();
     rectangle_t getFrameRect();
     void move(point_t new_centre);

@@ -7,6 +7,7 @@ namespace brevnov
   {
   public:
     Diamond(point_t center, point_t horizontal, point_t vertical);
+    ~Diamond();
     double getArea();
     rectangle_t getFrameRect();
     void move(point_t new_centre);
