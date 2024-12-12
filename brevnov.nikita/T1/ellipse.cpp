@@ -1,13 +1,13 @@
 #include "ellipse.hpp"
 #include <cmath>
 
-brevnov::Ellipse(point_t center, double r1, double r2) : center(center), r1(r1), r2(r2)
+brevnov::Ellipse(point_t center, double r1, double r2): center(center), r1(r1), r2(r2)
 {
 }
 
 double brevnov::Ellipse::getArea()
 {
-  const p = std::acos(-1.0);
+  const double p = std::acos(-1.0);
   return p * r1 * r2;
 }
 
