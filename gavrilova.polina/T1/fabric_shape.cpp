@@ -82,11 +82,10 @@ gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, s
   delete[] line;
   Rectangle * R = nullptr;
   try {
-    R = new Rectangle({verteces[0], verteces[1]});
+    R = new Rectangle(verteces[0], verteces[1]);
   } catch(const std::bad_alloc & e) {
     ++nError;
     verteces = nullptr;
-    delete[] line;
     return nullptr;
   }
   return R;
