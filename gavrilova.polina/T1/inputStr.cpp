@@ -38,6 +38,7 @@ char* gavrilova::inputStr(std::istream& in, size_t & len, size_t & nSpaces)
       result_str[len++] = c;
     }
   }
+  in >> std::skipws;
   result_str[len] = '\0';
   return result_str;
 }

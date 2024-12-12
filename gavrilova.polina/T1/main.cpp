@@ -32,7 +32,7 @@ int main()
     if (Shapes[nShapes]) {
       commonAreaBefore += Shapes[nShapes]->getArea();
       ++nShapes;
-    } else if (koef > 0) {
+    } else if (koef > 0 || std::cin.eof()) {
       break;
     }
     std::cout << "nShapes = " << nShapes << "\n";
