@@ -1,108 +1,88 @@
-#include "parseexpr.h"
 #include <cctype>
 #include <cstddef>
+#include <iostream>
+#include "parseexpr.h"
 
 namespace averenkov
 {
+  bool isSumb(const char* str, size_t& index);
   bool hasExpression(const char* str, size_t& index);
   bool hasTerm(const char* str, size_t& index);
   bool hasFactor(const char* str, size_t& index);
   bool hasNumber(const char* str, size_t& index);
 }
 
-
-bool averenkov::hasExpression(const char* str, size_t& index)
+bool averenkov::isSumb(const char* str, size_t& index)
 {
-  if (!averenkov::hasTerm(str, index))
+  if (c != 'a' && c != 'b' && c != 'c' && c != 'd' && c != 'e' && c != 'f' && c != 'x' && c != 'y' && c != 'z' )
   {
     return false;
   }
-  if (str[index] == '+' || str[index] == '-')
+  index++;
+  return true;
+}
+bool averenkov::hasNumber(const char* str, size_t& index)
+{
+  if (!std::isdigit(str[index]))
   {
-    index++;
-    return averenkov::hasExpression(str, index);
+    return false;
+  }
+  index++;
+  if (std::isdigit(str[index]))
+  {
+    return hasNumber(str, index);
   }
   return true;
 }
 
-bool averenkov::hasTerm(const char* str, size_t& index)
-{
-  if (!averenkov::hasFactor(str, index))
-  {
-    return false;
-  }
-  if (str[index] == '*' || str[index] == '/')
-  {
-    index++;
-    return averenkov::hasTerm(str, index);
-  }
-  return true;
-}
 
 bool averenkov::hasFactor(const char* str, size_t& index)
 {
   if (str[index] == '(')
   {
     index++;
-    if (!averenkov::hasExpression(str, index))
+    if (!hasExpression(str, index))
     {
       return false;
     }
-    if (str[index] != ')')
+    if (str[index] == ')')
     {
-      return false;
+      index++;
+      return true;
     }
-    index++;
-    return true;
+    return false;
   }
-  if (std::isalpha(str[index]))
-  {
-    index++;
-    return true;
-  }
-  return averenkov::hasNumber(str, index);
+  return hasNumber(str, index) || isSumb(str, index);
 }
 
-bool averenkov::hasNumber(const char* str, size_t& index)
+bool averenkov::hasTerm(const char* str, size_t& index)
 {
+  if (!hasFactor(str, index))
+  {
+    return false;
+  }
+  if (str[index] == '*' || str[index] == '/')
+  {
+    index++;
+    return hasTerm(str, index);
+  }
+  return true;
+}
+
+bool averenkov::hasExpression(const char* str, size_t& index)
+{
+  if (!hasTerm(str, index))
+  {
+    return false;
+  }
   if (str[index] == '+' || str[index] == '-')
   {
     index++;
+    return hasExpression(str, index);
   }
-  bool hasDigits = false;
-  if (std::isdigit(str[index]))
-  {
-    hasDigits = true;
-    index++;
-    return averenkov::hasNumber(str, index);
-  }
-  if (str[index] == '.')
-  {
-    index++;
-    if (std::isdigit(str[index]))
-    {
-      hasDigits = true;
-      index++;
-      return averenkov::hasNumber(str, index);
-    }
-    return false;
-  }
-  if ((str[index] == 'e' || str[index] == 'E') && hasDigits)
-  {
-    index++;
-    if (str[index] == '+' || str[index] == '-')
-    {
-      index++;
-    }
-    if (std::isdigit(str[index]))
-    {
-      index++;
-      return averenkov::hasNumber(str, index);
-    }
-    return false;
-  }
-  return hasDigits;
+  return true;
 }
+
 
 bool averenkov::isReal(const char* str)
 {

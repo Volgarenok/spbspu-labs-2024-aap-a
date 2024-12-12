@@ -4,12 +4,10 @@
 
 int main()
 {
-  char* input = nullptr;
-  input = averenkov::stringInput(std::cin);
+  const char* input = averenkov::stringInput(std::cin);
   if (input[0] == '\0')
   {
     std::cerr << "Empty string";
-    free(input);
     return 1;
   }
   if (input == nullptr)
@@ -18,6 +16,5 @@ int main()
     return 1;
   }
   std::cout << std::boolalpha << averenkov::isReal(input) << "\n";
-  free(input);
   return 0;
 }
