@@ -51,11 +51,11 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
   char * shapeType = strtok(line, " ");
 
   if (!std::strcmp(shapeType, "RECTANGLE")) {
-    return make_rectangle(char * line, nSpaces, nError);
+    return make_rectangle(line, nSpaces, nError);
   } else if (!std::strcmp(shapeType, "TRIANGLE")) {
-    return make_triangle(char * line, nSpaces, nError);
+    return make_triangle(line, nSpaces, nError);
   } else if (!std::strcmp(shapeType, "POLYGON")) {
-    return make_polygon(char * line, nSpaces, nError);
+    return make_polygon(line, nSpaces, nError);
   } else if (!std::strcmp(shapeType, "SCALE")) {
     point_t * cntr = nullptr;
     try {
