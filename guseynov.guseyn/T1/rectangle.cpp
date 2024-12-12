@@ -1,5 +1,7 @@
 #include "rectangle.hpp"
 
+#include <exception>
+
 guseynov::Rectangle::Rectangle(point_t leftLowP, point_t rightHighP)
 {
   if (leftLowP.x >= rightHighP.x || leftLowP.y >= rightHighP.y)
