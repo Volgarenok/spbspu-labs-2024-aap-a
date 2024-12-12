@@ -85,6 +85,7 @@ gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, s
     R = new Rectangle({verteces[0], verteces[1]});
   } catch(const std::bad_alloc & e) {
     ++nError;
+    verteces = nullptr;
     return nullptr;
   }
   return R;
@@ -106,6 +107,7 @@ gavrilova::Triangle* gavrilova::make_triangle(char * line, size_t & nSpaces, siz
     T = new Triangle(verteces[0], verteces[1], verteces[2]);
   } catch(const std::bad_alloc & e) {
     ++nError;
+    verteces = nullptr;
     return nullptr;
   }
   return T;
