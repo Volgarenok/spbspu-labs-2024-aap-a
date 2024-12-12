@@ -42,12 +42,12 @@ gavrilova::rectangle_t gavrilova::Triangle::getFrameRect() const {
   double maxY = std::max(std::max(A_.y, B_.y), C_.y);
   resultRect.height = maxY - minY;
   resultRect.width = maxX- minX;
-  resultRect.pos.x = (maxX- minX)/2;
-  resultRect.pos.y = (maxY - minY)/2;
+  resultRect.pos.x = (maxX - minX) / 2 + minX;
+  resultRect.pos.y = (maxY - minY) / 2 + minY;
   return resultRect;
 }
 void gavrilova::Triangle::move(point_t p) {
-  point_t center = getCenter();
+  point_t center = getFrameRect().pos;
   double difX = p.x - center.x;
   double difY = p.y - center.y;
   A_.x += difX;
@@ -56,8 +56,7 @@ void gavrilova::Triangle::move(point_t p) {
   B_.y += difY;
   C_.x += difX;
   C_.y += difY;
-  center.x = p.x;
-  center.y = p.y;
+
 }
 void gavrilova::Triangle::move(double difX, double difY) {
   A_.x += difX;
@@ -68,16 +67,17 @@ void gavrilova::Triangle::move(double difX, double difY) {
   C_.y += difY;
 }
 void gavrilova::Triangle::scale(double k) {
-  point_t center = getCenter();
-  A_.x = center.x - (center.x - A_.x) / 2 * k;
-  A_.y = center.y - (center.y - A_.y) / 2 * k;
-  B_.x = center.x - (center.x - B_.x) / 2 * k;
-  B_.y = center.y - (center.y - B_.y) / 2 * k;
-  C_.x = center.x - (center.x - C_.x) / 2 * k;
-  C_.y = center.y - (center.y - C_.y) / 2 * k;
+  point_t center =  getFrameRect().pos;
+  A_.x = center.x - (center.x - A_.x) * k;
+  A_.y = center.y - (center.y - A_.y) * k;
+  B_.x = center.x - (center.x - B_.x) * k;
+  B_.y = center.y - (center.y - B_.y) * k;
+  C_.x = center.x - (center.x - C_.x) * k;
+  C_.y = center.y - (center.y - C_.y) * k;
 }
-gavrilova::point_t gavrilova::Triangle::getCenter() {
+/* gavrilova::point_t gavrilova::Triangle::getCenter() {
   double cX = (A_.x + B_.x + C_.x) / 3;
   double cY = (A_.y + B_.y + C_.y) / 3;
   return {cX, cY};
 }
+ */

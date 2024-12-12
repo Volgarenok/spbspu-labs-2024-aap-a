@@ -1,15 +1,41 @@
 #include <iostream>
+#include <ostream>
 #include <string>
 #include "fabric_shape.hpp"
+#include <iomanip>
 namespace gavrilova {
   void scaleShape(Shape & shape, const point_t & center, double k) {
     point_t pos1 = shape.getFrameRect().pos;
     double difX = center.x - pos1.x;
     double difY = center.y - pos1.y;
+    //std::cout << "difX = " << difX << " dify = " << difY << "\n";
+    shape.move(center);
+    /* std::cout << "After move:\n";
+    std::cout << "height = "<< shape.getFrameRect().height << " width = "<< shape.getFrameRect().width << "\n";
+    std::cout << "pos = " << shape.getFrameRect().pos.x << " " << shape.getFrameRect().pos.y << "\n"; */
     shape.scale(k);
+    /* std::cout << "After scale:\n";
+    std::cout << "height = "<< shape.getFrameRect().height << " width = "<< shape.getFrameRect().width << "\n";
+    std::cout << "pos = " << shape.getFrameRect().pos.x << " " << shape.getFrameRect().pos.y << "\n"; */
     difX *= k;
     difY *= k;
+    //std::cout << "difX = " << difX << " dify = " << difY << "\n";
     shape.move(-difX, -difY);
+    /* std::cout << "After last move:\n";
+    std::cout << "height = "<< shape.getFrameRect().height << " width = "<< shape.getFrameRect().width << "\n";
+    std::cout << "pos = " << shape.getFrameRect().pos.x << " " << shape.getFrameRect().pos.y << "\n"; */
+  }
+  void outRectangles(std::ostream & out, gavrilova::Shape ** Shapes, size_t nShapes) {
+    if (nShapes) {
+      for (size_t i = 0; i < nShapes; ++i) {
+        rectangle_t rect = Shapes[i]->getFrameRect();
+        //out << " " << rect.height << " " << rect.width << " " << rect.pos.x << " " << rect.pos.y << "\n";
+        out << std::setprecision(3);
+        out << " " << rect.pos.x - rect.width / 2 << " " << rect.pos.y - rect.height / 2;
+        out << " " << rect.pos.x + rect.width / 2 << " " << rect.pos.y + rect.height / 2;
+      }
+      out << "\n";
+    }
   }
 }
 int main()
@@ -28,23 +54,34 @@ int main()
       //std::cerr << Error in creating shape;
       return 1;
     }
-    std::cout << "!!\n";
+    //std::cout << "!!\n";
     if (Shapes[nShapes]) {
       commonAreaBefore += Shapes[nShapes]->getArea();
       ++nShapes;
     } else if (koef > 0 || std::cin.eof()) {
       break;
     }
-    std::cout << "nShapes = " << nShapes << "\n";
+    //std::cout << "nShapes = " << nShapes << "\n";
   }
   if (koef <= 0) {
     std::cerr << "ERROR\n";
     return 1;
   }
+  if (!nShapes || nError) {
+    std::cerr << "Возникли ошибки при вводе фигур";
+  }
+  std::cout << std::setprecision(2);
+  std::cout << commonAreaBefore;
+  gavrilova::outRectangles(std::cout, Shapes, nShapes);
+
+  double commonAreaAfter = 0;
   for (size_t i = 0; i < nShapes; ++i) {
     gavrilova::scaleShape(*(Shapes[i]), center, koef);
+    commonAreaAfter += Shapes[i]->getArea();
   }
-  //std::cout << Форма отмасштабирована\n;
+  std::cout << commonAreaAfter;
+  gavrilova::outRectangles(std::cout, Shapes, nShapes);
+
    for (size_t i = 0; i < nShapes; ++i) {
        delete Shapes[i];
    }

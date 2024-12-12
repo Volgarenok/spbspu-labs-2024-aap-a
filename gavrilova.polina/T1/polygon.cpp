@@ -34,12 +34,12 @@ gavrilova::rectangle_t gavrilova::Polygon::getFrameRect() const {
   }
   resultRect.height = maxY - minY;
   resultRect.width = maxX- minX;
-  resultRect.pos.x = (maxX- minX)/2;
-  resultRect.pos.y = (maxY - minY)/2;
+  resultRect.pos.x = (maxX- minX) / 2 + minX;
+  resultRect.pos.y = (maxY - minY) / 2 + minY;
   return resultRect;
 }
 void gavrilova::Polygon::move(point_t p) {
-  point_t center = getCenter();
+  point_t center = getFrameRect().pos;
   double difX = p.x - center.x;
   double difY = p.y - center.y;
   for (size_t i = 1; i < size_; ++i) {
@@ -54,10 +54,10 @@ void gavrilova::Polygon::move(double difX, double difY) {
   }
 }
 void gavrilova::Polygon::scale(double k) {
-  point_t center = getCenter();
+  point_t center = getFrameRect().pos;
   for (size_t i = 1; i < size_; ++i) {
-    verteces_[i].x = center.x - (center.x - verteces_[i].x) / 2 * k;
-    verteces_[i].y = center.y - (center.y - verteces_[i].y) / 2 * k;
+    verteces_[i].x = center.x - (center.x - verteces_[i].x) * k;
+    verteces_[i].y = center.y - (center.y - verteces_[i].y) * k;
   }
 }
 gavrilova::point_t gavrilova::Polygon::getCenter() {
