@@ -1,5 +1,5 @@
 #include "isRealNumber.hpp"
-#include "cctype"
+#include <cctype>
 
 namespace balashov
 {
