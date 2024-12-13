@@ -56,6 +56,6 @@ namespace abramov
     pRightUpper_.x = center.x + newWidth / 2;
     pRightUpper_.y = center.y + newHeigth / 2;
     pLeftLower_.x = center.x - newWidth / 2;
-    pLeftLower_.y = center.y - newWidth / 2;
+    pLeftLower_.y = center.y - newHeigth / 2;
   }
 }
