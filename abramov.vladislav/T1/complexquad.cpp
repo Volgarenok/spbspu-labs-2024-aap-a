@@ -24,6 +24,26 @@ namespace abramov
     b = max;
   }
 
+  void getCoordsOfIntersection (point_t A, point_t B, point_t C, point_t D, double &x, double &y)
+  {
+    double k1 = (B.y - A.y) / (B.x - A.x);
+    double b1 = A.y - A.x * k1;
+    double k2 = (D.y - C.y) / (D.x - C.x);
+    double b2 = C.y - C.x * k2;
+    if (k1 == k2)
+    {
+      throw std::logic_error("There is no center\n");
+    }
+    double old_x = x;
+    x = (b2 - b1) / (k1 - k2);
+    y = k1 * x + b1;
+    if (x == A.x || x == B.x || x == C.x || x == D.x)
+    {
+      x = old_x;
+      throw std::logic_error("There is no center\n");
+    }
+  }
+
   double getTriangleArea(point_t A, point_t B, point_t O)
   {
     double a = getLength(A, B);
@@ -35,7 +55,18 @@ namespace abramov
 
   ComplexQuad::ComplexQuad(point_t A, point_t B, point_t C, point_t D):
   A_(A), B_(B), C_(C), D_(D)
-  {}
+  {
+    try
+    {
+      double x = 0;
+      double y = 0;
+      getCoordsOfIntersection(A, B, C, D, x, y);
+    }
+    catch (const std::logic_error &e)
+    {
+      throw std::logic_error("It is impossible to build ComplexQuad\n");
+    }
+  }
 
   double ComplexQuad::getArea() const
   {
@@ -66,17 +97,10 @@ namespace abramov
 
   point_t ComplexQuad::getCenterComplexQuad() const
   {
-    double k1 = (B_.y - A_.y) / (B_.x - A_.x);
-    double b1 = A_.y - A_.x * k1;
-    double k2 = (D_.y - C_.y) / (D_.x - C_.x);
-    double b2 = C_.y - C_.x * k2;
-    if (k1 == k2)
-    {
-      throw std::logic_error("There is no center\n");
-    }
-    double x = (b2 - b1) / (k1 - k2);
-    double y = k1 * x + b1;
+    double x = 0;
+    double y = 0;
     point_t center;
+    getCoordsOfIntersection(A_, B_, C_, D_, x, y);
     center.x = x;
     center.y = y;
     return center;

@@ -39,7 +39,8 @@ int main()
         p2.y = y2;
         try
         {
-          shapes[i++] = new abramov::Rectangle(p1, p2);
+          shapes[i] = new abramov::Rectangle(p1, p2);
+          ++i;
         }
         catch (const std::logic_error &e)
         {
@@ -50,16 +51,17 @@ int main()
       {
         double len = 0;
         std::cin >> x1 >> y1 >> len;
-        if (len <= 0)
+        abramov::point_t p;
+        p.x = x1;
+        p.y = y1;
+        try
+        {
+          shapes[i] = new abramov::Square(p, len);
+          ++i;
+        }
+        catch (const std::logic_error &e)
         {
           wrong_figure = true;
-        }
-        else
-        {
-          abramov::point_t p;
-          p.x = x1;
-          p.y = y1;
-          shapes[i++] = new abramov::Square(p, len);
         }
       }
       if (s1 == "COMPLEXQUAD")
@@ -81,7 +83,15 @@ int main()
         p3.y = y3;
         p4.x = x4;
         p4.y = y4;
-        shapes[i++] = new abramov::ComplexQuad(p1, p2, p3, p4);
+        try
+        {
+          shapes[i] = new abramov::ComplexQuad(p1, p2, p3, p4);
+          ++i;
+        }
+        catch (const std::logic_error &e)
+        {
+          wrong_figure = true;
+        }
       }
       if (s1 == "SCALE")
       {
@@ -103,7 +113,6 @@ int main()
   }
   if (i == 0)
   {
-    abramov::deleteShapes(shapes, i);
     std::cerr << "There is no figures\n";
     return 1;
   }

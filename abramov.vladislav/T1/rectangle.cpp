@@ -5,7 +5,8 @@
 
 namespace abramov
 {
-  Rectangle::Rectangle(point_t p1, point_t p2)
+  Rectangle::Rectangle(point_t p1, point_t p2):
+  pLeftLower_(p1), pRightUpper_(p2)
   {
     if (p1.x >= p2.x || p1.y >= p2.y)
     {

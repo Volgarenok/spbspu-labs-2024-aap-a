@@ -1,10 +1,16 @@
 #include "square.hpp"
+#include <stdexcept>
 
 namespace abramov
 {
   Square::Square(point_t p, double len):
   pLeftLower_(p), len_(len)
-  {}
+  {
+    if (len <= 0)
+    {
+      throw std::logic_error("It is impossible to build square\n");
+    }
+  }
 
   double Square::getArea() const
   {
