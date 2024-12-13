@@ -6,6 +6,6 @@ namespace lebedev
 {
   double getSumArea(lebedev::Shape** shps, size_t count);
   void scaleForShapes(lebedev::Shape** shps, size_t count, lebedev::point_t scalePoint, double k);
-  void getFrameCoordinates(lebedev::Shape** shps, size_t count);
+  void printFrameCoordinates(lebedev::Shape** shps, size_t count);
 }
 #endif
