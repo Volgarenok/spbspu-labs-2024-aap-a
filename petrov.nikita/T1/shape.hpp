@@ -1,13 +1,15 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 #include "base-types.hpp"
-struct Shape
+namespace petrov
 {
-public:
-  virtual void getArea();
-  virtual void getFrameRect();
-  virtual void move(point_t concrete_point);
-  virtual void move(double dx, double dy);
-  virtual void scale();
-};
+  struct Shape
+  {
+    virtual void getArea();
+    virtual void getFrameRect();
+    virtual void move(point_t concrete_point);
+    virtual void move(double dx, double dy);
+    virtual void scale(double k);
+  };
+}
 #endif

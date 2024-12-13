@@ -1,14 +1,17 @@
 #ifndef BASE_TYPES_HPP
 #define BASE_TYPES_HPP
-struct point_t
+namespace petrov
 {
-private:
-  double x, y;
-};
+  struct point_t
+  {
+  private:
+    double x_, y_;
+  };
 
-struct rectangle_t
-{
-private:
-  double width, height, pos;
-};
+  struct rectangle_t
+  {
+  private:
+    double width_, height_, pos_;
+  };
+}
 #endif
