@@ -118,9 +118,8 @@ gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, s
     ++nError;
     delete[] verteces;
     return nullptr;
-  }   
+  }
 }
-
 gavrilova::Triangle* gavrilova::make_triangle(char * line, size_t & nSpaces, size_t & nError) {
   if (nSpaces != 6) {
     delete[] line;
@@ -135,7 +134,7 @@ gavrilova::Triangle* gavrilova::make_triangle(char * line, size_t & nSpaces, siz
     ++nError;
     delete[] line;
     return nullptr;
-  } 
+  }
   delete[] line;
   Triangle * T = nullptr;
   try {
