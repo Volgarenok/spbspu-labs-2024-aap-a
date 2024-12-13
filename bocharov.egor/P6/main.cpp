@@ -17,7 +17,7 @@ int main()
     return 1;
   }
   std::cout << std::boolalpha;
-  std::cout << bocharov::Expression(string) << "\n";
+  std::cout << bocharov::isExpression(string) << "\n";
   delete[] string;
   return 0;
 }

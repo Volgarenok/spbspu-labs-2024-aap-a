@@ -5,10 +5,10 @@ namespace
 {
   bool isDigit(const char ** string, char cur);
   bool isLetter(const char ** string, char cur);
-  bool isId(const char ** string);
-  bool isUnsigned_int(const char ** string);
-  bool isMultiplier(const char ** string);
-  bool isTerm(const char ** string);
+  bool hasId(const char ** string);
+  bool hasNumber(const char ** string);
+  bool hasMultiplier(const char ** string);
+  bool hasTerm(const char ** string);
 
   bool isDigit(const char ** string, char cur)
   {
@@ -18,6 +18,7 @@ namespace
     }
     if (cur == (**string))
     {
+      ++(*string);
       return 1;
     }
     return isDigit(string, cur + 1);
@@ -31,41 +32,42 @@ namespace
     }
     if (cur == (**string))
     {
+      ++(*string);
       return 1;
     }
     return isLetter(string, cur + 1);
   }
 
-  bool isId(const char ** string)
+  bool hasId(const char ** string)
   {
     char cur = 'a';
     return isLetter(string, cur);
   }
 
-  bool isUnsigned_int(const char ** string)
+  bool hasNumber(const char ** string)
   {
     char cur = '0';
     bool result = isDigit(string, cur);
     if (result)
     {
-      isUnsigned_int(string);
+      hasNumber(string);
     }
     return result;
   }
 
-  bool isMultiplier(const char ** string)
+  bool hasMultiplier(const char ** string)
   {
-    return isUnsigned_int(string) || isId(string);
+    return hasNumber(string) || hasId(string);
   }
 
-  bool isTerm(const char ** string)
+  bool hasTerm(const char ** string)
   {
-    if (isMultiplier(string))
+    if (hasMultiplier(string))
     {
       if (**string == '*')
       {
         (*string)++;
-        return isTerm(string);
+        return hasTerm(string);
       }
       return true;
     }
@@ -73,21 +75,21 @@ namespace
   }
 }
 
-bool bocharov::isExpression(const char ** string)
+bool bocharov::hasExpression(const char ** string)
 {
   if (isTerm(string))
   {
     if ((**string == '+') || (**string == '-'))
     {
       (*string)++;
-      return isExpression(string);
+      return hasExpression(string);
     }
     return true;
   }
   return false;
 }
 
-bool bocharov::Expression(const char * string)
+bool bocharov::isExpression(const char * string)
 {
-  return isExpression(&string) && *string == '\0';
+  return hasExpression(&string) && *string == '\0';
 }

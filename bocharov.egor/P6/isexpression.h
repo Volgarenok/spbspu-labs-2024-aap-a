@@ -2,7 +2,7 @@
 #define ISEXPRESSION_H
 namespace bocharov
 {
-  bool Expression(const char * string);
-  bool isExpression(const char ** string);
+  bool isExpression(const char * string);
+  bool hasExpression(const char ** string);
 }
 #endif
