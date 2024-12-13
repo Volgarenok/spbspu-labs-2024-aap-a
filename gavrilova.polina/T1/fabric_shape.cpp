@@ -110,6 +110,7 @@ gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, s
   }
   Rectangle * R = nullptr;
   try {
+    std::cout << "Вершины:" << verteces[0].x << " " << verteces[0].y << " " << verteces[1].x << "\n"
     R = new Rectangle(verteces[0], verteces[1]);
     delete[] verteces;
     return R;
