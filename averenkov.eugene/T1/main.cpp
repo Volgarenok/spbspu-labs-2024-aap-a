@@ -18,7 +18,7 @@ int main()
   char* input;
   averenkov::point_t scale_center;
   double factor;
-  while (shapeCount < 10000)
+  while (shapeCount < 10000 || std::cin.eof())
   {
     input = averenkov::stringInput(std::cin);
     if (input == nullptr)
