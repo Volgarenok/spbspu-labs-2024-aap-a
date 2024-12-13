@@ -123,4 +123,42 @@ namespace abramov
       delete x[j];
     }
   }
+
+  void printShapes(std::ostream &out, Shape **shapes, rectangle_t *rects, size_t i, double &x, double &y, double k)
+  {
+    out << std::fixed << std::setprecision(1);
+    double s = 0;
+    for (size_t j = 0; j < i; ++j)
+    {
+      s += shapes[j]->getArea();
+      rects[j] = shapes[j]->getFrameRect();
+    }
+    out << s << " ";
+    point_t p;
+    p.x = x;
+    p.y = y;
+    for (size_t j = 0; j < i - 1; ++j)
+    {
+      printFrameRectCoords(rects[j]);
+      out << " ";
+      scaleFigure(shapes[j], p, k);
+    }
+    printFrameRectCoords(rects[i - 1]);
+    scaleFigure(shapes[i - 1], p, k);
+    out << "\n";
+    s = 0;
+    for (size_t j = 0; j < i; ++j)
+    {
+      s += shapes[j]->getArea();
+      rects[j] = shapes[j]->getFrameRect();
+    }
+    std::cout << s << " ";
+    for (size_t j = 0; j < i - 1; ++j)
+    {
+      printFrameRectCoords(rects[j]);
+      out << " ";
+    }
+    printFrameRectCoords(rects[i - 1]);
+    out << "\n";
+  }
 }

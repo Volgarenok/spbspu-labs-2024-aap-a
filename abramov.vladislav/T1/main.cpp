@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <iomanip>
 #include <getString.hpp>
 #include "base-types.hpp"
 #include "shape.hpp"
@@ -30,7 +29,8 @@ int main()
     std::cerr << "There is no figures\n";
     return 1;
   }
-  double s = 0;
+  abramov::printShapes(std::cout, shapes, rects, i, x, y, k);
+/*  double s = 0;
   std::cout << std::fixed << std::setprecision(1);
   for (size_t j = 0; j < i; ++j)
   {
@@ -63,7 +63,7 @@ int main()
     std::cout << " ";
   }
   abramov::printFrameRectCoords(rects[i - 1]);
-  std::cout << "\n";
+  std::cout << "\n"; */
   if (wrong_figure == true)
   {
     std::cerr << "There was bad figure\n";
