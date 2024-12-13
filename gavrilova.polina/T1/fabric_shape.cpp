@@ -23,8 +23,8 @@ namespace {
   }
   void make_verteces(gavrilova::point_t * verteces, size_t n) {
   for (size_t i = 0; i < n; ++i) {
-    char * xStr = strtok(nullptr, " ");
-    char * yStr = strtok(nullptr, " ");
+    
+    
     double x = std::atof(xStr);
     double y = std::atof(yStr);
     verteces[i] = {x, y};
@@ -110,7 +110,7 @@ gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, s
   }
   Rectangle * R = nullptr;
   try {
-    std::cout << "Вершины:" << verteces[0].x << " " << verteces[0].y << " " << verteces[1].x << "\n"
+    std::cout << "Вершины:" << verteces[0].x << " " << verteces[0].y << " " << verteces[1].x << "\n";
     R = new Rectangle(verteces[0], verteces[1]);
     delete[] verteces;
     return R;
