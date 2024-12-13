@@ -14,7 +14,7 @@ char * sharifullina::inputString(std::istream & in, char stop)
       char * newstr = nullptr;
       try
       {
-        newstr = new char[capacity * 2];
+        newstr = new char[capacity];
       }
       catch (const std::bad_alloc & e)
       {
@@ -85,20 +85,21 @@ char * sharifullina::uniTwo(const char * str1, const char * str2)
   {
     length2++;
   }
-  char *res = new char[length1 + length2 + 1];
+  char * res = new char[length1 + length2 + 1];
+  char * ptr = res;
   while (*str1 != '\0' && *str2 != '\0')
   {
-    *res++ = *str1++;
-    *res++ = *str2++;
+    *ptr++ = *str1++;
+    *ptr++ = *str2++;
   }
   while (*str1 != '\0')
   {
-    *res++ = *str1++;
+    *ptr++ = *str1++;
   }
   while (*str2 != '\0')
   {
-    *res++ = *str2++;
+    *ptr++ = *str2++;
   }
-  *res = '\0';
+  *ptr = '\0';
   return res;
 }

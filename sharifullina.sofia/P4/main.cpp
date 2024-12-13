@@ -25,4 +25,3 @@ int main()
   delete[] str;
   return 0;
 }
-
