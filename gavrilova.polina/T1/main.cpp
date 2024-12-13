@@ -19,7 +19,7 @@ namespace gavrilova {
       for (size_t i = 0; i < nShapes; ++i) {
         rectangle_t rect = Shapes[i]->getFrameRect();
         //out << " " << rect.height << " " << rect.width << " " << rect.pos.x << " " << rect.pos.y << "\n";
-        out << std::fixed;
+/*         out << std::fixed; */
         out << std::setprecision(1);
         out << " " << rect.pos.x - rect.width / 2 << " " << rect.pos.y - rect.height / 2;
         out << " " << rect.pos.x + rect.width / 2 << " " << rect.pos.y + rect.height / 2;
@@ -35,7 +35,7 @@ int main()
   double koef = -1;
   size_t nShapes = 0;
   size_t nError = 0;
-  size_t commonAreaBefore = 0;
+  double commonAreaBefore = 0;
 
   while (!std::cin.eof() && std::cin) {
     try {
@@ -60,8 +60,7 @@ int main()
   if (!nShapes || nError) {
     std::cerr << "Возникли ошибки при вводе фигур";
   }
-  std::cout << std::fixed;
-  std::cout << std::setprecision(1) << commonAreaBefore;
+  std::cout << std::fixed << std::setprecision(1) << commonAreaBefore;
   gavrilova::outRectangles(std::cout, Shapes, nShapes);
 
   double commonAreaAfter = 0;
@@ -69,7 +68,7 @@ int main()
     gavrilova::scaleShape(*(Shapes[i]), center, koef);
     commonAreaAfter += Shapes[i]->getArea();
   }
-  std::cout << std::setprecision(1) << commonAreaAfter;
+  std::cout << std::fixed << std::setprecision(1) << commonAreaAfter;
   gavrilova::outRectangles(std::cout, Shapes, nShapes);
 
   for (size_t i = 0; i < nShapes; ++i) {
