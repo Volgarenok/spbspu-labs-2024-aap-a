@@ -7,7 +7,7 @@ bool gavrilova::isTriangle(point_t A, point_t B, point_t C) {
   double AB = gavrilova::getDistance(A, B);
   double AC = gavrilova::getDistance(A, C);
   double BC = gavrilova::getDistance(B, C);
-  return ( (AB + BC) >= AC && (AB + AC) >= BC && (AC + BC) >= AB && AB && AC && BC );
+  return ( (AB + BC) > AC && (AB + AC) > BC && (AC + BC) > AB && AB && AC && BC );
 }
 double gavrilova::getDistance(point_t A, point_t B){
   return std::sqrt(std::pow(A.x - B.x, 2) + std::pow(A.y - B.y, 2));
