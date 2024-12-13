@@ -91,7 +91,7 @@ int main()
     free(input);
   }
 
-  if (std::cin.eof() && shapeCount == 0)
+  if (std::cin.eof())
   {
     std::cerr << "No scale\n";
     return 1;
