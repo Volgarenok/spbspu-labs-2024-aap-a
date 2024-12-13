@@ -57,7 +57,6 @@ int main()
       break;
     }
     //std::cout << "nShapes = " << nShapes << "\n";
-    
   }
   if (koef <= 0) {
     std::cerr << "ERROR\n";
