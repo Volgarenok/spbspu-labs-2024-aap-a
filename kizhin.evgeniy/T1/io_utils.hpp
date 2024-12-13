@@ -5,6 +5,7 @@
 #include "shape.hpp"
 
 namespace kizhin {
+  double* processInput(std::istream&, std::ostream&, size_t&, Shape**);
   void parseInputString(std::istream&, char**, double**);
   std::ostream& outputShapeFrame(std::ostream&, const Shape*);
   std::ostream& outputShapesInfo(std::ostream&, const Shape* const*, size_t);

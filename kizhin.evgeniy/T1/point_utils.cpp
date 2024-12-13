@@ -1,6 +1,7 @@
 #include "point_utils.hpp"
+#include <algorithm>
 #include <cmath>
-#include <limits>
+#include "base-types.hpp"
 
 namespace kizhin {
   double computeDotProduct(const point_t&, const point_t&, const point_t&);
@@ -9,17 +10,35 @@ namespace kizhin {
 
 bool kizhin::isRightTriangle(const point_t& p1, const point_t& p2, const point_t& p3)
 {
-  const bool isRightAngleAtP1 = !computeDotProduct(p1, p2, p3);
+  const bool isRightAngleAtP1 = !areCollinear(p1, p2, p3) && !computeDotProduct(p1, p2, p3);
   const bool isRightAngleAtP2 = isRightAngleAtP1 || !computeDotProduct(p2, p1, p3);
   const bool isRightAngleAtP3 = isRightAngleAtP2 || !computeDotProduct(p3, p1, p2);
   return isRightAngleAtP3;
 }
 
-double kizhin::computeDistanceSqr(const point_t& p1, const point_t& p2)
+double kizhin::computeDistance(const point_t& p1, const point_t& p2)
 {
   double dx = p1.x - p2.x;
   double dy = p1.y - p2.y;
-  return dx * dx + dy * dy;
+  return std::sqrt(dx * dx + dy * dy);
+}
+
+double* kizhin::computeEdgeCords(const point_t* points, size_t size)
+{
+  double* res = new double[4] {
+    points->x,
+    points->x,
+    points->y,
+    points->y,
+  };
+  for (const point_t* i = points; i != points + size; ++i) {
+    const point_t& point = *i;
+    res[0] = std::min(point.x, res[0]);
+    res[1] = std::max(point.x, res[1]);
+    res[2] = std::min(point.y, res[2]);
+    res[3] = std::max(point.y, res[3]);
+  }
+  return res;
 }
 
 double kizhin::computeDotProduct(const point_t& vertex, const point_t& p1, const point_t& p2)
@@ -35,6 +54,13 @@ bool kizhin::areCollinear(const point_t& p1, const point_t& p2, const point_t& p
 {
   const double leftProduct = (p3.x - p1.x) * (p2.y - p1.y);
   const double rigthProduct = (p2.x - p1.x) * (p3.y - p1.y);
-  return std::abs(leftProduct - rigthProduct) < std::numeric_limits< double >::epsilon();
+  return std::abs(leftProduct - rigthProduct) < epsilon;
+}
+
+kizhin::point_t& operator+=(kizhin::point_t& lhs, const kizhin::point_t& rhs)
+{
+  lhs.x += rhs.x;
+  lhs.y += rhs.y;
+  return lhs;
 }
 

@@ -11,29 +11,31 @@ namespace kizhin {
 class kizhin::Polygon : public Shape
 {
 public:
-  Polygon(const Polygon&) = delete;
-  Polygon(Polygon&&) = delete;
-  Polygon& operator=(const Polygon&) = delete;
-  Polygon& operator=(Polygon&&) = delete;
-
+  Polygon(const Polygon&);
+  Polygon(Polygon&&) noexcept;
   Polygon(const point_t*, size_t);
   ~Polygon();
 
-  double getArea() const override;
+  Polygon& operator=(const Polygon&);
+  Polygon& operator=(Polygon&&) noexcept;
+
   rectangle_t getFrameRect() const override;
+  double getArea() const override;
 
   void move(double, double) override;
   void move(const point_t&) override;
   void scale(double) override;
+  void swap(Polygon&) noexcept;
 
 private:
   point_t* vertices_;
   size_t size_;
   point_t center_;
-  rectangle_t frameRect_;
+  rectangle_t frame_;
 
   void computeFrameRect();
   void computeCenter();
 };
 
 #endif
+

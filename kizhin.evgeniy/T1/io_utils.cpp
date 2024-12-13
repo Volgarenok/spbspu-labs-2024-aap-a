@@ -1,4 +1,5 @@
 #include "io_utils.hpp"
+#include <cstring>
 #include <iomanip>
 #include <ostream>
 #include "shape_utils.hpp"
@@ -7,6 +8,8 @@ namespace kizhin {
   char* parseInputWord(std::istream&);
   double* parseInputParams(std::istream&);
   void resizeBuffer(double** buffer, size_t& capacity);
+  void resetPointers(char**, double**);
+  void throwIfNotScaleOrSize(bool isScaleCommand, size_t shapesSize);
   void copy(const double*, const double*, double*);
   void copy(const char*, const char*, char*);
 }
@@ -39,6 +42,36 @@ std::ostream& kizhin::outputShapeError(std::ostream& os, const char* name, const
     os << ' ' << *i;
   }
   return os;
+}
+
+double* kizhin::processInput(std::istream& is, std::ostream& errs, size_t& size, Shape** shapes)
+{
+  bool isScaleCommand = false;
+  char* currentName = nullptr;
+  double* currentParams = nullptr;
+  size = 0;
+  try {
+    while (is && !isScaleCommand) {
+      parseInputString(is, &currentName, &currentParams);
+      if (currentName && std::strcmp(currentName, "SCALE") == 0) {
+        isScaleCommand = true;
+      } else {
+        Shape* currentShape = createShape(currentName, currentParams);
+        if (currentShape) {
+          shapes[size++] = currentShape;
+        } else {
+          outputShapeError(errs, currentName, currentParams) << '\n';
+        }
+        resetPointers(&currentName, &currentParams);
+      }
+    }
+    throwIfNotScaleOrSize(isScaleCommand, size);
+  } catch (...) {
+    resetPointers(&currentName, &currentParams);
+    throw;
+  }
+  delete[] currentName;
+  return currentParams;
 }
 
 void kizhin::parseInputString(std::istream& is, char** nameOut, double** paramsOut)
@@ -100,6 +133,23 @@ void kizhin::resizeBuffer(double** buffer, size_t& capacity)
   *buffer = tempBuffer;
 }
 
+void kizhin::resetPointers(char** ptr1, double** ptr2)
+{
+  delete[] *ptr1;
+  delete[] *ptr2;
+  *ptr1 = nullptr;
+  *ptr2 = nullptr;
+}
+
+void kizhin::throwIfNotScaleOrSize(bool isScaleCommand, size_t shapesSize)
+{
+  if (!isScaleCommand) {
+    throw std::logic_error("Error: no 'SCALE' command\n");
+  } else if (!shapesSize) {
+    throw std::logic_error("Error: no shapes to perform 'SCALE' command\n");
+  }
+}
+
 void kizhin::copy(const double* first, const double* last, double* result)
 {
   for (; first != last; ++first, ++result) {
@@ -113,3 +163,4 @@ void kizhin::copy(const char* first, const char* last, char* result)
     *result = *first;
   }
 }
+

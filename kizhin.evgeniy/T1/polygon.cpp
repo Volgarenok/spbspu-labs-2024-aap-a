@@ -1,6 +1,7 @@
 #include "polygon.hpp"
 #include <cassert>
 #include <stdexcept>
+#include "point_utils.hpp"
 
 namespace kizhin {
   void copy(const point_t*, const point_t*, point_t*);
@@ -8,13 +9,25 @@ namespace kizhin {
   size_t countElement(const point_t*, const point_t*, const point_t);
 }
 
+kizhin::Polygon::Polygon(const Polygon& rhs) :
+  vertices_(new point_t[rhs.size_]), size_(rhs.size_), center_(rhs.center_), frame_(rhs.frame_)
+{
+  copy(rhs.vertices_, rhs.vertices_ + size_, vertices_);
+}
+
+kizhin::Polygon::Polygon(Polygon&& rhs) noexcept :
+  vertices_(rhs.vertices_), size_(rhs.size_), center_(rhs.center_), frame_(rhs.frame_)
+{
+  rhs.vertices_ = nullptr;
+}
+
 kizhin::Polygon::Polygon(const point_t* values, size_t size) :
   vertices_(new point_t[size]), size_(size)
 {
-  assert(values && size);
+  assert(values);
   if (size < 3 || hasDuplicates(values, values + size)) {
     delete[] vertices_;
-    throw std::logic_error("Failed to construct polygon");
+    throw std::logic_error("Invalid Points For Polygon Construction");
   }
   copy(values, values + size, vertices_);
   computeFrameRect();
@@ -26,31 +39,43 @@ kizhin::Polygon::~Polygon()
   delete[] vertices_;
 }
 
+kizhin::Polygon& kizhin::Polygon::operator=(const Polygon& rhs)
+{
+  Polygon tmp = rhs;
+  swap(tmp);
+  return *this;
+}
+
+kizhin::Polygon& kizhin::Polygon::operator=(Polygon&& rhs) noexcept
+{
+  delete[] vertices_;
+  swap(rhs);
+  return *this;
+}
+
+kizhin::rectangle_t kizhin::Polygon::getFrameRect() const
+{
+  return frame_;
+}
+
 double kizhin::Polygon::getArea() const
 {
-  double area = 0;
-  for (size_t i = 0; i < size_; ++i) {
-    const point_t& current = vertices_[i];
-    const point_t& next = vertices_[(i + 1) % size_];
+  double area = 0.0;
+  for (point_t *i = vertices_, *end = vertices_ + size_; i != end; ++i) {
+    const point_t& current = *i;
+    const point_t& next = (i + 1 == end) ? *vertices_ : *(i + 1);
     area += current.x * next.y - next.x * current.y;
   }
   return std::abs(area) / 2.0;
 }
 
-kizhin::rectangle_t kizhin::Polygon::getFrameRect() const
-{
-  return frameRect_;
-}
-
 void kizhin::Polygon::move(double dx, double dy)
 {
-  for (point_t* vertex = vertices_; vertex != vertices_ + size_; ++vertex) {
-    vertex->x += dx;
-    vertex->y += dy;
+  for (point_t* i = vertices_; i != vertices_ + size_; ++i) {
+    *i += { dx, dy };
   }
-  frameRect_.pos.x += dx;
-  frameRect_.pos.y += dy;
-  computeCenter();
+  frame_.pos += { dx, dy };
+  center_ += { dx, dy };
 }
 
 void kizhin::Polygon::move(const point_t& newPos)
@@ -62,10 +87,10 @@ void kizhin::Polygon::move(const point_t& newPos)
 
 void kizhin::Polygon::scale(double scaleFactor)
 {
-  assert(scaleFactor > 0);
-  for (point_t* vertex = vertices_; vertex != vertices_ + size_; ++vertex) {
-    vertex->x = center_.x + scaleFactor * (vertex->x - center_.x);
-    vertex->y = center_.y + scaleFactor * (vertex->y - center_.y);
+  assert(scaleFactor > 0.0);
+  for (point_t* i = vertices_; i != vertices_ + size_; ++i) {
+    i->x = center_.x + scaleFactor * (i->x - center_.x);
+    i->y = center_.y + scaleFactor * (i->y - center_.y);
   }
   computeCenter();
   computeFrameRect();
@@ -73,33 +98,32 @@ void kizhin::Polygon::scale(double scaleFactor)
 
 void kizhin::Polygon::computeFrameRect()
 {
-  double xMinCord = vertices_[0].x;
-  double xMaxCord = vertices_[0].x;
-  double yMinCord = vertices_[0].y;
-  double yMaxCord = vertices_[0].y;
-  for (point_t* vertex = vertices_; vertex != vertices_ + size_; ++vertex) {
-    xMinCord = std::min(vertex->x, xMinCord);
-    xMaxCord = std::max(vertex->x, xMaxCord);
-    yMinCord = std::min(vertex->y, yMinCord);
-    yMaxCord = std::max(vertex->y, yMaxCord);
-  }
-  const double width = xMaxCord - xMinCord;
-  const double height = yMaxCord - yMinCord;
-  const point_t pos = { (xMinCord + xMaxCord) / 2, (yMinCord + yMaxCord) / 2 };
-  frameRect_ = { width, height, pos };
+  double* edgeCords = computeEdgeCords(vertices_, size_);
+  const double width = edgeCords[1] - edgeCords[0];
+  const double height = edgeCords[3] - edgeCords[2];
+  const point_t pos = {
+    (edgeCords[0] + edgeCords[1]) / 2.0,
+    (edgeCords[2] + edgeCords[3]) / 2.0,
+  };
+  frame_ = { width, height, pos };
+  delete[] edgeCords;
 }
 
 void kizhin::Polygon::computeCenter()
 {
-  double xCord = 0;
-  double yCord = 0;
-  for (point_t* vertex = vertices_; vertex != vertices_ + size_; ++vertex) {
-    xCord += vertex->x;
-    yCord += vertex->y;
+  point_t sum { 0.0, 0.0 };
+  for (point_t* i = vertices_; i != vertices_ + size_; ++i) {
+    sum += *i;
   }
-  xCord /= size_;
-  yCord /= size_;
-  center_ = { xCord, yCord };
+  center_ = { sum.x / size_, sum.y / size_ };
+}
+
+void kizhin::Polygon::swap(Polygon& rhs) noexcept
+{
+  std::swap(vertices_, rhs.vertices_);
+  std::swap(size_, rhs.size_);
+  std::swap(center_, rhs.center_);
+  std::swap(frame_, rhs.frame_);
 }
 
 void kizhin::copy(const point_t* first, const point_t* last, point_t* result)
@@ -127,3 +151,4 @@ size_t kizhin::countElement(const point_t* begin, const point_t* end, const poin
   }
   return count;
 }
+

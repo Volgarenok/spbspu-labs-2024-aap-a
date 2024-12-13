@@ -49,6 +49,15 @@ double kizhin::computeTotalArea(const Shape* const* shapes, size_t size)
   return area;
 }
 
+void kizhin::deleteShapes(Shape* const* shapes, size_t& size)
+{
+  size_t deleted = 0;
+  for (kizhin::Shape* const* i = shapes; i != shapes + size; ++i, ++deleted) {
+    delete *i;
+  }
+  size -= deleted;
+}
+
 kizhin::Shape* kizhin::createShape(const char* shapeName, const double* shapeParams)
 {
   if (!shapeName || !shapeParams) {

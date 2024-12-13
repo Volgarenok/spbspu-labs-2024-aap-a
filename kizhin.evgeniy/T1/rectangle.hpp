@@ -10,13 +10,13 @@ namespace kizhin {
 class kizhin::Rectangle : public Shape
 {
 public:
-  Rectangle(double, double, point_t);
+  Rectangle(double, double, const point_t&);
 
-  double getArea() const override;
   rectangle_t getFrameRect() const override;
+  double getArea() const override;
 
-  void move(double, double) override;
   void move(const point_t&) override;
+  void move(double, double) override;
   void scale(double) override;
 
 private:
@@ -24,3 +24,4 @@ private:
 };
 
 #endif
+
