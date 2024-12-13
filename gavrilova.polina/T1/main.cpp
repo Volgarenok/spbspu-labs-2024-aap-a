@@ -19,6 +19,7 @@ namespace gavrilova {
       for (size_t i = 0; i < nShapes; ++i) {
         rectangle_t rect = Shapes[i]->getFrameRect();
         //out << " " << rect.height << " " << rect.width << " " << rect.pos.x << " " << rect.pos.y << "\n";
+        out << std::fixed;
         out << std::setprecision(1);
         out << " " << rect.pos.x - rect.width / 2 << " " << rect.pos.y - rect.height / 2;
         out << " " << rect.pos.x + rect.width / 2 << " " << rect.pos.y + rect.height / 2;
@@ -59,7 +60,8 @@ int main()
   if (!nShapes || nError) {
     std::cerr << "Возникли ошибки при вводе фигур";
   }
-
+  std::cout << std::fixed;
+  std::cout << std::setprecision(1) << commonAreaBefore;
   gavrilova::outRectangles(std::cout, Shapes, nShapes);
 
   double commonAreaAfter = 0;
