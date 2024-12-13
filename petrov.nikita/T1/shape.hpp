@@ -10,6 +10,7 @@ namespace petrov
     virtual void move(point_t concrete_point);
     virtual void move(double dx, double dy);
     virtual void scale(double k);
+    virtual ~Shape();
   };
 }
 #endif

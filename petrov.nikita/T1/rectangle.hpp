@@ -7,14 +7,14 @@ namespace petrov
   struct Rectangle: public Shape
   {
   public:
-    Rectangle(double * massive);
+    Rectangle(point_t p1, point_t p2);
     void getArea() override;
     void getFrameRect() override;
     void move(point_t concrete_point) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    point_t p1_, p2_;
+    point_t p1_, p2_, p3_, p4_;
     rectangle_t frame_rect_;
   };
 }
