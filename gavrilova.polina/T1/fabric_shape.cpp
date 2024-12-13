@@ -94,7 +94,7 @@ gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, s
   //point_t * verteces = nullptr;
   point_t* verteces = new point_t[2];
   /* try {
-    
+
   } catch(const std::bad_alloc & e) {
     ++nError;
     delete[] line;
@@ -124,7 +124,7 @@ gavrilova::Triangle* gavrilova::make_triangle(char * line, size_t & nSpaces, siz
   //point_t * verteces = nullptr;
   point_t* verteces = new point_t[3];
   /* try {
-    
+
   } catch(const std::bad_alloc & e) {
     ++nError;
     delete[] line;
