@@ -23,3 +23,28 @@ rectangle_t Rectangle::getFrameRect() const
   return frameRect;
 }
 
+void Rectangle::move(const point_t& centerPoint)
+{
+  rectangle_t frameRect = getFrameRect();
+  frameRect.pos_ = centerPoint;
+  a_.x_ = frameRect.pos_.x_ - frameRect.width_ / 2;
+  a_.y_ = frameRect.pos_.y_ - frameRect.height_ / 2;
+  b_.x_ = frameRect.pos_.x_ + frameRect.width_ / 2;
+  b_.y_ = frameRect.pos_.y_ + frameRect.height_ / 2;
+}
+
+void Rectangle::move(const double dx, const double dy)
+{
+  a_.x_ += dx;
+  a_.y_ += dy;
+  b_.x_ += dx;
+  b_.y_ += dy;
+}
+
+void Rectangle::scale(size_t k)
+{
+  a_.x_ *= k;
+  a_.y_ *= k;
+  b_.x_ *= k;
+  b_.y_ *= k;
+}

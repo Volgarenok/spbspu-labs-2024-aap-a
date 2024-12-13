@@ -4,6 +4,7 @@
 #include "base-types.hpp"
 #include <getString.h>
 #include <string>
+#include <iomanip>
 
 bool wasDescriptionError = 0;
 
@@ -73,6 +74,44 @@ Shape* makeShape(const std::string shapeDescription)
   return nullptr;
 }
 
+Shape* doScale(const std::string scaleDescription, Shape* shape)
+{
+  std::string scaleParams;
+  std::string param;
+  size_t paramsCount = 0;
+  param = getWord(scaleDescription, paramsCount + 2);
+  while (param != "")
+  {
+    if (paramsCount == 0)
+    {
+      scaleParams += param;
+    }
+    else
+    {
+      scaleParams += " " + param;
+    }
+    ++paramsCount;
+    param = getWord(scaleDescription, paramsCount + 2);
+  }
+  point_t scalePoint;
+  scalePoint.x_ = std::stod(getWord(scaleParams, 1));
+  scalePoint.y_ = std::stod(getWord(scaleParams, 2));
+  size_t k = std::stod(getWord(scaleParams, 3));
+  if (paramsCount != 3 || k <= 0.0)
+  {
+    return nullptr;
+  }
+  point_t tempPoint = (shape->getFrameRect()).pos_;
+  double dx = scalePoint.x_ - tempPoint.x_;
+  double dy = scalePoint.y_ - tempPoint.y_;
+  shape->move(scalePoint);
+  shape->scale(k);
+  dx /= k;
+  dy /= k;
+  shape->move(dx, dy);
+  return shape;
+}
+
 int main()
 {
   constexpr const size_t maxShapes = 10000;
@@ -81,7 +120,9 @@ int main()
   char* str = nullptr;
   try
   {
+    double sumBefore = 0;
     size_t count = 0;
+    std::string scaleDescription;
     while ((str = aleksandrov::getString(std::cin)) && !std::cin.eof())
     {
       inputStr = str;
@@ -89,15 +130,52 @@ int main()
       Shape* shape = makeShape(inputStr);
       if (!shape)
       {
+        if (getWord(inputStr, 1) == "SCALE")
+        {
+          scaleDescription = inputStr;
+          break;
+        }
         continue;
       }
       shapes[count++] = shape;
+      rectangle_t shapeFrameRect = shape->getFrameRect();
+      sumBefore += (shapeFrameRect.width_ * shapeFrameRect.height_);
     }
+    std::cout << sumBefore << " ";
     for (size_t i = 0; i < count; ++i)
     {
-      std::cout << shapes[i]->getArea() << "\n";
-      delete shapes[i];
+      rectangle_t frameRect = shapes[i]->getFrameRect();
+      std::cout << std::setprecision(3) << frameRect.pos_.x_ - (frameRect.width_ / 2) << " ";
+      std::cout << std::setprecision(3) << frameRect.pos_.y_ - (frameRect.height_ / 2) << " ";
+      std::cout << std::setprecision(3) << frameRect.pos_.x_ + (frameRect.width_ / 2) << " ";
+      std::cout << std::setprecision(3) << frameRect.pos_.y_ + (frameRect.height_ / 2);
+      if (i < count - 1)
+      {
+        std::cout << " ";
+      }
     }
+    std::cout << "\n";
+    double sumAfter = 0;
+    for (size_t i = 0; i < count; ++i)
+    {
+      doScale(scaleDescription, shapes[i]);
+      rectangle_t shapeFrameRect = shapes[i]->getFrameRect();
+      sumAfter += (shapeFrameRect.width_ * shapeFrameRect.height_);
+    }
+    std::cout << sumAfter << " ";
+    for (size_t i = 0; i < count; ++i)
+    {
+      rectangle_t frameRect = shapes[i]->getFrameRect();
+      std::cout << std::setprecision(3) << frameRect.pos_.x_ - (frameRect.width_ / 2) << " ";
+      std::cout << std::setprecision(3) << frameRect.pos_.y_ - (frameRect.height_ / 2) << " ";
+      std::cout << std::setprecision(3) << frameRect.pos_.x_ + (frameRect.width_ / 2) << " ";
+      std::cout << std::setprecision(3) << frameRect.pos_.y_ + (frameRect.height_ / 2);
+      if (i < count - 1)
+      {
+        std::cout << " ";
+      }
+    }
+    std::cout << "\n";
   }
   catch (const std::bad_alloc& e)
   {
