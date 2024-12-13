@@ -23,8 +23,8 @@ namespace {
   }
   void make_verteces(gavrilova::point_t * verteces, size_t n) {
   for (size_t i = 0; i < n; ++i) {
-    
-    
+    char * xStr = strtok(nullptr, " ");
+    char * yStr = strtok(nullptr, " ");
     double x = std::atof(xStr);
     double y = std::atof(yStr);
     verteces[i] = {x, y};
