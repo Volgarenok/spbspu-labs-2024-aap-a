@@ -5,6 +5,7 @@
 #include "ellipse.hpp"
 #include "diamond.hpp"
 #include <iostream>
+#include <iomanip>
 #include <sstream>
 #include <cstdlib>
 #include <cstring>
@@ -18,10 +19,10 @@ int main()
   char* input;
   averenkov::point_t scale_center;
   double factor;
-  while (shapeCount < 10000 || std::cin.eof())
+  while (shapeCount < 10000)
   {
     input = averenkov::stringInput(std::cin);
-    if (input == nullptr)
+    if (input == nullptr || !std::cin)
     {
       break;
     }
@@ -104,6 +105,7 @@ int main()
 
   for (size_t i = 0; i < shapeCount; ++i)
   {
+    std::cout << std::fixed << std::setprecision(1);
     std::cout << shapes[i]->getArea() << " ";
     std::cout << averenkov::getLeftBot(shapes[i]->getFrameRect()).x << " ";
     std::cout << averenkov::getLeftBot(shapes[i]->getFrameRect()).y << " ";
