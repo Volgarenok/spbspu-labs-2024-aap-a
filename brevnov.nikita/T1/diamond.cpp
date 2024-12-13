@@ -6,6 +6,8 @@ brevnov::Diamond::Diamond(point_t center, point_t horizontal, point_t vertical) 
 {
 }
 
+brevnov::Diamond::~Diamond(){}
+
 double brevnov::Diamond::getArea()
 {
   return (std::fabs((horizontal.x - center.x) * (vertical.y - center.y) * 2));

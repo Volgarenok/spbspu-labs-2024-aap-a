@@ -5,6 +5,8 @@ brevnov::Ellipse::Ellipse(point_t center, double r1, double r2): center(center),
 {
 }
 
+brevnov::Ellipse::~Ellipse(){}
+
 double brevnov::Ellipse::getArea()
 {
   const double p = std::acos(-1.0);
