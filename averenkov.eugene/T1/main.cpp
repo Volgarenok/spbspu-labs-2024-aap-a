@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <cmath>
+
 int main()
 {
   averenkov::Shape* shapes[10000];
