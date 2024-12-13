@@ -77,7 +77,7 @@ namespace
 
 bool bocharov::hasExpression(const char ** string)
 {
-  if (isTerm(string))
+  if (hasTerm(string))
   {
     if ((**string == '+') || (**string == '-'))
     {
