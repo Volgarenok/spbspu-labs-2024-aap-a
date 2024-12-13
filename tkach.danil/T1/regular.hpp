@@ -2,6 +2,7 @@
 #define REGULAR_HPP
 
 #include "shape.hpp"
+#include <cstddef>
 
 namespace tkach
 {
@@ -18,6 +19,13 @@ namespace tkach
     point_t first_point_;
     point_t second_point_;
     point_t third_point_;
+    double first_side_out_r_;
+    double second_side_in_r_;
+    double third_side_;
+    size_t amount_of_sides_;
+    double getDist(point_t point1, point_t point2) const;
+    size_t getSideAmount() const;
+    bool isEqualPoints(point_t point1, point_t point2) const;
   };
 }
 

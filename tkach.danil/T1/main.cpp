@@ -12,7 +12,7 @@ namespace
   {
       for(size_t i = 0; i < counter_of_shapes; ++i)
       {
-        delete[] shape_array[i];
+        delete shape_array[i];
       }
   }
   double getTotalArea(tkach::Shape** shape_array, size_t counter_of_shapes)
@@ -35,7 +35,7 @@ namespace
       left_bot_point.y = frame_rect.pos.y - frame_rect.height / 2.0;
       right_top_point.x = frame_rect.pos.x + frame_rect.width / 2.0;
       right_top_point.y = frame_rect.pos.y + frame_rect.height / 2.0;
-      std::cout << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
+      std::cout << " " << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
     }
   }
 
@@ -114,6 +114,16 @@ int main()
         incorrect_shape = true;
       }
     }
+
+
+
+
+
+
+
+
+
+
     else if (shape_name == "REGULAR")
     {
       tkach::point_t point1, point2, point3;
@@ -153,11 +163,11 @@ int main()
     std::cerr << "Error with shapes discription\n";
   }
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << getTotalArea(shapes_array, counter_of_shapes) << "\n";
+  std::cout << getTotalArea(shapes_array, counter_of_shapes);
   printCoordinatesOfFrameRect(shapes_array, counter_of_shapes);
   std::cout << "\n";
   doIsotropicScale(shapes_array, counter_of_shapes, scale_coef, scale_point);
-  std::cout << getTotalArea(shapes_array, counter_of_shapes) << "\n";
+  std::cout << getTotalArea(shapes_array, counter_of_shapes);
   printCoordinatesOfFrameRect(shapes_array, counter_of_shapes);
   std::cout << "\n";
   deleteShapes(shapes_array, counter_of_shapes);
