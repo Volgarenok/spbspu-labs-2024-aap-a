@@ -1,5 +1,6 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
+#include <cstddef>
 #include "base-types.hpp"
 
 namespace lebedev
@@ -14,5 +15,6 @@ namespace lebedev
     virtual void scale(double k) = 0;
     virtual ~Shape() = default;
   };
+  void deleteShapePtr(Shape** shps, const size_t count);
 }
 #endif
