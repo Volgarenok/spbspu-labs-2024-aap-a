@@ -59,7 +59,7 @@ int main()
   if (!nShapes || nError) {
     std::cerr << "Возникли ошибки при вводе фигур";
   }
-  std::cout << std::setprecision(1) << commonAreaBefore;
+  
   gavrilova::outRectangles(std::cout, Shapes, nShapes);
 
   double commonAreaAfter = 0;
@@ -74,4 +74,4 @@ int main()
     delete Shapes[i];
    }
 }
-
+ 

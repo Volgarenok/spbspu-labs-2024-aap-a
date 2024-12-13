@@ -21,7 +21,7 @@ namespace {
     }
     return false;
   }
-  gavrilova::point_t * make_verteces(gavrilova::point_t * verteces, size_t n) {
+  void make_verteces(gavrilova::point_t * verteces, size_t n) {
   for (size_t i = 0; i < n; ++i) {
     char * xStr = strtok(nullptr, " ");
     char * yStr = strtok(nullptr, " ");
@@ -29,7 +29,6 @@ namespace {
     double y = std::atof(yStr);
     verteces[i] = {x, y};
   }
-  return verteces;
 }
 
 }
@@ -102,7 +101,7 @@ gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, s
   point_t* verteces = new point_t[2];
   try {
     point_t* verteces = new point_t[2];
-    verteces = make_verteces(verteces, 2);
+    make_verteces(verteces, 2);
   } catch(const std::bad_alloc & e) {
     ++nError;
     delete[] line;
@@ -129,7 +128,7 @@ gavrilova::Triangle* gavrilova::make_triangle(char * line, size_t & nSpaces, siz
   point_t * verteces = nullptr;
   try {
     point_t* verteces = new point_t[3];
-    verteces = make_verteces(verteces, 3);
+    make_verteces(verteces, 3);
   } catch(const std::bad_alloc & e) {
     ++nError;
     delete[] line;
