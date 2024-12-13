@@ -40,7 +40,7 @@ void lebedev::Rectangle::scale(double k)
 {
   if (k <= 0)
   {
-    throw std::invalid_argument("Incorrect scale coefficient");
+    throw std::invalid_argument("Incorrect scale coefficient!");
   }
   point_t centre = this->getFrameRect().pos;
   leftDown_.x = centre.x + (leftDown_.x - centre.x) * k;
