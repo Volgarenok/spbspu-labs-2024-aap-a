@@ -10,7 +10,7 @@ gavrilova::Rectangle::Rectangle(point_t pBottomLeft, point_t pTopRight):
       pTopRight_.x = pTopRight.x;
       pTopRight_.y = pTopRight.y;
     } else {
-    throw std::logic_error("Invalid arguments for rectangle");
+      throw std::logic_error("Invalid arguments for rectangle");
   }
   }
 double gavrilova::Rectangle::getArea() const {
@@ -28,10 +28,10 @@ void gavrilova::Rectangle::move(point_t p) {
   point_t center = getFrameRect().pos;
   double difX = center.x - p.x;
   double difY = center.y - p.y;
-  pBottomLeft_.x += difX;
-  pBottomLeft_.y += difY;
-  pTopRight_.x += difX;
-  pTopRight_.y += difY;
+  pBottomLeft_.x -= difX;
+  pBottomLeft_.y -= difY;
+  pTopRight_.x -= difX;
+  pTopRight_.y -= difY;
 }
 void gavrilova::Rectangle::move(double difX, double difY) {
   pBottomLeft_.x += difX;

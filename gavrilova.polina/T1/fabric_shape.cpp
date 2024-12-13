@@ -177,4 +177,3 @@ gavrilova::Polygon* gavrilova::make_polygon(char * line, size_t & nSpaces, size_
   }
   return P;
 }
-

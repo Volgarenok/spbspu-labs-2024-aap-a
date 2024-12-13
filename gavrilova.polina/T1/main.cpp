@@ -8,10 +8,21 @@ namespace gavrilova {
     point_t pos1 = shape.getFrameRect().pos;
     double difX = center.x - pos1.x;
     double difY = center.y - pos1.y;
+    /* std::cout << "Center: " << center.x << " " << center.y << "\n";
+    std::cout << "pos: " << pos1.x << " " << pos1.y << "\n";
+    rectangle_t rect = shape.getFrameRect();
+    std::cout << " " << rect.height << " " << rect.width << " " << rect.pos.x << " " << rect.pos.y << "\n"; */
     shape.move(center);
+    /* rect = shape.getFrameRect();
+    std::cout << "After move1:\n";
+    std::cout << " " << rect.height << " " << rect.width << " " << rect.pos.x << " " << rect.pos.y << "\n"; */
     shape.scale(k);
+    /* rect = shape.getFrameRect();
+    std::cout << "After scale:\n";
+    std::cout << " " << rect.height << " " << rect.width << " " << rect.pos.x << " " << rect.pos.y << "\n"; */
     difX *= k;
     difY *= k;
+    /* std::cout << "difX and difY:" << difX << " " << difY << "\n"; */
     shape.move(-difX, -difY);
   }
   void outRectangles(std::ostream & out, gavrilova::Shape ** Shapes, size_t nShapes) {
