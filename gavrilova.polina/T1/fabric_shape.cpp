@@ -35,8 +35,8 @@ namespace {
 }
 namespace gavrilova
 {
-  Rectangle* make_rectangle(char * line, size_t & nSpaces, size_t & nError);
-  Triangle* make_triangle(char * line, size_t & nSpaces, size_t & nError);
+  Rectangle* make_rectangle(size_t & nSpaces, size_t & nError);
+  Triangle* make_triangle(size_t & nSpaces, size_t & nError);
   Polygon* make_polygon(char * line, size_t & nSpaces, size_t & nError);
 }
 
@@ -53,7 +53,7 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
   if (!std::strcmp(shapeType, "RECTANGLE")) {
     Shape * res = nullptr;
     try {
-      res = make_rectangle(line, nSpaces, nError);
+      res = make_rectangle(nSpaces, nError);
       return res;
     } catch (...) {
       ++nError;
@@ -63,7 +63,7 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
   } else if (!std::strcmp(shapeType, "TRIANGLE")) {
     Shape * res = nullptr;
     try {
-      res = make_triangle(line, nSpaces, nError);
+      res = make_triangle(nSpaces, nError);
       return res;
     } catch (...) {
       ++nError;
@@ -85,7 +85,7 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
   return nullptr;
 }
 
-gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, size_t & nError) {
+gavrilova::Rectangle* gavrilova::make_rectangle(size_t & nSpaces, size_t & nError) {
   if (nSpaces != 4) {
     ++nError;
     return nullptr;
@@ -114,7 +114,7 @@ gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, s
   return R;
 }
 
-gavrilova::Triangle* gavrilova::make_triangle(char * line, size_t & nSpaces, size_t & nError) {
+gavrilova::Triangle* gavrilova::make_triangle(size_t & nSpaces, size_t & nError) {
   if (nSpaces != 6) {
     ++nError;
     return nullptr;

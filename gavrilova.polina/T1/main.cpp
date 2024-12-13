@@ -72,7 +72,7 @@ int main()
   std::cout << commonAreaAfter;
   gavrilova::outRectangles(std::cout, Shapes, nShapes);
 
-   for (size_t i = 0; i < nShapes; ++i) {
+  for (size_t i = 0; i < nShapes; ++i) {
     delete Shapes[i];
    }
 }
