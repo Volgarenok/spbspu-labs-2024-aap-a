@@ -83,11 +83,6 @@ namespace abramov
         if (s1 == "SCALE")
         {
           in >> x >> y >> k;
-          if (k <= 0)
-          {
-            deleteShapes(shapes, i);
-            std::cerr << "Wrong scale command\n";
-          }
         }
       }
     }

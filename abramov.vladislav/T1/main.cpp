@@ -19,15 +19,15 @@ int main()
   double y = 0;
   bool wrong_figure = false;
   abramov::getShapes(std::cin, shapes, i, x, y, k, wrong_figure);
-  if (i == 0)
-  {
-    std::cerr << "There is no figures\n";
-    return 1;
-  }
   if (k <= 0)
   {
     abramov::deleteShapes(shapes, i);
     std::cerr << "There is no scale command\n";
+    return 1;
+  }
+  if (i == 0)
+  {
+    std::cerr << "There is no figures\n";
     return 1;
   }
   double s = 0;
