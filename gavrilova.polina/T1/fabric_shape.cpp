@@ -102,7 +102,15 @@ gavrilova::Rectangle* gavrilova::make_rectangle(size_t & nSpaces, size_t & nErro
   verteces = make_verteces(verteces, 2);
   //delete[] line;
   //Rectangle * R = nullptr;
-  Rectangle * R = new Rectangle(verteces[0], verteces[1]);
+  if (verteces[0].x < verteces[1].x && verteces[0].y < verteces[1].y){
+    Rectangle * R = new Rectangle(verteces[0], verteces[1]);
+    delete[] verteces;
+    return R;
+  } else {
+    delete[] verteces;
+    return nullptr;
+  }
+  
   /* try {
     R = new Rectangle(verteces[0], verteces[1]);
   } catch(const std::bad_alloc & e) {
@@ -110,8 +118,7 @@ gavrilova::Rectangle* gavrilova::make_rectangle(size_t & nSpaces, size_t & nErro
     delete[] verteces;
     return nullptr;
   } */
-  delete[] verteces;
-  return R;
+  
 }
 
 gavrilova::Triangle* gavrilova::make_triangle(size_t & nSpaces, size_t & nError) {
