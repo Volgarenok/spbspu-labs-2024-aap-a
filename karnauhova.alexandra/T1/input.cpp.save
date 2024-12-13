@@ -61,49 +61,16 @@ bool input_retangle(std::istream & in, double* x_y, size_t j)
   double x = 0;
   for (size_t i = 0; i < 4; i++)
   {
-    if (in.peek() != '\n' && in.peek() != EOF)
-    {
-      if (!(in >> x))
-      {
-        return false;
-      }
-      x_y[j + i] = x;
-    }
-    else
+    if (!(in >> x))
     {
       return false;
     }
+    x_y[j + i] = x;
   }
-  if (in.peek() != '\n' && in.peek() != EOF)
+  in >> x;
+  if (in)
   {
-    eat_trash(in);
-    return false;
-  }
-  return true;
-}
-
-bool input_triangle(std::istream & in, double* x_y, size_t j)
-{
-  double x = 0;
-  for (size_t i = 0; i < 6; i++)
-  {
-    if (in.peek() != '\n' && in.peek() != EOF)
-    {
-      if (!(in >> x))
-      {
-        return false;
-      }
-      x_y[j + i] = x;
-    }
-    else
-    {
-      return false;
-    }
-  }
-  if (in.peek() != '\n' && in.peek() != EOF)
-  {
-    eat_trash(in);
-    return false;
+    return false
   }
   return true;
 }

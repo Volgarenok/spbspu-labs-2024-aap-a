@@ -12,7 +12,7 @@ public:
   double getArea();
   rectangle_t getFrameRect();
   void scale(point_t t, double k);
-  ~Rectangle(){}
+  ~Triangle(){}
 private:
   point_t x1_;
   point_t x2_;
