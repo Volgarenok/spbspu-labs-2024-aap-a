@@ -8,22 +8,11 @@ namespace gavrilova {
     point_t pos1 = shape.getFrameRect().pos;
     double difX = center.x - pos1.x;
     double difY = center.y - pos1.y;
-    //std::cout << "difX = " << difX << " dify = " << difY << "\n";
     shape.move(center);
-    /* std::cout << "After move:\n";
-    std::cout << "height = "<< shape.getFrameRect().height << " width = "<< shape.getFrameRect().width << "\n";
-    std::cout << "pos = " << shape.getFrameRect().pos.x << " " << shape.getFrameRect().pos.y << "\n"; */
     shape.scale(k);
-    /* std::cout << "After scale:\n";
-    std::cout << "height = "<< shape.getFrameRect().height << " width = "<< shape.getFrameRect().width << "\n";
-    std::cout << "pos = " << shape.getFrameRect().pos.x << " " << shape.getFrameRect().pos.y << "\n"; */
     difX *= k;
     difY *= k;
-    //std::cout << "difX = " << difX << " dify = " << difY << "\n";
     shape.move(-difX, -difY);
-    /* std::cout << "After last move:\n";
-    std::cout << "height = "<< shape.getFrameRect().height << " width = "<< shape.getFrameRect().width << "\n";
-    std::cout << "pos = " << shape.getFrameRect().pos.x << " " << shape.getFrameRect().pos.y << "\n"; */
   }
   void outRectangles(std::ostream & out, gavrilova::Shape ** Shapes, size_t nShapes) {
     if (nShapes) {
@@ -46,7 +35,8 @@ int main()
   size_t nShapes = 0;
   size_t nError = 0;
   size_t commonAreaBefore = 0;
-
+  std::cout << std::fixed;
+  std::cout.precision(1);
   while (!std::cin.eof() && std::cin) {
     try {
       Shapes[nShapes] = gavrilova::fabric_shape(std::cin, center, koef, nError);
@@ -83,7 +73,7 @@ int main()
   gavrilova::outRectangles(std::cout, Shapes, nShapes);
 
    for (size_t i = 0; i < nShapes; ++i) {
-       delete Shapes[i];
+    delete Shapes[i];
    }
 }
 

@@ -88,7 +88,6 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
 gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, size_t & nError) {
   if (nSpaces != 4) {
     ++nError;
-    delete[] line;
     return nullptr;
   }
   //point_t * verteces = nullptr;
@@ -118,7 +117,6 @@ gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, s
 gavrilova::Triangle* gavrilova::make_triangle(char * line, size_t & nSpaces, size_t & nError) {
   if (nSpaces != 6) {
     ++nError;
-    delete[] line;
     return nullptr;
   }
   //point_t * verteces = nullptr;
