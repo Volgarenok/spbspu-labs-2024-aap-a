@@ -161,7 +161,7 @@ gavrilova::Polygon* gavrilova::make_polygon(char * line, size_t & nSpaces, size_
     delete[] line;
     return nullptr;
   }
-  verteces = make_verteces(verteces, nPoints);
+  make_verteces(verteces, nPoints);
   delete[] line;
   if (hasSameVerteces(verteces, nPoints)) {
     delete[] verteces;
