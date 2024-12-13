@@ -114,16 +114,6 @@ int main()
         incorrect_shape = true;
       }
     }
-
-
-
-
-
-
-
-
-
-
     else if (shape_name == "REGULAR")
     {
       tkach::point_t point1, point2, point3;
@@ -157,6 +147,11 @@ int main()
       }
       break;
     }
+  }
+  if (counter_of_shapes == 0)
+  {
+    std::cerr << "No shapes\n";
+    return 1;
   }
   if (incorrect_shape)
   {
