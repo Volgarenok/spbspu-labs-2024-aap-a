@@ -60,4 +60,5 @@ int main()
   petrov::point_t p2 = { std::strtod(description[2], p_end), std::strtod(description[3], p_end) };
   shapes_massive[0] = petrov::Rectangle(p1, p2);
   shapes_massive[0].getFrameRect();
+  shapes_massive[0].getArea();
 }

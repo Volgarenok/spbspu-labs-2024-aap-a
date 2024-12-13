@@ -4,7 +4,7 @@
 #include "base-types.hpp"
 namespace petrov
 {
-  struct Rectangle: public Shape
+  struct Rectangle: Shape
   {
   public:
     Rectangle(point_t p1, point_t p2);
@@ -16,6 +16,7 @@ namespace petrov
   private:
     point_t p1_, p2_, p3_, p4_;
     rectangle_t frame_rect_;
+    double area;
   };
 }
 #endif

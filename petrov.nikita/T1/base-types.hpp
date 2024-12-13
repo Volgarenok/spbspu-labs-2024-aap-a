@@ -9,7 +9,8 @@ namespace petrov
 
   struct rectangle_t
   {
-    double width_, height_, pos_;
+    double width_, height_;
+    point_t pos_;
   };
 }
 #endif
