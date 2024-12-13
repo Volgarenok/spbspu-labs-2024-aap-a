@@ -23,7 +23,6 @@ namespace abramov
     a = min;
     b = max;
   }
-
   void getCoordsOfIntersection (point_t A, point_t B, point_t C, point_t D, double &x, double &y)
   {
     double k1 = (B.y - A.y) / (B.x - A.x);
@@ -34,12 +33,24 @@ namespace abramov
     {
       throw std::logic_error("There is no center\n");
     }
-    double old_x = x;
     x = (b2 - b1) / (k1 - k2);
     y = k1 * x + b1;
     if (x == A.x || x == B.x || x == C.x || x == D.x)
     {
-      x = old_x;
+      throw std::logic_error("There is no center\n");
+    }
+    constexpr size_t k = 4;
+    double xs[k] = {A.x, B.x, C.x, D.x};
+    size_t count = 0;
+    for (size_t i = 0; i < k; ++i)
+    {
+      if (x > xs[i])
+      {
+        ++count;
+      }
+    }
+    if (count != 2)
+    {
       throw std::logic_error("There is no center\n");
     }
   }
