@@ -87,7 +87,7 @@ int main()
     brevnov::print_frame_coordinates(shapes, count_of_shape, std::cout);
     brevnov::scale_shape(shapes, count_of_shape, scale_p, ratio);
     std::cout << brevnov::get_sum_area(shapes, count_of_shape);
-    brevnov::print_shape_parameters(shapes, std::cout);
+    brevnov::print_frame_coordinates(shapes, count_of_shape, std::cout);
     brevnov::destroy_shape(shapes, count_of_shape);
     return 0;
   }

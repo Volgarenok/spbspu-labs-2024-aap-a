@@ -13,8 +13,8 @@ brevnov::rectangle_t brevnov::Rectangle::getFrameRect()
   rectangle_t result;
   result.width = right.x - left.x;
   result.height = right.y - left.y;
-  result.pos = {result.width / 2.0, result.height / 2.0} ;
-  return result
+  result.pos = {result.width / 2.0, result.height / 2.0};
+  return result;
 }
 
 void brevnov::Rectangle::move(point_t new_centre)

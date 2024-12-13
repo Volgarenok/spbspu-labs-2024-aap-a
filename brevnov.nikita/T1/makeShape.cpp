@@ -76,7 +76,7 @@ brevnov::Ellipse * brevnov::make_ellipse(std::istream & in)
   {
     throw std::invalid_argument("Incorrect parameters");
   }
-  Ellipse * result = new Ellipse(x, y, r1, r2);
+  Ellipse * result = new Ellipse({x, y}, r1, r2);
   return result;
 }
 

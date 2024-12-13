@@ -25,9 +25,9 @@ void brevnov::scale_shape(Shape** shapes, size_t count, point_t scale_p, double 
     point_t before_scale = shapes[i]->getFrameRect().pos;
     shapes[i]->move(scale_p);
     point_t after_scale = shapes[i]->getFrameRect().pos;
-    point_t movement = {(after_scale.x - before_scale.x) * ratio, (after_scale.y - before_scale.y) * retio};
+    point_t movement = {(after_scale.x - before_scale.x) * ratio, (after_scale.y - before_scale.y) * ratio};
     shapes[i]->scale(ratio);
-    shapes[i]->move(-movement.x, -ovement.y);
+    shapes[i]->move(-movement.x, -movement.y);
   }
 }
 
