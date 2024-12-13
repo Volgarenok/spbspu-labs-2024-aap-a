@@ -27,6 +27,11 @@ namespace gavrilova {
       out << "\n";
     }
   }
+  void clearShapes(Shape** Shapes, size_t n) {
+    for (size_t i = 0; i < n; ++i) {
+      delete Shapes[i];
+    }
+  }
 }
 int main()
 {
@@ -52,13 +57,18 @@ int main()
       break;
     }
     //std::cout << "nShapes = " << nShapes << "\n";
+    
   }
   if (koef <= 0) {
     std::cerr << "ERROR\n";
+    gavrilova::clearShapes(Shapes, nShapes);
     return 1;
   }
-  if (!nShapes || nError) {
-    std::cerr << "Возникли ошибки при вводе фигур";
+  if (nError) {
+    std::cerr << "Возникли ошибки при вводе фигур\n";
+  }
+  if (!nShapes) {
+    return 1;
   }
   std::cout << std::fixed << std::setprecision(1) << commonAreaBefore;
   gavrilova::outRectangles(std::cout, Shapes, nShapes);
@@ -71,7 +81,5 @@ int main()
   std::cout << std::fixed << std::setprecision(1) << commonAreaAfter;
   gavrilova::outRectangles(std::cout, Shapes, nShapes);
 
-  for (size_t i = 0; i < nShapes; ++i) {
-    delete Shapes[i];
-   }
+  gavrilova::clearShapes(Shapes, nShapes);
 }
