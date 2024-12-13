@@ -15,6 +15,6 @@ namespace lebedev
     virtual void scale(double k) = 0;
     virtual ~Shape() = default;
   };
-  void deleteShapePtr(Shape** shps, const size_t count);
+  void deleteShapePtr(Shape** shps, size_t count);
 }
 #endif
