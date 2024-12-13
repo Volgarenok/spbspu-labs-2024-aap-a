@@ -79,6 +79,7 @@ int main()
         if (!(line >> scale_center.x >> scale_center.y >> factor) || factor <= 0)
         {
           std::cerr << "Invalid scale\n";
+          free(input);
           return 1;
         }
         break;
@@ -95,6 +96,7 @@ int main()
   if (std::cin.eof())
   {
     std::cerr << "No scale\n";
+    free(input);
     return 1;
   }
 
@@ -117,7 +119,6 @@ int main()
     std::cout << averenkov::getLeftBot(shapes[i]->getFrameRect()).y << " ";
     std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).x << " ";
     std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).y << " \n";
-    delete shapes[i];
   }
   return 0;
 }
