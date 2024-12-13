@@ -100,7 +100,7 @@ gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, s
   point_t * verteces = nullptr;
 
   try {
-    point_t* verteces = new point_t[2];
+    verteces = new point_t[2];
     make_verteces(verteces, 2);
     delete[] line;
   } catch(const std::bad_alloc & e) {
@@ -128,7 +128,7 @@ gavrilova::Triangle* gavrilova::make_triangle(char * line, size_t & nSpaces, siz
   }
   point_t * verteces = nullptr;
   try {
-    point_t* verteces = new point_t[3];
+    verteces = new point_t[3];
     make_verteces(verteces, 3);
   } catch(const std::bad_alloc & e) {
     ++nError;
