@@ -54,7 +54,7 @@ tkach::Regular::Regular(point_t first_point, point_t second_point, point_t third
 }
 double tkach::Regular::getArea() const
 {
-  return (amount_of_sides_ * third_side_ * second_side_in_r_); 
+  return (amount_of_sides_ * third_side_ * second_side_in_r_);
 }
 tkach::rectangle_t tkach::Regular::getFrameRect() const
 {
@@ -112,7 +112,6 @@ void tkach::Regular::move(point_t point_to_move)
   third_point_.x += point_to_move.x - first_point_.x;
   third_point_.y += point_to_move.y - first_point_.y;
   first_point_ = point_to_move;
-  
 }
 void tkach::Regular::scale(double multiplier)
 {
