@@ -84,14 +84,18 @@ void Triangle::move(point_t t)
   x1_.y += shift_y;
 }
 
-//void Triangle::scale(point_t t, double k)
-//{
-//  double distance_x2 = x2_.x - t.x;
- // double distance_x4 = x4_.x - t.x;
-//  double distance_y2 = x2_.y - t.y;
-//  double distance_y4 = x2_.y - t.y;
-  //x2_.x = t.x + distance_x2 * k;
- // x4_.x = t.x + distance_x4 * k;
- // x2_.y = t.y + distance_y2 * k;
- // x4_.y = t.y + distance_y4 * k;
-//}
+void Triangle::scale(point_t t, double k)
+{
+  double distance_x1 = x1_.x - t.x;
+  double distance_x2 = x2_.x - t.x;
+  double distance_x3 = x3_.x - t.x;
+  double distance_y1 = x1_.y - t.y;
+  double distance_y2 = x2_.y - t.y;
+  double distance_y3 = x3_.y - t.y;
+  x1_.x = t.x + distance_x1 * k;
+  x2_.x = t.x + distance_x2 * k;
+  x3_.x = t.x + distance_x3 * k;
+  x1_.y = t.y + distance_y1 * k;
+  x2_.y = t.y + distance_y2 * k;
+  x3_.y = t.y + distance_y3 * k;
+}

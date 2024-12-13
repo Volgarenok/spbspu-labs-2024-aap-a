@@ -5,7 +5,10 @@
 
 namespace karnauhova
 {
-    bool input(std::istream &in, double* t, std::string* names, size_t i);
+  bool input_rectangle(std::istream & in, double* x_y, size_t j);
+  bool input_triangle(std::istream & in, double* x_y, size_t j);
+  bool input_scale(std::istream & in, double* x_y, size_t j);
+  void eat_trash(std::istream & in);
 }
 
 #endif

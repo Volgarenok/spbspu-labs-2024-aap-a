@@ -38,7 +38,7 @@ void Rectangle::scale(point_t t, double k)
   double distance_x2 = x2_.x - t.x;
   double distance_x4 = x4_.x - t.x;
   double distance_y2 = x2_.y - t.y;
-  double distance_y4 = x2_.y - t.y;
+  double distance_y4 = x4_.y - t.y;
   x2_.x = t.x + distance_x2 * k;
   x4_.x = t.x + distance_x4 * k;
   x2_.y = t.y + distance_y2 * k;
