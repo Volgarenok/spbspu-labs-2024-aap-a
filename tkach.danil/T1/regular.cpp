@@ -42,7 +42,7 @@ tkach::Regular::Regular(point_t first_point, point_t second_point, point_t third
   {
     throw std::logic_error("Triangle is not right");
   }
-  if (tkach::Regular::isEqualPoints(first_point,second_point) || isEqualPoints(first_point,third_point) || isEqualPoints(third_point,second_point))
+  if (isEqualPoints(first_point,second_point) || isEqualPoints(first_point,third_point) || isEqualPoints(third_point,second_point))
   {
     throw std::logic_error("Triangle doesn`t exist");
   }
