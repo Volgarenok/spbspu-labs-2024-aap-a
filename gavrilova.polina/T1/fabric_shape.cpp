@@ -97,8 +97,7 @@ gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, s
     ++nError;
     return nullptr;
   }
-  //point_t * verteces = nullptr;
-  point_t* verteces = new point_t[2];
+  point_t * verteces = nullptr;
   try {
     point_t* verteces = new point_t[2];
     make_verteces(verteces, 2);
