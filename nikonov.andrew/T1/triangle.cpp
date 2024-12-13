@@ -2,8 +2,8 @@
 #include <iostream>
 #include "base-types.hpp"
 nikonov::Triangle::Triangle(point_t A, point_t B, point_t C):
-  A_(A), 
-  B_(B), 
+  A_(A),
+  B_(B),
   C_(C)
 {}
 float nikonov::Triangle::getArea() const
