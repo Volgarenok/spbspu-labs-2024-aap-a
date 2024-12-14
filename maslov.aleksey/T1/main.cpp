@@ -5,7 +5,6 @@
 #include <iostream>
 #include <iomanip>
 
-
 int main()
 {
   constexpr int maxShapes = 10000;
@@ -15,16 +14,17 @@ int main()
   {
     count = maslov::inputShapes(std::cin, shapes);
   }
-  catch(const std::exception& e)
+  catch(const std::exception & e)
   {
     std::cerr << e.what() << '\n';
     destroyShapes(shapes, count);
     return 1;
   }
   double centerX = 0.0, centerY = 0.0, scaleFactor = 0.0;
-  if (!(std::cin >> centerX >> centerY >> scaleFactor))
+  std::cin >> centerX >> centerY >> scaleFactor;
+  if (scaleFactor <= 0)
   {
-    throw std::invalid_argument("Incorrect parameters");
+    throw std::invalid_argument("Incorrect scale factor");
     destroyShapes(shapes, count);
     return 1;
   }
