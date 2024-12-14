@@ -41,7 +41,7 @@ int main()
       else if (command == "RECTANGLE")
       {
         averenkov::point_t a, c;
-        if (!(line >> a.x >> a.y >> c.x >> c.y))
+        if (!(line >> a.x >> a.y >> c.x >> c.y) || a.x > c.x || a.y > c.x)
         {
           throw std::invalid_argument("Invalid RECTANGLE");
         }
@@ -108,13 +108,13 @@ int main()
   for (size_t i = 0; i < shapeCount; ++i)
   {
     std::cout << std::fixed << std::setprecision(1);
-    std::cout << shapes[i]->getArea() << " ";
+    std::cout << " " << shapes[i]->getArea() << " ";
     std::cout << averenkov::getLeftBot(shapes[i]->getFrameRect()).x << " ";
     std::cout << averenkov::getLeftBot(shapes[i]->getFrameRect()).y << " ";
     std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).x << " ";
     std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).y << " \n";
     shapes[i]->scale(scale_center, factor);
-    std::cout << shapes[i]->getArea() << " ";
+    std::cout << " " << shapes[i]->getArea() << " ";
     std::cout << averenkov::getLeftBot(shapes[i]->getFrameRect()).x << " ";
     std::cout << averenkov::getLeftBot(shapes[i]->getFrameRect()).y << " ";
     std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).x << " ";
