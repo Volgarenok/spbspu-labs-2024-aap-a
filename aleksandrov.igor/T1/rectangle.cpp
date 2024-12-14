@@ -41,10 +41,11 @@ void aleksandrov::Rectangle::move(const double dx, const double dy)
   b_.y_ += dy;
 }
 
-void aleksandrov::Rectangle::scale(size_t k)
+void aleksandrov::Rectangle::scale(const size_t k)
 {
-  a_.x_ *= k;
-  a_.y_ *= k;
-  b_.x_ *= k;
-  b_.y_ *= k;
+  point_t center = getFrameRect().pos_;
+  a_.x_ = center.x_ + (a_.x_ - center.x_) * k;
+  a_.y_ = center.y_ + (a_.y_ - center.y_) * k;
+  b_.x_ = center.x_ + (b_.x_ - center.x_) * k;
+  b_.y_ = center.y_ + (b_.y_ - center.y_) * k;
 }

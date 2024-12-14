@@ -20,22 +20,20 @@ Shape* aleksandrov::doScale(const std::string scaleDescription, Shape* shape)
     param = getWord(scaleDescription, paramsCount + 2);
   }
 
-  point_t scalePoint;
-  scalePoint.x_ = std::stod(getWord(scaleParams, 1));
-  scalePoint.y_ = std::stod(getWord(scaleParams, 2));
-  size_t k = std::stod(getWord(scaleParams, 3));
+  double scaleX = std::stod(getWord(scaleParams, 1));
+  double scaleY = std::stod(getWord(scaleParams, 2));
+  double k = std::stod(getWord(scaleParams, 3));
   if (paramsCount != 3 || k <= 0.0)
   {
     return nullptr;
   }
-
-  point_t tempPoint = (shape->getFrameRect()).pos_;
-  double dx = scalePoint.x_ - tempPoint.x_;
-  double dy = scalePoint.y_ - tempPoint.y_;
-  shape->move(scalePoint);
+  rectangle_t frameRect = shape->getFrameRect();
+  double centerX = frameRect.pos_.x_;
+  double centerY = frameRect.pos_.y_;
+  double dx = scaleX - centerX;
+  double dy = scaleY - centerY;
+  shape->move({scaleX, scaleY});
   shape->scale(k);
-  dx /= k;
-  dy /= k;
-  shape->move(dx, dy);
+  shape->move(-dx * k, -dy * k);
   return shape;
 }

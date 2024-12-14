@@ -3,6 +3,7 @@
 
 #include "shape.hpp"
 #include "base-types.hpp"
+#include <cstddef>
 
 namespace aleksandrov
 {
@@ -14,7 +15,7 @@ namespace aleksandrov
     rectangle_t getFrameRect() const override;
     void move(const point_t& centerPoint) override;
     void move(const double dx, const double dy) override;
-    void scale(size_t k) override;
+    void scale(const size_t k) override;
   private:
     point_t center_;
     double vr_;

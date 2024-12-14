@@ -38,8 +38,7 @@ int main()
         continue;
       }
       shapes[count++] = shape;
-      rectangle_t shapeFrameRect = shape->getFrameRect();
-      sumBefore += (shapeFrameRect.width_ * shapeFrameRect.height_);
+      sumBefore += shape->getArea();
     }
     if (aleksandrov::getWord(scaleDescription, 4) == "")
     {
@@ -64,8 +63,7 @@ int main()
     for (size_t i = 0; i < count; ++i)
     {
       aleksandrov::doScale(scaleDescription, shapes[i]);
-      rectangle_t shapeFrameRect = shapes[i]->getFrameRect();
-      sumAfter += (shapeFrameRect.width_ * shapeFrameRect.height_);
+      sumAfter += shapes[i]->getArea();
     }
     std::cout << std::fixed << std::setprecision(1) << sumAfter << " ";
     for (size_t i = 0; i < count; ++i)
@@ -98,7 +96,7 @@ int main()
   }
   if (wasDescriptionError)
   {
-    std::cout << "WARNING: Some supporting shapes had a description problems!\n";
+    std::cerr << "WARNING: Some supporting shapes had a description problems!\n";
   }
 }
 

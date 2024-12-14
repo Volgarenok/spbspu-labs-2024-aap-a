@@ -15,14 +15,14 @@ rectangle_t aleksandrov::Circle::getFrameRect() const
   rectangle_t frameRect;
   frameRect.width_ = 2 * r_;
   frameRect.height_ = 2 * r_;
-  point_t centerPoint = center_;
-  frameRect.pos_ = centerPoint;
+  frameRect.pos_ = center_;
   return frameRect;
 }
 
 void aleksandrov::Circle::move(const point_t& centerPoint)
 {
-  center_ = centerPoint;
+  center_.x_ = centerPoint.x_;
+  center_.y_ = centerPoint.y_;
 }
 
 void aleksandrov::Circle::move(const double dx, const double dy)
@@ -31,8 +31,11 @@ void aleksandrov::Circle::move(const double dx, const double dy)
   center_.y_ += dy;
 }
 
-void aleksandrov::Circle::scale(size_t k)
+void aleksandrov::Circle::scale(const size_t k)
 {
+  point_t center = getFrameRect().pos_;
+  center_.x_ = center.x_ + (center_.x_ - center.x_) * k;
+  center_.y_ = center.y_ + (center_.y_ - center.y_) * k;
   r_ *= k;
 }
 
