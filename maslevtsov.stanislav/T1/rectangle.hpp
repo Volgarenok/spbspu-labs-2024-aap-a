@@ -16,8 +16,7 @@ namespace maslevtsov
     void scale(double k) noexcept override;
 
   private:
-    point_t bottomLeft_;
-    point_t topRight_;
+    point_t bottomLeft_, topRight_;
   };
 
   Rectangle* makeRectangle(const double* arguments);
