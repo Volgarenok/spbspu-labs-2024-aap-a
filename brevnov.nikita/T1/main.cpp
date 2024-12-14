@@ -78,11 +78,6 @@ int main()
         break;
       }
     }
-    if (!scaleCommand)
-    {
-      std::cerr << "No SCALE command!\n";
-      return 1;
-    }
     if (isIncorrectParameters)
     {
       std::cerr << "Some parameters were incorrect\n";
@@ -90,6 +85,12 @@ int main()
     if (count_of_shape == 0)
     {
       std::cerr << "Not a single figure was read\n";
+      return 1;
+    }
+    if (!scaleCommand)
+    {
+      std::cerr << "No SCALE command!\n";
+      brevnov::destroy_shape(shapes, count_of_shape);
       return 1;
     }
     std::cout << std::setprecision(1);
