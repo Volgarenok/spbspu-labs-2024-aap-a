@@ -79,6 +79,10 @@ int main()
       {
         if (!(line >> scale_center.x >> scale_center.y >> factor) || factor <= 0)
         {
+          for(size_t i = 0; i < shapeCount; ++i)
+          {
+            delete shape[i];
+          }
           std::cerr << "Invalid scale\n";
           free(input);
           return 1;
