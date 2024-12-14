@@ -3,7 +3,8 @@
 char * komarova::rep_sym(const char * str,char * str_rep)
 {
   char * new_str = str_rep;
-  for (const char * i = str; *i != '\0'; i++)
+  const char * i = str;
+  for (; *i != '\0'; i++)
   {
     const char * k = str;
     size_t rep = 0;
