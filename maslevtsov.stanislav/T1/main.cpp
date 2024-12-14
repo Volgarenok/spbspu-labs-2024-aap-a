@@ -30,7 +30,6 @@ int main()
   std::size_t shapeIndex = 0;
   bool isIgnoredShapes = false, isImplementedShapes = false, isScale = false;
   std::string argument = "";
-  double* arguments = new double[8];
   double scalePntX = 0, scalePntY = 0, scaleK = 0;
 
   while (std::cin >> argument && !std::cin.eof())
@@ -41,16 +40,20 @@ int main()
       std::cin >> scalePntX >> scalePntY >> scaleK;
       continue;
     }
+    char* argStr = nullptr;
+    double* arguments = nullptr;
     maslevtsov::Shape* shape = nullptr;
     try
     {
-      arguments = maslevtsov::split(maslevtsov::getline(std::cin));
+      argStr = maslevtsov::getline(std::cin);
+      arguments = maslevtsov::split(argStr);
       shape = maslevtsov::makeShape(argument, arguments);
     }
     catch (const std::bad_alloc& e)
     {
       maslevtsov::clearShapes(shapes, shapeIndex);
       delete[] arguments;
+      delete[] argStr;
       std::cerr << "Error: fail in memory allocation\n";
       return 1;
     }
@@ -62,6 +65,7 @@ int main()
     shapes[shapeIndex++] = shape;
     isImplementedShapes = true;
     delete[] arguments;
+    delete[] argStr;
   }
 
   if (isIgnoredShapes)
