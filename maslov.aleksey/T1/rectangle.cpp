@@ -10,8 +10,8 @@ maslov::rectangle_t maslov::Rectangle::getFrameRect() const
 {
   double height = upperRightCorner_.y - lowerLeftCorner_.y;
   double width = upperRightCorner_.x - lowerLeftCorner_.x;
-  double centerY = height / 2.0;
-  double centerX = width / 2.0;
+  double centerY = lowerLeftCorner_.y + height / 2.0;
+  double centerX = lowerLeftCorner_.x + width / 2.0;
   return {height, width, {centerX, centerY}};
 }
 void maslov::Rectangle::move(point_t s)
@@ -31,12 +31,9 @@ void maslov::Rectangle::move(double dx, double dy)
 }
 void maslov::Rectangle::scale(double k)
 {
-  double height = getFrameRect().height;
-  double width = getFrameRect().width;
-  double newHalfHeight = height * k / 2.0;
-  double newHalfWidth = width * k / 2.0;
-  lowerLeftCorner_.x += newHalfWidth;
-  lowerLeftCorner_.y += newHalfHeight;
-  upperRightCorner_.x -= newHalfWidth;
-  upperRightCorner_.y -= newHalfHeight;
+  point_t center = this->getFrameRect().pos;
+  lowerLeftCorner_.x = center.x + (lowerLeftCorner_.x - center.x) * k;
+  lowerLeftCorner_.y = center.y + (lowerLeftCorner_.y - center.y) * k;
+  upperRightCorner_.x = center.x + (upperRightCorner_.x - center.x) * k;
+  upperRightCorner_.y = center.y + (upperRightCorner_.y - center.y) * k;
 }

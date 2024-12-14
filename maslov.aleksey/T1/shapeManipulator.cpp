@@ -37,8 +37,8 @@ void maslov::printCoordinates(Shape ** shapes, size_t count)
     double lowerLeftCornerY = centerY - heightHalf;
     double upperRightCornerX = centerX + widthHalf;
     double upperRightCornerY = centerY + heightHalf;
-    std::cout << lowerLeftCornerX << " " << lowerLeftCornerY << " ";
-    std::cout << upperRightCornerX << " " << upperRightCornerY;
+    std::cout << " " << lowerLeftCornerX << " " << lowerLeftCornerY;
+    std::cout << " " << upperRightCornerX << " " << upperRightCornerY;
   }
 }
 void maslov::destroyShapes(Shape ** shapes, size_t count)
