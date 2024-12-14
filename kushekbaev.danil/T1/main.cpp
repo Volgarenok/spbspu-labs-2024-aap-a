@@ -48,15 +48,16 @@ int main()
 
   if (std::cin.eof())
   {
-    std::cout << "We reached the end of program" << "\n";
+    std::cerr << "We reached the end of program" << "\n";
     return 0;
   }
 
-  std::cout << std::fixed << std::setprecision(1) << getTotalArea(capacity, shapeCounter) << "\n";
+  std::cout << std::fixed << std::setprecision(1) << getTotalArea(capacity, shapeCounter);
   coordOutput(capacity, shapeCounter);
 
   scaleEverything(shapeCounter, capacity, scaler, V);
 
-  std::cout << getTotalArea(capacity, shapeCounter) << "\n";
+  std::cout << getTotalArea(capacity, shapeCounter);
+  coordOutput(capacity, shapeCounter);
   clearMemory(capacity, shapeCounter);
 }
