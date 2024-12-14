@@ -1,9 +1,9 @@
+#include <iostream>
+#include <iomanip>
 #include "shape.hpp"
 #include "inputShape.hpp"
 #include "base-types.hpp"
 #include "shapeManipulator.hpp"
-#include <iostream>
-#include <iomanip>
 
 int main()
 {

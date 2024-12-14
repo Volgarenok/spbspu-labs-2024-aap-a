@@ -1,6 +1,6 @@
 #include "inputShape.hpp"
-#include "shapeManipulator.hpp"
 #include <cstring>
+#include "shapeManipulator.hpp"
 
 size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
 {
@@ -29,6 +29,41 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
         maslov::destroyShapes(shapes, count);
         throw;
       }
+    }
+    else if (name == "REGULAR")
+    {
+      try
+      {
+        shapes[count] = maslov::makeRegular(in);
+        count++;  
+      }
+      catch(const std::invalid_argument & e)
+      {
+        incorrectedFlag = true;
+      }
+      catch(const std::bad_alloc & e)
+      {
+        maslov::destroyShapes(shapes, count);
+        throw;
+      }
+    }
+    else if (name == "PARALLELOGRAM")
+    {
+      try
+      {
+        shapes[count] = maslov::makeParallelogram(in);
+        count++;  
+      }
+      catch(const std::invalid_argument & e)
+      {
+        incorrectedFlag = true;
+      }
+      catch(const std::bad_alloc & e)
+      {
+        maslov::destroyShapes(shapes, count);
+        throw;
+      }
+      
     }
   }
   if (in.eof())
@@ -63,7 +98,15 @@ maslov::Rectangle * maslov::makeRectangle(std::istream & in)
   }
   catch(const std::bad_alloc & e)
   {
-    throw ("Memory bad");
+    throw;
   }
   return rectangle;
+}
+maslov::Regular * makeRegular(std::istream & in)
+{
+
+}
+maslov::Parallelogram * makeParallelogram(std::istream & in)
+{
+
 }
