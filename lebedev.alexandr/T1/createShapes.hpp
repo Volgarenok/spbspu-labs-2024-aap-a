@@ -1,5 +1,5 @@
-#ifndef CREATESHAPES.HPP
-#define CREATESHAPES.HPP
+#ifndef CREATESHAPES_HPP
+#define CREATESHAPES_HPP
 #include <istream>
 #include "rectangle.hpp"
 
