@@ -31,7 +31,7 @@ void maslov::Rectangle::move(double dx, double dy)
 }
 void maslov::Rectangle::scale(double k)
 {
-  point_t center = this->getFrameRect().pos;
+  point_t center = getFrameRect().pos;
   lowerLeftCorner_.x = center.x + (lowerLeftCorner_.x - center.x) * k;
   lowerLeftCorner_.y = center.y + (lowerLeftCorner_.y - center.y) * k;
   upperRightCorner_.x = center.x + (upperRightCorner_.x - center.x) * k;

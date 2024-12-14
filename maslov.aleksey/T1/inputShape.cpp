@@ -89,7 +89,7 @@ maslov::Rectangle * maslov::makeRectangle(std::istream & in)
   in >> x1 >> y1 >> x2 >> y2;
   if (x2 <= x1 || y2 <= y1)
   {
-    throw std::invalid_argument("Incorrect parameters");
+    throw std::invalid_argument("Rectangle has incorrect parameters");
   }
   Rectangle * rectangle = nullptr;
   try
@@ -104,9 +104,44 @@ maslov::Rectangle * maslov::makeRectangle(std::istream & in)
 }
 maslov::Regular * makeRegular(std::istream & in)
 {
-
+  double x1 = 0, y1 = 0, x2 = 0, y2 = 0 , x3 = 0, y3 = 0;
+  in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+  if ()
+  {
+    throw std::invalid_argument("");
+  }
+  maslov::Regular * regular = nullptr;
+  try
+  {
+    regular = new maslov::Regular({x1, y1}, {x2, y2}, {x3, y3});
+  }
+  catch(const std::bad_alloc & e)
+  {
+    throw;
+  }
+  return regular;
 }
 maslov::Parallelogram * makeParallelogram(std::istream & in)
 {
-
+  double x1 = 0, y1 = 0, x2 = 0, y2 = 0 , x3 = 0, y3 = 0;
+  in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+  if (y1 != y2 && y2 != y3)
+  {
+    throw std::invalid_argument("Parallelogram is not parallel to the abscissa axis");
+  }
+  if (y2 == y3)
+  {
+    std::swap(y1, y3);
+    std::swap(x1, x3);
+  }
+  maslov::Parallelogram * parallelogram = nullptr;
+  try
+  {
+    parallelogram = new maslov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
+  }
+  catch(const std::bad_alloc & e)
+  {
+    throw;
+  }
+  return parallelogram;
 }
