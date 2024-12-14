@@ -7,7 +7,7 @@ namespace maslovskiy
   class Rectangle : public Shape
   {
   public:
-    Rectangle(point_t leftCorner, point_t rightCormer);
+    Rectangle(point_t leftCorner, point_t rightCorner);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;
