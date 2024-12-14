@@ -43,4 +43,7 @@ void maslevtsov::Regular::scale(double k) noexcept
 {}
 
 maslevtsov::Regular* maslevtsov::makeRegular(const double* arguments)
-{}
+{
+  Regular* reg = new Regular({arguments[0], arguments[1]}, {arguments[2], arguments[3]}, {arguments[4], arguments[5]});
+  return reg;
+}
