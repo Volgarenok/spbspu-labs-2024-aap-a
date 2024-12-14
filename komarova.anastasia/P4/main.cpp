@@ -28,15 +28,8 @@ int main()
   }
   str_res[0] = '\0';
   str_res[size_str_now] = '\0';
-  char * str_rep = komarova::rep_sym(str, str_res);
-  if (str_rep == nullptr)
-  {
-    std::cerr << "Error in rep_sym \n";
-    free(str);
-    free(str_res);
-    return 1;
-  }
-  std::cout << str_rep << "\n";
+
+  std::cout << komarova::rep_sym(str, str_res) << "\n";
   char* str_vowels = komarova::vowels(str, str_res);
   if (str_vowels == nullptr)
   {
