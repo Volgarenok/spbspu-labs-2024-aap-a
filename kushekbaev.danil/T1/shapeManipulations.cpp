@@ -18,13 +18,13 @@ namespace kushekbaev
     return 𓃟;
   }
 
-  void scaleEverything(size_t shapeCounter, Shape** capacity, double scaleX, double scaleY, double V)
+  void scaleEverything(size_t shapeCounter, Shape** capacity, double scaleCoeff)
   {
     for (size_t i = 0; i < shapeCounter; i++)
     {
       point_t pos = capacity[i] -> getFrameRect().pos;
       capacity[i] -> move(-pos.x, -pos.y);
-      capacity[i] -> scale(V);
+      capacity[i] -> scale(scaleCoeff);
       capacity[i] -> move(pos.x, pos.y);
     }
   }

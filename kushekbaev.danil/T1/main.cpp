@@ -9,7 +9,7 @@ int main()
   kushekbaev::Shape* capacity[10000]{};
   size_t shapeCounter = 0;
   std::string shapeName;
-  double V = 0, scaleX = 0, scaleY = 0;
+  double scaleCoeff = 0, scaleX = 0, scaleY = 0;
 
   while (std::cin >> shapeName)
   {
@@ -46,14 +46,14 @@ int main()
 
     else if (shapeName == "SCALE")
     {
-      if(!(std::cin >> scaleX >> scaleY >> V))
+      if(!(std::cin >> scaleX >> scaleY >> scaleCoeff))
       {
         std::cerr << "Scale reading error";
         clearMemory(capacity, shapeCounter);
         return 1;
       }
 
-      if (V <= 0)
+      if (scaleCoeff <= 0)
       {
         std::cerr << "Scale value should be positive";
         clearMemory(capacity, shapeCounter);
@@ -80,7 +80,7 @@ int main()
   std::cout << std::fixed << std::setprecision(1) << getTotalArea(capacity, shapeCounter);
   coordOutput(capacity, shapeCounter);
 
-  scaleEverything(shapeCounter, capacity, scaleX, scaleY, V);
+  scaleEverything(shapeCounter, capacity, scaleCoeff);
 
   std::cout << getTotalArea(capacity, shapeCounter);
   coordOutput(capacity, shapeCounter);
