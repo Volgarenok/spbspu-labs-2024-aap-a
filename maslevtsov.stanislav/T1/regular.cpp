@@ -1,5 +1,6 @@
 #include "regular.hpp"
 #include <stdexcept>
+#include <cmath>
 
 namespace maslevtsov
 {
@@ -8,9 +9,9 @@ namespace maslevtsov
 
 bool maslevtsov::isRightTriangle(point_t p1, point_t p2, point_t p3)
 {
-  double sqrLength1 = (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y);
-  double sqrLength2 = (p2.x - p3.x) * (p2.x - p3.x) + (p2.y - p3.y) * (p2.y - p3.y);
-  double sqrLength3 = (p1.x - p3.x) * (p1.x - p3.x) + (p1.y - p3.y) * (p1.y - p3.y);
+  double sqrLength1 = std::pow(p1.x - p2.x, 2) + std::pow(p1.y - p2.y, 2);
+  double sqrLength2 = std::pow(p2.x - p3.x, 2) + std::pow(p2.y - p3.y, 2);
+  double sqrLength3 = std::pow(p1.x - p3.x, 2) + std::pow(p1.y - p3.y, 2);
   return (p1.x != 0 && p1.y != 0 && p2.x != 0 && p2.y != 0 && p3.x != 0 && p3.y != 0) &&
     ((sqrLength1 + sqrLength2 == sqrLength3) || (sqrLength2 + sqrLength3 == sqrLength1) ||
      (sqrLength1 + sqrLength3 == sqrLength2));
@@ -28,7 +29,17 @@ maslevtsov::Regular::Regular(point_t center, point_t pnt2, point_t pnt3):
 }
 
 double maslevtsov::Regular::getArea() const noexcept
-{}
+{
+  double sqrLength1 = std::pow(center_.x - pnt2_.x, 2) + std::pow(center_.y - pnt2_.y, 2);
+  double sqrLength2 = std::pow(center_.x - pnt3_.x, 2) + std::pow(center_.y - pnt3_.y, 2);
+  double leg1 = std::sqrt(sqrLength1 < sqrLength2 ? sqrLength1 : sqrLength2);
+  double leg2 = std::pow(pnt2_.x - pnt3_.x, 2) + std::pow(pnt2_.y - pnt3_.y, 2);
+  double hypotenuse = std::sqrt(sqrLength1 > sqrLength2 ? sqrLength1 : sqrLength2);
+  double angle = std::acos(leg1 / hypotenuse);
+  double nTriangles = 360 / angle;
+  double triangleSquare = 0.5 * leg1 * leg2;
+  return triangleSquare * nTriangles;
+}
 
 maslevtsov::rectangle_t maslevtsov::Regular::getFrameRect() const noexcept
 {}
