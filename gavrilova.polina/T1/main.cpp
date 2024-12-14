@@ -8,29 +8,19 @@ namespace gavrilova {
     point_t pos1 = shape.getFrameRect().pos;
     double difX = center.x - pos1.x;
     double difY = center.y - pos1.y;
-    /* std::cout << "Center: " << center.x << " " << center.y << "\n";
-    std::cout << "pos: " << pos1.x << " " << pos1.y << "\n";
     rectangle_t rect = shape.getFrameRect();
-    std::cout << " " << rect.height << " " << rect.width << " " << rect.pos.x << " " << rect.pos.y << "\n"; */
     shape.move(center);
-    /* rect = shape.getFrameRect();
-    std::cout << "After move1:\n";
-    std::cout << " " << rect.height << " " << rect.width << " " << rect.pos.x << " " << rect.pos.y << "\n"; */
+    rect = shape.getFrameRect();
     shape.scale(k);
-    /* rect = shape.getFrameRect();
-    std::cout << "After scale:\n";
-    std::cout << " " << rect.height << " " << rect.width << " " << rect.pos.x << " " << rect.pos.y << "\n"; */
+    rect = shape.getFrameRect();
     difX *= k;
     difY *= k;
-    /* std::cout << "difX and difY:" << difX << " " << difY << "\n"; */
     shape.move(-difX, -difY);
   }
   void outRectangles(std::ostream & out, gavrilova::Shape ** Shapes, size_t nShapes) {
     if (nShapes) {
       for (size_t i = 0; i < nShapes; ++i) {
         rectangle_t rect = Shapes[i]->getFrameRect();
-        //out << " " << rect.height << " " << rect.width << " " << rect.pos.x << " " << rect.pos.y << "\n";
-/*         out << std::fixed; */
         out << std::setprecision(1);
         out << " " << rect.pos.x - rect.width / 2 << " " << rect.pos.y - rect.height / 2;
         out << " " << rect.pos.x + rect.width / 2 << " " << rect.pos.y + rect.height / 2;
@@ -67,7 +57,6 @@ int main()
     } else if (koef > 0 || std::cin.eof()) {
       break;
     }
-    //std::cout << "nShapes = " << nShapes << "\n";
   }
   if (koef <= 0) {
     std::cerr << "ERROR\n";
