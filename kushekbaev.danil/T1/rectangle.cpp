@@ -14,7 +14,8 @@ namespace kushekbaev
 
   rectangle_t Rectangle::getFrameRect() const
   {
-    return { upperRight_.x - lowerLeft_.x, upperRight_.y - lowerLeft_.y, { lowerLeft_.x + (upperRight_.x - lowerLeft_.x) / 2, lowerLeft_.y + (upperRight_.y - lowerLeft_.y) / 2 } };
+    return { upperRight_.x - lowerLeft_.x, upperRight_.y - lowerLeft_.y,
+    { lowerLeft_.x + (upperRight_.x - lowerLeft_.x) / 2, lowerLeft_.y + (upperRight_.y - lowerLeft_.y) / 2 } };
   }
 
   void Rectangle::move(point_t Z)
