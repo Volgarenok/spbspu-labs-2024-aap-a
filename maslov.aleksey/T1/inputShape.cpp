@@ -11,8 +11,9 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
   while (flag)
   {
     str = maslov::inputLine(in, ' ');
-    if (str == '\0' && !in.eof())
+    if (str[0] == '\0' && !in.eof())
     {
+      delete[] str;
       continue;
     }
     std::string name(str);
