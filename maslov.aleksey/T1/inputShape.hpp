@@ -3,12 +3,11 @@
 
 #include "shape.hpp"
 #include "rectangle.hpp"
-#include "scaleData.hpp"
 #include <iostream>
 
 namespace maslov
 {
-  maslov::ScaleData inputShape(std::istream & in, Shape ** shapes);
+  size_t inputShape(std::istream & in, Shape ** shapes);
   Rectangle * makeRectangle(std::istream & in);
 }
 
