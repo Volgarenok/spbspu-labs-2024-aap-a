@@ -5,6 +5,8 @@
 #include <iostream>
 #include <iomanip>
 
+void destroyShape(maslov::Shape ** shapes, size_t count);
+
 int main()
 {
   constexpr int maxShapes = 10000;
@@ -17,12 +19,14 @@ int main()
   catch(const std::exception& e)
   {
     std::cerr << e.what() << '\n';
+    destroyShape(shapes, count);
     return 1;
   }
   double centerX = 0.0, centerY = 0.0, scaleFactor = 0.0;
   if (!(std::cin >> centerX >> centerY >> scaleFactor))
   {
     throw std::invalid_argument("Incorrect parameters");
+    destroyShape(shapes, count);
     return 1;
   }
   maslov::point_t scaleCoor = {centerX, centerY};
@@ -33,4 +37,13 @@ int main()
   std::cout << getSumArea(shapes, count);
   printCoor(shapes, count);
   std::cout << "\n";
+  destroyShape(shapes, count);
+}
+
+void destroyShape(maslov::Shape ** shapes, size_t count)
+{
+  for (size_t i = 0; i < count; ++i)
+  {
+    delete shapes[i];
+  }
 }
