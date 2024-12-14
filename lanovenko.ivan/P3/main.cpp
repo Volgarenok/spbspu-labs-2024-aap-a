@@ -4,6 +4,7 @@
 #include <cstring>
 #include "input_matrix.h"
 #include "modification_matrix.h"
+#include "output_matrix.h"
 int main(int argc, char** argv)
 {
   if (argc > 4)
@@ -24,11 +25,8 @@ int main(int argc, char** argv)
   }
   const char* str = argv[1];
   char* endptr = nullptr;
-  long int num = 0;
-  num = std::strtol(str, std::addressof(endptr), 10);
-  size_t rows = 0;
-  size_t cols = 0;
-  size_t matrixsize = 0;
+  long int num = std::strtol(str, std::addressof(endptr), 10);
+  size_t rows = 0; size_t cols = 0;
   std::ifstream input(argv[2]);
   input >> rows >> cols;
   if (!input)
@@ -36,7 +34,7 @@ int main(int argc, char** argv)
     std::cerr << "Not a matrix" << '\n';
     return 2;
   }
-  matrixsize = rows * cols;
+  size_t matrixsize = rows * cols;
   std::ofstream output(argv[3]);
   int fixedmatrix[10000]{};
   int* matrix = fixedmatrix;
@@ -61,22 +59,8 @@ int main(int argc, char** argv)
     std::cerr << "Input fail" << '\n';
     return 2;
   }
-  lanovenko::editMatrix(matrix, rows, cols);
-  for (size_t r = 0; r < rows; ++r)
-  {
-    for (size_t c = 0; c < cols; ++c)
-    {
-      if (c < cols - 1)
-      {
-        output << matrix[r * cols + c] << ' ';
-      }
-      else
-      {
-        output << matrix[r * cols + c];
-      }
-    }
-    output << '\n';
-  }
+  lanovenko::editToSpiral(matrix, rows, cols);
+  lanovenko::outputMatrix(output, matrix, rows, cols);
   delete[] pointertodelete;
   return 0;
 }
