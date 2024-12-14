@@ -4,7 +4,7 @@
 
 namespace kushekbaev
 {
-  Rectangle* createRectangle(std::istream& input, bool incorrect_shape)
+  Rectangle* createRectangle(std::istream& input)
   {
     point_t lowerLeft;
     point_t upperRight;
@@ -13,11 +13,6 @@ namespace kushekbaev
     {
       input.clear();
       input.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    }
-    if (lowerLeft.x >= upperRight.x || lowerLeft.y >= upperRight.y)
-    {
-      incorrect_shape = true;
-      return nullptr;
     }
     Rectangle* 𓃟 = new Rectangle(lowerLeft, upperRight);
     return 𓃟;

@@ -6,7 +6,7 @@
 
 namespace kushekbaev
 {
-  Rectangle* createRectangle(std::istream& input, bool incorrect_shape);
+  Rectangle* createRectangle(std::istream& input);
   void scaleEverything(size_t shapeCounter, Shape** capacity, point_t scaler, double V);
   double getTotalArea(Shape** capacity, size_t shapeCounter);
   void coordOutput(Shape** capacity, size_t shapeCounter);

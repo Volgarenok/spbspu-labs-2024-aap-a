@@ -1,5 +1,7 @@
+#include "rectangle.cpp"
 #include "rectangle.hpp"
 #include "shapeManipulations.hpp"
+#include "shapeManipulations.cpp"
 #include <iostream>
 #include <string>
 #include <iomanip>
@@ -11,14 +13,13 @@ int main()
   std::string shapeName;
   kushekbaev::point_t scaler;
   double V = 0;
-  bool incorrect_shape = false;
   while (std::cin >> shapeName)
   {
     if (shapeName == "RECTANGLE")
     {
       try
       {
-        capacity[shapeCounter] = kushekbaev::createRectangle(std::cin, incorrect_shape);
+        capacity[shapeCounter] = kushekbaev::createRectangle(std::cin);
         shapeCounter++;
       }
       catch (std::bad_alloc& e)
@@ -26,10 +27,6 @@ int main()
         clearMemory(capacity, shapeCounter);
         std::cerr << "bad alloc" << "\n";
         return 1;
-      }
-      if (incorrect_shape)
-      {
-        std::cerr << "Incorrect shape input";
       }
     }
     else if (shapeName == "SCALE")
