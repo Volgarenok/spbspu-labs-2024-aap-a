@@ -1,6 +1,7 @@
 #include "diamond.hpp"
 #include <cmath>
 #include <stdexcept>
+#include <iostream>
 
 brevnov::Diamond::Diamond(point_t center, point_t horizontal, point_t vertical) : center(center), horizontal(horizontal), vertical(vertical)
 {

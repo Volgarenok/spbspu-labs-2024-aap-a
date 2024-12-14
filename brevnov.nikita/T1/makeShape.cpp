@@ -1,4 +1,5 @@
 #include "makeShape.hpp"
+#include <iostream>
 
 brevnov::Rectangle * brevnov::make_rectangle(std::istream & in)
 {
@@ -20,6 +21,7 @@ brevnov::Diamond * brevnov::make_diamond(std::istream & in)
 {
   double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0, x3 = 0.0, y3 = 0.0;
   in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+  Diamond * result = nullptr;
   if (in.fail())
   {
     throw std::invalid_argument("Incorrect parameters");
@@ -30,32 +32,32 @@ brevnov::Diamond * brevnov::make_diamond(std::istream & in)
   }
   if (x1 == x2 && y1 == y3)
   {
-    Diamond * result = new Diamond({x1, y1}, {x2, y2}, {x3, y3});
+    result = new Diamond({x1, y1}, {x2, y2}, {x3, y3});
     return result;
   }
   else if (x1 == x3 && y1 == y2)
   {
-    Diamond * result = new Diamond({x1, y1}, {x3, y3}, {x2, y2});
+    result = new Diamond({x1, y1}, {x3, y3}, {x2, y2});
     return result;
   }
   else if (x2 == x1 && y2 == y3)
   {
-    Diamond * result = new Diamond({x2, y2}, {x1, y1}, {x3, y3});
+    result = new Diamond({x2, y2}, {x1, y1}, {x3, y3});
     return result;
   }
   else if (x2 == x3 && y2 == y1)
   {
-    Diamond * result = new Diamond({x2, y2}, {x3, y3}, {x1, y1});
+    result = new Diamond({x2, y2}, {x3, y3}, {x1, y1});
     return result;
   }
   else if (x3 == x1 && y3 == y2)
   {
-    Diamond * result = new Diamond({x3, y3}, {x1, y1}, {x2, y2});
+    result = new Diamond({x3, y3}, {x1, y1}, {x2, y2});
     return result;
   }
   else if (x3 == x2 && y3 == y1)
   {
-    Diamond * result = new Diamond({x3, y3}, {x2, y2}, {x1, y1});
+    result = new Diamond({x3, y3}, {x2, y2}, {x1, y1});
     return result;
   }
   else
