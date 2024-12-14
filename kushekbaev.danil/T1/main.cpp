@@ -1,7 +1,5 @@
-#include "rectangle.cpp"
 #include "rectangle.hpp"
 #include "shapeManipulations.hpp"
-#include "shapeManipulations.cpp"
 #include <iostream>
 #include <string>
 #include <iomanip>
