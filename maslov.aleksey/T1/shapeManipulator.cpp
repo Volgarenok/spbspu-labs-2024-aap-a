@@ -10,7 +10,7 @@ double maslov::getSumArea(Shape ** shapes, size_t count)
   }
   return sum;
 }
-void maslov::scaleShapes(Shape ** shapes, size_t count, 
+void maslov::scaleShapes(Shape ** shapes, size_t count,
     point_t scaleCoordinate, double scaleFactor)
 {
   for (size_t i = 0; i < count; i++)
@@ -36,7 +36,7 @@ void maslov::printCoordinates(Shape ** shapes, size_t count)
     double lowerLeftCornerX = centerX - widthHalf;
     double lowerLeftCornerY = centerY - heightHalf;
     double upperRightCornerX = centerX + widthHalf;
-    double upperRightCornerY = centerY + heightHalf;    
+    double upperRightCornerY = centerY + heightHalf;
     std::cout << lowerLeftCornerX << " " << lowerLeftCornerY << " ";
     std::cout << upperRightCornerX << " " << upperRightCornerY;
   }

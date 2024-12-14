@@ -8,7 +8,7 @@
 namespace maslov
 {
   double getSumArea(Shape** shapes, size_t count);
-  void scaleShapes(Shape** shapes, size_t count, 
+  void scaleShapes(Shape** shapes, size_t count,
       point_t scaleCoordinate, double scaleFactor);
   void printCoordinates(Shape** shapes, size_t count);
   void destroyShapes(Shape ** shapes, size_t count);
