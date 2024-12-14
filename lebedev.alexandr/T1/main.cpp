@@ -32,6 +32,19 @@ int main()
       }
     }
 
+    else if (shapeName == "DIAMOND")
+    {
+      try
+      {
+        shps[count] = lebedev::createDiamond(std::cin);
+        count++;
+      }
+      catch (const std::invalid_argument& e)
+      {
+        isIncorrectScale = true;
+      }
+    }
+
     else if (std::cin.eof())
     {
       std::cerr << "Input ended with EOF!\n";
