@@ -2,16 +2,16 @@
 #include "base-types.hpp"
 #include <cmath>
 
-Rectangle::Rectangle(const point_t& a, const point_t& b):
+aleksandrov::Rectangle::Rectangle(const point_t& a, const point_t& b):
   a_(a), b_(b)
 {}
 
-double Rectangle::getArea() const
+double aleksandrov::Rectangle::getArea() const
 {
   return std::fabs((b_.x_ - a_.x_) * (b_.y_ - a_.y_));
 }
 
-rectangle_t Rectangle::getFrameRect() const
+rectangle_t aleksandrov::Rectangle::getFrameRect() const
 {
   rectangle_t frameRect;
   frameRect.width_ = std::fabs(b_.x_ - a_.x_);
@@ -23,7 +23,7 @@ rectangle_t Rectangle::getFrameRect() const
   return frameRect;
 }
 
-void Rectangle::move(const point_t& centerPoint)
+void aleksandrov::Rectangle::move(const point_t& centerPoint)
 {
   rectangle_t frameRect = getFrameRect();
   frameRect.pos_ = centerPoint;
@@ -33,7 +33,7 @@ void Rectangle::move(const point_t& centerPoint)
   b_.y_ = frameRect.pos_.y_ + frameRect.height_ / 2;
 }
 
-void Rectangle::move(const double dx, const double dy)
+void aleksandrov::Rectangle::move(const double dx, const double dy)
 {
   a_.x_ += dx;
   a_.y_ += dy;
@@ -41,7 +41,7 @@ void Rectangle::move(const double dx, const double dy)
   b_.y_ += dy;
 }
 
-void Rectangle::scale(size_t k)
+void aleksandrov::Rectangle::scale(size_t k)
 {
   a_.x_ *= k;
   a_.y_ *= k;
