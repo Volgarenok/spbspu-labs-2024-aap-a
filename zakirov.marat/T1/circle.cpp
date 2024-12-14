@@ -2,7 +2,7 @@
 #include <cmath>
 #include "shape.hpp"
 
-zakirov::Circle::Circle(point_t center, double radius):
+zakirov::Circle::Circle(point_t center, double radius) :
   center_(center),
   radius_(radius)
 {

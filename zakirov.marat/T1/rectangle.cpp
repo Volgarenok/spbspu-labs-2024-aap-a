@@ -1,7 +1,7 @@
 #include "rectangle.hpp"
 #include "base-types.hpp"
 
-zakirov::Rectangle::Rectangle(point_t bottom_left, point_t top_right):
+zakirov::Rectangle::Rectangle(point_t bottom_left, point_t top_right) :
   bottom_left_(bottom_left),
   top_right_(top_right)
 {
