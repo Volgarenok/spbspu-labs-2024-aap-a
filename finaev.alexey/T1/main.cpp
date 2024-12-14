@@ -30,9 +30,17 @@ int main()
       }
       else if (str == "RECTANGLE")
       {
-        finaev::Rectangle* a = finaev::makeRectangle(std::cin);
-        shapes[size] = a;
-        size++;
+        try
+        {
+          shapes[size] = finaev::makeRectangle(std::cin);
+          size++;
+        }
+        catch(std::bad_alloc & e)
+        {
+          finaev::deleteShapes(shapes, size);
+          std::cerr << "Error alloc" << e.what() << "\n";
+          return 1;
+        }
       }
       else if (std::cin.eof())
       {
@@ -58,6 +66,7 @@ int main()
     finaev::scale(shapes, size, scaleCenter, k);
     std::cout << std::setprecision(2) << finaev::getSumArea(shapes, size) << " ";
     finaev::printFrameRect(shapes, size);
+    finaev::deleteShapes(shapes, size);
     return 0;
   }
   catch (std::bad_alloc& e)
