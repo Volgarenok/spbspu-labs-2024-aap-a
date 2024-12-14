@@ -2,12 +2,14 @@
 #include <string>
 #include <cmath>
 #include <stdexcept>
+#include <iomanip>
 #include "base-types.hpp"
 #include "shape.hpp"
 #include "makeShape.hpp"
 
 int main()
 {
+  std::cout << std::fixed << std::setprecision(1);
   constexpr size_t max_size_of_shape = 10000;
   size_t count_of_shape = 0;
   brevnov::Shape * shapes[max_size_of_shape] = {};
@@ -83,6 +85,7 @@ int main()
       std::cerr << "Not a single figure was read\n";
       return 1;
     }
+    std::cout << std::setprecision(1);
     std::cout << brevnov::get_sum_area(shapes, count_of_shape);
     brevnov::print_frame_coordinates(shapes, count_of_shape, std::cout);
     brevnov::scale_shape(shapes, count_of_shape, scale_p, ratio);
