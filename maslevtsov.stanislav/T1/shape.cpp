@@ -11,20 +11,11 @@ void maslevtsov::clearShapes(Shape** shapes, std::size_t border)
   }
 }
 
-// maslevtsov::Shape* maslevtsov::makeShape(std::string figureName, const double* arguments)
-// {
-//   if (figureName == "RECTANGLE")
-//   {
-//     return makeRectangle(arguments);
-//   }
-//   throw std::logic_error("not supported");
-// }
-
-maslevtsov::Shape* maslevtsov::makeShape(std::istream& in, std::string figureName)
+maslevtsov::Shape* maslevtsov::makeShape(std::string figureName, const double* arguments)
 {
   if (figureName == "RECTANGLE")
   {
-    return makeRectangle(in);
+    return makeRectangle(arguments);
   }
   throw std::logic_error("not supported");
 }

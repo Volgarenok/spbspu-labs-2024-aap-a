@@ -9,11 +9,11 @@ namespace maslevtsov
   {
   public:
     Rectangle(point_t bottomLeft, point_t topRight);
-    double getArea() const override;
-    rectangle_t getFrameRect() const override;
-    void move(point_t pnt) override;
-    void move(double dx, double dy) override;
-    void scale(double k) override;
+    double getArea() const noexcept override;
+    rectangle_t getFrameRect() const noexcept override;
+    void move(point_t pnt) noexcept override;
+    void move(double dx, double dy) noexcept override;
+    void scale(double k) noexcept override;
 
   private:
     point_t bottomLeft_;
@@ -21,7 +21,6 @@ namespace maslevtsov
   };
 
   Rectangle* makeRectangle(const double* arguments);
-  Rectangle* makeRectangle(std::istream& in);
 }
 
 #endif
