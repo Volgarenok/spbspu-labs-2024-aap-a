@@ -3,7 +3,7 @@
 
 namespace maslovskiy
 {
-  char* mergeStrs(const char* first, const char* second);
+  void mergeStrs(char* res, const char* first, const char* second);
 }
 
 #endif
