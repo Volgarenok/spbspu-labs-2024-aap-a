@@ -1,6 +1,15 @@
 #include "rectangle.hpp"
 #include "base-types.hpp"
 
+zakirov::Rectangle::Rectangle(point_t bottom_left, point_t top_right):
+  bottom_left_(bottom_left),
+  top_right_(top_right)
+{
+  if (bottom_left_.x_ >= top_right_.x_ || bottom_left_.y_ >= top_right_.y_)
+  {
+  }
+}
+
 double zakirov::Rectangle::getArea() const
 {
   double distance_x = get_distance_x(top_right_, bottom_left_);
@@ -16,7 +25,7 @@ zakirov::rectangle_t zakirov::Rectangle::getFrameRect() const
   сircumscribed.position_ = get_middle(top_right_, bottom_left_);
 
   return сircumscribed;
-} 
+}
 
 void zakirov::Rectangle::move(point_t target)
 {
