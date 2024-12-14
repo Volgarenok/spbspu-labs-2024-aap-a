@@ -12,6 +12,7 @@
 #include "ellipse.hpp"
 #include "diamond.hpp"
 
+
 int main()
 {
   averenkov::Shape* shapes[10000];
@@ -117,7 +118,8 @@ int main()
     std::cout << averenkov::getLeftBot(shapes[i]->getFrameRect()).y << " ";
     std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).x << " ";
     std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).y << "\n";
-    shapes[i]->scale(scale_center, factor);
+    shapes[i]->scale(factor);
+    shapeScale(shapes[i], scale_center, factor);
     std::cout << shapes[i]->getArea() << " ";
     std::cout << averenkov::getLeftBot(shapes[i]->getFrameRect()).x << " ";
     std::cout << averenkov::getLeftBot(shapes[i]->getFrameRect()).y << " ";

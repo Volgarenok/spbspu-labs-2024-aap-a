@@ -5,10 +5,8 @@ averenkov::Ellipse::Ellipse(averenkov::point_t center_, double radius_v_, double
 {
 }
 
-void averenkov::Ellipse::scale(averenkov::point_t s, double factor)
+void averenkov::Ellipse::scale(double factor)
 {
-  center.x = (center.x - s.x) * factor + s.x;
-  center.y = (center.y - s.y) * factor + s.y;
   radius_h *= factor;
   radius_v *= factor;
 }
