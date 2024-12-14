@@ -42,13 +42,34 @@ double maslevtsov::Regular::getArea() const noexcept
 }
 
 maslevtsov::rectangle_t maslevtsov::Regular::getFrameRect() const noexcept
-{}
+{
+  rectangle_t frameRect;
+  frameRect.pos = center_;
+  double sqrLength1 = std::pow(center_.x - pnt2_.x, 2) + std::pow(center_.y - pnt2_.y, 2);
+  double sqrLength2 = std::pow(center_.x - pnt3_.x, 2) + std::pow(center_.y - pnt3_.y, 2);
+  double hypotenuse = std::sqrt(sqrLength1 > sqrLength2 ? sqrLength1 : sqrLength2);
+  point_t movedCenter1 = {center_.x + hypotenuse, center_.y + hypotenuse};
+  point_t movedCenter2 = {center_.x - hypotenuse, center_.y - hypotenuse};
+  frameRect.width = std::abs(movedCenter2.x - movedCenter1.x);
+  frameRect.height = std::abs(movedCenter2.y - movedCenter1.y);
+  return frameRect;
+}
 
 void maslevtsov::Regular::move(point_t pnt) noexcept
-{}
+{
+  center_ = pnt;
+  double movedX = pnt.x - getFrameRect().pos.x;
+  double movedY = pnt.y - getFrameRect().pos.y;
+  pnt2_ = {pnt2_.x + movedX, pnt2_.y + movedX};
+  pnt3_ = {pnt3_.x + movedX, pnt3_.y + movedY};
+}
 
 void maslevtsov::Regular::move(double dx, double dy) noexcept
-{}
+{
+  center_ = {center_.x + dx, center_.y + dy};
+  pnt2_ = {pnt2_.x + dx, pnt2_.y + dy};
+  pnt3_ = {pnt3_.x + dx, pnt3_.y + dy};
+}
 
 void maslevtsov::Regular::scale(double k) noexcept
 {}

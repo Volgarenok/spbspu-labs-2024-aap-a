@@ -30,18 +30,14 @@ void maslevtsov::Rectangle::move(point_t pnt) noexcept
 {
   double movedX = pnt.x - getFrameRect().pos.x;
   double movedY = pnt.y - getFrameRect().pos.y;
-  bottomLeft_.x += movedX;
-  bottomLeft_.y += movedY;
-  topRight_.x += movedX;
-  topRight_.y += movedY;
+  bottomLeft_ = {bottomLeft_.x + movedX, bottomLeft_.y + movedY};
+  topRight_ = {topRight_.x + movedX, topRight_.y + movedY};
 }
 
 void maslevtsov::Rectangle::move(double dx, double dy) noexcept
 {
-  bottomLeft_.x += dx;
-  bottomLeft_.y += dy;
-  topRight_.x += dx;
-  topRight_.y += dy;
+  bottomLeft_ = {bottomLeft_.x + dx, bottomLeft_.y + dy};
+  topRight_ = {topRight_.x + dx, topRight_.y + dy};
 }
 
 void maslevtsov::Rectangle::scale(double k) noexcept
