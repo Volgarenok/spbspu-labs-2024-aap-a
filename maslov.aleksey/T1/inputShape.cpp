@@ -1,22 +1,19 @@
 #include "inputShape.hpp"
-#include <string>
-#include <stringInput.hpp>
+#include <cstring>
 
 size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
 {
   bool flag = true;
   size_t count = 0;
   bool incorrectedFlag = false;
-  char * str = nullptr;
+  std::string name;
   while (flag)
   {
-    str = maslov::inputLine(in, ' ');
-    if (str[0] == '\0' && !in.eof())
+    in >> name;
+    if (name.empty())
     {
-      delete[] str;
       continue;
     }
-    std::string name(str);
     if (name == "SCALE")
     {
       flag = false;
@@ -35,11 +32,8 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
     }
     if (in.eof())
     {
-      delete[] str;
       throw std::runtime_error("Error: EOF encountered before SCALE command");
     }
-    in.get();
-    delete[] str;
   }
   if (incorrectedFlag)
   {
