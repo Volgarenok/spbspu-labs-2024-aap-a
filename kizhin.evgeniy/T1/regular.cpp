@@ -5,7 +5,7 @@
 #include "point_utils.hpp"
 
 kizhin::Regular::Regular(const point_t& p1, const point_t& p2, const point_t& p3) :
-  frame_ { 0.0, 0.0, p1 }
+  frame_{ 0.0, 0.0, p1 }
 {
   if (!isRightTriangle(p1, p2, p3)) {
     throw std::invalid_argument("Invalid Triangle For Regular Construction");
@@ -60,10 +60,10 @@ void kizhin::Regular::computeFrameRect()
 {
   point_t* vertices = computeVerticesArray();
   double* edgeCords = computeEdgeCords(vertices, size_);
+  delete[] vertices;
   frame_.width = edgeCords[1] - edgeCords[0];
   frame_.height = edgeCords[3] - edgeCords[2];
   delete[] edgeCords;
-  delete[] vertices;
 }
 
 kizhin::point_t* kizhin::Regular::computeVerticesArray() const

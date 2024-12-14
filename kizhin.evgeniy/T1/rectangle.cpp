@@ -2,7 +2,7 @@
 #include <cassert>
 
 kizhin::Rectangle::Rectangle(double width, double height, const point_t& position) :
-  data_ { width, height, position }
+  data_{ width, height, position }
 {
 }
 

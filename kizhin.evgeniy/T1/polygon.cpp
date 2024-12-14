@@ -6,7 +6,7 @@
 namespace kizhin {
   void copy(const point_t*, const point_t*, point_t*);
   bool hasDuplicates(const point_t*, const point_t*);
-  size_t countElement(const point_t*, const point_t*, const point_t);
+  size_t countEqual(const point_t*, const point_t*, const point_t);
 }
 
 kizhin::Polygon::Polygon(const Polygon& rhs) :
@@ -136,14 +136,14 @@ void kizhin::copy(const point_t* first, const point_t* last, point_t* result)
 bool kizhin::hasDuplicates(const point_t* begin, const point_t* end)
 {
   for (const point_t* i = begin; i != end; ++i) {
-    if (countElement(begin, end, *i) > 1) {
+    if (countEqual(begin, end, *i) > 1) {
       return true;
     }
   }
   return false;
 }
 
-size_t kizhin::countElement(const point_t* begin, const point_t* end, const point_t val)
+size_t kizhin::countEqual(const point_t* begin, const point_t* end, const point_t val)
 {
   size_t count = 0;
   for (; begin != end; ++begin) {

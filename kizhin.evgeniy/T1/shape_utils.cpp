@@ -2,7 +2,6 @@
 #include <cassert>
 #include <cstring>
 #include <stdexcept>
-#include "base-types.hpp"
 #include "polygon.hpp"
 #include "rectangle.hpp"
 #include "regular.hpp"
@@ -29,12 +28,10 @@ void kizhin::scaleShape(Shape* shape, const double* params)
     throw std::logic_error("Invalid Scale Factor");
   }
   const point_t scalingPoint { params[1], params[2] };
-
   const point_t oldFramePos = shape->getFrameRect().pos;
   shape->move(scalingPoint);
   const point_t newFramePos = shape->getFrameRect().pos;
   shape->scale(scalingFactor);
-
   const double dx = (oldFramePos.x - newFramePos.x) * scalingFactor;
   const double dy = (oldFramePos.y - newFramePos.y) * scalingFactor;
   shape->move(dx, dy);
@@ -128,3 +125,4 @@ kizhin::Polygon* kizhin::createPolygon(const double* params)
   }
   return result;
 }
+
