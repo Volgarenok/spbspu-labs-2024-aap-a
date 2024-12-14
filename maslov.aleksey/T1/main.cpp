@@ -14,7 +14,7 @@ int main()
   {
     count = maslov::inputShapes(std::cin, shapes);
   }
-  catch(const std::exception & e)
+  catch(const std::runtime_error & e)
   {
     std::cerr << e.what() << '\n';
     destroyShapes(shapes, count);
@@ -24,7 +24,7 @@ int main()
   std::cin >> centerX >> centerY >> scaleFactor;
   if (scaleFactor <= 0)
   {
-    throw std::invalid_argument("Incorrect scale factor");
+    std::cerr << "Incorrect scale factor\n";
     destroyShapes(shapes, count);
     return 1;
   }

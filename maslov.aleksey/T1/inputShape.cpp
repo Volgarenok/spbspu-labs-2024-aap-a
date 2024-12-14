@@ -25,10 +25,10 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
         incorrectedFlag = true;
       }
     }
-    else if (in.eof())
-    {
-      throw std::runtime_error("Error: EOF encountered before SCALE command");
-    }
+  }
+  if (in.eof())
+  {
+    throw std::runtime_error("Error: EOF encountered before SCALE command");
   }
   if (incorrectedFlag)
   {
