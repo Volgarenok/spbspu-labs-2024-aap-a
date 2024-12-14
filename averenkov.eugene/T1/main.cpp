@@ -30,15 +30,15 @@ int main()
     std::istringstream line(input);
     std::string command;
     line >> command;
-    if (command.empty())
-    {
-      free(input);
-      continue;
-    }
 
     try
     {
-      if (command == "RECTANGLE")
+      if (command.empty())
+      {
+        free(input);
+        continue;
+      }
+      else if (command == "RECTANGLE")
       {
         averenkov::point_t a, c;
         if (!(line >> a.x >> a.y >> c.x >> c.y))
