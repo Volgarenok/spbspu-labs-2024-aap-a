@@ -57,7 +57,7 @@ int main()
     }
   }
   if (koef <= 0) {
-    std::cerr << "\оэфицент не введен или введен неправильно\n";
+    std::cerr << "Kоэфицент не введен или введен неправильно\n";
     gavrilova::clearShapes(Shapes, nShapes);
     return 1;
   }
