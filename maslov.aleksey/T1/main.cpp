@@ -5,7 +5,6 @@
 #include <iostream>
 #include <iomanip>
 
-void destroyShape(maslov::Shape ** shapes, size_t count);
 
 int main()
 {
@@ -30,7 +29,7 @@ int main()
     return 1;
   }
   maslov::point_t scaleCoordinate = {centerX, centerY};
-  
+
   std::cout << std::fixed << std::setprecision(1);
   std::cout << maslov::getSumArea(shapes, count);
   maslov::printCoordinates(shapes, count);
@@ -40,12 +39,4 @@ int main()
   maslov::printCoordinates(shapes, count);
   std::cout << "\n";
   destroyShape(shapes, count);
-}
-
-void destroyShape(maslov::Shape ** shapes, size_t count)
-{
-  for (size_t i = 0; i < count; ++i)
-  {
-    delete shapes[i];
-  }
 }
