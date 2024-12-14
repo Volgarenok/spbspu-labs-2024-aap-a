@@ -10,16 +10,17 @@ petrov::Rectangle::Rectangle(point_t p1, point_t p2):
   p4_.y_ = p1_.y_;
 }
 
-void petrov::Rectangle::getArea()
+double petrov::Rectangle::getArea()
 {
-  area = frame_rect_.width_ * frame_rect_.height_;
+  return frame_rect_.width_ * frame_rect_.height_;
 }
 
-void petrov::Rectangle::getFrameRect()
+petrov::point_t petrov::Rectangle::getFrameRect()
 {
   frame_rect_.height_ = abs(p2_.y_ - p1_.y_);
   frame_rect_.width_ = abs(p4_.x_ - p1_.x_);
   frame_rect_.pos_ = { p3_.x_ - p1_.x_, p3_.y_ - p1_.y_ };
+  return frame_rect_.pos_;
 }
 
 void petrov::Rectangle::move(point_t concrete_point)

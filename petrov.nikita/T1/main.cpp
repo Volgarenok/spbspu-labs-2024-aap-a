@@ -6,7 +6,7 @@
 #include "rectangle.hpp"
 int main()
 {
-  petrov::Shape shapes_massive[10000] = {};
+  petrov::Shape * shapes_massive[10000] = {};
   char * stream_massive = nullptr;
   size_t capacity = 1;
   char * type_of_shape = nullptr;
@@ -58,7 +58,8 @@ int main()
   char ** p_end = nullptr;
   petrov::point_t p1 = { std::strtod(description[0], p_end), std::strtod(description[1], p_end) };
   petrov::point_t p2 = { std::strtod(description[2], p_end), std::strtod(description[3], p_end) };
-  shapes_massive[0] = petrov::Rectangle(p1, p2);
-  shapes_massive[0].getFrameRect();
-  shapes_massive[0].getArea();
+  petrov::Rectangle rectangle(p1, p2);
+  petrov::Rectangle * ptr_rectangle = &rectangle;
+  shapes_massive[0] = ptr_rectangle;
+  std::cout << shapes_massive[0]->getArea();
 }
