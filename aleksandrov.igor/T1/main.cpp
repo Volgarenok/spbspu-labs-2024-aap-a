@@ -45,23 +45,24 @@ Rectangle* makeRectangle(const std::string rectangleParams)
 Shape* makeShape(const std::string shapeDescription)
 {
   std::string shapeName = getWord(shapeDescription, 1);
-  std::string shapeParams;
-  std::string param;
+
+  std::string params, param;
   size_t paramsCount = 0;
   param = getWord(shapeDescription, paramsCount + 2);
   while (param != "")
   {
     if (paramsCount == 0)
     {
-      shapeParams += param;
+      params += param;
     }
     else
     {
-      shapeParams += " " + param;
+      params += " " + param;
     }
     ++paramsCount;
     param = getWord(shapeDescription, paramsCount + 2);
   }
+
   if (shapeName == "RECTANGLE")
   {
     if (paramsCount != 4)
@@ -69,15 +70,14 @@ Shape* makeShape(const std::string shapeDescription)
       wasDescriptionError = 1;
       return nullptr;
     }
-    return makeRectangle(shapeParams);
+    return makeRectangle(params);
   }
   return nullptr;
 }
 
 Shape* doScale(const std::string scaleDescription, Shape* shape)
 {
-  std::string scaleParams;
-  std::string param;
+  std::string scaleParams, param;
   size_t paramsCount = 0;
   param = getWord(scaleDescription, paramsCount + 2);
   while (param != "")
@@ -93,6 +93,7 @@ Shape* doScale(const std::string scaleDescription, Shape* shape)
     ++paramsCount;
     param = getWord(scaleDescription, paramsCount + 2);
   }
+
   point_t scalePoint;
   scalePoint.x_ = std::stod(getWord(scaleParams, 1));
   scalePoint.y_ = std::stod(getWord(scaleParams, 2));
@@ -101,6 +102,7 @@ Shape* doScale(const std::string scaleDescription, Shape* shape)
   {
     return nullptr;
   }
+
   point_t tempPoint = (shape->getFrameRect()).pos_;
   double dx = scalePoint.x_ - tempPoint.x_;
   double dy = scalePoint.y_ - tempPoint.y_;
@@ -140,6 +142,11 @@ int main()
       shapes[count++] = shape;
       rectangle_t shapeFrameRect = shape->getFrameRect();
       sumBefore += (shapeFrameRect.width_ * shapeFrameRect.height_);
+    }
+    if (getWord(scaleDescription, 4) == "")
+    {
+      std::cerr << "ERROR: Incorrect SCALE command description!\n";
+      return 1;
     }
     std::cout << sumBefore << " ";
     for (size_t i = 0; i < count; ++i)
