@@ -17,13 +17,11 @@ int main()
   catch(const std::runtime_error & e)
   {
     std::cerr << e.what() << '\n';
-    destroyShapes(shapes, count);
     return 1;
   }
   catch (const std::bad_alloc& e)
   {
     std::cerr << "Memory was not allocated\n";
-    maslov::destroyShapes(shapes, count);
     return 1;
   }
   double centerX = 0.0, centerY = 0.0, scaleFactor = 0.0;
@@ -31,7 +29,7 @@ int main()
   if (scaleFactor < 0)
   {
     std::cerr << "Incorrect scale factor\n";
-    destroyShapes(shapes, count);
+    maslov::destroyShapes(shapes, count);
     return 1;
   }
   maslov::point_t scaleCoordinate = {centerX, centerY};
@@ -44,5 +42,5 @@ int main()
   std::cout << getSumArea(shapes, count);
   maslov::printCoordinates(shapes, count);
   std::cout << "\n";
-  destroyShapes(shapes, count);
+  maslov::destroyShapes(shapes, count);
 }

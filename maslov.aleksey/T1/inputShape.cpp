@@ -1,4 +1,5 @@
 #include "inputShape.hpp"
+#include "shapeManipulator.hpp"
 #include <cstring>
 
 size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
@@ -25,12 +26,14 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
       }
       catch(const std::bad_alloc & e)
       {
+        maslov::destroyShapes(shapes, count);
         throw;
       }
     }
   }
   if (in.eof())
   {
+    maslov::destroyShapes(shapes, count);
     throw std::runtime_error("Error: EOF encountered before SCALE command");
   }
   if (incorrectedFlag)
@@ -39,6 +42,7 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
   }
   if (count == 0)
   {
+    maslov::destroyShapes(shapes, count);
     throw std::runtime_error("There are no shapes");
   }
   return count;
