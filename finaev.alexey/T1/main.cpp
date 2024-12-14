@@ -58,14 +58,14 @@ int main()
           std::cerr << "Uncorrect scale coefficient!";
           return 1;
         }
-        std::cout << std::fixed << std::setprecision(2) << finaev::getSumArea(shapes, size) << " ";
+        std::cout << std::fixed << std::setprecision(1) << finaev::getSumArea(shapes, size) << " ";
         finaev::printFrameRect(shapes, size);
         std::cout << "\n";
         break;
       }
     }
     finaev::scale(shapes, size, scaleCenter, k);
-    std::cout << std::fixed << std::setprecision(2) << finaev::getSumArea(shapes, size) << " ";
+    std::cout << std::fixed << std::setprecision(1) << finaev::getSumArea(shapes, size) << " ";
     finaev::printFrameRect(shapes, size);
     finaev::deleteShapes(shapes, size);
     return 0;
