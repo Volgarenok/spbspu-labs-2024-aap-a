@@ -4,6 +4,7 @@
 #include "base-types.hpp"
 
 class Shape {
+public:
   virtual float getArea() = 0;
   virtual rectangle_t getFrameRect() = 0;
   virtual void move(point_t p) = 0;
