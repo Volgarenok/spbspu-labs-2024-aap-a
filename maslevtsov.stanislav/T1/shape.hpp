@@ -1,7 +1,7 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
-#include <iostream>
+#include <ostream>
 #include <string>
 #include "base-types.hpp"
 
@@ -24,6 +24,7 @@ namespace maslevtsov
   void scaleShapes(Shape** shapes, point_t pnt, double k, std::size_t border);
   void outputAreaSum(std::ostream& out, const Shape* const* shapes, std::size_t border);
   void outputShapes(std::ostream& out, const Shape* const* shapes, std::size_t border);
+  void outputShapesData(std::ostream& out, const Shape* const* shapes, std::size_t border);
 }
 
 #endif

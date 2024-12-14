@@ -1,4 +1,3 @@
-#include <iomanip>
 #include <stdexcept>
 #include <cstring>
 #include <getline.hpp>
@@ -71,10 +70,7 @@ int main()
   }
   if (isImplementedShapes)
   {
-    std::cout << std::fixed << std::setprecision(1);
-    maslevtsov::outputAreaSum(std::cout, shapes, shapeIndex);
-    std::cout << ' ';
-    maslevtsov::outputShapes(std::cout, shapes, shapeIndex);
+    maslevtsov::outputShapesData(std::cout, shapes, shapeIndex);
     std::cout << '\n';
     try
     {
@@ -86,9 +82,7 @@ int main()
       maslevtsov::clearShapes(shapes, shapeIndex);
       return 1;
     }
-    maslevtsov::outputAreaSum(std::cout, shapes, shapeIndex);
-    std::cout << ' ';
-    maslevtsov::outputShapes(std::cout, shapes, shapeIndex);
+    maslevtsov::outputShapesData(std::cout, shapes, shapeIndex);
     std::cout << '\n';
   }
   else if (isScale)

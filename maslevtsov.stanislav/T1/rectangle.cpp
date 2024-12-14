@@ -11,12 +11,12 @@ maslevtsov::Rectangle::Rectangle(point_t bottomLeft, point_t topRight)
   topRight_ = topRight;
 }
 
-double maslevtsov::Rectangle::getArea() const
+double maslevtsov::Rectangle::getArea() const noexcept
 {
   return (topRight_.x - bottomLeft_.x) * (topRight_.y - bottomLeft_.y);
 }
 
-maslevtsov::rectangle_t maslevtsov::Rectangle::getFrameRect() const
+maslevtsov::rectangle_t maslevtsov::Rectangle::getFrameRect() const noexcept
 {
   rectangle_t frameRect;
   frameRect.width = topRight_.x - bottomLeft_.x;
@@ -26,7 +26,7 @@ maslevtsov::rectangle_t maslevtsov::Rectangle::getFrameRect() const
   return frameRect;
 }
 
-void maslevtsov::Rectangle::move(point_t pnt)
+void maslevtsov::Rectangle::move(point_t pnt) noexcept
 {
   double movedX = pnt.x - getFrameRect().pos.x;
   double movedY = pnt.y - getFrameRect().pos.y;
@@ -36,7 +36,7 @@ void maslevtsov::Rectangle::move(point_t pnt)
   topRight_.y += movedY;
 }
 
-void maslevtsov::Rectangle::move(double dx, double dy)
+void maslevtsov::Rectangle::move(double dx, double dy) noexcept
 {
   bottomLeft_.x += dx;
   bottomLeft_.y += dy;
@@ -44,7 +44,7 @@ void maslevtsov::Rectangle::move(double dx, double dy)
   topRight_.y += dy;
 }
 
-void maslevtsov::Rectangle::scale(double k)
+void maslevtsov::Rectangle::scale(double k) noexcept
 {
   point_t frameCenter = getFrameRect().pos;
   bottomLeft_ = {

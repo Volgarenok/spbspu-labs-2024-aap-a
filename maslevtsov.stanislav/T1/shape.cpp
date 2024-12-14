@@ -1,4 +1,6 @@
 #include "shape.hpp"
+#include <iomanip>
+#include <iostream>
 #include <string>
 #include <stdexcept>
 #include "rectangle.hpp"
@@ -66,4 +68,12 @@ void maslevtsov::outputShapes(std::ostream& out, const Shape* const* shapes, std
       out << ' ';
     }
   }
+}
+
+void maslevtsov::outputShapesData(std::ostream& out, const Shape* const* shapes, std::size_t border)
+{
+  std::cout << std::fixed << std::setprecision(1);
+  outputAreaSum(out, shapes, border);
+  std::cout << ' ';
+  outputShapes(out, shapes, border);
 }
