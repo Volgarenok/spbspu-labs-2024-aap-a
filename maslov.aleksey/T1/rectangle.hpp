@@ -15,7 +15,7 @@ namespace maslov
     void move(double dx, double dy) override;
     //void scale(double k) override;
    private:
-    point_t lowerLeftCorner_, upperRightCorner_;  
+    point_t lowerLeftCorner_, upperRightCorner_;
   };
 }
 

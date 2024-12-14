@@ -5,9 +5,14 @@
 
 int main()
 {
-  
   constexpr int maxShapes = 10000;
   maslov::Shape * shapes[maxShapes] = {};
-  maslov::ScaleData scaleData = maslov::inputShape(std::cin, shapes);
+  try
+  {
+    maslov::ScaleData scaleData = maslov::inputShape(std::cin, shapes);
+  }
+  catch(const std::exception& e)
+  {
+    std::cerr << e.what() << '\n';
+  }
 }
-

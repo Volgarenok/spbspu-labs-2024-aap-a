@@ -8,6 +8,7 @@ maslov::ScaleData maslov::inputShape(std::istream & in, maslov::Shape ** shapes)
   maslov::ScaleData scaleData = {{0.0, 0.0}, 0.0};
   bool flag = true;
   size_t count = 0;
+  bool incorrectedFlag = false;
   while (flag)
   {
     std::string name = maslov::inputLine(in, ' ');
@@ -26,16 +27,20 @@ maslov::ScaleData maslov::inputShape(std::istream & in, maslov::Shape ** shapes)
         shapes[count] = maslov::makeRectangle(in);
         count++;
       }
-      catch(...)
+      catch(const std::invalid_argument & e)
       {
-        std::cerr << "error\n";
+        incorrectedFlag = true;
       }
     }
     if (in.eof())
     {
-      flag = false;
+      throw std::runtime_error("Error: EOF encountered before SCALE command");
     }
     in.get();
+  }
+  if (incorrectedFlag)
+  {
+    std::cout << "ERROR";
   }
   return scaleData;
 }
@@ -45,7 +50,7 @@ maslov::Rectangle * maslov::makeRectangle(std::istream & in)
   double x1 = 0, x2 = 0, y1 = 0, y2 = 0;
   if (!(in >> x1 >> x2 >> y1 >> y2))
   {
-
+    throw std::invalid_argument("Incorrect parameters");
   }
   return new maslov::Rectangle({x1, y1}, {x2, y2});
 }
