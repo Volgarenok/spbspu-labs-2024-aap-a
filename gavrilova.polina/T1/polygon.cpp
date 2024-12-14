@@ -48,7 +48,7 @@ void gavrilova::Polygon::move(point_t p) {
   }
 }
 void gavrilova::Polygon::move(double difX, double difY) {
-  for (size_t i = 1; i < size_; ++i) {
+  for (size_t i = 0; i < size_; ++i) {
     verteces_[i].x += difX;
     verteces_[i].y += difY;
   }
