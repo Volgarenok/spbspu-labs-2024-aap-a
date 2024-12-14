@@ -1,15 +1,16 @@
+#include <iostream>
+#include <memory>
+#include <iomanip>
+#include <sstream>
+#include <cstdlib>
+#include <cstring>
+#include <cmath>
 #include "shape.hpp"
 #include "rectangle.hpp"
 #include "rectanglepoints.hpp"
 #include "dynamicinput.h"
 #include "ellipse.hpp"
 #include "diamond.hpp"
-#include <iostream>
-#include <iomanip>
-#include <sstream>
-#include <cstdlib>
-#include <cstring>
-#include <cmath>
 
 int main()
 {
