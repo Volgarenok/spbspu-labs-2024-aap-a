@@ -8,9 +8,9 @@ namespace cherkasov
     {
       throw std::logic_error("invalid rectangl coordinates");
     }
-    rect_pos = {(lowLeft.x + upRight.x) / 2, (lowLeft.y + upRight.y) / 2};
-    rect_.widht = upRight.x - lowLeft.x;
-    rect_.height = upRight.y - lowLeft.y;
+  rect_pos = {(lowLeft.x + upRight.x) / 2, (lowLeft.y + upRight.y) / 2};
+  rect_.widht = upRight.x - lowLeft.x;
+  rect_.height = upRight.y - lowLeft.y;
   }
 
   double Rectangle::getArea() const
@@ -27,8 +27,17 @@ namespace cherkasov
   }
   void Rectangle::move(double dx, double dy)
   {
-    rect_.width *= k;
-    rect_.height *= k;
+    rect_.pos.x += dx;
+    rect_.pos.y += dy;
+  }
+  void Rectangle::scale(double k)
+  {
+    if (k <= 0)
+    {
+      throw std::logic_error("")
+    }
+  rect_.width *= k;
+  recct_.height *= k;
   }
 }
 
