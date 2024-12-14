@@ -2,7 +2,11 @@
 #include <cstddef>
 int komarova::vowel(char sym)
 {
-  if (sym == 'a' || sym == 'e' || sym == 'o' || sym == 'i' || sym == 'u' || sym == 'A' || sym == 'E' || sym == 'O' || sym == 'I' || sym == 'U')
+  if (sym == 'a' || sym == 'e' ||
+      sym == 'o' || sym == 'i' ||
+      sym == 'u' || sym == 'A' ||
+      sym == 'E' || sym == 'O' ||
+      sym == 'I' || sym == 'U')
   {
     return 1;
   }
