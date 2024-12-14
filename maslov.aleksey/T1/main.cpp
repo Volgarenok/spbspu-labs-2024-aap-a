@@ -29,13 +29,15 @@ int main()
     destroyShape(shapes, count);
     return 1;
   }
-  maslov::point_t scaleCoor = {centerX, centerY};
-  std::cout << std::fixed << std::setprecision(1) << getSumArea(shapes, count);
-  printCoor(shapes, count);
+  maslov::point_t scaleCoordinate = {centerX, centerY};
+  
+  std::cout << std::fixed << std::setprecision(1);
+  std::cout << maslov::getSumArea(shapes, count);
+  maslov::printCoordinates(shapes, count);
   std::cout << "\n";
-  scaleShapes(shapes, count, scaleCoor, scaleFactor);
+  maslov::scaleShapes(shapes, count, scaleCoordinate, scaleFactor);
   std::cout << getSumArea(shapes, count);
-  printCoor(shapes, count);
+  maslov::printCoordinates(shapes, count);
   std::cout << "\n";
   destroyShape(shapes, count);
 }
