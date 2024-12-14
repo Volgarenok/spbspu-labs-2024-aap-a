@@ -81,7 +81,7 @@ int main()
         {
           for(size_t i = 0; i < shapeCount; ++i)
           {
-            delete shape[i];
+            delete shapes[i];
           }
           std::cerr << "Invalid scale\n";
           free(input);
