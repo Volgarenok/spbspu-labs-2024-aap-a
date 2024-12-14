@@ -1,5 +1,5 @@
 #include <iostream>
-#include "stringinput.h"
+#include <stringinput.hpp>
 #include "removevowels.h"
 
 int main()

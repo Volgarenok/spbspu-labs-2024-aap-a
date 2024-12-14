@@ -1,4 +1,4 @@
-#include "stringinput.h"
+#include <stringinput.hpp>
 
 char* tkach::inputStr(std::istream& in, size_t& capacity)
 {

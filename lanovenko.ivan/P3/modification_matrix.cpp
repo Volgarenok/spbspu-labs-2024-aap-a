@@ -1,6 +1,6 @@
 #include "modification_matrix.h"
 
-void lanovenko::editMatrix(int* matrix, size_t rows, size_t cols)
+void lanovenko::editToSpiral(int* matrix, size_t rows, size_t cols)
 {
   size_t count = 1;
   size_t i = 0, j = 0;
@@ -38,3 +38,4 @@ void lanovenko::editMatrix(int* matrix, size_t rows, size_t cols)
     ++count;
   }
 }
+
