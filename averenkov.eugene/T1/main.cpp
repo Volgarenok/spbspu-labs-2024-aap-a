@@ -89,8 +89,6 @@ int main()
     {
       hasErrors = true;
     }
-
-    free(input);
   }
 
   if (std::cin.eof())
@@ -119,6 +117,8 @@ int main()
     std::cout << averenkov::getLeftBot(shapes[i]->getFrameRect()).y << " ";
     std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).x << " ";
     std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).y << " \n";
+    delete shapes[i];
   }
+  free(input);
   return 0;
 }
