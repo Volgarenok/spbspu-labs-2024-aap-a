@@ -60,6 +60,7 @@ int main()
         }
         std::cout << std::fixed << std::setprecision(2) << finaev::getSumArea(shapes, size) << " ";
         finaev::printFrameRect(shapes, size);
+        std::cout << "\n";
         break;
       }
     }
