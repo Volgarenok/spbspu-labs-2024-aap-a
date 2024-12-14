@@ -22,13 +22,10 @@ namespace kushekbaev
   {
     for (size_t i = 0; i < shapeCounter; i++)
     {
-      point_t scaler = { scaleX, scaleY };
-      point_t firstpos = capacity[i] -> getFrameRect().pos;
-      capacity[i] -> move(scaler);
-      point_t secondpos = capacity[i] -> getFrameRect().pos;
-      point_t diff = { (firstpos.x - secondpos.x) * V, (firstpos.y - secondpos.y) * V };
+      point_t pos = capacity[i] -> getFrameRect().pos;
+      capacity[i] -> move(-pos.x, -pos.y);
       capacity[i] -> scale(V);
-      capacity[i] -> move(diff.x, diff.y);
+      capacity[i] -> move(pos.x, pos.y);
     }
   }
 
