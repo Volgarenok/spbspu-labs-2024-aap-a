@@ -60,12 +60,14 @@ int main()
     catch (const std::logic_error& e)
     {
       isIgnoredShapes = true;
+      delete[] argStr;
+      delete[] arguments;
       continue;
     }
     shapes[shapeIndex++] = shape;
     isImplementedShapes = true;
-    delete[] arguments;
     delete[] argStr;
+    delete[] arguments;
   }
 
   if (isIgnoredShapes)
