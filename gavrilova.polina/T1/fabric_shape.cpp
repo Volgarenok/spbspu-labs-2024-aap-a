@@ -85,7 +85,6 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
     center.y = std::atof(cYStr);
     char * koefStr = strtok(nullptr, " ");
     koef = std::atof(koefStr);
-    //std::cout << "KOEF =" << koef << "\n";
   }
   delete[] line;
   return nullptr;
@@ -96,8 +95,8 @@ gavrilova::Rectangle* gavrilova::make_rectangle(char * line, size_t & nSpaces, s
     ++nError;
     return nullptr;
   }
+  
   point_t * verteces = nullptr;
-
   try {
     verteces = new point_t[2];
     make_verteces(verteces, 2);

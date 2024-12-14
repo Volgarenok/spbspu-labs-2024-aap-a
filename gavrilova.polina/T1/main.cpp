@@ -8,15 +8,13 @@ namespace gavrilova {
     point_t pos1 = shape.getFrameRect().pos;
     double difX = center.x - pos1.x;
     double difY = center.y - pos1.y;
-    rectangle_t rect = shape.getFrameRect();
     shape.move(center);
-    rect = shape.getFrameRect();
     shape.scale(k);
-    rect = shape.getFrameRect();
     difX *= k;
     difY *= k;
     shape.move(-difX, -difY);
   }
+
   void outRectangles(std::ostream & out, gavrilova::Shape ** Shapes, size_t nShapes) {
     if (nShapes) {
       for (size_t i = 0; i < nShapes; ++i) {
@@ -59,7 +57,7 @@ int main()
     }
   }
   if (koef <= 0) {
-    std::cerr << "ERROR\n";
+    std::cerr << "\оэфицент не введен или введен неправильно\n";
     gavrilova::clearShapes(Shapes, nShapes);
     return 1;
   }
