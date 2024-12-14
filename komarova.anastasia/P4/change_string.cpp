@@ -17,14 +17,16 @@ int komarova::vowel(char sym)
 }
 char * komarova::vowels(const char * str, char * str_res)
 {
-  for (; *str != '\0'; str++)
+  char * res = str_res;
+  while (*str != '\0')
   {
     if (komarova::vowel(*str) || *str == ' ')
     {
       *str_res = *str;
       str_res++;
     }
+    str++;
   }
   *str_res = '\0';
-  return str_res;
+  return res;
 }
