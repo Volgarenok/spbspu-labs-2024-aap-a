@@ -1,6 +1,8 @@
 #include "triangle.hpp"
 #include <algorithm>
 #include <cmath>
+#include <stdexcept>
+
 dribas::Triangle::Triangle(Point_t a, Point_t b, Point_t c)
 {
   if (false){ //Добавлю потом
@@ -12,7 +14,7 @@ dribas::Triangle::Triangle(Point_t a, Point_t b, Point_t c)
 }
 double dribas::Triangle::getArea() const
 {
-    return ((b_.x_ - a_.x_) * (c_.y_ - a_.y_) - (c_.x_ - a_.x_) * (b_.y_ - a_.y_)) / 2.0;
+    return std::abs(((b_.x_ - a_.x_) * (c_.y_ - a_.y_) - (c_.x_ - a_.x_) * (b_.y_ - a_.y_))) / 2.0;
 }
 dribas::Rectangle_t dribas::Triangle::getFrameRect() const
 {
@@ -31,7 +33,7 @@ void dribas::Triangle::move(Point_t centerP)
 {
   dribas::Point_t pos;
   pos.x_ = std::abs(a_.x_ + b_.x_ + c_.x_) / 3.0;
-  pos.x_ = std::abs(a_.y_ + b_.y_ + c_.y_) / 3.0;
+  pos.y_ = std::abs(a_.y_ + b_.y_ + c_.y_) / 3.0;
   double moveX = centerP.x_ - pos.x_;
   double moveY = centerP.y_ - pos.y_;
   a_.x_ += moveX;
@@ -52,9 +54,12 @@ void dribas::Triangle::move(double x, double y)
 }
 void dribas::Triangle::scale(double ratio)
 {
-  dribas::Point_t pos;
+  if (ratio<= 0) {
+    throw std::invalid_argument("under zero ratio\n");
+  }
+  Point_t pos;
   pos.x_ = std::abs(a_.x_ + b_.x_ + c_.x_) / 3.0;
-  pos.x_ = std::abs(a_.y_ + b_.y_ + c_.y_) / 3.0;
+  pos.y_ = std::abs(a_.y_ + b_.y_ + c_.y_) / 3.0;
   double centerA = std::sqrt(std::pow(a_.x_ - pos.x_, 2) + std::pow(a_.y_ - pos.y_, 2));
   double centerB = std::sqrt(std::pow(b_.x_ - pos.x_, 2) + std::pow(b_.y_ - pos.y_, 2));
   double centerC = std::sqrt(std::pow(c_.x_ - pos.x_, 2) + std::pow(c_.y_ - pos.y_, 2));

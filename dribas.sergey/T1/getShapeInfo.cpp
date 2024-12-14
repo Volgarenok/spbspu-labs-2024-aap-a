@@ -2,6 +2,7 @@
 #include "enterStr.hpp"
 #include "rectangle.hpp"
 #include "triangle.hpp"
+#include "diamond.hpp"
 size_t dribas::getShapeInfo(std::istream& input, Shape** myShapes)
 {
   std::string Mystr;
@@ -38,6 +39,22 @@ size_t dribas::getShapeInfo(std::istream& input, Shape** myShapes)
         } catch (const std::invalid_argument& e) {
           std::cerr << e.what() << '\n';
         }
+      } else if (Mystr == "DIAMOND") {
+        try {
+          Point_t a, b, c; 
+          input >> a.x_;
+          input >> a.y_;
+          input >> b.x_;
+          input >> b.y_;
+          input >> c.x_;
+          input >> c.y_;
+          myShapes[shapesCount] =  new Diamond{a, b, c};
+          std::cout << myShapes[shapesCount]->getArea();
+          shapesCount++;
+        } catch (const std::invalid_argument& e) {
+          std::cerr << e.what() << '\n';
+        }
+
       }
     }
   } catch (const std::bad_alloc& e) {

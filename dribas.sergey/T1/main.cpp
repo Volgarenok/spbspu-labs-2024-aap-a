@@ -1,6 +1,6 @@
 #include <cstddef> 
 #include <iostream>
-#include "enterStr.hpp"
+#include "getShapeInfo.hpp"
 #include "shape.hpp"
 
 void clearStr(char** stack, size_t stackSize){
@@ -10,24 +10,11 @@ void clearStr(char** stack, size_t stackSize){
      }
 int main()
 {
-  //string = enterStr();
-  constexpr size_t stackSize = 1000;
-  dribas::Shape * stack[stackSize] = {} ;
-  for (size_t i = 0; (std::cin) && i < stackSize; i++) {
-    char * str = dribas::enterStr(std::cin);
-    
-    
-  }
-  for (size_t i = 0; *(stack + i) != nullptr; i++) {
-    std::cout << *(stack + i) << '\n';
-  }
-  if (std::cin.eof()) {
-    std::cout << "EOF\n";
-  }
-  else if (std::cin.fail()) {
-    std::cout << "Fail\n";
-    return 1;
-  }
+  constexpr size_t shapesSize = 10000;
+  dribas::Shape * myShapes[shapesSize] = {};
+  std::cout << dribas::getShapeInfo(std::cin, myShapes);
+  return 0;
+
 
 }
 
