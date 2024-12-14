@@ -1,32 +1,40 @@
 #include "rectangle.hpp"
 
-  Rectangle::Rectangle(): rect_(rectangle_t{}) {}
-  Rectangle::Rectangle(const point_t& a, const point_t& c) {
-    rect_.width = c.x - a.x;
-    rect_.height = c.y - a.y;
-    rect_.pos.x = (a.x + c.x) / 2.0;
-    rect_.pos.y = (a.y + c.y) / 2.0;
-  }
+Rectangle::Rectangle()
+  : rect_{}
+{}
 
-  float Rectangle::getArea() {
-    return rect_.width * rect_.height;
-  }
+Rectangle::Rectangle(const point_t& a, const point_t& c)
+{
+  rect_.width = c.x - a.x;
+  rect_.height = c.y - a.y;
+  rect_.pos.x = (a.x + c.x) / 2.0f;
+  rect_.pos.y = (a.y + c.y) / 2.0f;
+}
 
-  rectangle_t Rectangle::getFrameRect() {
-    return rect_;
-  }
+float Rectangle::getArea()
+{
+  return rect_.width * rect_.height;
+}
 
-  void Rectangle::move(point_t p) {
-    rect_.pos = p;
-  }
+rectangle_t Rectangle::getFrameRect()
+{
+  return rect_;
+}
 
-  void Rectangle::move(float dx, float dy) {
-    rect_.pos.x += dx;
-    rect_.pos.y += dy;
-  }
+void Rectangle::move(point_t p)
+{
+  rect_.pos = p;
+}
 
-  void Rectangle::scale(float k) {
-    rect_.width *= k;
-    rect_.height *= k;
-  }
-  
+void Rectangle::move(float dx, float dy)
+{
+  rect_.pos.x += dx;
+  rect_.pos.y += dy;
+}
+
+void Rectangle::scale(float k)
+{
+  rect_.width *= k;
+  rect_.height *= k;
+}
