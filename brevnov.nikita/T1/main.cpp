@@ -17,6 +17,7 @@ int main()
   brevnov::point_t scale_p;
   double ratio = 0.0;
   bool isIncorrectParameters = false;
+  bool scaleCommand = false;
   try
   {
     while (std::cin >> input_shape)
@@ -73,8 +74,14 @@ int main()
           brevnov::destroy_shape(shapes, count_of_shape);
           return 1;
         }
+        scaleCommand = true;
         break;
       }
+    }
+    if (!scaleCommand)
+    {
+      std::cerr << "No SCALE command!\n";
+      return 1;
     }
     if (isIncorrectParameters)
     {
