@@ -72,7 +72,10 @@ void maslevtsov::Regular::move(double dx, double dy) noexcept
 }
 
 void maslevtsov::Regular::scale(double k) noexcept
-{}
+{
+  pnt2_ = {pnt2_.x * k, pnt2_.y * k};
+  pnt3_ = {pnt3_.x * k, pnt3_.y * k};
+}
 
 maslevtsov::Regular* maslevtsov::makeRegular(const double* arguments)
 {
