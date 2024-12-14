@@ -58,13 +58,13 @@ int main()
           std::cerr << "Uncorrect scale coefficient!";
           return 1;
         }
-        std::cout << std::setprecision(2) << finaev::getSumArea(shapes, size) << " ";
+        std::cout << std::fixed << std::setprecision(2) << finaev::getSumArea(shapes, size) << " ";
         finaev::printFrameRect(shapes, size);
         break;
       }
     }
     finaev::scale(shapes, size, scaleCenter, k);
-    std::cout << std::setprecision(2) << finaev::getSumArea(shapes, size) << " ";
+    std::cout << std::fixed << std::setprecision(2) << finaev::getSumArea(shapes, size) << " ";
     finaev::printFrameRect(shapes, size);
     finaev::deleteShapes(shapes, size);
     return 0;
