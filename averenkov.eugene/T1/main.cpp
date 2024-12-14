@@ -98,6 +98,10 @@ int main()
   {
     std::cerr << "No scale\n";
     free(input);
+    for(size_t i = 0; i < shapeCount; ++i)
+    {
+      delete shapes[i];
+    }
     return 1;
   }
 
