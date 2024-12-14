@@ -12,7 +12,7 @@ maslov::rectangle_t maslov::Rectangle::getFrameRect() const
   double width = upperRightCorner_.x - lowerLeftCorner_.x;
   double centerY = lowerLeftCorner_.y + height / 2.0;
   double centerX = lowerLeftCorner_.x + width / 2.0;
-  return {height, width, {centerX, centerY}};
+  return {width, height, {centerX, centerY}};
 }
 void maslov::Rectangle::move(point_t s)
 {
