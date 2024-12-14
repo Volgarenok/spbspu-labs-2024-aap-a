@@ -22,7 +22,7 @@ int main()
   }
   double centerX = 0.0, centerY = 0.0, scaleFactor = 0.0;
   std::cin >> centerX >> centerY >> scaleFactor;
-  if (scaleFactor <= 0)
+  if (scaleFactor < 0)
   {
     std::cerr << "Incorrect scale factor\n";
     destroyShapes(shapes, count);
