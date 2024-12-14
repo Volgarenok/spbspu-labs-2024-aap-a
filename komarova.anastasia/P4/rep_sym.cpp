@@ -7,7 +7,7 @@ char * komarova::rep_sym(const char * str,char * str_rep)
   {
     const char * k = str;
     size_t rep = 0;
-    char s = str_rep;
+    char * s = str_rep;
     while (*s != '\0' && rep != 1)
     {
       if (*i == *s)
@@ -23,7 +23,7 @@ char * komarova::rep_sym(const char * str,char * str_rep)
         if (*i == *k && i != k)
         {
           *new_str = *i;
-          *(nea_str + 1) = '\0';
+          *(new_str + 1) = '\0';
           rep = 1;
           new_str++;
         }
