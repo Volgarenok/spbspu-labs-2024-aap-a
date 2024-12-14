@@ -23,7 +23,7 @@ Shape* aleksandrov::doScale(const std::string scaleDescription, Shape* shape)
   double scaleX = std::stod(getWord(scaleParams, 1));
   double scaleY = std::stod(getWord(scaleParams, 2));
   double k = std::stod(getWord(scaleParams, 3));
-  if (paramsCount != 3 || k <= 0.0)
+  if (paramsCount != 3)
   {
     return nullptr;
   }

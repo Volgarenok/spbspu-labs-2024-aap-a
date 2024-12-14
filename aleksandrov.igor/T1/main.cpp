@@ -18,10 +18,10 @@ int main()
   Shape* shapes[maxShapes];
   std::string inputStr;
   char* str = nullptr;
+  size_t count = 0;
   try
   {
     double sumBefore = 0;
-    size_t count = 0;
     std::string scaleDescription;
     while ((str = aleksandrov::getString(std::cin)) && !std::cin.eof())
     {
@@ -40,7 +40,8 @@ int main()
       shapes[count++] = shape;
       sumBefore += shape->getArea();
     }
-    if (aleksandrov::getWord(scaleDescription, 4) == "")
+    std::string coeff = aleksandrov::getWord(scaleDescription, 4);
+    if (coeff == "" || std::stod(coeff) <= 0)
     {
       std::cerr << "ERROR: Incorrect SCALE command description!\n";
       return 1;
@@ -79,24 +80,19 @@ int main()
       }
     }
     std::cout << "\n";
-    for (size_t i = 0; i < count; ++i)
-    {
-      delete shapes[i];
-    }
   }
   catch (const std::bad_alloc& e)
   {
     std::cerr << "ERROR: Out of memory!\n";
     return 1;
   }
-  catch (const std::logic_error& e)
-  {
-    std::cerr << e.what();
-    return 1;
-  }
   if (wasDescriptionError)
   {
     std::cerr << "WARNING: Some supporting shapes had a description problems!\n";
+  }
+  for (size_t i = 0; i < count; ++i)
+  {
+    delete shapes[i];
   }
 }
 
