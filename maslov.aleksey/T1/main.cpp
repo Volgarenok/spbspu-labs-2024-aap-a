@@ -20,6 +20,12 @@ int main()
     destroyShapes(shapes, count);
     return 1;
   }
+  catch (const std::bad_alloc& e)
+  {
+    std::cerr << "Memory was not allocated\n";
+    maslov::destroyShapes(shapes, count);
+    return 1;
+  }
   double centerX = 0.0, centerY = 0.0, scaleFactor = 0.0;
   std::cin >> centerX >> centerY >> scaleFactor;
   if (scaleFactor < 0)

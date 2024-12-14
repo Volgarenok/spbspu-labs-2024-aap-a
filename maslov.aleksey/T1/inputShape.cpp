@@ -3,7 +3,6 @@
 
 size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
 {
-
   size_t count = 0;
   bool incorrectedFlag = false;
   std::string name;
@@ -49,5 +48,6 @@ maslov::Rectangle * maslov::makeRectangle(std::istream & in)
   {
     throw std::invalid_argument("Incorrect parameters");
   }
-  return new maslov::Rectangle({x1, y1}, {x2, y2});
+  Rectangle * rectangle = new Rectangle({x1, y1}, {x2, y2});
+  return rectangle;
 }
