@@ -48,7 +48,7 @@ void hismatova::triangle::scale(double index)
 {
   if (index <= 0)
   {
-    std::cerr << "index must be positive";
+    std::cerr << "index must be positive\n";
     return;
   }
   point_t center = get_center();
