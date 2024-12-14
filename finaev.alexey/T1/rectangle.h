@@ -18,7 +18,7 @@ namespace finaev
     rectangle_t getFrameRect() override;
     void move(point_t a) override;
     void move(double sx, double sy) override;
-    void scale(size_t k) override;
+    void scale(double k) override;
   };
 }
 #endif

@@ -2,6 +2,7 @@
 #define SHAPE_H
 
 #include "base-types.h"
+#include <cstddef>
 
 namespace finaev
 {
@@ -12,8 +13,9 @@ namespace finaev
     virtual rectangle_t getFrameRect() = 0;
     virtual void move(point_t a) = 0;
     virtual void move(double sx, double sy) = 0;
-    virtual void scale(size_t k) = 0;
+    virtual void scale(double k) = 0;
     virtual ~Shape() = default;
   };
+  void deleteShapes(finaev::Shape** shapes, size_t size);
 }
-#endif 
+#endif
