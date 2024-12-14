@@ -20,7 +20,7 @@ int main()
     description = new char * [number_of_doubles];
     for (size_t i = 0; i < number_of_doubles; i++)
     {
-      description[number_of_doubles] = new char[capacity];
+      description[i] = new char[capacity];
       created++;
     }
   }
@@ -42,24 +42,29 @@ int main()
     type_of_shape[i] = stream_massive[i];
     i++;
   }
+  i++;
+  type_of_shape[i] = '\0';
   size_t j = 0;
   size_t k = 0;
   while (stream_massive[i] != '\0')
   {
-    if (stream_massive[i] == ' ')
-    {
-      description[j][k] = '\0';
-      j++;
-    }
     description[j][k] = stream_massive[i];
     i++;
     k++;
+    if (stream_massive[i] == ' ')
+    {
+      description[j][k] = '\0';
+      i++;
+      j++;
+      k = 0;
+    }
   }
   char ** p_end = nullptr;
   petrov::point_t p1 = { std::strtod(description[0], p_end), std::strtod(description[1], p_end) };
   petrov::point_t p2 = { std::strtod(description[2], p_end), std::strtod(description[3], p_end) };
   petrov::Rectangle rectangle(p1, p2);
+  rectangle.getFrameRect();
   petrov::Rectangle * ptr_rectangle = &rectangle;
   shapes_massive[0] = ptr_rectangle;
-  std::cout << shapes_massive[0]->getArea();
+  std::cout << shapes_massive[0]->getArea() << "\n";
 }
