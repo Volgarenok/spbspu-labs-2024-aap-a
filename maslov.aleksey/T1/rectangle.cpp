@@ -31,7 +31,6 @@ void maslov::Rectangle::move(double dx, double dy)
 }
 void maslov::Rectangle::scale(double k)
 {
-  point_t center = getFrameRect().pos;
   double height = getFrameRect().height;
   double width = getFrameRect().width;
   double newHalfHeight = height * k / 2.0;
