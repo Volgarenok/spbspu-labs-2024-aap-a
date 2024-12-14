@@ -4,6 +4,6 @@
 #include "cstddef"
 namespace petrov
 {
-  void scaleIsotropically(point_t scale_point, size_t k, Shape * shape);
+  void scaleIsotropically(point_t scale_point, double k, Shape * shape);
 }
 #endif

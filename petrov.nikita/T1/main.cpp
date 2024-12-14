@@ -70,8 +70,8 @@ int main()
   std::cout << std::fixed << std::setprecision(1);
   std::cout << rectangle.area_ << " " << p1.x_ << " " <<  p1.y_ << " " << p2.x_ << " " << p2.y_ << "\n";
   shapes_massive[0] = &rectangle;
-  petrov::point_t scale_point = { -1.0 , 2.0 };
-  double b = 3.0;
+  petrov::point_t scale_point = { -6.0 , 2.0 };
+  double b = 0.3;
   petrov::scaleIsotropically(scale_point, b, shapes_massive[0]);
   std::cout << std::fixed << std::setprecision(1);
   std::cout << rectangle.area_ << " " << rectangle.p1_.x_ << " " <<  rectangle.p1_.y_ << " " << rectangle.p3_.x_ << " " << rectangle.p3_.y_ << "\n";
