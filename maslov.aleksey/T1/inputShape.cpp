@@ -23,6 +23,10 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
       {
         incorrectedFlag = true;
       }
+      catch(const std::bad_alloc & e)
+      {
+        throw;
+      }
     }
   }
   if (in.eof())
@@ -48,6 +52,14 @@ maslov::Rectangle * maslov::makeRectangle(std::istream & in)
   {
     throw std::invalid_argument("Incorrect parameters");
   }
-  Rectangle * rectangle = new Rectangle({x1, y1}, {x2, y2});
+  Rectangle * rectangle = nullptr;
+  try
+  {
+    rectangle = new Rectangle({x1, y1}, {x2, y2});
+  }
+  catch(const std::bad_alloc & e)
+  {
+    throw ("Memory bad");
+  }
   return rectangle;
 }
