@@ -2,9 +2,11 @@
 #include "change.h"
 #include "dynamic.h"
 #include <cstddef>
-int main
+#include <cstdlib>
+int main()
 {
-  size_t size_str = 20, size_str_now = 0;
+  size_t size_str = 20;
+  size_t size_str_now = 0;
   char* str = komarova::read(std::cin, size_str, size_str_now, '\n');
   if (str == nullptr)
   {
@@ -25,9 +27,9 @@ int main
     return 1;
   }
   str_res[size_str_now] = '\0';
-  str_rep = komarova::rep_sym(str, str_res);
+  char * str_rep = komarova::rep_sym(str, str_res);
   std::cout << str_rep << "\n";
-  std::cout << komarova::vowels(const char * str, char * str_res) << "\n";
+  std::cout << komarova::vowels(str, str_res) << "\n";
   free(str);
   free(str_res);
 }
