@@ -1,7 +1,8 @@
 #ifndef SCALE_HPP
 #define SCALE_HPP
+#include "shape.hpp"
 namespace nikonov
 {
-  void ispScale(double x, double y, double k);
+  void ispScale(Shape* shp, float x, float y, float k);
 }
 #endif

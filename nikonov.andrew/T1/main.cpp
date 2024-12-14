@@ -2,40 +2,24 @@
 #include <string>
 #include "shape.hpp"
 #include "fabric.hpp"
+#include "scale.hpp"
+#include "fillShapeCollection.hpp"
 int main()
 {
-  std::string name = " ";
   nikonov::Shape* shapeCollection[10000] = { nullptr };
-  size_t n = 0, cnt = 0, noncorrect = 0;
-  while (std::cin >> name && name != "SCALE")
+  std::string name = "";
+  size_t cnt = 0, noncorrect = 0;
+  nikonov::fillShapeCollection(shapeCollection, cnt, noncorrect);
+  float x = 0, y = 0;
+  float k = 0;
+  std::cin >> x >> y >> k;
+  if (std::cin)
   {
-    if (name == "RECTANGLE")
+    nikonov::Shape* next = shapeCollection[0];
+    while (next)
     {
-      n = 4;
+      nikonov::ispScale(next, x, y, k);
     }
-    else if (name == "TRIANGLE" || name == "DIAMOND")
-    {
-      n = 6;
-    }
-    float* nums = new float[n];
-    for (size_t i = 0; i < n; ++i)
-    {
-      std::cin >> nums[i];
-    }
-    if (!std::cin)
-    {
-      delete[] nums;
-      std::cin.clear();
-      ++noncorrect;
-      continue;
-    }
-    nikonov::Shape* newElem = nikonov::make_shape(name, nums);
-    if (newElem != nullptr)
-    {
-      shapeCollection[cnt] = newElem;
-      ++cnt;
-    }
-    delete[] nums;
   }
   for (size_t i = 0; i < cnt; ++i)
   {
