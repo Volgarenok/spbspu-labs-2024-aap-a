@@ -36,10 +36,10 @@ void brevnov::print_frame_coordinates(Shape** shapes, size_t count, std::ostream
   for (size_t i = 0; i < count; ++i)
   {
     rectangle_t frame = shapes[i]->getFrameRect();
-    double leftx = frame.pos.x - frame.width / 2;
-    double lefty = frame.pos.y - frame.height / 2;
-    double rightx = frame.pos.x + frame.width / 2;
-    double righty = frame.pos.y + frame.height / 2;
+    double leftx = frame.pos.x - frame.width / 2.0;
+    double lefty = frame.pos.y - frame.height / 2.0;
+    double rightx = frame.pos.x + frame.width / 2.0;
+    double righty = frame.pos.y + frame.height / 2.0;
     out << " " << leftx << " " << lefty << " " <<  rightx << " " << righty;
   }
   out << "\n";
