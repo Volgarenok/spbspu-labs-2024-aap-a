@@ -1,35 +1,35 @@
 #include "change.h"
 #include <cstddef>
-char * komarova::rep_sym(const char * str)
+char * komarova::rep_sym(const char * str,char * str_rep)
 {
-  while (*str != '\0')
+  char * new_str = str_rep;
+  for (const char * i = str; *i != '\0'; i++)
   {
     const char * k = str;
     size_t rep = 0;
-    const char * str_rep = nullptr;
-    while (*str_rep != '\0' && rep != 1)
+    char s = str_rep;
+    while (*s != '\0' && rep != 1)
     {
-      if (*str == *str_rep)
+      if (*i == *s)
       {
         rep = 1;
       }
-      str_rep++;
+      s++;
     }
     if (rep == 0)
     {
-      while (*k != '\0')
+      while (*k != '\0' && rep != 1)
       {
-        if (*str == *k && str != k)
+        if (*i == *k && i != k)
         {
-          *new_str = *str;
+          *new_str = *i;
+          *(nea_str + 1) = '\0';
+          rep = 1;
           new_str++;
-          break;
         }
         k++;
       }
     }
-    str++;
   }
-  *new_str = '\0';
   return str_rep;
 }
