@@ -119,7 +119,7 @@ int main()
     std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).x << " ";
     std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).y << "\n";
     shapes[i]->scale(factor);
-    shapeScale(shapes[i], scale_center, factor);
+    shapes[i]->move(scale_center);
     std::cout << shapes[i]->getArea() << " ";
     std::cout << averenkov::getLeftBot(shapes[i]->getFrameRect()).x << " ";
     std::cout << averenkov::getLeftBot(shapes[i]->getFrameRect()).y << " ";
