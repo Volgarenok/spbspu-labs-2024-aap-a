@@ -13,6 +13,7 @@ namespace shramko
     virtual void move(point_t s) = 0;
     virtual void move(double x, double y) = 0;
     virtual void scale(double k) = 0;
+    virtual ~Shape() = default;
   };
 }
 

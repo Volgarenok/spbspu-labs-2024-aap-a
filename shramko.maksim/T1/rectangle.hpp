@@ -6,14 +6,16 @@
 
 namespace shramko
 {
-  class Rectangle: Shape
+  class Rectangle: public Shape
   {
   public:
+    Rectangle(double leftBottomX, double leftBottomY, double rightTopX, double rightTopY);
     double getArea() const override;
     rectangle_t getRectangleFrame() const override;
     void move(point_t s) override;
     void move(double x, double y) override;
     void scale(double k) override;
+  private:
     point_t leftBottom_;
     point_t rightTop_;
   };
