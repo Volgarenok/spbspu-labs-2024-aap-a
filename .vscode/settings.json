@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "cstddef": "cpp"
+        "cstddef": "cpp",
+        "string_view": "cpp"
     }
 }
