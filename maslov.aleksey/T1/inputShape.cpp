@@ -10,7 +10,7 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
   while (flag)
   {
     in >> name;
-    if (name.empty())
+    if (name.empty() && !in.eof())
     {
       continue;
     }
