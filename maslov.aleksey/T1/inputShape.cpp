@@ -7,13 +7,15 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
   bool flag = true;
   size_t count = 0;
   bool incorrectedFlag = false;
+  char * str = nullptr;
   while (flag)
   {
-    std::string name = maslov::inputLine(in, ' ');
-    if (name.empty() && !in.eof())
+    str = maslov::inputLine(in, ' ');
+    if (str == '\0' && !in.eof())
     {
       continue;
     }
+    std::string name(str);
     if (name == "SCALE")
     {
       flag = false;
@@ -32,9 +34,11 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
     }
     if (in.eof())
     {
+      delete[] str;
       throw std::runtime_error("Error: EOF encountered before SCALE command");
     }
     in.get();
+    delete[] str;
   }
   if (incorrectedFlag)
   {
