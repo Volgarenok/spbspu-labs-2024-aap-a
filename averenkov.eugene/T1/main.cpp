@@ -124,7 +124,7 @@ int main()
 
   if (hasErrors)
   {
-    std::cout << "Errors descriptions\n";
+    std::cerr << "Errors descriptions\n";
   }
 
   return 0;
