@@ -4,28 +4,17 @@
 
 namespace kushekbaev
 {
-  Rectangle* createRectangle(std::istream& input)
-  {
-    point_t lowerLeft;
-    point_t upperRight;
-    input >> lowerLeft.x >> lowerLeft.y >> upperRight.x >> upperRight.y;
-    if (!(input >> lowerLeft.x >> lowerLeft.y >> upperRight.x >> upperRight.y))
-    {
-      input.clear();
-      input.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    }
-    Rectangle* 𓃟 = new Rectangle(lowerLeft, upperRight);
-    return 𓃟;
-  }
-
-  void scaleEverything(size_t shapeCounter, Shape** capacity, double scaleCoeff)
+  void scaleEverything(size_t shapeCounter, Shape** capacity, double scaleCoeff, point_t scalePoint)
   {
     for (size_t i = 0; i < shapeCounter; i++)
     {
-      point_t pos = capacity[i] -> getFrameRect().pos;
-      capacity[i] -> move(-pos.x, -pos.y);
-      capacity[i] -> scale(scaleCoeff);
-      capacity[i] -> move(pos.x, pos.y);
+      point_t firstpos = capacity[i]->getFrameRect().pos;
+      capacity[i]->move(scalePoint);
+      point_t secondpos = capacity[i]->getFrameRect().pos;
+      point_t vector = { secondpos.x - firstpos.x, secondpos.y - firstpos.y };
+      capacity[i]->scale(scaleCoeff);
+      point_t diff = { vector.x * scaleCoeff, vector.y * scaleCoeff };
+      capacity[i]->move(-diff.x, -diff.y);
     }
   }
 
@@ -39,8 +28,8 @@ namespace kushekbaev
       lowerLeft.x = 𓃟.pos.x - 𓃟.width / 2;
       lowerLeft.y = 𓃟.pos.y - 𓃟.length / 2;
       upperRight.x = 𓃟.pos.x + 𓃟.width / 2;
-      upperRight.y = 𓃟.pos.y + 𓃟.width / 2;
-      std::cout << " " << lowerLeft.x << " " << lowerLeft.y << " " << upperRight.x << " " << upperRight.y << "\n";
+      upperRight.y = 𓃟.pos.y + 𓃟.length / 2;
+      std::cout << " " << lowerLeft.x << " " << lowerLeft.y << " " << upperRight.x << " " << upperRight.y;
     }
   }
 

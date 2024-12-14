@@ -14,28 +14,18 @@ namespace kushekbaev
 
   rectangle_t Rectangle::getFrameRect() const
   {
-    double width = upperRight_.x - lowerLeft_.x;
-    double length = upperRight_.y - lowerLeft_.y;
-    rectangle_t frame;
-    frame.pos.x = lowerLeft_.x;
-    frame.pos.y = upperRight_.y;
-    frame.width = width;
-    frame.length = length;
-    return frame;
+    return { upperRight_.x - lowerLeft_.x, upperRight_.y - lowerLeft_.y, { lowerLeft_.x + (upperRight_.x - lowerLeft_.x) / 2, lowerLeft_.y + (upperRight_.y - lowerLeft_.y) / 2 } };
   }
 
   void Rectangle::move(point_t Z)
   {
-    point_t middle;
-    middle.x = (upperRight_.x - lowerLeft_.x) / 2;
-    middle.y =  (upperRight_.y - lowerLeft_.y) / 2;
-    point_t move;
-    move.x = Z.x - middle.x;
-    move.y = Z.x - middle.y;
-    lowerLeft_.x += move.x;
-    upperRight_.x += move.y;
-    lowerLeft_.y += move.x;
-    upperRight_.y += move.y;
+    point_t middle = this->getFrameRect().pos;
+    double moveX = Z.x - middle.x;
+    double moveY = Z.y - middle.y;
+    lowerLeft_.x += moveX;
+    lowerLeft_.y += moveY;
+    upperRight_.x += moveX;
+    upperRight_.y += moveY;
   }
 
   void Rectangle::move(double dy, double dx)

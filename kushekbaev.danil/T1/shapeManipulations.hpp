@@ -1,13 +1,12 @@
 #ifndef SHAPEMANIPULATIONS_HPP
 #define SHAPEMANIPULATIONS_HPP
 
-#include <istream>
 #include "rectangle.hpp"
+#include <cstddef>
 
 namespace kushekbaev
 {
-  Rectangle* createRectangle(std::istream& input);
-  void scaleEverything(size_t shapeCounter, Shape** capacity, double scaleCoeff);
+  void scaleEverything(size_t shapeCounter, Shape** capacity, double scaleCoeff, point_t scalePoint);
   double getTotalArea(Shape** capacity, size_t shapeCounter);
   void coordOutput(Shape** capacity, size_t shapeCounter);
   void clearMemory(Shape** capacity, size_t shapeCounter);

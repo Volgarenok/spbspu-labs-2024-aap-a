@@ -10,6 +10,7 @@ int main()
   size_t shapeCounter = 0;
   std::string shapeName;
   double scaleCoeff = 0, scaleX = 0, scaleY = 0;
+  kushekbaev::point_t scalePoint;
 
   while (std::cin >> shapeName)
   {
@@ -60,6 +61,8 @@ int main()
         return 1;
       }
 
+      scalePoint = { scaleX, scaleY };
+
       break;
     }
     shapeName = "";
@@ -79,8 +82,9 @@ int main()
 
   std::cout << std::fixed << std::setprecision(1) << getTotalArea(capacity, shapeCounter);
   coordOutput(capacity, shapeCounter);
+  std::cout << "\n";
 
-  scaleEverything(shapeCounter, capacity, scaleCoeff);
+  scaleEverything(shapeCounter, capacity, scaleCoeff, scalePoint);
 
   std::cout << getTotalArea(capacity, shapeCounter);
   coordOutput(capacity, shapeCounter);
