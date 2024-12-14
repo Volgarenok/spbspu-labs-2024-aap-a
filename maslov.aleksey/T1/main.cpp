@@ -13,19 +13,19 @@ int main()
   size_t count = 0;
   try
   {
-    count = maslov::inputShape(std::cin, shapes);
+    count = maslov::inputShapes(std::cin, shapes);
   }
   catch(const std::exception& e)
   {
     std::cerr << e.what() << '\n';
-    destroyShape(shapes, count);
+    destroyShapes(shapes, count);
     return 1;
   }
   double centerX = 0.0, centerY = 0.0, scaleFactor = 0.0;
   if (!(std::cin >> centerX >> centerY >> scaleFactor))
   {
     throw std::invalid_argument("Incorrect parameters");
-    destroyShape(shapes, count);
+    destroyShapes(shapes, count);
     return 1;
   }
   maslov::point_t scaleCoordinate = {centerX, centerY};
@@ -38,5 +38,5 @@ int main()
   std::cout << getSumArea(shapes, count);
   maslov::printCoordinates(shapes, count);
   std::cout << "\n";
-  destroyShape(shapes, count);
+  destroyShapes(shapes, count);
 }

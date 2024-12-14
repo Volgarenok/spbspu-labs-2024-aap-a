@@ -2,7 +2,7 @@
 #include <string>
 #include <stringInput.hpp>
 
-size_t maslov::inputShape(std::istream & in, maslov::Shape ** shapes)
+size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
 {
   bool flag = true;
   size_t count = 0;
