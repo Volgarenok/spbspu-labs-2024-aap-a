@@ -48,7 +48,7 @@ int main()
         if (k <= 0)
         {
           std::cerr << "Uncorrect scale coefficient!";
-	  return 1;
+          return 1;
         }
         std::cout << std::setprecision(2) << finaev::getSumArea(shapes, size) << " ";
         finaev::printFrameRect(shapes, size);
