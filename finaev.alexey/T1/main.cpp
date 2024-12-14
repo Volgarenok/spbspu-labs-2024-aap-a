@@ -32,27 +32,27 @@ int main()
       {
         finaev::Rectangle* a = finaev::makeRectangle(std::cin);
         shapes[size] = a;
-	size++;
+        size++;
       }
       else if (std::cin.eof())
       {
-	std::cerr << "the program is completed by eof, but scale not described\n";
-	deleteShapes(shapes, size);
-	return 1;
+        std::cerr << "the program is completed by eof, but scale not described\n";
+        deleteShapes(shapes, size);
+        return 1;
       }
       else if (str == "SCALE")
       {
-	std::cin >> scaleCenter.x;
-	std::cin >> scaleCenter.y;
-	std::cin >> k;
-	if (k <= 0)
-	{
-	  std::cerr << "Uncorrect scale coefficient!";
+        std::cin >> scaleCenter.x;
+        std::cin >> scaleCenter.y;
+        std::cin >> k;
+        if (k <= 0)
+        {
+          std::cerr << "Uncorrect scale coefficient!";
 	  return 1;
-	}
-	std::cout << std::setprecision(2) << finaev::getSumArea(shapes, size) << " ";
-	finaev::printFrameRect(shapes, size);
-	break;
+        }
+        std::cout << std::setprecision(2) << finaev::getSumArea(shapes, size) << " ";
+        finaev::printFrameRect(shapes, size);
+        break;
       }
     }
     finaev::scale(shapes, size, scaleCenter, k);
