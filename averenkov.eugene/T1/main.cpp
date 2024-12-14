@@ -83,6 +83,7 @@ int main()
           free(input);
           return 1;
         }
+        free(input);
         break;
       }
     }
@@ -90,6 +91,7 @@ int main()
     {
       hasErrors = true;
     }
+    free(input);
   }
 
   if (std::cin.eof())
@@ -97,11 +99,6 @@ int main()
     std::cerr << "No scale\n";
     free(input);
     return 1;
-  }
-
-  if (hasErrors)
-  {
-    std::cerr << "Errors descriptions\n";
   }
 
   for (size_t i = 0; i < shapeCount; ++i)
@@ -120,6 +117,11 @@ int main()
     std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).y << " \n";
     delete shapes[i];
   }
-  free(input);
+
+  if (hasErrors)
+  {
+    std::cerr << "Errors descriptions\n";
+  }
+
   return 0;
 }
