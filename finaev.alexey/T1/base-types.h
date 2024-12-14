@@ -15,4 +15,5 @@ namespace finaev
     double height;
   };
 }
+
 #endif

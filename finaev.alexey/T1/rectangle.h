@@ -21,4 +21,5 @@ namespace finaev
     void scale(double k) override;
   };
 }
+
 #endif
