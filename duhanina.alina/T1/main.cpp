@@ -7,6 +7,7 @@ int main()
   duhanina::Shape* shapes[10000];
   size_t shapeCount = 0;
   std::string shapeType;
+  bool hasScale = false;
   while (std::cin >> shapeType)
   {
     try
@@ -28,6 +29,12 @@ int main()
       }
       else if (shapeType == "SCALE")
       {
+        if (shapeCount == 0)
+        {
+          std::cerr << "No shape\n";
+          duhanina::destroy(shapes, shapeCount);
+          return 1;
+        }
         double x = 0;
         double y = 0;
         duhanina::point_t point;
@@ -42,18 +49,9 @@ int main()
           duhanina::destroy(shapes, shapeCount);
           return 1;
         }
+        hasScale = true;
         duhanina::processScaling(shapes, shapeCount, point, scalingFactor);
         break;
-      }
-      else if (std::cin.eof())
-      {
-        std::cerr << "No scale\n";
-        duhanina::destroy(shapes, shapeCount);
-        return 1;
-      }
-      else
-      {
-        continue;
       }
     }
     catch (const std::invalid_argument&)
@@ -62,12 +60,12 @@ int main()
       duhanina::destroy(shapes, shapeCount);
       continue;
     }
-    if (std::cin.eof())
-    {
-      std::cerr << "No scale\n";
-      duhanina::destroy(shapes, shapeCount);
-      return 1;
-    }
+  }
+  if (!hasScale)
+  {
+    std::cerr << "No scale\n";
+    duhanina::destroy(shapes, shapeCount);
+    return 1;
   }
   duhanina::destroy(shapes, shapeCount);
   return 0;
