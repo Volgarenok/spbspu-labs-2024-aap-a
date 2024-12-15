@@ -24,7 +24,7 @@ int main()
       }
       else if (shapeType == "ELLIPSE")
       {
-        shapes[shapeCount] = duhanina::makeEllipse(std::cin, incorrectRadius);
+        shapes[shapeCount] = duhanina::makeEllipse(std::cin);
         shapeCount++;
       }
       else if (shapeType == "SCALE")
