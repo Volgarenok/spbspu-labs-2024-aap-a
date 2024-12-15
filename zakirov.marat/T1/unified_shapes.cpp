@@ -1,4 +1,4 @@
-#include "getting_figures.hpp"
+#include "unified_shapes.hpp"
 #include <stdexcept>
 #include <resize_line.hpp>
 #include <string>
@@ -61,7 +61,7 @@ zakirov::Shape * zakirov::make_shape(const double * data)
   }
 }
 
-double * get_data(std::istream & in)
+double * zakirov::get_data(std::istream & in)
 {
   constexpr size_t step = 1;
   size_t real_size = 2;
@@ -117,4 +117,18 @@ double * get_data(std::istream & in)
 
   data[1] = counter;
   return data;
+}
+
+void zakirov::scale_from_point(Shape * mutable_shape, point_t target, double k)
+{
+  point_t nailed_p1 = mutable_shape -> getFrameRect().position_;
+  mutable_shape -> move(target);
+  point_t nailed_p2 = mutable_shape -> getFrameRect().position_;
+  mutable_shape -> scale(k);
+  
+  point_t bias;
+  bias.x_ = nailed_p2.x_ - nailed_p1.x_;
+  bias.y_ = nailed_p2.y_ - nailed_p1.y_;
+
+  mutable_shape -> move(-bias.x_ * k, -bias.x_ * k);
 }

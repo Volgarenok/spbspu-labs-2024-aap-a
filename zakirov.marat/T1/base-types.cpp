@@ -27,7 +27,7 @@ zakirov::point_t zakirov::get_middle(point_t first_p, point_t second_p)
   double middle_x = (first_p.x_ + second_p.x_) / 2;
   double middle_y = (first_p.y_ + second_p.y_) / 2;
   point_t middle;
-  
+
   middle.x_ = middle_x;
   middle.y_ = middle_y;
 
