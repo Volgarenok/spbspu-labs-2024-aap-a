@@ -1,4 +1,4 @@
-#include "makeShape.h"
+#include "makeShape.hpp"
 #include <iostream>
 
 duhanina::Rectangle* duhanina::makeRectangle(std::istream& in)
