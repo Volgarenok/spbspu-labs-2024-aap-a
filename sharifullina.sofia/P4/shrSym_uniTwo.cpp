@@ -2,7 +2,7 @@
 
 char * sharifullina::inputString(std::istream & in, char stop)
 {
-  constexpr size_t capacity = 10;
+  size_t capacity = 10;
   char * str = new char[capacity];
   size_t size = 0;
   char ch = '\0';
@@ -11,6 +11,7 @@ char * sharifullina::inputString(std::istream & in, char stop)
   {
     if (capacity == size)
     {
+      size_t capacity = capacity * 2;
       char * newstr = nullptr;
       try
       {

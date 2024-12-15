@@ -3,7 +3,7 @@
 
 int main()
 {
-  const char firstLine[] = "pupupu";
+  const char firstLine[] = "def ";
   char * str = nullptr;
   try
   {
