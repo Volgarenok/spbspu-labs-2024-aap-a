@@ -1,8 +1,4 @@
-#include <cstddef>
 #include <iomanip>
-#include <iostream>
-#include <stdexcept>
-#include <string>
 #include "shapeManipulations.hpp"
 #include "shapeBreeding.hpp"
 #include "shape.hpp"
