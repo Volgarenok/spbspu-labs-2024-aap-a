@@ -128,7 +128,7 @@ int main()
   timofeev::print_frame_rect(shapes, count);
   timofeev::izoscale(shapes, count, izo_pos, factor);
   std::cout << "\n";
-  std::cout << std::fixed << std::setprecision(1) << print_sum_area(shapes, count);
+  std::cout << print_sum_area(shapes, count);
   timofeev::print_frame_rect(shapes, count);
   std::cout << "\n";
   shape_delete(shapes, count);
