@@ -1,7 +1,8 @@
 #include "additional-utilities.hpp"
 #include <iostream>
-#include <string>
 #include <limits>
+#include <iomanip>
+#include <dynamicArray.hpp>
 #include "shape.hpp"
 #include "fabric.hpp"
 void nikonov::fillShapeCollection(Shape* collection[], size_t& cnt, size_t& noncorrect)
@@ -10,7 +11,11 @@ void nikonov::fillShapeCollection(Shape* collection[], size_t& cnt, size_t& nonc
   size_t n = 0;
   while (std::cin >> name && name != "SCALE")
   {
-    if (name == "RECTANGLE")
+    if (name[0] == '\n')
+    {
+      continue;
+    }
+    else if (name == "RECTANGLE")
     {
       n = 4;
     }
@@ -20,7 +25,6 @@ void nikonov::fillShapeCollection(Shape* collection[], size_t& cnt, size_t& nonc
     }
     else
     {
-      ++noncorrect;
       std::cin.clear();
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
@@ -80,41 +84,49 @@ void nikonov::ispScale(Shape* shp, float x, float y, float k)
 }
 bool nikonov::processCollection(Shape* collection[], size_t cnt)
 {
+  if (cnt == 0)
+  {
+    std::cerr << "ERROR: nothing to scale\n";
+    return 1;
+  }
   float x = 0.0, y = 0.0;
   float k = 0.0;
   std::cin >> x >> y >> k;
-  if (!std::cin || k <= 0) {
+  if ((!std::cin && !std::cin.eof()) || k <= 0) {
     std::cerr << "ERROR: noncorrect scale parameters\n";
     nikonov::destoy(collection, cnt);
     return 1;
   }
   float s1 = 0.0, s2 = 0.0;
+  std::cout << std::fixed << std::setprecision(1);
   for (size_t i = 0; i < cnt; ++i)
   {
     s1 += collection[i]->getArea();
   }
+  std::cout << s1;
   for (size_t i = 0; i < cnt; ++i)
   {
-    std::cout << s1 << ' ';
     nikonov::rectangle_t tempRect = collection[i]->getFrameRect();
-    std::cout << tempRect.pos_.x_ - tempRect.width_ / 2 << " ";
-    std::cout << tempRect.pos_.y_ - tempRect.height_ / 2 << " ";
-    std::cout << tempRect.pos_.x_ + tempRect.width_ / 2 << " ";
-    std::cout << tempRect.pos_.y_ + tempRect.height_ / 2 << '\n';
+    std::cout << " " << tempRect.pos_.x_ - tempRect.width_ / 2;
+    std::cout << " " << tempRect.pos_.y_ - tempRect.height_ / 2;
+    std::cout << " " << tempRect.pos_.x_ + tempRect.width_ / 2;
+    std::cout << " " << tempRect.pos_.y_ + tempRect.height_ / 2;
   }
+  std::cout << '\n';
   for (size_t i = 0; i < cnt; ++i)
   {
     nikonov::ispScale(collection[i], x, y, k);
     s2 += collection[i]->getArea();
   }
+  std::cout << s2;
   for (size_t i = 0; i < cnt; ++i)
   {
-    std::cout << s2 << ' ';
     nikonov::rectangle_t tempRect = collection[i]->getFrameRect();
-    std::cout << tempRect.pos_.x_ - tempRect.width_ / 2 << " ";
-    std::cout << tempRect.pos_.y_ - tempRect.height_ / 2 << " ";
-    std::cout << tempRect.pos_.x_ + tempRect.width_ / 2 << " ";
-    std::cout << tempRect.pos_.y_ + tempRect.height_ / 2 << '\n';
+    std::cout << " " << tempRect.pos_.x_ - tempRect.width_ / 2;
+    std::cout << " " << tempRect.pos_.y_ - tempRect.height_ / 2;
+    std::cout << " " << tempRect.pos_.x_ + tempRect.width_ / 2;
+    std::cout << " " << tempRect.pos_.y_ + tempRect.height_ / 2;
   }
+  std::cout << '\n';
   return 0;
 }

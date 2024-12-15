@@ -1,7 +1,7 @@
 #ifndef ADDITIONAL_UTILITIES_HPP
 #define ADDITIONAL_UTILITIES_HPP
+#include <cstdlib>
 #include "shape.hpp"
-#include "cstdlib"
 namespace nikonov
 {
   void fillShapeCollection(Shape* collection[], size_t& cnt, size_t& noncorrect);
