@@ -1,52 +1,49 @@
 #include "shapeManipulations.hpp"
 #include <iostream>
-#include <limits>
 
 namespace kushekbaev
 {
-void scaleEverything(size_t shapeCounter, Shape** capacity, double scaleCoeff, point_t scalePoint)
-{
-  for (size_t i = 0; i < shapeCounter; i++)
+  double getTotalArea(Shape** capacity, size_t shapeCounter)
   {
-    rectangle_t frame = capacity[i]->getFrameRect();
-    point_t vector = { scalePoint.x - frame.pos.x, scalePoint.y - frame.pos.y };
-    capacity[i]->move(vector.x, vector.y);
-    capacity[i]->scale(scaleCoeff);
-    point_t scaledVector = { vector.x * scaleCoeff, vector.y * scaleCoeff };
-    capacity[i]->move(-scaledVector.x, -scaledVector.y);
+    double area = 0;
+    for (size_t i = 0; i < shapeCounter; ++i)
+    {
+      area += capacity[i]->getArea();
+    }
+    return area;
   }
-}
+
+  void scaleEverything(Shape** capacity, size_t shapeCounter, point_t scalePoint, double scaleCoeff)
+  {
+    for (size_t i = 0; i < shapeCounter; ++i)
+    {
+      point_t beforeScale = capacity[i]->getFrameRect().pos;
+      capacity[i]->move(scalePoint);
+      point_t afterScale = capacity[i]->getFrameRect().pos;
+      point_t vector = { (afterScale.x - beforeScale.x) * scaleCoeff, (afterScale.y - beforeScale.y) * scaleCoeff };
+      capacity[i]->scale(scaleCoeff);
+      capacity[i]->move(-vector.x, -vector.y);
+    }
+  }
 
   void coordOutput(Shape** capacity, size_t shapeCounter)
   {
-    for (size_t i = 0; i < shapeCounter; i++)
+    for (size_t i = 0; i < shapeCounter; ++i)
     {
-      rectangle_t 𓃟 = capacity[i] -> getFrameRect();
-      point_t lowerLeft;
-      point_t upperRight;
-      lowerLeft.x = 𓃟.pos.x - 𓃟.width / 2;
-      lowerLeft.y = 𓃟.pos.y - 𓃟.height / 2;
-      upperRight.x = 𓃟.pos.x + 𓃟.width / 2;
-      upperRight.y = 𓃟.pos.y + 𓃟.height / 2;
-      std::cout << " " << lowerLeft.x << " " << lowerLeft.y << " " << upperRight.x << " " << upperRight.y;
+      rectangle_t rect = capacity[i]->getFrameRect();
+      double leftDownX = rect.pos.x - rect.width / 2;
+      double leftDownY = rect.pos.y - rect.height / 2;
+      double rightUpX = rect.pos.x + rect.width / 2;
+      double rightUpY = rect.pos.y + rect.height / 2;
+      std::cout << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
     }
   }
 
-  double getTotalArea(Shape** capacity, size_t shapeCounter)
+  void clearMemory(Shape** shapes, size_t shapeCounter)
   {
-    double total = 0;
-    for (size_t i = 0; i < shapeCounter; i++)
+    for (size_t i = 0; i < shapeCounter; ++i)
     {
-      total += capacity[i] -> getArea();
-    }
-    return total;
-  }
-
-  void clearMemory(Shape** capacity, size_t shapeCounter)
-  {
-    for (size_t i = 0; i < shapeCounter; i++)
-    {
-      delete capacity[i];
+      delete shapes[i];
     }
   }
 }

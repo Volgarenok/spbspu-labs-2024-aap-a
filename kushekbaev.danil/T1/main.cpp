@@ -1,102 +1,91 @@
-#include "rectangle.hpp"
-#include "shapeManipulations.hpp"
-#include <iostream>
-#include <string>
+#include <cstddef>
 #include <iomanip>
+#include <iostream>
+#include <stdexcept>
+#include <string>
+#include "shapeManipulations.hpp"
+#include "shapeBreeding.hpp"
+#include "shape.hpp"
 
 int main()
 {
   kushekbaev::Shape* capacity[10000]{};
   size_t shapeCounter = 0;
   std::string shapeName;
-  double scaleCoeff = 0, scaleX = 0, scaleY = 0;
+  bool incorrectRectangleInput = false;
   kushekbaev::point_t scalePoint;
-  bool therewasascale = false;
+  double scaleCoeff = 0;
 
-  while (std::cin >> shapeName)
+  try
   {
-    if (shapeName == "RECTANGLE")
+    while (std::cin >> shapeName)
     {
-      double x1 = 0, y1 = 0, x2 = 0, y2 = 0;
-      if (!(std::cin >> x1 >> y1 >> x2 >> y2))
+      if (shapeName == "RECTANGLE")
       {
-        std::cerr << "Rectangle reading error" << "\n";
-        clearMemory(capacity, shapeCounter);
-        return 1;
+        try
+        {
+          capacity[shapeCounter++] = kushekbaev::makeRectangle(std::cin);
+        }
+
+        catch (const std::invalid_argument& e)
+        {
+          incorrectRectangleInput = true;
+        }
       }
 
-      if (x1 >= x2 || y1 >= y2)
+      else if (shapeName == "SCALE")
       {
-        std::cerr << "Coordinates of left point couldnt be greater than coordinates of right point" << "\n";
-        clearMemory(capacity, shapeCounter);
-        return 0;
-      }
+        scalePoint = kushekbaev::makeScale(std::cin);
+        std::cin >> scaleCoeff;
+        if (scaleCoeff <= 0)
+        {
+          std::cerr << "Incorrect scaleCoeff" << "\n";
+          kushekbaev::clearMemory(capacity, shapeCounter);
+          return 1;
+        }
+        break;
 
-      kushekbaev::point_t lowerLeft = { x1, y1 };
-      kushekbaev::point_t upperRight = { x2, y2 };
-
-      try
-      {
-        capacity[shapeCounter] = new kushekbaev::Rectangle(lowerLeft, upperRight);
-        shapeCounter++;
-      }
-      catch (std::bad_alloc& e)
-      {
-        std::cerr << "bad alloc" << "\n";
-        clearMemory(capacity, shapeCounter);
-        return 1;
+        break;
       }
     }
 
-    else if (shapeName == "SCALE")
+    if (incorrectRectangleInput)
     {
-      if(!(std::cin >> scaleX >> scaleY >> scaleCoeff))
-      {
-        std::cerr << "Scale reading error";
-        clearMemory(capacity, shapeCounter);
-        return 1;
-      }
-
-      if (scaleCoeff <= 0)
-      {
-        std::cerr << "Scale value should be positive";
-        clearMemory(capacity, shapeCounter);
-        return 1;
-      }
-
-      scalePoint = { scaleX, scaleY };
-      therewasascale = true;
-
-      break;
+      std::cerr << "Some of inputed rectangles were incorrectly inputed" << "\n";
     }
-    shapeName = "";
-  }
-  if (!therewasascale)
-  {
-    std::cerr << "No scale command" << "\n";
-    clearMemory(capacity, shapeCounter);
-    return 1;
-  }
 
-  if (shapeCounter == 0)
-  {
-    std::cerr << "Shapeless input" << "\n";
-    return 1;
-  }
+    if (shapeCounter == 0)
+    {
+      std::cerr << "Shapeless input" << "\n";
+      return 1;
+    }
 
-  if (std::cin.eof())
-  {
-    std::cerr << "We reached the end of program" << "\n";
+    std::cout << std::fixed << std::setprecision(1) << kushekbaev::getTotalArea(capacity, shapeCounter);
+
+    kushekbaev::coordOutput(capacity, shapeCounter);
+    std::cout << "\n";
+
+    kushekbaev::scaleEverything(capacity, shapeCounter, scalePoint, scaleCoeff);
+    std::cout << kushekbaev::getTotalArea(capacity, shapeCounter);
+
+    kushekbaev::coordOutput(capacity, shapeCounter);
+    std::cout << "\n";
+
+    kushekbaev::clearMemory(capacity, shapeCounter);
     return 0;
   }
 
-  std::cout << std::fixed << std::setprecision(1) << getTotalArea(capacity, shapeCounter);
-  coordOutput(capacity, shapeCounter);
-  std::cout << "\n";
+  catch (const std::logic_error& e)
+  {
+    std::cerr << e.what();
+    kushekbaev::clearMemory(capacity, shapeCounter);
+    return 1;
+  }
 
-  scaleEverything(shapeCounter, capacity, scaleCoeff, scalePoint);
-
-  std::cout << getTotalArea(capacity, shapeCounter);
-  coordOutput(capacity, shapeCounter);
-  clearMemory(capacity, shapeCounter);
+  catch (const std::bad_alloc& e)
+  {
+    std::cerr << "Bad alloc" << "\n";
+    kushekbaev::clearMemory(capacity, shapeCounter);
+    return 1;
+  }
 }
