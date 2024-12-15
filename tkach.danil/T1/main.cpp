@@ -106,11 +106,11 @@ int main()
     std::cerr << "Error with shapes discription\n";
   }
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << tkach::getTotalArea(shapes_array, counter_of_shapes) << " ";
+  std::cout << tkach::getTotalArea(shapes_array, counter_of_shapes);
   tkach::printCoordinatesOfFrameRect(std::cout, shapes_array, counter_of_shapes);
   std::cout << "\n";
   tkach::doIsoScaleShapes(shapes_array, counter_of_shapes, scale_coef, scale_point);
-  std::cout << tkach::getTotalArea(shapes_array, counter_of_shapes) << " ";
+  std::cout << tkach::getTotalArea(shapes_array, counter_of_shapes);
   tkach::printCoordinatesOfFrameRect(std::cout, shapes_array, counter_of_shapes);
   std::cout << "\n";
   tkach::deleteShapes(shapes_array, counter_of_shapes);

@@ -1,6 +1,6 @@
 #include "figureactions.hpp"
 
-void tkach::deleteShapes(tkach::Shape** shape_array, size_t counter_of_shapes)
+void tkach::deleteShapes(tkach::Shape** shape_array, const size_t counter_of_shapes)
 {
   for (size_t i = 0; i < counter_of_shapes; ++i)
   {
@@ -8,7 +8,7 @@ void tkach::deleteShapes(tkach::Shape** shape_array, size_t counter_of_shapes)
   }
 }
 
-double tkach::getTotalArea(tkach::Shape** shape_array, size_t counter_of_shapes)
+double tkach::getTotalArea(const tkach::Shape* const* const shape_array, const size_t counter_of_shapes)
 {
   double sum = 0;
   for (size_t i = 0; i < counter_of_shapes; ++i)
@@ -18,7 +18,7 @@ double tkach::getTotalArea(tkach::Shape** shape_array, size_t counter_of_shapes)
   return sum;
 }
 
-void tkach::printCoordinatesOfFrameRect(std::ostream& out, tkach::Shape** shape_array, size_t counter_of_shapes)
+void tkach::printCoordinatesOfFrameRect(std::ostream& out, const tkach::Shape* const* const shape_array, const size_t counter_of_shapes)
 {
   for (size_t i = 0; i < counter_of_shapes; ++i)
   {
@@ -28,11 +28,12 @@ void tkach::printCoordinatesOfFrameRect(std::ostream& out, tkach::Shape** shape_
     left_bot_point.y = frame_rect.pos.y - frame_rect.height / 2.0;
     right_top_point.x = frame_rect.pos.x + frame_rect.width / 2.0;
     right_top_point.y = frame_rect.pos.y + frame_rect.height / 2.0;
-    out << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
+    out << " " << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
   }
 }
 
-void tkach::doIsoScaleShapes(tkach::Shape** shape_array, size_t counter_of_shapes, double scale_coef, const tkach::point_t& scale_point)
+void tkach::doIsoScaleShapes(tkach::Shape* const* const shape_array, const size_t counter_of_shapes, const double scale_coef,
+  const tkach::point_t& scale_point)
 {
   for (size_t i = 0; i < counter_of_shapes; ++i)
   {
