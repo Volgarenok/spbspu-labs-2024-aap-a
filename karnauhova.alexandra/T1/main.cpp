@@ -82,7 +82,7 @@ int main()
         {
           if (karnauhova::it_polygon(polygon, count_polygon, count))
           {
-            if (karnauhova::dubl_polygon(polygon, count_polygon + count, names, count_shape + 1, i + 1, points))
+            if (karnauhova::dubl_polygon(pol, count_polygon + count, names, count_shape + 1, i + 1, points))
             {
               points[i] = count;
               i++;

@@ -146,7 +146,7 @@ bool karnauhova::dubl_triangle(double* points, std::string* names, size_t c_name
   }
   return true;
 }
-bool karnauhova::dubl_polygon(double* polygon, size_t end_pol, std::string* names, size_t c_names, size_t c_points, double* points)
+bool karnauhova::dubl_pol(double* polygon, size_t end_pol, std::string* names, size_t c_names, size_t c_points, double* points)
 {
   size_t k = 0;
   size_t c_polygon = 0;
