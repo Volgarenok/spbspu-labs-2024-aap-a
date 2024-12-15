@@ -62,7 +62,14 @@ void maslevtsov::Polygon::move(double dx, double dy) noexcept
 }
 
 void maslevtsov::Polygon::scale(double k) noexcept
-{}
+{
+  point_t frameCenter = getFrameRect().pos;
+  for (std::size_t i = 0; i < nVertices_; ++i)
+  {
+    vertices_[i] = {
+      frameCenter.x - (frameCenter.x - vertices_[i].x) * k, frameCenter.y - (frameCenter.y - vertices_[i].y) * k};
+  }
+}
 
 maslevtsov::Polygon* maslevtsov::makePolygon(const double* arguments)
 {}
