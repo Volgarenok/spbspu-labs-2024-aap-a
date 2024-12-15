@@ -20,6 +20,7 @@ int main()
   finaev::point_t scaleCenter = {0, 0};
   std::string coordinates = "";
   bool isCorrect = false;
+  bool isScale = false;
   try
   {
     while (std::cin >> str)
@@ -73,6 +74,7 @@ int main()
       }
       else if (str == "SCALE")
       {
+        isScale = true;
         std::cin >> scaleCenter.x;
         std::cin >> scaleCenter.y;
         std::cin >> k;
@@ -84,6 +86,12 @@ int main()
         }
         break;
       }
+    }
+    if (!isScale)
+    {
+      std::cerr << "no scale!\n";
+      finaev::deleteShapes(shapes, size);
+      return 1;
     }
     if (isCorrect)
     {
