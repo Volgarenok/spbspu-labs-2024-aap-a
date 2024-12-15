@@ -23,10 +23,10 @@ double dribas::Rectangle::getArea() const
 dribas::rectangle_t dribas::Rectangle::getFrameRect() const
 {
   rectangle_t result;
-  result.height_ = rightUp_.y_ - leftDown_.y_;
-  result.width_ = rightUp_.x_ - leftDown_.x_;
-  result.pos_.x_ = leftDown_.x_ + (result.width_ / 2.0L);
-  result.pos_.y_ = leftDown_.y_ + (result.height_ / 2.0L);
+  result.height = rightUp_.y_ - leftDown_.y_;
+  result.width = rightUp_.x_ - leftDown_.x_;
+  result.pos.x_ = leftDown_.x_ + (result.width / 2.0L);
+  result.pos.y_ = leftDown_.y_ + (result.height / 2.0L);
   return result;
 }
 
@@ -40,7 +40,7 @@ void dribas::Rectangle::move(double x, double y)
 
 void dribas::Rectangle::move(point_t centerP)
 {
-  point_t pos = getFrameRect().pos_;
+  point_t pos = getFrameRect().pos;
   double moveX = centerP.x_ - pos.x_;
   double moveY = centerP.y_ - pos.y_;
   move(moveX, moveY);
@@ -52,9 +52,9 @@ void dribas::Rectangle::scale(double ratio)
     throw std::invalid_argument("under zero ratio with scale\n");
   }
   rectangle_t fremRect = getFrameRect();
-  point_t pos = fremRect.pos_;
-  rightUp_.x_ = pos.x_ + fremRect.width_ / 2.0L * ratio;
-  rightUp_.y_ = pos.y_ + fremRect.height_ / 2.0L * ratio;
-  leftDown_.x_ = pos.x_ - fremRect.width_ / 2.0L * ratio;
-  leftDown_.y_ = pos.y_ - fremRect.height_ / 2.0L * ratio;
+  point_t pos = fremRect.pos;
+  rightUp_.x_ = pos.x_ + fremRect.width / 2.0L * ratio;
+  rightUp_.y_ = pos.y_ + fremRect.height / 2.0L * ratio;
+  leftDown_.x_ = pos.x_ - fremRect.width / 2.0L * ratio;
+  leftDown_.y_ = pos.y_ - fremRect.height / 2.0L * ratio;
 }

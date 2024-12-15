@@ -51,10 +51,10 @@ dribas::rectangle_t dribas::Concave::getFrameRect() const
   double minY = std::min(a_.y_, std::min(b_.y_, std::min(c_.y_, d_.y_)));
   double minX = std::min(a_.x_, std::min(b_.x_, std::min(c_.x_, d_.x_)));
   rectangle_t result;
-  result.height_ = maxY - minY;
-  result.width_ = maxX - minY;
-  result.pos_.x_ = minX + (result.width_ / 2);
-  result.pos_.y_ = maxX + (result.height_ / 2);
+  result.height = maxY - minY;
+  result.width = maxX - minY;
+  result.pos.x_ = minX + (result.width / 2);
+  result.pos.y_ = maxX + (result.height / 2);
   return result;
 }
 void dribas::Concave::move(double x, double y)

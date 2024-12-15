@@ -44,9 +44,9 @@ double dribas::Diamond::getArea() const
 dribas::rectangle_t dribas::Diamond::getFrameRect() const
 {
   rectangle_t fremRECT;
-  fremRECT.pos_ = a_;
-  fremRECT.width_ = std::max(std::abs(c_.x_ - a_.x_), std::abs(b_.x_ - a_.x_));
-  fremRECT.height_ = std::max(std::abs(c_.y_ - a_.y_), std::abs(b_.y_ - a_.y_));
+  fremRECT.pos = a_;
+  fremRECT.width = std::max(std::abs(c_.x_ - a_.x_), std::abs(b_.x_ - a_.x_));
+  fremRECT.height = std::max(std::abs(c_.y_ - a_.y_), std::abs(b_.y_ - a_.y_));
   return fremRECT;
 }
 

@@ -51,7 +51,7 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
           input >> c.x_;
           input >> c.y_;
           myShapes[shapesCount] =  new Triangle{a, b, c};
-          std::cout << myShapes[shapesCount]->getFrameRect().width_;
+          std::cout << myShapes[shapesCount]->getFrameRect().width;
           shapesCount++;
         } catch (const std::invalid_argument& e) {
           error << e.what() << '\n';

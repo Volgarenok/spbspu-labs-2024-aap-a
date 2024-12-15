@@ -23,10 +23,10 @@ dribas::rectangle_t dribas::Triangle::getFrameRect() const
   double minX = std::min(a_.x_, std::min(b_.x_, c_.x_));
   double minY = std::min(a_.y_, std::min(b_.y_, c_.y_));
   dribas::rectangle_t result;
-  result.height_ = maxY - minY;
-  result.width_ = maxX - minY;
-  result.pos_.x_ = minX + (result.width_ / 2);
-  result.pos_.y_ = maxX + (result.height_ / 2);
+  result.height = maxY - minY;
+  result.width = maxX - minY;
+  result.pos.x_ = minX + (result.width / 2);
+  result.pos.y_ = maxX + (result.height / 2);
   return result;
 }
 void dribas::Triangle::move(point_t centerP)

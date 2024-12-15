@@ -9,9 +9,9 @@ namespace dribas
   };
   struct rectangle_t
   {
-    double width_;
-    double height_;
-    point_t pos_;
+    double width;
+    double height;
+    point_t pos;
   };
 }
 #endif
