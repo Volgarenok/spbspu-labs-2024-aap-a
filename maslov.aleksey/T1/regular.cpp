@@ -8,7 +8,7 @@ A_(A), B_(B), C_(C), AB_(distance(A, B)),
 AC_(distance(A, C)), BC_(distance(B, C)),
 rI_(findRadiusIncircle(AC_, AB_, BC_)),
 rC_(findRadiusCircumcircle(AC_, AB_)),
-halfSide_(findHalfSide(AC_, AB_, BC_)), 
+halfSide_(findHalfSide(AC_, AB_, BC_)),
 n_(findVerticals(halfSide_, rI_, rC_))
 {}
 double maslov::Regular::getArea() const
