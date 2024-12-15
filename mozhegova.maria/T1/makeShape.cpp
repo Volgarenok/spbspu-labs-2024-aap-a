@@ -29,7 +29,7 @@ mozhegova::Diamond* mozhegova::makeDiamond(std::istream& in)
   in >> p1 >> p2 >> p3 >> p4 >> p5 >> p6;
   point_t pCent = {p1, p2};
   point_t pVert = {p3, p4};
-  point_t pHori = {p1, p2};
+  point_t pHori = {p5, p6};
   point_t p = {0, 0};
   if (pCent.x == pVert.x && pCent.y == pHori.y)
   {}
@@ -76,11 +76,12 @@ mozhegova::Diamond* mozhegova::makeDiamond(std::istream& in)
 mozhegova::Polygon * mozhegova::makePolygon(std::istream& in)
 {
   size_t len = 0;
-  double * num = nullptr;
+  size_t i = 0;
+  double * num = new double [len];
   double p = 0.0;
-  for (size_t i = 0; in >> p; i++)
+  while (in.peek() != '\n')
   {
-    num = new double [len];
+    in >> p;
     if (i == len)
     {
       double * newnum = nullptr;
@@ -101,6 +102,8 @@ mozhegova::Polygon * mozhegova::makePolygon(std::istream& in)
       num = newnum;
       len += 2;
     }
+    num[i] = p;
+    i++;
   }
   if (len < 6)
   {

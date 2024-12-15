@@ -23,7 +23,7 @@ double mozhegova::Polygon::getArea() const
     sum += points[i].x * (points[i + 1].y - points[i - 1].y);
   }
   sum += points[count - 1].x * (points[0].y - points[count - 2].y);
-  return 0.5 * sum;
+  return 0.5 * std::abs(sum);
 }
 
 mozhegova::rectangle_t mozhegova::Polygon::getFrameRect() const

@@ -27,9 +27,10 @@ int main()
     {
       try
       {
-        shapes[count++] = mozhegova::makeRectangle(std::cin);
+        shapes[count] = mozhegova::makeRectangle(std::cin);
+        count++;
       }
-      catch (const std::exception& e)
+      catch (const std::invalid_argument& e)
       {
         flag = true;
       }
@@ -38,9 +39,10 @@ int main()
     {
       try
       {
-        shapes[count++] = mozhegova::makeDiamond(std::cin);
+        shapes[count] = mozhegova::makeDiamond(std::cin);
+        count++;
       }
-      catch (const std::exception& e)
+      catch (const std::invalid_argument& e)
       {
         flag = true;
       }
@@ -49,7 +51,8 @@ int main()
     {
       try
       {
-        shapes[count++] = mozhegova::makeDiamond(std::cin);
+        shapes[count] = mozhegova::makePolygon(std::cin);
+        count++;
       }
       catch (const std::bad_alloc& e)
       {
