@@ -1,7 +1,7 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
 
-#include "Shape.h"
+#include "Shape.hpp"
 #include "base-types.hpp"
 
 namespace timofeev

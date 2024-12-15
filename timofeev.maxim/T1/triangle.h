@@ -1,6 +1,6 @@
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
-#include "Shape.h"
+#include "Shape.hpp"
 #include "base-types.hpp"
 #include "shapes_tools.h"
 #include <iostream>

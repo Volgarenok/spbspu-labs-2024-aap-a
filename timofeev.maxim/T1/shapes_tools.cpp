@@ -1,5 +1,5 @@
 #include "shapes_tools.h"
-#include "Shape.h"
+#include "Shape.hpp"
 #include <iostream>
 
 bool timofeev::correct_triangle(point_t p1, point_t p2, point_t p3)

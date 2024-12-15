@@ -1,6 +1,6 @@
 #ifndef CONCAVE_H
 #define CONCAVE_H
-#include "Shape.h"
+#include "Shape.hpp"
 #include "base-types.hpp"
 #include "shapes_tools.h"
 #include <iostream>
