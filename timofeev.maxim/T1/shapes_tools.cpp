@@ -56,6 +56,16 @@ bool timofeev::is_point_in_quad(point_t p1, point_t p2, point_t p3, point_t p4, 
   return false;
 }
 
+double timofeev::print_sum_area(Shape** shapes, size_t count)
+{
+  double summa = 0;
+  for (size_t i = 0; i < count; i++)
+  {
+    summa += shapes[i]->get_area();
+  }
+  return summa;
+}
+
 timofeev::point_t timofeev::cross_point(point_t p1, point_t p2, point_t p3, point_t p4)
 {
   double a1 = p2.y - p1.y;

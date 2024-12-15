@@ -14,5 +14,6 @@ namespace timofeev
   void shape_delete(Shape** shapes, size_t count);
   void izoscale(Shape** shapes, size_t count, point_t izo_pos, double factor);
   void print_frame_rect(Shape** shapes, size_t count);
+  double print_sum_area(Shape** shapes, size_t count);
 }
 #endif
