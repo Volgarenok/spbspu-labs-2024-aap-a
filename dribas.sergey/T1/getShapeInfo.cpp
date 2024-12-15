@@ -105,7 +105,6 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
           outputRes(output, myShapes, shapesCount);
           scaling(myShapes, shapesCount, toCenter, ratio);
           outputRes(output, myShapes, shapesCount);
-          output << '\n';
         } catch (const std::invalid_argument& e) {
           error << e.what() << '\n';
           clear(myShapes, shapesCount);
