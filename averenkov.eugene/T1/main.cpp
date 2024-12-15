@@ -67,7 +67,7 @@ int main()
           throw std::invalid_argument("Invalid DIAMOND");
         }
         if (!((a.x == b.x && a.y == c.y) ||
-          (a.x == c.x && c.y == b.y) ||
+          (a.x == c.x && a.y == b.y) ||
           (b.x == a.x && b.y == c.y) ||
           (b.x == c.x && b.y == a.y) ||
           (c.x == a.x && c.y == b.y) ||

@@ -13,26 +13,55 @@ double averenkov::Diamond::getArea() const
 
 averenkov::rectangle_t averenkov::Diamond::getFrameRect() const
 {
+  double width, height;
   if ((a.x == b.x && a.y == c.y) || (a.x == c.x && a.y == b.y))
   {
-    return { (c.x - a.x + b.x - a.x) * 2, (c.y - a.y + b.y - a.y) * 2, a };
+    width = (c.x - a.x + b.x - a.x) * 2;
+    height = (c.y - a.y + b.y - a.y) * 2;
+    if (width < 0)
+    {
+      width = width - width - width;
+    }
+    if (height < 0)
+    {
+      height = height - height - height;
+    }
+    return { width, height, a };
   }
   if ((b.x == a.x && b.y == c.y) || (b.x == c.x && b.y == a.y))
   {
-    return { (c.x - b.x + a.x - b.x) * 2, (c.y - b.y + a.y - b.y) * 2, b };
+    width = (c.x - b.x + a.x - b.x) * 2;
+    height = (c.y - b.y + a.y - b.y) * 2;
+    if (width < 0)
+    {
+      width = width - width - width;
+    }
+    if (height < 0)
+    {
+      height = height - height - height;
+    }
+    return { width, height, b };
   }
   if ((c.x == a.x && c.y == b.y) || (c.x == b.x && c.y == a.y))
   {
-    return { (a.x - c.x + b.x - c.x) * 2, (a.y - c.y + b.y - c.y) * 2, c };
+    width = (a.x - c.x + b.x - c.x) * 2;
+    height = (a.y - c.y + b.y - c.y) * 2;
+    if (width < 0)
+    {
+      width = width - width - width;
+    }
+    if (height < 0)
+    {
+      height = height - height - height;
+    }
+    return { width, height, c };
   }
   return { 0.0, 0.0 };
 }
 
 void averenkov::Diamond::scale(double factor)
 {
-  point_t center;
-  center.x = (a.x + c.x) / 2.0;
-  center.y = (a.y + b.y) / 2.0;
+  point_t center = getFrameRect().pos;
   a.x = center.x + (a.x - center.x) * factor;
   a.y = center.y + (a.y - center.y) * factor;
   b.x = center.x + (b.x - center.x) * factor;
