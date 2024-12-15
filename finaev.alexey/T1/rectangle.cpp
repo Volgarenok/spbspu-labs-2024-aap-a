@@ -4,10 +4,6 @@
 finaev::Rectangle::Rectangle(point_t l, point_t r) :
   leftDown(l), rightUp(r)
 {
-  if (l.x >= r.x || l.y >= r.y)
-  {
-    throw std::invalid_argument("Invalid argument!");
-  }
 }
 double finaev::Rectangle::getArea()
 {

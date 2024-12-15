@@ -16,9 +16,10 @@ int main()
   finaev::Shape* shapes[capacity] = {};
   std::string str = "";
   size_t size = 0;
-  double k;
-  finaev::point_t scaleCenter;
+  double k = 0.0;
+  finaev::point_t scaleCenter = {0, 0};
   std::string coordinates = "";
+  bool isCorrect = false;
   try
   {
     while (std::cin >> str)
@@ -33,19 +34,41 @@ int main()
         try
         {
           shapes[size] = finaev::makeRectangle(std::cin);
+          if (shapes[size] == nullptr)
+          {
+            isCorrect = true;
+          }
           size++;
         }
         catch(std::bad_alloc & e)
         {
           finaev::deleteShapes(shapes, size);
-          std::cerr << "Error alloc" << e.what() << "\n";
+          std::cerr << "Error alloc" << "\n";
+          return 1;
+        }
+      }
+      else if (str == "SQUARE")
+      {
+        try
+        {
+          shapes[size] = finaev::makeSquare(std::cin);
+          if (shapes[size] == nullptr)
+          {
+            isCorrect = true;
+          }
+          size++;
+        }
+        catch(std::bad_alloc & e)
+        {
+          finaev::deleteShapes(shapes, size);
+          std::cerr << "Error alloc" << "\n";
           return 1;
         }
       }
       else if (std::cin.eof())
       {
-        std::cerr << "the program is completed by eof, but scale not described\n";
         deleteShapes(shapes, size);
+        std::cerr << "the program is completed by eof, but scale not described\n";
         return 1;
       }
       else if (str == "SCALE")
@@ -55,7 +78,7 @@ int main()
         std::cin >> k;
         if (k <= 0)
         {
-          std::cerr << "Uncorrect scale coefficient!";
+          std::cerr << "Uncorrect scale coefficient!\n";
           return 1;
         }
         std::cout << std::fixed << std::setprecision(1) << finaev::getSumArea(shapes, size) << " ";
@@ -67,7 +90,12 @@ int main()
     finaev::scale(shapes, size, scaleCenter, k);
     std::cout << std::fixed << std::setprecision(1) << finaev::getSumArea(shapes, size) << " ";
     finaev::printFrameRect(shapes, size);
+    std::cout << "\n";
     finaev::deleteShapes(shapes, size);
+    if (isCorrect)
+    {
+      std::cerr << "Input has uncorrects figures!\n";
+    }
     return 0;
   }
   catch (std::bad_alloc& e)
