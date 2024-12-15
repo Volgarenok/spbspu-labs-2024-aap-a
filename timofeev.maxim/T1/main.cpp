@@ -129,4 +129,7 @@ int main()
   }
   std::cout << std::fixed << std::setprecision(1) << sum_area;
   timofeev::print_frame_rect(shapes, count);
+  std::cout << "\n";
+  shape_delete(shapes, count);
+  return 0;
 }
