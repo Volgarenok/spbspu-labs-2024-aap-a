@@ -3,6 +3,7 @@
 #include "shape.hpp"
 #include "rectangle.hpp"
 #include "diamond.hpp"
+#include "polygon.hpp"
 #include "shapeManipulator.hpp"
 
 int main()
@@ -35,6 +36,7 @@ int main()
     char * tok = std::strtok(str, " ");
     bool isRectangle = std::strcmp(tok, "RECTANGLE") == 0;
     bool isDiamond = std::strcmp(tok, "DIAMOND") == 0;
+    bool isPolygon = std::strcmp(tok, "POLYGON") == 0;
     bool isScale = std::strcmp(tok, "SCALE") == 0;
 
     if (isRectangle)
@@ -94,6 +96,48 @@ int main()
         delete[] num;
         continue;
       }
+    }
+    else if (isPolygon)
+    {
+      try
+      {
+        num = mozhegova::getNum(tok, len);
+      }
+      catch (const std::exception& e)
+      {
+        std::cerr << "Out of memory\n";
+        delete[] str;
+        mozhegova::destroy(shapes, count);
+        return 1;
+      }
+      if (len < 6)
+      {
+        flag = true;
+        delete[] str;
+        delete[] num;
+        continue;
+      }
+      mozhegova::point_t * numPoint = nullptr;
+      try
+      {
+        numPoint = new mozhegova::point_t [len / 2];
+      }
+      catch (const std::exception& e)
+      {
+        std::cerr << "Out of memory\n";
+        delete[] str;
+        delete[] num;
+        mozhegova::destroy(shapes, count);
+        return 1;
+      }
+      for (size_t i = 0; i < len / 2; i++)
+      {
+        numPoint[i] = {num[i * 2], num[i * 2 + 1]};
+      }
+      mozhegova::Polygon * poly = new mozhegova::Polygon(len / 2, numPoint);
+      shapes[count++] = poly;
+      delete[] num;
+      delete[] numPoint;
     }
     else if (isScale)
     {
