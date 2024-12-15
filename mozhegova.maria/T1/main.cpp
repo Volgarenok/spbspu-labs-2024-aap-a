@@ -2,6 +2,7 @@
 #include <cstring>
 #include "shape.hpp"
 #include "rectangle.hpp"
+#include "diamond.hpp"
 #include "shapeManipulator.hpp"
 
 int main()
@@ -33,6 +34,7 @@ int main()
     size_t len = 0;
     char * tok = std::strtok(str, " ");
     bool isRectangle = std::strcmp(tok, "RECTANGLE") == 0;
+    bool isDiamond = std::strcmp(tok, "DIAMOND") == 0;
     bool isScale = std::strcmp(tok, "SCALE") == 0;
 
     if (isRectangle)
@@ -61,6 +63,37 @@ int main()
       mozhegova::Rectangle * rect = new mozhegova::Rectangle(lowLef, uppRig);
       shapes[count++] = rect;
       delete[] num;
+    }
+    else if (isDiamond)
+    {
+      len = 6;
+      try
+      {
+        num = mozhegova::getNum(tok, len);
+      }
+      catch (const std::exception& e)
+      {
+        std::cerr << "Out of memory\n";
+        delete[] str;
+        mozhegova::destroy(shapes, count);
+        return 1;
+      }
+      mozhegova::point_t p1 = {num[0], num[1]};
+      mozhegova::point_t p2 = {num[2], num[3]};
+      mozhegova::point_t p3 = {num[4], num[5]};
+      try
+      {
+        mozhegova::Diamond * diam = new mozhegova::Diamond(p1, p2, p3);
+        shapes[count++] = diam;
+        delete[] num;
+      }
+      catch(const std::exception& e)
+      {
+        flag = true;
+        delete[] str;
+        delete[] num;
+        continue;
+      }
     }
     else if (isScale)
     {
