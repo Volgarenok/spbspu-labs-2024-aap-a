@@ -14,7 +14,7 @@ int main()
   bool flag = false;
   double scaleCoef = 0.0;
   mozhegova::point_t scaleCenter = {0.0, 0.0};
-  while (!std::cin.eof())
+  while (true)
   {
     try
     {
