@@ -16,9 +16,9 @@ double krylov::Rectangle::getArea() const
     return (topRight_.x - bottomLeft_.x) * (topRight_.y - bottomLeft_.y);
 }
 
-rectangle_t krylov::Rectangle::getFrameRect() const
+krylov::rectangle_t krylov::Rectangle::getFrameRect() const
 {
-  return {topRight_.x - bottomLeft_.x, topRight_.y - bottomLeft_.y,
+  return krylov::rectangle_t{(topRight_.x - bottomLeft_.x), (topRight_.y - bottomLeft_.y),
           {(bottomLeft_.x + topRight_.x) / 2, (bottomLeft_.y + topRight_.y) / 2}};
 }
 

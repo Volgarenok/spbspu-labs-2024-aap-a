@@ -17,7 +17,7 @@ double krylov::Triangle::getArea() const
   return 0.5 * std::fabs(a_.x * (b_.y - c_.y) + b_.x * (c_.y - a_.y) + c_.x * (a_.y - b_.y));
 }
 
-rectangle_t krylov::Triangle::getFrameRect() const
+krylov::rectangle_t krylov::Triangle::getFrameRect() const
 {
   double minX = std::fmin(a_.x, std::fmin(b_.x, c_.x));
   double maxX = std::fmax(a_.x, std::fmax(b_.x, c_.x));
@@ -29,7 +29,7 @@ rectangle_t krylov::Triangle::getFrameRect() const
 
 void krylov::Triangle::move(const point_t& point)
 {
-  point_t center = getCenter();
+  krylov::point_t center = getCenter();
   double dx = point.x - center.x;
   double dy = point.y - center.y;
   a_.x += dx; a_.y += dy;
@@ -37,7 +37,7 @@ void krylov::Triangle::move(const point_t& point)
   c_.x += dx; c_.y += dy;
 }
 
-void Triangle::move(double dx, double dy)
+void krylov::Triangle::move(double dx, double dy)
 {
   a_.x += dx; a_.y += dy;
   b_.x += dx; b_.y += dy;
@@ -50,7 +50,7 @@ void krylov::Triangle::scale(double factor)
   {
     throw std::invalid_argument("Scale factor must be positive");
   }
-  point_t center = getCenter();
+  krylov::point_t center = getCenter();
   a_.x = center.x + factor * (a_.x - center.x);
   a_.y = center.y + factor * (a_.y - center.y);
   b_.x = center.x + factor * (b_.x - center.x);
@@ -59,7 +59,7 @@ void krylov::Triangle::scale(double factor)
   c_.y = center.y + factor * (c_.y - center.y);
 }
 
-point_t krylov::Triangle::getCenter() const
+krylov::point_t krylov::Triangle::getCenter() const
 {
   return {(a_.x + b_.x + c_.x) / 3, (a_.y + b_.y + c_.y) / 3};
 }

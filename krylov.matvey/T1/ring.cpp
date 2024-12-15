@@ -16,7 +16,7 @@ double krylov::Ring::getArea() const
   return piNumber * (outerRadius_ * outerRadius_ - innerRadius_ * innerRadius_);
 }
 
-rectangle_t krylov::Ring::getFrameRect() const
+krylov::rectangle_t krylov::Ring::getFrameRect() const
 {
   return {outerRadius_ * 2, outerRadius_ * 2, center_};
 }
