@@ -12,11 +12,11 @@ namespace dribas
 
 bool dribas::isTriangle(point_t a, point_t b, point_t c)
 {
-  return !((((a.x_ == b.x_) && (a.x_ == c.x_))) || (( a.y_ == b.y_) && (a.y_ == c.y_)));
+  return !((((a.x == b.x) && (a.x == c.x))) || (( a.y == b.y) && (a.y == c.y)));
 }
 
 double dribas::getMyArea(point_t a, point_t b, point_t c) {
-  return std::abs((a.x_ * (b.y_ - c.y_) + b.x_ * (c.y_ - a.y_) + c.x_ * (a.y_ -b.y_)) / 2.0l);
+  return std::abs((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y -b.y)) / 2.0l);
 }
 
 bool dribas::isPointInTriangle(point_t a, point_t b, point_t c, point_t d)
@@ -41,38 +41,38 @@ dribas::Concave::Concave(point_t a, point_t b, point_t c, point_t d):a_({0.0, 0.
 
 double dribas::Concave::getArea() const
 {
-  return std::abs(a_.x_ * b_.y_ + b_.x_ * c_.y_ + c_.x_ * d_.y_ + d_.x_ * a_.y_ -
-    b_.x_ * a_.y_ - c_.x_ * b_.y_ - d_.x_ * c_.y_ - a_.x_ * d_.y_) / 2.0l;
+  return std::abs(a_.x * b_.y + b_.x * c_.y + c_.x * d_.y + d_.x * a_.y -
+    b_.x * a_.y - c_.x * b_.y - d_.x * c_.y - a_.x * d_.y) / 2.0l;
 }
 dribas::rectangle_t dribas::Concave::getFrameRect() const
 {
-  double maxX = std::max(a_.x_, std::max(b_.x_, std::max(c_.x_, d_.x_)));
-  double maxY = std::max(a_.y_, std::max(b_.y_, std::max(c_.y_, d_.y_)));
-  double minY = std::min(a_.y_, std::min(b_.y_, std::min(c_.y_, d_.y_)));
-  double minX = std::min(a_.x_, std::min(b_.x_, std::min(c_.x_, d_.x_)));
+  double maxX = std::max(a_.x, std::max(b_.x, std::max(c_.x, d_.x)));
+  double maxY = std::max(a_.y, std::max(b_.y, std::max(c_.y, d_.y)));
+  double minY = std::min(a_.y, std::min(b_.y, std::min(c_.y, d_.y)));
+  double minX = std::min(a_.x, std::min(b_.x, std::min(c_.x, d_.x)));
   rectangle_t result;
   result.height = maxY - minY;
   result.width = maxX - minY;
-  result.pos.x_ = minX + (result.width / 2);
-  result.pos.y_ = maxX + (result.height / 2);
+  result.pos.x = minX + (result.width / 2);
+  result.pos.y = maxX + (result.height / 2);
   return result;
 }
 void dribas::Concave::move(double x, double y)
 {
-  a_.x_ += x;
-  b_.x_ += x;
-  c_.x_ += x;
-  d_.x_ += x;
-  a_.y_ += y;
-  b_.y_ += y;
-  c_.y_ += y;
-  d_.y_ += y;
+  a_.x += x;
+  b_.x += x;
+  c_.x += x;
+  d_.x += x;
+  a_.y += y;
+  b_.y += y;
+  c_.y += y;
+  d_.y += y;
 }
 
 void dribas::Concave::move(point_t point)
 {
-  double moveX = point.x_ - d_.x_;
-  double moveY = point.y_ - d_.y_;
+  double moveX = point.x - d_.x;
+  double moveY = point.y - d_.y;
   move(moveX, moveY);
 }
 
@@ -81,34 +81,34 @@ void dribas::Concave::scale(double ratio)
   if (ratio <= 0) {
     throw std::invalid_argument("under zero ratio\n");
   }
-  if (a_.x_ - d_.x_ < 0) {
-    a_.x_ = -(d_.x_ - a_.x_) * ratio;
+  if (a_.x - d_.x < 0) {
+    a_.x = -(d_.x - a_.x) * ratio;
   } else {
-    a_.x_ = (a_.x_ - d_.x_) * ratio;
+    a_.x = (a_.x - d_.x) * ratio;
   }
-  if (b_.x_ - d_.x_ < 0) {
-    b_.x_ = -(d_.x_ - b_.x_) * ratio;
+  if (b_.x - d_.x < 0) {
+    b_.x = -(d_.x - b_.x) * ratio;
   } else {
-    b_.x_ = (b_.x_ - d_.x_) * ratio;
+    b_.x = (b_.x - d_.x) * ratio;
   }
-  if (c_.x_ - d_.x_ < 0) {
-    c_.x_ = -(d_.x_ - c_.x_) * ratio;
+  if (c_.x - d_.x < 0) {
+    c_.x = -(d_.x - c_.x) * ratio;
   } else {
-    c_.x_ = (c_.x_ - d_.x_) * ratio;
+    c_.x = (c_.x - d_.x) * ratio;
   }
-   if (a_.y_ - d_.y_ < 0) {
-    a_.y_ = -(d_.y_ - a_.y_) * ratio;
+   if (a_.y - d_.y < 0) {
+    a_.y = -(d_.y - a_.y) * ratio;
   } else {
-    a_.y_ = (a_.y_ - d_.y_) * ratio;
+    a_.y = (a_.y - d_.y) * ratio;
   }
-  if (b_.y_ - d_.y_ < 0) {
-    b_.y_ = -(d_.y_ - b_.y_) * ratio;
+  if (b_.y - d_.y < 0) {
+    b_.y = -(d_.y - b_.y) * ratio;
   } else {
-    b_.y_ = (b_.y_ - d_.y_) * ratio;
+    b_.y = (b_.y - d_.y) * ratio;
   }
-  if (c_.y_ - d_.y_ < 0) {
-    c_.y_ = -(d_.y_ - c_.y_) * ratio;
+  if (c_.y - d_.y < 0) {
+    c_.y = -(d_.y - c_.y) * ratio;
   } else {
-    c_.y_ = (c_.y_ - d_.y_) * ratio;
+    c_.y = (c_.y - d_.y) * ratio;
   }
 }

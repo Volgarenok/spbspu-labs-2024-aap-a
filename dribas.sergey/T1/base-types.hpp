@@ -4,8 +4,8 @@ namespace dribas
 {
   struct point_t
   {
-    double x_;
-    double y_;
+    double x;
+    double y;
   };
   struct rectangle_t
   {

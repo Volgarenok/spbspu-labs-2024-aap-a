@@ -31,10 +31,10 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
         std::cout <<"sdad";
         try {
           point_t down, up;
-          input >> down.x_;
-          input >> down.y_;
-          input >> up.x_;
-          input >> up.y_;
+          input >> down.x;
+          input >> down.y;
+          input >> up.x;
+          input >> up.y;
           myShapes[shapesCount] =  new Rectangle{down, up};
           std::cout << myShapes[shapesCount]->getArea();
           shapesCount++;
@@ -44,12 +44,12 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
       } else if (Mystr == "TRIANGLE") {
         try {
           point_t a, b, c;
-          input >> a.x_;
-          input >> a.y_;
-          input >> b.x_;
-          input >> b.y_;
-          input >> c.x_;
-          input >> c.y_;
+          input >> a.x;
+          input >> a.y;
+          input >> b.x;
+          input >> b.y;
+          input >> c.x;
+          input >> c.y;
           myShapes[shapesCount] =  new Triangle{a, b, c};
           std::cout << myShapes[shapesCount]->getFrameRect().width;
           shapesCount++;
@@ -59,12 +59,12 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
       } else if (Mystr == "DIAMOND") {
         try {
           point_t a, b, c;
-          input >> a.x_;
-          input >> a.y_;
-          input >> b.x_;
-          input >> b.y_;
-          input >> c.x_;
-          input >> c.y_;
+          input >> a.x;
+          input >> a.y;
+          input >> b.x;
+          input >> b.y;
+          input >> c.x;
+          input >> c.y;
           myShapes[shapesCount] =  new Diamond{a, b, c};
           shapesCount++;
         } catch (const std::invalid_argument& e) {
@@ -73,14 +73,14 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
       } else if (Mystr == "CONCAVE") {
         try {
           point_t a, b, c, d;
-          input >> a.x_;
-          input >> a.y_;
-          input >> b.x_;
-          input >> b.y_;
-          input >> c.x_;
-          input >> c.y_;
-          input >> d.x_;
-          input >> d.y_;
+          input >> a.x;
+          input >> a.y;
+          input >> b.x;
+          input >> b.y;
+          input >> c.x;
+          input >> c.y;
+          input >> d.x;
+          input >> d.y;
           myShapes[shapesCount] =  new Concave{a, b, c, d};
           shapesCount++;
         } catch (const std::invalid_argument& e) {
@@ -92,8 +92,8 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
           return 0;
         }
         point_t toCenter;
-        input >> toCenter.x_;
-        input >> toCenter.y_;
+        input >> toCenter.x;
+        input >> toCenter.y;
         double ratio;
         input >> ratio;
         try {

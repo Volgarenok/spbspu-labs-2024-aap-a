@@ -4,18 +4,18 @@
 
 dribas::Diamond::Diamond(point_t a, point_t b, point_t c): a_({0.0, 0.0}), b_({0.0, 0.0}), c_({0.0, 0.0})
 {
-  if ((a.x_ == b.x_ && a.y_ == c.y_) || (a.y_ == b.y_ && a.x_ == c.x_)) {
+  if ((a.x == b.x && a.y == c.y) || (a.y == b.y && a.x == c.x)) {
     a_ = a;
-    if (a_.x_ == b.x_) {
+    if (a_.x == b.x) {
       b_ = b;
       c_ = c;
     } else {
       b_ = c;
       c_ = b;
     }
-  } else if ((b.x_ == a.x_ && b.y_ == c.y_) || (b.y_ == a.y_ && b.x_ == c.x_)) {
+  } else if ((b.x == a.x && b.y == c.y) || (b.y == a.y && b.x == c.x)) {
     a_ = b;
-    if (a_.x_ == a.x_) {
+    if (a_.x == a.x) {
       b_ = a;
       c_ = c;
     } else {
@@ -23,9 +23,9 @@ dribas::Diamond::Diamond(point_t a, point_t b, point_t c): a_({0.0, 0.0}), b_({0
       c_ = a;
     }
 
-  } else if ((c.x_ == b.x_ && c.y_ == a.y_) || (c.y_ == b.y_ && c.x_ == a.x_)) {
+  } else if ((c.x == b.x && c.y == a.y) || (c.y == b.y && c.x == a.x)) {
     a_ = c;
-    if (a_.x_ == b.x_) {
+    if (a_.x == b.x) {
       b_ = b;
       c_ = a;
     } else {
@@ -38,32 +38,32 @@ dribas::Diamond::Diamond(point_t a, point_t b, point_t c): a_({0.0, 0.0}), b_({0
 }
 double dribas::Diamond::getArea() const
 {
-  return std::abs(a_.x_ - b_.x_ + a_.x_ - c_.x_) * std::abs(a_.y_ - b_.y_ + a_.y_ - c_.y_) * 2.0L ;
+  return std::abs(a_.x - b_.x + a_.x - c_.x) * std::abs(a_.y - b_.y + a_.y - c_.y) * 2.0L ;
 }
 
 dribas::rectangle_t dribas::Diamond::getFrameRect() const
 {
   rectangle_t fremRECT;
   fremRECT.pos = a_;
-  fremRECT.width = std::max(std::abs(c_.x_ - a_.x_), std::abs(b_.x_ - a_.x_));
-  fremRECT.height = std::max(std::abs(c_.y_ - a_.y_), std::abs(b_.y_ - a_.y_));
+  fremRECT.width = std::max(std::abs(c_.x - a_.x), std::abs(b_.x - a_.x));
+  fremRECT.height = std::max(std::abs(c_.y - a_.y), std::abs(b_.y - a_.y));
   return fremRECT;
 }
 
 void dribas::Diamond::move(double x, double y)
 {
-  a_.y_ += y;
-  a_.x_ += x;
-  b_.x_ += x;
-  b_.y_ += y;
-  c_.x_ += x;
-  c_.y_ += y;
+  a_.y += y;
+  a_.x += x;
+  b_.x += x;
+  b_.y += y;
+  c_.x += x;
+  c_.y += y;
 }
 
 void dribas::Diamond::move(point_t point)
 {
-  double moveX = point.x_ - a_.x_;
-  double moveY = point.y_ - a_.y_;
+  double moveX = point.x - a_.x;
+  double moveY = point.y - a_.y;
   move(moveX, moveY);
 }
 void dribas::Diamond::scale(double ratio)
@@ -71,6 +71,6 @@ void dribas::Diamond::scale(double ratio)
   if (ratio <= 0) {
     throw std::invalid_argument("under zero ratio\n");
   }
-  b_.x_ = (b_.x_ - a_.x_) * ratio;
-  c_.y_ = (c_.y_ - a_.y_) * ratio;
+  b_.x = (b_.x - a_.x) * ratio;
+  c_.y = (c_.y - a_.y) * ratio;
 }
