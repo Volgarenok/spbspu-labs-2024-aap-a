@@ -7,7 +7,7 @@
 int main()
 {
   constexpr size_t max_shapes = 1000;
-  zholobov::Shape* shapes[max_shapes];
+  zholobov::Shape* shapes[max_shapes]{};
   size_t shape_cnt = 0;
   std::string shape_name;
   bool is_scale_processed = false;
