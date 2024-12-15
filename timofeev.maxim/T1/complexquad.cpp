@@ -58,7 +58,7 @@ void timofeev::Complexquad::move(double move_x, double move_y)
 }
 void timofeev::Complexquad::scale(double factor)
 {
-  point_t pos_an = cross_point(p1_, p2_, p3_, p4_);
+  point_t pos_an = this->get_frame_rect().pos;
   p1_.x = pos_an.x - (pos_an.x - p1_.x) * factor;
   p1_.y = pos_an.y - (pos_an.y - p1_.y) * factor;
   p2_.x = pos_an.x - (pos_an.x - p2_.x) * factor;

@@ -105,6 +105,7 @@ int main()
       {
         std::cerr  << "factor must be positive\n";
         shape_delete(shapes, count);
+        return 1;
       }
       break;
     }
