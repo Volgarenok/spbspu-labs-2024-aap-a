@@ -25,13 +25,13 @@ int main()
       double x2;
       double y2;
       std::cin >> x1 >> y1 >> x2 >> y2;
-      try
-      {
-        shapes[count++] = new timofeev::Rectangle(x1, y1, x2, y2);
-      }
-      catch (const std::invalid_argument& e)
+      if (x1 >= x2 || y1 >= y2)
       {
         incorrect_values = true;
+      }
+      else
+      {
+        shapes[count++] = new timofeev::Rectangle(x1, y1, x2, y2);
       }
     }
     else if (input == "CONCAVE")
@@ -45,7 +45,6 @@ int main()
       double x4;
       double y4;
       std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
-      shapes[count++] = new timofeev::Concave({ x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 });
       if (!timofeev::correct_triangle({ x1, y1 }, { x2, y2 }, { x3, y3 }))
       {
         incorrect_values = true;
@@ -53,6 +52,10 @@ int main()
       if (!timofeev::is_point_in_triangle({ x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 }))
       {
         incorrect_values = true;
+      }
+      else
+      {
+        shapes[count++] = new timofeev::Concave({ x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 });
       }
     }
     else if (input == "COMPLEXQUAD")
@@ -66,12 +69,15 @@ int main()
       double x4;
       double y4;
       std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
-      shapes[count++] = new timofeev::Complexquad({ x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 });
       timofeev::point_t pos;
       pos = timofeev::cross_point({ x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 });
       if (!timofeev::is_point_in_quad({ x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 }, pos))
       {
         incorrect_values = true;
+      }
+      else
+      {
+        shapes[count++] = new timofeev::Complexquad({ x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 });
       }
     }
     else if (input == "TRIANGLE")
@@ -83,10 +89,13 @@ int main()
       double x3;
       double y3;
       std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-      shapes[count++] = new timofeev::Triangle({ x1, y1 }, { x2, y2 }, { x3, y3 });
       if (!timofeev::correct_triangle({ x1, y1 }, { x2, y2 }, { x3, y3 }))
       {
         incorrect_values = true;
+      }
+      else
+      {
+        shapes[count++] = new timofeev::Triangle({ x1, y1 }, { x2, y2 }, { x3, y3 });
       }
     }
     else if (input == "SCALE")
