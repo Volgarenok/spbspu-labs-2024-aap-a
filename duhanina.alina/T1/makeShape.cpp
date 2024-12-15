@@ -16,24 +16,32 @@ duhanina::Rectangle* duhanina::makeRectangle(std::istream& in)
   return rect;
 }
 
-duhanina::Circle* duhanina::makeCircle(std::istream& in)
+duhanina::Circle* duhanina::makeCircle(std::istream& in, bool& incorrectRadius)
 {
   double x = 0;
   double y = 0;
   in >> x >> y;
   double radius = 0;
   in >> radius;
+  if (radius <= 0)
+  {
+    incorrectRadius = true;
+  }
   Circle* circ = new Circle({ x, y }, radius);
   return circ;
 }
 
-duhanina::Ellipse* duhanina::makeEllipse(std::istream& in)
+duhanina::Ellipse* duhanina::makeEllipse(std::istream& in, bool& incorrectRadius)
 {
   double x = 0;
   double y = 0;
   in >> x >> y;
   double vertRadius = 0;
   double horizRadius = 0;
+  if (vertRadius <= 0 || horizRadius <= 0)
+  {
+    incorrectRadius = true;
+  }
   in >> vertRadius >> horizRadius;
   Ellipse* ell = new Ellipse({ x, y }, horizRadius, vertRadius);
   return ell;
