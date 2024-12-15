@@ -2,13 +2,7 @@
 #include <stdexcept>
 
 duhanina::Circle::Circle(point_t pos, double radius)
-  : pos_(pos), radius_(radius)
-{
-  if (radius_ <= 0)
-  {
-    throw std::invalid_argument("Incorrect radius");
-  }
-}
+  : pos_(pos), radius_(radius) {}
 
 double duhanina::Circle::getArea() const
 {
