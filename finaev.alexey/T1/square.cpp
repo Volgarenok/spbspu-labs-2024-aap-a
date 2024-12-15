@@ -5,21 +5,17 @@ finaev::Square::Square(point_t l, double s) :
   leftDown(l), side(s)
 {
 }
-double finaev::Square::getArea()
+double finaev::Square::getArea() const
 {
   return side*side;
 }
-finaev::point_t finaev::Square::getCentre()
+finaev::rectangle_t finaev::Square::getFrameRect() const
 {
-  point_t a;
-  a.x = (side / 2) + leftDown.x;
-  a.y = (side / 2) + leftDown.y;
-  return a;
-}
-finaev::rectangle_t finaev::Square::getFrameRect()
-{
+  point_t b;
+  b.x = (side / 2) + leftDown.x;
+  b.y = (side / 2) + leftDown.y;
   rectangle_t a;
-  a.pos = getCentre();
+  a.pos = b;
   a.wedth = side;
   a.height = side;
   return a;

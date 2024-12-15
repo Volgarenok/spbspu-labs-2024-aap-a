@@ -12,9 +12,8 @@ namespace finaev
     double side;
   public:
     Square(point_t l, double s);
-    double getArea() override;
-    point_t getCentre();
-    rectangle_t getFrameRect() override;
+    double getArea() const override;
+    rectangle_t getFrameRect() const override;
     void move(point_t a) override;
     void move(double sx, double sy) override;
     void scale(double k) override;
