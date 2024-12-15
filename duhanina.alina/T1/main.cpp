@@ -45,6 +45,12 @@ int main()
         duhanina::processScaling(shapes, shapeCount, point, scalingFactor);
         break;
       }
+      else if (std::cin.eof())
+      {
+        std::cerr << "No scale\n";
+        duhanina::destroy(shapes, shapeCount);
+        return 1;
+      }
       else
       {
         continue;
