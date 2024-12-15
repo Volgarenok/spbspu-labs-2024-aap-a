@@ -1,6 +1,7 @@
 #include "printResult.hpp"
 #include <iostream>
 #include <iomanip>
+#include <cstddef>
 
 void duhanina::printFiguresInfo(Shape shapes, size_t shapeCount)
 {
