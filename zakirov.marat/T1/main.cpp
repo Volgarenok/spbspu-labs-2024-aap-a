@@ -9,6 +9,7 @@
 
 int main()
 {
+  bool shape_flag = false;
   zakirov::Shape * shapes[10000];
   double * scale_data = nullptr;
   size_t location = 0;
@@ -62,4 +63,9 @@ int main()
 
   std::cout << total_area;
   zakirov::output_frame(std::cout, shapes, location);
+
+  if (shape_flag)
+  {
+    std::cerr << "Warning! One or more figures are specified incorrectly." << '\n';
+  }
 }
