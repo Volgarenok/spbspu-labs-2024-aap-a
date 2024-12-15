@@ -24,7 +24,7 @@ void duhanina::printFiguresInfo(Shape** shapes, size_t shapeCount)
       std::cout << frame.pos.x - frame.width / 2.0 << " ";
       std::cout << frame.pos.y - frame.height / 2.0 << " ";
       std::cout << frame.pos.x + frame.width / 2.0 << " ";
-      std::cout << frame.pos.y + frame.height / 2.0;
+      std::cout << frame.pos.y + frame.height / 2.0 << " ";
     }
   }
   std::cout << "\n";
