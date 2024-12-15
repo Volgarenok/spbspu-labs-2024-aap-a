@@ -3,6 +3,7 @@
 #include "triangle.hpp"
 #include "diamond.hpp"
 #include "concave.hpp"
+#include "outputRes.hpp"
 
 double dribas::getAllArea(Shape** myShapes, size_t shapeCount)
 {
@@ -16,15 +17,15 @@ double dribas::getAllArea(Shape** myShapes, size_t shapeCount)
 void dribas::scaling(Shape** myShapes, size_t shapeCount, point_t center, double ratio)
 {
   for (size_t i = 0; i <shapeCount; i++) {
-    myShapes[i]->move(center);
     myShapes[i]->scale(ratio);
+    myShapes[i]->move(center.x, center.y);
   }
 }
 
-size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** myShapes)
+int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream& output, Shape** myShapes)
 {
   std::string Mystr;
-  size_t shapesCount = 0;
+  int shapesCount = 0;
   try {
     while (input >> Mystr) {
       if (Mystr == "RECTANGLE") {
@@ -35,7 +36,6 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
           input >> up.x;
           input >> up.y;
           myShapes[shapesCount] =  new Rectangle{down, up};
-          std::cout << myShapes[shapesCount]->getArea();
           shapesCount++;
         } catch (const std::invalid_argument& e) {
           error << e.what() << '\n';
@@ -88,29 +88,33 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
       } else if (Mystr == "SCALE") {
         if (shapesCount == 0) {
           error << "No shapes for scale\n";
-          return 0;
+          return -1;
         }
         point_t toCenter;
+        double ratio;
         input >> toCenter.x;
         input >> toCenter.y;
-        double ratio;
         input >> ratio;
         try {
+          outputRes(output, myShapes, shapesCount);
+          output << '\n';
           scaling(myShapes, shapesCount, toCenter, ratio);
+          outputRes(output, myShapes, shapesCount);
         } catch (const std::invalid_argument& e) {
           error << e.what() << '\n';
-
+          clear(myShapes, shapesCount);
+          return -1;
         }
       }
     }
   } catch (const std::bad_alloc& e) {
     error << e.what() << '\n';
     clear(myShapes, shapesCount);
-    return 0;
+    return -1;
   } catch (const std::logic_error& e) {
     error << e.what() << '\n';
     clear(myShapes, shapesCount);
-    return 0;
+    return -1;
   }
   return shapesCount;
 }

@@ -39,9 +39,9 @@ dribas::rectangle_t dribas::Rectangle::getFrameRect() const
 void dribas::Rectangle::move(double x, double y)
 {
   leftDown_.x += x;
-  leftDown_.y += x;
-  rightUp_.x += y;
   leftDown_.y += y;
+  rightUp_.x += x;
+  rightUp_.y += y;
 }
 
 void dribas::Rectangle::move(point_t centerP)
@@ -59,8 +59,8 @@ void dribas::Rectangle::scale(double ratio)
   }
   rectangle_t fremRect = getFrameRect();
   point_t pos = fremRect.pos;
-  rightUp_.x = pos.x + fremRect.width / 2.0L * ratio;
-  rightUp_.y = pos.y + fremRect.height / 2.0L * ratio;
-  leftDown_.x = pos.x - fremRect.width / 2.0L * ratio;
-  leftDown_.y = pos.y - fremRect.height / 2.0L * ratio;
+  rightUp_.x = pos.x + (rightUp_.x - pos.x) * ratio;
+  rightUp_.y = pos.y + (rightUp_.y - pos.y) * ratio;
+  leftDown_.x = pos.x + (leftDown_.x - pos.x) * ratio;
+  leftDown_.y = pos.y + (leftDown_.y - pos.y) * ratio;
 }

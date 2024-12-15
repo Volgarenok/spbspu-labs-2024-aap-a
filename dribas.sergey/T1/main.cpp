@@ -12,8 +12,11 @@ int main()
 {
   constexpr size_t shapesSize = 10000;
   dribas::Shape * myShapes[shapesSize] = {};
-  size_t shapeCount = 0;
-  shapeCount = dribas::getShapeInfo(std::cin, std::cerr, myShapes);
+  int shapeCount = 0;
+  shapeCount = dribas::getShapeInfo(std::cin, std::cerr, std::cout, myShapes);
+  if (shapeCount == -1) {
+    return 1;
+  }
   dribas::clear(myShapes, shapeCount);
   return 0;
 }
