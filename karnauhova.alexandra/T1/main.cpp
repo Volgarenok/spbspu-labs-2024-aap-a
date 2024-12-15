@@ -34,6 +34,10 @@ int main()
             names[count_shape] = name;
             count_shape++;
           }
+          else
+          {
+            count_error++;
+          }
         }
       }
       else if (name == "TRIANGLE")
@@ -53,6 +57,14 @@ int main()
               names[count_shape] = name;
               count_shape++;
             }
+            else
+            {
+              count_error++;
+            }
+          }
+          else
+          {
+            count_error++;
           }
         }
       }
@@ -90,6 +102,14 @@ int main()
               count_shape++;
               count_polygon += count;
             }
+            else
+            {
+              count_error++;
+            }
+          }
+          else
+          {
+            count_error++;
           }
         }
       }
