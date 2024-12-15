@@ -66,6 +66,24 @@ int main()
           return 1;
         }
       }
+      else if (str == "CONCAVE")
+      {
+        try
+        {
+          shapes[size] = finaev::makeConcave(std::cin);
+          if (shapes[size] == nullptr)
+          {
+            isCorrect = true;
+          }
+          size++;
+        }
+        catch(std::bad_alloc & e)
+        {
+          finaev::deleteShapes(shapes, size);
+          std::cerr << "Error alloc" << "\n";
+          return 1;
+        }
+      }
       else if (std::cin.eof())
       {
         deleteShapes(shapes, size);

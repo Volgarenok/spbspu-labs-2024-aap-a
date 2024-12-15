@@ -1,5 +1,10 @@
 #include "makeObjects.hpp"
+#include <cmath>
 
+double finaev::len(point_t a, point_t b)
+{
+  return std::sqrt(pow((a.x - b.x), 2) + pow((a.y - b.y), 2));
+}
 finaev::Rectangle* finaev::makeRectangle(std::istream& in)
 {
   double x0 = 0, y0 = 0, x1 = 0, y1 = 0;
@@ -29,4 +34,28 @@ finaev::Square* finaev::makeSquare(std::istream& in)
   l.y = y0;
   Square* square = new Square(l, side);
   return square;
+}
+finaev::Concave* finaev::makeConcave(std::istream& in)
+{
+  double x1, y1, x2, y2, x3, y3, x4, y4;
+  in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
+  point_t first, second, third, internal;
+  first = {x1, y1};
+  second = {x2, y2};
+  third = {x3, y3};
+  internal = {x4, y4};
+  if (len(first, second) + len(first, third) <= len(second, third))
+  {
+    return nullptr;
+  }
+  else if (len(second, third) + len(first, third) <= len(first, second))
+  {
+    return nullptr;
+  }
+  else if (len(first, second) + len(second, third) <= len(first, third))
+  {
+    return nullptr;
+  }
+  Concave* concave = new Concave(first, second, third, internal);
+  return concave;
 }
