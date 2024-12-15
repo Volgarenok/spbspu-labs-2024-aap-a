@@ -46,7 +46,11 @@ int main()
       double y4;
       std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
       shapes[count++] = new timofeev::Concave({ x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 });
-      if (!timofeev::correct_triangle({ x1, y1 }, { x2, y2 }, { x3, y3 }) || !timofeev::is_point_in_triangle({ x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 }))
+      if (!timofeev::correct_triangle({ x1, y1 }, { x2, y2 }, { x3, y3 }))
+      {
+        incorrect_values = true;
+      }
+      if (!timofeev::is_point_in_triangle({ x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 })))
       {
         incorrect_values = true;
       }
