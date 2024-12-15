@@ -26,6 +26,7 @@ void processShapes()
 {
   krylov::Shape* shapes[10000] = {nullptr};
   size_t shapeCount = 0;
+  bool scaleCommandProcessed = false;
   bool invalidDescriptions = false;
   std::string line = "";
   while (std::getline(std::cin, line))
@@ -90,6 +91,7 @@ void processShapes()
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x + frame.width / 2 << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.y + frame.height / 2 << '\n';
         }
+        scaleCommandProcessed = true;
         break;
       }
       else
@@ -105,6 +107,19 @@ void processShapes()
   if (invalidDescriptions)
   {
     std::cerr << "Warning: Some shapes had invalid descriptions\n";
+  }
+  if (!scaleCommandProcessed)
+  {
+    if (std::cin.eof())
+    {
+      throw std::invalid_argument("Missing SCALE before EOF\n");
+      break;
+    }
+    for (size_t i = 0; i < shapeCount; ++i)
+    {
+      delete shapes[i];
+    }
+    throw std::invalid_argument("Missing or invalid SCALE command");
   }
   for (size_t i = 0; i < shapeCount; ++i)
   {
