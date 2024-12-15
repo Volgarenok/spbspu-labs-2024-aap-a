@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 
-tkach::Ring::Ring(point_t center, double outer_radius, double inner_radius):
+tkach::Ring::Ring(const point_t& center, const double outer_radius, const double inner_radius):
   center_(center),
   outer_radius_(outer_radius),
   inner_radius_(inner_radius)
@@ -29,16 +29,16 @@ tkach::rectangle_t tkach::Ring::getFrameRect() const
   frame_rect.pos.y = center_.y;
   return frame_rect;
 }
-void tkach::Ring::move(double add_to_x, double add_to_y)
+void tkach::Ring::move(const double add_to_x, const double add_to_y)
 {
   center_.x += add_to_x;
   center_.y += add_to_y;
 }
-void tkach::Ring::move(point_t point_to_move)
+void tkach::Ring::move(const point_t& point_to_move)
 {
   center_ = point_to_move;
 }
-void tkach::Ring::scale(double multiplier)
+void tkach::Ring::scale(const double multiplier)
 {
   outer_radius_ *= multiplier;
   inner_radius_ *= multiplier;

@@ -8,11 +8,11 @@ namespace tkach
   class Rectangle: public Shape
   {
   public:
-    Rectangle(point_t left_bot_point, point_t right_top_point);
+    Rectangle(const point_t& left_bot_point, const point_t& right_top_point);
     double getArea() const override;
-    rectangle_t getFrameRect() const;
+    rectangle_t getFrameRect() const override;
     void move(double add_to_x, double add_to_y) override;
-    void move(point_t point_to_move) override;
+    void move(const point_t& point_to_move) override;
     void scale(double multiplier) override;
   private:
     point_t left_bot_point_;
