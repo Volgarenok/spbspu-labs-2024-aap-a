@@ -118,6 +118,6 @@ int main()
     }
     std::cout << names[i] << "\n";
   }
-  karnauhova::output_all_shape(std::cout, points, polygon, names, i, count_shape);
+  karnauhova::output(std::cout, points, polygon, names, i, count_shape);
   delete[] points;
 }

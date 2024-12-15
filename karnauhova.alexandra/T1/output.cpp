@@ -4,7 +4,7 @@
 #include "rectangle.hpp"
 #include "triangle.hpp"
 #include "polygon.hpp"
-void karnauhova::output_all_shape(std::ostream & out, double* all_points, double* polygon, std::string* names, size_t c_points, size_t c_shape)
+void karnauhova::output(std::ostream & out, double* all_points, double* polygon, std::string* names, size_t c_points, size_t c_shape)
 {
   size_t k = 0, m = 0, c_polygon = 0;
   point_t centr_scale;
@@ -111,9 +111,4 @@ void karnauhova::output_all_shape(std::ostream & out, double* all_points, double
     out << " " << out2[i];
   }
   out << "\n";
-}
-Rectangle getrectangle(point_t x4, point_t x2)
-{
-  Rectangle t(x4,x2);
-  return t;
 }
