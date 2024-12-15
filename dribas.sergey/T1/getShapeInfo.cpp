@@ -24,7 +24,7 @@ void dribas::scaling(Shape** myShapes, size_t shapeCount, point_t center, double
 size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** myShapes)
 {
   std::string Mystr;
-  size_t shapesCount = 1;
+  size_t shapesCount = 0;
   try {
     while (input >> Mystr) {
       if (Mystr == "RECTANGLE") {
@@ -34,8 +34,8 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
           input >> down.y;
           input >> up.x;
           input >> up.y;
-          myShapes[shapesCount - 1] =  new Rectangle{down, up};
-          std::cout << myShapes[shapesCount - 1]->getArea();
+          myShapes[shapesCount] =  new Rectangle{down, up};
+          std::cout << myShapes[shapesCount]->getArea();
           shapesCount++;
         } catch (const std::invalid_argument& e) {
           error << e.what() << '\n';
@@ -49,8 +49,8 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
           input >> b.y;
           input >> c.x;
           input >> c.y;
-          myShapes[shapesCount - 1] =  new Triangle{a, b, c};
-          std::cout << myShapes[shapesCount - 1]->getFrameRect().width;
+          myShapes[shapesCount] =  new Triangle{a, b, c};
+          std::cout << myShapes[shapesCount]->getFrameRect().width;
           shapesCount++;
         } catch (const std::invalid_argument& e) {
           error << e.what() << '\n';
@@ -64,7 +64,7 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
           input >> b.y;
           input >> c.x;
           input >> c.y;
-          myShapes[shapesCount - 1] =  new Diamond{a, b, c};
+          myShapes[shapesCount] =  new Diamond{a, b, c};
           shapesCount++;
         } catch (const std::invalid_argument& e) {
           error << e.what() << '\n';
@@ -80,13 +80,13 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
           input >> c.y;
           input >> d.x;
           input >> d.y;
-          myShapes[shapesCount - 1] =  new Concave{a, b, c, d};
+          myShapes[shapesCount] =  new Concave{a, b, c, d};
           shapesCount++;
         } catch (const std::invalid_argument& e) {
           error << e.what() << '\n';
         }
       } else if (Mystr == "SCALE") {
-        if (shapesCount == 1) {
+        if (shapesCount == 0) {
           error << "No shapes for scale\n";
           return 0;
         }
@@ -96,7 +96,7 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
         double ratio;
         input >> ratio;
         try {
-          scaling(myShapes, shapesCount - 1, toCenter, ratio);
+          scaling(myShapes, shapesCount, toCenter, ratio);
         } catch (const std::invalid_argument& e) {
           error << e.what() << '\n';
 
