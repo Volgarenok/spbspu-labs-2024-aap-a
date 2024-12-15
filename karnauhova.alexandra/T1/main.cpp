@@ -1,4 +1,5 @@
 #include "input.hpp"
+#include "output.hpp"
 #include "shape.hpp"
 #include "count_point.hpp"
 #include <string>
@@ -7,6 +8,7 @@
 int main()
 {
   std::string names[5000] = {};
+  double polygon[10000] = {};
   double* points = nullptr;
   size_t i = 0;
   size_t count_shape = 0;
@@ -29,6 +31,7 @@ int main()
       {
         if (!karnauhova::input_rectangle(std::cin, points, i))
         {
+          std::cin.clear();
           std::cerr << "LOL\n";
           count_error++;
         }
@@ -55,7 +58,7 @@ int main()
       }
       else if (name == "SCALE")
       {
-        if (!karnauhova::input_triangle(std::cin, points, i))
+        if (!karnauhova::input_scale(std::cin, points, i))
         {
           std::cerr << "LOL\n";
           count_error++;
@@ -75,14 +78,16 @@ int main()
       }
     }
   }
-  if (points[count_shape-1] != "SCALE")
+  if (names[count_shape-1] != "SCALE")
   {
     std::cerr << "Error: missing scale\n";
+    delete[] points;
     return 1;
   }
   if (points[i] < 0)
   {
     std::cerr << "Error: missing scale\n";
+    delete[] points;
     return 1;
   }
   if (count_error > 0)
@@ -97,4 +102,5 @@ int main()
     }
     std::cout << names[i] << "\n";
   }
+  karnauhova::output_all_shape(std::cout, points, polygon, names, i, count_shape);
 }

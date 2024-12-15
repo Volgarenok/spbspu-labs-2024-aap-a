@@ -17,7 +17,6 @@ bool karnauhova::input_rectangle(std::istream & in, double* x_y, size_t j)
   {
     if (!(in >> x))
     {
-      in.clear();
       karnauhova::eat_trash(in);
       for (size_t n = 0; n < i; n++)
       {

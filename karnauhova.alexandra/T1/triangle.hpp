@@ -5,6 +5,7 @@
 class Triangle
 {
 public:
+  Triangle() : x1_{}, x2_{}, x3_{} {}
   Triangle(point_t x1, point_t x2, point_t x3): x1_(x1), x2_(x2), x3_(x3)
   {}
   void move(double x, double y);

@@ -5,6 +5,7 @@
 class Rectangle: public Shape
 {
 public:
+  Rectangle(): x2_{}, x4_{} {}
   Rectangle(point_t x4, point_t x2): x2_(x2), x4_(x4)
   {}
   void move(double x, double y);
