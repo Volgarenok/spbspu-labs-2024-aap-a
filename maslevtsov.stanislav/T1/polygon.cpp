@@ -5,8 +5,15 @@ maslevtsov::Polygon::~Polygon()
   delete[] vertices_;
 }
 
-maslevtsov::Polygon::Polygon(std::size_t nVertices, point_t vertices)
-{}
+maslevtsov::Polygon::Polygon(std::size_t nVertices, point_t* vertices):
+  nVertices_(nVertices),
+  vertices_(vertices)
+{
+  if (nVertices < 3)
+  {
+    throw std::logic_error("incorrect coordinates");
+  }
+}
 
 double maslevtsov::Polygon::getArea() const noexcept
 {}
