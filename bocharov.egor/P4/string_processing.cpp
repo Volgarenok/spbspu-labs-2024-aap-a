@@ -1,4 +1,4 @@
-#include "processing.h"
+#include "string_processing.h"
 #include <cctype>
 #include <cstddef>
 int bocharov::symbols_comparison(const char * string1, const char * string2)
