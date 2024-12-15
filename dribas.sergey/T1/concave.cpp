@@ -58,10 +58,10 @@ double dribas::Concave::getArea() const
 }
 dribas::rectangle_t dribas::Concave::getFrameRect() const
 {
-  double maxX = std::max(a_.x, std::max(b_.x, c_.x));
-  double maxY = std::max(a_.y, std::max(b_.y, c_.y));
-  double minY = std::min(a_.y, std::min(b_.y, c_.y));
-  double minX = std::min(a_.x, std::min(b_.x, c_.x));
+  double maxX = std::max(a_.x, std::max(b_.x, std::max(c_.x, d_.x)));
+  double maxY = std::max(a_.y, std::max(b_.y, std::max(c_.y, d_.y)));
+  double minY = std::min(a_.y, std::min(b_.y, std::min(c_.y, d_.y)));
+  double minX = std::min(a_.x, std::min(b_.x, std::min(c_.x, d_.x)));
   rectangle_t result;
   result.height = maxY - minY;
   result.width = maxX - minX;
