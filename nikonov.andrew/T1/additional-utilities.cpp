@@ -51,7 +51,16 @@ void nikonov::fillShapeCollection(Shape* collection[], size_t& cnt, size_t& nonc
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       continue;
     }
-    nikonov::Shape* newElem = nikonov::make_shape(name, nums);
+    nikonov::Shape* newElem = nullptr;
+    try
+    {
+      newElem = nikonov::make_shape(name, nums);
+    }
+    catch(const std::bad_alloc& e)
+    {
+      std::cerr << e.what() << '\n';
+      destoy(collection, cnt);
+    }
     if (newElem != nullptr)
     {
       collection[cnt] = newElem;

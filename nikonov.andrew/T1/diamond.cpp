@@ -1,7 +1,7 @@
 #include "diamond.hpp"
 #include <iostream>
 #include "base-types.hpp"
-nikonov::Diamond::Diamond(point_t topP, point_t rightP, point_t midP):
+nikonov::Diamond::Diamond(point_t topP, point_t midP, point_t rightP):
   topP_(topP),
   rightP_(rightP),
   midP_(midP)
