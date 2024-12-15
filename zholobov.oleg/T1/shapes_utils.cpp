@@ -40,7 +40,8 @@ zholobov::Parallelogram* zholobov::create_parallelogram(std::istream& in)
   double x3 = 0.0;
   double y3 = 0.0;
   in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-  if (!in) {
+  bool correct_parallelogram = (y1 == y2 && y1 != y3) || (y2 == y3 && y1 != y2);
+  if (!in || !correct_parallelogram) {
     throw std::invalid_argument("Error in PARALLELOGRAM parameters");
   }
   return new zholobov::Parallelogram(
@@ -54,6 +55,9 @@ void zholobov::process_scale(std::istream& in, Shape** shapes, size_t shape_cnt)
   double x = 0.0;
   double y = 0.0;
   double k = 0.0;
+  if (shape_cnt == 0) {
+    throw std::runtime_error("There are no shapes to scale");
+  }
   in >> x >> y >> k;
   if (!in || k <= 0) {
     throw std::runtime_error("Error in SCALE paramaters");
