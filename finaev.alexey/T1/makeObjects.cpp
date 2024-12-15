@@ -57,7 +57,19 @@ finaev::Concave* finaev::makeConcave(std::istream& in)
   {
     return nullptr;
   }
-  if (len(first, second) + len(first, third) <= len(second, third))
+  else if (((internal.x == first.x) && (internal.x == second.x)) || ((internal.x == third.x) && (internal.x == second.x)))
+  {
+    return nullptr;
+  }
+  else if (((internal.x == first.x) && (internal.x == third.x)) || ((internal.y == third.y) && (internal.y == second.y)))
+  {
+    return nullptr;
+  }
+  else if (((internal.y == first.y) && (internal.x == third.x)) || ((internal.y == first.y) && (internal.y == second.y)))
+  {
+    return nullptr;
+  }
+  else if (len(first, second) + len(first, third) <= len(second, third))
   {
     return nullptr;
   }
