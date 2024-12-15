@@ -26,7 +26,7 @@ namespace maslovskiy
     double area3 = calculateTriangleArea(point, vertexC, vertexA);
     return totalArea == (area1 + area2 + area3);
   }
-  bool isPointInQuad(point_t vertexA, point_t vertexB, point_t vertexC, point_t vertexD, point_t pos)
+  bool isPointInQuad(point_t vertexA, point_t vertexB, point_t vertexC, point_t vertexD)
   {
     int sideA = (vertexA.x - pos.x) * (vertexD.y - vertexA.y) - (vertexD.x - vertexA.x) * (vertexA.y - pos.y);
     int sideB = (vertexD.x - pos.x) * (vertexB.y - vertexD.y) - (vertexB.x - vertexD.x) * (vertexD.y - pos.y);
