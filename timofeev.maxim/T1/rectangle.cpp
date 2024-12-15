@@ -10,13 +10,13 @@ timofeev::Rectangle::Rectangle(double ldx, double ldy, double rux, double ruy)
 }
 
 double timofeev::Rectangle::get_area() const {
-  return (ld_.x - ru_.x) * (ld_.y - ru_.y);
+  return (ru_.x - ld.x) * (ru_.y - ld_.y);
 }
 
 timofeev::rectangle_t timofeev::Rectangle::get_frame_rect() const {
   timofeev::rectangle_t frame_rect;
-  frame_rect.height = (ld_.y - ru_.y);
-  frame_rect.width = (ld_.x - ru_.x);
+  frame_rect.height = (ru_.y - ld_.y);
+  frame_rect.width = (ru_.x - ld_.x);
   frame_rect.pos.x = ld_.x + (frame_rect.width / 2);
   frame_rect.pos.y = ld_.y + (frame_rect.height / 2);
   return frame_rect;
