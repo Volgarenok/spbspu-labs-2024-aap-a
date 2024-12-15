@@ -14,7 +14,7 @@ double  nikonov::Diamond::getArea() const
 nikonov::rectangle_t nikonov::Diamond::getFrameRect() const
 {
   point_t rtp(rightP_.x, topP_.y);
-  point_t lbp(midP_.x - rightP_.x, midP_.y - topP_.y);
+  point_t lbp(2 * midP_.x - rightP_.x, 2 * midP_.y - topP_.y);
   return rectangle_t(lbp, rtp);
 }
 void nikonov::Diamond::move(point_t newPos)

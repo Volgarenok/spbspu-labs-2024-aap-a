@@ -60,7 +60,6 @@ nikonov::Diamond* nikonov::make_diamond(double  nums[])
   }
   catch (const std::exception&)
   {
-    std::cout << "\nmid not found\n";
     return nullptr;
   }
   if (!nikonov::isEqualPoint(p1, topP) && !nikonov::isEqualPoint(p1, midP))
@@ -78,6 +77,10 @@ nikonov::Diamond* nikonov::make_diamond(double  nums[])
   if (edgeP.x < midP.x)
   {
     edgeP.x = 2 * midP.x - edgeP.x;
+  }
+  if (!(topP.x == midP.x && edgeP.y == midP.y))
+  {
+    return nullptr;
   }
   Diamond* result = new Diamond(topP, midP, edgeP);
   return result;
@@ -120,15 +123,15 @@ namespace nikonov
   }
   point_t findMid(point_t p1, point_t p2, point_t p3, point_t topP)
   {
-    if (p1.y < topP.y && p1.x < topP.x)
+    if (p1.y < topP.y && p1.x == topP.x)
     {
       return p1;
     }
-    else if (p2.y < topP.y && p2.x < topP.x)
+    else if (p2.y < topP.y && p2.x == topP.x)
     {
       return p2;
     }
-    else if (p3.y < topP.y && p3.x < topP.x)
+    else if (p3.y < topP.y && p3.x == topP.x)
     {
       return p3;
     }
