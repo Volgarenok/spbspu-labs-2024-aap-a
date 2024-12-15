@@ -1,23 +1,31 @@
 #include "inputShape.hpp"
 #include <cstring>
+#include "rectangle.hpp"
+#include "regular.hpp"
+#include "parallelogram.hpp"
 #include "shapeManipulator.hpp"
+
+maslov::Rectangle * makeRectangle(std::istream & in);
+maslov::Regular * makeRegular(std::istream & in);
+maslov::Parallelogram * makeParallelogram(std::istream & in);
 
 size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
 {
   size_t count = 0;
   bool incorrectedFlag = false;
+  bool scaleFlag = true;
   std::string name;
-  while (in >> name)
+  while (in >> name && scaleFlag)
   {
     if (name == "SCALE")
     {
-      break;
+      scaleFlag = false;
     }
     else if (name == "RECTANGLE")
     {
       try
       {
-        shapes[count] = maslov::makeRectangle(in);
+        shapes[count] = makeRectangle(in);
         count++;
       }
       catch(const std::invalid_argument & e)
@@ -34,7 +42,7 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
     {
       try
       {
-        shapes[count] = maslov::makeRegular(in);
+        shapes[count] = makeRegular(in);
         count++;  
       }
       catch(const std::invalid_argument & e)
@@ -51,7 +59,7 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
     {
       try
       {
-        shapes[count] = maslov::makeParallelogram(in);
+        shapes[count] = makeParallelogram(in);
         count++;  
       }
       catch(const std::invalid_argument & e)
@@ -83,7 +91,7 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
   return count;
 }
 
-maslov::Rectangle * maslov::makeRectangle(std::istream & in)
+maslov::Rectangle * makeRectangle(std::istream & in)
 {
   double x1 = 0, x2 = 0, y1 = 0, y2 = 0;
   in >> x1 >> y1 >> x2 >> y2;
@@ -91,10 +99,10 @@ maslov::Rectangle * maslov::makeRectangle(std::istream & in)
   {
     throw std::invalid_argument("Rectangle has incorrect parameters");
   }
-  Rectangle * rectangle = nullptr;
+  maslov::Rectangle * rectangle = nullptr;
   try
   {
-    rectangle = new Rectangle({x1, y1}, {x2, y2});
+    rectangle = new maslov::Rectangle({x1, y1}, {x2, y2});
   }
   catch(const std::bad_alloc & e)
   {
@@ -106,9 +114,9 @@ maslov::Regular * makeRegular(std::istream & in)
 {
   double x1 = 0, y1 = 0, x2 = 0, y2 = 0 , x3 = 0, y3 = 0;
   in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-  if ()
+  if (maslov::isRegular({x1, y1}, {x2, y2}, {x3, y3}))
   {
-    throw std::invalid_argument("");
+    throw std::invalid_argument("Regular does not exist");
   }
   maslov::Regular * regular = nullptr;
   try
@@ -127,7 +135,7 @@ maslov::Parallelogram * makeParallelogram(std::istream & in)
   in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
   if (y1 != y2 && y2 != y3)
   {
-    throw std::invalid_argument("Parallelogram is not parallel to the abscissa axis");
+    throw std::invalid_argument("Parallelogram is not parallel");
   }
   if (y2 == y3)
   {
