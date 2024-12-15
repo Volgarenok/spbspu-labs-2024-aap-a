@@ -1,3 +1,5 @@
+#ifndef SHAPE_HPP
+#define SHAPE_HPP
 #include "base-types.hpp"
 
 namespace zakirov
@@ -12,3 +14,5 @@ namespace zakirov
       virtual void scale(double k) = 0;
   };
 }
+
+#endif
