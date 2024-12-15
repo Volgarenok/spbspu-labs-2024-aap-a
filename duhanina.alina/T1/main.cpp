@@ -19,25 +19,13 @@ int main()
       }
       else if (shapeType == "CIRCLE")
       {
-        bool incorrectRadius = false;
-        shapes[shapeCount] = duhanina::makeCircle(std::cin, incorrectRadius);
+        shapes[shapeCount] = duhanina::makeCircle(std::cin);
         shapeCount++;
-        if (incorrectRadius)
-        {
-          std::cerr << "Incorrect radius\n";
-          continue;
-        }
       }
       else if (shapeType == "ELLIPSE")
       {
-        bool incorrectRadius = false;
         shapes[shapeCount] = duhanina::makeEllipse(std::cin, incorrectRadius);
         shapeCount++;
-        if (incorrectRadius)
-        {
-          std::cerr << "Incorrect radius\n";
-          continue;
-        }
       }
       else if (shapeType == "SCALE")
       {

@@ -16,7 +16,7 @@ duhanina::Rectangle* duhanina::makeRectangle(std::istream& in)
   return rect;
 }
 
-duhanina::Circle* duhanina::makeCircle(std::istream& in, bool& incorrectRadius)
+duhanina::Circle* duhanina::makeCircle(std::istream& in)
 {
   double x = 0;
   double y = 0;
@@ -25,13 +25,13 @@ duhanina::Circle* duhanina::makeCircle(std::istream& in, bool& incorrectRadius)
   in >> radius;
   if (radius <= 0)
   {
-    incorrectRadius = true;
+    throw std::invalid_argument("Error in parameters");
   }
   Circle* circ = new Circle({ x, y }, radius);
   return circ;
 }
 
-duhanina::Ellipse* duhanina::makeEllipse(std::istream& in, bool& incorrectRadius)
+duhanina::Ellipse* duhanina::makeEllipse(std::istream& in)
 {
   double x = 0;
   double y = 0;
@@ -40,7 +40,7 @@ duhanina::Ellipse* duhanina::makeEllipse(std::istream& in, bool& incorrectRadius
   double horizRadius = 0;
   if (vertRadius <= 0 || horizRadius <= 0)
   {
-    incorrectRadius = true;
+    throw std::invalid_argument("Error in parameters");
   }
   in >> vertRadius >> horizRadius;
   Ellipse* ell = new Ellipse({ x, y }, horizRadius, vertRadius);
