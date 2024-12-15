@@ -1,6 +1,5 @@
 #pragma once
 #include "shape.hpp"
-#include "base-types.hpp"
 
 class Rectangle : public Shape
 {
@@ -8,9 +7,9 @@ class Rectangle : public Shape
   point_t rt;
 public:
   Rectangle(point_t a, point_t b);
-  double getArea();
-  rectangle_t getFrameRect();
+  double getArea() const;
+  rectangle_t getFrameRect() const;
   void move(point_t pos);
   void move(double x, double y);
-  void scale(double scale);
+  void scale(point_t pos, double scale);
 };

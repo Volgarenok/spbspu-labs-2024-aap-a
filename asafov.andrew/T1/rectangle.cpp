@@ -1,4 +1,5 @@
 #include "rectangle.h"
+#include <cmath>
 
 Rectangle::Rectangle(point_t a, point_t b):
 lb(a), rt(b)
@@ -6,27 +7,43 @@ lb(a), rt(b)
   
 }
 
-double Rectangle::getArea()
+double Rectangle::getArea() const
 {
-  
+	return abs((lb.x - rt.x) * (lb.y - rt.y));
 }
 
-rectangle_t Rectangle::getFrameRect()
+rectangle_t Rectangle::getFrameRect() const
 {
-  
+	rectangle_t frect;
+	frect.height = abs(lb.y - rt.y);
+	frect.width = abs(lb.x - rt.x);
+	frect.pos.x = abs(lb.x + rt.x) / 2;
+	frect.pos.y = abs(lb.y + rt.y) / 2;
+	return frect;
 }
 
 void Rectangle::move(double x, double y)
 {
-  
+	lb.x += x;
+	rt.x += x;
+	lb.y += y;
+	rt.y += y;
 }
 
 void Rectangle::move(point_t pos)
 {
-  
+	double temp = abs(lb.x + rt.x) / 2 - pos.x;
+	lb.x += temp;
+	rt.x += temp;
+	temp = abs(lb.y + rt.y) / 2 - pos.y;
+	lb.y += temp;
+	rt.y += temp;
 }
 
-void Rectangle::scale(double scale)
+void Rectangle::scale(point_t pos, double scale)
 {
-  
+	rt.x += (rt.x - pos.x) * (scale - 1);
+	rt.y += (rt.y - pos.y) * (scale - 1);
+	lb.x += (lb.x - pos.x) * (scale - 1);
+	lb.y += (lb.y - pos.y) * (scale - 1);
 }
