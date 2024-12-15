@@ -54,12 +54,14 @@ void zholobov::process_scale(Shape** shapes, size_t shape_cnt, point_t pos, doub
 {
   zholobov::print_shapes(shapes, shape_cnt);
   for (size_t i = 0; i < shape_cnt; ++i) {
-    shapes[i]->scale(scale_factor);
-    zholobov::rectangle_t rect = shapes[i]->getFrameRect();
-    zholobov::point_t new_pos;
-    new_pos.x = (rect.pos.x - pos.x) * scale_factor + pos.x;
-    new_pos.y = (rect.pos.y - pos.y) * scale_factor + pos.y;
-    shapes[i]->move(new_pos);
+    if (shapes[i]) {
+      shapes[i]->scale(scale_factor);
+      zholobov::rectangle_t rect = shapes[i]->getFrameRect();
+      zholobov::point_t new_pos;
+      new_pos.x = (rect.pos.x - pos.x) * scale_factor + pos.x;
+      new_pos.y = (rect.pos.y - pos.y) * scale_factor + pos.y;
+      shapes[i]->move(new_pos);
+    }
   }
   zholobov::print_shapes(shapes, shape_cnt);
 }
@@ -68,14 +70,17 @@ void zholobov::print_shapes(Shape** shapes, size_t shape_cnt)
 {
   double total_area = 0.0;
   for (size_t i = 0; i < shape_cnt; ++i) {
-    total_area += shapes[i]->getArea();
+    if (shapes[i]) {
+      total_area += shapes[i]->getArea();
+    }
   }
-
   std::cout << std::fixed << std::setprecision(1) << total_area;
   for (size_t i = 0; i < shape_cnt; ++i) {
-    rectangle_t rect = shapes[i]->getFrameRect();
-    std::cout << " " << rect.pos.x - rect.width / 2.0f << " " << rect.pos.y - rect.height / 2.0f;
-    std::cout << " " << rect.pos.x + rect.width / 2.0f << " " << rect.pos.y + rect.height / 2.0f;
+    if (shapes[i]) {
+      rectangle_t rect = shapes[i]->getFrameRect();
+      std::cout << " " << rect.pos.x - rect.width / 2.0f << " " << rect.pos.y - rect.height / 2.0f;
+      std::cout << " " << rect.pos.x + rect.width / 2.0f << " " << rect.pos.y + rect.height / 2.0f;
+    }
   }
   std::cout << "\n";
 }
