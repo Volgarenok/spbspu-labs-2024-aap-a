@@ -11,7 +11,7 @@ namespace finaev
   struct rectangle_t
   {
     point_t pos;
-    double wedth;
+    double width;
     double height;
   };
 }

@@ -2,7 +2,6 @@
 #define RECTANGLE_HPP
 
 #include "shape.hpp"
-#include "base-types.hpp"
 
 namespace finaev
 {

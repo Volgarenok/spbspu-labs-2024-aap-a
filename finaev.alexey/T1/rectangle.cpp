@@ -1,5 +1,6 @@
 #include "rectangle.hpp"
 #include <stdexcept>
+#include "base-types.hpp"
 
 finaev::Rectangle::Rectangle(point_t l, point_t r) :
   leftDown(l), rightUp(r)
@@ -16,7 +17,7 @@ finaev::rectangle_t finaev::Rectangle::getFrameRect() const
   b.y = leftDown.y + (rightUp.y - leftDown.y) / 2;
   rectangle_t a;
   a.pos = b;
-  a.wedth = rightUp.x - leftDown.x;
+  a.width = rightUp.x - leftDown.x;
   a.height = rightUp.y - leftDown.y;
   return a;
 }

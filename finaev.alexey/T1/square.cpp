@@ -16,7 +16,7 @@ finaev::rectangle_t finaev::Square::getFrameRect() const
   b.y = (side / 2) + leftDown.y;
   rectangle_t a;
   a.pos = b;
-  a.wedth = side;
+  a.width = side;
   a.height = side;
   return a;
 }

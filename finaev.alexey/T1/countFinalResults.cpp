@@ -21,9 +21,9 @@ void finaev::printFrameRect(Shape** shapes, size_t size)
     if (shapes[i] != nullptr)
     {
       rectangle_t a = shapes[i]->getFrameRect();
-      double leftDownX = a.pos.x - (a.wedth / 2);
+      double leftDownX = a.pos.x - (a.width / 2);
       double leftDownY = a.pos.y - (a.height / 2);
-      double rightUpX = a.pos.x + (a.wedth / 2);
+      double rightUpX = a.pos.x + (a.width / 2);
       double rightUpY = a.pos.y + (a.height / 2);
       std::cout << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
     }
