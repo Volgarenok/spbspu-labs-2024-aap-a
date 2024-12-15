@@ -60,6 +60,12 @@ int main()
       duhanina::destroy(shapes, shapeCount);
       continue;
     }
+    catch(const std::bad_alloc& e)
+    {
+      std::cerr << "Error memory\n";
+      duhanina::destroy(shapes, shapeCount);
+      return 1;
+    }
   }
   if (!hasScale)
   {
