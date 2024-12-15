@@ -8,7 +8,7 @@ timofeev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p
 {
 }
 
-double timofeev::Complexquad::get_area() const
+double timofeev::Complexquad::getArea() const
 {
   point_t pos = timofeev::cross_point(p1_, p2_, p3_, p4_);
   double first_part = timofeev::triangle_area(p1_, p4_, pos);
@@ -16,7 +16,7 @@ double timofeev::Complexquad::get_area() const
   return first_part + second_part;
 }
 
-timofeev::rectangle_t timofeev::Complexquad::get_frame_rect() const
+timofeev::rectangle_t timofeev::Complexquad::getFrameRect() const
 {
   double left_border = std::min(std::min(std::min(p1_.x, p2_.x), p3_.x), p4_.x);
   double right_border = std::max(std::max(std::max(p1_.x, p2_.x), p3_.x), p4_.x);
@@ -32,7 +32,7 @@ timofeev::rectangle_t timofeev::Complexquad::get_frame_rect() const
 
 void timofeev::Complexquad::move(point_t new_pos)
 {
-  point_t pos_an = get_frame_rect().pos;
+  point_t pos_an = getFrameRect().pos;
   double move_x = new_pos.x - pos_an.x;
   double move_y = new_pos.y - pos_an.y;
   p1_.x += move_x;
@@ -58,7 +58,7 @@ void timofeev::Complexquad::move(double move_x, double move_y)
 }
 void timofeev::Complexquad::scale(double factor)
 {
-  point_t pos_an = this->get_frame_rect().pos;
+  point_t pos_an = this->getFrameRect().pos;
   p1_.x = pos_an.x - (pos_an.x - p1_.x) * factor;
   p1_.y = pos_an.y - (pos_an.y - p1_.y) * factor;
   p2_.x = pos_an.x - (pos_an.x - p2_.x) * factor;

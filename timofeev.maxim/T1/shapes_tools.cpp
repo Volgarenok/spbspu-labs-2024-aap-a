@@ -61,7 +61,7 @@ double timofeev::print_sum_area(Shape** shapes, size_t count)
   double summa = 0;
   for (size_t i = 0; i < count; i++)
   {
-    summa += shapes[i]->get_area();
+    summa += shapes[i]->getArea();
   }
   return summa;
 }
@@ -86,7 +86,7 @@ void timofeev::print_frame_rect(Shape** shapes, size_t count)
   for (size_t i = 0; i < count; i++)
   {
     timofeev::rectangle_t frame_rect;
-    frame_rect = shapes[i]->get_frame_rect();
+    frame_rect = shapes[i]->getFrameRect();
     std::cout << " " << frame_rect.pos.x - frame_rect.width / 2 << " " << frame_rect.pos.y - frame_rect.height / 2;
     std::cout << " " << frame_rect.pos.x + frame_rect.width / 2 << " " << frame_rect.pos.y + frame_rect.height / 2;
   }
@@ -95,9 +95,9 @@ void timofeev::izoscale(Shape** shapes, size_t count, point_t izo_pos, double fa
 {
   for (size_t i = 0; i < count; ++i)
   {
-    timofeev::point_t start = shapes[i]->get_frame_rect().pos;
+    timofeev::point_t start = shapes[i]->getFrameRect().pos;
     shapes[i]->move(izo_pos);
-    timofeev::point_t result = shapes[i]->get_frame_rect().pos;
+    timofeev::point_t result = shapes[i]->getFrameRect().pos;
     timofeev::point_t vector;
     vector.x = (result.x - start.x);
     vector.y = (result.y - start.y);

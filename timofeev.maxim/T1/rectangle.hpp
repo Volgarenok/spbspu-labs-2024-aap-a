@@ -9,8 +9,8 @@ namespace timofeev
   class Rectangle : public Shape {
   public:
     Rectangle(double ldx, double ldy, double rux, double ruy);
-    double get_area() const override;
-    rectangle_t get_frame_rect() const override;
+    double getArea() const override;
+    rectangle_t getFrameRect() const override;
     void move(point_t new_pos) override;
     void move(double move_x, double move_y) override;
     void scale(double factor) override;
