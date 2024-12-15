@@ -12,7 +12,7 @@
 
 int main()
 {
-  const size_t capacity = 10;
+  const size_t capacity = 10000;
   finaev::Shape* shapes[capacity] = {};
   std::string str = "";
   size_t size = 0;
@@ -88,6 +88,11 @@ int main()
     if (isCorrect)
     {
       std::cerr << "Input has uncorrects figures!\n";
+    }
+    if (size == 0)
+    {
+      std::cerr << "No figures!\n";
+      return 1;
     }
     std::cout << std::fixed << std::setprecision(1) << finaev::getSumArea(shapes, size);
     finaev::printFrameRect(shapes, size);
