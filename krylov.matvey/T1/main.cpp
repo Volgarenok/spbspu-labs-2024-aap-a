@@ -108,6 +108,10 @@ void processShapes()
   {
     if (std::cin.eof())
     {
+      for (size_t i = 0; i < shapeCount; ++i)
+      {
+      delete shapes[i];
+      }
       throw std::invalid_argument("Missing SCALE before EOF\n");
     }
     for (size_t i = 0; i < shapeCount; ++i)
