@@ -20,12 +20,14 @@ int main()
       if (!(std::cin >> x1 >> y1 >> x2 >> y2))
       {
         std::cerr << "Rectangle reading error" << "\n";
+        clearMemory(capacity, shapeCounter);
         return 1;
       }
 
       if (x1 >= x2 || y1 >= y2)
       {
         std::cerr << "Coordinates of left point couldnt be greater than coordinates of right point" << "\n";
+        clearMemory(capacity, shapeCounter);
         return 1;
       }
 
