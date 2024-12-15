@@ -19,78 +19,85 @@ int main()
   bool haveScaleCommand = false;
   bool isIncorrectScaleCoefficient = false;
 
-  while (std::cin >> shapeName)
+  try
   {
-    if (shapeName == "RECTANGLE")
+    while (std::cin >> shapeName)
     {
-      try
+      if (shapeName == "RECTANGLE")
       {
-        shps[count] = lebedev::createRectangle(std::cin);
-        count++;
+        try
+        {
+          shps[count] = lebedev::createRectangle(std::cin);
+          count++;
+        }
+        catch (const std::invalid_argument& e)
+        {
+          isIncorrectSize = true;
+        }
       }
-      catch (const std::invalid_argument& e)
+
+      else if (shapeName == "DIAMOND")
       {
-        isIncorrectSize = true;
+        try
+        {
+          shps[count] = lebedev::createDiamond(std::cin);
+          count++;
+        }
+        catch (const std::invalid_argument& e)
+        {
+          isIncorrectSize = true;
+        }
+      }
+
+      else if (shapeName == "SCALE")
+      {
+        haveScaleCommand = true;
+        scalePoint = lebedev::createScalePoint(std::cin);
+        std::cin >> k;
+        if (k <= 0)
+        {
+          isIncorrectScaleCoefficient = true;
+        }
+        break;
       }
     }
 
-    else if (shapeName == "DIAMOND")
+    if (std::cin.eof())
     {
-      try
+      if (!haveScaleCommand)
       {
-        shps[count] = lebedev::createDiamond(std::cin);
-        count++;
+        std::cerr << "Scale command was not entered!\n";
       }
-      catch (const std::invalid_argument& e)
+      else if (isIncorrectScaleCoefficient)
       {
-        isIncorrectSize = true;
+        std::cerr << "Incorrect scale coefficient!\n";
       }
+      lebedev::deleteShapePtr(shps, count);
+      return 1;
     }
 
-    else if (shapeName == "SCALE")
+    if (isIncorrectSize)
     {
-      haveScaleCommand = true;
-      scalePoint = lebedev::createScalePoint(std::cin);
-      std::cin >> k;
-      if (k <= 0)
-      {
-        isIncorrectScaleCoefficient = true;
-      }
-      break;
+      std::cerr << "Incorrect shape size was entered!\n";
     }
-  }
 
-  if (std::cin.eof())
-  {
-    if (!haveScaleCommand)
+    if (count == 0)
     {
-      std::cerr << "Scale command was not entered!\n";
+      std::cerr << "No supported shapes were found!\n";
+      return 1;
     }
-    else if (isIncorrectScaleCoefficient)
-    {
-      std::cerr << "Incorrect scale coefficient!\n";
-    }
+
+    std::cout << std::setprecision(1);
+    std::cout << std::fixed << lebedev::getSumArea(shps, count);
+    lebedev::printFrameCoordinates(shps, count);
+    lebedev::scaleForShapes(shps, count, scalePoint, k);
+    std::cout << lebedev::getSumArea(shps, count);
+    lebedev::printFrameCoordinates(shps, count);
     lebedev::deleteShapePtr(shps, count);
-    return 1;
   }
-
-  if (isIncorrectSize)
+  catch (const std::logic_error& e)
   {
-    std::cerr << "Incorrect shape size was entered!\n";
+    std::cerr << e.what() << '\n';
+    return 2;
   }
-
-  if (count == 0)
-  {
-    std::cerr << "No supported shapes were found!\n";
-    return 1;
-  }
-
-  std::cout << std::setprecision(1);
-  std::cout << std::fixed << lebedev::getSumArea(shps, count);
-  lebedev::printFrameCoordinates(shps, count);
-  lebedev::scaleForShapes(shps, count, scalePoint, k);
-  std::cout << lebedev::getSumArea(shps, count);
-  lebedev::printFrameCoordinates(shps, count);
-  lebedev::deleteShapePtr(shps, count);
-  return 0;
 }
