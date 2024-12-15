@@ -1,6 +1,5 @@
 #include "triangle.h"
 
-
 timofeev::Triangle::Triangle(point_t p1, point_t p2, point_t p3) :
   p1_(p1),
   p2_(p2),
@@ -52,9 +51,7 @@ void timofeev::Triangle::move(double move_x, double move_y)
 
 void timofeev::Triangle::scale(double factor)
 {
-  point_t pos_an;
-  pos_an.x = (p1_.x + p2_.x + p3_.x) / 3;
-  pos_an.y = (p1_.y + p2_.y + p3_.y) / 3;
+  point_t pos_an = this->get_frame_rect().pos;
   p1_.x = pos_an.x - (pos_an.x - p1_.x) * factor;
   p1_.y = pos_an.y - (pos_an.y - p1_.y) * factor;
   p2_.x = pos_an.x - (pos_an.x - p2_.x) * factor;
