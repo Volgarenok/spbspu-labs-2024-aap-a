@@ -2,7 +2,6 @@
 #define MAKEOBJECTS_HPP
 
 #include <fstream>
-#include "base-types.hpp"
 #include "rectangle.hpp"
 #include "square.hpp"
 
