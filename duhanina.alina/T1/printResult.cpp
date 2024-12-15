@@ -14,17 +14,17 @@ void duhanina::printFiguresInfo(Shape** shapes, size_t shapeCount)
     }
   }
 
-  std::cout << std::fixed << std::setprecision(1) << totalArea << " ";
+  std::cout << std::fixed << std::setprecision(1) << totalArea;
 
   for (size_t i = 0; i < shapeCount; ++i)
   {
     if (shapes[i])
     {
       rectangle_t frame = shapes[i]->getFrameRect();
-      std::cout << frame.pos.x - frame.width / 2.0 << " ";
+      std::cout << " " << frame.pos.x - frame.width / 2.0 << " ";
       std::cout << frame.pos.y - frame.height / 2.0 << " ";
       std::cout << frame.pos.x + frame.width / 2.0 << " ";
-      std::cout << frame.pos.y + frame.height / 2.0 << " ";
+      std::cout << frame.pos.y + frame.height / 2.0;
     }
   }
   std::cout << "\n";
