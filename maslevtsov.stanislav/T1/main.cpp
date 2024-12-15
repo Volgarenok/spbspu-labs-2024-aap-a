@@ -1,7 +1,7 @@
 #include <stdexcept>
 #include <cstring>
 #include <getline.hpp>
-#include "rectangle.hpp"
+#include "shape.hpp"
 
 namespace maslevtsov
 {

@@ -1,8 +1,6 @@
 #include "shape.hpp"
 #include <iomanip>
 #include <iostream>
-#include <string>
-#include <stdexcept>
 #include "rectangle.hpp"
 #include "regular.hpp"
 
