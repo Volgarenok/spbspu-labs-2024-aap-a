@@ -22,11 +22,11 @@ int main()
     std::cerr << "Empty input\n";
     return 1;
   }
-  char* resultShrSym = sharifullina::shrSym(firstLine, str);
+  resultShrSym = sharifullina::shrSym(firstLine, str);
   std::cout << resultShrSym << '\n';
   delete[] resultShrSym;
 
-  char* resultUniTwo = sharifullina::uniTwo(firstLine, str);
+  resultUniTwo = sharifullina::uniTwo(firstLine, str);
   std::cout << resultUniTwo << '\n';
   delete[] resultUniTwo;
 

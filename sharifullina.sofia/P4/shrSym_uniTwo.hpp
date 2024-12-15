@@ -9,5 +9,4 @@ namespace sharifullina
   char * shrSym(const char * str1, const char * str2);
   char * uniTwo(const char * str1, const char * str2);
 }
-
 #endif
