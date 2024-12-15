@@ -73,8 +73,8 @@ double * zakirov::get_data(std::istream & in)
     return nullptr;
   }
 
-  std::string shape = "";
-  in >> shape;
+  std::string shape = zakirov::get_line(in, step, ' ');
+  
   if (shape == "RECTANGLE")
   {
     data[0] = 1.0;
@@ -94,26 +94,23 @@ double * zakirov::get_data(std::istream & in)
 
   size_t location = 2;
   double counter = 0.0;
-
-  while (!in.eof())
+  char * workline = zakirov::get_line(in, step, '\n');
+  size_t start  = 0, finish = 0;
+  while (workline[start] != '\n')
   {
-    size_t new_size = real_size * sizeof(double) + step * sizeof(double);
-    double * expanded_data = static_cast< double * >(malloc(new_size));
-    real_size += step;
-    if (expanded_data == nullptr)
+    data = extra_element(data, location);
+    while (workline[finish] != ' ' && workline[finish] != '\n')
     {
-      return nullptr;
+      finish += 1;
     }
 
-    for (size_t i = 0; i < real_size; ++i)
+    data[location++] = std::stod(workline);
+    while (start != (finish - 1))
     {
-      expanded_data[i] = data[i];
+      workline[start++] = ' ';
     }
-
-    free(data);
-    data = expanded_data;
-
-    in >> data[location++];
+    
+    start = finish;
     ++counter;
   }
 
@@ -153,4 +150,24 @@ void zakirov::output_frame(std::ostream & out, Shape ** shapes, size_t quantity)
     out << ' ' << frame_top_right.x_ << ' ' << frame_top_right.y_;
   }
   out << '\n';
+}
+
+namespace
+{
+  double * extra_element(double * array, size_t size)
+  {
+    size_t new_size = size * sizeof(double) + sizeof(double);
+    double * new_array = static_cast< double * >(malloc(new_size));
+    if (new_array == nullptr)
+    {
+      return new_array;
+    }
+
+    for (size_t i = 0; i < size; ++i)
+    {
+      new_array[i] = array[i];
+    }
+
+    return new_array;
+  }
 }

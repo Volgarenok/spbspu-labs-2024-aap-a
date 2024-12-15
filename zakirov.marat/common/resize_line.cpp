@@ -30,7 +30,7 @@ void zakirov::get_segment(std::istream & in, char * line, size_t start, size_t f
   }
 }
 
-char * zakirov::get_line(std::istream & in, size_t step)
+char * zakirov::get_line(std::istream & in, size_t step, char interrupt_el = '\0')
 {
   size_t start = 1, finish = 1;
   char * line = static_cast< char * >(malloc(sizeof(char)));
@@ -38,10 +38,10 @@ char * zakirov::get_line(std::istream & in, size_t step)
   {
     return line;
   }
-  char last_symbol = '\0';
+  char last_symbol = interrupt_el;
   in >> last_symbol;
   line[0] = last_symbol;
-  while (last_symbol != '\0')
+  while (last_symbol != interrupt_el)
   {
     char * expanded_line = zakirov::expand_line(line, finish, step);
     finish += step;
@@ -56,7 +56,7 @@ char * zakirov::get_line(std::istream & in, size_t step)
     line = expanded_line;
     for (size_t i = start; i < finish; ++i)
     {
-      if (line[i] == '\0')
+      if (line[i] == interrupt_el)
       {
         last_symbol = line[i];
         break;
