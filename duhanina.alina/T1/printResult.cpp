@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <cstddef>
 
-void duhanina::printFiguresInfo(Shape shapes, size_t shapeCount)
+void duhanina::printFiguresInfo(Shape** shapes, size_t shapeCount)
 {
   double totalArea = 0;
   for (size_t i = 0; i < shapeCount; ++i)
@@ -29,7 +29,7 @@ void duhanina::printFiguresInfo(Shape shapes, size_t shapeCount)
   }
 }
 
-void duhanina::processScaling(Shape shapes, size_t shapeCount, point_t point, double scalingFactor)
+void duhanina::processScaling(Shape** shapes, size_t shapeCount, point_t point, double scalingFactor)
 {
   printFiguresInfo(shapes, shapeCount);
   for (size_t i = 0; i < shapeCount; ++i)
