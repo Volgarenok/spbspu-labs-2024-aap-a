@@ -1,12 +1,17 @@
 #include "ring.hpp"
 #include "shape.hpp"
 #include <cmath>
+#include <stdexcept>
 
 zakirov::Ring::Ring(point_t center, double in_radius, double ex_radius) :
   center_(center),
   in_radius_(in_radius),
   ex_radius_(ex_radius)
 {
+  if (in_radius >= ex_radius || in_radius <= 0 || ex_radius <= 0)
+  {
+    throw std::invalid_argument("Incorrect data");
+  }
 }
 
 double zakirov::Ring::getArea() const

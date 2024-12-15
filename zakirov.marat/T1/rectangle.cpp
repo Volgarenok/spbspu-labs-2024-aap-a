@@ -1,4 +1,5 @@
 #include "rectangle.hpp"
+#include <stdexcept>
 #include "base-types.hpp"
 
 zakirov::Rectangle::Rectangle(point_t bottom_left, point_t top_right) :
@@ -7,6 +8,7 @@ zakirov::Rectangle::Rectangle(point_t bottom_left, point_t top_right) :
 {
   if (bottom_left_.x_ >= top_right_.x_ || bottom_left_.y_ >= top_right_.y_)
   {
+    throw std::invalid_argument("Incorrect data");
   }
 }
 

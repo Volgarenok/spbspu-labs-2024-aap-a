@@ -38,25 +38,27 @@ zakirov::Ring * zakirov::make_ring(double center_x, double center_y, double in_r
 
 zakirov::Shape * zakirov::make_shape(const double * data)
 {
-  if (data[0] == 0.0)
+  try
   {
-    return nullptr;
+    if (data[0] == 1.0 && data[1] == 4.0)
+    {
+      return make_rectangle(data[2], data[3], data[4], data[5]);
+    }
+    else if (data[0] == 2.0 && data[1] == 3.0)
+    {
+      return make_circle(data[2], data[3], data[4]);
+    }
+    else if (data[0] == 3.0 && data[1] == 4.0)
+    {
+      return make_ring(data[2], data[3], data[4], data[5]);
+    }
+    else
+    {
+      return nullptr;
+    }
   }
-  else if (data[0] == 1.0 && data[1] == 4.0)
+  catch (const std::invalid_argument & e)
   {
-    return make_rectangle(data[2], data[3], data[4], data[5]);
-  }
-  else if (data[0] == 2.0 && data[1] == 3.0)
-  {
-    return make_circle(data[2], data[3], data[4]);
-  }
-  else if (data[0] == 3.0 && data[1] == 4.0)
-  {
-    return make_ring(data[2], data[3], data[4], data[5]);
-  }
-  else
-  {
-    throw std::logic_error("Unsupported figure");
     return nullptr;
   }
 }
@@ -131,4 +133,24 @@ void zakirov::scale_from_point(Shape * mutable_shape, point_t target, double k)
   bias.y_ = nailed_p2.y_ - nailed_p1.y_;
 
   mutable_shape -> move(-bias.x_ * k, -bias.x_ * k);
+}
+
+void zakirov::output_frame(std::ostream & out, Shape ** shapes, size_t quantity)
+{
+  for (size_t i = 0; i < quantity; ++i)
+  {
+    zakirov::rectangle_t frame = shapes[i] -> getFrameRect();
+
+    zakirov::point_t frame_bottom_left;
+    frame_bottom_left.x_ = frame.position_.x_ - frame.width_ / 2;
+    frame_bottom_left.y_ = frame.position_.y_ - frame.height_ / 2;
+
+    zakirov::point_t frame_top_right;
+    frame_top_right.x_ = frame.position_.x_ + frame.width_ / 2;
+    frame_top_right.y_ = frame.position_.y_ + frame.height_ / 2;
+
+    out << ' ' << frame_bottom_left.x_ << ' ' << frame_bottom_left.y_;
+    out << ' ' << frame_top_right.x_ << ' ' << frame_top_right.y_;
+  }
+  out << '\n';
 }

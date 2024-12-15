@@ -1,11 +1,16 @@
 #include "circle.hpp"
 #include <cmath>
+#include <stdexcept>
 #include "shape.hpp"
 
 zakirov::Circle::Circle(point_t center, double radius) :
   center_(center),
   radius_(radius)
 {
+  if (radius <= 0)
+  {
+    throw std::invalid_argument("Incorrect data");
+  }
 }
 
 double zakirov::Circle::getArea() const
