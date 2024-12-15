@@ -1,11 +1,12 @@
 #include "ellipse.hpp"
+#include <cmath>
 
 duhanina::Ellipse::Ellipse(point_t center, double horizRadius, double vertRadius)
   : center_(center), horizRadius_(horizRadius), vertRadius_(vertRadius) {}
 
 double duhanina::Ellipse::getArea() const
 {
-  return 3.14 * horizRadius_ * vertRadius_;
+  return M_PI * horizRadius_ * vertRadius_;
 }
 
 duhanina::rectangle_t duhanina::Ellipse::getFrameRect() const

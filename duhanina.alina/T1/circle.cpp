@@ -1,12 +1,13 @@
 #include "circle.hpp"
 #include <stdexcept>
+#include <cmath>
 
 duhanina::Circle::Circle(point_t pos, double radius)
   : pos_(pos), radius_(radius) {}
 
 double duhanina::Circle::getArea() const
 {
-  return 3.14 * radius_ * radius_;
+  return M_PI * radius_ * radius_;
 }
 
 duhanina::rectangle_t duhanina::Circle::getFrameRect() const
