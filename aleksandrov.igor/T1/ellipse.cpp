@@ -10,7 +10,7 @@ double aleksandrov::Ellipse::getArea() const
   return 3.14159265 * vr_ * hr_;
 }
 
-rectangle_t aleksandrov::Ellipse::getFrameRect() const
+aleksandrov::rectangle_t aleksandrov::Ellipse::getFrameRect() const
 {
   rectangle_t frameRect;
   frameRect.width_ = 2 * hr_;

@@ -51,7 +51,7 @@ aleksandrov::Circle* aleksandrov::makeCircle(const std::string circleParams, boo
   return new Circle(center, r);
 }
 
-Shape* aleksandrov::makeShape(const std::string shapeDescription, bool& error)
+aleksandrov::Shape* aleksandrov::makeShape(const std::string shapeDescription, bool& error)
 {
   std::string shapeName = getWord(shapeDescription, 1);
 

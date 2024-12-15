@@ -1,7 +1,7 @@
 #include "doScale.h"
 #include "getWord.h"
 
-Shape* aleksandrov::doScale(const std::string scaleDescription, Shape* shape)
+aleksandrov::Shape* aleksandrov::doScale(const std::string scaleDescription, Shape* shape)
 {
   std::string scaleParams, param;
   size_t paramsCount = 0;

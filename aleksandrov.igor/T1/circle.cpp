@@ -10,7 +10,7 @@ double aleksandrov::Circle::getArea() const
   return 3.14159265 * r_ * r_;
 }
 
-rectangle_t aleksandrov::Circle::getFrameRect() const
+aleksandrov::rectangle_t aleksandrov::Circle::getFrameRect() const
 {
   rectangle_t frameRect;
   frameRect.width_ = 2 * r_;

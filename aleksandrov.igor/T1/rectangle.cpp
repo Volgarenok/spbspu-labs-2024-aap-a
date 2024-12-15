@@ -11,7 +11,7 @@ double aleksandrov::Rectangle::getArea() const
   return std::fabs((b_.x_ - a_.x_) * (b_.y_ - a_.y_));
 }
 
-rectangle_t aleksandrov::Rectangle::getFrameRect() const
+aleksandrov::rectangle_t aleksandrov::Rectangle::getFrameRect() const
 {
   rectangle_t frameRect;
   frameRect.width_ = std::fabs(b_.x_ - a_.x_);
