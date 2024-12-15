@@ -15,11 +15,11 @@ finaev::Concave::Concave(point_t f, point_t s, point_t t, point_t i) :
 double finaev::Concave::getArea() const
 {
   double a1 = len(first, second);
-  double b1 = len(second, third);
-  double c = len(third, first);
+  double b1 = len(first, third);
+  double c = len(second, third);
   double p1 = (a1 + b1 + c) / 2;
   double s1 = std::sqrt(p1 * (p1 - a1) * (p1 - b1) * (p1 - c));
-  double a2 = len(first, internal);
+  double a2 = len(second, internal);
   double b2 = len(third, internal);
   double p2 = (a2 + b2 + c) / 2;
   double s2 = std::sqrt(p2 * (p2 - a2) * (p2 - b2) * (p2 - c));
@@ -38,21 +38,22 @@ double finaev::min(double a, double b, double c)
 finaev::rectangle_t finaev::Concave::getFrameRect() const
 {
   rectangle_t a;
-  a.pos = internal;
   a.width = max(first.x, second.x, third.x) - min(first.x, second.x, third.x);
   a.height = max(first.y, second.y, third.y) - min(first.y, second.y, third.y);
+  a.pos.x = min(first.x, second.x, third.x) + (a.width / 2);
+  a.pos.y = min(first.y, second.y, third.y) + (a.height / 2);
   return a;
 }
 void finaev::Concave::move(point_t a)
 {
-  first.x = a.x - (internal.x - first.x);
-  first.y = a.y - (internal.x - first.x);
-  second.x = a.x - (internal.x - second.x);
-  second.y = a.y - (internal.y - second.y);
-  third.x = a.x - (internal.x - third.x);
-  third.y = a.y - (internal.y - third.y);
-  internal.x = a.x;
-  internal.y = a.y;
+  first.x += a.x - internal.x;
+  first.y += a.y - internal.y;
+  second.x += a.x - internal.x;
+  second.y += a.y - internal.y;
+  third.x += a.x - internal.x;
+  third.y += a.y - internal.y;
+  internal.x += a.x - internal.x;
+  internal.y += a.y - internal.y;
 }
 void finaev::Concave::move(double sx, double sy)
 {
@@ -67,10 +68,10 @@ void finaev::Concave::move(double sx, double sy)
 }
 void finaev::Concave::scale(double k)
 {
-  first.x = (first.x - internal.x) * k + internal.x;
-  first.y = (first.y - internal.y) * k + internal.y;
-  second.x = (second.x - internal.x) * k + internal.x;
-  second.y = (second.y - internal.y) * k + internal.y;
-  third.x = (third.x - internal.x) * k + internal.x;
-  third.y = (third.y - internal.y) * k + internal.y;
+  first.x = internal.x - (internal.x - first.x) * k;
+  first.y = internal.y - (internal.y - first.y) * k;
+  second.x = internal.x - (internal.x - second.x) * k;
+  second.y = internal.y - (internal.y - second.y) * k;
+  third.x = internal.x - (internal.x - third.x) * k;
+  third.y = internal.y - (internal.y - third.y) * k;
 }
