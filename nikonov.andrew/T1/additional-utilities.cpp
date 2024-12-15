@@ -2,7 +2,6 @@
 #include <iostream>
 #include <limits>
 #include <iomanip>
-#include <dynamicArray.hpp>
 #include "shape.hpp"
 #include "fabric.hpp"
 void nikonov::fillShapeCollection(Shape* collection[], size_t& cnt, size_t& noncorrect)

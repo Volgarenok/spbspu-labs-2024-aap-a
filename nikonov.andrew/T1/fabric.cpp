@@ -8,6 +8,12 @@
 #include "additional-utilities.hpp"
 #include "diamond.hpp"
 #include "triangle.hpp"
+namespace nikonov
+{
+  point_t findTop(point_t p1, point_t p2, point_t p3);
+  point_t findMid(point_t p1, point_t p2, point_t p3, point_t topP);
+  bool isEqualPoint(const point_t& p1, const point_t& p2);
+}
 nikonov::Shape* nikonov::make_shape(std::string name, double  nums[])
 {
   if (name == "RECTANGLE")
@@ -100,48 +106,46 @@ nikonov::Triangle* nikonov::make_triangle(double  nums[])
   Triangle* result = new Triangle(A, B, C);
   return result;
 }
-namespace nikonov
+
+nikonov::point_t nikonov::findTop(point_t p1, point_t p2, point_t p3)
 {
-  point_t findTop(point_t p1, point_t p2, point_t p3)
+  if (p1.y > p2.y && p1.y > p3.y)
   {
-    if (p1.y > p2.y && p1.y > p3.y)
-    {
-      return p1;
-    }
-    else if (p2.y > p1.y && p2.y > p3.y)
-    {
-      return p2;
-    }
-    else if (p3.y > p1.y && p3.y > p2.y)
-    {
-      return p3;
-    }
-    else
-    {
-      throw std::exception();
-    }
+    return p1;
   }
-  point_t findMid(point_t p1, point_t p2, point_t p3, point_t topP)
+  else if (p2.y > p1.y && p2.y > p3.y)
   {
-    if (p1.y < topP.y && p1.x == topP.x)
-    {
-      return p1;
-    }
-    else if (p2.y < topP.y && p2.x == topP.x)
-    {
-      return p2;
-    }
-    else if (p3.y < topP.y && p3.x == topP.x)
-    {
-      return p3;
-    }
-    else
-    {
-      throw std::exception();
-    }
+    return p2;
   }
-  bool isEqualPoint(const point_t& p1, const point_t& p2)
+  else if (p3.y > p1.y && p3.y > p2.y)
   {
-    return (p1.x == p2.x) && (p1.y == p2.y);
+    return p3;
   }
+  else
+  {
+    throw std::exception();
+  }
+}
+nikonov::point_t nikonov::findMid(point_t p1, point_t p2, point_t p3, point_t topP)
+{
+  if (p1.y < topP.y && p1.x == topP.x)
+  {
+    return p1;
+  }
+  else if (p2.y < topP.y && p2.x == topP.x)
+  {
+    return p2;
+  }
+  else if (p3.y < topP.y && p3.x == topP.x)
+  {
+    return p3;
+  }
+  else
+  {
+    throw std::exception();
+  }
+}
+bool nikonov::isEqualPoint(const point_t& p1, const point_t& p2)
+{
+  return (p1.x == p2.x) && (p1.y == p2.y);
 }
