@@ -12,7 +12,7 @@ timofeev::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4) :
 double timofeev::Concave::get_area() const
 {
   double first_part = timofeev::triangle_area(p1_, p2_, p4_);
-  double second_part = timofeev::triangle_area(p2_, p3_, p4_);
+  double second_part = timofeev::triangle_area(p1_, p3_, p4_);
   return first_part + second_part;
 }
 
