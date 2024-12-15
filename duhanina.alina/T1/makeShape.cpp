@@ -38,11 +38,11 @@ duhanina::Ellipse* duhanina::makeEllipse(std::istream& in)
   in >> x >> y;
   double vertRadius = 0;
   double horizRadius = 0;
+  in >> vertRadius >> horizRadius;
   if (vertRadius <= 0 || horizRadius <= 0)
   {
     throw std::invalid_argument("Error in parameters");
   }
-  in >> vertRadius >> horizRadius;
   Ellipse* ell = new Ellipse({ x, y }, horizRadius, vertRadius);
   return ell;
 }
