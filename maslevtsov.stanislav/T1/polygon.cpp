@@ -1,4 +1,5 @@
 #include "polygon.hpp"
+#include <cmath>
 
 maslevtsov::Polygon::~Polygon()
 {
@@ -16,7 +17,15 @@ maslevtsov::Polygon::Polygon(std::size_t nVertices, point_t* vertices):
 }
 
 double maslevtsov::Polygon::getArea() const noexcept
-{}
+{
+  double result = 0;
+  for (std::size_t i = 0; i < nVertices_; ++i)
+  {
+    result += vertices_[i].x * vertices_[i + 1].y - vertices_[i].y * vertices_[i + 1].x;
+  }
+  result *= 0.5;
+  return std::abs(result);
+}
 
 maslevtsov::rectangle_t maslevtsov::Polygon::getFrameRect() const noexcept
 {}
