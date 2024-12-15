@@ -8,8 +8,8 @@ namespace brevnov
   public:
     Diamond(point_t center, point_t horizontal, point_t vertical);
     ~Diamond();
-    double getArea() override;
-    rectangle_t getFrameRect() override;
+    double getArea() const override;
+    rectangle_t getFrameRect() const override;
     void move(point_t new_centre) override;
     void move(double dx, double dy) override;
     void scale(double n) override;

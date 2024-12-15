@@ -7,13 +7,13 @@ brevnov::Ellipse::Ellipse(point_t center, double r1, double r2): center(center),
 
 brevnov::Ellipse::~Ellipse(){}
 
-double brevnov::Ellipse::getArea()
+double brevnov::Ellipse::getArea() const
 {
   const double p = std::acos(-1.0);
   return p * r1 * r2;
 }
 
-brevnov::rectangle_t brevnov::Ellipse::getFrameRect()
+brevnov::rectangle_t brevnov::Ellipse::getFrameRect() const
 {
   rectangle_t result;
   result.pos = center;

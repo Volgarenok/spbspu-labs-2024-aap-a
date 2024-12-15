@@ -3,19 +3,19 @@
 
 brevnov::Rectangle::Rectangle(point_t left, point_t right) : left(left), right(right) {}
 
-double brevnov::Rectangle::getArea()
+double brevnov::Rectangle::getArea() const
 {
   return (right.x - left.x) * (right.y - left.y);
 }
 
 brevnov::Rectangle::~Rectangle(){}
 
-brevnov::rectangle_t brevnov::Rectangle::getFrameRect()
+brevnov::rectangle_t brevnov::Rectangle::getFrameRect() const
 {
   rectangle_t result;
   result.width = right.x - left.x;
   result.height = right.y - left.y;
-  result.pos = {left.x + result.width / 2.0, left.y + result.height / 2.0};
+  result.pos = {left.x + result.width / 2.0, left.y +   result.height / 2.0};
   return result;
 }
 
