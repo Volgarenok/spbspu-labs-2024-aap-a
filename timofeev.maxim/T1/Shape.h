@@ -1,6 +1,6 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
-#include "base-types.h"
+#include "base-types.hpp"
 
 namespace timofeev
 {

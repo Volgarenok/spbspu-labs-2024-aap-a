@@ -1,7 +1,7 @@
 #ifndef COMPLEXQUAD_H
 #define COMPLEXQUAD_H
 #include "Shape.h"
-#include "base-types.h"
+#include "base-types.hpp"
 #include "shapes_tools.h"
 #include <iostream>
 

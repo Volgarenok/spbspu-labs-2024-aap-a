@@ -2,7 +2,7 @@
 #define RECTANGLE_HPP
 
 #include "Shape.h"
-#include "base-types.h"
+#include "base-types.hpp"
 
 namespace timofeev
 {

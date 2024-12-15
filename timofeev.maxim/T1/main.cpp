@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Shape.h"
-#include "base-types.h"
+#include "base-types.hpp"
 #include "shapes_tools.h"
 #include "concave.h"
 #include "rectangle.h"
