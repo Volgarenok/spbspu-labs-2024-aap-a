@@ -53,7 +53,7 @@ dribas::Concave::Concave(point_t a, point_t b, point_t c, point_t d):
 
 double dribas::Concave::getArea() const
 {
-  return std::abs((a_.x - b_.x) * (a_.y + b_.y) + (b_.x - c_.x) * (b_.y + c_.y) + 
+  return std::abs((a_.x - b_.x) * (a_.y + b_.y) + (b_.x - c_.x) * (b_.y + c_.y) +
     (c_.x - d_.x) * (c_.y + d_.y) + (d_.x - a_.x) * (d_.y + a_.y)) / 2.0l;
 }
 dribas::rectangle_t dribas::Concave::getFrameRect() const
