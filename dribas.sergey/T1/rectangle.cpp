@@ -13,9 +13,9 @@ dribas::Rectangle::Rectangle(point_t leftDown, point_t rightUp): leftDown_({0.0L
     leftDown_.y = leftDown.y;
   } else if (leftDown.x > rightUp.x && leftDown.y > rightUp.y) {
     rightUp_.x = leftDown.x;
-    rightUp_.y = leftDown.y; 
+    rightUp_.y = leftDown.y;
     leftDown_.x = rightUp.x;
-    leftDown_.y = rightUp.y;    
+    leftDown_.y = rightUp.y;
   } else {
     throw std::invalid_argument("error with rectangle size\n");
   }
