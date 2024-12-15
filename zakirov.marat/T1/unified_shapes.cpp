@@ -158,7 +158,7 @@ double * zakirov::get_data(std::istream & in)
 
   size_t location = 2;
   double counter = 0.0;
-  char * workline = get_line(in, step, '\n');
+  char * workline = get_string(in, step, '\n');
   size_t start  = 0, finish = 0;
   while (workline[start] != '\n')
   {
