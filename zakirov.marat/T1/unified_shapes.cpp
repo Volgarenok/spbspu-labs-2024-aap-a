@@ -74,7 +74,7 @@ double * zakirov::get_data(std::istream & in)
   }
 
   std::string shape = zakirov::get_line(in, step, ' ');
-  
+
   if (shape == "RECTANGLE")
   {
     data[0] = 1.0;
@@ -109,7 +109,7 @@ double * zakirov::get_data(std::istream & in)
     {
       workline[start++] = ' ';
     }
-    
+
     start = finish;
     ++counter;
   }
