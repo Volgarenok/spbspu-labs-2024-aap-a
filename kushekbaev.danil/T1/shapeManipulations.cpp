@@ -4,19 +4,18 @@
 
 namespace kushekbaev
 {
-  void scaleEverything(size_t shapeCounter, Shape** capacity, double scaleCoeff, point_t scalePoint)
+void scaleEverything(size_t shapeCounter, Shape** capacity, double scaleCoeff, point_t scalePoint)
+{
+  for (size_t i = 0; i < shapeCounter; i++)
   {
-    for (size_t i = 0; i < shapeCounter; i++)
-    {
-      point_t firstpos = capacity[i]->getFrameRect().pos;
-      capacity[i]->move(scalePoint);
-      point_t secondpos = capacity[i]->getFrameRect().pos;
-      point_t vector = { secondpos.x - firstpos.x, secondpos.y - firstpos.y };
-      capacity[i]->scale(scaleCoeff);
-      point_t diff = { vector.x * scaleCoeff, vector.y * scaleCoeff };
-      capacity[i]->move(-diff.x, -diff.y);
-    }
+    rectangle_t frame = capacity[i]->getFrameRect();
+    point_t vector = { scalePoint.x - frame.pos.x, scalePoint.y - frame.pos.y };
+    capacity[i]->move(vector.x, vector.y);
+    capacity[i]->scale(scaleCoeff);
+    point_t scaledVector = { vector.x * scaleCoeff, vector.y * scaleCoeff };
+    capacity[i]->move(-scaledVector.x, -scaledVector.y);
   }
+}
 
   void coordOutput(Shape** capacity, size_t shapeCounter)
   {
