@@ -12,8 +12,8 @@ shramko::Rectangle::Rectangle(double leftBottomX, double leftBottomY, double rig
 
 double shramko:Rectangle:getArea() const
 {
-  double lenHeight = std::sqrt((rightTop.y - leftBottom_.y) * (rightTop_.y - leftBottom_.y));
-  double lenWidth = std::sqrt((rightTop.x - leftBottom_.x) * (rightTop_.x - leftBottom_.x));
+  double lenHeight = rightTop.y - leftBottom_.y;
+  double lenWidth = rightTop.x - leftBottom_.x;
 
   return lenHeight * lenWidth;
 }
@@ -24,8 +24,8 @@ shramko::rectangle_t shramko::Rectangle::getRectangleFrame() const
   double height = rightTop_.y - leftBottom_.y;
 
   rectangle_t rectangleFrame;
-  rectangleFrame.pos_.x = leftBottom_.x + width / 2;
-  rectangleFrame.pos_.y = leftBottom_.y + height / 2;
+  rectangleFrame.pos.x = leftBottom_.x + width / 2;
+  rectangleFrame.pos.y = leftBottom_.y + height / 2;
   rectangleFrame.height = height;
   rectangleFrame.width = width;
 
@@ -59,7 +59,7 @@ void shramko::Rectangle::move(double x, double y)
 
 void shramko::Rectangle::scale(double k)
 {
-  point_t centre = getRectangleFrame().pos_;
+  point_t centre = getRectangleFrame().pos;
 
   leftBottom_.x = (leftBottom_.x - centre.x) * k + centre.x;
   leftBottom_.y = (leftBottom_.y - centre.y) * k + centre.y;
