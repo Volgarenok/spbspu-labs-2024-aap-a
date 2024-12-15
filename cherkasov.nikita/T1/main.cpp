@@ -66,6 +66,7 @@ int main()
     else
     {
       std::cerr << "Unsupported command: " << inputCommand << "\n";
+      return 1;
     }
   }
   catch (const std::bad_alloc& e)
@@ -76,10 +77,12 @@ int main()
   catch (const std::logic_error& e)
   {
     std::cerr << "error: " << e.what() << "\n";
+    return 1;
   }
     catch (const std::exception& e)
     {
       std::cerr << "Error: " << e.what() << "\n";
+      return 1;
     }
   }
   std::cout << std::fixed << std::setprecision(1);
