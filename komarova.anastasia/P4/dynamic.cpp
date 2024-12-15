@@ -35,7 +35,7 @@ char* komarova::read(std::istream & input, size_t & size_str, size_t & size_str_
       str = str_1;
     }
   }
-  str[size_str] = '\0';
+  str[size_str_now] = '\0';
   input >> std::skipws;
   return str;
 }
