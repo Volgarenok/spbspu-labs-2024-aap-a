@@ -127,7 +127,7 @@ void zakirov::scale_from_point(Shape * mutable_shape, point_t target, double k)
   mutable_shape -> move(target);
   point_t nailed_p2 = mutable_shape -> getFrameRect().position_;
   mutable_shape -> scale(k);
-  
+
   point_t bias;
   bias.x_ = nailed_p2.x_ - nailed_p1.x_;
   bias.y_ = nailed_p2.y_ - nailed_p1.y_;
