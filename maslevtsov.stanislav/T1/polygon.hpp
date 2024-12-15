@@ -21,7 +21,7 @@ namespace maslevtsov
     point_t* vertices_;
   };
 
-  Polygon* makePolygon(const double* arguments);
+  Polygon* makePolygon(const double* arguments, std::size_t nArguments);
 }
 
 #endif

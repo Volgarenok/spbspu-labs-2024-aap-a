@@ -3,6 +3,7 @@
 #include <iostream>
 #include "rectangle.hpp"
 #include "regular.hpp"
+#include "polygon.hpp"
 
 void maslevtsov::clearShapes(Shape** shapes, std::size_t border)
 {
@@ -12,7 +13,7 @@ void maslevtsov::clearShapes(Shape** shapes, std::size_t border)
   }
 }
 
-maslevtsov::Shape* maslevtsov::makeShape(std::string figureName, const double* arguments)
+maslevtsov::Shape* maslevtsov::makeShape(std::string figureName, const double* arguments, std::size_t nArguments)
 {
   if (figureName == "RECTANGLE")
   {
@@ -21,6 +22,10 @@ maslevtsov::Shape* maslevtsov::makeShape(std::string figureName, const double* a
   if (figureName == "REGULAR")
   {
     return makeRegular(arguments);
+  }
+  if (figureName == "POLYGON")
+  {
+    return makePolygon(arguments, nArguments);
   }
   throw std::logic_error("not supported");
 }

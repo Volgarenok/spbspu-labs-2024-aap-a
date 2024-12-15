@@ -5,10 +5,10 @@
 
 namespace maslevtsov
 {
-  double* split(char* str);
+  double* split(char* str, std::size_t& splitted);
 }
 
-double* maslevtsov::split(char* str)
+double* maslevtsov::split(char* str, std::size_t& splitted)
 {
   double* result = new double[8];
   str = std::strtok(str, " ");
@@ -16,8 +16,8 @@ double* maslevtsov::split(char* str)
 
   while (str != nullptr)
   {
-    result[argumentIndex] = std::atof(str);
-    ++argumentIndex;
+    result[argumentIndex++] = std::atof(str);
+    ++splitted;
     str = std::strtok(nullptr, " ");
   }
 
@@ -43,11 +43,12 @@ int main()
     char* argStr = nullptr;
     double* arguments = nullptr;
     maslevtsov::Shape* shape = nullptr;
+    std::size_t splitted = 0;
     try
     {
       argStr = maslevtsov::getline(std::cin);
-      arguments = maslevtsov::split(argStr);
-      shape = maslevtsov::makeShape(argument, arguments);
+      arguments = maslevtsov::split(argStr, splitted);
+      shape = maslevtsov::makeShape(argument, arguments, splitted);
     }
     catch (const std::bad_alloc& e)
     {

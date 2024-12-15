@@ -1,6 +1,6 @@
 #include "regular.hpp"
-#include <stdexcept>
 #include <cmath>
+#include <stdexcept>
 
 namespace maslevtsov
 {
