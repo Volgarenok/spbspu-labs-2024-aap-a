@@ -1,6 +1,13 @@
 #include "makeObjects.hpp"
 #include <cmath>
 
+namespace finaev
+{
+  bool operator ==(const finaev::point_t a, const finaev::point_t b);
+  double sign(point_t a, point_t b, point_t c);
+  bool isPointInsideTriangle(point_t first, point_t second, point_t third, point_t internal);
+}
+
 double finaev::len(point_t a, point_t b)
 {
   return std::sqrt(pow((a.x - b.x), 2) + pow((a.y - b.y), 2));
@@ -35,6 +42,22 @@ finaev::Square* finaev::makeSquare(std::istream& in)
   Square* square = new Square(l, side);
   return square;
 }
+bool finaev::operator ==(const finaev::point_t a, const finaev::point_t b)
+{
+        return ((a.x == b.x) && (a.y == b.y));
+}
+double finaev::sign(point_t a, point_t b, point_t c)
+{
+  return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+}
+bool finaev::isPointInsideTriangle(point_t first, point_t second, point_t third, point_t internal)
+{
+  double s1 = sign(internal, first, second);
+  double s2 = sign (internal, second, third);
+  double s3 = sign (internal, first, third);
+  return (s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0);
+}
+
 finaev::Concave* finaev::makeConcave(std::istream& in)
 {
   double x1, y1, x2, y2, x3, y3, x4, y4;
@@ -44,6 +67,14 @@ finaev::Concave* finaev::makeConcave(std::istream& in)
   second = {x2, y2};
   third = {x3, y3};
   internal = {x4, y4};
+  if (first == second || first == third || first == internal || second == third || second == internal || third == internal)
+  {
+    return nullptr;
+  }
+  if (!(isPointInsideTriangle(first, second, third, internal)))
+  {
+    return nullptr;
+  }
   if (len(first, second) + len(first, third) <= len(second, third))
   {
     return nullptr;
