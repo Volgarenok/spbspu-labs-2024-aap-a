@@ -1,4 +1,4 @@
-#include "countFinalResults.h"
+#include "countFinalResults.hpp"
 #include <iostream>
 #include <iomanip>
 

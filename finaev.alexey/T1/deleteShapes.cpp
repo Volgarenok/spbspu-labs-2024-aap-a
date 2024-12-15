@@ -1,4 +1,4 @@
-#include "shape.h"
+#include "shape.hpp"
 
 void finaev::deleteShapes(finaev::Shape** shapes, size_t size)
 {

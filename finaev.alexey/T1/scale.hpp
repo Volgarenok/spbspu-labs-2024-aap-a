@@ -1,8 +1,8 @@
-#ifndef SCALE_H
-#define SCALE_H
+#ifndef SCALE_HPP
+#define SCALE_HPP
 
 #include <cstddef>
-#include "shape.h"
+#include "shape.hpp"
 
 namespace finaev
 {

@@ -1,7 +1,7 @@
-#ifndef COUNTFINALRESULTS_H
-#define COUNTFINALRESULTS_H
+#ifndef COUNTFINALRESULTS_HPP
+#define COUNTFINALRESULTS_HPP
 
-#include "shape.h"
+#include "shape.hpp"
 
 namespace finaev
 {

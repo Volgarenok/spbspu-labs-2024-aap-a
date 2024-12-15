@@ -1,10 +1,10 @@
-#ifndef MAKEOBJECTS_H
-#define MAKEOBJECTS_H
+#ifndef MAKEOBJECTS_HPP
+#define MAKEOBJECTS_HPP
 
 #include <fstream>
-#include "base-types.h"
-#include "rectangle.h"
-#include "square.h"
+#include "base-types.hpp"
+#include "rectangle.hpp"
+#include "square.hpp"
 
 namespace finaev
 {

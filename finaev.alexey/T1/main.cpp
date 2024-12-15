@@ -3,12 +3,12 @@
 #include <string>
 #include <iomanip>
 #include <cstddef>
-#include "shape.h"
-#include "base-types.h"
-#include "rectangle.h"
-#include "makeObjects.h"
-#include "countFinalResults.h"
-#include "scale.h"
+#include "shape.hpp"
+#include "base-types.hpp"
+#include "rectangle.hpp"
+#include "makeObjects.hpp"
+#include "countFinalResults.hpp"
+#include "scale.hpp"
 
 int main()
 {

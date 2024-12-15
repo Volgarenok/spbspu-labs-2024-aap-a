@@ -1,4 +1,4 @@
-#include "rectangle.h"
+#include "rectangle.hpp"
 #include <stdexcept>
 
 finaev::Rectangle::Rectangle(point_t l, point_t r) :

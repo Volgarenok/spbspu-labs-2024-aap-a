@@ -1,4 +1,4 @@
-#include "scale.h"
+#include "scale.hpp"
 
 void finaev::scale(Shape** shapes, size_t size, point_t scaleCenter, double k)
 {

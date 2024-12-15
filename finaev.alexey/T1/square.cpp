@@ -1,4 +1,4 @@
-#include "square.h"
+#include "square.hpp"
 #include <stdexcept>
 
 finaev::Square::Square(point_t l, double s) :
