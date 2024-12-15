@@ -32,6 +32,7 @@ int main()
     } catch (const std::invalid_argument& e) {
       std::cerr << e.what() << "\n";
     }
+    std::cout << "shape_cnt=" << shape_cnt << "\n";
   }
 
   if (!is_scale_processed) {

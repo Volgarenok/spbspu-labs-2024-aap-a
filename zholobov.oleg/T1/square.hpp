@@ -8,7 +8,7 @@ namespace zholobov {
   class Square : public Rectangle {
    public:
     Square();
-    Square(const point_t& a, float length);
+    Square(const point_t& a, double length);
   };
 
 }

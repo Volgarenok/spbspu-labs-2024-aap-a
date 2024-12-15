@@ -12,7 +12,7 @@ zholobov::Rectangle::Rectangle(const point_t& a, const point_t& c)
   rect_.pos.y = (a.y + c.y) / 2.0f;
 }
 
-float zholobov::Rectangle::getArea()
+double zholobov::Rectangle::getArea()
 {
   return rect_.width * rect_.height;
 }
@@ -27,13 +27,13 @@ void zholobov::Rectangle::move(point_t p)
   rect_.pos = p;
 }
 
-void zholobov::Rectangle::move(float dx, float dy)
+void zholobov::Rectangle::move(double dx, double dy)
 {
   rect_.pos.x += dx;
   rect_.pos.y += dy;
 }
 
-void zholobov::Rectangle::scale(float k)
+void zholobov::Rectangle::scale(double k)
 {
   rect_.width *= k;
   rect_.height *= k;

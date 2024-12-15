@@ -14,7 +14,7 @@ zholobov::Parallelogram::Parallelogram(const point_t& p1, const point_t& p2, con
   pos_.y = (p2.y + p3.y) / 2.0f;
 }
 
-float zholobov::Parallelogram::getArea()
+double zholobov::Parallelogram::getArea()
 {
   return (p2_.x - p1_.x) * (pos_.y - p1_.y) * 2.0f;
 }
@@ -33,13 +33,13 @@ void zholobov::Parallelogram::move(point_t p)
   pos_ = p;
 }
 
-void zholobov::Parallelogram::move(float dx, float dy)
+void zholobov::Parallelogram::move(double dx, double dy)
 {
   pos_.x += dx;
   pos_.y += dy;
 }
 
-void zholobov::Parallelogram::scale(float k)
+void zholobov::Parallelogram::scale(double k)
 {
   p1_.x = (p1_.x - pos_.x) * k + pos_.x;
   p1_.y = (p1_.y - pos_.y) * k + pos_.y;

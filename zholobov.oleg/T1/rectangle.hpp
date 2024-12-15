@@ -12,11 +12,11 @@ namespace zholobov {
     Rectangle();
     Rectangle(const point_t& a, const point_t& c);
 
-    float getArea() override;
+    double getArea() override;
     rectangle_t getFrameRect() override;
     void move(point_t p) override;
-    void move(float dx, float dy) override;
-    void scale(float k) override;
+    void move(double dx, double dy) override;
+    void scale(double k) override;
   };
 
 }
