@@ -13,7 +13,6 @@ void karnauhova::output(std::ostream & out, double* all_points, double* polygon,
   double sum1 = 0, sum2 = 0;
   double out1[10000] = {};
   double out2[10000] = {};
-  out << centr_scale.x << centr_scale.y << "\n";
   for (size_t i = 0; i < c_shape; i++)
   {
     if (names[i] == "RECTANGLE")
@@ -32,7 +31,6 @@ void karnauhova::output(std::ostream & out, double* all_points, double* polygon,
       out1[m + 3] = rec1.pos.y + (rec1.height / 2);
       shape_rec.scale(centr_scale, all_points[c_points - 1]);
       sum2 += shape_rec.getArea();
-      out << sum2 << "\n";
       rectangle_t rec2 = shape_rec.getFrameRect();
       out2[m] = rec2.pos.x - (rec2.width / 2);
       out2[m + 1] = rec2.pos.y - (rec2.height / 2);

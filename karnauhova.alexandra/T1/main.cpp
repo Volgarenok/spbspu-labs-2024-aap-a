@@ -110,14 +110,6 @@ int main()
   {
     std::cerr << "Error in the input\n";
   }
-  for (size_t i = 0; i < 4; i++)
-  {
-    for (size_t j = 0; j < 4; j++)
-    {
-      std::cout << polygon[(i * 4) + j] << " ";
-    }
-    std::cout << names[i] << "\n";
-  }
   karnauhova::output(std::cout, points, polygon, names, i, count_shape);
   delete[] points;
 }
