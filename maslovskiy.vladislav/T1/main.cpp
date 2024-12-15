@@ -1,1 +1,5 @@
-int main(){}
+#include <iostream>
+int main()
+{
+  std::cout << "test" << "\n";
+}

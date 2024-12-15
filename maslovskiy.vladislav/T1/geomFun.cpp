@@ -1,5 +1,5 @@
 #include <cmath>
-#include "geom_fun.hpp"
+#include "geomFun.hpp"
 
 namespace maslovskiy
 {

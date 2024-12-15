@@ -15,7 +15,7 @@ namespace maslovskiy
     void scale(double k) override;
   private:
     point_t leftCorner_;
-    point_t rightCormer_;
+    point_t rightCorner_;
   };
 }
 
