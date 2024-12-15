@@ -8,15 +8,15 @@ rychkov::Rectangle::Rectangle(point_t center, double height, double width):
   height_(height),
   width_(width)
 {
-  if((height == 0) || (width_ = 0))
+  if((height == 0) || (width_ == 0))
   {
     throw std::invalid_argument("invalid rectangle");
   }
 }
 rychkov::Rectangle::Rectangle(point_t bottomLeft, point_t topRight):
   Rectangle({(bottomLeft.x + topRight.x) / 2, (bottomLeft.y + topRight.y) / 2},
-      std::max(bottomLeft.x, topRight.x) - std::min(bottomLeft.x, topRight.x),
-      std::max(bottomLeft.y, topRight.y) - std::min(bottomLeft.y, topRight.y))
+      std::abs(bottomLeft.x - topRight.x),
+      std::abs(bottomLeft.y - topRight.y))
 {}
 
 double rychkov::Rectangle::getArea() const noexcept
