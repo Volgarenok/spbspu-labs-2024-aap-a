@@ -27,6 +27,7 @@ void nikonov::fillShapeCollection(Shape* collection[], size_t& cnt, size_t& nonc
     {
       std::cin.clear();
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      continue;
     }
     float* nums = nullptr;
     try
