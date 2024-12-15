@@ -10,7 +10,7 @@ namespace maslevtsov
 
 double* maslevtsov::split(char* str, std::size_t& splitted)
 {
-  double* result = new double[8];
+  double* result = new double[10'000];
   str = std::strtok(str, " ");
   std::size_t argumentIndex = 0;
 
