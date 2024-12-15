@@ -6,5 +6,7 @@ namespace nikonov
 {
   void fillShapeCollection(Shape* collection[], size_t& cnt, size_t& noncorrect);
   void destoy(Shape* collection[], size_t& cnt);
+  void ispScale(Shape* shp, float x, float y, float k);
+  bool processCollection(Shape* collection[], size_t cnt);
 }
 #endif

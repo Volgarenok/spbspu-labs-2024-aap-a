@@ -4,7 +4,6 @@
 #include <limits>
 #include "shape.hpp"
 #include "fabric.hpp"
-#include "scale.hpp"
 void nikonov::fillShapeCollection(Shape* collection[], size_t& cnt, size_t& noncorrect)
 {
   std::string name = "";
@@ -67,4 +66,55 @@ void nikonov::destoy(Shape* collection[], size_t& cnt)
     delete collection[i];
   }
   cnt = 0;
+}
+void nikonov::ispScale(Shape* shp, float x, float y, float k)
+{
+  point_t S(x, y);
+  point_t origCenter = shp->getFrameRect().pos_;
+  shp->move(S);
+  point_t newCenter = shp->getFrameRect().pos_;
+  float diffX = newCenter.x_ - origCenter.x_;
+  float diffY = newCenter.y_ - origCenter.y_;
+  shp->scale(k);
+  shp->move(diffX * k * (-1), diffY * k * (-1));
+}
+bool nikonov::processCollection(Shape* collection[], size_t cnt)
+{
+  float x = 0.0, y = 0.0;
+  float k = 0.0;
+  std::cin >> x >> y >> k;
+  if (!std::cin || k <= 0) {
+    std::cerr << "ERROR: noncorrect scale parameters\n";
+    nikonov::destoy(collection, cnt);
+    return 1;
+  }
+  float s1 = 0.0, s2 = 0.0;
+  for (size_t i = 0; i < cnt; ++i)
+  {
+    s1 += collection[i]->getArea();
+  }
+  for (size_t i = 0; i < cnt; ++i)
+  {
+    std::cout << s1 << ' ';
+    nikonov::rectangle_t tempRect = collection[i]->getFrameRect();
+    std::cout << tempRect.pos_.x_ - tempRect.width_ / 2 << " ";
+    std::cout << tempRect.pos_.y_ - tempRect.height_ / 2 << " ";
+    std::cout << tempRect.pos_.x_ + tempRect.width_ / 2 << " ";
+    std::cout << tempRect.pos_.y_ + tempRect.height_ / 2 << '\n';
+  }
+  for (size_t i = 0; i < cnt; ++i)
+  {
+    nikonov::ispScale(collection[i], x, y, k);
+    s2 += collection[i]->getArea();
+  }
+  for (size_t i = 0; i < cnt; ++i)
+  {
+    std::cout << s2 << ' ';
+    nikonov::rectangle_t tempRect = collection[i]->getFrameRect();
+    std::cout << tempRect.pos_.x_ - tempRect.width_ / 2 << " ";
+    std::cout << tempRect.pos_.y_ - tempRect.height_ / 2 << " ";
+    std::cout << tempRect.pos_.x_ + tempRect.width_ / 2 << " ";
+    std::cout << tempRect.pos_.y_ + tempRect.height_ / 2 << '\n';
+  }
+  return 0;
 }
