@@ -109,7 +109,7 @@ int main()
   std::cout << tkach::getTotalArea(shapes_array, counter_of_shapes) << " ";
   tkach::printCoordinatesOfFrameRect(std::cout, shapes_array, counter_of_shapes);
   std::cout << "\n";
-  tkach::doIsotropicScaleShapes(shapes_array, counter_of_shapes, scale_coef, scale_point);
+  tkach::doIsoScaleShapes(shapes_array, counter_of_shapes, scale_coef, scale_point);
   std::cout << tkach::getTotalArea(shapes_array, counter_of_shapes) << " ";
   tkach::printCoordinatesOfFrameRect(std::cout, shapes_array, counter_of_shapes);
   std::cout << "\n";

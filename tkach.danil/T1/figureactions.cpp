@@ -32,7 +32,7 @@ void tkach::printCoordinatesOfFrameRect(std::ostream& out, tkach::Shape** shape_
   }
 }
 
-void tkach::doIsotropicScaleShapes(tkach::Shape** shape_array, size_t counter_of_shapes, double scale_coef, const tkach::point_t& scale_point)
+void tkach::doIsoScaleShapes(tkach::Shape** shape_array, size_t counter_of_shapes, double scale_coef, const tkach::point_t& scale_point)
 {
   for (size_t i = 0; i < counter_of_shapes; ++i)
   {
