@@ -8,14 +8,14 @@ namespace cherkasov
     {
       throw std::logic_error("invalid rectangl coordinates");
     }
-  rect_pos = {(lowLeft.x + upRight.x) / 2, (lowLeft.y + upRight.y) / 2};
-  rect_.widht = upRight.x - lowLeft.x;
+  rect_.pos = {(lowLeft.x + upRight.x) / 2, (lowLeft.y + upRight.y) / 2};
+  rect_.width = upRight.x - lowLeft.x;
   rect_.height = upRight.y - lowLeft.y;
   }
 
   double Rectangle::getArea() const
   {
-    return rect_.widht * rect_.height;
+    return rect_.width * rect_.height;
   }
   rectangle_t Rectangle::getFrameRect() const
   {
@@ -34,10 +34,10 @@ namespace cherkasov
   {
     if (k <= 0)
     {
-      throw std::logic_error("")
+      throw std::logic_error("dddd");
     }
   rect_.width *= k;
-  recct_.height *= k;
+  rect_.height *= k;
   }
 }
 
