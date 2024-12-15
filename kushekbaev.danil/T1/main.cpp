@@ -11,6 +11,7 @@ int main()
   std::string shapeName;
   double scaleCoeff = 0, scaleX = 0, scaleY = 0;
   kushekbaev::point_t scalePoint;
+  bool therewasascale = false;
 
   while (std::cin >> shapeName)
   {
@@ -28,7 +29,7 @@ int main()
       {
         std::cerr << "Coordinates of left point couldnt be greater than coordinates of right point" << "\n";
         clearMemory(capacity, shapeCounter);
-        return 1;
+        return 0;
       }
 
       kushekbaev::point_t lowerLeft = { x1, y1 };
@@ -64,10 +65,17 @@ int main()
       }
 
       scalePoint = { scaleX, scaleY };
+      therewasascale = true;
 
       break;
     }
     shapeName = "";
+  }
+  if (!therewasascale)
+  {
+    std::cerr << "No scale command" << "\n";
+    clearMemory(capacity, shapeCounter);
+    return 1;
   }
 
   if (shapeCounter == 0)
