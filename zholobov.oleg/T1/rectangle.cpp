@@ -12,12 +12,12 @@ zholobov::Rectangle::Rectangle(const point_t& a, const point_t& c)
   rect_.pos.y = (a.y + c.y) / 2.0f;
 }
 
-double zholobov::Rectangle::getArea()
+double zholobov::Rectangle::getArea() const
 {
   return rect_.width * rect_.height;
 }
 
-zholobov::rectangle_t zholobov::Rectangle::getFrameRect()
+zholobov::rectangle_t zholobov::Rectangle::getFrameRect() const
 {
   return rect_;
 }

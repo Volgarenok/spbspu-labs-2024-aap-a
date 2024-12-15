@@ -14,12 +14,12 @@ zholobov::Parallelogram::Parallelogram(const point_t& p1, const point_t& p2, con
   pos_.y = (p2.y + p3.y) / 2.0f;
 }
 
-double zholobov::Parallelogram::getArea()
+double zholobov::Parallelogram::getArea() const
 {
   return (p2_.x - p1_.x) * (pos_.y - p1_.y) * 2.0f;
 }
 
-zholobov::rectangle_t zholobov::Parallelogram::getFrameRect()
+zholobov::rectangle_t zholobov::Parallelogram::getFrameRect() const
 {
   rectangle_t rect;
   rect.pos = pos_;

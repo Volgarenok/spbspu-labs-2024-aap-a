@@ -14,8 +14,8 @@ namespace zholobov {
     Parallelogram();
     Parallelogram(const point_t& p1, const point_t& p2, const point_t& p3);
 
-    double getArea() override;
-    rectangle_t getFrameRect() override;
+    double getArea() const  override;
+    rectangle_t getFrameRect() const override;
     void move(point_t p) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
