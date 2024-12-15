@@ -23,10 +23,6 @@ int main()
       return 1;
     }
     std::cin >> shapeName;
-
-    double * num = nullptr;
-    size_t len = 0;
-
     if (shapeName == "RECTANGLE")
     {
       try
