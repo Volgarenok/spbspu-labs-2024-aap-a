@@ -17,8 +17,13 @@ double dribas::getAllArea(Shape** myShapes, size_t shapeCount)
 void dribas::scaling(Shape** myShapes, size_t shapeCount, point_t center, double ratio)
 {
   for (size_t i = 0; i <shapeCount; i++) {
+    point_t cneter = myShapes[i]->getFrameRect().pos;
+    myShapes[i]->move(center);
+    point_t center2 = myShapes[i]->getFrameRect().pos;
+    double diffenceX = (center2.x - cneter.x) * ratio * - 1;
+    double diffenceY = (center2.y - cneter.y) * ratio * - 1;
     myShapes[i]->scale(ratio);
-    myShapes[i]->move(center.x, center.y);
+    myShapes[i]->move(diffenceX, diffenceY);
   }
 }
 
@@ -50,7 +55,6 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
           input >> c.x;
           input >> c.y;
           myShapes[shapesCount] =  new Triangle{a, b, c};
-          std::cout << myShapes[shapesCount]->getFrameRect().width;
           shapesCount++;
         } catch (const std::invalid_argument& e) {
           error << e.what() << '\n';

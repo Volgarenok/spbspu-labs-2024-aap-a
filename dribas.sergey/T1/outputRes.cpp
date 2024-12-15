@@ -11,5 +11,4 @@ void dribas::outputRes(std::ostream & output, Shape ** myShape, size_t shapeSize
     output << " " << myShape[i]->getFrameRect().pos.x + (myShape[i]->getFrameRect().width) / 2.0f;
     output << " " << myShape[i]->getFrameRect().pos.y + (myShape[i]->getFrameRect().height) / 2.0f;
   }
-
 }
