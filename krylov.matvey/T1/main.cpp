@@ -104,22 +104,21 @@ void processShapes()
       invalidDescriptions = true;
     }
   }
-  if (invalidDescriptions)
-  {
-    std::cerr << "Warning: Some shapes had invalid descriptions\n";
-  }
   if (!scaleCommandProcessed)
   {
     if (std::cin.eof())
     {
       throw std::invalid_argument("Missing SCALE before EOF\n");
-      break;
     }
     for (size_t i = 0; i < shapeCount; ++i)
     {
       delete shapes[i];
     }
     throw std::invalid_argument("Missing or invalid SCALE command");
+  }
+  if (invalidDescriptions)
+  {
+    std::cerr << "Warning: Some shapes had invalid descriptions\n";
   }
   for (size_t i = 0; i < shapeCount; ++i)
   {
