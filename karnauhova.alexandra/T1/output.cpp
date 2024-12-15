@@ -3,10 +3,10 @@
 #include <iostream>
 #include "rectangle.hpp"
 #include "triangle.hpp"
-
+#include "polygon.hpp"
 void karnauhova::output_all_shape(std::ostream & out, double* all_points, double* polygon, std::string* names, size_t c_points, size_t c_shape)
 {
-  size_t k = 0, m = 0;
+  size_t k = 0, m = 0, c_polygon = 0;
   point_t centr_scale;
   centr_scale.x = all_points[c_points - 3];
   centr_scale.y = all_points[c_points - 2];
@@ -57,7 +57,7 @@ void karnauhova::output_all_shape(std::ostream & out, double* all_points, double
       out1[m + 1] = tri1.pos.y - (tri1.height / 2);
       out1[m + 2] = tri1.pos.x + (tri1.width / 2);
       out1[m + 3] = tri1.pos.y + (tri1.height / 2);
-      shape_tri.scale(centr_scale, all_points[k - 1]);
+      shape_tri.scale(centr_scale, all_points[c_points - 1]);
       sum2 += shape_tri.getArea();
       rectangle_t tri2 = shape_tri.getFrameRect();
       out2[m] = tri2.pos.x - (tri2.width / 2);
@@ -66,6 +66,36 @@ void karnauhova::output_all_shape(std::ostream & out, double* all_points, double
       out2[m + 3] = tri2.pos.y + (tri2.height / 2);
       k += 6;
       m += 4;
+    }
+    else if (names[i] == "POLYGON")
+    {
+      point_t points_polygon[10000] = {};
+      size_t j = 0;
+      for (size_t i = 0; i < all_points[k]; i++)
+      {
+        point_t point;
+        point.x = polygon[c_polygon + i];
+        point.y = polygon[c_polygon + i + 1];
+        points_polygon[j] = point;
+        j++;
+      }
+      Polygon shape_pol(points_polygon, j);
+      sum1 += shape_pol.getArea();
+      rectangle_t pol1 = shape_pol.getFrameRect();
+      out1[m] = pol1.pos.x - (pol1.width / 2);
+      out1[m + 1] = pol1.pos.y - (pol1.height / 2);
+      out1[m + 2] = pol1.pos.x + (pol1.width / 2);
+      out1[m + 3] = pol1.pos.y + (pol1.height / 2);
+      shape_pol.scale(centr_scale, all_points[c_points - 1]);
+      sum2 += shape_pol.getArea();
+      rectangle_t pol2 = shape_pol.getFrameRect();
+      out2[m] = pol2.pos.x - (pol2.width / 2);
+      out2[m + 1] = pol2.pos.y - (pol2.height / 2);
+      out2[m + 2] = pol2.pos.x + (pol2.width / 2);
+      out2[m + 3] = pol2.pos.y + (pol2.height / 2);
+      k += 1;
+      m += 4;
+      c_polygon += all_points[k];
     }
   }
   polygon[0] = 0;

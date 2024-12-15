@@ -41,7 +41,6 @@ bool karnauhova::input_triangle(std::istream & in, double* x_y, size_t j)
   {
     if (!(in >> x))
     {
-      in.clear();
       karnauhova::eat_trash(in);
       for (size_t n = 0; n < i; n++)
       {
@@ -66,7 +65,6 @@ bool karnauhova::input_scale(std::istream & in, double* x_y, size_t j)
   {
     if (!(in >> x))
     {
-      in.clear();
       karnauhova::eat_trash(in);
       for (size_t n = 0; n < i; n++)
       {
@@ -82,4 +80,36 @@ bool karnauhova::input_scale(std::istream & in, double* x_y, size_t j)
     return false;
   }
   return true;
+}
+
+size_t karnauhova::input_polygon(std::istream & in, double* polygon, size_t count_polygon)
+{
+  double x = 0;
+  double y = 0;
+  size_t count = 0;
+  while (in.peek() != '\n' && in.peek() != EOF)
+  {
+    if (!(in >> x))
+    {
+      karnauhova::eat_trash(in);
+      for (size_t n = 0; n < count; n++)
+      {
+        polygon[count_polygon + n] = 0;
+      }
+      return 0;
+    }
+    if (!(in >> y))
+    {
+      karnauhova::eat_trash(in);
+      for (size_t n = 0; n < count; n++)
+      {
+        polygon[count_polygon + n] = 0;
+      }
+      return 0;
+    }
+    polygon[count_polygon + count] = x;
+    polygon[count_polygon + count + 1] = y;
+    count += 2;
+  }
+  return count;
 }

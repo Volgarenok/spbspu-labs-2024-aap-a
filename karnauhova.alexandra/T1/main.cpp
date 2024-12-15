@@ -13,6 +13,7 @@ int main()
   size_t i = 0;
   size_t count_shape = 0;
   size_t count_error = 0;
+  size_t count_polygon = 0;
   std::string name = "uwu";
   try
   {
@@ -32,7 +33,6 @@ int main()
         if (!karnauhova::input_rectangle(std::cin, points, i))
         {
           std::cin.clear();
-          std::cerr << "LOL\n";
           count_error++;
         }
         else
@@ -46,7 +46,7 @@ int main()
       {
         if (!karnauhova::input_triangle(std::cin, points, i))
         {
-          std::cerr << "LOL\n";
+          std::cin.clear();
           count_error++;
         }
         else
@@ -60,7 +60,7 @@ int main()
       {
         if (!karnauhova::input_scale(std::cin, points, i))
         {
-          std::cerr << "LOL\n";
+          std::cin.clear();
           count_error++;
         }
         else
@@ -70,9 +70,25 @@ int main()
           count_shape++;
         }
       }
+      else if (name == "POLYGON")
+      {
+        size_t count = karnauhova::input_polygon(std::cin, polygon, count_polygon);
+        if (!count)
+        {
+          std::cin.clear();
+          count_error++;
+        }
+        else
+        {
+          points[i] = count;
+          i++;
+          names[count_shape] = name;
+          count_shape++;
+          count_polygon += count;
+        }
+      }
       else
       {
-        std::cerr << "Name bad\n";
         karnauhova::eat_trash(std::cin);
         count_error++;
       }
@@ -98,9 +114,10 @@ int main()
   {
     for (size_t j = 0; j < 4; j++)
     {
-      std::cout << points[(i * 4) + j] << " ";
+      std::cout << polygon[(i * 4) + j] << " ";
     }
     std::cout << names[i] << "\n";
   }
   karnauhova::output_all_shape(std::cout, points, polygon, names, i, count_shape);
+  delete[] points;
 }
