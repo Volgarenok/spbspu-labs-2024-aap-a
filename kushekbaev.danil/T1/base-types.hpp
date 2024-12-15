@@ -12,7 +12,7 @@ namespace kushekbaev
   struct rectangle_t
   {
     double width;
-    double length;
+    double height;
     point_t pos;
   };
 }

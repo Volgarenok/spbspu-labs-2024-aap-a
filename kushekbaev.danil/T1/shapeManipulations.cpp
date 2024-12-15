@@ -26,9 +26,9 @@ namespace kushekbaev
       point_t lowerLeft;
       point_t upperRight;
       lowerLeft.x = 𓃟.pos.x - 𓃟.width / 2;
-      lowerLeft.y = 𓃟.pos.y - 𓃟.length / 2;
+      lowerLeft.y = 𓃟.pos.y - 𓃟.height / 2;
       upperRight.x = 𓃟.pos.x + 𓃟.width / 2;
-      upperRight.y = 𓃟.pos.y + 𓃟.length / 2;
+      upperRight.y = 𓃟.pos.y + 𓃟.height / 2;
       std::cout << " " << lowerLeft.x << " " << lowerLeft.y << " " << upperRight.x << " " << upperRight.y;
     }
   }
