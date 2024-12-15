@@ -71,7 +71,7 @@ int main()
         {
           throw std::invalid_argument("Invalid DIAMOND");
         }
-        if ((a.x != b.x && a.x != c.x && b.x != c.x) || (a.y != b.y && a.y != c.y && b.y != c.y)
+        if ((a.x != b.x && a.x != c.x && b.x != c.x) || (a.y != b.y && a.y != c.y && b.y != c.y))
         {
           throw std::invalid_argument("Invalid DIAMOND");
         }
@@ -82,7 +82,7 @@ int main()
       }
       else if (command == "SCALE")
       {
-        if (shapeCoung == 0)
+        if (shapeCount == 0)
         {
           std::cerr << "Nothing to scale\n";
           free(input);
