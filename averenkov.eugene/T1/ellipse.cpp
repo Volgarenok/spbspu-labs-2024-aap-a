@@ -1,4 +1,5 @@
 #include "ellipse.hpp"
+#include <cmath>
 
 averenkov::Ellipse::Ellipse(averenkov::point_t center_, double radius_v_, double radius_h_)
  : center(center_), radius_v(radius_v_), radius_h(radius_h_)
@@ -13,7 +14,7 @@ void averenkov::Ellipse::scale(double factor)
 
 double averenkov::Ellipse::getArea() const
 {
-  return 3.14 * radius_h * radius_v;
+  return M_PI * radius_h * radius_v;
 }
 
 averenkov::rectangle_t averenkov::Ellipse::getFrameRect() const
