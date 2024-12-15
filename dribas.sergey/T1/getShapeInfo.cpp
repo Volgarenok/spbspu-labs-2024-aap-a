@@ -116,6 +116,6 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
 }
 void dribas::clear(Shape ** myshape, size_t shapeCount) {
   for (size_t i = 0; i < shapeCount; i++) {
-    delete [] myshape[i];
+    delete myshape[i];
   }
 }
