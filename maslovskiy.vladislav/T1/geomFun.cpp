@@ -42,4 +42,17 @@ namespace maslovskiy
     }
     return false;
   }
+  point_t findIntersectionPoint(point_t vertexA, point_t vertexB, point_t vertexC, point_t vertexD, point_t pos)
+  {
+    double slope1 = vertexB.y - vertexA.y;
+    double intercept1 = vertexA.x - vertexB.x;
+    double constant1 = slope1 * vertexA.x + intercept1 * vertexA.y;
+    double slope2 = vertexD.y - vertexC.y;
+    double intercept2 = vertexC.x - vertexD.x;
+    double constant2 = slope2 * vertexC.x + intercept2 * vertexC.y;
+    double determinant = slope1 * intercept2 - slope2 * intercept1;
+    double intersectionX = (intercept2 * constant1 - intercept1 * constant2) / determinant;
+    double intersectionY = (slope1 * constant2 - slope2 * constant1) / determinant;
+    return {intersectionX, intersectionY};
+  }
 }
