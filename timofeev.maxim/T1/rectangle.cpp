@@ -42,7 +42,7 @@ void timofeev::Rectangle::move(double move_x, double move_y)
 }
 
 void timofeev::Rectangle::scale(double factor) {
-  timofeev::point_t pos_an = this->getFrameRect().pos;
+  point_t pos_an = getFrameRect().pos;
   ld_.x = pos_an.x - (pos_an.x - ld_.x) * factor;
   ru_.x = pos_an.x + (ru_.x - pos_an.x) * factor;
   ld_.y = pos_an.y - (pos_an.y - ld_.y) * factor;
