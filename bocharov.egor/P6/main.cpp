@@ -3,8 +3,8 @@
 #include "isexpression.h"
 int main()
 {
-  char symbol = '\0';
-  char * string = bocharov::getline(std::cin, symbol);
+  char end_symbol = '\n';
+  char * string = bocharov::getline(std::cin, end_symbol);
   if (string == nullptr)
   {
     std::cerr << "Error: not enough memory\n";
