@@ -8,24 +8,46 @@ int main()
   size_t shapeCount = 0;
   std::string shapeType;
   bool hasScale = false;
+  bool hasError = false;
   while (std::cin >> shapeType)
   {
     try
     {
       if (shapeType == "RECTANGLE")
       {
-        shapes[shapeCount] = duhanina::makeRectangle(std::cin);
-        shapeCount++;
+        try
+        {
+          shapes[shapeCount] = duhanina::makeRectangle(std::cin);
+          shapeCount++;
+        }
+        catch (const std::invalid_argument&)
+        {
+          hasError = true;
+        }
       }
       else if (shapeType == "CIRCLE")
       {
-        shapes[shapeCount] = duhanina::makeCircle(std::cin);
-        shapeCount++;
+        try
+        {
+          shapes[shapeCount] = duhanina::makeCircle(std::cin);
+          shapeCount++;
+        }
+        catch (const std::invalid_argument&)
+        {
+          hasError = true;
+        }
       }
       else if (shapeType == "ELLIPSE")
       {
-        shapes[shapeCount] = duhanina::makeEllipse(std::cin);
-        shapeCount++;
+        try
+        {
+          shapes[shapeCount] = duhanina::makeEllipse(std::cin);
+          shapeCount++;
+        }
+        catch (const std::invalid_argument&)
+        {
+          hasError = true;
+        }
       }
       else if (shapeType == "SCALE")
       {
@@ -54,18 +76,16 @@ int main()
         break;
       }
     }
-    catch (const std::invalid_argument&)
-    {
-      std::cerr << "Error in figure description\n";
-      duhanina::destroy(shapes, shapeCount);
-      continue;
-    }
     catch(const std::bad_alloc& e)
     {
       std::cerr << "Error memory\n";
       duhanina::destroy(shapes, shapeCount);
       return 1;
     }
+  }
+  if (hasError)
+  {
+    std::cerr << "Incorrect parameters\n";
   }
   if (!hasScale)
   {
