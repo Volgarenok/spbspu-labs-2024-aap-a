@@ -16,8 +16,6 @@ int main()
   bool isIncorrectSize = false;
   lebedev::point_t scalePoint;
   double k = 0;
-  bool haveScaleCommand = false;
-  bool isIncorrectScaleCoefficient = false;
 
   try
   {
@@ -49,31 +47,25 @@ int main()
         }
       }
 
+      else if (std::cin.eof())
+      {
+        std::cerr << "Eof before scale command!\n";
+        lebedev::deleteShapePtr(shps, count);
+        return 1;
+      }
+
       else if (shapeName == "SCALE")
       {
-        haveScaleCommand = true;
         scalePoint = lebedev::createScalePoint(std::cin);
         std::cin >> k;
         if (k <= 0)
         {
-          isIncorrectScaleCoefficient = true;
+          std::cerr << "Incorrect scale coefficient!\n";
+          lebedev::deleteShapePtr(shps, count);
+          return 1;
         }
         break;
       }
-    }
-
-    if (std::cin.eof())
-    {
-      if (!haveScaleCommand)
-      {
-        std::cerr << "Scale command was not entered!\n";
-      }
-      else if (isIncorrectScaleCoefficient)
-      {
-        std::cerr << "Incorrect scale coefficient!\n";
-      }
-      lebedev::deleteShapePtr(shps, count);
-      return 1;
     }
 
     if (isIncorrectSize)
