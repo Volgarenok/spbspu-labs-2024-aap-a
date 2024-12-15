@@ -103,7 +103,7 @@ double maslov::findRadiusCircumcircle(double AC, double AB)
 }
 double maslov::findHalfSide(double AC, double AB, double BC)
 {
-  return std::min(AB, AC, BC);
+  return std::min(AB, std::min(AC, BC));
 }
 size_t maslov::Regular::getVerticals() const
 {

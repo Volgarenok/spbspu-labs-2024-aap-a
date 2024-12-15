@@ -13,13 +13,12 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
 {
   size_t count = 0;
   bool incorrectedFlag = false;
-  bool scaleFlag = true;
   std::string name;
-  while (in >> name && scaleFlag)
+  while (in >> name)
   {
     if (name == "SCALE")
     {
-      scaleFlag = false;
+      break;
     }
     else if (name == "RECTANGLE")
     {
