@@ -25,6 +25,7 @@ int main()
         if (incorrectRadius)
         {
           std::cerr << "Incorrect radius\n";
+          continue;
         }
       }
       else if (shapeType == "ELLIPSE")
@@ -35,6 +36,7 @@ int main()
         if (incorrectRadius)
         {
           std::cerr << "Incorrect radius\n";
+          continue;
         }
       }
       else if (shapeType == "SCALE")
