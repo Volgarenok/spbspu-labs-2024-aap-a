@@ -17,8 +17,6 @@ namespace zholobov {
     virtual void scale(float k) = 0;
   };
 
-  void print_shapes(Shape** shapes, size_t shape_cnt);
-
 }
 
 #endif
