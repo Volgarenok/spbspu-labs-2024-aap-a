@@ -16,6 +16,12 @@ int main()
   mozhegova::point_t scaleCenter = {0.0, 0.0};
   while (true)
   {
+    if (std::cin.eof())
+    {
+      std::cerr << "Incorrect scale\n";
+      mozhegova::destroy(shapes, count);
+      return 1;
+    }
     try
     {
       str = mozhegova::inputString(std::cin, '\n');
