@@ -105,17 +105,17 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
     }
   } catch (const std::bad_alloc& e) {
     error << e.what() << '\n';
-    clear(myShapes);
+    clear(myShapes, shapesCount);
     return 0;
   } catch (const std::logic_error& e) {
     error << e.what() << '\n';
-    clear(myShapes);
+    clear(myShapes, shapesCount);
     return 0;
   }
   return shapesCount;
 }
-void dribas::clear(Shape ** myshape) {
-  for (size_t i = 0; i < 10000; i++) {
+void dribas::clear(Shape ** myshape, size_t shapeCount) {
+  for (size_t i = 0; i < shapeCount; i++) {
     delete [] myshape[i];
   }
 }
