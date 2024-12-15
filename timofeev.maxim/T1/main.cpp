@@ -123,8 +123,6 @@ int main()
   if (incorrect_values)
   {
     std::cerr << "Input was bad\n";
-    shape_delete(shapes, count);
-    return 1;
   }
   double sum_area = 0;
   for (size_t i = 0; i < count; i++)
