@@ -4,6 +4,7 @@
 #include <string>
 #include <stdexcept>
 #include "rectangle.hpp"
+#include "regular.hpp"
 
 void maslevtsov::clearShapes(Shape** shapes, std::size_t border)
 {
@@ -18,6 +19,10 @@ maslevtsov::Shape* maslevtsov::makeShape(std::string figureName, const double* a
   if (figureName == "RECTANGLE")
   {
     return makeRectangle(arguments);
+  }
+  if (figureName == "REGULAR")
+  {
+    return makeRegular(arguments);
   }
   throw std::logic_error("not supported");
 }
