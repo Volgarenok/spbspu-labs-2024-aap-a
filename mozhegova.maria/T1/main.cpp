@@ -1,5 +1,8 @@
 #include <strinput.hpp>
 #include <cstring>
+#include "shape.hpp"
+#include "rectangle.hpp"
+#include "shapeManipulator.hpp"
 
 int main()
 {
@@ -92,6 +95,14 @@ int main()
     std::cerr << "There are no shapes\n";
     return 1;
   }
+  std::cout << std::fixed;
+  std::cout.precision(1);
+  std::cout << mozhegova::sumArea(shapes, count);
+  mozhegova::printCoorRect(shapes, count);
+  mozhegova::scaleShapes(shapes, count, scaleCenter, scaleCoef);
+  std::cout << mozhegova::sumArea(shapes, count);
+  mozhegova::printCoorRect(shapes, count);
+  mozhegova::destroy(shapes, count);
   if (flag)
   {
     std::cerr << "There is an incorrect shape\n";
