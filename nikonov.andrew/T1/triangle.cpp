@@ -6,44 +6,44 @@ nikonov::Triangle::Triangle(point_t A, point_t B, point_t C):
   B_(B),
   C_(C)
 {}
-float nikonov::Triangle::getArea() const
+double  nikonov::Triangle::getArea() const
 {
   rectangle_t tempRect = getFrameRect();
-  return (tempRect.height_ * tempRect.width_) / 2;
+  return (tempRect.height * tempRect.width) / 2;
 }
 nikonov::point_t nikonov::Triangle::getCenterOfGravity() const
 {
-  return point_t((A_.x_ + B_.x_ + C_.x_) / 3, ((A_.y_ + B_.y_ + C_.y_) / 3));
+  return point_t((A_.x + B_.x + C_.x) / 3, ((A_.y + B_.y + C_.y) / 3));
 }
 nikonov::rectangle_t nikonov::Triangle::getFrameRect() const
 {
-  float tempX = (A_.x_ > B_.x_ ? A_.x_ : B_.x_);
-  float maxX = (C_.x_ > tempX ? C_.x_ : tempX);
-  float tempY = (A_.y_ > B_.y_ ? A_.y_ : B_.y_);
-  float maxY = (C_.y_ > tempY ? C_.y_ : tempY);
-  tempX = (A_.x_ < B_.x_ ? A_.x_ : B_.x_);
-  float minX = (C_.x_ < tempX ? C_.x_ : tempX);
-  tempY = (A_.y_ < B_.y_ ? A_.y_ : B_.y_);
-  float minY = (C_.y_ < tempY ? C_.y_ : tempY);
+  double  tempX = (A_.x > B_.x ? A_.x : B_.x);
+  double  maxX = (C_.x > tempX ? C_.x : tempX);
+  double  tempY = (A_.y > B_.y ? A_.y : B_.y);
+  double  maxY = (C_.y > tempY ? C_.y : tempY);
+  tempX = (A_.x < B_.x ? A_.x : B_.x);
+  double  minX = (C_.x < tempX ? C_.x : tempX);
+  tempY = (A_.y < B_.y ? A_.y : B_.y);
+  double  minY = (C_.y < tempY ? C_.y : tempY);
   return rectangle_t(point_t(minX, minY), point_t(maxX, maxY));
 }
 void nikonov::Triangle::move(point_t newPos)
 {
   point_t center = getCenterOfGravity();
-  float diffX = newPos.x_ - center.x_;
-  float diffY = newPos.y_ - center.y_;
+  double  diffX = newPos.x - center.x;
+  double  diffY = newPos.y - center.y;
   move(diffX, diffY);
 }
-void nikonov::Triangle::move(float x, float y)
+void nikonov::Triangle::move(double  x, double  y)
 {
-  A_.x_ += x;
-  B_.x_ += x;
-  C_.x_ += x;
-  A_.y_ += y;
-  B_.y_ += y;
-  C_.y_ += y;
+  A_.x += x;
+  B_.x += x;
+  C_.x += x;
+  A_.y += y;
+  B_.y += y;
+  C_.y += y;
 }
-void nikonov::Triangle::scale(float k)
+void nikonov::Triangle::scale(double  k)
 {
   if (k <= 0)
   {
@@ -51,10 +51,10 @@ void nikonov::Triangle::scale(float k)
     return;
   }
   point_t center = getCenterOfGravity();
-  A_.x_ = center.x_ + (A_.x_ - center.x_) * k;
-  A_.y_ = center.y_ + (A_.y_ - center.y_) * k;
-  B_.x_ = center.x_ + (B_.x_ - center.x_) * k;
-  B_.y_ = center.y_ + (B_.y_ - center.y_) * k;
-  C_.x_ = center.x_ + (C_.x_ - center.x_) * k;
-  C_.y_ = center.y_ + (C_.y_ - center.y_) * k;
+  A_.x = center.x + (A_.x - center.x) * k;
+  A_.y = center.y + (A_.y - center.y) * k;
+  B_.x = center.x + (B_.x - center.x) * k;
+  B_.y = center.y + (B_.y - center.y) * k;
+  C_.x = center.x + (C_.x - center.x) * k;
+  C_.y = center.y + (C_.y - center.y) * k;
 }

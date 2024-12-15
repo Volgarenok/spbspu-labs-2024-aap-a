@@ -8,11 +8,11 @@ namespace nikonov
   {
   public:
     Rectangle(point_t lbp, point_t rtp);
-    float getArea() const override;
+    double  getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t a) override;
-    void move(float x, float y) override;
-    void scale(float k) override;
+    void move(double  x, double  y) override;
+    void scale(double  k) override;
   private:
     point_t lbp_, rtp_;
   };

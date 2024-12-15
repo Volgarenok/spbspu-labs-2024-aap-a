@@ -5,10 +5,10 @@ nikonov::Rectangle::Rectangle(point_t lbp, point_t rtp):
   lbp_(lbp),
   rtp_(rtp)
 {}
-float nikonov::Rectangle::getArea() const
+double  nikonov::Rectangle::getArea() const
 {
   rectangle_t tempRect = getFrameRect();
-  return (tempRect.height_ * tempRect.width_);
+  return (tempRect.height * tempRect.width);
 }
 nikonov::rectangle_t nikonov::Rectangle::getFrameRect() const
 {
@@ -17,18 +17,18 @@ nikonov::rectangle_t nikonov::Rectangle::getFrameRect() const
 void nikonov::Rectangle::move(point_t newPos)
 {
   rectangle_t crntRect = getFrameRect();
-  float diffX = newPos.x_ - crntRect.pos_.x_;
-  float diffY = newPos.y_ - crntRect.pos_.y_;
+  double  diffX = newPos.x - crntRect.pos.x;
+  double  diffY = newPos.y - crntRect.pos.y;
   move(diffX, diffY);
 }
-void nikonov::Rectangle::move(float x, float y)
+void nikonov::Rectangle::move(double  x, double  y)
 {
-  lbp_.x_ += x;
-  rtp_.x_ += x;
-  lbp_.y_ += y;
-  rtp_.y_ += y;
+  lbp_.x += x;
+  rtp_.x += x;
+  lbp_.y += y;
+  rtp_.y += y;
 }
-void nikonov::Rectangle::scale(float k)
+void nikonov::Rectangle::scale(double  k)
 {
   if (k <= 0)
   {
@@ -36,12 +36,12 @@ void nikonov::Rectangle::scale(float k)
     return;
   }
   rectangle_t crntRect = getFrameRect();
-  crntRect.width_ *= k;
-  crntRect.height_ *= k;
-  float newlbpX = crntRect.pos_.x_ - crntRect.width_ / 2;
-  float newlbpY = crntRect.pos_.y_ - crntRect.height_ / 2;
-  float newrtpX = crntRect.pos_.x_ + crntRect.width_ / 2;
-  float newrtpY = crntRect.pos_.y_ + crntRect.height_ / 2;
+  crntRect.width *= k;
+  crntRect.height *= k;
+  double  newlbpX = crntRect.pos.x - crntRect.width / 2;
+  double  newlbpY = crntRect.pos.y - crntRect.height / 2;
+  double  newrtpX = crntRect.pos.x + crntRect.width / 2;
+  double  newrtpY = crntRect.pos.y + crntRect.height / 2;
   lbp_ = point_t(newlbpX, newlbpY);
   rtp_ = point_t(newrtpX, newrtpY);
 }

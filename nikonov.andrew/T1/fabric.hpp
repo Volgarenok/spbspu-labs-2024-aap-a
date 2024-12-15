@@ -8,9 +8,9 @@
 #include "triangle.hpp"
 namespace nikonov
 {
-  nikonov::Shape* make_shape(std::string name, float nums[]);
-  nikonov::Rectangle* make_rectangle(float nums[]);
-  nikonov::Diamond* make_diamond(float nums[]);
-  nikonov::Triangle* make_triangle(float nums[]);
+  nikonov::Shape* make_shape(std::string name, double  nums[]);
+  nikonov::Rectangle* make_rectangle(double  nums[]);
+  nikonov::Diamond* make_diamond(double  nums[]);
+  nikonov::Triangle* make_triangle(double  nums[]);
 }
 #endif

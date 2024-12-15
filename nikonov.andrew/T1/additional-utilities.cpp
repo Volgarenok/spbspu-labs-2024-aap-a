@@ -29,10 +29,10 @@ void nikonov::fillShapeCollection(Shape* collection[], size_t& cnt, size_t& nonc
       std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       continue;
     }
-    float* nums = nullptr;
+    double * nums = nullptr;
     try
     {
-      nums = new float[n];
+      nums = new double [n];
     }
     catch(const std::bad_alloc& e)
     {
@@ -72,14 +72,14 @@ void nikonov::destoy(Shape* collection[], size_t& cnt)
   }
   cnt = 0;
 }
-void nikonov::ispScale(Shape* shp, float x, float y, float k)
+void nikonov::ispScale(Shape* shp, double  x, double  y, double  k)
 {
   point_t S(x, y);
-  point_t origCenter = shp->getFrameRect().pos_;
+  point_t origCenter = shp->getFrameRect().pos;
   shp->move(S);
-  point_t newCenter = shp->getFrameRect().pos_;
-  float diffX = newCenter.x_ - origCenter.x_;
-  float diffY = newCenter.y_ - origCenter.y_;
+  point_t newCenter = shp->getFrameRect().pos;
+  double  diffX = newCenter.x - origCenter.x;
+  double  diffY = newCenter.y - origCenter.y;
   shp->scale(k);
   shp->move(diffX * k * (-1), diffY * k * (-1));
 }
@@ -90,15 +90,15 @@ bool nikonov::processCollection(Shape* collection[], size_t cnt)
     std::cerr << "ERROR: nothing to scale\n";
     return 1;
   }
-  float x = 0.0, y = 0.0;
-  float k = 0.0;
+  double  x = 0.0, y = 0.0;
+  double  k = 0.0;
   std::cin >> x >> y >> k;
   if ((!std::cin && !std::cin.eof()) || k <= 0) {
     std::cerr << "ERROR: noncorrect scale parameters\n";
     nikonov::destoy(collection, cnt);
     return 1;
   }
-  float s1 = 0.0, s2 = 0.0;
+  double  s1 = 0.0, s2 = 0.0;
   std::cout << std::fixed << std::setprecision(1);
   for (size_t i = 0; i < cnt; ++i)
   {
@@ -108,10 +108,10 @@ bool nikonov::processCollection(Shape* collection[], size_t cnt)
   for (size_t i = 0; i < cnt; ++i)
   {
     nikonov::rectangle_t tempRect = collection[i]->getFrameRect();
-    std::cout << " " << tempRect.pos_.x_ - tempRect.width_ / 2;
-    std::cout << " " << tempRect.pos_.y_ - tempRect.height_ / 2;
-    std::cout << " " << tempRect.pos_.x_ + tempRect.width_ / 2;
-    std::cout << " " << tempRect.pos_.y_ + tempRect.height_ / 2;
+    std::cout << " " << tempRect.pos.x - tempRect.width / 2;
+    std::cout << " " << tempRect.pos.y - tempRect.height / 2;
+    std::cout << " " << tempRect.pos.x + tempRect.width / 2;
+    std::cout << " " << tempRect.pos.y + tempRect.height / 2;
   }
   std::cout << '\n';
   for (size_t i = 0; i < cnt; ++i)
@@ -123,10 +123,10 @@ bool nikonov::processCollection(Shape* collection[], size_t cnt)
   for (size_t i = 0; i < cnt; ++i)
   {
     nikonov::rectangle_t tempRect = collection[i]->getFrameRect();
-    std::cout << " " << tempRect.pos_.x_ - tempRect.width_ / 2;
-    std::cout << " " << tempRect.pos_.y_ - tempRect.height_ / 2;
-    std::cout << " " << tempRect.pos_.x_ + tempRect.width_ / 2;
-    std::cout << " " << tempRect.pos_.y_ + tempRect.height_ / 2;
+    std::cout << " " << tempRect.pos.x - tempRect.width / 2;
+    std::cout << " " << tempRect.pos.y - tempRect.height / 2;
+    std::cout << " " << tempRect.pos.x + tempRect.width / 2;
+    std::cout << " " << tempRect.pos.y + tempRect.height / 2;
   }
   std::cout << '\n';
   return 0;

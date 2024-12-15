@@ -6,7 +6,7 @@
 #include "rectangle.hpp"
 #include "diamond.hpp"
 #include "triangle.hpp"
-nikonov::Shape* nikonov::make_shape(std::string name, float nums[])
+nikonov::Shape* nikonov::make_shape(std::string name, double  nums[])
 {
   if (name == "RECTANGLE")
   {
@@ -25,7 +25,7 @@ nikonov::Shape* nikonov::make_shape(std::string name, float nums[])
     return nullptr;
   }
 }
-nikonov::Rectangle* nikonov::make_rectangle(float nums[])
+nikonov::Rectangle* nikonov::make_rectangle(double  nums[])
 {
   if (nums[0] >= nums[2] || nums[1] >= nums[3])
   {
@@ -36,7 +36,7 @@ nikonov::Rectangle* nikonov::make_rectangle(float nums[])
   Rectangle* result = new Rectangle(lbp, rtp);
   return result;
 }
-nikonov::Diamond* nikonov::make_diamond(float nums[])
+nikonov::Diamond* nikonov::make_diamond(double  nums[])
 {
   if (nums[0] >= nums[2] || nums[1] <= nums[3] || nums[0] <= nums[4] ||
     nums[1] <= nums[5] || nums[2] <= nums[4] || nums[3] <= nums[5])
@@ -49,11 +49,11 @@ nikonov::Diamond* nikonov::make_diamond(float nums[])
   Diamond* result = new Diamond(topP, rightP, midP);
   return result;
 }
-nikonov::Triangle* nikonov::make_triangle(float nums[])
+nikonov::Triangle* nikonov::make_triangle(double  nums[])
 {
-  float AB = std::sqrt(std::pow(nums[2] - nums[0], 2) + std::pow(nums[3] - nums[1], 2));
-  float BC = std::sqrt(std::pow(nums[4] - nums[2], 2) + std::pow(nums[5] - nums[3], 2));
-  float CA = std::sqrt(std::pow(nums[4] - nums[0], 2) + std::pow(nums[5] - nums[1], 2));
+  double  AB = std::sqrt(std::pow(nums[2] - nums[0], 2) + std::pow(nums[3] - nums[1], 2));
+  double  BC = std::sqrt(std::pow(nums[4] - nums[2], 2) + std::pow(nums[5] - nums[3], 2));
+  double  CA = std::sqrt(std::pow(nums[4] - nums[0], 2) + std::pow(nums[5] - nums[1], 2));
   if (!((AB + BC > CA) && (AB + CA > BC) && (CA + BC > AB)))
   {
     return nullptr;
