@@ -9,7 +9,6 @@
 
 int main()
 {
-  bool shape_flag = false;
   zakirov::Shape * shapes[10000];
   double * scale_data = nullptr;
   size_t location = 0;
