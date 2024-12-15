@@ -50,28 +50,16 @@ zholobov::Parallelogram* zholobov::create_parallelogram(std::istream& in)
       zholobov::point_t{x3, y3});
 }
 
-void zholobov::process_scale(std::istream& in, Shape** shapes, size_t shape_cnt)
+void zholobov::process_scale(Shape** shapes, size_t shape_cnt, point_t pos, double scale_factor)
 {
-  double x = 0.0;
-  double y = 0.0;
-  double k = 0.0;
-  if (shape_cnt == 0) {
-    throw std::runtime_error("There are no shapes to scale");
-  }
-  in >> x >> y >> k;
-  if (!in || k <= 0) {
-    throw std::runtime_error("Error in SCALE paramaters");
-  }
   zholobov::print_shapes(shapes, shape_cnt);
   for (size_t i = 0; i < shape_cnt; ++i) {
-    if (shapes[i]) {
-      shapes[i]->scale(k);
-      zholobov::rectangle_t rect = shapes[i]->getFrameRect();
-      zholobov::point_t new_pos;
-      new_pos.x = (rect.pos.x - x) * k + x;
-      new_pos.y = (rect.pos.y - y) * k + y;
-      shapes[i]->move(new_pos);
-    }
+    shapes[i]->scale(scale_factor);
+    zholobov::rectangle_t rect = shapes[i]->getFrameRect();
+    zholobov::point_t new_pos;
+    new_pos.x = (rect.pos.x - pos.x) * scale_factor + pos.x;
+    new_pos.y = (rect.pos.y - pos.y) * scale_factor + pos.y;
+    shapes[i]->move(new_pos);
   }
   zholobov::print_shapes(shapes, shape_cnt);
 }
@@ -80,18 +68,14 @@ void zholobov::print_shapes(Shape** shapes, size_t shape_cnt)
 {
   double total_area = 0.0;
   for (size_t i = 0; i < shape_cnt; ++i) {
-    if (shapes[i]) {
-      total_area += shapes[i]->getArea();
-    }
+    total_area += shapes[i]->getArea();
   }
 
   std::cout << std::fixed << std::setprecision(1) << total_area;
   for (size_t i = 0; i < shape_cnt; ++i) {
-    if (shapes[i]) {
-      rectangle_t rect = shapes[i]->getFrameRect();
-      std::cout << " " << rect.pos.x - rect.width / 2.0f << " " << rect.pos.y - rect.height / 2.0f;
-      std::cout << " " << rect.pos.x + rect.width / 2.0f << " " << rect.pos.y + rect.height / 2.0f;
-    }
+    rectangle_t rect = shapes[i]->getFrameRect();
+    std::cout << " " << rect.pos.x - rect.width / 2.0f << " " << rect.pos.y - rect.height / 2.0f;
+    std::cout << " " << rect.pos.x + rect.width / 2.0f << " " << rect.pos.y + rect.height / 2.0f;
   }
   std::cout << "\n";
 }

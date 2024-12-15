@@ -20,8 +20,20 @@ int main()
       } else if (shape_name == "PARALLELOGRAM") {
         shapes[shape_cnt++] = zholobov::create_parallelogram(std::cin);
       } else if (shape_name == "SCALE") {
+        if (shape_cnt == 0) {
+          std::cerr << "There are no shapes to scale\n";
+          std::exit(1);
+        }
         is_scale_processed = true;
-        zholobov::process_scale(std::cin, shapes, shape_cnt);
+        double x = 0.0;
+        double y = 0.0;
+        double scale_factor = 0.0;
+        std::cin >> x >> y >> scale_factor;
+        if (!std::cin || scale_factor <= 0) {
+          std::cerr << "Error in SCALE paramaters\n";
+          std::exit(1);
+        }
+        zholobov::process_scale(shapes, shape_cnt, {x, y}, scale_factor);
       } else {
         std::cerr << "Unknown shape (" << shape_name << ")\n";
       }
