@@ -12,10 +12,7 @@ public:
   double getArea();
   rectangle_t getFrameRect();
   void scale(point_t t, double k);
-  ~Polygon()
-  {
-    delete[] points_;
-  }
+  ~Polygon() {}
 private:
   point_t* points_;
   size_t count_;

@@ -70,7 +70,12 @@ void karnauhova::output(std::ostream & out, double* all_points, double* polygon,
     {
       point_t points_polygon[10000] = {};
       size_t j = 0;
-      for (size_t i = 0; i < all_points[k]; i++)
+      if (all_points[k] < 6)
+      {
+        k += 1;
+        continue;
+      }
+      for (size_t i = 0; i < all_points[k]; i+=2)
       {
         point_t point;
         point.x = polygon[c_polygon + i];
@@ -99,13 +104,13 @@ void karnauhova::output(std::ostream & out, double* all_points, double* polygon,
   }
   out << std::fixed;
   out << std::setprecision(1) << sum1;
-  for (size_t i = 0; i < k; i++)
+  for (size_t i = 0; i < m; i++)
   {
     out << std::setprecision(1) << " " << out1[i];
   }
   out << "\n";
   out << std::setprecision(1) << sum2;
-  for (size_t i = 0; i < k; i++)
+  for (size_t i = 0; i < m; i++)
   {
     out << std::setprecision(1) << " " << out2[i];
   }
