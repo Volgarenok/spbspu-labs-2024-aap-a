@@ -74,5 +74,3 @@ void dribas::Diamond::scale(double ratio)
   b_.x_ = (b_.x_ - a_.x_) * ratio;
   c_.y_ = (c_.y_ - a_.y_) * ratio;
 }
-
-

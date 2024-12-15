@@ -29,7 +29,7 @@ dribas::Rectangle_t dribas::Triangle::getFrameRect() const
   result.pos_.y_ = maxX + (result.height_ / 2);
   return result;
 }
-void dribas::Triangle::move(Point_t centerP) 
+void dribas::Triangle::move(Point_t centerP)
 {
   dribas::Point_t pos;
   pos.x_ = std::abs(a_.x_ + b_.x_ + c_.x_) / 3.0;
