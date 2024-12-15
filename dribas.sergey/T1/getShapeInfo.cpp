@@ -30,7 +30,7 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
       if (Mystr == "RECTANGLE") {
         std::cout <<"sdad";
         try {
-          Point_t down, up; 
+          Point_t down, up;
           input >> down.x_;
           input >> down.y_;
           input >> up.x_;
@@ -43,7 +43,7 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
         }
       } else if (Mystr == "TRIANGLE") {
         try {
-          Point_t a, b, c; 
+          Point_t a, b, c;
           input >> a.x_;
           input >> a.y_;
           input >> b.x_;
@@ -58,7 +58,7 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
         }
       } else if (Mystr == "DIAMOND") {
         try {
-          Point_t a, b, c; 
+          Point_t a, b, c;
           input >> a.x_;
           input >> a.y_;
           input >> b.x_;
@@ -72,7 +72,7 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
         }
       } else if (Mystr == "CONCAVE") {
         try {
-          Point_t a, b, c, d; 
+          Point_t a, b, c, d;
           input >> a.x_;
           input >> a.y_;
           input >> b.x_;
