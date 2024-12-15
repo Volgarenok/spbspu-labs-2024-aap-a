@@ -27,6 +27,9 @@ int main()
         catch (const std::invalid_argument& e)
         {
           incorrectRectangleInput = true;
+          std::cerr << "Invalid rectangle input: " << e.what() << "\n";
+          kushekbaev::clearMemory(capacity, shapeCounter);
+	  return 0;
         }
       }
 
