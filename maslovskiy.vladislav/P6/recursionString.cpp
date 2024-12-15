@@ -3,12 +3,12 @@
 
 namespace maslovskiy
 {
-  const char *hasDigit(const char *str);
-  const char *hasChar(const char *str, char c);
-  const char *hasSign (const char *str);
-  const char *hasNumbers(const char *str);
-  const char *hasMantissa(const char *str);
-  const char *hasExponent(const char *str);
+  const char* hasDigit(const char* str);
+  const char* hasChar(const char* str, char c);
+  const char* hasSign(const char* str);
+  const char* hasNumbers(const char* str);
+  const char* hasMantissa(const char* str);
+  const char* hasExponent(const char* str);
   bool isSign(char c);
 }
 bool maslovskiy::isSign(char c)
@@ -50,11 +50,7 @@ const char* maslovskiy::hasNumbers(const char* str)
   {
     return nullptr;
   }
-  while (next && isdigit(*next))
-  {
-    next++;
-  }
-  return next;
+  return hasNumbers(next) ? hasNumbers(next) : next;
 }
 const char* maslovskiy::hasMantissa(const char* str)
 {
