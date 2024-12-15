@@ -8,6 +8,7 @@ void clearStr(char** stack, size_t stackSize){
     free(*(stack + i));
     }
      }
+
 int main()
 {
   constexpr size_t shapesSize = 10000;

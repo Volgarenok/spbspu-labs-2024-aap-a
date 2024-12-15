@@ -46,22 +46,22 @@ dribas::Concave::Concave(point_t a, point_t b, point_t c, point_t d):
     throw std::invalid_argument("Error witch point for concave\n");
   }
   a_ = a;
-  b_ = a;
+  b_ = b;
   c_ = c;
   d_ = d;
 }
 
 double dribas::Concave::getArea() const
 {
-  return std::abs((a_.x - b_.x) * (a_.y + b_.y) + (b_.x - c_.x) * (b_.y + c_.y) +
-    (c_.x - d_.x) * (c_.y + d_.y) + (d_.x - a_.x) * (d_.y + a_.y)) * 1.25; //ОБЯЗАТЕЛЬНО ПЕРЕДЕЛАТЬ!!!!!
+  return std::abs(a_.x * b_.y + b_.x * c_.y + c_.x * d_.y + d_.x * a_.y - b_.x * a_.y - c_.x
+    * b_.y - d_.x * c_.y - a_.x * d_.y) / 2.0; //ОБЯЗАТЕЛЬНО ПЕРЕДЕЛАТЬ!!!!!
 }
 dribas::rectangle_t dribas::Concave::getFrameRect() const
 {
-  double maxX = std::max(a_.x, std::max(b_.x, std::max(c_.x, d_.x)));
-  double maxY = std::max(a_.y, std::max(b_.y, std::max(c_.y, d_.y)));
-  double minY = std::min(a_.y, std::min(b_.y, std::min(c_.y, d_.y)));
-  double minX = std::min(a_.x, std::min(b_.x, std::min(c_.x, d_.x)));
+  double maxX = std::max(a_.x, std::max(b_.x, c_.x));
+  double maxY = std::max(a_.y, std::max(b_.y, c_.y));
+  double minY = std::min(a_.y, std::min(b_.y, c_.y));
+  double minX = std::min(a_.x, std::min(b_.x, c_.x));
   rectangle_t result;
   result.height = maxY - minY;
   result.width = maxX - minX;
