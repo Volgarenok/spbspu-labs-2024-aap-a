@@ -122,7 +122,8 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
     return -1;
   }
   if (!scaled) {
-    return -2;
+    clear(myShapes, shapesCount);
+    return -1;
   }
   return shapesCount;
 }

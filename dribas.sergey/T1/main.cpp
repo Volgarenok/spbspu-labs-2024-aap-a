@@ -18,9 +18,5 @@ int main()
     return 1;
   }
   dribas::clear(myShapes, shapeCount);
-  if (shapeCount == -2) {
-    return 1;
-  }
   return 0;
-
 }
