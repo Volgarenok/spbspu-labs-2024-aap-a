@@ -25,8 +25,6 @@ int main()
         if (incorrectRadius)
         {
           std::cerr << "Incorrect radius\n";
-          duhanina::destroy(shapes, shapeCount);
-          return 1;
         }
       }
       else if (shapeType == "ELLIPSE")
@@ -37,8 +35,6 @@ int main()
         if (incorrectRadius)
         {
           std::cerr << "Incorrect radius\n";
-          duhanina::destroy(shapes, shapeCount);
-          return 1;
         }
       }
       else if (shapeType == "SCALE")
