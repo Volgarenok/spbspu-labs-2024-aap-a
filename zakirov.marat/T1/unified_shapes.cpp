@@ -4,6 +4,70 @@
 #include <string>
 #include <cstddef>
 
+namespace
+{
+  char * get_string(std::istream & in, size_t step, char interrupt_el)
+  {
+    size_t start = 1, finish = 1;
+    char * line = static_cast< char * >(malloc(sizeof(char)));
+    if (line == nullptr)
+    {
+      return line;
+    }
+    char last_symbol = interrupt_el;
+    in >> last_symbol;
+    line[0] = last_symbol;
+    while (last_symbol != interrupt_el)
+    {
+      char * expanded_line = zakirov::expand_line(line, finish, step);
+      finish += step;
+      if (expanded_line == nullptr)
+      {
+        free(line);
+        return expanded_line;
+      }
+
+      zakirov::get_segment(in, expanded_line, start, finish);
+      free(line);
+      line = expanded_line;
+      for (size_t i = start; i < finish; ++i)
+      {
+        if (line[i] == interrupt_el)
+        {
+          last_symbol = line[i];
+          break;
+        }
+        else if (i == finish - 1)
+        {
+          last_symbol = line[i];
+        }
+      }
+
+      start += step;
+    }
+
+    return line;
+  }
+
+
+  double * extra_element(double * array, size_t size)
+  {
+    size_t new_size = size * sizeof(double) + sizeof(double);
+    double * new_array = static_cast< double * >(malloc(new_size));
+    if (new_array == nullptr)
+    {
+      return new_array;
+    }
+
+    for (size_t i = 0; i < size; ++i)
+    {
+      new_array[i] = array[i];
+    }
+
+    return new_array;
+  }
+}
+
 zakirov::Rectangle * zakirov::make_rectangle(double bottom_x, double bottom_y, double top_x, double top_y)
 {
   point_t bottom_left, top_right;
@@ -73,7 +137,7 @@ double * zakirov::get_data(std::istream & in)
     return nullptr;
   }
 
-  std::string shape = zakirov::get_line(in, step, ' ');
+  std::string shape = get_string(in, step, ' ');
 
   if (shape == "RECTANGLE")
   {
@@ -94,7 +158,7 @@ double * zakirov::get_data(std::istream & in)
 
   size_t location = 2;
   double counter = 0.0;
-  char * workline = zakirov::get_line(in, step, '\n');
+  char * workline = get_line(in, step, '\n');
   size_t start  = 0, finish = 0;
   while (workline[start] != '\n')
   {
@@ -150,24 +214,4 @@ void zakirov::output_frame(std::ostream & out, Shape ** shapes, size_t quantity)
     out << ' ' << frame_top_right.x_ << ' ' << frame_top_right.y_;
   }
   out << '\n';
-}
-
-namespace
-{
-  double * extra_element(double * array, size_t size)
-  {
-    size_t new_size = size * sizeof(double) + sizeof(double);
-    double * new_array = static_cast< double * >(malloc(new_size));
-    if (new_array == nullptr)
-    {
-      return new_array;
-    }
-
-    for (size_t i = 0; i < size; ++i)
-    {
-      new_array[i] = array[i];
-    }
-
-    return new_array;
-  }
 }
