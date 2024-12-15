@@ -9,7 +9,7 @@ void brevnov::destroy_shape(Shape** shapes, size_t count)
   }
 }
 
-double brevnov::get_sum_area(Shape ** shapes, size_t count) const
+double brevnov::get_sum_area(Shape ** shapes, size_t count)
 {
   double result = 0;
   for (size_t i = 0; i < count; ++i)
