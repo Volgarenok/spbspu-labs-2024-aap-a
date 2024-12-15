@@ -10,7 +10,7 @@ timofeev::Rectangle::Rectangle(double ldx, double ldy, double rux, double ruy)
 }
 
 double timofeev::Rectangle::get_area() const {
-  return (ru_.x - ld.x) * (ru_.y - ld_.y);
+  return (ru_.x - ld_.x) * (ru_.y - ld_.y);
 }
 
 timofeev::rectangle_t timofeev::Rectangle::get_frame_rect() const {
@@ -46,5 +46,5 @@ void timofeev::Rectangle::scale(double factor) {
   ld_.x = pos_an.x - (pos_an.x - ld_.x) * factor;
   ru_.x = pos_an.x + (ru_.x - pos_an.x) * factor;
   ld_.y = pos_an.y - (pos_an.y - ld_.y) * factor;
-  ru_.y = pos_an.y + (ld_.y - pos_an.y) * factor;
+  ru_.y = pos_an.y + (ru_.y - pos_an.y) * factor;
 }
