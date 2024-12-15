@@ -45,7 +45,7 @@ const char* maslovskiy::hasNumbers(const char* str)
   {
     return nullptr;
   }
-  const char* next = maslovskiy::hasDigit(str);
+  const char* next = hasDigit(str);
   if (!next)
   {
     return nullptr;
@@ -62,7 +62,7 @@ const char* maslovskiy::hasMantissa(const char* str)
   {
     return nullptr;
   }
-  const char* next = maslovskiy::hasNumbers(str);
+  const char* next = hasNumbers(str);
   if (!next)
   {
     return nullptr;
@@ -70,7 +70,7 @@ const char* maslovskiy::hasMantissa(const char* str)
   if (*next == '.')
   {
     next++;
-    next = maslovskiy::hasNumbers(next);
+    next = hasNumbers(next);
   }
   return next;
 }
@@ -80,13 +80,13 @@ const char* maslovskiy::hasExponent(const char* str)
   {
     return nullptr;
   }
-  const char* next = maslovskiy::hasChar(str, 'E');
+  const char* next = hasChar(str, 'E');
   if (!next)
   {
     return str;
   }
-  next = maslovskiy::hasSign(next);
-  next = maslovskiy::hasNumbers(next);
+  next = hasSign(next);
+  next = hasNumbers(next);
   return next;
 }
 bool maslovskiy::isDouble(const char* str)
@@ -95,16 +95,16 @@ bool maslovskiy::isDouble(const char* str)
   {
     return false;
   }
-  const char* next = maslovskiy::hasSign(str);
+  const char* next = hasSign(str);
   if (!next)
   {
     return false;
   }
-  next = maslovskiy::hasMantissa(next);
+  next = hasMantissa(next);
   if (!next)
   {
     return false;
   }
-  next = maslovskiy::hasExponent(next);
+  next = hasExponent(next);
   return next && *next == '\0';
 }
