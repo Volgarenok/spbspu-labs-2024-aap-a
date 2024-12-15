@@ -15,8 +15,8 @@ namespace mozhegova
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    point_t lowerLeft;
-    point_t upperRight;
+    point_t lowerLeft = {0.0, 0.0};
+    point_t upperRight = {0.0, 0.0};
   };
 }
 

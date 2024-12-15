@@ -8,7 +8,6 @@
 
 int main()
 {
-  char * str = nullptr;
   mozhegova::Shape * shapes[1000] = {};
   size_t count = 0;
   bool flag = false;
@@ -22,6 +21,7 @@ int main()
       mozhegova::destroy(shapes, count);
       return 1;
     }
+    char * str = nullptr;
     try
     {
       str = mozhegova::inputString(std::cin, '\n');
