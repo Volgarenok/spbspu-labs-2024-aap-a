@@ -59,7 +59,7 @@ void timofeev::Concave::move(double move_x, double move_y)
 
 void timofeev::Concave::scale(double factor)
 {
-  point_t pos_an = get_frame_rect().pos;
+  point_t pos_an = this->get_frame_rect().pos;
   p1_.x = pos_an.x - (pos_an.x - p1_.x) * factor;
   p1_.y = pos_an.y - (pos_an.y - p1_.y) * factor;
   p2_.x = pos_an.x - (pos_an.x - p2_.x) * factor;
