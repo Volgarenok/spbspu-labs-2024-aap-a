@@ -1,4 +1,4 @@
-#include "complexquad.hpp"
+#include "complexQuad.hpp"
 #include "geomFun.hpp"
 #include <algorithm>
 
@@ -7,6 +7,7 @@ namespace maslovskiy
   ComplexQuad::ComplexQuad(point_t vertexA, point_t vertexB, point_t vertexC, point_t vertexD)
       : vertexA_(vertexA), vertexB_(vertexB), vertexC_(vertexC), vertexD_(vertexD)
   {}
+
   double ComplexQuad::getArea() const
   {
     point_t intersectionPoint = findIntersectionPoint(vertexA_, vertexB_, vertexC_, vertexD_);
@@ -14,6 +15,7 @@ namespace maslovskiy
     double secondTriangleArea = calculateTriangleArea(intersectionPoint, vertexB_, vertexC_);
     return firstTriangleArea + secondTriangleArea;
   }
+
   rectangle_t ComplexQuad::getFrameRect() const
   {
     double left = std::min({vertexA_.x, vertexB_.x, vertexC_.x, vertexD_.x});
@@ -27,6 +29,7 @@ namespace maslovskiy
     frameRect.pos.y = bottom + frameRect.height / 2;
     return frameRect;
   }
+
   void ComplexQuad::move(point_t newPos)
   {
     point_t currentCenter = getFrameRect().pos;
@@ -41,6 +44,7 @@ namespace maslovskiy
     vertexD_.x += moveX;
     vertexD_.y += moveY;
   }
+
   void ComplexQuad::move(double moveX, double moveY)
   {
     vertexA_.x += moveX;
@@ -52,6 +56,7 @@ namespace maslovskiy
     vertexD_.x += moveX;
     vertexD_.y += moveY;
   }
+
   void ComplexQuad::scale(double factor)
   {
     point_t currentCenter = getFrameRect().pos;

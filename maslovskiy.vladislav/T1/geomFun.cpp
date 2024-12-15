@@ -10,6 +10,7 @@ namespace maslovskiy
     double sideCA = std::sqrt(std::pow((vertexA.x - vertexC.x), 2) + std::pow((vertexA.y - vertexC.y), 2));
     return (sideAB + sideBC > sideCA) && (sideAB + sideCA > sideBC) && (sideBC + sideCA > sideAB);
   }
+
   double calculateTriangleArea(point_t vertexA, point_t vertexB, point_t vertexC)
   {
     double sideAB = std::sqrt(std::pow((vertexB.x - vertexA.x), 2) + std::pow((vertexB.y - vertexA.y), 2));
@@ -18,6 +19,7 @@ namespace maslovskiy
     double semiPerimeter = (sideAB + sideBC + sideCA) / 2;
     return std::sqrt(semiPerimeter * (semiPerimeter - sideAB) * (semiPerimeter - sideBC) * (semiPerimeter - sideCA));
   }
+
   bool isPointInTriangle(point_t vertexA, point_t vertexB, point_t vertexC, point_t point)
   {
     double totalArea = calculateTriangleArea(vertexA, vertexB, vertexC);
@@ -26,23 +28,17 @@ namespace maslovskiy
     double area3 = calculateTriangleArea(point, vertexC, vertexA);
     return totalArea == (area1 + area2 + area3);
   }
-  bool isPointInQuad(point_t vertexA, point_t vertexB, point_t vertexC, point_t vertexD)
+
+  bool isPointInQuad(point_t vertexA, point_t vertexB, point_t vertexC, point_t vertexD, point_t pos)
   {
     int sideA = (vertexA.x - pos.x) * (vertexD.y - vertexA.y) - (vertexD.x - vertexA.x) * (vertexA.y - pos.y);
     int sideB = (vertexD.x - pos.x) * (vertexB.y - vertexD.y) - (vertexB.x - vertexD.x) * (vertexD.y - pos.y);
     int sideC = (vertexB.x - pos.x) * (vertexC.y - vertexB.y) - (vertexC.x - vertexB.x) * (vertexB.y - pos.y);
     int sideD = (vertexC.x - pos.x) * (vertexA.y - vertexC.y) - (vertexA.x - vertexC.x) * (vertexC.y - pos.y);
-    if (sideA > 0 && sideB > 0 && sideC > 0 && sideD > 0)
-    {
-      return true;
-    }
-    else if (sideA < 0 && sideB < 0 && sideC < 0 && sideD < 0)
-    {
-      return true;
-    }
-    return false;
+    return (sideA > 0 && sideB > 0 && sideC > 0 && sideD > 0) || (sideA < 0 && sideB < 0 && sideC < 0 && sideD < 0);
   }
-  point_t findIntersectionPoint(point_t vertexA, point_t vertexB, point_t vertexC, point_t vertexD, point_t pos)
+
+  point_t findIntersectionPoint(point_t vertexA, point_t vertexB, point_t vertexC, point_t vertexD)
   {
     double slope1 = vertexB.y - vertexA.y;
     double intercept1 = vertexA.x - vertexB.x;

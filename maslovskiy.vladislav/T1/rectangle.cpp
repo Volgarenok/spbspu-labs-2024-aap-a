@@ -1,54 +1,50 @@
 #include "rectangle.hpp"
-#include <stdexcept>
+#include <cmath>
+
 namespace maslovskiy
 {
   Rectangle::Rectangle(point_t leftCorner, point_t rightCorner)
       : leftCorner_(leftCorner), rightCorner_(rightCorner)
-  {
-    if ((leftCorner.x > leftCorner.y || rightCorner.x > rightCorner.y))
-    {
-      throw std::logic_error("Incorrect rectangle points");
-    }
-  }
+  {}
+
   double Rectangle::getArea() const
   {
-    return ((leftCorner_.x - rightCorner_.x) * (leftCorner_.y - rightCorner_.y));
+    return std::abs(leftCorner_.x - rightCorner_.x) * std::abs(leftCorner_.y - rightCorner_.y);
   }
 
   rectangle_t Rectangle::getFrameRect() const
   {
-    double width = leftCorner_.x - rightCorner_.x;
-    double height = leftCorner_.y - rightCorner_.y;
-    point_t pos = {leftCorner_.x - (width / 2), leftCorner_.y - (height / 2)};
-    rectangle_t frameRect{width, height, pos};
-    return frameRect;
+    double width = std::abs(leftCorner_.x - rightCorner_.x);
+    double height = std::abs(leftCorner_.y - rightCorner_.y);
+    point_t pos = {leftCorner_.x + width / 2, leftCorner_.y + height / 2};
+    return rectangle_t{width, height, pos};
   }
-  void Rectangle::move(double dx, double dy)
-  {
-    leftCorner_.x += dx;
-    leftCorner_.y += dy;
-    rightCorner_.x += dx;
-    rightCorner_.y += dy;
-  }
+
   void Rectangle::move(point_t newPos)
   {
-    rectangle_t rect = getFrameRect();
-    double dx = rect.pos.x - newPos.x;
-    double dy = rect.pos.y - newPos.y;
-    move(dx, dy);
+    point_t currentCenter = getFrameRect().pos;
+    double moveX = newPos.x - currentCenter.x;
+    double moveY = newPos.y - currentCenter.y;
+    leftCorner_.x += moveX;
+    leftCorner_.y += moveY;
+    rightCorner_.x += moveX;
+    rightCorner_.y += moveY;
   }
-  void maslovskiy::Rectangle::scale(double k)
+
+  void Rectangle::move(double moveX, double moveY)
   {
-    if (k <= 0)
-    {
-      throw std::logic_error("Scaling coefficient must be positive");
-    }
-    double newWidth = (leftCorner_.x - rightCorner_.x) * k;
-    double newHeigth = (leftCorner_.y - rightCorner_.y) * k;
-    point_t center = getFrameRect().pos;
-    rightCorner_.x = center.x + newWidth / 2;
-    rightCorner_.y = center.y + newHeigth / 2;
-    leftCorner_.x = center.x - newWidth / 2;
-    leftCorner_.y = center.y - newHeigth / 2;
+    leftCorner_.x += moveX;
+    leftCorner_.y += moveY;
+    rightCorner_.x += moveX;
+    rightCorner_.y += moveY;
+  }
+
+  void Rectangle::scale(double factor)
+  {
+    point_t currentCenter = getFrameRect().pos;
+    leftCorner_.x = currentCenter.x - (currentCenter.x - leftCorner_.x) * factor;
+    leftCorner_.y = currentCenter.y - (currentCenter.y - leftCorner_.y) * factor;
+    rightCorner_.x = currentCenter.x - (currentCenter.x - rightCorner_.x) * factor;
+    rightCorner_.y = currentCenter.y - (currentCenter.y - rightCorner_.y) * factor;
   }
 }
