@@ -79,26 +79,27 @@ int main()
         if (k <= 0)
         {
           std::cerr << "Uncorrect scale coefficient!\n";
+          finaev::deleteShapes(shapes, size);
           return 1;
         }
-        std::cout << std::fixed << std::setprecision(1) << finaev::getSumArea(shapes, size);
-        finaev::printFrameRect(shapes, size);
-        std::cout << "\n";
         break;
       }
     }
+    if (isCorrect)
+    {
+      std::cerr << "Input has uncorrects figures!\n";
+    }
+    std::cout << std::fixed << std::setprecision(1) << finaev::getSumArea(shapes, size);
+    finaev::printFrameRect(shapes, size);
+    std::cout << "\n";
     finaev::scale(shapes, size, scaleCenter, k);
     std::cout << std::fixed << std::setprecision(1) << finaev::getSumArea(shapes, size);
     finaev::printFrameRect(shapes, size);
     std::cout << "\n";
     finaev::deleteShapes(shapes, size);
-    if (isCorrect)
-    {
-      std::cerr << "Input has uncorrects figures!\n";
-    }
     return 0;
   }
-  catch (std::bad_alloc& e)
+  catch (std::logic_error& e)
   {
     finaev::deleteShapes(shapes, size);
     return 1;
