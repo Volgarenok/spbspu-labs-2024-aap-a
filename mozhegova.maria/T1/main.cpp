@@ -33,9 +33,67 @@ int main()
     bool isScale = std::strcmp(tok, "SCALE") == 0;
 
     if (isRectangle)
-    {}
+    {
+      len = 4;
+      try
+      {
+        num = mozhegova::getNum(tok, len);
+      }
+      catch (const std::exception& e)
+      {
+        std::cerr << "Out of memory\n";
+        delete[] str;
+        mozhegova::destroy(shapes, count);
+        return 1;
+      }
+      mozhegova::point_t lowLef = {num[0], num[1]};
+      mozhegova::point_t uppRig = {num[2], num[3]};
+      if (lowLef.x >= uppRig.x || lowLef.y >= uppRig.y)
+      {
+        flag = true;
+        delete[] str;
+        delete[] num;
+        continue;
+      }
+      mozhegova::Rectangle * rect = new mozhegova::Rectangle(lowLef, uppRig);
+      shapes[count++] = rect;
+      delete[] num;
+    }
     else if (isScale)
-    {}
+    {
+      len = 3;
+      try
+      {
+        num = mozhegova::getNum(tok, len);
+      }
+      catch (const std::exception& e)
+      {
+        std::cerr << "Out of memory\n";
+        delete[] str;
+        mozhegova::destroy(shapes, count);
+        return 1;
+      }
+      scaleCenter = {num[0], num[1]};
+      scaleCoef = num[2];
+      delete[] str;
+      delete[] num;
+      break;
+    }
     delete[] str;
+  }
+  if (scaleCoef <= 0)
+  {
+    std::cerr << "Incorrect scale\n";
+    mozhegova::destroy(shapes, count);
+    return 1;
+  }
+  if (count == 0)
+  {
+    std::cerr << "There are no shapes\n";
+    return 1;
+  }
+  if (flag)
+  {
+    std::cerr << "There is an incorrect shape\n";
   }
 }
