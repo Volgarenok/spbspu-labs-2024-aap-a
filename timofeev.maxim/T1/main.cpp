@@ -16,6 +16,7 @@ int main()
   bool incorrect_values = false;
   timofeev::point_t izo_pos;
   double factor;
+  bool scale_availability = false;
   while (std::cin >> input)
   {
     if (input == "RECTANGLE")
@@ -100,6 +101,7 @@ int main()
     }
     else if (input == "SCALE")
     {
+      scale_availability = true;
       std::cin >> izo_pos.x >> izo_pos.y >> factor;
       if (factor <= 0)
       {
@@ -115,6 +117,10 @@ int main()
       shape_delete(shapes, count);
       return 1;
     }
+  }
+  if (!scale_availability)
+  {
+    std::cerr << "Scale was not given\n";
   }
   if (count == 0)
   {
