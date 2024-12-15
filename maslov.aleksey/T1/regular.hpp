@@ -11,6 +11,7 @@ namespace maslov
   double findRadiusCircumcircle(double AC, double AB);
   double findHalfSide(double AC, double AB, double BC);
   bool isRegular(point_t A, point_t B, point_t C);
+  size_t findVerticals(double cat1, double cat2, double hyp);
 
   struct Regular : public Shape
   {
@@ -20,7 +21,6 @@ namespace maslov
     void move(point_t s) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
-    size_t getVerticals() const;
    private:
     point_t A_ = {0, 0}, B_ = {0, 0}, C_ = {0, 0};
     double AB_ = 0.0, AC_ = 0.0, BC_ = 0.0;
