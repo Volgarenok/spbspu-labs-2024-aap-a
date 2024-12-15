@@ -99,11 +99,6 @@ int main()
     free(input);
   }
 
-  if (shapeCount == 0 )
-  {
-    std::cerr << "Nothing no scale\n";
-    return 1;
-  }
   if (std::cin.eof())
   {
     std::cerr << "No scale\n";
