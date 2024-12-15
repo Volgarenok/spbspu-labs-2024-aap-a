@@ -36,7 +36,7 @@ void finaev::Square::move(double sx, double sy)
 }
 void finaev::Square::scale(double k)
 {
-  leftDown.x -= (side * k - side);
-  leftDown.y -= (side * k - side);
+  leftDown.x -= (side * k - side)/2;
+  leftDown.y -= (side * k - side)/2;
   side *= k;
 }
