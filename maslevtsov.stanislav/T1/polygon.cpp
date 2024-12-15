@@ -4,7 +4,23 @@
 
 namespace maslevtsov
 {
+  bool hasSameVertices(const point_t* vertices, std::size_t nVertices);
   point_t* convertArguments(const double* arguments, std::size_t nArguments);
+}
+
+bool maslevtsov::hasSameVertices(const point_t* vertices, std::size_t nVertices)
+{
+  for (const point_t* i = vertices; i < vertices + nVertices - 1; ++i)
+  {
+    for (const point_t* j = i + 1; j < vertices + nVertices; ++j)
+    {
+      if (i->x == j->x && i->y == j->y)
+      {
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 maslevtsov::Polygon::~Polygon()
@@ -16,7 +32,7 @@ maslevtsov::Polygon::Polygon(std::size_t nVertices, point_t* vertices):
   nVertices_(nVertices),
   vertices_(vertices)
 {
-  if (nVertices < 3)
+  if (nVertices < 3 || hasSameVertices(vertices, nVertices))
   {
     throw std::logic_error("incorrect coordinates");
   }
