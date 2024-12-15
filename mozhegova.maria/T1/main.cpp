@@ -134,6 +134,22 @@ int main()
       {
         numPoint[i] = {num[i * 2], num[i * 2 + 1]};
       }
+      for (size_t i = 0; i < (len - 1) / 2; i++)
+      {
+        for (size_t j = i + 1; j < len / 2; j++)
+        {
+          if (numPoint[i].x == numPoint[j].x && numPoint[i].y == numPoint[j].y)
+          {
+            flag = true;
+          }
+        }
+      }
+      if (flag)
+      {
+        delete[] str;
+        delete[] num;
+        continue;
+      }
       mozhegova::Polygon * poly = new mozhegova::Polygon(len / 2, numPoint);
       shapes[count++] = poly;
       delete[] num;
