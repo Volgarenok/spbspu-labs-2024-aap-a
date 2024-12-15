@@ -77,19 +77,19 @@ double * zakirov::get_data(std::istream & in)
   in >> shape;
   if (shape == "RECTANGLE")
   {
-    data[0] == 1.0;
+    data[0] = 1.0;
   }
   else if (shape == "CIRCLE")
   {
-    data[0] == 2.0;
+    data[0] = 2.0;
   }
   else if (shape == "RING")
   {
-    data[0] == 3.0;
+    data[0] = 3.0;
   }
   else
   {
-    data[0] == 0.0;
+    data[0] = 0.0;
   }
 
   size_t location = 2;
