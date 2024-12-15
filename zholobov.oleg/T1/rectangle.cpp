@@ -1,7 +1,7 @@
 #include "rectangle.hpp"
 
-Rectangle::Rectangle()
-  : rect_{}
+Rectangle::Rectangle():
+  rect_{}
 {}
 
 Rectangle::Rectangle(const point_t& a, const point_t& c)
