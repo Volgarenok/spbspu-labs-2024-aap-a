@@ -45,5 +45,3 @@ void brevnov::print_frame_coordinates(Shape** shapes, size_t count, std::ostream
   }
   out << "\n";
 }
-
-
