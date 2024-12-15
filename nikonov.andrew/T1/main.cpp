@@ -16,7 +16,7 @@ int main()
   }
   if (noncorrect)
   {
-    std::cerr << "It was" << noncorrect << " noncorrect figures\n ";
+    std::cerr << "It was '" << noncorrect << "' noncorrect figures\n ";
   }
   nikonov::destoy(shapeCollection, cnt);
 }

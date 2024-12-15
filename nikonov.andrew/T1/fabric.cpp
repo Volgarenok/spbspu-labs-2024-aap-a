@@ -51,10 +51,10 @@ nikonov::Diamond* nikonov::make_diamond(float nums[])
 }
 nikonov::Triangle* nikonov::make_triangle(float nums[])
 {
-  float AB = pow(nums[2] - nums[0], 2) + pow(nums[3] - nums[1], 2);
-  float BC = pow(nums[4] - nums[2], 2) + pow(nums[5] - nums[3], 2);
-  float CD = pow(nums[0] - nums[4], 2) + pow(nums[1] - nums[5], 2);
-  if (!(AB + BC > CD) && (AB + CD > BC) && (CD + BC > AB))
+  float AB = std::sqrt(std::pow(nums[2] - nums[0], 2) + std::pow(nums[3] - nums[1], 2));
+  float BC = std::sqrt(std::pow(nums[4] - nums[2], 2) + std::pow(nums[5] - nums[3], 2));
+  float CA = std::sqrt(std::pow(nums[4] - nums[0], 2) + std::pow(nums[5] - nums[1], 2));
+  if (!((AB + BC > CA) && (AB + CA > BC) && (CA + BC > AB)))
   {
     return nullptr;
   }
