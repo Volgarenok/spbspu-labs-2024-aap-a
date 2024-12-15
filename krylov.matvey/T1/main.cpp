@@ -71,6 +71,7 @@ void processShapes()
         {
           totalAreaBefore += shapes[i]->getArea();
           krylov::rectangle_t frame = shapes[i]->getFrameRect();
+          std::cout << std::fixed << std::setprecision(1) << totalAreaBefore << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x - frame.width / 2 << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.y - frame.height / 2 << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x + frame.width / 2 << ' ';
@@ -86,6 +87,7 @@ void processShapes()
         {
           totalAreaAfter += shapes[i]->getArea();
           krylov::rectangle_t frame = shapes[i]->getFrameRect();
+          std::cout << std::fixed << std::setprecision(1) << totalAreaAfter << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x - frame.width / 2 << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x - frame.width / 2 << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x + frame.width / 2 << ' ';
