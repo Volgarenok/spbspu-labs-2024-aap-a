@@ -2,16 +2,16 @@
 #define BASE_TYPES_HPP
 namespace dribas
 {
-  struct Point_t
+  struct point_t
   {
     double x_;
     double y_;
   };
-  struct Rectangle_t
+  struct rectangle_t
   {
     double width_;
     double height_;
-    Point_t pos_;
+    point_t pos_;
   };
 }
 #endif

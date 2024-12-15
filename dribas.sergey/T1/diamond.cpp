@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 
-dribas::Diamond::Diamond(Point_t a, Point_t b, Point_t c): a_({0.0, 0.0}), b_({0.0, 0.0}), c_({0.0, 0.0})
+dribas::Diamond::Diamond(point_t a, point_t b, point_t c): a_({0.0, 0.0}), b_({0.0, 0.0}), c_({0.0, 0.0})
 {
   if ((a.x_ == b.x_ && a.y_ == c.y_) || (a.y_ == b.y_ && a.x_ == c.x_)) {
     a_ = a;
@@ -41,9 +41,9 @@ double dribas::Diamond::getArea() const
   return std::abs(a_.x_ - b_.x_ + a_.x_ - c_.x_) * std::abs(a_.y_ - b_.y_ + a_.y_ - c_.y_) * 2.0L ;
 }
 
-dribas::Rectangle_t dribas::Diamond::getFrameRect() const
+dribas::rectangle_t dribas::Diamond::getFrameRect() const
 {
-  Rectangle_t fremRECT;
+  rectangle_t fremRECT;
   fremRECT.pos_ = a_;
   fremRECT.width_ = std::max(std::abs(c_.x_ - a_.x_), std::abs(b_.x_ - a_.x_));
   fremRECT.height_ = std::max(std::abs(c_.y_ - a_.y_), std::abs(b_.y_ - a_.y_));
@@ -60,7 +60,7 @@ void dribas::Diamond::move(double x, double y)
   c_.y_ += y;
 }
 
-void dribas::Diamond::move(Point_t point)
+void dribas::Diamond::move(point_t point)
 {
   double moveX = point.x_ - a_.x_;
   double moveY = point.y_ - a_.y_;

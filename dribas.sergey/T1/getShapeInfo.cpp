@@ -13,7 +13,7 @@ double dribas::getAllArea(Shape** myShapes, size_t shapeCount)
   return allArea;
 }
 
-void dribas::scaling(Shape** myShapes, size_t shapeCount, Point_t center, double ratio)
+void dribas::scaling(Shape** myShapes, size_t shapeCount, point_t center, double ratio)
 {
   for (size_t i = 0; i <shapeCount; i++) {
     myShapes[i]->move(center);
@@ -30,7 +30,7 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
       if (Mystr == "RECTANGLE") {
         std::cout <<"sdad";
         try {
-          Point_t down, up;
+          point_t down, up;
           input >> down.x_;
           input >> down.y_;
           input >> up.x_;
@@ -43,7 +43,7 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
         }
       } else if (Mystr == "TRIANGLE") {
         try {
-          Point_t a, b, c;
+          point_t a, b, c;
           input >> a.x_;
           input >> a.y_;
           input >> b.x_;
@@ -58,7 +58,7 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
         }
       } else if (Mystr == "DIAMOND") {
         try {
-          Point_t a, b, c;
+          point_t a, b, c;
           input >> a.x_;
           input >> a.y_;
           input >> b.x_;
@@ -72,7 +72,7 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
         }
       } else if (Mystr == "CONCAVE") {
         try {
-          Point_t a, b, c, d;
+          point_t a, b, c, d;
           input >> a.x_;
           input >> a.y_;
           input >> b.x_;
@@ -91,7 +91,7 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** my
           error << "No shapes for scale\n";
           return 0;
         }
-        Point_t toCenter;
+        point_t toCenter;
         input >> toCenter.x_;
         input >> toCenter.y_;
         double ratio;

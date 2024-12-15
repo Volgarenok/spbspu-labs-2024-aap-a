@@ -6,17 +6,17 @@ namespace dribas
   class Concave : public Shape
   {
   public:
-    Concave(Point_t a, Point_t b, Point_t c, Point_t d);
+    Concave(point_t a, point_t b, point_t c, point_t d);
     double getArea() const  override;
-    Rectangle_t getFrameRect() const override;
-    void move(Point_t point) override;
+    rectangle_t getFrameRect() const override;
+    void move(point_t point) override;
     void move(double x, double y) override;
     void scale(double ratio) override;
   private:
-    Point_t a_;
-    Point_t b_;
-    Point_t c_;
-    Point_t d_;
+    point_t a_;
+    point_t b_;
+    point_t c_;
+    point_t d_;
   };
 }
 #endif
