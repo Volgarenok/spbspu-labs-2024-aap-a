@@ -22,6 +22,7 @@ int main()
     std::cerr << "Empty input\n";
     return 1;
   }
+
   resultShrSym = sharifullina::shrSym(firstLine, str);
   std::cout << resultShrSym << '\n';
   delete[] resultShrSym;

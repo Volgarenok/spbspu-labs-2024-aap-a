@@ -74,6 +74,7 @@ char * sharifullina::shrSym(const char * str1, const char * str2)
   res[resIndex] = '\0';
   return res;
 }
+
 char * sharifullina::uniTwo(const char * str1, const char * str2)
 {
   size_t length1 = 0;
