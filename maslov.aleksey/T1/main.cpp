@@ -19,7 +19,7 @@ int main()
     std::cerr << e.what() << '\n';
     return 1;
   }
-  catch (const std::bad_alloc& e)
+  catch (const std::bad_alloc & e)
   {
     std::cerr << "Memory was not allocated\n";
     return 1;

@@ -1,5 +1,4 @@
 #include "parallelogram.hpp"
-#include <cstdlib>
 #include <algorithm>
 
 double maslov::Parallelogram::getArea() const

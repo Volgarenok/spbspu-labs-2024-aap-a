@@ -1,8 +1,8 @@
 #ifndef REGULAR_HPP
 #define REGULAR_HPP
 
-#include "shape.hpp"
 #include <cstddef>
+#include "shape.hpp"
 
 namespace maslov
 {

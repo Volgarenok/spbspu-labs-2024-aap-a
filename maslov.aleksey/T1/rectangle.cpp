@@ -1,5 +1,4 @@
 #include "rectangle.hpp"
-#include <stdexcept>
 #include "base-types.hpp"
 
 double maslov::Rectangle::getArea() const

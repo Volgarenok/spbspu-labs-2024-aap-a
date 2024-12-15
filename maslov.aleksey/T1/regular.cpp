@@ -8,7 +8,7 @@ A_(A), B_(B), C_(C), AB_(distance(A, B)),
 AC_(distance(A, C)), BC_(distance(B, C)),
 rI_(findRadiusIncircle(AC_, AB_, BC_)),
 rC_(findRadiusCircumcircle(AC_, AB_)),
-halfSide_(findHalfSide(AC_, AB_, BC_)),
+halfSide_(findHalfSide(AC_, AB_, BC_)), 
 n_(findVerticals(halfSide_, rI_, rC_))
 {}
 double maslov::Regular::getArea() const
@@ -117,18 +117,17 @@ size_t maslov::findVerticals(double cat1, double cat2, double hyp)
   }
   return std::round(verticals);
 }
-
 bool maslov::isRegular(point_t A, point_t B, point_t C)
 {
   double AB = distance(A, B);
   double AC = distance(A, C);
   double BC = distance(B, C);
   double hyp = std::max(AB, AC);
-  double cat1 = BC;
-  double cat2 = std::min(AB, AC);
+  double cat1 = std::max(std::min(AB, AC), BC);
+  double cat2 = std::min(std::min(AB, AC), BC);
   if (std::abs(hyp * hyp - (cat1 * cat1 + cat2 * cat2)) > 1e-20)
   {
-    if (findVerticals(std::min(cat1, cat2), std::max(cat1, cat2), hyp) != 0)
+    if (findVerticals(cat1, cat2, hyp) != 0)
     {
       return true;
     }
