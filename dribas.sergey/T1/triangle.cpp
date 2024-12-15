@@ -24,9 +24,9 @@ dribas::rectangle_t dribas::Triangle::getFrameRect() const
   double minY = std::min(a_.y, std::min(b_.y, c_.y));
   dribas::rectangle_t result;
   result.height = maxY - minY;
-  result.width = maxX - minY;
-  result.pos.x = minX + (result.width / 2);
-  result.pos.y = maxX + (result.height / 2);
+  result.width = maxX - minX;
+  result.pos.x = minX + (result.width / 2.0);
+  result.pos.y = minY + (result.height / 2.0);
   return result;
 }
 void dribas::Triangle::move(point_t centerP)
@@ -60,16 +60,10 @@ void dribas::Triangle::scale(double ratio)
   point_t pos;
   pos.x = std::abs(a_.x + b_.x + c_.x) / 3.0;
   pos.y = std::abs(a_.y + b_.y + c_.y) / 3.0;
-  double centerA = std::sqrt(std::pow(a_.x - pos.x, 2) + std::pow(a_.y - pos.y, 2));
-  double centerB = std::sqrt(std::pow(b_.x - pos.x, 2) + std::pow(b_.y - pos.y, 2));
-  double centerC = std::sqrt(std::pow(c_.x - pos.x, 2) + std::pow(c_.y - pos.y, 2));
-  centerA *= ratio;
-  centerB *= ratio;
-  centerC *= ratio;
-  a_.x = pos.x + centerA * std::cos(std::atan2(a_.y - pos.y, a_.x - pos.x));
-  a_.y = pos.y + centerA * std::sin(std::atan2(a_.y - pos.y, a_.x - pos.x));
-  b_.x = pos.x + centerB * std::cos(std::atan2(b_.y - pos.y, b_.x - pos.x));
-  b_.y = pos.y + centerB * std::sin(std::atan2(b_.y - pos.y, b_.x - pos.x));
-  c_.x = pos.x + centerC * std::cos(std::atan2(c_.y - pos.y, c_.x - pos.x));
-  c_.y = pos.y + centerC * std::sin(std::atan2(c_.y - pos.y, c_.x - pos.x));
+  a_.x = (a_.x - pos.x) * ratio + pos.x;
+  a_.y = (a_.y - pos.y) * ratio + pos.y;
+  b_.x = (b_.x - pos.x) * ratio + pos.x;
+  b_.y = (b_.y - pos.y) * ratio + pos.y;
+  c_.x = (c_.x - pos.x) * ratio + pos.x;
+  c_.y = (c_.y - pos.y) * ratio + pos.y;
 }

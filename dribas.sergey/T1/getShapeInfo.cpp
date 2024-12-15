@@ -31,6 +31,7 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
 {
   std::string Mystr;
   int shapesCount = 0;
+  bool scaled = false;
   try {
     while (input >> Mystr) {
       if (Mystr == "RECTANGLE") {
@@ -90,6 +91,7 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
           error << e.what() << '\n';
         }
       } else if (Mystr == "SCALE") {
+        scaled = true;
         if (shapesCount == 0) {
           error << "No shapes for scale\n";
           return -1;
@@ -118,6 +120,9 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
   } catch (const std::logic_error& e) {
     error << e.what() << '\n';
     clear(myShapes, shapesCount);
+    return -1;
+  }
+  if (!scaled) {
     return -1;
   }
   return shapesCount;

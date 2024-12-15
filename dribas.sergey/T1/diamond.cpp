@@ -45,8 +45,8 @@ dribas::rectangle_t dribas::Diamond::getFrameRect() const
 {
   rectangle_t fremRECT;
   fremRECT.pos = a_;
-  fremRECT.width = std::max(std::abs(c_.x - a_.x), std::abs(b_.x - a_.x));
-  fremRECT.height = std::max(std::abs(c_.y - a_.y), std::abs(b_.y - a_.y));
+  fremRECT.width = std::abs(c_.x - a_.x) * 2;
+  fremRECT.height = std::abs(b_.y - a_.y) * 2;
   return fremRECT;
 }
 
@@ -71,6 +71,6 @@ void dribas::Diamond::scale(double ratio)
   if (ratio <= 0) {
     throw std::invalid_argument("under zero ratio\n");
   }
-  b_.x = (b_.x - a_.x) * ratio;
-  c_.y = (c_.y - a_.y) * ratio;
+  b_.y = (a_.y - b_.y) * ratio + a_.y;
+  c_.x = (a_.x - c_.x) * ratio + a_.x;
 }
