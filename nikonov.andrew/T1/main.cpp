@@ -1,9 +1,10 @@
 #include <iostream>
 #include <string>
 #include "shape.hpp"
+#include "base-types.hpp"
 #include "fabric.hpp"
 #include "scale.hpp"
-#include "fillShapeCollection.hpp"
+#include "additional-utilities.hpp"
 int main()
 {
   nikonov::Shape* shapeCollection[10000] = { nullptr };
@@ -13,16 +14,17 @@ int main()
   float x = 0, y = 0;
   float k = 0;
   std::cin >> x >> y >> k;
+  float s1 = 0, s2 = 0;
   if (std::cin)
   {
-    nikonov::Shape* next = shapeCollection[0];
-    while (next)
+    nikonov::Shape* current = shapeCollection[0];
+    while (current)
     {
-      nikonov::ispScale(next, x, y, k);
+      nikonov::rectangle_t tempRect = current->getFrameRect();
+      s1 += tempRect.height_ * tempRect.width_;
+      nikonov::ispScale(current, x, y, k);
+      ++current;
     }
   }
-  for (size_t i = 0; i < cnt; ++i)
-  {
-    delete shapeCollection[i];
-  }
+  nikonov::destoy(shapeCollection, cnt);
 }

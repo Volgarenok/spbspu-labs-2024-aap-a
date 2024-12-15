@@ -1,6 +1,6 @@
 #include "fabric.hpp"
 #include <iostream>
-#include <cmath> 
+#include <cmath>
 #include <string>
 #include "shape.hpp"
 #include "rectangle.hpp"
