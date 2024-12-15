@@ -52,7 +52,7 @@ int main()
       {
         averenkov::point_t center;
         double a, b;
-        if (!(line >> center.x >> center.y >> a >> b))
+        if (!(line >> center.x >> center.y >> a >> b) || a <= 0 || b <= 0)
         {
           throw std::invalid_argument("Invalid ELLIPSE");
         }
@@ -71,6 +71,10 @@ int main()
         {
           throw std::invalid_argument("Invalid DIAMOND");
         }
+        if ((a.x != b.x && a.x != c.x && b.x != c.x) || (a.y != b.y && a.y != c.y && b.y != c.y)
+        {
+          throw std::invalid_argument("Invalid DIAMOND");
+        }
         else
         {
           shapes[shapeCount++] = new averenkov::Diamond(a, b, c);
@@ -78,6 +82,12 @@ int main()
       }
       else if (command == "SCALE")
       {
+        if (shapeCoung == 0)
+        {
+          std::cerr << "Nothing to scale\n";
+          free(input);
+          return 1;
+        }
         if (!(line >> scale_center.x >> scale_center.y >> factor) || factor <= 0)
         {
           for(size_t i = 0; i < shapeCount; ++i)
