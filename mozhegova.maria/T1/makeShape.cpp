@@ -107,6 +107,7 @@ mozhegova::Polygon * mozhegova::makePolygon(std::istream& in)
   }
   if (len < 6)
   {
+    delete[] num;
     throw std::invalid_argument("Incorrect coordinates");
   }
   point_t * numPoint = nullptr;
@@ -129,6 +130,8 @@ mozhegova::Polygon * mozhegova::makePolygon(std::istream& in)
     {
       if (numPoint[i].x == numPoint[j].x && numPoint[i].y == numPoint[j].y)
       {
+        delete[] num;
+        delete[] numPoint;
         throw std::invalid_argument("Incorrect coordinates");
       }
     }
