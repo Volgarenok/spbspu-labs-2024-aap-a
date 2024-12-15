@@ -25,10 +25,7 @@ void finaev::printFrameRect(Shape** shapes, size_t size)
       double leftDownY = a.pos.y - (a.height / 2);
       double rightUpX = a.pos.x + (a.wedth / 2);
       double rightUpY = a.pos.y + (a.height / 2);
-      std::cout << std::fixed << std::setprecision(1) << leftDownX << " ";
-      std::cout << std::fixed << std::setprecision(1) << leftDownY << " ";
-      std::cout << std::fixed << std::setprecision(1) << rightUpX << " ";
-      std::cout << std::fixed << std::setprecision(1) << rightUpY << " ";
+      std::cout << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY << " ";
     }
   }
 }
