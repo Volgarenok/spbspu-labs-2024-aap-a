@@ -3,11 +3,14 @@
 
 #include "rectangle.hpp"
 
-class Square: public Rectangle {
-public:
-  Square();
-  Square(const point_t& a, float length);
-};
+namespace zholobov {
 
+  class Square : public Rectangle {
+   public:
+    Square();
+    Square(const point_t& a, float length);
+  };
+
+}
 
 #endif

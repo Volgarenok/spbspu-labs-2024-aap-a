@@ -1,10 +1,10 @@
 #include "rectangle.hpp"
 
-Rectangle::Rectangle():
+zholobov::Rectangle::Rectangle():
   rect_{}
 {}
 
-Rectangle::Rectangle(const point_t& a, const point_t& c)
+zholobov::Rectangle::Rectangle(const point_t& a, const point_t& c)
 {
   rect_.width = c.x - a.x;
   rect_.height = c.y - a.y;
@@ -12,28 +12,28 @@ Rectangle::Rectangle(const point_t& a, const point_t& c)
   rect_.pos.y = (a.y + c.y) / 2.0f;
 }
 
-float Rectangle::getArea()
+float zholobov::Rectangle::getArea()
 {
   return rect_.width * rect_.height;
 }
 
-rectangle_t Rectangle::getFrameRect()
+zholobov::rectangle_t zholobov::Rectangle::getFrameRect()
 {
   return rect_;
 }
 
-void Rectangle::move(point_t p)
+void zholobov::Rectangle::move(point_t p)
 {
   rect_.pos = p;
 }
 
-void Rectangle::move(float dx, float dy)
+void zholobov::Rectangle::move(float dx, float dy)
 {
   rect_.pos.x += dx;
   rect_.pos.y += dy;
 }
 
-void Rectangle::scale(float k)
+void zholobov::Rectangle::scale(float k)
 {
   rect_.width *= k;
   rect_.height *= k;
