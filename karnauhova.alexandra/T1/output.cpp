@@ -1,6 +1,7 @@
 #include "output.hpp"
 #include "shape.hpp"
 #include <iostream>
+#include <iomanip>
 #include "rectangle.hpp"
 #include "triangle.hpp"
 #include "polygon.hpp"
@@ -96,17 +97,17 @@ void karnauhova::output(std::ostream & out, double* all_points, double* polygon,
       c_polygon += all_points[k];
     }
   }
-  polygon[0] = 0;
-  out << sum1;
+  out << std::fixed;
+  out << std::setprecision(1) << sum1;
   for (size_t i = 0; i < k; i++)
   {
-    out << " " << out1[i];
+    out << std::setprecision(1) << " " << out1[i];
   }
   out << "\n";
-  out << sum2;
+  out << std::setprecision(1) << sum2;
   for (size_t i = 0; i < k; i++)
   {
-    out << " " << out2[i];
+    out << std::setprecision(1) << " " << out2[i];
   }
   out << "\n";
 }

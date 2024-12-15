@@ -9,21 +9,12 @@ int main()
 {
   std::string names[5000] = {};
   double polygon[10000] = {};
-  double* points = nullptr;
   size_t i = 0;
   size_t count_shape = 0;
   size_t count_error = 0;
   size_t count_polygon = 0;
   std::string name = "uwu";
-  try
-  {
-    points = new double[10000];
-  }
-  catch (const std::bad_alloc & e)
-  {
-    delete[] points;
-    std::cerr << "Out of memmory\n";
-  }
+  double points[10000] = {};
   while (std::cin >> name)
   {
     if (!name.empty())
@@ -94,16 +85,19 @@ int main()
       }
     }
   }
+  if (names[0] == "SCALE" || names[0].empty())
+  {
+    std::cerr << "Error: empty input\n";
+    return 1;
+  }
   if (names[count_shape-1] != "SCALE")
   {
     std::cerr << "Error: missing scale\n";
-    delete[] points;
     return 1;
   }
-  if (points[i] < 0)
+  if (points[i - 1] < 0)
   {
     std::cerr << "Error: missing scale\n";
-    delete[] points;
     return 1;
   }
   if (count_error > 0)
@@ -111,5 +105,4 @@ int main()
     std::cerr << "Error in the input\n";
   }
   karnauhova::output(std::cout, points, polygon, names, i, count_shape);
-  delete[] points;
 }
