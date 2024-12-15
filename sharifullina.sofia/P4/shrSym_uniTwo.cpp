@@ -11,7 +11,7 @@ char * sharifullina::inputString(std::istream & in, char stop)
   {
     if (capacity == size)
     {
-      size_t capacity = capacity * 2;
+      capacity = capacity * 2;
       char * newstr = nullptr;
       try
       {
