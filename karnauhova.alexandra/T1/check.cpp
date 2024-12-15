@@ -25,9 +25,12 @@ bool karnauhova::it_polygon(double* polygon, size_t max_count, size_t count)
   {
     for (size_t j = i + 2; j < count; j++)
     {
-      if (polygon[max_count + i] == polygon[max_count + j] && polygon[max_count + i + 1] == polygon[max_count + j + 1])
+      if (polygon[max_count + i] == polygon[max_count + j])
       {
-        return false;
+        if (polygon[max_count + i + 1] == polygon[max_count + j + 1])
+        {
+          return false;
+        }
       }
     }
   }
@@ -146,7 +149,7 @@ bool karnauhova::dubl_triangle(double* points, std::string* names, size_t c_name
   }
   return true;
 }
-bool karnauhova::dubl_pol(double* polygon, size_t end_pol, std::string* names, size_t c_names, size_t c_points, double* points)
+bool karnauhova::dubl_pol(double* pol, size_t end, std::string* names, size_t c_names, size_t c_points, double* points)
 {
   size_t k = 0;
   size_t c_polygon = 0;
@@ -169,9 +172,12 @@ bool karnauhova::dubl_pol(double* polygon, size_t end_pol, std::string* names, s
       size_t y = 0;
       for (size_t j = 0; j < points[k]; j += 2)
       {
-        if (polygon[c_polygon + j] == polygon[end_pol - static_cast<int>(points[c_points - 1])] && polygon[c_polygon + j + 1] == polygon[end_pol - static_cast<int>(points[c_points - 1]) + 1])
+        if (pol[c_polygon + j] == pol[end - static_cast<int>(points[c_points - 1])])
         {
-          y++;
+          if (pol[c_polygon + j + 1] == pol[end - static_cast<int>(points[c_points - 1]) + 1])
+          {
+            y++;
+          }
         }
       }
       if (y == points[c_points - 1])
