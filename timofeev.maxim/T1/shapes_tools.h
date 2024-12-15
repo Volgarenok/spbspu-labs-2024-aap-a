@@ -1,6 +1,6 @@
 #ifndef SHAPES_TOOLS_H
 #define SHAPES_TOOLS_H
-#include "Shape.hpp"
+#include "shape.hpp"
 #include <cctype>
 #include <cmath>
 

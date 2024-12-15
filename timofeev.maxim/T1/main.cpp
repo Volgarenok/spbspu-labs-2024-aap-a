@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Shape.hpp"
+#include "shape.hpp"
 #include "base-types.hpp"
 #include "shapes_tools.h"
 #include "concave.h"
@@ -121,6 +121,7 @@ int main()
   if (!scale_availability)
   {
     std::cerr << "Scale was not given\n";
+    shape_delete(shapes, count);
     return 1;
   }
   if (count == 0)
