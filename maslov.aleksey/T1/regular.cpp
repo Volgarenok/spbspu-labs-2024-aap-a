@@ -38,7 +38,8 @@ maslov::rectangle_t maslov::Regular::getFrameRect() const
     {
       minY = y;
     }
-    if (x > maxX) {
+    if (x > maxX)
+    {
       maxX = x;
     }
     if (x < minX)
@@ -88,7 +89,6 @@ void maslov::Regular::scale(double k)
   rC_ = findRadiusCircumcircle(AC_, AB_);
   halfSide_ = findHalfSide(AC_, AB_, BC_);
 }
-
 double maslov::distance(point_t A, point_t B)
 {
   return std::sqrt(std::pow(B.x - A.x, 2.0) + std::pow(B.y - A.y, 2.0));

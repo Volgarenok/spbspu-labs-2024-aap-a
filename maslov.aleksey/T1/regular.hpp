@@ -11,7 +11,7 @@ namespace maslov
   double findRadiusCircumcircle(double AC, double AB);
   double findHalfSide(double AC, double AB, double BC);
   bool isRegular(point_t A, point_t B, point_t C);
-  
+
   struct Regular : public Shape
   {
     Regular(point_t A, point_t B, point_t C);

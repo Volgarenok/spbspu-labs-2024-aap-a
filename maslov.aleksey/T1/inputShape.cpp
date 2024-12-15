@@ -42,7 +42,7 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
       try
       {
         shapes[count] = makeRegular(in);
-        count++;  
+        count++;
       }
       catch(const std::invalid_argument & e)
       {
@@ -59,7 +59,7 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
       try
       {
         shapes[count] = makeParallelogram(in);
-        count++;  
+        count++;
       }
       catch(const std::invalid_argument & e)
       {
@@ -70,7 +70,6 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
         maslov::destroyShapes(shapes, count);
         throw;
       }
-      
     }
   }
   if (in.eof())
