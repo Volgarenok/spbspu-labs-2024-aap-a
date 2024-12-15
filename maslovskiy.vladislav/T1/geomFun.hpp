@@ -9,6 +9,7 @@ namespace maslovskiy
   bool isCorrectTriangle(point_t vertexA, point_t vertexB, point_t vertexC);
   double calculateTriangleArea(point_t vertexA, point_t vertexB, point_t vertexC);
   bool isPointInTriangle(point_t vertexA, point_t vertexB, point_t vertexC, point_t point);
+  bool isPointInQuad(point_t vertexA, point_t vertexB, point_t vertexC, point_t vertexD, point_t pos);
 }
 
 #endif
