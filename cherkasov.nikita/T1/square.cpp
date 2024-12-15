@@ -1,6 +1,6 @@
 #include "square.h"
 #include <stdexcept>
-namespace
+namespace cherkasov
 {
   Square::Square(point_t lowLeft, double leght)
   {
@@ -14,7 +14,7 @@ namespace
   }
   double Square::getArea() const
   {
-    return square_.wigth * square_.height;
+    return square_.width * square_.height;
   }
   rectangle_t Square::getFrameRect() const
   {

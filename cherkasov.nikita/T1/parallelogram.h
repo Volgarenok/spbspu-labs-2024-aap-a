@@ -1,6 +1,6 @@
 #ifndef PARALLELOGRAM_H
 #define PARALLELOGRAM_H
-#include "shape.hpp"
+#include "shape.h"
 namespace cherkasov
 {
   class Parallelogram : public Shape
