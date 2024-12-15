@@ -6,9 +6,7 @@ maslevtsov::Polygon::~Polygon()
   delete[] vertices_;
 }
 
-maslevtsov::Polygon::Polygon(std::size_t nVertices, point_t* vertices):
-  nVertices_(nVertices),
-  vertices_(vertices)
+maslevtsov::Polygon::Polygon(std::size_t nVertices, point_t* vertices): nVertices_(nVertices), vertices_(vertices)
 {
   if (nVertices < 3)
   {
@@ -28,7 +26,22 @@ double maslevtsov::Polygon::getArea() const noexcept
 }
 
 maslevtsov::rectangle_t maslevtsov::Polygon::getFrameRect() const noexcept
-{}
+{
+  rectangle_t frameRect;
+  point_t minPnt{vertices_[0].x, vertices_[0].y}, maxPnt = minPnt;
+  for (size_t i = 1; i < nVertices_; ++i)
+  {
+    minPnt = {
+      minPnt.x < vertices_[i].x ? minPnt.x : vertices_[i].x, minPnt.y < vertices_[i].y ? minPnt.y : vertices_[i].y};
+    maxPnt = {
+      minPnt.x > vertices_[i].x ? minPnt.x : vertices_[i].x, minPnt.y > vertices_[i].y ? minPnt.y : vertices_[i].y};
+  }
+  frameRect.width = maxPnt.x - minPnt.x;
+  frameRect.height = maxPnt.y - minPnt.y;
+  frameRect.pos.x = minPnt.x + (frameRect.width) / 2;
+  frameRect.pos.y = minPnt.y + (frameRect.height) / 2;
+  return frameRect;
+}
 
 void maslevtsov::Polygon::move(point_t pnt) noexcept
 {}
