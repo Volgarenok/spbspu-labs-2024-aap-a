@@ -14,6 +14,6 @@ int main()
   dribas::Shape * myShapes[shapesSize] = {};
   size_t shapeCount = 0;
   shapeCount = dribas::getShapeInfo(std::cin, std::cerr, myShapes);
-  dribas::clear(myShapes, shapeCount);
+  dribas::clear(myShapes, shapeCount - 1);
   return 0;
 }
