@@ -1,39 +1,5 @@
 #include "shapeManipulator.hpp"
-#include <cstring>
 
-double * mozhegova::getNum(char * tok, size_t &length)
-{
-  double * num = new double [length];
-  for (size_t i = 0; tok != NULL; i++)
-  {
-    if (i == length)
-    {
-      double * newnum = nullptr;
-      try
-      {
-        newnum = new double [length + 2];
-        for (size_t i = 0; i < length; i++)
-        {
-          newnum[i] = num[i];
-        }
-      }
-      catch (const std::bad_alloc & e)
-      {
-        delete[] num;
-        throw;
-      }
-      delete[] num;
-      num = newnum;
-      length += 2;
-    }
-    tok = std::strtok(NULL, " ");
-    if (tok != NULL)
-    {
-      num[i] = std::atof(tok);
-    }
-  }
-  return num;
-}
 double mozhegova::sumArea(Shape ** shapes, size_t n)
 {
   double sum = 0;
@@ -43,6 +9,7 @@ double mozhegova::sumArea(Shape ** shapes, size_t n)
   }
   return sum;
 }
+
 void mozhegova::printCoorRect(Shape ** shapes, size_t n)
 {
   for (size_t i = 0; i < n; i++)
@@ -56,6 +23,7 @@ void mozhegova::printCoorRect(Shape ** shapes, size_t n)
   }
   std::cout << "\n";
 }
+
 void mozhegova::scaleShapes(Shape ** shapes, size_t n, point_t p, double k)
 {
   for (size_t i = 0; i < n; i++)
@@ -68,6 +36,7 @@ void mozhegova::scaleShapes(Shape ** shapes, size_t n, point_t p, double k)
     shapes[i]->move(-vectorMove.x, -vectorMove.y);
   }
 }
+
 void mozhegova::destroy(Shape ** shapes, size_t n)
 {
   for (size_t i = 0; i < n; i++)

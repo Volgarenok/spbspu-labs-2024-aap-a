@@ -4,47 +4,7 @@
 
 mozhegova::Diamond::Diamond(point_t p1, point_t p2, point_t p3) :
   pCent(p1), pVert(p2), pHori(p3)
-{
-  point_t p = {0, 0};
-  if (pCent.x == pVert.x && pCent.y == pHori.y)
-  {}
-  else if (pCent.x == pHori.x && pCent.y == pVert.y)
-  {
-    p = pVert;
-    pVert = pHori;
-    pHori = p;
-  }
-  else if (pVert.x == pCent.x && pVert.y == pHori.y)
-  {
-    p = pVert;
-    pVert = pCent;
-    pCent = p;
-  }
-  else if (pVert.x == pHori.x && pVert.y == pCent.y)
-  {
-    p = pCent;
-    pCent = pVert;
-    pVert = pHori;
-    pHori = p;
-  }
-  else if (pHori.x == pCent.x && pHori.y == pVert.y)
-  {
-    p = pCent;
-    pCent = pHori;
-    pHori = pVert;
-    pVert = p;
-  }
-  else if (pHori.x == pVert.x && pHori.y == pCent.y)
-  {
-    p = pHori;
-    pHori = pCent;
-    pCent = p;
-  }
-  else
-  {
-    throw std::invalid_argument("Incorrect coordinates");
-  }
-}
+{}
 
 double mozhegova::Diamond::getArea() const
 {
