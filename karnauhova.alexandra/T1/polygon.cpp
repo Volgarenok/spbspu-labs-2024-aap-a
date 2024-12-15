@@ -21,22 +21,10 @@ rectangle_t Polygon::getFrameRect()
   double min_y = points_[0].y;
   for (size_t i = 0; i < count_; ++i)
   {
-    if (points_[i].x > max_x)
-    {
-      max_x = points_[i].x;
-    }
-    else if (points_[i].x < min_x)
-    {
-      min_x = points_[i].x;
-    }
-    if (points_[i].y > max_y)
-    {
-      max_y = points_[i].y;
-    }
-    else if (points_[i].y < min_y)
-    {
-      min_y = points_[i].y;
-    }
+    min_x = std::fmin(min_x, points_[i].x);
+    min_y = std::fmin(min_y, points_[i].y);
+    max_x = std::fmax(max_x, points_[i].x);
+    max_y = std::fmax(max_y, points_[i].y);
   }
   rect.width = max_x - min_x;
   rect.height = max_y - min_y;
