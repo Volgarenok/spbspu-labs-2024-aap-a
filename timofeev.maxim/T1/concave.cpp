@@ -66,4 +66,6 @@ void timofeev::Concave::scale(double factor)
   p2_.y = pos_an.y - (pos_an.y - p2_.y) * factor;
   p3_.x = pos_an.x - (pos_an.x - p3_.x) * factor;
   p3_.y = pos_an.y - (pos_an.y - p3_.y) * factor;
+  p4_.x = pos_an.x - (pos_an.x - p4_.x) * factor;
+  p4_.y = pos_an.y - (pos_an.y - p4_.y) * factor;
 }
