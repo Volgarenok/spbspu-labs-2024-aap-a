@@ -1,4 +1,4 @@
-#include "triangle.h"
+#include "triangle.hpp"
 
 timofeev::Triangle::Triangle(point_t p1, point_t p2, point_t p3) :
   p1_(p1),

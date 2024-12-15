@@ -1,16 +1,16 @@
-#ifndef CONCAVE_H
-#define CONCAVE_H
+#ifndef TRIANGLE_H
+#define TRIANGLE_H
 #include "shape.hpp"
 #include "base-types.hpp"
-#include "shapes_tools.h"
+#include "shapes_tools.hpp"
 #include <iostream>
 
 namespace timofeev
 {
-  class Concave : public Shape
+  class Triangle : public Shape
   {
   public:
-    Concave(point_t p1, point_t p2, point_t p3, point_t p4);
+    Triangle(point_t p1, point_t p2, point_t p3);
     double get_area() const override;
     rectangle_t get_frame_rect() const override;
     void move(point_t new_pos) override;
@@ -21,7 +21,6 @@ namespace timofeev
     point_t p1_;
     point_t p2_;
     point_t p3_;
-    point_t p4_;
   };
 }
 #endif

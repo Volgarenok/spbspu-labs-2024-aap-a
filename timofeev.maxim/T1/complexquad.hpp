@@ -2,7 +2,7 @@
 #define COMPLEXQUAD_H
 #include "shape.hpp"
 #include "base-types.hpp"
-#include "shapes_tools.h"
+#include "shapes_tools.hpp"
 #include <iostream>
 
 namespace timofeev

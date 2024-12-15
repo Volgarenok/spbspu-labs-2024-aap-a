@@ -1,11 +1,11 @@
 #include <iostream>
 #include "shape.hpp"
 #include "base-types.hpp"
-#include "shapes_tools.h"
-#include "concave.h"
-#include "rectangle.h"
-#include "complexquad.h"
-#include "triangle.h"
+#include "shapes_tools.hpp"
+#include "concave.hpp"
+#include "rectangle.hpp"
+#include "complexquad.hpp"
+#include "triangle.hpp"
 #include <iomanip>
 
 int main()

@@ -1,4 +1,4 @@
-#include "rectangle.h"
+#include "rectangle.hpp"
 #include <cmath>
 
 timofeev::Rectangle::Rectangle(double ldx, double ldy, double rux, double ruy)
