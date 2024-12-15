@@ -4,7 +4,7 @@
 #include "count_point.hpp"
 #include <string>
 #include <iostream>
-
+#include "check.hpp"
 int main()
 {
   std::string names[5000] = {};
@@ -28,9 +28,12 @@ int main()
         }
         else
         {
-          i+=4;
-          names[count_shape] = name;
-          count_shape++;
+          if (karnauhova::dubl_rectangle(points, names, count_shape + 1, i + 4))
+          {
+            i += 4;
+            names[count_shape] = name;
+            count_shape++;
+          }
         }
       }
       else if (name == "TRIANGLE")
@@ -42,9 +45,15 @@ int main()
         }
         else
         {
-          i+=6;
-          names[count_shape] = name;
-          count_shape++;
+          if (karnauhova::it_triangle(points, i + 6))
+          {
+            if (karnauhova::dubl_triangle(points, names, count_shape + 1, i + 6))
+            {
+              i += 6;
+              names[count_shape] = name;
+              count_shape++;
+            }
+          }
         }
       }
       else if (name == "SCALE")
@@ -56,7 +65,7 @@ int main()
         }
         else
         {
-          i+=3;
+          i += 3;
           names[count_shape] = name;
           count_shape++;
         }
@@ -71,11 +80,17 @@ int main()
         }
         else
         {
-          points[i] = count;
-          i++;
-          names[count_shape] = name;
-          count_shape++;
-          count_polygon += count;
+          if (karnauhova::it_polygon(polygon, count_polygon, count))
+          {
+            if (karnauhova::dubl_polygon(polygon, count_polygon + count, names, count_shape + 1, i + 1, points))
+            {
+              points[i] = count;
+              i++;
+              names[count_shape] = name;
+              count_shape++;
+              count_polygon += count;
+            }
+          }
         }
       }
       else
