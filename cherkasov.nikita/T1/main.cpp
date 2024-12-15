@@ -1,98 +1,90 @@
 #include <iostream>
 #include <iomanip>
-#include <stdexcept>
 #include <string>
 #include "rectangle.h"
 #include "square.h"
 #include "parallelogram.h"
 
-constexpr size_t maxShapes = 10000;
+const size_t max = 10000;
 int main()
 {
-  cherkasov::Shape* shapes[maxShapes] = {nullptr};
-  size_t shapeCount = 0;
-  std::string inputCommand;
-  while (std::cin >> inputCommand)
+  cherkasov::Shape *figures[max];
+  size_t count = 0;
+  std::string command;
+  while (std::cin >> command && command != "SCALE")
   {
-  try
-  {
-    if (inputCommand == "RECTANGLE")
+    if (count >= max)
     {
-      double x1, y1, x2, y2;
-      std::cin >> x1 >> y1 >> x2 >> y2;
-      if (shapeCount >= maxShapes)
-      {
-        throw std::logic_error("Shape limit exceeded");
-      }
-     shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
+      std::cerr << "Too many figures, skipping input." << std::endl;
+      break;
     }
-    else if (inputCommand == "SQUARE")
+    try
     {
-      double x, y, sideLength;
-      std::cin >> x >> y >> sideLength;
-      if (shapeCount >= maxShapes)
+      if (command == "RECTANGLE")
       {
-        throw std::logic_error("Shape limit exceeded");
+        double x1, y1, x2, y2;
+        std::cin >> x1 >> y1 >> x2 >> y2;
+        figures[count++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
       }
-     shapes[shapeCount++] = new cherkasov::Square({x, y}, sideLength);
-    }
-    else if (inputCommand == "PARALLELOGRAM")
-    {
-      double x1, y1, x2, y2, x3, y3;
-      std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-      if (shapeCount >= maxShapes)
+      else if (command == "SQUARE")
       {
-        throw std::logic_error("Shape limit exceeded");
+        double x, y, side;
+        std::cin >> x >> y >> side;
+        figures[count++] = new cherkasov::Square({x, y}, side);
       }
-     shapes[shapeCount++] = new cherkasov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
-    }
-    else if (inputCommand == "SCALE")
-    {
-      double dx, dy, k;
-      std::cin >> dx >> dy >> k;
-      if (k <= 0)
+      else if (command == "PARALLELOGRAM")
       {
-        throw std::logic_error("Scale factor must be positive");
+        double x1, y1, x2, y2, x3, y3;
+        std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+        figures[count++] = new cherkasov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
       }
-      for (size_t i = 0; i < shapeCount; ++i)
+      else
       {
-        if (shapes[i])
-        {
-          shapes[i]->move(dx, dy);
-          shapes[i]->scale(k);
-        }
+        std::cerr << "Unsupported figure type: " << command << std::endl;
+        std::string skip_line;
+        std::getline(std::cin, skip_line);
       }
     }
-    else
+    catch (const std::exception &e)
     {
-      std::cerr << "Unsupported command: " << inputCommand << "\n";
-      return 1;
+      std::cerr << "Error processing input: " << e.what() << std::endl;
     }
   }
-  catch (const std::bad_alloc& e)
+  double centerX, centerY, scaleFactor;
+  std::cin >> centerX >> centerY >> scaleFactor;
+  if (scaleFactor <= 0)
   {
-    std::cerr << "Memory allocation error: " << e.what() << "\n";
+    std::cerr << "Invalid scale factor." << std::endl;
     return 1;
   }
-  catch (const std::logic_error& e)
-  {
-    std::cerr << "error: " << e.what() << "\n";
-    return 1;
-  }
-    catch (const std::exception& e)
-    {
-      std::cerr << "Error: " << e.what() << "\n";
-      return 1;
-    }
-  }
+  double totalAreaBefore = 0.0;
+  double totalAreaAfter = 0.0;
   std::cout << std::fixed << std::setprecision(1);
-  for (size_t i = 0; i < shapeCount; ++i)
+  for (size_t i = 0; i < count; ++i)
   {
-    if (shapes[i])
-    {
-      std::cout << "Shape " << i + 1 << " Area: " << shapes[i]->getArea() << "\n";
-      delete shapes[i];
-    }
+    totalAreaBefore += figures[i]->getArea();
+    cherkasov::rectangle_t frame = figures[i]->getFrameRect();
+    std::cout << frame.pos.x - frame.width / 2 << " ";
+    std::cout << frame.pos.y - frame.height / 2 << " ";
+    std::cout << frame.pos.x + frame.width / 2 << " ";
+    std::cout << frame.pos.y + frame.height / 2 << "\n";
+    figures[i]->scale(scaleFactor);
+    figures[i]->move(centerX - frame.pos.x, centerY - frame.pos.y);
+    totalAreaAfter += figures[i]->getArea();
+  }
+  std::cout << totalAreaBefore << "\n";
+  for (size_t i = 0; i < count; ++i)
+  {
+    cherkasov::rectangle_t frame = figures[i]->getFrameRect();
+    std::cout << frame.pos.x - frame.width / 2 << " ";
+    std::cout << frame.pos.y - frame.height / 2 << " ";
+    std::cout << frame.pos.x + frame.width / 2 << " ";
+    std::cout << frame.pos.y + frame.height / 2 << "\n";
+  }
+  std::cout << totalAreaAfter << "\n";
+  for (size_t i = 0; i < count; ++i)
+  {
+    delete figures[i];
   }
   return 0;
 }
