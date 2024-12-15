@@ -44,10 +44,22 @@ maslevtsov::rectangle_t maslevtsov::Polygon::getFrameRect() const noexcept
 }
 
 void maslevtsov::Polygon::move(point_t pnt) noexcept
-{}
+{
+  double movedX = pnt.x - getFrameRect().pos.x;
+  double movedY = pnt.y - getFrameRect().pos.y;
+  for (std::size_t i = 0; i < nVertices_; ++i)
+  {
+    vertices_[i] = {vertices_[i].x + movedX, vertices_[i].y + movedY};
+  }
+}
 
 void maslevtsov::Polygon::move(double dx, double dy) noexcept
-{}
+{
+  for (std::size_t i = 0; i < nVertices_; ++i)
+  {
+    vertices_[i] = {vertices_[i].x + dx, vertices_[i].y + dy};
+  }
+}
 
 void maslevtsov::Polygon::scale(double k) noexcept
 {}
