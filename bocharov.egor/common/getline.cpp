@@ -17,13 +17,14 @@ char * bocharov::extend_string(const char * string, std::size_t capacity, std::s
   return newString;
 }
 
-char * bocharov::getline(std::istream & in, char symbol)
+char * bocharov::getline(std::istream & in, char end_symbol)
 {
   std::size_t capacity = 32;
   char * string = new char[capacity];
   std::size_t string_index = 0;
+  char symbol = '\0';
   std::noskipws(in);
-  while ((in >> symbol) && (symbol != '\n'))
+  while ((in >> symbol) && (symbol != end_symbol))
   {
     if (string_index == capacity - 1)
     {

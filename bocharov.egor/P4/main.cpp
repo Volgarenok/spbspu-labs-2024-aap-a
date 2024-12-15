@@ -5,10 +5,10 @@ int main()
 {
   constexpr char secondstring[25] = "ahgm032uOqZni,dR(#@ )!.e";
   char * firststring = nullptr;
-  char symbol = '\0';
+  char end_symbol = '\n';
   try
   {
-    firststring = bocharov::getline(std::cin, symbol);
+    firststring = bocharov::getline(std::cin, end_symbol);
   }
   catch (const std::bad_alloc & e)
   {
