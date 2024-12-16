@@ -15,7 +15,6 @@ namespace alymova
     bool operator<(point_t p2);
     double getX() const;
     double getY() const;
-  
     double x, y;
   };
   struct rectangle_t
@@ -29,7 +28,6 @@ namespace alymova
     void scale(double ratio);
     point_t getLowLeft() const;
     point_t getUppRight() const;
-
     point_t low_left_, upp_right_;
     double width, height;
     point_t pos, shift_point_;
