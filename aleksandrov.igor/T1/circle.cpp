@@ -31,7 +31,7 @@ void aleksandrov::Circle::move(const double dx, const double dy)
   center_.y += dy;
 }
 
-void aleksandrov::Circle::scale(const size_t k)
+void aleksandrov::Circle::scale(double k)
 {
   point_t centerPoint = getFrameRect().pos;
   center_.x = center_.x + (center_.x - centerPoint.x) * k;

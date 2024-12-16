@@ -41,13 +41,18 @@ int main()
       sumBefore += shape->getArea();
     }
     std::string coeff = aleksandrov::getWord(scaleDescription, 4);
-    if (coeff == "" || std::stod(coeff) <= 0 || count == 0)
+    if (coeff == "" || std::stod(coeff) <= 0)
     {
       std::cerr << "ERROR: Incorrect SCALE command description!\n";
       for (size_t i = 0; i < count; ++i)
       {
         delete shapes[i];
       }
+      return 1;
+    }
+    if (count == 0)
+    {
+      std::cerr << "ERROR: There was no supporting shapes!\n";
       return 1;
     }
     std::cout << std::fixed << std::setprecision(1);

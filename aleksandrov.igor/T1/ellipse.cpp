@@ -31,7 +31,7 @@ void aleksandrov::Ellipse::move(const double dx, const double dy)
   center_.y += dy;
 }
 
-void aleksandrov::Ellipse::scale(const size_t k)
+void aleksandrov::Ellipse::scale(double k)
 {
   vr_ *= k;
   hr_ *= k;

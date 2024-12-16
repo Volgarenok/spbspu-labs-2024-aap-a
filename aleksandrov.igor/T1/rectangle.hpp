@@ -15,7 +15,7 @@ namespace aleksandrov
     rectangle_t getFrameRect() const override;
     void move(const point_t& centerPoint) override;
     void move(const double dx, const double dy) override;
-    void scale(const size_t k) override;
+    void scale(double k) override;
   private:
     point_t a_;
     point_t b_;

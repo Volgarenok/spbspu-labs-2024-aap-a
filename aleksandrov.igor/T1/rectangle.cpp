@@ -41,7 +41,7 @@ void aleksandrov::Rectangle::move(const double dx, const double dy)
   b_.y += dy;
 }
 
-void aleksandrov::Rectangle::scale(const size_t k)
+void aleksandrov::Rectangle::scale(double k)
 {
   point_t center = getFrameRect().pos;
   a_.x = center.x + (a_.x - center.x) * k;
