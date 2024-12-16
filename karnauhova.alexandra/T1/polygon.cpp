@@ -1,8 +1,8 @@
 #include "polygon.hpp"
 #include <cmath>
-double Polygon::getArea()
+double karnauhova::Polygon::getArea()
 {
-  double area = 0.0;
+  double area = 0;
   for (size_t i = 0; i < count_; ++i)
   {
     int j = (i + 1) % count_;
@@ -12,14 +12,14 @@ double Polygon::getArea()
   return std::abs(area) / 2;
 }
 
-rectangle_t Polygon::getFrameRect()
+rectangle_t karnauhova::Polygon::getFrameRect()
 {
   rectangle_t rect;
   double max_x = points_[0].x;
   double min_x = points_[0].x;
   double max_y = points_[0].y;
   double min_y = points_[0].y;
-  for (size_t i = 0; i < count_; ++i)
+  for (size_t i = 1; i < count_; i++)
   {
     min_x = std::fmin(min_x, points_[i].x);
     min_y = std::fmin(min_y, points_[i].y);
@@ -33,7 +33,7 @@ rectangle_t Polygon::getFrameRect()
   return rect;
 }
 
-void Polygon::move(double x, double y)
+void karnauhova::Polygon::move(double x, double y)
 {
   for (size_t i = 0; i < count_; ++i)
   {
@@ -42,7 +42,7 @@ void Polygon::move(double x, double y)
   }
 }
 
-void Polygon::move(point_t t)
+void karnauhova::Polygon::move(point_t t)
 {
   point_t centr = getFrameRect().pos;
   double dif_x = t.x - centr.x;
@@ -54,7 +54,7 @@ void Polygon::move(point_t t)
   }
 }
 
-void Polygon::scale(point_t t, double k)
+void karnauhova::Polygon::scale(point_t t, double k)
 {
   for (size_t i = 0; i < count_; i++)
   {

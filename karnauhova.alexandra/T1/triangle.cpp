@@ -1,6 +1,6 @@
 #include "triangle.hpp"
 #include <cmath>
-double Triangle::getArea()
+double karnauhova::Triangle::getArea()
 {
   double len_x1 = x1_.x - x2_.x;
   double len_y1 = x1_.y - x2_.y;
@@ -15,7 +15,7 @@ double Triangle::getArea()
   return std::sqrt(p * (p - len_1) * (p - len_2) * (p - len_3));
 }
 
-rectangle_t Triangle::getFrameRect()
+rectangle_t karnauhova::Triangle::getFrameRect()
 {
   double x_max = 0;
   double x_min = 0;
@@ -61,7 +61,7 @@ rectangle_t Triangle::getFrameRect()
   return rect;
 }
 
-void Triangle::move(double x, double y)
+void karnauhova::Triangle::move(double x, double y)
 {
   x1_.x += x;
   x1_.y += y;
@@ -71,7 +71,7 @@ void Triangle::move(double x, double y)
   x2_.y += y;
 }
 
-void Triangle::move(point_t t)
+void karnauhova::Triangle::move(point_t t)
 {
   point_t centr = getFrameRect().pos;
   double shift_x = (t.x - centr.x);
@@ -84,7 +84,7 @@ void Triangle::move(point_t t)
   x1_.y += shift_y;
 }
 
-void Triangle::scale(point_t t, double k)
+void karnauhova::Triangle::scale(point_t t, double k)
 {
   double distance_x1 = x1_.x - t.x;
   double distance_x2 = x2_.x - t.x;

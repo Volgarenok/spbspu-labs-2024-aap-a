@@ -1,12 +1,12 @@
 #include "rectangle.hpp"
-double Rectangle::getArea()
+double karnauhova::Rectangle::getArea()
 {
   double len1 = x2_.y - x4_.y;
   double len2 = x2_.x - x4_.x;
   return (len1 * len2);
 }
 
-rectangle_t Rectangle::getFrameRect()
+rectangle_t karnauhova::Rectangle::getFrameRect()
 {
   rectangle_t rect;
   rect.width = x2_.x - x4_.x;
@@ -16,7 +16,7 @@ rectangle_t Rectangle::getFrameRect()
   return rect;
 }
 
-void Rectangle::move(double x, double y)
+void karnauhova::Rectangle::move(double x, double y)
 {
   x4_.x += x;
   x4_.y += y;
@@ -24,7 +24,7 @@ void Rectangle::move(double x, double y)
   x2_.y += y;
 }
 
-void Rectangle::move(point_t t)
+void karnauhova::Rectangle::move(point_t t)
 {
   point_t centr = getFrameRect().pos;
   x2_.x += (t.x - centr.x);
@@ -33,7 +33,7 @@ void Rectangle::move(point_t t)
   x4_.y += (t.y - centr.y);
 }
 
-void Rectangle::scale(point_t t, double k)
+void karnauhova::Rectangle::scale(point_t t, double k)
 {
   double distance_x2 = x2_.x - t.x;
   double distance_x4 = x4_.x - t.x;

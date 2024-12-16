@@ -75,7 +75,7 @@ void karnauhova::output(std::ostream & out, double* all_points, double* polygon,
         k += 1;
         continue;
       }
-      for (size_t i = 0; i < all_points[k]; i+=2)
+      for (size_t i = 0; i < all_points[k]; i += 2)
       {
         point_t point;
         point.x = polygon[c_polygon + i];
@@ -97,9 +97,10 @@ void karnauhova::output(std::ostream & out, double* all_points, double* polygon,
       out2[m + 1] = pol2.pos.y - (pol2.height / 2);
       out2[m + 2] = pol2.pos.x + (pol2.width / 2);
       out2[m + 3] = pol2.pos.y + (pol2.height / 2);
-      k += 1;
       m += 4;
       c_polygon += all_points[k];
+      k += 1;
+      out << "\n";
     }
   }
   out << std::fixed;
