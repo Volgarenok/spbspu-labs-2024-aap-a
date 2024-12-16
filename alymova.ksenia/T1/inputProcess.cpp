@@ -5,6 +5,7 @@
 #include "base-types.hpp"
 #include "rectangle.hpp"
 #include "circle.hpp"
+#include "regular.hpp"
 void alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool& wrong_shape_flag,
   double& scale_x, double& scale_y, double& scale_ratio)
 {
@@ -50,6 +51,24 @@ void alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool&
           wrong_shape_flag = true;
         }
       }
+      if (type == "REGULAR")
+      {
+        double x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
+        in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+        point_t pos(x1, y1);
+        point_t top(x2, y2);
+        point_t other(x3, y3);
+        try
+        {
+          shapes[shapes_now] = new Regular(pos, top, other);
+          shapes_now++;
+        }
+        catch (const std::logic_error& e)
+        {
+          delete shapes[shapes_now];
+          wrong_shape_flag = true;
+        }
+      }
       if (type == "SCALE")
       {
         scale_flag = true;
@@ -82,28 +101,9 @@ void alymova::print(std::ostream& out, Shape** shapes)
   out << area;
   for (size_t i = 0; shapes[i] != nullptr; i++)
   {
-    out << " " << shapes[i]->getFrameRect().getLowLeft().getX();
-    out << " " << shapes[i]->getFrameRect().getLowLeft().getY();
-    out << " " << shapes[i]->getFrameRect().getUppRight().getX();
-    out << " " << shapes[i]->getFrameRect().getUppRight().getY();
-  }
-}
-void alymova::scale(Shape** shapes, point_t s, double ratio)
-{
-  if (ratio <= 0)
-  {
-    throw std::invalid_argument("The scale ratio should be positive");
-  }
-  if (ratio == 1)
-  {
-    return;
-  }
-  for (size_t i = 0; shapes[i] != nullptr; i++)
-  {
-    shapes[i]->move(s);
-    point_t shift_point(shapes[i]->getFrameRect().getShift());
-    shapes[i]->scale(ratio);
-    shift_point *= ratio;
-    shapes[i]->move(-shift_point.getX(), -shift_point.getY());
+    out << " " << shapes[i]->getFrameRect().getLowLeft().x;
+    out << " " << shapes[i]->getFrameRect().getLowLeft().y;
+    out << " " << shapes[i]->getFrameRect().getUppRight().x;
+    out << " " << shapes[i]->getFrameRect().getUppRight().y;
   }
 }

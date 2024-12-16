@@ -9,6 +9,5 @@ namespace alymova
     double& scale_x, double& scale_y, double& scale_ratio);
   void clear(Shape** shapes);
   void print(std::ostream& out, Shape** shapes);
-  void scale(Shape** shapes, point_t s, double ratio);
 }
 #endif

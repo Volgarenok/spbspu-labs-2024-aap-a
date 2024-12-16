@@ -49,9 +49,9 @@ double alymova::point_t::getY() const
 alymova::rectangle_t::rectangle_t(point_t low_left, point_t upp_right):
   low_left_(low_left),
   upp_right_(upp_right),
-  width(upp_right_.getX() - low_left_.getX()),
-  height(upp_right_.getY() - low_left_.getY()),
-  pos(point_t((low_left_.getX() + width / 2), (upp_right_.getY() - height / 2))),
+  width(upp_right_.x - low_left_.x),
+  height(upp_right_.y - low_left_.y),
+  pos(point_t((low_left_.x + width / 2), (upp_right_.y - height / 2))),
   shift_point_()
 {}
 double alymova::rectangle_t::getArea() const

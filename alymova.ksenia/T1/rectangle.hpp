@@ -15,8 +15,8 @@ namespace alymova
     void scale(double ratio) override;
   private:
     point_t low_left_, upp_right_;
-    double width, height;
-    point_t pos;
+    double width_, height_;
+    point_t pos_;
     rectangle_t frame_rect_;
   };
 }
