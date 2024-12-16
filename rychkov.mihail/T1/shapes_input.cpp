@@ -9,8 +9,8 @@
 
 namespace rychkov
 {
-  static const char* shapeTypes[] = {"RECTANGLE", "REGULAR"};
-  static Shape* (*shapeGetters[])(std::istream&) = {getRectangle, getRegular};
+  static const char* shapeTypes[] = {"RECTANGLE", "REGULAR", "POLYGON"};
+  static Shape* (*shapeGetters[])(std::istream&) = {getRectangle, getRegular, getPolygon};
   static constexpr size_t shapeTypesCount = sizeof(shapeTypes) / sizeof(const char*);
 }
 
@@ -88,6 +88,7 @@ rychkov::Shape* rychkov::getPolygon(std::istream& in)
     }
     used++;
   }
+  std::cin.clear();
   Polygon* result = static_cast< Polygon* >(malloc(sizeof(Polygon)));
   try
   {

@@ -69,7 +69,9 @@ int main()
       shapes = tempShapes;
     }
     free(command);
+    command = nullptr;
   }
+  free(command);
   rychkov::composition::deallocate(shapes, used);
   return std::cin.fail() ? 2 : 1;
 }
