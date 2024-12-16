@@ -1,38 +1,38 @@
 #include "base-types.hpp"
 #include <stdexcept>
 alymova::point_t::point_t(double x, double y):
-  x_(x),
-  y_(y)
+  x(x),
+  y(y)
 {}
 alymova::point_t::point_t(const point_t& point):
-  x_(point.x_),
-  y_(point.y_)
+  x(point.x),
+  y(point.y)
 {}
 alymova::point_t::point_t(point_t&& point):
-  x_(point.x_),
-  y_(point.y_)
+  x(point.x),
+  y(point.y)
 {}
 alymova::point_t alymova::point_t::operator=(const point_t& point)
 {
-  x_ = point.x_;
-  y_ = point.y_;
+  x = point.x;
+  y = point.y;
   return *this;
 }
 alymova::point_t alymova::point_t::operator+=(point_t shift_point)
 {
-  x_ += shift_point.x_;
-  y_ += shift_point.y_;
+  x += shift_point.x;
+  y += shift_point.y;
   return *this;
 }
 alymova::point_t alymova::point_t::operator*=(double ratio)
 {
-  x_ *= ratio;
-  y_ *= ratio;
+  x *= ratio;
+  y *= ratio;
   return *this;
 }
 bool alymova::point_t::operator<(point_t p2)
 {
-  if (x_ < p2.x_ && y_ < p2.y_)
+  if (x < p2.x && y < p2.y)
   {
     return true;
   }
@@ -40,28 +40,28 @@ bool alymova::point_t::operator<(point_t p2)
 }
 double alymova::point_t::getX() const
 {
-  return x_;
+  return x;
 }
 double alymova::point_t::getY() const
 {
-  return y_;
+  return y;
 }
 alymova::rectangle_t::rectangle_t(point_t low_left, point_t upp_right):
   low_left_(low_left),
   upp_right_(upp_right),
-  width_(upp_right_.getX() - low_left_.getX()),
-  height_(upp_right_.getY() - low_left_.getY()),
-  pos_(point_t((low_left_.getX() + width_ / 2), (upp_right_.getY() - height_ / 2))),
+  width(upp_right_.getX() - low_left_.getX()),
+  height(upp_right_.getY() - low_left_.getY()),
+  pos(point_t((low_left_.getX() + width / 2), (upp_right_.getY() - height / 2))),
   shift_point_()
 {}
 double alymova::rectangle_t::getArea() const
 {
-  return width_ * height_;
+  return width * height;
 }
 void alymova::rectangle_t::move(double shift_x, double shift_y)
 {
   shift_point_ = point_t(shift_x, shift_y);
-  pos_ += shift_point_;
+  pos += shift_point_;
   low_left_ += shift_point_;
   upp_right_ += shift_point_;
 }
@@ -79,10 +79,10 @@ void alymova::rectangle_t::scale(double ratio)
   {
     return;
   }
-  low_left_ += (point_t(0.5 * (width_ - ratio * width_), 0.5 * (height_ - ratio * height_)));
-  upp_right_ += (point_t(0.5 * (ratio * width_ - width_), 0.5 * (ratio * height_ - height_)));
-  width_ *= ratio;
-  height_ *= ratio;
+  low_left_ += (point_t(0.5 * (width - ratio * width), 0.5 * (height - ratio * height)));
+  upp_right_ += (point_t(0.5 * (ratio * width - width), 0.5 * (ratio * height - height)));
+  width *= ratio;
+  height *= ratio;
 }
 alymova::point_t alymova::rectangle_t::getLowLeft() const
 {
