@@ -28,8 +28,8 @@ aleksandrov::Shape* aleksandrov::doScale(const std::string scaleDescription, Sha
     return nullptr;
   }
   rectangle_t frameRect = shape->getFrameRect();
-  double centerX = frameRect.pos_.x_;
-  double centerY = frameRect.pos_.y_;
+  double centerX = frameRect.pos.x;
+  double centerY = frameRect.pos.y;
   double dx = scaleX - centerX;
   double dy = scaleY - centerY;
   shape->move({scaleX, scaleY});

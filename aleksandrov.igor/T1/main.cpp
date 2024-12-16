@@ -16,21 +16,23 @@ int main()
   bool wasDescriptionError = 0;
   constexpr const size_t maxShapes = 10000;
   aleksandrov::Shape* shapes[maxShapes];
-  std::string str;
+  std::string inputStr;
+  char* str = nullptr;
   size_t count = 0;
   try
   {
     double sumBefore = 0;
     std::string scaleDescription;
-    while (!std::cin.eof())
+    while ((str = aleksandrov::getString(std::cin)) && !std::cin.eof())
     {
-      str = aleksandrov::getString(std::cin);
-      aleksandrov::Shape* shape = aleksandrov::makeShape(str, wasDescriptionError);
+      inputStr = str;
+      delete[] str;
+      aleksandrov::Shape* shape = aleksandrov::makeShape(inputStr, wasDescriptionError);
       if (!shape)
       {
-        if (aleksandrov::getWord(str, 1) == "SCALE")
+        if (aleksandrov::getWord(inputStr, 1) == "SCALE")
         {
-          scaleDescription = str;
+          scaleDescription = inputStr;
           break;
         }
         continue;
@@ -42,6 +44,10 @@ int main()
     if (coeff == "" || std::stod(coeff) <= 0 || count == 0)
     {
       std::cerr << "ERROR: Incorrect SCALE command description!\n";
+      for (size_t i = 0; i < count; ++i)
+      {
+        delete shapes[i];
+      }
       return 1;
     }
     std::cout << std::fixed << std::setprecision(1);
@@ -49,10 +55,10 @@ int main()
     for (size_t i = 0; i < count; ++i)
     {
       aleksandrov::rectangle_t frameRect = shapes[i]->getFrameRect();
-      std::cout << frameRect.pos_.x_ - (frameRect.width_ / 2) << " ";
-      std::cout << frameRect.pos_.y_ - (frameRect.height_ / 2) << " ";
-      std::cout << frameRect.pos_.x_ + (frameRect.width_ / 2) << " ";
-      std::cout << frameRect.pos_.y_ + (frameRect.height_ / 2);
+      std::cout << frameRect.pos.x - (frameRect.width / 2) << " ";
+      std::cout << frameRect.pos.y - (frameRect.height / 2) << " ";
+      std::cout << frameRect.pos.x + (frameRect.width / 2) << " ";
+      std::cout << frameRect.pos.y + (frameRect.height / 2);
       if (i < count - 1)
       {
         std::cout << " ";
@@ -69,10 +75,10 @@ int main()
     for (size_t i = 0; i < count; ++i)
     {
       aleksandrov::rectangle_t frameRect = shapes[i]->getFrameRect();
-      std::cout << frameRect.pos_.x_ - (frameRect.width_ / 2) << " ";
-      std::cout << frameRect.pos_.y_ - (frameRect.height_ / 2) << " ";
-      std::cout << frameRect.pos_.x_ + (frameRect.width_ / 2) << " ";
-      std::cout << frameRect.pos_.y_ + (frameRect.height_ / 2);
+      std::cout << frameRect.pos.x - (frameRect.width / 2) << " ";
+      std::cout << frameRect.pos.y - (frameRect.height / 2) << " ";
+      std::cout << frameRect.pos.x + (frameRect.width / 2) << " ";
+      std::cout << frameRect.pos.y + (frameRect.height / 2);
       if (i < count - 1)
       {
         std::cout << " ";
@@ -83,6 +89,10 @@ int main()
   catch (const std::bad_alloc& e)
   {
     std::cerr << "ERROR: Out of memory!\n";
+    for (size_t i = 0; i < count; ++i)
+    {
+      delete shapes[i];
+    }
     return 1;
   }
   if (wasDescriptionError)
@@ -91,10 +101,6 @@ int main()
   }
   for (size_t i = 0; i < count; ++i)
   {
-    if (!shapes[i])
-    {
-      continue;
-    }
     delete shapes[i];
   }
 }

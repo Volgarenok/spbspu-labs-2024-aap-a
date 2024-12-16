@@ -8,44 +8,44 @@ aleksandrov::Rectangle::Rectangle(const point_t& a, const point_t& b):
 
 double aleksandrov::Rectangle::getArea() const
 {
-  return std::fabs((b_.x_ - a_.x_) * (b_.y_ - a_.y_));
+  return std::fabs((b_.x - a_.x) * (b_.y - a_.y));
 }
 
 aleksandrov::rectangle_t aleksandrov::Rectangle::getFrameRect() const
 {
   rectangle_t frameRect;
-  frameRect.width_ = std::fabs(b_.x_ - a_.x_);
-  frameRect.height_ = std::fabs(b_.y_ - a_.y_);
+  frameRect.width = std::fabs(b_.x - a_.x);
+  frameRect.height = std::fabs(b_.y - a_.y);
   point_t centerPoint;
-  centerPoint.x_ = a_.x_ + ((b_.x_ - a_.x_) / 2);
-  centerPoint.y_ = a_.y_ + ((b_.y_ - a_.y_) / 2);
-  frameRect.pos_ = centerPoint;
+  centerPoint.x = a_.x + ((b_.x - a_.x) / 2);
+  centerPoint.y = a_.y + ((b_.y - a_.y) / 2);
+  frameRect.pos = centerPoint;
   return frameRect;
 }
 
 void aleksandrov::Rectangle::move(const point_t& centerPoint)
 {
   rectangle_t frameRect = getFrameRect();
-  frameRect.pos_ = centerPoint;
-  a_.x_ = frameRect.pos_.x_ - frameRect.width_ / 2;
-  a_.y_ = frameRect.pos_.y_ - frameRect.height_ / 2;
-  b_.x_ = frameRect.pos_.x_ + frameRect.width_ / 2;
-  b_.y_ = frameRect.pos_.y_ + frameRect.height_ / 2;
+  frameRect.pos = centerPoint;
+  a_.x = frameRect.pos.x - frameRect.width / 2;
+  a_.y = frameRect.pos.y - frameRect.height / 2;
+  b_.x = frameRect.pos.x + frameRect.width / 2;
+  b_.y = frameRect.pos.y + frameRect.height / 2;
 }
 
 void aleksandrov::Rectangle::move(const double dx, const double dy)
 {
-  a_.x_ += dx;
-  a_.y_ += dy;
-  b_.x_ += dx;
-  b_.y_ += dy;
+  a_.x += dx;
+  a_.y += dy;
+  b_.x += dx;
+  b_.y += dy;
 }
 
 void aleksandrov::Rectangle::scale(const size_t k)
 {
-  point_t center = getFrameRect().pos_;
-  a_.x_ = center.x_ + (a_.x_ - center.x_) * k;
-  a_.y_ = center.y_ + (a_.y_ - center.y_) * k;
-  b_.x_ = center.x_ + (b_.x_ - center.x_) * k;
-  b_.y_ = center.y_ + (b_.y_ - center.y_) * k;
+  point_t center = getFrameRect().pos;
+  a_.x = center.x + (a_.x - center.x) * k;
+  a_.y = center.y + (a_.y - center.y) * k;
+  b_.x = center.x + (b_.x - center.x) * k;
+  b_.y = center.y + (b_.y - center.y) * k;
 }

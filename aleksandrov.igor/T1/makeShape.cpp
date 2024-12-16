@@ -9,12 +9,12 @@
 aleksandrov::Rectangle* aleksandrov::makeRectangle(const std::string rectangleParams, bool& error)
 {
   point_t a;
-  a.x_ = std::stod(getWord(rectangleParams, 1));
-  a.y_ = std::stod(getWord(rectangleParams, 2));
+  a.x = std::stod(getWord(rectangleParams, 1));
+  a.y = std::stod(getWord(rectangleParams, 2));
   point_t b;
-  b.x_ = std::stod(getWord(rectangleParams, 3));
-  b.y_ = std::stod(getWord(rectangleParams, 4));
-  if (a.x_ >= b.x_ || a.y_ >= b.y_)
+  b.x = std::stod(getWord(rectangleParams, 3));
+  b.y = std::stod(getWord(rectangleParams, 4));
+  if (a.x >= b.x || a.y >= b.y)
   {
     error = 1;
     return nullptr;
@@ -25,8 +25,8 @@ aleksandrov::Rectangle* aleksandrov::makeRectangle(const std::string rectanglePa
 aleksandrov::Ellipse* aleksandrov::makeEllipse(const std::string ellipseParams, bool& error)
 {
   point_t center;
-  center.x_ = std::stod(getWord(ellipseParams, 1));
-  center.y_ = std::stod(getWord(ellipseParams, 2));
+  center.x = std::stod(getWord(ellipseParams, 1));
+  center.y = std::stod(getWord(ellipseParams, 2));
   double vr = std::stod(getWord(ellipseParams, 3));
   double hr = std::stod(getWord(ellipseParams, 4));
   if (vr <= 0 || hr <= 0)
@@ -40,8 +40,8 @@ aleksandrov::Ellipse* aleksandrov::makeEllipse(const std::string ellipseParams, 
 aleksandrov::Circle* aleksandrov::makeCircle(const std::string circleParams, bool& error)
 {
   point_t center;
-  center.x_ = std::stod(getWord(circleParams, 1));
-  center.y_ = std::stod(getWord(circleParams, 2));
+  center.x = std::stod(getWord(circleParams, 1));
+  center.y = std::stod(getWord(circleParams, 2));
   double r = std::stod(getWord(circleParams, 3));
   if (r <= 0)
   {
