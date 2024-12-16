@@ -6,10 +6,12 @@
 #include "shape.hpp"
 #include "base-types.hpp"
 #include "rectangle.hpp"
+#include "triangle.hpp"
 #include "scale_isotropically.hpp"
 int main() // Valgrind will argue...
 {
   const char RECTANGLE[10] = "RECTANGLE";
+  const char TRIANGLE[9] = "TRIANGLE";
   const char SCALE[6] = "SCALE";
   petrov::Shape * shapes_massive[10000] = {};
   size_t count = 0;
@@ -18,7 +20,7 @@ int main() // Valgrind will argue...
   char * stream_massive = nullptr;
   char * type_of_shape = nullptr;
   char ** description = nullptr;
-  size_t number_of_doubles = 4;
+  size_t number_of_doubles = 8;
   while (true)
   {
     size_t capacity = 1;
@@ -101,6 +103,39 @@ int main() // Valgrind will argue...
       delete[] description;
       std::clog << "YAY!\n"; // RAD
     }
+    else if (!strcmp(type_of_shape, TRIANGLE))
+    {
+      char ** p_end = nullptr;
+      petrov::point_t p1 = { std::strtod(description[0], p_end), std::strtod(description[1], p_end) };
+      petrov::point_t p2 = { std::strtod(description[2], p_end), std::strtod(description[3], p_end) };
+      petrov::point_t p3 = { std::strtod(description[4], p_end), std::strtod(description[5], p_end) };
+      petrov::Triangle * ptr_triangle = nullptr;
+      try
+      {
+        ptr_triangle = new petrov::Triangle(p1, p2, p3);
+      }
+      catch (const std::bad_alloc & e)
+      {
+        delete[] stream_massive;
+        delete[] type_of_shape;
+        for (size_t i = 0; i < created; i++)
+        {
+          delete[] description[i];
+        }
+        delete[] description;
+        std::cerr << "ERROR: Out of memory\n";
+        return 1;
+      }
+      shapes_massive[count++] = ptr_triangle;
+      delete[] stream_massive;
+      delete[] type_of_shape;
+      for (size_t i = 0; i < created; i++)
+      {
+        delete[] description[i];
+      }
+      delete[] description;
+      std::clog << "YAY!TRIANGLE\n"; // RAD
+    }
     else if (!strcmp(type_of_shape, SCALE))
     {
       char ** p_end = nullptr;
@@ -133,5 +168,5 @@ int main() // Valgrind will argue...
     std::cout << shapes_massive[i] << "\n"; // RAD
   }
   std::cout << std::fixed << std::setprecision(1);
-  petrov::scaleIsotropicallyAndOutputData(scale_point, scale_value, shapes_massive, count); // <- Declarator problem
+  petrov::scaleIsotropicallyAndOutputData(scale_point, scale_value, shapes_massive, count);
 }

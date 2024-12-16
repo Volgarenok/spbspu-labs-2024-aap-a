@@ -37,9 +37,9 @@ void petrov::scaleIsotropicallyAndOutputData(point_t scale_point, double k, Shap
     std::cout << "Iteration number: " << i << "\n"; // RAD
   }
   std::cout << first_sum_area;
-  std::cout << " " << first_all_coordinates[0][0];
   for (size_t i = 0; i < count; i++)
   {
+    std::cout << " " << first_all_coordinates[i][0];
     for (size_t j = 1; j < 4; j++)
     {
       std::cout << " " << first_all_coordinates[i][j];
@@ -47,9 +47,9 @@ void petrov::scaleIsotropicallyAndOutputData(point_t scale_point, double k, Shap
   }
   std::cout << "\n";
   std::cout << second_sum_area;
-  std::cout << " " << second_all_coordinates[0][0];
   for (size_t i = 0; i < count; i++)
   {
+    std::cout << " " << second_all_coordinates[i][0];
     for (size_t j = 1; j < 4; j++)
     {
       std::cout << " " << second_all_coordinates[i][j];
