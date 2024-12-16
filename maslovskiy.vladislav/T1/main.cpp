@@ -110,7 +110,9 @@ int main()
   std::cout << "\n";
   std::cout << calculateTotalArea(shapeArray, shapeCount) << "\n";
   outputFrameCoordinates(shapeArray, shapeCount);
+
   std::cout << "\n";
   deleteShapes(shapeArray, shapeCount);
+
   return 0;
 }

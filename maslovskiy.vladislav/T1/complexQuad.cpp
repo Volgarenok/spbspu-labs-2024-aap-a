@@ -6,7 +6,8 @@ namespace maslovskiy
 {
   ComplexQuad::ComplexQuad(point_t vertexA, point_t vertexB, point_t vertexC, point_t vertexD)
       : vertexA_(vertexA), vertexB_(vertexB), vertexC_(vertexC), vertexD_(vertexD)
-  {}
+  {
+  }
 
   double ComplexQuad::getArea() const
   {

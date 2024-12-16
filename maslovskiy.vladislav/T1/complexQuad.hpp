@@ -15,6 +15,7 @@ namespace maslovskiy
     void move(double dx, double dy) override;
     void scale(double k) override;
     point_t getCenterComplexQuad() const;
+
   private:
     point_t vertexA_;
     point_t vertexB_;

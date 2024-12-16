@@ -1,3 +1,4 @@
+
 #include "geomFun.hpp"
 #include <cmath>
 #include <iostream>
@@ -11,7 +12,6 @@ namespace maslovskiy
     double sideCA = std::sqrt(std::pow((vertexA.x - vertexC.x), 2) + std::pow((vertexA.y - vertexC.y), 2));
     return (sideAB + sideBC > sideCA) && (sideAB + sideCA > sideBC) && (sideBC + sideCA > sideAB);
   }
-
   double calculateTriangleArea(point_t vertexA, point_t vertexB, point_t vertexC)
   {
     double sideAB = std::sqrt(std::pow((vertexB.x - vertexA.x), 2) + std::pow((vertexB.y - vertexA.y), 2));
@@ -34,20 +34,30 @@ namespace maslovskiy
     int sideB = (vertexD.x - pos.x) * (vertexB.y - vertexD.y) - (vertexB.x - vertexD.x) * (vertexD.y - pos.y);
     int sideC = (vertexB.x - pos.x) * (vertexC.y - vertexB.y) - (vertexC.x - vertexB.x) * (vertexB.y - pos.y);
     int sideD = (vertexC.x - pos.x) * (vertexA.y - vertexC.y) - (vertexA.x - vertexC.x) * (vertexC.y - pos.y);
-    return (sideA > 0 && sideB > 0 && sideC > 0 && sideD > 0) || (sideA < 0 && sideB < 0 && sideC < 0 && sideD < 0);
+
+    if (sideA > 0 && sideB > 0 && sideC > 0 && sideD > 0)
+    {
+      return true;
+    }
+    else if (sideA < 0 && sideB < 0 && sideC < 0 && sideD < 0)
+    {
+      return true;
+    }
+    return false;
   }
-  point_t findIntersectionPoint(point_t vertexA, point_t vertexB, point_t vertexC, point_t vertexD)
+  point_t findIntersectionPoint(point_t p1, point_t p2, point_t p3, point_t p4)
   {
-    double slope1 = vertexB.y - vertexA.y;
-    double intercept1 = vertexA.x - vertexB.x;
-    double constant1 = slope1 * vertexA.x + intercept1 * vertexA.y;
-    double slope2 = vertexD.y - vertexC.y;
-    double intercept2 = vertexC.x - vertexD.x;
-    double constant2 = slope2 * vertexC.x + intercept2 * vertexC.y;
-    double determinant = slope1 * intercept2 - slope2 * intercept1;
-    double intersectionX = (intercept2 * constant1 - intercept1 * constant2) / determinant;
-    double intersectionY = (slope1 * constant2 - slope2 * constant1) / determinant;
-    return {intersectionX, intersectionY};
+    double a1 = p2.y - p1.y;
+    double b1 = p1.x - p2.x;
+    double c1 = a1 * p1.x + b1 * p1.y;
+    double a2 = p4.y - p3.y;
+    double b2 = p3.x - p4.x;
+    double c2 = a2 * p3.x + b2 * p3.y;
+
+    double det = a1 * b2 - a2 * b1;
+    double x = (b2 * c1 - b1 * c2) / det;
+    double y = (a1 * c2 - a2 * c1) / det;
+    return {x, y};
   }
   double calculateTotalArea(Shape **shapeList, size_t shapeCount)
   {
