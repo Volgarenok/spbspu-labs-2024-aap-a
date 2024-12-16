@@ -6,8 +6,8 @@ namespace sveshnikov
 {
   class Rectangle : public Shape
   {
-    virtual double getArea() const override = 0;
-    virtual rectangle_t getFrameRect() const override = 0;
+    virtual double getArea() const override;
+    virtual rectangle_t getFrameRect() const override;
     virtual void move(point_t p) override;
     virtual void move(double dx, double dy) override;
     virtual void scale(double k) override;
