@@ -4,7 +4,7 @@
 int main()
 {
   char* istr = nullptr;
-  char missing[27];
+  char missing[27]{};
   try
   {
     istr = lanovenko::inputStr(std::cin, '\n');
