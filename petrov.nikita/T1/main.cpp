@@ -9,7 +9,7 @@
 #include "triangle.hpp"
 #include "concave.hpp"
 #include "scale_isotropically.hpp"
-int main() // Valgrind will argue... Yes
+int main()
 {
   const char * ERROR_MSG = "ERROR: Invalid data somewhere";
   const char RECTANGLE[10] = "RECTANGLE";

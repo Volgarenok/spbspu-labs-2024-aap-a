@@ -57,7 +57,7 @@ void petrov::Rectangle::move(double dx, double dy)
   p3_.x_ += dx;
   p3_.y_ += dy;
   p4_.x_ += dx;
-  p4_.y_ += dx;
+  p4_.y_ += dy;
 }
 
 void petrov::Rectangle::scale(double k)
