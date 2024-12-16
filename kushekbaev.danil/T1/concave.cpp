@@ -11,9 +11,9 @@ namespace kushekbaev
 
   double Concave::getArea() const
   {
-    double first_part = getAreaOfTriangle(first_, second_, final_);
-    double second_part = getAreaOfTriangle(first_, third_, final_);
-    return first_part + second_part;
+    double standart = getAreaOfTriangle(first_, second_, third_);
+    double concavity = getAreaOfTriangle(second_, third_, final_);
+    return standart - concavity;
   }
 
   rectangle_t Concave::getFrameRect() const
