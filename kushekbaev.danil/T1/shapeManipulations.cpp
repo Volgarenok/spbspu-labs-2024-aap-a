@@ -7,8 +7,8 @@ namespace kushekbaev
   {
     double total = 0;
     for (size_t i = 0; i < shapeCounter; i++)
-    if (capacity[i])
     {
+      if (capacity[i])
       {
         total += capacity[i] -> getArea();
       }
@@ -20,12 +20,15 @@ namespace kushekbaev
   {
     for (size_t i = 0; i < shapeCounter; ++i)
     {
-      point_t beforeScale = capacity[i]->getFrameRect().pos;
-      capacity[i]->move(scalePoint);
-      point_t afterScale = capacity[i]->getFrameRect().pos;
-      point_t vector = { (afterScale.x - beforeScale.x) * scaleCoeff, (afterScale.y - beforeScale.y) * scaleCoeff };
-      capacity[i]->scale(scaleCoeff);
-      capacity[i]->move(-vector.x, -vector.y);
+      if (capacity[i])
+      {
+        point_t beforeScale = capacity[i]->getFrameRect().pos;
+        capacity[i]->move(scalePoint);
+        point_t afterScale = capacity[i]->getFrameRect().pos;
+        point_t vector = { (afterScale.x - beforeScale.x) * scaleCoeff, (afterScale.y - beforeScale.y) * scaleCoeff };
+        capacity[i]->scale(scaleCoeff);
+        capacity[i]->move(-vector.x, -vector.y);
+      }
     }
   }
 
