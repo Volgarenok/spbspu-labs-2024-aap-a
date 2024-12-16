@@ -1,7 +1,7 @@
-#include "processing.h"
+#include "string_processing.h"
 #include <cctype>
 #include <cstddef>
-int bocharov::symbols_comparison(const char * string1, const char * string2)
+int bocharov::compare_symbols(const char * string1, const char * string2)
 {
   for (const char * i = string1; *i != '\0'; ++i)
   {

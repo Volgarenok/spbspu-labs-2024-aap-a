@@ -1,11 +1,11 @@
 #include "getline.h"
 #include <stdexcept>
 #include <cstring>
-char * bocharov::extend_string(const char * string, std::size_t capacity)
+char * bocharov::extend_string(const char * string, std::size_t capacity, std::size_t current_lenght)
 {
-  if (capacity <= strlen(string))
+  if (capacity <= current_lenght)
   {
-    throw std::invalid_argument("Capacity must be greater than the string length");
+    throw std::invalid_argument("Capacity must be greater than the current string length");
   }
   char * newString = new char[capacity];
   char * j = newString;
@@ -17,13 +17,14 @@ char * bocharov::extend_string(const char * string, std::size_t capacity)
   return newString;
 }
 
-char * bocharov::getline(std::istream & in, char symbol)
+char * bocharov::getline(std::istream & in, char end_symbol)
 {
   std::size_t capacity = 32;
   char * string = new char[capacity];
   std::size_t string_index = 0;
+  char symbol = '\0';
   std::noskipws(in);
-  while ((in >> symbol) && (symbol != '\n'))
+  while ((in >> symbol) && (symbol != end_symbol))
   {
     if (string_index == capacity - 1)
     {
@@ -31,7 +32,7 @@ char * bocharov::getline(std::istream & in, char symbol)
       char * extended_string = nullptr;
       try
       {
-        extended_string = extend_string(string, capacity *= 2);
+        extended_string = extend_string(string, capacity *= 2, string_index);
       }
       catch (const std::bad_alloc & e)
       {

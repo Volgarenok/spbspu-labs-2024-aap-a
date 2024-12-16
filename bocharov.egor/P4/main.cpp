@@ -1,14 +1,14 @@
 #include <iostream>
 #include <getline.h>
-#include "processing.h"
+#include "string_processing.h"
 int main()
 {
   constexpr char secondstring[25] = "ahgm032uOqZni,dR(#@ )!.e";
   char * firststring = nullptr;
-  char symbol = '\0';
+  char end_symbol = '\n';
   try
   {
-    firststring = bocharov::getline(std::cin, symbol);
+    firststring = bocharov::getline(std::cin, end_symbol);
   }
   catch (const std::bad_alloc & e)
   {
@@ -24,7 +24,7 @@ int main()
   char result[27];
   bocharov::merge_lines(firststring, secondstring, result);
   std::cout << result << "\n";
-  std::cout << bocharov::symbols_comparison(firststring, secondstring);
+  std::cout << bocharov::compare_symbols(firststring, secondstring);
   std::cout << "\n";
   delete[] firststring;
 }
