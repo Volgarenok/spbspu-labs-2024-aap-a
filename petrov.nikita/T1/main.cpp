@@ -32,15 +32,16 @@ int main() // Valgrind will argue...
     try
     {
       stream_massive = petrov::inputCString(std::cin, capacity);
-      if (!std::cin || std::cin.eof() || stream_massive[0] == '\n')
+      if (std::cin.eof())
+      {
+        delete[] stream_massive;
+        std::cerr << "End of file\n";
+        return 2;
+      }
+      else if (!std::cin || stream_massive[0] == '\n')
       {
         delete[] stream_massive;
         continue;
-      }
-      else if (std::cin.eof())
-      {
-        std::cerr << "End of file\n";
-        return 2;
       }
       type_of_shape = new char[capacity];
       description = new char * [number_of_doubles];
