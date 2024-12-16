@@ -19,13 +19,13 @@ double krylov::Rectangle::getArea() const
 krylov::rectangle_t krylov::Rectangle::getFrameRect() const
 {
   return krylov::rectangle_t{(topRight_.x - bottomLeft_.x), (topRight_.y - bottomLeft_.y),
-          {(bottomLeft_.x + topRight_.x) / 2, (bottomLeft_.y + topRight_.y) / 2}};
+          {bottomLeft_.x + ((topRight_.x - bottomLeft_.x) / 2.0), bottomLeft_.y + ((topRight_.y - bottomLeft_.y) / 2.0)}};
 }
 
 void krylov::Rectangle::move(const point_t& point)
 {
-  double dx = point.x - (bottomLeft_.x + topRight_.x) / 2;
-  double dy = point.y - (bottomLeft_.y + topRight_.y) / 2;
+  double dx = point.x - (bottomLeft_.x + topRight_.x) / 2.0;
+  double dy = point.y - (bottomLeft_.y + topRight_.y) / 2.0;
   move(dx, dy);
 }
 
