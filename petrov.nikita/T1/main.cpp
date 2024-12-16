@@ -35,6 +35,10 @@ int main() // Valgrind will argue... Yes
       if (std::cin.eof())
       {
         delete[] stream_massive;
+        for (size_t i = 0; i < count; i++)
+        {
+          delete shapes_massive[i];
+        }
         std::cerr << "End of file\n";
         return 2;
       }
@@ -233,6 +237,18 @@ int main() // Valgrind will argue... Yes
     }
     else if (!strcmp(type_of_shape, SCALE))
     {
+      if (count == 0)
+      {
+        delete[] stream_massive;
+        delete[] type_of_shape;
+        for (size_t i = 0; i < created; i++)
+        {
+          delete[] description[i];
+        }
+        delete[] description;
+        std::cerr << "ERROR: Nothing to scale\n";
+        return 4;
+      }
       char ** p_end = nullptr;
       scale_point = { std::strtod(description[0], p_end), std::strtod(description[1], p_end) };
       scale_value = std::strtod(description[2], p_end);
