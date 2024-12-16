@@ -7,12 +7,14 @@
 #include "base-types.hpp"
 #include "rectangle.hpp"
 #include "triangle.hpp"
+#include "concave.hpp"
 #include "scale_isotropically.hpp"
 int main() // Valgrind will argue...
 {
   const char RECTANGLE[10] = "RECTANGLE";
   const char TRIANGLE[9] = "TRIANGLE";
   const char SCALE[6] = "SCALE";
+  const char CONCAVE[8] = "CONCAVE";
   petrov::Shape * shapes_massive[10000] = {};
   size_t count = 0;
   petrov::point_t scale_point = {};
@@ -135,6 +137,40 @@ int main() // Valgrind will argue...
       }
       delete[] description;
       std::clog << "YAY!TRIANGLE\n"; // RAD
+    }
+    else if (!strcmp(type_of_shape, CONCAVE))
+    {
+      char ** p_end = nullptr;
+      petrov::point_t p1 = { std::strtod(description[0], p_end), std::strtod(description[1], p_end) };
+      petrov::point_t p2 = { std::strtod(description[2], p_end), std::strtod(description[3], p_end) };
+      petrov::point_t p3 = { std::strtod(description[4], p_end), std::strtod(description[5], p_end) };
+      petrov::point_t p4 = { std::strtod(description[6], p_end), std::strtod(description[7], p_end) };
+      petrov::Concave * ptr_concave = nullptr;
+      try
+      {
+        ptr_concave = new petrov::Concave(p1, p2, p3, p4);
+      }
+      catch (const std::bad_alloc & e)
+      {
+        delete[] stream_massive;
+        delete[] type_of_shape;
+        for (size_t i = 0; i < created; i++)
+        {
+          delete[] description[i];
+        }
+        delete[] description;
+        std::cerr << "ERROR: Out of memory\n";
+        return 1;
+      }
+      shapes_massive[count++] = ptr_concave;
+      delete[] stream_massive;
+      delete[] type_of_shape;
+      for (size_t i = 0; i < created; i++)
+      {
+        delete[] description[i];
+      }
+      delete[] description;
+      std::clog << "YAY!CONCAVE\n"; // RAD
     }
     else if (!strcmp(type_of_shape, SCALE))
     {
