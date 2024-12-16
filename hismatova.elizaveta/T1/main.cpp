@@ -99,45 +99,50 @@ int main()
     }
     else if (nameFigure == "SCALE")
     {
-     if (count == 0)
-     {
-       std::cerr << "there is no figures";
-       hismatova::deleteFigures(figures, count);
-       return 1;
-     }
-     double x = 0, y = 0;
-     hismatova::point_t point_;
-     std::cin >> x >> y;
-     point_.x = x;
-     point_.y = y;
-     double index = 0;
-     std::cin >> index;
-     if (index <= 0)
-     {
-       std::cerr << "index must be positive\n";
-       hismatova::deleteFigures(figures, count);
-       return 1;
-     }
-     scales = true;
-     hismatova::results(figures, count);
-     for (size_t i = 0; i < count; i++)
-     {
-       hismatova::point_t pos = figures[i]->getFrameRect().pos;
-       figures[i]->move(point_);
-       hismatova::point_t pos2 = figures[i]->getFrameRect().pos;
-       hismatova::point_t p2;
-       p2.x = (pos2.x - pos.x) * index;
-       p2.y = (pos2.y - pos.y) * index;
-       figures[i]->scale(index);
-       figures[i]->move(-1 * p2.x, -1 * p2.y);
-     }
-     hismatova::results(figures, count);
-     break;
+      if (count == 0)
+      {
+        std::cerr << "there is no figures";
+        hismatova::deleteFigures(figures, count);
+        return 1;
+      }
+      double x = 0, y = 0;
+      hismatova::point_t point_;
+      std::cin >> x >> y;
+      point_.x = x;
+      point_.y = y;
+      double index = 0;
+      std::cin >> index;
+      if (index <= 0)
+      {
+        std::cerr << "index must be positive\n";
+        hismatova::deleteFigures(figures, count);
+        return 1;
+      }
+      scales = true;
+      hismatova::results(figures, count);
+      for (size_t i = 0; i < count; i++)
+      {
+        hismatova::point_t pos = figures[i]->getFrameRect().pos;
+        figures[i]->move(point_);
+        hismatova::point_t pos2 = figures[i]->getFrameRect().pos;
+        hismatova::point_t p2;
+        p2.x = (pos2.x - pos.x) * index;
+        p2.y = (pos2.y - pos.y) * index;
+        figures[i]->scale(index);
+        figures[i]->move(-1 * p2.x, -1 * p2.y);
+      }
+      hismatova::results(figures, count);
+      break;
+    }
+    else
+    {
+      std::cout << "untracked figure:" << nameFigure;
     }
   }
   if (!scales)
   {
     std::cerr << "incorrect input\n";
+    return 1;
   }
   else if (errors)
   {
