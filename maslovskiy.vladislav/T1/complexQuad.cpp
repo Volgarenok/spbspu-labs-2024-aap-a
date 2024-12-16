@@ -41,7 +41,6 @@ namespace maslovskiy
     vertexD_.x += moveX;
     vertexD_.y += moveY;
   }
-
   void ComplexQuad::move(double moveX, double moveY)
   {
     vertexA_.x += moveX;
@@ -53,7 +52,6 @@ namespace maslovskiy
     vertexD_.x += moveX;
     vertexD_.y += moveY;
   }
-
   void ComplexQuad::scale(double factor)
   {
     point_t currentCenter = getFrameRect().pos;

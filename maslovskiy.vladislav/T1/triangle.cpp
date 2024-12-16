@@ -29,7 +29,6 @@ maslovskiy::rectangle_t maslovskiy::Triangle::getFrameRect() const
   frameRect.pos = {minX + frameRect.width / 2, minY + frameRect.height / 2};
   return frameRect;
 }
-
 void maslovskiy::Triangle::move(point_t newPos)
 {
   point_t currentCenter = getFrameRect().pos;

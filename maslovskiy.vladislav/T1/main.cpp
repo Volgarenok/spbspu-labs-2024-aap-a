@@ -63,7 +63,6 @@ int main()
     {
       scalingRequested = true;
       std::cin >> isoCenter.x >> isoCenter.y >> scalingFactor;
-
       if (scalingFactor <= 0)
       {
         std::cerr << "Scaling factor must be positive\n";
