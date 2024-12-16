@@ -4,22 +4,9 @@
 
 namespace lebedev
 {
-  double max(double a, double b, double c)
-  {
-    double d = std::fmax(a, b);
-    return std::fmax(d, c);
-  }
-
-  double min(double a, double b, double c)
-  {
-    double d = std::fmin(a, b);
-    return std::fmin(d, c);
-  }
-
-  double triangleArea(point_t p1, point_t p2, point_t p3)
-  {
-    return 0.5 * std::fabs(p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y));
-  }
+  double max(double a, double b, double c);
+  double min(double a, double b, double c);
+  double triangleArea(point_t p1, point_t p2, point_t p3);
 }
 
 lebedev::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4) :
@@ -76,4 +63,21 @@ void lebedev::Concave::scale(double k)
   p2_.y = p4_.y + (p4_.y - p2_.y) * k;
   p3_.x = p4_.x + (p4_.x - p3_.x) * k;
   p3_.y = p4_.y + (p4_.y - p3_.y) * k;
+}
+
+double lebedev::max(double a, double b, double c)
+{
+  double d = std::fmax(a, b);
+  return std::fmax(d, c);
+}
+
+double lebedev::min(double a, double b, double c)
+{
+  double d = std::fmin(a, b);
+  return std::fmin(d, c);
+}
+
+double lebedev::triangleArea(point_t p1, point_t p2, point_t p3)
+{
+  return 0.5 * std::fabs(p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y));
 }
