@@ -50,7 +50,7 @@ void lanovenko::transformationStr(const char* str, char* missing)
       if (std::isalpha(str[i]) && std::tolower(str[i]) == c)
       {
         present = true;
-	break;
+        break;
       }
     }
     if (!present)
