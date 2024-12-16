@@ -16,6 +16,7 @@ char* ivanova::getLine(std::istream& in)
   {
     if (max == size - 1)
     {
+      string[max] = '\0';
       size += 10;
       try
       {
