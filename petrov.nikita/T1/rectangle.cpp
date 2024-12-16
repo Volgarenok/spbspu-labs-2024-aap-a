@@ -1,5 +1,6 @@
 #include "rectangle.hpp"
 #include <cmath>
+#include <iostream>
 petrov::Rectangle::Rectangle(point_t p1, point_t p2):
   p1_(p1),
   p3_(p2)
@@ -24,8 +25,8 @@ petrov::point_t * petrov::Rectangle::getFrameRect() // It needs changes...
   frame_rect_.height_ = abs(p2_.y_ - p1_.y_);
   frame_rect_.width_ = abs(p4_.x_ - p1_.x_);
   frame_rect_.pos_ = { ((2 * p1_.x_ + p3_.x_ - p1_.x_) / 2.0), ((2 * p1_.y_ + p3_.y_ - p1_.y_) / 2.0) };
-  point_t lower_left_corner = { (frame_rect_.pos_.x_ - (frame_rect_.width_ / 2)), (frame_rect_.pos_.y_ - (frame_rect_.height_ / 2)) };
-  point_t upper_right_corner = { (frame_rect_.pos_.x_ + (frame_rect_.width_ / 2)), (frame_rect_.pos_.y_ + (frame_rect_.height_ / 2)) };
+  point_t lower_left_corner = { p1_.x_, p1_.y_ };
+  point_t upper_right_corner = { p3_.x_, p3_.y_ };
   frame_points_[0] = lower_left_corner;
   frame_points_[1] = frame_rect_.pos_;
   frame_points_[2] = upper_right_corner;
