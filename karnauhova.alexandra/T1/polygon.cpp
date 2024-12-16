@@ -54,8 +54,9 @@ void karnauhova::Polygon::move(point_t t)
   }
 }
 
-void karnauhova::Polygon::scale(point_t t, double k)
+void karnauhova::Polygon::scale(double k)
 {
+  point_t t = getFrameRect().pos;
   for (size_t i = 0; i < count_; i++)
   {
      points_[i].x = t.x + (points_[i].x - t.x) * k;

@@ -33,8 +33,9 @@ void karnauhova::Rectangle::move(point_t t)
   x4_.y += (t.y - centr.y);
 }
 
-void karnauhova::Rectangle::scale(point_t t, double k)
+void karnauhova::Rectangle::scale(double k)
 {
+  point_t t = getFrameRect().pos;
   double distance_x2 = x2_.x - t.x;
   double distance_x4 = x4_.x - t.x;
   double distance_y2 = x2_.y - t.y;

@@ -30,7 +30,7 @@ void karnauhova::output(std::ostream & out, double* all_points, double* polygon,
       out1[m + 1] = rec1.pos.y - (rec1.height / 2);
       out1[m + 2] = rec1.pos.x + (rec1.width / 2);
       out1[m + 3] = rec1.pos.y + (rec1.height / 2);
-      shape_rec.scale(centr_scale, all_points[c_points - 1]);
+      scale_point(shape_rec, centr_scale, all_points[c_points - 1]);
       sum2 += shape_rec.getArea();
       rectangle_t rec2 = shape_rec.getFrameRect();
       out2[m] = rec2.pos.x - (rec2.width / 2);
@@ -56,7 +56,7 @@ void karnauhova::output(std::ostream & out, double* all_points, double* polygon,
       out1[m + 1] = tri1.pos.y - (tri1.height / 2);
       out1[m + 2] = tri1.pos.x + (tri1.width / 2);
       out1[m + 3] = tri1.pos.y + (tri1.height / 2);
-      shape_tri.scale(centr_scale, all_points[c_points - 1]);
+      scale_point(shape_tri, centr_scale, all_points[c_points - 1]);
       sum2 += shape_tri.getArea();
       rectangle_t tri2 = shape_tri.getFrameRect();
       out2[m] = tri2.pos.x - (tri2.width / 2);
@@ -90,7 +90,7 @@ void karnauhova::output(std::ostream & out, double* all_points, double* polygon,
       out1[m + 1] = pol1.pos.y - (pol1.height / 2);
       out1[m + 2] = pol1.pos.x + (pol1.width / 2);
       out1[m + 3] = pol1.pos.y + (pol1.height / 2);
-      shape_pol.scale(centr_scale, all_points[c_points - 1]);
+      scale_point(shape_pol, centr_scale, all_points[c_points - 1]);
       sum2 += shape_pol.getArea();
       rectangle_t pol2 = shape_pol.getFrameRect();
       out2[m] = pol2.pos.x - (pol2.width / 2);
@@ -116,4 +116,13 @@ void karnauhova::output(std::ostream & out, double* all_points, double* polygon,
     out << std::setprecision(1) << " " << out2[i];
   }
   out << "\n";
+}
+
+void karnauhova::scale_point(Shape& object, point_t t, double k)
+{
+  point_t centr_rec = object.getFrameRect().pos;
+  double x = t.x - centr_rec.x;
+  double y = t.y - centr_rec.y;
+  object.scale(k);
+  object.move(x * k, y * k);
 }

@@ -84,8 +84,9 @@ void karnauhova::Triangle::move(point_t t)
   x1_.y += shift_y;
 }
 
-void karnauhova::Triangle::scale(point_t t, double k)
+void karnauhova::Triangle::scale(double k)
 {
+  point_t t = getFrameRect().pos;
   double distance_x1 = x1_.x - t.x;
   double distance_x2 = x2_.x - t.x;
   double distance_x3 = x3_.x - t.x;

@@ -13,7 +13,7 @@ namespace karnauhova
     void move(point_t t) override;
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void scale(point_t t, double k) override;
+    void scale(double k) override;
     ~Polygon() {}
   private:
     point_t* points_;
