@@ -44,6 +44,7 @@ namespace kushekbaev
     for (size_t i = 0; i < shapeCounter; ++i)
     {
       delete capacity[i];
+      capacity[i] = nullptr;
     }
   }
 }
