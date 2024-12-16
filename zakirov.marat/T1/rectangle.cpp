@@ -57,6 +57,6 @@ void zakirov::Rectangle::scale(double k)
 
   top_right_.x_ *= k;
   top_right_.y_ *= k;
-  bottom_left_.x_ /= k;
-  bottom_left_.y_ /= k;
+  bottom_left_.x_ *= k;
+  bottom_left_.y_ *= k;
 }

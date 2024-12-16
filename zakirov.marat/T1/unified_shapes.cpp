@@ -188,16 +188,21 @@ double * zakirov::get_data(std::istream & in)
 
 void zakirov::scale_from_point(Shape * mutable_shape, point_t target, double k)
 {
+  if (k <= 0)
+  {
+    return;
+  }
+
   point_t nailed_p1 = mutable_shape -> getFrameRect().position_;
   mutable_shape -> move(target);
   point_t nailed_p2 = mutable_shape -> getFrameRect().position_;
-  mutable_shape -> scale(k);
 
   point_t bias;
-  bias.x_ = nailed_p2.x_ - nailed_p1.x_;
-  bias.y_ = nailed_p2.y_ - nailed_p1.y_;
+  bias.x_ = (nailed_p2.x_ - nailed_p1.x_) * k;
+  bias.y_ = (nailed_p2.y_ - nailed_p1.y_) * k;
 
-  mutable_shape -> move(-bias.x_ * k, -bias.x_ * k);
+  mutable_shape -> scale(k);
+  mutable_shape -> move(-bias.x_, -bias.x_);
 }
 
 void zakirov::output_frame(std::ostream & out, Shape ** shapes, size_t quantity)
@@ -218,4 +223,12 @@ void zakirov::output_frame(std::ostream & out, Shape ** shapes, size_t quantity)
     out << ' ' << frame_top_right.x_ << ' ' << frame_top_right.y_;
   }
   out << '\n';
+}
+
+void zakirov::clear_shapes(Shape ** shapes, size_t quantity)
+{
+  for (size_t i = 0; i < quantity; ++i)
+  {
+    delete shapes[i];
+  }
 }
