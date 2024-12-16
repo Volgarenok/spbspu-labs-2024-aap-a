@@ -64,6 +64,7 @@ namespace
       new_array[i] = array[i];
     }
 
+    free(array);
     return new_array;
   }
 }

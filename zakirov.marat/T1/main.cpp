@@ -41,14 +41,14 @@ int main()
       break;
     }
   }
-  std::cout << std::setprecision(1);
+  
   double total_area = 0;
   for (size_t i = 0; i < location; ++i)
   {
     total_area += shapes[i] -> getArea();
   }
 
-  std::cout << total_area;
+  std::cout << std::fixed << std::setprecision(1) << total_area;
   zakirov::output_frame(std::cout, shapes, location);
 
   total_area = 0;
