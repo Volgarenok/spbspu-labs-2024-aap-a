@@ -73,7 +73,7 @@ int main() // Valgrind will argue... Yes
     {
       for (size_t j = 0; j < capacity; j++)
       {
-        description[i][j] = '1';
+        description[i][j] = '0';
       }
     }
     size_t i = 0;
@@ -82,7 +82,6 @@ int main() // Valgrind will argue... Yes
       type_of_shape[i] = stream_massive[i];
       i++;
     }
-    i++;
     type_of_shape[i] = '\0';
     size_t j = 0;
     size_t k = 0;
