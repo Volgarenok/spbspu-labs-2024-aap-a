@@ -5,7 +5,7 @@
 
 namespace maslovskiy
 {
-  class ComplexQuad : Shape
+  class ComplexQuad : public Shape
   {
   public:
     ComplexQuad(point_t vertexA, point_t vertexB, point_t vertexC, point_t vertexD);
