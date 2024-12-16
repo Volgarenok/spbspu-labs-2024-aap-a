@@ -205,7 +205,7 @@ void zakirov::scale_from_point(Shape * mutable_shape, point_t target, double k)
   bias.y_ = (nailed_p2.y_ - nailed_p1.y_) * k;
 
   mutable_shape -> scale(k);
-  mutable_shape -> move(-bias.x_, -bias.x_);
+  mutable_shape -> move(-bias.x_, -bias.y_);
 }
 
 void zakirov::output_frame(std::ostream & out, Shape ** shapes, size_t quantity)
