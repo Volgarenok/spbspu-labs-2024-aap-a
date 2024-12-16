@@ -183,6 +183,7 @@ double * zakirov::get_data(std::istream & in)
     ++finish;
   }
 
+  free(workline);
   data[1] = counter;
   return data;
 }
