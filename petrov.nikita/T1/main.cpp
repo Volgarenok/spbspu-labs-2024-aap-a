@@ -261,6 +261,10 @@ int main() // Valgrind will argue... Yes
           delete[] description[i];
         }
         delete[] description;
+        for (size_t i = 0; i < count; i++)
+        {
+          delete shapes_massive[i];
+        }
         std::cerr << "ERROR: Invalid scale value\n";
         return 3;
       }
