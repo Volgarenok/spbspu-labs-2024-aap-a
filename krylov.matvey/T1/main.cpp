@@ -102,7 +102,14 @@ void processShapes()
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x - frame.width / 2 << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x - frame.width / 2 << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x + frame.width / 2 << ' ';
-          std::cout << std::fixed << std::setprecision(1) << frame.pos.y + frame.height / 2 << ' ';
+          if (i == shapeCount - 1)
+          {
+            std::cout << std::fixed << std::setprecision(1) << frame.pos.y + frame.height / 2 << '\n';
+          }
+          else
+          {
+            std::cout << std::fixed << std::setprecision(1) << frame.pos.y + frame.height / 2 << ' ';
+          }
         }
         std::cout << "\n";
         scaleCommandProcessed = true;
