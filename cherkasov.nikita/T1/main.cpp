@@ -30,7 +30,6 @@ int main()
       if (!(std::cin >> x1 >> y1 >> x2 >> y2))
       {
         std::cerr << "Error: Invalid input for RECTANGLE\n";
-        return 1;
       }
       shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
     }
@@ -40,7 +39,6 @@ int main()
       if (!(std::cin >> x >> y >> lenght) || lenght <= 0)
       {
         std::cerr << "Error: Invalid input for SQUARE\n";
-        return 1;
       }
       shapes[shapeCount++] = new cherkasov::Square({x, y}, lenght);
     }
@@ -50,13 +48,12 @@ int main()
       if (!(std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3))
       {
         std::cerr << "Error: Invalid input for PARALLELOGRAM\n";
-        return 1;
       }
       shapes[shapeCount++] = new cherkasov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
     }
     else
     {
-      std::cerr << "Error: Unsupported shape" << inputCommand << "\n";
+      std::cerr << "Error: Unsupported shape " << inputCommand << "\n";
       return 1;
     }
     std::string remainingInput;
