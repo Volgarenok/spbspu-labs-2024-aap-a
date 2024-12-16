@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 #include "base-types.hpp"
+#include "triangle.hpp"
 
 namespace hismatova
 {
@@ -15,9 +16,9 @@ namespace hismatova
     double area2 = triangle(p1, p3, p4).getArea();
     double area3 = triangle(p2, p3, p4).getArea();
     double area_triangle = getArea();
-    if (std::fabs(area1 + area2 + area3 - area_triangle) > std::numeric_limits<double>::epsilon())
+    if (std::fabs(area1 + area2 + area3 - area_triangle) > std::numeric_limits< double >::epsilon())
     {
-      throw std::invalid_argument("4 point must be inside the triangle formed by the first three points");
+      throw std::wrong_arg("4 point must be inside the triangle formed by the first three points");
     }
   }
   double concave::getArea() const
@@ -47,8 +48,8 @@ namespace hismatova
   }
   void concave::move(point_t point)
   {
-    double dx = point.x - get_center().x;
-    double dy = point.y - get_center().y;
+    double dx = point.x - p4_.x;
+    double dy = point.y - p4_.y;
     move(dx, dy);
   }
   void concave::scale(double index)
