@@ -1,5 +1,5 @@
-#ifndef BASE-TYPES_HPP
-#define BASE-TYPES_HPP
+#ifndef BASE_TYPES_HPP
+#define BASE_TYPES_HPP
 
 namespace guseynov
 {
@@ -15,5 +15,5 @@ namespace guseynov
     double height;
     point_t pos;
   };
-
+}
 #endif

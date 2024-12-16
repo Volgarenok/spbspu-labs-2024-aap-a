@@ -31,18 +31,18 @@ void guseynov::Rectangle::move(point_t pos)
   point_t center = getFrameRect().pos;
   double moveX = pos.x - center.x;
   double moveY = pos.y - center.y;
-  leftLowP_.x += moveX;
-  leftLowP_.y += moveY;
-  rightHighP_.x += moveX;
-  rightHighP_.y += moveY;
+  this->leftLowP_.x += moveX;
+  this->leftLowP_.y += moveY;
+  this->rightHighP_.x += moveX;
+  this->rightHighP_.y += moveY;
 }
 
 void guseynov::Rectangle::move(double x, double y)
 {
-  leftLowP_.x += x;
-  leftLowP_.y += y;
-  rightHighP_.x += x;
-  rightHighP_.y += y;
+  this->leftLowP_.x += x;
+  this->leftLowP_.y += y;
+  this->rightHighP_.x += x;
+  this->rightHighP_.y += y;
 }
 
 void guseynov::Rectangle::scale(double k)
@@ -52,8 +52,8 @@ void guseynov::Rectangle::scale(double k)
     throw std::logic_error("Invalid argument for k")
   }
   point_t center = getFrameRect().pos;
-  leftLowP_.x = center.x - (center.x - leftLowP_.x) * k;
-  leftLowP_.y = center.y - (center.y - leftLowP_.y) * k;
-  rightHighP_.x = center.x + (center.x - rightHighP_.x) * k;
-  rightHighP_.y = center.y + (center.y - rightHighP_.y) * k;
+  this->leftLowP_.x = center.x - (center.x - leftLowP_.x) * k;
+  this->leftLowP_.y = center.y - (center.y - leftLowP_.y) * k;
+  this->rightHighP_.x = center.x + (center.x - rightHighP_.x) * k;
+  this->rightHighP_.y = center.y + (center.y - rightHighP_.y) * k;
 }

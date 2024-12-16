@@ -14,6 +14,7 @@ namespace guseynov
     virtual void move(double x, double y) const = 0;
     virtual void scale(double k) const = 0;
     virtual ~Shape() = default;
+  };
 }
 
 #endif
