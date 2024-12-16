@@ -139,19 +139,19 @@ double * zakirov::get_data(std::istream & in)
   }
 
   char * shape = get_string(in, step, ' ');
-  if (std::strcmp(shape, "RECTANGLE "))
+  if (!std::strcmp(shape, "RECTANGLE "))
   {
     data[0] = 1.0;
   }
-  else if (std::strcmp(shape, "CIRCLE "))
+  else if (!std::strcmp(shape, "CIRCLE "))
   {
     data[0] = 2.0;
   }
-  else if (std::strcmp(shape, "RING "))
+  else if (!std::strcmp(shape, "RING "))
   {
     data[0] = 3.0;
   }
-  else if (std::strcmp(shape, "SCALE "))
+  else if (!std::strcmp(shape, "SCALE "))
   {
     data[0] = 4.0;
   }
