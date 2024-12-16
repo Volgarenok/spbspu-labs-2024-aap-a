@@ -8,6 +8,7 @@ namespace rychkov
   class Shape
   {
   public:
+    virtual ~Shape() = default;
     virtual double getArea() const noexcept = 0;
     virtual rectangle_t getFrameRect() const noexcept = 0;
     virtual void move(point_t destination) noexcept = 0;

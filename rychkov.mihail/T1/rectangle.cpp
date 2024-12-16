@@ -38,7 +38,7 @@ void rychkov::Rectangle::move(double deltaX, double deltaY) noexcept
 }
 void rychkov::Rectangle::scale(double coef)
 {
-  if (coef == 0)
+  if (coef <= 0)
   {
     throw std::invalid_argument("scale can't be executed with coefficient 0");
   }
