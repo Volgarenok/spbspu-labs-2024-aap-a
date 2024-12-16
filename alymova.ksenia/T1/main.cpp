@@ -5,8 +5,6 @@
 #include "rectangle.hpp"
 #include "circle.hpp"
 #include "inputProcess.hpp"
-#include <cmath>
-
 int main()
 {
   constexpr int max_size = 1000;
@@ -49,6 +47,4 @@ int main()
     std::cerr << "Incorrect description of the shapes\n";
   }
   clear(shapes);
-  
 }
-
