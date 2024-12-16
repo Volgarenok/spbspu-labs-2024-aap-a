@@ -81,7 +81,7 @@ void processShapes()
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x + frame.width / 2 << ' ';
           if (i == shapeCount - 1)
           {
-            std::cout << std::fixed << std::setprecision(1) << frame.pos.y + frame.height / 2 << '\n';
+            std::cout << std::fixed << std::setprecision(1) << frame.pos.y + frame.height / 2;
           }
           else
           {
@@ -111,7 +111,7 @@ void processShapes()
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x + frame.width / 2 << ' ';
           if (i == shapeCount - 1)
           {
-            std::cout << std::fixed << std::setprecision(1) << frame.pos.y + frame.height / 2 << '\n';
+            std::cout << std::fixed << std::setprecision(1) << frame.pos.y + frame.height / 2;
           }
           else
           {
