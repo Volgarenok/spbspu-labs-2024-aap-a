@@ -1,7 +1,7 @@
 #include "circle.hpp"
 #include <cmath>
 #include <stdexcept>
-constexpr double PI = acos(-1.0);
+constexpr double PI = std::acos(-1.0);
 alymova::Circle::Circle(point_t pos, double radius):
   pos_(pos),
   radius_(1),

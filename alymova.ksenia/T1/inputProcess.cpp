@@ -24,8 +24,16 @@ void alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool&
       {
         double x1 = 0, y1 = 0, x2 = 0, y2 = 0;
         in >> x1 >> y1 >> x2 >> y2;
-        shapes[shapes_now] = new Rectangle(point_t(x1, y1), point_t(x2, y2));
-        shapes_now++;
+        try
+        {
+          shapes[shapes_now] = new Rectangle(point_t(x1, y1), point_t(x2, y2));
+          shapes_now++;
+        }
+        catch (const std::logic_error& e)
+        {
+          delete shapes[shapes_now];
+          wrong_shape_flag = true;
+        }
       }
       if (type == "CIRCLE")
       {
@@ -67,7 +75,7 @@ void alymova::print(std::ostream& out, Shape** shapes)
   double area = 0;
   for(size_t i = 0; shapes[i] != nullptr; i++)
   {
-    area += shapes[i]->getFrameRect().getArea();
+    area += shapes[i]->getArea();
   }
   out << std::setprecision(1) << std::fixed;
   out << area;

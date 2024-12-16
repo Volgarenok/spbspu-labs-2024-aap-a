@@ -5,6 +5,7 @@
 #include "rectangle.hpp"
 #include "circle.hpp"
 #include "inputProcess.hpp"
+#include <cmath>
 
 int main()
 {
@@ -27,6 +28,11 @@ int main()
     std::cerr << e.what() << "\n";
     return 1;
   }
+  if (shapes_now == 0)
+  {
+    std::cerr << "Nothig to scale\n";
+    return 1;
+  }
   if (scale_ratio <= 0)
   {
     clear(shapes);
@@ -43,5 +49,6 @@ int main()
     std::cerr << "Incorrect description of the shapes\n";
   }
   clear(shapes);
+  
 }
 
