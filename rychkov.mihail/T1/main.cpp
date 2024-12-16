@@ -6,6 +6,12 @@
 #include "shape_scale.hpp"
 #include "composition.hpp"
 
+namespace rychkov
+{
+  std::ostream& printRectangle(std::ostream& out, rychkov::rectangle_t rect);
+  std::ostream& printCompositionFrames(std::ostream& out, rychkov::Shape** shapes, size_t size);
+}
+
 int main()
 {
   size_t allocated = 8;
@@ -26,27 +32,24 @@ int main()
       double coef = 1;
       if (std::cin >> scaleCenter.x >> scaleCenter.y >> coef)
       {
-        std::cout << rychkov::composition::getArea(shapes, used);
-        for (size_t i = 0; i < used; i++)
+        if (!allIsValid)
         {
-          rychkov::rectangle_t temp = shapes[i]->getFrameRect();
-          std::cout << ' ' << temp.pos.x - temp.width / 2;
-          std::cout << ' ' << temp.pos.y - temp.height / 2;
-          std::cout << ' ' << temp.pos.x + temp.width / 2;
-          std::cout << ' ' << temp.pos.y + temp.height / 2;
+          std::cerr << "some of figures have errors in input description\n";
         }
-        std::cout << '\n';
+        rychkov::printCompositionFrames(std::cout, shapes, used) << '\n';
         rychkov::scale(shapes, used, coef, scaleCenter);
+        rychkov::printCompositionFrames(std::cout, shapes, used) << '\n';
       }
       free(command);
       rychkov::composition::deallocate(shapes, used);
       return std::cin.fail() || std::cin.eof();
     }
+
     rychkov::Shape* temp = rychkov::getShape(command, std::cin);
     if (!temp)
     {
       allIsValid = false;
-      std::cin.ignore();
+      std::cin.clear();
       free(rychkov::getline(std::cin));
     }
     else
@@ -65,9 +68,23 @@ int main()
     free(command);
   }
   rychkov::composition::deallocate(shapes, used);
-  if (!allIsValid)
-  {
-    std::cerr << "some of figures have errors in input description\n";
-  }
   return std::cin.fail() ? 2 : 1;
+}
+
+std::ostream& rychkov::printRectangle(std::ostream& out, rychkov::rectangle_t rect)
+{
+  out << rect.pos.x - rect.width / 2;
+  out << ' ' << rect.pos.y - rect.height / 2;
+  out << ' ' << rect.pos.x + rect.width / 2;
+  out << ' ' << rect.pos.y + rect.height / 2;
+  return out;
+}
+std::ostream& rychkov::printCompositionFrames(std::ostream& out, rychkov::Shape** shapes, size_t size)
+{
+  out << rychkov::composition::getArea(shapes, size);
+  for (size_t i = 0; i < size; i++)
+  {
+    printRectangle(out << ' ', shapes[i]->getFrameRect());
+  }
+  return out;
 }
