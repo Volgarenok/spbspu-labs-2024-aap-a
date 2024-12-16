@@ -124,6 +124,13 @@ int main() // Valgrind will argue... Yes
       catch (const char * error)
       {
         count_errors++;
+        delete[] stream_massive;
+        delete[] type_of_shape;
+        for (size_t i = 0; i < created; i++)
+        {
+          delete[] description[i];
+        }
+        delete[] description;
         continue;
       }
       shapes_massive[count++] = ptr_rectangle;
@@ -161,6 +168,13 @@ int main() // Valgrind will argue... Yes
       catch (const char * error)
       {
         count_errors++;
+        delete[] stream_massive;
+        delete[] type_of_shape;
+        for (size_t i = 0; i < created; i++)
+        {
+          delete[] description[i];
+        }
+        delete[] description;
         continue;
       }
       shapes_massive[count++] = ptr_triangle;
@@ -199,6 +213,13 @@ int main() // Valgrind will argue... Yes
       catch (const char * error)
       {
         count_errors++;
+        delete[] stream_massive;
+        delete[] type_of_shape;
+        for (size_t i = 0; i < created; i++)
+        {
+          delete[] description[i];
+        }
+        delete[] description;
         continue;
       }
       shapes_massive[count++] = ptr_concave;
