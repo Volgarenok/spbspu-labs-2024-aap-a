@@ -6,6 +6,7 @@
 #include "rectangle.hpp"
 #include "concave.hpp"
 #include "parallelogram.hpp"
+#include "diamond.hpp"
 
 namespace kushekbaev
 {
@@ -13,6 +14,7 @@ namespace kushekbaev
   Rectangle* makeRectangle(std::istream& input);
   Concave* makeConcave(std::istream& input);
   Parallelogram* makeParallelogram(std::istream& input);
+  Diamond* makeDiamond(std::istream& input);
   point_t makeScale(std::istream& input);
 }
 

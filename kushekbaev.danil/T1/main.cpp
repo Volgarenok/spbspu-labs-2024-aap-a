@@ -12,6 +12,7 @@ int main()
   bool incorrectRectangleInput = false;
   bool incorrectConcaveInput = false;
   bool incorrectParallelogramInput = false;
+  bool incorrectDiamondInput = false;
   kushekbaev::point_t scalePoint;
   double scaleCoeff = 0;
 
@@ -58,6 +59,19 @@ int main()
         }
       }
 
+      else if (shapeName == "DIAMOND")
+      {
+        try
+        {
+          capacity[shapeCounter++] = kushekbaev::makeDiamond(std::cin);
+        }
+
+        catch (const std::invalid_argument& e)
+        {
+          incorrectDiamondInput = true;
+        }
+      }
+
       else if (shapeName == "SCALE")
       {
         scalePoint = kushekbaev::makeScale(std::cin);
@@ -85,6 +99,11 @@ int main()
     if (incorrectParallelogramInput)
     {
       std::cerr << "Some of inputed parallelograms were incorrectly inputed" << "\n";
+    }
+
+    if (incorrectDiamondInput)
+    {
+      std::cerr << "Some of inputed diamonds were incorrectly inputed" << "\n";
     }
 
     if (shapeCounter == 0)

@@ -59,6 +59,19 @@ namespace kushekbaev
     return new Parallelogram({ first, second, third });
   }
 
+  Diamond* makeDiamond(std::istream& input)
+  {
+    point_t first { 0, 0 };
+    point_t second { 0, 0 };
+    point_t third { 0, 0 };
+    input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
+    if (!isTriangle(first, second, third))
+    {
+      throw std::invalid_argument("First three points wouldnt make a triangle\n");
+    }
+    return new Diamond({ first, second, third });
+  }
+
   point_t makeScale(std::istream& input)
   {
     double x = 0;
