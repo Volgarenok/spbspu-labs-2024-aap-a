@@ -8,10 +8,6 @@ petrov::Rectangle::Rectangle(point_t p1, point_t p2):
   {
     throw "ERROR: Invalid data somewhere\n";
   }
-  p1_.x_ = round(p1_.x_) / 10;
-  p1_.y_ = round(p1_.y_) / 10;
-  p3_.x_ = round(p3_.x_) / 10;
-  p3_.y_ = round(p3_.y_) / 10;
   p2_.x_ = p1_.x_;
   p2_.y_ = p3_.y_;
   p4_.x_ = p3_.x_;

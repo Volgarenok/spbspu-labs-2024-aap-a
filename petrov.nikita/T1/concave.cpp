@@ -7,6 +7,10 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   p3_(p3),
   p4_(p4)
 {
+  if ( (p1_.x_ == p4_.x_ && p1_.y_ == p4_.y_) || (p2_.x_ == p4_.x_ && p2_.y_ == p4_.y_) || (p3_.x_ == p4_.x_ && p3_.y_ == p4_.y_) )
+  {
+    throw "ERROR: Invalid data somewhere";
+  }
   double a = sqrt(pow((p1_.x_ - p2_.x_), 2) + pow((p1_.y_ - p2_.y_), 2));
   double b = sqrt(pow((p3_.x_ - p2_.x_), 2) + pow((p3_.y_ - p2_.y_), 2));
   double c = sqrt(pow((p1_.x_ - p3_.x_), 2) + pow((p1_.y_ - p3_.y_), 2));
