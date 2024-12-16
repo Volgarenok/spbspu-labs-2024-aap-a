@@ -4,6 +4,7 @@ namespace alymova
 {
   struct point_t
   {
+  public:
     point_t() = default;
     point_t(const point_t& point);
     point_t(point_t&& point);
@@ -19,6 +20,7 @@ namespace alymova
   };
   struct rectangle_t
   {
+  public:
     rectangle_t() = default;
     rectangle_t(point_t low_left, point_t upp_right);
     double getArea() const;

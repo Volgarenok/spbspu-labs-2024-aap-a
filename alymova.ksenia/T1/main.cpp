@@ -29,6 +29,7 @@ int main()
   }
   if (scale_ratio <= 0)
   {
+    clear(shapes);
     std::cerr << "The scale ratio should be positive\n";
     return 1;
   }

@@ -64,20 +64,27 @@ void alymova::clear(Shape** shapes)
 }
 void alymova::print(std::ostream& out, Shape** shapes)
 {
-  double area = 0, low_left_x = 0, low_left_y = 0, upp_right_x = 0, upp_right_y = 0;
+  double area = 0;
   for(size_t i = 0; shapes[i] != nullptr; i++)
   {
     area += shapes[i]->getFrameRect().getArea();
-    low_left_x += shapes[i]->getFrameRect().getLowLeft().getX();
-    low_left_y += shapes[i]->getFrameRect().getLowLeft().getY();
-    upp_right_x += shapes[i]->getFrameRect().getUppRight().getX();
-    upp_right_y += shapes[i]->getFrameRect().getUppRight().getY();
   }
   out << std::setprecision(1) << std::fixed;
-  out << area << " " << low_left_x << " " << low_left_y << " " << upp_right_x << " " << upp_right_y;
+  out << area;
+  for (size_t i = 0; shapes[i] != nullptr; i++)
+  {
+    out << " " << shapes[i]->getFrameRect().getLowLeft().getX();
+    out << " " << shapes[i]->getFrameRect().getLowLeft().getY();
+    out << " " << shapes[i]->getFrameRect().getUppRight().getX();
+    out << " " << shapes[i]->getFrameRect().getUppRight().getY();
+  }
 }
 void alymova::scale(Shape** shapes, point_t s, double ratio)
 {
+  if (ratio <= 0)
+  {
+    throw std::invalid_argument("The scale ratio should be positive");
+  }
   if (ratio == 1)
   {
     return;
