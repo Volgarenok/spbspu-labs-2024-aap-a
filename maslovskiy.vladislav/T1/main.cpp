@@ -10,7 +10,7 @@ using namespace maslovskiy;
 
 int main()
 {
-  Shape* shapeArray[10000];
+  Shape *shapeArray[10000];
   std::string inputCommand;
   size_t shapeCount = 0;
   bool invalidInput = false;
@@ -26,12 +26,6 @@ int main()
       std::cin >> x1 >> y1 >> x2 >> y2;
 
       if (x1 >= x2 || y1 >= y2)
-      {
-        std::swap(x1, x2);
-        std::swap(y1, y2);
-      }
-
-      if (x1 == x2 || y1 == y2)
       {
         invalidInput = true;
       }
@@ -109,16 +103,13 @@ int main()
     std::cerr << "Invalid input encountered\n";
   }
 
-  std::cout << std::fixed << std::setprecision(1) << calculateTotalArea(shapeArray, shapeCount) << "\n";
+  std::cout << std::fixed << std::setprecision(1) << calculateTotalArea(shapeArray, shapeCount);
   outputFrameCoordinates(shapeArray, shapeCount);
-
   applyIsoScaling(shapeArray, shapeCount, isoCenter, scalingFactor);
   std::cout << "\n";
-  std::cout << calculateTotalArea(shapeArray, shapeCount) << "\n";
+  std::cout << calculateTotalArea(shapeArray, shapeCount);
   outputFrameCoordinates(shapeArray, shapeCount);
-
   std::cout << "\n";
   deleteShapes(shapeArray, shapeCount);
-
   return 0;
 }
