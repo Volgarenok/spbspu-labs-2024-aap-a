@@ -13,6 +13,7 @@ int main()
   size_t shapeCount = 0;
   std::string inputCommand;
   bool scaleCommandIssued = false;
+  bool fugInput = false;
   while (std::getline(std::cin, inputCommand))
   {
     if (inputCommand.empty())
@@ -27,29 +28,41 @@ int main()
     if (inputCommand == "RECTANGLE")
     {
       double x1, y1, x2, y2;
-      if (!(std::cin >> x1 >> y1 >> x2 >> y2))
+      if (std::cin >> x1 >> y1 >> x2 >> y2)
       {
-        std::cerr << "Error: Invalid input for RECTANGLE\n";
+        fugInput = true;
+        shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
       }
-      shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
+      else
+      {
+        std::cerr << "Error: invalid input for RECTANGLE\n";
+      }
     }
     else if (inputCommand == "SQUARE")
     {
       double x, y, lenght;
-      if (!(std::cin >> x >> y >> lenght) || lenght <= 0)
+      if (std::cin >> x >> y >> lenght || lenght > 0)
       {
-        std::cerr << "Error: Invalid input for SQUARE\n";
+        fugInput = true;
+        shapes[shapeCount++] = new cherkasov::Square({x, y}, lenght);
       }
-      shapes[shapeCount++] = new cherkasov::Square({x, y}, lenght);
+      else
+      {
+        std::cerr << "Error: invalid input for SQUARE\n";
+      }
     }
     else if (inputCommand == "PARALLELOGRAM")
     {
       double x1, y1, x2, y2, x3, y3;
-      if (!(std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3))
+      if (std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3)
       {
-        std::cerr << "Error: Invalid input for PARALLELOGRAM\n";
+        fugInput = true;
+        shapes[shapeCount++] = new cherkasov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
       }
-      shapes[shapeCount++] = new cherkasov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
+      else
+      {
+        std::cerr << "Error: invalid input for PARALLELOGRAMM\n";
+      }
     }
     else
     {
@@ -87,3 +100,4 @@ int main()
   std::cout << "Total area of all shapes: " << totalArea << "\n";
   return 0;
 }
+
