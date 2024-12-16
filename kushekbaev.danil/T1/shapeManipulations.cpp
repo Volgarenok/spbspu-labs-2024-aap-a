@@ -1,5 +1,6 @@
 #include "shapeManipulations.hpp"
 #include <iostream>
+#include <numeric>
 
 namespace kushekbaev
 {
@@ -8,7 +9,8 @@ namespace kushekbaev
     double area = 0;
     for (size_t i = 0; i < shapeCounter; ++i)
     {
-      area += capacity[i]->getArea();
+      return std::accumulate(capacity, capacity + shapeCounter, 0.0,
+                           [](double sum, Shape* shape) { return sum + shape->getArea(); });
     }
     return area;
   }
