@@ -5,20 +5,25 @@
 
 namespace kushekbaev
 {
-  Concave::Concave(point_t first, point_t second, point_t third, point_t final) : first_(first), second_(second), third_(third), final_(final) {}
+  Concave::Concave(point_t first, point_t second, point_t third, point_t final)
+  : first_(first), second_(second), third_(third), final_(final) {}
 
   double Concave::getArea() const
   {
     double halfperimeterOfTriangle = (getLineLength(first_, second_) + getLineLength(second_, third_)
     + getLineLength(first_, third_)) / 2;
-    double squaredAreaOfTriangle = (halfperimeterOfTriangle) * (halfperimeterOfTriangle - getLineLength(first_, second_))
-    * (halfperimeterOfTriangle - getLineLength(second_, third_)) * (halfperimeterOfTriangle - getLineLength(first_, third_));
+    double squaredAreaOfTriangle = (halfperimeterOfTriangle)
+    * (halfperimeterOfTriangle - getLineLength(first_, second_))
+    * (halfperimeterOfTriangle - getLineLength(second_, third_))
+    * (halfperimeterOfTriangle - getLineLength(first_, third_));
     double areaOfTriangle = std::sqrt(squaredAreaOfTriangle);
 
     double halfperimeterOfConcavity = (getLineLength(second_, third_) + getLineLength(third_, final_)
     + getLineLength(second_, final_));
-    double squaredAreaOfConcavity = (halfperimeterOfConcavity) * (halfperimeterOfConcavity - getLineLength(second_, third_))
-    * (halfperimeterOfConcavity - getLineLength(third_, final_)) * (halfperimeterOfConcavity - getLineLength(second_, final_));
+    double squaredAreaOfConcavity = (halfperimeterOfConcavity)
+    * (halfperimeterOfConcavity - getLineLength(second_, third_))
+    * (halfperimeterOfConcavity - getLineLength(third_, final_))
+    * (halfperimeterOfConcavity - getLineLength(second_, final_));
     double areaOfConcavity = std::sqrt(squaredAreaOfConcavity);
 
     return areaOfTriangle - areaOfConcavity;
@@ -51,7 +56,8 @@ namespace kushekbaev
     double middleForX = lowerLeft.x + (upperRight.x - lowerLeft.x) / 2;
     double middleForY = lowerLeft.y + (upperRight.y - lowerLeft.y) / 2;
 
-    rectangle_t* rect = new rectangle_t{ upperRight.x - lowerLeft.x, upperRight.y - lowerLeft.y, { middleForX, middleForY } };
+    rectangle_t* rect = new rectangle_t
+    { upperRight.x - lowerLeft.x, upperRight.y - lowerLeft.y, { middleForX, middleForY } };
     return *rect;
   }
 
