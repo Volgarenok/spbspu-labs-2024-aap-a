@@ -31,6 +31,8 @@ int main()
       {
         if (x1 < x2 && y1 < y2)
         {
+          double width = x2 - x1;
+          double height = y2 - y1;
           shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2}, width, height);
         }
         else
