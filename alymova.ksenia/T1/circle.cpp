@@ -1,14 +1,14 @@
 #include "circle.hpp"
 #include <cmath>
 constexpr double PI = acos(-1.0);
-alymova::Circle::Circle(point pos, double radius):
+alymova::Circle::Circle(point_t pos, double radius):
   pos_(pos),
   radius_(radius),
   frame_rect_(point_t(pos_.getX() - radius, pos_.getY() - radius), point_t(pos_.getX() + radius, pos_.getY() + radius))
 {}
 double alymova::Circle::getArea() const
 {
-  return PI * radius * radius;
+  return PI * radius_ * radius_;
 }
 alymova::rectangle_t alymova::Circle::getFrameRect() const
 {
@@ -32,6 +32,6 @@ void alymova::Circle::scale(double ratio)
   {
     return;
   }
-  radius *= ratio;
+  radius_ *= ratio;
   frame_rect_.scale(ratio);
 }

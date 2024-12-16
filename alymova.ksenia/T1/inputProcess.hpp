@@ -5,7 +5,7 @@
 #include "rectangle.hpp"
 namespace alymova
 {
-  Shape* makeShape(std::istream& in, Shape** shapes);
+  Shape* makeShape(std::istream& in, Shape** shapes, int& shapes_cnt, point_t& scale_s, double& scale_ratio);
   Rectangle* makeRectangle(double x1, double y1, double x2, double y2);
   void clear(Shape** shapes);
   void print(std::ostream& out, Shape** shapes);

@@ -1,7 +1,7 @@
 #include "inputProcess.hpp"
 #include <iostream>
 #include <iomanip>
-alymova::Shape* alymova::makeShape(std::istream& in, Shape** shapes)
+alymova::Shape* alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_cnt, point_t& scale_s, double& scale_ratio)
 {
   std::string type;
   in >> type;

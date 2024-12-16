@@ -8,7 +8,9 @@ int main()
 {
   alymova::Shape* shapes[1000] = {};
   int shapes_now = 0;
-  shapes[0] = alymova::makeShape(std::cin, shapes);
+  alymova::point_t scale_t(0.0, 0.0);
+  double ratio = 2;
+  shapes[0] = alymova::makeShape(std::cin, shapes, shapes_now, scale_t, ratio);
   shapes_now++;
 
   print(std::cout, shapes);

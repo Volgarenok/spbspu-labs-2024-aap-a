@@ -1,5 +1,7 @@
 #ifndef CIRCLE_HPP
 #define CIRCLE_HPP
+#include "base-types.hpp"
+#include "shape.hpp"
 namespace alymova
 {
   struct Circle: public Shape
@@ -14,5 +16,6 @@ namespace alymova
     point_t pos_;
     double radius_;
     rectangle_t frame_rect_;
-  }
+  };
 }
+#endif
