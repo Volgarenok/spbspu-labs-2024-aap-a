@@ -43,6 +43,7 @@ void balashov::Rectangle::move(point_t s)
 
 void balashov::Rectangle::scale(double k)
 {
+  сentre = getFrameRect().pos_;
   angleDownLeft_.x_ = сentre.x_ - (сentre.x_ - angleDownLeft_.x_) * k;
   angleDownLeft_.y_ = сentre.y_ - (сentre.y_ - angleDownLeft_.y_) * k;
   angleUpRight_.x_ = сentre.x_ + (angleUpRight_.x_ - сentre.x_) * k;
