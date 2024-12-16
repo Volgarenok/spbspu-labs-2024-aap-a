@@ -1,10 +1,10 @@
 #include "output.hpp"
+#include "shape.hpp"
 #include "rectangle.hpp"
 #include "triangle.hpp"
 #include "polygon.hpp"
 #include <iostream>
 #include <iomanip>
-#include "shape.hpp"
 void karnauhova::output(std::ostream & out, double* all_points, double* polygon, std::string* names, size_t c_points, size_t c_shape)
 {
   size_t k = 0, m = 0, c_polygon = 0;
