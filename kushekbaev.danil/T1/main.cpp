@@ -3,7 +3,6 @@
 #include "shapeManipulations.hpp"
 #include "shapeBreeding.hpp"
 #include "shape.hpp"
-#include "shapeManipulations.cpp"
 
 int main()
 {
