@@ -34,6 +34,7 @@ maslevtsov::Polygon::Polygon(std::size_t nVertices, point_t* vertices):
 {
   if (nVertices < 3 || hasSameVertices(vertices, nVertices))
   {
+    delete[] vertices_;
     throw std::logic_error("incorrect coordinates");
   }
 }
@@ -59,7 +60,7 @@ maslevtsov::rectangle_t maslevtsov::Polygon::getFrameRect() const noexcept
     minPnt = {
       minPnt.x < vertices_[i].x ? minPnt.x : vertices_[i].x, minPnt.y < vertices_[i].y ? minPnt.y : vertices_[i].y};
     maxPnt = {
-      minPnt.x > vertices_[i].x ? minPnt.x : vertices_[i].x, minPnt.y > vertices_[i].y ? minPnt.y : vertices_[i].y};
+      maxPnt.x > vertices_[i].x ? maxPnt.x : vertices_[i].x, maxPnt.y > vertices_[i].y ? maxPnt.y : vertices_[i].y};
   }
   frameRect.width = maxPnt.x - minPnt.x;
   frameRect.height = maxPnt.y - minPnt.y;
