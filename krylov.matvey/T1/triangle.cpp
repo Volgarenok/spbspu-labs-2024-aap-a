@@ -63,3 +63,4 @@ krylov::point_t krylov::Triangle::getCenter() const
 {
   return {(a_.x + b_.x + c_.x) / 3, (a_.y + b_.y + c_.y) / 3};
 }
+
