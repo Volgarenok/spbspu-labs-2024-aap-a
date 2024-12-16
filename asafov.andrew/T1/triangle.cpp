@@ -4,9 +4,7 @@
 
 asafov::Triangle::Triangle(point_t a, point_t b, point_t c):
 one(a), two(b), three(c)
-{
-  
-}
+{}
 
 double asafov::Triangle::getArea() const
 {
@@ -14,7 +12,7 @@ double asafov::Triangle::getArea() const
   double sideb = pow((three.x-two.x)*(three.x-two.x)+(three.y-two.y)*(three.y-two.y), 0.5);
   double sidec = pow((one.x-three.x)*(one.x-three.x)+(one.y-three.y)*(one.y-three.y), 0.5);
   double semi = (sidea + sideb + sidec)/2;
-  return pow(semi*(semi-sidea)*(semi-sideb)*(semi-sidec) , 0.5);
+  return pow(semi*(semi-sidea)*(semi-sideb)*(semi-sidec), 0.5);
 }
 
 rectangle_t asafov::Triangle::getFrameRect() const

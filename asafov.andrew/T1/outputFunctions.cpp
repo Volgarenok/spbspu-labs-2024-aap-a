@@ -64,7 +64,7 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
   }
   else if (hash == 'S' * 'Q' * 'U' * 'A')
   {
-  
+
   }
   else if (hash == 'T' * 'R' * 'I' * 'A')
   {
@@ -116,9 +116,11 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
   for (unsigned long long i = 0; i < count; i++)
   {
     rect = shapes[i][0].getFrameRect();
-    out << '\n' << "Area:" << shapes[i][0].getArea() << "; Frame rectangle: " << '(' << rect.pos.x << ", " << rect.pos.y << ") " << rect.width << ' ' << rect.height << '\n';
+    out << '\n' << "Area:" << shapes[i][0].getArea() << "; Frame rectangle: " << '(' << rect.pos.x << ", " ;
+    out << rect.pos.y << ") " << rect.width << ' ' << rect.height << '\n';
     shapes[i][0].scale(pos, scale);
     rect = shapes[i][0].getFrameRect();
-    out << "Area:" << shapes[i][0].getArea() << "; Frame rectangle: " << '(' << rect.pos.x << ", " << rect.pos.y << ") " << rect.width << ' ' << rect.height << '\n';
+    out << "Area:" << shapes[i][0].getArea() << "; Frame rectangle: " << '(' << rect.pos.x << ", ";
+    out << rect.pos.y << ") " << rect.width << ' ' << rect.height << '\n';
   }
 }
