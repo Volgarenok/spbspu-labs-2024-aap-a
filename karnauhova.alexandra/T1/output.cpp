@@ -123,6 +123,7 @@ void karnauhova::scale_point(Shape& object, point_t t, double k)
   point_t centr_rec = object.getFrameRect().pos;
   double x = t.x - centr_rec.x;
   double y = t.y - centr_rec.y;
+  object.move(t);
   object.scale(k);
-  object.move(x * k, y * k);
+  object.move(-(x * k), -(y * k));
 }
