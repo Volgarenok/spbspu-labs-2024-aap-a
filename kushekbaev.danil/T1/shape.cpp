@@ -1,4 +1,5 @@
 #include "shape.hpp"
+#include <cmath>
 
 namespace kushekbaev
 {
