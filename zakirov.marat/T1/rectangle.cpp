@@ -55,8 +55,9 @@ void zakirov::Rectangle::scale(double k)
     return;
   }
 
-  top_right_.x_ *= k;
-  top_right_.y_ *= k;
-  bottom_left_.x_ *= k;
-  bottom_left_.y_ *= k;
+  point_t center = getFrameRect().position_;
+  top_right_.x_ = center.x_ + (top_right_.x_ - center.x_) * k;
+  top_right_.y_  = center.y_ + (top_right_.y_ - center.y_) * k;
+  bottom_left_.x_ *= center.x_ - (center.x_ - bottom_left_.x_) * k;
+  bottom_left_.y_ *= center.x_ - (center.x_ - bottom_left_.y_) * k;
 }
