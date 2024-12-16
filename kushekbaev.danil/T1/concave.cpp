@@ -56,9 +56,7 @@ namespace kushekbaev
     double middleForX = lowerLeft.x + (upperRight.x - lowerLeft.x) / 2;
     double middleForY = lowerLeft.y + (upperRight.y - lowerLeft.y) / 2;
 
-    rectangle_t* rect = new rectangle_t
-    { upperRight.x - lowerLeft.x, upperRight.y - lowerLeft.y, { middleForX, middleForY } };
-    return *rect;
+    return { upperRight.x - lowerLeft.x, upperRight.y - lowerLeft.y, { middleForX, middleForY } };
   }
 
   void Concave::move(point_t Z)
