@@ -68,4 +68,10 @@ int main()
   {
     std::cerr << "Warning! One or more figures are specified incorrectly." << '\n';
   }
+
+  free(scale_data);
+  for (size_t i = 0; i < location; ++i)
+  {
+    delete shapes[i];
+  }
 }
