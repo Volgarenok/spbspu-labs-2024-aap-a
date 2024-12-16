@@ -29,8 +29,7 @@ namespace kushekbaev
     {
       throw std::invalid_argument("Left point values should be less than right point values\n");
     }
-    Rectangle* rect = new Rectangle({ x1, y1 }, { x2, y2 });
-    return rect;
+    return new Rectangle({ x1, y1 }, { x2, y2 });
   }
 
   Concave* makeConcave(std::istream& input)
@@ -44,8 +43,7 @@ namespace kushekbaev
     {
       throw std::invalid_argument("First three points wouldnt make a triangle\n");
     }
-    Concave* conc = new Concave({ first, second, third, final });
-    return conc;
+    return new Concave({ first, second, third, final });
   }
 
   Parallelogram* makeParallelogram(std::istream& input)
@@ -58,8 +56,7 @@ namespace kushekbaev
     {
       throw std::invalid_argument("First three points wouldnt make a triangle\n");
     }
-    Parallelogram* par = new Parallelogram({ first, second, third });
-    return par;
+    return new Parallelogram({ first, second, third });
   }
 
   point_t makeScale(std::istream& input)
