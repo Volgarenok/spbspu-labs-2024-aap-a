@@ -1,4 +1,5 @@
 #include "rectangle.hpp"
+#include <stdexcept>
 alymova::Rectangle::Rectangle(point_t p1, point_t p2):
   low_left_(),
   upp_right_(),
@@ -46,6 +47,10 @@ void alymova::Rectangle::move(point_t point)
 }
 void alymova::Rectangle::scale(double ratio)
 {
+  if (ratio <= 0)
+  {
+    throw std::invalid_argument("The scale ratio should be positive");
+  }
   if (ratio == 1)
   {
     return;

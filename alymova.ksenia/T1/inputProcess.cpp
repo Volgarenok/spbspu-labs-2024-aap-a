@@ -5,46 +5,55 @@
 #include "base-types.hpp"
 #include "rectangle.hpp"
 #include "circle.hpp"
-alymova::Shape* alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool& wrong_shape_flag,
+void alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool& wrong_shape_flag,
   double& scale_x, double& scale_y, double& scale_ratio)
 {
-  std::string type;
-  in >> type;
-  try
+  bool scale_flag = false;
+  while (!scale_flag)
   {
-    if (type == "RECTANGLE")
+    if (in.eof())
     {
-      double x1 = 0, y1 = 0, x2 = 0, y2 = 0;
-      in >> x1 >> y1 >> x2 >> y2;
-      shapes[shapes_now] = new Rectangle(point_t(x1, y1), point_t(x2, y2));
-      shapes_now++;
+      clear(shapes);
+      throw std::logic_error("Command SCALE must be described");
     }
-    if (type == "CIRCLE")
+    std::string type;
+    in >> type;
+    try
     {
-      double x = 0, y = 0, radius = 0;
-      in >> x >> y >> radius;
-      try
+      if (type == "RECTANGLE")
       {
-        shapes[shapes_now] = new Circle(point_t(x, y), radius);
+        double x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+        in >> x1 >> y1 >> x2 >> y2;
+        shapes[shapes_now] = new Rectangle(point_t(x1, y1), point_t(x2, y2));
         shapes_now++;
       }
-      catch (const std::logic_error& e)
+      if (type == "CIRCLE")
       {
-        delete shapes[shapes_now];
-        wrong_shape_flag = true;
+        double x = 0, y = 0, radius = 0;
+        in >> x >> y >> radius;
+        try
+        {
+          shapes[shapes_now] = new Circle(point_t(x, y), radius);
+          shapes_now++;
+        }
+        catch (const std::logic_error& e)
+        {
+          delete shapes[shapes_now];
+          wrong_shape_flag = true;
+        }
+      }
+      if (type == "SCALE")
+      {
+        scale_flag = true;
+        in >> scale_x >> scale_y >> scale_ratio;
       }
     }
-    if (type == "SCALE")
+    catch (const std::bad_alloc& e)
     {
-      in >> scale_x >> scale_y >> scale_ratio;
+      clear(shapes);
+      throw;
     }
   }
-  catch (const std::bad_alloc& e)
-  {
-    clear(shapes);
-    std::cerr << "Error: memory allocate fail\n";
-  }
-  return nullptr;
 }
 void alymova::clear(Shape** shapes)
 {
@@ -69,10 +78,6 @@ void alymova::print(std::ostream& out, Shape** shapes)
 }
 void alymova::scale(Shape** shapes, point_t s, double ratio)
 {
-  if (ratio <= 0)
-  {
-    throw std::invalid_argument("The scale ratio should be positive");
-  }
   if (ratio == 1)
   {
     return;

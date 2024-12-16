@@ -1,4 +1,5 @@
 #include "base-types.hpp"
+#include <stdexcept>
 alymova::point_t::point_t(double x, double y):
   x_(x),
   y_(y)
@@ -70,6 +71,10 @@ alymova::point_t alymova::rectangle_t::getShift() const
 }
 void alymova::rectangle_t::scale(double ratio)
 {
+  if (ratio <= 0)
+  {
+    throw std::invalid_argument("The scale ratio should be positive");
+  }
   if (ratio == 1)
   {
     return;

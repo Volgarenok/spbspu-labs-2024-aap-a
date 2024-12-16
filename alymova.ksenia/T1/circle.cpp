@@ -36,6 +36,10 @@ void alymova::Circle::move(point_t point)
 }
 void alymova::Circle::scale(double ratio)
 {
+  if (ratio <= 0)
+  {
+    throw std::invalid_argument("The scale ratio should be positive");
+  }
   if (ratio == 1)
   {
     return;
