@@ -85,7 +85,7 @@ int main() // Valgrind will argue... Yes
     type_of_shape[i] = '\0';
     size_t j = 0;
     size_t k = 0;
-    while (stream_massive[i] != '\0')
+    while (stream_massive[i] != '\0') // InvalidRead problem reason
     {
       description[j][k] = stream_massive[i];
       i++;
@@ -98,6 +98,7 @@ int main() // Valgrind will argue... Yes
         k = 0;
       }
     }
+    description[j][k] = '\0';
     if (!strcmp(type_of_shape, RECTANGLE))
     {
       char ** p_end = nullptr;
