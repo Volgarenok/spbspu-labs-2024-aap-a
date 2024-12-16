@@ -15,7 +15,7 @@ namespace
       return line;
     }
     char last_symbol = interrupt_el;
-    in >> last_symbol;
+    in >> last_symbol >> std::noskipws;
     line[0] = last_symbol;
     while (last_symbol != interrupt_el)
     {
@@ -46,6 +46,7 @@ namespace
       start += step;
     }
 
+    in >> std::skipws;
     return line;
   }
 
@@ -123,6 +124,7 @@ zakirov::Shape * zakirov::make_shape(const double * data)
   }
   catch (const std::invalid_argument & e)
   {
+    std::cout << "Error" << '\n';
     return nullptr;
   }
 }
@@ -136,18 +138,17 @@ double * zakirov::get_data(std::istream & in)
   {
     return nullptr;
   }
-
+  
   std::string shape = get_string(in, step, ' ');
-
-  if (shape == "RECTANGLE")
+  if (shape == "RECTANGLE ")
   {
     data[0] = 1.0;
   }
-  else if (shape == "CIRCLE")
+  else if (shape == "CIRCLE ")
   {
     data[0] = 2.0;
   }
-  else if (shape == "RING")
+  else if (shape == "RING ")
   {
     data[0] = 3.0;
   }
@@ -165,17 +166,18 @@ double * zakirov::get_data(std::istream & in)
     data = extra_element(data, location);
     while (workline[finish] != ' ' && workline[finish] != '\n')
     {
-      finish += 1;
+      ++finish;
     }
 
     data[location++] = std::stod(workline);
-    while (start != (finish - 1))
+    while (start != finish)
     {
-      workline[start++] = ' ';
+      workline[start] = ' ';
+      ++start;
     }
 
-    start = finish;
     ++counter;
+    ++finish;
   }
 
   data[1] = counter;

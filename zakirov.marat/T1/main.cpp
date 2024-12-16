@@ -19,7 +19,7 @@ int main()
     if (data)
     {
       shapes[location] = zakirov::make_shape(data);
-      if (shapes[location])
+      if (shapes[location] != nullptr)
       {
         ++location;
       }
