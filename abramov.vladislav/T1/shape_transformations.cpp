@@ -18,15 +18,9 @@ namespace abramov
         if (s1 == "RECTANGLE")
         {
           in >> x1 >> y1 >> x2 >> y2;
-          point_t p1;
-          p1.x = x1;
-          p1.y = y1;
-          point_t p2;
-          p2.x = x2;
-          p2.y = y2;
           try
           {
-            shapes[i] = new Rectangle(p1, p2);
+            shapes[i] = new Rectangle({x1, y1}, {x2, y2});
             ++i;
           }
           catch (const std::logic_error &e)
@@ -38,12 +32,9 @@ namespace abramov
         {
           double len = 0;
           in >> x1 >> y1 >> len;
-          point_t p;
-          p.x = x1;
-          p.y = y1;
           try
           {
-            shapes[i] = new Square(p, len);
+            shapes[i] = new Square({x1, y1}, len);
             ++i;
           }
           catch (const std::logic_error &e)
@@ -58,21 +49,9 @@ namespace abramov
           double x4 = 0;
           double y4 = 0;
           in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
-          point_t p1;
-          point_t p2;
-          point_t p3;
-          point_t p4;
-          p1.x = x1;
-          p1.y = y1;
-          p2.x = x2;
-          p2.y = y2;
-          p3.x = x3;
-          p3.y = y3;
-          p4.x = x4;
-          p4.y = y4;
           try
           {
-            shapes[i] = new ComplexQuad(p1, p2, p3, p4);
+            shapes[i] = new ComplexQuad({x1, y1}, {x2, y2}, {x3, y3}, {x4, y4});
             ++i;
           }
           catch (const std::logic_error &e)
