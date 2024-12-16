@@ -39,7 +39,7 @@ namespace kushekbaev
     }
   }
 
-  void clearMemory(Shape** shapes, size_t shapeCounter)
+  void clearMemory(Shape** capacity, size_t shapeCounter)
   {
     for (size_t i = 0; i < shapeCounter; ++i)
     {

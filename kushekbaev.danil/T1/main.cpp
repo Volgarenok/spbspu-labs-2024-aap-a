@@ -10,6 +10,7 @@ int main()
   size_t shapeCounter = 0;
   std::string shapeName;
   bool incorrectRectangleInput = false;
+  bool incorrectConcaveInput = false;
   kushekbaev::point_t scalePoint;
   double scaleCoeff = 0;
 
@@ -30,6 +31,19 @@ int main()
         }
       }
 
+      else if (shapeName == "CONCAVE")
+      {
+        try
+        {
+          capacity[shapeCounter++] = kushekbaev::makeConcave(std::cin);
+        }
+
+        catch (const std::invalid_argument& e)
+        {
+          incorrectConcaveInput = true;
+        }
+      }
+
       else if (shapeName == "SCALE")
       {
         scalePoint = kushekbaev::makeScale(std::cin);
@@ -47,6 +61,11 @@ int main()
     if (incorrectRectangleInput)
     {
       std::cerr << "Some of inputed rectangles were incorrectly inputed" << "\n";
+    }
+
+    if (incorrectConcaveInput)
+    {
+      std::cerr << "Some of inputed concaves were incorrectly inputed" << "\n";
     }
 
     if (shapeCounter == 0)

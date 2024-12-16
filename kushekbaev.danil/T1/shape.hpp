@@ -16,6 +16,8 @@ namespace kushekbaev
     virtual void scale(double k) = 0;
     virtual ~Shape() = default;
   };
+
+  double getLineLength(point_t first, point_t second);
 }
 
 #endif

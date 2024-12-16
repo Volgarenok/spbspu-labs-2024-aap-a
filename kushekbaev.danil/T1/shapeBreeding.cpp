@@ -1,10 +1,23 @@
 #include "shapeBreeding.hpp"
-#include <cmath>
-#include <stdexcept>
 #include "base-types.hpp"
+#include <stdexcept>
 
 namespace kushekbaev
 {
+  bool isTriangle(point_t first, point_t second, point_t third)
+  {
+    if ((getLineLength(first, second) > getLineLength(second, third) + getLineLength(first, third))
+       || (getLineLength(second, third) > (getLineLength(first, second) + getLineLength(first, third)))
+       || (getLineLength(first, third) > getLineLength(first, second) + getLineLength(second, third)))
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
+
   Rectangle* makeRectangle(std::istream& input)
   {
     double x1 = 0;
@@ -18,6 +31,21 @@ namespace kushekbaev
     }
     Rectangle* rect = new Rectangle({ x1, y1 }, { x2, y2 });
     return rect;
+  }
+
+  Concave* makeConcave(std::istream& input)
+  {
+    point_t first { 0, 0 };
+    point_t second { 0, 0 };
+    point_t third { 0, 0 };
+    point_t final { 0, 0 };
+    input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y >> final.x >> final.y;
+    if (!isTriangle(first, second, third))
+    {
+      throw std::invalid_argument("First three points wouldnt make a triangle\n");
+    }
+    Concave* conc = new Concave({ first, second, third, final });
+    return conc;
   }
 
   point_t makeScale(std::istream& input)
