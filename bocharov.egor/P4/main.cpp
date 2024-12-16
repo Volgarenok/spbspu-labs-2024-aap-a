@@ -24,7 +24,7 @@ int main()
   char result[27];
   bocharov::merge_lines(firststring, secondstring, result);
   std::cout << result << "\n";
-  std::cout << bocharov::comparison_symbols(firststring, secondstring);
+  std::cout << bocharov::compare_symbols(firststring, secondstring);
   std::cout << "\n";
   delete[] firststring;
 }
