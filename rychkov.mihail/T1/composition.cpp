@@ -1,6 +1,6 @@
 #include "composition.hpp"
 
-#include <cmath>
+#include <algorithm>
 #include <stdexcept>
 #include <memf.hpp>
 #include "shape_scale.hpp"
@@ -33,7 +33,7 @@ Shape** rychkov::composition::push_back(Shape** shapes, size_t& size, size_t& nA
     Shape** temp = reallocate(shapes, nAllocated, size * 2);
     if (!temp)
     {
-      throw std::bad_alloc();
+      return nullptr;
     }
     shapes = temp;
     nAllocated = size * 2;
@@ -100,4 +100,13 @@ void rychkov::composition::scale(Shape*const* shapes, size_t size, double coef)
   {
     scale(shapes[i], coef, compositionFrame.pos);
   }
+}
+
+void rychkov::scale(Shape** shapes, size_t size, double coef, point_t scaleCenter)
+{
+  rectangle_t tempFrame = composition::getFrameRect(shapes, size);
+  composition::scale(shapes, size, coef);
+  double deltaX = (tempFrame.pos.x - scaleCenter.x) * (coef - 1);
+  double deltaY = (tempFrame.pos.y - scaleCenter.y) * (coef - 1);
+  composition::move(shapes, size, deltaX, deltaY);
 }

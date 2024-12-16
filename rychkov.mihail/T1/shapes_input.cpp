@@ -25,7 +25,7 @@ rychkov::Shape* rychkov::getShape(const char* type, std::istream& in)
 rychkov::Shape* rychkov::getRectangle(std::istream& in)
 {
   rychkov::point_t p1, p2;
-  if (std::cin >> p1.x >> p1.y >> p2.x >> p2.y)
+  if (in >> p1.x >> p1.y >> p2.x >> p2.y)
   {
     return new rychkov::Rectangle(p1, p2);
   }
