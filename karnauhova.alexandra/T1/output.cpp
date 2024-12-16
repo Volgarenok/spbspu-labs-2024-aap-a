@@ -23,7 +23,7 @@ void karnauhova::output(std::ostream & out, double* all_points, double* polygon,
       x4.y = all_points[k + 1];
       x2.x = all_points[k + 2];
       x2.y = all_points[k + 3];
-      Rectangle shape_rec(x4, x2);
+      karnauhova::Rectangle shape_rec(x4, x2);
       sum1 += shape_rec.getArea();
       rectangle_t rec1 = shape_rec.getFrameRect();
       out1[m] = rec1.pos.x - (rec1.width / 2);
@@ -49,7 +49,7 @@ void karnauhova::output(std::ostream & out, double* all_points, double* polygon,
       x2.y = all_points[k + 3];
       x3.x = all_points[k + 4];
       x3.y = all_points[k + 5];
-      Triangle shape_tri(x1, x2, x3);
+      karnauhova::Triangle shape_tri(x1, x2, x3);
       sum1 += shape_tri.getArea();
       rectangle_t tri1 = shape_tri.getFrameRect();
       out1[m] = tri1.pos.x - (tri1.width / 2);
@@ -83,7 +83,7 @@ void karnauhova::output(std::ostream & out, double* all_points, double* polygon,
         points_polygon[j] = point;
         j++;
       }
-      Polygon shape_pol(points_polygon, j);
+      karnauhova::Polygon shape_pol(points_polygon, j);
       sum1 += shape_pol.getArea();
       rectangle_t pol1 = shape_pol.getFrameRect();
       out1[m] = pol1.pos.x - (pol1.width / 2);
