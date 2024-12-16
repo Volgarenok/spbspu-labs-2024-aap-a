@@ -38,7 +38,7 @@ int main()
                 }
                 else
                 {
-                    std::cerr << "Error: Invalid RECTANGLE parameters\n";
+                    std::cerr << "Ошибка: одна сторона должна быть параллельна оси X\n";
                 }
             }
             else if (inputCommand == "SQUARE")
@@ -51,7 +51,7 @@ int main()
                 }
                 else
                 {
-                    std::cerr << "Error: Invalid input for SQUARE\n";
+                    std::cerr << "Ошибка: некорректные параметры для SQUARE\n";
                 }
             }
             else if (inputCommand == "PARALLELOGRAM")
@@ -64,7 +64,7 @@ int main()
                 }
                 else
                 {
-                    std::cerr << "Error: Invalid PARALLELOGRAM parameters\n";
+                    std::cerr << "Ошибка: одна сторона должна быть параллельна оси X\n";
                 }
             }
             else if (inputCommand == "SCALE")
@@ -79,30 +79,30 @@ int main()
                 }
                 else
                 {
-                    std::cerr << "Error: Invalid SCALE parameters\n";
+                    std::cerr << "Ошибка: некорректные параметры для SCALE\n";
                 }
             }
             else
             {
-                std::cerr << "Error: Unsupported shape " << inputCommand << "\n";
+                std::cerr << "Ошибка: неподдерживаемая форма " << inputCommand << "\n";
                 std::string remainingInput;
-                std::getline(std::cin, remainingInput); // Пропускаем оставшиеся данные
+                std::getline(std::cin, remainingInput); // Пропуск остальных данных
             }
         }
         catch (const std::exception& e)
         {
-            std::cerr << "Error: " << e.what() << "\n";
+            std::cerr << "Ошибка: " << e.what() << "\n";
         }
     }
 
     if (!rectangleImplemented || !squareImplemented || !parallelogramImplemented)
     {
-        std::cerr << "Rectangle and at least two additional shapes must be implemented\n";
+        std::cerr << "Необходимо реализовать прямоугольник и как минимум две дополнительные фигуры\n";
         for (size_t i = 0; i < shapeCount; ++i)
         {
             delete shapes[i];
         }
-        return 1;
+        return 2;
     }
 
     std::cout << std::fixed << std::setprecision(1);
@@ -120,7 +120,7 @@ int main()
             }
             catch (const std::exception& e)
             {
-                std::cerr << "Error: Failed to calculate area for shape " << i + 1 << ": " << e.what() << "\n";
+                std::cerr << "Ошибка: не удалось вычислить площадь для фигуры " << i + 1 << ": " << e.what() << "\n";
             }
             delete shapes[i];
         }
