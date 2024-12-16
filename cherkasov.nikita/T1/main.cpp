@@ -5,12 +5,6 @@
 #include "rectangle.h"
 #include "square.h"
 #include "parallelogram.h"
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include "rectangle.h"
-#include "square.h"
-#include "parallelogram.h"
 
 constexpr size_t maxShapes = 10000;
 int main()
@@ -47,14 +41,14 @@ int main()
     }
     else if (inputCommand == "SQUARE")
     {
-      double x, y, sideLength;
-      if (!(std::cin >> x >> y >> sideLength) || sideLength <= 0)
+      double x, y, lenght;
+      if (!(std::cin >> x >> y >> lenght) || lenght <= 0)
       {
         std::cerr << "Error: Invalid input for SQUARE\n";
         return 1;
       }
 
-      shapes[shapeCount++] = new cherkasov::Square({x, y}, sideLength);
+      shapes[shapeCount++] = new cherkasov::Square({x, y}, lenght);
     }
     else if (inputCommand == "PARALLELOGRAM")
     {
