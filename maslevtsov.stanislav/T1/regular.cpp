@@ -31,14 +31,11 @@ maslevtsov::Regular::Regular(point_t center, point_t pnt2, point_t pnt3):
 double maslevtsov::Regular::getArea() const noexcept
 {
   double sqrLength1 = std::pow(center_.x - pnt2_.x, 2) + std::pow(center_.y - pnt2_.y, 2);
-  double sqrLength2 = std::pow(pnt3_.x - pnt2_.x, 2) + std::pow(pnt3_.y - pnt2_.y, 2);
-  double sqrLength3 = std::pow(center_.x - pnt3_.x, 2) + std::pow(center_.y - pnt3_.y, 2);
-  double leg = std::sqrt(sqrLength1 < sqrLength3 ? sqrLength1 : sqrLength3);
-  double hypotenuse = std::sqrt(std::max(std::max(sqrLength1, sqrLength2), sqrLength3));
-  double angle = std::acos(leg / hypotenuse);
-  double nTriangles = (2 * M_PI) / angle;
-  double triangleSquare = 0.5 * std::sqrt(sqrLength1) * std::sqrt(sqrLength3) * std::sin(angle);
-  return triangleSquare * nTriangles;
+  double sqrLength2 = std::pow(center_.x - pnt3_.x, 2) + std::pow(center_.y - pnt3_.y, 2);
+  double smallRadius = std::sqrt(std::min(sqrLength1, sqrLength2));
+  double bigRadius = std::sqrt(std::max(sqrLength1, sqrLength2));
+  std::size_t nVertices = std::round(M_PI / std::acos(smallRadius / bigRadius));
+  return ((nVertices * std::pow(bigRadius, 2)) / 2) * std::sin((2 * M_PI) / nVertices);
 }
 
 maslevtsov::rectangle_t maslevtsov::Regular::getFrameRect() const noexcept
@@ -46,23 +43,32 @@ maslevtsov::rectangle_t maslevtsov::Regular::getFrameRect() const noexcept
   rectangle_t frameRect;
   frameRect.pos = center_;
   double sqrLength1 = std::pow(center_.x - pnt2_.x, 2) + std::pow(center_.y - pnt2_.y, 2);
-  double sqrLength2 = std::pow(pnt3_.x - pnt2_.x, 2) + std::pow(pnt3_.y - pnt2_.y, 2);
-  double sqrLength3 = std::pow(center_.x - pnt3_.x, 2) + std::pow(center_.y - pnt3_.y, 2);
-  double hypotenuse = std::sqrt(std::max(std::max(sqrLength1, sqrLength2), sqrLength3));
-  point_t movedCenter1 = {center_.x + hypotenuse, center_.y + hypotenuse};
-  point_t movedCenter2 = {center_.x - hypotenuse, center_.y - hypotenuse};
-  frameRect.width = std::abs(movedCenter2.x - movedCenter1.x);
-  frameRect.height = std::abs(movedCenter2.y - movedCenter1.y);
+  double sqrLength2 = std::pow(center_.x - pnt3_.x, 2) + std::pow(center_.y - pnt3_.y, 2);
+  double bigRadius = std::sqrt(std::max(sqrLength1, sqrLength2));
+  double smallRadius = std::sqrt(std::min(sqrLength1, sqrLength2));
+  std::size_t nVertices = std::round(M_PI / std::acos(smallRadius / bigRadius));
+  double maxX = 0, maxY = 0, minX = 0, minY = 0;
+  double angle = 2 * M_PI / nVertices;
+  for (std::size_t i = 0; i < nVertices; ++i)
+  {
+    double nextAngle = i * angle;
+    maxX = std::max(maxX, center_.x + bigRadius * std::cos(nextAngle));
+    maxY = std::max(maxY, center_.y + bigRadius * std::sin(nextAngle));
+    minX = std::min(minX, center_.x + bigRadius * std::cos(nextAngle));
+    minY = std::min(minY, center_.y + bigRadius * std::sin(nextAngle));
+  }
+  frameRect.width = maxX - minX;
+  frameRect.height = maxY - minY;
   return frameRect;
 }
 
 void maslevtsov::Regular::move(point_t pnt) noexcept
 {
-  center_ = pnt;
   double movedX = pnt.x - getFrameRect().pos.x;
   double movedY = pnt.y - getFrameRect().pos.y;
   pnt2_ = {pnt2_.x + movedX, pnt2_.y + movedX};
   pnt3_ = {pnt3_.x + movedX, pnt3_.y + movedY};
+  center_ = pnt;
 }
 
 void maslevtsov::Regular::move(double dx, double dy) noexcept
