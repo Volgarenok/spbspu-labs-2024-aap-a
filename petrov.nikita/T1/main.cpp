@@ -11,12 +11,14 @@
 #include "scale_isotropically.hpp"
 int main() // Valgrind will argue...
 {
+  const char * ERROR_MSG = "ERROR: Invalid data somewhere";
   const char RECTANGLE[10] = "RECTANGLE";
   const char TRIANGLE[9] = "TRIANGLE";
   const char SCALE[6] = "SCALE";
   const char CONCAVE[8] = "CONCAVE";
   petrov::Shape * shapes_massive[10000] = {};
   size_t count = 0;
+  size_t count_errors = 0;
   petrov::point_t scale_point = {};
   double scale_value = 0.0;
   char * stream_massive = nullptr;
@@ -29,7 +31,7 @@ int main() // Valgrind will argue...
     size_t created = 0;
     try
     {
-      stream_massive = petrov::inputCString(std::cin, capacity); // Can be added const ERROR_MSG for input type of errors
+      stream_massive = petrov::inputCString(std::cin, capacity);
       type_of_shape = new char[capacity];
       description = new char * [number_of_doubles];
       for (size_t i = 0; i < number_of_doubles; i++)
@@ -95,6 +97,11 @@ int main() // Valgrind will argue...
         std::cerr << "ERROR: Out of memory\n";
         return 1;
       }
+      catch (const char * error)
+      {
+        count_errors++;
+        continue;
+      }
       shapes_massive[count++] = ptr_rectangle;
       delete[] stream_massive;
       delete[] type_of_shape;
@@ -127,6 +134,11 @@ int main() // Valgrind will argue...
         delete[] description;
         std::cerr << "ERROR: Out of memory\n";
         return 1;
+      }
+      catch (const char * error)
+      {
+        count_errors++;
+        continue;
       }
       shapes_massive[count++] = ptr_triangle;
       delete[] stream_massive;
@@ -161,6 +173,11 @@ int main() // Valgrind will argue...
         delete[] description;
         std::cerr << "ERROR: Out of memory\n";
         return 1;
+      }
+      catch (const char * error)
+      {
+        count_errors++;
+        continue;
       }
       shapes_massive[count++] = ptr_concave;
       delete[] stream_massive;
@@ -205,4 +222,8 @@ int main() // Valgrind will argue...
   }
   std::cout << std::fixed << std::setprecision(1);
   petrov::scaleIsotropicallyAndOutputData(scale_point, scale_value, shapes_massive, count);
+  if (count_errors > 0)
+  {
+    std::cerr << ERROR_MSG << "\n";
+  }
 }

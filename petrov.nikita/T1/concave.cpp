@@ -6,9 +6,39 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   p2_(p2),
   p3_(p3),
   p4_(p4)
-{}
+{
+  double a = sqrt(pow((p1_.x_ - p2_.x_), 2) + pow((p1_.y_ - p2_.y_), 2)); 
+  double b = sqrt(pow((p3_.x_ - p2_.x_), 2) + pow((p3_.y_ - p2_.y_), 2));
+  double c = sqrt(pow((p1_.x_ - p3_.x_), 2) + pow((p1_.y_ - p3_.y_), 2));
+  if (a + b < c || a + c < b || b + c < a)
+  {
+    throw "ERROR: Invalid data somewhere\n";
+;
+  }
+  double p = (a + b + c) / 2;
+  double area_of_triangle = sqrt(p * (p - a) * (p - b) * (p - c));
+  a = sqrt(pow((p2_.x_ - p3_.x_), 2) + pow((p2_.y_ - p3_.y_), 2)); 
+  b = sqrt(pow((p3_.x_ - p4_.x_), 2) + pow((p3_.y_ - p4_.y_), 2));
+  c = sqrt(pow((p2_.x_ - p4_.x_), 2) + pow((p2_.y_ - p4_.y_), 2));
+  p = (a + b + c) / 2;
+  double area_1 = sqrt(p * (p - a) * (p - b) * (p - c));
+  a = sqrt(pow((p2_.x_ - p1_.x_), 2) + pow((p2_.y_ - p1_.y_), 2)); 
+  b = sqrt(pow((p1_.x_ - p4_.x_), 2) + pow((p1_.y_ - p4_.y_), 2));
+  c = sqrt(pow((p2_.x_ - p4_.x_), 2) + pow((p2_.y_ - p4_.y_), 2));
+  p = (a + b + c) / 2;
+  double area_2 = sqrt(p * (p - a) * (p - b) * (p - c));
+  a = sqrt(pow((p3_.x_ - p1_.x_), 2) + pow((p3_.y_ - p1_.y_), 2)); 
+  b = sqrt(pow((p1_.x_ - p4_.x_), 2) + pow((p1_.y_ - p4_.y_), 2));
+  c = sqrt(pow((p3_.x_ - p4_.x_), 2) + pow((p3_.y_ - p4_.y_), 2));
+  p = (a + b + c) / 2;
+  double area_3 = sqrt(p * (p - a) * (p - b) * (p - c));
+  if (round(area_of_triangle) / 10 != round(area_1 + area_2 + area_3) / 10)
+  {
+    throw "ERROR: Invalid data somewhere\n";
+  }
+}
 
-double petrov::Concave::getArea()
+double petrov::Concave::getArea() // Here you can use variables more effictively (decrease initializations number)
 {
   double a_1 = sqrt(pow((p1_.x_ - p2_.x_), 2) + pow((p1_.y_ - p2_.y_), 2)); 
   double b_1 = sqrt(pow((p3_.x_ - p2_.x_), 2) + pow((p3_.y_ - p2_.y_), 2));

@@ -4,6 +4,10 @@ petrov::Rectangle::Rectangle(point_t p1, point_t p2):
   p1_(p1),
   p3_(p2)
 {
+  if (p1.x_ >= p2.x_ || p1.y_ >= p2.y_)
+  {
+    throw "ERROR: Invalid data somewhere\n";
+  }
   p2_.x_ = p1_.x_;
   p2_.y_ = p3_.y_;
   p4_.x_ = p3_.x_;
