@@ -2,61 +2,36 @@
 #include "base-types.hpp"
 #include <cmath>
 #include <stdexcept>
+#include <cctype>
 
 namespace kushekbaev
 {
-  Concave::Concave(point_t first, point_t second, point_t third, point_t final)
-  : first_(first), second_(second), third_(third), final_(final) {}
+  Concave::Concave(point_t first, point_t second, point_t third, point_t final) : first_(first), second_(second), third_(third), final_(final) {}
 
   double Concave::getArea() const
   {
-    double halfperimeterOfTriangle = (getLineLength(first_, second_) + getLineLength(second_, third_)
-    + getLineLength(first_, third_)) / 2;
-    double squaredAreaOfTriangle = (halfperimeterOfTriangle)
-    * (halfperimeterOfTriangle - getLineLength(first_, second_))
-    * (halfperimeterOfTriangle - getLineLength(second_, third_))
-    * (halfperimeterOfTriangle - getLineLength(first_, third_));
-    double areaOfTriangle = std::sqrt(squaredAreaOfTriangle);
-
-    double halfperimeterOfConcavity = (getLineLength(second_, third_) + getLineLength(third_, final_)
-    + getLineLength(second_, final_));
-    double squaredAreaOfConcavity = (halfperimeterOfConcavity)
-    * (halfperimeterOfConcavity - getLineLength(second_, third_))
-    * (halfperimeterOfConcavity - getLineLength(third_, final_))
-    * (halfperimeterOfConcavity - getLineLength(second_, final_));
-    double areaOfConcavity = std::sqrt(squaredAreaOfConcavity);
-
-    return areaOfTriangle - areaOfConcavity;
+    double first_part = getAreaOfTriangle(first_, second_, final_);
+    double second_part = getAreaOfTriangle(first_, third_, final_);
+    return first_part + second_part;
   }
 
   rectangle_t Concave::getFrameRect() const
   {
     point_t lowerLeft { 0, 0 };
-    double lowerLeftX = 0;
-    (first_.x > second_.x) ? ((first_.x > third_.x) ? lowerLeftX = first_.x : lowerLeftX = third_.x)
-    : ((second_.x > third_.x) ? lowerLeftX = second_.x : lowerLeftX = third_.x);
-    lowerLeft.x = lowerLeftX;
-
-    double lowerLeftY = 0;
-    (first_.y > second_.y) ? ((first_.y > third_.y) ? lowerLeftY = first_.y : lowerLeftY = third_.y)
-    : ((second_.y > third_.y) ? lowerLeftY = second_.y : lowerLeftY = third_.y);
-    lowerLeft.y = lowerLeftY;
+    lowerLeft.x = std::min(std::min(std::min(first_.x, second_.x), third_.x), final_.x);
+    lowerLeft.y = std::min(std::min(std::min(first_.y, second_.y), third_.y), final_.y);
 
     point_t upperRight { 0, 0 };
-    double upperRightX = 0;
-    (first_.x > second_.x) ? ((first_.x > third_.x) ? upperRightX = first_.x : upperRightX = third_.x)
-    : ((second_.x > third_.x) ? upperRightX = second_.x : upperRightX = third_.x);
-    upperRight.x = upperRightX;
 
-    double upperRightY = 0;
-    (first_.y > second_.y) ? ((first_.y > third_.y) ? upperRightY = first_.y : upperRightY = third_.y)
-    : ((second_.y > third_.y) ? upperRightY = second_.y : upperRightY = third_.y);
-    upperRight.y = upperRightY;
+    upperRight.x = std::max(std::max(std::max(first_.x, second_.x), third_.x), final_.x);
+    upperRight.y = std::max(std::max(std::max(first_.y, second_.y), third_.y), final_.y);
 
-    double middleForX = lowerLeft.x + (upperRight.x - lowerLeft.x) / 2;
-    double middleForY = lowerLeft.y + (upperRight.y - lowerLeft.y) / 2;
-
-    return { upperRight.x - lowerLeft.x, upperRight.y - lowerLeft.y, { middleForX, middleForY } };
+    rectangle_t frame_rect;
+    frame_rect.height = upperRight.y - lowerLeft.y;
+    frame_rect.width = upperRight.x - lowerLeft.x;
+    frame_rect.pos.x = lowerLeft.x + frame_rect.width / 2;
+    frame_rect.pos.y = lowerLeft.y + frame_rect.height / 2;
+    return frame_rect;
   }
 
   void Concave::move(point_t Z)

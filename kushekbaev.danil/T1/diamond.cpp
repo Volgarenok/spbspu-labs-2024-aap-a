@@ -5,74 +5,17 @@
 
 namespace kushekbaev
 {
-  Diamond::Diamond(point_t first, point_t second, point_t third)
-  : first_(first), second_(second), third_(third){}
+  Diamond::Diamond(point_t middle, point_t diffX, point_t diffY)
+  : middle_(middle), diffX_(diffX), diffY_(diffY){}
 
   double Diamond::getArea() const
   {
-    double halfperimeterOfTriangle = (getLineLength(first_, second_) + getLineLength(second_, third_)
-    + getLineLength(first_, third_)) / 2;
-    double squaredAreaOfTriangle = (halfperimeterOfTriangle)
-    * (halfperimeterOfTriangle - getLineLength(first_, second_))
-    * (halfperimeterOfTriangle - getLineLength(second_, third_))
-    * (halfperimeterOfTriangle - getLineLength(first_, third_));
-    double areaOfTriangle = std::sqrt(squaredAreaOfTriangle);
-
-    return 4 * areaOfTriangle;
+    return std::fabs((middle_.x - diffX_.x) * (middle_.y - diffY_.y) * 2);
   }
 
   rectangle_t Diamond::getFrameRect() const
   {
-    double length = 0;
-    double width = 0;
-
-    double XparallelLine = 0;
-    (first_.x == second_.x) ?
-    XparallelLine = first_.x :
-    ((second_.x == third_.x) ?
-    XparallelLine = second_.x :
-    ((first_.x == third_.x) ?
-    XparallelLine = third_.x :
-    throw std::invalid_argument("There is no line parallel to X\n")));
-
-    double YparallelLine = 0;
-    (first_.y == second_.y) ?
-    YparallelLine = first_.y :
-    ((second_.y == third_.y) ?
-    YparallelLine = second_.y :
-    ((first_.y == third_.y) ?
-    YparallelLine = third_.y :
-    throw std::invalid_argument("There is no line parallel to Y\n")));
-
-    point_t middle { XparallelLine, YparallelLine };
-    if (middle.x == first_.x && middle.y == first_.y)
-    {
-      (second_.x > third_.x) ?
-      width = second_.x : width = third_.x;
-
-      (second_.y > third_.y) ?
-      length = second_.y : length = third_.y;
-    }
-
-    else if (middle.x == second_.x && middle.y == second_.y)
-    {
-      (second_.x > third_.x) ?
-      width = second_.x : width = third_.x;
-
-      (second_.y > third_.y) ?
-      length = second_.y : length = third_.y;
-    }
-
-    else if (middle.x == third_.x && middle.x == third_.y)
-    {
-      (second_.x > first_.x) ?
-      width = second_.x : width = first_.x;
-
-      (second_.y > first_.y) ?
-      length = second_.y : length = first_.y;
-    }
-
-    return { width, length, middle };
+    return { std::fabs((middle_.x - diffX_.x)) * 2, std::fabs((middle_.y - diffY_.y) * 2), middle_ };
   }
 
   void Diamond::move(point_t Z)
@@ -80,22 +23,21 @@ namespace kushekbaev
     point_t middle = this->getFrameRect().pos;
     double moveX = Z.x - middle.x;
     double moveY = Z.y - middle.y;
-    first_.x += moveX;
-    first_.y += moveY;
-    second_.x += moveX;
-    second_.y += moveY;
-    third_.x += moveX;
-    third_.y += moveY;
+    middle_ = Z;
+    diffX_.x += moveX;
+    diffX_.y += moveY;
+    diffY_.x += moveX;
+    diffY_.y += moveY;
   }
 
   void Diamond::move(double dx, double dy)
   {
-    first_.x += dx;
-    first_.y += dy;
-    second_.x += dx;
-    second_.y += dy;
-    third_.x += dx;
-    third_.y += dy;
+    middle_.x += dx;
+    middle_.y += dy;
+    diffX_.x += dx;
+    diffX_.y += dy;
+    diffY_.x += dx;
+    diffY_.y += dy;
   }
 
   void Diamond::scale(double V)
@@ -105,12 +47,8 @@ namespace kushekbaev
       throw std::invalid_argument("Scale coefficient should be greater than zero\n");
     }
     point_t middle = this->getFrameRect().pos;
-    first_.x = middle.x + (first_.x - middle.x) * V;
-    first_.y = middle.y + (first_.y - middle.y) * V;
-    second_.x = middle.x + (second_.x - middle.x) * V;
-    second_.y = middle.y + (second_.y - middle.y) * V;
-    third_.x = middle.x + (third_.x - middle.x) * V;
-    third_.y = middle.y + (third_.y - middle.y) * V;
+    diffY_.y = middle_.y + (diffY_.y - middle_.y) * V;
+    diffX_.x = middle_.x + (diffX_.x - middle_.x) * V;
   }
 
 }
