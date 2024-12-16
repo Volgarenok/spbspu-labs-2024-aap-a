@@ -90,11 +90,11 @@ void processShapes()
         std::cout << "\n";
         for (size_t i = 0; i < shapeCount; ++i)
         {
-          krylov::point_t scaleCenter = {x, y};
           krylov::point_t shapeCenter = shapes[i]->getFrameRect().pos;
-          double dx = scaleCenter.x - shapeCenter.x;
-          double dy = scaleCenter.y - shapeCenter.y;
-          shapes[i]->move(dx, dy);
+          shapes[i]->move(x, y);
+          krylov::point_t newShapeCenter = shapes[i]->getFrameRect().pos;
+          double dx = newShapeCenter.x - shapeCenter.x;
+          double dy = newShapeCenter.y - shapeCenter.y;
           shapes[i]->scale(factor);
           shapes[i]->move(-dx, -dy);
         }
