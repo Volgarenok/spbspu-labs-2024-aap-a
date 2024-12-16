@@ -142,6 +142,7 @@ int main()
   if (!scales)
   {
     std::cerr << "incorrect input\n";
+    hismatova::deleteFigures(figures, count);
     return 1;
   }
   else if (errors)
