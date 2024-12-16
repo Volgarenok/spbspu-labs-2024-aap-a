@@ -25,9 +25,6 @@ int main() // Valgrind will argue... Yes
   char * type_of_shape = nullptr;
   char ** description = nullptr;
   size_t number_of_doubles = 8;
-  petrov::Rectangle * ptr_rectangle = nullptr;
-  petrov::Triangle * ptr_triangle = nullptr;
-  petrov::Concave * ptr_concave = nullptr;
   while (true)
   {
     size_t capacity = 1;
@@ -52,11 +49,11 @@ int main() // Valgrind will argue... Yes
         length_of_word++;
       }
       length_of_word++;
-      type_of_shape = new char[length_of_word + 1];
+      type_of_shape = new char[length_of_word];
       description = new char * [number_of_doubles];
       for (size_t i = 0; i < number_of_doubles; i++)
       {
-        description[i] = new char[capacity + 1];
+        description[i] = new char[capacity];
         created++;
       }
     }
@@ -107,6 +104,7 @@ int main() // Valgrind will argue... Yes
       char ** p_end = nullptr;
       petrov::point_t p1 = { std::strtod(description[0], p_end), std::strtod(description[1], p_end) };
       petrov::point_t p2 = { std::strtod(description[2], p_end), std::strtod(description[3], p_end) };
+      petrov::Rectangle * ptr_rectangle = nullptr;
       try
       {
         ptr_rectangle = new petrov::Rectangle(p1, p2);
@@ -129,6 +127,8 @@ int main() // Valgrind will argue... Yes
         continue;
       }
       shapes_massive[count++] = ptr_rectangle;
+      ptr_rectangle = nullptr;
+      delete[] ptr_rectangle;
       delete[] stream_massive;
       delete[] type_of_shape;
       for (size_t i = 0; i < created; i++)
@@ -143,6 +143,7 @@ int main() // Valgrind will argue... Yes
       petrov::point_t p1 = { std::strtod(description[0], p_end), std::strtod(description[1], p_end) };
       petrov::point_t p2 = { std::strtod(description[2], p_end), std::strtod(description[3], p_end) };
       petrov::point_t p3 = { std::strtod(description[4], p_end), std::strtod(description[5], p_end) };
+      petrov::Triangle * ptr_triangle = nullptr;
       try
       {
         ptr_triangle = new petrov::Triangle(p1, p2, p3);
@@ -165,6 +166,8 @@ int main() // Valgrind will argue... Yes
         continue;
       }
       shapes_massive[count++] = ptr_triangle;
+      ptr_triangle = nullptr;
+      delete[] ptr_triangle;
       delete[] stream_massive;
       delete[] type_of_shape;
       for (size_t i = 0; i < created; i++)
@@ -180,6 +183,7 @@ int main() // Valgrind will argue... Yes
       petrov::point_t p2 = { std::strtod(description[2], p_end), std::strtod(description[3], p_end) };
       petrov::point_t p3 = { std::strtod(description[4], p_end), std::strtod(description[5], p_end) };
       petrov::point_t p4 = { std::strtod(description[6], p_end), std::strtod(description[7], p_end) };
+      petrov::Concave * ptr_concave = nullptr;
       try
       {
         ptr_concave = new petrov::Concave(p1, p2, p3, p4);
@@ -202,6 +206,8 @@ int main() // Valgrind will argue... Yes
         continue;
       }
       shapes_massive[count++] = ptr_concave;
+      ptr_concave = nullptr;
+      delete[] ptr_concave;
       delete[] stream_massive;
       delete[] type_of_shape;
       for (size_t i = 0; i < created; i++)
@@ -215,6 +221,18 @@ int main() // Valgrind will argue... Yes
       char ** p_end = nullptr;
       scale_point = { std::strtod(description[0], p_end), std::strtod(description[1], p_end) };
       scale_value = std::strtod(description[2], p_end);
+      if (scale_value <= 0)
+      {
+        delete[] stream_massive;
+        delete[] type_of_shape;
+        for (size_t i = 0; i < created; i++)
+        {
+          delete[] description[i];
+        }
+        delete[] description;
+        std::cerr << "ERROR: Invalid scale value\n";
+        return 3;
+      }
       delete[] stream_massive;
       delete[] type_of_shape;
       for (size_t i = 0; i < created; i++)
