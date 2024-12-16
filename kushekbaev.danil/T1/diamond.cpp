@@ -28,29 +28,21 @@ namespace kushekbaev
 
     double XparallelLine = 0;
     (first_.x == second_.x) ?
+    XparallelLine = first_.x :
+    ((second_.x == third_.x) ?
+    XparallelLine = second_.x :
     ((first_.x == third_.x) ?
-    XparallelLine = getLineLength(first_, third_) :
-    (second_.x == third_.x) ?
-    XparallelLine = getLineLength(second_, third_) :
-    throw std::invalid_argument("There is no line parallel to X\n")) :
-    (second_.x == third_.x) ?
-    XparallelLine = getLineLength(second_, third_) :
-    ((first_.x == third_.x) ?
-    XparallelLine = getLineLength(first_, third_) :
-    throw std::invalid_argument("There is no line parallel to X\n"));
+    XparallelLine = third_.x :
+    throw std::invalid_argument("There is no line parallel to X\n")));
 
     double YparallelLine = 0;
     (first_.y == second_.y) ?
+    YparallelLine = first_.y :
+    ((second_.y == third_.y) ?
+    YparallelLine = second_.y :
     ((first_.y == third_.y) ?
-    YparallelLine = getLineLength(first_, third_) :
-    (second_.y == third_.y) ?
-    YparallelLine = getLineLength(second_, third_) :
-    throw std::invalid_argument("There is no line parallel to Y\n")) :
-    (second_.y == third_.y) ?
-    YparallelLine = getLineLength(second_, third_) :
-    ((first_.y == third_.y) ?
-    YparallelLine = getLineLength(first_, third_) :
-    throw std::invalid_argument("There is no line parallel to Y\n"));
+    YparallelLine = third_.y :
+    throw std::invalid_argument("There is no line parallel to Y\n")));
 
     point_t middle { XparallelLine, YparallelLine };
     if (middle.x == first_.x && middle.y == first_.y)
