@@ -73,7 +73,7 @@ int main() // Valgrind will argue... Yes
     {
       for (size_t j = 0; j < capacity; j++)
       {
-        description[i][j] = '0';
+        description[i][j] = '1';
       }
     }
     size_t i = 0;
