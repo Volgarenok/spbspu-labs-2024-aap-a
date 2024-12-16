@@ -46,7 +46,6 @@ namespace kushekbaev
     {
       throw std::invalid_argument("Scale coefficient should be greater than zero\n");
     }
-    point_t middle = this->getFrameRect().pos;
     diffY_.y = middle_.y + (diffY_.y - middle_.y) * V;
     diffX_.x = middle_.x + (diffX_.x - middle_.x) * V;
   }
