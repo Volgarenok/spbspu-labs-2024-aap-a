@@ -88,13 +88,14 @@ void processShapes()
           }
         }
         std::cout << "\n";
-        krylov::point_t scaleCenter = {x, y};
         for (size_t i = 0; i < shapeCount; ++i)
         {
+          krylov::point_t scaleCenter = {x, y};
           krylov::point_t shapeCenter = shapes[i]->getFrameRect().pos;
-          shapes[i]->move(scaleCenter.x - shapeCenter.x, scaleCenter.y - shapeCenter.y); // Сдвиг к центру масштабирования
+          shapes[i]->move(scaleCenter.x - shapeCenter.x, scaleCenter.y - shapeCenter.y);
           shapes[i]->scale(factor);
-          shapes[i]->move(shapeCenter.x - scaleCenter.x, shapeCenter.y - scaleCenter.y); // Сдвиг обратно
+          krylov::point_t newCenter = shapes[i]->getFrameRect().pos;
+          shapes[i]->move(shapeCenter.x - newCenter.x, shapeCenter.y - newCenter.y);
         }
         double totalAreaAfter = 0.0;
         for (size_t i = 0; i < shapeCount; ++i)
