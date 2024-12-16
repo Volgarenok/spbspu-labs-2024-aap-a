@@ -9,7 +9,7 @@
 #include "triangle.hpp"
 #include "concave.hpp"
 #include "scale_isotropically.hpp"
-int main() // Valgrind will argue...
+int main() // Valgrind will argue... Yes
 {
   const char * ERROR_MSG = "ERROR: Invalid data somewhere";
   const char RECTANGLE[10] = "RECTANGLE";
@@ -27,6 +27,9 @@ int main() // Valgrind will argue...
   size_t number_of_doubles = 8;
   while (true)
   {
+    petrov::Rectangle * ptr_rectangle = nullptr;
+    petrov::Triangle * ptr_triangle = nullptr;
+    petrov::Concave * ptr_concave = nullptr;
     size_t capacity = 1;
     size_t created = 0;
     try
@@ -43,7 +46,13 @@ int main() // Valgrind will argue...
         delete[] stream_massive;
         continue;
       }
-      type_of_shape = new char[capacity];
+      size_t length_of_word = 0;
+      while (stream_massive[length_of_word] != ' ')
+      {
+        length_of_word++;
+      }
+      length_of_word++;
+      type_of_shape = new char[length_of_word];
       description = new char * [number_of_doubles];
       for (size_t i = 0; i < number_of_doubles; i++)
       {
@@ -62,6 +71,13 @@ int main() // Valgrind will argue...
       delete[] description;
       std::cerr << "ERROR: Out of memory\n";
       return 1;
+    }
+    for (size_t i = 0; i < number_of_doubles; i++) // Initializing description for Valgrind
+    {
+      for (size_t j = 0; j < capacity; j++)
+      {
+        description[i][j] = '0';
+      }
     }
     size_t i = 0;
     while (stream_massive[i] != ' ')
@@ -86,12 +102,11 @@ int main() // Valgrind will argue...
         k = 0;
       }
     }
-    if (!strcmp(type_of_shape, RECTANGLE)) // Maybe LeakDefinitelyLost
+    if (!strcmp(type_of_shape, RECTANGLE))
     {
       char ** p_end = nullptr;
       petrov::point_t p1 = { std::strtod(description[0], p_end), std::strtod(description[1], p_end) };
       petrov::point_t p2 = { std::strtod(description[2], p_end), std::strtod(description[3], p_end) };
-      petrov::Rectangle * ptr_rectangle = nullptr;
       try
       {
         ptr_rectangle = new petrov::Rectangle(p1, p2);
@@ -128,7 +143,6 @@ int main() // Valgrind will argue...
       petrov::point_t p1 = { std::strtod(description[0], p_end), std::strtod(description[1], p_end) };
       petrov::point_t p2 = { std::strtod(description[2], p_end), std::strtod(description[3], p_end) };
       petrov::point_t p3 = { std::strtod(description[4], p_end), std::strtod(description[5], p_end) };
-      petrov::Triangle * ptr_triangle = nullptr;
       try
       {
         ptr_triangle = new petrov::Triangle(p1, p2, p3);
@@ -166,7 +180,6 @@ int main() // Valgrind will argue...
       petrov::point_t p2 = { std::strtod(description[2], p_end), std::strtod(description[3], p_end) };
       petrov::point_t p3 = { std::strtod(description[4], p_end), std::strtod(description[5], p_end) };
       petrov::point_t p4 = { std::strtod(description[6], p_end), std::strtod(description[7], p_end) };
-      petrov::Concave * ptr_concave = nullptr;
       try
       {
         ptr_concave = new petrov::Concave(p1, p2, p3, p4);
