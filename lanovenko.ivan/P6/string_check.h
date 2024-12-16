@@ -6,5 +6,4 @@ namespace lanovenko
   bool is_valid_float_string(const char* str);
 }
 
-
 #endif
