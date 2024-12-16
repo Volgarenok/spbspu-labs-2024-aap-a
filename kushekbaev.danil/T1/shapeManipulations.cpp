@@ -7,8 +7,11 @@ namespace kushekbaev
   {
     double total = 0;
     for (size_t i = 0; i < shapeCounter; i++)
+    if (capacity[i])
     {
-      total += capacity[i] -> getArea();
+      {
+        total += capacity[i] -> getArea();
+      }
     }
     return total;
   }
@@ -30,12 +33,15 @@ namespace kushekbaev
   {
     for (size_t i = 0; i < shapeCounter; ++i)
     {
-      rectangle_t rect = capacity[i]->getFrameRect();
-      double leftDownX = rect.pos.x - rect.width / 2;
-      double leftDownY = rect.pos.y - rect.height / 2;
-      double rightUpX = rect.pos.x + rect.width / 2;
-      double rightUpY = rect.pos.y + rect.height / 2;
-      std::cout << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
+      if (capacity[i])
+      {
+        rectangle_t rect = capacity[i]->getFrameRect();
+        double leftDownX = rect.pos.x - rect.width / 2;
+        double leftDownY = rect.pos.y - rect.height / 2;
+        double rightUpX = rect.pos.x + rect.width / 2;
+        double rightUpY = rect.pos.y + rect.height / 2;
+        std::cout << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
+      }
     }
   }
 
