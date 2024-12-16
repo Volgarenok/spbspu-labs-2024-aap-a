@@ -36,6 +36,7 @@ void balashov::Rectangle::move(double x, double y)
 
 void balashov::Rectangle::move(point_t s)
 {
+  сentre = getFrameRect().pos_;
   double distanceBetweenPointsX = s.x_ - сentre.x_;
   double distanceBetweenPointsY = s.y_ - сentre.y_;
   move(distanceBetweenPointsX, distanceBetweenPointsY);
