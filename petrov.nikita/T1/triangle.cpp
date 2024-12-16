@@ -10,7 +10,7 @@ petrov::Triangle::Triangle(point_t p1, point_t p2, point_t p3):
   {
     throw "ERROR: Invalid data somewhere";
   }
-  else if ( (p1_.x_ / p2_.x_ == p1_.y_ / p2_.y_) || (p3_.x_ / p2_.x_ == p3_.y_ / p2_.y_) || (p1_.x_ / p3_.x_ == p1_.y_ / p3_.y_) )
+  else if ( (p1_.x_ / p2_.x_ == p1_.y_ / p2_.y_) || (p3_.x_ / p2_.x_ == p3_.y_ / p2_.y_) || (p1_.x_ / p3_.x_ == p1_.y_ / p3_.y_) ) // Here can be division by zero
   {
     throw "ERROR: Invalid data somewhere";
   }
@@ -34,13 +34,13 @@ double petrov::Triangle::getArea()
 
 petrov::point_t * petrov::Triangle::getFrameRect()
 {
-  frame_rect_.pos_ = { ((p1_.x_ + p2_.x_ + p3_.x_) / 3), ((p1_.y_ + p2_.y_ + p3_.y_) / 3) };
   double x_max = std::max(std::max(p1_.x_, p2_.x_), p3_.x_);
   double x_min = std::min(std::min(p1_.x_, p2_.x_), p3_.x_);
   double y_max = std::max(std::max(p1_.y_, p2_.y_), p3_.y_);
   double y_min = std::min(std::min(p1_.y_, p2_.y_), p3_.y_);
   frame_rect_.width_ = abs(x_max - x_min);
   frame_rect_.height_ = abs(y_max - y_min);
+  frame_rect_.pos_ = { ((2 * x_min + x_max - x_min) / 2.0), ((2 * y_min + y_max - y_min) / 2.0) };
   point_t lower_left_corner = { (frame_rect_.pos_.x_ - (frame_rect_.width_ / 2)), (frame_rect_.pos_.y_ - (frame_rect_.height_ / 2)) };
   point_t upper_right_corner = { (frame_rect_.pos_.x_ + (frame_rect_.width_ / 2)), (frame_rect_.pos_.y_ + (frame_rect_.height_ / 2)) };
   frame_points_[0] = lower_left_corner;
