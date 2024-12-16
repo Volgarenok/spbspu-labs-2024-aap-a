@@ -39,9 +39,14 @@ namespace kushekbaev
     point_t third { 0, 0 };
     point_t final { 0, 0 };
     input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y >> final.x >> final.y;
-    if (!isTriangle(first, second, third))
+    if (!isTriangle(first, second, final))
     {
-      throw std::invalid_argument("First three points wouldnt make a triangle\n");
+      throw std::invalid_argument("First two + final points wouldnt make a triangle\n");
+    }
+
+    if (!isTriangle(second, third, final))
+    {
+      throw std::invalid_argument("First + two last points wouldnt make a triangle\n");
     }
     return new Concave({ first, second, third, final });
   }
