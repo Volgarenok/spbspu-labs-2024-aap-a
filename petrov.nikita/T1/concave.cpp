@@ -1,13 +1,13 @@
 #include "concave.hpp"
 #include <cmath>
 #include <algorithm>
-petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4): 
+petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   p1_(p1),
   p2_(p2),
   p3_(p3),
   p4_(p4)
 {
-  double a = sqrt(pow((p1_.x_ - p2_.x_), 2) + pow((p1_.y_ - p2_.y_), 2)); 
+  double a = sqrt(pow((p1_.x_ - p2_.x_), 2) + pow((p1_.y_ - p2_.y_), 2));
   double b = sqrt(pow((p3_.x_ - p2_.x_), 2) + pow((p3_.y_ - p2_.y_), 2));
   double c = sqrt(pow((p1_.x_ - p3_.x_), 2) + pow((p1_.y_ - p3_.y_), 2));
   if (a + b < c || a + c < b || b + c < a)
@@ -17,17 +17,17 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   }
   double p = (a + b + c) / 2;
   double area_of_triangle = sqrt(p * (p - a) * (p - b) * (p - c));
-  a = sqrt(pow((p2_.x_ - p3_.x_), 2) + pow((p2_.y_ - p3_.y_), 2)); 
+  a = sqrt(pow((p2_.x_ - p3_.x_), 2) + pow((p2_.y_ - p3_.y_), 2));
   b = sqrt(pow((p3_.x_ - p4_.x_), 2) + pow((p3_.y_ - p4_.y_), 2));
   c = sqrt(pow((p2_.x_ - p4_.x_), 2) + pow((p2_.y_ - p4_.y_), 2));
   p = (a + b + c) / 2;
   double area_1 = sqrt(p * (p - a) * (p - b) * (p - c));
-  a = sqrt(pow((p2_.x_ - p1_.x_), 2) + pow((p2_.y_ - p1_.y_), 2)); 
+  a = sqrt(pow((p2_.x_ - p1_.x_), 2) + pow((p2_.y_ - p1_.y_), 2));
   b = sqrt(pow((p1_.x_ - p4_.x_), 2) + pow((p1_.y_ - p4_.y_), 2));
   c = sqrt(pow((p2_.x_ - p4_.x_), 2) + pow((p2_.y_ - p4_.y_), 2));
   p = (a + b + c) / 2;
   double area_2 = sqrt(p * (p - a) * (p - b) * (p - c));
-  a = sqrt(pow((p3_.x_ - p1_.x_), 2) + pow((p3_.y_ - p1_.y_), 2)); 
+  a = sqrt(pow((p3_.x_ - p1_.x_), 2) + pow((p3_.y_ - p1_.y_), 2));
   b = sqrt(pow((p1_.x_ - p4_.x_), 2) + pow((p1_.y_ - p4_.y_), 2));
   c = sqrt(pow((p3_.x_ - p4_.x_), 2) + pow((p3_.y_ - p4_.y_), 2));
   p = (a + b + c) / 2;
@@ -40,12 +40,12 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
 
 double petrov::Concave::getArea() // Here you can use variables more effictively (decrease initializations number)
 {
-  double a_1 = sqrt(pow((p1_.x_ - p2_.x_), 2) + pow((p1_.y_ - p2_.y_), 2)); 
+  double a_1 = sqrt(pow((p1_.x_ - p2_.x_), 2) + pow((p1_.y_ - p2_.y_), 2));
   double b_1 = sqrt(pow((p3_.x_ - p2_.x_), 2) + pow((p3_.y_ - p2_.y_), 2));
   double c_1 = sqrt(pow((p1_.x_ - p3_.x_), 2) + pow((p1_.y_ - p3_.y_), 2));
   double p_1 = (a_1 + b_1 + c_1) / 2;
   double area_without_cave = sqrt(p_1 * (p_1 - a_1) * (p_1 - b_1) * (p_1 - c_1));
-  double a_2 = sqrt(pow((p4_.x_ - p2_.x_), 2) + pow((p4_.y_ - p2_.y_), 2)); 
+  double a_2 = sqrt(pow((p4_.x_ - p2_.x_), 2) + pow((p4_.y_ - p2_.y_), 2));
   double b_2 = sqrt(pow((p3_.x_ - p2_.x_), 2) + pow((p3_.y_ - p2_.y_), 2));
   double c_2 = sqrt(pow((p1_.x_ - p4_.x_), 2) + pow((p1_.y_ - p4_.y_), 2));
   double p_2 = (a_2 + b_2 + c_2) / 2;

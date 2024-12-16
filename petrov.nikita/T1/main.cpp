@@ -52,7 +52,7 @@ int main() // Valgrind will argue...
     }
     catch (const std::bad_alloc & e)
     {
-      delete[] stream_massive; // Warning! Clearing memory like this duplicates often in this code 
+      delete[] stream_massive; // Warning! Clearing memory like this duplicates often in this code
       delete[] type_of_shape;
       for (size_t i = 0; i < created; i++)
       {

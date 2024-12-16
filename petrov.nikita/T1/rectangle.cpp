@@ -1,6 +1,6 @@
 #include "rectangle.hpp"
 #include <cmath>
-petrov::Rectangle::Rectangle(point_t p1, point_t p2): 
+petrov::Rectangle::Rectangle(point_t p1, point_t p2):
   p1_(p1),
   p3_(p2)
 {
