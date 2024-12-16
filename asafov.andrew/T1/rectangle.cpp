@@ -1,18 +1,18 @@
-#include "rectangle.h"
+#include "rectangle.hpp"
 #include <cmath>
 
-Rectangle::Rectangle(point_t a, point_t b):
+asafov::Rectangle::Rectangle(point_t a, point_t b):
 lb(a), rt(b)
 {
   
 }
 
-double Rectangle::getArea() const
+double asafov::Rectangle::getArea() const
 {
 	return abs((lb.x - rt.x) * (lb.y - rt.y));
 }
 
-rectangle_t Rectangle::getFrameRect() const
+rectangle_t asafov::Rectangle::getFrameRect() const
 {
 	rectangle_t frect;
 	frect.height = abs(lb.y - rt.y);
@@ -22,7 +22,7 @@ rectangle_t Rectangle::getFrameRect() const
 	return frect;
 }
 
-void Rectangle::move(double x, double y)
+void asafov::Rectangle::move(double x, double y)
 {
 	lb.x += x;
 	rt.x += x;
@@ -30,7 +30,7 @@ void Rectangle::move(double x, double y)
 	rt.y += y;
 }
 
-void Rectangle::move(point_t pos)
+void asafov::Rectangle::move(point_t pos)
 {
 	double temp = abs(lb.x + rt.x) / 2 - pos.x;
 	lb.x += temp;
@@ -40,7 +40,7 @@ void Rectangle::move(point_t pos)
 	rt.y += temp;
 }
 
-void Rectangle::scale(point_t pos, double scale)
+void asafov::Rectangle::scale(point_t pos, double scale)
 {
 	rt.x += (rt.x - pos.x) * (scale - 1);
 	rt.y += (rt.y - pos.y) * (scale - 1);

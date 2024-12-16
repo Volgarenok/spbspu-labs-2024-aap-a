@@ -1,8 +1,10 @@
 #include "outputFunctions.hpp"
-#include "rectangle.h"
-#include "circle.h"
+#include "rectangle.hpp"
+#include "circle.hpp"
+#include "ring.hpp"
+#include "ellipse.hpp"
 
-// что-то что очень хотело быть похожим на фабричную функцию
+// chto-to podobnoe na fabriku
 Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
 {
     if (hash == 'R' * 'E' * 'C' * 'T')
@@ -34,13 +36,33 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
         return circ;
     }
     else if (hash == 'R' * 'I' * 'N' * 'G') {
-
+        double temp = 0;
+        point_t a = {};
+        in >> temp;
+        a.x = temp;
+        in >> temp;
+        a.y = temp;
+        in >> temp;
+        double temp2 = 0;
+        in >> temp2;
+        Ring* ring = new Ring(a, temp, temp2);
+        return ring;
     }
     else if (hash == 'E' * 'L' * 'L' * 'I') {
-
+        double temp = 0;
+        point_t a = {};
+        in >> temp;
+        a.x = temp;
+        in >> temp;
+        a.y = temp;
+        in >> temp;
+        double temp2 = 0;
+        in >> temp2;
+        Ellipse* elli = new Ellipse(a, temp, temp2);
+        return elli;
     }
     else if (hash == 'S' * 'Q' * 'U' * 'A') {
-
+        
     }
     else if (hash == 'T' * 'R' * 'I' * 'A') {
 
@@ -65,7 +87,7 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
     }
 }
 
-// мне лень по букавам сравнивать и это работает >_<
+// mnr tak udobno i tak rabotaet >_<
 unsigned long asafov::getHash(std::istream& in)
 {
     
@@ -79,7 +101,7 @@ unsigned long asafov::getHash(std::istream& in)
     return hash;
 }
 
-// процедура где происходит изотропное масштабирование и вывод в консоль
+// tut proishodit izotropnoe mashtabirovanie i vivod v konsol
 void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, double scale, std::ostream& out)
 {
     rectangle_t rect = {};

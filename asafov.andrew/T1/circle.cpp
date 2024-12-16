@@ -1,19 +1,19 @@
-#include "circle.h"
+#include "circle.hpp"
 #define _USE_MATH_DEFINES
 #include <cmath>
 
-Circle::Circle(point_t pos, double rad):
+asafov::Circle::Circle(point_t pos, double rad):
 center(pos), radius(rad)
 {
   
 }
 
-double Circle::getArea() const
+double asafov::Circle::getArea() const
 {
 	return radius * radius * M_PI;
 }
 
-rectangle_t Circle::getFrameRect() const
+rectangle_t asafov::Circle::getFrameRect() const
 {
 	rectangle_t frect;
 	frect.pos = center;
@@ -22,18 +22,18 @@ rectangle_t Circle::getFrameRect() const
 	return frect;
 }
 
-void Circle::move(double x, double y)
+void asafov::Circle::move(double x, double y)
 {
 	center.x += x;
 	center.y += y;
 }
 
-void Circle::move(point_t pos)
+void asafov::Circle::move(point_t pos)
 {
 	center = pos;
 }
 
-void Circle::scale(point_t pos, double scale)
+void asafov::Circle::scale(point_t pos, double scale)
 {
 	center.x += (center.x - pos.x) * (scale - 1);
 	center.y += (center.y - pos.y) * (scale - 1);
