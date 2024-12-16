@@ -1,47 +1,36 @@
 #ifndef BASE_TYPES_HPP
 #define BASE_TYPES_HPP
-struct point_t
+namespace alymova
 {
-    point_t(double x, double y):
-        x_(x),
-        y_(y)
-    {}
-    point_t(const point_t& point)
-    {
-        x_ = point.x_;
-        y_ = point.y_;
-    }
-    point_t(point_t&& point)
-    {
-        x_ = point.x_;
-        y_ = point.y_;
-    }
-    double getX()
-    {
-        return x_;
-    }
-    double getY()
-    {
-        return y_;
-    }
-    point_t operator+=(point_t shift_point)
-    {
-        x_ += shift_point.x_;
-        y_ += shift_point.y_;
-        return *this;
-    }
-private:
+  struct point_t
+  {
+    point_t() = default;
+    point_t(const point_t& point);
+    point_t(point_t&& point);
+    point_t(double x, double y);
+    point_t operator=(const point_t& point);
+    point_t operator+=(point_t shift_point);
+    point_t operator*=(double ratio);
+    bool operator<(point_t p2);
+    double getX() const;
+    double getY() const;
+  private:
     double x_, y_;
-};
-struct rectangle_t
-{
-    rectangle_t(double w, double h):
-        width_(w),
-        height_(h),
-        pos_(point_t(width_ / 2, height_ / 2))
-    {}
-private:
+  };
+  struct rectangle_t
+  {
+    rectangle_t() = default;
+    rectangle_t(point_t low_left, point_t upp_right);
+    double getArea() const;
+    void move(double shift_x, double shift_y);
+    point_t getShift() const;
+    void scale(double ratio);
+    point_t getLowLeft() const;
+    point_t getUppRight() const;
+  private:
+    point_t low_left_, upp_right_;
     double width_, height_;
-    point_t pos_;
-};
+    point_t pos_, shift_point_;
+  };
+}
 #endif
