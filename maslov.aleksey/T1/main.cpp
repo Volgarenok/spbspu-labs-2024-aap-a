@@ -7,14 +7,14 @@
 
 int main()
 {
-  constexpr int maxShapes = 10000;
+  constexpr size_t maxShapes = 10000;
   maslov::Shape * shapes[maxShapes] = {};
   size_t count = 0;
   try
   {
     count = maslov::inputShapes(std::cin, shapes);
   }
-  catch(const std::runtime_error & e)
+  catch (const std::runtime_error & e)
   {
     std::cerr << e.what() << '\n';
     return 1;
@@ -39,7 +39,7 @@ int main()
   maslov::printCoordinates(shapes, count);
   std::cout << "\n";
   maslov::scaleShapes(shapes, count, scaleCoordinate, scaleFactor);
-  std::cout << getSumArea(shapes, count);
+  std::cout << maslov::getSumArea(shapes, count);
   maslov::printCoordinates(shapes, count);
   std::cout << "\n";
   maslov::destroyShapes(shapes, count);

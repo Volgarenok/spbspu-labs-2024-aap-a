@@ -27,11 +27,11 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
         shapes[count] = makeRectangle(in);
         count++;
       }
-      catch(const std::invalid_argument & e)
+      catch (const std::invalid_argument & e)
       {
         incorrectedFlag = true;
       }
-      catch(const std::bad_alloc & e)
+      catch (const std::bad_alloc & e)
       {
         maslov::destroyShapes(shapes, count);
         throw;
@@ -44,11 +44,11 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
         shapes[count] = makeRegular(in);
         count++;
       }
-      catch(const std::invalid_argument & e)
+      catch (const std::invalid_argument & e)
       {
         incorrectedFlag = true;
       }
-      catch(const std::bad_alloc & e)
+      catch (const std::bad_alloc & e)
       {
         maslov::destroyShapes(shapes, count);
         throw;
@@ -61,11 +61,11 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
         shapes[count] = makeParallelogram(in);
         count++;
       }
-      catch(const std::invalid_argument & e)
+      catch (const std::invalid_argument & e)
       {
         incorrectedFlag = true;
       }
-      catch(const std::bad_alloc & e)
+      catch (const std::bad_alloc & e)
       {
         maslov::destroyShapes(shapes, count);
         throw;
@@ -102,7 +102,7 @@ maslov::Rectangle * makeRectangle(std::istream & in)
   {
     rectangle = new maslov::Rectangle({x1, y1}, {x2, y2});
   }
-  catch(const std::bad_alloc & e)
+  catch (const std::bad_alloc & e)
   {
     throw;
   }
@@ -121,7 +121,7 @@ maslov::Regular * makeRegular(std::istream & in)
   {
     regular = new maslov::Regular({x1, y1}, {x2, y2}, {x3, y3});
   }
-  catch(const std::bad_alloc & e)
+  catch (const std::bad_alloc & e)
   {
     throw;
   }
@@ -145,7 +145,7 @@ maslov::Parallelogram * makeParallelogram(std::istream & in)
   {
     parallelogram = new maslov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
   }
-  catch(const std::bad_alloc & e)
+  catch (const std::bad_alloc & e)
   {
     throw;
   }

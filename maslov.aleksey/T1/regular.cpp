@@ -4,8 +4,8 @@
 #include <limits>
 
 maslov::Regular::Regular(point_t A, point_t B, point_t C):
-A_(A), B_(B), C_(C), AB_(distance(A, B)),
-AC_(distance(A, C)), BC_(distance(B, C)),
+A_(A), B_(B), C_(C),
+AB_(distance(A, B)), AC_(distance(A, C)), BC_(distance(B, C)),
 rI_(findRadiusIncircle(AC_, AB_, BC_)),
 rC_(findRadiusCircumcircle(AC_, AB_)),
 halfSide_(findHalfSide(AC_, AB_, BC_)),
@@ -19,29 +19,28 @@ maslov::rectangle_t maslov::Regular::getFrameRect() const
 {
   double centerX = A_.x;
   double centerY = A_.y;
-  double R = rC_;
   double maxX = std::numeric_limits< double >::min();
   double minX = std::numeric_limits< double >::max();
   double maxY = std::numeric_limits< double >::min();
   double minY = std::numeric_limits< double >::max();
   double value = halfSide_ / rC_;
   double initialAngle = std::acos(value);
-  if (AB_ == std::max(AB_, AC_))
+  if (AB_ == rC_)
   {
-    if (B_.y == A_.y)
+    if (B_.y == centerY)
     {
       initialAngle = 0;
     }
   }
-  else if (C_.y == A_.y)
+  else if (C_.y == centerY)
   {
     initialAngle = 0;
   }
   for (size_t i = 0; i < n_; ++i)
   {
     double angle = initialAngle + 2 * M_PI * i / n_;
-    double x = std::round((centerX + R * std::cos(angle)) * 100.0) / 100.0;
-    double y = std::round((centerY + R * std::sin(angle)) * 100.0) / 100.0;
+    double x = std::round((centerX + rC_ * std::cos(angle)) * 100.0) / 100.0;
+    double y = std::round((centerY + rC_ * std::sin(angle)) * 100.0) / 100.0;
     maxX = std::max(maxX, x);
     minX = std::min(minX, x);
     maxY = std::max(maxY, y);

@@ -2,7 +2,6 @@
 #define SHAPE_MANIPULATOR_HPP
 
 #include <cstddef>
-#include "base-types.hpp"
 #include "shape.hpp"
 
 namespace maslov

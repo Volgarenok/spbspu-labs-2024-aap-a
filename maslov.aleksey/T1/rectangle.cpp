@@ -1,5 +1,4 @@
 #include "rectangle.hpp"
-#include "base-types.hpp"
 
 double maslov::Rectangle::getArea() const
 {
@@ -16,17 +15,15 @@ maslov::rectangle_t maslov::Rectangle::getFrameRect() const
 void maslov::Rectangle::move(point_t s)
 {
   point_t center = getFrameRect().pos;
-  lowerLeftCorner_.x += s.x - center.x;
-  lowerLeftCorner_.y += s.y - center.y;
-  upperRightCorner_.x += s.x - center.x;
-  upperRightCorner_.y += s.y - center.y;
+  double dx = s.x - center.x;
+  double dy = s.y - center.y;
+  lowerLeftCorner_ = {lowerLeftCorner_.x + dx, lowerLeftCorner_.y + dy};
+  upperRightCorner_ = {upperRightCorner_.x + dx, upperRightCorner_.y + dy};
 }
 void maslov::Rectangle::move(double dx, double dy)
 {
-  lowerLeftCorner_.x += dx;
-  lowerLeftCorner_.y += dy;
-  upperRightCorner_.x += dx;
-  upperRightCorner_.y += dy;
+  lowerLeftCorner_ = {lowerLeftCorner_.x + dx, lowerLeftCorner_.y + dy};
+  upperRightCorner_ = {upperRightCorner_.x + dx, upperRightCorner_.y + dy};
 }
 void maslov::Rectangle::scale(double k)
 {
