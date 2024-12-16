@@ -123,7 +123,6 @@ zakirov::Shape * zakirov::make_shape(const double * data)
   }
   catch (const std::invalid_argument & e)
   {
-    std::cout << "Error" << '\n';
     return nullptr;
   }
 }
@@ -150,6 +149,10 @@ double * zakirov::get_data(std::istream & in)
   else if (shape == "RING ")
   {
     data[0] = 3.0;
+  }
+  else if (shape == "SCALE ")
+  {
+    data[0] = 4.0;
   }
   else
   {

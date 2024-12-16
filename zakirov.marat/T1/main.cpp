@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstddef>
+#include <iomanip>
 #include "base-types.hpp"
 #include "shape.hpp"
 #include "rectangle.hpp"
@@ -23,7 +24,7 @@ int main()
       {
         ++location;
       }
-      else if (std::cin.eof())
+      else if (data[0] == 4.0)
       {
         scale_data = data;
         break;
@@ -40,7 +41,7 @@ int main()
       break;
     }
   }
-
+  std::cout << std::setprecision(1);
   double total_area = 0;
   for (size_t i = 0; i < location; ++i)
   {
@@ -51,16 +52,15 @@ int main()
   zakirov::output_frame(std::cout, shapes, location);
 
   total_area = 0;
-  for (size_t i = 1; i < location; ++i)
+  for (size_t i = 0; i < location; ++i)
   {
     zakirov::point_t target;
-    target.x_ = scale_data[1];
-    target.y_ = scale_data[2];
+    target.x_ = scale_data[2];
+    target.y_ = scale_data[3];
 
-    zakirov::scale_from_point(shapes[i], target, scale_data[3]);
+    zakirov::scale_from_point(shapes[i], target, scale_data[4]);
     total_area += shapes[i] -> getArea();
   }
-
   std::cout << total_area;
   zakirov::output_frame(std::cout, shapes, location);
 
