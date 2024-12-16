@@ -1,12 +1,12 @@
 #include "rectangle.hpp"
-double karnauhova::Rectangle::getArea()
+double karnauhova::Rectangle::getArea() const
 {
   double len1 = x2_.y - x4_.y;
   double len2 = x2_.x - x4_.x;
   return (len1 * len2);
 }
 
-rectangle_t karnauhova::Rectangle::getFrameRect()
+karnauhova::rectangle_t karnauhova::Rectangle::getFrameRect() const
 {
   rectangle_t rect;
   rect.width = x2_.x - x4_.x;

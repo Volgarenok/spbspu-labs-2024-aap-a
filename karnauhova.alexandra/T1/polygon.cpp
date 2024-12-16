@@ -1,6 +1,6 @@
 #include "polygon.hpp"
 #include <cmath>
-double karnauhova::Polygon::getArea()
+double karnauhova::Polygon::getArea() const
 {
   double area = 0;
   for (size_t i = 0; i < count_; ++i)
@@ -12,7 +12,7 @@ double karnauhova::Polygon::getArea()
   return std::abs(area) / 2;
 }
 
-rectangle_t karnauhova::Polygon::getFrameRect()
+karnauhova::rectangle_t karnauhova::Polygon::getFrameRect() const
 {
   rectangle_t rect;
   double max_x = points_[0].x;

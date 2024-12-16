@@ -1,9 +1,8 @@
 #include "input.hpp"
-#include "shape.hpp"
-#include "count_point.hpp"
 #include <iostream>
 #include <string>
 #include <limits>
+#include "shape.hpp"
 
 void karnauhova::eat_trash(std::istream & in)
 {

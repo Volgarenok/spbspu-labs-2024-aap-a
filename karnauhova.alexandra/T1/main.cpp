@@ -1,9 +1,8 @@
+#include <string>
+#include <iostream>
 #include "input.hpp"
 #include "output.hpp"
 #include "shape.hpp"
-#include "count_point.hpp"
-#include <string>
-#include <iostream>
 #include "check.hpp"
 int main()
 {

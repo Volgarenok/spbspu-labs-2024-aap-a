@@ -3,7 +3,7 @@
 #include "shape.hpp"
 namespace karnauhova
 {
-  class Triangle
+  class Triangle: public Shape
   {
   public:
     Triangle(point_t x1, point_t x2, point_t x3): x1_(x1), x2_(x2), x3_(x3)

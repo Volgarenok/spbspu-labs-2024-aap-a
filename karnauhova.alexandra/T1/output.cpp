@@ -1,7 +1,7 @@
 #include "output.hpp"
-#include "shape.hpp"
 #include <iostream>
 #include <iomanip>
+#include "shape.hpp"
 #include "rectangle.hpp"
 #include "triangle.hpp"
 #include "polygon.hpp"

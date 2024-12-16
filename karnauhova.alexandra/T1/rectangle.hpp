@@ -11,7 +11,7 @@ namespace karnauhova
     void move(double x, double y) override;
     void move(point_t t) override;
     double getArea() const override;
-    rectangle_t getFrameRect() override;
+    rectangle_t getFrameRect() const override;
     void scale(point_t t, double k) override;
     ~Rectangle(){}
   private:

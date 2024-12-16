@@ -1,6 +1,6 @@
 #include "triangle.hpp"
 #include <cmath>
-double karnauhova::Triangle::getArea()
+double karnauhova::Triangle::getArea() const
 {
   double len_x1 = x1_.x - x2_.x;
   double len_y1 = x1_.y - x2_.y;
@@ -15,7 +15,7 @@ double karnauhova::Triangle::getArea()
   return std::sqrt(p * (p - len_1) * (p - len_2) * (p - len_3));
 }
 
-rectangle_t karnauhova::Triangle::getFrameRect()
+karnauhova::rectangle_t karnauhova::Triangle::getFrameRect() const
 {
   double x_max = 0;
   double x_min = 0;
