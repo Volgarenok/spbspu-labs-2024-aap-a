@@ -13,8 +13,13 @@ int main()
   cherkasov::Shape* shapes[maxShapes] = {nullptr};
   size_t shapeCount = 0;
   std::string inputCommand;
-  while (std::cin >> inputCommand)
+  bool scaleCommandIssued = false;
+  while (std::getline(std::cin, inputCommand))
   {
+    if (inputCommand.empty())
+    {
+      continue;
+    }
     try
     {
     if (shapeCount >= maxShapes)
@@ -27,6 +32,18 @@ int main()
       if (!(std::cin >> x1 >> y1 >> x2 >> y2))
       {
         throw std::invalid_argument("Invalid input for RECTANGLE");
+      }
+      if (x1 > x2)
+      {
+        double temp = x1;
+        x1 = x2;
+        x2 = temp;
+      }
+      if (y1 > y2)
+      {
+        double temp = y1;
+        y1 = y2;
+        y2 = temp;
       }
      shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
     }
@@ -50,6 +67,7 @@ int main()
     }
     else if (inputCommand == "SCALE")
     {
+      scaleCommandIssued = true;
       double dx, dy, k;
       if (!(std::cin >> dx >> dy >> k))
       {
@@ -59,15 +77,15 @@ int main()
       {
         throw std::logic_error("Scale factor must be positive");
       }
-    for (size_t i = 0; i < shapeCount; ++i)
-    {
-      if (shapes[i])
+      for (size_t i = 0; i < shapeCount; ++i)
       {
-        shapes[i]->move(dx, dy);
-        shapes[i]->scale(k);
+        if (shapes[i])
+        {
+          shapes[i]->move(dx, dy);
+          shapes[i]->scale(k);
+        }
       }
     }
-  }
     else
     {
       std::cerr << "Unsupported command: " << inputCommand << "\n";
@@ -96,6 +114,10 @@ int main()
     {
       std::cerr << "Error: " << e.what() << "\n";
     }
+  }
+  if (!scaleCommandIssued)
+  {
+    std::cerr << "Error: SCALE command was not issued\n";
   }
   std::cout << std::fixed << std::setprecision(1);
   double totalArea = 0.0;
