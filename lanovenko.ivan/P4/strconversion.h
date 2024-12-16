@@ -3,7 +3,7 @@
 #include <istream>
 namespace lanovenko
 {
-  char* inputStr(std::istream& in, const char stop);
-  char* transformationStr(char* str);
+  char* inputStr(std::istream& in, char stop);
+  void transformationStr(const char* str, char* missing);
 }
 #endif
