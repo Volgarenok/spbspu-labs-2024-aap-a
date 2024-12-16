@@ -16,7 +16,7 @@ namespace alymova
     double getX() const;
     double getY() const;
   private:
-    double x, y;
+    double x_, y_;
   };
   struct rectangle_t
   {
@@ -31,8 +31,8 @@ namespace alymova
     point_t getUppRight() const;
   private:
     point_t low_left_, upp_right_;
-    double width, height;
-    point_t pos, shift_point_;
+    double width_, height_;
+    point_t pos_, shift_point_;
   };
 }
 #endif
