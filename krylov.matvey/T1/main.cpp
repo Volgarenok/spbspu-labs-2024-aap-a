@@ -70,13 +70,18 @@ void processShapes()
         for (size_t i = 0; i < shapeCount; ++i)
         {
           totalAreaBefore += shapes[i]->getArea();
+        }
+        std::cout << std::fixed << std::setprecision(1) << totalAreaBefore << ' ';
+        for (size_t i = 0; i < shapeCount; ++i)
+        {
+          totalAreaBefore += shapes[i]->getArea();
           krylov::rectangle_t frame = shapes[i]->getFrameRect();
-          std::cout << std::fixed << std::setprecision(1) << totalAreaBefore << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x - frame.width / 2 << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.y - frame.height / 2 << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x + frame.width / 2 << ' ';
-          std::cout << std::fixed << std::setprecision(1) << frame.pos.y + frame.height / 2 << '\n';
+          std::cout << std::fixed << std::setprecision(1) << frame.pos.y + frame.height / 2 << ' ';
         }
+        std::cout << "\n";
         for (size_t i = 0; i < shapeCount; ++i)
         {
           krylov::point_t shapeCenter = shapes[i]->getFrameRect().pos;
@@ -88,13 +93,18 @@ void processShapes()
         for (size_t i = 0; i < shapeCount; ++i)
         {
           totalAreaAfter += shapes[i]->getArea();
+        }
+        std::cout << std::fixed << std::setprecision(1) << totalAreaAfter << ' ';
+        for (size_t i = 0; i < shapeCount; ++i)
+        {
+          totalAreaAfter += shapes[i]->getArea();
           krylov::rectangle_t frame = shapes[i]->getFrameRect();
-          std::cout << std::fixed << std::setprecision(1) << totalAreaAfter << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x - frame.width / 2 << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x - frame.width / 2 << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x + frame.width / 2 << ' ';
-          std::cout << std::fixed << std::setprecision(1) << frame.pos.y + frame.height / 2 << '\n';
+          std::cout << std::fixed << std::setprecision(1) << frame.pos.y + frame.height / 2 << ' ';
         }
+        std::cout << "\n";
         scaleCommandProcessed = true;
         break;
       }
