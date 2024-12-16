@@ -5,7 +5,8 @@
 #include "base-types.hpp"
 namespace alymova
 {
-  Shape* makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool& wrong_shape_flag, double& scale_x, double& scale_y, double& scale_ratio);
+  Shape* makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool& wrong_shape_flag, 
+    double& scale_x, double& scale_y, double& scale_ratio);
   void clear(Shape** shapes);
   void print(std::ostream& out, Shape** shapes);
   void scale(Shape** shapes, point_t s, double ratio);
