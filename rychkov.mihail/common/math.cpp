@@ -1,6 +1,7 @@
 #include "math.hpp"
 
 #include <cmath>
+#include <limits>
 
 bool rychkov::isAlmostEqual(double a, double b, int coef)
 {
