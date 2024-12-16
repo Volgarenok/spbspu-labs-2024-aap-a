@@ -2,13 +2,6 @@
 #include <cmath>
 #include "base-types.hpp"
 
-namespace lebedev
-{
-  double max(double a, double b, double c);
-  double min(double a, double b, double c);
-  double triangleArea(point_t p1, point_t p2, point_t p3);
-}
-
 lebedev::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4) :
   p1_(p1), p2_(p2), p3_(p3), p4_(p4)
 {}
