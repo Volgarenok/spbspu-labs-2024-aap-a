@@ -79,7 +79,14 @@ void processShapes()
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x - frame.width / 2 << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.y - frame.height / 2 << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x + frame.width / 2 << ' ';
-          std::cout << std::fixed << std::setprecision(1) << frame.pos.y + frame.height / 2 << ' ';
+          if (i == shapeCount - 1)
+          {
+            std::cout << std::fixed << std::setprecision(1) << frame.pos.y + frame.height / 2 << '\n';
+          }
+          else
+          {
+            std::cout << std::fixed << std::setprecision(1) << frame.pos.y + frame.height / 2 << ' ';
+          }
         }
         std::cout << "\n";
         for (size_t i = 0; i < shapeCount; ++i)
@@ -100,7 +107,7 @@ void processShapes()
           totalAreaAfter += shapes[i]->getArea();
           krylov::rectangle_t frame = shapes[i]->getFrameRect();
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x - frame.width / 2 << ' ';
-          std::cout << std::fixed << std::setprecision(1) << frame.pos.x - frame.width / 2 << ' ';
+          std::cout << std::fixed << std::setprecision(1) << frame.pos.y - frame.height / 2 << ' ';
           std::cout << std::fixed << std::setprecision(1) << frame.pos.x + frame.width / 2 << ' ';
           if (i == shapeCount - 1)
           {
