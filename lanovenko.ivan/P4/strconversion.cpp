@@ -21,6 +21,7 @@ char* lanovenko::inputStr(std::istream& in, const char stop)
       }
       catch (const std::bad_alloc & e)
       {
+        in >> std::skipws;
         delete[] str;
         throw;
       }
@@ -38,28 +39,24 @@ char* lanovenko::inputStr(std::istream& in, const char stop)
   return str;
 }
 
-char* lanovenko::transformationStr(char* str)
+void lanovenko::transformationStr(const char* str, char* missing)
 {
-  bool present[26] = { false };
-  int len = strlen(str);
-
-  for (int i = 0; i < len; i++)
+  size_t index = 0;
+  for (char c = 'a'; c <= 'z'; c++)
   {
-    if (str[i] >= 'a' && str[i] <= 'z')
+    bool present = false;
+    for (size_t i = 0; str[i] != '\0'; ++i)
     {
-      present[str[i] - 'a'] = true;
+      if (std::isalpha(str[i]) && std::tolower(str[i]) == c)
+      {
+        present = true;
+	break;
+      }
     }
-  }
-  static char missing[27];
-  int index = 0;
-
-  for (char ch = 'a'; ch <= 'z'; ch++)
-  {
-    if (!present[ch - 'a'])
+    if (!present)
     {
-      missing[index++] = ch;
+      missing[index++] = c;
     }
   }
   missing[index] = '\0';
-  return missing;
 }
