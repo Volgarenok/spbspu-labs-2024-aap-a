@@ -75,8 +75,12 @@ petrov::point_t * petrov::Concave::getFrameRect()
 
 void petrov::Concave::move(point_t concrete_point)
 {
+  double pos_dx = concrete_point.x_ - frame_rect_.pos_.x_;
+  double pos_dy = concrete_point.y_ - frame_rect_.pos_.y_;
   frame_rect_.pos_.x_ = concrete_point.x_;
   frame_rect_.pos_.y_ = concrete_point.y_;
+  p4_.x_ += pos_dx;
+  p4_.y_ += pos_dy;
   p1_.x_ = frame_rect_.pos_.x_ - (frame_rect_.width_ / 2);
   p1_.y_ = frame_rect_.pos_.y_ - (frame_rect_.height_ / 2);
   p2_.x_ = frame_rect_.pos_.x_ - (frame_rect_.width_ / 2);
@@ -95,6 +99,8 @@ void petrov::Concave::move(double dx, double dy)
   p2_.y_ += dy;
   p3_.x_ += dx;
   p3_.y_ += dy;
+  p4_.x_ += dx;
+  p4_.y_ += dy;
 }
 
 void petrov::Concave::scale(double k)
