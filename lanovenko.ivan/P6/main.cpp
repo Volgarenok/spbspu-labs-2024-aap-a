@@ -17,5 +17,4 @@ int main()
   }
   std::cout << std::boolalpha << lanovenko::is_valid_float_string(str) << '\n';
   delete[] str;
-
 }
