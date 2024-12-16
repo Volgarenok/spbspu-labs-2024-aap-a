@@ -3,6 +3,9 @@
 #include "circle.hpp"
 #include "ring.hpp"
 #include "ellipse.hpp"
+#include "square.hpp"
+#include "triangle.hpp"
+#include "complexquad.hpp"
 
 // chto-to podobnoe na fabriku
 Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
@@ -64,11 +67,37 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
   }
   else if (hash == 'S' * 'Q' * 'U' * 'A')
   {
+      double temp = 0;
+      point_t lb = {};
+      in >> temp;
+      lb.x = temp;
+      in >> temp;
+      lb.y = temp;
+      in >> temp;
+      Square* squa = new Square(lb, temp);
+      return squa;
 
   }
   else if (hash == 'T' * 'R' * 'I' * 'A')
   {
-
+    double temp = 0;
+    point_t a = {};
+    point_t b = {};
+    point_t c = {};
+    in >> temp;
+    a.x = temp;
+    in >> temp;
+    a.y = temp;
+    in >> temp;
+    b.x = temp;
+    in >> temp;
+    b.y = temp;
+    in >> temp;
+    c.x = temp;
+    in >> temp;
+    c.y = temp;
+    Triangle* tria = new Triangle(a, b, c);
+    return tria;
   }
   else if (hash == 'P' * 'A' * 'R' * 'A')
   {
@@ -92,7 +121,29 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
   }
   else if (hash == 'C' * 'O' * 'M' * 'P')
   {
-
+    double temp = 0;
+    point_t a = {};
+    point_t b = {};
+    point_t c = {};
+    point_t d = {};
+    in >> temp;
+    a.x = temp;
+    in >> temp;
+    a.y = temp;
+    in >> temp;
+    b.x = temp;
+    in >> temp;
+    b.y = temp;
+    in >> temp;
+    c.x = temp;
+    in >> temp;
+    c.y = temp;
+    in >> temp;
+    d.x = temp;
+    in >> temp;
+    d.y = temp;
+    Complexquad* comp = new Complexquad(a, b, c, d);
+    return comp;
   }
 }
 
@@ -116,7 +167,7 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
   for (unsigned long long i = 0; i < count; i++)
   {
     rect = shapes[i][0].getFrameRect();
-    out << '\n' << "Area:" << shapes[i][0].getArea() << "; Frame rectangle: " << '(' << rect.pos.x << ", " ;
+    out << '\n' << "Area:" << shapes[i][0].getArea() << "; Frame rectangle: " << '(' << rect.pos.x << ", ";
     out << rect.pos.y << ") " << rect.width << ' ' << rect.height << '\n';
     shapes[i][0].scale(pos, scale);
     rect = shapes[i][0].getFrameRect();
