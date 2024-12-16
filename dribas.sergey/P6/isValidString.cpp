@@ -16,7 +16,7 @@ const char* dribas::isChar(const char* string, const char* symbol)
   if (*symbol == '0') {
     return nullptr;
   }
-  return *string == *symbol ? string + 1: isChar(string,symbol + 1);
+  return (*string == *symbol) ? (string + 1) : isChar(string, symbol + 1);
 }
 const char* dribas::isLetter(const char* string)
 {
