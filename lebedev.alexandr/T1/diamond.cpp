@@ -1,5 +1,4 @@
 #include "diamond.hpp"
-#include <stdexcept>
 #include <cmath>
 #include "base-types.hpp"
 
