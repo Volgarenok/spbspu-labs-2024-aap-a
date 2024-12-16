@@ -43,7 +43,7 @@ void krylov::Rectangle::scale(double factor)
   {
     throw std::invalid_argument("Scale factor must be positive");
   }
-  point_t center = {(bottomLeft_.x + topRight_.x) / 2, (bottomLeft_.y + topRight_.y) / 2};
+  point_t center = getFrameRect().pos;
   bottomLeft_.x = center.x + (bottomLeft_.x - center.x) * factor;
   bottomLeft_.y = center.y + (bottomLeft_.y - center.y) * factor;
   topRight_.x = center.x + (topRight_.x - center.x) * factor;
