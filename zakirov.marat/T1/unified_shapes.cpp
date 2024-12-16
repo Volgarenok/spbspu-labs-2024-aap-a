@@ -219,11 +219,3 @@ void zakirov::output_frame(std::ostream & out, Shape ** shapes, size_t quantity)
   }
   out << '\n';
 }
-
-void zakirov::clear_shapes(Shape ** shapes, size_t quantity)
-{
-  for (size_t i = 0; i < quantity; ++i)
-  {
-    delete shapes[i];
-  }
-}

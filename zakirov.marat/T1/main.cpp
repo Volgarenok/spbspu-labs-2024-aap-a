@@ -70,5 +70,4 @@ int main()
   }
 
   free(scale_data);
-  zakirov::clear_shapes(shapes, location);
 }
