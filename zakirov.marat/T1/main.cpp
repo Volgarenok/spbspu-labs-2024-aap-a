@@ -70,8 +70,5 @@ int main()
   }
 
   free(scale_data);
-  for (size_t i = 0; i < location; ++i)
-  {
-    delete shapes[i];
-  }
+  zakirov::clear_shapes(shapes, location);
 }

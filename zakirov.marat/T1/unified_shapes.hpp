@@ -16,6 +16,7 @@ namespace zakirov
   double * get_data(std::istream & in);
   void scale_from_point(Shape * mutable_shape, point_t target, double k);
   void output_frame(std::ostream & out, Shape ** shapes, size_t quantity);
+  void clear_shapes(Shape ** shapes, size_t quantity);
 }
 
 #endif
