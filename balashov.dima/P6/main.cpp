@@ -1,5 +1,5 @@
-#include "processingString.hpp"
 #include <inputString.hpp>
+#include "isRealNumber.hpp"
 
 int main()
 {
@@ -16,7 +16,7 @@ int main()
     std::cerr << "The absence of a line\n";
     return 1;
   }
-  std::cout << balashov::removeSpaces(line) << "\n";
+  std::cout << std::boolalpha << balashov::isFloatingPointLiteral(line) << "\n";
   free(line);
   return 0;
 }
