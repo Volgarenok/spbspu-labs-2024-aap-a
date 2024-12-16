@@ -47,6 +47,19 @@ int main()
         }
       }
 
+      else if (shapeName == "CONCAVE")
+      {
+        try
+        {
+          shps[count] = lebedev::createConcave(std::cin);
+          count++;
+        }
+        catch (const std::invalid_argument& e)
+        {
+          isIncorrectSize = true;
+        }
+      }
+
       else if (std::cin.eof())
       {
         std::cerr << "Eof before scale command!\n";
