@@ -27,7 +27,7 @@ namespace hismatova
       if (figures[i])
       {
         rectangle_t FrameRect = figures[i]->getFrameRect();
-        std::cout << FrameRect.pos.x - FrameRect.width / 2 << " " << FrameRect.pos.y - FrameRect.height / 2 << " ";
+        std::cout << " " << FrameRect.pos.x - FrameRect.width / 2 << " " << FrameRect.pos.y - FrameRect.height / 2 << " ";
         std::cout << FrameRect.pos.x + FrameRect.width / 2 << " " << FrameRect.pos.y + FrameRect.height / 2;
       }
     }
@@ -58,6 +58,7 @@ int main()
       {
         std::cerr << "out of memory\n";
         hismatova::deleteFigures(figures, count);
+        return 1;
       }
     }
     else if (nameFigure == "TRIANGLE")
@@ -75,6 +76,7 @@ int main()
       {
         std::cerr << "out of memory\n";
         hismatova::deleteFigures(figures, count);
+        return 1;
       }
     }
     else if (nameFigure == "CONCAVE")
@@ -92,6 +94,7 @@ int main()
       {
         std::cerr << "out of memory\n";
         hismatova::deleteFigures(figures, count);
+        return 1;
       }
     }
     else if (nameFigure == "SCALE")
@@ -100,6 +103,7 @@ int main()
      {
        std::cerr << "there is no figures";
        hismatova::deleteFigures(figures, count);
+       return 1;
      }
      double x = 0, y = 0;
      hismatova::point_t point_;
@@ -141,4 +145,5 @@ int main()
   {
     std::cerr << "error in parametrs\n";
   }
+  hismatova::deleteFigures(figures, count);
 }
