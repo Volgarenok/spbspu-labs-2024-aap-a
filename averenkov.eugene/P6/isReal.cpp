@@ -1,7 +1,7 @@
+#include "isReal.h"
 #include <cctype>
 #include <cstddef>
 #include <iostream>
-#include "isReal.h"
 
 namespace averenkov
 {
@@ -14,8 +14,7 @@ namespace averenkov
 
 bool averenkov::isSumb(const char* str, size_t& index)
 {
-  if (str[index] != 'a' && str[index] != 'b' && str[index] != 'c' && str[index] != 'd' && str[index] != 'e'
- && str[index] != 'f' && str[index] != 'x' && str[index] != 'y' && str[index] != 'z' )
+  if (!(str[index] >= 'a' && str[index] <= 'f') && !(str[index] >= 'x' && str[index] <= 'z'))
   {
     return false;
   }
@@ -88,7 +87,7 @@ bool averenkov::hasExpression(const char* str, size_t& index)
 bool averenkov::isReal(const char* str)
 {
   size_t index = 0;
-  if (averenkov::hasExpression(str, index) && str[index] == '\0')
+  if (hasExpression(str, index) && str[index] == '\0')
   {
     return true;
   }

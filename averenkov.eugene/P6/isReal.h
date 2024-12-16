@@ -1,5 +1,5 @@
-#ifndef PARSEEXPR_H
-#define PARSEEXPR_H
+#ifndef ISREAL_H
+#define ISREAL_H
 
 namespace averenkov
 {
