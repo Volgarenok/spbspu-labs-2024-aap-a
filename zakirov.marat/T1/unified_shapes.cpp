@@ -1,7 +1,7 @@
 #include "unified_shapes.hpp"
+#include <cstring>
 #include <stdexcept>
 #include <resize_line.hpp>
-#include <string>
 #include <cstddef>
 
 namespace
@@ -138,20 +138,20 @@ double * zakirov::get_data(std::istream & in)
     return nullptr;
   }
 
-  std::string shape = get_string(in, step, ' ');
-  if (shape == "RECTANGLE ")
+  char * shape = get_string(in, step, ' ');
+  if (std::strcmp(shape, "RECTANGLE "))
   {
     data[0] = 1.0;
   }
-  else if (shape == "CIRCLE ")
+  else if (std::strcmp(shape, "CIRCLE "))
   {
     data[0] = 2.0;
   }
-  else if (shape == "RING ")
+  else if (std::strcmp(shape, "RING "))
   {
     data[0] = 3.0;
   }
-  else if (shape == "SCALE ")
+  else if (std::strcmp(shape, "SCALE "))
   {
     data[0] = 4.0;
   }
@@ -160,6 +160,7 @@ double * zakirov::get_data(std::istream & in)
     data[0] = 0.0;
   }
 
+  free(shape);
   size_t location = 2;
   double counter = 0.0;
   char * workline = get_string(in, step, '\n');
