@@ -10,6 +10,7 @@ namespace alymova
     virtual void move(point_t point) = 0;
     virtual void move(double shift_x, double shift_y) = 0;
     virtual void scale(double ratio) = 0;
+    virtual ~Shape() = default;
   };
 }
 #endif
