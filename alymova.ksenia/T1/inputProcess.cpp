@@ -1,22 +1,49 @@
 #include "inputProcess.hpp"
 #include <iostream>
 #include <iomanip>
-alymova::Shape* alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_cnt, point_t& scale_s, double& scale_ratio)
+#include <stdexcept>
+#include "base-types.hpp"
+#include "rectangle.hpp"
+#include "circle.hpp"
+alymova::Shape* alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool& wrong_shape_flag, double& scale_x, double& scale_y, double& scale_ratio)
 {
   std::string type;
   in >> type;
-  if (type == "RECTANGLE")
+  try
   {
-    double x1 = 0, y1 = 0, x2 = 0, y2 = 0;
-    std::cin >> x1 >> y1 >> x2 >> y2;
-    return makeRectangle(x1, y1, x2, y2);
+    if (type == "RECTANGLE")
+    {
+      double x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+      in >> x1 >> y1 >> x2 >> y2;
+      shapes[shapes_now] = new Rectangle(point_t(x1, y1), point_t(x2, y2));
+      shapes_now++;
+    }
+    if (type == "CIRCLE")
+    {
+      double x = 0, y = 0, radius = 0;
+      in >> x >> y >> radius;
+      try
+      {
+        shapes[shapes_now] = new Circle(point_t(x, y), radius);
+        shapes_now++;
+      }
+      catch (const std::logic_error& e)
+      {
+        delete shapes[shapes_now];
+        wrong_shape_flag = true;
+      }
+    }
+    if (type == "SCALE")
+    {
+      in >> scale_x >> scale_y >> scale_ratio;
+    }
+  }
+  catch (const std::bad_alloc& e)
+  {
+    clear(shapes);
+    std::cerr << "Error: memory allocate fail\n";
   }
   return nullptr;
-}
-alymova::Rectangle* alymova::makeRectangle(double x1, double y1, double x2, double y2)
-{
-  Rectangle* r = new Rectangle(point_t(x1, y1), point_t(x2, y2));
-  return r;
 }
 void alymova::clear(Shape** shapes)
 {
@@ -43,7 +70,7 @@ void alymova::scale(Shape** shapes, point_t s, double ratio)
 {
   if (ratio <= 0)
   {
-    throw std::logic_error("The scale ratio should be positive");
+    throw std::invalid_argument("The scale ratio should be positive");
   }
   if (ratio == 1)
   {

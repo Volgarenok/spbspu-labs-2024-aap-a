@@ -1,11 +1,19 @@
 #include "circle.hpp"
 #include <cmath>
+#include <stdexcept>
 constexpr double PI = acos(-1.0);
 alymova::Circle::Circle(point_t pos, double radius):
   pos_(pos),
-  radius_(radius),
-  frame_rect_(point_t(pos_.getX() - radius, pos_.getY() - radius), point_t(pos_.getX() + radius, pos_.getY() + radius))
-{}
+  radius_(1),
+  frame_rect_()
+{
+  if (radius <= 0)
+  {
+    throw std::logic_error("Incorrect description of the shape");
+  }
+  radius_ = radius;
+  frame_rect_ = rectangle_t(point_t(pos_.getX() - radius, pos_.getY() - radius), point_t(pos_.getX() + radius, pos_.getY() + radius));
+}
 double alymova::Circle::getArea() const
 {
   return PI * radius_ * radius_;

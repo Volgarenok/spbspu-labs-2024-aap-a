@@ -2,11 +2,10 @@
 #define INPUT_PROCESS_HPP
 #include <iostream>
 #include "shape.hpp"
-#include "rectangle.hpp"
+#include "base-types.hpp"
 namespace alymova
 {
-  Shape* makeShape(std::istream& in, Shape** shapes, int& shapes_cnt, point_t& scale_s, double& scale_ratio);
-  Rectangle* makeRectangle(double x1, double y1, double x2, double y2);
+  Shape* makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool& wrong_shape_flag, double& scale_x, double& scale_y, double& scale_ratio);
   void clear(Shape** shapes);
   void print(std::ostream& out, Shape** shapes);
   void scale(Shape** shapes, point_t s, double ratio);
