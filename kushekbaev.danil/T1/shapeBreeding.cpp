@@ -4,6 +4,11 @@
 
 namespace kushekbaev
 {
+  bool parallelX(point_t first, point_t second)
+  {
+    return (first.x == second.x);
+  }
+
   bool isTriangle(point_t first, point_t second, point_t third)
   {
     double side1 = getLineLength(first, second);
@@ -22,21 +27,21 @@ namespace kushekbaev
     }
   }
 
-bool isPointInsideTriangle(point_t first, point_t second, point_t third, point_t final)
-{
-  int firstcheck = (first.x - final.x) * (second.y - first.y) - (second.x - first.x) * (first.y - final.y);
-  int secondcheck = (second.x - final.x) * (third.y - second.y) - (third.x - second.x) * (second.y - final.y);
-  int thirdcheck = (third.x - final.x) * (first.y - third.y) - (first.x - third.x) * (third.y - final.y);
-  if (firstcheck > 0 && secondcheck > 0 && thirdcheck > 0)
+  bool isPointInsideTriangle(point_t first, point_t second, point_t third, point_t final)
   {
-    return true;
+    double firstcheck = (first.x - final.x) * (second.y - first.y) - (second.x - first.x) * (first.y - final.y);
+    double secondcheck = (second.x - final.x) * (third.y - second.y) - (third.x - second.x) * (second.y - final.y);
+    double thirdcheck = (third.x - final.x) * (first.y - third.y) - (first.x - third.x) * (third.y - final.y);
+    if (firstcheck > 0 && secondcheck > 0 && thirdcheck > 0)
+    {
+      return true;
+    }
+    else if (firstcheck < 0 && secondcheck < 0 && thirdcheck < 0)
+    {
+      return true;
+    }
+    return false;
   }
-  else if (firstcheck < 0 && secondcheck < 0 && thirdcheck < 0)
-  {
-    return true;
-  }
-  return false;
-}
 
   Rectangle* makeRectangle(std::istream& input)
   {
@@ -78,6 +83,10 @@ bool isPointInsideTriangle(point_t first, point_t second, point_t third, point_t
     point_t second { 0, 0 };
     point_t third { 0, 0 };
     input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
+    if (!parallelX(first, second) || !parallelX(second, third) || !parallelX(first, third))
+    {
+      throw std::invalid_argument("There is no lina that would be parallel to X\n");
+    }
     if (!isTriangle(first, second, third))
     {
       throw std::invalid_argument("First three points wouldnt make a triangle\n");
