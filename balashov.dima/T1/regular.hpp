@@ -5,19 +5,19 @@
 
 namespace balashov
 {
-  class Regular: public Shape
+  class Regular : public Shape
   {
   public:
-    Regular(point_t first_point, point_t second_point, point_t third_point);
+    Regular(point_t firstPoint_, point_t secondPoint_, point_t thirdPoint_);
     double getArea() const override;
     rectangle_t getFrameRect() const;
     void move(double x, double y) override;
-    void move(const point_t s) override;
-    void scale(double k) override;
+    void move(point_t pointRoute) override;
+    void scale(double scaleCoefficient) override;
   private:
-    point_t first_point_;
-    point_t second_point_;
-    point_t third_point_;
+    point_t firstPoint_;
+    point_t secondPoint_;
+    point_t thirdPoint_;
   };
 }
 
