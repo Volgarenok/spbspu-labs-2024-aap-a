@@ -17,14 +17,12 @@ int main()
   point_t isoCenter;
   double scalingFactor;
   bool scalingRequested = false;
-
   while (std::cin >> inputCommand)
   {
     if (inputCommand == "RECTANGLE")
     {
       double x1, y1, x2, y2;
       std::cin >> x1 >> y1 >> x2 >> y2;
-
       if (x1 >= x2 || y1 >= y2)
       {
         invalidInput = true;
@@ -38,9 +36,7 @@ int main()
     {
       double x1, y1, x2, y2, x3, y3, x4, y4;
       std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
-
       point_t intersectionPoint = findIntersectionPoint({x1, y1}, {x2, y2}, {x3, y3}, {x4, y4});
-
       if (!isPointInQuad({x1, y1}, {x2, y2}, {x3, y3}, {x4, y4}, intersectionPoint))
       {
         invalidInput = true;
@@ -54,7 +50,6 @@ int main()
     {
       double x1, y1, x2, y2, x3, y3;
       std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-
       if (!isCorrectTriangle({x1, y1}, {x2, y2}, {x3, y3}))
       {
         invalidInput = true;
@@ -84,25 +79,21 @@ int main()
       return 1;
     }
   }
-
   if (!scalingRequested)
   {
     std::cerr << "Scaling was not specified\n";
     deleteShapes(shapeArray, shapeCount);
     return 1;
   }
-
   if (shapeCount == 0)
   {
     std::cerr << "No shapes were created\n";
     return 1;
   }
-
   if (invalidInput)
   {
     std::cerr << "Invalid input encountered\n";
   }
-
   std::cout << std::fixed << std::setprecision(1) << calculateTotalArea(shapeArray, shapeCount);
   outputFrameCoordinates(shapeArray, shapeCount);
   applyIsoScaling(shapeArray, shapeCount, isoCenter, scalingFactor);

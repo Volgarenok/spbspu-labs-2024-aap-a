@@ -10,12 +10,10 @@ namespace maslovskiy
     rightCorner_.x = x2;
     rightCorner_.y = y2;
   }
-
   double Rectangle::getArea() const
   {
     return (rightCorner_.x - leftCorner_.x) * (rightCorner_.y - leftCorner_.y);
   }
-
   rectangle_t Rectangle::getFrameRect() const
   {
     rectangle_t frameRect;
@@ -25,19 +23,16 @@ namespace maslovskiy
     frameRect.pos.y = leftCorner_.y + (frameRect.height / 2);
     return frameRect;
   }
-
   void Rectangle::move(point_t newPos)
   {
     point_t currentPos = getFrameRect().pos;
     double moveX = newPos.x - currentPos.x;
     double moveY = newPos.y - currentPos.y;
-
     leftCorner_.x += moveX;
     rightCorner_.x += moveX;
     leftCorner_.y += moveY;
     rightCorner_.y += moveY;
   }
-
   void Rectangle::move(double dx, double dy)
   {
     leftCorner_.x += dx;
@@ -45,11 +40,9 @@ namespace maslovskiy
     leftCorner_.y += dy;
     rightCorner_.y += dy;
   }
-
   void Rectangle::scale(double k)
   {
     point_t currentPos = getFrameRect().pos;
-
     leftCorner_.x = currentPos.x - (currentPos.x - leftCorner_.x) * k;
     rightCorner_.x = currentPos.x + (rightCorner_.x - currentPos.x) * k;
     leftCorner_.y = currentPos.y - (currentPos.y - leftCorner_.y) * k;

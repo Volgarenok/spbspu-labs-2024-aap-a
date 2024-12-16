@@ -1,6 +1,7 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 #include "base-types.hpp"
+
 namespace maslovskiy
 {
   class Shape
@@ -14,4 +15,5 @@ namespace maslovskiy
     virtual ~Shape() = default;
   };
 }
+
 #endif

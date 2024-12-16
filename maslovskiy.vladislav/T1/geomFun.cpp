@@ -53,7 +53,6 @@ namespace maslovskiy
     double a2 = p4.y - p3.y;
     double b2 = p3.x - p4.x;
     double c2 = a2 * p3.x + b2 * p3.y;
-
     double det = a1 * b2 - a2 * b1;
     double x = (b2 * c1 - b1 * c2) / det;
     double y = (a1 * c2 - a2 * c1) / det;

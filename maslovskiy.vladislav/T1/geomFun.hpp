@@ -15,7 +15,6 @@ namespace maslovskiy
   void outputFrameCoordinates(Shape **shapeList, size_t shapeCount);
   void applyIsoScaling(Shape **shapeList, size_t shapeCount, point_t isoCenter, double scaleFactor);
   void deleteShapes(Shape **shapeList, size_t shapeCount);
-
 }
 
 #endif

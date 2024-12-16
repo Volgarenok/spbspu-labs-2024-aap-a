@@ -13,7 +13,6 @@ namespace maslovskiy
     void move(point_t p) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
-
   private:
     point_t leftCorner_;
     point_t rightCorner_;
