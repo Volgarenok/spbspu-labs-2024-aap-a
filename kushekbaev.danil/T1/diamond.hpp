@@ -8,7 +8,7 @@ namespace kushekbaev
   class Diamond : public Shape
   {
   public:
-    Diamond(point_t first, point_t second, point_t third);
+    Diamond(point_t middle, point_t diffX, point_t diffY);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t Z) override;
@@ -16,9 +16,9 @@ namespace kushekbaev
     void scale(double V) override;
 
   private:
-    point_t first_;
-    point_t second_;
-    point_t third_;
+    point_t middle_;
+    point_t diffX_;
+    point_t diffY_;
   };
 }
 
