@@ -2,7 +2,12 @@
 #include <iomanip>
 #include <stdexcept>
 #include <string>
-#include <limits>
+#include "rectangle.h"
+#include "square.h"
+#include "parallelogram.h"
+#include <iostream>
+#include <iomanip>
+#include <string>
 #include "rectangle.h"
 #include "square.h"
 #include "parallelogram.h"
@@ -20,40 +25,35 @@ int main()
     {
       continue;
     }
-    try
-    {
+
     if (shapeCount >= maxShapes)
     {
-      throw std::logic_error("Shape limit exceeded");
+      std::cerr << "Error: Shape limit exceeded\n";
+      return 1;
     }
+
     if (inputCommand == "RECTANGLE")
     {
       double x1, y1, x2, y2;
       if (!(std::cin >> x1 >> y1 >> x2 >> y2))
       {
-        throw std::invalid_argument("Invalid input for RECTANGLE");
+        std::cerr << "Error: Invalid input for RECTANGLE\n";
+        return 1;
       }
-      if (x1 > x2)
-      {
-        double temp = x1;
-        x1 = x2;
-        x2 = temp;
-      }
-      if (y1 > y2)
-      {
-        double temp = y1;
-        y1 = y2;
-        y2 = temp;
-      }
-     shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
+      if (x1 > x2) std::swap(x1, x2);
+      if (y1 > y2) std::swap(y1, y2);
+
+      shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
     }
     else if (inputCommand == "SQUARE")
     {
       double x, y, sideLength;
-      if (!(std::cin >> x >> y >> sideLength))
+      if (!(std::cin >> x >> y >> sideLength) || sideLength <= 0)
       {
-        throw std::invalid_argument("Invalid input for SQUARE");
+        std::cerr << "Error: Invalid input for SQUARE\n";
+        return 1;
       }
+
       shapes[shapeCount++] = new cherkasov::Square({x, y}, sideLength);
     }
     else if (inputCommand == "PARALLELOGRAM")
@@ -61,22 +61,22 @@ int main()
       double x1, y1, x2, y2, x3, y3;
       if (!(std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3))
       {
-        throw std::invalid_argument("Invalid input for PARALLELOGRAM");
+        std::cerr << "Error: Invalid input for PARALLELOGRAM\n";
+        return 1;
       }
+
       shapes[shapeCount++] = new cherkasov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
     }
     else if (inputCommand == "SCALE")
     {
       scaleCommandIssued = true;
       double dx, dy, k;
-      if (!(std::cin >> dx >> dy >> k))
+      if (!(std::cin >> dx >> dy >> k) || k <= 0)
       {
-        throw std::invalid_argument("Invalid input for SCALE");
+        std::cerr << "Error: Invalid input for SCALE or non-positive factor\n";
+        return 1;
       }
-      if (k <= 0)
-      {
-        throw std::logic_error("Scale factor must be positive");
-      }
+
       for (size_t i = 0; i < shapeCount; ++i)
       {
         if (shapes[i])
@@ -88,36 +88,21 @@ int main()
     }
     else
     {
-      std::cerr << "Unsupported command: " << inputCommand << "\n";
-      std::cin.clear();
-      std::string invalidInput;
-      std::getline(std::cin, invalidInput);
+      std::cerr << "Error: Unsupported command '" << inputCommand << "'\n";
+      return 1;
     }
-  }
-    catch (const std::invalid_argument& e)
-    {
-      std::cerr << "Invalid argument: " << e.what() << "\n";
-      std::cin.clear();
-      std::string invalidInput;
-      std::getline(std::cin, invalidInput);
-    }
-    catch (const std::bad_alloc& e)
-    {
-      std::cerr << "Memory allocation error: " << e.what() << "\n";
-      break;
-    }
-    catch (const std::logic_error& e)
-    {
-      std::cerr << "Logic error: " << e.what() << "\n";
-    }
-    catch (const std::exception& e)
-    {
-      std::cerr << "Error: " << e.what() << "\n";
-    }
+    std::string remainingInput;
+    std::getline(std::cin, remainingInput);
   }
   if (!scaleCommandIssued)
   {
     std::cerr << "Error: SCALE command was not issued\n";
+    return 1;
+  }
+  if (shapeCount == 0)
+  {
+    std::cerr << "Error: No shapes created\n";
+    return 1;
   }
   std::cout << std::fixed << std::setprecision(1);
   double totalArea = 0.0;
@@ -125,25 +110,23 @@ int main()
   {
     if (shapes[i])
     {
-    try
-    {
-      double area = shapes[i]->getArea();
-      totalArea += area;
-      std::cout << "Shape " << i + 1 << " Area: " << area << "\n";
-    }
-    catch (const std::exception& e)
-    {
-      std::cerr << "Failed to calculate area for shape " << i + 1 << ": " << e.what() << "\n";
-    }
-    delete shapes[i];
-    shapes[i] = nullptr;
+      try
+      {
+        double area = shapes[i]->getArea();
+        totalArea += area;
+        std::cout << "Shape " << i + 1 << " Area: " << area << "\n";
+      }
+      catch (const std::exception& e)
+      {
+        std::cerr << "Error: Failed to calculate area for shape " << i + 1 << ": " << e.what() << "\n";
+      }
+
+      delete shapes[i];
+      shapes[i] = nullptr;
     }
   }
+
   std::cout << "Total area of all shapes: " << totalArea << "\n";
-  for (size_t i = 0; i < maxShapes; ++i)
-  {
-    delete shapes[i];
-    shapes[i] = nullptr;
-  }
+
   return 0;
 }
