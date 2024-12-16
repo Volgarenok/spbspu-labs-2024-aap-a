@@ -127,8 +127,6 @@ int main() // Valgrind will argue... Yes
         continue;
       }
       shapes_massive[count++] = ptr_rectangle;
-      ptr_rectangle = nullptr;
-      delete[] ptr_rectangle;
       delete[] stream_massive;
       delete[] type_of_shape;
       for (size_t i = 0; i < created; i++)
@@ -166,8 +164,6 @@ int main() // Valgrind will argue... Yes
         continue;
       }
       shapes_massive[count++] = ptr_triangle;
-      ptr_triangle = nullptr;
-      delete[] ptr_triangle;
       delete[] stream_massive;
       delete[] type_of_shape;
       for (size_t i = 0; i < created; i++)
@@ -206,8 +202,6 @@ int main() // Valgrind will argue... Yes
         continue;
       }
       shapes_massive[count++] = ptr_concave;
-      ptr_concave = nullptr;
-      delete[] ptr_concave;
       delete[] stream_massive;
       delete[] type_of_shape;
       for (size_t i = 0; i < created; i++)
@@ -255,6 +249,10 @@ int main() // Valgrind will argue... Yes
   }
   std::cout << std::fixed << std::setprecision(1);
   petrov::scaleIsotropicallyAndOutputData(scale_point, scale_value, shapes_massive, count);
+  for (size_t i = 0; i < count; i++)
+  {
+    delete shapes_massive[i];
+  }
   if (count_errors > 0)
   {
     std::cerr << ERROR_MSG << "\n";
