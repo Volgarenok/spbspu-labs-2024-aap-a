@@ -7,7 +7,7 @@ namespace kushekbaev
   {
     double width = (first.x - second.x);
     double length = (first.y - second.y);
-    return (width * width + length * length);
+    return std::sqrt(width * width + length * length);
   }
   double getAreaOfTriangle(point_t first, point_t second, point_t third)
   {
