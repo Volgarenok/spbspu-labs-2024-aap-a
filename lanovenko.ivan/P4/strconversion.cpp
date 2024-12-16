@@ -1,29 +1,16 @@
 #include "strconversion.h"
+#include <iostream>
 #include <cstddef>
 #include <cstring>
-char* lanovenko::inputstring(std::istream& in, const char stop)
+char* lanovenko::inputStr(std::istream& in, const char stop)
 {
-  size_t capacity = 1;
-  char* str = nullptr;
-  try
-  {
-    str = new char[capacity];
-  }
-  catch (const std::bad_alloc & e)
-  {
-    delete[] str;
-    throw std::logic_error("Out of memory\n");
-  }
+  size_t capacity = 10;
+  char* str = new char[capacity];
   size_t quantity = 0;
   char c = '\0';
   in >> std::noskipws;
   while (in >> c && c != stop)
   {
-    if (!isalpha(c))
-    {
-      delete[] str;
-      throw std::logic_error("Not a letter");
-    }
     if (quantity >= capacity - 1)
     {
       capacity *= 2;
@@ -34,9 +21,9 @@ char* lanovenko::inputstring(std::istream& in, const char stop)
       }
       catch (const std::bad_alloc & e)
       {
-        delete[] new_str;
+        in >> std::skipws;
         delete[] str;
-        throw std::logic_error("Out of memory\n");
+        throw;
       }
       for (size_t i = 0; i < quantity; i++)
       {
@@ -52,28 +39,24 @@ char* lanovenko::inputstring(std::istream& in, const char stop)
   return str;
 }
 
-char* lanovenko::transformationstr(char* str)
+void lanovenko::transformationStr(const char* str, char* missing)
 {
-  bool present[26] = { false };
-  int len = strlen(str);
-
-  for (int i = 0; i < len; i++)
+  size_t index = 0;
+  for (char c = 'a'; c <= 'z'; c++)
   {
-    if (str[i] >= 'a' && str[i] <= 'z')
+    bool present = false;
+    for (size_t i = 0; str[i] != '\0'; ++i)
     {
-      present[str[i] - 'a'] = true;
+      if (std::isalpha(str[i]) && std::tolower(str[i]) == c)
+      {
+        present = true;
+        break;
+      }
     }
-  }
-  static char missing[27];
-  int index = 0;
-
-  for (char ch = 'a'; ch <= 'z'; ch++)
-  {
-    if (!present[ch - 'a'])
+    if (!present)
     {
-      missing[index++] = ch;
+      missing[index++] = c;
     }
   }
   missing[index] = '\0';
-  return missing;
 }
