@@ -31,41 +31,41 @@ int main()
             if (inputCommand == "RECTANGLE")
             {
                 double x1, y1, x2, y2;
-                if (std::cin >> x1 >> y1 >> x2 >> y2 && x1 < x2 && y1 < y2)
-                {
-                    shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
-                    rectangleImplemented = true;
+               if (std::cin >> x1 >> y1 >> x2 >> y2 && x1 < x2 && y1 < y2)
+             {
+      shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
+             rectangleImplemented = true;
                 }
                 else
                 {
-                    std::cerr << "Ошибка: одна сторона должна быть параллельна оси X\n";
+   std::cerr << "Ошибка: одна сторона должна быть параллельна оси X\n";
                 }
             }
             else if (inputCommand == "SQUARE")
-            {
-                double x, y, length;
-                if (std::cin >> x >> y >> length && length > 0)
-                {
-                    shapes[shapeCount++] = new cherkasov::Square({x, y}, length);
-                    squareImplemented = true;
-                }
+        {
+          double x, y, length;
+               if (std::cin >> x >> y >> length && length > 0)
+              {
+                   shapes[shapeCount++] = new cherkasov::Square({x, y}, length);
+                  squareImplemented = true;
+              }
+               else
+    {
+         std::cerr << "Ошибка: некорректные параметры для SQUARE\n";
+           }
+         }
+           else if (inputCommand == "PARALLELOGRAM")
+        {
+            double x1, y1, x2, y2, x3, y3;
+      if (std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 && (x1 != x2 || y1 != y2))
+             {
+     shapes[shapeCount++] = new cherkasov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
+         parallelogramImplemented = true;
+          }
                 else
-                {
-                    std::cerr << "Ошибка: некорректные параметры для SQUARE\n";
-                }
-            }
-            else if (inputCommand == "PARALLELOGRAM")
-            {
-                double x1, y1, x2, y2, x3, y3;
-                if (std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 && (x1 != x2 || y1 != y2))
-                {
-                    shapes[shapeCount++] = new cherkasov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
-                    parallelogramImplemented = true;
-                }
-                else
-                {
-                    std::cerr << "Ошибка: одна сторона должна быть параллельна оси X\n";
-                }
+             {
+    std::cerr << "Ошибка: одна сторона должна быть параллельна оси X\n";
+               }
             }
             else if (inputCommand == "SCALE")
             {
@@ -73,7 +73,7 @@ int main()
                 if (std::cin >> scaleX >> scaleY >> factor && factor > 0)
                 {
                     for (size_t i = 0; i < shapeCount; ++i)
-                    {
+         {
                         shapes[i]->scale(factor);
                     }
                 }
@@ -86,7 +86,7 @@ int main()
             {
                 std::cerr << "Ошибка: неподдерживаемая форма " << inputCommand << "\n";
                 std::string remainingInput;
-                std::getline(std::cin, remainingInput); // Пропуск остальных данных
+                std::getline(std::cin, remainingInput);
             }
         }
         catch (const std::exception& e)
@@ -97,7 +97,7 @@ int main()
 
     if (!rectangleImplemented || !squareImplemented || !parallelogramImplemented)
     {
-        std::cerr << "Необходимо реализовать прямоугольник и как минимум две дополнительные фигуры\n";
+ std::cerr << "Необходимо реализовать прямоугольникельные фигуры\n";
         for (size_t i = 0; i < shapeCount; ++i)
         {
             delete shapes[i];
