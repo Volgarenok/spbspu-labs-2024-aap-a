@@ -100,7 +100,6 @@ void karnauhova::output(std::ostream & out, double* all_points, double* polygon,
       m += 4;
       c_polygon += all_points[k];
       k += 1;
-      out << "\n";
     }
   }
   out << std::fixed;
