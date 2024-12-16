@@ -13,7 +13,6 @@ int main()
   size_t shapeCount = 0;
   std::string inputCommand;
   bool scaleCommandIssued = false;
-  bool fugInput = false;
   while (std::getline(std::cin, inputCommand))
   {
     if (inputCommand.empty())
@@ -30,7 +29,6 @@ int main()
       double x1, y1, x2, y2;
       if (std::cin >> x1 >> y1 >> x2 >> y2)
       {
-        fugInput = true;
         shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
       }
       else
@@ -41,9 +39,8 @@ int main()
     else if (inputCommand == "SQUARE")
     {
       double x, y, lenght;
-      if (std::cin >> x >> y >> lenght || lenght > 0)
+      if (std::cin >> x >> y >> lenght && lenght > 0)
       {
-        fugInput = true;
         shapes[shapeCount++] = new cherkasov::Square({x, y}, lenght);
       }
       else
@@ -56,7 +53,6 @@ int main()
       double x1, y1, x2, y2, x3, y3;
       if (std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3)
       {
-        fugInput = true;
         shapes[shapeCount++] = new cherkasov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
       }
       else
