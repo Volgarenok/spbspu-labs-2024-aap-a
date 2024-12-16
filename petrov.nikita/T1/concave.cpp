@@ -10,10 +10,9 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   double a = sqrt(pow((p1_.x_ - p2_.x_), 2) + pow((p1_.y_ - p2_.y_), 2));
   double b = sqrt(pow((p3_.x_ - p2_.x_), 2) + pow((p3_.y_ - p2_.y_), 2));
   double c = sqrt(pow((p1_.x_ - p3_.x_), 2) + pow((p1_.y_ - p3_.y_), 2));
-  if (a + b < c || a + c < b || b + c < a)
+  if (a + b <= c || a + c <= b || b + c <= a)
   {
-    throw "ERROR: Invalid data somewhere\n";
-;
+    throw "ERROR: Invalid data somewhere";
   }
   double p = (a + b + c) / 2;
   double area_of_triangle = sqrt(p * (p - a) * (p - b) * (p - c));
@@ -55,13 +54,13 @@ double petrov::Concave::getArea() // Here you can use variables more effictively
 
 petrov::point_t * petrov::Concave::getFrameRect()
 {
-  frame_rect_.pos_ = p4_;
   double x_max = std::max(std::max(p1_.x_, p2_.x_), p3_.x_);
   double x_min = std::min(std::min(p1_.x_, p2_.x_), p3_.x_);
   double y_max = std::max(std::max(p1_.y_, p2_.y_), p3_.y_);
   double y_min = std::min(std::min(p1_.y_, p2_.y_), p3_.y_);
   frame_rect_.width_ = abs(x_max - x_min);
   frame_rect_.height_ = abs(y_max - y_min);
+  frame_rect_.pos_ = { ((2 * x_min + x_max - x_min) / 2.0), ((2 * y_min + y_max - y_min) / 2.0) };
   point_t lower_left_corner = { (frame_rect_.pos_.x_ - (frame_rect_.width_ / 2)), (frame_rect_.pos_.y_ - (frame_rect_.height_ / 2)) };
   point_t upper_right_corner = { (frame_rect_.pos_.x_ + (frame_rect_.width_ / 2)), (frame_rect_.pos_.y_ + (frame_rect_.height_ / 2)) };
   frame_points_[0] = lower_left_corner;
