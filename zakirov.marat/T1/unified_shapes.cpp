@@ -50,7 +50,6 @@ namespace
     return line;
   }
 
-
   double * extra_element(double * array, size_t size)
   {
     size_t new_size = size * sizeof(double) + sizeof(double);
@@ -138,7 +137,7 @@ double * zakirov::get_data(std::istream & in)
   {
     return nullptr;
   }
-  
+
   std::string shape = get_string(in, step, ' ');
   if (shape == "RECTANGLE ")
   {
