@@ -2,8 +2,10 @@
 
 #include <iostream>
 #include <string_comparison.hpp>
+#include <memf.hpp>
 #include "rectangle.hpp"
 #include "regular.hpp"
+#include "polygon.hpp"
 
 namespace rychkov
 {
@@ -58,6 +60,44 @@ rychkov::Shape* rychkov::getRegular(std::istream& in)
       free(result);
       return nullptr;
     }
+  }
+  return nullptr;
+}
+rychkov::Shape* rychkov::getPolygon(std::istream& in)
+{
+  size_t nAllocated = 8, used = 0;
+  point_t* points = static_cast< point_t* >(malloc(nAllocated * sizeof(point_t)));
+  if (!points)
+  {
+    return nullptr;
+  }
+
+  while (in >> points[used].x >> points[used].y)
+  {
+    if (used >= nAllocated)
+    {
+      char* temp = rychkov::realloc(reinterpret_cast< char* >(points), nAllocated * sizeof(point_t),
+            used * 2 * sizeof(point_t));
+      if (!temp)
+      {
+        free(points);
+        return nullptr;
+      }
+      nAllocated = used * 2;
+      points = reinterpret_cast< rychkov::point_t* >(temp);
+    }
+    used++;
+  }
+  Polygon* result = static_cast< Polygon* >(malloc(sizeof(Polygon)));
+  try
+  {
+    new (result) Polygon(points, used);
+    return result;
+  }
+  catch (...)
+  {
+    free(result);
+    return nullptr;
   }
   return nullptr;
 }

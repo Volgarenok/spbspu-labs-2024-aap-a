@@ -40,7 +40,7 @@ void rychkov::Rectangle::scale(double coef)
 {
   if (coef <= 0)
   {
-    throw std::invalid_argument("scale can't be executed with coefficient 0");
+    throw std::invalid_argument("scale can't be executed with non-positive coefficient");
   }
   height_ *= coef;
   width_ *= coef;

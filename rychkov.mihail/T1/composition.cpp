@@ -13,9 +13,9 @@ Shape** rychkov::composition::allocate(size_t size)
 }
 Shape** rychkov::composition::reallocate(Shape** shapes, size_t nAllocated, size_t newSize)
 {
-  char* temp = rychkov::realloc(reinterpret_cast< char* >(shapes), nAllocated,
-        newSize * sizeof(rychkov::Shape*));
-  return reinterpret_cast< rychkov::Shape** >(temp);
+  char* temp = realloc(reinterpret_cast< char* >(shapes), nAllocated * sizeof(Shape*),
+        newSize * sizeof(Shape*));
+  return reinterpret_cast< Shape** >(temp);
 }
 void rychkov::composition::deallocate(Shape** shapes, size_t size)
 {

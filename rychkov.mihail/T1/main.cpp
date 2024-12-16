@@ -1,4 +1,6 @@
 #include <iostream>
+#include <iomanip>
+
 #include <string_input.hpp>
 #include <string_comparison.hpp>
 
@@ -14,6 +16,7 @@ namespace rychkov
 
 int main()
 {
+  std::cout << std::fixed << std::setprecision(1);
   size_t allocated = 8;
   size_t used = 0;
   rychkov::Shape** shapes = rychkov::composition::allocate(allocated);

@@ -6,12 +6,12 @@
 
 namespace rychkov
 {
-  class Regular: public Shape
+  class Polygon: public Shape
   {
   public:
-    Regular() = delete;
-    Regular(point_t center, size_t nSides, double sideLength);
-    Regular(point_t p1, point_t p2, point_t p3);
+    Polygon() = delete;
+    virtual ~Polygon();
+    Polygon(point_t* points, size_t size);
 
     virtual double getArea() const noexcept override;
     virtual rectangle_t getFrameRect() const noexcept override;
