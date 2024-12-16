@@ -69,6 +69,12 @@ namespace kushekbaev
                 ((second_.y > firstalt.y) ? second_.y : firstalt.y) :
                 ((third_.y > firstalt.y) ? third_.y : firstalt.y));
     upperRight.y = upperRightY;
+
+    double middleForX = lowerLeft.x + (upperRight.x - lowerLeft.x) / 2;
+    double middleForY = lowerLeft.y + (upperRight.y - lowerLeft.y) / 2;
+
+    rectangle_t* rect = new rectangle_t{ upperRight.x - lowerLeft.x, upperRight.y - lowerLeft.y, { middleForX, middleForY } };
+    return *rect;
   }
 
   void Parallelogram::move(point_t Z)
