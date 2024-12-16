@@ -7,26 +7,26 @@ hismatova::rectangle* hismatova::createRectangle(std::istream& in)
   in >> left_x >> left_y >> right_x >> right_y;
   if (left_y >= right_y || left_x >= right_x)
   {
-    throw std::wrong_arg("rectangle cannot be built");
+    throw std::invalid_argument("rectangle cannot be built");
   }
-  rectangle* rectangle_ = new rectangle(left_x, left_y, right_x, right_y);
+  rectangle* rectangle_ = new rectangle({ left_x, left_y }, { right_x, right_y });
   return rectangle_;
 }
 hismatova::triangle* hismatova::createTriangle(std::istream& in)
 {
-  point_t p1, p2, p3;
-  in >> p1 >> p2 >> p3;
-  if ((p1.x == p2.x && p1.y == p2.y) || (p1.x == p3.x && p1.y == p3.y) || (p3.x == p2.x && p3.y == p2.y))
+  double x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
+  in >> x1 >> y2 >> x2 >> y2 >> x3 >> y3;
+  if ((x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3) || (x3 == x2 && y3 == y2))
   {
-    throw std::wrong_arg("triangle cannot be built");
+    throw std::invalid_argument("triangle cannot be built");
   }
-  triangle* triangle_ = new triangle(p1, p2, p3);
+  triangle* triangle_ = new triangle({ x1, y1 }, { x2, y2 }, { x3, y3 });
   return triangle_;
 }
 hismatova::concave* hismatova::createConcave(std::istream& in)
 {
-  point_t p1, p2, p3, p4;
-  in >> p1 >> p2 >> p3 >> p4;
-  concave* concave_ = new concave(p1, p2, p3, p4);
+  double x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0, x4 = 0, y4 = 0;
+  in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
+  concave* concave_ = new concave( { x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 });
   return concave_;
 }

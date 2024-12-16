@@ -4,17 +4,18 @@
 
 namespace hismatova
 {
-  struct rectangle : public shape
+  class rectangle : public shape
   {
+  public:
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void move(double x, double y) override;
-    void move(point_t point) override;
+    void move(double dx, double dy) override;
+    void move(const point_t& newPos) override;
     void scale(double index) override;
-    rectangle(double left_x, double left_y, double right_x, double right_y);
+    rectangle(const point_t& bottomLeft, const point_t& topRight);
   private:
-    point_t left_;
-    point_t right_;
+    point_t bottomLeft_;
+    point_t topRight_;
   };
 }
 

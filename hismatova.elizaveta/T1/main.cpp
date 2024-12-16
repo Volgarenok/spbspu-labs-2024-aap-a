@@ -1,6 +1,6 @@
 #include <iostream>
-#include "createFigures.hpp"
-#include "shape.hpp"
+#include <iomanip>
+#include "createFigure.hpp"
 
 namespace hismatova
 {
@@ -14,22 +14,24 @@ namespace hismatova
   void results(shape** figures, size_t count)
   {
     double sum = 0;
-     for (size_t i = 0; i < count; i++)
-     {
-       if (figures[i])
-       {
-         sum = sum + figures[i].getArea();
-       }
-     }
-     std::cout << std::fixed << std::setprecision(1) << sum;
-     for (size_t i = 0; i < count; i++)
-     {
-       if (figures[i])
-       {
-         rectangle_t FrameRect = figures[i].getFrameRect();
-         std:: cout << FrameRect.pos.x - FrameRect.width / 2 << " " << FrameRect.pos.y - FrameRect.height / 2 << " " << FrameRect.pos.x + FrameRect.width />       }
-     }
-     std::cout << "\n";
+    for (size_t i = 0; i < count; i++)
+    {
+      if (figures[i])
+      {
+        sum = sum + figures[i]->getArea();
+      }
+    }
+    std::cout << std::fixed << std::setprecision(1) << sum;
+    for (size_t i = 0; i < count; i++)
+    {
+      if (figures[i])
+      {
+        rectangle_t FrameRect = figures[i]->getFrameRect();
+        std::cout << FrameRect.pos.x - FrameRect.width / 2 << " " << FrameRect.pos.y - FrameRect.height / 2 << " ";
+        std::cout << FrameRect.pos.x + FrameRect.width / 2 << " " << FrameRect.pos.y + FrameRect.height / 2;
+      }
+    }
+    std::cout << "\n";
   }
 }
 int main()
@@ -45,10 +47,10 @@ int main()
     {
       try
       {
-        figures[count] = hismatova::createRectangle(std::cin)
+        figures[count] = hismatova::createRectangle(std::cin);
         count++;
       }
-      catch (const std::wrong_arg&)
+      catch (const std::invalid_argument&)
       {
         errors = true;
       }
@@ -65,7 +67,7 @@ int main()
         figures[count] = hismatova::createTriangle(std::cin);
         count++;
       }
-      catch (const std::wrong_arg&)
+      catch (const std::invalid_argument&)
       {
         errors = true;
       }
@@ -82,7 +84,7 @@ int main()
         figures[count] = hismatova::createConcave(std::cin);
         count++;
       }
-      catch (const std::wrong_arg&)
+      catch (const std::invalid_argument&)
       {
         errors = true;
       }
@@ -94,6 +96,11 @@ int main()
     }
     else if (nameFigure == "SCALE")
     {
+     if (count == 0)
+     {
+       std::cerr << "there is no figures";
+       hismatova::deleteFigures(figures, count);
+     }
      double x = 0, y = 0;
      hismatova::point_t point_;
      std::cin >> x >> y;
@@ -111,16 +118,27 @@ int main()
      hismatova::results(figures, count);
      for (size_t i = 0; i < count; i++)
      {
-       hismatova::point_t pos = figures[i].getFrameRect().pos;
-       figures[i].move(point);
-       hismatova::point_t pos2 = figures[i].getFrameRect().pos;
+       hismatova::point_t pos = figures[i]->getFrameRect().pos;
+       figures[i]->move(point_);
+       hismatova::point_t pos2 = figures[i]->getFrameRect().pos;
        hismatova::point_t p2;
        p2.x = (pos2.x - pos.x) * index;
        p2.y = (pos2.y - pos.y) * index;
-       figures[i].scale(index);
-       figures[i].move(-p2.x, -p2.y);
+       figures[i]->scale(index);
+       figures[i]->move(-1 * p2.x, -1 * p2.y);
      }
      hismatova::results(figures, count);
+     break;
     }
+  }
+  if (!scales)
+  {
+    std::cerr << "incorrect input\n";
+    hismatova::deleteFigures(figures, count);
+    return 1;
+  }
+  else if (errors)
+  {
+    std::cerr << "error in parametrs\n";
   }
 }
