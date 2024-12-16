@@ -4,9 +4,7 @@
 
 asafov::Ring::Ring(point_t pos, double radi, double rado):
 center(pos), radiusi(radi), radiuso(rado)
-{
-  
-}
+{}
 
 double asafov::Ring::getArea() const
 {

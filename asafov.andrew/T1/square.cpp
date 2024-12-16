@@ -3,9 +3,7 @@
 
 asafov::Square::Square(point_t a, double s):
 lb(a), side(s)
-{
-  
-}
+{}
 
 double asafov::Square::getArea() const
 {

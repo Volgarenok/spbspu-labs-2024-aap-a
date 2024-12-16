@@ -4,9 +4,7 @@
 
 asafov::Ellipse::Ellipse(point_t pos, double radv, double radh):
 center(pos), radiusv(radv), radiush(radh)
-{
-  
-}
+{}
 
 double asafov::Ellipse::getArea() const
 {
