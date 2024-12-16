@@ -5,12 +5,12 @@ namespace kushekbaev
 {
   double getTotalArea(Shape** capacity, size_t shapeCounter)
   {
-    double area = 0;
-    for (size_t i = 0; i < shapeCounter; ++i)
+    double total = 0;
+    for (size_t i = 0; i < shapeCounter; i++)
     {
-      area += capacity[i]->getArea();
+      total += capacity[i] -> getArea();
     }
-    return area;
+    return total;
   }
 
   void scaleEverything(Shape** capacity, size_t shapeCounter, point_t scalePoint, double scaleCoeff)
