@@ -31,9 +31,7 @@ int main()
       {
         if (x1 < x2 && y1 < y2)
         {
-          double width = x2 - x1;
-          double height = y2 - y1;
-          shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2}, width, height);
+          shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
         }
         else
         {
@@ -84,7 +82,12 @@ int main()
       double scaleX, scaleY, factor;
       if (std::cin >> scaleX >> scaleY >> factor && factor > 0)
       {
-       scaleCommandIssued = true;
+        if (shapeCount == 0)
+        {
+          std::cerr << "Error: No shapes to scale\n";
+          continue;
+        }
+        scaleCommandIssued = true;
         for (size_t i = 0; i < shapeCount; ++i)
         {
           shapes[i]->scale(factor);
@@ -125,8 +128,8 @@ int main()
       {
         std::cerr << "Error: Failed to calculate area for shape " << i + 1 << ": " << e.what() << "\n";
       }
-      delete shapes[i];
-      shapes[i] = nullptr;
+      delete shapes[shapeCount - 1];
+      shapes[shapeCount - 1] = nullptr;
     }
   }
   std::cout << "Total area of all shapes: " << totalArea << "\n";

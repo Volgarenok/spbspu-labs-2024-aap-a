@@ -2,15 +2,11 @@
 #include <stdexcept>
 namespace cherkasov
 {
-  Rectangle::Rectangle(point_t lowLeft, point_t upRight, double width, double height)
+  Rectangle::Rectangle(point_t lowLeft, point_t upRight)
   {
     if (lowLeft.x >= upRight.x || lowLeft.y >= upRight.y)
     {
       throw std::logic_error("invalid rectangl coordinates");
-    }
-    if (width <= 0 || height <= 0)
-    {
-      throw std::logic_error("Width and height must be positive");
     }
   rect.pos = {(lowLeft.x + upRight.x) / 2, (lowLeft.y + upRight.y) / 2};
   rect.width = upRight.x - lowLeft.x;

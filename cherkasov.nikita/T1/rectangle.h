@@ -6,7 +6,7 @@ namespace cherkasov
   class Rectangle : public Shape
   {
   public:
-    Rectangle(point_t lowLeft, point_t upRight, double width, double height);
+    Rectangle(point_t lowLeft, point_t upRight);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;

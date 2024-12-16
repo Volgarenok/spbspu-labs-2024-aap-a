@@ -8,10 +8,13 @@ namespace cherkasov
   point2(point2),
   point3(point3)
   {
-    if (point1.x == point2.x && point1.y == point2.y)
+    if ((point1.x == point2.x && point1.y == point2.y) ||
+      (point1.x == point3.x && point1.y == point3.y) ||
+      (point2.x == point3.x && point2.y == point3.y))
     {
-      throw std::logic_error("points must not coincide");
+      throw std::logic_error("Parallelogram vertices must be distinct");
     }
+
     if (point1.y != point2.y)
     {
       throw std::logic_error("One side must be parallel to the X");
