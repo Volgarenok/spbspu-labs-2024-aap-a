@@ -13,7 +13,6 @@ void petrov::scaleIsotropicallyAndOutputData(point_t scale_point, double k, Shap
     point_t lower_left_corner = { (((*(shape[i])).getFrameRect())[0].x_), (((*(shape[i])).getFrameRect())[0].y_) } ;
     point_t pos = { (((*(shape[i])).getFrameRect())[1].x_), (((*(shape[i])).getFrameRect())[1].y_) };
     point_t upper_right_corner = { (((*(shape[i])).getFrameRect())[2].x_), (((*(shape[i])).getFrameRect())[2].y_) };
-    std::clog << "Check1\n";
     first_all_coordinates[i][0] = lower_left_corner.x_;
     first_all_coordinates[i][1] = lower_left_corner.y_;
     first_all_coordinates[i][2] = upper_right_corner.x_;
@@ -34,7 +33,6 @@ void petrov::scaleIsotropicallyAndOutputData(point_t scale_point, double k, Shap
     second_all_coordinates[i][1] = lower_left_corner.y_;
     second_all_coordinates[i][2] = upper_right_corner.x_;
     second_all_coordinates[i][3] = upper_right_corner.y_;
-    std::cout << "Iteration number: " << i << "\n"; // RAD
   }
   std::cout << first_sum_area;
   for (size_t i = 0; i < count; i++)

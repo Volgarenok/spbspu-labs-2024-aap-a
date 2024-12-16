@@ -66,7 +66,7 @@ void petrov::Triangle::move(double dx, double dy)
   p3_.y_ += dy;
 }
 
-void petrov::Triangle::scale(double k) // ???
+void petrov::Triangle::scale(double k)
 {
   {
     if (k > 1)
