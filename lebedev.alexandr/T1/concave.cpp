@@ -6,14 +6,14 @@ namespace lebedev
 {
   double max(double a, double b, double c)
   {
-    double d = std::max(a, b);
-    return std::max(d, c);
+    double d = std::fmax(a, b);
+    return std::fmax(d, c);
   }
 
   double min(double a, double b, double c)
   {
-    double d = std::min(a, b);
-    return std::min(d, c);
+    double d = std::fmin(a, b);
+    return std::fmin(d, c);
   }
 
   double triangleArea(point_t p1, point_t p2, point_t p3)
