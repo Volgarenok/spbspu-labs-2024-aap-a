@@ -3,6 +3,7 @@
 #include "shapeManipulations.hpp"
 #include "shapeBreeding.hpp"
 #include "shape.hpp"
+#include "shapeManipulations.cpp"
 
 int main()
 {
@@ -11,6 +12,7 @@ int main()
   std::string shapeName;
   bool incorrectRectangleInput = false;
   bool incorrectConcaveInput = false;
+  bool incorrectParallelogramInput = false;
   kushekbaev::point_t scalePoint;
   double scaleCoeff = 0;
 
@@ -44,6 +46,19 @@ int main()
         }
       }
 
+      else if (shapeName == "PARALLELOGRAM")
+      {
+        try
+        {
+          capacity[shapeCounter++] = kushekbaev::makeParallelogram(std::cin);
+        }
+
+        catch (const std::invalid_argument& e)
+        {
+          incorrectParallelogramInput = true;
+        }
+      }
+
       else if (shapeName == "SCALE")
       {
         scalePoint = kushekbaev::makeScale(std::cin);
@@ -66,6 +81,11 @@ int main()
     if (incorrectConcaveInput)
     {
       std::cerr << "Some of inputed concaves were incorrectly inputed" << "\n";
+    }
+
+    if (incorrectParallelogramInput)
+    {
+      std::cerr << "Some of inputed parallelograms were incorrectly inputed" << "\n";
     }
 
     if (shapeCounter == 0)
