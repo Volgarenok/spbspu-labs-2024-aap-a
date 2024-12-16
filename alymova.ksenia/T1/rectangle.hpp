@@ -6,7 +6,7 @@ namespace alymova
 {
   struct Rectangle: public Shape
   {
-    public:
+  public:
     Rectangle(point_t p1, point_t p2);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
@@ -15,8 +15,8 @@ namespace alymova
     void scale(double ratio) override;
   private:
     point_t low_left_, upp_right_;
-    double width_, height_;
-    point_t pos_;
+    double width, height;
+    point_t pos;
     rectangle_t frame_rect_;
   };
 }

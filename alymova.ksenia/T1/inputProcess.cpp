@@ -33,6 +33,7 @@ void alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool&
         {
           delete shapes[shapes_now];
           wrong_shape_flag = true;
+          shapes_now--;
         }
       }
       if (type == "CIRCLE")
@@ -48,6 +49,7 @@ void alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool&
         {
           delete shapes[shapes_now];
           wrong_shape_flag = true;
+          shapes_now--;
         }
       }
       if (type == "SCALE")
@@ -58,6 +60,7 @@ void alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool&
     }
     catch (const std::bad_alloc& e)
     {
+      shapes_now = 0;
       clear(shapes);
       throw;
     }
