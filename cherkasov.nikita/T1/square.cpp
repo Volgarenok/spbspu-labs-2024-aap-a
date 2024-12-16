@@ -2,32 +2,32 @@
 #include <stdexcept>
 namespace cherkasov
 {
-  Square::Square(point_t lowLeft, double leght)
+  Square::Square(point_t lowLeft, double lenght)
   {
-    if (leght <= 0)
+    if (lenght <= 0)
     {
       throw std::logic_error("leght must positiv");
     }
-    square_.pos = {lowLeft.x + leght / 2, lowLeft.y + leght / 2};
-    square_.width = leght;
-    square_.height = leght;
+    square.pos = {lowLeft.x + lenght / 2, lowLeft.y + lenght / 2};
+    square.width = lenght;
+    square.height = lenght;
   }
   double Square::getArea() const
   {
-    return square_.width * square_.height;
+    return square.width * square.height;
   }
   rectangle_t Square::getFrameRect() const
   {
-    return square_;
+    return square;
   }
   void Square::move(point_t c)
   {
-    square_.pos = c;
+    square.pos = c;
   }
   void Square::move(double dx, double dy)
   {
-    square_.pos.x += dx;
-    square_.pos.y += dy;
+    square.pos.x += dx;
+    square.pos.y += dy;
   }
   void Square::scale(double k)
   {
@@ -35,7 +35,7 @@ namespace cherkasov
     {
       throw std::logic_error("scale factor must positive");
     }
-  square_.width *= k;
-  square_.height *= k;
+  square.width *= k;
+  square.height *= k;
   }
 }

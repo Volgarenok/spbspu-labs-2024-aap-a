@@ -4,10 +4,14 @@
 namespace cherkasov
 {
   Parallelogram::Parallelogram(point_t point1, point_t point2, point_t point3):
-  point1_(point1),
-  point2_(point2),
-  point3_(point3)
+  point1(point1),
+  point2(point2),
+  point3(point3)
   {
+    if (point1.x == point2.x && point1.y == point2.y)
+    {
+      throw std::logic_error("points must not coincide");
+    }
     if (point1.y != point2.y)
     {
       throw std::logic_error("One side must be parallel to the X");
@@ -16,42 +20,42 @@ namespace cherkasov
   }
   void Parallelogram::calculateCenter()
   {
-    length_ = std::abs(point2_.x - point1_.x);
-    height_ = std::abs(point3_.y - point1_.y);
-    center_.x = (point1_.x + point2_.x + point3_.x + (point3_.x - point1_.x)) / 4;
-    center_.y = (point1_.y + point2_.y + point3_.y + (point3_.y - point2_.y)) / 4;
+    length = std::abs(point2.x - point1.x);
+    height = std::abs(point3.y - point1.y);
+    center.x = (point1.x + point2.x + point3.x + (point3.x - point1.x)) / 4;
+    center.y = (point1.y + point2.y + point3.y + (point3.y - point2.y)) / 4;
   }
   double Parallelogram::getArea() const
   {
-    return length_ * height_;
+    return length * height;
   }
 
   rectangle_t Parallelogram::getFrameRect() const
   {
-    return {length_, height_, center_};
+    return {length, height, center};
   }
   void Parallelogram::move(point_t c)
   {
-    double dx = c.x - center_.x;
-    double dy = c.y - center_.y;
-    point1_.x += dx;
-    point1_.y += dy;
-    point2_.x += dx;
-    point2_.y += dy;
-    point3_.x += dx;
-    point3_.y += dy;
-    center_ = c;
+    double dx = c.x - center.x;
+    double dy = c.y - center.y;
+    point1.x += dx;
+    point1.y += dy;
+    point2.x += dx;
+    point2.y += dy;
+    point3.x += dx;
+    point3.y += dy;
+    center = c;
   }
   void Parallelogram::move(double dx, double dy)
   {
-    point1_.x += dx;
-    point1_.y += dy;
-    point2_.x += dx;
-    point2_.y += dy;
-    point3_.x += dx;
-    point3_.y += dy;
-    center_.x += dx;
-    center_.y += dy;
+    point1.x += dx;
+    point1.y += dy;
+    point2.x += dx;
+    point2.y += dy;
+    point3.x += dx;
+    point3.y += dy;
+    center.x += dx;
+    center.y += dy;
   }
   void Parallelogram::scale(double k)
   {
@@ -59,12 +63,12 @@ namespace cherkasov
     {
       throw std::logic_error("Scale factor must be positive");
     }
-    point1_.x = center_.x + (point1_.x - center_.x) * k;
-    point1_.y = center_.y + (point1_.y - center_.y) * k;
-    point2_.x = center_.x + (point2_.x - center_.x) * k;
-    point2_.y = center_.y + (point2_.y - center_.y) * k;
-    point3_.x = center_.x + (point3_.x - center_.x) * k;
-    point3_.y = center_.y + (point3_.y - center_.y) * k;
+    point1.x = center.x + (point1.x - center.x) * k;
+    point1.y = center.y + (point1.y - center.y) * k;
+    point2.x = center.x + (point2.x - center.x) * k;
+    point2.y = center.y + (point2.y - center.y) * k;
+    point3.x = center.x + (point3.x - center.x) * k;
+    point3.y = center.y + (point3.y - center.y) * k;
     calculateCenter();
   }
 }

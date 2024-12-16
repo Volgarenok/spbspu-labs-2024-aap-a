@@ -13,7 +13,7 @@ namespace cherkasov
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    rectangle_t rect_;
+    rectangle_t rect;
   };
 }
 #endif

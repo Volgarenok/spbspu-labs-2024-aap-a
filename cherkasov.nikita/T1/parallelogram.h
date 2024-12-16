@@ -13,12 +13,12 @@ namespace cherkasov
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    point_t point1_;
-    point_t point2_;
-    point_t point3_;
-    point_t center_;
-    double length_;
-    double height_;
+    point_t point1;
+    point_t point2;
+    point_t point3;
+    point_t center;
+    double length;
+    double height;
     void calculateCenter();
   };
 }
