@@ -25,11 +25,11 @@ int main() // Valgrind will argue... Yes
   char * type_of_shape = nullptr;
   char ** description = nullptr;
   size_t number_of_doubles = 8;
+  petrov::Rectangle * ptr_rectangle = nullptr;
+  petrov::Triangle * ptr_triangle = nullptr;
+  petrov::Concave * ptr_concave = nullptr;
   while (true)
   {
-    petrov::Rectangle * ptr_rectangle = nullptr;
-    petrov::Triangle * ptr_triangle = nullptr;
-    petrov::Concave * ptr_concave = nullptr;
     size_t capacity = 1;
     size_t created = 0;
     try
@@ -52,11 +52,11 @@ int main() // Valgrind will argue... Yes
         length_of_word++;
       }
       length_of_word++;
-      type_of_shape = new char[length_of_word];
+      type_of_shape = new char[length_of_word + 1];
       description = new char * [number_of_doubles];
       for (size_t i = 0; i < number_of_doubles; i++)
       {
-        description[i] = new char[capacity];
+        description[i] = new char[capacity + 1];
         created++;
       }
     }
