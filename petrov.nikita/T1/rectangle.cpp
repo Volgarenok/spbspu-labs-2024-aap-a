@@ -80,8 +80,8 @@ void petrov::Rectangle::scale(double k)
     }
     else
     {
-      double dx = (frame_rect_.width_ * (1 - k)) / 2;
-      double dy = (frame_rect_.height_ * (1 - k)) / 2;
+      double dx = (frame_rect_.width_ / 2) * (1 - k);
+      double dy = (frame_rect_.height_ / 2) * (1 - k);
       p1_.x_ += dx;
       p1_.y_ += dy;
       p2_.x_ += dx;
