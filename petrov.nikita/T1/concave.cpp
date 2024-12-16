@@ -50,7 +50,7 @@ double petrov::Concave::getArea() // Here you can use variables more effictively
   double area_without_cave = sqrt(p_1 * (p_1 - a_1) * (p_1 - b_1) * (p_1 - c_1));
   double a_2 = sqrt(pow((p4_.x_ - p2_.x_), 2) + pow((p4_.y_ - p2_.y_), 2));
   double b_2 = sqrt(pow((p3_.x_ - p2_.x_), 2) + pow((p3_.y_ - p2_.y_), 2));
-  double c_2 = sqrt(pow((p1_.x_ - p4_.x_), 2) + pow((p1_.y_ - p4_.y_), 2));
+  double c_2 = sqrt(pow((p2_.x_ - p4_.x_), 2) + pow((p2_.y_ - p4_.y_), 2));
   double p_2 = (a_2 + b_2 + c_2) / 2;
   double area_of_cave = sqrt(p_2 * (p_2 - a_2) * (p_2 - b_2) * (p_2 - c_2));
   return area_without_cave - area_of_cave;
