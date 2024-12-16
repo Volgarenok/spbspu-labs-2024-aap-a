@@ -128,8 +128,8 @@ int main()
       {
         std::cerr << "Error: Failed to calculate area for shape " << i + 1 << ": " << e.what() << "\n";
       }
-      delete shapes[shapeCount - 1];
-      shapes[shapeCount - 1] = nullptr;
+      delete shapes[i];
+      shapes[i] = nullptr;
     }
   }
   std::cout << "Total area of all shapes: " << totalArea << "\n";
