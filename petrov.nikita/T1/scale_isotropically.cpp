@@ -27,7 +27,6 @@ void petrov::scaleIsotropicallyAndOutputData(point_t scale_point, double k, Shap
     mv_dy *= k;
     (*(shape[i])).move(mv_dx, mv_dy);
     lower_left_corner = { (((*(shape[i])).getFrameRect())[0].x_), (((*(shape[i])).getFrameRect())[0].y_) };
-    std::clog << lower_left_corner.y_ << "HERE\n";
     pos = { (((*(shape[i])).getFrameRect())[1].x_), (((*(shape[i])).getFrameRect())[1].y_) };
     upper_right_corner = { (((*(shape[i])).getFrameRect())[2].x_), (((*(shape[i])).getFrameRect())[2].y_) };
     second_all_coordinates[i][0] = lower_left_corner.x_;
