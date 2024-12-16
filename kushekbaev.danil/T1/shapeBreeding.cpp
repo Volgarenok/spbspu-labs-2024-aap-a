@@ -59,7 +59,7 @@ bool isPointInsideTriangle(point_t first, point_t second, point_t third, point_t
     kushekbaev::point_t third { 0, 0 };
     kushekbaev::point_t final { 0, 0 };
 
-    std::cin >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y >> final.x >> final.y;
+    input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y >> final.x >> final.y;
     if (!kushekbaev::isTriangle(first, second, third))
     {
       throw (std::invalid_argument("First three points doesnt make a triangle\n"));
