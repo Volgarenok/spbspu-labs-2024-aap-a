@@ -1,4 +1,5 @@
 #include "triangle.hpp"
+#include "base-types.hpp"
 #include <cmath>
 #include <algorithm>
 petrov::Triangle::Triangle(petrov::point_t p1, petrov::point_t p2, petrov::point_t p3):

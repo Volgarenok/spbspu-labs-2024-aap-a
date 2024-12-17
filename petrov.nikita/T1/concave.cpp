@@ -1,4 +1,5 @@
 #include "concave.hpp"
+#include "base-types.hpp"
 #include <cmath>
 #include <algorithm>
 petrov::Concave::Concave(petrov::point_t p1, petrov::point_t p2, petrov::point_t p3, petrov::point_t p4):

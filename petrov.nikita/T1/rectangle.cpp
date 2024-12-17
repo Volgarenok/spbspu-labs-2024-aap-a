@@ -1,4 +1,5 @@
 #include "rectangle.hpp"
+#include "base-types.hpp"
 #include <cmath>
 petrov::Rectangle::Rectangle(petrov::point_t p1, petrov::point_t p2):
   p1_(p1),
