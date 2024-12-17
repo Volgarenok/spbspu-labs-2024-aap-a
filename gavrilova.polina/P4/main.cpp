@@ -5,7 +5,8 @@
 int main()
 {
   size_t len = 0;
-  char* first_str = gavrilova::inputStr(std::cin, len);
+  size_t nSpaces = 0;
+  char* first_str = gavrilova::inputStr(std::cin, len, nSpaces);
 
   if (!first_str) {
     std::cerr << "Memory error\n";
