@@ -123,12 +123,12 @@ int main()
       for (size_t i = 0; i < count; i++)
       {
         hismatova::point_t pos = figures[i]->getFrameRect().pos;
-        figures[i]->scale(index);
-        figures[i]->move(point_.x - pos.x, point_.y - pos.y);
+        figures[i]->move(point_);
         hismatova::point_t pos2 = figures[i]->getFrameRect().pos;
         hismatova::point_t p2;
         p2.x = (pos2.x - pos.x) * index;
         p2.y = (pos2.y - pos.y) * index;
+        figures[i]->scale(index);
         figures[i]->move(-1 * p2.x, -1 * p2.y);
       }
       hismatova::results(figures, count);
