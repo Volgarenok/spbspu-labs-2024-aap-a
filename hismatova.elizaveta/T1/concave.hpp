@@ -4,10 +4,10 @@
 
 namespace hismatova
 {
-  class concave: public shape
+  class Concave: public Shape
   {
   public:
-    concave(const point_t& a, const point_t& b, const point_t& c, const point_t& d);
+    Concave(const point_t& a, const point_t& b, const point_t& c, const point_t& d);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(double dx, double dy) override;

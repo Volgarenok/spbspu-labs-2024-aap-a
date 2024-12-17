@@ -7,9 +7,9 @@
 
 namespace hismatova
 {
-  hismatova::rectangle* createRectangle(std::istream& in);
-  hismatova::triangle* createTriangle(std::istream& in);
-  hismatova::concave* createConcave(std::istream& in);
+  hismatova::Rectangle* createRectangle(std::istream& in);
+  hismatova::Triangle* createTriangle(std::istream& in);
+  hismatova::Concave* createConcave(std::istream& in);
 }
 
 #endif

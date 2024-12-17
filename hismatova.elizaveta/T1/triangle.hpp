@@ -4,10 +4,10 @@
 
 namespace hismatova
 {
-  class triangle : public shape
+  class Triangle : public Shape
   {
   public:
-    triangle(const point_t& a, const point_t& b, const point_t& c);
+    Triangle(const point_t& a, const point_t& b, const point_t& c);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(double dx, double dy) override;

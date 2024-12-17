@@ -4,16 +4,16 @@
 
 namespace hismatova
 {
-  void deleteFigures(shape** figures, size_t size)
+  void deleteFigures(Shape** figures, size_t size)
   {
     for (size_t i = 0; i < size; i++)
     {
       delete figures[i];
     }
   }
-  void results(shape** figures, size_t count)
+  void results(Shape** figures, size_t count)
   {
-    double sum = 0;
+    double sum = 0.0;
     for (size_t i = 0; i < count; i++)
     {
       if (figures[i])
@@ -27,8 +27,8 @@ namespace hismatova
       if (figures[i])
       {
         rectangle_t FrameRect = figures[i]->getFrameRect();
-        std::cout << " " << FrameRect.pos.x - FrameRect.width / 2 << " " << FrameRect.pos.y - FrameRect.height / 2 << " ";
-        std::cout << FrameRect.pos.x + FrameRect.width / 2 << " " << FrameRect.pos.y + FrameRect.height / 2;
+        std::cout << " " << FrameRect.pos.x - FrameRect.width / 2.0 << " " << FrameRect.pos.y - FrameRect.height / 2.0 << " ";
+        std::cout << FrameRect.pos.x + FrameRect.width / 2.0 << " " << FrameRect.pos.y + FrameRect.height / 2.0;
       }
     }
     std::cout << "\n";
@@ -39,9 +39,9 @@ int main()
   size_t count = 0;
   bool errors = false;
   bool scales = false;
-  hismatova::shape* figures[10000];
+  hismatova::Shape* figures[10000];
   std::string nameFigure;
-  while(std::cin >> nameFigure)
+  while (std::cin >> nameFigure)
   {
     if (nameFigure == "RECTANGLE")
     {
@@ -101,7 +101,7 @@ int main()
     {
       if (count == 0)
       {
-        std::cerr << "there is no figures";
+        std::cerr << "there is no figures\n";
         hismatova::deleteFigures(figures, count);
         return 1;
       }
@@ -133,10 +133,6 @@ int main()
       }
       hismatova::results(figures, count);
       break;
-    }
-    else
-    {
-      std::cout << "untracked figure:" << nameFigure;
     }
   }
   if (!scales)

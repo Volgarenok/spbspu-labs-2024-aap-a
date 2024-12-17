@@ -3,16 +3,16 @@
 #include <algorithm>
 #include <stdexcept>
 
-hismatova::triangle::triangle(const point_t &a, const point_t &b, const point_t &c):
+hismatova::Triangle::Triangle(const point_t &a, const point_t &b, const point_t &c):
   a_(a),
   b_(b),
   c_(c)
 {}
-double hismatova::triangle::getArea() const
+double hismatova::Triangle::getArea() const
 {
   return 0.5 * std::abs(a_.x * (b_.y - c_.y) + b_.x * (c_.y - a_.y) + c_.x * (a_.y - b_.y));
 }
-hismatova::rectangle_t hismatova::triangle::getFrameRect() const
+hismatova::rectangle_t hismatova::Triangle::getFrameRect() const
 {
   double minX = std::min({a_.x, b_.x, c_.x});
   double maxX = std::max({a_.x, b_.x, c_.x});
@@ -20,14 +20,14 @@ hismatova::rectangle_t hismatova::triangle::getFrameRect() const
   double maxY = std::max({a_.y, b_.y, c_.y});
   return {maxX - minX, maxY - minY, {(minX + maxX) / 2, (minY + maxY) / 2}};
 }
-void hismatova::triangle::move(const point_t &newPos)
+void hismatova::Triangle::move(const point_t &newPos)
 {
   point_t centroid = getCentroid();
   double dx = newPos.x - centroid.x;
   double dy = newPos.y - centroid.y;
   move(dx, dy);
 }
-void hismatova::triangle::move(double dx, double dy)
+void hismatova::Triangle::move(double dx, double dy)
 {
   a_.x += dx;
   a_.y += dy;
@@ -36,7 +36,7 @@ void hismatova::triangle::move(double dx, double dy)
   c_.x += dx;
   c_.y += dy;
 }
-void hismatova::triangle::scale(double index)
+void hismatova::Triangle::scale(double index)
 {
   if (index <= 0)
   {
@@ -50,7 +50,7 @@ void hismatova::triangle::scale(double index)
   c_.x = centroid.x + (c_.x - centroid.x) * index;
   c_.y = centroid.y + (c_.y - centroid.y) * index;
 }
-hismatova::point_t hismatova::triangle::getCentroid() const
+hismatova::point_t hismatova::Triangle::getCentroid() const
 {
   return {(a_.x + b_.x + c_.x) / 3, (a_.y + b_.y + c_.y) / 3};
 }

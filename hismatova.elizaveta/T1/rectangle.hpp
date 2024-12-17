@@ -4,7 +4,7 @@
 
 namespace hismatova
 {
-  class rectangle : public shape
+  class Rectangle : public Shape
   {
   public:
     double getArea() const override;
@@ -12,7 +12,7 @@ namespace hismatova
     void move(double dx, double dy) override;
     void move(const point_t& newPos) override;
     void scale(double index) override;
-    rectangle(const point_t& bottomLeft, const point_t& topRight);
+    Rectangle(const point_t& bottomLeft, const point_t& topRight);
   private:
     point_t bottomLeft_;
     point_t topRight_;
