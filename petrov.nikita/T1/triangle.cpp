@@ -77,7 +77,7 @@ void petrov::Triangle::scale(double k)
       p3_.x += dx;
       p3_.y += dy;
       frame_rect_.height *= k;
-      frame_rect_.width *- k;
+      frame_rect_.width *= k;
     }
     else
     {
