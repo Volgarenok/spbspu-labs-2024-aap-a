@@ -2,6 +2,7 @@
 #define CONCAVE_HPP
 #include "shape.hpp"
 #include "base-types.hpp"
+#include "triangle.hpp"
 namespace petrov
 {
   struct Concave: petrov::Shape
