@@ -1,6 +1,5 @@
 #ifndef BASE_TYPES_HPP
 #define BASE_TYPES_HPP
-
 namespace gavrilova {
   struct point_t {
     double x;
@@ -12,5 +11,4 @@ namespace gavrilova {
     point_t pos;
   };
 }
-
 #endif

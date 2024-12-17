@@ -1,7 +1,7 @@
 #include "polygon.hpp"
-#include "base-types.hpp"
 #include <cmath>
 #include <iostream>
+#include "base-types.hpp"
 
 gavrilova::Polygon::Polygon(size_t size, point_t * verteces):
 size_(size), verteces_(verteces)

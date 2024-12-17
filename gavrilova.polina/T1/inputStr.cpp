@@ -2,6 +2,7 @@
 #include <istream>
 #include <cstring>
 #include <iostream>
+
 char* gavrilova::inputStr(std::istream& in, size_t & len, size_t & nSpaces)
 {
   char* result_str = nullptr;

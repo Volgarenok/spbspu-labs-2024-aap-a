@@ -1,6 +1,6 @@
 #include "rectangle.hpp"
-#include "base-types.hpp"
 #include <iostream>
+#include "base-types.hpp"
 
 gavrilova::Rectangle::Rectangle(point_t pBottomLeft, point_t pTopRight):
   pBottomLeft_({0,0}), pTopRight_({0,0}) {

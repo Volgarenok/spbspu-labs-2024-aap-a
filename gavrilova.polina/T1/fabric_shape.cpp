@@ -1,14 +1,15 @@
 #include "fabric_shape.hpp"
 #include <cstdlib>
-#include "inputStr.hpp"
 #include <cstring>
+#include <iostream>
+#include <cstddef>
 #include "base-types.hpp"
 #include "rectangle.hpp"
 #include "triangle.hpp"
 #include "polygon.hpp"
 #include "shape.hpp"
-#include <iostream>
-#include <cstddef>
+#include "inputStr.hpp"
+
 namespace {
   bool hasSameVerteces(gavrilova::point_t * verteces, size_t size) {
     for (size_t i = 0; i < size; ++i) {

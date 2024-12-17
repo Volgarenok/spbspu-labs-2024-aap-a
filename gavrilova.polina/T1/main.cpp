@@ -1,8 +1,9 @@
 #include <iostream>
 #include <ostream>
+#include <iomanip>
 #include <string>
 #include "fabric_shape.hpp"
-#include <iomanip>
+
 namespace gavrilova {
   void scaleShape(Shape & shape, const point_t & center, double k) {
     point_t pos1 = shape.getFrameRect().pos;
