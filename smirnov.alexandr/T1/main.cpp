@@ -19,7 +19,7 @@ int main()
     if (std::cin.eof())
     {
       smirnov::destroyShapes(shapes, countShapes);
-      std::cerr << "Incorrect input\n";
+      std::cerr << "EOF input\n";
       return 1;
     }
     if (shapeType == "RECTANGLE")
@@ -69,6 +69,7 @@ int main()
         destroyShapes(shapes, countShapes);
         std::cerr << "Incorrect scale\n";
       }
+      break;
     }
   }
   if (countShapes == 0)
@@ -78,7 +79,7 @@ int main()
   }
   if (hasError)
   {
-    std::cerr << "incorrect shape size\n";
+    std::cerr << "Incorrect shape size\n";
     return 1;
   }
   std::cout << std::fixed;
@@ -88,5 +89,6 @@ int main()
   smirnov::scaleShapes(shapes, countShapes, centerPoint, scaleFactor);
   std::cout << smirnov::sumArea(shapes, countShapes);
   smirnov::printFrameRect(shapes, countShapes);
+  std::cout << "\n";
   smirnov::destroyShapes(shapes, countShapes);
 }
