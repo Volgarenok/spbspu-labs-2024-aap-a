@@ -19,7 +19,7 @@ int main()
     if (std::cin.eof())
     {
       std::cerr << "Incorrect scale\n";
-      smirnov::destroyShape(shapes, shapeCount);
+      smirnov::destroyShapes(shapes, shapeCount);
       return 1;
     }
     std::cin >> nameShape;
@@ -57,7 +57,7 @@ int main()
       catch (const std::bad_alloc & e)
       {
         std::cerr << "Out of memory\n";
-        smirnov::destroyShape(shapes, shapeCount);
+        smirnov::destroyShapes(shapes, shapeCount);
         return 1;
       }
       catch (const std::invalid_argument & e)
@@ -78,7 +78,7 @@ int main()
   if (k <= 0)
   {
     std::cerr << "Incorrect scale\n";
-    smirnov::destroyShape(shapes, shapeCount);
+    smirnov::destroyShapes(shapes, shapeCount);
     return 1;
   }
   if (shapeCount == 0)
@@ -90,10 +90,10 @@ int main()
   std::cout.precision(1);
   std::cout << smirnov::sumArea(shapes, shapeCount);
   smirnov::printFrameRect(shapes, shapeCount);
-  smirnov::scaleShape(shapes, shapeCount, scaleCenter, k);
+  smirnov::scaleShapes(shapes, shapeCount, scaleCenter, k);
   std::cout << smirnov::sumArea(shapes, shapeCount);
   smirnov::printFrameRect(shapes, shapeCount);
-  smirnov::destroyShape(shapes, shapeCount);
+  smirnov::destroyShapes(shapes, shapeCount);
   if (flag)
   {
     std::cerr << "There is an incorrect shape\n";

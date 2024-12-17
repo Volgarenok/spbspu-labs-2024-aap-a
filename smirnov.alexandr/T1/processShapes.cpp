@@ -11,7 +11,7 @@ double smirnov::sumArea(Shape ** shapes, size_t count)
   return sumArea;
 }
 
-void smirnov::destroyShape(Shape ** shapes, size_t count)
+void smirnov::destroyShapes(Shape ** shapes, size_t count)
 {
   for (size_t i = 0; i < count; i++)
   {
@@ -33,7 +33,7 @@ void smirnov::printFrameRect(Shape ** shapes, size_t count)
   std::cout << "\n";
 }
 
-void smirnov::scaleShape(Shape ** shapes, size_t count, point_t p, double factor)
+void smirnov::scaleShapes(Shape ** shapes, size_t count, point_t p, double factor)
 {
   for (size_t i = 0; i < count; i++)
   {
@@ -47,3 +47,4 @@ void smirnov::scaleShape(Shape ** shapes, size_t count, point_t p, double factor
     shapes[i]->move(-vector.x, -vector.y);
   }
 }
+
