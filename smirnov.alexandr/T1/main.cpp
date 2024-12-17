@@ -78,11 +78,6 @@ int main()
     std::cerr << "No figures found\n";
     return 1;
   }
-  if (hasError)
-  {
-    std::cerr << "Incorrect shape size\n";
-    return 1;
-  }
   std::cout << std::fixed;
   std::cout.precision(1);
   std::cout << smirnov::sumArea(shapes, countShapes);
@@ -90,6 +85,9 @@ int main()
   smirnov::scaleShapes(shapes, countShapes, centerPoint, scaleFactor);
   std::cout << smirnov::sumArea(shapes, countShapes);
   smirnov::printFrameRect(shapes, countShapes);
-  std::cout << "\n";
   smirnov::destroyShapes(shapes, countShapes);
+  if (hasError)
+  {
+    std::cerr << "Incorrect shape size\n";
+  }
 }
