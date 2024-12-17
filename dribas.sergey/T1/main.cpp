@@ -3,11 +3,12 @@
 #include "getShapeInfo.hpp"
 #include "shape.hpp"
 
-void clearStr(char** stack, size_t stackSize){
+void clearStr(char** stack, size_t stackSize)
+{
   for (size_t i = 0; *(stack+i) && i <stackSize; i++) {
     free(*(stack + i));
-    }
-     }
+  }
+}
 
 int main()
 {
