@@ -31,7 +31,7 @@ petrov::rectangle_t petrov::Rectangle::getFrameRect() const
 void petrov::Rectangle::move(petrov::point_t concrete_point)
 {
   double dx = concrete_point.x - frame_rect_.pos.x;
-  double dy = concrete_point.y - frame_rect_.pos.x;
+  double dy = concrete_point.y - frame_rect_.pos.y;
   frame_rect_.pos.x = concrete_point.x;
   frame_rect_.pos.y = concrete_point.y;
   p1_.x += dx;
