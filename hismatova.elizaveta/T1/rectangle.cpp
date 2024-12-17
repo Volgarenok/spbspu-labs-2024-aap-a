@@ -8,16 +8,16 @@ hismatova::Rectangle::Rectangle(const point_t& bottomLeft, const point_t& topRig
 {}
 double hismatova::Rectangle::getArea() const
 {
-  double width = std::abs(topRight_.x - bottomLeft_.x);
-  double height = std::abs(topRight_.y - bottomLeft_.y);
+  double width = topRight_.x - bottomLeft_.x;
+  double height = topRight_.y - bottomLeft_.y;
   return width * height;
 }
 hismatova::rectangle_t hismatova::Rectangle::getFrameRect() const
 {
-  double width = std::abs(topRight_.x - bottomLeft_.x);
-  double height = std::abs(topRight_.y - bottomLeft_.y);
-  hismatova::point_t center = { (bottomLeft_.x + topRight_.x) / 2.0, (bottomLeft_.y + topRight_.y) / 2.0 };
-  return {width, height, center};
+  double width = topRight_.x - bottomLeft_.x;
+  double height = topRight_.y - bottomLeft_.y;
+  hismatova::point_t center = { bottomLeft_.x + width / 2.0, bottomLeft_.y + height / 2.0 };
+  return {center, width, height};
 }
 void hismatova::Rectangle::move(const point_t &newPos)
 {
