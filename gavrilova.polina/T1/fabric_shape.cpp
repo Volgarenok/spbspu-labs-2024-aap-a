@@ -3,12 +3,12 @@
 #include <cstring>
 #include <iostream>
 #include <cstddef>
+#include <inputStr.hpp>
 #include "base-types.hpp"
 #include "rectangle.hpp"
 #include "triangle.hpp"
 #include "polygon.hpp"
 #include "shape.hpp"
-#include "inputStr.hpp"
 
 namespace {
   bool hasSameVerteces(gavrilova::point_t * verteces, size_t size) {
