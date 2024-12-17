@@ -7,9 +7,9 @@ namespace smirnov
   class Diamond : public Shape
   {
   private:
-    point_t center;
-    double diagonal1;
-    double diagonal2;
+    point_t vertex1;
+    point_t vertex2;
+    point_t vertex3;
   public:
     Diamond(double x1, double y1, double x2, double y2, double x3, double y3);
     double getArea() const override;

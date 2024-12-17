@@ -17,7 +17,7 @@ smirnov::Rectangle * smirnov::createRectangle(std::istream & in)
 
 smirnov::Square * smirnov::createSquare(std::istream & in)
 {
-  double x = 0.0
+  double x = 0.0;
   double y = 0.0;
   double length = 0.0;
   in >> x >> y >> length;
