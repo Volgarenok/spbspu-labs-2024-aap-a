@@ -23,14 +23,16 @@ int main()
   }
   catch (const std::bad_alloc & e)
   {
+    delete[] res;
     std::cerr << "Out of memory\n";
     return 1;
   }
   if (str1[0] == '\0')
   {
     delete[] str1;
+    delete[] res;
     std::cerr << "Empty input\n";
-    return 1;
+    return 2;
   }
 
   std::cout << sharifullina::shrSym(str1, str2, res) << '\n';
