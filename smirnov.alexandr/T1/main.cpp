@@ -16,12 +16,6 @@ int main()
   double scaleFactor = 0.0;
   while (std::cin >> shapeType)
   {
-    if (std::cin.eof())
-    {
-      smirnov::destroyShapes(shapes, countShapes);
-      std::cerr << "EOF input\n";
-      return 1;
-    }
     if (shapeType == "RECTANGLE")
     {
       try
@@ -67,9 +61,16 @@ int main()
       if (scaleFactor <= 0)
       {
         destroyShapes(shapes, countShapes);
-        std::cerr << "Incorrect scale\n";
+        std::cerr << "Incorrect scaleFactor\n";
+        return 1;
       }
       break;
+    }
+        if (std::cin.eof())
+    {
+      smirnov::destroyShapes(shapes, countShapes);
+      std::cerr << "EOF input\n";
+      return 1;
     }
   }
   if (countShapes == 0)
