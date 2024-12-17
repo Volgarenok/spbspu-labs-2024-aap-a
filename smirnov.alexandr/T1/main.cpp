@@ -82,6 +82,7 @@ int main()
   }
   if (!checkScale)
   {
+    smirnov::destroyShapes(shapes, countShapes);
     std::cerr << "No Scale Command\n";
     return 1;
   }
