@@ -11,6 +11,7 @@ int main()
   smirnov::Shape * shapes[1000] = {};
   std::string shapeType = "";
   size_t countShapes = 0;
+  bool checkScale = false;
   bool hasError = false;
   smirnov::point_t centerPoint = {0.0, 0.0};
   double scaleFactor = 0.0;
@@ -54,6 +55,7 @@ int main()
     }
     else if (shapeType == "SCALE")
     {
+      checkScale = true;
       double xCoord = 0.0;
       double yCoord = 0.0;
       std::cin >> xCoord >> yCoord >> scaleFactor;
@@ -76,6 +78,11 @@ int main()
   if (countShapes == 0)
   {
     std::cerr << "No figures found\n";
+    return 1;
+  }
+  if (!checkScale)
+  {
+    std::cerr << "No Scale Command\n";
     return 1;
   }
   std::cout << std::fixed;
