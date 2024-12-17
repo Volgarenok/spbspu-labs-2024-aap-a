@@ -31,10 +31,10 @@ hismatova::Concave* hismatova::createConcave(std::istream& in)
   double a1 = 0.5 * std::abs(x4 * (y2 - y3) + x2 * (y3 - y4) + x3 * (y4 - y2));
   double a2 = 0.5 * std::abs(x1 * (y4 - y3) + x4 * (y3 - y1) + x3 * (y1 - y4));
   double a3 = 0.5 * std::abs(x1 * (y2 - y4) + x2 * (y4 - y1) + x4 * (y1 - y2));
-  if (a <= 0 || (a != a1 + a2 + a3))
+  if (a > 0 && (a = a1 + a2 + a3) && a1 > 0 && a2 > 0 && a3 > 0)
   {
-    throw std::invalid_argument("concave cannot be built");
+    Concave* concave_ = new Concave( { x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 });
+    return concave_;
   }
-  Concave* concave_ = new Concave( { x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 });
-  return concave_;
+  throw std::invalid_argument("concave cannot be built");
 }
