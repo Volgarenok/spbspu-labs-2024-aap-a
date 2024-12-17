@@ -2,6 +2,7 @@
 #include "base-types.hpp"
 #include <cmath>
 #include <algorithm>
+#include <iostream>
 petrov::Concave::Concave(petrov::point_t p1, petrov::point_t p2, petrov::point_t p3, petrov::point_t p4):
   p1_(p1),
   p2_(p2),
@@ -60,6 +61,7 @@ double petrov::Concave::getArea() const // Here you can use variables more effic
   c = sqrt(pow((p4_.x - p3_.x), 2) + pow((p4_.y - p3_.y), 2));
   p = (a + b + c) / 2;
   double area_of_cave = sqrt(p * (p - a) * (p - b) * (p - c));
+  std::clog << area_without_cave - area_of_cave << "\n";
   return area_without_cave - area_of_cave;
 }
 
@@ -70,18 +72,15 @@ petrov::rectangle_t petrov::Concave::getFrameRect() const
 
 void petrov::Concave::move(petrov::point_t concrete_point)
 {
-  double dx = concrete_point.x - frame_rect_.pos.x;
-  double dy = concrete_point.y - frame_rect_.pos.y;
   frame_rect_.pos.x = concrete_point.x;
   frame_rect_.pos.y = concrete_point.y;
-  p1_.x += dx;
-  p1_.y += dy;
-  p2_.x += dx;
-  p2_.y += dy;
-  p3_.x += dx;
-  p3_.y += dy;
-  p4_.x += dx;
-  p4_.y += dy;
+  p1_.x = frame_rect_.pos.x - (frame_rect_.width / 2);
+  p1_.y = frame_rect_.pos.y - (frame_rect_.height / 2);
+  p2_.x = frame_rect_.pos.x - (frame_rect_.width / 2);
+  p2_.y = frame_rect_.pos.y + (frame_rect_.height / 2);
+  p3_.x = frame_rect_.pos.x + (frame_rect_.width / 2);
+  p3_.y = frame_rect_.pos.y + (frame_rect_.height / 2);
+  p4_ = { (p1_.x + p2_.x + p3_.x) / 3, (p1_.y + p2_.y + p3_.y) };
 }
 
 void petrov::Concave::move(double dx, double dy)
@@ -96,12 +95,6 @@ void petrov::Concave::move(double dx, double dy)
   p3_.y += dy;
   p4_.x += dx;
   p4_.y += dy;
-  double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
-  double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
-  double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
-  double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
-  frame_rect_.width = abs(xmax - xmin);
-  frame_rect_.height = abs(ymax - ymin);
 }
 
 void petrov::Concave::scale(double k)
@@ -117,28 +110,9 @@ void petrov::Concave::scale(double k)
       p2_.y += dy;
       p3_.x += dx;
       p3_.y += dy;
-      if (p4_.x < frame_rect_.pos.x && p4_.y < frame_rect_.pos.y)
-      {
-        p4_.x -= dx;
-        p4_.y -= dy;
-      }
-      else if (p4_.x > frame_rect_.pos.x && p4_.y > frame_rect_.pos.y)
-      {
-        p4_.x += dx;
-        p4_.y += dy;
-      }
-      else if (p4_.x < frame_rect_.pos.x && p4_.y > frame_rect_.pos.y)
-      {
-        p4_.x -= dx;
-        p4_.y += dy;
-      }
-      else if (p4_.x > frame_rect_.pos.x && p4_.y < frame_rect_.pos.y)
-      {
-        p4_.x += dx;
-        p4_.y -= dy;
-      }
+      p4_ = { (p1_.x + p2_.x + p3_.x) / 3, (p1_.y + p2_.y + p3_.y) / 3 };
       frame_rect_.height *= k;
-      frame_rect_.width *= k;
+      frame_rect_.width *= k;    
     }
     else
     {
@@ -150,28 +124,9 @@ void petrov::Concave::scale(double k)
       p2_.y -= dy;
       p3_.x -= dx;
       p3_.y -= dy;
+      p4_ = { (p1_.x + p2_.x + p3_.x) / 3, (p1_.y + p2_.y + p3_.y) / 3 };
       frame_rect_.height *= k;
       frame_rect_.width *= k;
-      if (p4_.x < frame_rect_.pos.x && p4_.y < frame_rect_.pos.y)
-      {
-        p4_.x += dx;
-        p4_.y += dy;
-      }
-      else if (p4_.x > frame_rect_.pos.x && p4_.y > frame_rect_.pos.y)
-      {
-        p4_.x -= dx;
-        p4_.y -= dy;
-      }
-      else if (p4_.x < frame_rect_.pos.x && p4_.y > frame_rect_.pos.y)
-      {
-        p4_.x += dx;
-        p4_.y -= dy;
-      }
-      else if (p4_.x > frame_rect_.pos.x && p4_.y < frame_rect_.pos.y)
-      {
-        p4_.x -= dx;
-        p4_.y += dy;
-      }
     }
   }
 }
