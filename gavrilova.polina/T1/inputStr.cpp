@@ -15,7 +15,7 @@ char* gavrilova::inputStr(std::istream& in, size_t & len, size_t & nSpaces)
   char c = '\0';
   in >> std::noskipws;
   while ((in >> c)) {
-    if (c == '\n' || in.eof()){
+    if (c == '\n' || in.eof()) {
       break;
     }
     if (len < K - 1) {

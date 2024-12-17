@@ -3,16 +3,18 @@
 #include "base-types.hpp"
 
 gavrilova::Rectangle::Rectangle(point_t pBottomLeft, point_t pTopRight):
-  pBottomLeft_({0,0}), pTopRight_({0,0}) {
-    if (pBottomLeft.x < pTopRight.x && pBottomLeft.y < pTopRight.y) {
-      pBottomLeft_.x = pBottomLeft.x;
-      pBottomLeft_.y = pBottomLeft.y;
-      pTopRight_.x = pTopRight.x;
-      pTopRight_.y = pTopRight.y;
-    } else {
-      throw std::logic_error("Invalid arguments for rectangle");
+  pBottomLeft_({0,0}), 
+  pTopRight_({0,0})
+{
+  if (pBottomLeft.x < pTopRight.x && pBottomLeft.y < pTopRight.y) {
+    pBottomLeft_.x = pBottomLeft.x;
+    pBottomLeft_.y = pBottomLeft.y;
+    pTopRight_.x = pTopRight.x;
+    pTopRight_.y = pTopRight.y;
+  } else {
+    throw std::logic_error("Invalid arguments for rectangle");
   }
-  }
+}
 double gavrilova::Rectangle::getArea() const {
   return (pTopRight_.x - pBottomLeft_.x) * (pTopRight_.y - pBottomLeft_.y);
 }

@@ -4,8 +4,10 @@
 #include "base-types.hpp"
 
 gavrilova::Polygon::Polygon(size_t size, point_t * verteces):
-size_(size), verteces_(verteces)
+  size_(size),
+  verteces_(verteces)
 {}
+
 gavrilova::Polygon::~Polygon() {
   delete[] verteces_;
 }

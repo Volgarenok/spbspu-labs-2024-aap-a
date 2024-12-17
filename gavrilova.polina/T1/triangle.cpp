@@ -1,7 +1,7 @@
 #include "triangle.hpp"
-#include "base-types.hpp"
 #include <cmath>
 #include <iostream>
+#include "base-types.hpp"
 
 bool gavrilova::isTriangle(point_t A, point_t B, point_t C) {
   double AB = gavrilova::getDistance(A, B);
@@ -14,7 +14,9 @@ double gavrilova::getDistance(point_t A, point_t B){
 }
 
 gavrilova::Triangle::Triangle(point_t A, point_t B, point_t C):
-A_({0.0}), B_({0.0}), C_({0.0})
+  A_({0.0}), 
+  B_({0.0}), 
+  C_({0.0})
 {
   if (gavrilova::isTriangle(A, B, C)){
     A_.x = A.x;
@@ -56,7 +58,6 @@ void gavrilova::Triangle::move(point_t p) {
   B_.y += difY;
   C_.x += difX;
   C_.y += difY;
-
 }
 void gavrilova::Triangle::move(double difX, double difY) {
   A_.x += difX;
