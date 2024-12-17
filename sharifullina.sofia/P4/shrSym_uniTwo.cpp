@@ -37,9 +37,8 @@ char * sharifullina::inputString(std::istream & in, char stop)
   return str;
 }
 
-char * sharifullina::shrSym(const char * str1, const char * str2)
+char * sharifullina::shrSym(const char * str1, const char * str2, char * res)
 {
-  char * res = new char[27];
   bool lettersFound[26] = { false };
   for (const char *ptr = str1; *ptr != '\0'; ++ptr)
   {
@@ -75,32 +74,23 @@ char * sharifullina::shrSym(const char * str1, const char * str2)
   return res;
 }
 
-char * sharifullina::uniTwo(const char * str1, const char * str2)
+char * sharifullina::uniTwo(const char * str1, const char * str2, char * res)
 {
-  size_t length1 = 0;
-  while (str1[length1] != '\0')
+  char* ptr = res;
+  const char* ptr1 = str1;
+  const char* ptr2 = str2;
+  while (*ptr1 != '\0' && *ptr2 != '\0')
   {
-    length1++;
+    *ptr++ = *ptr1++;
+    *ptr++ = *ptr2++;
   }
-  size_t length2 = 0;
-  while (str2[length2] != '\0')
+  while (*ptr1 != '\0')
   {
-    length2++;
+    *ptr++ = *ptr1++;
   }
-  char * res = new char[length1 + length2 + 1];
-  char * ptr = res;
-  size_t i = 0;
-  while (i < length1 || i < length2)
+  while (*ptr2 != '\0')
   {
-    if (i < length2)
-    {
-      *ptr++ = str2[i];
-    }
-    if (i < length1)
-    {
-      *ptr++ = str1[i];
-    }
-    i++;
+    *ptr++ = *ptr2++;
   }
   *ptr = '\0';
   return res;
