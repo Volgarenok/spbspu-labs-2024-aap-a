@@ -4,12 +4,16 @@
 #include <limits>
 
 maslov::Regular::Regular(point_t A, point_t B, point_t C):
-A_(A), B_(B), C_(C),
-AB_(distance(A, B)), AC_(distance(A, C)), BC_(distance(B, C)),
-rI_(findRadiusIncircle(AC_, AB_, BC_)),
-rC_(findRadiusCircumcircle(AC_, AB_)),
-halfSide_(findHalfSide(AC_, AB_, BC_)),
-n_(findVerticals(halfSide_, rI_, rC_))
+  A_(A),
+  B_(B),
+  C_(C),
+  AB_(distance(A, B)),
+  AC_(distance(A, C)),
+  BC_(distance(B, C)),
+  rI_(findRadiusIncircle(AC_, AB_, BC_)),
+  rC_(findRadiusCircumcircle(AC_, AB_)),
+  halfSide_(findHalfSide(AC_, AB_, BC_)),
+  n_(findVerticals(halfSide_, rI_, rC_))
 {}
 double maslov::Regular::getArea() const
 {

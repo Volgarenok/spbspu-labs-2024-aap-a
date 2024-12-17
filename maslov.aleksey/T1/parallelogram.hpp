@@ -8,8 +8,10 @@ namespace maslov
   struct Parallelogram : public Shape
   {
     Parallelogram(point_t first, point_t second, point_t third):
-    first_(first), second_(second), third_(third),
-    fourth_({first.x + third.x - second.x, first.y + third.y - second.y})
+      first_(first),
+      second_(second),
+      third_(third),
+      fourth_({first.x + third.x - second.x, first.y + third.y - second.y})
     {}
     double getArea() const override;
     rectangle_t getFrameRect() const override;

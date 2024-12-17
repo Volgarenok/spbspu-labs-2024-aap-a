@@ -8,7 +8,9 @@ namespace maslov
   struct Rectangle : public Shape
   {
     Rectangle(point_t lowerLeftCorner, point_t upperRightCorner):
-    lowerLeftCorner_(lowerLeftCorner), upperRightCorner_(upperRightCorner) {};
+      lowerLeftCorner_(lowerLeftCorner),
+      upperRightCorner_(upperRightCorner)
+    {}
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t s) override;
