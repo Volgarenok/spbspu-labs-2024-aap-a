@@ -9,93 +9,84 @@
 int main()
 {
   smirnov::Shape * shapes[1000] = {};
-  size_t shapeCount = 0;
-  std::string nameShape = "";
-  bool flag = false;
-  double k = 0.0;
-  smirnov::point_t scaleCenter = {0.0, 0.0};
-  while (true)
+  std::string shapeType = "";
+  size_t countShapes = 0;
+  bool hasError = false;
+  smirnov::point_t centerPoint;
+  double scaleFactor = 0.0;
+  while (std::cin >> shapeType)
   {
     if (std::cin.eof())
     {
-      std::cerr << "Incorrect scale\n";
-      smirnov::destroyShapes(shapes, shapeCount);
+      smirnov::destroyShapes(shapes, countShapes);
+      std::cerr << "Incorrect input\n";
       return 1;
     }
-    std::cin >> nameShape;
-    if (nameShape == "RECTANGLE")
+    if (shapeType == "RECTANGLE")
     {
       try
       {
-        shapes[shapeCount] = smirnov::createRectangle(std::cin);
-        shapeCount++;
+        shapes[countShapes] = smirnov::createRectangle(std::cin);
+        countShapes++;
       }
       catch (const std::invalid_argument & e)
       {
-        flag = true;
+        hasError = true;
       }
     }
-    else if (nameShape == "DIAMOND")
+    else if (shapeType == "DIAMOND")
     {
       try
       {
-        shapes[shapeCount] = smirnov::createDiamond(std::cin);
-        shapeCount++;
+        shapes[countShapes] = smirnov::createDiamond(std::cin);
+        countShapes++;
       }
       catch (const std::invalid_argument & e)
       {
-        flag = true;
+        hasError = true;
       }
     }
-    else if (nameShape == "SQUARE")
+    else if (shapeType == "SQUARE")
     {
       try
       {
-        shapes[shapeCount] = smirnov::createSquare(std::cin);
-        shapeCount++;
-      }
-      catch (const std::bad_alloc & e)
-      {
-        std::cerr << "Out of memory\n";
-        smirnov::destroyShapes(shapes, shapeCount);
-        return 1;
+        shapes[countShapes] = smirnov::createSquare(std::cin);
+        countShapes++;
       }
       catch (const std::invalid_argument & e)
       {
-        flag = true;
+        hasError = true;
       }
     }
-    else if (nameShape == "SCALE")
+    else if (shapeType == "SCALE")
     {
-      double p1 = 0.0;
-      double p2 = 0.0;
-      std::cin >> p1 >> p2;
-      scaleCenter = {p1, p2};
-      std::cin >> k;
-      break;
+      double xCoord = 0.0;
+      double yCoord = 0.0;
+      std::cin >> xCoord >> yCoord >> scaleFactor;
+      centerPoint = {xCoord, yCoord};
+      if (scaleFactor <= 0)
+      {
+        destroyShapes(shapes, countShapes);
+        std::cerr << "Incorrect scale\n";
+      }
     }
   }
-  if (k <= 0)
+  if (countShapes == 0)
   {
-    std::cerr << "Incorrect scale\n";
-    smirnov::destroyShapes(shapes, shapeCount);
+    std::cerr << "No figures found\n";
     return 1;
   }
-  if (shapeCount == 0)
+  if (hasError)
   {
-    std::cerr << "There are no shapes\n";
+    std::cerr << "incorrect shape size\n";
     return 1;
   }
   std::cout << std::fixed;
   std::cout.precision(1);
-  std::cout << smirnov::sumArea(shapes, shapeCount);
-  smirnov::printFrameRect(shapes, shapeCount);
-  smirnov::scaleShapes(shapes, shapeCount, scaleCenter, k);
-  std::cout << smirnov::sumArea(shapes, shapeCount);
-  smirnov::printFrameRect(shapes, shapeCount);
-  smirnov::destroyShapes(shapes, shapeCount);
-  if (flag)
-  {
-    std::cerr << "There is an incorrect shape\n";
-  }
+  std::cout << smirnov::sumArea(shapes, countShapes);
+  smirnov::printFrameRect(shapes, countShapes);
+  smirnov::scaleShapes(shapes, countShapes, centerPoint, scaleFactor);
+  std::cout << smirnov::sumArea(shapes, countShapes);
+  smirnov::printFrameRect(shapes, countShapes);
+  smirnov::destroyShapes(shapes, countShapes);
 }
