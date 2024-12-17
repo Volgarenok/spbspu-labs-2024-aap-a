@@ -1,6 +1,6 @@
 #include "rectangle.hpp"
 #include <cmath>
-petrov::Rectangle::Rectangle(point_t p1, point_t p2):
+petrov::Rectangle::Rectangle(petrov::point_t p1, petrov::point_t p2):
   p1_(p1),
   p3_(p2)
 {
@@ -27,7 +27,7 @@ petrov::rectangle_t petrov::Rectangle::getFrameRect() // It needs changes...
   return frame_rect_;
 }
 
-void petrov::Rectangle::move(point_t concrete_point)
+void petrov::Rectangle::move(petrov::point_t concrete_point)
 {
   frame_rect_.pos_.x_ = concrete_point.x_;
   frame_rect_.pos_.y_ = concrete_point.y_;

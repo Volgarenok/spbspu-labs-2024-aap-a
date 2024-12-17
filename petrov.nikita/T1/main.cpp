@@ -8,7 +8,7 @@
 #include "rectangle.hpp"
 #include "triangle.hpp"
 #include "concave.hpp"
-#include "scale_isotropically.hpp"
+#include "scale_isotropically_and_output_data.hpp"
 int main()
 {
   const char * ERROR_MSG = "ERROR: Invalid data somewhere";

@@ -1,7 +1,7 @@
 #include "triangle.hpp"
 #include <cmath>
 #include <algorithm>
-petrov::Triangle::Triangle(point_t p1, point_t p2, point_t p3):
+petrov::Triangle::Triangle(petrov::point_t p1, petrov::point_t p2, petrov::point_t p3):
   p1_(p1),
   p2_(p2),
   p3_(p3)
@@ -36,7 +36,7 @@ petrov::rectangle_t petrov::Triangle::getFrameRect()
   return frame_rect_;
 }
 
-void petrov::Triangle::move(point_t concrete_point)
+void petrov::Triangle::move(petrov::point_t concrete_point)
 {
   frame_rect_.pos_.x_ = concrete_point.x_;
   frame_rect_.pos_.y_ = concrete_point.y_;

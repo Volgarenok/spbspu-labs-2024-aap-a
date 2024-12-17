@@ -1,5 +1,5 @@
-#ifndef SCALE_ISOTROPICALLY_HPP
-#define SCALE_ISOTROPICALLY_HPP
+#ifndef SCALE_ISOTROPICALLY_AND_OUTPUT_DATA_HPP
+#define SCALE_ISOTROPICALLY_AND_OUTPUT_DATA_HPP
 #include "shape.hpp"
 #include "cstddef"
 namespace petrov

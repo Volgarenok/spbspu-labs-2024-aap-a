@@ -1,8 +1,8 @@
-#include "scale_isotropically.hpp"
+#include "scale_isotropically_and_output_data.hpp"
 #include "base-types.hpp"
 #include "shape.hpp"
 #include <iostream>
-void petrov::scaleIsotropicallyAndOutputData(point_t scale_point, double k, Shape ** shape, size_t count)
+void petrov::scaleIsotropicallyAndOutputData(petrov::point_t scale_point, double k, petrov::Shape ** shape, size_t count)
 {
   double first_sum_area = 0.0;
   double second_sum_area = 0.0;
@@ -10,9 +10,9 @@ void petrov::scaleIsotropicallyAndOutputData(point_t scale_point, double k, Shap
   double second_all_coordinates[10000][4] = { 0 };
   for (size_t i = 0; i < count; i++)
   {
-    rectangle_t frame_rect = (*shape)[i].getFrameRect();
-    point_t lower_left_corner = { (frame_rect.pos_.x_ - (frame_rect.width_ / 2)), (frame_rect.pos_.y_ - (frame_rect.height_ / 2)) };
-    point_t upper_right_corner = { (frame_rect.pos_.x_ + (frame_rect.width_ / 2)), (frame_rect.pos_.y_ + (frame_rect.height_ / 2)) };
+    petrov::rectangle_t frame_rect = (*(shape[i])).getFrameRect();
+    petrov::point_t lower_left_corner = { (frame_rect.pos_.x_ - (frame_rect.width_ / 2)), (frame_rect.pos_.y_ - (frame_rect.height_ / 2)) };
+    petrov::point_t upper_right_corner = { (frame_rect.pos_.x_ + (frame_rect.width_ / 2)), (frame_rect.pos_.y_ + (frame_rect.height_ / 2)) };
     first_all_coordinates[i][0] = lower_left_corner.x_;
     first_all_coordinates[i][1] = lower_left_corner.y_;
     first_all_coordinates[i][2] = upper_right_corner.x_;
@@ -26,7 +26,7 @@ void petrov::scaleIsotropicallyAndOutputData(point_t scale_point, double k, Shap
     mv_dx *= k;
     mv_dy *= k;
     (*(shape[i])).move(mv_dx, mv_dy);
-    frame_rect = (*shape)[i].getFrameRect();
+    frame_rect = (*(shape[i])).getFrameRect();
     lower_left_corner = { (frame_rect.pos_.x_ - (frame_rect.width_ / 2)), (frame_rect.pos_.y_ - (frame_rect.height_ / 2)) };
     upper_right_corner = { (frame_rect.pos_.x_ + (frame_rect.width_ / 2)), (frame_rect.pos_.y_ + (frame_rect.height_ / 2)) };
     second_all_coordinates[i][0] = lower_left_corner.x_;

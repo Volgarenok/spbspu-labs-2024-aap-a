@@ -1,7 +1,7 @@
 #include "concave.hpp"
 #include <cmath>
 #include <algorithm>
-petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
+petrov::Concave::Concave(petrov::point_t p1, petrov::point_t p2, petrov::point_t p3, petrov::point_t p4):
   p1_(p1),
   p2_(p2),
   p3_(p3),
@@ -68,7 +68,7 @@ petrov::rectangle_t petrov::Concave::getFrameRect()
   return frame_rect_;
 }
 
-void petrov::Concave::move(point_t concrete_point)
+void petrov::Concave::move(petrov::point_t concrete_point)
 {
   double pos_dx = concrete_point.x_ - frame_rect_.pos_.x_;
   double pos_dy = concrete_point.y_ - frame_rect_.pos_.y_;
