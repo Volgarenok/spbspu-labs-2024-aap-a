@@ -18,11 +18,11 @@ hismatova::rectangle_t hismatova::Triangle::getFrameRect() const
   double maxX = std::max({a_.x, b_.x, c_.x});
   double minY = std::min({a_.y, b_.y, c_.y});
   double maxY = std::max({a_.y, b_.y, c_.y});
-  return {maxY - minY, maxX - minX, {(minX + maxX) / 2, (minY + maxY) / 2}};
+  return {maxY - minY, maxX - minX, {(minX + maxX) / 2.0, (minY + maxY) / 2.0}};
 }
 void hismatova::Triangle::move(const point_t &newPos)
 {
-  point_t centroid = getCentroid();
+  point_t centroid = this->getCentroid();
   double dx = newPos.x - centroid.x;
   double dy = newPos.y - centroid.y;
   move(dx, dy);
@@ -42,7 +42,7 @@ void hismatova::Triangle::scale(double index)
   {
     throw std::invalid_argument("Scale factor must be positive.");
   }
-  hismatova::point_t centroid = getCentroid();
+  hismatova::point_t centroid = this->getCentroid();
   a_.x = centroid.x + (a_.x - centroid.x) * index;
   a_.y = centroid.y + (a_.y - centroid.y) * index;
   b_.x = centroid.x + (b_.x - centroid.x) * index;
@@ -52,5 +52,5 @@ void hismatova::Triangle::scale(double index)
 }
 hismatova::point_t hismatova::Triangle::getCentroid() const
 {
-  return {(a_.x + b_.x + c_.x) / 3, (a_.y + b_.y + c_.y) / 3};
+  return {(a_.x + b_.x + c_.x) / 3.0, (a_.y + b_.y + c_.y) / 3.0};
 }

@@ -15,7 +15,7 @@ hismatova::Rectangle* hismatova::createRectangle(std::istream& in)
 hismatova::Triangle* hismatova::createTriangle(std::istream& in)
 {
   double x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
-  in >> x1 >> y2 >> x2 >> y2 >> x3 >> y3;
+  in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
   if (0.5 * std::abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) <= 0)
   {
     throw std::invalid_argument("triangle cannot be built");
