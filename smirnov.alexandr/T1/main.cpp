@@ -12,7 +12,7 @@ int main()
   std::string shapeType = "";
   size_t countShapes = 0;
   bool hasError = false;
-  smirnov::point_t centerPoint;
+  smirnov::point_t centerPoint = {0.0, 0.0};
   double scaleFactor = 0.0;
   while (std::cin >> shapeType)
   {
@@ -66,7 +66,7 @@ int main()
       }
       break;
     }
-        if (std::cin.eof())
+    else if (std::cin.eof())
     {
       smirnov::destroyShapes(shapes, countShapes);
       std::cerr << "EOF input\n";
