@@ -5,55 +5,55 @@ petrov::Rectangle::Rectangle(petrov::point_t p1, petrov::point_t p2):
   p1_(p1),
   p3_(p2)
 {
-  if (p1.x_ >= p2.x_ || p1.y_ >= p2.y_)
+  if (p1.x >= p2.x || p1.y >= p2.y)
   {
     throw "ERROR: Invalid data somewhere\n";
   }
-  p2_.x_ = p1_.x_;
-  p2_.y_ = p3_.y_;
-  p4_.x_ = p3_.x_;
-  p4_.y_ = p1_.y_;
+  p2_.x = p1_.x;
+  p2_.y = p3_.y;
+  p4_.x = p3_.x;
+  p4_.y = p1_.y;
 }
 
 double petrov::Rectangle::getArea()
 {
-  return frame_rect_.width_ * frame_rect_.height_;
+  return frame_rect_.width * frame_rect_.height;
 }
 
 petrov::rectangle_t petrov::Rectangle::getFrameRect() // It needs changes...
 {
-  frame_rect_.height_ = abs(p2_.y_ - p1_.y_);
-  frame_rect_.width_ = abs(p4_.x_ - p1_.x_);
-  frame_rect_.pos_ = { ((2 * p1_.x_ + p3_.x_ - p1_.x_) / 2.0), ((2 * p1_.y_ + p3_.y_ - p1_.y_) / 2.0) };
+  frame_rect_.height = abs(p2_.y - p1_.y);
+  frame_rect_.width = abs(p4_.x - p1_.x);
+  frame_rect_.pos = { ((2 * p1_.x + p3_.x - p1_.x) / 2.0), ((2 * p1_.y + p3_.y - p1_.y) / 2.0) };
   return frame_rect_;
 }
 
 void petrov::Rectangle::move(petrov::point_t concrete_point)
 {
-  frame_rect_.pos_.x_ = concrete_point.x_;
-  frame_rect_.pos_.y_ = concrete_point.y_;
-  p1_.x_ = frame_rect_.pos_.x_ - (frame_rect_.width_ / 2);
-  p1_.y_ = frame_rect_.pos_.y_ - (frame_rect_.height_ / 2);
-  p2_.x_ = frame_rect_.pos_.x_ - (frame_rect_.width_ / 2);
-  p2_.y_ = frame_rect_.pos_.y_ + (frame_rect_.height_ / 2);
-  p3_.x_ = frame_rect_.pos_.x_ + (frame_rect_.width_ / 2);
-  p3_.y_ = frame_rect_.pos_.y_ + (frame_rect_.height_ / 2);
-  p4_.x_ = frame_rect_.pos_.x_ + (frame_rect_.width_ / 2);
-  p4_.y_ = frame_rect_.pos_.y_ - (frame_rect_.height_ / 2);
+  frame_rect_.pos.x = concrete_point.x;
+  frame_rect_.pos.y = concrete_point.y;
+  p1_.x = frame_rect_.pos.x - (frame_rect_.width / 2);
+  p1_.y = frame_rect_.pos.y - (frame_rect_.height / 2);
+  p2_.x = frame_rect_.pos.x - (frame_rect_.width / 2);
+  p2_.y = frame_rect_.pos.y + (frame_rect_.height / 2);
+  p3_.x = frame_rect_.pos.x + (frame_rect_.width / 2);
+  p3_.y = frame_rect_.pos.y + (frame_rect_.height / 2);
+  p4_.x = frame_rect_.pos.x + (frame_rect_.width / 2);
+  p4_.y = frame_rect_.pos.y - (frame_rect_.height / 2);
 }
 
 void petrov::Rectangle::move(double dx, double dy)
 {
-  frame_rect_.pos_.x_ += dx;
-  frame_rect_.pos_.y_ += dy;
-  p1_.x_ += dx;
-  p1_.y_ += dy;
-  p2_.x_ += dx;
-  p2_.y_ += dy;
-  p3_.x_ += dx;
-  p3_.y_ += dy;
-  p4_.x_ += dx;
-  p4_.y_ += dy;
+  frame_rect_.pos.x += dx;
+  frame_rect_.pos.y += dy;
+  p1_.x += dx;
+  p1_.y += dy;
+  p2_.x += dx;
+  p2_.y += dy;
+  p3_.x += dx;
+  p3_.y += dy;
+  p4_.x += dx;
+  p4_.y += dy;
 }
 
 void petrov::Rectangle::scale(double k)
@@ -61,33 +61,33 @@ void petrov::Rectangle::scale(double k)
   {
     if (k > 1)
     {
-      double dx = (frame_rect_.width_ / 2) * (k - 1);
-      double dy = (frame_rect_.height_ / 2) * (k - 1);
-      p1_.x_ -= dx;
-      p1_.y_ -= dy;
-      p2_.x_ -= dx;
-      p2_.y_ += dy;
-      p3_.x_ += dx;
-      p3_.y_ += dy;
-      p4_.x_ += dx;
-      p4_.y_ -= dy;
-      frame_rect_.height_ *= k;
-      frame_rect_.width_ *= k;
+      double dx = (frame_rect_.width / 2) * (k - 1);
+      double dy = (frame_rect_.height / 2) * (k - 1);
+      p1_.x -= dx;
+      p1_.y -= dy;
+      p2_.x -= dx;
+      p2_.y += dy;
+      p3_.x += dx;
+      p3_.y += dy;
+      p4_.x += dx;
+      p4_.y -= dy;
+      frame_rect_.height *= k;
+      frame_rect_.width *= k;
     }
     else
     {
-      double dx = (frame_rect_.width_ / 2) * (1 - k);
-      double dy = (frame_rect_.height_ / 2) * (1 - k);
-      p1_.x_ += dx;
-      p1_.y_ += dy;
-      p2_.x_ += dx;
-      p2_.y_ -= dy;
-      p3_.x_ -= dx;
-      p3_.y_ -= dy;
-      p4_.x_ -= dx;
-      p4_.y_ += dy;
-      frame_rect_.height_ *= k;
-      frame_rect_.width_ *= k;
+      double dx = (frame_rect_.width / 2) * (1 - k);
+      double dy = (frame_rect_.height / 2) * (1 - k);
+      p1_.x += dx;
+      p1_.y += dy;
+      p2_.x += dx;
+      p2_.y -= dy;
+      p3_.x -= dx;
+      p3_.y -= dy;
+      p4_.x -= dx;
+      p4_.y += dy;
+      frame_rect_.height *= k;
+      frame_rect_.width *= k;
     }
   }
 }

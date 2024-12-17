@@ -7,9 +7,9 @@ petrov::Triangle::Triangle(petrov::point_t p1, petrov::point_t p2, petrov::point
   p2_(p2),
   p3_(p3)
 {
-  double a = sqrt(pow((p1_.x_ - p2_.x_), 2) + pow((p1_.y_ - p2_.y_), 2));
-  double b = sqrt(pow((p3_.x_ - p2_.x_), 2) + pow((p3_.y_ - p2_.y_), 2));
-  double c = sqrt(pow((p1_.x_ - p3_.x_), 2) + pow((p1_.y_ - p3_.y_), 2));
+  double a = sqrt(pow((p1_.x - p2_.x), 2) + pow((p1_.y - p2_.y), 2));
+  double b = sqrt(pow((p3_.x - p2_.x), 2) + pow((p3_.y - p2_.y), 2));
+  double c = sqrt(pow((p1_.x - p3_.x), 2) + pow((p1_.y - p3_.y), 2));
   if (a + b <= c || a + c <= b || b + c <= a)
   {
     throw "ERROR: Invalid data somewhere";
@@ -18,47 +18,47 @@ petrov::Triangle::Triangle(petrov::point_t p1, petrov::point_t p2, petrov::point
 
 double petrov::Triangle::getArea()
 {
-  double a = sqrt(pow((p1_.x_ - p2_.x_), 2) + pow((p1_.y_ - p2_.y_), 2));
-  double b = sqrt(pow((p3_.x_ - p2_.x_), 2) + pow((p3_.y_ - p2_.y_), 2));
-  double c = sqrt(pow((p1_.x_ - p3_.x_), 2) + pow((p1_.y_ - p3_.y_), 2));
+  double a = sqrt(pow((p1_.x - p2_.x), 2) + pow((p1_.y - p2_.y), 2));
+  double b = sqrt(pow((p3_.x - p2_.x), 2) + pow((p3_.y - p2_.y), 2));
+  double c = sqrt(pow((p1_.x - p3_.x), 2) + pow((p1_.y - p3_.y), 2));
   double p = (a + b + c) / 2;
   return sqrt(p * (p - a) * (p - b) * (p - c));
 }
 
 petrov::rectangle_t petrov::Triangle::getFrameRect()
 {
-  double x_max = std::max(std::max(p1_.x_, p2_.x_), p3_.x_);
-  double x_min = std::min(std::min(p1_.x_, p2_.x_), p3_.x_);
-  double y_max = std::max(std::max(p1_.y_, p2_.y_), p3_.y_);
-  double y_min = std::min(std::min(p1_.y_, p2_.y_), p3_.y_);
-  frame_rect_.width_ = abs(x_max - x_min);
-  frame_rect_.height_ = abs(y_max - y_min);
-  frame_rect_.pos_ = { ((2 * x_min + x_max - x_min) / 2.0), ((2 * y_min + y_max - y_min) / 2.0) };
+  double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
+  double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
+  double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
+  double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
+  frame_rect_.width = abs(xmax - xmin);
+  frame_rect_.height = abs(ymax - ymin);
+  frame_rect_.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
   return frame_rect_;
 }
 
 void petrov::Triangle::move(petrov::point_t concrete_point)
 {
-  frame_rect_.pos_.x_ = concrete_point.x_;
-  frame_rect_.pos_.y_ = concrete_point.y_;
-  p1_.x_ = frame_rect_.pos_.x_ - (frame_rect_.width_ / 2);
-  p1_.y_ = frame_rect_.pos_.y_ - (frame_rect_.height_ / 2);
-  p2_.x_ = frame_rect_.pos_.x_ - (frame_rect_.width_ / 2);
-  p2_.y_ = frame_rect_.pos_.y_ + (frame_rect_.height_ / 2);
-  p3_.x_ = frame_rect_.pos_.x_ + (frame_rect_.width_ / 2);
-  p3_.y_ = frame_rect_.pos_.y_ + (frame_rect_.height_ / 2);
+  frame_rect_.pos.x = concrete_point.x;
+  frame_rect_.pos.y = concrete_point.y;
+  p1_.x = frame_rect_.pos.x - (frame_rect_.width / 2);
+  p1_.y = frame_rect_.pos.y - (frame_rect_.height / 2);
+  p2_.x = frame_rect_.pos.x - (frame_rect_.width / 2);
+  p2_.y = frame_rect_.pos.y + (frame_rect_.height / 2);
+  p3_.x = frame_rect_.pos.x + (frame_rect_.width / 2);
+  p3_.y = frame_rect_.pos.y + (frame_rect_.height / 2);
 }
 
 void petrov::Triangle::move(double dx, double dy)
 {
-  frame_rect_.pos_.x_ += dx;
-  frame_rect_.pos_.y_ += dy;
-  p1_.x_ += dx;
-  p1_.y_ += dy;
-  p2_.x_ += dx;
-  p2_.y_ += dy;
-  p3_.x_ += dx;
-  p3_.y_ += dy;
+  frame_rect_.pos.x += dx;
+  frame_rect_.pos.y += dy;
+  p1_.x += dx;
+  p1_.y += dy;
+  p2_.x += dx;
+  p2_.y += dy;
+  p3_.x += dx;
+  p3_.y += dy;
 }
 
 void petrov::Triangle::scale(double k)
@@ -66,29 +66,29 @@ void petrov::Triangle::scale(double k)
   {
     if (k > 1)
     {
-      double dx = (frame_rect_.width_ / 2) * (k - 1);
-      double dy = (frame_rect_.height_ / 2) * (k - 1);
-      p1_.x_ -= dx;
-      p1_.y_ -= dy;
-      p2_.x_ -= dx;
-      p2_.y_ += dy;
-      p3_.x_ += dx;
-      p3_.y_ += dy;
-      frame_rect_.height_ *= k;
-      frame_rect_.width_ *= k;
+      double dx = (frame_rect_.width / 2) * (k - 1);
+      double dy = (frame_rect_.height / 2) * (k - 1);
+      p1_.x -= dx;
+      p1_.y -= dy;
+      p2_.x -= dx;
+      p2_.y += dy;
+      p3_.x += dx;
+      p3_.y += dy;
+      frame_rect_.height *= k;
+      frame_rect_.width *= k;
     }
     else
     {
-      double dx = (frame_rect_.width_ * (1 - k)) / 2;
-      double dy = (frame_rect_.height_ * (1 - k)) / 2;
-      p1_.x_ += dx;
-      p1_.y_ += dy;
-      p2_.x_ += dx;
-      p2_.y_ -= dy;
-      p3_.x_ -= dx;
-      p3_.y_ -= dy;
-      frame_rect_.height_ *= k;
-      frame_rect_.width_ *= k;
+      double dx = (frame_rect_.width * (1 - k)) / 2;
+      double dy = (frame_rect_.height * (1 - k)) / 2;
+      p1_.x += dx;
+      p1_.y += dy;
+      p2_.x += dx;
+      p2_.y -= dy;
+      p3_.x -= dx;
+      p3_.y -= dy;
+      frame_rect_.height *= k;
+      frame_rect_.width *= k;
     }
   }
 }

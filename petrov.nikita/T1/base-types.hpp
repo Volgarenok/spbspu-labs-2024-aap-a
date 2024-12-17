@@ -4,13 +4,13 @@ namespace petrov
 {
   struct point_t
   {
-    double x_, y_;
+    double x, y;
   };
 
   struct rectangle_t
   {
-    double width_, height_;
-    point_t pos_;
+    double width, height;
+    point_t pos;
   };
 }
 #endif
