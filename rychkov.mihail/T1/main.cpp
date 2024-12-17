@@ -33,29 +33,33 @@ int main()
     {
       rychkov::point_t scaleCenter{0, 0};
       double coef = 1;
+      bool inputHasError = false;
       if (std::cin >> scaleCenter.x >> scaleCenter.y >> coef)
       {
-        if (used == 0)
-        {
-          std::cerr << "there are no valid shapes in input\n";
-          return 1;
-        }
-        if (coef <= 0)
-        {
-          std::cerr << "there are no shapes in input\n";
-          return 1;
-        }
         if (!allIsValid)
         {
           std::cerr << "some of figures have errors in input description\n";
         }
-        rychkov::printCompositionFrames(std::cout, shapes, used) << '\n';
-        rychkov::scale(shapes, used, coef, scaleCenter);
-        rychkov::printCompositionFrames(std::cout, shapes, used) << '\n';
+        if (used == 0)
+        {
+          std::cerr << "there are no valid shapes in input\n";
+          inputHasError = true;
+        }
+        if (coef <= 0)
+        {
+          std::cerr << "scale coefficient is non-positive\n";
+          inputHasError = true;
+        }
+        if (!inputHasError)
+        {
+          rychkov::printCompositionFrames(std::cout, shapes, used) << '\n';
+          rychkov::scale(shapes, used, coef, scaleCenter);
+          rychkov::printCompositionFrames(std::cout, shapes, used) << '\n';
+        }
       }
       free(command);
       rychkov::composition::deallocate(shapes, used);
-      return !std::cin.good();
+      return !std::cin.good() || inputHasError;
     }
 
     bool isUnknown = false;

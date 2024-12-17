@@ -29,8 +29,15 @@ rychkov::Polygon::Polygon(point_t* points, size_t size):
 
 double rychkov::Polygon::getArea() const noexcept
 {
-  rectangle_t temp = getFrameRect();
-  return temp.height * temp.width;
+  point_t basePoint = vertexes_[0];
+  point_t p1 = vertexes_[1];
+  double result = 0;
+  for (size_t i = 2; i < size_; i++)
+  {
+    result += getSquare(basePoint, p1, vertexes_[i]);
+    p1 = vertexes_[i];
+  }
+  return result;
 }
 rychkov::rectangle_t rychkov::Polygon::getFrameRect() const noexcept
 {

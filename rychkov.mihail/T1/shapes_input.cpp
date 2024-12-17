@@ -34,7 +34,6 @@ rychkov::Shape* rychkov::getRectangle(std::istream& in)
   {
     return nullptr;
   }
-
   Rectangle* result = static_cast< Rectangle* >(malloc(sizeof(Rectangle)));
   if (!result)
   {
@@ -53,24 +52,24 @@ rychkov::Shape* rychkov::getRectangle(std::istream& in)
 rychkov::Shape* rychkov::getRegular(std::istream& in)
 {
   point_t p1, p2, p3;
-  if (in >> p1.x >> p1.y >> p2.x >> p2.y >> p3.x >> p3.y)
+  if (!(in >> p1.x >> p1.y >> p2.x >> p2.y >> p3.x >> p3.y))
   {
-    Regular* result = static_cast< Regular* >(malloc(sizeof(Regular)));
-    if (!result)
-    {
-      return nullptr;
-    }
-    try
-    {
-      return new (result) Regular(p1, p2, p3);
-    }
-    catch (...)
-    {
-      free(result);
-      return nullptr;
-    }
+    return nullptr;
   }
-  return nullptr;
+  Regular* result = static_cast< Regular* >(malloc(sizeof(Regular)));
+  if (!result)
+  {
+    return nullptr;
+  }
+  try
+  {
+    return new (result) Regular(p1, p2, p3);
+  }
+  catch (...)
+  {
+    free(result);
+    return nullptr;
+  }
 }
 rychkov::Shape* rychkov::getPolygon(std::istream& in)
 {
@@ -88,6 +87,8 @@ rychkov::Shape* rychkov::getPolygon(std::istream& in)
       free(points);
       return nullptr;
     }
+    used++;
+
     if (used >= nAllocated)
     {
       char* temp = rychkov::realloc(reinterpret_cast< char* >(points), nAllocated * sizeof(point_t),
@@ -100,7 +101,6 @@ rychkov::Shape* rychkov::getPolygon(std::istream& in)
       nAllocated = used * 2;
       points = reinterpret_cast< rychkov::point_t* >(temp);
     }
-    used++;
   }
   std::cin.clear();
   Polygon* result = static_cast< Polygon* >(malloc(sizeof(Polygon)));
@@ -117,5 +117,4 @@ rychkov::Shape* rychkov::getPolygon(std::istream& in)
     free(result);
     return nullptr;
   }
-  return nullptr;
 }

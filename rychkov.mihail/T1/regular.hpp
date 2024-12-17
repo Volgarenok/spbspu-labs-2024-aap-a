@@ -10,8 +10,8 @@ namespace rychkov
   {
   public:
     Regular() = delete;
-    Regular(point_t center, size_t nSides, double sideLength);
-    Regular(point_t p1, point_t p2, point_t p3);
+    Regular(point_t center, size_t nSides, double sideLength, double rotationAngle);
+    Regular(point_t center, point_t p2, point_t p3);
 
     virtual double getArea() const noexcept override;
     virtual rectangle_t getFrameRect() const noexcept override;
@@ -22,6 +22,7 @@ namespace rychkov
     point_t center_;
     size_t nSides_;
     double sideLength_;
+    double rotationAngle_;
   };
 }
 

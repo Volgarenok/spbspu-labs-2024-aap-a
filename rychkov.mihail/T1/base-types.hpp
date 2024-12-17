@@ -12,6 +12,8 @@ namespace rychkov
     double height, width;
     point_t pos;
   };
+  double getDistanceSqr(point_t from, point_t to);
+  double getSquare(point_t p1, point_t p2, point_t p3);
 }
 
 #endif
