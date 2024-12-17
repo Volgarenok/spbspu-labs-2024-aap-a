@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include "shape.hpp"
 constexpr double PI = std::acos(-1.0);
+constexpr double inaccuracy = 0.0000000001;
 alymova::Regular::Regular(point_t pos, point_t top, point_t other):
   pos_(),
   top_(),
@@ -15,7 +16,7 @@ alymova::Regular::Regular(point_t pos, point_t top, point_t other):
 {
   if (!getRectanglurTriangle(pos, top, other))
   {
-    throw std::logic_error("Incorrect points for description regular");
+    throw std::logic_error("Incorrect description regular");
   }
   pos_ = pos;
   top_ = top;
@@ -24,6 +25,10 @@ alymova::Regular::Regular(point_t pos, point_t top, point_t other):
   radius_small_ = getVector(pos_, other_);
   other_side_ = getVector(top_, other_);
   sides_cnt_ = getCntSides();
+  if (sides_cnt_ == 0 || sides_cnt_ < 3)
+  {
+    throw std::logic_error("Incorrect description regular");
+  }
   frame_rect_ = setFrameRect();
 }
 double alymova::Regular::getArea() const
@@ -33,7 +38,12 @@ double alymova::Regular::getArea() const
 size_t alymova::Regular::getCntSides() const
 {
   double sides = PI / (std::acos(radius_small_ / radius_big_));
-  return std::round(sides);
+  size_t round_sides = std::round(sides);
+  if (std::abs((std::cos(180 / std::round(sides) * PI / 180)) - (radius_small_ / radius_big_)) < inaccuracy)
+  {
+    return round_sides;
+  }
+  return 0;
 }
 alymova::rectangle_t alymova::Regular::getFrameRect() const
 {
@@ -81,5 +91,8 @@ void alymova::Regular::scale(double ratio)
   top_.y = pos_.y + (top_.y - pos_.y) * ratio;
   other_.x = pos_.x + (other_.x - pos_.x) * ratio;
   other_.y = pos_.y + (other_.y - pos_.y) * ratio;
+  radius_big_ *= ratio;
+  radius_small_ *= ratio;
+  other_side_ *= ratio;
   frame_rect_.scale(ratio);
 }
