@@ -18,7 +18,7 @@ hismatova::rectangle_t hismatova::Triangle::getFrameRect() const
   double maxX = std::max({a_.x, b_.x, c_.x});
   double minY = std::min({a_.y, b_.y, c_.y});
   double maxY = std::max({a_.y, b_.y, c_.y});
-  return {maxX - minX, maxY - minY, {(minX + maxX) / 2, (minY + maxY) / 2}};
+  return {maxY - minY, maxX - minX, {(minX + maxX) / 2, (minY + maxY) / 2}};
 }
 void hismatova::Triangle::move(const point_t &newPos)
 {
