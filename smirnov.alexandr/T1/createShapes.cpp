@@ -15,28 +15,34 @@ smirnov::Rectangle * smirnov::createRectangle(std::istream & in)
   return new Rectangle(x1, y1, x2, y2);
 }
 
-smirnov::Diamond * smirnov::createDiamond(std::istream & in)
-{
-  double centerX = 0.0;
-  double centerY = 0.0;
-  double diagonal1 = 0.0;
-  double diagonal2 = 0.0;
-  in >> centerX >> centerY >> diagonal1 >> diagonal2;
-  if (!in || diagonal1 <= 0 || diagonal2 <= 0)
-  {
-    throw std::invalid_argument("Incorrect coordinates");
-  }
-  return new Diamond(centerX, centerY, diagonal1, diagonal2);
-}
-
 smirnov::Square * smirnov::createSquare(std::istream & in)
 {
-  double x = 0.0;
+  double x = 0.0
   double y = 0.0;
-  double sideLength;
-  in >> x >> y >> sideLength;
-  if (!in || sideLength <= 0) {
+  double length = 0.0;
+  in >> x >> y >> length;
+  if (!in || length <= 0) {
     throw std::invalid_argument("Incorrect coordinates");
   }
-  return new Square(x, y, sideLength);
+  return new Square(x, y, length);
+}
+
+smirnov::Diamond * smirnov::createDiamond(std::istream & in)
+{
+  double x1 = 0.0;
+  double y1 = 0.0;
+  double x2 = 0.0;
+  double y2 = 0.0;
+  double x3 = 0.0;
+  double y3 = 0.0;
+  in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+  if ((x1 == x2 && y1 == y2) && (x1 == x3 && y1 == y3))
+  {
+    throw std::invalid_argument("All three vertices cannot coincide.");
+  }
+  if ((x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3))
+  {
+    throw std::invalid_argument("Two vertices cannot coincide.");
+  }
+  return new Diamond(x1, y1, x2, y2, x3, y3);
 }

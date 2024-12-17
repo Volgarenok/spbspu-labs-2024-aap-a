@@ -1,5 +1,4 @@
 #include "rectangle.hpp"
-#include <stdexcept>
 
 smirnov::Rectangle::Rectangle(double x1, double y1, double x2, double y2)
 {
@@ -44,10 +43,6 @@ void smirnov::Rectangle::move(double dx, double dy)
 
 void smirnov::Rectangle::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::invalid_argument("The zoom factor must be positive.");
-  }
   point_t center = getFrameRect().pos;
   lowerLeft.x = (lowerLeft.x - center.x) * k + center.x;
   lowerLeft.y = (lowerLeft.y - center.y) * k + center.y;

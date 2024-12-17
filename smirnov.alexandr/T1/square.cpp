@@ -1,12 +1,7 @@
 #include "square.hpp"
-#include <stdexcept>
 
 smirnov::Square::Square(double x, double y, double length)
 {
-  if (length <= 0)
-  {
-    throw std::invalid_argument("Side length must be positive.");
-  }
   lowerLeft = {x, y};
   sideLength = {length};
 }
