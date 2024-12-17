@@ -7,7 +7,7 @@ namespace kizhin {
   class Rectangle;
 }
 
-class kizhin::Rectangle : public Shape
+class kizhin::Rectangle: public Shape
 {
 public:
   Rectangle(double, double, const point_t&);

@@ -8,7 +8,7 @@ namespace kizhin {
   class Regular;
 }
 
-class kizhin::Regular : public Shape
+class kizhin::Regular: public Shape
 {
 public:
   Regular(const point_t&, const point_t&, const point_t&);

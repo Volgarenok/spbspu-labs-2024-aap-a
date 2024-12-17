@@ -1,7 +1,6 @@
 #include "io_utils.hpp"
 #include <cstring>
 #include <iomanip>
-#include <ostream>
 #include "shape_utils.hpp"
 
 namespace kizhin {

@@ -9,20 +9,27 @@ namespace kizhin {
   size_t countEqual(const point_t*, const point_t*, const point_t);
 }
 
-kizhin::Polygon::Polygon(const Polygon& rhs) :
-  vertices_(new point_t[rhs.size_]), size_(rhs.size_), center_(rhs.center_), frame_(rhs.frame_)
+kizhin::Polygon::Polygon(const Polygon& rhs):
+  vertices_(new point_t[rhs.size_]),
+  size_(rhs.size_),
+  center_(rhs.center_),
+  frame_(rhs.frame_)
 {
   copy(rhs.vertices_, rhs.vertices_ + size_, vertices_);
 }
 
-kizhin::Polygon::Polygon(Polygon&& rhs) noexcept :
-  vertices_(rhs.vertices_), size_(rhs.size_), center_(rhs.center_), frame_(rhs.frame_)
+kizhin::Polygon::Polygon(Polygon&& rhs) noexcept:
+  vertices_(rhs.vertices_),
+  size_(rhs.size_),
+  center_(rhs.center_),
+  frame_(rhs.frame_)
 {
   rhs.vertices_ = nullptr;
 }
 
-kizhin::Polygon::Polygon(const point_t* values, size_t size) :
-  vertices_(new point_t[size]), size_(size)
+kizhin::Polygon::Polygon(const point_t* values, size_t size):
+  vertices_(new point_t[size]),
+  size_(size)
 {
   assert(values);
   if (size < 3 || hasDuplicates(values, values + size)) {

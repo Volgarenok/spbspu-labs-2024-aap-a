@@ -8,7 +8,7 @@ namespace kizhin {
   class Polygon;
 }
 
-class kizhin::Polygon : public Shape
+class kizhin::Polygon: public Shape
 {
 public:
   Polygon(const Polygon&);

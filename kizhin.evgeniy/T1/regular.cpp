@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include "point_utils.hpp"
 
-kizhin::Regular::Regular(const point_t& p1, const point_t& p2, const point_t& p3) :
+kizhin::Regular::Regular(const point_t& p1, const point_t& p2, const point_t& p3):
   frame_{ 0.0, 0.0, p1 }
 {
   if (!isRightTriangle(p1, p2, p3)) {

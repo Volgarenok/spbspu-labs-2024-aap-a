@@ -1,7 +1,7 @@
 #include "rectangle.hpp"
 #include <cassert>
 
-kizhin::Rectangle::Rectangle(double width, double height, const point_t& position) :
+kizhin::Rectangle::Rectangle(double width, double height, const point_t& position):
   data_{ width, height, position }
 {
 }
