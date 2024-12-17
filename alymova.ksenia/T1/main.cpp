@@ -2,8 +2,6 @@
 #include <stdexcept>
 #include "base-types.hpp"
 #include "shape.hpp"
-#include "rectangle.hpp"
-#include "circle.hpp"
 #include "inputProcess.hpp"
 int main()
 {
@@ -23,6 +21,7 @@ int main()
   }
   catch (const std::logic_error& e)
   {
+    clear(shapes);
     std::cerr << e.what() << "\n";
     return 1;
   }

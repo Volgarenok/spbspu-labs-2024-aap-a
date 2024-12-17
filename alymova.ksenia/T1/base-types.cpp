@@ -8,7 +8,7 @@ alymova::point_t::point_t(const point_t& point):
   x(point.x),
   y(point.y)
 {}
-alymova::point_t::point_t(point_t&& point):
+alymova::point_t::point_t(const point_t&& point):
   x(point.x),
   y(point.y)
 {}

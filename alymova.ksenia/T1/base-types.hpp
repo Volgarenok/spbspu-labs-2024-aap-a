@@ -7,7 +7,7 @@ namespace alymova
   public:
     point_t() = default;
     point_t(const point_t& point);
-    point_t(point_t&& point);
+    point_t(const point_t&& point);
     point_t(double x, double y);
     point_t operator=(const point_t& point);
     point_t operator+=(point_t shift_point);

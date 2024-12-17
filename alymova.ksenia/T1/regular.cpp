@@ -1,6 +1,7 @@
 #include "regular.hpp"
 #include <cmath>
 #include <stdexcept>
+#include <limits>
 #include "shape.hpp"
 constexpr double PI = std::acos(-1.0);
 constexpr double inaccuracy = 0.0000000001;
@@ -51,17 +52,24 @@ alymova::rectangle_t alymova::Regular::getFrameRect() const
 }
 alymova::rectangle_t alymova::Regular::setFrameRect()
 {
-  double low_left_x = 1000, low_left_y = 1000, upp_right_x = -1000, upp_right_y = -1000;
-  double angle = PI / sides_cnt_;
+  double low_left_x = std::numeric_limits< double >::max();
+  double low_left_y = std::numeric_limits< double >::max();
+  double upp_right_x = std::numeric_limits< double >::min();
+  double upp_right_y = std::numeric_limits< double >::min();
+  double angle_start = std::acos(other_side_ / radius_big_);
+  if (top_.y == pos_.y)
+  {
+    angle_start = 0;
+  }
   for (size_t i = 0; i < sides_cnt_; i++)
   {
-    angle *= i;
-    low_left_x = std::min(low_left_x, pos_.x + radius_big_ * std::cos(angle));
-    low_left_y = std::min(low_left_y, pos_.y + radius_big_ * std::sin(angle));
-    upp_right_x = std::max(upp_right_x, pos_.x + radius_big_ * std::cos(angle));
-    upp_right_y = std::max(upp_right_y, pos_.y + radius_big_ * std::sin(angle));
+    double angle_now = angle_start + i * 2 * PI / sides_cnt_;
+    low_left_x = std::min(low_left_x, pos_.x + radius_big_ * std::cos(angle_now));
+    low_left_y = std::min(low_left_y, pos_.y + radius_big_ * std::sin(angle_now));
+    upp_right_x = std::max(upp_right_x, pos_.x + radius_big_ * std::cos(angle_now));
+    upp_right_y = std::max(upp_right_y, pos_.y + radius_big_ * std::sin(angle_now));
   }
-  return rectangle_t(point_t(low_left_x, low_left_y), point_t(upp_right_y, upp_right_y));
+  return rectangle_t(point_t(low_left_x, low_left_y), point_t(upp_right_x, upp_right_y));
 }
 void alymova::Regular::move(double shift_x, double shift_y)
 {

@@ -14,7 +14,6 @@ void alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool&
   {
     if (in.eof())
     {
-      clear(shapes);
       throw std::logic_error("Command SCALE must be described");
     }
     std::string type;
@@ -83,13 +82,6 @@ void alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool&
     }
   }
 }
-void alymova::clear(Shape** shapes)
-{
-  for(size_t i = 0; shapes[i] != nullptr; i++)
-  {
-    delete shapes[i];
-  }
-}
 void alymova::print(std::ostream& out, Shape** shapes)
 {
   double area = 0;
@@ -105,5 +97,12 @@ void alymova::print(std::ostream& out, Shape** shapes)
     out << " " << shapes[i]->getFrameRect().getLowLeft().y;
     out << " " << shapes[i]->getFrameRect().getUppRight().x;
     out << " " << shapes[i]->getFrameRect().getUppRight().y;
+  }
+}
+void alymova::clear(Shape** shapes)
+{
+  for(size_t i = 0; shapes[i] != nullptr; i++)
+  {
+    delete shapes[i];
   }
 }

@@ -14,7 +14,7 @@ namespace alymova
     virtual ~Shape() = default;
   };
   void scale(Shape** shapes, point_t s, double ratio);
-  bool getRectanglurTriangle(point_t& p1, point_t& p2, point_t& p3);
+  bool getRectanglurTriangle(point_t p1, point_t& p2, point_t& p3);
   double getVector(point_t p1, point_t p2);
 }
 #endif
