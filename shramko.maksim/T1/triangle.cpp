@@ -1,4 +1,5 @@
 #include "triangle.hpp"
+#include <algorithm>
 #include <cmath>
 
 shramko::Triangle::Triangle(point_t One, point_t Two, point_t Three)
