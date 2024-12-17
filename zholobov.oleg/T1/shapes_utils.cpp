@@ -13,7 +13,7 @@ zholobov::Rectangle* zholobov::create_rectangle(std::istream& in)
   double x2 = 0.0;
   double y2 = 0.0;
   in >> x1 >> y1 >> x2 >> y2;
-  if (!in || x2 <= x1 || y2 <=y1) {
+  if (!in || (x2 <= x1) || (y2 <=y1)) {
     throw std::invalid_argument("Error in RECTANGLE parameters");
   }
   return new Rectangle({x1, y1}, {x2, y2});
@@ -25,7 +25,7 @@ zholobov::Square* zholobov::create_square(std::istream& in)
   double y1 = 0.0;
   double a;
   in >> x1 >> y1 >> a;
-  if (!in || a <= 0) {
+  if (!in || (a <= 0)) {
     throw std::invalid_argument("Error in SQUARE parameters");
   }
   return new Square(zholobov::point_t{x1, y1}, double{a});
@@ -40,7 +40,7 @@ zholobov::Parallelogram* zholobov::create_parallelogram(std::istream& in)
   double x3 = 0.0;
   double y3 = 0.0;
   in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-  bool correct_parallelogram = (y1 == y2 && y1 != y3) || (y2 == y3 && y1 != y2);
+  bool correct_parallelogram = ((y1 == y2) && (y1 != y3)) || ((y2 == y3) && (y1 != y2));
   if (!in || !correct_parallelogram) {
     throw std::invalid_argument("Error in PARALLELOGRAM parameters");
   }
