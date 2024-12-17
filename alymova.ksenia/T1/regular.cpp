@@ -80,6 +80,6 @@ void alymova::Regular::scale(double ratio)
   top_.x = pos_.x + (top_.x - pos_.x) * ratio;
   top_.y = pos_.y + (top_.y - pos_.y) * ratio;
   other_.x = pos_.x + (other_.x - pos_.x) * ratio;
-  other_.y = pos_.y + (other_.y - pos_.y) * ratio; 
+  other_.y = pos_.y + (other_.y - pos_.y) * ratio;
   frame_rect_.scale(ratio);
 }
