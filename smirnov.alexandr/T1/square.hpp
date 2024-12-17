@@ -8,9 +8,9 @@ namespace smirnov
   {
   private:
     point_t lowerLeft;
-    double side;
+    double sideLength;
   public:
-    Square(double x, double y, double sideLength);
+    Square(double x, double y, double length);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;

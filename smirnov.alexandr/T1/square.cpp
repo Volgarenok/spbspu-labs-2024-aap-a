@@ -1,25 +1,30 @@
 #include "square.hpp"
 #include <stdexcept>
 
-smirnov::Square::Square(double x, double y, double sideLength)
-  : lowerLeft{x, y}, side(sideLength)
+smirnov::Square::Square(double x, double y, double length)
 {
+  if (length <= 0)
+  {
+    throw std::invalid_argument("Side length must be positive.");
+  }
+  lowerLeft = {x, y};
+  sideLength = {length};
 }
 
 double smirnov::Square::getArea() const
 {
-  return side * side;
+  return sideLength * sideLength;
 }
 
 smirnov::rectangle_t smirnov::Square::getFrameRect() const
 {
   point_t center;
-  center.x = lowerLeft.x + side / 2;
-  center.y = lowerLeft.y + side / 2;
+  center.x = lowerLeft.x + sideLength / 2;
+  center.y = lowerLeft.y + sideLength / 2;
   rectangle_t frameRect;
   frameRect.pos = center;
-  frameRect.width = side;
-  frameRect.height = side;
+  frameRect.width = sideLength;
+  frameRect.height = sideLength;
   return frameRect;
 }
 
@@ -39,12 +44,8 @@ void smirnov::Square::move(double dx, double dy)
 
 void smirnov::Square::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::invalid_argument("The zoom factor must be positive.");
-  }
   point_t center = getFrameRect().pos;
-  lowerLeft.x = (lowerLeft.x - center.x) * k + center.x;
-  lowerLeft.x = (lowerLeft.x - center.x) * k + center.x;
-  side *= k;
+  sideLength *= k;
+  lowerLeft.x = center.x - sideLength / 2;
+  lowerLeft.y = center.y - sideLength / 2;
 }
