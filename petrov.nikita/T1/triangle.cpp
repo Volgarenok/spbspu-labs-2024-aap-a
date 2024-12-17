@@ -24,7 +24,7 @@ double petrov::Triangle::getArea()
   return sqrt(p * (p - a) * (p - b) * (p - c));
 }
 
-petrov::point_t * petrov::Triangle::getFrameRect()
+petrov::rectangle_t petrov::Triangle::getFrameRect()
 {
   double x_max = std::max(std::max(p1_.x_, p2_.x_), p3_.x_);
   double x_min = std::min(std::min(p1_.x_, p2_.x_), p3_.x_);
@@ -33,12 +33,7 @@ petrov::point_t * petrov::Triangle::getFrameRect()
   frame_rect_.width_ = abs(x_max - x_min);
   frame_rect_.height_ = abs(y_max - y_min);
   frame_rect_.pos_ = { ((2 * x_min + x_max - x_min) / 2.0), ((2 * y_min + y_max - y_min) / 2.0) };
-  point_t lower_left_corner = { (frame_rect_.pos_.x_ - (frame_rect_.width_ / 2)), (frame_rect_.pos_.y_ - (frame_rect_.height_ / 2)) };
-  point_t upper_right_corner = { (frame_rect_.pos_.x_ + (frame_rect_.width_ / 2)), (frame_rect_.pos_.y_ + (frame_rect_.height_ / 2)) };
-  frame_points_[0] = lower_left_corner;
-  frame_points_[1] = frame_rect_.pos_;
-  frame_points_[2] = upper_right_corner;
-  return frame_points_;
+  return frame_rect_;
 }
 
 void petrov::Triangle::move(point_t concrete_point)

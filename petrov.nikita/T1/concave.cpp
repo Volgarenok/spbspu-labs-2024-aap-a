@@ -56,7 +56,7 @@ double petrov::Concave::getArea() // Here you can use variables more effictively
   return area_without_cave - area_of_cave;
 }
 
-petrov::point_t * petrov::Concave::getFrameRect()
+petrov::rectangle_t petrov::Concave::getFrameRect()
 {
   double x_max = std::max(std::max(p1_.x_, p2_.x_), p3_.x_);
   double x_min = std::min(std::min(p1_.x_, p2_.x_), p3_.x_);
@@ -65,22 +65,17 @@ petrov::point_t * petrov::Concave::getFrameRect()
   frame_rect_.width_ = abs(x_max - x_min);
   frame_rect_.height_ = abs(y_max - y_min);
   frame_rect_.pos_ = { ((2 * x_min + x_max - x_min) / 2.0), ((2 * y_min + y_max - y_min) / 2.0) };
-  point_t lower_left_corner = { (frame_rect_.pos_.x_ - (frame_rect_.width_ / 2)), (frame_rect_.pos_.y_ - (frame_rect_.height_ / 2)) };
-  point_t upper_right_corner = { (frame_rect_.pos_.x_ + (frame_rect_.width_ / 2)), (frame_rect_.pos_.y_ + (frame_rect_.height_ / 2)) };
-  frame_points_[0] = lower_left_corner;
-  frame_points_[1] = frame_rect_.pos_;
-  frame_points_[2] = upper_right_corner;
-  return frame_points_;
+  return frame_rect_;
 }
 
 void petrov::Concave::move(point_t concrete_point)
 {
   double pos_dx = concrete_point.x_ - frame_rect_.pos_.x_;
   double pos_dy = concrete_point.y_ - frame_rect_.pos_.y_;
-  frame_rect_.pos_.x_ = concrete_point.x_;
-  frame_rect_.pos_.y_ = concrete_point.y_;
   p4_.x_ += pos_dx;
   p4_.y_ += pos_dy;
+  frame_rect_.pos_.x_ = concrete_point.x_;
+  frame_rect_.pos_.y_ = concrete_point.y_;
   p1_.x_ = frame_rect_.pos_.x_ - (frame_rect_.width_ / 2);
   p1_.y_ = frame_rect_.pos_.y_ - (frame_rect_.height_ / 2);
   p2_.x_ = frame_rect_.pos_.x_ - (frame_rect_.width_ / 2);
