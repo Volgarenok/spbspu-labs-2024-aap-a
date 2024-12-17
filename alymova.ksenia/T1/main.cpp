@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include "base-types.hpp"
 #include "shape.hpp"
+#include "shapesProcess.hpp"
 #include "inputProcess.hpp"
 int main()
 {

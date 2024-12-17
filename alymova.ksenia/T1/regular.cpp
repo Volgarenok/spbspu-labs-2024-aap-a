@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <limits>
-#include "shape.hpp"
+#include "shapesProcess.hpp"
 constexpr double PI = std::acos(-1.0);
 constexpr double inaccuracy = 0.0000000001;
 alymova::Regular::Regular(point_t pos, point_t top, point_t other):
