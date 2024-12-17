@@ -31,6 +31,7 @@ int main()
         std::cin >> x >> y >> scale_factor;
         if (!std::cin || scale_factor <= 0) {
           std::cerr << "Error in SCALE paramaters\n";
+          zholobov::delete_shapes(shapes, shape_cnt);
           return 1;
         }
         zholobov::process_scale(shapes, shape_cnt, {x, y}, scale_factor);
