@@ -104,9 +104,8 @@ void rychkov::composition::scale(Shape*const* shapes, size_t size, double coef)
 
 void rychkov::scale(Shape** shapes, size_t size, double coef, point_t scaleCenter)
 {
-  rectangle_t tempFrame = composition::getFrameRect(shapes, size);
-  composition::scale(shapes, size, coef);
-  double deltaX = (tempFrame.pos.x - scaleCenter.x) * (coef - 1);
-  double deltaY = (tempFrame.pos.y - scaleCenter.y) * (coef - 1);
-  composition::move(shapes, size, deltaX, deltaY);
+  for (size_t i = 0; i < size; i++)
+  {
+    scale(shapes[i], coef, scaleCenter);
+  }
 }

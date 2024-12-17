@@ -34,13 +34,13 @@ double rychkov::Polygon::getArea() const noexcept
 }
 rychkov::rectangle_t rychkov::Polygon::getFrameRect() const noexcept
 {
-  point_t bottomLeft{0, 0}, topRight{0, 0};
+  point_t bottomLeft(vertexes_[0]), topRight(vertexes_[0]);
   for (size_t i = 0; i < size_; i++)
   {
     bottomLeft.x = std::min(bottomLeft.x, vertexes_[i].x);
     bottomLeft.y = std::min(bottomLeft.y, vertexes_[i].y);
-    bottomLeft.x = std::max(bottomLeft.x, vertexes_[i].x);
-    bottomLeft.y = std::max(bottomLeft.y, vertexes_[i].y);
+    topRight.x = std::max(topRight.x, vertexes_[i].x);
+    topRight.y = std::max(topRight.y, vertexes_[i].y);
   }
   point_t center = {(topRight.x + bottomLeft.x) / 2, (topRight.y + bottomLeft.y) / 2};
   return {topRight.y - bottomLeft.y, topRight.x - bottomLeft.x, center};

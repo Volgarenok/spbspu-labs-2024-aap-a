@@ -34,7 +34,7 @@ rychkov::Regular::Regular(point_t p1, point_t p2, point_t p3)
   double hypotenuseSqr = std::max({len1Sqr, len2Sqr, len3Sqr});
   double innerRadiusSqr = std::min({len1Sqr, len2Sqr, len3Sqr});
   double leg2Sqr = len1Sqr + len2Sqr + len3Sqr - hypotenuseSqr - innerRadiusSqr;
-  if (!rychkov::isAlmostEqual(std::sqrt(hypotenuseSqr), std::sqrt(innerRadiusSqr) + std::sqrt(leg2Sqr), epsilonCoef))
+  if (!rychkov::isAlmostEqual(hypotenuseSqr, innerRadiusSqr + leg2Sqr, epsilonCoef))
   {
     throw std::invalid_argument("invalid right triangle");
   }
@@ -48,7 +48,6 @@ rychkov::Regular::Regular(point_t p1, point_t p2, point_t p3)
     {
       throw std::invalid_argument("invalid sides count");
     }
-
   }
   nSides_ = std::round(nSides);
   sideLength_ = std::sqrt(len1Sqr + len2Sqr + len3Sqr - hypotenuseSqr - innerRadiusSqr) * 2;
@@ -72,7 +71,7 @@ double rychkov::Regular::getArea() const noexcept
 }
 rychkov::rectangle_t rychkov::Regular::getFrameRect() const noexcept
 {
-  double outerRadius = sideLength_ / 2 / std::sin(PI / nSides_);
+  double outerRadius = (sideLength_ / 2) / std::sin(PI / nSides_);
   return {outerRadius * 2, outerRadius * 2, center_};
 }
 void rychkov::Regular::move(point_t destination) noexcept

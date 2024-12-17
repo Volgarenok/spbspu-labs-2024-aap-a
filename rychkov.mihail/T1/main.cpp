@@ -35,6 +35,16 @@ int main()
       double coef = 1;
       if (std::cin >> scaleCenter.x >> scaleCenter.y >> coef)
       {
+        if (used == 0)
+        {
+          std::cerr << "there are no valid shapes in input\n";
+          return 1;
+        }
+        if (coef <= 0)
+        {
+          std::cerr << "there are no shapes in input\n";
+          return 1;
+        }
         if (!allIsValid)
         {
           std::cerr << "some of figures have errors in input description\n";
@@ -45,15 +55,19 @@ int main()
       }
       free(command);
       rychkov::composition::deallocate(shapes, used);
-      return std::cin.fail() || std::cin.eof();
+      return !std::cin.good();
     }
 
-    rychkov::Shape* temp = rychkov::getShape(command, std::cin);
-    if (!temp)
+    bool isUnknown = false;
+    rychkov::Shape* temp = rychkov::getShape(command, std::cin, isUnknown);
+    if (isUnknown)
+    {
+      free(rychkov::getline(std::cin));
+    }
+    else if (!temp)
     {
       allIsValid = false;
       std::cin.clear();
-      free(rychkov::getline(std::cin));
     }
     else
     {

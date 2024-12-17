@@ -1,22 +1,21 @@
 #include "rectangle.hpp"
 
 #include <stdexcept>
-#include <algorithm>
 
 rychkov::Rectangle::Rectangle(point_t center, double height, double width):
   center_(center),
   height_(height),
   width_(width)
 {
-  if((height == 0) || (width_ == 0))
+  if((height <= 0) || (width_ <= 0))
   {
     throw std::invalid_argument("invalid rectangle");
   }
 }
 rychkov::Rectangle::Rectangle(point_t bottomLeft, point_t topRight):
   Rectangle({(bottomLeft.x + topRight.x) / 2, (bottomLeft.y + topRight.y) / 2},
-      std::abs(bottomLeft.x - topRight.x),
-      std::abs(bottomLeft.y - topRight.y))
+      topRight.y - bottomLeft.y,
+      topRight.x - bottomLeft.x)
 {}
 
 double rychkov::Rectangle::getArea() const noexcept
