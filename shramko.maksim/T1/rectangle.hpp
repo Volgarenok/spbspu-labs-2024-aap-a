@@ -1,15 +1,14 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
 
-#include "baseTypes.hpp"
-#include "base.hpp"
+#include "base-types.hpp"
 
 namespace shramko
 {
   class Rectangle: public Shape
   {
   public:
-    Rectangle(double leftBottomX, double leftBottomY, double rightTopX, double rightTopY);
+    Rectangle(point_t leftBottom, point_t rightTop);
     double getArea() const override;
     rectangle_t getRectangleFrame() const override;
     void move(point_t s) override;

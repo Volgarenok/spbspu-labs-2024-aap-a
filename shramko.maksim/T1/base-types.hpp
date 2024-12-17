@@ -6,14 +6,14 @@ namespace shramko
   struct point_t
   {
     double x;
-    double y:
+    double y;
   };
 
   struct rectangle_t
   {
     double width;
     double height;
-    pont_t pos;
+    point_t pos;
   };
 }
 

@@ -21,9 +21,6 @@ namespace shramko
     point_t Two_;
     point_t Three_;
   };
-
-  bool isTriangle(point_t One, point_t Two, point_t Three);
-  double getDistance(point_t One, point_t Two);
 }
 
 #endif

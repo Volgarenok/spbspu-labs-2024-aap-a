@@ -1,7 +1,7 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
-#include "baseTypes.hpp"
+#include "base-types.hpp"
 
 namespace shramko
 {
