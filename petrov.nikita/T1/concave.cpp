@@ -112,7 +112,7 @@ void petrov::Concave::scale(double k)
       p3_.y += dy;
       p4_ = { (p1_.x + p2_.x + p3_.x) / 3, (p1_.y + p2_.y + p3_.y) / 3 };
       frame_rect_.height *= k;
-      frame_rect_.width *= k;    
+      frame_rect_.width *= k;
     }
     else
     {
