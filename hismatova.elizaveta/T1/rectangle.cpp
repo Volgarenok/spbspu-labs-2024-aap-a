@@ -16,8 +16,8 @@ hismatova::rectangle_t hismatova::Rectangle::getFrameRect() const
 {
   double width = topRight_.x - bottomLeft_.x;
   double height = topRight_.y - bottomLeft_.y;
-  hismatova::point_t center = { bottomLeft_.x + width / 2.0, bottomLeft_.y + height / 2.0 };
-  return {width, height, center};
+  hismatova::point_t pos = { bottomLeft_.x + width / 2.0, bottomLeft_.y + height / 2.0 };
+  return {width, height, pos};
 }
 void hismatova::Rectangle::move(const point_t &newPos)
 {
