@@ -14,9 +14,16 @@ petrov::Triangle::Triangle(petrov::point_t p1, petrov::point_t p2, petrov::point
   {
     throw "ERROR: Invalid data somewhere";
   }
+  double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
+  double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
+  double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
+  double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
+  frame_rect_.width = abs(xmax - xmin);
+  frame_rect_.height = abs(ymax - ymin);
+  frame_rect_.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
 }
 
-double petrov::Triangle::getArea()
+double petrov::Triangle::getArea() const
 {
   double a = sqrt(pow((p1_.x - p2_.x), 2) + pow((p1_.y - p2_.y), 2));
   double b = sqrt(pow((p3_.x - p2_.x), 2) + pow((p3_.y - p2_.y), 2));
@@ -25,15 +32,8 @@ double petrov::Triangle::getArea()
   return sqrt(p * (p - a) * (p - b) * (p - c));
 }
 
-petrov::rectangle_t petrov::Triangle::getFrameRect()
+petrov::rectangle_t petrov::Triangle::getFrameRect() const
 {
-  double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
-  double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
-  double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
-  double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
-  frame_rect_.width = abs(xmax - xmin);
-  frame_rect_.height = abs(ymax - ymin);
-  frame_rect_.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
   return frame_rect_;
 }
 
@@ -47,6 +47,12 @@ void petrov::Triangle::move(petrov::point_t concrete_point)
   p2_.y = frame_rect_.pos.y + (frame_rect_.height / 2);
   p3_.x = frame_rect_.pos.x + (frame_rect_.width / 2);
   p3_.y = frame_rect_.pos.y + (frame_rect_.height / 2);
+  double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
+  double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
+  double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
+  double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
+  frame_rect_.width = abs(xmax - xmin);
+  frame_rect_.height = abs(ymax - ymin);
 }
 
 void petrov::Triangle::move(double dx, double dy)
@@ -59,6 +65,13 @@ void petrov::Triangle::move(double dx, double dy)
   p2_.y += dy;
   p3_.x += dx;
   p3_.y += dy;
+  double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
+  double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
+  double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
+  double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
+  frame_rect_.width = abs(xmax - xmin);
+  frame_rect_.height = abs(ymax - ymin);
+  frame_rect_.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
 }
 
 void petrov::Triangle::scale(double k)
@@ -76,6 +89,11 @@ void petrov::Triangle::scale(double k)
       p3_.y += dy;
       frame_rect_.height *= k;
       frame_rect_.width *= k;
+      double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
+      double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
+      double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
+      double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
+      frame_rect_.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
     }
     else
     {
@@ -89,6 +107,11 @@ void petrov::Triangle::scale(double k)
       p3_.y -= dy;
       frame_rect_.height *= k;
       frame_rect_.width *= k;
+      double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
+      double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
+      double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
+      double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
+      frame_rect_.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
     }
   }
 }

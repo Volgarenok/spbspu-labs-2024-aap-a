@@ -8,8 +8,8 @@ namespace petrov
   {
   public:
     Triangle(petrov::point_t p1, petrov::point_t p2, petrov::point_t p3);
-    double getArea() override;
-    petrov::rectangle_t getFrameRect() override;
+    double getArea() const override;
+    petrov::rectangle_t getFrameRect() const override;
     void move(petrov::point_t concrete_point) override;
     void move(double dx, double dy) override;
     void scale(double k) override;

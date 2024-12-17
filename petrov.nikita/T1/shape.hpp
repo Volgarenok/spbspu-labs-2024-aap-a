@@ -5,8 +5,8 @@ namespace petrov
 {
   struct Shape
   {
-    virtual double getArea() = 0;
-    virtual petrov::rectangle_t getFrameRect() = 0;
+    virtual double getArea() const;
+    virtual petrov::rectangle_t getFrameRect() const;
     virtual void move(petrov::point_t concrete_point) = 0;
     virtual void move(double dx, double dy) = 0;
     virtual void scale(double k) = 0;

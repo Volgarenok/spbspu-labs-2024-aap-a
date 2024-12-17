@@ -13,18 +13,18 @@ petrov::Rectangle::Rectangle(petrov::point_t p1, petrov::point_t p2):
   p2_.y = p3_.y;
   p4_.x = p3_.x;
   p4_.y = p1_.y;
+  frame_rect_.height = abs(p2_.y - p1_.y);
+  frame_rect_.width = abs(p4_.x - p1_.x);
+  frame_rect_.pos = { ((2 * p1_.x + p3_.x - p1_.x) / 2.0), ((2 * p1_.y + p3_.y - p1_.y) / 2.0) };
 }
 
-double petrov::Rectangle::getArea()
+double petrov::Rectangle::getArea() const
 {
   return frame_rect_.width * frame_rect_.height;
 }
 
-petrov::rectangle_t petrov::Rectangle::getFrameRect() // It needs changes...
+petrov::rectangle_t petrov::Rectangle::getFrameRect() const
 {
-  frame_rect_.height = abs(p2_.y - p1_.y);
-  frame_rect_.width = abs(p4_.x - p1_.x);
-  frame_rect_.pos = { ((2 * p1_.x + p3_.x - p1_.x) / 2.0), ((2 * p1_.y + p3_.y - p1_.y) / 2.0) };
   return frame_rect_;
 }
 
@@ -40,6 +40,9 @@ void petrov::Rectangle::move(petrov::point_t concrete_point)
   p3_.y = frame_rect_.pos.y + (frame_rect_.height / 2);
   p4_.x = frame_rect_.pos.x + (frame_rect_.width / 2);
   p4_.y = frame_rect_.pos.y - (frame_rect_.height / 2);
+  frame_rect_.height = abs(p2_.y - p1_.y);
+  frame_rect_.width = abs(p4_.x - p1_.x);
+  frame_rect_.pos = { ((2 * p1_.x + p3_.x - p1_.x) / 2.0), ((2 * p1_.y + p3_.y - p1_.y) / 2.0) };
 }
 
 void petrov::Rectangle::move(double dx, double dy)
@@ -54,6 +57,9 @@ void petrov::Rectangle::move(double dx, double dy)
   p3_.y += dy;
   p4_.x += dx;
   p4_.y += dy;
+  frame_rect_.height = abs(p2_.y - p1_.y);
+  frame_rect_.width = abs(p4_.x - p1_.x);
+  frame_rect_.pos = { ((2 * p1_.x + p3_.x - p1_.x) / 2.0), ((2 * p1_.y + p3_.y - p1_.y) / 2.0) };
 }
 
 void petrov::Rectangle::scale(double k)
@@ -73,6 +79,7 @@ void petrov::Rectangle::scale(double k)
       p4_.y -= dy;
       frame_rect_.height *= k;
       frame_rect_.width *= k;
+      frame_rect_.pos = { ((2 * p1_.x + p3_.x - p1_.x) / 2.0), ((2 * p1_.y + p3_.y - p1_.y) / 2.0) };
     }
     else
     {
@@ -88,6 +95,7 @@ void petrov::Rectangle::scale(double k)
       p4_.y += dy;
       frame_rect_.height *= k;
       frame_rect_.width *= k;
+      frame_rect_.pos = { ((2 * p1_.x + p3_.x - p1_.x) / 2.0), ((2 * p1_.y + p3_.y - p1_.y) / 2.0) };
     }
   }
 }
