@@ -3,7 +3,7 @@
 #include "base-types.hpp"
 
 gavrilova::Rectangle::Rectangle(point_t pBottomLeft, point_t pTopRight):
-  pBottomLeft_({0,0}), 
+  pBottomLeft_({0,0}),
   pTopRight_({0,0})
 {
   if (pBottomLeft.x < pTopRight.x && pBottomLeft.y < pTopRight.y) {
@@ -49,4 +49,3 @@ void gavrilova::Rectangle::scale(double k) {
   pTopRight_.x = center.x + frameRect.width / 2 * k;
   pTopRight_.y = center.y + frameRect.height / 2 * k;
 }
-

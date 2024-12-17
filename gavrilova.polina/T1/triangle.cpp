@@ -14,8 +14,8 @@ double gavrilova::getDistance(point_t A, point_t B){
 }
 
 gavrilova::Triangle::Triangle(point_t A, point_t B, point_t C):
-  A_({0.0}), 
-  B_({0.0}), 
+  A_({0.0}),
+  B_({0.0}),
   C_({0.0})
 {
   if (gavrilova::isTriangle(A, B, C)){
