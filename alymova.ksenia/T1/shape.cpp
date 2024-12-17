@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <cmath>
 #include <limits>
-constexpr double inaccuracy = 0.000000000000001;
+constexpr double inaccuracy = 0.00000000001;
 void alymova::scale(Shape** shapes, point_t s, double ratio)
 {
   if (ratio <= 0)
