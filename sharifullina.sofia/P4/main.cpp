@@ -19,16 +19,16 @@ int main()
   }
   try
   {
-    str = sharifullina::inputString(std::cin, '\n');
+    str1 = sharifullina::inputString(std::cin, '\n');
   }
   catch (const std::bad_alloc & e)
   {
     std::cerr << "Out of memory\n";
     return 1;
   }
-  if (str[0] == '\0')
+  if (str1[0] == '\0')
   {
-    delete[] str;
+    delete[] str1;
     std::cerr << "Empty input\n";
     return 1;
   }
