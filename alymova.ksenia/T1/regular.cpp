@@ -30,7 +30,7 @@ double alymova::Regular::getArea() const
 {
   return 0.5 * radius_big_ * radius_big_ * sides_cnt_ * std::sin((360 / getCntSides()) * PI / 180);
 }
-int alymova::Regular::getCntSides() const
+size_t alymova::Regular::getCntSides() const
 {
   double sides = PI / (std::acos(radius_small_ / radius_big_));
   return std::round(sides);

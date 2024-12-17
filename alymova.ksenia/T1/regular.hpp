@@ -2,6 +2,7 @@
 #define RECTANGLE_HPP
 #include "base-types.hpp"
 #include "shape.hpp"
+#include <cstddef>
 namespace alymova
 {
   struct Regular: public Shape
@@ -9,7 +10,7 @@ namespace alymova
   public:
     Regular(point_t pos, point_t top, point_t other);
     double getArea() const override;
-    int getCntSides() const;
+    size_t getCntSides() const;
     rectangle_t getFrameRect() const override;
     rectangle_t setFrameRect();
     void move(double shift_x, double shift_y) override;
