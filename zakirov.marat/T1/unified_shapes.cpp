@@ -50,7 +50,7 @@ namespace
     return line;
   }
 
-  double * extra_element(double * array, size_t size)
+  double * extra_element(const double * array, size_t size)
   {
     size_t new_size = size * sizeof(double) + sizeof(double);
     double * new_array = static_cast< double * >(malloc(new_size));
@@ -64,7 +64,6 @@ namespace
       new_array[i] = array[i];
     }
 
-    free(array);
     return new_array;
   }
 }
@@ -167,7 +166,17 @@ double * zakirov::get_data(std::istream & in)
   size_t start  = 0, finish = 0;
   while (workline[start] != '\n')
   {
-    data = extra_element(data, location);
+    double * expanded_data = extra_element(data, location);
+    free(data);
+    if (expanded_data != nullptr)
+    {
+      data = expanded_data;
+    }
+    else
+    {
+      return nullptr;
+    }
+
     while (workline[finish] != ' ' && workline[finish] != '\n')
     {
       ++finish;
