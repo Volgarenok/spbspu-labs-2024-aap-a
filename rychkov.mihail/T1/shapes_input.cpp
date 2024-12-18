@@ -106,6 +106,7 @@ rychkov::Shape* rychkov::getPolygon(std::istream& in)
   Polygon* result = static_cast< Polygon* >(malloc(sizeof(Polygon)));
   if (!result)
   {
+    free(points);
     return nullptr;
   }
   try
@@ -115,6 +116,7 @@ rychkov::Shape* rychkov::getPolygon(std::istream& in)
   catch (...)
   {
     free(result);
+    free(points);
     return nullptr;
   }
 }
