@@ -17,7 +17,7 @@ int main()
   guseynov::point_t p = {0, 0};
   while (true)
   {
-    delete[] line;
+    free(line);
     line = guseynov::getLine(std::cin);
     if (line == nullptr)
     {
@@ -29,7 +29,7 @@ int main()
     {
       std::cerr << "Error: EOF\n";
       guseynov::clearShapes(Shapes, current);
-      delete[] line;
+      free(line);
       return 1;
     }
     size_t f = guseynov::makeShape(line, Shapes, current, p, k);
@@ -37,7 +37,7 @@ int main()
     {
       if (!current)
       {
-        delete[] line;
+        free(line);
         std::cerr << "Error: empty shapes";
         return 1;
       }
@@ -46,14 +46,14 @@ int main()
       guseynov::scaleAllRelativeTo(Shapes, current, p, k);
       std::cout << std::fixed << std::setprecision(1) << guseynov::getAreaSum(Shapes, current);
       guseynov::printFrRectCords(std::cout, Shapes, current);
-      delete[] line;
+      free(line);
       break;
     }
     if (current == capacity)
     {
       std::cerr << "ERROR: Memory full\n";
       guseynov::clearShapes(Shapes, current);
-      delete[] line;
+      free(line);
       return 1;
     }
     flag = (f == 2) ? true : flag;
