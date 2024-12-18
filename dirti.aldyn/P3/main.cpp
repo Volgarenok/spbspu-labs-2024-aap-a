@@ -37,10 +37,11 @@ int main(int argc, char ** argv)
     std::cerr << "Input is incorrect" << "\n";
     return 2;
   }
+  int * matrix = nullptr;
   int * dyn_matrix = nullptr;
   if (num == 1)
   {
-    int matrix[10000] = {};
+    int matrix[10000] = {0};
   }
   else
   {
