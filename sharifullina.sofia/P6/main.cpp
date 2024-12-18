@@ -1,5 +1,5 @@
 #include<iostream>
-#include <inputString.hpp>
+#include <shrSym_uniTwo.hpp>
 #include "isExpression.hpp"
 int main()
 {
