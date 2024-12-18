@@ -7,13 +7,42 @@
 namespace
 {
 
+  bool compare_strings(const char * first_string, const char * second_string)
+  {
+    size_t location = 0;
+    if (first_string == nullptr || second_string == nullptr)
+    {
+      return true;
+    }
+
+    while (first_string[location] != '\0' && second_string[location] != '\0')
+    {
+      if (first_string[location] != second_string[location])
+      {
+        return true;
+      }
+
+      ++location;
+    }
+
+    if (first_string[location] == second_string[location])
+    {
+      return false;
+    }
+    else
+    {
+      return true;
+    }
+  }
+
   void get_part(std::istream & in, char * line, size_t start, size_t finish, char interrupt_el)
   {
     for (; start < finish; ++start)
     {
       in >> line[start];
-      if (in.eof() || line[start] == interrupt_el)
+      if (in.eof() || (line[start] == interrupt_el))
       {
+        line[start] = '\0';
         break;
       }
     }
@@ -36,7 +65,7 @@ namespace
     char last_symbol = interrupt_el;
     in >> last_symbol >> std::noskipws;
     line[0] = last_symbol;
-    while (last_symbol != interrupt_el)
+    while (last_symbol != interrupt_el && last_symbol != '\0')
     {
       char * expanded_line = zakirov::expand_line(line, finish, step);
       finish += step;
@@ -51,7 +80,7 @@ namespace
       line = expanded_line;
       for (size_t i = start; i < finish; ++i)
       {
-        if (line[i] == interrupt_el)
+        if (line[i] == interrupt_el || line[i] == '\0')
         {
           last_symbol = line[i];
           break;
@@ -148,6 +177,11 @@ zakirov::Shape * zakirov::make_shape(const double * data)
 
 double * zakirov::get_data(std::istream & in)
 {
+  constexpr char rectangle[] = "RECTANGLE";
+  constexpr char circle[] = "CIRCLE";
+  constexpr char ring[] = "RING";
+  constexpr char scale[] = "SCALE";
+  
   constexpr size_t step = 1;
   size_t real_size = 2;
   double * data = static_cast< double * >(malloc(real_size * sizeof(double)));
@@ -161,19 +195,19 @@ double * zakirov::get_data(std::istream & in)
   {
     data[0] = 0.0;
   }
-  else if (!std::strcmp(shape, "RECTANGLE "))
+  else if (!compare_strings(shape, rectangle))
   {
     data[0] = 1.0;
   }
-  else if (!std::strcmp(shape, "CIRCLE "))
+  else if (!compare_strings(shape, circle))
   {
     data[0] = 2.0;
   }
-  else if (!std::strcmp(shape, "RING "))
+  else if (!compare_strings(shape, ring))
   {
     data[0] = 3.0;
   }
-  else if (!std::strcmp(shape, "SCALE "))
+  else if (!compare_strings(shape, scale))
   {
     data[0] = 4.0;
   }
@@ -187,7 +221,7 @@ double * zakirov::get_data(std::istream & in)
   double counter = 0.0;
   char * workline = get_string(in, step, '\n');
   size_t start  = 0, finish = 0;
-  while (workline[start] != '\n')
+  while (workline[start] != '\0')
   {
     double * expanded_data = extra_element(data, location);
     free(data);
@@ -200,18 +234,18 @@ double * zakirov::get_data(std::istream & in)
       return nullptr;
     }
 
-    while (workline[finish] != ' ' && workline[finish] != '\n')
+    while (workline[finish] != ' ' && workline[finish] != '\0')
     {
       ++finish;
     }
 
     data[location++] = std::stod(workline);
-    while (start != finish)
+    while (start < finish)
     {
       workline[start] = ' ';
       ++start;
     }
-
+    start = finish;
     ++counter;
     ++finish;
   }
