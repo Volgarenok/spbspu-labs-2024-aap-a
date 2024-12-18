@@ -96,6 +96,7 @@ void guseynov::clearShapes(guseynov::Shape **shp, size_t currentIndx)
   {
     delete[] shp[i];
   }
+  delete[] shp;
 }
 
 double guseynov::getAreaSum(guseynov::Shape **shp, size_t Num)

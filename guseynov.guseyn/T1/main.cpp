@@ -32,22 +32,32 @@ int main()
       free(line);
       return 1;
     }
-    size_t f = guseynov::makeShape(line, Shapes, current, p, k);
-    if (f == 1)
+    size_t f = 0;
+    try
     {
-      if (!current)
+      f = guseynov::makeShape(line, Shapes, current, p, k);
+      if (f == 1)
       {
+        if (!current)
+        {
+          free(line);
+          std::cerr << "Error: empty shapes";
+          return 1;
+        }
+        std::cout << std::fixed << std::setprecision(1) << guseynov::getAreaSum(Shapes, current);
+        guseynov::printFrRectCords(std::cout, Shapes, current);
+        guseynov::scaleAllRelativeTo(Shapes, current, p, k);
+        std::cout << std::fixed << std::setprecision(1) << guseynov::getAreaSum(Shapes, current);
+        guseynov::printFrRectCords(std::cout, Shapes, current);
         free(line);
-        std::cerr << "Error: empty shapes";
-        return 1;
+        break;
       }
-      std::cout << std::fixed << std::setprecision(1) << guseynov::getAreaSum(Shapes, current);
-      guseynov::printFrRectCords(std::cout, Shapes, current);
-      guseynov::scaleAllRelativeTo(Shapes, current, p, k);
-      std::cout << std::fixed << std::setprecision(1) << guseynov::getAreaSum(Shapes, current);
-      guseynov::printFrRectCords(std::cout, Shapes, current);
+    }
+    catch (...)
+    {
+      guseynov::clearShapes(Shapes, current);
       free(line);
-      break;
+      return 1;
     }
     if (current == capacity)
     {
