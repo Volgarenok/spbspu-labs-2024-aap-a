@@ -1,4 +1,4 @@
-#include "shrSym_uniTwo.hpp"
+#include "inputString.hpp"
 
 char * sharifullina::inputString(std::istream & in, char stop)
 {

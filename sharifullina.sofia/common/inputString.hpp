@@ -1,5 +1,5 @@
-#ifndef SHRSYM_UNITWO_HPP
-#define SHRSYM_UNITWO_HPP
+#ifndef INPUTSTRING_HPP
+#define INPUTSTRING_HPP
 
 #include <iostream>
 
