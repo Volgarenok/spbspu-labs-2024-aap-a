@@ -71,6 +71,7 @@ const char * sharifullina::hasTerm(const char * str)
       return nullptr;
     }
     return next;
+  }
 }
 
 const char * sharifullina::hasMultiplier(const char * str)
