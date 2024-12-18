@@ -11,6 +11,7 @@ int main()
   constexpr size_t capacity = 10000;
   char *line = nullptr;
   guseynov::Shape * Shapes[capacity];
+  size_t sch = 0;
   size_t current = 0;
   double k = 0;
   bool flag = false;
@@ -25,7 +26,7 @@ int main()
       guseynov::clearShapes(Shapes, current);
       return 1;
     }
-    if (!std::cin.eof())
+    if (std::cin.eof())
     {
       std::cerr << "Error: EOF\n";
       guseynov::clearShapes(Shapes, current);
@@ -36,6 +37,7 @@ int main()
     try
     {
       f = guseynov::makeShape(line, Shapes, current, p, k);
+      sch++;
       if (f == 1)
       {
         if (!current)
@@ -59,7 +61,7 @@ int main()
       free(line);
       return 1;
     }
-    if (current == capacity)
+    if (sch == capacity)
     {
       std::cerr << "ERROR: Memory full\n";
       guseynov::clearShapes(Shapes, current);

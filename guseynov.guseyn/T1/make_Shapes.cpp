@@ -41,7 +41,7 @@ namespace
   }
 }
 
-size_t guseynov::makeShape(char *line, guseynov::Shape **shp, size_t & sch, guseynov::point_t & p, double & k)
+size_t guseynov::makeShape(char *line, guseynov::Shape **shp, size_t sch, guseynov::point_t & p, double & k)
 {
   if (line[0] == '\0')
     {
