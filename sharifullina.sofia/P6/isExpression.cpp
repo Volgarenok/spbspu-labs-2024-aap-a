@@ -47,8 +47,8 @@ const char * sharifullina::hasExpression(const char * str)
     {
       return nullptr;
     }
-    return next;
   }
+  return next;
 }
 
 const char * sharifullina::hasTerm(const char * str)
@@ -70,8 +70,8 @@ const char * sharifullina::hasTerm(const char * str)
     {
       return nullptr;
     }
-    return next;
   }
+  return next;
 }
 
 const char * sharifullina::hasMultiplier(const char * str)
@@ -100,11 +100,12 @@ const char * sharifullina::hasUnsignedInt(const char * str)
     return str;
   }
   auto next = hasNumber(str);
-  if (auto continues = hasUnsignedInt(next))
+  if (next)
   {
-    return continues;
+    while (next = hasNumber(next));
+    return next;
   }
-  return next;
+  return nullptr;
 }
 
 const char * sharifullina::hasIdentifier(const char * str)
