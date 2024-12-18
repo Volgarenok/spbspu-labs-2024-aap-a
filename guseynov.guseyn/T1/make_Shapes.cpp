@@ -22,7 +22,7 @@ namespace
     }
   }
 
-  void getFrRectCords(guseynov::rectangle_t & rect, double & lbx, double & lby, double & rtx, doub>
+  void getFrRectCords(guseynov::rectangle_t & rect, double & lbx, double & lby, double & rtx, double & rty)
   {
     lbx = rect.pos.x - rect.width / 2;
     lby = rect.pos.y - rect.height / 2;
@@ -30,17 +30,18 @@ namespace
     rty = rect.pos.y + rect.height / 2;
   }
 
-  void scaleRelativeTo(guseynov::Shape * shp, point_t p, double k)
+  void scaleRelativeTo(guseynov::Shape * shp, guseynov::point_t p, double k)
   {
-    point_t firstRect = shp->getFrameRect().pos;
+    guseynov::point_t firstRect = shp->getFrameRect().pos;
     shp->move(p);
-    point_t secondRect = shp->getFrameRect().pos;
-    point_t vector = {(secondRect.x - firstRect.x) * k, (secondRect.y - firstRect.y)>  shp->scale(k);
+    guseynov::point_t secondRect = shp->getFrameRect().pos;
+    guseynov::point_t vector = {(secondRect.x - firstRect.x) * k, (secondRect.y - firstRect.y)};
+    shp->scale(k);
     shp->move(-vector.x, -vector.y);
   }
 }
 
-size_t guseynov::makeShape(const char *line, guseynov::Shape **shp, size_t & sch, point_t & p, double & k)
+size_t guseynov::makeShape(char *line, guseynov::Shape **shp, size_t & sch, guseynov::point_t & p, double & k)
 {
   if (line[0] == '\0')
     {
@@ -82,15 +83,16 @@ size_t guseynov::makeShape(const char *line, guseynov::Shape **shp, size_t & sch
   {
     double numbers[3] = {0, 0, 0};
     readNum(numbers, 3);
-    p = {numbers[0], numbers[1]}
+    p = {numbers[0], numbers[1]};
     k = numbers[2];
     return 1;
   }
+  return 2;
 }
 
 void guseynov::clearShapes(guseynov::Shape **shp, size_t currentIndx)
 {
-  for (size_t i; i < currentIndx; i++)
+  for (size_t i = 0; i < currentIndx; i++)
   {
     delete[] shp[i];
   }
@@ -118,7 +120,7 @@ void guseynov::printFrRectCords(std::ostream & out, guseynov::Shape **shp, size_
   out << "\n";
 }
 
-void guseynov::scaleAllRelativeTo(Shape **shp, size_t Num, point_t p, double k)
+void guseynov::scaleAllRelativeTo(Shape **shp, size_t Num, guseynov::point_t p, double k)
 {
   if (k <= 0)
   {

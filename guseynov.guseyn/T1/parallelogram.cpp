@@ -1,9 +1,9 @@
-#include "pyyarallelogram.hpp"
+#include "parallelogram.hpp"
 
 #include <exception>
 #include <cmath>
 
-guseynov::Parallelogram::Parallelogram(point_t leftLowP, point_t rightLowP, point_t leftHighP)
+guseynov::Parallelogram::Parallelogram(guseynov::point_t leftLowP, guseynov::point_t rightLowP, guseynov::point_t leftHighP)
 {
   if (leftLowP.y != rightLowP.y || leftLowP.y == LeftHighP.y || leftLowP.x == leftHighP.x || leftLowP.x >= rightLowP.x )
   {
@@ -29,9 +29,9 @@ guseynov::rectangle_t guseynov::Parallelogram::getFrameRect() const
   return {width, height, {leftLowP_.x + (width / 2), leftLowP.y + (height / 2)}};
 }
 
-void guseynov::Parallelogram::move(point_t pos)
+void guseynov::Parallelogram::move(guseynov::point_t pos)
 {
-  point_t center = getFrameRect().pos;
+  guseynov::point_t center = getFrameRect().pos;
   double moveX = pos.x - center.x;
   double moveY = pos.y - center.y;
   leftLowP_.x += moveX;
@@ -58,7 +58,7 @@ void guseynov::Parallelogram::scale(double k)
   {
     throw std::logic_error("Invalid argument for k");
   }
-  point_t center = getFrameRect().pos;
+  guseynov::point_t center = getFrameRect().pos;
   leftLowP_.x = center.x - (center.x - leftLowP_.x) * k;
   leftLowP_.y = center.y - (center.y - leftLowP_.y) * k;
   rightLowP_.x = center.x + (center.x - rightLowP_.x) * k;
