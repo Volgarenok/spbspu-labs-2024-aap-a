@@ -48,10 +48,10 @@ const char * sharifullina::hasExpression(const char * str)
       return nullptr;
     }
     return next;
-}
+  }
 }
 
-const char * hasTerm(const char * str)
+const char * sharifullina::hasTerm(const char * str)
 {
   if (!str)
   {
@@ -73,7 +73,7 @@ const char * hasTerm(const char * str)
     return next;
 }
 
-const char * hasMultiplier(const char * str)
+const char * sharifullina::hasMultiplier(const char * str)
 {
   if (!str)
   {
@@ -92,7 +92,7 @@ const char * hasMultiplier(const char * str)
   return nullptr;
 }
 
-const char * hasUnsignedInt(const char * str)
+const char * sharifullina::hasUnsignedInt(const char * str)
 {
   if (!str)
   {
@@ -106,7 +106,7 @@ const char * hasUnsignedInt(const char * str)
   return next;
 }
 
-const char * hasIdentifier(const char * str)
+const char * sharifullina::hasIdentifier(const char * str)
 {
   return hasLetter(str);
 }

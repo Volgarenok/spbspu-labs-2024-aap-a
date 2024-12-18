@@ -20,6 +20,6 @@ int main()
     return 1;
   }
   std::cout << std::boolalpha;
-  std::cout << sharifullina::IsExpression(str) << "\n";
+  std::cout << sharifullina::isExpression(str) << "\n";
   delete[] str;
 }
