@@ -14,6 +14,10 @@ namespace
     {
       return line;
     }
+    else if (!in)
+    {
+      return nullptr;
+    }
 
     char last_symbol = interrupt_el;
     in >> last_symbol >> std::noskipws;

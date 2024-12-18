@@ -41,12 +41,6 @@ int main()
       std::cerr << "Warning! Not enought memory." << '\n';
       return 0;
     }
-
-    if (!std::cin)
-    {
-      free(data);
-      break;
-    }
   }
 
   double total_area = 0;
