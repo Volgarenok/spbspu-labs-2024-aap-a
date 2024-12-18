@@ -102,7 +102,7 @@ const char * sharifullina::hasUnsignedInt(const char * str)
   auto next = hasNumber(str);
   if (next)
   {
-    while (next = hasNumber(next));
+    while ((next = hasNumber(next)));
     return next;
   }
   return nullptr;
