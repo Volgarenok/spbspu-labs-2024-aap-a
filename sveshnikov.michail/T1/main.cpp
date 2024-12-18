@@ -53,7 +53,17 @@ int main()
   std::cout << std::fixed << std::setprecision(1);
   output(std::cout, shapes, num_shapes);
 
-  
+  for (size_t i = 0; i < num_shapes; i++)
+  {
+    sveshnikov::point_t pos = shapes[i]->getFrameRect().pos;
+    shapes[i]->move({zoom_ctr_x, zoom_ctr_y});
+    double dx = 0.0, dy = 0.0;
+    dx = -k * (pos.x - shapes[i]->getFrameRect().pos.x);
+    dy = -k * (pos.y - shapes[i]->getFrameRect().pos.y);
+    shapes[i]->scale(k);
+    shapes[i]->move(dx, dy);
+  }
+  output(std::cout, shapes, num_shapes);
   return 0;
 }
 
