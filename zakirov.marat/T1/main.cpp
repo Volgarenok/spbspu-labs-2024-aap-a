@@ -23,6 +23,7 @@ int main()
       if (shapes[location] != nullptr)
       {
         ++location;
+        free(data);
       }
       else if (data[0] == 4.0)
       {
@@ -32,7 +33,13 @@ int main()
       else
       {
         shape_flag = true;
+        free(data);
       }
+    }
+    else
+    {
+      std::cerr << "Warning! Not enought memory." << '\n';
+      return 0;
     }
 
     if (!std::cin)
