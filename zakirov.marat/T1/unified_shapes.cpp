@@ -14,6 +14,7 @@ namespace
     {
       return line;
     }
+
     char last_symbol = interrupt_el;
     in >> last_symbol >> std::noskipws;
     line[0] = last_symbol;
@@ -138,7 +139,11 @@ double * zakirov::get_data(std::istream & in)
   }
 
   char * shape = get_string(in, step, ' ');
-  if (!std::strcmp(shape, "RECTANGLE "))
+  if (shape == nullptr)
+  {
+    data[0] = 0.0;
+  }
+  else if (!std::strcmp(shape, "RECTANGLE "))
   {
     data[0] = 1.0;
   }
