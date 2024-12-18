@@ -3,6 +3,8 @@
 #include <iomanip>
 #include "rectangle.hpp"
 
+void output(std::ostream &in, sveshnikov::Shape **shapes, const size_t num_shapes);
+
 int main()
 {
   const size_t size = 10000;
@@ -28,28 +30,55 @@ int main()
       }
       else
       {
-        std::cerr << "ERROR: The rectangle is described by the lower left and upper right points!\n";
+        std::cerr << "ERROR: The rectangle should be described by the lower left and upper right points!\n";
         continue;
       }
       num_shapes++;
     }
   }
+
   if (shape_name != "SCALE")
   {
     std::cerr << "ERROR: The input must end with the zoom command!\n";
     return 1;
   }
   double zoom_ctr_x = 0.0, zoom_ctr_y = 0.0, k = 0.0;
+  std::cin >> zoom_ctr_x >> zoom_ctr_y >> k;
   if (k <= 0)
   {
     std::cerr << "ERROR: Zoom coefficient must be positive!\n";
     return 1;
   }
+
+  std::cout << std::fixed << std::setprecision(1);
+  output(std::cout, shapes, num_shapes);
+
+  
+  return 0;
+}
+
+void output(std::ostream &in, sveshnikov::Shape **shapes, const size_t num_shapes)
+{
   double total_area = 0.0;
   for (size_t i = 0; i < num_shapes; i++)
   {
     total_area += shapes[i]->getArea();
   }
-  std::cout << std::fixed << std::setprecision(1) << total_area << " ";
-  return 0;
+  std::cout << total_area << " ";
+
+  double low_left_x = 0.0, low_left_y = 0.0, up_right_x = 0.0, up_right_y = 0.0;
+  for (size_t i = 0; i < num_shapes; i++)
+  {
+    sveshnikov::rectangle_t frame = shapes[i]->getFrameRect();
+    low_left_x = frame.pos.x - frame.width / 2;
+    low_left_y = frame.pos.y - frame.height / 2;
+    up_right_x = frame.pos.x + frame.width / 2;
+    up_right_y = frame.pos.y + frame.height / 2;
+    std::cout << low_left_x << " " << low_left_y << " " << up_right_x << " " << up_right_y;
+    if (i != num_shapes)
+    {
+      std::cout << " ";
+    }
+  }
+  std::cout << '\n';
 }
