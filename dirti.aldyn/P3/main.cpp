@@ -26,15 +26,15 @@ int main(int argc, char ** argv)
   size_t read = 0;
   std::ifstream input(argv[2]);
   input >> m >> n;
-  if (m == 0 && n == 0)
-  {
-    std::cout << 0 << " " << 0 << "\n";
-    return 0;
-  }
   if (!input)
   {
     std::cerr << "Input is incorrect" << "\n";
     return 2;
+  }
+  if (m == 0 && n == 0)
+  {
+    std::cout << 0 << " " << 0 << "\n";
+    return 0;
   }
   int fix_matrix[10000] = {};
   int * matrix = nullptr;
