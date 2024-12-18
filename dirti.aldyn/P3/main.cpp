@@ -45,7 +45,6 @@ int main(int argc, char ** argv)
   }
   else
   {
-    int * matrix = nullptr;
     try
     {
       dyn_matrix = new int[m * n];
