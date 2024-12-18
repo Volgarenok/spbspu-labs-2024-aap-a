@@ -3,7 +3,7 @@
 smirnov::Square::Square(double x, double y, double length)
 {
   lowerLeft = {x, y};
-  sideLength = {length};
+  sideLength = length;
 }
 
 double smirnov::Square::getArea() const

@@ -21,7 +21,8 @@ smirnov::Square * smirnov::createSquare(std::istream & in)
   double y = 0.0;
   double length = 0.0;
   in >> x >> y >> length;
-  if (!in || length <= 0) {
+  if (!in || length <= 0)
+  {
     throw std::invalid_argument("Incorrect coordinates");
   }
   return new Square(x, y, length);
