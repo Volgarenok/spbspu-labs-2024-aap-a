@@ -6,7 +6,6 @@
 
 namespace
 {
-
   bool compare_strings(const char * first_string, const char * second_string)
   {
     size_t location = 0;
@@ -181,7 +180,7 @@ double * zakirov::get_data(std::istream & in)
   constexpr char circle[] = "CIRCLE";
   constexpr char ring[] = "RING";
   constexpr char scale[] = "SCALE";
-  
+
   constexpr size_t step = 1;
   size_t real_size = 2;
   double * data = static_cast< double * >(malloc(real_size * sizeof(double)));
