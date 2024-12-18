@@ -6,7 +6,7 @@ guseynov::Square::Square(point_t leftLowP, double length)
 {
   if (length <= 0)
   {
-    throw std::logic_error("Invalid argumets for Square");
+    throw;
   }
   leftLowP_.x = leftLowP.x;
   leftLowP_.y = leftLowP.y;
@@ -20,7 +20,7 @@ double guseynov::Square::getArea() const
 
 guseynov::rectangle_t guseynov::Square::getFrameRect() const
 {
-  return {length_, length_, {leftLowP_.x + (length_ / 2), leftLowP_.y + (length_ / 2)}}
+  return {length_, length_, {leftLowP_.x + (length_ / 2), leftLowP_.y + (length_ / 2)}};
 }
 
 void guseynov::Square::move(point_t pos)
@@ -39,9 +39,9 @@ void guseynov::Square::scale(double k)
 {
   if (k <= 0)
   {
-    throw std::logic_error("Invalid argument for k");
+    throw;
   }
-  point_t center = getFrameRect.pos;
+  point_t center = getFrameRect().pos;
   leftLowP_.x = center.x - (length_ / 2) * k;
   leftLowP_.y = center.y - (length_ / 2) * k;
 }

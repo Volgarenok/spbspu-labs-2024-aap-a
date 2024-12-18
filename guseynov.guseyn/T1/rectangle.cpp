@@ -6,7 +6,7 @@ guseynov::Rectangle::Rectangle(point_t leftLowP, point_t rightHighP)
 {
   if (leftLowP.x >= rightHighP.x || leftLowP.y >= rightHighP.y)
   {
-    throw std::logic_error("Invalid argumets for Rectangle");
+    throw;
   }
   leftLowP_.x = leftLowP.x;
   leftLowP_.y = leftLowP.y;
@@ -23,7 +23,7 @@ guseynov::rectangle_t guseynov::Rectangle::getFrameRect() const
 {
   double width = rightHighP_.x - leftLowP_.x;
   double height = rightHighP_.y - leftLowP_.y;
-  return {width, height, {leftLowP_.x + (width / 2), leftLowP.y + (height / 2)}};
+  return {width, height, {leftLowP_.x + (width / 2), leftLowP_.y + (height / 2)}};
 }
 
 void guseynov::Rectangle::move(point_t pos)
@@ -49,7 +49,7 @@ void guseynov::Rectangle::scale(double k)
 {
   if (k <= 0)
   {
-    throw std::logic_error("Invalid argument for k")
+    throw;
   }
   point_t center = getFrameRect().pos;
   this->leftLowP_.x = center.x - (center.x - leftLowP_.x) * k;
