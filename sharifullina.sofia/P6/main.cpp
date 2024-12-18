@@ -6,7 +6,7 @@ int main()
   char * str = nullptr;
   try
   {
-    str = sharifullina::inputString(std::cin, '\n');
+    str = sharifullina::inputstring(std::cin, '\n');
   }
   catch (const std::exception& e)
   {

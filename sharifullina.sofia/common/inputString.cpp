@@ -1,6 +1,6 @@
 #include "inputString.hpp"
 
-char * sharifullina::inputString(std::istream & in, char stop)
+char * sharifullina::inputstring(std::istream & in, char stop)
 {
   size_t capacity = 10;
   char * str = new char[capacity];
