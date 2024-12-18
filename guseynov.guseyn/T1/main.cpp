@@ -25,7 +25,7 @@ int main()
       guseynov::clearShapes(Shapes, current);
       return 1;
     }
-    if (std::cin.eof())
+    if (!std::cin.eof())
     {
       std::cerr << "Error: EOF\n";
       guseynov::clearShapes(Shapes, current);
