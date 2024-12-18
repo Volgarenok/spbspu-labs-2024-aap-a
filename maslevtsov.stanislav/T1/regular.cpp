@@ -18,7 +18,10 @@ bool maslevtsov::isRightTriangle(point_t p1, point_t p2, point_t p3)
      (sqrLength1 + sqrLength3 == sqrLength2));
 }
 
-maslevtsov::Regular::Regular(point_t center, point_t pnt2, point_t pnt3): center_(center), pnt2_(pnt2), pnt3_(pnt3)
+maslevtsov::Regular::Regular(point_t center, point_t pnt2, point_t pnt3):
+  center_(center),
+  pnt2_(pnt2),
+  pnt3_(pnt3)
 {
   double sqrLength1 = std::pow(center_.x - pnt2_.x, 2) + std::pow(center_.y - pnt2_.y, 2);
   double sqrLength2 = std::pow(pnt2_.x - pnt3_.x, 2) + std::pow(pnt2_.y - pnt3_.y, 2);
