@@ -106,7 +106,6 @@ const char * sharifullina::hasUnsignedInt(const char * str)
   }
   return next;
 }
-}
 
 const char * sharifullina::hasIdentifier(const char * str)
 {
