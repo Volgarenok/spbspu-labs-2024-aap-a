@@ -22,7 +22,6 @@ int main(int argc, char ** argv)
     std::cerr << "First parameter is not suitable" << "\n";
     return 1;
   }
-  const int num = std::atoi(argv[1][0]);
   size_t m = 0, n = 0;
   size_t read = 0;
   std::ifstream input(argv[2]);
@@ -40,7 +39,7 @@ int main(int argc, char ** argv)
   int fix_matrix[10000] = {};
   int * matrix = nullptr;
   int * dyn_matrix = nullptr;
-  if (num == 1)
+  if (argv[1][0] == '1')
   {
     matrix = fix_matrix;
   }
