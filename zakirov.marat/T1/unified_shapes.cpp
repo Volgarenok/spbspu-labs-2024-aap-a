@@ -6,6 +6,19 @@
 
 namespace
 {
+
+  void get_part(std::istream & in, char * line, size_t start, size_t finish, char interrupt_el)
+  {
+    for (; start < finish; ++start)
+    {
+      in >> line[start];
+      if (in.eof() || line[start] == interrupt_el)
+      {
+        break;
+      }
+    }
+  }
+
   char * get_string(std::istream & in, size_t step, char interrupt_el)
   {
     size_t start = 1, finish = 1;
@@ -16,6 +29,7 @@ namespace
     }
     else if (!in)
     {
+      free(line);
       return nullptr;
     }
 
@@ -32,7 +46,7 @@ namespace
         return expanded_line;
       }
 
-      zakirov::get_segment(in, expanded_line, start, finish);
+      get_part(in, expanded_line, start, finish, interrupt_el);
       free(line);
       line = expanded_line;
       for (size_t i = start; i < finish; ++i)
