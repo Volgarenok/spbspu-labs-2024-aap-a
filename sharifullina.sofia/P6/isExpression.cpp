@@ -100,12 +100,12 @@ const char * sharifullina::hasUnsignedInt(const char * str)
     return str;
   }
   auto next = hasNumber(str);
-  if (next)
+  if (auto continues = hasUnsignedInt(next))
   {
-    while ((next = hasNumber(next)));
-    return next;
+    return continues;
   }
-  return nullptr;
+  return next;
+}
 }
 
 const char * sharifullina::hasIdentifier(const char * str)
