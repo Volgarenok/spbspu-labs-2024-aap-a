@@ -8,8 +8,8 @@ namespace sveshnikov
   {
   private:
     point_t center_;
-    double short_radius_;
     double long_radius_;
+    double short_radius_;
 
   public:
     Ring(point_t center, double long_radius, double short_radius);
