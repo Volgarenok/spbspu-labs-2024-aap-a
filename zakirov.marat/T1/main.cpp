@@ -25,17 +25,12 @@ int main()
       }
       catch (const std::invalid_argument & e)
       {
-        std::cerr << "Error! Some argument is incorrect." << '\n';
+        shape_flag = true;
         free(data);
         continue;
       }
 
-      if (data[0] == 0.0)
-      {
-        shape_flag = true;
-        free(data);
-      }
-      else if (data[0] == 1.0)
+      if (data[0] == 1.0)
       {
         scale_data = data;
         break;
@@ -49,15 +44,24 @@ int main()
     else
     {
       std::cerr << "Warning! Some problems getting the string." << '\n';
-      return 0;
+      return 1;
+    }
+
+    if (std::cin.eof())
+    {
+      std::cerr << "Warning! Scale is not defined." << '\n';
+      zakirov::clear_shapes(shapes, location);
+      free(data);
+      return 1;
     }
   }
 
   if (shapes[0] == nullptr)
   {
     std::cerr << "Warning! No shapes entered." << '\n';
+    zakirov::clear_shapes(shapes, location);
     free(scale_data);
-    return 0;
+    return 1;
   }
 
   double total_area = 0;
@@ -88,6 +92,6 @@ int main()
     std::cerr << "Warning! One or more figures are specified incorrectly." << '\n';
   }
 
-  free(scale_data);
   zakirov::clear_shapes(shapes, location);
+  free(scale_data);
 }
