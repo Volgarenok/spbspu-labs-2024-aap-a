@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cstddef>
 #include <cstring>
-char* lanovenko::inputStr(std::istream& in, const char stop)
+char* lanovenko::inputStr(std::istream& in, char stop)
 {
   size_t capacity = 10;
   char* str = new char[capacity];
