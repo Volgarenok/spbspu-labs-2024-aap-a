@@ -13,7 +13,6 @@ using namespace lanovenko;
 
 int main()
 {
-  std::cin >> std::noskipws;
   constexpr size_t maxcapasity = 1000;
   char* str = nullptr;
   size_t shapeNumber = 0;
@@ -47,8 +46,8 @@ int main()
       }
       return 2;
     }
-    constexpr size_t shapes_count = 3;
-    const char* shape_names[shapes_count] = { "RECTANGLE", "TRIANGLE", "SCALE"};
+    constexpr size_t shapes_count = 4;
+    const char* shape_names[shapes_count] = { "RECTANGLE", "TRIANGLE", "DIAMOND", "SCALE"};
     try
     {
       for (size_t i = 0; i < shapes_count; i++)
@@ -73,6 +72,14 @@ int main()
             }
           }
           if (i == 2)
+          {
+            Shape* shape = inputDiamond(str);
+            if (shape != nullptr)
+            {
+              shapeArray[shapeNumber++] = shpae;
+            }
+          }
+          if (i == 3)
           {
             scale_was_met = true;
             scaleCommand(str, shapeArray, shapeNumber, std::cout);
@@ -104,5 +111,4 @@ int main()
   {
     delete shapeArray[i];
   }
-  std::cin >> std::skipws;
 }
