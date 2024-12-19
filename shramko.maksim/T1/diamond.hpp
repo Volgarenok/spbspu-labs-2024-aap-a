@@ -13,7 +13,7 @@ namespace shramko
     rectangle_t getRecctangleFrame() const override;
     void move(point_t point) override;
     void move(double x, double y) override;
-    void scale(k) override;
+    void scale(double k) override;
   private:
     point_t One_;
     point_t Two_;
