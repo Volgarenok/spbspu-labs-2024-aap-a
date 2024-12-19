@@ -65,7 +65,7 @@ void lanovenko::outputShapes(const Shape* const* shapeArray, size_t shapeNumbers
     double lft_lower_x = utillity.pos.x - utillity.width / 2;
     double lft_lower_y = utillity.pos.y - utillity.height / 2;
     double rht_upper_x = utillity.pos.x + utillity.width / 2;
-    double rht_upper_y = utillity.pos.y + utillity.height / 2;
+    double rht_upper_y = utillity.pos.x + utillity.height / 2;
     out << " " << lft_lower_x << " " << lft_lower_y;
     out << " " << rht_upper_x << " " << rht_upper_y;
   }
