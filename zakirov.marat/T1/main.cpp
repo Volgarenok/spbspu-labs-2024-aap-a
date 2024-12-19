@@ -20,9 +20,9 @@ int main()
     if (data)
     {
       shapes[location] = zakirov::make_shape(data);
-      if (shapes[location] != nullptr)
+      if (data[0] == 0.0)
       {
-        ++location;
+        shape_flag = true;
         free(data);
       }
       else if (data[0] == 4.0)
@@ -32,7 +32,7 @@ int main()
       }
       else
       {
-        shape_flag = true;
+        ++location;
         free(data);
       }
     }
@@ -41,6 +41,12 @@ int main()
       std::cerr << "Warning! Not enought memory." << '\n';
       return 0;
     }
+  }
+
+  if (shapes[0] == nullptr)
+  {
+    std::cerr << "Warning! No shapes entered." << '\n';
+    return 0;
   }
 
   double total_area = 0;

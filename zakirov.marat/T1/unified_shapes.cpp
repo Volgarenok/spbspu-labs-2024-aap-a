@@ -192,7 +192,8 @@ double * zakirov::get_data(std::istream & in)
   char * shape = get_string(in, step, ' ');
   if (shape == nullptr)
   {
-    data[0] = 0.0;
+    free(data);
+    return nullptr;
   }
   else if (!compare_strings(shape, rectangle))
   {
