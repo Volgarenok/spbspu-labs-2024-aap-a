@@ -3,7 +3,6 @@
 
 #include "shape.hpp"
 #include "base-types.hpp"
-#include <cstddef>
 
 namespace aleksandrov
 {
