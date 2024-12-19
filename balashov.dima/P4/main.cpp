@@ -1,4 +1,5 @@
 #include "processingString.hpp"
+#include <inputString.hpp>
 
 int main()
 {
