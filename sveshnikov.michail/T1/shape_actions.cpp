@@ -36,7 +36,7 @@ void sveshnikov::output_frame(std::ostream &out, sveshnikov::Shape **shapes)
     up_right_x = frame.pos.x + frame.width / 2;
     up_right_y = frame.pos.y + frame.height / 2;
     out << low_left_x << " " << low_left_y << " " << up_right_x << " " << up_right_y;
-    if (shapes[i+1] != nullptr)
+    if (shapes[i + 1] != nullptr)
     {
       out << " ";
     }

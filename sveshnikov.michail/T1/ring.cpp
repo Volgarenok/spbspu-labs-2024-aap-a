@@ -1,7 +1,7 @@
 #include "ring.hpp"
 #include <cmath>
 
-sveshnikov::Ring::Ring(point_t center, double long_radius, double short_radius): 
+sveshnikov::Ring::Ring(point_t center, double long_radius, double short_radius):
   center_(center),
   long_radius_(long_radius),
   short_radius_(short_radius)

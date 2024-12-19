@@ -1,7 +1,7 @@
 #include "ellipse.hpp"
 #include <cmath>
 
-sveshnikov::Ellipse::Ellipse(point_t center, double vert_radius, double horiz_radius): 
+sveshnikov::Ellipse::Ellipse(point_t center, double vert_radius, double horiz_radius):
   center_(center),
   vert_radius_(vert_radius),
   horiz_radius_(horiz_radius)
