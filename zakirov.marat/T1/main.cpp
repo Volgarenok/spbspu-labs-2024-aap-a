@@ -47,11 +47,10 @@ int main()
       return 1;
     }
 
-    if (std::cin.eof())
+    if (std::cin.eof() && data[0] != 1.0)
     {
       std::cerr << "Warning! Scale is not defined." << '\n';
       zakirov::clear_shapes(shapes, location);
-      free(data);
       return 1;
     }
   }

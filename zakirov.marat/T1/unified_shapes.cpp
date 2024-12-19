@@ -193,6 +193,7 @@ double * zakirov::get_data(std::istream & in)
   if (shape == nullptr)
   {
     free(data);
+    free(shape);
     return nullptr;
   }
   else if (!compare_strings(shape, rectangle))
@@ -214,6 +215,7 @@ double * zakirov::get_data(std::istream & in)
   else
   {
     data[0] = 0.0;
+    free(shape);
     return data;
   }
 
