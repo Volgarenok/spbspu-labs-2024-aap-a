@@ -1,5 +1,5 @@
 #include "rectangle.hpp"
-#include "base-types.hpp"
+#include <stdlib.h>
 #include <cmath>
 
 shramko::Rectangle::Rectangle(point_t leftBottom, point_t rightTop): leftBottom_({0.0L, 0.0L}), rightTop_({0.0L, 0.0L})

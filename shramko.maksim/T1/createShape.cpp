@@ -87,7 +87,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
           in >> Two.y;
           in >> Three.x;
           in >> Three.y;
-          shpes[count] = new Diamond{One, Two, Three};
+          shapes[count] = new Diamond{One, Two, Three};
           count++;
         }
         catch (const std::invalid_argument& e)
@@ -149,7 +149,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
 
 void shramko::clear(Shape** shapes, size_t count)
 {
-  for (size_t i = 0; i < count, i++)
+  for (size_t i = 0; i < count; i++)
   {
     delete shapes[i];
   }

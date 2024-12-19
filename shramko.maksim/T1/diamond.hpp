@@ -10,7 +10,7 @@ namespace shramko
   public:
     Diamond(point_t One, point_t Two, point_t Three);
     double getArea() const override;
-    rectangle_t getRecctangleFrame() const override;
+    rectangle_t getRectangleFrame() const override;
     void move(point_t point) override;
     void move(double x, double y) override;
     void scale(double k) override;
