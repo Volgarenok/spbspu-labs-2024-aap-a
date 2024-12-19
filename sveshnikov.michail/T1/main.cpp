@@ -4,6 +4,7 @@
 #include "rectangle.hpp"
 
 void output(std::ostream &in, sveshnikov::Shape **shapes, const size_t num_shapes);
+void isotropic_scaling(sveshnikov::Shape **shapes, double zoom_ctr_x, double zoom_ctr_y, double k);
 void clear(sveshnikov::Shape **shapes);
 
 int main()
@@ -42,9 +43,9 @@ int main()
   {
     std::cerr << "ERROR: Memmory not allocated!";
     clear(shapes);
-    return 1; 
+    return 1;
   }
-  
+
   if (shape_name != "SCALE")
   {
     std::cerr << "ERROR: The input must end with the zoom command!\n";
@@ -62,8 +63,15 @@ int main()
 
   std::cout << std::fixed << std::setprecision(1);
   output(std::cout, shapes, num_shapes);
+  isotropic_scaling(shapes, zoom_ctr_x, zoom_ctr_y, k);
+  output(std::cout, shapes, num_shapes);
+  clear(shapes);
+  return 0;
+}
 
-  for (size_t i = 0; i < num_shapes; i++)
+void isotropic_scaling(sveshnikov::Shape **shapes, double zoom_ctr_x, double zoom_ctr_y, double k)
+{
+  for (size_t i = 0; shapes[i] != nullptr; i++)
   {
     sveshnikov::point_t pos = shapes[i]->getFrameRect().pos;
     shapes[i]->move({zoom_ctr_x, zoom_ctr_y});
@@ -73,9 +81,6 @@ int main()
     shapes[i]->scale(k);
     shapes[i]->move(dx, dy);
   }
-  output(std::cout, shapes, num_shapes);
-  clear(shapes);
-  return 0;
 }
 
 void output(std::ostream &in, sveshnikov::Shape **shapes, const size_t num_shapes)
