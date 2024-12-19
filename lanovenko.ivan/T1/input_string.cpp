@@ -18,7 +18,7 @@ char* lanovenko::inputStr(std::istream& in)
       }
       catch (const std::bad_alloc& e)
       {
-        in >> std:skipws;
+        in >> std::skipws;
         delete[] str;
         throw;
       }

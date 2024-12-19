@@ -4,6 +4,7 @@
 #include <string>
 #include "rectangle.hpp"
 #include "traingle.hpp"
+#include "diamond.hpp"
 
 void lanovenko::getPoints(const size_t num_points, double* coords_array, point_t* points)
 {

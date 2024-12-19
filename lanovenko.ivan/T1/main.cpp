@@ -76,7 +76,7 @@ int main()
             Shape* shape = inputDiamond(str);
             if (shape != nullptr)
             {
-              shapeArray[shapeNumber++] = shpae;
+              shapeArray[shapeNumber++] = shape;
             }
           }
           if (i == 3)
