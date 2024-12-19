@@ -2,7 +2,6 @@
 #include "rectangle.hpp"
 #include "triangle.hpp"
 #include "diamond.hpp"
-#include "createShape.hpp"
 #include "outRes.hpp"
 
 double shramko::getArea(Shape** shapes, size_t count)

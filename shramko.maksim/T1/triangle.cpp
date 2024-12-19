@@ -2,24 +2,24 @@
 #include <algorithm>
 #include <cmath>
 
-shramko::Triangle::Triangle(point_t One, point_t Two, point_t Three)
+shramko::Triangle::Triangle(point_t one, point_t two, point_t three)
 {
-  One_ = One;
-  Two_ = Two;
-  Three_ = Three;
+  one_ = one;
+  two_ = two;
+  three_ = three;
 }
 
 double shramko::Triangle::getArea()
 {
-  return std::abs(((Two_.x - One_.x) * (Three_.y - One_.y) - (Three_.x - One_.x) * (Two_.y - One_.y))) / 2.0;
+  return std::abs(((two_.x - one_.x) * (three_.y - one_.y) - (three_.x - one_.x) * (two_.y - one_.y))) / 2.0;
 }
 
 double shramko::Triangle::getRectangleFrame() const
 {
-  double xMax = std::max(One_.x, std::max(Two_.x, Three_.x));
-  double yMax = std::max(One_.y, std::max(Two_.y, Three_.y));
-  double xMin = std::min(One_.x, std::min(Two_.x, Three_.x));
-  double yMin = std::min(One_.y, std::min(Two_.y, Three_.y));
+  double xMax = std::max(one_.x, std::max(two_.x, three_.x));
+  double yMax = std::max(one_.y, std::max(two_.y, three_.y));
+  double xMin = std::min(one_.x, std::min(two_.x, three_.x));
+  double yMin = std::min(one_.y, std::min(two_.y, three_.y));
 
   shramko::rectangle_t rectangleFrame;
   rectangleFrame.height = xMax - yMin;
@@ -33,40 +33,40 @@ double shramko::Triangle::getRectangleFrame() const
 void shramko::Triangle::move(point_t s)
 {
   shramko::point_t pos;
-  pos.x = std::abs(One_.x + Two_.x + Three_.x) / 3.0;
-  pos.y = std::abs(One_.y + Two_.y + Three_.y) / 3.0;
+  pos.x = std::abs(one_.x + two_.x + three_.x) / 3.0;
+  pos.y = std::abs(one_.y + two_.y + three_.y) / 3.0;
 
   double xMove = s.x - pos.x;
   double yMove = s.y - pos.y;
 
-  One_.x += xMove;
-  One_.y += yMove;
-  Two_.x += xMove;
-  Two_.y += yMove;
-  Three_.x += xMove;
-  Three_.y += yMove;
+  one_.x += xMove;
+  one_.y += yMove;
+  two_.x += xMove;
+  two_.y += yMove;
+  three_.x += xMove;
+  three_.y += yMove;
 }
 
 void shramko::Triangle::move(double x, double y)
 {
-  One_.x += xMove;
-  One_.y += yMove;
-  Two_.x += xMove;
-  Two_.y += yMove;
-  Three_.x += xMove;
-  Three_.y += yMove;
+  one_.x += xMove;
+  one_.y += yMove;
+  two_.x += xMove;
+  two_.y += yMove;
+  three_.x += xMove;
+  three_.y += yMove;
 }
 
 void shramko::Triangle::scale(k)
 {
   point_t pos;
-  pos.x = std::abs(One_.x + Two.x + Three_.x) / 3.0;
-  pos.y = std::abs(One_.y + Two.y + Three_.y) / 3.0;
+  pos.x = std::abs(one_.x + two.x + three_.x) / 3.0;
+  pos.y = std::abs(one_.y + two.y + three_.y) / 3.0;
 
-  One_.x = (One_.x - pos.x) * k + pos.x;
-  One_.y = (One_.y - pos.y) * k + pos.y;
-  Two_.x = (Two_.x - pos.x) * k + pos.x;
-  Two_.y = (Two_.y - pos.y) * k + pos.y;
-  Three_.x = (Three_.x - pos.x) * k + pos.x;
-  Three_.y = (Three_.y - pos.y) * k + pos.y;
+  one_.x = (one_.x - pos.x) * k + pos.x;
+  one_.y = (one_.y - pos.y) * k + pos.y;
+  two_.x = (two_.x - pos.x) * k + pos.x;
+  two_.y = (two_.y - pos.y) * k + pos.y;
+  three_.x = (three_.x - pos.x) * k + pos.x;
+  three_.y = (three_.y - pos.y) * k + pos.y;
 }

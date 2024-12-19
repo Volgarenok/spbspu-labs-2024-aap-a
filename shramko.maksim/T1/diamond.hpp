@@ -8,16 +8,16 @@ namespace shramko
   class Diamond: public Shape
   {
   public:
-    Diamond(point_t One, point_t Two, point_t Three);
+    Diamond(point_t one, point_t two, point_t three);
     double getArea() const override;
     rectangle_t getRectangleFrame() const override;
     void move(point_t point) override;
     void move(double x, double y) override;
     void scale(double k) override;
   private:
-    point_t One_;
-    point_t Two_;
-    point_t Three_;
+    point_t one_;
+    point_t two_;
+    point_t three_;
   };
 }
 
