@@ -35,6 +35,12 @@ int main()
         scale_data = data;
         break;
       }
+      else if (std::cin.eof())
+      {
+        std::cerr << "Warning! Scale is not defined." << '\n';
+        zakirov::clear_shapes(shapes, location);
+        return 1;
+      }
       else
       {
         ++location;
@@ -47,7 +53,7 @@ int main()
       return 1;
     }
 
-    if (std::cin.eof() && data[0] != 1.0)
+    if (std::cin.eof())
     {
       std::cerr << "Warning! Scale is not defined." << '\n';
       zakirov::clear_shapes(shapes, location);
@@ -58,6 +64,13 @@ int main()
   if (shapes[0] == nullptr)
   {
     std::cerr << "Warning! No shapes entered." << '\n';
+    zakirov::clear_shapes(shapes, location);
+    free(scale_data);
+    return 1;
+  }
+  else if (scale_data[4] <= 0)
+  {
+    std::cerr << "Warning! The figure change coefficient is incorrect." << '\n';
     zakirov::clear_shapes(shapes, location);
     free(scale_data);
     return 1;
