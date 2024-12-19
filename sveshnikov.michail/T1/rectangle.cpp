@@ -1,6 +1,6 @@
 #include "rectangle.hpp"
 
-sveshnikov::Rectangle::Rectangle(point_t low_left, point_t up_right): 
+sveshnikov::Rectangle::Rectangle(point_t low_left, point_t up_right):
   low_left_(low_left),
   up_right_(up_right)
 {}
