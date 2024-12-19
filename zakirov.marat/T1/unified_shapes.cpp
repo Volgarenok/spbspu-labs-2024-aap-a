@@ -151,15 +151,15 @@ zakirov::Shape * zakirov::make_shape(const double * data)
 {
   try
   {
-    if (data[0] == 1.0 && data[1] == 4.0)
+    if (data[0] == 2.0 && data[1] == 4.0)
     {
       return make_rectangle(data[2], data[3], data[4], data[5]);
     }
-    else if (data[0] == 2.0 && data[1] == 3.0)
+    else if (data[0] == 3.0 && data[1] == 3.0)
     {
       return make_circle(data[2], data[3], data[4]);
     }
-    else if (data[0] == 3.0 && data[1] == 4.0)
+    else if (data[0] == 4.0 && data[1] == 4.0)
     {
       return make_ring(data[2], data[3], data[4], data[5]);
     }
@@ -170,7 +170,7 @@ zakirov::Shape * zakirov::make_shape(const double * data)
   }
   catch (const std::invalid_argument & e)
   {
-    return nullptr;
+    throw e;
   }
 }
 
@@ -197,19 +197,19 @@ double * zakirov::get_data(std::istream & in)
   }
   else if (!compare_strings(shape, rectangle))
   {
-    data[0] = 1.0;
+    data[0] = 2.0;
   }
   else if (!compare_strings(shape, circle))
   {
-    data[0] = 2.0;
+    data[0] = 3.0;
   }
   else if (!compare_strings(shape, ring))
   {
-    data[0] = 3.0;
+    data[0] = 4.0;
   }
   else if (!compare_strings(shape, scale))
   {
-    data[0] = 4.0;
+    data[0] = 1.0;
   }
   else
   {

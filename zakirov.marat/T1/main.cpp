@@ -10,22 +10,32 @@
 
 int main()
 {
-  bool shape_flag = false;
   zakirov::Shape * shapes[10000];
-  double * scale_data = nullptr;
   size_t location = 0;
+  bool shape_flag = false;
+  double * scale_data = nullptr;
   while(true)
   {
     double * data = zakirov::get_data(std::cin);
     if (data)
     {
-      shapes[location] = zakirov::make_shape(data);
+      try
+      {
+        shapes[location] = zakirov::make_shape(data);
+      }
+      catch (const std::invalid_argument & e)
+      {
+        std::cerr << "Error! Some argument is incorrect." << '\n';
+        free(data);
+        continue;
+      }
+
       if (data[0] == 0.0)
       {
         shape_flag = true;
         free(data);
       }
-      else if (data[0] == 4.0)
+      else if (data[0] == 1.0)
       {
         scale_data = data;
         break;
@@ -38,7 +48,7 @@ int main()
     }
     else
     {
-      std::cerr << "Warning! Not enought memory." << '\n';
+      std::cerr << "Warning! Some problems getting the string." << '\n';
       return 0;
     }
   }
@@ -46,6 +56,7 @@ int main()
   if (shapes[0] == nullptr)
   {
     std::cerr << "Warning! No shapes entered." << '\n';
+    free(scale_data);
     return 0;
   }
 
