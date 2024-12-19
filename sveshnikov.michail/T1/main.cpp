@@ -1,9 +1,9 @@
-#include <iostream>
 #include <string>
+#include <exception>
 #include <iomanip>
-#include "rectangle.hpp"
+#include "build_shapes.hpp"
 
-void output(std::ostream &in, sveshnikov::Shape **shapes, const size_t num_shapes);
+void output(std::ostream &out, sveshnikov::Shape **shapes, const size_t num_shapes);
 void isotropic_scaling(sveshnikov::Shape **shapes, double zoom_ctr_x, double zoom_ctr_y, double k);
 void clear(sveshnikov::Shape **shapes);
 
@@ -20,22 +20,36 @@ int main()
       std::cin >> shape_name;
       if (shape_name == "RECTANGLE")
       {
-        double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0;
-        std::cin >> x1 >> y1 >> x2 >> y2;
-        if (x1 < x2 && y1 < y2)
+        try
         {
-          shapes[num_shapes] = new sveshnikov::Rectangle({x1, y1}, {x2, y2});
+          sveshnikov::build_rectangle(std::cin, shapes, num_shapes);
         }
-        else if (x1 > x2 && y1 > y2)
-        {
-          shapes[num_shapes] = new sveshnikov::Rectangle({x2, y2}, {x1, y1});
-        }
-        else
+        catch(std::logic_error)
         {
           std::cerr << "ERROR: The rectangle should be described by the lower left and upper right points!\n";
-          continue;
         }
-        num_shapes++;
+      }
+      if (shape_name == "RING")
+      {
+        try
+        {
+          sveshnikov::build_ring(std::cin, shapes, num_shapes);
+        }
+        catch(std::logic_error)
+        {
+          std::cerr << "ERROR: The radiuses of the ring must be given by positive numbers!\n";
+        }
+      }
+      if (shape_name == "RECTANGLE")
+      {
+        try
+        {
+          sveshnikov::build_ellipse(std::cin, shapes, num_shapes);
+        }
+        catch(std::logic_error)
+        {
+          std::cerr << "ERROR: The radiuses of the ellipse must be given by positive numbers!\n";
+        }
       }
     }
   }
@@ -83,14 +97,14 @@ void isotropic_scaling(sveshnikov::Shape **shapes, double zoom_ctr_x, double zoo
   }
 }
 
-void output(std::ostream &in, sveshnikov::Shape **shapes, const size_t num_shapes)
+void output(std::ostream &out, sveshnikov::Shape **shapes, const size_t num_shapes)
 {
   double total_area = 0.0;
   for (size_t i = 0; i < num_shapes; i++)
   {
     total_area += shapes[i]->getArea();
   }
-  std::cout << total_area << " ";
+  out << total_area << " ";
 
   double low_left_x = 0.0, low_left_y = 0.0, up_right_x = 0.0, up_right_y = 0.0;
   for (size_t i = 0; i < num_shapes; i++)
@@ -100,13 +114,13 @@ void output(std::ostream &in, sveshnikov::Shape **shapes, const size_t num_shape
     low_left_y = frame.pos.y - frame.height / 2;
     up_right_x = frame.pos.x + frame.width / 2;
     up_right_y = frame.pos.y + frame.height / 2;
-    std::cout << low_left_x << " " << low_left_y << " " << up_right_x << " " << up_right_y;
+    out << low_left_x << " " << low_left_y << " " << up_right_x << " " << up_right_y;
     if (i != num_shapes - 1)
     {
-      std::cout << "_";
+      out << "_";
     }
   }
-  std::cout << '\n';
+  out << '\n';
 }
 
 void clear(sveshnikov::Shape **shapes)
