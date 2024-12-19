@@ -23,7 +23,7 @@ int main()
         {
           sveshnikov::build_rectangle(std::cin, shapes, num_shapes);
         }
-        catch (const std::logic_error& e)
+        catch (const std::logic_error &e)
         {
           std::cerr << "ERROR: The rectangle should be described by the lower left and upper right points!\n";
         }
@@ -34,7 +34,7 @@ int main()
         {
           sveshnikov::build_ring(std::cin, shapes, num_shapes);
         }
-        catch (const std::logic_error& e)
+        catch (const std::logic_error &e)
         {
           std::cerr << "ERROR: The radiuses of the ring must be given by positive numbers!\n";
         }
@@ -45,7 +45,7 @@ int main()
         {
           sveshnikov::build_ellipse(std::cin, shapes, num_shapes);
         }
-        catch (const std::logic_error& e)
+        catch (const std::logic_error &e)
         {
           std::cerr << "ERROR: The radiuses of the ellipse must be given by positive numbers!\n";
         }
