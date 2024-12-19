@@ -12,11 +12,11 @@ namespace sveshnikov
 
   public:
     Rectangle(point_t low_left, point_t up_right);
-    virtual double getArea() const override;
-    virtual rectangle_t getFrameRect() const override;
-    virtual void move(point_t p) override;
-    virtual void move(double dx, double dy) override;
-    virtual void scale(double k) override;
+    double getArea() const override;
+    rectangle_t getFrameRect() const override;
+    void move(point_t p) override;
+    void move(double dx, double dy) override;
+    void scale(double k) override;
   };
 }
 

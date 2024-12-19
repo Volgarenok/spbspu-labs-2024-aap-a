@@ -40,8 +40,8 @@ void sveshnikov::Rectangle::scale(double k)
 {
   double height = up_right_.y - low_left_.y;
   double width = up_right_.x - low_left_.x;
-  up_right_.x += width * (k - 1);
-  up_right_.y += height * (k - 1);
-  low_left_.x -= width * (k - 1);
-  low_left_.y -= height * (k - 1);
+  up_right_.x += width * (k - 1) / 2;
+  up_right_.y += height * (k - 1) / 2;
+  low_left_.x -= width * (k - 1) / 2;
+  low_left_.y -= height * (k - 1) / 2;
 }
