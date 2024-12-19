@@ -1,10 +1,10 @@
 #include "ring.hpp"
 #include <cmath>
 
-sveshnikov::Ring::Ring(point_t center, double short_radius, double long_radius): 
+sveshnikov::Ring::Ring(point_t center, double long_radius, double short_radius): 
   center_(center),
-  short_radius_(short_radius),
-  long_radius_(long_radius)
+  long_radius_(long_radius),
+  short_radius_(short_radius)
 {}
 
 double sveshnikov::Ring::getArea() const

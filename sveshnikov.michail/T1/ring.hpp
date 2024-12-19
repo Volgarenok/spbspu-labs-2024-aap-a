@@ -12,7 +12,7 @@ namespace sveshnikov
     double long_radius_;
 
   public:
-    Ring(point_t center, double short_radius, double long_radius);
+    Ring(point_t center, double long_radius, double short_radius);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;

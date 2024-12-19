@@ -26,12 +26,37 @@ void sveshnikov::build_rectangle(std::istream &in, Shape **shapes, size_t &num_s
 
 void sveshnikov::build_ring(std::istream &in, Shape **shapes, size_t &num_shapes)
 {
-  double ctr_x = 0.0, ctr_y = 0.0, short_radius = 0.0, long_radius = 0.0;
-  in >> ctr_x >> ctr_y >> short_radius >> long_radius;
-  
+  double ctr_x = 0.0, ctr_y = 0.0, radius1 = 0.0, radius2 = 0.0;
+  in >> ctr_x >> ctr_y >> radius1 >> radius2;
+  if (radius1 > 0 && radius2 > 0 && radius1 != radius2)
+  {
+    if (radius1 > radius2)
+    {
+      shapes[num_shapes] = new Ring({ctr_x, ctr_y}, radius1, radius2);
+    }
+    else
+    {
+      shapes[num_shapes] = new Ring({ctr_x, ctr_y}, radius2, radius1);
+    }
+    num_shapes++;
+  }
+  else
+  {
+    throw std::logic_error("input shape error");
+  }
 }
 
 void sveshnikov::build_ellipse(std::istream &in, Shape **shapes, size_t &num_shapes)
 {
-
+  double ctr_x = 0.0, ctr_y = 0.0, vert_radius = 0.0, horiz_radius = 0.0;
+  in >> ctr_x >> ctr_y >> vert_radius >> horiz_radius;
+  if (vert_radius > 0 && horiz_radius > 0)
+  {
+    shapes[num_shapes] = new Ring({ctr_x, ctr_y}, vert_radius, horiz_radius);
+    num_shapes++;
+  }
+  else
+  {
+    throw std::logic_error("input shape error");
+  }
 }
