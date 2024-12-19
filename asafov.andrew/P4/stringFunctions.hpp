@@ -4,7 +4,7 @@
 namespace asafov
 {
   bool isLetter(char ch);
-  int countUniqLetters(const char* string, size_t lenght);
-  char* getUnusedLetters(const char* string, size_t length);
+  int countUniqLetters(const char* string);
+  char* getUnusedLetters(const char* string);
 }
 #endif

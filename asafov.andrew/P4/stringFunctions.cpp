@@ -1,19 +1,10 @@
 #include "stringFunctions.hpp"
 
-bool asafov::isLetter(char ch)
-{
-  if((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z'))
-  {
-    return true;
-  }
-  return false;
-}
-
-int asafov::countUniqLetters(const char* string, size_t length)
+int asafov::countUniqLetters(const char* string)
 {
   char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
   size_t count = 0;
-  for(size_t i = 0; i < length; i++)
+  for(size_t i = 0; string[i]!='\0'; i++)
   {
     if(isLetter(string[i]))
     {
@@ -27,25 +18,14 @@ int asafov::countUniqLetters(const char* string, size_t length)
       }
     }
   }
-  char* unusedLetters = new char[count+1];
-  count = 0;
-  for(size_t i = 0; i < 26; i++)
-  {
-    if(alphabet[i]!=0)
-    {
-      unusedLetters[count]=alphabet[i];
-      count++;
-    }
-  }
-  delete[] unusedLetters;
-  return count;
+  return 26 - count;
 }
 
-char* asafov::getUnusedLetters(const char* string, size_t length)
+char* asafov::getUnusedLetters(const char* string)
 {
   char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
   size_t count = 0;
-  for(size_t i = 0; i < length; i++)
+  for(size_t i = 0; string[i]!='\0'; i++)
   {
     if(isLetter(string[i]))
     {
@@ -59,16 +39,16 @@ char* asafov::getUnusedLetters(const char* string, size_t length)
       }
     }
   }
-  char* unusedLetters = new char[count+1];
-  count = 0;
-  for(size_t i = 0; i < 26; i++)
+  while(count!=0)
   {
-    if(alphabet[i]!=0)
-    {
-      unusedLetters[count]=alphabet[i];
-      count++;
+    count=0;
+    for(size_t i = 0;i<26;i++){
+      if (string[i]==0 && i!=26){
+        alphabet[i] = string[i+1];
+        alphabet[i+1] = 0;
+        count++;
+      }
     }
   }
-  unusedLetters[count] = 0;
-  return unusedLetters;
+  return alphabet;
 }
