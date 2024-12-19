@@ -2,7 +2,6 @@
 #define SHAPE_HPP
 
 #include "base-types.hpp"
-#include <cstddef>
 
 namespace aleksandrov
 {

@@ -1,10 +1,10 @@
-#ifndef MAKESHAPE_H
-#define MAKESHAPE_H
+#ifndef SHAPEMANIP_H
+#define SHAPEMANIP_H
 
+#include "shape.hpp"
 #include "rectangle.hpp"
 #include "ellipse.hpp"
 #include "circle.hpp"
-#include "shape.hpp"
 #include <string>
 
 namespace aleksandrov
@@ -13,6 +13,9 @@ namespace aleksandrov
   Ellipse* makeEllipse(const std::string ellipseParams, bool& error);
   Circle* makeCircle(const std::string circleParams, bool& error);
   Shape* makeShape(const std::string shapeDescription, bool& error);
+  void doScale(Shape** shapes, size_t count, double& x, double& y, double& k, double& sum);
+  void printFrameRectCoords(Shape** shape, size_t count);
+  void deleteShapes(Shape** shape, size_t count);
 }
 
 #endif
