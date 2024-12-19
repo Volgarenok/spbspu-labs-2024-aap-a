@@ -11,15 +11,15 @@ lanovenko::Rectangle::Rectangle(point_t p1, point_t p2) : leftlower(p1), rightup
 
 double lanovenko::Rectangle::getArea() const
 {
-  double width = std::abs(rightupper.x - leftlower.x);
-  double height = std::abs(rightupper.y - leftlower.y);
+  double width = std::abs(leftlower.x - rightupper.x);
+  double height = std::abs(leftlower.y - rightupper.y);
   return width * height;
 }
 
 lanovenko::rectangle_t lanovenko::Rectangle::getFrameRect() const
 {
-  double width = std::abs(rightupper.x - leftlower.x);
-  double height = std::abs(rightupper.y - leftlower.y);
+  double width = std::abs(leftlower.x - rightupper.x);
+  double height = std::abs(leftlower.y - rightupper.y);
   point_t center = { (rightupper.x + leftlower.x) / 2, (rightupper.y + leftlower.y) / 2 };
   return { width, height, center };
 }
