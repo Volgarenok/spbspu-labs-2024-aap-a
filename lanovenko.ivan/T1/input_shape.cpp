@@ -54,3 +54,22 @@ lanovenko::Shape* lanovenko::inputTriangle(const char str[])
     return new Triangle(points[0], points[1], points[2]);
 }
 
+lanovenko::Shape* lanovenko::inputDiamond(const char str[])
+{
+  const char* coords_str = str + 9;
+  double coords_array[6]{};
+  size_t pos = 0;
+  for (size_t i = 0; i < 6; ++i)
+  {
+    coords_array[i] = std::stod(coords_str, std::addressof(pos));
+    coords_str += pos;
+  }
+  if (*coords_str != '\0')
+  {
+    throw std::invalid_argument("Invalid Diamond arguments");
+  }
+  constexpr size_t num_points = 3;
+  point_t points[num_points]{};
+  getPoints(num_points, coords_array, points);
+  return new Diamond(points[0], points[1], points[2]);
+}
