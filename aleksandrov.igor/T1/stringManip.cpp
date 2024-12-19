@@ -62,6 +62,10 @@ namespace aleksandrov
     x = std::stod(param1);
     y = std::stod(param2);
     k = std::stod(param3);
+    if (k <= 0)
+    {
+      return "";
+    }
     return "something not empty";
   }
 }

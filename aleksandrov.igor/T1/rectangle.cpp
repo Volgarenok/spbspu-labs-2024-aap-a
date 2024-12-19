@@ -49,3 +49,4 @@ void aleksandrov::Rectangle::scale(double k)
   b_.x = center.x + (b_.x - center.x) * k;
   b_.y = center.y + (b_.y - center.y) * k;
 }
+
