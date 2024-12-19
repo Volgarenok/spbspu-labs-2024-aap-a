@@ -4,7 +4,7 @@
 #include <istream>
 char* komarova::read(std::istream & input, size_t & size_str, size_t & size_str_now, char end_str)
 {
-  char * str = reinterpret_cast< char * >(malloc((size_str + 1) * sizeof(char)));
+  char * str = reinterpret_cast< char * >(malloc(size_str + 1));
   if (str == nullptr)
   {
     return nullptr;
@@ -19,7 +19,7 @@ char* komarova::read(std::istream & input, size_t & size_str, size_t & size_str_
     if (size_str_now == size_str)
     {
       size_str = size_str * 10;
-      char * str_1 = reinterpret_cast< char* >(malloc((size_str + 1) * sizeof(char)));
+      char * str_1 = reinterpret_cast< char* >(malloc(size_str + 1));
       if (str_1 == nullptr)
       {
         size_str = size_str_now;

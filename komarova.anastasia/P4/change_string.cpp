@@ -1,26 +1,27 @@
 #include "change.h"
 #include <cstddef>
-int komarova::vowel(char sym)
+int komarova::vowel(char * str)
 {
-  if (sym == 'a' || sym == 'e' ||
-      sym == 'o' || sym == 'i' ||
-      sym == 'u' || sym == 'A' ||
-      sym == 'E' || sym == 'O' ||
-      sym == 'I' || sym == 'U')
+  const char * vows = "aeiouAEIOU\0";
+  while (*str != '\0')
   {
-    return 1;
+    for (const char * v = vows; *v != '\0'; v++)
+    {
+      if (*str == *v)
+      {
+        return 1;
+      }
+    }
+    str++;
   }
-  else
-  {
-    return 0;
-  }
+  return 0;
 }
 char * komarova::vowels(const char * str, char * str_res)
 {
   char * res = str_res;
   while (*str != '\0')
   {
-    if (komarova::vowel(*str) || *str == ' ')
+    if (vowel(*str) || *str == ' ')
     {
       *str_res = *str;
       str_res++;
