@@ -1,6 +1,6 @@
 #include "change.h"
 #include <cstddef>
-int komarova::vowel(char str)
+int komarova::vowel(const char* str)
 {
   const char * vows = "aeiouAEIOU\0";
   while (*str != '\0')
@@ -21,7 +21,7 @@ char * komarova::vowels(const char * str, char * str_res)
   char * res = str_res;
   while (*str != '\0')
   {
-    if (vowel(*str) || *str == ' ')
+    if (vowel(str) || *str == ' ')
     {
       *str_res = *str;
       str_res++;
