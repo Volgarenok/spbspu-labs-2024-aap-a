@@ -6,7 +6,8 @@
 int main()
 {
   size_t len = 0;
-  const char* str = gavrilova::inputStr(std::cin, len);
+  size_t nSpaces = 0;
+  const char* str = gavrilova::inputStr(std::cin, len, nSpaces);
   if (!str || str[0] == '\0') {
     std::cerr << "Wrong input!" << "\n";
     delete[] str;
