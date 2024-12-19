@@ -10,10 +10,10 @@ shramko::Rectangle::Rectangle(point_t leftBottom, point_t rightTop): leftBottom(
   rightTop_.y = rightTop.y;
 }
 
-double shramko:Rectangle:getArea() const
+double shramko::Rectangle::getArea() const
 {
-  double lenWidth = rightTop.x - leftBottom_.x;
-  double lenHeight = rightTop.y - leftBottom_.y;
+  double lenWidth = rightTop_.x - leftBottom_.x;
+  double lenHeight = rightTop_.y - leftBottom_.y;
 
   return lenWidth * lenHeight;
 }

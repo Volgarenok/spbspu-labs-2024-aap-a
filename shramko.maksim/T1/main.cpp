@@ -7,7 +7,7 @@ int main()
 {
   constexpr size_t size = 10000;
   shramko::Shape* shapes[size] = {};
-  size_t count = 0;
+  int count = 0;
   count = shramko::createShape(std::cin, std::cerr, std::cout, shapes);
 
   if (count == -1)
