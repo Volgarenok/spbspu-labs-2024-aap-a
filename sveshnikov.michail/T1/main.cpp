@@ -25,7 +25,7 @@ int main()
         }
         catch (const std::logic_error &e)
         {
-          std::cerr << "ERROR: The rectangle should be described by the lower left and upper right points!\n";
+          std::cerr << "ERROR: Incorrect input of rectangle!\n";
         }
       }
       else if (shape_name == "RING")
@@ -36,7 +36,7 @@ int main()
         }
         catch (const std::logic_error &e)
         {
-          std::cerr << "ERROR: The radiuses of the ring must be given by positive numbers!\n";
+          std::cerr << "ERROR: Incorrect input of ring!\n";
         }
       }
       else if (shape_name == "ELLIPSE")
@@ -47,14 +47,14 @@ int main()
         }
         catch (const std::logic_error &e)
         {
-          std::cerr << "ERROR: The radiuses of the ellipse must be given by positive numbers!\n";
+          std::cerr << "ERROR: Incorrect input of ellipse!\n";
         }
       }
     }
   }
   catch (const std::bad_alloc &e)
   {
-    std::cerr << "ERROR: Memmory not allocated!";
+    std::cerr << "ERROR: Memmory did not allocated!\n";
     clear(shapes);
     return 1;
   }

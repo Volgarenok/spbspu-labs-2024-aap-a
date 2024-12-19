@@ -13,8 +13,8 @@ double sveshnikov::Rectangle::getArea() const
 sveshnikov::rectangle_t sveshnikov::Rectangle::getFrameRect() const
 {
   rectangle_t frame = {0, 0, {0, 0}};
-  frame.height = up_right_.y - low_left_.y;
   frame.width = up_right_.x - low_left_.x;
+  frame.height = up_right_.y - low_left_.y;
   frame.pos.x = (low_left_.x + up_right_.x) / 2;
   frame.pos.y = (low_left_.y + up_right_.y) / 2;
   return frame;

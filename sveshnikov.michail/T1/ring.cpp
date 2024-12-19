@@ -14,18 +14,12 @@ double sveshnikov::Ring::getArea() const
 
 sveshnikov::rectangle_t sveshnikov::Ring::getFrameRect() const
 {
-  rectangle_t frame = {0, 0, {0, 0}};
-  frame.height = 2 * long_radius_;
-  frame.width = 2 * long_radius_;
-  frame.pos.x = center_.x;
-  frame.pos.y = center_.y;
-  return frame;
+  return {2 * long_radius_, 2 * long_radius_, center_};
 }
 
 void sveshnikov::Ring::move(point_t p)
 {
-  center_.x = p.x;
-  center_.y = p.y;
+  center_ = p;
 }
 
 void sveshnikov::Ring::move(double dx, double dy)

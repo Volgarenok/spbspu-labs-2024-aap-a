@@ -14,18 +14,12 @@ double sveshnikov::Ellipse::getArea() const
 
 sveshnikov::rectangle_t sveshnikov::Ellipse::getFrameRect() const
 {
-  rectangle_t frame = {0, 0, {0, 0}};
-  frame.height = 2 * vert_radius_;
-  frame.width = 2 * horiz_radius_;
-  frame.pos.x = center_.x;
-  frame.pos.y = center_.y;
-  return frame;
+  return {2 * horiz_radius_, 2 * vert_radius_, center_};
 }
 
 void sveshnikov::Ellipse::move(point_t p)
 {
-  center_.x = p.x;
-  center_.y = p.y;
+  center_ = p;
 }
 
 void sveshnikov::Ellipse::move(double dx, double dy)

@@ -24,7 +24,7 @@ void sveshnikov::build_ring(std::istream &in, Shape **shapes, size_t &num_shapes
 {
   double ctr_x = 0.0, ctr_y = 0.0, radius1 = 0.0, radius2 = 0.0;
   in >> ctr_x >> ctr_y >> radius1 >> radius2;
-  if (radius1 > 0 && radius2 > 0 && radius1 > radius2)
+  if (radius1 > radius2 && radius2 > 0)
   {
     shapes[num_shapes] = new Ring({ctr_x, ctr_y}, radius1, radius2);
     num_shapes++;
