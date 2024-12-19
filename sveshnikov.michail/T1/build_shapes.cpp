@@ -12,32 +12,21 @@ void sveshnikov::build_rectangle(std::istream &in, Shape **shapes, size_t &num_s
   if (x1 < x2 && y1 < y2)
   {
     shapes[num_shapes] = new Rectangle({x1, y1}, {x2, y2});
-  }
-  else if (x1 > x2 && y1 > y2)
-  {
-    shapes[num_shapes] = new Rectangle({x2, y2}, {x1, y1});
+    num_shapes++;
   }
   else
   {
     throw std::logic_error("input shape error");
   }
-  num_shapes++;
 }
 
 void sveshnikov::build_ring(std::istream &in, Shape **shapes, size_t &num_shapes)
 {
   double ctr_x = 0.0, ctr_y = 0.0, radius1 = 0.0, radius2 = 0.0;
   in >> ctr_x >> ctr_y >> radius1 >> radius2;
-  if (radius1 > 0 && radius2 > 0 && radius1 != radius2)
+  if (radius1 > 0 && radius2 > 0 && radius1 > radius2)
   {
-    if (radius1 > radius2)
-    {
-      shapes[num_shapes] = new Ring({ctr_x, ctr_y}, radius1, radius2);
-    }
-    else
-    {
-      shapes[num_shapes] = new Ring({ctr_x, ctr_y}, radius2, radius1);
-    }
+    shapes[num_shapes] = new Ring({ctr_x, ctr_y}, radius1, radius2);
     num_shapes++;
   }
   else

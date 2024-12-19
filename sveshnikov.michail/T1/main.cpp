@@ -58,6 +58,12 @@ int main()
     clear(shapes);
     return 1;
   }
+  if (num_shapes == 0)
+  {
+    std::cerr << "ERROR: Nothing To Scale!\n";
+    clear(shapes);
+    return 1;
+  }
   if (shape_name != "SCALE")
   {
     std::cerr << "ERROR: The input must end with the zoom command!\n";
