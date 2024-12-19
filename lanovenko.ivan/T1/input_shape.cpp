@@ -55,15 +55,52 @@ lanovenko::Shape* lanovenko::inputTriangle(const char str[])
     return new Triangle(points[0], points[1], points[2]);
 }
 
+
+
+
 lanovenko::Shape* lanovenko::inputDiamond(const char str[])
 {
-  const char* coords_str = str + 9;
+  const char* coords_str = str + 7;
   double coords_array[6]{};
   size_t pos = 0;
   for (size_t i = 0; i < 6; ++i)
   {
     coords_array[i] = std::stod(coords_str, std::addressof(pos));
     coords_str += pos;
+  }
+  if (coords_array[0] == coords_array[2] && coords_array[1] == coords_array[5])
+  {
+    lanovenko::Diamond* diam = new lanovenko::Diamond({ coords_array[0], coords_array[1] }, { coords_array[2], coords_array[3] }, { coords_array[4], coords_array[5] });
+    return diam;
+  }
+  else if (coords_array[0] == coords_array[4] && coords_array[1] == coords_array[3])
+  {
+    lanovenko::Diamond* diam = new lanovenko::Diamond({ coords_array[0], coords_array[1] }, { coords_array[4], coords_array[5] }, { coords_array[2], coords_array[3] });
+    return diam;
+  }
+  else if (coords_array[2] == coords_array[0] && coords_array[3] == coords_array[5])
+  {
+    lanovenko::Diamond* diam = new lanovenko::Diamond({ coords_array[2], coords_array[3] }, { coords_array[0], coords_array[1] }, { coords_array[4], coords_array[5] });
+    return diam;
+  }
+  else if (coords_array[2] == coords_array[4] && coords_array[3] == coords_array[1])
+  {
+    lanovenko::Diamond* diam = new lanovenko::Diamond({ coords_array[2], coords_array[3] }, { coords_array[4], coords_array[5] }, { coords_array[0], coords_array[1] });
+    return diam;
+  }
+  else if (coords_array[4] == coords_array[0] && coords_array[5] == coords_array[3])
+  {
+    lanovenko::Diamond* diam = new lanovenko::Diamond({ coords_array[4], coords_array[5] }, { coords_array[0], coords_array[1] }, { coords_array[2], coords_array[3] });
+    return diam;
+  }
+  else if (coords_array[4] == coords_array[2] && coords_array[5] == coords_array[1])
+  {
+    lanovenko::Diamond* diam = new lanovenko::Diamond({ coords_array[4], coords_array[5] }, { coords_array[2], coords_array[3] }, { coords_array[0], coords_array[1] });
+    return diam;
+  }
+  else
+  {
+    throw std::invalid_argument("No Diamond!");
   }
   if (*coords_str != '\0')
   {
@@ -74,3 +111,4 @@ lanovenko::Shape* lanovenko::inputDiamond(const char str[])
   getPoints(num_points, coords_array, points);
   return new Diamond(points[0], points[1], points[2]);
 }
+
