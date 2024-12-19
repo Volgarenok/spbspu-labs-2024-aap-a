@@ -22,7 +22,7 @@ int main()
   {
     double sumBefore = 0;
     std::string scaleDescription;
-    while ((str = aleksandrov::getString(std::cin)))
+    while ((str = aleksandrov::getString(std::cin)) && !std::cin.eof())
     {
       inputStr = str;
       delete[] str;
@@ -45,13 +45,15 @@ int main()
     std::string params = aleksandrov::getScaleParams(scaleDescription, x, y, k);
     if (params == "")
     {
-      std::cerr << "ERROR: Incorrect SCALE command description!\n";
+      std::cerr << "ERROR: There was no correct SCALE command description!\n";
       aleksandrov::deleteShapes(shapes, count);
+      delete[] str;
       return 1;
     }
     if (count == 0)
     {
-      std::cerr << "ERROR: There was no supporting shapes!\n";
+      std::cerr << "ERROR: There were no supporting shapes!\n";
+      delete[] str;
       return 1;
     }
 
@@ -70,15 +72,13 @@ int main()
     aleksandrov::deleteShapes(shapes, count);
     return 1;
   }
-  if (str)
-  {
-    delete[] str;
-  }
+
   aleksandrov::deleteShapes(shapes, count);
 
   if (wasDescriptionError)
   {
     std::cerr << "WARNING: Some supporting shapes had a description problems!\n";
   }
+  delete[] str;
 }
 
