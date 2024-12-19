@@ -12,9 +12,9 @@ int main()
     return 1;
   }
   int count = 0;
-  count = asafov::countUniqLetters(str, lenght);
+  count = asafov::countUniqLetters(str);
   std::cout<<count<<'\n';
-  char* unusedLetters = asafov::getUnusedLetters(str, lenght);
+  char* unusedLetters = asafov::getUnusedLetters(str);
   for(unsigned long long i = 0; unusedLetters[i] != 0; i++)
   {
     std::cout<<unusedLetters[i];
