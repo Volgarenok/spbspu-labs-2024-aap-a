@@ -214,6 +214,7 @@ double * zakirov::get_data(std::istream & in)
   else
   {
     data[0] = 0.0;
+    return data;
   }
 
   free(shape);
