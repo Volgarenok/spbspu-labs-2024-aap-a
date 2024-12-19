@@ -70,32 +70,50 @@ lanovenko::Shape* lanovenko::inputDiamond(const char str[])
   }
   if (coords_array[0] == coords_array[2] && coords_array[1] == coords_array[5])
   {
-    lanovenko::Diamond* diam = new lanovenko::Diamond({ coords_array[0], coords_array[1] }, { coords_array[2], coords_array[3] }, { coords_array[4], coords_array[5] });
+    lanovenko::Diamond* diam = new lanovenko::Diamond
+    ({ coords_array[0], coords_array[1] },
+    { coords_array[2], coords_array[3] },
+    { coords_array[4], coords_array[5] });
     return diam;
   }
   else if (coords_array[0] == coords_array[4] && coords_array[1] == coords_array[3])
   {
-    lanovenko::Diamond* diam = new lanovenko::Diamond({ coords_array[0], coords_array[1] }, { coords_array[4], coords_array[5] }, { coords_array[2], coords_array[3] });
+    lanovenko::Diamond* diam = new lanovenko::Diamond
+    ({ coords_array[0], coords_array[1] },
+    { coords_array[4], coords_array[5] },
+    { coords_array[2], coords_array[3] });
     return diam;
   }
   else if (coords_array[2] == coords_array[0] && coords_array[3] == coords_array[5])
   {
-    lanovenko::Diamond* diam = new lanovenko::Diamond({ coords_array[2], coords_array[3] }, { coords_array[0], coords_array[1] }, { coords_array[4], coords_array[5] });
+    lanovenko::Diamond* diam = new lanovenko::Diamond
+    ({ coords_array[2], coords_array[3] },
+    { coords_array[0], coords_array[1] },
+    { coords_array[4], coords_array[5] });
     return diam;
   }
   else if (coords_array[2] == coords_array[4] && coords_array[3] == coords_array[1])
   {
-    lanovenko::Diamond* diam = new lanovenko::Diamond({ coords_array[2], coords_array[3] }, { coords_array[4], coords_array[5] }, { coords_array[0], coords_array[1] });
+    lanovenko::Diamond* diam = new lanovenko::Diamond
+    ({ coords_array[2], coords_array[3] },
+    { coords_array[4], coords_array[5] },
+    { coords_array[0], coords_array[1] });
     return diam;
   }
   else if (coords_array[4] == coords_array[0] && coords_array[5] == coords_array[3])
   {
-    lanovenko::Diamond* diam = new lanovenko::Diamond({ coords_array[4], coords_array[5] }, { coords_array[0], coords_array[1] }, { coords_array[2], coords_array[3] });
+    lanovenko::Diamond* diam = new lanovenko::Diamond
+    ({ coords_array[4], coords_array[5] },
+    { coords_array[0], coords_array[1] },
+    { coords_array[2], coords_array[3] });
     return diam;
   }
   else if (coords_array[4] == coords_array[2] && coords_array[5] == coords_array[1])
   {
-    lanovenko::Diamond* diam = new lanovenko::Diamond({ coords_array[4], coords_array[5] }, { coords_array[2], coords_array[3] }, { coords_array[0], coords_array[1] });
+    lanovenko::Diamond* diam = new lanovenko::Diamond
+    ({ coords_array[4], coords_array[5] },
+    { coords_array[2], coords_array[3] },
+    { coords_array[0], coords_array[1] });
     return diam;
   }
   else
