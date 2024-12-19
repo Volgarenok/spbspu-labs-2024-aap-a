@@ -41,6 +41,10 @@ int main()
         zakirov::clear_shapes(shapes, location);
         return 1;
       }
+      else if (data[0] == 0.0)
+      {
+        free(data);
+      }
       else
       {
         ++location;
@@ -50,13 +54,6 @@ int main()
     else
     {
       std::cerr << "Warning! Some problems getting the string." << '\n';
-      return 1;
-    }
-
-    if (std::cin.eof())
-    {
-      std::cerr << "Warning! Scale is not defined." << '\n';
-      zakirov::clear_shapes(shapes, location);
       return 1;
     }
   }

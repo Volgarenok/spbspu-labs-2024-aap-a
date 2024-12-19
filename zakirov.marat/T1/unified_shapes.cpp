@@ -215,7 +215,9 @@ double * zakirov::get_data(std::istream & in)
   else
   {
     data[0] = 0.0;
+    char * rest_string = get_string(in, step, '\n');
     free(shape);
+    free(rest_string);
     return data;
   }
 
