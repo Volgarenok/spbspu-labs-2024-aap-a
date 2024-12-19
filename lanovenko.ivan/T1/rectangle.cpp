@@ -40,8 +40,8 @@ void lanovenko::Rectangle::move(double dx, double dy)
   point_t* points[] = { &leftlower, &rightupper };
   for (size_t i = 0; i < 2; i++)
   {
-    points[0]->x += dx;
-    points[0]->y += dy;
+    points[i]->x += dx;
+    points[i]->y += dy;
   }
 }
 
