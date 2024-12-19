@@ -13,7 +13,7 @@ shramko::Diamond::Diamond(point_t One, point_t Two, point_t Three): One_({0.0, 0
     }
     else
     {
-      Teo_ = Three;
+      Two_ = Three;
       Three_ = Two;
     }
   }

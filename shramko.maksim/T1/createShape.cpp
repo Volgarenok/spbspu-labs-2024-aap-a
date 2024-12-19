@@ -127,13 +127,13 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
   }
   catch (const std::bad_alloc& e)
   {
-    err << e.what() << '\n'
+    err << e.what() << '\n';
     clear(shapes, count);
     return -1;
   }
   catch (const std::logic_error& e)
   {
-    err << e.what() << '\n'
+    err << e.what() << '\n';
     clear(shapes, count);
     return -1;
   }

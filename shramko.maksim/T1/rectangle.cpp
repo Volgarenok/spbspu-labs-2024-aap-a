@@ -2,7 +2,7 @@
 #include "base-types.hpp"
 #include <cmath>
 
-shramko::Rectangle::Rectangle(point_t leftBottom, point_t rightTop): leftBottom({0.0, 0.0}), rightTop({0.0, 0.0})
+shramko::Rectangle::Rectangle(point_t leftBottom, point_t rightTop): leftBottom_({0.0L, 0.0L}), rightTop_({0.0L, 0.0L})
 {
   leftBottom_.x = leftBottom.x;
   leftBottom_.y = leftBottom.y;

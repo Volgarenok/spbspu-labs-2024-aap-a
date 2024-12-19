@@ -18,6 +18,7 @@ namespace shramko
     point_t leftBottom_;
     point_t rightTop_;
   };
+
 }
 
 #endif

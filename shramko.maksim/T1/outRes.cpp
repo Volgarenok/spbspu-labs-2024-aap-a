@@ -13,5 +13,6 @@ void shramko::outRes(std::ostream& out, Shape** shapes, size_t, count)
     out << " " << shapes[i]->getRectangleFrame().pos.x + (shapes[i]->getRectangleFrame().width) / 2.0f;
     out << " " << shapes[i]->getRectangleFrame().pos.y + (shapes[i]->getRectangleFrame().height) / 2.0f;
   }
+
   out << '\n';
 }
