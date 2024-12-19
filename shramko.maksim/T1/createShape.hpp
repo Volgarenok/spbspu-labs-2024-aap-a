@@ -1,16 +1,16 @@
 #ifndef CREATESHAPE_HPP
 #define CREATESHAPE_HPP
 
-#include <istream>
-#include "rectangle.hpp"
-#include "triangle.hpp"
-#include "diamond.hpp"
+#include <iostream>
+#include <cstddef>
+#include "shape.hpp"
 
 namespace shramko
 {
-  Rectangle* createRectangle(std::istream& in);
-  Triangle* createTriangle(std::istream& in);
-  Diamond* createDiamond(std::istream& in);
+  int createShape(std::istream& in, std::ostream& err, std::ostream& out, Shape** shapes);
+  void clear(Shape** shapes, size_t count);
+  double getArea(Shape** shapes, size_t count);
+  void scaling(Shape** shapes, size_t count, point_t centre, double k);
 }
 
 #endif
