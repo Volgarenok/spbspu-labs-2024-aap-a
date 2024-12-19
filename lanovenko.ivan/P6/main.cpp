@@ -1,6 +1,7 @@
 #include <iostream>
 #include <strinput.h>
 #include "string_check.h"
+
 int main()
 {
   char* str = lanovenko::input_string(std::cin, '\n');
