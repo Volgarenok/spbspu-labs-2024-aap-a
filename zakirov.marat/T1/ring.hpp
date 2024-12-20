@@ -15,8 +15,8 @@ namespace zakirov
     void scale(double k) override;
   private:
     point_t center_;
-    double in_radius_;
     double ex_radius_;
+    double in_radius_;
   };
 }
 
