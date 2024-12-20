@@ -1,6 +1,6 @@
+#include <iostream>
 #include "removeVowels.h"
 #include "inputOfString.h"
-#include <iostream>
 
 int main()
 {
