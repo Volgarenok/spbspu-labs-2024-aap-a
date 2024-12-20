@@ -89,12 +89,9 @@ namespace
     {
       return str;
     }
-    if (const char *next = is_sign(str))
-    {
-      next = is_mantissa(next);
-      next = is_E(str);
-      return next;
-    }
+    auto next = is_symbol(str, 'E');
+    next = is_mantissa(next);
+    return next;
   }
 }
 
