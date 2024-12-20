@@ -46,8 +46,8 @@ int main()
       }
       return 2;
     }
-    constexpr size_t shapes_count = 4;
-    const char* shape_names[shapes_count] = { "RECTANGLE", "TRIANGLE", "DIAMOND", "SCALE"};
+    constexpr size_t shapes_count = 5;
+    const char* shape_names[shapes_count] = { "RECTANGLE", "TRIANGLE", "DIAMOND", "PARALLELOGRAM", "SCALE"};
     try
     {
       for (size_t i = 0; i < shapes_count; i++)
@@ -80,6 +80,14 @@ int main()
             }
           }
           if (i == 3)
+          {
+            Shape* shape = inputParallelogram(str);
+            if (shape != nullptr)
+            {
+              shapeArray[shapeNumber++] = shape;
+            }
+          }
+          if (i == 4)
           {
             scale_was_met = true;
             scaleCommand(str, shapeArray, shapeNumber, std::cout);
