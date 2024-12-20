@@ -13,13 +13,17 @@ namespace
 
   const char *is_digit(const char *str)
   {
-    if (!str)
+    if (str == nullptr)
     {
-      return str;
+      return nullptr;
     }
-    return ((*str >= '0') && (*str <= '9')) ? (str + 1) : nullptr;
+    if (*str == '0' || *str == '1' || *str == '2' || *str == '3' || *str == '4' ||
+        *str == '5' || *str == '6' || *str == '7' || *str == '8' || *str == '9')
+    {
+      return str + 1;
+    }
+    return nullptr;
   }
-
   const char *is_unsigned_int(const char *str)
   {
     if (!str)
@@ -70,7 +74,7 @@ namespace
     {
       return nullptr;
     }
-    if (const char * next = is_symbol(str, '.'))
+    if (const char *next = is_symbol(str, '.'))
     {
       next = is_unsigned_int(str);
       return next;
@@ -97,7 +101,7 @@ namespace
   }
 }
 
-bool shabalin::func(const char * str)
+bool shabalin::func(const char *str)
 {
   if (!str)
   {
