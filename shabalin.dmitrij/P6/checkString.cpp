@@ -2,7 +2,7 @@
 
 namespace
 {
-  const char *is_sign(const char *str)
+  const char *isSign(const char *str)
   {
     if (!str)
     {
@@ -11,7 +11,7 @@ namespace
     return ((*str == '+') || (*str == '-')) ? (str + 1) : nullptr;
   }
 
-  const char *is_digit(const char *str)
+  const char *isDigit(const char *str)
   {
     if (str == nullptr)
     {
@@ -24,22 +24,22 @@ namespace
     }
     return nullptr;
   }
-  const char *is_unsigned_int(const char *str)
+  const char *isUnsignedInt(const char *str)
   {
     if (!str)
     {
       return nullptr;
     }
-    auto next = is_digit(str);
+    auto next = isDigit(str);
     if (next == nullptr)
     {
       return nullptr;
     }
-    auto next2 = is_unsigned_int(next);
+    auto next2 = isUnsignedInt(next);
     return (next2 == nullptr) ? next : next2;
   }
 
-  const char *is_symbol(const char *str, char ch)
+  const char *isSymbol(const char *str, char ch)
   {
     if (!str)
     {
@@ -48,55 +48,55 @@ namespace
     return (*str == ch) ? (str + 1) : nullptr;
   }
 
-  const char *is_E(const char *str)
+  const char *isOrder(const char *str)
   {
     if (!str)
     {
       return nullptr;
     }
-    auto next = is_symbol(str, 'E');
+    auto next = isSymbol(str, 'E');
     if (!next)
     {
       return nullptr;
     }
-    auto next2 = is_sign(next);
+    auto next2 = isSign(next);
     if (next2 != nullptr)
     {
       next = next2;
     }
-    next = is_unsigned_int(next);
+    next = isUnsignedInt(next);
     return next;
   }
 
-  const char *is_mantissa(const char *str)
+  const char *isMantissa(const char *str)
   {
     if (!str)
     {
       return nullptr;
     }
-    if (const char *next = is_symbol(str, '.'))
+    if (const char *next = isSymbol(str, '.'))
     {
-      next = is_unsigned_int(str);
+      next = isUnsignedInt(str);
       return next;
     }
-    const char *next = is_unsigned_int(str);
-    if (const char *next2 = is_symbol(next, '.'))
+    const char *next = isUnsignedInt(str);
+    if (const char *next2 = isSymbol(next, '.'))
     {
-      next2 = is_unsigned_int(next2);
+      next2 = isUnsignedInt(next2);
       return next2;
     }
     return next;
   }
 
-  const char *has_real(const char *str)
+  const char *hasRealNum(const char *str)
   {
     if (!str)
     {
       return str;
     }
-    auto next = is_sign(str);
-    auto next2 = is_mantissa(next);
-    auto next3 = is_E(next2);
+    auto next = isSign(str);
+    auto next2 = isMantissa(next);
+    auto next3 = isOrder(next2);
     return next3;
   }
 }
@@ -107,6 +107,6 @@ bool shabalin::isRealNumber(const char *str)
   {
     return false;
   }
-  const char *next = has_real(str);
+  const char *next = hasRealNum(str);
   return next && (*next == '\0');
 }
