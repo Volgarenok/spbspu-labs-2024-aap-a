@@ -28,9 +28,8 @@ maslevtsov::Regular::Regular(point_t center, point_t pnt2, point_t pnt3):
   double sqrLength3 = std::pow(center_.x - pnt3_.x, 2) + std::pow(center_.y - pnt3_.y, 2);
   double sqrHypotenuse = std::max(std::max(sqrLength1, sqrLength2), sqrLength3);
   double sqrSmallRadius = std::min(std::min(sqrLength1, sqrLength2), sqrLength3);
-  double sideLength = 2 * std::sqrt(sqrLength1 + sqrLength2 + sqrLength3 - sqrHypotenuse - sqrSmallRadius);
   std::size_t nVertices = M_PI / std::acos(std::sqrt(sqrSmallRadius / sqrHypotenuse));
-  double bigRadius = sideLength / (2 * std::sin(M_PI / std::round(nVertices)));
+  double bigRadius = std::sqrt(std::max(sqrLength1, sqrLength3));
   if (
     !isRightTriangle(center, pnt2, pnt3) ||
     (std::abs((std::cos(M_PI / std::round(nVertices))) - (std::sqrt(sqrSmallRadius) / bigRadius)) >= 1e-10))
@@ -61,11 +60,14 @@ maslevtsov::rectangle_t maslevtsov::Regular::getFrameRect() const noexcept
   double sqrSmallRadius = std::min(std::min(sqrLength1, sqrLength2), sqrLength3);
   double sqrHypotenuse = std::max(std::max(sqrLength1, sqrLength2), sqrLength3);
   std::size_t nVertices = std::round(M_PI / std::acos(std::sqrt(sqrSmallRadius / sqrHypotenuse)));
-  double sideLength = 2 * std::sqrt(sqrLength1 + sqrLength2 + sqrLength3 - sqrHypotenuse - sqrSmallRadius);
-  double bigRadius = sideLength / (2 * std::sin(M_PI / std::round(nVertices)));
+  double bigRadius = std::sqrt(std::max(sqrLength1, sqrLength3));
   double maxX = std::numeric_limits<double>::min(), minX = std::numeric_limits<double>::max();
   double maxY = std::numeric_limits<double>::min(), minY = std::numeric_limits<double>::max();
   double angle = std::acos(std::sqrt(sqrSmallRadius / sqrHypotenuse));
+  if (center_.y == pnt3_.y)
+  {
+    angle = 0;
+  }
   for (std::size_t i = 0; i < nVertices; ++i)
   {
     double nextAngle = i * 2 * M_PI / nVertices + angle;
