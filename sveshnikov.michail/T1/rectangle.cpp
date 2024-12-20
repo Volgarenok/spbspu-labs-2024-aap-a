@@ -15,17 +15,18 @@ sveshnikov::rectangle_t sveshnikov::Rectangle::getFrameRect() const
   rectangle_t frame = {0, 0, {0, 0}};
   frame.width = up_right_.x - low_left_.x;
   frame.height = up_right_.y - low_left_.y;
-  frame.pos.x = (low_left_.x + up_right_.x) / 2;
-  frame.pos.y = (low_left_.y + up_right_.y) / 2;
+  frame.pos.x = (low_left_.x + up_right_.x) / 2.0;
+  frame.pos.y = (low_left_.y + up_right_.y) / 2.0;
   return frame;
 }
 
 void sveshnikov::Rectangle::move(point_t p)
 {
-  up_right_.x = p.x + (up_right_.x - low_left_.x) / 2;
-  up_right_.y = p.y + (up_right_.y - low_left_.y) / 2;
-  low_left_.x = p.x - (up_right_.x - low_left_.x) / 2;
-  low_left_.y = p.y - (up_right_.y - low_left_.y) / 2;
+  double ctr_x = getFrameRect().pos.x, ctr_y = getFrameRect().pos.y;
+  up_right_.x += p.x - ctr_x;
+  up_right_.y += p.y - ctr_y;
+  low_left_.x += p.x - ctr_x;
+  low_left_.y += p.y - ctr_y;
 }
 
 void sveshnikov::Rectangle::move(double dx, double dy)
@@ -38,10 +39,9 @@ void sveshnikov::Rectangle::move(double dx, double dy)
 
 void sveshnikov::Rectangle::scale(double k)
 {
-  double height = up_right_.y - low_left_.y;
-  double width = up_right_.x - low_left_.x;
-  up_right_.x += width * (k - 1) / 2;
-  up_right_.y += height * (k - 1) / 2;
-  low_left_.x -= width * (k - 1) / 2;
-  low_left_.y -= height * (k - 1) / 2;
+  double ctr_x = getFrameRect().pos.x, ctr_y = getFrameRect().pos.y;
+  up_right_.x = ctr_x + k * (up_right_.x - ctr_x);
+  up_right_.y = ctr_y + k * (up_right_.y - ctr_y);
+  low_left_.x = ctr_x - k * (ctr_x - low_left_.x);
+  low_left_.y = ctr_y - k * (ctr_y - low_left_.y);
 }
