@@ -14,9 +14,9 @@ smirnov::Parallelogram::Parallelogram(double x1, double y1,
 
 double smirnov::Parallelogram::getArea() const
 {
-  double vector1X = vertex2.x - vertex1.y;
+  double vector1X = vertex2.x - vertex1.x;
   double vector1Y = vertex2.y - vertex1.y;
-  double vector2X = vertex3.x - vertex1.y;
+  double vector2X = vertex3.x - vertex1.x;
   double vector2Y = vertex3.y - vertex1.y;
   return std::abs(vector1X * vector2Y - vector1Y * vector2X);
 }

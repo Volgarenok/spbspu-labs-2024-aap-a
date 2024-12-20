@@ -61,13 +61,13 @@ smirnov::Parallelogram * smirnov::createParallelogram(std::istream & in)
   double x3 = 0.0;
   double y3 = 0.0;
   in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-  if (!in || (x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3))
+  if (!in || (x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3))
   {
     throw std::invalid_argument("Incorrect coordinates for the parallelogram");
   }
-  if (!((y1 == y2) || (y1 == y3) || (y2 == y3)))
+  if (!(y1 == y2 || y1 == y3 || y2 == y3))
   {
-    throw std::invalid_argument("The side of the parallelogram must be parallel to the X-axis");
+    throw std::invalid_argument("The sides of the parallelogram must be parallel to the X-axis");
   }
   return new Parallelogram(x1, y1, x2, y2, x3, y3);
 }
