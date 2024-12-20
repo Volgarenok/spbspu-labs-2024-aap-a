@@ -6,16 +6,16 @@ namespace zakirov
   struct point_t
   {
     public:
-      double x_;
-      double y_;
+      double x;
+      double y;
   };
 
   struct rectangle_t
   {
     public:
-      double width_;
-      double height_;
-      point_t position_;
+      double width;
+      double height;
+      point_t pos;
   };
 
   double get_distance_x(point_t first_p, point_t second_p);

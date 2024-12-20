@@ -25,9 +25,9 @@ double zakirov::Ring::getArea() const
 zakirov::rectangle_t zakirov::Ring::getFrameRect() const
 {
   rectangle_t сircumscribed;
-  сircumscribed.width_ = ex_radius_ * 2;
-  сircumscribed.height_ = ex_radius_ * 2;
-  сircumscribed.position_ = center_;
+  сircumscribed.width = ex_radius_ * 2;
+  сircumscribed.height = ex_radius_ * 2;
+  сircumscribed.pos = center_;
 
   return сircumscribed;
 }
@@ -39,8 +39,8 @@ void zakirov::Ring::move(point_t target)
 
 void zakirov::Ring::move(double bias_x, double bias_y)
 {
-  center_.x_ += bias_x;
-  center_.y_ += bias_y;
+  center_.x += bias_x;
+  center_.y += bias_y;
 }
 
 void zakirov::Ring::scale(double k)

@@ -87,8 +87,8 @@ int main()
   for (size_t i = 0; i < location; ++i)
   {
     zakirov::point_t target;
-    target.x_ = scale_data[2];
-    target.y_ = scale_data[3];
+    target.x = scale_data[2];
+    target.y = scale_data[3];
 
     zakirov::scale_from_point(shapes[i], target, scale_data[4]);
     total_area += shapes[i] -> getArea();

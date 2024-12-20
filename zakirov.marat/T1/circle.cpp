@@ -21,9 +21,9 @@ double zakirov::Circle::getArea() const
 zakirov::rectangle_t zakirov::Circle::getFrameRect() const
 {
   rectangle_t сircumscribed;
-  сircumscribed.width_ = radius_ * 2;
-  сircumscribed.height_ = radius_* 2;
-  сircumscribed.position_ = center_;
+  сircumscribed.width = radius_ * 2;
+  сircumscribed.height = radius_* 2;
+  сircumscribed.pos = center_;
 
   return сircumscribed;
 }
@@ -35,8 +35,8 @@ void zakirov::Circle::move(point_t target)
 
 void zakirov::Circle::move(double bias_x, double bias_y)
 {
-  center_.x_ += bias_x;
-  center_.y_ += bias_y;
+  center_.x += bias_x;
+  center_.y += bias_y;
 }
 
 void zakirov::Circle::scale(double k)
