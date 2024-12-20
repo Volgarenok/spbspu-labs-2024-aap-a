@@ -31,7 +31,7 @@ namespace cherkasov
   {
     if (k <= 0)
     {
-      throw std::logic_error("dddd");
+      throw std::logic_error("Scale factor must be positive");
     }
   rect.width *= k;
   rect.height *= k;

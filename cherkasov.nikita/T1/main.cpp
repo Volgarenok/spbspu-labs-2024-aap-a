@@ -12,13 +12,14 @@
 #include "scaling.h"
 
 constexpr size_t maxShapes = 10000;
+
 int main()
 {
   cherkasov::Shape* shapes[maxShapes] = {nullptr};
   size_t shapeCount = 0;
   std::string inputCommand;
   cherkasov::point_t isoCenter;
-  double scalingFactor;
+  double scalingFactor = 0;
   bool scalingRequested = false;
   while (std::cin >> inputCommand)
   {
@@ -28,13 +29,13 @@ int main()
       {
         double x1, y1, x2, y2;
         std::cin >> x1 >> y1 >> x2 >> y2;
-        shapes[shapeCount++] = new cherkasov::Rectangle(x1, y1, x2, y2);
+        shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
       }
       else if (inputCommand == "SQUARE")
       {
-        double x1, y1, lenght;
-        std::cin >> x1 >> y1 >> lenght;
-        shapes[shapeCount++] = new cherkasov::Square(x1, y1, lenght);
+        double x1, y1, length;
+        std::cin >> x1 >> y1 >> length;
+        shapes[shapeCount++] = new cherkasov::Square({x1, y1}, length);
       }
       else if (inputCommand == "PARALLELOGRAM")
       {
@@ -46,7 +47,7 @@ int main()
       {
         double cx, cy, d1, d2;
         std::cin >> cx >> cy >> d1 >> d2;
-        shapes[shapeCount++] = new cherkasov::Diamond(cx, cy, d1, d2);
+        shapes[shapeCount++] = new cherkasov::Diamond({cx, cy}, d1, d2);
       }
       else if (inputCommand == "SCALE")
       {
@@ -57,11 +58,15 @@ int main()
           throw std::invalid_argument("Scaling factor must be positive");
         }
         break;
-        }
+      }
+      else
+      {
+        throw std::invalid_argument("Unknown command: " + inputCommand);
+      }
     }
     catch (const std::exception& e)
     {
-      std::cerr << e.what() << "\n";
+      std::cerr << "Error: " << e.what() << "\n";
     }
   }
   if (shapeCount == 0 || !scalingRequested)
@@ -71,13 +76,13 @@ int main()
     return 1;
   }
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << cherkasov::calculArea(shapes, shapeCount);
-  std::cout << cherkasov::outputFrameCoordinates(shapeArray, shapeCount);
-  std::cout << cherkasov::scaling(shapeArray, shapeCount, isoCenter, scalingFactor);
-  std::cout << "\n";
-  std::cout << cherkasov::calculArea(shapes, shapeCount);
-  std::cout << cherkasov::outputFrameCoordinates(shapes, shapeCount);
-  std::cout << "\n";
+  std::cout << "Total area before scaling: " << cherkasov::calculArea(shapes, shapeCount) << "\n";
+  std::cout << "Frame rectangles before scaling:\n";
+  cherkasov::outputFrameCoordinates(shapes, shapeCount);
+  cherkasov::scaling(shapes, shapeCount, isoCenter, scalingFactor);
+  std::cout << "Total area after scaling: " << cherkasov::calculArea(shapes, shapeCount) << "\n";
+  std::cout << "Frame rectangles after scaling:\n";
+  cherkasov::outputFrameCoordinates(shapes, shapeCount);
   cherkasov::deleteShapes(shapes, shapeCount);
   return 0;
 }
