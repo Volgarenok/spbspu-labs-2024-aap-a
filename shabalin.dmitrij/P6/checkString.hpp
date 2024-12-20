@@ -3,6 +3,6 @@
 
 namespace shabalin
 {
-  bool func(const char *str);
+  bool isRealNumber(const char *str);
 }
 #endif

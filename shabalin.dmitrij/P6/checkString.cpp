@@ -88,7 +88,7 @@ namespace
     return next;
   }
 
-  const char *is_real(const char *str)
+  const char *has_real(const char *str)
   {
     if (!str)
     {
@@ -101,12 +101,12 @@ namespace
   }
 }
 
-bool shabalin::func(const char *str)
+bool shabalin::isRealNumber(const char *str)
 {
   if (!str)
   {
     return false;
   }
-  const char *next = is_real(str);
+  const char *next = has_real(str);
   return next && (*next == '\0');
 }
