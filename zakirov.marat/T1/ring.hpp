@@ -7,7 +7,7 @@ namespace zakirov
   class Ring : public Shape
   {
   public:
-    Ring(point_t center, double in_radius, double ex_radius);
+    Ring(point_t center, double ex_radius, double in_radius);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t target) override;
