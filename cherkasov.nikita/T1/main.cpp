@@ -5,9 +5,9 @@
 #include "rectangle.h"
 #include "square.h"
 #include "parallelogram.h"
+#include "diamond.h"
 
 constexpr size_t maxShapes = 10000;
-
 int main()
 {
   cherkasov::Shape* shapes[maxShapes] = {nullptr};
@@ -74,7 +74,27 @@ int main()
       }
       else
       {
-        std::cerr << "Error: invalid input for PARALLELOGRAMM\n";
+        std::cerr << "Error: invalid input for PARALLELOGRAM\n";
+        continue;
+      }
+    }
+    else if (inputCommand == "DIAMOND")
+    {
+      double x1, y1, x2, y2, x3, y3;
+      if (std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3)
+      {
+        try
+        {
+          shapes[shapeCount++] = new cherkasov::Diamond({x1, y1}, {x2, y2}, {x3, y3});
+        }
+        catch (const std::logic_error& e)
+        {
+          std::cerr << "Error: " << e.what() << "\n";
+        }
+      }
+      else
+      {
+        std::cerr << "Error: invalid input for DIAMOND\n";
         continue;
       }
     }
