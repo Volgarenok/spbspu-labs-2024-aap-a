@@ -30,11 +30,6 @@ char *shabalin::inputOfString(std::istream &input, char end)
         free(initialString);
         return intermediateString;
       }
-      if (!intermediateString)
-      {
-        free(initialString);
-        throw std::bad_alloc();
-      }
       for (size_t j = 0; j < (sizeOfString / 2); ++j)
       {
         intermediateString[j] = initialString[j];

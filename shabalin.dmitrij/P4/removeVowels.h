@@ -4,7 +4,7 @@
 namespace shabalin
 {
   char *removeVowels(char *string);
-  bool checkSymbol(char symbol);
+  //bool checkSymbol(char symbol);
 }
 
 #endif
