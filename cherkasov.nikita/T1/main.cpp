@@ -41,7 +41,7 @@ int main()
   {
     double x1, y1, length;
     std::cin >> x1 >> y1 >> length;
-    if (length > 0)
+    if (length <= 0)
     {
       invalidInput = true;
     }
@@ -87,7 +87,7 @@ int main()
       return 1;
     }
   }
-  else
+  else if (std::cin.eof())
   {
     std::cerr << "EOF encountered\n";
     cherkasov::deleteShapes(shapes, shapeCount);
@@ -108,6 +108,7 @@ int main()
   if (invalidInput)
   {
     std::cerr << "Invalid input encountered\n";
+    return 1;
   }
   std::cout << std::fixed << std::setprecision(1);
   std::cout << "Total area before scaling: " << cherkasov::calculArea(shapes, shapeCount) << "\n";
