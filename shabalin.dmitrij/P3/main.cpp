@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 
   if (task == 1)
   {
-    matrix = tempMatrix;
+    matrix = staticMatrix;
   }
   else if (task == 2)
   {
