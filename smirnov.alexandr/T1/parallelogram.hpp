@@ -10,6 +10,7 @@ namespace smirnov
     point_t vertex1;
     point_t vertex2;
     point_t vertex3;
+    point_t vertex4;
   public:
     Parallelogram(double x1, double y1, double x2, double y2, double x3, double y3);
     double getArea() const override;

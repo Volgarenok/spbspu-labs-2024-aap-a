@@ -8,6 +8,8 @@ smirnov::Parallelogram::Parallelogram(double x1, double y1,
   vertex1 = {x1, y1};
   vertex2 = {x2, y2};
   vertex3 = {x3, y3};
+  vertex4 = {vertex1.x + vertex3.x - vertex2.x, vertex1.y
+      + vertex3.y - vertex2.y};
 }
 
 double smirnov::Parallelogram::getArea() const
@@ -20,12 +22,12 @@ double smirnov::Parallelogram::getArea() const
 smirnov::rectangle_t smirnov::Parallelogram::getFrameRect() const
 {
   point_t center;
-  center.x = (vertex1.x + vertex2.x + vertex3.x) / 3;
-  center.y = (vertex1.y + vertex2.y + vertex3.y) / 3;
-  double minX = std::min({vertex1.x, vertex2.x, vertex3.x});
-  double maxX = std::max({vertex1.x, vertex2.x, vertex3.x});
-  double minY = std::min({vertex1.y, vertex2.y, vertex3.y});
-  double maxY = std::max({vertex1.y, vertex2.y, vertex3.y});
+  center.x = (vertex1.x + vertex2.x + vertex3.x + vertex4.x) / 4;
+  center.y = (vertex1.y + vertex2.y + vertex3.y + vertex4.y) / 4;
+  double minX = std::min({vertex1.x, vertex2.x, vertex3.x, vertex4.x});
+  double maxX = std::max({vertex1.x, vertex2.x, vertex3.x, vertex4.x});
+  double minY = std::min({vertex1.y, vertex2.y, vertex3.y, vertex4.y});
+  double maxY = std::max({vertex1.y, vertex2.y, vertex3.y, vertex4.y});
   rectangle_t frameRect;
   frameRect.pos = center;
   frameRect.width = maxX - minX;
@@ -49,6 +51,8 @@ void smirnov::Parallelogram::move(double dx, double dy)
   vertex2.y += dy;
   vertex3.x += dx;
   vertex3.y += dy;
+  vertex4.x += dx;
+  vertex4.y += dy;
 }
 
 void smirnov::Parallelogram::scale(double k)
@@ -60,4 +64,6 @@ void smirnov::Parallelogram::scale(double k)
   vertex2.y = (vertex2.y - center.y) * k + center.y;
   vertex3.x = (vertex3.x - center.x) * k + center.x;
   vertex3.y = (vertex3.y - center.y) * k + center.y;
+  vertex4 = {vertex1.x + vertex3.x - vertex2.x,
+      vertex1.y + vertex3.y - vertex2.y};
 }
