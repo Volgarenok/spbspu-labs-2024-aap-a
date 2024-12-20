@@ -141,10 +141,7 @@ int main()
     {
       double lbx = 0, lby = 0;
       double rtx = 0, rty = 0;
-      std::cin >> lbx;
-      std::cin >> lby;
-      std::cin >> rtx;
-      std::cin >> rty;
+      std::cin >> lbx >> lby >> rtx >> rty;
       if (lbx >= rtx || lby >= rty)
       {
         is_incorrect_shp = true;
@@ -228,9 +225,7 @@ int main()
     {
       double x = 0;
       double y = 0;
-      std::cin >> x;
-      std::cin >> y;
-      std::cin >> scale_k;
+      std::cin >> x >> y >> scale_k;
       if (scale_k < 0)
       {
         std::cerr << "Incorrect scale\n";
