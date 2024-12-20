@@ -61,7 +61,7 @@ int main()
         shapes[i]->scale(k);
         evstyunichev::point_t v{};
         v.x = (cur.x - old.x) * k;
-        v.y = (cur.y - old.y) * k; 
+        v.y = (cur.y - old.y) * k;
         shapes[i]->move(-v.x, -v.y);
       }
       evstyunichev::frameOutput(shapes[0]->getFrameRect());
@@ -76,6 +76,5 @@ int main()
       evstyunichev::skip_to_sign(std::cin, '\n');
     }
   }
-  
   return 0;
 }
