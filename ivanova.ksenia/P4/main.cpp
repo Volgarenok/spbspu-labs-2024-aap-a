@@ -1,6 +1,6 @@
 #include <iostream>
 #include "string.h"
-#include "functions.h"
+#include "frequentSymbols.h"
 
 int main()
 {
