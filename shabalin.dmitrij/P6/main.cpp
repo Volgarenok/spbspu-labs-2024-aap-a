@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdexcept>
 #include "checkString.hpp"
-#include <inputOfString.hpp>
+#include "input.hpp"
 
 int main()
 {
