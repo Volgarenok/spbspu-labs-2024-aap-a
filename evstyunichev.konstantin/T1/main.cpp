@@ -51,6 +51,11 @@ int main()
       {
         input_errors_flag = 1;
       }
+      else
+      {
+        totalSquare += shapes[done]->getArea();
+      }
+      done++;
     }
     else if (s == "SCALE")
     {
@@ -60,7 +65,7 @@ int main()
       if (k < 0)
       {
         evstyunichev::destroy_shapes(shapes, done);
-        std::cerr << "negative k!";
+        std::cerr << "negative k!\n";
         return 1;
       }
       if (!done)
