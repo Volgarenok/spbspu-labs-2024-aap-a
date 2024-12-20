@@ -17,41 +17,64 @@ int main()
 {
   cherkasov::Shape* shapes[maxShapes] = {nullptr};
   size_t shapeCount = 0;
+  bool invalidInput = false;
   std::string inputCommand;
   cherkasov::point_t isoCenter;
   double scalingFactor = 0;
   bool scalingRequested = false;
   while (std::cin >> inputCommand)
   {
-  try
-  {
-  if (shapeCount >= maxShapes)
-  {
-    throw std::overflow_error("Maximum number of shapes exceeded");
-  }
   if (inputCommand == "RECTANGLE")
   {
     double x1, y1, x2, y2;
     std::cin >> x1 >> y1 >> x2 >> y2;
-    shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
+    if (x1 > x2 || y1 > y2)
+    {
+      invalidInput = true;
+    }
+    else
+    {
+      shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
+    }
   }
   else if (inputCommand == "SQUARE")
   {
     double x1, y1, length;
     std::cin >> x1 >> y1 >> length;
-    shapes[shapeCount++] = new cherkasov::Square({x1, y1}, length);
+    if (length > 0)
+    {
+      invalidInput = true;
+    }
+    else
+    {
+      shapes[shapeCount++] = new cherkasov::Square({x1, y1}, length);
+    }
   }
   else if (inputCommand == "PARALLELOGRAM")
   {
     double x1, y1, x2, y2, x3, y3;
     std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-    shapes[shapeCount++] = new cherkasov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
+    if ((x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3))
+    {
+      invalidInput = true;
+    }
+    else
+    {
+      shapes[shapeCount++] = new cherkasov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
+    }
   }
   else if (inputCommand == "DIAMOND")
   {
     double x1, y1, x2, y2, x3, y3;
     std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-    shapes[shapeCount++] = new cherkasov::Diamond({x1, y1}, {x2, y2}, {x3, y3});
+    if ((x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3))
+    {
+      invalidInput = true;
+    }
+    else
+    {
+      shapes[shapeCount++] = new cherkasov::Diamond({x1, y1}, {x2, y2}, {x3, y3});
+    }
   }
   else if (inputCommand == "SCALE")
   {
@@ -59,24 +82,32 @@ int main()
     std::cin >> isoCenter.x >> isoCenter.y >> scalingFactor;
     if (scalingFactor <= 0)
     {
-      throw std::invalid_argument("Scaling factor must be positive");
-    }
-    }
-    else
-    {
-      throw std::invalid_argument("Unknown command: " + inputCommand);
+      std::cerr << "Scaling factor must be positive\n";
+      cherkasov::deleteShapes(shapes, shapeCount);
+      return 1;
     }
   }
-  catch (const std::exception& e)
+  else
   {
-    std::cerr << "Error: " << e.what() << "\n";
-  }
-  }
-  if (shapeCount == 0 || !scalingRequested)
-  {
-    std::cerr << "No shapes or scaling not specified\n";
+    std::cerr << "EOF encountered\n";
     cherkasov::deleteShapes(shapes, shapeCount);
     return 1;
+  }
+  }
+  if (shapeCount == 0)
+  {
+    std::cerr << "No shapes or scaling not specified\n";
+    return 1;
+  }
+  if (!scalingRequested)
+  {
+    std::cerr << "Scaling was not specified\n";
+    cherkasov::deleteShapes(shapes, shapeCount);
+    return 1;
+  }
+  if (invalidInput)
+  {
+    std::cerr << "Invalid input encountered\n";
   }
   std::cout << std::fixed << std::setprecision(1);
   std::cout << "Total area before scaling: " << cherkasov::calculArea(shapes, shapeCount) << "\n";
