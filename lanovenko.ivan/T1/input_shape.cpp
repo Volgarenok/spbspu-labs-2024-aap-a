@@ -5,6 +5,7 @@
 #include "rectangle.hpp"
 #include "traingle.hpp"
 #include "diamond.hpp"
+#include "parallelogram.hpp"
 
 void lanovenko::getPoints(const size_t num_points, double* coords_array, point_t* points)
 {
@@ -27,7 +28,7 @@ lanovenko::Shape* lanovenko::inputRectangle(const char str[])
   }
   if (*coords_str != '\0')
   {
-    throw std::invalid_argument("Wrong rectangle arguments!\n");
+    throw std::invalid_argument("Wrong Rectangle arguments!\n");
   }
   constexpr size_t num_points = 2;
   point_t points[num_points]{};
@@ -47,7 +48,7 @@ lanovenko::Shape* lanovenko::inputTriangle(const char str[])
   }
     if (*coords_str != '\0')
     {
-        throw std::invalid_argument("Invalid TRIANGLE arguments");
+        throw std::invalid_argument("Wronf Traingle arguments");
     }
     constexpr size_t num_points = 3;
     point_t points[num_points]{};
@@ -122,7 +123,7 @@ lanovenko::Shape* lanovenko::inputDiamond(const char str[])
   }
   if (*coords_str != '\0')
   {
-    throw std::invalid_argument("Invalid Diamond arguments");
+    throw std::invalid_argument("Wrog Diamond arguments");
   }
   constexpr size_t num_points = 3;
   point_t points[num_points]{};
@@ -130,3 +131,22 @@ lanovenko::Shape* lanovenko::inputDiamond(const char str[])
   return new Diamond(points[0], points[1], points[2]);
 }
 
+lanovenko::Shape* lanovenko::inputParallelogram(const char str[])
+{
+  const char* coords_string = str + 14;
+  double coords_array[6]{};
+  size_t pos = 0;
+  for (size_t i = 0; i < 6; ++i)
+  {
+    coords_array[i] = std::stod(coords_string, std::addressof(pos));
+    coords_string += pos;
+  }
+  if (*coords_string != '\0')
+  {
+    throw std::invalid_argument("Wrong Parallelogram arguments!\n");
+  }
+  constexpr size_t num_points = 3;
+  point_t points[num_points]{};
+  getPoints(num_points, coords_array, points);
+  return new Parallelogram(points[0], points[1], points[2]);
+}

@@ -9,6 +9,7 @@ namespace lanovenko
   Shape* inputRectangle(const char str[]);
   Shape* inputTriangle(const char str[]);
   Shape* inputDiamond(const char str[]);
+  Shape* inputParallelogram(const char str[]);
 }
 
 #endif
