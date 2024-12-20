@@ -27,6 +27,9 @@ int main()
   evstyunichev::Shape *shapes[10000]{};
   std::string s;
   size_t done = 0;
+  double totalSquare = 0;
+  std::cout.precision(1);
+  std::cout << std::fixed;
   while (std::cin >> s)
   {
     if (s == "RECTANGLE")
@@ -34,6 +37,7 @@ int main()
       shapes[done] = evstyunichev::make_rectangle(std::cin);
       if (shapes[done])
       {
+        totalSquare += shapes[done]->getArea();
         done++;
       }
     }
@@ -42,12 +46,14 @@ int main()
       evstyunichev::point_t mid{};
       double k{};
       std::cin >> mid.x >> mid.y >> k;
+      std::cout << evstyunichev::roundToOneSign(totalSquare) << ' ';
       evstyunichev::frameOutput(shapes[0]->getFrameRect());
       for (size_t i = 1; i < done; i++)
       {
         std::cout << ' ';
         evstyunichev::frameOutput(shapes[i]->getFrameRect());
       }
+      std::cout << '\n' << evstyunichev::roundToOneSign(totalSquare) * k * k << ' ';
       for (size_t i = 0; i < done; i++)
       {
         evstyunichev::point_t old = shapes[i]->getFrameRect().pos;
@@ -65,11 +71,16 @@ int main()
         std::cout << ' ';
         evstyunichev::frameOutput(shapes[i]->getFrameRect());
       }
+      std::cout << '\n';
     }
     else
     {
       evstyunichev::skip_to_sign(std::cin, '\n');
     }
+  }
+  for (size_t i = 0; i < done; i++)
+  {
+    delete[] shapes[i];
   }
   return 0;
 }

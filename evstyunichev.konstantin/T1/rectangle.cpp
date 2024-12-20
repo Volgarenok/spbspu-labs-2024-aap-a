@@ -40,8 +40,8 @@ void evstyunichev::Rectangle::move(point_t cds)
 evstyunichev::point_t evstyunichev::Rectangle::find_mid()
 {
   point_t mid{};
-  mid.x = (rightUp_.x - leftDown_.x) / 2.0;
-  mid.y = (rightUp_.y - leftDown_.y) / 2.0;
+  mid.x = (rightUp_.x + leftDown_.x) / 2.0;
+  mid.y = (rightUp_.y + leftDown_.y) / 2.0;
   return mid;
 }
 
