@@ -10,11 +10,10 @@ char *shabalin::removeVowels(char *string)
     {
       if (*current == *list)
       {
-        continue;
+        *result++ = *current;
       }
       ++list;
     }
-    *result++ = *current;
   }
   *result = '\0';
   return string;
