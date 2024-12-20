@@ -56,13 +56,13 @@ int main(int argc, char *argv[])
 
   size_t countOfElements = rows * cols;
 
-  int staticMatrix[1000] = {};
+  int staticMatrix[10000] = {};
   int *tempMatrix = nullptr;
   int *matrix = nullptr;
 
   if (task == 1)
   {
-    matrix = staticMatrix;
+    matrix = tempMatrix;
   }
   else if (task == 2)
   {
@@ -85,13 +85,16 @@ int main(int argc, char *argv[])
     shabalin::outputMatrix(output, matrix, rows, cols);
     if (!output)
     {
-      throw std::logic_error("Error of out");
+      throw std::logic_error("Error of output");
     }
   }
   catch (const std::exception &e)
   {
-    std::cerr << e.what() << "\n";
+    std::cerr << e.what() << '\n';
     delete[] tempMatrix;
+    return 2;
   }
+
+  delete[] tempMatrix;
   return 0;
 }
