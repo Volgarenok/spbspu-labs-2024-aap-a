@@ -10,7 +10,7 @@ evstyunichev::Ring::Ring(point_t mid, double R, double r):
 
 double evstyunichev::Ring::getArea()
 {
-  double s = M_PI * (R_ * R_ - r_ * r_);
+  double s = M_PI * R_ * R_ - M_PI * r_ * r_;
   return s;
 }
 

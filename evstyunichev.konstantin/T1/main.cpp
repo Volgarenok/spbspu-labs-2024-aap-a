@@ -87,7 +87,7 @@ int main()
         std::cout << ' ';
         evstyunichev::frameOutput(shapes[i]->getFrameRect());
       }
-      std::cout << '\n' << evstyunichev::roundToOneSign(totalSquare) * k * k << ' ';
+      std::cout << '\n' << evstyunichev::roundToOneSign(totalSquare * k * k) << ' ';
       for (size_t i = 0; i < done; i++)
       {
         evstyunichev::point_t old = shapes[i]->getFrameRect().pos;
