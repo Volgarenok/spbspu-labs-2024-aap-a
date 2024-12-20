@@ -5,11 +5,11 @@ namespace evstyunichev
 {
   struct Shape
   {
-    virtual double getArea();
-    virtual rectangle_t getFrameRect();
-    virtual void move(double, double);
-    virtual void move(point_t);
-    virtual void scale(double);
+    virtual double getArea() = 0;
+    virtual rectangle_t getFrameRect() = 0;
+    virtual void move(double, double) = 0;
+    virtual void move(point_t) = 0;
+    virtual void scale(double) = 0;
   };
 }
 #endif
