@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "base-types.hpp"
+#include "circle.hpp"
 #include "make_shape.hpp"
 #include "rectangle.hpp"
 #include "shape.hpp"
@@ -20,6 +21,7 @@ void evstyunichev::skip_to_sign(std::istream &in, char end)
   {
     in >> c;
   }
+  std::skipws(in);
   return;
 }
 
@@ -41,12 +43,25 @@ int main()
   std::cout.precision(1);
   std::cout << std::fixed;
   bool noInputErrors = 1, scaleFlag = 0;
-  while (std::cin >> s)
+  while (!(std::cin >> s).eof())
   {
     non_empty++;
     if (s == "RECTANGLE")
     {
       shapes[done] = evstyunichev::make_rectangle(std::cin);
+      if (!shapes[done])
+      {
+        noInputErrors = 0;
+      }
+      else
+      {
+        totalSquare += shapes[done]->getArea();
+        done++;
+      }
+    }
+    else if (s == "CIRCLE")
+    {
+      shapes[done] = evstyunichev::make_circle(std::cin);
       if (!shapes[done])
       {
         noInputErrors = 0;
