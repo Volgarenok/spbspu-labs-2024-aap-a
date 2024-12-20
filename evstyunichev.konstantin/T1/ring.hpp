@@ -1,21 +1,22 @@
-#ifndef CIRCLE_HPP
-#define CIRCLE_HPP
+#ifndef RING_HPP
+#define RING_HPP
 #include <iostream>
 #include "base-types.hpp"
+#include "circle.hpp"
 #include "shape.hpp"
 namespace evstyunichev
 {
-  struct Circle: public Shape
+  struct Ring: public Shape
   {
-    Circle(point_t, double);
+    Ring(point_t, double, double);
     double getArea();
     rectangle_t getFrameRect();
     void move(double, double);
     void move(point_t);
     void scale(double);
     private:
-    point_t mid_;
-    double r_;
+      point_t mid_;
+      double R_, r_;
   };
 }
 #endif

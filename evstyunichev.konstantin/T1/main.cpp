@@ -4,6 +4,7 @@
 #include "circle.hpp"
 #include "make_shape.hpp"
 #include "rectangle.hpp"
+#include "ring.hpp"
 #include "shape.hpp"
 #include "specific_output.hpp"
 
@@ -45,32 +46,22 @@ int main()
   bool noInputErrors = 1, scaleFlag = 0;
   while (!(std::cin >> s).eof())
   {
+    bool isSomethingMade = 0;
     non_empty++;
     if (s == "RECTANGLE")
     {
+      isSomethingMade = 1;
       shapes[done] = evstyunichev::make_rectangle(std::cin);
-      if (!shapes[done])
-      {
-        noInputErrors = 0;
-      }
-      else
-      {
-        totalSquare += shapes[done]->getArea();
-        done++;
-      }
     }
     else if (s == "CIRCLE")
     {
+      isSomethingMade = 1;
       shapes[done] = evstyunichev::make_circle(std::cin);
-      if (!shapes[done])
-      {
-        noInputErrors = 0;
-      }
-      else
-      {
-        totalSquare += shapes[done]->getArea();
-        done++;
-      }
+    }
+    else if (s == "RING")
+    {
+      isSomethingMade = 1;
+      shapes[done] = evstyunichev::make_ring(std::cin);
     }
     else if (s == "SCALE")
     {
@@ -119,6 +110,18 @@ int main()
     else
     {
       evstyunichev::skip_to_sign(std::cin, '\n');
+    }
+    if (isSomethingMade)
+    {
+      if (!shapes[done])
+      {
+        noInputErrors = 0;
+      }
+      else
+      {
+        totalSquare += shapes[done]->getArea();
+        done++;
+      }
     }
   }
   evstyunichev::destroy_shapes(shapes, done);

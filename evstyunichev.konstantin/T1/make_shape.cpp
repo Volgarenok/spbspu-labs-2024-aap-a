@@ -26,3 +26,15 @@ evstyunichev::Circle * evstyunichev::make_circle(std::istream &in)
   Circle *temp = new Circle({x, y}, r);
   return temp;
 }
+
+evstyunichev::Ring * evstyunichev::make_ring(std::istream &in)
+{
+  double x{}, y{}, R{}, r{};
+  in >> x >> y >> R >> r;
+  if ((r <= 0) || (R <= r))
+  {
+    return nullptr;
+  }
+  Ring *temp = new Ring({x, y}, R, r);
+  return temp;
+}
