@@ -84,9 +84,10 @@ int main()
       evstyunichev::skip_to_sign(std::cin, '\n');
     }
   }
+  evstyunichev::Shape **temp = shapes;
   for (size_t i = 0; i < done; i++)
   {
-    delete shapes[i];
+    delete temp[i];
   }
   if (!non_empty)
   {
