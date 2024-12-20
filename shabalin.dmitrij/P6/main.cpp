@@ -1,8 +1,5 @@
 #include <iostream>
-<<<<<<< HEAD
-=======
 #include <stdexcept>
->>>>>>> master
 #include "checkString.hpp"
 #include <inputOfString.hpp>
 
@@ -21,13 +18,10 @@ int main()
     free(c);
     return 1;
   }
-<<<<<<< HEAD
   std::cout << std::boolalpha << shabalin::func(c) << '\n';
   free(c);
 }
-
-=======
   std::cout << std::boolalpha << shabalin::func(t) << '\n';
   free(c);
 }
->>>>>>> master
+
