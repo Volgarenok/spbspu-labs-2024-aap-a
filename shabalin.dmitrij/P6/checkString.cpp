@@ -83,15 +83,17 @@ namespace
     }
     return next;
   }
+
   const char *is_real(const char *str)
   {
     if (!str)
     {
       return str;
     }
-    auto next = is_symbol(str, 'E');
-    next = is_mantissa(next);
-    return next;
+    auto next = is_sign(str);
+    auto next2 = is_mantissa(next);
+    auto next3 = is_E(next2);
+    return next3;
   }
 }
 
@@ -104,4 +106,3 @@ bool shabalin::func(const char * str)
   const char *next = is_real(str);
   return next && (*next == '\0');
 }
-
