@@ -77,14 +77,15 @@ int main(int argc, char *argv[])
       return 2;
     }
   }
-
   shabalin::inputMatrix(input, matrix, countOfElements);
+  if (!input)
+  {
+    std::cerr << "Invalid in" << "\n";
+    delete[] tempMatrix;
+    return 2;
+  }
   shabalin::spiralDecrease(matrix, rows, cols);
   shabalin::outputMatrix(output, matrix, rows, cols);
-  if (!output)
-  {
-    throw std::logic_error("Error of output");
-  }
 
   delete[] tempMatrix;
   return 0;
