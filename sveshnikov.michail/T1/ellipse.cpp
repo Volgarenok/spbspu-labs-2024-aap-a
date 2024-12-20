@@ -9,7 +9,7 @@ sveshnikov::Ellipse::Ellipse(point_t center, double vert_radius, double horiz_ra
 
 double sveshnikov::Ellipse::getArea() const
 {
-  return M_PI * vert_radius_ * horiz_radius_;
+  return M_PI * (vert_radius_ * horiz_radius_);
 }
 
 sveshnikov::rectangle_t sveshnikov::Ellipse::getFrameRect() const

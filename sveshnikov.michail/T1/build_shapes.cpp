@@ -41,7 +41,7 @@ void sveshnikov::build_ellipse(std::istream &in, Shape **shapes, size_t &num_sha
   in >> ctr_x >> ctr_y >> vert_radius >> horiz_radius;
   if (vert_radius > 0 && horiz_radius > 0)
   {
-    shapes[num_shapes] = new Ring({ctr_x, ctr_y}, vert_radius, horiz_radius);
+    shapes[num_shapes] = new Ellipse({ctr_x, ctr_y}, vert_radius, horiz_radius);
     num_shapes++;
   }
   else
