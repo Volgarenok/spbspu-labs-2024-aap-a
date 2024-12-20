@@ -27,7 +27,6 @@ int main()
   evstyunichev::Shape *shapes[10000]{};
   std::string s;
   size_t done = 0;
-  bool existBadShape = 0;
   while (std::cin >> s)
   {
     if (s == "RECTANGLE")
@@ -36,10 +35,6 @@ int main()
       if (shapes[done])
       {
         done++;
-      }
-      else
-      {
-        existBadShape = 1;
       }
     }
     else if (s == "SCALE")
@@ -71,7 +66,7 @@ int main()
         evstyunichev::frameOutput(shapes[i]->getFrameRect());
       }
     }
-    else if (s != "\n")
+    else
     {
       evstyunichev::skip_to_sign(std::cin, '\n');
     }
