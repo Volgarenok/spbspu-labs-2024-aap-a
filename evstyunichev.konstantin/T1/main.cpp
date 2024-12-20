@@ -100,15 +100,15 @@ int main()
       evstyunichev::skip_to_sign(std::cin, '\n');
     }
   }
-  evstyunichev::Shape **temp = shapes;
-  for (size_t i = 0; i < done; i++)
-  {
-    delete temp[i];
-  }
+  evstyunichev::destroy_shapes(shapes, done);
   if (!non_empty)
   {
     std::cout << "no input\n";
     return 1;
+  }
+  if (input_errors_flag)
+  {
+    std::cerr << "invalid shapes";
   }
   return 0;
 }
