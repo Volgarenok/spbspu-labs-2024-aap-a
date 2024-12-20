@@ -1,23 +1,21 @@
 #include "parallelogram.h"
 #include <stdexcept>
 #include <cmath>
+
 namespace cherkasov
 {
-  Parallelogram::Parallelogram(point_t point1, point_t point2, point_t point3):
-  point1(point1),
-  point2(point2),
-  point3(point3)
+  Parallelogram::Parallelogram(point_t point1, point_t point2, point_t point3)
+  : point1(point1), point2(point2), point3(point3)
   {
     if ((point1.x == point2.x && point1.y == point2.y) ||
-      (point1.x == point3.x && point1.y == point3.y) ||
-      (point2.x == point3.x && point2.y == point3.y))
+        (point1.x == point3.x && point1.y == point3.y) ||
+        (point2.x == point3.x && point2.y == point3.y))
     {
       throw std::logic_error("Parallelogram vertices must be distinct");
     }
-
     if (point1.y != point2.y)
     {
-      throw std::logic_error("One side must be parallel to the X");
+      throw std::logic_error("One side must be parallel to the X-axis");
     }
     calculateCenter();
   }
@@ -32,7 +30,6 @@ namespace cherkasov
   {
     return length * height;
   }
-
   rectangle_t Parallelogram::getFrameRect() const
   {
     return {length, height, center};

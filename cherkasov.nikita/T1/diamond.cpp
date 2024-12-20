@@ -40,7 +40,7 @@ namespace cherkasov
     {
       throw std::logic_error("Scale factor must be positive");
     }
-  width *= k;
-  height *= k;
+    width *= k;
+    height *= k;
   }
 }

@@ -1,5 +1,6 @@
 #ifndef CALCULAREA_H
 #define CALCULAREA_H
+#include <cstddef>
 #include "shape.h"
 namespace cherkasov
 {

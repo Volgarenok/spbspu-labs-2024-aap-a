@@ -1,5 +1,6 @@
 #include "rectangle.h"
 #include <stdexcept>
+
 namespace cherkasov
 {
   Rectangle::Rectangle(point_t lowLeft, point_t upRight)
@@ -33,8 +34,7 @@ namespace cherkasov
     {
       throw std::logic_error("Scale factor must be positive");
     }
-  rect.width *= k;
-  rect.height *= k;
+    rect.width *= k;
+    rect.height *= k;
   }
 }
-

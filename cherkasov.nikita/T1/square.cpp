@@ -1,16 +1,17 @@
 #include "square.h"
 #include <stdexcept>
+
 namespace cherkasov
 {
-  Square::Square(point_t lowLeft, double lenght)
+  Square::Square(point_t lowLeft, double length)
   {
-    if (lenght <= 0)
+    if (length <= 0)
     {
-      throw std::logic_error("leght must positiv");
+      throw std::logic_error("Length must be positive");
     }
-    square.pos = {lowLeft.x + lenght / 2, lowLeft.y + lenght / 2};
-    square.width = lenght;
-    square.height = lenght;
+    square.pos = {lowLeft.x + length / 2, lowLeft.y + length / 2};
+    square.width = length;
+    square.height = length;
   }
   double Square::getArea() const
   {
@@ -33,9 +34,9 @@ namespace cherkasov
   {
     if (k <= 0)
     {
-      throw std::logic_error("scale factor must positive");
+      throw std::logic_error("Scale factor must be positive");
     }
-  square.width *= k;
-  square.height *= k;
+    square.width *= k;
+    square.height *= k;
   }
 }
