@@ -107,7 +107,7 @@ int main()
     }
   }
   evstyunichev::destroy_shapes(shapes, done);
-  if (!(non_empty * scaleFlag))
+  if (!(non_empty && scaleFlag))
   {
     std::cout << "((\n";
     return 1;
