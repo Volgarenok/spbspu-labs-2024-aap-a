@@ -40,7 +40,7 @@ int main()
   double totalSquare = 0;
   std::cout.precision(1);
   std::cout << std::fixed;
-  bool input_errors_flag = 0;
+  bool noInputErrors = 1, scaleFlag = 0;
   while (std::cin >> s)
   {
     non_empty++;
@@ -49,13 +49,13 @@ int main()
       shapes[done] = evstyunichev::make_rectangle(std::cin);
       if (!shapes[done])
       {
-        input_errors_flag = 1;
+        noInputErrors = 0;
       }
       else
       {
         totalSquare += shapes[done]->getArea();
+        done++;
       }
-      done++;
     }
     else if (s == "SCALE")
     {
@@ -73,6 +73,7 @@ int main()
         std::cerr << "Nothing to scale!\n";
         return 1;
       }
+      scaleFlag = 1;
       std::cout << evstyunichev::roundToOneSign(totalSquare) << ' ';
       evstyunichev::frameOutput(shapes[0]->getFrameRect());
       for (size_t i = 1; i < done; i++)
@@ -106,14 +107,14 @@ int main()
     }
   }
   evstyunichev::destroy_shapes(shapes, done);
-  if (!non_empty)
+  if (!(non_empty * scaleFlag))
   {
-    std::cout << "no input\n";
+    std::cout << "((\n";
     return 1;
   }
-  if (input_errors_flag)
+  if (!noInputErrors)
   {
-    std::cerr << "invalid shapes";
+    std::cerr << "something went wrong\n";
   }
   return 0;
 }
