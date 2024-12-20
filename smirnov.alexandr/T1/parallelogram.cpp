@@ -10,7 +10,6 @@ smirnov::Parallelogram::Parallelogram(double x1, double y1,
   vertex3 = {x3, y3};
 }
 
-
 double smirnov::Parallelogram::getArea() const
 {
   double base = std::abs(vertex2.x - vertex1.x);

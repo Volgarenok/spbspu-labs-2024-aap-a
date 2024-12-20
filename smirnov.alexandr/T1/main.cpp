@@ -3,6 +3,7 @@
 #include "rectangle.hpp"
 #include "diamond.hpp"
 #include "square.hpp"
+#include "parallelogram.hpp"
 #include "processShapes.hpp"
 #include "createShapes.hpp"
 
@@ -46,6 +47,18 @@ int main()
       try
       {
         shapes[countShapes] = smirnov::createSquare(std::cin);
+        countShapes++;
+      }
+      catch (const std::invalid_argument & e)
+      {
+        hasError = true;
+      }
+    }
+    else if (shapeType == "PARALLELOGRAM")
+    {
+      try
+      {
+        shapes[countShapes] = smirnov::createParallelogram(std::cin);
         countShapes++;
       }
       catch (const std::invalid_argument & e)

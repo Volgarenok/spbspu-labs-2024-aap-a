@@ -37,6 +37,10 @@ smirnov::Diamond * smirnov::createDiamond(std::istream & in)
   double x3 = 0.0;
   double y3 = 0.0;
   in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+  if (!in)
+  {
+    throw std::invalid_argument("Incorrect coordinates");
+  }
   if ((x1 == x2 && y1 == y2) && (x1 == x3 && y1 == y3))
   {
     throw std::invalid_argument("All three vertices cannot coincide.");
@@ -46,4 +50,20 @@ smirnov::Diamond * smirnov::createDiamond(std::istream & in)
     throw std::invalid_argument("Two vertices cannot coincide.");
   }
   return new Diamond(x1, y1, x2, y2, x3, y3);
+}
+
+smirnov::Parallelogram * smirnov::createParallelogram(std::istream & in)
+{
+  double x1 = 0.0;
+  double y1 = 0.0;
+  double x2 = 0.0;
+  double y2 = 0.0;
+  double x3 = 0.0;
+  double y3 = 0.0;
+  in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+  if (!in || (x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3))
+  {
+    throw std::invalid_argument("Incorrect coordinates for the parallelogram");
+  }
+  return new Parallelogram(x1, y1, x2, y2, x3, y3);
 }
