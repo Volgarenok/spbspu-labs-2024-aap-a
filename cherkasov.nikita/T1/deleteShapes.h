@@ -1,4 +1,4 @@
-#ifndef DELETESPAPES_H
+#ifndef DELETESHAPES_H
 #define DELETESHAPES_H
 namespace cherkasov
 {

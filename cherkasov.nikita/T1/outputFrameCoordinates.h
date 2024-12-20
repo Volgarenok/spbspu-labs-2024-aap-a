@@ -4,4 +4,4 @@ namespace cherkasov
 {
   void outputFrameCoordinates(Shape* shapes[], size_t shapeCount);
 }
-#define
+#endif
