@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 
   size_t countOfElements = rows * cols;
 
-  int tempMatrix[10000] = {};
+  int *tempMatrix = nullptr;
   int *matrix = nullptr;
 
   if (task == 1)
@@ -67,37 +67,25 @@ int main(int argc, char *argv[])
   {
     try
     {
-      matrix = new int[countOfElements];
+      tempMatrix = new int[countOfElements];
+      matrix = tempMatrix;
     }
     catch (const std::bad_alloc &e)
     {
       std::cerr << "Error" << e.what() << "\n";
-      delete[] matrix;
+      delete[] tempMatrix;
       return 2;
     }
   }
-  try
+
+  shabalin::inputMatrix(input, matrix, countOfElements);
+  shabalin::spiralDecrease(matrix, rows, cols);
+  shabalin::outputMatrix(output, matrix, rows, cols);
+  if (!output)
   {
-    shabalin::inputMatrix(input, matrix, countOfElements);
-    shabalin::spiralDecrease(matrix, rows, cols);
-    shabalin::outputMatrix(output, matrix, rows, cols);
-    if (!output)
-    {
-      throw std::logic_error("Error of output");
-    }
+    throw std::logic_error("Error of output");
   }
-  catch (const std::exception &e)
-  {
-    std::cerr << e.what() << '\n';
-    if (task == 2)
-    {
-      delete[] matrix;
-    }
-    return 2;
-  }
-  if (task == 2)
-  {
-    delete[] matrix;
-  }
+
+  delete[] tempMatrix;
   return 0;
 }
