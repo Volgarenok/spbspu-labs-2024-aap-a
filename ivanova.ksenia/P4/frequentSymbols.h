@@ -1,5 +1,5 @@
-#ifndef FUNTIONS_H
-#define FUNTIONS_H
+#ifndef FREQUENTSYMBOLS_H
+#define FREQUENTSYMBOLS_H
 #include <iostream>
 
 namespace ivanova

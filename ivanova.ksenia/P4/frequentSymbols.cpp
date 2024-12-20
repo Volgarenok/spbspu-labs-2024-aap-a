@@ -1,4 +1,4 @@
-#include "functions.h"
+#include "frequentSymbols.h"
 #include <cstddef>
 
 char ivanova::frequentSymbol(const char* string)
