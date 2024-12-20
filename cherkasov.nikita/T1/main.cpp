@@ -6,166 +6,78 @@
 #include "square.h"
 #include "parallelogram.h"
 #include "diamond.h"
+#include "deleteShapes.h"
+#include "calculArea.h"
+#include "outputFrameCoordinates.h"
+#include "scaling.h"
 
 constexpr size_t maxShapes = 10000;
-
 int main()
 {
   cherkasov::Shape* shapes[maxShapes] = {nullptr};
   size_t shapeCount = 0;
   std::string inputCommand;
-  bool scaleCommandIssued = false;
-  try
+  Point isoCenter;
+  double scalingFactor;
+  bool scalingRequested = false;
+  while (std::cin >> inputCommand)
   {
-    while (std::cin >> inputCommand)
-    {
-      if (inputCommand.empty())
-      {
-        continue;
-      }
-      if (shapeCount >= maxShapes)
-      {
-        std::cerr << "Error: Shape limit exceeded\n";
-        break;
-      }
-      try
-      {
-        if (inputCommand == "RECTANGLE")
-        {
-          double x1, y1, x2, y2;
-          if (std::cin >> x1 >> y1 >> x2 >> y2)
-          {
-          if (x1 < x2 && y1 < y2)
-          {
-            shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
-          }
-          else
-          {
-            std::cerr << "Error: Invalid RECTANGLE parameters\n";
-          }
-       }
-       else
-       {
-         std::cerr << "Error: Invalid input for RECTANGLE\n";
-       }
-    }
-    else if (inputCommand == "SQUARE")
-    {
-      double x, y, length;
-      if (std::cin >> x >> y >> length && length > 0)
-      {
-        shapes[shapeCount++] = new cherkasov::Square({x, y}, length);
-      }
-      else
-      {
-        std::cerr << "Error: Invalid input for SQUARE\n";
-      }
-    }
-    else if (inputCommand == "PARALLELOGRAM")
-    {
-      double x1, y1, x2, y2, x3, y3;
-      if (std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3)
-      {
-      if ((x1 != x2 || y1 != y2) && y1 == y2)
-      {
-        shapes[shapeCount++] = new cherkasov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
-      }
-      else
-      {
-        std::cerr << "Error: Invalid PARALLELOGRAM parameters\n";
-      }
-    }
-    else
-    {
-      std::cerr << "Error: Invalid input for PARALLELOGRAM\n";
-    }
-  }
-    else if (inputCommand == "DIAMOND")
-    {
-      double x1, y1, x2, y2, x3, y3;
-      if (std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3)
-      {
-        shapes[shapeCount++] = new cherkasov::Diamond({x1, y1}, {x2, y2}, {x3, y3});
-      }
-      else
-      {
-        std::cerr << "Error: Invalid input for DIAMOND\n";
-      }
-    }
-    else if (inputCommand == "SCALE")
-    {
-      double scaleX, scaleY, factor;
-      if (std::cin >> scaleX >> scaleY >> factor && factor > 0)
-      {
-      if (shapeCount == 0)
-      {
-        std::cerr << "Error: No shapes to scale\n";
-      }
-      else
-      {
-        scaleCommandIssued = true;
-        for (size_t i = 0; i < shapeCount; ++i)
-        {
-          if (shapes[i])
-          {
-            shapes[i]->scale(factor);
-          }
-        }
-      }
-    }
-    else
-    {
-      std::cerr << "Error: Invalid SCALE parameters\n";
-    }
-  }
-  else
-  {
-    std::cerr << "Error: Unsupported shape " << inputCommand << "\n";
-  }
-  }
-  catch (const std::logic_error& e)
-  {
-    std::cerr << "Error: " << e.what() << "\n";
-  }
-    std::string remainingInput;
-    std::getline(std::cin, remainingInput);
-  }
-  if (!scaleCommandIssued && shapeCount == 0)
-  {
-    std::cerr << "Error: No shapes were created and no SCALE command issued.\n";
-    return 1;
-  }
-  std::cout << std::fixed << std::setprecision(1);
-  double totalArea = 0.0;
-  for (size_t i = 0; i < shapeCount; ++i)
-  {
-    if (shapes[i])
-    {
     try
     {
-      double area = shapes[i]->getArea();
-      totalArea += area;
-      std::cout << "Shape " << i + 1 << " Area: " << area << "\n";
+      if (inputCommand == "RECTANGLE")
+      {
+        double x1, y1, x2, y2;
+        std::cin >> x1 >> y1 >> x2 >> y2;
+        shapeArray[shapeCount++] = new cherkasov::Rectangle(x1, y1, x2, y2);
+      }
+      else if (inputCommand == "SQUARE")
+      {
+        double x1, y1, sideLength;
+        std::cin >> x1 >> y1 >> sideLength;
+        shapeArray[shapeCount++] = new cherkasov::Square(x1, y1, sideLength);
+      }
+      else if (inputCommand == "PARALLELOGRAM")
+      {
+        double x1, y1, x2, y2, x3, y3, x4, y4;
+        std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
+        shapeArray[shapeCount++] = new cherkasov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3}, {x4, y4});
+      }
+      else if (inputCommand == "DIAMOND")
+      {
+        double cx, cy, d1, d2;
+        std::cin >> cx >> cy >> d1 >> d2;
+        shapeArray[shapeCount++] = new cherkasov::Diamond(cx, cy, d1, d2);
+      }
+      else if (inputCommand == "SCALE")
+      {
+        scalingRequested = true;
+        std::cin >> isoCenter.x >> isoCenter.y >> scalingFactor;
+        if (scalingFactor <= 0)
+        {
+          throw std::invalid_argument("Scaling factor must be positive");
+        }
+        break;
+        }
     }
     catch (const std::exception& e)
     {
-      std::cerr << "Error: Failed to calculate area for shape " << i + 1 << ": " << e.what() << "\n";
-    }
-  delete shapes[i];
-  shapes[i] = nullptr;
+      std::cerr << e.what() << "\n";
     }
   }
-    std::cout << "Total area of all shapes: " << totalArea << "\n";
-  }
-  catch (const std::exception& e)
+  if (shapeCount == 0 || !scalingRequested)
   {
-    std::cerr << "Error: " << e.what() << "\n";
-    for (size_t i = 0; i < shapeCount; ++i)
-    {
-      delete shapes[i];
-      shapes[i] = nullptr;
-    }
-      return 1;
-    }
+    std::cerr << "No shapes or scaling not specified\n";
+    cherkasov::deleteShapes(shapeArray, shapeCount);
+    return 1;
+  }
+  std::cout << std::fixed << std::setprecision(1);
+  std::cout << cherkasov::calculateTotalArea(shapeArray, shapeCount);
+  std::cout << cherkasov::outputFrameCoordinates(shapeArray, shapeCount);
+  std::cout << cherkasov::scaling(shapeArray, shapeCount, isoCenter, scalingFactor);
+  std::cout·<<·"\n";
+  std::cout << calculateTotalArea(shapeArray, shapeCount);
+  std::cout << cherkasov::outputFrameCoordinates(shapeArray, shapeCount);
+  std::cout·<<·"\n";
+  cherkasov::deleteShapes(shapeArray, shapeCount);
   return 0;
 }

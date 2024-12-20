@@ -1,7 +1,6 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 #include "shape.h"
-#include "base-types.h"
 namespace cherkasov
 {
   class Square : public Shape
