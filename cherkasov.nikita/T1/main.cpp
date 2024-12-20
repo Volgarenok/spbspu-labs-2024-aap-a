@@ -25,6 +25,10 @@ int main()
   {
   try
   {
+  if (shapeCount >= maxShapes)
+  {
+    throw std::overflow_error("Maximum number of shapes exceeded");
+  }
   if (inputCommand == "RECTANGLE")
   {
     double x1, y1, x2, y2;
@@ -57,7 +61,6 @@ int main()
     {
       throw std::invalid_argument("Scaling factor must be positive");
     }
-    break;
     }
     else
     {
