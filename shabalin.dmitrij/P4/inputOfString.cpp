@@ -4,6 +4,7 @@ char *shabalin::inputOfString(std::istream &input, char end)
 {
   size_t sizeOfString = 123;
   size_t index = 1;
+
   char *initialString = reinterpret_cast< char* >(malloc(sizeOfString));
 
   if (!initialString)
