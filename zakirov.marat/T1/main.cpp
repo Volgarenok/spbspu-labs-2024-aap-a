@@ -39,6 +39,7 @@ int main()
       {
         std::cerr << "Warning! Scale is not defined." << '\n';
         zakirov::clear_shapes(shapes, location);
+        free(data);
         return 1;
       }
       else if (data[0] == 0.0)
