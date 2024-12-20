@@ -65,7 +65,7 @@ namespace abramov
   }
 
   ComplexQuad::ComplexQuad(point_t A, point_t B, point_t C, point_t D):
-  A_({0.0, 0.0}), B_({10.0, 10.0}), C_({2.0, 0.0}), D_({0.0, 3.0})
+  A_(A), B_(B), C_(C), D_(D)
   {
     try
     {
