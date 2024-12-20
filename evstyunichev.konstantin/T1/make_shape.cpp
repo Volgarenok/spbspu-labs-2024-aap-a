@@ -19,7 +19,7 @@ evstyunichev::Circle * evstyunichev::make_circle(std::istream &in)
 {
   double x{}, y{}, r{};
   in >> x >> y >> r;
-  if (r < 0)
+  if (r <= 0)
   {
     return nullptr;
   }
