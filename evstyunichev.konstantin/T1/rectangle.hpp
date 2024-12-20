@@ -8,14 +8,14 @@ namespace evstyunichev
   struct Rectangle: public Shape
   {
     Rectangle(point_t, point_t);
-    double getArea();
-    rectangle_t getFrameRect();
+    double getArea() const;
+    rectangle_t getFrameRect() const;
     void move(double, double);
     void move(point_t);
     void scale(double k);
-    point_t find_mid();
     private:
-    point_t leftDown_, rightUp_;
+      point_t find_mid() const;
+      point_t leftDown_, rightUp_;
   };
 }
 #endif

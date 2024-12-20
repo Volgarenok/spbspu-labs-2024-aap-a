@@ -7,13 +7,13 @@ evstyunichev::Circle::Circle(point_t mid, double r):
 {
 }
 
-double evstyunichev::Circle::getArea()
+double evstyunichev::Circle::getArea() const
 {
   double s = M_PI * r_ * r_;
   return s;
 }
 
-evstyunichev::rectangle_t evstyunichev::Circle::getFrameRect()
+evstyunichev::rectangle_t evstyunichev::Circle::getFrameRect() const
 {
   rectangle_t ans{};
   ans.pos = mid_;

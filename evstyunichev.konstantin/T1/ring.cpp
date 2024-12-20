@@ -8,13 +8,13 @@ evstyunichev::Ring::Ring(point_t mid, double R, double r):
 {
 }
 
-double evstyunichev::Ring::getArea()
+double evstyunichev::Ring::getArea() const
 {
   double s = M_PI * R_ * R_ - M_PI * r_ * r_;
   return s;
 }
 
-evstyunichev::rectangle_t evstyunichev::Ring::getFrameRect()
+evstyunichev::rectangle_t evstyunichev::Ring::getFrameRect() const
 {
   rectangle_t ans{};
   ans.pos = mid_;

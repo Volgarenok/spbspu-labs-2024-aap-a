@@ -9,8 +9,8 @@ namespace evstyunichev
   struct Ring: public Shape
   {
     Ring(point_t, double, double);
-    double getArea();
-    rectangle_t getFrameRect();
+    double getArea() const;
+    rectangle_t getFrameRect() const;
     void move(double, double);
     void move(point_t);
     void scale(double);

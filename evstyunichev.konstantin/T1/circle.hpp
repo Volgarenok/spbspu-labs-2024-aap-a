@@ -8,8 +8,8 @@ namespace evstyunichev
   struct Circle: public Shape
   {
     Circle(point_t, double);
-    double getArea();
-    rectangle_t getFrameRect();
+    double getArea() const;
+    rectangle_t getFrameRect() const;
     void move(double, double);
     void move(point_t);
     void scale(double);

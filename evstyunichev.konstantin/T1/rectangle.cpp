@@ -7,12 +7,12 @@ evstyunichev::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
 {
 }
 
-double evstyunichev::Rectangle::getArea()
+double evstyunichev::Rectangle::getArea() const
 {
   return (rightUp_.x - leftDown_.x) * (rightUp_.y - leftDown_.y);
 }
 
-evstyunichev::rectangle_t evstyunichev::Rectangle::getFrameRect()
+evstyunichev::rectangle_t evstyunichev::Rectangle::getFrameRect() const
 {
   rectangle_t frame;
   frame.pos = find_mid();
@@ -37,7 +37,7 @@ void evstyunichev::Rectangle::move(point_t cds)
   return;
 }
 
-evstyunichev::point_t evstyunichev::Rectangle::find_mid()
+evstyunichev::point_t evstyunichev::Rectangle::find_mid() const
 {
   point_t mid{};
   mid.x = (rightUp_.x + leftDown_.x) / 2.0;
