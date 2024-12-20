@@ -4,12 +4,13 @@
 namespace abramov
 {
   Square::Square(point_t p, double len):
-  pLeftLower_(p), len_(len)
+  pLeftLower_(p), len_(1.0)
   {
     if (len <= 0)
     {
       throw std::logic_error("It is impossible to build square\n");
     }
+    len_ = len;
   }
 
   double Square::getArea() const

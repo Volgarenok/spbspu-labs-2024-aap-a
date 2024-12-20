@@ -6,7 +6,7 @@
 namespace abramov
 {
   Rectangle::Rectangle(point_t p1, point_t p2):
-  pLeftLower_(p1), pRightUpper_(p2)
+  pLeftLower_({-1.0, -1.0}), pRightUpper_({1.0, 1.0})
   {
     if (p1.x >= p2.x || p1.y >= p2.y)
     {
