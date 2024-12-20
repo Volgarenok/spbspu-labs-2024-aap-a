@@ -6,9 +6,7 @@
 namespace zholobov {
 
   class Rectangle : public Shape {
-    rectangle_t rect_;
-
-   public:
+  public:
     Rectangle();
     Rectangle(const point_t& a, const point_t& c);
 
@@ -17,6 +15,9 @@ namespace zholobov {
     void move(point_t p) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
+
+  private:
+    rectangle_t rect_;
   };
 
 }

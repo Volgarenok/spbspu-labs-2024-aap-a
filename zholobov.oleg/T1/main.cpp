@@ -48,9 +48,9 @@ int main()
   }
 
   if (!is_scale_processed) {
-      std::cerr << "SCALE command not found\n";
-      zholobov::delete_shapes(shapes, shape_cnt);
-      return 1;
+    std::cerr << "SCALE command not found\n";
+    zholobov::delete_shapes(shapes, shape_cnt);
+    return 1;
   }
 
   zholobov::delete_shapes(shapes, shape_cnt);

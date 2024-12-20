@@ -6,7 +6,7 @@
 namespace zholobov {
 
   class Square : public Rectangle {
-   public:
+  public:
     Square();
     Square(const point_t& a, double length);
   };

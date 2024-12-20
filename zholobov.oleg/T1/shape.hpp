@@ -8,7 +8,7 @@
 namespace zholobov {
 
   class Shape {
-   public:
+  public:
     virtual ~Shape() = default;
     virtual double getArea() const = 0;
     virtual rectangle_t getFrameRect() const = 0;

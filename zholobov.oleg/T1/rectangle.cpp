@@ -8,8 +8,8 @@ zholobov::Rectangle::Rectangle(const point_t& a, const point_t& c)
 {
   rect_.width = c.x - a.x;
   rect_.height = c.y - a.y;
-  rect_.pos.x = (a.x + c.x) / 2.0f;
-  rect_.pos.y = (a.y + c.y) / 2.0f;
+  rect_.pos.x = (a.x + c.x) / 2.0;
+  rect_.pos.y = (a.y + c.y) / 2.0;
 }
 
 double zholobov::Rectangle::getArea() const
