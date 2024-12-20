@@ -56,12 +56,13 @@ int main(int argc, char *argv[])
 
   size_t countOfElements = rows * cols;
 
+  int staticMatrix[1000] = {};
   int *tempMatrix = nullptr;
   int *matrix = nullptr;
 
   if (task == 1)
   {
-    matrix = tempMatrix;
+    matrix = staticMatrix;
   }
   else if (task == 2)
   {
@@ -92,7 +93,5 @@ int main(int argc, char *argv[])
     std::cerr << e.what() << "\n";
     delete[] tempMatrix;
   }
-
-  delete[] tempMatrix;
   return 0;
 }
