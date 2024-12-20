@@ -21,8 +21,8 @@ double zakirov::Circle::getArea() const
 zakirov::rectangle_t zakirov::Circle::getFrameRect() const
 {
   rectangle_t сircumscribed;
-  сircumscribed.width_ = radius_;
-  сircumscribed.height_ = radius_;
+  сircumscribed.width_ = radius_ * 2;
+  сircumscribed.height_ = radius_* 2;
   сircumscribed.position_ = center_;
 
   return сircumscribed;

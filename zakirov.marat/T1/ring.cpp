@@ -25,8 +25,8 @@ double zakirov::Ring::getArea() const
 zakirov::rectangle_t zakirov::Ring::getFrameRect() const
 {
   rectangle_t сircumscribed;
-  сircumscribed.width_ = ex_radius_;
-  сircumscribed.height_ = ex_radius_;
+  сircumscribed.width_ = ex_radius_ * 2;
+  сircumscribed.height_ = ex_radius_ * 2;
   сircumscribed.position_ = center_;
 
   return сircumscribed;
