@@ -36,6 +36,7 @@ char * sharifullina::inputstring(std::istream & in, char stop)
   in >> std::skipws;
   return str;
 }
+
 namespace
 {
   char * fillStringRecursive(std::istream& in, char stop, size_t index)
@@ -46,16 +47,16 @@ namespace
     {
       try
       {
-        char *  str = new char[index + 1];
+        char * str = new char[index + 1];
         str[index] = '\0';
         return str;
       }
-      catch (const std::bad_alloc&)
+      catch (const std::bad_alloc& e)
       {
         return nullptr;
       }
     }
-    char* str = fillStringRecursive(in, stop, index + 1);
+    char * str = fillStringRecursive(in, stop, index + 1);
     str[index] = '\0';
     return str;
   }
