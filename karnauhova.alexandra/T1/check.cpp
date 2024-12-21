@@ -37,7 +37,7 @@ bool karnauhova::it_polygon(double* polygon, size_t max_count, size_t count)
   return true;
 }
 
-bool karnauhova::dubl_rectangle(double* points, std::string* names, size_t c_names, size_t c_points)
+bool karnauhova::same_rectangle(double* points, std::string* names, size_t c_names, size_t c_points)
 {
   size_t k = 0;
   for (size_t i = 0; i < (c_names - 1); i++)
@@ -72,7 +72,7 @@ bool karnauhova::dubl_rectangle(double* points, std::string* names, size_t c_nam
   return true;
 }
 
-bool karnauhova::dubl_triangle(double* points, std::string* names, size_t c_names, size_t c_points)
+bool karnauhova::same_triangle(double* points, std::string* names, size_t c_names, size_t c_points)
 {
   size_t k = 0;
   for (size_t i = 0; i < (c_names - 1); i++)
@@ -149,7 +149,7 @@ bool karnauhova::dubl_triangle(double* points, std::string* names, size_t c_name
   }
   return true;
 }
-bool karnauhova::dubl_pol(double* pol, size_t end, std::string* names, size_t c_names, size_t c_points, double* points)
+bool karnauhova::same_pol(double* pol, size_t end, std::string* names, size_t c_names, size_t c_points, double* points)
 {
   size_t k = 0;
   size_t c_polygon = 0;

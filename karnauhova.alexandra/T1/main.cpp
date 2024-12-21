@@ -27,7 +27,7 @@ int main()
         }
         else
         {
-          if (karnauhova::dubl_rectangle(points, names, count_shape + 1, i + 4))
+          if (karnauhova::same_rectangle(points, names, count_shape + 1, i + 4))
           {
             i += 4;
             names[count_shape] = name;
@@ -50,7 +50,7 @@ int main()
         {
           if (karnauhova::it_triangle(points, i + 6))
           {
-            if (karnauhova::dubl_triangle(points, names, count_shape + 1, i + 6))
+            if (karnauhova::same_triangle(points, names, count_shape + 1, i + 6))
             {
               i += 6;
               names[count_shape] = name;
@@ -93,7 +93,7 @@ int main()
         {
           if (karnauhova::it_polygon(polygon, count_polygon, count))
           {
-            if (karnauhova::dubl_pol(polygon, count_polygon + count, names, count_shape + 1, i + 1, points))
+            if (karnauhova::same_pol(polygon, count_polygon + count, names, count_shape + 1, i + 1, points))
             {
               points[i] = count;
               i++;
