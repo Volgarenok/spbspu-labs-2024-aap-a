@@ -4,7 +4,6 @@
 
 int main()
 {
-  std::cout << "in";
   char* str = asafov::inputString();
   if(str[0] == '\0')
   {
@@ -13,12 +12,12 @@ int main()
   }
 
   //[DIF-LAT]
-  std::cout << "dif " << asafov::countUniqLetters(str) << '\n';
+  std::cout << asafov::countUniqLetters(str) << '\n';
 
   //[SHR-SYM]
   char* unusedLetters = new char[26];
   asafov::getUnusedLetters(str, unusedLetters);
-  std::cout << "shr " << unusedLetters << '\n';
+  std::cout << unusedLetters << '\n';
 
   delete[] unusedLetters;
   delete[] str;

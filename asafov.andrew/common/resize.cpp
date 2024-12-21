@@ -17,10 +17,12 @@ char* asafov::resize(char* string, size_t length)
   while (i < length)
   {
     newString[i] = oldString[i];
+    i++;
   }
   while (i < length + 8)
   {
     newString[i] = '\0';
+    i++;
   }
   delete[] oldString;
   return newString;
