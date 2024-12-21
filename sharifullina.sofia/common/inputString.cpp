@@ -38,49 +38,29 @@ char * sharifullina::inputstring(std::istream & in, char stop)
 }
 namespace
 {
-  char * fillStringRecursive(const char* buffer, size_t index, size_t length)
+  char * fillStringRecursive(std::istream& in, char stop, size_t index)
   {
-    if (index == length)
+    char ch = '\0';
+    in >> std::noskipws >> ch;
+    if (!in || ch == stop)
     {
-      char * str = nullptr;
       try
       {
-        str = new char[length + 1];
+        char *  str = new char[index + 1];
+        str[index] = '\0';
+        return str;
       }
       catch (const std::bad_alloc&)
       {
         return nullptr;
       }
-      str[length] = '\0';
-      return str;
     }
-    char * str = fillStringRecursive(buffer, index + 1, length);
-    if (str != nullptr)
-    {
-      str[index] = buffer[index];
-    }
+    char* str = fillStringRecursive(in, stop, index + 1);
+    str[index] = '\0';
     return str;
   }
 }
-
 char * sharifullina::inputStringRecursive(std::istream& in, char stop)
 {
-  if (!in)
-  {
-    return nullptr;
-  }
-  const size_t maxSize = 1024;
-  char inputBuffer[maxSize];
-  size_t length = 0;
-  char ch = '\0';
-  std::noskipws(in);
-  while ((in >> ch) && (ch != stop))
-  {
-    if (length >= maxSize)
-    {
-       return nullptr;
-    }
-    inputBuffer[length++] = ch;
-  }
-  return fillStringRecursive(inputBuffer, 0, length);
+  return fillStringRecursive(in, stop, 0);
 }
