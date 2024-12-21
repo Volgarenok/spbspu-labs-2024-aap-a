@@ -72,7 +72,7 @@ void processShapes()
         }
         shapes[shapeCount++] = new krylov::Triangle({x1, y1}, {x2, y2}, {x3, y3});
       }
-      if (shapeType == "COMPLEXQUAD")
+      else if (shapeType == "COMPLEXQUAD")
       {
         double x1 = 0.0, y1 = 0.0;
         double x2 = 0.0, y2 = 0.0;
