@@ -4,6 +4,7 @@
 #include "circle.hpp"
 #include "make_shape.hpp"
 #include "rectangle.hpp"
+#include "regular.hpp"
 #include "ring.hpp"
 #include "shape.hpp"
 #include "specific_output.hpp"
@@ -62,6 +63,11 @@ int main()
     {
       isSomethingMade = 1;
       shapes[done] = evstyunichev::make_ring(std::cin);
+    }
+    else if (s == "REGULAR")
+    {
+      isSomethingMade = 1;
+      shapes[done] = evstyunichev::make_regular(std::cin);
     }
     else if (s == "SCALE")
     {
