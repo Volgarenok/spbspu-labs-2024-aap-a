@@ -4,6 +4,7 @@
 
 int main()
 {
+  std::cout << "in";
   char* str = asafov::inputString();
   if(str[0] == '\0')
   {
