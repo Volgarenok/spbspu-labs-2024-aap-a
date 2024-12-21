@@ -13,7 +13,7 @@ char* asafov::inputString()
     string[i] = '\0';
   }
   char ch = 0;
-  while (true)
+  while (!std::cin.eof())
   {
     count--;
     std::cin >> ch;
