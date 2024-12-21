@@ -70,7 +70,6 @@ char * sharifullina::inputStringRecursive(std::istream& in, char stop)
   {
     return nullptr;
   }
-
   const size_t maxSize = 1024;
   char inputBuffer[maxSize];
   size_t length = 0;
@@ -86,4 +85,3 @@ char * sharifullina::inputStringRecursive(std::istream& in, char stop)
   }
   return fillStringRecursive(inputBuffer, 0, length);
 }
-
