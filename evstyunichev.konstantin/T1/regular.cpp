@@ -29,9 +29,9 @@ evstyunichev::rectangle_t evstyunichev::Regular::getFrameRect() const
   frame.pos = A_;
   double l = A_.x, r = A_.x, u = A_.y, d = A_.y;
   l = std::min(std::min(l, B_.x), C_.x);
-  r = std::max(std::max(l, B_.x), C_.x);
-  d = std::min(std::min(l, B_.y), C_.y);
-  u = std::max(std::max(l, B_.y), C_.y);
+  r = std::max(std::max(r, B_.x), C_.x);
+  d = std::min(std::min(d, B_.y), C_.y);
+  u = std::max(std::max(u, B_.y), C_.y);
   frame.height = std::max(u - A_.y, A_.y - d) * 2.0;
   frame.width = std::max(r - A_.x, A_.x - l) * 2.0;
   return frame;
