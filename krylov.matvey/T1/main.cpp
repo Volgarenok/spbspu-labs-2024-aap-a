@@ -4,6 +4,7 @@
 #include "rectangle.hpp"
 #include "ring.hpp"
 #include "triangle.hpp"
+#include "complexquad.hpp"
 
 void processShapes();
 
@@ -44,7 +45,7 @@ void processShapes()
     {
       if (shapeType == "RECTANGLE")
       {
-        double x1, y1, x2, y2;
+        double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0;
         if (!(std::cin >> x1 >> y1 >> x2 >> y2))
         {
           throw std::invalid_argument("Invalid RECTANGLE parameters");
@@ -70,6 +71,18 @@ void processShapes()
           throw std::invalid_argument("Invalid TRIANGLE parameters");
         }
         shapes[shapeCount++] = new krylov::Triangle({x1, y1}, {x2, y2}, {x3, y3});
+      }
+      if (shapeType == "COMPLEXQUAD")
+      {
+        double x1 = 0.0, y1 = 0.0;
+        double x2 = 0.0, y2 = 0.0;
+        double x3 = 0.0, y3 = 0.0;
+        double x4 = 0.0, y4 = 0.0;
+        if (!(std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4))
+        {
+          throw std::invalid_argument("Invalid COMPLEXQUAD parameters");
+        }
+        shapes[shapeCount++] = new krylov::Complexquad({x1, y1}, {x2, y2}, {x3, y3}, {x4, y4});
       }
       else if (shapeType == "SCALE")
       {
