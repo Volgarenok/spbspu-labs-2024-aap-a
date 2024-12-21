@@ -6,7 +6,6 @@
 namespace sharifullina
 {
   char * inputstring(std::istream & in, char stop);
-  char * shrSym(const char * str1, const char * str2, char * res);
-  char * uniTwo(const char * str1, const char * str2, char * res);
+  char * inputStringRecursive(std::istream& in, char stop);
 }
 #endif
