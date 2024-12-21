@@ -10,7 +10,7 @@ char* asafov::resize(char* string, size_t length)
   {
     newString = new char[length + 8];
   }
-  catch (std::bad_alloc)
+  catch (const std::bad_alloc)
   {
     return oldString;
   }
