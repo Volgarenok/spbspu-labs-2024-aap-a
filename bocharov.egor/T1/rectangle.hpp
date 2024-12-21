@@ -11,7 +11,7 @@ namespace bocharov
     rectangle_t getFrameRect() const override;
     void move(point_t point) override;
     void move(double x, double y) override;
-    void scale(double k) override;
+    void scale(double ratio) override;
   private:
     point_t leftDown_;
     point_t rightUp_;
