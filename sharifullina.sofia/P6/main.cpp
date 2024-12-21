@@ -6,7 +6,7 @@ int main()
   char * str = nullptr;
   try
   {
-    str = sharifullina::inputstringRecursive(std::cin, '\n');
+    str = sharifullina::inputStringRecursive(std::cin, '\n');
   }
   catch (const std::exception& e)
   {
