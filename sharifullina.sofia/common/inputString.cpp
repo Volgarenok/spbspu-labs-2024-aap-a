@@ -54,7 +54,6 @@ namespace
       str[length] = '\0';
       return str;
     }
-
     char * str = fillStringRecursive(buffer, index + 1, length);
     if (str != nullptr)
     {
