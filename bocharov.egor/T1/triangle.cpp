@@ -31,7 +31,7 @@ bocharov::rectangle_t bocharov::Triangle::getFrameRect() const
 }
 void bocharov::Triangle::move(point_t centerP)
 {
-  dribas::point_t pos;
+  bocharov::point_t pos;
   pos.x = std::abs(a_.x + b_.x + c_.x) / 3.0;
   pos.y = std::abs(a_.y + b_.y + c_.y) / 3.0;
   double moveX = centerP.x - pos.x;
