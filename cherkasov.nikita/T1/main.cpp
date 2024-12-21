@@ -1,12 +1,8 @@
 #include <iostream>
 #include <iomanip>
-#include <cstddef>
-#include <stdexcept>
 #include <string>
-#include "rectangle.h"
-#include "square.h"
-#include "parallelogram.h"
-#include "diamond.h"
+#include "InputHandler.h"
+#include "ErrorHandler.h"
 #include "deleteShapes.h"
 #include "calculArea.h"
 #include "outputFrameCoordinates.h"
@@ -24,90 +20,37 @@ int main()
   bool scalingRequested = false;
   while (std::cin >> inputCommand)
   {
-  if (inputCommand == "RECTANGLE")
-  {
-    double x1, y1, x2, y2;
-    std::cin >> x1 >> y1 >> x2 >> y2;
-    if (x1 > x2 || y1 > y2)
+    if (inputCommand == "SCALE")
     {
-      invalidInput = true;
+      scalingRequested = true;
+      if (!cherkasov::parseScalingInput(isoCenter.x, isoCenter.y, scalingFactor))
+      {
+        cherkasov::handleError("Scaling factor must be positive");
+        cherkasov::deleteShapes(shapes, shapeCount);
+        return 1;
+      }
     }
     else
     {
-      shapes[shapeCount++] = new cherkasov::Rectangle({x1, y1}, {x2, y2});
+      cherkasov::Shape* shape = cherkasov::parseShapeInput(inputCommand, invalidInput);
+      if (invalidInput || shape == nullptr)
+      {
+        cherkasov::handleError("Invalid shape input");
+        cherkasov::deleteShapes(shapes, shapeCount);
+        return 1;
+      }
+      shapes[shapeCount++] = shape;
     }
-  }
-  else if (inputCommand == "SQUARE")
-  {
-    double x1, y1, length;
-    std::cin >> x1 >> y1 >> length;
-    if (length <= 0)
-    {
-      invalidInput = true;
-    }
-    else
-    {
-      shapes[shapeCount++] = new cherkasov::Square({x1, y1}, length);
-    }
-  }
-  else if (inputCommand == "PARALLELOGRAM")
-  {
-    double x1, y1, x2, y2, x3, y3;
-    std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-    if ((x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3))
-    {
-      invalidInput = true;
-    }
-    else
-    {
-      shapes[shapeCount++] = new cherkasov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
-    }
-  }
-  else if (inputCommand == "DIAMOND")
-  {
-    double x1, y1, x2, y2, x3, y3;
-    std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-    if ((x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3))
-    {
-      invalidInput = true;
-    }
-    else
-    {
-      shapes[shapeCount++] = new cherkasov::Diamond({x1, y1}, {x2, y2}, {x3, y3});
-    }
-  }
-  else if (inputCommand == "SCALE")
-  {
-    scalingRequested = true;
-    std::cin >> isoCenter.x >> isoCenter.y >> scalingFactor;
-    if (scalingFactor <= 0)
-    {
-      std::cerr << "Scaling factor must be positive\n";
-      cherkasov::deleteShapes(shapes, shapeCount);
-      return 1;
-    }
-  }
-  else if (std::cin.eof())
-  {
-    std::cerr << "EOF encountered\n";
-    cherkasov::deleteShapes(shapes, shapeCount);
-    return 1;
-  }
   }
   if (shapeCount == 0)
   {
-    std::cerr << "No shapes or scaling not specified\n";
+    cherkasov::handleError("No shapes specified");
     return 1;
   }
   if (!scalingRequested)
   {
-    std::cerr << "Scaling was not specified\n";
+    cherkasov::handleError("Scaling was not specified");
     cherkasov::deleteShapes(shapes, shapeCount);
-    return 1;
-  }
-  if (invalidInput)
-  {
-    std::cerr << "Invalid input encountered\n";
     return 1;
   }
   std::cout << std::fixed << std::setprecision(1);
