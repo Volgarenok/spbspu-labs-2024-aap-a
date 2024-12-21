@@ -57,7 +57,7 @@ namespace
       }
     }
     char * str = fillStringRecursive(in, stop, index + 1);
-    str[index] = '\0';
+    str[index] = ch;
     return str;
   }
 }
