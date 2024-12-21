@@ -3,8 +3,7 @@
 #include <cstddef>
 namespace asafov
 {
-  bool isLetter(char ch);
   int countUniqLetters(const char* string);
-  char* getUnusedLetters(const char* string);
+  void getUnusedLetters(const char* string, char* unusedletters);
 }
 #endif
