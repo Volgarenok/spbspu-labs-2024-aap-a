@@ -3,6 +3,14 @@
 #include "getShapeInfo.hpp"
 #include "shape.hpp"
 
+void clearStr(char** stack, size_t stackSize)
+{
+  for (size_t i = 0; *(stack+i) && i <stackSize; i++)
+  {
+    delete (stack + i);
+  }
+}
+
 int main()
 {
   constexpr size_t shapesSize = 10000;
