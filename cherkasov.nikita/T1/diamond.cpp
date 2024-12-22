@@ -7,10 +7,6 @@ namespace cherkasov
 {
   Diamond::Diamond(double x1, double y1, double x2, double y2, double x3, double y3)
   {
-    if (x1 != x3 || y2 != y3)
-    {
-      throw std::invalid_argument("Diagonals of the diamond must be parallel to the coordinate");
-    }
     vertex1_.x = x1;
     vertex1_.y = y1;
     vertex2_.x = x2;

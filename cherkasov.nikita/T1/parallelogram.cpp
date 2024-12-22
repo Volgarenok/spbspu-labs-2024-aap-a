@@ -11,10 +11,6 @@ namespace cherkasov
     vertex1_.y = y1;
     vertex2_.x = x2;
     vertex2_.y = y2;
-    if (y1 != y2)
-    {
-      throw std::invalid_argument("One of the sides must be parallel to Y");
-    }
     vertex3_.x = x3;
     vertex3_.y = y3;
     vertex4_.x = x3 + (x2 - x1);
