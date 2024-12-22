@@ -6,6 +6,7 @@ void cherkasov::deleteShapes(Shape* shapes[], size_t& shapeCount)
     if (shapes[i] != nullptr)
     {
       delete shapes[i];
+      shapes[i] = nullptr;
     }
   }
 }
