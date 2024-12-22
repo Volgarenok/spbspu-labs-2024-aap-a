@@ -1,4 +1,5 @@
 #include "make_shape.hpp"
+#include <cmath>
 #include <iostream>
 #include "circle.hpp"
 #include "rectangle.hpp"
@@ -7,12 +8,39 @@
 
 namespace
 {
-  bool isEqual(double, double, double p = 0.000001);
+  const double prec = 0.0000001;
+  bool isEqual(double, double, double p = prec);
+  size_t goodCos(double);
+
   bool isEqual(double a, double b, double p)
   {
-    if (abs(a - b) <= p)
+    if (std::abs(a - b) <= p)
     {
       return 1;
+    }
+    return 0;
+  }
+
+  size_t goodCos(double d)
+  {
+    int l = 3, r = 1e5, mid = 0;
+    double cur = 0;
+    while (l <= r)
+    {
+      mid = (l + r) / 2;
+      cur = std::cos(M_PI / mid);
+      if (isEqual(cur, d))
+      {
+        return mid;
+      }
+      else if (cur < d)
+      {
+        l = mid + 1;
+      }
+      else
+      {
+        r = mid - 1;
+      }
     }
     return 0;
   }
@@ -72,10 +100,14 @@ evstyunichev::Regular * evstyunichev::make_regular(std::istream &in)
   {
     std::swap(a, b);
   }
-  if (isEqual(a * a + b * b, c * c))
+  if (isEqual(pow(a, 2) + pow(b, 2), pow(c, 2)))
   {
-    Regular *temp = new Regular({x1, y1}, {x2, y2}, {x3, y3});
-    return temp;
+    size_t n = goodCos(b / c);
+    if (n)
+    {
+      Regular * temp = new Regular({x1, y1}, n, 2 * c * std::sin(M_PI / n));
+      return temp;
+    }
   }
   return nullptr;
 }
