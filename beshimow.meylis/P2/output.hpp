@@ -1,10 +1,11 @@
-#ifndef TABLE_HPP
-#define TABLE_HPP
-#include <cstddef>
+#ifndef ROWOUTPUT_HPP
+#define ROWOUTPUT_HPP
+
+#include <iostream>
 
 namespace beshimow
 {
-  void output(double x, size_t k, double error);
-  void outTable(double left, double right, size_t k, double error, double step);
+    void rowOutput(double x, size_t k, double error);
 }
-#endif
+
+#endif // ROWOUTPUT_HPP
