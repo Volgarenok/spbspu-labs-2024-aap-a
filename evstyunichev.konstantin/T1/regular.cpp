@@ -41,7 +41,7 @@ evstyunichev::rectangle_t evstyunichev::Regular::getFrameRect() const
 void evstyunichev::Regular::move(double dx, double dy)
 {
   O_.x += dx;
-  O_.y += dy; 
+  O_.y += dy;
   return;
 }
 
