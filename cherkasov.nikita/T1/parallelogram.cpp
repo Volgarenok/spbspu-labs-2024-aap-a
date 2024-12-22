@@ -15,12 +15,17 @@ namespace cherkasov
     vertex3_.y = y3;
     vertex4_.x = x3 + (x2 - x1);
     vertex4_.y = y3 + (y2 - y1);
+    center_.x = (vertex1_.x + vertex3_.x) / 2;
+    center_.y = (vertex1_.y + vertex3_.y) / 2;
   }
   double Parallelogram::getArea() const
   {
-    double base = std::hypot(vertex2_.x - vertex1_.x, vertex2_.y - vertex1_.y);
-    double height = std::abs(vertex3_.y - vertex1_.y);
-    return base * height;
+    double vector1_x = vertex2_.x - vertex1_.x;
+    double vector1_y = vertex2_.y - vertex1_.y;
+    double vector2_x = vertex3_.x - vertex1_.x;
+    double vector2_y = vertex3_.y - vertex1_.y;
+    double area = std::abs(vector1_x * vector2_y - vector1_y * vector2_x);
+    return area;
   }
   rectangle_t Parallelogram::getFrameRect() const
   {
@@ -31,15 +36,15 @@ namespace cherkasov
     rectangle_t rect;
     rect.width = maxX - minX;
     rect.height = maxY - minY;
-    rect.pos.x = (minX + maxX) / 2;
-    rect.pos.y = (minY + maxY) / 2;
+    rect.pos.x = center_.x;
+    rect.pos.y = center_.y;
     return rect;
   }
+
   void Parallelogram::move(point_t c)
   {
-    point_t Pos = getFrameRect().pos;
-    double moveX = c.x - Pos.x;
-    double moveY = c.y - Pos.y;
+    double moveX = c.x - center_.x;
+    double moveY = c.y - center_.y;
     vertex1_.x += moveX;
     vertex1_.y += moveY;
     vertex2_.x += moveX;
@@ -48,6 +53,7 @@ namespace cherkasov
     vertex3_.y += moveY;
     vertex4_.x += moveX;
     vertex4_.y += moveY;
+    center_ = c;
   }
   void Parallelogram::move(double dx, double dy)
   {
@@ -59,17 +65,18 @@ namespace cherkasov
     vertex3_.y += dy;
     vertex4_.x += dx;
     vertex4_.y += dy;
+    center_.x += dx;
+    center_.y += dy;
   }
   void Parallelogram::scale(double k)
   {
-    point_t Pos = getFrameRect().pos;
-    vertex1_.x = Pos.x + (vertex1_.x - Pos.x) * k;
-    vertex1_.y = Pos.y + (vertex1_.y - Pos.y) * k;
-    vertex2_.x = Pos.x + (vertex2_.x - Pos.x) * k;
-    vertex2_.y = Pos.y + (vertex2_.y - Pos.y) * k;
-    vertex3_.x = Pos.x + (vertex3_.x - Pos.x) * k;
-    vertex3_.y = Pos.y + (vertex3_.y - Pos.y) * k;
-    vertex4_.x = Pos.x + (vertex4_.x - Pos.x) * k;
-    vertex4_.y = Pos.y + (vertex4_.y - Pos.y) * k;
+    vertex1_.x = center_.x + (vertex1_.x - center_.x) * k;
+    vertex1_.y = center_.y + (vertex1_.y - center_.y) * k;
+    vertex2_.x = center_.x + (vertex2_.x - center_.x) * k;
+    vertex2_.y = center_.y + (vertex2_.y - center_.y) * k;
+    vertex3_.x = center_.x + (vertex3_.x - center_.x) * k;
+    vertex3_.y = center_.y + (vertex3_.y - center_.y) * k;
+    vertex4_.x = center_.x + (vertex4_.x - center_.x) * k;
+    vertex4_.y = center_.y + (vertex4_.y - center_.y) * k;
   }
 }

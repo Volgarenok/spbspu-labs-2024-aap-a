@@ -19,6 +19,7 @@ namespace cherkasov
     point_t vertex2_;
     point_t vertex3_;
     point_t vertex4_;
+    point_t center_;
   };
 }
 #endif
