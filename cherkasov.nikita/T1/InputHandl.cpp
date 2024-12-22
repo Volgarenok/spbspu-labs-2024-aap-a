@@ -4,13 +4,13 @@
 #include "parallelogram.h"
 #include "diamond.h"
 #include <iostream>
-cherkasov::Shape* parseShapeInput(const std::string& inputCommand, bool& invalidInput)
+cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream& input, bool& invalidInput)
 {
   if (inputCommand == "RECTANGLE")
   {
     double x1, y1, x2, y2;
-    std::cin >> x1 >> y1 >> x2 >> y2;
-    if (!std::cin || (x1 >= x2 || y1 >= y2))
+    input >> x1 >> y1 >> x2 >> y2;
+    if (!input || (x1 >= x2 || y1 >= y2))
     {
       invalidInput = true;
     }
@@ -19,8 +19,8 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, bool& invalid
   else if (inputCommand == "SQUARE")
   {
     double x1, y1, length;
-    std::cin >> x1 >> y1 >> length;
-    if (length <= 0)
+    input >> x1 >> y1 >> length;
+    if (!input || length <= 0)
     {
       invalidInput = true;
     }
@@ -29,8 +29,8 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, bool& invalid
   else if (inputCommand == "PARALLELOGRAM")
   {
     double x1, y1, x2, y2, x3, y3;
-    std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-    if ((x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3))
+    input >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+    if (!input || (x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3))
     {
       invalidInput = true;
     }
@@ -39,8 +39,8 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, bool& invalid
   else if (inputCommand == "DIAMOND")
   {
     double x1, y1, x2, y2, x3, y3;
-    std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-    if ((x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3))
+    input >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+    if (!input || (x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3))
     {
       invalidInput = true;
     }
