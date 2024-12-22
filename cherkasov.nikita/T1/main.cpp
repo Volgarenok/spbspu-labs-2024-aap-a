@@ -33,11 +33,11 @@ int main()
     else
     {
       cherkasov::Shape* shape = parseShapeInput(inputCommand, invalidInput);
-      if (shape == nullptr)
+      if (invalidInput || shape == nullptr)
       {
         std::cerr << "Invalid shape input\n";
-        cherkasov::deleteShapes(shapes, shapeCount);
-        return 1;
+        invalidInput = false;
+        continue;
       }
       shapes[shapeCount++] = shape;
     }
@@ -59,18 +59,14 @@ int main()
     cherkasov::deleteShapes(shapes, shapeCount);
     return 1;
   }
-  if (invalidInput)
-  {
-    std::cerr << "Invalid shape input\n";
-  }
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << "Total area before scaling: " << cherkasov::calculArea(shapes, shapeCount) << "\n";
-  std::cout << "Frame rectangles before scaling:\n";
+  cherkasov::calculArea(shapes, shapeCount)
   cherkasov::outputFrameCoordinates(shapes, shapeCount);
   cherkasov::scaling(shapes, shapeCount, scalingFactor);
-  std::cout << "Total area after scaling: " << cherkasov::calculArea(shapes, shapeCount) << "\n";
-  std::cout << "Frame rectangles after scaling:\n";
+  std::cout << "\n";
+  std::cout << cherkasov::calculArea(shapes, shapeCount);
   cherkasov::outputFrameCoordinates(shapes, shapeCount);
+  std::cout << "\n";
   cherkasov::deleteShapes(shapes, shapeCount);
   return 0;
 }
