@@ -7,7 +7,7 @@ namespace evstyunichev
 {
   struct Regular: public Shape
   {
-    Regular(point_t, size_t, double);
+    Regular(point_t, size_t, double, double);
     double getArea() const;
     rectangle_t getFrameRect() const;
     void move(double, double);
@@ -16,7 +16,7 @@ namespace evstyunichev
     private:
       point_t O_;
       size_t n_;
-      double a_, R_, r_;
+      double a_, R_, r_, base_;
   };
   double findDist(point_t, point_t);
 }

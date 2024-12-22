@@ -10,8 +10,8 @@ double evstyunichev::findDist(evstyunichev::point_t A, evstyunichev::point_t B)
   return ans;
 }
 
-evstyunichev::Regular::Regular(point_t O, size_t n, double a):
-  O_(O), n_(n), a_(a)
+evstyunichev::Regular::Regular(point_t O, size_t n, double a, double base):
+  O_(O), n_(n), a_(a), base_(base)
 {
   r_ = a_ / (2 * std::tan(M_PI / n_));
   R_ = a_ / (2 * std::sin(M_PI / n_));
@@ -26,13 +26,18 @@ double evstyunichev::Regular::getArea() const
 evstyunichev::rectangle_t evstyunichev::Regular::getFrameRect() const
 {
   rectangle_t temp{};
-  double right = 0, left = 0, down = 0, up = 0, fragment = 2.0 * M_PI / n_, zero = 0;
-  zero = -(M_PI + fragment) / 2.0;
-  down = O_.y - r_;
-  left = O_.x + R_ * std::cos(zero - (n_ / 4) * fragment);
-  right = O_.x + R_ * std::cos(zero + (n_ / 4 + 1) * fragment);
-  up = O_.y + R_ * std::sin(zero + (n_ / 2) * fragment);
   temp.pos = O_;
+  double right = -1e9, left = 1e9, down = 1e9, up = -1e9, fragment = 2.0 * M_PI / n_;
+  point_t cur{};
+  for (size_t i = 0; i < n_; i++)
+  {
+    cur.x = O_.x + R_ * std::cos(base_ + fragment * i);
+    cur.y = O_.y + R_ * std::sin(base_ + fragment * i);
+    left = std::min(left, cur.x);
+    right = std::max(right, cur.x);
+    down = std::min(down, cur.y);
+    up = std::max(up, cur.y);
+  }
   temp.height = up - down;
   temp.width = right - left;
   return temp;
