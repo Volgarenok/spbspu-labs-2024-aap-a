@@ -37,9 +37,9 @@ namespace cherkasov
   }
   void Square::scale(double k)
   {
-    point_t Pos = getFrameRect().pos;
+    point_t center = getFrameRect().pos;
     length_ *= k;
-    left_.x = Pos.x - (length_ / 2);
-    left_.y = Pos.y - (length_ / 2);
+    left_.x = center.x - length_ / 2;
+    left_.y = center.y - length_ / 2;
   }
 }
