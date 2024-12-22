@@ -28,7 +28,7 @@ shramko::rectangle_t shramko::Triangle::getRectFrame() const
   double yMin = std::min(one_.y, std::min(two_.y, three_.y));
 
   shramko::rectangle_t rectFrame;
-  rectFrame.height = xMax - yMin;
+  rectFrame.height = yMax - yMin;
   rectFrame.width = xMax - xMin;
   rectFrame.pos.x = xMin + (rectFrame.width / 2.0);
   rectFrame.pos.y = yMin + (rectFrame.height / 2.0);
@@ -67,12 +67,12 @@ void shramko::Triangle::scale(double k)
 {
   if (k <= 0)
   {
-    throw std::invalid_argument("Triangle scale err\n")
+    throw std::invalid_argument("Triangle scale err\n");
   }
 
   point_t pos;
-  pos.x = std::abs(one_.x + two.x + three_.x) / 3.0;
-  pos.y = std::abs(one_.y + two.y + three_.y) / 3.0;
+  pos.x = std::abs(one_.x + two_.x + three_.x) / 3.0;
+  pos.y = std::abs(one_.y + two_.y + three_.y) / 3.0;
 
   one_.x = (one_.x - pos.x) * k + pos.x;
   one_.y = (one_.y - pos.y) * k + pos.y;

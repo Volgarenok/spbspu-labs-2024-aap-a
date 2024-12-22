@@ -61,7 +61,7 @@ void shramko::Rectangle::scale(double k)
     throw std::invalid_argument("Rect scale err\n");
   }
   rectangle_t rectFrame = getRectFrame();
-  point_t pos = rectFrame().pos;
+  point_t pos = rectFrame.pos;
 
   leftBottom_.x = pos.x + (leftBottom_.x - pos.x) * k;
   leftBottom_.y = pos.y + (leftBottom_.y - pos.y) * k;
