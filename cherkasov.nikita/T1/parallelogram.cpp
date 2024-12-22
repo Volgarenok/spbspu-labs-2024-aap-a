@@ -13,10 +13,6 @@ namespace cherkasov
     {
       throw std::logic_error("Parallelogram vertices must be distinct");
     }
-    if (point1.y != point2.y)
-    {
-      throw std::logic_error("One side must be parallel to the X-axis");
-    }
     calculateCenter();
   }
   void Parallelogram::calculateCenter()
