@@ -18,11 +18,9 @@ namespace cherkasov
   }
   double Parallelogram::getArea() const
   {
-    double vector1X = vertex2_.x - vertex1_.x;
-    double vector1Y = vertex2_.y - vertex1_.y;
-    double vector2X = vertex3_.x - vertex1_.x;
-    double vector2Y = vertex3_.y - vertex1_.y;
-    return std::abs(vector1X * vector2Y - vector1Y * vector2X);
+    double base = std::hypot(vertex2_.x - vertex1_.x, vertex2_.y - vertex1_.y);
+    double height = std::abs(vertex3_.y - vertex1_.y);
+    return base * height;
   }
   rectangle_t Parallelogram::getFrameRect() const
   {
