@@ -22,9 +22,10 @@ int main()
     if (inputCommand == "SCALE")
     {
       scalingRequested = true;
-      if (!cherkasov::parseScalingInput(isoCenter.x, isoCenter.y, scalingFactor))
+      std::cin >> isoCenter.x >> isoCenter.y >> scalingFactor;
+      if (scalingFactor <= 0)
       {
-        std::cerr << "Scaling factor must be positive\n";
+        std::cerr << "Scaling factor must positive\n";
         cherkasov::deleteShapes(shapes, shapeCount);
         return 1;
       }
@@ -33,11 +34,11 @@ int main()
     else
     {
       cherkasov::Shape* shape = parseShapeInput(inputCommand, invalidInput);
-      if (invalidInput || shape == nullptr)
+      if (shape == nullptr)
       {
         std::cerr << "Invalid shape input\n";
-        invalidInput = false;
-        continue;
+        cherkasov::deleteShapes(shapes, shapeCount);
+        return 1;
       }
       shapes[shapeCount++] = shape;
     }
@@ -59,8 +60,11 @@ int main()
     cherkasov::deleteShapes(shapes, shapeCount);
     return 1;
   }
-  std::cout << std::fixed << std::setprecision(1);
-  cherkasov::calculArea(shapes, shapeCount);
+  if (invalidInput)
+  {
+    std::cerr << "Invalid input encountered\n";
+  }
+  std::cout << std::fixed << std::setprecision(1) << cherkasov::calculArea(shapes, shapeCount);
   cherkasov::outputFrameCoordinates(shapes, shapeCount);
   cherkasov::scaling(shapes, shapeCount, scalingFactor);
   std::cout << "\n";

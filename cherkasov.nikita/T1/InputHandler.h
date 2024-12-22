@@ -4,8 +4,4 @@
 #include "shape.h"
 
 cherkasov::Shape* parseShapeInput(const std::string& inputCommand, bool& invalidInput);
-namespace cherkasov
-{
-  bool parseScalingInput(double& isoCenterX, double& isoCenterY, double& scalingFactor);
-}
 #endif

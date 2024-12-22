@@ -25,10 +25,6 @@ namespace cherkasov
   }
   void Rectangle::scale(double k)
   {
-    if (k <= 0)
-    {
-      throw std::logic_error("Scale factor must be positive");
-    }
     rect.width *= k;
     rect.height *= k;
   }
