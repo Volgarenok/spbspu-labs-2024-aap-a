@@ -65,7 +65,7 @@ int main(int argc, char ** argv)
   }
   if (!(dirti::matrix_checking(matrix, m, n)))
   {
-    std::cerr << "Matrix does not suit condition" << "n";
+    std::cout << "Matrix does not suit condition" << "\n";
     delete[] dyn_matrix;
     return 0;
   }
