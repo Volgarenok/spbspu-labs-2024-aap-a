@@ -5,10 +5,10 @@ namespace cherkasov
 {
   Rectangle:: Rectangle(double x1, double y1, double x2, double y2)
   {
-    left_.x = x1;
-    left_.y = y1;
-    right_.x = x2;
-    right_.y = y2;
+    left_.x = std::min(x1, x2);
+    left_.y = std::min(y1, y2);
+    right_.x = std::max(x1, x2);
+    right_.y = std::max(y1, y2);
   }
   double Rectangle::getArea() const
   {
