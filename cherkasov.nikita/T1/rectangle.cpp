@@ -1,5 +1,6 @@
 #include "rectangle.h"
 #include <cmath>
+#include <algorithm>
 
 namespace cherkasov
 {
