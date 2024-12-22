@@ -1,9 +1,15 @@
 #include "triangle.hpp"
+#include <stdexcept>
 #include <algorithm>
 #include <cmath>
 
 shramko::Triangle::Triangle(point_t one, point_t two, point_t three)
 {
+  if ((one.x * (two.y - three.y) + two.x * (three.y - one.y) + three.x * (one.y - two.y)) == 0)
+  {
+    throw std::invalid_argument("Triangle size err\n");
+  }
+
   one_ = one;
   two_ = two;
   three_ = three;
@@ -59,6 +65,11 @@ void shramko::Triangle::move(double x, double y)
 
 void shramko::Triangle::scale(k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Triangle scale err\n")
+  }
+
   point_t pos;
   pos.x = std::abs(one_.x + two.x + three_.x) / 3.0;
   pos.y = std::abs(one_.y + two.y + three_.y) / 3.0;

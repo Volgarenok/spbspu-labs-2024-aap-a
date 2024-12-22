@@ -6,13 +6,13 @@
 int main()
 {
   constexpr size_t size = 10000;
-  shramko::Shape* shapes[size] = {};
+  shramko::Shape* shape[size] = {};
   int count = 0;
-  count = shramko::createShape(std::cin, std::cerr, std::cout, shapes);
+  count = shramko::createShape(std::cin, std::cerr, std::cout, shape);
 
   if (count == -1)
   {
     return 1;
   }
-  shramko::clear(shapes, count);
+  shramko::destroy(shapes, count);
 }

@@ -1,4 +1,5 @@
 #include "diamond.hpp"
+#include <stdexcept>
 #include <cmath>
 
 shramko::Diamond::Diamond(point_t one, point_t two, point_t three): one_({0.0, 0.0}), two_({0.0, 0.0}), three({0.0, 0.0})
@@ -47,6 +48,11 @@ shramko::Diamond::Diamond(point_t one, point_t two, point_t three): one_({0.0, 0
       three_ = two;
     }
   }
+
+  else
+  {
+    throw std::invalid_argument("Diamond size err\n");
+  }
 }
 
 double shramko::Diamond::getArea() const
@@ -87,6 +93,11 @@ void shramko::Diamond::move(point_t point)
 
 void shramko::Diamond::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Diamond scale err\n");
+  }
+
   two_.y = (one_.y - two_.y) * k + one_.y;
   three_.x = (one_.x - three_.x) * k + one_.x;
 }

@@ -9,7 +9,7 @@ double shramko::getEveryArea(Shape** shape, size_t count)
   double everyArea = 0.0;
   for (size_t i = 0; i < count; i++)
   {
-    area += shape[i]->getArea();
+    everyArea += shape[i]->getArea();
   }
   return everyArea;
 }
@@ -37,9 +37,9 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
   bool isScaled = false;
   try
   {
-    while (in >> str)
+    while (in >> stri)
     {
-      if (str == "RECTANGLE")
+      if (stri == "RECTANGLE")
       {
         try
         {
@@ -56,7 +56,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
           err << e.what << '\n';
         }
       }
-      else if (str == "TRIANGLE")
+      else if (stri == "TRIANGLE")
       {
         try
         {
@@ -75,7 +75,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
           err << e.what << '\n';
         }
       }
-      else if (str == "DIAMOND")
+      else if (stri == "DIAMOND")
       {
         try
         {
@@ -94,7 +94,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
           err << e.what << '\n';
         }
       }
-      else if (str == "SCALE")
+      else if (stri == "SCALE")
       {
         isScaled = true;
         if (count == 0)

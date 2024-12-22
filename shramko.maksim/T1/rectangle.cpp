@@ -1,13 +1,21 @@
 #include "rectangle.hpp"
+#include <stdexcept>
 #include <stdlib.h>
 #include <cmath>
 
 shramko::Rectangle::Rectangle(point_t leftBottom, point_t rightTop): leftBottom_({0.0L, 0.0L}), rightTop_({0.0L, 0.0L})
 {
-  leftBottom_.x = leftBottom.x;
-  leftBottom_.y = leftBottom.y;
-  rightTop_.x = rightTop.x;
-  rightTop_.y = rightTop.y;
+  if (leftBottom.x < rightTop.x && leftBottom.y < rightTop.y)
+  {
+    leftBottom_.x = leftBottom.x;
+    leftBottom_.y = leftBottom.y;
+    rightTop_.x = rightTop.x;
+    rightTop_.y = rightTop.y;
+  }
+  else
+  {
+    throw std::invalid_argument("Rect size err\n");
+  }
 }
 
 double shramko::Rectangle::getArea() const
@@ -48,6 +56,10 @@ void shramko::Rectangle::move(double x, double y)
 
 void shramko::Rectangle::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Rect scale err\n");
+  }
   rectangle_t rectFrame = getRectFrame();
   point_t pos = rectFrame().pos;
 
