@@ -1,10 +1,15 @@
 #include <iostream>
-#include <../P4/inputString.hpp>
+#include <cstddef>
+#include "../../asafov.andrew/common/inputString.hpp"
 #include "isExpression.hpp"
 
 int main()
 {
-    unsigned long long length = 0;
-    char* string = asafov::inputString(length);
-    std::cout << asafov::isExpression(string, 0, length) << std::endl;
+  char* str = asafov::inputString();
+  size_t len = 0;
+  for (size_t i = 0; str[i] != '\0'; i++)
+  {
+    len++;
+  }
+  std::cout << asafov::isExpression(str, 0, len) << std::endl;
 }
