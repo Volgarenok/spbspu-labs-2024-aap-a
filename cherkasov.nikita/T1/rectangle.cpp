@@ -16,12 +16,11 @@ namespace cherkasov
   }
   rectangle_t Rectangle::getFrameRect() const
   {
-    point_t center;
-    center.y = (left_.y + right_.y) / 2;
-    center.x = (left_.x + right_.x) / 2;
     rectangle_t rect;
     rect.height = right_.y - left_.y;
     rect.width = right_.x - left_.x;
+    rect.pos.y = left_.y + (rect.height / 2);
+    rect.pos.x = left_.x + (rect.width / 2);
     return rect;
   }
   void Rectangle::move(point_t c)
@@ -44,9 +43,9 @@ namespace cherkasov
   void Rectangle::scale(double k)
   {
     point_t center = getFrameRect().pos;
-    left_.x = center.x + (left_.x - center.x) * k + center.x;
-    right_.x = center.x + (right_.x - center.x) * k + center.x;
-    left_.y = center.y + (left_.y - center.y) * k + center.y;
-    right_.y = center.y + (right_.y - center.y) * k + center.y;
+    left_.x = center.x + (left_.x - center.x) * k;
+    right_.x = center.x + (right_.x - center.x) * k;
+    left_.y = center.y + (left_.y - center.y) * k;
+    right_.y = center.y + (right_.y - center.y) * k;
   }
 }
