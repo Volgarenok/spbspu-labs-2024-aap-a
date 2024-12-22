@@ -84,28 +84,23 @@ evstyunichev::Ring * evstyunichev::make_ring(std::istream &in)
 
 evstyunichev::Regular * evstyunichev::make_regular(std::istream &in)
 {
-  double x1{}, y1{}, x2{}, y2{}, x3{}, y3{};
+  double x1{}, y1{}, x2{}, y2{}, x3{}, y3{}, base{};
   in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
   double a = findDist({x1, y1}, {x2, y2}), b = findDist({x1, y1}, {x3, y3}),
     c = findDist({x3, y3}, {x2, y2});
+  double target = y3 - y1;
   if (a > b)
   {
     std::swap(a, b);
+    target = y2 - y1;
   }
-  if (b > c)
+  if (isEqual(pow(a, 2) + pow(c, 2), pow(b, 2)))
   {
-    std::swap(b, c);
-  }
-  if (a > b)
-  {
-    std::swap(a, b);
-  }
-  if (isEqual(pow(a, 2) + pow(b, 2), pow(c, 2)))
-  {
-    size_t n = goodCos(b / c);
+    base = std::asin(target / b);
+    size_t n = goodCos(a / b);
     if (n)
     {
-      Regular * temp = new Regular({x1, y1}, n, 2 * c * std::sin(M_PI / n));
+      Regular * temp = new Regular({x1, y1}, n, 2 * b * std::sin(M_PI / n), base);
       return temp;
     }
   }
