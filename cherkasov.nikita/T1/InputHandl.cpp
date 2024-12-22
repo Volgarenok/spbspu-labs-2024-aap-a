@@ -10,7 +10,11 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, bool& invalid
   {
     double x1, y1, x2, y2;
     std::cin >> x1 >> y1 >> x2 >> y2;
-    if (!std::cin || (x1 >= x2 || y1 >= y2))
+    if (!(std::cin >> x1 >> y1 >> x2 >> y2))
+    {
+      invalidInput = true;
+    }
+    if (x1 >= x2 || y1 >= y2)
     {
       invalidInput = true;
     }
@@ -20,6 +24,10 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, bool& invalid
   {
     double x1, y1, length;
     std::cin >> x1 >> y1 >> length;
+    if (!(std::cin >> x1 >> y1 >> length))
+    {
+      invalidInput = true;
+    }
     if (length <= 0)
     {
       invalidInput = true;
