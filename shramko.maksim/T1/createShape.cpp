@@ -53,7 +53,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
         }
         catch (const std::invalid_argument& e)
         {
-          err << e.what << '\n';
+          err << e.what() << '\n';
         }
       }
       else if (stri == "TRIANGLE")
@@ -72,7 +72,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
         }
         catch (const std::invalid_argument& e)
         {
-          err << e.what << '\n';
+          err << e.what() << '\n';
         }
       }
       else if (stri == "DIAMOND")
@@ -91,7 +91,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
         }
         catch (const std::invalid_argument& e)
         {
-          err << e.what << '\n';
+          err << e.what() << '\n';
         }
       }
       else if (stri == "SCALE")
@@ -146,7 +146,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
   return count;
 }
 
-void shramko::clear(Shape** shape, size_t count)
+void shramko::destroy(Shape** shape, size_t count)
 {
   for (size_t i = 0; i < count; i++)
   {

@@ -14,5 +14,5 @@ int main()
   {
     return 1;
   }
-  shramko::destroy(shapes, count);
+  shramko::destroy(shape, count);
 }
