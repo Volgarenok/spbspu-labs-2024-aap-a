@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string.h>
-#include "frequentSymbols.h"
+#include "recursiveStringCheck.h"
 
 int main()
 {
@@ -11,10 +11,7 @@ int main()
     delete[] string;
     return 1;
   }
-  char dest[3] = {};
-  ivanova::twoFrequentSymbol(string, dest);
-  std::cout << ivanova::frequentSymbol(string) << '\n';
-  std::cout << dest << '\n';
+  std::cout << std::boolalpha << ivanova::rightString(string) << "\n";
   delete[] string;
   return 0;
 }
