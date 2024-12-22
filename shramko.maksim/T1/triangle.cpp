@@ -15,12 +15,12 @@ shramko::Triangle::Triangle(point_t one, point_t two, point_t three)
   three_ = three;
 }
 
-double shramko::Triangle::getArea()
+double shramko::Triangle::getArea() const
 {
   return std::abs(((two_.x - one_.x) * (three_.y - one_.y) - (three_.x - one_.x) * (two_.y - one_.y))) / 2.0;
 }
 
-double shramko::Triangle::getRectFrame() const
+shramko::rectangle_t shramko::Triangle::getRectFrame() const
 {
   double xMax = std::max(one_.x, std::max(two_.x, three_.x));
   double yMax = std::max(one_.y, std::max(two_.y, three_.y));
@@ -63,7 +63,7 @@ void shramko::Triangle::move(double x, double y)
   three_.y += y;
 }
 
-void shramko::Triangle::scale(k)
+void shramko::Triangle::scale(double k)
 {
   if (k <= 0)
   {

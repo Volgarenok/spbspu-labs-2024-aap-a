@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <cmath>
 
-shramko::Diamond::Diamond(point_t one, point_t two, point_t three): one_({0.0, 0.0}), two_({0.0, 0.0}), three({0.0, 0.0})
+shramko::Diamond::Diamond(point_t one, point_t two, point_t three): one_({0.0, 0.0}), two_({0.0, 0.0}), three_({0.0, 0.0})
 {
   if ((one.x == two.x && one.y == three.y) || (one.y == two.y && one.x == three.x))
   {
