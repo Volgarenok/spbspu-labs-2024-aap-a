@@ -14,7 +14,7 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, bool& invalid
     {
       invalidInput = true;
     }
-    return new cherkasov::Rectangle({x1, y1}, {x2, y2});
+    return new cherkasov::Rectangle(x1, y1, x2, y2);
   }
   else if (inputCommand == "SQUARE")
   {
@@ -24,7 +24,7 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, bool& invalid
     {
       invalidInput = true;
     }
-    return new cherkasov::Square({x1, y1}, length);
+    return new cherkasov::Square(x1, y1, length);
   }
   else if (inputCommand == "PARALLELOGRAM")
   {
@@ -34,7 +34,7 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, bool& invalid
     {
       invalidInput = true;
     }
-    return new cherkasov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
+    return new cherkasov::Parallelogram(x1, y1, x2, y2, x3, y3);
   }
   else if (inputCommand == "DIAMOND")
   {
@@ -44,7 +44,7 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, bool& invalid
     {
       invalidInput = true;
     }
-    return new cherkasov::Diamond({x1, y1}, {x2, y2}, {x3, y3});
+    return new cherkasov::Diamond(x1, y1, x2, y2, x3, y3);
   }
   invalidInput = true;
   return nullptr;

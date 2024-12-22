@@ -1,70 +1,79 @@
 #include "parallelogram.h"
 #include <stdexcept>
 #include <cmath>
+#include <algorithm>
 
 namespace cherkasov
 {
-  Parallelogram::Parallelogram(point_t point1, point_t point2, point_t point3)
-  : point1(point1), point2(point2), point3(point3)
+  Parallelogram::Parallelogram(double x1, double y1, double x2, double y2, double x3, double y3)
   {
-    if ((point1.x == point2.x && point1.y == point2.y) ||
-        (point1.x == point3.x && point1.y == point3.y) ||
-        (point2.x == point3.x && point2.y == point3.y))
+    vertex1_.x = x1;
+    vertex1_.y = y1;
+    vertex2_.x = x2;
+    vertex2_.y = y2;
+    if (y1 != y2)
     {
-      throw std::logic_error("Parallelogram vertices must be distinct");
+      throw std::invalid_argument("One of the sides must be parallel to Y");
     }
-    calculateCenter();
-  }
-  void Parallelogram::calculateCenter()
-  {
-    length = std::abs(point2.x - point1.x);
-    height = std::abs(point3.y - point1.y);
-    center.x = (point1.x + point2.x + point3.x + (point3.x - point1.x)) / 4;
-    center.y = (point1.y + point2.y + point3.y + (point3.y - point2.y)) / 4;
+    vertex3_.x = x3;
+    vertex3_.y = y3;
+    vertex4_.x = x3 + (x2 - x1);
+    vertex4_.y = y3 + (y2 - y1);
   }
   double Parallelogram::getArea() const
   {
-    return length * height;
+    double base = std::hypot(vertex2_.x - vertex1_.x, vertex2_.y - vertex1_.y);
+    double height = std::abs(vertex3_.y - vertex1_.y);
+    return base * height;
   }
   rectangle_t Parallelogram::getFrameRect() const
   {
-    return {length, height, center};
+    double minX = std::min({vertex1_.x, vertex2_.x, vertex3_.x, vertex4_.x});
+    double maxX = std::max({vertex1_.x, vertex2_.x, vertex3_.x, vertex4_.x});
+    double minY = std::min({vertex1_.y, vertex2_.y, vertex3_.y, vertex4_.y});
+    double maxY = std::max({vertex1_.y, vertex2_.y, vertex3_.y, vertex4_.y});
+    rectangle_t rect;
+    rect.width = maxX - minX;
+    rect.height = maxY - minY;
+    rect.pos.x = (minX + maxX) / 2;
+    rect.pos.y = (minY + maxY) / 2;
+    return rect;
   }
   void Parallelogram::move(point_t c)
   {
-    double dx = c.x - center.x;
-    double dy = c.y - center.y;
-    point1.x += dx;
-    point1.y += dy;
-    point2.x += dx;
-    point2.y += dy;
-    point3.x += dx;
-    point3.y += dy;
-    center = c;
+    point_t Pos = getFrameRect().pos;
+    double moveX = c.x - Pos.x;
+    double moveY = c.y - Pos.y;
+    vertex1_.x += moveX;
+    vertex1_.y += moveY;
+    vertex2_.x += moveX;
+    vertex2_.y += moveY;
+    vertex3_.x += moveX;
+    vertex3_.y += moveY;
+    vertex4_.x += moveX;
+    vertex4_.y += moveY;
   }
   void Parallelogram::move(double dx, double dy)
   {
-    point1.x += dx;
-    point1.y += dy;
-    point2.x += dx;
-    point2.y += dy;
-    point3.x += dx;
-    point3.y += dy;
-    center.x += dx;
-    center.y += dy;
+    vertex1_.x += dx;
+    vertex1_.y += dy;
+    vertex2_.x += dx;
+    vertex2_.y += dy;
+    vertex3_.x += dx;
+    vertex3_.y += dy;
+    vertex4_.x += dx;
+    vertex4_.y += dy;
   }
   void Parallelogram::scale(double k)
   {
-    if (k <= 0)
-    {
-      throw std::logic_error("Scale factor must be positive");
-    }
-    point1.x = center.x + (point1.x - center.x) * k;
-    point1.y = center.y + (point1.y - center.y) * k;
-    point2.x = center.x + (point2.x - center.x) * k;
-    point2.y = center.y + (point2.y - center.y) * k;
-    point3.x = center.x + (point3.x - center.x) * k;
-    point3.y = center.y + (point3.y - center.y) * k;
-    calculateCenter();
+    point_t Pos = getFrameRect().pos;
+    vertex1_.x = Pos.x + (vertex1_.x - Pos.x) * k;
+    vertex1_.y = Pos.y + (vertex1_.y - Pos.y) * k;
+    vertex2_.x = Pos.x + (vertex2_.x - Pos.x) * k;
+    vertex2_.y = Pos.y + (vertex2_.y - Pos.y) * k;
+    vertex3_.x = Pos.x + (vertex3_.x - Pos.x) * k;
+    vertex3_.y = Pos.y + (vertex3_.y - Pos.y) * k;
+    vertex4_.x = Pos.x + (vertex4_.x - Pos.x) * k;
+    vertex4_.y = Pos.y + (vertex4_.y - Pos.y) * k;
   }
 }

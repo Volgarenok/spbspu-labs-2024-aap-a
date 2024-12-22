@@ -1,42 +1,45 @@
 #include "square.h"
-#include <stdexcept>
+#include <cmath>
 
 namespace cherkasov
 {
-  Square::Square(point_t lowLeft, double length)
+  Square::Square(double x1, double y1, double length)
   {
-    if (length <= 0)
-    {
-      throw std::logic_error("Length must be positive");
-    }
-    square.pos = {lowLeft.x + length / 2, lowLeft.y + length / 2};
-    square.width = length;
-    square.height = length;
+    left_.x = x1;
+    left_.y = y1;
+    length_ = length;
   }
   double Square::getArea() const
   {
-    return square.width * square.height;
+    return length_ * length_;
   }
   rectangle_t Square::getFrameRect() const
   {
-    return square;
+    rectangle_t rect;
+    rect.height = length_;
+    rect.width = length_;
+    rect.pos.y = left_.y + (length_ / 2);
+    rect.pos.x = left_.x + (length_ / 2);
+    return rect;
   }
   void Square::move(point_t c)
   {
-    square.pos = c;
+    point_t Pos = getFrameRect().pos;
+    double moveX = c.x - Pos.x;
+    double moveY = c.y - Pos.y;
+    left_.x += moveX;
+    left_.y += moveY;
   }
   void Square::move(double dx, double dy)
   {
-    square.pos.x += dx;
-    square.pos.y += dy;
+    left_.x += dx;
+    left_.y += dy;
   }
   void Square::scale(double k)
   {
-    if (k <= 0)
-    {
-      throw std::logic_error("Scale factor must be positive");
-    }
-    square.width *= k;
-    square.height *= k;
+    point_t Pos = getFrameRect().pos;
+    length_ *= k;
+    left_.x = Pos.x - (length_ / 2);
+    left_.y = Pos.y - (length_ / 2);
   }
 }
