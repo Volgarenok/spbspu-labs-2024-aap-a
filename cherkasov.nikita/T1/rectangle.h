@@ -15,6 +15,7 @@ namespace cherkasov
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
+    point_t center;
     point_t left_;
     point_t right_;
   };
