@@ -39,11 +39,6 @@ int main()
         cherkasov::deleteShapes(shapes, shapeCount);
         return 1;
       }
-      if (invalidInput)
-      {
-        std::cerr << "Invalid shape input\n";
-        return 0;
-      }
       shapes[shapeCount++] = shape;
     }
   }
@@ -63,6 +58,10 @@ int main()
     std::cerr << "Scaling was not specified\n";
     cherkasov::deleteShapes(shapes, shapeCount);
     return 1;
+  }
+  if (invalidInput)
+  {
+    std::cerr << "Invalid shape input\n";
   }
   std::cout << std::fixed << std::setprecision(1);
   std::cout << "Total area before scaling: " << cherkasov::calculArea(shapes, shapeCount) << "\n";
