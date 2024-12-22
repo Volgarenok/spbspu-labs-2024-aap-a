@@ -12,25 +12,33 @@ shramko::Rectangle::Rectangle(point_t leftBottom, point_t rightTop): leftBottom_
 
 double shramko::Rectangle::getArea() const
 {
-  double lenWidth = rightTop_.x - leftBottom_.x;
-  double lenHeight = rightTop_.y - leftBottom_.y;
+  double weight = rightTop_.x - leftBottom_.x;
+  double height = rightTop_.y - leftBottom_.y;
 
-  return lenWidth * lenHeight;
+  return weight * height;
 }
 
-shramko::rectangle_t shramko::Rectangle::getRectangleFrame() const
+shramko::rectangle_t shramko::Rectangle::getRectFrame() const
 {
-  rectangle_t rectangleFrame;
+  rectangle_t rectFrame;
 
-  rectangleFrame.pos.x = leftBottom_.x + (width / 2.0);
-  rectangleFrame.pos.y = leftBottom_.y + (height / 2.0);
-  rectangleFrame.height = rightTop_.y - leftBottom_.y;
-  rectangleFrame.width = rightTop_.x - leftBottom_.x;
+  rectFrame.height = rightTop_.y - leftBottom_.y;
+  rectFrame.width = rightTop_.x - leftBottom_.x;
+  rectFrame.pos.x = leftBottom_.x + (rectFrame.width / 2.0L);
+  rectFrame.pos.y = leftBottom_.y + (rectFrame.height / 2.0L);
 
-  return rectangleFrame;
+  return rectFrame;
 }
 
-void shramko::Rectangle::move(point_t s)
+void shramko::Rectangle::move(point_t point)
+{
+  point_t pos = getRectFrame().pos;
+  double xMove = point.x - pos.x;
+  double yMove = point.y - pos.y;
+  move(xMove, yMove);
+}
+
+void shramko::Rectangle::move(double x, double y)
 {
   leftBottom_.x += x;
   leftBottom_.y += y;
@@ -38,18 +46,10 @@ void shramko::Rectangle::move(point_t s)
   rightTop_.y += y;
 }
 
-void shramko::Rectangle::move(double x, double y)
-{
-  point_t pos = getRectangleFrame().pos;
-  double xMove = centre.x - pos.x;
-  double yMove = centre.y - pos.y;
-  move(xMove, yMove);
-}
-
 void shramko::Rectangle::scale(double k)
 {
-  rectangle_t rectangleFrame = getRectangleFrame();
-  point_t pos = rectangleFrame().pos;
+  rectangle_t rectFrame = getRectFrame();
+  point_t pos = rectFrame().pos;
 
   leftBottom_.x = pos.x + (leftBottom_.x - pos.x) * k;
   leftBottom_.y = pos.y + (leftBottom_.y - pos.y) * k;

@@ -10,8 +10,8 @@ namespace shramko
   public:
     Rectangle(point_t leftBottom, point_t rightTop);
     double getArea() const override;
-    rectangle_t getRectangleFrame() const override;
-    void move(point_t s) override;
+    rectangle_t getRectFrame() const override;
+    void move(point_t point) override;
     void move(double x, double y) override;
     void scale(double k) override;
   private:

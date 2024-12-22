@@ -6,7 +6,7 @@
 
 namespace shramko
 {
-  void outRes(std::ostream& out, Shape** shapes, size_t count);
+  void outRes(std::ostream& out, Shape** shape, size_t size);
 }
 
 #endif

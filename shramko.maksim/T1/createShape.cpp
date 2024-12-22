@@ -4,36 +4,36 @@
 #include "diamond.hpp"
 #include "outRes.hpp"
 
-double shramko::getArea(Shape** shapes, size_t count)
+double shramko::getEveryArea(Shape** shape, size_t count)
 {
-  double area = 0.0;
-  for (size_t i = 0; i < count; i ++)
+  double everyArea = 0.0;
+  for (size_t i = 0; i < count; i++)
   {
-    area += shapes[i]->getArea();
+    area += shape[i]->getArea();
   }
-  return area;
+  return everyArea;
 }
 
-void shramko::scaling(Shape** shapes, size_t count, point_t centre, double k)
+void shramko::scaling(Shape** shape, size_t count, point_t centre, double k)
 {
   for (size_t i = 0; i < count; i++)
   {
-    point_t centre = shapes[i]->getRectangleFrame().pos;
-    shapes[i]->move(centre);
-    point_t centreTwo = shapes[i]->getRectangleFrame().pos;
+    point_t center = shape[i]->getRectFrame().pos;
+    shape[i]->move(centre);
+    point_t centreTwo = shape[i]->getRectFrame().pos;
 
-    double diffX = (centreTwo.x - centre.x) * k * - 1;
-    double diffY = (centreTwo.y - centre.y) * k * - 1;
+    double diffX = (centreTwo.x - center.x) * k * - 1;
+    double diffY = (centreTwo.y - center.y) * k * - 1;
 
-    shapes[i]->scale(k);
-    shapes[i]->move(diffX, diffY);
+    shape[i]->scale(k);
+    shape[i]->move(diffX, diffY);
   }
 }
 
-int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out, Shape** shapes)
+int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out, Shape** shape)
 {
-  std::string str;
-  size_t count = 0;
+  std::string stri;
+  int count = 0;
   bool isScaled = false;
   try
   {
@@ -48,7 +48,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
           in >> bottom.y;
           in >> top.x;
           in >> top.y;
-          shapes[count] = new Rectangle{bottom, top};
+          shape[count] = new Rectangle{bottom, top};
           count++;
         }
         catch (const std::invalid_argument& e)
@@ -60,14 +60,14 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
       {
         try
         {
-          point_t One, Two, Three;
-          in >> One.x;
-          in >> One.y;
-          in >> Two.x;
-          in >> Two.y;
-          in >> Three.x;
-          in >> Three.y;
-          shapes[count] = new Triangle{One, Two, Three};
+          point_t one, two, three;
+          in >> one.x;
+          in >> one.y;
+          in >> two.x;
+          in >> two.y;
+          in >> three.x;
+          in >> three.y;
+          shape[count] = new Triangle{one, two, three};
           count++;
         }
         catch (const std::invalid_argument& e)
@@ -79,14 +79,14 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
       {
         try
         {
-          point_t One, Two, Three;
-          in >> One.x;
-          in >> One.y;
-          in >> Two.x;
-          in >> Two.y;
-          in >> Three.x;
-          in >> Three.y;
-          shapes[count] = new Diamond{One, Two, Three};
+          point_t one, two, three;
+          in >> one.x;
+          in >> one.y;
+          in >> two.x;
+          in >> two.y;
+          in >> three.x;
+          in >> three.y;
+          shape[count] = new Diamond{one, two, three};
           count++;
         }
         catch (const std::invalid_argument& e)
@@ -111,14 +111,14 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
 
         try
         {
-          outRes(out, shapes, count);
-          scaling(shapes, count, goCentre, k);
-          outRes(out, shapes, count);
+          outRes(out, shape, count);
+          scaling(shape, count, goCentre, k);
+          outRes(out, shape, count);
         }
         catch (const std::invalid_argument& e)
         {
           err << e.what() << '\n';
-          clear(shapes, count);
+          destroy(shape, count);
           return -1;
         }
       }
@@ -127,29 +127,29 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
   catch (const std::bad_alloc& e)
   {
     err << e.what() << '\n';
-    clear(shapes, count);
+    destroy(shape, count);
     return -1;
   }
   catch (const std::logic_error& e)
   {
     err << e.what() << '\n';
-    clear(shapes, count);
+    destroy(shape, count);
     return -1;
   }
 
   if (!isScaled)
   {
-    clear(shapes, count);
+    destroy(shape, count);
     return -1;
   }
 
   return count;
 }
 
-void shramko::clear(Shape** shapes, size_t count)
+void shramko::clear(Shape** shape, size_t count)
 {
   for (size_t i = 0; i < count; i++)
   {
-    delete shapes[i];
+    delete shape[i];
   }
 }

@@ -5,12 +5,12 @@
 
 namespace shramko
 {
-  class Diamond: public Shape
+  class Diamond : public Shape
   {
   public:
     Diamond(point_t one, point_t two, point_t three);
     double getArea() const override;
-    rectangle_t getRectangleFrame() const override;
+    rectangle_t getRectFrame() const override;
     void move(point_t point) override;
     void move(double x, double y) override;
     void scale(double k) override;

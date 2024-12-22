@@ -33,7 +33,7 @@ shramko::Diamond::Diamond(point_t one, point_t two, point_t three): one_({0.0, 0
     }
   }
 
-  else if ((three.x == two.x && three.y == one.y) || (three.y == two.y && three.x == three.x))
+  else if ((three.x == two.x && three.y == one.y) || (three.y == two.y && three.x == one.x))
   {
     one_ = three;
     if (one_.x == two.x)
@@ -51,23 +51,23 @@ shramko::Diamond::Diamond(point_t one, point_t two, point_t three): one_({0.0, 0
 
 double shramko::Diamond::getArea() const
 {
-  return std::abs(one_.x - two_.x + one_.x - three_.x) * std::abs(one_.y - two_.y + one_.y - three_.y) * 2.0;
+  return std::abs(one_.x - two_.x + one_.x - three_.x) * std::abs(one_.y - two_.y + one_.y - three_.y) * 2.0L;
 }
 
-shramko::rectangle_t shramko::Diamond::getRectangleFrame() const
+shramko::rectangle_t shramko::Diamond::getRectFrame() const
 {
-  rectangle_t rectangleFrame;
-  rectangleFrame.pos = one_;
+  rectangle_t rectFrame;
+  rectFrame.pos = one_;
 
-  rectangleFrame.width = std::abs(three_.x - one_.x) * 2;
-  rectangleFrame.height = std::abs(two_.x - one_.x) * 2;
+  rectFrame.width = std::abs(three_.x - one_.x) * 2;
+  rectFrame.height = std::abs(two_.y - one_.y) * 2;
 
-  return rectangleFrame;
+  return rectFrame;
 }
 
 void shramko::Diamond::move(double x, double y)
 {
-  one_.x += y;
+  one_.x += x;
   one_.y += y;
 
   two_.x += x;
@@ -77,7 +77,7 @@ void shramko::Diamond::move(double x, double y)
   three_.y += y;
 }
 
-void shramko::Diamond::move(point_t k)
+void shramko::Diamond::move(point_t point)
 {
   double xMove = point.x - one_.x;
   double yMove = point.y - one_.y;

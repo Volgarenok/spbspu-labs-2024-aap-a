@@ -1,5 +1,5 @@
-#ifndef BASETYPES_HPP
-#define BASETYPES_HPP
+#ifndef BASE_TYPES_HPP
+#define BASE_TYPES_HPP
 
 namespace shramko
 {
@@ -8,7 +8,6 @@ namespace shramko
     double x;
     double y;
   };
-
   struct rectangle_t
   {
     double width;
