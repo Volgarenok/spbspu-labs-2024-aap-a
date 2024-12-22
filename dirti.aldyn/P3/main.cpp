@@ -67,7 +67,7 @@ int main(int argc, char ** argv)
   {
     std::cerr << "Matrix does not suit condition" << "n";
     delete[] dyn_matrix;
-    return 2;
+    return 0;
   }
   std::ofstream output(argv[3]);
   output << dirti::local_min(matrix, m, n) << "\n";
