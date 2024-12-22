@@ -2,21 +2,24 @@
 
 bool isBetween(char term1, char term2, char term3)
 {
-  if(term1 == term2)
+  if (term1 == term2)
   {
     return true;
   }
-  else if(term2 == term3)
+  else if (term2 == term3)
   {
     return false;
   }
-  term2++;
-  isBetween(term1, term2, term3);
+  else
+  {
+    term2++;
+    isBetween(term1, term2, term3);
+  }
 }
 
 bool isDigit(char term)
 {
-  if(isBetween(term, '0', '9'))
+  if (isBetween(term, '0', '9'))
   {
     return true;
   }
@@ -28,7 +31,7 @@ bool isDigit(char term)
 
 bool isLetter(char term)
 {
-  if(isBetween(term, 'a', 'z'))
+  if (isBetween(term, 'a', 'z'))
   {
     return true;
   }
@@ -40,25 +43,25 @@ bool isLetter(char term)
 
 bool asafov::isExpression(const char* string, size_t pos, size_t length)
 {
-  if(isDigit(string[pos]))
+  if (isDigit(string[pos]))
   {
-    if(isDigit(string[pos + 1]))
+    if (isDigit(string[pos + 1]))
     {
       return isExpression(string, pos + 1, length);
     }
-    else if(isLetter(string[pos + 1]))
+    else if (isLetter(string[pos + 1]))
     {
       return isExpression(string, pos + 1, length);
     }
-    else if(string[pos + 1]=='*')
+    else if (string[pos + 1]=='*')
     {
       return isExpression(string, pos + 1, length);
     }
-    else if(string[pos + 1]=='+' || string[pos + 1]=='-')
+    else if (string[pos + 1]=='+' || string[pos + 1]=='-')
     {
       return isExpression(string, pos + 1, length);
     }
-    else if(pos + 1 == length)
+    else if (pos + 1 == length)
     {
       return true;
     }
@@ -67,17 +70,17 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
       return false;
     }
   }
-  else if(isLetter(string[pos]))
+  else if (isLetter(string[pos]))
   {
-    if(string[pos + 1]=='*')
+    if (string[pos + 1]=='*')
     {
       return isExpression(string, pos + 1, length);
     }
-    else if(string[pos + 1]=='+' || string[pos + 1]=='-')
+    else if (string[pos + 1]=='+' || string[pos + 1]=='-')
     {
       return isExpression(string, pos + 1, length);
     }
-    else if(pos + 1 == length)
+    else if (pos + 1 == length)
     {
       return true;
     }
@@ -86,13 +89,13 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
       return false;
     }
   }
-  else if(string[pos] == '*')
+  else if (string[pos] == '*')
   {
-    if(isDigit(string[pos + 1]))
+    if (isDigit(string[pos + 1]))
     {
       return isExpression(string, pos + 1, length);
     }
-    else if(isLetter(string[pos + 1]))
+    else if (isLetter(string[pos + 1]))
     {
       return isExpression(string, pos + 1, length);
     }
@@ -101,13 +104,13 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
       return false;
     }
   }
-  else if(string[pos] == '+' || string[pos]=='-')
+  else if (string[pos] == '+' || string[pos]=='-')
   {
-    if(isDigit(string[pos + 1]))
+    if (isDigit(string[pos + 1]))
     {
       return isExpression(string, pos + 1, length);
     }
-    else if(isLetter(string[pos + 1]))
+    else if (isLetter(string[pos + 1]))
     {
       return isExpression(string, pos + 1, length);
     }
