@@ -68,8 +68,8 @@ int main()
   std::cout << cherkasov::calculArea(shapes, shapeCount);
   cherkasov::outputFrameCoordinates(shapes, shapeCount);
   cherkasov::scaling(shapes, shapeCount, isoCenter, scalingFactor);
-  std::cout << cherkasov::calculArea(shapes, shapeCount);
-  cherkasov::outputFrameCoordinates(shapes, shapeCount);
+//  std::cout << cherkasov::calculArea(shapes, shapeCount);
+//  cherkasov::outputFrameCoordinates(shapes, shapeCount);
   cherkasov::deleteShapes(shapes, shapeCount);
   return 0;
 }
