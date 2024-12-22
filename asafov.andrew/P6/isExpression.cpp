@@ -13,7 +13,7 @@ bool isBetween(char term1, char term2, char term3)
   else
   {
     term2++;
-    isBetween(term1, term2, term3);
+    return isBetween(term1, term2, term3);
   }
 }
 
