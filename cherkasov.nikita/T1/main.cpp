@@ -2,7 +2,6 @@
 #include <iomanip>
 #include <string>
 #include "InputHandler.h"
-#include "ErrorHandler.h"
 #include "deleteShapes.h"
 #include "calculArea.h"
 #include "outputFrameCoordinates.h"
@@ -25,31 +24,38 @@ int main()
       scalingRequested = true;
       if (!cherkasov::parseScalingInput(isoCenter.x, isoCenter.y, scalingFactor))
       {
-        cherkasov::handleError("Scaling factor must be positive");
+        std::cerr << "Scaling factor must be positive\n";
         cherkasov::deleteShapes(shapes, shapeCount);
         return 1;
       }
+      break;
     }
     else
     {
       cherkasov::Shape* shape = parseShapeInput(inputCommand, invalidInput);
       if (invalidInput || shape == nullptr)
       {
-        cherkasov::handleError("Invalid shape input");
+        std::cerr << "Invalid shape input\n";
         cherkasov::deleteShapes(shapes, shapeCount);
         return 1;
       }
       shapes[shapeCount++] = shape;
     }
   }
+  if (std::cin.eof())
+  {
+    std::cerr << "eof false\n";
+    cherkasov::deleteShapes(shapes, shapeCount);
+    return 1;
+  }
   if (shapeCount == 0)
   {
-    cherkasov::handleError("No shapes specified");
+    std::cerr << "No shapes specified\n";
     return 1;
   }
   if (!scalingRequested)
   {
-    cherkasov::handleError("Scaling was not specified");
+    std::cerr << "Scaling was not specified\n";
     cherkasov::deleteShapes(shapes, shapeCount);
     return 1;
   }
