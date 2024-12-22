@@ -2,8 +2,9 @@
 #define SCALING_H
 #include <cstddef>
 #include "shape.h"
+
 namespace cherkasov
 {
-  void scaling(Shape* shapes[], size_t shapeCount, double factor);
+  void scaling(Shape* shapes[], size_t shapeCount, point_t p, double scalingFactor);
 }
 #endif
