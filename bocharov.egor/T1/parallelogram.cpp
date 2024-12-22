@@ -40,21 +40,21 @@ bocharov::rectangle_t bocharov::Parallelogram::getFrameRect() const
   return rect;
 }
 
-void bocharov::Parallelogram::move(point_t p)
+void bocharov::Parallelogram::move(point_t point)
 {
-  pos_ = p;
+  pos_ = point;
 }
 
-void bocharov::Parallelogram::move(double dx, double dy)
+void bocharov::Parallelogram::move(double x, double y)
 {
-  pos_.x += dx;
-  pos_.y += dy;
+  pos_.x += x;
+  pos_.y += y;
 }
 
-void bocharov::Parallelogram::scale(double k)
+void bocharov::Parallelogram::scale(double ratio)
 {
-  p1_.x *= k;
-  p1_.y *= k;
-  p2_.x *= k;
-  p2_.y *= k;
+  p1_.x *= ratio;
+  p1_.y *= ratio;
+  p2_.x *= ratio;
+  p2_.y *= ratio;
 }
