@@ -20,7 +20,7 @@ double shramko::Triangle::getArea() const
   return std::abs(((two_.x - one_.x) * (three_.y - one_.y) - (three_.x - one_.x) * (two_.y - one_.y))) / 2.0;
 }
 
-shramko::rectangle_t shramko::Triangle::getRectFrame() const
+shramko::rectangle_t shramko::Triangle::getFrameRect() const
 {
   double xMax = std::max(one_.x, std::max(two_.x, three_.x));
   double yMax = std::max(one_.y, std::max(two_.y, three_.y));

@@ -60,7 +60,7 @@ double shramko::Diamond::getArea() const
   return std::abs(one_.x - two_.x + one_.x - three_.x) * std::abs(one_.y - two_.y + one_.y - three_.y) * 2.0L;
 }
 
-shramko::rectangle_t shramko::Diamond::getRectFrame() const
+shramko::rectangle_t shramko::Diamond::getFrameRect() const
 {
   rectangle_t rectFrame;
   rectFrame.pos = one_;

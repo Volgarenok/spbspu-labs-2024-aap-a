@@ -26,7 +26,7 @@ double shramko::Rectangle::getArea() const
   return weight * height;
 }
 
-shramko::rectangle_t shramko::Rectangle::getRectFrame() const
+shramko::rectangle_t shramko::Rectangle::getFrameRect() const
 {
   rectangle_t rectFrame;
 
@@ -60,7 +60,7 @@ void shramko::Rectangle::scale(double k)
   {
     throw std::invalid_argument("Rect scale err\n");
   }
-  rectangle_t rectFrame = getRectFrame();
+  rectangle_t rectFrame = getFrameRect();
   point_t pos = rectFrame.pos;
 
   leftBottom_.x = pos.x + (leftBottom_.x - pos.x) * k;
