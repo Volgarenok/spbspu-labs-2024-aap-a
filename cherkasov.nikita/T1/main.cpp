@@ -32,7 +32,7 @@ int main()
     }
     else
     {
-      cherkasov::Shape* shape = cherkasov::parseShapeInput(inputCommand, invalidInput);
+      cherkasov::Shape* shape = parseShapeInput(inputCommand, invalidInput);
       if (invalidInput || shape == nullptr)
       {
         cherkasov::handleError("Invalid shape input");

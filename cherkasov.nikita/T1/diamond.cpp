@@ -10,10 +10,6 @@ namespace cherkasov
     {
       throw std::logic_error("Diamond vertices must be distinct");
     }
-    if (std::abs(d2.y - d3.y) > epsilon || std::abs(d1.x - d3.x) > epsilon)
-    {
-      throw std::logic_error("...");
-    }
     center = {(d1.x + d2.x) / 2, (d1.y + d3.y) / 2};
     width = std::abs(d2.x - d1.x);
     height = std::abs(d3.y - d1.y);

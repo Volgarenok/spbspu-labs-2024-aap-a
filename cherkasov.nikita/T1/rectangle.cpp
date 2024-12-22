@@ -6,7 +6,7 @@ namespace cherkasov
   Rectangle::Rectangle(point_t lowLeft, point_t upRight)
   : rect({(lowLeft.x + upRight.x) / 2, (lowLeft.y + upRight.y) / 2, upRight.x - lowLeft.x, upRight.y - lowLeft.y})
   {
-    if (lowLeft.x <= upRight.x || lowLeft.y <= upRight.y)
+    if (lowLeft.x >= upRight.x || lowLeft.y >= upRight.y)
     {
       throw std::logic_error("Invalid rectangle coordinates");
     }
