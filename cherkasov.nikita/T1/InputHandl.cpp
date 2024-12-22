@@ -15,7 +15,7 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, bool& invalid
       invalidInput = true;
       return nullptr;
     }
-    if (x1 > x2 || y1 > y2)
+    if (x1 >= x2 || y1 >= y2)
     {
       invalidInput = true;
       return nullptr;
