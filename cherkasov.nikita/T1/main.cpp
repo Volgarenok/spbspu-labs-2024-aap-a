@@ -60,7 +60,7 @@ int main()
     return 1;
   }
   std::cout << std::fixed << std::setprecision(1);
-  cherkasov::calculArea(shapes, shapeCount)
+  cherkasov::calculArea(shapes, shapeCount);
   cherkasov::outputFrameCoordinates(shapes, shapeCount);
   cherkasov::scaling(shapes, shapeCount, scalingFactor);
   std::cout << "\n";
