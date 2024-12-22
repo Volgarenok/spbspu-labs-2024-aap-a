@@ -40,7 +40,7 @@ shramko::rectangle_t shramko::Rectangle::getFrameRect() const
 
 void shramko::Rectangle::move(point_t point)
 {
-  point_t pos = getRectFrame().pos;
+  point_t pos = getFrameRect().pos;
   double xMove = point.x - pos.x;
   double yMove = point.y - pos.y;
   move(xMove, yMove);
