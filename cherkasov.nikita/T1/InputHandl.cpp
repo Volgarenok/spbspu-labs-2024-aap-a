@@ -10,16 +10,10 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, bool& invalid
   {
     double x1, y1, x2, y2;
     std::cin >> x1 >> y1 >> x2 >> y2;
-    if (!(std::cin >> x1 >> y1 >> x2 >> y2))
-    {
-      invalidInput = true;
-      return nullptr;
-    }
     if (x1 >= x2 || y1 >= y2)
     {
       invalidInput = true;
-      std::cerr << "Invalid input\n";
-      return 0;
+      return nullptr;
     }
     return new cherkasov::Rectangle({x1, y1}, {x2, y2});
   }
