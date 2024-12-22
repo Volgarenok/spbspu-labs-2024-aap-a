@@ -85,6 +85,11 @@ int bocharov::getShapeInfo(std::istream& input, std::ostream& error, std::ostrea
           input >> b.y;
           input >> c.x;
           input >> c.y;
+          bool correct_parallelogram = ((a.y == b.y) && (a.y != c.y)) || ((b.y == c.y) && (a.y != b.y));
+          if (!correct_parallelogram)
+          {
+            throw std::invalid_argument("Error in PARALLELOGRAM parameters");
+          }
           myShapes[shapesCount] =  new Parallelogram{a, b, c};
           shapesCount++;
         }

@@ -5,7 +5,7 @@
 
 bocharov::Triangle::Triangle(point_t a, point_t b, point_t c)
 {
-  if ((a.x * (b.y -c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) == 0) { //Добавлю потом
+  if ((a.x * (b.y -c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) == 0) {
     throw std::invalid_argument("error arguments for triangle\n");
   }
   a_ = a;
