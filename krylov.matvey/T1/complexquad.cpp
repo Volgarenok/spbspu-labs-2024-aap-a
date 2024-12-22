@@ -5,14 +5,45 @@
 
 krylov::Complexquad::Complexquad(const point_t& a, const point_t& b, const point_t& c, const point_t& d):
 a_(a), b_(b), c_(c), d_(d)
-{}
+{
+  if (((a_.x == b_.x && a_.y == b_.y) || (b_.x == c_.x && b_.y == c_.y) || (c_.x == d_.x && c_.y == d_.y)
+    || (a_.x == c_.x && a_.y == c_.y) || (a_.x == d_.x && a_.y == d_.y) || (b_.x == d_.x && b_.y == d_.y)))
+  {
+    throw std::invalid_argument("Invalid complexquad coordinates");
+  }
+  try
+  {
+    point_t p = findIntersection(a_, b_, c_, d_);
+    if ((p.x == a_.x && p.y == a_.y) || (p.x == b_.x && p.y == b_.y) || (p.x == c_.x && p.y == c_.y) || (p.x == d_.x && p.y == d_.y))
+    {
+      throw std::invalid_argument("Invalid complexquad coordinates");
+    }
+  }
+  catch (const std::invalid_argument())
+  {
+    throw std::invalid_argument("Invalid complexquad coordinates");
+  }
+}
+bool krylov::Complexquad::isPointOnSegment(const point_t& point, const point_t& segStart, const point_t& segEnd) const
+{
+  return std::min(segStart.x, segEnd.x) <= point.x && point.x <= std::max(segStart.x, segEnd.x) 
+    && std::min(segStart.y, segEnd.y) <= point.y && point.y <= std::max(segStart.y, segEnd.y);
+}
 krylov::point_t krylov::Complexquad::findIntersection(const point_t& a, const point_t& b, const point_t& c, const point_t& d) const
 {
   double m1 = (b.y - a.y) / (b.x - a.x);
   double m2 = (d.y - c.y) / (d.x - c.x);
   double b1 = a.y - m1 * a.x;
   double b2 = c.y - m2 * c.x;
-  return {(b2 - b1) / (m1 - m2), m1 * ((b2 - b1) / (m1 - m2)) + b1};
+  point_t intersectionPoint = {(b2 - b1) / (m1 - m2), m1 * ((b2 - b1) / (m1 - m2)) + b1};
+  if (isPointOnSegment(intersectionPoint, a, b) && isPointOnSegment(intersectionPoint, c, d))
+  {
+    return intersectionPoint;
+  }
+  else
+  {
+    throw std::invalid_argument("Invalid complexquad coordinates");
+  }
 }
 double krylov::Complexquad::getArea() const
 {
