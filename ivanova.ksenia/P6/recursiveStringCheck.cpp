@@ -115,7 +115,7 @@ namespace
     }
 
     int count = countFrq(string, 0, 0);
-  
+
     if (max[0] < count)
     {
       max[1] = max[0];
@@ -156,8 +156,8 @@ bool ivanova::rightString(const char * string)
 void ivanova::twoFrequentSymbol(const char * string, char* dest)
 {
   int max[2] = {0, 0};
-  char maxSym[2] = {'\0', '\0'}; 
-  
+  char maxSym[2] = {'\0', '\0'};
+
   twoFrq(string, max, maxSym);
 
   dest[0] = maxSym[0];
