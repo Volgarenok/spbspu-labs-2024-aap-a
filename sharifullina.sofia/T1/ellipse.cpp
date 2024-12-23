@@ -14,7 +14,7 @@ double sharifullina::Ellipse::getArea() const
 
 sharifullina::rectangle_t sharifullina::Ellipse::getFrameRect() const
 {
-  return {center_, 2 * radiusX_, 2 * radiusY_};
+  return {2 * radiusX_, 2 * radiusY_, center_};
 }
 
 void sharifullina::Ellipse::move(const point_t p)
