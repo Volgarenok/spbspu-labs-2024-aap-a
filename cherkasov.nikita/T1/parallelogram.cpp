@@ -36,8 +36,8 @@ namespace cherkasov
     rectangle_t rect;
     rect.width = maxX - minX;
     rect.height = maxY - minY;
-    rect.pos.x = center.x;
-    rect.pos.y = center.y;
+    rect.pos.x = (minX + maxX) / 2.0;
+    rect.pos.y = (minY + maxY) / 2.0;
     return rect;
   }
   void Parallelogram::move(point_t c)
