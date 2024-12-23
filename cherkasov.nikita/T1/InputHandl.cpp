@@ -14,7 +14,7 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
     double x2 = 0.0;
     double y2 = 0.0;
     input >> x1 >> y1 >> x2 >> y2;
-    if (input.fail() || x1 >= x2 || y1 >= y2)
+    if (input.fail() || x1 == x2 || y1 == y2)
     {
       invalidInput = true;
     }
