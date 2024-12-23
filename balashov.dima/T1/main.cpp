@@ -55,6 +55,18 @@ int main()
         incorrectrRecordShapes = true;
       }
     }
+    if (shapeType == "REGULAR")
+    {
+        try
+        {
+            shapes[shapeCount] = balashov::makeRegular(std::cin);
+            shapeCount++;
+        }
+        catch (const std::invalid_argument&)
+        {
+            incorrectrRecordShapes = true;
+        }
+    }
     else if (shapeType == "SCALE")
     {
       if (shapeCount == 0)

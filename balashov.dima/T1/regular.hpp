@@ -5,20 +5,17 @@
 
 namespace balashov
 {
-  class Regular : public Shape
+  struct Regular : public Shape
   {
   public:
-    Regular(point_t firstPoint_, point_t secondPoint_, point_t thirdPoint_);
+    Regular(point_t center, point_t pnt2, point_t pnt3);
     double getArea() const override;
-    rectangle_t getFrameRect() const;
-    void move(double x, double y) override;
-    void move(point_t pointRoute) override;
-    void scale(double scaleCoefficient) override;
+    rectangle_t getFrameRect() const override;
+    void move(point_t pnt) override;
+    void move(double dx, double dy) override;
+    void scale(double k) override;
   private:
-    point_t firstPoint_;
-    point_t secondPoint_;
-    point_t thirdPoint_;
+    point_t point1, point2, point3;
   };
 }
-
 #endif
