@@ -69,9 +69,10 @@ balashov::Regular* balashov::makeRegular(std::istream& in)
   double nVertices = 3.14 / std::acos(std::sqrt(sqrSmallRadius / sqrHypotenuse));
   double bigRadius = std::sqrt(std::max(sqrLength1, sqrLength3));
 
-  if (!isRightTriangle || (std::abs((std::cos(3.14 / std::round(nVertices))) - (std::sqrt(sqrSmallRadius) / bigRadius)) >= 0.0001))
+  if (!isRightTriangle ||
+    (std::abs((std::cos(3.14 / std::round(nVertices))) - (std::sqrt(sqrSmallRadius) / bigRadius)) >= 0.001))
   {
-    throw std::logic_error("Incorrect data");
+    throw std::invalid_argument("Incorrect data");
   }
   Regular* regular = new Regular({ point1.x, point1.y }, { point2.x, point2.y }, { point3.x, point3.y });
   return regular;
