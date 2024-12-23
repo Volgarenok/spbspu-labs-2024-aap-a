@@ -39,15 +39,6 @@ int main()
         std::cerr << "Invalid shape input\n";
         cherkasov::deleteShapes(shapes, shapeCount);
         return 1;
-        for (size_t i = 0; i < shapeCount; ++i)
-        {
-          if (shapes[i] == shape)
-          {
-            std::cerr << "Duplicate shape detected at index " << i << "\n";
-            delete shape;
-            return 1;
-          }
-        }
       }
       shapes[shapeCount++] = shape;
     }

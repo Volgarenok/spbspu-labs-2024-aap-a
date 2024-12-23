@@ -17,11 +17,13 @@ namespace cherkasov
   }
   rectangle_t Rectangle::getFrameRect() const
   {
+    point_t center;
+    center.x = (left.x + right.x) / 2;
+    center.y = (left.y + right.y) / 2;
     rectangle_t rect;
-    rect.height = std::abs(right.y - left.y);
+    rect.pos = center;
     rect.width = std::abs(right.x - left.x);
-    rect.pos.y = left.y + (rect.height / 2);
-    rect.pos.x = left.x + (rect.width / 2);
+    rect.height = std::abs(right.y - left.y);
     return rect;
   }
   void Rectangle::move(point_t c)
