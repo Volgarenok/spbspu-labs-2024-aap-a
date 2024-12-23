@@ -7,16 +7,11 @@ namespace cherkasov
 {
   Parallelogram::Parallelogram(double x1, double y1, double x2, double y2, double x3, double y3)
   {
-    vertex1.x = x1;
-    vertex1.y = y1;
-    vertex2.x = x2;
-    vertex2.y = y2;
-    vertex3.x = x3;
-    vertex3.y = y3;
-    vertex4.x = x3 + (x2 - x1);
-    vertex4.y = y3 + (y2 - y1);
-    center.x = (vertex1.x + vertex3.x) / 2;
-    center.y = (vertex1.y + vertex3.y) / 2;
+    vertex1 = {x1, y1};
+    vertex2 = {x2, y2};
+    vertex3 = {x3, y3};
+    vertex4 = {x3 + (x2 - x1), y3 + (y2 - y1)};
+    center = {(vertex1.x + vertex3.x) / 2, (vertex1.y + vertex3.y) / 2};
   }
   double Parallelogram::getArea() const
   {
@@ -36,22 +31,21 @@ namespace cherkasov
     rectangle_t rect;
     rect.width = maxX - minX;
     rect.height = maxY - minY;
-    rect.pos.x = (minX + maxX) / 2.0;
-    rect.pos.y = (minY + maxY) / 2.0;
+    rect.pos = {(minX + maxX) / 2.0, (minY + maxY) / 2};
     return rect;
   }
   void Parallelogram::move(point_t c)
   {
-    double moveX = c.x - center.x;
-    double moveY = c.y - center.y;
-    vertex1.x += moveX;
-    vertex1.y += moveY;
-    vertex2.x += moveX;
-    vertex2.y += moveY;
-    vertex3.x += moveX;
-    vertex3.y += moveY;
-    vertex4.x += moveX;
-    vertex4.y += moveY;
+    double dx = c.x - center.x;
+    double dy = c.y - center.y;
+    vertex1.x += dx;
+    vertex1.y += dy;
+    vertex2.x += dx;
+    vertex2.y += dy;
+    vertex3.x += dx;
+    vertex3.y += dy;
+    vertex4.x += dx;
+    vertex4.y += dy;
     center = c;
   }
   void Parallelogram::move(double dx, double dy)
