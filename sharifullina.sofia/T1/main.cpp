@@ -17,7 +17,7 @@ int main()
   std::string shapeType = "";
   bool flag = false;
   double scaleK = 0.0;
-  sharifullina::point_t scaleCenter = { 0.0, 0.0 };
+  sharifullina::point_t scaleCenter = {0.0, 0.0};
   while (true)
   {
     if (std::cin.eof())
@@ -88,7 +88,7 @@ int main()
       double p1 = 0.0;
       double p2 = 0.0;
       std::cin >> p1 >> p2;
-      scaleCenter = { p1, p2 };
+      scaleCenter = {p1, p2};
       std::cin >> scaleK;
       break;
     }
