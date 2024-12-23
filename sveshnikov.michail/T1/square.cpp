@@ -35,4 +35,5 @@ void sveshnikov::Square::scale(double k)
   double ctr_x = getFrameRect().pos.x, ctr_y = getFrameRect().pos.y;
   low_left_.x = ctr_x - k * (ctr_x - low_left_.x);
   low_left_.y = ctr_y - k * (ctr_y - low_left_.y);
+  side_ *= k;
 }
