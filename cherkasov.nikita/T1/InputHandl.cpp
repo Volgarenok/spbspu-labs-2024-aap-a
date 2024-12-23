@@ -4,6 +4,7 @@
 #include "parallelogram.h"
 #include "diamond.h"
 #include <iostream>
+#include <algorithm>
 cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream& input, bool& invalidInput)
 {
   if (inputCommand == "RECTANGLE")
@@ -14,7 +15,11 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
     {
       invalidInput = true;
     }
-    return new cherkasov::Rectangle(x1, y1, x2, y2);
+  double minX = std::min(x1, x2);
+  double maxX = std::max(x1, x2);
+  double minY = std::min(y1, y2);
+  double maxY = std::max(y1, y2);
+  return new cherkasov::Rectangle(minX, minY, maxX, maxY);
   }
   else if (inputCommand == "SQUARE")
   {
