@@ -9,6 +9,7 @@
 #include "ring.hpp"
 #include "circle.hpp"
 #include "ellipse.hpp"
+#include "actionShapes.hpp"
 #include "makeShape.hpp"
 int main()
 {
