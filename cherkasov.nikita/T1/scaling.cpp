@@ -9,7 +9,6 @@ void cherkasov::scaling(Shape* shapes[], size_t shapeCount, point_t p, double sc
     point_t vector;
     vector.x = (startPoint.x - p.x) * (1 - scalingFactor);
     vector.y = (startPoint.y - p.y) * (1 - scalingFactor);
-    shapes[i]->scale(scalingFactor);
     shapes[i]->move(-vector.x, -vector.y);
   }
 }

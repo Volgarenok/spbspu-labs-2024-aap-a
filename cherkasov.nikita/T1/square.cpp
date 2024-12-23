@@ -5,21 +5,21 @@ namespace cherkasov
 {
   Square::Square(double x1, double y1, double length)
   {
-    left_.x = x1;
-    left_.y = y1;
-    length_ = length;
+    left.x = x1;
+    left.y = y1;
+    length = length;
   }
   double Square::getArea() const
   {
-    return length_ * length_;
+    return length * length;
   }
   rectangle_t Square::getFrameRect() const
   {
     rectangle_t rect;
-    rect.height = length_;
-    rect.width = length_;
-    rect.pos.y = left_.y + (length_ / 2);
-    rect.pos.x = left_.x + (length_ / 2);
+    rect.height = length;
+    rect.width = length;
+    rect.pos.y = left.y + (length / 2);
+    rect.pos.x = left.x + (length / 2);
     return rect;
   }
   void Square::move(point_t c)
@@ -27,19 +27,19 @@ namespace cherkasov
     point_t Pos = getFrameRect().pos;
     double moveX = c.x - Pos.x;
     double moveY = c.y - Pos.y;
-    left_.x += moveX;
-    left_.y += moveY;
+    left.x += moveX;
+    left.y += moveY;
   }
   void Square::move(double dx, double dy)
   {
-    left_.x += dx;
-    left_.y += dy;
+    left.x += dx;
+    left.y += dy;
   }
   void Square::scale(double k)
   {
     point_t Pos = getFrameRect().pos;
-    length_ *= k;
-    left_.x = Pos.x - (length_ / 2);
-    left_.y = Pos.y - (length_ / 2);
+    length *= k;
+    left.x = Pos.x - (length / 2);
+    left.y = Pos.y - (length / 2);
   }
 }
