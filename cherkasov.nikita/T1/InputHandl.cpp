@@ -5,6 +5,7 @@
 #include "diamond.hpp"
 #include <iostream>
 #include <algorithm>
+
 cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream& input, bool& invalidInput)
 {
   if (inputCommand == "RECTANGLE")
@@ -18,7 +19,7 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
     {
       invalidInput = true;
     }
-  return new cherkasov::Rectangle(x1, y1, x2, y2);
+    return new cherkasov::Rectangle(x1, y1, x2, y2);
   }
   else if (inputCommand == "SQUARE")
   {

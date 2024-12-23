@@ -19,8 +19,7 @@ namespace cherkasov
     double vector1y = vertex2.y - vertex1.y;
     double vector2x = vertex3.x - vertex1.x;
     double vector2y = vertex3.y - vertex1.y;
-    double area = std::abs(vector1x * vector2y - vector1y * vector2x);
-    return area;
+    return std::abs(vector1x * vector2y - vector1y * vector2x);
   }
   rectangle_t Parallelogram::getFrameRect() const
   {
@@ -63,6 +62,10 @@ namespace cherkasov
   }
   void Parallelogram::scale(double k)
   {
+    if (k > 1)
+    {
+      return;
+    }
     vertex1.x = center.x + (vertex1.x - center.x) * k;
     vertex1.y = center.y + (vertex1.y - center.y) * k;
     vertex2.x = center.x + (vertex2.x - center.x) * k;
