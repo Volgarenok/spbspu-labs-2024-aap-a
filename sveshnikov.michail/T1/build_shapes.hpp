@@ -8,6 +8,7 @@ namespace sveshnikov
   void build_rectangle(std::istream &in, Shape **shapes, size_t &num_shapes);
   void build_ring(std::istream &in, Shape **shapes, size_t &num_shapes);
   void build_ellipse(std::istream &in, Shape **shapes, size_t &num_shapes);
+  void build_square(std::istream &in, Shape **shapes, size_t &num_shapes);
 }
 
 #endif
