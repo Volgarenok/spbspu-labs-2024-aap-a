@@ -9,21 +9,22 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
 {
   if (inputCommand == "RECTANGLE")
   {
-    double x1, y1, x2, y2;
+    double x1 = 0.0;
+    double y1 = 0.0;
+    double x2 = 0.0;
+    double y2 = 0.0;
     input >> x1 >> y1 >> x2 >> y2;
-    if (input.fail() || (x1 >= x2 || y1 >= y2))
+    if (input.fail() || x1 >= x2 || y1 >= y2)
     {
       invalidInput = true;
     }
-  double minX = std::min(x1, x2);
-  double maxX = std::max(x1, x2);
-  double minY = std::min(y1, y2);
-  double maxY = std::max(y1, y2);
-  return new cherkasov::Rectangle(minX, minY, maxX, maxY);
+  return new cherkasov::Rectangle(x1, y1, x2, y2);
   }
   else if (inputCommand == "SQUARE")
   {
-    double x1, y1, length;
+    double x1 = 0.0;
+    double y1 = 0.0;
+    double length = 0.0;
     input >> x1 >> y1 >> length;
     if (input.fail() || length <= 0)
     {
@@ -33,7 +34,12 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
   }
   else if (inputCommand == "PARALLELOGRAM")
   {
-    double x1, y1, x2, y2, x3, y3;
+    double x1 = 0.0;
+    double y1 = 0.0;
+    double x2 = 0.0;
+    double y2 = 0.0;
+    double x3 = 0.0;
+    double y3 = 0.0;
     input >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
     if (input.fail() || (x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3))
     {
@@ -43,7 +49,12 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
   }
   else if (inputCommand == "DIAMOND")
   {
-    double x1, y1, x2, y2, x3, y3;
+    double x1 = 0.0;
+    double y1 = 0.0;
+    double x2 = 0.0;
+    double y2 = 0.0;
+    double x3 = 0.0;
+    double y3 = 0.0;
     input >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
     if (input.fail() || (x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3))
     {
