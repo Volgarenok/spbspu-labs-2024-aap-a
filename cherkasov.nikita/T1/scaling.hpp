@@ -1,7 +1,7 @@
 #ifndef SCALING_H
 #define SCALING_H
 #include <cstddef>
-#include "shape.h"
+#include "shape.hpp"
 
 namespace cherkasov
 {

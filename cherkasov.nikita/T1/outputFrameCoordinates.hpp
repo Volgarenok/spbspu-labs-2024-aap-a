@@ -1,7 +1,8 @@
-#ifndef OUTPUTFRAMECOORDINATES_H
-#define OUTPUTFRAMECOORDINATES_H
+#ifndef OUTPUTFRAMECOORDINATES_HPP
+#define OUTPUTFRAMECOORDINATES_HPP
 #include <cstddef>
-#include "shape.h"
+#include "shape.hpp"
+
 namespace cherkasov
 {
   void outputFrameCoordinates(Shape* shapes[], size_t shapeCount);

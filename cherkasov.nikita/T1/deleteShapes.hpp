@@ -1,7 +1,8 @@
-#ifndef DELETESHAPES_H
-#define DELETESHAPES_H
+#ifndef DELETESHAPES_HPP
+#define DELETESHAPES_HPP
 #include <cstddef>
-#include "shape.h"
+#include "shape.hpp"
+
 namespace cherkasov
 {
   void deleteShapes(Shape* shapes[], size_t& shapeCount);

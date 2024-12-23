@@ -1,4 +1,4 @@
-#include "parallelogram.h"
+#include "parallelogram.hpp"
 #include <stdexcept>
 #include <cmath>
 #include <algorithm>

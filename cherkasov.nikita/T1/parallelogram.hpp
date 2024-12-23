@@ -1,7 +1,7 @@
-#ifndef PARALLELOGRAM_H
-#define PARALLELOGRAM_H
+#ifndef PARALLELOGRAM_HPP
+#define PARALLELOGRAM_HPP
 #include "base-types.hpp"
-#include "shape.h"
+#include "shape.hpp"
 
 namespace cherkasov
 {

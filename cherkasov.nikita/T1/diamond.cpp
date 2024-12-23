@@ -1,4 +1,4 @@
-#include "diamond.h"
+#include "diamond.hpp"
 #include <stdexcept>
 #include <cmath>
 #include <algorithm>

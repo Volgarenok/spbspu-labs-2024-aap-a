@@ -1,8 +1,8 @@
-#include "InputHandler.h"
-#include "rectangle.h"
-#include "square.h"
-#include "parallelogram.h"
-#include "diamond.h"
+#include "InputHandler.hpp"
+#include "rectangle.hpp"
+#include "square.hpp"
+#include "parallelogram.hpp"
+#include "diamond.hpp"
 #include <iostream>
 #include <algorithm>
 cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream& input, bool& invalidInput)

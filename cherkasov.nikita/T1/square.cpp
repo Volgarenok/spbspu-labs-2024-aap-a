@@ -1,4 +1,4 @@
-#include "square.h"
+#include "square.hpp"
 #include <cmath>
 
 namespace cherkasov

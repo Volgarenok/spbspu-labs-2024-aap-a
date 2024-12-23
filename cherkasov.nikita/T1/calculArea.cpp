@@ -1,4 +1,4 @@
-#include "calculArea.h"
+#include "calculArea.hpp"
 #include <cstddef>
 double cherkasov::calculArea(Shape* shapes[], size_t shapeCount)
 {

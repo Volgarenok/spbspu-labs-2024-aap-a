@@ -1,4 +1,4 @@
-#include "scaling.h"
+#include "scaling.hpp"
 
 void cherkasov::scaling(Shape* shapes[], size_t shapeCount, point_t p, double scalingFactor)
 {

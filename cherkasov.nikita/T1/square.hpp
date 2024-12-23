@@ -1,6 +1,6 @@
-#ifndef SQUARE_H
-#define SQUARE_H
-#include "shape.h"
+#ifndef SQUARE_HPP
+#define SQUARE_HPP
+#include "shape.hpp"
 #include "base-types.hpp"
 
 namespace cherkasov
