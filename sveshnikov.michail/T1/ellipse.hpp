@@ -12,7 +12,7 @@ namespace sveshnikov
     double horiz_radius_;
 
   public:
-    Ellipse(point_t center, double vert_radius_, double horiz_radius_);
+    Ellipse(point_t center, double vert_radius, double horiz_radius);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;
