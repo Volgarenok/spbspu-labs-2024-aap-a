@@ -19,7 +19,7 @@ double sharifullina::Ellipse::getArea() const
 
 sharifullina::rectangle_t sharifullina::Ellipse::getFrameRect() const
 {
-  return {{center_.x, center_.y}, 2 * radiusX_, 2 * radiusY_};
+  return {center_, 2 * radiusX_, 2 * radiusY_};
 }
 
 void sharifullina::Ellipse::move(const point_t p)
@@ -35,10 +35,6 @@ void sharifullina::Ellipse::move(double dx, double dy)
 
 void sharifullina::Ellipse::scale(double k)
 {
-  if (k <= 0.0)
-  {
-    throw std::invalid_argument("Scale factor must be positive.");
-  }
   radiusX_ *= k;
   radiusY_ *= k;
 }
