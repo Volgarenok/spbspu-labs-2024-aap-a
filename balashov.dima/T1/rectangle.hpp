@@ -8,14 +8,14 @@ namespace balashov
   {
   public:
     Rectangle(double xLeft, double yUp, double xRight, double yDowm);
-    rectangle_t getFrameRect() const override;
+    virtual rectangle_t getFrameRect() const override;
     double getArea() const override;
-    void move(point_t s) override;
+    void move(point_t target) override;
     void move(double x, double y) override;
-    void scale(double k) override;
+    void scale(double scaleCoefficient) override;
   private:
-    point_t angleDownLeft_;
-    point_t angleUpRight_;
+    point_t angleDownLeft;
+    point_t angleUpRight;
     point_t сentre;
   };
 }

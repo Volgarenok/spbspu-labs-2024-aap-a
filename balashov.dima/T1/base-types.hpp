@@ -5,15 +5,16 @@ namespace balashov
 {
   struct point_t
   {
-    double x_;
-    double y_;
+    double x;
+    double y;
   };
 
   struct rectangle_t
   {
-    double width_;
-    double height_;
-    point_t pos_;
+    point_t pos;
+    double width;
+    double height;
+
   };
 }
 

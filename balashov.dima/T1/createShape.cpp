@@ -6,7 +6,7 @@ balashov::Rectangle* balashov::makeRectangle(std::istream& in)
   double yUp = 0;
   double xRight = 0;
   double yDown = 0;
-
+  
   in >> xLeft >> yDown >> xRight >> yUp;
   if (xLeft >= xRight || yDown >= yUp)
   {
@@ -18,20 +18,28 @@ balashov::Rectangle* balashov::makeRectangle(std::istream& in)
 
 balashov::Circle* balashov::makeCircle(std::istream& in)
 {
-  point_t center = {};
-  double radius = 0;
   double x = 0;
   double y = 0;
   in >> x >> y;
-  center.x_ = x;
-  center.y_ = y;
+  double radius = 0;
   in >> radius;
-  if (radius < 0)
+  if (radius <= 0)
   {
-    throw std::invalid_argument("There can be no such coordinates");
+      throw std::invalid_argument("Error in parameters");
   }
-  Circle* circle = new Circle(center, radius);
-  return circle;
+  Circle* circ = new Circle({ x, y }, radius);
+  return circ;
+}
+
+balashov::Ring* balashov::makeRing(std::istream& in)
+{
+  double centerX = 0;
+  double centerY = 0;
+  double outerRadius = 0;
+  double innerRadius = 0;
+  in >> centerX >> centerY >> outerRadius >> innerRadius;
+  Ring* ring = new Ring({ centerX, centerY }, outerRadius, innerRadius);
+  return ring;
 }
 
 void balashov::deleteShapes(Shape** shapes, size_t count)

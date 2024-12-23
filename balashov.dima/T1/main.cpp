@@ -12,7 +12,7 @@ int main()
   bool incorrectrRecordShapes = false;
   balashov::point_t pointCenter = {};
   double scaleCoefficient = 0;
-
+  
   if (std::cin.eof())
   {
     std::cerr << "Not enough arguments\n";
@@ -22,9 +22,33 @@ int main()
   {
     if (shapeType == "RECTANGLE")
     {
+        try
+        {
+            shapes[shapeCount] = balashov::makeRectangle(std::cin);
+            shapeCount++;
+        }
+        catch (const std::invalid_argument&)
+        {
+            incorrectrRecordShapes = true;
+        }
+    }
+    if (shapeType == "CIRCLE")
+    {
+        try
+        {
+            shapes[shapeCount] = balashov::makeCircle(std::cin);
+            shapeCount++;
+        }
+        catch (const std::invalid_argument&)
+        {
+            incorrectrRecordShapes = true;
+        }
+    }
+    if (shapeType == "RING")
+    {
       try
       {
-        shapes[shapeCount] = balashov::makeRectangle(std::cin);
+        shapes[shapeCount] = balashov::makeRing(std::cin);
         shapeCount++;
       }
       catch (const std::invalid_argument&)
@@ -32,42 +56,31 @@ int main()
         incorrectrRecordShapes = true;
       }
     }
-    if (shapeType == "CIRCLE")
+    else if (shapeType == "SCALE")
     {
-      try
+      if (shapeCount == 0)
       {
-        shapes[shapeCount] = balashov::makeCircle(std::cin);
-        shapeCount++;
+        std::cerr << "No shape\n";
+        balashov::deleteShapes(shapes, shapeCount);
+        return 1;
       }
-      catch (const std::invalid_argument&)
-        {
-          incorrectrRecordShapes = true;
-        }
-      }
-      else if (shapeType == "SCALE")
+      double x = 0;
+      double y = 0;
+      std::cin >> x >> y;
+      pointCenter.x = x;
+      pointCenter.y = y;
+      std::cin >> scaleCoefficient;
+      if (scaleCoefficient <= 0)
       {
-        if (shapeCount == 0)
-        {
-          std::cerr << "No shape\n";
-          balashov::deleteShapes(shapes, shapeCount);
-          return 1;
-        }
-        double x = 0;
-        double y = 0;
-        std::cin >> x >> y;
-        pointCenter.x_ = x;
-        pointCenter.y_ = y;
-        std::cin >> scaleCoefficient;
-        if (scaleCoefficient <= 0)
-        {
-          std::cerr << "Incorrect scaling\n";
-          balashov::deleteShapes(shapes, shapeCount);
-          return 1;
-        }
-        shapeScaled = true;
-        break;
+        std::cerr << "Incorrect scaling\n";
+        balashov::deleteShapes(shapes, shapeCount);
+        return 1;
       }
+      shapeScaled = true;  
+      break;
     }
+    
+  }
   if (!shapeScaled)
   {
     std::cerr << "Shape not scaled\n";

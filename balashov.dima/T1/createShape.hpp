@@ -3,10 +3,12 @@
 #include <iostream>
 #include "rectangle.hpp"
 #include "circle.hpp"
+#include "ring.hpp"
 
 namespace balashov
 {
   Rectangle* makeRectangle(std::istream& in);
+  Ring* makeRing(std::istream& in);
   Circle* makeCircle(std::istream& in);
   void deleteShapes(Shape** shapes, size_t count);
 }
