@@ -44,9 +44,9 @@ namespace cherkasov
   void Rectangle::scale(double k)
   {
     point_t center = getFrameRect().pos;
-    left.x = center.x + (left.x - center.x) * k;
+    left.x = center.x - (left.x - center.x) * k;
     right.x = center.x + (right.x - center.x) * k;
-    left.y = center.y + (left.y - center.y) * k;
+    left.y = center.y - (left.y - center.y) * k;
     right.y = center.y + (right.y - center.y) * k;
   }
 }
