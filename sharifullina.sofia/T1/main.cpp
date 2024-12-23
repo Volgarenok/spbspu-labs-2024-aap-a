@@ -70,7 +70,6 @@ int main()
         flag = true;
       }
     }
-
     else if (shapeType == "ELLIPSE")
     {
       try
@@ -83,7 +82,6 @@ int main()
         flag = true;
       }
     }
-
     else if (shapeType == "SCALE")
     {
       double p1 = 0.0;

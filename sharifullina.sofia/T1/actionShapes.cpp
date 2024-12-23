@@ -16,9 +16,9 @@ void sharifullina::scaleOfShapes(Shape ** shapes, size_t n, point_t p, double k)
   {
     point_t ptr = shapes[i]->getFrameRect().pos;
     shapes[i]->move(p);
+    shapes[i]->scale(k);
     point_t newptr = shapes[i]->getFrameRect().pos;
     point_t vectorMove = {(newptr.x - ptr.x) * k, (newptr.y - ptr.y) * k};
-    shapes[i]->scale(k);
     shapes[i]->move(-vectorMove.x, -vectorMove.y);
   }
 }
