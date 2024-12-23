@@ -1,7 +1,7 @@
 #ifndef DIAMOND_H
 #define DIAMOND_H
-#include "shape.h"
 #include "base-types.h"
+#include "shape.h"
 
 namespace cherkasov
 {

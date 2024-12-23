@@ -1,7 +1,7 @@
 #ifndef PARALLELOGRAM_H
 #define PARALLELOGRAM_H
-#include "shape.h"
 #include "base-types.h"
+#include "shape.h"
 
 namespace cherkasov
 {
