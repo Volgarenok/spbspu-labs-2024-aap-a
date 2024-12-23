@@ -6,7 +6,6 @@ balashov::Rectangle* balashov::makeRectangle(std::istream& in)
   double yUp = 0;
   double xRight = 0;
   double yDown = 0;
-  
   in >> xLeft >> yDown >> xRight >> yUp;
   if (xLeft >= xRight || yDown >= yUp)
   {

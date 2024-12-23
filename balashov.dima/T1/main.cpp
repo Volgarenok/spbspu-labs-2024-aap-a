@@ -12,7 +12,6 @@ int main()
   bool incorrectrRecordShapes = false;
   balashov::point_t pointCenter = {};
   double scaleCoefficient = 0;
-  
   if (std::cin.eof())
   {
     std::cerr << "Not enough arguments\n";
@@ -76,10 +75,9 @@ int main()
         balashov::deleteShapes(shapes, shapeCount);
         return 1;
       }
-      shapeScaled = true;  
+      shapeScaled = true;
       break;
     }
-    
   }
   if (!shapeScaled)
   {

@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 
-balashov::Ring::Ring(point_t center, double radiusIn, double radiusOut) 
+balashov::Ring::Ring(point_t center, double radiusIn, double radiusOut)
 {
   centerPoint = center;
   innerRadius = radiusIn;
