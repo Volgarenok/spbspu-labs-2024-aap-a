@@ -19,6 +19,10 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
     {
       invalidInput = true;
     }
+    if (x1 < x2 && y1 < y2)
+    {
+      invalidInput = true;
+    }
     return new cherkasov::Rectangle(x1, y1, x2, y2);
   }
   else if (inputCommand == "SQUARE")
