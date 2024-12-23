@@ -62,6 +62,10 @@ namespace cherkasov
   }
   void Parallelogram::scale(double k)
   {
+    if (k <= 0)
+    {
+      throw std::logic_error("Scaling factor must be positive");
+    }
     vertex1.x = center.x + (vertex1.x - center.x) * k;
     vertex1.y = center.y + (vertex1.y - center.y) * k;
     vertex2.x = center.x + (vertex2.x - center.x) * k;
