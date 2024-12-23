@@ -18,6 +18,7 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
     if (!input || x1 >= x2 || y1 >= y2)
     {
       invalidInput = true;
+      return nullptr;
     }
     return new cherkasov::Rectangle(x1, y1, x2, y2);
   }
@@ -30,6 +31,7 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
     if (!input || length <= 0)
     {
       invalidInput = true;
+      return nullptr;
     }
     return new cherkasov::Square(x1, y1, length);
   }
@@ -45,14 +47,17 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
     if (!input || (x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3))
     {
       invalidInput = true;
+      return nullptr;
     }
     if ((x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3))
     {
         invalidInput = true;
+        return nullptr;
     }
     if ((x2 - x1) * (y3 - y1) == (y2 - y1) * (x3 - x1))
     {
       invalidInput = true;
+      return nullptr;
     }
     return new cherkasov::Parallelogram(x1, y1, x2, y2, x3, y3);
   }
@@ -68,6 +73,7 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
     if (!input || (x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3))
     {
       invalidInput = true;
+      return nullptr;
     }
     return new cherkasov::Diamond(x1, y1, x2, y2, x3, y3);
   }

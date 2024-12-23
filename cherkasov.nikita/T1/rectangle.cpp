@@ -13,8 +13,8 @@ namespace cherkasov
   }
   double Rectangle::getArea() const
   {
-    double width = std::abs(right.x - left.y);
-    double height = std::abs(right.x - left.y);
+    double width = std::abs(right.x - left.x);
+    double height = std::abs(right.y - left.y);
     return width * height;
   }
   rectangle_t Rectangle::getFrameRect() const
