@@ -34,17 +34,17 @@ int main()
     else
     {
       cherkasov::Shape* shape = parseShapeInput(inputCommand, std::cin, invalidInput);
-      if (shape == nullptr)
-      {
-        std::cerr << "Invalid shape input\n";
-        cherkasov::deleteShapes(shapes, shapeCount);
-        return 1;
-      }
       if (invalidInput)
       {
         std::cerr << "Invalid shape input detected.\n";
         invalidInput = false;
         continue;
+      }
+      if (shape == nullptr)
+      {
+        std::cerr << "Invalid shape input\n";
+        cherkasov::deleteShapes(shapes, shapeCount);
+        return 1;
       }
       shapes[shapeCount++] = shape;
     }
