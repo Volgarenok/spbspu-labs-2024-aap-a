@@ -14,11 +14,9 @@ void cherkasov::scaling(Shape* shapes[], size_t shapeCount, point_t p, double sc
     shapes[i]->move(p);
     point_t newPoint = shapes[i]->getFrameRect().pos;
     point_t newVector;
-    newVector.x = (newPoint.x - startPoint.x);
-    newVector.y = (newPoint.y - startPoint.y);
+    newVector.x = (newPoint.x - startPoint.x) * scalingFactor;
+    newVector.y = (newPoint.y - startPoint.y) * scalingFactor;
     shapes[i]->scale(scalingFactor);
-    newVector.x *= scalingFactor;
-    newVector.y *= scalingFactor;
     shapes[i]->move(-newVector.x, -newVector.y);
   }
 }

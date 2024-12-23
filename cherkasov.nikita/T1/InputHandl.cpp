@@ -15,7 +15,7 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
     double x2 = 0.0;
     double y2 = 0.0;
     input >> x1 >> y1 >> x2 >> y2;
-    if (input.fail() || x1 >= x2 || y1 >= y2)
+    if (!input || x1 >= x2 || y1 >= y2)
     {
       invalidInput = true;
     }
@@ -27,7 +27,7 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
     double y1 = 0.0;
     double length = 0.0;
     input >> x1 >> y1 >> length;
-    if (input.fail() || length <= 0)
+    if (!input || length <= 0)
     {
       invalidInput = true;
     }
@@ -42,7 +42,7 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
     double x3 = 0.0;
     double y3 = 0.0;
     input >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-    if (input.fail() || (x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3))
+    if (!input || (x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3))
     {
       invalidInput = true;
     }
@@ -65,7 +65,7 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
     double x3 = 0.0;
     double y3 = 0.0;
     input >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-    if (input.fail() || (x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3))
+    if (!input || (x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3))
     {
       invalidInput = true;
     }
