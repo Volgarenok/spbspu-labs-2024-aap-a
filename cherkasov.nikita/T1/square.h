@@ -1,7 +1,7 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 #include "shape.h"
-#include "base-types.h"
+#include "base-types.hpp"
 
 namespace cherkasov
 {

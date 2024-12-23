@@ -1,6 +1,6 @@
 #ifndef SHAPE_H
 #define SHAPE_H
-#include "base-types.h"
+#include "base-types.hpp"
 
 namespace cherkasov
 {

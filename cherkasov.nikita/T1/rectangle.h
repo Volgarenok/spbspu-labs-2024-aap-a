@@ -1,6 +1,6 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
-#include "base-types.h"
+#include "base-types.hpp"
 #include "shape.h"
 
 namespace cherkasov

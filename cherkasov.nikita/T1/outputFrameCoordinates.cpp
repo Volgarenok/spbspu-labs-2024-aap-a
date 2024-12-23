@@ -1,5 +1,5 @@
 #include  "outputFrameCoordinates.h"
-#include "base-types.h"
+#include "base-types.hpp"
 #include <iostream>
 
 void cherkasov::outputFrameCoordinates(Shape* shapes[], size_t shapeCount)
