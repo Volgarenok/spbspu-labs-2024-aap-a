@@ -1,7 +1,13 @@
 #include "scaling.hpp"
+#include <iostream>
 
 void cherkasov::scaling(Shape* shapes[], size_t shapeCount, point_t p, double scalingFactor)
 {
+  if (scalingFactor <= 0)
+  {
+    std::cerr << "Error: scalingFactor must be positive.\n";
+    return;
+  }
   for (size_t i = 0; i < shapeCount; i++)
   {
     point_t startPoint = shapes[i]->getFrameRect().pos;
