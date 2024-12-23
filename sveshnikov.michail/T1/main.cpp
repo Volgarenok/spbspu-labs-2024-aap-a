@@ -50,6 +50,17 @@ int main()
           std::cerr << "ERROR: Incorrect input of ellipse!\n";
         }
       }
+      else if (shape_name == "SQUARE")
+      {
+        try
+        {
+          sveshnikov::build_square(std::cin, shapes, num_shapes);
+        }
+        catch (const std::logic_error &e)
+        {
+          std::cerr << "ERROR: Incorrect input of square!\n";
+        }
+      }
     }
   }
   catch (const std::bad_alloc &e)
