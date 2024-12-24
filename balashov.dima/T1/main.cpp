@@ -67,7 +67,7 @@ int main()
             incorrectrRecordShapes = true;
         }
     }
-    else if (shapeType == "SCALE")
+    if (shapeType == "SCALE")
     {
       if (shapeCount == 0)
       {
