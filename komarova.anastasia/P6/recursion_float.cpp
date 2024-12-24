@@ -95,6 +95,10 @@ const char * komarova::is_float(const char * str)
 
 bool komarova::is_float_lit(const char * str)
 {
-  const char * next = is_float_lit(str);
+  if (!str)
+  {
+    return false;
+  }
+  const char * next = is_float(str);
   return next && (*next == '\0');
 }
