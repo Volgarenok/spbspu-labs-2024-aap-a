@@ -16,7 +16,7 @@ int main()
   bool invalidInput = false;
   std::string inputCommand;
   cherkasov::point_t p = {0.0, 0.0};
-  double scalingFactor = 0.0;
+  double scalingFactor = 0;
   bool scalingRequested = false;
   while (std::cin >> inputCommand)
   {
@@ -78,7 +78,7 @@ int main()
       std::cin >> p.x >> p.y >> scalingFactor;
       if (scalingFactor <= 0)
       {
-        std::cerr << "Scaling factor must be positive\n";
+        std::cerr << "scaling factor must  positive\n";
         cherkasov::deleteShapes(shapes, shapeCount);
         return 1;
       }
@@ -87,18 +87,18 @@ int main()
   }
   if (shapeCount == 0)
   {
-    std::cerr << "No shapes specified\n";
+    std::cerr << "no shapes specified\n";
     return 1;
   }
   if (!scalingRequested)
   {
-    std::cerr << "Scaling was not specified\n";
+    std::cerr << "scaling was not specified\n";
     cherkasov::deleteShapes(shapes, shapeCount);
     return 1;
   }
   if (invalidInput)
   {
-    std::cerr << "Invalid input encountered\n";
+    std::cerr << "invalid input encountered\n";
   }
   std::cout << std::fixed << std::setprecision(1);
   std::cout << cherkasov::calculArea(shapes, shapeCount);

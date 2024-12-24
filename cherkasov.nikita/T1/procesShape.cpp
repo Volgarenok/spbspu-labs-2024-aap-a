@@ -11,15 +11,12 @@ double cherkasov::calculArea(Shape* shapes[], size_t shapeCount)
   }
   return totalArea;
 }
-void cherkasov::deleteShapes(Shape* shapes[], size_t& shapeCount)
+void cherkasov::deleteShapes(Shape** shapes, size_t size)
 {
-  for (size_t i = 0; i < shapeCount; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
-    if (shapes[i] != nullptr)
-    {
-      delete shapes[i];
-      shapes[i] = nullptr;
-    }
+    delete shapes[i];
+    delete[] shapes;
   }
 }
 void cherkasov::outputFrameCoordinates(Shape* shapes[], size_t shapeCount)
