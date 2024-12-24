@@ -58,6 +58,10 @@ int main()
           guseynov::clearShapes(Shapes, current);
           return 1;
         }
+        if (current == 0)
+        {
+          return 1;
+        }
         std::cout << std::fixed << std::setprecision(1) << guseynov::getAreaSum(Shapes, current - 1);
         guseynov::printFrRectCords(std::cout, Shapes, current - 1);
         guseynov::scaleAllRelativeTo(Shapes, current - 1, p, k);
@@ -84,11 +88,11 @@ int main()
     guseynov::clearShapes(Shapes, current);
     return 1;
   }
-  guseynov::clearShapes(Shapes, current);
-  if (isScale)
+  guseynov::clearShapes(Shapes, current - 1);
+  if (!isScale)
   {
     std::cerr << "no scale!\n";
-    guseynov::clearShapes(Shapes, current);
+    guseynov::clearShapes(Shapes, current - 1);
     return 1;
   }
   if (isCorrect)
