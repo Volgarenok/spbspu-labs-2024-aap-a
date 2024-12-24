@@ -8,9 +8,9 @@
 
 namespace cherkasov
 {
-	Rectangle* getRectangle(std::istream& input);
-	Square* getSquare(std::istream& input);
-	Parallelogram* getParallelogram(std::istream& input);
-	Diamond* getDiamond(std::istream& input);
+  Rectangle* getRectangle(std::istream& input);
+  Square* getSquare(std::istream& input);
+  Parallelogram* getParallelogram(std::istream& input);
+  Diamond* getDiamond(std::istream& input);
 }
 #endif
