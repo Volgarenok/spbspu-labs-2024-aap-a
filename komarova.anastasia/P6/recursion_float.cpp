@@ -3,7 +3,7 @@
 
 namespace
 {
-  const char * is_symbol(const char * str);
+  const char * is_symbol(const char * str, const char sym);
   const char * is_number(const char * str);
   const char * is_unsigned_int(const char * str);
   const char * is_sign(const char * str);
