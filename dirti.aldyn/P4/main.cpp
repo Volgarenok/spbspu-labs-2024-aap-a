@@ -1,20 +1,15 @@
 #include <iostream>
-#include <ios>
 #include <cstddef>
+#include "str_input.hpp"
+
+
 int main()
 {
-  size_t max = 10;
-  char str[max + 1] = {};
-  size_t size = 0;
-  char c = '\0';
-  std::noskipws(std::cin);
-  
-  while ((std::cin >> c) && (c != '\n') && (size < max))
+  char * str = dirti::str_input(std::cin);
+  if (str == nullptr)
   {
-    str[size++] = c;
+    std::cerr << "Error" << "\n";
+    return 1;
   }
-  std::skipws(std::cin);
-  
-  std::cout << size << "\n";
-  std::cout << str << "\n";
+  std::cout << str[1] << "\n";
 }
