@@ -49,7 +49,6 @@ char * dirti::str_input(std::istream & input)
     str = str2;
     str[size++] = c;
   }
-  free(str2);
   str[size] = '\0';
   std::skipws(input);
   return str;
