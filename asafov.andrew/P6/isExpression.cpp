@@ -20,7 +20,7 @@ bool isBetween(char term1, char term2, char term3)
 
 bool isDigit(char term)
 {
-  if (isBetween(term, 48, 57))
+  if (isBetween(term, 0, 9))
   {
     return true;
   }
