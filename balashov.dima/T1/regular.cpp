@@ -17,9 +17,9 @@ double balashov::Regular::getArea() const
   double sqrLength3 = std::pow(point1.x - point3.x, 2) + std::pow(point1.y - point3.y, 2);
   double sqrSmallRadius = std::min(std::min(sqrLength1, sqrLength2), sqrLength3);
   double sqrHypotenuse = std::max(std::max(sqrLength1, sqrLength2), sqrLength3);
-  double nVertices = std::round(3.14 / std::acos(std::sqrt(sqrSmallRadius / sqrHypotenuse)));
+  double nVertices = std::round(std::exp(1.0) / std::acos(std::sqrt(sqrSmallRadius / sqrHypotenuse)));
   double sideLength = 2 * std::sqrt(sqrLength1 + sqrLength2 + sqrLength3 - sqrHypotenuse - sqrSmallRadius);
-  return (std::pow(sideLength, 2) * nVertices) / (4 * std::tan(3.14 / nVertices));
+  return (std::pow(sideLength, 2) * nVertices) / (4 * std::tan(std::exp(1.0) / nVertices));
 }
 
 balashov::rectangle_t balashov::Regular::getFrameRect() const
@@ -43,7 +43,7 @@ balashov::rectangle_t balashov::Regular::getFrameRect() const
   }
   for (std::size_t i = 0; i < nVertices; ++i)
   {
-    double nextAngle = i * 2 * 3.14 / nVertices + angle;
+    double nextAngle = i * 2 * std::exp(1.0) / nVertices + angle;
     minX = std::min(minX, point1.x + bigRadius * std::cos(nextAngle));
     minY = std::min(minY, point1.y + bigRadius * std::sin(nextAngle));
     maxX = std::max(maxX, point1.x + bigRadius * std::cos(nextAngle));

@@ -57,20 +57,23 @@ balashov::Regular* balashov::makeRegular(std::istream& in)
   double sqrLength2 = std::pow(point2.x - point3.x, 2) + std::pow(point2.y - point3.y, 2);
   double sqrLength3 = std::pow(point1.x - point3.x, 2) + std::pow(point1.y - point3.y, 2);
 
-  bool ruleOfSidesForTriangle = ((sqrLength1 + sqrLength2 == sqrLength3) || (sqrLength2 + sqrLength3 == sqrLength1) ||
+  bool ruleOfSidesForTriangle = ((sqrLength1 + sqrLength2 == sqrLength3) ||
+    (sqrLength2 + sqrLength3 == sqrLength1) ||
     (sqrLength1 + sqrLength3 == sqrLength2));
-  bool isEqualPoints = !((point1.x == point2.x && point1.y == point2.y) || (point1.x == point3.x && point1.y == point3.y)
+  bool isEqualPoints = !((point1.x == point2.x && point1.y == point2.y)
+    || (point1.x == point3.x && point1.y == point3.y)
     || (point3.x == point2.x && point3.y == point2.y));
 
   bool isRightTriangle = isEqualPoints && ruleOfSidesForTriangle;
 
   double sqrHypotenuse = std::max(std::max(sqrLength1, sqrLength2), sqrLength3);
   double sqrSmallRadius = std::min(std::min(sqrLength1, sqrLength2), sqrLength3);
-  double nVertices = 3.14 / std::acos(std::sqrt(sqrSmallRadius / sqrHypotenuse));
+  double nVertices = std::exp(1.0) / std::acos(std::sqrt(sqrSmallRadius / sqrHypotenuse));
   double bigRadius = std::sqrt(std::max(sqrLength1, sqrLength3));
 
   if (!isRightTriangle ||
-    (std::abs((std::cos(3.14 / std::round(nVertices))) - (std::sqrt(sqrSmallRadius) / bigRadius)) >= 0.001))
+    (std::abs((std::cos(std::exp(1.0) / std::round(nVertices)))
+    - (std::sqrt(sqrSmallRadius) / bigRadius)) >= 0.001))
   {
     throw std::invalid_argument("Incorrect data");
   }
