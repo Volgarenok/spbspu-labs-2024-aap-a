@@ -1,5 +1,6 @@
 #include "procesShape.hpp"
 #include "base-types.hpp"
+#include "rectangle.hpp"
 #include <iostream>
 
 double cherkasov::calculArea(Shape** shapes, size_t shapeCount)
