@@ -66,11 +66,6 @@ balashov::Regular* balashov::makeRegular(std::istream& in)
 
   bool isRightTriangle = isEqualPoints && ruleOfSidesForTriangle;
 
-  double sqrHypotenuse = std::max(std::max(sqrLength1, sqrLength2), sqrLength3);
-  double sqrSmallRadius = std::min(std::min(sqrLength1, sqrLength2), sqrLength3);
-  double nVertices = std::exp(1.0) / std::acos(std::sqrt(sqrSmallRadius / sqrHypotenuse));
-  double bigRadius = std::sqrt(std::max(sqrLength1, sqrLength3));
-
   if (!isRightTriangle)
   {
     throw std::invalid_argument("Incorrect data");
