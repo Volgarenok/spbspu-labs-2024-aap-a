@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include "rectangle.hpp"
 #include "square.hpp"
@@ -19,11 +20,15 @@ int main()
   bool scalingRequested = false;
   while (std::cin >> inputCommand)
   {
+    if (shapeCount >= maxShapes)
+    {
+      throw std::overflow_error("maximum number of shapes.");
+    }
     if (inputCommand == "RECTANGLE")
     {
       try
       {
-        shapes[shapeCount] = cherkasov::Rectangle(std::cin);
+        shapes[shapeCount] = cherkasov::getRectangle(std::cin);
         shapeCount++;
       }
       catch (const std::invalid_argument& e)
@@ -35,7 +40,7 @@ int main()
     {
       try
       {
-        shapes[shapeCount] = cherkasov::Square(std::cin);
+        shapes[shapeCount] = cherkasov::getSquare(std::cin);
         shapeCount++;
       }
       catch (const std::invalid_argument& e)
@@ -47,7 +52,7 @@ int main()
     {
       try
       {
-        shapes[shapeCount] = cherkasov::Parallelogram(std::cin);
+        shapes[shapeCount] = cherkasov::getParallelogram(std::cin);
         shapeCount++;
       }
       catch (const std::invalid_argument& e)
@@ -59,7 +64,7 @@ int main()
     {
       try
       {
-        shapes[shapeCount] = cherkasov::Diamond(std::cin);
+        shapes[shapeCount] = cherkasov::getDiamond(std::cin);
         shapeCount++;
       }
       catch (const std::invalid_argument& e)

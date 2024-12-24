@@ -1,4 +1,4 @@
-#include "makesShape.cpp"
+#include "makesShape.hpp"
 #include <stdexcept>
 #include <algorithm>
 
@@ -50,8 +50,8 @@ cherkasov::Diamond* cherkasov::getDiamond(std::istream& input)
   double y2 = 0.0;
   double x3 = 0.0;
   double y3 = 0.0;
-  in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-  if (!input || (x1 == x2 && y1 == y2) && (x1 == x3 && y1 == y3))
+  input >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+  if (!input || ((x1 == x2 && y1 == y2) && (x1 == x3 && y1 == y3)))
   {
     throw std::invalid_argument("no input coordinat");
   }

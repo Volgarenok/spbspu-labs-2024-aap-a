@@ -1,4 +1,4 @@
-#ifdef MAKESSHAPE_HPP
+#ifndef MAKESSHAPE_HPP
 #define MAKESSHAPE_HPP
 #include <istream>
 #include "rectangle.hpp"

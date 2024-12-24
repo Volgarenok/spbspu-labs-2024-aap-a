@@ -1,4 +1,4 @@
-#ifdef PROCESSHAPE_HPP
+#ifndef PROCESSHAPE_HPP
 #define PROCESSHAPE_HPP
 #include <cstddef>
 #include "shape.hpp"
