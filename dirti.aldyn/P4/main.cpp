@@ -14,5 +14,13 @@ int main()
     return 1;
   }
   size_t size = capacity - 1;
-  std::cout << dirti::str_min(str, size) << "\n";
+  if (dirti::str_min(str, size) == '\0')
+  {
+    std::cerr << "Error: bad alloc" << "\n";
+    return 1;
+  }
+  else
+  {
+    std::cout << dirti::str_min(str, size) << "\n";
+  }
 }
