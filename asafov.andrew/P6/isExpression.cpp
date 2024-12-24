@@ -134,7 +134,7 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
   }
   else
   {
-    std::cout<<"g else\n";
+    std::cout<< pos << length <<"g else\n";
     return false;
   }
 }
