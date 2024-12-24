@@ -1,6 +1,6 @@
 #include <iostream>
 #include "change.h"
-#include "dynamic.h"
+#include <dynamic.h>
 #include <cstddef>
 #include <cstdlib>
 int main()
