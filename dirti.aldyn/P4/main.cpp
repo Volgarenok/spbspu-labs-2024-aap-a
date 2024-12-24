@@ -1,15 +1,18 @@
 #include <iostream>
 #include <cstddef>
 #include "str_input.hpp"
+#include "str_min.hpp"
 
 
 int main()
 {
-  char * str = dirti::str_input(std::cin);
+  size_t capacity = 2;
+  char * str = dirti::str_input(std::cin, capacity);
   if (str == nullptr)
   {
     std::cerr << "Error" << "\n";
     return 1;
   }
-  std::cout << str[1] << "\n";
+  size_t size = capacity - 1;
+  std::cout << dirti::str_min(str, size) << "\n";
 }

@@ -15,10 +15,9 @@ char * dirti::new_storage(char * str, size_t & capacity)
   return str2;
 }
 
-char * dirti::str_input(std::istream & input)
+char * dirti::str_input(std::istream & input, size_t & capacity)
 {
   char c = '\0';
-  size_t capacity = 2;
   size_t size = 1;
   char * str = reinterpret_cast< char * >(malloc(sizeof(char) * capacity));
   if (str == nullptr)

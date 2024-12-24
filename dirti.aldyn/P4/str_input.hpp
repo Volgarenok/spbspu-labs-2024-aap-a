@@ -6,7 +6,7 @@
 namespace dirti
 {
   char * new_storage(char * str, size_t & capacity);
-  char * str_input(std::istream & input);
+  char * str_input(std::istream & input, size_t & capacity);
 }
 
 #endif
