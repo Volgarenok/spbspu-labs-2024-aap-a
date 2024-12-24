@@ -127,4 +127,8 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
       return false;
     }
   }
+  else
+  {
+    return false;
+  }
 }
