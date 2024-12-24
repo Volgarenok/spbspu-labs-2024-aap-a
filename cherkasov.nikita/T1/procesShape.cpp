@@ -2,7 +2,7 @@
 #include "base-types.hpp"
 #include <iostream>
 
-double cherkasov::calculArea(Shape* shapes[], size_t shapeCount)
+double cherkasov::calculArea(Shape** shapes, size_t shapeCount)
 {
   double totalArea = 0.0;
   for (size_t i = 0; i < shapeCount; ++i)
@@ -11,14 +11,14 @@ double cherkasov::calculArea(Shape* shapes[], size_t shapeCount)
   }
   return totalArea;
 }
-void cherkasov::deleteShapes(Shape* shapes[], size_t& shapeCount)
+void cherkasov::deleteShapes(Shape** shapes, size_t& shapeCount)
 {
   for (size_t i = 0; i < shapeCount; ++i)
   {
     delete shapes[i];
   }
 }
-void cherkasov::outputFrameCoordinates(Shape* shapes[], size_t shapeCount)
+void cherkasov::outputFrameCoordinates(Shape** shapes, size_t shapeCount)
 {
   for (size_t i = 0; i < shapeCount; i++)
   {
@@ -31,7 +31,7 @@ void cherkasov::outputFrameCoordinates(Shape* shapes[], size_t shapeCount)
   }
   std::cout << "\n";
 }
-void cherkasov::scaling(Shape* shapes[], size_t shapeCount, point_t p, double scalingFactor)
+void cherkasov::scaling(Shape** shapes, size_t shapeCount, point_t p, double scalingFactor)
 {
   if (scalingFactor <= 0)
   {
