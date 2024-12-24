@@ -1,4 +1,4 @@
-#include "InputHandler.hpp"
+#include "inputHandler.hpp"
 #include "rectangle.hpp"
 #include "square.hpp"
 #include "parallelogram.hpp"
@@ -15,11 +15,7 @@ cherkasov::Shape* parseShapeInput(const std::string& inputCommand, std::istream&
     double x2 = 0.0;
     double y2 = 0.0;
     input >> x1 >> y1 >> x2 >> y2;
-    if (!input || x1 >= x2 || y1 >= y2)
-    {
-      invalidInput = true;
-    }
-    if (x1 < x2 && y1 < y2)
+    if (x1 >= x2 || y1 >= y2)
     {
       invalidInput = true;
     }

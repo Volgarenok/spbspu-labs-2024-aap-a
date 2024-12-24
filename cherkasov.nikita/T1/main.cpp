@@ -1,11 +1,8 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include "InputHandler.hpp"
-#include "deleteShapes.hpp"
-#include "calculArea.hpp"
-#include "outputFrameCoordinates.hpp"
-#include "scaling.hpp"
+#include "procesShape.hpp"
+#include "makesShape.hpp"
 
 constexpr size_t maxShapes = 10000;
 int main()
