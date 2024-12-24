@@ -61,17 +61,17 @@ guseynov::Parallelogram* guseynov::makeParallelogram(std::istream& in)
 {
   double x0, y0, x1, y1, x2, y2;
   in >> x0 >> y0 >> x1 >> y1 >> x2 >> y2;
-  if (y0 != y2 || x0 >= x2)
+  if (y0 != y1 || x0 >= x1)
   {
     return nullptr;
   }
   point_t leftLowP, leftHighP, rightLowP;
   leftLowP.x = x0;
   leftLowP.y = y0;
-  leftHighP.x = x1;
-  leftHighP.y = y1;
-  rightLowP.x = x2;
-  rightLowP.y = y2;
+  leftHighP.x = x2;
+  leftHighP.y = y2;
+  rightLowP.x = x1;
+  rightLowP.y = y1;
   Parallelogram *parallelogram = new Parallelogram(leftLowP, rightLowP, leftHighP);
   return parallelogram;
 }
