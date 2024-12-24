@@ -9,13 +9,13 @@ guseynov::Parallelogram::Parallelogram(point_t leftLowP, point_t rightLowP, poin
 
 double guseynov::Parallelogram::getArea() const
 {
-  return (fabs((leftHighP_.y - leftLowP_.y) * (rightLowP_.x - leftLowP_.x)));
+  return (std::abs((leftHighP_.y - leftLowP_.y) * (rightLowP_.x - leftLowP_.x)));
 }
 
 guseynov::rectangle_t guseynov::Parallelogram::getFrameRect() const
 {
   double width = rightLowP_.x - leftLowP_.x + fabs(leftLowP_.x - leftHighP_.x);
-  double height = fabs(leftHighP_.y - leftLowP_.y);
+  double height = std::abs(leftHighP_.y - leftLowP_.y);
   return {width, height, {leftLowP_.x + (width / 2), leftLowP_.y + (height / 2)}};
 }
 
