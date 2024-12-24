@@ -2,14 +2,9 @@
 
 #include <cmath>
 
-guseynov::Parallelogram::Parallelogram(guseynov::point_t leftLowP, guseynov::point_t rightLowP, guseynov::point_t leftHighP)
+guseynov::Parallelogram::Parallelogram(point_t leftLowP, point_t rightLowP, point_t leftHighP) :
+  leftLowP_(leftLowP), leftHighP_(leftHighP), rightLowP_(rightLowP)
 {
-  leftLowP_.x = leftLowP.x;
-  leftLowP_.y = leftLowP.y;
-  rightLowP_.x = rightLowP.x;
-  rightLowP_.y = rightLowP.y;
-  leftHighP_.x = leftHighP.x;
-  leftHighP_.y = leftHighP.y;
 }
 
 double guseynov::Parallelogram::getArea() const
@@ -19,14 +14,14 @@ double guseynov::Parallelogram::getArea() const
 
 guseynov::rectangle_t guseynov::Parallelogram::getFrameRect() const
 {
-  double width = rightLowP_.x - leftLowP_.x;
+  double width = rightLowP_.x - leftLowP_.x + fabs(leftLowP_.x - leftHighP_.x);
   double height = fabs(leftHighP_.y - leftLowP_.y);
   return {width, height, {leftLowP_.x + (width / 2), leftLowP_.y + (height / 2)}};
 }
 
-void guseynov::Parallelogram::move(guseynov::point_t pos)
+void guseynov::Parallelogram::move(point_t pos)
 {
-  guseynov::point_t center = getFrameRect().pos;
+  point_t center = getFrameRect().pos;
   double moveX = pos.x - center.x;
   double moveY = pos.y - center.y;
   leftLowP_.x += moveX;
@@ -49,7 +44,7 @@ void guseynov::Parallelogram::move(double x, double y)
 
 void guseynov::Parallelogram::scale(double k)
 {
-  guseynov::point_t center = getFrameRect().pos;
+  point_t center = getFrameRect().pos;
   leftLowP_.x = center.x - (center.x - leftLowP_.x) * k;
   leftLowP_.y = center.y - (center.y - leftLowP_.y) * k;
   rightLowP_.x = center.x + (center.x - rightLowP_.x) * k;

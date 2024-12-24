@@ -1,10 +1,8 @@
 #include "square.hpp"
 
-guseynov::Square::Square(point_t leftLowP, double length)
+guseynov::Square::Square(point_t leftLowP, double length) :
+  leftLowP_(leftLowP), length_(length)
 {
-  leftLowP_.x = leftLowP.x;
-  leftLowP_.y = leftLowP.y;
-  length_ = length;
 }
 
 double guseynov::Square::getArea() const
@@ -31,7 +29,7 @@ void guseynov::Square::move(double x, double y)
 
 void guseynov::Square::scale(double k)
 {
-  point_t center = getFrameRect().pos;
-  leftLowP_.x = center.x - (length_ / 2) * k;
-  leftLowP_.y = center.y - (length_ / 2) * k;
+  leftLowP_.x -= (length_ * k - length_) / 2;
+  leftLowP_.y -= (length_ * k - length_) / 2;
+  length_ *= k;
 }

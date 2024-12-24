@@ -78,7 +78,7 @@ void guseynov::clearShapes(guseynov::Shape **shp, size_t currentIndx)
 {
   for (size_t i = 0; i < currentIndx; i++)
   {
-    delete[] shp[i];
+    delete shp[i];
   }
 }
 
@@ -96,10 +96,13 @@ void guseynov::printFrRectCords(std::ostream & out, guseynov::Shape **shp, size_
 {
   for (size_t i = 0; i < Num; i++)
   {
-    double lbx = 0, lby = 0, rtx = 0, rty = 0;
-    guseynov::rectangle_t rect = shp[i]->getFrameRect();
-    getFrRectCords(rect, lbx, lby, rtx, rty);
-    out << " " << lbx << " " << lby << " " << rtx << " " << rty;
+    if (shp[i] != nullptr)
+    {
+      double lbx = 0, lby = 0, rtx = 0, rty = 0;
+      guseynov::rectangle_t rect = shp[i]->getFrameRect();
+      getFrRectCords(rect, lbx, lby, rtx, rty);
+      out << " " << lbx << " " << lby << " " << rtx << " " << rty;
+    }
   }
   out << "\n";
 }
