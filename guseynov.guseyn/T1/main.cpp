@@ -62,11 +62,11 @@ int main()
         {
           return 1;
         }
-        std::cout << std::fixed << std::setprecision(1) << guseynov::getAreaSum(Shapes, current - 1);
-        guseynov::printFrRectCords(std::cout, Shapes, current - 1);
-        guseynov::scaleAllRelativeTo(Shapes, current - 1, p, k);
-        std::cout << std::fixed << std::setprecision(1) << guseynov::getAreaSum(Shapes, current - 1);
-        guseynov::printFrRectCords(std::cout, Shapes, current - 1);
+        std::cout << std::fixed << std::setprecision(1) << guseynov::getAreaSum(Shapes, current);
+        guseynov::printFrRectCords(std::cout, Shapes, current);
+        guseynov::scaleAllRelativeTo(Shapes, current, p, k);
+        std::cout << std::fixed << std::setprecision(1) << guseynov::getAreaSum(Shapes, current);
+        guseynov::printFrRectCords(std::cout, Shapes, current);
         break;
       }
       else if (std::cin.eof())
@@ -88,11 +88,11 @@ int main()
     guseynov::clearShapes(Shapes, current);
     return 1;
   }
-  guseynov::clearShapes(Shapes, current - 1);
+  guseynov::clearShapes(Shapes, current);
   if (!isScale)
   {
     std::cerr << "no scale!\n";
-    guseynov::clearShapes(Shapes, current - 1);
+    guseynov::clearShapes(Shapes, current);
     return 1;
   }
   if (isCorrect)
