@@ -84,9 +84,11 @@ int main()
       }
       break;
     }
-    else
+    else if (std::cin.eof())
     {
-      std::cerr << "unknown shape " << inputCommand << '\n';
+      std::cerr << "EOF encountered\n";
+      deleteShapes(shapes, shapeCount);
+      return 1;
     }
   }
   if (shapeCount == 0)
