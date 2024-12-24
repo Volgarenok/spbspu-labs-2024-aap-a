@@ -18,7 +18,7 @@ int main()
   {
     while (std::cin >> str)
     {
-      if (!std::cin.eof())
+      if (std::cin.eof())
       {
         std::cerr << "Error: EOF\n";
         guseynov::clearShapes(Shapes, current);
