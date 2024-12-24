@@ -13,7 +13,7 @@ int main()
   cherkasov::Shape* shapes[10000] = {};
   size_t shapeCount = 0;
   bool invalidInput = false;
-  std::string inputCommand;
+  std::string inputCommand = "";
   cherkasov::point_t p = {0.0, 0.0};
   double scalingFactor = 0;
   bool scalingRequested = false;
