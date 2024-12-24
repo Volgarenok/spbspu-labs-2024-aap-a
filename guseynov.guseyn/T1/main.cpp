@@ -12,7 +12,6 @@ int main()
   std::string str = "";
   size_t current = 0;
   double k = 0;
-  bool isCorrect = false;
   bool isScale = false;
   guseynov::point_t p = {0, 0};
   try
@@ -22,28 +21,16 @@ int main()
       if (str == "RECTANGLE")
       {
         Shapes[current] = guseynov::makeRectangle(std::cin);
-          if (Shapes[current] == nullptr)
-          {
-            isCorrect = true;
-          }
         current++;
       }
       else if (str == "SQUARE")
       {
         Shapes[current] = guseynov::makeSquare(std::cin);
-          if (Shapes[current] == nullptr)
-          {
-            isCorrect = true;
-          }
         current++;
       }
       else if (str == "PARALLELOGRAM")
       {
         Shapes[current] = guseynov::makeParallelogram(std::cin);
-          if (Shapes[current] == nullptr)
-          {
-            isCorrect = true;
-          }
         current++;
       }
       else if (str == "SCALE")
@@ -95,8 +82,4 @@ int main()
     return 1;
   }
   guseynov::clearShapes(Shapes, current);
-  if (isCorrect)
-  {
-    std::cerr << "WARNING: incorect Shapes\n";
-  }
 }
