@@ -8,10 +8,9 @@
 #include "procesShape.hpp"
 #include "makesShape.hpp"
 
-constexpr size_t maxShapes = 10000;
 int main()
 {
-  cherkasov::Shape* shapes[maxShapes] = {nullptr};
+  cherkasov::Shape* shapes[10000] = {};
   size_t shapeCount = 0;
   bool invalidInput = false;
   std::string inputCommand;
