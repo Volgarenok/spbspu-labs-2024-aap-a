@@ -88,13 +88,13 @@ int main()
     guseynov::clearShapes(Shapes, current);
     return 1;
   }
-  guseynov::clearShapes(Shapes, current);
   if (!isScale)
   {
     std::cerr << "no scale!\n";
     guseynov::clearShapes(Shapes, current);
     return 1;
   }
+  guseynov::clearShapes(Shapes, current);
   if (isCorrect)
   {
     std::cerr << "WARNING: incorect Shapes\n";
