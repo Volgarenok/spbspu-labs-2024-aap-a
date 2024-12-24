@@ -47,23 +47,35 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
   {
     if (isDigit(string[pos + 1]))
     {
+      if (pos + 1 == length)
+      {
+      return true;
+      }
       return isExpression(string, pos + 1, length);
     }
     else if (isLetter(string[pos + 1]))
     {
+      if (pos + 1 == length)
+      {
+      return true;
+      }
       return isExpression(string, pos + 1, length);
     }
     else if (string[pos + 1]=='*')
     {
+      if (pos + 1 == length)
+      {
+      return true;
+      }
       return isExpression(string, pos + 1, length);
     }
     else if (string[pos + 1]=='+' || string[pos + 1]=='-')
     {
-      return isExpression(string, pos + 1, length);
-    }
-    else if (pos + 1 == length)
-    {
+      if (pos + 1 == length)
+      {
       return true;
+      }
+      return isExpression(string, pos + 1, length);
     }
     else
     {
@@ -79,10 +91,6 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
     else if (string[pos + 1]=='+' || string[pos + 1]=='-')
     {
       return isExpression(string, pos + 1, length);
-    }
-    else if (pos + 1 == length)
-    {
-      return true;
     }
     else
     {
@@ -119,5 +127,4 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
       return false;
     }
   }
-  return true;
 }
