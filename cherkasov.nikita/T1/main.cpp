@@ -84,6 +84,10 @@ int main()
       }
       break;
     }
+    else
+    {
+      std::cerr << "unknown shape " << inputCommand << '\n';
+    }
   }
   if (shapeCount == 0)
   {
