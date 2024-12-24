@@ -80,7 +80,10 @@ void guseynov::clearShapes(guseynov::Shape **shp, size_t currentIndx)
 {
   for (size_t i = 0; i < currentIndx; i++)
   {
-    delete shp[i];
+    if (shp[i] != nullptr)
+    {
+      delete shp[i];
+    }
   }
 }
 
@@ -89,7 +92,10 @@ double guseynov::getAreaSum(guseynov::Shape **shp, size_t Num)
   double sum = 0;
   for (size_t i = 0; i < Num; i++)
   {
-    sum += shp[i]->getArea();
+    if (shp[i] != nullptr)
+    {
+      sum += shp[i]->getArea();
+    }
   }
   return sum;
 }
@@ -113,7 +119,10 @@ void guseynov::scaleAllRelativeTo(Shape **shp, size_t Num, guseynov::point_t p, 
 {
   for (size_t i = 0; i < Num; i++)
   {
-    scaleRelativeTo(shp[i], p, k);
+    if (shp[i] != nullptr)
+    {
+      scaleRelativeTo(shp[i], p, k);
+    }
   }
 }
 
