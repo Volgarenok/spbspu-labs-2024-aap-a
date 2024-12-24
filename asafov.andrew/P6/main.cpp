@@ -14,6 +14,7 @@ int main()
   if (len == 0)
   {
     std::cerr << "empty string" << '\n';
+    delete[] str;
     return 1;
   }
   std::cout << std::boolalpha << asafov::isExpression(str, 0, len) << std::endl;
