@@ -1,13 +1,7 @@
 #include "square.hpp"
 
-#include <exception>
-
 guseynov::Square::Square(point_t leftLowP, double length)
 {
-  if (length <= 0)
-  {
-    throw;
-  }
   leftLowP_.x = leftLowP.x;
   leftLowP_.y = leftLowP.y;
   length_ = length;
@@ -37,10 +31,6 @@ void guseynov::Square::move(double x, double y)
 
 void guseynov::Square::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw;
-  }
   point_t center = getFrameRect().pos;
   leftLowP_.x = center.x - (length_ / 2) * k;
   leftLowP_.y = center.y - (length_ / 2) * k;

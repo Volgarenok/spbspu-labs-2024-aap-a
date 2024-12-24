@@ -1,14 +1,9 @@
 #include "parallelogram.hpp"
 
-#include <exception>
 #include <cmath>
 
 guseynov::Parallelogram::Parallelogram(guseynov::point_t leftLowP, guseynov::point_t rightLowP, guseynov::point_t leftHighP)
 {
-  if (leftLowP.y != rightLowP.y || leftLowP.y == leftHighP.y || leftLowP.x == leftHighP.x || leftLowP.x >= rightLowP.x )
-  {
-    throw;
-  }
   leftLowP_.x = leftLowP.x;
   leftLowP_.y = leftLowP.y;
   rightLowP_.x = rightLowP.x;
@@ -54,10 +49,6 @@ void guseynov::Parallelogram::move(double x, double y)
 
 void guseynov::Parallelogram::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw;
-  }
   guseynov::point_t center = getFrameRect().pos;
   leftLowP_.x = center.x - (center.x - leftLowP_.x) * k;
   leftLowP_.y = center.y - (center.y - leftLowP_.y) * k;

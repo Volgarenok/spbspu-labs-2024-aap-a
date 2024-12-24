@@ -1,13 +1,7 @@
 #include "rectangle.hpp"
 
-#include <exception>
-
 guseynov::Rectangle::Rectangle(point_t leftLowP, point_t rightHighP)
 {
-  if (leftLowP.x >= rightHighP.x || leftLowP.y >= rightHighP.y)
-  {
-    throw;
-  }
   leftLowP_.x = leftLowP.x;
   leftLowP_.y = leftLowP.y;
   rightHighP_.x = rightHighP.x;
@@ -47,10 +41,6 @@ void guseynov::Rectangle::move(double x, double y)
 
 void guseynov::Rectangle::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw;
-  }
   point_t center = getFrameRect().pos;
   this->leftLowP_.x = center.x - (center.x - leftLowP_.x) * k;
   this->leftLowP_.y = center.y - (center.y - leftLowP_.y) * k;

@@ -1,49 +1,65 @@
 #include <iostream>
 #include <cctype>
 #include <iomanip>
-#include <workWithString.hpp>
-
+#include <string>
 #include "shape.hpp"
 #include "make_Shapes.hpp"
 
 int main()
 {
   constexpr size_t capacity = 10000;
-  char *line = nullptr;
-  guseynov::Shape * Shapes[capacity];
-  size_t sch = 0;
+  guseynov::Shape *Shapes[capacity];
+  std::string str = "";
   size_t current = 0;
   double k = 0;
-  bool flag = false;
+  bool isCorrect = false;
   guseynov::point_t p = {0, 0};
-  while (true)
+  try
   {
-    free(line);
-    line = guseynov::getLine(std::cin);
-    if (line == nullptr)
+    while (std::cin >> str)
     {
-      std::cerr << "Error: unread line\n";
-      guseynov::clearShapes(Shapes, current);
-      return 1;
-    }
-    if (std::cin.eof())
-    {
-      std::cerr << "Error: EOF\n";
-      guseynov::clearShapes(Shapes, current);
-      free(line);
-      return 1;
-    }
-    size_t f = 0;
-    try
-    {
-      f = guseynov::makeShape(line, Shapes, current, p, k);
-      sch++;
-      if (f == 1)
+      if (!std::cin.eof())
       {
-        if (!current)
+        std::cerr << "Error: EOF\n";
+        guseynov::clearShapes(Shapes, current);
+        return 1;
+      }
+      if (str == "RECTANGLE")
+      {
+        Shapes[current] = guseynov::makeRectangle(std::cin);
+          if (Shapes[current] == nullptr)
+          {
+            isCorrect = true;
+          }
+        current++;
+      }
+      else if (str == "SQUARE")
+      {
+        Shapes[current] = guseynov::makeSquare(std::cin);
+          if (Shapes[current] == nullptr)
+          {
+            isCorrect = true;
+          }
+        current++;
+      }
+      else if (str == "PARALLELOGRAM")
+      {
+        Shapes[current] = guseynov::makeParallelogram(std::cin);
+          if (Shapes[current] == nullptr)
+          {
+            isCorrect = true;
+          }
+        current++;
+      }
+      else if (str == "SCALE")
+      {
+        std::cin >> p.x;
+        std::cin >> p.y;
+        std::cin >> k;
+        if (k <= 0)
         {
-          free(line);
-          std::cerr << "Error: empty shapes";
+          std::cerr << "Uncorrect scale coefficient!\n";
+          guseynov::clearShapes(Shapes, current);
           return 1;
         }
         std::cout << std::fixed << std::setprecision(1) << guseynov::getAreaSum(Shapes, current);
@@ -51,27 +67,23 @@ int main()
         guseynov::scaleAllRelativeTo(Shapes, current, p, k);
         std::cout << std::fixed << std::setprecision(1) << guseynov::getAreaSum(Shapes, current);
         guseynov::printFrRectCords(std::cout, Shapes, current);
-        free(line);
         break;
       }
+      if (current == capacity)
+      {
+        std::cerr << "ERROR: Memory full\n";
+        guseynov::clearShapes(Shapes, current);
+        return 1;
+      }
     }
-    catch (...)
-    {
-      guseynov::clearShapes(Shapes, current);
-      free(line);
-      return 1;
-    }
-    if (sch == capacity)
-    {
-      std::cerr << "ERROR: Memory full\n";
-      guseynov::clearShapes(Shapes, current);
-      free(line);
-      return 1;
-    }
-    flag = (f == 2) ? true : flag;
+  }
+  catch(...)
+  {
+  guseynov::clearShapes(Shapes, current);
+  return 1;
   }
   guseynov::clearShapes(Shapes, current);
-  if (flag)
+  if (isCorrect)
   {
     std::cerr << "WARNING: incorect Shapes\n";
   }
