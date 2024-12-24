@@ -1,4 +1,5 @@
 #include "isExpression.hpp"
+#include <iostream>
 
 bool isBetween(char term1, char term2, char term3)
 {
@@ -79,6 +80,7 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
     }
     else
     {
+      std::cout<<"int else\n";
       return false;
     }
   }
@@ -94,6 +96,7 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
     }
     else
     {
+      std::cout<<"letter else\n";
       return false;
     }
   }
@@ -109,6 +112,7 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
     }
     else
     {
+      std::cout<<"* else\n";
       return false;
     }
   }
@@ -124,11 +128,13 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
     }
     else
     {
+      std::cout<<"+- else\n";
       return false;
     }
   }
   else
   {
+    std::cout<<"g else\n";
     return false;
   }
 }
