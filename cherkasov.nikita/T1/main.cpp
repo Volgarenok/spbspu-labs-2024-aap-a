@@ -101,7 +101,8 @@ int main()
   {
     std::cerr << "invalid input encountered\n";
   }
-  std::cout << std::fixed << std::setprecision(1);
+  std::cout << std::fixed;
+  std::cout << std::setprecision(1);
   std::cout << cherkasov::calculArea(shapes, shapeCount);
   cherkasov::outputFrameCoordinates(shapes, shapeCount);
   cherkasov::scaling(shapes, shapeCount, p, scalingFactor);
