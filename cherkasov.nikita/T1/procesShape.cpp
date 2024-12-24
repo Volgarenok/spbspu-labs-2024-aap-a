@@ -12,7 +12,7 @@ double cherkasov::calculArea(Shape** shapes, size_t shapeCount)
   }
   return totalArea;
 }
-void cherkasov::deleteShapes(Shape** shapes, size_t& shapeCount)
+void cherkasov::deleteShapes(Shape** shapes, size_t shapeCount)
 {
   for (size_t i = 0; i < shapeCount; ++i)
   {
