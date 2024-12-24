@@ -9,7 +9,6 @@ namespace
   const char * is_sign(const char * str);
   const char * is_order(const char * str);
   const char * is_mantissa(const char * str);
-  const char * is_float(const char * str);
 
   const char * is_symbol(const char * str, const char sym)
   {
