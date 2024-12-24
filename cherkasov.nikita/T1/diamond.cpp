@@ -26,11 +26,11 @@ namespace cherkasov
   }
   rectangle_t Diamond::getFrameRect() const
   {
-    double minX = std::min({vertex1.x, vertex2.x, vertex3.x, vertex4.x});
-    double maxX = std::max({vertex1.x, vertex2.x, vertex3.x, vertex4.x});
-    double minY = std::min({vertex1.y, vertex2.y, vertex3.y, vertex4.y});
-    double maxY = std::max({vertex1.y, vertex2.y, vertex3.y, vertex4.y});
-    rectangle_t rect;
+    double minX = std::min({ vertex1.x, vertex2.x, vertex3.x, vertex4.x });
+    double maxX = std::max({ vertex1.x, vertex2.x, vertex3.x, vertex4.x });
+    double minY = std::min({ vertex1.y, vertex2.y, vertex3.y, vertex4.y });
+    double maxY = std::max({ vertex1.y, vertex2.y, vertex3.y, vertex4.y });
+    cherkasov::rectangle_t rect{};
     rect.width = maxX - minX;
     rect.height = maxY - minY;
     rect.pos.x = center.x;
