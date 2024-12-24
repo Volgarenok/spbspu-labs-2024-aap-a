@@ -1,5 +1,4 @@
 #include "isExpression.hpp"
-#include <iostream>
 
 bool isBetween(char term1, char term2, char term3)
 {
@@ -64,23 +63,14 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
     }
     else if (string[pos + 1]=='*')
     {
-      if (pos + 1 == length)
-      {
-      return true;
-      }
       return isExpression(string, pos + 1, length);
     }
     else if (string[pos + 1]=='+' || string[pos + 1]=='-')
     {
-      if (pos + 1 == length)
-      {
-      return true;
-      }
       return isExpression(string, pos + 1, length);
     }
     else
     {
-      std::cout<< pos << length << "int else\n";
       return false;
     }
   }
@@ -96,7 +86,6 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
     }
     else
     {
-      std::cout<<"letter else\n";
       return false;
     }
   }
@@ -104,15 +93,22 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
   {
     if (isDigit(string[pos + 1]))
     {
+      if (pos + 1 == length)
+      {
+      return true;
+      }
       return isExpression(string, pos + 1, length);
     }
     else if (isLetter(string[pos + 1]))
     {
+      if (pos + 1 == length)
+      {
+      return true;
+      }
       return isExpression(string, pos + 1, length);
     }
     else
     {
-      std::cout<<"* else\n";
       return false;
     }
   }
@@ -120,15 +116,22 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
   {
     if (isDigit(string[pos + 1]))
     {
+      if (pos + 1 == length)
+      {
+      return true;
+      }
       return isExpression(string, pos + 1, length);
     }
     else if (isLetter(string[pos + 1]))
     {
+      if (pos + 1 == length)
+      {
+      return true;
+      }
       return isExpression(string, pos + 1, length);
     }
     else
     {
-      std::cout<<"+- else\n";
       return false;
     }
   }
