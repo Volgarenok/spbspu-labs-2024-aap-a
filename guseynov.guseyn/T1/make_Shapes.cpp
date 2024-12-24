@@ -17,9 +17,11 @@ namespace
     guseynov::point_t firstRect = shp->getFrameRect().pos;
     shp->move(p);
     guseynov::point_t secondRect = shp->getFrameRect().pos;
-    guseynov::point_t vector = {(secondRect.x - firstRect.x) * k, (secondRect.y - firstRect.y)};
     shp->scale(k);
-    shp->move(-vector.x, -vector.y);
+    guseynov::point_t offset;
+    offset.x = (secondRect.x - firstRect.x) * k;
+    offset.y = (secondRect.y - firstRect.y) * k;
+    shp->move(-offset.x, -offset.y);
   }
 }
 
