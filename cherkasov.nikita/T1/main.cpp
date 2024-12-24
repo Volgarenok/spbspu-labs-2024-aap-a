@@ -20,10 +20,6 @@ int main()
   bool scalingRequested = false;
   while (std::cin >> inputCommand)
   {
-    if (shapeCount >= maxShapes)
-    {
-      throw std::overflow_error("maximum number of shapes.");
-    }
     if (inputCommand == "RECTANGLE")
     {
       try
@@ -78,16 +74,16 @@ int main()
       std::cin >> p.x >> p.y >> scalingFactor;
       if (scalingFactor <= 0)
       {
-        std::cerr << "scaling factor must  positive\n";
         cherkasov::deleteShapes(shapes, shapeCount);
+        std::cerr << "scaling factor must  positive\n";
         return 1;
       }
       break;
     }
     else if (std::cin.eof())
     {
-      std::cerr << "EOF encountered\n";
       deleteShapes(shapes, shapeCount);
+      std::cerr << "EOF encountered\n";
       return 1;
     }
   }
@@ -98,8 +94,8 @@ int main()
   }
   if (!scalingRequested)
   {
-    std::cerr << "scaling was not specified\n";
     cherkasov::deleteShapes(shapes, shapeCount);
+    std::cerr << "scaling was not specified\n";
     return 1;
   }
   if (invalidInput)
