@@ -9,7 +9,7 @@ namespace
   const char * is_sign(const char * str);
   const char * is_order(const char * str);
   const char * is_mantissa(const char * str);
-  bool komarova::is_digit(const char* str);
+  bool is_digit(const char* str);
 
   const char * is_symbol(const char * str, const char sym)
   {
@@ -20,7 +20,7 @@ namespace
     return (*str == sym) ? (str + 1) : nullptr;
   }
 
-  bool komarova::is_digit(const char* str)
+  bool is_digit(const char* str)
   {
     if (*str == '\0')
     {
@@ -46,7 +46,7 @@ namespace
     {
       return str;
     }
-    return (komarova::is_digit(str)) ? (str + 1) : nullptr;
+    return (is_digit(str)) ? (str + 1) : nullptr;
   }
 
   const char * is_unsigned_int(const char * str)
