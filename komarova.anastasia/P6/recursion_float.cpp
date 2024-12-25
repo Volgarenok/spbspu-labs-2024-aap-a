@@ -1,7 +1,7 @@
 #include "recursion_float.h"
 #include <cctype>
 
-bool komarova::is_digit(const char* str)
+bool komarova::is_digit(char* str)
 {
   if (*str == '\0')
   {
