@@ -1,7 +1,7 @@
 #include "recursion_float.h"
 #include <cctype>
 
-bool komarova::is_digit(char* str)
+bool komarova::is_digit(const char* str)
 {
   if (*str == '\0')
   {
@@ -45,7 +45,7 @@ namespace
     {
       return str;
     }
-    return (komarova::is_digit(*str)) ? (str + 1) : nullptr;
+    return (komarova::is_digit(str)) ? (str + 1) : nullptr;
   }
 
   const char * is_unsigned_int(const char * str)
