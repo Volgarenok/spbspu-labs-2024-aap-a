@@ -33,7 +33,7 @@ namespace
       {
         if (*str == *d)
         {
-          return is_digit(str + 1);
+          return str + 1;
         }
       }
     }
