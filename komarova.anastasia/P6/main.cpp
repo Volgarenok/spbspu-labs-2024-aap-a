@@ -21,4 +21,3 @@ int main()
   std::cout << std::boolalpha << komarova::is_float_lit(str) << "\n";
   free(str);
 }
-
