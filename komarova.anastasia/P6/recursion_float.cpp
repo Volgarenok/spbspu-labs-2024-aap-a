@@ -1,26 +1,6 @@
 #include "recursion_float.h"
 #include <cctype>
 
-bool komarova::is_digit(const char* str)
-{
-  if (*str == '\0')
-  {
-    return false;
-  }
-  const char * dig = "0123456789\0";
-  while (*str != '\0')
-  {
-    for (const char* d = dig; *d != '\0'; d++)
-    {
-      if (*str == *d)
-      {
-        return is_digit(str + 1);
-      }
-    }
-  }
-  return false;
-}
-
 namespace
 {
   const char * is_symbol(const char * str, const char sym);
@@ -29,6 +9,7 @@ namespace
   const char * is_sign(const char * str);
   const char * is_order(const char * str);
   const char * is_mantissa(const char * str);
+  bool komarova::is_digit(const char* str);
 
   const char * is_symbol(const char * str, const char sym)
   {
@@ -37,6 +18,26 @@ namespace
       return str;
     }
     return (*str == sym) ? (str + 1) : nullptr;
+  }
+
+  bool komarova::is_digit(const char* str)
+  {
+    if (*str == '\0')
+    {
+      return false;
+    }
+    const char * dig = "0123456789\0";
+    while (*str != '\0')
+    {
+      for (const char* d = dig; *d != '\0'; d++)
+      {
+        if (*str == *d)
+        {
+          return is_digit(str + 1);
+        }
+      }
+    }
+    return false;
   }
 
   const char * is_number(const char * str)

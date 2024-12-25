@@ -4,7 +4,6 @@ namespace komarova
 {
   const char * is_float(const char * str);
   bool is_float_lit(const char * str);
-  bool komarova::is_digit(const char* str);
 }
 #endif
 
