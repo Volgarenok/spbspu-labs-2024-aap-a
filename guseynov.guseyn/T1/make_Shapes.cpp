@@ -116,7 +116,7 @@ guseynov::Diamond* guseynov::makeDiamond(std::istream& in)
     else if (y2 > y1)
     {
       rakirovka(x1, x2, y1, y2);
-      rakirovka(x0, x1, y1, y1);
+      rakirovka(x0, x1, y0, y1);
     }
     else
     {
