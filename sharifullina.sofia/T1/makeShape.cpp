@@ -61,6 +61,6 @@ sharifullina::Ellipse* sharifullina::makeEllipse(std::istream& in)
   {
     throw std::invalid_argument("Incorrect radius");
   }
-  sharifullina::Ellipse* ellips = new sharifullina::Ellipse(center, r1, r2);
+  sharifullina::Ellipse* ellips = new sharifullina::Ellipse(center, r2, r1);
   return ellips;
 }
