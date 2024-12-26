@@ -59,4 +59,14 @@ namespace abramov
     pLeftLower_.x = center.x - newWidth / 2;
     pLeftLower_.y = center.y - newHeigth / 2;
   }
+
+  friend Rectangle::getpLeftLower(const Rectangle &rect)
+  {
+    return rect.pLeftLower_;
+  }
+
+  friend Rectangle::getpRightUpper(const Rectangle &rect)
+  {
+    return rect.pRightUpper_;
+  }
 }

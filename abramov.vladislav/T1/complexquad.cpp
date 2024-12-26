@@ -23,6 +23,7 @@ namespace abramov
     a = min;
     b = max;
   }
+
   void getCoordsOfIntersection (point_t A, point_t B, point_t C, point_t D, double &x, double &y)
   {
     double k1 = (B.y - A.y) / (B.x - A.x);
@@ -116,6 +117,7 @@ namespace abramov
     center.y = y;
     return center;
   }
+
   void ComplexQuad::move(point_t p)
   {
     point_t center = getCenterComplexQuad();
@@ -148,5 +150,25 @@ namespace abramov
     C_.y -= (O.y - C_.y) * dk;
     D_.x -= (O.x - D_.x) * dk;
     D_.y -= (O.y - D_.y) * dk;
+  }
+
+  friend point_t ComplexQuad::getA(const ComplexQuad &shp)
+  {
+    return shp.A_;
+  }
+
+  friend point_t ComplexQuad::getB(const ComplexQuad &shp)
+  {
+    return shp.B_;
+  }
+
+  friend point_t ComplexQuad::getC(const ComplexQuad &shp)
+  {
+    return shp.C_;
+  }
+
+  friend point_t ComplexQuad::getD(const ComplexQuad &shp)
+  {
+    return shp.D_;
   }
 }

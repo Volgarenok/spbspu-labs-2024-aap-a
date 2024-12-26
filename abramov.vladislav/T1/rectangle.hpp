@@ -16,5 +16,8 @@ namespace abramov
     point_t pLeftLower_;
     point_t pRightUpper_;
   };
+
+  friend point_t Rectangle::getpLeftLower(const Rectangle &rect);
+  friend point_t Rectangle::getpRightUpper(const Rectangle &rect);
 }
 #endif

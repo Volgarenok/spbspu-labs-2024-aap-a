@@ -17,6 +17,9 @@ namespace abramov
     point_t pLeftLower_;
     double len_;
   };
+
+  friend point_t Square::getpLeftLower(const Square &square);
+  friend double Square::getlen(const Square &square);
 }
 #endif
 

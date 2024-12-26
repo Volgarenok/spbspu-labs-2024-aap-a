@@ -51,4 +51,14 @@ namespace abramov
     pLeftLower_.y -= dx;
     len_ *= k;
   }
+
+  friend point_t Square::getpLeftLower(const Square &square)
+  {
+    return square.pLeftLower_;
+  }
+
+  friend double Square::getlen(const Square &square)
+  {
+    return square.len_;
+  }
 }

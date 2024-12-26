@@ -20,5 +20,10 @@ namespace abramov
     point_t C_;
     point_t D_;
   };
+
+  friend point_t ComplexQuad::getA(const ComplexQuad &shp);
+  friend point_t ComplexQuad::getB(const ComplexQuad &shp);
+  friend point_t ComplexQuad::getC(const ComplexQuad &shp);
+  friend point_t ComplexQuad::getD(const ComplexQuad &shp);
 }
 #endif
