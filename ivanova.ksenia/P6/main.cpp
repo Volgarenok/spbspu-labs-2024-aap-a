@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string.h>
+#include <inputString.hpp>
 #include "recursiveStringCheck.h"
 
 int main()

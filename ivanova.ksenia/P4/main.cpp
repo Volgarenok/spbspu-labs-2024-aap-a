@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string.h>
+#include <inputString.hpp>
 #include "frequentSymbols.h"
 
 int main()
