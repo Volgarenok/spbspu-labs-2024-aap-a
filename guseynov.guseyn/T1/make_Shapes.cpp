@@ -123,7 +123,7 @@ guseynov::Diamond* guseynov::makeDiamond(std::istream& in)
       return nullptr;
     }
   }
-  else
+  else if (x0 != x2)
   {
     return nullptr;
   }
