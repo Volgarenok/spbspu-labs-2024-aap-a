@@ -7,6 +7,7 @@
 #include "rectangle.hpp"
 #include "square.hpp"
 #include "parallelogram.hpp"
+#include "diamond.hpp"
 
 namespace guseynov
 {
@@ -17,6 +18,7 @@ namespace guseynov
   guseynov::Rectangle* makeRectangle(std::istream& in);
   guseynov::Square* makeSquare(std::istream& in);
   guseynov::Parallelogram* makeParallelogram(std::istream& in);
+  guseynov::Diamond* makeDiamond(std::istream& in);
 }
 
 #endif

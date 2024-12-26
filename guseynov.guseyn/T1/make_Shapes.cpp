@@ -76,6 +76,25 @@ guseynov::Parallelogram* guseynov::makeParallelogram(std::istream& in)
   return parallelogram;
 }
 
+guseynov::Diamond* guseynov::makeDiamond(std::istream& in)
+{
+  double x0, y0, x1, y1, x2, y2;
+  in >> x0 >> y0 >> x1 >> y1 >> x2 >> y2;
+  if (x0 != x2 || y1 != y2 || x1 <= x2 || y0 <= y2)
+  {
+    return nullptr;
+  }
+  point_t highP, rightP, center;
+  highP.x = x0;
+  highP.y = y0;
+  rightP.x = x1;
+  rightP.y = y1;
+  center.x = x2;
+  center.y = y2;
+  Diamond *diamond = new Diamond(highP, rightP, center);
+  return diamond;
+}
+
 void guseynov::clearShapes(guseynov::Shape **shp, size_t currentIndx)
 {
   for (size_t i = 0; i < currentIndx; i++)

@@ -22,28 +22,37 @@ int main()
       if (str == "RECTANGLE")
       {
         Shapes[current] = guseynov::makeRectangle(std::cin);
-          if (Shapes[current] == nullptr)
-          {
-            isCorrect = true;
-          }
+        if (Shapes[current] == nullptr)
+        {
+          isCorrect = true;
+        }
         current++;
       }
       else if (str == "SQUARE")
       {
         Shapes[current] = guseynov::makeSquare(std::cin);
-          if (Shapes[current] == nullptr)
-          {
-            isCorrect = true;
-          }
+        if (Shapes[current] == nullptr)
+        {
+          isCorrect = true;
+        }
         current++;
       }
       else if (str == "PARALLELOGRAM")
       {
         Shapes[current] = guseynov::makeParallelogram(std::cin);
-          if (Shapes[current] == nullptr)
-          {
-            isCorrect = true;
-          }
+        if (Shapes[current] == nullptr)
+        {
+          isCorrect = true;
+        }
+        current++;
+      }
+      else if (str == "DIAMOND")
+      {
+        Shapes[current] = guseynov::makeDiamond(std::cin);
+        if (Shapes[current] == nullptr)
+        {
+          isCorrect = true;
+        }
         current++;
       }
       else if (str == "SCALE")
