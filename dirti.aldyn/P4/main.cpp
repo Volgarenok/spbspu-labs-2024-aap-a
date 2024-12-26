@@ -2,6 +2,7 @@
 #include <cstddef>
 #include "str_input.hpp"
 #include "str_min.hpp"
+#include "str_min2.hpp"
 
 
 int main()
@@ -19,8 +20,20 @@ int main()
     std::cerr << "Error: bad alloc" << "\n";
     return 1;
   }
+  else if (dirti::str_min(str, size) == '\n')
+  {
+    std::cout << "Not existing one rare symbol" << "\n";
+  }
   else
   {
     std::cout << dirti::str_min(str, size) << "\n";
+  }
+  if (dirti::str_min2(str, size) == nullptr)
+  {
+    std::cerr << "Error: bad_alloc" << "\n";
+  }
+  else
+  {
+    std::cout << dirti::str_min2(str, size) << "\n";
   }
 }
