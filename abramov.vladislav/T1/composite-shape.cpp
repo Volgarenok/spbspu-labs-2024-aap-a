@@ -10,7 +10,7 @@ namespace abramov
 
   rectangle_t CompositeShapes::getFrameRect(size_t id) const
   {
-    return shapeptrs_[id]->getArea();
+    return shapeptrs_[id]->getFrameRect();
   }
 
   void CompositeShapes::move(size_t id, point_t p)
@@ -75,9 +75,39 @@ namespace abramov
     return shapes_;
   }
 
-  Shape *CompositeShapes::clone()
+  Shape *CompositeShapes::clone(size_t id) const
   {
-    return nullptr;
+    Shape *figure = shapeptrs[id];
+    try
+    {
+      Rectangle *shp = dynamic_cast< Rectangle* >(figure);
+      Rectangle *shape = new Rectangle(getpLeftLower(shp), getpRightUpper(shp));
+      return shape;
+    }
+    catch (const std::bad_cast &e)
+    {
+
+    }
+    try
+    {
+      Square *shp = dynamic_cast< Square* >(figure);
+      Square *shape = new Square(getpLeftLower(shp), getlen(shp));
+      return shape;
+    }
+    catch (const std::bad_cast &e)
+    {
+
+    }
+    try
+    {
+      ComplexQuad *shp = dynamic_cast< ComplexQuad* >(figure);
+      ComplexQuad *shape = new ComplexQuad(getA(shp), getB(shp), getC(shp), getD(shp));
+      return shape;
+    }
+    catch (const std::bad_cast &e)
+    {
+
+    }
   }
 
   Shape *expandArray(Shape * arr, size_t capacity)
