@@ -15,9 +15,9 @@ namespace guseynov
     void move(double x, double y) override;
     void scale(double k) override;
   private:
-    point_t leftLowP_;
-    point_t leftHighP_;
-    point_t rightLowP_;
+    point_t pos_;
+    point_t p1_;
+    point_t p2_;
   };
 }
 
