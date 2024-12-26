@@ -152,23 +152,23 @@ namespace abramov
     D_.y -= (O.y - D_.y) * dk;
   }
 
-  friend point_t ComplexQuad::getA(const ComplexQuad &shp)
+  point_t ComplexQuad::getA() const
   {
-    return shp.A_;
+    return A_;
   }
 
-  friend point_t ComplexQuad::getB(const ComplexQuad &shp)
+  point_t ComplexQuad::getB() const
   {
-    return shp.B_;
+    return B_;
   }
 
-  friend point_t ComplexQuad::getC(const ComplexQuad &shp)
+  point_t ComplexQuad::getC() const
   {
-    return shp.C_;
+    return C_;
   }
 
-  friend point_t ComplexQuad::getD(const ComplexQuad &shp)
+  point_t ComplexQuad::getD() const
   {
-    return shp.D_;
+    return D_;
   }
 }

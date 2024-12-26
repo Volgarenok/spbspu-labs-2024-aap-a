@@ -14,16 +14,15 @@ namespace abramov
     void move(double dx, double dy) override;
     void scale(double k) override;
     point_t getCenterComplexQuad() const;
+    point_t getA() const;
+    point_t getB() const;
+    point_t getC() const;
+    point_t getD() const;
   private:
     point_t A_;
     point_t B_;
     point_t C_;
     point_t D_;
   };
-
-  friend point_t ComplexQuad::getA(const ComplexQuad &shp);
-  friend point_t ComplexQuad::getB(const ComplexQuad &shp);
-  friend point_t ComplexQuad::getC(const ComplexQuad &shp);
-  friend point_t ComplexQuad::getD(const ComplexQuad &shp);
 }
 #endif

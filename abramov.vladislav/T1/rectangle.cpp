@@ -60,13 +60,13 @@ namespace abramov
     pLeftLower_.y = center.y - newHeigth / 2;
   }
 
-  friend Rectangle::getpLeftLower(const Rectangle &rect)
+  point_t Rectangle::getpLeftLower() const
   {
-    return rect.pLeftLower_;
+    return pLeftLower_;
   }
 
-  friend Rectangle::getpRightUpper(const Rectangle &rect)
+  point_t Rectangle::getpRightUpper() const
   {
-    return rect.pRightUpper_;
+    return pRightUpper_;
   }
 }

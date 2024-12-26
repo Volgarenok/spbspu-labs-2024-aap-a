@@ -13,13 +13,12 @@ namespace abramov
     void move(point_t p) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
+    point_t getpLeftLower() const;
+    double getlen() const;
   private:
     point_t pLeftLower_;
     double len_;
   };
-
-  friend point_t Square::getpLeftLower(const Square &square);
-  friend double Square::getlen(const Square &square);
 }
 #endif
 
