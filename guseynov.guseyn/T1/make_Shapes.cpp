@@ -72,39 +72,7 @@ guseynov::Parallelogram* guseynov::makeParallelogram(std::istream& in)
 {
   double x0, y0, x1, y1, x2, y2;
   in >> x0 >> y0 >> x1 >> y1 >> x2 >> y2;
-  if (y0 == y2)
-  {
-    if (x0 > x2)
-    {
-      rakirovka(x0, x1, y0, y1);
-      rakirovka(x0, x2, y0, y2);
-    }
-    if (x2 > x0)
-    {
-      rakirovka(x1, x2, y1, y2);
-    }
-    else
-    {
-      return nullptr;
-    }
-  }
-  else if (y1 == y2)
-  {
-    if (x1 > x2)
-    {
-      rakirovka(x0, x2, y0, y2);
-    }
-    if (x2 > x1)
-    {
-      rakirovka(x0, x1, y0, y1);
-      rakirovka(x1, x2, y1, y2);
-    }
-    else
-    {
-      return nullptr;
-    }
-  }
-  else if (y0 != y1)
+  if (!(((y0 == y1) && (y0 != y2)) || ((y1 == y2) && (y0 != y1))))
   {
     return nullptr;
   }
