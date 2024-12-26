@@ -23,6 +23,17 @@ namespace
     offset.y = (secondRect.y - firstRect.y) * k;
     shp->move(-offset.x, -offset.y);
   }
+
+  void rakirovka(double & x, double & x2, double & y, double & y2)
+  {
+    double timeX, timeY;
+    timeX = x2;
+    x2 = x;
+    x = timeX;
+    timeY = y2;
+    y2 = y;
+    y = timeY;
+  }
 }
 
 guseynov::Rectangle* guseynov::makeRectangle(std::istream& in)
@@ -80,7 +91,39 @@ guseynov::Diamond* guseynov::makeDiamond(std::istream& in)
 {
   double x0, y0, x1, y1, x2, y2;
   in >> x0 >> y0 >> x1 >> y1 >> x2 >> y2;
-  if (x0 != x2 || y1 != y2 || x1 <= x2 || y0 <= y2)
+  if (x0 == x1)
+  {
+    if (y0 > y1)
+    {
+      rakirovka(x1, x2, y1, y2);
+    }
+    else if (y1 > y0)
+    {
+      rakirovka(x1, x2, y1, y2);
+      rakirovka(x0, x2, y0, y2);
+    }
+    else
+    {
+      return nullptr;
+    }
+  }
+  else if (x1 == x2)
+  {
+    if (y1 > y2)
+    {
+      rakirovka(x0, x1, y0, y1);
+    }
+    else if (y2 > y1)
+    {
+      rakirovka(x1, x2, y1, y2);
+      rakirovka(x0, x1, y1, y1);
+    }
+    else
+    {
+      return nullptr;
+    }
+  }
+  else
   {
     return nullptr;
   }
