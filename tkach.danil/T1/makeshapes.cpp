@@ -43,5 +43,5 @@ tkach::Shape* tkach::make_shape(std::istream& in, std::string shape_name)
   {
     return make_regular(in);
   }
-  throw std::invalid_argument("No these shapes");
+  return nullptr;
 }

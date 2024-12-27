@@ -22,25 +22,25 @@ int main()
     {
       continue;
     }
-    if (shape_name == "RECTANGLE" || shape_name == "RING" || shape_name == "REGULAR")
+    try
     {
-      try
+      shapes_array[counter_of_shapes] = tkach::make_shape(std::cin, shape_name);
+      if (shapes_array[counter_of_shapes] != nullptr)
       {
-        shapes_array[counter_of_shapes] = tkach::make_shape(std::cin, shape_name);
         counter_of_shapes++;
       }
-      catch(const std::bad_alloc& e)
-      {
-        tkach::deleteShapes(shapes_array, counter_of_shapes);
-        std::cerr << "Not enough memory\n";
-        return 1;
-      }
-      catch (const std::logic_error& e)
-      {
-        incorrect_shape = true;
-      }
     }
-    else if (shape_name == "SCALE")
+    catch(const std::bad_alloc& e)
+    {
+      tkach::deleteShapes(shapes_array, counter_of_shapes);
+      std::cerr << "Not enough memory\n";
+      return 1;
+    }
+    catch (const std::logic_error& e)
+    {
+      incorrect_shape = true;
+    }
+    if (shape_name == "SCALE")
     {
       std::cin >> scale_point.x >> scale_point.y;
       std::cin >> scale_coef;
