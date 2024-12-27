@@ -1,11 +1,6 @@
 #include <iostream>
-#include <iomanip>
 #include <stdexcept>
 #include "processShapes.hpp"
-#include "rectangle.hpp"
-#include "ring.hpp"
-#include "triangle.hpp"
-#include "complexquad.hpp"
 
 int main()
 {
