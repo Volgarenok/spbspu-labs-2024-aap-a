@@ -13,7 +13,7 @@ namespace abramov
     CompositeShape(const CompositeShape &comp_shp);
     CompositeShape(CompositeShape &&comp_shp);
     CompositeShape &operator=(const CompositeShape &comp_shp);
-    CompositeShape operator=(CompositeShape &&comp_shp);
+    CompositeShape &operator=(CompositeShape &&comp_shp);
     double getArea(size_t id) const;
     rectangle_t getFrameRect(size_t id) const;
     void move(size_t id, point_t p);

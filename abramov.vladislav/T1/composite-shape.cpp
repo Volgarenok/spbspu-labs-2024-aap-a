@@ -28,6 +28,34 @@ namespace abramov
     comp_shp.setArray(nullptr);
   }
 
+  CompositeShape &CompositeShape::operator=(const CompositeShape &comp_shp)
+  {
+    if (&comp_shp != this)
+    {
+      Shape **arr = new Shape*[comp_shp.capacity_];
+      for (size_t i = 0; i < comp_shp.capacity_; ++i)
+      {
+        arr[i] = comp_shp.shapeptrs_[i];
+      }
+      delete[] shapeptrs_;
+      shapeptrs_ = arr;
+      shapes_ = comp_shp.shapes_;
+      capacity_ = comp_shp.capacity_;
+    }
+    return *this;
+  }
+
+  CompositeShape &CompositeShape::operator=(CompositeShape &&comp_shp)
+  {
+    if (&comp_shp != this)
+    {
+      delete[] shapeptrs_;
+      shapeptrs_ = comp_shp.shapeptrs_;
+      comp_shp.shapeptrs_ = nullptr;
+    }
+    return *this;
+  }
+
   double CompositeShape::getArea(size_t id) const
   {
     return shapeptrs_[id]->getArea();
