@@ -12,9 +12,9 @@ int main()
     return 1;
   }
   char dest[3] = {};
-  ivanova::twoFrequentSymbol(string, dest);
-  std::cout << ivanova::frequentSymbol(string) << '\n';
-  std::cout << dest << '\n';
+  ivanova::twoFrequentSymbolRec(string, dest);
+  std::cout << dest[0] << '\n';
+  std::cout << dest[1] << '\n';
   delete[] string;
   return 0;
 }

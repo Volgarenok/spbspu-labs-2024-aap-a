@@ -10,8 +10,6 @@ namespace
   const char * unsignedIntCheck(const char * str);
   const char * orderCheck(const char * str);
   const char * mantisCheck(const char * str);
-  int countFrq(const char * string, int i, int count);
-  char * twoFrq(const char * string, int * max, char * maxSym);
 
   const char * signCheck(const char * string)
   {
@@ -93,44 +91,6 @@ namespace
     }
     return unsignedIntCheck(next);
   }
-
-  int countFrq(const char * string, int i, int count)
-  {
-    if (string[i] == '\0')
-    {
-      return count;
-    }
-    if (*string == string[i])
-    {
-      count++;
-    }
-    return countFrq(string, i + 1, count);
-  }
-
-  char * twoFrq(const char * string, int * max, char * maxSym)
-  {
-    if (*string == '\0')
-    {
-      return maxSym;
-    }
-
-    int count = countFrq(string, 0, 0);
-
-    if (max[0] < count)
-    {
-      max[1] = max[0];
-      maxSym[1] = maxSym[0];
-
-      max[0] = count;
-      maxSym[0] = *string;
-    }
-    else if (count > max[1] && *string != maxSym[0])
-    {
-      max[1] = count;
-      maxSym[1] = *string;
-    }
-    return twoFrq(string + 1, max, maxSym);
-  }
 }
 
 bool ivanova::rightString(const char * string)
@@ -151,16 +111,4 @@ bool ivanova::rightString(const char * string)
     return true;
   }
   return false;
-}
-
-void ivanova::twoFrequentSymbol(const char * string, char* dest)
-{
-  int max[2] = {0, 0};
-  char maxSym[2] = {'\0', '\0'};
-
-  twoFrq(string, max, maxSym);
-
-  dest[0] = maxSym[0];
-  dest[1] = maxSym[1];
-  dest[2] = '\0';
 }
