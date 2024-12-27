@@ -10,6 +10,7 @@
 
 namespace kushekbaev
 {
+  bool parallelX(point_t first, point_t second);
   bool isTriangle(point_t first, point_t second, point_t third);
   Rectangle* makeRectangle(std::istream& input);
   Concave* makeConcave(std::istream& input);
