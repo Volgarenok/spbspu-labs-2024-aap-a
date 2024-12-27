@@ -6,7 +6,7 @@ demehin::Ring::Ring(point_t center, double out_r, double in_r):
   in_r_(in_r),
   out_r_(out_r)
 {
-  if (out_r <= in_r)
+  if (out_r <= in_r || out_r <= 0 || in_r <= 0)
   {
     throw std::logic_error("incorrect shape");
   }

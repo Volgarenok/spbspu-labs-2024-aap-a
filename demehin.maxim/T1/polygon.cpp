@@ -34,14 +34,19 @@ demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
   vrtx_cnt_(vrtx_cnt),
   vertex_(new point_t[vrtx_cnt])
 {
+  if (vrtx_cnt < 3)
+  {
+    throw std::logic_error("incorrect_shape");
+  }
   for (size_t i = 0; i < vrtx_cnt; i++)
   {
     vertex_[i] = vertex[i];
   }
 
-  if (hasSameVertex(vrtx_cnt, vertex_) || vrtx_cnt < 3)
+  if (hasSameVertex(vrtx_cnt, vertex_))
   {
     throw std::logic_error("incorrect_shape");
+    delete[] vertex_;
   }
 
 }
