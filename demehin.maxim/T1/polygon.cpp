@@ -1,5 +1,29 @@
 #include "polygon.hpp"
 #include <cmath>
+#include <stdexcept>
+
+namespace
+{
+  bool areEqualPts(const demehin::point_t p1, const demehin::point_t p2)
+  {
+    return p1.x == p2.x && p1.y == p2.y;
+  }
+
+  bool hasSameVertex(size_t n, demehin::point_t* vertex)
+  {
+    for (size_t i = 0; i < n; i++)
+    {
+      for (size_t j = i + 1; j < n; j++)
+      {
+        if (areEqualPts(vertex[i], vertex[j]))
+        {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+}
 
 demehin::Polygon::~Polygon()
 {
@@ -14,6 +38,12 @@ demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
   {
     vertex_[i] = vertex[i];
   }
+
+  if (hasSameVertex(vrtx_cnt, vertex_) || vrtx_cnt < 3)
+  {
+    throw std::logic_error("incorrect_shape");
+  }
+
 }
 
 double demehin::Polygon::getArea() const
