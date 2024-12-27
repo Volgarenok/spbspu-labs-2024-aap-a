@@ -15,60 +15,18 @@ int main()
   size_t counter_of_shapes = 0;
   double scale_coef = 0.0;
   tkach::point_t scale_point;
-  while(true)
+  while(!std::cin.eof())
   {
     std::cin >> shape_name;
-    if (std::cin.eof())
-    {
-      deleteShapes(shapes_array, counter_of_shapes);
-      std::cerr << "Error: not enough arguments\n";
-      return 1;
-    }
     if (shape_name.empty())
     {
       continue;
     }
-    if (shape_name == "RECTANGLE")
+    if (shape_name == "RECTANGLE" || shape_name == "RING" || shape_name == "REGULAR")
     {
       try
       {
-        shapes_array[counter_of_shapes] = tkach::make_rectangle(std::cin);
-        counter_of_shapes++;
-      }
-      catch(const std::bad_alloc& e)
-      {
-        tkach::deleteShapes(shapes_array, counter_of_shapes);
-        std::cerr << "Not enough memory\n";
-        return 1;
-      }
-      catch (const std::logic_error& e)
-      {
-        incorrect_shape = true;
-      }
-    }
-    else if (shape_name == "RING")
-    {
-      try
-      {
-        shapes_array[counter_of_shapes] = tkach::make_ring(std::cin);
-        counter_of_shapes++;
-      }
-      catch(const std::bad_alloc& e)
-      {
-        tkach::deleteShapes(shapes_array, counter_of_shapes);
-        std::cerr << "Not enough memory\n";
-        return 1;
-      }
-      catch (const std::logic_error& e)
-      {
-        incorrect_shape = true;
-      }
-    }
-    else if (shape_name == "REGULAR")
-    {
-      try
-      {
-        shapes_array[counter_of_shapes] = tkach::make_regular(std::cin);
+        shapes_array[counter_of_shapes] = tkach::make_shape(std::cin, shape_name);
         counter_of_shapes++;
       }
       catch(const std::bad_alloc& e)
@@ -94,6 +52,12 @@ int main()
       }
       break;
     }
+  }
+  if (std::cin.eof())
+  {
+    deleteShapes(shapes_array, counter_of_shapes);
+    std::cerr << "Error: not enough arguments\n";
+    return 1;
   }
   if (counter_of_shapes == 0)
   {

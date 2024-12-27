@@ -29,3 +29,19 @@ tkach::Regular* tkach::make_regular(std::istream& in)
   return regular;
 }
 
+tkach::Shape* tkach::make_shape(std::istream& in, std::string shape_name)
+{
+  if (shape_name == "RECTANGLE")
+  {
+    return make_rectangle(in);
+  }
+  else if (shape_name == "RING")
+  {
+    return make_ring(in);
+  }
+  else if (shape_name == "REGULAR")
+  {
+    return make_regular(in);
+  }
+  throw std::invalid_argument("No these shapes");
+}
