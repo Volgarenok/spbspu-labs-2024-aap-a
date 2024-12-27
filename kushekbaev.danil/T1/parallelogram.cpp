@@ -6,17 +6,29 @@
 
 namespace kushekbaev
 {
-  Parallelogram::Parallelogram(point_t first, point_t second, point_t third)
-  : first_(first), second_(second), third_(third){}
+  Parallelogram::Parallelogram(point_t first,
+    point_t second,
+    point_t third):
+    first_(first),
+    second_(second),
+    third_(third)
+  {
+    if (!parallelX(first_, second_) || !parallelX(second_, third_) || !parallelX(first_, third_))
+    {
+      throw std::invalid_argument("There is no lina that would be parallel to X\n");
+    }
+    if (!isTriangle(first_, second_, third_))
+    {
+      throw std::invalid_argument("First three points wouldnt make a triangle\n");
+    }
+  }
 
   double Parallelogram::getArea() const
   {
-    double halfperimeterOfTriangle = (getLineLength(first_, second_) + getLineLength(second_, third_)
+    double p = (getLineLength(first_, second_) + getLineLength(second_, third_)
     + getLineLength(first_, third_)) / 2;
-    double squaredAreaOfTriangle = (halfperimeterOfTriangle)
-    * (halfperimeterOfTriangle - getLineLength(first_, second_))
-    * (halfperimeterOfTriangle - getLineLength(second_, third_))
-    * (halfperimeterOfTriangle - getLineLength(first_, third_));
+    double squaredAreaOfTriangle = (p) * (p - getLineLength(first_, second_))
+    * (p - getLineLength(second_, third_)) * (p - getLineLength(first_, third_));
     double areaOfTriangle = std::sqrt(squaredAreaOfTriangle);
 
     return 2 * areaOfTriangle;
@@ -39,31 +51,23 @@ namespace kushekbaev
   {
     point_t firstalt({ first_.x + third_.x - second_.x, first_.y + third_.y - second_.y });
 
-    point_t middle = this->getFrameRect().pos;
+    point_t middle = getFrameRect().pos;
     double moveX = Z.x - middle.x;
     double moveY = Z.y - middle.y;
-    first_.x += moveX;
-    first_.y += moveY;
-    second_.x += moveX;
-    second_.y += moveY;
-    third_.x += moveX;
-    third_.y += moveY;
-    firstalt.x += moveX;
-    firstalt.y += moveY;
+    moveDelta(moveX, moveY, first_);
+    moveDelta(moveX, moveY, second_);
+    moveDelta(moveX, moveY, third_);
+    moveDelta(moveX, moveY, firstalt);
   }
 
   void Parallelogram::move(double dx, double dy)
   {
     point_t firstalt({ first_.x + third_.x - second_.x, first_.y + third_.y - second_.y });
 
-    first_.x += dx;
-    first_.y += dy;
-    second_.x += dx;
-    second_.y += dy;
-    third_.x += dx;
-    third_.y += dy;
-    firstalt.x += dx;
-    firstalt.y += dy;
+    moveDelta(dx, dy, first_);
+    moveDelta(dx, dy, second_);
+    moveDelta(dx, dy, third_);
+    moveDelta(dx, dy, firstalt);
   }
 
   void Parallelogram::scale(double V)
@@ -73,14 +77,10 @@ namespace kushekbaev
     {
       throw std::invalid_argument("Scale coefficient should be greater than zero\n");
     }
-    point_t middle = this->getFrameRect().pos;
-    first_.x = middle.x + (first_.x - middle.x) * V;
-    first_.y = middle.y + (first_.y - middle.y) * V;
-    second_.x = middle.x + (second_.x - middle.x) * V;
-    second_.y = middle.y + (second_.y - middle.y) * V;
-    third_.x = middle.x + (third_.x - middle.x) * V;
-    third_.y = middle.y + (third_.y - middle.y) * V;
-    firstalt.x = middle.x + (firstalt.x - middle.x) * V;
-    firstalt.y = middle.y + (firstalt.y - middle.y) * V;
+    point_t middle = getFrameRect().pos;
+    isoScaling(V, middle, first_);
+    isoScaling(V, middle, second_);
+    isoScaling(V, middle, third_);
+    isoScaling(V, middle, firstalt);
   }
 }

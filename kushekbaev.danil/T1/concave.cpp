@@ -1,13 +1,29 @@
 #include "concave.hpp"
-#include "base-types.hpp"
 #include <cmath>
 #include <stdexcept>
 #include <cctype>
+#include "base-types.hpp"
 
 namespace kushekbaev
 {
-  Concave::Concave(point_t first, point_t second, point_t third, point_t final)
-  : first_(first), second_(second), third_(third), final_(final) {}
+  Concave::Concave(point_t first,
+    point_t second,
+    point_t third,
+    point_t final):
+    first_(first),
+    second_(second),
+    third_(third),
+    final_(final)
+  {
+    if (!kushekbaev::isTriangle(first_, second_, third_))
+    {
+      throw std::invalid_argument("First three points doesnt make a triangle\n");
+    }
+    if (!kushekbaev::isPointInsideTriangle(first_, second_, third_, final_))
+    {
+      throw std::invalid_argument("Final point isnt in triangle\n");
+    }
+  }
 
   double Concave::getArea() const
   {
@@ -37,29 +53,21 @@ namespace kushekbaev
 
   void Concave::move(point_t Z)
   {
-    point_t middle = this->getFrameRect().pos;
+    point_t middle = getFrameRect().pos;
     double moveX = Z.x - middle.x;
     double moveY = Z.y - middle.y;
-    first_.x += moveX;
-    first_.y += moveY;
-    second_.x += moveX;
-    second_.y += moveY;
-    third_.x += moveX;
-    third_.y += moveY;
-    final_.x += moveX;
-    final_.y += moveY;
+    moveDelta(moveX, moveY, first_);
+    moveDelta(moveX, moveY, second_);
+    moveDelta(moveX, moveY, third_);
+    moveDelta(moveX, moveY, final_);
   }
 
   void Concave::move(double dx, double dy)
   {
-    first_.x += dx;
-    first_.y += dy;
-    second_.x += dx;
-    second_.y += dy;
-    third_.x += dx;
-    third_.y += dy;
-    final_.x += dx;
-    final_.y += dy;
+    moveDelta(dx, dy, first_);
+    moveDelta(dx, dy, second_);
+    moveDelta(dx, dy, third_);
+    moveDelta(dx, dy, final_);
   }
 
   void Concave::scale(double V)
@@ -68,14 +76,10 @@ namespace kushekbaev
     {
       throw std::invalid_argument("Scale coefficient should be greater than zero\n");
     }
-    point_t middle = this->getFrameRect().pos;
-    first_.x = middle.x + (first_.x - middle.x) * V;
-    first_.y = middle.y + (first_.y - middle.y) * V;
-    second_.x = middle.x + (second_.x - middle.x) * V;
-    second_.y = middle.y + (second_.y - middle.y) * V;
-    third_.x = middle.x + (third_.x - middle.x) * V;
-    third_.y = middle.y + (third_.y - middle.y) * V;
-    final_.x = middle.x + (final_.x - middle.x) * V;
-    final_.y = middle.y + (final_.y - middle.y) * V;
+    point_t middle = getFrameRect().pos;
+    isoScaling(V, middle, first_);
+    isoScaling(V, middle, second_);
+    isoScaling(V, middle, third_);
+    isoScaling(V, middle, final_);
   }
 }
