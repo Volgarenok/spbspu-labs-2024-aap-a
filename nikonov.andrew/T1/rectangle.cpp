@@ -7,8 +7,7 @@ nikonov::Rectangle::Rectangle(point_t lbp, point_t rtp):
 {}
 double nikonov::Rectangle::getArea() const
 {
-  rectangle_t tempRect = getFrameRect();
-  return (tempRect.height * tempRect.width);
+  return ((rtp_.x - lbp_.x) * (rtp_.y - lbp_.y));
 }
 nikonov::rectangle_t nikonov::Rectangle::getFrameRect() const
 {

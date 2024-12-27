@@ -4,7 +4,7 @@
 #include "shape.hpp"
 namespace nikonov
 {
-  class Rectangle: public Shape
+  class Rectangle final: public Shape
   {
   public:
     Rectangle(point_t lbp, point_t rtp);
@@ -14,7 +14,8 @@ namespace nikonov
     void move(double x, double y) override;
     void scale(double k) override;
   private:
-    point_t lbp_, rtp_;
+    point_t lbp_;
+    point_t rtp_;
   };
 }
 #endif

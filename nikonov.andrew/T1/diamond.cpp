@@ -1,15 +1,14 @@
 #include "diamond.hpp"
 #include <iostream>
 #include "base-types.hpp"
-nikonov::Diamond::Diamond(point_t topP, point_t midP, point_t rightP):
+nikonov::Diamond::Diamond(const point_t& topP, const point_t& midP, const point_t& rightP):
   topP_(topP),
   rightP_(rightP),
   midP_(midP)
 {}
 double nikonov::Diamond::getArea() const
 {
-  rectangle_t tempRect = getFrameRect();
-  return (tempRect.height * tempRect.width) / 2;
+  return ((topP_.y - 2 * midP_.y - topP_.y) * (rightP_.x - 2 * midP_.x - rightP_.x)) / 2;
 }
 nikonov::rectangle_t nikonov::Diamond::getFrameRect() const
 {

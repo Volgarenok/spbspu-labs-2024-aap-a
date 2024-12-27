@@ -1,6 +1,10 @@
 #include "triangle.hpp"
 #include <iostream>
 #include "base-types.hpp"
+nikonov::point_t getCenterOfGravity(const nikonov::point_t &A, const nikonov::point_t &B, const nikonov::point_t &C)
+{
+  return nikonov::point_t({ (A.x + B.x + C.x) / 3, ((A.y + B.y + C.y) / 3) });
+}
 nikonov::Triangle::Triangle(point_t A, point_t B, point_t C):
   A_(A),
   B_(B),
@@ -10,10 +14,6 @@ double nikonov::Triangle::getArea() const
 {
   rectangle_t tempRect = getFrameRect();
   return (tempRect.height * tempRect.width) / 2;
-}
-nikonov::point_t nikonov::Triangle::getCenterOfGravity() const
-{
-  return point_t((A_.x + B_.x + C_.x) / 3, ((A_.y + B_.y + C_.y) / 3));
 }
 nikonov::rectangle_t nikonov::Triangle::getFrameRect() const
 {
@@ -29,7 +29,7 @@ nikonov::rectangle_t nikonov::Triangle::getFrameRect() const
 }
 void nikonov::Triangle::move(point_t newPos)
 {
-  point_t center = getCenterOfGravity();
+  point_t center = getCenterOfGravity(A_, B_, C_);
   double diffX = newPos.x - center.x;
   double diffY = newPos.y - center.y;
   move(diffX, diffY);
@@ -50,7 +50,7 @@ void nikonov::Triangle::scale(double k)
     std::cerr << "Scale denied: k must be more than zero\n";
     return;
   }
-  point_t center = getCenterOfGravity();
+  point_t center = getCenterOfGravity(A_, B_, C_);
   A_.x = center.x + (A_.x - center.x) * k;
   A_.y = center.y + (A_.y - center.y) * k;
   B_.x = center.x + (B_.x - center.x) * k;

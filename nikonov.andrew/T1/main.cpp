@@ -11,7 +11,7 @@ int main()
   size_t cnt = 0;
   size_t noncorrect = 0;
   nikonov::fillShapeCollection(std::cin, shapeCollection, cnt, noncorrect);
-  if (nikonov::processCollection(shapeCollection, cnt))
+  if (nikonov::processCollection(std::cin, shapeCollection, cnt))
   {
     return 1;
   }

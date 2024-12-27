@@ -4,10 +4,10 @@
 #include "shape.hpp"
 namespace nikonov
 {
-  class Diamond: public Shape
+  class Diamond final: public Shape
   {
   public:
-    Diamond(point_t topP, point_t midP, point_t rightP);
+    Diamond(const point_t& topP, const point_t& midP, const point_t& rightP);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t a) override;
@@ -16,7 +16,6 @@ namespace nikonov
   private:
     point_t topP_;
     point_t rightP_;
-    point_t leftP_;
     point_t midP_;
   };
 }

@@ -8,11 +8,11 @@
 #include "additional-utilities.hpp"
 #include "diamond.hpp"
 #include "triangle.hpp"
-namespace nikonov
+namespace 
 {
-  point_t findTop(point_t p1, point_t p2, point_t p3);
-  point_t findMid(point_t p1, point_t p2, point_t p3, point_t topP);
-  bool isEqualPoint(const point_t &p1, const point_t &p2);
+  nikonov::point_t findTop(nikonov::point_t p1, nikonov::point_t p2, nikonov::point_t p3);
+  nikonov::point_t findMid(nikonov::point_t p1, nikonov::point_t p2, nikonov::point_t p3, nikonov::point_t topP);
+  bool isEqualPoint(const nikonov::point_t &p1, const nikonov::point_t &p2);
 }
 nikonov::Shape *nikonov::make_shape(std::string name, double nums[])
 {
@@ -54,25 +54,25 @@ nikonov::Diamond *nikonov::make_diamond(double nums[])
   point_t midP(0, 0);
   try
   {
-    topP = nikonov::findTop(p1, p2, p3);
+    topP = findTop(p1, p2, p3);
   }
-  catch (const std::exception &)
+  catch (const std::exception &e)
   {
     return nullptr;
   }
   try
   {
-    midP = nikonov::findMid(p1, p2, p3, topP);
+    midP = findMid(p1, p2, p3, topP);
   }
-  catch (const std::exception &)
+  catch (const std::exception &e)
   {
     return nullptr;
   }
-  if (!nikonov::isEqualPoint(p1, topP) && !nikonov::isEqualPoint(p1, midP))
+  if (!isEqualPoint(p1, topP) && !isEqualPoint(p1, midP))
   {
     edgeP = p1;
   }
-  else if (!nikonov::isEqualPoint(p2, topP) && !nikonov::isEqualPoint(p2, midP))
+  else if (!isEqualPoint(p2, topP) && !isEqualPoint(p2, midP))
   {
     edgeP = p2;
   }
@@ -107,45 +107,48 @@ nikonov::Triangle *nikonov::make_triangle(double nums[])
   return result;
 }
 
-nikonov::point_t nikonov::findTop(point_t p1, point_t p2, point_t p3)
+namespace 
 {
-  if (p1.y > p2.y && p1.y > p3.y)
+  nikonov::point_t findTop(nikonov::point_t p1, nikonov::point_t p2, nikonov::point_t p3)
   {
-    return p1;
+    if (p1.y > p2.y && p1.y > p3.y)
+    {
+      return p1;
+    }
+    else if (p2.y > p1.y && p2.y > p3.y)
+    {
+      return p2;
+    }
+    else if (p3.y > p1.y && p3.y > p2.y)
+    {
+      return p3;
+    }
+    else
+    {
+      throw std::logic_error("non-correct parameters\n");
+    }
   }
-  else if (p2.y > p1.y && p2.y > p3.y)
+  nikonov::point_t findMid(nikonov::point_t p1, nikonov::point_t p2, nikonov::point_t p3, nikonov::point_t topP)
   {
-    return p2;
+    if (p1.y < topP.y && p1.x == topP.x)
+    {
+      return p1;
+    }
+    else if (p2.y < topP.y && p2.x == topP.x)
+    {
+      return p2;
+    }
+    else if (p3.y < topP.y && p3.x == topP.x)
+    {
+      return p3;
+    }
+    else
+    {
+      throw std::exception();
+    }
   }
-  else if (p3.y > p1.y && p3.y > p2.y)
+  bool isEqualPoint(const nikonov::point_t &p1, const nikonov::point_t &p2)
   {
-    return p3;
+    return (p1.x == p2.x) && (p1.y == p2.y);
   }
-  else
-  {
-    throw std::exception();
-  }
-}
-nikonov::point_t nikonov::findMid(point_t p1, point_t p2, point_t p3, point_t topP)
-{
-  if (p1.y < topP.y && p1.x == topP.x)
-  {
-    return p1;
-  }
-  else if (p2.y < topP.y && p2.x == topP.x)
-  {
-    return p2;
-  }
-  else if (p3.y < topP.y && p3.x == topP.x)
-  {
-    return p3;
-  }
-  else
-  {
-    throw std::exception();
-  }
-}
-bool nikonov::isEqualPoint(const point_t &p1, const point_t &p2)
-{
-  return (p1.x == p2.x) && (p1.y == p2.y);
 }
