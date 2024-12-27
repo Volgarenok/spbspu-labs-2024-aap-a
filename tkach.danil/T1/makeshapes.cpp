@@ -1,4 +1,5 @@
 #include "makeshapes.hpp"
+#include <string>
 
 tkach::Rectangle* tkach::make_rectangle(std::istream& in)
 {
@@ -27,3 +28,4 @@ tkach::Regular* tkach::make_regular(std::istream& in)
   tkach::Regular* regular = new tkach::Regular({point1.x, point1.y}, {point2.x, point2.y}, {point3.x, point3.y});
   return regular;
 }
+

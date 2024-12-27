@@ -15,8 +15,9 @@ int main()
   size_t counter_of_shapes = 0;
   double scale_coef = 0.0;
   tkach::point_t scale_point;
-  while(std::cin >> shape_name)
+  while(true)
   {
+    std::cin >> shape_name;
     if (std::cin.eof())
     {
       deleteShapes(shapes_array, counter_of_shapes);
