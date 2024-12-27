@@ -5,18 +5,19 @@
 
 namespace demehin
 {
-  class Polygon: public Shape
+  class Polygon final: public Shape
   {
   public:
-    Polygon(size_t vrtx_cnt, point_t* vertex);
+    Polygon(size_t vrtx_cnt, const point_t* vertex);
     ~Polygon();
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t s) override;
     void move(double x, double y) override;
     void scale(double k) override;
+    void addDifference(double dif_x, double dif_y);
   private:
-    size_t vrtx_cnt_ = 0;
+    size_t vrtx_cnt_;
     point_t* vertex_;
   };
 }

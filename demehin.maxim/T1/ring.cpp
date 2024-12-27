@@ -1,24 +1,31 @@
 #include "ring.hpp"
+#include <stdexcept>
 
-demehin::Ring::Ring(double cent_x, double cent_y, double out_r, double in_r):
-  in_r_(in_r), out_r_(out_r)
+demehin::Ring::Ring(point_t center, double out_r, double in_r):
+  center_(center),
+  in_r_(in_r),
+  out_r_(out_r)
 {
-  center_.x = cent_x;
-  center_.y = cent_y;
+  if (out_r <= in_r)
+  {
+    throw std::logic_error("incorrect shape");
+  }
 }
 
 double demehin::Ring::getArea() const
 {
-  const double PI = 3.1415;
+  constexpr double PI = 3.1415;
   return PI * (out_r_ * out_r_ - in_r_ * in_r_);
 }
 
 demehin::rectangle_t demehin::Ring::getFrameRect() const
 {
+  double width = 2 * out_r_;
+  double height = 2 * out_r_;
   rectangle_t fr_rect;
   fr_rect.pos = center_;
-  fr_rect.width = 2 * out_r_;
-  fr_rect.height = 2 * out_r_;
+  fr_rect.width = width;
+  fr_rect.height = height;
   return fr_rect;
 }
 

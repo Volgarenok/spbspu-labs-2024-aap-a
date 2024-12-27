@@ -6,8 +6,9 @@ demehin::Polygon::~Polygon()
   delete[] vertex_;
 }
 
-demehin::Polygon::Polygon(size_t vrtx_cnt, point_t* vertex):
-  vrtx_cnt_(vrtx_cnt), vertex_(new point_t[vrtx_cnt])
+demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
+  vrtx_cnt_(vrtx_cnt),
+  vertex_(new point_t[vrtx_cnt])
 {
   for (size_t i = 0; i < vrtx_cnt; i++)
   {
@@ -39,12 +40,18 @@ demehin::rectangle_t demehin::Polygon::getFrameRect() const
     max_y = (max_y > vertex_[i].y) ? max_y : vertex_[i].y;
   }
 
-  rectangle_t fr_rect;
-  fr_rect.height = max_y - min_y;
-  fr_rect.width = max_x - min_x;
-  fr_rect.pos.x = (max_x + min_x) / 2;
-  fr_rect.pos.y = (max_y + min_y) / 2;
 
+  double fr_rect_h = max_y - min_y;
+  double fr_rect_w = max_x - min_x;
+  double pos_x = (max_x + min_x) / 2;
+  double pos_y = (max_y + min_y) / 2;
+  point_t fr_rect_pos;
+  fr_rect_pos.x = pos_x;
+  fr_rect_pos.y = pos_y;
+  rectangle_t fr_rect;
+  fr_rect.height = fr_rect_h;
+  fr_rect.width = fr_rect_w;
+  fr_rect.pos = fr_rect_pos;
   return fr_rect;
 }
 
@@ -64,12 +71,7 @@ void demehin::Polygon::move(point_t s)
   double difference_x = s.x - plg_centre.x;
   double difference_y = s.y - plg_centre.y;
 
-  for (size_t i = 0; i < vrtx_cnt_; i++)
-  {
-    vertex_[i].x += difference_x;
-    vertex_[i].y += difference_y;
-  }
-
+  this->move(difference_x, difference_y);
 }
 
 void demehin::Polygon::move(double x, double y)

@@ -1,12 +1,15 @@
 #include "rectangle.hpp"
 #include <cmath>
+#include <stdexcept>
 
-demehin::Rectangle::Rectangle(double lbx, double lby, double rtx, double rty)
+demehin::Rectangle::Rectangle(point_t left_bot, point_t right_top):
+  lb_(left_bot),
+  rt_(right_top)
 {
-  lb_.x = lbx;
-  lb_.y = lby;
-  rt_.x = rtx;
-  rt_.y = rty;
+  if (rt_.x <= lb_.x || rt_.y <= lb_.y)
+  {
+    throw std::logic_error("incorrect shape");
+  }
 }
 
 double demehin::Rectangle::getArea() const
@@ -20,9 +23,11 @@ demehin::rectangle_t demehin::Rectangle::getFrameRect() const
 {
   double width = rt_.x - lb_.x;
   double height = rt_.y - lb_.y;
+  double pos_x = lb_.x + width / 2.0;
+  double pos_y = lb_.y + height / 2.0;
   rectangle_t frame_rect;
-  frame_rect.pos.x = lb_.x + width / 2.0;
-  frame_rect.pos.y = lb_.y + height / 2.0;
+  frame_rect.pos.x = pos_x;
+  frame_rect.pos.y = pos_y;
   frame_rect.height = height;
   frame_rect.width = width;
   return frame_rect;
@@ -31,11 +36,13 @@ demehin::rectangle_t demehin::Rectangle::getFrameRect() const
 void demehin::Rectangle::move(point_t s)
 {
 
-  point_t centre;
   double width = rt_.x - lb_.x;
   double height = rt_.y - lb_.y;
-  centre.x = rt_.x - width / 2;
-  centre.y = rt_.y - height / 2;
+  double cent_x = rt_.x - width / 2;
+  double cent_y = rt_.y - height / 2;
+  point_t centre;
+  centre.x = cent_x;
+  centre.y = cent_y;
   double difference_x = s.x - centre.x;
   double difference_y = s.y - centre.y;
   rt_.x += difference_x;

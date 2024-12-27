@@ -148,9 +148,15 @@ int main()
         continue;
       }
 
+      demehin::point_t left_bot;
+      left_bot.x = lbx;
+      left_bot.y = lby;
+      demehin::point_t right_top;
+      right_top.x = rtx;
+      right_top.y = rty;
       try
       {
-        shapes[shp_cnt++] = new demehin::Rectangle(lbx, lby, rtx, rty);
+        shapes[shp_cnt++] = new demehin::Rectangle(left_bot, right_top);
       }
       catch (std::bad_alloc& e)
       {
@@ -170,10 +176,12 @@ int main()
         is_incorrect_shp = true;
         continue;
       }
-
+      demehin::point_t center;
+      center.x = cent_x;
+      center.y = cent_y;
       try
       {
-        shapes[shp_cnt++] = new demehin::Ring(cent_x, cent_y, out_r, in_r);
+        shapes[shp_cnt++] = new demehin::Ring(center, out_r, in_r);
       }
       catch (std::bad_alloc& e)
       {

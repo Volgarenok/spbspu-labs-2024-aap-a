@@ -4,10 +4,10 @@
 
 namespace demehin
 {
-  class Ring: public Shape
+  class Ring final: public Shape
   {
   public:
-    Ring(double cent_x, double cent_y, double out_r, double in_r);
+    Ring(point_t center, double out_r, double in_r);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t s) override;

@@ -4,10 +4,10 @@
 
 namespace demehin
 {
-  class Rectangle: public Shape
+  class Rectangle final: public Shape
   {
   public:
-    Rectangle(double lbx, double lby, double rtx, double rty);
+    Rectangle(point_t left_bot, point_t right_top);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t s) override;
