@@ -5,7 +5,7 @@
 
 namespace tkach
 {
-  class Rectangle: public Shape
+  class Rectangle final: public Shape
   {
   public:
     Rectangle(const point_t& left_bot_point, const point_t& right_top_point);
@@ -13,7 +13,7 @@ namespace tkach
     rectangle_t getFrameRect() const override;
     void move(double add_to_x, double add_to_y) override;
     void move(const point_t& point_to_move) override;
-    void scale(double multiplier) override;
+    void scaleShape(double multiplier) override;
   private:
     point_t left_bot_point_;
     point_t right_top_point_;

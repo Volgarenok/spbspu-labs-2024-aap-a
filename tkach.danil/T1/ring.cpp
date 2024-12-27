@@ -31,14 +31,13 @@ tkach::rectangle_t tkach::Ring::getFrameRect() const
 }
 void tkach::Ring::move(const double add_to_x, const double add_to_y)
 {
-  center_.x += add_to_x;
-  center_.y += add_to_y;
+  addToPoint(center_, add_to_x, add_to_y);
 }
 void tkach::Ring::move(const point_t& point_to_move)
 {
   center_ = point_to_move;
 }
-void tkach::Ring::scale(const double multiplier)
+void tkach::Ring::scaleShape(const double multiplier)
 {
   outer_radius_ *= multiplier;
   inner_radius_ *= multiplier;

@@ -1,5 +1,16 @@
 #include "figureactions.hpp"
 
+namespace
+{
+  void setFrameRectPoints(const tkach::rectangle_t& frame_rect, tkach::point_t& left_bot_point, tkach::point_t& right_top_point)
+  {
+    left_bot_point.x = frame_rect.pos.x - frame_rect.width / 2.0;
+    left_bot_point.y = frame_rect.pos.y - frame_rect.height / 2.0;
+    right_top_point.x = frame_rect.pos.x + frame_rect.width / 2.0;
+    right_top_point.y = frame_rect.pos.y + frame_rect.height / 2.0;
+  }
+}
+
 void tkach::deleteShapes(tkach::Shape** shape_array, const size_t counter_of_shapes)
 {
   for (size_t i = 0; i < counter_of_shapes; ++i)
@@ -18,16 +29,16 @@ double tkach::getTotalArea(const tkach::Shape* const* const shape_array, const s
   return sum;
 }
 
-void tkach::printCoordinatesOfFrameRect(std::ostream& out, const tkach::Shape* const* const shape_array, const size_t counter_of_shapes)
+void tkach::printCoordinatesOfAllFrameRects(std::ostream& out, const tkach::Shape* const* const shape_array, const size_t counter_of_shapes)
 {
-  for (size_t i = 0; i < counter_of_shapes; ++i)
+  tkach::rectangle_t frame_rect = shape_array[0]->getFrameRect();
+  tkach::point_t left_bot_point, right_top_point;
+  setFrameRectPoints(frame_rect, left_bot_point, right_top_point);
+  out << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
+  for (size_t i = 1; i < counter_of_shapes; ++i)
   {
-    tkach::rectangle_t frame_rect = shape_array[i]->getFrameRect();
-    tkach::point_t left_bot_point, right_top_point;
-    left_bot_point.x = frame_rect.pos.x - frame_rect.width / 2.0;
-    left_bot_point.y = frame_rect.pos.y - frame_rect.height / 2.0;
-    right_top_point.x = frame_rect.pos.x + frame_rect.width / 2.0;
-    right_top_point.y = frame_rect.pos.y + frame_rect.height / 2.0;
+    frame_rect = shape_array[i]->getFrameRect();
+    setFrameRectPoints(frame_rect, left_bot_point, right_top_point);
     out << " " << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
   }
 }

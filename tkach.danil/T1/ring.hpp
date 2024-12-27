@@ -5,7 +5,7 @@
 
 namespace tkach
 {
-  class Ring: public Shape
+  class Ring final: public Shape
   {
   public:
     Ring(const point_t& center, double outer_radius, double inner_radius);
@@ -13,7 +13,7 @@ namespace tkach
     rectangle_t getFrameRect() const;
     void move(double add_to_x, double add_to_y) override;
     void move(const point_t& point_to_move) override;
-    void scale(double multiplier) override;
+    void scaleShape(double multiplier) override;
   private:
     point_t center_;
     double outer_radius_;

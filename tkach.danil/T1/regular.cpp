@@ -6,6 +6,7 @@ double tkach::Regular::getDist(const point_t& point1, const point_t& point2) con
 {
   return std::sqrt((point1.x - point2.x) * (point1.x - point2.x) + (point1.y - point2.y) * (point1.y - point2.y));
 }
+
 bool tkach::Regular::isEqualPoints(const point_t& point1, const point_t& point2) const
 {
   if (point1.x == point2.x && point1.y == point2.y)
@@ -14,6 +15,7 @@ bool tkach::Regular::isEqualPoints(const point_t& point1, const point_t& point2)
   }
   return false;
 }
+
 size_t tkach::Regular::getSideAmount() const
 {
   const double res = std::acos(-1.0) / (std::acos(second_side_in_r_ / first_side_out_r_));
@@ -100,12 +102,9 @@ tkach::rectangle_t tkach::Regular::getFrameRect() const
 
 void tkach::Regular::move(const double add_to_x, const double add_to_y)
 {
-  first_point_.x += add_to_x;
-  first_point_.y += add_to_y;
-  second_point_.x += add_to_x;
-  second_point_.y += add_to_y;
-  third_point_.x += add_to_x;
-  third_point_.y += add_to_y;
+  addToPoint(first_point_, add_to_x, add_to_y);
+  addToPoint(second_point_, add_to_x, add_to_y);
+  addToPoint(third_point_, add_to_x, add_to_y);
 }
 void tkach::Regular::move(const point_t& point_to_move)
 {
@@ -115,7 +114,7 @@ void tkach::Regular::move(const point_t& point_to_move)
   third_point_.y += point_to_move.y - first_point_.y;
   first_point_ = point_to_move;
 }
-void tkach::Regular::scale(const double multiplier)
+void tkach::Regular::scaleShape(const double multiplier)
 {
   second_point_.x = first_point_.x + (second_point_.x - first_point_.x) * multiplier;
   second_point_.y = first_point_.y + (second_point_.y - first_point_.y) * multiplier;

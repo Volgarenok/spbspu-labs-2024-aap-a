@@ -6,7 +6,7 @@
 
 namespace tkach
 {
-  class Regular: public Shape
+  class Regular final: public Shape
   {
   public:
     Regular(const point_t& first_point, const point_t& second_point, const point_t& third_point);
@@ -14,7 +14,7 @@ namespace tkach
     rectangle_t getFrameRect() const;
     void move(double add_to_x, double add_to_y) override;
     void move(const point_t& point_to_move) override;
-    void scale(double multiplier) override;
+    void scaleShape(double multiplier) override;
   private:
     point_t first_point_;
     point_t second_point_;
