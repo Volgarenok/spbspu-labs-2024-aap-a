@@ -4,7 +4,7 @@
 gavrilova::Ellipse::Ellipse(point_t center, double radiusX, double radiusY) :
   center_(center),
   radiusX_(radiusX),
-  radiusY_(radiusY) 
+  radiusY_(radiusY)
 {
   if (radiusX <= 0 || radiusY <= 0) {
     throw std::logic_error("Invalid radiuses for ellipse");
