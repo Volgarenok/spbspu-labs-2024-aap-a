@@ -69,6 +69,7 @@ namespace
     constexpr size_t max_size = 100;
     size_t cord_cnt = 0;
     demehin::point_t* vrt = inputPolygonCords(in, max_size, cord_cnt);
+    delete[] vrt;
     return new demehin::Polygon(cord_cnt, vrt);
   }
 }

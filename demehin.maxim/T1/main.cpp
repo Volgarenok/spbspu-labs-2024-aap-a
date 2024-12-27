@@ -149,6 +149,7 @@ int main()
     }
     catch (std::logic_error& e)
     {
+      delete shapes[shp_cnt--];
       is_incorrect_shp = true;
     }
 
