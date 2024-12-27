@@ -9,15 +9,14 @@
 
 int main()
 {
-  tkach::Shape* shapes_array[10000] = {0};
+  tkach::Shape* shapes_array[10000] = {};
   std::string shape_name = "";
   bool incorrect_shape = false;
   size_t counter_of_shapes = 0;
   double scale_coef = 0.0;
   tkach::point_t scale_point;
-  while(true)
+  while(std::cin >> shape_name)
   {
-    std::cin >> shape_name;
     if (std::cin.eof())
     {
       deleteShapes(shapes_array, counter_of_shapes);
