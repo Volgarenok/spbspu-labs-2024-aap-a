@@ -4,11 +4,11 @@
 #include <iomanip>
 #include "shape.hpp"
 #include "fabric.hpp"
-void nikonov::fillShapeCollection(Shape* collection[], size_t& cnt, size_t& noncorrect)
+void nikonov::fillShapeCollection(std::istream &input, Shape *collection[], size_t &cnt, size_t &noncorrect)
 {
   std::string name = "";
   size_t n = 0;
-  while (std::cin >> name && name != "SCALE")
+  while (input >> name && name != "SCALE")
   {
     if (name[0] == '\n')
     {
@@ -24,38 +24,38 @@ void nikonov::fillShapeCollection(Shape* collection[], size_t& cnt, size_t& nonc
     }
     else
     {
-      std::cin.clear();
-      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      input.clear();
+      input.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       continue;
     }
-    double * nums = nullptr;
+    double *nums = nullptr;
     try
     {
-      nums = new double [n];
+      nums = new double[n];
     }
-    catch(const std::bad_alloc& e)
+    catch (const std::bad_alloc &e)
     {
       std::cerr << e.what() << '\n';
       destoy(collection, cnt);
     }
     for (size_t i = 0; i < n; ++i)
     {
-      std::cin >> nums[i];
+      input >> nums[i];
     }
-    if (!std::cin)
+    if (!input)
     {
       delete[] nums;
       ++noncorrect;
-      std::cin.clear();
-      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      input.clear();
+      input.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       continue;
     }
-    nikonov::Shape* newElem = nullptr;
+    nikonov::Shape *newElem = nullptr;
     try
     {
       newElem = nikonov::make_shape(name, nums);
     }
-    catch(const std::bad_alloc& e)
+    catch (const std::bad_alloc &e)
     {
       std::cerr << e.what() << '\n';
       destoy(collection, cnt);
@@ -72,7 +72,7 @@ void nikonov::fillShapeCollection(Shape* collection[], size_t& cnt, size_t& nonc
     delete[] nums;
   }
 }
-void nikonov::destoy(Shape* collection[], size_t& cnt)
+void nikonov::destoy(Shape *collection[], size_t &cnt)
 {
   for (size_t i = 0; i < cnt; ++i)
   {
@@ -80,33 +80,36 @@ void nikonov::destoy(Shape* collection[], size_t& cnt)
   }
   cnt = 0;
 }
-void nikonov::ispScale(Shape* shp, double  x, double  y, double  k)
+void nikonov::ispScale(Shape *shp, double x, double y, double k)
 {
   point_t S(x, y);
   point_t origCenter = shp->getFrameRect().pos;
   shp->move(S);
   point_t newCenter = shp->getFrameRect().pos;
-  double  diffX = newCenter.x - origCenter.x;
-  double  diffY = newCenter.y - origCenter.y;
+  double diffX = newCenter.x - origCenter.x;
+  double diffY = newCenter.y - origCenter.y;
   shp->scale(k);
   shp->move(diffX * k * (-1), diffY * k * (-1));
 }
-bool nikonov::processCollection(Shape* collection[], size_t cnt)
+bool nikonov::processCollection(Shape *collection[], size_t cnt)
 {
   if (cnt == 0)
   {
     std::cerr << "ERROR: nothing to scale\n";
     return 1;
   }
-  double  x = 0.0, y = 0.0;
-  double  k = 0.0;
+  double x = 0.0;
+  double y = 0.0;
+  double k = 0.0;
   std::cin >> x >> y >> k;
-  if ((!std::cin && !std::cin.eof()) || k <= 0) {
+  if ((!std::cin && !std::cin.eof()) || k <= 0)
+  {
     std::cerr << "ERROR: noncorrect scale parameters\n";
     nikonov::destoy(collection, cnt);
     return 1;
   }
-  double  s1 = 0.0, s2 = 0.0;
+  double s1 = 0.0;
+  double s2 = 0.0;
   std::cout << std::fixed << std::setprecision(1);
   for (size_t i = 0; i < cnt; ++i)
   {

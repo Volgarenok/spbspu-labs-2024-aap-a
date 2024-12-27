@@ -5,13 +5,15 @@ namespace nikonov
   struct point_t
   {
     point_t();
-    point_t(double  x, double  y);
-    double  x, y;
+    point_t(double x, double y);
+    double x;
+    double y;
   };
   struct rectangle_t
   {
     rectangle_t(point_t lbp, point_t rtp);
-    double  width, height;
+    double width;
+    double height;
     point_t pos;
   };
 }

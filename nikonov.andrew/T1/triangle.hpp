@@ -7,12 +7,12 @@ namespace nikonov
   {
   public:
     Triangle(point_t leftP, point_t topP, point_t rightP);
-    double  getArea() const override;
+    double getArea() const override;
     point_t getCenterOfGravity() const;
     rectangle_t getFrameRect() const override;
     void move(point_t a) override;
-    void move(double  x, double  y) override;
-    void scale(double  k) override;
+    void move(double x, double y) override;
+    void scale(double k) override;
   private:
     point_t A_, B_, C_;
   };

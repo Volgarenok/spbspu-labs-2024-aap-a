@@ -6,7 +6,7 @@ nikonov::Diamond::Diamond(point_t topP, point_t midP, point_t rightP):
   rightP_(rightP),
   midP_(midP)
 {}
-double  nikonov::Diamond::getArea() const
+double nikonov::Diamond::getArea() const
 {
   rectangle_t tempRect = getFrameRect();
   return (tempRect.height * tempRect.width) / 2;
@@ -20,11 +20,11 @@ nikonov::rectangle_t nikonov::Diamond::getFrameRect() const
 void nikonov::Diamond::move(point_t newPos)
 {
   rectangle_t crntRect = getFrameRect();
-  double  diffX = newPos.x - crntRect.pos.x;
-  double  diffY = newPos.y - crntRect.pos.y;
+  double diffX = newPos.x - crntRect.pos.x;
+  double diffY = newPos.y - crntRect.pos.y;
   move(diffX, diffY);
 }
-void nikonov::Diamond::move(double  x, double  y)
+void nikonov::Diamond::move(double x, double y)
 {
   topP_.x += x;
   midP_.x += x;
@@ -33,7 +33,7 @@ void nikonov::Diamond::move(double  x, double  y)
   midP_.y += y;
   rightP_.y += y;
 }
-void nikonov::Diamond::scale(double  k)
+void nikonov::Diamond::scale(double k)
 {
   if (k <= 0)
   {
@@ -43,10 +43,10 @@ void nikonov::Diamond::scale(double  k)
   rectangle_t crntRect = getFrameRect();
   crntRect.width *= k;
   crntRect.height *= k;
-  double  newTopX = crntRect.pos.x + crntRect.width / 2;
-  double  newTopY = crntRect.pos.y + crntRect.height / 2;
-  double  newRightX = crntRect.pos.x + crntRect.width / 2;
-  double  newRightY = crntRect.pos.y + crntRect.height / 2;
+  double newTopX = crntRect.pos.x + crntRect.width / 2;
+  double newTopY = crntRect.pos.y + crntRect.height / 2;
+  double newRightX = crntRect.pos.x + crntRect.width / 2;
+  double newRightY = crntRect.pos.y + crntRect.height / 2;
   topP_ = point_t(newTopX, newTopY);
   rightP_ = point_t(newRightX, newRightY);
 }

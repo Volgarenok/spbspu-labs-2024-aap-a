@@ -3,7 +3,7 @@ nikonov::point_t::point_t():
   x(0),
   y(0)
 {}
-nikonov::point_t::point_t(double  x, double  y):
+nikonov::point_t::point_t(double x, double  y):
   x(x),
   y(y)
 {}

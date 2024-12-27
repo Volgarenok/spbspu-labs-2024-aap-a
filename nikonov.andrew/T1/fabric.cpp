@@ -12,9 +12,9 @@ namespace nikonov
 {
   point_t findTop(point_t p1, point_t p2, point_t p3);
   point_t findMid(point_t p1, point_t p2, point_t p3, point_t topP);
-  bool isEqualPoint(const point_t& p1, const point_t& p2);
+  bool isEqualPoint(const point_t &p1, const point_t &p2);
 }
-nikonov::Shape* nikonov::make_shape(std::string name, double  nums[])
+nikonov::Shape *nikonov::make_shape(std::string name, double nums[])
 {
   if (name == "RECTANGLE")
   {
@@ -33,7 +33,7 @@ nikonov::Shape* nikonov::make_shape(std::string name, double  nums[])
     return nullptr;
   }
 }
-nikonov::Rectangle* nikonov::make_rectangle(double  nums[])
+nikonov::Rectangle *nikonov::make_rectangle(double nums[])
 {
   if (nums[0] >= nums[2] || nums[1] >= nums[3])
   {
@@ -41,10 +41,10 @@ nikonov::Rectangle* nikonov::make_rectangle(double  nums[])
   }
   point_t lbp(nums[0], nums[1]);
   point_t rtp(nums[2], nums[3]);
-  Rectangle* result = new Rectangle(lbp, rtp);
+  Rectangle *result = new Rectangle(lbp, rtp);
   return result;
 }
-nikonov::Diamond* nikonov::make_diamond(double  nums[])
+nikonov::Diamond *nikonov::make_diamond(double nums[])
 {
   point_t p1(nums[0], nums[1]);
   point_t p2(nums[2], nums[3]);
@@ -56,7 +56,7 @@ nikonov::Diamond* nikonov::make_diamond(double  nums[])
   {
     topP = nikonov::findTop(p1, p2, p3);
   }
-  catch (const std::exception&)
+  catch (const std::exception &)
   {
     return nullptr;
   }
@@ -64,7 +64,7 @@ nikonov::Diamond* nikonov::make_diamond(double  nums[])
   {
     midP = nikonov::findMid(p1, p2, p3, topP);
   }
-  catch (const std::exception&)
+  catch (const std::exception &)
   {
     return nullptr;
   }
@@ -88,14 +88,14 @@ nikonov::Diamond* nikonov::make_diamond(double  nums[])
   {
     return nullptr;
   }
-  Diamond* result = new Diamond(topP, midP, edgeP);
+  Diamond *result = new Diamond(topP, midP, edgeP);
   return result;
 }
-nikonov::Triangle* nikonov::make_triangle(double  nums[])
+nikonov::Triangle *nikonov::make_triangle(double nums[])
 {
-  double  AB = std::sqrt(std::pow(nums[2] - nums[0], 2) + std::pow(nums[3] - nums[1], 2));
-  double  BC = std::sqrt(std::pow(nums[4] - nums[2], 2) + std::pow(nums[5] - nums[3], 2));
-  double  CA = std::sqrt(std::pow(nums[4] - nums[0], 2) + std::pow(nums[5] - nums[1], 2));
+  double AB = std::sqrt(std::pow(nums[2] - nums[0], 2) + std::pow(nums[3] - nums[1], 2));
+  double BC = std::sqrt(std::pow(nums[4] - nums[2], 2) + std::pow(nums[5] - nums[3], 2));
+  double CA = std::sqrt(std::pow(nums[4] - nums[0], 2) + std::pow(nums[5] - nums[1], 2));
   if (!((AB + BC > CA) && (AB + CA > BC) && (CA + BC > AB)))
   {
     return nullptr;
@@ -103,7 +103,7 @@ nikonov::Triangle* nikonov::make_triangle(double  nums[])
   point_t A(nums[0], nums[1]);
   point_t B(nums[2], nums[3]);
   point_t C(nums[4], nums[5]);
-  Triangle* result = new Triangle(A, B, C);
+  Triangle *result = new Triangle(A, B, C);
   return result;
 }
 
@@ -145,7 +145,7 @@ nikonov::point_t nikonov::findMid(point_t p1, point_t p2, point_t p3, point_t to
     throw std::exception();
   }
 }
-bool nikonov::isEqualPoint(const point_t& p1, const point_t& p2)
+bool nikonov::isEqualPoint(const point_t &p1, const point_t &p2)
 {
   return (p1.x == p2.x) && (p1.y == p2.y);
 }
