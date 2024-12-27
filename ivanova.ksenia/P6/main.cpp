@@ -11,7 +11,6 @@ int main()
     delete[] string;
     return 1;
   }
-  char dest[3] = {};
   std::cout << std::boolalpha << ivanova::rightString(string) << "\n";
   delete[] string;
   return 0;
