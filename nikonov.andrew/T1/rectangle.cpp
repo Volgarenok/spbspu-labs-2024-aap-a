@@ -11,7 +11,10 @@ double nikonov::Rectangle::getArea() const
 }
 nikonov::rectangle_t nikonov::Rectangle::getFrameRect() const
 {
-  return rectangle_t(lbp_, rtp_);
+  double width = rtp_.x - lbp_.x;
+  double height = rtp_.y - lbp_.y;
+  point_t pos = point_t({ lbp_.x + (width / 2), lbp_.y + (height / 2) });
+  return rectangle_t({ width, height, pos });
 }
 void nikonov::Rectangle::move(point_t newPos)
 {
@@ -41,6 +44,6 @@ void nikonov::Rectangle::scale(double k)
   double newlbpY = crntRect.pos.y - crntRect.height / 2;
   double newrtpX = crntRect.pos.x + crntRect.width / 2;
   double newrtpY = crntRect.pos.y + crntRect.height / 2;
-  lbp_ = point_t(newlbpX, newlbpY);
-  rtp_ = point_t(newrtpX, newrtpY);
+  lbp_ = point_t({ newlbpX, newlbpY });
+  rtp_ = point_t({ newrtpX, newrtpY });
 }

@@ -25,7 +25,10 @@ nikonov::rectangle_t nikonov::Triangle::getFrameRect() const
   double minX = (C_.x < tempX ? C_.x : tempX);
   tempY = (A_.y < B_.y ? A_.y : B_.y);
   double minY = (C_.y < tempY ? C_.y : tempY);
-  return rectangle_t(point_t(minX, minY), point_t(maxX, maxY));
+  double width = maxX - minX;
+  double height = maxY - minY;
+  point_t pos = point_t({ minX + (width / 2), minY + (height / 2) });
+  return rectangle_t({ width, height, pos });
 }
 void nikonov::Triangle::move(point_t newPos)
 {

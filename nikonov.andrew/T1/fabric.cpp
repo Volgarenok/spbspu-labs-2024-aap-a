@@ -39,19 +39,19 @@ nikonov::Rectangle *nikonov::make_rectangle(double nums[])
   {
     return nullptr;
   }
-  point_t lbp(nums[0], nums[1]);
-  point_t rtp(nums[2], nums[3]);
+  point_t lbp({ nums[0], nums[1] });
+  point_t rtp({ nums[2], nums[3] });
   Rectangle *result = new Rectangle(lbp, rtp);
   return result;
 }
 nikonov::Diamond *nikonov::make_diamond(double nums[])
 {
-  point_t p1(nums[0], nums[1]);
-  point_t p2(nums[2], nums[3]);
-  point_t p3(nums[4], nums[5]);
-  point_t topP(0, 0);
-  point_t edgeP(0, 0);
-  point_t midP(0, 0);
+  point_t p1({ nums[0], nums[1] });
+  point_t p2({ nums[2], nums[3] });
+  point_t p3({ nums[4], nums[5] });
+  point_t topP({ 0, 0 });
+  point_t edgeP({ 0, 0 });
+  point_t midP({ 0, 0 });
   try
   {
     topP = findTop(p1, p2, p3);
@@ -100,9 +100,9 @@ nikonov::Triangle *nikonov::make_triangle(double nums[])
   {
     return nullptr;
   }
-  point_t A(nums[0], nums[1]);
-  point_t B(nums[2], nums[3]);
-  point_t C(nums[4], nums[5]);
+  point_t A({ nums[0], nums[1] });
+  point_t B({ nums[2], nums[3] });
+  point_t C({ nums[4], nums[5] });
   Triangle *result = new Triangle(A, B, C);
   return result;
 }

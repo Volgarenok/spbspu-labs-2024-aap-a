@@ -82,7 +82,7 @@ void nikonov::destoy(Shape *collection[], size_t &cnt)
 }
 void nikonov::ispScale(Shape *shp, double x, double y, double k)
 {
-  point_t S(x, y);
+  point_t S({ x, y });
   point_t origCenter = shp->getFrameRect().pos;
   shp->move(S);
   point_t newCenter = shp->getFrameRect().pos;

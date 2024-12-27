@@ -12,9 +12,12 @@ double nikonov::Diamond::getArea() const
 }
 nikonov::rectangle_t nikonov::Diamond::getFrameRect() const
 {
-  point_t rtp(rightP_.x, topP_.y);
-  point_t lbp(2 * midP_.x - rightP_.x, 2 * midP_.y - topP_.y);
-  return rectangle_t(lbp, rtp);
+  point_t rtp({ rightP_.x, topP_.y });
+  point_t lbp({ 2 * midP_.x - rightP_.x, 2 * midP_.y - topP_.y });
+  double width = rtp.x - lbp.x;
+  double height = rtp.y - lbp.y;
+  point_t pos = point_t({ lbp.x + (width / 2), lbp.y + (height / 2) });
+  return rectangle_t({ width, height, pos });
 }
 void nikonov::Diamond::move(point_t newPos)
 {
@@ -46,6 +49,6 @@ void nikonov::Diamond::scale(double k)
   double newTopY = crntRect.pos.y + crntRect.height / 2;
   double newRightX = crntRect.pos.x + crntRect.width / 2;
   double newRightY = crntRect.pos.y + crntRect.height / 2;
-  topP_ = point_t(newTopX, newTopY);
-  rightP_ = point_t(newRightX, newRightY);
+  topP_ = point_t({ newTopX, newTopY });
+  rightP_ = point_t({ newRightX, newRightY });
 }
