@@ -1,34 +1,59 @@
-#include "composite-shapes.hpp"
-#icnlude <stdexcept>
+#include "composite-shape.hpp"
+#include <stdexcept>
 
 namespace abramov
 {
-  double CompositeShapes::getArea(size_t id) const
+  CompositeShape::CompositeShape(const CompositeShape &comp_shp)
+  {
+    shapes_ = comp_shp.shapes_;
+    capacity_ = comp_shp.capacity_;
+    shapeptrs_ = nullptr;
+    shapeptrs_ = new Shape*[capacity_];
+    for (size_t i = 0; i < shapes_; ++i)
+    {
+      shapeptrs_[i] = comp_shp.shapeptrs_[i];
+    }
+  }
+
+  void CompositeShape::setArray(Shape **arr)
+  {
+    shapeptrs_ = arr;
+  }
+
+  CompositeShape::CompositeShape(CompositeShape &&comp_shp)
+  {
+    shapes_ = comp_shp.shapes_;
+    capacity_ = comp_shp.capacity_;
+    shapeptrs_ = comp_shp.shapeptrs_;
+    comp_shp.setArray(nullptr);
+  }
+
+  double CompositeShape::getArea(size_t id) const
   {
     return shapeptrs_[id]->getArea();
   }
 
-  rectangle_t CompositeShapes::getFrameRect(size_t id) const
+  rectangle_t CompositeShape::getFrameRect(size_t id) const
   {
     return shapeptrs_[id]->getFrameRect();
   }
 
-  void CompositeShapes::move(size_t id, point_t p)
+  void CompositeShape::move(size_t id, point_t p)
   {
-    return shapeptrs_[id]->move(point_t p);
+    return shapeptrs_[id]->move(p);
   }
 
-  void CompositeShapes::move(size_t id, double dx, double dy)
+  void CompositeShape::move(size_t id, double dx, double dy)
   {
-    return shapeptrs_[id]->move(double dx, double dy);
+    return shapeptrs_[id]->move(dx, dy);
   }
 
-  void CompositeShapes::scale(size_t id, double k)
+  void CompositeShape::scale(size_t id, double k)
   {
-    return shapeptrs_[id]->scale(double k);
+    return shapeptrs_[id]->scale(k);
   }
 
-  void CompositeShapes::push_back(Shape *shp)
+  void CompositeShape::push_back(Shape *shp)
   {
     if (capacity_ == shapes_)
     {
@@ -38,30 +63,30 @@ namespace abramov
         throw std::bad_alloc();
       }
     }
-    shapeptrs[++shapes_] = shp;
+    shapeptrs_[++shapes_] = shp;
   }
 
-  void CompositeShapes::pop_back()
+  void CompositeShape::pop_back()
   {
     delete shapeptrs_[shapes_ - 1];
     shapeptrs_[shapes_ - 1] = nullptr;
   }
 
-  Shape *CompositeShapes::at(size_t id) const
+  Shape *CompositeShape::at(size_t id) const
   {
     if (id >= shapes_)
     {
-      throw std::out_of_range();
+      throw std::logic_error("There is no such element");
     }
     return shapeptrs_[id];
   }
 
-  Shape *CompositeShapes::operator[](size_t id) const noexcept
+  Shape *CompositeShape::operator[](size_t id) const noexcept
   {
     return shapeptrs_[id];
   }
 
-  bool CompositeShapes::empty() const
+  bool CompositeShape::empty() const
   {
     if (shapes_ == 0)
     {
@@ -70,18 +95,18 @@ namespace abramov
     return false;
   }
 
-  size_t CompositeShapes::size() const
+  size_t CompositeShape::size() const
   {
     return shapes_;
   }
 
-  Shape *CompositeShapes::clone(size_t id) const
+  Shape *CompositeShape::clone(size_t id) const
   {
-    Shape *figure = shapeptrs[id];
+    Shape *figure = shapeptrs_[id];
     try
     {
       Rectangle *shp = dynamic_cast< Rectangle* >(figure);
-      Rectangle *shape = new Rectangle(getpLeftLower(shp), getpRightUpper(shp));
+      Rectangle *shape = new Rectangle(shp->getpLeftLower(), shp->getpRightUpper());
       return shape;
     }
     catch (const std::bad_cast &e)
@@ -91,7 +116,7 @@ namespace abramov
     try
     {
       Square *shp = dynamic_cast< Square* >(figure);
-      Square *shape = new Square(getpLeftLower(shp), getlen(shp));
+      Square *shape = new Square(shp->getpLeftLower(), shp->getlen());
       return shape;
     }
     catch (const std::bad_cast &e)
@@ -101,21 +126,22 @@ namespace abramov
     try
     {
       ComplexQuad *shp = dynamic_cast< ComplexQuad* >(figure);
-      ComplexQuad *shape = new ComplexQuad(getA(shp), getB(shp), getC(shp), getD(shp));
+      ComplexQuad *shape = new ComplexQuad(shp->getA(), shp->getB(), shp->getC(), shp->getD());
       return shape;
     }
     catch (const std::bad_cast &e)
     {
 
     }
+    return nullptr;
   }
 
-  Shape *expandArray(Shape * arr, size_t capacity)
+  Shape **expandArray(Shape **arr, size_t capacity)
   {
-    Shape *array = nullptr;
+    Shape **array = nullptr;
     try
     {
-      array = new Shape[capacity * 2];
+      array = new Shape*[capacity * 2];
     }
     catch (const std::bad_alloc &e)
     {
