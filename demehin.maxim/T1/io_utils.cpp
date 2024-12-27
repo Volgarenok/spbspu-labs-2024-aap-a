@@ -61,9 +61,7 @@ namespace
       pts[size++] = vrt;
       cord_cnt++;
     }
-    demehin::point_t* returnable_pts = pts;
-    delete[] pts;
-    return returnable_pts;
+    return pts;
   }
 
   demehin::Polygon* createPolygon(std::istream& in)
@@ -71,7 +69,9 @@ namespace
     constexpr size_t max_size = 100;
     size_t cord_cnt = 0;
     demehin::point_t* vrt = inputPolygonCords(in, max_size, cord_cnt);
-    return new demehin::Polygon(cord_cnt, vrt);
+    demehin::Polygon* plg = new demehin::Polygon(cord_cnt, vrt);
+    delete[] vrt;
+    return plg;
   }
 }
 
