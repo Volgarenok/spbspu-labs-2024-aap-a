@@ -34,7 +34,7 @@ namespace
   {
     demehin::point_t* pts = new demehin::point_t[max_size];
     size_t size = 0;
-    while (!in.fail())
+    while (in.peek() != '\n')
     {
       if (size >= max_size)
       {
