@@ -42,7 +42,7 @@ namespace
         demehin::point_t* new_pts = nullptr;
         try
         {
-          new_pts = new demehin::point_t[size];
+          new_pts = new demehin::point_t[max_size];
         }
         catch (const std::bad_alloc& e)
         {
