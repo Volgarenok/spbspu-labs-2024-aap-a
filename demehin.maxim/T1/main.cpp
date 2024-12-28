@@ -45,6 +45,7 @@ namespace
 
   void printFrRectCords(std::ostream& out, demehin::Shape** const shapes, size_t shp_cnt)
   {
+    out << getAreaSum(shapes, shp_cnt) << " ";
     for (size_t i = 0; i < shp_cnt; i++)
     {
       double lbx = 0, lby = 0, rtx = 0, rty = 0;
@@ -125,15 +126,12 @@ int main()
   }
 
 
-  double sum_area = getAreaSum(shapes, shp_cnt);
-  std::cout << std::fixed << std::setprecision(1) << sum_area << " ";
+  std::cout << std::fixed << std::setprecision(1);
   printFrRectCords(std::cout, shapes, shp_cnt);
   std::cout << "\n";
 
   makeIsoScale(shapes, shp_cnt, scale_k, scale_pt);
 
-  sum_area = getAreaSum(shapes, shp_cnt);
-  std::cout << sum_area << " ";
   printFrRectCords(std::cout, shapes, shp_cnt);
   std::cout << "\n";
 
