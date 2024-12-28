@@ -25,7 +25,7 @@ namespace
     }
   }
 
-  double getAreaSum(demehin::Shape** shapes, size_t shp_cnt)
+  double getAreaSum(demehin::Shape** const shapes, size_t shp_cnt)
   {
     double area_sum = 0;
     for (size_t i = 0; i < shp_cnt; i++)
@@ -35,7 +35,7 @@ namespace
     return area_sum;
   }
 
-  void getFrRectCords(demehin::rectangle_t& fr_rect, double& lbx, double& lby, double& rtx, double& rty)
+  void getFrRectCords(const demehin::rectangle_t& fr_rect, double& lbx, double& lby, double& rtx, double& rty)
   {
     lbx = fr_rect.pos.x - fr_rect.width / 2;
     lby = fr_rect.pos.y - fr_rect.height / 2;
@@ -43,16 +43,15 @@ namespace
     rty = fr_rect.pos.y + fr_rect.height / 2;
   }
 
-  void printFrRectCords(std::ostream& out, demehin::Shape** shapes, size_t shp_cnt)
+  void printFrRectCords(std::ostream& out, demehin::Shape** const shapes, size_t shp_cnt)
   {
     for (size_t i = 0; i < shp_cnt; i++)
     {
       double lbx = 0, lby = 0, rtx = 0, rty = 0;
       demehin::rectangle_t fr_rect = shapes[i]->getFrameRect();
       getFrRectCords(fr_rect, lbx, lby, rtx, rty);
-      out << " " << lbx << " " << lby << " " << rtx << " " << rty;
+      out << lbx << " " << lby << " " << rtx << " " << rty;
     }
-    out << "\n";
   }
 
   void free_shapes(demehin::Shape** shapes, size_t shp_cnt)
@@ -62,61 +61,6 @@ namespace
       delete shapes[i];
     }
   }
-
-  //bool areEqualPts(demehin::point_t p1, demehin::point_t p2)
-  //{
-    //return p1.x == p2.x && p1.y == p2.y;
-  //}
-
-  //bool hasSameVertex(size_t n, demehin::point_t* vertex)
-  //{
-    //for (size_t i = 0; i < n; i++)
-    //{
-      //for (size_t j = i + 1; j < n; j++)
-      //{
-        //if (areEqualPts(vertex[i], vertex[j]))
-        //{
-          //return true;
-        //}
-      //}
-    //}
-    //return false;
-  //}
-
-  //void inputPolygonCords(std::istream& in, demehin::point_t** pts, size_t max_size, size_t& cord_cnt)
-  //{
-   // *pts = new demehin::point_t[max_size];
-    //size_t size = 0;
-    //while (std::cin.peek() != '\n')
-    //{
-      //if (size >= max_size)
-      //{
-        //max_size *= 2;
-        //demehin::point_t* new_pts = nullptr;
-        //try
-        //{
-          // *new_pts = new demehin::point_t[size];
-        //}
-        //catch (std::bad_alloc& e)
-        //{
-          //delete[] *pts;
-          //throw;
-        //}
-        //for (size_t i = 0; i < size; i++)
-        //{
-          //new_pts[i].x = (*pts)[i].x;
-          //new_pts[i].y = (*pts)[i].y;
-        //}
-        //delete[] *pts;
-        // *pts = new_pts;
-      //}
-      //demehin::point_t vrt;
-      //in >> vrt.x >> vrt.y;
-      //(*pts)[size++] = vrt;
-      //cord_cnt++;
-    //}
-   //}
-
 }
 
 int main()
@@ -126,7 +70,6 @@ int main()
   double scale_k = 0;
   demehin::point_t scale_pt;
   bool is_incorrect_shp = false;
-  //constexpr size_t max_size = 100;
 
   std::string shape_name;
   bool is_scale = false;
@@ -139,6 +82,7 @@ int main()
       free_shapes(shapes, shp_cnt);
       return 1;
     }
+
     try
     {
       demehin::createShape(shape_name, shapes, shp_cnt);
@@ -168,124 +112,6 @@ int main()
       is_scale = true;
     }
   }
-  //while (!is_scale)
-  //{
-    //std::cin >> shape_name;
-    //if (std::cin.eof())
-    //{
-      //std::cerr << "error: eof\n";
-      //free_shapes(shapes, shp_cnt);
-      //return 1;
-    //}
-    //if (shape_name == "RECTANGLE")
-    //{
-      //double lbx = 0, lby = 0;
-      //double rtx = 0, rty = 0;
-      //std::cin >> lbx >> lby >> rtx >> rty;
-      //if (lbx >= rtx || lby >= rty)
-      //{
-        //is_incorrect_shp = true;
-        //continue;
-      //}
-
-      //demehin::point_t left_bot;
-      //left_bot.x = lbx;
-      //left_bot.y = lby;
-      //demehin::point_t right_top;
-      //right_top.x = rtx;
-      //right_top.y = rty;
-      //try
-      //{
-        //shapes[shp_cnt++] = new demehin::Rectangle(left_bot, right_top);
-      //}
-      //catch (std::bad_alloc& e)
-      //{
-        //free_shapes(shapes, shp_cnt);
-        //std::cerr << "bad alloc\n";
-        //return 1;
-      //}
-      //shape_name = "";
-    //}
-
-    //else if (shape_name == "RING")
-    //{
-      //double cent_x = 0, cent_y = 0, out_r = 0, in_r = 0;
-      //std::cin >> cent_x >> cent_y >> out_r >> in_r;
-      //if (out_r < in_r || out_r <= 0 || in_r <= 0)
-      //{
-        //is_incorrect_shp = true;
-        //continue;
-      //}
-      //demehin::point_t center;
-      //center.x = cent_x;
-      //center.y = cent_y;
-      //try
-      //{
-        //shapes[shp_cnt++] = new demehin::Ring(center, out_r, in_r);
-      //}
-      //catch (std::bad_alloc& e)
-      //{
-        //free_shapes(shapes, shp_cnt);
-        //std::cerr << "bad alloc\n";
-        //return 1;
-      //}
-
-      //shape_name = "";
-    //}
-
-    //else if (shape_name == "POLYGON")
-    //{
-      //demehin::point_t* vrt = nullptr;
-      //size_t cord_cnt = 0;
-      //try
-      //{
-        //inputPolygonCords(std::cin, &vrt, max_size, cord_cnt);
-      //}
-      //catch (std::bad_alloc& e)
-      //{
-        //free_shapes(shapes, shp_cnt);
-        //std::cerr << "bad alloc\n";
-        //return 1;
-      //}
-      //bool isBadPolygon = cord_cnt < 3 || hasSameVertex(cord_cnt, vrt);
-      //if (isBadPolygon)
-      //{
-        //is_incorrect_shp = true;
-        //delete[] vrt;
-        //continue;
-      //}
-      //try
-      //{
-        //shapes[shp_cnt++] = new demehin::Polygon(cord_cnt, vrt);
-      //}
-      //catch (std::bad_alloc& e)
-      //{
-        //free_shapes(shapes, shp_cnt);
-        //delete[] vrt;
-        //std::cerr << "bad alloc\n";
-        //return 1;
-      //}
-      //shape_name = "";
-      //delete[] vrt;
-    //}
-
-    //else if (shape_name == "SCALE")
-    //{
-      //double x = 0;
-      //double y = 0;
-      //std::cin >> x >> y >> scale_k;
-      //if (scale_k < 0)
-      //{
-        //std::cerr << "Incorrect scale\n";
-        //free_shapes(shapes, shp_cnt);
-        //return 1;
-      //}
-      //scale_pt.x = x;
-      //scale_pt.y = y;
-      //break;
-    //}
-    //shape_name = "";
-  //}
 
   if (shp_cnt == 0)
   {
@@ -300,14 +126,16 @@ int main()
 
 
   double sum_area = getAreaSum(shapes, shp_cnt);
-  std::cout << std::fixed << std::setprecision(1) << sum_area;
+  std::cout << std::fixed << std::setprecision(1) << sum_area << " ";
   printFrRectCords(std::cout, shapes, shp_cnt);
+  std::cout << "\n";
 
   makeIsoScale(shapes, shp_cnt, scale_k, scale_pt);
 
   sum_area = getAreaSum(shapes, shp_cnt);
-  std::cout << sum_area;
+  std::cout << sum_area << " ";
   printFrRectCords(std::cout, shapes, shp_cnt);
+  std::cout << "\n";
 
   free_shapes(shapes, shp_cnt);
 }
