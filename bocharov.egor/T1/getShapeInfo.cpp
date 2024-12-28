@@ -17,7 +17,7 @@ double bocharov::getAllArea(Shape** myShapes, size_t shapeCount)
 
 void bocharov::scaling(Shape** myShapes, size_t shapeCount, point_t center, double ratio)
 {
-  for (size_t i = 0; i <shapeCount; i++)
+  for (size_t i = 0; i < shapeCount; i++)
   {
     point_t cneter = myShapes[i]->getFrameRect().pos;
     myShapes[i]->move(center);
@@ -29,10 +29,10 @@ void bocharov::scaling(Shape** myShapes, size_t shapeCount, point_t center, doub
   }
 }
 
-int bocharov::getShapeInfo(std::istream& input, std::ostream& error, std::ostream& output, Shape** myShapes)
+int bocharov::getShapeInfo(std::istream & input, std::ostream & error, std::ostream & output, Shape ** myShapes)
 {
   std::string Mystr;
-  int shapesCount = 0;
+  std::size_t shapesCount = 0;
   bool scaled = false;
   try
   {
@@ -47,10 +47,10 @@ int bocharov::getShapeInfo(std::istream& input, std::ostream& error, std::ostrea
           input >> down.y;
           input >> up.x;
           input >> up.y;
-          myShapes[shapesCount] =  new Rectangle{down, up};
+          myShapes[shapesCount] = new Rectangle{down, up};
           shapesCount++;
         }
-        catch (const std::invalid_argument& e)
+        catch (const std::invalid_argument & e)
         {
           error << e.what() << '\n';
         }
@@ -69,7 +69,7 @@ int bocharov::getShapeInfo(std::istream& input, std::ostream& error, std::ostrea
           myShapes[shapesCount] =  new Triangle{a, b, c};
           shapesCount++;
         }
-        catch (const std::invalid_argument& e)
+        catch (const std::invalid_argument & e)
         {
           error << e.what() << '\n';
         }
@@ -93,7 +93,7 @@ int bocharov::getShapeInfo(std::istream& input, std::ostream& error, std::ostrea
           myShapes[shapesCount] =  new Parallelogram{a, b, c};
           shapesCount++;
         }
-        catch (const std::invalid_argument& e)
+        catch (const std::invalid_argument & e)
         {
           error << e.what() << '\n';
         }
@@ -114,7 +114,7 @@ int bocharov::getShapeInfo(std::istream& input, std::ostream& error, std::ostrea
           myShapes[shapesCount] =  new Concave{a, b, c, d};
           shapesCount++;
         }
-        catch (const std::invalid_argument& e)
+        catch (const std::invalid_argument & e)
         {
           error << e.what() << '\n';
         }
@@ -138,7 +138,7 @@ int bocharov::getShapeInfo(std::istream& input, std::ostream& error, std::ostrea
           scaling(myShapes, shapesCount, toCenter, ratio);
           outputRes(output, myShapes, shapesCount);
         }
-        catch (const std::invalid_argument& e)
+        catch (const std::invalid_argument & e)
         {
           error << e.what() << '\n';
           clear(myShapes, shapesCount);
@@ -147,13 +147,13 @@ int bocharov::getShapeInfo(std::istream& input, std::ostream& error, std::ostrea
       }
     }
   }
-  catch (const std::bad_alloc& e)
+  catch (const std::bad_alloc & e)
   {
     error << e.what() << '\n';
     clear(myShapes, shapesCount);
     return -1;
   }
-  catch (const std::logic_error& e)
+  catch (const std::logic_error & e)
   {
     error << e.what() << '\n';
     clear(myShapes, shapesCount);

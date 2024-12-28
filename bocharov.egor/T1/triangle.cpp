@@ -3,7 +3,7 @@
 #include <cmath>
 #include <stdexcept>
 
-bocharov::Triangle::Triangle(point_t a, point_t b, point_t c)
+bocharov::Triangle::Triangle(point_t a, point_t b, point_t c) : a_(a), b_(b), c_(c)
 {
   if ((a.x * (b.y -c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) == 0)
   {
@@ -35,7 +35,7 @@ bocharov::rectangle_t bocharov::Triangle::getFrameRect() const
 
 void bocharov::Triangle::move(point_t centerP)
 {
-  bocharov::point_t pos;
+  point_t pos;
   pos.x = std::abs(a_.x + b_.x + c_.x) / 3.0;
   pos.y = std::abs(a_.y + b_.y + c_.y) / 3.0;
   double moveX = centerP.x - pos.x;
@@ -60,7 +60,7 @@ void bocharov::Triangle::move(double x, double y)
 
 void bocharov::Triangle::scale(double ratio)
 {
-  if (ratio<= 0)
+  if (ratio <= 0)
   {
     throw std::invalid_argument("under zero ratio\n");
   }
