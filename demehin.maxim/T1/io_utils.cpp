@@ -68,11 +68,13 @@ namespace
     constexpr size_t max_size = 100;
     size_t cord_cnt = 0;
     demehin::point_t* vrt = new demehin::point_t[max_size];
+    demehin::point_t* temp_vrt = vrt;
     //inputPolygonCords(in, &vrt, max_size, cord_cnt);
     demehin::Polygon* plg = nullptr;
     try
     {
-      inputPolygonCords(in, &vrt, max_size, cord_cnt);
+      inputPolygonCords(in, &temp_vrt, max_size, cord_cnt);
+      vrt = temp_vrt;
       plg = new demehin::Polygon(cord_cnt, vrt);
     }
     catch (const std::bad_alloc& e)
