@@ -15,25 +15,37 @@ int main()
     return 1;
   }
   size_t size = capacity - 1;
-  if (dirti::str_min(str, size) == '\0')
+  char str_min = dirti::str_min(str, size);
+  if (str_min == '\0')
   {
+    free(str);
     std::cerr << "Error: bad alloc" << "\n";
     return 1;
   }
-  else if (dirti::str_min(str, size) == '\n')
+  else if (str_min == '\n')
   {
     std::cout << "Not existing one rare symbol" << "\n";
   }
   else
   {
-    std::cout << dirti::str_min(str, size) << "\n";
+    std::cout << str_min << "\n";
   }
-  if (dirti::str_min2(str, size) == nullptr)
+  char * str_min2 = nullptr;
+  str_min2 = dirti::str_min2(str, size);
+  if (str_min2 == nullptr)
   {
     std::cerr << "Error: bad_alloc" << "\n";
+    free(str);
+    return 1;
+  }
+  else if (str_min2[0] == str_min2[1])
+  {
+    std::cout << "There is only one symbol" << "\n";
   }
   else
   {
-    std::cout << dirti::str_min2(str, size) << "\n";
+    std::cout << str_min2[0] << " " << str_min2[1] << "\n";
   }
+  free(str_min2);
+  free(str);
 }

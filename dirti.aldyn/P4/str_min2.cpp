@@ -41,12 +41,14 @@ char * dirti::str_min2(const char * str, const size_t size)
       sym_num[sym - 1] = 1;
     }
   }
+  str_min2[0] = sym_sym[0];
   size_t min = size + 1;
   for (size_t i = 0; i < sym; ++i)
   {
     if (sym_num[i] < min)
     {
       min = sym_num[i];
+      str_min2[1] = str_min2[0];
       str_min2[0] = sym_sym[i];
     }
     else if (sym_num[i] == min)

@@ -12,6 +12,7 @@ char dirti::str_min(const char * str, const size_t size)
   size_t * sym_num = reinterpret_cast< size_t * >(malloc(sizeof(size_t) * size));
   if (sym_num == nullptr)
   {
+    free(sym_sym);
     return '\0';
   }
   sym_sym[0] = str[0];
@@ -53,6 +54,8 @@ char dirti::str_min(const char * str, const size_t size)
   }
   if (num > 1)
   {
+    free(sym_sym);
+    free(sym_num);
     return '\n';
   }
   char sym_out = sym_sym[min_index];
