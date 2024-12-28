@@ -32,7 +32,7 @@ namespace
 
   void inputPolygonCords(std::istream& in, demehin::point_t** pts, size_t max_size, size_t& cord_cnt)
   {
-    *pts = new demehin::point_t[max_size];
+    // *pts = new demehin::point_t[max_size];
     size_t size = 0;
     while (in.peek() != '\n')
     {
@@ -67,7 +67,7 @@ namespace
   {
     constexpr size_t max_size = 100;
     size_t cord_cnt = 0;
-    demehin::point_t* vrt = nullptr;
+    demehin::point_t* vrt = new demehin::point_t[max_size];
     inputPolygonCords(in, &vrt, max_size, cord_cnt);
     demehin::Polygon* plg = nullptr;
     try
