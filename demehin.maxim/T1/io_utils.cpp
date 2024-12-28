@@ -32,7 +32,7 @@ namespace
 
   void inputPolygonCords(std::istream& in, demehin::point_t** pts, size_t max_size, size_t& cord_cnt)
   {
-    // *pts = new demehin::point_t[max_size];
+    *pts = new demehin::point_t[max_size];
     size_t size = 0;
     while (in.peek() != '\n')
     {
@@ -67,25 +67,25 @@ namespace
   {
     constexpr size_t max_size = 100;
     size_t cord_cnt = 0;
-    demehin::point_t* vrt = new demehin::point_t[max_size];
-    demehin::point_t* temp_vrt = vrt;
-    //inputPolygonCords(in, &vrt, max_size, cord_cnt);
-    //demehin::Polygon* plg = nullptr;
+    demehin::point_t* vrt = nullptr;
+    inputPolygonCords(in, &vrt, max_size, cord_cnt);
+    demehin::Polygon* plg = nullptr;
     try
     {
-      inputPolygonCords(in, &temp_vrt, max_size, cord_cnt);
-      vrt = temp_vrt;
-      demehin::Polygon* plg = new demehin::Polygon(cord_cnt, vrt);
-      delete[] vrt;
-      return plg;
+      plg = new demehin::Polygon(cord_cnt, vrt);
     }
     catch (const std::bad_alloc& e)
     {
       delete[] vrt;
       throw;
     }
-    //delete[] vrt;
-    //return plg;
+    catch (const std::logic_error& e)
+    {
+      delete[] vrt;
+      throw;
+    }
+    delete[] vrt;
+    return plg;
   }
 }
 
