@@ -121,9 +121,8 @@ void nikonov::processCollection(std::istream &input, Shape *collection[], size_t
   double y = 0.0;
   double k = 0.0;
   input >> x >> y >> k;
-  if ((!input && !input.eof()))
+  if ((!input && !input.eof()) || k <= 0)
   {
-    destoy(collection, cnt);
     throw std::logic_error("ERROR: noncorrect scale parameters");
   }
   outputCollection(std::cout, collection, cnt);
