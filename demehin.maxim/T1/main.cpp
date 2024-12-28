@@ -143,11 +143,11 @@ int main()
     {
       demehin::createShape(shape_name, shapes, shp_cnt);
     }
-    catch (std::bad_alloc& e)
+    catch (const std::bad_alloc& e)
     {
       free_shapes(shapes, shp_cnt);
     }
-    catch (std::logic_error& e)
+    catch (const std::logic_error& e)
     {
       delete shapes[shp_cnt--];
       is_incorrect_shp = true;

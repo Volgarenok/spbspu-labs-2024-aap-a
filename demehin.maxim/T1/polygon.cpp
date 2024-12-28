@@ -41,8 +41,8 @@ demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
 
   if (hasSameVertex(vrtx_cnt, vertex_) || vrtx_cnt < 3)
   {
-    throw std::logic_error("incorrect_shape");
     delete[] vertex_;
+    throw std::logic_error("incorrect_shape");
   }
 
 }

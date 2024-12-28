@@ -44,7 +44,7 @@ namespace
         {
           new_pts = new demehin::point_t[size];
         }
-        catch (std::bad_alloc& e)
+        catch (const std::bad_alloc& e)
         {
           delete[] pts;
           throw;
@@ -69,7 +69,16 @@ namespace
     constexpr size_t max_size = 100;
     size_t cord_cnt = 0;
     demehin::point_t* vrt = inputPolygonCords(in, max_size, cord_cnt);
-    demehin::Polygon* plg = new demehin::Polygon(cord_cnt, vrt);
+    demehin::Polygon* plg = nullptr;
+    try
+    {
+      plg = new demehin::Polygon(cord_cnt, vrt);
+    }
+    catch (const std::bad_alloc& e)
+    {
+      delete[] vrt;
+      throw;
+    }
     delete[] vrt;
     return plg;
   }
