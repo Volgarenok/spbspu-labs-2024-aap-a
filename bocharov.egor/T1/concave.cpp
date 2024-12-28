@@ -13,13 +13,15 @@ namespace bocharov
 
 bool bocharov::isDupePoint(point_t p1, point_t p2, point_t p3, point_t p4)
 {
-   if (p1.x == p2.x && p1.y == p2.y) return true;
-   if (p1.x == p3.x && p1.y == p3.y) return true;
-   if (p1.x == p4.x && p1.y == p4.y) return true;
-   if (p2.x == p3.x && p2.y == p3.y) return true;
-   if (p2.x == p4.x && p2.y == p4.y) return true;
-   if (p3.x == p4.x && p3.y == p4.y) return true;
-   return false;
+  if ((p1.x == p2.x && p1.y == p2.y) || (p1.x == p3.x && p1.y == p3.y) || (p1.x == p4.x && p1.y == p4.y) || (p2.x == p3.x && p2.y == p3.y)
+     || (p2.x == p4.x && p2.y == p4.y) || (p3.x == p4.x && p3.y == p4.y))
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }
 
 bool bocharov::isTriangle(point_t a, point_t b, point_t c)
