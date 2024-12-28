@@ -34,8 +34,7 @@ void nikonov::Rectangle::scale(double k)
 {
   if (k <= 0)
   {
-    std::cerr << "Scale denied: k must be more than zero\n";
-    return;
+    throw std::logic_error("Scale denied: k must be more than zero");
   }
   rectangle_t crntRect = getFrameRect();
   crntRect.width *= k;

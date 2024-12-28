@@ -7,12 +7,17 @@
 int main()
 {
   nikonov::Shape *shapeCollection[10000] = {nullptr};
-  std::string name = "";
   size_t cnt = 0;
   size_t noncorrect = 0;
-  nikonov::fillShapeCollection(std::cin, shapeCollection, cnt, noncorrect);
-  if (nikonov::processCollection(std::cin, shapeCollection, cnt))
+  try
   {
+    nikonov::fillShapeCollection(std::cin, shapeCollection, cnt, noncorrect);
+    nikonov::processCollection(std::cin, shapeCollection, cnt);
+  }
+  catch (const std::exception& e)
+  {
+    std::cerr << e.what() << '\n';
+    nikonov::destoy(shapeCollection, cnt);
     return 1;
   }
   if (noncorrect)

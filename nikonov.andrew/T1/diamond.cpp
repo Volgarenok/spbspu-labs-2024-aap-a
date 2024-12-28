@@ -8,7 +8,7 @@ nikonov::Diamond::Diamond(const point_t& topP, const point_t& midP, const point_
 {}
 double nikonov::Diamond::getArea() const
 {
-  return ((topP_.y - 2 * midP_.y - topP_.y) * (rightP_.x - 2 * midP_.x - rightP_.x)) / 2;
+  return (rightP_.x - midP_.x) * (topP_.y - midP_.y) * 2;
 }
 nikonov::rectangle_t nikonov::Diamond::getFrameRect() const
 {
@@ -39,8 +39,7 @@ void nikonov::Diamond::scale(double k)
 {
   if (k <= 0)
   {
-    std::cerr << "Scale denied: k must be more than zero\n";
-    return;
+    throw std::logic_error("Scale denied: k must be more than zero");
   }
   rectangle_t crntRect = getFrameRect();
   crntRect.width *= k;

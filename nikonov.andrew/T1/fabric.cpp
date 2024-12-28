@@ -8,7 +8,7 @@
 #include "additional-utilities.hpp"
 #include "diamond.hpp"
 #include "triangle.hpp"
-namespace 
+namespace
 {
   nikonov::point_t findTop(nikonov::point_t p1, nikonov::point_t p2, nikonov::point_t p3);
   nikonov::point_t findMid(nikonov::point_t p1, nikonov::point_t p2, nikonov::point_t p3, nikonov::point_t topP);
@@ -107,7 +107,7 @@ nikonov::Triangle *nikonov::make_triangle(double nums[])
   return result;
 }
 
-namespace 
+namespace
 {
   nikonov::point_t findTop(nikonov::point_t p1, nikonov::point_t p2, nikonov::point_t p3)
   {
@@ -125,7 +125,7 @@ namespace
     }
     else
     {
-      throw std::logic_error("non-correct parameters\n");
+      throw std::logic_error("non-correct parameters");
     }
   }
   nikonov::point_t findMid(nikonov::point_t p1, nikonov::point_t p2, nikonov::point_t p3, nikonov::point_t topP)
@@ -144,7 +144,7 @@ namespace
     }
     else
     {
-      throw std::exception();
+      throw std::logic_error("non-correct parameters");
     }
   }
   bool isEqualPoint(const nikonov::point_t &p1, const nikonov::point_t &p2)

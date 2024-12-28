@@ -50,8 +50,7 @@ void nikonov::Triangle::scale(double k)
 {
   if (k <= 0)
   {
-    std::cerr << "Scale denied: k must be more than zero\n";
-    return;
+    throw std::logic_error("Scale denied: k must be more than zero");
   }
   point_t center = getCenterOfGravity(A_, B_, C_);
   A_.x = center.x + (A_.x - center.x) * k;

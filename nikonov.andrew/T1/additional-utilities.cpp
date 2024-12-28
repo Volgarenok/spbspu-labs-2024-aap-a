@@ -8,6 +8,10 @@ void nikonov::fillShapeCollection(std::istream &input, Shape *collection[], size
 {
   std::string name = "";
   size_t n = 0;
+  constexpr size_t rectangleParametersNum = 4;
+  constexpr size_t triangleOrDiamondParametersNum = 6;
+  size_t maxNum = std::max(rectangleParametersNum, triangleOrDiamondParametersNum);
+  double *nums = new double[maxNum];
   while (input >> name && name != "SCALE")
   {
     if (name[0] == '\n')
@@ -16,11 +20,11 @@ void nikonov::fillShapeCollection(std::istream &input, Shape *collection[], size
     }
     else if (name == "RECTANGLE")
     {
-      n = 4;
+      n = rectangleParametersNum;
     }
     else if (name == "TRIANGLE" || name == "DIAMOND")
     {
-      n = 6;
+      n = triangleOrDiamondParametersNum;
     }
     else
     {
@@ -28,38 +32,18 @@ void nikonov::fillShapeCollection(std::istream &input, Shape *collection[], size
       input.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
       continue;
     }
-    double *nums = nullptr;
-    try
-    {
-      nums = new double[n];
-    }
-    catch (const std::bad_alloc &e)
-    {
-      std::cerr << e.what() << '\n';
-      destoy(collection, cnt);
-    }
     for (size_t i = 0; i < n; ++i)
     {
       input >> nums[i];
     }
     if (!input)
     {
-      delete[] nums;
       ++noncorrect;
       input.clear();
       input.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
       continue;
     }
-    Shape *newElem = nullptr;
-    try
-    {
-      newElem = make_shape(name, nums);
-    }
-    catch (const std::bad_alloc &e)
-    {
-      std::cerr << e.what() << '\n';
-      destoy(collection, cnt);
-    }
+    Shape *newElem = make_shape(name, nums);
     if (newElem != nullptr)
     {
       collection[cnt] = newElem;
@@ -69,8 +53,8 @@ void nikonov::fillShapeCollection(std::istream &input, Shape *collection[], size
     {
       ++noncorrect;
     }
-    delete[] nums;
   }
+  delete[] nums;
 }
 void nikonov::destoy(Shape *collection[], size_t &cnt)
 {
@@ -91,54 +75,58 @@ void nikonov::ispScale(Shape *shp, double x, double y, double k)
   shp->scale(k);
   shp->move(diffX * k * (-1), diffY * k * (-1));
 }
-bool nikonov::processCollection(std::istream &input, Shape *collection[], size_t cnt)
+double nikonov::getCollectionArea(Shape *collection[], size_t cnt)
+{
+  double summ = 0.0;
+  for (size_t i = 0; i < cnt; ++i)
+  {
+    summ += collection[i]->getArea();
+  }
+  return summ;
+}
+void nikonov::scaleCollection(Shape *collection[], size_t cnt, double x, double y, double k)
+{
+  if (k <= 0)
+  {
+    destoy(collection, cnt);
+    throw std::logic_error("ERROR: noncorrect scale parameters");
+  }
+  for (size_t i = 0; i < cnt; ++i)
+  {
+    ispScale(collection[i], x, y, k);
+  }
+}
+void nikonov::outputCollection(std::ostream &out, Shape *collection[], size_t cnt)
+{
+  out << std::fixed << std::setprecision(1);
+  double summArea = getCollectionArea(collection, cnt);
+  out << summArea;
+  for (size_t i = 0; i < cnt; ++i)
+  {
+    rectangle_t tempRect = collection[i]->getFrameRect();
+    out << " " << tempRect.pos.x - tempRect.width / 2;
+    out << " " << tempRect.pos.y - tempRect.height / 2;
+    out << " " << tempRect.pos.x + tempRect.width / 2;
+    out << " " << tempRect.pos.y + tempRect.height / 2;
+  }
+  out << '\n';
+}
+void nikonov::processCollection(std::istream &input, Shape *collection[], size_t cnt)
 {
   if (cnt == 0)
   {
-    std::cerr << "ERROR: nothing to scale\n";
-    return 1;
+    throw std::logic_error("ERROR: nothing to scale");
   }
   double x = 0.0;
   double y = 0.0;
   double k = 0.0;
   input >> x >> y >> k;
-  if ((!input && !input.eof()) || k <= 0)
+  if ((!input && !input.eof()))
   {
-    std::cerr << "ERROR: noncorrect scale parameters\n";
     destoy(collection, cnt);
-    return 1;
+    throw std::logic_error("ERROR: noncorrect scale parameters");
   }
-  double s1 = 0.0;
-  double s2 = 0.0;
-  std::cout << std::fixed << std::setprecision(1);
-  for (size_t i = 0; i < cnt; ++i)
-  {
-    s1 += collection[i]->getArea();
-  }
-  std::cout << s1;
-  for (size_t i = 0; i < cnt; ++i)
-  {
-    rectangle_t tempRect = collection[i]->getFrameRect();
-    std::cout << " " << tempRect.pos.x - tempRect.width / 2;
-    std::cout << " " << tempRect.pos.y - tempRect.height / 2;
-    std::cout << " " << tempRect.pos.x + tempRect.width / 2;
-    std::cout << " " << tempRect.pos.y + tempRect.height / 2;
-  }
-  std::cout << '\n';
-  for (size_t i = 0; i < cnt; ++i)
-  {
-    ispScale(collection[i], x, y, k);
-    s2 += collection[i]->getArea();
-  }
-  std::cout << s2;
-  for (size_t i = 0; i < cnt; ++i)
-  {
-    rectangle_t tempRect = collection[i]->getFrameRect();
-    std::cout << " " << tempRect.pos.x - tempRect.width / 2;
-    std::cout << " " << tempRect.pos.y - tempRect.height / 2;
-    std::cout << " " << tempRect.pos.x + tempRect.width / 2;
-    std::cout << " " << tempRect.pos.y + tempRect.height / 2;
-  }
-  std::cout << '\n';
-  return 0;
+  outputCollection(std::cout, collection, cnt);
+  scaleCollection(collection, cnt, x, y, k);
+  outputCollection(std::cout, collection, cnt);
 }
