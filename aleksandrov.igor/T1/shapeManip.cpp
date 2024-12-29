@@ -1,123 +1,155 @@
 #include "shapeManip.h"
-#include "stringManip.h"
-#include "base-types.hpp"
 #include <iostream>
+#include <string>
+#include "base-types.hpp"
 
 namespace aleksandrov
 {
-  Rectangle* makeRectangle(const std::string rectangleParams, bool& error)
+  size_t getShapes(std::istream& input, Shape** shapes, bool& error)
+  {
+    std::string word;
+    size_t count = 0;
+
+    while (input >> word)
+    {
+      try
+      {
+        if (word == "RECTANGLE")
+        {
+          shapes[count] = makeRectangle(input);
+        }
+        else if (word == "ELLIPSE")
+        {
+          shapes[count] = makeEllipse(input);
+        }
+        else if (word == "CIRCLE")
+        {
+          shapes[count] = makeCircle(input);
+        }
+        else if (word == "SCALE" && count)
+        {
+          return count;
+        }
+        else if (word == "SCALE" && !count)
+        {
+          break;
+        }
+      }
+      catch (const std::logic_error& e)
+      {
+        error = true;
+        input.clear();
+        continue;
+      }
+      if (shapes[count])
+      {
+        count++;
+      }
+    }
+    throw std::logic_error("Input was incorrect!");
+  }
+
+  double getAreaSum(Shape** shapes, size_t count)
+  {
+    double sum = 0.0;
+
+    for (size_t i = 0; i < count; ++i)
+    {
+      sum += shapes[i]->getArea();
+    }
+    return sum;
+  }
+
+  void getScaleParams(std::istream& input, double& x, double& y, double& k)
+  {
+    if (!(input >> x >> y >> k))
+    {
+      throw std::logic_error("Input was incorrect!");
+    }
+    if (k <= 0.0)
+    {
+      throw std::logic_error("Incorrect SCALE command description!");
+    }
+  }
+
+  Rectangle* makeRectangle(std::istream& input)
   {
     point_t a;
-    a.x = std::stod(getWord(rectangleParams, 1));
-    a.y = std::stod(getWord(rectangleParams, 2));
     point_t b;
-    b.x = std::stod(getWord(rectangleParams, 3));
-    b.y = std::stod(getWord(rectangleParams, 4));
+
+    if (!(input >> a.x >> a.y >> b.x >> b.y))
+    {
+      throw std::logic_error("Input was incorrect!");
+    }
     if (a.x >= b.x || a.y >= b.y)
     {
-      error = 1;
-      return nullptr;
+      throw std::logic_error("Incorrect SCALE command description!");
     }
     return new Rectangle(a, b);
   }
 
-  Ellipse* makeEllipse(const std::string ellipseParams, bool& error)
+  Ellipse* makeEllipse(std::istream& input)
   {
     point_t center;
-    center.x = std::stod(getWord(ellipseParams, 1));
-    center.y = std::stod(getWord(ellipseParams, 2));
-    double vr = std::stod(getWord(ellipseParams, 3));
-    double hr = std::stod(getWord(ellipseParams, 4));
+    double vr = 0.0;
+    double hr = 0.0;
+
+    if (!(input >> center.x >> center.y >> vr >> hr))
+    {
+      throw std::logic_error("Input was incorrect!");
+    }
     if (vr <= 0 || hr <= 0)
     {
-      error = 1;
-      return nullptr;
+      throw std::logic_error("Incorrect SCALE command description!");
     }
     return new Ellipse(center, vr, hr);
   }
 
-  Circle* makeCircle(const std::string circleParams, bool& error)
+  Circle* makeCircle(std::istream& input)
   {
     point_t center;
-    center.x = std::stod(getWord(circleParams, 1));
-    center.y = std::stod(getWord(circleParams, 2));
-    double r = std::stod(getWord(circleParams, 3));
+    double r = 0.0;
+
+    if (!(input >> center.x >> center.y >> r))
+    {
+      throw std::logic_error("Input was incorrect!");
+    }
     if (r <= 0)
     {
-      error = 1;
-      return nullptr;
+      throw std::logic_error("Incorrect SCALE command description!");
     }
     return new Circle(center, r);
   }
 
-  Shape* makeShape(const std::string shapeDescription, bool& error)
-  {
-    std::string shapeName = getWord(shapeDescription, 1);
-    size_t paramsCount = 0;
-    std::string params = getShapeParams(shapeDescription, paramsCount);
-
-    if (shapeName == "RECTANGLE")
-    {
-      if (paramsCount != 4)
-      {
-        error = 1;
-        return nullptr;
-      }
-      return makeRectangle(params, error);
-    }
-    else if (shapeName == "ELLIPSE")
-    {
-      if (paramsCount != 4)
-      {
-        error = 1;
-        return nullptr;
-      }
-      return makeEllipse(params, error);
-    }
-    else if (shapeName == "CIRCLE")
-    {
-      if (paramsCount != 3)
-      {
-        error = 1;
-        return nullptr;
-      }
-      return makeCircle(params, error);
-    }
-    return nullptr;
-  }
-
-  void doScale(Shape** shapes, size_t count, double& x, double& y, double& k, double& sum)
+  void scaleShapes(Shape** shapes, size_t count, double x, double y, double k)
   {
     for (size_t i = 0; i < count; ++i)
     {
-      Shape* shape = shapes[i];
-      rectangle_t frameRect = shape->getFrameRect();
-      double xCenter = frameRect.pos.x;
-      double yCenter = frameRect.pos.y;
-      double dx = x - xCenter;
-      double dy = y - yCenter;
-      shape->move({x, y});
-      shape->scale(k);
-      shape->move(-dx * k, -dy * k);
-      sum += shape->getArea();
+      rectangle_t frameRect = shapes[i]->getFrameRect();
+      double dx = x - frameRect.pos.x;
+      double dy = y - frameRect.pos.y;
+
+      shapes[i]->move({x, y});
+      shapes[i]->scale(k);
+      shapes[i]->move(-dx * k, -dy * k);
     }
   }
 
-  void printFrameRectCoords(Shape** shapes, size_t count)
+  void printFrameRectCoords(std::ostream& output, Shape** shapes, size_t count)
   {
     for (size_t i = 0; i < count; ++i)
     {
-      aleksandrov::rectangle_t frameRect = shapes[i]->getFrameRect();
-      std::cout << frameRect.pos.x - (frameRect.width / 2) << " ";
-      std::cout << frameRect.pos.y - (frameRect.height / 2) << " ";
-      std::cout << frameRect.pos.x + (frameRect.width / 2) << " ";
-      std::cout << frameRect.pos.y + (frameRect.height / 2);
+      rectangle_t frameRect = shapes[i]->getFrameRect();
+
+      output << frameRect.pos.x - (frameRect.width / 2) << " ";
+      output << frameRect.pos.y - (frameRect.height / 2) << " ";
+      output << frameRect.pos.x + (frameRect.width / 2) << " ";
+      output << frameRect.pos.y + (frameRect.height / 2);
       if (i < count - 1)
       {
-        std::cout << " ";
+        output << " ";
       }
     }
-    std::cout << "\n";
   }
 
   void deleteShapes(Shape** shapes, size_t count)

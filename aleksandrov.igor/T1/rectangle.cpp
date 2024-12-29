@@ -1,6 +1,6 @@
 #include "rectangle.hpp"
-#include "base-types.hpp"
 #include <cmath>
+#include "base-types.hpp"
 
 aleksandrov::Rectangle::Rectangle(const point_t& a, const point_t& b):
   a_(a), b_(b)
@@ -13,13 +13,8 @@ double aleksandrov::Rectangle::getArea() const
 
 aleksandrov::rectangle_t aleksandrov::Rectangle::getFrameRect() const
 {
-  rectangle_t frameRect;
-  frameRect.width = std::fabs(b_.x - a_.x);
-  frameRect.height = std::fabs(b_.y - a_.y);
-  point_t centerPoint;
-  centerPoint.x = a_.x + ((b_.x - a_.x) / 2);
-  centerPoint.y = a_.y + ((b_.y - a_.y) / 2);
-  frameRect.pos = centerPoint;
+  point_t centerPoint {a_.x + ((b_.x - a_.x) / 2), a_.y + ((b_.y - a_.y) / 2)};
+  rectangle_t frameRect {std::fabs(b_.x - a_.x), std::fabs(b_.y - a_.y), centerPoint};
   return frameRect;
 }
 
@@ -33,7 +28,7 @@ void aleksandrov::Rectangle::move(const point_t& centerPoint)
   b_.y = frameRect.pos.y + frameRect.height / 2;
 }
 
-void aleksandrov::Rectangle::move(const double dx, const double dy)
+void aleksandrov::Rectangle::move(double dx, double dy)
 {
   a_.x += dx;
   a_.y += dy;

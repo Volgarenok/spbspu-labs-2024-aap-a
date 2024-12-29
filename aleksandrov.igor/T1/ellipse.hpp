@@ -6,14 +6,14 @@
 
 namespace aleksandrov
 {
-  class Ellipse : public Shape
+  class Ellipse final: public Shape
   {
   public:
-    Ellipse(const point_t& center, const double vr, const double hr);
+    Ellipse(const point_t& center, double vr, double hr);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(const point_t& centerPoint) override;
-    void move(const double dx, const double dy) override;
+    void move(double dx, double dy) override;
     void scale(double k) override;
   private:
     point_t center_;

@@ -1,7 +1,7 @@
 #include "ellipse.hpp"
 #include "base-types.hpp"
 
-aleksandrov::Ellipse::Ellipse(const point_t& center, const double vr, const double hr):
+aleksandrov::Ellipse::Ellipse(const point_t& center, double vr, double hr):
   center_(center), vr_(vr), hr_(hr)
 {}
 
@@ -12,11 +12,7 @@ double aleksandrov::Ellipse::getArea() const
 
 aleksandrov::rectangle_t aleksandrov::Ellipse::getFrameRect() const
 {
-  rectangle_t frameRect;
-  frameRect.width = 2 * hr_;
-  frameRect.height = 2 * vr_;
-  point_t centerPoint = center_;
-  frameRect.pos = centerPoint;
+  rectangle_t frameRect{2 * hr_, 2 * vr_, center_};
   return frameRect;
 }
 
@@ -25,7 +21,7 @@ void aleksandrov::Ellipse::move(const point_t& centerPoint)
   center_ = centerPoint;
 }
 
-void aleksandrov::Ellipse::move(const double dx, const double dy)
+void aleksandrov::Ellipse::move(double dx, double dy)
 {
   center_.x += dx;
   center_.y += dy;
