@@ -41,10 +41,11 @@ int main()
   catch (const std::logic_error& e)
   {
     std::cerr << "ERROR: " << e.what() << "\n";
+    return 1;
   }
   if (wasDescriptionError)
   {
-    std::cout << "WARNING: Some supporting shapes had a description error!\n";
+    std::cerr << "WARNING: Some supporting shapes had a description error!\n";
   }
   aleksandrov::deleteShapes(shapes, count);
 }
