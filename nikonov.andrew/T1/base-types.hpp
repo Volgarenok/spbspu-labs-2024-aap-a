@@ -13,5 +13,6 @@ namespace nikonov
     double height;
     point_t pos;
   };
+  void movePoint(point_t &pt, double x, double y);
 }
 #endif

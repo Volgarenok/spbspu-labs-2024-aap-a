@@ -1,10 +1,16 @@
 #include "rectangle.hpp"
 #include <iostream>
+#include <exception>
 #include "base-types.hpp"
-nikonov::Rectangle::Rectangle(point_t lbp, point_t rtp):
-  lbp_(lbp),
-  rtp_(rtp)
-{}
+nikonov::Rectangle::Rectangle(const point_t &lbp, const point_t &rtp)
+{
+  if (lbp.x >= rtp.x || lbp.y >= rtp.y)
+  {
+    throw std::logic_error("ERROR:noncorrect rectangle parameters");
+  }
+  lbp_ = lbp;
+  rtp_ = rtp;
+}
 double nikonov::Rectangle::getArea() const
 {
   return ((rtp_.x - lbp_.x) * (rtp_.y - lbp_.y));
@@ -16,7 +22,7 @@ nikonov::rectangle_t nikonov::Rectangle::getFrameRect() const
   point_t pos = point_t({ lbp_.x + (width / 2), lbp_.y + (height / 2) });
   return rectangle_t({ width, height, pos });
 }
-void nikonov::Rectangle::move(point_t newPos)
+void nikonov::Rectangle::move(const point_t &newPos)
 {
   rectangle_t crntRect = getFrameRect();
   double diffX = newPos.x - crntRect.pos.x;
@@ -25,10 +31,8 @@ void nikonov::Rectangle::move(point_t newPos)
 }
 void nikonov::Rectangle::move(double x, double y)
 {
-  lbp_.x += x;
-  rtp_.x += x;
-  lbp_.y += y;
-  rtp_.y += y;
+  movePoint(lbp_, x, y);
+  movePoint(rtp_, x, y);
 }
 void nikonov::Rectangle::scale(double k)
 {
