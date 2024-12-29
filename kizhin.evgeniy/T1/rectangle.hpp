@@ -1,5 +1,5 @@
-#ifndef RECTANGLE_HPP
-#define RECTANGLE_HPP
+#ifndef KIZHIN_T1_RECTANGLE_HPP
+#define KIZHIN_T1_RECTANGLE_HPP
 
 #include "shape.hpp"
 
@@ -7,7 +7,7 @@ namespace kizhin {
   class Rectangle;
 }
 
-class kizhin::Rectangle: public Shape
+class kizhin::Rectangle final: public Shape
 {
 public:
   Rectangle(double, double, const point_t&);

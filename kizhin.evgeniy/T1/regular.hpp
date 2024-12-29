@@ -1,5 +1,5 @@
-#ifndef REGULAR_HPP
-#define REGULAR_HPP
+#ifndef KIZHIN_T1_REGULAR_HPP
+#define KIZHIN_T1_REGULAR_HPP
 
 #include <cstddef>
 #include "shape.hpp"
@@ -8,7 +8,7 @@ namespace kizhin {
   class Regular;
 }
 
-class kizhin::Regular: public Shape
+class kizhin::Regular final: public Shape
 {
 public:
   Regular(const point_t&, const point_t&, const point_t&);

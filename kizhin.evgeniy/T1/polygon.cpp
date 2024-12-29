@@ -1,5 +1,4 @@
 #include "polygon.hpp"
-#include <cassert>
 #include <stdexcept>
 #include "point_utils.hpp"
 
@@ -31,8 +30,7 @@ kizhin::Polygon::Polygon(const point_t* values, size_t size):
   vertices_(new point_t[size]),
   size_(size)
 {
-  assert(values);
-  if (size < 3 || hasDuplicates(values, values + size)) {
+  if (!values || size < 3 || hasDuplicates(values, values + size)) {
     delete[] vertices_;
     throw std::logic_error("Invalid Points For Polygon Construction");
   }
@@ -94,7 +92,7 @@ void kizhin::Polygon::move(const point_t& newPos)
 
 void kizhin::Polygon::scale(double scaleFactor)
 {
-  assert(scaleFactor > 0.0);
+  scaleFactor = std::abs(scaleFactor);
   for (point_t* i = vertices_; i != vertices_ + size_; ++i) {
     i->x = center_.x + scaleFactor * (i->x - center_.x);
     i->y = center_.y + scaleFactor * (i->y - center_.y);
@@ -127,10 +125,11 @@ void kizhin::Polygon::computeCenter()
 
 void kizhin::Polygon::swap(Polygon& rhs) noexcept
 {
-  std::swap(vertices_, rhs.vertices_);
-  std::swap(size_, rhs.size_);
-  std::swap(center_, rhs.center_);
-  std::swap(frame_, rhs.frame_);
+  using std::swap;
+  swap(vertices_, rhs.vertices_);
+  swap(size_, rhs.size_);
+  swap(center_, rhs.center_);
+  swap(frame_, rhs.frame_);
 }
 
 void kizhin::copy(const point_t* first, const point_t* last, point_t* result)

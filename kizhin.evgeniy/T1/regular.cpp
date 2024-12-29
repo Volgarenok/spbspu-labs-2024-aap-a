@@ -16,7 +16,7 @@ kizhin::Regular::Regular(const point_t& p1, const point_t& p2, const point_t& p3
   const double innerRadius = std::min(r1, r2);
   vertex_ = (outerRadius == r1) ? p2 : p3;
 
-  const double calculatedSize = M_PI / std::acos(innerRadius / outerRadius);
+  const double calculatedSize = pi / std::acos(innerRadius / outerRadius);
   size_ = std::round(calculatedSize);
   if (std::abs(calculatedSize - size_) > epsilon || size_ < 3) {
     throw std::logic_error("Invalid Regular Size");
@@ -27,7 +27,7 @@ kizhin::Regular::Regular(const point_t& p1, const point_t& p2, const point_t& p3
 double kizhin::Regular::getArea() const
 {
   const double radius = computeDistance(vertex_, frame_.pos);
-  return size_ * std::pow(radius, 2) * 0.5 * std::sin(M_PI * 2 / size_);
+  return size_ * std::pow(radius, 2) * 0.5 * std::sin(pi * 2 / size_);
 }
 
 kizhin::rectangle_t kizhin::Regular::getFrameRect() const
@@ -70,7 +70,7 @@ kizhin::point_t* kizhin::Regular::computeVerticesArray() const
 {
   point_t* vertices = new point_t[size_];
   const double radius = computeDistance(vertex_, frame_.pos);
-  const double angleStep = (2 * M_PI) / size_;
+  const double angleStep = (2 * pi) / size_;
   double angle = std::acos(std::abs(vertex_.x - frame_.pos.x) / radius);
   for (point_t* i = vertices; i != vertices + size_; ++i) {
     *i = {

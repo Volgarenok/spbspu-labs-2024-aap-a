@@ -1,11 +1,11 @@
-#ifndef SHAPE_UTILS_HPP
-#define SHAPE_UTILS_HPP
+#ifndef KIZHIN_T1_SHAPE_UTILS_HPP
+#define KIZHIN_T1_SHAPE_UTILS_HPP
 
-#include <cstddef>
+#include <string>
 #include "shape.hpp"
 
 namespace kizhin {
-  Shape* createShape(const char*, const double*);
+  Shape* createShape(const std::string&, const double*);
   void scaleShapes(Shape* const*, size_t, const double*);
   double computeTotalArea(const Shape* const*, size_t size);
   void deleteShapes(Shape* const*, size_t&);

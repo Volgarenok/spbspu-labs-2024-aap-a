@@ -1,6 +1,5 @@
 #include "shape_utils.hpp"
 #include <cassert>
-#include <cstring>
 #include <stdexcept>
 #include "polygon.hpp"
 #include "rectangle.hpp"
@@ -55,21 +54,18 @@ void kizhin::deleteShapes(Shape* const* shapes, size_t& size)
   size -= deleted;
 }
 
-kizhin::Shape* kizhin::createShape(const char* shapeName, const double* shapeParams)
+kizhin::Shape* kizhin::createShape(const std::string& shapeName, const double* shapeParams)
 {
-  if (!shapeName || !shapeParams) {
-    return nullptr;
-  }
-  if (std::strcmp(shapeName, "RECTANGLE") == 0) {
+  if (shapeName == "RECTANGLE") {
     return createRectangle(shapeParams);
   }
-  if (std::strcmp(shapeName, "REGULAR") == 0) {
+  if (shapeName == "REGULAR") {
     return createRegular(shapeParams);
   }
-  if (std::strcmp(shapeName, "POLYGON") == 0) {
+  if (shapeName== "POLYGON") {
     return createPolygon(shapeParams);
   }
-  return nullptr;
+  throw std::logic_error("Failed to create shape");
 }
 
 kizhin::Rectangle* kizhin::createRectangle(const double* params)
@@ -78,7 +74,7 @@ kizhin::Rectangle* kizhin::createRectangle(const double* params)
   const point_t leftDown { params[1], params[2] };
   const point_t rightUp { params[3], params[4] };
   if (leftDown.x >= rightUp.x || leftDown.y >= rightUp.y) {
-    return nullptr;
+    throw std::logic_error("Failed to create rectangle");
   }
   const double width = rightUp.x - leftDown.x;
   const double height = rightUp.y - leftDown.y;
@@ -92,13 +88,7 @@ kizhin::Regular* kizhin::createRegular(const double* params)
   const point_t p1 { params[1], params[2] };
   const point_t p2 { params[3], params[4] };
   const point_t p3 { params[5], params[6] };
-  Regular* result = nullptr;
-  try {
-    result = new Regular { p1, p2, p3 };
-  } catch (const std::logic_error&) {
-    return nullptr;
-  }
-  return result;
+  return new Regular { p1, p2, p3 };
 }
 
 kizhin::Polygon* kizhin::createPolygon(const double* params)
@@ -115,14 +105,11 @@ kizhin::Polygon* kizhin::createPolygon(const double* params)
   Polygon* result = nullptr;
   try {
     result = new Polygon(points, pointCount);
-    delete[] points;
-  } catch (const std::logic_error&) {
-    delete[] points;
-    return nullptr;
   } catch (...) {
     delete[] points;
     throw;
   }
+  delete[] points;
   return result;
 }
 

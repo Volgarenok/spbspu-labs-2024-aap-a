@@ -1,5 +1,5 @@
-#ifndef BASE_TYPES_HPP
-#define BASE_TYPES_HPP
+#ifndef KIZHIN_T1_BASE_TYPES_HPP
+#define KIZHIN_T1_BASE_TYPES_HPP
 
 namespace kizhin {
   struct point_t;

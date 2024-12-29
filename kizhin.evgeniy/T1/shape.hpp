@@ -1,5 +1,5 @@
-#ifndef SHAPE_HPP
-#define SHAPE_HPP
+#ifndef KIZHIN_T1_SHAPE_HPP
+#define KIZHIN_T1_SHAPE_HPP
 
 #include "base-types.hpp"
 

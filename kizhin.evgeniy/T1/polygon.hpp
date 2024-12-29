@@ -1,5 +1,5 @@
-#ifndef POLYGON_HPP
-#define POLYGON_HPP
+#ifndef KIZHIN_T1_POLYGON_HPP
+#define KIZHIN_T1_POLYGON_HPP
 
 #include <cstddef>
 #include "shape.hpp"
@@ -8,7 +8,7 @@ namespace kizhin {
   class Polygon;
 }
 
-class kizhin::Polygon: public Shape
+class kizhin::Polygon final: public Shape
 {
 public:
   Polygon(const Polygon&);

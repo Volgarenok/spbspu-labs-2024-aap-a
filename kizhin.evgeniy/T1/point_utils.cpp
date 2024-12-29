@@ -57,7 +57,7 @@ bool kizhin::areCollinear(const point_t& p1, const point_t& p2, const point_t& p
   return std::abs(leftProduct - rigthProduct) < epsilon;
 }
 
-kizhin::point_t& operator+=(kizhin::point_t& lhs, const kizhin::point_t& rhs)
+kizhin::point_t& kizhin::operator+=(point_t& lhs, const kizhin::point_t& rhs)
 {
   lhs.x += rhs.x;
   lhs.y += rhs.y;
