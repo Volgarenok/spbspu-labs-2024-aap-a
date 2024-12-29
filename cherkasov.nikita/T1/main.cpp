@@ -10,11 +10,11 @@
 
 int main()
 {
-  cherkasov::Shape* shapes[10000] = {};
+  cherkasov::Shape* shapes[1000] = {};
   std::string inputCommand = "";
   size_t shapeCount = 0;
   bool invalidInput = false;
-  cherkasov::point_t p = { 0.0, 0.0 };
+  cherkasov::point_t p = {0.0, 0.0};
   double scalingFactor = 0;
   bool scalingRequested = false;
   while (std::cin >> inputCommand)
