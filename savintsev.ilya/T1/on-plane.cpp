@@ -1,4 +1,4 @@
-#include "base-types.hpp"
+#include "on-plane.hpp"
 #include <cmath>
 
 double savintsev::getLength(point_t lhs, point_t rhs)
@@ -31,7 +31,7 @@ bool savintsev::isTriangle(point_t p1, point_t p2, point_t p3)
   return largest < (l1 + l2 + l3 - largest);
 }
 
-savintsev::point_t savintsev::findLinesIntersect(point_t m1, point_t m2, point_t n1, point_t n2, bool * finded)
+bool savintsev::findLinesIntersect(point_t m1, point_t m2, point_t n1, point_t n2, point_t & found)
 {
   double a1 = m2.y - m1.y;
   double b1 = m1.x - m2.x;
@@ -42,21 +42,14 @@ savintsev::point_t savintsev::findLinesIntersect(point_t m1, point_t m2, point_t
   double determinant = a1 * b2 - a2 * b1;
   if (determinant == 0)
   {
-    if (finded != nullptr)
-    {
-      *finded = false;
-    }
-    return {0., 0.};
+    return false;
   }
   else
   {
     double x = (b2 * c1 - b1 * c2) / determinant;
     double y = (a1 * c2 - a2 * c1) / determinant;
-    if (finded != nullptr)
-    {
-      *finded = true;
-    }
-    return {x, y};
+    found = {x, y};
+    return true;
   }
 }
 

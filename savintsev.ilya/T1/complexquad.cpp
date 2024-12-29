@@ -7,9 +7,8 @@ savintsev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t 
   p3_(p3),
   p4_(p4)
 {
-  bool wasFounded = true;
-  point_t center = findLinesIntersect(p1_, p2_, p3_, p4_, &wasFounded);
-  if (!wasFounded || !isTriangle(p1_, p4_, center) || !isTriangle(p2_, p3_, center))
+  point_t center = {0.0, 0.0};
+  if (!findLinesIntersect(p1_, p2_, p3_, p4_, center) || !isTriangle(p1_, p4_, center) || !isTriangle(p2_, p3_, center))
   {
     throw std::invalid_argument("ERROR: Invalid argumets for Complexquad");
   }
@@ -33,7 +32,8 @@ savintsev::rectangle_t savintsev::Complexquad::getFrameRect() const
 
 void savintsev::Complexquad::move(point_t p)
 {
-  point_t center = findLinesIntersect(p1_, p2_, p3_, p4_, nullptr);
+  point_t center = {0.0, 0.0};
+  findLinesIntersect(p1_, p2_, p3_, p4_, center);
   double moveByX = p.x - center.x;
   double moveByY = p.y - center.y;
   this->p1_ = {p1_.x + moveByX, p1_.y + moveByY};
@@ -56,7 +56,8 @@ void savintsev::Complexquad::scale(double k)
   {
     return;
   }
-  point_t center = findLinesIntersect(p1_, p2_, p3_, p4_, nullptr);
+  point_t center = {0.0, 0.0};
+  findLinesIntersect(p1_, p2_, p3_, p4_, center);
   this->p1_ = {center.x - (center.x - p1_.x) * k, center.y - (center.y - p1_.y) * k};
   this->p2_ = {center.x - (center.x - p2_.x) * k, center.y - (center.y - p2_.y) * k};
   this->p3_ = {center.x - (center.x - p3_.x) * k, center.y - (center.y - p3_.y) * k};
