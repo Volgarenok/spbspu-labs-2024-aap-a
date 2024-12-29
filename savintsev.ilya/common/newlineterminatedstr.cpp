@@ -4,7 +4,7 @@
 
 namespace savintsev
 {
-  constexpr size_t MEMORY_SIZE = 8;
+  constexpr size_t MEMORY_SIZE = 40;
 }
 
 char * savintsev::inputNewlineTerminatedStr(std::istream & in)
@@ -21,7 +21,7 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
   }
   size_t i = 0;
   char buffer = 'a';
-  while (in.good())
+  while (!in.eof())
   {
     if (i == (capacity - 1))
     {
@@ -45,11 +45,6 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
     {
       break;
     }
-  }
-  if (!in.good())
-  {
-    delete[] t;
-    return nullptr;
   }
   t[i - 1] = '\0';
   return t;
