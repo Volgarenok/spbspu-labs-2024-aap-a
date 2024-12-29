@@ -1,4 +1,5 @@
 #include "stringFunctions.hpp"
+#include <cstdlib>
 
 int asafov::countUniqLetters(const char* string)
 {
@@ -6,7 +7,7 @@ int asafov::countUniqLetters(const char* string)
   size_t count = 0;
   for(size_t i = 0; string[i]!='\0'; i++)
   {
-    if((string[i] > 'A' && string[i] < 'Z') || (string[i] > 'a' && string[i] < 'z'))
+    if(std::isalpha(string[i]))
     {
       for(int j = 0; j < 26; j++)
       {
@@ -27,7 +28,7 @@ void asafov::getUnusedLetters(const char* string, char* unusedletters)
   size_t count = 0;
   for(size_t i = 0; string[i]!='\0'; i++)
   {
-    if((string[i] > 'A' && string[i] < 'Z') || (string[i] > 'a' && string[i] < 'z'))
+    if(std::isalpha(string[i]))
     {
       for(int j = 0; j < 26; j++)
       {
@@ -39,27 +40,18 @@ void asafov::getUnusedLetters(const char* string, char* unusedletters)
       }
     }
   }
-  while (alphabet[0] == 0)
+  for (size_t i = 0; i <=26; i++)
   {
-    for (size_t i = 0; i < 25; i++)
+    if (alphabet[i] == '\0')
     {
-      alphabet[i] = alphabet[i + 1];
-    }
-    alphabet[25] = '\0';
-  }
-  for (size_t i = 1; i < 26; i++)
-  {
-    if (alphabet[i] == 0)
-    {
-      for (size_t j = 0; j < 25; j++)
+      for (size_t j = 26; j > i; j--)
       {
-        alphabet[j] = alphabet[j + 1];
+        if (alphabet[j] != '\0' && alphabet[j - 1] == '\0')
+        {
+          alphabet[j - 1] = alphabet[j];
+          alphabet[j] = '\0';
+        }
       }
-      alphabet[25] = '\0';
     }
-  }
-  for (size_t i = 0; i < 26; i++)
-  {
-    unusedletters[i] = alphabet[i];
   }
 }

@@ -11,10 +11,8 @@ int main()
     return 1;
   }
 
-  //[DIF-LAT]
   std::cout << asafov::countUniqLetters(str) << '\n';
 
-  //[SHR-SYM]
   char* unusedLetters = new char[26];
   asafov::getUnusedLetters(str, unusedLetters);
   std::cout << unusedLetters << '\n';
