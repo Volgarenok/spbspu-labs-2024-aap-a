@@ -7,7 +7,7 @@ int asafov::countUniqLetters(const char* string)
   size_t count = 0;
   for(size_t i = 0; string[i]!='\0'; i++)
   {
-    if(std::isalpha(string[i]))
+    if(isalpha(string[i]))
     {
       for(int j = 0; j < 26; j++)
       {
@@ -28,7 +28,7 @@ void asafov::getUnusedLetters(const char* string, char* unusedletters)
   size_t count = 0;
   for(size_t i = 0; string[i]!='\0'; i++)
   {
-    if(std::isalpha(string[i]))
+    if(isalpha(string[i]))
     {
       for(int j = 0; j < 26; j++)
       {
