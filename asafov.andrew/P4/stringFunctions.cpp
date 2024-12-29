@@ -1,5 +1,5 @@
 #include "stringFunctions.hpp"
-#include <cstdlib>
+#include <cctype>
 
 int asafov::countUniqLetters(const char* string)
 {
