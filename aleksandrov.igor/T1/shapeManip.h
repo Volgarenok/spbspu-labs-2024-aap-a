@@ -17,7 +17,7 @@ namespace aleksandrov
   Circle* makeCircle(std::istream& input);
   void scaleShapes(Shape** shapes, size_t count, double x, double y, double k);
   void printFrameRectCoords(std::ostream& output, Shape** shape, size_t count);
-  void deleteShapes(Shape** shape, size_t count);
+  void deleteShapes(Shape** shape);
 }
 
 #endif

@@ -12,9 +12,9 @@ int main()
   constexpr const size_t maxShapes = 10000;
   aleksandrov::Shape* shapes[maxShapes] = {};
   bool wasDescriptionError = false;
-  size_t count = 0;
   try
   {
+    size_t count = 0;
     count = aleksandrov::getShapes(std::cin, shapes, wasDescriptionError);
     double x = 0.0;
     double y = 0.0;
@@ -35,18 +35,19 @@ int main()
   catch (const std::bad_alloc& e)
   {
     std::cerr << "ERROR: Out of memory!\n";
-    aleksandrov::deleteShapes(shapes, count);
+    aleksandrov::deleteShapes(shapes);
     return 1;
   }
   catch (const std::logic_error& e)
   {
     std::cerr << "ERROR: " << e.what() << "\n";
+    aleksandrov::deleteShapes(shapes);
     return 1;
   }
   if (wasDescriptionError)
   {
     std::cerr << "WARNING: Some supporting shapes had a description error!\n";
   }
-  aleksandrov::deleteShapes(shapes, count);
+  aleksandrov::deleteShapes(shapes);
 }
 

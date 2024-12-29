@@ -152,11 +152,12 @@ namespace aleksandrov
     }
   }
 
-  void deleteShapes(Shape** shapes, size_t count)
+  void deleteShapes(Shape** shapes)
   {
-    for (size_t i = 0; i < count; ++i)
+    size_t i = 0;
+    while (shapes[i])
     {
-      delete shapes[i];
+      delete shapes[i++];
     }
   }
 }
