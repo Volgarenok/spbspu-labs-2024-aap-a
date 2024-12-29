@@ -1,4 +1,4 @@
-#include "io_utils.hpp"
+#include "factory.hpp"
 #include <iostream>
 #include "rectangle.hpp"
 #include "ring.hpp"
@@ -30,19 +30,19 @@ namespace
     return new demehin::Ring(center, out_r, in_r);
   }
 
-  void inputPolygonCords(std::istream& in, demehin::point_t** pts, size_t max_size, size_t& cord_cnt)
+  void inputPolygonCords(std::istream& in, demehin::point_t** pts, size_t capacity, size_t& cord_cnt)
   {
-    *pts = new demehin::point_t[max_size];
+    *pts = new demehin::point_t[capacity];
     size_t size = 0;
     while (in.peek() != '\n')
     {
-      if (size >= max_size)
+      if (size >= capacity)
       {
-        max_size *= 2;
+        capacity *= 2;
         demehin::point_t* new_pts = nullptr;
         try
         {
-          new_pts = new demehin::point_t[max_size];
+          new_pts = new demehin::point_t[capacity];
         }
         catch (const std::bad_alloc& e)
         {
@@ -65,10 +65,10 @@ namespace
 
   demehin::Polygon* createPolygon(std::istream& in)
   {
-    constexpr size_t max_size = 100;
+    constexpr size_t capacity = 128;
     size_t cord_cnt = 0;
     demehin::point_t* vrt = nullptr;
-    inputPolygonCords(in, &vrt, max_size, cord_cnt);
+    inputPolygonCords(in, &vrt, capacity, cord_cnt);
     demehin::Polygon* plg = nullptr;
     try
     {

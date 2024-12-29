@@ -2,11 +2,9 @@
 #include <string>
 #include <iomanip>
 #include "rectangle.hpp"
-#include "shape.hpp"
-#include "base-types.hpp"
 #include "ring.hpp"
 #include "polygon.hpp"
-#include "io_utils.hpp"
+#include "factory.hpp"
 
 namespace
 {
@@ -124,7 +122,6 @@ int main()
   {
     std::cerr << "Incorrect shape\n";
   }
-
 
   std::cout << std::fixed << std::setprecision(1);
   printShapesInfo(std::cout, shapes, shp_cnt);

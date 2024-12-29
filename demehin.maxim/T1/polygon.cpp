@@ -71,7 +71,6 @@ demehin::rectangle_t demehin::Polygon::getFrameRect() const
     max_y = (max_y > vertex_[i].y) ? max_y : vertex_[i].y;
   }
 
-
   double fr_rect_h = max_y - min_y;
   double fr_rect_w = max_x - min_x;
   double pos_x = (max_x + min_x) / 2;
@@ -119,6 +118,7 @@ void demehin::Polygon::scale(double k)
   point_t plg_centre;
   plg_centre.x = 0;
   plg_centre.y = 0;
+
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
     plg_centre.x += vertex_[i].x;
