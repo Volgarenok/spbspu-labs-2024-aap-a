@@ -3,7 +3,10 @@
 #include <cmath>
 #include <stdexcept>
 
-bocharov::Triangle::Triangle(point_t a, point_t b, point_t c) : a_(a), b_(b), c_(c)
+bocharov::Triangle::Triangle(point_t a, point_t b, point_t c):
+ a_(a),
+ b_(b),
+ c_(c)
 {
   if ((a.x * (b.y -c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) == 0)
   {
