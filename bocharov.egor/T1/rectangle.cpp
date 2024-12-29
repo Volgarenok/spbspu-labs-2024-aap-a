@@ -3,7 +3,9 @@
 #include <stdexcept>
 #include <cmath>
 
-bocharov::Rectangle::Rectangle(point_t leftDown, point_t rightUp): leftDown_({0.0L, 0.0L}), rightUp_({0.0L, 0.0L})
+bocharov::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
+ leftDown_({0.0L, 0.0L}),
+ rightUp_({0.0L, 0.0L})
 {
   if (leftDown.x < rightUp.x && leftDown.y < rightUp.y)
   {
