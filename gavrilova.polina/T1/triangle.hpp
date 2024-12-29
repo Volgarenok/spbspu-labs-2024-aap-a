@@ -5,12 +5,13 @@ namespace gavrilova {
   class Triangle : public Shape {
   public:
     Triangle(point_t A, point_t B, point_t C);
+    Triangle(const Triangle& other);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;
     void move(double difX, double difY) override;
     void scale(double k) override;
-    point_t getCenter();
+    Shape* clone() const;
   private:
     point_t A_;
     point_t B_;

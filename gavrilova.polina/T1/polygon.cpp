@@ -7,6 +7,15 @@ gavrilova::Polygon::Polygon(size_t size, point_t * verteces):
   size_(size),
   verteces_(verteces)
 {}
+gavrilova::Polygon::Polygon(const Polygon& other):
+  size_(other.size_),
+  verteces_(nullptr) 
+{
+  verteces_ = new point_t[size_];
+  for (size_t i = 0; i < size_; ++i) {
+    verteces_[i] = other.verteces_[i];
+  }
+}
 
 gavrilova::Polygon::~Polygon() {
   delete[] verteces_;
@@ -71,4 +80,7 @@ gavrilova::point_t gavrilova::Polygon::getCenter() {
   xC /= size_;
   yC /= size_;
   return {xC, yC};
+}
+gavrilova::Shape* gavrilova::Polygon::clone() const {
+  return new Polygon(*this);
 }

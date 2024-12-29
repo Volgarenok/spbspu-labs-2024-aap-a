@@ -15,6 +15,11 @@ gavrilova::Rectangle::Rectangle(point_t pBottomLeft, point_t pTopRight):
     throw std::logic_error("Invalid arguments for rectangle");
   }
 }
+gavrilova::Rectangle::Rectangle(const Rectangle& other):
+  pBottomLeft_(other.pBottomLeft_),
+  pTopRight_(other.pTopRight_)
+{}
+
 double gavrilova::Rectangle::getArea() const {
   return (pTopRight_.x - pBottomLeft_.x) * (pTopRight_.y - pBottomLeft_.y);
 }
@@ -48,4 +53,7 @@ void gavrilova::Rectangle::scale(double k) {
   pBottomLeft_.y = center.y - frameRect.height / 2 * k;
   pTopRight_.x = center.x + frameRect.width / 2 * k;
   pTopRight_.y = center.y + frameRect.height / 2 * k;
+}
+gavrilova::Shape* gavrilova::Rectangle::clone() const {
+  return new Rectangle(*this);
 }

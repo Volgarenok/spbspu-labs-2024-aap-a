@@ -11,6 +11,12 @@ gavrilova::Ellipse::Ellipse(point_t center, double radiusX, double radiusY) :
   }
 }
 
+gavrilova::Ellipse::Ellipse(const Ellipse& other):
+  center_(other.center_),
+  radiusX_(other.radiusX_),
+  radiusY_(other.radiusY_)
+{}
+
 double gavrilova::Ellipse::getArea() const {
   return 3.14159 * radiusX_ * radiusY_;
 }
@@ -37,4 +43,7 @@ void gavrilova::Ellipse::move(double difX, double difY) {
 void gavrilova::Ellipse::scale(double k) {
   radiusX_ *= k;
   radiusY_ *= k;
+}
+gavrilova::Shape* gavrilova::Ellipse::clone() const {
+  return new Ellipse(*this);
 }

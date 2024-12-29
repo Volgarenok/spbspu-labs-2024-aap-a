@@ -9,6 +9,7 @@ bool gavrilova::isTriangle(point_t A, point_t B, point_t C) {
   double BC = gavrilova::getDistance(B, C);
   return ( (AB + BC) > AC && (AB + AC) > BC && (AC + BC) > AB && AB && AC && BC );
 }
+
 double gavrilova::getDistance(point_t A, point_t B){
   return std::sqrt(std::pow(A.x - B.x, 2) + std::pow(A.y - B.y, 2));
 }
@@ -29,6 +30,12 @@ gavrilova::Triangle::Triangle(point_t A, point_t B, point_t C):
     throw std::logic_error("Invalid arguments for triangle");
   }
 }
+gavrilova::Triangle::Triangle(const Triangle& other): 
+  A_(other.A_),
+  B_(other.B_),
+  C_(other.C_)
+{}
+
 double gavrilova::Triangle::getArea() const
 {
     double S = std::abs(((A_.x * (B_.y - C_.y) +
@@ -76,9 +83,6 @@ void gavrilova::Triangle::scale(double k) {
   C_.x = center.x - (center.x - C_.x) * k;
   C_.y = center.y - (center.y - C_.y) * k;
 }
-/* gavrilova::point_t gavrilova::Triangle::getCenter() {
-  double cX = (A_.x + B_.x + C_.x) / 3;
-  double cY = (A_.y + B_.y + C_.y) / 3;
-  return {cX, cY};
+gavrilova::Shape* gavrilova::Triangle::clone() const {
+  return new Triangle(*this);
 }
- */

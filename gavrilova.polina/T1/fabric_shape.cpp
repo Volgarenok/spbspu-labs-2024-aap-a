@@ -8,6 +8,7 @@
 #include "rectangle.hpp"
 #include "triangle.hpp"
 #include "polygon.hpp"
+#include "ellipse.hpp"
 #include "shape.hpp"
 
 namespace {
@@ -73,6 +74,25 @@ gavrilova::Shape * gavrilova::fabric_shape(std::istream& in, gavrilova::point_t 
     Shape * res = nullptr;
     try {
       res = make_polygon(line, nSpaces, nError);
+      return res;
+    } catch (...) {
+      ++nError;
+      delete[] line;
+      return nullptr;
+    }
+  } else if (!std::strcmp(shapeType, "ELLIPSE")) {
+    char * cXStr = strtok(nullptr, " ");
+    char * cYStr = strtok(nullptr, " ");
+    char * rXStr = strtok(nullptr, " ");
+    char * rYStr = strtok(nullptr, " ");
+    double x = std::atof(cXStr);
+    double y = std::atof(cYStr);
+    double radiusX = std::atof(rXStr);
+    double radiusY = std::atof(rYStr);
+
+    try {
+      gavrilova::Ellipse* res = new gavrilova::Ellipse({x, y}, radiusX, radiusY);
+      delete[] line;
       return res;
     } catch (...) {
       ++nError;
