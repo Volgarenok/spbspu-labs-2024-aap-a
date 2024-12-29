@@ -15,7 +15,7 @@ int main()
   size_t shapeCount = 0;
   bool invalidInput = false;
   cherkasov::point_t p = {0.0, 0.0};
-  double scalingFactor = 0;
+  double scalingFactor = 0.0;
   bool scalingRequested = false;
   while (std::cin >> inputCommand)
   {
@@ -109,5 +109,6 @@ int main()
   std::cout << cherkasov::calculArea(shapes, shapeCount);
   cherkasov::outputFrameCoordinates(shapes, shapeCount);
   cherkasov::deleteShapes(shapes, shapeCount);
+  shapeCount = 0;
   return 0;
 }
