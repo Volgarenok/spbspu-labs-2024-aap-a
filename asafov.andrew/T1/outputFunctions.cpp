@@ -144,18 +144,10 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
     Complexquad* comp = new Complexquad(a, b, c, d);
     return comp;
   }
-  else
-  {
-    double temp = 0;
-    point_t a = {};
-    in >> temp;
-    a.x = temp;
-    in >> temp;
-    a.y = temp;
-    in >> temp;
-    Circle* circ = new Circle(a, temp);
-    return circ;
-  }
+  double temp = 0;
+  point_t a = {};
+  Circle* circ = new Circle(a, temp);
+  return circ;
 }
 
 unsigned long asafov::getHash(std::istream& in)
