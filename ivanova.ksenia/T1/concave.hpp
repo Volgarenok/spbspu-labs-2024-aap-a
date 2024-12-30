@@ -8,20 +8,20 @@ namespace ivanova
   class Concave : public Shape
   {
   public:
-    Concave(point_t conPoint1, point_t conPoint2, point_t conPoint3, point_t conPoint4);
+    Concave(point_t cnPoint1, point_t cnPoint2, point_t cnPoint3, point_t cnPoint4);
 
     double getArea() const override;
     rectangle_t getFrameRect() const override;
 
     void move(point_t point) override;
     void move(double x, double y) override;
-    void scale(double) override;
+    void scale(double ratio) override;
 
   private:
-    point_t conPoint1_;
-    point_t conPoint2_;
-    point_t conPoint3_;
-    point_t conPoint4_;
+    point_t cnPoint1_;
+    point_t cnPoint2_;
+    point_t cnPoint3_;
+    point_t cnPoint4_;
   };
 }
 

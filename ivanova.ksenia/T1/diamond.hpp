@@ -15,7 +15,7 @@ namespace ivanova
 
     void move(point_t point) override;
     void move(double x, double y) override;
-    void scale(double) override;
+    void scale(double ratio) override;
 
   private:
     point_t topPoint_;
