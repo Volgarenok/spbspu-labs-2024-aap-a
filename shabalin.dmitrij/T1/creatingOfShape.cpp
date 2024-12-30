@@ -30,7 +30,7 @@ void shabalin::extractDataForShape(const char *string, double *coordStorage, con
   }
 }
 
-shabalin::Shape * arakelyan::createPar(const char *string)
+shabalin::Shape * shabalin::createPar(const char *string)
 {
   size_t wordLen = 13;
   const size_t arrayWeight = 6;
@@ -42,7 +42,7 @@ shabalin::Shape * arakelyan::createPar(const char *string)
   return new Parallelogram(p1, p2, p3);
 }
 
-arakelyan::Shape * arakelyan::createDiam(const char *string)
+shabalin::Shape * shabalin::createDiam(const char *string)
 {
   size_t wordLen = 7;
   const size_t arrayWeight = 6;

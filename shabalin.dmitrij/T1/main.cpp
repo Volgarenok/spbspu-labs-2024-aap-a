@@ -13,7 +13,6 @@
 
 int main()
 {
-  using namespace arakelyan;
   size_t maxShapesCount = 1000;
   size_t currentShapesCount = 0;
   Shape **myShapes = new Shape *[maxShapesCount]{nullptr};
@@ -33,18 +32,18 @@ int main()
   {
     if (!std::cin.good())
     {
-      freeMem(myShapes, currentShapesCount);
+      shabalin::freeMem(myShapes, currentShapesCount);
       std::cerr << "Somthing went wrong with input, might be EOF!\n";
       return 1;
     }
 
     try
     {
-      string = inputLine(std::cin);
+      string = shabalin::inputOfString(std::cin);
     }
     catch (const std::exception &e)
     {
-      freeMem(myShapes, currentShapesCount);
+      shabalin::freeMem(myShapes, currentShapesCount);
       std::cerr << "Error: " << e.what() << "\n";
       return 1;
     }
@@ -52,10 +51,10 @@ int main()
     const char * foundScale = std::strstr(string, targetWordScale);
     if (foundScale != nullptr)
     {
-      inputScaleParam(string, scalePoint, scaleK);
+      shabalin::inputScaleParam(string, scalePoint, scaleK);
       try
       {
-        scaleFunction(myShapes, currentShapesCount, scalePoint, scaleK, std::cout);
+        shabalin::scaleFunction(myShapes, currentShapesCount, scalePoint, scaleK, std::cout);
       }
       catch (const std::logic_error &e)
       {
@@ -69,7 +68,7 @@ int main()
       {
         if (string[0] != '\0')
         {
-          defineAndCreateShape(myShapes, currentShapesCount, string);
+          shabalin::defineAndCreateShape(myShapes, currentShapesCount, string);
         }
       }
       catch (const std::logic_error &e)
@@ -92,17 +91,16 @@ int main()
   if (errorsFlagScale)
   {
     std::cerr << "Something went wrong with scale process, might be incorrect k of scale!\n";
-    freeMem(myShapes, currentShapesCount);
+    shabalin::freeMem(myShapes, currentShapesCount);
     return 2;
   }
 
   if (currentShapesCount == 0)
   {
     std::cerr << "\nNothing to scale!\n";
-    freeMem(myShapes, currentShapesCount);
+    shabalin::freeMem(myShapes, currentShapesCount);
     return 2;
   }
-
-  freeMem(myShapes, currentShapesCount);
+  shabalin::freeMem(myShapes, currentShapesCount);
   return 0;
 }
