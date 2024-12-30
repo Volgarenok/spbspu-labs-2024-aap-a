@@ -28,7 +28,7 @@ int main()
   char *string = nullptr;
 
   bool scaleEntered = false;
-
+  const char end = '\n';
   while (!scaleEntered)
   {
     if (!std::cin.good())
@@ -37,7 +37,6 @@ int main()
       std::cerr << "Somthing went wrong with input, might be EOF!\n";
       return 1;
     }
-    const char end = '\n';
     try
     {
       string = shabalin::inputOfString(std::cin, end);
