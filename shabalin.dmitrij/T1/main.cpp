@@ -46,6 +46,7 @@ int main()
       {
         throw std::runtime_error("Input error: string is null.");
       }
+      const char *foundScale = std::strstr(string, targetWordScale);
     }
     catch (const std::exception &e)
     {
@@ -54,7 +55,7 @@ int main()
       return 1;
     }
 
-    const char *foundScale = std::strstr(string, targetWordScale);
+    //const char *foundScale = std::strstr(string, targetWordScale);
     if (foundScale != nullptr)
     {
       inputScale(string, scalePoint, scaleK);
