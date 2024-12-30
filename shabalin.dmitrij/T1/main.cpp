@@ -15,7 +15,7 @@ int main()
 {
   size_t maxShapesCount = 1000;
   size_t currentShapesCount = 0;
-  Shape **myShapes = new Shape *[maxShapesCount]{nullptr};
+  shabalin::Shape **myShapes = new shabalin::Shape *[maxShapesCount]{nullptr};
 
   bool errorsFlagShapes = false;
   bool errorsFlagScale = false;
@@ -51,7 +51,7 @@ int main()
     const char * foundScale = std::strstr(string, targetWordScale);
     if (foundScale != nullptr)
     {
-      shabalin::inputScaleParam(string, scalePoint, scaleK);
+      shabalin::inputScale(string, scalePoint, scaleK);
       try
       {
         shabalin::scaleFunction(myShapes, currentShapesCount, scalePoint, scaleK, std::cout);
