@@ -63,4 +63,3 @@ kizhin::point_t& kizhin::operator+=(point_t& lhs, const kizhin::point_t& rhs)
   lhs.y += rhs.y;
   return lhs;
 }
-

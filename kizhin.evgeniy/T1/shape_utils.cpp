@@ -1,5 +1,4 @@
 #include "shape_utils.hpp"
-#include <cassert>
 #include <stdexcept>
 #include "polygon.hpp"
 #include "rectangle.hpp"
@@ -12,20 +11,16 @@ namespace kizhin {
   void scaleShape(Shape*, const double*);
 }
 
-void kizhin::scaleShapes(Shape* const* shapes, size_t size, const double* params)
+void kizhin::scaleShapes(Shape* const* shapes, const double* params)
 {
-  for (Shape* const* i = shapes; i != shapes + size; ++i) {
+  for (Shape* const* i = shapes; *i != nullptr; ++i) {
     scaleShape(*i, params);
   }
 }
 
 void kizhin::scaleShape(Shape* shape, const double* params)
 {
-  assert(params && params[0] == 3);
   const double scalingFactor = params[3];
-  if (scalingFactor <= 0) {
-    throw std::logic_error("Invalid Scale Factor");
-  }
   const point_t scalingPoint { params[1], params[2] };
   const point_t oldFramePos = shape->getFrameRect().pos;
   shape->move(scalingPoint);
@@ -36,22 +31,20 @@ void kizhin::scaleShape(Shape* shape, const double* params)
   shape->move(dx, dy);
 }
 
-double kizhin::computeTotalArea(const Shape* const* shapes, size_t size)
+double kizhin::computeTotalArea(const Shape* const* shapes)
 {
   double area = 0.0;
-  for (const Shape* const* i = shapes; i != shapes + size; ++i) {
+  for (const Shape* const* i = shapes; *i != nullptr; ++i) {
     area += (*i)->getArea();
   }
   return area;
 }
 
-void kizhin::deleteShapes(Shape* const* shapes, size_t& size)
+void kizhin::deleteShapes(Shape* const* shapes)
 {
-  size_t deleted = 0;
-  for (kizhin::Shape* const* i = shapes; i != shapes + size; ++i, ++deleted) {
+  for (Shape* const* i = shapes; *i != nullptr; ++i) {
     delete *i;
   }
-  size -= deleted;
 }
 
 kizhin::Shape* kizhin::createShape(const std::string& shapeName, const double* shapeParams)
@@ -70,7 +63,6 @@ kizhin::Shape* kizhin::createShape(const std::string& shapeName, const double* s
 
 kizhin::Rectangle* kizhin::createRectangle(const double* params)
 {
-  assert(params && params[0] == 4);
   const point_t leftDown { params[1], params[2] };
   const point_t rightUp { params[3], params[4] };
   if (leftDown.x >= rightUp.x || leftDown.y >= rightUp.y) {
@@ -84,7 +76,6 @@ kizhin::Rectangle* kizhin::createRectangle(const double* params)
 
 kizhin::Regular* kizhin::createRegular(const double* params)
 {
-  assert(params && params[0] == 6);
   const point_t p1 { params[1], params[2] };
   const point_t p2 { params[3], params[4] };
   const point_t p3 { params[5], params[6] };
@@ -93,9 +84,7 @@ kizhin::Regular* kizhin::createRegular(const double* params)
 
 kizhin::Polygon* kizhin::createPolygon(const double* params)
 {
-  assert(params);
   const size_t size = static_cast< size_t >(params[0]);
-  assert(size && size % 2 == 0);
   const size_t pointCount = size / 2;
   point_t* points = new point_t[pointCount];
   for (size_t i = 0; i < pointCount; ++i) {
@@ -112,4 +101,3 @@ kizhin::Polygon* kizhin::createPolygon(const double* params)
   delete[] points;
   return result;
 }
-

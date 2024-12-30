@@ -5,11 +5,10 @@
 #include "shape.hpp"
 
 namespace kizhin {
-  double* processInput(std::istream&, std::ostream&, size_t&, Shape**);
-  double* parseInputString(std::istream&, std::string&);
+  double* processInput(std::istream&, std::ostream&, Shape**);
+  double* parseInputShape(std::istream&, std::string&);
   std::ostream& outputShapeFrame(std::ostream&, const Shape*);
-  std::ostream& outputShapesInfo(std::ostream&, const Shape* const*, size_t);
+  std::ostream& outputShapesInfo(std::ostream&, const Shape* const*);
 }
 
 #endif
-

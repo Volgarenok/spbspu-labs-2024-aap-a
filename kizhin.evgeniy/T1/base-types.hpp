@@ -20,4 +20,3 @@ struct kizhin::rectangle_t
 };
 
 #endif
-

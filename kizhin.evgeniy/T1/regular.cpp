@@ -1,5 +1,4 @@
 #include "regular.hpp"
-#include <cassert>
 #include <cmath>
 #include <stdexcept>
 #include "point_utils.hpp"
@@ -50,7 +49,9 @@ void kizhin::Regular::move(const point_t& newPos)
 
 void kizhin::Regular::scale(double scaleFactor)
 {
-  assert(scaleFactor > 0);
+  if (scaleFactor <= 0.0) {
+    throw std::logic_error("Failed to scale");
+  }
   vertex_.x *= scaleFactor;
   vertex_.y *= scaleFactor;
   computeFrameRect();
@@ -81,4 +82,3 @@ kizhin::point_t* kizhin::Regular::computeVerticesArray() const
   }
   return vertices;
 }
-

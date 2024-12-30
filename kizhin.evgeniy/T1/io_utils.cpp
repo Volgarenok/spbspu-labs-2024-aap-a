@@ -1,21 +1,18 @@
 #include "io_utils.hpp"
-#include <stdexcept>
 #include <iomanip>
 #include "shape_utils.hpp"
 
 namespace kizhin {
-  char* parseInputWord(std::istream&);
-  double* parseInputParams(std::istream&);
   void resizeBuffer(double** buffer, size_t& capacity);
   void throwIfNotScaleOrSize(bool isScaleCommand, size_t shapesSize);
   void copy(const double*, const double*, double*);
 }
 
-std::ostream& kizhin::outputShapesInfo(std::ostream& os, const Shape* const* shapes, size_t size)
+std::ostream& kizhin::outputShapesInfo(std::ostream& os, const Shape* const* shapes)
 {
   os << std::fixed << std::setprecision(1);
-  os << computeTotalArea(shapes, size);
-  for (const Shape* const* i = shapes; i != shapes + size; ++i) {
+  os << computeTotalArea(shapes);
+  for (const Shape* const* i = shapes; *i != nullptr; ++i) {
     outputShapeFrame(os << ' ', *i);
   }
   return os;
@@ -31,15 +28,15 @@ std::ostream& kizhin::outputShapeFrame(std::ostream& os, const Shape* shape)
   return os << x1 << ' ' << y1 << ' ' << x2 << ' ' << y2;
 }
 
-double* kizhin::processInput(std::istream& is, std::ostream& errs, size_t& size, Shape** shapes)
+double* kizhin::processInput(std::istream& is, std::ostream& errs, Shape** shapes)
 {
   bool isScaleCommand = false;
   std::string currentName;
   double* currentParams = nullptr;
-  size = 0;
+  size_t size = 0;
   try {
-    while (is && !isScaleCommand) {
-      currentParams = parseInputString(is, currentName);
+    while (is) {
+      currentParams = parseInputShape(is, currentName);
       if (currentName == "SCALE") {
         isScaleCommand = true;
         break;
@@ -70,26 +67,9 @@ void kizhin::throwIfNotScaleOrSize(bool isScaleCommand, size_t shapesSize)
   }
 }
 
-double* kizhin::parseInputString(std::istream& is, std::string& nameOut)
+double* kizhin::parseInputShape(std::istream& is, std::string& nameOut)
 {
   is >> nameOut;
-  return parseInputParams(is);
-}
-
-char* kizhin::parseInputWord(std::istream& is)
-{
-  std::string shapeName;
-  if (!(is >> shapeName)) {
-    return nullptr;
-  }
-  char* shapeNameCStr = new char[shapeName.size() + 1];
-  copy(shapeName.begin(), shapeName.end(), shapeNameCStr);
-  shapeNameCStr[shapeName.size()] = '\0';
-  return shapeNameCStr;
-}
-
-double* kizhin::parseInputParams(std::istream& is)
-{
   size_t paramsCapacity = 16;
   double* params = new double[paramsCapacity];
   params[0] = 0;
@@ -127,4 +107,3 @@ void kizhin::copy(const double* first, const double* last, double* result)
     *result = *first;
   }
 }
-

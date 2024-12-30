@@ -6,10 +6,9 @@
 
 namespace kizhin {
   Shape* createShape(const std::string&, const double*);
-  void scaleShapes(Shape* const*, size_t, const double*);
-  double computeTotalArea(const Shape* const*, size_t size);
-  void deleteShapes(Shape* const*, size_t&);
+  void scaleShapes(Shape* const*, const double*);
+  double computeTotalArea(const Shape* const*);
+  void deleteShapes(Shape* const*);
 }
 
 #endif
-

@@ -1,5 +1,5 @@
 #include "rectangle.hpp"
-#include <cmath>
+#include <stdexcept>
 
 kizhin::Rectangle::Rectangle(double width, double height, const point_t& position):
   data_{ width, height, position }
@@ -29,7 +29,9 @@ void kizhin::Rectangle::move(double dx, double dy)
 
 void kizhin::Rectangle::scale(double scaleFactor)
 {
-  data_.height *= std::abs(scaleFactor);
-  data_.width *= std::abs(scaleFactor);
+  if (scaleFactor <= 0.0) {
+    throw std::logic_error("Failed to scale");
+  }
+  data_.height *= scaleFactor;
+  data_.width *= scaleFactor;
 }
-

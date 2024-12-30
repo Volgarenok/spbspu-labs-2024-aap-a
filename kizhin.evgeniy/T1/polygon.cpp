@@ -92,7 +92,9 @@ void kizhin::Polygon::move(const point_t& newPos)
 
 void kizhin::Polygon::scale(double scaleFactor)
 {
-  scaleFactor = std::abs(scaleFactor);
+  if (scaleFactor <= 0.0) {
+    throw std::logic_error("Failed to scale");
+  }
   for (point_t* i = vertices_; i != vertices_ + size_; ++i) {
     i->x = center_.x + scaleFactor * (i->x - center_.x);
     i->y = center_.y + scaleFactor * (i->y - center_.y);
@@ -157,4 +159,3 @@ size_t kizhin::countEqual(const point_t* begin, const point_t* end, const point_
   }
   return count;
 }
-
