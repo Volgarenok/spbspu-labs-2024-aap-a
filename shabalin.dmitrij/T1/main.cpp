@@ -82,7 +82,7 @@ int main()
         currentShapesCount++;
       }
     }
-    delete [] string;
+    free(string);
   }
 
   if (errorsFlagShapes)
