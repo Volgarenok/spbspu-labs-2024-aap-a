@@ -1,7 +1,8 @@
 #include "complexquad.hpp"
 #include <cmath>
+#include "on-plane.hpp"
 
-savintsev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4) :
+savintsev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4):
   p1_(p1),
   p2_(p2),
   p3_(p3),

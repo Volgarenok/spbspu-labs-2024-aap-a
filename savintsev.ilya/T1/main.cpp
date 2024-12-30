@@ -10,8 +10,9 @@ int main()
   size_t amtOfShapes = 0;
   savintsev::Shape * ShapeList[capac];
   savintsev::point_t scaleC = {0, 0};
-  double scaleK = 0.;
-  while (true)
+  double scaleK = 0.0;
+  int result = 0;
+  while (result != 1)
   {
     delete[] line;
     line = savintsev::inputNewlineTerminatedStr(std::cin);
@@ -28,7 +29,7 @@ int main()
       std::cerr << "ERROR: EOF is not implemented\n";
       return 2;
     }
-    int result = savintsev::actWithShpByDesc(line, ShapeList, amtOfShapes, scaleC, scaleK);
+    result = savintsev::actWithShpByDesc(line, ShapeList, amtOfShapes, scaleC, scaleK);
     if (result == 1)
     {
       if (!amtOfShapes)

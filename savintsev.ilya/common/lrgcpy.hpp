@@ -5,7 +5,7 @@
 namespace savintsev
 {
   template <typename T>
-  T * createAmpCpyAny(const T * old, size_t old_size, size_t new_size)
+  T * createAmpCopy(const T * old, size_t old_size, size_t new_size)
   {
     T * created = new T[new_size];
     try
@@ -15,7 +15,7 @@ namespace savintsev
         created[i] = old[i];
       }
     }
-    catch (...)
+    catch (conts std::bad_alloc & e)
     {
       delete created;
       return nullptr;

@@ -29,8 +29,8 @@ void savintsev::scaleAllRelativeTo(Shape ** rhs, size_t amt, point_t p, double k
 
 void savintsev::printSumAreaAndBorders(std::ostream & out, Shape ** rhs, size_t amt)
 {
-  savintsev::point_t lL = {0., 0.}, uR = {0., 0.};
-  savintsev::rectangle_t rect = {0., 0., {0., 0.}};
+  savintsev::point_t lL = {0.0, 0.0}, uR = {0.0, 0.0};
+  savintsev::rectangle_t rect = {0.0, 0.0, {0.0, 0.0}};
   double sumArea = 0.;
   for (size_t i = 0; i < amt; ++i)
   {
@@ -77,7 +77,7 @@ int savintsev::actWithShpByDesc(char * desc, Shape ** rhs, size_t & amt, point_t
   {
     if (!std::strcmp(token, "RECTANGLE"))
     {
-      double numbers[4] = {0., 0., 0., 0.};
+      double numbers[4] = {0.0, 0.0, 0.0, 0.0};
       readDblfromDesc(numbers, 4);
       Rectangle * Rect = new Rectangle({numbers[0], numbers[1]}, {numbers[2], numbers[3]});
       rhs[amt++] = Rect;
@@ -85,7 +85,7 @@ int savintsev::actWithShpByDesc(char * desc, Shape ** rhs, size_t & amt, point_t
     }
     if (!std::strcmp(token, "CONCAVE"))
     {
-      double n[8] = {0., 0., 0., 0., 0., 0., 0., 0.};
+      double n[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
       readDblfromDesc(n, 8);
       Concave * Conc = new Concave({n[0], n[1]}, {n[2], n[3]}, {n[4], n[5]}, {n[6], n[7]});
       rhs[amt++] = Conc;
@@ -93,7 +93,7 @@ int savintsev::actWithShpByDesc(char * desc, Shape ** rhs, size_t & amt, point_t
     }
     if (!std::strcmp(token, "COMPLEXQUAD"))
     {
-      double n[8] = {0., 0., 0., 0., 0., 0., 0., 0.};
+      double n[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
       readDblfromDesc(n, 8);
       Complexquad * Comp = new Complexquad({n[0], n[1]}, {n[2], n[3]}, {n[4], n[5]}, {n[6], n[7]});
       rhs[amt++] = Comp;
@@ -106,7 +106,7 @@ int savintsev::actWithShpByDesc(char * desc, Shape ** rhs, size_t & amt, point_t
   }
   if (!std::strcmp(token, "SCALE"))
   {
-    double numbers[3] = {0., 0., 0.};
+    double numbers[3] = {0.0, 0.0, 0.0};
     readDblfromDesc(numbers, 3);
     if (numbers[2] <= 0)
     {

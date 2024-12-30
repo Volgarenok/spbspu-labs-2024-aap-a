@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 
-savintsev::Rectangle::Rectangle(point_t lhs, point_t rhs) :
+savintsev::Rectangle::Rectangle(point_t lhs, point_t rhs):
   pLowLeft_(lhs),
   pUpRight_(rhs)
 {

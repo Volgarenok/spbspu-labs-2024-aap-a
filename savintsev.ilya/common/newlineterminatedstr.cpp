@@ -29,7 +29,7 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
       t[i] = '\0';
       try
       {
-        char * new_t = createAmpCpyAny(t, capacity, capacity + capacity);
+        char * new_t = createAmpCopy(t, capacity, capacity + capacity);
         delete[] t;
         t = new_t;
         capacity += capacity;
