@@ -1,5 +1,5 @@
-#ifndef STRING_H
-#define STRING_H
+#ifndef INPUTSTRING_HPP
+#define INPUTSTRING_HPP
 #include <iostream>
 
 namespace ivanova
