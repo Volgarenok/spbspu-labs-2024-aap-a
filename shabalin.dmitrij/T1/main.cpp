@@ -40,6 +40,10 @@ int main()
     try
     {
       string = shabalin::inputOfString(std::cin, end);
+      if (string == nullptr)
+      {
+        throw std::runtime_error("Input error: string is null.");
+      }
     }
     catch (const std::exception &e)
     {
