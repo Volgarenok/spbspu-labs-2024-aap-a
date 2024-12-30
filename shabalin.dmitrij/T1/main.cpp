@@ -13,6 +13,7 @@
 
 int main()
 {
+  using namespace shabalin;
   size_t maxShapesCount = 1000;
   size_t currentShapesCount = 0;
   shabalin::Shape **myShapes = new shabalin::Shape *[maxShapesCount]{nullptr};
@@ -20,7 +21,7 @@ int main()
   bool errorsFlagShapes = false;
   bool errorsFlagScale = false;
 
-  point_t scalePoint = {0.0, 0.0};
+  shabalin::point_t scalePoint = {0.0, 0.0};
   double scaleK = 0;
   const char *targetWordScale = "SCALE";
 
@@ -36,10 +37,10 @@ int main()
       std::cerr << "Somthing went wrong with input, might be EOF!\n";
       return 1;
     }
-
+    const char end = '\n';
     try
     {
-      string = shabalin::inputOfString(std::cin);
+      string = shabalin::inputOfString(std::cin, end);
     }
     catch (const std::exception &e)
     {
