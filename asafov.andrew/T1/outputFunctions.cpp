@@ -7,7 +7,6 @@
 #include "triangle.hpp"
 #include "complexquad.hpp"
 
-// chto-to podobnoe na fabriku
 Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
 {
   if (hash == 'R' * 'E' * 'C' * 'T')
@@ -147,7 +146,6 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
   }
 }
 
-// mnr tak udobno i tak rabotaet >_<
 unsigned long asafov::getHash(std::istream& in)
 {
   std::string str = {};
@@ -160,7 +158,6 @@ unsigned long asafov::getHash(std::istream& in)
   return hash;
 }
 
-// tut proishodit izotropnoe mashtabirovanie i vivod v konsol
 void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, double scale, std::ostream& out)
 {
   rectangle_t rect = {};
