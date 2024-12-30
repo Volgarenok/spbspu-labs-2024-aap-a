@@ -46,7 +46,6 @@ int main()
       {
         throw std::runtime_error("Input error: string is null.");
       }
-      const char *foundScale = std::strstr(string, targetWordScale);
     }
     catch (const std::exception &e)
     {
@@ -55,19 +54,21 @@ int main()
       return 1;
     }
 
-    //const char *foundScale = std::strstr(string, targetWordScale);
-    if (foundScale != nullptr)
+    try
     {
-      inputScale(string, scalePoint, scaleK);
-      try
+      const char *foundScale = std::strstr(string, targetWordScale);
+      if (foundScale != nullptr)
       {
-        scaleFunction(myShapes, currentShapesCount, scalePoint, scaleK, std::cout);
+        inputScale(string, scalePoint, scaleK);
+        {
+          scaleFunction(myShapes, currentShapesCount, scalePoint, scaleK, std::cout);
+        }
+        catch (const std::logic_error &e)
+        {
+          errorsFlagScale = true;
+        }
+        scaleEntered = true;
       }
-      catch (const std::logic_error &e)
-      {
-        errorsFlagScale = true;
-      }
-      scaleEntered = true;
     }
     else
     {
