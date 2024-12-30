@@ -8,12 +8,12 @@ namespace shabalin
   class Parallelogram: public Shape
   {
   public:
-    Parallelogram(point_t fp, point_t sp, point_t tp);
+    Parallelogram(point_t, point_t, point_t);
     virtual double getArea() const;
     virtual rectangle_t getFrameRect() const;
-    virtual void move(point_t point);
-    virtual void move(double delX, double delY);
-    virtual void scaleShape(double k);
+    virtual void move(point_t);
+    virtual void move(double, double);
+    virtual void scaleShape(double);
     virtual ~Parallelogram() = default;
   private:
     point_t p1_;

@@ -3,10 +3,10 @@
 #include "base-types.hpp"
 #include "creatingOfShape.hpp"
 
-shabalin::Parallelogram::Parallelogram(point_t fp, point_t sp, point_t tp):
-  p1_(fp),
-  p2_(sp),
-  p3_(tp)
+shabalin::Parallelogram::Parallelogram(point_t firstP, point_t secondP, point_t thirdP):
+  p1_(firstP),
+  p2_(secondP),
+  p3_(thirdP)
 {
   if (!((p1_.y == p2_.y) || (p1_.y == p3_.y) || (p2_.y == p3_.y)))
   {
