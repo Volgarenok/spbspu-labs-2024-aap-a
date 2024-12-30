@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SHAPE_HPP
+#define SHAPE_HPP
 #include "base-types.hpp"
 class Shape
 {
@@ -10,3 +11,4 @@ public:
   virtual void scale(point_t pos, double scale) = 0;
   virtual ~Shape() = default;
 };
+#endif
