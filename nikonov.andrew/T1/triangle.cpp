@@ -9,9 +9,9 @@ nikonov::point_t getCenterOfGravity(const nikonov::point_t &A, const nikonov::po
 }
 nikonov::Triangle::Triangle(const point_t &A, const point_t &B, const point_t &C)
 {
-  double AB = std::sqrt(std::pow(B_.x - A_.x, 2) + std::pow(B_.y - A_.y, 2));
-  double BC = std::sqrt(std::pow(C_.x - B_.x, 2) + std::pow(C_.y - B_.y, 2));
-  double CA = std::sqrt(std::pow(C_.x - A_.x, 2) + std::pow(C_.y - A_.y, 2));
+  double AB = std::sqrt(std::pow(B.x - A.x, 2) + std::pow(B.y - A.y, 2));
+  double BC = std::sqrt(std::pow(C.x - B.x, 2) + std::pow(C.y - B.y, 2));
+  double CA = std::sqrt(std::pow(C.x - A.x, 2) + std::pow(C.y - A.y, 2));
   if (!((AB + BC > CA) && (AB + CA > BC) && (CA + BC > AB)))
   {
     throw std::logic_error("ERROR:noncorrect triangle parameters");
