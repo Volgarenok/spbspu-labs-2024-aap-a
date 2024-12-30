@@ -16,7 +16,7 @@ int main()
   using namespace shabalin;
   size_t maxShapesCount = 1000;
   size_t currentShapesCount = 0;
-  Shape **myShapes = new Shape *[maxShapesCount]{ nullptr };
+  Shape **myShapes = new Shape *[maxShapesCount]{nullptr};
 
   bool errorsFlagShapes = false;
   bool errorsFlagScale = false;
@@ -46,6 +46,36 @@ int main()
       {
         throw std::runtime_error("Input error: string is null.");
       }
+
+      const char *foundScale = std::strstr(string, targetWordScale);
+      if (foundScale != nullptr)
+      {
+        inputScale(string, scalePoint, scaleK);
+        scaleFunction(myShapes, currentShapesCount, scalePoint, scaleK, std::cout);
+        scaleEntered = true;
+      }
+      else
+      {
+        if (string[0] != '\0')
+        {
+          defineAndCreateShape(myShapes, currentShapesCount, string);
+          if (currentShapesCount < maxShapesCount && myShapes[currentShapesCount] != nullptr)
+          {
+            currentShapesCount++;
+          }
+        }
+      }
+    }
+    catch (const std::logic_error &e)
+    {
+      if (scaleEntered)
+      {
+        errorsFlagScale = true;
+      }
+      else
+      {
+        errorsFlagShapes = true;
+      }
     }
     catch (const std::exception &e)
     {
@@ -54,41 +84,6 @@ int main()
       return 1;
     }
 
-    try
-    {
-      const char *foundScale = std::strstr(string, targetWordScale);
-      if (foundScale != nullptr)
-      {
-        inputScale(string, scalePoint, scaleK);
-        {
-          scaleFunction(myShapes, currentShapesCount, scalePoint, scaleK, std::cout);
-        }
-        catch (const std::logic_error &e)
-        {
-          errorsFlagScale = true;
-        }
-        scaleEntered = true;
-      }
-    }
-    else
-    {
-      try
-      {
-        if (string[0] != '\0')
-        {
-          defineAndCreateShape(myShapes, currentShapesCount, string);
-        }
-      }
-      catch (const std::logic_error &e)
-      {
-        errorsFlagShapes = true;
-      }
-
-      if (currentShapesCount < maxShapesCount && myShapes[currentShapesCount] != nullptr)
-      {
-        currentShapesCount++;
-      }
-    }
     free(string);
   }
 
@@ -109,6 +104,7 @@ int main()
     freeMem(myShapes, currentShapesCount);
     return 2;
   }
+
   freeMem(myShapes, currentShapesCount);
   return 0;
 }
