@@ -31,11 +31,11 @@ namespace
       return nullptr;
     }
     const char ch = '0';
-    if (!is_digit(str, ch))
+    if (is_digit(str, ch))
     {
-      return nullptr;
+      return str + 1;
     }
-    return isUnsignedInt(str);
+    return nullptr;
   }
 
   const char *isSymbol(const char *str, char ch)
