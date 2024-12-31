@@ -20,7 +20,7 @@ namespace
     }
     if (*str == *digits)
     {
-      return str + 1;
+      return isDigit(str + 1);
     }
     return nullptr;
   }
