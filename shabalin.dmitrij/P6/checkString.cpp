@@ -13,14 +13,14 @@ namespace
 
   const char *isDigit(const char *str)
   {
-    char digits = '0123456789';
+    const char *digits = "0123456789";
     if (str == nullptr)
     {
       return nullptr;
     }
-    for (*str; *str != '\0';)
+    while (*str != '\0')
     {
-      if (*str == digits)
+      if (*str == *digits)
       {
         return str + 1;
       }
