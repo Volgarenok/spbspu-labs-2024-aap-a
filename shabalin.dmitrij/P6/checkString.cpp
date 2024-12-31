@@ -1,28 +1,27 @@
 #include "checkString.hpp"
 
-namespace
+namespace shabalin
 {
   const char *isSign(const char *str)
   {
     if (!str)
     {
-      return str;
+      return nullptr;
     }
     return ((*str == '+') || (*str == '-')) ? (str + 1) : nullptr;
   }
 
-  const char *isDigit(const char *str)
+  bool is_digit(char c, char cur)
   {
-    const char *digits = "0123456789";
-    if (*str == '\0')
+    if (cur == '9' + 1)
     {
-      return nullptr;
+      return false;
     }
-    if (*str == *digits)
+    if (cur == c)
     {
-      return str;
+      return true;
     }
-    return isDigit(str + 1);
+    return is_digit(c, cur + 1);
   }
 
   const char *isUnsignedInt(const char *str)
@@ -31,20 +30,22 @@ namespace
     {
       return nullptr;
     }
-    auto next = isDigit(str);
-    if (next == nullptr)
+    while (*str)
     {
-      return nullptr;
+      if (!is_digit(*str, '0'))
+      {
+        return nullptr;
+      }
+      str++;
     }
-    auto next2 = isUnsignedInt(next);
-    return (next2 == nullptr) ? next : next2;
+    return str;
   }
 
   const char *isSymbol(const char *str, char ch)
   {
     if (!str)
     {
-      return str;
+      return nullptr;
     }
     return (*str == ch) ? (str + 1) : nullptr;
   }
@@ -75,16 +76,15 @@ namespace
     {
       return nullptr;
     }
-    if (const char *next = isSymbol(str, '.'))
+    const char *next = isSymbol(str, '.');
+    if (next)
     {
-      next = isUnsignedInt(str);
-      return next;
+      return isUnsignedInt(next);
     }
-    const char *next = isUnsignedInt(str);
+    next = isUnsignedInt(str);
     if (const char *next2 = isSymbol(next, '.'))
     {
-      next2 = isUnsignedInt(next2);
-      return next2;
+      return isUnsignedInt(next2);
     }
     return next;
   }
@@ -93,21 +93,21 @@ namespace
   {
     if (!str)
     {
-      return str;
+      return nullptr;
     }
     auto next = isSign(str);
     auto next2 = isMantissa(next);
     auto next3 = isOrder(next2);
     return next3;
   }
-}
 
-bool shabalin::isRealNumber(const char *str)
-{
-  if (!str)
+  bool shabalin::isRealNumber(const char *str)
   {
-    return false;
+    if (!str)
+    {
+      return false;
+    }
+    const char *next = hasRealNum(str);
+    return next && (*next == '\0');
   }
-  const char *next = hasRealNum(str);
-  return next && (*next == '\0');
 }
