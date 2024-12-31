@@ -11,18 +11,17 @@ namespace
     return ((*str == '+') || (*str == '-')) ? (str + 1) : nullptr;
   }
 
-  const char *isDigit(const char *str)
+  const char *isDigit(const char *str, char ch)
   {
-    const char *digits = "0123456789";
-    if (*str == '\0')
+    if (ch == '9' + 1)
     {
       return nullptr;
     }
-    if (*str == *digits)
+    if (ch == *str)
     {
-      return isDigit(str + 1);
+      return str;
     }
-    return nullptr;
+    return isDigit(str, ch + 1);
   }
 
   const char *isUnsignedInt(const char *str)
@@ -31,7 +30,8 @@ namespace
     {
       return nullptr;
     }
-    auto next = isDigit(str);
+    auto ch = *str;
+    auto next = isDigit(str,ch);
     if (next == nullptr)
     {
       return nullptr;
