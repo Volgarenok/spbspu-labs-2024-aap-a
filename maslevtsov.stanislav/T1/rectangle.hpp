@@ -5,7 +5,7 @@
 
 namespace maslevtsov
 {
-  struct Rectangle: public Shape
+  struct Rectangle final: public Shape
   {
   public:
     Rectangle(point_t bottomLeft, point_t topRight);
@@ -13,7 +13,7 @@ namespace maslevtsov
     rectangle_t getFrameRect() const noexcept override;
     void move(point_t pnt) noexcept override;
     void move(double dx, double dy) noexcept override;
-    void scale(double k) noexcept override;
+    void scale(double k) override;
 
   private:
     point_t bottomLeft_, topRight_;

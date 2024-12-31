@@ -18,11 +18,8 @@ double maslevtsov::Rectangle::getArea() const noexcept
 
 maslevtsov::rectangle_t maslevtsov::Rectangle::getFrameRect() const noexcept
 {
-  rectangle_t frameRect;
-  frameRect.width = topRight_.x - bottomLeft_.x;
-  frameRect.height = topRight_.y - bottomLeft_.y;
-  frameRect.pos.x = frameRect.width / 2 + bottomLeft_.x;
-  frameRect.pos.y = frameRect.height / 2 + bottomLeft_.y;
+  rectangle_t frameRect = {topRight_.x - bottomLeft_.x, topRight_.y - bottomLeft_.y,
+                          {frameRect.width / 2 + bottomLeft_.x, frameRect.height / 2 + bottomLeft_.y}};
   return frameRect;
 }
 
@@ -40,11 +37,15 @@ void maslevtsov::Rectangle::move(double dx, double dy) noexcept
   topRight_ = {topRight_.x + dx, topRight_.y + dy};
 }
 
-void maslevtsov::Rectangle::scale(double k) noexcept
+void maslevtsov::Rectangle::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("invalid coefficient");
+  }
   point_t frameCenter = getFrameRect().pos;
-  bottomLeft_ = {
-    frameCenter.x - (frameCenter.x - bottomLeft_.x) * k, frameCenter.y - (frameCenter.y - bottomLeft_.y) * k};
+  bottomLeft_ = {frameCenter.x - (frameCenter.x - bottomLeft_.x) * k,
+                frameCenter.y - (frameCenter.y - bottomLeft_.y) * k};
   topRight_ = {frameCenter.x + (topRight_.x - frameCenter.x) * k, frameCenter.y + (topRight_.y - frameCenter.y) * k};
 }
 

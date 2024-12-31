@@ -34,7 +34,7 @@ void maslevtsov::scale(Shape* shape, point_t pnt, double k)
 {
   if (k <= 0)
   {
-    throw std::logic_error("invalid coefficient");
+    throw std::invalid_argument("invalid coefficient");
   }
   point_t frameCenterBefore = shape->getFrameRect().pos;
   shape->move(pnt);

@@ -1,32 +1,11 @@
 #include <stdexcept>
-#include <cstring>
 #include <getline.hpp>
 #include "shape.hpp"
-
-namespace maslevtsov
-{
-  double* split(char* str, std::size_t& splitted);
-}
-
-double* maslevtsov::split(char* str, std::size_t& splitted)
-{
-  double* result = new double[10'000];
-  str = std::strtok(str, " ");
-  std::size_t argumentIndex = 0;
-
-  while (str != nullptr)
-  {
-    result[argumentIndex++] = std::atof(str);
-    ++splitted;
-    str = std::strtok(nullptr, " ");
-  }
-
-  return result;
-}
+#include "split.hpp"
 
 int main()
 {
-  maslevtsov::Shape* shapes[10'000] = {nullptr};
+  maslevtsov::Shape* shapes[10'000]{nullptr};
   std::size_t shapeIndex = 0;
   bool isIgnoredShapes = false, isImplementedShapes = false, isScale = false;
   std::string argument = "";
@@ -83,7 +62,7 @@ int main()
     {
       maslevtsov::scaleShapes(shapes, {scalePntX, scalePntY}, scaleK, shapeIndex);
     }
-    catch (const std::logic_error& e)
+    catch (const std::invalid_argument& e)
     {
       std::cerr << "Error: fail in scaling\n";
       maslevtsov::clearShapes(shapes, shapeIndex);

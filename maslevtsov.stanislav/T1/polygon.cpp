@@ -2,25 +2,37 @@
 #include <cmath>
 #include <stdexcept>
 
-namespace maslevtsov
+namespace
 {
-  bool hasSameVertices(const point_t* vertices, std::size_t nVertices);
-  point_t* convertArguments(const double* arguments, std::size_t nArguments);
-}
-
-bool maslevtsov::hasSameVertices(const point_t* vertices, std::size_t nVertices)
-{
-  for (const point_t* i = vertices; i < vertices + nVertices - 1; ++i)
+  bool hasSameVertices(const maslevtsov::point_t *vertices, std::size_t nVertices)
   {
-    for (const point_t* j = i + 1; j < vertices + nVertices; ++j)
+    for (const maslevtsov::point_t *i = vertices; i < vertices + nVertices - 1; ++i)
     {
-      if (i->x == j->x && i->y == j->y)
+      for (const maslevtsov::point_t *j = i + 1; j < vertices + nVertices; ++j)
       {
-        return true;
+        if (i->x == j->x && i->y == j->y)
+        {
+          return true;
+        }
       }
     }
+    return false;
   }
-  return false;
+
+  maslevtsov::point_t *convertArguments(const double *arguments, std::size_t nArguments)
+  {
+    if (nArguments % 2 != 0 || nArguments < 6)
+    {
+      throw std::logic_error("incorrect coordinates");
+    }
+    maslevtsov::point_t *converted = new maslevtsov::point_t[nArguments / 2];
+    std::size_t iConverted = 0;
+    for (std::size_t i = 1; i < nArguments; i += 2)
+    {
+      converted[iConverted++] = {arguments[i - 1], arguments[i]};
+    }
+    return converted;
+  }
 }
 
 maslevtsov::Polygon::~Polygon()
@@ -28,15 +40,15 @@ maslevtsov::Polygon::~Polygon()
   delete[] vertices_;
 }
 
-maslevtsov::Polygon::Polygon(std::size_t nVertices, point_t* vertices):
+maslevtsov::Polygon::Polygon(std::size_t nVertices, point_t *vertices):
   nVertices_(nVertices),
-  vertices_(vertices)
+  vertices_(nullptr)
 {
   if (nVertices < 3 || hasSameVertices(vertices, nVertices))
   {
-    delete[] vertices_;
     throw std::logic_error("incorrect coordinates");
   }
+  vertices_ = vertices;
 }
 
 double maslevtsov::Polygon::getArea() const noexcept
@@ -53,19 +65,16 @@ double maslevtsov::Polygon::getArea() const noexcept
 
 maslevtsov::rectangle_t maslevtsov::Polygon::getFrameRect() const noexcept
 {
-  rectangle_t frameRect;
   point_t minPnt{vertices_[0].x, vertices_[0].y}, maxPnt = minPnt;
   for (size_t i = 1; i < nVertices_; ++i)
   {
-    minPnt = {
-      minPnt.x < vertices_[i].x ? minPnt.x : vertices_[i].x, minPnt.y < vertices_[i].y ? minPnt.y : vertices_[i].y};
-    maxPnt = {
-      maxPnt.x > vertices_[i].x ? maxPnt.x : vertices_[i].x, maxPnt.y > vertices_[i].y ? maxPnt.y : vertices_[i].y};
+    minPnt = {minPnt.x < vertices_[i].x ? minPnt.x : vertices_[i].x,
+             minPnt.y < vertices_[i].y ? minPnt.y : vertices_[i].y};
+    maxPnt = {maxPnt.x > vertices_[i].x ? maxPnt.x : vertices_[i].x,
+             maxPnt.y > vertices_[i].y ? maxPnt.y : vertices_[i].y};
   }
-  frameRect.width = maxPnt.x - minPnt.x;
-  frameRect.height = maxPnt.y - minPnt.y;
-  frameRect.pos.x = minPnt.x + (frameRect.width) / 2;
-  frameRect.pos.y = minPnt.y + (frameRect.height) / 2;
+  rectangle_t frameRect = {maxPnt.x - minPnt.x, maxPnt.y - minPnt.y,
+                          {minPnt.x + (frameRect.width) / 2, minPnt.y + (frameRect.height) / 2}};
   return frameRect;
 }
 
@@ -87,40 +96,34 @@ void maslevtsov::Polygon::move(double dx, double dy) noexcept
   }
 }
 
-void maslevtsov::Polygon::scale(double k) noexcept
+void maslevtsov::Polygon::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("invalid coefficient");
+  }
   point_t frameCenter = getFrameRect().pos;
   for (std::size_t i = 0; i < nVertices_; ++i)
   {
-    vertices_[i] = {
-      frameCenter.x - (frameCenter.x - vertices_[i].x) * k, frameCenter.y - (frameCenter.y - vertices_[i].y) * k};
+    vertices_[i] = {frameCenter.x - (frameCenter.x - vertices_[i].x) * k,
+                   frameCenter.y - (frameCenter.y - vertices_[i].y) * k};
   }
 }
 
-maslevtsov::point_t* maslevtsov::convertArguments(const double* arguments, std::size_t nArguments)
+maslevtsov::Polygon *maslevtsov::makePolygon(const double *arguments, std::size_t nArguments)
 {
-  if (nArguments % 2 != 0 || nArguments < 6)
-  {
-    throw std::logic_error("incorrect coordinates");
-  }
-  point_t* converted = new point_t[nArguments / 2];
-  std::size_t iConverted = 0;
-  for (std::size_t i = 1; i < nArguments; i += 2)
-  {
-    converted[iConverted++] = {arguments[i - 1], arguments[i]};
-  }
-  return converted;
-}
-
-maslevtsov::Polygon* maslevtsov::makePolygon(const double* arguments, std::size_t nArguments)
-{
-  point_t* pntArguments = convertArguments(arguments, nArguments);
-  Polygon* polygon = nullptr;
+  point_t *pntArguments = convertArguments(arguments, nArguments);
+  Polygon *polygon = nullptr;
   try
   {
     polygon = new Polygon(nArguments / 2, pntArguments);
   }
-  catch (const std::bad_alloc& e)
+  catch (const std::bad_alloc &e)
+  {
+    delete[] pntArguments;
+    throw;
+  }
+  catch (const std::logic_error &e)
   {
     delete[] pntArguments;
     throw;
