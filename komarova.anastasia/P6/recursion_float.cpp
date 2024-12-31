@@ -26,13 +26,44 @@ namespace
     {
       return str;
     }
-    const char * dig = "0123456789";
-    if (*str != *dig)
+    const char * dig = "0123456789\0";
+    if (*str == *dig)
     {
-      dig = dig + 1;
-      return is_digit(str);
+      return str + 1;
     }
-    else if (*str == *dig)
+    if (*(dig + 1) != '\0' && *str == *(dig + 1))
+    {
+      return str + 1;
+    }
+    if (*(dig + 2) != '\0' && *str == *(dig + 2))
+    {
+      return str + 1;
+    }
+    if (*(dig + 3) != '\0' && *str == *(dig + 3))
+    {
+      return str + 1;
+    }
+    if (*(dig + 4) != '\0' && *str == *(dig + 4))
+    {
+      return str + 1;
+    }
+    if (*(dig + 5) != '\0' && *str == *(dig + 5))
+    {
+      return str + 1;
+    }
+    if (*(dig + 6) != '\0' && *str == *(dig + 6))
+    {
+      return str + 1;
+    }
+    if (*(dig + 7) != '\0' && *str == *(dig + 7))
+    {
+      return str + 1;
+    }
+    if (*(dig + 8) != '\0' && *str == *(dig + 8))
+    {
+      return str + 1;
+    }
+    if (*(dig + 9) != '\0' && *str == *(dig + 9))
     {
       return str + 1;
     }
