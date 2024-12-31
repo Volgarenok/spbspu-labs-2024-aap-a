@@ -26,13 +26,10 @@ namespace
     {
       return str;
     }
-    const char * dig = "0123456789\0";
-    for (const char* d = dig; *d != '\0'; d++)
+    const char * dig = "0123456789";
+    if (*str == *dig)
     {
-      if (*str == *d)
-      {
-        return str + 1;
-      }
+      return str + 1;
     }
     return nullptr;
   }
