@@ -1,8 +1,6 @@
 #include <iostream>
 #include <stdexcept>
 #include <cstring>
-//#include <inputOfString.hpp>
-#include "input.hpp"
 #include "shape.hpp"
 #include "base-types.hpp"
 #include "ioOperations.hpp"
@@ -24,19 +22,17 @@ int main()
 
   point_t scalePoint = {0.0, 0.0};
   double scaleK = 0;
-  const char *targetWordScale = "SCALE";
+  const char *target = "SCALE";
 
   char *string = nullptr;
-
   bool scaleEntered = false;
-  //const char end = '\n';
 
   while (!scaleEntered)
   {
     if (!std::cin.good())
     {
       freeMem(myShapes, currentShapesCount);
-      std::cerr << "Something went wrong with input, might be EOF!\n";
+      std::cerr << "Something wrong with input\n";
       return 1;
     }
 
@@ -48,7 +44,7 @@ int main()
         throw std::runtime_error("Input error: string is null.");
       }
 
-      const char *foundScale = std::strstr(string, targetWordScale);
+      const char *foundScale = std::strstr(string, target);
       if (foundScale != nullptr)
       {
         inputScale(string, scalePoint, scaleK);
@@ -90,18 +86,18 @@ int main()
 
   if (errorsFlagShapes)
   {
-    std::cerr << "\nSomething went wrong with shapes creation!\n";
+    std::cerr << "Something wrong with shapes\n";
   }
   if (errorsFlagScale)
   {
-    std::cerr << "Something went wrong with scale process, might be incorrect k of scale!\n";
+    std::cerr << "Something wrong with scale process\n";
     freeMem(myShapes, currentShapesCount);
     return 2;
   }
 
   if (currentShapesCount == 0)
   {
-    std::cerr << "\nNothing to scale!\n";
+    std::cerr << "No to scale!\n";
     freeMem(myShapes, currentShapesCount);
     return 2;
   }

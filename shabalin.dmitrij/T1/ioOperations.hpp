@@ -7,6 +7,7 @@
 namespace shabalin
 {
   void inputScale(const char *string, point_t &point, double &k);
+  char * inputLine(std::istream &input);
   void shapeOutput(std::ostream &output, const Shape *const *shapes, size_t shapesCount);
 }
 #endif
