@@ -35,5 +35,6 @@ int main()
   double scale = 0;
   std::cin >> pos.x >> pos.y >> scale;
   scaleShapes(shapes, count, pos, scale, std::cout);
+  delete[] shapes;
   return 0;
 }
