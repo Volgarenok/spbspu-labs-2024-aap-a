@@ -1,12 +1,12 @@
 #include "creatingOfShape.hpp"
-#include <cmath>
-#include <memory>
-#include <stdexcept>
-#include <cstring>
 #include "base-types.hpp"
 #include "parallelogram.hpp"
 #include "diamond.hpp"
 #include "rectangle.hpp"
+#include <cmath>
+#include <memory>
+#include <stdexcept>
+#include <cstring>
 
 void shabalin::extractDataForShape(const char *string, double *coordStorage, const size_t pointsCount, const size_t wordLen)
 {

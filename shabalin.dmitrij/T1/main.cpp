@@ -1,6 +1,3 @@
-#include <iostream>
-#include <stdexcept>
-#include <cstring>
 #include "shape.hpp"
 #include "base-types.hpp"
 #include "ioOperations.hpp"
@@ -9,6 +6,9 @@
 #include "rectangle.hpp"
 #include "diamond.hpp"
 #include "parallelogram.hpp"
+#include <iostream>
+#include <stdexcept>
+#include <cstring>
 
 int main()
 {

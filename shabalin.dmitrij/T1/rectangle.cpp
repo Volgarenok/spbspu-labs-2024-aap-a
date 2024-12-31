@@ -1,6 +1,6 @@
 #include "rectangle.hpp"
-#include <stdexcept>
 #include "base-types.hpp"
+#include <stdexcept>
 
 shabalin::Rectangle::Rectangle(point_t fp, point_t sp):
   rightUp(sp),

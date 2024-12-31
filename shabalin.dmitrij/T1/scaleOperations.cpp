@@ -1,6 +1,6 @@
 #include "scaleOperations.hpp"
-#include <stdexcept>
 #include "ioOperations.hpp"
+#include <stdexcept>
 
 void shabalin::isoScale(Shape *shapeObj, const point_t scalePoint, const double scaleK)
 {

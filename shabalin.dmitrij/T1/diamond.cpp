@@ -1,6 +1,6 @@
 #include "diamond.hpp"
-#include <stdexcept>
 #include "creatingOfShape.hpp"
+#include <stdexcept>
 
 shabalin::Diamond::Diamond(const point_t fp, const point_t sp, const point_t tp):
   p1_(fp),

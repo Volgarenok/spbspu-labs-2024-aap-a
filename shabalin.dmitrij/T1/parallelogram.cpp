@@ -1,7 +1,7 @@
 #include "parallelogram.hpp"
-#include <stdexcept>
 #include "base-types.hpp"
 #include "creatingOfShape.hpp"
+#include <stdexcept>
 
 shabalin::Parallelogram::Parallelogram(point_t firstP, point_t secondP, point_t thirdP):
   p1_(firstP),

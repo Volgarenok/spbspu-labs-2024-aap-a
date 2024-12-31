@@ -1,9 +1,9 @@
 #ifndef SCALEOPERATIONS_HPP
 #define SCALEOPERATIONS_HPP
-#include <iostream>
-#include <cstddef>
 #include "base-types.hpp"
 #include "shape.hpp"
+#include <iostream>
+#include <cstddef>
 
 namespace shabalin
 {

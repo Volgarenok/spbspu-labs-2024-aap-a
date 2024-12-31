@@ -1,8 +1,9 @@
 #ifndef CREATINGOFSHAPE_HPP
 #define CREATINGOFSHAPE_HPP
-#include <cstddef>
 #include "base-types.hpp"
 #include "shape.hpp"
+#include <cstddef>
+
 
 namespace shabalin
 {
