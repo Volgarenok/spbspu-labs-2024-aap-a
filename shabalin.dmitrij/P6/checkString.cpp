@@ -13,17 +13,18 @@ namespace
 
   const char *isDigit(const char *str)
   {
-    if (str == nullptr)
+    const char *digits = "0123456789";
+    if (*str == '\0')
     {
       return nullptr;
     }
-    if (*str == '0' || *str == '1' || *str == '2' || *str == '3' || *str == '4' ||
-        *str == '5' || *str == '6' || *str == '7' || *str == '8' || *str == '9')
+    if (*str == *digits)
     {
-      return str + 1;
+      return str;
     }
-    return nullptr;
+    return isDigit(str + 1);
   }
+
   const char *isUnsignedInt(const char *str)
   {
     if (!str)
