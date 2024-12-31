@@ -10,7 +10,7 @@ namespace
     }
     return ((*str == '+') || (*str == '-')) ? (str + 1) : nullptr;
   }
-  
+
   const char *isDigit(const char *str)
   {
     char digits = '0123456789';
