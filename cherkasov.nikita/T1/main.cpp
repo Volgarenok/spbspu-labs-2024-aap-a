@@ -109,6 +109,5 @@ int main()
   std::cout << cherkasov::calculArea(shapes, shapeCount);
   cherkasov::outputFrameCoordinates(shapes, shapeCount);
   cherkasov::deleteShapes(shapes, shapeCount);
-  shapeCount = 0;
   return 0;
 }
