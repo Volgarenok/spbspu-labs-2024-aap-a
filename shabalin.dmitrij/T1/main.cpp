@@ -1,7 +1,8 @@
 #include <iostream>
 #include <stdexcept>
 #include <cstring>
-#include <inputOfString.hpp>
+//#include <inputOfString.hpp>
+#include "input.hpp"
 #include "shape.hpp"
 #include "base-types.hpp"
 #include "ioOperations.hpp"
@@ -28,7 +29,7 @@ int main()
   char *string = nullptr;
 
   bool scaleEntered = false;
-  const char end = '\n';
+  //const char end = '\n';
 
   while (!scaleEntered)
   {
@@ -41,7 +42,7 @@ int main()
 
     try
     {
-      string = shabalin::inputOfString(std::cin, end);
+      string = shabalin::inputLine(std::cin);
       if (string == nullptr)
       {
         throw std::runtime_error("Input error: string is null.");
