@@ -30,7 +30,7 @@ void shabalin::extractDataForShape(const char *string, double *coordStorage, con
   }
 }
 
-shabalin::Shape * shabalin::createPar(const char *string)
+shabalin::Shape * shabalin::createParallelogram(const char *string)
 {
   size_t wordLen = 13;
   const size_t arrayWeight = 6;
@@ -42,7 +42,7 @@ shabalin::Shape * shabalin::createPar(const char *string)
   return new Parallelogram(p1, p2, p3);
 }
 
-shabalin::Shape * shabalin::createDiam(const char *string)
+shabalin::Shape * shabalin::createDiamond(const char *string)
 {
   size_t wordLen = 7;
   const size_t arrayWeight = 6;
@@ -65,7 +65,7 @@ shabalin::Shape * shabalin::createDiam(const char *string)
   }
 }
 
-shabalin::Shape * shabalin::createRect(const char *string)
+shabalin::Shape * shabalin::createRectangle(const char *string)
 {
   size_t wordLen = 9;
   const size_t arrayWeight = 4;
@@ -88,15 +88,15 @@ void shabalin::defineAndCreateShape(Shape **myShapes, size_t shapesCount, const 
 
   if (foundPar != nullptr)
   {
-    myShapes[shapesCount] = createPar(string);
+    myShapes[shapesCount] = createParallelogram(string);
   }
   else if (foundRect != nullptr)
   {
-    myShapes[shapesCount] = createRect(string);
+    myShapes[shapesCount] = createRectangle(string);
   }
   else if (foundDia != nullptr)
   {
-    myShapes[shapesCount] = createDiam(string);
+    myShapes[shapesCount] = createDiamond(string);
   }
   else
   {

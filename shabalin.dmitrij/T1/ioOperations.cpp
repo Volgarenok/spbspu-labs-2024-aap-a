@@ -1,7 +1,7 @@
 #include "ioOperations.hpp"
 #include <stdexcept>
 
-char *shabalin::inputLine(std::istream &input)
+char *shabalin::input(std::istream &input)
 {
   size_t arrSize = 10;
 

@@ -38,7 +38,7 @@ int main()
 
     try
     {
-      string = shabalin::inputLine(std::cin);
+      string = shabalin::input(std::cin);
       if (string == nullptr)
       {
         throw std::runtime_error("Input error: string is null.");
