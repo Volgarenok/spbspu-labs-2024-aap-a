@@ -11,56 +11,32 @@ namespace
     return ((*str == '+') || (*str == '-')) ? (str + 1) : nullptr;
   }
 
-  const char *isDigit(const char *str, char ch)
+  const char *isDigit(const char *str)
   {
-    if (*str + 1 == '9' + 1)
+    if (str == nullptr)
     {
       return nullptr;
     }
-    if (*str + 1 == *str)
+    if (*str == '0' || *str == '1' || *str == '2' || *str == '3' || *str == '4' ||
+        *str == '5' || *str == '6' || *str == '7' || *str == '8' || *str == '9')
     {
-      return str;
+      return str + 1;
     }
-    return isDigit(str, ch + 1);
+    return nullptr;
   }
-
-  /*
-    const char *isUnsignedInt(const char *str)
-    {
-      if (!str)
-      {
-        return nullptr;
-      }
-      auto next = isDigit(str);
-      if (next == nullptr)
-      {
-        return nullptr;
-      }
-      auto next2 = isUnsignedInt(next);
-      return (next2 == nullptr) ? next : next2;
-    }
-  */
   const char *isUnsignedInt(const char *str)
   {
     if (!str)
     {
       return nullptr;
     }
-    const char *next = isDigit(str, '0');
+    auto next = isDigit(str);
     if (next == nullptr)
     {
       return nullptr;
     }
-    while (*next != '\0')
-    {
-      if (isDigit(next, *next) == nullptr)
-      {
-        return nullptr;
-      }
-      next++;
-    }
-
-    return str;
+    auto next2 = isUnsignedInt(next);
+    return (next2 == nullptr) ? next : next2;
   }
 
   const char *isSymbol(const char *str, char ch)
