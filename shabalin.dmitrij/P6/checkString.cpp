@@ -32,7 +32,7 @@ namespace shabalin
     }
     while (*str)
     {
-      if (!is_digit(*str, '0'))
+      if (!is_digit(*str, ':'))
       {
         return nullptr;
       }
