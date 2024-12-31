@@ -85,7 +85,7 @@ int main()
       return 1;
     }
 
-    free(string);
+    delete [] string;
   }
 
   if (errorsFlagShapes)
