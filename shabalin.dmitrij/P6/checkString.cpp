@@ -35,7 +35,7 @@ namespace
     {
       return nullptr;
     }
-    isUnsignedInt(str);
+    return isUnsignedInt(str);
   }
 
   const char *isSymbol(const char *str, char ch)
