@@ -11,31 +11,31 @@ namespace
     return ((*str == '+') || (*str == '-')) ? (str + 1) : nullptr;
   }
 
-  const char *isDigit(const char *str)
+  bool is_digit(const char *str, char ch)
   {
-    if (!str)
+    if (ch == '9' + 1)
     {
-      return nullptr;
+      return false;
     }
-    if (str == "0123456789")
+    if (ch == *str)
     {
-      return str + 1;
+      return true;
     }
-    return nullptr;
+    return is_digit(str, ch + 1);
   }
+
   const char *isUnsignedInt(const char *str)
   {
     if (!str)
     {
       return nullptr;
     }
-    auto next = isDigit(str);
-    if (next == nullptr)
+    const char ch = '0';
+    if (!is_digit(str, ch))
     {
       return nullptr;
     }
-    auto next2 = isUnsignedInt(next);
-    return (next2 == nullptr) ? next : next2;
+    isUnsignedInt(str);
   }
 
   const char *isSymbol(const char *str, char ch)
