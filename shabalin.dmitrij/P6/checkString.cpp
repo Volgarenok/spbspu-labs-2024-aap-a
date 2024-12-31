@@ -13,31 +13,54 @@ namespace
 
   const char *isDigit(const char *str, char ch)
   {
-    if (ch == '9' + 1)
+    if (*str + 1 == '9' + 1)
     {
       return nullptr;
     }
-    if (ch == *str)
+    if (*str + 1 == *str)
     {
       return str;
     }
     return isDigit(str, ch + 1);
   }
 
+  /*
+    const char *isUnsignedInt(const char *str)
+    {
+      if (!str)
+      {
+        return nullptr;
+      }
+      auto next = isDigit(str);
+      if (next == nullptr)
+      {
+        return nullptr;
+      }
+      auto next2 = isUnsignedInt(next);
+      return (next2 == nullptr) ? next : next2;
+    }
+  */
   const char *isUnsignedInt(const char *str)
   {
     if (!str)
     {
       return nullptr;
     }
-    auto ch = *str + 1;
-    auto next = isDigit(str,ch);
+    const char *next = isDigit(str, '0');
     if (next == nullptr)
     {
       return nullptr;
     }
-    auto next2 = isUnsignedInt(next);
-    return (next2 == nullptr) ? next : next2;
+    while (*next != '\0')
+    {
+      if (isDigit(next, *next) == nullptr)
+      {
+        return nullptr;
+      }
+      next++;
+    }
+
+    return str;
   }
 
   const char *isSymbol(const char *str, char ch)
