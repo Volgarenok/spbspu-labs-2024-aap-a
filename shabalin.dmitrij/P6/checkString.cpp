@@ -30,7 +30,7 @@ namespace
     {
       return nullptr;
     }
-    auto ch = *str;
+    auto ch = *str + 1;
     auto next = isDigit(str,ch);
     if (next == nullptr)
     {
