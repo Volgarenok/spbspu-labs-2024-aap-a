@@ -27,7 +27,12 @@ namespace
       return str;
     }
     const char * dig = "0123456789";
-    if (*str == *dig)
+    if (*str != *dig)
+    {
+      dig = dig + 1;
+      return is_digit(str);
+    }
+    else if (*str == *dig)
     {
       return str + 1;
     }
