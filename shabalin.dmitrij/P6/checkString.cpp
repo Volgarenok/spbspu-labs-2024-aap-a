@@ -10,20 +10,29 @@ namespace
     }
     return ((*str == '+') || (*str == '-')) ? (str + 1) : nullptr;
   }
-
+  
   const char *isDigit(const char *str)
   {
+    char digits = '0123456789';
     if (str == nullptr)
     {
       return nullptr;
     }
-    if (*str == '0' || *str == '1' || *str == '2' || *str == '3' || *str == '4' ||
-        *str == '5' || *str == '6' || *str == '7' || *str == '8' || *str == '9')
+    for (*str; *str != '\0';)
     {
-      return str + 1;
+      if (*str == digits)
+      {
+        return str + 1;
+      }
     }
+    //if (*str == '0' || *str == '1' || *str == '2' || *str == '3' || *str == '4' ||
+        //*str == '5' || *str == '6' || *str == '7' || *str == '8' || *str == '9')
+    //{
+      //return str + 1;
+    //}
     return nullptr;
   }
+
   const char *isUnsignedInt(const char *str)
   {
     if (!str)
