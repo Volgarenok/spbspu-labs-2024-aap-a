@@ -37,7 +37,7 @@ int main()
   scaleShapes(shapes, count, pos, scale, std::cout);
   for (size_t i = 0; i < 10000; i++)
   {
-    delete[i] shapes;
+    delete[] shapes[i];
   }
   delete shapes;
   return 0;
