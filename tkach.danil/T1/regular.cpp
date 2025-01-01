@@ -23,7 +23,7 @@ size_t tkach::Regular::getSideAmount() const
   {
     return 0;
   }
-  return std::round(std::acos(-1.0) / (std::acos(getDist(first_point_, third_point_) / getDist(first_point_, second_point_))));
+  return std::round(res);
 }
 
 tkach::Regular::Regular(const point_t& first_point, const point_t& second_point, const point_t& third_point):

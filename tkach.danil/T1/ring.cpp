@@ -24,12 +24,11 @@ double tkach::Ring::getArea() const
 
 tkach::rectangle_t tkach::Ring::getFrameRect() const
 {
-  rectangle_t frame_rect;
-  frame_rect.height = 2 * outer_radius_;
-  frame_rect.width = 2 * outer_radius_;
-  frame_rect.pos.x = center_.x;
-  frame_rect.pos.y = center_.y;
-  return frame_rect;
+  double height = 2 * outer_radius_;
+  double width = 2 * outer_radius_;
+  double frame_rect_pos_x = center_.x;
+  double frame_rect_pos_y = center_.y;
+  return {width, height, frame_rect_pos_x, frame_rect_pos_y};
 }
 
 void tkach::Ring::move(const double add_to_x, const double add_to_y)
