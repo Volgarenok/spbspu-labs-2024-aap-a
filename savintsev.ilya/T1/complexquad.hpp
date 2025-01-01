@@ -4,7 +4,7 @@
 
 namespace savintsev
 {
-  class Complexquad : public Shape
+  class Complexquad final : public Shape
   {
   public:
     Complexquad(point_t p1, point_t p2, point_t p3, point_t p4);

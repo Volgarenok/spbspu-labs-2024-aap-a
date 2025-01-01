@@ -1,10 +1,11 @@
 #ifndef LRGCPY_HPP
 #define LRGCPY_HPP
 #include <cstddef>
+#include <new>
 
 namespace savintsev
 {
-  template <typename T>
+  template < typename T >
   T * createAmpCopy(const T * old, size_t old_size, size_t new_size)
   {
     T * created = new T[new_size];
@@ -15,7 +16,7 @@ namespace savintsev
         created[i] = old[i];
       }
     }
-    catch (conts std::bad_alloc & e)
+    catch (const std::bad_alloc & e)
     {
       delete created;
       return nullptr;
