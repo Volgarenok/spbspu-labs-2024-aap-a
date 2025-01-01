@@ -1,4 +1,5 @@
 #include <iostream>
+#include <getLine.hpp>
 #include "rmv_vow.hpp"
 
 int main()
