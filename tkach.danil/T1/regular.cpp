@@ -46,7 +46,7 @@ tkach::Regular::Regular(const point_t& first_point, const point_t& second_point,
   {
     throw std::logic_error("Triangle doesn`t exist");
   }
-  if (getSideAmount() == 0)
+  if (getSideAmount() < 3)
   {
     throw std::logic_error("Shape doesn`t exist");
   }
