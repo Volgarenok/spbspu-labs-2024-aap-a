@@ -48,7 +48,7 @@ namespace
     {
       return str;
     }
-    return (is_digit(str)) ? (str + 1) : nullptr;
+    return (is_digit(str, 0)) ? (str + 1) : nullptr;
   }
 
   const char * is_unsigned_int(const char * str)
