@@ -9,7 +9,7 @@ namespace
   const char * is_sign(const char * str);
   const char * is_order(const char * str);
   const char * is_mantissa(const char * str);
-  const char * is_digit(const char * str);
+  const char * is_digit(const char * str, const int i);
 
   const char * is_symbol(const char * str, const char sym)
   {
@@ -20,50 +20,22 @@ namespace
     return (*str == sym) ? (str + 1) : nullptr;
   }
 
-  const char * is_digit(const char * str)
+  const char * is_digit(const char * str, const int i)
   {
     if (!str)
     {
       return str;
     }
     const char * dig = "0123456789\0";
-    if (*str == *dig)
+    if (dig[i] == '\0')
     {
-      return str + 1;
+      return nullptr;
     }
-    if (*(dig + 1) != '\0' && *str == *(dig + 1))
+    if (*str != dig[i])
     {
-      return str + 1;
+      return is_digit(str, i + 1);
     }
-    if (*(dig + 2) != '\0' && *str == *(dig + 2))
-    {
-      return str + 1;
-    }
-    if (*(dig + 3) != '\0' && *str == *(dig + 3))
-    {
-      return str + 1;
-    }
-    if (*(dig + 4) != '\0' && *str == *(dig + 4))
-    {
-      return str + 1;
-    }
-    if (*(dig + 5) != '\0' && *str == *(dig + 5))
-    {
-      return str + 1;
-    }
-    if (*(dig + 6) != '\0' && *str == *(dig + 6))
-    {
-      return str + 1;
-    }
-    if (*(dig + 7) != '\0' && *str == *(dig + 7))
-    {
-      return str + 1;
-    }
-    if (*(dig + 8) != '\0' && *str == *(dig + 8))
-    {
-      return str + 1;
-    }
-    if (*(dig + 9) != '\0' && *str == *(dig + 9))
+    if (*str == dig[i])
     {
       return str + 1;
     }
