@@ -6,7 +6,7 @@
 
 namespace aleksandrov
 {
-  class Ellipse final: public Shape
+  class Ellipse: public Shape
   {
   public:
     Ellipse(const point_t& center, double vr, double hr);

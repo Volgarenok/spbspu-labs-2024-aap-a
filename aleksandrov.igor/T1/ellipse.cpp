@@ -1,9 +1,17 @@
 #include "ellipse.hpp"
+#include <stdexcept>
 #include "base-types.hpp"
 
 aleksandrov::Ellipse::Ellipse(const point_t& center, double vr, double hr):
-  center_(center), vr_(vr), hr_(hr)
-{}
+  center_(center),
+  vr_(vr),
+  hr_(hr)
+{
+  if (vr_ <= 0 || hr_ <= 0)
+  {
+    throw std::logic_error("Incorrect radiuses");
+  }
+}
 
 double aleksandrov::Ellipse::getArea() const
 {
@@ -29,6 +37,10 @@ void aleksandrov::Ellipse::move(double dx, double dy)
 
 void aleksandrov::Ellipse::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::logic_error("Incorrect coefficient");
+  }
   vr_ *= k;
   hr_ *= k;
 }

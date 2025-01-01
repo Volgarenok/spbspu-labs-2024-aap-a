@@ -1,10 +1,17 @@
 #include "rectangle.hpp"
+#include <stdexcept>
 #include <cmath>
 #include "base-types.hpp"
 
 aleksandrov::Rectangle::Rectangle(const point_t& a, const point_t& b):
-  a_(a), b_(b)
-{}
+  a_(a),
+  b_(b)
+{
+  if (a_.x >= b_.x || a_.y >= b_.y)
+  {
+    throw std::logic_error("Incorrect point coordinates");
+  }
+}
 
 double aleksandrov::Rectangle::getArea() const
 {
@@ -38,6 +45,10 @@ void aleksandrov::Rectangle::move(double dx, double dy)
 
 void aleksandrov::Rectangle::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::logic_error("Incorrect coefficient");
+  }
   point_t center = getFrameRect().pos;
   a_.x = center.x + (a_.x - center.x) * k;
   a_.y = center.y + (a_.y - center.y) * k;

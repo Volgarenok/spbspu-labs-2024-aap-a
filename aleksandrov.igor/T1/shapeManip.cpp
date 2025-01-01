@@ -1,6 +1,7 @@
 #include "shapeManip.h"
 #include <iostream>
 #include <string>
+#include <limits>
 #include "base-types.hpp"
 
 namespace aleksandrov
@@ -43,10 +44,18 @@ namespace aleksandrov
       }
       if (shapes[count])
       {
-        count++;
+        ++count;
       }
     }
-    throw std::logic_error("Input was incorrect!");
+    if (word == "SCALE" && !count)
+    {
+      throw std::logic_error("There were no shapes to scale!");
+    }
+    if (count)
+    {
+      throw std::logic_error("There was no SCALE command description!");
+    }
+    throw std::logic_error("Incorrect input!");
   }
 
   double getAreaSum(Shape** shapes, size_t count)
@@ -60,30 +69,13 @@ namespace aleksandrov
     return sum;
   }
 
-  void getScaleParams(std::istream& input, double& x, double& y, double& k)
-  {
-    if (!(input >> x >> y >> k))
-    {
-      throw std::logic_error("Input was incorrect!");
-    }
-    if (k <= 0.0)
-    {
-      throw std::logic_error("Incorrect SCALE command description!");
-    }
-  }
-
   Rectangle* makeRectangle(std::istream& input)
   {
     point_t a;
     point_t b;
-
     if (!(input >> a.x >> a.y >> b.x >> b.y))
     {
-      throw std::logic_error("Input was incorrect!");
-    }
-    if (a.x >= b.x || a.y >= b.y)
-    {
-      throw std::logic_error("Incorrect SCALE command description!");
+      throw std::logic_error("Incorrect input!");
     }
     return new Rectangle(a, b);
   }
@@ -93,14 +85,9 @@ namespace aleksandrov
     point_t center;
     double vr = 0.0;
     double hr = 0.0;
-
     if (!(input >> center.x >> center.y >> vr >> hr))
     {
-      throw std::logic_error("Input was incorrect!");
-    }
-    if (vr <= 0 || hr <= 0)
-    {
-      throw std::logic_error("Incorrect SCALE command description!");
+      throw std::logic_error("Incorrect input!");
     }
     return new Ellipse(center, vr, hr);
   }
@@ -109,20 +96,27 @@ namespace aleksandrov
   {
     point_t center;
     double r = 0.0;
-
     if (!(input >> center.x >> center.y >> r))
     {
-      throw std::logic_error("Input was incorrect!");
-    }
-    if (r <= 0)
-    {
-      throw std::logic_error("Incorrect SCALE command description!");
+      throw std::logic_error("Incorrect input!");
     }
     return new Circle(center, r);
   }
 
+  void getScaleParams(std::istream& input, double& x, double& y, double& k)
+  {
+    if (!(input >> x >> y >> k))
+    {
+      throw std::logic_error("Incorrect input!");
+    }
+  }
+
   void scaleShapes(Shape** shapes, size_t count, double x, double y, double k)
   {
+    if (k <= 0)
+    {
+      throw std::logic_error("Incorrect coefficient!");
+    }
     for (size_t i = 0; i < count; ++i)
     {
       rectangle_t frameRect = shapes[i]->getFrameRect();

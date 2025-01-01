@@ -1,9 +1,15 @@
 #include "circle.hpp"
+#include <stdexcept>
 #include "base-types.hpp"
 
 aleksandrov::Circle::Circle(const point_t& center, double r):
   ellipse_(center, r, r)
-{}
+{
+  if (r <= 0)
+  {
+    throw std::logic_error("Incorrect radius");
+  }
+}
 
 double aleksandrov::Circle::getArea() const
 {
@@ -27,6 +33,10 @@ void aleksandrov::Circle::move(double dx, double dy)
 
 void aleksandrov::Circle::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::logic_error("Incorrect coefficient");
+  }
   ellipse_.scale(k);
 }
 

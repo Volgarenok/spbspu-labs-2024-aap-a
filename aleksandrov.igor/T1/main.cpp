@@ -20,6 +20,10 @@ int main()
     double y = 0.0;
     double k = 0.0;
     aleksandrov::getScaleParams(std::cin, x, y, k);
+    if (k <= 0)
+    {
+      throw std::logic_error("Incorrect input!");
+    }
 
     std::cout << std::fixed << std::setprecision(1);
     std::cout << aleksandrov::getAreaSum(shapes, count) << " ";
