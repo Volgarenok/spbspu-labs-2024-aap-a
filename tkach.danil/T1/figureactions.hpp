@@ -2,7 +2,7 @@
 #define FIGUREACTIONS_HPP
 
 #include <cstddef>
-#include <fstream>
+#include <iostream>
 #include "shape.hpp"
 
 namespace tkach

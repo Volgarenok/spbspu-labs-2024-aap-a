@@ -18,28 +18,27 @@ bool tkach::Regular::isEqualPoints(const point_t& point1, const point_t& point2)
 
 size_t tkach::Regular::getSideAmount() const
 {
-  const double res = std::acos(-1.0) / (std::acos(second_side_in_r_ / first_side_out_r_));
+  const double res = std::acos(-1.0) / (std::acos(getDist(first_point_, third_point_) / getDist(first_point_, second_point_)));
   if (std::fabs(res - std::round(res)) > 0.0001)
   {
     return 0;
   }
-  return std::round(std::acos(-1.0) / (std::acos(second_side_in_r_ / first_side_out_r_)));
+  return std::round(std::acos(-1.0) / (std::acos(getDist(first_point_, third_point_) / getDist(first_point_, second_point_))));
 }
 
 tkach::Regular::Regular(const point_t& first_point, const point_t& second_point, const point_t& third_point):
   first_point_(first_point),
   second_point_(second_point),
-  third_point_(third_point),
-  first_side_out_r_(getDist(first_point, second_point)),
-  second_side_in_r_(getDist(first_point, third_point)),
-  third_side_(getDist(second_point, third_point)),
-  amount_of_sides_(0)
+  third_point_(third_point)
 {
-  if (second_side_in_r_ > first_side_out_r_)
+  if (getDist(first_point, third_point) > getDist(first_point, second_point))
   {
-    std::swap(second_side_in_r_, first_side_out_r_);
+    std::swap(second_point_, third_point_);
   }
-  if (std::fabs(first_side_out_r_ * first_side_out_r_ - (second_side_in_r_ * second_side_in_r_ + third_side_ * third_side_)) > 0.00001)
+  double first_side_squared = getDist(first_point_, second_point_) * getDist(first_point_, second_point_);
+  double second_side_squared = getDist(third_point_, second_point_) * getDist(third_point_, second_point_);
+  double third_side_squared = getDist(first_point_, third_point_) * getDist(first_point_, third_point_);
+  if (std::fabs(first_side_squared - (second_side_squared + third_side_squared)) > 0.00001)
   {
     throw std::logic_error("Triangle is not right");
   }
@@ -47,8 +46,7 @@ tkach::Regular::Regular(const point_t& first_point, const point_t& second_point,
   {
     throw std::logic_error("Triangle doesn`t exist");
   }
-  amount_of_sides_ = getSideAmount();
-  if (amount_of_sides_ == 0)
+  if (getSideAmount() == 0)
   {
     throw std::logic_error("Shape doesn`t exist");
   }
@@ -56,48 +54,38 @@ tkach::Regular::Regular(const point_t& first_point, const point_t& second_point,
 
 double tkach::Regular::getArea() const
 {
-  return (amount_of_sides_ * third_side_ * second_side_in_r_);
+  return (getSideAmount() * getDist(second_point_, third_point_) * getDist(first_point_, third_point_));
 }
 
 tkach::rectangle_t tkach::Regular::getFrameRect() const
 {
-  rectangle_t frame_rect;
-  frame_rect.height = 0;
-  frame_rect.width = 0;
-  frame_rect.pos.x = first_point_.x;
-  frame_rect.pos.y = first_point_.y;
+  double height = 0.0;
+  double width = 0.0;
   point_t start_point, new_point, start_point_temp;
-  const double step_angle = 2.0 * M_PI / amount_of_sides_;
-  if (getDist(first_point_, second_point_) >= getDist(first_point_, third_point_))
-  {
-    start_point = second_point_;
-  }
-  else
-  {
-    start_point = third_point_;
-  }
+  const double step_angle = 2.0 * std::acos(-1.0) / getSideAmount();
+  start_point = second_point_;
   new_point.x = start_point.x + 1;
   new_point.y = start_point.y + 1;
   start_point_temp = start_point;
-  double new_angle = std::acos((start_point.x - first_point_.x) / first_side_out_r_);
+  double new_angle = std::acos((start_point.x - first_point_.x) / getDist(first_point_, second_point_));
   while ((new_point.x - start_point.x > 0.0001) || (new_point.y - start_point.y > 0.0001))
   {
     new_angle += step_angle;
-    start_point_temp.x = first_point_.x + first_side_out_r_ * std::cos(new_angle);
-    start_point_temp.y = first_point_.y + first_side_out_r_ * std::sin(new_angle);
+    start_point_temp.x = first_point_.x + getDist(first_point_, second_point_) * std::cos(new_angle);
+    start_point_temp.y = first_point_.y + getDist(first_point_, second_point_) * std::sin(new_angle);
     new_point = start_point_temp;
-    if (std::fabs(first_point_.x - start_point_temp.x) > frame_rect.width)
+    if (std::fabs(first_point_.x - start_point_temp.x) > width)
     {
-      frame_rect.width = std::fabs(first_point_.x - start_point_temp.x);
+      width = std::fabs(first_point_.x - start_point_temp.x);
     }
-    if (std::fabs(first_point_.y - start_point_temp.y) > frame_rect.height)
+    if (std::fabs(first_point_.y - start_point_temp.y) > height)
     {
-      frame_rect.height = std::fabs(first_point_.y - start_point_temp.y);
+      height = std::fabs(first_point_.y - start_point_temp.y);
     }
   }
-  frame_rect.width *= 2;
-  frame_rect.height *= 2;
-  return frame_rect;
+  width *= 2;
+  height *= 2;
+  return {width, height, {first_point_.x, first_point_.y}};
 }
 
 void tkach::Regular::move(const double add_to_x, const double add_to_y)
@@ -114,13 +102,10 @@ void tkach::Regular::move(const point_t& point_to_move)
   third_point_.y += point_to_move.y - first_point_.y;
   first_point_ = point_to_move;
 }
-void tkach::Regular::scaleShape(const double multiplier)
+void tkach::Regular::scaleOneOfUniqueShapes(const double multiplier)
 {
   second_point_.x = first_point_.x + (second_point_.x - first_point_.x) * multiplier;
   second_point_.y = first_point_.y + (second_point_.y - first_point_.y) * multiplier;
   third_point_.x = first_point_.x + (third_point_.x - first_point_.x) * multiplier;
   third_point_.y = first_point_.y + (third_point_.y - first_point_.y) * multiplier;
-  first_side_out_r_ *= multiplier;
-  second_side_in_r_ *= multiplier;
-  third_side_ *= multiplier;
 }

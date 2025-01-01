@@ -1,7 +1,7 @@
 #ifndef MAKESHAPES_HPP
 #define MAKESHAPES_HPP
 
-#include <fstream>
+#include <iostream>
 #include "regular.hpp"
 #include "ring.hpp"
 #include "rectangle.hpp"
