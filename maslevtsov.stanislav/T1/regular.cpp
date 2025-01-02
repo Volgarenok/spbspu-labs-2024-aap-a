@@ -14,6 +14,7 @@ namespace
            ((sqrLength1 + sqrLength2 == sqrLength3) || (sqrLength2 + sqrLength3 == sqrLength1) ||
             (sqrLength1 + sqrLength3 == sqrLength2));
   }
+
   bool isRightSize(std::size_t nVertices, double smallRadius, double bigRadius)
   {
     return std::abs((std::cos(M_PI / std::round(nVertices))) - (smallRadius / bigRadius)) < 1e-10;
@@ -102,8 +103,8 @@ void maslevtsov::Regular::scale(double k)
   pnt3_ = {center_.x + (pnt3_.x - center_.x) * k, center_.y + (pnt3_.y - center_.y) * k};
 }
 
-maslevtsov::Regular *maslevtsov::makeRegular(const double *arguments)
+maslevtsov::Regular* maslevtsov::makeRegular(const double* arguments)
 {
-  Regular *reg = new Regular({arguments[0], arguments[1]}, {arguments[2], arguments[3]}, {arguments[4], arguments[5]});
+  Regular* reg = new Regular({arguments[0], arguments[1]}, {arguments[2], arguments[3]}, {arguments[4], arguments[5]});
   return reg;
 }

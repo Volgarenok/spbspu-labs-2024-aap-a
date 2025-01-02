@@ -4,11 +4,11 @@
 
 namespace
 {
-  bool hasSameVertices(const maslevtsov::point_t *vertices, std::size_t nVertices)
+  bool hasSameVertices(const maslevtsov::point_t* vertices, std::size_t nVertices)
   {
-    for (const maslevtsov::point_t *i = vertices; i < vertices + nVertices - 1; ++i)
+    for (const maslevtsov::point_t* i = vertices; i < vertices + nVertices - 1; ++i)
     {
-      for (const maslevtsov::point_t *j = i + 1; j < vertices + nVertices; ++j)
+      for (const maslevtsov::point_t* j = i + 1; j < vertices + nVertices; ++j)
       {
         if (i->x == j->x && i->y == j->y)
         {
@@ -19,7 +19,7 @@ namespace
     return false;
   }
 
-  maslevtsov::point_t *convertArguments(const double *arguments, std::size_t nArguments)
+  maslevtsov::point_t* convertArguments(const double* arguments, std::size_t nArguments)
   {
     if (nArguments % 2 != 0 || nArguments < 6)
     {
@@ -40,7 +40,7 @@ maslevtsov::Polygon::~Polygon()
   delete[] vertices_;
 }
 
-maslevtsov::Polygon::Polygon(std::size_t nVertices, point_t *vertices):
+maslevtsov::Polygon::Polygon(std::size_t nVertices, point_t* vertices):
   nVertices_(nVertices),
   vertices_(nullptr)
 {
@@ -110,10 +110,10 @@ void maslevtsov::Polygon::scale(double k)
   }
 }
 
-maslevtsov::Polygon *maslevtsov::makePolygon(const double *arguments, std::size_t nArguments)
+maslevtsov::Polygon* maslevtsov::makePolygon(const double* arguments, std::size_t nArguments)
 {
-  point_t *pntArguments = convertArguments(arguments, nArguments);
-  Polygon *polygon = nullptr;
+  point_t* pntArguments = convertArguments(arguments, nArguments);
+  Polygon* polygon = nullptr;
   try
   {
     polygon = new Polygon(nArguments / 2, pntArguments);
