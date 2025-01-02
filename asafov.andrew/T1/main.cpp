@@ -35,10 +35,10 @@ int main()
   double scale = 0;
   std::cin >> pos.x >> pos.y >> scale;
   scaleShapes(shapes, count, pos, scale, std::cout);
-  for (size_t i = 0; i < 10000; i++)
+  for (size_t i = 0; i < count; i++)
   {
     delete shapes[i];
   }
-  delete shapes;
+  delete[] shapes;
   return 0;
 }
