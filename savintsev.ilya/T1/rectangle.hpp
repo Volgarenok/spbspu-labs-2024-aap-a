@@ -1,6 +1,7 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
 #include "shape.hpp"
+#include "complexquad.hpp"
 
 namespace savintsev
 {
@@ -8,14 +9,15 @@ namespace savintsev
   {
   public:
     Rectangle(point_t lhs, point_t rhs);
+    ~Rectangle() override;
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;
     void move(double x, double y) override;
   private:
     void doScale(double k) override;
-    point_t pLowLeft_;
-    point_t pUpRight_;
+    Complexquad * stay_;
+    Complexquad * lay_;
   };
 }
 #endif

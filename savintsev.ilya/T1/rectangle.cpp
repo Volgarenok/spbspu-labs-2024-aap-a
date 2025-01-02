@@ -3,45 +3,54 @@
 #include <stdexcept>
 
 savintsev::Rectangle::Rectangle(point_t lhs, point_t rhs):
-  pLowLeft_(lhs),
-  pUpRight_(rhs)
+  stay_(nullptr),
+  lay_(nullptr)
 {
-  if (pLowLeft_.x >= pUpRight_.x || pLowLeft_.y >= pUpRight_.y)
+  if (lhs.x >= rhs.x || lhs.y >= rhs.y)
   {
     throw std::invalid_argument("ERROR: Invalid argumets for Rectangle");
   }
+  try
+  {
+    stay_ = new Complexquad(lhs, rhs, {lhs.x, rhs.y}, {rhs.x, lhs.y});
+    lay_ = new Complexquad(lhs, rhs, {rhs.x, lhs.y}, {lhs.x, rhs.y});
+  }
+  catch(const std::bad_alloc & e)
+  {
+    delete stay_;
+  }
+}
+
+savintsev::Rectangle::~Rectangle()
+{
+  delete stay_;
+  delete lay_;
 }
 
 double savintsev::Rectangle::getArea() const
 {
-  return (pUpRight_.y - pLowLeft_.y) * (pUpRight_.x - pLowLeft_.x);
+  return stay_->getArea() + lay_->getArea();
 }
 
 savintsev::rectangle_t savintsev::Rectangle::getFrameRect() const
 {
-  double centerByX = pLowLeft_.x + ((pUpRight_.x - pLowLeft_.x) / 2.);
-  double centerByY = pLowLeft_.y + ((pUpRight_.y - pLowLeft_.y) / 2.);
-  return {pUpRight_.x - pLowLeft_.x, pUpRight_.y - pLowLeft_.y, {centerByX, centerByY}};
+  return stay_->getFrameRect();
 }
 
 void savintsev::Rectangle::move(point_t p)
 {
-  point_t center = getFrameRect().pos;
-  double moveByX = p.x - center.x;
-  double moveByY = p.y - center.y;
-  this->pLowLeft_ = {pLowLeft_.x + moveByX, pLowLeft_.y + moveByY};
-  this->pUpRight_ = {pUpRight_.x + moveByX, pUpRight_.y + moveByY};
+  this->stay_->move(p);
+  this->lay_->move(p);
 }
 
 void savintsev::Rectangle::move(double x, double y)
 {
-  this->pLowLeft_ = {pLowLeft_.x + x, pLowLeft_.y + y};
-  this->pUpRight_ = {pUpRight_.x + x, pUpRight_.y + y};
+  this->stay_->move(x, y);
+  this->lay_->move(x, y);
 }
 
 void savintsev::Rectangle::doScale(double k)
 {
-  point_t center = getFrameRect().pos;
-  this->pLowLeft_ = {center.x - (center.x - pLowLeft_.x) * k, center.y - (center.y - pLowLeft_.y) * k};
-  this->pUpRight_ = {center.x + (pUpRight_.x - center.x) * k, center.y + (pUpRight_.y - center.y) * k};
+  this->stay_->scale(k);
+  this->lay_->scale(k);
 }
