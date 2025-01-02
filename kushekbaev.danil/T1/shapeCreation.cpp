@@ -21,7 +21,7 @@ namespace kushekbaev
 
           catch (const std::invalid_argument& e)
           {
-            throw std::invalid_argument("Some of inputed shapes were incorrectly inputed");
+            throw std::invalid_argument("Some of inputed shapes were incorrectly inputed\n");
           }
         }
 
@@ -34,7 +34,7 @@ namespace kushekbaev
 
           catch (const std::invalid_argument& e)
           {
-            throw std::invalid_argument("Some of inputed shapes were incorrectly inputed");
+            throw std::invalid_argument("Some of inputed shapes were incorrectly inputed\n");
           }
         }
 
@@ -47,7 +47,7 @@ namespace kushekbaev
 
           catch (const std::invalid_argument& e)
           {
-            throw std::invalid_argument("Some of inputed shapes were incorrectly inputed");
+            throw std::invalid_argument("Some of inputed shapes were incorrectly inputed\n");
           }
         }
 
@@ -60,7 +60,7 @@ namespace kushekbaev
 
           catch (const std::invalid_argument& e)
           {
-            throw std::invalid_argument("Some of inputed shapes were incorrectly inputed");
+            throw std::invalid_argument("Some of inputed shapes were incorrectly inputed\n");
           }
         }
 
@@ -70,7 +70,7 @@ namespace kushekbaev
           input >> scaleCoeff;
           if (scaleCoeff <= 0)
           {
-            std::cerr << ("invalid scaleCoeff");
+            throw std::invalid_argument("incorrect scaleCoeff");
             errorexit = true;
             kushekbaev::clearMemory(capacity, shapeCounter);
           }
