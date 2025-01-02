@@ -4,15 +4,8 @@
 
 namespace kushekbaev
 {
-  Rectangle::Rectangle(point_t lowerLeft,
-    point_t upperRight):
-    lowerLeft_(lowerLeft),
-    upperRight_(upperRight)
+  Rectangle::Rectangle(point_t lowerLeft, point_t upperRight) : lowerLeft_(lowerLeft), upperRight_(upperRight)
   {
-    if (lowerLeft_.x >= upperRight_.x || lowerLeft_.y >= upperRight_.y)
-    {
-      throw std::invalid_argument("Coordinates of first point should be less than second");
-    }
   }
 
   double Rectangle::getArea() const
@@ -29,17 +22,21 @@ namespace kushekbaev
 
   void Rectangle::move(point_t Z)
   {
-    point_t middle = getFrameRect().pos;
+    point_t middle = this->getFrameRect().pos;
     double moveX = Z.x - middle.x;
     double moveY = Z.y - middle.y;
-    moveDelta(moveX, moveY, lowerLeft_);
-    moveDelta(moveX, moveY, upperRight_);
+    lowerLeft_.x += moveX;
+    lowerLeft_.y += moveY;
+    upperRight_.x += moveX;
+    upperRight_.y += moveY;
   }
 
   void Rectangle::move(double dx, double dy)
   {
-    moveDelta(dx, dy, lowerLeft_);
-    moveDelta(dx, dy, upperRight_);
+    lowerLeft_.x += dx;
+    lowerLeft_.y += dy;
+    upperRight_.x += dx;
+    upperRight_.y += dy;
   }
 
   void Rectangle::scale(double V)
@@ -49,7 +46,9 @@ namespace kushekbaev
       throw std::invalid_argument("Scale coefficient should be greater than zero\n");
     }
     point_t middle = this->getFrameRect().pos;
-    isoScaling(V, middle, lowerLeft_);
-    isoScaling(V, middle, upperRight_);
+    lowerLeft_.x = middle.x + (lowerLeft_.x - middle.x) * V;
+    lowerLeft_.y = middle.y + (lowerLeft_.y - middle.y) * V;
+    upperRight_.x = middle.x + (upperRight_.x - middle.x) * V;
+    upperRight_.y = middle.y + (upperRight_.y - middle.y) * V;
   }
 }

@@ -1,22 +1,12 @@
 #include "diamond.hpp"
+#include "shape.hpp"
 #include <cmath>
 #include <stdexcept>
-#include "shape.hpp"
 
 namespace kushekbaev
 {
-  Diamond::Diamond(point_t middle,
-    point_t diffX,
-    point_t diffY):
-    middle_(middle),
-    diffX_(diffX),
-    diffY_(diffY)
-  {
-    if (!isTriangle(middle_, diffX_, diffY_))
-    {
-      throw std::invalid_argument("First three points wouldnt make a triangle\n");
-    }
-  }
+  Diamond::Diamond(point_t middle, point_t diffX, point_t diffY)
+  : middle_(middle), diffX_(diffX), diffY_(diffY){}
 
   double Diamond::getArea() const
   {
@@ -30,19 +20,24 @@ namespace kushekbaev
 
   void Diamond::move(point_t Z)
   {
-    point_t middle = getFrameRect().pos;
+    point_t middle = this->getFrameRect().pos;
     double moveX = Z.x - middle.x;
     double moveY = Z.y - middle.y;
     middle_ = Z;
-    moveDelta(moveX, moveY, diffX_);
-    moveDelta(moveX, moveY, diffY_);
+    diffX_.x += moveX;
+    diffX_.y += moveY;
+    diffY_.x += moveX;
+    diffY_.y += moveY;
   }
 
   void Diamond::move(double dx, double dy)
   {
-    moveDelta(dx, dy, middle_);
-    moveDelta(dx, dy, diffX_);
-    moveDelta(dx, dy, diffY_);
+    middle_.x += dx;
+    middle_.y += dy;
+    diffX_.x += dx;
+    diffX_.y += dy;
+    diffY_.x += dx;
+    diffY_.y += dy;
   }
 
   void Diamond::scale(double V)
@@ -51,7 +46,8 @@ namespace kushekbaev
     {
       throw std::invalid_argument("Scale coefficient should be greater than zero\n");
     }
-    isoScaling(V, middle_, diffX_);
-    isoScaling(V, middle_, diffY_);
+    diffY_.y = middle_.y + (diffY_.y - middle_.y) * V;
+    diffX_.x = middle_.x + (diffX_.x - middle_.x) * V;
   }
+
 }

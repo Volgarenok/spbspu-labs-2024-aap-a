@@ -15,16 +15,9 @@ namespace kushekbaev
     double side2 = getLineLength(second, third);
     double side3 = getLineLength(first, third);
 
-    if ((side1 + side2 > side3) &&
-        (side1 + side3 > side2) &&
-        (side2 + side3 > side1))
-    {
-      return true;
-    }
-    else
-    {
-      return false;
-    }
+    return((side1 + side2 > side3) &&
+          (side1 + side3 > side2) &&
+          (side2 + side3 > side1));
   }
 
   bool isPointInsideTriangle(point_t first, point_t second, point_t third, point_t final)
@@ -59,19 +52,19 @@ namespace kushekbaev
 
   Concave* makeConcave(std::istream& input)
   {
-    kushekbaev::point_t first { 0, 0 };
-    kushekbaev::point_t second { 0, 0 };
-    kushekbaev::point_t third { 0, 0 };
-    kushekbaev::point_t final { 0, 0 };
+    point_t first { 0, 0 };
+    point_t second { 0, 0 };
+    point_t third { 0, 0 };
+    point_t final { 0, 0 };
 
     input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y >> final.x >> final.y;
-    if (!kushekbaev::isTriangle(first, second, third))
+    if (!isTriangle(first, second, third))
     {
-      throw (std::invalid_argument("First three points doesnt make a triangle\n"));
+      throw std::invalid_argument("First three points doesnt make a triangle\n");
     }
-    if (!kushekbaev::isPointInsideTriangle(first, second, third, final))
+    if (!isPointInsideTriangle(first, second, third, final))
     {
-      throw (std::invalid_argument("Final point isnt in triangle\n"));
+      throw std::invalid_argument("Final point isnt in triangle\n");
     }
 
     return new Concave({ first, second, third, final });
@@ -82,10 +75,23 @@ namespace kushekbaev
     point_t first { 0, 0 };
     point_t second { 0, 0 };
     point_t third { 0, 0 };
+    bool shit = false;
     input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
-    if (!parallelX(first, second) || !parallelX(second, third) || !parallelX(first, third))
+    if (!parallelX(first, second))
     {
-      throw std::invalid_argument("There is no lina that would be parallel to X\n");
+      if (!parallelX(second,third))
+      {
+        if (!parallelX(first, third))
+        {
+          shit = false;
+        }
+        shit = true;
+      }
+      shit = true;
+    }
+    if (!shit)
+    {
+      throw std::invalid_argument("shit\n");
     }
     if (!isTriangle(first, second, third))
     {

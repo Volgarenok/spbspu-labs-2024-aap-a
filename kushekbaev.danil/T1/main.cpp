@@ -10,20 +10,32 @@ int main()
   kushekbaev::Shape* capacity[10000]{};
   size_t shapeCounter = 0;
   std::string shapeName;
-  bool incorrectShapeInput = false;
-  kushekbaev::point_t scalePoint { 0, 0 };
+  kushekbaev::point_t scalePoint;
   double scaleCoeff = 0;
 
   try
   {
     kushekbaev::createShape(std::cin, capacity, shapeCounter, scalePoint, scaleCoeff);
-  }
 
-  catch (const std::bad_alloc& e)
-  {
-    std::cerr << "bad alloc";
+    if (shapeCounter == 0)
+    {
+      std::cerr << "Shapeless input" << "\n";
+      return 1;
+    }
+
+    std::cout << std::fixed << std::setprecision(1) << kushekbaev::getTotalArea(capacity, shapeCounter);
+
+    kushekbaev::coordOutput(capacity, shapeCounter);
+    std::cout << "\n";
+
+    kushekbaev::scaleEverything(capacity, shapeCounter, scalePoint, scaleCoeff);
+    std::cout << kushekbaev::getTotalArea(capacity, shapeCounter);
+
+    kushekbaev::coordOutput(capacity, shapeCounter);
+    std::cout << "\n";
+
     kushekbaev::clearMemory(capacity, shapeCounter);
-    return 1;
+    return 0;
   }
 
   catch (const std::logic_error& e)
@@ -33,22 +45,10 @@ int main()
     return 1;
   }
 
-  if (incorrectShapeInput)
+  catch (const std::bad_alloc& e)
   {
-    std::cerr << "Some of inputed shapes were incorrectly inputed\n";
+    std::cerr << "Bad alloc" << "\n";
+    kushekbaev::clearMemory(capacity, shapeCounter);
+    return 1;
   }
-
-  std::cout << std::fixed << std::setprecision(1) << kushekbaev::getTotalArea(capacity, shapeCounter);
-
-  kushekbaev::coordOutput(capacity, shapeCounter, std::cout);
-  std::cout << "\n";
-
-  kushekbaev::scaleEverything(capacity, shapeCounter, scalePoint, scaleCoeff);
-  std::cout << kushekbaev::getTotalArea(capacity, shapeCounter);
-
-  kushekbaev::coordOutput(capacity, shapeCounter, std::cout);
-  std::cout << "\n";
-
-  kushekbaev::clearMemory(capacity, shapeCounter);
-  return 0;
 }

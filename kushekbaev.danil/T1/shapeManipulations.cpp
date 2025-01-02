@@ -18,7 +18,7 @@ namespace kushekbaev
 
   void scaleEverything(Shape** capacity, size_t shapeCounter, point_t scalePoint, double scaleCoeff)
   {
-    for (size_t i = 0; i < shapeCounter; i++)
+    for (size_t i = 0; i < shapeCounter; ++i)
     {
       if (capacity[i])
       {
@@ -30,12 +30,11 @@ namespace kushekbaev
         capacity[i]->move(-vector.x, -vector.y);
       }
     }
-    std::cout << "scale coeffitient = " << scaleCoeff << "\n";
   }
 
-  void coordOutput(Shape** capacity, size_t shapeCounter, std::ostream& output)
+  void coordOutput(Shape** capacity, size_t shapeCounter)
   {
-    for (size_t i = 0; i < shapeCounter; i++)
+    for (size_t i = 0; i < shapeCounter; ++i)
     {
       if (capacity[i])
       {
@@ -44,14 +43,14 @@ namespace kushekbaev
         double leftDownY = rect.pos.y - rect.height / 2;
         double rightUpX = rect.pos.x + rect.width / 2;
         double rightUpY = rect.pos.y + rect.height / 2;
-        output << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
+        std::cout << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
       }
     }
   }
 
   void clearMemory(Shape** capacity, size_t shapeCounter)
   {
-    for (size_t i = 0; i < shapeCounter; i++)
+    for (size_t i = 0; i < shapeCounter; ++i)
     {
       delete capacity[i];
       capacity[i] = nullptr;
