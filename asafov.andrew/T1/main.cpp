@@ -50,7 +50,6 @@ int main()
       }
     }
   }
-  count--;
 
   point_t pos;
   double scale = 0;
