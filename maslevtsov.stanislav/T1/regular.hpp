@@ -2,6 +2,7 @@
 #define REGULAR_HPP
 
 #include "shape.hpp"
+#include "polygon.hpp"
 
 namespace maslevtsov
 {
@@ -16,7 +17,7 @@ namespace maslevtsov
     void scale(double k) override;
 
   private:
-    point_t center_, pnt2_, pnt3_;
+    Polygon polygon;
   };
 
   Regular* makeRegular(const double* arguments);

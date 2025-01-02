@@ -25,7 +25,7 @@ namespace
     {
       throw std::logic_error("incorrect coordinates");
     }
-    maslevtsov::point_t *converted = new maslevtsov::point_t[nArguments / 2];
+    maslevtsov::point_t* converted = new maslevtsov::point_t[nArguments / 2];
     std::size_t iConverted = 0;
     for (std::size_t i = 1; i < nArguments; i += 2)
     {
