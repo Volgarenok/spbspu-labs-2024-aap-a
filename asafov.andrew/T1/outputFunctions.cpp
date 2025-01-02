@@ -201,7 +201,6 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
   out << '\n';
   for (unsigned long long i = 0; i < count; i++)
   {
-    
     rect = shapes[i][0].getFrameRect();
     out << std::setprecision(2) << std::fixed << area;
     out << std::setprecision(2) << std::fixed << ' ' << rect.pos.x - rect.width / 2;
