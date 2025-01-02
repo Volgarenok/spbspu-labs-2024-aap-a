@@ -154,6 +154,10 @@ unsigned long asafov::getHash(std::istream& in)
 {
   std::string str = {};
   in >> str;
+  if (str[0] == '\0')
+  {
+    return 0;
+  }
   unsigned long hash = 1;
   for (unsigned long long i = 0; i < 4; i++)
   {
