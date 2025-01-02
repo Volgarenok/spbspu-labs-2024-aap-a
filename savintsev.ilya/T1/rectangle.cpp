@@ -39,12 +39,8 @@ void savintsev::Rectangle::move(double x, double y)
   this->pUpRight_ = {pUpRight_.x + x, pUpRight_.y + y};
 }
 
-void savintsev::Rectangle::scale(double k)
+void savintsev::Rectangle::doScale(double k)
 {
-  if (k <= 0)
-  {
-    return;
-  }
   point_t center = getFrameRect().pos;
   this->pLowLeft_ = {center.x - (center.x - pLowLeft_.x) * k, center.y - (center.y - pLowLeft_.y) * k};
   this->pUpRight_ = {center.x + (pUpRight_.x - center.x) * k, center.y + (pUpRight_.y - center.y) * k};

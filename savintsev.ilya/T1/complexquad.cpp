@@ -1,6 +1,7 @@
 #include "complexquad.hpp"
 #include <cmath>
-#include "on-plane.hpp"
+#include <stdexcept>
+#include "lins-tris.hpp"
 
 savintsev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4):
   p1_(p1),
@@ -51,12 +52,8 @@ void savintsev::Complexquad::move(double x, double y)
   this->p4_ = {p4_.x + x, p4_.y + y};
 }
 
-void savintsev::Complexquad::scale(double k)
+void savintsev::Complexquad::doScale(double k)
 {
-  if (k <= 0)
-  {
-    return;
-  }
   point_t center = {0.0, 0.0};
   findLinesIntersect(p1_, p2_, p3_, p4_, center);
   this->p1_ = {center.x - (center.x - p1_.x) * k, center.y - (center.y - p1_.y) * k};

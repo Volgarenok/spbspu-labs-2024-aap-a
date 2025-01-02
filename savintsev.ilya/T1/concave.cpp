@@ -1,6 +1,7 @@
 #include "concave.hpp"
 #include <cmath>
-#include "on-plane.hpp"
+#include <stdexcept>
+#include "lins-tris.hpp"
 
 savintsev::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   p1_(p1),
@@ -47,12 +48,8 @@ void savintsev::Concave::move(double x, double y)
   this->p4_ = {p4_.x + x, p4_.y + y};
 }
 
-void savintsev::Concave::scale(double k)
+void savintsev::Concave::doScale(double k)
 {
-  if (k <= 0)
-  {
-    return;
-  }
   this->p1_ = {p4_.x - (p4_.x - p1_.x) * k, p4_.y - (p4_.y - p1_.y) * k};
   this->p2_ = {p4_.x - (p4_.x - p2_.x) * k, p4_.y - (p4_.y - p2_.y) * k};
   this->p3_ = {p4_.x - (p4_.x - p3_.x) * k, p4_.y - (p4_.y - p3_.y) * k};

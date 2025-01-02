@@ -1,5 +1,5 @@
-#ifndef ON_PLANE_HPP
-#define ON_PLANE_HPP
+#ifndef LINS_TRIS_HPP
+#define LINS_TRIS_HPP
 #include "base-types.hpp"
 
 namespace savintsev
