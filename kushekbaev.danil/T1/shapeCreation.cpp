@@ -44,6 +44,7 @@ namespace kushekbaev
           try
           {
             capacity[shapeCounter++] = kushekbaev::makeParallelogram(input);
+            std::cout << "eblan\n";
           }
 
           catch (const std::invalid_argument& e)
@@ -71,7 +72,7 @@ namespace kushekbaev
           input >> scaleCoeff;
           if (scaleCoeff <= 0)
           {
-            std::invalid_argument("invalid scaleCoeff");
+            std::cerr << ("invalid scaleCoeff");
             errorexit = true;
             kushekbaev::clearMemory(capacity, shapeCounter);
           }
