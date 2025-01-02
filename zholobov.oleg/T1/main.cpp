@@ -34,7 +34,9 @@ int main()
           zholobov::delete_shapes(shapes, shape_cnt);
           return 1;
         }
+        zholobov::print_shapes(shapes, shape_cnt);
         zholobov::process_scale(shapes, shape_cnt, {x, y}, scale_factor);
+        zholobov::print_shapes(shapes, shape_cnt);
       } else {
         std::cerr << "Unknown shape (" << shape_name << ")\n";
       }
@@ -42,7 +44,7 @@ int main()
       std::cerr << e.what() << "\n";
       zholobov::delete_shapes(shapes, shape_cnt);
       return 1;
-    } catch (const std::invalid_argument& e) {
+    } catch (const std::logic_error& e) {
       std::cerr << e.what() << "\n";
     }
   }

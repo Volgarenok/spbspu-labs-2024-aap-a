@@ -7,7 +7,6 @@ namespace zholobov {
 
   class Parallelogram : public Shape {
   public:
-    Parallelogram();
     Parallelogram(const point_t& p1, const point_t& p2, const point_t& p3);
 
     double getArea() const override;

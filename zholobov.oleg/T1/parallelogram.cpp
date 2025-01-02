@@ -1,12 +1,6 @@
 #include "parallelogram.hpp"
 #include <cmath>
 
-zholobov::Parallelogram::Parallelogram():
-  pos_{},
-  p1_{},
-  p2_{}
-{}
-
 zholobov::Parallelogram::Parallelogram(const point_t& p1, const point_t& p2, const point_t& p3)
 {
   pos_.x = (p1.x + p3.x) / 2.0;

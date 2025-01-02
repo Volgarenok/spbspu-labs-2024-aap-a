@@ -5,9 +5,8 @@
 
 namespace zholobov {
 
-  class Square : public Rectangle {
+  class Square final: public Rectangle {
   public:
-    Square();
     Square(const point_t& a, double length);
   };
 

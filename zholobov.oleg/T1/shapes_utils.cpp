@@ -13,7 +13,10 @@ zholobov::Rectangle* zholobov::create_rectangle(std::istream& in)
   double x2 = 0.0;
   double y2 = 0.0;
   in >> x1 >> y1 >> x2 >> y2;
-  if (!in || (x2 <= x1) || (y2 <=y1)) {
+  if (!in) {
+    throw std::logic_error("Stream read error");
+  }
+  if ((x2 <= x1) || (y2 <=y1)) {
     throw std::invalid_argument("Error in RECTANGLE parameters");
   }
   return new Rectangle({x1, y1}, {x2, y2});
@@ -25,7 +28,10 @@ zholobov::Square* zholobov::create_square(std::istream& in)
   double y1 = 0.0;
   double a;
   in >> x1 >> y1 >> a;
-  if (!in || (a <= 0)) {
+  if (!in) {
+    throw std::logic_error("Stream read error");
+  }
+  if (a <= 0) {
     throw std::invalid_argument("Error in SQUARE parameters");
   }
   return new Square(zholobov::point_t{x1, y1}, double{a});
@@ -40,8 +46,11 @@ zholobov::Parallelogram* zholobov::create_parallelogram(std::istream& in)
   double x3 = 0.0;
   double y3 = 0.0;
   in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+  if (!in) {
+    throw std::logic_error("Stream read error");
+  }
   bool correct_parallelogram = ((y1 == y2) && (y1 != y3)) || ((y2 == y3) && (y1 != y2));
-  if (!in || !correct_parallelogram) {
+  if (!correct_parallelogram) {
     throw std::invalid_argument("Error in PARALLELOGRAM parameters");
   }
   return new zholobov::Parallelogram(
@@ -52,7 +61,6 @@ zholobov::Parallelogram* zholobov::create_parallelogram(std::istream& in)
 
 void zholobov::process_scale(Shape** shapes, size_t shape_cnt, point_t pos, double scale_factor)
 {
-  zholobov::print_shapes(shapes, shape_cnt);
   for (size_t i = 0; i < shape_cnt; ++i) {
     if (shapes[i]) {
       shapes[i]->scale(scale_factor);
@@ -63,7 +71,6 @@ void zholobov::process_scale(Shape** shapes, size_t shape_cnt, point_t pos, doub
       shapes[i]->move(new_pos);
     }
   }
-  zholobov::print_shapes(shapes, shape_cnt);
 }
 
 void zholobov::print_shapes(Shape** shapes, size_t shape_cnt)
@@ -78,14 +85,14 @@ void zholobov::print_shapes(Shape** shapes, size_t shape_cnt)
   for (size_t i = 0; i < shape_cnt; ++i) {
     if (shapes[i]) {
       rectangle_t rect = shapes[i]->getFrameRect();
-      std::cout << " " << rect.pos.x - rect.width / 2.0f << " " << rect.pos.y - rect.height / 2.0f;
-      std::cout << " " << rect.pos.x + rect.width / 2.0f << " " << rect.pos.y + rect.height / 2.0f;
+      std::cout << " " << rect.pos.x - rect.width / 2.0 << " " << rect.pos.y - rect.height / 2.0;
+      std::cout << " " << rect.pos.x + rect.width / 2.0 << " " << rect.pos.y + rect.height / 2.0;
     }
   }
   std::cout << "\n";
 }
 
-void zholobov::delete_shapes(Shape** shapes, size_t shape_cnt)\
+void zholobov::delete_shapes(Shape** shapes, size_t shape_cnt)
 {
   for (size_t i = 0; i < shape_cnt; ++i) {
     delete shapes[i];
