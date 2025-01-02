@@ -1,6 +1,7 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
 #include "shape.hpp"
+#include "complexquad.hpp"
 
 namespace abramov
 {
@@ -12,11 +13,11 @@ namespace abramov
     void move(point_t p) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
-    point_t getpLeftLower() const;
-    point_t getpRightUpper() const;
   private:
-    point_t pLeftLower_;
-    point_t pRightUpper_;
+    ComplexQuad cmplxqd1_;
+    ComplexQuad cmplxqd2_;
+    ComplexQuad cmplxqd3_;
+    ComplexQuad cmplxqd4_;
   };
 }
 #endif

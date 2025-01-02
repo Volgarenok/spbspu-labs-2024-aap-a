@@ -134,8 +134,8 @@ namespace abramov
     try
     {
       Rectangle *shp = dynamic_cast< Rectangle* >(figure);
-      Rectangle *shape = new Rectangle(shp->getpLeftLower(), shp->getpRightUpper());
-      return shape;
+//      Rectangle *shape = new Rectangle(shp->getpLeftLower(), shp->getpRightUpper());
+      return shp;
     }
     catch (const std::bad_cast &e)
     {
