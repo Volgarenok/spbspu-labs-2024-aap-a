@@ -1,4 +1,5 @@
 #include "outputFunctions.hpp"
+#include <iomanip>
 #include "exception"
 #include "rectangle.hpp"
 #include "circle.hpp"
@@ -173,11 +174,11 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
   for (unsigned long long i = 0; i < count; i++)
   {
     rect = shapes[i][0].getFrameRect();
-    out << shapes[i][0].getArea() << ' ' << rect.pos.x - rect.width / 2 << ' ' << rect.pos.y - rect.height / 2;
-    out << ' ' << rect.pos.x + rect.width / 2 << ' ' << rect.pos.y + rect.height / 2 << '\n';
+    out << std::setprecision(2) << std::fixed << shapes[i][0].getArea() << ' ' << rect.pos.x - rect.width / 2 << ' ' << rect.pos.y - rect.height / 2;
+    out << std::setprecision(2) << std::fixed << ' ' << rect.pos.x + rect.width / 2 << ' ' << rect.pos.y + rect.height / 2 << '\n';
     shapes[i][0].scale(pos, scale);
     rect = shapes[i][0].getFrameRect();
-    out << shapes[i][0].getArea() << ' ' << rect.pos.x - rect.width / 2 << ' ' << rect.pos.y - rect.height / 2;
-    out << ' ' << rect.pos.x + rect.width / 2 << ' ' << rect.pos.y + rect.height / 2 << '\n';
+    out << std::setprecision(2) << std::fixed << shapes[i][0].getArea() << ' ' << rect.pos.x - rect.width / 2 << ' ' << rect.pos.y - rect.height / 2;
+    out << std::setprecision(2) << std::fixed << ' ' << rect.pos.x + rect.width / 2 << ' ' << rect.pos.y + rect.height / 2 << '\n';
   }
 }
