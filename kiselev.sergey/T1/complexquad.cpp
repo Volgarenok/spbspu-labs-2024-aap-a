@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <cmath>
 #include "base-types.hpp"
-kiselev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4) noexcept : 
+kiselev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4) noexcept :
   p1_(p1),
   p2_(p2),
   p3_(p3),

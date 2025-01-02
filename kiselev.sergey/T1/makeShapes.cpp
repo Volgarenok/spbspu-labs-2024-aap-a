@@ -37,7 +37,7 @@ namespace
     return { x, y };
   }
 
-} // namespace
+}
 kiselev::Rectangle* kiselev::make_rectangle(std::istream& input)
 {
   double x1 = 0;
