@@ -35,3 +35,4 @@ void kizhin::Rectangle::scale(double scaleFactor)
   data_.height *= scaleFactor;
   data_.width *= scaleFactor;
 }
+

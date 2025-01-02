@@ -101,3 +101,4 @@ kizhin::Polygon* kizhin::createPolygon(const double* params)
   delete[] points;
   return result;
 }
+

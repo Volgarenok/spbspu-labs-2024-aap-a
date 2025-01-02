@@ -82,3 +82,4 @@ kizhin::point_t* kizhin::Regular::computeVerticesArray() const
   }
   return vertices;
 }
+

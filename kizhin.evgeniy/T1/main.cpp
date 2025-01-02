@@ -21,3 +21,4 @@ int main()
   delete[] scaleParams;
   kizhin::deleteShapes(shapes);
 }
+

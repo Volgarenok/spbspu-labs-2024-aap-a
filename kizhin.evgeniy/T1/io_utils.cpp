@@ -3,6 +3,8 @@
 #include "shape_utils.hpp"
 
 namespace kizhin {
+  std::ostream& outputShapeFrame(std::ostream&, const Shape*);
+  double* parseInputShape(std::istream&, std::string&);
   void resizeBuffer(double** buffer, size_t& capacity);
   void throwIfNotScaleOrSize(bool isScaleCommand, size_t shapesSize);
   void copy(const double*, const double*, double*);
@@ -37,6 +39,9 @@ double* kizhin::processInput(std::istream& is, std::ostream& errs, Shape** shape
   try {
     while (is) {
       currentParams = parseInputShape(is, currentName);
+      if (!is) {
+        break;
+      }
       if (currentName == "SCALE") {
         isScaleCommand = true;
         break;
@@ -107,3 +112,4 @@ void kizhin::copy(const double* first, const double* last, double* result)
     *result = *first;
   }
 }
+

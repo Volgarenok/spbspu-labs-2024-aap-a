@@ -1,7 +1,7 @@
 #ifndef KIZHIN_T1_SHAPE_UTILS_HPP
 #define KIZHIN_T1_SHAPE_UTILS_HPP
 
-#include <string>
+#include <iosfwd>
 #include "shape.hpp"
 
 namespace kizhin {
@@ -12,3 +12,4 @@ namespace kizhin {
 }
 
 #endif
+

@@ -1,7 +1,6 @@
 #include "point_utils.hpp"
 #include <algorithm>
 #include <cmath>
-#include "base-types.hpp"
 
 namespace kizhin {
   double computeDotProduct(const point_t&, const point_t&, const point_t&);
@@ -63,3 +62,4 @@ kizhin::point_t& kizhin::operator+=(point_t& lhs, const kizhin::point_t& rhs)
   lhs.y += rhs.y;
   return lhs;
 }
+

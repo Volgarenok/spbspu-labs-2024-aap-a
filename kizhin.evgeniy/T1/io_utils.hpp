@@ -6,9 +6,8 @@
 
 namespace kizhin {
   double* processInput(std::istream&, std::ostream&, Shape**);
-  double* parseInputShape(std::istream&, std::string&);
-  std::ostream& outputShapeFrame(std::ostream&, const Shape*);
   std::ostream& outputShapesInfo(std::ostream&, const Shape* const*);
 }
 
 #endif
+

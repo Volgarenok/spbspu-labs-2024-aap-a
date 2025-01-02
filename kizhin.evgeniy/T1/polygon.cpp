@@ -159,3 +159,4 @@ size_t kizhin::countEqual(const point_t* begin, const point_t* end, const point_
   }
   return count;
 }
+
