@@ -34,7 +34,7 @@ zholobov::Square* zholobov::create_square(std::istream& in)
   if (a <= 0) {
     throw std::invalid_argument("Error in SQUARE parameters");
   }
-  return new Square(zholobov::point_t{x1, y1}, double{a});
+  return new Square(point_t{x1, y1}, a);
 }
 
 zholobov::Parallelogram* zholobov::create_parallelogram(std::istream& in)
@@ -54,9 +54,9 @@ zholobov::Parallelogram* zholobov::create_parallelogram(std::istream& in)
     throw std::invalid_argument("Error in PARALLELOGRAM parameters");
   }
   return new zholobov::Parallelogram(
-      zholobov::point_t{x1, y1},
-      zholobov::point_t{x2, y2},
-      zholobov::point_t{x3, y3});
+      point_t{x1, y1},
+      point_t{x2, y2},
+      point_t{x3, y3});
 }
 
 void zholobov::process_scale(Shape** shapes, size_t shape_cnt, point_t pos, double scale_factor)
