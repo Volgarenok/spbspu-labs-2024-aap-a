@@ -18,25 +18,6 @@ int main()
   try
   {
     kushekbaev::createShape(std::cin, capacity, shapeCounter, scalePoint, scaleCoeff);
-
-    if (shapeCounter == 0)
-    {
-      std::cerr << "Shapeless input" << "\n";
-      return 1;
-    }
-
-    std::cout << std::fixed << std::setprecision(1) << kushekbaev::getTotalArea(capacity, shapeCounter);
-
-    kushekbaev::coordOutput(capacity, shapeCounter);
-    std::cout << "\n";
-
-    kushekbaev::scaleEverything(capacity, shapeCounter, scalePoint, scaleCoeff);
-    std::cout << kushekbaev::getTotalArea(capacity, shapeCounter);
-
-    kushekbaev::coordOutput(capacity, shapeCounter);
-    std::cout << "\n";
-
-    kushekbaev::clearMemory(capacity, shapeCounter);
   }
 
   catch (const std::logic_error& e)
@@ -53,16 +34,29 @@ int main()
     return 1;
   }
 
-  if (incorrectShapeInput)
+  if (shapeCounter == 0)
   {
-    std::cerr << "Some of inputed shapes were incorrectly inputed";
-    return 0;
+    std::cerr << "Shapeless input" << "\n";
+    return 1;
   }
 
   if (errorexit)
   {
     return 1;
   }
+
+  std::cout << std::fixed << std::setprecision(1) << kushekbaev::getTotalArea(capacity, shapeCounter);
+
+  kushekbaev::coordOutput(capacity, shapeCounter);
+  std::cout << "\n";
+
+  kushekbaev::scaleEverything(capacity, shapeCounter, scalePoint, scaleCoeff);
+  std::cout << kushekbaev::getTotalArea(capacity, shapeCounter);
+
+  kushekbaev::coordOutput(capacity, shapeCounter);
+  std::cout << "\n";
+
+  kushekbaev::clearMemory(capacity, shapeCounter);
 
   return 0;
 }

@@ -22,6 +22,7 @@ namespace kushekbaev
 
           catch (const std::invalid_argument& e)
           {
+            throw std::invalid_argument("Some of inputed shapes were incorrectly inputed");
             incorrectShapeInput = true;
           }
         }
@@ -35,6 +36,7 @@ namespace kushekbaev
 
           catch (const std::invalid_argument& e)
           {
+            throw std::invalid_argument("Some of inputed shapes were incorrectly inputed");
             incorrectShapeInput = true;
           }
         }
@@ -44,11 +46,11 @@ namespace kushekbaev
           try
           {
             capacity[shapeCounter++] = kushekbaev::makeParallelogram(input);
-            std::cout << "eblan\n";
           }
 
           catch (const std::invalid_argument& e)
           {
+            throw std::invalid_argument("Some of inputed shapes were incorrectly inputed");
             incorrectShapeInput = true;
           }
         }
@@ -62,6 +64,7 @@ namespace kushekbaev
 
           catch (const std::invalid_argument& e)
           {
+            throw std::invalid_argument("Some of inputed shapes were incorrectly inputed");
             incorrectShapeInput = true;
           }
         }
