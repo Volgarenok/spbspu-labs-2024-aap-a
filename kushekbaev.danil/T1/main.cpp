@@ -13,6 +13,7 @@ int main()
   kushekbaev::point_t scalePoint;
   double scaleCoeff = 0;
   bool errorexit = false;
+  bool incorrectShapeInput = false;
 
   try
   {
@@ -36,7 +37,6 @@ int main()
     std::cout << "\n";
 
     kushekbaev::clearMemory(capacity, shapeCounter);
-    return 0;
   }
 
   catch (const std::logic_error& e)
@@ -53,8 +53,16 @@ int main()
     return 1;
   }
 
+  if (incorrectShapeInput)
+  {
+    std::cerr << "Some of inputed shapes were incorrectly inputed";
+    return 0;
+  }
+
   if (errorexit)
   {
     return 1;
   }
+
+  return 0;
 }

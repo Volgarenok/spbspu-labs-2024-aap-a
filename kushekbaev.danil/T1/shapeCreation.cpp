@@ -71,17 +71,12 @@ namespace kushekbaev
           input >> scaleCoeff;
           if (scaleCoeff <= 0)
           {
-            std::cerr << "Incorrect scaleCoeff" << "\n";
+            std::invalid_argument("invalid scaleCoeff");
             errorexit = true;
             kushekbaev::clearMemory(capacity, shapeCounter);
           }
           break;
         }
-    }
-
-    if (incorrectShapeInput)
-    {
-      throw std::invalid_argument("Some of inputed shapes were incorrectly inputed\n");
     }
 
     if (shapeCounter == 0)
