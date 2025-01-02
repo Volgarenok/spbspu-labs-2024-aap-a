@@ -1,5 +1,7 @@
 #include "shapeCreation.hpp"
 #include <iomanip>
+#include "shapeBreeding.hpp"
+#include "shapeManipulations.hpp"
 
 namespace kushekbaev
 {
@@ -8,13 +10,13 @@ namespace kushekbaev
 
   void createShape(std::istream& input, Shape** capacity, size_t& shapeCounter, point_t& scalePoint, double& scaleCoeff)
   {
-    while (std::cin >> shapeName)
+    while (input >> shapeName)
     {
       if (shapeName == "RECTANGLE")
         {
           try
           {
-            capacity[shapeCounter++] = kushekbaev::makeRectangle(std::cin);
+            capacity[shapeCounter++] = kushekbaev::makeRectangle(input);
             std::cout << "rectangle\n";
           }
 
@@ -28,7 +30,7 @@ namespace kushekbaev
         {
           try
           {
-            capacity[shapeCounter++] = kushekbaev::makeConcave(std::cin);
+            capacity[shapeCounter++] = kushekbaev::makeConcave(input);
             std::cout << "concave\n";
           }
 
@@ -42,7 +44,7 @@ namespace kushekbaev
         {
           try
           {
-            capacity[shapeCounter++] = kushekbaev::makeParallelogram(std::cin);
+            capacity[shapeCounter++] = kushekbaev::makeParallelogram(input);
             std::cout << "parallelogram\n";
           }
 
@@ -57,7 +59,7 @@ namespace kushekbaev
         {
           try
           {
-            capacity[shapeCounter++] = kushekbaev::makeDiamond(std::cin);
+            capacity[shapeCounter++] = kushekbaev::makeDiamond(input);
             std::cout << "diamond\n";
           }
 
@@ -70,8 +72,8 @@ namespace kushekbaev
 
         else if (shapeName == "SCALE")
         {
-          scalePoint = kushekbaev::makeScale(std::cin);
-          std::cin >> scaleCoeff;
+          scalePoint = kushekbaev::makeScale(input);
+          input >> scaleCoeff;
           if (scaleCoeff <= 0)
           {
             std::cerr << "Incorrect scaleCoeff" << "\n";
@@ -91,3 +93,4 @@ namespace kushekbaev
       std::cerr << "Shapeless input" << "\n";
     }
   }
+}
