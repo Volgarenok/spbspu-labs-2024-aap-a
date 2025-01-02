@@ -15,7 +15,20 @@ int main()
   unsigned long long hash = 0;
   while (true)
   {
-    hash = getHash(std::cin);
+    try
+    {
+      hash = getHash(std::cin);
+    }
+    catch (std::logic_error)
+    {
+      for (size_t i = 0; i < count; i++)
+      {
+        delete shapes[i];
+      }
+      delete[] shapes;
+      std::cerr << "in err\n";
+      return 1;
+    }
     if (hash == 'S' * 'C' * 'A' * 'L')
     {
       break;
@@ -34,6 +47,15 @@ int main()
   point_t pos;
   double scale = 0;
   std::cin >> pos.x >> pos.y >> scale;
+  if (scale <= 0)
+  {
+    for (size_t i = 0; i < count; i++)
+    {
+      delete shapes[i];
+    }
+    delete[] shapes;
+    return 1;
+  }
   scaleShapes(shapes, count, pos, scale, std::cout);
   for (size_t i = 0; i < count; i++)
   {

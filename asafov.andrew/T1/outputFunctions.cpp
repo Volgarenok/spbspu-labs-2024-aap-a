@@ -1,4 +1,5 @@
 #include "outputFunctions.hpp"
+#include "exception"
 #include "rectangle.hpp"
 #include "circle.hpp"
 #include "ring.hpp"
@@ -154,9 +155,9 @@ unsigned long asafov::getHash(std::istream& in)
 {
   std::string str = {};
   in >> str;
-  if (str[0] == '\0')
+  if (str[0] == '\0' || in.fail() || in.eof())
   {
-    return 0;
+    throw std::logic_error("");
   }
   unsigned long hash = 1;
   for (unsigned long long i = 0; i < 4; i++)
@@ -172,11 +173,11 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
   for (unsigned long long i = 0; i < count; i++)
   {
     rect = shapes[i][0].getFrameRect();
-    out << '\n' << "Area:" << shapes[i][0].getArea() << "; Frame rectangle: " << '(' << rect.pos.x << ", ";
-    out << rect.pos.y << ") " << rect.width << ' ' << rect.height << '\n';
+    out << shapes[i][0].getArea() << ' ' << rect.pos.x - rect.width / 2 << ' ' << rect.pos.y - rect.height / 2;
+    out << ' ' << rect.pos.x + rect.width / 2 << ' ' << rect.pos.y + rect.height / 2 << '\n';
     shapes[i][0].scale(pos, scale);
     rect = shapes[i][0].getFrameRect();
-    out << "Area:" << shapes[i][0].getArea() << "; Frame rectangle: " << '(' << rect.pos.x << ", ";
-    out << rect.pos.y << ") " << rect.width << ' ' << rect.height << '\n';
+    out << shapes[i][0].getArea() << ' ' << rect.pos.x - rect.width / 2 << ' ' << rect.pos.y - rect.height / 2;
+    out << ' ' << rect.pos.x + rect.width / 2 << ' ' << rect.pos.y + rect.height / 2 << '\n';
   }
 }
