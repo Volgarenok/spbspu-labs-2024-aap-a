@@ -63,7 +63,19 @@ int main()
     delete[] shapes;
     return 1;
   }
-  scaleShapes(shapes, count, pos, scale, std::cout);
+  try
+  {
+    scaleShapes(shapes, count, pos, scale, std::cout);
+  }
+  catch (const std::logic_error & e)
+  {
+    for (size_t i = 0; i < count; i++)
+    {
+      delete shapes[i];
+    }
+    delete[] shapes;
+    return 1;
+  }
   for (size_t i = 0; i < count; i++)
   {
     delete shapes[i];

@@ -174,21 +174,39 @@ unsigned long asafov::getHash(std::istream& in)
 
 void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, double scale, std::ostream& out)
 {
+  if (count == 0)
+  {
+    throw std::logic_error("");
+  }
   rectangle_t rect = {};
+  double area = 0.0;
+  for (unsigned long long i = 0; i < count; i++)
+  {
+    area += shapes[i][0].getArea();
+  }
   for (unsigned long long i = 0; i < count; i++)
   {
     rect = shapes[i][0].getFrameRect();
-    out << std::setprecision(2) << std::fixed << shapes[i][0].getArea();
+    out << std::setprecision(2) << std::fixed << area;
     out << std::setprecision(2) << std::fixed << ' ' << rect.pos.x - rect.width / 2;
     out << std::setprecision(2) << std::fixed << ' ' << rect.pos.y - rect.height / 2;
     out << std::setprecision(2) << std::fixed << ' ' << rect.pos.x + rect.width / 2;
-    out << std::setprecision(2) << std::fixed << ' ' << rect.pos.y + rect.height / 2 << '\n';
+    out << std::setprecision(2) << std::fixed << ' ' << rect.pos.y + rect.height / 2;
     shapes[i][0].scale(pos, scale);
+  }
+  for (unsigned long long i = 0; i < count; i++)
+  {
+    area += shapes[i][0].getArea();
+  }
+  out << '\n';
+  for (unsigned long long i = 0; i < count; i++)
+  {
+    
     rect = shapes[i][0].getFrameRect();
-    out << std::setprecision(2) << std::fixed << shapes[i][0].getArea();
+    out << std::setprecision(2) << std::fixed << area;
     out << std::setprecision(2) << std::fixed << ' ' << rect.pos.x - rect.width / 2;
     out << std::setprecision(2) << std::fixed << ' ' << rect.pos.y - rect.height / 2;
     out << std::setprecision(2) << std::fixed << ' ' << rect.pos.x + rect.width / 2;
-    out << std::setprecision(2) << std::fixed << ' ' << rect.pos.y + rect.height / 2 << '\n';
+    out << std::setprecision(2) << std::fixed << ' ' << rect.pos.y + rect.height / 2;
   }
 }
