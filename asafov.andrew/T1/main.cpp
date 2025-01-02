@@ -19,7 +19,7 @@ int main()
     {
       hash = getHash(std::cin);
     }
-    catch (std::logic_error)
+    catch (const std::logic_error & e)
     {
       for (size_t i = 0; i < count; i++)
       {
