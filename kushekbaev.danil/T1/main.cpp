@@ -51,4 +51,9 @@ int main()
     kushekbaev::clearMemory(capacity, shapeCounter);
     return 1;
   }
+
+  if (errorexit)
+  {
+    return 1;
+  }
 }

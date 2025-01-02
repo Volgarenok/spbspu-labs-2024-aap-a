@@ -7,6 +7,7 @@ namespace kushekbaev
 {
   std::string shapeName;
   bool incorrectShapeInput = false;
+  bool errorexit = false;
 
   void createShape(std::istream& input, Shape** capacity, size_t& shapeCounter, point_t& scalePoint, double& scaleCoeff)
   {
@@ -31,7 +32,6 @@ namespace kushekbaev
           try
           {
             capacity[shapeCounter++] = kushekbaev::makeConcave(input);
-            std::cout << "concave\n";
           }
 
           catch (const std::invalid_argument& e)
@@ -45,13 +45,11 @@ namespace kushekbaev
           try
           {
             capacity[shapeCounter++] = kushekbaev::makeParallelogram(input);
-            std::cout << "parallelogram\n";
           }
 
           catch (const std::invalid_argument& e)
           {
             incorrectShapeInput = true;
-            std::cerr << e.what();
           }
         }
 
@@ -60,13 +58,11 @@ namespace kushekbaev
           try
           {
             capacity[shapeCounter++] = kushekbaev::makeDiamond(input);
-            std::cout << "diamond\n";
           }
 
           catch (const std::invalid_argument& e)
           {
             incorrectShapeInput = true;
-            std::cerr << e.what();
           }
         }
 
@@ -77,6 +73,7 @@ namespace kushekbaev
           if (scaleCoeff <= 0)
           {
             std::cerr << "Incorrect scaleCoeff" << "\n";
+            errorexit = true;
             kushekbaev::clearMemory(capacity, shapeCounter);
           }
           break;
