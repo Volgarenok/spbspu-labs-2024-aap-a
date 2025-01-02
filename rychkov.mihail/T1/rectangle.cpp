@@ -44,3 +44,12 @@ void rychkov::Rectangle::scale(double coef)
   height_ *= coef;
   width_ *= coef;
 }
+rychkov::Shape* rychkov::Rectangle::clone() const
+{
+  Rectangle* result = static_cast< Rectangle* >(malloc(sizeof(Rectangle)));
+  if (!result)
+  {
+    return nullptr;
+  }
+  return new (result) Rectangle(*this);
+}

@@ -10,19 +10,25 @@ rychkov::CompositeShape::CompositeShape():
   size_(0),
   capacity_(0)
 {}
+rychkov::CompositeShape::CompositeShape(const CompositeShape& src):
+  shapes_(static_cast< Shape** >(malloc(src.size_ * sizeof(Shape*)))),
+  size_(src.size_),
+  capacity_(src.size_)
+{
+  if (!shapes_)
+  {
+    throw std::bad_alloc();
+  }
+  for (size_t i = 0; i < size_; i++)
+  {
+    shapes_[i] = src.shapes_[i]->clone();
+  }
+}
 rychkov::CompositeShape::CompositeShape(CompositeShape&& src) noexcept:
   shapes_(std::exchange(src.shapes_, nullptr)),
   size_(std::exchange(src.size_, 0)),
   capacity_(std::exchange(src.capacity_, 0))
 {}
-rychkov::CompositeShape& rychkov::CompositeShape::operator=(CompositeShape&& src) noexcept
-{
-  CompositeShape(std::move(*this));
-  shapes_ = std::exchange(src.shapes_, nullptr);
-  size_ = std::exchange(src.size_, 0);
-  capacity_ = std::exchange(src.capacity_, 0);
-  return *this;
-}
 rychkov::CompositeShape::~CompositeShape()
 {
   for (size_t i = 0; i < size_; i++)
@@ -31,6 +37,21 @@ rychkov::CompositeShape::~CompositeShape()
     free(shapes_[i]);
   }
   free(shapes_);
+}
+
+rychkov::CompositeShape& rychkov::CompositeShape::operator=(const CompositeShape& src)
+{
+  CompositeShape temp(src);
+  std::swap(*this, temp);
+  return *this;
+}
+rychkov::CompositeShape& rychkov::CompositeShape::operator=(CompositeShape&& src) noexcept
+{
+  CompositeShape(std::move(*this));
+  shapes_ = std::exchange(src.shapes_, nullptr);
+  size_ = std::exchange(src.size_, 0);
+  capacity_ = std::exchange(src.capacity_, 0);
+  return *this;
 }
 
 rychkov::Shape* rychkov::CompositeShape::operator[](size_t id) noexcept
@@ -114,6 +135,23 @@ void rychkov::CompositeShape::scale(double coef)
   for (size_t i = 0; i < size_; i++)
   {
     rychkov::scale(shapes_[i], coef, compositionFrame.pos);
+  }
+}
+rychkov::CompositeShape* rychkov::CompositeShape::clone() const
+{
+  CompositeShape* result = static_cast< CompositeShape* >(malloc(sizeof(CompositeShape)));
+  if (!result)
+  {
+    return nullptr;
+  }
+  try
+  {
+    return new (result) CompositeShape(*this);
+  }
+  catch (...)
+  {
+    free(result);
+    return nullptr;
   }
 }
 

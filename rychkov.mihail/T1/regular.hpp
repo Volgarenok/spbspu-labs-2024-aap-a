@@ -18,6 +18,7 @@ namespace rychkov
     virtual void move(point_t destination) noexcept override;
     virtual void move(double deltaX, double deltaY) noexcept override;
     virtual void scale(double coef) override;
+    virtual Shape* clone() const override;
   private:
     point_t center_;
     size_t nSides_;

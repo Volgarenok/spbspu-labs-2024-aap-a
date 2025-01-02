@@ -10,9 +10,10 @@ namespace rychkov
   {
   public:
     CompositeShape();
-    CompositeShape(const CompositeShape&) = delete;
+    CompositeShape(const CompositeShape&);
     CompositeShape(CompositeShape&& src) noexcept;
     ~CompositeShape();
+    CompositeShape& operator=(const CompositeShape& src);
     CompositeShape& operator=(CompositeShape&& src) noexcept;
 
     Shape* operator[](size_t id) noexcept;
@@ -25,6 +26,7 @@ namespace rychkov
     void move(point_t destination) noexcept;
     void move(double deltaX, double deltaY) noexcept;
     void scale(double coef);
+    CompositeShape* clone() const;
 
     size_t size() const noexcept;
     bool empty() const noexcept;

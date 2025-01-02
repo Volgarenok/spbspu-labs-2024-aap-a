@@ -14,6 +14,7 @@ namespace rychkov
     virtual void move(point_t destination) noexcept = 0;
     virtual void move(double deltaX, double deltaY) noexcept = 0;
     virtual void scale(double coef) = 0;
+    virtual Shape* clone() const = 0;
   };
   void scale(Shape* shape, double coef, point_t scaleCenter);
 }

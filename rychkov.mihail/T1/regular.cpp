@@ -91,3 +91,12 @@ void rychkov::Regular::scale(double coef)
   }
   sideLength_ *= coef;
 }
+rychkov::Shape* rychkov::Regular::clone() const
+{
+  Regular* result = static_cast< Regular* >(malloc(sizeof(Regular)));
+  if (!result)
+  {
+    return nullptr;
+  }
+  return new (result) Regular(*this);
+}

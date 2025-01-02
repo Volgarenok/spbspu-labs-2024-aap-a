@@ -2,11 +2,25 @@
 
 #include <stdexcept>
 #include <algorithm>
+#include <utility>
 
-rychkov::Polygon::~Polygon()
+rychkov::Polygon::Polygon(const Polygon& src):
+  vertexes_(static_cast< point_t* >(malloc(src.size_ * sizeof(point_t)))),
+  size_(src.size_)
 {
-  free(vertexes_);
+  if (!vertexes_)
+  {
+    throw std::bad_alloc();
+  }
+  for (size_t i = 0; i < size_; i++)
+  {
+    vertexes_[i] = src.vertexes_[i];
+  }
 }
+rychkov::Polygon::Polygon(Polygon&& src):
+  vertexes_(std::exchange(src.vertexes_, nullptr)),
+  size_(src.size_)
+{}
 rychkov::Polygon::Polygon(point_t* points, size_t size):
   vertexes_(points),
   size_(size)
@@ -25,6 +39,24 @@ rychkov::Polygon::Polygon(point_t* points, size_t size):
       }
     }
   }
+}
+rychkov::Polygon::~Polygon()
+{
+  free(vertexes_);
+}
+
+rychkov::Polygon& rychkov::Polygon::operator=(const Polygon& src)
+{
+  Polygon temp(src);
+  std::swap(*this, temp);
+  return *this;
+}
+rychkov::Polygon& rychkov::Polygon::operator=(Polygon&& src)
+{
+  Polygon temp(std::move(*this));
+  vertexes_ = std::exchange(src.vertexes_, nullptr);
+  size_ = src.size_;
+  return *this;
 }
 
 double rychkov::Polygon::getArea() const noexcept
@@ -86,4 +118,21 @@ rychkov::point_t rychkov::Polygon::getCenter() const noexcept
     coordsSum.y += vertexes_[i].y;
   }
   return {coordsSum.x / size_, coordsSum.y / size_};
+}
+rychkov::Shape* rychkov::Polygon::clone() const
+{
+  Polygon* result = static_cast< Polygon* >(malloc(sizeof(Polygon)));
+  if (!result)
+  {
+    return nullptr;
+  }
+  try
+  {
+    return new (result) Polygon(*this);
+  }
+  catch (...)
+  {
+    free(result);
+    return nullptr;
+  }
 }
