@@ -18,7 +18,6 @@ namespace kushekbaev
           try
           {
             capacity[shapeCounter++] = kushekbaev::makeRectangle(input);
-            std::cout << "rectangle\n";
           }
 
           catch (const std::invalid_argument& e)

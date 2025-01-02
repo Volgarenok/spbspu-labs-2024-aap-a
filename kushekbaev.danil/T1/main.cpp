@@ -12,6 +12,7 @@ int main()
   std::string shapeName;
   kushekbaev::point_t scalePoint;
   double scaleCoeff = 0;
+  bool errorexit = false;
 
   try
   {
