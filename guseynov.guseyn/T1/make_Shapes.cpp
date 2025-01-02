@@ -4,7 +4,7 @@
 
 namespace
 {
-  void getFrRectCords(guseynov::rectangle_t & rect, double & lbx, double & lby, double & rtx, double & rty)
+  void getFrRectCords(guseynov::rectangle_t& rect, double& lbx, double& lby, double& rtx, double& rty)
   {
     lbx = rect.pos.x - rect.width / 2;
     lby = rect.pos.y - rect.height / 2;
@@ -12,7 +12,7 @@ namespace
     rty = rect.pos.y + rect.height / 2;
   }
 
-  void scaleRelativeTo(guseynov::Shape * shp, guseynov::point_t p, double k)
+  void scaleRelativeTo(guseynov::Shape *shp, guseynov::point_t p, double k)
   {
     guseynov::point_t firstRect = shp->getFrameRect().pos;
     shp->move(p);
@@ -24,7 +24,7 @@ namespace
     shp->move(-offset.x, -offset.y);
   }
 
-  void rakirovka(double & x, double & x2, double & y, double & y2)
+  void rakirovka(double& x, double& x2, double& y, double& y2)
   {
     double timeX, timeY;
     timeX = x2;
@@ -162,7 +162,7 @@ double guseynov::getAreaSum(guseynov::Shape **shp, size_t Num)
   return sum;
 }
 
-void guseynov::printFrRectCords(std::ostream & out, guseynov::Shape **shp, size_t Num)
+void guseynov::printFrRectCords(std::ostream& out, guseynov::Shape **shp, size_t Num)
 {
   for (size_t i = 0; i < Num; i++)
   {

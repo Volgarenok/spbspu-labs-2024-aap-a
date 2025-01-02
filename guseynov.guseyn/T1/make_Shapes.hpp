@@ -13,7 +13,7 @@ namespace guseynov
 {
   void clearShapes(guseynov::Shape **shp, size_t currentIndx);
   double getAreaSum(guseynov::Shape **shp, size_t Num);
-  void printFrRectCords(std::ostream & out, guseynov::Shape **shp, size_t Num);
+  void printFrRectCords(std::ostream& out, guseynov::Shape **shp, size_t Num);
   void scaleAllRelativeTo(Shape **shp, size_t Num, guseynov::point_t p, double k);
   guseynov::Rectangle* makeRectangle(std::istream& in);
   guseynov::Square* makeSquare(std::istream& in);
