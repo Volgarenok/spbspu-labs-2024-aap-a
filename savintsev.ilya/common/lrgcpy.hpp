@@ -1,7 +1,7 @@
 #ifndef LRGCPY_HPP
 #define LRGCPY_HPP
 #include <cstddef>
-#include <new>
+#include <stdexcept>
 
 namespace savintsev
 {
@@ -16,10 +16,10 @@ namespace savintsev
         created[i] = old[i];
       }
     }
-    catch (const std::bad_alloc & e)
+    catch (const std::exception & e)
     {
       delete created;
-      return nullptr;
+      throw;
     }
     return created;
   }
