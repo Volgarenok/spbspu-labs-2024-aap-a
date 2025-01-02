@@ -17,8 +17,7 @@ namespace
     }
     return false;
   }
-  kiselev::point_t pointInter(
-      kiselev::point_t p1, kiselev::point_t p2, kiselev::point_t p3, kiselev::point_t p4, bool& isIntersect)
+  kiselev::point_t pointInter(kiselev::point_t p1, kiselev::point_t p2, kiselev::point_t p3, kiselev::point_t p4, bool& isIntersect)
   {
     double A1 = p2.y - p1.y;
     double B1 = p2.x - p1.x;
@@ -38,7 +37,7 @@ namespace
     return { x, y };
   }
 
-}
+} // namespace
 kiselev::Rectangle* kiselev::make_rectangle(std::istream& input)
 {
   double x1 = 0;
@@ -46,10 +45,6 @@ kiselev::Rectangle* kiselev::make_rectangle(std::istream& input)
   double x2 = 0;
   double y2 = 0;
   input >> x1 >> y1 >> x2 >> y2;
-  if (x1 >= x2 || y1 >= y2)
-  {
-    throw std::invalid_argument("Incorrect parameters");
-  }
   kiselev::Rectangle* rect = new kiselev::Rectangle({ x1, y1 }, { x2, y2 });
   return rect;
 }
@@ -129,4 +124,3 @@ kiselev::Complexquad* kiselev::make_complexquad(std::istream& input)
   kiselev::Complexquad* comp = new kiselev::Complexquad(p1, p2, p3, p4);
   return comp;
 }
-

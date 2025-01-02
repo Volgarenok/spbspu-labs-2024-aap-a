@@ -17,4 +17,3 @@ namespace kiselev
   void destroyShapePtr(Shape** shapes, size_t count);
 }
 #endif
-

@@ -1,22 +1,27 @@
 #include "rectangle.hpp"
 #include <stdexcept>
 #include "base-types.hpp"
-kiselev::Rectangle::Rectangle(kiselev::point_t leftDown, kiselev::point_t rightUp) :
-  leftDown_(leftDown), rightUp_(rightUp)
+kiselev::Rectangle::Rectangle(kiselev::point_t leftDown, kiselev::point_t rightUp) : 
+  leftDown_(leftDown),
+  rightUp_(rightUp)
 {
+  if (leftDown.x >= rightUp.x || leftDown.y >= rightUp.y)
+  {
+    throw std::invalid_argument("Incorrect parameters");
+  }
 }
-double kiselev::Rectangle::getArea() const
+double kiselev::Rectangle::getArea() const noexcept
 {
   double area = (rightUp_.x - leftDown_.x) * (rightUp_.y - leftDown_.y);
   return area;
 }
-kiselev::rectangle_t kiselev::Rectangle::getFrameRect() const
+kiselev::rectangle_t kiselev::Rectangle::getFrameRect() const noexcept
 {
   double centreForX = leftDown_.x + (rightUp_.x - leftDown_.x) / 2;
   double centreForY = leftDown_.y + (rightUp_.y - leftDown_.y) / 2;
   return { rightUp_.x - leftDown_.x, rightUp_.y - leftDown_.y, { centreForX, centreForY } };
 }
-void kiselev::Rectangle::move(point_t a)
+void kiselev::Rectangle::move(point_t a) noexcept
 {
   point_t centre = this->getFrameRect().pos;
   double moveX = a.x - centre.x;
@@ -26,7 +31,7 @@ void kiselev::Rectangle::move(point_t a)
   rightUp_.x += moveX;
   rightUp_.y += moveY;
 }
-void kiselev::Rectangle::move(double dx, double dy)
+void kiselev::Rectangle::move(double dx, double dy) noexcept
 {
   leftDown_.x += dx;
   leftDown_.y += dy;

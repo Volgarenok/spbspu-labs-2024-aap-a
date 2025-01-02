@@ -10,5 +10,5 @@ namespace kiselev
   Diamond* make_diamond(std::istream& input);
   Complexquad* make_complexquad(std::istream& input);
   point_t make_scale(std::istream& input);
-}
+} // namespace kiselev
 #endif

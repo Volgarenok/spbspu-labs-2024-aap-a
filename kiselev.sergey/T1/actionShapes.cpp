@@ -1,5 +1,6 @@
 #include "actionShapes.hpp"
 #include <iostream>
+#include <ostream>
 double kiselev::getSumArea(kiselev::Shape** shapes, size_t countShape)
 {
   double sum = 0;
@@ -21,7 +22,7 @@ void kiselev::scaleForShapes(kiselev::Shape** shapes, size_t countShape, kiselev
     shapes[i]->move(-vector.x, -vector.y);
   }
 }
-void kiselev::printCoordinatesRect(kiselev::Shape** shapes, size_t countShape)
+void kiselev::printCoordinatesRect(std::ostream& output, kiselev::Shape** shapes, size_t countShape)
 {
   for (size_t i = 0; i < countShape; ++i)
   {
@@ -30,7 +31,7 @@ void kiselev::printCoordinatesRect(kiselev::Shape** shapes, size_t countShape)
     double leftDownY = rect.pos.y - rect.height / 2;
     double rightUpX = rect.pos.x + rect.width / 2;
     double rightUpY = rect.pos.y + rect.height / 2;
-    std::cout << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
+    output << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
   }
   std::cout << "\n";
 }
