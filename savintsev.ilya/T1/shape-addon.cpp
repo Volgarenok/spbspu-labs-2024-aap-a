@@ -8,6 +8,10 @@
 
 void savintsev::scaleRelativeTo(Shape * rhs, point_t p, double k)
 {
+  if (k <= 0)
+  {
+    return;
+  }
   point_t jointFirst = rhs->getFrameRect().pos;
   rhs->move(p);
   point_t jointSecond = rhs->getFrameRect().pos;
