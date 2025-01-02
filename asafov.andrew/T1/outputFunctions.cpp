@@ -24,6 +24,10 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
     b.x = temp;
     in >> temp;
     b.y = temp;
+    if (a.x > b.x || a.y > b.y)
+    {
+      throw std::logic_error("");
+    }
     Rectangle* rect = new Rectangle(a, b);
     return rect;
   }

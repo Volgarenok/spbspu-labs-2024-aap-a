@@ -39,7 +39,19 @@ int main()
     }
     else
     {
-      shapes[count] = ShapeFactory(hash, std::cin);
+      try
+      {
+        shapes[count] = ShapeFactory(hash, std::cin);
+      }
+      catch (const std::logic_error & e)
+      {
+        for (size_t i = 0; i < count; i++)
+        {
+          delete shapes[i];
+        }
+        delete[] shapes;
+        return 0;
+      }
       count++;
     }
   }
