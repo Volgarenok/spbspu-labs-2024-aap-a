@@ -1,4 +1,4 @@
-#include "shape_scale.hpp"
+#include "shape.hpp"
 
 void rychkov::scale(Shape* shape, double coef, point_t scaleCenter)
 {

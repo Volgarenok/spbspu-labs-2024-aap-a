@@ -49,8 +49,7 @@ rychkov::rectangle_t rychkov::Polygon::getFrameRect() const noexcept
     topRight.x = std::max(topRight.x, vertexes_[i].x);
     topRight.y = std::max(topRight.y, vertexes_[i].y);
   }
-  point_t center = {(topRight.x + bottomLeft.x) / 2, (topRight.y + bottomLeft.y) / 2};
-  return {topRight.y - bottomLeft.y, topRight.x - bottomLeft.x, center};
+  return makeFrame(bottomLeft, topRight);
 }
 void rychkov::Polygon::move(point_t destination) noexcept
 {

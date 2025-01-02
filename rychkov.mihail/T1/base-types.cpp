@@ -4,8 +4,8 @@
 
 double rychkov::getDistanceSqr(point_t from, point_t to)
 {
-  double deltaX = from.x - to.x;
-  double deltaY = from.y - to.y;
+  double deltaX = to.x - from.x;
+  double deltaY = to.y - from.y;
   return deltaX * deltaX + deltaY * deltaY;
 }
 double rychkov::getSquare(point_t p1, point_t p2, point_t p3)
@@ -16,4 +16,9 @@ double rychkov::getSquare(point_t p1, point_t p2, point_t p3)
   double semiperimeter = (side1 + side2 + side3) / 2;
   return std::sqrt(semiperimeter * (semiperimeter - side1)
         * (semiperimeter - side2) * (semiperimeter - side3));
+}
+rychkov::rectangle_t rychkov::makeFrame(point_t bottomLeft, point_t topRight)
+{
+  point_t center = {(bottomLeft.x + topRight.x) / 2, (bottomLeft.y + topRight.y) / 2};
+  return {topRight.y - bottomLeft.y, topRight.x - bottomLeft.x, center};
 }

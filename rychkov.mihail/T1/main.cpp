@@ -5,26 +5,19 @@
 #include <string_comparison.hpp>
 
 #include "shapes_input.hpp"
-#include "shape_scale.hpp"
-#include "composition.hpp"
+#include "composite-shape.hpp"
 
 namespace rychkov
 {
-  std::ostream& printRectangle(std::ostream& out, rychkov::rectangle_t rect);
-  std::ostream& printCompositionFrames(std::ostream& out, rychkov::Shape** shapes, size_t size);
+  std::ostream& printRectangle(std::ostream& out, rectangle_t rect);
+  std::ostream& printCompositionData(std::ostream& out, const CompositeShape& composition);
 }
 
 int main()
 {
   std::cout << std::fixed << std::setprecision(1);
-  size_t allocated = 8;
-  size_t used = 0;
-  rychkov::Shape** shapes = rychkov::composition::allocate(allocated);
-  if (!shapes)
-  {
-    return 2;
-  }
 
+  rychkov::CompositeShape composition;
   bool allIsValid = true;
   char* command = nullptr;
   while ((command = rychkov::getline(std::cin, ' ')) && (std::cin.good()))
@@ -40,7 +33,7 @@ int main()
         {
           std::cerr << "some of figures have errors in input description\n";
         }
-        if (used == 0)
+        if (composition.size() == 0)
         {
           std::cerr << "there are no valid shapes in input\n";
           inputHasError = true;
@@ -52,13 +45,12 @@ int main()
         }
         if (!inputHasError)
         {
-          rychkov::printCompositionFrames(std::cout, shapes, used) << '\n';
-          rychkov::scale(shapes, used, coef, scaleCenter);
-          rychkov::printCompositionFrames(std::cout, shapes, used) << '\n';
+          rychkov::printCompositionData(std::cout, composition) << '\n';
+          rychkov::scale(composition, coef, scaleCenter);
+          rychkov::printCompositionData(std::cout, composition) << '\n';
         }
       }
       free(command);
-      rychkov::composition::deallocate(shapes, used);
       return !std::cin.good() || inputHasError;
     }
 
@@ -75,22 +67,22 @@ int main()
     }
     else
     {
-      rychkov::Shape** tempShapes = rychkov::composition::push_back(shapes, used, allocated, temp);
-      if (!tempShapes)
+      try
+      {
+        composition.push_back(temp);
+      }
+      catch (const std::bad_alloc&)
       {
         temp->~Shape();
         free(temp);
         free(command);
-        rychkov::composition::deallocate(shapes, used);
         return 2;
       }
-      shapes = tempShapes;
     }
     free(command);
     command = nullptr;
   }
   free(command);
-  rychkov::composition::deallocate(shapes, used);
   return std::cin.fail() ? 2 : 1;
 }
 
@@ -102,12 +94,12 @@ std::ostream& rychkov::printRectangle(std::ostream& out, rychkov::rectangle_t re
   out << ' ' << rect.pos.y + rect.height / 2;
   return out;
 }
-std::ostream& rychkov::printCompositionFrames(std::ostream& out, rychkov::Shape** shapes, size_t size)
+std::ostream& rychkov::printCompositionData(std::ostream& out, const rychkov::CompositeShape& composition)
 {
-  out << rychkov::composition::getArea(shapes, size);
-  for (size_t i = 0; i < size; i++)
+  out << composition.getArea();
+  for (size_t i = 0; i < composition.size(); i++)
   {
-    printRectangle(out << ' ', shapes[i]->getFrameRect());
+    printRectangle(out << ' ', composition[i]->getFrameRect());
   }
   return out;
 }

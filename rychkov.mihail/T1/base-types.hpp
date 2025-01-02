@@ -14,6 +14,7 @@ namespace rychkov
   };
   double getDistanceSqr(point_t from, point_t to);
   double getSquare(point_t p1, point_t p2, point_t p3);
+  rectangle_t makeFrame(point_t bottomLeft, point_t topRight);
 }
 
 #endif

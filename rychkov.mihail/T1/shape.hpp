@@ -15,6 +15,7 @@ namespace rychkov
     virtual void move(double deltaX, double deltaY) noexcept = 0;
     virtual void scale(double coef) = 0;
   };
+  void scale(Shape* shape, double coef, point_t scaleCenter);
 }
 
 #endif
