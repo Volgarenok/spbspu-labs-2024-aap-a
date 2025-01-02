@@ -13,7 +13,6 @@ int main()
   kushekbaev::point_t scalePoint;
   double scaleCoeff = 0;
   bool errorexit = false;
-  bool incorrectShapeInput = false;
 
   try
   {

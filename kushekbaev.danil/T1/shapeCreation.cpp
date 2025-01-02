@@ -6,7 +6,6 @@
 namespace kushekbaev
 {
   std::string shapeName;
-  bool incorrectShapeInput = false;
   bool errorexit = false;
 
   void createShape(std::istream& input, Shape** capacity, size_t& shapeCounter, point_t& scalePoint, double& scaleCoeff)
@@ -23,7 +22,6 @@ namespace kushekbaev
           catch (const std::invalid_argument& e)
           {
             throw std::invalid_argument("Some of inputed shapes were incorrectly inputed");
-            incorrectShapeInput = true;
           }
         }
 
@@ -37,7 +35,6 @@ namespace kushekbaev
           catch (const std::invalid_argument& e)
           {
             throw std::invalid_argument("Some of inputed shapes were incorrectly inputed");
-            incorrectShapeInput = true;
           }
         }
 
@@ -51,7 +48,6 @@ namespace kushekbaev
           catch (const std::invalid_argument& e)
           {
             throw std::invalid_argument("Some of inputed shapes were incorrectly inputed");
-            incorrectShapeInput = true;
           }
         }
 
@@ -65,7 +61,6 @@ namespace kushekbaev
           catch (const std::invalid_argument& e)
           {
             throw std::invalid_argument("Some of inputed shapes were incorrectly inputed");
-            incorrectShapeInput = true;
           }
         }
 
