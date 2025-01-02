@@ -3,18 +3,23 @@
 #include <stdexcept>
 #include <cmath>
 #include "base-types.hpp"
-
+#include <iostream>
 zakirov::Polygon::Polygon(size_t size, point_t * points) :
   size_(size),
   points_(points)
 {
+  if (size <= 2 || size % 2 != 0)
+  {
+    throw std::invalid_argument("Incorrect data");
+  }
+
   for (size_t i = 0; i < (size - 1); ++i)
   {
     double x = points[i].x;
     double y = points[i].y;
     for (size_t j = (i + 1); j < size; ++j)
     {
-      if ((x == points[j].x && y == points[j].x) || size <= 2)
+      if ((x == points[j].x) && (y == points[j].y))
       {
         throw std::invalid_argument("Incorrect data");
       }
@@ -34,14 +39,13 @@ double zakirov::Polygon::getArea() const
 
   central_p.x /= size_;
   central_p.y /= size_;
-  for (size_t i = 0; i < size_ - 1; ++i)
+  for (size_t i = 0; i < size_; ++i)
   {
     double side_a = get_distance(central_p, points_[i]);
     double side_b = get_distance(central_p, points_[i + 1]);
     double side_c = get_distance(points_[i], points_[i + 1]);
-    double half_p = (side_a + side_b + side_c) / 2;
-
-    area += std::sqrt(half_p * (side_a - half_p) * (side_a - half_p) * (side_a - half_p));
+    double half_p = (side_a + side_b + side_c) / 2.0;
+    area += std::sqrt(half_p * (half_p - side_a) * (half_p - side_b) * (half_p - side_c));
   }
 
   return area;

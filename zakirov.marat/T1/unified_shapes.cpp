@@ -113,6 +113,21 @@ namespace
 
     return new_array;
   }
+
+  zakirov::point_t * convert_polygon(const double * original_data)
+  {
+    size_t points_size = static_cast< size_t >(original_data[1] / 2);
+    zakirov::point_t * converted_data = static_cast< zakirov::point_t * >(malloc(points_size * sizeof(zakirov::point_t)));
+    size_t counter = 2;
+    for (size_t i = 0; i < points_size; ++i)
+    {
+      zakirov::point_t point = {original_data[counter], original_data[counter + 1]};
+      converted_data[i] = point;
+      counter += 2;
+    }
+
+    return converted_data;
+  }
 }
 
 zakirov::Rectangle * zakirov::make_rectangle(double bottom_x, double bottom_y, double top_x, double top_y)
@@ -147,6 +162,11 @@ zakirov::Ring * zakirov::make_ring(double center_x, double center_y, double in_r
   return new Ring(center, in_radius, ex_radius);
 }
 
+zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t * points)
+{
+  return new Polygon(points_num, points);
+}
+
 zakirov::Shape * zakirov::make_shape(const double * data)
 {
   try
@@ -162,6 +182,13 @@ zakirov::Shape * zakirov::make_shape(const double * data)
     else if (data[0] == 4.0 && data[1] == 4.0)
     {
       return make_ring(data[2], data[3], data[4], data[5]);
+    }
+    else if (data[0] == 5.0)
+    {
+      point_t * converted_data = convert_polygon(data);
+      size_t points_size = static_cast< size_t >(data[1] / 2);
+      Polygon * polygon = make_polygon(points_size, converted_data);
+      return polygon;
     }
     else
     {
@@ -180,6 +207,7 @@ double * zakirov::get_data(std::istream & in)
   constexpr char circle[] = "CIRCLE";
   constexpr char ring[] = "RING";
   constexpr char scale[] = "SCALE";
+  constexpr char polygon[] = "POLYGON";
 
   constexpr size_t step = 1;
   size_t real_size = 2;
@@ -207,6 +235,10 @@ double * zakirov::get_data(std::istream & in)
   else if (!compare_strings(shape, ring))
   {
     data[0] = 4.0;
+  }
+  else if (!compare_strings(shape, polygon))
+  {
+    data[0] = 5.0;
   }
   else if (!compare_strings(shape, scale))
   {
