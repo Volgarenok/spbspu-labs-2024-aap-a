@@ -11,9 +11,11 @@ namespace duhanina
     Rectangle(point_t lt, point_t rt);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void move(point_t newPos) override;
+    point_t calculateOffset(const point_t& currentPos, const point_t& newPos);
+    void move(const point_t& newPos) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
+    point_t scalePoint(const point_t& point, const point_t& origin, double k);
     Ellipse** fillWithEllipses();
 
   private:

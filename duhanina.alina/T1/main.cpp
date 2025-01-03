@@ -1,16 +1,15 @@
 #include <iostream>
+#include <stdexcept>
 #include "destroy.hpp"
 #include "printResult.hpp"
 #include "createCommand.hpp"
 
-using namespace duhanina;
-
 int main()
 {
+  using namespace duhanina;
   Shape* shapes[10000] = {};
   size_t shapeCount = 0;
   std::string shapeType;
-  bool hasScale = false;
   while (std::cin >> shapeType)
   {
     try
@@ -18,42 +17,34 @@ int main()
       createShape(shapeType, shapes, shapeCount);
       if (shapeType == "SCALE")
       {
-        if (shapeCount == 0)
-        {
-          std::cerr << "No shape\n";
-          destroy(shapes, shapeCount);
-          return 1;
-        }
-        hasScale = true;
-        createScale(std::cin, std::cout, shapes, shapeCount);
+        printFiguresInfo(std::cout, shapes, shapeCount);
+        createScale(std::cin, shapes, shapeCount);
+        printFiguresInfo(std::cout, shapes, shapeCount);
         break;
       }
     }
-    catch (const std::invalid_argument&)
+    catch (const std::invalid_argument& e)
     {
-      std::cerr << "Incorrect parameters\n";
+      std::cerr << e.what() << "\n";
     }
-    catch (const std::logic_error&)
+    catch (const std::logic_error& e)
     {
-      std::cerr << "Incorrect scale coef\n";
+      std::cerr << e.what() << "\n";
       destroy(shapes, shapeCount);
       return 1;
     }
     catch (const std::bad_alloc& e)
     {
-      std::cerr << "Error memory\n";
+      std::cerr << e.what() << "\n";
       destroy(shapes, shapeCount);
       return 1;
     }
   }
   if (std::cin.eof())
   {
-    if (!hasScale)
-    {
-      std::cerr << "No scale\n";
-      destroy(shapes, shapeCount);
-      return 1;
-    }
+    std::cerr << "No scale\n";
+    destroy(shapes, shapeCount);
+    return 1;
   }
   destroy(shapes, shapeCount);
   return 0;

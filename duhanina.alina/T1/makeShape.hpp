@@ -1,6 +1,6 @@
 #ifndef MAKESHAPE_HPP
 #define MAKESHAPE_HPP
-#include <iostream>
+#include <istream>
 #include "rectangle.hpp"
 #include "ellipse.hpp"
 #include "circle.hpp"

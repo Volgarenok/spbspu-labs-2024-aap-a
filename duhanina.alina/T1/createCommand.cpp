@@ -7,23 +7,27 @@ void duhanina::createShape(const std::string& shapeType, Shape** shapes, size_t&
 {
   if (shapeType == "RECTANGLE")
   {
-    shapes[shapeCount] = duhanina::makeRectangle(std::cin);
+    shapes[shapeCount] = makeRectangle(std::cin);
     shapeCount++;
   }
   else if (shapeType == "CIRCLE")
   {
-    shapes[shapeCount] = duhanina::makeCircle(std::cin);
+    shapes[shapeCount] = makeCircle(std::cin);
     shapeCount++;
   }
   else if (shapeType == "ELLIPSE")
   {
-    shapes[shapeCount] = duhanina::makeEllipse(std::cin);
+    shapes[shapeCount] = makeEllipse(std::cin);
     shapeCount++;
   }
 }
 
-void duhanina::createScale(std::istream& in, std::ostream& out, Shape** shapes, size_t shapeCount)
+void duhanina::createScale(std::istream& in, Shape** shapes, size_t shapeCount)
 {
+  if (shapeCount == 0)
+  {
+    throw std::logic_error("No shape");
+  }
   double x = 0;
   double y = 0;
   double scalingFactor = 0;
@@ -31,10 +35,6 @@ void duhanina::createScale(std::istream& in, std::ostream& out, Shape** shapes, 
   {
     throw std::invalid_argument("Incorrect input");
   }
-  duhanina::point_t point;
-  point.x = x;
-  point.y = y;
-  duhanina::printFiguresInfo(out, shapes, shapeCount);
+  duhanina::point_t point = { x, y };
   duhanina::processScaling(shapes, shapeCount, point, scalingFactor);
-  duhanina::printFiguresInfo(out, shapes, shapeCount);
 }

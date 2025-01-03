@@ -10,7 +10,7 @@ namespace duhanina
     Ellipse(point_t center, double horizRadius, double vertRadius);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void move(point_t newPos) override;
+    void move(const point_t& newPos) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
 

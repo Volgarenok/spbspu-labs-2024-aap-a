@@ -2,7 +2,6 @@
 #include <stdexcept>
 #include <cstddef>
 #include <cmath>
-#include "ellipse.hpp"
 
 duhanina::Rectangle::Rectangle(point_t lt, point_t rt):
   lt_(lt),
@@ -28,12 +27,16 @@ duhanina::rectangle_t duhanina::Rectangle::getFrameRect() const
   return { { posX, posY }, width, height };
 }
 
-void duhanina::Rectangle::move(point_t newPos)
+duhanina::point_t duhanina::Rectangle::calculateOffset(const duhanina::point_t& currentPos, const duhanina::point_t& newPos)
+{
+  return { newPos.x - currentPos.x, newPos.y - currentPos.y };
+}
+
+void duhanina::Rectangle::move(const point_t& newPos)
 {
   point_t pos = this->getFrameRect().pos;
-  double dx = newPos.x - pos.x;
-  double dy = newPos.y - pos.y;
-  move(dx, dy);
+  point_t offset = calculateOffset(pos, newPos);
+  move(offset.x, offset.y);
 }
 
 void duhanina::Rectangle::move(double dx, double dy)
@@ -44,17 +47,19 @@ void duhanina::Rectangle::move(double dx, double dy)
   rt_.y += dy;
 }
 
+duhanina::point_t duhanina::Rectangle::scalePoint(const duhanina::point_t& point, const duhanina::point_t& origin, double k)
+{
+  point_t scaledPoint;
+  scaledPoint.x = origin.x + (point.x - origin.x) * k;
+  scaledPoint.y = origin.y + (point.y - origin.y) * k;
+  return scaledPoint;
+}
+
 void duhanina::Rectangle::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::logic_error("Error in parameters");
-  }
   point_t pos = this->getFrameRect().pos;
-  lt_.x = pos.x + (lt_.x - pos.x) * k;
-  lt_.y = pos.y + (lt_.y - pos.y) * k;
-  rt_.x = pos.x + (rt_.x - pos.x) * k;
-  rt_.y = pos.y + (rt_.y - pos.y) * k;
+  lt_ = scalePoint(lt_, pos, k);
+  rt_ = scalePoint(rt_, pos, k);
 }
 
 duhanina::Ellipse** duhanina::Rectangle::fillWithEllipses()
@@ -63,16 +68,18 @@ duhanina::Ellipse** duhanina::Rectangle::fillWithEllipses()
   double rectArea = getArea();
   size_t horizontalCuts = 1;
   size_t verticalCuts = 1;
-  while (true)
+  double ellipsesArea = 0.0;
+  Ellipse** ellipses = nullptr;
+  while (std::fabs(rectArea - ellipsesArea) >= 0.01)
   {
     ellipseCount = horizontalCuts * verticalCuts;
     if (ellipseCount > 10000)
     {
       throw std::runtime_error("Maximum number of ellipses");
     }
+    ellipses = new Ellipse*[ellipseCount];
     double ellipseWidth = (rt_.x - lt_.x) / verticalCuts;
     double ellipseHeight = (rt_.y - lt_.y) / horizontalCuts;
-    Ellipse** ellipses = new Ellipse*[ellipseCount];
     for (size_t i = 0; i < verticalCuts; ++i)
     {
       for (size_t j = 0; j < horizontalCuts; ++j)
@@ -81,27 +88,27 @@ duhanina::Ellipse** duhanina::Rectangle::fillWithEllipses()
         ellipses[i * horizontalCuts + j] = new Ellipse(center, ellipseWidth / 2, ellipseHeight / 2);
       }
     }
-    double ellipsesArea = 0.0;
+    ellipsesArea = 0.0;
     for (size_t i = 0; i < ellipseCount; ++i)
     {
       ellipsesArea += ellipses[i]->getArea();
     }
-    if (fabs(rectArea - ellipsesArea) <= 0.01)
+    if (std::fabs(rectArea - ellipsesArea) >= 0.01)
     {
-      return ellipses;
-    }
-    for (size_t i = 0; i < ellipseCount; ++i)
-    {
-      delete ellipses[i];
-    }
-    delete[] ellipses;
-    if (horizontalCuts < verticalCuts)
-    {
-      horizontalCuts++;
-    }
-    else
-    {
-      verticalCuts++;
+      for (size_t i = 0; i < ellipseCount; ++i)
+      {
+        delete ellipses[i];
+      }
+      delete[] ellipses;
+      if (horizontalCuts < verticalCuts)
+      {
+        horizontalCuts++;
+      }
+      else
+      {
+        verticalCuts++;
+      }
     }
   }
+  return ellipses;
 }

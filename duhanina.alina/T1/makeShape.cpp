@@ -11,8 +11,7 @@ duhanina::Rectangle* duhanina::makeRectangle(std::istream& in)
   {
     throw std::invalid_argument("Incorrect input");
   }
-  Rectangle* rect = new Rectangle({ ltX, ltY }, { rtX, rtY });
-  return rect;
+  return new Rectangle({ ltX, ltY }, { rtX, rtY });
 }
 
 duhanina::Circle* duhanina::makeCircle(std::istream& in)
@@ -24,8 +23,7 @@ duhanina::Circle* duhanina::makeCircle(std::istream& in)
   {
     throw std::invalid_argument("Incorrect input");
   }
-  Circle* circ = new Circle({ x, y }, radius);
-  return circ;
+  return new Circle({ x, y }, radius);
 }
 
 duhanina::Ellipse* duhanina::makeEllipse(std::istream& in)
@@ -38,6 +36,5 @@ duhanina::Ellipse* duhanina::makeEllipse(std::istream& in)
   {
     throw std::invalid_argument("Incorrect input");
   }
-  Ellipse* ell = new Ellipse({ x, y }, horizRadius, vertRadius);
-  return ell;
+  return new Ellipse({ x, y }, horizRadius, vertRadius);
 }

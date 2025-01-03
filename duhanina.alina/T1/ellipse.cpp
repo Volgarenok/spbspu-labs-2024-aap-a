@@ -1,5 +1,4 @@
 #include "ellipse.hpp"
-#include <cmath>
 #include <stdexcept>
 
 duhanina::Ellipse::Ellipse(point_t center, double horizRadius, double vertRadius):
@@ -15,7 +14,8 @@ duhanina::Ellipse::Ellipse(point_t center, double horizRadius, double vertRadius
 
 double duhanina::Ellipse::getArea() const
 {
-  return M_PI * horizRadius_ * vertRadius_;
+  constexpr double pi = 3.1415;
+  return pi * horizRadius_ * vertRadius_;
 }
 
 duhanina::rectangle_t duhanina::Ellipse::getFrameRect() const
@@ -23,7 +23,7 @@ duhanina::rectangle_t duhanina::Ellipse::getFrameRect() const
   return { center_, 2 * horizRadius_, 2 * vertRadius_ };
 }
 
-void duhanina::Ellipse::move(point_t newPos)
+void duhanina::Ellipse::move(const point_t& newPos)
 {
   center_ = newPos;
 }
@@ -36,10 +36,6 @@ void duhanina::Ellipse::move(double dx, double dy)
 
 void duhanina::Ellipse::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::logic_error("Error in parameters");
-  }
   horizRadius_ *= k;
   vertRadius_ *= k;
 }
