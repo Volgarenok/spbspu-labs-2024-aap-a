@@ -8,7 +8,7 @@ void clear(sveshnikov::Shape **shapes);
 
 int main()
 {
-  const size_t size = 10000;
+  constexpr size_t size = 10000;
   size_t num_shapes = 0;
   sveshnikov::Shape *shapes[size] = {nullptr};
   std::string shape_name = "";
@@ -69,16 +69,15 @@ int main()
     clear(shapes);
     return 1;
   }
-  if (num_shapes == 0)
-  {
-    std::cerr << "ERROR: Nothing To Scale!\n";
-    clear(shapes);
-    return 1;
-  }
   if (shape_name != "SCALE")
   {
     std::cerr << "ERROR: The input must end with the zoom command!\n";
     clear(shapes);
+    return 1;
+  }
+  if (num_shapes == 0)
+  {
+    std::cerr << "ERROR: Nothing To Scale!\n";
     return 1;
   }
   double zoom_ctr_x = 0.0, zoom_ctr_y = 0.0, k = 0.0;

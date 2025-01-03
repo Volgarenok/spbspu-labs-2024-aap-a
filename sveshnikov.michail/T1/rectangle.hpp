@@ -4,7 +4,7 @@
 
 namespace sveshnikov
 {
-  class Rectangle : public Shape
+  class Rectangle final : public Shape
   {
   private:
     point_t low_left_;
@@ -14,7 +14,7 @@ namespace sveshnikov
     Rectangle(point_t low_left, point_t up_right);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void move(point_t p) override;
+    void move(const point_t p) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
   };

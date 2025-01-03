@@ -17,7 +17,7 @@ sveshnikov::rectangle_t sveshnikov::Ring::getFrameRect() const
   return {2 * long_radius_, 2 * long_radius_, center_};
 }
 
-void sveshnikov::Ring::move(point_t p)
+void sveshnikov::Ring::move(const point_t p)
 {
   center_ = p;
 }

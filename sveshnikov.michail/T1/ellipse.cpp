@@ -17,7 +17,7 @@ sveshnikov::rectangle_t sveshnikov::Ellipse::getFrameRect() const
   return {2 * horiz_radius_, 2 * vert_radius_, center_};
 }
 
-void sveshnikov::Ellipse::move(point_t p)
+void sveshnikov::Ellipse::move(const point_t p)
 {
   center_ = p;
 }

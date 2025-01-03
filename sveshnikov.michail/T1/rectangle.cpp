@@ -20,13 +20,13 @@ sveshnikov::rectangle_t sveshnikov::Rectangle::getFrameRect() const
   return frame;
 }
 
-void sveshnikov::Rectangle::move(point_t p)
+void sveshnikov::Rectangle::move(const point_t p)
 {
-  double ctr_x = getFrameRect().pos.x, ctr_y = getFrameRect().pos.y;
-  up_right_.x += p.x - ctr_x;
-  up_right_.y += p.y - ctr_y;
-  low_left_.x += p.x - ctr_x;
-  low_left_.y += p.y - ctr_y;
+  const point_t ctr = getFrameRect().pos;
+  up_right_.x += p.x - ctr.x;
+  up_right_.y += p.y - ctr.y;
+  low_left_.x += p.x - ctr.x;
+  low_left_.y += p.y - ctr.y;
 }
 
 void sveshnikov::Rectangle::move(double dx, double dy)
@@ -39,9 +39,9 @@ void sveshnikov::Rectangle::move(double dx, double dy)
 
 void sveshnikov::Rectangle::scale(double k)
 {
-  double ctr_x = getFrameRect().pos.x, ctr_y = getFrameRect().pos.y;
-  up_right_.x = ctr_x + k * (up_right_.x - ctr_x);
-  up_right_.y = ctr_y + k * (up_right_.y - ctr_y);
-  low_left_.x = ctr_x - k * (ctr_x - low_left_.x);
-  low_left_.y = ctr_y - k * (ctr_y - low_left_.y);
+  const point_t ctr = getFrameRect().pos;
+  up_right_.x = ctr.x + k * (up_right_.x - ctr.x);
+  up_right_.y = ctr.y + k * (up_right_.y - ctr.y);
+  low_left_.x = ctr.x - k * (ctr.x - low_left_.x);
+  low_left_.y = ctr.y - k * (ctr.y - low_left_.y);
 }

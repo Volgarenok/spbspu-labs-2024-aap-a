@@ -15,7 +15,7 @@ void sveshnikov::isotropic_scaling(Shape **shapes, double zoom_ctr_x, double zoo
   }
 }
 
-void sveshnikov::output_total_area(std::ostream &out, Shape **shapes)
+void sveshnikov::output_total_area(std::ostream &out, const Shape *const *shapes)
 {
   double total_area = 0.0;
   for (size_t i = 0; shapes[i] != nullptr; i++)
@@ -25,7 +25,7 @@ void sveshnikov::output_total_area(std::ostream &out, Shape **shapes)
   out << total_area << " ";
 }
 
-void sveshnikov::output_frame(std::ostream &out, Shape **shapes)
+void sveshnikov::output_frame(std::ostream &out, const Shape *const *shapes)
 {
   double low_left_x = 0.0, low_left_y = 0.0, up_right_x = 0.0, up_right_y = 0.0;
   for (size_t i = 0; shapes[i] != nullptr; i++)
