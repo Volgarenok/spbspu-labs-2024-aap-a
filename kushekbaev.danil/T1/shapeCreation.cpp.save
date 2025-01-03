@@ -4,6 +4,14 @@
 #include "shapeBreeding.hpp"
 #include "shape.hpp"
 #include "shapeCreation.hpp"
+#include "shapeManipulations.cpp"
+#include "shapeBreeding.cpp"
+#include "rectangle.cpp"
+#include "concave.cpp"
+#include "shape.cpp"
+#include "parallelogram.cpp"
+#include "diamond.cpp"
+#include "shapeCreation.cpp"
 
 int main()
 {
@@ -13,6 +21,7 @@ int main()
   kushekbaev::point_t scalePoint;
   double scaleCoeff = 0;
   bool errorexit = false;
+  bool incorrectShapeInput = false;
 
   try
   {
@@ -38,10 +47,9 @@ int main()
     std::cerr << "Shapeless input" << "\n";
     return 1;
   }
-
+  
   if (errorexit)
   {
-    kushekbaev::clearMemory(capacity, shapeCounter);
     return 1;
   }
 
