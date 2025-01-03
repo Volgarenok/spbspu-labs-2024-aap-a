@@ -192,7 +192,7 @@ zakirov::Shape * zakirov::make_shape(const double * data)
       size_t points_size = static_cast< size_t >(data[1] / 2);
       shape = make_polygon(points_size, converted_data);
     }
-    
+
     return shape;
   }
   catch (const std::invalid_argument & e)
