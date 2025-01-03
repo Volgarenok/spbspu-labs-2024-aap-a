@@ -40,6 +40,10 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
     in >> temp;
     a.y = temp;
     in >> temp;
+    if (temp <= 0.0)
+    {
+        throw std::logic_error("");
+    }
     Circle* circ = new Circle(a, temp);
     return circ;
   }
@@ -67,6 +71,10 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
     in >> temp;
     double temp2 = 0;
     in >> temp2;
+    if (temp <= 0.0 || temp2 <= 0.0)
+    {
+        throw std::logic_error("");
+    }
     Ellipse* elli = new Ellipse(a, temp, temp2);
     return elli;
   }
@@ -79,6 +87,10 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
       in >> temp;
       lb.y = temp;
       in >> temp;
+      if (temp <= 0.0)
+      {
+          throw std::logic_error("");
+      }
       Square* squa = new Square(lb, temp);
       return squa;
 
@@ -101,6 +113,13 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
     c.x = temp;
     in >> temp;
     c.y = temp;
+    double sidea = pow(pow((a.x - b.x), 2.0) + pow((a.y - b.y), 2.0), 0.5);
+    double sideb = pow(pow((b.x - c.x), 2.0) + pow((b.y - c.y), 2.0), 0.5);
+    double sidec = pow(pow((a.x - c.x), 2.0) + pow((a.y - c.y), 2.0), 0.5);
+    if ((a.x - b.x + a.y - b.y) * (a.x - c.x + a.y - c.y) * (b.x - c.x + b.y - c.y) == 0 || sidea + sideb == sidec || sidea + sidec == sideb || sideb + sidec == sidea)
+    {
+        throw std::logic_error("");
+    }
     Triangle* tria = new Triangle(a, b, c);
     return tria;
   }
@@ -147,6 +166,10 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
     d.x = temp;
     in >> temp;
     d.y = temp;
+    if ((a.x-b.x+a.y-b.y)*(a.x-c.x+a.y-c.y)*(a.x-d.x+a.y-d.y)*(b.x-c.x+b.y-c.y)*(b.x-d.x+b.y-d.y)*(c.x-d.x+c.y-d.y)==0)
+    {
+        throw std::logic_error("");
+    }
     Complexquad* comp = new Complexquad(a, b, c, d);
     return comp;
   }
@@ -174,6 +197,7 @@ unsigned long asafov::getHash(std::istream& in)
 
 void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, double scale, std::ostream& out)
 {
+  out << std::fixed << std::setprecision(1);
   if (count == 0)
   {
     throw std::logic_error("");
@@ -184,28 +208,31 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
   {
     area += shapes[i][0].getArea();
   }
+  out << std::fixed << std::setprecision(1);
+  out << area;
   for (unsigned long long i = 0; i < count; i++)
   {
     rect = shapes[i][0].getFrameRect();
-    out << std::setprecision(2) << std::fixed << area;
-    out << std::setprecision(2) << std::fixed << ' ' << rect.pos.x - rect.width / 2;
-    out << std::setprecision(2) << std::fixed << ' ' << rect.pos.y - rect.height / 2;
-    out << std::setprecision(2) << std::fixed << ' ' << rect.pos.x + rect.width / 2;
-    out << std::setprecision(2) << std::fixed << ' ' << rect.pos.y + rect.height / 2;
+    out << ' ' << rect.pos.x - rect.width / 2;
+    out << ' ' << rect.pos.y - rect.height / 2;
+    out << ' ' << rect.pos.x + rect.width / 2;
+    out << ' ' << rect.pos.y + rect.height / 2;
     shapes[i][0].scale(pos, scale);
   }
+  area = 0;
   for (unsigned long long i = 0; i < count; i++)
   {
     area += shapes[i][0].getArea();
   }
   out << '\n';
+  out << std::fixed << std::setprecision(1);
+  out << area;
   for (unsigned long long i = 0; i < count; i++)
   {
-    rect = shapes[i][0].getFrameRect();
-    out << std::setprecision(2) << std::fixed << area;
-    out << std::setprecision(2) << std::fixed << ' ' << rect.pos.x - rect.width / 2;
-    out << std::setprecision(2) << std::fixed << ' ' << rect.pos.y - rect.height / 2;
-    out << std::setprecision(2) << std::fixed << ' ' << rect.pos.x + rect.width / 2;
-    out << std::setprecision(2) << std::fixed << ' ' << rect.pos.y + rect.height / 2;
+      rect = shapes[i][0].getFrameRect();
+    out << ' ' << rect.pos.x - rect.width / 2;
+    out << ' ' << rect.pos.y - rect.height / 2;
+    out << ' ' << rect.pos.x + rect.width / 2;
+    out << ' ' << rect.pos.y + rect.height / 2;
   }
 }
