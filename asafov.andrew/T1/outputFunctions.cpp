@@ -212,8 +212,8 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
   {
     area += shapes[i][0].getArea();
   }
-  out << std::fixed << std::setprecision(1);
-  out << '  ' << area;
+  out << std::fixed << out.precision(1);
+  out << area;
   for (unsigned long long i = 0; i < count; i++)
   {
     rect = shapes[i][0].getFrameRect();
@@ -229,8 +229,8 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
     area += shapes[i][0].getArea();
   }
   out << '\n';
-  out << std::fixed << std::setprecision(1);
-  out << '  ' << area;
+  out << std::fixed << out.precision(1);
+  out << area;
   for (unsigned long long i = 0; i < count; i++)
   {
       rect = shapes[i][0].getFrameRect();

@@ -46,6 +46,7 @@ int main()
       }
       catch (const std::logic_error & e)
       {
+        std::cerr << "shape err\n";
         count--;
       }
     }
