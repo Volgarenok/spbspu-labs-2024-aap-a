@@ -1,7 +1,7 @@
 #ifndef BASE_TYPES_HPP
 #define BASE_TYPES_HPP
 
-namespase komarova
+namespace komarova
 {
   struct point_t
   {
