@@ -9,7 +9,7 @@ namespace
   const char * is_sign(const char * str);
   const char * is_order(const char * str);
   const char * is_mantissa(const char * str);
-  const char * is_digit(const char * str, const int i);
+  const char * is_digit(const char * str, size_t i);
 
   const char * is_symbol(const char * str, const char sym)
   {
@@ -20,7 +20,7 @@ namespace
     return (*str == sym) ? (str + 1) : nullptr;
   }
 
-  const char * is_digit(const char * str, const int i)
+  const char * is_digit(const char * str, size_t i)
   {
     if (!str)
     {
