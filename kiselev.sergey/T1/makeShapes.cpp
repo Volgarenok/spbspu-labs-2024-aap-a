@@ -67,32 +67,32 @@ kiselev::Diamond* kiselev::make_diamond(std::istream& input)
   if (x1 == x2 && y1 == y3)
   {
 
-    kiselev::Diamond* diam = new kiselev::Diamond({ x1, y1 }, { x2, y2 }, { x3, y3 });
+    kiselev::Diamond* diam = new kiselev::Diamond({ x2, y2 }, { x3, y3 });
     return diam;
   }
   else if (x1 == x3 && y1 == y2)
   {
-    kiselev::Diamond* diam = new kiselev::Diamond({ x1, y1 }, { x3, y3 }, { x2, y2 });
+    kiselev::Diamond* diam = new kiselev::Diamond({ x3, y3 }, { x2, y2 });
     return diam;
   }
   else if (x2 == x1 && y2 == y3)
   {
-    kiselev::Diamond* diam = new kiselev::Diamond({ x2, y2 }, { x1, y1 }, { x3, y3 });
+    kiselev::Diamond* diam = new kiselev::Diamond({ x1, y1 }, { x3, y3 });
     return diam;
   }
   else if (x2 == x3 && y2 == y1)
   {
-    kiselev::Diamond* diam = new kiselev::Diamond({ x2, y2 }, { x3, y3 }, { x1, y1 });
+    kiselev::Diamond* diam = new kiselev::Diamond({ x3, y3 }, { x1, y1 });
     return diam;
   }
   else if (x3 == x1 && y3 == y2)
   {
-    kiselev::Diamond* diam = new kiselev::Diamond({ x3, y3 }, { x1, y1 }, { x2, y2 });
+    kiselev::Diamond* diam = new kiselev::Diamond({ x1, y1 }, { x2, y2 });
     return diam;
   }
   else if (x3 == x2 && y3 == y1)
   {
-    kiselev::Diamond* diam = new kiselev::Diamond({ x3, y3 }, { x2, y2 }, { x1, y1 });
+    kiselev::Diamond* diam = new kiselev::Diamond({ x2, y2 }, { x1, y1 });
     return diam;
   }
   else

@@ -1,42 +1,53 @@
 #include "diamond.hpp"
 #include <cmath>
+#include <new>
+#include <stdexcept>
 #include "base-types.hpp"
 #include "cmath"
-kiselev::Diamond::Diamond(kiselev::point_t center, kiselev::point_t pVertical, point_t pHorizontal) noexcept :
-  center_(center),
-  pVertical_(pVertical),
-  pHorizontal_(pHorizontal)
+#include "complexquad.hpp"
+kiselev::Diamond::Diamond(kiselev::point_t pVertical, point_t pHorizontal) :
+  comp1(nullptr),
+  comp2(nullptr)
 {
+  point_t pHorizontal2 = {pHorizontal.x * -1, pHorizontal.y};
+  point_t pVertical2 = {pVertical.x, pVertical.y * -1};
+  try
+  {
+    comp1 = new Complexquad(pHorizontal2, pHorizontal, pVertical, pVertical2);
+    comp2 = new Complexquad(pHorizontal2, pHorizontal, pVertical2, pVertical);
+  }
+  catch (const std::bad_alloc &e)
+  {
+    delete comp1;
+    throw;
+  }
+  catch (const std::invalid_argument &e)
+  {
+    delete comp1;
+    delete comp2;
+    throw;
+  }
 }
 double kiselev::Diamond::getArea() const noexcept
 {
-  return std::fabs((center_.x - pHorizontal_.x) * (center_.y - pVertical_.y) * 2);
+  return comp1->getArea() + comp2->getArea();
 }
 kiselev::rectangle_t kiselev::Diamond::getFrameRect() const noexcept
 {
-  return { std::fabs((center_.x - pHorizontal_.x)) * 2, std::fabs((center_.y - pVertical_.y) * 2), center_ };
+  return comp1->getFrameRect();
 }
 void kiselev::Diamond::move(double dx, double dy) noexcept
 {
-  center_.x += dx;
-  center_.y += dy;
-  pVertical_.x += dx;
-  pVertical_.y += dy;
-  pHorizontal_.x += dx;
-  pHorizontal_.y += dy;
+  comp1->move(dx, dy);
+  comp2->move(dx, dy);
 }
 void kiselev::Diamond::move(kiselev::point_t a) noexcept
 {
-  double moveForX = a.x - center_.x;
-  double moveForY = a.y - center_.y;
-  center_ = a;
-  pVertical_.x += moveForX;
-  pVertical_.y += moveForY;
-  pHorizontal_.x += moveForX;
-  pHorizontal_.y += moveForY;
+  comp1->move(a);
+  comp2->move(a);
 }
 void kiselev::Diamond::scale(double k) noexcept
 {
-  pVertical_.y = center_.y + (pVertical_.y - center_.y) * k;
-  pHorizontal_.x = center_.x + (pHorizontal_.x - center_.x) * k;
+  comp1->scale(k);
+  comp2->scale(k);
 }
