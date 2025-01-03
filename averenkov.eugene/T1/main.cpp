@@ -34,15 +34,15 @@ int main()
       }
       else if (command == "RECTANGLE")
       {
-        averenkov::makeRectangle(shapes, shapeCount, std::cin);
+        averenkov::makeRectangle(shapes, shapeCount, std::cin, hasErrors);
       }
       else if (command == "ELLIPSE")
       {
-        averenkov::makeEllipse(shapes, shapeCount, std::cin);
+        averenkov::makeEllipse(shapes, shapeCount, std::cin, hasErrors);
       }
       else if (command == "DIAMOND")
       {
-        averenkov::makeDiamond(shapes, shapeCount, std::cin);
+        averenkov::makeDiamond(shapes, shapeCount, std::cin, hasErrors);
       }
       else if (command == "SCALE")
       {
