@@ -12,6 +12,10 @@ namespace abramov
     }
   }
 
+  Square::Square(Rectangle rect):
+   rect_(rect)
+  {}
+
   double Square::getArea() const
   {
     return rect_.getArea();
@@ -31,8 +35,14 @@ namespace abramov
   {
     rect_.move(p);
   }
+
   void Square::scale(double k)
   {
     rect_.scale(k);
+  }
+
+  Rectangle Square::getRect() const
+  {
+    return rect_;
   }
 }

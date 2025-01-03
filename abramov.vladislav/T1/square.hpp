@@ -9,11 +9,13 @@ namespace abramov
   struct Square: Shape
   {
     Square(point_t p, double len);
+    Square(Rectangle rect);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
+    Rectangle getRect() const;
   private:
     Rectangle rect_;
   };

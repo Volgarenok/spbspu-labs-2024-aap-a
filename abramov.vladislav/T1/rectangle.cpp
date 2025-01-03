@@ -38,6 +38,13 @@ namespace abramov
     }
   }
 
+  Rectangle::Rectangle(ComplexQuad cq1, ComplexQuad cq2, ComplexQuad cq3, ComplexQuad cq4):
+   cmplxqd1_(cq1),
+   cmplxqd2_(cq2),
+   cmplxqd3_(cq3),
+   cmplxqd4_(cq4)
+  {}
+
   double Rectangle::getArea() const
   {
     return cmplxqd1_.getArea() + cmplxqd2_.getArea() + cmplxqd3_.getArea() + cmplxqd4_.getArea();
@@ -109,5 +116,25 @@ namespace abramov
       cmplxqd3_ = ComplexQuad({x1, y1}, {x2, y3}, {x2, y1}, {x1, y3});
       cmplxqd4_ = ComplexQuad({x1, y1}, {x2, y3}, {x1, y3}, {x2, y1});
     }
+  }
+
+  ComplexQuad Rectangle::getCQ1() const
+  {
+    return cmplxqd1_;
+  }
+
+  ComplexQuad Rectangle::getCQ2() const
+  {
+    return cmplxqd2_;
+  }
+
+  ComplexQuad Rectangle::getCQ3() const
+  {
+    return cmplxqd3_;
+  }
+
+  ComplexQuad Rectangle::getCQ4() const
+  {
+    return cmplxqd4_;
   }
 }
