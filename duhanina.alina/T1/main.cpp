@@ -32,6 +32,8 @@ int main()
     catch (const std::invalid_argument&)
     {
       std::cerr << "Incorrect parameters\n";
+      destroy(shapes, shapeCount);
+      return 1;
     }
     catch (const std::bad_alloc& e)
     {
