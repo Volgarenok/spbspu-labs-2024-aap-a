@@ -1,7 +1,10 @@
 #include "diamond.hpp"
 #include <cmath>
 #include <iostream>
-averenkov::Diamond::Diamond(averenkov::point_t a_, averenkov::point_t b_, averenkov::point_t c_) : a(a_), b(b_), c(c_)
+averenkov::Diamond::Diamond(point_t a_, point_t b_, point_t c_):
+  a(a_),
+  b(b_),
+  c(c_)
 {
 }
 
@@ -14,53 +17,42 @@ double averenkov::Diamond::getArea() const
 averenkov::rectangle_t averenkov::Diamond::getFrameRect() const
 {
   double width, height;
+  point_t center;
   if ((a.x == b.x && a.y == c.y) || (a.x == c.x && a.y == b.y))
   {
     width = (c.x - a.x + b.x - a.x) * 2;
     height = (c.y - a.y + b.y - a.y) * 2;
-    if (width < 0)
-    {
-      width = width - width - width;
-    }
-    if (height < 0)
-    {
-      height = height - height - height;
-    }
-    return { width, height, a };
+    center = a;
   }
   if ((b.x == a.x && b.y == c.y) || (b.x == c.x && b.y == a.y))
   {
     width = (c.x - b.x + a.x - b.x) * 2;
     height = (c.y - b.y + a.y - b.y) * 2;
-    if (width < 0)
-    {
-      width = width - width - width;
-    }
-    if (height < 0)
-    {
-      height = height - height - height;
-    }
-    return { width, height, b };
+    center = b;
   }
   if ((c.x == a.x && c.y == b.y) || (c.x == b.x && c.y == a.y))
   {
     width = (a.x - c.x + b.x - c.x) * 2;
     height = (a.y - c.y + b.y - c.y) * 2;
-    if (width < 0)
-    {
-      width = width - width - width;
-    }
-    if (height < 0)
-    {
-      height = height - height - height;
-    }
-    return { width, height, c };
+    center = c;
   }
-  return { 0.0, 0.0 };
+  if (width < 0)
+  {
+    width = -width;
+  }
+  if (height < 0)
+  {
+    height = -height;
+  }
+  return { width, height, center };
 }
 
 void averenkov::Diamond::scale(double factor)
 {
+  if (factor <= 0)
+  {
+    throw "invalid scale";
+  }
   point_t center = getFrameRect().pos;
   a.x = center.x + (a.x - center.x) * factor;
   a.y = center.y + (a.y - center.y) * factor;
@@ -72,30 +64,25 @@ void averenkov::Diamond::scale(double factor)
 
 void averenkov::Diamond::move(point_t s)
 {
-  if ((a.x == b.x && a.y == c.y) || (a.x == c.x && a.y == b.y))
+  point_t cen;
+  if (this->getFrameRect().pos.x == a.x && this->getFrameRect().pos.y == a.y)
   {
-    b.x = b.x - a.x + s.x;
-    b.y = b.y - a.y + s.y;
-    c.x = c.x - a.x + s.x;
-    c.y = c.y - a.y + s.y;
-    a = s;
+    cen = a;
   }
-  else if ((b.x == a.x && b.y == c.y) || (b.x == c.x && b.y == a.y))
+  if (this->getFrameRect().pos.x == b.x && this->getFrameRect().pos.y == b.y)
   {
-    a.x = a.x - b.x + s.x;
-    a.y = a.y - b.y + s.y;
-    c.x = c.x - b.x + s.x;
-    c.y = c.y - b.y + s.y;
-    b = s;
+    cen = b;
   }
-  else if ((c.x == a.x && c.y == b.y) || (c.x == b.x && c.y == a.y))
+  if (this->getFrameRect().pos.x == c.x && this->getFrameRect().pos.y == c.y)
   {
-    a.x = a.x - c.x + s.x;
-    a.y = a.y - c.y + s.y;
-    b.x = b.x - c.x + s.x;
-    b.y = b.y - c.y + s.y;
-    c = s;
+    cen = c;
   }
+  a.x = a.x - cen.x + s.x;
+  a.y = a.y - cen.y + s.y;
+  b.x = b.x - cen.x + s.x;
+  b.y = b.y - cen.y + s.y;
+  c.x = c.x - cen.x + s.x;
+  c.y = c.y - cen.y + s.y;
 }
 
 void averenkov::Diamond::move(double x_plus, double y_plus)

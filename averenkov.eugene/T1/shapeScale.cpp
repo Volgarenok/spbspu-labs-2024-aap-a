@@ -1,11 +1,7 @@
-#include "shape.hpp"
+#include "shapeScale.hpp"
 
 namespace averenkov
 {
-  double getLine(point_t a, point_t b)
-  {
-    return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2));
-  }
   void shapeScale(Shape* shap, point_t scale_center, double factor)
   {
     point_t pos = shap->getFrameRect().pos;

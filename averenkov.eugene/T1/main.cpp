@@ -11,17 +11,19 @@
 #include "dynamicinput.h"
 #include "ellipse.hpp"
 #include "diamond.hpp"
-
+#include "getline.hpp"
+#include "shapeScale.hpp"
 
 int main()
 {
   averenkov::Shape* shapes[10000];
   size_t shapeCount = 0;
   bool hasErrors = false;
+  bool hasScale = false;
   char* input;
   averenkov::point_t scale_center;
   double factor;
-  while (shapeCount < 10000)
+  while (shapeCount < 10000 && !std::cin.eof())
   {
     input = averenkov::stringInput(std::cin);
     if (input == nullptr || !std::cin)
@@ -82,6 +84,7 @@ int main()
       }
       else if (command == "SCALE")
       {
+        hasScale = true;
         if (shapeCount == 0)
         {
           std::cerr << "Nothing to scale\n";
@@ -108,18 +111,19 @@ int main()
     }
     free(input);
   }
-
   if (std::cin.eof())
   {
-    std::cerr << "No scale\n";
-    free(input);
-    for(size_t i = 0; i < shapeCount; ++i)
+    if (!hasScale)
     {
-      delete shapes[i];
+      std::cerr << "No scale\n";
+      free(input);
+      for(size_t i = 0; i < shapeCount; ++i)
+      {
+        delete shapes[i];
+      }
+      return 1;
     }
-    return 1;
   }
-
   double sum = 0;
   std::cout << std::fixed << std::setprecision(1);
 

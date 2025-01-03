@@ -2,7 +2,7 @@
 #define SHAPE
 
 #include "base-types.hpp"
-
+#include "getline.hpp"
 namespace averenkov
 {
   class Shape
@@ -15,8 +15,6 @@ namespace averenkov
     virtual void move(double x_plus, double y_plus) = 0;
     virtual void scale(double factor) = 0;
   };
-  void shapeScale(Shape* shap, point_t scale_center, double factor);
-  double getLine(point_t a, point_t b);
 }
 
 #endif
