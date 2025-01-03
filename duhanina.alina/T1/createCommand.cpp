@@ -3,7 +3,7 @@
 #include "makeShape.hpp"
 #include "printResult.hpp"
 
-void duhanina::createShape(const std::string& shapeType, Shape** shapes, size_t shapeCount)
+void duhanina::createShape(const std::string& shapeType, Shape** shapes, size_t& shapeCount)
 {
   if (shapeType == "RECTANGLE")
   {
