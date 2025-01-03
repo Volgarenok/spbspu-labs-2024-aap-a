@@ -239,4 +239,5 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
     out << ' ' << rect.pos.x + rect.width / 2;
     out << ' ' << rect.pos.y + rect.height / 2;
   }
+  out << '\n';
 }
