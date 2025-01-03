@@ -94,3 +94,29 @@ void averenkov::Diamond::move(double x_plus, double y_plus)
   b.y += y_plus;
   c.y += y_plus;
 }
+averenkov::Rectangle** averenkov::Diamond::buildRectangles()
+{
+  Rectangle** rectangles = new Rectangle*[40];
+  point_t center = this->getFrameRect().pos;
+  double widthR = this->getFrameRect().width / 8;
+  double heightR = this->getFrameRect().height / 8;
+  size_t index = 0;
+  for (size_t quadrant = 0; quadrant < 4; ++quadrant)
+  {
+    double x_dir = (quadrant % 2 == 0) ? -1 : 1;
+    double y_dir = (quadrant < 2) ? -1 : 1;
+    for (size_t level = 0; level < 4; ++level)
+    {
+      double y_offset = y_dir * (level * heightR);
+      for (size_t rect_in_level = 0; rect_in_level < (4 - level); ++rect_in_level)
+      {
+        double x_offset = x_dir * (rect_in_level - (3 - level) / 2.0) * widthR;
+        point_t rect_a = { center.x + x_offset - widthR / 2, center.y + y_offset - heightR / 2 };
+        point_t rect_c = { rect_a.x + widthR, rect_a.y + heightR };
+        rectangles[index] = new averenkov::Rectangle(rect_a, rect_c);
+        ++index;
+      }
+    }
+  }
+  return rectangles;
+}

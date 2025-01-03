@@ -2,6 +2,7 @@
 #define DIAMOND
 
 #include "shape.hpp"
+#include "rectangle.hpp"
 
 namespace averenkov
 {
@@ -9,6 +10,7 @@ namespace averenkov
   {
   public:
     Diamond(point_t a_, point_t b_, point_t c_);
+    Rectangle** buildRectangles();
     void scale(double factor);
     double getArea() const;
     rectangle_t getFrameRect() const;
