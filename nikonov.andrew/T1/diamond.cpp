@@ -1,6 +1,5 @@
 #include "diamond.hpp"
-#include <iostream>
-#include <exception>
+#include <stdexcept>
 #include "base-types.hpp"
 namespace
 {
@@ -9,7 +8,7 @@ namespace
   nikonov::point_t findEdge(const nikonov::point_t &p1, const nikonov::point_t &p2, const nikonov::point_t &p3);
   bool isEqualPoint(const nikonov::point_t &p1, const nikonov::point_t &p2);
 }
-nikonov::Diamond::Diamond(const point_t& p1, const point_t& p2, const point_t& p3)
+nikonov::Diamond::Diamond(const point_t &p1, const point_t &p2, const point_t &p3)
 {
   point_t topP({ 0, 0 });
   point_t midP({ 0, 0 });

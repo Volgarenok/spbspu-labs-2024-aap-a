@@ -1,15 +1,14 @@
 #include "rectangle.hpp"
-#include <iostream>
-#include <exception>
+#include <stdexcept>
 #include "base-types.hpp"
-nikonov::Rectangle::Rectangle(const point_t &lbp, const point_t &rtp)
+nikonov::Rectangle::Rectangle(const point_t &lbp, const point_t &rtp):
+  lbp_(lbp),
+  rtp_(rtp)
 {
   if (lbp.x >= rtp.x || lbp.y >= rtp.y)
   {
     throw std::logic_error("ERROR:noncorrect rectangle parameters");
   }
-  lbp_ = lbp;
-  rtp_ = rtp;
 }
 double nikonov::Rectangle::getArea() const
 {

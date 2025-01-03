@@ -1,10 +1,9 @@
 #include "additional-utilities.hpp"
-#include <iostream>
 #include <limits>
 #include <iomanip>
 #include "shape.hpp"
 #include "fabric.hpp"
-void nikonov::fillShapeCollection(std::istream &input, Shape *collection[], size_t &cnt, size_t &noncorrect)
+void nikonov::fillShapeCollection(std::istream &input, Shape **collection, size_t &cnt, size_t &noncorrect)
 {
   std::string name = "";
   size_t n = 0;
@@ -54,15 +53,14 @@ void nikonov::fillShapeCollection(std::istream &input, Shape *collection[], size
       ++noncorrect;
     }
   }
-  delete[] nums;
+  delete []nums;
 }
-void nikonov::destoy(Shape *collection[], size_t &cnt)
+void nikonov::destoy(Shape **collection, size_t cnt)
 {
   for (size_t i = 0; i < cnt; ++i)
   {
     delete collection[i];
   }
-  cnt = 0;
 }
 void nikonov::ispScale(Shape *shp, double x, double y, double k)
 {
@@ -75,7 +73,7 @@ void nikonov::ispScale(Shape *shp, double x, double y, double k)
   shp->scale(k);
   shp->move(diffX * k * (-1), diffY * k * (-1));
 }
-double nikonov::getCollectionArea(Shape *collection[], size_t cnt)
+double nikonov::getCollectionArea(Shape **collection, size_t cnt)
 {
   double summ = 0.0;
   for (size_t i = 0; i < cnt; ++i)
@@ -84,11 +82,10 @@ double nikonov::getCollectionArea(Shape *collection[], size_t cnt)
   }
   return summ;
 }
-void nikonov::scaleCollection(Shape *collection[], size_t cnt, double x, double y, double k)
+void nikonov::scaleCollection(Shape **collection, size_t cnt, double x, double y, double k)
 {
   if (k <= 0)
   {
-    destoy(collection, cnt);
     throw std::logic_error("ERROR: noncorrect scale parameters");
   }
   for (size_t i = 0; i < cnt; ++i)
@@ -96,7 +93,7 @@ void nikonov::scaleCollection(Shape *collection[], size_t cnt, double x, double 
     ispScale(collection[i], x, y, k);
   }
 }
-void nikonov::outputCollection(std::ostream &out, Shape *collection[], size_t cnt)
+void nikonov::outputCollection(std::ostream &out, Shape **collection, size_t cnt)
 {
   out << std::fixed << std::setprecision(1);
   double summArea = getCollectionArea(collection, cnt);
@@ -111,7 +108,7 @@ void nikonov::outputCollection(std::ostream &out, Shape *collection[], size_t cn
   }
   out << '\n';
 }
-void nikonov::processCollection(std::istream &input, Shape *collection[], size_t cnt)
+void nikonov::processCollection(std::istream &input, std::ostream &out, Shape **collection, size_t cnt)
 {
   if (cnt == 0)
   {
@@ -121,11 +118,11 @@ void nikonov::processCollection(std::istream &input, Shape *collection[], size_t
   double y = 0.0;
   double k = 0.0;
   input >> x >> y >> k;
-  if ((!input && !input.eof()) || k <= 0)
+  if (!input || k <= 0)
   {
     throw std::logic_error("ERROR: noncorrect scale parameters");
   }
-  outputCollection(std::cout, collection, cnt);
+  outputCollection(out, collection, cnt);
   scaleCollection(collection, cnt, x, y, k);
-  outputCollection(std::cout, collection, cnt);
+  outputCollection(out, collection, cnt);
 }

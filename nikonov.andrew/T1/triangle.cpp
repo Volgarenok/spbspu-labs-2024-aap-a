@@ -1,24 +1,33 @@
 #include "triangle.hpp"
-#include <iostream>
-#include <exception>
+#include <stdexcept>
 #include <cmath>
 #include "base-types.hpp"
 nikonov::point_t getCenterOfGravity(const nikonov::point_t &A, const nikonov::point_t &B, const nikonov::point_t &C)
 {
   return nikonov::point_t({ (A.x + B.x + C.x) / 3, ((A.y + B.y + C.y) / 3) });
 }
-nikonov::Triangle::Triangle(const point_t &A, const point_t &B, const point_t &C)
+double nikonov::getSegmentLength(const point_t &a, const point_t &b)
 {
-  double AB = std::sqrt(std::pow(B.x - A.x, 2) + std::pow(B.y - A.y, 2));
-  double BC = std::sqrt(std::pow(C.x - B.x, 2) + std::pow(C.y - B.y, 2));
-  double CA = std::sqrt(std::pow(C.x - A.x, 2) + std::pow(C.y - A.y, 2));
-  if (!((AB + BC > CA) && (AB + CA > BC) && (CA + BC > AB)))
+  return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2));
+}
+void scaleTrianglePoint(nikonov::point_t &pt, nikonov::point_t &center, double k)
+{
+  pt.x = center.x + (pt.x - center.x) * k;
+  pt.y = center.y + (pt.y - center.y) * k;
+}
+
+nikonov::Triangle::Triangle(const point_t &a, const point_t &b, const point_t &c):
+  a_(a),
+  b_(b),
+  c_(c)
+{
+  double ab = getSegmentLength(a, b);
+  double bc = getSegmentLength(b, c);
+  double ca = getSegmentLength(c, a);
+  if (!((ab + bc > ca) && (ab + ca > bc) && (ca + bc > ab)))
   {
     throw std::logic_error("ERROR:noncorrect triangle parameters");
   }
-  A_ = A;
-  B_ = B;
-  C_ = C;
 }
 double nikonov::Triangle::getArea() const
 {
@@ -27,14 +36,10 @@ double nikonov::Triangle::getArea() const
 }
 nikonov::rectangle_t nikonov::Triangle::getFrameRect() const
 {
-  double tempX = (A_.x > B_.x ? A_.x : B_.x);
-  double maxX = (C_.x > tempX ? C_.x : tempX);
-  double tempY = (A_.y > B_.y ? A_.y : B_.y);
-  double maxY = (C_.y > tempY ? C_.y : tempY);
-  tempX = (A_.x < B_.x ? A_.x : B_.x);
-  double minX = (C_.x < tempX ? C_.x : tempX);
-  tempY = (A_.y < B_.y ? A_.y : B_.y);
-  double minY = (C_.y < tempY ? C_.y : tempY);
+  double maxX = std::max(std::max(a_.x, b_.x), c_.x);
+  double maxY = std::max(std::max(a_.y, b_.y), c_.y);
+  double minX = std::min(std::min(a_.x, b_.x), c_.x);
+  double minY = std::min(std::min(a_.y, b_.y), c_.y);
   double width = maxX - minX;
   double height = maxY - minY;
   point_t pos = point_t({ minX + (width / 2), minY + (height / 2) });
@@ -42,24 +47,21 @@ nikonov::rectangle_t nikonov::Triangle::getFrameRect() const
 }
 void nikonov::Triangle::move(const point_t &newPos)
 {
-  point_t center = getCenterOfGravity(A_, B_, C_);
+  point_t center = getCenterOfGravity(a_, b_, c_);
   double diffX = newPos.x - center.x;
   double diffY = newPos.y - center.y;
   move(diffX, diffY);
 }
 void nikonov::Triangle::move(double x, double y)
 {
-  movePoint(A_, x, y);
-  movePoint(B_, x, y);
-  movePoint(C_, x, y);
+  movePoint(a_, x, y);
+  movePoint(b_, x, y);
+  movePoint(c_, x, y);
 }
 void nikonov::Triangle::doScale(double k)
 {
-  point_t center = getCenterOfGravity(A_, B_, C_);
-  A_.x = center.x + (A_.x - center.x) * k;
-  A_.y = center.y + (A_.y - center.y) * k;
-  B_.x = center.x + (B_.x - center.x) * k;
-  B_.y = center.y + (B_.y - center.y) * k;
-  C_.x = center.x + (C_.x - center.x) * k;
-  C_.y = center.y + (C_.y - center.y) * k;
+  point_t center = getCenterOfGravity(a_, b_, c_);
+  scaleTrianglePoint(a_, center, k);
+  scaleTrianglePoint(b_, center, k);
+  scaleTrianglePoint(c_, center, k);
 }

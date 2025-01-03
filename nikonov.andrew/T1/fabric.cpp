@@ -1,5 +1,4 @@
 #include "fabric.hpp"
-#include <iostream>
 #include <string>
 #include <exception>
 #include "shape.hpp"
@@ -7,7 +6,7 @@
 #include "additional-utilities.hpp"
 #include "diamond.hpp"
 #include "triangle.hpp"
-nikonov::Shape *nikonov::make_shape(const std::string& name, double nums[])
+nikonov::Shape *nikonov::make_shape(const std::string &name, double nums[])
 {
   if (name == "RECTANGLE")
   {
@@ -67,13 +66,13 @@ nikonov::Diamond *nikonov::make_diamond(double nums[])
 }
 nikonov::Triangle *nikonov::make_triangle(double nums[])
 {
-  point_t A({ nums[0], nums[1] });
-  point_t B({ nums[2], nums[3] });
-  point_t C({ nums[4], nums[5] });
+  point_t a({ nums[0], nums[1] });
+  point_t b({ nums[2], nums[3] });
+  point_t c({ nums[4], nums[5] });
   Triangle *result = nullptr;
   try
   {
-    result = new Triangle(A, B, C);
+    result = new Triangle(a, b, c);
   }
   catch (const std::logic_error &e)
   {

@@ -6,16 +6,17 @@ namespace nikonov
   class Triangle final: public Shape
   {
   public:
-    Triangle(const point_t &leftP, const point_t &topP, const point_t &rightP);
+    Triangle(const point_t &a, const point_t &b, const point_t &c);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(const point_t &a) override;
     void move(double x, double y) override;
   private:
+    point_t a_;
+    point_t b_;
+    point_t c_;
     void doScale(double k) override;
-    point_t A_;
-    point_t B_;
-    point_t C_;
   };
+  double getSegmentLength(const point_t &a, const point_t &b);
 }
 #endif
