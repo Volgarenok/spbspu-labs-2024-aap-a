@@ -57,12 +57,8 @@ void nikonov::Diamond::move(double x, double y)
   movePoint(midP_, x, y);
   movePoint(rightP_, x, y);
 }
-void nikonov::Diamond::scale(double k)
+void nikonov::Diamond::doScale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::logic_error("Scale denied: k must be more than zero");
-  }
   rectangle_t crntRect = getFrameRect();
   crntRect.width *= k;
   crntRect.height *= k;

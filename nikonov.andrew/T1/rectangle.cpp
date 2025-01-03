@@ -34,12 +34,8 @@ void nikonov::Rectangle::move(double x, double y)
   movePoint(lbp_, x, y);
   movePoint(rtp_, x, y);
 }
-void nikonov::Rectangle::scale(double k)
+void nikonov::Rectangle::doScale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::logic_error("Scale denied: k must be more than zero");
-  }
   rectangle_t crntRect = getFrameRect();
   crntRect.width *= k;
   crntRect.height *= k;

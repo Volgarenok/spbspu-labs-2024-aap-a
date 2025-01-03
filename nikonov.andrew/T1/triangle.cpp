@@ -53,12 +53,8 @@ void nikonov::Triangle::move(double x, double y)
   movePoint(B_, x, y);
   movePoint(C_, x, y);
 }
-void nikonov::Triangle::scale(double k)
+void nikonov::Triangle::doScale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::logic_error("Scale denied: k must be more than zero");
-  }
   point_t center = getCenterOfGravity(A_, B_, C_);
   A_.x = center.x + (A_.x - center.x) * k;
   A_.y = center.y + (A_.y - center.y) * k;
