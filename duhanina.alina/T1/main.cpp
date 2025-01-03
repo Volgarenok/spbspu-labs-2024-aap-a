@@ -15,7 +15,7 @@ int main()
   {
     try
     {
-      createShape(shapeType, shapes, shapeCount);
+      createShape(shapeType, shapes, &shapeCount);
       if (shapeType == "SCALE")
       {
         if (shapeCount == 0)
