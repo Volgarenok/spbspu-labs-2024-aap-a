@@ -133,38 +133,39 @@ namespace
 zakirov::Rectangle * zakirov::make_rectangle(double bottom_x, double bottom_y, double top_x, double top_y)
 {
   point_t bottom_left, top_right;
-
   bottom_left.x = bottom_x;
   bottom_left.y = bottom_y;
   top_right.x = top_x;
   top_right.y = top_y;
 
-  return new Rectangle(bottom_left, top_right);
+  Rectangle * rectangle = static_cast< Rectangle * >(malloc(sizeof(Rectangle)));
+  return new (rectangle) Rectangle(bottom_left, top_right);
 }
 
 zakirov::Circle * zakirov::make_circle(double center_x, double center_y, double radius)
 {
   point_t center;
-
   center.x = center_x;
   center.y = center_y;
 
-  return new Circle(center, radius);
+  Circle * circle = static_cast< Circle * >(malloc(sizeof(Circle)));
+  return new (circle) Circle(center, radius);
 }
 
 zakirov::Ring * zakirov::make_ring(double center_x, double center_y, double in_radius, double ex_radius)
 {
   point_t center;
-
   center.x = center_x;
   center.y = center_y;
 
-  return new Ring(center, in_radius, ex_radius);
+  Ring * ring = static_cast< Ring * >(malloc(sizeof(Ring)));
+  return new (ring) Ring(center, in_radius, ex_radius);
 }
 
 zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t * points)
 {
-  return new Polygon(points_num, points);
+  Polygon * polygon = static_cast< Polygon * >(malloc(sizeof(Polygon)));
+  return new (polygon) Polygon(points_num, points);
 }
 
 zakirov::Shape * zakirov::make_shape(const double * data)
@@ -335,6 +336,7 @@ void zakirov::clear_shapes(Shape ** shapes, size_t quantity)
 {
   for (size_t i = 0; i < quantity; ++i)
   {
-    delete shapes[i];
+    shapes[i]->~Shape();
+    free(shapes[i]);
   }
 }
