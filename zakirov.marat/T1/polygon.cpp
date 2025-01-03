@@ -27,11 +27,6 @@ zakirov::Polygon::Polygon(size_t size, point_t * points) :
   }
 }
 
-zakirov::Polygon::~Polygon()
-{
-  free(points_);
-}
-
 double zakirov::Polygon::getArea() const
 {
   double result = 0;

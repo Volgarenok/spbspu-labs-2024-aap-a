@@ -188,6 +188,7 @@ zakirov::Shape * zakirov::make_shape(const double * data)
       point_t * converted_data = convert_polygon(data);
       size_t points_size = static_cast< size_t >(data[1] / 2);
       Polygon * polygon = make_polygon(points_size, converted_data);
+      free(converted_data);
       return polygon;
     }
     else
