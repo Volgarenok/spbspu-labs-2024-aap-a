@@ -22,8 +22,6 @@ int main()
   catch (const std::logic_error& e)
   {
     std::cerr << e.what();
-    kushekbaev::clearMemory(capacity, shapeCounter);
-    return 1;
   }
 
   catch (const std::bad_alloc& e)
