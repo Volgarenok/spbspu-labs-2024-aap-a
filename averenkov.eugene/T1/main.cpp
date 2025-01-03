@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <sstream>
 #include <cstdlib>
-#include <cstring>
+#include <string>
 #include <cmath>
 #include "shape.hpp"
 #include "rectangle.hpp"
@@ -13,74 +13,35 @@
 #include "diamond.hpp"
 #include "getline.hpp"
 #include "shapeScale.hpp"
-
+#include "makeshape.hpp"
 int main()
 {
   averenkov::Shape* shapes[10000];
   size_t shapeCount = 0;
   bool hasErrors = false;
   bool hasScale = false;
-  char* input;
   averenkov::point_t scale_center;
   double factor;
-  while (shapeCount < 10000 && !std::cin.eof())
+  std::string command;
+  while (shapeCount < 10000 && std::cin >> command)
   {
-    input = averenkov::stringInput(std::cin);
-    if (input == nullptr || !std::cin)
-    {
-      break;
-    }
-    std::istringstream line(input);
-    std::string command;
-    line >> command;
     try
     {
       if (command.empty())
       {
-        free(input);
         continue;
       }
       else if (command == "RECTANGLE")
       {
-        averenkov::point_t a, c;
-        if (!(line >> a.x >> a.y >> c.x >> c.y) || a.x > c.x || a.y > c.x)
-        {
-          throw std::invalid_argument("Invalid RECTANGLE");
-        }
-        shapes[shapeCount++] = new averenkov::Rectangle(a, c);
+        shapes[shapeCount++] = averenkov::makeRectangle(std::cin);
       }
       else if (command == "ELLIPSE")
       {
-        averenkov::point_t center;
-        double a, b;
-        if (!(line >> center.x >> center.y >> a >> b) || a <= 0 || b <= 0)
-        {
-          throw std::invalid_argument("Invalid ELLIPSE");
-        }
-        shapes[shapeCount++] = new averenkov::Ellipse(center, a, b);
+        shapes[shapeCount++] = averenkov::makeEllipse(std::cin);
       }
       else if (command == "DIAMOND")
       {
-        averenkov::point_t a;
-        averenkov::point_t b;
-        averenkov::point_t c;
-        if (!(line >> a.x >> a.y >> b.x >> b.y >> c.x >> c.y))
-        {
-          throw std::invalid_argument("Invalid DIAMOND");
-        }
-        if (!((a.x == b.x && a.y == c.y) ||
-          (a.x == c.x && a.y == b.y) ||
-          (b.x == a.x && b.y == c.y) ||
-          (b.x == c.x && b.y == a.y) ||
-          (c.x == a.x && c.y == b.y) ||
-          (c.x == b.x && c.y == a.y)))
-        {
-          throw std::invalid_argument("Invalid DIAMOND");
-        }
-        else
-        {
-          shapes[shapeCount++] = new averenkov::Diamond(a, b, c);
-        }
+        shapes[shapeCount++] = averenkov::makeDiamond(std::cin);
       }
       else if (command == "SCALE")
       {
@@ -88,20 +49,17 @@ int main()
         if (shapeCount == 0)
         {
           std::cerr << "Nothing to scale\n";
-          free(input);
           return 1;
         }
-        if (!(line >> scale_center.x >> scale_center.y >> factor) || factor <= 0)
+        if (!(std::cin >> scale_center.x >> scale_center.y >> factor) || factor <= 0)
         {
           for(size_t i = 0; i < shapeCount; ++i)
           {
             delete shapes[i];
           }
           std::cerr << "Invalid scale\n";
-          free(input);
           return 1;
         }
-        free(input);
         break;
       }
     }
@@ -109,20 +67,15 @@ int main()
     {
       hasErrors = true;
     }
-    free(input);
   }
-  if (std::cin.eof())
+  if (std::cin.eof() && !hasScale)
   {
-    if (!hasScale)
+    std::cerr << "No scale\n";
+    for(size_t i = 0; i < shapeCount; ++i)
     {
-      std::cerr << "No scale\n";
-      free(input);
-      for(size_t i = 0; i < shapeCount; ++i)
-      {
-        delete shapes[i];
-      }
-      return 1;
+      delete shapes[i];
     }
+    return 1;
   }
   double sum = 0;
   std::cout << std::fixed << std::setprecision(1);
