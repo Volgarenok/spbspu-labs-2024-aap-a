@@ -5,12 +5,12 @@
 #include "base-types.hpp"
 #include "cmath"
 #include "complexquad.hpp"
-kiselev::Diamond::Diamond(kiselev::point_t pVertical, point_t pHorizontal) :
+kiselev::Diamond::Diamond(point_t center, point_t pVertical, point_t pHorizontal) :
   comp1(nullptr),
   comp2(nullptr)
 {
-  point_t pHorizontal2 = {pHorizontal.x * -1, pHorizontal.y};
-  point_t pVertical2 = {pVertical.x, pVertical.y * -1};
+  point_t pHorizontal2 = { center.x +(center.x - pHorizontal.x), pHorizontal.y};
+  point_t pVertical2 = {pVertical.x, center.y + (center.y - pVertical.y)};
   try
   {
     comp1 = new Complexquad(pHorizontal2, pHorizontal, pVertical, pVertical2);

@@ -1,5 +1,6 @@
 #ifndef DIAMOND_HPP
 #define DIAMOND_HPP
+#include "base-types.hpp"
 #include "shape.hpp"
 #include "complexquad.hpp"
 namespace kiselev
@@ -7,7 +8,7 @@ namespace kiselev
   class Diamond final : public Shape
   {
   public:
-    Diamond(point_t pVertical, point_t pHorizontal);
+    Diamond(point_t center, point_t pVertical, point_t pHorizontal);
     double getArea() const noexcept override;
     rectangle_t getFrameRect() const noexcept override;
     void move(point_t a) noexcept override;
