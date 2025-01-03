@@ -52,6 +52,11 @@ tkach::Regular::Regular(const point_t& first_point, const point_t& second_point,
   }
 }
 
+tkach::Shape* tkach::Regular::clone() const
+{
+  return new Regular(*this);
+}
+
 double tkach::Regular::getArea() const
 {
   return (getSideAmount() * getDist(second_point_, third_point_) * getDist(first_point_, third_point_));

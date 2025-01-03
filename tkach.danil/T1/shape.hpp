@@ -14,6 +14,7 @@ namespace tkach
     virtual rectangle_t getFrameRect() const = 0;
     virtual void move(double add_to_x, double add_to_y) = 0;
     virtual void move(const point_t& point_to_move) = 0;
+    virtual Shape* clone() const = 0;
     void scale(double multiplier);
   private:
     virtual void scaleOneOfUniqueShapes(double multiplier) = 0;

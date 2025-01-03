@@ -61,6 +61,11 @@ void tkach::Ring::move(const double add_to_x, const double add_to_y)
   out_reg_->move(add_to_x, add_to_y);
 }
 
+tkach::Shape* tkach::Ring::clone() const
+{
+  return new Ring(*this);
+}
+
 void tkach::Ring::move(const point_t& point_to_move)
 {
   in_reg_->move(point_to_move);

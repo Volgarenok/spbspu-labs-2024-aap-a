@@ -16,6 +16,7 @@ namespace tkach
     void move(double add_to_x, double add_to_y) override;
     void move(const point_t& point_to_move) override;
     void scaleOneOfUniqueShapes(double multiplier) override;
+    Shape* clone() const override;
   private:
     Regular* in_reg_;
     Regular* out_reg_;
