@@ -116,7 +116,8 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
     double sidea = pow(pow((a.x - b.x), 2.0) + pow((a.y - b.y), 2.0), 0.5);
     double sideb = pow(pow((b.x - c.x), 2.0) + pow((b.y - c.y), 2.0), 0.5);
     double sidec = pow(pow((a.x - c.x), 2.0) + pow((a.y - c.y), 2.0), 0.5);
-    if ((a.x - b.x + a.y - b.y) * (a.x - c.x + a.y - c.y) * (b.x - c.x + b.y - c.y) == 0 || sidea + sideb == sidec || sidea + sidec == sideb || sideb + sidec == sidea)
+    if ((a.x - b.x + a.y - b.y) * (a.x - c.x + a.y - c.y) * (b.x - c.x + b.y - c.y) == 0
+      || sidea + sideb == sidec || sidea + sidec == sideb || sideb + sidec == sidea)
     {
         throw std::logic_error("");
     }
