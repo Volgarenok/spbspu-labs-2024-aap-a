@@ -12,6 +12,10 @@ namespace savintsev
     ~CompositeShape();
     CompositeShape();
     CompositeShape(size_t capacity);
+    CompositeShape(const CompositeShape & rhs);
+    CompositeShape(CompositeShape && rhs);
+    CompositeShape & operator=(const CompositeShape & rhs);
+    CompositeShape & operator=(CompositeShape && rhs);
 
     double getArea() const;
     rectangle_t getFrameRect() const;

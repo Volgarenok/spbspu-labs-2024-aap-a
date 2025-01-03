@@ -48,6 +48,11 @@ void savintsev::Concave::move(double x, double y)
   this->p4_ = {p4_.x + x, p4_.y + y};
 }
 
+savintsev::Shape * savintsev::Concave::clone() const
+{
+  return new Concave(*this);
+}
+
 void savintsev::Concave::doScale(double k)
 {
   this->p1_ = {p4_.x - (p4_.x - p1_.x) * k, p4_.y - (p4_.y - p1_.y) * k};

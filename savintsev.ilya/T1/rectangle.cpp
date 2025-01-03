@@ -49,6 +49,11 @@ void savintsev::Rectangle::move(double x, double y)
   this->lay_->move(x, y);
 }
 
+savintsev::Shape * savintsev::Rectangle::clone() const
+{
+  return new Rectangle(*this);
+}
+
 void savintsev::Rectangle::doScale(double k)
 {
   this->stay_->scale(k);

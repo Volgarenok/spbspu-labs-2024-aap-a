@@ -52,6 +52,11 @@ void savintsev::Complexquad::move(double x, double y)
   this->p4_ = {p4_.x + x, p4_.y + y};
 }
 
+savintsev::Shape * savintsev::Complexquad::clone() const
+{
+  return new Complexquad(*this);
+}
+
 void savintsev::Complexquad::doScale(double k)
 {
   point_t center = {0.0, 0.0};

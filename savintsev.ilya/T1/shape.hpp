@@ -13,6 +13,7 @@ namespace savintsev
     virtual void move(point_t p) = 0;
     virtual void move(double x, double y) = 0;
     void scale(double k);
+    virtual Shape * clone() const = 0;
   private:
     virtual void doScale(double k) = 0;
   };

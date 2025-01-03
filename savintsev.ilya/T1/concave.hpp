@@ -12,6 +12,7 @@ namespace savintsev
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;
     void move(double x, double y) override;
+    Shape * clone() const override;
   private:
     void doScale(double k) override;
     point_t p1_;

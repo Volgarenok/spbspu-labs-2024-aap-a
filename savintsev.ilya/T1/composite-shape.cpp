@@ -16,6 +16,35 @@ savintsev::CompositeShape::CompositeShape(size_t capacity):
   lst_ = new Shape * [cap_];
 }
 
+savintsev::CompositeShape::CompositeShape(const CompositeShape & rhs)
+{
+  Shape ** new_lst = createAmpCopy(rhs.lst_, rhs.cap_, rhs.cap_);
+  lst_ = new_lst;
+  amt_ = rhs.amt_;
+  cap_ = rhs.cap_;
+}
+
+savintsev::CompositeShape::CompositeShape(CompositeShape && rhs)
+{
+  lst_ = rhs.lst_;
+  amt_ = rhs.amt_;
+  cap_ = rhs.cap_;
+  rhs.lst_ = nullptr;
+}
+
+savintsev::CompositeShape & savintsev::CompositeShape::operator=(const CompositeShape & rhs)
+{
+  if (&rhs != this)
+  {
+    Shape ** new_lst = createAmpCopy(rhs.lst_, rhs.cap_, rhs.cap_);
+    destroy(lst_, amt_);
+    lst_ = new_lst;
+    amt_ = rhs.amt_;
+    cap_ = rhs.cap_;
+  }
+  return *this;
+}
+
 double savintsev::CompositeShape::getArea() const
 {
   double area = 0.0;
