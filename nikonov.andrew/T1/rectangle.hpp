@@ -7,10 +7,10 @@ namespace nikonov
   class Rectangle final : public Shape
   {
   public:
-    Rectangle(const nikonov::point_t &lbp, const nikonov::point_t &rtp);
+    Rectangle(const point_t &lbp, const point_t &rtp);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void move(const nikonov::point_t &a) override;
+    void move(const point_t &a) override;
     void move(double x, double y) override;
   private:
     point_t lbp_;

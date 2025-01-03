@@ -70,7 +70,7 @@ void nikonov::ispScale(Shape *shp, double x, double y, double k)
   point_t newCenter = shp->getFrameRect().pos;
   double diffX = newCenter.x - origCenter.x;
   double diffY = newCenter.y - origCenter.y;
-  shp->scale(k);
+  shp->scaleWithoutCheck(k);
   shp->move(diffX * k * (-1), diffY * k * (-1));
 }
 double nikonov::getCollectionArea(Shape **collection, size_t cnt)

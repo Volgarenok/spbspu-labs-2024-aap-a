@@ -1,5 +1,6 @@
 #include "diamond.hpp"
 #include <stdexcept>
+#include <cmath>
 #include "base-types.hpp"
 namespace
 {
@@ -12,15 +13,8 @@ nikonov::Diamond::Diamond(const point_t &p1, const point_t &p2, const point_t &p
 {
   point_t topP({ 0, 0 });
   point_t midP({ 0, 0 });
-  try
-  {
-    topP = findTop(p1, p2, p3);
-    midP = findMid(p1, p2, p3);
-  }
-  catch (const std::exception &e)
-  {
-    throw std::logic_error("ERROR:noncorrect diamond parameters");
-  }
+  topP = findTop(p1, p2, p3);
+  midP = findMid(p1, p2, p3);
   point_t edgeP = findEdge(p1, p2, p3);
   if (!(topP.x == midP.x && edgeP.y == midP.y))
   {
@@ -72,15 +66,15 @@ namespace
 {
   nikonov::point_t findTop(const nikonov::point_t &p1, const nikonov::point_t &p2, const nikonov::point_t &p3)
   {
-    if (p1.y > p2.y && p1.y > p3.y)
+    if (p1.y == std::max(std::max(p1.y, p2.y), p3.y))
     {
       return p1;
     }
-    else if (p2.y > p1.y && p2.y > p3.y)
+    else if (p2.y == std::max(std::max(p1.y, p2.y), p3.y))
     {
       return p2;
     }
-    else if (p3.y > p1.y && p3.y > p2.y)
+    else if (p3.y == std::max(std::max(p1.y, p2.y), p3.y))
     {
       return p3;
     }

@@ -8,3 +8,7 @@ void nikonov::Shape::scale(double k)
   }
   doScale(k);
 }
+void nikonov::Shape::scaleWithoutCheck(double k)
+{
+  doScale(k);
+}
