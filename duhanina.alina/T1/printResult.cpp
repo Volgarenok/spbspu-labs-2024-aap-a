@@ -3,17 +3,15 @@
 #include <iomanip>
 #include <cstddef>
 
-void duhanina::outFigures(std::ostream& out, const Shape* const* shapes, size_t shapeCount)
+void duhanina::outFigures(std::ostream& out, const Shape* const* shapes, size_t i)
 {
-  for (size_t i = 0; i < shapeCount; ++i)
-  {
-    rectangle_t frame = shapes[i]->getFrameRect();
-    out << frame.pos.x - frame.width / 2.0 << " ";
-    out << frame.pos.y - frame.height / 2.0 << " ";
-    out << frame.pos.x + frame.width / 2.0 << " ";
-    out << frame.pos.y + frame.height / 2.0;
-  }
+  rectangle_t frame = shapes[i]->getFrameRect();
+  out << frame.pos.x - frame.width / 2.0 << " ";
+  out << frame.pos.y - frame.height / 2.0 << " ";
+  out << frame.pos.x + frame.width / 2.0 << " ";
+  out << frame.pos.y + frame.height / 2.0;
 }
+
 double duhanina::calcArea(const Shape* const* shapes, size_t shapeCount)
 {
   double totalArea = 0;
@@ -30,8 +28,11 @@ double duhanina::calcArea(const Shape* const* shapes, size_t shapeCount)
 void duhanina::printFiguresInfo(std::ostream& out, const Shape* const* shapes, size_t shapeCount)
 {
   out << std::fixed << std::setprecision(1) << calcArea(shapes, shapeCount);
-  out << " ";
-  outFigures(out, shapes, shapeCount);
+  for (size_t i = 0; i < shapeCount; i++)
+  {
+    out << " ";
+    outFigures(out, shapes, i);
+  }
   out << "\n";
 }
 
