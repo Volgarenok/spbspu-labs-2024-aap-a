@@ -1,5 +1,5 @@
 #include "complexquad.hpp"
-#include <cmath>
+#include <algorithm>
 #include <stdexcept>
 #include "lins-tris.hpp"
 
@@ -24,10 +24,10 @@ double savintsev::Complexquad::getArea() const
 
 savintsev::rectangle_t savintsev::Complexquad::getFrameRect() const
 {
-  double mostLeft = std::fmin(std::fmin(p1_.x, p2_.x), std::fmin(p3_.x, p4_.x));
-  double mostRight = std::fmax(std::fmax(p1_.x, p2_.x), std::fmax(p3_.x, p4_.x));
-  double mostLow = std::fmin(std::fmin(p1_.y, p2_.y), std::fmin(p3_.y, p4_.y));
-  double mostHigh = std::fmax(std::fmax(p1_.y, p2_.y), std::fmax(p3_.y, p4_.y));
+  double mostLeft = std::min({p1_.x, p2_.x, p3_.x, p4_.x});
+  double mostRight = std::max({p1_.x, p2_.x, p3_.x, p4_.x});
+  double mostLow = std::min({p1_.y, p2_.y, p3_.y, p4_.y});
+  double mostHigh = std::max({p1_.y, p2_.y, p3_.y, p4_.y});
   point_t center = {mostLeft + (mostRight - mostLeft) / 2, mostLow + (mostHigh - mostLow) / 2};
   return {mostRight - mostLeft, mostHigh - mostLow, center};
 }

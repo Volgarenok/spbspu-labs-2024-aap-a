@@ -27,18 +27,14 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
     if (i == (capacity - 1))
     {
       t[i] = '\0';
-      try
+      char * new_t = createAmpCopy(t, capacity, capacity + capacity);
+      delete[] t;
+      if (new_t == nullptr)
       {
-        char * new_t = createAmpCopy(t, capacity, capacity + capacity);
-        delete[] t;
-        t = new_t;
-        capacity += capacity;
-      }
-      catch (const std::bad_alloc & e)
-      {
-        delete[] t;
         return nullptr;
       }
+      t = new_t;
+      capacity += capacity;
     }
     in >> std::noskipws >> buffer;
     t[i++] = buffer;
