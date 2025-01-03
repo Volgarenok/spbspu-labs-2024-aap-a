@@ -7,10 +7,10 @@
 namespace abramov
 {
   Rectangle::Rectangle(point_t p1, point_t p2):
-  cmplxqd1_({p1.x, p1.y}, {(p1.x + p2.x) / 2, p2.y}, {(p1.x + p2.x) / 2, p1.y}, {p1.x, p2.y}),
-  cmplxqd2_({p1.x, p2.y}, {(p1.x + p2.x) / 2, p1.y}, {p1.x, p1.y}, {(p1.x + p2.x) / 2, p2.y}),
-  cmplxqd3_({(p1.x + p2.x) / 2, p1.y}, {p2.x, p2.y}, {p2.x, p1.y}, {(p1.x + p2.x) / 2, p2.y}),
-  cmplxqd4_({(p1.x + p2.x) / 2, p2.y}, {p2.x, p1.y}, {(p1.x + p2.x) / 2, p1.y}, {p2.x, p2.y})
+   cmplxqd1_({p1.x, p1.y}, {(p1.x + p2.x) / 2, p2.y}, {(p1.x + p2.x) / 2, p1.y}, {p1.x, p2.y}),
+   cmplxqd2_({p1.x, p2.y}, {(p1.x + p2.x) / 2, p1.y}, {p1.x, p1.y}, {(p1.x + p2.x) / 2, p2.y}),
+   cmplxqd3_({(p1.x + p2.x) / 2, p1.y}, {p2.x, p2.y}, {p2.x, p1.y}, {(p1.x + p2.x) / 2, p2.y}),
+   cmplxqd4_({(p1.x + p2.x) / 2, p2.y}, {p2.x, p1.y}, {(p1.x + p2.x) / 2, p1.y}, {p2.x, p2.y})
   {
     if (p1.x >= p2.x || p1.y >= p2.y)
     {
@@ -68,17 +68,17 @@ namespace abramov
 
   void Rectangle::move(point_t p)
   {
-    point_t center = getFrameRect().pos;
-    double dx = p.x - center.x;
-    double dy = p.y - center.y;
+    const point_t center = getFrameRect().pos;
+    const double dx = p.x - center.x;
+    const double dy = p.y - center.y;
     move(dx, dy);
   }
 
   void Rectangle::scale(double k)
   {
-    double newWidth = (cmplxqd4_.getD().x - cmplxqd1_.getA().x) * k;
+    const double newWidth = (cmplxqd4_.getD().x - cmplxqd1_.getA().x) * k;
     double height = 0;
-    double dy = std::abs(cmplxqd4_.getD().y - cmplxqd1_.getA().y);
+    const double dy = std::abs(cmplxqd4_.getD().y - cmplxqd1_.getA().y);
     if (dy == 0)
     {
       height = cmplxqd1_.getB().y - cmplxqd1_.getA().y;
@@ -87,12 +87,12 @@ namespace abramov
     {
       height = dy;
     }
-    double newHeight = height * k;
-    point_t center = getFrameRect().pos;
-    double x2 = center.x + newWidth / 2;
-    double y2 = center.y + newHeight / 2;
-    double x1 = center.x - newWidth / 2;
-    double y1 = center.y - newHeight / 2;
+    const double newHeight = height * k;
+    const point_t center = getFrameRect().pos;
+    const double x2 = center.x + newWidth / 2;
+    const double y2 = center.y + newHeight / 2;
+    const double x1 = center.x - newWidth / 2;
+    const double y1 = center.y - newHeight / 2;
     if (x2 - x1 >= y2 - y1)
     {
       const double x3 = (x1 + x2) / 2;

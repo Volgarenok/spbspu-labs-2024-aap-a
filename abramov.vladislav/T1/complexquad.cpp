@@ -26,10 +26,10 @@ namespace abramov
 
   void getCoordsOfIntersection (point_t A, point_t B, point_t C, point_t D, double &x, double &y)
   {
-    double k1 = (B.y - A.y) / (B.x - A.x);
-    double b1 = A.y - A.x * k1;
-    double k2 = (D.y - C.y) / (D.x - C.x);
-    double b2 = C.y - C.x * k2;
+    const double k1 = (B.y - A.y) / (B.x - A.x);
+    const double b1 = A.y - A.x * k1;
+    const double k2 = (D.y - C.y) / (D.x - C.x);
+    const double b2 = C.y - C.x * k2;
     if (k1 == k2)
     {
       throw std::logic_error("There is no center\n");
@@ -58,15 +58,18 @@ namespace abramov
 
   double getTriangleArea(point_t A, point_t B, point_t O)
   {
-    double a = getLength(A, B);
-    double b = getLength(B, O);
-    double c = getLength(O, A);
-    double p = (a + b + c) / 2;
+    const double a = getLength(A, B);
+    const double b = getLength(B, O);
+    const double c = getLength(O, A);
+    const double p = (a + b + c) / 2;
     return std::sqrt(p * (p - a) * (p - b) * (p - c));
   }
 
   ComplexQuad::ComplexQuad(point_t A, point_t B, point_t C, point_t D):
-  A_(A), B_(B), C_(C), D_(D)
+   A_(A),
+   B_(B),
+   C_(C),
+   D_(D)
   {
     try
     {
@@ -82,7 +85,7 @@ namespace abramov
 
   double ComplexQuad::getArea() const
   {
-    point_t center = getCenterComplexQuad();
+    const point_t center = getCenterComplexQuad();
     return getTriangleArea(A_, D_, center) + getTriangleArea(B_, C_, center);
   }
 
@@ -120,9 +123,9 @@ namespace abramov
 
   void ComplexQuad::move(point_t p)
   {
-    point_t center = getCenterComplexQuad();
-    double dx = p.x - center.x;
-    double dy = p.y - center.y;
+    const point_t center = getCenterComplexQuad();
+    const double dx = p.x - center.x;
+    const double dy = p.y - center.y;
     move(dx, dy);
   }
 
@@ -140,7 +143,7 @@ namespace abramov
 
   void ComplexQuad::scale(double k)
   {
-    point_t O = getCenterComplexQuad();
+    const point_t O = getCenterComplexQuad();
     const double dk = k - 1;
     A_.x -= (O.x - A_.x) * dk;
     A_.y -= (O.y - A_.y) * dk;
