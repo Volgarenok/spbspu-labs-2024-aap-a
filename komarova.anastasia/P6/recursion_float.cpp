@@ -1,4 +1,5 @@
 #include "recursion_float.h"
+#include <cstdlib>
 #include <cctype>
 
 namespace
