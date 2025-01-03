@@ -22,7 +22,7 @@ std::ostream& kizhin::outputShapesInfo(std::ostream& os, const Shape* const* sha
 
 std::ostream& kizhin::outputShapeFrame(std::ostream& os, const Shape* shape)
 {
-  rectangle_t frame = shape->getFrameRect();
+  const rectangle_t frame = shape->getFrameRect();
   const double x1 = frame.pos.x - frame.width / 2;
   const double x2 = frame.pos.x + frame.width / 2;
   const double y1 = frame.pos.y - frame.height / 2;
@@ -39,9 +39,6 @@ double* kizhin::processInput(std::istream& is, std::ostream& errs, Shape** shape
   try {
     while (is) {
       currentParams = parseInputShape(is, currentName);
-      if (!is) {
-        break;
-      }
       if (currentName == "SCALE") {
         isScaleCommand = true;
         break;
@@ -50,7 +47,7 @@ double* kizhin::processInput(std::istream& is, std::ostream& errs, Shape** shape
         shapes[size] = createShape(currentName, currentParams);
         ++size;
       } catch (const std::exception& e) {
-        errs << "Error" << e.what() << '\n';
+        errs << "Error: " << e.what() << '\n';
       }
       delete[] currentParams;
       currentParams = nullptr;
