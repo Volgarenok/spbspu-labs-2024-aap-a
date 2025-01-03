@@ -13,6 +13,7 @@ namespace kiselev
     void move(point_t a) noexcept override;
     void move(double dx, double dy) noexcept override;
     void scale(double k) noexcept override;
+    ~Diamond();
 
   private:
     Complexquad * comp1;

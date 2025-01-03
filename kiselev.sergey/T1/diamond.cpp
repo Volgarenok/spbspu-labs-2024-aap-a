@@ -51,3 +51,8 @@ void kiselev::Diamond::scale(double k) noexcept
   comp1->scale(k);
   comp2->scale(k);
 }
+kiselev::Diamond::~Diamond()
+{
+  delete comp1;
+  delete comp2;
+}
