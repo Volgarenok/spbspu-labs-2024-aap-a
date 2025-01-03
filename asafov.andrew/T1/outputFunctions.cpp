@@ -166,7 +166,8 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
     d.x = temp;
     in >> temp;
     d.y = temp;
-    if ((a.x-b.x+a.y-b.y)*(a.x-c.x+a.y-c.y)*(a.x-d.x+a.y-d.y)*(b.x-c.x+b.y-c.y)*(b.x-d.x+b.y-d.y)*(c.x-d.x+c.y-d.y)==0)
+    if ((a.x-b.x+a.y-b.y)*(a.x-c.x+a.y-c.y)*(a.x-d.x+a.y-d.y)*
+      (b.x-c.x+b.y-c.y)*(b.x-d.x+b.y-d.y)*(c.x-d.x+c.y-d.y)==0)
     {
         throw std::logic_error("");
     }
