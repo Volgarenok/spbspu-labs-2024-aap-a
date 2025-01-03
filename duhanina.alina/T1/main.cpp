@@ -32,6 +32,10 @@ int main()
     catch (const std::invalid_argument&)
     {
       std::cerr << "Incorrect parameters\n";
+    }
+    catch (const std::logic_error&)
+    {
+      std::cerr << "Incorrect scale coef\n";
       destroy(shapes, shapeCount);
       return 1;
     }

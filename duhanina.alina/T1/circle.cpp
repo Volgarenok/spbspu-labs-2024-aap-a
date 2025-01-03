@@ -37,7 +37,7 @@ void duhanina::Circle::scale(double k)
 {
   if (k <= 0)
   {
-    throw std::invalid_argument("Error in parameters");
+    throw std::logic_error("Error in parameters");
   }
   radius_ *= k;
 }

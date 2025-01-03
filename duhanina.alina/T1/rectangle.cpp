@@ -45,7 +45,7 @@ void duhanina::Rectangle::scale(double k)
 {
   if (k <= 0)
   {
-    throw std::invalid_argument("Error in parameters");
+    throw std::logic_error("Error in parameters");
   }
   point_t pos = this->getFrameRect().pos;
   lt_.x = pos.x + (lt_.x - pos.x) * k;
