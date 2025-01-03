@@ -144,8 +144,8 @@ namespace abramov
     try
     {
       Square *shp = dynamic_cast< Square* >(figure);
-      Square *shape = new Square(shp->getpLeftLower(), shp->getlen());
-      return shape;
+//      Square *shape = new Square(shp->getpLeftLower(), shp->getlen());
+      return shp;
     }
     catch (const std::bad_cast &e)
     {
