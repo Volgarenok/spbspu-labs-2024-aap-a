@@ -70,7 +70,7 @@ namespace kushekbaev
           input >> scaleCoeff;
           if (scaleCoeff <= 0)
           {
-            throw std::invalid_argument("incorrect scaleCoeff");
+            std::cerr << "incorrect scaleCoeff";
             errorexit = true;
             kushekbaev::clearMemory(capacity, shapeCounter);
           }
