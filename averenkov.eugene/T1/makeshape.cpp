@@ -1,49 +1,66 @@
 #include "makeshape.hpp"
 #include <iostream>
 
-averenkov::Rectangle* averenkov::makeRectangle(std::istream& input)
+void averenkov::makeRectangle(averenkov::Shape** shapes, size_t& shapeCount, std::istream& input)
 {
   point_t a, c;
-  if (!(input >> a.x >> a.y >> c.x >> c.y) || a.x > c.x || a.y > c.x)
-  {
-    throw std::invalid_argument("Invalid RECTANGLE");
-  }
+    if (!(input >> a.x >> a.y >> c.x >> c.y) || a.x > c.x || a.y > c.x)
+    {
+      return;
+    }
   Rectangle* rect = new Rectangle(a, c);
-  return rect;
+  shapes[shapeCount++] = rect;
+  return;
 }
 
-averenkov::Diamond* averenkov::makeDiamond(std::istream& input)
+void averenkov::makeDiamond(averenkov::Shape** shapes, size_t& shapeCount, std::istream& input)
 {
   point_t a;
   point_t b;
   point_t c;
-  if (!(input >> a.x >> a.y >> b.x >> b.y >> c.x >> c.y))
+  try
   {
-    throw std::invalid_argument("Invalid DIAMOND");
+    if (!(input >> a.x >> a.y >> b.x >> b.y >> c.x >> c.y))
+    {
+      throw std::invalid_argument("Invalid DIAMOND");
+    }
+    if (!((a.x == b.x && a.y == c.y) ||
+      (a.x == c.x && a.y == b.y) ||
+      (b.x == a.x && b.y == c.y) ||
+      (b.x == c.x && b.y == a.y) ||
+      (c.x == a.x && c.y == b.y) ||
+      (c.x == b.x && c.y == a.y)))
+    {
+      throw std::invalid_argument("Invalid DIAMOND");
+    }
   }
-  if (!((a.x == b.x && a.y == c.y) ||
-    (a.x == c.x && a.y == b.y) ||
-    (b.x == a.x && b.y == c.y) ||
-    (b.x == c.x && b.y == a.y) ||
-    (c.x == a.x && c.y == b.y) ||
-    (c.x == b.x && c.y == a.y)))
+  catch(...)
   {
-    throw std::invalid_argument("Invalid DIAMOND");
+    return;
   }
   Diamond* diam = new Diamond(a, b, c);
-  return diam;
+  shapes[shapeCount++] = diam;
+  return;
 }
 
-averenkov::Ellipse* averenkov::makeEllipse(std::istream& input)
+void averenkov::makeEllipse(averenkov::Shape** shapes, size_t& shapeCount, std::istream& input)
 {
   point_t center;
   double a, b;
-  if (!(input >> center.x >> center.y >> a >> b) || a <= 0 || b <= 0)
+  try
   {
-    throw std::invalid_argument("Invalid ELLIPSE");
+    if (!(input >> center.x >> center.y >> a >> b) || a <= 0 || b <= 0)
+    {
+      throw std::invalid_argument("Invalid ELLIPSE");
+    }
+  }
+  catch(...)
+  {
+    return;
   }
   Ellipse* ellip = new Ellipse(center, a, b);
-  return ellip;
+  shapes[shapeCount++] = ellip;
+  return;
 }
 
 

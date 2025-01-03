@@ -7,8 +7,8 @@
 
 namespace averenkov
 {
-  Rectangle* makeRectangle(std::istream& in);
-  Diamond* makeDiamond(std::istream& in);
-  Ellipse* makeEllipse(std::istream& in);
+  void makeRectangle(Shape** shapes, size_t& shapeCount, std::istream& in);
+  void makeDiamond(Shape** shapes, size_t& shapeCount, std::istream& in);
+  void makeEllipse(Shape** shapes, size_t& shapeCount, std::istream& in);
 }
 #endif

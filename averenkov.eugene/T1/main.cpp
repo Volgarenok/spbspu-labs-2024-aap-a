@@ -14,6 +14,7 @@
 #include "getline.hpp"
 #include "shapeScale.hpp"
 #include "makeshape.hpp"
+#include "shapelist.hpp"
 int main()
 {
   averenkov::Shape* shapes[10000];
@@ -33,21 +34,22 @@ int main()
       }
       else if (command == "RECTANGLE")
       {
-        shapes[shapeCount++] = averenkov::makeRectangle(std::cin);
+        averenkov::makeRectangle(shapes, shapeCount, std::cin);
       }
       else if (command == "ELLIPSE")
       {
-        shapes[shapeCount++] = averenkov::makeEllipse(std::cin);
+        averenkov::makeEllipse(shapes, shapeCount, std::cin);
       }
       else if (command == "DIAMOND")
       {
-        shapes[shapeCount++] = averenkov::makeDiamond(std::cin);
+        averenkov::makeDiamond(shapes, shapeCount, std::cin);
       }
       else if (command == "SCALE")
       {
         hasScale = true;
         if (shapeCount == 0)
         {
+          std::cout << "SHAPECOUNT IS" << shapeCount << "A";
           std::cerr << "Nothing to scale\n";
           return 1;
         }
