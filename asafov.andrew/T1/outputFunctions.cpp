@@ -1,5 +1,6 @@
 #include "outputFunctions.hpp"
 #include <iomanip>
+#include <cmath>
 #include "exception"
 #include "rectangle.hpp"
 #include "circle.hpp"
