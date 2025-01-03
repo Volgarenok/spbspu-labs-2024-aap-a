@@ -29,26 +29,14 @@ zakirov::Polygon::Polygon(size_t size, point_t * points) :
 
 double zakirov::Polygon::getArea() const
 {
-  point_t central_p = {0.0, 0.0};
-  double area = 0.0;
-  for (size_t i = 0; i < size_; ++i)
+  double result = 0;
+  for (std::size_t i = 0; i < size_ - 1; ++i)
   {
-    central_p.x += points_[i].x;
-    central_p.y += points_[i].y;
+    result += points_[i].x * points_[i + 1].y - points_[i].y * points_[i + 1].x;
   }
-
-  central_p.x /= size_;
-  central_p.y /= size_;
-  for (size_t i = 0; i < size_; ++i)
-  {
-    double side_a = get_distance(central_p, points_[i]);
-    double side_b = get_distance(central_p, points_[i + 1]);
-    double side_c = get_distance(points_[i], points_[i + 1]);
-    double half_p = (side_a + side_b + side_c) / 2.0;
-    area += std::sqrt(half_p * (half_p - side_a) * (half_p - side_b) * (half_p - side_c));
-  }
-
-  return area;
+  result += points_[size_ - 1].x * points_[0].y - points_[size_ - 1].y * points_[0].x;
+  result *= 0.5;
+  return std::abs(result);
 }
 
 zakirov::rectangle_t zakirov::Polygon::getFrameRect() const
