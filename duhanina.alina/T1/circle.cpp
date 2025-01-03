@@ -2,8 +2,15 @@
 #include <stdexcept>
 #include <cmath>
 
-duhanina::Circle::Circle(point_t pos, double radius)
-  : pos_(pos), radius_(radius) {}
+duhanina::Circle::Circle(point_t pos, double radius):
+  pos_(pos),
+  radius_(radius)
+{
+  if (radius <= 0)
+  {
+    throw std::invalid_argument("Error in parameters");
+  }
+}
 
 double duhanina::Circle::getArea() const
 {
@@ -28,5 +35,9 @@ void duhanina::Circle::move(double dx, double dy)
 
 void duhanina::Circle::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Error in parameters");
+  }
   radius_ *= k;
 }

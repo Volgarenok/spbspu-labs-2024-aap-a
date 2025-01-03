@@ -1,8 +1,15 @@
 #include "rectangle.hpp"
 #include <stdexcept>
 
-duhanina::Rectangle::Rectangle(point_t lt, point_t rt)
-  : lt_(lt), rt_(rt) {}
+duhanina::Rectangle::Rectangle(point_t lt, point_t rt):
+  lt_(lt),
+  rt_(rt)
+{
+  if (lt.x >= rt.x || lt.y >= rt.y)
+  {
+    throw std::invalid_argument("Error in parameters");
+  }
+}
 
 double duhanina::Rectangle::getArea() const
 {
@@ -23,10 +30,7 @@ void duhanina::Rectangle::move(point_t newPos)
   point_t pos = this->getFrameRect().pos;
   double dx = newPos.x - pos.x;
   double dy = newPos.y - pos.y;
-  lt_.x += dx;
-  lt_.y += dy;
-  rt_.x += dx;
-  rt_.y += dy;
+  move(dx, dy);
 }
 
 void duhanina::Rectangle::move(double dx, double dy)
@@ -39,6 +43,10 @@ void duhanina::Rectangle::move(double dx, double dy)
 
 void duhanina::Rectangle::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Error in parameters");
+  }
   point_t pos = this->getFrameRect().pos;
   lt_.x = pos.x + (lt_.x - pos.x) * k;
   lt_.y = pos.y + (lt_.y - pos.y) * k;

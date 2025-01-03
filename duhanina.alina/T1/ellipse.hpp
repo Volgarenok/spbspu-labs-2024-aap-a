@@ -4,7 +4,8 @@
 
 namespace duhanina
 {
-  class Ellipse : public Shape {
+  class Ellipse final: public Shape
+  {
   public:
     Ellipse(point_t center, double horizRadius, double vertRadius);
     double getArea() const override;

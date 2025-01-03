@@ -4,7 +4,8 @@
 
 namespace duhanina
 {
-  class Rectangle : public Shape {
+  class Rectangle final: public Shape
+  {
   public:
     Rectangle(point_t lt, point_t rt);
     double getArea() const override;

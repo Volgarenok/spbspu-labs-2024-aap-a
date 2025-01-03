@@ -1,98 +1,54 @@
 #include <iostream>
-#include "makeShape.hpp"
+#include "destroy.hpp"
 #include "printResult.hpp"
+#include "createCommand.hpp"
+
+using namespace duhanina;
 
 int main()
 {
-  duhanina::Shape* shapes[10000];
+  Shape* shapes[10000] = {};
   size_t shapeCount = 0;
   std::string shapeType;
   bool hasScale = false;
-  bool hasError = false;
   while (std::cin >> shapeType)
   {
     try
     {
-      if (shapeType == "RECTANGLE")
-      {
-        try
-        {
-          shapes[shapeCount] = duhanina::makeRectangle(std::cin);
-          shapeCount++;
-        }
-        catch (const std::invalid_argument&)
-        {
-          hasError = true;
-        }
-      }
-      else if (shapeType == "CIRCLE")
-      {
-        try
-        {
-          shapes[shapeCount] = duhanina::makeCircle(std::cin);
-          shapeCount++;
-        }
-        catch (const std::invalid_argument&)
-        {
-          hasError = true;
-        }
-      }
-      else if (shapeType == "ELLIPSE")
-      {
-        try
-        {
-          shapes[shapeCount] = duhanina::makeEllipse(std::cin);
-          shapeCount++;
-        }
-        catch (const std::invalid_argument&)
-        {
-          hasError = true;
-        }
-      }
-      else if (shapeType == "SCALE")
+      createShape(shapeType, shapes, shapeCount);
+      if (shapeType == "SCALE")
       {
         if (shapeCount == 0)
         {
           std::cerr << "No shape\n";
-          duhanina::destroy(shapes, shapeCount);
-          return 1;
-        }
-        double x = 0;
-        double y = 0;
-        duhanina::point_t point;
-        std::cin >> x >> y;
-        point.x = x;
-        point.y = y;
-        double scalingFactor = 0;
-        std::cin >> scalingFactor;
-        if (scalingFactor <= 0)
-        {
-          std::cerr << "Incorrect scalingFactor\n";
-          duhanina::destroy(shapes, shapeCount);
+          destroy(shapes, shapeCount);
           return 1;
         }
         hasScale = true;
-        duhanina::processScaling(shapes, shapeCount, point, scalingFactor);
+        createScale(std::cin, std::cout, shapes, shapeCount);
         break;
       }
     }
-    catch(const std::bad_alloc& e)
+    catch (const std::invalid_argument&)
+    {
+      std::cerr << "Incorrect parameters\n";
+    }
+    catch (const std::bad_alloc& e)
     {
       std::cerr << "Error memory\n";
-      duhanina::destroy(shapes, shapeCount);
+      destroy(shapes, shapeCount);
       return 1;
     }
   }
-  if (hasError)
+  if (std::cin.eof())
   {
-    std::cerr << "Incorrect parameters\n";
+    if (!hasScale)
+    {
+      std::cerr << "No scale\n";
+      destroy(shapes, shapeCount);
+      return 1;
+    }
   }
-  if (!hasScale)
-  {
-    std::cerr << "No scale\n";
-    duhanina::destroy(shapes, shapeCount);
-    return 1;
-  }
-  duhanina::destroy(shapes, shapeCount);
+  destroy(shapes, shapeCount);
   return 0;
 }

@@ -1,5 +1,5 @@
 #include "makeShape.hpp"
-#include <iostream>
+#include <stdexcept>
 
 duhanina::Rectangle* duhanina::makeRectangle(std::istream& in)
 {
@@ -7,10 +7,9 @@ duhanina::Rectangle* duhanina::makeRectangle(std::istream& in)
   double ltY = 0;
   double rtX = 0;
   double rtY = 0;
-  in >> ltX >> ltY >> rtX >> rtY;
-  if (ltX >= rtX || ltY >= rtY)
+  if (!(in >> ltX >> ltY >> rtX >> rtY))
   {
-    throw std::invalid_argument("Error in parameters");
+    throw std::invalid_argument("Incorrect input");
   }
   Rectangle* rect = new Rectangle({ ltX, ltY }, { rtX, rtY });
   return rect;
@@ -20,12 +19,10 @@ duhanina::Circle* duhanina::makeCircle(std::istream& in)
 {
   double x = 0;
   double y = 0;
-  in >> x >> y;
   double radius = 0;
-  in >> radius;
-  if (radius <= 0)
+  if (!(in >> x >> y >> radius))
   {
-    throw std::invalid_argument("Error in parameters");
+    throw std::invalid_argument("Incorrect input");
   }
   Circle* circ = new Circle({ x, y }, radius);
   return circ;
@@ -35,13 +32,11 @@ duhanina::Ellipse* duhanina::makeEllipse(std::istream& in)
 {
   double x = 0;
   double y = 0;
-  in >> x >> y;
   double vertRadius = 0;
   double horizRadius = 0;
-  in >> vertRadius >> horizRadius;
-  if (vertRadius <= 0 || horizRadius <= 0)
+  if (!(in >> x >> y >> vertRadius >> horizRadius))
   {
-    throw std::invalid_argument("Error in parameters");
+    throw std::invalid_argument("Incorrect input");
   }
   Ellipse* ell = new Ellipse({ x, y }, horizRadius, vertRadius);
   return ell;

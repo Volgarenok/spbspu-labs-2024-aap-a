@@ -1,5 +1,4 @@
-#include "shape.hpp"
-#include <cstddef>
+#include "destroy.hpp"
 
 void duhanina::destroy(Shape** shapes, size_t size)
 {

@@ -1,8 +1,17 @@
 #include "ellipse.hpp"
 #include <cmath>
+#include <stdexcept>
 
-duhanina::Ellipse::Ellipse(point_t center, double horizRadius, double vertRadius)
-  : center_(center), horizRadius_(horizRadius), vertRadius_(vertRadius) {}
+duhanina::Ellipse::Ellipse(point_t center, double horizRadius, double vertRadius):
+  center_(center),
+  horizRadius_(horizRadius),
+  vertRadius_(vertRadius)
+{
+  if (vertRadius <= 0 || horizRadius <= 0)
+  {
+    throw std::invalid_argument("Error in parameters");
+  }
+}
 
 double duhanina::Ellipse::getArea() const
 {
@@ -27,6 +36,10 @@ void duhanina::Ellipse::move(double dx, double dy)
 
 void duhanina::Ellipse::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Error in parameters");
+  }
   horizRadius_ *= k;
   vertRadius_ *= k;
 }

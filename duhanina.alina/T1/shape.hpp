@@ -1,7 +1,6 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 #include "base-types.hpp"
-#include <cstddef>
 
 namespace duhanina
 {
@@ -15,7 +14,6 @@ namespace duhanina
     virtual void move(double dx, double dy) = 0;
     virtual void scale(double k) = 0;
   };
-  void destroy(Shape** shapes, size_t size);
 }
 
 #endif

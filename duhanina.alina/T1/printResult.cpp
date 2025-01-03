@@ -3,7 +3,21 @@
 #include <iomanip>
 #include <cstddef>
 
-void duhanina::printFiguresInfo(Shape** shapes, size_t shapeCount)
+void duhanina::outFigures(std::ostream& out, Shape** shapes, size_t shapeCount)
+{
+  for (size_t i = 0; i < shapeCount; ++i)
+  {
+    if (shapes[i])
+    {
+      rectangle_t frame = shapes[i]->getFrameRect();
+      out << " " << frame.pos.x - frame.width / 2.0 << " ";
+      out << frame.pos.y - frame.height / 2.0 << " ";
+      out << frame.pos.x + frame.width / 2.0 << " ";
+      out << frame.pos.y + frame.height / 2.0;
+    }
+  }
+}
+double duhanina::calcArea(Shape** shapes, size_t shapeCount)
 {
   double totalArea = 0;
   for (size_t i = 0; i < shapeCount; ++i)
@@ -13,26 +27,18 @@ void duhanina::printFiguresInfo(Shape** shapes, size_t shapeCount)
       totalArea += shapes[i]->getArea();
     }
   }
+  return totalArea;
+}
 
-  std::cout << std::fixed << std::setprecision(1) << totalArea;
-
-  for (size_t i = 0; i < shapeCount; ++i)
-  {
-    if (shapes[i])
-    {
-      rectangle_t frame = shapes[i]->getFrameRect();
-      std::cout << " " << frame.pos.x - frame.width / 2.0 << " ";
-      std::cout << frame.pos.y - frame.height / 2.0 << " ";
-      std::cout << frame.pos.x + frame.width / 2.0 << " ";
-      std::cout << frame.pos.y + frame.height / 2.0;
-    }
-  }
-  std::cout << "\n";
+void duhanina::printFiguresInfo(std::ostream& out, Shape** shapes, size_t shapeCount)
+{
+  out << std::fixed << std::setprecision(1) << calcArea(shapes, shapeCount);
+  outFigures(out, shapes, shapeCount);
+  out << "\n";
 }
 
 void duhanina::processScaling(Shape** shapes, size_t shapeCount, point_t point, double scalingFactor)
 {
-  printFiguresInfo(shapes, shapeCount);
   for (size_t i = 0; i < shapeCount; ++i)
   {
     duhanina::point_t pos = shapes[i]->getFrameRect().pos;
@@ -44,5 +50,4 @@ void duhanina::processScaling(Shape** shapes, size_t shapeCount, point_t point, 
     shapes[i]->scale(scalingFactor);
     shapes[i]->move(vect.x * -1, vect.y * -1);
   }
-  printFiguresInfo(shapes, shapeCount);
 }
