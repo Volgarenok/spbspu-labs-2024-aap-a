@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <resize_line.hpp>
 #include <cstddef>
+#include <memory>
 
 namespace
 {
