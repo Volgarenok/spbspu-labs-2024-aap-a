@@ -10,6 +10,7 @@ namespace zakirov
   {
   public:
     Polygon(size_t size, point_t * points);
+    ~Polygon();
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t target) override;
