@@ -1,7 +1,10 @@
 #include "createCommand.hpp"
+#include <iostream>
+#include <stdexcept>
 #include "shape.hpp"
 #include "makeShape.hpp"
 #include "printResult.hpp"
+#include "destroy.hpp"
 
 void duhanina::createShape(const std::string& shapeType, Shape** shapes, size_t& shapeCount)
 {
@@ -39,4 +42,25 @@ void duhanina::createScale(std::istream& in, size_t shapeCount, double& scalingF
     throw std::logic_error("Incorrect scalingFactor");
   }
   point = { x, y };
+}
+
+void duhanina::inputShapes(std::ostream& out, duhanina::Shape** shapes, size_t& shapeCount)
+{
+  std::string shapeType;
+  while (std::cin >> shapeType && shapeType != "SCALE")
+  {
+    try
+    {
+      duhanina::createShape(shapeType, shapes, shapeCount);
+    }
+    catch (const std::invalid_argument& e)
+    {
+      out << e.what() << "\n";
+    }
+    catch (const std::exception& e)
+    {
+      out << e.what() << "\n";
+      destroy(shapes, shapeCount);
+    }
+  }
 }
