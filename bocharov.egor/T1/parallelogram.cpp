@@ -1,7 +1,7 @@
 #include "parallelogram.hpp"
 #include <cmath>
 
-bocharov::Parallelogram::Parallelogram(const point_t & p1, const point_t & p2, const point_t & p3)
+bocharov::Parallelogram::Parallelogram(point_t p1, point_t p2, point_t p3)
 {
   pos_.x = (p1.x + p3.x) / 2.0;
   pos_.y = (p1.y + p3.y) / 2.0;
