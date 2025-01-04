@@ -66,13 +66,6 @@ int main()
     free(scale_data);
     return 1;
   }
-  else if (scale_data[4] <= 0)
-  {
-    std::cerr << "Warning! The figure change coefficient is incorrect." << '\n';
-    zakirov::clear_shapes(shapes, location);
-    free(scale_data);
-    return 1;
-  }
 
   double total_area = 0;
   for (std::size_t i = 0; i < location; ++i)
@@ -87,7 +80,18 @@ int main()
   for (std::size_t i = 0; i < location; ++i)
   {
     zakirov::point_t target{scale_data[2], scale_data[3]};
-    zakirov::scale_from_point(shapes[i], target, scale_data[4]);
+    try
+    {
+      zakirov::scale_from_point(shapes[i], target, scale_data[4]);
+    }
+    catch(const std::invalid_argument& e)
+    {
+      std::cerr << "Warning! The figure change coefficient is incorrect." << '\n';
+      zakirov::clear_shapes(shapes, location);
+      free(scale_data);
+      return 1;
+    }
+
     total_area += shapes[i] -> getArea();
   }
 

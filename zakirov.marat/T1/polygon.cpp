@@ -88,6 +88,11 @@ void zakirov::Polygon::move(double bias_x, double bias_y)
 
 void zakirov::Polygon::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Incorrect coefficient");
+  }
+
   rectangle_t object_frame = getFrameRect();
   for (std::size_t i = 0; i < size_; ++i)
   {

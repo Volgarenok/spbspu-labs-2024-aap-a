@@ -52,7 +52,7 @@ void zakirov::Rectangle::scale(double k)
 {
   if (k <= 0)
   {
-    return;
+    throw std::invalid_argument("Incorrect coefficient");
   }
 
   point_t center = getFrameRect().pos;

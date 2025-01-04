@@ -42,6 +42,11 @@ void zakirov::Ring::move(double bias_x, double bias_y)
 
 void zakirov::Ring::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Incorrect coefficient");
+  }
+
   in_radius_ *= k;
   ex_radius_ *= k;
 }
