@@ -1,5 +1,6 @@
 #include "shape_utils.hpp"
 #include <stdexcept>
+#include <string>
 #include "polygon.hpp"
 #include "rectangle.hpp"
 #include "regular.hpp"
@@ -47,7 +48,8 @@ void kizhin::deleteShapes(Shape* const* shapes)
   }
 }
 
-kizhin::Shape* kizhin::createShape(const std::string& shapeName, const double* shapeParams)
+kizhin::Shape*
+kizhin::createShape(const std::string& shapeName, const double* shapeParams)
 {
   if (shapeName == "RECTANGLE") {
     return createRectangle(shapeParams);
@@ -70,7 +72,10 @@ kizhin::Rectangle* kizhin::createRectangle(const double* params)
   }
   const double width = rightUp.x - leftDown.x;
   const double height = rightUp.y - leftDown.y;
-  const point_t center{ 0.5 * (leftDown.x + rightUp.x), 0.5 * (leftDown.y + rightUp.y) };
+  const point_t center{
+    0.5 * (leftDown.x + rightUp.x),
+    0.5 * (leftDown.y + rightUp.y),
+  };
   return new Rectangle{ width, height, center };
 }
 

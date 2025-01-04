@@ -1,5 +1,6 @@
 #include "polygon.hpp"
 #include <stdexcept>
+#include <utility>
 #include "point_utils.hpp"
 
 namespace kizhin {
@@ -53,8 +54,11 @@ kizhin::Polygon& kizhin::Polygon::operator=(const Polygon& rhs)
 
 kizhin::Polygon& kizhin::Polygon::operator=(Polygon&& rhs) noexcept
 {
-  delete[] vertices_;
-  swap(rhs);
+  if (this != &rhs) {
+    delete[] vertices_;
+    vertices_ = nullptr;
+    swap(rhs);
+  }
   return *this;
 }
 
@@ -151,7 +155,8 @@ bool kizhin::hasDuplicates(const point_t* begin, const point_t* end)
   return false;
 }
 
-size_t kizhin::countEqual(const point_t* begin, const point_t* end, const point_t val)
+size_t
+kizhin::countEqual(const point_t* begin, const point_t* end, const point_t val)
 {
   size_t count = 0;
   for (; begin != end; ++begin) {
