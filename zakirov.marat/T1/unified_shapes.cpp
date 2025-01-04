@@ -154,10 +154,7 @@ zakirov::Rectangle * zakirov::make_rectangle(double bottom_x, double bottom_y, d
 
 zakirov::Circle * zakirov::make_circle(double center_x, double center_y, double radius)
 {
-  point_t center;
-  center.x = center_x;
-  center.y = center_y;
-
+  point_t center{center_x, center_y};
   Circle * circle = static_cast< Circle * >(malloc(sizeof(Circle)));
   try
   {
@@ -173,10 +170,7 @@ zakirov::Circle * zakirov::make_circle(double center_x, double center_y, double 
 
 zakirov::Ring * zakirov::make_ring(double center_x, double center_y, double in_radius, double ex_radius)
 {
-  point_t center;
-  center.x = center_x;
-  center.y = center_y;
-
+  point_t center{center_x, center_y};
   Ring * ring = static_cast< Ring * >(malloc(sizeof(Ring)));
   try
   {
@@ -343,11 +337,7 @@ void zakirov::scale_from_point(Shape * mutable_shape, point_t target, double k)
   point_t nailed_p1 = mutable_shape -> getFrameRect().pos;
   mutable_shape -> move(target);
   point_t nailed_p2 = mutable_shape -> getFrameRect().pos;
-
-  point_t bias;
-  bias.x = (nailed_p2.x - nailed_p1.x) * k;
-  bias.y = (nailed_p2.y - nailed_p1.y) * k;
-
+  point_t bias{(nailed_p2.x - nailed_p1.x) * k, (nailed_p2.y - nailed_p1.y) * k};
   mutable_shape -> scale(k);
   mutable_shape -> move(-bias.x, -bias.y);
 }
@@ -357,15 +347,8 @@ void zakirov::output_frame(std::ostream & out, Shape ** shapes, size_t quantity)
   for (size_t i = 0; i < quantity; ++i)
   {
     zakirov::rectangle_t frame = shapes[i] -> getFrameRect();
-
-    zakirov::point_t frame_bottom_left;
-    frame_bottom_left.x = frame.pos.x - frame.width / 2;
-    frame_bottom_left.y = frame.pos.y - frame.height / 2;
-
-    zakirov::point_t frame_top_right;
-    frame_top_right.x = frame.pos.x + frame.width / 2;
-    frame_top_right.y = frame.pos.y + frame.height / 2;
-
+    zakirov::point_t frame_bottom_left{frame.pos.x - frame.width / 2, frame.pos.y - frame.height / 2};
+    zakirov::point_t frame_top_right{frame.pos.x + frame.width / 2, frame.pos.y + frame.height / 2};
     out << ' ' << frame_bottom_left.x << ' ' << frame_bottom_left.y;
     out << ' ' << frame_top_right.x << ' ' << frame_top_right.y;
   }

@@ -20,11 +20,7 @@ double zakirov::Circle::getArea() const
 
 zakirov::rectangle_t zakirov::Circle::getFrameRect() const
 {
-  rectangle_t сircumscribed;
-  сircumscribed.width = radius_ * 2;
-  сircumscribed.height = radius_* 2;
-  сircumscribed.pos = center_;
-
+  rectangle_t сircumscribed{radius_ * 2, radius_* 2, center_};
   return сircumscribed;
 }
 
