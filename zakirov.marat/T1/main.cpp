@@ -71,7 +71,7 @@ int main()
   zakirov::output_frame(std::cout, shapes, location);
 
   zakirov::point_t target{scale_data[2], scale_data[3]};
-  double coefficient = scale_data[4]; 
+  double coefficient = scale_data[4];
 
   try
   {

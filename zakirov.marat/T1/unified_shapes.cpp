@@ -7,34 +7,6 @@
 
 namespace
 {
-  bool compare_strings(const char * first_string, const char * second_string)
-  {
-    std::size_t location = 0;
-    if (first_string == nullptr || second_string == nullptr)
-    {
-      return true;
-    }
-
-    while (first_string[location] != '\0' && second_string[location] != '\0')
-    {
-      if (first_string[location] != second_string[location])
-      {
-        return true;
-      }
-
-      ++location;
-    }
-
-    if (first_string[location] == second_string[location])
-    {
-      return false;
-    }
-    else
-    {
-      return true;
-    }
-  }
-
   void get_part(std::istream & in, char * line, std::size_t start, std::size_t finish, char interrupt_el)
   {
     for (; start < finish; ++start)
@@ -262,23 +234,23 @@ double * zakirov::get_data(std::istream & in)
     free(shape);
     return nullptr;
   }
-  else if (!compare_strings(shape, rectangle))
+  else if (!std::strcmp(shape, rectangle))
   {
     data[0] = 2.0;
   }
-  else if (!compare_strings(shape, circle))
+  else if (!std::strcmp(shape, circle))
   {
     data[0] = 3.0;
   }
-  else if (!compare_strings(shape, ring))
+  else if (!std::strcmp(shape, ring))
   {
     data[0] = 4.0;
   }
-  else if (!compare_strings(shape, polygon))
+  else if (!std::strcmp(shape, polygon))
   {
     data[0] = 5.0;
   }
-  else if (!compare_strings(shape, scale))
+  else if (!std::strcmp(shape, scale))
   {
     data[0] = 1.0;
   }
