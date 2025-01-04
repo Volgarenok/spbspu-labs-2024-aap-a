@@ -15,7 +15,7 @@ int main()
   {
     inputShapes(std::cout, shapes, shapeCount);
     createScale(std::cin, shapeCount, scalingFactor, point);
-    printFiguresInfo(std::cout, shapes, shapeCount);
+    printFiguresInfo(std::cerr, shapes, shapeCount);
     processScaling(shapes, shapeCount, point, scalingFactor);
     printFiguresInfo(std::cout, shapes, shapeCount);
   }
@@ -35,5 +35,6 @@ int main()
     destroy(shapes, shapeCount);
     return 1;
   }
+  destroy(shapes, shapeCount);
   return 0;
 }
