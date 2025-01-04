@@ -3,25 +3,25 @@
 #include "rectangle.hpp"
 #include <iostream>
 
-double cherkasov::calculArea(Shape** shapes, size_t shapeCount)
+double cherkasov::calculArea(Shape** shapes, size_t shape)
 {
   double totalArea = 0;
-  for (size_t i = 0; i < shapeCount; i++)
+  for (size_t i = 0; i < shape; i++)
   {
     totalArea += shapes[i]->getArea();
   }
   return totalArea;
 }
-void cherkasov::deleteShapes(Shape** shapes, size_t shapeCount)
+void cherkasov::deleteShapes(Shape** shapes, size_t shape)
 {
-  for (size_t i = 0; i < shapeCount; i++)
+  for (size_t i = 0; i < shape; i++)
   {
     delete shapes[i];
   }
 }
-void cherkasov::outputFrameCoordinates(Shape** shapes, size_t shapeCount)
+void cherkasov::outputFrameCoordinates(Shape** shapes, size_t shape)
 {
-  for (size_t i = 0; i < shapeCount; i++)
+  for (size_t i = 0; i < shape; i++)
   {
     rectangle_t rectangle = shapes[i]->getFrameRect();
     double x1 = rectangle.pos.x - rectangle.width / 2.0;
@@ -32,14 +32,14 @@ void cherkasov::outputFrameCoordinates(Shape** shapes, size_t shapeCount)
   }
   std::cout << "\n";
 }
-void cherkasov::scaling(Shape** shapes, size_t shapeCount, point_t p, double scalingFactor)
+void cherkasov::scaling(Shape** shapes, size_t shape, point_t p, double scalingFactor)
 {
   if (scalingFactor <= 0)
   {
     std::cerr << "Error: scalingFactor must be positive.\n";
     return;
   }
-  for (size_t i = 0; i < shapeCount; i++)
+  for (size_t i = 0; i < shape; i++)
   {
     point_t startPoint = shapes[i]->getFrameRect().pos;
     shapes[i]->move(p);
