@@ -62,8 +62,7 @@ bocharov::Concave::Concave(point_t a, point_t b, point_t c, point_t d):
 
 double bocharov::Concave::getArea() const
 {
-  return std::abs(a_.x * b_.y + b_.x * c_.y + c_.x * d_.y + d_.x * a_.y - b_.x * a_.y - c_.x
-    * b_.y - d_.x * c_.y - a_.x * d_.y) / 2.0;
+  return std::abs(a_.x * b_.y + b_.x * c_.y + c_.x * d_.y + d_.x * a_.y - b_.x * a_.y - c_.x * b_.y - d_.x * c_.y - a_.x * d_.y) / 2.0;
 }
 bocharov::rectangle_t bocharov::Concave::getFrameRect() const
 {
