@@ -327,22 +327,22 @@ void zakirov::scale_from_point(Shape * mutable_shape, point_t target, double k)
 {
   if (k <= 0)
   {
-    return;
+    throw std::invalid_argument("Incorrect coefficient");
   }
 
-  point_t nailed_p1 = mutable_shape -> getFrameRect().pos;
-  mutable_shape -> move(target);
-  point_t nailed_p2 = mutable_shape -> getFrameRect().pos;
+  point_t nailed_p1 = mutable_shape->getFrameRect().pos;
+  mutable_shape->move(target);
+  point_t nailed_p2 = mutable_shape->getFrameRect().pos;
   point_t bias{(nailed_p2.x - nailed_p1.x) * k, (nailed_p2.y - nailed_p1.y) * k};
-  mutable_shape -> scale(k);
-  mutable_shape -> move(-bias.x, -bias.y);
+  mutable_shape->scale(k);
+  mutable_shape->move(-bias.x, -bias.y);
 }
 
 void zakirov::output_frame(std::ostream & out, Shape ** shapes, std::size_t quantity)
 {
   for (std::size_t i = 0; i < quantity; ++i)
   {
-    zakirov::rectangle_t frame = shapes[i] -> getFrameRect();
+    zakirov::rectangle_t frame = shapes[i]->getFrameRect();
     zakirov::point_t frame_bottom_left{frame.pos.x - frame.width / 2, frame.pos.y - frame.height / 2};
     zakirov::point_t frame_top_right{frame.pos.x + frame.width / 2, frame.pos.y + frame.height / 2};
     out << ' ' << frame_bottom_left.x << ' ' << frame_bottom_left.y;

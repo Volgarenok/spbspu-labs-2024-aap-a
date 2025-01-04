@@ -70,7 +70,7 @@ int main()
   double total_area = 0;
   for (std::size_t i = 0; i < location; ++i)
   {
-    total_area += shapes[i] -> getArea();
+    total_area += shapes[i]->getArea();
   }
 
   std::cout << std::fixed << std::setprecision(1) << total_area;
@@ -92,7 +92,7 @@ int main()
       return 1;
     }
 
-    total_area += shapes[i] -> getArea();
+    total_area += shapes[i]->getArea();
   }
 
   std::cout << total_area;
