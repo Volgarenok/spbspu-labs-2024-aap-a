@@ -40,10 +40,6 @@ void kiselev::Rectangle::move(double dx, double dy) noexcept
 }
 void kiselev::Rectangle::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::invalid_argument("Incorrect coefficient");
-  }
   point_t centre = this->getFrameRect().pos;
   leftDown_.x = centre.x + (leftDown_.x - centre.x) * k;
   leftDown_.y = centre.y + (leftDown_.y - centre.y) * k;
