@@ -15,12 +15,10 @@ int main()
   catch (const std::bad_alloc & e)
   {
     std::cerr << e.what() << '\n';
-    clear(myShapes, shapesCount);
   }
   catch (const std::logic_error & e)
   {
     std::cerr << e.what() << '\n';
-    clear(myShapes, shapesCount);
   }
   if (shapeCount == -1)
   {
