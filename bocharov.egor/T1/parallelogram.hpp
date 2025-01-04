@@ -3,7 +3,7 @@
 #include "shape.hpp"
 namespace bocharov
 {
-  class Parallelogram : public Shape
+  class Parallelogram final: public Shape
   {
     point_t pos_;
     point_t p1_;
