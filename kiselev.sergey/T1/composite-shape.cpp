@@ -149,3 +149,7 @@ void kiselev::CompositeShape::scale(double k) noexcept
     shapes[i]->move(-vector.x, -vector.y);
   }
 }
+kiselev::CompositeShape::~CompositeShape()
+{
+    clear();
+}

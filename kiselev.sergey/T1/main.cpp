@@ -19,6 +19,12 @@ int main()
   {
     while (std::cin >> titleShape)
     {
+      if (std::cin.eof())
+      {
+        std::cerr << "The input ended with eof\n";
+        kiselev::destroyShapePtr(shapes, countShape);
+        return 1;
+      }
       try
       {
         if (titleShape == "RECTANGLE")
@@ -35,12 +41,6 @@ int main()
         {
           shapes[countShape] = kiselev::make_complexquad(std::cin);
           countShape++;
-        }
-        else if (std::cin.eof())
-        {
-          std::cerr << "The input ended with eof\n";
-          kiselev::destroyShapePtr(shapes, countShape);
-          return 1;
         }
         else if (titleShape == "SCALE")
         {
@@ -68,6 +68,12 @@ int main()
     {
       std::cerr << "The scales were not passed\n";
       return 1;
+    }
+    if (ratio == 0)
+    {
+        std::cerr << "Not entered SCALE\n";
+        kiselev::destroyShapePtr(shapes, countShape);
+        return 1;
     }
     std::cout << std::fixed << std::setprecision(1) << getSumArea(shapes, countShape);
     kiselev::printCoordinatesRect(std::cout, shapes, countShape);
