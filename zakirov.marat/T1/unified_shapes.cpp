@@ -200,7 +200,7 @@ zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t * points)
   }
   catch(const std::invalid_argument & e)
   {
-    polygon->~Polygon();
+    free(points);
     free(polygon);
     throw e;
   }
