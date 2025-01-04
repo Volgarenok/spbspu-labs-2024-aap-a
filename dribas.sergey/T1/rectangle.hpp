@@ -3,7 +3,7 @@
 #include "shape.hpp"
 namespace dribas
 {
-  class Rectangle : public Shape
+  class Rectangle final: public Shape
   {
   public:
     Rectangle(point_t leftDown, point_t rightUp);

@@ -3,7 +3,7 @@
 #include "shape.hpp"
 namespace dribas
 {
-  class Diamond : public Shape
+  class Diamond final: public Shape
   {
   public:
     Diamond(point_t a, point_t b, point_t c);
