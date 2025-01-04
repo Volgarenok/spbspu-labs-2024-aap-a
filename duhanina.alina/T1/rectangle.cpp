@@ -34,8 +34,8 @@ void duhanina::Rectangle::move(const point_t& newPos)
 {
   point_t pos = this->getFrameRect().pos;
   point_t offset = calculateOffset(pos, newPos);
-  movePoint(pos, offset.x, offset.y);
-  move(pos.x, pos.y);
+  movePoint(lt_, offset.x, offset.y);
+  movePoint(rt_, offset.x, offset.y);
 }
 
 void duhanina::Rectangle::move(double dx, double dy)
