@@ -6,81 +6,75 @@
 #include "additional-utilities.hpp"
 #include "diamond.hpp"
 #include "triangle.hpp"
-nikonov::Shape *nikonov::make_shape(const std::string &name, double nums[])
+nikonov::Shape *nikonov::make_shape(const std::string &name, std::istream &input)
 {
   if (name == "RECTANGLE")
   {
-    return make_rectangle(nums);
+    return make_rectangle(input);
   }
   else if (name == "DIAMOND")
   {
-    return make_diamond(nums);
+    return make_diamond(input);
   }
   else if (name == "TRIANGLE")
   {
-    return make_triangle(nums);
+    return make_triangle(input);
   }
   else
   {
-    return nullptr;
+    throw std::runtime_error("RE:noncorrect figure name");
   }
 }
-nikonov::Rectangle *nikonov::make_rectangle(double nums[])
+nikonov::Rectangle *nikonov::make_rectangle(std::istream &input)
 {
+  constexpr size_t rectangleParametersNum = 4;
+  double nums[rectangleParametersNum] = {};
+  for (size_t i = 0; i < rectangleParametersNum; ++i)
+  {
+    input >> nums[i];
+  }
+  if (!input)
+  {
+    throw std::runtime_error("RE:noncorrect rectangle parameters");
+  }
   point_t lbp({ nums[0], nums[1] });
   point_t rtp({ nums[2], nums[3] });
-  Rectangle *result = nullptr;
-  try
-  {
-    result = new Rectangle(lbp, rtp);
-  }
-  catch (const std::logic_error &e)
-  {
-    return nullptr;
-  }
-  catch (const std::bad_alloc &e)
-  {
-    throw;
-  }
+  Rectangle *result = new Rectangle(lbp, rtp);
   return result;
 }
-nikonov::Diamond *nikonov::make_diamond(double nums[])
+nikonov::Diamond *nikonov::make_diamond(std::istream &input)
 {
+  constexpr size_t diamondParametersNum = 6;
+  double nums[diamondParametersNum] = {};
+  for (size_t i = 0; i < diamondParametersNum; ++i)
+  {
+    input >> nums[i];
+  }
+  if (!input)
+  {
+    throw std::runtime_error("RE:noncorrect diamond parameters");
+  }
   point_t p1({ nums[0], nums[1] });
   point_t p2({ nums[2], nums[3] });
   point_t p3({ nums[4], nums[5] });
-  Diamond *result = nullptr;
-  try
-  {
-    result = new Diamond(p1, p2, p3);
-  }
-  catch (const std::logic_error &e)
-  {
-    return nullptr;
-  }
-  catch (const std::bad_alloc &e)
-  {
-    throw;
-  }
+  Diamond *result = new Diamond(p1, p2, p3);
   return result;
 }
-nikonov::Triangle *nikonov::make_triangle(double nums[])
+nikonov::Triangle *nikonov::make_triangle(std::istream &input)
 {
+  constexpr size_t triangleParametersNum = 6;
+  double nums[triangleParametersNum] = {};
+  for (size_t i = 0; i < triangleParametersNum; ++i)
+  {
+    input >> nums[i];
+  }
+  if (!input)
+  {
+    throw std::runtime_error("RE:noncorrect triangle parameters");
+  }
   point_t a({ nums[0], nums[1] });
   point_t b({ nums[2], nums[3] });
   point_t c({ nums[4], nums[5] });
-  Triangle *result = nullptr;
-  try
-  {
-    result = new Triangle(a, b, c);
-  }
-  catch (const std::logic_error &e)
-  {
-    return nullptr;
-  }
-  catch (const std::bad_alloc &e)
-  {
-    throw;
-  }
+  Triangle *result = new Triangle(a, b, c);
   return result;
 }

@@ -6,54 +6,36 @@
 void nikonov::fillShapeCollection(std::istream &input, Shape **collection, size_t &cnt, size_t &noncorrect)
 {
   std::string name = "";
-  size_t n = 0;
-  constexpr size_t rectangleParametersNum = 4;
-  constexpr size_t triangleOrDiamondParametersNum = 6;
-  size_t maxNum = std::max(rectangleParametersNum, triangleOrDiamondParametersNum);
-  double *nums = new double[maxNum];
   while (input >> name && name != "SCALE")
   {
     if (name[0] == '\n')
     {
       continue;
     }
-    else if (name == "RECTANGLE")
-    {
-      n = rectangleParametersNum;
-    }
-    else if (name == "TRIANGLE" || name == "DIAMOND")
-    {
-      n = triangleOrDiamondParametersNum;
-    }
-    else
-    {
-      input.clear();
-      input.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
-      continue;
-    }
-    for (size_t i = 0; i < n; ++i)
-    {
-      input >> nums[i];
-    }
-    if (!input)
+    else if (!input)
     {
       ++noncorrect;
       input.clear();
       input.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
       continue;
     }
-    Shape *newElem = make_shape(name, nums);
-    if (newElem != nullptr)
+    try
     {
+      Shape *newElem = make_shape(name, input);
       collection[cnt] = newElem;
       ++cnt;
     }
-    else
+    catch (const std::logic_error &e)
     {
       ++noncorrect;
     }
+    catch (const std::runtime_error &e)
+    {
+      input.clear();
+      input.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
+      continue;
+    }
   }
-  delete []nums;
 }
 void nikonov::destoy(Shape **collection, size_t cnt)
 {
