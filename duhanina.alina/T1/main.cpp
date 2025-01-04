@@ -10,9 +10,9 @@ int main()
   Shape* shapes[10000] = {};
   size_t shapeCount = 0;
   std::string shapeType;
-  while (std::cin >> shapeType)
+  try
   {
-    try
+    while (std::cin >> shapeType)
     {
       createShape(shapeType, shapes, shapeCount);
       if (shapeType == "SCALE")
@@ -20,26 +20,26 @@ int main()
         break;
       }
     }
-    catch (const std::invalid_argument& e)
+    if (std::cin.eof())
     {
-      std::cerr << e.what() << "\n";
-    }
-    catch (const std::exception& e)
-    {
-      std::cerr << e.what() << "\n";
+      std::cerr << "No scale\n";
       destroy(shapes, shapeCount);
       return 1;
     }
+    printFiguresInfo(std::cout, shapes, shapeCount);
+    createScale(std::cin, shapes, shapeCount);
+    printFiguresInfo(std::cout, shapes, shapeCount);
   }
-  if (std::cin.eof())
+  catch (const std::invalid_argument& e)
   {
-    std::cerr << "No scale\n";
+    std::cerr << e.what() << "\n";
+  }
+  catch (const std::exception& e)
+  {
+    std::cerr << e.what() << "\n";
     destroy(shapes, shapeCount);
     return 1;
   }
-  printFiguresInfo(std::cout, shapes, shapeCount);
-  createScale(std::cin, shapes, shapeCount);
-  printFiguresInfo(std::cout, shapes, shapeCount);
   destroy(shapes, shapeCount);
   return 0;
 }
