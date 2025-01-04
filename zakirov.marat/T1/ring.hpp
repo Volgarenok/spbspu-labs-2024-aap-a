@@ -4,7 +4,7 @@
 
 namespace zakirov
 {
-  class Ring : public Shape
+  class Ring:public Shape
   {
   public:
     Ring(point_t center, double ex_radius, double in_radius);

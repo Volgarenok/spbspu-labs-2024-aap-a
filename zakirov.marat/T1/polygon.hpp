@@ -6,7 +6,7 @@
 
 namespace zakirov
 {
-  class Polygon : public Shape
+  class Polygon:public Shape
   {
   public:
     Polygon(std::size_t size, point_t * points);

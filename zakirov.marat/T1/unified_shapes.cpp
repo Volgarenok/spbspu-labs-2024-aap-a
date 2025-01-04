@@ -45,6 +45,10 @@ namespace
         line[start] = '\0';
         break;
       }
+      else if (!in)
+      {
+        throw std::logic_error("The stream is broken");
+      }
     }
   }
 
@@ -75,7 +79,17 @@ namespace
         return expanded_line;
       }
 
-      get_part(in, expanded_line, start, finish, interrupt_el);
+      try
+      {
+        get_part(in, expanded_line, start, finish, interrupt_el);
+      }
+      catch(const std::exception& e)
+      {
+        free(expanded_line);
+        free(line);
+        throw e;
+      }
+
       free(line);
       line = expanded_line;
       for (std::size_t i = start; i < finish; ++i)
@@ -200,35 +214,28 @@ zakirov::Polygon * zakirov::make_polygon(std::size_t points_num, point_t * point
 
 zakirov::Shape * zakirov::make_shape(const double * data)
 {
-  try
+  if (data[0] == 2.0 && data[1] == 4.0)
   {
-    if (data[0] == 2.0 && data[1] == 4.0)
-    {
-      return make_rectangle(data[2], data[3], data[4], data[5]);
-    }
-    else if (data[0] == 3.0 && data[1] == 3.0)
-    {
-      return make_circle(data[2], data[3], data[4]);
-    }
-    else if (data[0] == 4.0 && data[1] == 4.0)
-    {
-      return make_ring(data[2], data[3], data[4], data[5]);
-    }
-    else if (data[0] == 5.0)
-    {
-      point_t * converted_data = convert_polygon(data);
-      std::size_t points_size = static_cast< std::size_t >(data[1] / 2);
-      Polygon * polygon = make_polygon(points_size, converted_data);
-      return polygon;
-    }
-    else
-    {
-      return nullptr;
-    }
+    return make_rectangle(data[2], data[3], data[4], data[5]);
   }
-  catch (const std::invalid_argument & e)
+  else if (data[0] == 3.0 && data[1] == 3.0)
   {
-    throw e;
+    return make_circle(data[2], data[3], data[4]);
+  }
+  else if (data[0] == 4.0 && data[1] == 4.0)
+  {
+    return make_ring(data[2], data[3], data[4], data[5]);
+  }
+  else if (data[0] == 5.0)
+  {
+    point_t * converted_data = convert_polygon(data);
+    std::size_t points_size = static_cast< std::size_t >(data[1] / 2);
+    Polygon * polygon = make_polygon(points_size, converted_data);
+    return polygon;
+  }
+  else
+  {
+    return nullptr;
   }
 }
 
