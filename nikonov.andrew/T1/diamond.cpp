@@ -53,14 +53,10 @@ void nikonov::Diamond::move(double x, double y)
 void nikonov::Diamond::doScale(double k)
 {
   rectangle_t crntRect = getFrameRect();
-  crntRect.width *= k;
-  crntRect.height *= k;
-  double newTopX = crntRect.pos.x + crntRect.width / 2;
-  double newTopY = crntRect.pos.y + crntRect.height / 2;
-  double newRightX = crntRect.pos.x + crntRect.width / 2;
-  double newRightY = crntRect.pos.y + crntRect.height / 2;
-  topP_ = point_t({ newTopX, newTopY });
-  rightP_ = point_t({ newRightX, newRightY });
+  double diffX = crntRect.width * k - crntRect.width;
+  double diffY = crntRect.height * k - crntRect.height;
+  movePoint(topP_, 0, diffY / 2);
+  movePoint(rightP_, diffX / 2, 0);
 }
 namespace
 {

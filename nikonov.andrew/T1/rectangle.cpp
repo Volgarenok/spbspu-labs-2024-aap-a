@@ -38,6 +38,6 @@ void nikonov::Rectangle::doScale(double k)
   rectangle_t crntRect = getFrameRect();
   double diffX = crntRect.width * k - crntRect.width;
   double diffY = crntRect.height * k - crntRect.height;
-  movePoint(lbp_, diffX / 2, diffY / 2);
+  movePoint(lbp_, (diffX / 2) * (-1), (diffY / 2) * (-1));
   movePoint(rtp_, diffX / 2, diffY / 2);
 }
