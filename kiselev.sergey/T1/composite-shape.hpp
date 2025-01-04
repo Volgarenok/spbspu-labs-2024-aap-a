@@ -23,7 +23,7 @@ namespace kiselev
     rectangle_t getFrameRect() const noexcept;
     void move(point_t a) noexcept;
     void move(double dx, double dy) noexcept;
-    void scale(double k) noexcept;
+    void scale(double k, point_t scale) noexcept;
     ~CompositeShape();
   private:
     void clear() noexcept;

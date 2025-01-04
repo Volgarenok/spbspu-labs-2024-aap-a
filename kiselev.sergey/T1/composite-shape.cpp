@@ -28,7 +28,10 @@ kiselev::CompositeShape::CompositeShape(kiselev::CompositeShape & cmp) :
   shapes = new Shape *[capacity];
   if (shapes)
   {
-    std::copy(cmp.shapes, cmp.shapes+capacity, shapes);
+    for (size_t i = 0; i < capacity; ++i)
+    {
+        shapes[i] = cmp[i];
+    }
   }
 }
 kiselev::CompositeShape::CompositeShape(kiselev::CompositeShape && cmp) noexcept :
@@ -136,9 +139,8 @@ void kiselev::CompositeShape::move(double dx, double dy) noexcept
     shapes[i]->move(dx, dy);
   }
 }
-void kiselev::CompositeShape::scale(double k) noexcept
+void kiselev::CompositeShape::scale(double k, point_t scale) noexcept
 {
-  point_t scale = getFrameRect().pos;
   for (size_t i = 0; i < realSize; ++i)
   {
     kiselev::point_t beforeScale = shapes[i]->getFrameRect().pos;
