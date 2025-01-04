@@ -13,7 +13,7 @@ int main()
   point_t point = { 0, 0 };
   try
   {
-    inputShapes(std::cerr, shapes, shapeCount);
+    inputShapes(std::cin, std::cerr, shapes, shapeCount);
     createScale(std::cin, shapeCount, scalingFactor, point);
     printFiguresInfo(std::cout, shapes, shapeCount);
     processScaling(shapes, shapeCount, point, scalingFactor);
@@ -26,12 +26,6 @@ int main()
   catch (const std::exception& e)
   {
     std::cerr << e.what() << "\n";
-    destroy(shapes, shapeCount);
-    return 1;
-  }
-  if (std::cin.eof())
-  {
-    std::cerr << "No scale\n";
     destroy(shapes, shapeCount);
     return 1;
   }

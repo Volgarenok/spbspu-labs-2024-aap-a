@@ -1,27 +1,21 @@
 #include "createCommand.hpp"
-#include <iostream>
 #include <stdexcept>
-#include "shape.hpp"
 #include "makeShape.hpp"
-#include "printResult.hpp"
 #include "destroy.hpp"
 
-void duhanina::createShape(const std::string& shapeType, Shape** shapes, size_t& shapeCount)
+void duhanina::createShape(std::istream& in, const std::string& shapeType, Shape** shapes, size_t& shapeCount)
 {
   if (shapeType == "RECTANGLE")
   {
-    shapes[shapeCount] = makeRectangle(std::cin);
-    shapeCount++;
+    shapes[shapeCount++] = makeRectangle(in);
   }
   else if (shapeType == "CIRCLE")
   {
-    shapes[shapeCount] = makeCircle(std::cin);
-    shapeCount++;
+    shapes[shapeCount++] = makeCircle(in);
   }
   else if (shapeType == "ELLIPSE")
   {
-    shapes[shapeCount] = makeEllipse(std::cin);
-    shapeCount++;
+    shapes[shapeCount++] = makeEllipse(in);
   }
 }
 
@@ -31,8 +25,8 @@ void duhanina::createScale(std::istream& in, size_t shapeCount, double& scalingF
   {
     throw std::logic_error("No shape");
   }
-  double x = point.x;
-  double y = point.y;
+  double x = 0;
+  double y = 0;
   if (!(in >> x >> y >> scalingFactor))
   {
     throw std::invalid_argument("Incorrect input");
@@ -40,14 +34,14 @@ void duhanina::createScale(std::istream& in, size_t shapeCount, double& scalingF
   point = { x, y };
 }
 
-void duhanina::inputShapes(std::ostream& out, duhanina::Shape** shapes, size_t& shapeCount)
+void duhanina::inputShapes(std::istream& in, std::ostream& out, Shape** shapes, size_t& shapeCount)
 {
   std::string shapeType;
-  while (std::cin >> shapeType && shapeType != "SCALE")
+  while (in >> shapeType && shapeType != "SCALE")
   {
     try
     {
-      duhanina::createShape(shapeType, shapes, shapeCount);
+      createShape(in, shapeType, shapes, shapeCount);
     }
     catch (const std::invalid_argument& e)
     {
@@ -58,5 +52,10 @@ void duhanina::inputShapes(std::ostream& out, duhanina::Shape** shapes, size_t& 
       out << e.what() << "\n";
       destroy(shapes, shapeCount);
     }
+  }
+  if (in.eof())
+  {
+    out << "No scale\n";
+    destroy(shapes, shapeCount);
   }
 }
