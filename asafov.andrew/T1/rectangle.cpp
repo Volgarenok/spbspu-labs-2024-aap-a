@@ -7,7 +7,7 @@ lb(a), rt(b)
 
 double asafov::Rectangle::getArea() const
 {
-  return abs((lb.x - rt.x) * (lb.y - rt.y));
+  return pow((lb.x - rt.x), 0.5) * pow((lb.y - rt.y), 0.5));
 }
 
 rectangle_t asafov::Rectangle::getFrameRect() const
