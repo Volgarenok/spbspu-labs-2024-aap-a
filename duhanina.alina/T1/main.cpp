@@ -17,9 +17,6 @@ int main()
       createShape(shapeType, shapes, shapeCount);
       if (shapeType == "SCALE")
       {
-        //printFiguresInfo(std::cout, shapes, shapeCount);
-        //createScale(std::cin, shapes, shapeCount);
-        //printFiguresInfo(std::cout, shapes, shapeCount);
         break;
       }
     }
