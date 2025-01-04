@@ -58,6 +58,6 @@ void duhanina::inputShapes(std::istream& in, std::ostream& out, Shape** shapes, 
   }
   if (in.eof())
   {
-    out << "No scale\n";
+    throw std::logic_error("No scale");
   }
 }
