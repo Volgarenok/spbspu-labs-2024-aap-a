@@ -13,10 +13,10 @@ double asafov::Rectangle::getArea() const
 rectangle_t asafov::Rectangle::getFrameRect() const
 {
   rectangle_t frect;
-  frect.height = rt.y - lb.y;
-  frect.width = rt.x - lb.x;
-  frect.pos.x = lb.x + rt.x / 2;
-  frect.pos.y = lb.y + rt.y / 2;
+  frect.height = abs(lb.y - rt.y);
+  frect.width = abs(lb.x - rt.x);
+  frect.pos.x = abs(lb.x + rt.x) / 2;
+  frect.pos.y = abs(lb.y + rt.y) / 2;
   return frect;
 }
 
