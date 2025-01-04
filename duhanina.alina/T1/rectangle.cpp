@@ -3,7 +3,7 @@
 #include <cstddef>
 #include <cmath>
 
-duhanina::Rectangle::Rectangle(point_t lt, point_t rt):
+duhanina::Rectangle::Rectangle(const point_t& lt, const point_t& rt):
   lt_(lt),
   rt_(rt)
 {
@@ -27,16 +27,16 @@ duhanina::rectangle_t duhanina::Rectangle::getFrameRect() const
   return { { posX, posY }, width, height };
 }
 
-duhanina::point_t duhanina::Rectangle::calculateOffset(const duhanina::point_t& currentPos, const duhanina::point_t& newPos)
+void duhanina::Rectangle::movePoint(const duhanina::point_t& pos, const duhanina::point_t& newPos)
 {
-  return { newPos.x - currentPos.x, newPos.y - currentPos.y };
+  point_t offset = pos.calculateOffset(newPos);
+  move(offset.x, offset.y);
 }
 
 void duhanina::Rectangle::move(const point_t& newPos)
 {
   point_t pos = this->getFrameRect().pos;
-  point_t offset = calculateOffset(pos, newPos);
-  move(offset.x, offset.y);
+  movePoint(pos, newPos);
 }
 
 void duhanina::Rectangle::move(double dx, double dy)
@@ -49,10 +49,7 @@ void duhanina::Rectangle::move(double dx, double dy)
 
 duhanina::point_t duhanina::Rectangle::scalePoint(const duhanina::point_t& point, const duhanina::point_t& origin, double k)
 {
-  point_t scaledPoint;
-  scaledPoint.x = origin.x + (point.x - origin.x) * k;
-  scaledPoint.y = origin.y + (point.y - origin.y) * k;
-  return scaledPoint;
+  return { origin.x + (point.x - origin.x) * k, origin.y + (point.y - origin.y) * k };
 }
 
 void duhanina::Rectangle::scale(double k)
@@ -77,7 +74,7 @@ duhanina::Ellipse** duhanina::Rectangle::fillWithEllipses()
     {
       throw std::runtime_error("Maximum number of ellipses");
     }
-    ellipses = new Ellipse*[ellipseCount];
+    ellipses = new Ellipse*[ellipseCount] {};
     double ellipseWidth = (rt_.x - lt_.x) / verticalCuts;
     double ellipseHeight = (rt_.y - lt_.y) / horizontalCuts;
     for (size_t i = 0; i < verticalCuts; ++i)

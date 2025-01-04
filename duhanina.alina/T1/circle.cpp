@@ -1,7 +1,7 @@
 #include "circle.hpp"
 #include <stdexcept>
 
-duhanina::Circle::Circle(point_t pos, double radius):
+duhanina::Circle::Circle(const point_t& pos, const double& radius):
   pos_(pos),
   radius_(radius)
 {
@@ -29,8 +29,8 @@ void duhanina::Circle::move(const point_t& newPos)
 
 void duhanina::Circle::move(double dx, double dy)
 {
-  pos_.x += dx;
-  pos_.y += dy;
+  point_t newPos = { pos_.x + dx, pos_.y + dy };
+  move(newPos);
 }
 
 void duhanina::Circle::scale(double k)

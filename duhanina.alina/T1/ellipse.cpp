@@ -1,7 +1,7 @@
 #include "ellipse.hpp"
 #include <stdexcept>
 
-duhanina::Ellipse::Ellipse(point_t center, double horizRadius, double vertRadius):
+duhanina::Ellipse::Ellipse(const point_t& center, const double& horizRadius, const double& vertRadius):
   center_(center),
   horizRadius_(horizRadius),
   vertRadius_(vertRadius)
@@ -30,8 +30,8 @@ void duhanina::Ellipse::move(const point_t& newPos)
 
 void duhanina::Ellipse::move(double dx, double dy)
 {
-  center_.x += dx;
-  center_.y += dy;
+  point_t newPos = { center_.x + dx, center_.y + dy };
+  move(newPos);
 }
 
 void duhanina::Ellipse::scale(double k)

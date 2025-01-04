@@ -35,6 +35,6 @@ void duhanina::createScale(std::istream& in, Shape** shapes, size_t shapeCount)
   {
     throw std::invalid_argument("Incorrect input");
   }
-  duhanina::point_t point = { x, y };
-  duhanina::processScaling(shapes, shapeCount, point, scalingFactor);
+  point_t point = { x, y };
+  processScaling(shapes, shapeCount, point, scalingFactor);
 }

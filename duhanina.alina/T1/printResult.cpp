@@ -17,10 +17,7 @@ double duhanina::calcArea(const Shape* const* shapes, size_t shapeCount)
   double totalArea = 0;
   for (size_t i = 0; i < shapeCount; ++i)
   {
-    if (shapes[i])
-    {
-      totalArea += shapes[i]->getArea();
-    }
+    totalArea += shapes[i]->getArea();
   }
   return totalArea;
 }
@@ -40,10 +37,10 @@ void duhanina::processScaling(Shape* const* shapes, size_t shapeCount, point_t p
 {
   for (size_t i = 0; i < shapeCount; ++i)
   {
-    duhanina::point_t pos = shapes[i]->getFrameRect().pos;
+    point_t pos = shapes[i]->getFrameRect().pos;
     shapes[i]->move(point);
-    duhanina::point_t newPos = shapes[i]->getFrameRect().pos;
-    duhanina::point_t vect;
+    point_t newPos = shapes[i]->getFrameRect().pos;
+    point_t vect;
     vect.x = (newPos.x - pos.x) * scalingFactor;
     vect.y = (newPos.y - pos.y) * scalingFactor;
     shapes[i]->scaleCheck(scalingFactor);

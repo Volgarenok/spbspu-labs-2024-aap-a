@@ -17,9 +17,9 @@ int main()
       createShape(shapeType, shapes, shapeCount);
       if (shapeType == "SCALE")
       {
-        printFiguresInfo(std::cout, shapes, shapeCount);
-        createScale(std::cin, shapes, shapeCount);
-        printFiguresInfo(std::cout, shapes, shapeCount);
+        //printFiguresInfo(std::cout, shapes, shapeCount);
+        //createScale(std::cin, shapes, shapeCount);
+        //printFiguresInfo(std::cout, shapes, shapeCount);
         break;
       }
     }
@@ -27,13 +27,7 @@ int main()
     {
       std::cerr << e.what() << "\n";
     }
-    catch (const std::logic_error& e)
-    {
-      std::cerr << e.what() << "\n";
-      destroy(shapes, shapeCount);
-      return 1;
-    }
-    catch (const std::bad_alloc& e)
+    catch (const std::exception& e)
     {
       std::cerr << e.what() << "\n";
       destroy(shapes, shapeCount);
@@ -46,6 +40,9 @@ int main()
     destroy(shapes, shapeCount);
     return 1;
   }
+  printFiguresInfo(std::cout, shapes, shapeCount);
+  createScale(std::cin, shapes, shapeCount);
+  printFiguresInfo(std::cout, shapes, shapeCount);
   destroy(shapes, shapeCount);
   return 0;
 }
