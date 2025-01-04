@@ -118,7 +118,7 @@ void kizhin::Polygon::computeFrameRect()
 
 void kizhin::Polygon::computeCenter()
 {
-  point_t sum { 0.0, 0.0 };
+  point_t sum{ 0.0, 0.0 };
   for (point_t* i = vertices_; i != vertices_ + size_; ++i) {
     sum += *i;
   }
