@@ -15,8 +15,8 @@ rectangle_t asafov::Square::getFrameRect() const
   rectangle_t frect;
   frect.height = side;
   frect.width = side;
-  frect.pos.x = (lb.x + side) / 2;
-  frect.pos.y = (lb.y + side) / 2;
+  frect.pos.x = lb.x + side / 2;
+  frect.pos.y = lb.y + side / 2;
   return frect;
 }
 
