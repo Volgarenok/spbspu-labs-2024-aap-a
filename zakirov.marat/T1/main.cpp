@@ -66,36 +66,28 @@ int main()
     return 1;
   }
 
-  double total_area = 0;
-  for (std::size_t i = 0; i < location; ++i)
-  {
-    total_area += shapes[i]->getArea();
-  }
-
-  std::cout << std::fixed << std::setprecision(1) << total_area;
+  std::cout << std::fixed << std::setprecision(1);
+  std::cout << zakirov::get_total_area(shapes, location) << ' ';
   zakirov::output_frame(std::cout, shapes, location);
 
-  total_area = 0;
-  for (std::size_t i = 0; i < location; ++i)
-  {
-    zakirov::point_t target{scale_data[2], scale_data[3]};
-    try
-    {
-      zakirov::scale_from_point(shapes[i], target, scale_data[4]);
-    }
-    catch(const std::invalid_argument& e)
-    {
-      std::cerr << "Warning! The figure change coefficient is incorrect." << '\n';
-      zakirov::clear_shapes(shapes, location);
-      free(scale_data);
-      return 1;
-    }
+  zakirov::point_t target{scale_data[2], scale_data[3]};
+  double coefficient = scale_data[4]; 
 
-    total_area += shapes[i]->getArea();
+  try
+  {
+    zakirov::scale_all_shapes(shapes, target, coefficient, location);
+  }
+  catch(const std::invalid_argument& e)
+  {
+    std::cerr << "Warning! The figure change coefficient is incorrect." << '\n';
+    zakirov::clear_shapes(shapes, location);
+    free(scale_data);
+    return 1;
   }
 
-  std::cout << total_area;
+  std::cout << zakirov::get_total_area(shapes, location) << ' ';
   zakirov::output_frame(std::cout, shapes, location);
+
   if (shape_flag)
   {
     std::cerr << "Warning! One or more figures are specified incorrectly." << '\n';

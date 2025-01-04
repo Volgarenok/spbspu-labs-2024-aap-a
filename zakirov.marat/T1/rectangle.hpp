@@ -4,7 +4,7 @@
 
 namespace zakirov
 {
-  class Rectangle:public Shape
+  class Rectangle: public Shape
   {
   public:
     Rectangle(point_t bottom_left_, point_t top_right_);

@@ -19,6 +19,8 @@ namespace zakirov
   void scale_from_point(Shape * mutable_shape, point_t target, double k);
   void output_frame(std::ostream & out, Shape ** shapes, std::size_t quantity);
   void clear_shapes(Shape ** shapes, std::size_t quantity);
+  void scale_all_shapes(Shape ** shapes, point_t target, double k, std::size_t size);
+  double get_total_area(Shape ** shapes, std::size_t size);
 }
 
 #endif

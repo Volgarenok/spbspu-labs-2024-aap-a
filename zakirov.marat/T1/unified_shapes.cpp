@@ -352,9 +352,10 @@ void zakirov::output_frame(std::ostream & out, Shape ** shapes, std::size_t quan
     zakirov::rectangle_t frame = shapes[i]->getFrameRect();
     zakirov::point_t frame_bottom_left{frame.pos.x - frame.width / 2, frame.pos.y - frame.height / 2};
     zakirov::point_t frame_top_right{frame.pos.x + frame.width / 2, frame.pos.y + frame.height / 2};
-    out << ' ' << frame_bottom_left.x << ' ' << frame_bottom_left.y;
-    out << ' ' << frame_top_right.x << ' ' << frame_top_right.y;
+    out << frame_bottom_left.x << ' ' << frame_bottom_left.y << ' ';
+    out << frame_top_right.x << ' ' << frame_top_right.y;
   }
+
   out << '\n';
 }
 
@@ -365,4 +366,23 @@ void zakirov::clear_shapes(Shape ** shapes, std::size_t quantity)
     shapes[i]->~Shape();
     free(shapes[i]);
   }
+}
+
+void zakirov::scale_all_shapes(Shape ** shapes, point_t target, double k, std::size_t size)
+{
+  for (std::size_t i = 0; i < size; ++i)
+  {
+    zakirov::scale_from_point(shapes[i], target, k);
+  }
+}
+
+double zakirov::get_total_area(Shape ** shapes, std::size_t size)
+{
+  double total_area = 0.0;
+  for (std::size_t i = 0; i < size; ++i)
+  {
+    total_area += shapes[i]->getArea();
+  }
+
+  return total_area;
 }
