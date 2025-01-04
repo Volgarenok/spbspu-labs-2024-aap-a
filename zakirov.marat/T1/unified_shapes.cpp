@@ -171,35 +171,68 @@ zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t * points)
 
 zakirov::Shape * zakirov::make_shape(const double * data)
 {
-  Shape * shape = nullptr;
-  try
+  if (data[0] == 2.0 && data[1] == 4.0)
   {
-    if (data[0] == 2.0 && data[1] == 4.0)
+    Rectangle * rectangle = nullptr;
+    try
     {
-      shape = make_rectangle(data[2], data[3], data[4], data[5]);
+      rectangle = make_rectangle(data[2], data[3], data[4], data[5]);
+      return rectangle;
     }
-    else if (data[0] == 3.0 && data[1] == 3.0)
+    catch(const std::invalid_argument & e)
     {
-      shape = make_circle(data[2], data[3], data[4]);
+      free(rectangle);
+      throw e;
     }
-    else if (data[0] == 4.0 && data[1] == 4.0)
+  }
+  else if (data[0] == 3.0 && data[1] == 3.0)
+  {
+    Circle * circle = nullptr;
+    try
     {
-      shape = make_ring(data[2], data[3], data[4], data[5]);
+      circle = make_circle(data[2], data[3], data[4]);
+      return circle;
     }
-    else if (data[0] == 5.0)
+    catch(const std::invalid_argument & e)
+    {
+      free(circle);
+      throw e;
+    }
+  }
+  else if (data[0] == 4.0 && data[1] == 4.0)
+  {
+    Ring * ring = nullptr;
+    try
+    {
+      ring = make_ring(data[2], data[3], data[4], data[5]);
+      return ring;
+    }
+    catch(const std::invalid_argument & e)
+    {
+      free(ring);
+      throw e;
+    }
+  }
+  else if (data[0] == 5.0)
+  {
+    Polygon * polygon = nullptr;
+    try
     {
       point_t * converted_data = convert_polygon(data);
       size_t points_size = static_cast< size_t >(data[1] / 2);
-      shape = make_polygon(points_size, converted_data);
+      Polygon * polygon = make_polygon(points_size, converted_data);
+      return polygon;
     }
-
-    return shape;
+    catch(const std::exception& e)
+    {
+      polygon->~Polygon();
+      free(polygon);
+      throw e;
+    }
   }
-  catch (const std::invalid_argument & e)
+  else
   {
-    shape->~Shape();
-    free(shape);
-    throw e;
+    return nullptr;
   }
 }
 
