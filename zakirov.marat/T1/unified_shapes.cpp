@@ -164,7 +164,7 @@ zakirov::Circle * zakirov::make_circle(double center_x, double center_y, double 
     new (circle) Circle(center, radius);
     return circle;
   }
-  catch(const std::exception& e)
+  catch(const std::invalid_argument & e)
   {
     free(circle);
     throw e;
@@ -183,7 +183,7 @@ zakirov::Ring * zakirov::make_ring(double center_x, double center_y, double in_r
     new (ring) Ring(center, in_radius, ex_radius);
     return ring;
   }
-  catch(const std::exception& e)
+  catch(const std::invalid_argument & e)
   {
     free(ring);
     throw e;
@@ -198,7 +198,7 @@ zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t * points)
     new (polygon) Polygon(points_num, points);
     return polygon;
   }
-  catch(const std::exception& e)
+  catch(const std::invalid_argument & e)
   {
     polygon->~Polygon();
     free(polygon);
