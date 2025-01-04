@@ -1,5 +1,6 @@
 #include "rectangle.hpp"
 #include <stdexcept>
+#include "additional-utilities.hpp"
 #include "base-types.hpp"
 nikonov::Rectangle::Rectangle(const point_t &lbp, const point_t &rtp):
   lbp_(lbp),
@@ -33,11 +34,9 @@ void nikonov::Rectangle::move(double x, double y)
   movePoint(lbp_, x, y);
   movePoint(rtp_, x, y);
 }
-void nikonov::Rectangle::doScale(double k)
+void nikonov::Rectangle::scaleWithoutCheck(double k)
 {
   rectangle_t crntRect = getFrameRect();
-  double diffX = crntRect.width * k - crntRect.width;
-  double diffY = crntRect.height * k - crntRect.height;
-  movePoint(lbp_, (diffX / 2) * (-1), (diffY / 2) * (-1));
-  movePoint(rtp_, diffX / 2, diffY / 2);
+  scalePoint(lbp_, crntRect.pos, k);
+  scalePoint(rtp_, crntRect.pos, k);
 }

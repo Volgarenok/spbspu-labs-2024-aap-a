@@ -12,11 +12,11 @@ namespace nikonov
     rectangle_t getFrameRect() const override;
     void move(const point_t &a) override;
     void move(double x, double y) override;
+    void scaleWithoutCheck(double k) override;
   private:
     point_t topP_;
-    point_t rightP_;
     point_t midP_;
-    void doScale(double k) override;
+    point_t rightP_;
   };
 }
 #endif

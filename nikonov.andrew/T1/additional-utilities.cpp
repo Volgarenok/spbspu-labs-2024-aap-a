@@ -1,9 +1,11 @@
 #include "additional-utilities.hpp"
 #include <limits>
+#include <iostream>
 #include <iomanip>
+#include <cmath>
 #include "shape.hpp"
 #include "fabric.hpp"
-void nikonov::fillShapeCollection(std::istream &input, Shape **collection, size_t &cnt, size_t &noncorrect)
+void nikonov::fillShapeCollection(std::istream &input, Shape **collection, size_t &cnt)
 {
   std::string name = "";
   while (input >> name && name != "SCALE")
@@ -12,22 +14,15 @@ void nikonov::fillShapeCollection(std::istream &input, Shape **collection, size_
     {
       continue;
     }
-    else if (!input)
-    {
-      ++noncorrect;
-      input.clear();
-      input.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
-      continue;
-    }
     try
     {
-      Shape *newElem = make_shape(name, input);
+      Shape *newElem = make_shape(input, name);
       collection[cnt] = newElem;
       ++cnt;
     }
     catch (const std::logic_error &e)
     {
-      ++noncorrect;
+      std::cerr << e.what() << '\n';
     }
     catch (const std::runtime_error &e)
     {
@@ -107,4 +102,13 @@ void nikonov::processCollection(std::istream &input, std::ostream &out, Shape **
   outputCollection(out, collection, cnt);
   scaleCollection(collection, cnt, x, y, k);
   outputCollection(out, collection, cnt);
+}
+double nikonov::getSegmentLength(const point_t &a, const point_t &b)
+{
+  return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2));
+}
+void nikonov::scalePoint(nikonov::point_t &pt, nikonov::point_t &center, double k)
+{
+  pt.x = center.x + (pt.x - center.x) * k;
+  pt.y = center.y + (pt.y - center.y) * k;
 }

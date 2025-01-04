@@ -1,6 +1,7 @@
 #include "diamond.hpp"
 #include <stdexcept>
 #include <cmath>
+#include "additional-utilities.hpp"
 #include "base-types.hpp"
 namespace
 {
@@ -9,20 +10,15 @@ namespace
   nikonov::point_t findEdge(const nikonov::point_t &p1, const nikonov::point_t &p2, const nikonov::point_t &p3);
   bool isEqualPoint(const nikonov::point_t &p1, const nikonov::point_t &p2);
 }
-nikonov::Diamond::Diamond(const point_t &p1, const point_t &p2, const point_t &p3)
+nikonov::Diamond::Diamond(const point_t &p1, const point_t &p2, const point_t &p3):
+  topP_(findTop(p1, p2, p3)),
+  midP_(findMid(p1, p2, p3)),
+  rightP_(findEdge(p1, p2, p3))
 {
-  point_t topP({ 0, 0 });
-  point_t midP({ 0, 0 });
-  topP = findTop(p1, p2, p3);
-  midP = findMid(p1, p2, p3);
-  point_t edgeP = findEdge(p1, p2, p3);
-  if (!(topP.x == midP.x && edgeP.y == midP.y))
+  if (!(topP_.x == midP_.x && rightP_.y == midP_.y))
   {
     throw std::logic_error("ERROR:noncorrect diamond parameters");
   }
-  topP_ = topP;
-  midP_ = midP;
-  rightP_ = edgeP;
 }
 double nikonov::Diamond::getArea() const
 {
@@ -50,33 +46,32 @@ void nikonov::Diamond::move(double x, double y)
   movePoint(midP_, x, y);
   movePoint(rightP_, x, y);
 }
-void nikonov::Diamond::doScale(double k)
+void nikonov::Diamond::scaleWithoutCheck(double k)
 {
   rectangle_t crntRect = getFrameRect();
-  double diffX = crntRect.width * k - crntRect.width;
-  double diffY = crntRect.height * k - crntRect.height;
-  movePoint(topP_, 0, diffY / 2);
-  movePoint(rightP_, diffX / 2, 0);
+  scalePoint(topP_, crntRect.pos, k);
+  scalePoint(rightP_, crntRect.pos, k);
 }
 namespace
 {
   nikonov::point_t findTop(const nikonov::point_t &p1, const nikonov::point_t &p2, const nikonov::point_t &p3)
   {
-    if (p1.y == std::max(std::max(p1.y, p2.y), p3.y))
+    double maxY = std::max(std::max(p1.y, p2.y), p3.y);
+    if ((static_cast< int >(p1.y == maxY) + (p2.y == maxY) + (p3.y == maxY)) > 1)
+    {
+      throw std::logic_error("non-correct parameters");
+    }
+    else if (p1.y == maxY)
     {
       return p1;
     }
-    else if (p2.y == std::max(std::max(p1.y, p2.y), p3.y))
+    else if (p2.y == maxY)
     {
       return p2;
     }
-    else if (p3.y == std::max(std::max(p1.y, p2.y), p3.y))
-    {
-      return p3;
-    }
     else
     {
-      throw std::logic_error("non-correct parameters");
+      return p3;
     }
   }
   nikonov::point_t findMid(const nikonov::point_t &p1, const nikonov::point_t &p2, const nikonov::point_t &p3)

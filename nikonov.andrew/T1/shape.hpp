@@ -10,10 +10,8 @@ namespace nikonov
     virtual rectangle_t getFrameRect() const = 0;
     virtual void move(const point_t &a) = 0;
     virtual void move(double x, double y) = 0;
-    void scale(double k);
-    void scaleWithoutCheck(double k);
-  private:
-    virtual void doScale(double k) = 0;
+    virtual void scaleWithoutCheck(double k) = 0;
+    void scaleWithCheck(double k);
   };
 }
 #endif

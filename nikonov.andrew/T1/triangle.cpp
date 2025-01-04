@@ -1,19 +1,13 @@
 #include "triangle.hpp"
 #include <stdexcept>
-#include <cmath>
+#include "additional-utilities.hpp"
 #include "base-types.hpp"
-nikonov::point_t getCenterOfGravity(const nikonov::point_t &A, const nikonov::point_t &B, const nikonov::point_t &C)
+namespace
 {
-  return nikonov::point_t({ (A.x + B.x + C.x) / 3, ((A.y + B.y + C.y) / 3) });
-}
-double nikonov::getSegmentLength(const point_t &a, const point_t &b)
-{
-  return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2));
-}
-void scaleTrianglePoint(nikonov::point_t &pt, nikonov::point_t &center, double k)
-{
-  pt.x = center.x + (pt.x - center.x) * k;
-  pt.y = center.y + (pt.y - center.y) * k;
+  nikonov::point_t getCenterOfGravity(const nikonov::point_t &a, const nikonov::point_t &b, const nikonov::point_t &c)
+  {
+    return nikonov::point_t({ (a.x + b.x + c.x) / 3, ((a.y + b.y + c.y) / 3) });
+  }
 }
 
 nikonov::Triangle::Triangle(const point_t &a, const point_t &b, const point_t &c):
@@ -58,10 +52,10 @@ void nikonov::Triangle::move(double x, double y)
   movePoint(b_, x, y);
   movePoint(c_, x, y);
 }
-void nikonov::Triangle::doScale(double k)
+void nikonov::Triangle::scaleWithoutCheck(double k)
 {
   point_t center = getCenterOfGravity(a_, b_, c_);
-  scaleTrianglePoint(a_, center, k);
-  scaleTrianglePoint(b_, center, k);
-  scaleTrianglePoint(c_, center, k);
+  scalePoint(a_, center, k);
+  scalePoint(b_, center, k);
+  scalePoint(c_, center, k);
 }

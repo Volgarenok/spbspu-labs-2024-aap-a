@@ -6,7 +6,7 @@
 #include "additional-utilities.hpp"
 #include "diamond.hpp"
 #include "triangle.hpp"
-nikonov::Shape *nikonov::make_shape(const std::string &name, std::istream &input)
+nikonov::Shape *nikonov::make_shape(std::istream &input, const std::string &name)
 {
   if (name == "RECTANGLE")
   {
@@ -39,8 +39,7 @@ nikonov::Rectangle *nikonov::make_rectangle(std::istream &input)
   }
   point_t lbp({ nums[0], nums[1] });
   point_t rtp({ nums[2], nums[3] });
-  Rectangle *result = new Rectangle(lbp, rtp);
-  return result;
+  return new Rectangle(lbp, rtp);
 }
 nikonov::Diamond *nikonov::make_diamond(std::istream &input)
 {
@@ -57,8 +56,7 @@ nikonov::Diamond *nikonov::make_diamond(std::istream &input)
   point_t p1({ nums[0], nums[1] });
   point_t p2({ nums[2], nums[3] });
   point_t p3({ nums[4], nums[5] });
-  Diamond *result = new Diamond(p1, p2, p3);
-  return result;
+  return new Diamond(p1, p2, p3);
 }
 nikonov::Triangle *nikonov::make_triangle(std::istream &input)
 {
@@ -75,6 +73,5 @@ nikonov::Triangle *nikonov::make_triangle(std::istream &input)
   point_t a({ nums[0], nums[1] });
   point_t b({ nums[2], nums[3] });
   point_t c({ nums[4], nums[5] });
-  Triangle *result = new Triangle(a, b, c);
-  return result;
+  return new Triangle(a, b, c);
 }
