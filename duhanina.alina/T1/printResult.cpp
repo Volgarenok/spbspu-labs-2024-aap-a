@@ -3,6 +3,16 @@
 #include <iomanip>
 #include <cstddef>
 
+double duhanina::calcArea(const Shape* const* shapes, size_t shapeCount)
+{
+  double totalArea = 0;
+  for (size_t i = 0; i < shapeCount; ++i)
+  {
+    totalArea += shapes[i]->getArea();
+  }
+  return totalArea;
+}
+
 void duhanina::outFigures(std::ostream& out, const Shape* const* shapes, size_t i)
 {
   rectangle_t frame = shapes[i]->getFrameRect();
