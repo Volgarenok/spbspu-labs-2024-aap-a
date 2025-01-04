@@ -38,130 +38,115 @@ int bocharov::getShapeInfo(std::istream & input, std::ostream & error, std::ostr
   std::string Mystr;
   std::size_t shapesCount = 0;
   bool scaled = false;
-  try
+  while (input >> Mystr)
   {
-    while (input >> Mystr)
+    if (Mystr == "RECTANGLE")
     {
-      if (Mystr == "RECTANGLE")
+      try
       {
-        try
-        {
-          point_t down, up;
-          input >> down.x;
-          input >> down.y;
-          input >> up.x;
-          input >> up.y;
-          myShapes[shapesCount] = new Rectangle{down, up};
-          shapesCount++;
-        }
-        catch (const std::invalid_argument & e)
-        {
-          error << e.what() << '\n';
-        }
+        point_t down, up;
+        input >> down.x;
+        input >> down.y;
+        input >> up.x;
+        input >> up.y;
+        myShapes[shapesCount] = new Rectangle{down, up};
+        shapesCount++;
       }
-      else if (Mystr == "TRIANGLE")
+      catch (const std::invalid_argument & e)
       {
-        try
-        {
-          point_t a, b, c;
-          input >> a.x;
-          input >> a.y;
-          input >> b.x;
-          input >> b.y;
-          input >> c.x;
-          input >> c.y;
-          myShapes[shapesCount] =  new Triangle{a, b, c};
-          shapesCount++;
-        }
-        catch (const std::invalid_argument & e)
-        {
-          error << e.what() << '\n';
-        }
-      }
-      else if (Mystr == "PARALLELOGRAM")
-      {
-        try
-        {
-          point_t a, b, c;
-          input >> a.x;
-          input >> a.y;
-          input >> b.x;
-          input >> b.y;
-          input >> c.x;
-          input >> c.y;
-          bool correct_parallelogram = ((a.y == b.y) && (a.y != c.y)) || ((b.y == c.y) && (a.y != b.y));
-          if (!correct_parallelogram)
-          {
-            throw std::invalid_argument("Error in PARALLELOGRAM parameters");
-          }
-          myShapes[shapesCount] =  new Parallelogram{a, b, c};
-          shapesCount++;
-        }
-        catch (const std::invalid_argument & e)
-        {
-          error << e.what() << '\n';
-        }
-      }
-      else if (Mystr == "CONCAVE")
-      {
-        try
-        {
-          point_t a, b, c, d;
-          input >> a.x;
-          input >> a.y;
-          input >> b.x;
-          input >> b.y;
-          input >> c.x;
-          input >> c.y;
-          input >> d.x;
-          input >> d.y;
-          myShapes[shapesCount] =  new Concave{a, b, c, d};
-          shapesCount++;
-        }
-        catch (const std::invalid_argument & e)
-        {
-          error << e.what() << '\n';
-        }
-      }
-      else if (Mystr == "SCALE")
-      {
-        scaled = true;
-        if (shapesCount == 0)
-        {
-          error << "No shapes for scale\n";
-          return -1;
-        }
-        point_t toCenter;
-        double ratio;
-        input >> toCenter.x;
-        input >> toCenter.y;
-        input >> ratio;
-        try
-        {
-          outputRes(output, myShapes, shapesCount);
-          scaling(myShapes, shapesCount, toCenter, ratio);
-          outputRes(output, myShapes, shapesCount);
-        }
-        catch (const std::invalid_argument & e)
-        {
-          error << e.what() << '\n';
-          clear(myShapes, shapesCount);
-          return -1;
-        }
+        error << e.what() << '\n';
       }
     }
-  }
-  catch (const std::bad_alloc & e)
-  {
-    error << e.what() << '\n';
-    clear(myShapes, shapesCount);
-    return -1;
-  }
-  catch (const std::logic_error & e)
-  {
-    error << e.what() << '\n';
-    clear(myShapes, shapesCount);
-    return -1;
+    else if (Mystr == "TRIANGLE")
+    {
+      try
+      {
+        point_t a, b, c;
+        input >> a.x;
+        input >> a.y;
+        input >> b.x;
+        input >> b.y;
+        input >> c.x;
+        input >> c.y;
+        myShapes[shapesCount] =  new Triangle{a, b, c};
+        shapesCount++;
+      }
+      catch (const std::invalid_argument & e)
+      {
+        error << e.what() << '\n';
+      }
+    }
+    else if (Mystr == "PARALLELOGRAM")
+    {
+      try
+      {
+        point_t a, b, c;
+        input >> a.x;
+        input >> a.y;
+        input >> b.x;
+        input >> b.y;
+        input >> c.x;
+        input >> c.y;
+        bool correct_parallelogram = ((a.y == b.y) && (a.y != c.y)) || ((b.y == c.y) && (a.y != b.y));
+        if (!correct_parallelogram)
+        {
+          throw std::invalid_argument("Error in PARALLELOGRAM parameters");
+        }
+        myShapes[shapesCount] =  new Parallelogram{a, b, c};
+        shapesCount++;
+      }
+      catch (const std::invalid_argument & e)
+      {
+        error << e.what() << '\n';
+      }
+    }
+    else if (Mystr == "CONCAVE")
+    {
+      try
+      {
+        point_t a, b, c, d;
+        input >> a.x;
+        input >> a.y;
+        input >> b.x;
+        input >> b.y;
+        input >> c.x;
+        input >> c.y;
+        input >> d.x;
+        input >> d.y;
+        myShapes[shapesCount] =  new Concave{a, b, c, d};
+        shapesCount++;
+      }
+      catch (const std::invalid_argument & e)
+      {
+        error << e.what() << '\n';
+      }
+    }
+    else if (Mystr == "SCALE")
+    {
+      scaled = true;
+      if (shapesCount == 0)
+      {
+        error << "No shapes for scale\n";
+        return -1;
+      }
+      point_t toCenter;
+      double ratio;
+      input >> toCenter.x;
+      input >> toCenter.y;
+      input >> ratio;
+      try
+      {
+        outputRes(output, myShapes, shapesCount);
+        scaling(myShapes, shapesCount, toCenter, ratio);
+        outputRes(output, myShapes, shapesCount);
+      }
+      catch (const std::invalid_argument & e)
+      {
+        error << e.what() << '\n';
+        clear(myShapes, shapesCount);
+        return -1;
+      }
+    }
   }
   if (!scaled)
   {

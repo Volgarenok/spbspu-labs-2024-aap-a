@@ -8,7 +8,20 @@ int main()
   constexpr size_t shapesSize = 10000;
   bocharov::Shape * myShapes[shapesSize] = {};
   int shapeCount = 0;
-  shapeCount = bocharov::getShapeInfo(std::cin, std::cerr, std::cout, myShapes);
+  try
+  {
+    shapeCount = bocharov::getShapeInfo(std::cin, std::cerr, std::cout, myShapes);
+  }
+  catch (const std::bad_alloc & e)
+  {
+    error << e.what() << '\n';
+    clear(myShapes, shapesCount);
+  }
+  catch (const std::logic_error & e)
+  {
+    error << e.what() << '\n';
+    clear(myShapes, shapesCount);
+  }
   if (shapeCount == -1)
   {
     return 1;
