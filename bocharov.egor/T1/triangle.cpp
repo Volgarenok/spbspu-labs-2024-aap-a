@@ -4,11 +4,11 @@
 #include <stdexcept>
 
 bocharov::Triangle::Triangle(point_t a, point_t b, point_t c):
- a_(a),
- b_(b),
- c_(c)
+ a_({0.0L, 0.0L}),
+ b_({0.0L, 0.0L}),
+ c_({0.0L, 0.0L})
 {
-  if ((a.x * (b.y -c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) == 0)
+  if ((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) == 0)
   {
     throw std::invalid_argument("error arguments for triangle\n");
   }
