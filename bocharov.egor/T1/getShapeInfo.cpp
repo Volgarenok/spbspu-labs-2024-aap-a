@@ -19,7 +19,7 @@ void bocharov::scaling(Shape ** myShapes, size_t shapeCount, point_t center, dou
 {
   if (ratio <= 0)
   {
-    throw std::invalid_argument("under zero ratio with scale\n");
+    throw std::invalid_argument("under zero ratio\n");
   }
   for (size_t i = 0; i < shapeCount; i++)
   {

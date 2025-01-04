@@ -53,10 +53,6 @@ void bocharov::Rectangle::move(point_t centerP)
 
 void bocharov::Rectangle::scale(double ratio)
 {
-  if (ratio <= 0)
-  {
-    throw std::invalid_argument("under zero ratio with scale\n");
-  }
   rectangle_t fremRect = getFrameRect();
   point_t pos = fremRect.pos;
   rightUp_.x = pos.x + (rightUp_.x - pos.x) * ratio;

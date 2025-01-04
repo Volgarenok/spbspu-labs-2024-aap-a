@@ -63,10 +63,6 @@ void bocharov::Triangle::move(double x, double y)
 
 void bocharov::Triangle::scale(double ratio)
 {
-  if (ratio <= 0)
-  {
-    throw std::invalid_argument("under zero ratio\n");
-  }
   point_t pos = {0.0L, 0.0L};
   pos.x = std::abs(a_.x + b_.x + c_.x) / 3.0;
   pos.y = std::abs(a_.y + b_.y + c_.y) / 3.0;

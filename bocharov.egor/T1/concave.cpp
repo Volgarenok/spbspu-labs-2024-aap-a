@@ -98,10 +98,6 @@ void bocharov::Concave::move(point_t point)
 
 void bocharov::Concave::scale(double ratio)
 {
-  if (ratio <= 0)
-  {
-    throw std::invalid_argument("under zero ratio\n");
-  }
   a_.x = (a_.x - d_.x) * ratio;
   b_.x = (b_.x - d_.x) * ratio;
   c_.x = (c_.x - d_.x) * ratio;
