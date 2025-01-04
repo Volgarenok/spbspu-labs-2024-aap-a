@@ -28,7 +28,7 @@ bocharov::rectangle_t bocharov::Triangle::getFrameRect() const
   double maxY = std::max(a_.y, std::max(b_.y, c_.y));
   double minX = std::min(a_.x, std::min(b_.x, c_.x));
   double minY = std::min(a_.y, std::min(b_.y, c_.y));
-  bocharov::rectangle_t result;
+  rectangle_t result;
   result.height = maxY - minY;
   result.width = maxX - minX;
   result.pos.x = minX + (result.width / 2.0);
@@ -67,7 +67,7 @@ void bocharov::Triangle::scale(double ratio)
   {
     throw std::invalid_argument("under zero ratio\n");
   }
-  point_t pos;
+  point_t pos = {0.0L, 0.0L};
   pos.x = std::abs(a_.x + b_.x + c_.x) / 3.0;
   pos.y = std::abs(a_.y + b_.y + c_.y) / 3.0;
   a_.x = (a_.x - pos.x) * ratio + pos.x;
