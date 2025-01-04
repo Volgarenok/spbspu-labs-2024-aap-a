@@ -41,9 +41,13 @@ void duhanina::processScaling(Shape* const* shapes, size_t shapeCount, point_t p
     shapes[i]->move(point);
     point_t newPos = shapes[i]->getFrameRect().pos;
     point_t vect;
+    if (scalingFactor <= 0)
+    {
+      throw std::logic_error("Incorrect scalingFactor)
+    }
     vect.x = (newPos.x - pos.x) * scalingFactor;
     vect.y = (newPos.y - pos.y) * scalingFactor;
-    shapes[i]->scaleCheck(scalingFactor);
+    shapes[i]->scale(scalingFactor);
     shapes[i]->move(vect.x * -1, vect.y * -1);
   }
 }
