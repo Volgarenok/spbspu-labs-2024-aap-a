@@ -57,21 +57,30 @@ namespace
   nikonov::point_t findTop(const nikonov::point_t &p1, const nikonov::point_t &p2, const nikonov::point_t &p3)
   {
     double maxY = std::max(std::max(p1.y, p2.y), p3.y);
-    if ((static_cast< int >(p1.y == maxY) + (p2.y == maxY) + (p3.y == maxY)) > 1)
+    nikonov::point_t result({ 0, 0 });
+    double maxCnt = 0;
+    if (p1.y == maxY)
+    {
+      ++maxCnt;
+      result = p1;
+    }
+    if (p2.y == maxY)
+    {
+      ++maxCnt;
+      result = p2;
+    }
+    if (p3.y == maxY)
+    {
+      ++maxCnt;
+      result = p3;
+    }
+    if (maxCnt > 1)
     {
       throw std::logic_error("non-correct parameters");
     }
-    else if (p1.y == maxY)
-    {
-      return p1;
-    }
-    else if (p2.y == maxY)
-    {
-      return p2;
-    }
     else
     {
-      return p3;
+      return result;
     }
   }
   nikonov::point_t findMid(const nikonov::point_t &p1, const nikonov::point_t &p2, const nikonov::point_t &p3)
