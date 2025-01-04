@@ -20,7 +20,7 @@ int main()
   {
     std::cerr << e.what() << '\n';
   }
-  if (shapeCount == -1)
+  if (shapeCount == 0)
   {
     return 1;
   }
