@@ -26,7 +26,7 @@ bool bocharov::isDupePoint(point_t p1, point_t p2, point_t p3, point_t p4)
 
 bool bocharov::isTriangle(point_t a, point_t b, point_t c)
 {
-  return !((((a.x == b.x) && (a.x == c.x))) || (( a.y == b.y) && (a.y == c.y)));
+  return !(((a.x == b.x) && (a.x == c.x)) || ((a.y == b.y) && (a.y == c.y)));
 }
 
 double bocharov::getMyArea(point_t a, point_t b, point_t c)
