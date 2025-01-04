@@ -2,6 +2,9 @@
 #include <stdexcept>
 #include <cstddef>
 #include <cmath>
+#include "destroy.hpp"
+#include "printResult.hpp"
+#include "movingPoint.hpp"
 
 duhanina::Rectangle::Rectangle(const point_t& lt, const point_t& rt):
   lt_(lt),
@@ -27,29 +30,17 @@ duhanina::rectangle_t duhanina::Rectangle::getFrameRect() const
   return { { posX, posY }, width, height };
 }
 
-void duhanina::Rectangle::movePoint(const duhanina::point_t& pos, const duhanina::point_t& newPos)
-{
-  point_t offset = pos.calculateOffset(newPos);
-  move(offset.x, offset.y);
-}
-
 void duhanina::Rectangle::move(const point_t& newPos)
 {
   point_t pos = this->getFrameRect().pos;
-  movePoint(pos, newPos);
+  point_t offset = calculateOffset(pos, newPos);
+  movePoint(pos, offset.x, offset.y);
 }
 
 void duhanina::Rectangle::move(double dx, double dy)
 {
-  lt_.x += dx;
-  lt_.y += dy;
-  rt_.x += dx;
-  rt_.y += dy;
-}
-
-duhanina::point_t duhanina::Rectangle::scalePoint(const duhanina::point_t& point, const duhanina::point_t& origin, double k)
-{
-  return { origin.x + (point.x - origin.x) * k, origin.y + (point.y - origin.y) * k };
+  movePoint(lt_, dx, dy);
+  movePoint(lt_, dx, dy);
 }
 
 void duhanina::Rectangle::scale(double k)
@@ -85,17 +76,10 @@ duhanina::Ellipse** duhanina::Rectangle::fillWithEllipses()
         ellipses[i * horizontalCuts + j] = new Ellipse(center, ellipseWidth / 2, ellipseHeight / 2);
       }
     }
-    ellipsesArea = 0.0;
-    for (size_t i = 0; i < ellipseCount; ++i)
-    {
-      ellipsesArea += ellipses[i]->getArea();
-    }
+    ellipsesArea = calcArea(ellipses, ellipseCount);
     if (std::fabs(rectArea - ellipsesArea) >= 0.01)
     {
-      for (size_t i = 0; i < ellipseCount; ++i)
-      {
-        delete ellipses[i];
-      }
+      destroy(ellipses, ellipseCount);
       delete[] ellipses;
       if (horizontalCuts < verticalCuts)
       {

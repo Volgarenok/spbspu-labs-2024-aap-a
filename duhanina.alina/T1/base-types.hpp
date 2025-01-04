@@ -7,10 +7,6 @@ namespace duhanina
   {
     double x;
     double y;
-    point_t calculateOffset(const point_t& newPos) const
-    {
-      return { newPos.x - x, newPos.y - y };
-    }
   };
 
   struct rectangle_t

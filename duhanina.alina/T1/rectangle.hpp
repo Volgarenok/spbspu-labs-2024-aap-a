@@ -19,8 +19,6 @@ namespace duhanina
   private:
     point_t lt_;
     point_t rt_;
-    void movePoint(const point_t& pos, const point_t& newPos);
-    point_t scalePoint(const point_t& point, const point_t& origin, double k);
   };
 }
 

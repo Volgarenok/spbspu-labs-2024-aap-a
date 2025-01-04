@@ -6,7 +6,7 @@
 
 namespace duhanina
 {
-  void createScale(std::istream& in, Shape** shapes, size_t shapeCount);
+  void createScale(std::istream& in, size_t shapeCount, double& scalingFactor, point_t& point);
   void createShape(const std::string& shapeType, Shape** shapes, size_t& shapeCount);
 }
 

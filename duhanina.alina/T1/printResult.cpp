@@ -12,16 +12,6 @@ void duhanina::outFigures(std::ostream& out, const Shape* const* shapes, size_t 
   out << frame.pos.y + frame.height / 2.0;
 }
 
-double duhanina::calcArea(const Shape* const* shapes, size_t shapeCount)
-{
-  double totalArea = 0;
-  for (size_t i = 0; i < shapeCount; ++i)
-  {
-    totalArea += shapes[i]->getArea();
-  }
-  return totalArea;
-}
-
 void duhanina::printFiguresInfo(std::ostream& out, const Shape* const* shapes, size_t shapeCount)
 {
   out << std::fixed << std::setprecision(1) << calcArea(shapes, shapeCount);
