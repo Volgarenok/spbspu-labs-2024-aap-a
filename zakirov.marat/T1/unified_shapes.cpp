@@ -326,6 +326,10 @@ void zakirov::output_frame(std::ostream & out, Shape ** shapes, std::size_t quan
     zakirov::point_t frame_top_right{frame.pos.x + frame.width / 2, frame.pos.y + frame.height / 2};
     out << frame_bottom_left.x << ' ' << frame_bottom_left.y << ' ';
     out << frame_top_right.x << ' ' << frame_top_right.y;
+    if (i != quantity - 1)
+    {
+      out << ' ';
+    }
   }
 
   out << '\n';
