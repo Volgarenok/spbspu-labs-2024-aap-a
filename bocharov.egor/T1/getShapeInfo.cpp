@@ -5,7 +5,7 @@
 #include "concave.hpp"
 #include "outputRes.hpp"
 
-double bocharov::getAllArea(Shape** myShapes, size_t shapeCount)
+double bocharov::getAllArea(Shape ** myShapes, size_t shapeCount)
 {
   double allArea = 0.0;
   for (size_t i = 0; i < shapeCount; i++)
@@ -15,8 +15,12 @@ double bocharov::getAllArea(Shape** myShapes, size_t shapeCount)
   return allArea;
 }
 
-void bocharov::scaling(Shape** myShapes, size_t shapeCount, point_t center, double ratio)
+void bocharov::scaling(Shape ** myShapes, size_t shapeCount, point_t center, double ratio)
 {
+  if (ratio <= 0)
+  {
+    throw std::invalid_argument("under zero ratio with scale\n");
+  }
   for (size_t i = 0; i < shapeCount; i++)
   {
     point_t cneter = myShapes[i]->getFrameRect().pos;
