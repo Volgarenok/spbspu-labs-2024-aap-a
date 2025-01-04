@@ -133,7 +133,7 @@ namespace
 
 zakirov::Rectangle * zakirov::make_rectangle(double bottom_x, double bottom_y, double top_x, double top_y)
 {
-  point_t bottom_left{bottom_x, bottom_y}; 
+  point_t bottom_left{bottom_x, bottom_y};
   point_t top_right{top_x, top_y};
   Rectangle * rectangle = static_cast< Rectangle * >(malloc(sizeof(Rectangle)));
   try

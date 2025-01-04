@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include "base-types.hpp"
 
-zakirov::Polygon::Polygon(std::size_t size, point_t * points) :
+zakirov::Polygon::Polygon(std::size_t size, point_t * points):
   size_(size),
   points_(points)
 {

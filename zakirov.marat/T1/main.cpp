@@ -14,7 +14,7 @@ int main()
   std::size_t location = 0;
   bool shape_flag = false;
   double * scale_data = nullptr;
-  while(true)
+  while (true)
   {
     double * data = zakirov::get_data(std::cin);
     if (data)

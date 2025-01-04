@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include "shape.hpp"
 
-zakirov::Circle::Circle(point_t center, double radius) :
+zakirov::Circle::Circle(point_t center, double radius):
   center_(center),
   radius_(radius)
 {
@@ -15,7 +15,8 @@ zakirov::Circle::Circle(point_t center, double radius) :
 
 double zakirov::Circle::getArea() const
 {
-  return 3.14 * std::pow(radius_, 2);
+  constexpr double pi = 3.14;
+  return pi * std::pow(radius_, 2);
 }
 
 zakirov::rectangle_t zakirov::Circle::getFrameRect() const

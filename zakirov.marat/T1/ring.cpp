@@ -3,7 +3,7 @@
 #include <cmath>
 #include <stdexcept>
 
-zakirov::Ring::Ring(point_t center, double ex_radius, double in_radius) :
+zakirov::Ring::Ring(point_t center, double ex_radius, double in_radius):
   center_(center),
   ex_radius_(ex_radius),
   in_radius_(in_radius)
@@ -16,8 +16,9 @@ zakirov::Ring::Ring(point_t center, double ex_radius, double in_radius) :
 
 double zakirov::Ring::getArea() const
 {
-  double in_area = 3.14 * std::pow(in_radius_, 2);
-  double ex_area = 3.14 * std::pow(ex_radius_, 2);
+  constexpr double pi = 3.14;
+  double in_area = pi * std::pow(in_radius_, 2);
+  double ex_area = pi * std::pow(ex_radius_, 2);
 
   return ex_area - in_area;
 }
