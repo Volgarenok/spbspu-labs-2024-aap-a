@@ -49,7 +49,6 @@ int main()
         hasScale = true;
         if (shapeCount == 0)
         {
-          std::cout << "SHAPECOUNT IS" << shapeCount << "A";
           std::cerr << "Nothing to scale\n";
           return 1;
         }
