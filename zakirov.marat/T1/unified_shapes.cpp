@@ -159,7 +159,16 @@ zakirov::Circle * zakirov::make_circle(double center_x, double center_y, double 
   center.y = center_y;
 
   Circle * circle = static_cast< Circle * >(malloc(sizeof(Circle)));
-  return new (circle) Circle(center, radius);
+  try
+  {
+    new (circle) Circle(center, radius);
+    return circle;
+  }
+  catch(const std::exception& e)
+  {
+    free(circle);
+    throw e;
+  }
 }
 
 zakirov::Ring * zakirov::make_ring(double center_x, double center_y, double in_radius, double ex_radius)
@@ -169,12 +178,33 @@ zakirov::Ring * zakirov::make_ring(double center_x, double center_y, double in_r
   center.y = center_y;
 
   Ring * ring = static_cast< Ring * >(malloc(sizeof(Ring)));
-  return new (ring) Ring(center, in_radius, ex_radius);
+  try
+  {
+    new (ring) Ring(center, in_radius, ex_radius);
+    return ring;
+  }
+  catch(const std::exception& e)
+  {
+    free(ring);
+    throw e;
+  }
 }
 
 zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t * points)
 {
   Polygon * polygon = static_cast< Polygon * >(malloc(sizeof(Polygon)));
+  try
+  {
+    new (polygon) Polygon(points_num, points);
+    return polygon;
+  }
+  catch(const std::exception& e)
+  {
+    polygon->~Polygon();
+    free(polygon);
+    throw e;
+  }
+
   return new (polygon) Polygon(points_num, points);
 }
 
