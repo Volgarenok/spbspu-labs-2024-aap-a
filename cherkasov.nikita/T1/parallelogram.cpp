@@ -15,8 +15,6 @@ namespace cherkasov
     vertex3.y = y3;
     vertex4.x = x2 + (x1 - x3);
     vertex4.y = y2 + (y3 - y1);
-    center.x = (x1 + x3) / 2;
-    center.y = (y1 + y3) /2;
   }
   double Parallelogram::getArea() const
   {
@@ -32,25 +30,21 @@ namespace cherkasov
     double maxX = std::max({vertex1.x, vertex2.x, vertex3.x, vertex4.x});
     double minY = std::min({vertex1.y, vertex2.y, vertex3.y, vertex4.y});
     double maxY = std::max({vertex1.y, vertex2.y, vertex3.y, vertex4.y});
+    point_t center;
+    center.x = (vertex1.x + vertex2.x + vertex3.x + vertex4.x) / 4;
+    center.y = (vertex1.y + vertex2.y + vertex3.y + vertex4.y) / 4;
     rectangle_t rect{};
     rect.width = maxX - minX;
     rect.height = maxY - minY;
-    rect.pos = {(minX + maxX) / 2, (minY + maxY) / 2};
+    rect.pos = center;
     return rect;
   }
   void Parallelogram::move(point_t c)
   {
-    double dx = c.x - center.x;
-    double dy = c.y - center.y;
-    vertex1.x += dx;
-    vertex1.y += dy;
-    vertex2.x += dx;
-    vertex2.y += dy;
-    vertex3.x += dx;
-    vertex3.y += dy;
-    vertex4.x += dx;
-    vertex4.y += dy;
-    center = c;
+    point_t Pos = getFrameRect().pos;
+    double dx = c.x - Pos.x;
+    double dy = c.y - Pos.y;
+    move(dx, dy);
   }
   void Parallelogram::move(double dx, double dy)
   {
@@ -62,22 +56,16 @@ namespace cherkasov
     vertex3.y += dy;
     vertex4.x += dx;
     vertex4.y += dy;
-    center.x += dx;
-    center.y += dy;
   }
   void Parallelogram::scale(double k)
   {
-    if (k <= 0)
-    {
-      throw std::logic_error("Scaling factor must be positive");
-    }
-  vertex1.x = center.x + (vertex1.x - center.x) * k;
-  vertex1.y = center.y + (vertex1.y - center.y) * k;
-  vertex2.x = center.x + (vertex2.x - center.x) * k;
-  vertex2.y = center.y + (vertex2.y - center.y) * k;
-  vertex3.x = center.x + (vertex3.x - center.x) * k;
-  vertex3.y = center.y + (vertex3.y - center.y) * k;
-  vertex4.x = center.x + (vertex4.x - center.x) * k;
-  vertex4.y = center.y + (vertex4.y - center.y) * k;
+    vertex1.x = center.x + (vertex1.x - center.x) * k;
+    vertex1.y = center.y + (vertex1.y - center.y) * k;
+    vertex2.x = center.x + (vertex2.x - center.x) * k;
+    vertex2.y = center.y + (vertex2.y - center.y) * k;
+    vertex3.x = center.x + (vertex3.x - center.x) * k;
+    vertex3.y = center.y + (vertex3.y - center.y) * k;
+    vertex4.x = center.x + (vertex4.x - center.x) * k;
+    vertex4.y = center.y + (vertex4.y - center.y) * k;
   }
 }
