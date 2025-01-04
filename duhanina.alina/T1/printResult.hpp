@@ -1,7 +1,6 @@
 #ifndef PRINTRESULT_HPP
 #define PRINTRESULT_HPP
 #include <ostream>
-#include "base-types.hpp"
 #include "shape.hpp"
 
 namespace duhanina

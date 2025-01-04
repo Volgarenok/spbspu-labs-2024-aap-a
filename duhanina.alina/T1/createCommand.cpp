@@ -1,7 +1,6 @@
 #include "createCommand.hpp"
 #include <stdexcept>
 #include "makeShape.hpp"
-#include "destroy.hpp"
 
 void duhanina::createShape(std::istream& in, const std::string& shapeType, Shape** shapes, size_t& shapeCount)
 {
@@ -49,11 +48,6 @@ void duhanina::inputShapes(std::istream& in, std::ostream& out, Shape** shapes, 
     catch (const std::invalid_argument& e)
     {
       out << e.what() << "\n";
-    }
-    catch (const std::exception& e)
-    {
-      out << e.what() << "\n";
-      destroy(shapes, shapeCount);
     }
   }
   if (in.eof())

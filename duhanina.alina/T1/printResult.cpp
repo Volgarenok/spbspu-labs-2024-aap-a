@@ -1,5 +1,5 @@
 #include "printResult.hpp"
-#include <iostream>
+#include <ostream>
 #include <iomanip>
 #include <cstddef>
 
@@ -35,19 +35,19 @@ void duhanina::printFiguresInfo(std::ostream& out, const Shape* const* shapes, s
 
 void duhanina::processScaling(Shape* const* shapes, size_t shapeCount, point_t point, double scalingFactor)
 {
+  if (scalingFactor <= 0)
+  {
+    throw std::logic_error("Incorrect scalingFactor");
+  }
   for (size_t i = 0; i < shapeCount; ++i)
   {
     point_t pos = shapes[i]->getFrameRect().pos;
     shapes[i]->move(point);
     point_t newPos = shapes[i]->getFrameRect().pos;
     point_t vect;
-    if (scalingFactor <= 0)
-    {
-      throw std::logic_error("Incorrect scalingFactor");
-    }
     vect.x = (newPos.x - pos.x) * scalingFactor;
     vect.y = (newPos.y - pos.y) * scalingFactor;
-    shapes[i]->scale(scalingFactor);
+    shapes[i]->scaleCheck(scalingFactor);
     shapes[i]->move(vect.x * -1, vect.y * -1);
   }
 }
