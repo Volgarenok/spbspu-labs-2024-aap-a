@@ -126,6 +126,11 @@ void savintsev::CompositeShape::scale(double k)
   }
 }
 
+savintsev::CompositeShape * savintsev::CompositeShape::clone() const
+{
+  return new CompositeShape(*this);
+}
+
 void savintsev::CompositeShape::scaleRelativeTo(double k, point_t p)
 {
   point_t center = p;

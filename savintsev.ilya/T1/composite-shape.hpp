@@ -22,6 +22,7 @@ namespace savintsev
     void move(point_t p);
     void move(double x, double y);
     void scale(double k);
+    CompositeShape * clone() const;
     void scaleRelativeTo(double k, point_t p);
 
     void push_back(Shape * shp);

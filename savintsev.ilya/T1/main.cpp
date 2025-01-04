@@ -48,7 +48,6 @@ int main()
   savintsev::CompositeShape figure(4);
   savintsev::point_t scalePoint = {0, 0};
   double scaleRatio = 0.0;
-  int result = 0;
   while (!was_scale)
   {
     delete[] line;
