@@ -13,8 +13,7 @@ namespace cherkasov
     vertex2.y = y2;
     vertex3.x = x3;
     vertex3.y = y3;
-    vertex4.x = x2 + (x1 - x3);
-    vertex4.y = y2 + (y3 - y1);
+    vertex4 = {vertex1.x + vertex3.x - vertex2.x, vertex1.y + vertex3.y - vertex2.y};
   }
   double Parallelogram::getArea() const
   {
@@ -59,13 +58,13 @@ namespace cherkasov
   }
   void Parallelogram::scale(double k)
   {
+    point_t center = getFrameRect().pos;
     vertex1.x = center.x + (vertex1.x - center.x) * k;
     vertex1.y = center.y + (vertex1.y - center.y) * k;
     vertex2.x = center.x + (vertex2.x - center.x) * k;
     vertex2.y = center.y + (vertex2.y - center.y) * k;
     vertex3.x = center.x + (vertex3.x - center.x) * k;
     vertex3.y = center.y + (vertex3.y - center.y) * k;
-    vertex4.x = center.x + (vertex4.x - center.x) * k;
-    vertex4.y = center.y + (vertex4.y - center.y) * k;
+    vertex4 = {vertex1.x + vertex3.x - vertex2.x, vertex1.y + vertex3.y - vertex2.y};
   }
 }
