@@ -3,72 +3,65 @@
 
 namespace abramov
 {
-  void getShapes(std::istream &in, Shape **shapes, size_t &i, double &x, double &y, double &k, bool &flag)
+  using CS = CompositeShape;
+  void getShapes(std::istream &in, CS &shapes, size_t &i, double &x, double &y, double &k, bool &flag)
   {
-    try
+    while (in)
     {
-      while (in)
+      std::string s1;
+      in >> s1;
+      double x1 = 0;
+      double x2 = 0;
+      double y1 = 0;
+      double y2 = 0;
+      if (s1 == "RECTANGLE")
       {
-        std::string s1;
-        in >> s1;
-        double x1 = 0;
-        double x2 = 0;
-        double y1 = 0;
-        double y2 = 0;
-        if (s1 == "RECTANGLE")
+        in >> x1 >> y1 >> x2 >> y2;
+        try
         {
-          in >> x1 >> y1 >> x2 >> y2;
-          try
-          {
-            shapes[i] = new Rectangle({x1, y1}, {x2, y2});
-            ++i;
-          }
-          catch (const std::logic_error &e)
-          {
-            flag = true;
-          }
+          shapes.push_back(new Rectangle({x1, y1}, {x2, y2}));
+          ++i;
         }
-        if (s1 == "SQUARE")
+        catch (const std::logic_error &e)
         {
-          double len = 0;
-          in >> x1 >> y1 >> len;
-          try
-          {
-            shapes[i] = new Square({x1, y1}, len);
-            ++i;
-          }
-          catch (const std::logic_error &e)
-          {
-            flag = true;
-          }
-        }
-        if (s1 == "COMPLEXQUAD")
-        {
-          double x3 = 0;
-          double y3 = 0;
-          double x4 = 0;
-          double y4 = 0;
-          in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
-          try
-          {
-            shapes[i] = new ComplexQuad({x1, y1}, {x2, y2}, {x3, y3}, {x4, y4});
-            ++i;
-          }
-          catch (const std::logic_error &e)
-          {
-            flag = true;
-          }
-        }
-        if (s1 == "SCALE")
-        {
-          in >> x >> y >> k;
+          flag = true;
         }
       }
-    }
-    catch (const std::bad_alloc &e)
-    {
-      deleteShapes(shapes, i);
-      std::cerr << "Memory fail\n";
+      if (s1 == "SQUARE")
+      {
+        double len = 0;
+        in >> x1 >> y1 >> len;
+        try
+        {
+          shapes.push_back(new Square({x1, y1}, len));
+          ++i;
+        }
+        catch (const std::logic_error &e)
+        {
+          flag = true;
+        }
+      }
+      if (s1 == "COMPLEXQUAD")
+      {
+        double x3 = 0;
+        double y3 = 0;
+        double x4 = 0;
+        double y4 = 0;
+        in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
+        try
+        {
+          shapes.push_back(new ComplexQuad({x1, y1}, {x2, y2}, {x3, y3}, {x4, y4}));
+          ++i;
+        }
+        catch (const std::logic_error &e)
+        {
+          flag = true;
+        }
+      }
+      if (s1 == "SCALE")
+      {
+        in >> x >> y >> k;
+      }
     }
   }
 
@@ -82,17 +75,17 @@ namespace abramov
     std::cout << x2 << " " << y2;
   }
 
-  void scaleFigure(Shape *r, point_t p, double k)
+  void scaleFigure(Shape *s, point_t p, double k)
   {
-    const point_t pos1 = r->getFrameRect().pos;
-    r->move(p);
-    const point_t pos2 = r->getFrameRect().pos;
+    const point_t pos1 = s->getFrameRect().pos;
+    s->move(p);
+    const point_t pos2 = s->getFrameRect().pos;
     double dx = pos2.x - pos1.x;
     double dy = pos2.y - pos1.y;
-    r->scale(k);
+    s->scale(k);
     dx *= -1 * k;
     dy *= -1 * k;
-    r->move(dx, dy);
+    s->move(dx, dy);
   }
 
   void deleteShapes(Shape **x, size_t i)
@@ -103,7 +96,7 @@ namespace abramov
     }
   }
 
-  void printShapes(std::ostream &out, Shape **shapes, rectangle_t *rects, size_t i, double &x, double &y, double k)
+  void printShapes(std::ostream &out, CS &shapes, rectangle_t *rects, size_t i, double &x, double &y, double k)
   {
     out << std::fixed << std::setprecision(1);
     double s = 0;
@@ -113,9 +106,7 @@ namespace abramov
       rects[j] = shapes[j]->getFrameRect();
     }
     out << s << " ";
-    point_t p;
-    p.x = x;
-    p.y = y;
+    point_t p{x, y};
     for (size_t j = 0; j < i - 1; ++j)
     {
       printFrameRectCoords(rects[j]);

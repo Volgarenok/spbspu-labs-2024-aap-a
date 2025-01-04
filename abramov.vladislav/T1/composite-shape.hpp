@@ -10,6 +10,7 @@ namespace abramov
 {
   struct CompositeShape
   {
+    CompositeShape(size_t capacity);
     CompositeShape(const CompositeShape &comp_shp);
     CompositeShape(CompositeShape &&comp_shp);
     CompositeShape &operator=(const CompositeShape &comp_shp);
@@ -19,7 +20,7 @@ namespace abramov
     void move(size_t id, point_t p);
     void move(size_t id, double dx, double dy);
     void scale(size_t id, double k);
-    ~CompositeShape() = default;
+    ~CompositeShape();
     void push_back(Shape *shp);
     void pop_back();
     Shape *at(size_t id) const;

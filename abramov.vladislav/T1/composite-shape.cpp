@@ -3,6 +3,18 @@
 
 namespace abramov
 {
+  CompositeShape::CompositeShape(size_t capacity):
+   shapes_(0),
+   capacity_(capacity),
+   shapeptrs_(nullptr)
+  {
+    shapeptrs_ = new Shape*[capacity];
+    for (size_t i = 0; i < capacity; ++i)
+    {
+      shapeptrs_[i] = nullptr;
+    }
+  }
+
   CompositeShape::CompositeShape(const CompositeShape &comp_shp)
   {
     shapes_ = comp_shp.shapes_;
@@ -13,6 +25,15 @@ namespace abramov
     {
       shapeptrs_[i] = comp_shp.shapeptrs_[i];
     }
+  }
+
+  CompositeShape::~CompositeShape()
+  {
+    for (size_t i = 0; i < shapes_; ++i)
+    {
+      delete shapeptrs_[i];
+    }
+    delete[] shapeptrs_;
   }
 
   void CompositeShape::setArray(Shape **arr)
@@ -90,8 +111,9 @@ namespace abramov
       {
         throw std::bad_alloc();
       }
+      capacity_ *= 2;
     }
-    shapeptrs_[++shapes_] = shp;
+    shapeptrs_[shapes_++] = shp;
   }
 
   void CompositeShape::pop_back()

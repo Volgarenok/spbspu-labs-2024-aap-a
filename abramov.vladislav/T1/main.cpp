@@ -10,17 +10,24 @@
 
 int main()
 {
-  abramov::Shape *shapes[10000] = {};
+  abramov::CompositeShape shapes(10000);
   abramov::rectangle_t rects[10000] = {};
   size_t i = 0;
   double k = 0;
   double x = 0;
   double y = 0;
   bool wrong_figure = false;
-  abramov::getShapes(std::cin, shapes, i, x, y, k, wrong_figure);
+  try
+  {
+    abramov::getShapes(std::cin, shapes, i, x, y, k, wrong_figure);
+  }
+  catch (const std::bad_alloc &e)
+  {
+    std::cerr << "Memory fail\n";
+    return 2;
+  }
   if (k <= 0)
   {
-    abramov::deleteShapes(shapes, i);
     std::cerr << "There is no scale command\n";
     return 1;
   }
@@ -34,5 +41,4 @@ int main()
   {
     std::cerr << "There was bad figure\n";
   }
-  abramov::deleteShapes(shapes, i);
 }
