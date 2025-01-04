@@ -7,15 +7,18 @@ void duhanina::createShape(std::istream& in, const std::string& shapeType, Shape
 {
   if (shapeType == "RECTANGLE")
   {
-    shapes[shapeCount++] = makeRectangle(in);
+    Rectangle* rect = makeRectangle(in);
+    shapes[shapeCount++] = rect;
   }
   else if (shapeType == "CIRCLE")
   {
-    shapes[shapeCount++] = makeCircle(in);
+    Circle* circ = makeCircle(in);
+    shapes[shapeCount++] = circ;
   }
   else if (shapeType == "ELLIPSE")
   {
-    shapes[shapeCount++] = makeEllipse(in);
+    Ellipse* ellip = makeEllipse(in);
+    shapes[shapeCount++] = ellip;
   }
 }
 

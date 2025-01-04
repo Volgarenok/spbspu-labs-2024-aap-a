@@ -6,7 +6,7 @@
 double duhanina::calcArea(const Shape* const* shapes, size_t shapeCount)
 {
   double totalArea = 0;
-  for (size_t i = 0; i <= shapeCount; ++i)
+  for (size_t i = 0; i < shapeCount; ++i)
   {
     totalArea += shapes[i]->getArea();
   }
@@ -25,7 +25,7 @@ void duhanina::outFigures(std::ostream& out, const Shape* const* shapes, size_t 
 void duhanina::printFiguresInfo(std::ostream& out, const Shape* const* shapes, size_t shapeCount)
 {
   out << std::fixed << std::setprecision(1) << calcArea(shapes, shapeCount);
-  for (size_t i = 0; i <= shapeCount; i++)
+  for (size_t i = 0; i < shapeCount; i++)
   {
     out << " ";
     outFigures(out, shapes, i);
@@ -35,7 +35,7 @@ void duhanina::printFiguresInfo(std::ostream& out, const Shape* const* shapes, s
 
 void duhanina::processScaling(Shape* const* shapes, size_t shapeCount, point_t point, double scalingFactor)
 {
-  for (size_t i = 0; i <= shapeCount; ++i)
+  for (size_t i = 0; i < shapeCount; ++i)
   {
     point_t pos = shapes[i]->getFrameRect().pos;
     shapes[i]->move(point);
