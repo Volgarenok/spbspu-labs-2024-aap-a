@@ -34,7 +34,7 @@ void nikonov::Rectangle::move(double x, double y)
   movePoint(lbp_, x, y);
   movePoint(rtp_, x, y);
 }
-void nikonov::Rectangle::scaleWithoutCheck(double k)
+void nikonov::Rectangle::scale(double k)
 {
   rectangle_t crntRect = getFrameRect();
   scalePoint(lbp_, crntRect.pos, k);

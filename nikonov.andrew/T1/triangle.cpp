@@ -52,7 +52,7 @@ void nikonov::Triangle::move(double x, double y)
   movePoint(b_, x, y);
   movePoint(c_, x, y);
 }
-void nikonov::Triangle::scaleWithoutCheck(double k)
+void nikonov::Triangle::scale(double k)
 {
   point_t center = getCenterOfGravity(a_, b_, c_);
   scalePoint(a_, center, k);

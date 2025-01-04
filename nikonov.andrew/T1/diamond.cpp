@@ -46,7 +46,7 @@ void nikonov::Diamond::move(double x, double y)
   movePoint(midP_, x, y);
   movePoint(rightP_, x, y);
 }
-void nikonov::Diamond::scaleWithoutCheck(double k)
+void nikonov::Diamond::scale(double k)
 {
   rectangle_t crntRect = getFrameRect();
   scalePoint(topP_, crntRect.pos, k);

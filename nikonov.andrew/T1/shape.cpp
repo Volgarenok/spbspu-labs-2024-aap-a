@@ -6,5 +6,9 @@ void nikonov::Shape::scaleWithCheck(double k)
   {
     throw std::logic_error("Scale denied: k must be more than zero");
   }
-  scaleWithoutCheck(k);
+  scale(k);
+}
+void nikonov::Shape::scaleWithoutCheck(double k)
+{
+  scale(k);
 }
