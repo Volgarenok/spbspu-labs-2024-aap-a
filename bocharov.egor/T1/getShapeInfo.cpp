@@ -127,7 +127,7 @@ int bocharov::getShapeInfo(std::istream & input, std::ostream & error, std::ostr
       if (shapesCount == 0)
       {
         error << "No shapes for scale\n";
-        return -1;
+        return 0;
       }
       point_t toCenter;
       double ratio;
@@ -144,14 +144,14 @@ int bocharov::getShapeInfo(std::istream & input, std::ostream & error, std::ostr
       {
         error << e.what() << '\n';
         clear(myShapes, shapesCount);
-        return -1;
+        return 0;
       }
     }
   }
   if (!scaled)
   {
     clear(myShapes, shapesCount);
-    return -1;
+    return 0;
   }
   return shapesCount;
 }
