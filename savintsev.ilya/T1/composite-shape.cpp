@@ -19,6 +19,10 @@ savintsev::CompositeShape::CompositeShape(size_t capacity):
 savintsev::CompositeShape::CompositeShape(const CompositeShape & rhs)
 {
   Shape ** new_lst = createAmpCopy(rhs.lst_, rhs.cap_, rhs.cap_);
+  if (!new_lst)
+  {
+    throw std::bad_alloc();
+  }
   lst_ = new_lst;
   amt_ = rhs.amt_;
   cap_ = rhs.cap_;
@@ -37,6 +41,10 @@ savintsev::CompositeShape & savintsev::CompositeShape::operator=(const Composite
   if (&rhs != this)
   {
     Shape ** new_lst = createAmpCopy(rhs.lst_, rhs.cap_, rhs.cap_);
+    if (!new_lst)
+    {
+      throw std::bad_alloc();
+    }
     destroy(lst_, amt_);
     lst_ = new_lst;
     amt_ = rhs.amt_;
@@ -106,11 +114,21 @@ void savintsev::CompositeShape::move(double x, double y)
 
 void savintsev::CompositeShape::scale(double k)
 {
-  if (k <= 0)
-  {
-    return;
-  }
   point_t center = getFrameRect().pos;
+  for (size_t i = 0; i < amt_; ++i)
+  {
+    point_t jFirst = lst_[i]->getFrameRect().pos;
+    lst_[i]->move(center);
+    point_t jSecond = lst_[i]->getFrameRect().pos;
+    point_t vector = {(jSecond.x - jFirst.x) * k, (jSecond.y - jFirst.y) * k};
+    lst_[i]->scale(k);
+    lst_[i]->move(-vector.x, -vector.y);
+  }
+}
+
+void savintsev::CompositeShape::scaleRelativeTo(double k, point_t p)
+{
+  point_t center = p;
   for (size_t i = 0; i < amt_; ++i)
   {
     point_t jFirst = lst_[i]->getFrameRect().pos;
@@ -176,5 +194,5 @@ void savintsev::CompositeShape::destroy(Shape ** shps, size_t n)
   {
     delete shps[i];
   }
-  delete shps;
+  delete[] shps;
 }
