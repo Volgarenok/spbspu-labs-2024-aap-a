@@ -31,16 +31,17 @@ bool bocharov::isTriangle(point_t a, point_t b, point_t c)
 
 double bocharov::getMyArea(point_t a, point_t b, point_t c)
 {
-  return std::abs((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y -b.y)) / 2.0l);
+  return std::abs((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y -b.y)) / 2.0);
 }
 
 bool bocharov::isPointInTriangle(point_t a, point_t b, point_t c, point_t d)
 {
+  const double epsilon = 1e-9;
   double s = getMyArea(a, b, c);
   double s1 = getMyArea(a, b, d);
   double s2 = getMyArea(a, d, c);
   double s3 = getMyArea(d, b, c);
-  return (s == (s1 + s2 + s3));
+  return std::abs(s - (s1 + s2 + s3)) < epsilon;
 }
 
 bocharov::Concave::Concave(point_t a, point_t b, point_t c, point_t d):
