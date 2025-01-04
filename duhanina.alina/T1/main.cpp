@@ -13,9 +13,9 @@ int main()
   point_t point = { 0, 0 };
   try
   {
-    inputShapes(std::cout, shapes, shapeCount);
+    inputShapes(std::cerr, shapes, shapeCount);
     createScale(std::cin, shapeCount, scalingFactor, point);
-    printFiguresInfo(std::cerr, shapes, shapeCount);
+    printFiguresInfo(std::cout, shapes, shapeCount);
     processScaling(shapes, shapeCount, point, scalingFactor);
     printFiguresInfo(std::cout, shapes, shapeCount);
   }
