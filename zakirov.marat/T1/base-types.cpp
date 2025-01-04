@@ -17,9 +17,9 @@ double zakirov::get_distance_y(zakirov::point_t first_p, zakirov::point_t second
 
 double zakirov::get_distance(zakirov::point_t first_p, zakirov::point_t second_p)
 {
-  double squared_x = pow(zakirov::get_distance_x(first_p, second_p), 2);
-  double squared_y = pow(zakirov::get_distance_y(first_p, second_p), 2);
-  return sqrt(squared_x + squared_y);
+  double squared_x = std::pow(zakirov::get_distance_x(first_p, second_p), 2);
+  double squared_y = std::pow(zakirov::get_distance_y(first_p, second_p), 2);
+  return std::sqrt(squared_x + squared_y);
 }
 
 zakirov::point_t zakirov::get_middle(point_t first_p, point_t second_p)

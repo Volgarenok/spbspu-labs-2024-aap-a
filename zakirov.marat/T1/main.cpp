@@ -11,7 +11,7 @@
 int main()
 {
   zakirov::Shape * shapes[10000];
-  size_t location = 0;
+  std::size_t location = 0;
   bool shape_flag = false;
   double * scale_data = nullptr;
   while(true)
@@ -75,7 +75,7 @@ int main()
   }
 
   double total_area = 0;
-  for (size_t i = 0; i < location; ++i)
+  for (std::size_t i = 0; i < location; ++i)
   {
     total_area += shapes[i] -> getArea();
   }
@@ -84,7 +84,7 @@ int main()
   zakirov::output_frame(std::cout, shapes, location);
 
   total_area = 0;
-  for (size_t i = 0; i < location; ++i)
+  for (std::size_t i = 0; i < location; ++i)
   {
     zakirov::point_t target{scale_data[2], scale_data[3]};
     zakirov::scale_from_point(shapes[i], target, scale_data[4]);

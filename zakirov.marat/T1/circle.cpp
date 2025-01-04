@@ -15,7 +15,7 @@ zakirov::Circle::Circle(point_t center, double radius) :
 
 double zakirov::Circle::getArea() const
 {
-  return 3.14 * pow(radius_, 2);
+  return 3.14 * std::pow(radius_, 2);
 }
 
 zakirov::rectangle_t zakirov::Circle::getFrameRect() const

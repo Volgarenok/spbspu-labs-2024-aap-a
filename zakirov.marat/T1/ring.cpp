@@ -16,8 +16,8 @@ zakirov::Ring::Ring(point_t center, double ex_radius, double in_radius) :
 
 double zakirov::Ring::getArea() const
 {
-  double in_area = 3.14 * pow(in_radius_, 2);
-  double ex_area = 3.14 * pow(ex_radius_, 2);
+  double in_area = 3.14 * std::pow(in_radius_, 2);
+  double ex_area = 3.14 * std::pow(ex_radius_, 2);
 
   return ex_area - in_area;
 }
