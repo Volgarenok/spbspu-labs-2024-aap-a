@@ -102,52 +102,10 @@ void bocharov::Concave::scale(double ratio)
   {
     throw std::invalid_argument("under zero ratio\n");
   }
-  if (a_.x - d_.x < 0)
-  {
-    a_.x = -(d_.x - a_.x) * ratio;
-  }
-  else
-  {
-    a_.x = (a_.x - d_.x) * ratio;
-  }
-  if (b_.x - d_.x < 0)
-  {
-    b_.x = -(d_.x - b_.x) * ratio;
-  }
-  else
-  {
-    b_.x = (b_.x - d_.x) * ratio;
-  }
-  if (c_.x - d_.x < 0)
-  {
-    c_.x = -(d_.x - c_.x) * ratio;
-  }
-  else
-  {
-    c_.x = (c_.x - d_.x) * ratio;
-  }
-  if (a_.y - d_.y < 0)
-  {
-    a_.y = -(d_.y - a_.y) * ratio;
-  }
-  else
-  {
-    a_.y = (a_.y - d_.y) * ratio;
-  }
-  if (b_.y - d_.y < 0)
-  {
-    b_.y = -(d_.y - b_.y) * ratio;
-  }
-  else
-  {
-    b_.y = (b_.y - d_.y) * ratio;
-  }
-  if (c_.y - d_.y < 0)
-  {
-    c_.y = -(d_.y - c_.y) * ratio;
-  }
-  else
-  {
-    c_.y = (c_.y - d_.y) * ratio;
-  }
+  a_.x = (a_.x - d_.x) * ratio;
+  b_.x = (b_.x - d_.x) * ratio;
+  c_.x = (c_.x - d_.x) * ratio;
+  a_.y = (a_.y - d_.y) * ratio;
+  b_.y = (b_.y - d_.y) * ratio;
+  c_.y = (c_.y - d_.y) * ratio;
 }
