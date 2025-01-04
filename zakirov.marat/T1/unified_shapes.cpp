@@ -140,7 +140,16 @@ zakirov::Rectangle * zakirov::make_rectangle(double bottom_x, double bottom_y, d
   top_right.y = top_y;
 
   Rectangle * rectangle = static_cast< Rectangle * >(malloc(sizeof(Rectangle)));
-  return new (rectangle) Rectangle(bottom_left, top_right);
+  try
+  {
+    new (rectangle) Rectangle(bottom_left, top_right);
+    return rectangle;
+  }
+  catch(const std::invalid_argument & e)
+  {
+    free(rectangle);
+    throw e;
+  }
 }
 
 zakirov::Circle * zakirov::make_circle(double center_x, double center_y, double radius)

@@ -48,8 +48,3 @@ void zakirov::Ring::scale(double k)
   in_radius_ *= k;
   ex_radius_ *= k;
 }
-
-zakirov::Ring::~Ring()
-{
-  free(this);
-}

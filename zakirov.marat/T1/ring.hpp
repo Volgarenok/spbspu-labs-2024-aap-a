@@ -8,7 +8,6 @@ namespace zakirov
   {
   public:
     Ring(point_t center, double ex_radius, double in_radius);
-    ~Ring();
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t target) override;
