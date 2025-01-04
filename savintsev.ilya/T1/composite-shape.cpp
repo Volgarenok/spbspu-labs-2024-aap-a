@@ -45,6 +45,18 @@ savintsev::CompositeShape & savintsev::CompositeShape::operator=(const Composite
   return *this;
 }
 
+savintsev::CompositeShape & savintsev::CompositeShape::operator=(CompositeShape && rhs)
+{
+  if (&rhs != this)
+  {
+    lst_ = rhs.lst_;
+    amt_ = rhs.amt_;
+    cap_ = rhs.cap_;
+    rhs.lst_ = nullptr;
+  }
+  return *this;
+}
+
 double savintsev::CompositeShape::getArea() const
 {
   double area = 0.0;

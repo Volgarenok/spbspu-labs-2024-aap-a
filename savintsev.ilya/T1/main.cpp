@@ -1,6 +1,7 @@
 #include <iostream>
 #include <newlineterminatedstr.h>
 #include "shape.hpp"
+#include "composite-shape.hpp"
 #include "shape-addon.hpp"
 
 int main()
