@@ -1,21 +1,22 @@
-#ifndef TRIANGLE_HPP
-#define TRIANGLE_HPP
+#ifndef SQUARE_HPP
+#define SQUARE_HPP
 #include "base_types.hpp"
 #include "shape.hpp"
 
 namespace komarova
 {
-  struct Triangle : public Shape
+  struct Square : public Shape
   {
   public:
-    Triangle(point_t a, point_t b, point_t c);
+    Square(point_t low_left, double len);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void move(double dx, double dy) override;
     void move(point_t point) override;
+    void move(double dx, double dy) override;
     void scale(double coef) override;
   private:
-    point_t a_, b_, c_;
+    point_t low_left_;
+    double len_;
   };
 }
 
