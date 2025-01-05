@@ -51,20 +51,28 @@ namespace kushekbaev
   void Concave::move(point_t Z)
   {
     point_t middle = getFrameRect().pos;
-    double dx = Z.x - middle.x;
-    double dy = Z.y - middle.y;
-    moveDelta(dx, dy, first_);
-    moveDelta(dx, dy, second_);
-    moveDelta(dx, dy, third_);
-    moveDelta(dx, dy, final_);
+    double moveX = Z.x - middle.x;
+    double moveY = Z.y - middle.y;
+    first_.x += moveX;
+    first_.y += moveY;
+    second_.x += moveX;
+    second_.y += moveY;
+    third_.x += moveX;
+    third_.y += moveY;
+    final_.x += moveX;
+    final_.y += moveY;
   }
 
   void Concave::move(double dx, double dy)
   {
-    moveDelta(dx, dy, first_);
-    moveDelta(dx, dy, second_);
-    moveDelta(dx, dy, third_);
-    moveDelta(dx, dy, final_);
+    first_.x += dx;
+    first_.y += dy;
+    second_.x += dx;
+    second_.y += dy;
+    third_.x += dx;
+    third_.y += dy;
+    final_.x += dx;
+    final_.y += dy;
   }
 
   void Concave::scale(double V)
