@@ -13,8 +13,8 @@ gavrilova::Ellipse::Ellipse(const point_t& center, double radiusY, double radius
 
 gavrilova::Ellipse::Ellipse(const Ellipse& other):
   center_(other.center_),
-  radiusX_(other.radiusX_),
-  radiusY_(other.radiusY_)
+  radiusY_(other.radiusY_),
+  radiusX_(other.radiusX_)
 {}
 
 double gavrilova::Ellipse::getArea() const {
