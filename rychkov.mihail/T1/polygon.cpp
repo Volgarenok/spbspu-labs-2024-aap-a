@@ -27,7 +27,7 @@ rychkov::Polygon::Polygon(point_t* points, size_t size):
 {
   if(size < 3)
   {
-    throw std::invalid_argument("invalid polygon vertexes count");
+    throw std::invalid_argument("not enough vertexes to build polygon");
   }
   for (size_t i = 1; i < size; i++)
   {
@@ -35,7 +35,7 @@ rychkov::Polygon::Polygon(point_t* points, size_t size):
     {
       if ((points[i].x == points[j].x) && (points[i].y == points[j].y))
       {
-        throw std::invalid_argument("invalid polygon vertexes");
+        throw std::invalid_argument("polygon can't have equal vertexes");
       }
     }
   }

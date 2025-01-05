@@ -66,7 +66,7 @@ rychkov::Shape* rychkov::CompositeShape::at(size_t id)
 {
   if (id >= size_)
   {
-    throw std::length_error("composite shape index is too big");
+    throw std::out_of_range("composite shape index is too big");
   }
   return shapes_[id];
 }
@@ -74,7 +74,7 @@ const rychkov::Shape* rychkov::CompositeShape::at(size_t id) const
 {
   if (id >= size_)
   {
-    throw std::length_error("composite shape index is too big");
+    throw std::out_of_range("composite shape index is too big");
   }
   return shapes_[id];
 }
@@ -98,9 +98,11 @@ rychkov::rectangle_t rychkov::CompositeShape::getFrameRect() const noexcept
     {
       continue;
     }
+    point_t tempBottomLeft = {tempFrame.pos.x - tempFrame.width / 2,
+          tempFrame.pos.y - tempFrame.height / 2};
+    point_t tempTopRight = {tempFrame.pos.x + tempFrame.width / 2,
+          tempFrame.pos.y + tempFrame.height / 2};
 
-    point_t tempBottomLeft = {tempFrame.pos.x - tempFrame.width / 2, tempFrame.pos.y - tempFrame.height / 2};
-    point_t tempTopRight = {tempFrame.pos.x + tempFrame.width / 2, tempFrame.pos.y + tempFrame.height / 2};
     if ((bottomLeft.x == topRight.x) || (bottomLeft.y == topRight.y))
     {
       bottomLeft = tempBottomLeft;

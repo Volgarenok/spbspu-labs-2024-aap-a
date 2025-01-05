@@ -21,17 +21,17 @@ namespace rychkov
     Shape* at(size_t id);
     const Shape* at(size_t id) const;
 
+    size_t size() const noexcept;
+    bool empty() const noexcept;
+    void push_back(Shape* value);
+    void pop_back();
+
     double getArea() const noexcept;
     rectangle_t getFrameRect() const noexcept;
     void move(point_t destination) noexcept;
     void move(double deltaX, double deltaY) noexcept;
     void scale(double coef);
     CompositeShape* clone() const;
-
-    size_t size() const noexcept;
-    bool empty() const noexcept;
-    void push_back(Shape* value);
-    void pop_back();
   private:
     Shape** shapes_;
     size_t size_, capacity_;
