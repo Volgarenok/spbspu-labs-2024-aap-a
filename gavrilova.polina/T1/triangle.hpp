@@ -2,7 +2,7 @@
 #define TRIANGLE_HPP
 #include "shape.hpp"
 namespace gavrilova {
-  class Triangle : public Shape {
+  class Triangle final : public Shape {
   public:
     Triangle(point_t A, point_t B, point_t C);
     Triangle(const Triangle& other);

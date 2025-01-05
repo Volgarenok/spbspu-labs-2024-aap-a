@@ -4,7 +4,7 @@
 #include "shape.hpp"
 #include "triangle.hpp"
 namespace gavrilova {
-  class Polygon : public Shape {
+  class Polygon final : public Shape {
   public:
     ~Polygon();
     Polygon(size_t size, point_t * verteces);
@@ -23,3 +23,4 @@ namespace gavrilova {
   };
 }
 #endif
+

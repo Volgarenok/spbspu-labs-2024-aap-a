@@ -2,7 +2,7 @@
 #define RECTANGLE_HPP
 #include "shape.hpp"
 namespace gavrilova {
-  class Rectangle : public Shape {
+  class Rectangle final : public Shape {
   public:
     Rectangle(point_t pBottomLeft, point_t pTopRigh);
     Rectangle(const Rectangle& other);

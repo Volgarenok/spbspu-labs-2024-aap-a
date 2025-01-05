@@ -2,7 +2,7 @@
 #define ELLIPSE_HPP
 #include "shape.hpp"
 namespace gavrilova {
-  class Ellipse : public Shape {
+  class Ellipse final : public Shape {
   public:
     Ellipse(const point_t& center, double radiusX, double radiusY);
     Ellipse(const Ellipse& other);
