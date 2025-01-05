@@ -1,7 +1,9 @@
 #include "rectangle.hpp"
 #include <stdexcept>
+#include <cmath>
 #include "destroy.hpp"
 #include "printResult.hpp"
+#include "ellipse.hpp"
 #include "movingPoint.hpp"
 
 duhanina::Rectangle::Rectangle(const point_t& lt, const point_t& rt):
