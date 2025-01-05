@@ -32,11 +32,14 @@ namespace kushekbaev
         }
         else if (shapeName == "SCALE")
         {
-          scalePoint = kushekbaev::makeScale(input);
-          input >> scaleCoeff;
-          if (scaleCoeff <= 0)
+          try
           {
-            throw std::underflow_error("ERROR: Incorrect scale coefficient\n");
+            scalePoint = kushekbaev::makeScale(input);
+            input >> scaleCoeff;
+          }
+          catch (std::out_of_range)
+          {
+            throw std::out_of_range("ERROR: Incorrect scale coefficient\n");
           }
           therewasascale = true;
           break;
@@ -54,7 +57,11 @@ namespace kushekbaev
     }
     if (!therewasascale)
     {
-      throw std::underflow_error("ERROR: there was no scale\n");
+      throw std::length_error("ERROR: there was no scale\n");
+    }
+    if (shapeCounter == 0)
+    {
+      throw std::underflow_error("Shapeless input\n");
     }
   }
 }
