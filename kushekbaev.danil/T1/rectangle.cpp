@@ -24,7 +24,7 @@ namespace kushekbaev
 
   void Rectangle::move(point_t Z)
   {
-    point_t middle = this->getFrameRect().pos;
+    point_t middle = getFrameRect().pos;
     double moveX = Z.x - middle.x;
     double moveY = Z.y - middle.y;
     lowerLeft_.x += moveX;
@@ -47,7 +47,7 @@ namespace kushekbaev
     {
       throw std::out_of_range("Scale coefficient should be greater than zero\n");
     }
-    point_t middle = this->getFrameRect().pos;
+    point_t middle = getFrameRect().pos;
     lowerLeft_.x = middle.x + (lowerLeft_.x - middle.x) * V;
     lowerLeft_.y = middle.y + (lowerLeft_.y - middle.y) * V;
     upperRight_.x = middle.x + (upperRight_.x - middle.x) * V;

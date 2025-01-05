@@ -25,7 +25,7 @@ namespace kushekbaev
 
   void Diamond::move(point_t Z)
   {
-    point_t middle = this->getFrameRect().pos;
+    point_t middle = getFrameRect().pos;
     double moveX = Z.x - middle.x;
     double moveY = Z.y - middle.y;
     middle_ = Z;

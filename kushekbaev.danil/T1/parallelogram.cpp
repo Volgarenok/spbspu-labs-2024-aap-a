@@ -42,7 +42,7 @@ namespace kushekbaev
   {
     point_t firstalt({ first_.x + third_.x - second_.x, first_.y + third_.y - second_.y });
 
-    point_t middle = this->getFrameRect().pos;
+    point_t middle = getFrameRect().pos;
     double moveX = Z.x - middle.x;
     double moveY = Z.y - middle.y;
     first_.x += moveX;
@@ -76,7 +76,7 @@ namespace kushekbaev
     {
       throw std::out_of_range("Scale coefficient should be greater than zero\n");
     }
-    point_t middle = this->getFrameRect().pos;
+    point_t middle = getFrameRect().pos;
     first_.x = middle.x + (first_.x - middle.x) * V;
     first_.y = middle.y + (first_.y - middle.y) * V;
     second_.x = middle.x + (second_.x - middle.x) * V;
