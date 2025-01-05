@@ -45,6 +45,14 @@ demehin::Ring::Ring(point_t center, double out_r, double in_r):
     delete outer_plg_;
     throw;
   }
+  catch (const std::logic_error& e)
+  {
+    delete[] outerVrt;
+    delete[] innerVrt;
+    delete outer_plg_;
+    throw;
+  }
+
   delete[] outerVrt;
   delete[] innerVrt;
 }

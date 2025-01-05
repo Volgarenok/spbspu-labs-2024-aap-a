@@ -36,6 +36,11 @@ demehin::Rectangle::Rectangle(point_t left_bot, point_t right_top):
     delete[] vrt;
     throw;
   }
+  catch (const std::logic_error& e)
+  {
+    delete[] vrt;
+    throw;
+  }
   delete[] vrt;
 }
 
