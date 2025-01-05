@@ -3,19 +3,9 @@
 #include <iomanip>
 #include <string>
 #include "fabric_shape.hpp"
+#include "scaleShape.hpp"
 
 namespace gavrilova {
-  void scaleShape(Shape & shape, const point_t & center, double k) {
-    point_t pos1 = shape.getFrameRect().pos;
-    double difX = center.x - pos1.x;
-    double difY = center.y - pos1.y;
-    shape.move(center);
-    shape.scale(k);
-    difX *= k;
-    difY *= k;
-    shape.move(-difX, -difY);
-  }
-
   void outRectangles(std::ostream & out, gavrilova::Shape ** Shapes, size_t nShapes) {
     if (nShapes) {
       for (size_t i = 0; i < nShapes; ++i) {

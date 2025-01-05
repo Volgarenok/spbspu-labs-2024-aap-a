@@ -2,6 +2,7 @@
 #include <cmath>
 #include <iostream>
 #include "base-types.hpp"
+#include "scaleShape.hpp"
 
 gavrilova::Polygon::Polygon(size_t nPoints, point_t * verteces):
   size_(nPoints - 2),
@@ -83,7 +84,10 @@ void gavrilova::Polygon::move(double difX, double difY) {
 }
 void gavrilova::Polygon::scale(double k) {
  for (size_t i = 0; i < size_; ++i) {
-    triangles_[i]->scale(k);
+    point_t center =  getFrameRect().pos;
+    for (size_t i = 0; i < size_; ++i) {
+      scaleShape(*triangles_[i], center, k);
+    }
   }
 }
 gavrilova::Shape* gavrilova::Polygon::clone() const {
