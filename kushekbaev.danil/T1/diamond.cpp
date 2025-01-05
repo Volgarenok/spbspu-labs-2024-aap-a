@@ -10,14 +10,16 @@ namespace kushekbaev
   Diamond::Diamond(point_t middle,
     point_t diffX,
   point_t diffY):
+  Parallelogram(
+    {middle.x - diffX.x, middle.y},
+    {middle.x + diffX.x, middle.y},
+    {middle.x, middle.y - diffY.y}
+  ),
   middle_(middle),
   diffX_(diffX),
   diffY_(diffY)
   {
-    if (!isTriangle(middle, diffX, diffY))
-    {
-      throw std::invalid_argument("Incorrect diamond\n");
-    }
+
   }
 
   double Diamond::getArea() const
