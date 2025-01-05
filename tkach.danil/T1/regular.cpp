@@ -101,10 +101,8 @@ void tkach::Regular::move(const double add_to_x, const double add_to_y)
 }
 void tkach::Regular::move(const point_t& point_to_move)
 {
-  second_point_.x += point_to_move.x - first_point_.x;
-  second_point_.y += point_to_move.y - first_point_.y;
-  third_point_.x += point_to_move.x - first_point_.x;
-  third_point_.y += point_to_move.y - first_point_.y;
+  addToPoint(second_point_, point_to_move.x - first_point_.x, point_to_move.y - first_point_.y);
+  addToPoint(third_point_, point_to_move.x - first_point_.x, point_to_move.y - first_point_.y);
   first_point_ = point_to_move;
 }
 void tkach::Regular::scaleOneOfUniqueShapes(const double multiplier)
