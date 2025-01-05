@@ -4,15 +4,14 @@
 #include "base-types.hpp"
 
 namespace {
+  double getDistance(gavrilova::point_t A, gavrilova::point_t B){
+    return std::sqrt(std::pow(A.x - B.x, 2) + std::pow(A.y - B.y, 2));
+  }
   bool isTriangle(gavrilova::point_t A, gavrilova::point_t B, gavrilova::point_t C) {
     double AB = getDistance(A, B);
     double AC = getDistance(A, C);
     double BC = getDistance(B, C);
     return ( (AB + BC) > AC && (AB + AC) > BC && (AC + BC) > AB && AB && AC && BC );
-  }
-
-  double getDistance(gavrilova::point_t A, gavrilova::point_t B){
-    return std::sqrt(std::pow(A.x - B.x, 2) + std::pow(A.y - B.y, 2));
   }
 }
 
