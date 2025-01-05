@@ -35,7 +35,7 @@ namespace kushekbaev
           input >> scaleCoeff;
           if (scaleCoeff <= 0)
           {
-            std::cerr << "ERROR: incorrect scale coefficient\n";
+            throw std::out_of_range("ERROR: incorrect scale coefficient\n");
           }
           break;
         }
