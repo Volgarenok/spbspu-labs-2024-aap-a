@@ -37,7 +37,7 @@ int main()
     return 1;
   }
 
-  catch (const std::out_of_range& e)
+  catch (const std::underflow_error& e)
   {
     std::cerr << "Shapeless input\n";
     return 1;

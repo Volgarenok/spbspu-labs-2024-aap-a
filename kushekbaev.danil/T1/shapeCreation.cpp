@@ -37,7 +37,7 @@ namespace kushekbaev
             scalePoint = kushekbaev::makeScale(input);
             input >> scaleCoeff;
           }
-          catch (std::out_of_range)
+          catch (const std::out_of_range& e)
           {
             throw std::out_of_range("ERROR: Incorrect scale coefficient\n");
           }
