@@ -12,9 +12,16 @@ int main()
   std::string shapeName;
   kushekbaev::point_t scalePoint;
   double scaleCoeff = 0;
-  bool errorexit = false;
 
-  kushekbaev::createShape(std::cin, capacity, shapeCounter, scalePoint, scaleCoeff, errorexit);
+  try
+  {
+    kushekbaev::createShape(std::cin, capacity, shapeCounter, scalePoint, scaleCoeff);
+  }
+
+  catch (const std::exception& e)
+  {
+    return 1;
+  }
 
   if (shapeCounter == 0)
   {

@@ -9,8 +9,7 @@ namespace kushekbaev
   bool therewasascale = false;
   bool errorexit = false;
 
-  void createShape(std::istream& input, Shape** capacity, size_t& shapeCounter, point_t& scalePoint, double& scaleCoeff,
-bool errorexit)
+  void createShape(std::istream& input, Shape** capacity, size_t& shapeCounter, point_t& scalePoint, double& scaleCoeff)
   {
     while (input >> shapeName)
     {
@@ -62,6 +61,10 @@ bool errorexit)
       std::cerr << "ERROR: there was no scale\n";
       kushekbaev::clearMemory(capacity, shapeCounter);
       errorexit = true;
+    }
+    if (errorexit)
+    {
+       throw std::exception("exit must be non-zero");
     }
   }
 }
