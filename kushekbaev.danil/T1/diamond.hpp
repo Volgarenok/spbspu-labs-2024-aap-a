@@ -1,12 +1,26 @@
-#ifndef SHAPECREATION_HPP
-#define SHAPECREATION_HPP
+#ifndef DIAMOND_HPP
+#define DIAMOND_HPP
 
-#include <iostream>
 #include "shape.hpp"
+
 
 namespace kushekbaev
 {
-  void createShape(std::istream& input, Shape** capacity, size_t& shapeCounter, point_t& scalePoint, double& scaleCoeff);
+  class Diamond final: public Shape
+  {
+  public:
+    Diamond(const point_t middle, const point_t diffX, const point_t diffY);
+    double getArea() const override;
+    rectangle_t getFrameRect() const override;
+    void move(const point_t Z) override;
+    void move(const double dx, const double dy) override;
+    void scale(const double V) override;
+
+  private:
+    point_t middle_;
+    point_t diffX_;
+    point_t diffY_;
+  };
 }
 
 #endif
