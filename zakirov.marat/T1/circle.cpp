@@ -1,7 +1,6 @@
 #include "circle.hpp"
 #include <cmath>
 #include <stdexcept>
-#include "shape.hpp"
 
 zakirov::Circle::Circle(point_t center, double radius):
   center_(center),
@@ -21,8 +20,7 @@ double zakirov::Circle::getArea() const
 
 zakirov::rectangle_t zakirov::Circle::getFrameRect() const
 {
-  rectangle_t сircumscribed{radius_ * 2, radius_* 2, center_};
-  return сircumscribed;
+  return {radius_ * 2, radius_* 2, center_};
 }
 
 void zakirov::Circle::move(point_t target)

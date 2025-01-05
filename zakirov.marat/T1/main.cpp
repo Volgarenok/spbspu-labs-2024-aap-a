@@ -11,7 +11,7 @@
 int main()
 {
   zakirov::Shape * shapes[10000] = {};
-  std::size_t location = 0;
+  size_t location = 0;
   bool shape_flag = false;
   double * scale_data = nullptr;
   double * data = nullptr;

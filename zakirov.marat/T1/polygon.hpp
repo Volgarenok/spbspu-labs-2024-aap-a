@@ -9,7 +9,7 @@ namespace zakirov
   class Polygon: public Shape
   {
   public:
-    Polygon(std::size_t size, point_t * points);
+    Polygon(size_t size, point_t * points);
     ~Polygon();
     double getArea() const override;
     rectangle_t getFrameRect() const override;
@@ -17,7 +17,7 @@ namespace zakirov
     void move(double bias_x, double bias_y) override;
     void scale(double k) override;
   private:
-    std::size_t size_;
+    size_t size_;
     point_t * points_;
   };
 }

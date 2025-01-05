@@ -1,5 +1,4 @@
 #include "ring.hpp"
-#include "shape.hpp"
 #include <cmath>
 #include <stdexcept>
 
