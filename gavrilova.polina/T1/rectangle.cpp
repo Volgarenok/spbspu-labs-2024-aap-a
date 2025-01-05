@@ -33,18 +33,13 @@ gavrilova::rectangle_t gavrilova::Rectangle::getFrameRect() const {
 }
 void gavrilova::Rectangle::move(point_t p) {
   point_t center = getFrameRect().pos;
-  double difX = center.x - p.x;
-  double difY = center.y - p.y;
-  pBottomLeft_.x -= difX;
-  pBottomLeft_.y -= difY;
-  pTopRight_.x -= difX;
-  pTopRight_.y -= difY;
+  double difX = p.x - center.x;
+  double difY = p.y - center.y;
+  move(difX, difY);
 }
 void gavrilova::Rectangle::move(double difX, double difY) {
-  pBottomLeft_.x += difX;
-  pBottomLeft_.y += difY;
-  pTopRight_.x += difX;
-  pTopRight_.y += difY;
+  pBottomLeft_.move(difX, difY);
+  pTopRight_.move(difX, difY);
 }
 void gavrilova::Rectangle::scale(double k) {
   rectangle_t frameRect = getFrameRect();

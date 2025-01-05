@@ -53,15 +53,11 @@ void gavrilova::Polygon::move(point_t p) {
   point_t center = getFrameRect().pos;
   double difX = p.x - center.x;
   double difY = p.y - center.y;
-  for (size_t i = 0; i < size_; ++i) {
-    verteces_[i].x += difX;
-    verteces_[i].y += difY;
-  }
+  move(difX, difY);
 }
 void gavrilova::Polygon::move(double difX, double difY) {
   for (size_t i = 0; i < size_; ++i) {
-    verteces_[i].x += difX;
-    verteces_[i].y += difY;
+    verteces_[i].move(difX, difY);
   }
 }
 void gavrilova::Polygon::scale(double k) {

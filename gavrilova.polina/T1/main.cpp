@@ -44,7 +44,7 @@ int main()
 
   while (!std::cin.eof() && std::cin) {
     try {
-      Shapes[nShapes] = gavrilova::fabric_shape(std::cin, center, koef, nError);
+      Shapes[nShapes] = gavrilova::make_shape(std::cin, center, koef, nError);
     } catch (...) {
       //std::cerr << Error in creating shape;
       return 1;

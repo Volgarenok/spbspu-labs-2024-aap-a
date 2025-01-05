@@ -19,16 +19,12 @@ gavrilova::Triangle::Triangle(point_t A, point_t B, point_t C):
   B_({0.0}),
   C_({0.0})
 {
-  if (gavrilova::isTriangle(A, B, C)){
-    A_.x = A.x;
-    B_.x = B.x;
-    C_.x = C.x;
-    A_.y = A.y;
-    B_.y = B.y;
-    C_.y = C.y;
-  } else {
+  if (!gavrilova::isTriangle(A, B, C)) {
     throw std::logic_error("Invalid arguments for triangle");
   }
+  A_ = A;
+  B_ = B;
+  C_ = C;
 }
 gavrilova::Triangle::Triangle(const Triangle& other): 
   A_(other.A_),
@@ -59,20 +55,12 @@ void gavrilova::Triangle::move(point_t p) {
   point_t center = getFrameRect().pos;
   double difX = p.x - center.x;
   double difY = p.y - center.y;
-  A_.x += difX;
-  A_.y += difY;
-  B_.x += difX;
-  B_.y += difY;
-  C_.x += difX;
-  C_.y += difY;
+  move(difX, difY);
 }
 void gavrilova::Triangle::move(double difX, double difY) {
-  A_.x += difX;
-  A_.y += difY;
-  B_.x += difX;
-  B_.y += difY;
-  C_.x += difX;
-  C_.y += difY;
+  A_.move(difX, difY);
+  B_.move(difX, difY);
+  C_.move(difX, difY);
 }
 void gavrilova::Triangle::scale(double k) {
   point_t center =  getFrameRect().pos;
