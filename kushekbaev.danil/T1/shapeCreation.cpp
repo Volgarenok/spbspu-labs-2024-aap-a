@@ -36,7 +36,8 @@ namespace kushekbaev
           input >> scaleCoeff;
           if (scaleCoeff <= 0)
           {
-            throw std::out_of_range("ERROR: incorrect scale coefficient\n");
+            std::cerr << "ERROR: Incorrect scale coefficient\n";
+            kushekbaev::clearMemory(capacity, shapeCounter);
           }
           therewasascale = true;
           break;
@@ -44,7 +45,7 @@ namespace kushekbaev
       }
       catch (const std::invalid_argument& e)
       {
-        throw std::invalid_argument("Some of inputed shapes were incorrectly inputed\n");
+        std::cerr << "Some of inputed shapes were incorrectly inputed\n";
       }
       catch (const std::bad_alloc& e)
       {
@@ -55,7 +56,8 @@ namespace kushekbaev
     }
     if (!therewasascale)
     {
-      throw std::out_of_range("ERROR: There was no scale command\n");
+      std::cerr << "ERROR: there was no scale\n";
+      kushekbaev::clearMemory(capacity, shapeCounter);
     }
   }
 }

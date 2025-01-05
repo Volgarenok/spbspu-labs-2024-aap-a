@@ -13,22 +13,7 @@ int main()
   kushekbaev::point_t scalePoint;
   double scaleCoeff = 0;
 
-  try
-  {
-    kushekbaev::createShape(std::cin, capacity, shapeCounter, scalePoint, scaleCoeff);
-  }
-
-  catch (const std::invalid_argument& e)
-  {
-    std::cerr << "Some of inputed shapes were inputed wrong\n";
-  }
-
-  catch (const std::out_of_range& e)
-  {
-    std::cerr << "incorrect scale coefficient\n";
-    kushekbaev::clearMemory(capacity, shapeCounter);
-    return 1;
-  }
+  kushekbaev::createShape(std::cin, capacity, shapeCounter, scalePoint, scaleCoeff);
 
   if (shapeCounter == 0)
   {
