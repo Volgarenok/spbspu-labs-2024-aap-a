@@ -1,6 +1,7 @@
 #include "rectangle.hpp"
-#include "base_types.hpp"
 #include <stdexcept>
+#include "base_types.hpp"
+#include "shape.hpp"
 
 komarova::Rectangle::Rectangle(point_t low_left, point_t up_right):
   low_left_(low_left),

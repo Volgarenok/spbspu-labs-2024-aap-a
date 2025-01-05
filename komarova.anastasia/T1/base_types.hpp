@@ -15,5 +15,5 @@ namespace komarova
     point_t pos;
   };
 }
-#endif
 
+#endif

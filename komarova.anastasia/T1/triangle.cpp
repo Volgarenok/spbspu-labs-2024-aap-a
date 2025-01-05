@@ -1,9 +1,9 @@
-#include "base_types.hpp"
-#include "shape.hpp"
+#include "triangle.hpp"
 #include <cmath>
 #include <algorithm>
 #include <stdexcept>
-#include "triangle.hpp"
+#include "base_types.hpp"
+#include "shape.hpp"
 
 komarova::Triangle::Triangle(point_t a, point_t b, point_t c):
   a_(a),

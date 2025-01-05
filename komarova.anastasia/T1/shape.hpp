@@ -15,4 +15,5 @@ namespace komarova
     virtual void scale(double coef) = 0;
   };
 }
+
 #endif
