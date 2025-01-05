@@ -17,8 +17,8 @@ namespace kushekbaev
     virtual ~Shape() = default;
   };
 
-  double getLineLength(point_t first, point_t second);
-  double getAreaOfTriangle(point_t first, point_t second, point_t third);
+  double getLineLength(const point_t first, const point_t second);
+  double getAreaOfTriangle(const point_t first, const point_t second, const point_t third);
 }
 
 #endif

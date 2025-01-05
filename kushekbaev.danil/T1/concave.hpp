@@ -8,12 +8,12 @@ namespace kushekbaev
   class Concave : public Shape
   {
   public:
-    Concave(point_t first, point_t second, point_t third, point_t final);
+    Concave(const point_t first, const point_t second, const point_t third, const point_t final);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void move(point_t Z) override;
-    void move(double dx, double dy) override;
-    void scale(double V) override;
+    void move(const point_t Z) override;
+    void move(const double dx, const double dy) override;
+    void scale(const double V) override;
 
   private:
     point_t first_;

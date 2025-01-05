@@ -8,12 +8,12 @@ namespace kushekbaev
   class Rectangle : public Shape
   {
   public:
-    Rectangle(point_t lowerLeft, point_t upperRight);
+    Rectangle(const point_t lowerLeft, const point_t upperRight);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void move(point_t Z) override;
-    void move(double dx, double dy) override;
-    void scale(double V) override;
+    void move(const point_t Z) override;
+    void move(const double dx, const double dy) override;
+    void scale(const double V) override;
 
   private:
     point_t lowerLeft_;
