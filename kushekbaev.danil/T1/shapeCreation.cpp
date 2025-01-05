@@ -38,6 +38,7 @@ namespace kushekbaev
           {
             throw std::out_of_range("ERROR: incorrect scale coefficient\n");
           }
+          therewasascale = true;
           break;
         }
       }
