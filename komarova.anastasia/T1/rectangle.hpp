@@ -17,7 +17,7 @@ namespace komarova
   private:
     point_t low_left_;
     point_t up_right_;
-  }
+  };
 }
 
 #endif
