@@ -10,9 +10,9 @@ namespace kushekbaev
 
   void createShape(std::istream& input, Shape** capacity, size_t& shapeCounter, point_t& scalePoint, double& scaleCoeff)
   {
-    while (input >> shapeName)
+    try
     {
-      try
+      while (input >> shapeName)
       {
         if (shapeName == "RECTANGLE")
         {
@@ -45,16 +45,17 @@ namespace kushekbaev
           break;
         }
       }
-      catch (const std::invalid_argument& e)
-      {
-        throw std::invalid_argument("Some of inputed shapes were incorrectly inputed\n");
-      }
-      catch (const std::bad_alloc& e)
-      {
-        std::cerr << "ERROR: Bad allocation\n";
-        kushekbaev::clearMemory(capacity, shapeCounter);
-      }
     }
+    catch (const std::invalid_argument& e)
+    {
+      throw std::invalid_argument("Some of inputed shapes were incorrectly inputed\n");
+    }
+    catch (const std::bad_alloc& e)
+    {
+      std::cerr << "ERROR: Bad allocation\n";
+      kushekbaev::clearMemory(capacity, shapeCounter);
+    }
+
     if (!therewasascale)
     {
       throw std::length_error("ERROR: there was no scale\n");
