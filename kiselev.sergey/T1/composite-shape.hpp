@@ -24,6 +24,7 @@ namespace kiselev
     void move(point_t a) noexcept;
     void move(double dx, double dy) noexcept;
     void scale(double k, point_t scale) noexcept;
+    void scale(double k) noexcept;
     ~CompositeShape();
   private:
     void clear() noexcept;

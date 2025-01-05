@@ -151,6 +151,19 @@ void kiselev::CompositeShape::scale(double k, point_t scale) noexcept
     shapes[i]->move(-vector.x, -vector.y);
   }
 }
+void kiselev::CompositeShape::scale(double k) noexcept
+{
+  point_t scale = getFrameRect().pos;
+  for (size_t i = 0; i < realSize; ++i)
+  {
+    kiselev::point_t beforeScale = shapes[i]->getFrameRect().pos;
+    shapes[i]->move(scale);
+    kiselev::point_t afterScale = shapes[i]->getFrameRect().pos;
+    kiselev::point_t vector = { (afterScale.x - beforeScale.x) * k, (afterScale.y - beforeScale.y) * k };
+    shapes[i]->scale(k);
+    shapes[i]->move(-vector.x, -vector.y);
+  }
+}
 kiselev::CompositeShape::~CompositeShape()
 {
     clear();
