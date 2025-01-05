@@ -72,6 +72,8 @@ alymova::rectangle_t::rectangle_t(const rectangle_t&& rect):
 {}
 alymova::rectangle_t alymova::rectangle_t::operator=(const rectangle_t& rect)
 {
+  low_left_ = rect.low_left_;
+  upp_right_ = rect.upp_right_;
   width = rect.width;
   height = rect.height;
   pos = rect.pos;
