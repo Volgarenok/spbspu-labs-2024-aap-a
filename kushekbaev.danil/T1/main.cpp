@@ -12,12 +12,18 @@ int main()
   std::string shapeName;
   kushekbaev::point_t scalePoint;
   double scaleCoeff = 0;
+  bool errorexit = false;
 
   kushekbaev::createShape(std::cin, capacity, shapeCounter, scalePoint, scaleCoeff);
 
   if (shapeCounter == 0)
   {
     std::cerr << "Shapeless input" << "\n";
+    return 1;
+  }
+
+  if (errorexit)
+  {
     return 1;
   }
 
