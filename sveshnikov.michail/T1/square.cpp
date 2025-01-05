@@ -1,10 +1,16 @@
 #include "square.hpp"
 #include <cmath>
+#include <stdexcept>
 
 sveshnikov::Square::Square(point_t low_left, double side):
   low_left_(low_left),
   side_(side)
-{}
+{
+  if (side <= 0)
+  {
+    throw std::logic_error("ERROR: incorrect side value of square");
+  }
+}
 
 double sveshnikov::Square::getArea() const
 {
@@ -17,7 +23,7 @@ sveshnikov::rectangle_t sveshnikov::Square::getFrameRect() const
   return {side_, side_, center};
 }
 
-void sveshnikov::Square::move(point_t p)
+void sveshnikov::Square::move(const point_t p)
 {
   double ctr_x = getFrameRect().pos.x, ctr_y = getFrameRect().pos.y;
   low_left_.x += p.x - ctr_x;
@@ -32,6 +38,10 @@ void sveshnikov::Square::move(double dx, double dy)
 
 void sveshnikov::Square::scale(double k)
 {
+  if (k < 0)
+  {
+    throw std::logic_error("ERROR: zoom coefficient must be positive!");
+  }
   double ctr_x = getFrameRect().pos.x, ctr_y = getFrameRect().pos.y;
   low_left_.x = ctr_x - k * (ctr_x - low_left_.x);
   low_left_.y = ctr_y - k * (ctr_y - low_left_.y);

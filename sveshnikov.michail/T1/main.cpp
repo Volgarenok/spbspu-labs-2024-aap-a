@@ -17,49 +17,28 @@ int main()
     while (shape_name != "SCALE" && !std::cin.eof())
     {
       std::cin >> shape_name;
-      if (shape_name == "RECTANGLE")
+      try
       {
-        try
+        if (shape_name == "RECTANGLE")
         {
           sveshnikov::build_rectangle(std::cin, shapes, num_shapes);
         }
-        catch (const std::logic_error &e)
-        {
-          std::cerr << "ERROR: Incorrect input of rectangle!\n";
-        }
-      }
-      else if (shape_name == "RING")
-      {
-        try
+        else if (shape_name == "RING")
         {
           sveshnikov::build_ring(std::cin, shapes, num_shapes);
         }
-        catch (const std::logic_error &e)
-        {
-          std::cerr << "ERROR: Incorrect input of ring!\n";
-        }
-      }
-      else if (shape_name == "ELLIPSE")
-      {
-        try
+        else if (shape_name == "ELLIPSE")
         {
           sveshnikov::build_ellipse(std::cin, shapes, num_shapes);
         }
-        catch (const std::logic_error &e)
-        {
-          std::cerr << "ERROR: Incorrect input of ellipse!\n";
-        }
-      }
-      else if (shape_name == "SQUARE")
-      {
-        try
+        else if (shape_name == "SQUARE")
         {
           sveshnikov::build_square(std::cin, shapes, num_shapes);
         }
-        catch (const std::logic_error &e)
-        {
-          std::cerr << "ERROR: Incorrect input of square!\n";
-        }
+      }
+      catch (const std::logic_error &e)
+      {
+        std::cerr << e.what() << "\n";
       }
     }
   }
@@ -82,16 +61,19 @@ int main()
   }
   double zoom_ctr_x = 0.0, zoom_ctr_y = 0.0, k = 0.0;
   std::cin >> zoom_ctr_x >> zoom_ctr_y >> k;
-  if (k <= 0)
-  {
-    std::cerr << "ERROR: Zoom coefficient must be positive!\n";
-    clear(shapes);
-    return 1;
-  }
   std::cout << std::fixed << std::setprecision(1);
   output_total_area(std::cout, shapes);
   output_frame(std::cout, shapes);
-  sveshnikov::isotropic_scaling(shapes, zoom_ctr_x, zoom_ctr_y, k);
+  try
+  {
+    sveshnikov::isotropic_scaling(shapes, zoom_ctr_x, zoom_ctr_y, k);
+  }
+  catch(const std::logic_error& e)
+  {
+    std::cerr << e.what() << "\n";
+    clear(shapes);
+    return 1;
+  }
   output_total_area(std::cout, shapes);
   output_frame(std::cout, shapes);
   clear(shapes);

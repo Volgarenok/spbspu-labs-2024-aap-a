@@ -1,8 +1,13 @@
 #include "shape_actions.hpp"
 #include <cstddef>
+#include <stdexcept>
 
 void sveshnikov::isotropic_scaling(Shape **shapes, double zoom_ctr_x, double zoom_ctr_y, double k)
 {
+  if (k < 0)
+  {
+    throw std::logic_error("ERROR: zoom coefficient must be positive!");
+  }
   for (size_t i = 0; shapes[i] != nullptr; i++)
   {
     point_t pos = shapes[i]->getFrameRect().pos;

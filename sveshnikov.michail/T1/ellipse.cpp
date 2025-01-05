@@ -1,11 +1,17 @@
 #include "ellipse.hpp"
 #include <cmath>
+#include <stdexcept>
 
 sveshnikov::Ellipse::Ellipse(point_t center, double vert_radius, double horiz_radius):
   center_(center),
   vert_radius_(vert_radius),
   horiz_radius_(horiz_radius)
-{}
+{
+  if (vert_radius_ <= 0 || horiz_radius_ <= 0)
+  {
+    throw std::logic_error("ERROR: incorrect radius values of ellipse");
+  }
+}
 
 double sveshnikov::Ellipse::getArea() const
 {
@@ -30,6 +36,10 @@ void sveshnikov::Ellipse::move(double dx, double dy)
 
 void sveshnikov::Ellipse::scale(double k)
 {
+  if (k < 0)
+  {
+    throw std::logic_error("ERROR: zoom coefficient must be positive!");
+  }
   vert_radius_ *= k;
   horiz_radius_ *= k;
 }
