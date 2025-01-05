@@ -8,9 +8,9 @@ namespace
   {
     demehin::point_t* vrt = new demehin::point_t[vrt_cnt];
     constexpr double PI = 3.1415;
-    for (size_t i = 0; i < 13; ++i)
+    for (size_t i = 0; i < 130; ++i)
     {
-      double angle = 2 * PI * i / 13;
+      double angle = 2 * PI * i / 130;
       double x = center.x + radius * cos(angle);
       double y = center.y + radius * sin(angle);
       vrt[i].x = x;
@@ -33,10 +33,10 @@ demehin::Ring::Ring(point_t center, double out_r, double in_r):
   demehin::point_t* innerVrt = nullptr;
   try
   {
-    outerVrt = generate_vrt(center, out_r, 13);
-    innerVrt = generate_vrt(center, in_r, 13);
-    outer_plg_ = new demehin::Polygon(13, outerVrt);
-    inner_plg_ = new demehin::Polygon(13, innerVrt);
+    outerVrt = generate_vrt(center, out_r, 130);
+    innerVrt = generate_vrt(center, in_r, 130);
+    outer_plg_ = new demehin::Polygon(130, outerVrt);
+    inner_plg_ = new demehin::Polygon(130, innerVrt);
   }
   catch (const std::bad_alloc& e)
   {
