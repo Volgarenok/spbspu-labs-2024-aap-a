@@ -14,7 +14,7 @@ int main()
   double scaleCoeff = 0;
   bool errorexit = false;
 
-  kushekbaev::createShape(std::cin, capacity, shapeCounter, scalePoint, scaleCoeff);
+  kushekbaev::createShape(std::cin, capacity, shapeCounter, scalePoint, scaleCoeff, errorexit);
 
   if (shapeCounter == 0)
   {
