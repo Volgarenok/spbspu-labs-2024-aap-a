@@ -26,7 +26,7 @@ gavrilova::Triangle::Triangle(point_t A, point_t B, point_t C):
   B_ = B;
   C_ = C;
 }
-gavrilova::Triangle::Triangle(const Triangle& other): 
+gavrilova::Triangle::Triangle(const Triangle& other):
   A_(other.A_),
   B_(other.B_),
   C_(other.C_)

@@ -41,7 +41,7 @@ namespace {
     gavrilova::point_t * verteces = arr;
     make_verteces(verteces, 2);
     delete[] line;
-    
+
     gavrilova::Rectangle * rect = nullptr;
     try {
       rect = new gavrilova::Rectangle(verteces[0], verteces[1]);
@@ -57,7 +57,7 @@ namespace {
       ++nError;
       return nullptr;
     }
-    
+
     gavrilova::point_t arr[3] = {};
     gavrilova::point_t * verteces = arr;
     make_verteces(verteces, 3);
@@ -169,6 +169,3 @@ gavrilova::Shape * gavrilova::make_shape(std::istream& in, gavrilova::point_t & 
   delete[] line;
   return new_shape;
 }
-
-
- 

@@ -17,7 +17,7 @@ gavrilova::Polygon::Polygon(size_t nPoints, point_t * verteces):
 }
 gavrilova::Polygon::Polygon(const Polygon& other):
   size_(other.size_),
-  triangles_(nullptr) 
+  triangles_(nullptr)
 {
   triangles_ = new gavrilova::Triangle*[size_];
   for (size_t i = 0; i < size_; ++i) {
