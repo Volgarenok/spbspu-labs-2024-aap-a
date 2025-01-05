@@ -24,8 +24,8 @@ namespace {
   }
   void make_verteces(gavrilova::point_t * verteces, size_t n) {
     for (size_t i = 0; i < n; ++i) {
-      char * xStr = strtok(nullptr, " ");
-      char * yStr = strtok(nullptr, " ");
+      char * xStr = std::strtok(nullptr, " ");
+      char * yStr = std::strtok(nullptr, " ");
       double x = std::atof(xStr);
       double y = std::atof(yStr);
       verteces[i] = {x, y};
@@ -98,7 +98,7 @@ namespace {
       poligon = new gavrilova::Polygon(nPoints, verteces);
       delete[] verteces;
       return poligon;
-    } catch (const std::exception & e) {
+    }catch (const std::exception & e) {
       delete[] verteces;
       ++nError;
       return nullptr;
@@ -111,10 +111,10 @@ namespace {
         return nullptr;
     }
 
-    char* cXStr = strtok(nullptr, " ");
-    char* cYStr = strtok(nullptr, " ");
-    char* rXStr = strtok(nullptr, " ");
-    char* rYStr = strtok(nullptr, " ");
+    char* cXStr = std::strtok(nullptr, " ");
+    char* cYStr = std::strtok(nullptr, " ");
+    char* rXStr = std::strtok(nullptr, " ");
+    char* rYStr = std::strtok(nullptr, " ");
 
     if (!cXStr || !cYStr || !rXStr || !rYStr) {
         ++nError;
@@ -131,7 +131,7 @@ namespace {
         gavrilova::Ellipse* ellipse = new gavrilova::Ellipse({x, y}, radiusX, radiusY);
         delete[] line;
         return ellipse;
-    } catch (const std::exception & e) {
+    }catch (const std::exception & e) {
         ++nError;
         delete[] line;
         return nullptr;
@@ -148,7 +148,7 @@ gavrilova::Shape * gavrilova::make_shape(std::istream& in, gavrilova::point_t & 
     delete[] line;
     return nullptr;
   }
-  char * shapeType = strtok(line, " ");
+  char * shapeType = std::strtok(line, " ");
   Shape* new_shape = nullptr;
 
   if (!std::strcmp(shapeType, "RECTANGLE")) {
@@ -160,11 +160,11 @@ gavrilova::Shape * gavrilova::make_shape(std::istream& in, gavrilova::point_t & 
   } else if (!std::strcmp(shapeType, "ELLIPSE")) {
     new_shape = make_ellipse(line, nSpaces, nError);
   } else if (!std::strcmp(shapeType, "SCALE")) {
-    char * cXStr = strtok(nullptr, " ");
-    char * cYStr = strtok(nullptr, " ");
+    char * cXStr = std::strtok(nullptr, " ");
+    char * cYStr = std::strtok(nullptr, " ");
     center.x = std::atof(cXStr);
     center.y = std::atof(cYStr);
-    char * koefStr = strtok(nullptr, " ");
+    char * koefStr = std::strtok(nullptr, " ");
     koef = std::atof(koefStr);
     delete[] line;
   } else {

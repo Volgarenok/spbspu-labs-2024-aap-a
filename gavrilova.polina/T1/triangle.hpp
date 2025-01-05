@@ -18,7 +18,5 @@ namespace gavrilova {
     point_t B_;
     point_t C_;
   };
-  bool isTriangle(point_t A, point_t B, point_t C);
-  double getDistance(point_t A, point_t B);
 }
 #endif
