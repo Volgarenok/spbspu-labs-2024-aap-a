@@ -45,16 +45,9 @@ namespace
     in >> std::noskipws >> ch;
     if (!in || ch == stop)
     {
-      try
-      {
-        char * str = new char[index + 1];
-        str[index] = '\0';
-        return str;
-      }
-      catch (const std::bad_alloc& e)
-      {
-        return nullptr;
-      }
+      char * str = new char[index + 1];
+      str[index] = '\0';
+      return str;
     }
     char * str = fillStringRecursive(in, stop, index + 1);
     str[index] = ch;
