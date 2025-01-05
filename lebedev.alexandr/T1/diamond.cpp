@@ -2,7 +2,7 @@
 #include <cmath>
 #include "base-types.hpp"
 
-lebedev::Diamond::Diamond(point_t centre, point_t vert, point_t horiz) :
+lebedev::Diamond::Diamond(point_t centre, point_t vert, point_t horiz):
   centre_(centre), vert_(vert), horiz_(horiz)
 {}
 

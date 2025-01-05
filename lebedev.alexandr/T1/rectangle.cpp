@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include "base-types.hpp"
 
-lebedev::Rectangle::Rectangle(lebedev::point_t leftDown, lebedev::point_t rightUp) :
+lebedev::Rectangle::Rectangle(lebedev::point_t leftDown, lebedev::point_t rightUp):
   leftDown_(leftDown), rightUp_(rightUp)
 {}
 double lebedev::Rectangle::getArea() const
