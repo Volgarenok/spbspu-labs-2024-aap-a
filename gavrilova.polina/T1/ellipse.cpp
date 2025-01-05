@@ -1,10 +1,10 @@
 #include "ellipse.hpp"
 #include <iostream>
 #include "base-types.hpp"
-gavrilova::Ellipse::Ellipse(const point_t& center, double radiusX, double radiusY) :
+gavrilova::Ellipse::Ellipse(const point_t& center, double radiusY, double radiusX) :
   center_(center),
-  radiusX_(radiusX),
-  radiusY_(radiusY)
+  radiusY_(radiusY),
+  radiusX_(radiusX)
 {
   if (radiusX <= 0 || radiusY <= 0) {
     throw std::logic_error("Invalid radiuses for ellipse");

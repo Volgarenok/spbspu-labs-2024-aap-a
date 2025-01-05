@@ -15,8 +15,8 @@ namespace gavrilova {
 
   private:
     point_t center_;
-    double radiusX_;
     double radiusY_;
+    double radiusX_;
   };
 }
 #endif
