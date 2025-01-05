@@ -1,5 +1,6 @@
 #include "rectangle.hpp"
 #include <stdexcept>
+#include <array>
 #include "base-types.hpp"
 
 namespace kushekbaev

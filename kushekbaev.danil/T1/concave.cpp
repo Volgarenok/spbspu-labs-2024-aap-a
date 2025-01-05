@@ -2,6 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <cctype>
+#include <array>
 #include "base-types.hpp"
 #include "shapeBreeding.hpp"
 
