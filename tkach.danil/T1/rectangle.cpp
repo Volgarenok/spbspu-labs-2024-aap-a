@@ -16,6 +16,11 @@ double tkach::Rectangle::getArea() const
   return (right_top_point_.y - left_bot_point_.y) * (right_top_point_.x - left_bot_point_.x);
 }
 
+tkach::Shape* tkach::Rectangle::clone() const
+{
+  return new Rectangle(*this);
+}
+
 tkach::rectangle_t tkach::Rectangle::getFrameRect() const
 {
   double height = right_top_point_.y - left_bot_point_.y;

@@ -14,6 +14,7 @@ namespace tkach
     rectangle_t getFrameRect() const;
     void move(double add_to_x, double add_to_y) override;
     void move(const point_t& point_to_move) override;
+    Shape* clone() const override;
     void scaleOneOfUniqueShapes(double multiplier) override;
   private:
     point_t first_point_;
