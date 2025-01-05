@@ -18,6 +18,10 @@ namespace kushekbaev
 
   void scaleEverything(Shape** capacity, size_t shapeCounter, point_t scalePoint, double scaleCoeff)
   {
+    if (scaleCoeff <= 0)
+    {
+      throw std::out_of_range("Incorecct scaleCoeff\n");
+    }
     for (size_t i = 0; i < shapeCounter; ++i)
     {
       if (capacity[i])
