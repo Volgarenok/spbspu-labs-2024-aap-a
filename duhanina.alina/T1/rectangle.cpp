@@ -1,7 +1,5 @@
 #include "rectangle.hpp"
 #include <stdexcept>
-#include <cstddef>
-#include <cmath>
 #include "destroy.hpp"
 #include "printResult.hpp"
 #include "movingPoint.hpp"

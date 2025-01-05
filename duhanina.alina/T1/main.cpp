@@ -1,4 +1,3 @@
-#include <iostream>
 #include <stdexcept>
 #include "destroy.hpp"
 #include "printResult.hpp"

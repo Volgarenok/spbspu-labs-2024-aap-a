@@ -1,7 +1,5 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
-#include "shape.hpp"
-#include "ellipse.hpp"
 
 namespace duhanina
 {

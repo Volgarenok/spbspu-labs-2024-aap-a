@@ -1,5 +1,4 @@
 #include "printResult.hpp"
-#include <ostream>
 #include <iomanip>
 #include <cstddef>
 
@@ -47,7 +46,7 @@ void duhanina::processScaling(Shape* const* shapes, size_t shapeCount, point_t p
     point_t vect;
     vect.x = (newPos.x - pos.x) * scalingFactor;
     vect.y = (newPos.y - pos.y) * scalingFactor;
-    shapes[i]->scaleCheck(scalingFactor);
+    shapes[i]->scale(scalingFactor);
     shapes[i]->move(vect.x * -1, vect.y * -1);
   }
 }
