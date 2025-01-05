@@ -71,7 +71,7 @@ alymova::rectangle_t alymova::Regular::setFrameRect()
   }
   point_t p1 = {low_left_x, low_left_y};
   point_t p2 = {upp_right_x, upp_right_y};
-  return rectangle_t(point_t(low_left_x, low_left_y), point_t(upp_right_x, upp_right_y));
+  return rectangle_t(p1, p2);
 }
 void alymova::Regular::move(double shift_x, double shift_y)
 {
