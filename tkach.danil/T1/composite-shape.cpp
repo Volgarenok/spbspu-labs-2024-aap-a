@@ -1,7 +1,7 @@
 #include "composite-shape.hpp"
-#include "figureactions.hpp"
 #include <cmath>
 #include <stdexcept>
+#include "figureactions.hpp"
 
 namespace
 {
@@ -14,6 +14,11 @@ namespace
     }
   }
 }
+
+tkach::CompositeShape::CompositeShape():
+  shapes_(nullptr),
+  size_(0)
+{}
 
 tkach::CompositeShape::CompositeShape(CompositeShape&& other) noexcept:
   size_(other.size_),
@@ -76,7 +81,7 @@ tkach::CompositeShape& tkach::CompositeShape::operator=(CompositeShape&& other) 
   }
   return *this;
 }
-  
+
 double tkach::CompositeShape::getArea() const
 {
   return getTotalArea(shapes_, size_);

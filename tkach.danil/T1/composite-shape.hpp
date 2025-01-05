@@ -9,11 +9,12 @@ namespace tkach
   class CompositeShape
   {
   public:
+    CompositeShape();
     CompositeShape(const CompositeShape& other);
     CompositeShape(CompositeShape&& other) noexcept;
+    virtual ~CompositeShape();
     CompositeShape& operator=(const CompositeShape& other);
     CompositeShape& operator=(CompositeShape&& other);
-    virtual ~CompositeShape();
     virtual double getArea() const noexcept;
     virtual rectangle_t getFrameRect() const noexcept;
     virtual void move(double add_to_x, double add_to_y) noexcept;
