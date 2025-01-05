@@ -6,7 +6,7 @@ gavrilova::CompositeShape::CompositeShape():
   capacity_(10),
   shapes_(nullptr)
 {
-  shapes_ = new Shape*[capacity_]; 
+  shapes_ = new Shape*[capacity_];
 }
 
 gavrilova::CompositeShape::~CompositeShape() {
