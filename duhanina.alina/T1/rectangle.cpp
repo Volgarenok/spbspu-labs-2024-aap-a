@@ -71,9 +71,9 @@ duhanina::Shape** duhanina::Rectangle::fillWithEllipses(const point_t& lt, const
   Shape** ellipses = nullptr;
   ellWidth_ = (rt.x - lt.x) / std::sqrt(cuts_);
   ellHeight_ = (rt.y - lt.y) / std::sqrt(cuts_);
-  while (std::fabs(rectArea - ellipsesArea) >= 0.5)
+  while (std::fabs(rectArea - ellipsesArea) >= 1.5)
   {
-    if (cuts_ > 10000)
+    if (cuts_ > 100000)
     {
       throw std::runtime_error("Maximum number of ellipses");
     }
@@ -84,7 +84,7 @@ duhanina::Shape** duhanina::Rectangle::fillWithEllipses(const point_t& lt, const
       ellipses[i] = new Ellipse(center, ellWidth_ / 2, ellHeight_ / 2);
     }
     ellipsesArea = calcArea(ellipses, cuts_);
-    if (std::fabs(rectArea - ellipsesArea) >= 0.5)
+    if (std::fabs(rectArea - ellipsesArea) >= 1.5)
     {
       destroy(ellipses, cuts_);
       delete[] ellipses;
