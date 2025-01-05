@@ -2,11 +2,11 @@
 #define KIZHIN_T1_IO_UTILS_HPP
 
 #include <iosfwd>
-#include "shape.hpp"
+#include "composite_shape.hpp"
 
 namespace kizhin {
-  double* processInput(std::istream&, std::ostream&, Shape**);
-  std::ostream& outputShapesInfo(std::ostream&, const Shape* const*);
+  std::ostream& outputShapesInfo(std::ostream&, const CompositeShape&);
+  double* processInput(std::istream&, std::ostream&, CompositeShape&);
 }
 
 #endif

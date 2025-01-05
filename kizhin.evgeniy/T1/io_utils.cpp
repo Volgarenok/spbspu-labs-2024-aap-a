@@ -10,12 +10,13 @@ namespace kizhin {
   void copy(const double*, const double*, double*);
 }
 
-std::ostream& kizhin::outputShapesInfo(std::ostream& os, const Shape* const* shapes)
+std::ostream&
+kizhin::outputShapesInfo(std::ostream& os, const CompositeShape& shapes)
 {
   os << std::fixed << std::setprecision(1);
-  os << computeTotalArea(shapes);
-  for (const Shape* const* i = shapes; *i != nullptr; ++i) {
-    outputShapeFrame(os << ' ', *i);
+  os << shapes.getArea();
+  for (size_t i = 0; i != shapes.size(); ++i) {
+    outputShapeFrame(os << ' ', shapes[i]);
   }
   return os;
 }
@@ -30,12 +31,12 @@ std::ostream& kizhin::outputShapeFrame(std::ostream& os, const Shape* shape)
   return os << x1 << ' ' << y1 << ' ' << x2 << ' ' << y2;
 }
 
-double* kizhin::processInput(std::istream& is, std::ostream& errs, Shape** shapes)
+double*
+kizhin::processInput(std::istream& is, std::ostream& errs, CompositeShape& shapes)
 {
   bool isScaleCommand = false;
   std::string currentName;
   double* currentParams = nullptr;
-  size_t size = 0;
   try {
     while (is) {
       currentParams = parseInputShape(is, currentName);
@@ -44,15 +45,15 @@ double* kizhin::processInput(std::istream& is, std::ostream& errs, Shape** shape
         break;
       }
       try {
-        shapes[size] = createShape(currentName, currentParams);
-        ++size;
+        Shape* shape = createShape(currentName, currentParams);
+        shapes.push_back(shape);
       } catch (const std::exception& e) {
         errs << "Error: " << e.what() << '\n';
       }
       delete[] currentParams;
       currentParams = nullptr;
     }
-    throwIfNotScaleOrSize(isScaleCommand, size);
+    throwIfNotScaleOrSize(isScaleCommand, shapes.size());
   } catch (...) {
     delete[] currentParams;
     throw;

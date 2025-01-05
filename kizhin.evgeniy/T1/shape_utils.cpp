@@ -9,20 +9,11 @@ namespace kizhin {
   Rectangle* createRectangle(const double*);
   Regular* createRegular(const double*);
   Polygon* createPolygon(const double*);
-  void scaleShape(Shape*, const double*);
 }
 
-void kizhin::scaleShapes(Shape* const* shapes, const double* params)
+void kizhin::scaleShape(Shape* shape, double scalingFactor,
+    const point_t& scalingPoint)
 {
-  for (Shape* const* i = shapes; *i != nullptr; ++i) {
-    scaleShape(*i, params);
-  }
-}
-
-void kizhin::scaleShape(Shape* shape, const double* params)
-{
-  const double scalingFactor = params[3];
-  const point_t scalingPoint{ params[1], params[2] };
   const point_t oldFramePos = shape->getFrameRect().pos;
   shape->move(scalingPoint);
   const point_t newFramePos = shape->getFrameRect().pos;
@@ -32,19 +23,12 @@ void kizhin::scaleShape(Shape* shape, const double* params)
   shape->move(dx, dy);
 }
 
-double kizhin::computeTotalArea(const Shape* const* shapes)
+void kizhin::scaleShapes(CompositeShape& shapes, const double* params)
 {
-  double area = 0.0;
-  for (const Shape* const* i = shapes; *i != nullptr; ++i) {
-    area += (*i)->getArea();
-  }
-  return area;
-}
-
-void kizhin::deleteShapes(Shape* const* shapes)
-{
-  for (Shape* const* i = shapes; *i != nullptr; ++i) {
-    delete *i;
+  const double scalingFactor = params[3];
+  const point_t scalingPoint{ params[1], params[2] };
+  for (size_t i = 0; i != shapes.size(); ++i) {
+    scaleShape(shapes[i], scalingFactor, scalingPoint);
   }
 }
 

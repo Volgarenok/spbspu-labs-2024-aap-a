@@ -11,6 +11,7 @@ namespace kizhin {
 
     rectangle_t getFrameRect() const override;
     double getArea() const override;
+    Shape* clone() const override;
 
     void move(const point_t&) override;
     void move(double, double) override;

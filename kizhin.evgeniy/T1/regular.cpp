@@ -36,6 +36,11 @@ kizhin::rectangle_t kizhin::Regular::getFrameRect() const
   return polygon_.getFrameRect();
 }
 
+kizhin::Shape* kizhin::Regular::clone() const
+{
+  return new Regular(*this);
+}
+
 void kizhin::Regular::move(double dx, double dy)
 {
   polygon_.move(dx, dy);

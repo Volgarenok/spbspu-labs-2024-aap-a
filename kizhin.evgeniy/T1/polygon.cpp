@@ -78,6 +78,11 @@ double kizhin::Polygon::getArea() const
   return std::abs(area) / 2.0;
 }
 
+kizhin::Shape* kizhin::Polygon::clone() const
+{
+  return new Polygon(*this);
+}
+
 void kizhin::Polygon::move(double dx, double dy)
 {
   for (point_t* i = vertices_; i != vertices_ + size_; ++i) {
