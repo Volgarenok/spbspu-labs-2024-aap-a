@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <cmath>
 #include <cctype>
+#include <array>
 #include "shape.hpp"
 #include "shapeBreeding.hpp"
 
@@ -9,10 +10,10 @@ namespace kushekbaev
 {
   Parallelogram::Parallelogram(point_t first,
     point_t second,
-    point_t third):
-    first_(first),
-    second_(second),
-    third_(third)
+  point_t third):
+  first_(first),
+  second_(second),
+  third_(third)
   {
     bool isParallelToX = parallelX(first, second) || parallelX (second, third) || parallelX(first, third);
     if (!isTriangle(first, second, third) || !isParallelToX)
@@ -50,22 +51,29 @@ namespace kushekbaev
     point_t firstalt({ first_.x + third_.x - second_.x, first_.y + third_.y - second_.y });
 
     point_t middle = getFrameRect().pos;
-    double dx = Z.x - middle.x;
-    double dy = Z.y - middle.y;
-    moveDelta(dx, dy, first_);
-    moveDelta(dx, dy, second_);
-    moveDelta(dx, dy, third_);
-    moveDelta(dx, dy, firstalt);
+    double moveX = Z.x - middle.x;
+    double moveY = Z.y - middle.y;
+
+    std::array<point_t*, 4> points = { &first_, &second_, &third_, &firstalt };
+
+    for (point_t* point : points)
+    {
+      point->x += moveX;
+      point->y += moveY;
+    }
   }
 
   void Parallelogram::move(double dx, double dy)
   {
     point_t firstalt({ first_.x + third_.x - second_.x, first_.y + third_.y - second_.y });
 
-    moveDelta(dx, dy, first_);
-    moveDelta(dx, dy, second_);
-    moveDelta(dx, dy, third_);
-    moveDelta(dx, dy, firstalt);
+    std::array<point_t*, 4> points = { &first_, &second_, &third_, &firstalt };
+
+    for (point_t* point : points)
+    {
+      point->x += dx;
+      point->y += dy;
+    }
   }
 
   void Parallelogram::scale(double V)
@@ -76,13 +84,13 @@ namespace kushekbaev
       throw std::out_of_range("Scale coefficient should be greater than zero\n");
     }
     point_t middle = getFrameRect().pos;
-    first_.x = middle.x + (first_.x - middle.x) * V;
-    first_.y = middle.y + (first_.y - middle.y) * V;
-    second_.x = middle.x + (second_.x - middle.x) * V;
-    second_.y = middle.y + (second_.y - middle.y) * V;
-    third_.x = middle.x + (third_.x - middle.x) * V;
-    third_.y = middle.y + (third_.y - middle.y) * V;
-    firstalt.x = middle.x + (firstalt.x - middle.x) * V;
-    firstalt.y = middle.y + (firstalt.y - middle.y) * V;
+
+    std::array<point_t*, 4> points = { &first_, &second_, &third_, &firstalt };
+
+    for (point_t* point : points)
+    {
+      point->x = middle.x + (point->x - middle.x) * V;
+      point->y = middle.y + (point->y - middle.y) * V;
+    }
   }
 }
