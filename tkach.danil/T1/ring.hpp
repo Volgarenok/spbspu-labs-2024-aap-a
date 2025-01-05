@@ -9,7 +9,7 @@ namespace tkach
   class Ring final: public Shape
   {
   public:
-    Ring(const point_t* in_reg_points, const point_t* out_reg_points);
+    Ring(const point_t& center, double outer_radius, double inner_radius);
     ~Ring() override;
     double getArea() const override;
     rectangle_t getFrameRect() const;

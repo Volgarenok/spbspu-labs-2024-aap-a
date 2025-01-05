@@ -2,28 +2,31 @@
 #include <cmath>
 #include <stdexcept>
 
-namespace
-{
-  double getDist(const tkach::point_t& point1, const tkach::point_t& point2)
-  {
-    return std::sqrt((point1.x - point2.x) * (point1.x - point2.x) + (point1.y - point2.y) * (point1.y - point2.y));
-  }
-}
-
-tkach::Ring::Ring(const point_t* in_reg_points, const point_t* out_reg_points):
+tkach::Ring::Ring(const point_t& center, double outer_radius, double inner_radius):
   in_reg_(nullptr),
   out_reg_(nullptr)
 {
-  double max_in = std::max(getDist(in_reg_points[0], in_reg_points[1]), getDist(in_reg_points[0], in_reg_points[2]));
-  double max_out = std::max(getDist(out_reg_points[0], out_reg_points[1]), getDist(out_reg_points[0], out_reg_points[2]));
-  if (max_out < max_in)
+   if (outer_radius <= inner_radius)
   {
-    throw std::logic_error("Outer radius is bigger than inner");
+    throw std::logic_error("Outer radius is lesser than inner_radius or equal to it");
   }
+  if (outer_radius <= 0 || inner_radius <= 0)
+  {
+    throw std::logic_error("Incorrect radius");
+  }
+  const double step_in_angle = 2.0 * std::acos(-1.0) / 130.0;
+  const double step_out_angle = 2.0 * std::acos(-1.0) / 170.0;
+  point_t temp_point;
+  temp_point.x = inner_radius * std::cos(step_in_angle) + center.x;
+  temp_point.y = inner_radius * std::sin(step_in_angle) + center.y;
+  point_t new_in_point = {(center.x + inner_radius + temp_point.x) / 2.0, (temp_point.y + center.y) / 2.0};
+  temp_point.x = outer_radius * std::cos(step_out_angle) + center.x;
+  temp_point.y = outer_radius * std::sin(step_out_angle) + center.y;
+  point_t new_out_point = {(center.x + outer_radius + temp_point.x) / 2.0, (temp_point.y + center.y) / 2.0};
   try
   {
-    in_reg_ = new tkach::Regular({in_reg_points[0], in_reg_points[1], in_reg_points[2]});
-    out_reg_ = new tkach::Regular({out_reg_points[0], out_reg_points[1], out_reg_points[2]});
+    in_reg_ = new tkach::Regular(center, {center.x + inner_radius, center.y}, new_in_point);
+    out_reg_ = new tkach::Regular(center, {center.x + outer_radius, center.y}, new_out_point);
   }
   catch (const std::logic_error& e)
   {

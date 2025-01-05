@@ -5,7 +5,7 @@
 
 namespace
 {
-  void fill_array_with_clones(tkach::Shape** now, const tkach::Shape** other, const size_t size, size_t& true_size)
+  void fill_array_with_clones(tkach::Shape** now, tkach::Shape** other, const size_t size, size_t& true_size)
   {
     for (size_t i = 0; i < size; ++i)
     {
@@ -16,8 +16,8 @@ namespace
 }
 
 tkach::CompositeShape::CompositeShape():
-  shapes_(nullptr),
-  size_(0)
+  size_(0),
+  shapes_(nullptr)
 {}
 
 tkach::CompositeShape::CompositeShape(CompositeShape&& other) noexcept:

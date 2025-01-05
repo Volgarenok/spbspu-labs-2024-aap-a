@@ -14,9 +14,9 @@ namespace tkach
     CompositeShape(CompositeShape&& other) noexcept;
     virtual ~CompositeShape();
     CompositeShape& operator=(const CompositeShape& other);
-    CompositeShape& operator=(CompositeShape&& other);
-    virtual double getArea() const noexcept;
-    virtual rectangle_t getFrameRect() const noexcept;
+    CompositeShape& operator=(CompositeShape&& other) noexcept;
+    virtual double getArea() const;
+    virtual rectangle_t getFrameRect() const;
     virtual void move(double add_to_x, double add_to_y) noexcept;
     virtual void move(const point_t& point_to_move) noexcept;
     virtual void scale(double multiplier);
