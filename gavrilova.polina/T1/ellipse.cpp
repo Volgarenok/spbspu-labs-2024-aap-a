@@ -41,6 +41,9 @@ void gavrilova::Ellipse::move(double difX, double difY) {
 }
 
 void gavrilova::Ellipse::scale(double k) {
+  if (k <= 0) {
+    throw std::logic_error("Коэффицент должен быть положительным");
+  }
   radiusX_ *= k;
   radiusY_ *= k;
 }

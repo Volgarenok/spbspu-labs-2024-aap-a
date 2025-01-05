@@ -63,6 +63,9 @@ void gavrilova::Triangle::move(double difX, double difY) {
   C_.move(difX, difY);
 }
 void gavrilova::Triangle::scale(double k) {
+  if (k <= 0) {
+    throw std::logic_error("Коэффицент должен быть положительным");
+  }
   point_t center =  getFrameRect().pos;
   A_.x = center.x - (center.x - A_.x) * k;
   A_.y = center.y - (center.y - A_.y) * k;

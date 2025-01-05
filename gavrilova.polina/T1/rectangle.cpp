@@ -42,6 +42,9 @@ void gavrilova::Rectangle::move(double difX, double difY) {
   pTopRight_.move(difX, difY);
 }
 void gavrilova::Rectangle::scale(double k) {
+  if (k <= 0) {
+    throw std::logic_error("Коэффицент должен быть положительным");
+  }
   rectangle_t frameRect = getFrameRect();
   point_t center = frameRect.pos;
   pBottomLeft_.x = center.x - frameRect.width / 2 * k;
