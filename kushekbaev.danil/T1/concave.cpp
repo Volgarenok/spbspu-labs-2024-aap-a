@@ -12,6 +12,8 @@ namespace kushekbaev
     point_t second,
   point_t third,
   point_t final):
+  parallelogram1_(first_, second_, third_),
+  parallelogram2_(second_, third_, final_),
   first_(first),
   second_(second),
   third_(third),
