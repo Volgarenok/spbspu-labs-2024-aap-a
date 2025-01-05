@@ -83,11 +83,9 @@ void gavrilova::Polygon::move(double difX, double difY) {
   }
 }
 void gavrilova::Polygon::scale(double k) {
- for (size_t i = 0; i < size_; ++i) {
-    point_t center =  getFrameRect().pos;
-    for (size_t i = 0; i < size_; ++i) {
-      scaleShape(*triangles_[i], center, k);
-    }
+  point_t center =  getFrameRect().pos;
+  for (size_t i = 0; i < size_; ++i) {
+    scaleShape(*triangles_[i], center, k);
   }
 }
 gavrilova::Shape* gavrilova::Polygon::clone() const {
