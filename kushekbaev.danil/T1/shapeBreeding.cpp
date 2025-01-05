@@ -75,23 +75,11 @@ namespace kushekbaev
     point_t first { 0, 0 };
     point_t second { 0, 0 };
     point_t third { 0, 0 };
-    bool shit = false;
     input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
-    if (!parallelX(first, second))
+    bool isParallelToX = parallelX(first, second) || parallelX (second, third) || parallelX(first, third);
+    if (!isParallelToX)
     {
-      if (!parallelX(second,third))
-      {
-        if (!parallelX(first, third))
-        {
-          shit = false;
-        }
-        shit = true;
-      }
-      shit = true;
-    }
-    if (!shit)
-    {
-      throw std::invalid_argument("shit\n");
+      throw std::invalid_argument("There is no line that would be parallel to X axis\n");
     }
     if (!isTriangle(first, second, third))
     {
