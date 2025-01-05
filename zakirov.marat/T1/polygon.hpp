@@ -6,7 +6,7 @@
 
 namespace zakirov
 {
-  class Polygon: public Shape
+  class Polygon final: public Shape
   {
   public:
     Polygon(size_t size, point_t * points);

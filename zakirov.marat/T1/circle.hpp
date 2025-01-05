@@ -4,7 +4,7 @@
 
 namespace zakirov
 {
-  class Circle: public Shape
+  class Circle final: public Shape
   {
   public:
     Circle(point_t center, double radius);
