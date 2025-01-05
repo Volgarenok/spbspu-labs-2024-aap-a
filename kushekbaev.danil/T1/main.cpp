@@ -62,6 +62,7 @@ int main()
   catch (const std::out_of_range& e)
   {
     std::cerr << "Scale coefficient must be greater than zero\n";
+    kushekbaev::clearMemory(capacity, shapeCounter);
     return 1;
   }
   return 0;
