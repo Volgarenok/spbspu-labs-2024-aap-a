@@ -16,6 +16,7 @@ namespace alymova
     void move(double shift_x, double shift_y) override;
     void move(point_t point) override;
     void scale(double ratio) override;
+    Shape* clone() const override;
   private:
     point_t pos_, top_, other_;
     double radius_big_, radius_small_, other_side_;

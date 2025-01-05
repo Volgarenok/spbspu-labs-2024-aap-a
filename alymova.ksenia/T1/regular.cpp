@@ -104,3 +104,18 @@ void alymova::Regular::scale(double ratio)
   other_side_ *= ratio;
   frame_rect_.scale(ratio);
 }
+alymova::Shape* alymova::Regular::clone() const
+{
+  Regular* reg = nullptr;
+  try
+  {
+    reg = new Regular(pos_, top_, other_);
+    Shape* shape = reg;
+    return shape;
+  }
+  catch (const std::bad_alloc& e)
+  {
+    delete reg;
+    throw;
+  }
+}

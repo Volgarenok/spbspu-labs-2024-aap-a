@@ -57,3 +57,18 @@ void alymova::Rectangle::scale(double ratio)
   height_ *= ratio;
   frame_rect_.scale(ratio);
 }
+alymova::Shape* alymova::Rectangle::clone() const
+{
+  Rectangle* rect = nullptr;
+  try
+  {
+    rect = new Rectangle(low_left_, upp_right_);
+    Shape* shape = rect;
+    return shape;
+  }
+  catch (const std::bad_alloc& e)
+  {
+    delete rect;
+    throw;
+  }
+}

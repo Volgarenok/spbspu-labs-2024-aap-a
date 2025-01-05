@@ -22,6 +22,7 @@ namespace alymova
   public:
     rectangle_t() = default;
     rectangle_t(point_t low_left, point_t upp_right);
+    rectangle_t operator=(const rectangle_t& rect);
     double getArea() const;
     void move(double shift_x, double shift_y);
     point_t getShift() const;

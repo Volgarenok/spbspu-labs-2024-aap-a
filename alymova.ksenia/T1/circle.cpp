@@ -47,3 +47,18 @@ void alymova::Circle::scale(double ratio)
   radius_ *= ratio;
   frame_rect_.scale(ratio);
 }
+alymova::Shape* alymova::Circle::clone() const
+{
+  Circle* circle = nullptr;
+  try
+  {
+    circle = new Circle(pos_, radius_);
+    Shape* shape = circle;
+    return shape;
+  }
+  catch (const std::bad_alloc& e)
+  {
+    delete circle;
+    throw;
+  }
+}
