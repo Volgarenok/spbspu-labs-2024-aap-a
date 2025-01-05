@@ -2,11 +2,11 @@
 #define DIAMOND_HPP
 
 #include "shape.hpp"
-
+#include "parallelogram.hpp"
 
 namespace kushekbaev
 {
-  class Diamond final: public Shape
+  class Diamond final: public Parallelogram
   {
   public:
     Diamond(const point_t middle, const point_t diffX, const point_t diffY);

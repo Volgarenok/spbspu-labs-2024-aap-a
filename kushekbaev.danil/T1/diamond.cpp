@@ -2,8 +2,6 @@
 #include <cmath>
 #include <stdexcept>
 #include <array>
-#include "shape.hpp"
-#include "shapeBreeding.hpp"
 
 namespace kushekbaev
 {
