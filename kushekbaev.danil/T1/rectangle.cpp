@@ -9,10 +9,6 @@ namespace kushekbaev
     lowerLeft_(lowerLeft),
     upperRight_(upperRight)
   {
-    if (lowerLeft.x >= upperRight.x || lowerLeft.y >= upperRight.x)
-    {
-      throw std::invalid_argument("Incorrect rectangle\n");
-    }
   }
 
   double Rectangle::getArea() const
@@ -30,16 +26,20 @@ namespace kushekbaev
   void Rectangle::move(point_t Z)
   {
     point_t middle = getFrameRect().pos;
-    double dx = Z.x - middle.x;
-    double dy = Z.y - middle.y;
-    moveDelta(dx, dy, lowerLeft_);
-    moveDelta(dx, dy, upperRight_);
+    double moveX = Z.x - middle.x;
+    double moveY = Z.y - middle.y;
+    lowerLeft_.x += moveX;
+    lowerLeft_.y += moveY;
+    upperRight_.x += moveX;
+    upperRight_.y += moveY;
   }
 
   void Rectangle::move(double dx, double dy)
   {
-    moveDelta(dx, dy, lowerLeft_);
-    moveDelta(dx, dy, upperRight_);
+    lowerLeft_.x += dx;
+    lowerLeft_.y += dy;
+    upperRight_.x += dx;
+    upperRight_.y += dy;
   }
 
   void Rectangle::scale(double V)
