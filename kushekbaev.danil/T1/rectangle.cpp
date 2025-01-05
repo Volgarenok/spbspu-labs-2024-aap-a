@@ -9,6 +9,10 @@ namespace kushekbaev
     lowerLeft_(lowerLeft),
     upperRight_(upperRight)
   {
+    if (lowerLeft.x >= upperRight.x || lowerLeft.y >= upperRight.x)
+    {
+      throw std::invalid_argument("Incorrect rectangle\n");
+    }
   }
 
   double Rectangle::getArea() const
