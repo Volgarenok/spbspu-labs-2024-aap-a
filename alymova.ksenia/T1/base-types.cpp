@@ -60,7 +60,7 @@ alymova::rectangle_t::rectangle_t(const rectangle_t& rect):
   width(upp_right_.x - low_left_.x),
   height(upp_right_.y - low_left_.y),
   pos(point_t((low_left_.x + width / 2), (upp_right_.y - height / 2))),
-  shift_point_()
+  shift_point_(rect.shift_point_)
 {}
 alymova::rectangle_t::rectangle_t(const rectangle_t&& rect):
   low_left_(rect.low_left_),
@@ -68,7 +68,7 @@ alymova::rectangle_t::rectangle_t(const rectangle_t&& rect):
   width(upp_right_.x - low_left_.x),
   height(upp_right_.y - low_left_.y),
   pos(point_t((low_left_.x + width / 2), (upp_right_.y - height / 2))),
-  shift_point_()
+  shift_point_(rect.shift_point_)
 {}
 alymova::rectangle_t alymova::rectangle_t::operator=(const rectangle_t& rect)
 {
