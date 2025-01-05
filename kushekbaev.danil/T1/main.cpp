@@ -18,14 +18,21 @@ int main()
     kushekbaev::createShape(std::cin, capacity, shapeCounter, scalePoint, scaleCoeff);
   }
 
-  catch (int code)
+  catch (const std::invalid_argument& e)
   {
+    std::cerr << "Some of inputed shapes were inputed incorrectly\n";
+  }
+
+  catch (const std::underflow_error& e)
+  {
+    std::cerr << "SCALE command error\n";
+    kushekbaev::clearMemory(capacity, shapeCounter);
     return 1;
   }
 
   if (shapeCounter == 0)
   {
-    std::cerr << "Shapeless input" << "\n";
+    std::cerr << "Shapeless input\n";
     return 1;
   }
 

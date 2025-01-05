@@ -7,7 +7,6 @@ namespace kushekbaev
 {
   std::string shapeName;
   bool therewasascale = false;
-  bool errorexit = false;
 
   void createShape(std::istream& input, Shape** capacity, size_t& shapeCounter, point_t& scalePoint, double& scaleCoeff)
   {
@@ -37,9 +36,7 @@ namespace kushekbaev
           input >> scaleCoeff;
           if (scaleCoeff <= 0)
           {
-            std::cerr << "ERROR: Incorrect scale coefficient\n";
-            kushekbaev::clearMemory(capacity, shapeCounter);
-            errorexit = true;
+            throw std::underflow_error("ERROR: Incorrect scale coefficient\n");
           }
           therewasascale = true;
           break;
@@ -47,25 +44,17 @@ namespace kushekbaev
       }
       catch (const std::invalid_argument& e)
       {
-        std::cerr << "Some of inputed shapes were incorrectly inputed\n";
+        throw std::invalid_argument("Some of inputed shapes were incorrectly inputed\n");
       }
       catch (const std::bad_alloc& e)
       {
         std::cerr << "ERROR: Bad allocation\n";
         kushekbaev::clearMemory(capacity, shapeCounter);
-        errorexit = true;
       }
     }
     if (!therewasascale)
     {
-      std::cerr << "ERROR: there was no scale\n";
-      kushekbaev::clearMemory(capacity, shapeCounter);
-      errorexit = true;
-    }
-
-    if (errorexit)
-    {
-      throw 1;
+      throw std::underflow_error("ERROR: there was no scale\n");
     }
   }
 }
