@@ -1,5 +1,6 @@
 #include "makeShapes.hpp"
 #include <cmath>
+#include <iostream>
 #include <stdexcept>
 #include "base-types.hpp"
 #include "complexquad.hpp"
@@ -123,4 +124,22 @@ kiselev::Complexquad* kiselev::make_complexquad(std::istream& input)
   }
   kiselev::Complexquad* comp = new kiselev::Complexquad(p1, p2, p3, p4);
   return comp;
+}
+void kiselev::make_shape(std::string & str, Shape * shape, CompositeShape & compShp)
+{
+  if (str == "RECTANGLE")
+  {
+    shape = kiselev::make_rectangle(std::cin);
+    compShp.push_back(shape);
+  }
+  else if (str == "DIAMOND")
+  {
+    shape = kiselev::make_diamond(std::cin);
+    compShp.push_back(shape);
+  }
+  else if (str == "COMPLEXQUAD")
+  {
+    shape = kiselev::make_complexquad(std::cin);
+    compShp.push_back(shape);
+  }
 }
