@@ -96,6 +96,7 @@ namespace {
     gavrilova::Polygon * poligon = nullptr;
     try {
       poligon = new gavrilova::Polygon(nPoints, verteces);
+      delete[] verteces;
       return poligon;
     } catch (const std::exception & e) {
       delete[] verteces;
