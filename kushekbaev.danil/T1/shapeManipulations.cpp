@@ -16,22 +16,13 @@ namespace kushekbaev
     return total;
   }
 
-  void scaleEverything(Shape** capacity, size_t shapeCounter, point_t scalePoint, double scaleCoeff)
+  void totalScaling(Shape** capacity, size_t shapeCounter, point_t scalePoint, double scaleCoeff)
   {
-    if (scaleCoeff <= 0)
-    {
-      throw std::out_of_range("Incorecct scaleCoeff\n");
-    }
     for (size_t i = 0; i < shapeCounter; ++i)
     {
       if (capacity[i])
       {
-        point_t beforeScale = capacity[i]->getFrameRect().pos;
-        capacity[i]->move(scalePoint);
-        point_t afterScale = capacity[i]->getFrameRect().pos;
-        point_t vector = { (afterScale.x - beforeScale.x) * scaleCoeff, (afterScale.y - beforeScale.y) * scaleCoeff };
-        capacity[i]->scale(scaleCoeff);
-        capacity[i]->move(-vector.x, -vector.y);
+        capacity[i]->scaleEverything(scalePoint, scaleCoeff);
       }
     }
   }

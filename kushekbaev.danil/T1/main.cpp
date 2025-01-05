@@ -54,7 +54,7 @@ int main()
     kushekbaev::coordOutput(capacity, shapeCounter, std::cout);
     std::cout << "\n";
 
-    kushekbaev::scaleEverything(capacity, shapeCounter, scalePoint, scaleCoeff);
+    kushekbaev::totalScaling(capacity, shapeCounter, scalePoint, scaleCoeff);
     std::cout << kushekbaev::getTotalArea(capacity, shapeCounter);
 
     kushekbaev::coordOutput(capacity, shapeCounter, std::cout);
