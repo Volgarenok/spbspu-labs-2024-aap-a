@@ -253,7 +253,7 @@ void alymova::CompositeShape::clear(Shape** shapes) noexcept
 {
   for (size_t i = 0; i < size_; i++)
   {
-    delete shapes_[i];
+    delete shapes[i];
   }
-  delete[] shapes_;
+  delete[] shapes;
 }
