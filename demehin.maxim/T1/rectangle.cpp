@@ -38,6 +38,11 @@ demehin::Rectangle::Rectangle(point_t left_bot, point_t right_top):
   delete[] vrt;
 }
 
+demehin::Rectangle::~Rectangle()
+{
+  delete plg_;
+}
+
 double demehin::Rectangle::getArea() const
 {
   return plg_->getArea();

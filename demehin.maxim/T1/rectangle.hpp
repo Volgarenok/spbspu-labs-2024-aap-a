@@ -9,6 +9,7 @@ namespace demehin
   {
   public:
     Rectangle(point_t left_bot, point_t right_top);
+    ~Rectangle();
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t s) override;
