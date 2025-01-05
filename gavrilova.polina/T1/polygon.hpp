@@ -2,6 +2,7 @@
 #define POLYGON_HPP
 #include <cstddef>
 #include "shape.hpp"
+#include "triangle.hpp"
 namespace gavrilova {
   class Polygon : public Shape {
   public:
@@ -17,7 +18,7 @@ namespace gavrilova {
     point_t getCenter();
   private:
     size_t size_;
-    point_t * verteces_;
+    Triangle ** triangles_;
   };
 }
 #endif

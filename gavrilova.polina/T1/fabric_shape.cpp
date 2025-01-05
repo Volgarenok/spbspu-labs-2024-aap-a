@@ -40,7 +40,8 @@ namespace {
     gavrilova::point_t arr[2] = {};
     gavrilova::point_t * verteces = arr;
     make_verteces(verteces, 2);
-
+    delete[] line;
+    
     gavrilova::Rectangle * rect = nullptr;
     try {
       rect = new gavrilova::Rectangle(verteces[0], verteces[1]);
@@ -147,15 +148,16 @@ gavrilova::Shape * gavrilova::make_shape(std::istream& in, gavrilova::point_t & 
     return nullptr;
   }
   char * shapeType = strtok(line, " ");
-  
+  Shape* new_shape = nullptr;
+
   if (!std::strcmp(shapeType, "RECTANGLE")) {
-    Shape * new_shape = make_rectangle(line, nSpaces, nError);
+    new_shape = make_rectangle(line, nSpaces, nError);
   } else if (!std::strcmp(shapeType, "TRIANGLE")) {
-    Shape * res = make_triangle(line, nSpaces, nError);
+    new_shape = make_triangle(line, nSpaces, nError);
   } else if (!std::strcmp(shapeType, "POLYGON")) {
-    Shape * res = make_polygon(line, nSpaces, nError);
+    new_shape = make_polygon(line, nSpaces, nError);
   } else if (!std::strcmp(shapeType, "ELLIPSE")) {
-    Shape* res = make_ellipse(line, nSpaces, nError);
+    new_shape = make_ellipse(line, nSpaces, nError);
   } else if (!std::strcmp(shapeType, "SCALE")) {
     char * cXStr = strtok(nullptr, " ");
     char * cYStr = strtok(nullptr, " ");
@@ -165,7 +167,8 @@ gavrilova::Shape * gavrilova::make_shape(std::istream& in, gavrilova::point_t & 
     koef = std::atof(koefStr);
   }
   delete[] line;
-  return nullptr;
+  return new_shape;
 }
 
 
+ 

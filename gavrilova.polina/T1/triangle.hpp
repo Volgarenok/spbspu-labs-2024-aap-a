@@ -12,6 +12,7 @@ namespace gavrilova {
     void move(double difX, double difY) override;
     void scale(double k) override;
     Shape* clone() const;
+    Triangle& operator=(const Triangle&);
   private:
     point_t A_;
     point_t B_;

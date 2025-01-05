@@ -1,7 +1,7 @@
 #include "ellipse.hpp"
 #include <iostream>
 #include "base-types.hpp"
-gavrilova::Ellipse::Ellipse(point_t center, double radiusX, double radiusY) :
+gavrilova::Ellipse::Ellipse(const point_t& center, double radiusX, double radiusY) :
   center_(center),
   radiusX_(radiusX),
   radiusY_(radiusY)

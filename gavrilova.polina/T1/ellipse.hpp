@@ -4,7 +4,7 @@
 namespace gavrilova {
   class Ellipse : public Shape {
   public:
-    Ellipse(point_t center, double radiusX, double radiusY);
+    Ellipse(const point_t& center, double radiusX, double radiusY);
     Ellipse(const Ellipse& other);
     double getArea() const override;
     rectangle_t getFrameRect() const override;

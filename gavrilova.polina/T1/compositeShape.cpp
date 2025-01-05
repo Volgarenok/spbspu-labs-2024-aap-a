@@ -96,18 +96,12 @@ size_t gavrilova::CompositeShape::size() const noexcept {
 }
 
 void gavrilova::CompositeShape::scale(double k) {
-  auto frameRect = getFrameRect();
-  point_t center = frameRect.pos;
-
   for (size_t i = 0; i < size_; ++i) {
     shapes_[i]->scale(k);
   }
 }
 
 void gavrilova::CompositeShape::move(double difX, double difY) {
-  auto frameRect = getFrameRect();
-  point_t center = frameRect.pos;
-
   for (size_t i = 0; i < size_; ++i) {
     shapes_[i]->move(difX, difY);
   }
@@ -150,9 +144,8 @@ void gavrilova::CompositeShape::resize(size_t new_capacity) {
   shapes_ = new_shapes;
   capacity_ = new_capacity;
 }
-void gavrilova::CompositeShape::swap(CompositeShape& rhs) {
+void gavrilova::CompositeShape::swap(CompositeShape& rhs) noexcept{
   std::swap(size_, rhs.size_);
   std::swap(capacity_, rhs.capacity_);
   std::swap(shapes_, rhs.shapes_);
 }
-

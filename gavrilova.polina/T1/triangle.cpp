@@ -74,3 +74,9 @@ void gavrilova::Triangle::scale(double k) {
 gavrilova::Shape* gavrilova::Triangle::clone() const {
   return new Triangle(*this);
 }
+gavrilova::Triangle& gavrilova::Triangle::operator=(const gavrilova::Triangle& rhs) {
+  A_ = rhs.A_;
+  B_ = rhs.B_;
+  C_ = rhs.C_;
+  return *this;
+}

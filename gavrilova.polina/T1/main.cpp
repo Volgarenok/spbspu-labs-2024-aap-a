@@ -45,11 +45,10 @@ int main()
   while (!std::cin.eof() && std::cin) {
     try {
       Shapes[nShapes] = gavrilova::make_shape(std::cin, center, koef, nError);
-    } catch (...) {
-      //std::cerr << Error in creating shape;
+    } catch (const std::exception & e) {
+      std::cerr << e.what();
       return 1;
     }
-    //std::cout << "!!\n";
     if (Shapes[nShapes]) {
       commonAreaBefore += Shapes[nShapes]->getArea();
       ++nShapes;
