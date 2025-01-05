@@ -3,6 +3,7 @@
 #include <cmath>
 #include <cctype>
 #include "shape.hpp"
+#include "shapeBreeding.hpp"
 
 namespace kushekbaev
 {
@@ -12,7 +13,13 @@ namespace kushekbaev
     first_(first),
     second_(second),
     third_(third)
-  {}
+  {
+    bool isParallelToX = parallelX(first, second) || parallelX (second, third) || parallelX(first, third);
+    if (!isTriangle(first, second, third) || !isParallelToX)
+    {
+      throw std::invalid_argument("Incorrect parallelogram\\n");
+    }
+  }
 
   double Parallelogram::getArea() const
   {

@@ -11,8 +11,8 @@
 namespace kushekbaev
 {
   bool parallelX(const point_t first, const point_t second);
-  bool parallelY(const point_t first, const point_t second);
   bool isTriangle(const point_t first, const point_t second, const point_t third);
+  bool isPointInsideTriangle(point_t first, point_t second, point_t third, point_t final);
   Rectangle* makeRectangle(std::istream& input);
   Concave* makeConcave(std::istream& input);
   Parallelogram* makeParallelogram(std::istream& input);

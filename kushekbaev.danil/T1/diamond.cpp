@@ -2,6 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 #include "shape.hpp"
+#include "shapeBreeding.hpp"
 
 namespace kushekbaev
 {
@@ -11,7 +12,12 @@ namespace kushekbaev
     middle_(middle),
     diffX_(diffX),
     diffY_(diffY)
-  {}
+  {
+    if (!isTriangle(middle, diffX, diffY))
+    {
+      throw std::invalid_argument("Incorrect diamond\n");
+    }
+  }
 
   double Diamond::getArea() const
   {

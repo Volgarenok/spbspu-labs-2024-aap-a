@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <cctype>
 #include "base-types.hpp"
+#include "shapeBreeding.hpp"
 
 namespace kushekbaev
 {
@@ -14,7 +15,12 @@ namespace kushekbaev
     second_(second),
     third_(third),
     final_(final)
-  {}
+  {
+    if (!isTriangle(first, second, third) || !isPointInsideTriangle(first, second, third, final))
+    {
+      throw std::invalid_argument("Incorrect concave\n");
+    }
+  }
 
   double Concave::getArea() const
   {
