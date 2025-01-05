@@ -26,23 +26,17 @@ namespace kushekbaev
   void Diamond::move(point_t Z)
   {
     point_t middle = getFrameRect().pos;
-    double moveX = Z.x - middle.x;
-    double moveY = Z.y - middle.y;
-    middle_ = Z;
-    diffX_.x += moveX;
-    diffX_.y += moveY;
-    diffY_.x += moveX;
-    diffY_.y += moveY;
+    double dx = Z.x - middle.x;
+    double dy = Z.y - middle.y;
+    moveDelta(dx, dy, diffX_);
+    moveDelta(dx, dy, diffY_);
   }
 
   void Diamond::move(double dx, double dy)
   {
-    middle_.x += dx;
-    middle_.y += dy;
-    diffX_.x += dx;
-    diffX_.y += dy;
-    diffY_.x += dx;
-    diffY_.y += dy;
+    moveDelta(dx, dy, middle_);
+    moveDelta(dx, dy, diffX_);
+    moveDelta(dx, dy, diffY_);
   }
 
   void Diamond::scale(double V)
@@ -51,7 +45,7 @@ namespace kushekbaev
     {
       throw std::out_of_range("Scale coefficient should be greater than zero\n");
     }
-    diffY_.y = middle_.y + (diffY_.y - middle_.y) * V;
-    diffX_.x = middle_.x + (diffX_.x - middle_.x) * V;
+    isoScaling(V, middle_, diffX_);
+    isoScaling(V, middle_, diffY_);
   }
 }
