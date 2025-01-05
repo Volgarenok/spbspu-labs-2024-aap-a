@@ -41,8 +41,8 @@ void zakirov::Rectangle::move(point_t target)
 
 void zakirov::Rectangle::move(double bias_x, double bias_y)
 {
-  move_point(top_right_, bias_x, bias_y);
-  move_point(bottom_left_, bias_x, bias_y);
+  move_point(& top_right_, bias_x, bias_y);
+  move_point(& bottom_left_, bias_x, bias_y);
 }
 
 void zakirov::Rectangle::scale(double k)
