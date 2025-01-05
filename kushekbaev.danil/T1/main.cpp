@@ -26,6 +26,7 @@ int main()
   catch (const std::out_of_range& e)
   {
     std::cerr << "incorrect scale coefficient\n";
+    kushekbaev::clearMemory(capacity, shapeCounter);
     return 1;
   }
 
