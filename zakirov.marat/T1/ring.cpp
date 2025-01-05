@@ -24,8 +24,7 @@ double zakirov::Ring::getArea() const
 
 zakirov::rectangle_t zakirov::Ring::getFrameRect() const
 {
-  rectangle_t сircumscribed{ex_radius_ * 2, ex_radius_ * 2, center_};
-  return сircumscribed;
+  return {ex_radius_ * 2, ex_radius_ * 2, center_};
 }
 
 void zakirov::Ring::move(point_t target)

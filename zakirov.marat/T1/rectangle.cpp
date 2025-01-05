@@ -21,12 +21,11 @@ double zakirov::Rectangle::getArea() const
 
 zakirov::rectangle_t zakirov::Rectangle::getFrameRect() const
 {
-  rectangle_t сircumscribed;
-  сircumscribed.width = get_distance_x(top_right_, bottom_left_);
-  сircumscribed.height = get_distance_y(top_right_, bottom_left_);
-  сircumscribed.pos = get_middle(top_right_, bottom_left_);
+  double width = get_distance_x(top_right_, bottom_left_);
+  double height = get_distance_y(top_right_, bottom_left_);
+  point_t position = get_middle(top_right_, bottom_left_);
 
-  return сircumscribed;
+  return {width, height, position};
 }
 
 void zakirov::Rectangle::move(point_t target)

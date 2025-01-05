@@ -319,20 +319,20 @@ void zakirov::scale_from_point(Shape * mutable_shape, point_t target, double k)
 
 void zakirov::output_frame(std::ostream & out, Shape ** shapes, size_t quantity)
 {
-  for (size_t i = 0; i < quantity; ++i)
+  for (size_t i = 0; i < quantity - 1; ++i)
   {
     rectangle_t frame = shapes[i]->getFrameRect();
     point_t frame_bottom_left{frame.pos.x - frame.width / 2, frame.pos.y - frame.height / 2};
     point_t frame_top_right{frame.pos.x + frame.width / 2, frame.pos.y + frame.height / 2};
     out << frame_bottom_left.x << ' ' << frame_bottom_left.y << ' ';
-    out << frame_top_right.x << ' ' << frame_top_right.y;
-    if (i != quantity - 1)
-    {
-      out << ' ';
-    }
+    out << frame_top_right.x << ' ' << frame_top_right.y << ' ';
   }
 
-  out << '\n';
+  rectangle_t frame = shapes[quantity - 1]->getFrameRect();
+  point_t frame_bottom_left{frame.pos.x - frame.width / 2, frame.pos.y - frame.height / 2};
+  point_t frame_top_right{frame.pos.x + frame.width / 2, frame.pos.y + frame.height / 2};
+  out << frame_bottom_left.x << ' ' << frame_bottom_left.y << ' ';
+  out << frame_top_right.x << ' ' << frame_top_right.y << '\n';
 }
 
 void zakirov::clear_shapes(Shape ** shapes, size_t quantity)
