@@ -9,7 +9,7 @@ namespace kushekbaev
   bool therewasascale = false;
   bool errorexit = false;
 
-  void createShape(std::istream& input, Shape** capacity, size_t& shapeCounter, point_t& scalePoint, double& scaleCoeff
+  void createShape(std::istream& input, Shape** capacity, size_t& shapeCounter, point_t& scalePoint, double& scaleCoeff,
 bool errorexit)
   {
     while (input >> shapeName)
