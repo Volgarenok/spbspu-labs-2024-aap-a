@@ -69,6 +69,8 @@ alymova::rectangle_t alymova::Regular::setFrameRect()
     upp_right_x = std::max(upp_right_x, pos_.x + radius_big_ * std::cos(angle_now));
     upp_right_y = std::max(upp_right_y, pos_.y + radius_big_ * std::sin(angle_now));
   }
+  point_t p1 = {low_left_x, low_left_y};
+  point_t p2 = {upp_right_x, upp_right_y};
   return rectangle_t(point_t(low_left_x, low_left_y), point_t(upp_right_x, upp_right_y));
 }
 void alymova::Regular::move(double shift_x, double shift_y)
