@@ -8,9 +8,11 @@ namespace
   {
     demehin::point_t* vrt = new demehin::point_t[4];
     vrt[0] = left_bot;
-    vrt[1] = {left_bot.x, right_top.y};
+    vrt[1].x = left_bot.x;
+    vrt[1].y = right_top.y;
     vrt[2] = right_top;
-    vrt[3] = {right_top.x, left_bot.y};
+    vrt[3].x = right_top.x;
+    vrt[3].y = left_bot.y;
     return vrt;
   }
 }
@@ -32,7 +34,6 @@ demehin::Rectangle::Rectangle(point_t left_bot, point_t right_top):
   catch (const std::bad_alloc& e)
   {
     delete[] vrt;
-    delete plg_;
     throw;
   }
   delete[] vrt;

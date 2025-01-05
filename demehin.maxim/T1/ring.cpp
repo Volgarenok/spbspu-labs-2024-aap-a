@@ -43,7 +43,6 @@ demehin::Ring::Ring(point_t center, double out_r, double in_r):
     delete[] outerVrt;
     delete[] innerVrt;
     delete outer_plg_;
-    delete inner_plg_;
     throw;
   }
   delete[] outerVrt;
