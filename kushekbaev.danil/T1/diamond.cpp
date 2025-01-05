@@ -1,7 +1,7 @@
 #include "diamond.hpp"
-#include "shape.hpp"
 #include <cmath>
 #include <stdexcept>
+#include "shape.hpp"
 
 namespace kushekbaev
 {
@@ -44,10 +44,9 @@ namespace kushekbaev
   {
     if (V <= 0)
     {
-      throw std::invalid_argument("Scale coefficient should be greater than zero\n");
+      throw std::out_of_range("Scale coefficient should be greater than zero\n");
     }
     diffY_.y = middle_.y + (diffY_.y - middle_.y) * V;
     diffX_.x = middle_.x + (diffX_.x - middle_.x) * V;
   }
-
 }

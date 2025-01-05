@@ -1,8 +1,8 @@
-#include "shape.hpp"
 #include "parallelogram.hpp"
 #include <stdexcept>
 #include <cmath>
 #include <cctype>
+#include "shape.hpp"
 
 namespace kushekbaev
 {
@@ -69,7 +69,7 @@ namespace kushekbaev
     point_t firstalt({ first_.x + third_.x - second_.x, first_.y + third_.y - second_.y });
     if (V <= 0)
     {
-      throw std::invalid_argument("Scale coefficient should be greater than zero\n");
+      throw std::out_of_range("Scale coefficient should be greater than zero\n");
     }
     point_t middle = this->getFrameRect().pos;
     first_.x = middle.x + (first_.x - middle.x) * V;

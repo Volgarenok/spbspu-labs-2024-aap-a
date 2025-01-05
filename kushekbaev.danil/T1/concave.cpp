@@ -1,8 +1,8 @@
 #include "concave.hpp"
-#include "base-types.hpp"
 #include <cmath>
 #include <stdexcept>
 #include <cctype>
+#include "base-types.hpp"
 
 namespace kushekbaev
 {
@@ -66,7 +66,7 @@ namespace kushekbaev
   {
     if (V <= 0)
     {
-      throw std::invalid_argument("Scale coefficient should be greater than zero\n");
+      throw std::out_of_range("Scale coefficient should be greater than zero\n");
     }
     point_t middle = this->getFrameRect().pos;
     first_.x = middle.x + (first_.x - middle.x) * V;
