@@ -1,6 +1,7 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
 #include "shape.hpp"
+#include "polygon.hpp"
 
 namespace demehin
 {
@@ -14,8 +15,7 @@ namespace demehin
     void move(double x, double y) override;
     void scale(double k) override;
   private:
-    point_t lb_;
-    point_t rt_;
+    Polygon* plg_;
   };
 }
 
