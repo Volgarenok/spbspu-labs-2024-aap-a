@@ -70,9 +70,9 @@ $(addprefix test-,$(labs)): test-%: out/%/test-lab
 	$(if $(SILENT),,@echo [TEST] $(patsubst out/%/test-lab,%,$<))
 	$(hidecmd)$(if $(TIMEOUT),$(TIMEOUT_CMD) --signal=KILL $(TIMEOUT)s )$(if $(VALGRIND),valgrind $(VALGRIND) )$< $(TEST_ARGS)
 
-out/%/src-lab: $$(call lab_sources,%) $(call lab_headers,%) $$(call lab_common_sources,$$(call student,%)) $$(call lab_common_headers,$$(call student,%)) | $$(@D)/.dir
+out/%/src-lab: Makefile $$(call lab_sources,%) $$(call lab_headers,%) $$(call lab_common_sources,$$(call student,%)) $$(call lab_common_headers,$$(call student,%)) | $$(@D)/.dir
 	$(if $(SILENT),,@echo [ZIP ] $(patsubst out/%/lab-src,%,$@))
-	$(hidecmd)$(ZIP_CMD) -qr $@ $^
+	$(hidecmd)$(ZIP_CMD) -r $@ $^
 
 out/%/lab: $$(call lab_objects,%) $$(call lab_header_checks,%) | $$(@D)/.dir
 	$(if $(SILENT),,@echo [LINK] $(patsubst out/%/lab,%,$@))
