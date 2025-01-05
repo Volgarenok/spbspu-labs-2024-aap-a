@@ -11,8 +11,8 @@ namespace
     for (size_t i = 0; i < 130; ++i)
     {
       double angle = 2 * PI * i / 130;
-      double x = center.x + radius * cos(angle);
-      double y = center.y + radius * sin(angle);
+      double x = center.x + radius * std::cos(angle);
+      double y = center.y + radius * std::sin(angle);
       vrt[i].x = x;
       vrt[i].y = y;
     }
