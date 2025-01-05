@@ -78,5 +78,4 @@ int main()
   std::cout << compShp.getArea();
   kiselev::printCoordinatesRect(std::cout, compShp);
   return 0;
-}
-  
+} 
