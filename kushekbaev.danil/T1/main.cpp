@@ -13,34 +13,38 @@ int main()
   kushekbaev::point_t scalePoint;
   double scaleCoeff = 0;
 
-  try
+  while (true)
   {
-    kushekbaev::createShape(std::cin, capacity, shapeCounter, scalePoint, scaleCoeff);
-  }
+    try
+    {
+      kushekbaev::createShape(std::cin, capacity, shapeCounter, scalePoint, scaleCoeff);
+      break;
+    }
 
-  catch (const std::invalid_argument& e)
-  {
-    std::cerr << "Some of inputed shapes were inputed incorrectly\n";
-  }
+    catch (const std::invalid_argument& e)
+    {
+      std::cerr << "Some of inputed shapes were inputed incorrectly\n";
+    }
 
-  catch (const std::out_of_range& e)
-  {
-    std::cerr << "Bad SCALE command\n";
-    kushekbaev::clearMemory(capacity, shapeCounter);
-    return 1;
-  }
+    catch (const std::out_of_range& e)
+    {
+      std::cerr << "Bad SCALE command\n";
+      kushekbaev::clearMemory(capacity, shapeCounter);
+      return 1;
+    }
 
-  catch (const std::length_error& e)
-  {
-    std::cerr << "There was no SCALE command\n";
-    kushekbaev::clearMemory(capacity, shapeCounter);
-    return 1;
-  }
+    catch (const std::length_error& e)
+    {
+      std::cerr << "There was no SCALE command\n";
+      kushekbaev::clearMemory(capacity, shapeCounter);
+      return 1;
+    }
 
-  catch (const std::underflow_error& e)
-  {
-    std::cerr << "Shapeless input\n";
-    return 1;
+    catch (const std::underflow_error& e)
+    {
+      std::cerr << "Shapeless input\n";
+      return 1;
+    }
   }
 
   try
