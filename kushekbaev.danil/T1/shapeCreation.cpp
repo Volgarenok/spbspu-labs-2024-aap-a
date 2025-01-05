@@ -62,9 +62,10 @@ namespace kushekbaev
       kushekbaev::clearMemory(capacity, shapeCounter);
       errorexit = true;
     }
+
     if (errorexit)
     {
-       throw std::exception("exit must be non-zero");
+      throw 1;
     }
   }
 }

@@ -18,7 +18,7 @@ int main()
     kushekbaev::createShape(std::cin, capacity, shapeCounter, scalePoint, scaleCoeff);
   }
 
-  catch (const std::exception& e)
+  catch (int code)
   {
     return 1;
   }
@@ -26,11 +26,6 @@ int main()
   if (shapeCounter == 0)
   {
     std::cerr << "Shapeless input" << "\n";
-    return 1;
-  }
-
-  if (errorexit)
-  {
     return 1;
   }
 
