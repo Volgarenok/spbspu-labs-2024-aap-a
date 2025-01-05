@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 #include "base-types.hpp"
-
+#include "triangle.hpp"
 namespace dribas
 {
   bool isTriangle(point_t a, point_t b, point_t c);
@@ -40,51 +40,32 @@ bool dribas::isPointInTriangle(point_t a, point_t b, point_t c, point_t d)
 }
 
 dribas::Concave::Concave(point_t a, point_t b, point_t c, point_t d):
-  a_(b),
-  b_(d),
-  c_(c),
-  d_(a)
+  a_(Triangle{a, b, c}),
+  b_(Triangle{b, c, d})
 {
-  if (!isTriangle(d_, b_, c_) || !isPointInTriangle(a_, b_, c_, d_) || isDupePoint(a_, b_, c_, d_)) {
+  if (!isTriangle(d, b, c) || !isPointInTriangle(a, b, c, b) || isDupePoint(a, b, c, d)) {
     throw std::invalid_argument("Error witch point for concave\n");
   }
 }
 
 double dribas::Concave::getArea() const
 {
-  return std::abs(a_.x * b_.y + b_.x * c_.y + c_.x * d_.y + d_.x * a_.y - b_.x * a_.y - c_.x
-    * b_.y - d_.x * c_.y - a_.x * d_.y) / 2.0;
+  return a_.getArea() - b_.getArea();
 }
 dribas::rectangle_t dribas::Concave::getFrameRect() const
 {
-  double maxX = std::max(a_.x, std::max(b_.x, std::max(c_.x, d_.x)));
-  double maxY = std::max(a_.y, std::max(b_.y, std::max(c_.y, d_.y)));
-  double minY = std::min(a_.y, std::min(b_.y, std::min(c_.y, d_.y)));
-  double minX = std::min(a_.x, std::min(b_.x, std::min(c_.x, d_.x)));
-  rectangle_t result;
-  result.height = maxY - minY;
-  result.width = maxX - minX;
-  result.pos.x = minX + (result.width / 2.0);
-  result.pos.y = minY + (result.height / 2.0);
-  return result;
+  return a_.getFrameRect();
 }
 void dribas::Concave::move(double x, double y)
 {
-  a_.x += x;
-  b_.x += x;
-  c_.x += x;
-  d_.x += x;
-  a_.y += y;
-  b_.y += y;
-  c_.y += y;
-  d_.y += y;
+  a_.move(x,y);
+  b_.move(x,y);
 }
 
 void dribas::Concave::move(point_t point)
 {
-  double moveX = point.x - d_.x;
-  double moveY = point.y - d_.y;
-  move(moveX, moveY);
+  a_.move(point);
+  b_.move(point);
 }
 
 void dribas::Concave::scale(double ratio)
@@ -92,34 +73,6 @@ void dribas::Concave::scale(double ratio)
   if (ratio <= 0) {
     throw std::invalid_argument("under zero ratio\n");
   }
-  if (a_.x - d_.x < 0) {
-    a_.x = -(d_.x - a_.x) * ratio;
-  } else {
-    a_.x = (a_.x - d_.x) * ratio;
-  }
-  if (b_.x - d_.x < 0) {
-    b_.x = -(d_.x - b_.x) * ratio;
-  } else {
-    b_.x = (b_.x - d_.x) * ratio;
-  }
-  if (c_.x - d_.x < 0) {
-    c_.x = -(d_.x - c_.x) * ratio;
-  } else {
-    c_.x = (c_.x - d_.x) * ratio;
-  }
-   if (a_.y - d_.y < 0) {
-    a_.y = -(d_.y - a_.y) * ratio;
-  } else {
-    a_.y = (a_.y - d_.y) * ratio;
-  }
-  if (b_.y - d_.y < 0) {
-    b_.y = -(d_.y - b_.y) * ratio;
-  } else {
-    b_.y = (b_.y - d_.y) * ratio;
-  }
-  if (c_.y - d_.y < 0) {
-    c_.y = -(d_.y - c_.y) * ratio;
-  } else {
-    c_.y = (c_.y - d_.y) * ratio;
-  }
+  a_.scale(ratio);
+  b_.scale(ratio);
 }

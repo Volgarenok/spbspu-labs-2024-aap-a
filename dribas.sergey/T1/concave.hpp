@@ -2,6 +2,7 @@
 #define CONCAVE_HPP
 
 #include "shape.hpp"
+#include "triangle.hpp"
 
 namespace dribas
 {
@@ -18,10 +19,9 @@ namespace dribas
     void move(double x, double y) override;
     void scale(double ratio) override;
   private:
-    point_t a_;
-    point_t b_;
-    point_t c_;
-    point_t d_;
+    Triangle a_{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}};
+    Triangle b_{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}};
+
   };
 }
 #endif
