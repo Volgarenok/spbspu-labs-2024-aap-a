@@ -74,9 +74,13 @@ namespace kushekbaev
       throw std::out_of_range("Scale coefficient should be greater than zero\n");
     }
     point_t middle = getFrameRect().pos;
-    isoScaling(V, middle, first_);
-    isoScaling(V, middle, second_);
-    isoScaling(V, middle, third_);
-    isoScaling(V, middle, final_);
+    first_.x = middle.x + (first_.x - middle.x) * V;
+    first_.y = middle.y + (first_.y - middle.y) * V;
+    second_.x = middle.x + (second_.x - middle.x) * V;
+    second_.y = middle.y + (second_.y - middle.y) * V;
+    third_.x = middle.x + (third_.x - middle.x) * V;
+    third_.y = middle.y + (third_.y - middle.y) * V;
+    final_.x = middle.x + (final_.x - middle.x) * V;
+    final_.y = middle.y + (final_.y - middle.y) * V;
   }
 }
