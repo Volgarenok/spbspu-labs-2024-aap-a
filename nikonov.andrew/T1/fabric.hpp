@@ -1,7 +1,6 @@
 #ifndef FABRIC_HPP
 #define FABRIC_HPP
 #include <istream>
-#include <string>
 #include "rectangle.hpp"
 #include "diamond.hpp"
 #include "triangle.hpp"

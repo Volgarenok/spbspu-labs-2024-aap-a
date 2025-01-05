@@ -1,7 +1,6 @@
 #include "fabric.hpp"
 #include <string>
 #include <exception>
-#include "shape.hpp"
 #include "rectangle.hpp"
 #include "additional-utilities.hpp"
 #include "diamond.hpp"

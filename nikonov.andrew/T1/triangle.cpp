@@ -4,7 +4,7 @@
 #include "base-types.hpp"
 namespace
 {
-  nikonov::point_t getCenterOfGravity(const nikonov::point_t &a, const nikonov::point_t &b, const nikonov::point_t &c)
+  nikonov::point_t getCenterOfGravity(const nikonov::point_t &a, const nikonov::point_t &b, const nikonov::point_t &c) noexcept
   {
     return nikonov::point_t({ (a.x + b.x + c.x) / 3, ((a.y + b.y + c.y) / 3) });
   }
@@ -23,12 +23,12 @@ nikonov::Triangle::Triangle(const point_t &a, const point_t &b, const point_t &c
     throw std::logic_error("ERROR:noncorrect triangle parameters");
   }
 }
-double nikonov::Triangle::getArea() const
+double nikonov::Triangle::getArea() const noexcept
 {
   rectangle_t tempRect = getFrameRect();
   return (tempRect.height * tempRect.width) / 2;
 }
-nikonov::rectangle_t nikonov::Triangle::getFrameRect() const
+nikonov::rectangle_t nikonov::Triangle::getFrameRect() const noexcept
 {
   double maxX = std::max(std::max(a_.x, b_.x), c_.x);
   double maxY = std::max(std::max(a_.y, b_.y), c_.y);
@@ -39,20 +39,20 @@ nikonov::rectangle_t nikonov::Triangle::getFrameRect() const
   point_t pos = point_t({ minX + (width / 2), minY + (height / 2) });
   return rectangle_t({ width, height, pos });
 }
-void nikonov::Triangle::move(const point_t &newPos)
+void nikonov::Triangle::move(const point_t &newPos) noexcept
 {
   point_t center = getCenterOfGravity(a_, b_, c_);
   double diffX = newPos.x - center.x;
   double diffY = newPos.y - center.y;
   move(diffX, diffY);
 }
-void nikonov::Triangle::move(double x, double y)
+void nikonov::Triangle::move(double x, double y) noexcept
 {
   movePoint(a_, x, y);
   movePoint(b_, x, y);
   movePoint(c_, x, y);
 }
-void nikonov::Triangle::scale(double k)
+void nikonov::Triangle::scale(double k) noexcept
 {
   point_t center = getCenterOfGravity(a_, b_, c_);
   scalePoint(a_, center, k);

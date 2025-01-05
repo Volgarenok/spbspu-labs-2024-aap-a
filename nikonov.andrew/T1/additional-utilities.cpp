@@ -1,19 +1,14 @@
 #include "additional-utilities.hpp"
 #include <limits>
-#include <iostream>
 #include <iomanip>
 #include <cmath>
 #include "shape.hpp"
 #include "fabric.hpp"
-void nikonov::fillShapeCollection(std::istream &input, Shape **collection, size_t &cnt)
+void nikonov::fillShapeCollection(std::istream &input, std::ostream &out, Shape **collection, size_t &cnt)
 {
   std::string name = "";
   while (input >> name && name != "SCALE")
   {
-    if (name[0] == '\n')
-    {
-      continue;
-    }
     try
     {
       Shape *newElem = make_shape(input, name);
@@ -22,13 +17,12 @@ void nikonov::fillShapeCollection(std::istream &input, Shape **collection, size_
     }
     catch (const std::logic_error &e)
     {
-      std::cerr << e.what() << '\n';
+      out << e.what() << '\n';
     }
     catch (const std::runtime_error &e)
     {
       input.clear();
       input.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
-      continue;
     }
   }
 }
@@ -47,7 +41,7 @@ void nikonov::ispScale(Shape *shp, double x, double y, double k)
   point_t newCenter = shp->getFrameRect().pos;
   double diffX = newCenter.x - origCenter.x;
   double diffY = newCenter.y - origCenter.y;
-  shp->scaleWithoutCheck(k);
+  shp->scale(k);
   shp->move(diffX * k * (-1), diffY * k * (-1));
 }
 double nikonov::getCollectionArea(Shape **collection, size_t cnt)
@@ -107,7 +101,7 @@ double nikonov::getSegmentLength(const point_t &a, const point_t &b)
 {
   return std::sqrt(std::pow(b.x - a.x, 2) + std::pow(b.y - a.y, 2));
 }
-void nikonov::scalePoint(nikonov::point_t &pt, nikonov::point_t &center, double k)
+void nikonov::scalePoint(point_t &pt, point_t &center, double k)
 {
   pt.x = center.x + (pt.x - center.x) * k;
   pt.y = center.y + (pt.y - center.y) * k;

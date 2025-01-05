@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include "shape.hpp"
-#include "base-types.hpp"
 #include "fabric.hpp"
 #include "additional-utilities.hpp"
 int main()
@@ -11,7 +10,7 @@ int main()
   size_t cnt = 0;
   try
   {
-    fillShapeCollection(std::cin, shapeCollection, cnt);
+    fillShapeCollection(std::cin, std::cerr, shapeCollection, cnt);
     processCollection(std::cin, std::cout, shapeCollection, cnt);
   }
   catch (const std::exception &e)
