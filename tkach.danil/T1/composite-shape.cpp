@@ -5,7 +5,7 @@
 
 namespace
 {
-  void fill_array_with_clones(tkach::Shape** now, tkach::Shape** other, const size_t size, size_t& true_size)
+  void fill_array_with_clones(tkach::Shape** now, const tkach::Shape* const* const other, const size_t size, size_t& true_size)
   {
     for (size_t i = 0; i < size; ++i)
     {
