@@ -25,15 +25,8 @@ namespace kushekbaev
     double firstcheck = (first.x - final.x) * (second.y - first.y) - (second.x - first.x) * (first.y - final.y);
     double secondcheck = (second.x - final.x) * (third.y - second.y) - (third.x - second.x) * (second.y - final.y);
     double thirdcheck = (third.x - final.x) * (first.y - third.y) - (first.x - third.x) * (third.y - final.y);
-    if (firstcheck > 0 && secondcheck > 0 && thirdcheck > 0)
-    {
-      return true;
-    }
-    else if (firstcheck < 0 && secondcheck < 0 && thirdcheck < 0)
-    {
-      return true;
-    }
-    return false;
+    return ((firstcheck > 0 && secondcheck > 0 && thirdcheck > 0) ||
+            (firstcheck < 0 && secondcheck < 0 && thirdcheck < 0));
   }
 
   Rectangle* makeRectangle(std::istream& input)
@@ -43,10 +36,6 @@ namespace kushekbaev
     double x2 = 0;
     double y2 = 0;
     input >> x1 >> y1 >> x2 >> y2;
-    if (x1 >= x2 || y1 >= y2)
-    {
-      throw std::invalid_argument("Left point values should be less than right point values\n");
-    }
     return new Rectangle({ x1, y1 }, { x2, y2 });
   }
 
@@ -58,15 +47,6 @@ namespace kushekbaev
     point_t final { 0, 0 };
 
     input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y >> final.x >> final.y;
-    if (!isTriangle(first, second, third))
-    {
-      throw std::invalid_argument("First three points doesnt make a triangle\n");
-    }
-    if (!isPointInsideTriangle(first, second, third, final))
-    {
-      throw std::invalid_argument("Final point isnt in triangle\n");
-    }
-
     return new Concave({ first, second, third, final });
   }
 
@@ -76,15 +56,6 @@ namespace kushekbaev
     point_t second { 0, 0 };
     point_t third { 0, 0 };
     input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
-    bool isParallelToX = parallelX(first, second) || parallelX (second, third) || parallelX(first, third);
-    if (!isParallelToX)
-    {
-      throw std::invalid_argument("There is no line that would be parallel to X axis\n");
-    }
-    if (!isTriangle(first, second, third))
-    {
-      throw std::invalid_argument("First three points wouldnt make a triangle\n");
-    }
     return new Parallelogram({ first, second, third });
   }
 
@@ -94,10 +65,6 @@ namespace kushekbaev
     point_t second { 0, 0 };
     point_t third { 0, 0 };
     input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
-    if (!isTriangle(first, second, third))
-    {
-      throw std::invalid_argument("First three points wouldnt make a triangle\n");
-    }
     return new Diamond({ first, second, third });
   }
 
