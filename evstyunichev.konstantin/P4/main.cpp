@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdexcept>
+#include <input_string.hpp>
 #include "cstrings.hpp"
 
 int main()
