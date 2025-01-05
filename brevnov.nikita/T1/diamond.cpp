@@ -3,53 +3,50 @@
 #include <stdexcept>
 #include <iostream>
 
-brevnov::Diamond::Diamond(point_t center, point_t horizontal, point_t vertical) : center(center), horizontal(horizontal), vertical(vertical)
+brevnov::Diamond::Diamond(point_t center, point_t horizontal, point_t vertical):
+  center_(center), 
+  horizontal_(horizontal), 
+  vertical_(vertical)
 {
 }
 
-brevnov::Diamond::~Diamond(){}
-
 double brevnov::Diamond::getArea() const
 {
-  return (std::fabs((horizontal.x - center.x) * (vertical.y - center.y) * 2));
+  return (std::fabs((horizontal_.x_ - center_.x_) * (vertical_.y_ - center_.y_) * 2));
 }
 
 brevnov::rectangle_t brevnov::Diamond::getFrameRect() const
 {
-  rectangle_t result;
-  result.pos = center;
-  result.width = std::fabs(horizontal.x - center.x) * 2;
-  result.height = std::fabs(vertical.y - center.y) * 2;
+  point_t pos = center_;
+  double width = std::fabs(horizontal_.x_ - center_.x_) * 2;
+  double height = std::fabs(vertical_.y_ - center_.y_) * 2;
+  rectangle_t result(width, height, pos);
   return result;
 }
 
 void brevnov::Diamond::move(point_t new_centre)
 {
-  double xdif = horizontal.x - center.x;
-  double ydif = vertical.y - center.y;
-  center = new_centre;
-  horizontal = new_centre;
-  vertical = new_centre;
-  horizontal.x += xdif;
-  vertical.y += ydif;
+  double xdif = horizontal_.x_ - center_.x_;
+  double ydif = vertical_.y_ - center_.y_;
+  center_ = new_centre;
+  horizontal_ = new_centre;
+  vertical_ = new_centre;
+  horizontal_.x_ += xdif;
+  vertical_.y_ += ydif;
 }
 
 void brevnov::Diamond::move(double dx, double dy)
 {
-  center.x += dx;
-  horizontal.x += dx;
-  vertical.x += dx;
-  center.y += dy;
-  horizontal.y += dy;
-  vertical.y += dy;
+  center_.x_ += dx;
+  horizontal_.x_ += dx;
+  vertical_.x_ += dx;
+  center_.y_ += dy;
+  horizontal_.y_ += dy;
+  vertical_.y_ += dy;
 }
 
 void brevnov::Diamond::scale(double n)
 {
-  if (n <= 0)
-  {
-    throw std::invalid_argument("Invalid coefficient");
-  }
-  horizontal.x = center.x + (center.x - horizontal.x) * n;
-  vertical.y = center.y + (center.y - vertical.y) * n;
+  horizontal_.x_ = center_.x_ + (center_.x_ - horizontal_.x) * n;
+  vertical_.y_ = center_.y_ + (center_.y_ - vertical_.y) * n;
 }

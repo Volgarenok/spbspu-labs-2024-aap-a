@@ -69,7 +69,9 @@ brevnov::Diamond * brevnov::make_diamond(std::istream & in)
 brevnov::Ellipse * brevnov::make_ellipse(std::istream & in)
 {
   double x = 0.0, y = 0.0, r1 = 0.0, r2 = 0.0;
-  in >> x >> y >> r1 >> r2;
+  in >> x >> y;
+  point_t center(x, y);
+  in >> r1 >> r2;
   if (in.fail())
   {
     throw std::invalid_argument("Incorrect parameters");
@@ -78,8 +80,7 @@ brevnov::Ellipse * brevnov::make_ellipse(std::istream & in)
   {
     throw std::invalid_argument("Incorrect parameters");
   }
-  Ellipse * result = new Ellipse({x, y}, r1, r2);
-  return result;
+  return new Ellipse({x, y}, r1, r2);
 }
 
 brevnov::point_t brevnov::scale(std::istream & in)

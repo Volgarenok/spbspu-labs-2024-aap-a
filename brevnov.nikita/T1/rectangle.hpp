@@ -3,19 +3,19 @@
 #include "shape.hpp"
 namespace brevnov
 {
-  class Rectangle: public Shape
+  class Rectangle final: public Shape
   {
   public:
     Rectangle(point_t left, point_t right);
-    ~Rectangle();
+    ~Rectangle() = default;
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t new_centre) override;
     void move(double dx, double dy) override;
     void scale(double n) override;
   private:
-    point_t left;
-    point_t right;
+    point_t left_;
+    point_t right_;
   };
 }
 #endif

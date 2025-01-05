@@ -35,7 +35,7 @@ int main()
           shapes[count_of_shape] = brevnov::make_rectangle(std::cin);
           count_of_shape++;
         }
-        catch(const std::invalid_argument & e)
+        catch (const std::invalid_argument & e)
         {
           isIncorrectParameters = true;
         }
@@ -94,11 +94,13 @@ int main()
       return 1;
     }
     std::cout << std::setprecision(1);
-    std::cout << brevnov::get_sum_area(shapes, count_of_shape);
+    std::cout << brevnov::get_sum_area(shapes, count_of_shape) << " ";
     brevnov::print_frame_coordinates(shapes, count_of_shape, std::cout);
+    std::cout << "\n";
     brevnov::scale_shape(shapes, count_of_shape, scale_p, ratio);
-    std::cout << brevnov::get_sum_area(shapes, count_of_shape);
+    std::cout << brevnov::get_sum_area(shapes, count_of_shape) << " ";
     brevnov::print_frame_coordinates(shapes, count_of_shape, std::cout);
+    std::cout << "\n";
     brevnov::destroy_shape(shapes, count_of_shape);
     return 0;
   }

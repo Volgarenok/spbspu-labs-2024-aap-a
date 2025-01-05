@@ -1,49 +1,44 @@
 #include "rectangle.hpp"
 #include <stdexcept>
 
-brevnov::Rectangle::Rectangle(point_t left, point_t right) : left(left), right(right) {}
+brevnov::Rectangle::Rectangle(point_t left, point_t right):
+  left_(left),
+  right_(right)
+{}
 
 double brevnov::Rectangle::getArea() const
 {
-  return (right.x - left.x) * (right.y - left.y);
+  return (right_.x_ - left_.x_) * (right_.y_ - left_.y_);
 }
-
-brevnov::Rectangle::~Rectangle(){}
 
 brevnov::rectangle_t brevnov::Rectangle::getFrameRect() const
 {
-  rectangle_t result;
-  result.width = right.x - left.x;
-  result.height = right.y - left.y;
-  result.pos = {left.x + result.width / 2.0, left.y +   result.height / 2.0};
+  double width = right_.x_ - left_.x_;
+  double height = right_.y_ - left_.y_;
+  point_t pos = {left_.x_ + width / 2.0, left_.y_ + height / 2.0};
+  rectangle_t result(width, height, pos);
   return result;
 }
 
 void brevnov::Rectangle::move(point_t new_centre)
 {
-  point_t old_centre = getFrameRect().pos;
-  double dx = new_centre.x - old_centre.x;
-  double dy = new_centre.y - old_centre.y;
+  point_t old_centre = getFrameRect().pos_;
+  double dx_ = new_centre.x_ - old_centre.x_;
+  double dy_ = new_centre.y_ - old_centre.y_;
   move(dx, dy);
 }
 
 void brevnov::Rectangle::move(double dx, double dy)
 {
-  left.x += dx;
-  left.y += dy;
-  right.x += dx;
-  right.y += dy;
+  left_.x_ += dx;
+  left_.y_ += dy;
+  right_.x_ += dx;
+  right_.y_ += dy;
 }
 
 void brevnov::Rectangle::scale(double n)
 {
-  if (n <= 0)
-  {
-    throw std::invalid_argument("Invalid coefficient");
-  }
-  point_t centre = getFrameRect().pos;
-  left.x = centre.x + (left.x - centre.x) * n;
-  left.y = centre.y + (left.y - centre.y) * n;
-  right.x = centre.x + (right.x - centre.x) * n;
-  right.y = centre.y + (right.y - centre.y) * n;
+  point_t centre = getFrameRect().pos_;
+  left_ = {centre.x_ + (left_.x_ - centre.x_) * n, centre.y_ + (left_.y_ - centre.y_) * n};
+  right_ = {centre.x_ + (right_.x_ - centre.x_) * n, centre.y_ + (right_.y_ - centre.y_) * n};
 }
