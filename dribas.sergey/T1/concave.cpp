@@ -7,7 +7,7 @@ namespace dribas
 {
   bool isTriangle(point_t a, point_t b, point_t c);
   bool isPointInTriangle(point_t a, point_t b, point_t c, point_t d);
-  double getMyArea(point_t a, point_t b, point_t c);
+  double getYourArea(point_t a, point_t b, point_t c);
   bool isDupePoint(point_t p1, point_t p2, point_t p3, point_t p4);
 }
 
@@ -26,35 +26,34 @@ bool dribas::isTriangle(point_t a, point_t b, point_t c)
   return !((((a.x == b.x) && (a.x == c.x))) || (( a.y == b.y) && (a.y == c.y)));
 }
 
-double dribas::getMyArea(point_t a, point_t b, point_t c) {
+double dribas::getYourArea(point_t a, point_t b, point_t c) {
   return std::abs((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y -b.y)) / 2.0l);
 }
 
 bool dribas::isPointInTriangle(point_t a, point_t b, point_t c, point_t d)
 {
-  double s = getMyArea(a, b, c);
-  double s1 = getMyArea(a, b, d);
-  double s2 = getMyArea(a, d, c);
-  double s3 = getMyArea(d, b, c);
+  double s = getYourArea(a, b, c);
+  double s1 = getYourArea(a, b, d);
+  double s2 = getYourArea(a, d, c);
+  double s3 = getYourArea(d, b, c);
   return (s == (s1 + s2 + s3));
 }
 
 dribas::Concave::Concave(point_t a, point_t b, point_t c, point_t d):
-  a_({0.0, 0.0}), b_({0.0, 0.0}), c_({0.0, 0.0}), d_({0.0, 0.0})
+  a_(b),
+  b_(d),
+  c_(c),
+  d_(a)
 {
-  if (!isTriangle(d, b, c) || !isPointInTriangle(a, b, c, d) || isDupePoint(a, b, c, d)) {
+  if (!isTriangle(d_, b_, c_) || !isPointInTriangle(a_, b_, c_, d_) || isDupePoint(a_, b_, c_, d_)) {
     throw std::invalid_argument("Error witch point for concave\n");
   }
-  a_ = b;
-  b_ = d;
-  c_ = c;
-  d_ = a;
 }
 
 double dribas::Concave::getArea() const
 {
   return std::abs(a_.x * b_.y + b_.x * c_.y + c_.x * d_.y + d_.x * a_.y - b_.x * a_.y - c_.x
-    * b_.y - d_.x * c_.y - a_.x * d_.y) / 2.0; //ОБЯЗАТЕЛЬНО ПЕРЕДЕЛАТЬ!!!!!
+    * b_.y - d_.x * c_.y - a_.x * d_.y) / 2.0; 
 }
 dribas::rectangle_t dribas::Concave::getFrameRect() const
 {

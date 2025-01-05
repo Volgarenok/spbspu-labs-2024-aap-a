@@ -1,6 +1,8 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
+
 #include "shape.hpp"
+
 namespace dribas
 {
   class Rectangle final: public Shape

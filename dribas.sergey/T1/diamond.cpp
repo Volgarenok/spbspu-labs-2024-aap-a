@@ -2,7 +2,10 @@
 #include <cmath>
 #include <stdexcept>
 
-dribas::Diamond::Diamond(point_t a, point_t b, point_t c): a_({0.0, 0.0}), b_({0.0, 0.0}), c_({0.0, 0.0})
+dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
+  a_({0.0, 0.0}),
+  b_({0.0, 0.0}),
+  c_({0.0, 0.0})
 {
   if ((a.x == b.x && a.y == c.y) || (a.y == b.y && a.x == c.x)) {
     a_ = a;

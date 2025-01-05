@@ -3,14 +3,14 @@
 #include <cmath>
 #include <stdexcept>
 
-dribas::Triangle::Triangle(point_t a, point_t b, point_t c)
+dribas::Triangle::Triangle(point_t a, point_t b, point_t c):
+  a_(a),
+  b_(b),
+  c_(c)
 {
-  if ((a.x * (b.y -c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) == 0) { //Добавлю потом
+  if ((a_.x * (b_.y -c_.y) + b_.x * (c_.y - a_.y) + c_.x * (a_.y - b_.y)) == 0) {
     throw std::invalid_argument("error arguments for triangle\n");
   }
-  a_ = a;
-  b_ = b;
-  c_ = c;
 }
 double dribas::Triangle::getArea() const
 {

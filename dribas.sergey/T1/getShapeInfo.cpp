@@ -1,9 +1,12 @@
 #include "getShapeInfo.hpp"
+#include <iostream>
+#include <cstddef>
 #include "rectangle.hpp"
 #include "triangle.hpp"
 #include "diamond.hpp"
 #include "concave.hpp"
 #include "outputRes.hpp"
+#include "shape.hpp"
 
 double dribas::getAllArea(Shape** myShapes, size_t shapeCount)
 {
@@ -14,12 +17,12 @@ double dribas::getAllArea(Shape** myShapes, size_t shapeCount)
   return allArea;
 }
 
-void dribas::scaling(Shape** myShapes, size_t shapeCount, point_t center, double ratio)
+void scaling(dribas::Shape** myShapes, size_t shapeCount, dribas::point_t center, double ratio)
 {
   for (size_t i = 0; i <shapeCount; i++) {
-    point_t cneter = myShapes[i]->getFrameRect().pos;
+    dribas::point_t cneter = myShapes[i]->getFrameRect().pos;
     myShapes[i]->move(center);
-    point_t center2 = myShapes[i]->getFrameRect().pos;
+    dribas::point_t center2 = myShapes[i]->getFrameRect().pos;
     double diffenceX = (center2.x - cneter.x) * ratio * - 1;
     double diffenceY = (center2.y - cneter.y) * ratio * - 1;
     myShapes[i]->scale(ratio);

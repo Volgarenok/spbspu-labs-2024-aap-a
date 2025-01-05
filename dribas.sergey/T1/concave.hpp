@@ -1,12 +1,17 @@
 #ifndef CONCAVE_HPP
 #define CONCAVE_HPP
+
 #include "shape.hpp"
+
 namespace dribas
 {
   class Concave final: public Shape
   {
   public:
-    Concave(point_t a, point_t b, point_t c, point_t d);
+    Concave(point_t a,
+      point_t b,
+        point_t c,
+          point_t d);
     double getArea() const  override;
     rectangle_t getFrameRect() const override;
     void move(point_t point) override;

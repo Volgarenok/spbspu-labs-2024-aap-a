@@ -1,6 +1,8 @@
 #ifndef DIAMOND_HPP
 #define DIAMOND_HPP
+
 #include "shape.hpp"
+
 namespace dribas
 {
   class Diamond final: public Shape
