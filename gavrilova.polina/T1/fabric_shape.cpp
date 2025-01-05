@@ -166,7 +166,9 @@ gavrilova::Shape * gavrilova::make_shape(std::istream& in, gavrilova::point_t & 
     center.y = std::atof(cYStr);
     char * koefStr = strtok(nullptr, " ");
     koef = std::atof(koefStr);
+    delete[] line;
+  } else {
+    delete[] line;
   }
-  delete[] line;
   return new_shape;
 }
