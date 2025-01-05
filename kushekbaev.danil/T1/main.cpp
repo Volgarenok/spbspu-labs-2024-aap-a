@@ -30,13 +30,6 @@ int main()
     return 1;
   }
 
-  catch (const std::bad_alloc& e)
-  {
-    std::cerr << "Bad alloc" << "\n";
-    kushekbaev::clearMemory(capacity, shapeCounter);
-    return 1;
-  }
-
   if (shapeCounter == 0)
   {
     std::cerr << "Shapeless input" << "\n";

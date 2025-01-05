@@ -6,6 +6,7 @@
 namespace kushekbaev
 {
   std::string shapeName;
+  bool therewasascale = false;
 
   void createShape(std::istream& input, Shape** capacity, size_t& shapeCounter, point_t& scalePoint, double& scaleCoeff)
   {
@@ -42,7 +43,7 @@ namespace kushekbaev
       }
       catch (const std::invalid_argument& e)
       {
-        std::cerr << "ERROR: " << e.what() << "\n";
+        throw std::invalid_argument("Some of inputed shapes were incorrectly inputed\n");
       }
       catch (const std::bad_alloc& e)
       {
@@ -50,6 +51,10 @@ namespace kushekbaev
         kushekbaev::clearMemory(capacity, shapeCounter);
         throw;
       }
+    }
+    if (!therewasascale)
+    {
+      throw std::out_of_range("ERROR: There was no scale command\n");
     }
   }
 }
