@@ -1,5 +1,6 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
+#include <cstddef>
 #include "shape.hpp"
 
 namespace duhanina
@@ -13,11 +14,13 @@ namespace duhanina
     void move(const point_t& newPos) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
-    Shape** fillWithEllipses();
+    Shape** fillWithEllipses(const point_t& lt, const point_t& rt);
 
   private:
-    point_t lt_;
-    point_t rt_;
+    size_t cuts_;
+    Shape** ellipses_;
+    double ellWidth_;
+    double ellHeight_;
   };
 }
 
