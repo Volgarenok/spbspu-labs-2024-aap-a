@@ -7,6 +7,7 @@
 #include "createShapes.hpp"
 #include "actionsWithShapes.hpp"
 #include "shape.hpp"
+#include "auxiliaryFunctions.hpp"
 
 int main()
 {
