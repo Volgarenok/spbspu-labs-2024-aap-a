@@ -5,8 +5,13 @@
 
 namespace kushekbaev
 {
-  Diamond::Diamond(point_t middle, point_t diffX, point_t diffY)
-  : middle_(middle), diffX_(diffX), diffY_(diffY){}
+  Diamond::Diamond(point_t middle,
+    point_t diffX,
+    point_t diffY):
+    middle_(middle),
+    diffX_(diffX),
+    diffY_(diffY)
+  {}
 
   double Diamond::getArea() const
   {

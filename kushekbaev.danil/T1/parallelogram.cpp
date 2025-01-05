@@ -6,8 +6,13 @@
 
 namespace kushekbaev
 {
-  Parallelogram::Parallelogram(point_t first, point_t second, point_t third)
-  : first_(first), second_(second), third_(third){}
+  Parallelogram::Parallelogram(point_t first,
+    point_t second,
+    point_t third):
+    first_(first),
+    second_(second),
+    third_(third)
+  {}
 
   double Parallelogram::getArea() const
   {
