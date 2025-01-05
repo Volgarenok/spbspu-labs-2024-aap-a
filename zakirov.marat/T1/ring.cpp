@@ -29,13 +29,12 @@ zakirov::rectangle_t zakirov::Ring::getFrameRect() const
 
 void zakirov::Ring::move(point_t target)
 {
-  center_ = target;
+  move_point(center_, target);
 }
 
 void zakirov::Ring::move(double bias_x, double bias_y)
 {
-  center_.x += bias_x;
-  center_.y += bias_y;
+  move_point(center_, bias_x, bias_y);
 }
 
 void zakirov::Ring::scale(double k)

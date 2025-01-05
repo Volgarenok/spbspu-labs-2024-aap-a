@@ -62,19 +62,14 @@ void zakirov::Polygon::move(point_t target)
 {
   rectangle_t object_frame = getFrameRect();
   point_t bias = {target.x - object_frame.pos.x, target.y - object_frame.pos.y};
-  for (size_t i = 0; i < size_; ++i)
-  {
-    points_[i].x += bias.x;
-    points_[i].y += bias.y;
-  }
+  move(bias.x, bias.y);
 }
 
 void zakirov::Polygon::move(double bias_x, double bias_y)
 {
   for (size_t i = 0; i < size_; ++i)
   {
-    points_[i].x += bias_x;
-    points_[i].y += bias_y;
+    move_point(points_[i], bias_x, bias_y);
   }
 }
 

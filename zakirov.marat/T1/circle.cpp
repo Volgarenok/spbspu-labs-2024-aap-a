@@ -1,6 +1,7 @@
 #include "circle.hpp"
 #include <cmath>
 #include <stdexcept>
+#include "unified_shapes.hpp"
 
 zakirov::Circle::Circle(point_t center, double radius):
   center_(center),
@@ -25,12 +26,12 @@ zakirov::rectangle_t zakirov::Circle::getFrameRect() const
 
 void zakirov::Circle::move(point_t target)
 {
-  center_ = target;
+  move_point(center_, target);
 }
 
 void zakirov::Circle::move(double bias_x, double bias_y)
 {
-  move({center_.x + bias_x, center_.y + bias_y});
+  move_point(center_, bias_x, bias_y);
 }
 
 void zakirov::Circle::scale(double k)
