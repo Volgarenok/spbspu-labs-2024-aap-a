@@ -8,6 +8,7 @@ namespace kizhin {
   class Polygon final: public Shape
   {
   public:
+    Polygon(): vertices_(nullptr), size_(0) {}
     Polygon(const Polygon&);
     Polygon(Polygon&&) noexcept;
     Polygon(const point_t*, size_t);
@@ -18,6 +19,7 @@ namespace kizhin {
 
     rectangle_t getFrameRect() const override;
     double getArea() const override;
+    Shape* clone() const override;
 
     void move(double, double) override;
     void move(const point_t&) override;

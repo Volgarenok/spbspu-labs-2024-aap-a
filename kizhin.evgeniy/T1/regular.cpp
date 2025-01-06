@@ -1,10 +1,10 @@
 #include "regular.hpp"
+#include <algorithm>
 #include <cmath>
 #include <stdexcept>
 #include "point_utils.hpp"
 
-kizhin::Regular::Regular(const point_t& p1, const point_t& p2, const point_t& p3):
-  frame_{ 0.0, 0.0, p1 }
+kizhin::Regular::Regular(const point_t& p1, const point_t& p2, const point_t& p3)
 {
   if (!isRightTriangle(p1, p2, p3)) {
     throw std::invalid_argument("Invalid Triangle For Regular Construction");
@@ -13,73 +13,73 @@ kizhin::Regular::Regular(const point_t& p1, const point_t& p2, const point_t& p3
   const double r2 = computeDistance(p1, p3);
   const double outerRadius = std::max(r1, r2);
   const double innerRadius = std::min(r1, r2);
-  vertex_ = (outerRadius == r1) ? p2 : p3;
-
-  const double calculatedSize = pi / std::acos(innerRadius / outerRadius);
-  size_ = std::round(calculatedSize);
-  if (std::abs(calculatedSize - size_) > epsilon || size_ < 3) {
-    throw std::logic_error("Invalid Regular Size");
+  const point_t vertex = (outerRadius == r1) ? p2 : p3;
+  const size_t size = computeSize(innerRadius, outerRadius);
+  const point_t* vertices = nullptr;
+  try {
+    vertices = computeVerticesArray(p1, vertex, size);
+    polygon_ = Polygon{ vertices, size };
+  } catch (...) {
+    delete[] vertices;
+    throw;
   }
-  computeFrameRect();
+  delete[] vertices;
 }
 
 double kizhin::Regular::getArea() const
 {
-  const double radius = computeDistance(vertex_, frame_.pos);
-  return size_ * std::pow(radius, 2) * 0.5 * std::sin(pi * 2 / size_);
+  return polygon_.getArea();
 }
 
 kizhin::rectangle_t kizhin::Regular::getFrameRect() const
 {
-  return frame_;
+  return polygon_.getFrameRect();
+}
+
+kizhin::Shape* kizhin::Regular::clone() const
+{
+  return new Regular(*this);
 }
 
 void kizhin::Regular::move(double dx, double dy)
 {
-  vertex_ += { dx, dy };
-  frame_.pos += { dx, dy };
+  polygon_.move(dx, dy);
 }
 
 void kizhin::Regular::move(const point_t& newPos)
 {
-  const double dx = newPos.x - frame_.pos.x;
-  const double dy = newPos.y - frame_.pos.y;
-  move(dx, dy);
+  polygon_.move(newPos);
 }
 
 void kizhin::Regular::scale(double scaleFactor)
 {
-  if (scaleFactor <= 0.0) {
-    throw std::logic_error("Failed to scale");
-  }
-  vertex_.x *= scaleFactor;
-  vertex_.y *= scaleFactor;
-  computeFrameRect();
+  polygon_.scale(scaleFactor);
 }
 
-void kizhin::Regular::computeFrameRect()
+kizhin::point_t* kizhin::Regular::computeVerticesArray(const point_t& center,
+    const point_t& vertex, size_t size) const
 {
-  point_t* vertices = computeVerticesArray();
-  double* edgeCords = computeEdgeCords(vertices, size_);
-  delete[] vertices;
-  frame_.width = edgeCords[1] - edgeCords[0];
-  frame_.height = edgeCords[3] - edgeCords[2];
-  delete[] edgeCords;
-}
-
-kizhin::point_t* kizhin::Regular::computeVerticesArray() const
-{
-  point_t* vertices = new point_t[size_];
-  const double radius = computeDistance(vertex_, frame_.pos);
-  const double angleStep = (2 * pi) / size_;
-  double angle = std::acos(std::abs(vertex_.x - frame_.pos.x) / radius);
-  for (point_t* i = vertices; i != vertices + size_; ++i) {
+  point_t* vertices = new point_t[size];
+  const double radius = computeDistance(vertex, center);
+  const double angleStep = (2 * pi) / size;
+  double angle = std::acos(std::abs(vertex.x - center.x) / radius);
+  for (point_t* i = vertices; i != vertices + size; ++i) {
     *i = {
-      frame_.pos.x + radius * std::cos(angle),
-      frame_.pos.y + radius * std::sin(angle),
+      center.x + radius * std::cos(angle),
+      center.y + radius * std::sin(angle),
     };
     angle += angleStep;
   }
   return vertices;
+}
+
+size_t kizhin::Regular::computeSize(double innerRadius, double outerRadius)
+{
+  const double calculatedSize = pi / std::acos(innerRadius / outerRadius);
+  const size_t size = std::round(calculatedSize);
+  if (std::abs(calculatedSize - size) > epsilon || size < 3) {
+    throw std::logic_error("Invalid Regular Size");
+  }
+  return size;
 }
 

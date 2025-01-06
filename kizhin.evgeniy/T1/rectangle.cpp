@@ -16,6 +16,11 @@ double kizhin::Rectangle::getArea() const
   return data_.width * data_.height;
 }
 
+kizhin::Shape* kizhin::Rectangle::clone() const
+{
+  return new Rectangle(*this);
+}
+
 void kizhin::Rectangle::move(const point_t& newPos)
 {
   data_.pos = newPos;
