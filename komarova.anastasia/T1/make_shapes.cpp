@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
-#include "base-types.hpp"
+#include "base_types.hpp"
 #include "shape.hpp"
 #include "rectangle.hpp"
 #include "circle.hpp"
