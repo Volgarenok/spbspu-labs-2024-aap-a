@@ -6,14 +6,7 @@
 
 namespace maslov
 {
-  double distance(point_t A, point_t B);
-  double findRadiusIncircle(double AC, double AB, double BC);
-  double findRadiusCircumcircle(double AC, double AB);
-  double findHalfSide(double AC, double AB, double BC);
-  bool isRegular(point_t A, point_t B, point_t C);
-  size_t findVerticals(double cat1, double cat2, double hyp);
-
-  struct Regular : public Shape
+  struct Regular final: public Shape
   {
     Regular(point_t A, point_t B, point_t C);
     double getArea() const override;
@@ -22,10 +15,15 @@ namespace maslov
     void move(double dx, double dy) override;
     void scale(double k) override;
    private:
-    point_t A_ = {0, 0}, B_ = {0, 0}, C_ = {0, 0};
-    double AB_ = 0.0, AC_ = 0.0, BC_ = 0.0;
-    double rI_ = 0.0, rC_ = 0.0, halfSide_ = 0.0;
-    size_t n_ = 0;
+    point_t A_, B_, C_;
+    double AB_, AC_, BC_, rI_, rC_, halfSide_;
+    size_t n_;
+    double getDistance(point_t A, point_t B);
+    double findRadiusIncircle(double AC, double AB, double BC);
+    double findRadiusCircumcircle(double AC, double AB);
+    double findHalfSide(double AC, double AB, double BC);
+    bool isRegular(point_t A, point_t B, point_t C);
+    size_t findVerticals(double cat1, double cat2, double hyp);
   };
 }
 

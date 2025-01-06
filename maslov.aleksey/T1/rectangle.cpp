@@ -1,5 +1,9 @@
 #include "rectangle.hpp"
 
+maslov::Rectangle::Rectangle(point_t lowerLeftCorner, point_t upperRightCorner):
+  lowerLeftCorner_(lowerLeftCorner),
+  upperRightCorner_(upperRightCorner)
+{}
 double maslov::Rectangle::getArea() const
 {
   return getFrameRect().height * getFrameRect().width;

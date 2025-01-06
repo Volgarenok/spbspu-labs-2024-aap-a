@@ -1,7 +1,7 @@
 #include "shapeManipulator.hpp"
 #include <iostream>
 
-double maslov::getSumArea(Shape ** shapes, size_t count)
+double maslov::getSumArea(const Shape * const * const shapes, const size_t count)
 {
   double sum = 0.0;
   for (size_t i = 0; i < count; i++)
@@ -10,8 +10,8 @@ double maslov::getSumArea(Shape ** shapes, size_t count)
   }
   return sum;
 }
-void maslov::scaleShapes(Shape ** shapes, size_t count,
-    point_t scaleCoordinate, double scaleFactor)
+void maslov::scaleShapes(Shape ** shapes, const size_t count,
+    const point_t scaleCoordinate, const double scaleFactor)
 {
   for (size_t i = 0; i < count; i++)
   {
@@ -24,7 +24,7 @@ void maslov::scaleShapes(Shape ** shapes, size_t count,
     shapes[i]->move(-newX, -newY);
   }
 }
-void maslov::printCoordinates(Shape ** shapes, size_t count)
+void maslov::printCoordinates(const Shape * const * const shapes, const size_t count)
 {
   for (size_t i = 0; i < count; i++)
   {
@@ -37,11 +37,11 @@ void maslov::printCoordinates(Shape ** shapes, size_t count)
     double lowerLeftCornerY = centerY - heightHalf;
     double upperRightCornerX = centerX + widthHalf;
     double upperRightCornerY = centerY + heightHalf;
-    std::cout << " " << lowerLeftCornerX << " " << lowerLeftCornerY;
-    std::cout << " " << upperRightCornerX << " " << upperRightCornerY;
+    std::cout << lowerLeftCornerX << " " << lowerLeftCornerY << " ";
+    std::cout << upperRightCornerX << " " << upperRightCornerY;
   }
 }
-void maslov::destroyShapes(Shape ** shapes, size_t count)
+void maslov::destroyShapes(Shape ** shapes, const size_t count)
 {
   for (size_t i = 0; i < count; ++i)
   {

@@ -1,4 +1,5 @@
 #include "regular.hpp"
+#include <stdexcept>
 #include <cmath>
 #include <algorithm>
 #include <limits>
@@ -7,14 +8,19 @@ maslov::Regular::Regular(point_t A, point_t B, point_t C):
   A_(A),
   B_(B),
   C_(C),
-  AB_(distance(A, B)),
-  AC_(distance(A, C)),
-  BC_(distance(B, C)),
+  AB_(getDistance(A, B)),
+  AC_(getDistance(A, C)),
+  BC_(getDistance(B, C)),
   rI_(findRadiusIncircle(AC_, AB_, BC_)),
   rC_(findRadiusCircumcircle(AC_, AB_)),
   halfSide_(findHalfSide(AC_, AB_, BC_)),
   n_(findVerticals(halfSide_, rI_, rC_))
-{}
+{
+  if (!isRegular(A_, B_, C_))
+  {
+    throw std::invalid_argument("Regular does not exist");
+  }
+}
 double maslov::Regular::getArea() const
 {
   return halfSide_ * n_ * rI_;
@@ -61,8 +67,8 @@ void maslov::Regular::move(point_t s)
   A_ = {s.x, s.y};
   B_ = {B_.x + dx, B_.y + dy};
   C_ = {C_.x + dx, C_.y + dy};
-  AC_ = distance(A_, C_);
-  BC_ = distance(B_, C_);
+  AC_ = getDistance(A_, C_);
+  BC_ = getDistance(B_, C_);
   rI_ = findRadiusIncircle(AC_, AB_, BC_);
   rC_ = findRadiusCircumcircle(AC_, AB_);
   halfSide_ = findHalfSide(AC_, AB_, BC_);
@@ -72,9 +78,9 @@ void maslov::Regular::move(double dx, double dy)
   A_ = {A_.x + dx, A_.y + dy};
   B_ = {B_.x + dx, B_.y + dy};
   C_ = {C_.x + dx, C_.y + dy};
-  AB_ = distance(A_, B_);
-  AC_ = distance(A_, C_);
-  BC_ = distance(B_, C_);
+  AB_ = getDistance(A_, B_);
+  AC_ = getDistance(A_, C_);
+  BC_ = getDistance(B_, C_);
   rI_ = findRadiusIncircle(AC_, AB_, BC_);
   rC_ = findRadiusCircumcircle(AC_, AB_);
   halfSide_ = findHalfSide(AC_, AB_, BC_);
@@ -85,30 +91,30 @@ void maslov::Regular::scale(double k)
   B_.y = A_.y + (B_.y - A_.y) * k;
   C_.x = A_.x + (C_.x - A_.x) * k;
   C_.y = A_.y + (C_.y - A_.y) * k;
-  AB_ = distance(A_, B_);
-  AC_ = distance(A_, C_);
-  BC_ = distance(B_, C_);
+  AB_ = getDistance(A_, B_);
+  AC_ = getDistance(A_, C_);
+  BC_ = getDistance(B_, C_);
   rI_ = findRadiusIncircle(AC_, AB_, BC_);
   rC_ = findRadiusCircumcircle(AC_, AB_);
   halfSide_ = findHalfSide(AC_, AB_, BC_);
 }
-double maslov::distance(point_t A, point_t B)
+double maslov::Regular::getDistance(point_t A, point_t B)
 {
   return std::sqrt(std::pow(B.x - A.x, 2.0) + std::pow(B.y - A.y, 2.0));
 }
-double maslov::findRadiusIncircle(double AC, double AB, double BC)
+double maslov::Regular::findRadiusIncircle(double AC, double AB, double BC)
 {
   return std::max(std::min(AB, AC), BC);
 }
-double maslov::findRadiusCircumcircle(double AC, double AB)
+double maslov::Regular::findRadiusCircumcircle(double AC, double AB)
 {
   return std::max(AB, AC);
 }
-double maslov::findHalfSide(double AC, double AB, double BC)
+double maslov::Regular::findHalfSide(double AC, double AB, double BC)
 {
   return std::min(AB, std::min(AC, BC));
 }
-size_t maslov::findVerticals(double cat1, double cat2, double hyp)
+size_t maslov::Regular::findVerticals(double cat1, double cat2, double hyp)
 {
   double x = cat1, y = cat2, z = hyp;
   double value = (x * x - z * z - y * y) / (-2 * y * z);
@@ -120,11 +126,11 @@ size_t maslov::findVerticals(double cat1, double cat2, double hyp)
   }
   return std::round(verticals);
 }
-bool maslov::isRegular(point_t A, point_t B, point_t C)
+bool maslov::Regular::isRegular(point_t A, point_t B, point_t C)
 {
-  double AB = distance(A, B);
-  double AC = distance(A, C);
-  double BC = distance(B, C);
+  double AB = getDistance(A, B);
+  double AC = getDistance(A, C);
+  double BC = getDistance(B, C);
   double hyp = std::max(AB, AC);
   double cat1 = std::max(std::min(AB, AC), BC);
   double cat2 = std::min(std::min(AB, AC), BC);
