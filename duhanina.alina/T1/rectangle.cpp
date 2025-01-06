@@ -76,11 +76,6 @@ duhanina::Shape** duhanina::Rectangle::fillWithEllipses(const point_t& lt, const
     ellWidth_ = (rt.x - lt.x) / cuts_;
     ellHeight_ = (rt.y - lt.y) / cuts_;
     Shape** ellipses = nullptr;
-    if (ellipses != nullptr)
-    {
-      destroy(ellipses, ellCount);
-      delete[] ellipses;
-    }
     ellipses = new Shape*[ellCount] {};
     for (size_t i = 0; i < cuts_; ++i)
     {
@@ -104,9 +99,10 @@ duhanina::Shape** duhanina::Rectangle::fillWithEllipses(const point_t& lt, const
     if (std::fabs(rectArea - ellipsesArea) <= 1)
     {
         ell = ellipses;
-        destroy(ellipses, ellCount);
-        delete[] ellipses;
+        break;
     }
+    destroy(ellipses, ellCount);
+    delete[] ellipses;
   }
   return ell;
 }
