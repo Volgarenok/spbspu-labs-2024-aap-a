@@ -64,8 +64,8 @@ void petrov::Triangle::move(double dx, double dy)
 void petrov::Triangle::scale(double k)
 {
   rectangle_t frame_rect = getFrameRect();
-  double dx = (frame_rect.width / 2) * (k - 1);
-  double dy = (frame_rect.height / 2) * (k - 1);
+  double dx = (frame_rect.width / 2) * std::abs(k - 1);
+  double dy = (frame_rect.height / 2) * std::abs(k - 1);
   p1_.x > frame_rect.pos.x ? p1_.x += dx : (p1_.x < frame_rect.pos.x ? p1_.x -= dx : p1_.x += 0);
   p2_.x > frame_rect.pos.x ? p2_.x += dx : (p2_.x < frame_rect.pos.x ? p2_.x -= dx : p2_.x += 0);
   p3_.x > frame_rect.pos.x ? p3_.x += dx : (p3_.x < frame_rect.pos.x ? p3_.x -= dx : p3_.x += 0);
