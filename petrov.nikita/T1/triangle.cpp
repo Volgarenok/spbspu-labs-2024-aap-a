@@ -39,14 +39,16 @@ petrov::rectangle_t petrov::Triangle::getFrameRect() const
 
 void petrov::Triangle::move(petrov::point_t concrete_point)
 {
+  double dx = concrete_point.x - frame_rect_.pos.x;
+  double dy = concrete_point.y - frame_rect_.pos.y;
   frame_rect_.pos.x = concrete_point.x;
   frame_rect_.pos.y = concrete_point.y;
-  p1_.x = frame_rect_.pos.x - (frame_rect_.width / 2);
-  p1_.y = frame_rect_.pos.y - (frame_rect_.height / 2);
-  p2_.x = frame_rect_.pos.x - (frame_rect_.width / 2);
-  p2_.y = frame_rect_.pos.y + (frame_rect_.height / 2);
-  p3_.x = frame_rect_.pos.x + (frame_rect_.width / 2);
-  p3_.y = frame_rect_.pos.y + (frame_rect_.height / 2);
+  p1_.x += dx;
+  p1_.y += dy;
+  p2_.x += dx;
+  p2_.y += dy;
+  p3_.x += dx;
+  p3_.y += dy;
 }
 
 void petrov::Triangle::move(double dx, double dy)
