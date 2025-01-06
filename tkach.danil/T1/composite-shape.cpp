@@ -113,7 +113,7 @@ tkach::CompositeShape::~CompositeShape()
   delete[] shapes_;
 }
 
-void tkach::CompositeShape::move(double add_to_x, double add_to_y) noexcept
+void tkach::CompositeShape::move(const double add_to_x, const double add_to_y) noexcept
 {
   for (size_t i = 0; i < size_; ++i)
   {
@@ -158,7 +158,7 @@ void tkach::CompositeShape::pop_back()
   shapes_ = new_shapes;
 }
 
-tkach::Shape* tkach::CompositeShape::at(size_t id)
+tkach::Shape* tkach::CompositeShape::at(const size_t id)
 {
   if (id >= size_)
   {
@@ -167,7 +167,7 @@ tkach::Shape* tkach::CompositeShape::at(size_t id)
   return shapes_[id];
 }
 
-const tkach::Shape* tkach::CompositeShape::at(size_t id) const
+const tkach::Shape* tkach::CompositeShape::at(const size_t id) const
 {
   if (id >= size_)
   {
@@ -176,12 +176,12 @@ const tkach::Shape* tkach::CompositeShape::at(size_t id) const
   return shapes_[id];
 }
 
-tkach::Shape* tkach::CompositeShape::operator[](size_t id)
+tkach::Shape* tkach::CompositeShape::operator[](const size_t id)
 {
   return shapes_[id];
 }
 
-const tkach::Shape* tkach::CompositeShape::operator[](size_t id) const
+const tkach::Shape* tkach::CompositeShape::operator[](const size_t id) const
 {
   return shapes_[id];
 }
@@ -203,7 +203,7 @@ size_t tkach::CompositeShape::size() const noexcept
   return size_;
 }
 
-void tkach::CompositeShape::scale(double multiplier)
+void tkach::CompositeShape::scale(const double multiplier)
 {
   doSaveIsoScaleShapes(shapes_, size_, multiplier, getFrameRect().pos);
 }

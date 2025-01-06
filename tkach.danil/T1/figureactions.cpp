@@ -39,7 +39,8 @@ double tkach::getTotalArea(const tkach::Shape* const* const shape_array, const s
   return sum;
 }
 
-std::ostream& tkach::printCoordinatesOfAllFrameRects(std::ostream& out, const tkach::Shape* const* const shape_array, const size_t counter_of_shapes)
+std::ostream& tkach::printCoordinatesOfAllFrameRects(std::ostream& out, const tkach::Shape* const* const shape_array,
+  const size_t counter_of_shapes)
 {
   tkach::rectangle_t frame_rect = shape_array[0]->getFrameRect();
   tkach::point_t left_bot_point, right_top_point;
