@@ -1,7 +1,7 @@
 #include "shape.hpp"
 #include <iomanip>
 
-void brevnov::destroyshape(Shape** shapes, size_t count)
+void brevnov::destroy_shape(Shape** shapes, size_t count)
 {
   for (size_t i = 0; i < count; ++i)
   {

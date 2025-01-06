@@ -31,18 +31,18 @@ void brevnov::CompositeShape::clear() noexcept
 
 brevnov::CompositeShape::CompositeShape(size_t cus):
   shapes_(nullptr),
-  capacity(cus),
+  capacity_(cus),
   current_size_(0)
 {
-  shapes_ = new Shape *[capacity];
+  shapes_ = new Shape *[capacity_];
 }
 
 brevnov::CompositeShape::CompositeShape(CompositeShape & cos):
   shapes_(nullptr),
-  capacity(cos.capacity),
+  capacity_(cos.capacity_),
   current_size_(cos.current_size_)
 {
-  shapes_ = new Shape *[capacity];
+  shapes_ = new Shape *[capacity_];
   for (size_t i = 0; i < current_size_; i++)
   {
     shapes_[i] = cos[i];
@@ -51,20 +51,20 @@ brevnov::CompositeShape::CompositeShape(CompositeShape & cos):
 
 brevnov::CompositeShape::CompositeShape(CompositeShape && cos) noexcept:
   shapes_(cos.shapes_),
-  capacity(cos.capacity),
+  capacity_(cos.capacity_),
   current_size_(cos.current_size_)
 {
   cos.shapes_ = nullptr;
   cos.current_size_ = 0;
-  cos.capacity = 0;
+  cos.capacity_ = 0;
 }
 
 brevnov::CompositeShape & brevnov::CompositeShape::operator=(brevnov::CompositeShape & cos)
 {
-  Shape ** help = new Shape *[cos.capacity];
+  Shape ** help = new Shape *[cos.capacity_];
   clear();
   shapes_ = help;
-  capacity = cos.capacity;
+  capacity_ = cos.capacity_;
   current_size_ = cos.current_size_;
   for (size_t i = 0; i < current_size_; i++)
   {
@@ -77,18 +77,18 @@ brevnov::CompositeShape & brevnov::CompositeShape::operator=(brevnov::CompositeS
 {
   clear();
   shapes_ = cos.shapes_;
-  capacity = cos.capacity;
+  capacity_ = cos.capacity_;
   current_size_ = cos.current_size_;
   cos.shapes_ = nullptr;
   cos.current_size_ = 0;
-  cos.capacity = 0;
+  cos.capacity_ = 0;
   return *this;
 }
 
 void brevnov::CompositeShape::add_memory()
 {
   constexpr size_t add_number = 10;
-  CompositeShape help(capacity + add_number);
+  CompositeShape help(capacity_ + add_number);
   for (size_t i = 0; i < current_size_; i++)
   {
     help.shapes_[i] = shapes_[i];
@@ -99,7 +99,7 @@ void brevnov::CompositeShape::add_memory()
 
 void brevnov::CompositeShape::push_back(Shape * sp)
 {
-  if (current_size_ >= capacity)
+  if (current_size_ >= capacity_)
   {
     add_memory();
   }

@@ -6,8 +6,8 @@ namespace brevnov
   {
     point_t() = default;
     point_t(double xf, double yf):
-      x(x),
-      y(y)
+      x(xf),
+      y(yf)
       {}
     double x;
     double y;
