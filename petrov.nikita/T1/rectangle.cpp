@@ -13,29 +13,27 @@ petrov::Rectangle::Rectangle(petrov::point_t p1, petrov::point_t p2):
   p2_.y = p3_.y;
   p4_.x = p3_.x;
   p4_.y = p1_.y;
-  frame_rect_.height = abs(p2_.y - p1_.y);
-  frame_rect_.width = abs(p4_.x - p1_.x);
-  frame_rect_.pos = { ((2 * p1_.x + p3_.x - p1_.x) / 2.0), ((2 * p1_.y + p3_.y - p1_.y) / 2.0) };
 }
 
 double petrov::Rectangle::getArea() const
 {
-  return frame_rect_.width * frame_rect_.height;
+  return (p3_.x - p1_.x) * (p3_.y - p1_.y);
 }
 
 petrov::rectangle_t petrov::Rectangle::getFrameRect() const
 {
-  return frame_rect_;
+  rectangle_t frame_rect = {};
+  frame_rect.height = abs(p2_.y - p1_.y);
+  frame_rect.width = abs(p4_.x - p1_.x);
+  frame_rect.pos = { ((2 * p1_.x + p3_.x - p1_.x) / 2.0), ((2 * p1_.y + p3_.y - p1_.y) / 2.0) };
+  return frame_rect;
 }
 
 void petrov::Rectangle::move(petrov::point_t concrete_point)
 {
-  double dx = concrete_point.x - frame_rect_.pos.x;
-  double dy = concrete_point.y - frame_rect_.pos.y;
-  frame_rect_.pos.x = concrete_point.x;
-  frame_rect_.pos.y = concrete_point.y;
-  p1_.x += dx;
-  p1_.y += dy;
+  rectangle_t frame_rect = getFrameRect();
+  double dx = concrete_point.x - frame_rect.pos.x;
+  double dy = concrete_point.y - frame_rect.pos.y;
   p2_.x += dx;
   p2_.y += dy;
   p3_.x += dx;
@@ -46,8 +44,6 @@ void petrov::Rectangle::move(petrov::point_t concrete_point)
 
 void petrov::Rectangle::move(double dx, double dy)
 {
-  frame_rect_.pos.x += dx;
-  frame_rect_.pos.y += dy;
   p1_.x += dx;
   p1_.y += dy;
   p2_.x += dx;
@@ -60,8 +56,9 @@ void petrov::Rectangle::move(double dx, double dy)
 
 void petrov::Rectangle::scale(double k)
 {
-  double dx = (frame_rect_.width / 2) * abs((k - 1));
-  double dy = (frame_rect_.height / 2) * abs((k - 1));
+  rectangle_t frame_rect = getFrameRect();
+  double dx = (frame_rect.width / 2) * abs((k - 1));
+  double dy = (frame_rect.height / 2) * abs((k - 1));
   p1_.x -= dx;
   p1_.y -= dy;
   p2_.x -= dx;
@@ -70,7 +67,4 @@ void petrov::Rectangle::scale(double k)
   p3_.y += dy;
   p4_.x += dx;
   p4_.y -= dy;
-  frame_rect_.height *= k;
-  frame_rect_.width *= k;
-  frame_rect_.pos = { ((2 * p1_.x + p3_.x - p1_.x) / 2.0), ((2 * p1_.y + p3_.y - p1_.y) / 2.0) };
 }
