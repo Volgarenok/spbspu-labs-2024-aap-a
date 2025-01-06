@@ -23,14 +23,14 @@ namespace abramov
     void scale(double k);
     ~CompositeShape();
     void push_back(Shape *shp);
-    void pop_back();
+    void pop_back() noexcept;
     Shape *at(size_t id);
     Shape *at(size_t id) const;
     Shape *operator[](size_t id) noexcept;
     Shape *operator[](size_t id) const noexcept;
     bool empty() const noexcept;
     size_t size() const noexcept;
-    Shape *clone() const;
+    CompositeShape *clone() const;
     size_t getShapes_() const noexcept;
   private:
     size_t shapes_;

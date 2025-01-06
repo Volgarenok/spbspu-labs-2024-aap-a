@@ -159,7 +159,7 @@ namespace abramov
     shapeptrs_[shapes_++] = shp;
   }
 
-  void CompositeShape::pop_back()
+  void CompositeShape::pop_back() noexcept
   {
     delete shapeptrs_[shapes_];
     shapeptrs_[shapes_] = nullptr;
@@ -203,41 +203,17 @@ namespace abramov
     return shapes_;
   }
 
-  /*Shape *CompositeShape::clone() const
+  CompositeShape *CompositeShape::clone() const
   {
-    Shape *figure = shapeptrs_[id];
     try
     {
-      Rectangle *shp = dynamic_cast< Rectangle* >(figure);
-      Rectangle *shape = new Rectangle(shp->getCQ1(), shp->getCQ2(), shp->getCQ3(), shp->getCQ4());
-      return shape;
+      return new CompositeShape(*this);
     }
-    catch (const std::bad_cast &e)
+    catch (std::bad_alloc &e)
     {
-
+      return nullptr;
     }
-    try
-    {
-      Square *shp = dynamic_cast< Square* >(figure);
-      Square *shape = new Square(shp->getRect());
-      return shape;
-    }
-    catch (const std::bad_cast &e)
-    {
-
-    }
-    try
-    {
-      ComplexQuad *shp = dynamic_cast< ComplexQuad* >(figure);
-      ComplexQuad *shape = new ComplexQuad(shp->getA(), shp->getB(), shp->getC(), shp->getD());
-      return shape;
-    }
-    catch (const std::bad_cast &e)
-    {
-
-    }
-    return nullptr;
-  } */
+  }
 
   size_t CompositeShape::getShapes_() const noexcept
   {
