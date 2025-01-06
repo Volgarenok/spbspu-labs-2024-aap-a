@@ -205,5 +205,5 @@ size_t tkach::CompositeShape::size() const noexcept
 
 void tkach::CompositeShape::scale(double multiplier)
 {
-  doIsoScaleShapes(shapes_, size_, multiplier, getFrameRect().pos);
+  doSaveIsoScaleShapes(shapes_, size_, multiplier, getFrameRect().pos);
 }
