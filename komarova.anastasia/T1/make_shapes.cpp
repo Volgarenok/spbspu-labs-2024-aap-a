@@ -24,11 +24,12 @@ void komarova::make_shapes(std::istream& input, Shape** shapes, int& count, bool
     {
       if (figure == "RECTANGLE")
       {
-        double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0;
-        input >> x1 >> y1 >> x2 >> y2;
+        point_t a;
+        point_t b;
+        input >> a.x >> a.y >> b.x >> b.y;
         try
         {
-          shapes[count] = new Rectangle(point_t(x1, y1), point_t(x2, y2));
+          shapes[count] = new Rectangle(a, b);
           count++;
         }
         catch (const std::logic_error& e)
@@ -130,3 +131,4 @@ void komarova::delete_shapes(Shape** shapes)
     delete shapes[i];
   }
 }
+
