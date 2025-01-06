@@ -15,9 +15,6 @@ namespace kushekbaev
     double height;
     point_t pos;
   };
-
-  void moveDelta(const double dx, const double dy, point_t point);
-  void isoScaling(const double V, const point_t middle, point_t point);
 }
 
 #endif
