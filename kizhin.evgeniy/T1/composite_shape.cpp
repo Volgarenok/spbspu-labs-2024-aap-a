@@ -127,7 +127,7 @@ void kizhin::CompositeShape::move(double dx, double dy)
 void kizhin::CompositeShape::scale(double factor)
 {
   if (factor <= 0) {
-    throw std::logic_error("Scale factor must be positive");
+    throw std::logic_error("Scaling factor must be positive");
   }
   if (empty()) {
     throw std::logic_error("CompositeShape is empty");

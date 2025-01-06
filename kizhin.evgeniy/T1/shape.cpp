@@ -10,7 +10,7 @@ void kizhin::Shape::scale(double scalingFactor)
 void kizhin::Shape::throwIfInvalidScalingFractor(double scalingFactor)
 {
   if (scalingFactor <= 0.0) {
-    throw std::logic_error("Failed to scale");
+    throw std::logic_error("Scaling factor must be positive");
   }
 }
 

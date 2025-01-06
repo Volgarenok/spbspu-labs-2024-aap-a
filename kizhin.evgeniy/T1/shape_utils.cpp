@@ -44,7 +44,7 @@ kizhin::createShape(const std::string& shapeName, const double* shapeParams)
   if (shapeName == "POLYGON") {
     return createPolygon(shapeParams);
   }
-  throw std::logic_error("Failed to create shape");
+  throw std::logic_error("Unknown shape given");
 }
 
 kizhin::Rectangle* kizhin::createRectangle(const double* params)
@@ -52,7 +52,7 @@ kizhin::Rectangle* kizhin::createRectangle(const double* params)
   const point_t leftDown{ params[1], params[2] };
   const point_t rightUp{ params[3], params[4] };
   if (leftDown.x >= rightUp.x || leftDown.y >= rightUp.y) {
-    throw std::logic_error("Failed to create rectangle");
+    throw std::logic_error("Invalid pointns to create rectangle");
   }
   const double width = rightUp.x - leftDown.x;
   const double height = rightUp.y - leftDown.y;
