@@ -9,7 +9,15 @@ komarova::Triangle::Triangle(point_t a, point_t b, point_t c):
   a_(a),
   b_(b),
   c_(c)
-{}
+{
+  double ab = std::sqrt((a_.x - b_.x) * (a_.x - b_.x) + (a_.y - b_.y) * (a_.y - b_.y));
+  double bc = std::sqrt((b_.x - c_.x) * (b_.x - c_.x) + (b_.y - c_.y) * (b_.y - c_.y));
+  double ac = std::sqrt((a_.x - c_.x) * (a_.x - c_.x) + (a_.y - c_.y) * (a_.y - c_.y));
+  if ((ab + bc) < ac || (bc + ac) < ab || (ab + ac) < bc)
+  {
+    throw std::logic_error("incorrect triangle");
+  }
+}
 
 double komarova::Triangle::getArea() const
 {
@@ -27,7 +35,7 @@ komarova::rectangle_t komarova::Triangle::getFrameRect() const
 
 void komarova::Triangle::move(point_t point)
 {
-  point_t center = getFrameRect().pos;
+  point_t center = {(a_.x + b_.x + c_.x) / 3.0, (a_.y + b_.y + c_.y) / 3.0};
   double dx = point.x - center.x;
   double dy = point.y - center.y;
   move(dx, dy);
@@ -46,7 +54,7 @@ void komarova::Triangle::scale(double coef)
   {
     throw std::logic_error("incorrect coefficient");
   }
-  point_t center = getFrameRect().pos;
+  point_t center = {(a_.x + b_.x + c_.x) / 3.0, (a_.y + b_.y + c_.y) / 3.0};
   a_.x = center.x + (a_.x - center.x) * coef;
   a_.y = center.y + (a_.y - center.y) * coef;
   b_.x = center.x + (b_.x - center.x) * coef;
