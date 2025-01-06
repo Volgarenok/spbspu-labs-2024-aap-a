@@ -7,36 +7,35 @@
 #include "square.hpp"
 #include "complexquad.hpp"
 #include "shape_transformations.hpp"
+using namespace abramov;
 
 int main()
 {
-  abramov::CompositeShape shapes(10000);
-  abramov::rectangle_t rects[10000] = {};
-  size_t i = 0;
+  CompositeShape shapes(10000);
   double k = 0;
-  double x = 0;
-  double y = 0;
   bool wrong_figure = false;
+  point_t p{0.0, 0.0};
   try
   {
-    abramov::getShapes(std::cin, shapes, i, x, y, k, wrong_figure);
+    getShapes(std::cin, shapes, p, k, wrong_figure);
   }
   catch (const std::bad_alloc &e)
   {
     std::cerr << "Memory fail\n";
     return 2;
   }
+  size_t count = shapes.getShapes_();
   if (k <= 0)
   {
     std::cerr << "There is no scale command\n";
     return 1;
   }
-  if (i == 0)
+  if (count == 0)
   {
     std::cerr << "There is no figures\n";
     return 1;
   }
-  abramov::printShapes(std::cout, shapes, rects, i, x, y, k);
+  printShapes(std::cout, shapes, p, k, count);
   if (wrong_figure == true)
   {
     std::cerr << "There was bad figure\n";

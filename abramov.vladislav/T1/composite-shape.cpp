@@ -4,9 +4,9 @@
 namespace abramov
 {
   CompositeShape::CompositeShape(size_t capacity):
-   shapes_(0),
-   capacity_(capacity),
-   shapeptrs_(nullptr)
+    shapes_(0),
+    capacity_(capacity),
+    shapeptrs_(nullptr)
   {
     shapeptrs_ = new Shape*[capacity];
     for (size_t i = 0; i < capacity; ++i)
@@ -15,11 +15,11 @@ namespace abramov
     }
   }
 
-  CompositeShape::CompositeShape(const CompositeShape &comp_shp)
+  CompositeShape::CompositeShape(const CompositeShape &comp_shp):
+    shapes_(comp_shp.shapes_),
+    capacity_(comp_shp.capacity_),
+    shapeptrs_(nullptr)
   {
-    shapes_ = comp_shp.shapes_;
-    capacity_ = comp_shp.capacity_;
-    shapeptrs_ = nullptr;
     shapeptrs_ = new Shape*[capacity_];
     for (size_t i = 0; i < shapes_; ++i)
     {
@@ -41,11 +41,11 @@ namespace abramov
     shapeptrs_ = arr;
   }
 
-  CompositeShape::CompositeShape(CompositeShape &&comp_shp)
+  CompositeShape::CompositeShape(CompositeShape &&comp_shp):
+    shapes_(comp_shp.shapes_),
+    capacity_(comp_shp.capacity_),
+    shapeptrs_(comp_shp.shapeptrs_)
   {
-    shapes_ = comp_shp.shapes_;
-    capacity_ = comp_shp.capacity_;
-    shapeptrs_ = comp_shp.shapeptrs_;
     comp_shp.setArray(nullptr);
   }
 
@@ -77,9 +77,40 @@ namespace abramov
     return *this;
   }
 
-  double CompositeShape::getArea(size_t id) const
+  double CompositeShape::getArea() const
   {
-    return shapeptrs_[id]->getArea();
+    double area = 0;
+    for (size_t i = 0; i < shapes_; ++i)
+    {
+      area += shapeptrs_[i]->getArea();
+    }
+    return area;
+  }
+
+  void getRectCoords(rectangle_t rect, double &x1, double &y1, double &x2, double &y2)
+  {
+    x1 = std::min(x1, rect.pos.x - rect.width / 2);
+    x2 = std::max(x2, rect.pos.x + rect.width / 2);
+    y1 = std::min(y1, rect.pos.y - rect.height / 2);
+    y2 = std::max(y2, rect.pos.y + rect.height / 2);
+  }
+
+  rectangle_t CompositeShape::getFrameRect() const
+  {
+    if (shapes_ == 0)
+    {
+      throw std::logic_error("There is no figures\n");
+    }
+    double x1 = 0;
+    double x2 = 0;
+    double y1 = 0;
+    double y2 = 0;
+    for (size_t i = 0; i < shapes_; ++i)
+    {
+      getRectCoords(shapeptrs_[i]->getFrameRect(), x1, y1, x2, y2);
+    }
+    rectangle_t rect{x2 - x1, y2 - y1, {(x2 + x1) / 2, (y2 + y1) / 2}};
+    return rect;
   }
 
   rectangle_t CompositeShape::getFrameRect(size_t id) const
@@ -87,39 +118,51 @@ namespace abramov
     return shapeptrs_[id]->getFrameRect();
   }
 
-  void CompositeShape::move(size_t id, point_t p)
+  void CompositeShape::move(point_t p)
   {
-    return shapeptrs_[id]->move(p);
+    for (size_t i = 0; i < shapes_; ++i)
+    {
+      shapeptrs_[i]->move(p);
+    }
   }
 
-  void CompositeShape::move(size_t id, double dx, double dy)
+  void CompositeShape::move(double dx, double dy)
   {
-    return shapeptrs_[id]->move(dx, dy);
+    for (size_t i = 0; i < shapes_; ++i)
+    {
+      shapeptrs_[i]->move(dx, dy);
+    }
   }
 
-  void CompositeShape::scale(size_t id, double k)
+  void CompositeShape::scale(double k)
   {
-    return shapeptrs_[id]->scale(k);
+    for (size_t i = 0; i < shapes_; ++i)
+    {
+      shapeptrs_[i]->scale(k);
+    }
   }
 
   void CompositeShape::push_back(Shape *shp)
   {
     if (capacity_ == shapes_)
     {
-      shapeptrs_ = expandArray(shapeptrs_, capacity_);
-      if (shapeptrs_ == nullptr)
+      Shape **new_shapeptrs = expandArray(shapeptrs_, capacity_);
+      if (new_shapeptrs == nullptr)
       {
         throw std::bad_alloc();
       }
       capacity_ *= 2;
+      delete[] shapeptrs_;
+      shapeptrs_ = new_shapeptrs;
     }
     shapeptrs_[shapes_++] = shp;
   }
 
   void CompositeShape::pop_back()
   {
-    delete shapeptrs_[shapes_ - 1];
-    shapeptrs_[shapes_ - 1] = nullptr;
+    shapeptrs_[--shapes_]->~Shape();
+    delete shapeptrs_[shapes_];
+    shapeptrs_[shapes_] = nullptr;
   }
 
   Shape *CompositeShape::at(size_t id) const
@@ -184,6 +227,11 @@ namespace abramov
 
     }
     return nullptr;
+  }
+
+  size_t CompositeShape::getShapes_() const
+  {
+    return shapes_;
   }
 
   Shape **expandArray(Shape **arr, size_t capacity)

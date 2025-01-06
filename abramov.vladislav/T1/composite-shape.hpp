@@ -15,11 +15,12 @@ namespace abramov
     CompositeShape(CompositeShape &&comp_shp);
     CompositeShape &operator=(const CompositeShape &comp_shp);
     CompositeShape &operator=(CompositeShape &&comp_shp);
-    double getArea(size_t id) const;
+    double getArea() const;
+    rectangle_t getFrameRect() const;
     rectangle_t getFrameRect(size_t id) const;
-    void move(size_t id, point_t p);
-    void move(size_t id, double dx, double dy);
-    void scale(size_t id, double k);
+    void move(point_t p);
+    void move(double dx, double dy);
+    void scale(double k);
     ~CompositeShape();
     void push_back(Shape *shp);
     void pop_back();
@@ -28,6 +29,7 @@ namespace abramov
     bool empty() const;
     size_t size() const;
     Shape *clone(size_t id) const;
+    size_t getShapes_() const;
     void setArray(Shape **arr);
   private:
     size_t shapes_;

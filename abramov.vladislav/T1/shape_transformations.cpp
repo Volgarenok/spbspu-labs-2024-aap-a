@@ -1,71 +1,94 @@
 #include "shape_transformations.hpp"
 #include <iostream>
+#include <limits>
 
 namespace abramov
 {
   using CS = CompositeShape;
-  void getShapes(std::istream &in, CS &shapes, size_t &i, double &x, double &y, double &k, bool &flag)
+
+  void getShapes(std::istream &in, CS &shapes, point_t &p, double &k, bool &flag)
   {
     while (in)
     {
       std::string s1;
       in >> s1;
-      double x1 = 0;
-      double x2 = 0;
-      double y1 = 0;
-      double y2 = 0;
       if (s1 == "RECTANGLE")
       {
-        in >> x1 >> y1 >> x2 >> y2;
-        try
-        {
-          shapes.push_back(new Rectangle({x1, y1}, {x2, y2}));
-          ++i;
-        }
-        catch (const std::logic_error &e)
-        {
-          flag = true;
-        }
+        makeRectangle(in, shapes, flag);
       }
-      if (s1 == "SQUARE")
+      else if (s1 == "SQUARE")
       {
-        double len = 0;
-        in >> x1 >> y1 >> len;
-        try
-        {
-          shapes.push_back(new Square({x1, y1}, len));
-          ++i;
-        }
-        catch (const std::logic_error &e)
-        {
-          flag = true;
-        }
+        makeSquare(in, shapes, flag);
       }
-      if (s1 == "COMPLEXQUAD")
+      else if (s1 == "COMPLEXQUAD")
       {
-        double x3 = 0;
-        double y3 = 0;
-        double x4 = 0;
-        double y4 = 0;
-        in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
-        try
-        {
-          shapes.push_back(new ComplexQuad({x1, y1}, {x2, y2}, {x3, y3}, {x4, y4}));
-          ++i;
-        }
-        catch (const std::logic_error &e)
-        {
-          flag = true;
-        }
+        makeComplexQuad(in, shapes, flag);
       }
-      if (s1 == "SCALE")
+      else if (s1 == "SCALE")
       {
-        in >> x >> y >> k;
+        in >> p.x >> p.y >> k;
+      }
+      else
+      {
+        in.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
       }
     }
   }
 
-  void printFrameRectCoords(const abramov::rectangle_t &r)
+  void getArray(std::istream &in, double *x, size_t k)
+  {
+    for (size_t i = 0; i < k; ++i)
+    {
+      in >> x[i];
+    }
+  }
+
+  void makeRectangle(std::istream &in, CS &shapes, bool &flag)
+  {
+    constexpr size_t k = 4;
+    double arr[k] = {};
+    getArray(in, arr, k);
+    try
+    {
+      shapes.push_back(new Rectangle({arr[0], arr[1]}, {arr[2], arr[3]}));
+    }
+    catch (const std::logic_error &e)
+    {
+      flag = true;
+    }
+  }
+
+  void makeSquare(std::istream &in, CS &shapes, bool &flag)
+  {
+    constexpr size_t k = 3;
+    double arr[k] = {};
+    getArray(in, arr, k);
+    try
+    {
+      shapes.push_back(new Square({arr[0], arr[1]}, arr[2]));
+    }
+    catch (const std::logic_error &e)
+    {
+      flag = true;
+    }
+  }
+
+  void makeComplexQuad(std::istream &in, CS &shapes, bool &flag)
+  {
+    constexpr size_t k = 8;
+    double x[k] = {};
+    getArray(in, x, k);
+    try
+    {
+      shapes.push_back(new ComplexQuad({x[0], x[1]}, {x[2], x[3]}, {x[4], x[5]}, {x[6], x[7]}));
+    }
+    catch (const std::logic_error &e)
+    {
+      flag = true;
+    }
+  }
+
+  void printFrameRectCoords(const rectangle_t &r)
   {
     const double x1 = r.pos.x - r.width / 2;
     const double y1 = r.pos.y - r.height / 2;
@@ -96,39 +119,28 @@ namespace abramov
     }
   }
 
-  void printShapes(std::ostream &out, CS &shapes, rectangle_t *rects, size_t i, double &x, double &y, double k)
+  void printShapes(std::ostream &out, CS &shapes, point_t p, double k, size_t i)
   {
     out << std::fixed << std::setprecision(1);
-    double s = 0;
-    for (size_t j = 0; j < i; ++j)
-    {
-      s += shapes[j]->getArea();
-      rects[j] = shapes[j]->getFrameRect();
-    }
+    double s = shapes.getArea();
     out << s << " ";
-    point_t p{x, y};
     for (size_t j = 0; j < i - 1; ++j)
     {
-      printFrameRectCoords(rects[j]);
+      printFrameRectCoords(shapes.getFrameRect(j));
       out << " ";
       scaleFigure(shapes[j], p, k);
     }
-    printFrameRectCoords(rects[i - 1]);
+    printFrameRectCoords(shapes.getFrameRect(i - 1));
     scaleFigure(shapes[i - 1], p, k);
     out << "\n";
-    s = 0;
-    for (size_t j = 0; j < i; ++j)
-    {
-      s += shapes[j]->getArea();
-      rects[j] = shapes[j]->getFrameRect();
-    }
+    s = shapes.getArea();
     std::cout << s << " ";
     for (size_t j = 0; j < i - 1; ++j)
     {
-      printFrameRectCoords(rects[j]);
+      printFrameRectCoords(shapes.getFrameRect(j));
       out << " ";
     }
-    printFrameRectCoords(rects[i - 1]);
+    printFrameRectCoords(shapes.getFrameRect(i - 1));
     out << "\n";
   }
 }
