@@ -2,6 +2,12 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include "base-types.hpp"
+#include "shape.hpp"
+#include "rectangle.hpp"
+#include "circle.hpp"
+#include "triangle.hpp"
+#include "square.hpp"
 
 void komarova::make_shapes(std::istream& input, Shape** shapes, int& count, bool& wrong_shape, double& x_sc, double& y_sc, double& coef)
 {
@@ -67,7 +73,7 @@ void komarova::make_shapes(std::istream& input, Shape** shapes, int& count, bool
       }
       if (figure == "SQUARE")
       {
-        double x = 0.0, y = 0.0, len = 0.0
+        double x = 0.0, y = 0.0, len = 0.0;
         input >> x >> y >> len;
         try
         {
@@ -89,7 +95,7 @@ void komarova::make_shapes(std::istream& input, Shape** shapes, int& count, bool
     catch (const std::bad_alloc& e)
     {
       count = 0;
-      clear(shapes);
+      delete_shapes(shapes);
       throw;
     }
   }
