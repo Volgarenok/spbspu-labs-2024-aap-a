@@ -40,9 +40,9 @@ void komarova::make_shapes(std::istream& input, Shape** shapes, int& count, bool
       }
       if (figure == "CIRCLE")
       {
-        double x = 0.0, y = 0.0, radius = 0.0;
-        input >> x >> y >> radius;
-        point_t point_c(x, y);
+        point_t point_c;
+        double radius;
+        input >> point_c.x >> point_c.y >> radius;
         try
         {
           shapes[count] = new Circle(point_c, radius);
@@ -56,11 +56,10 @@ void komarova::make_shapes(std::istream& input, Shape** shapes, int& count, bool
       }
       if (figure == "TRIANGLE")
       {
-        double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0, x3 = 0.0, y3 = 0.0;
-        input >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-        point_t a(x1, y1);
-        point_t b(x2, y2);
-        point_t c(x3, y3);
+        point_t a;
+        point_t b;
+        point_t c;
+        input >> a.x >> a.y >> b.x >> b.y >> c.x >> c.y;
         try
         {
           shapes[count] = new Triangle(a, b, c);
@@ -74,11 +73,12 @@ void komarova::make_shapes(std::istream& input, Shape** shapes, int& count, bool
       }
       if (figure == "SQUARE")
       {
-        double x = 0.0, y = 0.0, len = 0.0;
-        input >> x >> y >> len;
+        double len;
+        point_t low_left;
+        input >> low_left.x >> low_left.y >> len;
         try
         {
-          shapes[count] = new Square(point_t(x, y), len);
+          shapes[count] = new Square(low_left, len);
           count++;
         }
         catch (const std::logic_error& e)
@@ -124,6 +124,23 @@ void komarova::frame_rect_xy(std::ostream& output, Shape** shapes)
   }
 }
 
+void komarova::scale(Shape** shapes, point_t point, double coef)
+{
+  if (coef <= 0.0)
+  {
+    throw std::logic_error("incorrect coefficient");
+  }
+  for (size_t i = 0; shapes[i] != nullptr; i++)
+  {
+    point_t p = shapes[i]->getFrameRect().pos;
+    shapes[i]->move(point);
+    shapes[i]->scale(coef);
+    point_t new_p = shapes[i]->getFrameRect().pos;
+    point_t vector = {(new_p.x - p.x) * coef, (new_p.y - p.y) * coef};
+    shapes[i]->move(-vector.x, -vector.y);
+  }
+}
+
 void komarova::delete_shapes(Shape** shapes)
 {
   for (size_t i = 0; shapes[i] != nullptr; i++)
@@ -131,4 +148,3 @@ void komarova::delete_shapes(Shape** shapes)
     delete shapes[i];
   }
 }
-
