@@ -11,7 +11,6 @@ namespace gavrilova {
     virtual void move(double x, double y) noexcept = 0;
     virtual void scale(double k) = 0;
     virtual Shape* clone() const = 0;
-    
   };
 }
 #endif
