@@ -1,8 +1,7 @@
 #include "rectangle.hpp"
 #include <iostream>
-#include "base-types.hpp"
 
-gavrilova::Rectangle::Rectangle(point_t pBottomLeft, point_t pTopRight):
+gavrilova::Rectangle::Rectangle(const point_t& pBottomLeft, const point_t& pTopRight):
   pBottomLeft_({0,0}),
   pTopRight_({0,0})
 {
@@ -20,24 +19,22 @@ gavrilova::Rectangle::Rectangle(const Rectangle& other):
   pTopRight_(other.pTopRight_)
 {}
 
-double gavrilova::Rectangle::getArea() const {
+double gavrilova::Rectangle::getArea() const noexcept {
   return (pTopRight_.x - pBottomLeft_.x) * (pTopRight_.y - pBottomLeft_.y);
 }
-gavrilova::rectangle_t gavrilova::Rectangle::getFrameRect() const {
-  rectangle_t resultRect;
-  resultRect.height = pTopRight_.y - pBottomLeft_.y;
-  resultRect.width = pTopRight_.x - pBottomLeft_.x;
-  resultRect.pos.x = (pTopRight_.x - pBottomLeft_.x) / 2 + pBottomLeft_.x;
-  resultRect.pos.y = (pTopRight_.y - pBottomLeft_.y) / 2 + pBottomLeft_.y;
-  return resultRect;
+gavrilova::rectangle_t gavrilova::Rectangle::getFrameRect() const noexcept {
+  double height = pTopRight_.y - pBottomLeft_.y;
+  double width = pTopRight_.x - pBottomLeft_.x;
+  point_t pos{(pTopRight_.x - pBottomLeft_.x) / 2 + pBottomLeft_.x, (pTopRight_.y - pBottomLeft_.y) / 2 + pBottomLeft_.y};
+  return {height, width, pos};
 }
-void gavrilova::Rectangle::move(point_t p) {
+void gavrilova::Rectangle::move(const point_t& p) noexcept {
   point_t center = getFrameRect().pos;
   double difX = p.x - center.x;
   double difY = p.y - center.y;
   move(difX, difY);
 }
-void gavrilova::Rectangle::move(double difX, double difY) {
+void gavrilova::Rectangle::move(double difX, double difY) noexcept {
   pBottomLeft_.move(difX, difY);
   pTopRight_.move(difX, difY);
 }

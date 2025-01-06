@@ -1,5 +1,6 @@
 #include "compositeShape.hpp"
 #include <algorithm>
+#include "shapeManip.hpp"
 
 gavrilova::CompositeShape::CompositeShape():
   size_(0),
@@ -9,17 +10,14 @@ gavrilova::CompositeShape::CompositeShape():
   shapes_ = new Shape*[capacity_];
 }
 
-gavrilova::CompositeShape::~CompositeShape() {
-  for (size_t i = 0; i < size_; ++i) {
-    delete shapes_[i];
-  }
-  delete[] shapes_;
-}
 gavrilova::CompositeShape::CompositeShape(size_t capacity):
-  CompositeShape()
+  size_(0),
+  capacity_(capacity),
+  shapes_(nullptr)
 {
-  resize(capacity);
+  shapes_ = new Shape*[capacity_];
 }
+
 gavrilova::CompositeShape::CompositeShape(const CompositeShape& other):
   CompositeShape(other.capacity_)
 {
@@ -27,12 +25,6 @@ gavrilova::CompositeShape::CompositeShape(const CompositeShape& other):
   for (size_t i = 0; i < size_; ++i) {
     shapes_[i] = other.shapes_[i]->clone();
   }
-}
-
-gavrilova::CompositeShape& gavrilova::CompositeShape::operator=(const CompositeShape& other) {
-  CompositeShape cpy(other);
-  swap(cpy);
-  return *this;
 }
 
 gavrilova::CompositeShape::CompositeShape(CompositeShape&& other) noexcept:
@@ -45,15 +37,23 @@ gavrilova::CompositeShape::CompositeShape(CompositeShape&& other) noexcept:
   other.shapes_ = nullptr;
 }
 
+gavrilova::CompositeShape::~CompositeShape() {
+  clear();
+}
+
+
+gavrilova::CompositeShape& gavrilova::CompositeShape::operator=(const CompositeShape& other) {
+  if (this != &other) {
+    CompositeShape cpy(other);
+    swap(cpy);
+  }
+  return *this;
+}
+
 gavrilova::CompositeShape& gavrilova::CompositeShape::operator=(CompositeShape&& other) noexcept {
   if (this != &other) {
     swap(other);
-    for (size_t i = 0; i < other.size_; ++i) {
-      delete other.shapes_[i];
-    }
-    other.size_ = 0;
-    other.capacity_ = 0;
-    other.shapes_ = nullptr;
+    other.clear();
   }
   return *this;
 }
@@ -62,9 +62,7 @@ void gavrilova::CompositeShape::push_back(Shape* shp) {
   if (!shp) {
     throw std::invalid_argument("Shape cannot be null");
   }
-  if (size_ == capacity_) {
-    resize(capacity_ * 2);
-  }
+  resize();
   shapes_[size_++] = shp;
 }
 
@@ -82,7 +80,7 @@ gavrilova::Shape* gavrilova::CompositeShape::at(size_t id) const {
   return shapes_[id];
 }
 
-gavrilova::Shape* gavrilova::CompositeShape::operator[](size_t id) {
+gavrilova::Shape* gavrilova::CompositeShape::operator[](size_t id) const noexcept{
   return shapes_[id];
 }
 
@@ -96,20 +94,30 @@ size_t gavrilova::CompositeShape::size() const noexcept {
 }
 
 void gavrilova::CompositeShape::scale(double k) {
+  if (k <= 0) {
+    throw std::logic_error("Коэффицент должен быть положительным");
+  }
   for (size_t i = 0; i < size_; ++i) {
     shapes_[i]->scale(k);
   }
 }
 
-void gavrilova::CompositeShape::move(double difX, double difY) {
+void gavrilova::CompositeShape::move(const point_t& p) noexcept {
+  point_t center = getFrameRect().pos;
+  double difX = p.x - center.x;
+  double difY = p.y - center.y;
+  move(difX, difY);
+}
+
+void gavrilova::CompositeShape::move(double difX, double difY) noexcept {
   for (size_t i = 0; i < size_; ++i) {
     shapes_[i]->move(difX, difY);
   }
 }
 
-gavrilova::rectangle_t gavrilova::CompositeShape::getFrameRect() const {
-  if (size_ == 0) {
-    return {0, 0, {0, 0}};
+gavrilova::rectangle_t gavrilova::CompositeShape::getFrameRect() const noexcept{
+  if (empty()) {
+    throw std::logic_error("Composite shape is empty.");
   }
 
   double minX = shapes_[0]->getFrameRect().pos.x - shapes_[0]->getFrameRect().width / 2;
@@ -133,7 +141,19 @@ gavrilova::rectangle_t gavrilova::CompositeShape::getFrameRect() const {
   return frameRect;
 }
 
-void gavrilova::CompositeShape::resize(size_t new_capacity) {
+double gavrilova::CompositeShape::getArea() const noexcept {
+  double area = 0;
+  for (size_t i = 0; i < size_; ++i) {
+    area += shapes_[i]->getArea();
+  }
+  return area;
+}
+
+void gavrilova::CompositeShape::resize() {
+  if (size_ != capacity_) {
+    return;
+  }
+  size_t new_capacity = capacity_ * 2;
   Shape** new_shapes = new Shape*[new_capacity];
 
   for (size_t i = 0; i < size_; ++i) {
@@ -144,8 +164,15 @@ void gavrilova::CompositeShape::resize(size_t new_capacity) {
   shapes_ = new_shapes;
   capacity_ = new_capacity;
 }
-void gavrilova::CompositeShape::swap(CompositeShape& rhs) noexcept{
+
+void gavrilova::CompositeShape::swap(CompositeShape& rhs) noexcept {
   std::swap(size_, rhs.size_);
   std::swap(capacity_, rhs.capacity_);
   std::swap(shapes_, rhs.shapes_);
+}
+
+void gavrilova::CompositeShape::clear() {
+  clearShapes(shapes_, capacity_);
+  size_ = 0;
+  capacity_ = 0;
 }

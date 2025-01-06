@@ -1,31 +1,15 @@
 #include <iostream>
-#include <ostream>
-#include <iomanip>
-#include <string>
 #include "fabric_shape.hpp"
-#include "scaleShape.hpp"
+#include "shapeManip.hpp"
+#include <iomanip>
 
 namespace gavrilova {
-  void outRectangles(std::ostream & out, gavrilova::Shape ** Shapes, size_t nShapes) {
-    if (nShapes) {
-      for (size_t i = 0; i < nShapes; ++i) {
-        rectangle_t rect = Shapes[i]->getFrameRect();
-        out << std::setprecision(1);
-        out << " " << rect.pos.x - rect.width / 2 << " " << rect.pos.y - rect.height / 2;
-        out << " " << rect.pos.x + rect.width / 2 << " " << rect.pos.y + rect.height / 2;
-      }
-      out << "\n";
-    }
-  }
-  void clearShapes(Shape** Shapes, size_t n) {
-    for (size_t i = 0; i < n; ++i) {
-      delete Shapes[i];
-    }
-  }
+  void clearShapes(Shape** Shapes, size_t n);
 }
+
 int main()
 {
-  gavrilova::Shape * Shapes[1000] = {nullptr};
+  gavrilova::Shape* Shapes[1000] = {nullptr};
   gavrilova::point_t center{0,0};
   double koef = -1;
   size_t nShapes = 0;
@@ -35,7 +19,7 @@ int main()
   while (!std::cin.eof() && std::cin) {
     try {
       Shapes[nShapes] = gavrilova::make_shape(std::cin, center, koef, nError);
-    } catch (const std::exception & e) {
+    } catch (const std::exception& e) {
       std::cerr << e.what();
       return 1;
     }
@@ -61,12 +45,12 @@ int main()
   gavrilova::outRectangles(std::cout, Shapes, nShapes);
 
   double commonAreaAfter = 0;
-  for (size_t i = 0; i < nShapes; ++i) {
-    gavrilova::scaleShape(*(Shapes[i]), center, koef);
-    commonAreaAfter += Shapes[i]->getArea();
-  }
+
+  gavrilova::scaleShapes(Shapes, nShapes, center, koef, commonAreaAfter);
+
   std::cout << std::fixed << std::setprecision(1) << commonAreaAfter;
   gavrilova::outRectangles(std::cout, Shapes, nShapes);
 
   gavrilova::clearShapes(Shapes, nShapes);
 }
+

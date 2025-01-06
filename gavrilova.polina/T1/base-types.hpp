@@ -4,7 +4,9 @@ namespace gavrilova {
   struct point_t {
     double x;
     double y;
-    void move(double difX, double difY);
+    void move(double difX, double difY) noexcept;
+    double getDistance(point_t other) noexcept;
+    void scaleDistance(point_t other, double k);
   };
   struct rectangle_t {
     double width;

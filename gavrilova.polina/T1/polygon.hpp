@@ -3,22 +3,22 @@
 #include <cstddef>
 #include "shape.hpp"
 #include "triangle.hpp"
+
 namespace gavrilova {
   class Polygon final : public Shape {
   public:
     ~Polygon();
-    Polygon(size_t size, point_t * verteces);
+    Polygon(size_t size, point_t* verteces);
     Polygon(const Polygon& other);
-    double getArea() const override;
-    rectangle_t getFrameRect() const override;
-    void move(point_t p) override;
-    void move(double difX, double difY) override;
+    double getArea() const noexcept override;
+    rectangle_t getFrameRect() const noexcept override;
+    void move(const point_t& p) noexcept override;
+    void move(double difX, double difY) noexcept override;
     void scale(double k) override;
     Shape* clone() const;
-    point_t getCenter();
   private:
     size_t size_;
-    Triangle ** triangles_;
+    Triangle** triangles_;
     void clear(size_t created);
   };
 }

@@ -1,23 +1,22 @@
 #include "polygon.hpp"
-#include <cmath>
 #include <iostream>
-#include "base-types.hpp"
-#include "scaleShape.hpp"
+#include "shapeManip.hpp"
 
-gavrilova::Polygon::Polygon(size_t nPoints, point_t * verteces):
-  size_(nPoints - 2),
+gavrilova::Polygon::Polygon(size_t nPoints, point_t* verteces):
+  size_(0),
   triangles_(nullptr)
 {
   if (nPoints < 3) {
     throw std::logic_error("Polygon must have at least 3 vertices.");
   }
+  size_ = nPoints - 2;
   triangles_ = new gavrilova::Triangle*[size_];
   size_t created = 0;
   for (size_t i = 0; i < size_; ++i) {
     try{
       triangles_[i] = new gavrilova::Triangle(verteces[0], verteces[i + 1], verteces[i + 2]);
       ++created;
-    } catch (const std::bad_alloc & e) {
+    } catch (const std::bad_alloc&) {
       clear(created);
       throw;
     }
@@ -33,7 +32,7 @@ gavrilova::Polygon::Polygon(const Polygon& other):
     try{
       triangles_[i] = new gavrilova::Triangle(*other.triangles_[i]);
       ++created;
-    } catch (const std::bad_alloc & e) {
+    } catch (const std::bad_alloc&) {
       clear(created);
       throw;
     }
@@ -41,21 +40,17 @@ gavrilova::Polygon::Polygon(const Polygon& other):
 }
 
 gavrilova::Polygon::~Polygon() {
-  for (size_t i = 0; i < size_; ++i) {
-    delete triangles_[i];
-  }
-  delete[] triangles_;
+  clear(size_);
 }
 
-double gavrilova::Polygon::getArea() const
-{
+double gavrilova::Polygon::getArea() const noexcept {
   double area = 0;
   for (size_t i = 0; i < size_; ++i) {
     area += triangles_[i]->getArea();
   }
   return area;
 }
-gavrilova::rectangle_t gavrilova::Polygon::getFrameRect() const {
+gavrilova::rectangle_t gavrilova::Polygon::getFrameRect() const noexcept {
   double minX = triangles_[0]->getFrameRect().pos.x - triangles_[0]->getFrameRect().width / 2;
   double maxX = triangles_[0]->getFrameRect().pos.x + triangles_[0]->getFrameRect().width / 2;
   double minY = triangles_[0]->getFrameRect().pos.y - triangles_[0]->getFrameRect().height / 2;
@@ -67,17 +62,16 @@ gavrilova::rectangle_t gavrilova::Polygon::getFrameRect() const {
     minY = std::min(minY, rect.pos.y - rect.height / 2);
     maxY = std::max(maxY, rect.pos.y + rect.height / 2);
   }
+  return {maxX - minX, maxY - minY, { (minX + maxX) / 2, (minY + maxY) / 2 }};
+}
 
-  rectangle_t frameRect = {maxX - minX, maxY - minY, { (minX + maxX) / 2, (minY + maxY) / 2 }};
-  return frameRect;
-  }
-void gavrilova::Polygon::move(point_t p) {
+void gavrilova::Polygon::move(const point_t& p) noexcept {
   point_t center = getFrameRect().pos;
   double difX = p.x - center.x;
   double difY = p.y - center.y;
   move(difX, difY);
 }
-void gavrilova::Polygon::move(double difX, double difY) {
+void gavrilova::Polygon::move(double difX, double difY) noexcept {
   for (size_t i = 0; i < size_; ++i) {
     triangles_[i]->move(difX, difY);
   }

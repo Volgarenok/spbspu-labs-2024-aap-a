@@ -4,19 +4,19 @@
 namespace gavrilova {
   class Triangle final : public Shape {
   public:
-    Triangle(point_t A, point_t B, point_t C);
+    Triangle(const point_t& a, const point_t& b, const point_t& c);
     Triangle(const Triangle& other);
-    double getArea() const override;
-    rectangle_t getFrameRect() const override;
-    void move(point_t p) override;
-    void move(double difX, double difY) override;
-    void scale(double k) override;
+    double getArea() const noexcept override;
+    rectangle_t getFrameRect() const noexcept override;
+    void move(const point_t& p) noexcept override;
+    void move(double difX, double difY) noexcept override;
+    void scale(double k) noexcept override;
     Shape* clone() const;
-    Triangle& operator=(const Triangle&);
+    
   private:
-    point_t A_;
-    point_t B_;
-    point_t C_;
+    point_t a_;
+    point_t b_;
+    point_t c_;
   };
 }
 #endif
