@@ -6,12 +6,12 @@ brevnov::Rectangle::Rectangle(point_t left, point_t right):
   right_(right)
 {}
 
-double brevnov::Rectangle::getArea() const
+double brevnov::Rectangle::getArea() const noexcept
 {
   return (right_.x_ - left_.x_) * (right_.y_ - left_.y_);
 }
 
-brevnov::rectangle_t brevnov::Rectangle::getFrameRect() const
+brevnov::rectangle_t brevnov::Rectangle::getFrameRect() const noexcept
 {
   double width = right_.x_ - left_.x_;
   double height = right_.y_ - left_.y_;
@@ -20,7 +20,7 @@ brevnov::rectangle_t brevnov::Rectangle::getFrameRect() const
   return result;
 }
 
-void brevnov::Rectangle::move(point_t new_centre)
+void brevnov::Rectangle::move(point_t new_centre) noexcept
 {
   point_t old_centre = getFrameRect().pos_;
   double dx_ = new_centre.x_ - old_centre.x_;
@@ -28,7 +28,7 @@ void brevnov::Rectangle::move(point_t new_centre)
   move(dx, dy);
 }
 
-void brevnov::Rectangle::move(double dx, double dy)
+void brevnov::Rectangle::move(double dx, double dy) noexcept
 {
   left_.x_ += dx;
   left_.y_ += dy;
@@ -36,7 +36,7 @@ void brevnov::Rectangle::move(double dx, double dy)
   right_.y_ += dy;
 }
 
-void brevnov::Rectangle::scale(double n)
+void brevnov::Rectangle::scale(double n) noexcept
 {
   point_t centre = getFrameRect().pos_;
   left_ = {centre.x_ + (left_.x_ - centre.x_) * n, centre.y_ + (left_.y_ - centre.y_) * n};

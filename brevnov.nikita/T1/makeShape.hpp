@@ -1,14 +1,19 @@
 #ifndef MAKESHAPE_HPP
 #define MAKESHAPE_HPP
 #include <istream>
+#include <string>
 #include "diamond.hpp"
 #include "ellipse.hpp"
 #include "rectangle.hpp"
+#include "composite-shape.hpp"
+#include "big-rectangle.hpp"
 namespace brevnov
 {
-  Rectangle * make_rectangle(std::istream & in);
-  Diamond * make_diamond(std::istream & in);
-  Ellipse * make_ellipse(std::istream & in);
+  Rectangle * make_rectangle(double x1, double y1, double x2, double y2);
+  Diamond * make_diamond(double x1, double y1, double x2, double y2, double x3, double y3);
+  Ellipse * make_ellipse(point_t center, double r1, double r2);
+  BigRectangle * make_big_rectangle(double x1, double y1, double x2, double y2);
   point_t scale(std::istream & in);
+  Shape * make_shape(std::string name_shape, std::istream & in);
 }
 #endif

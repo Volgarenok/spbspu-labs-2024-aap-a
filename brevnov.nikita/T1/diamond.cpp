@@ -10,12 +10,12 @@ brevnov::Diamond::Diamond(point_t center, point_t horizontal, point_t vertical):
 {
 }
 
-double brevnov::Diamond::getArea() const
+double brevnov::Diamond::getArea() const noexcept
 {
   return (std::fabs((horizontal_.x_ - center_.x_) * (vertical_.y_ - center_.y_) * 2));
 }
 
-brevnov::rectangle_t brevnov::Diamond::getFrameRect() const
+brevnov::rectangle_t brevnov::Diamond::getFrameRect() const noexcept
 {
   point_t pos = center_;
   double width = std::fabs(horizontal_.x_ - center_.x_) * 2;
@@ -24,7 +24,7 @@ brevnov::rectangle_t brevnov::Diamond::getFrameRect() const
   return result;
 }
 
-void brevnov::Diamond::move(point_t new_centre)
+void brevnov::Diamond::move(point_t new_centre) noexcept
 {
   double xdif = horizontal_.x_ - center_.x_;
   double ydif = vertical_.y_ - center_.y_;
@@ -35,7 +35,7 @@ void brevnov::Diamond::move(point_t new_centre)
   vertical_.y_ += ydif;
 }
 
-void brevnov::Diamond::move(double dx, double dy)
+void brevnov::Diamond::move(double dx, double dy) noexcept
 {
   center_.x_ += dx;
   horizontal_.x_ += dx;
@@ -45,7 +45,7 @@ void brevnov::Diamond::move(double dx, double dy)
   vertical_.y_ += dy;
 }
 
-void brevnov::Diamond::scale(double n)
+void brevnov::Diamond::scale(double n) noexcept
 {
   horizontal_.x_ = center_.x_ + (center_.x_ - horizontal_.x) * n;
   vertical_.y_ = center_.y_ + (center_.y_ - vertical_.y) * n;

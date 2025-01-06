@@ -10,104 +10,80 @@
 int main()
 {
   std::cout << std::fixed << std::setprecision(1);
-  constexpr size_t max_size_of_shape = 10000;
-  size_t count_of_shape = 0;
-  brevnov::Shape * shapes[max_size_of_shape] = {};
+  size_t start_count_shape = 30;
+  brevnov::CompositeShape Cs(start_count_shape);
   std::string input_shape;
   brevnov::point_t scale_p;
   double ratio = 0.0;
-  bool isIncorrectParameters = false;
+  bool isIncorrectParameters = false, iswereLogicerror = false;
   bool scaleCommand = false;
-  try
+  brevnov::Shape * new_shape = nullptr;
+  while (std::cin >> input_shape)
   {
-    while (std::cin >> input_shape)
+    if (std::cin.eof())
     {
-      if (std::cin.eof())
+      std::cerr << "EOF!!\n";
+      return 1;
+    }
+    else if (input_shape == "SCALE")
+    {
+      scale_p = brevnov::scale(std::cin);
+      std::cin >> ratio;
+      if (ratio <= 0.0)
       {
-        std::cerr << "EOF!!\n";
-        brevnov::destroy_shape(shapes, count_of_shape);
+        std::cerr << "Incorrect retio\n";
         return 1;
       }
-      else if (input_shape == "RECTANGLE")
-      {
-        try
-        {
-          shapes[count_of_shape] = brevnov::make_rectangle(std::cin);
-          count_of_shape++;
-        }
-        catch (const std::invalid_argument & e)
-        {
-          isIncorrectParameters = true;
-        }
-      }
-      else if (input_shape == "DIAMOND")
-      {
-        try
-        {
-          shapes[count_of_shape] = brevnov::make_diamond(std::cin);
-          count_of_shape++;
-        }
-        catch(const std::invalid_argument & e)
-        {
-          isIncorrectParameters = true;
-        }
-      }
-      else if (input_shape == "ELLIPSE")
-      {
-        try
-        {
-          shapes[count_of_shape] = brevnov::make_ellipse(std::cin);
-          count_of_shape++;
-        }
-        catch(const std::invalid_argument & e)
-        {
-          isIncorrectParameters = true;
-        }
-      }
-      else if (input_shape == "SCALE")
-      {
-        scale_p = brevnov::scale(std::cin);
-        std::cin >> ratio;
-        if (ratio <= 0.0)
-        {
-          std::cerr << "Incorrect retio\n";
-          brevnov::destroy_shape(shapes, count_of_shape);
-          return 1;
-        }
-        scaleCommand = true;
-        break;
-      }
+      scaleCommand = true;
+      break;
     }
-    if (isIncorrectParameters)
+    else
     {
-      std::cerr << "Some parameters were incorrect\n";
+      try
+      {
+        new_shape = brevnov::make_shape(input_shape, std::cin);
+      }
+      catch (const std::bad_alloc & e)
+      {
+        std::cerr << "Not enough memory!";
+        return 1;
+      }
+      catch (const std::logic_error & t)
+      {
+        iswereLogicerror = true;
+      }
+      catch (const std::invalid_argument & f)
+      {
+        isIncorrectParameters = true;
+      }
+      Cs.push_back(new_shape);
     }
-    if (count_of_shape == 0)
-    {
-      std::cerr << "Not a single figure was read\n";
-      return 1;
-    }
-    if (!scaleCommand)
-    {
-      std::cerr << "No SCALE command!\n";
-      brevnov::destroy_shape(shapes, count_of_shape);
-      return 1;
-    }
-    std::cout << std::setprecision(1);
-    std::cout << brevnov::get_sum_area(shapes, count_of_shape) << " ";
-    brevnov::print_frame_coordinates(shapes, count_of_shape, std::cout);
-    std::cout << "\n";
-    brevnov::scale_shape(shapes, count_of_shape, scale_p, ratio);
-    std::cout << brevnov::get_sum_area(shapes, count_of_shape) << " ";
-    brevnov::print_frame_coordinates(shapes, count_of_shape, std::cout);
-    std::cout << "\n";
-    brevnov::destroy_shape(shapes, count_of_shape);
-    return 0;
   }
-  catch(const std::bad_alloc& e)
+  if (isIncorrectParameters)
   {
-    std::cerr << "Not emough memory\n";
-    brevnov::destroy_shape(shapes, count_of_shape);
+    std::cerr << "Some parameters were incorrect\n";
+  }
+  if (iswereLogicerror)
+  {
+    std::cerr << "Logic error happend\n";
+  }
+  if (count_of_shape == 0)
+  {
+    std::cerr << "Not a single figure was read\n";
     return 1;
   }
+  if (!scaleCommand)
+  {
+    std::cerr << "No SCALE command!\n";
+    return 1;
+  }
+  std::cout << std::setprecision(1);
+  std::cout << Cs.getArea() << " ";
+  Cs.print_frame_coordinates(std::cout);
+  std::cout << "\n";
+  Cs.scale(ratio, scale_p);
+  std::cout << Cs.getArea() << " ";
+  Cs.print_frame_coordinates(std::cout);
+  std::cout << "\n";
+  return 0;
 }

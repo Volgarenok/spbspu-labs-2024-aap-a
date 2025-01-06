@@ -8,11 +8,11 @@ namespace brevnov
   public:
     Ellipse(point_t center, double r1, double r2);
     ~Ellipse() = default;
-    double getArea() const override;
-    rectangle_t getFrameRect() const override;
-    void move(point_t new_centre) override;
-    void move(double dx, double dy) override;
-    void scale(double n) override;
+    double getArea() const noexcept override;
+    rectangle_t getFrameRect() const noexcept override;
+    void move(point_t new_centre) noexcept override;
+    void move(double dx, double dy) noexcept override;
+    void scale(double n) noexcept override;
   private:
     point_t center_;
     double r1_;

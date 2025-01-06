@@ -8,13 +8,13 @@ brevnov::Ellipse::Ellipse(point_t center, double r1, double r2):
 {
 }
 
-double brevnov::Ellipse::getArea() const
+double brevnov::Ellipse::getArea() const noexcept
 {
   const double pi = std::acos(-1.0);
   return pi * r1_ * r2_;
 }
 
-brevnov::rectangle_t brevnov::Ellipse::getFrameRect() const
+brevnov::rectangle_t brevnov::Ellipse::getFrameRect() const noexcept
 {
   point_t pos = center_;
   double width = r2_ * 2.0;
@@ -23,18 +23,18 @@ brevnov::rectangle_t brevnov::Ellipse::getFrameRect() const
   return result;
 }
 
-void brevnov::Ellipse::move(point_t new_centre)
+void brevnov::Ellipse::move(point_t new_centre) noexcept
 {
   center_ = new_centre;
 }
 
-void brevnov::Ellipse::move(double dx, double dy)
+void brevnov::Ellipse::move(double dx, double dy) noexcept
 {
   center_.x_ += dx;
   center_.y_ += dy;
 }
 
-void brevnov::Ellipse::scale(double n)
+void brevnov::Ellipse::scale(double n) noexcept
 {
   r1_ *= n;
   r2_ *= n;
