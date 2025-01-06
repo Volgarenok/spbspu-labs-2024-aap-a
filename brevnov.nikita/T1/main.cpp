@@ -42,6 +42,10 @@ int main()
       try
       {
         new_shape = brevnov::make_shape(input_shape, std::cin);
+        if (new_shape)
+        {
+          Cs.push_back(new_shape);
+        }
       }
       catch (const std::bad_alloc & e)
       {
@@ -52,7 +56,6 @@ int main()
       {
         isIncorrectParameters = true;
       }
-      Cs.push_back(new_shape);
     }
   }
   if (isIncorrectParameters)
