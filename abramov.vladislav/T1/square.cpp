@@ -16,12 +16,12 @@ namespace abramov
    rect_(rect)
   {}
 
-  double Square::getArea() const
+  double Square::getArea() const noexcept
   {
     return rect_.getArea();
   }
 
-  rectangle_t Square::getFrameRect() const
+  rectangle_t Square::getFrameRect() const noexcept
   {
     return rect_.getFrameRect();
   }
@@ -39,6 +39,11 @@ namespace abramov
   void Square::scale(double k)
   {
     rect_.scale(k);
+  }
+
+  Square *Square::clone() const
+  {
+    return new Square(*this);
   }
 
   Rectangle Square::getRect() const

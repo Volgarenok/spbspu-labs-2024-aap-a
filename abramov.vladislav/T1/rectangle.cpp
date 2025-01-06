@@ -26,12 +26,12 @@ namespace abramov
     cmplxqd4_(cq4)
   {}
 
-  double Rectangle::getArea() const
+  double Rectangle::getArea() const noexcept
   {
     return cmplxqd1_.getArea() + cmplxqd2_.getArea() + cmplxqd3_.getArea() + cmplxqd4_.getArea();
   }
 
-  rectangle_t Rectangle::getFrameRect() const
+  rectangle_t Rectangle::getFrameRect() const noexcept
   {
     const double width = cmplxqd4_.getD().x - cmplxqd1_.getA().x;
     double height = std::abs(cmplxqd4_.getD().y - cmplxqd1_.getA().y);
@@ -91,6 +91,11 @@ namespace abramov
       const point_t p2{x2, y2};
       createCQs(p1, p2, cmplxqd1_, cmplxqd2_, cmplxqd3_, cmplxqd4_);
     }
+  }
+
+  Rectangle *Rectangle::clone() const
+  {
+    return new Rectangle(*this);
   }
 
   ComplexQuad Rectangle::getCQ1() const

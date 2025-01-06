@@ -102,13 +102,13 @@ namespace abramov
     getCoordsOfIntersection(A, B, C, D, x, y);
   }
 
-  double ComplexQuad::getArea() const
+  double ComplexQuad::getArea() const noexcept
   {
     const point_t center = getCenterComplexQuad();
     return getTriangleArea(A_, D_, center) + getTriangleArea(B_, C_, center);
   }
 
-  rectangle_t ComplexQuad::getFrameRect() const
+  rectangle_t ComplexQuad::getFrameRect() const noexcept
   {
     constexpr size_t k = 4;
     double x[k] = {A_.x, B_.x, C_.x, D_.x};
@@ -180,6 +180,11 @@ namespace abramov
       C_ = points[2];
       D_ = points[3];
     }
+  }
+
+  ComplexQuad *ComplexQuad::clone() const
+  {
+    return new ComplexQuad(*this);
   }
 
   point_t ComplexQuad::getA() const

@@ -116,14 +116,14 @@ namespace abramov
     return shapeptrs_[id]->getFrameRect();
   }
 
-  void CompositeShape::move(point_t p) noexcept
+  void CompositeShape::move(point_t p)
   {
     const double dx = p.x - getFrameRect().pos.x;
     const double dy = p.y - getFrameRect().pos.y;
     move(dx, dy);
   }
 
-  void CompositeShape::move(double dx, double dy) noexcept
+  void CompositeShape::move(double dx, double dy)
   {
     for (size_t i = 0; i < shapes_; ++i)
     {

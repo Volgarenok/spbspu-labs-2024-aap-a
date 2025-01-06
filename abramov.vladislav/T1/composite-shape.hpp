@@ -18,8 +18,8 @@ namespace abramov
     double getArea() const noexcept;
     rectangle_t getFrameRect() const noexcept;
     rectangle_t getFrameRect(size_t id) const noexcept;
-    void move(point_t p) noexcept;
-    void move(double dx, double dy) noexcept;
+    void move(point_t p);
+    void move(double dx, double dy);
     void scale(double k);
     ~CompositeShape();
     void push_back(Shape *shp);
