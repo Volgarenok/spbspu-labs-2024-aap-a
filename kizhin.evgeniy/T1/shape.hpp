@@ -15,7 +15,11 @@ namespace kizhin {
 
     virtual void move(const point_t&) = 0;
     virtual void move(double, double) = 0;
-    virtual void scale(double) = 0;
+    void scale(double);
+
+  private:
+    virtual void scaleWithoutChecks(double) = 0;
+    void throwIfInvalidScalingFractor(double);
   };
 }
 

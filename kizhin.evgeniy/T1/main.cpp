@@ -4,13 +4,14 @@
 
 int main()
 {
-  kizhin::CompositeShape shapes;
+  using namespace kizhin;
+  CompositeShape shapes;
   double* scaleParams = nullptr;
   try {
-    scaleParams = kizhin::processInput(std::cin, std::cerr, shapes);
-    kizhin::outputShapesInfo(std::cout, shapes) << '\n';
-    kizhin::scaleShapes(shapes, scaleParams);
-    kizhin::outputShapesInfo(std::cout, shapes) << '\n';
+    scaleParams = processInput(std::cin, std::cerr, shapes);
+    outputShapesInfo(std::cout, shapes) << '\n';
+    scaleShapes(shapes, scaleParams);
+    outputShapesInfo(std::cout, shapes) << '\n';
   } catch (const std::exception& e) {
     delete[] scaleParams;
     std::cerr << "Error: " << e.what() << '\n';

@@ -38,20 +38,20 @@ kizhin::processInput(std::istream& is, std::ostream& errs, CompositeShape& shape
   std::string currentName;
   double* currentParams = nullptr;
   try {
-    while (is) {
+    while (is && !isScaleCommand) {
       currentParams = parseInputShape(is, currentName);
       if (currentName == "SCALE") {
         isScaleCommand = true;
-        break;
+      } else {
+        try {
+          Shape* shape = createShape(currentName, currentParams);
+          shapes.push_back(shape);
+        } catch (const std::exception& e) {
+          errs << "Error: " << e.what() << '\n';
+        }
+        delete[] currentParams;
+        currentParams = nullptr;
       }
-      try {
-        Shape* shape = createShape(currentName, currentParams);
-        shapes.push_back(shape);
-      } catch (const std::exception& e) {
-        errs << "Error: " << e.what() << '\n';
-      }
-      delete[] currentParams;
-      currentParams = nullptr;
     }
     throwIfNotScaleOrSize(isScaleCommand, shapes.size());
   } catch (...) {

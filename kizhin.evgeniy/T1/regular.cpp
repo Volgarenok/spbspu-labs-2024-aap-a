@@ -51,7 +51,7 @@ void kizhin::Regular::move(const point_t& newPos)
   polygon_.move(newPos);
 }
 
-void kizhin::Regular::scale(double scaleFactor)
+void kizhin::Regular::scaleWithoutChecks(double scaleFactor)
 {
   polygon_.scale(scaleFactor);
 }

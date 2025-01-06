@@ -32,11 +32,8 @@ void kizhin::Rectangle::move(double dx, double dy)
   data_.pos.y += dy;
 }
 
-void kizhin::Rectangle::scale(double scaleFactor)
+void kizhin::Rectangle::scaleWithoutChecks(double scaleFactor)
 {
-  if (scaleFactor <= 0.0) {
-    throw std::logic_error("Failed to scale");
-  }
   data_.height *= scaleFactor;
   data_.width *= scaleFactor;
 }
