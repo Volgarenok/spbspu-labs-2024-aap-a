@@ -7,6 +7,10 @@ void brevnov::CompositeShape::print_frame_coordinates(std::ostream & out)
 {
   for (size_t i = 0; i < current_size_; i++)
   {
+    if (i > 0)
+    {
+      out << " ";
+    }
     rectangle_t frame = shapes_[i]->getFrameRect();
     double leftx = frame.pos_.x_ - frame.width_ / 2.0;
     double lefty = frame.pos_.y_ - frame.height_ / 2.0;
@@ -61,6 +65,7 @@ brevnov::CompositeShape & brevnov::CompositeShape::operator=(brevnov::CompositeS
   clear();
   shapes_ = help;
   capacity_ = cos.capacity_;
+  current_size_ = cos.current_size_
   for (size_t i = 0; i < current_size_; i++)
   {
     shapes_[i] = cos[i];
@@ -87,8 +92,8 @@ void brevnov::CompositeShape::add_memory()
   for (size_t i = 0; i < current_size_; i++)
   {
     help.shapes_[i] = shapes_[i];
-    help.current_size_++;
   }
+  help.current_size_ = current_size_;
   *this = std::move(help);
 }
 
