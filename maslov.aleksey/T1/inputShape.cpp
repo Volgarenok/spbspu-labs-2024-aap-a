@@ -60,25 +60,43 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
 
 namespace
 {
+  void inputArray(std::istream & in, double * coordinates, size_t count)
+  {
+    for (size_t i = 0; i < count; ++i)
+    {
+      in >> coordinates[i];
+    }
+  }
   Rectangle * makeRectangle(std::istream & in)
   {
-    double x1 = 0, x2 = 0, y1 = 0, y2 = 0;
-    in >> x1 >> y1 >> x2 >> y2;
-    Rectangle * rectangle = new Rectangle({x1, y1}, {x2, y2});
+    constexpr size_t numberOfCoordinates = 4;
+    double coordinates[numberOfCoordinates] = {};
+    inputArray(in, coordinates, numberOfCoordinates);
+    point_t firstPoint = {coordinates[0], coordinates[1]};
+    point_t secondPoint = {coordinates[2], coordinates[3]};
+    Rectangle * rectangle = new Rectangle(firstPoint, secondPoint);
     return rectangle;
   }
   Regular * makeRegular(std::istream & in)
   {
-    double x1 = 0, y1 = 0, x2 = 0, y2 = 0 , x3 = 0, y3 = 0;
-    in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-    Regular * regular = new Regular({x1, y1}, {x2, y2}, {x3, y3});
+    constexpr size_t numberOfCoordinates = 6;
+    double coordinates[numberOfCoordinates] = {};
+    inputArray(in, coordinates, numberOfCoordinates);
+    point_t firstPoint = {coordinates[0], coordinates[1]};
+    point_t secondPoint = {coordinates[2], coordinates[3]};
+    point_t thirdPoint = {coordinates[4], coordinates[5]};
+    Regular * regular = new Regular(firstPoint, secondPoint, thirdPoint);
     return regular;
   }
   Parallelogram * makeParallelogram(std::istream & in)
   {
-    double x1 = 0, y1 = 0, x2 = 0, y2 = 0 , x3 = 0, y3 = 0;
-    in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-    Parallelogram * parallelogram = new Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
+    constexpr size_t numberOfCoordinates = 6;
+    double coordinates[numberOfCoordinates] = {};
+    inputArray(in, coordinates, numberOfCoordinates);
+    point_t firstPoint = {coordinates[0], coordinates[1]};
+    point_t secondPoint = {coordinates[2], coordinates[3]};
+    point_t thirdPoint = {coordinates[4], coordinates[5]};
+    Parallelogram * parallelogram = new Parallelogram(firstPoint, secondPoint, thirdPoint);
     return parallelogram;
   }
   Shape * makeShape(std::istream & in, std::string name)
