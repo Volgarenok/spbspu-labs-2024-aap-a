@@ -33,7 +33,7 @@ kizhin::Polygon::Polygon(const point_t* values, size_t size):
 {
   if (!values || size < 3 || hasDuplicates(values, values + size)) {
     delete[] vertices_;
-    throw std::logic_error("Invalid Points For Polygon Construction");
+    throw std::logic_error("Invalid points for polygon construction");
   }
   copy(values, values + size, vertices_);
   computeFrameRect();

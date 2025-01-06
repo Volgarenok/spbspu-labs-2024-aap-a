@@ -23,13 +23,23 @@ void kizhin::scaleShape(Shape* shape, double scalingFactor,
   shape->move(dx, dy);
 }
 
-void kizhin::scaleShapes(CompositeShape& shapes, const double* params)
+void kizhin::unsafeScaleShapes(CompositeShape& shapes, const double* params)
 {
   const double scalingFactor = params[3];
   const point_t scalingPoint{ params[1], params[2] };
   for (size_t i = 0; i != shapes.size(); ++i) {
     scaleShape(shapes[i], scalingFactor, scalingPoint);
   }
+}
+
+void kizhin::scaleShapes(CompositeShape& shapes, const double* params)
+{
+  if (params == nullptr) {
+    throw std::invalid_argument("No scaling parameters provided");
+  } else if (static_cast< size_t >(params[0] != 3)) {
+    throw std::invalid_argument("Invalid scaling parameters count");
+  }
+  return unsafeScaleShapes(shapes, params);
 }
 
 kizhin::Shape*
@@ -44,7 +54,7 @@ kizhin::createShape(const std::string& shapeName, const double* shapeParams)
   if (shapeName == "POLYGON") {
     return createPolygon(shapeParams);
   }
-  throw std::logic_error("Unknown shape given");
+  throw std::logic_error("Unknown shape provided");
 }
 
 kizhin::Rectangle* kizhin::createRectangle(const double* params)

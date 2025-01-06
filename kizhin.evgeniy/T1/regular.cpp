@@ -7,7 +7,7 @@
 kizhin::Regular::Regular(const point_t& p1, const point_t& p2, const point_t& p3)
 {
   if (!isRightTriangle(p1, p2, p3)) {
-    throw std::invalid_argument("Invalid Triangle For Regular Construction");
+    throw std::invalid_argument("Invalid triangle for regular construction");
   }
   const double r1 = computeDistance(p1, p2);
   const double r2 = computeDistance(p1, p3);
@@ -78,7 +78,7 @@ size_t kizhin::Regular::computeSize(double innerRadius, double outerRadius)
   const double calculatedSize = pi / std::acos(innerRadius / outerRadius);
   const size_t size = std::round(calculatedSize);
   if (std::abs(calculatedSize - size) > epsilon || size < 3) {
-    throw std::logic_error("Invalid Regular Size");
+    throw std::logic_error("Fractional shape size");
   }
   return size;
 }
