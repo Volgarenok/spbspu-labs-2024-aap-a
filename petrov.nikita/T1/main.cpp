@@ -12,7 +12,7 @@
 #include "scale_isotropically_and_output_data.hpp"
 int main()
 {
-  const char * ERROR_MSG = "ERROR: Invalid data somewhere";
+  const char * ERROR_MSG = "NOTE: Scaling of some figures skipped due to their invalid description\n";
   const char RECTANGLE[10] = "RECTANGLE";
   const char TRIANGLE[9] = "TRIANGLE";
   const char SCALE[6] = "SCALE";
@@ -213,6 +213,6 @@ int main()
   }
   if (count_errors > 0)
   {
-    std::cerr << ERROR_MSG << "\n";
+    std::cerr << ERROR_MSG;
   }
 }

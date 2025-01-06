@@ -9,14 +9,14 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
 {
   if ( (p1_.x == p4_.x && p1_.y == p4_.y) || (p2_.x == p4_.x && p2_.y == p4_.y) || (p3_.x == p4_.x && p3_.y == p4_.y) )
   {
-    throw "ERROR: Invalid data somewhere";
+    throw "NOTE: Scaling of some figures skipped due to their invalid description\n";
   }
   double a = sqrt(pow((p1_.x - p2_.x), 2) + pow((p1_.y - p2_.y), 2));
   double b = sqrt(pow((p3_.x - p2_.x), 2) + pow((p3_.y - p2_.y), 2));
   double c = sqrt(pow((p1_.x - p3_.x), 2) + pow((p1_.y - p3_.y), 2));
   if (a + b <= c || a + c <= b || b + c <= a)
   {
-    throw "ERROR: Invalid data somewhere";
+    throw "NOTE: Scaling of some figures skipped due to their invalid description\n";
   }
   double p = (a + b + c) / 2;
   double area_of_triangle = sqrt(p * (p - a) * (p - b) * (p - c));
@@ -37,7 +37,7 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   double area_3 = sqrt(p * (p - a) * (p - b) * (p - c));
   if (round(area_of_triangle) / 10 != round(area_1 + area_2 + area_3) / 10)
   {
-    throw "ERROR: Invalid data somewhere\n";
+    throw "NOTE: Scaling of some figures skipped due to their invalid description\n";
   }
   double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
   double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);

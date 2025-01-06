@@ -7,7 +7,7 @@ petrov::Rectangle::Rectangle(petrov::point_t p1, petrov::point_t p2):
 {
   if (p1.x >= p2.x || p1.y >= p2.y)
   {
-    throw "ERROR: Invalid data somewhere\n";
+    throw "NOTE: Scaling of some figures skipped due to their invalid description\n";
   }
   p2_.x = p1_.x;
   p2_.y = p3_.y;

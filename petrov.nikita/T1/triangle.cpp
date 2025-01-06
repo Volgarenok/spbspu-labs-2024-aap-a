@@ -12,7 +12,7 @@ petrov::Triangle::Triangle(petrov::point_t p1, petrov::point_t p2, petrov::point
   double c = sqrt(pow((p1_.x - p3_.x), 2) + pow((p1_.y - p3_.y), 2));
   if (a + b <= c || a + c <= b || b + c <= a)
   {
-    throw "ERROR: Invalid data somewhere";
+    throw "NOTE: Scaling of some figures skipped due to their invalid description\n";
   }
   double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
   double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
