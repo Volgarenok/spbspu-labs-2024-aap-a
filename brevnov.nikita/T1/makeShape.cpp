@@ -47,7 +47,7 @@ brevnov::point_t brevnov::scale(std::istream & in)
   in >> x >> y;
   if (in.fail())
   {
-    throw std::invalid_argument("Incorrect parameters");
+    throw std::invalid_argument("Some parameters were incorrect");
   }
   return {x, y};
 }
@@ -65,11 +65,11 @@ brevnov::Shape * brevnov::make_shape(std::string name_shape, std::istream & in)
     in >> x1 >> y1 >> x2 >> y2;
     if (in.fail())
     {
-      throw std::logic_error("Not a number");
+      throw std::invalid_argument("Some parameters were incorrect");
     }
     if (x1 >= x2 || y1 >= y2)
     {
-      throw std::invalid_argument("Incorrect numbers");
+      throw std::invalid_argument("Some parameters were incorrect");
     }
     if (name_shape == "RECTANGLE")
     {
@@ -88,11 +88,11 @@ brevnov::Shape * brevnov::make_shape(std::string name_shape, std::istream & in)
     in >> r1 >> r2;
     if (in.fail())
     {
-      throw std::logic_error("Not a number");
+      throw std::invalid_argument("Some parameters were incorrect");
     }
     if (r1 <= 0.0 || r2 <= 0.0)
     {
-      throw std::invalid_argument("Incorrect numbers");
+      throw std::invalid_argument("Some parameters were incorrect");
     }
     return make_ellipse(center, r1, r2);
   }
@@ -102,11 +102,11 @@ brevnov::Shape * brevnov::make_shape(std::string name_shape, std::istream & in)
     in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
     if (in.fail())
     {
-      throw std::logic_error("Not a number");
+      throw std::invalid_argument("Some parameters were incorrect");
     }
     if ((x1 == x2 &&  y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3) || (x1 != x2 && x1 != x3 && x2 != x3) || (y1 != y2 && y1 != y3 && y2 != y3))
     {
-      throw std::invalid_argument("Incorrect numbers");
+      throw std::invalid_argument("Some parameters were incorrect");
     }
     return make_diamond(x1, y1, x2, y2, x3, y3)
   }

@@ -15,7 +15,7 @@ int main()
   std::string input_shape;
   brevnov::point_t scale_p;
   double ratio = 0.0;
-  bool isIncorrectParameters = false, iswereLogicerror = false;
+  bool isIncorrectParameters = false;
   bool scaleCommand = false;
   brevnov::Shape * new_shape = nullptr;
   while (std::cin >> input_shape)
@@ -48,10 +48,6 @@ int main()
         std::cerr << "Not enough memory!";
         return 1;
       }
-      catch (const std::logic_error & t)
-      {
-        iswereLogicerror = true;
-      }
       catch (const std::invalid_argument & f)
       {
         isIncorrectParameters = true;
@@ -63,11 +59,7 @@ int main()
   {
     std::cerr << "Some parameters were incorrect\n";
   }
-  if (iswereLogicerror)
-  {
-    std::cerr << "Logic error happend\n";
-  }
-  if (count_of_shape == 0)
+  if (Cs.empty())
   {
     std::cerr << "Not a single figure was read\n";
     return 1;

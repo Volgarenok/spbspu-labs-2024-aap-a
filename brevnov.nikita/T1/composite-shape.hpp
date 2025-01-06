@@ -34,6 +34,6 @@ namespace brevnov
     Shape ** shapes_;
     size_t capacity_;
     size_t current_size_;
-  }
+  };
 }
 #endif
