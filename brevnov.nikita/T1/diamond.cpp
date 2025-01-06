@@ -4,8 +4,8 @@
 #include <iostream>
 
 brevnov::Diamond::Diamond(point_t center, point_t horizontal, point_t vertical):
-  center_(center), 
-  horizontal_(horizontal), 
+  center_(center),
+  horizontal_(horizontal),
   vertical_(vertical)
 {
 }
