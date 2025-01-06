@@ -1,5 +1,6 @@
 #include "composite-shape.hpp"
 #include <stdexcept>
+#include "shape_transformations.hpp"
 
 namespace abramov
 {
@@ -23,7 +24,7 @@ namespace abramov
     shapeptrs_ = new Shape*[capacity_];
     for (size_t i = 0; i < shapes_; ++i)
     {
-      shapeptrs_[i] = comp_shp.clone(i);
+      shapeptrs_[i] = comp_shp.shapeptrs_[i];
     }
   }
 
@@ -53,7 +54,7 @@ namespace abramov
       Shape **arr = new Shape*[comp_shp.capacity_];
       for (size_t i = 0; i < comp_shp.capacity_; ++i)
       {
-        arr[i] = comp_shp.clone(i);
+        arr[i] = comp_shp.shapeptrs_[i];
       }
       delete[] shapeptrs_;
       shapeptrs_ = arr;
@@ -117,10 +118,9 @@ namespace abramov
 
   void CompositeShape::move(point_t p) noexcept
   {
-    for (size_t i = 0; i < shapes_; ++i)
-    {
-      shapeptrs_[i]->move(p);
-    }
+    const double dx = p.x - getFrameRect().pos.x;
+    const double dy = p.y - getFrameRect().pos.y;
+    move(dx, dy);
   }
 
   void CompositeShape::move(double dx, double dy) noexcept
@@ -133,9 +133,13 @@ namespace abramov
 
   void CompositeShape::scale(double k)
   {
+    if (k <= 0)
+    {
+      throw std::logic_error("Wrong scale coef\n");
+    }
     for (size_t i = 0; i < shapes_; ++i)
     {
-      shapeptrs_[i]->scale(k);
+      scaleFigure(shapeptrs_[i], getFrameRect().pos, k);
     }
   }
 
@@ -199,7 +203,7 @@ namespace abramov
     return shapes_;
   }
 
-  Shape *CompositeShape::clone(size_t id) const
+  /*Shape *CompositeShape::clone() const
   {
     Shape *figure = shapeptrs_[id];
     try
@@ -233,7 +237,7 @@ namespace abramov
 
     }
     return nullptr;
-  }
+  } */
 
   size_t CompositeShape::getShapes_() const noexcept
   {

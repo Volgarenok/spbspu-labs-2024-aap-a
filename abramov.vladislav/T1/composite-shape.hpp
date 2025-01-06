@@ -30,7 +30,7 @@ namespace abramov
     Shape *operator[](size_t id) const noexcept;
     bool empty() const noexcept;
     size_t size() const noexcept;
-    Shape *clone(size_t id) const;
+    Shape *clone() const;
     size_t getShapes_() const noexcept;
   private:
     size_t shapes_;
