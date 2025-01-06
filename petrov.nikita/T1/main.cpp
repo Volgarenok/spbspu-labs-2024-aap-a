@@ -5,6 +5,7 @@
 #include <input_cstring.hpp>
 #include "shape.hpp"
 #include "base-types.hpp"
+#include "clear_memory.hpp"
 #include "rectangle.hpp"
 #include "triangle.hpp"
 #include "concave.hpp"
@@ -63,17 +64,11 @@ int main()
     }
     catch (const std::bad_alloc & e)
     {
-      delete[] stream_massive; // Warning! Clearing memory like this duplicates often in this code
-      delete[] type_of_shape;
-      for (size_t i = 0; i < created; i++)
-      {
-        delete[] description[i];
-      }
-      delete[] description;
+      petrov::clearMemory(stream_massive, type_of_shape, description, created);
       std::cerr << "ERROR: Out of memory\n";
       return 1;
     }
-    for (size_t i = 0; i < number_of_doubles; i++) // Initializing description for Valgrind
+    for (size_t i = 0; i < number_of_doubles; i++)
     {
       for (size_t j = 0; j < capacity; j++)
       {
@@ -89,7 +84,7 @@ int main()
     type_of_shape[i] = '\0';
     size_t j = 0;
     size_t k = 0;
-    while (stream_massive[i] != '\0') // InvalidRead problem reason
+    while (stream_massive[i] != '\0')
     {
       description[j][k] = stream_massive[i];
       i++;
@@ -115,36 +110,18 @@ int main()
       }
       catch (const std::bad_alloc & e)
       {
-        delete[] stream_massive;
-        delete[] type_of_shape;
-        for (size_t i = 0; i < created; i++)
-        {
-          delete[] description[i];
-        }
-        delete[] description;
+        petrov::clearMemory(stream_massive, type_of_shape, description, created);
         std::cerr << "ERROR: Out of memory\n";
         return 1;
       }
       catch (const char * error)
       {
         count_errors++;
-        delete[] stream_massive;
-        delete[] type_of_shape;
-        for (size_t i = 0; i < created; i++)
-        {
-          delete[] description[i];
-        }
-        delete[] description;
+        petrov::clearMemory(stream_massive, type_of_shape, description, created);
         continue;
       }
       shapes_massive[count++] = ptr_rectangle;
-      delete[] stream_massive;
-      delete[] type_of_shape;
-      for (size_t i = 0; i < created; i++)
-      {
-        delete[] description[i];
-      }
-      delete[] description;
+      petrov::clearMemory(stream_massive, type_of_shape, description, created);
     }
     else if (!strcmp(type_of_shape, TRIANGLE))
     {
@@ -159,36 +136,18 @@ int main()
       }
       catch (const std::bad_alloc & e)
       {
-        delete[] stream_massive;
-        delete[] type_of_shape;
-        for (size_t i = 0; i < created; i++)
-        {
-          delete[] description[i];
-        }
-        delete[] description;
+        petrov::clearMemory(stream_massive, type_of_shape, description, created);
         std::cerr << "ERROR: Out of memory\n";
         return 1;
       }
       catch (const char * error)
       {
         count_errors++;
-        delete[] stream_massive;
-        delete[] type_of_shape;
-        for (size_t i = 0; i < created; i++)
-        {
-          delete[] description[i];
-        }
-        delete[] description;
+        petrov::clearMemory(stream_massive, type_of_shape, description, created);
         continue;
       }
       shapes_massive[count++] = ptr_triangle;
-      delete[] stream_massive;
-      delete[] type_of_shape;
-      for (size_t i = 0; i < created; i++)
-      {
-        delete[] description[i];
-      }
-      delete[] description;
+      petrov::clearMemory(stream_massive, type_of_shape, description, created);
     }
     else if (!strcmp(type_of_shape, CONCAVE))
     {
@@ -204,48 +163,24 @@ int main()
       }
       catch (const std::bad_alloc & e)
       {
-        delete[] stream_massive;
-        delete[] type_of_shape;
-        for (size_t i = 0; i < created; i++)
-        {
-          delete[] description[i];
-        }
-        delete[] description;
+        petrov::clearMemory(stream_massive, type_of_shape, description, created);
         std::cerr << "ERROR: Out of memory\n";
         return 1;
       }
       catch (const char * error)
       {
         count_errors++;
-        delete[] stream_massive;
-        delete[] type_of_shape;
-        for (size_t i = 0; i < created; i++)
-        {
-          delete[] description[i];
-        }
-        delete[] description;
+        petrov::clearMemory(stream_massive, type_of_shape, description, created);
         continue;
       }
       shapes_massive[count++] = ptr_concave;
-      delete[] stream_massive;
-      delete[] type_of_shape;
-      for (size_t i = 0; i < created; i++)
-      {
-        delete[] description[i];
-      }
-      delete[] description;
+      petrov::clearMemory(stream_massive, type_of_shape, description, created);
     }
     else if (!strcmp(type_of_shape, SCALE))
     {
       if (count == 0)
       {
-        delete[] stream_massive;
-        delete[] type_of_shape;
-        for (size_t i = 0; i < created; i++)
-        {
-          delete[] description[i];
-        }
-        delete[] description;
+        petrov::clearMemory(stream_massive, type_of_shape, description, created);
         std::cerr << "ERROR: Nothing to scale\n";
         return 4;
       }
@@ -254,13 +189,7 @@ int main()
       scale_value = std::strtod(description[2], p_end);
       if (scale_value <= 0)
       {
-        delete[] stream_massive;
-        delete[] type_of_shape;
-        for (size_t i = 0; i < created; i++)
-        {
-          delete[] description[i];
-        }
-        delete[] description;
+        petrov::clearMemory(stream_massive, type_of_shape, description, created);
         for (size_t i = 0; i < count; i++)
         {
           delete shapes_massive[i];
@@ -268,24 +197,12 @@ int main()
         std::cerr << "ERROR: Invalid scale value\n";
         return 3;
       }
-      delete[] stream_massive;
-      delete[] type_of_shape;
-      for (size_t i = 0; i < created; i++)
-      {
-        delete[] description[i];
-      }
-      delete[] description;
+      petrov::clearMemory(stream_massive, type_of_shape, description, created);
       break;
     }
     else
     {
-      delete[] stream_massive;
-      delete[] type_of_shape;
-      for (size_t i = 0; i < created; i++)
-      {
-        delete[] description[i];
-      }
-      delete[] description;
+      petrov::clearMemory(stream_massive, type_of_shape, description, created);
     }
   }
   std::cout << std::fixed << std::setprecision(1);
