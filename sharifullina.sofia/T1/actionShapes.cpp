@@ -12,6 +12,11 @@ double sharifullina::getSumArea(Shape ** shapes, size_t n)
 
 void sharifullina::scaleOfShapes(Shape ** shapes, size_t n, point_t p, double k)
 {
+  if (k <= 0)
+  {
+    std::cerr << "Сoefficient must be positive.\n";
+    return;
+  }
   for (size_t i = 0; i < n; i++)
   {
     point_t ptr = shapes[i]->getFrameRect().pos;

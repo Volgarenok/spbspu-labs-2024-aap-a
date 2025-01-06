@@ -16,8 +16,8 @@ namespace sharifullina
     void scale(double k) override;
 
   private:
-    point_t center_ = {0.0, 0.0};
-    double radius_ = 0.0;
+    point_t center_;
+    double radius_;
   };
 }
 

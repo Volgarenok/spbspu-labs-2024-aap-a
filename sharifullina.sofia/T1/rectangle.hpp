@@ -4,7 +4,8 @@
 #include "shape.hpp"
 namespace sharifullina
 {
-  class Rectangle : public Shape {
+  class Rectangle : public Shape
+  {
   public:
     Rectangle(point_t lowLeft, point_t uppRight);
     double getArea() const override;
@@ -13,8 +14,8 @@ namespace sharifullina
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    point_t lowLeft_ = {0.0, 0.0};
-    point_t uppRight_ = {0.0, 0.0};
+    point_t lowLeft_;
+    point_t uppRight_;
   };
 }
 

@@ -3,7 +3,7 @@
 
 const double PI = 3.1415926535;
 
-sharifullina::Circle::Circle(point_t center, double radius) :
+sharifullina::Circle::Circle(point_t center, double radius):
   center_(center),
   radius_(radius)
 {

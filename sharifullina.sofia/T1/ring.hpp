@@ -15,9 +15,9 @@ namespace sharifullina
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    point_t center_ = {0.0, 0.0};
-    double outRadius_ = 0.0;
-    double inRadius_ = 0.0;
+    point_t center_;
+    double outRadius_;
+    double inRadius_;
   };
 }
 
