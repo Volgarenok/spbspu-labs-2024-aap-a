@@ -47,6 +47,6 @@ void brevnov::Diamond::move(double dx, double dy) noexcept
 
 void brevnov::Diamond::scale(double n) noexcept
 {
-  horizontal_.x_ = center_.x_ + (center_.x_ - horizontal_.x) * n;
-  vertical_.y_ = center_.y_ + (center_.y_ - vertical_.y) * n;
+  horizontal_.x_ = center_.x_ + (center_.x_ - horizontal_.x_) * n;
+  vertical_.y_ = center_.y_ + (center_.y_ - vertical_.y_) * n;
 }
