@@ -3,7 +3,7 @@
 
 const double PI = 3.1415926535;
 
-sharifullina::Ellipse::Ellipse(point_t center, double radiusX, double radiusY) :
+sharifullina::Ellipse::Ellipse(point_t center, double radiusX, double radiusY):
   center_(center), radiusX_(radiusX), radiusY_(radiusY)
 {}
 

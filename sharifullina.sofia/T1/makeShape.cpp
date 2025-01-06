@@ -3,13 +3,10 @@
 
 sharifullina::Rectangle* sharifullina::makeRectangle(std::istream& in)
 {
-  double p1 = 0.0;
-  double p2 = 0.0;
-  double p3 = 0.0;
-  double p4 = 0.0;
-  in >> p1 >> p2 >> p3 >> p4;
-  point_t lowLeft = { p1, p2 };
-  point_t uppRight = { p3, p4 };
+  double params[4] = {0.0, 0.0, 0.0, 0.0};
+  in >> params[0] >> params[1] >> params[2] >> params[3];
+  point_t lowLeft = {params[0], params[1]};
+  point_t uppRight = {params[2], params[3]};
   if (lowLeft.x >= uppRight.x || lowLeft.y >= uppRight.y)
   {
     throw std::invalid_argument("Incorrect coordinates");
@@ -20,13 +17,12 @@ sharifullina::Rectangle* sharifullina::makeRectangle(std::istream& in)
 
 sharifullina::Ring* sharifullina::makeRing(std::istream& in)
 {
-  double p1 = 0.0;
-  double p2 = 0.0;
-  double r1 = 0.0;
-  double r2 = 0.0;
-  in >> p1 >> p2 >> r1 >> r2;
-  point_t center = { p1, p2 };
-  if (r1 <= 0 || r2 <= 0 || r1 >= r2)
+  double params[4] = {0.0, 0.0, 0.0, 0.0};
+  in >> params[0] >> params[1] >> params[2] >> params[3];
+  point_t center = {params[0], params[1]};
+  double innerRadius = params[2];
+  double outerRadius = params[3];
+  if (innerRadius <= 0 || outerRadius <= 0 || innerRadius >= outerRadius)
   {
     throw std::invalid_argument("Incorrect radius");
   }
@@ -36,12 +32,11 @@ sharifullina::Ring* sharifullina::makeRing(std::istream& in)
 
 sharifullina::Circle* sharifullina::makeCircle(std::istream& in)
 {
-  double p1 = 0.0;
-  double p2 = 0.0;
-  double r = 0.0;
-  in >> p1 >> p2 >> r;
-  point_t center = { p1, p2 };
-  if (r <= 0)
+  double params[3] = {0.0, 0.0, 0.0};
+  in >> params[0] >> params[1] >> params[2];
+  point_t center = {params[0], params[1]};
+  double radius = params[2];
+  if (radius <= 0)
   {
     throw std::invalid_argument("Incorrect radius");
   }
@@ -51,13 +46,12 @@ sharifullina::Circle* sharifullina::makeCircle(std::istream& in)
 
 sharifullina::Ellipse* sharifullina::makeEllipse(std::istream& in)
 {
-  double p1 = 0.0;
-  double p2 = 0.0;
-  double r1 = 0.0;
-  double r2 = 0.0;
-  in >> p1 >> p2 >> r1 >> r2;
-  point_t center = { p1, p2 };
-  if (r1 <= 0 || r2 <= 0)
+  double params[4] = {0.0, 0.0, 0.0, 0.0};
+  in >> params[0] >> params[1] >> params[2] >> params[3];
+  point_t center = {params[0], params[1]};
+  double radiusX = params[2];
+  double radiusY = params[3];
+  if (radiusX <= 0 || radiusY <= 0)
   {
     throw std::invalid_argument("Incorrect radius");
   }
