@@ -63,24 +63,19 @@ void petrov::Triangle::move(double dx, double dy)
 
 void petrov::Triangle::scale(double k)
 {
-  {
-    if (k > 1)
-    {
-      double dx = (frame_rect_.width / 2) * (k - 1);
-      double dy = (frame_rect_.height / 2) * (k - 1);
-      p1_.x -= dx;
-      p1_.y -= dy;
-      p2_.x -= dx;
-      p2_.y += dy;
-      p3_.x += dx;
-      p3_.y += dy;
-      frame_rect_.height *= k;
-      frame_rect_.width *= k;
-      double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
-      double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
-      double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
-      double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
-      frame_rect_.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
-    }
-  }
+  double dx = (frame_rect_.width / 2) * abs(k - 1);
+  double dy = (frame_rect_.height / 2) * abs(k - 1);
+  p1_.x -= dx;
+  p1_.y -= dy;
+  p2_.x -= dx;
+  p2_.y += dy;
+  p3_.x += dx;
+  p3_.y += dy;
+  frame_rect_.height *= k;
+  frame_rect_.width *= k;
+  double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
+  double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
+  double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
+  double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
+  frame_rect_.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
 }
