@@ -20,7 +20,7 @@ int main()
 
   try
   {
-    alymova::make_shapes(std::cin, shapes, count, wrong_shape, x_sc, y_sc, coef);
+    лщьфкщмф::make_shapes(std::cin, shapes, count, wrong_shape, x_sc, y_sc, coef);
   }
   catch (const std::bad_alloc& e)
   {
