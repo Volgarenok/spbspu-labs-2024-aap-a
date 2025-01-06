@@ -12,8 +12,8 @@ namespace brevnov
     CompositeShape(size_t cus);
     CompositeShape(CompositeShape & cos);
     CompositeShape(CompositeShape && cos) noexcept;
-    CompositeShape & operator=(CompositeShape & cmp);
-    CompositeShape & operator=(CompositeShape && cmp) noexcept;
+    CompositeShape & operator=(CompositeShape & cos);
+    CompositeShape & operator=(CompositeShape && cos) noexcept;
     void print_frame_coordinates(std::ostream & out);
     void add_memory();
     void push_back(Shape * sp);

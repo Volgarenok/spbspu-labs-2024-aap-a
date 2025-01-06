@@ -30,7 +30,7 @@ brevnov::Diamond * brevnov::make_diamond(double x1, double y1, double x2, double
   {
     return new Diamond({x3, y3}, {x2, y2}, {x1, y1});
   }
-  else if (x3 == x2 && y3 == y1)
+  else
   {
     return new Diamond({x3, y3}, {x1, y1}, {x2, y2});;
   }
@@ -108,7 +108,7 @@ brevnov::Shape * brevnov::make_shape(std::string name_shape, std::istream & in)
     {
       throw std::invalid_argument("Some parameters were incorrect");
     }
-    return make_diamond(x1, y1, x2, y2, x3, y3)
+    return make_diamond(x1, y1, x2, y2, x3, y3);
   }
   return nullptr;
 }

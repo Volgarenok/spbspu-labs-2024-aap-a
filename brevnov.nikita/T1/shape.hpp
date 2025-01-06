@@ -15,8 +15,8 @@ namespace brevnov
     virtual ~Shape() = default;
   };
   double get_sum_area(const Shape ** shapes, size_t count);
-  void destroy_shape(const Shape** shapes, size_t count);
-  void scale_shape(const Shape** shapes, size_t count, point_t scale_p, double ratio);
+  void destroy_shape(Shape** shapes, size_t count);
+  void scale_shape(Shape** shapes, size_t count, point_t scale_p, double ratio);
   void print_frame_coordinates(const Shape** shapes, size_t count, std::ostream & out);
 }
 #endif

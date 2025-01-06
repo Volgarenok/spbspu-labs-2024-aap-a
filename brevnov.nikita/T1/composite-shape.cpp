@@ -5,7 +5,7 @@
 
 void brevnov::CompositeShape::print_frame_coordinates(std::ostream & out)
 {
-  for (size_t i = 0; i < current_size_, i++)
+  for (size_t i = 0; i < current_size_; i++)
   {
     rectangle_t frame = shapes_[i]->getFrameRect();
     double leftx = frame.pos_.x_ - frame.width_ / 2.0;
@@ -16,7 +16,7 @@ void brevnov::CompositeShape::print_frame_coordinates(std::ostream & out)
   }
 }
 
-void brevnov::CompositeShape::clear()
+void brevnov::CompositeShape::clear() noexcept
 {
   for (size_t i = 0; i < current_size_; i++)
   {
@@ -39,7 +39,7 @@ brevnov::CompositeShape::CompositeShape(CompositeShape & cos):
   current_size_(cos.current_size_)
 {
   shapes_ = new Shape *[capacity_];
-  for (size_t i = 0; i < capacity_; i++)
+  for (size_t i = 0; i < current_size_; i++)
   {
     shapes_[i] = cos[i];
   }
@@ -50,23 +50,34 @@ brevnov::CompositeShape::CompositeShape(CompositeShape && cos) noexcept:
   capacity_(cos.capacity_),
   current_size_(cos.current_size_)
 {
-  cos.shape = nullptr;
-  cmp.current_size_ = 0;
-  cmp.capacity_ = 0;
+  cos.shapes_ = nullptr;
+  cos.current_size_ = 0;
+  cos.capacity_ = 0;
 }
 
-brevnov::CompositeShape & operator=(CompositeShape & cmp)
+brevnov::CompositeShape & brevnov::CompositeShape::operator=(brevnov::CompositeShape & cos)
 {
-  CompositeShape result(cmp);
+  Shape ** help = new Shape *[cos.capacity_];
   clear();
-  return result;
+  shapes_ = help;
+  capacity_ = cos.capacity_;
+  for (size_t i = 0; i < current_size_; i++)
+  {
+    shapes_[i] = cos[i];
+  }
+  return *this;
 }
 
-brevnov::CompositeShape & operator=(CompositeShape && cmp) noexcept
+brevnov::CompositeShape & brevnov::CompositeShape::operator=(brevnov::CompositeShape && cos) noexcept
 {
   clear();
-  CompositeShape result(std::move(cmp));
-  return result;
+  shapes_ = cos.shapes_;
+  capacity_ = cos.capacity_;
+  current_size_ = cos.current_size_;
+  cos.shapes_ = nullptr;
+  cos.current_size_ = 0;
+  cos.capacity_ = 0;
+  return *this;
 }
 
 void brevnov::CompositeShape::add_memory()
@@ -75,10 +86,10 @@ void brevnov::CompositeShape::add_memory()
   CompositeShape help(capacity_ + add_number);
   for (size_t i = 0; i < current_size_; i++)
   {
-    help[i] = shapes_[i];
+    help.shapes_[i] = shapes_[i];
     help.current_size_++;
   }
-  *this = std::moved(help);
+  *this = std::move(help);
 }
 
 void brevnov::CompositeShape::push_back(Shape * sp)
@@ -87,7 +98,7 @@ void brevnov::CompositeShape::push_back(Shape * sp)
   {
     add_memory();
   }
-  shape[current_size_++] = sp;
+  shapes_[current_size_++] = sp;
 }
 
 void brevnov::CompositeShape::pop_back()
@@ -101,7 +112,7 @@ void brevnov::CompositeShape::pop_back()
 
 brevnov::Shape * brevnov::CompositeShape::at(size_t id)
 {
-  if (id >= current_size_ || id < 0)
+  if (id >= current_size_)
   {
     throw std::out_of_range("Index out of range");
   }

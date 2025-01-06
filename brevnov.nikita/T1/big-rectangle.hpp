@@ -4,7 +4,7 @@
 #include "ellipse.hpp"
 namespace brevnov
 {
-  class BigRectangle
+  class BigRectangle final: public Shape
   {
   public:
     BigRectangle(point_t left, point_t right);
@@ -18,6 +18,6 @@ namespace brevnov
     Ellipse ** shapes_;
     point_t left_;
     point_t right_;
-  }
+  };
 }
 #endif

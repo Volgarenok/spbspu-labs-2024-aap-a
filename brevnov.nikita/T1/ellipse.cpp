@@ -8,6 +8,23 @@ brevnov::Ellipse::Ellipse(point_t center, double r1, double r2):
 {
 }
 
+double brevnov::Ellipse::getR1() const noexcept
+{
+  return r1_;
+}
+
+double brevnov::Ellipse::getR2() const noexcept
+{
+  return r2_;
+}
+
+void brevnov::Ellipse::updateEllipse(point_t center, double r1, double r2)
+{
+  center_ = center;
+  r1_ = r1;
+  r2_ = r2;
+}
+
 double brevnov::Ellipse::getArea() const noexcept
 {
   const double pi = std::acos(-1.0);

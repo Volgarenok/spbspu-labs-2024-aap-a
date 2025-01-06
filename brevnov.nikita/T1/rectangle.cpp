@@ -23,8 +23,8 @@ brevnov::rectangle_t brevnov::Rectangle::getFrameRect() const noexcept
 void brevnov::Rectangle::move(point_t new_centre) noexcept
 {
   point_t old_centre = getFrameRect().pos_;
-  double dx_ = new_centre.x_ - old_centre.x_;
-  double dy_ = new_centre.y_ - old_centre.y_;
+  double dx = new_centre.x_ - old_centre.x_;
+  double dy = new_centre.y_ - old_centre.y_;
   move(dx, dy);
 }
 
