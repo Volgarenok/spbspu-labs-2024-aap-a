@@ -8,9 +8,9 @@ namespace
   {
     demehin::point_t* vrt = new demehin::point_t[vrt_cnt];
     constexpr double PI = 3.1415;
-    for (size_t i = 0; i < 130; ++i)
+    for (size_t i = 0; i < vrt_cnt; ++i)
     {
-      double angle = 2 * PI * i / 130;
+      double angle = 2 * PI * i / vrt_cnt;
       double x = center.x + radius * std::cos(angle);
       double y = center.y + radius * std::sin(angle);
       vrt[i].x = x;
