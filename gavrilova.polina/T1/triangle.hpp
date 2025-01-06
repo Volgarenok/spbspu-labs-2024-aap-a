@@ -10,7 +10,7 @@ namespace gavrilova {
     rectangle_t getFrameRect() const noexcept override;
     void move(const point_t& p) noexcept override;
     void move(double difX, double difY) noexcept override;
-    void scale(double k) noexcept override;
+    void scale(double k) override;
     Shape* clone() const;
     
   private:

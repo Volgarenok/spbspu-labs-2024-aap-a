@@ -115,7 +115,7 @@ void gavrilova::CompositeShape::move(double difX, double difY) noexcept {
   }
 }
 
-gavrilova::rectangle_t gavrilova::CompositeShape::getFrameRect() const noexcept{
+gavrilova::rectangle_t gavrilova::CompositeShape::getFrameRect() const {
   if (empty()) {
     throw std::logic_error("Composite shape is empty.");
   }
