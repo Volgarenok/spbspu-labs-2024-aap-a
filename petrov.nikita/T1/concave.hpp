@@ -16,7 +16,6 @@ namespace petrov
     void scale(double k) override;
   private:
     petrov::point_t p1_, p2_, p3_, p4_;
-    petrov::rectangle_t frame_rect_;
   };
 }
 #endif

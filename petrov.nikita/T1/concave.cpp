@@ -39,62 +39,41 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   {
     throw "NOTE: Scaling of some figures skipped due to their invalid description\n";
   }
-  double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
-  double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
-  double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
-  double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
-  frame_rect_.width = abs(xmax - xmin);
-  frame_rect_.height = abs(ymax - ymin);
-  frame_rect_.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
 }
 
-double petrov::Concave::getArea() const// Here you can use variables more effictively (decrease initializations number)
+double petrov::Concave::getArea() const
 {
-  double a_1 = sqrt(pow((p1_.x - p2_.x), 2) + pow((p1_.y - p2_.y), 2));
-  double b_1 = sqrt(pow((p3_.x - p2_.x), 2) + pow((p3_.y - p2_.y), 2));
-  double c_1 = sqrt(pow((p1_.x - p3_.x), 2) + pow((p1_.y - p3_.y), 2));
-  double p_1 = (a_1 + b_1 + c_1) / 2;
-  double area_without_cave = sqrt(p_1 * (p_1 - a_1) * (p_1 - b_1) * (p_1 - c_1));
-  double a_2 = sqrt(pow((p2_.x - p4_.x), 2) + pow((p2_.y - p4_.y), 2));
-  double b_2 = b_1;
-  double c_2 = sqrt(pow((p4_.x - p3_.x), 2) + pow((p4_.y - p3_.y), 2));
-  double p_2 = (a_2 + b_2 + c_2) / 2;
-  double area_of_cave = sqrt(p_2 * (p_2 - a_2) * (p_2 - b_2) * (p_2 - c_2));
-  return area_without_cave - round(area_of_cave);
+  double a = sqrt(pow((p1_.x - p2_.x), 2) + pow((p1_.y - p2_.y), 2));
+  double b = sqrt(pow((p3_.x - p2_.x), 2) + pow((p3_.y - p2_.y), 2));
+  double c = sqrt(pow((p1_.x - p3_.x), 2) + pow((p1_.y - p3_.y), 2));
+  double p = (a + b + c) / 2;
+  double area_without_cave = sqrt(p * (p - a) * (p - b) * (p - c));
+  a = sqrt(pow((p2_.x - p4_.x), 2) + pow((p2_.y - p4_.y), 2));
+  b = b;
+  c = sqrt(pow((p4_.x - p3_.x), 2) + pow((p4_.y - p3_.y), 2));
+  p = (a + b + c) / 2;
+  double area_of_cave = sqrt(p * (p - a) * (p - b) * (p - c));
+  return area_without_cave - area_of_cave;
 }
 
 petrov::rectangle_t petrov::Concave::getFrameRect() const
 {
-  return frame_rect_;
-}
-
-void petrov::Concave::move(point_t concrete_point)
-{
-  double posdx = concrete_point.x - frame_rect_.pos.x;
-  double posdy = concrete_point.y - frame_rect_.pos.y;
-  p4_.x += posdx;
-  p4_.y += posdy;
-  frame_rect_.pos.x = concrete_point.x;
-  frame_rect_.pos.y = concrete_point.y;
-  p1_.x = frame_rect_.pos.x - (frame_rect_.width / 2);
-  p1_.y = frame_rect_.pos.y - (frame_rect_.height / 2);
-  p2_.x = frame_rect_.pos.x - (frame_rect_.width / 2);
-  p2_.y = frame_rect_.pos.y + (frame_rect_.height / 2);
-  p3_.x = frame_rect_.pos.x + (frame_rect_.width / 2);
-  p3_.y = frame_rect_.pos.y + (frame_rect_.height / 2);
+  rectangle_t frame_rect = {};
   double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
   double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
   double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
   double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
-  frame_rect_.width = abs(xmax - xmin);
-  frame_rect_.height = abs(ymax - ymin);
-  frame_rect_.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
+  frame_rect.width = abs(xmax - xmin);
+  frame_rect.height = abs(ymax - ymin);
+  frame_rect.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
+  return frame_rect;
 }
 
-void petrov::Concave::move(double dx, double dy)
+void petrov::Concave::move(point_t concrete_point)
 {
-  frame_rect_.pos.x += dx;
-  frame_rect_.pos.y += dy;
+ rectangle_t frame_rect = getFrameRect();
+  double dx = concrete_point.x - frame_rect.pos.x;
+  double dy = concrete_point.y - frame_rect.pos.y;
   p1_.x += dx;
   p1_.y += dy;
   p2_.x += dx;
@@ -103,57 +82,33 @@ void petrov::Concave::move(double dx, double dy)
   p3_.y += dy;
   p4_.x += dx;
   p4_.y += dy;
-  double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
-  double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
-  double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
-  double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
-  frame_rect_.width = abs(xmax - xmin);
-  frame_rect_.height = abs(ymax - ymin);
-  frame_rect_.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
+}
+
+void petrov::Concave::move(double dx, double dy)
+{
+  p1_.x += dx;
+  p1_.y += dy;
+  p2_.x += dx;
+  p2_.y += dy;
+  p3_.x += dx;
+  p3_.y += dy;
+  p4_.x += dx;
+  p4_.y += dy;
 }
 
 void petrov::Concave::scale(double k)
 {
   {
-    if (k > 1)
-    {
-      double dx = (frame_rect_.width / 2) * (k - 1);
-      double dy = (frame_rect_.height / 2) * (k - 1);
-      p1_.x -= dx;
-      p1_.y -= dy;
-      p2_.x -= dx;
-      p2_.y += dy;
-      p3_.x += dx;
-      p3_.y += dy;
-      frame_rect_.height *= k;
-      frame_rect_.width *= k;
-      double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
-      double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
-      double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
-      double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
-      frame_rect_.width = abs(xmax - xmin);
-      frame_rect_.height = abs(ymax - ymin);
-      frame_rect_.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
-    }
-    else
-    {
-      double dx = (frame_rect_.width * (1 - k)) / 2;
-      double dy = (frame_rect_.height * (1 - k)) / 2;
-      p1_.x += dx;
-      p1_.y += dy;
-      p2_.x += dx;
-      p2_.y -= dy;
-      p3_.x -= dx;
-      p3_.y -= dy;
-      frame_rect_.height *= k;
-      frame_rect_.width *= k;
-      double xmax = std::max(std::max(p1_.x, p2_.x), p3_.x);
-      double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
-      double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
-      double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
-      frame_rect_.width = abs(xmax - xmin);
-      frame_rect_.height = abs(ymax - ymin);
-      frame_rect_.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
-    }
+    rectangle_t frame_rect = getFrameRect();
+    double dx = (frame_rect.width / 2) * std::abs(k - 1);
+    double dy = (frame_rect.height / 2) * std::abs(k - 1);
+    p1_.x > frame_rect.pos.x ? p1_.x += dx : (p1_.x < frame_rect.pos.x ? p1_.x -= dx : p1_.x += 0);
+    p2_.x > frame_rect.pos.x ? p2_.x += dx : (p2_.x < frame_rect.pos.x ? p2_.x -= dx : p2_.x += 0);
+    p3_.x > frame_rect.pos.x ? p3_.x += dx : (p3_.x < frame_rect.pos.x ? p3_.x -= dx : p3_.x += 0);
+    p4_.x > frame_rect.pos.x ? p4_.x += dx : (p4_.x < frame_rect.pos.x ? p4_.x -= dx : p4_.x += 0);
+    p1_.y > frame_rect.pos.y ? p1_.y += dy : (p1_.y < frame_rect.pos.y ? p1_.y -= dy : p1_.y += 0);
+    p2_.y > frame_rect.pos.y ? p2_.y += dy : (p2_.y < frame_rect.pos.y ? p2_.y -= dy : p2_.y += 0);
+    p3_.y > frame_rect.pos.y ? p3_.y += dy : (p3_.y < frame_rect.pos.y ? p3_.y -= dy : p3_.y += 0);
+    p4_.y > frame_rect.pos.y ? p4_.y += dy : (p4_.y < frame_rect.pos.y ? p4_.y -= dy : p4_.y += 0);
   }
 }
