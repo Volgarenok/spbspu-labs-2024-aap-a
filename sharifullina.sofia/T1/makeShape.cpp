@@ -26,7 +26,7 @@ sharifullina::Ring* sharifullina::makeRing(std::istream& in)
   {
     throw std::invalid_argument("Incorrect radius");
   }
-  sharifullina::Ring* rin9 = new sharifullina::Ring(center, r1, r2);
+  sharifullina::Ring* rin9 = new sharifullina::Ring(center, innerRadius, outerRadius);
   return rin9;
 }
 
@@ -40,7 +40,7 @@ sharifullina::Circle* sharifullina::makeCircle(std::istream& in)
   {
     throw std::invalid_argument("Incorrect radius");
   }
-  sharifullina::Circle* circl = new sharifullina::Circle(center, r);
+  sharifullina::Circle* circl = new sharifullina::Circle(center, radius);
   return circl;
 }
 
@@ -55,6 +55,6 @@ sharifullina::Ellipse* sharifullina::makeEllipse(std::istream& in)
   {
     throw std::invalid_argument("Incorrect radius");
   }
-  sharifullina::Ellipse* ellips = new sharifullina::Ellipse(center, r2, r1);
+  sharifullina::Ellipse* ellips = new sharifullina::Ellipse(center, radiusX, radiusY);
   return ellips;
 }
