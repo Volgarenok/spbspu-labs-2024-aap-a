@@ -8,34 +8,29 @@ maslov::Regular::Regular(point_t A, point_t B, point_t C):
   A_(A),
   B_(B),
   C_(C),
-  AB_(getDistance(A, B)),
-  AC_(getDistance(A, C)),
-  BC_(getDistance(B, C)),
-  rI_(findRadiusIncircle(AC_, AB_, BC_)),
-  rC_(findRadiusCircumcircle(AC_, AB_)),
-  halfSide_(findHalfSide(AC_, AB_, BC_)),
-  n_(findVerticals(halfSide_, rI_, rC_))
+  n_(getVerticals())
 {
-  if (!isRegular(A_, B_, C_))
+  if (!isRegular())
   {
     throw std::invalid_argument("Regular does not exist");
   }
 }
 double maslov::Regular::getArea() const
 {
-  return halfSide_ * n_ * rI_;
+  double rI = getRadiusIncircle();
+  double halfSide = getHalfSide();
+  return halfSide * n_ * rI;
 }
 maslov::rectangle_t maslov::Regular::getFrameRect() const
 {
   double centerX = A_.x;
   double centerY = A_.y;
-  double maxX = std::numeric_limits< double >::min();
-  double minX = std::numeric_limits< double >::max();
-  double maxY = std::numeric_limits< double >::min();
-  double minY = std::numeric_limits< double >::max();
-  double value = halfSide_ / rC_;
+  double rC = getRadiusCircumcircle();
+  double halfSide = getHalfSide();
+  double AB = getDistance(A_, B_);
+  double value = halfSide / rC;
   double initialAngle = std::acos(value);
-  if (AB_ == rC_)
+  if (AB == rC)
   {
     if (B_.y == centerY)
     {
@@ -46,11 +41,15 @@ maslov::rectangle_t maslov::Regular::getFrameRect() const
   {
     initialAngle = 0;
   }
+  double maxX = std::numeric_limits< double >::min();
+  double minX = std::numeric_limits< double >::max();
+  double maxY = std::numeric_limits< double >::min();
+  double minY = std::numeric_limits< double >::max();
   for (size_t i = 0; i < n_; ++i)
   {
     double angle = initialAngle + 2 * M_PI * i / n_;
-    double x = std::round((centerX + rC_ * std::cos(angle)) * 100.0) / 100.0;
-    double y = std::round((centerY + rC_ * std::sin(angle)) * 100.0) / 100.0;
+    double x = std::round((centerX + rC * std::cos(angle)) * 100.0) / 100.0;
+    double y = std::round((centerY + rC * std::sin(angle)) * 100.0) / 100.0;
     maxX = std::max(maxX, x);
     minX = std::min(minX, x);
     maxY = std::max(maxY, y);
@@ -67,55 +66,53 @@ void maslov::Regular::move(point_t s)
   A_ = {s.x, s.y};
   B_ = {B_.x + dx, B_.y + dy};
   C_ = {C_.x + dx, C_.y + dy};
-  AC_ = getDistance(A_, C_);
-  BC_ = getDistance(B_, C_);
-  rI_ = findRadiusIncircle(AC_, AB_, BC_);
-  rC_ = findRadiusCircumcircle(AC_, AB_);
-  halfSide_ = findHalfSide(AC_, AB_, BC_);
 }
 void maslov::Regular::move(double dx, double dy)
 {
   A_ = {A_.x + dx, A_.y + dy};
   B_ = {B_.x + dx, B_.y + dy};
   C_ = {C_.x + dx, C_.y + dy};
-  AB_ = getDistance(A_, B_);
-  AC_ = getDistance(A_, C_);
-  BC_ = getDistance(B_, C_);
-  rI_ = findRadiusIncircle(AC_, AB_, BC_);
-  rC_ = findRadiusCircumcircle(AC_, AB_);
-  halfSide_ = findHalfSide(AC_, AB_, BC_);
 }
 void maslov::Regular::scale(double k)
 {
+  if (k < 0)
+  {
+    throw std::invalid_argument("Incorrect scale factor");
+  }
   B_.x = A_.x + (B_.x - A_.x) * k;
   B_.y = A_.y + (B_.y - A_.y) * k;
   C_.x = A_.x + (C_.x - A_.x) * k;
   C_.y = A_.y + (C_.y - A_.y) * k;
-  AB_ = getDistance(A_, B_);
-  AC_ = getDistance(A_, C_);
-  BC_ = getDistance(B_, C_);
-  rI_ = findRadiusIncircle(AC_, AB_, BC_);
-  rC_ = findRadiusCircumcircle(AC_, AB_);
-  halfSide_ = findHalfSide(AC_, AB_, BC_);
 }
-double maslov::Regular::getDistance(point_t A, point_t B)
+double maslov::Regular::getDistance(point_t A, point_t B) const
 {
   return std::sqrt(std::pow(B.x - A.x, 2.0) + std::pow(B.y - A.y, 2.0));
 }
-double maslov::Regular::findRadiusIncircle(double AC, double AB, double BC)
+double maslov::Regular::getRadiusIncircle() const
 {
+  double AB = getDistance(A_, B_);
+  double AC = getDistance(A_, C_);
+  double BC = getDistance(B_, C_);
   return std::max(std::min(AB, AC), BC);
 }
-double maslov::Regular::findRadiusCircumcircle(double AC, double AB)
+double maslov::Regular::getRadiusCircumcircle() const
 {
+  double AB = getDistance(A_, B_);
+  double AC = getDistance(A_, C_);
   return std::max(AB, AC);
 }
-double maslov::Regular::findHalfSide(double AC, double AB, double BC)
+double maslov::Regular::getHalfSide() const
 {
+  double AB = getDistance(A_, B_);
+  double AC = getDistance(A_, C_);
+  double BC = getDistance(B_, C_);
   return std::min(AB, std::min(AC, BC));
 }
-size_t maslov::Regular::findVerticals(double cat1, double cat2, double hyp)
+size_t maslov::Regular::getVerticals() const
 {
+  double hyp = getRadiusCircumcircle();
+  double cat1 = getHalfSide();
+  double cat2 = getRadiusIncircle();
   double x = cat1, y = cat2, z = hyp;
   double value = (x * x - z * z - y * y) / (-2 * y * z);
   double angle = std::acos(value) * 180.0 / M_PI;
@@ -126,17 +123,14 @@ size_t maslov::Regular::findVerticals(double cat1, double cat2, double hyp)
   }
   return std::round(verticals);
 }
-bool maslov::Regular::isRegular(point_t A, point_t B, point_t C)
+bool maslov::Regular::isRegular() const
 {
-  double AB = getDistance(A, B);
-  double AC = getDistance(A, C);
-  double BC = getDistance(B, C);
-  double hyp = std::max(AB, AC);
-  double cat1 = std::max(std::min(AB, AC), BC);
-  double cat2 = std::min(std::min(AB, AC), BC);
+  double hyp = getRadiusCircumcircle();
+  double cat1 = getHalfSide();
+  double cat2 = getRadiusIncircle();
   if (std::abs(hyp * hyp - (cat1 * cat1 + cat2 * cat2)) > 1e-20)
   {
-    if (findVerticals(cat1, cat2, hyp) != 0)
+    if (n_ != 0)
     {
       return true;
     }

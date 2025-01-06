@@ -16,14 +16,13 @@ namespace maslov
     void scale(double k) override;
    private:
     point_t A_, B_, C_;
-    double AB_, AC_, BC_, rI_, rC_, halfSide_;
     size_t n_;
-    double getDistance(point_t A, point_t B);
-    double findRadiusIncircle(double AC, double AB, double BC);
-    double findRadiusCircumcircle(double AC, double AB);
-    double findHalfSide(double AC, double AB, double BC);
-    bool isRegular(point_t A, point_t B, point_t C);
-    size_t findVerticals(double cat1, double cat2, double hyp);
+    double getDistance(point_t A, point_t B) const;
+    double getRadiusIncircle() const;
+    double getRadiusCircumcircle() const;
+    double getHalfSide() const;
+    bool isRegular() const;
+    size_t getVerticals() const;
   };
 }
 

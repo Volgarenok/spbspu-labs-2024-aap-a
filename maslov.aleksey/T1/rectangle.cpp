@@ -1,9 +1,15 @@
 #include "rectangle.hpp"
+#include <stdexcept>
 
 maslov::Rectangle::Rectangle(point_t lowerLeftCorner, point_t upperRightCorner):
   lowerLeftCorner_(lowerLeftCorner),
   upperRightCorner_(upperRightCorner)
-{}
+{
+  if (upperRightCorner.x <= lowerLeftCorner_.x || upperRightCorner_.y <= lowerLeftCorner_.y)
+  {
+    throw std::invalid_argument("Rectangle has incorrect parameters");
+  }
+}
 double maslov::Rectangle::getArea() const
 {
   return getFrameRect().height * getFrameRect().width;
@@ -31,6 +37,10 @@ void maslov::Rectangle::move(double dx, double dy)
 }
 void maslov::Rectangle::scale(double k)
 {
+  if (k < 0)
+  {
+    throw std::invalid_argument("Incorrect scale factor");
+  }
   point_t center = getFrameRect().pos;
   lowerLeftCorner_.x = center.x + (lowerLeftCorner_.x - center.x) * k;
   lowerLeftCorner_.y = center.y + (lowerLeftCorner_.y - center.y) * k;

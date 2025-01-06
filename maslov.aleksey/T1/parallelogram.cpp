@@ -1,5 +1,6 @@
 #include "parallelogram.hpp"
 #include <algorithm>
+#include <stdexcept>
 
 maslov::Parallelogram::Parallelogram(point_t first, point_t second, point_t third):
   first_(first),
@@ -42,6 +43,10 @@ void maslov::Parallelogram::move(double dx, double dy)
 }
 void maslov::Parallelogram::scale(double k)
 {
+  if (k < 0)
+  {
+    throw std::invalid_argument("Incorrect scale factor");
+  }
   point_t center = getFrameRect().pos;
   first_.x = center.x + (first_.x - center.x) * k;
   first_.y = center.y + (first_.y - center.y) * k;

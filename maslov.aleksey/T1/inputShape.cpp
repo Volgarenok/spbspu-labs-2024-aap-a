@@ -7,76 +7,44 @@
 
 namespace
 {
-  maslov::Rectangle * makeRectangle(std::istream & in);
-  maslov::Regular * makeRegular(std::istream & in);
-  maslov::Parallelogram * makeParallelogram(std::istream & in);
+  using namespace maslov;
+  Shape * makeShape(std::istream & in, std::string name);
 }
+
 size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
 {
+  using namespace maslov;
   size_t count = 0;
   bool incorrectedFlag = false;
   std::string name;
-  while (in >> name)
+  while (!std::cin.eof() && name != "SCALE")
   {
+    std::cin >> name;
+    try
+    {
+      shapes[count] = makeShape(std::cin, name);
+      if (shapes[count])
+      {
+        count++;
+      }
+    }
+    catch (const std::invalid_argument & e)
+    {
+      incorrectedFlag = true;
+    }
+    catch (const std::bad_alloc & e)
+    {
+      destroyShapes(shapes, count);
+      throw;
+    }
     if (name == "SCALE")
     {
       break;
     }
-    else if (name == "RECTANGLE")
-    {
-      try
-      {
-        shapes[count] = makeRectangle(in);
-        count++;
-      }
-      catch (const std::invalid_argument & e)
-      {
-        incorrectedFlag = true;
-      }
-      catch (const std::bad_alloc & e)
-      {
-        maslov::destroyShapes(shapes, count);
-        throw;
-      }
-    }
-    else if (name == "REGULAR")
-    {
-      try
-      {
-        shapes[count] = makeRegular(in);
-        count++;
-      }
-      catch (const std::invalid_argument & e)
-      {
-        incorrectedFlag = true;
-      }
-      catch (const std::bad_alloc & e)
-      {
-        maslov::destroyShapes(shapes, count);
-        throw;
-      }
-    }
-    else if (name == "PARALLELOGRAM")
-    {
-      try
-      {
-        shapes[count] = makeParallelogram(in);
-        count++;
-      }
-      catch (const std::invalid_argument & e)
-      {
-        incorrectedFlag = true;
-      }
-      catch (const std::bad_alloc & e)
-      {
-        maslov::destroyShapes(shapes, count);
-        throw;
-      }
-    }
   }
   if (in.eof())
   {
-    maslov::destroyShapes(shapes, count);
+    destroyShapes(shapes, count);
     throw std::runtime_error("Error: EOF encountered before SCALE command");
   }
   if (incorrectedFlag)
@@ -85,69 +53,48 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
   }
   if (count == 0)
   {
-    maslov::destroyShapes(shapes, count);
     throw std::runtime_error("There are no shapes");
   }
   return count;
 }
 
-namespace {
-  maslov::Rectangle * makeRectangle(std::istream & in)
+namespace
+{
+  Rectangle * makeRectangle(std::istream & in)
   {
     double x1 = 0, x2 = 0, y1 = 0, y2 = 0;
     in >> x1 >> y1 >> x2 >> y2;
-    if (x2 <= x1 || y2 <= y1)
-    {
-      throw std::invalid_argument("Rectangle has incorrect parameters");
-    }
-    maslov::Rectangle * rectangle = nullptr;
-    try
-    {
-      rectangle = new maslov::Rectangle({x1, y1}, {x2, y2});
-    }
-    catch (const std::bad_alloc & e)
-    {
-      throw;
-    }
+    Rectangle * rectangle = new Rectangle({x1, y1}, {x2, y2});
     return rectangle;
   }
-  maslov::Regular * makeRegular(std::istream & in)
+  Regular * makeRegular(std::istream & in)
   {
     double x1 = 0, y1 = 0, x2 = 0, y2 = 0 , x3 = 0, y3 = 0;
     in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-    maslov::Regular * regular = nullptr;
-    try
-    {
-      regular = new maslov::Regular({x1, y1}, {x2, y2}, {x3, y3});
-    }
-    catch (...)
-    {
-      throw;
-    }
+    Regular * regular = new Regular({x1, y1}, {x2, y2}, {x3, y3});
     return regular;
   }
-  maslov::Parallelogram * makeParallelogram(std::istream & in)
+  Parallelogram * makeParallelogram(std::istream & in)
   {
     double x1 = 0, y1 = 0, x2 = 0, y2 = 0 , x3 = 0, y3 = 0;
     in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-    if ((y1 != y2 && y2 != y3) || (y1 == y3))
-    {
-      throw std::invalid_argument("Parallelogram is not parallel");
-    }
-    if (y2 == y3)
-    {
-      std::swap(y1, y3);
-      std::swap(x1, x3);
-    }
-    maslov::Parallelogram * parallelogram = nullptr;
-    try
-    {
-      parallelogram = new maslov::Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
-    }
-    catch (const std::bad_alloc & e)
-    {
-      throw;
-    }
+    Parallelogram * parallelogram = new Parallelogram({x1, y1}, {x2, y2}, {x3, y3});
     return parallelogram;
+  }
+  Shape * makeShape(std::istream & in, std::string name)
+  {
+    if (name == "RECTANGLE")
+    {
+      return makeRectangle(in);
+    }
+    else if (name == "REGULAR")
+    {
+      return makeRegular(in);
+    }
+    else if (name == "PARALLELOGRAM")
+    {
+      return makeParallelogram(in);
+    }
+    return nullptr;
   }
 }
