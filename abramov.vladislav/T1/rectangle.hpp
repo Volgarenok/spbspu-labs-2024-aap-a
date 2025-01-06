@@ -15,10 +15,6 @@ namespace abramov
     void move(double dx, double dy) override;
     void scale(double k) override;
     Rectangle *clone() const override;
-    ComplexQuad getCQ1() const;
-    ComplexQuad getCQ2() const;
-    ComplexQuad getCQ3() const;
-    ComplexQuad getCQ4() const;
   private:
     ComplexQuad cmplxqd1_;
     ComplexQuad cmplxqd2_;

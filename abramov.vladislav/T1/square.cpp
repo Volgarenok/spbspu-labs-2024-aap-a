@@ -45,9 +45,4 @@ namespace abramov
   {
     return new Square(*this);
   }
-
-  Rectangle Square::getRect() const
-  {
-    return rect_;
-  }
 }

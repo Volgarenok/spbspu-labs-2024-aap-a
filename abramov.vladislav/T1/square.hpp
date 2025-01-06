@@ -16,7 +16,6 @@ namespace abramov
     void move(double dx, double dy) override;
     void scale(double k) override;
     Square *clone() const override;
-    Rectangle getRect() const;
   private:
     Rectangle rect_;
   };

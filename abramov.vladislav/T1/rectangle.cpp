@@ -97,24 +97,4 @@ namespace abramov
   {
     return new Rectangle(*this);
   }
-
-  ComplexQuad Rectangle::getCQ1() const
-  {
-    return cmplxqd1_;
-  }
-
-  ComplexQuad Rectangle::getCQ2() const
-  {
-    return cmplxqd2_;
-  }
-
-  ComplexQuad Rectangle::getCQ3() const
-  {
-    return cmplxqd3_;
-  }
-
-  ComplexQuad Rectangle::getCQ4() const
-  {
-    return cmplxqd4_;
-  }
 }
