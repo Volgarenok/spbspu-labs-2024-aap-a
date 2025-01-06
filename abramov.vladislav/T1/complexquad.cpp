@@ -67,6 +67,30 @@ namespace abramov
     return std::sqrt(p * (p - a) * (p - b) * (p - c));
   }
 
+  void createCQs(point_t p1, point_t p2, ComplexQuad &cq1, ComplexQuad &cq2, ComplexQuad &cq3, ComplexQuad &cq4)
+  {
+    const double x1 = p1.x;
+    const double x2 = p2.x;
+    const double y1 = p1.y;
+    const double y2 = p2.y;
+    if (x2 - x1 >= y2 - y1)
+    {
+      const double x3 = (x1 + x2) / 2;
+      cq1 = ComplexQuad({x1, y1}, {x3, y2}, {x3, y1}, {x1, y2});
+      cq2 = ComplexQuad({x1, y2}, {x3, y1}, {x1, y1}, {x3, y2});
+      cq3 = ComplexQuad({x3, y1}, {x2, y2}, {x2, y1}, {x3, y2});
+      cq4 = ComplexQuad({x3, y2}, {x2, y1}, {x3, y1}, {x2, y2});
+    }
+    else
+    {
+      const double y3 = (y1 + y2) / 2;
+      cq1 = ComplexQuad({x1, y2}, {x2, y3}, {x2, y2}, {x1, y3});
+      cq2 = ComplexQuad({x1, y3}, {x2, y2}, {x1, y2}, {x2, y3});
+      cq3 = ComplexQuad({x1, y1}, {x2, y3}, {x2, y1}, {x1, y3});
+      cq4 = ComplexQuad({x1, y1}, {x2, y3}, {x1, y3}, {x2, y1});
+    }
+  }
+
   ComplexQuad::ComplexQuad(point_t A, point_t B, point_t C, point_t D):
     A_(A),
     B_(B),
