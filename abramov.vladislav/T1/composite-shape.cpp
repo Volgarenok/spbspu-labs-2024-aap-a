@@ -23,7 +23,7 @@ namespace abramov
     shapeptrs_ = new Shape*[capacity_];
     for (size_t i = 0; i < shapes_; ++i)
     {
-      shapeptrs_[i] = comp_shp.shapeptrs_[i];
+      shapeptrs_[i] = comp_shp.clone(i);
     }
   }
 
@@ -36,17 +36,14 @@ namespace abramov
     delete[] shapeptrs_;
   }
 
-  void CompositeShape::setArray(Shape **arr)
-  {
-    shapeptrs_ = arr;
-  }
-
-  CompositeShape::CompositeShape(CompositeShape &&comp_shp):
+  CompositeShape::CompositeShape(CompositeShape &&comp_shp) noexcept:
     shapes_(comp_shp.shapes_),
     capacity_(comp_shp.capacity_),
     shapeptrs_(comp_shp.shapeptrs_)
   {
-    comp_shp.setArray(nullptr);
+    comp_shp.shapeptrs_ = nullptr;
+    comp_shp.shapes_ = 0;
+    comp_shp.capacity_ = 0;
   }
 
   CompositeShape &CompositeShape::operator=(const CompositeShape &comp_shp)
@@ -56,7 +53,7 @@ namespace abramov
       Shape **arr = new Shape*[comp_shp.capacity_];
       for (size_t i = 0; i < comp_shp.capacity_; ++i)
       {
-        arr[i] = comp_shp.shapeptrs_[i];
+        arr[i] = comp_shp.clone(i);
       }
       delete[] shapeptrs_;
       shapeptrs_ = arr;
@@ -66,7 +63,7 @@ namespace abramov
     return *this;
   }
 
-  CompositeShape &CompositeShape::operator=(CompositeShape &&comp_shp)
+  CompositeShape &CompositeShape::operator=(CompositeShape &&comp_shp) noexcept
   {
     if (&comp_shp != this)
     {
@@ -77,7 +74,7 @@ namespace abramov
     return *this;
   }
 
-  double CompositeShape::getArea() const
+  double CompositeShape::getArea() const noexcept
   {
     double area = 0;
     for (size_t i = 0; i < shapes_; ++i)
@@ -95,11 +92,11 @@ namespace abramov
     y2 = std::max(y2, rect.pos.y + rect.height / 2);
   }
 
-  rectangle_t CompositeShape::getFrameRect() const
+  rectangle_t CompositeShape::getFrameRect() const noexcept
   {
     if (shapes_ == 0)
     {
-      throw std::logic_error("There is no figures\n");
+      return rectangle_t{0.0, 0.0, {0.0, 0.0}};
     }
     double x1 = 0;
     double x2 = 0;
@@ -113,12 +110,12 @@ namespace abramov
     return rect;
   }
 
-  rectangle_t CompositeShape::getFrameRect(size_t id) const
+  rectangle_t CompositeShape::getFrameRect(size_t id) const noexcept
   {
     return shapeptrs_[id]->getFrameRect();
   }
 
-  void CompositeShape::move(point_t p)
+  void CompositeShape::move(point_t p) noexcept
   {
     for (size_t i = 0; i < shapes_; ++i)
     {
@@ -126,7 +123,7 @@ namespace abramov
     }
   }
 
-  void CompositeShape::move(double dx, double dy)
+  void CompositeShape::move(double dx, double dy) noexcept
   {
     for (size_t i = 0; i < shapes_; ++i)
     {
@@ -160,17 +157,30 @@ namespace abramov
 
   void CompositeShape::pop_back()
   {
-    shapeptrs_[--shapes_]->~Shape();
     delete shapeptrs_[shapes_];
     shapeptrs_[shapes_] = nullptr;
+  }
+
+  Shape *CompositeShape::at(size_t id)
+  {
+    if (id >= shapes_)
+    {
+      throw std::logic_error("There is no such element\n");
+    }
+    return shapeptrs_[id];
   }
 
   Shape *CompositeShape::at(size_t id) const
   {
     if (id >= shapes_)
     {
-      throw std::logic_error("There is no such element");
+      throw std::logic_error("There is no such element\n");
     }
+    return shapeptrs_[id];
+  }
+
+  Shape *CompositeShape::operator[](size_t id) noexcept
+  {
     return shapeptrs_[id];
   }
 
@@ -179,16 +189,12 @@ namespace abramov
     return shapeptrs_[id];
   }
 
-  bool CompositeShape::empty() const
+  bool CompositeShape::empty() const noexcept
   {
-    if (shapes_ == 0)
-    {
-      return true;
-    }
-    return false;
+    return (shapes_ == 0);
   }
 
-  size_t CompositeShape::size() const
+  size_t CompositeShape::size() const noexcept
   {
     return shapes_;
   }
@@ -229,7 +235,7 @@ namespace abramov
     return nullptr;
   }
 
-  size_t CompositeShape::getShapes_() const
+  size_t CompositeShape::getShapes_() const noexcept
   {
     return shapes_;
   }
