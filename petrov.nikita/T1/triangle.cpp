@@ -66,8 +66,8 @@ void petrov::Triangle::scale(double k)
   {
     if (k > 1)
     {
-      double dx = (frame_rect_.width / 2) * abs(k - 1);
-      double dy = (frame_rect_.height / 2) * abs(k - 1);
+      double dx = (frame_rect_.width / 2) * (k - 1);
+      double dy = (frame_rect_.height / 2) * (k - 1);
       p1_.x -= dx;
       p1_.y -= dy;
       p2_.x -= dx;
