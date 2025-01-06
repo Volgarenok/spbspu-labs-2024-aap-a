@@ -7,7 +7,17 @@ maslov::Parallelogram::Parallelogram(point_t first, point_t second, point_t thir
   second_(second),
   third_(third),
   fourth_({first.x + third.x - second.x, first.y + third.y - second.y})
-{}
+{
+  if ((first_.y != second_.y && second_.y != third_.y) || (first_.y == third_.y))
+  {
+    throw std::invalid_argument("Parallelogram is not parallel");
+  }
+  if (second_.y == third_.y)
+  {
+    std::swap(first_.y, third_.y);
+    std::swap(first_.x, third_.x);
+  }
+}
 double maslov::Parallelogram::getArea() const
 {
   double heigth = getFrameRect().height;
