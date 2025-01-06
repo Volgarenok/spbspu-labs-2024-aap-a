@@ -34,7 +34,8 @@ alymova::Regular::Regular(point_t pos, point_t top, point_t other):
 }
 double alymova::Regular::getArea() const
 {
-  return 0.5 * radius_big_ * radius_big_ * sides_cnt_ * std::sin((360 / getCntSides()) * PI / 180);
+  //return 0.5 * radius_big_ * radius_big_ * sides_cnt_ * std::sin((360 / getCntSides()) * PI / 180);
+  return 0.5 * radius_small_ * other_side_ * sides_cnt_ * 2.0;
 }
 size_t alymova::Regular::getCntSides() const
 {

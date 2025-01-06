@@ -2,7 +2,7 @@
 #define BASE_TYPES_HPP
 namespace alymova
 {
-  struct point_t
+  struct point_t final
   {
   public:
     point_t() = default;
@@ -17,7 +17,7 @@ namespace alymova
     double getY() const;
     double x, y;
   };
-  struct rectangle_t
+  struct rectangle_t final
   {
   public:
     rectangle_t() = default;

@@ -4,7 +4,7 @@
 #include "shape.hpp"
 namespace alymova
 {
-  struct Rectangle: public Shape
+  struct Rectangle final: public Shape
   {
   public:
     Rectangle(point_t p1, point_t p2);

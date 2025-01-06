@@ -5,9 +5,10 @@
 #include <cstddef>
 namespace alymova
 {
-  struct Regular: public Shape
+  struct Regular final: public Shape
   {
   public:
+    Regular() = default;
     Regular(point_t pos, point_t top, point_t other);
     double getArea() const override;
     size_t getCntSides() const;

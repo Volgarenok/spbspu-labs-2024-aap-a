@@ -5,7 +5,7 @@
 #include "base-types.hpp"
 namespace alymova
 {
-  struct CompositeShape
+  struct CompositeShape final
   {
   public:
     CompositeShape();

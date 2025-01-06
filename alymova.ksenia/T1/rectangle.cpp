@@ -10,7 +10,7 @@ alymova::Rectangle::Rectangle(point_t p1, point_t p2):
 {
   if (p2 < p1)
   {
-    throw std::logic_error("First point should be more left and low than other");
+    throw std::logic_error("Incorrect description rectangle");
   }
   low_left_ = p1;
   upp_right_ = p2;
