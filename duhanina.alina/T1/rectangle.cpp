@@ -8,6 +8,7 @@
 
 duhanina::Rectangle::Rectangle(const point_t& lt, const point_t& rt):
   cuts_(1),
+  ellipses_(nullptr),
   ellWidth_(1),
   ellHeight_(1)
 {
@@ -20,23 +21,23 @@ duhanina::Rectangle::Rectangle(const point_t& lt, const point_t& rt):
 
 double duhanina::Rectangle::getArea() const
 {
-  double width = ellWidth_ * std::sqrt(cuts_);
-  double height = ellHeight_ * std::sqrt(cuts_);
+  double width = ellWidth_ * cuts_;
+  double height = ellHeight_ * cuts_;
   return width * height;
 }
 
 duhanina::rectangle_t duhanina::Rectangle::getFrameRect() const
 {
-  double width = ellWidth_ * std::sqrt(cuts_);
-  double height = ellHeight_ * std::sqrt(cuts_);
+  double width = ellWidth_ * cuts_;
+  double height = ellHeight_ * cuts_;
   double sumX = 0;
   double sumY = 0;
-  for (size_t i = 0; i < cuts_; ++i)
+  for (size_t i = 0; i < (cuts_ * cuts_); ++i)
   {
     sumX += ellipses_[i]->getFrameRect().pos.x;
     sumY += ellipses_[i]->getFrameRect().pos.y;
   }
-  return { { sumX / cuts_, sumY / cuts_ }, width, height };
+  return { { sumX / (cuts_ * cuts_), sumY / (cuts_ * cuts_) }, width, height };
 }
 
 void duhanina::Rectangle::move(const point_t& newPos)
@@ -48,7 +49,7 @@ void duhanina::Rectangle::move(const point_t& newPos)
 
 void duhanina::Rectangle::move(double dx, double dy)
 {
-  for (size_t i = 0; i < cuts_; ++i)
+  for (size_t i = 0; i < (cuts_ * cuts_); ++i)
   {
     ellipses_[i]->move(dx, dy);
   }
@@ -56,7 +57,7 @@ void duhanina::Rectangle::move(double dx, double dy)
 
 void duhanina::Rectangle::scale(double k)
 {
-  for (size_t i = 0; i < cuts_; ++i)
+  for (size_t i = 0; i < (cuts_ * cuts_); ++i)
   {
     ellipses_[i]->scale(k);
   }
@@ -66,30 +67,46 @@ void duhanina::Rectangle::scale(double k)
 
 duhanina::Shape** duhanina::Rectangle::fillWithEllipses(const point_t& lt, const point_t& rt)
 {
-  double rectArea = getArea();
+  double rectArea = (rt.x - lt.x) * (rt.y - lt.y);
   double ellipsesArea = 0.0;
-  Shape** ellipses = nullptr;
-  ellWidth_ = (rt.x - lt.x) / std::sqrt(cuts_);
-  ellHeight_ = (rt.y - lt.y) / std::sqrt(cuts_);
-  while (std::fabs(rectArea - ellipsesArea) >= 0.5)
+  Shape** ell = nullptr;
+  while (std::fabs(rectArea - ellipsesArea) > 0.1)
   {
-    if (cuts_ > 10000)
+    size_t ellCount = cuts_ * cuts_;
+    ellWidth_ = (rt.x - lt.x) / cuts_;
+    ellHeight_ = (rt.y - lt.y) / cuts_;
+    Shape** ellipses = nullptr;
+    if (ellipses != nullptr)
     {
-      throw std::runtime_error("Maximum number of ellipses");
+      destroy(ellipses, ellCount);
+      delete[] ellipses;
     }
-    ellipses = new Shape*[cuts_] {};
+    ellipses = new Shape*[ellCount] {};
     for (size_t i = 0; i < cuts_; ++i)
     {
-      point_t center = { lt.x + (i + 0.5) * ellWidth_, lt.y + (i + 0.5) * ellHeight_ };
-      ellipses[i] = new Ellipse(center, ellWidth_ / 2, ellHeight_ / 2);
+      for (size_t j = 0; j < cuts_; ++j)
+      {
+        point_t center = { lt.x + (i + 0.5) * ellWidth_, lt.y + (j + 0.5) * ellHeight_ };
+        ellipses[i * cuts_ + j] = new Ellipse(center, ellWidth_ / 2, ellHeight_ / 2);
+      }
     }
-    ellipsesArea = calcArea(ellipses, cuts_);
-    if (std::fabs(rectArea - ellipsesArea) >= 0.5)
+    ellipsesArea = calcArea(ellipses, ellCount);
+    if (std::fabs(rectArea - ellipsesArea) > 0.1)
     {
-      destroy(ellipses, cuts_);
+      cuts_++;
+    }
+    if (cuts_ > 100)
+    {
+      destroy(ellipses, ellCount);
       delete[] ellipses;
-      cuts_ = (std::sqrt(cuts_) + 1) * (std::sqrt(cuts_) + 1);
+      throw std::invalid_argument("Maximum number of ellipses");
+    }
+    if (std::fabs(rectArea - ellipsesArea) <= 1)
+    {
+        ell = ellipses;
+        destroy(ellipses, ellCount);
+        delete[] ellipses;
     }
   }
-  return ellipses;
+  return ell;
 }
