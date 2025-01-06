@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdexcept>
+#include <iomanip>
 #include "base_types.hpp"
 #include "shape.hpp"
 #include "rectangle.hpp"
@@ -40,13 +41,14 @@ int main()
     std::cerr << "incorrect coefficient \n";
     return 1;
   }
+
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << komarova::area_sum(std::cout, shapes);
+  komarova::area_sum(std::cout, shapes);
   komarova::frame_rect_xy(std::cout, shapes);
   std::cout << "\n";
   komarova::point_t scale_xy = {x_sc, y_sc};
   komarova::scale(shapes, scale_xy, coef);
-  std::cout << komarova::area_sum(std::cout, shapes);
+  komarova::area_sum(std::cout, shapes);
   komarova::frame_rect_xy(std::cout, shapes);
   std::cout << "\n";
   if (wrong_shape)
