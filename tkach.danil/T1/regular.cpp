@@ -64,33 +64,41 @@ double tkach::Regular::getArea() const
 
 tkach::rectangle_t tkach::Regular::getFrameRect() const
 {
-  double height = 0.0;
-  double width = 0.0;
   point_t start_point, new_point, start_point_temp;
   const double step_angle = 2.0 * std::acos(-1.0) / getSideAmount();
   start_point = second_point_;
+  double top = start_point.y;
+  double bot = start_point.y;
+  double left = start_point.x;
+  double right = start_point.x;
   new_point.x = start_point.x + 1;
   new_point.y = start_point.y + 1;
   start_point_temp = start_point;
   double new_angle = std::acos((start_point.x - first_point_.x) / getDist(first_point_, second_point_));
-  while ((new_point.x - start_point.x > 0.0001) || (new_point.y - start_point.y > 0.0001))
+  while ((std::fabs(new_point.x - start_point.x) > 0.0001) || (std::fabs(new_point.y - start_point.y) > 0.0001))
   {
     new_angle += step_angle;
     start_point_temp.x = first_point_.x + getDist(first_point_, second_point_) * std::cos(new_angle);
     start_point_temp.y = first_point_.y + getDist(first_point_, second_point_) * std::sin(new_angle);
     new_point = start_point_temp;
-    if (std::fabs(first_point_.x - start_point_temp.x) > width)
+    if (start_point_temp.y < bot)
     {
-      width = std::fabs(first_point_.x - start_point_temp.x);
+      bot = start_point_temp.y;
     }
-    if (std::fabs(first_point_.y - start_point_temp.y) > height)
+    if (start_point_temp.y > top)
     {
-      height = std::fabs(first_point_.y - start_point_temp.y);
+      top = start_point_temp.y;
+    }
+    if (start_point_temp.x < left)
+    {
+      left = start_point_temp.x;
+    }
+    if (start_point_temp.x > right)
+    {
+      right = start_point_temp.x;
     }
   }
-  width *= 2;
-  height *= 2;
-  return {width, height, {first_point_.x, first_point_.y}};
+  return {right - left, top - bot, {(right + left) / 2.0, (top + bot) / 2.0}};
 }
 
 void tkach::Regular::move(const double add_to_x, const double add_to_y)

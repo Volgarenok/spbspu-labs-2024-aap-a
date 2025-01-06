@@ -105,7 +105,7 @@ tkach::rectangle_t tkach::CompositeShape::getFrameRect() const
     right = std::max(right, shape_rect.pos.x + shape_rect.width / 2.0);
     top = std::max(top, shape_rect.pos.y + shape_rect.height / 2.0);
   }
-  return {right - left, top - left, {(left + right) / 2.0, (top + bot) / 2.0}};
+  return {right - left, top - bot, {(left + right) / 2.0, (top + bot) / 2.0}};
 }
 
 tkach::CompositeShape::~CompositeShape()
@@ -127,7 +127,7 @@ void tkach::CompositeShape::move(const point_t& point_to_move) noexcept
   move(frame_center.x - point_to_move.x, frame_center.y - point_to_move.y);
 }
 
-void tkach::CompositeShape::push_back(Shape* shp)
+void tkach::CompositeShape::push_back(Shape* const shp)
 {
   if (shp == nullptr)
   {
