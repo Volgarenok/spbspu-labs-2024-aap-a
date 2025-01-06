@@ -6,7 +6,7 @@
 
 namespace abramov
 {
-  struct Square: Shape
+  struct Square final: Shape
   {
     Square(point_t p, double len);
     Square(Rectangle rect);

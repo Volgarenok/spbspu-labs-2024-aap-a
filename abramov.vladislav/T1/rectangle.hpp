@@ -5,7 +5,7 @@
 
 namespace abramov
 {
-  struct Rectangle: Shape
+  struct Rectangle final: Shape
   {
     Rectangle(point_t p1, point_t p2);
     Rectangle(ComplexQuad cq1, ComplexQuad cq2, ComplexQuad cq3, ComplexQuad cq4);

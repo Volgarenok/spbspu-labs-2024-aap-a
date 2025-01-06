@@ -5,7 +5,7 @@
 
 namespace abramov
 {
-  struct ComplexQuad: Shape
+  struct ComplexQuad final: Shape
   {
     ComplexQuad(point_t A, point_t B, point_t C, point_t D);
     double getArea() const override;
@@ -13,7 +13,6 @@ namespace abramov
     void move(point_t p) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
-    point_t getCenterComplexQuad() const;
     point_t getA() const;
     point_t getB() const;
     point_t getC() const;
@@ -23,6 +22,8 @@ namespace abramov
     point_t B_;
     point_t C_;
     point_t D_;
+
+    point_t getCenterComplexQuad() const;
   };
 }
 #endif

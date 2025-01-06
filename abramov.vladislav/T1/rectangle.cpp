@@ -7,18 +7,18 @@
 namespace abramov
 {
   Rectangle::Rectangle(point_t p1, point_t p2):
-   cmplxqd1_({p1.x, p1.y}, {(p1.x + p2.x) / 2, p2.y}, {(p1.x + p2.x) / 2, p1.y}, {p1.x, p2.y}),
-   cmplxqd2_({p1.x, p2.y}, {(p1.x + p2.x) / 2, p1.y}, {p1.x, p1.y}, {(p1.x + p2.x) / 2, p2.y}),
-   cmplxqd3_({(p1.x + p2.x) / 2, p1.y}, {p2.x, p2.y}, {p2.x, p1.y}, {(p1.x + p2.x) / 2, p2.y}),
-   cmplxqd4_({(p1.x + p2.x) / 2, p2.y}, {p2.x, p1.y}, {(p1.x + p2.x) / 2, p1.y}, {p2.x, p2.y})
+    cmplxqd1_({p1.x, p1.y}, {(p1.x + p2.x) / 2, p2.y}, {(p1.x + p2.x) / 2, p1.y}, {p1.x, p2.y}),
+    cmplxqd2_({p1.x, p2.y}, {(p1.x + p2.x) / 2, p1.y}, {p1.x, p1.y}, {(p1.x + p2.x) / 2, p2.y}),
+    cmplxqd3_({(p1.x + p2.x) / 2, p1.y}, {p2.x, p2.y}, {p2.x, p1.y}, {(p1.x + p2.x) / 2, p2.y}),
+    cmplxqd4_({(p1.x + p2.x) / 2, p2.y}, {p2.x, p1.y}, {(p1.x + p2.x) / 2, p1.y}, {p2.x, p2.y})
   {
     if (p1.x >= p2.x || p1.y >= p2.y)
     {
       throw std::logic_error("Impossible to build a rectangle");
     }
     const double x1 = p1.x;
-    const double y1 = p1.y;
     const double x2 = p2.x;
+    const double y1 = p1.y;
     const double y2 = p2.y;
     if (p2.x - p1.x >= p2.y - p1.y)
     {
@@ -39,10 +39,10 @@ namespace abramov
   }
 
   Rectangle::Rectangle(ComplexQuad cq1, ComplexQuad cq2, ComplexQuad cq3, ComplexQuad cq4):
-   cmplxqd1_(cq1),
-   cmplxqd2_(cq2),
-   cmplxqd3_(cq3),
-   cmplxqd4_(cq4)
+    cmplxqd1_(cq1),
+    cmplxqd2_(cq2),
+    cmplxqd3_(cq3),
+    cmplxqd4_(cq4)
   {}
 
   double Rectangle::getArea() const
@@ -83,38 +83,45 @@ namespace abramov
 
   void Rectangle::scale(double k)
   {
-    const double newWidth = (cmplxqd4_.getD().x - cmplxqd1_.getA().x) * k;
-    double height = 0;
-    const double dy = std::abs(cmplxqd4_.getD().y - cmplxqd1_.getA().y);
-    if (dy == 0)
+    if (k <= 0)
     {
-      height = cmplxqd1_.getB().y - cmplxqd1_.getA().y;
+      throw std::logic_error("Wrong scale coef\n");
     }
     else
     {
-      height = dy;
-    }
-    const double newHeight = height * k;
-    const point_t center = getFrameRect().pos;
-    const double x2 = center.x + newWidth / 2;
-    const double y2 = center.y + newHeight / 2;
-    const double x1 = center.x - newWidth / 2;
-    const double y1 = center.y - newHeight / 2;
-    if (x2 - x1 >= y2 - y1)
-    {
-      const double x3 = (x1 + x2) / 2;
-      cmplxqd1_ = ComplexQuad({x1, y1}, {x3, y2}, {x3, y1}, {x1, y2});
-      cmplxqd2_ = ComplexQuad({x1, y2}, {x3, y1}, {x1, y1}, {x3, y2});
-      cmplxqd3_ = ComplexQuad({x3, y1}, {x2, y2}, {x2, y1}, {x3, y2});
-      cmplxqd4_ = ComplexQuad({x3, y2}, {x2, y1}, {x3, y1}, {x2, y2});
-    }
-    else
-    {
-      const double y3 = (y1 + y2) / 2;
-      cmplxqd1_ = ComplexQuad({x1, y2}, {x2, y3}, {x2, y2}, {x1, y3});
-      cmplxqd2_ = ComplexQuad({x1, y3}, {x2, y2}, {x1, y2}, {x2, y3});
-      cmplxqd3_ = ComplexQuad({x1, y1}, {x2, y3}, {x2, y1}, {x1, y3});
-      cmplxqd4_ = ComplexQuad({x1, y1}, {x2, y3}, {x1, y3}, {x2, y1});
+      const double newWidth = (cmplxqd4_.getD().x - cmplxqd1_.getA().x) * k;
+      double height = 0;
+      const double dy = std::abs(cmplxqd4_.getD().y - cmplxqd1_.getA().y);
+      if (dy == 0)
+      {
+        height = cmplxqd1_.getB().y - cmplxqd1_.getA().y;
+      }
+      else
+      {
+        height = dy;
+      }
+      const double newHeight = height * k;
+      const point_t center = getFrameRect().pos;
+      const double x2 = center.x + newWidth / 2;
+      const double y2 = center.y + newHeight / 2;
+      const double x1 = center.x - newWidth / 2;
+      const double y1 = center.y - newHeight / 2;
+      if (x2 - x1 >= y2 - y1)
+      {
+        const double x3 = (x1 + x2) / 2;
+        cmplxqd1_ = ComplexQuad({x1, y1}, {x3, y2}, {x3, y1}, {x1, y2});
+        cmplxqd2_ = ComplexQuad({x1, y2}, {x3, y1}, {x1, y1}, {x3, y2});
+        cmplxqd3_ = ComplexQuad({x3, y1}, {x2, y2}, {x2, y1}, {x3, y2});
+        cmplxqd4_ = ComplexQuad({x3, y2}, {x2, y1}, {x3, y1}, {x2, y2});
+      }
+      else
+      {
+        const double y3 = (y1 + y2) / 2;
+        cmplxqd1_ = ComplexQuad({x1, y2}, {x2, y3}, {x2, y2}, {x1, y3});
+        cmplxqd2_ = ComplexQuad({x1, y3}, {x2, y2}, {x1, y2}, {x2, y3});
+        cmplxqd3_ = ComplexQuad({x1, y1}, {x2, y3}, {x2, y1}, {x1, y3});
+        cmplxqd4_ = ComplexQuad({x1, y1}, {x2, y3}, {x1, y3}, {x2, y1});
+      }
     }
   }
 

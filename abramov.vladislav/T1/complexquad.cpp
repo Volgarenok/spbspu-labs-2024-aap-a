@@ -1,30 +1,32 @@
 #include "complexquad.hpp"
 #include <stdexcept>
 #include <cmath>
-#include <limits>
 
 namespace abramov
 {
-  void searchInArray(double *x, double &a, double &b, size_t k)
+  void searchInArray(const double *x, double &a, double &b, size_t k)
   {
-    double max = std::numeric_limits< double >::min();
-    double min = std::numeric_limits< double >::max();
-    for (size_t i = 0; i < k; ++i)
+    if (k >= 1)
     {
-      if (x[i] > max)
+      double max = x[0];
+      double min = x[0];
+      for (size_t i = 0; i < k; ++i)
       {
-        max = x[i];
+        if (x[i] > max)
+        {
+          max = x[i];
+        }
+        if (x[i] < min)
+        {
+          min = x[i];
+        }
       }
-      if (x[i] < min)
-      {
-        min = x[i];
-      }
+      a = min;
+      b = max;
     }
-    a = min;
-    b = max;
   }
 
-  void getCoordsOfIntersection (point_t A, point_t B, point_t C, point_t D, double &x, double &y)
+  void getCoordsOfIntersection(point_t A, point_t B, point_t C, point_t D, double &x, double &y)
   {
     const double k1 = (B.y - A.y) / (B.x - A.x);
     const double b1 = A.y - A.x * k1;
@@ -66,21 +68,14 @@ namespace abramov
   }
 
   ComplexQuad::ComplexQuad(point_t A, point_t B, point_t C, point_t D):
-   A_(A),
-   B_(B),
-   C_(C),
-   D_(D)
+    A_(A),
+    B_(B),
+    C_(C),
+    D_(D)
   {
-    try
-    {
-      double x = 0;
-      double y = 0;
-      getCoordsOfIntersection(A, B, C, D, x, y);
-    }
-    catch (const std::logic_error &e)
-    {
-      throw std::logic_error("It is impossible to build ComplexQuad\n");
-    }
+    double x = 0;
+    double y = 0;
+    getCoordsOfIntersection(A, B, C, D, x, y);
   }
 
   double ComplexQuad::getArea() const
@@ -100,13 +95,8 @@ namespace abramov
     double min_y = 0;
     searchInArray(x, min_x, max_x, k);
     searchInArray(y, min_y, max_y, k);
-    rectangle_t frame_rect;
-    frame_rect.width = max_x - min_x;
-    frame_rect.height = max_y - min_y;
-    point_t pos;
-    pos.x = (max_x + min_x) / 2;
-    pos.y = (max_y + min_y) / 2;
-    frame_rect.pos = pos;
+    point_t pos{(max_x + min_x) / 2, (max_y + min_y) / 2};
+    rectangle_t frame_rect{max_x - min_x, max_y - min_y, pos};
     return frame_rect;
   }
 
@@ -114,10 +104,8 @@ namespace abramov
   {
     double x = 0;
     double y = 0;
-    point_t center;
     getCoordsOfIntersection(A_, B_, C_, D_, x, y);
-    center.x = x;
-    center.y = y;
+    point_t center{x, y};
     return center;
   }
 
@@ -131,28 +119,43 @@ namespace abramov
 
   void ComplexQuad::move(double dx, double dy)
   {
-    A_.x += dx;
-    B_.x += dx;
-    C_.x += dx;
-    D_.x += dx;
-    A_.y += dy;
-    B_.y += dy;
-    C_.y += dy;
-    D_.y += dy;
+    constexpr size_t k = 4;
+    point_t points[k] = {A_, B_, C_, D_};
+    for (size_t i = 0; i < k; ++i)
+    {
+      changePointCoords(points[i], dx, dy);
+    }
+    A_ = points[0];
+    B_ = points[1];
+    C_ = points[2];
+    D_ = points[3];
   }
 
   void ComplexQuad::scale(double k)
   {
-    const point_t O = getCenterComplexQuad();
-    const double dk = k - 1;
-    A_.x -= (O.x - A_.x) * dk;
-    A_.y -= (O.y - A_.y) * dk;
-    B_.x -= (O.x - B_.x) * dk;
-    B_.y -= (O.y - B_.y) * dk;
-    C_.x -= (O.x - C_.x) * dk;
-    C_.y -= (O.y - C_.y) * dk;
-    D_.x -= (O.x - D_.x) * dk;
-    D_.y -= (O.y - D_.y) * dk;
+    if (k <= 0)
+    {
+      throw std::logic_error("Wrong scale coef\n");
+    }
+    else
+    {
+      const point_t O = getCenterComplexQuad();
+      const double dk = k - 1;
+      const double ox = O.x;
+      const double oy = O.y;
+      constexpr size_t k = 4;
+      point_t points[k] = {A_, B_, C_, D_};
+      for (size_t i = 0; i < k; ++i)
+      {
+        double dx = -1 * (ox - points[i].x) * dk;
+        double dy = -1 * (oy - points[i].y) * dk;
+        changePointCoords(points[i], dx, dy);
+      }
+      A_ = points[0];
+      B_ = points[1];
+      C_ = points[2];
+      D_ = points[3];
+    }
   }
 
   point_t ComplexQuad::getA() const
