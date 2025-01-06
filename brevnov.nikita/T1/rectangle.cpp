@@ -8,37 +8,37 @@ brevnov::Rectangle::Rectangle(point_t left, point_t right):
 
 double brevnov::Rectangle::getArea() const noexcept
 {
-  return (right_.x_ - left_.x_) * (right_.y_ - left_.y_);
+  return (right_.x - left_.x) * (right_.y - left_.y);
 }
 
 brevnov::rectangle_t brevnov::Rectangle::getFrameRect() const noexcept
 {
-  double width = right_.x_ - left_.x_;
-  double height = right_.y_ - left_.y_;
-  point_t pos = {left_.x_ + width / 2.0, left_.y_ + height / 2.0};
+  double width = right_.x - left_.x;
+  double height = right_.y - left_.y;
+  point_t pos = {left_.x + width / 2.0, left_.y + height / 2.0};
   rectangle_t result(width, height, pos);
   return result;
 }
 
 void brevnov::Rectangle::move(point_t new_centre) noexcept
 {
-  point_t old_centre = getFrameRect().pos_;
-  double dx = new_centre.x_ - old_centre.x_;
-  double dy = new_centre.y_ - old_centre.y_;
+  point_t old_centre = getFrameRect().pos;
+  double dx = new_centre.x - old_centre.x;
+  double dy = new_centre.y - old_centre.y;
   move(dx, dy);
 }
 
 void brevnov::Rectangle::move(double dx, double dy) noexcept
 {
-  left_.x_ += dx;
-  left_.y_ += dy;
-  right_.x_ += dx;
-  right_.y_ += dy;
+  left_.x += dx;
+  left_.y += dy;
+  right_.x += dx;
+  right_.y += dy;
 }
 
 void brevnov::Rectangle::scale(double n) noexcept
 {
-  point_t centre = getFrameRect().pos_;
-  left_ = {centre.x_ + (left_.x_ - centre.x_) * n, centre.y_ + (left_.y_ - centre.y_) * n};
-  right_ = {centre.x_ + (right_.x_ - centre.x_) * n, centre.y_ + (right_.y_ - centre.y_) * n};
+  point_t centre = getFrameRect().pos;
+  left_ = {centre.x + (left_.x - centre.x) * n, centre.y + (left_.y - centre.y) * n};
+  right_ = {centre.x + (right_.x - centre.x) * n, centre.y + (right_.y - centre.y) * n};
 }

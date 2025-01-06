@@ -12,10 +12,10 @@ void brevnov::CompositeShape::print_frame_coordinates(std::ostream & out)
       out << " ";
     }
     rectangle_t frame = shapes_[i]->getFrameRect();
-    double leftx = frame.pos_.x_ - frame.width_ / 2.0;
-    double lefty = frame.pos_.y_ - frame.height_ / 2.0;
-    double rightx = frame.pos_.x_ + frame.width_ / 2.0;
-    double righty = frame.pos_.y_ + frame.height_ / 2.0;
+    double leftx = frame.pos.x - frame.width / 2.0;
+    double lefty = frame.pos.y - frame.height / 2.0;
+    double rightx = frame.pos.x + frame.width / 2.0;
+    double righty = frame.pos.y + frame.height / 2.0;
     out << leftx << " " << lefty << " " <<  rightx << " " << righty;
   }
 }
@@ -31,18 +31,18 @@ void brevnov::CompositeShape::clear() noexcept
 
 brevnov::CompositeShape::CompositeShape(size_t cus):
   shapes_(nullptr),
-  capacity_(cus),
+  capacity(cus),
   current_size_(0)
 {
-  shapes_ = new Shape *[capacity_];
+  shapes_ = new Shape *[capacity];
 }
 
 brevnov::CompositeShape::CompositeShape(CompositeShape & cos):
   shapes_(nullptr),
-  capacity_(cos.capacity_),
+  capacity(cos.capacity),
   current_size_(cos.current_size_)
 {
-  shapes_ = new Shape *[capacity_];
+  shapes_ = new Shape *[capacity];
   for (size_t i = 0; i < current_size_; i++)
   {
     shapes_[i] = cos[i];
@@ -51,20 +51,20 @@ brevnov::CompositeShape::CompositeShape(CompositeShape & cos):
 
 brevnov::CompositeShape::CompositeShape(CompositeShape && cos) noexcept:
   shapes_(cos.shapes_),
-  capacity_(cos.capacity_),
+  capacity(cos.capacity),
   current_size_(cos.current_size_)
 {
   cos.shapes_ = nullptr;
   cos.current_size_ = 0;
-  cos.capacity_ = 0;
+  cos.capacity = 0;
 }
 
 brevnov::CompositeShape & brevnov::CompositeShape::operator=(brevnov::CompositeShape & cos)
 {
-  Shape ** help = new Shape *[cos.capacity_];
+  Shape ** help = new Shape *[cos.capacity];
   clear();
   shapes_ = help;
-  capacity_ = cos.capacity_;
+  capacity = cos.capacity;
   current_size_ = cos.current_size_;
   for (size_t i = 0; i < current_size_; i++)
   {
@@ -77,18 +77,18 @@ brevnov::CompositeShape & brevnov::CompositeShape::operator=(brevnov::CompositeS
 {
   clear();
   shapes_ = cos.shapes_;
-  capacity_ = cos.capacity_;
+  capacity = cos.capacity;
   current_size_ = cos.current_size_;
   cos.shapes_ = nullptr;
   cos.current_size_ = 0;
-  cos.capacity_ = 0;
+  cos.capacity = 0;
   return *this;
 }
 
 void brevnov::CompositeShape::add_memory()
 {
   constexpr size_t add_number = 10;
-  CompositeShape help(capacity_ + add_number);
+  CompositeShape help(capacity + add_number);
   for (size_t i = 0; i < current_size_; i++)
   {
     help.shapes_[i] = shapes_[i];
@@ -99,7 +99,7 @@ void brevnov::CompositeShape::add_memory()
 
 void brevnov::CompositeShape::push_back(Shape * sp)
 {
-  if (current_size_ >= capacity_)
+  if (current_size_ >= capacity)
   {
     add_memory();
   }
@@ -154,21 +154,21 @@ brevnov::rectangle_t brevnov::CompositeShape::getFrameRect() const noexcept
   double leftx = 0.0, lefty = 0.0, rightx = 0.0, righty = 0.0;
   for (size_t i = 0; i < current_size_; i++)
   {
-    double width = shapes_[i]->getFrameRect().width_;
-    double height = shapes_[i]->getFrameRect().height_;
-    point_t pos = shapes_[i]->getFrameRect().pos_;
-    leftx = std::fmin(leftx, pos.x_ - width);
-    lefty = std::fmin(lefty, pos.y_ - height);
-    rightx = std::fmax(rightx, pos.x_ + width);
-    righty = std::fmax(righty, pos.y_ + height);
+    double width = shapes_[i]->getFrameRect().width;
+    double height = shapes_[i]->getFrameRect().height;
+    point_t pos = shapes_[i]->getFrameRect().pos;
+    leftx = std::fmin(leftx, pos.x - width);
+    lefty = std::fmin(lefty, pos.y - height);
+    rightx = std::fmax(rightx, pos.x + width);
+    righty = std::fmax(righty, pos.y + height);
   }
   return {rightx - leftx, righty - lefty, {(rightx + leftx) / 2.0, (righty + lefty) / 2.0}};
 }
 
 void brevnov::CompositeShape::move(point_t a) noexcept
 {
-  double dx = a.x_ - getFrameRect().pos_.x_;
-  double dy = a.y_ - getFrameRect().pos_.y_;
+  double dx = a.x - getFrameRect().pos.x;
+  double dy = a.y - getFrameRect().pos.y;
   move(dx, dy);
 }
 
@@ -184,18 +184,18 @@ void brevnov::CompositeShape::scale(double k,  point_t scale) noexcept
 {
   for (size_t i = 0; i < current_size_; ++i)
   {
-    point_t start = shapes_[i]->getFrameRect().pos_;
+    point_t start = shapes_[i]->getFrameRect().pos;
     shapes_[i]->move(scale);
-    point_t end = shapes_[i]->getFrameRect().pos_;
-    point_t vector = {(end.x_ - start.x_) * k, (end.y_ - start.y_) * k};
+    point_t end = shapes_[i]->getFrameRect().pos;
+    point_t vector = {(end.x - start.x) * k, (end.y - start.y) * k};
     shapes_[i]->scale(k);
-    shapes_[i]->move(-vector.x_,  -vector.y_);
+    shapes_[i]->move(-vector.x,  -vector.y);
   }
 }
 
 void brevnov::CompositeShape::scale(double k) noexcept
 {
-  point_t scalep = getFrameRect().pos_;
+  point_t scalep = getFrameRect().pos;
   scale(k, scalep);
 }
 

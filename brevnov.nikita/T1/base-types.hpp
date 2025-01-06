@@ -5,24 +5,24 @@ namespace brevnov
   struct point_t
   {
     point_t() = default;
-    point_t(double x, double y):
-      x_(x),
-      y_(y)
+    point_t(double xf, double yf):
+      x(x),
+      y(y)
       {}
-    double x_;
-    double y_;
+    double x;
+    double y;
   };
   struct rectangle_t
   {
     rectangle_t() = default;
-    rectangle_t(double width, double height, point_t pos):
-      width_(width),
-      height_(height),
-      pos_(pos)
+    rectangle_t(double widthf, double heightf, point_t posf):
+      width(widthf),
+      height(heightf),
+      pos(posf)
       {}
-    double width_;
-    double height_;
-    point_t pos_;
+    double width;
+    double height;
+    point_t pos;
   };
 }
 #endif

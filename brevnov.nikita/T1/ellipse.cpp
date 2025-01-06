@@ -47,8 +47,8 @@ void brevnov::Ellipse::move(point_t new_centre) noexcept
 
 void brevnov::Ellipse::move(double dx, double dy) noexcept
 {
-  center_.x_ += dx;
-  center_.y_ += dy;
+  center_.x += dx;
+  center_.y += dy;
 }
 
 void brevnov::Ellipse::scale(double n) noexcept

@@ -1,7 +1,7 @@
 #include "shape.hpp"
 #include <iomanip>
 
-void brevnov::destroy_shape(Shape** shapes, size_t count)
+void brevnov::destroyshape(Shape** shapes, size_t count)
 {
   for (size_t i = 0; i < count; ++i)
   {
@@ -24,12 +24,12 @@ void brevnov::scale_shape(Shape** shapes, size_t count, point_t scale_p, double 
 {
   for (size_t i = 0; i < count; ++i)
   {
-    point_t before_scale = shapes[i]->getFrameRect().pos_;
+    point_t before_scale = shapes[i]->getFrameRect().pos;
     shapes[i]->move(scale_p);
-    point_t after_scale = shapes[i]->getFrameRect().pos_;
-    point_t movement = {(after_scale.x_ - before_scale.x_) * ratio, (after_scale.y_ - before_scale.y_) * ratio};
+    point_t after_scale = shapes[i]->getFrameRect().pos;
+    point_t movement = {(after_scale.x - before_scale.x) * ratio, (after_scale.y - before_scale.y) * ratio};
     shapes[i]->scale(ratio);
-    shapes[i]->move(-movement.x_, -movement.y_);
+    shapes[i]->move(-movement.x, -movement.y);
   }
 }
 
@@ -38,10 +38,10 @@ void brevnov::print_frame_coordinates(const Shape** shapes, size_t count, std::o
   for (size_t i = 0; i < count; ++i)
   {
     rectangle_t frame = shapes[i]->getFrameRect();
-    double leftx = frame.pos_.x_ - frame.width_ / 2.0;
-    double lefty = frame.pos_.y_ - frame.height_ / 2.0;
-    double rightx = frame.pos_.x_ + frame.width_ / 2.0;
-    double righty = frame.pos_.y_ + frame.height_ / 2.0;
+    double leftx = frame.pos.x - frame.width / 2.0;
+    double lefty = frame.pos.y - frame.height / 2.0;
+    double rightx = frame.pos.x + frame.width / 2.0;
+    double righty = frame.pos.y + frame.height / 2.0;
     out << leftx << " " << lefty << " " <<  rightx << " " << righty;
   }
 }
