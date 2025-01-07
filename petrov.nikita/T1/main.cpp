@@ -14,6 +14,7 @@ int main()
   bool is_description_error = false;
   do
   {
+    shapes_massive[created] = nullptr;
     try
     {
       shapes_massive[created] = petrov::makeShape(std::cin);
