@@ -1,6 +1,7 @@
 #ifndef DIAMOND_HPP
 #define DIAMOND_HPP
 #include "shape.hpp"
+#include "concave.hpp"
 
 namespace lebedev
 {
