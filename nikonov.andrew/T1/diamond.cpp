@@ -56,7 +56,7 @@ namespace
   {
     double maxY = std::max(std::max(p1.y, p2.y), p3.y);
     nikonov::point_t result({ 0, 0 });
-    double maxCnt = (p1.y == maxY) + (p2.y == maxY) + (p3.y == maxY);
+    size_t maxCnt = (p1.y == maxY) + (p2.y == maxY) + (p3.y == maxY);
     if (maxCnt > 1)
     {
       throw std::logic_error("non-correct parameters");
