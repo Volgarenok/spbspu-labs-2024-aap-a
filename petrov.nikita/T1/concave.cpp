@@ -7,7 +7,7 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   p3_(p3),
   p4_(p4)
 {
-  if ( (p1_.x == p4_.x && p1_.y == p4_.y) 
+  if ( (p1_.x == p4_.x && p1_.y == p4_.y)
            || (p2_.x == p4_.x && p2_.y == p4_.y)
                || (p3_.x == p4_.x && p3_.y == p4_.y) )
   {
