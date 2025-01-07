@@ -17,8 +17,8 @@ namespace maslov
     void scale(double k) override;
    private:
     Regular ** regularArray_;
-    void clear(size_t count);
     size_t n_, nWidth_;
+    void clear(size_t count);
   };
 }
 

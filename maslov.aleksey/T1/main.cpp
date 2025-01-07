@@ -33,7 +33,6 @@ int main()
     return 1;
   }
   maslov::point_t scaleCoordinate = {centerX, centerY};
-
   std::cout << std::fixed << std::setprecision(1);
   std::cout << maslov::getSumArea(shapes, count) << " ";
   maslov::printCoordinates(std::cout, shapes, count);
