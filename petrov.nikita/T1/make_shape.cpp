@@ -13,6 +13,10 @@ petrov::Shape * petrov::makeShape(std::istream & in)
   const char SCALE[6] = "SCALE";
   char * type_of_shape = nullptr;
   type_of_shape = new char[14];
+  for (size_t i = 0; i < 14; i++)
+  {
+    type_of_shape[i] = '0';
+  }
   if (!strcmp(type_of_shape, RECTANGLE))
   {
     delete[] type_of_shape;
