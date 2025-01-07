@@ -4,6 +4,7 @@
 namespace cherkasov
 {
   Square::Square(double x1, double y1, double length)
+    : left {x1, y1}, length(length)
   {
     left.x = x1;
     left.y = y1;
