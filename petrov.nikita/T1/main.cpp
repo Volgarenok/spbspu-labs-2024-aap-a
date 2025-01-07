@@ -37,6 +37,7 @@ int main()
   while (shapes_massive[created - 1] && !std::cin.eof());
   if (std::cin.eof())
   {
+    petrov::clearMemory(shapes_massive, created);
     std::cerr << "End of file\n";
     return 1;
   }
@@ -51,6 +52,7 @@ int main()
   std::cin >> scale_point.x >> scale_point.y >> scale_value;
   if (scale_value <= 0)
   {
+    petrov::clearMemory(shapes_massive, created);
     std::cerr << "ERROR: Invalid scale value\n";
     return 3;
   }
@@ -60,4 +62,6 @@ int main()
   {
     std::cerr << NOTE_MSG;
   }
+  petrov::clearMemory(shapes_massive, created);
+
 }
