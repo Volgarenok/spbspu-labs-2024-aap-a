@@ -140,4 +140,5 @@ void maslov::Rectangle::clear(size_t count)
   {
     delete regularArray_[i];
   }
+  delete[] regularArray_;
 }
