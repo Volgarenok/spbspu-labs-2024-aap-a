@@ -8,6 +8,7 @@ namespace kushekbaev
   class Parallelogram : public Shape
   {
   public:
+    Parallelogram() = default;
     Parallelogram(const point_t first, const point_t second, const point_t third);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
