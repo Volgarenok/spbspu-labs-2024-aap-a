@@ -9,10 +9,14 @@ namespace kushekbaev
     parallelogram_(
       { middle.x - diffX.x, middle.y - diffX.y },
       { middle.x + diffX.x, middle.y + diffX.y },
-      { middle.x + diffY.x, middle.y + diffY.y }
+      { middle.x, middle.y + diffY.y }
     )
   {
-
+    if (parallelogram_.first_.x != parallelogram_.third_.x ||
+        parallelogram_.first_.y != parallelogram_.second_.y)
+    {
+      throw std::invalid_argument("Incorrect diamond\n");
+    }
   }
 
   double Diamond::getArea() const

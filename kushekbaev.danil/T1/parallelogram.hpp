@@ -5,8 +5,11 @@
 
 namespace kushekbaev
 {
+  class Diamond;
+
   class Parallelogram : public Shape
   {
+  friend class Diamond;
   public:
     Parallelogram() = default;
     Parallelogram(const point_t first, const point_t second, const point_t third);
