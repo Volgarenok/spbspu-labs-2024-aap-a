@@ -8,7 +8,7 @@
 int main()
 {
   const char * NOTE_MSG = "NOTE: Scaling of some figures skipped due to their invalid description\n";
-  petrov::Shape * shapes_massive[10000] = {};
+  petrov::Shape * shapes_massive[10000] = { 0 };
   size_t created = 0;
   bool is_description_error = false;
   do

@@ -11,7 +11,8 @@ petrov::Shape * petrov::makeShape(std::istream & in)
   const char TRIANGLE[9] = "TRIANGLE";
   const char CONCAVE[8] = "CONCAVE";
   const char SCALE[6] = "SCALE";
-  char * type_of_shape = new char[14];
+  char * type_of_shape = nullptr;
+  type_of_shape = new char[14];
   if (!strcmp(type_of_shape, RECTANGLE))
   {
     delete[] type_of_shape;
