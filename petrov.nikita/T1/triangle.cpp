@@ -1,6 +1,7 @@
 #include "triangle.hpp"
 #include "base-types.hpp"
 #include <cmath>
+#include <stdexcept>
 #include <algorithm>
 petrov::Triangle::Triangle(petrov::point_t p1, petrov::point_t p2, petrov::point_t p3):
   p1_(p1),
@@ -12,7 +13,7 @@ petrov::Triangle::Triangle(petrov::point_t p1, petrov::point_t p2, petrov::point
   double c = std::sqrt(std::pow((p1_.x - p3_.x), 2) + std::pow((p1_.y - p3_.y), 2));
   if (a + b <= c || a + c <= b || b + c <= a)
   {
-    throw "NOTE: Scaling of some figures skipped due to their invalid description\n";
+    throw std::invalid_argument("NOTE: Scaling of some figures skipped due to their invalid description\n");
   }
 }
 

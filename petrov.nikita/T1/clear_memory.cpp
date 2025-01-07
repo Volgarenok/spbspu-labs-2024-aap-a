@@ -1,11 +1,9 @@
 #include "clear_memory.hpp"
-void petrov::clearMemory(char * stream_massive, char * type_of_shape, char ** description, size_t created)
+#include "shape.hpp"
+void petrov::clearMemory(Shape ** shapes_massive, size_t created)
 {
-  delete[] stream_massive;
-      delete[] type_of_shape;
-      for (size_t i = 0; i < created; i++)
-      {
-        delete[] description[i];
-      }
-      delete[] description;
+  for (size_t i = 0; i < created; i++)
+  {
+    delete shapes_massive[i];
+  }
 }

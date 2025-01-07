@@ -1,5 +1,6 @@
 #include "rectangle.hpp"
 #include "base-types.hpp"
+#include <stdexcept>
 #include <cmath>
 petrov::Rectangle::Rectangle(petrov::point_t p1, petrov::point_t p2):
   p1_(p1),
@@ -7,7 +8,7 @@ petrov::Rectangle::Rectangle(petrov::point_t p1, petrov::point_t p2):
 {
   if (p1_.x >= p2_.x || p1_.y >= p2_.y)
   {
-    throw "NOTE: Scaling of some figures skipped due to their invalid description\n";
+    throw std::invalid_argument("NOTE: Scaling of some figures skipped due to their invalid description\n");
   }
 }
 

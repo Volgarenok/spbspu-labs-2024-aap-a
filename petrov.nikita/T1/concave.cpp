@@ -1,6 +1,7 @@
 #include "concave.hpp"
 #include <cmath>
 #include <algorithm>
+#include <stdexcept>
 petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   p1_(p1),
   p2_(p2),
@@ -11,14 +12,14 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
            || (p2_.x == p4_.x && p2_.y == p4_.y)
                || (p3_.x == p4_.x && p3_.y == p4_.y) )
   {
-    throw "NOTE: Scaling of some figures skipped due to their invalid description\n";
+    throw std::invalid_argument("NOTE: Scaling of some figures skipped due to their invalid description\n");
   }
   double a = std::sqrt(std::pow((p1_.x - p2_.x), 2) + std::pow((p1_.y - p2_.y), 2));
   double b = std::sqrt(std::pow((p3_.x - p2_.x), 2) + std::pow((p3_.y - p2_.y), 2));
   double c = std::sqrt(std::pow((p1_.x - p3_.x), 2) + std::pow((p1_.y - p3_.y), 2));
   if (a + b <= c || a + c <= b || b + c <= a)
   {
-    throw "NOTE: Scaling of some figures skipped due to their invalid description\n";
+    throw std::invalid_argument("NOTE: Scaling of some figures skipped due to their invalid description\n");
   }
   double p = (a + b + c) / 2;
   double area_of_triangle = std::sqrt(p * (p - a) * (p - b) * (p - c));
@@ -27,7 +28,7 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   double area_3 = getAreaOfComponent(p1_, p3_, p4_);
   if (std::round(area_of_triangle) / 10 != std::round(area_1 + area_2 + area_3) / 10)
   {
-    throw "NOTE: Scaling of some figures skipped due to their invalid description\n";
+    throw std::invalid_argument("NOTE: Scaling of some figures skipped due to their invalid description\n");
   }
 }
 
