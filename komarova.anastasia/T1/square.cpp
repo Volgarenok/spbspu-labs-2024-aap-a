@@ -1,6 +1,6 @@
 #include "square.hpp"
 #include <stdexcept>
-#include "base_types.hpp"
+#include "base-types.hpp"
 #include "shape.hpp"
 
 komarova::Square::Square(point_t low_left, double len) :

@@ -1,6 +1,6 @@
 #ifndef CIRCLE_HPP
 #define CIRCLE_HPP
-#include "base_types.hpp"
+#include "base-types.hpp"
 #include "shape.hpp"
 
 namespace komarova

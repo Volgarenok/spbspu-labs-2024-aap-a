@@ -2,7 +2,7 @@
 #define MAKE_SHAPES_HPP
 #include <iostream>
 #include "shape.hpp"
-#include "base_types.hpp"
+#include "base-types.hpp"
 
 namespace komarova
 {

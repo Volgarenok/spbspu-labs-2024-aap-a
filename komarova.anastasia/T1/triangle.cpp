@@ -2,7 +2,7 @@
 #include <cmath>
 #include <algorithm>
 #include <stdexcept>
-#include "base_types.hpp"
+#include "base-types.hpp"
 #include "shape.hpp"
 
 komarova::Triangle::Triangle(point_t a, point_t b, point_t c):

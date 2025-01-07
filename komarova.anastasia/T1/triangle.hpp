@@ -1,6 +1,6 @@
 #ifndef TRIANGLE_HPP
 #define TRIANGLE_HPP
-#include "base_types.hpp"
+#include "base-types.hpp"
 #include "shape.hpp"
 
 namespace komarova

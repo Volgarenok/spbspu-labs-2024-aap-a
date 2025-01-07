@@ -1,6 +1,6 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
-#include "base_types.hpp"
+#include "base-types.hpp"
 
 namespace komarova
 {
