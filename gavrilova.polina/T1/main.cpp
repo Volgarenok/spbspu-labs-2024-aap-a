@@ -48,7 +48,6 @@ int main()
   }catch(const std::logic_error& e) {
     std::cerr << e.what();
   }
-  
 
   std::cout << std::fixed << std::setprecision(1) << commonAreaAfter;
   gavrilova::outRectangles(std::cout, Shapes, nShapes);

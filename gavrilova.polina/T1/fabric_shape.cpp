@@ -83,7 +83,7 @@ namespace {
       return nullptr;
     }
     read_verteces_from_line(verteces, nPoints);
-  
+
     if (hasSameVerteces(verteces, nPoints)) {
       delete[] verteces;
       ++nError;
