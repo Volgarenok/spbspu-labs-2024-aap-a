@@ -33,6 +33,7 @@ namespace gavrilova {
     Shape** shapes_;
 
     void resize();
+    void resize(size_t capacity);
     void swap(CompositeShape& rhs) noexcept;
     void clear();
   };

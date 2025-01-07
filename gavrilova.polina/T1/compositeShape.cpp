@@ -11,11 +11,9 @@ gavrilova::CompositeShape::CompositeShape():
 }
 
 gavrilova::CompositeShape::CompositeShape(size_t capacity):
-  size_(0),
-  capacity_(capacity),
-  shapes_(nullptr)
+  CompositeShape()
 {
-  shapes_ = new Shape*[capacity_]{};
+  resize(capacity);
 }
 
 gavrilova::CompositeShape::CompositeShape(const CompositeShape& other):
@@ -154,17 +152,18 @@ void gavrilova::CompositeShape::resize() {
     return;
   }
   size_t new_capacity = capacity_ * 2;
-  Shape** new_shapes = new Shape*[new_capacity];
+  resize(new_capacity);
+}
 
+void gavrilova::CompositeShape::resize(size_t new_capacity) {
+  Shape** new_shapes = new Shape*[new_capacity];
   for (size_t i = 0; i < size_; ++i) {
     new_shapes[i] = shapes_[i];
   }
-
   delete[] shapes_;
   shapes_ = new_shapes;
   capacity_ = new_capacity;
 }
-
 void gavrilova::CompositeShape::swap(CompositeShape& rhs) noexcept {
   std::swap(size_, rhs.size_);
   std::swap(capacity_, rhs.capacity_);
