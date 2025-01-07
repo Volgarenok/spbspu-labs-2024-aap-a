@@ -63,7 +63,7 @@ namespace kushekbaev
       throw std::out_of_range("Scale coefficient should be greater than zero\n");
     }
 
-    std::array<point_t*, 4> points = { &diffX_, &diffY_,};
+    std::array<point_t*, 2> points = { &diffX_, &diffY_,};
 
     for (point_t* point : points)
     {
