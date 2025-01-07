@@ -26,7 +26,7 @@ gavrilova::rectangle_t gavrilova::Rectangle::getFrameRect() const noexcept {
   double height = pTopRight_.y - pBottomLeft_.y;
   double width = pTopRight_.x - pBottomLeft_.x;
   point_t pos{(pTopRight_.x - pBottomLeft_.x) / 2 + pBottomLeft_.x, (pTopRight_.y - pBottomLeft_.y) / 2 + pBottomLeft_.y};
-  return {height, width, pos};
+  return {width, height, pos};
 }
 void gavrilova::Rectangle::move(const point_t& p) noexcept {
   point_t center = getFrameRect().pos;
