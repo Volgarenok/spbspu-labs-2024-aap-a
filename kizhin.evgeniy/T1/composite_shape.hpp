@@ -23,6 +23,7 @@ namespace kizhin {
     bool empty() const noexcept { return begin_ == end_; }
     rectangle_t getFrameRect() const;
     double getArea() const;
+    CompositeShape* clone() const;
 
     const Shape* at(size_t) const;
     Shape* at(size_t);

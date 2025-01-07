@@ -11,8 +11,7 @@ namespace kizhin {
   Polygon* createPolygon(const double*);
 }
 
-void kizhin::scaleShape(Shape* shape, double scalingFactor,
-    const point_t& scalingPoint)
+void kizhin::scaleShape(Shape* shape, double scalingFactor, const point_t& scalingPoint)
 {
   const point_t oldFramePos = shape->getFrameRect().pos;
   shape->move(scalingPoint);
@@ -42,8 +41,7 @@ void kizhin::scaleShapes(CompositeShape& shapes, const double* params)
   return unsafeScaleShapes(shapes, params);
 }
 
-kizhin::Shape*
-kizhin::createShape(const std::string& shapeName, const double* shapeParams)
+kizhin::Shape* kizhin::createShape(const std::string& shapeName, const double* shapeParams)
 {
   if (shapeName == "RECTANGLE") {
     return createRectangle(shapeParams);
