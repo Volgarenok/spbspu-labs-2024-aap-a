@@ -15,6 +15,7 @@ namespace petrov
     void scale(double k) override;
   private:
     point_t p1_, p2_, p3_, p4_;
+    double getAreaOfComponent(point_t p1, point_t p2, point_t p3) const;
   };
 }
 #endif

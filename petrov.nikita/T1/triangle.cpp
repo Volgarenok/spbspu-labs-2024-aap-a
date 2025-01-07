@@ -43,12 +43,7 @@ void petrov::Triangle::move(petrov::point_t concrete_point)
   rectangle_t frame_rect = getFrameRect();
   double dx = concrete_point.x - frame_rect.pos.x;
   double dy = concrete_point.y - frame_rect.pos.y;
-  p1_.x += dx;
-  p1_.y += dy;
-  p2_.x += dx;
-  p2_.y += dy;
-  p3_.x += dx;
-  p3_.y += dy;
+  this->move(dx, dy);
 }
 
 void petrov::Triangle::move(double dx, double dy)
@@ -64,12 +59,10 @@ void petrov::Triangle::move(double dx, double dy)
 void petrov::Triangle::scale(double k)
 {
   rectangle_t frame_rect = getFrameRect();
-  double dx = (frame_rect.width / 2) * std::abs(k - 1);
-  double dy = (frame_rect.height / 2) * std::abs(k - 1);
-  p1_.x > frame_rect.pos.x ? p1_.x += dx : (p1_.x < frame_rect.pos.x ? p1_.x -= dx : p1_.x += 0);
-  p2_.x > frame_rect.pos.x ? p2_.x += dx : (p2_.x < frame_rect.pos.x ? p2_.x -= dx : p2_.x += 0);
-  p3_.x > frame_rect.pos.x ? p3_.x += dx : (p3_.x < frame_rect.pos.x ? p3_.x -= dx : p3_.x += 0);
-  p1_.y > frame_rect.pos.y ? p1_.y += dy : (p1_.y < frame_rect.pos.y ? p1_.y -= dy : p1_.y += 0);
-  p2_.y > frame_rect.pos.y ? p2_.y += dy : (p2_.y < frame_rect.pos.y ? p2_.y -= dy : p2_.y += 0);
-  p3_.y > frame_rect.pos.y ? p3_.y += dy : (p3_.y < frame_rect.pos.y ? p3_.y -= dy : p3_.y += 0);
+  p1_.x = frame_rect.pos.x + (p1_.x - frame_rect.pos.x) * k;
+  p1_.y = frame_rect.pos.y + (p1_.y - frame_rect.pos.y) * k;
+  p2_.x = frame_rect.pos.x + (p2_.x - frame_rect.pos.x) * k;
+  p2_.y = frame_rect.pos.y + (p2_.y - frame_rect.pos.y) * k;
+  p3_.x = frame_rect.pos.x + (p3_.x - frame_rect.pos.x) * k;
+  p3_.y = frame_rect.pos.y + (p3_.y - frame_rect.pos.y) * k;
 }
