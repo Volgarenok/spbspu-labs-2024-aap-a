@@ -15,10 +15,6 @@ int main()
   do
   {
     shapes_massive[created] = nullptr;
-    if (created == 0)
-    {
-      shapes_massive[created - 1] = nullptr;
-    }
     try
     {
       shapes_massive[created] = petrov::makeShape(std::cin);
@@ -40,7 +36,7 @@ int main()
       continue;
     }
   }
-  while ((shapes_massive[created - 1] != nullptr || created == 0) && !std::cin.eof() && std::cin);
+  while ((created == 0 || shapes_massive[created - 1] != nullptr) && !std::cin.eof() && std::cin);
   if (std::cin.eof())
   {
     petrov::clearMemory(shapes_massive, created);
