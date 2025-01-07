@@ -15,6 +15,10 @@ int main()
   do
   {
     shapes_massive[created] = nullptr;
+    if (created == 0)
+    {
+      shapes_massive[created - 1] = nullptr;
+    }
     try
     {
       shapes_massive[created] = petrov::makeShape(std::cin);
