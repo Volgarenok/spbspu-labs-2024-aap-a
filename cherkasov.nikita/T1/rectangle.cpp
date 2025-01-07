@@ -7,12 +7,7 @@ namespace cherkasov
   Rectangle::Rectangle(double x1, double y1, double x2, double y2)
   : left{std::min(x1, x2), std::min(y1, y2)},
     right{std::max(x1, x2), std::max(y1, y2)}
-  {
-    left.x = std::min(x1, x2);
-    left.y = std::min(y1, y2);
-    right.x = std::max(x1, x2);
-    right.y = std::max(y1, y2);
-  }
+    {}
   double Rectangle::getArea() const
   {
     double width = std::abs(right.x - left.x);

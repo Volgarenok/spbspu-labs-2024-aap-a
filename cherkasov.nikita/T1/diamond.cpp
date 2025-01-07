@@ -6,20 +6,8 @@
 namespace cherkasov
 {
   Diamond::Diamond(double x1, double y1, double x2, double y2, double x3, double y3)
-   : vertex1{x1, y1}, vertex2{x2, y2}, vertex3{x3, y3}, vertex4{x2 + (x1 - x3), y2 + (y3 - y1)},
-     center{(x1 + x3) / 2, (y1 + y3) / 2}
-  {
-    vertex1.x = x1;
-    vertex1.y = y1;
-    vertex2.x = x2;
-    vertex2.y = y2;
-    vertex3.x = x3;
-    vertex3.y = y3;
-    center.x = (x1 + x3) / 2;
-    center.y = (y1 + y3) / 2;
-    vertex4.x = x2 + (x1 - x3);
-    vertex4.y = y2 + (y3 - y1);
-  }
+  : vertex1{x1, y1}, vertex2{x2, y2}, vertex3{x3, y3}, vertex4{x2 + (x1 - x3), y2 + (y3 - y1)},
+    center{(x1 + x3) / 2, (y1 + y3) / 2} {}
   double Diamond::getArea() const
   {
     double diag1 = std::abs(vertex1.y - vertex3.y);

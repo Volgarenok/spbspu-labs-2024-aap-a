@@ -7,15 +7,7 @@ namespace cherkasov
 {
   Parallelogram::Parallelogram(double x1, double y1, double x2, double y2, double x3, double y3)
   : vertex1{x1, y1}, vertex2{x2, y2}, vertex3{x3, y3},vertex4{x2 + (x1 - x3), y2 + (y3 - y1)}
-  {
-    vertex1.x = x1;
-    vertex1.y = y1;
-    vertex2.x = x2;
-    vertex2.y = y2;
-    vertex3.x = x3;
-    vertex3.y = y3;
-    vertex4 = {vertex1.x + vertex3.x - vertex2.x, vertex1.y + vertex3.y - vertex2.y};
-  }
+    {}
   double Parallelogram::getArea() const
   {
     double vector1x = vertex2.x - vertex1.x;
