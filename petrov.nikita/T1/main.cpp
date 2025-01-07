@@ -1,8 +1,5 @@
 #include <iostream>
-#include <cstdlib>
 #include <iomanip>
-#include <cstring>
-#include <input_cstring.hpp>
 #include "shape.hpp"
 #include "make_shape.hpp"
 #include "clear_memory.hpp"
@@ -13,7 +10,7 @@ int main()
   const char * NOTE_MSG = "NOTE: Scaling of some figures skipped due to their invalid description\n";
   petrov::Shape * shapes_massive[10000] = {};
   size_t created = 0;
-  size_t count_descr_errors = 0;
+  bool is_description_error = false;
   do
   {
     try
@@ -29,7 +26,7 @@ int main()
     }
     catch(const std::invalid_argument & e)
     {
-      count_descr_errors++;
+      is_description_error = true;
       continue;
     }
     catch(const std::logic_error & e)
@@ -37,7 +34,12 @@ int main()
       continue;
     }
   }
-  while (shapes_massive[created - 1]);
+  while (shapes_massive[created - 1] && !std::cin.eof());
+  if (std::cin.eof())
+  {
+    std::cerr << "End of file\n";
+    return 1;
+  }
   created--;
   if (created == 0)
   {
@@ -54,7 +56,7 @@ int main()
   }
   std::cout << std::fixed << std::setprecision(1);
   petrov::scaleIsotropicallyAndOutputData(scale_point, scale_value, shapes_massive, created);
-  if (count_descr_errors > 0)
+  if (is_description_error)
   {
     std::cerr << NOTE_MSG;
   }
