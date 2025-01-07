@@ -12,8 +12,8 @@ maslov::Rectangle::Rectangle(point_t lowerLeftCorner, point_t upperRightCorner):
   {
     throw std::invalid_argument("Rectangle has incorrect parameters");
   }
-  double length = std::abs(lowerLeftCorner.x - upperRightCorner.x);
-  double width = std::abs(lowerLeftCorner.y - upperRightCorner.y);
+  double length = std::fabs(lowerLeftCorner.x - upperRightCorner.x);
+  double width = std::fabs(lowerLeftCorner.y - upperRightCorner.y);
   double w = width;
   double l = length;
   constexpr double error = 0.01;
@@ -23,26 +23,36 @@ maslov::Rectangle::Rectangle(point_t lowerLeftCorner, point_t upperRightCorner):
     w = std::fmod(l, w);
     l = temp;
   }
-  size_t N_width = width / l;
-  size_t N_length = length / l;
-  size_t Total = N_width * N_length;
-  n_ = Total;
-  if (N_width > N_length)
+  size_t nWidth = width / l;
+  size_t nLength = length / l;
+  size_t total = nWidth * nLength;
+  n_ = total;
+  if (nWidth > nLength)
   {
-    std::swap(N_width, N_length);
+    std::swap(nWidth, nLength);
   }
-  nWidth_ = N_width;
+  nWidth_ = nWidth;
   regularArray_ = new Regular*[n_];
-  for (size_t i = 0; i < N_length; i++)
+  for (size_t i = 0; i < nLength; i++)
   {
-    for (size_t j = 0; j < N_width; j++)
+    for (size_t j = 0; j < nWidth; j++)
     {
-      size_t index = (i % 2 == 0) ? (i * N_width + j) : (i * N_width + (N_width - 1 - j));
+      size_t index = 0;
+      if (i % 2 == 0)
+      {
+        index = i * nWidth + j;
+      }
+      else
+      {
+        index = i * nWidth + (nWidth - 1 - j);
+      }
+      double centerX = lowerLeftCorner.x + j * l + l / 2.0;
+      double centerY = lowerLeftCorner.y + (nLength - 1 - i) * l + l / 2.0;
+      point_t center = {centerX, centerY};
+      point_t inCircle = {center.x, center.y + (l / 2.0)};
+      point_t outCircle = {center.x + l / 2.0, center.y + l / 2.0};
       try
       {
-        point_t center = {lowerLeftCorner.x + j * l + l / 2, lowerLeftCorner.y + (N_length - 1 - i) * l + l / 2};
-        point_t inCircle = { center.x, center.y + (l / 2) };
-        point_t outCircle = { center.x + l / 2, center.y + l / 2 };
         regularArray_[index] = new Regular(center, inCircle, outCircle);
       }
       catch (const std::bad_alloc & e)
@@ -53,7 +63,6 @@ maslov::Rectangle::Rectangle(point_t lowerLeftCorner, point_t upperRightCorner):
     }
   }
 }
-
 maslov::Rectangle::~Rectangle()
 {
   clear(n_);
@@ -68,31 +77,36 @@ maslov::rectangle_t maslov::Rectangle::getFrameRect() const
   double minY = std::numeric_limits<double>::max();
   double maxX = std::numeric_limits<double>::lowest();
   double maxY = std::numeric_limits<double>::lowest();
-  for (size_t i = 0; i < n_ / nWidth_; i++)
+  size_t nLength = n_ / nWidth_;
+  for (size_t i = 0; i < nLength; i++)
   {
     for (size_t j = 0; j < nWidth_; j++)
     {
       if (regularArray_[i * 1 + j] != nullptr)
       {
         point_t center = regularArray_[i * 1 + j]->getFrameRect().pos;
-        if (center.x < minX) minX = center.x;
-        if (center.y < minY) minY = center.y;
-        if (center.x > maxX) maxX = center.x;
-        if (center.y > maxY) maxY = center.y;
+        maxX = std::max(maxX, center.x);
+        minX = std::min(minX, center.x);
+        maxY = std::max(maxY, center.y);
+        minY = std::min(minY, center.y);
       }
     }
   }
-  double width = regularArray_[0]->getFrameRect().width * nWidth_;
-  double height = n_ / nWidth_ * regularArray_[0]->getFrameRect().width;
-  point_t center = {(minX + maxX) / 2.0, (minY + maxY) / 2.0 };
-  return {width, height, {center}};
+  double centerX = (minX + maxX) / 2.0;
+  double centerY = (minY + maxY) / 2.0;
+  point_t center = {centerX, centerY};
+  double squareSize = regularArray_[0]->getFrameRect().width;
+  double width = squareSize * nWidth_;
+  double height = squareSize * nLength;
+  return {width, height, center};
 }
 void maslov::Rectangle::move(point_t s)
 {
-  point_t currentCenter = getFrameRect().pos;
-  double dx = s.x - currentCenter.x;
-  double dy = s.y - currentCenter.y;
-  for (size_t i = 0; i < n_; ++i) {
+  point_t center = getFrameRect().pos;
+  double dx = s.x - center.x;
+  double dy = s.y - center.y;
+  for (size_t i = 0; i < n_; ++i)
+  {
     regularArray_[i]->move(dx, dy);
   }
 }
@@ -113,24 +127,22 @@ void maslov::Rectangle::scale(double k)
   double centerX = center.x;
   double centerY = center.y;
   double scaleFactor = k;
-  for (size_t i = 0; i < n_; i++)
+  double squareSize = regularArray_[0]->getFrameRect().width;
+  size_t nlength = n_ / nWidth_;
+  double startX = centerX - (nlength * squareSize) / 2.0;
+  double startY = centerY - (nWidth_ * squareSize) / 2.0;
+  for (size_t i = 0; i < nWidth_; i++)
   {
-    regularArray_[i]->scale(scaleFactor);
-  }
-  double squareSize = regularArray_[0]->getFrameRect().height;
-  int width = n_ / nWidth_;
-  int length = nWidth_;
-  double startX = centerX - (width * squareSize) / 2;
-  double startY = centerY - (length * squareSize) / 2;
-  for (int i = 0; i < length; i++)
-  {
-    for (int j = 0; j < width; j++)
+    for (size_t j = 0; j < nlength; j++)
     {
-      size_t index = i * width + j;
-      double offsetX = startX + j * squareSize + squareSize / 2;
-      double offsetY = startY + i * squareSize + squareSize / 2;
-      regularArray_[index]->move(offsetX - regularArray_[index]->getFrameRect().pos.x,
-        offsetY - regularArray_[index]->getFrameRect().pos.y);
+      size_t index = i * nlength + j;
+      regularArray_[index]->scale(scaleFactor);
+      double offsetX = startX + j * squareSize + squareSize / 2.0;
+      double offsetY = startY + i * squareSize + squareSize / 2.0;
+      point_t centerRegular = regularArray_[index]->getFrameRect().pos;
+      double cRegularX = centerRegular.x;
+      double cRegularY = centerRegular.y;
+      regularArray_[index]->move(offsetX - cRegularX, offsetY - cRegularY);
     }
   }
 }

@@ -128,7 +128,7 @@ bool maslov::Regular::isRegular() const
   double hyp = getRadiusCircumcircle();
   double cat1 = getHalfSide();
   double cat2 = getRadiusIncircle();
-  if (std::abs(hyp * hyp - (cat1 * cat1 + cat2 * cat2)) > 1e-20)
+  if (std::fabs(hyp * hyp - (cat1 * cat1 + cat2 * cat2)) > 1e-20)
   {
     if (n_ != 0)
     {
