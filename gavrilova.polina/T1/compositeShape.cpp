@@ -15,7 +15,7 @@ gavrilova::CompositeShape::CompositeShape(size_t capacity):
   capacity_(capacity),
   shapes_(nullptr)
 {
-  shapes_ = new Shape*[capacity_];
+  shapes_ = new Shape*[capacity_]{};
 }
 
 gavrilova::CompositeShape::CompositeShape(const CompositeShape& other):
