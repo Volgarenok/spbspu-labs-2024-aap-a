@@ -172,9 +172,9 @@ bool karnauhova::same_pol(double* pol, size_t end, std::string* names, size_t c_
       size_t y = 0;
       for (size_t j = 0; j < points[k]; j += 2)
       {
-        if (pol[c_polygon + j] == pol[end - static_cast<int>(points[c_points - 1])])
+        if (pol[c_polygon + j] == pol[end - static_cast< int >(points[c_points - 1])])
         {
-          if (pol[c_polygon + j + 1] == pol[end - static_cast<int>(points[c_points - 1]) + 1])
+          if (pol[c_polygon + j + 1] == pol[end - static_cast< int >(points[c_points - 1]) + 1])
           {
             y++;
           }

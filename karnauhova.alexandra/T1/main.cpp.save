@@ -6,18 +6,24 @@
 #include "check.hpp"
 int main()
 {
-  if (
-  if (names[0] == "SCALE" || names[0].empty())
+  size_t count_error = 0;
+  double k = 0;
+  size_t point;
+  Shape* shaps = nullptr;
+  try
   {
-    std::cerr << "Error: empty input\n";
+    shaps = new[10000];
+  }
+  catch (const std::bad_alloc & e)
+  {
+    std::cerr << "Out of memmory\n";
     return 1;
   }
-  if (names[count_shape-1] != "SCALE")
+  if (karnauhova::fabric_input(std::cin, shaps, count_error, point, k))
   {
-    std::cerr << "Error: missing scale\n";
     return 1;
   }
-  if (points[i - 1] < 0)
+  if (k < 0)
   {
     std::cerr << "Error: missing scale\n";
     return 1;
