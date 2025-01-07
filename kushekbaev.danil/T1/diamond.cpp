@@ -2,19 +2,18 @@
 #include <cmath>
 #include <stdexcept>
 #include <array>
-#include "shape.hpp"
-#include "shapeBreeding.hpp"
 
 namespace kushekbaev
 {
-  Diamond::Diamond(point_t middle,
-    point_t diffX,
-  point_t diffY):
-  middle_(middle),
-  diffX_(diffX),
-  diffY_(diffY)
+  Diamond::Diamond(point_t middle, point_t diffX, point_t diffY):
+    parallelogram_(
+      { middle.x - diffX.x, middle.y - diffX.y },
+      { middle.x + diffX.x, middle.y + diffX.y },
+      { middle.x, middle.y + diffY.y }
+    )
   {
-    if (!isTriangle(middle, diffX, diffY))
+    if (parallelogram_.first_.x != parallelogram_.third_.x ||
+        parallelogram_.first_.y != parallelogram_.second_.y)
     {
       throw std::invalid_argument("Incorrect diamond\n");
     }
@@ -22,53 +21,26 @@ namespace kushekbaev
 
   double Diamond::getArea() const
   {
-    return std::fabs((middle_.x - diffX_.x) * (middle_.y - diffY_.y) * 2);
+    return parallelogram_.getArea();
   }
 
   rectangle_t Diamond::getFrameRect() const
   {
-    return { std::fabs((middle_.x - diffX_.x)) * 2, std::fabs((middle_.y - diffY_.y) * 2), middle_ };
+    return parallelogram_.getFrameRect();
   }
 
   void Diamond::move(point_t Z)
   {
-    point_t middle = getFrameRect().pos;
-    double dx = Z.x - middle.x;
-    double dy = Z.y - middle.y;
-
-    std::array<point_t*, 3> points = { &middle_, &diffX_, &diffY_, };
-
-    for (point_t* point : points)
-    {
-      point->x += dx;
-      point->y += dy;
-    }
+    return parallelogram_.move(Z);
   }
 
   void Diamond::move(double dx, double dy)
   {
-    std::array<point_t*, 3> points = { &middle_, &diffX_, &diffY_, };
-
-    for (point_t* point : points)
-    {
-      point->x += dx;
-      point->y += dy;
-    }
+    return parallelogram_.move(dx, dy);
   }
 
   void Diamond::scale(double V)
   {
-    if (V <= 0)
-    {
-      throw std::out_of_range("Scale coefficient should be greater than zero\n");
-    }
-
-    std::array<point_t*, 2> points = { &diffX_, &diffY_,};
-
-    for (point_t* point : points)
-    {
-      point->x = middle_.x + (point->x - middle_.x) * V;
-      point->y = middle_.y + (point->y - middle_.y) * V;
-    }
+    return parallelogram_.scale(V);
   }
 }

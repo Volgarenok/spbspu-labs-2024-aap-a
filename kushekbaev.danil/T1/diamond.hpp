@@ -2,6 +2,7 @@
 #define DIAMOND_HPP
 
 #include "shape.hpp"
+#include "parallelogram.hpp"
 
 namespace kushekbaev
 {
@@ -16,9 +17,7 @@ namespace kushekbaev
     void scale(const double V) override;
 
   private:
-    point_t middle_;
-    point_t diffX_;
-    point_t diffY_;
+    Parallelogram parallelogram_;
   };
 }
 
