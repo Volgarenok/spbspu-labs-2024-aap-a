@@ -26,7 +26,7 @@ gavrilova::rectangle_t gavrilova::Ellipse::getFrameRect() const noexcept {
   double height = 2 * radiusY_;
   double width = 2 * radiusX_;
   point_t pos(center_);
-  return {height, width, pos};
+  return {width, height, pos};
 }
 
 void gavrilova::Ellipse::move(const point_t& p) noexcept {
@@ -37,10 +37,7 @@ void gavrilova::Ellipse::move(double difX, double difY) noexcept {
   center_.move(difX, difY);
 }
 
-void gavrilova::Ellipse::scale(double k) {
-  if (k <= 0) {
-    throw std::logic_error("Коэффицент должен быть положительным");
-  }
+void gavrilova::Ellipse::scale_without_check(double k) noexcept {
   radiusX_ *= k;
   radiusY_ *= k;
 }

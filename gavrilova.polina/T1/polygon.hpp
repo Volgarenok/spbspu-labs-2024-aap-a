@@ -14,8 +14,8 @@ namespace gavrilova {
     rectangle_t getFrameRect() const noexcept override;
     void move(const point_t& p) noexcept override;
     void move(double difX, double difY) noexcept override;
-    void scale(double k) override;
     Shape* clone() const;
+    void scale_without_check(double k) override;
   private:
     size_t size_;
     Triangle** triangles_;

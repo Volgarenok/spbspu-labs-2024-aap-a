@@ -37,7 +37,7 @@ gavrilova::rectangle_t gavrilova::Triangle::getFrameRect() const noexcept {
   double height = maxY - minY;
   double width = maxX- minX;
   point_t pos {(maxX - minX) / 2 + minX, (maxY - minY) / 2 + minY};
-  return {height, width, pos};
+  return {width, height, pos};
 }
 void gavrilova::Triangle::move(const point_t& p) noexcept {
   point_t center = getFrameRect().pos;
@@ -50,10 +50,7 @@ void gavrilova::Triangle::move(double difX, double difY) noexcept {
   b_.move(difX, difY);
   c_.move(difX, difY);
 }
-void gavrilova::Triangle::scale(double k) {
-  if (k <= 0) {
-    throw std::logic_error("Коэффицент должен быть положительным");
-  }
+void gavrilova::Triangle::scale_without_check(double k) noexcept {
   point_t center =  getFrameRect().pos;
   a_.scaleDistance(center, k);
   b_.scaleDistance(center, k);

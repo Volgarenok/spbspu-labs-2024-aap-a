@@ -21,7 +21,7 @@ namespace {
     }
     return false;
   }
-  void make_verteces(gavrilova::point_t* verteces, size_t n) {
+  void read_verteces_from_line(gavrilova::point_t* verteces, size_t n) {
     for (size_t i = 0; i < n; ++i) {
       char* xStr = std::strtok(nullptr, " ");
       char* yStr = std::strtok(nullptr, " ");
@@ -39,7 +39,7 @@ namespace {
     }
 
     gavrilova::point_t verteces[nVertRect] = {};
-    make_verteces(verteces, nVertRect);
+    read_verteces_from_line(verteces, nVertRect);
     delete[] line;
 
     gavrilova::Rectangle* rect = nullptr;
@@ -60,8 +60,9 @@ namespace {
     }
 
     gavrilova::point_t verteces[nVertTriang] = {};
-    make_verteces(verteces, nVertTriang);
+    read_verteces_from_line(verteces, nVertTriang);
     delete[] line;
+    
     gavrilova::Triangle* triang = nullptr;
     try {
       triang = new gavrilova::Triangle(verteces[0], verteces[1], verteces[2]);
@@ -81,13 +82,13 @@ namespace {
     size_t nPoints = nSpaces / 2;
     gavrilova::point_t* verteces = nullptr;
     try {
-      verteces = new gavrilova::point_t[nPoints];
+      verteces = new gavrilova::point_t[nPoints]{};
     } catch (const std::bad_alloc&) {
       ++nError;
       delete[] line;
       return nullptr;
     }
-    make_verteces(verteces, nPoints);
+    read_verteces_from_line(verteces, nPoints);
     delete[] line;
     if (hasSameVerteces(verteces, nPoints)) {
       delete[] verteces;

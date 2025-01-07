@@ -76,10 +76,7 @@ void gavrilova::Polygon::move(double difX, double difY) noexcept {
     triangles_[i]->move(difX, difY);
   }
 }
-void gavrilova::Polygon::scale(double k) {
-  if (k <= 0) {
-    throw std::logic_error("Коэффицент должен быть положительным");
-  }
+void gavrilova::Polygon::scale_without_check(double k) {
   point_t center =  getFrameRect().pos;
   for (size_t i = 0; i < size_; ++i) {
     scaleShape(*triangles_[i], center, k);
