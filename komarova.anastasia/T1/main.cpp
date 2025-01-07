@@ -13,15 +13,11 @@ int main()
 {
   constexpr int size = 100000;
   komarova::Shape* shapes[size] = {};
-  int count = 0;
-  double x_sc = 0.0;
-  double y_sc = 0.0;
-  double coef = 1.0;
   bool wrong_shape = false;
 
   try
   {
-    komarova::make_shapes(std::cin, shapes, count, wrong_shape, x_sc, y_sc, coef);
+    komarova::make_shapes(std::cin, shapes, wrong_shape);
   }
   catch (const std::bad_alloc& e)
   {
@@ -63,4 +59,3 @@ int main()
   }
   komarova::delete_shapes(shapes);
 }
-
