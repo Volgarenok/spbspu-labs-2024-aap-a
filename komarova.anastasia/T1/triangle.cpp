@@ -27,9 +27,9 @@ double komarova::Triangle::getArea() const
 komarova::rectangle_t komarova::Triangle::getFrameRect() const
 {
   double min_x = std::min(std::min(a_.x, b_.x), c_.x);
-  double max_x = std::max(std::min(a_.x, b_.x), c_.x);
+  double max_x = std::max(std::max(a_.x, b_.x), c_.x);
   double min_y = std::min(std::min(a_.y, b_.y), c_.y);
-  double max_y = std::max(std::min(a_.y, b_.y), c_.y);
+  double max_y = std::max(std::max(a_.y, b_.y), c_.y);
   return {max_x - min_x, max_y - min_y, {(min_x + max_x) / 2.0, (min_y + max_y) / 2.0}};
 }
 
