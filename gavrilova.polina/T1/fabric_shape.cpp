@@ -30,7 +30,7 @@ namespace {
       verteces[i] = {x, y};
     }
   }
-  gavrilova::Rectangle* make_rectangle(char* line, size_t& nSpaces, size_t& nError) {
+  gavrilova::Rectangle* make_rectangle(size_t& nSpaces, size_t& nError) {
     const int nVertRect = 2;
     if (nSpaces != 2* nVertRect) {
       //delete[] line;
@@ -51,7 +51,7 @@ namespace {
       return nullptr;
     }
   }
-  gavrilova::Triangle* make_triangle(char* line, size_t& nSpaces, size_t& nError) {
+  gavrilova::Triangle* make_triangle(size_t& nSpaces, size_t& nError) {
     const int nVertTriang = 3;
     if (nSpaces != 2* nVertTriang) {
       //delete[] line;
@@ -72,7 +72,7 @@ namespace {
       return nullptr;
     }
   }
-  gavrilova::Polygon* make_polygon(char* line, size_t& nSpaces, size_t& nError) {
+  gavrilova::Polygon* make_polygon(size_t& nSpaces, size_t& nError) {
     const int minNVertPolygon = 3;
     if (nSpaces < 2* minNVertPolygon || nSpaces % 2 != 0) {
       ++nError;
@@ -106,7 +106,7 @@ namespace {
       return nullptr;
     }
   }
-  gavrilova::Ellipse* make_ellipse(char* line, size_t& nSpaces, size_t& nError) {
+  gavrilova::Ellipse* make_ellipse(size_t& nSpaces, size_t& nError) {
     if (nSpaces != 4) {
         ++nError;
         //delete[] line;
@@ -154,13 +154,13 @@ gavrilova::Shape* gavrilova::make_shape(std::istream& in, gavrilova::point_t& ce
   Shape* new_shape = nullptr;
 
   if (!std::strcmp(shapeType, "RECTANGLE")) {
-    new_shape = make_rectangle(line, nSpaces, nError);
+    new_shape = make_rectangle(nSpaces, nError);
   } else if (!std::strcmp(shapeType, "TRIANGLE")) {
-    new_shape = make_triangle(line, nSpaces, nError);
+    new_shape = make_triangle(nSpaces, nError);
   } else if (!std::strcmp(shapeType, "POLYGON")) {
-    new_shape = make_polygon(line, nSpaces, nError);
+    new_shape = make_polygon(nSpaces, nError);
   } else if (!std::strcmp(shapeType, "ELLIPSE")) {
-    new_shape = make_ellipse(line, nSpaces, nError);
+    new_shape = make_ellipse(nSpaces, nError);
   } else if (!std::strcmp(shapeType, "SCALE")) {
     if (nSpaces != 3) {
       delete[] line;
