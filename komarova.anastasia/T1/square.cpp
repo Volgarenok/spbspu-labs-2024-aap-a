@@ -8,7 +8,7 @@ komarova::Square::Square(point_t low_left, double len) :
 {
   if (len_ <= 0.0)
   {
-    throw std:logic_error("incorrect len");
+    throw std::logic_error("incorrect len");
   }
 }
 
