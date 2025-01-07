@@ -36,11 +36,11 @@ int main()
 
   std::cout << std::fixed << std::setprecision(1);
   std::cout << maslov::getSumArea(shapes, count) << " ";
-  maslov::printCoordinates(shapes, count);
+  maslov::printCoordinates(std::cout, shapes, count);
   std::cout << "\n";
   maslov::scaleShapes(shapes, count, scaleCoordinate, scaleFactor);
   std::cout << maslov::getSumArea(shapes, count) << " ";
-  maslov::printCoordinates(shapes, count);
+  maslov::printCoordinates(std::cout, shapes, count);
   std::cout << "\n";
   maslov::destroyShapes(shapes, count);
 }

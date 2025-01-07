@@ -24,7 +24,8 @@ void maslov::scaleShapes(Shape ** shapes, const size_t count,
     shapes[i]->move(-newX, -newY);
   }
 }
-void maslov::printCoordinates(const Shape * const * const shapes, const size_t count)
+void maslov::printCoordinates(std::ostream & out,
+  const Shape * const * const shapes, const size_t count)
 {
   for (size_t i = 0; i < count; i++)
   {
@@ -37,11 +38,11 @@ void maslov::printCoordinates(const Shape * const * const shapes, const size_t c
     double lowerLeftCornerY = centerY - heightHalf;
     double upperRightCornerX = centerX + widthHalf;
     double upperRightCornerY = centerY + heightHalf;
-    std::cout << lowerLeftCornerX << " " << lowerLeftCornerY << " ";
-    std::cout << upperRightCornerX << " " << upperRightCornerY;
+    out << lowerLeftCornerX << " " << lowerLeftCornerY << " ";
+    out << upperRightCornerX << " " << upperRightCornerY;
     if (i < count - 1)
     {
-      std::cout << " ";
+      out << " ";
     }
   }
 }
