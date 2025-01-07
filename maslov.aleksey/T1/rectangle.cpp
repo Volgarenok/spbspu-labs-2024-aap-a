@@ -23,8 +23,9 @@ maslov::Rectangle::Rectangle(point_t lowerLeftCorner, point_t upperRightCorner):
     w = std::fmod(l, w);
     l = temp;
   }
-  size_t nWidth = width / l;
-  size_t nLength = length / l;
+  double square = l;
+  size_t nWidth = width / square;
+  size_t nLength = length / square;
   size_t total = nWidth * nLength;
   n_ = total;
   if (nWidth > nLength)
@@ -46,11 +47,11 @@ maslov::Rectangle::Rectangle(point_t lowerLeftCorner, point_t upperRightCorner):
       {
         index = i * nWidth + (nWidth - 1 - j);
       }
-      double centerX = lowerLeftCorner.x + j * l + l / 2.0;
-      double centerY = lowerLeftCorner.y + (nLength - 1 - i) * l + l / 2.0;
+      double centerX = lowerLeftCorner.x + j * square + square / 2.0;
+      double centerY = lowerLeftCorner.y + (nLength - 1 - i) * square + square / 2.0;
       point_t center = {centerX, centerY};
-      point_t inCircle = {center.x, center.y + (l / 2.0)};
-      point_t outCircle = {center.x + l / 2.0, center.y + l / 2.0};
+      point_t inCircle = {center.x, center.y + (square / 2.0)};
+      point_t outCircle = {center.x + square / 2.0, center.y + square / 2.0};
       try
       {
         regularArray_[index] = new Regular(center, inCircle, outCircle);
