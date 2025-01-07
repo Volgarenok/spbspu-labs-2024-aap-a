@@ -32,7 +32,7 @@ namespace kushekbaev
         else if (shapeName == "DIAMOND")
         {
           capacity[shapeCounter++] = kushekbaev::makeDiamond(input);
-	  std::cout << "Sorry, but i need to steal tests\n";
+          std::cout << "Sorry, but i need to steal tests\n";
         }
         else if (shapeName == "SCALE")
         {
