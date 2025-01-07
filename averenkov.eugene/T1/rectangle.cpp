@@ -1,5 +1,6 @@
 #include "rectangle.hpp"
 #include <iostream>
+
 averenkov::Rectangle::Rectangle(averenkov::point_t a_, averenkov::point_t c_):
   a(a_),
   c(c_)
@@ -52,6 +53,10 @@ void averenkov::Rectangle::move(double x_plus, double y_plus)
 
 double averenkov::Rectangle::getArea() const
 {
+  if ((c.x - a.x) * (c.y - a.y) < 0)
+  {
+    return -((c.x - a.x) * (c.y - a.y));
+  }
   return (c.x - a.x) * (c.y - a.y);
 }
 

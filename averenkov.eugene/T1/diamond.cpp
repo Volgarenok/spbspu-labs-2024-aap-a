@@ -2,20 +2,65 @@
 #include <cmath>
 #include <iostream>
 averenkov::Diamond::Diamond(point_t a_, point_t b_, point_t c_):
-  a(a_),
-  b(b_),
-  c(c_)
+  rectangles(nullptr), widthR(1.0), heightR(1.0)
 {
+  rectangles = buildRectangles(a_, b_, c_);
 }
 
 double averenkov::Diamond::getArea() const
 {
-  double p = (averenkov::getLine(a, b) + averenkov::getLine(b, c) + averenkov::getLine(a, c)) / 2;
-  return std::sqrt(p * (p - averenkov::getLine(a, b)) * (p - averenkov::getLine(b, c)) * (p - averenkov::getLine(a, c))) * 4;
+//  double p = (averenkov::getLine(a, b) + averenkov::getLine(b, c) + averenkov::getLine(a, c)) / 2;
+//  return std::sqrt(p * (p - averenkov::getLine(a, b)) * (p - averenkov::getLine(b, c)) * (p - averenkov::getLine(a, c))) * 4;
+  return rectangles[1]->getArea() * 40;
 }
 
 averenkov::rectangle_t averenkov::Diamond::getFrameRect() const
 {
+  double x_sum, y_sum;
+  for (size_t i = 0; i < 40; i++)
+  {
+    x_sum += rectangles[i]->getFrameRect().pos.x;
+    y_sum += rectangles[i]->getFrameRect().pos.y;
+  }
+  point_t center = { x_sum / 40, y_sum / 40 };
+  double width = widthR * 8;
+  double height = heightR * 8;
+  return { width, height, center };
+}
+
+void averenkov::Diamond::scale(double factor)
+{
+  if (factor <= 0)
+  {
+    throw "invalid scale";
+  }
+  for (size_t i; i < 40; i++)
+  {
+    rectangles[i]->scale(factor);
+  }
+}
+
+void averenkov::Diamond::move(point_t s)
+{
+  point_t center = this->getFrameRect().pos;
+  double moveX = s.x - center.x;
+  double moveY = s.y - center.y;
+  for (size_t i; i < 40; i++)
+  {
+    rectangles[i]->move(moveX, moveY);
+  }
+}
+
+void averenkov::Diamond::move(double x_plus, double y_plus)
+{
+  for(size_t i = 0; i < 40; i++)
+  {
+    rectangles[i]->move(x_plus, y_plus);
+  }
+}
+averenkov::Rectangle** averenkov::Diamond::buildRectangles(const point_t a, const point_t b, const point_t c)
+{
+  Rectangle** rectangles = new Rectangle*[40];
   double width, height;
   point_t center;
   if ((a.x == b.x && a.y == c.y) || (a.x == c.x && a.y == b.y))
@@ -36,70 +81,8 @@ averenkov::rectangle_t averenkov::Diamond::getFrameRect() const
     height = (a.y - c.y + b.y - c.y) * 2;
     center = c;
   }
-  if (width < 0)
-  {
-    width = -width;
-  }
-  if (height < 0)
-  {
-    height = -height;
-  }
-  return { width, height, center };
-}
-
-void averenkov::Diamond::scale(double factor)
-{
-  if (factor <= 0)
-  {
-    throw "invalid scale";
-  }
-  point_t center = getFrameRect().pos;
-  a.x = center.x + (a.x - center.x) * factor;
-  a.y = center.y + (a.y - center.y) * factor;
-  b.x = center.x + (b.x - center.x) * factor;
-  b.y = center.y + (b.y - center.y) * factor;
-  c.x = center.x + (c.x - center.x) * factor;
-  c.y = center.y + (c.y - center.y) * factor;
-}
-
-void averenkov::Diamond::move(point_t s)
-{
-  point_t cen;
-  if (this->getFrameRect().pos.x == a.x && this->getFrameRect().pos.y == a.y)
-  {
-    cen = a;
-  }
-  if (this->getFrameRect().pos.x == b.x && this->getFrameRect().pos.y == b.y)
-  {
-    cen = b;
-  }
-  if (this->getFrameRect().pos.x == c.x && this->getFrameRect().pos.y == c.y)
-  {
-    cen = c;
-  }
-  a.x = a.x - cen.x + s.x;
-  a.y = a.y - cen.y + s.y;
-  b.x = b.x - cen.x + s.x;
-  b.y = b.y - cen.y + s.y;
-  c.x = c.x - cen.x + s.x;
-  c.y = c.y - cen.y + s.y;
-}
-
-void averenkov::Diamond::move(double x_plus, double y_plus)
-{
-  a.x += x_plus;
-  b.x += x_plus;
-  c.x += x_plus;
-  a.y += y_plus;
-  b.y += y_plus;
-  c.y += y_plus;
-}
-averenkov::Rectangle** averenkov::Diamond::buildRectangles()
-{
-  Rectangle** rectangles = new Rectangle*[40];
-  point_t center = this->getFrameRect().pos;
-  double widthR = this->getFrameRect().width / 8;
-  double heightR = this->getFrameRect().height / 8;
+  widthR = width / 8;
+  heightR = height / 8;
   size_t index = 0;
   for (size_t quadrant = 0; quadrant < 4; ++quadrant)
   {
