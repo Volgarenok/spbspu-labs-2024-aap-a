@@ -19,7 +19,7 @@ namespace gavrilova {
   private:
     size_t size_;
     Triangle** triangles_;
-    void clear(size_t created);
+    void clear();
   };
 }
 #endif
