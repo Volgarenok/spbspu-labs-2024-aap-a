@@ -8,8 +8,16 @@
 
 namespace kushekbaev
 {
-  Concave::Concave(point_t first, point_t second, point_t third, point_t final):
-    first_(first), second_(second), third_(third), final_(final)
+  Concave::Concave(point_t first,
+    point_t second,
+  point_t third,
+  point_t final):
+  first_(first),
+  second_(second),
+  third_(third),
+  final_(final),
+  parallelogram1_(first_, second_, third_),
+  parallelogram2_(second_, third_, final_)
   {
     if (!isTriangle(first, second, third) || !isPointInsideTriangle(first, second, third, final))
     {
