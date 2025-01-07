@@ -3,6 +3,10 @@
 #include <iostream>
 #include "shape.hpp"
 #include "base-types.hpp"
+#include "rectangle.hpp"
+#include "triangle.hpp"
+#include "circle.hpp"
+#include "square.hpp"
 
 namespace komarova
 {

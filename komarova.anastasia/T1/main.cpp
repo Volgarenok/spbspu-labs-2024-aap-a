@@ -14,6 +14,10 @@ int main()
   constexpr int size = 100000;
   komarova::Shape* shapes[size] = {};
   bool wrong_shape = false;
+  int count = 0;
+  double x_sc = 0.0;
+  double y_sc = 0.0;
+  double coef = 1.0;
 
   try
   {

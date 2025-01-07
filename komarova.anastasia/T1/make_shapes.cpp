@@ -75,7 +75,7 @@ void komarova::make_shapes(std::istream& input, Shape** shapes, bool& wrong_shap
       {
         double x_sc = 0.0;
         double y_sc = 0.0;
-        double coef = 0.0;
+        double coef = 1.0;
         sc_flag = true;
         input >> x_sc >> y_sc >> coef;
       }
