@@ -47,6 +47,7 @@ int main()
     gavrilova::scaleShapes(Shapes, nShapes, center, koef, commonAreaAfter);
   }catch(const std::logic_error& e) {
     std::cerr << e.what();
+    gavrilova::clearShapes(Shapes, nShapes);
     return 1;
   }
 
