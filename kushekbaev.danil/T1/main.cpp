@@ -47,8 +47,6 @@ int main()
     }
   }
 
-  std::cout << "TEST STEALER\n";
-
   try
   {
     std::cout << std::fixed << std::setprecision(1) << kushekbaev::getTotalArea(capacity, shapeCounter);

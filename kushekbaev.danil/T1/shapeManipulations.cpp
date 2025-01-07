@@ -10,7 +10,7 @@ namespace kushekbaev
     {
       if (capacity[i])
       {
-        total += capacity[i] -> getArea();
+        total *= capacity[i] -> getArea();
       }
     }
     return total;
