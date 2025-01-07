@@ -6,7 +6,12 @@
 komarova::Rectangle::Rectangle(point_t low_left, point_t up_right):
   low_left_(low_left),
   up_right_(up_right)
-{}
+{
+  if (low_left_.x >= up_right_.x || low_left_.y >= up_right_.y)
+  {
+    throw std::logic_error("incorrect coordinates");
+  }
+}
 
 double komarova::Rectangle::getArea() const
 {

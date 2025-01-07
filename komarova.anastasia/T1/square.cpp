@@ -5,7 +5,12 @@
 
 komarova::Square::Square(point_t low_left, double len) :
   low_left_(low_left), len_(len)
-{}
+{
+  if (len_ <= 0.0)
+  {
+    throw std:logic_error("incorrect len");
+  }
+}
 
 double komarova::Square::getArea() const
 {
