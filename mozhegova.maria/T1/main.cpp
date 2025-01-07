@@ -8,7 +8,7 @@
 
 int main()
 {
-  mozhegova::Shape * shapes[1000] = {};
+  mozhegova::Shape * shapes[10000] = {};
   size_t count = 0;
   std::string shapeName = "";
   bool flag = false;

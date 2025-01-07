@@ -2,8 +2,10 @@
 #include <cmath>
 #include <stdexcept>
 
-mozhegova::Diamond::Diamond(point_t p1, point_t p2, point_t p3) :
-  pCent(p1), pVert(p2), pHori(p3)
+mozhegova::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
+  pCent(p1),
+  pVert(p2),
+  pHori(p3)
 {}
 
 double mozhegova::Diamond::getArea() const

@@ -5,7 +5,7 @@
 
 namespace mozhegova
 {
-  class Rectangle : public Shape
+  class Rectangle final: public Shape
   {
   public:
     Rectangle(point_t lowLef, point_t uppRig);
@@ -15,8 +15,8 @@ namespace mozhegova
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    point_t lowerLeft = {0.0, 0.0};
-    point_t upperRight = {0.0, 0.0};
+    point_t lowerLeft;
+    point_t upperRight;
   };
 }
 

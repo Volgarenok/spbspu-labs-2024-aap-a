@@ -31,9 +31,7 @@ mozhegova::Diamond* mozhegova::makeDiamond(std::istream& in)
   point_t pVert = {p3, p4};
   point_t pHori = {p5, p6};
   point_t p = {0, 0};
-  if (pCent.x == pVert.x && pCent.y == pHori.y)
-  {}
-  else if (pCent.x == pHori.x && pCent.y == pVert.y)
+  if (pCent.x == pHori.x && pCent.y == pVert.y)
   {
     p = pVert;
     pVert = pHori;
@@ -65,7 +63,7 @@ mozhegova::Diamond* mozhegova::makeDiamond(std::istream& in)
     pHori = pCent;
     pCent = p;
   }
-  else
+  else if (!(pCent.x == pVert.x && pCent.y == pHori.y))
   {
     throw std::invalid_argument("Incorrect coordinates");
   }

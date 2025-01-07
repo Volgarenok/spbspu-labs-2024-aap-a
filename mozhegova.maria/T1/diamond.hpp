@@ -5,7 +5,7 @@
 
 namespace mozhegova
 {
-  class Diamond : public Shape
+  class Diamond final: public Shape
   {
   public:
     Diamond(point_t p1, point_t p2, point_t p3);
@@ -15,9 +15,9 @@ namespace mozhegova
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    point_t pCent = {0.0, 0.0};
-    point_t pVert = {0.0, 0.0};
-    point_t pHori = {0.0, 0.0};
+    point_t pCent;
+    point_t pVert;
+    point_t pHori;
   };
 }
 

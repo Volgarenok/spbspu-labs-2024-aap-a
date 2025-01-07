@@ -1,6 +1,6 @@
 #include "shapeManipulator.hpp"
 
-double mozhegova::sumArea(Shape ** shapes, size_t n)
+double mozhegova::sumArea(const Shape * const * shapes, size_t n)
 {
   double sum = 0;
   for (size_t i = 0; i < n; i++)
@@ -10,7 +10,7 @@ double mozhegova::sumArea(Shape ** shapes, size_t n)
   return sum;
 }
 
-void mozhegova::printCoorRect(Shape ** shapes, size_t n)
+void mozhegova::printCoorRect(const Shape * const * shapes, size_t n)
 {
   for (size_t i = 0; i < n; i++)
   {

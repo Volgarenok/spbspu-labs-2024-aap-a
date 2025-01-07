@@ -1,6 +1,6 @@
 #include "rectangle.hpp"
 
-mozhegova::Rectangle::Rectangle(point_t lowLef, point_t uppRig) :
+mozhegova::Rectangle::Rectangle(point_t lowLef, point_t uppRig):
   lowerLeft(lowLef),
   upperRight(uppRig)
 {}

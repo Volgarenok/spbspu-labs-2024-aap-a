@@ -6,8 +6,9 @@ mozhegova::Polygon::~Polygon()
   delete[] points;
 }
 
-mozhegova::Polygon::Polygon(size_t n, point_t * arr) :
-  count(n), points(new point_t[n])
+mozhegova::Polygon::Polygon(size_t n, const point_t * arr):
+  count(n),
+  points(new point_t[n])
 {
   for (size_t i = 0; i < count; i++)
   {
