@@ -1,7 +1,6 @@
 #include <iostream>
 #include "createShape.hpp"
 #include "shapeChanger.hpp"
-#include "circle.hpp"
 
 int main()
 {
@@ -59,8 +58,6 @@ int main()
     {
         try
         {
-            shapes[shapeCount] = balashov::makeRegular(std::cin);
-            shapeCount++;
         }
         catch (const std::invalid_argument&)
         {
