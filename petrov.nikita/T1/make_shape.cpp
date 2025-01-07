@@ -1,5 +1,5 @@
 #include <cstring>
-#include <input_cstring.hpp>
+#include "input_cstring_until_ws.hpp"
 #include "make_shape.hpp"
 #include "shape.hpp"
 #include "rectangle.hpp"
@@ -12,11 +12,8 @@ petrov::Shape * petrov::makeShape(std::istream & in)
   const char CONCAVE[8] = "CONCAVE";
   const char SCALE[6] = "SCALE";
   char * type_of_shape = nullptr;
-  type_of_shape = new char[14];
-  for (size_t i = 0; i < 14; i++)
-  {
-    type_of_shape[i] = '0';
-  }
+  size_t capacity = 1;
+  type_of_shape = inputCStringUntilWS(in, capacity);
   if (!strcmp(type_of_shape, RECTANGLE))
   {
     delete[] type_of_shape;

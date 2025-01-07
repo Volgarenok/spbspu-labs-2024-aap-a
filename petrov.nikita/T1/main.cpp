@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <cstring>
 #include "shape.hpp"
 #include "make_shape.hpp"
 #include "clear_memory.hpp"
@@ -34,7 +35,7 @@ int main()
       continue;
     }
   }
-  while (shapes_massive[created - 1] && !std::cin.eof());
+  while ((shapes_massive[created - 1] != nullptr || created == 0) && !std::cin.eof() && std::cin);
   if (std::cin.eof())
   {
     petrov::clearMemory(shapes_massive, created);
@@ -42,6 +43,7 @@ int main()
     return 1;
   }
   created--;
+  std::clog << "Out from cycle\n";
   if (created == 0)
   {
     std::cerr << "ERROR: Nothing to scale\n";
