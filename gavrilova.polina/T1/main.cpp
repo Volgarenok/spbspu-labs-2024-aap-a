@@ -16,7 +16,7 @@ int main()
   size_t nError = 0;
   double commonAreaBefore = 0;
 
-  while (!std::cin.eof() && std::cin) {
+  while (!std::cin.eof() && std::cin && koef <= 0) {
     try {
       Shapes[nShapes] = gavrilova::make_shape(std::cin, center, koef, nError);
     } catch (const std::exception& e) {
@@ -26,15 +26,13 @@ int main()
     if (Shapes[nShapes]) {
       commonAreaBefore += Shapes[nShapes]->getArea();
       ++nShapes;
-    } else if (koef > 0 || std::cin.eof()) {
-      break;
     }
   }
-  if (koef <= 0) {
+  /* if (koef <= 0) {
     std::cerr << "Kоэфицент не введен или введен неправильно\n";
     gavrilova::clearShapes(Shapes, nShapes);
     return 1;
-  }
+  } */
   if (nError) {
     std::cerr << "Возникли ошибки при вводе фигур\n";
   }
@@ -45,8 +43,12 @@ int main()
   gavrilova::outRectangles(std::cout, Shapes, nShapes);
 
   double commonAreaAfter = 0;
-
-  gavrilova::scaleShapes(Shapes, nShapes, center, koef, commonAreaAfter);
+  try {
+    gavrilova::scaleShapes(Shapes, nShapes, center, koef, commonAreaAfter);
+  }catch(const std::logic_error& e) {
+    std::cerr << e.what();
+  }
+  
 
   std::cout << std::fixed << std::setprecision(1) << commonAreaAfter;
   gavrilova::outRectangles(std::cout, Shapes, nShapes);

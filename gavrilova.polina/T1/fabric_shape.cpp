@@ -33,14 +33,12 @@ namespace {
   gavrilova::Rectangle* make_rectangle(size_t& nSpaces, size_t& nError) {
     const int nVertRect = 2;
     if (nSpaces != 2* nVertRect) {
-      //delete[] line;
       ++nError;
       return nullptr;
     }
 
     gavrilova::point_t verteces[nVertRect] = {};
     read_verteces_from_line(verteces, nVertRect);
-    //delete[] line;
 
     gavrilova::Rectangle* rect = nullptr;
     try {
@@ -54,14 +52,12 @@ namespace {
   gavrilova::Triangle* make_triangle(size_t& nSpaces, size_t& nError) {
     const int nVertTriang = 3;
     if (nSpaces != 2* nVertTriang) {
-      //delete[] line;
       ++nError;
       return nullptr;
     }
 
     gavrilova::point_t verteces[nVertTriang] = {};
     read_verteces_from_line(verteces, nVertTriang);
-    //delete[] line;
 
     gavrilova::Triangle* triang = nullptr;
     try {
@@ -76,7 +72,6 @@ namespace {
     const int minNVertPolygon = 3;
     if (nSpaces < 2* minNVertPolygon || nSpaces % 2 != 0) {
       ++nError;
-      //delete[] line;
       return nullptr;
     }
     size_t nPoints = nSpaces / 2;
@@ -85,11 +80,10 @@ namespace {
       verteces = new gavrilova::point_t[nPoints]{};
     } catch (const std::bad_alloc&) {
       ++nError;
-      //delete[] line;
       return nullptr;
     }
     read_verteces_from_line(verteces, nPoints);
-    //delete[] line;
+  
     if (hasSameVerteces(verteces, nPoints)) {
       delete[] verteces;
       ++nError;
@@ -109,7 +103,6 @@ namespace {
   gavrilova::Ellipse* make_ellipse(size_t& nSpaces, size_t& nError) {
     if (nSpaces != 4) {
         ++nError;
-        //delete[] line;
         return nullptr;
     }
 
@@ -120,7 +113,6 @@ namespace {
 
     if (!cXStr || !cYStr || !rXStr || !rYStr) {
         ++nError;
-        //delete[] line;
         return nullptr;
     }
 
@@ -131,11 +123,9 @@ namespace {
 
     try {
         gavrilova::Ellipse* ellipse = new gavrilova::Ellipse({x, y}, radiusX, radiusY);
-        //delete[] line;
         return ellipse;
     }catch (const std::exception&) {
         ++nError;
-        //delete[] line;
         return nullptr;
     }
   }
@@ -172,7 +162,6 @@ gavrilova::Shape* gavrilova::make_shape(std::istream& in, gavrilova::point_t& ce
     center.y = std::atof(cYStr);
     char* koefStr = std::strtok(nullptr, " ");
     koef = std::atof(koefStr);
-    //delete[] line;
   }
   delete[] line;
   return new_shape;
