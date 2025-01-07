@@ -62,7 +62,7 @@ namespace {
     gavrilova::point_t verteces[nVertTriang] = {};
     read_verteces_from_line(verteces, nVertTriang);
     delete[] line;
-    
+
     gavrilova::Triangle* triang = nullptr;
     try {
       triang = new gavrilova::Triangle(verteces[0], verteces[1], verteces[2]);
