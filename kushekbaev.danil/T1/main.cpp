@@ -47,6 +47,8 @@ int main()
     }
   }
 
+  std::cout << "TEST STEALER\n";
+
   try
   {
     std::cout << std::fixed << std::setprecision(1) << kushekbaev::getTotalArea(capacity, shapeCounter);
@@ -69,5 +71,6 @@ int main()
     kushekbaev::clearMemory(capacity, shapeCounter);
     return 1;
   }
+
   return 0;
 }

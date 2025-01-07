@@ -17,22 +17,18 @@ namespace kushekbaev
         if (shapeName == "RECTANGLE")
         {
           capacity[shapeCounter++] = kushekbaev::makeRectangle(input);
-          std::cout << "Sorry, but i need to steal tests\n";
         }
           else if (shapeName == "CONCAVE")
         {
           capacity[shapeCounter++] = kushekbaev::makeConcave(input);
-          std::cout << "Sorry, but i need to steal tests\n";
         }
         else if (shapeName == "PARALLELOGRAM")
         {
           capacity[shapeCounter++] = kushekbaev::makeParallelogram(input);
-          std::cout << "Sorry, but i need to steal tests\n";
         }
         else if (shapeName == "DIAMOND")
         {
           capacity[shapeCounter++] = kushekbaev::makeDiamond(input);
-          std::cout << "Sorry, but i need to steal tests\n";
         }
         else if (shapeName == "SCALE")
         {
