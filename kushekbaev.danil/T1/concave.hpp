@@ -2,7 +2,6 @@
 #define CONCAVE_HPP
 
 #include "shape.hpp"
-#include "parallelogram.hpp"
 
 namespace kushekbaev
 {
@@ -21,8 +20,6 @@ namespace kushekbaev
     point_t second_;
     point_t third_;
     point_t final_;
-    Parallelogram parallelogram1_;
-    Parallelogram parallelogram2_;
   };
 }
 
