@@ -4,17 +4,17 @@
 #include "base-types.hpp"
 namespace petrov
 {
-  struct Rectangle: petrov::Shape
+  struct Rectangle final: Shape
   {
   public:
-    Rectangle(petrov::point_t p1, petrov::point_t p2);
+    Rectangle(point_t p1, point_t p2);
     double getArea() const override;
-    petrov::rectangle_t getFrameRect() const override;
-    void move(petrov::point_t concrete_point) override;
+    rectangle_t getFrameRect() const override;
+    void move(point_t concrete_point) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    petrov::point_t p1_, p2_, p3_, p4_;
+    point_t p1_, p2_;
   };
 }
 #endif

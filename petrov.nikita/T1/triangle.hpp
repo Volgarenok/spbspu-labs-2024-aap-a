@@ -4,17 +4,17 @@
 #include "base-types.hpp"
 namespace petrov
 {
-  struct Triangle: petrov::Shape
+  struct Triangle final: Shape
   {
   public:
-    Triangle(petrov::point_t p1, petrov::point_t p2, petrov::point_t p3);
+    Triangle(point_t p1, point_t p2, point_t p3);
     double getArea() const override;
-    petrov::rectangle_t getFrameRect() const override;
-    void move(petrov::point_t concrete_point) override;
+    rectangle_t getFrameRect() const override;
+    void move(point_t concrete_point) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    petrov::point_t p1_, p2_, p3_;
+    point_t p1_, p2_, p3_;
   };
 }
 #endif

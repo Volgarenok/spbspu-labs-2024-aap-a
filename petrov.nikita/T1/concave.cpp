@@ -11,31 +11,31 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   {
     throw "NOTE: Scaling of some figures skipped due to their invalid description\n";
   }
-  double a = sqrt(pow((p1_.x - p2_.x), 2) + pow((p1_.y - p2_.y), 2));
-  double b = sqrt(pow((p3_.x - p2_.x), 2) + pow((p3_.y - p2_.y), 2));
-  double c = sqrt(pow((p1_.x - p3_.x), 2) + pow((p1_.y - p3_.y), 2));
+  double a = std::sqrt(std::pow((p1_.x - p2_.x), 2) + std::pow((p1_.y - p2_.y), 2));
+  double b = std::sqrt(std::pow((p3_.x - p2_.x), 2) + std::pow((p3_.y - p2_.y), 2));
+  double c = std::sqrt(std::pow((p1_.x - p3_.x), 2) + std::pow((p1_.y - p3_.y), 2));
   if (a + b <= c || a + c <= b || b + c <= a)
   {
     throw "NOTE: Scaling of some figures skipped due to their invalid description\n";
   }
   double p = (a + b + c) / 2;
-  double area_of_triangle = sqrt(p * (p - a) * (p - b) * (p - c));
-  a = sqrt(pow((p2_.x - p3_.x), 2) + pow((p2_.y - p3_.y), 2));
-  b = sqrt(pow((p3_.x - p4_.x), 2) + pow((p3_.y - p4_.y), 2));
-  c = sqrt(pow((p2_.x - p4_.x), 2) + pow((p2_.y - p4_.y), 2));
+  double area_of_triangle = std::sqrt(p * (p - a) * (p - b) * (p - c));
+  a = std::sqrt(std::pow((p2_.x - p3_.x), 2) + std::pow((p2_.y - p3_.y), 2));
+  b = std::sqrt(std::pow((p3_.x - p4_.x), 2) + std::pow((p3_.y - p4_.y), 2));
+  c = std::sqrt(std::pow((p2_.x - p4_.x), 2) + std::pow((p2_.y - p4_.y), 2));
   p = (a + b + c) / 2;
-  double area_1 = sqrt(p * (p - a) * (p - b) * (p - c));
-  a = sqrt(pow((p2_.x - p1_.x), 2) + pow((p2_.y - p1_.y), 2));
-  b = sqrt(pow((p1_.x - p4_.x), 2) + pow((p1_.y - p4_.y), 2));
-  c = sqrt(pow((p2_.x - p4_.x), 2) + pow((p2_.y - p4_.y), 2));
+  double area_1 = std::sqrt(p * (p - a) * (p - b) * (p - c));
+  a = std::sqrt(std::pow((p2_.x - p1_.x), 2) + std::pow((p2_.y - p1_.y), 2));
+  b = std::sqrt(std::pow((p1_.x - p4_.x), 2) + std::pow((p1_.y - p4_.y), 2));
+  c = std::sqrt(std::pow((p2_.x - p4_.x), 2) + std::pow((p2_.y - p4_.y), 2));
   p = (a + b + c) / 2;
-  double area_2 = sqrt(p * (p - a) * (p - b) * (p - c));
-  a = sqrt(pow((p3_.x - p1_.x), 2) + pow((p3_.y - p1_.y), 2));
-  b = sqrt(pow((p1_.x - p4_.x), 2) + pow((p1_.y - p4_.y), 2));
-  c = sqrt(pow((p3_.x - p4_.x), 2) + pow((p3_.y - p4_.y), 2));
+  double area_2 = std::sqrt(p * (p - a) * (p - b) * (p - c));
+  a = std::sqrt(std::pow((p3_.x - p1_.x), 2) + std::pow((p3_.y - p1_.y), 2));
+  b = std::sqrt(std::pow((p1_.x - p4_.x), 2) + std::pow((p1_.y - p4_.y), 2));
+  c = std::sqrt(std::pow((p3_.x - p4_.x), 2) + std::pow((p3_.y - p4_.y), 2));
   p = (a + b + c) / 2;
-  double area_3 = sqrt(p * (p - a) * (p - b) * (p - c));
-  if (round(area_of_triangle) / 10 != round(area_1 + area_2 + area_3) / 10)
+  double area_3 = std::sqrt(p * (p - a) * (p - b) * (p - c));
+  if (std::round(area_of_triangle) / 10 != std::round(area_1 + area_2 + area_3) / 10)
   {
     throw "NOTE: Scaling of some figures skipped due to their invalid description\n";
   }
@@ -43,15 +43,15 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
 
 double petrov::Concave::getArea() const
 {
-  double a = sqrt(pow((p1_.x - p2_.x), 2) + pow((p1_.y - p2_.y), 2));
-  double b = sqrt(pow((p3_.x - p2_.x), 2) + pow((p3_.y - p2_.y), 2));
-  double c = sqrt(pow((p1_.x - p3_.x), 2) + pow((p1_.y - p3_.y), 2));
+  double a = std::sqrt(std::pow((p1_.x - p2_.x), 2) + std::pow((p1_.y - p2_.y), 2));
+  double b = std::sqrt(std::pow((p3_.x - p2_.x), 2) + std::pow((p3_.y - p2_.y), 2));
+  double c = std::sqrt(std::pow((p1_.x - p3_.x), 2) + std::pow((p1_.y - p3_.y), 2));
   double p = (a + b + c) / 2;
-  double area_without_cave = sqrt(p * (p - a) * (p - b) * (p - c));
-  a = sqrt(pow((p2_.x - p4_.x), 2) + pow((p2_.y - p4_.y), 2));
-  c = sqrt(pow((p4_.x - p3_.x), 2) + pow((p4_.y - p3_.y), 2));
+  double area_without_cave = std::sqrt(p * (p - a) * (p - b) * (p - c));
+  a = std::sqrt(std::pow((p2_.x - p4_.x), 2) + std::pow((p2_.y - p4_.y), 2));
+  c = std::sqrt(std::pow((p4_.x - p3_.x), 2) + std::pow((p4_.y - p3_.y), 2));
   p = (a + b + c) / 2;
-  double area_of_cave = sqrt(p * (p - a) * (p - b) * (p - c));
+  double area_of_cave = std::sqrt(p * (p - a) * (p - b) * (p - c));
   return area_without_cave - area_of_cave;
 }
 

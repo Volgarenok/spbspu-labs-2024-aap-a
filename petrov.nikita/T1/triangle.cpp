@@ -7,9 +7,9 @@ petrov::Triangle::Triangle(petrov::point_t p1, petrov::point_t p2, petrov::point
   p2_(p2),
   p3_(p3)
 {
-  double a = sqrt(pow((p1_.x - p2_.x), 2) + pow((p1_.y - p2_.y), 2));
-  double b = sqrt(pow((p3_.x - p2_.x), 2) + pow((p3_.y - p2_.y), 2));
-  double c = sqrt(pow((p1_.x - p3_.x), 2) + pow((p1_.y - p3_.y), 2));
+  double a = std::sqrt(std::pow((p1_.x - p2_.x), 2) + std::pow((p1_.y - p2_.y), 2));
+  double b = std::sqrt(std::pow((p3_.x - p2_.x), 2) + std::pow((p3_.y - p2_.y), 2));
+  double c = std::sqrt(std::pow((p1_.x - p3_.x), 2) + std::pow((p1_.y - p3_.y), 2));
   if (a + b <= c || a + c <= b || b + c <= a)
   {
     throw "NOTE: Scaling of some figures skipped due to their invalid description\n";
@@ -18,11 +18,11 @@ petrov::Triangle::Triangle(petrov::point_t p1, petrov::point_t p2, petrov::point
 
 double petrov::Triangle::getArea() const
 {
-  double a = sqrt(pow((p1_.x - p2_.x), 2) + pow((p1_.y - p2_.y), 2));
-  double b = sqrt(pow((p3_.x - p2_.x), 2) + pow((p3_.y - p2_.y), 2));
-  double c = sqrt(pow((p1_.x - p3_.x), 2) + pow((p1_.y - p3_.y), 2));
+  double a = std::sqrt(std::pow((p1_.x - p2_.x), 2) + std::pow((p1_.y - p2_.y), 2));
+  double b = std::sqrt(std::pow((p3_.x - p2_.x), 2) + std::pow((p3_.y - p2_.y), 2));
+  double c = std::sqrt(std::pow((p1_.x - p3_.x), 2) + std::pow((p1_.y - p3_.y), 2));
   double p = (a + b + c) / 2;
-  return sqrt(p * (p - a) * (p - b) * (p - c));
+  return std::sqrt(p * (p - a) * (p - b) * (p - c));
 }
 
 petrov::rectangle_t petrov::Triangle::getFrameRect() const
@@ -32,8 +32,8 @@ petrov::rectangle_t petrov::Triangle::getFrameRect() const
   double xmin = std::min(std::min(p1_.x, p2_.x), p3_.x);
   double ymax = std::max(std::max(p1_.y, p2_.y), p3_.y);
   double ymin = std::min(std::min(p1_.y, p2_.y), p3_.y);
-  frame_rect.width = abs(xmax - xmin);
-  frame_rect.height = abs(ymax - ymin);
+  frame_rect.width = std::abs(xmax - xmin);
+  frame_rect.height = std::abs(ymax - ymin);
   frame_rect.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
   return frame_rect;
 }
