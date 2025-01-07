@@ -43,7 +43,6 @@ int main()
     return 1;
   }
   created--;
-  std::clog << "Out from cycle\n";
   if (created == 0)
   {
     std::cerr << "ERROR: Nothing to scale\n";
