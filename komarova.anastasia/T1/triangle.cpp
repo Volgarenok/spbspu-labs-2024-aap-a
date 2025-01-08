@@ -13,7 +13,7 @@ komarova::Triangle::Triangle(point_t a, point_t b, point_t c):
   double ab = std::sqrt((a_.x - b_.x) * (a_.x - b_.x) + (a_.y - b_.y) * (a_.y - b_.y));
   double bc = std::sqrt((b_.x - c_.x) * (b_.x - c_.x) + (b_.y - c_.y) * (b_.y - c_.y));
   double ac = std::sqrt((a_.x - c_.x) * (a_.x - c_.x) + (a_.y - c_.y) * (a_.y - c_.y));
-  if ((ab + bc) < ac || (bc + ac) < ab || (ab + ac) < bc)
+  if ((ab + bc) < ac || (bc + ac) < ab || (ab + ac) < bc))
   {
     throw std::logic_error("incorrect triangle");
   }
