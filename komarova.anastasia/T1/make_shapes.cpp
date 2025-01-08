@@ -9,9 +9,8 @@
 #include "triangle.hpp"
 #include "square.hpp"
 
-int komarova::make_shapes(std::istream& input, Shape** shapes, bool& wrong_shape)
+void komarova::make_shapes(std::istream& input, Shape** shapes, bool& wrong_shape, int& count)
 {
-  int count = 0;
   bool sc_flag = false;
   while (!sc_flag)
   {
@@ -25,49 +24,66 @@ int komarova::make_shapes(std::istream& input, Shape** shapes, bool& wrong_shape
     {
       if (figure == "RECTANGLE")
       {
+        point_t a;
+        point_t b;
+        input >> a.x >> a.y >> b.x >> b.y;
         try
         {
-          shapes[count] = make_rect(input);
+          shapes[count] = new Rectangle(a, b);
           count++;
         }
         catch (const std::logic_error& e)
         {
+          delete shapes[count];
           wrong_shape = true;
         }
       }
       else if (figure == "CIRCLE")
       {
+        point_t point_c;
+        double radius;
+        input >> point_c.x >> point_c.y >> radius;
         try
         {
-          shapes[count] = make_circ(input);
+          shapes[count] = new Circle(point_c, radius);
           count++;
         }
         catch (const std::logic_error& e)
         {
+          delete shapes(count);
           wrong_shape = true;
         }
       }
       else if (figure == "TRIANGLE")
       {
+        point_t a;
+        point_t b;
+        point_t c;
+        input >> a.x >> a.y >> b.x >> b.y >> c.x >> c.y;
         try
         {
-          shapes[count] = make_tri(input);
+          shapes[count] = new Triangle(a, b, c);
           count++;
         }
         catch (const std::logic_error& e)
         {
+          delete shapes[count];
           wrong_shape = true;
         }
       }
       else if (figure == "SQUARE")
       {
+        double len;
+        point_t low_left;
+        input >> low_left.x >> low_left.y >> len;
         try
         {
-          shapes[count] = make_sqr(input);
+          shapes[count] = new Square(low_left, len);
           count++;
         }
         catch (const std::logic_error& e)
         {
+          delete shaprs(count);
           wrong_shape = true;
         }
       }
@@ -78,11 +94,13 @@ int komarova::make_shapes(std::istream& input, Shape** shapes, bool& wrong_shape
           std::cerr << "nothig to scale \n";
           return 1;
         }
+
         double x_sc = 0.0;
         double y_sc = 0.0;
         double coef = 1.0;
         sc_flag = true;
         input >> x_sc >> y_sc >> coef;
+
         if (coef <= 0)
         {
           delete_shapes(shapes);
@@ -146,49 +164,4 @@ void komarova::delete_shapes(Shape** shapes)
   {
     delete shapes[i];
   }
-}
-
-komarova::Rectangle* komarova::make_rect(std::istream& input)
-{
-  point_t low_left;
-  point_t up_right;
-  if (!(input >> low_left.x >> low_left.y >> up_right.x >> up_right.y))
-  {
-    throw std::logic_error("incorrect input");
-  }
-  return new Rectangle(low_left, up_right);
-}
-
-komarova::Circle* komarova::make_circ(std::istream& input)
-{
-  point_t point_c;
-  double radius;
-  if (!(input >> point_c.x >> point_c.y >> radius))
-  {
-    throw std::logic_error("incorrect input");
-  }
-  return new Circle(point_c, radius);
-}
-
-komarova::Triangle* komarova::make_tri(std::istream& input)
-{
-  point_t a;
-  point_t b;
-  point_t c;
-  if (!(input >> a.x >> a.y >> b.x >> b.y >> c.x >> c.y))
-  {
-    throw std::logic_error("incorrect input");
-  }
-  return new Triangle(a, b, c);
-}
-
-komarova::Square* komarova::make_sqr(std::istream& input)
-{
-  point_t low_left;
-  double len;
-  if (!(input >> low_left.x >> low_left.y >> len))
-  {
-    throw std::logic_error("incorrect input");
-  }
-  return new Square(low_left, len);
 }
