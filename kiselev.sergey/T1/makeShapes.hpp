@@ -8,10 +8,10 @@
 #include "rectangle.hpp"
 namespace kiselev
 {
-  Rectangle* make_rectangle(std::istream& input);
-  Diamond* make_diamond(std::istream& input);
-  Complexquad* make_complexquad(std::istream& input);
-  point_t make_scale(std::istream& input);
-  void make_shape(std::string & str, Shape * shape, CompositeShape & compShp);
+  Rectangle* makeRectangle(std::istream& input);
+  Diamond* makeDiamond(std::istream& input);
+  Complexquad* makeComplexquad(std::istream& input);
+  point_t makeScale(std::istream& input);
+  void makeShape(std::string & str, Shape * shape, CompositeShape & compShp);
 }
 #endif

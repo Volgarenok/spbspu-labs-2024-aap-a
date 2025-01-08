@@ -25,10 +25,10 @@ int main()
     }
     try
     {
-      kiselev::make_shape(titleShape, shape, compShp);
+      kiselev::makeShape(titleShape, shape, compShp);
       if (titleShape == "SCALE")
       {
-        scale = kiselev::make_scale(std::cin);
+        scale = kiselev::makeScale(std::cin);
         std::cin >> ratio;
         if (ratio <= 0)
         {

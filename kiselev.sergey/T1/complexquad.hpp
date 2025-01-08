@@ -6,7 +6,7 @@ namespace kiselev
   class Complexquad final : public Shape
   {
   public:
-    Complexquad(point_t p1, point_t p2, point_t p3, point_t p4) noexcept;
+    Complexquad(point_t p1, point_t p2, point_t p3, point_t p4);
     double getArea() const noexcept override;
     rectangle_t getFrameRect() const noexcept override;
     void move(point_t a) noexcept override;

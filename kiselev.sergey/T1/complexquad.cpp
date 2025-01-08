@@ -1,13 +1,49 @@
 #include "complexquad.hpp"
 #include <algorithm>
 #include <cmath>
+#include <stdexcept>
 #include "base-types.hpp"
-kiselev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4) noexcept :
+namespace
+{
+  bool isTriangle(kiselev::point_t p1, kiselev::point_t p2, kiselev::point_t p3)
+  {
+    double lenght1 = std::sqrt(std::pow(p2.x - p1.x, 2) + std::pow(p2.y - p1.y, 2));
+    double lenght2 = std::sqrt(std::pow(p3.x - p1.x, 2) + std::pow(p3.y - p1.y, 2));
+    double lenght3 = std::sqrt(std::pow(p2.x - p3.x, 2) + std::pow(p2.y - p3.y, 2));
+    return lenght1 < lenght2 + lenght3 || lenght2 < lenght1 + lenght3 || lenght3 < lenght1 + lenght2;
+  }
+  kiselev::point_t findIntersectionPoint(kiselev::point_t p1, kiselev::point_t p2, kiselev::point_t p3, kiselev::point_t p4, bool& isIntersect)
+  {
+    double A1 = p2.y - p1.y;
+    double B1 = p2.x - p1.x;
+    double C1 = p1.x * A1 + p1.y * B1;
+    double A2 = p4.y - p3.y;
+    double B2 = p4.x - p3.x;
+    double C2 = p3.x * (A2) + p3.y * (B2);
+    double determiner = A1 * B2 - B1 * A2;
+    if (determiner == 0)
+    {
+      isIntersect = false;
+      return { 0, 0 };
+    }
+    isIntersect = true;
+    double x = (C1 * B2 - C2 * B1) / determiner;
+    double y = (C2 * A1 - A2 * C1) / determiner;
+    return { x, y };
+  }
+}
+kiselev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4) :
   p1_(p1),
   p2_(p2),
   p3_(p3),
   p4_(p4)
 {
+  bool isIntersect = true;
+  point_t centre = findIntersectionPoint(p1, p2, p3, p4, isIntersect);
+  if (!isTriangle(p1, p4, centre) || !isTriangle(p2, p3, centre) || !isIntersect || (p4.x > p1.x && p3.x > p1.x))
+  {
+    throw std::invalid_argument("Incorrect coordinates");
+  }
 }
 kiselev::rectangle_t kiselev::Complexquad::getFrameRect() const noexcept
 {
