@@ -196,6 +196,11 @@ size_t tkach::CompositeShape::size() const noexcept
   return size_;
 }
 
+void tkach::CompositeShape::scaleUnsave(const double multiplier)
+{
+  doUnsaveIsoScaleShapes(shapes_, size_, multiplier, getFrameRect().pos);
+}
+
 void tkach::CompositeShape::scale(const double multiplier)
 {
   doSaveIsoScaleShapes(shapes_, size_, multiplier, getFrameRect().pos);

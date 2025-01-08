@@ -6,15 +6,25 @@
 #include "rectangle.hpp"
 #include "figureactions.hpp"
 #include "makeshapes.hpp"
+#include "composite-shape.hpp"
 
 using namespace tkach;
 
+namespace
+{
+  void deleteShapesFromCompositeShape(CompositeShape& shapes_array)
+  {
+    for (size_t i = 0; i < shapes_array.size(); ++i)
+    {
+      delete shapes_array[i];
+    }
+  }
+}
 int main()
 {
-  Shape* shapes_array[10000] = {};
+  CompositeShape shapes_array;
   std::string shape_name = "";
   bool incorrect_shape = false;
-  size_t counter_of_shapes = 0;
   double scale_coef = 0.0;
   point_t scale_point;
   while(!std::cin.eof() && shape_name != "SCALE")
@@ -26,21 +36,21 @@ int main()
     }
     try
     {
-      shapes_array[counter_of_shapes] = make_shape(std::cin, shape_name);
-      if (shapes_array[counter_of_shapes] != nullptr)
+      Shape* shape = make_shape(std::cin, shape_name);
+      if (shape != nullptr)
       {
-        counter_of_shapes++;
+        shapes_array.push_back(shape);
       }
-    }
-    catch(const std::bad_alloc& e)
-    {
-      deleteShapes(shapes_array, counter_of_shapes);
-      std::cerr << "Not enough memory\n";
-      return 1;
     }
     catch (const std::logic_error& e)
     {
       incorrect_shape = true;
+    }
+    catch (const std::exception& e)
+    {
+      deleteShapesFromCompositeShape(shapes_array);
+      std::cerr << e.what();
+      return 1;
     }
     if (shape_name == "SCALE")
     {
@@ -48,7 +58,7 @@ int main()
       std::cin >> scale_coef;
       if (scale_coef <= 0)
       {
-        deleteShapes(shapes_array, counter_of_shapes);
+        deleteShapesFromCompositeShape(shapes_array);
         std::cerr << "Error: scale coefficent need to be bigger than 0\n";
         return 1;
       }
@@ -56,7 +66,7 @@ int main()
   }
   if (std::cin.eof())
   {
-    deleteShapes(shapes_array, counter_of_shapes);
+    deleteShapesFromCompositeShape(shapes_array);
     std::cerr << "Error: not enough arguments\n";
     return 1;
   }
@@ -64,18 +74,27 @@ int main()
   {
     std::cerr << "Error with shapes discription\n";
   }
-  if (counter_of_shapes == 0)
+  if (shapes_array.size() == 0)
   {
-    deleteShapes(shapes_array, counter_of_shapes);
+    deleteShapesFromCompositeShape(shapes_array);
     std::cerr << "Zero correct shapes\n";
     return 1;
   }
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << getTotalArea(shapes_array, counter_of_shapes) << " ";
-  printCoordinatesOfAllFrameRects(std::cout, shapes_array, counter_of_shapes) << "\n";
-  doUnsaveIsoScaleShapes(shapes_array, counter_of_shapes, scale_coef, scale_point);
-  std::cout << getTotalArea(shapes_array, counter_of_shapes) << " ";
-  printCoordinatesOfAllFrameRects(std::cout, shapes_array, counter_of_shapes) << "\n";
-  deleteShapes(shapes_array, counter_of_shapes);
+  try
+  {
+    std::cout << shapes_array.getArea() << " ";
+    printAllFrameRectsFromCompShape(std::cout, shapes_array) << "\n";
+    doUnsaveIsoScaleCompShape(shapes_array, scale_coef, scale_point);
+    std::cout << shapes_array.getArea() << " ";
+    printAllFrameRectsFromCompShape(std::cout, shapes_array) << "\n";
+  }
+  catch (const std::exception& e)
+  {
+    deleteShapesFromCompositeShape(shapes_array);
+    std::cerr << e.what();
+    return 1;
+  }
+  deleteShapesFromCompositeShape(shapes_array);
   return 0;
 }
