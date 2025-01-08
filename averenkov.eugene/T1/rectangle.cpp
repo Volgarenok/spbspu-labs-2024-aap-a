@@ -1,12 +1,11 @@
 #include "rectangle.hpp"
-#include <iostream>
+#include <stdexcept>
 
 averenkov::Rectangle::Rectangle(averenkov::point_t a_, averenkov::point_t c_):
   a(a_),
   c(c_)
 {
 }
-
 
 void averenkov::Rectangle::move(averenkov::point_t s)
 {

@@ -5,7 +5,6 @@
 #include <cstdlib>
 #include <string>
 #include <cmath>
-#include "shape.hpp"
 #include "rectangle.hpp"
 #include "rectanglepoints.hpp"
 #include "dynamicinput.h"
@@ -14,7 +13,7 @@
 #include "getline.hpp"
 #include "shapeScale.hpp"
 #include "makeshape.hpp"
-#include "shapelist.hpp"
+
 int main()
 {
   averenkov::Shape* shapes[10000];
@@ -54,7 +53,7 @@ int main()
         }
         if (!(std::cin >> scale_center.x >> scale_center.y >> factor) || factor <= 0)
         {
-          for(size_t i = 0; i < shapeCount; ++i)
+          for (size_t i = 0; i < shapeCount; ++i)
           {
             delete shapes[i];
           }

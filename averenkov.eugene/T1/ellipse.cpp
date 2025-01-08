@@ -1,4 +1,5 @@
 #include "ellipse.hpp"
+#include <stdexcept>
 
 averenkov::Ellipse::Ellipse(point_t center_, double radius_v_, double radius_h_):
   center(center_),
