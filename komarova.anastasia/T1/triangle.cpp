@@ -32,7 +32,7 @@ komarova::rectangle_t komarova::Triangle::getFrameRect() const
 
 void komarova::Triangle::move(point_t point)
 {
-  point_t center = {(a_.x + b_.x + c_.x) / 3.0, (a_.y + b_.y + c_.y) / 3.0};
+  point_t center = getFrameRect().pos;
   double dx = point.x - center.x;
   double dy = point.y - center.y;
   move(dx, dy);
