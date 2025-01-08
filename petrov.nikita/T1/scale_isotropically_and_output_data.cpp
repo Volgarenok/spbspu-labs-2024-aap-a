@@ -25,7 +25,7 @@ void petrov::scaleIsotropicallyAndOutputData(petrov::point_t scale_point, double
     mv_dy *= k;
     shape[i]->move(mv_dx, mv_dy);
   }
-  std::cout << "\n";
+  std::cout << "\b\n";
   double second_sum_area = 0.0;
   for (size_t i = 0; i < created; i++)
   {
@@ -40,5 +40,5 @@ void petrov::scaleIsotropicallyAndOutputData(petrov::point_t scale_point, double
     std::cout << frame_rect.pos.x + (frame_rect.width / 2) << " ";
     std::cout << frame_rect.pos.y + (frame_rect.height / 2) << " ";
   }
-  std::cout << "\n";
+  std::cout << "\b\n";
 }
