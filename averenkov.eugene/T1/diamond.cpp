@@ -61,8 +61,8 @@ void averenkov::Diamond::move(double x_plus, double y_plus)
 averenkov::Rectangle** averenkov::Diamond::buildRectangles(const point_t a, const point_t b, const point_t c)
 {
   Rectangle** rectangles = new Rectangle*[40];
-  double width, height;
-  point_t center;
+  double width = 0, height = 0;
+  point_t center = { 0.0, 0.0 };
   if ((a.x == b.x && a.y == c.y) || (a.x == c.x && a.y == b.y))
   {
     width = (c.x - a.x + b.x - a.x) * 2;
@@ -80,6 +80,10 @@ averenkov::Rectangle** averenkov::Diamond::buildRectangles(const point_t a, cons
     width = (a.x - c.x + b.x - c.x) * 2;
     height = (a.y - c.y + b.y - c.y) * 2;
     center = c;
+  }
+  if (width == 0 || height == 0)
+  {
+    throw std::runtime_error("Invalid dimensions for rectangles");
   }
   widthR = width / 8;
   heightR = height / 8;

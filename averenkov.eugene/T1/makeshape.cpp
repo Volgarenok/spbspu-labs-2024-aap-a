@@ -52,15 +52,3 @@ void averenkov::makeEllipse(averenkov::Shape** shapes, size_t& shapeCount, std::
   shapes[shapeCount++] = ellip;
   return;
 }
-
-
-
-
-
-
-
-
-
-
-
-

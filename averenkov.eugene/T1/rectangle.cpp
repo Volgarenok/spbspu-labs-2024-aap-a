@@ -34,7 +34,7 @@ void averenkov::Rectangle::scale(double factor)
 {
   if (factor <= 0)
   {
-    throw "invalid scale";
+    throw std::logic_error("invalid scale");
   }
   point_t pos = Rectangle::getFrameRect().pos;
   a.x = pos.x - ((pos.x - a.x) * factor);

@@ -11,7 +11,7 @@ void averenkov::Ellipse::scale(double factor)
 {
   if (factor <= 0)
   {
-    throw "invalid input";
+    throw std::logic_error("invalid input");
   }
   radius_h *= factor;
   radius_v *= factor;
