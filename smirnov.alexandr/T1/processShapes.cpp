@@ -29,7 +29,7 @@ void smirnov::printFrameRect(Shape ** shapes, size_t count)
     double x2 = rectangle.pos.x + rectangle.width / 2.0;
     double y2 = rectangle.pos.y + rectangle.height / 2.0;
     std::cout << x1 << " " << y1 << " " << x2 << " " << y2;
-    if (i != count - i)
+    if (i != count - 1)
     {
       std::cout << " ";
     }
