@@ -11,9 +11,9 @@
 namespace komarova
 {
   void make_shapes(std::istream& input, Shape** shapes, bool& wrong_shape, int& count);
-  void area_sum(std::ostream& output, const Shape** shapes);
+  void area_sum(std::ostream& output, Shape** shapes);
   void scale(Shape** shapes, point_t point, double coef);
-  void frame_rect_xy(std::ostream& output, const Shape** shapes);
+  void frame_rect_xy(std::ostream& output, Shape** shapes);
   void delete_shapes(Shape** shapes);
 }
 

@@ -103,7 +103,7 @@ void komarova::make_shapes(std::istream& input, Shape** shapes, bool& wrong_shap
   }
 }
 
-void komarova::area_sum(std::ostream& output, const Shape** shapes)
+void komarova::area_sum(std::ostream& output, Shape** shapes)
 {
   double sum = 0.0;
   for (size_t i = 0; shapes[i] != nullptr; i++)
@@ -113,7 +113,7 @@ void komarova::area_sum(std::ostream& output, const Shape** shapes)
   output << sum;
 }
 
-void komarova::frame_rect_xy(std::ostream& output, const Shape** shapes)
+void komarova::frame_rect_xy(std::ostream& output, Shape** shapes)
 {
   for (size_t i =0; shapes[i] != nullptr; i++)
   {
