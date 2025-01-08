@@ -23,49 +23,7 @@ int main()
       return 1;
     }
     std::cin >> shapeName;
-    if (shapeName == "RECTANGLE")
-    {
-      try
-      {
-        shapes[count] = mozhegova::makeRectangle(std::cin);
-        count++;
-      }
-      catch (const std::invalid_argument& e)
-      {
-        flag = true;
-      }
-    }
-    else if (shapeName == "DIAMOND")
-    {
-      try
-      {
-        shapes[count] = mozhegova::makeDiamond(std::cin);
-        count++;
-      }
-      catch (const std::invalid_argument& e)
-      {
-        flag = true;
-      }
-    }
-    else if (shapeName == "POLYGON")
-    {
-      try
-      {
-        shapes[count] = mozhegova::makePolygon(std::cin);
-        count++;
-      }
-      catch (const std::bad_alloc& e)
-      {
-        std::cerr << "Out of memory\n";
-        mozhegova::destroy(shapes, count);
-        return 1;
-      }
-      catch (const std::invalid_argument& e)
-      {
-        flag = true;
-      }
-    }
-    else if (shapeName == "SCALE")
+    if (shapeName == "SCALE")
     {
       double p1 = 0.0;
       double p2 = 0.0;
@@ -73,6 +31,25 @@ int main()
       scaleCenter = {p1, p2};
       std::cin >> scaleCoef;
       break;
+    }
+    try
+    {
+      shapes[count] = mozhegova::makeShape(std::cin, shapeName);
+      count++;
+    }
+    catch (const std::bad_alloc& e)
+    {
+      std::cerr << "Out of memory\n";
+      mozhegova::destroy(shapes, count);
+      return 1;
+    }
+    catch (const std::invalid_argument& e)
+    {
+      flag = true;
+    }
+    catch (const std::logic_error& e)
+    {
+      continue;
     }
   }
   if (scaleCoef <= 0)

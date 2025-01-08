@@ -2,15 +2,12 @@
 #define MAKESHAPE_HPP
 
 #include <iostream>
-#include "rectangle.hpp"
-#include "diamond.hpp"
-#include "polygon.hpp"
+#include <string>
+#include "shape.hpp"
 
 namespace mozhegova
 {
-  Rectangle * makeRectangle(std::istream& in);
-  Diamond * makeDiamond(std::istream& in);
-  Polygon * makePolygon(std::istream& in);
+  Shape * makeShape(std::istream& in, std::string shapeName);
 }
 
 #endif

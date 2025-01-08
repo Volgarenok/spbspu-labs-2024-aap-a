@@ -1,5 +1,35 @@
 #include "makeShape.hpp"
 #include <stdexcept>
+#include "rectangle.hpp"
+#include "diamond.hpp"
+#include "polygon.hpp"
+
+namespace mozhegova
+{
+  Rectangle * makeRectangle(std::istream& in);
+  Diamond * makeDiamond(std::istream& in);
+  Polygon * makePolygon(std::istream& in);
+}
+
+mozhegova::Shape * mozhegova::makeShape(std::istream& in, std::string shapeName)
+{
+  if (shapeName == "RECTANGLE")
+  {
+    return mozhegova::makeRectangle(in);
+  }
+  else if (shapeName == "DIAMOND")
+  {
+    return mozhegova::makeDiamond(in);
+  }
+  else if (shapeName == "POLYGON")
+  {
+    return mozhegova::makePolygon(in);
+  }
+  else
+  {
+    throw std::logic_error("unsupported");
+  }
+}
 
 mozhegova::Rectangle * mozhegova::makeRectangle(std::istream& in)
 {
@@ -18,7 +48,7 @@ mozhegova::Rectangle * mozhegova::makeRectangle(std::istream& in)
   return rect;
 }
 
-mozhegova::Diamond* mozhegova::makeDiamond(std::istream& in)
+mozhegova::Diamond * mozhegova::makeDiamond(std::istream& in)
 {
   double p1 = 0.0;
   double p2 = 0.0;
