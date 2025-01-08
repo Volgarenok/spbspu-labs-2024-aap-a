@@ -54,6 +54,10 @@ void smirnov::Diamond::move(double dx, double dy)
 
 void smirnov::Diamond::scale(double k)
 {
+  if (k < 0)
+  {
+    throw std::invalid_argument("Zoom coefficient must be positive");
+  }
   point_t center = getFrameRect().pos;
   vertex1.x = (vertex1.x - center.x) * k + center.x;
   vertex1.y = (vertex1.y - center.y) * k + center.y;

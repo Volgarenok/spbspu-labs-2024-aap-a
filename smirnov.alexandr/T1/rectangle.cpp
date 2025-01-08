@@ -18,14 +18,9 @@ double smirnov::Rectangle::getArea() const
 
 smirnov::rectangle_t smirnov::Rectangle::getFrameRect() const
 {
-  point_t center;
-  center.x = (lowerLeft.x + upperRight.x) / 2;
-  center.y = (lowerLeft.y + upperRight.y) / 2;
-  rectangle_t frameRect;
-  frameRect.pos = center;
-  frameRect.width = upperRight.x - lowerLeft.x;
-  frameRect.height = upperRight.y - lowerLeft.y;
-  return frameRect;
+  point_t center = {(lowerLeft.x + upperRight.x) / 2,
+      (lowerLeft.y + upperRight.y) / 2};
+  return {center, upperRight.x - lowerLeft.x, upperRight.y - lowerLeft.y};
 }
 
 void smirnov::Rectangle::move(point_t newPos)
@@ -46,6 +41,10 @@ void smirnov::Rectangle::move(double dx, double dy)
 
 void smirnov::Rectangle::scale(double k)
 {
+  if (k < 0)
+  {
+    throw std::invalid_argument("Zoom coefficient must be positive");
+  }
   point_t center = getFrameRect().pos;
   lowerLeft.x = (lowerLeft.x - center.x) * k + center.x;
   lowerLeft.y = (lowerLeft.y - center.y) * k + center.y;

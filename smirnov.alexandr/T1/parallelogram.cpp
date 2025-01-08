@@ -38,11 +38,7 @@ smirnov::rectangle_t smirnov::Parallelogram::getFrameRect() const
   double maxX = std::max({vertex1.x, vertex2.x, vertex3.x, vertex4.x});
   double minY = std::min({vertex1.y, vertex2.y, vertex3.y, vertex4.y});
   double maxY = std::max({vertex1.y, vertex2.y, vertex3.y, vertex4.y});
-  rectangle_t frameRect;
-  frameRect.pos = center;
-  frameRect.width = maxX - minX;
-  frameRect.height = maxY - minY;
-  return frameRect;
+  return {center, maxX- minX, maxY - minY};
 }
 
 void smirnov::Parallelogram::move(point_t newPos)
@@ -67,6 +63,10 @@ void smirnov::Parallelogram::move(double dx, double dy)
 
 void smirnov::Parallelogram::scale(double k)
 {
+  if (k < 0)
+  {
+    throw std::invalid_argument("Zoom coefficient must be positive");
+  }
   point_t center = getFrameRect().pos;
   vertex1.x = (vertex1.x - center.x) * k + center.x;
   vertex1.y = (vertex1.y - center.y) * k + center.y;
