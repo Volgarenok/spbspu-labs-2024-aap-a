@@ -9,7 +9,7 @@
 #include "triangle.hpp"
 #include "square.hpp"
 
-void komarova::make_shapes(std::istream& input, Shape** shapes, bool& wrong_shape)
+int komarova::make_shapes(std::istream& input, Shape** shapes, bool& wrong_shape)
 {
   int count = 0;
   bool sc_flag = false;
@@ -92,6 +92,7 @@ void komarova::make_shapes(std::istream& input, Shape** shapes, bool& wrong_shap
       throw;
     }
   }
+  return 0;
 }
 
 void komarova::area_sum(std::ostream& output, Shape** shapes)

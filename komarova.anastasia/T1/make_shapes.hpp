@@ -10,7 +10,7 @@
 
 namespace komarova
 {
-  void make_shapes(std::istream& input, Shape** shapes, bool& wrong_shape);
+  int make_shapes(std::istream& input, Shape** shapes, bool& wrong_shape);
   void area_sum(std::ostream& output, Shape** shapes);
   void scale(Shape** shapes, point_t point, double coef);
   void frame_rect_xy(std::ostream& output, Shape** shapes);

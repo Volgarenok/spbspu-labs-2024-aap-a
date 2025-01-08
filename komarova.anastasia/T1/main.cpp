@@ -20,7 +20,11 @@ int main()
 
   try
   {
-    komarova::make_shapes(std::cin, shapes, wrong_shape);
+    int result = komarova::make_shapes(std::cin, shapes, wrong_shape);
+    if (result != 0)
+    {
+      return result;
+    }
   }
   catch (const std::bad_alloc& e)
   {
