@@ -73,6 +73,11 @@ void komarova::make_shapes(std::istream& input, Shape** shapes, bool& wrong_shap
       }
       else if (figure == "SCALE")
       {
+        if (count == 0)
+        {
+          std::cerr << "nothig to scale \n";
+          return 1;
+        }
         double x_sc = 0.0;
         double y_sc = 0.0;
         double coef = 1.0;
