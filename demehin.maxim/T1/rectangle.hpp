@@ -9,14 +9,14 @@ namespace demehin
   {
   public:
     Rectangle(point_t left_bot, point_t right_top);
-    ~Rectangle();
+    //~Rectangle();
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t s) override;
     void move(double x, double y) override;
     void scale(double k) override;
   private:
-    Polygon* plg_;
+    Polygon plg_;
   };
 }
 

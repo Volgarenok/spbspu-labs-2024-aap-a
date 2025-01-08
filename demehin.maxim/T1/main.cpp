@@ -23,7 +23,7 @@ namespace
     }
   }
 
-  double getAreaSum(demehin::Shape** const shapes, size_t shp_cnt)
+  double getAreaSum(demehin::Shape** shapes, size_t shp_cnt)
   {
     double area_sum = 0;
     for (size_t i = 0; i < shp_cnt; i++)
@@ -66,13 +66,13 @@ int main()
 {
   demehin::Shape* shapes[10000] = {};
   size_t shp_cnt = 0;
-  double scale_k = 0;
-  demehin::point_t scale_pt;
+  //double scale_k = 0;
+  //demehin::point_t scale_pt;
   bool is_incorrect_shp = false;
 
   std::string shape_name;
-  bool is_scale = false;
-  while (!is_scale)
+  //bool is_scale = false;
+  while (shape_name != "SCALE")
   {
     std::cin >> shape_name;
     if (std::cin.eof())
@@ -92,11 +92,12 @@ int main()
     }
     catch (const std::logic_error& e)
     {
-      delete shapes[shp_cnt--];
+      //delete shapes[shp_cnt--];
+      shp_cnt--;
       is_incorrect_shp = true;
     }
 
-    if (shape_name == "SCALE")
+    /*if (shape_name == "SCALE")
     {
       double x = 0, y = 0;
       std::cin >> x >> y >> scale_k;
@@ -109,8 +110,20 @@ int main()
       scale_pt.x = x;
       scale_pt.y = y;
       is_scale = true;
-    }
+    }*/
   }
+
+  double x = 0, y = 0, scale_k = 0;
+  std::cin >> x >> y >> scale_k;
+  if (scale_k < 0)
+  {
+    std::cerr << "Incorrect scale\n";
+    free_shapes(shapes, shp_cnt);
+    return 1;
+  }
+  //scale_pt.x = x;
+  //scale_pt.y = y;
+  demehin::point_t scale_pt = {x, y};
 
   if (shp_cnt == 0)
   {

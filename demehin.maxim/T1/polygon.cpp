@@ -9,7 +9,7 @@ namespace
     return p1.x == p2.x && p1.y == p2.y;
   }
 
-  bool hasSameVertex(size_t n, demehin::point_t* vertex)
+  bool hasSameVertex(size_t n, const demehin::point_t* vertex)
   {
     for (size_t i = 0; i < n; i++)
     {
@@ -34,17 +34,19 @@ demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
   vrtx_cnt_(vrtx_cnt),
   vertex_(new point_t[vrtx_cnt])
 {
-  for (size_t i = 0; i < vrtx_cnt; i++)
+  if (vertex)
   {
-    vertex_[i] = vertex[i];
-  }
+    for (size_t i = 0; i < vrtx_cnt; i++)
+    {
+      vertex_[i] = vertex[i];
+    }
 
-  if (hasSameVertex(vrtx_cnt, vertex_) || vrtx_cnt < 3)
-  {
-    delete[] vertex_;
-    throw std::logic_error("incorrect_shape");
+    if (hasSameVertex(vrtx_cnt, vertex_) || vrtx_cnt < 3)
+    {
+      delete[] vertex_;
+      throw std::logic_error("incorrect_shape");
+    }
   }
-
 }
 
 double demehin::Polygon::getArea() const
@@ -75,31 +77,32 @@ demehin::rectangle_t demehin::Polygon::getFrameRect() const
   double fr_rect_w = max_x - min_x;
   double pos_x = (max_x + min_x) / 2;
   double pos_y = (max_y + min_y) / 2;
-  point_t fr_rect_pos;
-  fr_rect_pos.x = pos_x;
-  fr_rect_pos.y = pos_y;
-  rectangle_t fr_rect;
-  fr_rect.height = fr_rect_h;
-  fr_rect.width = fr_rect_w;
-  fr_rect.pos = fr_rect_pos;
+  point_t fr_rect_pos = {pos_x, pos_y};
+  //fr_rect_pos.x = pos_x;
+  //fr_rect_pos.y = pos_y;
+  rectangle_t fr_rect = {fr_rect_w, fr_rect_h, fr_rect_pos};
+  //fr_rect.height = fr_rect_h;
+  //fr_rect.width = fr_rect_w;
+  //fr_rect.pos = fr_rect_pos;
   return fr_rect;
 }
 
 void demehin::Polygon::move(point_t s)
 {
-  point_t plg_centre;
-  plg_centre.x = 0;
-  plg_centre.y = 0;
-  for (size_t i = 0; i < vrtx_cnt_; i++)
-  {
-    plg_centre.x += vertex_[i].x;
-    plg_centre.y += vertex_[i].y;
-  }
+  point_t plg_center = this->getCenter();
+  //plg_centre.x = 0;
+  //plg_centre.y = 0;
+  //for (size_t i = 0; i < vrtx_cnt_; i++)
+  //{
+    //plg_center.x += vertex_[i].x;
+    //plg_center.y += vertex_[i].y;
+  //}
 
-  plg_centre.x /= vrtx_cnt_;
-  plg_centre.y /= vrtx_cnt_;
-  double difference_x = s.x - plg_centre.x;
-  double difference_y = s.y - plg_centre.y;
+  //plg_center.x /= vrtx_cnt_;
+  //plg_center.y /= vrtx_cnt_;
+
+  double difference_x = s.x - plg_center.x;
+  double difference_y = s.y - plg_center.y;
 
   this->move(difference_x, difference_y);
 }
@@ -115,29 +118,48 @@ void demehin::Polygon::move(double x, double y)
 
 void demehin::Polygon::scale(double k)
 {
-  point_t plg_centre;
-  plg_centre.x = 0;
-  plg_centre.y = 0;
+  point_t plg_center = this->getCenter();
+  //plg_centre.x = 0;
+  //plg_centre.y = 0;
+
+  //for (size_t i = 0; i < vrtx_cnt_; i++)
+  //{
+    //plg_center.x += vertex_[i].x;
+    //plg_center.y += vertex_[i].y;
+  //}
+
+  //plg_center.x /= vrtx_cnt_;
+  //plg_center.y /= vrtx_cnt_;
 
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
-    plg_centre.x += vertex_[i].x;
-    plg_centre.y += vertex_[i].y;
-  }
-
-  plg_centre.x /= vrtx_cnt_;
-  plg_centre.y /= vrtx_cnt_;
-
-  for (size_t i = 0; i < vrtx_cnt_; i++)
-  {
-    double dx = vertex_[i].x - plg_centre.x;
-    double dy = vertex_[i].y - plg_centre.y;
+    double dx = vertex_[i].x - plg_center.x;
+    double dy = vertex_[i].y - plg_center.y;
 
     dx *= k;
     dy *= k;
 
-    vertex_[i].x = plg_centre.x + dx;
-    vertex_[i].y = plg_centre.y + dy;
+    vertex_[i].x = plg_center.x + dx;
+    vertex_[i].y = plg_center.y + dy;
+  }
+}
+
+void demehin::Polygon::setVertex(demehin::point_t* vertex)
+{
+  vertex_ = vertex;
+}
+
+demehin::point_t demehin::Polygon::getCenter()
+{
+  demehin::point_t plg_center = {0, 0};
+  for (size_t i = 0; i < vrtx_cnt_; i++)
+  {
+    plg_center.x += vertex_[i].x;
+    plg_center.y += vertex_[i].y;
   }
 
+  plg_center.x /= vrtx_cnt_;
+  plg_center.y /= vrtx_cnt_;
+
+  return plg_center;
 }
