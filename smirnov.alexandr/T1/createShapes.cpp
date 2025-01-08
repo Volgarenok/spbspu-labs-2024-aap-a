@@ -1,73 +1,64 @@
 #include "createShapes.hpp"
 #include <stdexcept>
 
+void smirnov::inputCoords(double * coordsArray, size_t count, std::istream & in)
+{
+  for (size_t i = 0; i < count; ++i)
+  {
+    if (!(in >> coordsArray[i]))
+    {
+      throw std::invalid_argument("Incorrect coordinates");
+    }
+  }
+}
+
 smirnov::Rectangle * smirnov::createRectangle(std::istream & in)
 {
-  double x1 = 0.0;
-  double y1 = 0.0;
-  double x2 = 0.0;
-  double y2 = 0.0;
-  in >> x1 >> y1 >> x2 >> y2;
-  if (!in || x1 >= x2 || y1 >= y2)
-  {
-    throw std::invalid_argument("Incorrect coordinates");
-  }
+  constexpr size_t coordinateCount = 4;
+  double coordsArray[coordinateCount];
+  inputCoords(coordsArray, coordinateCount, in);
+  double x1 = coordsArray[0];
+  double y1 = coordsArray[1];
+  double x2 = coordsArray[2];
+  double y2 = coordsArray[3];
   return new Rectangle(x1, y1, x2, y2);
 }
 
 smirnov::Square * smirnov::createSquare(std::istream & in)
 {
-  double x = 0.0;
-  double y = 0.0;
-  double length = 0.0;
-  in >> x >> y >> length;
-  if (!in || length <= 0)
-  {
-    throw std::invalid_argument("Incorrect coordinates");
-  }
+  constexpr size_t coordinateCount = 3;
+  double coordsArray[coordinateCount];
+  inputCoords(coordsArray, coordinateCount, in);
+  double x = coordsArray[0];
+  double y = coordsArray[1];
+  double length = coordsArray[2];
   return new Square(x, y, length);
 }
 
 smirnov::Diamond * smirnov::createDiamond(std::istream & in)
 {
-  double x1 = 0.0;
-  double y1 = 0.0;
-  double x2 = 0.0;
-  double y2 = 0.0;
-  double x3 = 0.0;
-  double y3 = 0.0;
-  in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-  if (!in)
-  {
-    throw std::invalid_argument("Incorrect coordinates");
-  }
-  if ((x1 == x2 && y1 == y2) && (x1 == x3 && y1 == y3))
-  {
-    throw std::invalid_argument("All three vertices cannot coincide.");
-  }
-  if ((x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3))
-  {
-    throw std::invalid_argument("Two vertices cannot coincide.");
-  }
+  constexpr size_t coordinateCount = 6;
+  double coordsArray[coordinateCount];
+  inputCoords(coordsArray, coordinateCount, in);
+  double x1 = coordsArray[0];
+  double y1 = coordsArray[1];
+  double x2 = coordsArray[2];
+  double y2 = coordsArray[3];
+  double x3 = coordsArray[4];
+  double y3 = coordsArray[5];
   return new Diamond(x1, y1, x2, y2, x3, y3);
 }
 
 smirnov::Parallelogram * smirnov::createParallelogram(std::istream & in)
 {
-  double x1 = 0.0;
-  double y1 = 0.0;
-  double x2 = 0.0;
-  double y2 = 0.0;
-  double x3 = 0.0;
-  double y3 = 0.0;
-  in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-  if (!in || (x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3))
-  {
-    throw std::invalid_argument("Incorrect coordinates for the parallelogram");
-  }
-  if (!(y1 == y2 || y1 == y3 || y2 == y3))
-  {
-    throw std::invalid_argument("The sides of the parallelogram must be parallel to the X-axis");
-  }
+  constexpr size_t coordinateCount = 6;
+  double coordsArray[coordinateCount];
+  inputCoords(coordsArray, coordinateCount, in);
+  double x1 = coordsArray[0];
+  double y1 = coordsArray[1];
+  double x2 = coordsArray[2];
+  double y2 = coordsArray[3];
+  double x3 = coordsArray[4];
+  double y3 = coordsArray[5];
   return new Parallelogram(x1, y1, x2, y2, x3, y3);
 }

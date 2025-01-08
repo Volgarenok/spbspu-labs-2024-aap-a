@@ -12,5 +12,6 @@ namespace smirnov
   Diamond * createDiamond(std::istream & in);
   Square * createSquare(std::istream & in);
   Parallelogram * createParallelogram(std::istream & in);
+  void inputCoords(double * coordsArray, size_t count, std::istream & in);
 }
 #endif
