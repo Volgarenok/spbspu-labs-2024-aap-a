@@ -27,7 +27,7 @@ duhanina::rectangle_t duhanina::Circle::getFrameRect() const
 
 void duhanina::Circle::move(const point_t& newPos)
 {
-  for (int i = 0; i < NUM_PARTS; ++i)
+  for (size_t i = 0; i < NUM_PARTS; ++i)
   {
     ellipses_[i].move(newPos);
   }
@@ -35,7 +35,7 @@ void duhanina::Circle::move(const point_t& newPos)
 
 void duhanina::Circle::move(double dx, double dy)
 {
-  for (int i = 0; i < NUM_PARTS; ++i)
+  for (size_t i = 0; i < NUM_PARTS; ++i)
   {
     ellipses_[i].move(dx, dy);
   }
@@ -43,7 +43,7 @@ void duhanina::Circle::move(double dx, double dy)
 
 void duhanina::Circle::scale(double k)
 {
-  for (int i = 0; i < NUM_PARTS; ++i)
+  for (size_t i = 0; i < NUM_PARTS; ++i)
   {
     ellipses_[i].scale(k);
   }
