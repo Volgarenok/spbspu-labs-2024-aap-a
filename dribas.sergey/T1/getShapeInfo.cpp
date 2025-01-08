@@ -17,7 +17,7 @@ double dribas::getAllArea(Shape** myShapes, size_t shapeCount)
   return allArea;
 }
 
-void scaling(dribas::Shape** myShapes, size_t shapeCount, dribas::point_t center, double ratio)
+void dribas::scaling(dribas::Shape** myShapes, size_t shapeCount, dribas::point_t center, double ratio)
 {
   for (size_t i = 0; i <shapeCount; i++) {
     dribas::point_t cneter = myShapes[i]->getFrameRect().pos;
