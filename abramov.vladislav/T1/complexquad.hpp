@@ -1,5 +1,6 @@
 #ifndef COMPLEXQUAD_HPP
 #define COMPLEXQUAD_HPP
+#include <cstddef>
 #include "base-types.hpp"
 #include "shape.hpp"
 
@@ -26,5 +27,8 @@ namespace abramov
   };
 
   void createCQs(point_t p1, point_t p2, ComplexQuad &cq1, ComplexQuad &cq2, ComplexQuad &cq3, ComplexQuad &cq4);
+  void searchInArray(const double *x, double &a, double &b, size_t k);
+  void getCoordsOfIntersection(const point_t *points, double &x, double &y);
+  double getTriangleArea(point_t A, point_t B, point_t O);
 }
 #endif
