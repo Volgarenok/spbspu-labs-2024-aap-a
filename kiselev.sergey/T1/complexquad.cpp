@@ -97,8 +97,8 @@ void kiselev::Complexquad::move(double dx, double dy)
 void kiselev::Complexquad::scale(double k)
 {
   point_t centre = this->getFrameRect().pos;
-  scalePoint(p1_, centre, k);
-  scalePoint(p2_, centre, k);
-  scalePoint(p3_, centre, k);
-  scalePoint(p4_, centre, k);
+  p1_ = scalePoint(p1_, centre, k);
+  p2_ = scalePoint(p2_, centre, k);
+  p3_ = scalePoint(p3_, centre, k);
+  p4_ = scalePoint(p4_, centre, k);
 }

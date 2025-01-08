@@ -72,7 +72,7 @@ void kiselev::makeShape(std::string & str, CompositeShape & compShp, bool& isUnk
       shape = makeComplexquad(std::cin);
       compShp.push_back(shape);
     }
-    else
+    else if (!str.empty() && str != "SCALE")
     {
       isUnknown = true;
     }

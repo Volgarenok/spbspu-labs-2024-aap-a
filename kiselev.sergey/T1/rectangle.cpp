@@ -37,6 +37,10 @@ void kiselev::Rectangle::move(double dx, double dy)
 void kiselev::Rectangle::scale(double k)
 {
   point_t centre = this->getFrameRect().pos;
-  scalePoint(leftDown_, centre, k);
-  scalePoint(rightUp_, centre, k);
+  //leftDown_.x = centre.x + (leftDown_.x - centre.x) * k;
+  //leftDown_.y = centre.y + (leftDown_.y - centre.y) * k;
+  //rightUp_.x = centre.x + (rightUp_.x - centre.x) * k;
+  //rightUp_.y = centre.y + (rightUp_.y - centre.y) * k;
+  leftDown_ = scalePoint(leftDown_, centre, k);
+  rightUp_ = scalePoint(rightUp_, centre, k);
 }

@@ -15,6 +15,6 @@ namespace kiselev
     double height;
     point_t pos;
   };
-  void scalePoint(point_t p, point_t centre, double k);
+  point_t scalePoint(point_t p, point_t centre, double k);
 }
 #endif
