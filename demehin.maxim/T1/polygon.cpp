@@ -47,6 +47,7 @@ demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
       throw std::logic_error("incorrect_shape");
     }
   }
+  delete[] vertex_;
 }
 
 double demehin::Polygon::getArea() const
