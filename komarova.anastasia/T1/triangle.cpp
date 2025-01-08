@@ -51,7 +51,7 @@ void komarova::Triangle::scale(double coef)
   {
     throw std::logic_error("incorrect coefficient");
   }
-  point_t center = {(a_.x + b_.x + c_.x) / 3.0, (a_.y + b_.y + c_.y) / 3.0};
+  point_t center = getFrameRect().pos;
   a_.x = center.x + (a_.x - center.x) * coef;
   a_.y = center.y + (a_.y - center.y) * coef;
   b_.x = center.x + (b_.x - center.x) * coef;
