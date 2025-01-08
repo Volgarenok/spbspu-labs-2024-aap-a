@@ -10,28 +10,24 @@ kiselev::Rectangle::Rectangle(point_t leftDown, point_t rightUp) :
     throw std::invalid_argument("Incorrect parameters");
   }
 }
-double kiselev::Rectangle::getArea() const noexcept
+double kiselev::Rectangle::getArea() const
 {
-  double area = (rightUp_.x - leftDown_.x) * (rightUp_.y - leftDown_.y);
-  return area;
+  return (rightUp_.x - leftDown_.x) * (rightUp_.y - leftDown_.y);
 }
-kiselev::rectangle_t kiselev::Rectangle::getFrameRect() const noexcept
+kiselev::rectangle_t kiselev::Rectangle::getFrameRect() const
 {
   double centreForX = leftDown_.x + (rightUp_.x - leftDown_.x) / 2;
   double centreForY = leftDown_.y + (rightUp_.y - leftDown_.y) / 2;
   return { rightUp_.x - leftDown_.x, rightUp_.y - leftDown_.y, { centreForX, centreForY } };
 }
-void kiselev::Rectangle::move(point_t a) noexcept
+void kiselev::Rectangle::move(point_t a)
 {
   point_t centre = this->getFrameRect().pos;
   double moveX = a.x - centre.x;
   double moveY = a.y - centre.y;
-  leftDown_.x += moveX;
-  leftDown_.y += moveY;
-  rightUp_.x += moveX;
-  rightUp_.y += moveY;
+  move(moveX, moveY);
 }
-void kiselev::Rectangle::move(double dx, double dy) noexcept
+void kiselev::Rectangle::move(double dx, double dy)
 {
   leftDown_.x += dx;
   leftDown_.y += dy;
@@ -41,8 +37,6 @@ void kiselev::Rectangle::move(double dx, double dy) noexcept
 void kiselev::Rectangle::scale(double k)
 {
   point_t centre = this->getFrameRect().pos;
-  leftDown_.x = centre.x + (leftDown_.x - centre.x) * k;
-  leftDown_.y = centre.y + (leftDown_.y - centre.y) * k;
-  rightUp_.x = centre.x + (rightUp_.x - centre.x) * k;
-  rightUp_.y = centre.y + (rightUp_.y - centre.y) * k;
+  scalePoint(leftDown_, centre, k);
+  scalePoint(rightUp_, centre, k);
 }

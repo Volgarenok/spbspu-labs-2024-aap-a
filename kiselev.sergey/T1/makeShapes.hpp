@@ -12,6 +12,6 @@ namespace kiselev
   Diamond* makeDiamond(std::istream& input);
   Complexquad* makeComplexquad(std::istream& input);
   point_t makeScale(std::istream& input);
-  void makeShape(std::string & str, Shape * shape, CompositeShape & compShp);
+  void makeShape(std::string & str, CompositeShape & compShp, bool& isUnknonw);
 }
 #endif

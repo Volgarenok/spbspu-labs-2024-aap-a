@@ -1,9 +1,9 @@
 #include "actionShapes.hpp"
-void kiselev::printCoordinatesRect(std::ostream& output, kiselev::CompositeShape & cmp)
+void kiselev::printCoordinatesRect(std::ostream& output, CompositeShape & cmp)
 {
   for (size_t i = 0; i < cmp.size(); ++i)
   {
-    kiselev::rectangle_t rect = cmp[i]->getFrameRect();
+    rectangle_t rect = cmp[i]->getFrameRect();
     double leftDownX = rect.pos.x - rect.width / 2;
     double leftDownY = rect.pos.y - rect.height / 2;
     double rightUpX = rect.pos.x + rect.width / 2;

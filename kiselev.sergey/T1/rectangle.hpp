@@ -3,14 +3,14 @@
 #include "shape.hpp"
 namespace kiselev
 {
-  class Rectangle final : public Shape
+  class Rectangle final: public Shape
   {
   public:
     Rectangle(point_t leftDown, point_t rightUp);
-    double getArea() const noexcept override;
-    rectangle_t getFrameRect() const noexcept override;
-    void move(point_t a) noexcept override;
-    void move(double dx, double dy) noexcept override;
+    double getArea() const override;
+    rectangle_t getFrameRect() const override;
+    void move(point_t a) override;
+    void move(double dx, double dy) override;
     void scale(double k) override;
 
   private:

@@ -1,4 +1,5 @@
 #include <cstddef>
+#include <exception>
 #include <iomanip>
 #include <iostream>
 #include <stdexcept>
@@ -6,14 +7,13 @@
 #include "actionShapes.hpp"
 #include "composite-shape.hpp"
 #include "makeShapes.hpp"
-#include "shape.hpp"
 int main()
 {
-  kiselev::Shape* shape = nullptr;
   constexpr size_t capacity = 100;
   kiselev::CompositeShape compShp(capacity);
   std::string titleShape;
   bool isIncorrectShape = false;
+  bool isUnknownShape = false;
   kiselev::point_t scale;
   double ratio = 0;
   while (std::cin >> titleShape)
@@ -25,7 +25,7 @@ int main()
     }
     try
     {
-      kiselev::makeShape(titleShape, shape, compShp);
+      kiselev::makeShape(titleShape, compShp, isUnknownShape);
       if (titleShape == "SCALE")
       {
         scale = kiselev::makeScale(std::cin);
@@ -38,29 +38,23 @@ int main()
         break;
       }
     }
-    catch (std::invalid_argument& e)
+    catch (const std::invalid_argument& e)
     {
       isIncorrectShape = true;
     }
-    catch (const std::out_of_range& e)
+    catch (const std::exception& e)
     {
-      std::cerr << e.what();
-      return 1;
-    }
-    catch (const std::logic_error& e)
-    {
-      std::cerr << e.what();
-      return 1;
-    }
-    catch (const std::bad_alloc& e)
-    {
-      std::cerr << "Memory was not allocated\n";
+      std::cerr << e.what() << "\n";
       return 1;
     }
   }
   if (isIncorrectShape)
   {
     std::cerr << "There was an error in the description of the scale\n";
+  }
+  if (isUnknownShape)
+  {
+      std::cout << "An unknown figure has been introduced\n";
   }
   if (compShp.empty())
   {

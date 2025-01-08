@@ -1,31 +1,32 @@
 #ifndef COMPOSITE_SHAPE_HPP
 #define COMPOSITE_SHAPE_HPP
+#include <cstddef>
 #include "base-types.hpp"
 #include "shape.hpp"
-#include <cstddef>
 namespace kiselev
 {
   class CompositeShape
   {
   public:
     CompositeShape(size_t cap);
-    CompositeShape(CompositeShape & cmp);
+    CompositeShape(const CompositeShape & cmp);
     CompositeShape(CompositeShape && cmp) noexcept;
-    CompositeShape & operator=(CompositeShape & cmp) noexcept;
+    CompositeShape & operator=(CompositeShape & cmp);
     CompositeShape & operator=(CompositeShape && cmp) noexcept;
     void push_back(Shape * shp);
     void pop_back();
-    Shape * at(size_t id);
-    Shape * operator[](size_t id) noexcept;
-    bool empty() noexcept;
-    size_t size() noexcept;
-    double getArea() const noexcept;
-    rectangle_t getFrameRect() const noexcept;
-    void move(point_t a) noexcept;
-    void move(double dx, double dy) noexcept;
-    void scale(double k, point_t scale) noexcept;
-    void scale(double k) noexcept;
+    Shape * at(size_t id) const;
+    Shape * operator[](size_t id) const noexcept;
+    bool empty() const noexcept;
+    size_t size() const noexcept;
+    double getArea() const;
+    rectangle_t getFrameRect() const;
+    void move(point_t a);
+    void move(double dx, double dy);
+    void scale(double k, point_t scale);
+    void scale(double k);
     ~CompositeShape();
+
   private:
     void clear() noexcept;
     Shape ** shapes;

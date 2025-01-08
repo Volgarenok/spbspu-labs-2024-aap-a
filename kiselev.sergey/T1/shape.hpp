@@ -12,6 +12,7 @@ namespace kiselev
     virtual void move(point_t a) = 0;
     virtual void move(double dx, double dy) = 0;
     virtual void scale(double k) = 0;
+    void scaleWithCheck(double k);
     virtual ~Shape() = default;
   };
   void destroyShapePtr(Shape** shapes, size_t count);

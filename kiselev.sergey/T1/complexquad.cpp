@@ -3,16 +3,16 @@
 #include <cmath>
 #include <stdexcept>
 #include "base-types.hpp"
-namespace
+namespace kiselev
 {
-  bool isTriangle(kiselev::point_t p1, kiselev::point_t p2, kiselev::point_t p3)
+  bool isTriangle(point_t p1, point_t p2, point_t p3)
   {
     double lenght1 = std::sqrt(std::pow(p2.x - p1.x, 2) + std::pow(p2.y - p1.y, 2));
     double lenght2 = std::sqrt(std::pow(p3.x - p1.x, 2) + std::pow(p3.y - p1.y, 2));
     double lenght3 = std::sqrt(std::pow(p2.x - p3.x, 2) + std::pow(p2.y - p3.y, 2));
     return lenght1 < lenght2 + lenght3 || lenght2 < lenght1 + lenght3 || lenght3 < lenght1 + lenght2;
   }
-  kiselev::point_t findIntersectionPoint(kiselev::point_t p1, kiselev::point_t p2, kiselev::point_t p3, kiselev::point_t p4, bool& isIntersect)
+  point_t findIntersectionPoint(point_t p1, point_t p2, point_t p3, point_t p4, bool& isIntersect)
   {
     double A1 = p2.y - p1.y;
     double B1 = p2.x - p1.x;
@@ -32,6 +32,13 @@ namespace
     return { x, y };
   }
 }
+kiselev::Complexquad::Complexquad() :
+  p1_(),
+  p2_(),
+  p3_(),
+  p4_()
+{
+}
 kiselev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4) :
   p1_(p1),
   p2_(p2),
@@ -45,7 +52,7 @@ kiselev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4
     throw std::invalid_argument("Incorrect coordinates");
   }
 }
-kiselev::rectangle_t kiselev::Complexquad::getFrameRect() const noexcept
+kiselev::rectangle_t kiselev::Complexquad::getFrameRect() const
 {
   double leftDownX = std::min(std::min(p1_.x, p2_.x), std::min(p3_.x, p4_.x));
   double leftDownY = std::min(std::min(p1_.y, p2_.y), std::min(p3_.y, p4_.y));
@@ -54,38 +61,29 @@ kiselev::rectangle_t kiselev::Complexquad::getFrameRect() const noexcept
   point_t centre = { leftDownX + (rightUpX - leftDownX) / 2, leftDownY + (rightUpY - leftDownY) / 2 };
   return { rightUpX - leftDownX, rightUpY - leftDownY, centre };
 }
-double kiselev::Complexquad::getArea() const noexcept
+double kiselev::Complexquad::getArea() const
 {
   point_t centre = this->getFrameRect().pos;
   double lenghtP1p4 = std::sqrt(std::pow(p4_.x - p1_.x, 2) + std::pow(p4_.y - p1_.y, 2));
   double lenghtP1centre = std::sqrt(std::pow(centre.x - p1_.x, 2) + std::pow(centre.y - p1_.y, 2));
   double lenghtP4centre = std::sqrt(std::pow(p4_.x - centre.x, 2) + std::pow(p4_.y - centre.y, 2));
-  double semiPerimeter1 = (lenghtP1p4 + lenghtP1centre + lenghtP4centre) / 2;
-  double area1
-      = std::sqrt(semiPerimeter1 * (semiPerimeter1 - lenghtP1p4) * (semiPerimeter1 - lenghtP1centre) * (semiPerimeter1 - lenghtP4centre));
+  double semiPer1 = (lenghtP1p4 + lenghtP1centre + lenghtP4centre) / 2;
+  double area1 = std::sqrt(semiPer1 * (semiPer1 - lenghtP1p4) * (semiPer1 - lenghtP1centre) * (semiPer1 - lenghtP4centre));
   double lenghtP2p3 = std::sqrt(std::pow(p2_.x - p3_.x, 2) + std::pow(p2_.y - p3_.y, 2));
   double lenghtP2centre = std::sqrt(std::pow(p2_.x - centre.x, 2) + std::pow(p2_.y - centre.y, 2));
   double lenghtP3centre = std::sqrt(std::pow(p3_.x - centre.x, 2) + std::pow(p3_.y - centre.y, 2));
-  double semiPerimeter2 = (lenghtP2p3 + lenghtP2centre + lenghtP3centre) / 2;
-  double area2
-      = std::sqrt(semiPerimeter2 * (semiPerimeter2 - lenghtP2p3) * (semiPerimeter2 - lenghtP2centre) * (semiPerimeter2 - lenghtP3centre));
+  double semiPer2 = (lenghtP2p3 + lenghtP2centre + lenghtP3centre) / 2;
+  double area2 = std::sqrt(semiPer2 * (semiPer2 - lenghtP2p3) * (semiPer2 - lenghtP2centre) * (semiPer2 - lenghtP3centre));
   return area1 + area2;
 }
-void kiselev::Complexquad::move(point_t a) noexcept
+void kiselev::Complexquad::move(point_t a)
 {
   point_t centre = this->getFrameRect().pos;
   double moveForX = a.x - centre.x;
   double moveForY = a.y - centre.y;
-  p1_.x += moveForX;
-  p1_.y += moveForY;
-  p2_.x += moveForX;
-  p2_.y += moveForY;
-  p3_.x += moveForX;
-  p3_.y += moveForY;
-  p4_.x += moveForX;
-  p4_.y += moveForY;
+  move(moveForX, moveForY);
 }
-void kiselev::Complexquad::move(double dx, double dy) noexcept
+void kiselev::Complexquad::move(double dx, double dy)
 {
   p1_.x += dx;
   p1_.y += dy;
@@ -96,15 +94,11 @@ void kiselev::Complexquad::move(double dx, double dy) noexcept
   p4_.x += dx;
   p4_.y += dy;
 }
-void kiselev::Complexquad::scale(double k) noexcept
+void kiselev::Complexquad::scale(double k)
 {
   point_t centre = this->getFrameRect().pos;
-  p1_.x = centre.x + (p1_.x - centre.x) * k;
-  p1_.y = centre.y + (p1_.y - centre.y) * k;
-  p2_.x = centre.x + (p2_.x - centre.x) * k;
-  p2_.y = centre.y + (p2_.y - centre.y) * k;
-  p3_.x = centre.x + (p3_.x - centre.x) * k;
-  p3_.y = centre.y + (p3_.y - centre.y) * k;
-  p4_.x = centre.x + (p4_.x - centre.x) * k;
-  p4_.y = centre.y + (p4_.y - centre.y) * k;
+  scalePoint(p1_, centre, k);
+  scalePoint(p2_, centre, k);
+  scalePoint(p3_, centre, k);
+  scalePoint(p4_, centre, k);
 }

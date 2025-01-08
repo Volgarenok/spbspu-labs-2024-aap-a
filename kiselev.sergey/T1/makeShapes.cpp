@@ -2,7 +2,6 @@
 #include <cmath>
 #include <iostream>
 #include <istream>
-#include <stdexcept>
 #include "base-types.hpp"
 #include "complexquad.hpp"
 #include "diamond.hpp"
@@ -23,7 +22,7 @@ kiselev::Rectangle* kiselev::makeRectangle(std::istream& input)
   inputCoordinates(input, arrCoordinates, quantity);
   point_t left = { arrCoordinates[0], arrCoordinates[1] };
   point_t right = { arrCoordinates[2], arrCoordinates[3] };
-  return new kiselev::Rectangle(left, right);
+  return new Rectangle(left, right);
 }
 kiselev::point_t kiselev::makeScale(std::istream& input)
 {
@@ -40,7 +39,7 @@ kiselev::Diamond* kiselev::makeDiamond(std::istream& input)
   point_t p1 = { arrCoordinates[0], arrCoordinates[1] };
   point_t p2 = { arrCoordinates[2], arrCoordinates[3] };
   point_t p3 = { arrCoordinates[4], arrCoordinates[5] };
-  return new kiselev::Diamond(p1, p2, p3);
+  return new Diamond(p1, p2, p3);
 }
 kiselev::Complexquad* kiselev::makeComplexquad(std::istream& input)
 {
@@ -51,25 +50,36 @@ kiselev::Complexquad* kiselev::makeComplexquad(std::istream& input)
   point_t p2 = { arrCoordinates[2], arrCoordinates[3] };
   point_t p3 = { arrCoordinates[4], arrCoordinates[5] };
   point_t p4 = { arrCoordinates[6], arrCoordinates[7] };
-  return new kiselev::Complexquad(p1, p2, p3, p4);
+  return new Complexquad(p1, p2, p3, p4);
 }
-void kiselev::makeShape(std::string & str, Shape * shape, CompositeShape & compShp)
+void kiselev::makeShape(std::string & str, CompositeShape & compShp, bool& isUnknown)
 {
+  Shape * shape = nullptr;
+  try
   {
     if (str == "RECTANGLE")
     {
-      shape = kiselev::makeRectangle(std::cin);
+      shape = makeRectangle(std::cin);
       compShp.push_back(shape);
     }
     else if (str == "DIAMOND")
     {
-      shape = kiselev::makeDiamond(std::cin);
+      shape = makeDiamond(std::cin);
       compShp.push_back(shape);
     }
     else if (str == "COMPLEXQUAD")
     {
-      shape = kiselev::makeComplexquad(std::cin);
+      shape = makeComplexquad(std::cin);
       compShp.push_back(shape);
     }
+    else
+    {
+      isUnknown = true;
+    }
+  }
+  catch (...)
+  {
+    delete shape;
+    throw;
   }
 }
