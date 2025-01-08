@@ -102,11 +102,11 @@ int main()
   std::cout << std::fixed;
   std::cout.precision(1);
   std::cout << smirnov::sumArea(shapes, countShapes) << " ";
-  smirnov::printFrameRect(shapes, countShapes);
+  smirnov::printFrameRect(shapes, countShapes, std::cout);
   std::cout << "\n";
   smirnov::scaleShapes(shapes, countShapes, centerPoint, scaleFactor);
   std::cout << smirnov::sumArea(shapes, countShapes) << " ";
-  smirnov::printFrameRect(shapes, countShapes);
+  smirnov::printFrameRect(shapes, countShapes, std::cout);
   std::cout << "\n";
   smirnov::destroyShapes(shapes, countShapes);
   if (hasError)
