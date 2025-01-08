@@ -21,7 +21,7 @@ int main()
 
   try
   {
-    komarova::make_shapes(std::cin, shapes, wrong_shape, count);
+    komarova::make_shapes(std::cin, shapes, wrong_shape, count, x_sc, y_sc, coef);
   }
   catch (const std::bad_alloc& e)
   {
