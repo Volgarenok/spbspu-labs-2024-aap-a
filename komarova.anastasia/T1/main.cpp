@@ -59,7 +59,7 @@ int main()
   std::cout << "\n";
   if (wrong_shape)
   {
-    std::cerr << "incorrect shape \n";
+    std::cerr << "incorrect shape \n"
   }
   komarova::delete_shapes(shapes);
 }
