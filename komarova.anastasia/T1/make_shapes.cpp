@@ -9,7 +9,7 @@
 #include "triangle.hpp"
 #include "square.hpp"
 
-void komarova::make_shapes(std::istream& input, Shape** shapes, bool& wrong_shape, int& count)
+void komarova::make_shapes(std::istream& input, Shape** shapes, bool& wrong_shape, int& count, double& x_sc, double& y_sc, double& coef)
 {
   double x_sc, y_sc, coef;
   bool sc_flag = false;
