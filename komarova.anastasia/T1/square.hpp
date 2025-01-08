@@ -5,7 +5,7 @@
 
 namespace komarova
 {
-  struct Square : public Shape
+  struct Square final: public Shape
   {
   public:
     Square(point_t low_left, double len);

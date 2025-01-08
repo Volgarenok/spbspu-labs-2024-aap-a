@@ -5,7 +5,7 @@
 
 namespace komarova
 {
-  struct Triangle : public Shape
+  struct Triangle final: public Shape
   {
   public:
     Triangle(point_t a, point_t b, point_t c);

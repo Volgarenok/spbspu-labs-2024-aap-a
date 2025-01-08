@@ -5,7 +5,7 @@
 
 namespace komarova
 {
-  struct Circle: public Shape
+  struct Circle final: public Shape
   {
   public:
     Circle(point_t point_c, double radius);

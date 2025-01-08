@@ -5,7 +5,7 @@
 
 namespace komarova
 {
-  struct Rectangle: public Shape
+  struct Rectangle final: public Shape
   {
   public:
     Rectangle(point_t low_left, point_t up_right);
