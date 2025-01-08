@@ -16,8 +16,9 @@ int main()
   bool hasError = false;
   smirnov::point_t centerPoint = {0.0, 0.0};
   double scaleFactor = 0.0;
-  while (std::cin >> shapeType)
+  while (!std::cin.eof() && shapeType != "SCALE")
   {
+    std::cin >> shapeType;
     if (shapeType == "RECTANGLE")
     {
       try
