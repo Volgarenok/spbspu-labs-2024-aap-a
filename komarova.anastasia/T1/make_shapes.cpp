@@ -134,9 +134,9 @@ void komarova::scale(Shape** shapes, point_t point, double coef)
   {
     point_t p = shapes[i]->getFrameRect().pos;
     shapes[i]->move(point);
-    shapes[i]->scale(coef);
     point_t new_p = shapes[i]->getFrameRect().pos;
     point_t vector = {(new_p.x - p.x) * coef, (new_p.y - p.y) * coef};
+    shapes[i]->scale(coef);
     shapes[i]->move(-vector.x, -vector.y);
   }
 }
