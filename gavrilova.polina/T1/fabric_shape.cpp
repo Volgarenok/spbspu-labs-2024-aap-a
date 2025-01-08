@@ -11,7 +11,8 @@
 #include "shape.hpp"
 
 namespace {
-  bool hasSameVerteces(gavrilova::point_t* verteces, size_t size) {
+  bool hasSameVerteces(gavrilova::point_t* verteces, size_t size)
+  {
     for (size_t i = 0; i < (size - 1); ++i) {
       for (size_t j = (i + 1); j < size; ++j) {
         if (verteces[i].x == verteces[j].x && verteces[i].y == verteces[j].y) {
@@ -21,7 +22,9 @@ namespace {
     }
     return false;
   }
-  void read_verteces_from_line(gavrilova::point_t* verteces, size_t n) {
+
+  void read_verteces_from_line(gavrilova::point_t* verteces, size_t n)
+  {
     for (size_t i = 0; i < n; ++i) {
       char* xStr = std::strtok(nullptr, " ");
       char* yStr = std::strtok(nullptr, " ");
@@ -30,7 +33,9 @@ namespace {
       verteces[i] = {x, y};
     }
   }
-  gavrilova::Rectangle* make_rectangle(size_t& nSpaces, size_t& nError) {
+
+  gavrilova::Rectangle* make_rectangle(size_t& nSpaces, size_t& nError)
+  {
     const int nVertRect = 2;
     if (nSpaces != 2* nVertRect) {
       ++nError;
@@ -49,7 +54,9 @@ namespace {
       return nullptr;
     }
   }
-  gavrilova::Triangle* make_triangle(size_t& nSpaces, size_t& nError) {
+
+  gavrilova::Triangle* make_triangle(size_t& nSpaces, size_t& nError)
+  {
     const int nVertTriang = 3;
     if (nSpaces != 2* nVertTriang) {
       ++nError;
@@ -68,7 +75,9 @@ namespace {
       return nullptr;
     }
   }
-  gavrilova::Polygon* make_polygon(size_t& nSpaces, size_t& nError) {
+  
+  gavrilova::Polygon* make_polygon(size_t& nSpaces, size_t& nError)
+  {
     const int minNVertPolygon = 3;
     if (nSpaces < 2* minNVertPolygon || nSpaces % 2 != 0) {
       ++nError;
@@ -100,7 +109,9 @@ namespace {
       return nullptr;
     }
   }
-  gavrilova::Ellipse* make_ellipse(size_t& nSpaces, size_t& nError) {
+
+  gavrilova::Ellipse* make_ellipse(size_t& nSpaces, size_t& nError)
+  {
     if (nSpaces != 4) {
         ++nError;
         return nullptr;
@@ -132,7 +143,8 @@ namespace {
 }
 
 
-gavrilova::Shape* gavrilova::make_shape(std::istream& in, gavrilova::point_t& center, double& koef, size_t& nError) {
+gavrilova::Shape* gavrilova::make_shape(std::istream& in, gavrilova::point_t& center, double& koef, size_t& nError)
+{
   size_t len = 0;
   size_t nSpaces = 0;
   char* line = inputStr(in, len, nSpaces);

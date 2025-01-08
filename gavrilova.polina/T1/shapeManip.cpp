@@ -1,7 +1,8 @@
 #include "shapeManip.hpp"
 #include <iomanip>
 
-void gavrilova::scaleShape(Shape& shape, const point_t& center, double k) {
+void gavrilova::scaleShape(Shape& shape, const point_t& center, double k)
+{
   if (k <= 0) {
     throw std::logic_error("Коэффицент должен быть положительным");
   }
@@ -14,7 +15,9 @@ void gavrilova::scaleShape(Shape& shape, const point_t& center, double k) {
   difY *= k;
   shape.move(-difX, -difY);
 }
-void gavrilova::outRectangles(std::ostream& out, gavrilova::Shape ** Shapes, size_t nShapes) noexcept {
+
+void gavrilova::outRectangles(std::ostream& out, gavrilova::Shape ** Shapes, size_t nShapes) noexcept
+{
   if (nShapes) {
     for (size_t i = 0; i < nShapes; ++i) {
       rectangle_t rect = Shapes[i]->getFrameRect();
@@ -26,14 +29,16 @@ void gavrilova::outRectangles(std::ostream& out, gavrilova::Shape ** Shapes, siz
   }
 }
 
-void gavrilova::scaleShapes(gavrilova::Shape** Shapes, size_t nShapes, const gavrilova::point_t& center, double k, double& areaAfter) {
+void gavrilova::scaleShapes(gavrilova::Shape** Shapes, size_t nShapes, const gavrilova::point_t& center, double k, double& areaAfter)
+{
   for (size_t i = 0; i < nShapes; ++i) {
     gavrilova::scaleShape(*(Shapes[i]), center, k);
     areaAfter += Shapes[i]->getArea();
   }
 }
 
-void gavrilova::clearShapes(Shape** Shapes, size_t n) {
+void gavrilova::clearShapes(Shape** Shapes, size_t n)
+{
   for (size_t i = 0; i < n; ++i) {
     delete Shapes[i];
   }
