@@ -9,7 +9,6 @@ namespace demehin
   {
   public:
     Ring(point_t center, double out_r, double in_r);
-    //~Ring();
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t s) override;

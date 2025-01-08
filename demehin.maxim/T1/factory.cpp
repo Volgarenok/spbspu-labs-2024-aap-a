@@ -13,18 +13,6 @@ namespace
     {
       in >> points[i].x >> points[i].y;
     }
-
-    //demehin::point_t left_bot
-    //double lbx = 0, lby = 0;
-    //double rtx = 0, rty = 0;
-    //in >> lbx >> lby >> rtx >> rty;
-    //demehin::point_t left_bot = {lbx, lby};
-    //left_bot.x = lbx;
-    //left_bot.y = lby;
-    //demehin::point_t right_top = {rtx, rty};
-    //right_top.x = rtx;
-    //right_top.y = rty;
-    //return new demehin::Rectangle(left_bot, right_top);
     return new demehin::Rectangle(points[0], points[1]);
   }
 
@@ -33,8 +21,6 @@ namespace
     double cent_x = 0, cent_y = 0, out_r = 0, in_r = 0;
     in >> cent_x >> cent_y >> out_r >> in_r;
     demehin::point_t center = {cent_x, cent_y};
-    //center.x = cent_x;
-    //center.y = cent_y;
     return new demehin::Ring(center, out_r, in_r);
   }
 
@@ -65,8 +51,6 @@ namespace
         delete[] *pts;
         *pts = new_pts;
       }
-      //demehin::point_t vrt;
-      //in >> vrt.x >> vrt.y;
       (*pts)[size++] = vrt;
       cord_cnt++;
     }
