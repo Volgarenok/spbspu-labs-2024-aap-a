@@ -1,83 +1,29 @@
 #include "rectangle.hpp"
 #include <stdexcept>
-#include <cmath>
-#include "destroy.hpp"
-#include "printResult.hpp"
-#include "ellipse.hpp"
 #include "movingPoint.hpp"
 
-duhanina::Rectangle::~Rectangle()
-{
-  if (ellipses_)
-  {
-    destroy(ellipses_, cuts_ * cuts_);
-  }
-  delete[] ellipses_;
-}
-
 duhanina::Rectangle::Rectangle(const point_t& lt, const point_t& rt):
-  cuts_(1),
-  ellipses_(nullptr),
-  ellWidth_(1),
-  ellHeight_(1)
+  lt_(lt),
+  rt_(rt)
 {
   if (lt.x >= rt.x || lt.y >= rt.y)
   {
     throw std::invalid_argument("Error in parameters");
   }
-  constexpr double pi = 3.1415;
-  double rectArea = (rt.x - lt.x) * (rt.y - lt.y);
-  double ellipsesArea = 0.0;
-  while (cuts_ <= 100)
-  {
-    size_t ellCount = cuts_ * cuts_;
-    ellWidth_ = (rt.x - lt.x) / cuts_;
-    ellHeight_ = (rt.y - lt.y) / cuts_;
-    ellipsesArea = ellCount * pi * (ellWidth_ / 2) * (ellHeight_ / 2);
-    if (std::fabs(rectArea - ellipsesArea) > 0.01)
-    {
-      ++cuts_;
-    }
-    else
-    {
-      break;
-    }
-    if (cuts_ > 100)
-    {
-      delete[] ellipses_;
-      throw std::invalid_argument("Maximum number of ellipses");
-    }
-  }
-  ellipses_ = new Shape*[cuts_ * cuts_] {};
-  for (size_t i = 0; i < cuts_; ++i)
-  {
-    for (size_t j = 0; j < cuts_; ++j)
-    {
-      point_t center = { lt.x + (i + 0.5) * ellWidth_, lt.y + (j + 0.5) * ellHeight_ };
-      ellipses_[i * cuts_ + j] = new Ellipse(center, ellWidth_ / 2, ellHeight_ / 2);
-    }
-  }
 }
 
 double duhanina::Rectangle::getArea() const
 {
-  double width = ellWidth_ * cuts_;
-  double height = ellHeight_ * cuts_;
-  return width * height;
+  return (rt_.x - lt_.x) * (rt_.y - lt_.y);
 }
 
 duhanina::rectangle_t duhanina::Rectangle::getFrameRect() const
 {
-  double width = ellWidth_ * cuts_;
-  double height = ellHeight_ * cuts_;
-  double sumX = 0;
-  double sumY = 0;
-  for (size_t i = 0; i < (cuts_ * cuts_); ++i)
-  {
-    sumX += ellipses_[i]->getFrameRect().pos.x;
-    sumY += ellipses_[i]->getFrameRect().pos.y;
-  }
-  return { { sumX / (cuts_ * cuts_), sumY / (cuts_ * cuts_) }, width, height };
+  double width = rt_.x - lt_.x;
+  double height = rt_.y - lt_.y;
+  double posX = lt_.x + (width / 2.0);
+  double posY = lt_.y + (height / 2.0);
+  return { { posX, posY }, width, height };
 }
 
 void duhanina::Rectangle::move(const point_t& newPos)
@@ -89,18 +35,13 @@ void duhanina::Rectangle::move(const point_t& newPos)
 
 void duhanina::Rectangle::move(double dx, double dy)
 {
-  for (size_t i = 0; i < (cuts_ * cuts_); ++i)
-  {
-    ellipses_[i]->move(dx, dy);
-  }
+  movePoint(lt_, dx, dy);
+  movePoint(rt_, dx, dy);
 }
 
 void duhanina::Rectangle::scale(double k)
 {
-  for (size_t i = 0; i < (cuts_ * cuts_); ++i)
-  {
-    ellipses_[i]->scale(k);
-  }
-  ellWidth_ *= k;
-  ellHeight_ *= k;
+  point_t pos = this->getFrameRect().pos;
+  lt_ = scalePoint(lt_, pos, k);
+  rt_ = scalePoint(rt_, pos, k);
 }

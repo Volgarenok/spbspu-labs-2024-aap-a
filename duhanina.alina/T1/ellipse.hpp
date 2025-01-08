@@ -7,6 +7,7 @@ namespace duhanina
   class Ellipse final: public Shape
   {
   public:
+    Ellipse();
     Ellipse(const point_t& center, double horizRadius, double vertRadius);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
