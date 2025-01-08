@@ -2,9 +2,19 @@
 #include <cmath>
 #include <stdexcept>
 
+tkach::Regular tkach::Ring::getReg(size_t sides_amount, const tkach::point_t& center, double radius)
+{
+  const double step_in_angle = 2.0 * std::acos(-1.0) / sides_amount;
+  tkach::point_t temp_point;
+  temp_point.x = radius * std::cos(step_in_angle) + center.x;
+  temp_point.y = radius * std::sin(step_in_angle) + center.y;
+  tkach::point_t new_point = {(center.x + radius + temp_point.x) / 2.0, (temp_point.y + center.y) / 2.0};
+  return {center, {center.x + radius, center.y}, new_point};
+}
+
 tkach::Ring::Ring(const point_t& center, double outer_radius, double inner_radius):
-  in_reg_(nullptr),
-  out_reg_(nullptr)
+  in_reg_(getReg(130, center, inner_radius)),
+  out_reg_(getReg(170, center, outer_radius))
 {
    if (outer_radius <= inner_radius)
   {
@@ -14,54 +24,22 @@ tkach::Ring::Ring(const point_t& center, double outer_radius, double inner_radiu
   {
     throw std::logic_error("Incorrect radius");
   }
-  const double step_in_angle = 2.0 * std::acos(-1.0) / 130.0;
-  const double step_out_angle = 2.0 * std::acos(-1.0) / 170.0;
-  point_t temp_point;
-  temp_point.x = inner_radius * std::cos(step_in_angle) + center.x;
-  temp_point.y = inner_radius * std::sin(step_in_angle) + center.y;
-  point_t new_in_point = {(center.x + inner_radius + temp_point.x) / 2.0, (temp_point.y + center.y) / 2.0};
-  temp_point.x = outer_radius * std::cos(step_out_angle) + center.x;
-  temp_point.y = outer_radius * std::sin(step_out_angle) + center.y;
-  point_t new_out_point = {(center.x + outer_radius + temp_point.x) / 2.0, (temp_point.y + center.y) / 2.0};
-  try
-  {
-    in_reg_ = new tkach::Regular(center, {center.x + inner_radius, center.y}, new_in_point);
-    out_reg_ = new tkach::Regular(center, {center.x + outer_radius, center.y}, new_out_point);
-  }
-  catch (const std::logic_error& e)
-  {
-    delete in_reg_;
-    delete out_reg_;
-    throw;
-  }
-  catch (const std::bad_alloc& e)
-  {
-    delete in_reg_;
-    delete out_reg_;
-    throw;
-  }
-}
-
-tkach::Ring::~Ring()
-{
-  delete in_reg_;
-  delete out_reg_;
 }
 
 double tkach::Ring::getArea() const
 {
-  return out_reg_->getArea() - in_reg_->getArea();
+  return out_reg_.getArea() - in_reg_.getArea();
 }
 
 tkach::rectangle_t tkach::Ring::getFrameRect() const
 {
-  return out_reg_->getFrameRect();
+  return out_reg_.getFrameRect();
 }
 
 void tkach::Ring::move(const double add_to_x, const double add_to_y)
 {
-  in_reg_->move(add_to_x, add_to_y);
-  out_reg_->move(add_to_x, add_to_y);
+  in_reg_.move(add_to_x, add_to_y);
+  out_reg_.move(add_to_x, add_to_y);
 }
 
 tkach::Shape* tkach::Ring::clone() const
@@ -71,12 +49,12 @@ tkach::Shape* tkach::Ring::clone() const
 
 void tkach::Ring::move(const point_t& point_to_move)
 {
-  in_reg_->move(point_to_move);
-  out_reg_->move(point_to_move);
+  in_reg_.move(point_to_move);
+  out_reg_.move(point_to_move);
 }
 
-void tkach::Ring::scaleOneOfUniqueShapes(const double multiplier)
+void tkach::Ring::scaleUnsafe(const double multiplier)
 {
-  in_reg_->scale(multiplier);
-  out_reg_->scale(multiplier);
+  in_reg_.scale(multiplier);
+  out_reg_.scale(multiplier);
 }

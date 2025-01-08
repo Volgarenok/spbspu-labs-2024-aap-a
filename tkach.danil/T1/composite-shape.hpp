@@ -17,8 +17,8 @@ namespace tkach
     CompositeShape& operator=(CompositeShape&& other) noexcept;
     double getArea() const;
     rectangle_t getFrameRect() const;
-    void move(double add_to_x, double add_to_y) noexcept;
-    void move(const point_t& point_to_move) noexcept;
+    void move(double add_to_x, double add_to_y);
+    void move(const point_t& point_to_move);
     void scale(double multiplier);
     void push_back(Shape* shp);
     void pop_back();

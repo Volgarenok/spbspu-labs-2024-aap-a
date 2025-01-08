@@ -57,7 +57,7 @@ std::ostream& tkach::printCoordinatesOfAllFrameRects(std::ostream& out, const tk
 
 void tkach::doUnsaveIsoScaleOneShape(tkach::Shape* shape, const double scale_coef, const tkach::point_t& scale_point)
 {
-  shape->scaleOneOfUniqueShapes(scale_coef);
+  shape->scaleUnsafe(scale_coef);
   moveShapeInIsoScale(shape, scale_coef, scale_point);
 }
 

@@ -3,10 +3,12 @@
 
 tkach::Rectangle* tkach::make_rectangle(std::istream& in)
 {
-  double left_bot_point_x = 0.0, left_bot_point_y = 0.0;
-  double right_top_point_x = 0.0, right_top_point_y = 0.0;
-  in >> left_bot_point_x >> left_bot_point_y >> right_top_point_x >> right_top_point_y;
-  tkach::Rectangle* rectangle = new tkach::Rectangle({left_bot_point_x, left_bot_point_y}, {right_top_point_x, right_top_point_y});
+  point_t lb_rt_points[2] = {};
+  for (size_t i = 0; i < 2; ++i)
+  {
+    in >> lb_rt_points[i].x >> lb_rt_points[i].y;
+  }
+  tkach::Rectangle* rectangle = new tkach::Rectangle({lb_rt_points[0].x, lb_rt_points[0].y}, {lb_rt_points[1].x, lb_rt_points[1].y});
   return rectangle;
 }
 

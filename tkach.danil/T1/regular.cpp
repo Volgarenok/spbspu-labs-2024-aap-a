@@ -107,16 +107,22 @@ void tkach::Regular::move(const double add_to_x, const double add_to_y)
   addToPoint(second_point_, add_to_x, add_to_y);
   addToPoint(third_point_, add_to_x, add_to_y);
 }
+
 void tkach::Regular::move(const point_t& point_to_move)
 {
   addToPoint(second_point_, point_to_move.x - first_point_.x, point_to_move.y - first_point_.y);
   addToPoint(third_point_, point_to_move.x - first_point_.x, point_to_move.y - first_point_.y);
   first_point_ = point_to_move;
 }
-void tkach::Regular::scaleOneOfUniqueShapes(const double multiplier)
+
+void tkach::Regular::scaleFromFirstPoint(const double multiplier, tkach::point_t& scale_point)
 {
-  second_point_.x = first_point_.x + (second_point_.x - first_point_.x) * multiplier;
-  second_point_.y = first_point_.y + (second_point_.y - first_point_.y) * multiplier;
-  third_point_.x = first_point_.x + (third_point_.x - first_point_.x) * multiplier;
-  third_point_.y = first_point_.y + (third_point_.y - first_point_.y) * multiplier;
+  scale_point.x = first_point_.x + (scale_point.x - first_point_.x) * multiplier;
+  scale_point.y = first_point_.y + (scale_point.y - first_point_.y) * multiplier;
+}
+
+void tkach::Regular::scaleUnsafe(const double multiplier)
+{
+  scaleFromFirstPoint(multiplier, second_point_);
+  scaleFromFirstPoint(multiplier, third_point_);
 }

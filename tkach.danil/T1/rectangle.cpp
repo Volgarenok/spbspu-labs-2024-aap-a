@@ -42,7 +42,7 @@ void tkach::Rectangle::move(const point_t& point_to_move)
   move(point_to_move.x - center_frame.x, point_to_move.y - center_frame.y);
 }
 
-void tkach::Rectangle::scaleOneOfUniqueShapes(const double multiplier)
+void tkach::Rectangle::scaleUnsafe(const double multiplier)
 {
   point_t center_frame = getFrameRect().pos;
   left_bot_point_.x = center_frame.x - (center_frame.x - left_bot_point_.x) * multiplier;

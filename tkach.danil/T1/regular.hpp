@@ -15,7 +15,7 @@ namespace tkach
     void move(double add_to_x, double add_to_y) override;
     void move(const point_t& point_to_move) override;
     Shape* clone() const override;
-    void scaleOneOfUniqueShapes(double multiplier) override;
+    void scaleUnsafe(double multiplier) override;
   private:
     point_t first_point_;
     point_t second_point_;
@@ -23,6 +23,7 @@ namespace tkach
     double getDist(const point_t& point1, const point_t& point2) const;
     size_t getSideAmount() const;
     bool isEqualPoints(const point_t& point1, const point_t& point2) const;
+    void scaleFromFirstPoint(double multiplier, point_t& scale_point);
   };
 }
 

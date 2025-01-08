@@ -13,7 +13,7 @@ namespace tkach
     rectangle_t getFrameRect() const override;
     void move(double add_to_x, double add_to_y) override;
     void move(const point_t& point_to_move) override;
-    void scaleOneOfUniqueShapes(double multiplier) override;
+    void scaleUnsafe(double multiplier) override;
     Shape* clone() const override;
   private:
     point_t left_bot_point_;

@@ -7,7 +7,7 @@ void tkach::Shape::scale(double multiplier)
   {
     throw std::logic_error("Error: not positive coef");
   }
-  scaleOneOfUniqueShapes(multiplier);
+  scaleUnsafe(multiplier);
 }
 
 void tkach::addToPoint(point_t& change_point, const double add_to_x, const double add_to_y)

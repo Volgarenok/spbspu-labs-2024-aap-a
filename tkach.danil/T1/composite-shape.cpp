@@ -89,7 +89,7 @@ double tkach::CompositeShape::getArea() const
 
 tkach::rectangle_t tkach::CompositeShape::getFrameRect() const
 {
-  if (size_ != 0)
+  if (size_ == 0)
   {
     return {0.0, 0.0, {0.0, 0.0}};
   }
@@ -113,7 +113,7 @@ tkach::CompositeShape::~CompositeShape()
   delete[] shapes_;
 }
 
-void tkach::CompositeShape::move(const double add_to_x, const double add_to_y) noexcept
+void tkach::CompositeShape::move(const double add_to_x, const double add_to_y)
 {
   for (size_t i = 0; i < size_; ++i)
   {
@@ -121,7 +121,7 @@ void tkach::CompositeShape::move(const double add_to_x, const double add_to_y) n
   }
 }
 
-void tkach::CompositeShape::move(const point_t& point_to_move) noexcept
+void tkach::CompositeShape::move(const point_t& point_to_move)
 {
   point_t frame_center = getFrameRect().pos;
   move(frame_center.x - point_to_move.x, frame_center.y - point_to_move.y);
@@ -188,14 +188,7 @@ const tkach::Shape* tkach::CompositeShape::operator[](const size_t id) const
 
 bool tkach::CompositeShape::empty() const noexcept
 {
-  if (size_ == 0)
-  {
-    return true;
-  }
-  else
-  {
-    return false;
-  }
+  return size_ == 0;
 }
 
 size_t tkach::CompositeShape::size() const noexcept
