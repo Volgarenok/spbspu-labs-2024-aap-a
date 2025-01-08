@@ -12,19 +12,29 @@ namespace abramov
     {
       std::string s1;
       in >> s1;
-      if (s1 == "RECTANGLE")
+      try
       {
-        makeRectangle(in, shapes, flag);
+        if (s1 == "RECTANGLE")
+        {
+          Rectangle *rect = makeRectangle(in);
+          shapes.push_back(rect);
+        }
+        else if (s1 == "SQUARE")
+        {
+          Square *square = makeSquare(in);
+          shapes.push_back(square);
+        }
+        else if (s1 == "COMPLEXQUAD")
+        {
+          ComplexQuad *cq = makeComplexQuad(in);
+          shapes.push_back(cq);
+        }
       }
-      else if (s1 == "SQUARE")
+      catch (const std::logic_error &e)
       {
-        makeSquare(in, shapes, flag);
+        flag = true;
       }
-      else if (s1 == "COMPLEXQUAD")
-      {
-        makeComplexQuad(in, shapes, flag);
-      }
-      else if (s1 == "SCALE")
+      if (s1 == "SCALE")
       {
         in >> p.x >> p.y >> k;
       }
@@ -43,49 +53,28 @@ namespace abramov
     }
   }
 
-  void makeRectangle(std::istream &in, CS &shapes, bool &flag)
+  Rectangle *makeRectangle(std::istream &in)
   {
     constexpr size_t k = 4;
     double arr[k] = {};
     getArray(in, arr, k);
-    try
-    {
-      shapes.push_back(new Rectangle({arr[0], arr[1]}, {arr[2], arr[3]}));
-    }
-    catch (const std::logic_error &e)
-    {
-      flag = true;
-    }
+    return new Rectangle({arr[0], arr[1]}, {arr[2], arr[3]});
   }
 
-  void makeSquare(std::istream &in, CS &shapes, bool &flag)
+  Square *makeSquare(std::istream &in)
   {
     constexpr size_t k = 3;
     double arr[k] = {};
     getArray(in, arr, k);
-    try
-    {
-      shapes.push_back(new Square({arr[0], arr[1]}, arr[2]));
-    }
-    catch (const std::logic_error &e)
-    {
-      flag = true;
-    }
+    return new Square({arr[0], arr[1]}, arr[2]);
   }
 
-  void makeComplexQuad(std::istream &in, CS &shapes, bool &flag)
+  ComplexQuad *makeComplexQuad(std::istream &in)
   {
     constexpr size_t k = 8;
     double x[k] = {};
     getArray(in, x, k);
-    try
-    {
-      shapes.push_back(new ComplexQuad({x[0], x[1]}, {x[2], x[3]}, {x[4], x[5]}, {x[6], x[7]}));
-    }
-    catch (const std::logic_error &e)
-    {
-      flag = true;
-    }
+    return new ComplexQuad({x[0], x[1]}, {x[2], x[3]}, {x[4], x[5]}, {x[6], x[7]});
   }
 
   void printFrameRectCoords(const rectangle_t &r)

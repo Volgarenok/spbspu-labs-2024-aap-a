@@ -14,9 +14,9 @@ namespace abramov
 {
   using CS = CompositeShape;
   void getShapes(std::istream &in, CS &shapes, point_t &p, double &k, bool &flag);
-  void makeRectangle(std::istream &in, CS &shapes, bool &flag);
-  void makeSquare(std::istream &in, CS &shapes, bool &flag);
-  void makeComplexQuad(std::istream &in, CS &shapes, bool &flag);
+  Rectangle *makeRectangle(std::istream &in);
+  Square *makeSquare(std::istream &in);
+  ComplexQuad *makeComplexQuad(std::istream &in);
   void printShapes(std::ostream &out, CS &shapes, point_t p, double k, size_t count);
   void printFrameRectCoords(const rectangle_t &r);
   void scaleFigure(Shape *s, point_t p, double k);
