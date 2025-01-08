@@ -1,13 +1,21 @@
 #include "diamond.hpp"
 #include <cmath>
+#include <stdexcept>
 
-smirnov::Diamond::Diamond(double x1, double y1, double x2, double y2, double x3, double y3)
+smirnov::Diamond::Diamond(double x1, double y1, double x2, double y2, double x3, double y3):
+  vertex1{x1, y1},
+  vertex2{x2, y2},
+  vertex3{x3, y3}
 {
-  vertex1 = {x1, y1};
-  vertex2 = {x2, y2};
-  vertex3 = {x3, y3};
+  if ((x1 == x2 && y1 == y2) && (x1 == x3 && y1 == y3))
+  {
+    throw std::invalid_argument("All three vertices cannot coincide");
+  }
+  if ((x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3))
+  {
+    throw std::invalid_argument("Two vertices cannot coincide");
+  }
 }
-
 
 double smirnov::Diamond::getArea() const
 {

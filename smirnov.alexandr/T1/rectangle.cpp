@@ -1,11 +1,14 @@
 #include "rectangle.hpp"
+#include <stdexcept>
 
-smirnov::Rectangle::Rectangle(double x1, double y1, double x2, double y2)
+smirnov::Rectangle::Rectangle(double x1, double y1, double x2, double y2):
+  lowerLeft{x1, y1},
+  upperRight{x2, y2}
 {
-  lowerLeft.x = x1;
-  lowerLeft.y = y1;
-  upperRight.x = x2;
-  upperRight.y = y2;
+  if (x1 >= x2 || y1 >= y2)
+  {
+    throw std::invalid_argument("Incorrect coordinates");
+  }
 }
 
 double smirnov::Rectangle::getArea() const

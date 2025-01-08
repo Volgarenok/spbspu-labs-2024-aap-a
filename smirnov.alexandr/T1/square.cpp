@@ -1,9 +1,14 @@
 #include "square.hpp"
+#include <stdexcept>
 
-smirnov::Square::Square(double x, double y, double length)
+smirnov::Square::Square(double x, double y, double length):
+  lowerLeft{x, y},
+  sideLength(length)
 {
-  lowerLeft = {x, y};
-  sideLength = length;
+  if (length <= 0)
+  {
+    throw std::invalid_argument("Side length must be positive");
+  }
 }
 
 double smirnov::Square::getArea() const
