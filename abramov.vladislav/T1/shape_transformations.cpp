@@ -2,9 +2,7 @@
 #include <iostream>
 #include <limits>
 
-using CS = abramov::CompositeShape;
-
-void abramov::getShapes(std::istream &in, CS &shapes, point_t &p, double &k, bool &flag)
+void abramov::getShapes(std::istream &in, Composite &shapes, point_t &p, double &k, bool &flag)
 {
   while (in)
   {
@@ -106,7 +104,7 @@ void abramov::deleteShapes(Shape **x, size_t i)
   }
 }
 
-void abramov::printShapes(std::ostream &out, CS &shapes, point_t p, double k, size_t i)
+void abramov::printShapes(std::ostream &out, Composite &shapes, point_t p, double k, size_t i)
 {
   out << std::fixed << std::setprecision(1);
   double s = shapes.getArea();

@@ -40,5 +40,6 @@ namespace abramov
 
   Shape **expandArray(Shape **arr, size_t capacity);
   void getRectCoords(rectangle_t, double&, double&, double&, double&);
+  using Composite = CompositeShape;
 }
 #endif
