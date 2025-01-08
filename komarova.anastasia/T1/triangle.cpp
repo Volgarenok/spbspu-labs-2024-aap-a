@@ -47,10 +47,6 @@ void komarova::Triangle::move(double dx, double dy)
 
 void komarova::Triangle::scale(double coef)
 {
-  if (coef <= 0.0)
-  {
-    throw std::logic_error("incorrect coefficient");
-  }
   point_t center = getFrameRect().pos;
   a_.x = center.x + (a_.x - center.x) * coef;
   a_.y = center.y + (a_.y - center.y) * coef;

@@ -43,10 +43,6 @@ void komarova::Rectangle::move(double dx, double dy)
 
 void komarova::Rectangle::scale(double coef)
 {
-  if (coef <= 0.0)
-  {
-    throw std::logic_error("incorrect coefficient");
-  }
   point_t center = getFrameRect().pos;
   low_left_.x = center.x + (low_left_.x - center.x) * coef;
   low_left_.y = center.y + (low_left_.y - center.y) * coef;

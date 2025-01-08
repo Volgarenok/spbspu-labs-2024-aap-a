@@ -38,10 +38,6 @@ void komarova::Square::move(double dx, double dy)
 
 void komarova::Square::scale(double coef)
 {
-  if (coef <= 0.0)
-  {
-    throw std::logic_error("incorrect coefficient");
-  }
   low_left_.x -= (len_ * coef - len_) / 2;
   low_left_.y -= (len_ * coef - len_) / 2;
   len_ *= coef;

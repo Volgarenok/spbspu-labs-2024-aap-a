@@ -38,9 +38,5 @@ void komarova::Circle::move(double dx, double dy)
 
 void komarova::Circle::scale(double coef)
 {
-  if (coef <= 0)
-  {
-    throw std::logic_error("incorrect coefficient");
-  }
   radius_ *= coef;
 }
