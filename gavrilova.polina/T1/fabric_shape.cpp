@@ -75,7 +75,7 @@ namespace {
       return nullptr;
     }
   }
-  
+
   gavrilova::Polygon* make_polygon(size_t& nSpaces, size_t& nError)
   {
     const int minNVertPolygon = 3;
