@@ -23,14 +23,14 @@ kiselev::Diamond::Diamond(point_t p1, point_t p2, point_t p3)
   else if (p2.x == p1.x && p2.y == p3.y)
   {
     center = { p2.x, p2.y };
-    pHorizontal = { p1.x, p1.y };
-    pVertical = { p3.x, p3.y };
+    pHorizontal = { p3.x, p3.y };
+    pVertical = { p1.x, p1.y };
   }
   else if (p2.x == p3.x && p2.y == p1.y)
   {
     center = { p2.x, p2.y };
-    pHorizontal = { p3.x, p3.y };
-    pVertical = { p1.x, p1.y };
+    pHorizontal = { p1.x, p1.y };
+    pVertical = { p3.x, p3.y };
   }
   else if (p3.x == p1.x && p3.y == p2.y)
   {
