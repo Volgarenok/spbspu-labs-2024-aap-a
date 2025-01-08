@@ -15,12 +15,12 @@ int main()
   komarova::Shape* shapes[size] = {};
   bool wrong_shape = false;
   int count = 0;
-  double x_sc = 0.0;
-  double y_sc = 0.0;
-  double coef = 1.0;
 
   try
   {
+    double x_sc = 0.0;
+    double y_sc = 0.0;
+    double coef = 1.0;
     komarova::make_shapes(std::cin, shapes, wrong_shape, count);
   }
   catch (const std::bad_alloc& e)
