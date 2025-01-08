@@ -35,7 +35,7 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
 
 double petrov::Concave::getArea() const
 {
-  return triangle_1_.getArea() + triangle_2_.getArea() 
+  return triangle_1_.getArea() + triangle_2_.getArea()
             + triangle_3_.getArea() + triangle_4_.getArea();
 }
 
@@ -50,7 +50,7 @@ double petrov::Concave::getAreaOfComponent(point_t p1, point_t p2, point_t p3) c
 
 petrov::rectangle_t petrov::Concave::getFrameRect() const
 {
-  rectangle_t tr_fr_r[4] = { triangle_1_.getFrameRect(), triangle_2_.getFrameRect(), 
+  rectangle_t tr_fr_r[4] = { triangle_1_.getFrameRect(), triangle_2_.getFrameRect(),
                              triangle_3_.getFrameRect(), triangle_4_.getFrameRect() };
   double xmax = tr_fr_r[0].pos.x + tr_fr_r[0].width / 2.0;
   double xmin = tr_fr_r[0].pos.x - tr_fr_r[0].width / 2.0;
@@ -94,7 +94,7 @@ void petrov::Concave::move(double dx, double dy)
 void petrov::Concave::scale(double k)
 {
   rectangle_t frame_rect = getFrameRect();
-  rectangle_t tr_fr_r[4] = { triangle_1_.getFrameRect(), triangle_2_.getFrameRect(), 
+  rectangle_t tr_fr_r[4] = { triangle_1_.getFrameRect(), triangle_2_.getFrameRect(),
                              triangle_3_.getFrameRect(), triangle_4_.getFrameRect() };
   Triangle * triangles[4] = { &triangle_1_, &triangle_2_, &triangle_3_, &triangle_4_ };
   for (size_t i = 0; i < 4; i++)
