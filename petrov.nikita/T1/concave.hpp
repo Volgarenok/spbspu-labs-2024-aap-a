@@ -2,6 +2,7 @@
 #define CONCAVE_HPP
 #include "shape.hpp"
 #include "base-types.hpp"
+#include "triangle.hpp"
 namespace petrov
 {
   struct Concave final: Shape
@@ -14,7 +15,7 @@ namespace petrov
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    point_t p1_, p2_, p3_, p4_;
+    Triangle triangle_1_, triangle_2_, triangle_3_, triangle_4_;
     double getAreaOfComponent(point_t p1, point_t p2, point_t p3) const;
   };
 }
