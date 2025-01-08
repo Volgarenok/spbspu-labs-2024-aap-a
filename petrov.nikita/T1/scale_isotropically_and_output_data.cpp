@@ -35,7 +35,7 @@ void petrov::scaleIsotropicallyAndOutputData(petrov::point_t scale_point, double
   {
     second_sum_area += shape[i]->getArea();
   }
-  std::cout << second_sum_area << " ";
+  std::cout << second_sum_area;
   for (size_t i = 0; i < created; i++)
   {
     petrov::rectangle_t frame_rect = shape[i]->getFrameRect();
