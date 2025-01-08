@@ -1,9 +1,15 @@
 #include "rectangle.hpp"
+#include <stdexcept>
 
 mozhegova::Rectangle::Rectangle(point_t lowLef, point_t uppRig):
   lowerLeft(lowLef),
   upperRight(uppRig)
-{}
+{
+  if (lowLef.x >= uppRig.x || lowLef.y >= uppRig.y)
+  {
+    throw std::invalid_argument("Incorrect coordinates");
+  }
+}
 
 double mozhegova::Rectangle::getArea() const
 {
@@ -38,6 +44,10 @@ void mozhegova::Rectangle::move(double dx, double dy)
 
 void mozhegova::Rectangle::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Incorrect scale");
+  }
   point_t center = getFrameRect().pos;
   double xLeft = center.x - (center.x - lowerLeft.x) * k;
   double yLeft = center.y - (center.y - lowerLeft.y) * k;

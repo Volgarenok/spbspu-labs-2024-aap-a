@@ -1,4 +1,5 @@
 #include "polygon.hpp"
+#include <stdexcept>
 #include <algorithm>
 
 mozhegova::Polygon::~Polygon()
@@ -10,9 +11,25 @@ mozhegova::Polygon::Polygon(size_t n, const point_t * arr):
   count(n),
   points(new point_t[n])
 {
+  if (count < 3)
+  {
+    delete[] points;
+    throw std::invalid_argument("Incorrect coordinates");
+  }
   for (size_t i = 0; i < count; i++)
   {
     points[i] = arr[i];
+  }
+  for (size_t i = 0; i < count - 1; i++)
+  {
+    for (size_t j = i + 1; j < count; j++)
+    {
+      if (points[i].x == points[j].x && points[i].y == points[j].y)
+      {
+        delete[] points;
+        throw std::invalid_argument("Incorrect coordinates");
+      }
+    }
   }
 }
 
@@ -76,6 +93,10 @@ void mozhegova::Polygon::move(double dx, double dy)
 
 void mozhegova::Polygon::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Incorrect scale");
+  }
   double sumX = 0.0;
   double sumY = 0.0;
   for (size_t i = 0; i < count; i++)
