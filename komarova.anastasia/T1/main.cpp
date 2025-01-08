@@ -38,13 +38,6 @@ int main()
     return 1;
   }
 
-  if (coef <= 0)
-  {
-    delete_shapes(shapes);
-    std::cerr << "incorrect coefficient \n";
-    return 1;
-  }
-
 
   std::cout << std::fixed << std::setprecision(1);
   komarova::area_sum(std::cout, shapes);

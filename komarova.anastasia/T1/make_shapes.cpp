@@ -83,6 +83,12 @@ int komarova::make_shapes(std::istream& input, Shape** shapes, bool& wrong_shape
         double coef = 1.0;
         sc_flag = true;
         input >> x_sc >> y_sc >> coef;
+        if (coef <= 0)
+        {
+          delete_shapes(shapes);
+          std::cerr << "incorrect coefficient \n";
+          return 1;
+        }
       }
     }
     catch (const std::bad_alloc& e)
