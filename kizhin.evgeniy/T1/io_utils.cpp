@@ -1,5 +1,6 @@
 #include "io_utils.hpp"
 #include <iomanip>
+#include "shape.hpp"
 #include "shape_utils.hpp"
 
 namespace kizhin {
@@ -10,8 +11,7 @@ namespace kizhin {
   void copy(const double*, const double*, double*);
 }
 
-std::ostream&
-kizhin::outputShapesInfo(std::ostream& os, const CompositeShape& shapes)
+std::ostream& kizhin::outputShapesInfo(std::ostream& os, const CompositeShape& shapes)
 {
   os << std::fixed << std::setprecision(1);
   os << shapes.getArea();
@@ -31,8 +31,7 @@ std::ostream& kizhin::outputShapeFrame(std::ostream& os, const Shape* shape)
   return os << x1 << ' ' << y1 << ' ' << x2 << ' ' << y2;
 }
 
-double*
-kizhin::processInput(std::istream& is, std::ostream& errs, CompositeShape& shapes)
+double* kizhin::processInput(std::istream& is, std::ostream& errs, CompositeShape& shapes)
 {
   bool isScaleCommand = false;
   std::string currentName;
@@ -43,10 +42,12 @@ kizhin::processInput(std::istream& is, std::ostream& errs, CompositeShape& shape
       if (currentName == "SCALE") {
         isScaleCommand = true;
       } else {
+        Shape* shape = nullptr;
         try {
-          Shape* shape = createShape(currentName, currentParams);
+          shape = createShape(currentName, currentParams);
           shapes.push_back(shape);
         } catch (const std::exception& e) {
+          delete shape;
           errs << "Error: " << e.what() << '\n';
         }
         delete[] currentParams;
