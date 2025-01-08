@@ -32,8 +32,16 @@ demehin::Polygon::~Polygon()
 
 demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
   vrtx_cnt_(vrtx_cnt),
-  vertex_(new point_t[vrtx_cnt])
+  vertex_(nullptr)
+  //vertex_(new point_t[vrtx_cnt])
 {
+  if (vrtx_cnt < 3)
+  {
+    throw std::logic_error("incorrect_shape");
+  }
+
+  vertex_ = new point_t[vrtx_cnt];
+
   if (vertex)
   {
     for (size_t i = 0; i < vrtx_cnt; i++)
@@ -41,13 +49,25 @@ demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
       vertex_[i] = vertex[i];
     }
 
-    if (hasSameVertex(vrtx_cnt, vertex_) || vrtx_cnt < 3)
+    if (hasSameVertex(vrtx_cnt, vertex_))
     {
       delete[] vertex_;
-      throw std::logic_error("incorrect_shape");
+      throw std::logic_error("incorrect shape");
     }
   }
-  delete[] vertex_;
+  //if (vertex)
+  //{
+    //for (size_t i = 0; i < vrtx_cnt; i++)
+    //{
+      //vertex_[i] = vertex[i];
+    //}
+
+    //if (hasSameVertex(vrtx_cnt, vertex_) || vrtx_cnt < 3)
+    //{
+      //delete[] vertex_;
+      //throw std::logic_error("incorrect_shape");
+    //}
+  //}
 }
 
 double demehin::Polygon::getArea() const
