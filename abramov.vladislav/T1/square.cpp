@@ -12,10 +12,6 @@ namespace abramov
     }
   }
 
-  Square::Square(Rectangle rect):
-   rect_(rect)
-  {}
-
   double Square::getArea() const noexcept
   {
     return rect_.getArea();

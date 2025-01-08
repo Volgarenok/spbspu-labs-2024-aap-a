@@ -9,7 +9,6 @@ namespace abramov
   struct Square final: Shape
   {
     Square(point_t p, double len);
-    Square(Rectangle rect);
     double getArea() const noexcept override;
     rectangle_t getFrameRect() const noexcept override;
     void move(point_t p) override;
