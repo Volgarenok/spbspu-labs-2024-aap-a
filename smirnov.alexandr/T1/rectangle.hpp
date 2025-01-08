@@ -4,11 +4,8 @@
 
 namespace smirnov
 {
-  class Rectangle: public Shape
+  class Rectangle final: public Shape
   {
-  private:
-    point_t lowerLeft;
-    point_t upperRight;
   public:
     Rectangle(double x1, double y1, double x2, double y2);
     double getArea() const override;
@@ -16,6 +13,9 @@ namespace smirnov
     void move(point_t newPos) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
+  private:
+    point_t lowerLeft;
+    point_t upperRight;
   };
 }
 #endif

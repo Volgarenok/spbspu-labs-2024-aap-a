@@ -15,5 +15,4 @@ namespace smirnov
     double height;
   };
 }
-
 #endif

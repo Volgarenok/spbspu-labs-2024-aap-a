@@ -4,11 +4,8 @@
 
 namespace smirnov
 {
-  class Square : public Shape
+  class Square final: public Shape
   {
-  private:
-    point_t lowerLeft;
-    double sideLength;
   public:
     Square(double x, double y, double length);
     double getArea() const override;
@@ -16,6 +13,9 @@ namespace smirnov
     void move(point_t p) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
+  private:
+    point_t lowerLeft;
+    double sideLength;
   };
 }
 #endif

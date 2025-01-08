@@ -4,12 +4,8 @@
 
 namespace smirnov
 {
-  class Diamond : public Shape
+  class Diamond final: public Shape
   {
-  private:
-    point_t vertex1;
-    point_t vertex2;
-    point_t vertex3;
   public:
     Diamond(double x1, double y1, double x2, double y2, double x3, double y3);
     double getArea() const override;
@@ -17,6 +13,10 @@ namespace smirnov
     void move(point_t newPos) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
+  private:
+    point_t vertex1;
+    point_t vertex2;
+    point_t vertex3;
   };
 }
 #endif

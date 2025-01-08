@@ -9,7 +9,7 @@
 
 int main()
 {
-  smirnov::Shape * shapes[1000] = {};
+  smirnov::Shape * shapes[10000] = {};
   std::string shapeType = "";
   size_t countShapes = 0;
   bool checkScale = false;
