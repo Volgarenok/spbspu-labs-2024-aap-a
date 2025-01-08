@@ -17,10 +17,6 @@ void petrov::scaleIsotropicallyAndOutputData(petrov::point_t scale_point, double
     std::cout << " " << frame_rect.pos.y - (frame_rect.height / 2);
     std::cout << " " << frame_rect.pos.x + (frame_rect.width / 2);
     std::cout << " " << frame_rect.pos.y + (frame_rect.height / 2);
-    if (i != created - 1)
-    {
-      std::cout << " ";
-    }
     double mv_dx = frame_rect.pos.x - scale_point.x;
     double mv_dy = frame_rect.pos.y - scale_point.y;
     shape[i]->move(scale_point);
@@ -43,10 +39,6 @@ void petrov::scaleIsotropicallyAndOutputData(petrov::point_t scale_point, double
     std::cout << " " << frame_rect.pos.y - (frame_rect.height / 2);
     std::cout << " " << frame_rect.pos.x + (frame_rect.width / 2);
     std::cout << " " << frame_rect.pos.y + (frame_rect.height / 2);
-    if (i != created - 1)
-    {
-      std::cout << " ";
-    }
   }
   std::cout << "\n";
 }
