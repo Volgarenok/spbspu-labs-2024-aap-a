@@ -9,13 +9,14 @@ gavrilova::Polygon::Polygon(size_t nPoints, point_t* verteces):
   if (nPoints < 3) {
     throw std::logic_error("Polygon must have at least 3 vertices.");
   }
-  triangles_ = new gavrilova::Triangle*[size_];
-  for (size_t i = 0; i < nPoints - 2; ++i) {
+  triangles_ = new gavrilova::Triangle*[nPoints - 2];
+  for (size_t i = 0; i < (nPoints - 2); ++i) {
     try{
       triangles_[i] = new gavrilova::Triangle(verteces[0], verteces[i + 1], verteces[i + 2]);
       ++size_;
     } catch (const std::bad_alloc&) {
       clear();
+      size_ = 0;
       throw;
     }
   }
@@ -25,13 +26,14 @@ gavrilova::Polygon::Polygon(const Polygon& other):
   size_(0),
   triangles_(nullptr)
 {
-  triangles_ = new gavrilova::Triangle*[size_];
+  triangles_ = new gavrilova::Triangle*[other.size_];
   for (size_t i = 0; i < other.size_; ++i) {
     try{
       triangles_[i] = new gavrilova::Triangle(*other.triangles_[i]);
       ++size_;
     } catch (const std::bad_alloc&) {
       clear();
+      size_ = 0;
       throw;
     }
   }
@@ -40,6 +42,7 @@ gavrilova::Polygon::Polygon(const Polygon& other):
 gavrilova::Polygon::~Polygon()
 {
   clear();
+  size_ = 0;
 }
 
 double gavrilova::Polygon::getArea() const noexcept
