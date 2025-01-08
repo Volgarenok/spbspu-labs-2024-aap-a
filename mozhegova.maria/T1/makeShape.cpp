@@ -9,6 +9,7 @@ namespace mozhegova
   Rectangle * makeRectangle(std::istream& in);
   Diamond * makeDiamond(std::istream& in);
   Polygon * makePolygon(std::istream& in);
+  void inputNum(std::istream& in, point_t * num, size_t n);
 }
 
 mozhegova::Shape * mozhegova::makeShape(std::istream& in, std::string shapeName)
@@ -33,30 +34,19 @@ mozhegova::Shape * mozhegova::makeShape(std::istream& in, std::string shapeName)
 
 mozhegova::Rectangle * mozhegova::makeRectangle(std::istream& in)
 {
-  double p1 = 0.0;
-  double p2 = 0.0;
-  double p3 = 0.0;
-  double p4 = 0.0;
-  in >> p1 >> p2 >> p3 >> p4;
-  point_t lowLef = {p1, p2};
-  point_t uppRig = {p3, p4};
-  mozhegova::Rectangle * rect = new mozhegova::Rectangle(lowLef, uppRig);
+  constexpr size_t len = 2;
+  point_t coor[len] = {};
+  inputNum(in, coor, len);
+  mozhegova::Rectangle * rect = new mozhegova::Rectangle(coor[0], coor[1]);
   return rect;
 }
 
 mozhegova::Diamond * mozhegova::makeDiamond(std::istream& in)
 {
-  double p1 = 0.0;
-  double p2 = 0.0;
-  double p3 = 0.0;
-  double p4 = 0.0;
-  double p5 = 0.0;
-  double p6 = 0.0;
-  in >> p1 >> p2 >> p3 >> p4 >> p5 >> p6;
-  point_t pCent = {p1, p2};
-  point_t pVert = {p3, p4};
-  point_t pHori = {p5, p6};
-  Diamond * diam = new Diamond(pCent, pVert, pHori);
+  constexpr size_t len = 3;
+  point_t coor[len] = {};
+  inputNum(in, coor, len);
+  Diamond * diam = new Diamond(coor[0], coor[1], coor[2]);
   return diam;
 }
 
@@ -124,4 +114,12 @@ mozhegova::Polygon * mozhegova::makePolygon(std::istream& in)
   }
   delete[] numPoint;
   return poly;
+}
+
+void mozhegova::inputNum(std::istream& in, point_t * num, size_t n)
+{
+  for (size_t i = 0; i < n; i++)
+  {
+    in >> num[i].x >> num[i].y;
+  }
 }
