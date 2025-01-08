@@ -41,8 +41,10 @@ demehin::Ring::Ring(point_t center, double out_r, double in_r):
     delete[] outerVrt;
   }
 
-  outer_plg_.setVertex(outerVrt);
-  inner_plg_.setVertex(innerVrt);
+  outer_plg_.setVertex(outerVrt, 130);
+  inner_plg_.setVertex(innerVrt, 130);
+  delete[] outerVrt;
+  delete[] innerVrt;
 
   //demehin::point_t* outerVrt = nullptr;
   //demehin::point_t* innerVrt = nullptr;

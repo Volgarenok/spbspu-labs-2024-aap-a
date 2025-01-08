@@ -165,9 +165,12 @@ void demehin::Polygon::scale(double k)
   }
 }
 
-void demehin::Polygon::setVertex(demehin::point_t* vertex)
+void demehin::Polygon::setVertex(demehin::point_t* vertex, size_t vrt_cnt)
 {
-  vertex_ = vertex;
+  for (size_t i = 0; i < vrt_cnt; i++)
+  {
+    vertex_[i] = vertex[i];
+  }
 }
 
 demehin::point_t demehin::Polygon::getCenter()

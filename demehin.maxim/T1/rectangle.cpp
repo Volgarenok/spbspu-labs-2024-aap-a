@@ -29,7 +29,8 @@ demehin::Rectangle::Rectangle(point_t left_bot, point_t right_top):
   }
 
   demehin::point_t* vrt = generate_vrt(left_bot, right_top);
-  plg_.setVertex(vrt);
+  plg_.setVertex(vrt, 4);
+  delete[] vrt;
   //demehin::point_t* vrt = nullptr;
   //try
   //{

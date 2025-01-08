@@ -15,7 +15,7 @@ namespace demehin
     void move(point_t s) override;
     void move(double x, double y) override;
     void scale(double k) override;
-    void setVertex(point_t* vertex);
+    void setVertex(point_t* vertex, size_t vrt_cnt);
     point_t getCenter();
   private:
     size_t vrtx_cnt_;
