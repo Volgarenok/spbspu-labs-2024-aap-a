@@ -7,10 +7,11 @@
 #include "square.hpp"
 #include "complexquad.hpp"
 #include "shape_transformations.hpp"
-using namespace abramov;
 
 int main()
 {
+  using namespace abramov;
+
   CompositeShape shapes(10000);
   double k = 0;
   bool wrong_figure = false;

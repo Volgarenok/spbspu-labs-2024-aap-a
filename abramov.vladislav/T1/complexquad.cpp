@@ -26,8 +26,12 @@ namespace abramov
     }
   }
 
-  void getCoordsOfIntersection(point_t A, point_t B, point_t C, point_t D, double &x, double &y)
+  void getCoordsOfIntersection(const point_t *points, double &x, double &y)
   {
+    const point_t A = points[0];
+    const point_t B = points[1];
+    const point_t C = points[2];
+    const point_t D = points[3];
     const double k1 = (B.y - A.y) / (B.x - A.x);
     const double b1 = A.y - A.x * k1;
     const double k2 = (D.y - C.y) / (D.x - C.x);
@@ -73,46 +77,57 @@ namespace abramov
     const double x2 = p2.x;
     const double y1 = p1.y;
     const double y2 = p2.y;
+    const point_t a{x1, y2};
+    const point_t b{x2, y1};
     if (x2 - x1 >= y2 - y1)
     {
       const double x3 = (x1 + x2) / 2;
-      cq1 = ComplexQuad({x1, y1}, {x3, y2}, {x3, y1}, {x1, y2});
-      cq2 = ComplexQuad({x1, y2}, {x3, y1}, {x1, y1}, {x3, y2});
-      cq3 = ComplexQuad({x3, y1}, {x2, y2}, {x2, y1}, {x3, y2});
-      cq4 = ComplexQuad({x3, y2}, {x2, y1}, {x3, y1}, {x2, y2});
+      const point_t c{x3, y2};
+      const point_t d{x3, y1};
+      cq1 = ComplexQuad(p1, c, d, a);
+      cq2 = ComplexQuad(a, d, p1, c);
+      cq3 = ComplexQuad(d, p2, b, c);
+      cq4 = ComplexQuad(c, b, d, p2);
     }
     else
     {
       const double y3 = (y1 + y2) / 2;
-      cq1 = ComplexQuad({x1, y2}, {x2, y3}, {x2, y2}, {x1, y3});
-      cq2 = ComplexQuad({x1, y3}, {x2, y2}, {x1, y2}, {x2, y3});
-      cq3 = ComplexQuad({x1, y1}, {x2, y3}, {x2, y1}, {x1, y3});
-      cq4 = ComplexQuad({x1, y1}, {x2, y3}, {x1, y3}, {x2, y1});
+      const point_t c{x2, y3};
+      const point_t d{x1, y3};
+      cq1 = ComplexQuad(a, c, p2, d);
+      cq2 = ComplexQuad(d, p2, a, c);
+      cq3 = ComplexQuad(p1, c, b, d);
+      cq4 = ComplexQuad(p1, c, d, b);
     }
   }
 
+  ComplexQuad::ComplexQuad():
+    points{{0.0, 0.0}, {10.0, 10.0}, {2.0, 0.0}, {0.0, 3.0}}
+  {}
+
   ComplexQuad::ComplexQuad(point_t A, point_t B, point_t C, point_t D):
-    A_(A),
-    B_(B),
-    C_(C),
-    D_(D)
+    points{A, B, C, D}
   {
     double x = 0;
     double y = 0;
-    getCoordsOfIntersection(A, B, C, D, x, y);
+    getCoordsOfIntersection(points, x, y);
   }
 
   double ComplexQuad::getArea() const noexcept
   {
     const point_t center = getCenterComplexQuad();
-    return getTriangleArea(A_, D_, center) + getTriangleArea(B_, C_, center);
+    return getTriangleArea(points[0], points[3], center) + getTriangleArea(points[1], points[2], center);
   }
 
   rectangle_t ComplexQuad::getFrameRect() const noexcept
   {
     constexpr size_t k = 4;
-    double x[k] = {A_.x, B_.x, C_.x, D_.x};
-    double y[k] = {A_.y, B_.y, C_.y, D_.y};
+    const point_t A = points[0];
+    const point_t B = points[1];
+    const point_t C = points[2];
+    const point_t D = points[3];
+    double x[k] = {A.x, B.x, C.x, D.x};
+    double y[k] = {A.y, B.y, C.y, D.y};
     double max_x = 0;
     double min_x = 0;
     double max_y = 0;
@@ -128,7 +143,7 @@ namespace abramov
   {
     double x = 0;
     double y = 0;
-    getCoordsOfIntersection(A_, B_, C_, D_, x, y);
+    getCoordsOfIntersection(points, x, y);
     point_t center{x, y};
     return center;
   }
@@ -144,15 +159,10 @@ namespace abramov
   void ComplexQuad::move(double dx, double dy)
   {
     constexpr size_t k = 4;
-    point_t points[k] = {A_, B_, C_, D_};
     for (size_t i = 0; i < k; ++i)
     {
       changePointCoords(points[i], dx, dy);
     }
-    A_ = points[0];
-    B_ = points[1];
-    C_ = points[2];
-    D_ = points[3];
   }
 
   void ComplexQuad::scale(double k)
@@ -168,17 +178,12 @@ namespace abramov
       const double ox = O.x;
       const double oy = O.y;
       constexpr size_t k = 4;
-      point_t points[k] = {A_, B_, C_, D_};
       for (size_t i = 0; i < k; ++i)
       {
         double dx = -1 * (ox - points[i].x) * dk;
         double dy = -1 * (oy - points[i].y) * dk;
         changePointCoords(points[i], dx, dy);
       }
-      A_ = points[0];
-      B_ = points[1];
-      C_ = points[2];
-      D_ = points[3];
     }
   }
 
@@ -189,21 +194,21 @@ namespace abramov
 
   point_t ComplexQuad::getA() const
   {
-    return A_;
+    return points[0];
   }
 
   point_t ComplexQuad::getB() const
   {
-    return B_;
+    return points[1];
   }
 
   point_t ComplexQuad::getC() const
   {
-    return C_;
+    return points[2];
   }
 
   point_t ComplexQuad::getD() const
   {
-    return D_;
+    return points[3];
   }
 }

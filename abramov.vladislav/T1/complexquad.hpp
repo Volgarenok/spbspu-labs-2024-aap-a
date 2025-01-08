@@ -7,6 +7,7 @@ namespace abramov
 {
   struct ComplexQuad final: Shape
   {
+    ComplexQuad();
     ComplexQuad(point_t A, point_t B, point_t C, point_t D);
     double getArea() const noexcept override;
     rectangle_t getFrameRect() const noexcept override;
@@ -19,10 +20,7 @@ namespace abramov
     point_t getC() const;
     point_t getD() const;
   private:
-    point_t A_;
-    point_t B_;
-    point_t C_;
-    point_t D_;
+    point_t points[4];
 
     point_t getCenterComplexQuad() const;
   };

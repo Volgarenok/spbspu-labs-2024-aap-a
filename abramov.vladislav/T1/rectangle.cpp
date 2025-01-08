@@ -6,11 +6,7 @@
 
 namespace abramov
 {
-  Rectangle::Rectangle(point_t p1, point_t p2):
-    cmplxqd1_({p1.x, p1.y}, {(p1.x + p2.x) / 2, p2.y}, {(p1.x + p2.x) / 2, p1.y}, {p1.x, p2.y}),
-    cmplxqd2_({p1.x, p2.y}, {(p1.x + p2.x) / 2, p1.y}, {p1.x, p1.y}, {(p1.x + p2.x) / 2, p2.y}),
-    cmplxqd3_({(p1.x + p2.x) / 2, p1.y}, {p2.x, p2.y}, {p2.x, p1.y}, {(p1.x + p2.x) / 2, p2.y}),
-    cmplxqd4_({(p1.x + p2.x) / 2, p2.y}, {p2.x, p1.y}, {(p1.x + p2.x) / 2, p1.y}, {p2.x, p2.y})
+  Rectangle::Rectangle(point_t p1, point_t p2)
   {
     if (p1.x >= p2.x || p1.y >= p2.y)
     {
