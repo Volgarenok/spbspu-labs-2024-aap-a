@@ -10,7 +10,7 @@ double mozhegova::sumArea(const Shape * const * shapes, size_t n)
   return sum;
 }
 
-void mozhegova::printCoorRect(const Shape * const * shapes, size_t n)
+void mozhegova::printCoorRect(std::ostream& out, const Shape * const * shapes, size_t n)
 {
   for (size_t i = 0; i < n; i++)
   {
@@ -19,9 +19,12 @@ void mozhegova::printCoorRect(const Shape * const * shapes, size_t n)
     double ly = rect.pos.y - rect.height / 2.0;
     double rx = rect.pos.x + rect.width / 2.0;
     double ry = rect.pos.y + rect.height / 2.0;
-    std::cout << " " << lx << " " << ly << " " << rx << " " << ry;
+    out << lx << " " << ly << " " << rx << " " << ry;
+    if (i < n - 1)
+    {
+      out << " ";
+    }
   }
-  std::cout << "\n";
 }
 
 void mozhegova::scaleShapes(Shape ** shapes, size_t n, point_t p, double k)

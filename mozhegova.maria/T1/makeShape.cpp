@@ -16,15 +16,15 @@ mozhegova::Shape * mozhegova::makeShape(std::istream& in, std::string shapeName)
 {
   if (shapeName == "RECTANGLE")
   {
-    return mozhegova::makeRectangle(in);
+    return makeRectangle(in);
   }
   else if (shapeName == "DIAMOND")
   {
-    return mozhegova::makeDiamond(in);
+    return makeDiamond(in);
   }
   else if (shapeName == "POLYGON")
   {
-    return mozhegova::makePolygon(in);
+    return makePolygon(in);
   }
   else
   {
@@ -37,7 +37,7 @@ mozhegova::Rectangle * mozhegova::makeRectangle(std::istream& in)
   constexpr size_t len = 2;
   point_t coor[len] = {};
   inputNum(in, coor, len);
-  mozhegova::Rectangle * rect = new mozhegova::Rectangle(coor[0], coor[1]);
+  Rectangle * rect = new Rectangle(coor[0], coor[1]);
   return rect;
 }
 
@@ -85,7 +85,7 @@ mozhegova::Polygon * mozhegova::makePolygon(std::istream& in)
   point_t * numPoint = nullptr;
   try
   {
-    numPoint = new mozhegova::point_t[len / 2];
+    numPoint = new point_t[len / 2];
   }
   catch (const std::bad_alloc& e)
   {
@@ -100,7 +100,7 @@ mozhegova::Polygon * mozhegova::makePolygon(std::istream& in)
   Polygon * poly = nullptr;
   try
   {
-    poly = new mozhegova::Polygon(len / 2, numPoint);
+    poly = new Polygon(len / 2, numPoint);
   }
   catch(const std::bad_alloc& e)
   {
