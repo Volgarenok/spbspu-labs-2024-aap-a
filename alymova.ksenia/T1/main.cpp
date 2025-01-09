@@ -9,7 +9,6 @@ int main()
 {
   constexpr int max_size = 1000;
   alymova::Shape* shapes[max_size] = {};
-  alymova::CompositeShape comp_shape = {};
   int shapes_now = 0;
   double scale_x = 0.0, scale_y = 0.0, scale_ratio = 1.0;
   bool wrong_shape_flag = false;
