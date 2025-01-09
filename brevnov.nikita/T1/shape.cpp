@@ -1,7 +1,7 @@
 #include "shape.hpp"
 #include <iomanip>
 
-void brevnov::destroy_shape(Shape** shapes, size_t count)
+void brevnov::destroy_shapes(Shape** shapes, size_t count)
 {
   for (size_t i = 0; i < count; ++i)
   {
@@ -10,7 +10,7 @@ void brevnov::destroy_shape(Shape** shapes, size_t count)
   delete shapes;
 }
 
-double brevnov::get_sum_area(const Shape * const * shapes, size_t count)
+double brevnov::get_sum_areas(const Shape * const * shapes, size_t count)
 {
   double result = 0;
   for (size_t i = 0; i < count; ++i)
@@ -20,7 +20,7 @@ double brevnov::get_sum_area(const Shape * const * shapes, size_t count)
   return result;
 }
 
-void brevnov::scale_shape(Shape * const * shapes, size_t count, point_t scale_p, double ratio)
+void brevnov::scale_shapes(Shape * const * shapes, size_t count, point_t scale_p, double ratio)
 {
   for (size_t i = 0; i < count; ++i)
   {
