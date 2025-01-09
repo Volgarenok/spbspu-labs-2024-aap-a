@@ -110,21 +110,21 @@ void abramov::printShapes(std::ostream &out, Composite &shapes, point_t p, doubl
   out << s << " ";
   for (size_t j = 0; j < i - 1; ++j)
   {
-    printFrameRectCoords(shapes.getFrameRect(j));
+    printFrameRectCoords(shapes[j]->getFrameRect());
     out << " ";
     scaleFigure(shapes[j], p, k);
   }
-  printFrameRectCoords(shapes.getFrameRect(i - 1));
+  printFrameRectCoords(shapes[i - 1]->getFrameRect());
   scaleFigure(shapes[i - 1], p, k);
   out << "\n";
   s = shapes.getArea();
   std::cout << s << " ";
   for (size_t j = 0; j < i - 1; ++j)
   {
-    printFrameRectCoords(shapes.getFrameRect(j));
+    printFrameRectCoords(shapes[j]->getFrameRect());
     out << " ";
   }
-  printFrameRectCoords(shapes.getFrameRect(i - 1));
+  printFrameRectCoords(shapes[i - 1]->getFrameRect());
   out << "\n";
   out.copyfmt(std::ios(NULL));
 }

@@ -109,11 +109,6 @@ abramov::rectangle_t abramov::CompositeShape::getFrameRect() const noexcept
   return rect;
 }
 
-abramov::rectangle_t abramov::CompositeShape::getFrameRect(size_t id) const noexcept
-{
-  return shapeptrs_[id]->getFrameRect();
-}
-
 void abramov::CompositeShape::move(point_t p)
 {
   const double dx = p.x - getFrameRect().pos.x;
@@ -228,10 +223,5 @@ abramov::CompositeShape *abramov::CompositeShape::clone() const
   {
     return nullptr;
   }
-}
-
-size_t abramov::CompositeShape::getShapes_() const noexcept
-{
-  return shapes_;
 }
 

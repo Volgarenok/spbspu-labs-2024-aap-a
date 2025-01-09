@@ -25,7 +25,7 @@ int main()
     std::cerr << "Memory fail\n";
     return 2;
   }
-  size_t count = shapes.getShapes_();
+  size_t count = shapes.size();
   if (k <= 0)
   {
     std::cerr << "There is no scale command\n";
