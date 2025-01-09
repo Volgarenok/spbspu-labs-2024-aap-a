@@ -5,11 +5,8 @@
 
 namespace finaev
 {
-  class Square :public Shape
+  class Square final: public Shape
   {
-  private:
-    point_t leftDown;
-    double side;
   public:
     Square(point_t l, double s);
     double getArea() const override;
@@ -17,6 +14,9 @@ namespace finaev
     void move(point_t a) override;
     void move(double sx, double sy) override;
     void scale(double k) override;
+  private:
+    point_t leftDown;
+    double side;
   };
 }
 

@@ -16,7 +16,7 @@ namespace finaev
     virtual void move(double sx, double sy) = 0;
     virtual void scale(double k) = 0;
   };
-  void deleteShapes(finaev::Shape** shapes, size_t size);
+  void deleteShapes(Shape** shapes, const size_t size);
 }
 
 #endif

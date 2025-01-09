@@ -5,11 +5,8 @@
 
 namespace finaev
 {
-  class Rectangle :public Shape
+  class Rectangle final: public Shape
   {
-  private:
-    point_t leftDown;
-    point_t rightUp;
   public:
     Rectangle(point_t l, point_t r);
     double getArea() const override;
@@ -17,6 +14,9 @@ namespace finaev
     void move(point_t a) override;
     void move(double sx, double sy) override;
     void scale(double k) override;
+  private:
+    point_t leftDown;
+    point_t rightUp;
   };
 }
 

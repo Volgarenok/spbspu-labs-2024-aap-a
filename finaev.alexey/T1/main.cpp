@@ -21,7 +21,7 @@ int main()
   std::string coordinates = "";
   bool isCorrect = false;
   bool isScale = false;
-  while (std::cin >> str && !std::cin.eof())
+  while (std::cin >> str && !std::cin.eof() && !isScale)
   {
     if (size == capacity)
     {
@@ -51,6 +51,7 @@ int main()
     try
     {
       shapes[size] = finaev::makeShapes(std::cin, str);
+      size++;
     }
     catch (std::logic_error& e)
     {
@@ -60,7 +61,6 @@ int main()
     {
       finaev::deleteShapes(shapes, size);
     }
-    size++;
   }
   if (!isScale)
   {
@@ -77,12 +77,12 @@ int main()
     std::cerr << "No figures!\n";
     return 1;
   }
-  std::cout << std::fixed << std::setprecision(1) << finaev::getSumArea(shapes, size);
-  finaev::printFrameRect(shapes, size);
+  std::cout << std::fixed << std::setprecision(1) << finaev::getSumArea(shapes, size) << " ";
+  finaev::printFrameRect(std::cout, shapes, size);
   std::cout << "\n";
   finaev::scale(shapes, size, scaleCenter, k);
-  std::cout << std::fixed << std::setprecision(1) << finaev::getSumArea(shapes, size);
-  finaev::printFrameRect(shapes, size);
+  std::cout << std::fixed << std::setprecision(1) << finaev::getSumArea(shapes, size) << " ";
+  finaev::printFrameRect(std::cout, shapes, size);
   std::cout << "\n";
   finaev::deleteShapes(shapes, size);
   return 0;
