@@ -32,7 +32,7 @@ void gavrilova::outRectangles(std::ostream& out, Shape ** Shapes, size_t nShapes
     out << std::setprecision(1);
     rectangle_t rect = Shapes[0]->getFrameRect();
     outRectangle(out, rect);
-    for (size_t i = 0; i < nShapes; ++i) {
+    for (size_t i = 1; i < nShapes; ++i) {
       rectangle_t rect = Shapes[i]->getFrameRect();
       out << " ";
       outRectangle(out, rect);
