@@ -26,4 +26,3 @@ double komarova::teilor(double x, size_t  k, double error)
     return sumi;
   }
 }
-
