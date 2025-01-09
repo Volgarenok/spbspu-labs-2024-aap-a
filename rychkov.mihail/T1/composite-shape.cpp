@@ -108,10 +108,7 @@ rychkov::rectangle_t rychkov::CompositeShape::getFrameRect() const noexcept
       bottomLeft = tempBottomLeft;
       topRight = tempTopRight;
     }
-    bottomLeft.x = std::min(bottomLeft.x, tempBottomLeft.x);
-    bottomLeft.y = std::min(bottomLeft.y, tempBottomLeft.y);
-    topRight.x = std::max(topRight.x, tempTopRight.x);
-    topRight.y = std::max(topRight.y, tempTopRight.y);
+    updateFrame(bottomLeft, topRight, tempBottomLeft);
   }
   return makeFrame(bottomLeft, topRight);
 }
@@ -198,5 +195,12 @@ void rychkov::scale(CompositeShape& composition, double coef, point_t scaleCente
   for (size_t i = 0; i < composition.size(); i++)
   {
     scale(composition[i], coef, scaleCenter);
+  }
+}
+void rychkov::unsafeScale(CompositeShape& composition, double coef, point_t scaleCenter)
+{
+  for (size_t i = 0; i < composition.size(); i++)
+  {
+    unsafeScale(composition[i], coef, scaleCenter);
   }
 }

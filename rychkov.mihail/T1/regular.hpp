@@ -6,7 +6,7 @@
 
 namespace rychkov
 {
-  class Regular: public Shape
+  class Regular final: public Shape
   {
   public:
     Regular() = delete;
@@ -17,13 +17,13 @@ namespace rychkov
     virtual rectangle_t getFrameRect() const noexcept override;
     virtual void move(point_t destination) noexcept override;
     virtual void move(double deltaX, double deltaY) noexcept override;
-    virtual void scale(double coef) override;
     virtual Shape* clone() const override;
   private:
     point_t center_;
     size_t nSides_;
     double sideLength_;
     double rotationAngle_;
+    virtual void unsafeScale(double coef) noexcept override;
   };
 }
 

@@ -25,7 +25,7 @@ rychkov::Polygon::Polygon(point_t* points, size_t size):
   vertexes_(points),
   size_(size)
 {
-  if(size < 3)
+  if (size < 3)
   {
     throw std::invalid_argument("not enough vertexes to build polygon");
   }
@@ -74,12 +74,9 @@ double rychkov::Polygon::getArea() const noexcept
 rychkov::rectangle_t rychkov::Polygon::getFrameRect() const noexcept
 {
   point_t bottomLeft(vertexes_[0]), topRight(vertexes_[0]);
-  for (size_t i = 0; i < size_; i++)
+  for (size_t i = 1; i < size_; i++)
   {
-    bottomLeft.x = std::min(bottomLeft.x, vertexes_[i].x);
-    bottomLeft.y = std::min(bottomLeft.y, vertexes_[i].y);
-    topRight.x = std::max(topRight.x, vertexes_[i].x);
-    topRight.y = std::max(topRight.y, vertexes_[i].y);
+    updateFrame(bottomLeft, topRight, vertexes_[i]);
   }
   return makeFrame(bottomLeft, topRight);
 }
@@ -96,12 +93,8 @@ void rychkov::Polygon::move(double deltaX, double deltaY) noexcept
     vertexes_[i].y += deltaY;
   }
 }
-void rychkov::Polygon::scale(double coef)
+void rychkov::Polygon::unsafeScale(double coef) noexcept
 {
-  if (coef <= 0)
-  {
-    throw std::invalid_argument("scale can't be executed with non-positive coefficient");
-  }
   point_t center = getCenter();
   for (size_t i = 0; i < size_; i++)
   {

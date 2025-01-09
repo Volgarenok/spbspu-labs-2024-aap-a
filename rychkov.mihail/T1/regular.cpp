@@ -17,21 +17,24 @@ rychkov::Regular::Regular(point_t center, size_t nSides, double sideLength, doub
   }
 }
 rychkov::Regular::Regular(point_t center, point_t p2, point_t p3):
-  center_(center)
+  center_(center),
+  nSides_(0),
+  sideLength_(0),
+  rotationAngle_(0)
 {
-  constexpr int epsilonCoef = 60;
+  constexpr int epsilonCoef = 1000;
   double len1Sqr = getDistanceSqr(center, p2);
   double len2Sqr = getDistanceSqr(center, p3);
   double hypotenuseSqr = std::max(len1Sqr, len2Sqr);
   double innerRadiusSqr = std::min(len1Sqr, len2Sqr);
   double halfSideLengthSqr = getDistanceSqr(p2, p3);
-  if (!rychkov::isAlmostEqual(hypotenuseSqr, innerRadiusSqr + halfSideLengthSqr, epsilonCoef))
+  if (!isAlmostEqual(hypotenuseSqr, innerRadiusSqr + halfSideLengthSqr, epsilonCoef))
   {
     throw std::invalid_argument("invalid right triangle");
   }
 
   double nSides = PI / std::acos(std::sqrt(innerRadiusSqr / hypotenuseSqr));
-  if (!rychkov::isAlmostEqual(nSides, std::round(nSides), epsilonCoef))
+  if (!isAlmostEqual(nSides, std::round(nSides), epsilonCoef))
   {
     throw std::invalid_argument("invalid sides count");
   }
@@ -64,15 +67,12 @@ rychkov::rectangle_t rychkov::Regular::getFrameRect() const noexcept
   point_t bottomLeft{0, 0}, topRight{0, 0};
   for (size_t i = 0; i < nSides_; i++)
   {
-    bottomLeft.x = std::min(bottomLeft.x, outerRadius * std::sin(angle));
-    bottomLeft.y = std::min(bottomLeft.y, outerRadius * std::cos(angle));
-    topRight.x = std::max(topRight.x, outerRadius * std::sin(angle));
-    topRight.y = std::max(topRight.y, outerRadius * std::cos(angle));
+    updateFrame(bottomLeft, topRight, {outerRadius * std::sin(angle), outerRadius * std::cos(angle)});
     angle += sectorAngle;
   }
-  point_t frameCenter = {(topRight.x + bottomLeft.x) / 2 + center_.x,
-      center_.y + (topRight.y + bottomLeft.y) / 2};
-  return {topRight.y - bottomLeft.y, topRight.x - bottomLeft.x, frameCenter};
+  rectangle_t result = makeFrame(bottomLeft, topRight);
+  rychkov::move(result.pos, center_.x, center_.y);
+  return result;
 }
 void rychkov::Regular::move(point_t destination) noexcept
 {
@@ -83,12 +83,8 @@ void rychkov::Regular::move(double deltaX, double deltaY) noexcept
   center_.x += deltaX;
   center_.y += deltaY;
 }
-void rychkov::Regular::scale(double coef)
+void rychkov::Regular::unsafeScale(double coef) noexcept
 {
-  if (coef <= 0)
-  {
-    throw std::invalid_argument("scale can't be executed with non-positive coefficient");
-  }
   sideLength_ *= coef;
 }
 rychkov::Shape* rychkov::Regular::clone() const

@@ -1,6 +1,7 @@
 #include "shapes_input.hpp"
 
 #include <iostream>
+#include <limits>
 #include <string_comparison.hpp>
 #include <memf.hpp>
 #include "rectangle.hpp"
@@ -12,6 +13,7 @@ namespace rychkov
   static const char* shapeTypes[] = {"RECTANGLE", "REGULAR", "POLYGON"};
   static Shape* (*shapeGetters[])(std::istream&) = {getRectangle, getRegular, getPolygon};
   static constexpr size_t shapeTypesCount = sizeof(shapeTypes) / sizeof(const char*);
+  static size_t getPoints(std::istream& in, point_t* arr, size_t length, bool* lastWasRead = nullptr);
 }
 
 rychkov::Shape* rychkov::getShape(const char* type, std::istream& in, bool& isUnknown)
@@ -29,8 +31,8 @@ rychkov::Shape* rychkov::getShape(const char* type, std::istream& in, bool& isUn
 }
 rychkov::Shape* rychkov::getRectangle(std::istream& in)
 {
-  point_t p1, p2;
-  if (!(in >> p1.x >> p1.y >> p2.x >> p2.y))
+  point_t points[2];
+  if (getPoints(in, points, 2) != 2)
   {
     return nullptr;
   }
@@ -41,7 +43,7 @@ rychkov::Shape* rychkov::getRectangle(std::istream& in)
   }
   try
   {
-    return new (result) Rectangle(p1, p2);
+    return new (result) Rectangle(points[0], points[1]);
   }
   catch (...)
   {
@@ -51,8 +53,8 @@ rychkov::Shape* rychkov::getRectangle(std::istream& in)
 }
 rychkov::Shape* rychkov::getRegular(std::istream& in)
 {
-  point_t p1, p2, p3;
-  if (!(in >> p1.x >> p1.y >> p2.x >> p2.y >> p3.x >> p3.y))
+  point_t points[3];
+  if (getPoints(in, points, 3) != 3)
   {
     return nullptr;
   }
@@ -63,7 +65,7 @@ rychkov::Shape* rychkov::getRegular(std::istream& in)
   }
   try
   {
-    return new (result) Regular(p1, p2, p3);
+    return new (result) Regular(points[0], points[1], points[2]);
   }
   catch (...)
   {
@@ -80,27 +82,24 @@ rychkov::Shape* rychkov::getPolygon(std::istream& in)
     return nullptr;
   }
 
-  while (in >> points[used].x)
+  bool lastWasRead = false;
+  while (used += getPoints(in, points, nAllocated - used, &lastWasRead), nAllocated <= used)
   {
-    if (!(in >> points[used].y))
+    if (!lastWasRead)
     {
       free(points);
       return nullptr;
     }
-    used++;
 
-    if (used >= nAllocated)
+    char* temp = rychkov::realloc(reinterpret_cast< char* >(points), nAllocated * sizeof(point_t),
+          used * 2 * sizeof(point_t));
+    if (!temp)
     {
-      char* temp = rychkov::realloc(reinterpret_cast< char* >(points), nAllocated * sizeof(point_t),
-            used * 2 * sizeof(point_t));
-      if (!temp)
-      {
-        free(points);
-        return nullptr;
-      }
-      nAllocated = used * 2;
-      points = reinterpret_cast< rychkov::point_t* >(temp);
+      free(points);
+      return nullptr;
     }
+    nAllocated = used * 2;
+    points = reinterpret_cast< rychkov::point_t* >(temp);
   }
   std::cin.clear();
   Polygon* result = static_cast< Polygon* >(malloc(sizeof(Polygon)));
@@ -119,4 +118,30 @@ rychkov::Shape* rychkov::getPolygon(std::istream& in)
     free(points);
     return nullptr;
   }
+}
+
+static size_t rychkov::getPoints(std::istream& in, point_t* arr, size_t length, bool* lastWasRead)
+{
+  for (size_t i = 0; i < length; i++)
+  {
+    arr[i].x = std::numeric_limits<double>::quiet_NaN();
+    arr[i].y = std::numeric_limits<double>::quiet_NaN();
+    if (!(in >> arr[i].x))
+    {
+      if (lastWasRead)
+      {
+        *lastWasRead = true;
+      }
+      return i;
+    }
+    if (!(in >> arr[i].y))
+    {
+      if (lastWasRead)
+      {
+        *lastWasRead = false;
+      }
+      return i;
+    }
+  }
+  return length;
 }

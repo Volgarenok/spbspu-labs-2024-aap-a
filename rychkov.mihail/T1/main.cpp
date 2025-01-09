@@ -86,7 +86,7 @@ int main()
   return std::cin.fail() ? 2 : 1;
 }
 
-std::ostream& rychkov::printRectangle(std::ostream& out, rychkov::rectangle_t rect)
+std::ostream& rychkov::printRectangle(std::ostream& out, rectangle_t rect)
 {
   out << rect.pos.x - rect.width / 2;
   out << ' ' << rect.pos.y - rect.height / 2;
@@ -94,7 +94,7 @@ std::ostream& rychkov::printRectangle(std::ostream& out, rychkov::rectangle_t re
   out << ' ' << rect.pos.y + rect.height / 2;
   return out;
 }
-std::ostream& rychkov::printCompositionData(std::ostream& out, const rychkov::CompositeShape& composition)
+std::ostream& rychkov::printCompositionData(std::ostream& out, const CompositeShape& composition)
 {
   out << composition.getArea();
   for (size_t i = 0; i < composition.size(); i++)

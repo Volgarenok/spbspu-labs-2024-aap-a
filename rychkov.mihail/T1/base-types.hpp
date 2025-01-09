@@ -12,9 +12,11 @@ namespace rychkov
     double height, width;
     point_t pos;
   };
-  double getDistanceSqr(point_t from, point_t to);
-  double getSquare(point_t p1, point_t p2, point_t p3);
-  rectangle_t makeFrame(point_t bottomLeft, point_t topRight);
+  double getDistanceSqr(point_t from, point_t to) noexcept;
+  double getSquare(point_t p1, point_t p2, point_t p3) noexcept;
+  void move(point_t& p1, double deltaX, double deltaY) noexcept;
+  rectangle_t makeFrame(point_t bottomLeft, point_t topRight) noexcept;
+  void updateFrame(point_t& bottomLeft, point_t& topRight, point_t newPoint) noexcept;
 }
 
 #endif

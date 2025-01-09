@@ -6,7 +6,7 @@
 
 namespace rychkov
 {
-  class CompositeShape
+  class CompositeShape final
   {
   public:
     CompositeShape();
@@ -38,6 +38,7 @@ namespace rychkov
     static Shape** reallocate(Shape** shapes, size_t oldSize, size_t newSize);
   };
   void scale(CompositeShape& shape, double coef, point_t scaleCenter);
+  void unsafeScale(CompositeShape& shape, double coef, point_t scaleCenter);
 }
 
 #endif

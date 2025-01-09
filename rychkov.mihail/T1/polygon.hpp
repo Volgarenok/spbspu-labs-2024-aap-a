@@ -6,7 +6,7 @@
 
 namespace rychkov
 {
-  class Polygon: public Shape
+  class Polygon final: public Shape
   {
   public:
     Polygon() = delete;
@@ -22,12 +22,12 @@ namespace rychkov
     virtual rectangle_t getFrameRect() const noexcept override;
     virtual void move(point_t destination) noexcept override;
     virtual void move(double deltaX, double deltaY) noexcept override;
-    virtual void scale(double coef) override;
     virtual Shape* clone() const override;
   private:
     point_t* vertexes_;
     size_t size_;
     point_t getCenter() const noexcept;
+    virtual void unsafeScale(double coef) noexcept override;
   };
 }
 
