@@ -123,8 +123,8 @@ namespace {
     char* rYStr = std::strtok(nullptr, " ");
 
     if (!cXStr || !cYStr || !rXStr || !rYStr) {
-        ++nError;
-        return nullptr;
+      ++nError;
+      return nullptr;
     }
 
     double x = std::atof(cXStr);
@@ -133,11 +133,11 @@ namespace {
     double radiusY = std::atof(rYStr);
 
     try {
-        gavrilova::Ellipse* ellipse = new gavrilova::Ellipse({x, y}, radiusX, radiusY);
-        return ellipse;
-    }catch (const std::exception&) {
-        ++nError;
-        return nullptr;
+      gavrilova::Ellipse* ellipse = new gavrilova::Ellipse({x, y}, radiusX, radiusY);
+      return ellipse;
+    } catch (const std::exception&) {
+      ++nError;
+      return nullptr;
     }
   }
 }

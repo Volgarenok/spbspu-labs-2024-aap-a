@@ -3,21 +3,20 @@
 #include "shapeManip.hpp"
 
 gavrilova::CompositeShape::CompositeShape():
-  size_(0),
-  capacity_(10),
-  shapes_(new Shape*[capacity_])
+  CompositeShape(10)
 {}
 
 gavrilova::CompositeShape::CompositeShape(size_t capacity):
-  CompositeShape()
-{
-  resize(capacity);
-}
+  size_(0),
+  capacity_(capacity),
+  shapes_(new Shape*[capacity_])
+{}
 
 gavrilova::CompositeShape::CompositeShape(const CompositeShape& other):
-  CompositeShape(other.capacity_)
+  size_(0),
+  capacity_(other.capacity_),
+  shapes_(new Shape*[capacity_])
 {
-  size_ = other.size_;
   for (size_t i = 0; i < size_; ++i) {
     shapes_[i] = other.shapes_[i]->clone();
   }
@@ -50,7 +49,7 @@ gavrilova::CompositeShape& gavrilova::CompositeShape::operator=(const CompositeS
 
 gavrilova::CompositeShape& gavrilova::CompositeShape::operator=(CompositeShape&& other) noexcept
 {
-  if (this != &other) {
+  if (this != std::addressof(other)) {
     swap(other);
     other.clear();
   }
@@ -62,7 +61,7 @@ void gavrilova::CompositeShape::push_back(Shape* shp)
   if (!shp) {
     throw std::invalid_argument("Shape cannot be null");
   }
-  resize();
+  expand();
   shapes_[size_++] = shp;
 }
 
@@ -77,7 +76,7 @@ void gavrilova::CompositeShape::pop_back()
 gavrilova::Shape* gavrilova::CompositeShape::at(size_t id) const
 {
   if (id >= size_) {
-      throw std::out_of_range("Index out of range");
+    throw std::out_of_range("Index out of range");
   }
   return shapes_[id];
 }
@@ -103,8 +102,9 @@ void gavrilova::CompositeShape::scale(double k)
   if (k <= 0) {
     throw std::logic_error("Коэффицент должен быть положительным");
   }
+  point_t pos = getFrameRect().pos;
   for (size_t i = 0; i < size_; ++i) {
-    shapes_[i]->scale(k);
+    scaleShape_without_check(*shapes_[i], pos, k);
   }
 }
 
@@ -123,7 +123,7 @@ void gavrilova::CompositeShape::move(double difX, double difY) noexcept
   }
 }
 
-gavrilova::rectangle_t gavrilova::CompositeShape::getFrameRect() const \
+gavrilova::rectangle_t gavrilova::CompositeShape::getFrameRect() const
 {
   if (empty()) {
     throw std::logic_error("Composite shape is empty.");
@@ -159,13 +159,13 @@ double gavrilova::CompositeShape::getArea() const noexcept
   return area;
 }
 
-void gavrilova::CompositeShape::resize()
+void gavrilova::CompositeShape::expand()
 {
   if (size_ != capacity_) {
     return;
   }
-  size_t new_capacity = capacity_ * 2;
-  resize(new_capacity);
+  const int CONSTANTA_FOR_RESIZE = 10;
+  resize(capacity_ + CONSTANTA_FOR_RESIZE);
 }
 
 void gavrilova::CompositeShape::resize(size_t new_capacity)

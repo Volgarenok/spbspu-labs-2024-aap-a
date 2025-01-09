@@ -2,14 +2,14 @@
 #define TRIANGLE_HPP
 #include "shape.hpp"
 namespace gavrilova {
-  class Triangle final : public Shape {
+  class Triangle final: public Shape {
   public:
     Triangle(const point_t& a, const point_t& b, const point_t& c);
     Triangle(const Triangle& other);
-    double getArea() const noexcept override;
-    rectangle_t getFrameRect() const noexcept override;
-    void move(const point_t& p) noexcept override;
-    void move(double difX, double difY) noexcept override;
+    double getArea() const override;
+    rectangle_t getFrameRect() const override;
+    void move(const point_t& p) override;
+    void move(double difX, double difY) override;
     Shape* clone() const;
     void scale_without_check(double k) noexcept override;
   private:

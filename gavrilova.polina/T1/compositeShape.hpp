@@ -2,7 +2,6 @@
 #define COMPOSITE_SHAPE_HPP
 
 #include "shape.hpp"
-#include <stdexcept>
 
 namespace gavrilova {
 
@@ -32,7 +31,7 @@ namespace gavrilova {
     size_t capacity_;
     Shape** shapes_;
 
-    void resize();
+    void expand();
     void resize(size_t capacity);
     void swap(CompositeShape& rhs) noexcept;
     void clear();

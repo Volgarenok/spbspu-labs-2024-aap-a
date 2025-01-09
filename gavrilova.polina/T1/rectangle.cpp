@@ -1,16 +1,12 @@
 #include "rectangle.hpp"
 #include <iostream>
+#include "pointManip.hpp"
 
 gavrilova::Rectangle::Rectangle(const point_t& pBottomLeft, const point_t& pTopRight):
-  pBottomLeft_({0,0}),
-  pTopRight_({0,0})
+  pBottomLeft_(pBottomLeft),
+  pTopRight_(pTopRight)
 {
-  if (pBottomLeft.x < pTopRight.x && pBottomLeft.y < pTopRight.y) {
-    pBottomLeft_.x = pBottomLeft.x;
-    pBottomLeft_.y = pBottomLeft.y;
-    pTopRight_.x = pTopRight.x;
-    pTopRight_.y = pTopRight.y;
-  } else {
+  if (pBottomLeft.x >= pTopRight.x || pBottomLeft.y >= pTopRight.y) {
     throw std::logic_error("Invalid arguments for rectangle");
   }
 }
@@ -20,12 +16,12 @@ gavrilova::Rectangle::Rectangle(const Rectangle& other):
   pTopRight_(other.pTopRight_)
 {}
 
-double gavrilova::Rectangle::getArea() const noexcept
+double gavrilova::Rectangle::getArea() const
 {
   return (pTopRight_.x - pBottomLeft_.x) * (pTopRight_.y - pBottomLeft_.y);
 }
 
-gavrilova::rectangle_t gavrilova::Rectangle::getFrameRect() const noexcept
+gavrilova::rectangle_t gavrilova::Rectangle::getFrameRect() const
 {
   double height = pTopRight_.y - pBottomLeft_.y;
   double width = pTopRight_.x - pBottomLeft_.x;
@@ -33,7 +29,7 @@ gavrilova::rectangle_t gavrilova::Rectangle::getFrameRect() const noexcept
   return {width, height, pos};
 }
 
-void gavrilova::Rectangle::move(const point_t& p) noexcept
+void gavrilova::Rectangle::move(const point_t& p)
 {
   point_t center = getFrameRect().pos;
   double difX = p.x - center.x;
@@ -41,20 +37,18 @@ void gavrilova::Rectangle::move(const point_t& p) noexcept
   move(difX, difY);
 }
 
-void gavrilova::Rectangle::move(double difX, double difY) noexcept
+void gavrilova::Rectangle::move(double difX, double difY)
 {
-  pBottomLeft_.move(difX, difY);
-  pTopRight_.move(difX, difY);
+  gavrilova::move(pBottomLeft_, difX, difY);
+  gavrilova::move(pTopRight_, difX, difY);
 }
 
 void gavrilova::Rectangle::scale_without_check(double k) noexcept
 {
   rectangle_t frameRect = getFrameRect();
   point_t center = frameRect.pos;
-  pBottomLeft_.x = center.x - frameRect.width / 2 * k;
-  pBottomLeft_.y = center.y - frameRect.height / 2 * k;
-  pTopRight_.x = center.x + frameRect.width / 2 * k;
-  pTopRight_.y = center.y + frameRect.height / 2 * k;
+  pBottomLeft_ = {center.x - frameRect.width / 2 * k, center.y - frameRect.height / 2 * k};
+  pTopRight_ = {center.x + frameRect.width / 2 * k, center.y + frameRect.height / 2 * k};
 }
 
 gavrilova::Shape* gavrilova::Rectangle::clone() const

@@ -2,21 +2,20 @@
 #include <iostream>
 #include "shapeManip.hpp"
 
-gavrilova::Polygon::Polygon(size_t nPoints, point_t* verteces):
+gavrilova::Polygon::Polygon(size_t nPoints, const point_t* verteces):
   size_(0),
   triangles_(nullptr)
 {
   if (nPoints < 3) {
     throw std::logic_error("Polygon must have at least 3 vertices.");
   }
-  triangles_ = new gavrilova::Triangle*[nPoints - 2];
+  triangles_ = new Triangle*[nPoints - 2];
   for (size_t i = 0; i < (nPoints - 2); ++i) {
     try{
-      triangles_[i] = new gavrilova::Triangle(verteces[0], verteces[i + 1], verteces[i + 2]);
+      triangles_[i] = new Triangle(verteces[0], verteces[i + 1], verteces[i + 2]);
       ++size_;
     } catch (const std::bad_alloc&) {
       clear();
-      size_ = 0;
       throw;
     }
   }
@@ -24,16 +23,14 @@ gavrilova::Polygon::Polygon(size_t nPoints, point_t* verteces):
 
 gavrilova::Polygon::Polygon(const Polygon& other):
   size_(0),
-  triangles_(nullptr)
+  triangles_(new gavrilova::Triangle*[other.size_])
 {
-  triangles_ = new gavrilova::Triangle*[other.size_];
   for (size_t i = 0; i < other.size_; ++i) {
     try{
       triangles_[i] = new gavrilova::Triangle(*other.triangles_[i]);
       ++size_;
     } catch (const std::bad_alloc&) {
       clear();
-      size_ = 0;
       throw;
     }
   }
@@ -42,10 +39,9 @@ gavrilova::Polygon::Polygon(const Polygon& other):
 gavrilova::Polygon::~Polygon()
 {
   clear();
-  size_ = 0;
 }
 
-double gavrilova::Polygon::getArea() const noexcept
+double gavrilova::Polygon::getArea() const
 {
   double area = 0;
   for (size_t i = 0; i < size_; ++i) {
@@ -53,7 +49,7 @@ double gavrilova::Polygon::getArea() const noexcept
   }
   return area;
 }
-gavrilova::rectangle_t gavrilova::Polygon::getFrameRect() const noexcept
+gavrilova::rectangle_t gavrilova::Polygon::getFrameRect() const
 {
   double minX = triangles_[0]->getFrameRect().pos.x - triangles_[0]->getFrameRect().width / 2;
   double maxX = triangles_[0]->getFrameRect().pos.x + triangles_[0]->getFrameRect().width / 2;
@@ -69,24 +65,24 @@ gavrilova::rectangle_t gavrilova::Polygon::getFrameRect() const noexcept
   return {maxX - minX, maxY - minY, { (minX + maxX) / 2, (minY + maxY) / 2 }};
 }
 
-void gavrilova::Polygon::move(const point_t& p) noexcept
+void gavrilova::Polygon::move(const point_t& p)
 {
   point_t center = getFrameRect().pos;
   double difX = p.x - center.x;
   double difY = p.y - center.y;
   move(difX, difY);
 }
-void gavrilova::Polygon::move(double difX, double difY) noexcept
+void gavrilova::Polygon::move(double difX, double difY)
 {
   for (size_t i = 0; i < size_; ++i) {
     triangles_[i]->move(difX, difY);
   }
 }
-void gavrilova::Polygon::scale_without_check(double k)
+void gavrilova::Polygon::scale_without_check(double k) noexcept
 {
   point_t center =  getFrameRect().pos;
   for (size_t i = 0; i < size_; ++i) {
-    scaleShape(*triangles_[i], center, k);
+    scaleShape_without_check(*triangles_[i], center, k);
   }
 }
 gavrilova::Shape* gavrilova::Polygon::clone() const

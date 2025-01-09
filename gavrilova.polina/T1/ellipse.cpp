@@ -1,5 +1,6 @@
 #include "ellipse.hpp"
 #include <iostream>
+#include "pointManip.hpp"
 
 gavrilova::Ellipse::Ellipse(const point_t& center, double radiusY, double radiusX):
   center_(center),
@@ -17,13 +18,13 @@ gavrilova::Ellipse::Ellipse(const Ellipse& other):
   radiusX_(other.radiusX_)
 {}
 
-double gavrilova::Ellipse::getArea() const noexcept
+double gavrilova::Ellipse::getArea() const
 {
   constexpr double pi = 3.14159;
   return pi * radiusX_ * radiusY_;
 }
 
-gavrilova::rectangle_t gavrilova::Ellipse::getFrameRect() const noexcept
+gavrilova::rectangle_t gavrilova::Ellipse::getFrameRect() const
 {
   double height = 2 * radiusY_;
   double width = 2 * radiusX_;
@@ -31,14 +32,14 @@ gavrilova::rectangle_t gavrilova::Ellipse::getFrameRect() const noexcept
   return {width, height, pos};
 }
 
-void gavrilova::Ellipse::move(const point_t& p) noexcept
+void gavrilova::Ellipse::move(const point_t& p)
 {
   center_ = p;
 }
 
-void gavrilova::Ellipse::move(double difX, double difY) noexcept
+void gavrilova::Ellipse::move(double difX, double difY)
 {
-  center_.move(difX, difY);
+  gavrilova::move(center_, difX, difY);
 }
 
 void gavrilova::Ellipse::scale_without_check(double k) noexcept

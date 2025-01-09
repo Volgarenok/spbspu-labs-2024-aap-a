@@ -9,8 +9,9 @@ namespace gavrilova {
 
 int main()
 {
-  gavrilova::Shape* Shapes[1000] = {nullptr};
-  gavrilova::point_t center{0,0};
+  using namespace gavrilova;
+  Shape* Shapes[1000] = {nullptr};
+  point_t center{0,0};
   double koef = -1;
   size_t nShapes = 0;
   size_t nError = 0;
@@ -18,7 +19,7 @@ int main()
 
   while (!std::cin.eof() && std::cin && koef <= 0) {
     try {
-      Shapes[nShapes] = gavrilova::make_shape(std::cin, center, koef, nError);
+      Shapes[nShapes] = make_shape(std::cin, center, koef, nError);
     } catch (const std::exception& e) {
       std::cerr << e.what();
       return 1;
@@ -28,32 +29,31 @@ int main()
       ++nShapes;
     }
   }
-  /* if (koef <= 0) {
-    std::cerr << "Kоэфицент не введен или введен неправильно\n";
-    gavrilova::clearShapes(Shapes, nShapes);
-    return 1;
-  } */
+
   if (nError) {
     std::cerr << "Возникли ошибки при вводе фигур\n";
   }
+
   if (!nShapes) {
     return 1;
   }
+
   std::cout << std::fixed << std::setprecision(1) << commonAreaBefore;
-  gavrilova::outRectangles(std::cout, Shapes, nShapes);
+  outRectangles(std::cout, Shapes, nShapes);
 
   double commonAreaAfter = 0;
   try {
-    gavrilova::scaleShapes(Shapes, nShapes, center, koef, commonAreaAfter);
+    commonAreaAfter = scaleShapes(Shapes, nShapes, center, koef);
   }catch(const std::logic_error& e) {
     std::cerr << e.what();
-    gavrilova::clearShapes(Shapes, nShapes);
+    clearShapes(Shapes, nShapes);
     return 1;
   }
 
-  std::cout << std::fixed << std::setprecision(1) << commonAreaAfter;
-  gavrilova::outRectangles(std::cout, Shapes, nShapes);
+  std::cout << std::fixed << std::setprecision(1) << commonAreaAfter << " ";
+  outRectangles(std::cout, Shapes, nShapes);
+  std::cout << "n";
 
-  gavrilova::clearShapes(Shapes, nShapes);
+  clearShapes(Shapes, nShapes);
 }
 

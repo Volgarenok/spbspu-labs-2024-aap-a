@@ -1,13 +1,14 @@
 #include "triangle.hpp"
 #include <iostream>
+#include "pointManip.hpp"
 
 namespace {
   bool isTriangle(gavrilova::point_t a, gavrilova::point_t b, gavrilova::point_t c) noexcept
   {
-    double ab = a.getDistance(b);
-    double bc = b.getDistance(c);
-    double ac = c.getDistance(a);
-    return ( (ab + bc) > ac && (ab + ac) > bc && (ac + bc) > ab && ab && ac && bc );
+    double ab = gavrilova::getDistance(a, b);
+    double bc = gavrilova::getDistance(b, c);
+    double ac = gavrilova::getDistance(a, c);
+    return ((ab + bc) > ac && (ab + ac) > bc && (ac + bc) > ab && ab && ac && bc);
   }
 }
 
@@ -26,12 +27,12 @@ gavrilova::Triangle::Triangle(const Triangle& other):
   c_(other.c_)
 {}
 
-double gavrilova::Triangle::getArea() const noexcept
+double gavrilova::Triangle::getArea() const
 {
   return std::abs(((a_.x * (b_.y - c_.y) +  b_.x * (c_.y - a_.y) + c_.x * (a_.y - b_.y))) / 2.0);
 }
 
-gavrilova::rectangle_t gavrilova::Triangle::getFrameRect() const noexcept
+gavrilova::rectangle_t gavrilova::Triangle::getFrameRect() const
 {
   double minX = std::min(std::min(a_.x, b_.x), c_.x);
   double maxX = std::max(std::max(a_.x, b_.x), c_.x);
@@ -43,7 +44,7 @@ gavrilova::rectangle_t gavrilova::Triangle::getFrameRect() const noexcept
   return {width, height, pos};
 }
 
-void gavrilova::Triangle::move(const point_t& p) noexcept
+void gavrilova::Triangle::move(const point_t& p)
 {
   point_t center = getFrameRect().pos;
   double difX = p.x - center.x;
@@ -51,19 +52,19 @@ void gavrilova::Triangle::move(const point_t& p) noexcept
   move(difX, difY);
 }
 
-void gavrilova::Triangle::move(double difX, double difY) noexcept
+void gavrilova::Triangle::move(double difX, double difY)
 {
-  a_.move(difX, difY);
-  b_.move(difX, difY);
-  c_.move(difX, difY);
+  gavrilova::move(a_, difX, difY);
+  gavrilova::move(b_, difX, difY);
+  gavrilova::move(c_, difX, difY);
 }
 
 void gavrilova::Triangle::scale_without_check(double k) noexcept
 {
   point_t center =  getFrameRect().pos;
-  a_.scaleDistance(center, k);
-  b_.scaleDistance(center, k);
-  c_.scaleDistance(center, k);
+  gavrilova::scaleDistance(a_, center, k);
+  gavrilova::scaleDistance(b_, center, k);
+  gavrilova::scaleDistance(c_, center, k);
 }
 gavrilova::Shape* gavrilova::Triangle::clone() const
 {

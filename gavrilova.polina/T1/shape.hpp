@@ -8,17 +8,12 @@ namespace gavrilova {
   class Shape {
   public:
     virtual ~Shape() = default;
-    virtual double getArea() const noexcept = 0;
-    virtual rectangle_t getFrameRect() const noexcept = 0;
-    virtual void move(const point_t& p) noexcept = 0;
-    virtual void move(double x, double y) noexcept = 0;
-    virtual void scale_without_check(double k) = 0;
-    void scale(double k) {
-      if (k <= 0) {
-        throw std::logic_error("Коэффицент должен быть положительным");
-      }
-      scale_without_check(k);
-    }
+    virtual double getArea() const = 0;
+    virtual rectangle_t getFrameRect() const = 0;
+    virtual void move(const point_t& p) = 0;
+    virtual void move(double x, double y) = 0;
+    virtual void scale_without_check(double k) noexcept = 0;
+    void scale(double k);
     virtual Shape* clone() const = 0;
   };
 }
