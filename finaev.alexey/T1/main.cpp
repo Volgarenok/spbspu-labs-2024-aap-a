@@ -11,7 +11,6 @@
 #include "scale.hpp"
 
 using namespace finaev;
-
 int main()
 {
   constexpr size_t capacity = 10000;
@@ -52,8 +51,11 @@ int main()
     }
     try
     {
-      shapes[size] = makeShapes(std::cin, str);
-      size++;
+      if (shapes[size] != nullptr)
+      {
+        shapes[size] = makeShapes(std::cin, str);
+        size++;
+      }
     }
     catch (std::logic_error& e)
     {
