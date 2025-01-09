@@ -1,5 +1,7 @@
 #include "composite-shape.hpp"
 #include <stdexcept>
+#include <memory>
+#include <algorithm>
 #include "shape_transformations.hpp"
 
 abramov::CompositeShape::CompositeShape(size_t capacity):
@@ -8,7 +10,7 @@ abramov::CompositeShape::CompositeShape(size_t capacity):
   shapeptrs_(nullptr)
 {
   shapeptrs_ = new Shape*[capacity];
-  for (size_t i = 0; i < capacity; ++i)
+  for (size_t i = 0; i < size(); ++i)
   {
     shapeptrs_[i] = nullptr;
   }
@@ -17,12 +19,11 @@ abramov::CompositeShape::CompositeShape(size_t capacity):
 abramov::CompositeShape::CompositeShape(const CompositeShape &comp_shp):
   shapes_(comp_shp.shapes_),
   capacity_(comp_shp.capacity_),
-  shapeptrs_(nullptr)
+  shapeptrs_(new Shape*[capacity_])
 {
-  shapeptrs_ = new Shape*[capacity_];
   for (size_t i = 0; i < shapes_; ++i)
   {
-    shapeptrs_[i] = comp_shp.shapeptrs_[i];
+    shapeptrs_[i] = comp_shp.shapeptrs_[i]->clone();
   }
 }
 
@@ -35,40 +36,40 @@ abramov::CompositeShape::~CompositeShape()
   delete[] shapeptrs_;
 }
 
-abramov::CompositeShape::CompositeShape(abramov::CompositeShape &&comp_shp) noexcept:
+abramov::CompositeShape::CompositeShape(CompositeShape &&comp_shp) noexcept:
   shapes_(comp_shp.shapes_),
   capacity_(comp_shp.capacity_),
   shapeptrs_(comp_shp.shapeptrs_)
 {
   comp_shp.shapeptrs_ = nullptr;
-  comp_shp.shapes_ = 0;
-  comp_shp.capacity_ = 0;
 }
 
-abramov::CompositeShape &abramov::CompositeShape::operator=(const abramov::CompositeShape &comp_shp)
+void abramov::CompositeShape::swap(CompositeShape &comp_shp) noexcept
 {
-  if (&comp_shp != this)
+  std::swap(shapeptrs_, comp_shp.shapeptrs_);
+  std::swap(shapes_, comp_shp.shapes_);
+  std::swap(capacity_, comp_shp.capacity_);
+}
+
+abramov::CompositeShape &abramov::CompositeShape::operator=(const CompositeShape &comp_shp)
+{
+  CompositeShape copy{comp_shp};
+  if (std::addressof(comp_shp) != this)
   {
-    Shape **arr = new Shape*[comp_shp.capacity_];
-    for (size_t i = 0; i < comp_shp.capacity_; ++i)
-    {
-      arr[i] = comp_shp.shapeptrs_[i];
-    }
-    delete[] shapeptrs_;
-    shapeptrs_ = arr;
-    shapes_ = comp_shp.shapes_;
-    capacity_ = comp_shp.capacity_;
+    swap(copy);
   }
   return *this;
 }
 
 abramov::CompositeShape &abramov::CompositeShape::operator=(abramov::CompositeShape &&comp_shp) noexcept
 {
-  if (&comp_shp != this)
+  if (std::addressof(comp_shp) != this)
   {
     delete[] shapeptrs_;
     shapeptrs_ = comp_shp.shapeptrs_;
     comp_shp.shapeptrs_ = nullptr;
+    shapes_ = comp_shp.shapes_;
+    capacity_ = comp_shp.capacity_;
   }
   return *this;
 }
@@ -91,11 +92,11 @@ void getRectCoords(abramov::rectangle_t rect, double &x1, double &y1, double &x2
   y2 = std::max(y2, rect.pos.y + rect.height / 2);
 }
 
-abramov::rectangle_t abramov::CompositeShape::getFrameRect() const noexcept
+abramov::rectangle_t abramov::CompositeShape::getFrameRect() const
 {
   if (shapes_ == 0)
   {
-    return rectangle_t{0.0, 0.0, {0.0, 0.0}};
+    throw std::logic_error("There is no frame rect\n");
   }
   double x1 = 0;
   double x2 = 0;
@@ -139,14 +140,7 @@ void abramov::CompositeShape::scale(double k)
 abramov::Shape **expandArray(abramov::Shape **arr, size_t capacity)
 {
   abramov::Shape **array = nullptr;
-  try
-  {
-    array = new abramov::Shape*[capacity * 2];
-  }
-  catch (const std::bad_alloc &e)
-  {
-    return nullptr;
-  }
+  array = new abramov::Shape*[capacity * 2];
   for (size_t i = 0; i < capacity; ++i)
   {
     array[i] = arr[i];
@@ -158,10 +152,6 @@ void abramov::CompositeShape::push_back(Shape *shp)
   if (capacity_ == shapes_)
   {
     Shape **new_shapeptrs = expandArray(shapeptrs_, capacity_);
-    if (new_shapeptrs == nullptr)
-    {
-      throw std::bad_alloc();
-    }
     capacity_ *= 2;
     delete[] shapeptrs_;
     shapeptrs_ = new_shapeptrs;
@@ -171,7 +161,7 @@ void abramov::CompositeShape::push_back(Shape *shp)
 
 void abramov::CompositeShape::pop_back() noexcept
 {
-  delete shapeptrs_[shapes_];
+  delete shapeptrs_[--shapes_];
   shapeptrs_[shapes_] = nullptr;
 }
 

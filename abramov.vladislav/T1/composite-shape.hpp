@@ -2,9 +2,6 @@
 #define COMPOSITE_SHAPE_HPP
 #include <cstddef>
 #include "shape.hpp"
-#include "rectangle.hpp"
-#include "square.hpp"
-#include "complexquad.hpp"
 
 namespace abramov
 {
@@ -16,7 +13,7 @@ namespace abramov
     CompositeShape &operator=(const CompositeShape &comp_shp);
     CompositeShape &operator=(CompositeShape &&comp_shp) noexcept;
     double getArea() const noexcept;
-    rectangle_t getFrameRect() const noexcept;
+    rectangle_t getFrameRect() const;
     void move(point_t p);
     void move(double dx, double dy);
     void scale(double k);
@@ -34,6 +31,8 @@ namespace abramov
     size_t shapes_;
     size_t capacity_;
     Shape **shapeptrs_;
+
+    void swap(CompositeShape &comp_shp) noexcept;
   };
 
   using Composite = CompositeShape;
