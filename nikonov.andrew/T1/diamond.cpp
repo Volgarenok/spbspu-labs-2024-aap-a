@@ -18,11 +18,11 @@ nikonov::Diamond::Diamond(const point_t &p1, const point_t &p2, const point_t &p
     throw std::logic_error("ERROR:noncorrect diamond parameters");
   }
 }
-double nikonov::Diamond::getArea() const noexcept
+double nikonov::Diamond::getArea() const
 {
   return (rightP_.x - midP_.x) * (topP_.y - midP_.y) * 2;
 }
-nikonov::rectangle_t nikonov::Diamond::getFrameRect() const noexcept
+nikonov::rectangle_t nikonov::Diamond::getFrameRect() const
 {
   point_t rtp({ rightP_.x, topP_.y });
   point_t lbp({ 2 * midP_.x - rightP_.x, 2 * midP_.y - topP_.y });
@@ -31,14 +31,14 @@ nikonov::rectangle_t nikonov::Diamond::getFrameRect() const noexcept
   point_t pos = point_t({ lbp.x + (width / 2), lbp.y + (height / 2) });
   return rectangle_t({ width, height, pos });
 }
-void nikonov::Diamond::move(const point_t &newPos) noexcept
+void nikonov::Diamond::move(const point_t &newPos)
 {
   rectangle_t crntRect = getFrameRect();
   double diffX = newPos.x - crntRect.pos.x;
   double diffY = newPos.y - crntRect.pos.y;
   move(diffX, diffY);
 }
-void nikonov::Diamond::move(double x, double y) noexcept
+void nikonov::Diamond::move(double x, double y)
 {
   movePoint(topP_, x, y);
   movePoint(midP_, x, y);
