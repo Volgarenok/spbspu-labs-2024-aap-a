@@ -2,9 +2,10 @@
 #define CIRCLE_HPP
 #include "base-types.hpp"
 #include "shape.hpp"
+#include "regular.hpp"
 namespace alymova
 {
-  struct Circle: public Shape
+  struct Circle final: public Shape
   {
   public:
     Circle(point_t pos, double radius);
@@ -13,10 +14,11 @@ namespace alymova
     void move(double shift_x, double shift_y) override;
     void move(point_t point) override;
     void scale(double ratio) override;
+    Shape* clone() const override;
   private:
     point_t pos_;
     double radius_;
-    rectangle_t frame_rect_;
+    Regular regular_;
   };
 }
 #endif

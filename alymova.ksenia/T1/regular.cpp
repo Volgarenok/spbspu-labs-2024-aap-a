@@ -34,7 +34,8 @@ alymova::Regular::Regular(point_t pos, point_t top, point_t other):
 }
 double alymova::Regular::getArea() const
 {
-  return 0.5 * radius_big_ * radius_big_ * sides_cnt_ * std::sin((360 / getCntSides()) * PI / 180);
+  //return 0.5 * radius_big_ * radius_big_ * sides_cnt_ * std::sin((360 / getCntSides()) * PI / 180);
+  return 0.5 * radius_small_ * other_side_ * sides_cnt_ * 2.0;
 }
 size_t alymova::Regular::getCntSides() const
 {
@@ -69,7 +70,9 @@ alymova::rectangle_t alymova::Regular::setFrameRect()
     upp_right_x = std::max(upp_right_x, pos_.x + radius_big_ * std::cos(angle_now));
     upp_right_y = std::max(upp_right_y, pos_.y + radius_big_ * std::sin(angle_now));
   }
-  return rectangle_t(point_t(low_left_x, low_left_y), point_t(upp_right_x, upp_right_y));
+  point_t p1 = {low_left_x, low_left_y};
+  point_t p2 = {upp_right_x, upp_right_y};
+  return rectangle_t(p1, p2);
 }
 void alymova::Regular::move(double shift_x, double shift_y)
 {
@@ -103,4 +106,19 @@ void alymova::Regular::scale(double ratio)
   radius_small_ *= ratio;
   other_side_ *= ratio;
   frame_rect_.scale(ratio);
+}
+alymova::Shape* alymova::Regular::clone() const
+{
+  Regular* reg = nullptr;
+  try
+  {
+    reg = new Regular(pos_, top_, other_);
+    Shape* shape = reg;
+    return shape;
+  }
+  catch (const std::bad_alloc& e)
+  {
+    delete reg;
+    throw;
+  }
 }

@@ -4,12 +4,13 @@
 #include "shape.hpp"
 #include "shapesProcess.hpp"
 #include "inputProcess.hpp"
+#include "composite-shape.hpp"
 int main()
 {
   constexpr int max_size = 1000;
   alymova::Shape* shapes[max_size] = {};
   int shapes_now = 0;
-  double scale_x = 0.0, scale_y = 0.0, scale_ratio = 1;
+  double scale_x = 0.0, scale_y = 0.0, scale_ratio = 1.0;
   bool wrong_shape_flag = false;
   try
   {
@@ -28,7 +29,7 @@ int main()
   }
   if (shapes_now == 0)
   {
-    std::cerr << "Nothig to scale\n";
+    std::cerr << "Nothing to scale\n";
     return 1;
   }
   if (scale_ratio <= 0)

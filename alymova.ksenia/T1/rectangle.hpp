@@ -4,7 +4,7 @@
 #include "shape.hpp"
 namespace alymova
 {
-  struct Rectangle: public Shape
+  struct Rectangle final: public Shape
   {
   public:
     Rectangle(point_t p1, point_t p2);
@@ -13,6 +13,7 @@ namespace alymova
     void move(double shift_x, double shift_y) override;
     void move(point_t point) override;
     void scale(double ratio) override;
+    Shape* clone() const override;
   private:
     point_t low_left_, upp_right_;
     double width_, height_;
