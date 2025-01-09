@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstddef>
-#include "str_input.hpp"
+#include <str_input.hpp>
 #include "str_min.hpp"
 #include "str_min2.hpp"
 
