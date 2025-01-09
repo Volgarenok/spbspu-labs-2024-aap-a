@@ -5,7 +5,7 @@
 
 int main()
 {
-  maslevtsov::Shape* shapes[10'000]{nullptr};
+  maslevtsov::Shape* shapes[10'000]{};
   std::size_t shapeIndex = 0;
   bool isIgnoredShapes = false, isImplementedShapes = false, isScale = false;
   std::string argument = "";
