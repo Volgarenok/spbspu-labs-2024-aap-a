@@ -9,14 +9,14 @@ abramov::CompositeShape::CompositeShape(size_t capacity):
   capacity_(capacity),
   shapeptrs_(nullptr)
 {
+  if (capacity_ == 0)
+  {
+    ++capacity_;
+  }
   shapeptrs_ = new Shape*[capacity];
   for (size_t i = 0; i < size(); ++i)
   {
     shapeptrs_[i] = nullptr;
-  }
-  if (capacity_ == 0)
-  {
-    ++capacity_;
   }
 }
 
