@@ -74,11 +74,11 @@ int main()
   }
   std::cout << std::setprecision(1);
   std::cout << Cs.getArea() << " ";
-  Cs.print_frame_coordinates(std::cout);
+  brevnov::print_frame_coordinates(Cs, std::cout);
   std::cout << "\n";
   Cs.scale(ratio, scale_p);
   std::cout << Cs.getArea() << " ";
-  Cs.print_frame_coordinates(std::cout);
+  brevnov::print_frame_coordinates(Cs, std::cout);
   std::cout << "\n";
   return 0;
 }
