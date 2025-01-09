@@ -2,6 +2,7 @@
 #define RECTANGLE_HPP
 
 #include "shape.hpp"
+#include "polygon.hpp"
 
 namespace mozhegova
 {
@@ -15,8 +16,8 @@ namespace mozhegova
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    point_t lowerLeft_;
-    point_t upperRight_;
+    Polygon * poly_;
+    ~Rectangle();
   };
 }
 
