@@ -17,6 +17,7 @@ namespace abramov
     void move(point_t p);
     void move(double dx, double dy);
     void scale(double k);
+    void unsafeScale(double k);
     ~CompositeShape();
     void push_back(Shape *shp);
     void pop_back() noexcept;

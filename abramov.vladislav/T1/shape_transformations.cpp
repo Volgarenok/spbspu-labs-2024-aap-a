@@ -95,6 +95,19 @@ void abramov::scaleFigure(Shape *s, point_t p, double k)
   s->move(dx, dy);
 }
 
+void abramov::unsafeScaleFigure(Shape *s, point_t p, double k)
+{
+  const point_t pos1 = s->getFrameRect().pos;
+  s->move(p);
+  const point_t pos2 = s->getFrameRect().pos;
+  double dx = pos2.x - pos1.x;
+  double dy = pos2.y - pos1.y;
+  s->scale(k);
+  dx *= -1 * k;
+  dy *= -1 * k;
+  s->move(dx, dy);
+}
+
 void abramov::deleteShapes(Shape **x, size_t i)
 {
   for (size_t j = 0; j < i; ++j)

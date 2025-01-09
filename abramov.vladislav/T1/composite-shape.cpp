@@ -137,6 +137,14 @@ void abramov::CompositeShape::scale(double k)
   }
 }
 
+void abramov::CompositeShape::unsafeScale(double k)
+{
+  for (size_t i = 0; i < shapes_; ++i)
+  {
+    unsafeScaleFigure(shapeptrs_[i], getFrameRect().pos, k);
+  }
+}
+
 abramov::Shape **expandArray(abramov::Shape **arr, size_t capacity)
 {
   abramov::Shape **array = nullptr;
