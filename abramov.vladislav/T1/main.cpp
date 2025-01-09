@@ -12,7 +12,7 @@ int main()
 {
   using namespace abramov;
 
-  CompositeShape shapes(10000);
+  CompositeShape shapes(0);
   double k = 0;
   bool wrong_figure = false;
   point_t p{0.0, 0.0};
