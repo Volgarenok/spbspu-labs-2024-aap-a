@@ -5,10 +5,6 @@ finaev::Rectangle* finaev::makeRectangle(std::istream& in)
 {
   double x0 = 0, y0 = 0, x1 = 0, y1 = 0;
   in >> x0 >> y0 >> x1 >> y1;
-  if (x0 >= x1 || y0 >= y1)
-  {
-    return nullptr;
-  }
   point_t l, r;
   l.x = x0;
   l.y = y0;

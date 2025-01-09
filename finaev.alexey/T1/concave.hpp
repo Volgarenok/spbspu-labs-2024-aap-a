@@ -21,6 +21,7 @@ namespace finaev
     point_t internal;
   };
   double len(point_t a, point_t b);
+  bool operator ==(const finaev::point_t a, const finaev::point_t b);
 }
 
 #endif

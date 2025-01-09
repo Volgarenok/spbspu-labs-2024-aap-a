@@ -4,9 +4,14 @@
 #include <stdexcept>
 #include "base-types.hpp"
 
-bool operator ==(const finaev::point_t a, const finaev::point_t b)
+bool finaev::operator ==(const finaev::point_t a, const finaev::point_t b)
 {
   return ((a.x == b.x) && (a.y == b.y));
+}
+
+double finaev::len(point_t a, point_t b)
+{
+  return std::sqrt(std::pow((a.x - b.x), 2) + std::pow((a.y - b.y), 2));
 }
 
 finaev::Concave::Concave(point_t f, point_t s, point_t t, point_t i):
@@ -17,37 +22,32 @@ finaev::Concave::Concave(point_t f, point_t s, point_t t, point_t i):
 {
   if (first == second || first == third || first == internal || second == third || second == internal || third == internal)
   {
-    throw std::invalid_argument("uncorrect coordinates");
+    throw std::logic_error("uncorrect coordinates");
   }
   else if (((internal.x == first.x) && (internal.x == second.x)) || ((internal.x == third.x) && (internal.x == second.x)))
   {
-    throw std::invalid_argument("uncorrect coordinates");
+    throw std::logic_error("uncorrect coordinates");
   }
   else if (((internal.x == first.x) && (internal.x == third.x)) || ((internal.y == third.y) && (internal.y == second.y)))
   {
-    throw std::invalid_argument("uncorrect coordinates");
+    throw std::logic_error("uncorrect coordinates");
   }
   else if (((internal.y == first.y) && (internal.x == third.x)) || ((internal.y == first.y) && (internal.y == second.y)))
   {
-    throw std::invalid_argument("uncorrect coordinates");
+    throw std::logic_error("uncorrect coordinates");
   }
   else if (len(first, second) + len(first, third) <= len(second, third))
   {
-    throw std::invalid_argument("uncorrect coordinates");
+    throw std::logic_error("uncorrect coordinates");
   }
   else if (len(second, third) + len(first, third) <= len(first, second))
   {
-    throw std::invalid_argument("uncorrect coordinates");
+    throw std::logic_error("uncorrect coordinates");
   }
   else if (len(first, second) + len(second, third) <= len(first, third))
   {
-    throw std::invalid_argument("uncorrect coordinates");
+    throw std::logic_error("uncorrect coordinates");
   }
-}
-
-double finaev::len(point_t a, point_t b)
-{
-  return std::sqrt(std::pow((a.x - b.x), 2) + std::pow((a.y - b.y), 2));
 }
 
 double finaev::Concave::getArea() const

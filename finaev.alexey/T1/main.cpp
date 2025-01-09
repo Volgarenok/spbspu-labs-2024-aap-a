@@ -21,7 +21,7 @@ int main()
   std::string coordinates = "";
   bool isCorrect = false;
   bool isScale = false;
-  while (std::cin >> str)
+  while (std::cin >> str && !std::cin.eof())
   {
     if (size == capacity)
     {
@@ -52,9 +52,13 @@ int main()
     {
       shapes[size] = finaev::makeShapes(std::cin, str);
     }
-    catch (std::invalid_argument & e)
+    catch (std::logic_error& e)
     {
       isCorrect = true;
+    }
+    catch (std::exception& e)
+    {
+      finaev::deleteShapes(shapes, size);
     }
     size++;
   }

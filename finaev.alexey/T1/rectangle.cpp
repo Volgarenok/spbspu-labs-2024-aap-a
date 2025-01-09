@@ -6,9 +6,9 @@ finaev::Rectangle::Rectangle(point_t l, point_t r):
   leftDown(l),
   rightUp(r)
 {
-  if (x0 >= x1 || y0 >= y1)
+  if (l.x >= r.x || l.y >= r.y)
   {
-    throw std::invalid_argument("Uncorrect argument");
+    throw std::logic_error("Uncorrect argument");
   }
 }
 
@@ -21,12 +21,9 @@ finaev::rectangle_t finaev::Rectangle::getFrameRect() const
 {
   double x = leftDown.x + (rightUp.x - leftDown.x) / 2;
   double y = leftDown.y + (rightUp.y - leftDown.y) / 2;
-  point_t b = {x, y};
-  rectangle_t a = {pos, width, height};
-  point_t pos = b;
   double width = rightUp.x - leftDown.x;
   double height = rightUp.y - leftDown.y;
-  rectangle_t a = {pos, width, height};
+  rectangle_t a = {{x, y}, width, height};
   return a;
 }
 
