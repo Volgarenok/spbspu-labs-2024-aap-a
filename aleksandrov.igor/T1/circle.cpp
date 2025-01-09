@@ -33,10 +33,6 @@ void aleksandrov::Circle::move(double dx, double dy)
 
 void aleksandrov::Circle::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::logic_error("Incorrect coefficient");
-  }
   ellipse_.scale(k);
 }
 
