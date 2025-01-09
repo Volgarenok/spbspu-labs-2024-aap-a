@@ -18,8 +18,8 @@ rectangle_t asafov::Rectangle::getFrameRect() const
   rectangle_t frect;
   frect.height = pow((lb.y - rt.y)*(lb.y - rt.y), 0.5);
   frect.width = pow((lb.x - rt.x)*(lb.x - rt.x), 0.5);
-  frect.pos.x = pow((lb.x + rt.x)*(lb.x + rt.x), 0.5) / 2;
-  frect.pos.y = pow((lb.y + rt.y)*(lb.y + rt.y), 0.5) / 2;
+  frect.pos.x = pow((lb.x + rt.x)*(lb.x + rt.x), 0.5) / 2.0;
+  frect.pos.y = pow((lb.y + rt.y)*(lb.y + rt.y), 0.5) / 2.0;
   return frect;
 }
 
@@ -33,10 +33,10 @@ void asafov::Rectangle::move(double x, double y)
 
 void asafov::Rectangle::move(point_t pos)
 {
-  double temp = pow((lb.x - rt.x)*(lb.x - rt.x), 0.5) / 2 - pos.x;
+  double temp = pow((lb.x - rt.x)*(lb.x - rt.x), 0.5) / 2.0 - pos.x;
   lb.x += temp;
   rt.x += temp;
-  temp = pow((lb.y + rt.y)*(lb.y + rt.y), 0.5) - pos.y;
+  temp = pow((lb.y + rt.y)*(lb.y + rt.y), 0.5) / 2.0 - pos.y;
   lb.y += temp;
   rt.y += temp;
 }

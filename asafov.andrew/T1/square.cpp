@@ -31,9 +31,9 @@ void asafov::Square::move(double x, double y)
 
 void asafov::Square::move(point_t pos)
 {
-  double temp = (lb.x + side) / 2 - pos.x;
+  double temp = pos.x - (lb.x + (side / 2.0));
   lb.x += temp;
-  temp = (lb.y + side) / 2 - pos.y;
+  temp = pos.y - (lb.y + (side / 2.0));
   lb.y += temp;
 }
 
