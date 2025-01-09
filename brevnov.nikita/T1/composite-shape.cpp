@@ -2,21 +2,15 @@
 #include <utility>
 #include <stdexcept>
 #include <cmath>
+#include "shape.hpp"
 
-void brevnov::CompositeShape::print_frame_coordinates(std::ostream & out)
+void brevnov::print_frame_coordinates(const CompositeShape CoSh, std::ostream & out);
 {
-  for (size_t i = 0; i < current_size_; i++)
+  find_frame_coordinates(CoSh[0]->getFrameRect(), out);
+  for (size_t i = 1; i < CoSh.size(); i++)
   {
-    if (i > 0)
-    {
-      out << " ";
-    }
-    rectangle_t frame = shapes_[i]->getFrameRect();
-    double leftx = frame.pos.x - frame.width / 2.0;
-    double lefty = frame.pos.y - frame.height / 2.0;
-    double rightx = frame.pos.x + frame.width / 2.0;
-    double righty = frame.pos.y + frame.height / 2.0;
-    out << leftx << " " << lefty << " " <<  rightx << " " << righty;
+    out << " ";
+    find_frame_coordinates(CoSh[i]->getFrameRect(), out);
   }
 }
 
