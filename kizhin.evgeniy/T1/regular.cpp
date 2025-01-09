@@ -88,15 +88,8 @@ kizhin::Polygon kizhin::createPolygon(const point_t& p1, const point_t& p2, cons
   const double innerRadius = std::min(r1, r2);
   const point_t vertex = (outerRadius == r1) ? p2 : p3;
   const size_t size = computeSize(innerRadius, outerRadius);
-  const point_t* vertices = nullptr;
-  try {
-    vertices = computeVerticesArray(p1, vertex, size);
-    Polygon result(vertices, size);
-    delete[] vertices;
-    return result;
-  } catch (...) {
-    delete[] vertices;
-    throw;
-  }
+  point_t* vertices = computeVerticesArray(p1, vertex, size);
+  Polygon result(vertices, size);
+  return result;
 }
 

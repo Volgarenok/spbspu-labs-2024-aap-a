@@ -27,15 +27,14 @@ kizhin::Polygon::Polygon(Polygon&& rhs) noexcept:
   rhs.vertices_ = nullptr;
 }
 
-kizhin::Polygon::Polygon(const point_t* values, size_t size):
-  vertices_(new point_t[size]),
-  size_(size)
+kizhin::Polygon::Polygon(point_t* values, size_t valuesCount):
+  vertices_(values),
+  size_(valuesCount)
 {
-  if (!values || size < 3 || hasDuplicates(values, values + size)) {
+  if (!values || valuesCount < 3 || hasDuplicates(vertices_, vertices_ + size_)) {
     clear();
     throw std::logic_error("Invalid points for polygon construction");
   }
-  copy(values, values + size, vertices_);
   computeFrameRect();
   computeCenter();
 }

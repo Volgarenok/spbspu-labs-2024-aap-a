@@ -88,14 +88,11 @@ kizhin::Polygon* kizhin::createPolygon(const double* params)
     points[i].x = params[1 + i * 2];
     points[i].y = params[2 + i * 2];
   }
-  Polygon* result = nullptr;
   try {
-    result = new Polygon(points, pointCount);
-  } catch (...) {
+    return new Polygon(points, pointCount);
+  } catch (const std::bad_alloc&) {
     delete[] points;
     throw;
   }
-  delete[] points;
-  return result;
 }
 

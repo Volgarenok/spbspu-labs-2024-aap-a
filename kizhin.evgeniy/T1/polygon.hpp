@@ -10,7 +10,7 @@ namespace kizhin {
   public:
     Polygon(const Polygon&);
     Polygon(Polygon&&) noexcept;
-    Polygon(const point_t*, size_t);
+    Polygon(point_t*, size_t);
     ~Polygon();
 
     Polygon& operator=(const Polygon&);
