@@ -28,6 +28,12 @@ void brevnov::Rectangle::move(point_t new_centre) noexcept
   move(dx, dy);
 }
 
+void brevnov::move_point(point_t& point, double dx, double dy)
+{
+  point.x += dx;
+  point.y += dy;
+}
+
 void brevnov::Rectangle::move(double dx, double dy) noexcept
 {
   left_.x += dx;
