@@ -38,8 +38,9 @@ int main()
     return 1;
   }
 
-  std::cout << std::fixed << std::setprecision(1) << commonAreaBefore;
+  std::cout << std::fixed << std::setprecision(1) << commonAreaBefore << " ";
   outRectangles(std::cout, Shapes, nShapes);
+  std::cout << "\n";
 
   double commonAreaAfter = 0;
   try {
@@ -52,7 +53,7 @@ int main()
 
   std::cout << std::fixed << std::setprecision(1) << commonAreaAfter << " ";
   outRectangles(std::cout, Shapes, nShapes);
-  std::cout << "n";
+  std::cout << "\n";
 
   clearShapes(Shapes, nShapes);
 }
