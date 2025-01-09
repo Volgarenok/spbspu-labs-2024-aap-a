@@ -9,7 +9,7 @@ namespace alymova
   };
   point_t operator+=(point_t& point, point_t shift_point);
   point_t operator*=(point_t& point, double ratio);
-  bool operator<(point_t& point1, point_t point2);
+  bool operator<(point_t point1, point_t point2);
 
   struct rectangle_t final
   {
@@ -19,8 +19,6 @@ namespace alymova
     rectangle_t(const rectangle_t& rect);
     rectangle_t(const rectangle_t&& rect);
     rectangle_t operator=(const rectangle_t& rect);*/
-
-    
     //point_t low_left_, upp_right_;
     double width, height;
     point_t pos;

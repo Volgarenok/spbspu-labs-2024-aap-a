@@ -12,7 +12,7 @@ alymova::point_t alymova::operator*=(point_t& point, double ratio)
   point.y *= ratio;
   return point;
 }
-bool alymova::operator<(point_t& point1, point_t point2)
+bool alymova::operator<(point_t point1, point_t point2)
 {
   if (point1.x < point2.x && point1.y < point2.y)
   {
