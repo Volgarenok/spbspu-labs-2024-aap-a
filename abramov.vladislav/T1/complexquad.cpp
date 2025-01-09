@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include <cmath>
 
-void abramov::searchInArray(const double *x, double &a, double &b, size_t k)
+void searchInArray(const double *x, double &a, double &b, size_t k)
 {
   if (k >= 1)
   {
@@ -24,12 +24,12 @@ void abramov::searchInArray(const double *x, double &a, double &b, size_t k)
   }
 }
 
-void abramov::getCoordsOfIntersection(const point_t *points, double &x, double &y)
+void getCoordsOfIntersection(const abramov::point_t *points, double &x, double &y)
 {
-  const point_t A = points[0];
-  const point_t B = points[1];
-  const point_t C = points[2];
-  const point_t D = points[3];
+  const abramov::point_t A = points[0];
+  const abramov::point_t B = points[1];
+  const abramov::point_t C = points[2];
+  const abramov::point_t D = points[3];
   const double k1 = (B.y - A.y) / (B.x - A.x);
   const double b1 = A.y - A.x * k1;
   const double k2 = (D.y - C.y) / (D.x - C.x);
@@ -60,7 +60,7 @@ void abramov::getCoordsOfIntersection(const point_t *points, double &x, double &
   }
 }
 
-double abramov::getTriangleArea(point_t A, point_t B, point_t O)
+double getTriangleArea(abramov::point_t A, abramov::point_t B, abramov::point_t O)
 {
   const double a = getLength(A, B);
   const double b = getLength(B, O);
