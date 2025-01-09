@@ -40,6 +40,8 @@ void averenkov::Diamond::scale(double factor)
   double scale_height = this->getFrameRect().height * factor;
   point_t a = {center.x + scale_width, center.y};
   point_t b = {center.x, center.y + scale_height};
+//std::cout << "Point a: " << a.x << ", " << a.y << std::endl;
+//std::cout << "Point b: " << b.x << ", " << b.y << std::endl;
   for (size_t i = 0; i < 40; i++)
   {
     rectangles[i] = Rectangle({ 0.0, 0.0 }, { 0.0, 0.0 });
@@ -116,7 +118,7 @@ void averenkov::Diamond::buildRectangles(const point_t a, const point_t b, const
         point_t rect_a = {center.x + x_offset - widthR / 2, center.y + y_offset - heightR / 2};
         point_t rect_c = {rect_a.x + widthR, rect_a.y + heightR};
         rectangles[index] = Rectangle(rect_a, rect_c);
-//std::cout << widthR;//rectangles[index].getArea() << "\n";
+//std::cout << rectangles[index].getFrameRect().pos.y + rectangles[index].getFrameRect().height / 2 << "\n";
         index++;
       }
     }

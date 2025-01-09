@@ -3,7 +3,8 @@
 
 void averenkov::makeRectangle(averenkov::Shape** shapes, size_t& shapeCount, std::istream& input, bool& errors)
 {
-  point_t a, c;
+  point_t a = { 0.0, 0.0 };
+  point_t c = { 0.0, 0.0 };
   if (!(input >> a.x >> a.y >> c.x >> c.y) || a.x > c.x || a.y > c.x)
   {
     errors = true;
@@ -16,9 +17,9 @@ void averenkov::makeRectangle(averenkov::Shape** shapes, size_t& shapeCount, std
 
 void averenkov::makeDiamond(averenkov::Shape** shapes, size_t& shapeCount, std::istream& input, bool& errors)
 {
-  point_t a;
-  point_t b;
-  point_t c;
+  point_t a = { 0.0, 0.0 };
+  point_t b = { 0.0, 0.0 };
+  point_t c = { 0.0, 0.0 };
   if (!(input >> a.x >> a.y >> b.x >> b.y >> c.x >> c.y))
   {
     errors = true;
@@ -41,8 +42,8 @@ void averenkov::makeDiamond(averenkov::Shape** shapes, size_t& shapeCount, std::
 
 void averenkov::makeEllipse(averenkov::Shape** shapes, size_t& shapeCount, std::istream& input, bool& errors)
 {
-  point_t center;
-  double a, b;
+  point_t center = { 0.0, 0.0 };
+  double a = 0.0, b = 0.0;
   if (!(input >> center.x >> center.y >> a >> b) || a <= 0 || b <= 0)
   {
     errors = true;
