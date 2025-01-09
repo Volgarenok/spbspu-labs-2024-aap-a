@@ -53,7 +53,7 @@ void tkach::Ring::move(const point_t& point_to_move)
   out_reg_.move(point_to_move);
 }
 
-void tkach::Ring::scaleUnsafe(const double multiplier)
+void tkach::Ring::doUnsafeScale(const double multiplier)
 {
   in_reg_.scale(multiplier);
   out_reg_.scale(multiplier);

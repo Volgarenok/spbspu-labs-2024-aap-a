@@ -121,7 +121,7 @@ void tkach::Regular::scaleFromFirstPoint(const double multiplier, tkach::point_t
   scale_point.y = first_point_.y + (scale_point.y - first_point_.y) * multiplier;
 }
 
-void tkach::Regular::scaleUnsafe(const double multiplier)
+void tkach::Regular::doUnsafeScale(const double multiplier)
 {
   scaleFromFirstPoint(multiplier, second_point_);
   scaleFromFirstPoint(multiplier, third_point_);

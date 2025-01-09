@@ -15,7 +15,7 @@ namespace tkach
     void move(double add_to_x, double add_to_y) override;
     void move(const point_t& point_to_move) override;
     Shape* clone() const override;
-    void scaleUnsafe(double multiplier) override;
+    void doUnsafeScale(double multiplier) override;
   private:
     point_t first_point_;
     point_t second_point_;

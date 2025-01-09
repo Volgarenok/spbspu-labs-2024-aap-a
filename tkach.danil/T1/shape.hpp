@@ -16,7 +16,7 @@ namespace tkach
     virtual void move(const point_t& point_to_move) = 0;
     virtual Shape* clone() const = 0;
     void scale(double multiplier);
-    virtual void scaleUnsafe(double multiplier) = 0;
+    virtual void doUnsafeScale(double multiplier) = 0;
   };
 }
 

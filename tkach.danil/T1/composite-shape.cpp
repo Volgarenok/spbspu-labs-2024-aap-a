@@ -5,11 +5,11 @@
 
 namespace
 {
-  void fillArrayWithClones(tkach::Shape** now, const tkach::Shape* const* const other, const size_t size, size_t& true_size)
+  void fillArrayWithClones(tkach::Shape** now, tkach::Shape* const* const other, const size_t size, size_t& true_size)
   {
     for (size_t i = 0; i < size; ++i)
     {
-      now[i] = other[i]->clone();
+      now[i] = other[i];
       true_size++;
     }
   }
@@ -198,7 +198,7 @@ size_t tkach::CompositeShape::size() const noexcept
   return size_;
 }
 
-void tkach::CompositeShape::scaleUnsave(const double multiplier)
+void tkach::CompositeShape::doUnsafeScale(const double multiplier)
 {
   doUnsaveIsoScaleShapes(shapes_, size_, multiplier, getFrameRect().pos);
 }

@@ -14,7 +14,7 @@ namespace tkach
     rectangle_t getFrameRect() const;
     void move(double add_to_x, double add_to_y) override;
     void move(const point_t& point_to_move) override;
-    void scaleUnsafe(double multiplier) override;
+    void doUnsafeScale(double multiplier) override;
     Shape* clone() const override;
   private:
     Regular in_reg_;

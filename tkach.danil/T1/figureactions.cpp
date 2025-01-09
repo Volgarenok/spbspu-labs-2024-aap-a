@@ -88,7 +88,7 @@ void tkach::doUnsaveIsoScaleCompShape(CompositeShape& shape_array, double scale_
 
 void tkach::doUnsaveIsoScaleOneShape(tkach::Shape* shape, const double scale_coef, const tkach::point_t& scale_point)
 {
-  shape->scaleUnsafe(scale_coef);
+  shape->doUnsafeScale(scale_coef);
   moveShapeInIsoScale(shape, scale_coef, scale_point);
 }
 
