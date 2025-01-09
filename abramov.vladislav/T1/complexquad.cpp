@@ -169,7 +169,7 @@ void abramov::ComplexQuad::scale(double k)
   const double dk = k - 1;
   const double ox = O.x;
   const double oy = O.y;
-  for (size_t i = 0; i < k; ++i)
+  for (size_t i = 0; i < 4; ++i)
   {
     double dx = -1 * (ox - points[i].x) * dk;
     double dy = -1 * (oy - points[i].y) * dk;
