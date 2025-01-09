@@ -1,5 +1,11 @@
 #include "rectangle.hpp"
 #include <stdexcept>
+#include <iostream>
+averenkov::Rectangle::Rectangle():
+  a({0.0, 0.0}),
+  c({0.0, 0.0})
+{
+}
 
 averenkov::Rectangle::Rectangle(averenkov::point_t a_, averenkov::point_t c_):
   a(a_),

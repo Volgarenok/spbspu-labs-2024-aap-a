@@ -52,7 +52,6 @@ void averenkov::Diamond::move(point_t new_pos)
   point_t center = getFrameRect().pos;
   double dx = new_pos.x - center.x;
   double dy = new_pos.y - center.y;
-  std::cout << "\n" << dx << " " << dy;
   move(dx, dy);
 }
 
