@@ -1,5 +1,4 @@
 #include "shape_transformations.hpp"
-#include <iostream>
 #include <limits>
 
 void abramov::getShapes(std::istream &in, Composite &shapes, point_t &p, double &k, bool &flag)
@@ -127,4 +126,5 @@ void abramov::printShapes(std::ostream &out, Composite &shapes, point_t p, doubl
   }
   printFrameRectCoords(shapes.getFrameRect(i - 1));
   out << "\n";
+  out << std::ios_base::fmtflags(0);
 }
