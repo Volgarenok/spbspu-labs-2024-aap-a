@@ -12,7 +12,7 @@ zakirov::CompositeShape::CompositeShape(point_t center, double radius)
   double ex_radius = 0.2;
   while ((radius - in_radius) / (ex_radius - in_radius) > possible_quantity)
   {
-    ex_radius += 0.1; 
+    ex_radius += 0.1;
   }
 
   ring_thickness_ = ex_radius - in_radius;
