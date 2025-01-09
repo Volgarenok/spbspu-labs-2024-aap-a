@@ -4,7 +4,7 @@
 
 namespace hismatova
 {
-  class Triangle : public Shape
+  class Triangle: public Shape
   {
   public:
     Triangle(const point_t& a, const point_t& b, const point_t& c);

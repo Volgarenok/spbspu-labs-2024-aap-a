@@ -36,10 +36,11 @@ namespace hismatova
 }
 int main()
 {
+  using namespace hismatova;
   size_t count = 0;
   bool errors = false;
   bool scales = false;
-  hismatova::Shape* figures[10000];
+  Shape* figures[10000];
   std::string nameFigure;
   while (std::cin >> nameFigure)
   {
@@ -47,7 +48,7 @@ int main()
     {
       try
       {
-        figures[count] = hismatova::createRectangle(std::cin);
+        figures[count] = createRectangle(std::cin);
         count++;
       }
       catch (const std::invalid_argument&)
@@ -57,7 +58,7 @@ int main()
       catch (const std::bad_alloc&)
       {
         std::cerr << "out of memory\n";
-        hismatova::deleteFigures(figures, count);
+        deleteFigures(figures, count);
         return 1;
       }
     }
@@ -65,7 +66,7 @@ int main()
     {
       try
       {
-        figures[count] = hismatova::createTriangle(std::cin);
+        figures[count] = createTriangle(std::cin);
         count++;
       }
       catch (const std::invalid_argument&)
@@ -75,7 +76,7 @@ int main()
       catch (const std::bad_alloc&)
       {
         std::cerr << "out of memory\n";
-        hismatova::deleteFigures(figures, count);
+        deleteFigures(figures, count);
         return 1;
       }
     }
@@ -83,7 +84,7 @@ int main()
     {
       try
       {
-        figures[count] = hismatova::createConcave(std::cin);
+        figures[count] = createConcave(std::cin);
         count++;
       }
       catch (const std::invalid_argument&)
@@ -93,7 +94,7 @@ int main()
       catch (const std::bad_alloc&)
       {
         std::cerr << "out of memory\n";
-        hismatova::deleteFigures(figures, count);
+        deleteFigures(figures, count);
         return 1;
       }
     }
@@ -102,11 +103,11 @@ int main()
       if (count == 0)
       {
         std::cerr << "there is no figures\n";
-        hismatova::deleteFigures(figures, count);
+        deleteFigures(figures, count);
         return 1;
       }
       double x = 0, y = 0;
-      hismatova::point_t point_;
+      point_t point_;
       std::cin >> x >> y;
       point_.x = x;
       point_.y = y;
@@ -115,35 +116,35 @@ int main()
       if (index <= 0)
       {
         std::cerr << "index must be positive\n";
-        hismatova::deleteFigures(figures, count);
+        deleteFigures(figures, count);
         return 1;
       }
       scales = true;
-      hismatova::results(figures, count);
+      results(figures, count);
       for (size_t i = 0; i < count; i++)
       {
-        hismatova::point_t pos = figures[i]->getFrameRect().pos;
+        point_t pos = figures[i]->getFrameRect().pos;
         figures[i]->move(point_);
-        hismatova::point_t pos2 = figures[i]->getFrameRect().pos;
-        hismatova::point_t p2;
+        point_t pos2 = figures[i]->getFrameRect().pos;
+        point_t p2;
         p2.x = (pos2.x - pos.x) * index;
         p2.y = (pos2.y - pos.y) * index;
         figures[i]->scale(index);
         figures[i]->move(-1 * p2.x, -1 * p2.y);
       }
-      hismatova::results(figures, count);
+      results(figures, count);
       break;
     }
   }
   if (!scales)
   {
     std::cerr << "incorrect input\n";
-    hismatova::deleteFigures(figures, count);
+    deleteFigures(figures, count);
     return 1;
   }
   else if (errors)
   {
     std::cerr << "error in parametrs\n";
   }
-  hismatova::deleteFigures(figures, count);
+  deleteFigures(figures, count);
 }

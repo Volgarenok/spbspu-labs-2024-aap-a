@@ -15,6 +15,8 @@ namespace hismatova
     void scale(double index) override;
   private:
     point_t a_, b_, c_, d_;
+    void movePoint(point_t& point, double dx, double dy);
+    void scalePoint(point_t& point, const point_t& center, double index);
   };
 }
 

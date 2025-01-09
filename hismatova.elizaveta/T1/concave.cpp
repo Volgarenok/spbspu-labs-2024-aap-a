@@ -29,16 +29,22 @@ void hismatova::Concave::move(const point_t &newPos)
   double dy = newPos.y - this->getFrameRect().pos.y;
   move(dx, dy);
 }
+void hismatova::Concave::movePoint(point_t& point, double dx, double dy)
+{
+  point.x += dx;
+  point.y += dy;
+}
 void hismatova::Concave::move(double dx, double dy)
 {
-  a_.x += dx;
-  a_.y += dy;
-  b_.x += dx;
-  b_.y += dy;
-  c_.x += dx;
-  c_.y += dy;
-  d_.x += dx;
-  d_.y += dy;
+  movePoint(a_, dx, dy);
+  movePoint(b_, dx, dy);
+  movePoint(c_, dx, dy);
+  movePoint(d_, dx, dy);
+}
+void hismatova::Concave::scalePoint(point_t& point, const point_t& center, double index)
+{
+  point.x = center.x + (point.x - center.x) * index;
+  point.y = center.y + (point.y - center.y) * index;
 }
 void hismatova::Concave::scale(double index)
 {
@@ -47,12 +53,8 @@ void hismatova::Concave::scale(double index)
     throw std::invalid_argument("Scale factor must be positive.");
   }
   hismatova::point_t center = this->getFrameRect().pos;
-  a_.x = center.x + (a_.x - center.x) * index;
-  a_.y = center.y + (a_.y - center.y) * index;
-  b_.x = center.x + (b_.x - center.x) * index;
-  b_.y = center.y + (b_.y - center.y) * index;
-  c_.x = center.x + (c_.x - center.x) * index;
-  c_.y = center.y + (c_.y - center.y) * index;
-  d_.x = center.x + (d_.x - center.x) * index;
-  d_.y = center.y + (d_.y - center.y) * index;
+  scalePoint(a_, center, index);
+  scalePoint(b_, center, index);
+  scalePoint(c_, center, index);
+  scalePoint(d_, center, index);
 }
