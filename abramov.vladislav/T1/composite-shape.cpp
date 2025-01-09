@@ -83,7 +83,7 @@ double abramov::CompositeShape::getArea() const noexcept
   return area;
 }
 
-void abramov::getRectCoords(rectangle_t rect, double &x1, double &y1, double &x2, double &y2)
+void getRectCoords(abramov::rectangle_t rect, double &x1, double &y1, double &x2, double &y2)
 {
   x1 = std::min(x1, rect.pos.x - rect.width / 2);
   x2 = std::max(x2, rect.pos.x + rect.width / 2);
@@ -141,6 +141,23 @@ void abramov::CompositeShape::scale(double k)
   }
 }
 
+abramov::Shape **expandArray(abramov::Shape **arr, size_t capacity)
+{
+  abramov::Shape **array = nullptr;
+  try
+  {
+    array = new abramov::Shape*[capacity * 2];
+  }
+  catch (const std::bad_alloc &e)
+  {
+    return nullptr;
+  }
+  for (size_t i = 0; i < capacity; ++i)
+  {
+    array[i] = arr[i];
+  }
+  return array;
+}
 void abramov::CompositeShape::push_back(Shape *shp)
 {
   if (capacity_ == shapes_)
@@ -218,20 +235,3 @@ size_t abramov::CompositeShape::getShapes_() const noexcept
   return shapes_;
 }
 
-abramov::Shape **abramov::expandArray(Shape **arr, size_t capacity)
-{
-  Shape **array = nullptr;
-  try
-  {
-    array = new Shape*[capacity * 2];
-  }
-  catch (const std::bad_alloc &e)
-  {
-    return nullptr;
-  }
-  for (size_t i = 0; i < capacity; ++i)
-  {
-    array[i] = arr[i];
-  }
-  return array;
-}

@@ -57,29 +57,26 @@ void abramov::Rectangle::scale(double k)
   {
     throw std::logic_error("Wrong scale coef\n");
   }
+  const double newWidth = (cmplxqds[3].getD().x - cmplxqds[0].getA().x) * k;
+  double height = 0;
+  const double dy = std::abs(cmplxqds[3].getD().y - cmplxqds[0].getA().y);
+  if (dy == 0)
+  {
+    height = cmplxqds[0].getB().y - cmplxqds[0].getA().y;
+  }
   else
   {
-    const double newWidth = (cmplxqds[3].getD().x - cmplxqds[0].getA().x) * k;
-    double height = 0;
-    const double dy = std::abs(cmplxqds[3].getD().y - cmplxqds[0].getA().y);
-    if (dy == 0)
-    {
-      height = cmplxqds[0].getB().y - cmplxqds[0].getA().y;
-    }
-    else
-    {
-      height = dy;
-    }
-    const double newHeight = height * k;
-    const point_t center = getFrameRect().pos;
-    const double x2 = center.x + newWidth / 2;
-    const double y2 = center.y + newHeight / 2;
-    const double x1 = center.x - newWidth / 2;
-    const double y1 = center.y - newHeight / 2;
-    const point_t p1{x1, y1};
-    const point_t p2{x2, y2};
-    createCQs(p1, p2, cmplxqds[0], cmplxqds[1], cmplxqds[2], cmplxqds[3]);
+    height = dy;
   }
+  const double newHeight = height * k;
+  const point_t center = getFrameRect().pos;
+  const double x2 = center.x + newWidth / 2;
+  const double y2 = center.y + newHeight / 2;
+  const double x1 = center.x - newWidth / 2;
+  const double y1 = center.y - newHeight / 2;
+  const point_t p1{x1, y1};
+  const point_t p2{x2, y2};
+  createCQs(p1, p2, cmplxqds[0], cmplxqds[1], cmplxqds[2], cmplxqds[3]);
 }
 
 abramov::Rectangle *abramov::Rectangle::clone() const

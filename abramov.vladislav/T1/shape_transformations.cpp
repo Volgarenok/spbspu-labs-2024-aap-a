@@ -126,5 +126,5 @@ void abramov::printShapes(std::ostream &out, Composite &shapes, point_t p, doubl
   }
   printFrameRectCoords(shapes.getFrameRect(i - 1));
   out << "\n";
-  out << std::ios_base::fmtflags(0);
+  out.copyfmt(std::ios(NULL));
 }
