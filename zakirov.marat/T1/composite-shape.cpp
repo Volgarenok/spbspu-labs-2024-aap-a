@@ -21,7 +21,7 @@ zakirov::CompositeShape::CompositeShape(point_t center, double radius)
   Shape * shapes[possible_quantity] = {};
   while (ex_radius_ < radius_)
   {
-    this->push_back(shapes);
+    push_back(shapes);
   }
 
   shapes_ = shapes;
@@ -69,7 +69,7 @@ void zakirov::CompositeShape::scale(double k)
 
 void zakirov::CompositeShape::push_back(Shape ** shape)
 {
-  shapes_[ring_quantity_] = zakirov::make_ring(center_.x, center_.y, ex_radius_, ex_radius_ + ring_thickness_);
+  shape[ring_quantity_] = zakirov::make_ring(center_.x, center_.y, ex_radius_, ex_radius_ + ring_thickness_);
   ++ring_quantity_;
   ex_radius_ += ring_thickness_;
 }
