@@ -83,7 +83,7 @@ rychkov::Shape* rychkov::getPolygon(std::istream& in)
   }
 
   bool lastWasRead = false;
-  while (used += getPoints(in, points, nAllocated - used, &lastWasRead), nAllocated <= used)
+  while (used += getPoints(in, points + used, nAllocated - used, &lastWasRead), nAllocated <= used)
   {
     if (!lastWasRead)
     {
@@ -122,16 +122,16 @@ rychkov::Shape* rychkov::getPolygon(std::istream& in)
 
 static size_t rychkov::getPoints(std::istream& in, point_t* arr, size_t length, bool* lastWasRead)
 {
+  if (lastWasRead)
+  {
+    *lastWasRead = true;
+  }
   for (size_t i = 0; i < length; i++)
   {
     arr[i].x = std::numeric_limits<double>::quiet_NaN();
     arr[i].y = std::numeric_limits<double>::quiet_NaN();
     if (!(in >> arr[i].x))
     {
-      if (lastWasRead)
-      {
-        *lastWasRead = true;
-      }
       return i;
     }
     if (!(in >> arr[i].y))

@@ -18,7 +18,7 @@ namespace rychkov
     virtual void move(double deltaX, double deltaY) noexcept override;
     virtual Shape* clone() const override;
   private:
-    static constexpr double maxError = 0.01;
+    static constexpr double maxError = 0.001;
     Regular bottomLeft_;
     long localHeight_, localWidth_;
     virtual void unsafeScale(double coef) noexcept override;

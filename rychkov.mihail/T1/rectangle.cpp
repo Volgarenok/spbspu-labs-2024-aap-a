@@ -15,6 +15,10 @@ rychkov::Rectangle::Rectangle(point_t bottomLeft, point_t topRight):
   localHeight_(0),
   localWidth_(0)
 {
+  if ((topRight.x <= bottomLeft.x) || (topRight.y <= bottomLeft.y))
+  {
+    throw std::invalid_argument("rectangle vertexes don't match their coordinates");
+  }
   double width = topRight.x - bottomLeft.x;
   double height = topRight.y - bottomLeft.y;
   double sideLength = tryRotation(width, height, 0);
@@ -83,7 +87,7 @@ rychkov::Shape* rychkov::Rectangle::clone() const
 
 double rychkov::Rectangle::tryRotation(double height, double width, double bestSideLength)
 {
-  constexpr long maxLoopDepth = 10000;
+  constexpr long maxLoopDepth = 1'000'000;
   for (long localHeight = 1; localHeight < maxLoopDepth; localHeight++)
   {
     double localWidthMid = (1 + 3 * localHeight) * width / height / std::sqrt(3);
