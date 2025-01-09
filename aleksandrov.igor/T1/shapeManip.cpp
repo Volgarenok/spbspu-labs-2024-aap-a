@@ -12,6 +12,7 @@ namespace aleksandrov
 
     while (input >> word)
     {
+      double* params = nullptr;
       try
       {
         size_t paramsCount = 0;
@@ -27,7 +28,7 @@ namespace aleksandrov
         {
           break;
         }
-        double* params = new double[paramsCount];
+        params = new double[paramsCount];
         if (!getShapeParams(input, params, paramsCount))
         {
           delete[] params;
@@ -38,6 +39,7 @@ namespace aleksandrov
       }
       catch (const std::logic_error& e)
       {
+        delete[] params;
         error = true;
         input.clear();
         continue;
