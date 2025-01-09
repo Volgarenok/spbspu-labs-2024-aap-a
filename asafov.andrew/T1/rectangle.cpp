@@ -41,10 +41,11 @@ void asafov::Rectangle::move(point_t pos)
   rt.y += temp;
 }
 
-void asafov::Rectangle::scale(point_t pos, double scale)
+void asafov::Rectangle::scale(double scale)
 {
-  rt.x += (rt.x - pos.x) * (scale - 1.0);
-  rt.y += (rt.y - pos.y) * (scale - 1.0);
-  lb.x += (lb.x - pos.x) * (scale - 1.0);
-  lb.y += (lb.y - pos.y) * (scale - 1.0);
+  rectangle_t rect = getFrameRect();
+  rt.x += (rt.x - rect.pos.x) * (scale - 1.0);
+  rt.y += (rt.y - rect.pos.y) * (scale - 1.0);
+  lb.x += (lb.x - rect.pos.x) * (scale - 1.0);
+  lb.y += (lb.y - rect.pos.y) * (scale - 1.0);
 }

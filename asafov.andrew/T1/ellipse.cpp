@@ -34,10 +34,11 @@ void asafov::Ellipse::move(point_t pos)
   center = pos;
 }
 
-void asafov::Ellipse::scale(point_t pos, double scale)
+void asafov::Ellipse::scale(double scale)
 {
-  center.x += (center.x - pos.x) * (scale - 1);
-  center.y += (center.y - pos.y) * (scale - 1);
+  rectangle_t rect = getFrameRect();
+  center.x += (center.x - rect.pos.x) * (scale - 1);
+  center.y += (center.y - rect.pos.y) * (scale - 1);
   radiusv *= scale;
   radiush *= scale;
 }

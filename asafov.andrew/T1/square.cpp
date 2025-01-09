@@ -37,9 +37,10 @@ void asafov::Square::move(point_t pos)
   lb.y += temp;
 }
 
-void asafov::Square::scale(point_t pos, double scale)
+void asafov::Square::scale(double scale)
 {
-  lb.x += (lb.x - pos.x) * (scale - 1);
-  lb.y += (lb.y - pos.y) * (scale - 1);
+  rectangle_t rect = getFrameRect();
+  lb.x += (lb.x - rect.pos.x) * (scale - 1);
+  lb.y += (lb.y - rect.pos.y) * (scale - 1);
   side *= scale;
 }

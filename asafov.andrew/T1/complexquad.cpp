@@ -63,14 +63,15 @@ void asafov::Complexquad::move(point_t pos)
   four.y += temp;
 }
 
-void asafov::Complexquad::scale(point_t pos, double scale)
+void asafov::Complexquad::scale(double scale)
 {
-  one.x += (one.x - pos.x) * (scale - 1);
-  one.y += (one.y - pos.y) * (scale - 1);
-  two.x += (two.x - pos.x) * (scale - 1);
-  two.y += (two.y - pos.y) * (scale - 1);
-  three.x += (three.x - pos.x) * (scale - 1);
-  three.y += (three.y - pos.y) * (scale - 1);
-  four.x += (four.x - pos.x) * (scale - 1);
-  four.y += (four.y - pos.y) * (scale - 1);
+  rectangle_t rect = getFrameRect();
+  one.x += (one.x - rect.pos.x) * (scale - 1);
+  one.y += (one.y - rect.pos.y) * (scale - 1);
+  two.x += (two.x - rect.pos.x) * (scale - 1);
+  two.y += (two.y - rect.pos.y) * (scale - 1);
+  three.x += (three.x - rect.pos.x) * (scale - 1);
+  three.y += (three.y - rect.pos.y) * (scale - 1);
+  four.x += (four.x - rect.pos.x) * (scale - 1);
+  four.y += (four.y - rect.pos.y) * (scale - 1);
 }

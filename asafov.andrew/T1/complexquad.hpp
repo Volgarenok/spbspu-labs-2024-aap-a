@@ -17,7 +17,7 @@ namespace asafov
         rectangle_t getFrameRect() const;
         void move(point_t pos);
         void move(double x, double y);
-        void scale(point_t pos, double scale);
+        void scale(double scale);
     };
 }
 #endif
