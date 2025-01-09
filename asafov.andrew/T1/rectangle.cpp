@@ -33,10 +33,10 @@ void asafov::Rectangle::move(double x, double y)
 
 void asafov::Rectangle::move(point_t pos)
 {
-  double temp = abs(lb.x + rt.x) / 2 - pos.x;
+  double temp = pow((lb.x - rt.x)*(lb.x - rt.x), 0.5) / 2 - pos.x;
   lb.x += temp;
   rt.x += temp;
-  temp = abs(lb.y + rt.y) / 2 - pos.y;
+  temp = pow((lb.y + rt.y)*(lb.y + rt.y), 0.5) - pos.y;
   lb.y += temp;
   rt.y += temp;
 }

@@ -187,6 +187,18 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
   return circ;
 }
 
+void isotropicScale(Shape* sh, point_t pos, double scale)
+{
+  point_t centr = sh[0].getFrameRect().pos;
+  sh[0].move(pos);
+  double vectorx = centr.x - sh[0].getFrameRect().pos.x;
+  double vectory = centr.y - sh[0].getFrameRect().pos.y;
+  sh[0].scale(scale);
+  vectorx *= scale;
+  vectory *= scale;
+  sh[0].move(vectorx, vectory);
+}
+
 unsigned long asafov::getHash(std::istream& in)
 {
   std::string str = {};
@@ -244,16 +256,4 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
     out << ' ' << rect.pos.y + rect.height / 2;
   }
   out << '\n';
-}
-
-void asafov::isotropicScale(Shape* sh, point_t pos, double scale)
-{
-  point_t centr = sh[0].getFrameRect().pos;
-  sh[0].move(pos);
-  double vectorx = centr.x - sh[0].getFrameRect().pos.x;
-  double vectory = centr.y - sh[0].getFrameRect().pos.y;
-  sh[0].scale(scale);
-  vectorx *= scale - 1;
-  vectory *= scale - 1;
-  sh[0].move(vectorx, vectory);
 }
