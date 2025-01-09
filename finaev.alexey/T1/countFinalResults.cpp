@@ -20,6 +20,6 @@ void finaev::printFrameRect(std::ostream& out, Shape** shapes, const size_t size
     double leftDownY = a.pos.y - (a.height / 2);
     double rightUpX = a.pos.x + (a.width / 2);
     double rightUpY = a.pos.y + (a.height / 2);
-    out << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
+    out << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY << " ";
   }
 }
