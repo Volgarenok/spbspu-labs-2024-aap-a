@@ -61,5 +61,5 @@ int main()
   {
     std::cerr << "incorrect shape \n";
   }
-  komarova::delete_shapes(shapes)
+  komarova::delete_shapes(shapes);
 }
