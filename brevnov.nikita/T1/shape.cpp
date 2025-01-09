@@ -34,7 +34,7 @@ namespace brevnov
       shapes[i]->move(-movement.x, -movement.y);
     }
   }
-
+  
   void find_frame_coordinates(rectangle_t frame, std::ostream& out)
   {
     double leftx = frame.pos.x - frame.width / 2.0;
