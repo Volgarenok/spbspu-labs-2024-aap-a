@@ -165,23 +165,15 @@ void abramov::ComplexQuad::move(double dx, double dy)
 
 void abramov::ComplexQuad::scale(double k)
 {
-  if (k <= 0)
+  const point_t O = getCenterComplexQuad();
+  const double dk = k - 1;
+  const double ox = O.x;
+  const double oy = O.y;
+  for (size_t i = 0; i < k; ++i)
   {
-    throw std::logic_error("Wrong scale coef\n");
-  }
-  else
-  {
-    const point_t O = getCenterComplexQuad();
-    const double dk = k - 1;
-    const double ox = O.x;
-    const double oy = O.y;
-    constexpr size_t k = 4;
-    for (size_t i = 0; i < k; ++i)
-    {
-      double dx = -1 * (ox - points[i].x) * dk;
-      double dy = -1 * (oy - points[i].y) * dk;
-      changePointCoords(points[i], dx, dy);
-    }
+    double dx = -1 * (ox - points[i].x) * dk;
+    double dy = -1 * (oy - points[i].y) * dk;
+    changePointCoords(points[i], dx, dy);
   }
 }
 

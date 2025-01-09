@@ -13,6 +13,7 @@ namespace abramov
     virtual void scale(double k) = 0;
     virtual ~Shape() = default;
     virtual Shape *clone() const = 0;
+    void doScale(double k);
   };
 }
 #endif

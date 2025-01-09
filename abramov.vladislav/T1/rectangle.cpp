@@ -53,10 +53,6 @@ void abramov::Rectangle::move(point_t p)
 
 void abramov::Rectangle::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::logic_error("Wrong scale coef\n");
-  }
   const double newWidth = (cmplxqds[3].getD().x - cmplxqds[0].getA().x) * k;
   double height = 0;
   const double dy = std::abs(cmplxqds[3].getD().y - cmplxqds[0].getA().y);
