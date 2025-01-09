@@ -10,14 +10,16 @@
 #include "countFinalResults.hpp"
 #include "scale.hpp"
 
+using namespace finaev;
+
 int main()
 {
   constexpr size_t capacity = 10000;
-  finaev::Shape* shapes[capacity] = {};
+  Shape* shapes[capacity] = {};
   std::string str = "";
   size_t size = 0;
   double k = 0.0;
-  finaev::point_t scaleCenter = {0, 0};
+  point_t scaleCenter = {0, 0};
   std::string coordinates = "";
   bool isCorrect = false;
   bool isScale = false;
@@ -43,14 +45,14 @@ int main()
       if (k <= 0)
       {
         std::cerr << "Uncorrect scale coefficient!\n";
-        finaev::deleteShapes(shapes, size);
+        deleteShapes(shapes, size);
         return 1;
       }
       break;
     }
     try
     {
-      shapes[size] = finaev::makeShapes(std::cin, str);
+      shapes[size] = makeShapes(std::cin, str);
       size++;
     }
     catch (std::logic_error& e)
@@ -59,13 +61,13 @@ int main()
     }
     catch (std::exception& e)
     {
-      finaev::deleteShapes(shapes, size);
+      deleteShapes(shapes, size);
     }
   }
   if (!isScale)
   {
     std::cerr << "no scale!\n";
-    finaev::deleteShapes(shapes, size);
+    deleteShapes(shapes, size);
     return 1;
   }
   if (isCorrect)
@@ -77,14 +79,14 @@ int main()
     std::cerr << "No figures!\n";
     return 1;
   }
-  std::cout << std::fixed << std::setprecision(1) << finaev::getSumArea(shapes, size) << " ";
-  finaev::printFrameRect(std::cout, shapes, size);
+  std::cout << std::fixed << std::setprecision(1) << getSumArea(shapes, size) << " ";
+  printFrameRect(std::cout, shapes, size);
   std::cout << "\n";
-  finaev::scale(shapes, size, scaleCenter, k);
-  std::cout << std::fixed << std::setprecision(1) << finaev::getSumArea(shapes, size) << " ";
-  finaev::printFrameRect(std::cout, shapes, size);
+  scale(shapes, size, scaleCenter, k);
+  std::cout << std::fixed << std::setprecision(1) << getSumArea(shapes, size) << " ";
+  printFrameRect(std::cout, shapes, size);
   std::cout << "\n";
-  finaev::deleteShapes(shapes, size);
+  deleteShapes(shapes, size);
   return 0;
 }
 

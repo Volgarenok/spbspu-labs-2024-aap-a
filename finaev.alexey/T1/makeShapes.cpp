@@ -31,7 +31,7 @@ finaev::Concave* finaev::makeConcave(std::istream& in)
   return concave;
 }
 
-finaev::Shape* finaev::makeShapes(std::istream& in, std::string str)
+finaev::Shape* finaev::makeShapes(std::istream& in, const std::string str)
 {
   if (str == "RECTANGLE")
   {

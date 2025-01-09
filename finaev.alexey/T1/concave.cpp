@@ -4,12 +4,12 @@
 #include <stdexcept>
 #include "base-types.hpp"
 
-bool finaev::operator ==(const finaev::point_t a, const finaev::point_t b)
+bool finaev::operator ==(const point_t a, const point_t b)
 {
   return ((a.x == b.x) && (a.y == b.y));
 }
 
-double finaev::len(point_t a, point_t b)
+double finaev::len(const point_t a, const point_t b)
 {
   return std::sqrt(std::pow((a.x - b.x), 2) + std::pow((a.y - b.y), 2));
 }
@@ -78,11 +78,13 @@ finaev::rectangle_t finaev::Concave::getFrameRect() const
 void finaev::Concave::move(double sx, double sy)
 {
   point_t * point[4] = {&first, &second, &third, &internal};
+  double moveX = 0.0;
+  double moveY = 0.0;
   for (size_t i = 0; i < 4; i++)
   {
     point_t p = *point[i];
-    double moveX = p.x + sx;
-    double moveY = p.y + sy;
+    moveX = p.x + sx;
+    moveY = p.y + sy;
     *point[i] = {moveX, moveY};
   }
 }

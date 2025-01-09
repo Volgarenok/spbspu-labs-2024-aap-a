@@ -27,22 +27,20 @@ finaev::rectangle_t finaev::Rectangle::getFrameRect() const
   return a;
 }
 
-void finaev::Rectangle::move(point_t a)
-{
-  point_t t;
-  t = getFrameRect().pos;
-  leftDown.x += (a.x - t.x);
-  leftDown.y += (a.y - t.y);
-  rightUp.x += (a.x - t.x);
-  rightUp.y += (a.y - t.y);
-}
-
 void finaev::Rectangle::move(double sx, double sy)
 {
   leftDown.x += sx;
   leftDown.y += sy;
   rightUp.x += sx;
   rightUp.y += sy;
+}
+
+void finaev::Rectangle::move(point_t a)
+{
+  point_t t = getFrameRect().pos;
+  double changeX = a.x - t.x;
+  double changeY = a.y - t.y;
+  this->move(changeX, changeY);
 }
 
 void finaev::Rectangle::scale(double k)
@@ -53,3 +51,4 @@ void finaev::Rectangle::scale(double k)
   leftDown.y = (leftDown.y - centre.y) * k + centre.y;
   rightUp.y = (rightUp.y - centre.y) * k + centre.y;
 }
+
