@@ -10,7 +10,7 @@ void brevnov::destroy_shape(Shape** shapes, size_t count)
   delete shapes;
 }
 
-double brevnov::get_sum_area(const Shape ** shapes, size_t count)
+double brevnov::get_sum_area(const Shape * const * shapes, size_t count)
 {
   double result = 0;
   for (size_t i = 0; i < count; ++i)
@@ -20,7 +20,7 @@ double brevnov::get_sum_area(const Shape ** shapes, size_t count)
   return result;
 }
 
-void brevnov::scale_shape(Shape** shapes, size_t count, point_t scale_p, double ratio)
+void brevnov::scale_shape(Shape * const * shapes, size_t count, point_t scale_p, double ratio)
 {
   for (size_t i = 0; i < count; ++i)
   {
@@ -33,7 +33,7 @@ void brevnov::scale_shape(Shape** shapes, size_t count, point_t scale_p, double 
   }
 }
 
-void brevnov::print_frame_coordinates(const Shape** shapes, size_t count, std::ostream & out)
+void brevnov::print_frame_coordinates(const Shape* const * shapes, size_t count, std::ostream & out)
 {
   for (size_t i = 0; i < count; ++i)
   {
