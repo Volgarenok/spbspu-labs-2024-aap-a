@@ -25,7 +25,7 @@ void alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool&
         in >> x1 >> y1 >> x2 >> y2;
         try
         {
-          shapes[shapes_now] = new Rectangle(point_t(x1, y1), point_t(x2, y2));
+          shapes[shapes_now] = new Rectangle(point_t{x1, y1}, point_t{x2, y2});
           shapes_now++;
         }
         catch (const std::logic_error& e)
@@ -40,7 +40,7 @@ void alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool&
         in >> x >> y >> radius;
         try
         {
-          shapes[shapes_now] = new Circle(point_t(x, y), radius);
+          shapes[shapes_now] = new Circle(point_t{x, y}, radius);
           shapes_now++;
         }
         catch (const std::logic_error& e)
@@ -53,9 +53,9 @@ void alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool&
       {
         double x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
         in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-        point_t pos(x1, y1);
-        point_t top(x2, y2);
-        point_t other(x3, y3);
+        point_t pos{x1, y1};
+        point_t top{x2, y2};
+        point_t other{x3, y3};
         try
         {
           shapes[shapes_now] = new Regular(pos, top, other);

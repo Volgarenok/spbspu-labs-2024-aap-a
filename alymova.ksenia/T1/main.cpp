@@ -40,7 +40,7 @@ int main()
   }
   print(std::cout, shapes);
   std::cout << "\n";
-  scale(shapes, alymova::point_t(scale_x, scale_y), scale_ratio);
+  scale(shapes, alymova::point_t{scale_x, scale_y}, scale_ratio);
   print(std::cout, shapes);
   std::cout << "\n";
   if (wrong_shape_flag)

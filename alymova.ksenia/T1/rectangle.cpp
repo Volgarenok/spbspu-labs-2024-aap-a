@@ -16,7 +16,7 @@ alymova::Rectangle::Rectangle(point_t p1, point_t p2):
   upp_right_ = p2;
   width_ = upp_right_.x - low_left_.x;
   height_ = upp_right_.y - low_left_.y;
-  pos_ = point_t((low_left_.x + width_ / 2), (upp_right_.y - height_ / 2));
+  pos_ = point_t{ (low_left_.x + width_ / 2), (upp_right_.y - height_ / 2) };
   frame_rect_ = rectangle_t(low_left_, upp_right_);
 }
 double alymova::Rectangle::getArea() const
@@ -29,7 +29,7 @@ alymova::rectangle_t alymova::Rectangle::getFrameRect() const
 }
 void alymova::Rectangle::move(double shift_x, double shift_y)
 {
-  point_t shift_point(shift_x, shift_y);
+  point_t shift_point{shift_x, shift_y};
   pos_ += shift_point;
   low_left_ += shift_point;
   upp_right_ += shift_point;
@@ -51,8 +51,8 @@ void alymova::Rectangle::scale(double ratio)
   {
     return;
   }
-  low_left_ += (point_t(0.5 * (width_ - ratio * width_), 0.5 * (height_ - ratio * height_)));
-  upp_right_ += (point_t(0.5 * (ratio * width_ - width_), 0.5 * (ratio * height_ - height_)));
+  low_left_ += (point_t{0.5 * (width_ - ratio * width_), 0.5 * (height_ - ratio * height_)});
+  upp_right_ += (point_t{0.5 * (ratio * width_ - width_), 0.5 * (ratio * height_ - height_)});
   width_ *= ratio;
   height_ *= ratio;
   frame_rect_.scale(ratio);

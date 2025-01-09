@@ -5,18 +5,12 @@ namespace alymova
   struct point_t final
   {
   public:
-    point_t() = default;
-    point_t(const point_t& point);
-    point_t(const point_t&& point);
-    point_t(double x, double y);
-    point_t operator=(const point_t& point);
-    point_t operator+=(point_t shift_point);
-    point_t operator*=(double ratio);
-    bool operator<(point_t p2);
-    double getX() const;
-    double getY() const;
     double x, y;
   };
+  point_t operator+=(point_t& point, point_t shift_point);
+  point_t operator*=(point_t& point, double ratio);
+  bool operator<(point_t& point1, point_t point2);
+
   struct rectangle_t final
   {
   public:
@@ -33,7 +27,8 @@ namespace alymova
     point_t getUppRight() const;
     point_t low_left_, upp_right_;
     double width, height;
-    point_t pos, shift_point_;
+    point_t pos;
+    point_t shift_point_;
   };
 }
 #endif

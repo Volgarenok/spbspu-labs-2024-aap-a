@@ -76,7 +76,7 @@ alymova::rectangle_t alymova::Regular::setFrameRect()
 }
 void alymova::Regular::move(double shift_x, double shift_y)
 {
-  point_t shift_point(shift_x, shift_y);
+  point_t shift_point{shift_x, shift_y};
   pos_ += shift_point;
   top_ += shift_point;
   other_ += shift_point;
