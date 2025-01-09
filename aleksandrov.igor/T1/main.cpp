@@ -19,8 +19,8 @@ int main()
     double x = 0.0;
     double y = 0.0;
     double k = 0.0;
-    aleksandrov::getScaleParams(std::cin, x, y, k);
-    if (k <= 0)
+    std::cin >> x >> y >> k;
+    if (!std::cin || k <= 0)
     {
       throw std::logic_error("Incorrect input!");
     }

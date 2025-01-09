@@ -2,6 +2,7 @@
 #define SHAPEMANIP_H
 
 #include <iostream>
+#include <string>
 #include "shape.hpp"
 #include "rectangle.hpp"
 #include "ellipse.hpp"
@@ -11,10 +12,9 @@ namespace aleksandrov
 {
   size_t getShapes(std::istream& input, Shape** shapes, bool& error);
   double getAreaSum(Shape** shapes, size_t count);
-  void getScaleParams(std::istream& input, double& x, double& y, double& k);
-  Rectangle* makeRectangle(std::istream& input);
-  Ellipse* makeEllipse(std::istream& input);
-  Circle* makeCircle(std::istream& input);
+  Shape* makeShape(const std::string& shapeName, double* params);
+  size_t getParamsCount(const std::string& command);
+  std::istream& getShapeParams(std::istream& input, double* params, size_t paramsCount);
   void scaleShapes(Shape** shapes, size_t count, double x, double y, double k);
   void printFrameRectCoords(std::ostream& output, Shape** shape, size_t count);
   void deleteShapes(Shape** shape);

@@ -1,7 +1,6 @@
 #include "shapeManip.h"
 #include <iostream>
 #include <string>
-#include <limits>
 #include "base-types.hpp"
 
 namespace aleksandrov
@@ -15,19 +14,12 @@ namespace aleksandrov
     {
       try
       {
-        if (word == "RECTANGLE")
+        size_t paramsCount = 0;
+        if (!(paramsCount = getParamsCount(word)))
         {
-          shapes[count] = makeRectangle(input);
+          throw std::logic_error("Incorrect input!");
         }
-        else if (word == "ELLIPSE")
-        {
-          shapes[count] = makeEllipse(input);
-        }
-        else if (word == "CIRCLE")
-        {
-          shapes[count] = makeCircle(input);
-        }
-        else if (word == "SCALE" && count)
+        if (word == "SCALE" && count)
         {
           return count;
         }
@@ -35,6 +27,14 @@ namespace aleksandrov
         {
           break;
         }
+        double* params = new double[paramsCount];
+        if (!getShapeParams(input, params, paramsCount))
+        {
+          delete[] params;
+          throw std::logic_error("Incorrect parameters!");
+        }
+        shapes[count] = makeShape(word, params);
+        delete[] params;
       }
       catch (const std::logic_error& e)
       {
@@ -69,46 +69,43 @@ namespace aleksandrov
     return sum;
   }
 
-  Rectangle* makeRectangle(std::istream& input)
+  Shape* makeShape(const std::string& shapeName, double* params)
   {
-    point_t a;
-    point_t b;
-    if (!(input >> a.x >> a.y >> b.x >> b.y))
+    if (shapeName == "RECTANGLE")
     {
-      throw std::logic_error("Incorrect input!");
+      return new Rectangle({params[0], params[1]}, {params[2], params[3]});
     }
-    return new Rectangle(a, b);
+    else if (shapeName == "ELLIPSE")
+    {
+      return new Ellipse({params[0], params[1]}, params[2], params[3]);
+    }
+    else if (shapeName == "CIRCLE")
+    {
+      return new Circle({params[0], params[1]}, params[2]);
+    }
+    return nullptr;
   }
 
-  Ellipse* makeEllipse(std::istream& input)
+  size_t getParamsCount(const std::string& command)
   {
-    point_t center;
-    double vr = 0.0;
-    double hr = 0.0;
-    if (!(input >> center.x >> center.y >> vr >> hr))
+    if (command == "RECTANGLE" || command == "ELLIPSE")
     {
-      throw std::logic_error("Incorrect input!");
+      return 4;
     }
-    return new Ellipse(center, vr, hr);
+    else if (command == "CIRCLE" || command == "SCALE")
+    {
+      return 3;
+    }
+    return 0;
   }
 
-  Circle* makeCircle(std::istream& input)
+  std::istream& getShapeParams(std::istream& input, double* params, size_t paramsCount)
   {
-    point_t center;
-    double r = 0.0;
-    if (!(input >> center.x >> center.y >> r))
+    for (size_t i = 0; i < paramsCount; ++i)
     {
-      throw std::logic_error("Incorrect input!");
+      input >> params[i];
     }
-    return new Circle(center, r);
-  }
-
-  void getScaleParams(std::istream& input, double& x, double& y, double& k)
-  {
-    if (!(input >> x >> y >> k))
-    {
-      throw std::logic_error("Incorrect input!");
-    }
+    return input;
   }
 
   void scaleShapes(Shape** shapes, size_t count, double x, double y, double k)
@@ -151,7 +148,8 @@ namespace aleksandrov
     size_t i = 0;
     while (shapes[i])
     {
-      delete shapes[i++];
+      delete shapes[i];
+      ++i;
     }
   }
 }
