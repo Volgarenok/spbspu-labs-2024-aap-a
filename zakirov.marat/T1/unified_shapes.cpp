@@ -348,7 +348,7 @@ void zakirov::scale_all_shapes(Shape ** shapes, point_t target, double k, size_t
 {
   for (size_t i = 0; i < size; ++i)
   {
-    zakirov::scale_from_point(shapes[i], target, k);
+    scale_from_point(shapes[i], target, k);
   }
 }
 
