@@ -51,9 +51,9 @@ int main()
     }
     try
     {
+      shapes[size] = makeShapes(std::cin, str);
       if (shapes[size] != nullptr)
       {
-        shapes[size] = makeShapes(std::cin, str);
         size++;
       }
     }
