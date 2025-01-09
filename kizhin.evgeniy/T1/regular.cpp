@@ -4,26 +4,15 @@
 #include <stdexcept>
 #include "point_utils.hpp"
 
-kizhin::Regular::Regular(const point_t& p1, const point_t& p2, const point_t& p3)
+namespace kizhin {
+  size_t computeSize(double, double);
+  point_t* computeVerticesArray(const point_t&, const point_t&, size_t);
+  Polygon createPolygon(const point_t&, const point_t&, const point_t&);
+}
+
+kizhin::Regular::Regular(const point_t& p1, const point_t& p2, const point_t& p3):
+  polygon_(createPolygon(p1, p2, p3))
 {
-  if (!isRightTriangle(p1, p2, p3)) {
-    throw std::invalid_argument("Invalid triangle for regular construction");
-  }
-  const double r1 = computeDistance(p1, p2);
-  const double r2 = computeDistance(p1, p3);
-  const double outerRadius = std::max(r1, r2);
-  const double innerRadius = std::min(r1, r2);
-  const point_t vertex = (outerRadius == r1) ? p2 : p3;
-  const size_t size = computeSize(innerRadius, outerRadius);
-  const point_t* vertices = nullptr;
-  try {
-    vertices = computeVerticesArray(p1, vertex, size);
-    polygon_ = Polygon{ vertices, size };
-  } catch (...) {
-    delete[] vertices;
-    throw;
-  }
-  delete[] vertices;
 }
 
 double kizhin::Regular::getArea() const
@@ -61,8 +50,18 @@ void kizhin::Regular::copyAssign(Shape* rhs)
   *this = *(reinterpret_cast< Regular* >(rhs));
 }
 
-kizhin::point_t* kizhin::Regular::computeVerticesArray(const point_t& center,
-    const point_t& vertex, size_t size) const
+size_t kizhin::computeSize(double innerRadius, double outerRadius)
+{
+  const double calculatedSize = pi / std::acos(innerRadius / outerRadius);
+  const size_t size = std::round(calculatedSize);
+  if (std::abs(calculatedSize - size) > epsilon || size < 3) {
+    throw std::logic_error("Fractional shape size");
+  }
+  return size;
+}
+
+kizhin::point_t* kizhin::computeVerticesArray(const point_t& center, const point_t& vertex,
+    size_t size)
 {
   point_t* vertices = new point_t[size];
   const double radius = computeDistance(vertex, center);
@@ -78,13 +77,26 @@ kizhin::point_t* kizhin::Regular::computeVerticesArray(const point_t& center,
   return vertices;
 }
 
-size_t kizhin::Regular::computeSize(double innerRadius, double outerRadius)
+kizhin::Polygon kizhin::createPolygon(const point_t& p1, const point_t& p2, const point_t& p3)
 {
-  const double calculatedSize = pi / std::acos(innerRadius / outerRadius);
-  const size_t size = std::round(calculatedSize);
-  if (std::abs(calculatedSize - size) > epsilon || size < 3) {
-    throw std::logic_error("Fractional shape size");
+  if (!isRightTriangle(p1, p2, p3)) {
+    throw std::invalid_argument("Invalid triangle for regular construction");
   }
-  return size;
+  const double r1 = computeDistance(p1, p2);
+  const double r2 = computeDistance(p1, p3);
+  const double outerRadius = std::max(r1, r2);
+  const double innerRadius = std::min(r1, r2);
+  const point_t vertex = (outerRadius == r1) ? p2 : p3;
+  const size_t size = computeSize(innerRadius, outerRadius);
+  const point_t* vertices = nullptr;
+  try {
+    vertices = computeVerticesArray(p1, vertex, size);
+    Polygon result(vertices, size);
+    delete[] vertices;
+    return result;
+  } catch (...) {
+    delete[] vertices;
+    throw;
+  }
 }
 

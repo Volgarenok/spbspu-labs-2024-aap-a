@@ -20,9 +20,6 @@ namespace kizhin {
 
   private:
     Polygon polygon_;
-
-    point_t* computeVerticesArray(const point_t&, const point_t&, size_t) const;
-    size_t computeSize(double, double);
   };
 }
 
