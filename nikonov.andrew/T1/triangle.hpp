@@ -7,10 +7,10 @@ namespace nikonov
   {
   public:
     Triangle(const point_t &a, const point_t &b, const point_t &c);
-    double getArea() const noexcept override;
-    rectangle_t getFrameRect() const noexcept override;
-    void move(const point_t &a) noexcept override;
-    void move(double x, double y) noexcept override;
+    double getArea() const override;
+    rectangle_t getFrameRect() const override;
+    void move(const point_t &a) override;
+    void move(double x, double y) override;
     void scale(double k) noexcept override;
   private:
     point_t a_;
