@@ -251,6 +251,6 @@ void asafov::isotropicScale(Shape* sh, point_t pos, double scale)
   point_t centr = sh[0].getFrameRect().pos;
   sh[0].move(pos);
   sh[0].scale(scale);
-  sh[0].move(scale * centr.x - scale * sh[0].getFrameRect().pos.x,
-    scale * centr.y - scale * sh[0].getFrameRect().pos.y);
+  sh[0].move((double)(scale * centr.x - scale * sh[0].getFrameRect().pos.x),
+    (double)(scale * centr.y - scale * sh[0].getFrameRect().pos.y));
 }
