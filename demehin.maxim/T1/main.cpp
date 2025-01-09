@@ -15,9 +15,9 @@ namespace
       demehin::point_t orig_pt = shapes[i]->getFrameRect().pos;
       shapes[i]->move(scale_pt);
       demehin::point_t new_pt = shapes[i]->getFrameRect().pos;
-      demehin::point_t move_vector;
-      move_vector.x = (new_pt.x - orig_pt.x) * scale_k;
-      move_vector.y = (new_pt.y - orig_pt.y) * scale_k;
+      double move_x = (new_pt.x - orig_pt.x) * scale_k;
+      double move_y = (new_pt.y - orig_pt.y) * scale_k;
+      demehin::point_t move_vector = {move_x, move_y};
       shapes[i]->scale(scale_k);
       shapes[i]->move(move_vector.x * -1, move_vector.y * -1);
     }
@@ -86,6 +86,7 @@ int main()
     catch (const std::bad_alloc& e)
     {
       free_shapes(shapes, shp_cnt);
+      return 1;
     }
     catch (const std::logic_error& e)
     {

@@ -124,7 +124,7 @@ void demehin::Polygon::scale(double k)
   }
 }
 
-void demehin::Polygon::setVertex(demehin::point_t* vertex, size_t vrt_cnt)
+void demehin::Polygon::setVertex(const demehin::point_t* vertex, size_t vrt_cnt)
 {
   for (size_t i = 0; i < vrt_cnt; i++)
   {
@@ -132,7 +132,7 @@ void demehin::Polygon::setVertex(demehin::point_t* vertex, size_t vrt_cnt)
   }
 }
 
-demehin::point_t demehin::Polygon::getCenter()
+demehin::point_t demehin::Polygon::getCenter() const
 {
   demehin::point_t plg_center = {0, 0};
   for (size_t i = 0; i < vrtx_cnt_; i++)
