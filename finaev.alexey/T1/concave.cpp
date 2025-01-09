@@ -98,10 +98,10 @@ void finaev::Concave::scale(double k)
 {
   double x1 = internal.x - (internal.x * k);
   double y1 = internal.y - (internal.y * k);
-  first.x = x1 - (first.x * k);
-  first.y = y1 - (first.y * k);
-  second.x = x1 - (second.x * k);
-  second.y = y1 - (second.y * k);
-  third.x = x1 - (third.x * k);
-  third.y = y1 - (third.y * k);
+  first.x = x1 + (first.x * k);
+  first.y = y1 + (first.y * k);
+  second.x = x1 + (second.x * k);
+  second.y = y1 + (second.y * k);
+  third.x = x1 + (third.x * k);
+  third.y = y1 + (third.y * k);
 }
