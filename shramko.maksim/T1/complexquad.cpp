@@ -1,5 +1,3 @@
-#include "complexquad.hpp"
-
 shramko::Complexquad::Complexquad(point_t one, point_t two, point_t three, point_t four)
 {
   one_ = one;
