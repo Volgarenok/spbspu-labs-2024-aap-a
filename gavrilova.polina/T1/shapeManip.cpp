@@ -22,16 +22,19 @@ void gavrilova::scaleShape(Shape& shape, const point_t& center, double k)
 
 void gavrilova::outRectangle(std::ostream& out, const rectangle_t& rect)
 {
-  out << rect.pos.x - rect.width / 2 << " " << rect.pos.y - rect.height / 2 << " ";
+  out << rect.pos.x - rect.width / 2 << " " << rect.pos.y - rect.height / 2;
   out << " " << rect.pos.x + rect.width / 2 << " " << rect.pos.y + rect.height / 2;
 }
 
 void gavrilova::outRectangles(std::ostream& out, Shape ** Shapes, size_t nShapes)
 {
   if (nShapes) {
+    out << std::setprecision(1);
+    rectangle_t rect = Shapes[0]->getFrameRect();
+    outRectangle(out, rect);
     for (size_t i = 0; i < nShapes; ++i) {
       rectangle_t rect = Shapes[i]->getFrameRect();
-      out << std::setprecision(1);
+      out << " ";
       outRectangle(out, rect);
     }
   }
