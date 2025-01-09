@@ -51,9 +51,14 @@ void kizhin::Regular::move(const point_t& newPos)
   polygon_.move(newPos);
 }
 
-void kizhin::Regular::scaleWithoutChecks(double scaleFactor)
+void kizhin::Regular::unsafeScale(double scalingFactor)
 {
-  polygon_.scale(scaleFactor);
+  polygon_.scale(scalingFactor);
+}
+
+void kizhin::Regular::copyAssign(Shape* rhs)
+{
+  *this = *(reinterpret_cast< Regular* >(rhs));
 }
 
 kizhin::point_t* kizhin::Regular::computeVerticesArray(const point_t& center,

@@ -22,9 +22,9 @@ double kizhin::computeDistance(const point_t& p1, const point_t& p2)
   return std::sqrt(dx * dx + dy * dy);
 }
 
-double* kizhin::computeEdgeCords(const point_t* points, size_t size)
+std::array< double, 4 > kizhin::computeEdgeCords(const point_t* points, size_t size)
 {
-  double* res = new double[4]{
+  std::array< double, 4 > res = {
     points->x,
     points->x,
     points->y,

@@ -13,13 +13,22 @@ namespace kizhin {
 
 void kizhin::scaleShape(Shape* shape, double scalingFactor, const point_t& scalingPoint)
 {
-  const point_t oldFramePos = shape->getFrameRect().pos;
-  shape->move(scalingPoint);
-  const point_t newFramePos = shape->getFrameRect().pos;
-  shape->scale(scalingFactor);
-  const double dx = (oldFramePos.x - newFramePos.x) * scalingFactor;
-  const double dy = (oldFramePos.y - newFramePos.y) * scalingFactor;
-  shape->move(dx, dy);
+  Shape* tempShape = nullptr;
+  try {
+    tempShape = shape->clone();
+    const point_t oldFramePos = tempShape->getFrameRect().pos;
+    tempShape->move(scalingPoint);
+    const point_t newFramePos = tempShape->getFrameRect().pos;
+    tempShape->scale(scalingFactor);
+    const double dx = (oldFramePos.x - newFramePos.x) * scalingFactor;
+    const double dy = (oldFramePos.y - newFramePos.y) * scalingFactor;
+    tempShape->move(dx, dy);
+    shape->copyAssign(tempShape);
+  } catch (...) {
+    delete tempShape;
+    throw;
+  }
+  delete tempShape;
 }
 
 void kizhin::unsafeScaleShapes(CompositeShape& shapes, const double* params)
@@ -59,16 +68,7 @@ kizhin::Rectangle* kizhin::createRectangle(const double* params)
 {
   const point_t leftDown{ params[1], params[2] };
   const point_t rightUp{ params[3], params[4] };
-  if (leftDown.x >= rightUp.x || leftDown.y >= rightUp.y) {
-    throw std::logic_error("Invalid pointns to create rectangle");
-  }
-  const double width = rightUp.x - leftDown.x;
-  const double height = rightUp.y - leftDown.y;
-  const point_t center{
-    0.5 * (leftDown.x + rightUp.x),
-    0.5 * (leftDown.y + rightUp.y),
-  };
-  return new Rectangle{ width, height, center };
+  return new Rectangle{ leftDown, rightUp };
 }
 
 kizhin::Regular* kizhin::createRegular(const double* params)

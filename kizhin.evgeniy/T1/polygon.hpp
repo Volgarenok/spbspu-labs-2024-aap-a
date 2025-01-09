@@ -23,7 +23,8 @@ namespace kizhin {
 
     void move(double, double) override;
     void move(const point_t&) override;
-    void swap(Polygon&) noexcept;
+    void unsafeScale(double) override;
+    void copyAssign(Shape*) override;
 
   private:
     point_t* vertices_;
@@ -31,9 +32,10 @@ namespace kizhin {
     point_t center_;
     rectangle_t frame_;
 
-    void scaleWithoutChecks(double) override;
     void computeFrameRect();
     void computeCenter();
+    void clear() noexcept;
+    void swap(Polygon&) noexcept;
   };
 }
 

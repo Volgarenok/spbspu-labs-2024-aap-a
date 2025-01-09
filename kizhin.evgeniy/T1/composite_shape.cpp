@@ -9,19 +9,13 @@ namespace kizhin {
 }
 
 kizhin::CompositeShape::CompositeShape(size_t capacity):
-  begin_(nullptr),
-  end_(nullptr),
-  end_cap_(nullptr)
+  begin_(capacity > 0 ? new Shape*[capacity] : nullptr),
+  end_(begin_),
+  end_cap_(begin_ ? begin_ + capacity : begin_)
 {
-  if (capacity > 0) {
-    begin_ = new Shape*[capacity];
-    end_ = begin_;
-    end_cap_ = begin_ + capacity;
-  }
 }
 
-kizhin::CompositeShape::CompositeShape(const CompositeShape& rhs):
-  CompositeShape(rhs.size())
+kizhin::CompositeShape::CompositeShape(const CompositeShape& rhs): CompositeShape(rhs.size())
 {
   copy(rhs.begin_, rhs.end_, begin_);
   end_ = begin_ + rhs.size();
@@ -49,10 +43,9 @@ kizhin::CompositeShape& kizhin::CompositeShape::operator=(const CompositeShape& 
   return *this;
 }
 
-kizhin::CompositeShape&
-kizhin::CompositeShape::operator=(CompositeShape&& rhs) noexcept
+kizhin::CompositeShape& kizhin::CompositeShape::operator=(CompositeShape&& rhs) noexcept
 {
-  if (this != &rhs) {
+  if (this != std::addressof(rhs)) {
     clear();
     swap(rhs);
   }
@@ -67,6 +60,16 @@ kizhin::Shape* kizhin::CompositeShape::operator[](size_t index) noexcept
 const kizhin::Shape* kizhin::CompositeShape::operator[](size_t index) const noexcept
 {
   return begin_[index];
+}
+
+size_t kizhin::CompositeShape::size() const noexcept
+{
+  return end_ - begin_;
+}
+
+bool kizhin::CompositeShape::empty() const noexcept
+{
+  return begin_ == end_;
 }
 
 const kizhin::Shape* kizhin::CompositeShape::at(size_t index) const
@@ -133,9 +136,9 @@ void kizhin::CompositeShape::move(double dx, double dy)
   }
 }
 
-void kizhin::CompositeShape::scale(double factor)
+void kizhin::CompositeShape::scale(double scalingFactor)
 {
-  if (factor <= 0) {
+  if (scalingFactor <= 0) {
     throw std::logic_error("Scaling factor must be positive");
   }
   if (empty()) {
@@ -143,7 +146,7 @@ void kizhin::CompositeShape::scale(double factor)
   }
   const point_t center = getFrameRect().pos;
   for (Shape* const* i = begin_; i != end_; ++i) {
-    scaleShape(*i, factor, center);
+    scaleShape(*i, scalingFactor, center);
   }
 }
 
@@ -164,22 +167,13 @@ void kizhin::CompositeShape::pop_back()
   --end_;
 }
 
-void kizhin::CompositeShape::resize(size_t newSize)
+void kizhin::CompositeShape::resize(size_t newCapacity)
 {
-  if (newSize <= size()) {
-    for (Shape** i = begin_ + newSize; i != end_; ++i) {
-      delete *i;
-    }
-    end_ = begin_ + newSize;
-    return;
-  }
-  const size_t currentSize = size();
-  Shape** newBegin = new Shape*[newSize];
-  copy(begin_, begin_ + currentSize, newBegin);
-  clear();
-  begin_ = newBegin;
-  end_ = begin_ + currentSize;
-  end_cap_ = begin_ + newSize;
+  CompositeShape tmp(newCapacity);
+  const size_t newSize = std::min(size(), newCapacity);
+  copy(begin_, begin_ + newSize, tmp.begin_);
+  tmp.end_ = tmp.begin_ + newSize;
+  swap(tmp);
 }
 
 void kizhin::CompositeShape::swap(CompositeShape& rhs) noexcept
@@ -207,8 +201,8 @@ void kizhin::copy(Shape* const* first, const Shape* const* last, Shape** result)
   }
 }
 
-kizhin::rectangle_t
-kizhin::combineRectangles(const rectangle_t& rect1, const rectangle_t& rect2)
+kizhin::rectangle_t kizhin::combineRectangles(const rectangle_t& rect1,
+    const rectangle_t& rect2)
 {
   const double rect1MinX = rect1.pos.x - rect1.width / 2;
   const double rect1MaxX = rect1.pos.x + rect1.width / 2;

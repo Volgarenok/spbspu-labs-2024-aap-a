@@ -7,7 +7,7 @@ namespace kizhin {
   class Rectangle final: public Shape
   {
   public:
-    Rectangle(double, double, const point_t&);
+    Rectangle(const point_t&, const point_t&);
 
     rectangle_t getFrameRect() const override;
     double getArea() const override;
@@ -15,11 +15,13 @@ namespace kizhin {
 
     void move(const point_t&) override;
     void move(double, double) override;
+    void unsafeScale(double) override;
+    void copyAssign(Shape*) override;
 
   private:
     rectangle_t data_;
 
-    void scaleWithoutChecks(double) override;
+    point_t computePosition(const point_t&, const point_t&);
   };
 }
 

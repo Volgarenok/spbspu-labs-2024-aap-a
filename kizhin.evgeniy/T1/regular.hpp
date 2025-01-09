@@ -15,11 +15,12 @@ namespace kizhin {
 
     void move(double, double) override;
     void move(const point_t&) override;
+    void unsafeScale(double) override;
+    void copyAssign(Shape*) override;
 
   private:
     Polygon polygon_;
 
-    void scaleWithoutChecks(double) override;
     point_t* computeVerticesArray(const point_t&, const point_t&, size_t) const;
     size_t computeSize(double, double);
   };

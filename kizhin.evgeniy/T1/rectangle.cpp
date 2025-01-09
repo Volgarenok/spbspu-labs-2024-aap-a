@@ -1,9 +1,16 @@
 #include "rectangle.hpp"
 #include <stdexcept>
 
-kizhin::Rectangle::Rectangle(double width, double height, const point_t& position):
-  data_{ width, height, position }
+kizhin::Rectangle::Rectangle(const point_t& leftDown, const point_t& rightUp):
+  data_{
+    rightUp.x - leftDown.x,
+    rightUp.y - leftDown.y,
+    computePosition(leftDown, rightUp),
+  }
 {
+  if (leftDown.x >= rightUp.x || leftDown.y >= rightUp.y) {
+    throw std::logic_error("Invalid pointns to create rectangle");
+  }
 }
 
 kizhin::rectangle_t kizhin::Rectangle::getFrameRect() const
@@ -32,9 +39,24 @@ void kizhin::Rectangle::move(double dx, double dy)
   data_.pos.y += dy;
 }
 
-void kizhin::Rectangle::scaleWithoutChecks(double scaleFactor)
+void kizhin::Rectangle::unsafeScale(double scalingFactor)
 {
-  data_.height *= scaleFactor;
-  data_.width *= scaleFactor;
+  data_.height *= scalingFactor;
+  data_.width *= scalingFactor;
+}
+
+void kizhin::Rectangle::copyAssign(Shape* rhs)
+{
+  *this = *(reinterpret_cast< Rectangle* >(rhs));
+}
+
+kizhin::point_t kizhin::Rectangle::computePosition(const point_t& leftDown,
+    const point_t& rightUp)
+{
+  const point_t center{
+    0.5 * (leftDown.x + rightUp.x),
+    0.5 * (leftDown.y + rightUp.y),
+  };
+  return center;
 }
 

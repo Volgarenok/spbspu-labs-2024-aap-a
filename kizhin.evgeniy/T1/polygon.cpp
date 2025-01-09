@@ -32,7 +32,7 @@ kizhin::Polygon::Polygon(const point_t* values, size_t size):
   size_(size)
 {
   if (!values || size < 3 || hasDuplicates(values, values + size)) {
-    delete[] vertices_;
+    clear();
     throw std::logic_error("Invalid points for polygon construction");
   }
   copy(values, values + size, vertices_);
@@ -42,7 +42,7 @@ kizhin::Polygon::Polygon(const point_t* values, size_t size):
 
 kizhin::Polygon::~Polygon()
 {
-  delete[] vertices_;
+  clear();
 }
 
 kizhin::Polygon& kizhin::Polygon::operator=(const Polygon& rhs)
@@ -54,9 +54,8 @@ kizhin::Polygon& kizhin::Polygon::operator=(const Polygon& rhs)
 
 kizhin::Polygon& kizhin::Polygon::operator=(Polygon&& rhs) noexcept
 {
-  if (this != &rhs) {
-    delete[] vertices_;
-    vertices_ = nullptr;
+  if (this != std::addressof(rhs)) {
+    clear();
     swap(rhs);
   }
   return *this;
@@ -99,19 +98,24 @@ void kizhin::Polygon::move(const point_t& newPos)
   move(dx, dy);
 }
 
-void kizhin::Polygon::scaleWithoutChecks(double scaleFactor)
+void kizhin::Polygon::unsafeScale(double scalingFactor)
 {
   for (point_t* i = vertices_; i != vertices_ + size_; ++i) {
-    i->x = center_.x + scaleFactor * (i->x - center_.x);
-    i->y = center_.y + scaleFactor * (i->y - center_.y);
+    i->x = center_.x + scalingFactor * (i->x - center_.x);
+    i->y = center_.y + scalingFactor * (i->y - center_.y);
   }
   computeCenter();
   computeFrameRect();
 }
 
+void kizhin::Polygon::copyAssign(Shape* rhs)
+{
+  *this = *(reinterpret_cast< Polygon* >(rhs));
+}
+
 void kizhin::Polygon::computeFrameRect()
 {
-  double* edgeCords = computeEdgeCords(vertices_, size_);
+  std::array< double, 4 > edgeCords = computeEdgeCords(vertices_, size_);
   const double width = edgeCords[1] - edgeCords[0];
   const double height = edgeCords[3] - edgeCords[2];
   const point_t pos = {
@@ -119,7 +123,6 @@ void kizhin::Polygon::computeFrameRect()
     (edgeCords[2] + edgeCords[3]) / 2.0,
   };
   frame_ = { width, height, pos };
-  delete[] edgeCords;
 }
 
 void kizhin::Polygon::computeCenter()
@@ -140,6 +143,12 @@ void kizhin::Polygon::swap(Polygon& rhs) noexcept
   swap(frame_, rhs.frame_);
 }
 
+void kizhin::Polygon::clear() noexcept
+{
+  delete[] vertices_;
+  vertices_ = nullptr;
+}
+
 void kizhin::copy(const point_t* first, const point_t* last, point_t* result)
 {
   for (; first != last; ++first, ++result) {
@@ -157,8 +166,7 @@ bool kizhin::hasDuplicates(const point_t* begin, const point_t* end)
   return false;
 }
 
-size_t
-kizhin::countEqual(const point_t* begin, const point_t* end, const point_t val)
+size_t kizhin::countEqual(const point_t* begin, const point_t* end, const point_t val)
 {
   size_t count = 0;
   for (; begin != end; ++begin) {

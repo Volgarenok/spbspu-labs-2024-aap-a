@@ -19,8 +19,8 @@ namespace kizhin {
     Shape* operator[](size_t) noexcept;
     const Shape* operator[](size_t) const noexcept;
 
-    size_t size() const noexcept { return end_ - begin_; }
-    bool empty() const noexcept { return begin_ == end_; }
+    size_t size() const noexcept;
+    bool empty() const noexcept;
     rectangle_t getFrameRect() const;
     double getArea() const;
     CompositeShape* clone() const;
