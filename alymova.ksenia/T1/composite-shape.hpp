@@ -14,8 +14,8 @@ namespace alymova
     ~CompositeShape();
     CompositeShape& operator=(const CompositeShape& comp_shape);
     CompositeShape& operator=(const CompositeShape&& comp_shape);
-    double getArea() const noexcept;
-    rectangle_t getFrameRect() const noexcept;
+    double* getArea() noexcept;
+    rectangle_t* getFrameRect() noexcept;
     void move(point_t point) noexcept;
     void move(double shift_x, double shift_y) noexcept;
     void scale(double ratio);
@@ -30,6 +30,9 @@ namespace alymova
   private:
     size_t size_, capacity_;
     Shape** shapes_;
+    double* areas_;
+    rectangle_t* frame_rect_points_;
+
   };
 }
 #endif
