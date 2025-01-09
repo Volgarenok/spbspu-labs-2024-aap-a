@@ -2,6 +2,8 @@
 #define OUTPUT_FUNCTIONS_HPP
 #include <fstream>
 #include "shape.hpp"
+using asafov::point_t;
+using asafov::rectangle_t;
 namespace asafov
 {
   unsigned long getHash(std::istream& in);

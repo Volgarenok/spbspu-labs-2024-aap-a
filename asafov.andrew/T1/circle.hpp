@@ -1,6 +1,8 @@
 #ifndef CIRCLE_HPP
 #define CIRCLE_HPP
 #include "shape.hpp"
+using asafov::point_t;
+using asafov::rectangle_t;
 namespace asafov
 {
   class Circle : public Shape

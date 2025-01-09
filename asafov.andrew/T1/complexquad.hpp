@@ -1,6 +1,8 @@
 #ifndef COMPLEXQUAD_HPP
 #define COMPLEXQUAD_HPP
 #include "shape.hpp"
+using asafov::point_t;
+using asafov::rectangle_t;
 namespace asafov
 {
     class Complexquad : public Shape

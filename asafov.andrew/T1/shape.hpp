@@ -1,6 +1,8 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 #include "base-types.hpp"
+using asafov::point_t;
+using asafov::rectangle_t;
 class Shape
 {
 public:

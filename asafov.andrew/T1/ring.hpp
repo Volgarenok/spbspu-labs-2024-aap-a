@@ -1,6 +1,8 @@
 #ifndef RING_HPP
 #define RING_HPP
 #include "shape.hpp"
+using asafov::point_t;
+using asafov::rectangle_t;
 namespace asafov
 {
   class Ring : public Shape
