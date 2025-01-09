@@ -5,20 +5,20 @@
 
 namespace
 {
-  void fillArrayWithClones(tkach::Shape** now, tkach::Shape* const* const other, const size_t size, size_t& true_size)
-  {
-    for (size_t i = 0; i < size; ++i)
-    {
-      now[i] = other[i];
-      true_size++;
-    }
-  }
-
-  void fillFromOneArrayToAnother(tkach::Shape** now, const tkach::Shape* const* const other, const size_t size)
+  void fillArrayWithClones(tkach::Shape** now, const tkach::Shape* const* const other, const size_t size, size_t& true_size)
   {
     for (size_t i = 0; i < size; ++i)
     {
       now[i] = other[i]->clone();
+      true_size++;
+    }
+  }
+
+  void fillFromOneArrayToAnother(tkach::Shape** now, tkach::Shape* const* const other, const size_t size)
+  {
+    for (size_t i = 0; i < size; ++i)
+    {
+      now[i] = other[i];
     }
   }
 }
