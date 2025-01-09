@@ -225,7 +225,7 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
     out << ' ' << rect.pos.y - rect.height / 2;
     out << ' ' << rect.pos.x + rect.width / 2;
     out << ' ' << rect.pos.y + rect.height / 2;
-    shapes[i][0].scale(scale);
+    isotropicScale(shapes[i], pos, scale);
   }
   area = 0;
   for (unsigned long long i = 0; i < count; i++)
@@ -246,7 +246,10 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
   out << '\n';
 }
 
-void asafov::isotropicScale(Shape* sh, double x, double y, double k)
+void asafov::isotropicScale(Shape* sh, point_t pos, double scale)
 {
-
+  point_t centr = sh[0].getFrameRect().pos;
+  sh[0].move(pos);
+  sh[0].scale(scale);
+  sh[0].move(centr.x - sh[0].getFrameRect().pos.x, centr.y - sh[0].getFrameRect().pos.y);
 }
