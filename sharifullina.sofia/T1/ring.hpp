@@ -5,7 +5,7 @@
 
 namespace sharifullina
 {
-  class Ring : public Shape
+  class Ring final: public Shape
   {
   public:
     Ring(point_t center, double inRadius, double outRadius);
