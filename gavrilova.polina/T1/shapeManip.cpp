@@ -22,7 +22,7 @@ void gavrilova::scaleShape(Shape& shape, const point_t& center, double k)
 
 void gavrilova::outRectangle(std::ostream& out, const rectangle_t& rect)
 {
-  out << rect.pos.x - rect.width / 2 << " " << rect.pos.y - rect.height / 2;
+  out << rect.pos.x - rect.width / 2 << " " << rect.pos.y - rect.height / 2 << " ";
   out << " " << rect.pos.x + rect.width / 2 << " " << rect.pos.y + rect.height / 2;
 }
 
