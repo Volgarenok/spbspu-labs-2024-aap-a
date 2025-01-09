@@ -37,7 +37,6 @@ int main()
     }
     else if (hash == 0)
     {
-
     }
     else
     {
