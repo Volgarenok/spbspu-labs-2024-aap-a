@@ -18,7 +18,7 @@ namespace averenkov
     void move(double x_plus, double y_plus);
   private:
     Rectangle rectangles[40];
-    double widthR, heightR;
+    double widthR_, heightR_, sumx_, sumy_;
   };
 }
 

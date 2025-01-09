@@ -15,8 +15,10 @@ namespace averenkov
     void scale(double factor);
     void move(point_t s);
     void move(double x_plus, double y_plus);
+    point_t getLeftBottom() const;
+    point_t getRightTop() const;
   private:
-    point_t a, c;
+    point_t a_, c_;
   };
 }
 #endif
