@@ -8,6 +8,7 @@ using asafov::ShapeFactory;
 using asafov::scaleShapes;
 using asafov::point_t;
 using asafov::rectangle_t;
+using asafov::Shape;
 
 int main()
 {
