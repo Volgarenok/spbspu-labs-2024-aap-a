@@ -20,6 +20,7 @@ namespace
     }
   }
 }
+
 int main()
 {
   CompositeShape shapes_array;

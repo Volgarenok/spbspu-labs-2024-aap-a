@@ -5,12 +5,20 @@
 
 namespace
 {
-  void fill_array_with_clones(tkach::Shape** now, const tkach::Shape* const* const other, const size_t size, size_t& true_size)
+  void fillArrayWithClones(tkach::Shape** now, const tkach::Shape* const* const other, const size_t size, size_t& true_size)
   {
     for (size_t i = 0; i < size; ++i)
     {
       now[i] = other[i]->clone();
       true_size++;
+    }
+  }
+
+  void fillFromOneArrayToAnother(tkach::Shape** now, const tkach::Shape* const* const other, const size_t size)
+  {
+    for (size_t i = 0; i < size; ++i)
+    {
+      now[i] = other[i]->clone();
     }
   }
 }
@@ -35,7 +43,7 @@ tkach::CompositeShape::CompositeShape(const CompositeShape& other):
   size_t true_size = 0;
   try
   {
-    fill_array_with_clones(shapes_, other.shapes_, size_, true_size);
+    fillArrayWithClones(shapes_, other.shapes_, size_, true_size);
   }
   catch (const std::bad_alloc& e)
   {
@@ -52,7 +60,7 @@ tkach::CompositeShape& tkach::CompositeShape::operator=(const CompositeShape& ot
     size_t true_size = 0;
     try
     {
-      fill_array_with_clones(new_shapes, other.shapes_, other.size_, true_size);
+      fillArrayWithClones(new_shapes, other.shapes_, other.size_, true_size);
     }
     catch (const std::bad_alloc& e)
     {
@@ -134,10 +142,7 @@ void tkach::CompositeShape::push_back(Shape* const shp)
     throw std::invalid_argument("No shape");
   }
   Shape** new_shapes = new Shape*[size_ + 1];
-  for (size_t i = 0; i < size_; ++i)
-  {
-    new_shapes[i] = shapes_[i];
-  }
+  fillFromOneArrayToAnother(new_shapes, shapes_, size_);
   new_shapes[size_++] = shp;
   delete[] shapes_;
   shapes_ = new_shapes;
@@ -150,10 +155,7 @@ void tkach::CompositeShape::pop_back()
     throw std::logic_error("Empty compositeshape");
   }
   Shape** new_shapes = new Shape*[--size_];
-  for (size_t i = 0; i < size_; ++i)
-  {
-    new_shapes[i] = shapes_[i];
-  }
+  fillFromOneArrayToAnother(new_shapes, shapes_, size_);
   delete[] shapes_;
   shapes_ = new_shapes;
 }
