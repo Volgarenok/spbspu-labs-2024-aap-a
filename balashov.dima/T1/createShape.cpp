@@ -31,21 +31,6 @@ balashov::Circle* balashov::makeCircle(std::istream& in)
   return circ;
 }
 
-balashov::Ring* balashov::makeRing(std::istream& in)
-{
-  double centerX = 0;
-  double centerY = 0;
-  double outerRadius = 0;
-  double innerRadius = 0;
-  in >> centerX >> centerY >> outerRadius >> innerRadius;
-  if (innerRadius >= outerRadius || innerRadius <= 0 || outerRadius <= 0)
-  {
-      throw std::invalid_argument("Incorrect data");
-  }
-  Ring* ring = new Ring({ centerX, centerY }, outerRadius, innerRadius);
-  return ring;
-}
-
 balashov::Regular* balashov::makeRegular(std::istream& in)
 {
   point_t point1, point2, point3;
@@ -80,4 +65,19 @@ void balashov::deleteShapes(Shape** shapes, size_t count)
   {
     delete shapes[i];
   }
+}
+
+balashov::Ring* balashov::makeRing(std::istream& in)
+{
+  double centerX = 0;
+  double centerY = 0;
+  double outerRadius = 0;
+  double innerRadius = 0;
+  in >> centerX >> centerY >> outerRadius >> innerRadius;
+  if (innerRadius >= outerRadius || innerRadius <= 0 || outerRadius <= 0)
+  {
+      throw std::invalid_argument("Incorrect data");
+  }
+  Ring* ring = new Ring({ centerX, centerY }, innerRadius, outerRadius);
+  return ring;
 }

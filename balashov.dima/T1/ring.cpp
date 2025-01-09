@@ -11,20 +11,19 @@ balashov::Ring::Ring(point_t center, double radiusIn, double radiusOut)
 
 double balashov::Ring::getArea() const
 {
-  double innerArea = 3.14 * pow(innerRadius, 2);
+  double innerArea = 3.14* pow(innerRadius, 2);
   double outerArea = 3.14 * pow(outerRadius, 2);
-
   return outerArea - innerArea;
 }
 
 balashov::rectangle_t balashov::Ring::getFrameRect() const
 {
-  rectangle_t сircumscribed;
-  сircumscribed.width = outerRadius * 2;
-  сircumscribed.height = outerRadius * 2;
-  сircumscribed.pos = centerPoint;
+  rectangle_t circumscribed;
+  circumscribed.width = outerRadius * 2;
+  circumscribed.height = outerRadius * 2;
+  circumscribed.pos = centerPoint;
 
-  return сircumscribed;
+  return circumscribed;
 }
 
 void balashov::Ring::move(point_t target)
