@@ -17,8 +17,8 @@ namespace mozhegova
     void scale(double k) override;
     ~Polygon();
   private:
-    size_t count;
-    point_t * points;
+    size_t count_;
+    point_t * points_;
   };
 }
 

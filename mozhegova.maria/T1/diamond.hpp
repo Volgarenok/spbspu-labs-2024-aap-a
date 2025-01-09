@@ -15,9 +15,9 @@ namespace mozhegova
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    point_t pCent;
-    point_t pVert;
-    point_t pHori;
+    point_t pCent_;
+    point_t pVert_;
+    point_t pHori_;
   };
 }
 
