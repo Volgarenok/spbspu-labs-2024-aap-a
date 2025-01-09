@@ -15,10 +15,11 @@ void alymova::scale(Shape** shapes, point_t s, double ratio)
   {
     return;
   }
-  for (size_t i = 0; shapes[i] != nullptr; i++)
+  for (size_t i = 0; shapes[i] != nullptr; i++) //if size == capacity
   {
+    rectangle_t old_rectangle = {shapes[i]->getFrameRect()};
     shapes[i]->move(s);
-    point_t shift_point(shapes[i]->getFrameRect().getShift());
+    point_t shift_point = {getShiftFrameRect(old_rectangle, shapes[i]->getFrameRect())};
     shapes[i]->scale(ratio);
     shift_point *= ratio;
     shapes[i]->move(-shift_point.x, -shift_point.y);
@@ -29,18 +30,19 @@ double alymova::getVector(point_t p1, point_t p2)
   return std::sqrt(std::pow(p1.x - p2.x, 2) + std::pow(p1.y - p2.y, 2));
 }
 
-bool alymova::getRectanglurTriangle(point_t pos, point_t& p2, point_t& p3)
+bool alymova::isRectanglurTriangle(point_t p1, point_t p2, point_t p3)
 {
-  if (std::abs(std::pow(getVector(p2, p3), 2) + std::pow(getVector(pos, p3), 2) - std::pow(getVector(pos, p2), 2)) < inaccuracy)
+  if (std::abs(std::pow(getVector(p2, p3), 2) + std::pow(getVector(p1, p3), 2) - std::pow(getVector(p1, p2), 2)) < inaccuracy)
   {
     return true;
   }
-  else if (std::abs(std::pow(getVector(p2, p3), 2) + std::pow(getVector(pos, p2), 2) - std::pow(getVector(pos, p3), 2)) < inaccuracy)
+  return false;
+  /*else if (std::abs(std::pow(getVector(p2, p3), 2) + std::pow(getVector(pos, p2), 2) - std::pow(getVector(pos, p3), 2)) < inaccuracy)
   {
     point_t temp(p2);
     p2 = p3;
     p3 = temp;
     return true;
-  }
+  }*/
   return false;
 }

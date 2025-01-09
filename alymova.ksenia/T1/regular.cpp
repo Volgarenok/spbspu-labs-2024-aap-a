@@ -6,22 +6,24 @@
 constexpr double PI = std::acos(-1.0);
 constexpr double inaccuracy = 0.0000000001;
 alymova::Regular::Regular(point_t pos, point_t top, point_t other):
-  pos_(),
-  top_(),
-  other_(),
+  pos_(pos),
+  top_(top),
+  other_(other),
   radius_big_(0),
   radius_small_(0),
   other_side_(0),
   sides_cnt_(0),
   frame_rect_()
 {
-  if (!getRectanglurTriangle(pos, top, other))
+  if (!isRectanglurTriangle(pos, top, other))
   {
-    throw std::logic_error("Incorrect description regular");
+    if (!isRectanglurTriangle(pos, other, top))
+    {
+      throw std::logic_error("Incorrect description regular");
+    }
+    top_ = other;
+    other_ = top;
   }
-  pos_ = pos;
-  top_ = top;
-  other_ = other;
   radius_big_ = getVector(pos_, top_);
   radius_small_ = getVector(pos_, other_);
   other_side_ = getVector(top_, other_);
@@ -70,9 +72,12 @@ alymova::rectangle_t alymova::Regular::setFrameRect()
     upp_right_x = std::max(upp_right_x, pos_.x + radius_big_ * std::cos(angle_now));
     upp_right_y = std::max(upp_right_y, pos_.y + radius_big_ * std::sin(angle_now));
   }
-  point_t p1 = {low_left_x, low_left_y};
-  point_t p2 = {upp_right_x, upp_right_y};
-  return rectangle_t(p1, p2);
+  //point_t p1 = {low_left_x, low_left_y};
+  //point_t p2 = {upp_right_x, upp_right_y};
+  double width = upp_right_x - low_left_x;
+  double height = upp_right_y - low_left_y;
+  point_t pos = {(low_left_x + width / 2.0), (upp_right_y - height / 2.0)};
+  return rectangle_t{width, height, pos};
 }
 void alymova::Regular::move(double shift_x, double shift_y)
 {
@@ -80,7 +85,7 @@ void alymova::Regular::move(double shift_x, double shift_y)
   pos_ += shift_point;
   top_ += shift_point;
   other_ += shift_point;
-  frame_rect_.move(shift_x, shift_y);
+  alymova::moveFrameRect(frame_rect_, shift_x, shift_y);
 }
 void alymova::Regular::move(point_t point)
 {
@@ -105,7 +110,7 @@ void alymova::Regular::scale(double ratio)
   radius_big_ *= ratio;
   radius_small_ *= ratio;
   other_side_ *= ratio;
-  frame_rect_.scale(ratio);
+  alymova::scaleFrameRect(frame_rect_, ratio);
 }
 alymova::Shape* alymova::Regular::clone() const
 {

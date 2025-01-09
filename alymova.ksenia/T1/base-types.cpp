@@ -20,7 +20,7 @@ bool alymova::operator<(point_t& point1, point_t point2)
   }
   return false;
 }
-alymova::rectangle_t::rectangle_t(point_t low_left, point_t upp_right):
+/*alymova::rectangle_t::rectangle_t(point_t low_left, point_t upp_right):
   low_left_(low_left),
   upp_right_(upp_right),
   width(upp_right_.x - low_left_.x),
@@ -53,23 +53,19 @@ alymova::rectangle_t alymova::rectangle_t::operator=(const rectangle_t& rect)
   pos = rect.pos;
   shift_point_ = rect.shift_point_;
   return *this;
-}
-double alymova::rectangle_t::getArea() const
+}*/
+double alymova::getAreaFrameRect(rectangle_t rect)
 {
-  return width * height;
+  return rect.width * rect.height;
 }
-void alymova::rectangle_t::move(double shift_x, double shift_y)
+void alymova::moveFrameRect(rectangle_t& rect, double shift_x, double shift_y)
 {
-  shift_point_ = point_t{shift_x, shift_y};
-  pos += shift_point_;
-  low_left_ += shift_point_;
-  upp_right_ += shift_point_;
+  point_t shift_point_ = {shift_x, shift_y};
+  rect.pos += shift_point_;
+  //low_left_ += shift_point_;
+  //upp_right_ += shift_point_;
 }
-alymova::point_t alymova::rectangle_t::getShift() const
-{
-  return shift_point_;
-}
-void alymova::rectangle_t::scale(double ratio)
+void alymova::scaleFrameRect(rectangle_t& rect, double ratio)
 {
   if (ratio <= 0)
   {
@@ -79,16 +75,23 @@ void alymova::rectangle_t::scale(double ratio)
   {
     return;
   }
-  low_left_ += (point_t{0.5 * (width - ratio * width), 0.5 * (height - ratio * height)});
-  upp_right_ += (point_t{0.5 * (ratio * width - width), 0.5 * (ratio * height - height)});
-  width *= ratio;
-  height *= ratio;
+  //low_left_ += (point_t{0.5 * (width - ratio * width), 0.5 * (height - ratio * height)});
+  //upp_right_ += (point_t{0.5 * (ratio * width - width), 0.5 * (ratio * height - height)});
+  rect.width *= ratio;
+  rect.height *= ratio;
 }
-alymova::point_t alymova::rectangle_t::getLowLeft() const
+alymova::point_t alymova::getShiftFrameRect(rectangle_t rect1, rectangle_t rect2)
 {
-  return low_left_;
+  point_t shift_point = {rect2.pos.x - rect1.pos.x, rect2.pos.y - rect1.pos.y};
+  return shift_point;
 }
-alymova::point_t alymova::rectangle_t::getUppRight() const
+alymova::point_t alymova::getLowLeftFrameRect(rectangle_t rect)
 {
-  return upp_right_;
+  point_t low_left{rect.pos.x - rect.width / 2.0, rect.pos.y - rect.height / 2.0};
+  return low_left;
+}
+alymova::point_t alymova::getUppRightFrameRect(rectangle_t rect)
+{
+  point_t upp_right{rect.pos.x + rect.width / 2.0, rect.pos.y + rect.height / 2.0};
+  return upp_right;
 }

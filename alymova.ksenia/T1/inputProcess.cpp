@@ -84,7 +84,7 @@ void alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool&
 void alymova::print(std::ostream& out, Shape** shapes)
 {
   double area = 0;
-  for(size_t i = 0; shapes[i] != nullptr; i++)
+  for(size_t i = 0; shapes[i] != nullptr; i++) //if size == capacity
   {
     area += shapes[i]->getArea();
   }
@@ -92,10 +92,11 @@ void alymova::print(std::ostream& out, Shape** shapes)
   out << area;
   for (size_t i = 0; shapes[i] != nullptr; i++)
   {
-    out << " " << shapes[i]->getFrameRect().getLowLeft().x;
-    out << " " << shapes[i]->getFrameRect().getLowLeft().y;
-    out << " " << shapes[i]->getFrameRect().getUppRight().x;
-    out << " " << shapes[i]->getFrameRect().getUppRight().y;
+    rectangle_t rect = shapes[i]->getFrameRect();
+    out << " " << getLowLeftFrameRect(rect).x;
+    out << " " << getLowLeftFrameRect(rect).y;
+    out << " " << getUppRightFrameRect(rect).x;
+    out << " " << getUppRightFrameRect(rect).y;
   }
 }
 void alymova::clear(Shape** shapes)
