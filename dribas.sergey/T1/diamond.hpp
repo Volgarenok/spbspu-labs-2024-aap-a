@@ -2,6 +2,7 @@
 #define DIAMOND_HPP
 
 #include "shape.hpp"
+#include "triangle.hpp"
 
 namespace dribas
 {
@@ -15,9 +16,10 @@ namespace dribas
     void move(double x, double y) override;
     void scale(double ratio) override;
   private:
-    point_t a_;
-    point_t b_;
-    point_t c_;
+    Triangle a_;
+    Triangle b_;
+    Triangle c_;
+    Triangle d_;
   };
 }
 #endif
