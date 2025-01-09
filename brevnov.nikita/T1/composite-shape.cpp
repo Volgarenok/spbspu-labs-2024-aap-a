@@ -4,7 +4,7 @@
 #include <cmath>
 #include "shape.hpp"
 
-void brevnov::print_frame_coordinates(const CompositeShape CoSh, std::ostream & out)
+void brevnov::print_frame_coordinates(CompositeShape CoSh, std::ostream & out)
 {
   find_frame_coordinates(CoSh[0]->getFrameRect(), out);
   for (size_t i = 1; i < CoSh.size(); i++)
