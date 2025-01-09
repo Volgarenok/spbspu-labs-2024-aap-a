@@ -6,6 +6,8 @@
 using asafov::getHash;
 using asafov::ShapeFactory;
 using asafov::scaleShapes;
+using asafov::point_t;
+using asafov::rectangle_t;
 
 int main()
 {

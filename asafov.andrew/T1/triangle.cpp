@@ -2,6 +2,9 @@
 #include <algorithm>
 #include <cmath>
 
+using asafov::point_t;
+using asafov::rectangle_t;
+
 asafov::Triangle::Triangle(point_t a, point_t b, point_t c):
 one(a), two(b), three(c)
 {}

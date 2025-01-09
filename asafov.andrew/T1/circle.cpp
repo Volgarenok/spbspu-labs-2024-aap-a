@@ -2,6 +2,9 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 
+using asafov::point_t;
+using asafov::rectangle_t;
+
 asafov::Circle::Circle(point_t pos, double rad):
 center(pos), radius(rad)
 {}

@@ -1,6 +1,9 @@
 #include "rectangle.hpp"
 #include <cmath>
 
+using asafov::point_t;
+using asafov::rectangle_t;
+
 asafov::Rectangle::Rectangle(point_t a, point_t b):
 lb(a), rt(b)
 {}

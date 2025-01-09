@@ -10,6 +10,9 @@
 #include "triangle.hpp"
 #include "complexquad.hpp"
 
+using asafov::point_t;
+using asafov::rectangle_t;
+
 Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
 {
   if (hash == 'R' * 'E' * 'C' * 'T')

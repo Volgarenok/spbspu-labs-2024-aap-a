@@ -1,6 +1,9 @@
 #include "square.hpp"
 #include <cmath>
 
+using asafov::point_t;
+using asafov::rectangle_t;
+
 asafov::Square::Square(point_t a, double s):
 lb(a), side(s)
 {}

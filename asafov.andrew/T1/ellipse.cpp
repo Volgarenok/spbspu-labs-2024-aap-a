@@ -2,6 +2,9 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 
+using asafov::point_t;
+using asafov::rectangle_t;
+
 asafov::Ellipse::Ellipse(point_t pos, double radv, double radh):
 center(pos), radiusv(radv), radiush(radh)
 {}
