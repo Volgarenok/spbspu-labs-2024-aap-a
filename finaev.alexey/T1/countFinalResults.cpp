@@ -22,10 +22,10 @@ void finaev::printFrameRect(std::ostream& out, Shape** shapes, const size_t size
   {
     out << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY << " ";
     rectangle_t a = shapes[i]->getFrameRect();
-    double leftDownX = a.pos.x - (a.width / 2);
-    double leftDownY = a.pos.y - (a.height / 2);
-    double rightUpX = a.pos.x + (a.width / 2);
-    double rightUpY = a.pos.y + (a.height / 2);
+    leftDownX = a.pos.x - (a.width / 2);
+    leftDownY = a.pos.y - (a.height / 2);
+    rightUpX = a.pos.x + (a.width / 2);
+    rightUpY = a.pos.y + (a.height / 2);
   }
   out << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
 }
