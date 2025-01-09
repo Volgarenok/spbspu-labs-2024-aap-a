@@ -2,78 +2,79 @@
 #include <cmath>
 #include <stdexcept>
 
-mozhegova::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
-  pCent_(p1),
-  pVert_(p2),
-  pHori_(p3)
+mozhegova::Diamond::Diamond(point_t pCent, point_t pVert, point_t pHori):
+  poly_(nullptr)
 {
   point_t p = {0, 0};
-  if (pCent_.x == pHori_.x && pCent_.y == pVert_.y)
+  if (pCent.x == pHori.x && pCent.y == pVert.y)
   {
-    p = pVert_;
-    pVert_ = pHori_;
-    pHori_ = p;
+    p = pVert;
+    pVert = pHori;
+    pHori = p;
   }
-  else if (pVert_.x == pCent_.x && pVert_.y == pHori_.y)
+  else if (pVert.x == pCent.x && pVert.y == pHori.y)
   {
-    p = pVert_;
-    pVert_ = pCent_;
-    pCent_ = p;
+    p = pVert;
+    pVert = pCent;
+    pCent = p;
   }
-  else if (pVert_.x == pHori_.x && pVert_.y == pCent_.y)
+  else if (pVert.x == pHori.x && pVert.y == pCent.y)
   {
-    p = pCent_;
-    pCent_ = pVert_;
-    pVert_ = pHori_;
-    pHori_ = p;
+    p = pCent;
+    pCent = pVert;
+    pVert = pHori;
+    pHori = p;
   }
-  else if (pHori_.x == pCent_.x && pHori_.y == pVert_.y)
+  else if (pHori.x == pCent.x && pHori.y == pVert.y)
   {
-    p = pCent_;
-    pCent_ = pHori_;
-    pHori_ = pVert_;
-    pVert_ = p;
+    p = pCent;
+    pCent = pHori;
+    pHori = pVert;
+    pVert = p;
   }
-  else if (pHori_.x == pVert_.x && pHori_.y == pCent_.y)
+  else if (pHori.x == pVert.x && pHori.y == pCent.y)
   {
-    p = pHori_;
-    pHori_ = pCent_;
-    pCent_ = p;
+    p = pHori;
+    pHori = pCent;
+    pCent = p;
   }
-  else if (!(pCent_.x == pVert_.x && pCent_.y == pHori_.y))
+  else if (!(pCent.x == pVert.x && pCent.y == pHori.y))
   {
     throw std::invalid_argument("Incorrect coordinates");
   }
+  point_t coor[4] = {};
+  double dx = std::abs(pCent.x - pHori.x);
+  double dy = std::abs(pCent.y - pVert.y);
+  coor[0] = {pCent.x, pCent.y - dy};
+  coor[1] = {pCent.x + dx, pCent.y};
+  coor[2] = {pCent.x, pCent.y + dy};
+  coor[3] = {pCent.x - dx, pCent.y};
+  poly_ = new Polygon(4, coor);
+}
+
+mozhegova::Diamond::~Diamond()
+{
+  delete poly_;
 }
 
 double mozhegova::Diamond::getArea() const
 {
-  double d1 = std::abs(pVert_.y - pCent_.y);
-  double d2 = std::abs(pHori_.x - pCent_.x);
-  return 2 * d1 * d2;
+  return poly_->getArea();
 }
 
 mozhegova::rectangle_t mozhegova::Diamond::getFrameRect() const
 {
-  double d1 = std::abs(pVert_.y - pCent_.y);
-  double d2 = std::abs(pHori_.x - pCent_.x);
-  return {2 * d2, 2 * d1, pCent_};
+  return poly_->getFrameRect();
 }
 
 void mozhegova::Diamond::move(point_t p)
 {
-  double d1 = pVert_.y - pCent_.y;
-  double d2 = pHori_.x - pCent_.x;
-  pCent_ = p;
-  pVert_ = {pCent_.x, pCent_.y + d1};
-  pHori_ = {pCent_.x + d2, pCent_.y};
+  poly_->move(p);
 }
 
 void mozhegova::Diamond::move(double dx, double dy)
 {
-  pCent_ = {pCent_.x + dx, pCent_.y + dy};
-  pVert_ = {pVert_.x + dx, pVert_.y + dy};
-  pHori_ = {pHori_.x + dx, pHori_.y + dy};
+  poly_->move(dx, dy);
 }
 
 void mozhegova::Diamond::scale(double k)
@@ -82,8 +83,5 @@ void mozhegova::Diamond::scale(double k)
   {
     throw std::invalid_argument("Incorrect scale");
   }
-  double d1 = pVert_.y - pCent_.y;
-  double d2 = pHori_.x - pCent_.x;
-  pVert_.y = pCent_.y + d1 * k;
-  pHori_.x = pCent_.x + d2 * k;
+  poly_->scale(k);
 }
