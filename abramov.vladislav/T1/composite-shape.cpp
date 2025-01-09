@@ -184,7 +184,7 @@ abramov::Shape *abramov::CompositeShape::at(size_t id)
   return shapeptrs_[id];
 }
 
-abramov::Shape *abramov::CompositeShape::at(size_t id) const
+const abramov::Shape *abramov::CompositeShape::at(size_t id) const
 {
   if (id >= shapes_)
   {
@@ -198,7 +198,7 @@ abramov::Shape *abramov::CompositeShape::operator[](size_t id) noexcept
   return shapeptrs_[id];
 }
 
-abramov::Shape *abramov::CompositeShape::operator[](size_t id) const noexcept
+const abramov::Shape *abramov::CompositeShape::operator[](size_t id) const noexcept
 {
   return shapeptrs_[id];
 }

@@ -24,9 +24,9 @@ namespace abramov
     void push_back(Shape *shp);
     void pop_back() noexcept;
     Shape *at(size_t id);
-    Shape *at(size_t id) const;
+    const Shape *at(size_t id) const;
     Shape *operator[](size_t id) noexcept;
-    Shape *operator[](size_t id) const noexcept;
+    const Shape *operator[](size_t id) const noexcept;
     bool empty() const noexcept;
     size_t size() const noexcept;
     CompositeShape *clone() const;
