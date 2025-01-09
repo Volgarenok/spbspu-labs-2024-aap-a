@@ -12,6 +12,7 @@
 
 using asafov::point_t;
 using asafov::rectangle_t;
+using asafov::Shape;
 
 Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
 {
