@@ -34,6 +34,6 @@ namespace brevnov
     size_t capacity_;
     size_t current_size_;
   };
-  void print_frame_coordinates(CompositeShape CoSh, std::ostream & out);
+  void print_frame_coordinates(CompositeShape& CoSh, std::ostream & out);
 }
 #endif

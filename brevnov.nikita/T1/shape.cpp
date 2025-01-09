@@ -35,7 +35,7 @@ namespace brevnov
     }
   }
 
-  void find_frame_coordinates(rectangle_t frame, std::ostream& out)
+  void find_frame_coordinates(rectangle_t& frame, std::ostream& out)
   {
     double leftx = frame.pos.x - frame.width / 2.0;
     double lefty = frame.pos.y - frame.height / 2.0;
