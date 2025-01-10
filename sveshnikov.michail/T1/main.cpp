@@ -11,7 +11,7 @@ int main()
   constexpr size_t size = 10000;
   size_t num_shapes = 0;
   sveshnikov::Shape *shapes[size] = {nullptr};
-  std::string shape_name = "";
+  std::string shape_name;
   try
   {
     while (shape_name != "SCALE" && !std::cin.eof())

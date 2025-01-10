@@ -4,13 +4,8 @@
 
 namespace sveshnikov
 {
-  class Ellipse final : public Shape
+  class Ellipse final: public Shape
   {
-  private:
-    point_t center_;
-    double vert_radius_;
-    double horiz_radius_;
-
   public:
     Ellipse(point_t center, double vert_radius, double horiz_radius);
     double getArea() const override;
@@ -18,6 +13,11 @@ namespace sveshnikov
     void move(const point_t p) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
+
+  private:
+    point_t center_;
+    double vert_radius_;
+    double horiz_radius_;
   };
 }
 

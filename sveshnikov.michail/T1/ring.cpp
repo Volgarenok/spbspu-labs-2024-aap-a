@@ -3,11 +3,10 @@
 #include <stdexcept>
 
 sveshnikov::Ring::Ring(point_t center, double long_radius, double short_radius):
-  center_(center),
-  long_radius_(long_radius),
-  short_radius_(short_radius)
+  small_ellipse_(center, short_radius, short_radius),
+  big_ellipse_(center, long_radius, long_radius)
 {
-  if (!(long_radius_ > short_radius_ && short_radius_ > 0))
+  if (!(long_radius > short_radius && short_radius > 0))
   {
     throw std::logic_error("ERROR: incorrect radius values of ring");
   }
@@ -15,31 +14,28 @@ sveshnikov::Ring::Ring(point_t center, double long_radius, double short_radius):
 
 double sveshnikov::Ring::getArea() const
 {
-  return M_PI * (long_radius_ * long_radius_ - short_radius_ * short_radius_);
+  return big_ellipse_.getArea() - small_ellipse_.getArea();
 }
 
 sveshnikov::rectangle_t sveshnikov::Ring::getFrameRect() const
 {
-  return {2 * long_radius_, 2 * long_radius_, center_};
+  return big_ellipse_.getFrameRect();
 }
 
 void sveshnikov::Ring::move(const point_t p)
 {
-  center_ = p;
+  small_ellipse_.move(p);
+  big_ellipse_.move(p);
 }
 
 void sveshnikov::Ring::move(double dx, double dy)
 {
-  center_.x += dx;
-  center_.y += dy;
+  small_ellipse_.move(dx, dy);
+  big_ellipse_.move(dx, dy);
 }
 
 void sveshnikov::Ring::scale(double k)
 {
-  if (k < 0)
-  {
-    throw std::logic_error("ERROR: zoom coefficient must be positive!");
-  }
-  long_radius_ *= k;
-  short_radius_ *= k;
+  small_ellipse_.scale(k);
+  big_ellipse_.scale(k);
 }
