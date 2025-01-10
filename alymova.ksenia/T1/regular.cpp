@@ -36,7 +36,6 @@ alymova::Regular::Regular(point_t pos, point_t top, point_t other):
 }
 double alymova::Regular::getArea() const
 {
-  //return 0.5 * radius_big_ * radius_big_ * sides_cnt_ * std::sin((360 / getCntSides()) * PI / 180);
   return 0.5 * radius_small_ * other_side_ * sides_cnt_ * 2.0;
 }
 size_t alymova::Regular::getCntSides() const
@@ -72,8 +71,6 @@ alymova::rectangle_t alymova::Regular::setFrameRect()
     upp_right_x = std::max(upp_right_x, pos_.x + radius_big_ * std::cos(angle_now));
     upp_right_y = std::max(upp_right_y, pos_.y + radius_big_ * std::sin(angle_now));
   }
-  //point_t p1 = {low_left_x, low_left_y};
-  //point_t p2 = {upp_right_x, upp_right_y};
   double width = upp_right_x - low_left_x;
   double height = upp_right_y - low_left_y;
   point_t pos = {(low_left_x + width / 2.0), (upp_right_y - height / 2.0)};

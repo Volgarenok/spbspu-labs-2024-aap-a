@@ -16,8 +16,6 @@ namespace alymova
     Shape* clone() const override;
   private:
     point_t low_left_, upp_right_;
-    double width_, height_;
-    point_t pos_;
     rectangle_t frame_rect_;
   };
 }

@@ -14,15 +14,8 @@ namespace alymova
   struct rectangle_t final
   {
   public:
-    /*rectangle_t() = default;
-    rectangle_t(point_t low_left, point_t upp_right);
-    rectangle_t(const rectangle_t& rect);
-    rectangle_t(const rectangle_t&& rect);
-    rectangle_t operator=(const rectangle_t& rect);*/
-    //point_t low_left_, upp_right_;
     double width, height;
     point_t pos;
-    //point_t shift_point_;
   };
   double getAreaFrameRect(rectangle_t rect);
   void moveFrameRect(rectangle_t& rect, double shift_x, double shift_y);
