@@ -32,14 +32,12 @@ double alymova::Regular::getArea() const
 {
   double radius_small = getVector(pos_, other_);
   double other_side = getVector(top_, other_);
-
   return 0.5 * radius_small * other_side * sides_cnt_ * 2.0;
 }
 size_t alymova::Regular::getCntSides() const
 {
   double radius_big = getVector(pos_, top_);
   double radius_small = getVector(pos_, other_);
-
   double sides = PI / (std::acos(radius_small / radius_big));
   size_t round_sides = std::round(sides);
   if (std::abs((std::cos(180 / std::round(sides) * PI / 180)) - (radius_small / radius_big)) < inaccuracy)
@@ -56,7 +54,6 @@ alymova::rectangle_t alymova::Regular::setFrameRect()
 {
   double radius_big = getVector(pos_, top_);
   double other_side = getVector(top_, other_);
-
   double low_left_x = std::numeric_limits< double >::max();
   double low_left_y = std::numeric_limits< double >::max();
   double upp_right_x = std::numeric_limits< double >::min();

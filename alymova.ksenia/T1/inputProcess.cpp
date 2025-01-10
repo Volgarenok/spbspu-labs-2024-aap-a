@@ -81,7 +81,7 @@ void alymova::makeShape(std::istream& in, Shape** shapes, int& shapes_now, bool&
     }
   }
 }
-void alymova::print(std::ostream& out, Shape** shapes)
+void alymova::print(std::ostream& out, const Shape** shapes)
 {
   double area = 0;
   for(size_t i = 0; shapes[i] != nullptr; i++) //if size == capacity

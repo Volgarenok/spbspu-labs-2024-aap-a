@@ -20,7 +20,6 @@ namespace alymova
     Shape* clone() const override;
   private:
     point_t pos_, top_, other_;
-    //double radius_big_, radius_small_, other_side_;
     size_t sides_cnt_;
     rectangle_t frame_rect_;
   };
