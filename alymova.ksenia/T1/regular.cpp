@@ -9,9 +9,6 @@ alymova::Regular::Regular(point_t pos, point_t top, point_t other):
   pos_(pos),
   top_(top),
   other_(other),
-  radius_big_(0),
-  radius_small_(0),
-  other_side_(0),
   sides_cnt_(0),
   frame_rect_()
 {
@@ -24,11 +21,8 @@ alymova::Regular::Regular(point_t pos, point_t top, point_t other):
     top_ = other;
     other_ = top;
   }
-  radius_big_ = getVector(pos_, top_);
-  radius_small_ = getVector(pos_, other_);
-  other_side_ = getVector(top_, other_);
   sides_cnt_ = getCntSides();
-  if (sides_cnt_ == 0 || sides_cnt_ < 3)
+  if (sides_cnt_ < 3)
   {
     throw std::logic_error("Incorrect description regular");
   }
@@ -36,13 +30,19 @@ alymova::Regular::Regular(point_t pos, point_t top, point_t other):
 }
 double alymova::Regular::getArea() const
 {
-  return 0.5 * radius_small_ * other_side_ * sides_cnt_ * 2.0;
+  double radius_small = getVector(pos_, other_);
+  double other_side = getVector(top_, other_);
+
+  return 0.5 * radius_small * other_side * sides_cnt_ * 2.0;
 }
 size_t alymova::Regular::getCntSides() const
 {
-  double sides = PI / (std::acos(radius_small_ / radius_big_));
+  double radius_big = getVector(pos_, top_);
+  double radius_small = getVector(pos_, other_);
+
+  double sides = PI / (std::acos(radius_small / radius_big));
   size_t round_sides = std::round(sides);
-  if (std::abs((std::cos(180 / std::round(sides) * PI / 180)) - (radius_small_ / radius_big_)) < inaccuracy)
+  if (std::abs((std::cos(180 / std::round(sides) * PI / 180)) - (radius_small / radius_big)) < inaccuracy)
   {
     return round_sides;
   }
@@ -54,11 +54,14 @@ alymova::rectangle_t alymova::Regular::getFrameRect() const
 }
 alymova::rectangle_t alymova::Regular::setFrameRect()
 {
+  double radius_big = getVector(pos_, top_);
+  double other_side = getVector(top_, other_);
+
   double low_left_x = std::numeric_limits< double >::max();
   double low_left_y = std::numeric_limits< double >::max();
   double upp_right_x = std::numeric_limits< double >::min();
   double upp_right_y = std::numeric_limits< double >::min();
-  double angle_start = std::acos(other_side_ / radius_big_);
+  double angle_start = std::acos(other_side / radius_big);
   if (top_.y == pos_.y)
   {
     angle_start = 0;
@@ -66,10 +69,10 @@ alymova::rectangle_t alymova::Regular::setFrameRect()
   for (size_t i = 0; i < sides_cnt_; i++)
   {
     double angle_now = angle_start + i * 2 * PI / sides_cnt_;
-    low_left_x = std::min(low_left_x, pos_.x + radius_big_ * std::cos(angle_now));
-    low_left_y = std::min(low_left_y, pos_.y + radius_big_ * std::sin(angle_now));
-    upp_right_x = std::max(upp_right_x, pos_.x + radius_big_ * std::cos(angle_now));
-    upp_right_y = std::max(upp_right_y, pos_.y + radius_big_ * std::sin(angle_now));
+    low_left_x = std::min(low_left_x, pos_.x + radius_big * std::cos(angle_now));
+    low_left_y = std::min(low_left_y, pos_.y + radius_big * std::sin(angle_now));
+    upp_right_x = std::max(upp_right_x, pos_.x + radius_big * std::cos(angle_now));
+    upp_right_y = std::max(upp_right_y, pos_.y + radius_big * std::sin(angle_now));
   }
   double width = upp_right_x - low_left_x;
   double height = upp_right_y - low_left_y;
@@ -104,9 +107,6 @@ void alymova::Regular::scale(double ratio)
   top_.y = pos_.y + (top_.y - pos_.y) * ratio;
   other_.x = pos_.x + (other_.x - pos_.x) * ratio;
   other_.y = pos_.y + (other_.y - pos_.y) * ratio;
-  radius_big_ *= ratio;
-  radius_small_ *= ratio;
-  other_side_ *= ratio;
   alymova::scaleFrameRect(frame_rect_, ratio);
 }
 alymova::Shape* alymova::Regular::clone() const
