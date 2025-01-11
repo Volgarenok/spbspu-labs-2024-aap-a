@@ -59,6 +59,7 @@ const char * has_number(const char * str)
   }
   return next;
 }
+const char * has_expression(const char * str);
 const char * has_multiplier(const char * str)
 {
   if (!str)
