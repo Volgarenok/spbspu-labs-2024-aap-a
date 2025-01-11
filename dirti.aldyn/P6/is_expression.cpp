@@ -113,7 +113,7 @@ const char * has_term(const char * str)
     }
     return nullptr;
   }
-  auto next = has_multiplier(str);
+  next = has_multiplier(str);
   next = has_symbol(next, '*');
   if (next)
   {
@@ -132,7 +132,7 @@ const char * has_expression(const char * str)
     return str;
   }
   auto next = has_term(str);
-  next = has_sumbol(next, '+');
+  next = has_symbol(next, '+');
   if (next)
   {
     if (auto continues = has_expression(next))
