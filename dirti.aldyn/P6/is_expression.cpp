@@ -75,10 +75,12 @@ const char * has_multiplier(const char * str)
   {
     return next;
   }
-  if (next = has_symbol(str, '('))
+  next = has_symbol(str, '(');
+  if (next)
   {
     next = has_expression(next);
-    if (next = has_symbol(next, ')'))
+    next = has_symbol(next, ')');
+    if (next)
     {
       return next;
     }
@@ -92,15 +94,18 @@ const char * has_term(const char * str)
   {
     return str;
   }
-  if (auto next = has_symbol(str, '('))
+  auto next = has_symbol(str, '(');
+  if (next)
   {
     next = has_multiplier(next);
-    if (next = has_symbol(next, '+'))
+    next = has_symbol(next, '+');
+    if (next)
     {
       next = has_term(next);
       if (next)
       {
-        if (next = has_symbol(next, ')'))
+        next = has_symbol(next, ')');
+        if (next)
         {
           return next;
         }
@@ -109,7 +114,8 @@ const char * has_term(const char * str)
     return nullptr;
   }
   auto next = has_multiplier(str);
-  if (next = has_symbol(next, '*'))
+  next = has_symbol(next, '*');
+  if (next)
   {
     if (auto continues = has_term(next))
     {
@@ -126,7 +132,8 @@ const char * has_expression(const char * str)
     return str;
   }
   auto next = has_term(str);
-  if (next = has_symbol(next, '+'))
+  next = has_sumbol(next, '+');
+  if (next)
   {
     if (auto continues = has_expression(next))
     {
@@ -134,7 +141,8 @@ const char * has_expression(const char * str)
     }
     return nullptr;
   }
-  if (next = has_symbol(next, '-'))
+  next = has_symbol(next, '-');
+  if (next)
   {
     if (auto continues = has_expression(next))
     {
