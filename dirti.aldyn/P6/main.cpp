@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ios>
+#include <cstddef>
 #include <str_input.hpp>
 #include "is_expression.hpp"
 
