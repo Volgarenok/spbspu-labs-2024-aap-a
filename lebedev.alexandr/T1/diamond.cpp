@@ -125,6 +125,7 @@ void lebedev::Diamond::divideIntoConcaves(point_t centre, point_t vert, point_t 
 
     concaves_[concaveCount_++] = cncv1;
     concaves_[concaveCount_++] = cncv2;
+    coveredArea += concaves_[concaveCount_ - 2]->getArea() + concaves_[concaveCount_ - 1]->getArea();
 
     if (isVerticalNext)
     {
