@@ -36,11 +36,11 @@ nikonov::Rectangle::Rectangle(const point_t &lbp, const point_t &rtp):
     throw std::logic_error("ERROR:noncorrect rectangle parameters");
   }
 }
-double nikonov::Rectangle::getArea() const noexcept
+double nikonov::Rectangle::getArea() const
 {
   return right_tgl_.getArea() + left_tgl_.getArea() + top_tgl_.getArea() + bot_tgl_.getArea();
 }
-nikonov::rectangle_t nikonov::Rectangle::getFrameRect() const noexcept
+nikonov::rectangle_t nikonov::Rectangle::getFrameRect() const
 {
   double minY = left_tgl_.getFrameRect().pos.y - left_tgl_.getFrameRect().height / 2;
   double minX = left_tgl_.getFrameRect().pos.x - left_tgl_.getFrameRect().width / 2;
@@ -49,14 +49,14 @@ nikonov::rectangle_t nikonov::Rectangle::getFrameRect() const noexcept
   point_t pos = point_t({ minX + (rectWidth / 2), minY + (rectHeight / 2) });
   return rectangle_t({ rectWidth, rectHeight, pos });
 }
-void nikonov::Rectangle::move(const point_t &newPos) noexcept
+void nikonov::Rectangle::move(const point_t &newPos)
 {
   rectangle_t crntRect = getFrameRect();
   double diffX = newPos.x - crntRect.pos.x;
   double diffY = newPos.y - crntRect.pos.y;
   move(diffX, diffY);
 }
-void nikonov::Rectangle::move(double x, double y) noexcept
+void nikonov::Rectangle::move(double x, double y)
 {
   right_tgl_.move(x, y);
   left_tgl_.move(x, y);
