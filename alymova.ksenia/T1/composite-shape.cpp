@@ -107,7 +107,7 @@ double alymova::CompositeShape::getArea() noexcept
   double area_sum = 0.0;
   for (size_t i = 0; i < size_; i++)
   {
-    area_sum += shapes[i]->getArea();
+    area_sum += shapes_[i]->getArea();
   }
   return area_sum;
 }
