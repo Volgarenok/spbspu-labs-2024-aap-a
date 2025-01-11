@@ -34,6 +34,39 @@ double alymova::Regular::getArea() const
   double other_side = getVector(top_, other_);
   return 0.5 * radius_small * other_side * sides_cnt_ * 2.0;
 }
+alymova::rectangle_t alymova::Regular::getFrameRect() const
+{
+  return frame_rect_;
+}
+void alymova::Regular::move(double shift_x, double shift_y)
+{
+  point_t shift_point{shift_x, shift_y};
+  pos_ += shift_point;
+  top_ += shift_point;
+  other_ += shift_point;
+  alymova::moveFrameRect(frame_rect_, shift_x, shift_y);
+}
+void alymova::Regular::move(point_t point)
+{
+  double shift_x = point.x - pos_.x;
+  double shift_y = point.y - pos_.y;
+  move(shift_x, shift_y);
+}
+alymova::Shape* alymova::Regular::clone() const
+{
+  Regular* reg = nullptr;
+  try
+  {
+    reg = new Regular(pos_, top_, other_);
+    Shape* shape = reg;
+    return shape;
+  }
+  catch (const std::bad_alloc& e)
+  {
+    delete reg;
+    throw;
+  }
+}
 size_t alymova::Regular::getCntSides() const
 {
   double radius_big = getVector(pos_, top_);
@@ -45,10 +78,6 @@ size_t alymova::Regular::getCntSides() const
     return round_sides;
   }
   return 0;
-}
-alymova::rectangle_t alymova::Regular::getFrameRect() const
-{
-  return frame_rect_;
 }
 alymova::rectangle_t alymova::Regular::setFrameRect()
 {
@@ -76,48 +105,11 @@ alymova::rectangle_t alymova::Regular::setFrameRect()
   point_t pos = {(low_left_x + width / 2.0), (upp_right_y - height / 2.0)};
   return rectangle_t{width, height, pos};
 }
-void alymova::Regular::move(double shift_x, double shift_y)
+void alymova::Regular::unsafeScale(double ratio)
 {
-  point_t shift_point{shift_x, shift_y};
-  pos_ += shift_point;
-  top_ += shift_point;
-  other_ += shift_point;
-  alymova::moveFrameRect(frame_rect_, shift_x, shift_y);
-}
-void alymova::Regular::move(point_t point)
-{
-  double shift_x = point.x - pos_.x;
-  double shift_y = point.y - pos_.y;
-  move(shift_x, shift_y);
-}
-void alymova::Regular::scale(double ratio)
-{
-  if (ratio <= 0)
-  {
-    throw std::invalid_argument("The scale ratio should be positive");
-  }
-  if (ratio == 1)
-  {
-    return;
-  }
   top_.x = pos_.x + (top_.x - pos_.x) * ratio;
   top_.y = pos_.y + (top_.y - pos_.y) * ratio;
   other_.x = pos_.x + (other_.x - pos_.x) * ratio;
   other_.y = pos_.y + (other_.y - pos_.y) * ratio;
   alymova::scaleFrameRect(frame_rect_, ratio);
-}
-alymova::Shape* alymova::Regular::clone() const
-{
-  Regular* reg = nullptr;
-  try
-  {
-    reg = new Regular(pos_, top_, other_);
-    Shape* shape = reg;
-    return shape;
-  }
-  catch (const std::bad_alloc& e)
-  {
-    delete reg;
-    throw;
-  }
 }

@@ -12,11 +12,11 @@ namespace alymova
     rectangle_t getFrameRect() const override;
     void move(double shift_x, double shift_y) override;
     void move(point_t point) override;
-    void scale(double ratio) override;
     Shape* clone() const override;
-  private:
+  protected:
     point_t low_left_, upp_right_;
     rectangle_t frame_rect_;
+    void unsafeScale(double ratio) override;
   };
 }
 #endif

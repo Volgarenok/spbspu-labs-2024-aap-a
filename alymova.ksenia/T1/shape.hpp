@@ -11,8 +11,14 @@ namespace alymova
     virtual rectangle_t getFrameRect() const = 0;
     virtual void move(point_t point) = 0;
     virtual void move(double shift_x, double shift_y) = 0;
-    virtual void scale(double ratio) = 0;
+    void scale(double ratio);
     virtual Shape* clone() const = 0;
+  protected:
+    virtual void unsafeScale(double ratio) = 0;
+    friend void unsafeScale(Shape** sahpes, point_t s, double ratio);
   };
+  void scale(Shape** shapes, point_t s, double ratio);
+  void unsafeScale(Shape** shapes, point_t s, double ratio);
+  void checkRatioScale(double ratio);
 }
 #endif

@@ -37,10 +37,6 @@ void alymova::Circle::move(point_t point)
 {
   regular_.move(point);
 }
-void alymova::Circle::scale(double ratio)
-{
-  regular_.scale(ratio);
-}
 alymova::Shape* alymova::Circle::clone() const
 {
   Circle* circle = nullptr;
@@ -55,4 +51,8 @@ alymova::Shape* alymova::Circle::clone() const
     delete circle;
     throw;
   }
+}
+void alymova::Circle::unsafeScale(double ratio)
+{
+  regular_.scale(ratio);
 }

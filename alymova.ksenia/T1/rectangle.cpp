@@ -38,22 +38,6 @@ void alymova::Rectangle::move(point_t point)
   double shift_y = point.y - pos.y;
   move(shift_x, shift_y);
 }
-void alymova::Rectangle::scale(double ratio)
-{
-  if (ratio <= 0)
-  {
-    throw std::invalid_argument("The scale ratio should be positive");
-  }
-  if (ratio == 1)
-  {
-    return;
-  }
-  double width = frame_rect_.width;
-  double height = frame_rect_.height;
-  low_left_ += (point_t{0.5 * (width - ratio * width), 0.5 * (height - ratio * height)});
-  upp_right_ += (point_t{0.5 * (ratio * width - width), 0.5 * (ratio * height - height)});
-  alymova::scaleFrameRect(frame_rect_, ratio);
-}
 alymova::Shape* alymova::Rectangle::clone() const
 {
   Rectangle* rect = nullptr;
@@ -68,4 +52,12 @@ alymova::Shape* alymova::Rectangle::clone() const
     delete rect;
     throw;
   }
+}
+void alymova::Rectangle::unsafeScale(double ratio)
+{
+  double width = frame_rect_.width;
+  double height = frame_rect_.height;
+  low_left_ += (point_t{0.5 * (width - ratio * width), 0.5 * (height - ratio * height)});
+  upp_right_ += (point_t{0.5 * (ratio * width - width), 0.5 * (ratio * height - height)});
+  alymova::scaleFrameRect(frame_rect_, ratio);
 }
