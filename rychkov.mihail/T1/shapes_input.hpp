@@ -10,6 +10,7 @@ namespace rychkov
   Shape* getRectangle(std::istream& in);
   Shape* getRegular(std::istream& in);
   Shape* getPolygon(std::istream& in);
+  size_t getPoints(std::istream& in, point_t* arr, size_t length, bool* lastWasRead = nullptr);
 }
 
 #endif

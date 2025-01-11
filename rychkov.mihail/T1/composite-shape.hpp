@@ -9,7 +9,7 @@ namespace rychkov
   class CompositeShape final
   {
   public:
-    CompositeShape();
+    CompositeShape() noexcept;
     CompositeShape(const CompositeShape&);
     CompositeShape(CompositeShape&& src) noexcept;
     ~CompositeShape();
@@ -35,6 +35,7 @@ namespace rychkov
   private:
     Shape** shapes_;
     size_t size_, capacity_;
+    void unsafeScale(double coef) noexcept;
     static Shape** reallocate(Shape** shapes, size_t oldSize, size_t newSize);
   };
   void scale(CompositeShape& shape, double coef, point_t scaleCenter);

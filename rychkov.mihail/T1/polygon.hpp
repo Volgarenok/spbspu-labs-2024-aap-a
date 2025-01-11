@@ -11,12 +11,12 @@ namespace rychkov
   public:
     Polygon() = delete;
     Polygon(const Polygon& src);
-    Polygon(Polygon&& src);
+    Polygon(Polygon&& src) noexcept;
     Polygon(point_t* points, size_t size);
     virtual ~Polygon();
 
     Polygon& operator=(const Polygon& src);
-    Polygon& operator=(Polygon&& src);
+    Polygon& operator=(Polygon&& src) noexcept;
 
     virtual double getArea() const noexcept override;
     virtual rectangle_t getFrameRect() const noexcept override;

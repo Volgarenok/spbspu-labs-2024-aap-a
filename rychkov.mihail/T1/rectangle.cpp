@@ -21,19 +21,19 @@ rychkov::Rectangle::Rectangle(point_t bottomLeft, point_t topRight):
   }
   double width = topRight.x - bottomLeft.x;
   double height = topRight.y - bottomLeft.y;
-  double sideLength = tryRotation(width, height, 0);
-  double verticalSideLength = tryRotation(height, width, sideLength);
-  if ((sideLength == 0) && (verticalSideLength == 0))
+  double sideForVerticalHexagon = tryLocalRotation(height, width, 0);
+  double sideForHorizontalHexagon = tryLocalRotation(width, height, sideForVerticalHexagon);
+  if ((sideForHorizontalHexagon == 0) && (sideForVerticalHexagon == 0))
   {
     throw std::runtime_error("rectangle precision wasn't reached");
   }
-  if (sideLength > verticalSideLength)
+  if (sideForHorizontalHexagon > sideForVerticalHexagon)
   {
-    bottomLeft_ = generateBasisHexagon(bottomLeft, sideLength, true);
+    bottomLeft_ = generateBasisHexagon(bottomLeft, sideForHorizontalHexagon, true);
   }
   else
   {
-    bottomLeft_ = generateBasisHexagon(bottomLeft, verticalSideLength, false);
+    bottomLeft_ = generateBasisHexagon(bottomLeft, sideForVerticalHexagon, false);
   }
 }
 
@@ -44,9 +44,9 @@ double rychkov::Rectangle::getArea() const noexcept
 }
 rychkov::rectangle_t rychkov::Rectangle::getFrameRect() const noexcept
 {
-  rectangle_t singleFrame = bottomLeft_.getFrameRect();
-  rectangle_t result = singleFrame;
-  if (singleFrame.height > singleFrame.width)
+  rectangle_t singleHexagonFrame = bottomLeft_.getFrameRect();
+  rectangle_t result = singleHexagonFrame;
+  if (singleHexagonFrame.height > singleHexagonFrame.width)
   {
     result.height *= (1.0 + 3.0 * localHeight_) / 4.0;
     result.width *= localWidth_ / 2.0;
@@ -56,15 +56,15 @@ rychkov::rectangle_t rychkov::Rectangle::getFrameRect() const noexcept
     result.height *= localWidth_ / 2.0;
     result.width *= (1.0 + 3.0 * localHeight_) / 4.0;
   }
-  point_t center = singleFrame.pos;
-  rychkov::move(center, -singleFrame.width / 2, -singleFrame.height / 2);
+  point_t center = singleHexagonFrame.pos;
+  rychkov::move(center, -singleHexagonFrame.width / 2, -singleHexagonFrame.height / 2);
   rychkov::move(center, result.width / 2, result.height / 2);
   return {result.height, result.width, center};
 }
 void rychkov::Rectangle::move(point_t destination) noexcept
 {
-  rectangle_t frame = getFrameRect();
-  move(destination.x - frame.pos.x, destination.y - frame.pos.y);
+  point_t center = getFrameRect().pos;
+  move(destination.x - center.x, destination.y - center.y);
 }
 void rychkov::Rectangle::move(double deltaX, double deltaY) noexcept
 {
@@ -72,8 +72,8 @@ void rychkov::Rectangle::move(double deltaX, double deltaY) noexcept
 }
 void rychkov::Rectangle::unsafeScale(double coef) noexcept
 {
-  rectangle_t frame = getFrameRect();
-  rychkov::unsafeScale(&bottomLeft_, coef, frame.pos);
+  point_t center = getFrameRect().pos;
+  rychkov::unsafeScale(&bottomLeft_, coef, center);
 }
 rychkov::Shape* rychkov::Rectangle::clone() const
 {
@@ -85,9 +85,9 @@ rychkov::Shape* rychkov::Rectangle::clone() const
   return new (result) Rectangle(*this);
 }
 
-double rychkov::Rectangle::tryRotation(double height, double width, double bestSideLength)
+double rychkov::Rectangle::tryLocalRotation(double height, double width, double bestSideLength)
 {
-  constexpr long maxLoopDepth = 1'000'000;
+  constexpr long maxLoopDepth = 1e6;
   for (long localHeight = 1; localHeight < maxLoopDepth; localHeight++)
   {
     double localWidthMid = (1 + 3 * localHeight) * width / height / std::sqrt(3);
@@ -117,9 +117,8 @@ double rychkov::Rectangle::getSideLength(long localHeight, long localWidth,
 {
   double sideMaximum1 = 2 * height / (1 + 3 * localHeight);
   double sideMaximum2 = 2 * width / std::sqrt(3) / localWidth;
-
-  double sideMinimum = std::max(sideMaximum1, sideMaximum2) * (1 - maxError);
   double sideMaximum = std::min(sideMaximum1, sideMaximum2);
+  double sideMinimum = std::max(sideMaximum1, sideMaximum2) * (1 - maxError);
   if (sideMaximum >= sideMinimum)
   {
     double square = sideMaximum * sideMaximum * std::sqrt(27) / 2 * (localHeight

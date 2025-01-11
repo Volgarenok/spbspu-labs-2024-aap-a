@@ -21,6 +21,7 @@ namespace rychkov
   };
   void scale(Shape* shape, double coef, point_t scaleCenter);
   void unsafeScale(Shape* shape, double coef, point_t scaleCenter) noexcept;
+  void validateScaleCoefficient(double coef);
 }
 
 #endif

@@ -5,7 +5,7 @@
 #include <utility>
 #include <memf.hpp>
 
-rychkov::CompositeShape::CompositeShape():
+rychkov::CompositeShape::CompositeShape() noexcept:
   shapes_(nullptr),
   size_(0),
   capacity_(0)
@@ -93,29 +93,26 @@ rychkov::rectangle_t rychkov::CompositeShape::getFrameRect() const noexcept
   point_t bottomLeft{0, 0}, topRight{0, 0};
   for (size_t i = 0; i < size_; i++)
   {
-    rectangle_t tempFrame = shapes_[0]->getFrameRect();
-    if ((tempFrame.height == 0) || (tempFrame.width == 0))
+    point_t tempBottomLeft{0, 0}, tempTopRight{0, 0};
+    convert(shapes_[i]->getFrameRect(), tempBottomLeft, tempTopRight);
+    if ((tempBottomLeft.x == tempTopRight.x) || (tempBottomLeft.y == tempTopRight.y))
     {
       continue;
     }
-    point_t tempBottomLeft = {tempFrame.pos.x - tempFrame.width / 2,
-          tempFrame.pos.y - tempFrame.height / 2};
-    point_t tempTopRight = {tempFrame.pos.x + tempFrame.width / 2,
-          tempFrame.pos.y + tempFrame.height / 2};
 
     if ((bottomLeft.x == topRight.x) || (bottomLeft.y == topRight.y))
     {
       bottomLeft = tempBottomLeft;
       topRight = tempTopRight;
     }
-    updateFrame(bottomLeft, topRight, tempBottomLeft);
+    updateFrame(bottomLeft, topRight, tempBottomLeft, tempTopRight);
   }
   return makeFrame(bottomLeft, topRight);
 }
 void rychkov::CompositeShape::move(point_t destination) noexcept
 {
-  rectangle_t tempFrame = getFrameRect();
-  move(destination.x - tempFrame.pos.x, destination.y - tempFrame.pos.y);
+  point_t center = getFrameRect().pos;
+  move(destination.x - center.x, destination.y - center.y);
 }
 void rychkov::CompositeShape::move(double deltaX, double deltaY) noexcept
 {
@@ -124,16 +121,18 @@ void rychkov::CompositeShape::move(double deltaX, double deltaY) noexcept
     shapes_[i]->move(deltaX, deltaY);
   }
 }
+
 void rychkov::CompositeShape::scale(double coef)
 {
-  if (coef <= 0)
-  {
-    throw std::invalid_argument("scale can't be executed with non-positive coefficient");
-  }
-  rectangle_t compositionFrame = getFrameRect();
+  validateScaleCoefficient(coef);
+  unsafeScale(coef);
+}
+void rychkov::CompositeShape::unsafeScale(double coef) noexcept
+{
+  point_t center = getFrameRect().pos;
   for (size_t i = 0; i < size_; i++)
   {
-    rychkov::scale(shapes_[i], coef, compositionFrame.pos);
+    rychkov::unsafeScale(shapes_[i], coef, center);
   }
 }
 rychkov::CompositeShape* rychkov::CompositeShape::clone() const
@@ -192,10 +191,8 @@ rychkov::Shape** rychkov::CompositeShape::reallocate(Shape** shapes, size_t oldS
 
 void rychkov::scale(CompositeShape& composition, double coef, point_t scaleCenter)
 {
-  for (size_t i = 0; i < composition.size(); i++)
-  {
-    scale(composition[i], coef, scaleCenter);
-  }
+  validateScaleCoefficient(coef);
+  unsafeScale(composition, coef, scaleCenter);
 }
 void rychkov::unsafeScale(CompositeShape& composition, double coef, point_t scaleCenter)
 {

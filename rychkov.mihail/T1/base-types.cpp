@@ -30,8 +30,18 @@ rychkov::rectangle_t rychkov::makeFrame(point_t bottomLeft, point_t topRight) no
 }
 void rychkov::updateFrame(point_t& bottomLeft, point_t& topRight, point_t newPoint) noexcept
 {
-  bottomLeft.x = std::min(bottomLeft.x, newPoint.x);
-  bottomLeft.y = std::min(bottomLeft.y, newPoint.y);
-  topRight.x = std::max(topRight.x, newPoint.x);
-  topRight.y = std::max(topRight.y, newPoint.y);
+  updateFrame(bottomLeft, topRight, newPoint, newPoint);
+}
+void rychkov::updateFrame(point_t& bottomLeft, point_t& topRight,
+    point_t bottomLeft2, point_t topRight2) noexcept
+{
+  bottomLeft.x = std::min(bottomLeft.x, bottomLeft2.x);
+  bottomLeft.y = std::min(bottomLeft.y, bottomLeft2.y);
+  topRight.x = std::max(topRight.x, topRight2.x);
+  topRight.y = std::max(topRight.y, topRight2.y);
+}
+void rychkov::convert(const rectangle_t& frame, point_t& bottomLeft, point_t& topRight) noexcept
+{
+  bottomLeft = {frame.pos.x - frame.width / 2, frame.pos.y - frame.height / 2};
+  topRight = {frame.pos.x + frame.width / 2, frame.pos.y + frame.height / 2};
 }

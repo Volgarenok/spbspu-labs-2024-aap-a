@@ -17,7 +17,7 @@ rychkov::Polygon::Polygon(const Polygon& src):
     vertexes_[i] = src.vertexes_[i];
   }
 }
-rychkov::Polygon::Polygon(Polygon&& src):
+rychkov::Polygon::Polygon(Polygon&& src) noexcept:
   vertexes_(std::exchange(src.vertexes_, nullptr)),
   size_(src.size_)
 {}
@@ -51,7 +51,7 @@ rychkov::Polygon& rychkov::Polygon::operator=(const Polygon& src)
   std::swap(*this, temp);
   return *this;
 }
-rychkov::Polygon& rychkov::Polygon::operator=(Polygon&& src)
+rychkov::Polygon& rychkov::Polygon::operator=(Polygon&& src) noexcept
 {
   Polygon temp(std::move(*this));
   vertexes_ = std::exchange(src.vertexes_, nullptr);
@@ -62,12 +62,10 @@ rychkov::Polygon& rychkov::Polygon::operator=(Polygon&& src)
 double rychkov::Polygon::getArea() const noexcept
 {
   point_t basePoint = vertexes_[0];
-  point_t p1 = vertexes_[1];
   double result = 0;
   for (size_t i = 2; i < size_; i++)
   {
-    result += getSquare(basePoint, p1, vertexes_[i]);
-    p1 = vertexes_[i];
+    result += getSquare(basePoint, vertexes_[i - 1], vertexes_[i]);
   }
   return result;
 }

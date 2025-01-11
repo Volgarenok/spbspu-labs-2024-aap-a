@@ -17,6 +17,9 @@ namespace rychkov
   void move(point_t& p1, double deltaX, double deltaY) noexcept;
   rectangle_t makeFrame(point_t bottomLeft, point_t topRight) noexcept;
   void updateFrame(point_t& bottomLeft, point_t& topRight, point_t newPoint) noexcept;
+  void updateFrame(point_t& bottomLeft, point_t& topRight,
+      point_t bottomLeft2, point_t topRight2) noexcept;
+  void convert(const rectangle_t& frame, point_t& bottomLeft, point_t& topRight) noexcept;
 }
 
 #endif

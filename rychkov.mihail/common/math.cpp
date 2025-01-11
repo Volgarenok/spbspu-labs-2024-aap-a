@@ -3,7 +3,7 @@
 #include <cmath>
 #include <limits>
 
-bool rychkov::isAlmostEqual(double a, double b, int coef)
+bool rychkov::isAlmostEqual(double a, double b, double coef)
 {
   double aBottom = a - getEpsilon(a, false) * coef;
   double aTop = a + getEpsilon(a, true) * coef;
