@@ -2,14 +2,13 @@
 #include <stdexcept>
 #include "base-types.hpp"
 #include "shape.hpp"
-#include "shapesProcess.hpp"
 #include "inputProcess.hpp"
 #include "composite-shape.hpp"
 int main()
 {
   constexpr int max_size = 1000;
   alymova::Shape* shapes[max_size] = {};
-  int shapes_now = 0;
+  size_t shapes_now = 0;
   double scale_x = 0.0, scale_y = 0.0, scale_ratio = 1.0;
   bool wrong_shape_flag = false;
   try
@@ -38,10 +37,10 @@ int main()
     std::cerr << "The scale ratio should be positive\n";
     return 1;
   }
-  print(std::cout, shapes);
+  print(std::cout, shapes, shapes_now);
   std::cout << "\n";
-  alymova::unsafeScale(shapes, alymova::point_t{scale_x, scale_y}, scale_ratio);
-  print(std::cout, shapes);
+  alymova::scale(shapes, shapes_now, alymova::point_t{scale_x, scale_y}, scale_ratio);
+  print(std::cout, shapes, shapes_now);
   std::cout << "\n";
   if (wrong_shape_flag)
   {

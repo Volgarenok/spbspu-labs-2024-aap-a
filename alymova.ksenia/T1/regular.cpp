@@ -2,7 +2,6 @@
 #include <cmath>
 #include <stdexcept>
 #include <limits>
-#include "shapesProcess.hpp"
 constexpr double PI = std::acos(-1.0);
 constexpr double inaccuracy = 0.0000000001;
 alymova::Regular::Regular(point_t pos, point_t top, point_t other):
@@ -28,17 +27,17 @@ alymova::Regular::Regular(point_t pos, point_t top, point_t other):
   }
   frame_rect_ = setFrameRect();
 }
-double alymova::Regular::getArea() const
+double alymova::Regular::getArea() const noexcept
 {
   double radius_small = getVector(pos_, other_);
   double other_side = getVector(top_, other_);
   return 0.5 * radius_small * other_side * sides_cnt_ * 2.0;
 }
-alymova::rectangle_t alymova::Regular::getFrameRect() const
+alymova::rectangle_t alymova::Regular::getFrameRect() const noexcept
 {
   return frame_rect_;
 }
-void alymova::Regular::move(double shift_x, double shift_y)
+void alymova::Regular::move(double shift_x, double shift_y) noexcept
 {
   point_t shift_point{shift_x, shift_y};
   pos_ += shift_point;
@@ -46,11 +45,19 @@ void alymova::Regular::move(double shift_x, double shift_y)
   other_ += shift_point;
   alymova::moveFrameRect(frame_rect_, shift_x, shift_y);
 }
-void alymova::Regular::move(point_t point)
+void alymova::Regular::move(point_t point) noexcept
 {
   double shift_x = point.x - pos_.x;
   double shift_y = point.y - pos_.y;
   move(shift_x, shift_y);
+}
+void alymova::Regular::unsafeScale(double ratio) noexcept
+{
+  top_.x = pos_.x + (top_.x - pos_.x) * ratio;
+  top_.y = pos_.y + (top_.y - pos_.y) * ratio;
+  other_.x = pos_.x + (other_.x - pos_.x) * ratio;
+  other_.y = pos_.y + (other_.y - pos_.y) * ratio;
+  alymova::scaleFrameRect(frame_rect_, ratio);
 }
 alymova::Shape* alymova::Regular::clone() const
 {
@@ -67,7 +74,7 @@ alymova::Shape* alymova::Regular::clone() const
     throw;
   }
 }
-size_t alymova::Regular::getCntSides() const
+size_t alymova::Regular::getCntSides() const noexcept
 {
   double radius_big = getVector(pos_, top_);
   double radius_small = getVector(pos_, other_);
@@ -79,7 +86,7 @@ size_t alymova::Regular::getCntSides() const
   }
   return 0;
 }
-alymova::rectangle_t alymova::Regular::setFrameRect()
+alymova::rectangle_t alymova::Regular::setFrameRect() noexcept
 {
   double radius_big = getVector(pos_, top_);
   double other_side = getVector(top_, other_);
@@ -104,12 +111,4 @@ alymova::rectangle_t alymova::Regular::setFrameRect()
   double height = upp_right_y - low_left_y;
   point_t pos = {(low_left_x + width / 2.0), (upp_right_y - height / 2.0)};
   return rectangle_t{width, height, pos};
-}
-void alymova::Regular::unsafeScale(double ratio)
-{
-  top_.x = pos_.x + (top_.x - pos_.x) * ratio;
-  top_.y = pos_.y + (top_.y - pos_.y) * ratio;
-  other_.x = pos_.x + (other_.x - pos_.x) * ratio;
-  other_.y = pos_.y + (other_.y - pos_.y) * ratio;
-  alymova::scaleFrameRect(frame_rect_, ratio);
 }

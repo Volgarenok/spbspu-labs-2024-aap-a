@@ -21,21 +21,25 @@ alymova::Circle::Circle(point_t pos, double radius):
   point_t other = {pos_.x + shift_x, pos_.y + shift_y};
   regular_ = Regular{pos, top, other};
 }
-double alymova::Circle::getArea() const
+double alymova::Circle::getArea() const noexcept
 {
   return regular_.getArea();
 }
-alymova::rectangle_t alymova::Circle::getFrameRect() const
+alymova::rectangle_t alymova::Circle::getFrameRect() const noexcept
 {
   return regular_.getFrameRect();
 }
-void alymova::Circle::move(double shift_x, double shift_y)
+void alymova::Circle::move(double shift_x, double shift_y) noexcept
 {
   regular_.move(shift_x, shift_y);
 }
-void alymova::Circle::move(point_t point)
+void alymova::Circle::move(point_t point) noexcept
 {
   regular_.move(point);
+}
+void alymova::Circle::unsafeScale(double ratio) noexcept
+{
+  regular_.unsafeScale(ratio);
 }
 alymova::Shape* alymova::Circle::clone() const
 {
@@ -51,8 +55,4 @@ alymova::Shape* alymova::Circle::clone() const
     delete circle;
     throw;
   }
-}
-void alymova::Circle::unsafeScale(double ratio)
-{
-  regular_.scale(ratio);
 }

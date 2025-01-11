@@ -21,11 +21,11 @@ bool alymova::operator<(point_t point1, point_t point2)
   return false;
 }
 
-double alymova::getAreaFrameRect(rectangle_t rect)
+double alymova::getAreaFrameRect(rectangle_t rect) noexcept
 {
   return rect.width * rect.height;
 }
-void alymova::moveFrameRect(rectangle_t& rect, double shift_x, double shift_y)
+void alymova::moveFrameRect(rectangle_t& rect, double shift_x, double shift_y) noexcept
 {
   point_t shift_point_ = {shift_x, shift_y};
   rect.pos += shift_point_;
@@ -43,17 +43,17 @@ void alymova::scaleFrameRect(rectangle_t& rect, double ratio)
   rect.width *= ratio;
   rect.height *= ratio;
 }
-alymova::point_t alymova::getShiftFrameRect(rectangle_t rect1, rectangle_t rect2)
+alymova::point_t alymova::getShiftFrameRect(rectangle_t rect1, rectangle_t rect2) noexcept
 {
   point_t shift_point = {rect2.pos.x - rect1.pos.x, rect2.pos.y - rect1.pos.y};
   return shift_point;
 }
-alymova::point_t alymova::getLowLeftFrameRect(rectangle_t rect)
+alymova::point_t alymova::getLowLeftFrameRect(rectangle_t rect) noexcept
 {
   point_t low_left{rect.pos.x - rect.width / 2.0, rect.pos.y - rect.height / 2.0};
   return low_left;
 }
-alymova::point_t alymova::getUppRightFrameRect(rectangle_t rect)
+alymova::point_t alymova::getUppRightFrameRect(rectangle_t rect) noexcept
 {
   point_t upp_right{rect.pos.x + rect.width / 2.0, rect.pos.y + rect.height / 2.0};
   return upp_right;

@@ -9,16 +9,16 @@ namespace alymova
   {
   public:
     Circle(point_t pos, double radius);
-    double getArea() const override;
-    rectangle_t getFrameRect() const override;
-    void move(double shift_x, double shift_y) override;
-    void move(point_t point) override;
+    double getArea() const noexcept override;
+    rectangle_t getFrameRect() const noexcept override;
+    void move(double shift_x, double shift_y) noexcept override;
+    void move(point_t point) noexcept override;
+    void unsafeScale(double ratio) noexcept override;
     Shape* clone() const override;
   protected:
     point_t pos_;
     double radius_;
     Regular regular_;
-    void unsafeScale(double ratio) override;
   };
 }
 #endif
