@@ -8,7 +8,6 @@ namespace duhanina
   class Circle final: public Shape
   {
   public:
-    static constexpr size_t NUM_PARTS = 9;
     Circle(const point_t& center, double radius);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
@@ -17,6 +16,7 @@ namespace duhanina
     void scale(double k) override;
 
   private:
+    static constexpr size_t NUM_PARTS = 9;
     Ellipse ellipses_[NUM_PARTS];
   };
 }
