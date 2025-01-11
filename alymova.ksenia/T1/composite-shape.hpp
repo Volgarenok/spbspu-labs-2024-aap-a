@@ -14,7 +14,7 @@ namespace alymova
     ~CompositeShape();
     CompositeShape& operator=(const CompositeShape& comp_shape);
     CompositeShape& operator=(const CompositeShape&& comp_shape);
-    double* getArea() noexcept;
+    double getArea() noexcept;
     rectangle_t* getFrameRect() noexcept;
     void move(point_t point) noexcept;
     void move(double shift_x, double shift_y) noexcept;
