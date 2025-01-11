@@ -9,6 +9,7 @@ namespace lebedev
   {
   public:
     Diamond(point_t centre, point_t vert, point_t horiz);
+    ~Diamond();
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;
@@ -16,9 +17,12 @@ namespace lebedev
     void scale(double k) override;
 
   private:
-    point_t centre_;
-    point_t vert_;
-    point_t horiz_;
+    Concave** concaves_;
+    size_t concaveCount_;
+    size_t capacity_;
+    void expandArray();
+    void divideIntoConcaves(point_t centre, point_t vert, point_t horiz);
+    double getCurrentDiamondArea(point_t centre, point_t vert, point_t horiz) const;
   };
 }
 #endif
