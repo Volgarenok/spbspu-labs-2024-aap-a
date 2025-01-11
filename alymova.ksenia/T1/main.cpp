@@ -10,7 +10,6 @@ int main()
   alymova::Shape* shapes[max_size] = {};
   size_t shapes_now = 0;
   double scale_params[3] = {};
-  //double scale_x = 0.0, scale_y = 0.0, scale_ratio = 1.0;
   bool wrong_shape_flag = false;
   try
   {
@@ -27,12 +26,6 @@ int main()
     std::cerr << "Nothing to scale\n";
     return 1;
   }
-  /*if (scale_ratio <= 0)
-  {
-    clear(shapes);
-    std::cerr << "The scale ratio should be positive\n";
-    return 1;
-  }*/
   print(std::cout, shapes, shapes_now);
   std::cout << "\n";
   try

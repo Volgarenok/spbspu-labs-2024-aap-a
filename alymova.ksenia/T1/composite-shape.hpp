@@ -30,7 +30,7 @@ namespace alymova
   private:
     size_t size_, capacity_;
     Shape** shapes_;
-    double* areas_;
+    //double* areas_;
     rectangle_t* frame_rect_points_;
 
   };

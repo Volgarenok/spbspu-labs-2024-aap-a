@@ -42,7 +42,6 @@ void alymova::makeShape(std::istream& in, Shape** shapes, size_t& shapes_now, bo
         }
         catch (const std::logic_error& e)
         {}
-        //in >> scale_x >> scale_y >> scale_ratio;
       }
     }
     catch (...)

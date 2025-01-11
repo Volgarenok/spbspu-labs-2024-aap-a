@@ -4,7 +4,7 @@ alymova::CompositeShape::CompositeShape():
   size_(0),
   capacity_(10),
   shapes_(nullptr),
-  areas_(nullptr),
+  //areas_(nullptr),
   frame_rect_points_(nullptr)
 {
   try
@@ -72,7 +72,7 @@ alymova::CompositeShape::CompositeShape(const CompositeShape&& comp_shape):
 alymova::CompositeShape::~CompositeShape()
 {
   clear(shapes_);
-  delete[] areas_;
+  //delete[] areas_;
   delete[] frame_rect_points_;
 }
 alymova::CompositeShape& alymova::CompositeShape::operator=(const CompositeShape& comp_shape)
@@ -102,22 +102,14 @@ alymova::CompositeShape& alymova::CompositeShape::operator=(const CompositeShape
   capacity_ = comp_shape.capacity_;
   return *this;
 }
-double* alymova::CompositeShape::getArea() noexcept
+double alymova::CompositeShape::getArea() noexcept
 {
-  try
+  double area_sum = 0.0;
+  for (size_t i = 0; i < size_; i++)
   {
-    areas_ = new double[size_];
-    for (size_t i = 0; i < size_; i++)
-    {
-      areas_[i] = shapes_[i]->getArea();
-    }
+    area_sum += shapes[i]->getArea();
   }
-  catch (const std::bad_alloc& e)
-  {
-    delete[] areas_;
-    return nullptr;
-  }
-  return areas_;
+  return area_sum;
 }
 alymova::rectangle_t* alymova::CompositeShape::getFrameRect() noexcept
 {
