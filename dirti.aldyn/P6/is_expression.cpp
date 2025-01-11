@@ -115,10 +115,10 @@ const char * has_term(const char * str)
     return nullptr;
   }
   next = has_multiplier(str);
-  next = has_symbol(next, '*');
-  if (next)
+  auto next2 = has_symbol(next, '*');
+  if (next2)
   {
-    if (auto continues = has_term(next))
+    if (auto continues = has_term(next2))
     {
       return continues;
     }
@@ -133,19 +133,19 @@ const char * has_expression(const char * str)
     return str;
   }
   auto next = has_term(str);
-  next = has_symbol(next, '+');
-  if (next)
+  auto next2 = has_symbol(next, '+');
+  if (next2)
   {
-    if (auto continues = has_expression(next))
+    if (auto continues = has_expression(next2))
     {
       return continues;
     }
     return nullptr;
   }
-  next = has_symbol(next, '-');
-  if (next)
+  next2 = has_symbol(next, '-');
+  if (next2)
   {
-    if (auto continues = has_expression(next))
+    if (auto continues = has_expression(next2))
     {
       return continues;
     }
