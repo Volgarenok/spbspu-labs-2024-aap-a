@@ -21,7 +21,16 @@ void alymova::makeShape(std::istream& in, Shape** shapes, size_t& shapes_now, bo
     {
       if (type == "RECTANGLE")
       {
-        double x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+        try
+        {
+          shapes[shapes_now] = makeRectangle(in);
+          shapes_now++;
+        }
+        catch (...)
+        {
+          wrong_shape_flag = true;
+        }
+        /*double x1 = 0, y1 = 0, x2 = 0, y2 = 0;
         in >> x1 >> y1 >> x2 >> y2;
         try
         {
@@ -32,7 +41,7 @@ void alymova::makeShape(std::istream& in, Shape** shapes, size_t& shapes_now, bo
         {
           delete shapes[shapes_now];
           wrong_shape_flag = true;
-        }
+        }*/
       }
       if (type == "CIRCLE")
       {
@@ -78,6 +87,36 @@ void alymova::makeShape(std::istream& in, Shape** shapes, size_t& shapes_now, bo
       shapes_now = 0;
       clear(shapes);
       throw;
+    }
+  }
+}
+alymova::Shape* alymova::makeRectangle(std::istream& in)
+{
+  double params[4] = {};
+  Rectangle* rect = nullptr;
+  try
+  {
+    readParameters(in, params, 4);
+    rect = new Rectangle(point_t{params[0], params[1]}, point_t{params[2], params[3]});
+    return rect;
+  }
+  catch (const std::logic_error& e)
+  {
+    throw;
+  }
+  catch (const std::bad_alloc& e)
+  {
+    delete rect;
+    throw;
+  }
+}
+void alymova::readParameters(std::istream& in, double* params, size_t size)
+{
+  for (size_t i = 0; i < size; i++)
+  {
+    if (!(in >> params[i]))
+    {
+      throw std::logic_error("Input shape error");
     }
   }
 }
