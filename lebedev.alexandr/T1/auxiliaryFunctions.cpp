@@ -44,3 +44,8 @@ void lebedev::deleteShapePtr(lebedev::Shape** shps, size_t count)
     delete shps[i];
   }
 }
+
+lebedev::point_t lebedev::getMiddlePoint(point_t p1, point_t p2)
+{
+  return { (p1.x + p2.x) / 2, (p1.y + p2.y) / 2 };
+}
