@@ -13,4 +13,5 @@ int main()
     return 1;
   }
   std::cout << std::boolalpha << dirti::is_expression(str);
+  free(str);
 }
