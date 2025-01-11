@@ -5,8 +5,7 @@
 #include "base-types.hpp"
 #include "rectangle.hpp"
 #include "circle.hpp"
-void alymova::makeShape(std::istream& in, Shape** shapes, size_t& shapes_now, bool& wrong_shape_flag,
-  double& scale_x, double& scale_y, double& scale_ratio)
+void alymova::makeShape(std::istream& in, Shape** shapes, size_t& shapes_now, bool& wrong_shape_flag, double* scale_params)
 {
   bool scale_flag = false;
   while (!scale_flag)
@@ -23,74 +22,33 @@ void alymova::makeShape(std::istream& in, Shape** shapes, size_t& shapes_now, bo
       {
         shapes[shapes_now] = makeRectangle(in);
         shapes_now++;
-        /*double x1 = 0, y1 = 0, x2 = 0, y2 = 0;
-        in >> x1 >> y1 >> x2 >> y2;
-        try
-        {
-          shapes[shapes_now] = new Rectangle(point_t{x1, y1}, point_t{x2, y2});
-          shapes_now++;
-        }
-        catch (const std::logic_error& e)
-        {
-          delete shapes[shapes_now];
-          wrong_shape_flag = true;
-        }*/
       }
       else if (type == "CIRCLE")
       {
         shapes[shapes_now] = makeCircle(in);
         shapes_now++;
-        /*double x = 0, y = 0, radius = 0;
-        in >> x >> y >> radius;
-        try
-        {
-          shapes[shapes_now] = new Circle(point_t{x, y}, radius);
-          shapes_now++;
-        }
-        catch (const std::logic_error& e)
-        {
-          delete shapes[shapes_now];
-          wrong_shape_flag = true;
-        }
-      }*/
       }
       else if (type == "REGULAR")
       {
         shapes[shapes_now] = makeRegular(in);
         shapes_now++;
-        /*double x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
-        in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-        point_t pos{x1, y1};
-        point_t top{x2, y2};
-        point_t other{x3, y3};
-        try
-        {
-          shapes[shapes_now] = new Regular(pos, top, other);
-          shapes_now++;
-        }
-        catch (const std::logic_error& e)
-        {
-          delete shapes[shapes_now];
-          wrong_shape_flag = true;
-        }
-      }*/
       }
       else if (type == "SCALE")
       {
-        scale_flag = true;
-        in >> scale_x >> scale_y >> scale_ratio;
+        try
+        {
+          readParameters(in, scale_params, 3);
+          scale_flag = true;
+        }
+        catch (const std::logic_error& e)
+        {}
+        //in >> scale_x >> scale_y >> scale_ratio;
       }
     }
     catch (...)
     {
       wrong_shape_flag = true;
     }
-    /*catch (const std::bad_alloc& e)
-    {
-      shapes_now = 0;
-      clear(shapes);
-      throw;
-    }*/
   }
 }
 alymova::Shape* alymova::makeRectangle(std::istream& in)
