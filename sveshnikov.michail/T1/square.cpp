@@ -38,10 +38,7 @@ void sveshnikov::Square::move(double dx, double dy)
 
 void sveshnikov::Square::scale(double k)
 {
-  if (k < 0)
-  {
-    throw std::logic_error("ERROR: zoom coefficient must be positive!");
-  }
+  unsafe_scale(k);
   double ctr_x = getFrameRect().pos.x, ctr_y = getFrameRect().pos.y;
   low_left_.x = ctr_x - k * (ctr_x - low_left_.x);
   low_left_.y = ctr_y - k * (ctr_y - low_left_.y);

@@ -13,6 +13,9 @@ namespace sveshnikov
     virtual void move(point_t p) = 0;
     virtual void move(double dx, double dy) = 0;
     virtual void scale(double k) = 0;
+
+  protected:
+    void unsafe_scale(double k);
   };
 }
 

@@ -36,6 +36,7 @@ void sveshnikov::Ring::move(double dx, double dy)
 
 void sveshnikov::Ring::scale(double k)
 {
+  unsafe_scale(k);
   small_ellipse_.scale(k);
   big_ellipse_.scale(k);
 }

@@ -36,10 +36,7 @@ void sveshnikov::Ellipse::move(double dx, double dy)
 
 void sveshnikov::Ellipse::scale(double k)
 {
-  if (k < 0)
-  {
-    throw std::logic_error("ERROR: zoom coefficient must be positive!");
-  }
+  unsafe_scale(k);
   vert_radius_ *= k;
   horiz_radius_ *= k;
 }
