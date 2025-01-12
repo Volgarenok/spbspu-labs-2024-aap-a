@@ -10,6 +10,7 @@ duhanina::Circle::Circle(const point_t& pos, double radius):
 {
   if (radius <= 0)
   {
+    delete[] ellipses_;
     throw std::invalid_argument("Error in parameters");
   }
   double r1 = std::sqrt(radius * radius / count_);
