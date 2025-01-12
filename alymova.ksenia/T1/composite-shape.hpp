@@ -1,10 +1,12 @@
 #ifndef COMPOSITE_SHAPE_HPP
 #define COMPOSITE_SHAPE_HPP
 #include <cstddef>
-#include "shape.hpp"
+//#include "shape.hpp"
 #include "base-types.hpp"
 namespace alymova
 {
+  struct Shape;
+
   struct CompositeShape final
   {
   public:
@@ -14,15 +16,18 @@ namespace alymova
     ~CompositeShape();
     CompositeShape& operator=(const CompositeShape& comp_shape);
     CompositeShape& operator=(const CompositeShape&& comp_shape);
+    Shape* operator[](size_t id) noexcept;
+
     double getArea() noexcept;
     rectangle_t* getFrameRect() noexcept;
     void move(point_t point) noexcept;
     void move(double shift_x, double shift_y) noexcept;
     void scale(double ratio);
+    void unsafeScale(double ratio);
+
     void push_back(Shape* shp);
     void pop_back() noexcept;
     Shape* at(size_t id);
-    Shape* operator[](size_t id) noexcept;
     bool empty() noexcept;
     size_t size() noexcept;
     void copyArray(Shape** other_shapes, Shape** shapes_new, bool& copy_success);
@@ -30,7 +35,6 @@ namespace alymova
   private:
     size_t size_, capacity_;
     Shape** shapes_;
-    //double* areas_;
     rectangle_t* frame_rect_points_;
 
   };

@@ -5,7 +5,8 @@
 #include "base-types.hpp"
 #include "rectangle.hpp"
 #include "circle.hpp"
-void alymova::makeShape(std::istream& in, Shape** shapes, size_t& shapes_now, bool& wrong_shape_flag, double* scale_params)
+
+void alymova::makeShape(std::istream& in, CompositeShape& shapes, bool& wrong_shape_flag, double* scale_params)
 {
   bool scale_flag = false;
   while (!scale_flag)
@@ -20,33 +21,25 @@ void alymova::makeShape(std::istream& in, Shape** shapes, size_t& shapes_now, bo
     {
       if (type == "RECTANGLE")
       {
-        shapes[shapes_now] = makeRectangle(in);
-        shapes_now++;
+        shapes.push_back(makeRectangle(in));
       }
       else if (type == "CIRCLE")
       {
-        shapes[shapes_now] = makeCircle(in);
-        shapes_now++;
+        shapes.push_back(makeCircle(in));
       }
       else if (type == "REGULAR")
       {
-        shapes[shapes_now] = makeRegular(in);
-        shapes_now++;
-      }
-      else if (type == "SCALE")
-      {
-        try
-        {
-          readParameters(in, scale_params, 3);
-          scale_flag = true;
-        }
-        catch (const std::logic_error& e)
-        {}
+        shapes.push_back(makeRegular(in));
       }
     }
     catch (...)
     {
       wrong_shape_flag = true;
+    }
+    if (type == "SCALE")
+    {
+      readParameters(in, scale_params, 3);
+      scale_flag = true;
     }
   }
 }
@@ -119,26 +112,33 @@ void alymova::readParameters(std::istream& in, double* params, size_t size)
   {
     if (!(in >> params[i]))
     {
-      throw std::logic_error("Input shape error");
+      throw std::logic_error("Input shape parameters error");
     }
   }
 }
-void alymova::print(std::ostream& out, const Shape* const* shapes, size_t size)
+void alymova::print(std::ostream& out, CompositeShape shapes)
 {
-  double area = 0;
-  for(size_t i = 0; i < size; i++)
+  size_t size = shapes.size();
+  double area = shapes.getArea();
+  /*for(size_t i = 0; i < size; i++)
   {
     area += shapes[i]->getArea();
+  }*/
+  rectangle_t rects[1000] = {};
+  //{shapes.getFrameRect()};
+  if (rects == nullptr)
+  {
+    throw std::logic_error("Getting error");
   }
   out << std::setprecision(1) << std::fixed;
   out << area;
   for (size_t i = 0; i < size; i++)
   {
-    rectangle_t rect = shapes[i]->getFrameRect();
-    out << " " << getLowLeftFrameRect(rect).x;
-    out << " " << getLowLeftFrameRect(rect).y;
-    out << " " << getUppRightFrameRect(rect).x;
-    out << " " << getUppRightFrameRect(rect).y;
+    rects[i] = shapes.getFrameRect()[i];
+    out << " " << getLowLeftFrameRect(rects[i]).x;
+    out << " " << getLowLeftFrameRect(rects[i]).y;
+    out << " " << getUppRightFrameRect(rects[i]).x;
+    out << " " << getUppRightFrameRect(rects[i]).y;
   }
 }
 void alymova::clear(Shape** shapes)

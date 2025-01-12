@@ -2,8 +2,8 @@
 #include <cmath>
 #include <stdexcept>
 #include <limits>
-constexpr double PI = std::acos(-1.0);
-constexpr double inaccuracy = 0.0000000001;
+double PI = std::acos(-1.0);
+double inaccuracy = 0.0000000001;
 alymova::Regular::Regular(point_t pos, point_t top, point_t other):
   pos_(pos),
   top_(top),
