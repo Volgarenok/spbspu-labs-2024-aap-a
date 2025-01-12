@@ -120,7 +120,7 @@ double alymova::CompositeShape::getArea() noexcept
   }
   return area_sum;
 }
-alymova::rectangle_t* alymova::CompositeShape::getFrameRect(size_t id) noexcept
+alymova::rectangle_t alymova::CompositeShape::getFrameRect(size_t id) noexcept
 {
   return shapes_[id]->getFrameRect();
   /*try

@@ -137,8 +137,8 @@ void alymova::print(std::ostream& out, CompositeShape shapes)
     rectangle_t rect = shapes.getFrameRect(i);
     out << " " << getLowLeftFrameRect(rect).x;
     out << " " << getLowLeftFrameRect(rect).y;
-    out << " " << getUppRightFrameRect(rects).x;
-    out << " " << getUppRightFrameRect(rects).y;
+    out << " " << getUppRightFrameRect(rect).x;
+    out << " " << getUppRightFrameRect(rect).y;
   }
 }
 void alymova::clear(Shape** shapes)
