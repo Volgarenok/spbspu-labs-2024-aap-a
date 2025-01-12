@@ -4,7 +4,8 @@
 #include "destroy.hpp"
 #include "ellipse.hpp"
 
-duhanina::Circle::Circle(const point_t& pos, double radius)
+duhanina::Circle::Circle(const point_t& pos, double radius):
+  ellipses_(nullptr)
 {
   if (radius <= 0)
   {
