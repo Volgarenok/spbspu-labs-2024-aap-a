@@ -1,14 +1,15 @@
 #ifndef CIRCLE_HPP
 #define CIRCLE_HPP
-#include "ellipse.hpp"
 #include <cstddef>
+#include "shape.hpp"
 
 namespace duhanina
 {
   class Circle final: public Shape
   {
   public:
-    Circle(const point_t& center, double radius);
+    Circle(const point_t& pos, double radius);
+    ~Circle();
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(const point_t& newPos) override;
@@ -17,7 +18,7 @@ namespace duhanina
 
   private:
     static constexpr size_t NUM_PARTS = 9;
-    Ellipse ellipses_[NUM_PARTS];
+    Shape** ellipses_;
   };
 }
 

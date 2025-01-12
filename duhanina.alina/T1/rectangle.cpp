@@ -28,7 +28,7 @@ duhanina::rectangle_t duhanina::Rectangle::getFrameRect() const
 
 void duhanina::Rectangle::move(const point_t& newPos)
 {
-  point_t pos = this->getFrameRect().pos;
+  point_t pos = getFrameRect().pos;
   point_t offset = calculateOffset(pos, newPos);
   move(offset.x, offset.y);
 }
@@ -41,7 +41,7 @@ void duhanina::Rectangle::move(double dx, double dy)
 
 void duhanina::Rectangle::scale(double k)
 {
-  point_t pos = this->getFrameRect().pos;
+  point_t pos = getFrameRect().pos;
   lt_ = scalePoint(lt_, pos, k);
   rt_ = scalePoint(rt_, pos, k);
 }

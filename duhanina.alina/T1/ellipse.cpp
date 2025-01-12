@@ -2,13 +2,6 @@
 #include <stdexcept>
 #include "movingPoint.hpp"
 
-duhanina::Ellipse::Ellipse():
-  center_{ 0.0, 0.0 },
-  horizRadius_(1.0),
-  vertRadius_(1.0)
-{
-}
-
 duhanina::Ellipse::Ellipse(const point_t& center, double horizRadius, double vertRadius):
   center_(center),
   horizRadius_(horizRadius),
