@@ -10,7 +10,7 @@ namespace nikonov
   void fillShapeCollection(std::istream &input, std::ostream &out, CompositeShape &collection);
   void destoy(CompositeShape &collection);
   void ispScale(Shape *shp, double x, double y, double k);
-  void scaleCollection(CompositeShape &collection, size_t cnt, double x, double y, double k);
+  void scaleCollection(CompositeShape &collection, double x, double y, double k);
   void outputCollection(std::ostream &out, CompositeShape &collection);
   void processCollection(std::istream &input, std::ostream &out, CompositeShape &collection);
   double getSegmentLength(const point_t &a, const point_t &b);

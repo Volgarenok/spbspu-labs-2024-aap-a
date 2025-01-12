@@ -43,13 +43,13 @@ void nikonov::ispScale(Shape *shp, double x, double y, double k)
   shp->scale(k);
   shp->move(diffX * k * (-1), diffY * k * (-1));
 }
-void nikonov::scaleCollection(CompositeShape &collection, size_t cnt, double x, double y, double k)
+void nikonov::scaleCollection(CompositeShape &collection, double x, double y, double k)
 {
   if (k <= 0)
   {
     throw std::logic_error("ERROR: noncorrect scale parameters");
   }
-  for (size_t i = 0; i < cnt; ++i)
+  for (size_t i = 0; i < collection.size(); ++i)
   {
     ispScale(collection[i], x, y, k);
   }
@@ -84,8 +84,7 @@ void nikonov::processCollection(std::istream &input, std::ostream &out, Composit
     throw std::logic_error("ERROR: noncorrect scale parameters");
   }
   outputCollection(out, collection);
-  collection.scaleWithCheck(k);
-  
+  scaleCollection(collection, x, y, k);
   outputCollection(out, collection);
 }
 double nikonov::getSegmentLength(const point_t &a, const point_t &b)
