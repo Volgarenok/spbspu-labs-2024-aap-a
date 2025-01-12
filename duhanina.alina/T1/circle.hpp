@@ -17,7 +17,7 @@ namespace duhanina
     void scale(double k) override;
 
   private:
-    static constexpr size_t NUM_PARTS = 9;
+    size_t count_;
     Shape** ellipses_;
   };
 }
