@@ -21,6 +21,7 @@ duhanina::Circle::Circle(const point_t& pos, double radius)
 duhanina::Circle::~Circle()
 {
   destroy(ellipses_, NUM_PARTS);
+  delete[] ellipses_;
 }
 
 double duhanina::Circle::getArea() const
