@@ -29,7 +29,7 @@ void nikonov::destoy(CompositeShape &collection)
 {
   for (size_t i = 0; i < collection.size(); ++i)
   {
-    delete collection[i];
+    collection.pop_back();
   }
 }
 void nikonov::ispScale(Shape *shp, double x, double y, double k)
