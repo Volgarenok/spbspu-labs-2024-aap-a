@@ -116,6 +116,14 @@ void alymova::readParameters(std::istream& in, double* params, size_t size)
     }
   }
 }
+void alymova::print(std::ostream& out, Shape* shape)
+{
+  rectangle_t rect = shape->getFrameRect();
+  out << " " << getLowLeftFrameRect(rect).x;
+  out << " " << getLowLeftFrameRect(rect).y;
+  out << " " << getUppRightFrameRect(rect).x;
+  out << " " << getUppRightFrameRect(rect).y;
+}
 void alymova::print(std::ostream& out, CompositeShape shapes)
 {
   size_t size = shapes.size();
@@ -134,11 +142,7 @@ void alymova::print(std::ostream& out, CompositeShape shapes)
   out << area;
   for (size_t i = 0; i < size; i++)
   {
-    rectangle_t rect = shapes.getFrameRect(i);
-    out << " " << getLowLeftFrameRect(rect).x;
-    out << " " << getLowLeftFrameRect(rect).y;
-    out << " " << getUppRightFrameRect(rect).x;
-    out << " " << getUppRightFrameRect(rect).y;
+    print(out, shapes[i]);
   }
 }
 void alymova::clear(Shape** shapes)

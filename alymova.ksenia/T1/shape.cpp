@@ -12,20 +12,16 @@ void alymova::scale(CompositeShape& shapes, point_t s, double ratio)
   checkRatioScale(ratio);
   unsafeScale(shapes, s, ratio);
 }
-void alymova::unsafeScaleOne(Shape* shape, point_t s, double ratio)
-{
-  rectangle_t old_rectangle = shape->getFrameRect();
-  shape->move(s);
-  point_t shift_point = {getShiftFrameRect(old_rectangle, shape->getFrameRect())};
-  shape->unsafeScale(ratio);
-  shift_point *= ratio;
-  shape->move(-shift_point.x, -shift_point.y); 
-}
 void alymova::unsafeScale(CompositeShape& shapes, point_t s, double ratio)
 {
   for (size_t i = 0; i < shapes.size(); i++)
   {
-    unsafeScaleOne(shapes[i], s, ratio);
+    rectangle_t old_rectangle = shapes[i]->getFrameRect();
+    shapes[i]->move(s);
+    point_t shift_point = {getShiftFrameRect(old_rectangle, shapes[i]->getFrameRect())};
+    shapes[i]->unsafeScale(ratio);
+    shift_point *= ratio;
+    shapes[i]->move(-shift_point.x, -shift_point.y);
   }
 }
 void alymova::checkRatioScale(double ratio)

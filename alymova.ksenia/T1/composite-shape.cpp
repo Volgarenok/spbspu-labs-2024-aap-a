@@ -1,5 +1,6 @@
 #include "composite-shape.hpp"
 #include "shape.hpp"
+#include <limits>
 #include <stdexcept>
 alymova::CompositeShape::CompositeShape():
   size_(0),
@@ -120,9 +121,23 @@ double alymova::CompositeShape::getArea() noexcept
   }
   return area_sum;
 }
-alymova::rectangle_t alymova::CompositeShape::getFrameRect(size_t id) noexcept
+alymova::rectangle_t alymova::CompositeShape::getFrameRect() noexcept
 {
-  return shapes_[id]->getFrameRect();
+  double low_left_x = std::numeric_limits< double >::max();
+  double low_left_y = std::numeric_limits< double >::max();
+  double upp_right_x = std::numeric_limits< double >::min();
+  double upp_right_y = std::numeric_limits< double >::min();
+  for (size_t i = 0; i < size_; i++)
+  {
+    rectangle_t rect = {shapes_[i]->getFrameRect()};
+    low_left_x = std::min(low_left_x, getLowLeftFrameRect(rect).x);
+    low_left_y = std::min(low_left_y, getLowLeftFrameRect(rect).y);
+    upp_right_x = std::max(upp_right_x, getUppRightFrameRect(rect).x);
+    upp_right_y = std::max(upp_right_x, getUppRightFrameRect(rect).y);
+  }
+  double width = upp_right_x - low_left_x;
+  double height = upp_right_y - low_left_y;
+  return rectangle_t{width, height, point_t{upp_right_x - width / 2.0, upp_right_y - height / 2.0}};
   /*try
   {
     frame_rect_points_ = new alymova::rectangle_t[size_];

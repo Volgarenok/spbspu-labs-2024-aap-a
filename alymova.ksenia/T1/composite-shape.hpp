@@ -19,7 +19,7 @@ namespace alymova
     Shape* operator[](size_t id) noexcept;
 
     double getArea() noexcept;
-    rectangle_t getFrameRect(size_t id) noexcept;
+    rectangle_t getFrameRect() noexcept;
     void move(point_t point) noexcept;
     void move(double shift_x, double shift_y) noexcept;
     void scale(double ratio);

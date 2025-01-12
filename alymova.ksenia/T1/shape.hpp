@@ -18,7 +18,6 @@ namespace alymova
     virtual Shape* clone() const = 0;
   };
   void scale(CompositeShape& shapes, point_t s, double ratio);
-  void unsafeScaleOne(Shape* shape, point_t s, double ratio);
   void unsafeScale(CompositeShape& shapes, point_t s, double ratio);
   void checkRatioScale(double ratio);
 
