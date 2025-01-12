@@ -124,20 +124,10 @@ void alymova::print(std::ostream& out, Shape* shape)
   out << " " << getUppRightFrameRect(rect).x;
   out << " " << getUppRightFrameRect(rect).y;
 }
-void alymova::print(std::ostream& out, CompositeShape shapes)
+void alymova::print(std::ostream& out, CompositeShape& shapes)
 {
   size_t size = shapes.size();
   double area = shapes.getArea();
-  /*for(size_t i = 0; i < size; i++)
-  {
-    area += shapes[i]->getArea();
-  }
-  rectangle_t rects[1000] = {};
-  {shapes.getFrameRect()};
-  if (rects == nullptr)
-  {
-    throw std::logic_error("Getting error");
-  }*/
   out << std::setprecision(1) << std::fixed;
   out << area;
   for (size_t i = 0; i < size; i++)

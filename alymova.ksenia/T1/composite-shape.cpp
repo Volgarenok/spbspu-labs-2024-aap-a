@@ -138,20 +138,6 @@ alymova::rectangle_t alymova::CompositeShape::getFrameRect() noexcept
   double width = upp_right_x - low_left_x;
   double height = upp_right_y - low_left_y;
   return rectangle_t{width, height, point_t{upp_right_x - width / 2.0, upp_right_y - height / 2.0}};
-  /*try
-  {
-    frame_rect_points_ = new alymova::rectangle_t[size_];
-    for (size_t i = 0; i < size_; i++)
-    {
-      frame_rect_points_[i] = shapes_[i]->getFrameRect();
-    }
-  }
-  catch (const std::bad_alloc& e)
-  {
-    delete[] frame_rect_points_;
-    return nullptr;
-  }
-  return frame_rect_points_;*/
 }
 void alymova::CompositeShape::move(point_t point) noexcept
 {

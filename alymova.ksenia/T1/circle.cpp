@@ -1,9 +1,9 @@
 #include "circle.hpp"
 #include <cmath>
 #include <stdexcept>
-constexpr double PI = std::acos(-1.0);
+constexpr double PII = std::acos(-1.0);
 constexpr size_t angles_cnt = 73;
-constexpr double angle_73 = 360.0 / angles_cnt / 2.0 * PI / 180.0;
+constexpr double angle_73 = 360.0 / angles_cnt / 2.0 * PII / 180.0;
 alymova::Circle::Circle(point_t pos, double radius):
   pos_(pos),
   radius_(1.0),
