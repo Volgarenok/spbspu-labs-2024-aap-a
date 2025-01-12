@@ -109,16 +109,7 @@ alymova::CompositeShape& alymova::CompositeShape::operator=(const CompositeShape
 }
 alymova::Shape* alymova::CompositeShape::operator[](size_t id) noexcept
 {
-  size_t i = 0;
-  for (Shape** ptr = shapes_; ptr != (shapes_ + size_ - 1); ptr++)
-  {
-    if (i == id)
-    {
-      return *ptr;
-    }
-    i++;
-  }
-  return nullptr;
+  return shapes_[id];
 }
 double alymova::CompositeShape::getArea() noexcept
 {
@@ -266,7 +257,7 @@ void alymova::CompositeShape::clear(Shape** shapes) noexcept
 {
   for (size_t i = 0; i < size_; i++)
   {
-    delete *(shapes[i]);
+    delete shapes[i];
   }
   delete[] shapes;
 }
