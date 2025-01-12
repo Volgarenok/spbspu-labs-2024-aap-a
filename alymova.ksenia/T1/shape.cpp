@@ -14,7 +14,7 @@ void alymova::scale(CompositeShape& shapes, point_t s, double ratio)
 }
 void alymova::unsafeScale(CompositeShape& shapes, point_t s, double ratio)
 {
-  rectangle_t old_rectangle = {shapes.getFrameRect()[0]};
+  rectangle_t old_rectangle = {shapes.getFrameRect(0)};
   shapes.move(s);
   point_t shift_point = {getShiftFrameRect(old_rectangle, shapes.getFrameRect()[0])};
   shapes.unsafeScale(ratio);

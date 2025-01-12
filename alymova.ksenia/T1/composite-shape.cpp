@@ -120,9 +120,10 @@ double alymova::CompositeShape::getArea() noexcept
   }
   return area_sum;
 }
-alymova::rectangle_t* alymova::CompositeShape::getFrameRect() noexcept
+alymova::rectangle_t* alymova::CompositeShape::getFrameRect(size_t id) noexcept
 {
-  try
+  return shapes_[id]->getFrameRect();
+  /*try
   {
     frame_rect_points_ = new alymova::rectangle_t[size_];
     for (size_t i = 0; i < size_; i++)
@@ -135,7 +136,7 @@ alymova::rectangle_t* alymova::CompositeShape::getFrameRect() noexcept
     delete[] frame_rect_points_;
     return nullptr;
   }
-  return frame_rect_points_;
+  return frame_rect_points_;*/
 }
 void alymova::CompositeShape::move(point_t point) noexcept
 {

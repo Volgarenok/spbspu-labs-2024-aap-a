@@ -123,22 +123,22 @@ void alymova::print(std::ostream& out, CompositeShape shapes)
   /*for(size_t i = 0; i < size; i++)
   {
     area += shapes[i]->getArea();
-  }*/
+  }
   rectangle_t rects[1000] = {};
-  //{shapes.getFrameRect()};
+  {shapes.getFrameRect()};
   if (rects == nullptr)
   {
     throw std::logic_error("Getting error");
-  }
+  }*/
   out << std::setprecision(1) << std::fixed;
   out << area;
   for (size_t i = 0; i < size; i++)
   {
-    rects[i] = shapes.getFrameRect()[i];
-    out << " " << getLowLeftFrameRect(rects[i]).x;
-    out << " " << getLowLeftFrameRect(rects[i]).y;
-    out << " " << getUppRightFrameRect(rects[i]).x;
-    out << " " << getUppRightFrameRect(rects[i]).y;
+    rectangle_t rect = shapes.getFrameRect(i);
+    out << " " << getLowLeftFrameRect(rect).x;
+    out << " " << getLowLeftFrameRect(rect).y;
+    out << " " << getUppRightFrameRect(rects).x;
+    out << " " << getUppRightFrameRect(rects).y;
   }
 }
 void alymova::clear(Shape** shapes)
