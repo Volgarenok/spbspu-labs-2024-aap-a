@@ -19,5 +19,4 @@ int main()
     destoy(shapeCollection);
     return 1;
   }
-  destoy(shapeCollection);
 }

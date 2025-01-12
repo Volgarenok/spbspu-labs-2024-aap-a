@@ -11,7 +11,7 @@ namespace nikonov
     CompositeShape(CompositeShape &copy);
     CompositeShape(CompositeShape &&copy);
     ~CompositeShape();
-    const Shape *operator[](size_t id) const;
+    Shape *operator[](size_t id);
     CompositeShape &operator=(const CompositeShape &another);
     CompositeShape &operator=(CompositeShape &&another);
     double getArea() const;
@@ -22,7 +22,7 @@ namespace nikonov
     void scaleWithCheck(double k);
     void push_back(Shape *newElem);
     void pop_back();
-    const Shape *at(size_t id) const;
+    Shape *at(size_t id);
     bool empty() const noexcept;
     size_t size() const noexcept;
   private:

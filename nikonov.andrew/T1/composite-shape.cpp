@@ -33,7 +33,7 @@ nikonov::CompositeShape::~CompositeShape()
 {
   nikonov::destoy(*this);
 }
-const nikonov::Shape *nikonov::CompositeShape::operator[](size_t id) const
+nikonov::Shape *nikonov::CompositeShape::operator[](size_t id)
 {
   return shp[id];
 }
@@ -149,7 +149,7 @@ void nikonov::CompositeShape::pop_back()
   shp[size_ - 1] = nullptr;
   --size_;
 }
-const nikonov::Shape *nikonov::CompositeShape::at(size_t id) const
+nikonov::Shape *nikonov::CompositeShape::at(size_t id)
 {
   if (id >= size_)
   {
