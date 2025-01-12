@@ -1,35 +1,18 @@
 #include "rectangle.hpp"
-#include <algorithm>
+#include <cmath>
 #include "additional-utilities.hpp"
 namespace
 {
-  struct RectangleData
-  {
-    double minX;
-    double maxX;
-    double minY;
-    double maxY;
-    double width;
-    double height;
-    RectangleData(const nikonov::point_t &lbp, const nikonov::point_t &rtp):
-      minX(std::min(lbp.x, rtp.x)),
-      maxX(std::max(lbp.x, rtp.x)),
-      minY(std::min(lbp.y, rtp.y)),
-      maxY(std::max(lbp.y, rtp.y)),
-      width(maxX - minX),
-      height(maxY - minY)
-    {}
-  };
   nikonov::Triangle findLeftTgl(const nikonov::point_t &lbp, const nikonov::point_t &rtp);
   nikonov::Triangle findRightTgl(const nikonov::point_t &lbp, const nikonov::point_t &rtp);
   nikonov::Triangle findTopTgl(const nikonov::point_t &lbp, const nikonov::point_t &rtp);
   nikonov::Triangle findBottomTgl(const nikonov::point_t &lbp, const nikonov::point_t &rtp);
 }
 nikonov::Rectangle::Rectangle(const point_t &lbp, const point_t &rtp):
-  left_tgl_(findLeftTgl(lbp, rtp)),
-  right_tgl_(findRightTgl(lbp, rtp)),
-  top_tgl_(findTopTgl(lbp, rtp)),
-  bot_tgl_(findBottomTgl(lbp, rtp))
+  left_(findLeftTgl(lbp, rtp)),
+  right_(findRightTgl(lbp, rtp)),
+  top_(findTopTgl(lbp, rtp)),
+  bot_(findBottomTgl(lbp, rtp))
 {
   if (lbp.x >= rtp.x || lbp.y >= rtp.y)
   {
@@ -38,14 +21,14 @@ nikonov::Rectangle::Rectangle(const point_t &lbp, const point_t &rtp):
 }
 double nikonov::Rectangle::getArea() const
 {
-  return right_tgl_.getArea() + left_tgl_.getArea() + top_tgl_.getArea() + bot_tgl_.getArea();
+  return right_.getArea() + left_.getArea() + top_.getArea() + bot_.getArea();
 }
 nikonov::rectangle_t nikonov::Rectangle::getFrameRect() const
 {
-  double minY = left_tgl_.getFrameRect().pos.y - left_tgl_.getFrameRect().height / 2;
-  double minX = left_tgl_.getFrameRect().pos.x - left_tgl_.getFrameRect().width / 2;
-  double rectWidth = bot_tgl_.getFrameRect().width;
-  double rectHeight = left_tgl_.getFrameRect().height;
+  double minY = left_.getFrameRect().pos.y - left_.getFrameRect().height / 2;
+  double minX = left_.getFrameRect().pos.x - left_.getFrameRect().width / 2;
+  double rectWidth = bot_.getFrameRect().width;
+  double rectHeight = left_.getFrameRect().height;
   point_t pos = point_t({ minX + (rectWidth / 2), minY + (rectHeight / 2) });
   return rectangle_t({ rectWidth, rectHeight, pos });
 }
@@ -58,51 +41,54 @@ void nikonov::Rectangle::move(const point_t &newPos)
 }
 void nikonov::Rectangle::move(double x, double y)
 {
-  right_tgl_.move(x, y);
-  left_tgl_.move(x, y);
-  top_tgl_.move(x, y);
-  bot_tgl_.move(x, y);
+  right_.move(x, y);
+  left_.move(x, y);
+  top_.move(x, y);
+  bot_.move(x, y);
 }
 void nikonov::Rectangle::scale(double k) noexcept
 {
   rectangle_t crntRect = getFrameRect();
-  ispScale(&right_tgl_, crntRect.pos.x, crntRect.pos.y, k);
-  ispScale(&left_tgl_, crntRect.pos.x, crntRect.pos.y, k);
-  ispScale(&top_tgl_, crntRect.pos.x, crntRect.pos.y, k);
-  ispScale(&bot_tgl_, crntRect.pos.x, crntRect.pos.y, k);
+  ispScale(&right_, crntRect.pos.x, crntRect.pos.y, k);
+  ispScale(&left_, crntRect.pos.x, crntRect.pos.y, k);
+  ispScale(&top_, crntRect.pos.x, crntRect.pos.y, k);
+  ispScale(&bot_, crntRect.pos.x, crntRect.pos.y, k);
+}
+nikonov::Shape *nikonov::Rectangle::clone() const
+{
+  rectangle_t crntRect = getFrameRect();
+  point_t lbp({ crntRect.pos.x - crntRect.width / 2, crntRect.pos.y - crntRect.height / 2 });
+  point_t rtp({ crntRect.pos.x + crntRect.width / 2, crntRect.pos.y + crntRect.height / 2 });
+  return new Rectangle(lbp, rtp);
 }
 namespace
 {
   nikonov::Triangle findLeftTgl(const nikonov::point_t &lbp, const nikonov::point_t &rtp)
   {
-    RectangleData data(lbp, rtp);
-    nikonov::point_t topP({ data.minX, data.maxY });
-    nikonov::point_t botP({ data.minX, data.minY });
-    nikonov::point_t midP({ data.minX + data.width / 2, data.minY + data.height / 2 });
+    nikonov::point_t topP({ lbp.x, rtp.y });
+    nikonov::point_t botP({ lbp.x, lbp.y });
+    nikonov::point_t midP({ lbp.x + (rtp.x - lbp.x) / 2, lbp.y + (rtp.y - lbp.y) / 2 });
     return nikonov::Triangle({ topP, botP, midP });
   }
   nikonov::Triangle findRightTgl(const nikonov::point_t &lbp, const nikonov::point_t &rtp)
   {
-    RectangleData data(lbp, rtp);
-    nikonov::point_t topP({ data.maxX, data.maxY });
-    nikonov::point_t botP({ data.maxX, data.minY });
-    nikonov::point_t midP({ data.minX + data.width / 2, data.minY + data.height / 2 });
+    nikonov::point_t topP({ rtp.x, rtp.y });
+    nikonov::point_t botP({ rtp.x, lbp.y });
+    nikonov::point_t midP({ lbp.x + (rtp.x - lbp.x) / 2, lbp.y + (rtp.y - lbp.y) / 2 });
     return nikonov::Triangle({ topP, botP, midP });
   }
   nikonov::Triangle findTopTgl(const nikonov::point_t &lbp, const nikonov::point_t &rtp)
   {
-    RectangleData data(lbp, rtp);
-    nikonov::point_t topP1({ data.minX, data.maxY });
-    nikonov::point_t topP2({ data.maxX, data.maxY });
-    nikonov::point_t midP({ data.minX + data.width / 2, data.minY + data.height / 2 });
+    nikonov::point_t topP1({ lbp.x, rtp.y });
+    nikonov::point_t topP2({ rtp.x, rtp.y });
+    nikonov::point_t midP({ lbp.x + (rtp.x - lbp.x) / 2, lbp.y + (rtp.y - lbp.y) / 2 });
     return nikonov::Triangle({ topP1, topP2, midP });
   }
   nikonov::Triangle findBottomTgl(const nikonov::point_t &lbp, const nikonov::point_t &rtp)
   {
-    RectangleData data(lbp, rtp);
-    nikonov::point_t botP1({ data.minX, data.minY });
-    nikonov::point_t botP2({ data.maxX, data.minY });
-    nikonov::point_t midP({ data.minX + data.width / 2, data.minY + data.height / 2 });
+    nikonov::point_t botP1({ lbp.x, lbp.y});
+    nikonov::point_t botP2({  rtp.x, lbp.y });
+    nikonov::point_t midP({ lbp.x + (rtp.x - lbp.x) / 2, lbp.y + (rtp.y - lbp.y) / 2 });
     return nikonov::Triangle({ botP1, botP2, midP });
   }
 }

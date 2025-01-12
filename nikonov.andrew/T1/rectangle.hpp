@@ -14,11 +14,12 @@ namespace nikonov
     void move(const point_t &a) override;
     void move(double x, double y) override;
     void scale(double k) noexcept override;
+    Shape *clone() const override;
   private:
-    Triangle left_tgl_;
-    Triangle right_tgl_;
-    Triangle top_tgl_;
-    Triangle bot_tgl_;
+    Triangle left_;
+    Triangle right_;
+    Triangle top_;
+    Triangle bot_;
   };
 }
 #endif

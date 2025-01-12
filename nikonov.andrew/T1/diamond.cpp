@@ -70,6 +70,14 @@ void nikonov::Diamond::scale(double k) noexcept
   ispScale(&rt_tgl_, crntRect.pos.x, crntRect.pos.y, k);
   ispScale(&rb_tgl_, crntRect.pos.x, crntRect.pos.y, k);
 }
+nikonov::Shape *nikonov::Diamond::clone() const
+{
+  rectangle_t crntRect = getFrameRect();
+  point_t topP({ crntRect.pos.x, crntRect.pos.y + crntRect.height / 2 });
+  point_t midP({ crntRect.pos.x, crntRect.pos.y });
+  point_t rightP({ crntRect.pos.x + crntRect.width / 2, crntRect.pos.y});
+  return new Diamond({ topP, midP, rightP });
+}
 namespace
 {
   point_t findTop(const point_t &p1, const point_t &p2, const point_t &p3)

@@ -59,3 +59,7 @@ void nikonov::Triangle::scale(double k) noexcept
   scalePoint(b_, center, k);
   scalePoint(c_, center, k);
 }
+nikonov::Shape *nikonov::Triangle::clone() const
+{
+  return new Triangle({ a_, b_, c_ });
+}

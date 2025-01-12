@@ -4,7 +4,7 @@
 #include <cmath>
 #include "shape.hpp"
 #include "fabric.hpp"
-void nikonov::fillShapeCollection(std::istream &input, std::ostream &out, Shape **collection, size_t &cnt)
+void nikonov::fillShapeCollection(std::istream &input, std::ostream &out, CompositeShape &collection)
 {
   std::string name = "";
   while (input >> name && name != "SCALE")
@@ -12,8 +12,7 @@ void nikonov::fillShapeCollection(std::istream &input, std::ostream &out, Shape 
     try
     {
       Shape *newElem = make_shape(input, name);
-      collection[cnt] = newElem;
-      ++cnt;
+      collection.push_back(newElem);
     }
     catch (const std::logic_error &e)
     {
@@ -26,9 +25,9 @@ void nikonov::fillShapeCollection(std::istream &input, std::ostream &out, Shape 
     }
   }
 }
-void nikonov::destoy(Shape **collection, size_t cnt)
+void nikonov::destoy(CompositeShape &collection)
 {
-  for (size_t i = 0; i < cnt; ++i)
+  for (size_t i = 0; i < collection.size(); ++i)
   {
     delete collection[i];
   }
@@ -44,32 +43,12 @@ void nikonov::ispScale(Shape *shp, double x, double y, double k)
   shp->scale(k);
   shp->move(diffX * k * (-1), diffY * k * (-1));
 }
-double nikonov::getCollectionArea(Shape **collection, size_t cnt)
-{
-  double summ = 0.0;
-  for (size_t i = 0; i < cnt; ++i)
-  {
-    summ += collection[i]->getArea();
-  }
-  return summ;
-}
-void nikonov::scaleCollection(Shape **collection, size_t cnt, double x, double y, double k)
-{
-  if (k <= 0)
-  {
-    throw std::logic_error("ERROR: noncorrect scale parameters");
-  }
-  for (size_t i = 0; i < cnt; ++i)
-  {
-    ispScale(collection[i], x, y, k);
-  }
-}
-void nikonov::outputCollection(std::ostream &out, Shape **collection, size_t cnt)
+void nikonov::outputCollection(std::ostream &out, CompositeShape &collection)
 {
   out << std::fixed << std::setprecision(1);
-  double summArea = getCollectionArea(collection, cnt);
+  double summArea = collection.getArea();
   out << summArea;
-  for (size_t i = 0; i < cnt; ++i)
+  for (size_t i = 0; i < collection.size(); ++i)
   {
     rectangle_t tempRect = collection[i]->getFrameRect();
     out << " " << tempRect.pos.x - tempRect.width / 2;
@@ -79,9 +58,9 @@ void nikonov::outputCollection(std::ostream &out, Shape **collection, size_t cnt
   }
   out << '\n';
 }
-void nikonov::processCollection(std::istream &input, std::ostream &out, Shape **collection, size_t cnt)
+void nikonov::processCollection(std::istream &input, std::ostream &out, CompositeShape &collection)
 {
-  if (cnt == 0)
+  if (collection.size() == 0)
   {
     throw std::logic_error("ERROR: nothing to scale");
   }
@@ -93,9 +72,9 @@ void nikonov::processCollection(std::istream &input, std::ostream &out, Shape **
   {
     throw std::logic_error("ERROR: noncorrect scale parameters");
   }
-  outputCollection(out, collection, cnt);
-  scaleCollection(collection, cnt, x, y, k);
-  outputCollection(out, collection, cnt);
+  outputCollection(out, collection);
+  collection.scaleWithCheck(k);
+  outputCollection(out, collection);
 }
 double nikonov::getSegmentLength(const point_t &a, const point_t &b)
 {

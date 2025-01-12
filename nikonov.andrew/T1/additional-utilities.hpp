@@ -3,16 +3,15 @@
 #include <cstdlib>
 #include <istream>
 #include <ostream>
+#include "composite-shape.hpp"
 #include "shape.hpp"
 namespace nikonov
 {
-  void fillShapeCollection(std::istream &input, std::ostream &out, Shape **collection, size_t &cnt);
-  void destoy(Shape **collection, size_t cnt);
+  void fillShapeCollection(std::istream &input, std::ostream &out, CompositeShape &collection);
+  void destoy(CompositeShape &collection);
   void ispScale(Shape *shp, double x, double y, double k);
-  void scaleCollection(Shape **collection, size_t cnt, double x, double y, double k);
-  double getCollectionArea(Shape **collection, size_t cnt);
-  void outputCollection(std::ostream &out, Shape **collection, size_t cnt);
-  void processCollection(std::istream &input, std::ostream &out, Shape **collection, size_t cnt);
+  void outputCollection(std::ostream &out, CompositeShape &collection);
+  void processCollection(std::istream &input, std::ostream &out, CompositeShape &collection);
   double getSegmentLength(const point_t &a, const point_t &b);
   void scalePoint(point_t &pt, point_t &center, double k);
 }

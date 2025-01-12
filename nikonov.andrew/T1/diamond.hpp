@@ -14,6 +14,7 @@ namespace nikonov
     void move(const point_t &a) override;
     void move(double x, double y) override;
     void scale(double k) noexcept override;
+    Shape *clone() const override;
   private:
     Triangle lt_tgl_;
     Triangle lb_tgl_;

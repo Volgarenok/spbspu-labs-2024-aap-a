@@ -12,6 +12,7 @@ namespace nikonov
     void move(const point_t &a) override;
     void move(double x, double y) override;
     void scale(double k) noexcept override;
+    Shape *clone() const override;
   private:
     point_t a_;
     point_t b_;

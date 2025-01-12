@@ -12,6 +12,7 @@ namespace nikonov
     virtual void move(double x, double y) = 0;
     virtual void scale(double k) noexcept = 0;
     void scaleWithCheck(double k);
+    virtual Shape *clone() const = 0;
   };
 }
 #endif

@@ -3,21 +3,21 @@
 #include "shape.hpp"
 #include "fabric.hpp"
 #include "additional-utilities.hpp"
+#include "composite-shape.hpp"
 int main()
 {
   using namespace nikonov;
-  Shape *shapeCollection[10000] = {};
-  size_t cnt = 0;
+  CompositeShape shapeCollection;
   try
   {
-    fillShapeCollection(std::cin, std::cerr, shapeCollection, cnt);
-    processCollection(std::cin, std::cout, shapeCollection, cnt);
+    fillShapeCollection(std::cin, std::cerr, shapeCollection);
+    processCollection(std::cin, std::cout, shapeCollection);
   }
   catch (const std::exception &e)
   {
     std::cerr << e.what() << '\n';
-    destoy(shapeCollection, cnt);
+    destoy(shapeCollection);
     return 1;
   }
-  destoy(shapeCollection, cnt);
+  destoy(shapeCollection);
 }

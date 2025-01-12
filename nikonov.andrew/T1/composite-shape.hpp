@@ -8,9 +8,12 @@ namespace nikonov
   {
   public:
     CompositeShape();
+    CompositeShape(CompositeShape &copy);
     CompositeShape(CompositeShape &&copy);
     ~CompositeShape();
-    Shape *operator[](size_t id) const;
+    const Shape *operator[](size_t id) const;
+    CompositeShape &operator=(const CompositeShape &another);
+    CompositeShape &operator=(CompositeShape &&another);
     double getArea() const;
     rectangle_t getFrameRect() const;
     void move(const point_t &a);
@@ -19,11 +22,11 @@ namespace nikonov
     void scaleWithCheck(double k);
     void push_back(Shape *newElem);
     void pop_back();
-    Shape *at(size_t id) const;
+    const Shape *at(size_t id) const;
     bool empty() const noexcept;
     size_t size() const noexcept;
   private:
-    Shape *shp[10000] = {};
+    Shape *shp[10000];
     size_t size_;
   };
 }
