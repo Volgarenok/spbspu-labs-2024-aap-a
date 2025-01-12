@@ -22,7 +22,7 @@ duhanina::Circle* duhanina::makeCircle(std::istream& in)
   {
     throw std::invalid_argument("Incorrect input");
   }
-  return new Circle({ x, y }, radius, 9);
+  return new Circle({ x, y }, radius);
 }
 
 duhanina::Ellipse* duhanina::makeEllipse(std::istream& in)

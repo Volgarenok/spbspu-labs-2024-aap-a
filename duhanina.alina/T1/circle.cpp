@@ -4,7 +4,7 @@
 #include "destroy.hpp"
 #include "ellipse.hpp"
 
-duhanina::Circle::Circle(const point_t& pos, double radius, size_t count = 9):
+duhanina::Circle::Circle(const point_t& pos, double radius, size_t count):
   count_(count),
   ellipses_(new Shape*[count_])
 {

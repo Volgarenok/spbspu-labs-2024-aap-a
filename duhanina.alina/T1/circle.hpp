@@ -8,7 +8,7 @@ namespace duhanina
   class Circle final: public Shape
   {
   public:
-    Circle(const point_t& pos, double radius, size_t count);
+    Circle(const point_t& pos, double radius, size_t count = 9);
     ~Circle();
     double getArea() const override;
     rectangle_t getFrameRect() const override;
