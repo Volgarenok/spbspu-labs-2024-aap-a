@@ -16,9 +16,10 @@ namespace alymova
     CompositeShape& operator=(const CompositeShape& comp_shape);
     CompositeShape& operator=(const CompositeShape&& comp_shape);
     Shape* operator[](size_t id) noexcept;
+    const Shape* operator[](size_t id) const noexcept;
 
-    double getArea() noexcept;
-    rectangle_t getFrameRect() noexcept;
+    double getArea() const noexcept;
+    rectangle_t getFrameRect() const noexcept;
     void move(point_t point) noexcept;
     void move(double shift_x, double shift_y) noexcept;
     void scale(double ratio);
@@ -27,14 +28,14 @@ namespace alymova
     void push_back(Shape* shp);
     void pop_back() noexcept;
     Shape* at(size_t id);
-    bool empty() noexcept;
-    size_t size() noexcept;
-    void copyArray(Shape** other_shapes, Shape** shapes_new, bool& copy_success);
+    bool empty() const noexcept;
+    size_t size() const noexcept;
+    void copyArray(const Shape* const* other_shapes);
+    void swap (CompositeShape& copy) noexcept;
     void clear(Shape** shapes) noexcept;
   private:
     size_t size_, capacity_;
     Shape** shapes_;
-    rectangle_t* frame_rect_points_;
 
   };
 }

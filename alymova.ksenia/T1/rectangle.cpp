@@ -55,7 +55,7 @@ alymova::Shape* alymova::Rectangle::clone() const
     Shape* shape = rect;
     return shape;
   }
-  catch (const std::bad_alloc& e)
+  catch (...)
   {
     delete rect;
     throw;

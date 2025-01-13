@@ -35,7 +35,6 @@ int main()
   catch (const std::invalid_argument& e)
   {
     std::cerr << e.what() << "\n";
-    //alymova::clear(shapes);
     return 1;
   }
   catch (const std::logic_error& e)

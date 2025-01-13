@@ -5,8 +5,7 @@
 alymova::CompositeShape::CompositeShape():
   size_(0),
   capacity_(10),
-  shapes_(nullptr),
-  frame_rect_points_(nullptr)
+  shapes_(nullptr)
 {
   try
   {
@@ -15,104 +14,130 @@ alymova::CompositeShape::CompositeShape():
   catch (const std::bad_alloc& e)
   {
     clear(shapes_);
-    throw;
+    throw std::runtime_error("Creating composition of shapes error");
   }
 }
 alymova::CompositeShape::CompositeShape(const CompositeShape& comp_shape):
     size_(comp_shape.size_),
     capacity_(comp_shape.capacity_),
-    shapes_(nullptr),
-    frame_rect_points_(nullptr)
+    shapes_(nullptr)
 {
   bool copy_success = true;
   try
   {
-    shapes_ = new Shape*[capacity_];
-    for (size_t i = 0; i < capacity_; i++)
-    {
-        shapes_[i] = nullptr;
-    }
-    copyArray(comp_shape.shapes_, shapes_, copy_success);
+    shapes_ = new Shape*[capacity_]();
+    copyArray(comp_shape.shapes_);
   }
-  catch (const std::bad_alloc& e)
+  //catch (const std::bad_alloc& e)
+  catch (...)
   {
     size_ = 0;
     capacity_ = 10;
     clear(shapes_);
-    throw;
+    throw std::runtime_error("Creating coping composition of shapes error");;
   }
-  if (!copy_success)
+  /*if (!copy_success)
   {
     size_ = 0;
     capacity_ = 10;
     clear(shapes_);
     throw std::bad_alloc();
-  }
+  }*/
 }
 alymova::CompositeShape::CompositeShape(const CompositeShape&& comp_shape) :
     size_(comp_shape.size_),
     capacity_(comp_shape.capacity_),
-    shapes_(nullptr),
-    frame_rect_points_(nullptr)
+    shapes_(nullptr)
 {
-  bool copy_success = true;
   try
   {
     shapes_ = new Shape*[capacity_];
-    copyArray(comp_shape.shapes_, shapes_, copy_success);
+    copyArray(comp_shape.shapes_);
   }
-  catch (const std::bad_alloc& e)
+  //catch (const std::bad_alloc& e)
+  catch (...)
   {
     size_ = 0;
     capacity_ = 10;
     clear(shapes_);
-    throw;
+    throw std::runtime_error("Creating moving composition of shapes error");;
   }
-  if (!copy_success)
+  /*if (!copy_success)
   {
     size_ = 0;
     capacity_ = 10;
     clear(shapes_);
     throw std::bad_alloc();
-  }
+  }*/
 }
 alymova::CompositeShape::~CompositeShape()
 {
   clear(shapes_);
-  delete[] frame_rect_points_;
 }
 alymova::CompositeShape& alymova::CompositeShape::operator=(const CompositeShape& comp_shape)
 {
-  if (this != &comp_shape)
+  try
   {
-    bool copy_success = true;
+    if (this != &comp_shape)
+    {
+      CompositeShape copy{comp_shape};
+      capacity_ = comp_shape.capacity_;
+      size_ = comp_shape.size_;
+      clear(shapes_);
+      shapes_ = new Shape*[comp_shape.capacity_];
+      swap(copy);
+      /*bool copy_success = true;
+      copyArray(comp_shape.shapes_, shapes_, copy_success);
+      if (!copy_success)
+      {
+        throw std::bad_alloc();
+      }
+      size_ = comp_shape.size_;
+      capacity_ = comp_shape.capacity_;*/
+    }
+    return *this;
+  }
+  catch (const std::bad_alloc& e)
+  {
+    clear(shapes_);
+    throw std::runtime_error("Copying assigment error");
+  }
+}
+alymova::CompositeShape& alymova::CompositeShape::operator=(const CompositeShape&& comp_shape)
+{
+  try
+  {
+    CompositeShape copy{comp_shape};
+    capacity_ = comp_shape.capacity_;
+    size_ = comp_shape.size_;
+    clear(shapes_);
+    shapes_ = new Shape*[comp_shape.capacity_];
+    swap(copy);
+    return *this;
+    /*bool copy_success = true;
     copyArray(comp_shape.shapes_, shapes_, copy_success);
     if (!copy_success)
     {
       throw std::bad_alloc();
     }
     size_ = comp_shape.size_;
-    capacity_ = comp_shape.capacity_;
+    capacity_ = comp_shape.capacity_;*/
   }
-  return *this;
-}
-alymova::CompositeShape& alymova::CompositeShape::operator=(const CompositeShape&& comp_shape)
-{
-  bool copy_success = true;
-  copyArray(comp_shape.shapes_, shapes_, copy_success);
-  if (!copy_success)
+  catch (const std::bad_alloc& e)
   {
-    throw std::bad_alloc();
+    clear(shapes_);
+    throw std::runtime_error("Moving assigment error");
   }
-  size_ = comp_shape.size_;
-  capacity_ = comp_shape.capacity_;
-  return *this;
 }
 alymova::Shape* alymova::CompositeShape::operator[](size_t id) noexcept
 {
   return shapes_[id];
 }
-double alymova::CompositeShape::getArea() noexcept
+const alymova::Shape* alymova::CompositeShape::operator[](size_t id) const noexcept
+{
+  return shapes_[id];
+}
+double alymova::CompositeShape::getArea() const noexcept
 {
   double area_sum = 0.0;
   for (size_t i = 0; i < size_; i++)
@@ -121,7 +146,7 @@ double alymova::CompositeShape::getArea() noexcept
   }
   return area_sum;
 }
-alymova::rectangle_t alymova::CompositeShape::getFrameRect() noexcept
+alymova::rectangle_t alymova::CompositeShape::getFrameRect() const noexcept
 {
   double low_left_x = std::numeric_limits< double >::max();
   double low_left_y = std::numeric_limits< double >::max();
@@ -173,27 +198,29 @@ void alymova::CompositeShape::push_back(Shape* shp)
   {
     int ratio = 2;
     capacity_ *= ratio;
-    Shape** shapes_new_ = nullptr;
-    bool copy_success = true;
+    Shape** shapes_new = nullptr;
     try
     {
-      shapes_new_ = new Shape*[capacity_];
-      copyArray(shapes_, shapes_new_, copy_success);
+      shapes_new = new Shape*[capacity_]();
+      for (size_t i = 0; i < size_; i++)
+      {
+        shapes_new[i] = shapes_[i];
+      }
       clear(shapes_);
-      shapes_ = shapes_new_;
+      shapes_ = shapes_new;
     }
     catch (const std::bad_alloc& e)
     {
       capacity_ /= ratio;
-      clear(shapes_new_);
+      clear(shapes_new);
       throw;
     }
-    if (!copy_success)
+    /*if (!copy_success)
     {
       capacity_ /= ratio;
       clear(shapes_new_);
       throw std::bad_alloc();
-    }
+    }*/
   }
   shapes_[size_] = shp;
   size_++;
@@ -214,7 +241,7 @@ alymova::Shape* alymova::CompositeShape::at(size_t id)
   }
   return shapes_[id];
 }
-bool alymova::CompositeShape::empty() noexcept
+bool alymova::CompositeShape::empty() const noexcept
 {
   if (size_ == 0)
   {
@@ -222,37 +249,48 @@ bool alymova::CompositeShape::empty() noexcept
   }
   return false;
 }
-size_t alymova::CompositeShape::size() noexcept
+size_t alymova::CompositeShape::size() const noexcept
 {
   return size_;
 }
-void alymova::CompositeShape::copyArray(Shape** other_shapes, Shape** shapes_new, bool& copy_success)
+void alymova::CompositeShape::copyArray(const Shape* const* other_shapes)
 {
   for (size_t i = 0; i < size_; i++)
   {
-    Shape* tmp = nullptr;
+    /*Shape* tmp = nullptr;
     try
     {
         tmp = shapes_new[i];
-      //tmp = shapes_new[i]->clone();
+        tmp = shapes_new[i]->clone();
     }
     catch (const std::bad_alloc& e)
     {
       delete tmp;
       copy_success = false;
       return;
-    }
-    delete shapes_new[i];
+    }*/
+    delete shapes_[i];
     try
     {
-      shapes_new[i] = other_shapes[i]->clone();
+      shapes_[i] = other_shapes[i]->clone();
     }
-    catch (const std::bad_alloc& e)
+    //catch (const std::bad_alloc& e)
+    catch (...)
     {
-      shapes_new[i] = tmp;
-      copy_success = false;
-      return;
+      //shapes_new[i] = tmp;
+      //copy_success = false;
+      //throw;
+      delete shapes_[i];
+      throw std::runtime_error("Coping error");
     }
+  }
+}
+void alymova::CompositeShape::swap(CompositeShape& copy) noexcept
+{
+  for (size_t i = 0; i < size_; i++)
+  {
+    shapes_[i] = copy[i];
+    //copy[i] = nullptr;
   }
 }
 void alymova::CompositeShape::clear(Shape** shapes) noexcept

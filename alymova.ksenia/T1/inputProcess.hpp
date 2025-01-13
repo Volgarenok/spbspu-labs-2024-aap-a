@@ -11,8 +11,8 @@ namespace alymova
   Shape* makeCircle(std::istream& in);
   Shape* makeRegular(std::istream& in);
   void readParameters(std::istream& in, double* params, size_t size);
-  void print(std::ostream& out, Shape* shape);
-  void print(std::ostream& out, CompositeShape& shapes);
+  void print(std::ostream& out, const Shape* shape);
+  void print(std::ostream& out, const CompositeShape& shapes);
   void clear(Shape** shapes);
 }
 #endif
