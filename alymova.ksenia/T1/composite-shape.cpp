@@ -18,9 +18,9 @@ alymova::CompositeShape::CompositeShape():
   }
 }
 alymova::CompositeShape::CompositeShape(const CompositeShape& comp_shape):
-    size_(comp_shape.size_),
-    capacity_(comp_shape.capacity_),
-    shapes_(nullptr)
+  size_(comp_shape.size_),
+  capacity_(comp_shape.capacity_),
+  shapes_(nullptr)
 {
   try
   {
@@ -36,9 +36,9 @@ alymova::CompositeShape::CompositeShape(const CompositeShape& comp_shape):
   }
 }
 alymova::CompositeShape::CompositeShape(const CompositeShape&& comp_shape):
-    size_(comp_shape.size_),
-    capacity_(comp_shape.capacity_),
-    shapes_(nullptr)
+  size_(comp_shape.size_),
+  capacity_(comp_shape.capacity_),
+  shapes_(nullptr)
 {
   try
   {
