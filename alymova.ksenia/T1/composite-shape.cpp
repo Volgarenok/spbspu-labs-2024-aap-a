@@ -22,7 +22,6 @@ alymova::CompositeShape::CompositeShape(const CompositeShape& comp_shape):
     capacity_(comp_shape.capacity_),
     shapes_(nullptr)
 {
-  bool copy_success = true;
   try
   {
     shapes_ = new Shape*[capacity_]();
