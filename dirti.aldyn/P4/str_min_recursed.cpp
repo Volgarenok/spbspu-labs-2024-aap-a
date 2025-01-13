@@ -68,7 +68,6 @@ char dirti::str_min_recursed(const char * str, const size_t size)
   }
   sym_sym[0] = str[0];
   sym_num[0] = 1;
-  size_t k = 0;
   size_t i = 1;
   symbols(str, sym_sym, sym_num, i, size, sym);
   size_t min = 0;
