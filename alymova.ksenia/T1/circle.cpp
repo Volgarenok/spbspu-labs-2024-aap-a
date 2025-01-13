@@ -50,7 +50,7 @@ alymova::Shape* alymova::Circle::clone() const
     Shape* shape = circle;
     return shape;
   }
-  catch (const std::bad_alloc& e)
+  catch (...)
   {
     delete circle;
     throw;

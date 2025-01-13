@@ -68,7 +68,7 @@ alymova::Shape* alymova::Regular::clone() const
     Shape* shape = reg;
     return shape;
   }
-  catch (const std::bad_alloc& e)
+  catch (...)
   {
     delete reg;
     throw;
