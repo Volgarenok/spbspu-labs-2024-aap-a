@@ -9,8 +9,8 @@ void sveshnikov::isotropic_scaling(Shape **shapes, double zoom_ctr_x, double zoo
     shapes[i]->move({zoom_ctr_x, zoom_ctr_y});
     double dx = 0.0, dy = 0.0;
     shapes[i]->scale(k);
-    dx = k * (pos.x - shapes[i]->getFrameRect().pos.x);
-    dy = k * (pos.y - shapes[i]->getFrameRect().pos.y);
+    dx = k * (pos.x - zoom_ctr_x);
+    dy = k * (pos.y - zoom_ctr_y);
     shapes[i]->move(dx, dy);
   }
 }
