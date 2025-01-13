@@ -20,7 +20,7 @@ lebedev::rectangle_t lebedev::Rectangle::getFrameRect() const
 
 void lebedev::Rectangle::move(point_t p)
 {
-  point_t centre = this->getFrameRect().pos;
+  point_t centre = getFrameRect().pos;
   double dx = p.x - centre.x;
   double dy = p.y - centre.y;
   leftDown_.x += dx;
@@ -43,7 +43,7 @@ void lebedev::Rectangle::scale(double k)
   {
     throw std::invalid_argument("Incorrect scale coefficient!");
   }
-  point_t centre = this->getFrameRect().pos;
+  point_t centre = getFrameRect().pos;
   leftDown_.x = centre.x + (leftDown_.x - centre.x) * k;
   leftDown_.y = centre.y + (leftDown_.y - centre.y) * k;
   rightUp_.x = centre.x + (rightUp_.x - centre.x) * k;
