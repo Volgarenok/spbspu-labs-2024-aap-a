@@ -36,9 +36,8 @@ void sveshnikov::Square::move(double dx, double dy)
   low_left_.y += dy;
 }
 
-void sveshnikov::Square::scale(double k)
+void sveshnikov::Square::unsafe_scale(double k)
 {
-  unsafe_scale(k);
   double ctr_x = getFrameRect().pos.x, ctr_y = getFrameRect().pos.y;
   low_left_.x = ctr_x - k * (ctr_x - low_left_.x);
   low_left_.y = ctr_y - k * (ctr_y - low_left_.y);

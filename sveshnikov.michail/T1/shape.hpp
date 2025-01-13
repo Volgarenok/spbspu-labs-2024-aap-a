@@ -12,10 +12,10 @@ namespace sveshnikov
     virtual rectangle_t getFrameRect() const = 0;
     virtual void move(point_t p) = 0;
     virtual void move(double dx, double dy) = 0;
-    virtual void scale(double k) = 0;
+    void scale(double k);
 
-  protected:
-    void unsafe_scale(double k);
+  private:
+    virtual void unsafe_scale(double k) = 0;
   };
 }
 

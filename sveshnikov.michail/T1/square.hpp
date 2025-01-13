@@ -4,7 +4,7 @@
 
 namespace sveshnikov
 {
-  class Square final: public Shape
+  class Square final : public Shape
   {
   public:
     Square(point_t low_left_, double side_);
@@ -12,11 +12,11 @@ namespace sveshnikov
     rectangle_t getFrameRect() const override;
     void move(const point_t p) override;
     void move(double dx, double dy) override;
-    void scale(double k) override;
 
   private:
     point_t low_left_;
     double side_;
+    void unsafe_scale(double k) override;
   };
 }
 

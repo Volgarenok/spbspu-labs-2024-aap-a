@@ -34,9 +34,8 @@ void sveshnikov::Ellipse::move(double dx, double dy)
   center_.y += dy;
 }
 
-void sveshnikov::Ellipse::scale(double k)
+void sveshnikov::Ellipse::unsafe_scale(double k)
 {
-  unsafe_scale(k);
   vert_radius_ *= k;
   horiz_radius_ *= k;
 }

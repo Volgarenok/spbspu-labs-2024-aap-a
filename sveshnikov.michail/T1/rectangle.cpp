@@ -43,9 +43,8 @@ void sveshnikov::Rectangle::move(double dx, double dy)
   low_left_.y += dy;
 }
 
-void sveshnikov::Rectangle::scale(double k)
+void sveshnikov::Rectangle::unsafe_scale(double k)
 {
-  unsafe_scale(k);
   const point_t center = getFrameRect().pos;
   up_right_.x = center.x + k * (up_right_.x - center.x);
   up_right_.y = center.y + k * (up_right_.y - center.y);
