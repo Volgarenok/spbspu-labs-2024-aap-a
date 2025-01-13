@@ -12,6 +12,7 @@ namespace sveshnikov
     rectangle_t getFrameRect() const override;
     void move(const point_t p) override;
     void move(double dx, double dy) override;
+    Shape *clone() const override;
 
   private:
     point_t center_;

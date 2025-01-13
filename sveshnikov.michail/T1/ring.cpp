@@ -4,7 +4,10 @@
 
 sveshnikov::Ring::Ring(point_t center, double long_radius, double short_radius):
   small_ellipse_(center, short_radius, short_radius),
-  big_ellipse_(center, long_radius, long_radius)
+  big_ellipse_(center, long_radius, long_radius),
+  center_(center),
+  long_radius_(long_radius),
+  short_radius_(short_radius)
 {
   if (!(long_radius > short_radius && short_radius > 0))
   {
@@ -38,4 +41,9 @@ void sveshnikov::Ring::unsafe_scale(double k)
 {
   small_ellipse_.scale(k);
   big_ellipse_.scale(k);
+}
+
+sveshnikov::Shape * sveshnikov::Ring::clone() const
+{
+  return new Ring(center_, long_radius_, short_radius_);
 }

@@ -39,3 +39,8 @@ void sveshnikov::Ellipse::unsafe_scale(double k)
   vert_radius_ *= k;
   horiz_radius_ *= k;
 }
+
+sveshnikov::Shape *sveshnikov::Ellipse::clone() const
+{
+  return new Ellipse(center_, vert_radius_, horiz_radius_);
+}

@@ -51,3 +51,8 @@ void sveshnikov::Rectangle::unsafe_scale(double k)
   low_left_.x = center.x - k * (center.x - low_left_.x);
   low_left_.y = center.y - k * (center.y - low_left_.y);
 }
+
+sveshnikov::Shape *sveshnikov::Rectangle::clone() const
+{
+  return new Rectangle(low_left_, up_right_);
+}

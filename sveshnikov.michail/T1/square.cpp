@@ -43,3 +43,8 @@ void sveshnikov::Square::unsafe_scale(double k)
   low_left_.y = ctr_y - k * (ctr_y - low_left_.y);
   side_ *= k;
 }
+
+sveshnikov::Shape *sveshnikov::Square::clone() const
+{
+  return new Square(low_left_, side_);
+}
