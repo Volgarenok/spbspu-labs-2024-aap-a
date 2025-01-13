@@ -16,7 +16,7 @@ namespace alymova
     void move(point_t point) noexcept override;
     void unsafeScale(double ratio) noexcept override;
     Shape* clone() const override;
-  protected:
+  private:
     point_t pos_, top_, other_;
     size_t sides_cnt_;
     rectangle_t frame_rect_;
