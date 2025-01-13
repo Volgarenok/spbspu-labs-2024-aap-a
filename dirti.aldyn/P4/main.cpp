@@ -3,6 +3,7 @@
 #include <str_input.hpp>
 #include "str_min.hpp"
 #include "str_min2.hpp"
+#include "str_min_recursed.hpp"
 
 
 int main()
@@ -45,6 +46,21 @@ int main()
   else
   {
     std::cout << str_min2[0] << " " << str_min2[1] << "\n";
+  }
+  char str_min_recursed = dirti::str_min_recursed(str, size);
+  if (str_min == '\0')
+  {
+    free(str);
+    std::cerr << "Error: bad alloc" << "\n";
+    return 1;
+  }
+  else if (str_min_recursed == '\n')
+  {
+    std::cout << "Not existing one rare symbol" << "\n";
+  }
+  else
+  {
+    std::cout << str_min_recursed << "\n";
   }
   free(str_min2);
   free(str);
