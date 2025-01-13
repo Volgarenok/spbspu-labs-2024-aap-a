@@ -4,7 +4,7 @@
 
 namespace sveshnikov
 {
-  class Square final : public Shape
+  class Square final: public Shape
   {
   public:
     Square(point_t low_left_, double side_);
