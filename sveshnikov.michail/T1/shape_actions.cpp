@@ -3,8 +3,13 @@
 
 void sveshnikov::isotropic_scaling(CompositeShape &comp_shp, double zoom_ctr_x, double zoom_ctr_y, double k)
 {
+  point_t center = comp_shp.getFrameRect().pos;
   comp_shp.move({zoom_ctr_x, zoom_ctr_y});
+  double dx = 0.0, dy = 0.0;
   comp_shp.scale(k);
+  dx = k * (center.x - zoom_ctr_x);
+  dy = k * (center.y - zoom_ctr_y);
+  comp_shp.move(dx, dy);
 }
 
 void sveshnikov::output_frame(std::ostream &out, const CompositeShape &comp_shp)
