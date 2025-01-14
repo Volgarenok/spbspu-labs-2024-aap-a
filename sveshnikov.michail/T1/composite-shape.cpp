@@ -144,7 +144,15 @@ double sveshnikov::CompositeShape::getArea() const noexcept
 
 sveshnikov::rectangle_t sveshnikov::CompositeShape::getFrameRect() const noexcept
 {
-  double low_left_x = 0.0, low_left_y = 0.0, up_right_x = 0.0, up_right_y = 0.0;
+  if (empty())
+  {
+    return {0.0, 0.0, {0.0, 0.0}};
+  }
+  rectangle_t frame0 = shapes_[0]->getFrameRect();
+  double low_left_x = frame0.pos.x - frame0.width / 2;
+  double low_left_y = frame0.pos.y - frame0.height / 2;
+  double up_right_x = frame0.pos.x + frame0.width / 2;
+  double up_right_y = frame0.pos.y + frame0.height / 2;
   for (size_t i = 0; i != size_; i++)
   {
     rectangle_t frame = shapes_[i]->getFrameRect();
