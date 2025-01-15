@@ -39,6 +39,7 @@ namespace kizhin {
     Shape** end_;
     Shape** end_cap_;
 
+    void throw_out_of_range() const;
     void resize(size_t);
     void swap(CompositeShape&) noexcept;
     void clear() noexcept;

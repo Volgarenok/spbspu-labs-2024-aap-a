@@ -75,7 +75,7 @@ bool kizhin::CompositeShape::empty() const noexcept
 const kizhin::Shape* kizhin::CompositeShape::at(size_t index) const
 {
   if (index >= size()) {
-    throw std::out_of_range("Index out of range");
+    throw_out_of_range();
   }
   return begin_[index];
 }
@@ -83,7 +83,7 @@ const kizhin::Shape* kizhin::CompositeShape::at(size_t index) const
 kizhin::Shape* kizhin::CompositeShape::at(size_t index)
 {
   if (index >= size()) {
-    throw std::out_of_range("Index out of range");
+    throw_out_of_range();
   }
   return begin_[index];
 }
@@ -128,9 +128,6 @@ kizhin::CompositeShape* kizhin::CompositeShape::clone() const
 
 void kizhin::CompositeShape::move(const point_t& newPos)
 {
-  if (empty()) {
-    throw std::logic_error("CompositeShape is empty");
-  }
   const point_t currentCenter = getFrameRect().pos;
   const double dx = newPos.x - currentCenter.x;
   const double dy = newPos.y - currentCenter.y;
@@ -149,9 +146,6 @@ void kizhin::CompositeShape::scale(double scalingFactor)
   if (scalingFactor <= 0) {
     throw std::logic_error("Scaling factor must be positive");
   }
-  if (empty()) {
-    throw std::logic_error("CompositeShape is empty");
-  }
   const point_t center = getFrameRect().pos;
   for (Shape* const* i = begin_; i != end_; ++i) {
     scaleShape(*i, scalingFactor, center);
@@ -169,9 +163,6 @@ void kizhin::CompositeShape::push_back(Shape* shape)
 
 void kizhin::CompositeShape::pop_back()
 {
-  if (empty()) {
-    throw std::logic_error("CompositeShape is empty");
-  }
   --end_;
 }
 
@@ -191,6 +182,7 @@ void kizhin::CompositeShape::swap(CompositeShape& rhs) noexcept
   swap(end_, rhs.end_);
   swap(end_cap_, rhs.end_cap_);
 }
+
 void kizhin::CompositeShape::clear() noexcept
 {
   for (Shape** i = begin_; i != end_; ++i) {
@@ -200,6 +192,11 @@ void kizhin::CompositeShape::clear() noexcept
   begin_ = nullptr;
   end_ = nullptr;
   end_cap_ = nullptr;
+}
+
+void kizhin::CompositeShape::throw_out_of_range() const
+{
+  throw std::out_of_range("CompositeShape: out of range");
 }
 
 void kizhin::copy(Shape* const* first, const Shape* const* last, Shape** result)
