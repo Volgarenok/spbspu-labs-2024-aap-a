@@ -10,17 +10,6 @@
 
 using namespace tkach;
 
-namespace
-{
-  void deleteShapesFromCompositeShape(CompositeShape& shapes_array)
-  {
-    for (size_t i = 0; i < shapes_array.size(); ++i)
-    {
-      delete shapes_array[i];
-    }
-  }
-}
-
 int main()
 {
   CompositeShape shapes_array;
@@ -49,7 +38,6 @@ int main()
     }
     catch (const std::exception& e)
     {
-      deleteShapesFromCompositeShape(shapes_array);
       std::cerr << e.what();
       return 1;
     }
@@ -59,7 +47,6 @@ int main()
       std::cin >> scale_coef;
       if (scale_coef <= 0)
       {
-        deleteShapesFromCompositeShape(shapes_array);
         std::cerr << "Error: scale coefficent need to be bigger than 0\n";
         return 1;
       }
@@ -67,7 +54,6 @@ int main()
   }
   if (std::cin.eof())
   {
-    deleteShapesFromCompositeShape(shapes_array);
     std::cerr << "Error: not enough arguments\n";
     return 1;
   }
@@ -77,7 +63,6 @@ int main()
   }
   if (shapes_array.size() == 0)
   {
-    deleteShapesFromCompositeShape(shapes_array);
     std::cerr << "Zero correct shapes\n";
     return 1;
   }
@@ -92,10 +77,8 @@ int main()
   }
   catch (const std::exception& e)
   {
-    deleteShapesFromCompositeShape(shapes_array);
     std::cerr << e.what();
     return 1;
   }
-  deleteShapesFromCompositeShape(shapes_array);
   return 0;
 }

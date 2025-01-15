@@ -74,7 +74,7 @@ void tkach::doSaveIsoScaleCompShape(CompositeShape& shape_array, double scale_co
 {
   for (size_t i = 0; i < shape_array.size(); ++i)
   {
-    doUnsaveIsoScaleOneShape(shape_array[i], scale_coef, scale_point);
+    doSaveIsoScaleOneShape(shape_array[i], scale_coef, scale_point);
   }
 }
 
@@ -82,7 +82,7 @@ void tkach::doUnsaveIsoScaleCompShape(CompositeShape& shape_array, double scale_
 {
   for (size_t i = 0; i < shape_array.size(); ++i)
   {
-    doSaveIsoScaleOneShape(shape_array[i], scale_coef, scale_point);
+    doUnsaveIsoScaleOneShape(shape_array[i], scale_coef, scale_point);
   }
 }
 

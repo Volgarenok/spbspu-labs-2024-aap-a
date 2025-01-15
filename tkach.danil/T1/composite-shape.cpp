@@ -45,9 +45,15 @@ tkach::CompositeShape::CompositeShape(const CompositeShape& other):
   {
     fillArrayWithClones(shapes_, other.shapes_, size_, true_size);
   }
-  catch (const std::bad_alloc& e)
+  catch (const std::bad_alloc&)
   {
-    size_ = true_size;
+    for (size_t i = 0; i < true_size; ++i)
+    {
+      delete shapes_[i];
+    }
+    delete[] shapes_;
+    size_ = 0;
+    shapes_ = nullptr;
     throw;
   }
 }
@@ -62,7 +68,7 @@ tkach::CompositeShape& tkach::CompositeShape::operator=(const CompositeShape& ot
     {
       fillArrayWithClones(new_shapes, other.shapes_, other.size_, true_size);
     }
-    catch (const std::bad_alloc& e)
+    catch (const std::bad_alloc&)
     {
       for (size_t i = 0; i < true_size; ++i)
       {
@@ -71,7 +77,7 @@ tkach::CompositeShape& tkach::CompositeShape::operator=(const CompositeShape& ot
       delete[] new_shapes;
       throw;
     }
-    delete[] shapes_;
+    clearCompositeShape();
     shapes_ = new_shapes;
     size_ = other.size_;
   }
@@ -82,6 +88,7 @@ tkach::CompositeShape& tkach::CompositeShape::operator=(CompositeShape&& other) 
 {
   if (this != &other)
   {
+    clearCompositeShape();
     size_ = other.size_;
     shapes_ = other.shapes_;
     other.shapes_ = nullptr;
@@ -93,6 +100,15 @@ tkach::CompositeShape& tkach::CompositeShape::operator=(CompositeShape&& other) 
 double tkach::CompositeShape::getArea() const
 {
   return getTotalArea(shapes_, size_);
+}
+
+void tkach::CompositeShape::clearCompositeShape()
+{
+  for (size_t i = 0; i < size_; ++i)
+  {
+    delete shapes_[i];
+  }
+  delete[] shapes_;
 }
 
 tkach::rectangle_t tkach::CompositeShape::getFrameRect() const
@@ -118,7 +134,7 @@ tkach::rectangle_t tkach::CompositeShape::getFrameRect() const
 
 tkach::CompositeShape::~CompositeShape()
 {
-  delete[] shapes_;
+  clearCompositeShape();
 }
 
 void tkach::CompositeShape::move(const double add_to_x, const double add_to_y)
