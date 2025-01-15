@@ -43,7 +43,7 @@ int main()
         shapes_array.push_back(shape);
       }
     }
-    catch (const std::logic_error& e)
+    catch (const std::logic_error&)
     {
       incorrect_shape = true;
     }
