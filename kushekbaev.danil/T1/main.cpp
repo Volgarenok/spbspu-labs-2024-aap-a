@@ -21,26 +21,26 @@ int main()
       break;
     }
 
-    catch (const std::invalid_argument& e)
+    catch (const std::invalid_argument)
     {
       std::cerr << "Some of inputed shapes were inputed incorrectly\n";
     }
 
-    catch (const std::out_of_range& e)
+    catch (const std::out_of_range)
     {
       std::cerr << "Bad SCALE command\n";
       kushekbaev::clearMemory(capacity, shapeCounter);
       return 1;
     }
 
-    catch (const std::length_error& e)
+    catch (const std::length_error)
     {
       std::cerr << "There was no SCALE command\n";
       kushekbaev::clearMemory(capacity, shapeCounter);
       return 1;
     }
 
-    catch (const std::underflow_error& e)
+    catch (const std::underflow_error)
     {
       std::cerr << "Shapeless input\n";
       return 1;
@@ -63,12 +63,11 @@ int main()
     kushekbaev::clearMemory(capacity, shapeCounter);
   }
 
-  catch (const std::out_of_range& e)
+  catch (const std::out_of_range)
   {
     std::cerr << "Scale coefficient must be greater than zero\n";
     kushekbaev::clearMemory(capacity, shapeCounter);
     return 1;
   }
-
   return 0;
 }
