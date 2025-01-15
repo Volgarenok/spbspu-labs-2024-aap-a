@@ -77,7 +77,7 @@ tkach::CompositeShape& tkach::CompositeShape::operator=(const CompositeShape& ot
       delete[] new_shapes;
       throw;
     }
-    clearCompositeShape();
+    delete[] shapes_;
     shapes_ = new_shapes;
     size_ = other.size_;
   }
@@ -88,7 +88,7 @@ tkach::CompositeShape& tkach::CompositeShape::operator=(CompositeShape&& other) 
 {
   if (this != &other)
   {
-    clearCompositeShape();
+    delete[] shapes_;
     size_ = other.size_;
     shapes_ = other.shapes_;
     other.shapes_ = nullptr;
@@ -100,15 +100,6 @@ tkach::CompositeShape& tkach::CompositeShape::operator=(CompositeShape&& other) 
 double tkach::CompositeShape::getArea() const
 {
   return getTotalArea(shapes_, size_);
-}
-
-void tkach::CompositeShape::clearCompositeShape()
-{
-  for (size_t i = 0; i < size_; ++i)
-  {
-    delete shapes_[i];
-  }
-  delete[] shapes_;
 }
 
 tkach::rectangle_t tkach::CompositeShape::getFrameRect() const
@@ -134,7 +125,7 @@ tkach::rectangle_t tkach::CompositeShape::getFrameRect() const
 
 tkach::CompositeShape::~CompositeShape()
 {
-  clearCompositeShape();
+  delete[] shapes_;
 }
 
 void tkach::CompositeShape::move(const double add_to_x, const double add_to_y)
@@ -187,11 +178,7 @@ tkach::Shape* tkach::CompositeShape::at(const size_t id)
 
 const tkach::Shape* tkach::CompositeShape::at(const size_t id) const
 {
-  if (id >= size_)
-  {
-    throw std::out_of_range("Index is out of range");
-  }
-  return shapes_[id];
+  return const_cast< CompositeShape* >(this)->at(id);
 }
 
 tkach::Shape* tkach::CompositeShape::operator[](const size_t id)
