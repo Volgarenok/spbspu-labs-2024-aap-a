@@ -6,7 +6,7 @@
 
 namespace averenkov
 {
-  class Diamond : public Shape
+  class Diamond final: public Shape
   {
   public:
     Diamond(point_t a_, point_t b_, point_t c_);

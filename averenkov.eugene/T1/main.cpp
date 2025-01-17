@@ -79,14 +79,11 @@ int main()
   }
   double sum = 0;
   std::cout << std::fixed << std::setprecision(1);
-
   for (size_t i = 0; i < shapeCount; ++i)
   {
     sum += shapes[i]->getArea();
   }
-
   std::cout << sum;
-
   for (size_t i = 0; i < shapeCount; ++i)
   {
     std::cout << " " << averenkov::getLeftBot(shapes[i]->getFrameRect()).x << " ";
@@ -97,7 +94,6 @@ int main()
     averenkov::shapeScale(shapes[i], scale_center, factor);
     sum += shapes[i]->getArea();
   }
-
   std::cout << "\n";
   sum = 0;
   for (size_t i = 0; i < shapeCount; ++i)
@@ -105,7 +101,6 @@ int main()
     sum += shapes[i]->getArea();
   }
   std::cout << sum;
-
   for (size_t i = 0; i < shapeCount; ++i)
   {
     std::cout << " " << averenkov::getLeftBot(shapes[i]->getFrameRect()).x << " ";
@@ -114,13 +109,10 @@ int main()
     std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).y;
     delete shapes[i];
   }
-
   std::cout << "\n";
-
   if (hasErrors)
   {
     std::cerr << "Errors descriptions\n";
   }
-
   return 0;
 }

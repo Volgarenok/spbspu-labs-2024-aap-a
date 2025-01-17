@@ -6,6 +6,10 @@ averenkov::Ellipse::Ellipse(point_t center, double radius_v, double radius_h):
   radius_v_(radius_v),
   radius_h_(radius_h)
 {
+  if (radius_v <= 0 || radius_h <= 0)
+  {
+    throw std::invalid_argument("Error in parameters");
+  }
 }
 
 void averenkov::Ellipse::scale(double factor)
@@ -20,7 +24,8 @@ void averenkov::Ellipse::scale(double factor)
 
 double averenkov::Ellipse::getArea() const
 {
-  return 3.1416 * radius_h_ * radius_v_;
+  constexpr double pi = 3.1416;
+  return pi * radius_h_ * radius_v_;
 }
 
 averenkov::rectangle_t averenkov::Ellipse::getFrameRect() const

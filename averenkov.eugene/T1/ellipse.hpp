@@ -5,7 +5,7 @@
 
 namespace averenkov
 {
-  class Ellipse : public Shape
+  class Ellipse final: public Shape
   {
   public:
     Ellipse(point_t center_, double radius_v_, double radius_h_);

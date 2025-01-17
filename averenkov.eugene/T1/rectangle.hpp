@@ -4,7 +4,7 @@
 
 namespace averenkov
 {
-  class Rectangle : public Shape
+  class Rectangle final: public Shape
   {
   public:
     Rectangle();

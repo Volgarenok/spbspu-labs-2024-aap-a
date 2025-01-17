@@ -7,13 +7,17 @@ averenkov::Rectangle::Rectangle():
 {
 }
 
-averenkov::Rectangle::Rectangle(averenkov::point_t a, averenkov::point_t c):
+averenkov::Rectangle::Rectangle(point_t a, point_t c):
   a_(a),
   c_(c)
 {
+  if (a.x > c.x || a.y > c.y)
+  {
+    throw std::invalid_argument("Error in parameters");
+  }
 }
 
-void averenkov::Rectangle::move(averenkov::point_t s)
+void averenkov::Rectangle::move(point_t s)
 {
   point_t center;
   center.x = (a_.x + c_.x) / 2;
