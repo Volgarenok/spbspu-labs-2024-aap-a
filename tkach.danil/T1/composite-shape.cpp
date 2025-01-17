@@ -21,6 +21,14 @@ namespace
       now[i] = other[i];
     }
   }
+
+  void deleteShapesFromArray(tkach::Shape** shapes_array, size_t size)
+  {
+    for (size_t i = 0; i < size; ++i)
+    {
+      delete shapes_array[i];
+    }
+  }
 }
 
 tkach::CompositeShape::CompositeShape():
@@ -47,20 +55,14 @@ tkach::CompositeShape::CompositeShape(const CompositeShape& other):
   }
   catch (const std::bad_alloc&)
   {
-    for (size_t i = 0; i < true_size; ++i)
-    {
-      delete shapes_[i];
-    }
-    delete[] shapes_;
-    size_ = 0;
-    shapes_ = nullptr;
+    deleteShapesFromArray(shapes_, true_size);
     throw;
   }
 }
 
 tkach::CompositeShape& tkach::CompositeShape::operator=(const CompositeShape& other)
 {
-  if (this != &other)
+  if (this != std::addressof(other))
   {
     Shape** new_shapes = new Shape*[other.size_];
     size_t true_size = 0;
@@ -70,10 +72,7 @@ tkach::CompositeShape& tkach::CompositeShape::operator=(const CompositeShape& ot
     }
     catch (const std::bad_alloc&)
     {
-      for (size_t i = 0; i < true_size; ++i)
-      {
-        delete new_shapes[i];
-      }
+      deleteShapesFromArray(new_shapes, true_size);
       delete[] new_shapes;
       throw;
     }
@@ -86,7 +85,7 @@ tkach::CompositeShape& tkach::CompositeShape::operator=(const CompositeShape& ot
 
 tkach::CompositeShape& tkach::CompositeShape::operator=(CompositeShape&& other) noexcept
 {
-  if (this != &other)
+  if (this != std::addressof(other))
   {
     delete[] shapes_;
     size_ = other.size_;
@@ -169,16 +168,16 @@ void tkach::CompositeShape::pop_back()
 
 tkach::Shape* tkach::CompositeShape::at(const size_t id)
 {
+  return const_cast< Shape* >(const_cast< const CompositeShape* >(this)->at(id));
+}
+
+const tkach::Shape* tkach::CompositeShape::at(const size_t id) const
+{
   if (id >= size_)
   {
     throw std::out_of_range("Index is out of range");
   }
   return shapes_[id];
-}
-
-const tkach::Shape* tkach::CompositeShape::at(const size_t id) const
-{
-  return const_cast< CompositeShape* >(this)->at(id);
 }
 
 tkach::Shape* tkach::CompositeShape::operator[](const size_t id)

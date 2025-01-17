@@ -8,11 +8,9 @@
 #include "makeshapes.hpp"
 #include "composite-shape.hpp"
 
-using namespace tkach;
-
 namespace
 {
-  void deleteShapesFromCompositeShape(CompositeShape& shapes_array)
+  void deleteShapesFromCompositeShape(tkach::CompositeShape& shapes_array)
   {
     for (size_t i = 0; i < shapes_array.size(); ++i)
     {
@@ -23,8 +21,9 @@ namespace
 
 int main()
 {
+  using namespace tkach;
   CompositeShape shapes_array;
-  std::string shape_name = "";
+  std::string shape_name;
   bool incorrect_shape = false;
   double scale_coef = 0.0;
   point_t scale_point;
@@ -77,7 +76,6 @@ int main()
   }
   if (shapes_array.size() == 0)
   {
-    deleteShapesFromCompositeShape(shapes_array);
     std::cerr << "Zero correct shapes\n";
     return 1;
   }
