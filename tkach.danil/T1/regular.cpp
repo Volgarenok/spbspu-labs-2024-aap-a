@@ -1,7 +1,6 @@
 #include "regular.hpp"
 #include <cmath>
 #include <stdexcept>
-#include <limits>
 
 double tkach::Regular::getDist(const point_t& point1, const point_t& point2) const
 {
