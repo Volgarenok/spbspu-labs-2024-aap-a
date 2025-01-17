@@ -52,7 +52,7 @@ void hismatova::Concave::scale(double index)
   {
     throw std::invalid_argument("Scale factor must be positive.");
   }
-  hismatova::point_t center = this->getFrameRect().pos;
+  point_t center = this->getFrameRect().pos;
   scalePoint(a_, center, index);
   scalePoint(b_, center, index);
   scalePoint(c_, center, index);

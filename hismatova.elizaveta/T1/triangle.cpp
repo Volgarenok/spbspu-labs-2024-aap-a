@@ -42,7 +42,7 @@ void hismatova::Triangle::scale(double index)
   {
     throw std::invalid_argument("Scale factor must be positive.");
   }
-  hismatova::point_t centroid = this->getCentroid();
+  point_t centroid = this->getCentroid();
   a_.x = centroid.x + (a_.x - centroid.x) * index;
   a_.y = centroid.y + (a_.y - centroid.y) * index;
   b_.x = centroid.x + (b_.x - centroid.x) * index;

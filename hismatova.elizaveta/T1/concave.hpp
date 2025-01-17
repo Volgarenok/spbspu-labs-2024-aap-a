@@ -4,7 +4,7 @@
 
 namespace hismatova
 {
-  class Concave: public Shape
+  class Concave final: public Shape
   {
   public:
     Concave(const point_t& a, const point_t& b, const point_t& c, const point_t& d);

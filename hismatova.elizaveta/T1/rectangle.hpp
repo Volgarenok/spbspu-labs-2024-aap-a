@@ -4,7 +4,7 @@
 
 namespace hismatova
 {
-  class Rectangle: public Shape
+  class Rectangle final: public Shape
   {
   public:
     double getArea() const override;

@@ -11,7 +11,7 @@ namespace hismatova
       delete figures[i];
     }
   }
-  void results(Shape** figures, size_t count)
+  void results(std::ostream& out, Shape** const figures, size_t count)
   {
     double sum = 0.0;
     for (size_t i = 0; i < count; i++)
@@ -21,17 +21,17 @@ namespace hismatova
         sum = sum + figures[i]->getArea();
       }
     }
-    std::cout << std::fixed << std::setprecision(1) << sum;
+    out << std::fixed << std::setprecision(1) << sum;
     for (size_t i = 0; i < count; i++)
     {
       if (figures[i])
       {
         rectangle_t FrameRect = figures[i]->getFrameRect();
-        std::cout << " " << FrameRect.pos.x - FrameRect.width / 2.0 << " " << FrameRect.pos.y - FrameRect.height / 2.0 << " ";
-        std::cout << FrameRect.pos.x + FrameRect.width / 2.0 << " " << FrameRect.pos.y + FrameRect.height / 2.0;
+        out << " " << FrameRect.pos.x - FrameRect.width / 2.0 << " " << FrameRect.pos.y - FrameRect.height / 2.0 << " ";
+        out << FrameRect.pos.x + FrameRect.width / 2.0 << " " << FrameRect.pos.y + FrameRect.height / 2.0;
       }
     }
-    std::cout << "\n";
+    out << "\n";
   }
 }
 int main()
@@ -120,7 +120,7 @@ int main()
         return 1;
       }
       scales = true;
-      results(figures, count);
+      results(std::cout, figures, count);
       for (size_t i = 0; i < count; i++)
       {
         point_t pos = figures[i]->getFrameRect().pos;
@@ -132,7 +132,7 @@ int main()
         figures[i]->scale(index);
         figures[i]->move(-1 * p2.x, -1 * p2.y);
       }
-      results(figures, count);
+      results(std::cout, figures, count);
       break;
     }
   }

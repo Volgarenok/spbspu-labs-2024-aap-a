@@ -16,7 +16,7 @@ hismatova::rectangle_t hismatova::Rectangle::getFrameRect() const
 {
   double width = topRight_.x - bottomLeft_.x;
   double height = topRight_.y - bottomLeft_.y;
-  hismatova::point_t pos = { bottomLeft_.x + width / 2.0, bottomLeft_.y + height / 2.0 };
+  point_t pos = { bottomLeft_.x + width / 2.0, bottomLeft_.y + height / 2.0 };
   return {height, width, pos};
 }
 void hismatova::Rectangle::move(const point_t &newPos)
@@ -38,7 +38,7 @@ void hismatova::Rectangle::scale(double index)
   {
     throw std::invalid_argument("Scale factor must be positive.");
   }
-  hismatova::point_t center = this->getFrameRect().pos;
+  point_t center = this->getFrameRect().pos;
   bottomLeft_.x = center.x + (bottomLeft_.x - center.x) * index;
   bottomLeft_.y = center.y + (bottomLeft_.y - center.y) * index;
   topRight_.x = center.x + (topRight_.x - center.x) * index;
