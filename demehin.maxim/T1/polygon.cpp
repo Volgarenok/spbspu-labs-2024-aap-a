@@ -41,12 +41,9 @@ demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
 
   vertex_ = new point_t[vrtx_cnt];
 
-  if (vertex)
+  if (vertex != nullptr)
   {
-    for (size_t i = 0; i < vrtx_cnt; i++)
-    {
-      vertex_[i] = vertex[i];
-    }
+    setVertex(vertex, vrtx_cnt);
 
     if (hasSameVertex(vrtx_cnt, vertex_))
     {
@@ -91,11 +88,11 @@ demehin::rectangle_t demehin::Polygon::getFrameRect() const
 
 void demehin::Polygon::move(point_t s)
 {
-  point_t plg_center = this->getCenter();
+  point_t plg_center = getCenter();
   double difference_x = s.x - plg_center.x;
   double difference_y = s.y - plg_center.y;
 
-  this->move(difference_x, difference_y);
+  move(difference_x, difference_y);
 }
 
 void demehin::Polygon::move(double x, double y)
@@ -109,7 +106,7 @@ void demehin::Polygon::move(double x, double y)
 
 void demehin::Polygon::scale(double k)
 {
-  point_t plg_center = this->getCenter();
+  point_t plg_center = getCenter();
 
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
@@ -119,8 +116,7 @@ void demehin::Polygon::scale(double k)
     dx *= k;
     dy *= k;
 
-    vertex_[i].x = plg_center.x + dx;
-    vertex_[i].y = plg_center.y + dy;
+    vertex_[i] = {plg_center.x + dx, plg_center.y + dy};
   }
 }
 

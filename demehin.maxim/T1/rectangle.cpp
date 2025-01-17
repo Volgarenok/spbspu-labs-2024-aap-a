@@ -16,7 +16,7 @@ namespace
 }
 
 demehin::Rectangle::Rectangle(point_t left_bot, point_t right_top):
-  plg_(demehin::Polygon(4, nullptr))
+  plg_(4, nullptr)
 {
   if (right_top.x <= left_bot.x || right_top.y <= left_bot.y)
   {

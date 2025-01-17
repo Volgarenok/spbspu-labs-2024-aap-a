@@ -20,8 +20,8 @@ namespace
 }
 
 demehin::Ring::Ring(point_t center, double out_r, double in_r):
-  inner_plg_(demehin::Polygon(130, nullptr)),
-  outer_plg_(demehin::Polygon(130, nullptr))
+  inner_plg_(130, nullptr),
+  outer_plg_(130, nullptr)
 {
   if (out_r <= in_r || out_r <= 0 || in_r <= 0)
   {

@@ -18,10 +18,14 @@ namespace
 
   demehin::Ring* createRing(std::istream& in)
   {
-    double cent_x = 0, cent_y = 0, out_r = 0, in_r = 0;
-    in >> cent_x >> cent_y >> out_r >> in_r;
-    demehin::point_t center = {cent_x, cent_y};
-    return new demehin::Ring(center, out_r, in_r);
+    double ringParams[4] = {};
+    for (size_t i = 0; i < 4; i++)
+    {
+      in >> ringParams[i];
+    }
+
+    demehin::point_t center = {ringParams[0], ringParams[1]};
+    return new demehin::Ring(center, ringParams[2], ringParams[3]);
   }
 
   void inputPolygonCords(std::istream& in, demehin::point_t** pts, size_t capacity, size_t& cord_cnt)
@@ -42,7 +46,7 @@ namespace
         catch (const std::bad_alloc& e)
         {
           delete[] *pts;
-          throw;
+          throw e;
         }
         for (size_t i = 0; i < size; i++)
         {
@@ -71,12 +75,12 @@ namespace
     catch (const std::bad_alloc& e)
     {
       delete[] vrt;
-      throw;
+      throw e;
     }
     catch (const std::logic_error& e)
     {
       delete[] vrt;
-      throw;
+      throw e;
     }
     delete[] vrt;
     return plg;
