@@ -32,7 +32,10 @@ namespace
     {
       in >> points_x_y[i];
     }
-    tkach::Regular* regular = new tkach::Regular({points_x_y[0], points_x_y[1]}, {points_x_y[2], points_x_y[3]}, {points_x_y[4], points_x_y[5]});
+    tkach::point_t point1 = {points_x_y[0], points_x_y[1]};
+    tkach::point_t point2 = {points_x_y[2], points_x_y[3]};
+    tkach::point_t point3 = {points_x_y[4], points_x_y[5]};
+    tkach::Regular* regular = new tkach::Regular(point1, point2, point3);
     return regular;
   }
 }
