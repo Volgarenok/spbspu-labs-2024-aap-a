@@ -2,13 +2,13 @@
 #include <cmath>
 #include <stdexcept>
 
-tkach::Regular tkach::Ring::getReg(size_t sides_amount, const tkach::point_t& center, double radius)
+tkach::Regular tkach::Ring::getReg(size_t sides_amount, const point_t& center, double radius)
 {
   const double step_in_angle = 2.0 * std::acos(-1.0) / sides_amount;
-  tkach::point_t temp_point;
+  point_t temp_point;
   temp_point.x = radius * std::cos(step_in_angle) + center.x;
   temp_point.y = radius * std::sin(step_in_angle) + center.y;
-  tkach::point_t new_point = {(center.x + radius + temp_point.x) / 2.0, (temp_point.y + center.y) / 2.0};
+  point_t new_point = {(center.x + radius + temp_point.x) / 2.0, (temp_point.y + center.y) / 2.0};
   return {center, {center.x + radius, center.y}, new_point};
 }
 
@@ -55,6 +55,6 @@ void tkach::Ring::move(const point_t& point_to_move)
 
 void tkach::Ring::doUnsafeScale(const double multiplier)
 {
-  in_reg_.scale(multiplier);
-  out_reg_.scale(multiplier);
+  in_reg_.doUnsafeScale(multiplier);
+  out_reg_.doUnsafeScale(multiplier);
 }

@@ -19,9 +19,25 @@ namespace
     double scaled_dy = (scaled_point.y - init_point.y) * scale_coef;
     shape->move(-1 * scaled_dx, -1 * scaled_dy);
   }
+
+  template< typename Container >
+  std::ostream& printFrameRects(std::ostream& Out, const Container& Shapes, const size_t Size)
+  {
+    tkach::rectangle_t frame_rect = Shapes[0]->getFrameRect();
+    tkach::point_t left_bot_point, right_top_point;
+    setFrameRectPoints(frame_rect, left_bot_point, right_top_point);
+    Out << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
+    for (size_t i = 1; i < Size; ++i)
+    {
+      frame_rect = Shapes[i]->getFrameRect();
+      setFrameRectPoints(frame_rect, left_bot_point, right_top_point);
+      Out << " " << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
+    }
+    return Out;
+  }
 }
 
-void tkach::deleteShapes(tkach::Shape** shape_array, const size_t counter_of_shapes)
+void tkach::deleteShapes(Shape** shape_array, const size_t counter_of_shapes)
 {
   for (size_t i = 0; i < counter_of_shapes; ++i)
   {
@@ -29,7 +45,7 @@ void tkach::deleteShapes(tkach::Shape** shape_array, const size_t counter_of_sha
   }
 }
 
-double tkach::getTotalArea(const tkach::Shape* const* const shape_array, const size_t counter_of_shapes)
+double tkach::getTotalArea(const Shape* const* const shape_array, const size_t counter_of_shapes)
 {
   double sum = 0.0;
   for (size_t i = 0; i < counter_of_shapes; ++i)
@@ -39,38 +55,18 @@ double tkach::getTotalArea(const tkach::Shape* const* const shape_array, const s
   return sum;
 }
 
-std::ostream& tkach::printCoordinatesOfAllFrameRects(std::ostream& out, const tkach::Shape* const* const shape_array,
+std::ostream& tkach::printCoordinatesOfAllFrameRects(std::ostream& out, const Shape* const* const shape_array,
   const size_t counter_of_shapes)
 {
-  tkach::rectangle_t frame_rect = shape_array[0]->getFrameRect();
-  tkach::point_t left_bot_point, right_top_point;
-  setFrameRectPoints(frame_rect, left_bot_point, right_top_point);
-  out << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
-  for (size_t i = 1; i < counter_of_shapes; ++i)
-  {
-    frame_rect = shape_array[i]->getFrameRect();
-    setFrameRectPoints(frame_rect, left_bot_point, right_top_point);
-    out << " " << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
-  }
-  return out;
+  return printFrameRects(out, shape_array, counter_of_shapes);
 }
 
-std::ostream& tkach::printAllFrameRectsFromCompShape(std::ostream& out, const tkach::CompositeShape& shape_array)
+std::ostream& tkach::printAllFrameRectsFromCompShape(std::ostream& out, const CompositeShape& shape_array)
 {
-  tkach::rectangle_t frame_rect = shape_array[0]->getFrameRect();
-  tkach::point_t left_bot_point, right_top_point;
-  setFrameRectPoints(frame_rect, left_bot_point, right_top_point);
-  out << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
-  for (size_t i = 1; i < shape_array.size(); ++i)
-  {
-    frame_rect = shape_array[i]->getFrameRect();
-    setFrameRectPoints(frame_rect, left_bot_point, right_top_point);
-    out << " " << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
-  }
-  return out;
+  return printFrameRects(out, shape_array, shape_array.size());
 }
 
-void tkach::doSaveIsoScaleCompShape(CompositeShape& shape_array, double scale_coef, const tkach::point_t& scale_point)
+void tkach::doSaveIsoScaleCompShape(CompositeShape& shape_array, double scale_coef, const point_t& scale_point)
 {
   for (size_t i = 0; i < shape_array.size(); ++i)
   {
@@ -78,7 +74,7 @@ void tkach::doSaveIsoScaleCompShape(CompositeShape& shape_array, double scale_co
   }
 }
 
-void tkach::doUnsaveIsoScaleCompShape(CompositeShape& shape_array, double scale_coef, const tkach::point_t& scale_point)
+void tkach::doUnsaveIsoScaleCompShape(CompositeShape& shape_array, double scale_coef, const point_t& scale_point)
 {
   for (size_t i = 0; i < shape_array.size(); ++i)
   {
@@ -86,13 +82,13 @@ void tkach::doUnsaveIsoScaleCompShape(CompositeShape& shape_array, double scale_
   }
 }
 
-void tkach::doUnsaveIsoScaleOneShape(tkach::Shape* shape, const double scale_coef, const tkach::point_t& scale_point)
+void tkach::doUnsaveIsoScaleOneShape(Shape* shape, const double scale_coef, const point_t& scale_point)
 {
   shape->doUnsafeScale(scale_coef);
   moveShapeInIsoScale(shape, scale_coef, scale_point);
 }
 
-void tkach::doUnsaveIsoScaleShapes(tkach::Shape* const* const shape_array, const size_t counter_of_shapes, const double scale_coef,
+void tkach::doUnsaveIsoScaleShapes(Shape* const* const shape_array, const size_t counter_of_shapes, const double scale_coef,
   const tkach::point_t& scale_point)
 {
   for (size_t i = 0; i < counter_of_shapes; ++i)
@@ -101,14 +97,14 @@ void tkach::doUnsaveIsoScaleShapes(tkach::Shape* const* const shape_array, const
   }
 }
 
-void tkach::doSaveIsoScaleOneShape(tkach::Shape* shape, const double scale_coef, const tkach::point_t& scale_point)
+void tkach::doSaveIsoScaleOneShape(Shape* shape, const double scale_coef, const point_t& scale_point)
 {
   shape->scale(scale_coef);
   moveShapeInIsoScale(shape, scale_coef, scale_point);
 }
 
-void tkach::doSaveIsoScaleShapes(tkach::Shape* const* const shape_array, const size_t counter_of_shapes, const double scale_coef,
-  const tkach::point_t& scale_point)
+void tkach::doSaveIsoScaleShapes(Shape* const* const shape_array, const size_t counter_of_shapes, const double scale_coef,
+  const point_t& scale_point)
 {
   for (size_t i = 0; i < counter_of_shapes; ++i)
   {

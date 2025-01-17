@@ -1,6 +1,7 @@
 #include "regular.hpp"
 #include <cmath>
 #include <stdexcept>
+#include <limits>
 
 double tkach::Regular::getDist(const point_t& point1, const point_t& point2) const
 {
@@ -9,17 +10,13 @@ double tkach::Regular::getDist(const point_t& point1, const point_t& point2) con
 
 bool tkach::Regular::isEqualPoints(const point_t& point1, const point_t& point2) const
 {
-  if (point1.x == point2.x && point1.y == point2.y)
-  {
-    return true;
-  }
-  return false;
+  return point1.x == point2.x && point1.y == point2.y;
 }
 
 size_t tkach::Regular::getSideAmount() const
 {
   const double res = std::acos(-1.0) / (std::acos(getDist(first_point_, third_point_) / getDist(first_point_, second_point_)));
-  if (std::fabs(res - std::round(res)) > 0.0001)
+  if (std::fabs(res - std::round(res)) > std::numeric_limits<double>::epsilon())
   {
     return 0;
   }
@@ -38,7 +35,7 @@ tkach::Regular::Regular(const point_t& first_point, const point_t& second_point,
   double first_side_squared = getDist(first_point_, second_point_) * getDist(first_point_, second_point_);
   double second_side_squared = getDist(third_point_, second_point_) * getDist(third_point_, second_point_);
   double third_side_squared = getDist(first_point_, third_point_) * getDist(first_point_, third_point_);
-  if (std::fabs(first_side_squared - (second_side_squared + third_side_squared)) > 0.00001)
+  if (std::fabs(first_side_squared - (second_side_squared + third_side_squared)) > std::numeric_limits<double>::epsilon())
   {
     throw std::logic_error("Triangle is not right");
   }
@@ -64,6 +61,7 @@ double tkach::Regular::getArea() const
 
 tkach::rectangle_t tkach::Regular::getFrameRect() const
 {
+  const double epsilon = std::numeric_limits<double>::epsilon();
   point_t start_point, new_point, start_point_temp;
   const double step_angle = 2.0 * std::acos(-1.0) / getSideAmount();
   start_point = second_point_;
@@ -75,28 +73,16 @@ tkach::rectangle_t tkach::Regular::getFrameRect() const
   new_point.y = start_point.y + 1;
   start_point_temp = start_point;
   double new_angle = std::acos((start_point.x - first_point_.x) / getDist(first_point_, second_point_));
-  while ((std::fabs(new_point.x - start_point.x) > 0.0001) || (std::fabs(new_point.y - start_point.y) > 0.0001))
+  while ((std::fabs(new_point.x - start_point.x) > epsilon) || (std::fabs(new_point.y - start_point.y) > epsilon))
   {
     new_angle += step_angle;
     start_point_temp.x = first_point_.x + getDist(first_point_, second_point_) * std::cos(new_angle);
     start_point_temp.y = first_point_.y + getDist(first_point_, second_point_) * std::sin(new_angle);
     new_point = start_point_temp;
-    if (start_point_temp.y < bot)
-    {
-      bot = start_point_temp.y;
-    }
-    if (start_point_temp.y > top)
-    {
-      top = start_point_temp.y;
-    }
-    if (start_point_temp.x < left)
-    {
-      left = start_point_temp.x;
-    }
-    if (start_point_temp.x > right)
-    {
-      right = start_point_temp.x;
-    }
+    bot = std::min(bot, start_point_temp.y);
+    top = std::max(top, start_point_temp.y);
+    left = std::min(left, start_point_temp.x);
+    right = std::max(right, start_point_temp.x);
   }
   return {right - left, top - bot, {(right + left) / 2.0, (top + bot) / 2.0}};
 }

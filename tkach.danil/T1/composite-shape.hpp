@@ -15,6 +15,8 @@ namespace tkach
     ~CompositeShape();
     CompositeShape& operator=(const CompositeShape& other);
     CompositeShape& operator=(CompositeShape&& other) noexcept;
+    Shape* operator[](size_t id);
+    const Shape* operator[](size_t id) const;
     double getArea() const;
     rectangle_t getFrameRect() const;
     void move(double add_to_x, double add_to_y);
@@ -25,8 +27,6 @@ namespace tkach
     void pop_back();
     Shape* at(size_t id);
     const Shape* at(size_t id) const;
-    Shape* operator[](size_t id);
-    const Shape* operator[](size_t id) const;
     bool empty() const noexcept;
     size_t size() const noexcept;
   private:

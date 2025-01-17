@@ -105,7 +105,7 @@ tkach::rectangle_t tkach::CompositeShape::getFrameRect() const
 {
   if (size_ == 0)
   {
-    return {0.0, 0.0, {0.0, 0.0}};
+    throw std::logic_error("No shapes for FrameRect");
   }
   double left = 0.0, right = 0.0, top = 0.0, bot = 0.0;
   rectangle_t shape_rect = shapes_[0]->getFrameRect();
