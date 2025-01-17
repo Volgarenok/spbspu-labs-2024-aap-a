@@ -10,7 +10,6 @@ namespace averenkov
     Rectangle();
     Rectangle(point_t a_, point_t c_);
     double getArea() const;
- void makeMOM();
     rectangle_t getFrameRect() const;
     void scale(double factor);
     void move(point_t s);

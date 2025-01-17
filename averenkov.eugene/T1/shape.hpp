@@ -1,8 +1,9 @@
 #ifndef SHAPE
 #define SHAPE
-
+#include "rectanglepoints.hpp"
 #include "base-types.hpp"
 #include "getline.hpp"
+
 namespace averenkov
 {
   class Shape

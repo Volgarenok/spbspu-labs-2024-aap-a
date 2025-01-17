@@ -1,4 +1,7 @@
 #include "rectangle.hpp"
+#include "rectanglepoints.hpp"
+#include "base-types.hpp"
+#include "getline.hpp"
 #include <stdexcept>
 
 averenkov::Rectangle::Rectangle():

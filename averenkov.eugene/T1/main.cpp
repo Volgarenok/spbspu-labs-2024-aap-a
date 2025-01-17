@@ -5,14 +5,12 @@
 #include <cstdlib>
 #include <string>
 #include <cmath>
-#include "rectangle.hpp"
-#include "rectanglepoints.hpp"
 #include "dynamicinput.h"
+#include "makeshape.hpp"
+#include "shapeScale.hpp"
+#include "rectangle.hpp"
 #include "ellipse.hpp"
 #include "diamond.hpp"
-#include "getline.hpp"
-#include "shapeScale.hpp"
-#include "makeshape.hpp"
 
 int main()
 {
@@ -45,7 +43,6 @@ int main()
       }
       else if (command == "SCALE")
       {
-        hasScale = true;
         if (shapeCount == 0)
         {
           std::cerr << "Nothing to scale\n";
@@ -68,7 +65,7 @@ int main()
       hasErrors = true;
     }
   }
-  if (std::cin.eof() && !hasScale)
+  if (!std::cin && !hasScale)
   {
     std::cerr << "No scale\n";
     for(size_t i = 0; i < shapeCount; ++i)

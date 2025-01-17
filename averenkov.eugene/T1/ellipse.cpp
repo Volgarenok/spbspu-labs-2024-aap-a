@@ -1,4 +1,7 @@
 #include "ellipse.hpp"
+#include "rectanglepoints.hpp"
+#include "base-types.hpp"
+#include "getline.hpp"
 #include <stdexcept>
 
 averenkov::Ellipse::Ellipse(point_t center, double radius_v, double radius_h):

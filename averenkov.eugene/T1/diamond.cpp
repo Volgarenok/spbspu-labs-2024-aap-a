@@ -1,4 +1,7 @@
 #include "diamond.hpp"
+#include "rectanglepoints.hpp"
+#include "base-types.hpp"
+#include "getline.hpp"
 #include <cmath>
 #include <stdexcept>
 
