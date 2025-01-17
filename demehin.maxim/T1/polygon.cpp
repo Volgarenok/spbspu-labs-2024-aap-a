@@ -23,6 +23,14 @@ namespace
     }
     return false;
   }
+
+  demehin::point_t getDifferenceCords(const demehin::point_t pt1, const demehin::point_t pt2)
+  {
+    double difference_x = pt1.x - pt2.x;
+    double difference_y = pt1.y - pt2.y;
+    demehin::point_t diff_cords = {difference_x, difference_y};
+    return diff_cords;
+  }
 }
 
 demehin::Polygon::~Polygon()
@@ -89,10 +97,8 @@ demehin::rectangle_t demehin::Polygon::getFrameRect() const
 void demehin::Polygon::move(point_t s)
 {
   point_t plg_center = getCenter();
-  double difference_x = s.x - plg_center.x;
-  double difference_y = s.y - plg_center.y;
-
-  move(difference_x, difference_y);
+  point_t difference_cords = getDifferenceCords(s, plg_center);
+  move(difference_cords.x, difference_cords.y);
 }
 
 void demehin::Polygon::move(double x, double y)
@@ -110,13 +116,14 @@ void demehin::Polygon::scale(double k)
 
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
-    double dx = vertex_[i].x - plg_center.x;
-    double dy = vertex_[i].y - plg_center.y;
+    point_t difference_cords = getDifferenceCords(vertex_[i], plg_center);
 
-    dx *= k;
-    dy *= k;
+    difference_cords.x *= k;
+    difference_cords.y *= k;
+    double vrt_x = plg_center.x + difference_cords.x;
+    double vrt_y = plg_center.y + difference_cords.y;
 
-    vertex_[i] = {plg_center.x + dx, plg_center.y + dy};
+    vertex_[i] = {vrt_x, vrt_y};
   }
 }
 
