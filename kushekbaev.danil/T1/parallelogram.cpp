@@ -23,9 +23,9 @@ namespace kushekbaev
   double Parallelogram::getArea() const
   {
     double p = (getLineLength(first_, second_) + getLineLength(second_, third_)
-    + getLineLength(first_, third_)) / 2;
+      + getLineLength(first_, third_)) / 2;
     double squaredAreaOfTriangle = (p) * (p - getLineLength(first_, second_))
-    * (p - getLineLength(second_, third_)) * (p - getLineLength(first_, third_));
+      * (p - getLineLength(second_, third_)) * (p - getLineLength(first_, third_));
     double areaOfTriangle = std::sqrt(squaredAreaOfTriangle);
 
     return 2 * areaOfTriangle;
@@ -46,19 +46,11 @@ namespace kushekbaev
 
   void Parallelogram::move(point_t Z)
   {
-    point_t firstalt({ first_.x + third_.x - second_.x, first_.y + third_.y - second_.y });
-
     point_t middle = getFrameRect().pos;
-    double moveX = Z.x - middle.x;
-    double moveY = Z.y - middle.y;
+    double dX = Z.x - middle.x;
+    double dY = Z.y - middle.y;
 
-    std::array<point_t*, 4> points = { &first_, &second_, &third_, &firstalt };
-
-    for (point_t* point : points)
-    {
-      point->x += moveX;
-      point->y += moveY;
-    }
+    move(dX, dY);
   }
 
   void Parallelogram::move(double dx, double dy)
@@ -67,7 +59,7 @@ namespace kushekbaev
 
     std::array<point_t*, 4> points = { &first_, &second_, &third_, &firstalt };
 
-    for (point_t* point : points)
+    for (point_t* point : points) 
     {
       point->x += dx;
       point->y += dy;

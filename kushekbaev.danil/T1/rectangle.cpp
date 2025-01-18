@@ -33,13 +33,7 @@ namespace kushekbaev
     double dx = Z.x - middle.x;
     double dy = Z.y - middle.y;
 
-    std::array<point_t*, 2> points = { &lowerLeft_, &upperRight_, };
-
-    for (point_t* point : points)
-    {
-      point->x += dx;
-      point->y += dy;
-    }
+    move(dx, dy);
   }
 
   void Rectangle::move(double dx, double dy)

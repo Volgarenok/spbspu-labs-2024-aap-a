@@ -51,13 +51,7 @@ namespace kushekbaev
     double dx = Z.x - middle.x;
     double dy = Z.y - middle.y;
 
-    std::array<point_t*, 4> points = { &first_, &second_, &third_, &final_ };
-
-    for (point_t* point : points)
-    {
-      point->x += dx;
-      point->y += dy;
-    }
+    move(dx, dy);
   }
 
   void Concave::move(double dx, double dy)
