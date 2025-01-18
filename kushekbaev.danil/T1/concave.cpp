@@ -35,11 +35,13 @@ namespace kushekbaev
     upperRight.x = std::max(std::max(std::max(first_.x, second_.x), third_.x), last_.x);
     upperRight.y = std::max(std::max(std::max(first_.y, second_.y), third_.y), last_.y);
 
-    rectangle_t frame_rect;
-    frame_rect.height = upperRight.y - lowerLeft.y;
-    frame_rect.width = upperRight.x - lowerLeft.x;
-    frame_rect.pos.x = lowerLeft.x + frame_rect.width / 2;
-    frame_rect.pos.y = lowerLeft.y + frame_rect.height / 2;
+    double frame_rectH = upperRight.y - lowerLeft.y;
+    double frame_rectW = upperRight.x - lowerLeft.x;
+    double frame_rectX = lowerLeft.x + frame_rectW / 2;
+    double frame_rectY = lowerLeft.y + frame_rectH / 2;
+
+    point_t pos { frame_rectX, frame_rectY };
+    rectangle_t frame_rect { frame_rectH, frame_rectW, pos };
     return frame_rect;
   }
 
