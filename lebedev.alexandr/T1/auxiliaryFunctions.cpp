@@ -1,18 +1,6 @@
 #include "auxiliaryFunctions.hpp"
 #include <cmath>
 
-double lebedev::max(double a, double b, double c)
-{
-  double d = std::fmax(a, b);
-  return std::fmax(d, c);
-}
-
-double lebedev::min(double a, double b, double c)
-{
-  double d = std::fmin(a, b);
-  return std::fmin(d, c);
-}
-
 double lebedev::triangleArea(point_t p1, point_t p2, point_t p3)
 {
   return 0.5 * std::fabs(p1.x * (p2.y - p3.y) + p2.x * (p3.y - p1.y) + p3.x * (p1.y - p2.y));

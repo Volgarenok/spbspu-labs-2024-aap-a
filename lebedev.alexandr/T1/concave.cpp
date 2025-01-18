@@ -1,4 +1,5 @@
 #include "concave.hpp"
+#include <algorithm>
 #include "auxiliaryFunctions.hpp"
 #include "base-types.hpp"
 
@@ -19,10 +20,10 @@ double lebedev::Concave::getArea() const
 lebedev::rectangle_t lebedev::Concave::getFrameRect() const
 {
   lebedev::rectangle_t rect;
-  rect.width = lebedev::max(p1_.x, p2_.x, p3_.x) - lebedev::min(p1_.x, p2_.x, p3_.x);
-  rect.height = lebedev::max(p1_.y, p2_.y, p3_.y) - lebedev::min(p1_.y, p2_.y, p3_.y);
-  rect.pos.x = lebedev::min(p1_.x, p2_.x, p3_.x) + rect.width / 2;
-  rect.pos.y = lebedev::min(p1_.y, p2_.y, p3_.y) + rect.height / 2;
+  rect.width = std::max({ p1_.x, p2_.x, p3_.x }) - std::min({ p1_.x, p2_.x, p3_.x });
+  rect.height = std::max({ p1_.y, p2_.y, p3_.y }) - std::min({ p1_.y, p2_.y, p3_.y });
+  rect.pos.x = std::min({ p1_.x, p2_.x, p3_.x }) + rect.width / 2;
+  rect.pos.y = std::min({ p1_.y, p2_.y, p3_.y }) + rect.height / 2;
   return rect;
 }
 

@@ -8,8 +8,7 @@ lebedev::Rectangle::Rectangle(lebedev::point_t leftDown, lebedev::point_t rightU
 {}
 double lebedev::Rectangle::getArea() const
 {
-  double area = (rightUp_.x - leftDown_.x) * (rightUp_.y - leftDown_.y);
-  return area;
+  return (rightUp_.x - leftDown_.x) * (rightUp_.y - leftDown_.y);
 }
 lebedev::rectangle_t lebedev::Rectangle::getFrameRect() const
 {
