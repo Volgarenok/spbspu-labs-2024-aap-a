@@ -2,10 +2,6 @@
 #define SHAPEBREEDING_HPP
 
 #include <istream>
-#include "rectangle.hpp"
-#include "concave.hpp"
-#include "parallelogram.hpp"
-#include "diamond.hpp"
 
 namespace kushekbaev
 {
