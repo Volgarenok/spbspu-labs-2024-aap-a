@@ -35,13 +35,12 @@ namespace kushekbaev
     point_t lowerLeft { lowerLeftx, lowerLefty };
     point_t upperRight { upperRightx, upperRighty };
 
-    double frame_rect_height = upperRight.y - lowerLeft.y;
-    double frame_rect_width = upperRight.x - lowerLeft.x;
-    double frame_rect_pos_x = lowerLeft.x + frame_rect_width / 2;
-    double frame_rect_pos_y = lowerLeft.y + frame_rect_height / 2;
-    point_t pos { frame_rect_pos_x, frame_rect_pos_y };
-    rectangle_t frame_rect { frame_rect_height, frame_rect_width, pos };
-    return frame_rect;
+    double width = upperRight.x - lowerLeft.x;
+    double height = upperRight.y - lowerLeft.y;
+    point_t middle;
+    middle.x = lowerLeft.x + width / 2;
+    middle.y = lowerLeft.y + height / 2;
+    return { width, height, middle };
   }
 
   void Concave::move(point_t scalePoint)
