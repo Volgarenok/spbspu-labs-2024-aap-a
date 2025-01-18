@@ -9,7 +9,10 @@
 namespace kushekbaev
 {
   Concave::Concave(point_t first, point_t second, point_t third, point_t final):
-    first_(first), second_(second), third_(third), final_(final)
+    first_(first),
+    second_(second),
+    third_(third),
+    final_(final)
   {
     if (!isTriangle(first, second, third) || !isPointInsideTriangle(first, second, third, final))
     {
@@ -31,7 +34,6 @@ namespace kushekbaev
     lowerLeft.y = std::min(std::min(std::min(first_.y, second_.y), third_.y), final_.y);
 
     point_t upperRight { 0, 0 };
-
     upperRight.x = std::max(std::max(std::max(first_.x, second_.x), third_.x), final_.x);
     upperRight.y = std::max(std::max(std::max(first_.y, second_.y), third_.y), final_.y);
 

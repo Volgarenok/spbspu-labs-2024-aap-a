@@ -5,13 +5,12 @@
 
 namespace kushekbaev
 {
-  std::string shapeName;
-  bool therewasascale = false;
-
   void createShape(std::istream& input, Shape** capacity, size_t& shapeCounter, point_t& scalePoint, double& scaleCoeff)
   {
+    bool thereWasAScale = false;
     try
     {
+      std::string shapeName;
       while (input >> shapeName)
       {
         if (shapeName == "RECTANGLE")
@@ -41,7 +40,7 @@ namespace kushekbaev
           {
             throw std::out_of_range("ERROR: Incorrect scale coefficient\n");
           }
-          therewasascale = true;
+          thereWasAScale = true;
           break;
         }
       }
@@ -56,7 +55,7 @@ namespace kushekbaev
       kushekbaev::clearMemory(capacity, shapeCounter);
     }
 
-    if (!therewasascale)
+    if (!thereWasAScale)
     {
       throw std::length_error("ERROR: there was no scale\n");
     }

@@ -5,10 +5,9 @@
 
 namespace kushekbaev
 {
-  Rectangle::Rectangle(point_t lowerLeft,
-    point_t upperRight):
-  lowerLeft_(lowerLeft),
-  upperRight_(upperRight)
+  Rectangle::Rectangle(point_t lowerLeft, point_t upperRight):
+    lowerLeft_(lowerLeft),
+    upperRight_(upperRight)
   {
     if (lowerLeft.x >= upperRight.x || lowerLeft.y >= upperRight.x)
     {

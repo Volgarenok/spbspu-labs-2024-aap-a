@@ -8,12 +8,10 @@
 
 namespace kushekbaev
 {
-  Parallelogram::Parallelogram(point_t first,
-    point_t second,
-  point_t third):
-  first_(first),
-  second_(second),
-  third_(third)
+  Parallelogram::Parallelogram(point_t first, point_t second, point_t third):
+    first_(first),
+    second_(second),
+    third_(third)
   {
     bool isParallelToX = parallelX(first, second) || parallelX (second, third) || parallelX(first, third);
     if (!isTriangle(first, second, third) || !isParallelToX)

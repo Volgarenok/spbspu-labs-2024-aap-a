@@ -14,7 +14,6 @@ namespace kushekbaev
     double side1 = getLineLength(first, second);
     double side2 = getLineLength(second, third);
     double side3 = getLineLength(first, third);
-
     return((side1 + side2 > side3) &&
           (side1 + side3 > side2) &&
           (side2 + side3 > side1));
@@ -41,29 +40,28 @@ namespace kushekbaev
 
   Concave* makeConcave(std::istream& input)
   {
-    point_t first { 0, 0 };
-    point_t second { 0, 0 };
-    point_t third { 0, 0 };
-    point_t final { 0, 0 };
-
+    point_t first;
+    point_t second;
+    point_t third;
+    point_t final;
     input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y >> final.x >> final.y;
     return new Concave({ first, second, third, final });
   }
 
   Parallelogram* makeParallelogram(std::istream& input)
   {
-    point_t first { 0, 0 };
-    point_t second { 0, 0 };
-    point_t third { 0, 0 };
+    point_t first;
+    point_t second;
+    point_t third;
     input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
     return new Parallelogram({ first, second, third });
   }
 
   Diamond* makeDiamond(std::istream& input)
   {
-    point_t first { 0, 0 };
-    point_t second { 0, 0 };
-    point_t third { 0, 0 };
+    point_t first;
+    point_t second;
+    point_t third;
     input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
     return new Diamond({ first, second, third });
   }
