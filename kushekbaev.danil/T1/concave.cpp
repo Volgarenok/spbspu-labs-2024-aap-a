@@ -1,7 +1,5 @@
 #include "concave.hpp"
-#include <cmath>
 #include <stdexcept>
-#include <cctype>
 #include <array>
 #include "base-types.hpp"
 #include "shapeBreeding.hpp"
@@ -45,11 +43,11 @@ namespace kushekbaev
     return frame_rect;
   }
 
-  void Concave::move(point_t Z)
+  void Concave::move(point_t scalePoint)
   {
     point_t middle = getFrameRect().pos;
-    double dx = Z.x - middle.x;
-    double dy = Z.y - middle.y;
+    double dx = scalePoint.x - middle.x;
+    double dy = scalePoint.y - middle.y;
 
     move(dx, dy);
   }
@@ -58,26 +56,26 @@ namespace kushekbaev
   {
     std::array<point_t*, 4> points = { &first_, &second_, &third_, &last_ };
 
-    for (point_t* point : points)
+    for (point_t* point: points)
     {
       point->x += dx;
       point->y += dy;
     }
   }
 
-  void Concave::scale(double V)
+  void Concave::scale(double scaleCoeff)
   {
-    if (V <= 0)
+    if (scaleCoeff <= 0)
     {
       throw std::out_of_range("Scale coefficient should be greater than zero\n");
     }
     point_t middle = getFrameRect().pos;
     std::array<point_t*, 4> points = { &first_, &second_, &third_, &last_ };
 
-    for (point_t* point : points)
+    for (point_t* point: points)
     {
-      point->x = middle.x + (point->x - middle.x) * V;
-      point->y = middle.y + (point->y - middle.y) * V;
+      point->x = middle.x + (point->x - middle.x) * scaleCoeff;
+      point->y = middle.y + (point->y - middle.y) * scaleCoeff;
     }
   }
 }
