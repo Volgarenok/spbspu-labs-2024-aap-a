@@ -16,16 +16,16 @@ namespace
 }
 
 demehin::Rectangle::Rectangle(point_t left_bot, point_t right_top):
-  plg_(4, nullptr)
+  plg_(4, generateVrt(left_bot, right_top))
 {
   if (right_top.x <= left_bot.x || right_top.y <= left_bot.y)
   {
     throw std::logic_error("incorrect shape");
   }
 
-  demehin::point_t* vrt = generateVrt(left_bot, right_top);
-  plg_.setVertex(vrt, 4);
-  delete[] vrt;
+  //demehin::point_t* vrt = generateVrt(left_bot, right_top);
+  //plg_.setVertex(vrt, 4);
+  //delete[] vrt;
 }
 
 double demehin::Rectangle::getArea() const

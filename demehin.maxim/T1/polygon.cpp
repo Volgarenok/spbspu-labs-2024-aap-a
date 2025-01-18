@@ -31,6 +31,14 @@ namespace
     demehin::point_t diff_cords = {difference_x, difference_y};
     return diff_cords;
   }
+
+  demehin::point_t& operator+=(demehin::point_t& lhs, const demehin::point_t& rhs)
+  {
+    lhs.x += rhs.x;
+    lhs.y += rhs.y;
+    return lhs;
+  }
+
 }
 
 demehin::Polygon::~Polygon()
@@ -103,10 +111,10 @@ void demehin::Polygon::move(point_t s)
 
 void demehin::Polygon::move(double x, double y)
 {
+  point_t move_cords = {x, y};
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
-    vertex_[i].x += x;
-    vertex_[i].y += y;
+    vertex_[i] += move_cords;
   }
 }
 
@@ -120,10 +128,8 @@ void demehin::Polygon::scale(double k)
 
     difference_cords.x *= k;
     difference_cords.y *= k;
-    double vrt_x = plg_center.x + difference_cords.x;
-    double vrt_y = plg_center.y + difference_cords.y;
 
-    vertex_[i] = {vrt_x, vrt_y};
+    vertex_[i] = {plg_center.x + difference_cords.x, plg_center.y + difference_cords.y};
   }
 }
 
@@ -140,8 +146,7 @@ demehin::point_t demehin::Polygon::getCenter() const
   demehin::point_t plg_center = {0, 0};
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
-    plg_center.x += vertex_[i].x;
-    plg_center.y += vertex_[i].y;
+    plg_center += vertex_[i];
   }
 
   plg_center.x /= vrtx_cnt_;
