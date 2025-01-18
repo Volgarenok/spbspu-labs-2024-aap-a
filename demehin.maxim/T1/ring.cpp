@@ -4,10 +4,9 @@
 
 namespace
 {
-  demehin::Polygon createPolygonForRing(const demehin::point_t center, double radius, size_t vrt_cnt)
+  demehin::point_t* generateVrt(const demehin::point_t center, double radius, size_t vrt_cnt)
   {
     demehin::point_t* vrt = new demehin::point_t[vrt_cnt];
-    //demehin::point_t vrt[vrt_cnt] = {};
     constexpr double PI = 3.1415;
     for (size_t i = 0; i < vrt_cnt; ++i)
     {
@@ -16,6 +15,26 @@ namespace
       double y = center.y + radius * std::sin(angle);
       vrt[i] = {x, y};
     }
+    return vrt;
+  }
+
+  demehin::Polygon createPolygonForRing(const demehin::point_t center, double radius, size_t vrt_cnt)
+  {
+    //demehin::point_t* vrt = new demehin::point_t[vrt_cnt];
+    //demehin::point_t vrt[vrt_cnt] = {};
+    //constexpr double PI = 3.1415;
+    //for (size_t i = 0; i < vrt_cnt; ++i)
+    //{
+      //double angle = 2 * PI * i / vrt_cnt;
+      //double x = center.x + radius * std::cos(angle);
+      //double y = center.y + radius * std::sin(angle);
+      //vrt[i] = {x, y};
+    //}
+    if (radius <= 0)
+    {
+      throw std::logic_error("incorrect shape");
+    }
+    demehin::point_t* vrt = generateVrt(center, radius, vrt_cnt);
     demehin::Polygon plg(130, vrt);
     return plg;
   }
@@ -25,7 +44,7 @@ demehin::Ring::Ring(point_t center, double out_r, double in_r):
   inner_plg_(createPolygonForRing(center, in_r, 130)),
   outer_plg_(createPolygonForRing(center, out_r, 130))
 {
-  if (out_r <= in_r || out_r <= 0 || in_r <= 0)
+  if (out_r <= in_r)
   {
     throw std::logic_error("incorrect shape");
   }
