@@ -20,10 +20,7 @@ namespace tkach
     point_t first_point_;
     point_t second_point_;
     point_t third_point_;
-    double getDist(const point_t& point1, const point_t& point2) const;
     size_t getSideAmount() const;
-    bool isEqualPoints(const point_t& point1, const point_t& point2) const;
-    void scaleFromFirstPoint(double multiplier, point_t& scale_point);
   };
 }
 

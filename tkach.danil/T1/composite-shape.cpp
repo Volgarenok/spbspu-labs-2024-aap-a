@@ -153,7 +153,7 @@ void tkach::CompositeShape::move(const point_t& point_to_move)
   move(frame_center.x - point_to_move.x, frame_center.y - point_to_move.y);
 }
 
-void tkach::CompositeShape::push_back(Shape* const shp)
+void tkach::CompositeShape::pushBack(Shape* const shp)
 {
   if (shp == nullptr)
   {
@@ -166,7 +166,7 @@ void tkach::CompositeShape::push_back(Shape* const shp)
   shapes_ = new_shapes;
 }
 
-void tkach::CompositeShape::pop_back()
+void tkach::CompositeShape::popBack()
 {
   if (size_ == 0)
   {
@@ -214,10 +214,14 @@ size_t tkach::CompositeShape::size() const noexcept
 
 void tkach::CompositeShape::doUnsafeScale(const double multiplier)
 {
-  doUnsaveIsoScaleShapes(shapes_, size_, multiplier, getFrameRect().pos);
+  doUnsafeIsoScaleCompShape(*this, multiplier, getFrameRect().pos);
 }
 
 void tkach::CompositeShape::scale(const double multiplier)
 {
-  doSaveIsoScaleShapes(shapes_, size_, multiplier, getFrameRect().pos);
+  if (multiplier <= 0)
+  {
+    throw std::logic_error("Not positive coef");
+  }
+  doUnsafeIsoScaleCompShape(*this, multiplier, getFrameRect().pos);
 }

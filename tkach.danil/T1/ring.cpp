@@ -14,11 +14,7 @@ tkach::Ring::Ring(const point_t& center, double outer_radius, double inner_radiu
   in_reg_(getReg(130, center, inner_radius)),
   out_reg_(getReg(170, center, outer_radius))
 {
-   if (outer_radius <= inner_radius)
-  {
-    throw std::logic_error("Outer radius is lesser than inner_radius or equal to it");
-  }
-  if (outer_radius <= 0 || inner_radius <= 0)
+  if (outer_radius <= inner_radius || outer_radius <= 0 || inner_radius <= 0)
   {
     throw std::logic_error("Incorrect radius");
   }

@@ -23,8 +23,8 @@ namespace tkach
     void move(const point_t& point_to_move);
     void scale(double multiplier);
     void doUnsafeScale(const double multiplier);
-    void push_back(Shape* shp);
-    void pop_back();
+    void pushBack(Shape* shp);
+    void popBack();
     Shape* at(size_t id);
     const Shape* at(size_t id) const;
     bool empty() const noexcept;

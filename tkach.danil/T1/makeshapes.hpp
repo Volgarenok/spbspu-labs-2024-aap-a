@@ -6,7 +6,7 @@
 
 namespace tkach
 {
-  tkach::Shape* make_shape(std::istream& in,  std::string shape_name);
+  Shape* makeShape(std::istream& in,  std::string shape_name);
 }
 
 #endif
