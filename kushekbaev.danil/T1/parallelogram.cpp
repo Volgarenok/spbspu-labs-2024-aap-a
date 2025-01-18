@@ -16,7 +16,7 @@ namespace kushekbaev
     bool isParallelToX = parallelX(first, second) || parallelX (second, third) || parallelX(first, third);
     if (!isTriangle(first, second, third) || !isParallelToX)
     {
-      throw std::invalid_argument("Incorrect parallelogram\\n");
+      throw std::invalid_argument("Incorrect parallelogram\n");
     }
   }
 
@@ -59,7 +59,7 @@ namespace kushekbaev
 
     std::array<point_t*, 4> points = { &first_, &second_, &third_, &firstalt };
 
-    for (point_t* point : points) 
+    for (point_t* point : points)
     {
       point->x += dx;
       point->y += dy;
