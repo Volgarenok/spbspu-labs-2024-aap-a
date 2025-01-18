@@ -19,11 +19,11 @@ namespace kushekbaev
           (side2 + side3 > side1));
   }
 
-  bool isPointInsideTriangle(point_t first, point_t second, point_t third, point_t final)
+  bool isPointInsideTriangle(point_t first, point_t second, point_t third, point_t last)
   {
-    double firstcheck = (first.x - final.x) * (second.y - first.y) - (second.x - first.x) * (first.y - final.y);
-    double secondcheck = (second.x - final.x) * (third.y - second.y) - (third.x - second.x) * (second.y - final.y);
-    double thirdcheck = (third.x - final.x) * (first.y - third.y) - (first.x - third.x) * (third.y - final.y);
+    double firstcheck = (first.x - last.x) * (second.y - first.y) - (second.x - first.x) * (first.y - last.y);
+    double secondcheck = (second.x - last.x) * (third.y - second.y) - (third.x - second.x) * (second.y - last.y);
+    double thirdcheck = (third.x - last.x) * (first.y - third.y) - (first.x - third.x) * (third.y - last.y);
     return ((firstcheck > 0 && secondcheck > 0 && thirdcheck > 0) ||
             (firstcheck < 0 && secondcheck < 0 && thirdcheck < 0));
   }
@@ -40,28 +40,28 @@ namespace kushekbaev
 
   Concave* makeConcave(std::istream& input)
   {
-    point_t first;
-    point_t second;
-    point_t third;
-    point_t final;
-    input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y >> final.x >> final.y;
-    return new Concave({ first, second, third, final });
+    point_t first { 0, 0 };
+    point_t second { 0, 0 };
+    point_t third { 0, 0 };
+    point_t last { 0, 0 };
+    input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y >> last.x >> last.y;
+    return new Concave({ first, second, third, last });
   }
 
   Parallelogram* makeParallelogram(std::istream& input)
   {
-    point_t first;
-    point_t second;
-    point_t third;
+    point_t first { 0, 0 };
+    point_t second { 0, 0 };
+    point_t third { 0, 0 };
     input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
     return new Parallelogram({ first, second, third });
   }
 
   Diamond* makeDiamond(std::istream& input)
   {
-    point_t first;
-    point_t second;
-    point_t third;
+    point_t first { 0, 0 };
+    point_t second { 0, 0 };
+    point_t third { 0, 0 };
     input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
     return new Diamond({ first, second, third });
   }
