@@ -36,7 +36,7 @@ namespace kushekbaev
             scalePoint = kushekbaev::makeScale(input);
             input >> scaleCoeff;
           }
-          catch (const std::out_of_range& e)
+          catch (const std::out_of_range&)
           {
             throw std::out_of_range("ERROR: Incorrect scale coefficient\n");
           }
@@ -45,11 +45,11 @@ namespace kushekbaev
         }
       }
     }
-    catch (const std::invalid_argument& e)
+    catch (const std::invalid_argument&)
     {
       throw std::invalid_argument("Some of inputed shapes were incorrectly inputed\n");
     }
-    catch (const std::bad_alloc& e)
+    catch (const std::bad_alloc&)
     {
       std::cerr << "ERROR: Bad allocation\n";
       kushekbaev::clearMemory(capacity, shapeCounter);
