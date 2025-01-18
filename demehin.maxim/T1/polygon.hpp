@@ -9,6 +9,7 @@ namespace demehin
   {
   public:
     Polygon(size_t vrtx_cnt, const point_t* vertex);
+    Polygon(Polygon&& plg);
     ~Polygon();
     double getArea() const override;
     rectangle_t getFrameRect() const override;

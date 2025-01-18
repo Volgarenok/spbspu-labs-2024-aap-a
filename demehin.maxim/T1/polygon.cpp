@@ -69,6 +69,13 @@ demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
   }
 }
 
+demehin::Polygon::Polygon(Polygon&& plg):
+  vrtx_cnt_(plg.vrtx_cnt_),
+  vertex_(plg.vertex_)
+{
+  plg.vertex_ = nullptr;
+}
+
 double demehin::Polygon::getArea() const
 {
   double area = 0;
