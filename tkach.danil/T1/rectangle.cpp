@@ -43,6 +43,6 @@ void tkach::Rectangle::move(const point_t& point_to_move)
 void tkach::Rectangle::doUnsafeScale(const double multiplier)
 {
   point_t center_frame = getFrameRect().pos;
-  changePointToAnotherPlusAdd(left_bot_point_, center_frame, multiplier);
-  changePointToAnotherPlusAdd(right_top_point_, center_frame, multiplier);
+  left_bot_point_ = changePointToAnotherPlusAdd(left_bot_point_, center_frame, multiplier);
+  right_top_point_ = changePointToAnotherPlusAdd(right_top_point_, center_frame, multiplier);
 }
