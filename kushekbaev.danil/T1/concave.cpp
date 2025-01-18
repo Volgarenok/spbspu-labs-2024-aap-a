@@ -35,11 +35,12 @@ namespace kushekbaev
     point_t lowerLeft { lowerLeftx, lowerLefty };
     point_t upperRight { upperRightx, upperRighty };
 
-    rectangle_t frame_rect;
-    frame_rect.height = upperRight.y - lowerLeft.y;
-    frame_rect.width = upperRight.x - lowerLeft.x;
-    frame_rect.pos.x = lowerLeft.x + frame_rect.width / 2;
-    frame_rect.pos.y = lowerLeft.y + frame_rect.height / 2;
+    double frame_rect_height = upperRight.y - lowerLeft.y;
+    double frame_rect_width = upperRight.x - lowerLeft.x;
+    double frame_rect_pos_x = lowerLeft.x + frame_rect_width / 2;
+    double frame_rect_pos_y = lowerLeft.y + frame_rect_height / 2;
+    point_t pos { frame_rect_pos_x, frame_rect_pos_y };
+    rectangle_t frame_rect { frame_rect_height, frame_rect_width, pos };
     return frame_rect;
   }
 
