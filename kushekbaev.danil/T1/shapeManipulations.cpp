@@ -1,5 +1,4 @@
 #include "shapeManipulations.hpp"
-#include <iostream>
 
 namespace kushekbaev
 {
@@ -16,7 +15,7 @@ namespace kushekbaev
     return total;
   }
 
-  void totalScaling(Shape** capacity, size_t shapeCounter, point_t scalePoint, double scaleCoeff)
+  void scaleTotal(Shape** capacity, size_t shapeCounter, point_t scalePoint, double scaleCoeff)
   {
     for (size_t i = 0; i < shapeCounter; ++i)
     {
@@ -27,7 +26,7 @@ namespace kushekbaev
     }
   }
 
-  void coordOutput(Shape** capacity, size_t shapeCounter, std::ostream& output)
+  void outputCoord(Shape** capacity, size_t shapeCounter, std::ostream& output)
   {
     for (size_t i = 0; i < shapeCounter; ++i)
     {
@@ -48,7 +47,6 @@ namespace kushekbaev
     for (size_t i = 0; i < shapeCounter; ++i)
     {
       delete capacity[i];
-      capacity[i] = nullptr;
     }
   }
 }

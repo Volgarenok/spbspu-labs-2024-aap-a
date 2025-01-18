@@ -5,9 +5,47 @@
 
 namespace kushekbaev
 {
+  Rectangle* makeRectangle(std::istream& input)
+  {
+    double x1 = 0;
+    double y1 = 0;
+    double x2 = 0;
+    double y2 = 0;
+    input >> x1 >> y1 >> x2 >> y2;
+    return new Rectangle({ x1, y1 }, { x2, y2 });
+  }
+
+  Concave* makeConcave(std::istream& input)
+  {
+    point_t first { 0, 0 };
+    point_t second { 0, 0 };
+    point_t third { 0, 0 };
+    point_t last { 0, 0 };
+    input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y >> last.x >> last.y;
+    return new Concave({ first, second, third, last });
+  }
+
+  Parallelogram* makeParallelogram(std::istream& input)
+  {
+    point_t first { 0, 0 };
+    point_t second { 0, 0 };
+    point_t third { 0, 0 };
+    input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
+    return new Parallelogram({ first, second, third });
+  }
+
+  Diamond* makeDiamond(std::istream& input)
+  {
+    point_t first { 0, 0 };
+    point_t second { 0, 0 };
+    point_t third { 0, 0 };
+    input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
+    return new Diamond({ first, second, third });
+  }
+
   void createShape(std::istream& input, Shape** capacity, size_t& shapeCounter, point_t& scalePoint, double& scaleCoeff)
   {
-    bool thereWasAScale = false;
+    bool scale_inputed = false;
     try
     {
       std::string shapeName;
@@ -40,7 +78,7 @@ namespace kushekbaev
           {
             throw std::out_of_range("ERROR: Incorrect scale coefficient\n");
           }
-          thereWasAScale = true;
+          scale_inputed = true;
           break;
         }
       }
@@ -55,13 +93,13 @@ namespace kushekbaev
       kushekbaev::clearMemory(capacity, shapeCounter);
     }
 
-    if (!thereWasAScale)
+    if (!scale_inputed)
     {
-      throw std::length_error("ERROR: there was no scale\n");
+      throw std::out_of_range("ERROR: there was no scale\n");
     }
     if (shapeCounter == 0)
     {
-      throw std::underflow_error("Shapeless input\n");
+      throw std::runtime_error("Shapeless input\n");
     }
   }
 }

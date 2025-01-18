@@ -12,9 +12,9 @@ namespace kushekbaev
     Diamond(const point_t middle, const point_t diffX, const point_t diffY);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void move(const point_t Z) override;
+    void move(const point_t scalePoint) override;
     void move(const double dx, const double dy) override;
-    void scale(const double V) override;
+    void scale(const double scaleCoeff) override;
 
   private:
     Parallelogram parallelogram_;

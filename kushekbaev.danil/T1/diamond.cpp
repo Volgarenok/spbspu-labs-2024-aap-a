@@ -5,15 +5,13 @@
 
 namespace kushekbaev
 {
-  Diamond::Diamond(point_t middle, point_t diffX, point_t diffY):
-    parallelogram_(
-      { middle.x - diffX.x, middle.y - diffX.y },
-      { middle.x + diffX.x, middle.y + diffX.y },
-      { middle.x, middle.y + diffY.y }
-    )
+  point_t parFirst { middle.x - diffX.x, middle.y - diffX.y };
+  point_t parSecond { middle.x + diffX.x, middle.y + diffX.y };
+  point_t parThird { middle.x, middle.y + diffY.y };
+  Diamond::Diamond(const point_t middle, const point_t diffX, const point_t diffY):
+    parallelogram_(parFirst, parSecond, parThird)
   {
-    if (parallelogram_.first_.x != parallelogram_.third_.x ||
-        parallelogram_.first_.y != parallelogram_.second_.y)
+    if (parFirst.x != parThird.x || parFirst.y != parSecond.y)
     {
       throw std::invalid_argument("Incorrect diamond\n");
     }
@@ -29,9 +27,9 @@ namespace kushekbaev
     return parallelogram_.getFrameRect();
   }
 
-  void Diamond::move(point_t Z)
+  void Diamond::move(point_t scalePoint)
   {
-    return parallelogram_.move(Z);
+    return parallelogram_.move(scalePoint);
   }
 
   void Diamond::move(double dx, double dy)
@@ -39,8 +37,8 @@ namespace kushekbaev
     return parallelogram_.move(dx, dy);
   }
 
-  void Diamond::scale(double V)
+  void Diamond::scale(double scaleCoeff)
   {
-    return parallelogram_.scale(V);
+    return parallelogram_.scale(scaleCoeff);
   }
 }

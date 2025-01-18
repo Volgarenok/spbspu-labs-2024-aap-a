@@ -4,11 +4,6 @@
 
 namespace kushekbaev
 {
-  bool parallelX(point_t first, point_t second)
-  {
-    return (first.x == second.x);
-  }
-
   bool isTriangle(point_t first, point_t second, point_t third)
   {
     double side1 = getLineLength(first, second);
@@ -26,44 +21,6 @@ namespace kushekbaev
     double thirdcheck = (third.x - last.x) * (first.y - third.y) - (first.x - third.x) * (third.y - last.y);
     return ((firstcheck > 0 && secondcheck > 0 && thirdcheck > 0) ||
             (firstcheck < 0 && secondcheck < 0 && thirdcheck < 0));
-  }
-
-  Rectangle* makeRectangle(std::istream& input)
-  {
-    double x1 = 0;
-    double y1 = 0;
-    double x2 = 0;
-    double y2 = 0;
-    input >> x1 >> y1 >> x2 >> y2;
-    return new Rectangle({ x1, y1 }, { x2, y2 });
-  }
-
-  Concave* makeConcave(std::istream& input)
-  {
-    point_t first { 0, 0 };
-    point_t second { 0, 0 };
-    point_t third { 0, 0 };
-    point_t last { 0, 0 };
-    input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y >> last.x >> last.y;
-    return new Concave({ first, second, third, last });
-  }
-
-  Parallelogram* makeParallelogram(std::istream& input)
-  {
-    point_t first { 0, 0 };
-    point_t second { 0, 0 };
-    point_t third { 0, 0 };
-    input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
-    return new Parallelogram({ first, second, third });
-  }
-
-  Diamond* makeDiamond(std::istream& input)
-  {
-    point_t first { 0, 0 };
-    point_t second { 0, 0 };
-    point_t third { 0, 0 };
-    input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
-    return new Diamond({ first, second, third });
   }
 
   point_t makeScale(std::istream& input)

@@ -12,9 +12,9 @@ namespace kushekbaev
 
   double getAreaOfTriangle(point_t first, point_t second, point_t third)
   {
-    double side1 = std::sqrt(std::pow((second.x - first.x), 2) + std::pow((second.y - first.y), 2));
-    double side2 = std::sqrt(std::pow((second.x - third.x), 2) + std::pow((second.y - third.y), 2));
-    double side3 = std::sqrt(std::pow((third.x - first.x), 2) + std::pow((third.y - first.y), 2));
+    double side1 = getLineLength(first, second);
+    double side2 = getLineLength(second, third);
+    double side3 = getLineLength(first, third);
     double p = (side1 + side2 + side3) / 2;
     return std::sqrt(p * (p - side1) * (p - side2) * (p - side3));
   }

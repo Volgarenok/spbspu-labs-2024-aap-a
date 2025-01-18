@@ -27,11 +27,11 @@ namespace kushekbaev
     return { upperRight_.x - lowerLeft_.x, upperRight_.y - lowerLeft_.y, { middleForX, middleForY } };
   }
 
-  void Rectangle::move(point_t Z)
+  void Rectangle::move(point_t scalePoint)
   {
     point_t middle = getFrameRect().pos;
-    double dx = Z.x - middle.x;
-    double dy = Z.y - middle.y;
+    double dx = scalePoint.x - middle.x;
+    double dy = scalePoint.y - middle.y;
 
     move(dx, dy);
   }
@@ -47,9 +47,9 @@ namespace kushekbaev
     }
   }
 
-  void Rectangle::scale(double V)
+  void Rectangle::scale(double scaleCoeff)
   {
-    if (V <= 0)
+    if (scaleCoeff <= 0)
     {
       throw std::out_of_range("Scale coefficient should be greater than zero\n");
     }
@@ -59,8 +59,8 @@ namespace kushekbaev
 
     for (point_t* point : points)
     {
-      point->x = middle.x + (point->x - middle.x) * V;
-      point->y = middle.y + (point->y - middle.y) * V;
+      point->x = middle.x + (point->x - middle.x) * scaleCoeff;
+      point->y = middle.y + (point->y - middle.y) * scaleCoeff;
     }
   }
 }

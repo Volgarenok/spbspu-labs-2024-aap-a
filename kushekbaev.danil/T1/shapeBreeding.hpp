@@ -2,7 +2,6 @@
 #define SHAPEBREEDING_HPP
 
 #include <istream>
-
 #include "rectangle.hpp"
 #include "concave.hpp"
 #include "parallelogram.hpp"
@@ -10,13 +9,8 @@
 
 namespace kushekbaev
 {
-  bool parallelX(const point_t first, const point_t second);
   bool isTriangle(const point_t first, const point_t second, const point_t third);
-  bool isPointInsideTriangle(point_t first, point_t second, point_t third, point_t final);
-  Rectangle* makeRectangle(std::istream& input);
-  Concave* makeConcave(std::istream& input);
-  Parallelogram* makeParallelogram(std::istream& input);
-  Diamond* makeDiamond(std::istream& input);
+  bool isPointInsideTriangle(const point_t first, const point_t second, const point_t third, const point_t final);
   point_t makeScale(std::istream& input);
 }
 
