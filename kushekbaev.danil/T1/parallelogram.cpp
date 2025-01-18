@@ -22,15 +22,14 @@ namespace kushekbaev
 
   double Parallelogram::getArea() const
   {
-    double p = (getLineLength(first_, second_) + getLineLength(second_, third_)
-      + getLineLength(first_, third_)) / 2;
-    double squaredAreaOfTriangle = (p) * (p - getLineLength(first_, second_))
-      * (p - getLineLength(second_, third_)) * (p - getLineLength(first_, third_));
+    double firstSecondLL = getLineLength(first_, second_);
+    double secondThirdLL = getLineLength(second_, third_);
+    double firstThirdLL = getLineLength(first_, third_);
+    double p = (firstSecondLL + secondThirdLL + firstThirdLL) / 2;
+    double squaredAreaOfTriangle = (p) * (p - firstSecondLL) * (p - secondThirdLL) * (p - firstThirdLL);
     double areaOfTriangle = std::sqrt(squaredAreaOfTriangle);
-
     return 2 * areaOfTriangle;
   }
-
   rectangle_t Parallelogram::getFrameRect() const
   {
     point_t firstalt({ first_.x + third_.x - second_.x, first_.y + third_.y - second_.y });
