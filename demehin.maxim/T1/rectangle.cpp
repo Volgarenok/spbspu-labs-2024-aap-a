@@ -7,6 +7,10 @@ namespace
 
   demehin::point_t* generateVrt(const demehin::point_t left_bot, const demehin::point_t right_top)
   {
+    if (right_top.x <= left_bot.x || right_top.y <= left_bot.y)
+    {
+      throw std::logic_error("incorrecr_shape");
+    }
     demehin::point_t* vrt = new demehin::point_t[4];
     vrt[0] = left_bot;
     vrt[1] = {left_bot.x, right_top.y};
@@ -15,25 +19,25 @@ namespace
     return vrt;
   }
 
-  demehin::Polygon createPolygonForRect(const demehin::point_t left_bot, const demehin::point_t right_top)
-  {
+  //demehin::Polygon createPolygonForRect(const demehin::point_t left_bot, const demehin::point_t right_top)
+  //{
     //demehin::point_t* vrt = new demehin::point_t[4];
     //vrt[0] = left_bot;
     //vrt[1] = {left_bot.x, right_top.y};
     //vrt[2] = right_top;
     //vrt[3] = {right_top.x, left_bot.y};
-    if (right_top.x <= left_bot.x || right_top.y <= left_bot.y)
-    {
-      throw std::logic_error("incorrect shape");
-    }
-    demehin::point_t* vrt = generateVrt(left_bot, right_top);
-    demehin::Polygon plg(4, vrt);
-    return plg;
-  }
+    //if (right_top.x <= left_bot.x || right_top.y <= left_bot.y)
+    //{
+      //throw std::logic_error("incorrect shape");
+    //}
+    //demehin::point_t* vrt = generateVrt(left_bot, right_top);
+    //demehin::Polygon plg(4, vrt);
+    //return plg;
+  //}
 }
 
 demehin::Rectangle::Rectangle(point_t left_bot, point_t right_top):
-  plg_(createPolygonForRect(left_bot, right_top))
+  plg_(4, generateVrt(left_bot, right_top))
 {
   //if (right_top.x <= left_bot.x || right_top.y <= left_bot.y)
   //{
