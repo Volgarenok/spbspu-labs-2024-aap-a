@@ -20,7 +20,7 @@ int main()
   {
     getShapes(std::cin, shapes, p, k, wrong_figure);
   }
-  catch (const std::bad_alloc &e)
+  catch (const std::bad_alloc &)
   {
     std::cerr << "Memory fail\n";
     return 2;

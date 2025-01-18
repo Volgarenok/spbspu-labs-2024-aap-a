@@ -151,8 +151,7 @@ void abramov::CompositeShape::unsafeScale(double k)
 
 abramov::Shape **expandArray(abramov::Shape **arr, size_t capacity)
 {
-  abramov::Shape **array = nullptr;
-  array = new abramov::Shape*[capacity * 2];
+  abramov::Shape **array = new abramov::Shape*[capacity * 2];
   for (size_t i = 0; i < capacity; ++i)
   {
     array[i] = arr[i];
@@ -221,7 +220,7 @@ abramov::CompositeShape *abramov::CompositeShape::clone() const
   {
     return new CompositeShape(*this);
   }
-  catch (std::bad_alloc &e)
+  catch (std::bad_alloc &)
   {
     return nullptr;
   }

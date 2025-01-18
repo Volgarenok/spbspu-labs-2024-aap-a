@@ -25,7 +25,7 @@ void abramov::getShapes(std::istream &in, Composite &shapes, point_t &p, double 
         shapes.push_back(cq);
       }
     }
-    catch (const std::logic_error &e)
+    catch (const std::logic_error &)
     {
       flag = true;
     }

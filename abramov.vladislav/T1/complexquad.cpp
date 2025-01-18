@@ -100,7 +100,7 @@ void abramov::createCQs(point_t p1, point_t p2, ComplexQuad &cq1, ComplexQuad &c
 }
 
 abramov::ComplexQuad::ComplexQuad():
-  points{{0.0, 0.0}, {10.0, 10.0}, {2.0, 0.0}, {0.0, 3.0}}
+  points{ {0.0, 0.0}, {10.0, 10.0}, {2.0, 0.0}, {0.0, 3.0} }
 {}
 
 abramov::ComplexQuad::ComplexQuad(point_t A, point_t B, point_t C, point_t D):
