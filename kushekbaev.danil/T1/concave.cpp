@@ -27,21 +27,19 @@ namespace kushekbaev
 
   rectangle_t Concave::getFrameRect() const
   {
-    point_t lowerLeft { 0, 0 };
-    lowerLeft.x = std::min(std::min(std::min(first_.x, second_.x), third_.x), last_.x);
-    lowerLeft.y = std::min(std::min(std::min(first_.y, second_.y), third_.y), last_.y);
+    double lowerLeftx = std::min(std::min(std::min(first_.x, second_.x), third_.x), last_.x);
+    double lowerLefty = std::min(std::min(std::min(first_.y, second_.y), third_.y), last_.y);
+    double upperRightx = std::max(std::max(std::max(first_.x, second_.x), third_.x), last_.x);
+    double upperRighty = std::max(std::max(std::max(first_.y, second_.y), third_.y), last_.y);
 
-    point_t upperRight { 0, 0 };
-    upperRight.x = std::max(std::max(std::max(first_.x, second_.x), third_.x), last_.x);
-    upperRight.y = std::max(std::max(std::max(first_.y, second_.y), third_.y), last_.y);
+    point_t lowerLeft { lowerLeftx, lowerLefty };
+    point_t upperRight { upperRightx, upperRighty };
 
-    double frame_rectH = upperRight.y - lowerLeft.y;
-    double frame_rectW = upperRight.x - lowerLeft.x;
-    double frame_rectX = lowerLeft.x + frame_rectW / 2;
-    double frame_rectY = lowerLeft.y + frame_rectH / 2;
-
-    point_t pos { frame_rectX, frame_rectY };
-    rectangle_t frame_rect { frame_rectH, frame_rectW, pos };
+    rectangle_t frame_rect;
+    frame_rect.height = upperRight.y - lowerLeft.y;
+    frame_rect.width = upperRight.x - lowerLeft.x;
+    frame_rect.pos.x = lowerLeft.x + frame_rect.width / 2;
+    frame_rect.pos.y = lowerLeft.y + frame_rect.height / 2;
     return frame_rect;
   }
 
