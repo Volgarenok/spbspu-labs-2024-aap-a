@@ -5,9 +5,7 @@
 tkach::Regular tkach::Ring::getReg(size_t sides_amount, const point_t& center, double radius)
 {
   const double step_in_angle = 2.0 * std::acos(-1.0) / sides_amount;
-  point_t temp_point;
-  temp_point.x = radius * std::cos(step_in_angle) + center.x;
-  temp_point.y = radius * std::sin(step_in_angle) + center.y;
+  point_t temp_point= {radius * std::cos(step_in_angle) + center.x, radius * std::sin(step_in_angle) + center.y};
   point_t new_point = {(center.x + radius + temp_point.x) / 2.0, (temp_point.y + center.y) / 2.0};
   return {center, {center.x + radius, center.y}, new_point};
 }

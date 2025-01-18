@@ -1,42 +1,41 @@
 #include "makeshapes.hpp"
 #include <string>
+#include "regular.hpp"
+#include "ring.hpp"
+#include "rectangle.hpp"
 
 namespace
 {
+  void inputDoubleArrayOfFour(std::istream& in, double* double_array, size_t size)
+  {
+    for (size_t i = 0; i < size; ++i)
+    {
+      in >> double_array[i];
+    }
+  }
+
   tkach::Rectangle* make_rectangle(std::istream& in)
   {
     double lb_rt_points[4] = {};
-    for (size_t i = 0; i < 4; ++i)
-    {
-      in >> lb_rt_points[i];
-    }
-    tkach::Rectangle* rectangle = new tkach::Rectangle({lb_rt_points[0], lb_rt_points[1]}, {lb_rt_points[2], lb_rt_points[3]});
-    return rectangle;
+    inputDoubleArrayOfFour(in, lb_rt_points, 4);
+    return new tkach::Rectangle({lb_rt_points[0], lb_rt_points[1]}, {lb_rt_points[2], lb_rt_points[3]});
   }
 
   tkach::Ring* make_ring(std::istream& in)
   {
     double ring_feature[4] = {};
-    for (size_t i = 0; i < 4; ++i)
-    {
-      in >> ring_feature[i];
-    }
-    tkach::Ring* ring = new tkach::Ring({ring_feature[0], ring_feature[1]}, ring_feature[2], ring_feature[3]);
-    return ring;
+    inputDoubleArrayOfFour(in, ring_feature, 4);
+    return new tkach::Ring({ring_feature[0], ring_feature[1]}, ring_feature[2], ring_feature[3]);
   }
 
   tkach::Regular* make_regular(std::istream& in)
   {
     double points_x_y[6] = {};
-    for (size_t i = 0; i < 6; ++i)
-    {
-      in >> points_x_y[i];
-    }
+    inputDoubleArrayOfFour(in, points_x_y, 6);
     tkach::point_t point1 = {points_x_y[0], points_x_y[1]};
     tkach::point_t point2 = {points_x_y[2], points_x_y[3]};
     tkach::point_t point3 = {points_x_y[4], points_x_y[5]};
-    tkach::Regular* regular = new tkach::Regular(point1, point2, point3);
-    return regular;
+    return new tkach::Regular(point1, point2, point3);
   }
 }
 

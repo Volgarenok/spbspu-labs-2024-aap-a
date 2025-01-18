@@ -15,6 +15,8 @@ namespace tkach
     double height;
     point_t pos;
   };
+  void addToPoint(point_t& change_point, double add_to_x, double add_to_y);
+  point_t changePointToAnotherPlusAdd(const point_t& first_point, const point_t& another_point, double multiplier);
 }
 
 #endif

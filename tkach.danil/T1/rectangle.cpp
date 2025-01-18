@@ -25,9 +25,7 @@ tkach::rectangle_t tkach::Rectangle::getFrameRect() const
 {
   double height = right_top_point_.y - left_bot_point_.y;
   double width = right_top_point_.x - left_bot_point_.x;
-  double frame_rect_pos_x = left_bot_point_.x + (right_top_point_.x - left_bot_point_.x) / 2.0;
-  double frame_rect_pos_y = left_bot_point_.y + (right_top_point_.y - left_bot_point_.y) / 2.0;
-  return {width, height, {frame_rect_pos_x, frame_rect_pos_y}};
+  return {width, height, changePointToAnotherPlusAdd(right_top_point_, left_bot_point_, 0.5)};
 }
 
 void tkach::Rectangle::move(const double add_to_x, const double add_to_y)
@@ -45,8 +43,6 @@ void tkach::Rectangle::move(const point_t& point_to_move)
 void tkach::Rectangle::doUnsafeScale(const double multiplier)
 {
   point_t center_frame = getFrameRect().pos;
-  left_bot_point_.x = center_frame.x - (center_frame.x - left_bot_point_.x) * multiplier;
-  left_bot_point_.y = center_frame.y - (center_frame.y - left_bot_point_.y) * multiplier;
-  right_top_point_.x = center_frame.x + (right_top_point_.x - center_frame.x) * multiplier;
-  right_top_point_.y = center_frame.y + (right_top_point_.y - center_frame.y) * multiplier;
+  changePointToAnotherPlusAdd(left_bot_point_, center_frame, multiplier);
+  changePointToAnotherPlusAdd(right_top_point_, center_frame, multiplier);
 }

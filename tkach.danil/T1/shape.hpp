@@ -5,7 +5,6 @@
 
 namespace tkach
 {
-  void addToPoint(point_t& change_point, double add_to_x, double add_to_y);
   class Shape
   {
   public:

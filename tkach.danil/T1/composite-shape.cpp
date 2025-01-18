@@ -5,6 +5,16 @@
 
 namespace
 {
+  double getTotalArea(const tkach::Shape* const* const shape_array, const size_t counter_of_shapes)
+  {
+    double sum = 0.0;
+    for (size_t i = 0; i < counter_of_shapes; ++i)
+    {
+      sum += shape_array[i]->getArea();
+    }
+    return sum;
+  }
+
   void fillArrayWithClones(tkach::Shape** now, const tkach::Shape* const* const other, const size_t size, size_t& true_size)
   {
     for (size_t i = 0; i < size; ++i)
@@ -111,6 +121,8 @@ tkach::rectangle_t tkach::CompositeShape::getFrameRect() const
   rectangle_t shape_rect = shapes_[0]->getFrameRect();
   left = shape_rect.pos.x - shape_rect.width / 2.0;
   bot = shape_rect.pos.y - shape_rect.height / 2.0;
+  right = shape_rect.pos.x + shape_rect.width / 2.0;
+  top = shape_rect.pos.y + shape_rect.height / 2.0;
   for (size_t i = 1; i < size_; ++i)
   {
     shape_rect = shapes_[i]->getFrameRect();

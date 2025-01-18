@@ -17,6 +17,43 @@ namespace
       delete shapes_array[i];
     }
   }
+
+  tkach::point_t setFrameRectLeftPoint(const tkach::rectangle_t& frame_rect)
+  {
+    return {frame_rect.pos.x - frame_rect.width / 2.0, frame_rect.pos.y - frame_rect.height / 2.0};
+  }
+
+  tkach::point_t setFrameRectRightPoint(const tkach::rectangle_t& frame_rect)
+  {
+    return {frame_rect.pos.x + frame_rect.width / 2.0, frame_rect.pos.y + frame_rect.height / 2.0};
+  }
+
+  void setFrameRectPoints(const tkach::rectangle_t& frame_rect, tkach::point_t& left_bot_point, tkach::point_t& right_top_point)
+  {
+    left_bot_point = setFrameRectLeftPoint(frame_rect);
+    right_top_point = setFrameRectRightPoint(frame_rect);
+  }
+
+  template< typename Container >
+  std::ostream& printFrameRects(std::ostream& Out, const Container& Shapes, const size_t Size)
+  {
+    tkach::rectangle_t frame_rect = Shapes[0]->getFrameRect();
+    tkach::point_t left_bot_point = setFrameRectLeftPoint(frame_rect);
+    tkach::point_t right_top_point = setFrameRectRightPoint(frame_rect);
+    Out << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
+    for (size_t i = 1; i < Size; ++i)
+    {
+      frame_rect = Shapes[i]->getFrameRect();
+      setFrameRectPoints(frame_rect, left_bot_point, right_top_point);
+      Out << " " << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
+    }
+    return Out;
+  }
+
+  std::ostream& printAllFrameRectsFromCompShape(std::ostream& out, const tkach::CompositeShape& shape_array)
+  {
+    return printFrameRects(out, shape_array, shape_array.size());
+  }
 }
 
 int main()
@@ -26,7 +63,7 @@ int main()
   std::string shape_name;
   bool incorrect_shape = false;
   double scale_coef = 0.0;
-  point_t scale_point;
+  double scale_point_x = 0.0, scale_point_y = 0.0;
   while(!std::cin.eof() && shape_name != "SCALE")
   {
     std::cin >> shape_name;
@@ -54,14 +91,8 @@ int main()
     }
     if (shape_name == "SCALE")
     {
-      std::cin >> scale_point.x >> scale_point.y;
+      std::cin >> scale_point_x >> scale_point_y;
       std::cin >> scale_coef;
-      if (scale_coef <= 0)
-      {
-        deleteShapesFromCompositeShape(shapes_array);
-        std::cerr << "Error: scale coefficent need to be bigger than 0\n";
-        return 1;
-      }
     }
   }
   if (std::cin.eof())
@@ -79,12 +110,13 @@ int main()
     std::cerr << "Zero correct shapes\n";
     return 1;
   }
+  point_t scale_point = {scale_point_x, scale_point_y};
   std::cout << std::fixed << std::setprecision(1);
   try
   {
     std::cout << shapes_array.getArea() << " ";
     printAllFrameRectsFromCompShape(std::cout, shapes_array) << "\n";
-    doUnsaveIsoScaleCompShape(shapes_array, scale_coef, scale_point);
+    doSaveIsoScaleCompShape(shapes_array, scale_coef, scale_point);
     std::cout << shapes_array.getArea() << " ";
     printAllFrameRectsFromCompShape(std::cout, shapes_array) << "\n";
   }

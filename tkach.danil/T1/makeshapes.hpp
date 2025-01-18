@@ -2,9 +2,7 @@
 #define MAKESHAPES_HPP
 
 #include <iostream>
-#include "regular.hpp"
-#include "ring.hpp"
-#include "rectangle.hpp"
+#include "shape.hpp"
 
 namespace tkach
 {
