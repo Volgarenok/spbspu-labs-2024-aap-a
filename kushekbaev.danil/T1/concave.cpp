@@ -63,7 +63,7 @@ namespace kushekbaev
   {
     if (scaleCoeff <= 0)
     {
-      throw std::domain_error("Scale coefficient should be greater than zero\n");
+      throw std::logic_error("Scale coefficient should be greater than zero\n");
     }
     point_t middle = getFrameRect().pos;
     size_t size = 4;

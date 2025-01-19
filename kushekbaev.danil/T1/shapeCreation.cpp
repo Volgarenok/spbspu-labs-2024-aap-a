@@ -90,9 +90,9 @@ namespace kushekbaev
             scalePoint = kushekbaev::makeScale(input);
             input >> scaleCoeff;
           }
-          catch (const std::domain_error&)
+          catch (const std::logic_error&)
           {
-            throw std::domain_error("ERROR: Incorrect scale coefficient\n");
+            throw std::logic_error("ERROR: Incorrect scale coefficient\n");
           }
           scale_inputed = true;
           break;
@@ -111,7 +111,7 @@ namespace kushekbaev
 
     if (!scale_inputed)
     {
-      throw std::domain_error("ERROR: there was no scale\n");
+      throw std::logic_error("ERROR: there was no scale\n");
     }
     if (shapeCounter == 0)
     {

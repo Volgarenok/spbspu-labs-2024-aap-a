@@ -28,7 +28,7 @@ int main()
       invalid_argument = true;
     }
 
-    catch (const std::domain_error&)
+    catch (const std::logic_error&)
     {
       std::cerr << "Bad SCALE command\n";
       kushekbaev::clearMemory(capacity, shapeCounter);
@@ -58,7 +58,7 @@ int main()
     kushekbaev::clearMemory(capacity, shapeCounter);
   }
 
-  catch (const std::out_of_range&)
+  catch (const std::logic_error&)
   {
     std::cerr << "Scale coefficient must be greater than zero\n";
     kushekbaev::clearMemory(capacity, shapeCounter);
