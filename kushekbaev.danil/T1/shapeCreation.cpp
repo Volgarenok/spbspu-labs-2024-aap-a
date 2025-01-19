@@ -3,16 +3,26 @@
 #include "shapeBreeding.hpp"
 #include "shapeManipulations.hpp"
 
+namespace
+{
+  double readDoubleInput(const size_t size, double *arr, std::istream& input)
+  {
+    for (size_t i = 0; i < size; i++)
+    {
+      input >> arr[i];
+    }
+    return *arr;
+  }
+}
+
 namespace kushekbaev
 {
   Rectangle* makeRectangle(std::istream& input)
   {
-    double x1 = 0;
-    double y1 = 0;
-    double x2 = 0;
-    double y2 = 0;
-    input >> x1 >> y1 >> x2 >> y2;
-    return new Rectangle({ x1, y1 }, { x2, y2 });
+    const size_t size = 4;
+    double arr[size];
+    readDoubleInput(4, arr, input);
+    return new Rectangle({ arr[0], arr[1] }, { arr[2], arr[3] });
   }
 
   Concave* makeConcave(std::istream& input)
