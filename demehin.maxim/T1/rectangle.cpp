@@ -7,11 +7,6 @@ namespace
 
   demehin::Polygon createPolygonForRect(const demehin::point_t left_bot, const demehin::point_t right_top)
   {
-    if (right_top.x <= left_bot.x || right_top.y <= left_bot.y)
-    {
-      throw std::logic_error("incorrect_shape");
-    }
-
     demehin::point_t vrt[4] = {};
     vrt[0] = left_bot;
     vrt[1] = {left_bot.x, right_top.y};
@@ -27,6 +22,10 @@ namespace
 demehin::Rectangle::Rectangle(point_t left_bot, point_t right_top):
   plg_(createPolygonForRect(left_bot, right_top))
 {
+  if (right_top.x <= left_bot.x || right_top.y <= left_bot.y)
+    {
+      throw std::logic_error("incorrect_shape");
+    }
 }
 
 double demehin::Rectangle::getArea() const
