@@ -21,35 +21,41 @@ namespace kushekbaev
   {
     const size_t size = 4;
     double arr[size];
-    readDoubleInput(4, arr, input);
+    readDoubleInput(size, arr, input);
     return new Rectangle({ arr[0], arr[1] }, { arr[2], arr[3] });
   }
 
   Concave* makeConcave(std::istream& input)
   {
-    point_t first { 0, 0 };
-    point_t second { 0, 0 };
-    point_t third { 0, 0 };
-    point_t last { 0, 0 };
-    input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y >> last.x >> last.y;
+    const size_t size = 8;
+    double arr[size];
+    readDoubleInput(size, arr, input);
+    point_t first { arr[0], arr[1] };
+    point_t second { arr[2], arr[3] };
+    point_t third { arr[4], arr[5] };
+    point_t last { arr[6], arr[7] };
     return new Concave({ first, second, third, last });
   }
 
   Parallelogram* makeParallelogram(std::istream& input)
   {
-    point_t first { 0, 0 };
-    point_t second { 0, 0 };
-    point_t third { 0, 0 };
-    input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
+    const size_t size = 6;
+    double arr[size];
+    readDoubleInput(size, arr, input);
+    point_t first { arr[0], arr[1] };
+    point_t second { arr[2], arr[3] };
+    point_t third { arr[4], arr[5] };
     return new Parallelogram({ first, second, third });
   }
 
   Diamond* makeDiamond(std::istream& input)
   {
-    point_t first { 0, 0 };
-    point_t second { 0, 0 };
-    point_t third { 0, 0 };
-    input >> first.x >> first.y >> second.x >> second.y >> third.x >> third.y;
+    const size_t size = 6;
+    double arr[size];
+    readDoubleInput(size, arr, input);
+    point_t first { arr[0], arr[1] };
+    point_t second { arr[2], arr[3] };
+    point_t third { arr[4], arr[5] };
     return new Diamond({ first, second, third });
   }
 
