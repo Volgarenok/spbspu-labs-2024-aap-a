@@ -8,8 +8,8 @@ namespace kushekbaev
   {
     for (point_t *point: points)
     {
-      point.x += dx;
-      point.y += dy;
+      point->x += dx;
+      point->y += dy;
     }
   }
 

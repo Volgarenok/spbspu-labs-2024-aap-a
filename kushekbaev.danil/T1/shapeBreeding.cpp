@@ -1,6 +1,7 @@
 #include "shapeBreeding.hpp"
 #include <stdexcept>
 #include "base-types.hpp"
+#include "shapeUtils.hpp"
 
 namespace kushekbaev
 {
