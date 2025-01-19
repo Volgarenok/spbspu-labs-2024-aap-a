@@ -39,6 +39,16 @@ namespace
     return lhs;
   }
 
+  demehin::point_t* copyCords(const demehin::point_t* vertex, size_t vrt_cnt)
+  {
+    demehin::point_t* vrt = new demehin::point_t[vrt_cnt];
+    for (size_t i = 0; i < vrt_cnt; i++)
+    {
+      vrt[i] = vertex[i];
+    }
+    return vrt;
+  }
+
 }
 
 demehin::Polygon::~Polygon()
@@ -48,15 +58,15 @@ demehin::Polygon::~Polygon()
 
 demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
   vrtx_cnt_(vrtx_cnt),
-  vertex_(nullptr)
+  vertex_(copyCords(vertex, vrtx_cnt))
 {
   if (vrtx_cnt < 3 || hasSameVertex(vrtx_cnt, vertex))
   {
     throw std::logic_error("incorrect_shape");
   }
 
-  vertex_ = new point_t[vrtx_cnt];
-  setVertex(vertex, vrtx_cnt);
+  //vertex_ = new point_t[vrtx_cnt];
+  //setVertex(vertex, vrtx_cnt);
 }
 
 double demehin::Polygon::getArea() const
