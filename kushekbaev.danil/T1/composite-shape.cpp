@@ -153,7 +153,7 @@ namespace kushekbaev
           created[i] = array[i];
         }
     }
-    catch (const std::exception& e)
+    catch (const std::exception&)
     {
       delete[] created;
       return nullptr;
