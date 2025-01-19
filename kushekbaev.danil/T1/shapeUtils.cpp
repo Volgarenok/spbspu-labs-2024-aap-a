@@ -3,6 +3,24 @@
 
 namespace kushekbaev
 {
+  void movePoints(point_t** points, size_t size, double dx, double dy)
+  {
+    for (size_t i = 0; i < size; i++)
+    {
+      points[i]->x += dx;
+      points[i]->y += dy;
+    }
+  }
+
+  void scalePoints(point_t** points, size_t size, double scaleCoeff, point_t middle)
+  {
+    for (size_t i = 0; i < size; i++)
+    {
+      points[i]->x = middle.x + scaleCoeff * (points[i]->x - middle.x);
+      points[i]->y = middle.y + scaleCoeff * (points[i]->y - middle.y);
+    }
+  }
+
   double getLineLength(point_t first, point_t second)
   {
     double width = (first.x - second.x);

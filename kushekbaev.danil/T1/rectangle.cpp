@@ -1,6 +1,5 @@
 #include "rectangle.hpp"
 #include <stdexcept>
-#include <array>
 #include "base-types.hpp"
 #include "shapeUtils.hpp"
 
@@ -39,8 +38,9 @@ namespace kushekbaev
 
   void Rectangle::move(double dx, double dy)
   {
-    std::array<point_t*, 2> points = { &lowerLeft_, &upperRight_, };
-    movePoints(points, dx, dy);
+    size_t size = 2;
+    point_t* points[] = { &lowerLeft_, &upperRight_ };
+    movePoints(points, size, dx, dy);
   }
 
   void Rectangle::scale(double scaleCoeff)
@@ -51,7 +51,8 @@ namespace kushekbaev
     }
     point_t middle = getFrameRect().pos;
 
-    std::array<point_t*, 2> points = { &lowerLeft_, &upperRight_, };
-    scalePoints(points, scaleCoeff, middle);
+    size_t size = 2;
+    point_t* points[] = { &lowerLeft_, &upperRight_ };
+    scalePoints(points, size, scaleCoeff, middle);
   }
 }

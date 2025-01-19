@@ -1,7 +1,6 @@
 #include "diamond.hpp"
 #include <cmath>
 #include <stdexcept>
-#include <array>
 
 namespace kushekbaev
 {

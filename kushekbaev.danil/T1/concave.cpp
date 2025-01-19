@@ -1,6 +1,5 @@
 #include "concave.hpp"
 #include <stdexcept>
-#include <array>
 #include "base-types.hpp"
 #include "shapeBreeding.hpp"
 #include "shapeUtils.hpp"
@@ -55,8 +54,9 @@ namespace kushekbaev
 
   void Concave::move(double dx, double dy)
   {
-    std::array<point_t*, 4> points = { &first_, &second_, &third_, &last_ };
-    movePoints(points, dx, dy);
+    size_t size = 4;
+    point_t* points[] = { &first_, &second_, &third_, &last_ };
+    movePoints(points, size, dx, dy);
   }
 
   void Concave::scale(double scaleCoeff)
@@ -66,7 +66,8 @@ namespace kushekbaev
       throw std::domain_error("Scale coefficient should be greater than zero\n");
     }
     point_t middle = getFrameRect().pos;
-    std::array<point_t*, 4> points = { &first_, &second_, &third_, &last_ };
-    scalePoints(points, scaleCoeff, middle);
+    size_t size = 4;
+    point_t* points[] = { &first_, &second_, &third_, &last_ };
+    scalePoints(points, size, scaleCoeff, middle);
   }
 }

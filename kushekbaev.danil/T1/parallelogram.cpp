@@ -2,13 +2,12 @@
 #include <stdexcept>
 #include <cmath>
 #include <cctype>
-#include <array>
 #include "shapeBreeding.hpp"
 #include "shapeUtils.hpp"
 
 namespace
 {
-  bool parallelX(kushekbaev::point_t first, kushekbaev::point_t second)
+  bool isParallelToX(kushekbaev::point_t first, kushekbaev::point_t second)
   {
     return (first.x == second.x);
   }
@@ -21,8 +20,8 @@ namespace kushekbaev
     second_(second),
     third_(third)
   {
-    bool isParallelToX = parallelX(first, second) || parallelX (second, third) || parallelX(first, third);
-    if (!isTriangle(first, second, third) || !isParallelToX)
+    bool isParallelToXflag = isParallelToX(first, second) || isParallelToX (second, third) || isParallelToX(first, third);
+    if (!isTriangle(first, second, third) || !isParallelToXflag)
     {
       throw std::invalid_argument("Incorrect parallelogram\n");
     }
@@ -55,16 +54,17 @@ namespace kushekbaev
   void Parallelogram::move(point_t scalePoint)
   {
     point_t middle = getFrameRect().pos;
-    double dX = scalePoint.x - middle.x;
-    double dY = scalePoint.y - middle.y;
+    double dx = scalePoint.x - middle.x;
+    double dy = scalePoint.y - middle.y;
 
-    move(dX, dY);
+    move(dx, dy);
   }
 
   void Parallelogram::move(double dx, double dy)
   {
-    std::array<point_t*, 3> points = { &first_, &second_, &third_, };
-    movePoints(points, dx, dy);
+    size_t size = 3;
+    point_t* points[] = { &first_, &second_, &third_ };
+    movePoints(points, size, dx, dy);
   }
 
   void Parallelogram::scale(double scaleCoeff)
@@ -75,7 +75,8 @@ namespace kushekbaev
     }
     point_t middle = getFrameRect().pos;
 
-    std::array<point_t*, 3> points = { &first_, &second_, &third_ };
-    scalePoints(points, scaleCoeff, middle);
+    size_t size = 3;
+    point_t* points[] = { &first_, &second_, &third_ };
+    scalePoints(points, size, scaleCoeff, middle);
   }
 }
