@@ -48,14 +48,14 @@ demehin::Polygon::~Polygon()
 
 demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
   vrtx_cnt_(vrtx_cnt),
-  vertex_(new point_t[vrtx_cnt])
+  vertex_(nullptr)
 {
   if (vrtx_cnt < 3)
   {
     throw std::logic_error("incorrect_shape");
   }
 
-  //vertex_ = new point_t[vrtx_cnt];
+  vertex_ = new point_t[vrtx_cnt];
 
   if (vertex != nullptr)
   {
