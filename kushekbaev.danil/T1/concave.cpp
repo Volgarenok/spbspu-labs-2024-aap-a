@@ -6,7 +6,7 @@
 
 namespace kushekbaev
 {
-  Concave::Concave(const point_t first, const point_t second, const point_t third, const point_t last):
+  Concave::Concave(point_t first, point_t second, point_t third, point_t last):
     points_{first, second, third, last}
   {
     if (!isTriangle(first, second, third) || !isPointInsideTriangle(first, second, third, last))
