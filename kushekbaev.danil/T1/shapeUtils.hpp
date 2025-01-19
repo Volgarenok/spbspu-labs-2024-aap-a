@@ -1,6 +1,7 @@
 #ifndef SHAPEUTILS_HPP
 #define SHAPEUTILS_HPP
 
+#include <cstddef>
 #include "base-types.hpp"
 
 namespace kushekbaev
