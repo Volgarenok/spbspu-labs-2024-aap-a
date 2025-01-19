@@ -32,7 +32,7 @@ namespace
   {
     *pts = new demehin::point_t[capacity];
     size_t size = 0;
-    demehin::point_t vrt;
+    demehin::point_t vrt = {0, 0};
     while (in >> vrt.x >> vrt.y)
     {
       if (size >= capacity)
