@@ -50,23 +50,13 @@ demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
   vrtx_cnt_(vrtx_cnt),
   vertex_(nullptr)
 {
-  if (vrtx_cnt < 3)
+  if (vrtx_cnt < 3 || hasSameVertex(vrtx_cnt, vertex))
   {
     throw std::logic_error("incorrect_shape");
   }
 
   vertex_ = new point_t[vrtx_cnt];
-
-  if (vertex != nullptr)
-  {
-    setVertex(vertex, vrtx_cnt);
-
-    if (hasSameVertex(vrtx_cnt, vertex_))
-    {
-      delete[] vertex_;
-      throw std::logic_error("incorrect shape");
-    }
-  }
+  setVertex(vertex, vrtx_cnt);
 }
 
 double demehin::Polygon::getArea() const

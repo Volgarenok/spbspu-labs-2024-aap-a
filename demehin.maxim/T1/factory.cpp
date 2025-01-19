@@ -72,16 +72,16 @@ namespace
     {
       plg = new demehin::Polygon(cord_cnt, vrt);
     }
-    catch (const std::bad_alloc& e)
+    catch (const std::exception&)
     {
       delete[] vrt;
-      throw e;
+      throw;
     }
-    catch (const std::logic_error& e)
-    {
-      delete[] vrt;
-      throw e;
-    }
+   // catch (const std::logic_error&)
+    //{
+      //delete[] vrt;
+      //throw;
+    //}
     delete[] vrt;
     return plg;
   }
