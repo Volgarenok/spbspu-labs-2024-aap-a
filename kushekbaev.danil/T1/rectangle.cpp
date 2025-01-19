@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <array>
 #include "base-types.hpp"
+#include "shapeUtils.hpp"
 
 namespace kushekbaev
 {
@@ -39,12 +40,7 @@ namespace kushekbaev
   void Rectangle::move(double dx, double dy)
   {
     std::array<point_t*, 2> points = { &lowerLeft_, &upperRight_, };
-
-    for (point_t* point : points)
-    {
-      point->x += dx;
-      point->y += dy;
-    }
+    movePoints(points, dx, dy);
   }
 
   void Rectangle::scale(double scaleCoeff)
@@ -56,11 +52,6 @@ namespace kushekbaev
     point_t middle = getFrameRect().pos;
 
     std::array<point_t*, 2> points = { &lowerLeft_, &upperRight_, };
-
-    for (point_t* point : points)
-    {
-      point->x = middle.x + (point->x - middle.x) * scaleCoeff;
-      point->y = middle.y + (point->y - middle.y) * scaleCoeff;
-    }
+    scalePoints(points, scaleCoeff, middle);
   }
 }

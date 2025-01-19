@@ -3,8 +3,8 @@
 #include <cmath>
 #include <cctype>
 #include <array>
-#include "shape.hpp"
 #include "shapeBreeding.hpp"
+#include "shapeUtils.hpp"
 
 namespace
 {
@@ -63,13 +63,8 @@ namespace kushekbaev
 
   void Parallelogram::move(double dx, double dy)
   {
-    std::array<point_t*, 3> points = { &first_, &second_, &third_};
-
-    for (point_t* point: points)
-    {
-      point->x += dx;
-      point->y += dy;
-    }
+    std::array<point_t*, 3> points = { &first_, &second_, &third_, };
+    movePoints(points, dx, dy);
   }
 
   void Parallelogram::scale(double scaleCoeff)
@@ -81,11 +76,6 @@ namespace kushekbaev
     point_t middle = getFrameRect().pos;
 
     std::array<point_t*, 3> points = { &first_, &second_, &third_ };
-
-    for (point_t* point: points)
-    {
-      point->x = middle.x + (point->x - middle.x) * scaleCoeff;
-      point->y = middle.y + (point->y - middle.y) * scaleCoeff;
-    }
+    scalePoints(points, scaleCoeff, middle);
   }
 }

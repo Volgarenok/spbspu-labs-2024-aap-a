@@ -3,6 +3,7 @@
 #include <array>
 #include "base-types.hpp"
 #include "shapeBreeding.hpp"
+#include "shapeUtils.hpp"
 
 namespace kushekbaev
 {
@@ -55,12 +56,7 @@ namespace kushekbaev
   void Concave::move(double dx, double dy)
   {
     std::array<point_t*, 4> points = { &first_, &second_, &third_, &last_ };
-
-    for (point_t* point: points)
-    {
-      point->x += dx;
-      point->y += dy;
-    }
+    movePoints(points, dx, dy);
   }
 
   void Concave::scale(double scaleCoeff)
@@ -71,11 +67,6 @@ namespace kushekbaev
     }
     point_t middle = getFrameRect().pos;
     std::array<point_t*, 4> points = { &first_, &second_, &third_, &last_ };
-
-    for (point_t* point: points)
-    {
-      point->x = middle.x + (point->x - middle.x) * scaleCoeff;
-      point->y = middle.y + (point->y - middle.y) * scaleCoeff;
-    }
+    scalePoints(points, scaleCoeff, middle);
   }
 }
