@@ -8,6 +8,7 @@ namespace kushekbaev
 {
   template<std::size_t N>
   void movePoints(std::array<point_t*, N> &points, const double dx, const double dy);
+  template<std::size_t N>
   void scalePoints(std::array<point_t*, N> &points, const double scaleCoeff, const point_t middle);
   double getLineLength(const point_t first, const point_t second);
   double getAreaOfTriangle(const point_t first, const point_t second, const point_t third);

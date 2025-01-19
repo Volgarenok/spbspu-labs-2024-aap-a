@@ -6,16 +6,17 @@ namespace kushekbaev
   template<std::size_t N>
   void movePoints(std::array<point_t*, N> &points, double dx, double dy)
   {
-    for (point_t *point : points)
+    for (point_t *point: points)
     {
       point.x += dx;
       point.y += dy;
     }
   }
 
+  template<std::size_t N>
   void scalePoints(std::array<point_t*, N> &points, double scaleCoeff, point_t middle)
   {
-    for (point_t* point : points)
+    for (point_t* point: points)
     {
       point->x = middle.x + (point->x - middle.x) * scaleCoeff;
       point->y = middle.y + (point->y - middle.y) * scaleCoeff;
