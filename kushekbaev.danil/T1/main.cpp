@@ -28,7 +28,7 @@ int main()
       invalid_argument = true;
     }
 
-    catch (const std::out_of_range&)
+    catch (const std::domain_error&)
     {
       std::cerr << "Bad SCALE command\n";
       kushekbaev::clearMemory(capacity, shapeCounter);
