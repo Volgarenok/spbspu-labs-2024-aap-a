@@ -4,5 +4,5 @@
 
 namespace demehin
 {
-  void createShape(const std::string& shp_name, Shape** shapes, size_t& shp_cnt);
+  void createShape(std::istream& in, const std::string& shp_name, Shape** shapes, size_t& shp_cnt);
 }

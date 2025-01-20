@@ -92,21 +92,21 @@ namespace
 
 namespace demehin
 {
-  void createShape(const std::string& shp_name, Shape** shapes, size_t& shp_cnt)
+  void createShape(std::istream& in, const std::string& shp_name, Shape** shapes, size_t& shp_cnt)
   {
     if (shp_name == "RECTANGLE")
     {
-      shapes[shp_cnt++] = createRect(std::cin);
+      shapes[shp_cnt++] = createRect(in);
     }
 
     else if (shp_name == "RING")
     {
-      shapes[shp_cnt++] = createRing(std::cin);
+      shapes[shp_cnt++] = createRing(in);
     }
 
     else if (shp_name == "POLYGON")
     {
-      shapes[shp_cnt++] = createPolygon(std::cin);
+      shapes[shp_cnt++] = createPolygon(in);
     }
   }
 }

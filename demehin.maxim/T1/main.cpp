@@ -81,7 +81,7 @@ int main()
 
     try
     {
-      demehin::createShape(shape_name, shapes, shp_cnt);
+      demehin::createShape(std::cin, shape_name, shapes, shp_cnt);
     }
     catch (const std::bad_alloc&)
     {
