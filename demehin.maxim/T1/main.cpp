@@ -68,7 +68,7 @@ int main()
   size_t shp_cnt = 0;
   bool is_incorrect_shp = false;
 
-  std::string shape_name = "";
+  std::string shape_name;
   while (shape_name != "SCALE")
   {
     std::cin >> shape_name;
@@ -83,12 +83,12 @@ int main()
     {
       demehin::createShape(shape_name, shapes, shp_cnt);
     }
-    catch (const std::bad_alloc& e)
+    catch (const std::bad_alloc&)
     {
       free_shapes(shapes, shp_cnt);
       return 1;
     }
-    catch (const std::logic_error& e)
+    catch (const std::logic_error&)
     {
       shp_cnt--;
       is_incorrect_shp = true;

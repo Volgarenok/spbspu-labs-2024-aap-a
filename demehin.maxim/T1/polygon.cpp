@@ -29,8 +29,8 @@ namespace
   {
     double difference_x = pt1.x - pt2.x;
     double difference_y = pt1.y - pt2.y;
-    demehin::point_t diff_cords = {difference_x, difference_y};
-    return diff_cords;
+
+    return {difference_x, difference_y};
   }
 
   demehin::point_t& operator+=(demehin::point_t& lhs, const demehin::point_t& rhs)
@@ -66,9 +66,6 @@ demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
     delete[] vertex_;
     throw std::logic_error("incorrect_shape");
   }
-
-  //vertex_ = new point_t[vrtx_cnt];
-  //setVertex(vertex, vrtx_cnt);
 }
 
 double demehin::Polygon::getArea() const
@@ -89,10 +86,6 @@ demehin::rectangle_t demehin::Polygon::getFrameRect() const
 
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
-    //min_x = (min_x < vertex_[i].x) ? min_x : vertex_[i].x;
-    //max_x = (max_x > vertex_[i].x) ? max_x : vertex_[i].x;
-    //min_y = (min_y < vertex_[i].y) ? min_y : vertex_[i].y;
-    //max_y = (max_y > vertex_[i].y) ? max_y : vertex_[i].y;
     min_x = std::min(min_x, vertex_[i].x);
     max_x = std::max(max_x, vertex_[i].x);
     min_y = std::min(min_y, vertex_[i].y);
@@ -104,8 +97,8 @@ demehin::rectangle_t demehin::Polygon::getFrameRect() const
   double pos_x = (max_x + min_x) / 2;
   double pos_y = (max_y + min_y) / 2;
   point_t fr_rect_pos = {pos_x, pos_y};
-  rectangle_t fr_rect = {fr_rect_w, fr_rect_h, fr_rect_pos};
-  return fr_rect;
+
+  return {fr_rect_w, fr_rect_h, fr_rect_pos};
 }
 
 void demehin::Polygon::move(point_t s)
