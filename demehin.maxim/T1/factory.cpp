@@ -6,24 +6,39 @@
 
 namespace
 {
+
+  void inputPtsCords(std::istream& in, double* cords, size_t cords_cnt)
+  {
+    for (size_t i = 0; i < cords_cnt; i++)
+    {
+      in >> *(cords + i);
+    }
+  }
+
   demehin::Rectangle* createRect(std::istream& in)
   {
-    demehin::point_t points[2] = {};
-    for (size_t i = 0; i < 2; i++)
-    {
-      in >> points[i].x >> points[i].y;
-    }
-    return new demehin::Rectangle(points[0], points[1]);
+    //demehin::point_t points[2] = {};
+    double rectCords[4] = {};
+    //for (size_t i = 0; i < 4; i++)
+    //{
+      //in >> points[i].x >> points[i].y;
+      //in >> rectCords[i];
+    //}
+    inputPtsCords(in, rectCords, 4);
+    demehin::point_t left_bot = {rectCords[0], rectCords[1]};
+    demehin::point_t right_top = {rectCords[2], rectCords[3]};
+    //return new demehin::Rectangle(points[0], points[1]);
+    return new demehin::Rectangle(left_bot, right_top);
   }
 
   demehin::Ring* createRing(std::istream& in)
   {
     double ringParams[4] = {};
-    for (size_t i = 0; i < 4; i++)
-    {
-      in >> ringParams[i];
-    }
-
+    //for (size_t i = 0; i < 4; i++)
+    //{
+      //in >> ringParams[i];
+    //}
+    inputPtsCords(in, ringParams, 4);
     demehin::point_t center = {ringParams[0], ringParams[1]};
     return new demehin::Ring(center, ringParams[2], ringParams[3]);
   }
@@ -77,11 +92,6 @@ namespace
       delete[] vrt;
       throw;
     }
-   // catch (const std::logic_error&)
-    //{
-      //delete[] vrt;
-      //throw;
-    //}
     delete[] vrt;
     return plg;
   }
