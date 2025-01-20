@@ -1,6 +1,7 @@
 #include "polygon.hpp"
 #include <cmath>
 #include <stdexcept>
+#include <algorithm>
 
 namespace
 {
@@ -88,10 +89,14 @@ demehin::rectangle_t demehin::Polygon::getFrameRect() const
 
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
-    min_x = (min_x < vertex_[i].x) ? min_x : vertex_[i].x;
-    max_x = (max_x > vertex_[i].x) ? max_x : vertex_[i].x;
-    min_y = (min_y < vertex_[i].y) ? min_y : vertex_[i].y;
-    max_y = (max_y > vertex_[i].y) ? max_y : vertex_[i].y;
+    //min_x = (min_x < vertex_[i].x) ? min_x : vertex_[i].x;
+    //max_x = (max_x > vertex_[i].x) ? max_x : vertex_[i].x;
+    //min_y = (min_y < vertex_[i].y) ? min_y : vertex_[i].y;
+    //max_y = (max_y > vertex_[i].y) ? max_y : vertex_[i].y;
+    min_x = std::min(min_x, vertex_[i].x);
+    max_x = std::max(max_x, vertex_[i].x);
+    min_y = std::min(min_y, vertex_[i].y);
+    max_y = std::max(max_y, vertex_[i].y);
   }
 
   double fr_rect_h = max_y - min_y;
