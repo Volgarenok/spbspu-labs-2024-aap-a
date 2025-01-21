@@ -13,6 +13,7 @@ namespace kiselev
     virtual void move(double dx, double dy) = 0;
     virtual void scale(double k) = 0;
     void scaleWithCheck(double k);
+    virtual Shape* clone() const = 0;
     virtual ~Shape() = default;
   };
   void destroyShapePtr(Shape** shapes, size_t count);

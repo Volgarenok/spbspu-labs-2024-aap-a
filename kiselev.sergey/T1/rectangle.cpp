@@ -1,6 +1,7 @@
 #include "rectangle.hpp"
 #include <stdexcept>
 #include "base-types.hpp"
+#include "shape.hpp"
 kiselev::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
  leftDown_(leftDown),
  rightUp_(rightUp)
@@ -37,4 +38,8 @@ void kiselev::Rectangle::scale(double k)
   point_t centre = this->getFrameRect().pos;
   leftDown_ = scalePoint(leftDown_, centre, k);
   rightUp_ = scalePoint(rightUp_, centre, k);
+}
+kiselev::Shape* kiselev::Rectangle::clone() const
+{
+  return new Rectangle(*this);
 }

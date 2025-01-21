@@ -8,6 +8,7 @@ namespace kiselev
   public:
     Complexquad(point_t p1, point_t p2, point_t p3, point_t p4);
     double getArea() const override;
+    Shape* clone() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t a) override;
     void move(double dx, double dy) override;

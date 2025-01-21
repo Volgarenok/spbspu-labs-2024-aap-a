@@ -3,6 +3,7 @@
 #include <cmath>
 #include <stdexcept>
 #include "base-types.hpp"
+#include "shape.hpp"
 namespace
 {
   bool isTriangle(kiselev::point_t p1, kiselev::point_t p2, kiselev::point_t p3)
@@ -90,4 +91,8 @@ void kiselev::Complexquad::scale(double k)
   p2_ = scalePoint(p2_, centre, k);
   p3_ = scalePoint(p3_, centre, k);
   p4_ = scalePoint(p4_, centre, k);
+}
+kiselev::Shape* kiselev::Complexquad::clone() const
+{
+  return new Complexquad(*this);
 }

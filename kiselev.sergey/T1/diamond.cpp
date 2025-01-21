@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include "base-types.hpp"
 #include "complexquad.hpp"
+#include "shape.hpp"
 kiselev::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
  comp1({ -1, -1 }, { 1, 1 }, { -1, 1 }, { 1, -1 }),
  comp2({ -1, -1 }, { 1, 1 }, { 1, -1 }, { -1, 1 })
@@ -77,4 +78,8 @@ void kiselev::Diamond::scale(double k)
 {
   comp1.scale(k);
   comp2.scale(k);
+}
+kiselev::Shape* kiselev::Diamond::clone() const
+{
+  return new Diamond(*this);
 }

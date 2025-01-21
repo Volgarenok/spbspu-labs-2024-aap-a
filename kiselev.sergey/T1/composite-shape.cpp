@@ -172,3 +172,23 @@ kiselev::CompositeShape::~CompositeShape()
 {
   clear();
 }
+kiselev::CompositeShape* kiselev::CompositeShape::clone() const
+{
+  CompositeShape* clone = new CompositeShape(capacity);
+  Shape* shape = nullptr;
+  try
+  {
+    for (size_t i = 0; i < realSize; ++i)
+    {
+      shape = shapes[i]->clone();
+      clone->push_back(shape);
+    }
+  }
+  catch (...)
+  {
+    delete shape;
+    delete clone;
+    throw;
+  }
+  return clone;
+}
