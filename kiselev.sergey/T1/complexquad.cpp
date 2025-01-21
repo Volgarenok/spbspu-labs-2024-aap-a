@@ -12,7 +12,7 @@ namespace
     double lenght3 = std::sqrt(std::pow(p2.x - p3.x, 2) + std::pow(p2.y - p3.y, 2));
     return lenght1 < lenght2 + lenght3 || lenght2 < lenght1 + lenght3 || lenght3 < lenght1 + lenght2;
   }
-  kiselev::point_t findIntersectionPoint(kiselev::point_t p1, kiselev::point_t p2, kiselev::point_t p3, kiselev::point_t p4, bool& isIntersect)
+  kiselev::point_t findP(kiselev::point_t p1, kiselev::point_t p2, kiselev::point_t p3, kiselev::point_t p4, bool& isIntersect)
   {
     double A1 = p2.y - p1.y;
     double B1 = p2.x - p1.x;
@@ -39,7 +39,7 @@ kiselev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4
  p4_(p4)
 {
   bool isIntersect = true;
-  point_t centre = findIntersectionPoint(p1, p2, p3, p4, isIntersect);
+  point_t centre = findP(p1, p2, p3, p4, isIntersect);
   if (!isTriangle(p1, p4, centre) || !isTriangle(p2, p3, centre) || !isIntersect || (p4.x > p1.x && p3.x > p1.x))
   {
     throw std::invalid_argument("Incorrect coordinates");
