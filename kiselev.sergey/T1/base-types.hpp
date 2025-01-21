@@ -16,5 +16,6 @@ namespace kiselev
     point_t pos;
   };
   point_t scalePoint(point_t p, point_t centre, double k);
+  point_t movePoint(point_t p, double dx, double dy);
 }
 #endif

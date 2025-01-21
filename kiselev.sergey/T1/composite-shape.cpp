@@ -13,36 +13,34 @@ void kiselev::CompositeShape::clear() noexcept
   }
   delete[] shapes;
 }
-kiselev::CompositeShape::CompositeShape(size_t cap) :
-  shapes(nullptr),
-  capacity(cap),
-  realSize(0)
+kiselev::CompositeShape::CompositeShape(size_t cap):
+ capacity(cap),
+ realSize(0),
+ shapes(new Shape *[capacity])
 {
-  shapes = new Shape *[capacity];
 }
-kiselev::CompositeShape::CompositeShape(const kiselev::CompositeShape & cmp) :
-  shapes(nullptr),
-  capacity(cmp.capacity),
-  realSize(cmp.realSize)
+kiselev::CompositeShape::CompositeShape(const CompositeShape & cmp):
+ capacity(cmp.capacity),
+ realSize(cmp.realSize),
+ shapes(new Shape *[capacity])
 {
-  shapes = new Shape *[capacity];
   if (shapes)
   {
     for (size_t i = 0; i < capacity; ++i)
     {
-        shapes[i] = cmp[i];
+      *shapes[i] = *cmp[i];
     }
   }
 }
-kiselev::CompositeShape::CompositeShape(kiselev::CompositeShape && cmp) noexcept :
-  shapes(cmp.shapes),
-  capacity(cmp.capacity),
-  realSize(cmp.realSize)
+kiselev::CompositeShape::CompositeShape(CompositeShape && cmp) noexcept:
+ capacity(cmp.capacity),
+ realSize(cmp.realSize),
+ shapes(cmp.shapes)
 {
   cmp.shapes = nullptr;
   realSize = 0;
 }
-kiselev::CompositeShape & kiselev::CompositeShape::operator=(kiselev::CompositeShape & cmp)
+kiselev::CompositeShape & kiselev::CompositeShape::operator=(const CompositeShape & cmp)
 {
   CompositeShape cpy(cmp);
   std::swap(shapes, cpy.shapes);
@@ -50,7 +48,7 @@ kiselev::CompositeShape & kiselev::CompositeShape::operator=(kiselev::CompositeS
   std::swap(realSize, cpy.realSize);
   return *this;
 }
-kiselev::CompositeShape & kiselev::CompositeShape::operator=(kiselev::CompositeShape && cmp) noexcept
+kiselev::CompositeShape & kiselev::CompositeShape::operator=(CompositeShape && cmp) noexcept
 {
   clear();
   shapes = cmp.shapes;
@@ -64,7 +62,7 @@ void kiselev::CompositeShape::push_back(Shape * shp)
 {
   if (realSize >= capacity)
   {
-      throw std::out_of_range("Exceeded capacity");
+    throw std::out_of_range("Exceeded capacity");
   }
   shapes[realSize++] = shp;
 }
@@ -85,7 +83,19 @@ kiselev::Shape * kiselev::CompositeShape::at(size_t id) const
   }
   return shapes[id];
 }
+kiselev::Shape * kiselev::CompositeShape::at(size_t id)
+{
+  if (id >= realSize)
+  {
+    throw std::out_of_range("Index bigger than realSize");
+  }
+  return shapes[id];
+}
 kiselev::Shape * kiselev::CompositeShape::operator[](size_t id) const noexcept
+{
+  return shapes[id];
+}
+kiselev::Shape * kiselev::CompositeShape::operator[](size_t id) noexcept
 {
   return shapes[id];
 }
@@ -128,7 +138,7 @@ kiselev::rectangle_t kiselev::CompositeShape::getFrameRect() const
   }
   return { rightX - leftX, rightY - leftY, { (rightX + leftX) / 2, (rightY + leftY) / 2 } };
 }
-void kiselev::CompositeShape::move(kiselev::point_t a)
+void kiselev::CompositeShape::move(point_t a)
 {
   double moveForX = a.x - getFrameRect().pos.x;
   double moveForY = a.y - getFrameRect().pos.y;

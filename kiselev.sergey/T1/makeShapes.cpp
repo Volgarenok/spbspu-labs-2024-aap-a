@@ -1,10 +1,12 @@
 #include "makeShapes.hpp"
 #include <cmath>
+#include <cstddef>
 #include <iostream>
 #include <istream>
 #include "base-types.hpp"
 #include "complexquad.hpp"
 #include "diamond.hpp"
+#include "rectangle.hpp"
 namespace
 {
   void inputCoordinates(std::istream& input, double* arr, size_t size)
@@ -14,68 +16,65 @@ namespace
       input >> arr[i];
     }
   }
-}
-kiselev::Rectangle* kiselev::makeRectangle(std::istream& input)
-{
-  const size_t quantity = 4;
-  double arrCoordinates[quantity] = {};
-  inputCoordinates(input, arrCoordinates, quantity);
-  point_t left = { arrCoordinates[0], arrCoordinates[1] };
-  point_t right = { arrCoordinates[2], arrCoordinates[3] };
-  return new Rectangle(left, right);
+  kiselev::Rectangle* makeRectangle(std::istream& input)
+  {
+    const size_t quantity = 4;
+    double arrCoordinates[quantity] = {};
+    inputCoordinates(input, arrCoordinates, quantity);
+    kiselev::point_t left = { arrCoordinates[0], arrCoordinates[1] };
+    kiselev::point_t right = { arrCoordinates[2], arrCoordinates[3] };
+    return new kiselev::Rectangle(left, right);
+  }
+  kiselev::Diamond* makeDiamond(std::istream& input)
+  {
+    const size_t quantity = 6;
+    double arrCoordinates[quantity] = {};
+    inputCoordinates(input, arrCoordinates, quantity);
+    kiselev::point_t p1 = { arrCoordinates[0], arrCoordinates[1] };
+    kiselev::point_t p2 = { arrCoordinates[2], arrCoordinates[3] };
+    kiselev::point_t p3 = { arrCoordinates[4], arrCoordinates[5] };
+    return new kiselev::Diamond(p1, p2, p3);
+  }
+  kiselev::Complexquad* makeComplexquad(std::istream& input)
+  {
+    const size_t quantity = 8;
+    double arrCoordinates[quantity] = {};
+    inputCoordinates(input, arrCoordinates, quantity);
+    kiselev::point_t p1 = { arrCoordinates[0], arrCoordinates[1] };
+    kiselev::point_t p2 = { arrCoordinates[2], arrCoordinates[3] };
+    kiselev::point_t p3 = { arrCoordinates[4], arrCoordinates[5] };
+    kiselev::point_t p4 = { arrCoordinates[6], arrCoordinates[7] };
+    return new kiselev::Complexquad(p1, p2, p3, p4);
+  }
 }
 kiselev::point_t kiselev::makeScale(std::istream& input)
 {
-  double x = 0;
-  double y = 0;
-  input >> x >> y;
-  return { x, y };
-}
-kiselev::Diamond* kiselev::makeDiamond(std::istream& input)
-{
-  const size_t quantity = 6;
-  double arrCoordinates[6] = {};
-  inputCoordinates(input, arrCoordinates, quantity);
-  point_t p1 = { arrCoordinates[0], arrCoordinates[1] };
-  point_t p2 = { arrCoordinates[2], arrCoordinates[3] };
-  point_t p3 = { arrCoordinates[4], arrCoordinates[5] };
-  return new Diamond(p1, p2, p3);
-}
-kiselev::Complexquad* kiselev::makeComplexquad(std::istream& input)
-{
-  const size_t quantity = 8;
+  const size_t quantity = 2;
   double arrCoordinates[quantity] = {};
   inputCoordinates(input, arrCoordinates, quantity);
-  point_t p1 = { arrCoordinates[0], arrCoordinates[1] };
-  point_t p2 = { arrCoordinates[2], arrCoordinates[3] };
-  point_t p3 = { arrCoordinates[4], arrCoordinates[5] };
-  point_t p4 = { arrCoordinates[6], arrCoordinates[7] };
-  return new Complexquad(p1, p2, p3, p4);
+  return { arrCoordinates[0], arrCoordinates[1] };
 }
-void kiselev::makeShape(std::string & str, CompositeShape & compShp, bool& isUnknown)
+bool kiselev::makeShape(std::istream& input, std::string & str, kiselev::CompositeShape & compShp)
 {
-  Shape * shape = nullptr;
+  kiselev::Shape * shape = nullptr;
   try
   {
     if (str == "RECTANGLE")
     {
-      shape = makeRectangle(std::cin);
+      shape = makeRectangle(input);
       compShp.push_back(shape);
     }
     else if (str == "DIAMOND")
     {
-      shape = makeDiamond(std::cin);
+      shape = makeDiamond(input);
       compShp.push_back(shape);
     }
     else if (str == "COMPLEXQUAD")
     {
-      shape = makeComplexquad(std::cin);
+      shape = makeComplexquad(input);
       compShp.push_back(shape);
     }
-    else if (!str.empty() && str != "SCALE")
-    {
-      isUnknown = true;
-    }
+    return !str.empty() && str != "SCALE";
   }
   catch (...)
   {

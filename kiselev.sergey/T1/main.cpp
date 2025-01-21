@@ -25,7 +25,7 @@ int main()
     }
     try
     {
-      kiselev::makeShape(titleShape, compShp, isUnknownShape);
+      isUnknownShape = kiselev::makeShape(std::cin, titleShape, compShp);
       if (titleShape == "SCALE")
       {
         scale = kiselev::makeScale(std::cin);

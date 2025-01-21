@@ -3,7 +3,9 @@
 #include <stdexcept>
 #include "base-types.hpp"
 #include "complexquad.hpp"
-kiselev::Diamond::Diamond(point_t p1, point_t p2, point_t p3)
+kiselev::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
+ comp1({ 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }),
+ comp2({ 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 })
 {
   point_t center = { 0, 0 };
   point_t pHorizontal = { 0, 0 };
