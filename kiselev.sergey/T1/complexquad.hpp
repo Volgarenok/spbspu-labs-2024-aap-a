@@ -6,7 +6,6 @@ namespace kiselev
   class Complexquad final: public Shape
   {
   public:
-    Complexquad();
     Complexquad(point_t p1, point_t p2, point_t p3, point_t p4);
     double getArea() const override;
     rectangle_t getFrameRect() const override;

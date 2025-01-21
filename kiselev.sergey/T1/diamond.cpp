@@ -4,8 +4,8 @@
 #include "base-types.hpp"
 #include "complexquad.hpp"
 kiselev::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
- comp1({ 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }),
- comp2({ 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 })
+ comp1({ -1, -1 }, { 1, 1 }, { -1, 1 }, { 1, -1 }),
+ comp2({ -1, -1 }, { 1, 1 }, { 1, -1 }, { -1, 1 })
 {
   point_t center = { 0, 0 };
   point_t pHorizontal = { 0, 0 };
@@ -44,7 +44,7 @@ kiselev::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
   {
     center = { p3.x, p3.y };
     pHorizontal = { p2.x, p2.y };
-    pVertical = { p3.x, p3.y };
+    pVertical = { p1.x, p1.y };
   }
   else
   {
