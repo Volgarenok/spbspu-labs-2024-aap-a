@@ -33,11 +33,11 @@ namespace
     return {difference_x, difference_y};
   }
 
-  demehin::point_t& operator+=(demehin::point_t& lhs, const demehin::point_t& rhs)
+  demehin::point_t& addToPoint(demehin::point_t& pt1, const demehin::point_t& pt2)
   {
-    lhs.x += rhs.x;
-    lhs.y += rhs.y;
-    return lhs;
+    pt1.x += pt2.x;
+    pt1.y += pt2.y;
+    return pt1;
   }
 
   demehin::point_t* copyCords(const demehin::point_t* vertex, size_t vrt_cnt)
@@ -113,7 +113,7 @@ void demehin::Polygon::move(double x, double y)
   point_t move_cords = {x, y};
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
-    vertex_[i] += move_cords;
+    vertex_[i] = addToPoint(vertex_[i], move_cords);
   }
 }
 
@@ -132,20 +132,12 @@ void demehin::Polygon::scale(double k)
   }
 }
 
-void demehin::Polygon::setVertex(const demehin::point_t* vertex, size_t vrt_cnt)
-{
-  for (size_t i = 0; i < vrt_cnt; i++)
-  {
-    vertex_[i] = vertex[i];
-  }
-}
-
 demehin::point_t demehin::Polygon::getCenter() const
 {
   demehin::point_t plg_center = {0, 0};
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
-    plg_center += vertex_[i];
+    plg_center = addToPoint(plg_center, vertex_[i]);
   }
 
   plg_center.x /= vrtx_cnt_;

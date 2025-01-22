@@ -51,10 +51,10 @@ namespace
         {
           new_pts = new demehin::point_t[capacity];
         }
-        catch (const std::bad_alloc& e)
+        catch (const std::bad_alloc&)
         {
           delete[] *pts;
-          throw e;
+          throw;
         }
         for (size_t i = 0; i < size; i++)
         {
