@@ -1,6 +1,7 @@
 #ifndef CIRCLE_HPP
 #define CIRCLE_HPP
 #include "shape.hpp"
+#include "ring.hpp"
 
 namespace zakirov
 {
@@ -14,8 +15,9 @@ namespace zakirov
     void move(double bias_x, double bias_y) override;
     void scale(double k) override;
   private:
-    point_t center_;
-    double radius_;
+    static const size_t rings_size_ = 10;
+    static const double first_in_radius_ = 0.1;
+    Ring * rings_[rings_size_];
   };
 }
 
