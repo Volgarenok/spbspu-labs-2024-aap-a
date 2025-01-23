@@ -74,10 +74,9 @@ void mozhegova::Polygon::move(point_t p)
     sumY += points_[i].y;
   }
   point_t center = {sumX / count_, sumY / count_};
-  point_t vector = {0.0, 0.0};
   for (size_t i = 0; i < count_; i++)
   {
-    vector = {points_[i].x - center.x, points_[i].y - center.y};
+    point_t vector = {points_[i].x - center.x, points_[i].y - center.y};
     points_[i] = {p.x + vector.x, p.y + vector.y};
   }
 }

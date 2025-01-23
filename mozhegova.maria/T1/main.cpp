@@ -8,7 +8,7 @@ int main()
   using namespace mozhegova;
   Shape * shapes[10000] = {};
   size_t count = 0;
-  std::string shapeName = "";
+  std::string shapeName;
   bool flag = false;
   double scaleCoef = 0.0;
   point_t scaleCenter = {0.0, 0.0};
@@ -26,17 +26,17 @@ int main()
       shapes[count] = makeShape(std::cin, shapeName);
       count++;
     }
-    catch (const std::bad_alloc& e)
+    catch (const std::bad_alloc &)
     {
       std::cerr << "Out of memory\n";
       destroy(shapes, count);
       return 1;
     }
-    catch (const std::invalid_argument& e)
+    catch (const std::invalid_argument &)
     {
       flag = true;
     }
-    catch (const std::logic_error& e)
+    catch (const std::logic_error &)
     {
       continue;
     }

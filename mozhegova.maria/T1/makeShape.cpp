@@ -6,13 +6,13 @@
 
 namespace mozhegova
 {
-  Rectangle * makeRectangle(std::istream& in);
-  Diamond * makeDiamond(std::istream& in);
-  Polygon * makePolygon(std::istream& in);
-  void inputNum(std::istream& in, point_t * num, size_t n);
+  Rectangle * makeRectangle(std::istream & in);
+  Diamond * makeDiamond(std::istream & in);
+  Polygon * makePolygon(std::istream & in);
+  void inputNum(std::istream & in, point_t * num, size_t n);
 }
 
-mozhegova::Shape * mozhegova::makeShape(std::istream& in, std::string shapeName)
+mozhegova::Shape * mozhegova::makeShape(std::istream & in, std::string shapeName)
 {
   if (shapeName == "RECTANGLE")
   {
@@ -32,7 +32,7 @@ mozhegova::Shape * mozhegova::makeShape(std::istream& in, std::string shapeName)
   }
 }
 
-mozhegova::Rectangle * mozhegova::makeRectangle(std::istream& in)
+mozhegova::Rectangle * mozhegova::makeRectangle(std::istream & in)
 {
   constexpr size_t len = 2;
   point_t coor[len] = {};
@@ -41,7 +41,7 @@ mozhegova::Rectangle * mozhegova::makeRectangle(std::istream& in)
   return rect;
 }
 
-mozhegova::Diamond * mozhegova::makeDiamond(std::istream& in)
+mozhegova::Diamond * mozhegova::makeDiamond(std::istream & in)
 {
   constexpr size_t len = 3;
   point_t coor[len] = {};
@@ -50,7 +50,7 @@ mozhegova::Diamond * mozhegova::makeDiamond(std::istream& in)
   return diam;
 }
 
-mozhegova::Polygon * mozhegova::makePolygon(std::istream& in)
+mozhegova::Polygon * mozhegova::makePolygon(std::istream & in)
 {
   size_t len = 0;
   size_t i = 0;
@@ -69,7 +69,7 @@ mozhegova::Polygon * mozhegova::makePolygon(std::istream& in)
           newnum[i] = num[i];
         }
       }
-      catch (const std::bad_alloc& e)
+      catch (const std::bad_alloc &)
       {
         delete[] num;
         throw;
@@ -87,7 +87,7 @@ mozhegova::Polygon * mozhegova::makePolygon(std::istream& in)
   {
     numPoint = new point_t[len / 2];
   }
-  catch (const std::bad_alloc& e)
+  catch (const std::bad_alloc &)
   {
     delete[] num;
     throw;
@@ -102,12 +102,7 @@ mozhegova::Polygon * mozhegova::makePolygon(std::istream& in)
   {
     poly = new Polygon(len / 2, numPoint);
   }
-  catch(const std::bad_alloc& e)
-  {
-    delete[] numPoint;
-    throw;
-  }
-  catch(const std::invalid_argument& e)
+  catch(const std::exception &)
   {
     delete[] numPoint;
     throw;
