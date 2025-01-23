@@ -1,6 +1,7 @@
 #ifndef COMPOSITE_SHAPE_HPP
 #define COMPOSITE_SHAPE_HPP
 #include <cstddef>
+#include <iostream>
 #include "shape.hpp"
 #include "base-types.hpp"
 
@@ -25,6 +26,7 @@ namespace savintsev
     void unsafeScale(double k) noexcept;
     CompositeShape * clone() const;
     void unsafeScaleRelativeTo(double k, point_t p) noexcept;
+    void printAreaBorders(std::ostream & out);
 
     void push_back(Shape * shp);
     void pop_back() noexcept;
@@ -38,5 +40,7 @@ namespace savintsev
     Shape ** lst_;
     void destroy(Shape ** shps, size_t n);
   };
+
+  void printAreaAndBorder(std::ostream & out, const CompositeShape & rhs);
 }
 #endif

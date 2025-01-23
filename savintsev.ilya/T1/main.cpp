@@ -1,42 +1,20 @@
 #include <iostream>
-#include <iomanip>
 #include <cstring>
 #include <newlineterminatedstr.h>
 #include "composite-shape.hpp"
-#include "rectangle.hpp"
-#include "concave.hpp"
-#include "complexquad.hpp"
+#include "shape-utils.hpp"
 
 namespace
 {
-  void readDblfromDesc(double * numbers, size_t amt);
-  void printSumAreaAndBorders(std::ostream & out, savintsev::CompositeShape & rhs);
-
-  void readDblfromDesc(double * numbers, size_t amt)
+  void readDescription(double * numbers)
   {
-    char * token = nullptr;
-    for (size_t i = 0; i < amt; ++i)
+    char * token = std::strtok(nullptr, " ");
+    size_t i = 0;
+    while (token)
     {
+      numbers[i++] = std::atof(token);
       token = std::strtok(nullptr, " ");
-      if (!token)
-      {
-        break;
-      }
-      numbers[i] = std::atof(token);
     }
-  }
-
-  void printSumAreaAndBorders(std::ostream & out, savintsev::CompositeShape & rhs)
-  {
-    out << std::fixed << std::setprecision(1) << rhs.getArea();
-    for (size_t i = 0; i < rhs.size(); ++i)
-    {
-      savintsev::rectangle_t rect = rhs[i]->getFrameRect();
-      savintsev::point_t lowLeft = {rect.pos.x - rect.width / 2, rect.pos.y - rect.height / 2};
-      savintsev::point_t upRight = {rect.pos.x + rect.width / 2, rect.pos.y + rect.height / 2};
-      out << ' ' << lowLeft.x << ' ' << lowLeft.y << ' ' << upRight.x << ' ' << upRight.y;
-    }
-    out << '\n';
   }
 }
 
@@ -46,15 +24,14 @@ int main()
   bool was_error = false;
   bool was_scale = false;
   savintsev::CompositeShape figure(4);
-  savintsev::point_t scalePoint = {0, 0};
-  double scaleRatio = 0.0;
+  double params[8] = {};
   while (!was_scale)
   {
     delete[] line;
     line = savintsev::inputNewlineTerminatedStr(std::cin);
     if (line == nullptr)
     {
-      std::cerr << "ERROR: Memory full\n";
+      std::cerr << "ERROR: Memory collapse\n";
       return 2;
     }
     if (std::cin.eof())
@@ -67,32 +44,15 @@ int main()
     {
       continue;
     }
-    char * token = std::strtok(line, " ");
+    char * type = std::strtok(line, " ");
+    savintsev::Shape * createdShape = nullptr;
     try
     {
-      if (!std::strcmp(token, "RECTANGLE"))
+      if (!std::strcmp(type, "RECTANGLE") || !std::strcmp(type, "COMPLEXQUAD") || !std::strcmp(type, "CONCAVE"))
       {
-        double nums[4] = {};
-        readDblfromDesc(nums, 4);
-        savintsev::Rectangle * Rect = nullptr;
-        Rect = new savintsev::Rectangle({nums[0], nums[1]}, {nums[2], nums[3]});
-        figure.push_back(Rect);
-      }
-      if (!std::strcmp(token, "CONCAVE"))
-      {
-        double n[8] = {};
-        readDblfromDesc(n, 8);
-        savintsev::Concave * Conc = nullptr;
-        Conc = new savintsev::Concave({n[0], n[1]}, {n[2], n[3]}, {n[4], n[5]}, {n[6], n[7]});
-        figure.push_back(Conc);
-      }
-      if (!std::strcmp(token, "COMPLEXQUAD"))
-      {
-        double n[8] = {};
-        readDblfromDesc(n, 8);
-        savintsev::Complexquad * Comp = nullptr;
-        Comp = new savintsev::Complexquad({n[0], n[1]}, {n[2], n[3]}, {n[4], n[5]}, {n[6], n[7]});
-        figure.push_back(Comp);
+        readDescription(params);
+        createdShape = savintsev::createShape(line, params);
+        figure.push_back(createdShape);
       }
     }
     catch (const std::invalid_argument & e)
@@ -100,25 +60,31 @@ int main()
       was_error = true;
       continue;
     }
-    if (!std::strcmp(token, "SCALE"))
+    catch (const std::bad_alloc & e)
     {
-      double numbers[3] = {0.0, 0.0, 0.0};
-      readDblfromDesc(numbers, 3);
-      if (numbers[2] <= 0)
+      delete[] line;
+      delete createdShape;
+      std::cerr << "ERROR: Memory collapse\n";
+      return 2;
+    }
+    if (!std::strcmp(type, "SCALE"))
+    {
+      readDescription(params);
+      savintsev::point_t scalePoint = {params[0], params[1]};
+      double scaleRatio = params[2];
+      if (scaleRatio <= 0)
       {
         continue;
       }
-      scalePoint = {numbers[0], numbers[1]};
-      scaleRatio = numbers[2];
       if (figure.empty())
       {
         delete[] line;
         std::cerr << "ERROR: No shapes\n";
         return 2;
       }
-      printSumAreaAndBorders(std::cout, figure);
+      savintsev::printAreaAndBorder(std::cout, figure);
       figure.unsafeScaleRelativeTo(scaleRatio, scalePoint);
-      printSumAreaAndBorders(std::cout, figure);
+      savintsev::printAreaAndBorder(std::cout, figure);
       delete[] line;
       was_scale = true;
     }

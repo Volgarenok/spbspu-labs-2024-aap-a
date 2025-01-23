@@ -1,6 +1,7 @@
 #include "composite-shape.hpp"
 #include <stdexcept>
 #include <memory>
+#include <iomanip>
 #include <cmath>
 #include <lrgcpy.hpp>
 
@@ -202,4 +203,17 @@ void savintsev::CompositeShape::destroy(Shape ** shps, size_t n)
     delete shps[i];
   }
   delete[] shps;
+}
+
+void savintsev::printAreaAndBorder(std::ostream & out, const CompositeShape & rhs)
+{
+  out << std::fixed << std::setprecision(1) << rhs.getArea();
+  for (size_t i = 0; i < rhs.size(); ++i)
+  {
+    rectangle_t rect = rhs[i]->getFrameRect();
+    point_t lowLeft = {rect.pos.x - rect.width / 2, rect.pos.y - rect.height / 2};
+    point_t upRight = {rect.pos.x + rect.width / 2, rect.pos.y + rect.height / 2};
+    out << ' ' << lowLeft.x << ' ' << lowLeft.y << ' ' << upRight.x << ' ' << upRight.y;
+  }
+  out << '\n';
 }
