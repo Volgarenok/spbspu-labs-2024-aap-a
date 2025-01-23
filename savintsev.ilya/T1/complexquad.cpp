@@ -1,7 +1,7 @@
 #include "complexquad.hpp"
 #include <algorithm>
 #include <stdexcept>
-#include "lins-tris.hpp"
+#include "geometry-utils.hpp"
 
 savintsev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4):
   p1_(p1),
@@ -57,7 +57,7 @@ savintsev::Shape * savintsev::Complexquad::clone() const
   return new Complexquad(*this);
 }
 
-void savintsev::Complexquad::doScale(double k)
+void savintsev::Complexquad::unsafeScale(double k) noexcept
 {
   point_t center = {0.0, 0.0};
   findLinesIntersect(p1_, p2_, p3_, p4_, center);

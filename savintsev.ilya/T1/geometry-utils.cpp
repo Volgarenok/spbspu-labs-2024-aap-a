@@ -1,4 +1,4 @@
-#include "lins-tris.hpp"
+#include "geometry-utils.hpp"
 #include <cmath>
 
 double savintsev::getLength(point_t lhs, point_t rhs)
@@ -8,18 +8,10 @@ double savintsev::getLength(point_t lhs, point_t rhs)
 
 bool savintsev::isPointInTriangle(point_t t1, point_t t2, point_t t3, point_t p)
 {
-  int part1 = (t1.x - p.x) * (t2.y - t1.y) - (t2.x - t1.x) * (t1.y - p.y);
-  int part2 = (t2.x - p.x) * (t3.y - t2.y) - (t3.x - t2.x) * (t2.y - p.y);
-  int part3 = (t3.x - p.x) * (t1.y - t3.y) - (t1.x - t3.x) * (t3.y - p.y);
-  if (part1 > 0 && part2 > 0 && part3 > 0)
-  {
-    return true;
-  }
-  else if (part1 < 0 && part2 < 0 && part3 < 0)
-  {
-    return true;
-  }
-  return false;
+  int p1 = (t1.x - p.x) * (t2.y - t1.y) - (t2.x - t1.x) * (t1.y - p.y);
+  int p2 = (t2.x - p.x) * (t3.y - t2.y) - (t3.x - t2.x) * (t2.y - p.y);
+  int p3 = (t3.x - p.x) * (t1.y - t3.y) - (t1.x - t3.x) * (t3.y - p.y);
+  return (p1 > 0 && p2 > 0 && p3 > 0) || (p1 < 0 && p2 < 0 && p3 < 0);
 }
 
 bool savintsev::isTriangle(point_t p1, point_t p2, point_t p3)

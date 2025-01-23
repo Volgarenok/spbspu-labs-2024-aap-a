@@ -1,7 +1,7 @@
 #include "concave.hpp"
 #include <cmath>
 #include <stdexcept>
-#include "lins-tris.hpp"
+#include "geometry-utils.hpp"
 
 savintsev::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   p1_(p1),
@@ -53,7 +53,7 @@ savintsev::Shape * savintsev::Concave::clone() const
   return new Concave(*this);
 }
 
-void savintsev::Concave::doScale(double k)
+void savintsev::Concave::unsafeScale(double k) noexcept
 {
   this->p1_ = {p4_.x - (p4_.x - p1_.x) * k, p4_.y - (p4_.y - p1_.y) * k};
   this->p2_ = {p4_.x - (p4_.x - p2_.x) * k, p4_.y - (p4_.y - p2_.y) * k};

@@ -14,8 +14,7 @@ namespace savintsev
     virtual void move(double x, double y) = 0;
     void scale(double k);
     virtual Shape * clone() const = 0;
-  private:
-    virtual void doScale(double k) = 0;
+    virtual void unsafeScale(double k) noexcept = 0;
   };
 }
 #endif

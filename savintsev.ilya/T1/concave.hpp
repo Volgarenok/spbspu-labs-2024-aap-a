@@ -13,8 +13,8 @@ namespace savintsev
     void move(point_t p) override;
     void move(double x, double y) override;
     Shape * clone() const override;
+    void unsafeScale(double k) noexcept override;
   private:
-    void doScale(double k) override;
     point_t p1_;
     point_t p2_;
     point_t p3_;

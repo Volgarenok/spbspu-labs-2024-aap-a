@@ -6,12 +6,11 @@
 namespace savintsev
 {
   template < typename T >
-  T * createAmpCopy(const T * old, size_t old_size, size_t new_size)
+  T * createExpandCopy(const T * old, size_t old_size, size_t new_size)
   {
-    T * created = nullptr;
+    T * created = new T[new_size];
     try
     {
-      created = new T[new_size];
       for (size_t i = 0; i < old_size; ++i)
       {
         created[i] = old[i];
@@ -20,7 +19,7 @@ namespace savintsev
     catch (const std::exception & e)
     {
       delete created;
-      return nullptr;
+      throw;
     }
     return created;
   }

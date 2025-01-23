@@ -1,5 +1,5 @@
-#ifndef LINS_TRIS_HPP
-#define LINS_TRIS_HPP
+#ifndef GEOMETRY_UTILS_HPP
+#define GEOMETRY_UTILS_HPP
 #include "base-types.hpp"
 
 namespace savintsev

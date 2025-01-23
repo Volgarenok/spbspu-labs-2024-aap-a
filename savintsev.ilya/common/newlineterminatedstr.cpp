@@ -27,12 +27,17 @@ char * savintsev::inputNewlineTerminatedStr(std::istream & in)
     if (i == (capacity - 1))
     {
       t[i] = '\0';
-      char * new_t = createAmpCopy(t, capacity, capacity + capacity);
-      delete[] t;
-      if (new_t == nullptr)
+      char * new_t = nullptr;
+      try
       {
+        new_t = createExpandCopy(t, capacity, capacity + capacity);
+      }
+      catch (const std::bad_alloc & e)
+      {
+        delete[] t;
         return nullptr;
       }
+      delete[] t;
       t = new_t;
       capacity += capacity;
     }

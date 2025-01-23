@@ -72,7 +72,7 @@ int main()
     {
       if (!std::strcmp(token, "RECTANGLE"))
       {
-        double nums[4] = {0.0, 0.0, 0.0, 0.0};
+        double nums[4] = {};
         readDblfromDesc(nums, 4);
         savintsev::Rectangle * Rect = nullptr;
         Rect = new savintsev::Rectangle({nums[0], nums[1]}, {nums[2], nums[3]});
@@ -80,7 +80,7 @@ int main()
       }
       if (!std::strcmp(token, "CONCAVE"))
       {
-        double n[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+        double n[8] = {};
         readDblfromDesc(n, 8);
         savintsev::Concave * Conc = nullptr;
         Conc = new savintsev::Concave({n[0], n[1]}, {n[2], n[3]}, {n[4], n[5]}, {n[6], n[7]});
@@ -88,7 +88,7 @@ int main()
       }
       if (!std::strcmp(token, "COMPLEXQUAD"))
       {
-        double n[8] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+        double n[8] = {};
         readDblfromDesc(n, 8);
         savintsev::Complexquad * Comp = nullptr;
         Comp = new savintsev::Complexquad({n[0], n[1]}, {n[2], n[3]}, {n[4], n[5]}, {n[6], n[7]});
@@ -117,7 +117,7 @@ int main()
         return 2;
       }
       printSumAreaAndBorders(std::cout, figure);
-      figure.scaleRelativeTo(scaleRatio, scalePoint);
+      figure.unsafeScaleRelativeTo(scaleRatio, scalePoint);
       printSumAreaAndBorders(std::cout, figure);
       delete[] line;
       was_scale = true;

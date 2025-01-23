@@ -1,5 +1,6 @@
 #include "composite-shape.hpp"
 #include <stdexcept>
+#include <memory>
 #include <cmath>
 #include <lrgcpy.hpp>
 
@@ -9,42 +10,36 @@ savintsev::CompositeShape::~CompositeShape()
 }
 
 savintsev::CompositeShape::CompositeShape(size_t capacity):
-  lst_(nullptr),
   amt_(0),
-  cap_(capacity)
+  cap_(capacity),
+  lst_(nullptr)
 {
   lst_ = new Shape * [cap_];
 }
 
-savintsev::CompositeShape::CompositeShape(const CompositeShape & rhs)
+savintsev::CompositeShape::CompositeShape(const CompositeShape & rhs):
+  amt_(rhs.amt_),
+  cap_(rhs.cap_),
+  lst_(nullptr)
 {
-  Shape ** new_lst = createAmpCopy(rhs.lst_, rhs.cap_, rhs.cap_);
-  if (!new_lst)
-  {
-    throw std::bad_alloc();
-  }
+  Shape ** new_lst = createExpandCopy(rhs.lst_, rhs.cap_, rhs.cap_);
   lst_ = new_lst;
-  amt_ = rhs.amt_;
-  cap_ = rhs.cap_;
 }
 
-savintsev::CompositeShape::CompositeShape(CompositeShape && rhs)
+savintsev::CompositeShape::CompositeShape(CompositeShape && rhs):
+  amt_(rhs.amt_),
+  cap_(rhs.cap_),
+  lst_(nullptr)
 {
   lst_ = rhs.lst_;
-  amt_ = rhs.amt_;
-  cap_ = rhs.cap_;
   rhs.lst_ = nullptr;
 }
 
 savintsev::CompositeShape & savintsev::CompositeShape::operator=(const CompositeShape & rhs)
 {
-  if (&rhs != this)
+  if (std::addressof(rhs) != this)
   {
-    Shape ** new_lst = createAmpCopy(rhs.lst_, rhs.cap_, rhs.cap_);
-    if (!new_lst)
-    {
-      throw std::bad_alloc();
-    }
+    Shape ** new_lst = createExpandCopy(rhs.lst_, rhs.cap_, rhs.cap_);
     destroy(lst_, amt_);
     lst_ = new_lst;
     amt_ = rhs.amt_;
@@ -55,8 +50,9 @@ savintsev::CompositeShape & savintsev::CompositeShape::operator=(const Composite
 
 savintsev::CompositeShape & savintsev::CompositeShape::operator=(CompositeShape && rhs)
 {
-  if (&rhs != this)
+  if (std::addressof(rhs) != this)
   {
+    delete[] lst_;
     lst_ = rhs.lst_;
     amt_ = rhs.amt_;
     cap_ = rhs.cap_;
@@ -77,31 +73,31 @@ double savintsev::CompositeShape::getArea() const
 
 savintsev::rectangle_t savintsev::CompositeShape::getFrameRect() const
 {
-  double lx = NAN;
-  double rx = NAN;
-  double ly = NAN;
-  double ry = NAN;
-  for (size_t i = 0; i < amt_; ++i)
+  if (empty())
   {
-    double height = lst_[i]->getFrameRect().height;
-    double width = lst_[i]->getFrameRect().width;
-    point_t center = lst_[i]->getFrameRect().pos;
-    lx = std::fmin(lx, center.x - width / 2);
-    ly = std::fmin(ly, center.y - height / 2);
-    rx = std::fmax(rx, center.x + width / 2);
-    ry = std::fmax(ry, center.y + height / 2);
+    return {0.0, 0.0, {0.0, 0.0}};
   }
-  return {rx - lx, ry - ly, {(rx + lx) / 2, (ry + ly) / 2}};
+  rectangle_t rect = lst_[0]->getFrameRect();
+  double xmin = rect.pos.x - rect.width / 2;
+  double xmax = rect.pos.x + rect.width / 2;
+  double ymin = rect.pos.y - rect.height / 2;
+  double ymax = rect.pos.y + rect.height / 2;
+  for (size_t i = 1; i < amt_; ++i)
+  {
+    rect = lst_[i]->getFrameRect(); 
+    xmin = std::fmin(xmin, rect.pos.x - rect.width / 2);
+    xmax = std::fmax(xmax, rect.pos.x + rect.width / 2);
+    ymin = std::fmin(ymin, rect.pos.y - rect.height / 2);
+    ymax = std::fmax(ymax, rect.pos.y + rect.height / 2);
+  }
+  return {xmax - xmin, ymax - ymin, {(xmax + xmin) / 2, (ymax + ymin) / 2}};
 }
 
 void savintsev::CompositeShape::move(point_t p)
 {
   double moveByX = p.x - getFrameRect().pos.x;
   double moveByY = p.y - getFrameRect().pos.y;
-  for (size_t i = 0; i < amt_; ++i)
-  {
-    lst_[i]->move(moveByX, moveByY);
-  }
+  move(moveByX, moveByY);
 }
 
 void savintsev::CompositeShape::move(double x, double y)
@@ -114,6 +110,15 @@ void savintsev::CompositeShape::move(double x, double y)
 
 void savintsev::CompositeShape::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("invalid ratio");
+  }
+  unsafeScale(k);
+}
+
+void savintsev::CompositeShape::unsafeScale(double k) noexcept
+{
   point_t center = getFrameRect().pos;
   for (size_t i = 0; i < amt_; ++i)
   {
@@ -121,7 +126,7 @@ void savintsev::CompositeShape::scale(double k)
     lst_[i]->move(center);
     point_t jSecond = lst_[i]->getFrameRect().pos;
     point_t vector = {(jSecond.x - jFirst.x) * k, (jSecond.y - jFirst.y) * k};
-    lst_[i]->scale(k);
+    lst_[i]->unsafeScale(k);
     lst_[i]->move(-vector.x, -vector.y);
   }
 }
@@ -131,7 +136,7 @@ savintsev::CompositeShape * savintsev::CompositeShape::clone() const
   return new CompositeShape(*this);
 }
 
-void savintsev::CompositeShape::scaleRelativeTo(double k, point_t p)
+void savintsev::CompositeShape::unsafeScaleRelativeTo(double k, point_t p) noexcept
 {
   point_t center = p;
   for (size_t i = 0; i < amt_; ++i)
@@ -140,23 +145,20 @@ void savintsev::CompositeShape::scaleRelativeTo(double k, point_t p)
     lst_[i]->move(center);
     point_t jSecond = lst_[i]->getFrameRect().pos;
     point_t vector = {(jSecond.x - jFirst.x) * k, (jSecond.y - jFirst.y) * k};
-    lst_[i]->scale(k);
+    lst_[i]->unsafeScale(k);
     lst_[i]->move(-vector.x, -vector.y);
   }
 }
 
-savintsev::CompositeShape::CompositeShape(): CompositeShape(1)
+savintsev::CompositeShape::CompositeShape():
+  CompositeShape(1)
 {}
 
 void savintsev::CompositeShape::push_back(Shape * shp)
 {
   if (amt_ + 1 == cap_)
   {
-    Shape ** new_lst = createAmpCopy(lst_, cap_, cap_ + cap_);
-    if (!new_lst)
-    {
-      throw std::bad_alloc();
-    }
+    Shape ** new_lst = createExpandCopy(lst_, cap_, cap_ + cap_);
     destroy(lst_, amt_);
     lst_ = new_lst;
     cap_ = cap_ + cap_;
@@ -169,7 +171,7 @@ void savintsev::CompositeShape::pop_back() noexcept
   delete lst_[--amt_];
 }
 
-savintsev::Shape * savintsev::CompositeShape::at(size_t id) const
+const savintsev::Shape * savintsev::CompositeShape::at(size_t id) const
 {
   if (id >= amt_)
   {
@@ -178,7 +180,7 @@ savintsev::Shape * savintsev::CompositeShape::at(size_t id) const
   return lst_[id];
 }
 
-savintsev::Shape * savintsev::CompositeShape::operator[](size_t id) const noexcept
+const savintsev::Shape * savintsev::CompositeShape::operator[](size_t id) const noexcept
 {
   return lst_[id];
 }
