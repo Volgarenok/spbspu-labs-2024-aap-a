@@ -62,6 +62,11 @@ void demehin::Ring::move(double x, double y)
 
 void demehin::Ring::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::logic_error("incorrect_scale");
+  }
+
   inner_plg_.scale(k);
   outer_plg_.scale(k);
 }

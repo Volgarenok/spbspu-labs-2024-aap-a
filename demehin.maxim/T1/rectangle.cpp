@@ -50,5 +50,10 @@ void demehin::Rectangle::move(double x, double y)
 
 void demehin::Rectangle::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::logic_error("incorrect_scale");
+  }
+
   plg_.scale(k);
 }
