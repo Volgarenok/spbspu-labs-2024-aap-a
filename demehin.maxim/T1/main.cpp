@@ -10,6 +10,11 @@ namespace
 {
   void makeIsoScale(demehin::Shape** shapes, size_t shp_cnt, double scale_k, const demehin::point_t& scale_pt)
   {
+    if (scale_k <= 0)
+    {
+      throw std::logic_error("incorrect_scale");
+    }
+
     for (size_t i = 0; i < shp_cnt; i++)
     {
       demehin::point_t orig_pt = shapes[i]->getFrameRect().pos;
