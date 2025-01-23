@@ -84,7 +84,7 @@ savintsev::rectangle_t savintsev::CompositeShape::getFrameRect() const
   double ymax = rect.pos.y + rect.height / 2;
   for (size_t i = 1; i < amt_; ++i)
   {
-    rect = lst_[i]->getFrameRect(); 
+    rect = lst_[i]->getFrameRect();
     xmin = std::fmin(xmin, rect.pos.x - rect.width / 2);
     xmax = std::fmax(xmax, rect.pos.x + rect.width / 2);
     ymin = std::fmin(ymin, rect.pos.y - rect.height / 2);
