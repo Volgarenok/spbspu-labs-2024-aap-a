@@ -5,7 +5,7 @@
 
 namespace
 {
-  bool areEqualPts(const demehin::point_t p1, const demehin::point_t p2)
+  bool areEqualPts(const demehin::point_t& p1, const demehin::point_t& p2)
   {
     return p1.x == p2.x && p1.y == p2.y;
   }
@@ -25,7 +25,7 @@ namespace
     return false;
   }
 
-  demehin::point_t getDifferenceCords(const demehin::point_t pt1, const demehin::point_t pt2)
+  demehin::point_t getDifferenceCords(const demehin::point_t& pt1, const demehin::point_t& pt2)
   {
     double difference_x = pt1.x - pt2.x;
     double difference_y = pt1.y - pt2.y;
@@ -119,6 +119,11 @@ void demehin::Polygon::move(double x, double y)
 
 void demehin::Polygon::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::logic_error("incorrect_scale");
+  }
+
   point_t plg_center = getCenter();
 
   for (size_t i = 0; i < vrtx_cnt_; i++)

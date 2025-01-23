@@ -8,7 +8,7 @@
 
 namespace
 {
-  void makeIsoScale(demehin::Shape** shapes, size_t shp_cnt, double scale_k, demehin::point_t& scale_pt)
+  void makeIsoScale(demehin::Shape** shapes, size_t shp_cnt, double scale_k, const demehin::point_t& scale_pt)
   {
     for (size_t i = 0; i < shp_cnt; i++)
     {
@@ -33,12 +33,13 @@ namespace
     return area_sum;
   }
 
-  void getFrRectCords(const demehin::rectangle_t& fr_rect, double& lbx, double& lby, double& rtx, double& rty)
+  void getFrRectCords(const demehin::rectangle_t& fr_rect, double& lt_bot_x, double& lt_bot_y,
+    double& rt_top_x, double& rt_top_y)
  {
-    lbx = fr_rect.pos.x - fr_rect.width / 2;
-    lby = fr_rect.pos.y - fr_rect.height / 2;
-    rtx = fr_rect.pos.x + fr_rect.width / 2;
-    rty = fr_rect.pos.y + fr_rect.height / 2;
+    lt_bot_x = fr_rect.pos.x - fr_rect.width / 2;
+    lt_bot_y = fr_rect.pos.y - fr_rect.height / 2;
+    rt_top_x = fr_rect.pos.x + fr_rect.width / 2;
+    rt_top_y = fr_rect.pos.y + fr_rect.height / 2;
   }
 
   void printShapesInfo(std::ostream& out, const demehin::Shape* const* shapes, size_t shp_cnt)
@@ -46,10 +47,10 @@ namespace
     out << getAreaSum(shapes, shp_cnt);
     for (size_t i = 0; i < shp_cnt; i++)
     {
-      double lbx = 0, lby = 0, rtx = 0, rty = 0;
+      double lt_bot_x = 0, lt_bot_y = 0, rt_top_x = 0, rt_top_y = 0;
       demehin::rectangle_t fr_rect = shapes[i]->getFrameRect();
-      getFrRectCords(fr_rect, lbx, lby, rtx, rty);
-      out << " "  << lbx << " " << lby << " " << rtx << " " << rty;
+      getFrRectCords(fr_rect, lt_bot_x, lt_bot_y, rt_top_x, rt_top_y);
+      out << " "  << lt_bot_x << " " << lt_bot_y << " " << rt_top_x << " " << rt_top_y;
     }
   }
 

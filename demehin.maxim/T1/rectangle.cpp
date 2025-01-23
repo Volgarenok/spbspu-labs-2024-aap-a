@@ -5,7 +5,7 @@
 namespace
 {
 
-  demehin::Polygon createPolygonForRect(const demehin::point_t left_bot, const demehin::point_t right_top)
+  demehin::Polygon createPolygonForRect(const demehin::point_t& left_bot, const demehin::point_t& right_top)
   {
     demehin::point_t vrt[4] = {};
     vrt[0] = left_bot;
@@ -19,7 +19,7 @@ namespace
   }
 }
 
-demehin::Rectangle::Rectangle(point_t left_bot, point_t right_top):
+demehin::Rectangle::Rectangle(const point_t& left_bot, const point_t& right_top):
   plg_(createPolygonForRect(left_bot, right_top))
 {
   if (right_top.x <= left_bot.x || right_top.y <= left_bot.y)

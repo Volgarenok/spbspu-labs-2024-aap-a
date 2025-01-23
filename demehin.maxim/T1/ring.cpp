@@ -4,7 +4,7 @@
 
 namespace
 {
-  demehin::Polygon createPolygonForRing(const demehin::point_t center, double radius)
+  demehin::Polygon createPolygonForRing(const demehin::point_t& center, double radius)
   {
 
     if (radius <= 0)
@@ -28,7 +28,7 @@ namespace
   }
 }
 
-demehin::Ring::Ring(point_t center, double out_r, double in_r):
+demehin::Ring::Ring(const point_t& center, double out_r, double in_r):
   inner_plg_(createPolygonForRing(center, in_r)),
   outer_plg_(createPolygonForRing(center, out_r))
 {

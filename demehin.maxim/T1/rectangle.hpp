@@ -8,7 +8,7 @@ namespace demehin
   class Rectangle final: public Shape
   {
   public:
-    Rectangle(point_t left_bot, point_t right_top);
+    Rectangle(const point_t& left_bot, const point_t& right_top);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t s) override;

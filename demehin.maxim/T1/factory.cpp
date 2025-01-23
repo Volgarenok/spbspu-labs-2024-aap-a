@@ -74,7 +74,7 @@ namespace
     constexpr size_t capacity = 128;
     size_t cord_cnt = 0;
     demehin::point_t* vrt = nullptr;
-    inputPolygonCords(in, &vrt, capacity, cord_cnt);
+    inputPolygonCords(in, std::addressof(vrt), capacity, cord_cnt);
     demehin::Polygon* plg = nullptr;
     try
     {
