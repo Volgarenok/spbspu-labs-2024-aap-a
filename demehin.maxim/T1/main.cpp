@@ -23,7 +23,7 @@ namespace
       double move_x = (new_pt.x - orig_pt.x) * scale_k;
       double move_y = (new_pt.y - orig_pt.y) * scale_k;
       demehin::point_t move_vector = {move_x, move_y};
-      shapes[i]->scale(scale_k);
+      shapes[i]->defaultScale(scale_k);
       shapes[i]->move(move_vector.x * -1, move_vector.y * -1);
     }
   }
@@ -55,7 +55,7 @@ namespace
       double lt_bot_x = 0, lt_bot_y = 0, rt_top_x = 0, rt_top_y = 0;
       demehin::rectangle_t fr_rect = shapes[i]->getFrameRect();
       getFrRectCords(fr_rect, lt_bot_x, lt_bot_y, rt_top_x, rt_top_y);
-      out << " "  << lt_bot_x << " " << lt_bot_y << " " << rt_top_x << " " << rt_top_y;
+      out << " " << lt_bot_x << " " << lt_bot_y << " " << rt_top_x << " " << rt_top_y;
     }
   }
 

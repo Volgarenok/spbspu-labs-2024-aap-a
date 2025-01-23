@@ -36,9 +36,9 @@ namespace
     return new demehin::Ring(center, ringParams[2], ringParams[3]);
   }
 
-  void inputPolygonCords(std::istream& in, demehin::point_t** pts, size_t capacity, size_t& cord_cnt)
+  demehin::point_t* inputPolygonCords(std::istream& in, size_t capacity, size_t& cord_cnt)
   {
-    *pts = new demehin::point_t[capacity];
+    demehin::point_t* pts = new demehin::point_t[capacity];
     size_t size = 0;
     demehin::point_t vrt = {0, 0};
     while (in >> vrt.x >> vrt.y)
@@ -53,28 +53,28 @@ namespace
         }
         catch (const std::bad_alloc&)
         {
-          delete[] *pts;
+          delete[] pts;
           throw;
         }
         for (size_t i = 0; i < size; i++)
         {
-          new_pts[i] = (*pts)[i];
+          new_pts[i] = pts[i];
         }
-        delete[] *pts;
-        *pts = new_pts;
+        delete[] pts;
+        pts = new_pts;
       }
-      (*pts)[size++] = vrt;
+      pts[size++] = vrt;
       cord_cnt++;
     }
     in.clear();
+    return pts;
   }
 
   demehin::Polygon* createPolygon(std::istream& in)
   {
     constexpr size_t capacity = 128;
     size_t cord_cnt = 0;
-    demehin::point_t* vrt = nullptr;
-    inputPolygonCords(in, std::addressof(vrt), capacity, cord_cnt);
+    demehin::point_t* vrt = inputPolygonCords(in, capacity, cord_cnt);
     demehin::Polygon* plg = nullptr;
     try
     {

@@ -33,11 +33,9 @@ namespace
     return {difference_x, difference_y};
   }
 
-  demehin::point_t& addToPoint(demehin::point_t& pt1, const demehin::point_t& pt2)
+  demehin::point_t sumPointsCords(const demehin::point_t& pt1, const demehin::point_t& pt2)
   {
-    pt1.x += pt2.x;
-    pt1.y += pt2.y;
-    return pt1;
+    return {pt1.x + pt2.x, pt1.y + pt2.y};
   }
 
   demehin::point_t* copyCords(const demehin::point_t* vertex, size_t vrt_cnt)
@@ -113,27 +111,18 @@ void demehin::Polygon::move(double x, double y)
   point_t move_cords = {x, y};
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
-    vertex_[i] = addToPoint(vertex_[i], move_cords);
+    vertex_[i] = sumPointsCords(vertex_[i], move_cords);
   }
 }
 
 void demehin::Polygon::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::logic_error("incorrect_scale");
-  }
-
   point_t plg_center = getCenter();
 
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
     point_t difference_cords = getDifferenceCords(vertex_[i], plg_center);
-
-    difference_cords.x *= k;
-    difference_cords.y *= k;
-
-    vertex_[i] = {plg_center.x + difference_cords.x, plg_center.y + difference_cords.y};
+    vertex_[i] = sumPointsCords(plg_center, {difference_cords.x * k, difference_cords.y * k});
   }
 }
 
@@ -142,11 +131,8 @@ demehin::point_t demehin::Polygon::getCenter() const
   demehin::point_t plg_center = {0, 0};
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
-    plg_center = addToPoint(plg_center, vertex_[i]);
+    plg_center = sumPointsCords(plg_center, vertex_[i]);
   }
 
-  plg_center.x /= vrtx_cnt_;
-  plg_center.y /= vrtx_cnt_;
-
-  return plg_center;
+  return {plg_center.x / vrtx_cnt_, plg_center.y / vrtx_cnt_};
 }
