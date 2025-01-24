@@ -5,7 +5,7 @@
 
 namespace zholobov {
 
-  class Rectangle : public Parallelogram {
+  class Rectangle: public Parallelogram {
   public:
     Rectangle(const point_t& a, const point_t& c);
   };

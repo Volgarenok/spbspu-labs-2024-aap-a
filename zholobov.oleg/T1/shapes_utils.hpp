@@ -2,6 +2,7 @@
 #define SHAPES_UTILS_HPP
 
 #include <istream>
+
 #include "parallelogram.hpp"
 #include "rectangle.hpp"
 #include "square.hpp"
