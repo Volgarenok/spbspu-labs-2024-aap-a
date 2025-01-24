@@ -77,7 +77,7 @@ int main()
   {
     zakirov::scale_all_shapes(shapes, target, coefficient, location);
   }
-  catch(const std::invalid_argument& e)
+  catch (const std::invalid_argument& e)
   {
     std::cerr << "Warning! The figure change coefficient is incorrect." << '\n';
     zakirov::clear_shapes(shapes, location);

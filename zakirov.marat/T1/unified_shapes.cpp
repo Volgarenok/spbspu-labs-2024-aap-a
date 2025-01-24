@@ -55,7 +55,7 @@ namespace
       {
         get_part(in, expanded_line, start, finish, interrupt_el);
       }
-      catch(const std::exception& e)
+      catch (const std::exception& e)
       {
         free(expanded_line);
         free(line);
@@ -127,7 +127,7 @@ zakirov::Rectangle * zakirov::make_rectangle(double bottom_x, double bottom_y, d
     new (rectangle) Rectangle(bottom_left, top_right);
     return rectangle;
   }
-  catch(const std::invalid_argument & e)
+  catch (const std::invalid_argument & e)
   {
     free(rectangle);
     throw e;
@@ -143,7 +143,7 @@ zakirov::Circle * zakirov::make_circle(double center_x, double center_y, double 
     new (circle) Circle(center, radius);
     return circle;
   }
-  catch(const std::invalid_argument & e)
+  catch (const std::invalid_argument & e)
   {
     free(circle);
     throw e;
@@ -159,7 +159,7 @@ zakirov::Ring * zakirov::make_ring(double center_x, double center_y, double in_r
     new (ring) Ring(center, in_radius, ex_radius);
     return ring;
   }
-  catch(const std::invalid_argument & e)
+  catch (const std::invalid_argument & e)
   {
     free(ring);
     throw e;
@@ -304,17 +304,25 @@ double * zakirov::get_data(std::istream & in)
 
 void zakirov::scale_from_point(Shape * mutable_shape, point_t target, double k)
 {
-  if (k <= 0)
-  {
-    throw std::invalid_argument("Incorrect coefficient");
-  }
-
   point_t nailed_p1 = mutable_shape->getFrameRect().pos;
   mutable_shape->move(target);
   point_t nailed_p2 = mutable_shape->getFrameRect().pos;
   point_t bias{(nailed_p2.x - nailed_p1.x) * k, (nailed_p2.y - nailed_p1.y) * k};
   mutable_shape->scale(k);
   mutable_shape->move(-bias.x, -bias.y);
+}
+
+void zakirov::scale_all_shapes(Shape ** shapes, point_t target, double k, size_t size)
+{
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Incorrect coefficient");
+  }
+
+  for (size_t i = 0; i < size; ++i)
+  {
+    scale_from_point(shapes[i], target, k);
+  }
 }
 
 void zakirov::output_frame(std::ostream & out, Shape ** shapes, size_t quantity)
@@ -335,23 +343,6 @@ void zakirov::output_frame(std::ostream & out, Shape ** shapes, size_t quantity)
   out << frame_top_right.x << ' ' << frame_top_right.y << '\n';
 }
 
-void zakirov::clear_shapes(Shape ** shapes, size_t quantity)
-{
-  for (size_t i = 0; i < quantity; ++i)
-  {
-    shapes[i]->~Shape();
-    free(shapes[i]);
-  }
-}
-
-void zakirov::scale_all_shapes(Shape ** shapes, point_t target, double k, size_t size)
-{
-  for (size_t i = 0; i < size; ++i)
-  {
-    scale_from_point(shapes[i], target, k);
-  }
-}
-
 double zakirov::get_total_area(Shape ** shapes, size_t size)
 {
   double total_area = 0.0;
@@ -361,4 +352,13 @@ double zakirov::get_total_area(Shape ** shapes, size_t size)
   }
 
   return total_area;
+}
+
+void zakirov::clear_shapes(Shape ** shapes, size_t quantity)
+{
+  for (size_t i = 0; i < quantity; ++i)
+  {
+    shapes[i]->~Shape();
+    free(shapes[i]);
+  }
 }
