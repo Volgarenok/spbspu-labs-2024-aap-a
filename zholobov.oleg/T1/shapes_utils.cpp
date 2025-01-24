@@ -26,7 +26,7 @@ zholobov::Square* zholobov::create_square(std::istream& in)
 {
   double x1 = 0.0;
   double y1 = 0.0;
-  double a;
+  double a = 0.0;
   in >> x1 >> y1 >> a;
   if (!in) {
     throw std::logic_error("Stream read error");
@@ -89,7 +89,6 @@ void zholobov::print_shapes(Shape** shapes, size_t shape_cnt)
       std::cout << " " << rect.pos.x + rect.width / 2.0 << " " << rect.pos.y + rect.height / 2.0;
     }
   }
-  std::cout << "\n";
 }
 
 void zholobov::delete_shapes(Shape** shapes, size_t shape_cnt)
