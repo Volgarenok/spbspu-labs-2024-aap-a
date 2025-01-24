@@ -22,7 +22,6 @@ namespace
       vrt[i] = {x, y};
     }
     demehin::Polygon plg(VRT_CNT, vrt);
-
     return plg;
   }
 }

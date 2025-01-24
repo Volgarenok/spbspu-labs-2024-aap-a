@@ -3,12 +3,9 @@
 #include <cstddef>
 #include "base-types.hpp"
 
-namespace demehin
+namespace demehin::details
 {
-  namespace details
-  {
-    point_t* copyCords(const point_t* vertex, size_t vrt_cnt);
-  }
+  point_t* copyCords(const point_t* vertex, size_t vrt_cnt);
 }
 
 #endif

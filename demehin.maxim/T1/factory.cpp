@@ -21,7 +21,6 @@ namespace
     inputParameters(in, rectCords, 4);
     demehin::point_t left_bot = {rectCords[0], rectCords[1]};
     demehin::point_t right_top = {rectCords[2], rectCords[3]};
-
     return new demehin::Rectangle(left_bot, right_top);
   }
 
@@ -30,7 +29,6 @@ namespace
     double ringParams[4] = {};
     inputParameters(in, ringParams, 4);
     demehin::point_t center = {ringParams[0], ringParams[1]};
-
     return new demehin::Ring(center, ringParams[2], ringParams[3]);
   }
 
@@ -62,7 +60,6 @@ namespace
       cord_cnt++;
     }
     in.clear();
-
     return pts;
   }
 
@@ -82,26 +79,26 @@ namespace
       throw;
     }
     delete[] vrt;
-
     return plg;
   }
 }
 
-void demehin::createShape(std::istream& in, const std::string& shp_name, Shape** shapes, size_t& shp_cnt)
+demehin::Shape* demehin::createShape(std::istream& in, const std::string& shp_name)
 {
   if (shp_name == "RECTANGLE")
   {
-    shapes[shp_cnt++] = createRect(in);
+    return createRect(in);
   }
 
   else if (shp_name == "RING")
   {
-    shapes[shp_cnt++] = createRing(in);
+    return createRing(in);
   }
 
   else if (shp_name == "POLYGON")
   {
-      shapes[shp_cnt++] = createPolygon(in);
+    return createPolygon(in);
   }
+  return nullptr;
 }
 

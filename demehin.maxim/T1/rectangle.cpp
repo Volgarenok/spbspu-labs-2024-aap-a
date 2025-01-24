@@ -4,7 +4,6 @@
 
 namespace
 {
-
   demehin::Polygon createPolygonForRect(const demehin::point_t& left_bot, const demehin::point_t& right_top)
   {
     demehin::point_t vrt[4] = {};
@@ -13,7 +12,6 @@ namespace
     vrt[2] = right_top;
     vrt[3] = {right_top.x, left_bot.y};
     demehin::Polygon plg(4, vrt);
-
     return plg;
   }
 }

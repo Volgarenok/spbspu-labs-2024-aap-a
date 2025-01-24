@@ -35,7 +35,6 @@ namespace
     {
       area_sum += shapes[i]->getArea();
     }
-
     return area_sum;
   }
 
@@ -85,24 +84,26 @@ int main()
     {
       std::cerr << "error: eof\n";
       free_shapes(shapes, shp_cnt);
-
       return 1;
     }
 
     try
     {
-      demehin::createShape(std::cin, shape_name, shapes, shp_cnt);
+      shapes[shp_cnt] = demehin::createShape(std::cin, shape_name);
     }
     catch (const std::bad_alloc&)
     {
       free_shapes(shapes, shp_cnt);
-
       return 1;
     }
     catch (const std::logic_error&)
     {
-      shp_cnt--;
       is_incorrect_shp = true;
+    }
+
+    if (shapes[shp_cnt] != nullptr)
+    {
+      shp_cnt++;
     }
   }
 
@@ -112,7 +113,6 @@ int main()
   if (shp_cnt == 0)
   {
     std::cerr << "no shapes\n";
-
     return 1;
   }
 
@@ -134,7 +134,6 @@ int main()
   {
     std::cerr << e.what() << "\n";
     free_shapes(shapes, shp_cnt);
-
     return 1;
   }
 
