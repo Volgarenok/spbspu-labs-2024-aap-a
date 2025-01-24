@@ -8,5 +8,5 @@ void demehin::Shape::scale(double k)
     throw std::logic_error("incorrect_scale");
   }
 
-  scale(k);
+  scaleUnsafely(k);
 }

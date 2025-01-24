@@ -14,18 +14,13 @@ namespace demehin
     rectangle_t getFrameRect() const override;
     void move(point_t s) override;
     void move(double x, double y) override;
-    void unsafeScale(double k) override;
+    void scaleUnsafely(double k) override;
   private:
     point_t getCenter() const;
 
     size_t vrtx_cnt_;
     point_t* vertex_;
   };
-
-  namespace details
-  {
-    point_t* copyCords(const point_t* vertex, size_t vrt_cnt);
-  }
 }
 
 #endif

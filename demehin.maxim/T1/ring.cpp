@@ -6,7 +6,6 @@ namespace
 {
   demehin::Polygon createPolygonForRing(const demehin::point_t& center, double radius)
   {
-
     if (radius <= 0)
     {
       throw std::logic_error("incorrect_shape");
@@ -22,8 +21,8 @@ namespace
       double y = center.y + radius * std::sin(angle);
       vrt[i] = {x, y};
     }
-
     demehin::Polygon plg(VRT_CNT, vrt);
+
     return plg;
   }
 }
@@ -60,8 +59,8 @@ void demehin::Ring::move(double x, double y)
   outer_plg_.move(x, y);
 }
 
-void demehin::Ring::unsafeScale(double k)
+void demehin::Ring::scaleUnsafely(double k)
 {
-  inner_plg_.unsafeScale(k);
-  outer_plg_.unsafeScale(k);
+  inner_plg_.scaleUnsafely(k);
+  outer_plg_.scaleUnsafely(k);
 }

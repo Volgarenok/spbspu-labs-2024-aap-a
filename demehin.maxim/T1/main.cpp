@@ -23,7 +23,7 @@ namespace
       double move_x = (new_pt.x - orig_pt.x) * scale_k;
       double move_y = (new_pt.y - orig_pt.y) * scale_k;
       demehin::point_t move_vector = {move_x, move_y};
-      shapes[i]->unsafeScale(scale_k);
+      shapes[i]->scaleUnsafely(scale_k);
       shapes[i]->move(move_vector.x * -1, move_vector.y * -1);
     }
   }
@@ -35,6 +35,7 @@ namespace
     {
       area_sum += shapes[i]->getArea();
     }
+
     return area_sum;
   }
 
@@ -54,12 +55,10 @@ namespace
       double frRectCords[4] = {};
       demehin::rectangle_t fr_rect = shapes[i]->getFrameRect();
       getFrRectCords(fr_rect, frRectCords);
-
       for (size_t i = 0; i < 4; i++)
       {
         out << " " << frRectCords[i];
       }
-
     }
   }
 
@@ -86,6 +85,7 @@ int main()
     {
       std::cerr << "error: eof\n";
       free_shapes(shapes, shp_cnt);
+
       return 1;
     }
 
@@ -96,6 +96,7 @@ int main()
     catch (const std::bad_alloc&)
     {
       free_shapes(shapes, shp_cnt);
+
       return 1;
     }
     catch (const std::logic_error&)
@@ -111,6 +112,7 @@ int main()
   if (shp_cnt == 0)
   {
     std::cerr << "no shapes\n";
+
     return 1;
   }
 
@@ -128,10 +130,11 @@ int main()
   {
     makeIsoScale(shapes, shp_cnt, scale_k, scale_pt);
   }
-  catch (std::logic_error& e)
+  catch (const std::logic_error& e)
   {
     std::cerr << e.what() << "\n";
     free_shapes(shapes, shp_cnt);
+
     return 1;
   }
 

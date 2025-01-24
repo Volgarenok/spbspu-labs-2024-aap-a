@@ -2,6 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <algorithm>
+#include "creating_utils.hpp"
 
 namespace
 {
@@ -22,6 +23,7 @@ namespace
         }
       }
     }
+
     return false;
   }
 
@@ -39,18 +41,6 @@ namespace
   }
 
 }
-
-
-demehin::point_t* demehin::details::copyCords(const point_t* vertex, size_t vrt_cnt)
-{
-  point_t* vrt = new point_t[vrt_cnt];
-  for (size_t i = 0; i < vrt_cnt; i++)
-  {
-    vrt[i] = vertex[i];
-  }
-  return vrt;
-}
-
 
 demehin::Polygon::~Polygon()
 {
@@ -76,6 +66,7 @@ double demehin::Polygon::getArea() const
     size_t j = (i + 1) % vrtx_cnt_;
     area += (vertex_[i].x * vertex_[j].y - vertex_[j].x * vertex_[i].y);
   }
+
   return std::abs(area) / 2.0;
 }
 
@@ -83,7 +74,6 @@ demehin::rectangle_t demehin::Polygon::getFrameRect() const
 {
   double min_x = vertex_[0].x, max_x = vertex_[0].x;
   double min_y = vertex_[0].y, max_y = vertex_[0].y;
-
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
     min_x = std::min(min_x, vertex_[i].x);
@@ -117,10 +107,9 @@ void demehin::Polygon::move(double x, double y)
   }
 }
 
-void demehin::Polygon::unsafeScale(double k)
+void demehin::Polygon::scaleUnsafely(double k)
 {
   point_t plg_center = getCenter();
-
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
     point_t difference_cords = getDifferenceCords(vertex_[i], plg_center);

@@ -12,7 +12,6 @@ namespace
     vrt[1] = {left_bot.x, right_top.y};
     vrt[2] = right_top;
     vrt[3] = {right_top.x, left_bot.y};
-
     demehin::Polygon plg(4, vrt);
 
     return plg;
@@ -48,7 +47,7 @@ void demehin::Rectangle::move(double x, double y)
   plg_.move(x, y);
 }
 
-void demehin::Rectangle::unsafeScale(double k)
+void demehin::Rectangle::scaleUnsafely(double k)
 {
-  plg_.unsafeScale(k);
+  plg_.scaleUnsafely(k);
 }
