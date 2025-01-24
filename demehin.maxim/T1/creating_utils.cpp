@@ -7,5 +7,6 @@ demehin::point_t* demehin::details::copyCords(const point_t* vertex, size_t vrt_
   {
     vrt[i] = vertex[i];
   }
+
   return vrt;
 }
