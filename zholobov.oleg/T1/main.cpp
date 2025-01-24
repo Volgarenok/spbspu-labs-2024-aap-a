@@ -34,10 +34,10 @@ int main()
           zholobov::delete_shapes(shapes, shape_cnt);
           return 1;
         }
-        zholobov::print_shapes(shapes, shape_cnt);
+        zholobov::print_shapes(std::cout, shapes, shape_cnt);
         std::cout << "\n";
         zholobov::process_scale(shapes, shape_cnt, {x, y}, scale_factor);
-        zholobov::print_shapes(shapes, shape_cnt);
+        zholobov::print_shapes(std::cout, shapes, shape_cnt);
         std::cout << "\n";
       } else {
         std::cerr << "Unknown shape (" << shape_name << ")\n";
