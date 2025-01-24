@@ -1,7 +1,7 @@
 #include "shape.hpp"
 #include <stdexcept>
 
-void demehin::Shape::defaultScale(double k)
+void demehin::Shape::scale(double k)
 {
   if (k <= 0)
   {

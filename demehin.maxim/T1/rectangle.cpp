@@ -48,7 +48,7 @@ void demehin::Rectangle::move(double x, double y)
   plg_.move(x, y);
 }
 
-void demehin::Rectangle::scale(double k)
+void demehin::Rectangle::unsafeScale(double k)
 {
-  plg_.scale(k);
+  plg_.unsafeScale(k);
 }

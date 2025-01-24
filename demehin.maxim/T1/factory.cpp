@@ -40,8 +40,9 @@ namespace
   {
     demehin::point_t* pts = new demehin::point_t[capacity];
     size_t size = 0;
-    demehin::point_t vrt = {0, 0};
-    while (in >> vrt.x >> vrt.y)
+    double vrt_x = 0, vrt_y = 0;
+
+    while (in >> vrt_x >> vrt_y)
     {
       if (size >= capacity)
       {
@@ -49,21 +50,17 @@ namespace
         demehin::point_t* new_pts = nullptr;
         try
         {
-          new_pts = new demehin::point_t[capacity];
+          new_pts = demehin::details::copyCords(pts, capacity);
         }
         catch (const std::bad_alloc&)
         {
           delete[] pts;
           throw;
         }
-        for (size_t i = 0; i < size; i++)
-        {
-          new_pts[i] = pts[i];
-        }
         delete[] pts;
         pts = new_pts;
       }
-      pts[size++] = vrt;
+      pts[size++] = {vrt_x, vrt_y};
       cord_cnt++;
     }
     in.clear();

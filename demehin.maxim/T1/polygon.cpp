@@ -38,17 +38,19 @@ namespace
     return {pt1.x + pt2.x, pt1.y + pt2.y};
   }
 
-  demehin::point_t* copyCords(const demehin::point_t* vertex, size_t vrt_cnt)
-  {
-    demehin::point_t* vrt = new demehin::point_t[vrt_cnt];
-    for (size_t i = 0; i < vrt_cnt; i++)
-    {
-      vrt[i] = vertex[i];
-    }
-    return vrt;
-  }
-
 }
+
+
+demehin::point_t* demehin::details::copyCords(const point_t* vertex, size_t vrt_cnt)
+{
+  point_t* vrt = new point_t[vrt_cnt];
+  for (size_t i = 0; i < vrt_cnt; i++)
+  {
+    vrt[i] = vertex[i];
+  }
+  return vrt;
+}
+
 
 demehin::Polygon::~Polygon()
 {
@@ -57,7 +59,7 @@ demehin::Polygon::~Polygon()
 
 demehin::Polygon::Polygon(size_t vrtx_cnt, const point_t* vertex):
   vrtx_cnt_(vrtx_cnt),
-  vertex_(copyCords(vertex, vrtx_cnt))
+  vertex_(details::copyCords(vertex, vrtx_cnt))
 {
   if (vrtx_cnt < 3 || hasSameVertex(vrtx_cnt, vertex))
   {
@@ -115,7 +117,7 @@ void demehin::Polygon::move(double x, double y)
   }
 }
 
-void demehin::Polygon::scale(double k)
+void demehin::Polygon::unsafeScale(double k)
 {
   point_t plg_center = getCenter();
 

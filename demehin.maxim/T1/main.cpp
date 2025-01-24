@@ -23,7 +23,7 @@ namespace
       double move_x = (new_pt.x - orig_pt.x) * scale_k;
       double move_y = (new_pt.y - orig_pt.y) * scale_k;
       demehin::point_t move_vector = {move_x, move_y};
-      shapes[i]->defaultScale(scale_k);
+      shapes[i]->unsafeScale(scale_k);
       shapes[i]->move(move_vector.x * -1, move_vector.y * -1);
     }
   }
@@ -38,13 +38,12 @@ namespace
     return area_sum;
   }
 
-  void getFrRectCords(const demehin::rectangle_t& fr_rect, double& lt_bot_x, double& lt_bot_y,
-    double& rt_top_x, double& rt_top_y)
- {
-    lt_bot_x = fr_rect.pos.x - fr_rect.width / 2;
-    lt_bot_y = fr_rect.pos.y - fr_rect.height / 2;
-    rt_top_x = fr_rect.pos.x + fr_rect.width / 2;
-    rt_top_y = fr_rect.pos.y + fr_rect.height / 2;
+  void getFrRectCords(const demehin::rectangle_t& fr_rect, double* frRectCords)
+  {
+    frRectCords[0] = fr_rect.pos.x - fr_rect.width / 2;
+    frRectCords[1] = fr_rect.pos.y - fr_rect.height / 2;
+    frRectCords[2] = fr_rect.pos.x + fr_rect.width / 2;
+    frRectCords[3] = fr_rect.pos.y + fr_rect.height / 2;
   }
 
   void printShapesInfo(std::ostream& out, const demehin::Shape* const* shapes, size_t shp_cnt)
@@ -52,10 +51,15 @@ namespace
     out << getAreaSum(shapes, shp_cnt);
     for (size_t i = 0; i < shp_cnt; i++)
     {
-      double lt_bot_x = 0, lt_bot_y = 0, rt_top_x = 0, rt_top_y = 0;
+      double frRectCords[4] = {};
       demehin::rectangle_t fr_rect = shapes[i]->getFrameRect();
-      getFrRectCords(fr_rect, lt_bot_x, lt_bot_y, rt_top_x, rt_top_y);
-      out << " " << lt_bot_x << " " << lt_bot_y << " " << rt_top_x << " " << rt_top_y;
+      getFrRectCords(fr_rect, frRectCords);
+
+      for (size_t i = 0; i < 4; i++)
+      {
+        out << " " << frRectCords[i];
+      }
+
     }
   }
 
@@ -103,12 +107,6 @@ int main()
 
   double scale_pt_x = 0, scale_pt_y = 0, scale_k = 0;
   std::cin >> scale_pt_x >> scale_pt_y >> scale_k;
-  if (scale_k < 0)
-  {
-    std::cerr << "Incorrect scale\n";
-    free_shapes(shapes, shp_cnt);
-    return 1;
-  }
 
   if (shp_cnt == 0)
   {
@@ -126,7 +124,16 @@ int main()
   std::cout << "\n";
 
   demehin::point_t scale_pt = {scale_pt_x, scale_pt_y};
-  makeIsoScale(shapes, shp_cnt, scale_k, scale_pt);
+  try
+  {
+    makeIsoScale(shapes, shp_cnt, scale_k, scale_pt);
+  }
+  catch (std::logic_error& e)
+  {
+    std::cerr << e.what() << "\n";
+    free_shapes(shapes, shp_cnt);
+    return 1;
+  }
 
   printShapesInfo(std::cout, shapes, shp_cnt);
   std::cout << "\n";
