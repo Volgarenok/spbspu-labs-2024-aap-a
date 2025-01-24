@@ -30,13 +30,10 @@ zakirov::rectangle_t zakirov::Rectangle::getFrameRect() const
 
 void zakirov::Rectangle::move(point_t target)
 {
-  double distance_x = get_distance_x(top_right_, bottom_left_);
-  double distance_y = get_distance_y(top_right_, bottom_left_);
-
-  top_right_.x = target.x + (distance_x / 2);
-  top_right_.y = target.y + (distance_y / 2);
-  bottom_left_.x = target.x - (distance_x / 2);
-  bottom_left_.y = target.y - (distance_y / 2);
+  point_t center = getFrameRect().pos;
+  point_t bias = {target.x - center.x, target.y - center.y};
+  move_point(& top_right_, bias.x, bias.y);
+  move_point(& bottom_left_, bias.x, bias.y);
 }
 
 void zakirov::Rectangle::move(double bias_x, double bias_y)
@@ -53,8 +50,8 @@ void zakirov::Rectangle::scale(double k)
   }
 
   point_t center = getFrameRect().pos;
-  top_right_.x = center.x + (top_right_.x - center.x) * k;
-  top_right_.y  = center.y + (top_right_.y - center.y) * k;
-  bottom_left_.x = center.x - (center.x - bottom_left_.x) * k;
-  bottom_left_.y = center.x - (center.x - bottom_left_.y) * k;
+  point_t bias = {(top_right_.x - center.x) * k, (top_right_.y - center.y) * k};
+
+  move_point(& top_right_, bias.x, bias.y);
+  move_point(& top_right_, -bias.x, -bias.y);
 }
