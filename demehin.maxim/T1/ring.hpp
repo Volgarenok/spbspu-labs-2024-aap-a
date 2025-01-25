@@ -15,10 +15,6 @@ namespace demehin
     void move(double x, double y) override;
     void scaleUnsafely(double k) override;
   private:
-    void movePolygons(point_t s);
-    void movePolygons(double x, double y);
-    void scaleUnsafelyPolygons(double k);
-
     Polygon inner_plg_;
     Polygon outer_plg_;
   };

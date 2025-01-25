@@ -48,33 +48,17 @@ demehin::rectangle_t demehin::Ring::getFrameRect() const
 
 void demehin::Ring::move(point_t s)
 {
-  movePolygons(s);
+  move(s.x, s.y);
 }
 
 void demehin::Ring::move(double x, double y)
 {
-  movePolygons(x, y);
+  outer_plg_.move(x, y);
+  inner_plg_.move(x, y);
 }
 
 void demehin::Ring::scaleUnsafely(double k)
 {
-  scaleUnsafelyPolygons(k);
-}
-
-void demehin::Ring::movePolygons(point_t s)
-{
-  inner_plg_.move(s);
-  outer_plg_.move(s);
-}
-
-void demehin::Ring::movePolygons(double x, double y)
-{
-  inner_plg_.move(x, y);
-  outer_plg_.move(x, y);
-}
-
-void demehin::Ring::scaleUnsafelyPolygons(double k)
-{
-  inner_plg_.scaleUnsafely(k);
-  outer_plg_.scaleUnsafely(k);
+  outer_plg_.scale(k);
+  inner_plg_.scale(k);
 }
