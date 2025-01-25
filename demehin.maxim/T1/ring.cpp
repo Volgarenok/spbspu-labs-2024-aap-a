@@ -48,7 +48,8 @@ demehin::rectangle_t demehin::Ring::getFrameRect() const
 
 void demehin::Ring::move(point_t s)
 {
-  move(s.x, s.y);
+  outer_plg_.move(s);
+  inner_plg_.move(s);
 }
 
 void demehin::Ring::move(double x, double y)

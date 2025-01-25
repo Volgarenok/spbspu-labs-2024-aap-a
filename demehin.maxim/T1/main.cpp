@@ -58,7 +58,7 @@ namespace
     }
   }
 
-  void free_shapes(demehin::Shape** shapes, size_t shp_cnt)
+  void freeShapes(demehin::Shape** shapes, size_t shp_cnt)
   {
     for (size_t i = 0; i < shp_cnt; i++)
     {
@@ -80,7 +80,7 @@ int main()
     if (std::cin.eof())
     {
       std::cerr << "error: eof\n";
-      free_shapes(shapes, shp_cnt);
+      freeShapes(shapes, shp_cnt);
       return 1;
     }
 
@@ -90,7 +90,7 @@ int main()
     }
     catch (const std::bad_alloc&)
     {
-      free_shapes(shapes, shp_cnt);
+      freeShapes(shapes, shp_cnt);
       return 1;
     }
     catch (const std::logic_error&)
@@ -130,13 +130,13 @@ int main()
   catch (const std::logic_error& e)
   {
     std::cerr << e.what() << "\n";
-    free_shapes(shapes, shp_cnt);
+    freeShapes(shapes, shp_cnt);
     return 1;
   }
 
   printShapesInfo(std::cout, shapes, shp_cnt);
   std::cout << "\n";
 
-  free_shapes(shapes, shp_cnt);
+  freeShapes(shapes, shp_cnt);
 }
 
