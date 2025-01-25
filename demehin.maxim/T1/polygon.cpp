@@ -23,7 +23,6 @@ namespace
         }
       }
     }
-
     return false;
   }
 
@@ -31,7 +30,6 @@ namespace
   {
     double difference_x = pt1.x - pt2.x;
     double difference_y = pt1.y - pt2.y;
-
     return {difference_x, difference_y};
   }
 
@@ -66,7 +64,6 @@ double demehin::Polygon::getArea() const
     size_t j = (i + 1) % vrtx_cnt_;
     area += (vertex_[i].x * vertex_[j].y - vertex_[j].x * vertex_[i].y);
   }
-
   return std::abs(area) / 2.0;
 }
 
@@ -87,7 +84,6 @@ demehin::rectangle_t demehin::Polygon::getFrameRect() const
   double pos_x = (max_x + min_x) / 2;
   double pos_y = (max_y + min_y) / 2;
   point_t fr_rect_pos = {pos_x, pos_y};
-
   return {fr_rect_w, fr_rect_h, fr_rect_pos};
 }
 
@@ -124,6 +120,5 @@ demehin::point_t demehin::Polygon::getCenter() const
   {
     plg_center = sumPointsCords(plg_center, vertex_[i]);
   }
-
   return {plg_center.x / vrtx_cnt_, plg_center.y / vrtx_cnt_};
 }
