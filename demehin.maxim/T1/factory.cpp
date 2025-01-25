@@ -2,7 +2,6 @@
 #include <iostream>
 #include "rectangle.hpp"
 #include "ring.hpp"
-#include "polygon.hpp"
 #include "creating_utils.hpp"
 
 namespace

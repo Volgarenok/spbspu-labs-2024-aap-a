@@ -1,9 +1,6 @@
 #include <iostream>
 #include <string>
 #include <iomanip>
-#include "rectangle.hpp"
-#include "ring.hpp"
-#include "polygon.hpp"
 #include "factory.hpp"
 
 namespace
