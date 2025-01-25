@@ -115,10 +115,12 @@ void demehin::Polygon::scaleUnsafely(double k)
 
 demehin::point_t demehin::Polygon::getCenter() const
 {
-  demehin::point_t plg_center = {0, 0};
+  point_t plg_center = {0, 0};
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
     plg_center = sumPointsCords(plg_center, vertex_[i]);
   }
-  return {plg_center.x / vrtx_cnt_, plg_center.y / vrtx_cnt_};
+  double cent_cord_x = plg_center.x / vrtx_cnt_;
+  double cent_cord_y = plg_center.y / vrtx_cnt_;
+  return {cent_cord_x, cent_cord_y};
 }

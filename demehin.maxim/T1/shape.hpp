@@ -13,7 +13,7 @@ namespace demehin
     virtual void move(point_t s) = 0;
     virtual void move(double x, double y) = 0;
     virtual void scaleUnsafely(double k) = 0;
-    virtual void scale(double k);
+    void scale(double k);
   };
 }
 
