@@ -7,8 +7,7 @@
 
 namespace
 {
-  using namespace maslov;
-  Shape * makeShape(std::istream & in, std::string name);
+  maslov::Shape * makeShape(std::istream & in, std::string name);
 }
 
 size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
@@ -67,39 +66,39 @@ namespace
       in >> coordinates[i];
     }
   }
-  Rectangle * makeRectangle(std::istream & in)
+  maslov::Rectangle * makeRectangle(std::istream & in)
   {
     constexpr size_t numberOfCoordinates = 4;
     double coordinates[numberOfCoordinates] = {};
     inputArray(in, coordinates, numberOfCoordinates);
-    point_t firstPoint = {coordinates[0], coordinates[1]};
-    point_t secondPoint = {coordinates[2], coordinates[3]};
-    Rectangle * rectangle = new Rectangle(firstPoint, secondPoint);
+    maslov::point_t firstPoint = {coordinates[0], coordinates[1]};
+    maslov::point_t secondPoint = {coordinates[2], coordinates[3]};
+    maslov::Rectangle * rectangle = new maslov::Rectangle(firstPoint, secondPoint);
     return rectangle;
   }
-  Regular * makeRegular(std::istream & in)
+  maslov::Regular * makeRegular(std::istream & in)
   {
     constexpr size_t numberOfCoordinates = 6;
     double coordinates[numberOfCoordinates] = {};
     inputArray(in, coordinates, numberOfCoordinates);
-    point_t firstPoint = {coordinates[0], coordinates[1]};
-    point_t secondPoint = {coordinates[2], coordinates[3]};
-    point_t thirdPoint = {coordinates[4], coordinates[5]};
-    Regular * regular = new Regular(firstPoint, secondPoint, thirdPoint);
+    maslov::point_t firstPoint = {coordinates[0], coordinates[1]};
+    maslov::point_t secondPoint = {coordinates[2], coordinates[3]};
+    maslov::point_t thirdPoint = {coordinates[4], coordinates[5]};
+    maslov::Regular * regular = new maslov::Regular(firstPoint, secondPoint, thirdPoint);
     return regular;
   }
-  Parallelogram * makeParallelogram(std::istream & in)
+  maslov::Parallelogram * makeParallelogram(std::istream & in)
   {
     constexpr size_t numberOfCoordinates = 6;
     double coordinates[numberOfCoordinates] = {};
     inputArray(in, coordinates, numberOfCoordinates);
-    point_t firstPoint = {coordinates[0], coordinates[1]};
-    point_t secondPoint = {coordinates[2], coordinates[3]};
-    point_t thirdPoint = {coordinates[4], coordinates[5]};
-    Parallelogram * parallelogram = new Parallelogram(firstPoint, secondPoint, thirdPoint);
+    maslov::point_t firstP = {coordinates[0], coordinates[1]};
+    maslov::point_t secondP = {coordinates[2], coordinates[3]};
+    maslov::point_t thirdP = {coordinates[4], coordinates[5]};
+    maslov::Parallelogram * parallelogram = new maslov::Parallelogram(firstP, secondP, thirdP);
     return parallelogram;
   }
-  Shape * makeShape(std::istream & in, std::string name)
+  maslov::Shape * makeShape(std::istream & in, std::string name)
   {
     if (name == "RECTANGLE")
     {
