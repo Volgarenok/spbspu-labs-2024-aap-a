@@ -35,7 +35,9 @@ namespace
 
   demehin::point_t sumPointsCords(const demehin::point_t& pt1, const demehin::point_t& pt2)
   {
-    return {pt1.x + pt2.x, pt1.y + pt2.y};
+    double sum_cord_x = pt1.x + pt2.x;
+    double sum_cord_y = pt1.y + pt2.y;
+    return {sum_cord_x, sum_cord_y};
   }
 
 }
@@ -109,7 +111,9 @@ void demehin::Polygon::scaleUnsafely(double k)
   for (size_t i = 0; i < vrtx_cnt_; i++)
   {
     point_t difference_cords = getDifferenceCords(vertex_[i], plg_center);
-    vertex_[i] = sumPointsCords(plg_center, {difference_cords.x * k, difference_cords.y * k});
+    double diff_cords_x = difference_cords.x * k;
+    double diff_cords_y = difference_cords.y * k;
+    vertex_[i] = sumPointsCords(plg_center, {diff_cords_x, diff_cords_y});
   }
 }
 
