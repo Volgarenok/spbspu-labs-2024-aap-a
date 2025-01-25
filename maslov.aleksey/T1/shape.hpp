@@ -13,6 +13,7 @@ namespace maslov
     virtual void move(point_t s) = 0;
     virtual void move(double dx, double dy) = 0;
     virtual void scale(double k) = 0;
+    virtual Shape * clone() const = 0;
   };
 }
 

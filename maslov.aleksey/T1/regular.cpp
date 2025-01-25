@@ -137,3 +137,7 @@ bool maslov::Regular::isRegular() const
   }
   return false;
 }
+maslov::Shape * maslov::Regular::clone() const
+{
+  return new Regular(A_, B_, C_);
+}

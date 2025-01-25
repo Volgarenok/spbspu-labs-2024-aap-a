@@ -155,3 +155,13 @@ void maslov::Rectangle::clear(size_t count)
   }
   delete[] regularArray_;
 }
+maslov::Shape * maslov::Rectangle::clone() const
+{
+  rectangle_t rectangle = getFrameRect();
+  point_t center = rectangle.pos;
+  double height = rectangle.height;
+  double width = rectangle.width;
+  point_t lowerLeft = {center.x - width / 2.0, center.y - height / 2.0};
+  point_t upperRight = {center.x + width / 2.0, center.y + height / 2.0};
+  return new Rectangle(lowerLeft, upperRight);
+}

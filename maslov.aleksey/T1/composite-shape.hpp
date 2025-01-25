@@ -6,7 +6,7 @@
 
 namespace maslov
 {
-  struct CompositeShape
+  struct CompositeShape final
   {
     CompositeShape();
     CompositeShape(const CompositeShape & rhs);

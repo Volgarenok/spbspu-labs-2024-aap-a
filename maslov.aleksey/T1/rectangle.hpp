@@ -15,6 +15,7 @@ namespace maslov
     void move(point_t s) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
+    Shape * clone() const;
    private:
     Regular ** regularArray_;
     size_t n_, nWidth_;

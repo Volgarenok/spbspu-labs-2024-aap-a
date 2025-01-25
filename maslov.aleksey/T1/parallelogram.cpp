@@ -67,3 +67,7 @@ void maslov::Parallelogram::scale(double k)
   fourth_.x = center.x + (fourth_.x - center.x) * k;
   fourth_.y = center.y + (fourth_.y - center.y) * k;
 }
+maslov::Shape * maslov::Parallelogram::clone() const
+{
+  return new Parallelogram(first_, second_, third_);
+}

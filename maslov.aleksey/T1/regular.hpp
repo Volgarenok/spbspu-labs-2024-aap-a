@@ -14,6 +14,7 @@ namespace maslov
     void move(point_t s) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
+    Shape * clone() const;
    private:
     point_t A_, B_, C_;
     size_t n_;
