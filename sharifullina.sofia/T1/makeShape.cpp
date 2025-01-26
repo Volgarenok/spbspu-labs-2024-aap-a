@@ -25,7 +25,7 @@ sharifullina::Shape * sharifullina::createShape(std::istream& in, const std::str
   }
 }
 
-void readParams(std::istream& in, double * params, size_t size)
+void sharifullina::readParams(std::istream& in, double * params, size_t size)
 {
   for (size_t i = 0; i < size; ++i)
   {
