@@ -15,44 +15,34 @@ namespace
     }
   }
 
-  tkach::point_t setFrameRectLeftPoint(const tkach::rectangle_t& frame_rect)
+  tkach::point_t getFrameRectLeftPoint(const tkach::rectangle_t& frame_rect)
   {
     tkach::point_t left_point = frame_rect.pos;
     tkach::addToPoint(left_point, (-1) * frame_rect.width / 2.0, (-1) * frame_rect.height / 2.0);
     return left_point;
   }
 
-  tkach::point_t setFrameRectRightPoint(const tkach::rectangle_t& frame_rect)
+  tkach::point_t getFrameRectRightPoint(const tkach::rectangle_t& frame_rect)
   {
     tkach::point_t right_point = frame_rect.pos;
     tkach::addToPoint(right_point, frame_rect.width / 2.0, frame_rect.height / 2.0);
     return right_point;
   }
 
-  void setFrameRectPoints(const tkach::rectangle_t& frame_rect, tkach::point_t& left_bot_point, tkach::point_t& right_top_point)
+  std::ostream& printAllFrameRectsFromCompShape(std::ostream& out, const tkach::CompositeShape& shape_array)
   {
-    left_bot_point = setFrameRectLeftPoint(frame_rect);
-    right_top_point = setFrameRectRightPoint(frame_rect);
-  }
-
-  std::ostream& printFrameRects(std::ostream& out, const tkach::CompositeShape& Shapes)
-  {
-    tkach::rectangle_t frame_rect = Shapes[0]->getFrameRect();
-    tkach::point_t left_bot_point = setFrameRectLeftPoint(frame_rect);
-    tkach::point_t right_top_point = setFrameRectRightPoint(frame_rect);
+    tkach::rectangle_t frame_rect = shape_array[0]->getFrameRect();
+    tkach::point_t left_bot_point = getFrameRectLeftPoint(frame_rect);
+    tkach::point_t right_top_point = getFrameRectRightPoint(frame_rect);
     out << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
-    for (size_t i = 1; i < Shapes.size(); ++i)
+    for (size_t i = 1; i < shape_array.size(); ++i)
     {
-      frame_rect = Shapes[i]->getFrameRect();
-      setFrameRectPoints(frame_rect, left_bot_point, right_top_point);
+      frame_rect = shape_array[i]->getFrameRect();
+      left_bot_point = getFrameRectLeftPoint(frame_rect);
+      right_top_point = getFrameRectRightPoint(frame_rect);
       out << " " << left_bot_point.x << " " << left_bot_point.y << " " << right_top_point.x << " " << right_top_point.y;
     }
     return out;
-  }
-
-  std::ostream& printAllFrameRectsFromCompShape(std::ostream& out, const tkach::CompositeShape& shape_array)
-  {
-    return printFrameRects(out, shape_array);
   }
 }
 
@@ -73,15 +63,18 @@ int main()
     }
     try
     {
-      Shape* shape = makeShape(std::cin, shape_name);
-      if (shape != nullptr)
+      if (shape_name == "RECTANGLE" || shape_name == "REGULAR" || shape_name == "RING")
       {
-        shapes_array.pushBack(shape);
+        Shape* shape = makeShape(std::cin, shape_name);
+        if (shape != nullptr)
+        {
+          shapes_array.pushBack(shape);
+        }
+        else
+        {
+           incorrect_shape = true; 
+        }
       }
-    }
-    catch (const std::logic_error&)
-    {
-      incorrect_shape = true;
     }
     catch (const std::exception& e)
     {

@@ -1,9 +1,6 @@
 #ifndef FIGUREACTIONS_HPP
 #define FIGUREACTIONS_HPP
 
-#include <cstddef>
-#include <iostream>
-#include "shape.hpp"
 #include "composite-shape.hpp"
 
 namespace tkach

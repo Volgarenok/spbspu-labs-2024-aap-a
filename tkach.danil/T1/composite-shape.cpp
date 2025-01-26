@@ -1,5 +1,4 @@
 #include "composite-shape.hpp"
-#include <cmath>
 #include <stdexcept>
 #include "figureactions.hpp"
 
@@ -204,7 +203,7 @@ const tkach::Shape* tkach::CompositeShape::operator[](const size_t id) const
 
 bool tkach::CompositeShape::empty() const noexcept
 {
-  return size_ == 0;
+  return size();
 }
 
 size_t tkach::CompositeShape::size() const noexcept
@@ -223,5 +222,5 @@ void tkach::CompositeShape::scale(const double multiplier)
   {
     throw std::logic_error("Not positive coef");
   }
-  doUnsafeIsoScaleCompShape(*this, multiplier, getFrameRect().pos);
+  doUnsafeScale(multiplier);
 }

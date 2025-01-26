@@ -5,10 +5,9 @@ double tkach::getCoordDistMultiplied(const double point1_coord, const double poi
   return (point1_coord - point2_coord) * multiplier;
 }
 
-tkach::point_t tkach::getShiftedPointFromAnother(const point_t& first_point, const point_t& another_point, const double multiplier)
+tkach::point_t tkach::getShiftedPointFromAnother(const point_t& first, const point_t& other, const double multiplier)
 {
-  return {another_point.x + getCoordDistMultiplied(first_point.x, another_point.x, multiplier), another_point.y
-    + getCoordDistMultiplied(first_point.y, another_point.y, multiplier)};
+  return {other.x + getCoordDistMultiplied(first.x, other.x, multiplier), other.y + getCoordDistMultiplied(first.y, other.y, multiplier)};
 }
 
 void tkach::addToPoint(point_t& change_point, const double add_to_x, const double add_to_y)

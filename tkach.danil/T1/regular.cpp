@@ -24,7 +24,7 @@ size_t tkach::Regular::getSideAmount() const
 {
   const double res = std::acos(-1.0) / (std::acos(getDist(first_point_, third_point_) / getDist(first_point_, second_point_)));
   size_t round_res = std::round(res);
-  return compareDoubles(res, std::round(res)) ? 0 : round_res;
+  return compareDoubles(res, round_res) ? 0 : round_res;
 }
 
 tkach::Regular::Regular(const point_t& first_point, const point_t& second_point, const point_t& third_point):
@@ -36,10 +36,10 @@ tkach::Regular::Regular(const point_t& first_point, const point_t& second_point,
   {
     std::swap(second_point_, third_point_);
   }
-  double first_side = getDist(first_point_, second_point_);
-  double second_side = getDist(third_point_, second_point_);
-  double third_side = getDist(first_point_, third_point_);
-  if (compareDoubles(first_side * first_side, second_side * second_side + third_side * third_side))
+  double first_side_squarred = std::pow(getDist(first_point_, second_point_), 2);
+  double second_side_squarred = std::pow(getDist(third_point_, second_point_), 2);
+  double third_side_squarred = std::pow(getDist(first_point_, third_point_), 2);
+  if (compareDoubles(first_side_squarred, second_side_squarred + third_side_squarred))
   {
     throw std::logic_error("Triangle is not right");
   }

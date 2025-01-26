@@ -1,4 +1,5 @@
 #include "figureactions.hpp"
+#include <stdexcept>
 
 namespace
 {
@@ -19,19 +20,16 @@ namespace
   }
 }
 
-void tkach::doSafeIsoScaleCompShape(CompositeShape& shape_array, double scale_coef, const point_t& scale_point)
+void tkach::doSafeIsoScaleCompShape(CompositeShape& shape_array, const double scale_coef, const point_t& scale_point)
 {
   if (scale_coef <= 0)
   {
     throw std::logic_error("Not positive coef");
   }
-  for (size_t i = 0; i < shape_array.size(); ++i)
-  {
-    doUnsafeIsoScaleOneShape(shape_array[i], scale_coef, scale_point);
-  }
+  doUnsafeIsoScaleCompShape(shape_array, scale_coef, scale_point);
 }
 
-void tkach::doUnsafeIsoScaleCompShape(CompositeShape& shape_array, double scale_coef, const point_t& scale_point)
+void tkach::doUnsafeIsoScaleCompShape(CompositeShape& shape_array, const double scale_coef, const point_t& scale_point)
 {
   for (size_t i = 0; i < shape_array.size(); ++i)
   {
