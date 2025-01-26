@@ -9,9 +9,10 @@ void nikonov::fillShapeCollection(std::istream &input, std::ostream &out, Compos
   std::string name = "";
   while (input >> name && name != "SCALE")
   {
+    Shape *newElem = nullptr;
     try
     {
-      Shape *newElem = make_shape(input, name);
+      newElem = make_shape(input, name);
       collection.push_back(newElem);
     }
     catch (const std::logic_error &e)
@@ -23,6 +24,7 @@ void nikonov::fillShapeCollection(std::istream &input, std::ostream &out, Compos
       input.clear();
       input.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
     }
+    delete newElem;
   }
 }
 void nikonov::destoy(CompositeShape &collection)
