@@ -1,6 +1,6 @@
 #include "actionShapes.hpp"
 
-double sharifullina::getSumArea(Shape ** shapes, size_t n)
+double sharifullina::getSumArea(const Shape* const* shapes, size_t n)
 {
   double res = 0;
   for (size_t i = 0; i < n; i++)
@@ -17,7 +17,7 @@ void sharifullina::scaleOfShapes(Shape ** shapes, size_t n, point_t p, double k)
     std::cerr << "Сoefficient must be positive.\n";
     return;
   }
-  scaleShapesWithoutCheck(shapes, n, p, k);
+  sharifullina::scaleShapesWithoutCheck(shapes, n, p, k);
 }
 
 void sharifullina::scaleShapesWithoutCheck(Shape ** shapes, size_t n, point_t p, double k)
@@ -33,7 +33,7 @@ void sharifullina::scaleShapesWithoutCheck(Shape ** shapes, size_t n, point_t p,
   }
 }
 
-void sharifullina::printCoorRect(std::ostream & out, Shape ** shapes, size_t n)
+void sharifullina::printCoorRect(std::ostream& out, const Shape* const* shapes, size_t n)
 {
   for (size_t i = 0; i < n; i++)
   {

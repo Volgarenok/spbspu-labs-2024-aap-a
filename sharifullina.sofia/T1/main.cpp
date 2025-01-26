@@ -32,7 +32,7 @@ int main()
     {
       try
       {
-        shapes[count] = sharifullina::makeRectangle(std::cin);
+        shapes[count] = makeRectangle(std::cin);
         count++;
       }
       catch (const std::invalid_argument& e)
@@ -44,7 +44,7 @@ int main()
     {
       try
       {
-        shapes[count] = sharifullina::makeRing(std::cin);
+        shapes[count] = makeRing(std::cin);
         count++;
       }
       catch (const std::invalid_argument& e)
@@ -56,13 +56,13 @@ int main()
     {
       try
       {
-        shapes[count] = sharifullina::makeCircle(std::cin);
+        shapes[count] = makeCircle(std::cin);
         count++;
       }
       catch (const std::bad_alloc& e)
       {
         std::cerr << "Out of memory\n";
-        sharifullina::destroyShapes(shapes, count);
+        destroyShapes(shapes, count);
         return 1;
       }
       catch (const std::invalid_argument& e)
@@ -74,7 +74,7 @@ int main()
     {
       try
       {
-        shapes[count] = sharifullina::makeEllipse(std::cin);
+        shapes[count] = makeEllipse(std::cin);
         count++;
       }
       catch (const std::invalid_argument&)
@@ -95,7 +95,7 @@ int main()
   if (scaleK <= 0)
   {
     std::cerr << "Incorrect scale\n";
-    sharifullina::destroyShapes(shapes, count);
+    destroyShapes(shapes, count);
     return 1;
   }
   if (count == 0)
@@ -105,12 +105,12 @@ int main()
   }
   std::cout << std::fixed;
   std::cout.precision(1);
-  std::cout << sharifullina::getSumArea(shapes, count);
-  sharifullina::printCoorRect(std::cout, shapes, count);
-  sharifullina::scaleOfShapes(shapes, count, scaleCenter, scaleK);
-  std::cout << sharifullina::getSumArea(shapes, count);
-  sharifullina::printCoorRect(std::cout, shapes, count);
-  sharifullina::destroyShapes(shapes, count);
+  std::cout << getSumArea(shapes, count);
+  printCoorRect(std::cout, shapes, count);
+  scaleOfShapes(shapes, count, scaleCenter, scaleK);
+  std::cout << getSumArea(shapes, count);
+  printCoorRect(std::cout, shapes, count);
+  destroyShapes(shapes, count);
   if (flag)
   {
     std::cerr << "There is an incorrect shape\n";

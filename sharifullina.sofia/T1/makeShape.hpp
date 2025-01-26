@@ -14,6 +14,7 @@ namespace sharifullina
   Circle * makeCircle(std::istream& in);
   Ellipse * makeEllipse(std::istream& in);
   Shape * createShape(std::istream& in, const std::string& shapeType);
+  void readParams(std::istream& in, double * params, size_t size);
 }
 
 #endif
