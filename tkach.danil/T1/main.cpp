@@ -72,7 +72,7 @@ int main()
         }
         else
         {
-           incorrect_shape = true; 
+           incorrect_shape = true;
         }
       }
     }
