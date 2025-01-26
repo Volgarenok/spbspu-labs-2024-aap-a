@@ -1,6 +1,42 @@
 #include "createCommand.hpp"
 #include <stdexcept>
-#include "makeShape.hpp"
+#include <istream>
+#include "rectangle.hpp"
+#include "ellipse.hpp"
+#include "circle.hpp"
+
+namespace
+{
+  duhanina::Rectangle* makeRectangle(std::istream& in)
+  {
+    double data[4] = {0};
+    if (!(in >> data[0] >> data[1] >> data[2] >> data[3]))
+    {
+      throw std::invalid_argument("Incorrect input");
+    }
+    return new duhanina::Rectangle({ data[0], data[1] }, { data[2], data[3] });
+  }
+
+  duhanina::Circle* makeCircle(std::istream& in)
+  {
+    double data[3] = {0};
+    if (!(in >> data[0] >> data[1] >> data[2]))
+    {
+      throw std::invalid_argument("Incorrect input");
+    }
+    return new duhanina::Circle({ data[0], data[1] }, data[2]);
+  }
+
+  duhanina::Ellipse* makeEllipse(std::istream& in)
+  {
+    double data[4] = {0};
+    if (!(in >> data[0] >> data[1] >> data[2] >> data[3]))
+    {
+      throw std::invalid_argument("Incorrect input");
+    }
+    return new duhanina::Ellipse({ data[0], data[1] }, data[2], data[3]);
+  }
+}
 
 void duhanina::createShape(std::istream& in, const std::string& shapeType, Shape** shapes, size_t& shapeCount)
 {

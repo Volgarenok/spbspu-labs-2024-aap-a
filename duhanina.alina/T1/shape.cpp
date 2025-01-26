@@ -1,7 +1,7 @@
 #include "shape.hpp"
 #include <stdexcept>
 
-void duhanina::Shape::scaleCheck(double k)
+void duhanina::Shape::scale(double k)
 {
   if (k <= 0)
   {

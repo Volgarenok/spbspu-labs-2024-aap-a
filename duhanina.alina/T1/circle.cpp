@@ -3,8 +3,10 @@
 #include <cmath>
 #include "destroy.hpp"
 #include "ellipse.hpp"
+#include "movingPoint.hpp"
 
 duhanina::Circle::Circle(const point_t& pos, double radius, size_t count):
+  pos_(pos),
   count_(count),
   ellipses_(new Shape*[count_])
 {
@@ -46,16 +48,14 @@ void duhanina::Circle::move(const point_t& newPos)
 
 void duhanina::Circle::move(double dx, double dy)
 {
-  for (size_t i = 0; i < count_; ++i)
-  {
-    ellipses_[i]->move(dx, dy);
-  }
+  pos_ = movePoint(pos_, dx, dy);
+  move(pos_);
 }
 
-void duhanina::Circle::scale(double k)
+void duhanina::Circle::unsaveScale(double k)
 {
   for (size_t i = 0; i < count_; ++i)
   {
-    ellipses_[i]->scale(k);
+    ellipses_[i]->unsaveScale(k);
   }
 }

@@ -31,10 +31,10 @@ void duhanina::Ellipse::move(const point_t& newPos)
 
 void duhanina::Ellipse::move(double dx, double dy)
 {
-  movePoint(center_, dx, dy);
+  center_ = movePoint(center_, dx, dy);
 }
 
-void duhanina::Ellipse::scale(double k)
+void duhanina::Ellipse::unsaveScale(double k)
 {
   horizRadius_ *= k;
   vertRadius_ *= k;
