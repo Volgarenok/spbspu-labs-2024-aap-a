@@ -10,7 +10,7 @@ averenkov::Rectangle::Rectangle():
 {
 }
 
-averenkov::Rectangle::Rectangle(point_t a, point_t c):
+averenkov::Rectangle::Rectangle(const point_t& a, const point_t& c):
   a_(a),
   c_(c)
 {
@@ -20,7 +20,7 @@ averenkov::Rectangle::Rectangle(point_t a, point_t c):
   }
 }
 
-void averenkov::Rectangle::move(point_t s)
+void averenkov::Rectangle::move(const point_t& s)
 {
   point_t center;
   center.x = (a_.x + c_.x) / 2;

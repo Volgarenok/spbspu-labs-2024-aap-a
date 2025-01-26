@@ -4,7 +4,7 @@
 #include "getline.hpp"
 #include <stdexcept>
 
-averenkov::Ellipse::Ellipse(point_t center, double radius_v, double radius_h):
+averenkov::Ellipse::Ellipse(const point_t& center, double radius_v, double radius_h):
   center_(center),
   radius_v_(radius_v),
   radius_h_(radius_h)
@@ -38,7 +38,7 @@ averenkov::rectangle_t averenkov::Ellipse::getFrameRect() const
   return { width, height, center_ };
 }
 
-void averenkov::Ellipse::move(point_t s)
+void averenkov::Ellipse::move(const point_t& s)
 {
   center_ = s;
 }

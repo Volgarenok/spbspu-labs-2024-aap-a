@@ -5,7 +5,7 @@
 #include <cmath>
 #include <stdexcept>
 
-averenkov::Diamond::Diamond(point_t a, point_t b, point_t c)
+averenkov::Diamond::Diamond(const point_t& a, const point_t& b, const point_t& c)
   : widthR_(0.0), heightR_(0.0), sumx_(0.0), sumy_(0.0)
 {
   if (!((a.x == b.x && a.y == c.y) ||
@@ -48,7 +48,7 @@ void averenkov::Diamond::scale(double factor)
   buildRectangles(center, a, b);
 }
 
-void averenkov::Diamond::move(point_t new_pos)
+void averenkov::Diamond::move(const point_t& new_pos)
 {
   point_t center = getFrameRect().pos;
   double dx = new_pos.x - center.x;
@@ -66,7 +66,7 @@ void averenkov::Diamond::move(double dx, double dy)
   }
 }
 
-void averenkov::Diamond::buildRectangles(const point_t a, const point_t b, const point_t c)
+void averenkov::Diamond::buildRectangles(const point_t& a, const point_t& b, const point_t& c)
 {
   double width = 0, height = 0;
   point_t center = { 0.0, 0.0 };
@@ -97,7 +97,6 @@ void averenkov::Diamond::buildRectangles(const point_t a, const point_t b, const
   {
     throw std::invalid_argument("Incorrect input");
   }
-
   widthR_ = width / 8;
   heightR_ = height / 8;
   size_t index = 0;

@@ -17,11 +17,10 @@ int main()
   averenkov::Shape* shapes[10000];
   size_t shapeCount = 0;
   bool hasErrors = false;
-  bool hasScale = false;
   averenkov::point_t scale_center;
   double factor;
   std::string command;
-  while (shapeCount < 10000 && std::cin >> command)
+  while (shapeCount < 10000 && std::cin >> command && command != "SCALE")
   {
     try
     {
@@ -41,37 +40,33 @@ int main()
       {
         averenkov::makeDiamond(shapes, shapeCount, std::cin, hasErrors);
       }
-      else if (command == "SCALE")
-      {
-        if (shapeCount == 0)
-        {
-          std::cerr << "Nothing to scale\n";
-          return 1;
-        }
-        if (!(std::cin >> scale_center.x >> scale_center.y >> factor) || factor <= 0)
-        {
-          for (size_t i = 0; i < shapeCount; ++i)
-          {
-            delete shapes[i];
-          }
-          std::cerr << "Invalid scale\n";
-          return 1;
-        }
-        break;
-      }
     }
     catch (const std::invalid_argument&)
     {
       hasErrors = true;
     }
   }
-  if (!std::cin && !hasScale)
+  if (std::cin.eof())
   {
     std::cerr << "No scale\n";
     for(size_t i = 0; i < shapeCount; ++i)
     {
       delete shapes[i];
     }
+    return 1;
+  }
+  if (shapeCount == 0)
+  {
+    std::cerr << "Nothing to scale\n";
+    return 1;
+  }
+  if (!(std::cin >> scale_center.x >> scale_center.y >> factor) || factor <= 0)
+  {
+    for (size_t i = 0; i < shapeCount; ++i)
+    {
+      delete shapes[i];
+    }
+    std::cerr << "Invalid scale\n";
     return 1;
   }
   double sum = 0;
