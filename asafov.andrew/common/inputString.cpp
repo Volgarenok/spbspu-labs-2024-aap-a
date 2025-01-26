@@ -25,5 +25,9 @@ char* asafov::inputString()
       string = resize(string, length);
     }
   }
+  if (length == 0)
+  {
+    string[0] = 0;
+  }
   return string;
 }
