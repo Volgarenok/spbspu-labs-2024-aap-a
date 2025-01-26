@@ -9,14 +9,16 @@ void nikonov::fillShapeCollection(std::istream &input, std::ostream &out, Compos
   std::string name = "";
   while (input >> name && name != "SCALE")
   {
+    Shape *newElem = nullptr;
     try
     {
-      Shape *newElem = make_shape(input, name);
+      newElem = make_shape(input, name);
       collection.push_back(newElem);
     }
     catch (const std::logic_error &e)
     {
       out << e.what() << '\n';
+      delete newElem;
     }
     catch (const std::runtime_error &e)
     {
