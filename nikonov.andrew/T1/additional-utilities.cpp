@@ -18,7 +18,6 @@ void nikonov::fillShapeCollection(std::istream &input, std::ostream &out, Compos
     catch (const std::logic_error &e)
     {
       out << e.what() << '\n';
-      delete newElem;
     }
     catch (const std::runtime_error &e)
     {
