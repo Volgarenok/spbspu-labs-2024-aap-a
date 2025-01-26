@@ -1,4 +1,5 @@
 #include "rectangle.hpp"
+#include <stdexcept>
 
 sharifullina::Rectangle::Rectangle(point_t lowLeft, point_t uppRight):
   lowLeft_(lowLeft),
