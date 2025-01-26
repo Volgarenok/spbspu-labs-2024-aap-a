@@ -35,8 +35,8 @@ void duhanina::Rectangle::move(const point_t& newPos)
 
 void duhanina::Rectangle::move(double dx, double dy)
 {
-  lt_ = movePoint(lt_, dx, dy);
-  rt_ = movePoint(rt_, dx, dy);
+  movePoint(lt_, dx, dy);
+  movePoint(rt_, dx, dy);
 }
 
 void duhanina::Rectangle::unsaveScale(double k)

@@ -31,7 +31,7 @@ void duhanina::Ellipse::move(const point_t& newPos)
 
 void duhanina::Ellipse::move(double dx, double dy)
 {
-  center_ = movePoint(center_, dx, dy);
+  movePoint(center_, dx, dy);
 }
 
 void duhanina::Ellipse::unsaveScale(double k)
