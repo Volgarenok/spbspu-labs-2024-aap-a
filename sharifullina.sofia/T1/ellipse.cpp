@@ -1,11 +1,18 @@
 #include "ellipse.hpp"
 #include <stdexcept>
 
-const double PI = 3.1415926535;
+constexpr double PI = 3.1415926535;
 
 sharifullina::Ellipse::Ellipse(point_t center, double radiusX, double radiusY):
-  center_(center), radiusX_(radiusX), radiusY_(radiusY)
-{}
+  center_(center),
+  radiusX_(radiusX),
+  radiusY_(radiusY)
+{
+  if (radiusX <= 0 || radiusY <= 0)
+  {
+    throw std::invalid_argument("Ellipse radii must be positive.");
+  }
+}
 
 double sharifullina::Ellipse::getArea() const
 {

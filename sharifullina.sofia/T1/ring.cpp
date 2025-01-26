@@ -1,7 +1,7 @@
 #include "ring.hpp"
 #include <stdexcept>
 
-const double PI = 3.1415926535;
+constexpr double PI = 3.1415926535;
 sharifullina::Ring::Ring(point_t center, double inRadius, double outRadius):
   center_(center),
   outRadius_(outRadius),
@@ -41,6 +41,10 @@ void sharifullina::Ring::move(double dx, double dy)
 
 void sharifullina::Ring::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Scale factor must be positive.");
+  }
   outRadius_ *= k;
   inRadius_ *= k;
 }

@@ -1,7 +1,7 @@
 #include "circle.hpp"
 #include <stdexcept>
 
-const double PI = 3.1415926535;
+constexpr double PI = 3.1415926535;
 
 sharifullina::Circle::Circle(point_t center, double radius):
   center_(center),

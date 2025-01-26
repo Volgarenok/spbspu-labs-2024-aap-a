@@ -3,28 +3,28 @@
 #include <memory>
 #include "makeShape.hpp"
 #include "shape.hpp"
-#include <string>
-#include "shape.hpp"
 #include "rectangle.hpp"
 #include "ring.hpp"
 #include "circle.hpp"
 #include "ellipse.hpp"
 #include "actionShapes.hpp"
-#include "makeShape.hpp"
+
+using namespace sharifullina;
+
 int main()
 {
-  sharifullina::Shape* shapes[1000] = {};
+  Shape * shapes[1000] = {};
   size_t count = 0;
-  std::string shapeType = "";
+  std::string shapeType;
   bool flag = false;
   double scaleK = 0.0;
-  sharifullina::point_t scaleCenter = {0.0, 0.0};
-  while (true)
+  point_t scaleCenter = {0.0, 0.0};
+  while (shapeType != "SCALE")
   {
     if (std::cin.eof())
     {
       std::cerr << "Incorrect scale\n";
-      sharifullina::destroyShapes(shapes, count);
+      destroyShapes(shapes, count);
       return 1;
     }
     std::cin >> shapeType;
@@ -106,10 +106,10 @@ int main()
   std::cout << std::fixed;
   std::cout.precision(1);
   std::cout << sharifullina::getSumArea(shapes, count);
-  sharifullina::printCoorRect(shapes, count);
+  sharifullina::printCoorRect(std::cout, shapes, count);
   sharifullina::scaleOfShapes(shapes, count, scaleCenter, scaleK);
   std::cout << sharifullina::getSumArea(shapes, count);
-  sharifullina::printCoorRect(shapes, count);
+  sharifullina::printCoorRect(std::cout, shapes, count);
   sharifullina::destroyShapes(shapes, count);
   if (flag)
   {

@@ -13,6 +13,7 @@ namespace sharifullina
   Ring * makeRing(std::istream& in);
   Circle * makeCircle(std::istream& in);
   Ellipse * makeEllipse(std::istream& in);
+  Shape * createShape(std::istream& in, const std::string& shapeType);
 }
 
 #endif

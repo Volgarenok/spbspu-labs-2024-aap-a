@@ -3,7 +3,17 @@
 sharifullina::Rectangle::Rectangle(point_t lowLeft, point_t uppRight):
   lowLeft_(lowLeft),
   uppRight_(uppRight)
-{}
+{
+  if (lowLeft.x >= uppRight.x || lowLeft.y >= uppRight.y)
+  {
+    throw std::invalid_argument("Incorrect coordinates: lowLeft must be below and to the left of uppRight");
+  }
+
+  if (lowLeft.x == uppRight.x || lowLeft.y == uppRight.y)
+  {
+    throw std::invalid_argument("Rectangle cannot have zero width or height");
+  }
+}
 
 double sharifullina::Rectangle::getArea() const
 {

@@ -17,6 +17,11 @@ void sharifullina::scaleOfShapes(Shape ** shapes, size_t n, point_t p, double k)
     std::cerr << "Сoefficient must be positive.\n";
     return;
   }
+  scaleShapesWithoutCheck(shapes, n, p, k);
+}
+
+void sharifullina::scaleShapesWithoutCheck(Shape ** shapes, size_t n, point_t p, double k)
+{
   for (size_t i = 0; i < n; i++)
   {
     point_t ptr = shapes[i]->getFrameRect().pos;
@@ -28,7 +33,7 @@ void sharifullina::scaleOfShapes(Shape ** shapes, size_t n, point_t p, double k)
   }
 }
 
-void sharifullina::printCoorRect(Shape ** shapes, size_t n)
+void sharifullina::printCoorRect(std::ostream & out, Shape ** shapes, size_t n)
 {
   for (size_t i = 0; i < n; i++)
   {
@@ -37,9 +42,8 @@ void sharifullina::printCoorRect(Shape ** shapes, size_t n)
     double ly = rect.pos.y - rect.height / 2.0;
     double rx = rect.pos.x + rect.width / 2.0;
     double ry = rect.pos.y + rect.height / 2.0;
-    std::cout << " " << lx << " " << ly << " " << rx << " " << ry;
+    std::cout << lx << " " << ly << " " << rx << " " << ry;
   }
-  std::cout << "\n";
 }
 
 void sharifullina::destroyShapes(Shape ** shapes, size_t n)

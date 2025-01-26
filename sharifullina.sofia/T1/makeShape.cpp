@@ -1,7 +1,31 @@
 #include "makeShape.hpp"
 #include <stdexcept>
 
-sharifullina::Rectangle* sharifullina::makeRectangle(std::istream& in)
+sharifullina::Shape * sharifullina::createShape(std::istream& in, const std::string& shapeType)
+{
+  if (shapeType == "RECTANGLE")
+  {
+    return sharifullina::makeRectangle(in);
+  }
+  else if (shapeType == "RING")
+  {
+    return makeRing(in);
+  }
+  else if (shapeType == "CIRCLE")
+  {
+    return makeCircle(in);
+  }
+  else if (shapeType == "ELLIPSE")
+  {
+    return makeEllipse(in);
+  }
+  else
+  {
+    throw std::invalid_argument("Unknown shape type");
+  }
+}
+
+sharifullina::Rectangle * sharifullina::makeRectangle(std::istream& in)
 {
   double params[4] = {0.0, 0.0, 0.0, 0.0};
   in >> params[0] >> params[1] >> params[2] >> params[3];
@@ -11,11 +35,11 @@ sharifullina::Rectangle* sharifullina::makeRectangle(std::istream& in)
   {
     throw std::invalid_argument("Incorrect coordinates");
   }
-  sharifullina::Rectangle* rect = new sharifullina::Rectangle(lowLeft, uppRight);
+  Rectangle * rect = new Rectangle(lowLeft, uppRight);
   return rect;
 }
 
-sharifullina::Ring* sharifullina::makeRing(std::istream& in)
+sharifullina::Ring * sharifullina::makeRing(std::istream& in)
 {
   double params[4] = {0.0, 0.0, 0.0, 0.0};
   in >> params[0] >> params[1] >> params[2] >> params[3];
@@ -26,11 +50,11 @@ sharifullina::Ring* sharifullina::makeRing(std::istream& in)
   {
     throw std::invalid_argument("Incorrect radius");
   }
-  sharifullina::Ring* rin9 = new sharifullina::Ring(center, innerRadius, outerRadius);
+  Ring * rin9 = new Ring(center, innerRadius, outerRadius);
   return rin9;
 }
 
-sharifullina::Circle* sharifullina::makeCircle(std::istream& in)
+sharifullina::Circle * sharifullina::makeCircle(std::istream& in)
 {
   double params[3] = {0.0, 0.0, 0.0};
   in >> params[0] >> params[1] >> params[2];
@@ -40,11 +64,11 @@ sharifullina::Circle* sharifullina::makeCircle(std::istream& in)
   {
     throw std::invalid_argument("Incorrect radius");
   }
-  sharifullina::Circle* circl = new sharifullina::Circle(center, radius);
+  Circle * circl = new Circle(center, radius);
   return circl;
 }
 
-sharifullina::Ellipse* sharifullina::makeEllipse(std::istream& in)
+sharifullina::Ellipse * sharifullina::makeEllipse(std::istream& in)
 {
   double params[4] = {0.0, 0.0, 0.0, 0.0};
   in >> params[0] >> params[1] >> params[2] >> params[3];
@@ -55,6 +79,6 @@ sharifullina::Ellipse* sharifullina::makeEllipse(std::istream& in)
   {
     throw std::invalid_argument("Incorrect radius");
   }
-  sharifullina::Ellipse* ellips = new sharifullina::Ellipse(center, radiusY, radiusX);
+  Ellipse * ellips = new Ellipse(center, radiusY, radiusX);
   return ellips;
 }
