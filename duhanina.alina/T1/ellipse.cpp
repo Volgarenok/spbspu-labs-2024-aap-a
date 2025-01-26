@@ -2,10 +2,10 @@
 #include <stdexcept>
 #include "movingPoint.hpp"
 
-duhanina::Ellipse::Ellipse(const point_t& center, double horizRadius, double vertRadius):
+duhanina::Ellipse::Ellipse(const point_t& center, double vertRadius, double horizRadius):
   center_(center),
-  horizRadius_(horizRadius),
-  vertRadius_(vertRadius)
+  vertRadius_(vertRadius),
+  horizRadius_(horizRadius)
 {
   if (vertRadius <= 0 || horizRadius <= 0)
   {
