@@ -29,7 +29,7 @@ void nikonov::fillShapeCollection(std::istream &input, std::ostream &out, Compos
 }
 void nikonov::destoy(CompositeShape &collection)
 {
-  for (size_t i = 0; i < collection.size(); ++i)
+  while (!collection.empty())
   {
     collection.pop_back();
   }
