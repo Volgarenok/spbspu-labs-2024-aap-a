@@ -11,9 +11,10 @@ int main()
   size_t shapeCount = 0;
   double scalingFactor = 0;
   point_t point = { 0, 0 };
+  bool errorArg = false;
   try
   {
-    inputShapes(std::cin, std::cerr, shapes, shapeCount);
+    inputShapes(std::cin, shapes, shapeCount, errorArg);
     createScale(std::cin, shapeCount, scalingFactor, point);
     printFiguresInfo(std::cout, shapes, shapeCount);
     processScaling(shapes, shapeCount, point, scalingFactor);
@@ -28,6 +29,10 @@ int main()
     std::cerr << e.what() << "\n";
     destroy(shapes, shapeCount);
     return 1;
+  }
+  if (errorArg)
+  {
+    std::cerr << "Invalid arguments for input shapes\n";
   }
   destroy(shapes, shapeCount);
   return 0;

@@ -5,21 +5,29 @@
 #include "ellipse.hpp"
 #include "movingPoint.hpp"
 
+namespace
+{
+  duhanina::Shape** createArray(const duhanina::point_t& pos, double radius, size_t count)
+  {
+    if (radius <= 0)
+    {
+      throw std::invalid_argument("Error in parameters");
+    }
+    duhanina::Shape** ellipses = new duhanina::Shape*[count];
+    double r1 = std::sqrt(radius * radius / count);
+    for (size_t i = 0; i < count; ++i)
+    {
+      ellipses[i] = new duhanina::Ellipse(pos, r1 * std::sqrt(i + 1), r1 * std::sqrt(i + 1));
+    }
+    return ellipses;
+  }
+}
+
 duhanina::Circle::Circle(const point_t& pos, double radius, size_t count):
   pos_(pos),
   count_(count),
-  ellipses_(new Shape*[count_])
+  ellipses_(createArray(pos, radius, count))
 {
-  if (radius <= 0)
-  {
-    delete[] ellipses_;
-    throw std::invalid_argument("Error in parameters");
-  }
-  double r1 = std::sqrt(radius * radius / count_);
-  for (size_t i = 0; i < count_; ++i)
-  {
-    ellipses_[i] = new Ellipse(pos, r1 * std::sqrt(i + 1), r1 * std::sqrt(i + 1));
-  }
 }
 
 duhanina::Circle::~Circle()
@@ -53,7 +61,7 @@ void duhanina::Circle::move(double dx, double dy)
   move(pos_);
 }
 
-void duhanina::Circle::unsaveScale(double k)
+void duhanina::Circle::unsaveScale(double k) noexcept
 {
   for (size_t i = 0; i < count_; ++i)
   {

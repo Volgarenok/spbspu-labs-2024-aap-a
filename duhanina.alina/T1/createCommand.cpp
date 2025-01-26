@@ -7,33 +7,34 @@
 
 namespace
 {
+  void readArray(std::istream& in, double* data, size_t size)
+  {
+    for (size_t i = 0; i < size; ++i)
+    {
+      if (!(in >> data[i]))
+      {
+        throw std::invalid_argument("Incorrect input");
+      }
+    }
+  }
   duhanina::Rectangle* makeRectangle(std::istream& in)
   {
     double data[4] = {0};
-    if (!(in >> data[0] >> data[1] >> data[2] >> data[3]))
-    {
-      throw std::invalid_argument("Incorrect input");
-    }
+    readArray(in, data, 4);
     return new duhanina::Rectangle({ data[0], data[1] }, { data[2], data[3] });
   }
 
   duhanina::Circle* makeCircle(std::istream& in)
   {
     double data[3] = {0};
-    if (!(in >> data[0] >> data[1] >> data[2]))
-    {
-      throw std::invalid_argument("Incorrect input");
-    }
+    readArray(in, data, 3);
     return new duhanina::Circle({ data[0], data[1] }, data[2]);
   }
 
   duhanina::Ellipse* makeEllipse(std::istream& in)
   {
     double data[4] = {0};
-    if (!(in >> data[0] >> data[1] >> data[2] >> data[3]))
-    {
-      throw std::invalid_argument("Incorrect input");
-    }
+    readArray(in, data, 4);
     return new duhanina::Ellipse({ data[0], data[1] }, data[2], data[3]);
   }
 }
@@ -72,7 +73,7 @@ void duhanina::createScale(std::istream& in, size_t shapeCount, double& scalingF
   point = { x, y };
 }
 
-void duhanina::inputShapes(std::istream& in, std::ostream& out, Shape** shapes, size_t& shapeCount)
+void duhanina::inputShapes(std::istream& in, Shape** shapes, size_t& shapeCount, bool& errorArg)
 {
   std::string shapeType;
   while (in >> shapeType && shapeType != "SCALE")
@@ -81,9 +82,9 @@ void duhanina::inputShapes(std::istream& in, std::ostream& out, Shape** shapes, 
     {
       createShape(in, shapeType, shapes, shapeCount);
     }
-    catch (const std::invalid_argument& e)
+    catch (const std::invalid_argument&)
     {
-      out << e.what() << "\n";
+      errorArg = true;
     }
   }
   if (in.eof())

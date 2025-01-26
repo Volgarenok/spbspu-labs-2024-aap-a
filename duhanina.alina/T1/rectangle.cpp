@@ -39,7 +39,7 @@ void duhanina::Rectangle::move(double dx, double dy)
   movePoint(rt_, dx, dy);
 }
 
-void duhanina::Rectangle::unsaveScale(double k)
+void duhanina::Rectangle::unsaveScale(double k) noexcept
 {
   point_t pos = getFrameRect().pos;
   lt_ = scalePoint(lt_, pos, k);
