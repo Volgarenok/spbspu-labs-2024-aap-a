@@ -13,7 +13,6 @@ void nikonov::fillShapeCollection(std::istream &input, std::ostream &out, Compos
     {
       Shape *newElem = make_shape(input, name);
       collection.push_back(newElem);
-      delete newElem;
     }
     catch (const std::logic_error &e)
     {
