@@ -31,10 +31,7 @@ nikonov::CompositeShape::CompositeShape(CompositeShape &&copy):
 }
 nikonov::CompositeShape::~CompositeShape()
 {
-  for (size_t i = 0; i < size_; ++i)
-  {
-    (*this).pop_back();
-  }
+  nikonov::destoy(*this);
 }
 nikonov::Shape *nikonov::CompositeShape::operator[](size_t id)
 {
