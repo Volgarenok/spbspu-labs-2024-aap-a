@@ -3,11 +3,10 @@
 #include "shape.hpp"
 namespace karnauhova
 {
-  class Rectangle: public Shape
+  class Rectangle final: public Shape
   {
   public:
-    Rectangle(point_t x4, point_t x2): x2_(x2), x4_(x4)
-    {}
+    Rectangle(point_t x4, point_t x2);
     void move(double x, double y) override;
     void move(point_t t) override;
     double getArea() const override;

@@ -3,11 +3,10 @@
 #include "shape.hpp"
 namespace karnauhova
 {
-  class Triangle: public Shape
+  class Triangle final: public Shape
   {
   public:
-    Triangle(point_t x1, point_t x2, point_t x3): x1_(x1), x2_(x2), x3_(x3)
-    {}
+    Triangle(point_t x1, point_t x2, point_t x3);
     void move(double x, double y) override;
     void move(point_t t) override;
     double getArea() const override;

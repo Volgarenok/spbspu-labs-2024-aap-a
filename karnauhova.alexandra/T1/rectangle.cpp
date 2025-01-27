@@ -1,4 +1,15 @@
 #include "rectangle.hpp"
+#include <stdexcept>
+karnauhova::Rectangle::Rectangle(point_t x4, point_t x2):
+  x2_(x2),
+  x4_(x4)
+{
+  if (x2_.x > x4_.x || x2_.y > x4_.y)
+  {
+    throw std::logic_error("It's not a rectangle");
+  }
+}
+
 double karnauhova::Rectangle::getArea() const
 {
   double len1 = x2_.y - x4_.y;

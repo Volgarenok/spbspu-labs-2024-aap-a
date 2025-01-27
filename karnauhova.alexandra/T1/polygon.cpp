@@ -1,5 +1,28 @@
 #include "polygon.hpp"
 #include <cmath>
+#include <stdexcept>
+#include "check.hpp"
+karnauhova::Polygon::Polygon(point_t* points, size_t count):
+  points_(nullptr),
+  count_(count)
+{
+  try
+  {
+    points_ = new point_t[count_];
+    if (count_ < 3 || !karnauhova::it_polygon(points, count_))
+    {
+      delete[] points_;
+      throw std::logic_error("It's not a polygon");
+    }
+    points_ = points;
+  }
+  catch (const std::exception& e)
+  {
+    delete[] points_;
+    throw;
+  }
+}
+
 double karnauhova::Polygon::getArea() const
 {
   double area = 0;
@@ -62,4 +85,9 @@ void karnauhova::Polygon::scale(double k)
      points_[i].x = t.x + (points_[i].x - t.x) * k;
      points_[i].y = t.y + (points_[i].y - t.y) * k;
   }
+}
+
+karnauhova::Polygon::~Polygon()
+{
+  delete[] points_;
 }

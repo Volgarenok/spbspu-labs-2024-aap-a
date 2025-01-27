@@ -1,58 +1,36 @@
 #include "triangle.hpp"
 #include <cmath>
+#include <stdexcept>
+#include "point.hpp"
+karnauhova::Triangle::Triangle(point_t x1, point_t x2, point_t x3):
+  x1_(x1),
+  x2_(x2),
+  x3_(x3)
+{
+  double len_1 = karnauhova::getDistance(x1_, x2_);
+  double len_2 = karnauhova::getDistance(x2_, x3_);
+  double len_3 = karnauhova::getDistance(x1_, x3_);
+  if (!(len_1 < (len_2 + len_3) && len_2 < (len_1 + len_3) && len_3 < (len_2 + len_1)))
+  {
+    throw std::logic_error("It's not a triangle");
+  }
+}
+
 double karnauhova::Triangle::getArea() const
 {
-  double len_x1 = x1_.x - x2_.x;
-  double len_y1 = x1_.y - x2_.y;
-  double len_1 = std::sqrt(len_x1 * len_x1 + len_y1 * len_y1);
-  double len_x2 = x2_.x - x3_.x;
-  double len_y2 = x2_.y - x3_.y;
-  double len_2 = std::sqrt(len_x2 * len_x2 + len_y2 * len_y2);
-  double len_x3 = x3_.x - x1_.x;
-  double len_y3 = x3_.y - x1_.y;
-  double len_3 = std::sqrt(len_x3 * len_x3 + len_y3 * len_y3);
+  double len_1 = karnauhova::getDistance(x1_, x2_);
+  double len_2 = karnauhova::getDistance(x2_, x3_);
+  double len_3 = karnauhova::getDistance(x1_, x3_);
   double p = (len_1 + len_2 + len_3)/2;
   return std::sqrt(p * (p - len_1) * (p - len_2) * (p - len_3));
 }
 
 karnauhova::rectangle_t karnauhova::Triangle::getFrameRect() const
 {
-  double x_max = 0;
-  double x_min = 0;
-  double y_max = 0;
-  double y_min = 0;
-  if (std::fmax(x1_.x, x2_.x) > x3_.x)
-  {
-    x_max = std::fmax(x1_.x, x2_.x);
-  }
-  else
-  {
-    x_max = x3_.x;
-  }
-  if (std::fmin(x1_.x, x2_.x) < x3_.x)
-  {
-    x_min = std::fmin(x1_.x, x2_.x);
-  }
-  else
-  {
-    x_min = x3_.x;
-  }
-  if (std::fmax(x1_.y, x2_.y) > x3_.y)
-  {
-    y_max = std::fmax(x1_.y, x2_.y);
-  }
-  else
-  {
-    y_max = x3_.y;
-  }
-  if (std::fmin(x1_.y, x2_.y) < x3_.y)
-  {
-    y_min = std::fmin(x1_.y, x2_.y);
-  }
-  else
-  {
-    y_min = x3_.y;
-  }
+  double x_max = std::fmax(std::fmax(x1_.x, x2_.x), x3_.x);
+  double x_min = std::fmin(std::fmin(x1_.x, x2_.x), x3_.x);
+  double y_max = std::fmax(std::fmax(x1_.y, x2_.y), x3_.y);
+  double y_min = std::fmin(std::fmin(x1_.y, x2_.y), x3_.y);
   rectangle_t rect;
   rect.width = x_max - x_min;
   rect.height = y_max - y_min;
@@ -76,12 +54,7 @@ void karnauhova::Triangle::move(point_t t)
   point_t centr = getFrameRect().pos;
   double shift_x = (t.x - centr.x);
   double shift_y = (t.y - centr.y);
-  x2_.x += shift_x;
-  x2_.y += shift_y;
-  x3_.x += shift_x;
-  x3_.y += shift_y;
-  x1_.x += shift_x;
-  x1_.y += shift_y;
+  move(shift_x, shift_y);
 }
 
 void karnauhova::Triangle::scale(double k)

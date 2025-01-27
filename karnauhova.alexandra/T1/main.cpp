@@ -4,27 +4,21 @@
 #include "output.hpp"
 #include "shape.hpp"
 #include "check.hpp"
+using namespace karnauhova;
 int main()
 {
-  if (
-  if (names[0] == "SCALE" || names[0].empty())
+  size_t count_error = 0;
+  size_t c_shape = 0;
+  point_t point {0,0};
+  double k = 0;
+  Shape* shaps[10000] = {};
+  if (fabric_input(std::cin, shaps, count_error, point, k, c_shape))
   {
-    std::cerr << "Error: empty input\n";
-    return 1;
-  }
-  if (names[count_shape-1] != "SCALE")
-  {
-    std::cerr << "Error: missing scale\n";
-    return 1;
-  }
-  if (points[i - 1] < 0)
-  {
-    std::cerr << "Error: missing scale\n";
     return 1;
   }
   if (count_error > 0)
   {
-    std::cerr << "Error in the input\n";
+    std::cerr << "Error in input!\n";
   }
-  karnauhova::output(std::cout, points, polygon, names, i, count_shape);
+  output(std::cout, shaps, point, k, c_shape);
 }

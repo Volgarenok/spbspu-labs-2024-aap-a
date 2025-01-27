@@ -3,16 +3,17 @@
 #include <string>
 #include <limits>
 #include "shape.hpp"
-
+#include "triangle.hpp"
+#include "rectangle.hpp"
+#include "polygon.hpp"
+#include "check.hpp"
 void karnauhova::eat_trash(std::istream & in)
 {
   in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-bool karnauhova::input_rectangle(std::istream & in, Shape* shaps, size_t count_shaps)
+bool karnauhova::input_rectangle(std::istream & in, Shape** shaps, size_t count_shaps)
 {
-  point_t x4{0,0};
-  point_t x2{0,0};
   double x_y[4] = {};
   double x = 0;
   for (size_t i = 0; i < 4; i++)
@@ -29,20 +30,14 @@ bool karnauhova::input_rectangle(std::istream & in, Shape* shaps, size_t count_s
     eat_trash(in);
     return false;
   }
-  x4.x = all_points[0];
-  x4.y = all_points[1];
-  x2.x = all_points[2];
-  x2.y = all_points[3];
-  Rectangle shape_rec(x4, x2);
-  shaps[count_shaps] = shape_rec;
+  point_t x4{x_y[0], x_y[1]};
+  point_t x2{x_y[2], x_y[3]};
+  shaps[count_shaps] = new Rectangle(x4, x2);
   return true;
 }
 
-bool karnauhova::input_triangle(std::istream & in, Shape* shaps, size_t count_shaps)
+bool karnauhova::input_triangle(std::istream & in, Shape** shaps, size_t count_shaps)
 {
-  point_t x1{0,0};
-  point_t x2{0,0};
-  point_t x3{0,0};
   double x_y[6] = {};
   double x = 0;
   for (size_t i = 0; i < 6; i++)
@@ -59,17 +54,16 @@ bool karnauhova::input_triangle(std::istream & in, Shape* shaps, size_t count_sh
     eat_trash(in);
     return false;
   }
-  x1{x_y[0], x_y[1]};
-  x2{x_y[2], x_y[3]};
-  x2{x_y[4], x_y[5]};
-  Triangle shape_tri(x1, x2, x3);
-  shaps[count_shaps] = shape_tri;
+  point_t x1{x_y[0], x_y[1]};
+  point_t x2{x_y[2], x_y[3]};
+  point_t x3{x_y[4], x_y[5]};
+  shaps[count_shaps] = new Triangle(x1, x2, x3);
   return true;
 }
 
-bool karnauhova::input_scale(std::istream & in, Shape* shaps, point_t point, double k)
+bool karnauhova::input_scale(std::istream & in, point_t& point, double& k)
 {
-  double x_y[3] = 0;
+  double x_y[3] = {};
   double x = 0;
   for (size_t i = 0; i < 3; i++)
   {
@@ -85,12 +79,13 @@ bool karnauhova::input_scale(std::istream & in, Shape* shaps, point_t point, dou
     eat_trash(in);
     return false;
   }
-  point {x_y[0], x_y[1]};
+  point.x = x_y[0];
+  point.y = x_y[1];
   k = x_y[2];
   return true;
 }
 
-bool karnauhova::input_polygon(std::istream & in, Shape* shaps, size_t count_shaps)
+bool karnauhova::input_polygon(std::istream & in, Shape** shaps, size_t count_shaps)
 {
   point_t x_y[10000] = {};
   double x = 0;
@@ -108,18 +103,17 @@ bool karnauhova::input_polygon(std::istream & in, Shape* shaps, size_t count_sha
       eat_trash(in);
       return false;
     }
-    polygon[count] {x,y};
+    x_y[count].x = x;
+    x_y[count].y = y;
     count += 1;
   }
-  Polygon shape_pol(polygon, count);
-  shaps[count_shaps] = shape_pol;
+  shaps[count_shaps] = new Polygon(x_y, count);
   return true;
 }
 
-void karnauhova::fabric_input(std::istream & in, Shape* shaps, size_t count_error, point_t point, double k)
+bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_error, point_t& point, double& k, size_t& count_shape)
 {
   std::string names[10000] = {};
-  size_t count_shape = 0;
   std::string name = "uwu";
   while (in >> name && !in.eof())
   {
@@ -136,15 +130,15 @@ void karnauhova::fabric_input(std::istream & in, Shape* shaps, size_t count_erro
           }
           else
           {
-            if (karnauhova::same_rectangle(shaps))
-            {
-              names[count_shape] = name;
-              count_shape++;
-            }
-            else
-            {
-              count_error++;
-            }
+            //if (!karnauhova::same_rectangle(shaps, count_shape))
+            //{
+            names[count_shape] = name;
+            count_shape++;
+            //}
+            //else
+            //{
+              //count_error++;
+            //}
            }
         }
         catch (const std::exception& e)
@@ -163,15 +157,15 @@ void karnauhova::fabric_input(std::istream & in, Shape* shaps, size_t count_erro
           }
           else
           {
-            if (karnauhova::same_triangle(shaps))
-            {
-              names[count_shape] = name;
-              count_shape++;
-            }
-            else
-            {
-              count_error++;
-            }
+            //if (!karnauhova::same_triangle(shaps, count_shape))
+            //{
+            names[count_shape] = name;
+            count_shape++;
+           // }
+           // else
+            //{
+              //count_error++;
+            //}
           }
         }
         catch (const std::exception& e)
@@ -203,15 +197,15 @@ void karnauhova::fabric_input(std::istream & in, Shape* shaps, size_t count_erro
           }
           else
           {
-            if (karnauhova::same_polygon(shaps))
-            {
-              names[count_shape] = name;
-              count_shape++;
-            }
-            else
-            {
-              count_error++;
-            }
+         //   if (!karnauhova::same_polygon(shaps, count_shape))
+           // {
+            names[count_shape] = name;
+            count_shape++;
+          //  }
+            //else
+            //{
+              //count_error++;
+           // }
            }
         }
         catch (const std::exception& e)
