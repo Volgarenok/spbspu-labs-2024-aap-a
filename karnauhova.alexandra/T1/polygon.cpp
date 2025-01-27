@@ -2,21 +2,39 @@
 #include <cmath>
 #include <stdexcept>
 #include "check.hpp"
-karnauhova::Polygon::Polygon(point_t* points, size_t count):
-  points_(nullptr),
-  count_(count)
+#include "output.hpp"
+#include "triangle.hpp"
+karnauhova::Polygon::Polygon(point_t* points, size_t count_point):
+  triangles_(nullptr),
+  count_(0)
 {
   try
   {
-    points_ = new point_t[count_];
-    if (count_ < 3 || !karnauhova::it_polygon(points, count_))
+    triangles_ = new Triangle*[count_point - 2];
+    if (count_point < 3 || !karnauhova::it_polygon(points, count_point))
     {
-      delete[] points_;
+      delete[] triangles_;
       throw std::logic_error("It's not a polygon");
     }
-    for (size_t i = 0; i < count_; i++)
+    for (size_t i = 0; i < count_point - 2; i += 2)
     {
-      points_[i] = points[i];
+      triangles_[count_] = new Triangle(points[i], points[i + 1], points[i + 2]);
+      count_++;
+    }
+    for (size_t i = 0; i < count_point - 5; i += 4)
+    {
+      triangles_[count_] = new Triangle(points[i], points[i + 2], points[i + 4]);
+      count_++;
+    }
+    if (count_point % 2 == 0)
+    {
+      triangles_[count_] = new Triangle(points[0], points[count_point - 2], points[count_point - 4]);
+      count_++;
+    }
+    else
+    {
+      triangles_[count_] = new Triangle(points[0], points[count_point - 1], points[count_point - 3]);
+      count_++;
     }
   }
   catch (const std::exception& e)
@@ -30,26 +48,25 @@ double karnauhova::Polygon::getArea() const
   double area = 0;
   for (size_t i = 0; i < count_; ++i)
   {
-    int j = (i + 1) % count_;
-    area += points_[i].x * points_[j].y;
-    area -= points_[j].x * points_[i].y;
+    area += triangles_[i]->getArea();
   }
-  return std::abs(area) / 2;
+  return area;
 }
 
 karnauhova::rectangle_t karnauhova::Polygon::getFrameRect() const
 {
   rectangle_t rect;
-  double max_x = points_[0].x;
-  double min_x = points_[0].x;
-  double max_y = points_[0].y;
-  double min_y = points_[0].y;
+  double min_x = triangles_[0]->getFrameRect().pos.x - triangles_[0]->getFrameRect().width / 2;
+  double max_x = triangles_[0]->getFrameRect().pos.x + triangles_[0]->getFrameRect().width / 2;
+  double min_y = triangles_[0]->getFrameRect().pos.y - triangles_[0]->getFrameRect().height / 2;
+  double max_y = triangles_[0]->getFrameRect().pos.y + triangles_[0]->getFrameRect().height / 2;
   for (size_t i = 1; i < count_; i++)
   {
-    min_x = std::fmin(min_x, points_[i].x);
-    min_y = std::fmin(min_y, points_[i].y);
-    max_x = std::fmax(max_x, points_[i].x);
-    max_y = std::fmax(max_y, points_[i].y);
+    rectangle_t rectangl = triangles_[i]->getFrameRect();
+    min_x = std::fmin(min_x, rectangl.pos.x - (rectangl.width / 2));
+    min_y = std::fmin(min_y, rectangl.pos.y - (rectangl.height / 2));
+    max_x = std::fmax(max_x, rectangl.pos.x + (rectangl.width / 2));
+    max_y = std::fmax(max_y, rectangl.pos.y + (rectangl.height / 2));
   }
   rect.width = max_x - min_x;
   rect.height = max_y - min_y;
@@ -62,8 +79,7 @@ void karnauhova::Polygon::move(double x, double y)
 {
   for (size_t i = 0; i < count_; ++i)
   {
-    points_[i].x += x;
-    points_[i].y += y;
+    triangles_[i]->move(x, y);
   }
 }
 
@@ -72,11 +88,7 @@ void karnauhova::Polygon::move(point_t t)
   point_t centr = getFrameRect().pos;
   double dif_x = t.x - centr.x;
   double dif_y = t.y - centr.y;
-  for (size_t i = 0; i < count_; i++)
-  {
-    points_[i].x += dif_x;
-    points_[i].y += dif_y;
-  }
+  move(dif_x, dif_y);
 }
 
 void karnauhova::Polygon::scale(double k)
@@ -84,12 +96,15 @@ void karnauhova::Polygon::scale(double k)
   point_t t = getFrameRect().pos;
   for (size_t i = 0; i < count_; i++)
   {
-     points_[i].x = t.x + (points_[i].x - t.x) * k;
-     points_[i].y = t.y + (points_[i].y - t.y) * k;
+     scale_point(*triangles_[i], t, k);
   }
 }
 
 karnauhova::Polygon::~Polygon()
 {
-  delete[] points_;
+  for (size_t i = 0; i < count_; ++i)
+  {
+    delete triangles_[i];
+  }
+  delete[] triangles_;
 }

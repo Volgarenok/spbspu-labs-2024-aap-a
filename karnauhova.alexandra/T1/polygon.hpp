@@ -2,6 +2,7 @@
 #define POLYGON_HPP
 #include <cstddef>
 #include "shape.hpp"
+#include "triangle.hpp"
 namespace karnauhova
 {
   class Polygon final: public Shape
@@ -15,7 +16,7 @@ namespace karnauhova
     void scale(double k) override;
     ~Polygon();
   private:
-    point_t* points_;
+    Triangle** triangles_;
     size_t count_;
   };
 }
