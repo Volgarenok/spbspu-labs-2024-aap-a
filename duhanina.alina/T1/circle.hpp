@@ -14,10 +14,10 @@ namespace duhanina
     rectangle_t getFrameRect() const override;
     void move(const point_t& newPos) override;
     void move(double dx, double dy) override;
-    void unsaveScale(double k) noexcept override;
+    void unsafeScale(double k) noexcept override;
+    point_t getCenter() const override;
 
   private:
-    point_t pos_;
     size_t count_;
     Shape** ellipses_;
   };

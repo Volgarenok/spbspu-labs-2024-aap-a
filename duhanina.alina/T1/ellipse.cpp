@@ -34,8 +34,13 @@ void duhanina::Ellipse::move(double dx, double dy)
   movePoint(center_, dx, dy);
 }
 
-void duhanina::Ellipse::unsaveScale(double k) noexcept
+void duhanina::Ellipse::unsafeScale(double k) noexcept
 {
   horizRadius_ *= k;
   vertRadius_ *= k;
+}
+
+duhanina::point_t duhanina::Ellipse::getCenter() const
+{
+  return center_;
 }

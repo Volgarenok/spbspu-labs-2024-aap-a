@@ -17,6 +17,7 @@ namespace
       }
     }
   }
+
   duhanina::Rectangle* makeRectangle(std::istream& in)
   {
     double data[4] = {0};
@@ -58,12 +59,8 @@ void duhanina::createShape(std::istream& in, const std::string& shapeType, Shape
   }
 }
 
-void duhanina::createScale(std::istream& in, size_t shapeCount, double& scalingFactor, point_t& point)
+void duhanina::createScale(std::istream& in, double& scalingFactor, point_t& point)
 {
-  if (shapeCount == 0)
-  {
-    throw std::logic_error("No shape");
-  }
   double x = 0;
   double y = 0;
   if (!(in >> x >> y >> scalingFactor))

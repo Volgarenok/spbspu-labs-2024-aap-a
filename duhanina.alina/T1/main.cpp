@@ -15,7 +15,11 @@ int main()
   try
   {
     inputShapes(std::cin, shapes, shapeCount, errorArg);
-    createScale(std::cin, shapeCount, scalingFactor, point);
+    if (shapeCount == 0)
+    {
+      throw std::logic_error("No shape");
+    }
+    createScale(std::cin, scalingFactor, point);
     printFiguresInfo(std::cout, shapes, shapeCount);
     processScaling(shapes, shapeCount, point, scalingFactor);
     printFiguresInfo(std::cout, shapes, shapeCount);

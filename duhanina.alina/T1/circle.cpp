@@ -24,11 +24,9 @@ namespace
 }
 
 duhanina::Circle::Circle(const point_t& pos, double radius, size_t count):
-  pos_(pos),
   count_(count),
   ellipses_(createArray(pos, radius, count))
-{
-}
+{}
 
 duhanina::Circle::~Circle()
 {
@@ -48,7 +46,6 @@ duhanina::rectangle_t duhanina::Circle::getFrameRect() const
 
 void duhanina::Circle::move(const point_t& newPos)
 {
-  pos_ = newPos;
   for (size_t i = 0; i < count_; ++i)
   {
     ellipses_[i]->move(newPos);
@@ -57,14 +54,20 @@ void duhanina::Circle::move(const point_t& newPos)
 
 void duhanina::Circle::move(double dx, double dy)
 {
-  movePoint(pos_, dx, dy);
-  move(pos_);
+  point_t pos = ellipses_[0]->getCenter();
+  movePoint(pos, dx, dy);
+  move(pos);
 }
 
-void duhanina::Circle::unsaveScale(double k) noexcept
+void duhanina::Circle::unsafeScale(double k) noexcept
 {
   for (size_t i = 0; i < count_; ++i)
   {
-    ellipses_[i]->unsaveScale(k);
+    ellipses_[i]->unsafeScale(k);
   }
+}
+
+duhanina::point_t duhanina::Circle::getCenter() const
+{
+  return ellipses_[0]->getCenter();
 }
