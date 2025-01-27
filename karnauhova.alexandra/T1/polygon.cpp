@@ -18,7 +18,6 @@ karnauhova::Polygon::Polygon(point_t* points, size_t count):
   }
   catch (const std::exception& e)
   {
-    delete[] points_;
     throw;
   }
 }
