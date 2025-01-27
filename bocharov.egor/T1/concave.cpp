@@ -36,7 +36,7 @@ double bocharov::getMyArea(point_t a, point_t b, point_t c)
 
 bool bocharov::isPointInTriangle(point_t a, point_t b, point_t c, point_t d)
 {
-  const double epsilon = 1e-9;
+  constexpr double epsilon = 1e-9;
   double s = getMyArea(a, b, c);
   double s1 = getMyArea(a, b, d);
   double s2 = getMyArea(a, d, c);
