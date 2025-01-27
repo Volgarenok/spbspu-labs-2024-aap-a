@@ -193,14 +193,14 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
   }
   if (names[0] == "SCALE" || names[0].empty() || count_shape == 0)
   {
-    std::cerr << k << " " << names[0] << " " << "Error: empty input\n";
+    std::cerr << "Error: empty input\n";
     return 1;
   }
-  if (names[count_shape - 1] != "SCALE")
+  if (names[count_shape - 1] != "SCALE" || k <= 0)
   {
     std::cerr << "Error: scale input\n";
     return 1;
   }
-  std::cout << names[0] << names[1] << "\n";
+  count_shape -= 1;
   return 0;
 }

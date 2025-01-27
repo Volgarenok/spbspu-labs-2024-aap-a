@@ -17,7 +17,6 @@ int main()
   {
     if (fabric_input(std::cin, shaps, count_error, point, k, c_shape))
     {
-      std::cout << "main fabric\n";
       return 1;
     }
   }
