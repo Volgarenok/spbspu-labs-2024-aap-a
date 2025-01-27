@@ -33,7 +33,7 @@ void bocharov::scaling(Shape ** myShapes, size_t shapeCount, point_t center, dou
   }
 }
 
-int bocharov::getShapeInfo(std::istream & input, std::ostream & error, std::ostream & output, Shape ** myShapes)
+std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, std::ostream & output, Shape ** myShapes)
 {
   std::string Mystr;
   std::size_t shapesCount = 0;

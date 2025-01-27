@@ -6,10 +6,10 @@
 
 namespace bocharov
 {
-  int getShapeInfo(std::istream& input, std::ostream& error, std::ostream& output, Shape** myShapes);
+  size_t getShapeInfo(std::istream & input, std::ostream & error, std::ostream & output, Shape ** myShapes);
   void clear(Shape ** myshape, size_t shapeCount);
-  double getAllArea(Shape** myShapes, size_t shapeCount);
-  void scaling(Shape** myShapes, size_t shapeCount, point_t center, double ratio);
+  double getAllArea(Shape ** myShapes, size_t shapeCount);
+  void scaling(Shape ** myShapes, size_t shapeCount, point_t center, double ratio);
 }
 
 #endif
