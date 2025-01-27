@@ -117,65 +117,11 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
   std::string name = "uwu";
   while (in >> name && !in.eof())
   {
-    if (!name.empty())
+    if (name == "RECTANGLE")
     {
-      if (name == "RECTANGLE")
+      try
       {
-        try
-        {
-          if (!karnauhova::input_rectangle(in, shaps, count_shape))
-          {
-            in.clear();
-            count_error++;
-          }
-          else
-          {
-            //if (!karnauhova::same_rectangle(shaps, count_shape))
-            //{
-            names[count_shape] = name;
-            count_shape++;
-            //}
-            //else
-            //{
-              //count_error++;
-            //}
-           }
-        }
-        catch (const std::exception& e)
-        {
-          count_error++;
-        }
-      }
-      else if (name == "TRIANGLE")
-      {
-        try
-        {
-          if (!karnauhova::input_triangle(in, shaps, count_shape))
-          {
-            in.clear();
-            count_error++;
-          }
-          else
-          {
-            //if (!karnauhova::same_triangle(shaps, count_shape))
-            //{
-            names[count_shape] = name;
-            count_shape++;
-           // }
-           // else
-            //{
-              //count_error++;
-            //}
-          }
-        }
-        catch (const std::exception& e)
-        {
-          count_error++;
-        }
-      }
-      else if (name == "SCALE")
-      {
-        if (!karnauhova::input_scale(std::cin, point, k))
+        if (!karnauhova::input_rectangle(in, shaps, count_shape))
         {
           in.clear();
           count_error++;
@@ -186,43 +132,68 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
           count_shape++;
         }
       }
-      else if (name == "POLYGON")
+      catch (const std::exception& e)
       {
-        try
+        count_error++;
+      }
+    }
+    else if (name == "TRIANGLE")
+    {
+      try
+      {
+        if (!karnauhova::input_triangle(in, shaps, count_shape))
         {
-          if (!karnauhova::input_polygon(in, shaps, count_shape))
-          {
-            in.clear();
-            count_error++;
-          }
-          else
-          {
-         //   if (!karnauhova::same_polygon(shaps, count_shape))
-           // {
-            names[count_shape] = name;
-            count_shape++;
-          //  }
-            //else
-            //{
-              //count_error++;
-           // }
-           }
-        }
-        catch (const std::exception& e)
-        {
+          in.clear();
           count_error++;
         }
+        else
+        {
+          names[count_shape] = name;
+          count_shape++;
+        }
+      }
+      catch (const std::exception& e)
+      {
+        count_error++;
+      }
+    }
+    else if (name == "SCALE")
+    {
+      if (!karnauhova::input_scale(std::cin, point, k))
+      {
+        in.clear();
+        count_error++;
       }
       else
       {
-        karnauhova::eat_trash(std::cin);
+        names[count_shape] = name;
+        count_shape++;
+      }
+    }
+    else if (name == "POLYGON")
+    {
+      try
+      {
+        if (!karnauhova::input_polygon(in, shaps, count_shape))
+        {
+          in.clear();
+          count_error++;
+        }
+        else
+        {
+          names[count_shape] = name;
+          count_shape++;
+         }
+      }
+      catch (const std::exception& e)
+      {
         count_error++;
       }
     }
   }
-  if (names[0] == "SCALE" || names[0].empty())
+  if (names[0] == "SCALE" || names[0].empty() || count_shape == 0)
   {
-    std::cerr << "Error: empty input\n";
+    std::cerr << k << " " << names[0] << " " << "Error: empty input\n";
     return 1;
   }
   if (names[count_shape - 1] != "SCALE")
@@ -230,5 +201,6 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
     std::cerr << "Error: scale input\n";
     return 1;
   }
+  std::cout << names[0] << names[1] << "\n";
   return 0;
 }

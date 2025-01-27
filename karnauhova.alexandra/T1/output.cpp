@@ -7,6 +7,7 @@
 #include "polygon.hpp"
 void karnauhova::output(std::ostream & out, Shape** shaps, point_t point, double k, double c_shape)
 {
+  std::cout << "lol";
   size_t m = 0;
   double sum1 = 0, sum2 = 0;
   double out1[10000] = {};
