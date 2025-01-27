@@ -17,6 +17,7 @@ int main()
   {
     if (fabric_input(std::cin, shaps, count_error, point, k, c_shape))
     {
+      delet(shaps, c_shape);
       return 1;
     }
   }

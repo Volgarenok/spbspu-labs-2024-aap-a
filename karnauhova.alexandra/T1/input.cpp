@@ -124,6 +124,7 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
         if (!karnauhova::input_rectangle(in, shaps, count_shape))
         {
           in.clear();
+          delete shaps[count_shape];
           count_error++;
         }
         else
@@ -144,6 +145,7 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
         if (!karnauhova::input_triangle(in, shaps, count_shape))
         {
           in.clear();
+          delete shaps[count_shape];
           count_error++;
         }
         else
@@ -177,6 +179,7 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
         if (!karnauhova::input_polygon(in, shaps, count_shape))
         {
           in.clear();
+          delete shaps[count_shape];
           count_error++;
         }
         else
