@@ -14,7 +14,10 @@ karnauhova::Polygon::Polygon(point_t* points, size_t count):
       delete[] points_;
       throw std::logic_error("It's not a polygon");
     }
-    points_ = points;
+    for (size_t i = 0; i < count_; i++)
+    {
+      points_[i] = points[i];
+    }
   }
   catch (const std::exception& e)
   {
