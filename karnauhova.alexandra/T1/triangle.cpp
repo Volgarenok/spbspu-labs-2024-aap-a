@@ -18,11 +18,7 @@ karnauhova::Triangle::Triangle(point_t x1, point_t x2, point_t x3):
 
 double karnauhova::Triangle::getArea() const
 {
-  double len_1 = karnauhova::getDistance(x1_, x2_);
-  double len_2 = karnauhova::getDistance(x2_, x3_);
-  double len_3 = karnauhova::getDistance(x1_, x3_);
-  double p = (len_1 + len_2 + len_3)/2;
-  return std::sqrt(p * (p - len_1) * (p - len_2) * (p - len_3));
+  return std::abs(((x1_.x * (x2_.y - x3_.y) +  x2_.x * (x3_.y - x1_.y) + x3_.x * (x1_.y - x2_.y))) / 2.0);
 }
 
 karnauhova::rectangle_t karnauhova::Triangle::getFrameRect() const
