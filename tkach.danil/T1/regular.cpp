@@ -39,7 +39,7 @@ size_t tkach::Regular::getSideAmount() const
   return compareDoubles(res, round_res) ? 0 : round_res;
 }
 
-tkach::Regular::Regular(const point_t& first_point, const point_t& second_point, const point_t& third_point): 
+tkach::Regular::Regular(const point_t& first_point, const point_t& second_point, const point_t& third_point):
   first_point_(first_point),
   second_point_(getSecondPoint(first_point, second_point, third_point)),
   third_point_(getThirdPoint(first_point, second_point, third_point))
