@@ -14,7 +14,7 @@ namespace
     return sum;
   }
 
-  void fillArrayWithClones(tkach::Shape** now, const tkach::Shape* const* const other, const size_t size, size_t& true_size)
+  void fillCloneArray(tkach::Shape** now, const tkach::Shape* const* const other, const size_t size, size_t& true_size)
   {
     for (size_t i = 0; i < size; ++i)
     {
@@ -60,7 +60,7 @@ tkach::CompositeShape::CompositeShape(const CompositeShape& other):
   size_t true_size = 0;
   try
   {
-    fillArrayWithClones(shapes_, other.shapes_, size_, true_size);
+    fillCloneArray(shapes_, other.shapes_, size_, true_size);
   }
   catch (const std::bad_alloc&)
   {
@@ -77,7 +77,7 @@ tkach::CompositeShape& tkach::CompositeShape::operator=(const CompositeShape& ot
     size_t true_size = 0;
     try
     {
-      fillArrayWithClones(new_shapes, other.shapes_, other.size_, true_size);
+      fillCloneArray(new_shapes, other.shapes_, other.size_, true_size);
     }
     catch (const std::bad_alloc&)
     {
@@ -112,7 +112,7 @@ double tkach::CompositeShape::getArea() const
 
 tkach::rectangle_t tkach::CompositeShape::getFrameRect() const
 {
-  if (size_ == 0)
+  if (empty())
   {
     throw std::logic_error("No shapes for FrameRect");
   }
@@ -122,7 +122,7 @@ tkach::rectangle_t tkach::CompositeShape::getFrameRect() const
   bot = shape_rect.pos.y - shape_rect.height / 2.0;
   right = shape_rect.pos.x + shape_rect.width / 2.0;
   top = shape_rect.pos.y + shape_rect.height / 2.0;
-  for (size_t i = 1; i < size_; ++i)
+  for (size_t i = 1; i < size(); ++i)
   {
     shape_rect = shapes_[i]->getFrameRect();
     left = std::min(left, shape_rect.pos.x - shape_rect.width / 2.0);
@@ -140,7 +140,7 @@ tkach::CompositeShape::~CompositeShape()
 
 void tkach::CompositeShape::move(const double add_to_x, const double add_to_y)
 {
-  for (size_t i = 0; i < size_; ++i)
+  for (size_t i = 0; i < size(); ++i)
   {
     shapes_[i]->move(add_to_x, add_to_y);
   }
@@ -167,7 +167,7 @@ void tkach::CompositeShape::pushBack(Shape* const shp)
 
 void tkach::CompositeShape::popBack()
 {
-  if (size_ == 0)
+  if (empty())
   {
     throw std::logic_error("Empty compositeshape");
   }
@@ -184,7 +184,7 @@ tkach::Shape* tkach::CompositeShape::at(const size_t id)
 
 const tkach::Shape* tkach::CompositeShape::at(const size_t id) const
 {
-  if (id >= size_)
+  if (id >= size())
   {
     throw std::out_of_range("Index is out of range");
   }
@@ -193,7 +193,7 @@ const tkach::Shape* tkach::CompositeShape::at(const size_t id) const
 
 tkach::Shape* tkach::CompositeShape::operator[](const size_t id)
 {
-  return shapes_[id];
+  return const_cast< Shape* >(const_cast< const CompositeShape* >(this)->operator[](id));
 }
 
 const tkach::Shape* tkach::CompositeShape::operator[](const size_t id) const
@@ -203,7 +203,7 @@ const tkach::Shape* tkach::CompositeShape::operator[](const size_t id) const
 
 bool tkach::CompositeShape::empty() const noexcept
 {
-  return size();
+  return size() == 0;
 }
 
 size_t tkach::CompositeShape::size() const noexcept

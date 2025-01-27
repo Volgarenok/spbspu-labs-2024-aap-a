@@ -1,6 +1,4 @@
-#include <iostream>
 #include <iomanip>
-#include <string>
 #include "figureactions.hpp"
 #include "makeshapes.hpp"
 #include "composite-shape.hpp"
@@ -72,7 +70,7 @@ int main()
         }
         else
         {
-           incorrect_shape = true;
+          incorrect_shape = true;
         }
       }
     }
@@ -98,7 +96,7 @@ int main()
   {
     std::cerr << "Error with shapes discription\n";
   }
-  if (shapes_array.size() == 0)
+  if (shapes_array.empty())
   {
     std::cerr << "Zero correct shapes\n";
     return 1;

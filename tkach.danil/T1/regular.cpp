@@ -18,24 +18,32 @@ namespace
   {
     return point1.x == point2.x && point1.y == point2.y;
   }
+
+  tkach::point_t getSecondPoint(const tkach::point_t& first, const tkach::point_t& second, const tkach::point_t& third)
+  {
+    return getDist(first, third) > getDist(first, second) ? third : second;
+  }
+
+  tkach::point_t getThirdPoint(const tkach::point_t& first, const tkach::point_t& second, const tkach::point_t& third)
+  {
+    return getDist(first, third) > getDist(first, second) ? second : third;
+  }
 }
 
 size_t tkach::Regular::getSideAmount() const
 {
-  const double res = std::acos(-1.0) / (std::acos(getDist(first_point_, third_point_) / getDist(first_point_, second_point_)));
+  double dist_first_to_third = getDist(first_point_, third_point_);
+  double dist_first_to_second = getDist(first_point_, second_point_);
+  const double res = std::acos(-1.0) / (std::acos(dist_first_to_third / dist_first_to_second));
   size_t round_res = std::round(res);
   return compareDoubles(res, round_res) ? 0 : round_res;
 }
 
-tkach::Regular::Regular(const point_t& first_point, const point_t& second_point, const point_t& third_point):
+tkach::Regular::Regular(const point_t& first_point, const point_t& second_point, const point_t& third_point): 
   first_point_(first_point),
-  second_point_(second_point),
-  third_point_(third_point)
+  second_point_(getSecondPoint(first_point, second_point, third_point)),
+  third_point_(getThirdPoint(first_point, second_point, third_point))
 {
-  if (getDist(first_point, third_point) > getDist(first_point, second_point))
-  {
-    std::swap(second_point_, third_point_);
-  }
   double first_side_squarred = std::pow(getDist(first_point_, second_point_), 2);
   double second_side_squarred = std::pow(getDist(third_point_, second_point_), 2);
   double third_side_squarred = std::pow(getDist(first_point_, third_point_), 2);
@@ -43,7 +51,11 @@ tkach::Regular::Regular(const point_t& first_point, const point_t& second_point,
   {
     throw std::logic_error("Triangle is not right");
   }
-  if (isEqualPoints(first_point, second_point) || isEqualPoints(first_point, third_point) || isEqualPoints(third_point, second_point))
+  bool equal_points[3];
+  equal_points[0] = isEqualPoints(first_point, second_point);
+  equal_points[1] = isEqualPoints(first_point, third_point);
+  equal_points[2] = isEqualPoints(third_point, second_point);
+  if (equal_points[0] || equal_points[1] || equal_points[2])
   {
     throw std::logic_error("Triangle doesn`t exist");
   }

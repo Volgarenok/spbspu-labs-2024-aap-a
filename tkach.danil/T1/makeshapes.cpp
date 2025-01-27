@@ -1,5 +1,4 @@
 #include "makeshapes.hpp"
-#include <string>
 #include "regular.hpp"
 #include "ring.hpp"
 #include "rectangle.hpp"
@@ -41,7 +40,7 @@ namespace
   }
 }
 
-tkach::Shape* tkach::makeShape(std::istream& in, std::string shape_name)
+tkach::Shape* tkach::makeShape(std::istream& in, const std::string& shape_name)
 {
   try
   {

@@ -1,7 +1,6 @@
 #ifndef RING_HPP
 #define RING_HPP
 
-#include "shape.hpp"
 #include "regular.hpp"
 
 namespace tkach
