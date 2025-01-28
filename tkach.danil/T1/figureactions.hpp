@@ -2,6 +2,7 @@
 #define FIGUREACTIONS_HPP
 
 #include "composite-shape.hpp"
+#include "base-types.hpp"
 
 namespace tkach
 {

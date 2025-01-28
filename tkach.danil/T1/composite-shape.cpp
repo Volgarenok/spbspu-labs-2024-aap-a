@@ -31,12 +31,28 @@ namespace
     }
   }
 
-  void deleteShapesFromArray(tkach::Shape** shapes_array, size_t size)
+  void deleteShapesFromArray(tkach::Shape** shapes_array, const size_t size)
   {
     for (size_t i = 0; i < size; ++i)
     {
       delete shapes_array[i];
     }
+  }
+
+  tkach::Shape** getCompoiteShapeFromOther(const tkach::Shape* const* const other_array, const size_t size)
+  {
+    tkach::Shape** shapes = new tkach::Shape*[size];
+    size_t true_size = 0;
+    try
+    {
+      fillCloneArray(shapes, other_array, size, true_size);
+    }
+    catch (const std::bad_alloc&)
+    {
+      deleteShapesFromArray(shapes, true_size);
+      throw;
+    }
+    return shapes;
   }
 }
 
@@ -55,19 +71,8 @@ tkach::CompositeShape::CompositeShape(CompositeShape&& other) noexcept:
 
 tkach::CompositeShape::CompositeShape(const CompositeShape& other):
   size_(other.size_),
-  shapes_(new Shape*[size_])
-{
-  size_t true_size = 0;
-  try
-  {
-    fillCloneArray(shapes_, other.shapes_, size_, true_size);
-  }
-  catch (const std::bad_alloc&)
-  {
-    deleteShapesFromArray(shapes_, true_size);
-    throw;
-  }
-}
+  shapes_(getCompoiteShapeFromOther(other.shapes_, size_))
+{}
 
 tkach::CompositeShape& tkach::CompositeShape::operator=(const CompositeShape& other)
 {

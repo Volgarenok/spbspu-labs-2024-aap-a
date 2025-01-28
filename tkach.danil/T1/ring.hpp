@@ -2,6 +2,7 @@
 #define RING_HPP
 
 #include "regular.hpp"
+#include "base-types.hpp"
 
 namespace tkach
 {

@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include "shape.hpp"
+#include "base-types.hpp"
 
 namespace tkach
 {

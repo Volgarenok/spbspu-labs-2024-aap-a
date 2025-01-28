@@ -2,6 +2,8 @@
 #include "figureactions.hpp"
 #include "makeshapes.hpp"
 #include "composite-shape.hpp"
+#include "shape.hpp"
+#include "base-types.hpp"
 
 namespace
 {
