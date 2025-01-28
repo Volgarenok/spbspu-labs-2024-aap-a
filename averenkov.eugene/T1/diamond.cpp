@@ -58,6 +58,10 @@ void averenkov::Diamond::scale(double factor)
   double scale_height = getFrameRect().height / 2 * factor;
   point_t a = {center.x + scale_width, center.y};
   point_t b = {center.x, center.y + scale_height};
+  for (size_t i = 0; i < 40; i++)
+  {
+    delete rectangles_[i];
+  }
   rectangles_ = (buildRectangles(center, a, b));
 }
 

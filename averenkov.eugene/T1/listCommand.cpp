@@ -37,6 +37,7 @@ void averenkov::printList(Shape** list, size_t count)
     std::cout << " " << averenkov::getLeftBot(rect).x << " ";
     std::cout << averenkov::getLeftBot(rect).y << " ";
     std::cout << averenkov::getRightTop(rect).x << " ";
-    std::cout << averenkov::getRightTop(rect).y << "\n";
+    std::cout << averenkov::getRightTop(rect).y;
   }
+  std::cout << "\n";
 }
