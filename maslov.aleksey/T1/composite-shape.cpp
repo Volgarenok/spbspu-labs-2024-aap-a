@@ -61,18 +61,34 @@ void maslov::CompositeShape::push_back(Shape * shp)
 }
 void maslov::CompositeShape::pop_back()
 {
+  if (empty())
+  {
+    throw std::out_of_range("Composite shape is empty");
+  }
   delete shapeArray_[--size_];
 }
 maslov::Shape * maslov::CompositeShape::at(size_t id) const
 {
+  if (id >= size_)
+  {
+    throw std::out_of_range("Index out of range");
+  }
   return shapeArray_[id];
 }
 maslov::Shape * maslov::CompositeShape::operator[](size_t id)
 {
+  if (id >= size_)
+  {
+    throw std::out_of_range("Index out of range");
+  }
   return shapeArray_[id];
 }
 const maslov::Shape * maslov::CompositeShape::operator[](size_t id) const
 {
+  if (id >= size_)
+  {
+    throw std::out_of_range("Index out of range");
+  }
   return shapeArray_[id];
 }
 bool maslov::CompositeShape::empty() const
@@ -113,7 +129,7 @@ maslov::rectangle_t maslov::CompositeShape::getFrameRect() const
   double centerY = (minY + maxY) / 2.0;
   double width = maxX - minX;
   double height = maxY - minY;
-  return {width - 4, height + 1, {centerX, centerY}};
+  return {width, height, {centerX, centerY}};
 }
 void maslov::CompositeShape::move(point_t s)
 {
@@ -131,6 +147,10 @@ void maslov::CompositeShape::move(double dx, double dy)
 }
 void maslov::CompositeShape::scale(double k)
 {
+  if (k <= 0.0)
+  {
+    throw std::invalid_argument("Incorrect scale factor");
+  }
   point_t centerComposite =  getFrameRect().pos;
   for (size_t i = 0; i < size_; ++i)
   {

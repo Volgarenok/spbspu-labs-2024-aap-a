@@ -1,6 +1,5 @@
 #include <iostream>
 #include <iomanip>
-#include "shape.hpp"
 #include "inputShape.hpp"
 #include "base-types.hpp"
 #include "shapeManipulator.hpp"
@@ -8,10 +7,10 @@
 
 int main()
 {
-  maslov::CompositeShape compositeShapes;
+  maslov::CompositeShape compositeShape;
   try
   {
-    maslov::inputShapes(std::cin, compositeShapes);
+    maslov::inputShapes(std::cin, compositeShape);
   }
   catch (const std::runtime_error & e)
   {
@@ -25,20 +24,20 @@ int main()
   }
   double centerX = 0.0, centerY = 0.0, scaleFactor = 0.0;
   std::cin >> centerX >> centerY >> scaleFactor;
-  if (scaleFactor < 0)
+  if (scaleFactor <= 0.0)
   {
     std::cerr << "Incorrect scale factor\n";
-    maslov::destroyShapes(compositeShapes);
+    maslov::destroyShapes(compositeShape);
     return 1;
   }
   maslov::point_t scaleCoordinate = {centerX, centerY};
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << maslov::getSumArea(compositeShapes) << " ";
-  maslov::printCoordinates(std::cout, compositeShapes);
+  std::cout << maslov::getSumArea(compositeShape) << " ";
+  maslov::printCoordinates(std::cout, compositeShape);
   std::cout << "\n";
-  maslov::scaleShapes(compositeShapes, scaleCoordinate, scaleFactor);
-  std::cout << maslov::getSumArea(compositeShapes) << " ";
-  maslov::printCoordinates(std::cout, compositeShapes);
+  maslov::scaleShapes(compositeShape, scaleCoordinate, scaleFactor);
+  std::cout << maslov::getSumArea(compositeShape) << " ";
+  maslov::printCoordinates(std::cout, compositeShape);
   std::cout << "\n";
-  maslov::destroyShapes(compositeShapes);
+  maslov::destroyShapes(compositeShape);
 }

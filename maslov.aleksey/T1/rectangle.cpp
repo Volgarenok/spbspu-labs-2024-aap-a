@@ -119,7 +119,7 @@ void maslov::Rectangle::move(double dx, double dy)
 }
 void maslov::Rectangle::scale(double k)
 {
-  if (k < 0)
+  if (k <= 0.0)
   {
     throw std::invalid_argument("Incorrect scale factor");
   }

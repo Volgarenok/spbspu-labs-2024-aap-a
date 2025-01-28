@@ -1,7 +1,6 @@
 #ifndef SHAPE_MANIPULATOR_HPP
 #define SHAPE_MANIPULATOR_HPP
 
-#include <cstddef>
 #include <iostream>
 #include "composite-shape.hpp"
 

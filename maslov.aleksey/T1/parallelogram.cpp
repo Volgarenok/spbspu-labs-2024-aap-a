@@ -53,7 +53,7 @@ void maslov::Parallelogram::move(double dx, double dy)
 }
 void maslov::Parallelogram::scale(double k)
 {
-  if (k < 0)
+  if (k <= 0.0)
   {
     throw std::invalid_argument("Incorrect scale factor");
   }
