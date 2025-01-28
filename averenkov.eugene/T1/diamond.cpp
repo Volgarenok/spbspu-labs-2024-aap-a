@@ -84,10 +84,9 @@ void averenkov::Diamond::move(double dx, double dy)
 averenkov::Rectangle** averenkov::Diamond::buildRectangles(const point_t& a, const point_t& b, const point_t& c)
 {
   Rectangle** rectangles = new Rectangle*[40];
-  double width = 0, height = 0;
-  point_t center = { 0.0, 0.0 };
-  width = std::abs(c.x - a.x) + std::abs(b.x - a.x) + std::abs(c.x - b.x);
-  height = std::abs(c.y - a.y) + std::abs(b.y - a.y) + std::abs(c.y - b.y);
+  double width = std::abs(c.x - a.x) + std::abs(b.x - a.x) + std::abs(c.x - b.x);
+  double height = std::abs(c.y - a.y) + std::abs(b.y - a.y) + std::abs(c.y - b.y);
+  point_t center = {0.0, 0.0};
   if ((a.x == b.x && a.y == c.y) || (a.x == c.x && a.y == b.y))
   {
     center = a;
@@ -102,33 +101,44 @@ averenkov::Rectangle** averenkov::Diamond::buildRectangles(const point_t& a, con
   }
   if (width == 0 || height == 0)
   {
+    delete[] rectangles;
     throw std::invalid_argument("Incorrect input");
   }
   double widthR_ = width / 8;
   double heightR_ = height / 8;
   size_t index = 0;
-  for (size_t quadrant = 0; quadrant < 4; ++quadrant)
+  try
   {
-    double x_dir = (quadrant % 2 == 0) ? -1 : 1;
-    double y_dir = (quadrant < 2) ? -1 : 1;
-    for (size_t level = 0; level < 4; ++level)
+    for (size_t quadrant = 0; quadrant < 4; ++quadrant)
     {
-      double y_offset = y_dir * (level * heightR_);
-
-      for (size_t rect_in_level = 0; rect_in_level < (4 - level); ++rect_in_level)
+      double x_dir = (quadrant % 2 == 0) ? -1 : 1;
+      double y_dir = (quadrant < 2) ? -1 : 1;
+      for (size_t level = 0; level < 4; ++level)
       {
-        if (index >= 40)
+        double y_offset = y_dir * (level * heightR_);
+        for (size_t rect_in_level = 0; rect_in_level < (4 - level); ++rect_in_level)
         {
-          delete[] rectangles;
-          throw std::out_of_range("Too many rectangles for the array.");
+          if (index >= 40)
+          {
+            throw std::out_of_range("Too many rectangles");
+          }
+          double x_offset = x_dir * (rect_in_level - (3 - level) / 2.0) * widthR_;
+          point_t rect_a = {center.x + x_offset - widthR_ / 2, center.y + y_offset - heightR_ / 2};
+          point_t rect_c = {rect_a.x + widthR_, rect_a.y + heightR_};
+          rectangles[index] = new Rectangle(rect_a, rect_c);
+          index++;
         }
-        double x_offset = x_dir * (rect_in_level - (3 - level) / 2.0) * widthR_;
-        point_t rect_a = {center.x + x_offset - widthR_ / 2, center.y + y_offset - heightR_ / 2};
-        point_t rect_c = {rect_a.x + widthR_, rect_a.y + heightR_};
-        rectangles[index] = new Rectangle(rect_a, rect_c);
-        index++;
       }
     }
+  }
+  catch (...)
+  {
+    for (size_t i = 0; i < index; ++i)
+    {
+      delete rectangles[i];
+    }
+    delete[] rectangles;
+    throw;
   }
   return rectangles;
 }
