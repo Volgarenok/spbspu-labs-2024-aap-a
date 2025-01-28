@@ -7,13 +7,8 @@
 abramov::CompositeShape::CompositeShape(size_t capacity):
   shapes_(0),
   capacity_(capacity),
-  shapeptrs_(nullptr)
+  shapeptrs_(new Shape*[capacity])
 {
-  if (capacity_ == 0)
-  {
-    ++capacity_;
-  }
-  shapeptrs_ = new Shape*[capacity_];
   for (size_t i = 0; i < size(); ++i)
   {
     shapeptrs_[i] = nullptr;
@@ -151,7 +146,7 @@ void abramov::CompositeShape::unsafeScale(double k)
 
 abramov::Shape **expandArray(abramov::Shape **arr, size_t capacity)
 {
-  abramov::Shape **array = new abramov::Shape*[capacity * 2];
+  abramov::Shape **array = new abramov::Shape*[capacity + 10];
   for (size_t i = 0; i < capacity; ++i)
   {
     array[i] = arr[i];
@@ -163,7 +158,7 @@ void abramov::CompositeShape::push_back(Shape *shp)
   if (capacity_ == shapes_)
   {
     Shape **new_shapeptrs = expandArray(shapeptrs_, capacity_);
-    capacity_ *= 2;
+    capacity_ += 10;
     delete[] shapeptrs_;
     shapeptrs_ = new_shapeptrs;
   }

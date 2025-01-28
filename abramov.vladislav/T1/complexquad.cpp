@@ -6,21 +6,19 @@ void searchInArray(const double *x, double &a, double &b, size_t k)
 {
   if (k >= 1)
   {
-    double max = x[0];
-    double min = x[0];
+    a = x[0];
+    b = x[0];
     for (size_t i = 0; i < k; ++i)
     {
-      if (x[i] > max)
+      if (x[i] > b)
       {
-        max = x[i];
+        b = x[i];
       }
-      if (x[i] < min)
+      if (x[i] < a)
       {
-        min = x[i];
+        a = x[i];
       }
     }
-    a = min;
-    b = max;
   }
 }
 
