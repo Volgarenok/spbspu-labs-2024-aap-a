@@ -2,11 +2,11 @@
 #define INPUT_SHAPE_HPP
 
 #include <iostream>
-#include "shape.hpp"
+#include "composite-shape.hpp"
 
 namespace maslov
 {
-  size_t inputShapes(std::istream & in, Shape ** shapes);
+  void inputShapes(std::istream & in, CompositeShape & compositeShape);
 }
 
 #endif

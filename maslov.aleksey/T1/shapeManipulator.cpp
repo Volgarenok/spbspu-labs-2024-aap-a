@@ -1,35 +1,29 @@
 #include "shapeManipulator.hpp"
-#include <iostream>
 
-double maslov::getSumArea(const Shape * const * const shapes, const size_t count)
+double maslov::getSumArea(const CompositeShape & compositeShape)
 {
-  double sum = 0.0;
-  for (size_t i = 0; i < count; i++)
-  {
-    sum += shapes[i]->getArea();
-  }
-  return sum;
+  return compositeShape.getArea();
 }
-void maslov::scaleShapes(Shape ** shapes, const size_t count,
+void maslov::scaleShapes(CompositeShape & compositeShape,
     const point_t scaleCoordinate, const double scaleFactor)
 {
-  for (size_t i = 0; i < count; i++)
+  for (size_t i = 0; i < compositeShape.size(); i++)
   {
-    point_t centerBefore = shapes[i]->getFrameRect().pos;
-    shapes[i]->move(scaleCoordinate);
-    point_t centerAfter = shapes[i]->getFrameRect().pos;
-    shapes[i]->scale(scaleFactor);
+    point_t centerBefore = compositeShape[i]->getFrameRect().pos;
+    compositeShape[i]->move(scaleCoordinate);
+    point_t centerAfter = compositeShape[i]->getFrameRect().pos;
+    compositeShape[i]->scale(scaleFactor);
     double newX = (centerAfter.x - centerBefore.x) * scaleFactor;
     double newY = (centerAfter.y - centerBefore.y) * scaleFactor;
-    shapes[i]->move(-newX, -newY);
+    compositeShape[i]->move(-newX, -newY);
   }
 }
 void maslov::printCoordinates(std::ostream & out,
-  const Shape * const * const shapes, const size_t count)
+  const CompositeShape & compositeShape)
 {
-  for (size_t i = 0; i < count; i++)
+  for (size_t i = 0; i < compositeShape.size(); i++)
   {
-    rectangle_t rectangle = shapes[i]->getFrameRect();
+    rectangle_t rectangle = compositeShape[i]->getFrameRect();
     double heightHalf = rectangle.height / 2.0;
     double widthHalf = rectangle.width / 2.0;
     double centerX = rectangle.pos.x;
@@ -40,16 +34,16 @@ void maslov::printCoordinates(std::ostream & out,
     double upperRightCornerY = centerY + heightHalf;
     out << lowerLeftCornerX << " " << lowerLeftCornerY << " ";
     out << upperRightCornerX << " " << upperRightCornerY;
-    if (i < count - 1)
+    if (i < compositeShape.size() - 1)
     {
       out << " ";
     }
   }
 }
-void maslov::destroyShapes(Shape ** shapes, const size_t count)
+void maslov::destroyShapes(CompositeShape & compositeShape)
 {
-  for (size_t i = 0; i < count; ++i)
+  while (compositeShape.size() > 0)
   {
-    delete shapes[i];
+    compositeShape.pop_back();
   }
 }

@@ -4,15 +4,14 @@
 #include "inputShape.hpp"
 #include "base-types.hpp"
 #include "shapeManipulator.hpp"
+#include "composite-shape.hpp"
 
 int main()
 {
-  constexpr size_t maxShapes = 10000;
-  maslov::Shape * shapes[maxShapes] = {};
-  size_t count = 0;
+  maslov::CompositeShape compositeShapes;
   try
   {
-    count = maslov::inputShapes(std::cin, shapes);
+    maslov::inputShapes(std::cin, compositeShapes);
   }
   catch (const std::runtime_error & e)
   {
@@ -29,17 +28,17 @@ int main()
   if (scaleFactor < 0)
   {
     std::cerr << "Incorrect scale factor\n";
-    maslov::destroyShapes(shapes, count);
+    maslov::destroyShapes(compositeShapes);
     return 1;
   }
   maslov::point_t scaleCoordinate = {centerX, centerY};
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << maslov::getSumArea(shapes, count) << " ";
-  maslov::printCoordinates(std::cout, shapes, count);
+  std::cout << maslov::getSumArea(compositeShapes) << " ";
+  maslov::printCoordinates(std::cout, compositeShapes);
   std::cout << "\n";
-  maslov::scaleShapes(shapes, count, scaleCoordinate, scaleFactor);
-  std::cout << maslov::getSumArea(shapes, count) << " ";
-  maslov::printCoordinates(std::cout, shapes, count);
+  maslov::scaleShapes(compositeShapes, scaleCoordinate, scaleFactor);
+  std::cout << maslov::getSumArea(compositeShapes) << " ";
+  maslov::printCoordinates(std::cout, compositeShapes);
   std::cout << "\n";
-  maslov::destroyShapes(shapes, count);
+  maslov::destroyShapes(compositeShapes);
 }

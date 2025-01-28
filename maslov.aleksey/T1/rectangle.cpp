@@ -95,11 +95,10 @@ maslov::rectangle_t maslov::Rectangle::getFrameRect() const
   }
   double centerX = (minX + maxX) / 2.0;
   double centerY = (minY + maxY) / 2.0;
-  point_t center = {centerX, centerY};
   double squareSize = regularArray_[0]->getFrameRect().width;
   double width = squareSize * nWidth_;
   double height = squareSize * nLength;
-  return {width, height, center};
+  return {width, height, {centerX, centerY}};
 }
 void maslov::Rectangle::move(point_t s)
 {
@@ -127,7 +126,6 @@ void maslov::Rectangle::scale(double k)
   point_t center = getFrameRect().pos;
   double centerX = center.x;
   double centerY = center.y;
-  double scaleFactor = k;
   double squareSize = regularArray_[0]->getFrameRect().width;
   size_t nlength = n_ / nWidth_;
   double startX = centerX - (nlength * squareSize) / 2.0;
@@ -137,7 +135,7 @@ void maslov::Rectangle::scale(double k)
     for (size_t j = 0; j < nlength; j++)
     {
       size_t index = i * nlength + j;
-      regularArray_[index]->scale(scaleFactor);
+      regularArray_[index]->scale(k);
       double offsetX = startX + j * squareSize + squareSize / 2.0;
       double offsetY = startY + i * squareSize + squareSize / 2.0;
       point_t centerRegular = regularArray_[index]->getFrameRect().pos;

@@ -10,22 +10,21 @@ namespace
   maslov::Shape * makeShape(std::istream & in, std::string name);
 }
 
-size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
+void maslov::inputShapes(std::istream & in, maslov::CompositeShape & compositeShape)
 {
   using namespace maslov;
-  size_t count = 0;
   bool incorrectedFlag = false;
   std::string name;
   while (!std::cin.eof() && name != "SCALE")
   {
     std::cin >> name;
+    if (name == "SCALE")
+    {
+      break;
+    }
     try
     {
-      shapes[count] = makeShape(std::cin, name);
-      if (shapes[count])
-      {
-        count++;
-      }
+      compositeShape.push_back(makeShape(std::cin, name));
     }
     catch (const std::invalid_argument & e)
     {
@@ -33,28 +32,23 @@ size_t maslov::inputShapes(std::istream & in, maslov::Shape ** shapes)
     }
     catch (const std::bad_alloc & e)
     {
-      destroyShapes(shapes, count);
+      destroyShapes(compositeShape);
       throw;
-    }
-    if (name == "SCALE")
-    {
-      break;
     }
   }
   if (in.eof())
   {
-    destroyShapes(shapes, count);
+    destroyShapes(compositeShape);
     throw std::runtime_error("Error: EOF encountered before SCALE command");
   }
   if (incorrectedFlag)
   {
     std::cerr << "There were wrong shapes\n";
   }
-  if (count == 0)
+  if (compositeShape.size() == 0)
   {
     throw std::runtime_error("There are no shapes");
   }
-  return count;
 }
 
 namespace

@@ -16,10 +16,11 @@ namespace maslov
     ~CompositeShape();
     void push_back(Shape * shp);
     void pop_back();
-    Shape * at(size_t id);
+    Shape * at(size_t id) const;
     Shape * operator[](size_t id);
-    bool empty();
-    size_t size();
+    const Shape * operator[](size_t id) const;
+    bool empty() const;
+    size_t size() const;
     double getArea() const;
     rectangle_t getFrameRect() const;
     void move(point_t s);
