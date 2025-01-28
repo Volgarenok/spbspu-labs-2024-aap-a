@@ -87,28 +87,57 @@ bool karnauhova::input_scale(std::istream & in, point_t& point, double& k)
 
 bool karnauhova::input_polygon(std::istream & in, Shape** shaps, size_t count_shaps)
 {
-  point_t x_y[10000] = {};
+  size_t size = 1;
+  point_t* x_y = new point_t[size];
   double x = 0;
   double y = 0;
   size_t count = 0;
-  while (in.peek() != '\n' && in.peek() != EOF)
+  while (!in.fail())
+  //while (in.peek() != '\n' && in.peek() != EOF)
   {
+    if (count >= size)
+    {
+      point_t* a = nullptr;
+      try
+      {
+        a = expansion(x_y, size, size + 1);
+      }
+      catch (const std::bad_alloc& e)
+      {
+        delete[] x_y;
+        throw;
+      }
+      x_y = a;
+      size++;
+    }
     if (!(in >> x))
     {
-      eat_trash(in);
+      //eat_trash(in);
       return false;
     }
-    if (!(in >> y))
-    {
-      eat_trash(in);
-      return false;
-    }
+    //if (!(in >> y))
+    //{
+     // return false;
+    //}
+    std::cout << x << " " << y << "\n";
     x_y[count].x = x;
     x_y[count].y = y;
     count += 1;
   }
   shaps[count_shaps] = new Polygon(x_y, count);
+  delete[] x_y;
   return true;
+}
+
+karnauhova::point_t* karnauhova::expansion(point_t* a, size_t old, size_t dl)
+{
+  point_t* newm = new point_t[dl];
+  for (size_t i = 0; i < old; i++)
+  {
+    newm[i] = a[i];
+  }
+  delete[] a;
+  return newm;
 }
 
 bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_error, point_t& point, double& k, size_t& count_shape)
@@ -184,6 +213,7 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
         }
         else
         {
+          in.clear();
           names[count_shape] = name;
           count_shape++;
          }
