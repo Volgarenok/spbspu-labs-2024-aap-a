@@ -116,12 +116,11 @@ tkach::rectangle_t tkach::CompositeShape::getFrameRect() const
   {
     throw std::logic_error("No shapes for FrameRect");
   }
-  double left = 0.0, right = 0.0, top = 0.0, bot = 0.0;
   rectangle_t shape_rect = shapes_[0]->getFrameRect();
-  left = shape_rect.pos.x - shape_rect.width / 2.0;
-  bot = shape_rect.pos.y - shape_rect.height / 2.0;
-  right = shape_rect.pos.x + shape_rect.width / 2.0;
-  top = shape_rect.pos.y + shape_rect.height / 2.0;
+  double left = shape_rect.pos.x - shape_rect.width / 2.0;
+  double bot = shape_rect.pos.y - shape_rect.height / 2.0;
+  double right = shape_rect.pos.x + shape_rect.width / 2.0;
+  double top = shape_rect.pos.y + shape_rect.height / 2.0;
   for (size_t i = 1; i < size(); ++i)
   {
     shape_rect = shapes_[i]->getFrameRect();
