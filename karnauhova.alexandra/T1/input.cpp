@@ -92,8 +92,7 @@ bool karnauhova::input_polygon(std::istream & in, Shape** shaps, size_t count_sh
   double x = 0;
   double y = 0;
   size_t count = 0;
-  while (!in.fail() && in >> x)
-  //while (in.peek() != '\n' && in.peek() != EOF)
+  while (in >> x)
   {
     if (count >= size)
     {
@@ -110,24 +109,13 @@ bool karnauhova::input_polygon(std::istream & in, Shape** shaps, size_t count_sh
       x_y = a;
       size++;
     }
-    //if (!(in >> x))
-    //{
-      //eat_trash(in);
-      //return false;
-    //}
-    if (in >> y)
-    {
-    //if (!(in >> y))
-    //{
-     // return false;
-    //}
-      x_y[count].x = x;
-      x_y[count].y = y;
-      count += 1;
-    }
+    in >> y;
+    x_y[count].x = x;
+    x_y[count].y = y;
+    count += 1;
   }
+  in.clear();
   shaps[count_shaps] = new Polygon(x_y, count);
-  delete[] x_y;
   return true;
 }
 
@@ -233,7 +221,7 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
   }
   if (names[count_shape - 1] != "SCALE" || k <= 0)
   {
-    std::cerr << "Error: scale input\n";
+    std::cerr << names[count_shape - 1] << k << "Error: scale input\n";
     return 1;
   }
   count_shape -= 1;
