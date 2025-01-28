@@ -116,7 +116,6 @@ bool karnauhova::input_polygon(std::istream & in, Shape** shaps, size_t count_sh
   }
   in.clear();
   shaps[count_shaps] = new Polygon(x_y, count);
-  delete[] x_y;
   return true;
 }
 
