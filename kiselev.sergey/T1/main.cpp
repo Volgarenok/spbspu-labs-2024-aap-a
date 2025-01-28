@@ -32,13 +32,12 @@ int main()
         std::cin >> ratio;
         if (ratio <= 0)
         {
-          std::cerr << "Incorrect ratio\n";
-          return 1;
+          throw std::logic_error("Incorrect ratio");
         }
         break;
       }
     }
-    catch (const std::invalid_argument& e)
+    catch (const std::invalid_argument&)
     {
       isIncorrectShape = true;
     }

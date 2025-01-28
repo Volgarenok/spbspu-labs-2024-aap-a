@@ -13,5 +13,5 @@ void kiselev::Shape::scaleWithCheck(double k)
   {
     throw std::logic_error("Incorrect scaling coefficent");
   }
-  this->scale(k);
+  scale(k);
 }

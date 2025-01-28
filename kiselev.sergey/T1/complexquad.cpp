@@ -6,11 +6,15 @@
 #include "shape.hpp"
 namespace
 {
+  double getLenghtSide(kiselev::point_t p1, kiselev::point_t p2)
+  {
+    return std::sqrt(std::pow(p2.x - p1.x, 2) + std::pow(p2.y - p1.y, 2));
+  }
   bool isTriangle(kiselev::point_t p1, kiselev::point_t p2, kiselev::point_t p3)
   {
-    double lenght1 = std::sqrt(std::pow(p2.x - p1.x, 2) + std::pow(p2.y - p1.y, 2));
-    double lenght2 = std::sqrt(std::pow(p3.x - p1.x, 2) + std::pow(p3.y - p1.y, 2));
-    double lenght3 = std::sqrt(std::pow(p2.x - p3.x, 2) + std::pow(p2.y - p3.y, 2));
+    double lenght1 = getLenghtSide(p1, p2);
+    double lenght2 = getLenghtSide(p1, p3);
+    double lenght3 = getLenghtSide(p3, p2);
     return lenght1 < lenght2 + lenght3 || lenght2 < lenght1 + lenght3 || lenght3 < lenght1 + lenght2;
   }
   kiselev::point_t findP(kiselev::point_t p1, kiselev::point_t p2, kiselev::point_t p3, kiselev::point_t p4, bool& isIntersect)
@@ -34,10 +38,10 @@ namespace
   }
 }
 kiselev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4):
- p1_(p1),
- p2_(p2),
- p3_(p3),
- p4_(p4)
+  p1_(p1),
+  p2_(p2),
+  p3_(p3),
+  p4_(p4)
 {
   bool isIntersect = true;
   point_t centre = findP(p1, p2, p3, p4, isIntersect);
@@ -57,7 +61,7 @@ kiselev::rectangle_t kiselev::Complexquad::getFrameRect() const
 }
 double kiselev::Complexquad::getArea() const
 {
-  point_t centre = this->getFrameRect().pos;
+  point_t centre = getFrameRect().pos;
   double lenghtP1p4 = std::sqrt(std::pow(p4_.x - p1_.x, 2) + std::pow(p4_.y - p1_.y, 2));
   double lenghtP1centre = std::sqrt(std::pow(centre.x - p1_.x, 2) + std::pow(centre.y - p1_.y, 2));
   double lenghtP4centre = std::sqrt(std::pow(p4_.x - centre.x, 2) + std::pow(p4_.y - centre.y, 2));

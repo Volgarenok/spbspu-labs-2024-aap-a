@@ -5,8 +5,8 @@
 #include "complexquad.hpp"
 #include "shape.hpp"
 kiselev::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
- comp1({ -1, -1 }, { 1, 1 }, { -1, 1 }, { 1, -1 }),
- comp2({ -1, -1 }, { 1, 1 }, { 1, -1 }, { -1, 1 })
+  comp1({ -1, -1 }, { 1, 1 }, { -1, 1 }, { 1, -1 }),
+  comp2({ -1, -1 }, { 1, 1 }, { 1, -1 }, { -1, 1 })
 {
   point_t center = { 0, 0 };
   point_t pHorizontal = { 0, 0 };

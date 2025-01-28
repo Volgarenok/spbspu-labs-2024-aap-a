@@ -13,11 +13,11 @@ namespace kiselev
     ~CompositeShape();
     CompositeShape & operator=(const CompositeShape & cmp);
     CompositeShape & operator=(CompositeShape && cmp) noexcept;
-    void push_back(Shape * shp);
-    void pop_back();
-    Shape * at(size_t id) const;
+    void pushBack(Shape * shp);
+    void popBack();
+    const Shape * at(size_t id) const;
     Shape * at(size_t id);
-    Shape * operator[](size_t id) const noexcept;
+    const Shape * operator[](size_t id) const noexcept;
     Shape * operator[](size_t id) noexcept;
     bool empty() const noexcept;
     size_t size() const noexcept;

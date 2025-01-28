@@ -62,17 +62,17 @@ bool kiselev::makeShape(std::istream& input, std::string & str, kiselev::Composi
     if (str == "RECTANGLE")
     {
       shape = makeRectangle(input);
-      compShp.push_back(shape);
+      compShp.pushBack(shape);
     }
     else if (str == "DIAMOND")
     {
       shape = makeDiamond(input);
-      compShp.push_back(shape);
+      compShp.pushBack(shape);
     }
     else if (str == "COMPLEXQUAD")
     {
       shape = makeComplexquad(input);
-      compShp.push_back(shape);
+      compShp.pushBack(shape);
     }
     return !str.empty() && str != "SCALE";
   }

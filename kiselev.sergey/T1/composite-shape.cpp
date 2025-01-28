@@ -1,9 +1,5 @@
 #include "composite-shape.hpp"
-#include "base-types.hpp"
-#include "shape.hpp"
-#include <algorithm>
 #include <cmath>
-#include <cstddef>
 #include <stdexcept>
 void kiselev::CompositeShape::clear() noexcept
 {
@@ -14,15 +10,15 @@ void kiselev::CompositeShape::clear() noexcept
   delete[] shapes;
 }
 kiselev::CompositeShape::CompositeShape(size_t cap):
- capacity(cap),
- realSize(0),
- shapes(new Shape *[capacity])
+  capacity(cap),
+  realSize(0),
+  shapes(new Shape *[capacity])
 {
 }
 kiselev::CompositeShape::CompositeShape(const CompositeShape & cmp):
- capacity(cmp.capacity),
- realSize(cmp.realSize),
- shapes(new Shape *[capacity])
+  capacity(cmp.capacity),
+  realSize(cmp.realSize),
+  shapes(new Shape *[capacity])
 {
   if (shapes)
   {
@@ -33,9 +29,9 @@ kiselev::CompositeShape::CompositeShape(const CompositeShape & cmp):
   }
 }
 kiselev::CompositeShape::CompositeShape(CompositeShape && cmp) noexcept:
- capacity(cmp.capacity),
- realSize(cmp.realSize),
- shapes(cmp.shapes)
+  capacity(cmp.capacity),
+  realSize(cmp.realSize),
+  shapes(cmp.shapes)
 {
   cmp.shapes = nullptr;
   realSize = 0;
@@ -58,7 +54,7 @@ kiselev::CompositeShape & kiselev::CompositeShape::operator=(CompositeShape && c
   cmp.realSize = 0;
   return *this;
 }
-void kiselev::CompositeShape::push_back(Shape * shp)
+void kiselev::CompositeShape::pushBack(Shape * shp)
 {
   if (realSize >= capacity)
   {
@@ -66,7 +62,7 @@ void kiselev::CompositeShape::push_back(Shape * shp)
   }
   shapes[realSize++] = shp;
 }
-void kiselev::CompositeShape::pop_back()
+void kiselev::CompositeShape::popBack()
 {
   if (realSize == 0)
   {
@@ -75,7 +71,7 @@ void kiselev::CompositeShape::pop_back()
   delete shapes[realSize];
   realSize--;
 }
-kiselev::Shape * kiselev::CompositeShape::at(size_t id) const
+const kiselev::Shape * kiselev::CompositeShape::at(size_t id) const
 {
   if (id >= realSize)
   {
@@ -91,7 +87,7 @@ kiselev::Shape * kiselev::CompositeShape::at(size_t id)
   }
   return shapes[id];
 }
-kiselev::Shape * kiselev::CompositeShape::operator[](size_t id) const noexcept
+const kiselev::Shape * kiselev::CompositeShape::operator[](size_t id) const noexcept
 {
   return shapes[id];
 }
@@ -142,7 +138,7 @@ void kiselev::CompositeShape::move(point_t a)
 {
   double moveForX = a.x - getFrameRect().pos.x;
   double moveForY = a.y - getFrameRect().pos.y;
-  this->move(moveForX, moveForY);
+  move(moveForX, moveForY);
 }
 void kiselev::CompositeShape::move(double dx, double dy)
 {
@@ -152,7 +148,7 @@ void kiselev::CompositeShape::move(double dx, double dy)
   }
 }
 void kiselev::CompositeShape::scale(double k, point_t scale)
-{
+{ 
   for (size_t i = 0; i < realSize; ++i)
   {
     kiselev::point_t beforeScale = shapes[i]->getFrameRect().pos;
@@ -165,8 +161,8 @@ void kiselev::CompositeShape::scale(double k, point_t scale)
 }
 void kiselev::CompositeShape::scale(double k)
 {
-  point_t scale = getFrameRect().pos;
-  this->scale(k, scale);
+  point_t pScale = getFrameRect().pos;
+  scale(k, pScale);
 }
 kiselev::CompositeShape::~CompositeShape()
 {
@@ -181,7 +177,7 @@ kiselev::CompositeShape* kiselev::CompositeShape::clone() const
     for (size_t i = 0; i < realSize; ++i)
     {
       shape = shapes[i]->clone();
-      clone->push_back(shape);
+      clone->pushBack(shape);
     }
   }
   catch (...)

@@ -3,8 +3,8 @@
 #include "base-types.hpp"
 #include "shape.hpp"
 kiselev::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
- leftDown_(leftDown),
- rightUp_(rightUp)
+  leftDown_(leftDown),
+  rightUp_(rightUp)
 {
   if (leftDown.x >= rightUp.x || leftDown.y >= rightUp.y)
   {
@@ -23,7 +23,7 @@ kiselev::rectangle_t kiselev::Rectangle::getFrameRect() const
 }
 void kiselev::Rectangle::move(point_t a)
 {
-  point_t centre = this->getFrameRect().pos;
+  point_t centre = getFrameRect().pos;
   double moveX = a.x - centre.x;
   double moveY = a.y - centre.y;
   move(moveX, moveY);
@@ -35,7 +35,7 @@ void kiselev::Rectangle::move(double dx, double dy)
 }
 void kiselev::Rectangle::scale(double k)
 {
-  point_t centre = this->getFrameRect().pos;
+  point_t centre = getFrameRect().pos;
   leftDown_ = scalePoint(leftDown_, centre, k);
   rightUp_ = scalePoint(rightUp_, centre, k);
 }

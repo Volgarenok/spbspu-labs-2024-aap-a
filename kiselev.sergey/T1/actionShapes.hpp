@@ -4,6 +4,6 @@
 #include "composite-shape.hpp"
 namespace kiselev
 {
-  void printCoordinatesRect(std::ostream& output, kiselev::CompositeShape & cmp);
+  void printCoordinatesRect(std::ostream& output, CompositeShape & cmp);
 }
 #endif
