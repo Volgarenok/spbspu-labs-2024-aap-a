@@ -48,6 +48,13 @@ maslevtsov::Polygon::Polygon():
   vertices_(nullptr)
 {}
 
+maslevtsov::Polygon::Polygon(const Polygon& rhs):
+  Polygon()
+{
+  nVertices_ = rhs.nVertices_;
+  copy(rhs.vertices_, nVertices_, vertices_);
+}
+
 maslevtsov::Polygon::~Polygon()
 {
   delete[] vertices_;
@@ -63,6 +70,16 @@ maslevtsov::Polygon::Polygon(std::size_t nVertices, const point_t* vertices):
   }
   vertices_ = new point_t[nVertices_];
   copy(vertices, nVertices_, vertices_);
+}
+
+maslevtsov::Polygon& maslevtsov::Polygon::operator=(const Polygon& rhs)
+{
+  point_t* newVertices = new point_t[rhs.nVertices_];
+  copy(rhs.vertices_, rhs.nVertices_, newVertices);
+  delete[] vertices_;
+  vertices_ = newVertices;
+  nVertices_ = rhs.nVertices_;
+  return *this;
 }
 
 double maslevtsov::Polygon::getArea() const noexcept

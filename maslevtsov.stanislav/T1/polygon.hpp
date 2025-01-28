@@ -9,8 +9,11 @@ namespace maslevtsov
   {
   public:
     Polygon();
+    Polygon(const Polygon& rhs);
     ~Polygon() override;
     Polygon(std::size_t nVertices, const point_t* vertices);
+    Polygon& operator=(const Polygon& rhs);
+
     double getArea() const noexcept override;
     rectangle_t getFrameRect() const noexcept override;
     void move(point_t pnt) noexcept override;

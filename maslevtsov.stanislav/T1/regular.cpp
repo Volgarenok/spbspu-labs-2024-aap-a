@@ -66,7 +66,8 @@ maslevtsov::Regular::Regular(point_t center, point_t pnt2, point_t pnt3):
 {
   std::size_t nVertices = getNVertices(center, pnt2, pnt3);
   point_t* vertices = getVertices(center, pnt2, pnt3);
-  polygon = Polygon(nVertices, vertices);
+  Polygon tmpPolygon(nVertices, vertices);
+  polygon = tmpPolygon;
   delete[] vertices;
 }
 
