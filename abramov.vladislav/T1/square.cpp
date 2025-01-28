@@ -2,7 +2,7 @@
 #include <stdexcept>
 
 abramov::Square::Square(point_t p, double len):
-  rect_(Rectangle(p, {p.x + len, p.y + len}))
+  rect_({ p, { p.x + len, p.y + len } })
 {
   if (len <= 0)
   {
