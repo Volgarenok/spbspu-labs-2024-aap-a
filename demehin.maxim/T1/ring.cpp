@@ -60,6 +60,6 @@ void demehin::Ring::move(double x, double y)
 
 void demehin::Ring::scaleUnsafely(double k)
 {
-  outer_plg_.scale(k);
-  inner_plg_.scale(k);
+  outer_plg_.scaleUnsafely(k);
+  inner_plg_.scaleUnsafely(k);
 }
