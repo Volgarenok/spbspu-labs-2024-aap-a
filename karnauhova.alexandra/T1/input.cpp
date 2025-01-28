@@ -116,25 +116,18 @@ bool karnauhova::input_polygon(std::istream & in, Shape** shaps, size_t count_sh
   }
   in.clear();
   shaps[count_shaps] = new Polygon(x_y, count);
+  delete[] x_y
   return true;
 }
 
 karnauhova::point_t* karnauhova::expansion(point_t* a, size_t old, size_t dl)
 {
-  point_t* newm = nullptr;
-  try
+  point_t* newm = new point_t[dl];
+  for (size_t i = 0; i < old; i++)
   {
-    newm = new point_t[dl];
-    for (size_t i = 0; i < old; i++)
-    {
-      newm[i] = a[i];
-    }
+    newm[i] = a[i];
   }
-  catch (const std::bad_alloc& e)
-  {
-    delete[] a;
-    throw;
-  }
+  delete[] a;
   return newm;
 }
 
