@@ -17,7 +17,7 @@ namespace duhanina
     void scaleUnsafe(double k) noexcept override;
 
   private:
-    size_t count_;
+    static constexpr size_t numParts_ = 9;
     Shape** ellipses_;
   };
 }

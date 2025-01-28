@@ -23,30 +23,29 @@ namespace
   }
 }
 
-duhanina::Circle::Circle(const point_t& pos, double radius, size_t count):
-  count_(count),
+duhanina::Circle::Circle(const point_t& pos, double radius):
   ellipses_(createArray(pos, radius, count))
 {}
 
 duhanina::Circle::~Circle()
 {
-  destroy(ellipses_, count_);
+  destroy(ellipses_, numParts_);
   delete[] ellipses_;
 }
 
 double duhanina::Circle::getArea() const
 {
-  return ellipses_[count_ - 1]->getArea();
+  return ellipses_[0]->getArea() * numParts_;
 }
 
 duhanina::rectangle_t duhanina::Circle::getFrameRect() const
 {
-  return ellipses_[count_ - 1]->getFrameRect();
+  return ellipses_[numParts_ - 1]->getFrameRect();
 }
 
 void duhanina::Circle::move(const point_t& newPos)
 {
-  for (size_t i = 0; i < count_; ++i)
+  for (size_t i = 0; i < numParts_; ++i)
   {
     ellipses_[i]->move(newPos);
   }
@@ -61,7 +60,7 @@ void duhanina::Circle::move(double dx, double dy)
 
 void duhanina::Circle::scaleUnsafe(double k) noexcept
 {
-  for (size_t i = 0; i < count_; ++i)
+  for (size_t i = 0; i < numParts_; ++i)
   {
     ellipses_[i]->scaleUnsafe(k);
   }
