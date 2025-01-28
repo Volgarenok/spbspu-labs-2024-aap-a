@@ -1,14 +1,8 @@
 #include "rectangle.hpp"
+#include <stdexcept>
 #include "rectanglepoints.hpp"
 #include "base-types.hpp"
 #include "getline.hpp"
-#include <stdexcept>
-
-averenkov::Rectangle::Rectangle():
-  a_({0.0, 0.0}),
-  c_({0.0, 0.0})
-{
-}
 
 averenkov::Rectangle::Rectangle(const point_t& a, const point_t& c):
   a_(a),
@@ -22,13 +16,9 @@ averenkov::Rectangle::Rectangle(const point_t& a, const point_t& c):
 
 void averenkov::Rectangle::move(const point_t& s)
 {
-  point_t center;
-  center.x = (a_.x + c_.x) / 2;
-  center.y = (a_.y + c_.y) / 2;
-  a_.x = s.x - (center.x - a_.x);
-  c_.x = s.x + (c_.x - center.x);
-  a_.y = s.y - (center.y - a_.y);
-  c_.y = s.y + (c_.y - center.y);
+  double dx = s.x - (getFrameRect().width / 2) - a_.x;
+  double dy = s.y - (getFrameRect().height / 2) - a_.y;
+  move(dx, dy);
 }
 
 averenkov::rectangle_t averenkov::Rectangle::getFrameRect() const
@@ -55,28 +45,15 @@ void averenkov::Rectangle::scale(double factor)
   c_.y = ((c_.y - pos.y) * factor) + pos.y;
 }
 
-void averenkov::Rectangle::move(double x_plus, double y_plus)
+void averenkov::Rectangle::move(double dx, double dy)
 {
-  a_.x = a_.x + x_plus;
-  c_.x = c_.x + x_plus;
-  a_.y = a_.y + y_plus;
-  c_.y = a_.y + y_plus;
+  a_.x = a_.x + dx;
+  c_.x = c_.x + dx;
+  a_.y = a_.y + dy;
+  c_.y = c_.y + dy;
 }
 
 double averenkov::Rectangle::getArea() const
 {
-  if ((c_.x - a_.x) * (c_.y - a_.y) < 0)
-  {
-    return -((c_.x - a_.x) * (c_.y - a_.y));
-  }
   return (c_.x - a_.x) * (c_.y - a_.y);
-}
-
-averenkov::point_t averenkov::Rectangle::getLeftBottom() const
-{
-  return a_;
-}
-averenkov::point_t averenkov::Rectangle::getRightTop() const
-{
-  return c_;
 }

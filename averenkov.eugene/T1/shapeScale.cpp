@@ -9,23 +9,11 @@ namespace averenkov
     double yplus = scale_center.y - pos.y;
     xplus *= factor;
     yplus *= factor;
-    point_t newpos;
-    if (scale_center.x >= pos.x)
+    point_t newpos =
     {
-      newpos.x = scale_center.x + xplus;
-    }
-    else
-    {
-      newpos.x = scale_center.x - xplus;
-    }
-    if (scale_center.y >= pos.y)
-    {
-      newpos.y = scale_center.y + yplus;
-    }
-    else
-    {
-      newpos.y = scale_center.y - yplus;
-    }
+      scale_center.x + (pos.x - scale_center.x) * factor,
+      scale_center.y + (pos.y - scale_center.y) * factor
+    };
     shap->move(newpos);
   }
 }

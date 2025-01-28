@@ -1,24 +1,16 @@
 #include <iostream>
-#include <memory>
 #include <iomanip>
-#include <sstream>
-#include <cstdlib>
 #include <string>
-#include <cmath>
 #include "dynamicinput.h"
 #include "makeshape.hpp"
-#include "shapeScale.hpp"
-#include "rectangle.hpp"
-#include "ellipse.hpp"
-#include "diamond.hpp"
+#include "rectanglepoints.hpp"
+#include "listCommand.hpp"
 
 int main()
 {
   averenkov::Shape* shapes[10000];
   size_t shapeCount = 0;
   bool hasErrors = false;
-  averenkov::point_t scale_center;
-  double factor;
   std::string command;
   while (shapeCount < 10000 && std::cin >> command && command != "SCALE")
   {
@@ -49,10 +41,7 @@ int main()
   if (std::cin.eof())
   {
     std::cerr << "No scale\n";
-    for(size_t i = 0; i < shapeCount; ++i)
-    {
-      delete shapes[i];
-    }
+    averenkov::destroy(shapes, shapeCount);
     return 1;
   }
   if (shapeCount == 0)
@@ -60,48 +49,23 @@ int main()
     std::cerr << "Nothing to scale\n";
     return 1;
   }
-  if (!(std::cin >> scale_center.x >> scale_center.y >> factor) || factor <= 0)
+  averenkov::point_t scaling_center = { 0.0, 0.0 };
+  double factor = 0.0;
+  try
   {
-    for (size_t i = 0; i < shapeCount; ++i)
-    {
-      delete shapes[i];
-    }
+    averenkov::makeScale(factor, scaling_center, std::cin);
+  }
+  catch(...)
+  {
+    averenkov::destroy(shapes, shapeCount);
     std::cerr << "Invalid scale\n";
     return 1;
   }
-  double sum = 0;
   std::cout << std::fixed << std::setprecision(1);
-  for (size_t i = 0; i < shapeCount; ++i)
-  {
-    sum += shapes[i]->getArea();
-  }
-  std::cout << sum;
-  for (size_t i = 0; i < shapeCount; ++i)
-  {
-    std::cout << " " << averenkov::getLeftBot(shapes[i]->getFrameRect()).x << " ";
-    std::cout << averenkov::getLeftBot(shapes[i]->getFrameRect()).y << " ";
-    std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).x << " ";
-    std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).y;
-    shapes[i]->scale(factor);
-    averenkov::shapeScale(shapes[i], scale_center, factor);
-    sum += shapes[i]->getArea();
-  }
-  std::cout << "\n";
-  sum = 0;
-  for (size_t i = 0; i < shapeCount; ++i)
-  {
-    sum += shapes[i]->getArea();
-  }
-  std::cout << sum;
-  for (size_t i = 0; i < shapeCount; ++i)
-  {
-    std::cout << " " << averenkov::getLeftBot(shapes[i]->getFrameRect()).x << " ";
-    std::cout << averenkov::getLeftBot(shapes[i]->getFrameRect()).y << " ";
-    std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).x << " ";
-    std::cout << averenkov::getRightTop(shapes[i]->getFrameRect()).y;
-    delete shapes[i];
-  }
-  std::cout << "\n";
+  averenkov::printList(shapes, shapeCount);
+  averenkov::scaleList(shapes, shapeCount, scaling_center, factor);
+  averenkov::printList(shapes, shapeCount);
+  averenkov::destroy(shapes, shapeCount);
   if (hasErrors)
   {
     std::cerr << "Errors descriptions\n";

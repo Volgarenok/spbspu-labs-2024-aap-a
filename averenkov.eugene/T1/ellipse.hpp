@@ -1,6 +1,5 @@
 #ifndef ELLIPSE
 #define ELLIPSE
-
 #include "shape.hpp"
 
 namespace averenkov
@@ -9,15 +8,16 @@ namespace averenkov
   {
   public:
     Ellipse(const point_t& center, double radius_v, double radius_h);
-    void scale(double factor);
-    double getArea() const;
-    rectangle_t getFrameRect() const;
-    void move(const point_t& s);
-    void move(double x_plus, double y_plus);
+    void scale(double factor) override;
+    double getArea() const override;
+    rectangle_t getFrameRect() const override;
+    void move(const point_t& s) override;
+    void move(double dx, double dy) override;
   private:
     point_t center_;
     double radius_v_;
     double radius_h_;
   };
 }
+
 #endif

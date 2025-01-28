@@ -1,8 +1,6 @@
 #include "ellipse.hpp"
-#include "rectanglepoints.hpp"
-#include "base-types.hpp"
-#include "getline.hpp"
 #include <stdexcept>
+#include "base-types.hpp"
 
 averenkov::Ellipse::Ellipse(const point_t& center, double radius_v, double radius_h):
   center_(center),
@@ -43,8 +41,8 @@ void averenkov::Ellipse::move(const point_t& s)
   center_ = s;
 }
 
-void averenkov::Ellipse::move(double x_plus, double y_plus)
+void averenkov::Ellipse::move(double dx, double dy)
 {
-  center_.x = center_.x + x_plus;
-  center_.y = center_.y + y_plus;
+  center_.x = center_.x + dx;
+  center_.y = center_.y + dy;
 }

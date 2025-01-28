@@ -9,18 +9,15 @@ namespace averenkov
   {
   public:
     Diamond(const point_t& a, const point_t& b, const point_t& c);
-    void buildRectangles(const point_t& a, const point_t& b, const point_t& c);
-    void scale(double factor);
-    double getArea() const;
-    rectangle_t getFrameRect() const;
-    void move(const point_t& s);
-    void move(double x_plus, double y_plus);
+    ~Diamond();
+    Rectangle** buildRectangles(const point_t& a, const point_t& b, const point_t& c);
+    void scale(double factor) override;
+    double getArea() const override;
+    rectangle_t getFrameRect() const override;
+    void move(const point_t& s) override;
+    void move(double dx, double dy) override;
   private:
-    Rectangle rectangles[40];
-    double widthR_;
-    double heightR_;
-    double sumx_;
-    double sumy_;
+    Rectangle** rectangles_;
   };
 }
 
