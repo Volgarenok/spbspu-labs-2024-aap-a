@@ -10,8 +10,8 @@ namespace maslevtsov
   public:
     Polygon();
     Polygon(const Polygon& rhs);
-    ~Polygon() override;
     Polygon(std::size_t nVertices, const point_t* vertices);
+    ~Polygon() override;
     Polygon& operator=(const Polygon& rhs);
 
     double getArea() const noexcept override;
