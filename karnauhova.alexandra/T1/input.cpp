@@ -121,7 +121,6 @@ bool karnauhova::input_polygon(std::istream & in, Shape** shaps, size_t count_sh
     //{
      // return false;
     //}
-      std::cout << x << " " << y << "\n";
       x_y[count].x = x;
       x_y[count].y = y;
       count += 1;
