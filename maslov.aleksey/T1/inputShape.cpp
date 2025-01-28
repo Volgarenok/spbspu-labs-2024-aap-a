@@ -24,7 +24,11 @@ void maslov::inputShapes(std::istream & in, maslov::CompositeShape & compositeSh
     }
     try
     {
-      compositeShape.push_back(makeShape(std::cin, name));
+      Shape * shape = makeShape(std::cin, name);
+      if (shape)
+      {
+        compositeShape.push_back(shape);
+      }
     }
     catch (const std::invalid_argument & e)
     {
