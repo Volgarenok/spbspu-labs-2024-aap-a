@@ -83,7 +83,6 @@ averenkov::Rectangle** averenkov::Diamond::buildRectangles(const point_t& a, con
   {
     delete rectangles_[i];
   }
-  delete[] rectangles_;
   Rectangle** rectangles = new Rectangle*[40];
   double width = 0, height = 0;
   point_t center = { 0.0, 0.0 };
