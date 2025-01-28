@@ -137,5 +137,6 @@ maslevtsov::Polygon* maslevtsov::makePolygon(const double* arguments, std::size_
     delete[] pntArguments;
     throw;
   }
+  delete[] pntArguments;
   return polygon;
 }
