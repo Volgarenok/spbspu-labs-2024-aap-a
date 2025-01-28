@@ -54,20 +54,15 @@ void duhanina::Circle::move(const point_t& newPos)
 
 void duhanina::Circle::move(double dx, double dy)
 {
-  point_t pos = ellipses_[0]->getCenter();
+  point_t pos = ellipses_[0]->getFrameRect().pos;
   movePoint(pos, dx, dy);
   move(pos);
 }
 
-void duhanina::Circle::unsafeScale(double k) noexcept
+void duhanina::Circle::scaleUnsafe(double k) noexcept
 {
   for (size_t i = 0; i < count_; ++i)
   {
-    ellipses_[i]->unsafeScale(k);
+    ellipses_[i]->scaleUnsafe(k);
   }
-}
-
-duhanina::point_t duhanina::Circle::getCenter() const
-{
-  return ellipses_[0]->getCenter();
 }

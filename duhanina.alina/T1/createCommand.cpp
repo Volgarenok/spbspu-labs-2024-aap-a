@@ -38,24 +38,24 @@ namespace
     readArray(in, data, 4);
     return new duhanina::Ellipse({ data[0], data[1] }, data[2], data[3]);
   }
-}
 
-void duhanina::createShape(std::istream& in, const std::string& shapeType, Shape** shapes, size_t& shapeCount)
-{
-  if (shapeType == "RECTANGLE")
+  void createShape(std::istream& in, const std::string& shapeType, duhanina::Shape** shapes, size_t& shapeCount)
   {
-    Rectangle* rect = makeRectangle(in);
-    shapes[shapeCount++] = rect;
-  }
-  else if (shapeType == "CIRCLE")
-  {
-    Circle* circ = makeCircle(in);
-    shapes[shapeCount++] = circ;
-  }
-  else if (shapeType == "ELLIPSE")
-  {
-    Ellipse* ellip = makeEllipse(in);
-    shapes[shapeCount++] = ellip;
+    if (shapeType == "RECTANGLE")
+    {
+      duhanina::Rectangle* rect = makeRectangle(in);
+      shapes[shapeCount++] = rect;
+    }
+    else if (shapeType == "CIRCLE")
+    {
+      duhanina::Circle* circ = makeCircle(in);
+      shapes[shapeCount++] = circ;
+    }
+    else if (shapeType == "ELLIPSE")
+    {
+      duhanina::Ellipse* ellip = makeEllipse(in);
+      shapes[shapeCount++] = ellip;
+    }
   }
 }
 

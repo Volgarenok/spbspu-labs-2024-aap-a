@@ -7,5 +7,5 @@ void duhanina::Shape::scale(double k)
   {
     throw std::logic_error("Incorrect coef");
   }
-  unsafeScale(k);
+  scaleUnsafe(k);
 }

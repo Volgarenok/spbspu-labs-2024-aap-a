@@ -39,14 +39,9 @@ void duhanina::Rectangle::move(double dx, double dy)
   movePoint(rt_, dx, dy);
 }
 
-void duhanina::Rectangle::unsafeScale(double k) noexcept
+void duhanina::Rectangle::scaleUnsafe(double k) noexcept
 {
   point_t pos = getFrameRect().pos;
   lt_ = scalePoint(lt_, pos, k);
   rt_ = scalePoint(rt_, pos, k);
-}
-
-duhanina::point_t duhanina::Rectangle::getCenter() const
-{
-  return getFrameRect().pos;
 }
