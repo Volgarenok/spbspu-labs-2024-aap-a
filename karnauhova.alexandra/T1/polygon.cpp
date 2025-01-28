@@ -16,24 +16,19 @@ karnauhova::Polygon::Polygon(point_t* points, size_t count_point):
       delete[] triangles_;
       throw std::logic_error("It's not a polygon");
     }
-    for (size_t i = 0; i < count_point - 2; i += 2)
+    for (size_t i = 0; i < (count_point - 2); i += 2)
     {
       triangles_[count_] = new Triangle(points[i], points[i + 1], points[i + 2]);
       count_++;
     }
-    for (size_t i = 0; i < count_point - 5; i += 4)
-    {
-      triangles_[count_] = new Triangle(points[i], points[i + 2], points[i + 4]);
-      count_++;
-    }
     if (count_point % 2 == 0)
     {
-      triangles_[count_] = new Triangle(points[0], points[count_point - 2], points[count_point - 4]);
+      triangles_[count_] = new Triangle(points[0], points[count_point - 1], points[count_point - 2]);
       count_++;
     }
-    else
+    for (size_t i = 2; i < (count_point - 2); i += 2)
     {
-      triangles_[count_] = new Triangle(points[0], points[count_point - 1], points[count_point - 3]);
+      triangles_[count_] = new Triangle(points[0], points[i], points[i + 2]);
       count_++;
     }
   }
