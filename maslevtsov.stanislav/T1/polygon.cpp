@@ -33,6 +33,14 @@ namespace
     }
     return converted;
   }
+
+  void copy(const maslevtsov::point_t* src, std::size_t nVertices, maslevtsov::point_t* dest)
+  {
+    for (std::size_t i = 0; i < nVertices; ++i)
+    {
+      dest[i] = src[i];
+    }
+  }
 }
 
 maslevtsov::Polygon::~Polygon()
@@ -40,7 +48,7 @@ maslevtsov::Polygon::~Polygon()
   delete[] vertices_;
 }
 
-maslevtsov::Polygon::Polygon(std::size_t nVertices, point_t* vertices):
+maslevtsov::Polygon::Polygon(std::size_t nVertices, const point_t* vertices):
   nVertices_(nVertices),
   vertices_(nullptr)
 {
@@ -48,7 +56,8 @@ maslevtsov::Polygon::Polygon(std::size_t nVertices, point_t* vertices):
   {
     throw std::logic_error("incorrect coordinates");
   }
-  vertices_ = vertices;
+  vertices_ = new point_t[nVertices_];
+  copy(vertices, nVertices_, vertices_);
 }
 
 double maslevtsov::Polygon::getArea() const noexcept
