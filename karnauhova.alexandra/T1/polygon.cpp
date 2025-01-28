@@ -31,9 +31,11 @@ karnauhova::Polygon::Polygon(point_t* points, size_t count_point):
       triangles_[count_] = new Triangle(points[0], points[i], points[i + 2]);
       count_++;
     }
+    delete[] points;
   }
   catch (const std::exception& e)
   {
+    delete[] points;
     throw;
   }
 }
