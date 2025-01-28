@@ -107,6 +107,7 @@ bool karnauhova::input_polygon(std::istream & in, Shape** shaps, size_t count_sh
         throw;
       }
       x_y = a;
+      delete[] a;
       size++;
     }
     in >> y;
