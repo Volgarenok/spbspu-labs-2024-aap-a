@@ -6,13 +6,14 @@ namespace karnauhova
   class Rectangle final: public Shape
   {
   public:
-    Rectangle(point_t x4, point_t x2);
+    Rectangle(const point_t& x4, const point_t& x2);
     void move(double x, double y) override;
-    void move(point_t t) override;
+    void move(const point_t& t) override;
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void scale(double k) override;
     ~Rectangle(){}
+    Shape* clone() const override;
   private:
     point_t x2_;
     point_t x4_;

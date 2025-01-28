@@ -5,6 +5,6 @@
 #include "shape.hpp"
 namespace karnauhova
 {
-  bool it_polygon(point_t* points, size_t count);
+  bool it_polygon(const point_t* points, size_t count);
 }
 #endif

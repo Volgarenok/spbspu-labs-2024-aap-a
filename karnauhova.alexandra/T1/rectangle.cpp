@@ -1,6 +1,6 @@
 #include "rectangle.hpp"
 #include <stdexcept>
-karnauhova::Rectangle::Rectangle(point_t x4, point_t x2):
+karnauhova::Rectangle::Rectangle(const point_t& x4, const point_t& x2):
   x2_(x2),
   x4_(x4)
 {
@@ -35,7 +35,7 @@ void karnauhova::Rectangle::move(double x, double y)
   x2_.y += y;
 }
 
-void karnauhova::Rectangle::move(point_t t)
+void karnauhova::Rectangle::move(const point_t& t)
 {
   point_t centr = getFrameRect().pos;
   x2_.x += (t.x - centr.x);
@@ -55,4 +55,9 @@ void karnauhova::Rectangle::scale(double k)
   x4_.x = t.x + distance_x4 * k;
   x2_.y = t.y + distance_y2 * k;
   x4_.y = t.y + distance_y4 * k;
+}
+
+karnauhova::Shape* karnauhova::Rectangle::clone() const
+{
+  return new Rectangle(*this);
 }

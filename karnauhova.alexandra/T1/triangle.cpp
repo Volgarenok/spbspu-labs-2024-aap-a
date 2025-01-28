@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 #include "point.hpp"
-karnauhova::Triangle::Triangle(point_t x1, point_t x2, point_t x3):
+karnauhova::Triangle::Triangle(const point_t& x1, const point_t& x2, const point_t& x3):
   x1_(x1),
   x2_(x2),
   x3_(x3)
@@ -45,7 +45,7 @@ void karnauhova::Triangle::move(double x, double y)
   x2_.y += y;
 }
 
-void karnauhova::Triangle::move(point_t t)
+void karnauhova::Triangle::move(const point_t& t)
 {
   point_t centr = getFrameRect().pos;
   double shift_x = (t.x - centr.x);
@@ -68,4 +68,9 @@ void karnauhova::Triangle::scale(double k)
   x1_.y = t.y + distance_y1 * k;
   x2_.y = t.y + distance_y2 * k;
   x3_.y = t.y + distance_y3 * k;
+}
+
+karnauhova::Shape* karnauhova::Triangle::clone() const
+{
+  return new Triangle(*this);
 }

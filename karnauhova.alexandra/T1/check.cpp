@@ -5,7 +5,7 @@
 #include "triangle.hpp"
 #include "rectangle.hpp"
 #include "polygon.hpp"
-bool karnauhova::it_polygon(point_t* points, size_t count)
+bool karnauhova::it_polygon(const point_t* points, size_t count)
 {
   for (size_t i = 0; i < count; i ++)
   {

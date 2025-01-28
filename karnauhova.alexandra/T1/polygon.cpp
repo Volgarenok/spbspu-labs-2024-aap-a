@@ -4,7 +4,7 @@
 #include "check.hpp"
 #include "output.hpp"
 #include "triangle.hpp"
-karnauhova::Polygon::Polygon(point_t* points, size_t count_point):
+karnauhova::Polygon::Polygon(const point_t* points, size_t count_point):
   triangles_(nullptr),
   count_(0)
 {
@@ -80,7 +80,7 @@ void karnauhova::Polygon::move(double x, double y)
   }
 }
 
-void karnauhova::Polygon::move(point_t t)
+void karnauhova::Polygon::move(const point_t& t)
 {
   point_t centr = getFrameRect().pos;
   double dif_x = t.x - centr.x;
@@ -104,4 +104,9 @@ karnauhova::Polygon::~Polygon()
     delete triangles_[i];
   }
   delete[] triangles_;
+}
+
+karnauhova::Shape* karnauhova::Polygon::clone() const
+{
+  return new Polygon(*this);
 }
