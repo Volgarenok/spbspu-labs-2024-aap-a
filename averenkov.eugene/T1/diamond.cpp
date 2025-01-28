@@ -58,6 +58,13 @@ void averenkov::Diamond::scale(double factor)
   double scale_height = getFrameRect().height / 2 * factor;
   point_t a = {center.x + scale_width, center.y};
   point_t b = {center.x, center.y + scale_height};
+  for (size_t i = 0; i < 40; i++)
+  {
+    if (rectangles_[i] != nullptr)
+    {
+      delete rectangles_[i];
+    }
+  }
   rectangles_ = (buildRectangles(center, a, b));
 }
 
@@ -79,10 +86,6 @@ void averenkov::Diamond::move(double dx, double dy)
 
 averenkov::Rectangle** averenkov::Diamond::buildRectangles(const point_t& a, const point_t& b, const point_t& c)
 {
-  for (size_t i = 0; i < 40; i++)
-  {
-    delete rectangles_[i];
-  }
   Rectangle** rectangles = new Rectangle*[40];
   double width = 0, height = 0;
   point_t center = { 0.0, 0.0 };
