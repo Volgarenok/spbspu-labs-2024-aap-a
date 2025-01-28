@@ -235,8 +235,12 @@ void alymova::CompositeShape::swap(CompositeShape& copy) noexcept
   for (size_t i = 0; i < size_; i++)
   {
     shapes_[i] = copy[i];
-    delete copy[i];
+    copy.do_null(i);
   }
+}
+void alymova::CompositeShape::do_null(size_t id)
+{
+  shapes_[id] = nullptr;
 }
 void alymova::CompositeShape::clear(Shape** shapes) noexcept
 {
