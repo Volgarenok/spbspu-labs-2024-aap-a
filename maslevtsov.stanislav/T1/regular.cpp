@@ -62,8 +62,13 @@ namespace
 }
 
 maslevtsov::Regular::Regular(point_t center, point_t pnt2, point_t pnt3):
-  polygon(getNVertices(center, pnt2, pnt3), getVertices(center, pnt2, pnt3))
-{}
+  polygon()
+{
+  std::size_t nVertices = getNVertices(center, pnt2, pnt3);
+  point_t* vertices = getVertices(center, pnt2, pnt3);
+  polygon = Polygon(nVertices, vertices);
+  delete[] vertices;
+}
 
 double maslevtsov::Regular::getArea() const noexcept
 {

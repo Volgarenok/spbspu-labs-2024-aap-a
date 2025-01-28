@@ -8,6 +8,7 @@ namespace maslevtsov
   struct Polygon final: public Shape
   {
   public:
+    Polygon();
     ~Polygon() override;
     Polygon(std::size_t nVertices, const point_t* vertices);
     double getArea() const noexcept override;

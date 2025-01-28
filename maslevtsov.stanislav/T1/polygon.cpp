@@ -43,6 +43,11 @@ namespace
   }
 }
 
+maslevtsov::Polygon::Polygon():
+  nVertices_(0),
+  vertices_(nullptr)
+{}
+
 maslevtsov::Polygon::~Polygon()
 {
   delete[] vertices_;
