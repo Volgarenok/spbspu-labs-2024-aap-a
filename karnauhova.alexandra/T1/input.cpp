@@ -92,7 +92,7 @@ bool karnauhova::input_polygon(std::istream & in, Shape** shaps, size_t count_sh
   double x = 0;
   double y = 0;
   size_t count = 0;
-  while (!in.fail())
+  while (!in.fail() && in >> x)
   //while (in.peek() != '\n' && in.peek() != EOF)
   {
     if (count >= size)
@@ -110,17 +110,18 @@ bool karnauhova::input_polygon(std::istream & in, Shape** shaps, size_t count_sh
       x_y = a;
       size++;
     }
-    if (!(in >> x))
-    {
+    //if (!(in >> x))
+    //{
       //eat_trash(in);
-      return false;
-    }
+      //return false;
+    //}
     if (in >> y)
     {
     //if (!(in >> y))
     //{
      // return false;
     //}
+      std::cout << x << " " << y << "\n";
       x_y[count].x = x;
       x_y[count].y = y;
       count += 1;
