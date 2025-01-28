@@ -105,3 +105,8 @@ void petrov::Concave::scale(double k)
     triangles[i]->move(dx_unique, dy_unique);
   }
 }
+
+petrov::Shape * petrov::Concave::clone() const
+{
+  return new Concave(*this);
+}

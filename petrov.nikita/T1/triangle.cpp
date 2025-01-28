@@ -67,3 +67,8 @@ void petrov::Triangle::scale(double k)
   p3_.x = frame_rect.pos.x + (p3_.x - frame_rect.pos.x) * k;
   p3_.y = frame_rect.pos.y + (p3_.y - frame_rect.pos.y) * k;
 }
+
+petrov::Shape * petrov::Triangle::clone() const
+{
+  return new Triangle(*this);
+}

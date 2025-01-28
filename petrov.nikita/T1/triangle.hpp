@@ -13,6 +13,7 @@ namespace petrov
     void move(point_t concrete_point) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
+    Shape * clone() const override;
   private:
     point_t p1_, p2_, p3_;
   };

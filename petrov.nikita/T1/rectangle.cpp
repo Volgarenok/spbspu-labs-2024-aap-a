@@ -50,3 +50,8 @@ void petrov::Rectangle::scale(double k)
   p2_.x = frame_rect.pos.x + (p2_.x - frame_rect.pos.x) * k;
   p2_.y = frame_rect.pos.y + (p2_.y - frame_rect.pos.y) * k;
 }
+
+petrov::Shape * petrov::Rectangle::clone() const
+{
+  return new Rectangle(*this);
+}
