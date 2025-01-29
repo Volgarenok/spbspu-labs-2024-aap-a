@@ -7,7 +7,7 @@ namespace beshimow {
         // Определяем длину входной строки
         size_t len1 = std::strlen(str1);
         size_t len2 = std::strlen(str2);
-        
+
         // Выделяем память для выходной строки (максимально возможная длина)
         result = new char[len1 + 1]; // +1 для нуль-терминатора
         if (!result) {
@@ -46,7 +46,7 @@ int main() {
     std::cout << "Введите строку: ";
     std::string temp;
     std::getline(std::cin, temp);
-    
+
     // Выделяем память для входной строки
     input = new char[temp.length() + 1];
     if (!input) {
