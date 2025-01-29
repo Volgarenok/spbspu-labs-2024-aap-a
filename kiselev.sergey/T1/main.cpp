@@ -31,9 +31,6 @@ int main()
         scale = kiselev::makeScale(std::cin);
         std::cin >> ratio;
         if (ratio <= 0)
-        {
-          throw std::logic_error("Incorrect ratio");
-        }
         break;
       }
     }
@@ -65,10 +62,18 @@ int main()
     std::cerr << "Not entered SCALE\n";
     return 1;
   }
-  std::cout << std::fixed << std::setprecision(1) << compShp.getArea();
-  kiselev::printCoordinatesRect(std::cout, compShp);
-  compShp.scale(ratio, scale);
-  std::cout << compShp.getArea();
-  kiselev::printCoordinatesRect(std::cout, compShp);
+  try
+  {
+    std::cout << std::fixed << std::setprecision(1) << compShp.getArea();
+    kiselev::printCoordinatesRect(std::cout, compShp);
+    compShp.scale(ratio, scale);
+    std::cout << compShp.getArea();
+    kiselev::printCoordinatesRect(std::cout, compShp);
+  }
+  catch (const std::exception& e)
+  {
+    std::cerr << e.what() << "\n";
+    return 1;
+  }
   return 0;
 }

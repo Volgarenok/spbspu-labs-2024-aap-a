@@ -54,7 +54,7 @@ kiselev::point_t kiselev::makeScale(std::istream& input)
   inputCoordinates(input, arrCoordinates, quantity);
   return { arrCoordinates[0], arrCoordinates[1] };
 }
-bool kiselev::makeShape(std::istream& input, std::string & str, kiselev::CompositeShape & compShp)
+bool kiselev::makeShape(std::istream& input, std::string& str, kiselev::CompositeShape& compShp)
 {
   kiselev::Shape * shape = nullptr;
   try
@@ -62,16 +62,17 @@ bool kiselev::makeShape(std::istream& input, std::string & str, kiselev::Composi
     if (str == "RECTANGLE")
     {
       shape = makeRectangle(input);
-      compShp.pushBack(shape);
     }
     else if (str == "DIAMOND")
     {
       shape = makeDiamond(input);
-      compShp.pushBack(shape);
     }
     else if (str == "COMPLEXQUAD")
     {
       shape = makeComplexquad(input);
+    }
+    if (shape)
+    {
       compShp.pushBack(shape);
     }
     return !str.empty() && str != "SCALE";

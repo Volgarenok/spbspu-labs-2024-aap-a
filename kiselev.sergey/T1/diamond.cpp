@@ -51,7 +51,7 @@ kiselev::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
   {
     throw std::invalid_argument("Invalid coordinates");
   }
-  point_t pHorizontal2 = { center.x +(center.x - pHorizontal.x), pHorizontal.y};
+  point_t pHorizontal2 = { center.x + (center.x - pHorizontal.x), pHorizontal.y};
   point_t pVertical2 = {pVertical.x, center.y + (center.y - pVertical.y)};
   comp1 = { pHorizontal2, pHorizontal, pVertical, pVertical2 };
   comp2 = { pHorizontal2, pHorizontal, pVertical2, pVertical };
@@ -71,8 +71,10 @@ void kiselev::Diamond::move(double dx, double dy)
 }
 void kiselev::Diamond::move(kiselev::point_t a)
 {
-  comp1.move(a);
-  comp2.move(a);
+  point_t center = comp1.getFrameRect().pos;
+  double dx = a.x - center.x;
+  double dy = a.y - center.y;
+  move(dx, dy);
 }
 void kiselev::Diamond::scale(double k)
 {

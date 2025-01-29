@@ -7,6 +7,6 @@
 namespace kiselev
 {
   point_t makeScale(std::istream& input);
-  bool makeShape(std::istream& input, std::string & str, kiselev::CompositeShape & compShp);
+  bool makeShape(std::istream& input, std::string& str, kiselev::CompositeShape& compShp);
 }
 #endif
