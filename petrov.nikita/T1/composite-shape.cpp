@@ -6,12 +6,10 @@
 #include <iostream>
 double petrov::CompositeShape::getArea() const
 {
-  std::cout << "Processing area...\n";
   double area = 0.0;
   for (size_t i = 0; i < size_of_vector_; i++)
   {
     area += shapes_vector_[i]->getArea();
-    std::cout << area << "\n";
   }
   return area;
 }
@@ -73,7 +71,6 @@ void petrov::CompositeShape::push_back(Shape * shp)
     capacity_ = 5;
     shapes_vector_ = new Shape * [capacity_];
     shapes_vector_[size_of_vector_++] = shp;
-    std::clog << "Check\n";
   }
   else if (capacity_ ==  ++size_of_vector_)
   {
@@ -88,8 +85,7 @@ void petrov::CompositeShape::push_back(Shape * shp)
   }
   else
   {
-    shapes_vector_[size_of_vector_] = shp;
-    std::clog << "Check3\n";
+    shapes_vector_[--size_of_vector_] = shp;
   }
 }
 

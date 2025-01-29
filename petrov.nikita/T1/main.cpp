@@ -11,7 +11,7 @@ int main()
 {
   using namespace petrov;
   const char * NOTE_MSG = "NOTE: Scaling of some figures skipped due to their invalid description\n";
-  CompositeShape composite_shape;
+  CompositeShape composite_shape = {};
   CompositeShape * ptr_composite_shape = &composite_shape;
   Shape * ptr_shape = nullptr;
   bool is_description_error = false;
@@ -65,7 +65,6 @@ int main()
     return 3;
   }
   std::cout << std::fixed << std::setprecision(1);
-  std::clog << "Scaling...\n";
   scaleIsotropicallyAndOutputData(scale_point, scale_value, ptr_composite_shape);
   if (is_description_error)
   {
