@@ -21,6 +21,11 @@ zakirov::Circle::Circle(point_t center, double radius)
   }
 }
 
+zakirov::Circle::~Circle()
+{
+  free(rings_);
+}
+
 double zakirov::Circle::getArea() const
 {
   double total_area = 0.0;
@@ -38,7 +43,7 @@ zakirov::rectangle_t zakirov::Circle::getFrameRect() const
 
 void zakirov::Circle::move(point_t target)
 {
-  for (size_t i; i < rings_size_; ++i)
+  for (size_t i = 0; i < rings_size_; ++i)
   {
     rings_[i]->move(target);
   }
@@ -46,7 +51,7 @@ void zakirov::Circle::move(point_t target)
 
 void zakirov::Circle::move(double bias_x, double bias_y)
 {
-  for (size_t i; i < rings_size_; ++i)
+  for (size_t i = 0; i < rings_size_; ++i)
   {
     rings_[i]->move(bias_x, bias_y);
   }
