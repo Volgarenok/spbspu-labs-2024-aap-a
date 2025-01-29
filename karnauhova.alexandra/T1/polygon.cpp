@@ -1,9 +1,14 @@
 #include "polygon.hpp"
 #include <cmath>
 #include <stdexcept>
-#include "check.hpp"
 #include "output.hpp"
 #include "triangle.hpp"
+#include "point.hpp"
+namespace details
+{
+  bool it_polygon(const karnauhova::point_t* points, size_t count);
+}
+
 karnauhova::Polygon::Polygon(const point_t* points, size_t count_point):
   triangles_(nullptr),
   count_(0)
@@ -11,7 +16,7 @@ karnauhova::Polygon::Polygon(const point_t* points, size_t count_point):
   try
   {
     triangles_ = new Triangle*[count_point - 2];
-    if (count_point < 3 || !karnauhova::it_polygon(points, count_point))
+    if (count_point < 3 || !details::it_polygon(points, count_point))
     {
       delete[] triangles_;
       throw std::logic_error("It's not a polygon");
@@ -109,4 +114,19 @@ karnauhova::Polygon::~Polygon()
 karnauhova::Shape* karnauhova::Polygon::clone() const
 {
   return new Polygon(*this);
+}
+
+bool details::it_polygon(const karnauhova::point_t* points, size_t count)
+{
+  for (size_t i = 0; i < count; i ++)
+  {
+    for (size_t j = i + 1; j < count; j++)
+    {
+      if (karnauhova::isEqual(points[i], points[j]))
+      {
+        return false;
+      }
+    }
+  }
+  return true;
 }
