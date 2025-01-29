@@ -69,7 +69,6 @@ void averenkov::Diamond::scale(double factor)
     {
       delete rectangles_[i];
     }
-    delete[] rectangles_;
   }
   rectangles_ = (buildRectangles(center, a, b));
 }
