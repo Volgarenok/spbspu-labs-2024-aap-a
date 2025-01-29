@@ -134,7 +134,7 @@ bool karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
         }
         else
         {
-          names[shaps.size()] = name;
+          names[shaps.size() - 1] = name;
         }
       }
       catch (const std::exception& e)
@@ -154,7 +154,7 @@ bool karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
         }
         else
         {
-          names[shaps.size()] = name;
+          names[shaps.size() - 1] = name;
         }
       }
       catch (const std::exception& e)
@@ -185,7 +185,7 @@ bool karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
         }
         else
         {
-          names[shaps.size()] = name;
+          names[shaps.size() - 1] = name;
          }
       }
       catch (const std::exception& e)
@@ -203,7 +203,7 @@ bool karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
     std::cerr << "Error: empty input\n";
     return 1;
   }
-  if (names[shaps.size() - 1] != "SCALE" || k <= 0)
+  if (names[shaps.size()] != "SCALE" || k <= 0)
   {
     std::cerr << "Error: scale input\n";
     return 1;
