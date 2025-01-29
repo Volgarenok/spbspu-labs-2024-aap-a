@@ -66,3 +66,13 @@ alymova::Shape* alymova::CreatorRegular::create(std::istream& in)
     throw;
   }
 }
+void alymova::readParameters(std::istream& in, double* params, size_t size)
+{
+  for (size_t i = 0; i < size; i++)
+  {
+    if (!(in >> params[i]))
+    {
+      throw std::logic_error("Input shape parameters error");
+    }
+  }
+}

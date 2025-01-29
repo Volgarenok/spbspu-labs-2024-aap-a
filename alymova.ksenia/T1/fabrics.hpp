@@ -1,7 +1,7 @@
 #ifndef FABRICS_HPP
 #define FABRICS_HPP
+#include <iostream>
 #include "shape.hpp"
-#include "inputProcess.hpp"
 namespace alymova
 {
   struct Creator
@@ -9,17 +9,19 @@ namespace alymova
     virtual ~Creator() = default;
     virtual Shape* create(std::istream& in) = 0;
   };
-  struct CreatorRectangle: public Creator
+  struct CreatorRectangle final: public Creator
   {
     Shape* create(std::istream& in) override;
   };
-  struct CreatorCircle: public Creator
+  struct CreatorCircle final: public Creator
   {
     Shape* create(std::istream& in) override;
   };
-  struct CreatorRegular: public Creator
+  struct CreatorRegular final: public Creator
   {
     Shape* create(std::istream& in) override;
   };
+
+  void readParameters(std::istream& in, double* params, size_t size);
 }
 #endif
