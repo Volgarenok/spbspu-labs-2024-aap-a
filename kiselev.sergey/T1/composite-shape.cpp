@@ -145,7 +145,7 @@ void kiselev::CompositeShape::move(double dx, double dy)
   }
 }
 void kiselev::CompositeShape::scale(double k, point_t scale)
-{ 
+{
   for (size_t i = 0; i < realSize; ++i)
   {
     kiselev::point_t beforeScale = shapes[i]->getFrameRect().pos;
