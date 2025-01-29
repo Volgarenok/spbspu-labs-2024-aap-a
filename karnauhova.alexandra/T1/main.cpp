@@ -3,7 +3,6 @@
 #include "input.hpp"
 #include "output.hpp"
 #include "shape.hpp"
-#include "check.hpp"
 void delet(karnauhova::Shape** shaps, size_t c_shape);
 using namespace karnauhova;
 int main()
