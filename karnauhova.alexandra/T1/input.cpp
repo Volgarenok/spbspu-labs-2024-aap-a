@@ -6,7 +6,6 @@
 #include "triangle.hpp"
 #include "rectangle.hpp"
 #include "polygon.hpp"
-#include "check.hpp"
 
 bool karnauhova::input_rectangle(std::istream & in, Shape** shaps, size_t count_shaps)
 {
