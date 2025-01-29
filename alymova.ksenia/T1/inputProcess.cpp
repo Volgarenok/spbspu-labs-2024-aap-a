@@ -5,7 +5,7 @@
 #include "base-types.hpp"
 #include "rectangle.hpp"
 #include "circle.hpp"
-
+#include "fabrics.hpp"
 void alymova::makeShape(std::istream& in, CompositeShape& shapes, bool& wrong_shape_flag, double* scale_params)
 {
   bool scale_flag = false;
@@ -21,15 +21,24 @@ void alymova::makeShape(std::istream& in, CompositeShape& shapes, bool& wrong_sh
     {
       if (type == "RECTANGLE")
       {
-        shapes.push_back(makeRectangle(in));
+        Creator* creator = new CreatorRectangle();
+        shapes.push_back(creator->create(in));
+        delete creator;
+        //shapes.push_back(makeRectangle(in));
       }
       else if (type == "CIRCLE")
       {
-        shapes.push_back(makeCircle(in));
+        Creator* creator = new CreatorCircle();
+        shapes.push_back(creator->create(in));
+        delete creator;
+        //shapes.push_back(makeCircle(in));
       }
       else if (type == "REGULAR")
       {
-        shapes.push_back(makeRegular(in));
+        Creator* creator = new CreatorRegular();
+        shapes.push_back(creator->create(in));
+        delete creator;
+        //shapes.push_back(makeRegular(in));
       }
     }
     catch (...)
