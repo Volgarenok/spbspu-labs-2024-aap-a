@@ -52,7 +52,6 @@ int main()
   }
   if (composite_shape.empty())
   {
-    clearMemory(ptr_composite_shape);
     std::cerr << "ERROR: Nothing to scale\n";
     return 4;
   }

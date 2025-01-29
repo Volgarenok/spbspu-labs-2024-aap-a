@@ -72,20 +72,20 @@ void petrov::CompositeShape::push_back(Shape * shp)
     shapes_vector_ = new Shape * [capacity_];
     shapes_vector_[size_of_vector_++] = shp;
   }
-  else if (capacity_ ==  ++size_of_vector_)
+  else if (capacity_ - 1 ==  size_of_vector_)
   {
     Shape ** temp = new Shape * [capacity_ *= 2];
-    for (size_t i = 0; i < size_of_vector_ - 1; i++)
+    for (size_t i = 0; i < size_of_vector_; i++)
     {
       temp[i] = shapes_vector_[i];
     }
     delete[] shapes_vector_;
     shapes_vector_ = temp;
-    shapes_vector_[size_of_vector_] = shp;
+    shapes_vector_[size_of_vector_++] = shp;
   }
   else
   {
-    shapes_vector_[--size_of_vector_] = shp;
+    shapes_vector_[size_of_vector_++] = shp;
   }
 }
 
