@@ -98,7 +98,7 @@ void karnauhova::Polygon::scale(double k)
   point_t t = getFrameRect().pos;
   for (size_t i = 0; i < count_; i++)
   {
-     scale_point(*triangles_[i], t, k);
+     scale_point(triangles_[i], t, k);
   }
 }
 

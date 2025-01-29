@@ -3,10 +3,11 @@
 #include <string>
 #include <iostream>
 #include "shape.hpp"
+#include "compositeShape.hpp"
 namespace karnauhova
 {
-  void output(std::ostream & out, Shape** shaps, point_t point, double k, double c_shape);
-  void scale_point(Shape& object, point_t t, double k);
+  void output(std::ostream & out, CompositeShape& shaps, point_t point, double k);
+  void scale_point(Shape* object, point_t t, double k);
 }
 
 #endif
