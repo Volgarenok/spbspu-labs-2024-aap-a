@@ -10,46 +10,45 @@
 
 bool karnauhova::input_rectangle(std::istream & in, Shape** shaps, size_t count_shaps)
 {
-  double x_y[40000] = {};
-  double x = 0;
-  size_t count = 0;
-  while (in >> x)
+  point_t x_y[2] = {};
+  double x = 0, y = 0;
+  for (size_t i = 0; i < 2; i++)
   {
-    x_y[count] = x;
-    count++;
+    in >> x;
+    in >> y;
+    if (in)
+    {
+      x_y[i].x = x;
+      x_y[i].y = y;
+    }
+    else
+    {
+      return false;
+    }
   }
-  if (!(count == 4))
-  {
-    in.clear();
-    return false;
-  }
-  point_t x4{x_y[0], x_y[1]};
-  point_t x2{x_y[2], x_y[3]};
-  shaps[count_shaps] = new Rectangle(x4, x2);
-  in.clear();
+  shaps[count_shaps] = new Rectangle(x_y[0], x_y[1]);
   return true;
 }
 
 bool karnauhova::input_triangle(std::istream & in, Shape** shaps, size_t count_shaps)
 {
-  double x_y[40000] = {};
-  double x = 0;
-  size_t count = 0;
-  while (in >> x)
+  point_t x_y[3] = {};
+  double x = 0, y = 0;
+  for (size_t i = 0; i < 3; i++)
   {
-    x_y[count] = x;
-    count++;
+    in >> x;
+    in >> y;
+    if (in)
+    {
+      x_y[i].x = x;
+      x_y[i].y = y;
+    }
+    else
+    {
+      return false;
+    }
   }
-  if (!(count == 6))
-  {
-    in.clear();
-    return false;
-  }
-  point_t x1{x_y[0], x_y[1]};
-  point_t x2{x_y[2], x_y[3]};
-  point_t x3{x_y[4], x_y[5]};
-  shaps[count_shaps] = new Triangle(x1, x2, x3);
-  in.clear();
+  shaps[count_shaps] = new Triangle(x_y[0], x_y[1], x_y[2]);
   return true;
 }
 
@@ -65,13 +64,11 @@ bool karnauhova::input_scale(std::istream & in, point_t& point, double& k)
   }
   if (!(count == 3))
   {
-    in.clear();
     return false;
   }
   point.x = x_y[0];
   point.y = x_y[1];
   k = x_y[2];
-  in.clear();
   return true;
 }
 
@@ -132,6 +129,7 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
       {
         if (!karnauhova::input_rectangle(in, shaps, count_shape))
         {
+          in.clear();
           delete shaps[count_shape];
           count_error++;
         }
@@ -152,6 +150,7 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
       {
         if (!karnauhova::input_triangle(in, shaps, count_shape))
         {
+          in.clear();
           delete shaps[count_shape];
           count_error++;
         }
@@ -170,6 +169,7 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
     {
       if (!karnauhova::input_scale(std::cin, point, k))
       {
+        in.clear();
         count_error++;
       }
       else
@@ -189,7 +189,6 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
         }
         else
         {
-          in.clear();
           names[count_shape] = name;
           count_shape++;
          }
@@ -199,6 +198,11 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
         count_error++;
       }
     }
+    else
+    {
+       delete shaps[--count_shape];
+       count_error++;
+    }
   }
   if (names[0] == "SCALE" || names[0].empty() || count_shape == 0)
   {
@@ -207,7 +211,7 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
   }
   if (names[count_shape - 1] != "SCALE" || k <= 0)
   {
-    std::cerr << names[count_shape - 1] << k << "Error: scale input\n";
+    std::cerr << "Error: scale input\n";
     return 1;
   }
   count_shape -= 1;
