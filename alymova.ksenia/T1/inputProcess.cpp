@@ -21,23 +21,23 @@ void alymova::makeShape(std::istream& in, CompositeShape& shapes, bool& wrong_sh
     {
       if (type == "RECTANGLE")
       {
-        Creator* creator = new CreatorRectangle();
+        CreatorRectangle crt = CreatorRectangle();
+        Creator* creator = &crt;
         shapes.push_back(creator->create(in));
-        delete creator;
         //shapes.push_back(makeRectangle(in));
       }
       else if (type == "CIRCLE")
       {
-        Creator* creator = new CreatorCircle();
+        CreatorCircle crt = CreatorCircle();
+        Creator* creator = &crt;
         shapes.push_back(creator->create(in));
-        delete creator;
         //shapes.push_back(makeCircle(in));
       }
       else if (type == "REGULAR")
       {
-        Creator* creator = new CreatorRegular();
+        CreatorRegular crt = CreatorRegular();
+        Creator* creator = &crt;
         shapes.push_back(creator->create(in));
-        delete creator;
         //shapes.push_back(makeRegular(in));
       }
     }
