@@ -32,14 +32,14 @@ void zakirov::Rectangle::move(point_t target)
 {
   point_t center = getFrameRect().pos;
   point_t bias = {target.x - center.x, target.y - center.y};
-  move_point(& top_right_, bias.x, bias.y);
-  move_point(& bottom_left_, bias.x, bias.y);
+  move_point(top_right_, bias.x, bias.y);
+  move_point(bottom_left_, bias.x, bias.y);
 }
 
 void zakirov::Rectangle::move(double bias_x, double bias_y)
 {
-  move_point(& top_right_, bias_x, bias_y);
-  move_point(& bottom_left_, bias_x, bias_y);
+  move_point(top_right_, bias_x, bias_y);
+  move_point(bottom_left_, bias_x, bias_y);
 }
 
 void zakirov::Rectangle::scale(double k)
@@ -50,8 +50,8 @@ void zakirov::Rectangle::scale(double k)
   }
 
   point_t center = getFrameRect().pos;
-  point_t bias = {(top_right_.x - center.x) * k, (top_right_.y - center.y) * k};
+  point_t bias = {(top_right_.x - center.x) * (k - 1), (top_right_.y - center.y) * (k - 1)};
 
-  move_point(& top_right_, bias.x, bias.y);
-  move_point(& top_right_, -bias.x, -bias.y);
+  move_point(top_right_, bias.x, bias.y);
+  move_point(bottom_left_, -bias.x, -bias.y);
 }

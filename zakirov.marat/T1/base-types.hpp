@@ -22,8 +22,8 @@ namespace zakirov
   double get_distance_y(const point_t & first_p, const point_t & second_p);
   double get_distance(const point_t & first_p, const point_t & second_p);
   point_t get_middle(const point_t & first_p, const point_t & second_p);
-  void move_point(point_t * object, const point_t & target);
-  void move_point(point_t * object, double bias_x, double bias_y);
+  void move_point(point_t & object, point_t target);
+  void move_point(point_t & object, double bias_x, double bias_y);
 }
 
 #endif

@@ -1,8 +1,11 @@
 #include "circle.hpp"
 #include <cmath>
+#include <cstddef>
 #include <stdexcept>
 #include "unified_shapes.hpp"
 #include "ring.hpp"
+#include "unified_shapes.hpp"
+#include <iostream>
 
 zakirov::Circle::Circle(point_t center, double radius)
 {
@@ -14,19 +17,17 @@ zakirov::Circle::Circle(point_t center, double radius)
   double step = (radius - first_in_radius_) / rings_size_;
   for (size_t i = 0; i < rings_size_; ++i)
   {
-    Ring ring(center, (i * step) + first_in_radius_, i * (step + 1) + first_in_radius_);
-    rings_[i] = & ring;
+    rings_[i] = make_ring(center.x, center.y, step * (i + 1) + first_in_radius_, step * i + first_in_radius_);
   }
 }
 
 double zakirov::Circle::getArea() const
 {
-  double total_area = 0;
-  for (size_t i; i < rings_size_; ++i)
+  double total_area = 0.0;
+  for (size_t i = 0; i < rings_size_; ++i)
   {
     total_area += rings_[i]->getArea();
   }
-
   return total_area;
 }
 
@@ -58,7 +59,7 @@ void zakirov::Circle::scale(double k)
     throw std::invalid_argument("Incorrect coefficient");
   }
 
-  for (size_t i; i < rings_size_; ++i)
+  for (size_t i = 0; i < rings_size_; ++i)
   {
     rings_[i]->scale(k);
   }

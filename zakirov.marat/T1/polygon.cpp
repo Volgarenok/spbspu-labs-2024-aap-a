@@ -69,7 +69,7 @@ void zakirov::Polygon::move(double bias_x, double bias_y)
 {
   for (size_t i = 0; i < size_; ++i)
   {
-    move_point(& points_[i], bias_x, bias_y);
+    move_point(points_[i], bias_x, bias_y);
   }
 }
 

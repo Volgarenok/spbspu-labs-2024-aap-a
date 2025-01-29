@@ -2,12 +2,14 @@
 #include <cmath>
 #include <stdexcept>
 
+#include <iostream>
+
 zakirov::Ring::Ring(point_t center, double ex_radius, double in_radius):
   center_(center),
   ex_radius_(ex_radius),
   in_radius_(in_radius)
 {
-  if (in_radius >= ex_radius || in_radius <= 0 || ex_radius <= 0)
+  if (in_radius >= ex_radius || ex_radius <= 0 || in_radius <= 0)
   {
     throw std::invalid_argument("Incorrect data");
   }
@@ -16,8 +18,8 @@ zakirov::Ring::Ring(point_t center, double ex_radius, double in_radius):
 double zakirov::Ring::getArea() const
 {
   constexpr double pi = 3.14;
-  double in_area = pi * std::pow(in_radius_, 2);
   double ex_area = pi * std::pow(ex_radius_, 2);
+  double in_area = pi * std::pow(in_radius_, 2);
 
   return ex_area - in_area;
 }
@@ -29,12 +31,12 @@ zakirov::rectangle_t zakirov::Ring::getFrameRect() const
 
 void zakirov::Ring::move(point_t target)
 {
-  move_point(& center_, target);
+  move_point(center_, target);
 }
 
 void zakirov::Ring::move(double bias_x, double bias_y)
 {
-  move_point(& center_, bias_x, bias_y);
+  move_point(center_, bias_x, bias_y);
 }
 
 void zakirov::Ring::scale(double k)

@@ -150,13 +150,13 @@ zakirov::Circle * zakirov::make_circle(double center_x, double center_y, double 
   }
 }
 
-zakirov::Ring * zakirov::make_ring(double center_x, double center_y, double in_radius, double ex_radius)
+zakirov::Ring * zakirov::make_ring(double center_x, double center_y, double ex_radius, double in_radius)
 {
   point_t center{center_x, center_y};
   Ring * ring = static_cast< Ring * >(malloc(sizeof(Ring)));
   try
   {
-    new (ring) Ring(center, in_radius, ex_radius);
+    new (ring) Ring(center, ex_radius, in_radius);
     return ring;
   }
   catch (const std::invalid_argument & e)
