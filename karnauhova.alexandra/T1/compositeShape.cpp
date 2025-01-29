@@ -183,3 +183,8 @@ void karnauhova::CompositeShape::scale(double k)
   }
 }
 
+karnauhova::CompositeShape* karnauhova::CompositeShape::clone() const
+{
+  return new CompositeShape(*this);
+}
+

@@ -27,6 +27,7 @@ namespace karnauhova
     Shape* operator[](size_t id) const noexcept;
     bool empty() const noexcept;
     size_t size() const noexcept;
+    CompositeShape* clone() const;
 
   private:
     size_t count_shapes_;
