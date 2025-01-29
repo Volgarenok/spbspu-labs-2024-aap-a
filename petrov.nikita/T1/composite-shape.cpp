@@ -91,8 +91,8 @@ void petrov::CompositeShape::push_back(Shape * shp)
 
 void petrov::CompositeShape::pop_back() noexcept
 {
-  delete shapes_vector_[size_of_vector_];
-  shapes_vector_[size_of_vector_--] = nullptr;
+  delete shapes_vector_[--size_of_vector_];
+  shapes_vector_[size_of_vector_] = nullptr;
 }
 
 petrov::Shape * petrov::CompositeShape::at(size_t id)
