@@ -1,6 +1,7 @@
 #ifndef COMPLEXQUAD_HPP
 #define COMPLEXQUAD_HPP
 #include "shape.hpp"
+#include <cstddef>
 namespace kiselev
 {
   class Complexquad final: public Shape
@@ -15,10 +16,8 @@ namespace kiselev
     void scale(double k) override;
 
   private:
-    point_t p1_;
-    point_t p2_;
-    point_t p3_;
-    point_t p4_;
+    static constexpr size_t size = 4;
+    point_t arr[size];
   };
 }
 #endif
