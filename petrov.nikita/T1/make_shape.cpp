@@ -46,9 +46,7 @@ petrov::Shape * petrov::makeRectangle(std::istream & in)
   petrov::point_t p1 = {};
   petrov::point_t p2 = {};
   in >> p1.x >> p1.y >> p2.x >> p2.y;
-  petrov::Rectangle * ptr_rectangle = nullptr;
-  ptr_rectangle = new petrov::Rectangle(p1, p2);
-  return ptr_rectangle;
+  return new petrov::Rectangle(p1, p2);
 }
 
 petrov::Shape * petrov::makeTriangle(std::istream & in)
@@ -58,9 +56,7 @@ petrov::Shape * petrov::makeTriangle(std::istream & in)
   petrov::point_t p3 = {};
   in >> p1.x >> p1.y >> p2.x >> p2.y;
   in >> p3.x >> p3.y;
-  petrov::Triangle * ptr_triangle = nullptr;
-  ptr_triangle = new petrov::Triangle(p1, p2, p3);
-  return ptr_triangle;
+  return new petrov::Triangle(p1, p2, p3);
 }
 
 petrov::Shape * petrov::makeConcave(std::istream & in)
@@ -71,7 +67,5 @@ petrov::Shape * petrov::makeConcave(std::istream & in)
   petrov::point_t p4 = {};
   in >> p1.x >> p1.y >> p2.x >> p2.y;
   in >> p3.x >> p3.y >> p4.x >> p4.y;
-  petrov::Concave * ptr_concave = nullptr;
-  ptr_concave = new petrov::Concave(p1, p2, p3, p4);
-  return ptr_concave;
+  return new petrov::Concave(p1, p2, p3, p4);
 }
