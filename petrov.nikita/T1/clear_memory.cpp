@@ -1,9 +1,11 @@
 #include "clear_memory.hpp"
+#include "composite-shape.hpp"
 #include "shape.hpp"
-void petrov::clearMemory(Shape ** shapes_massive, size_t created)
+void petrov::clearMemory(petrov::CompositeShape * ptr_composite_shape)
 {
-  for (size_t i = 0; i < created; i++)
+  size_t size_of_composite_shape = ptr_composite_shape->size();
+  for (size_t i = 0; i < size_of_composite_shape; i++)
   {
-    delete shapes_massive[i];
+    ptr_composite_shape->pop_back();
   }
 }

@@ -8,6 +8,7 @@ namespace petrov
   struct CompositeShape
   {
   public:
+    CompositeShape() = default;
     double getArea() const;
     rectangle_t getFrameRect() const;
     void move(point_t concrete_point);

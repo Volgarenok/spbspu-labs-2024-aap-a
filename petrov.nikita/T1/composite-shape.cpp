@@ -3,12 +3,15 @@
 #include "scale_isotropically_and_output_data.hpp"
 #include <cmath>
 #include <stdexcept>
+#include <iostream>
 double petrov::CompositeShape::getArea() const
 {
+  std::cout << "Processing area...\n";
   double area = 0.0;
   for (size_t i = 0; i < size_of_vector_; i++)
   {
     area += shapes_vector_[i]->getArea();
+    std::cout << area << "\n";
   }
   return area;
 }
@@ -60,7 +63,7 @@ void petrov::CompositeShape::scale()
   rectangle_t frame_rect = getFrameRect();
   point_t scale_point = frame_rect.pos;
   double scale_value = 2.0;
-  scaleIsotropicallyAndOutputData(scale_point, scale_value, shapes_vector_, size_of_vector_);
+  scaleIsotropicallyAndOutputData(scale_point, scale_value, this);
 }
 
 void petrov::CompositeShape::push_back(Shape * shp)
@@ -70,6 +73,7 @@ void petrov::CompositeShape::push_back(Shape * shp)
     capacity_ = 5;
     shapes_vector_ = new Shape * [capacity_];
     shapes_vector_[size_of_vector_++] = shp;
+    std::clog << "Check\n";
   }
   else if (capacity_ ==  ++size_of_vector_)
   {
@@ -85,12 +89,13 @@ void petrov::CompositeShape::push_back(Shape * shp)
   else
   {
     shapes_vector_[size_of_vector_] = shp;
+    std::clog << "Check3\n";
   }
 }
 
 void petrov::CompositeShape::pop_back() noexcept
 {
-  delete[] shapes_vector_[size_of_vector_];
+  delete shapes_vector_[size_of_vector_];
   shapes_vector_[size_of_vector_--] = nullptr;
 }
 
@@ -163,7 +168,7 @@ petrov::CompositeShape::CompositeShape(CompositeShape & rhs):
   {
     for (size_t i = 0; i < created; i++)
     {
-      delete[] shapes_vector_[i];
+      delete shapes_vector_[i];
     }
     throw;
   }
@@ -185,14 +190,14 @@ petrov::CompositeShape & petrov::CompositeShape::operator=(CompositeShape & rhs)
   {
     for (size_t i = 0; i < created; i++)
     {
-      delete[] temp[i];
+      delete temp[i];
     }
     delete[] temp;
     throw;
   }
   for (size_t i = 0; i < size_of_vector_; i++)
   {
-    delete[] shapes_vector_[i];
+    delete shapes_vector_[i];
   }
   delete[] shapes_vector_;
   shapes_vector_ = temp;
@@ -213,7 +218,7 @@ petrov::CompositeShape & petrov::CompositeShape::operator=(CompositeShape && rhs
 {
   for (size_t i = 0; i < size_of_vector_; i++)
   {
-    delete[] shapes_vector_[i];
+    delete shapes_vector_[i];
   }
   delete[] shapes_vector_;
   shapes_vector_ = rhs.shapes_vector_;
