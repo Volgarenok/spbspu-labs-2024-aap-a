@@ -12,11 +12,11 @@ namespace savintsev
   public:
     CompositeShape();
     CompositeShape(const CompositeShape & rhs);
-    CompositeShape(CompositeShape && rhs);
+    CompositeShape(CompositeShape && rhs) noexcept;
     CompositeShape(size_t capacity);
     ~CompositeShape();
     CompositeShape & operator=(const CompositeShape & rhs);
-    CompositeShape & operator=(CompositeShape && rhs);
+    CompositeShape & operator=(CompositeShape && rhs) noexcept;
 
     double getArea() const;
     rectangle_t getFrameRect() const;
@@ -26,12 +26,13 @@ namespace savintsev
     void unsafeScale(double k) noexcept;
     CompositeShape * clone() const;
     void unsafeScaleRelativeTo(double k, point_t p) noexcept;
-    void printAreaBorders(std::ostream & out);
 
     void push_back(Shape * shp);
     void pop_back() noexcept;
     const Shape * at(size_t id) const;
+    Shape * at(size_t id);
     const Shape * operator[](size_t id) const noexcept;
+    Shape * operator[](size_t id) noexcept;
     bool empty() const;
     size_t size() const;
   private:

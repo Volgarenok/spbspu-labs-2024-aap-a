@@ -13,26 +13,25 @@ savintsev::CompositeShape::~CompositeShape()
 savintsev::CompositeShape::CompositeShape(size_t capacity):
   amt_(0),
   cap_(capacity),
-  lst_(nullptr)
-{
-  lst_ = new Shape * [cap_];
-}
+  lst_(new Shape * [cap_])
+{}
 
 savintsev::CompositeShape::CompositeShape(const CompositeShape & rhs):
   amt_(rhs.amt_),
   cap_(rhs.cap_),
-  lst_(nullptr)
+  lst_(new Shape * [rhs.cap_])
 {
-  Shape ** new_lst = createExpandCopy(rhs.lst_, rhs.cap_, rhs.cap_);
-  lst_ = new_lst;
+  for (size_t i = 0; i < amt_; ++i)
+  {
+    lst_[i] = rhs.lst_[i]->clone();
+  }
 }
 
-savintsev::CompositeShape::CompositeShape(CompositeShape && rhs):
+savintsev::CompositeShape::CompositeShape(CompositeShape && rhs) noexcept:
   amt_(rhs.amt_),
   cap_(rhs.cap_),
-  lst_(nullptr)
+  lst_(rhs.lst_)
 {
-  lst_ = rhs.lst_;
   rhs.lst_ = nullptr;
 }
 
@@ -40,23 +39,25 @@ savintsev::CompositeShape & savintsev::CompositeShape::operator=(const Composite
 {
   if (std::addressof(rhs) != this)
   {
-    Shape ** new_lst = createExpandCopy(rhs.lst_, rhs.cap_, rhs.cap_);
-    destroy(lst_, amt_);
-    lst_ = new_lst;
     amt_ = rhs.amt_;
     cap_ = rhs.cap_;
+    lst_ = new Shape * [rhs.cap_];
+    for (size_t i = 0; i < amt_; ++i)
+    {
+      lst_[i] = rhs.lst_[i]->clone();
+    }
   }
   return *this;
 }
 
-savintsev::CompositeShape & savintsev::CompositeShape::operator=(CompositeShape && rhs)
+savintsev::CompositeShape & savintsev::CompositeShape::operator=(CompositeShape && rhs) noexcept
 {
   if (std::addressof(rhs) != this)
   {
     delete[] lst_;
-    lst_ = rhs.lst_;
     amt_ = rhs.amt_;
     cap_ = rhs.cap_;
+    lst_ = rhs.lst_;
     rhs.lst_ = nullptr;
   }
   return *this;
@@ -120,16 +121,7 @@ void savintsev::CompositeShape::scale(double k)
 
 void savintsev::CompositeShape::unsafeScale(double k) noexcept
 {
-  point_t center = getFrameRect().pos;
-  for (size_t i = 0; i < amt_; ++i)
-  {
-    point_t jFirst = lst_[i]->getFrameRect().pos;
-    lst_[i]->move(center);
-    point_t jSecond = lst_[i]->getFrameRect().pos;
-    point_t vector = {(jSecond.x - jFirst.x) * k, (jSecond.y - jFirst.y) * k};
-    lst_[i]->unsafeScale(k);
-    lst_[i]->move(-vector.x, -vector.y);
-  }
+  unsafeScaleRelativeTo(k, getFrameRect().pos);
 }
 
 savintsev::CompositeShape * savintsev::CompositeShape::clone() const
@@ -181,7 +173,21 @@ const savintsev::Shape * savintsev::CompositeShape::at(size_t id) const
   return lst_[id];
 }
 
+savintsev::Shape * savintsev::CompositeShape::at(size_t id)
+{
+  if (id >= amt_)
+  {
+    throw std::out_of_range("ERROR: Out of range");
+  }
+  return lst_[id];
+}
+
 const savintsev::Shape * savintsev::CompositeShape::operator[](size_t id) const noexcept
+{
+  return lst_[id];
+}
+
+savintsev::Shape * savintsev::CompositeShape::operator[](size_t id) noexcept
 {
   return lst_[id];
 }
