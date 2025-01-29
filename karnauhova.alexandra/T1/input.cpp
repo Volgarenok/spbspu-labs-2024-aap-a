@@ -200,8 +200,7 @@ bool karnauhova::fabric_input(std::istream & in, Shape** shaps, size_t& count_er
     }
     else
     {
-       delete shaps[--count_shape];
-       count_error++;
+      count_error++;
     }
   }
   if (names[0] == "SCALE" || names[0].empty() || count_shape == 0)
