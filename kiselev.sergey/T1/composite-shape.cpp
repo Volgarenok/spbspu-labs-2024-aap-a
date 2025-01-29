@@ -1,9 +1,11 @@
 #include "composite-shape.hpp"
 #include <cmath>
+#include <cstddef>
+#include <new>
 #include <stdexcept>
-void kiselev::CompositeShape::clear() noexcept
+void kiselev::CompositeShape::clear(size_t size) noexcept
 {
-  for (size_t i = 0; i < realSize; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
     delete shapes[i];
   }
@@ -20,9 +22,18 @@ kiselev::CompositeShape::CompositeShape(const CompositeShape & cmp):
   realSize(cmp.realSize),
   shapes(new Shape *[capacity])
 {
-  for (size_t i = 0; i < capacity; ++i)
+  size_t i = 0;
+  try
   {
-    *shapes[i] = *cmp[i];
+    for (; i < capacity; ++i)
+    {
+      shapes[i] = cmp[i]->clone();
+    }
+  }
+  catch (const std::bad_alloc&)
+  {
+    clear(i);
+    throw;
   }
 }
 kiselev::CompositeShape::CompositeShape(CompositeShape && cmp) noexcept:
@@ -43,7 +54,7 @@ kiselev::CompositeShape & kiselev::CompositeShape::operator=(const CompositeShap
 }
 kiselev::CompositeShape & kiselev::CompositeShape::operator=(CompositeShape && cmp) noexcept
 {
-  clear();
+  clear(realSize);
   shapes = cmp.shapes;
   capacity = cmp.capacity;
   realSize = cmp.realSize;
@@ -163,7 +174,7 @@ void kiselev::CompositeShape::scale(double k)
 }
 kiselev::CompositeShape::~CompositeShape()
 {
-  clear();
+  clear(realSize);
 }
 kiselev::CompositeShape* kiselev::CompositeShape::clone() const
 {

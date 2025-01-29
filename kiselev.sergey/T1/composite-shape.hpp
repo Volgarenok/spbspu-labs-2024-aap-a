@@ -33,7 +33,7 @@ namespace kiselev
     size_t capacity;
     size_t realSize;
     Shape ** shapes;
-    void clear() noexcept;
+    void clear(size_t size) noexcept;
   };
 }
 #endif

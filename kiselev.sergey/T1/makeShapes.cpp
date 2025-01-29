@@ -16,35 +16,41 @@ namespace
       input >> arr[i];
     }
   }
+  void createPoint(size_t size, const double* arrCoord, kiselev::point_t* arr)
+  {
+    size_t j = 0;
+    for (size_t i = 0; i < size; i++)
+    {
+      arr[j] = { arrCoord[i], arrCoord[++i] };
+      j++;
+    }
+  }
   kiselev::Rectangle* makeRectangle(std::istream& input)
   {
     const size_t quantity = 4;
     double arrCoordinates[quantity] = {};
+    kiselev::point_t arrPoint[quantity / 2] = {};
     inputCoordinates(input, arrCoordinates, quantity);
-    kiselev::point_t left = { arrCoordinates[0], arrCoordinates[1] };
-    kiselev::point_t right = { arrCoordinates[2], arrCoordinates[3] };
-    return new kiselev::Rectangle(left, right);
+    createPoint(quantity, arrCoordinates, arrPoint);
+    return new kiselev::Rectangle(arrPoint[0], arrPoint[1]);
   }
   kiselev::Diamond* makeDiamond(std::istream& input)
   {
     const size_t quantity = 6;
     double arrCoordinates[quantity] = {};
+    kiselev::point_t arrPoint[quantity / 2] = {};
     inputCoordinates(input, arrCoordinates, quantity);
-    kiselev::point_t p1 = { arrCoordinates[0], arrCoordinates[1] };
-    kiselev::point_t p2 = { arrCoordinates[2], arrCoordinates[3] };
-    kiselev::point_t p3 = { arrCoordinates[4], arrCoordinates[5] };
-    return new kiselev::Diamond(p1, p2, p3);
+    createPoint(quantity, arrCoordinates, arrPoint);
+    return new kiselev::Diamond(arrPoint[0], arrPoint[1], arrPoint[2]);
   }
   kiselev::Complexquad* makeComplexquad(std::istream& input)
   {
     const size_t quantity = 8;
     double arrCoordinates[quantity] = {};
     inputCoordinates(input, arrCoordinates, quantity);
-    kiselev::point_t p1 = { arrCoordinates[0], arrCoordinates[1] };
-    kiselev::point_t p2 = { arrCoordinates[2], arrCoordinates[3] };
-    kiselev::point_t p3 = { arrCoordinates[4], arrCoordinates[5] };
-    kiselev::point_t p4 = { arrCoordinates[6], arrCoordinates[7] };
-    return new kiselev::Complexquad(p1, p2, p3, p4);
+    kiselev::point_t arrPoint[quantity / 2] = {};
+    createPoint(quantity, arrCoordinates, arrPoint);
+    return new kiselev::Complexquad(arrPoint[0], arrPoint[1], arrPoint[2], arrPoint[3]);
   }
 }
 kiselev::point_t kiselev::makeScale(std::istream& input)
