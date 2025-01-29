@@ -4,6 +4,8 @@
 #include "rectanglepoints.hpp"
 #include "base-types.hpp"
 
+#include <iostream>
+
 averenkov::Diamond::Diamond(const point_t& a, const point_t& b, const point_t& c):
   rectangles_(buildRectangles(a, b, c))
 {
@@ -70,6 +72,7 @@ void averenkov::Diamond::scale(double factor)
       delete rectangles_[i];
     }
   }
+  delete[] rectangles_;
   rectangles_ = (buildRectangles(center, a, b));
 }
 
@@ -110,6 +113,7 @@ averenkov::Rectangle** averenkov::Diamond::buildRectangles(const point_t& a, con
   }
   if (width == 0 || height == 0)
   {
+    delete[] rectangles;
     throw std::invalid_argument("Incorrect input");
   }
   double widthR_ = width / 8;
