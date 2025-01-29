@@ -6,7 +6,7 @@ namespace alymova
 {
   struct Creator
   {
-    ~Creator() = default;
+    virtual ~Creator() = default;
     virtual Shape* create(std::istream& in) = 0;
   };
   struct CreatorRectangle: public Creator
