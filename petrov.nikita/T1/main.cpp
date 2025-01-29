@@ -41,9 +41,7 @@ int main()
       continue;
     }
   }
-  while ((!(composite_shape.empty() && ptr_shape == nullptr)
-            && (composite_shape.empty() || ptr_shape != nullptr))
-                && !std::cin.eof() && std::cin);
+  while ((composite_shape.empty() || ptr_shape != nullptr) && !std::cin.eof() && std::cin);
   if (std::cin.eof())
   {
     clearMemory(ptr_composite_shape);
