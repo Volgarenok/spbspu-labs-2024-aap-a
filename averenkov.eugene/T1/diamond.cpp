@@ -4,8 +4,6 @@
 #include "rectanglepoints.hpp"
 #include "base-types.hpp"
 
-#include <iostream>
-
 averenkov::Diamond::Diamond(const point_t& a, const point_t& b, const point_t& c):
   rectangles_(buildRectangles(a, b, c))
 {
