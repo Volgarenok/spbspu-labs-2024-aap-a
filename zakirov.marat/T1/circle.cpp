@@ -23,7 +23,10 @@ zakirov::Circle::Circle(point_t center, double radius)
 
 zakirov::Circle::~Circle()
 {
-  free(rings_);
+  for (size_t i = 0; i < rings_size_; ++i)
+  {
+    free(rings_[i]);
+  }
 }
 
 double zakirov::Circle::getArea() const
