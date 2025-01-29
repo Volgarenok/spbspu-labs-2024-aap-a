@@ -103,7 +103,7 @@ void karnauhova::CompositeShape::pop_back()
   delete shapes_[--count_shapes_];
 }
 
-karnauhova::Shape* karnauhova::CompositeShape::at(size_t id) const
+const karnauhova::Shape* karnauhova::CompositeShape::at(size_t id) const
 {
   if (id >= count_shapes_)
   {
@@ -112,7 +112,7 @@ karnauhova::Shape* karnauhova::CompositeShape::at(size_t id) const
   return shapes_[id];
 }
 
-karnauhova::Shape* karnauhova::CompositeShape::operator[](size_t id) const noexcept
+karnauhova::Shape* karnauhova::CompositeShape::operator[](size_t id) noexcept
 {
   return shapes_[id];
 }

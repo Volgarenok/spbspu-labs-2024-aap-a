@@ -23,8 +23,8 @@ namespace karnauhova
 
     void push_back(Shape* shp);
     void pop_back();
-    Shape* at(size_t id) const;
-    Shape* operator[](size_t id) const noexcept;
+    const Shape* at(size_t id) const;
+    Shape* operator[](size_t id) noexcept;
     bool empty() const noexcept;
     size_t size() const noexcept;
     CompositeShape* clone() const;
