@@ -51,6 +51,11 @@ void averenkov::Diamond::scale(double factor)
 {
   if (factor <= 0)
   {
+    for (size_t i = 0; i < 40; i++)
+    {
+      delete rectangles_[i];
+    }
+    delete[] rectangles_;
     throw std::invalid_argument("Scale factor must be positive.");
   }
   point_t center = getFrameRect().pos;

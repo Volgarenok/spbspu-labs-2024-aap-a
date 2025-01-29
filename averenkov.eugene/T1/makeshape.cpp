@@ -51,7 +51,7 @@ void averenkov::makeScale(double& factor, point_t& scaling_center, std::istream&
 {
   double x = 0;
   double y = 0;
-  if (!(input >> x >> y >> factor))
+  if (!(input >> x >> y >> factor) || factor <= 0)
   {
     throw std::invalid_argument("Incorrect input");
   }
