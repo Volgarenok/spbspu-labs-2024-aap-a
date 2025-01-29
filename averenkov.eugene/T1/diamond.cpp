@@ -16,6 +16,11 @@ averenkov::Diamond::Diamond(const point_t& a, const point_t& b, const point_t& c
     (c.x == a.x && c.y == b.y) ||
     (c.x == b.x && c.y == a.y)))
   {
+    for (size_t i = 0; i < 40; i++)
+    {
+      delete rectangles_[i];
+    }
+    delete[] rectangles_;
     throw std::invalid_argument("Error in parameters");
   }
 }
