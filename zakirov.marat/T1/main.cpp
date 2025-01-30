@@ -7,13 +7,13 @@
 #include "circle.hpp"
 #include "ring.hpp"
 #include "unified_shapes.hpp"
+#include "composite-shape.hpp"
 
 using namespace zakirov;
 
 int main()
 {
-  Shape * shapes[10000] = {};
-  size_t location = 0;
+  CompositeShape shapes;
   bool shape_flag = false;
   double * scale_data = nullptr;
   double * data = nullptr;
@@ -28,7 +28,7 @@ int main()
 
     try
     {
-      shapes[location] = make_shape(data);
+      shapes.push_back(make_shape(data));
     }
     catch (const std::invalid_argument & e)
     {
@@ -42,59 +42,45 @@ int main()
       scale_data = data;
       break;
     }
-    else if (data[0] == 0.0)
-    {
-      free(data);
-    }
-    else
-    {
-      ++location;
-      free(data);
-    }
+    
+    free(data);
   }
 
   if (shapes[0] == nullptr)
   {
     std::cerr << "Warning! No shapes entered." << '\n';
-    clear_shapes(shapes, location);
     free(scale_data);
     return 1;
   }
   else if (!scale_data)
   {
     std::cerr << "Warning! Scale is not defined." << '\n';
-    clear_shapes(shapes, location);
     free(data);
     return 1;
   }
 
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << get_total_area(shapes, location) << ' ';
-  output_frame(std::cout, shapes, location);
-
+  std::cout << shapes.getArea() << ' ';
+  output_frame(std::cout, shapes);
   point_t target{scale_data[2], scale_data[3]};
   double coefficient = scale_data[4];
-
   try
   {
-    scale_all_shapes(shapes, target, coefficient, location);
+    scale_composite(shapes, target, coefficient);
   }
   catch (const std::invalid_argument& e)
   {
     std::cerr << "Warning! The figure change coefficient is incorrect." << '\n';
-    clear_shapes(shapes, location);
     free(scale_data);
     return 1;
   }
 
-  std::cout << get_total_area(shapes, location) << ' ';
-  output_frame(std::cout, shapes, location);
-
+  std::cout << shapes.getArea() << ' ';
+  output_frame(std::cout, shapes);
   if (shape_flag)
   {
     std::cerr << "Warning! One or more figures are specified incorrectly." << '\n';
   }
 
-  clear_shapes(shapes, location);
   free(scale_data);
 }

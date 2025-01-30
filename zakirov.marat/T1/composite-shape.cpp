@@ -2,7 +2,10 @@
 #include <cstring>
 #include <stdexcept>
 #include "unified_shapes.hpp"
+#include "base-types.hpp"
 
+#include <iostream>
+#include "ring.hpp"
 zakirov::CompositeShape::CompositeShape() :
   shapes_quantity_(0)
 {
@@ -12,7 +15,7 @@ zakirov::CompositeShape::~CompositeShape()
 {
   for (size_t i = 0; i < shapes_quantity_; ++i)
   {
-    shapes_[i]->~Shape();
+    clear_shapes(shapes_, shapes_quantity_);
   }
 }
 
@@ -27,17 +30,24 @@ zakirov::rectangle_t zakirov::CompositeShape::getFrameRect()
   {
     throw std::logic_error("ERROR: empty array");
   }
-
-  point_t min_p = {shapes_[0]->getFrameRect().pos.x, shapes_[0]->getFrameRect().pos.y};
-  point_t max_p = min_p;
-  for (size_t i = 1; i < shapes_quantity_; ++i)
+  double most_top = shapes_[0]->getFrameRect().pos.y;
+  double most_low = shapes_[0]->getFrameRect().pos.y;
+  double most_left = shapes_[0]->getFrameRect().pos.x;
+  double most_right = shapes_[0]->getFrameRect().pos.x;
+  for (size_t i = 0; i < shapes_quantity_; ++i)
   {
-    point_t real_p = shapes_[i]->getFrameRect().pos;
-    min_p = (min_p.x >= real_p.x && min_p.y >= real_p.y) ? real_p : min_p;
-    max_p = (max_p.x <= real_p.x && max_p.y <= max_p.y) ? real_p : max_p;
+    rectangle_t frame_rect = shapes_[i]->getFrameRect();
+    double shape_top = frame_rect.height / 2.0 + frame_rect.pos.y;
+    double shape_low = frame_rect.height / 2.0 - frame_rect.pos.y;
+    double shape_left = frame_rect.width / 2.0 - frame_rect.pos.x;
+    double shape_right = frame_rect.width / 2.0 + frame_rect.pos.x;
+    most_top = most_top <= shape_top ? shape_top : most_top;
+    most_low = most_low >= shape_low ? shape_low : most_low;
+    most_left = most_left >= shape_left ? shape_left : most_left;
+    most_right = most_right <= shape_right ? shape_right : most_right;
   }
-
-  return {max_p.x - min_p.x, max_p.y - min_p.y, get_middle(min_p, max_p)};
+  point_t center = get_middle({most_right, most_top}, {most_left, most_low});
+  return {most_right - most_left, most_top - most_low, center};
 }
 
 void zakirov::CompositeShape::move(point_t target)
@@ -66,7 +76,10 @@ void zakirov::CompositeShape::scale(double k)
 
 void zakirov::CompositeShape::push_back(Shape * shape)
 {
-  shapes_[shapes_quantity_++] = shape;
+  if (shape)
+  {
+    shapes_[shapes_quantity_++] = shape;
+  }
 }
 
 void zakirov::CompositeShape::pop_back()
@@ -77,6 +90,7 @@ void zakirov::CompositeShape::pop_back()
   }
 
   shapes_[--shapes_quantity_]->~Shape();
+  free(shapes_[shapes_quantity_]);
 }
 
 zakirov::Shape * zakirov::CompositeShape::at(size_t id)
