@@ -42,7 +42,7 @@ int main()
       scale_data = data;
       break;
     }
-    
+
     free(data);
   }
 
