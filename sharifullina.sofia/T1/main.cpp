@@ -105,11 +105,13 @@ int main()
   }
   std::cout << std::fixed;
   std::cout.precision(1);
-  std::cout << getSumArea(shapes, count);
+  std::cout << getSumArea(shapes, count) << " ";
   printCoorRect(std::cout, shapes, count);
+  std::cout << '\n';
   scaleOfShapes(shapes, count, scaleCenter, scaleK);
-  std::cout << getSumArea(shapes, count);
+  std::cout << getSumArea(shapes, count) << " ";
   printCoorRect(std::cout, shapes, count);
+  std::cout << '\n';
   destroyShapes(shapes, count);
   if (flag)
   {
