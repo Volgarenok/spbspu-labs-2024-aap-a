@@ -1,6 +1,7 @@
 #include "polygon.hpp"
 #include <stdexcept>
 #include <algorithm>
+#include <cmath>
 
 mozhegova::Polygon::~Polygon()
 {
@@ -41,7 +42,7 @@ double mozhegova::Polygon::getArea() const
     sum += points_[i].x * (points_[i + 1].y - points_[i - 1].y);
   }
   sum += points_[count_ - 1].x * (points_[0].y - points_[count_ - 2].y);
-  return 0.5 * std::abs(sum);
+  return 0.5 * std::fabs(sum);
 }
 
 mozhegova::rectangle_t mozhegova::Polygon::getFrameRect() const
@@ -90,12 +91,8 @@ void mozhegova::Polygon::move(double dx, double dy)
   }
 }
 
-void mozhegova::Polygon::scale(double k)
+void mozhegova::Polygon::scaleImpl(double k)
 {
-  if (k <= 0)
-  {
-    throw std::invalid_argument("Incorrect scale");
-  }
   double sumX = 0.0;
   double sumY = 0.0;
   for (size_t i = 0; i < count_; i++)

@@ -14,10 +14,9 @@ namespace mozhegova
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;
     void move(double dx, double dy) override;
-    void scale(double k) override;
   private:
-    Polygon * poly_;
-    ~Rectangle();
+    Polygon poly_;
+    void scaleImpl(double k) override;
   };
 }
 
