@@ -1,16 +1,12 @@
 #include "composite-shape.hpp"
 #include <stdexcept>
 #include <cmath>
-#include <algorithm>
+#include <cstring>
+#include <memory>
 #include "additional-utilities.hpp"
 nikonov::CompositeShape::CompositeShape():
   size_(0)
-{
-  for (size_t i = 0; i < 10000; ++i)
-  {
-    shp[i] = nullptr;
-  }
-}
+{}
 nikonov::CompositeShape::CompositeShape(CompositeShape &copy):
   size_(copy.size_)
 {
@@ -31,17 +27,21 @@ nikonov::CompositeShape::CompositeShape(CompositeShape &&copy):
 }
 nikonov::CompositeShape::~CompositeShape()
 {
-  nikonov::destoy(*this);
+  clear();
 }
 nikonov::Shape *nikonov::CompositeShape::operator[](size_t id)
 {
   return shp[id];
 }
+const nikonov::Shape *nikonov::CompositeShape::operator[](size_t id) const
+{
+  return shp[id];
+}
 nikonov::CompositeShape &nikonov::CompositeShape::operator=(const CompositeShape &another)
 {
-  if (&another != this)
+  if (std::addressof(another) != this)
   {
-    nikonov::destoy(*this);
+    clear();
     for (size_t i = 0; i < another.size(); ++i)
     {
       shp[i] = another.shp[i]->clone();
@@ -52,9 +52,9 @@ nikonov::CompositeShape &nikonov::CompositeShape::operator=(const CompositeShape
 }
 nikonov::CompositeShape &nikonov::CompositeShape::operator=(CompositeShape &&another)
 {
-  if (&another != this)
+  if (std::addressof(another) != this)
   {
-    nikonov::destoy(*this);
+    clear();
     for (size_t i = 0; i < another.size(); ++i)
     {
       shp[i] = another.shp[i];
@@ -62,7 +62,7 @@ nikonov::CompositeShape &nikonov::CompositeShape::operator=(CompositeShape &&ano
     }
     size_ = another.size_;
     another.size_ = 0;
-    nikonov::destoy(another);
+    another.clear();
   }
   return *this;
 }
@@ -157,6 +157,14 @@ nikonov::Shape *nikonov::CompositeShape::at(size_t id)
   }
   return shp[id];
 }
+const nikonov::Shape *nikonov::CompositeShape::at(size_t id) const
+{
+  if (id >= size_)
+  {
+    throw std::logic_error("noncorrect id");
+  }
+  return shp[id];
+}
 bool nikonov::CompositeShape::empty() const noexcept
 {
   return size_ == 0;
@@ -164,4 +172,11 @@ bool nikonov::CompositeShape::empty() const noexcept
 size_t nikonov::CompositeShape::size() const noexcept
 {
   return size_;
+}
+void nikonov::CompositeShape::clear()
+{
+  while (size_ > 0)
+  {
+    pop_back();
+  }
 }

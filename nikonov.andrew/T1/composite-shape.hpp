@@ -12,6 +12,7 @@ namespace nikonov
     CompositeShape(CompositeShape &&copy);
     ~CompositeShape();
     Shape *operator[](size_t id);
+    const Shape *operator[](size_t id) const;
     CompositeShape &operator=(const CompositeShape &another);
     CompositeShape &operator=(CompositeShape &&another);
     double getArea() const;
@@ -23,8 +24,10 @@ namespace nikonov
     void push_back(Shape *newElem);
     void pop_back();
     Shape *at(size_t id);
+    const Shape *at(size_t id) const;
     bool empty() const noexcept;
     size_t size() const noexcept;
+    void clear();
   private:
     Shape *shp[10000];
     size_t size_;

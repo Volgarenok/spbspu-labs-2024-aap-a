@@ -8,43 +8,30 @@ namespace
   point_t findMid(const point_t &p1, const point_t &p2, const point_t &p3);
   point_t findRight(const point_t &p1, const point_t &p2, const point_t &p3);
   bool isEqualPoint(const point_t &p1, const point_t &p2);
-  Triangle findLeftTopTgl(const point_t &p1, const point_t &p2, const point_t &p3);
-  Triangle findLeftBotTgl(const point_t &p1, const point_t &p2, const point_t &p3);
-  Triangle findRightTopTgl(const point_t &p1, const point_t &p2, const point_t &p3);
-  Triangle findRightBotTgl(const point_t &p1, const point_t &p2, const point_t &p3);
-  struct BaseTglPoints
-  {
-    point_t topP;
-    point_t midP;
-    point_t rightP;
-    BaseTglPoints(const point_t &p1, const point_t &p2, const point_t &p3):
-      topP(findTop(p1, p2, p3)),
-      midP(findMid(p1, p2, p3)),
-      rightP(findRight(p1, p2, p3))
-    {}
-  };
 }
 nikonov::Diamond::Diamond(const point_t &p1, const point_t &p2, const point_t &p3):
-  lt_tgl_(findLeftTopTgl(p1, p2, p3)),
-  lb_tgl_(findLeftBotTgl(p1, p2, p3)),
-  rt_tgl_(findRightTopTgl(p1, p2, p3)),
-  rb_tgl_(findRightBotTgl(p1, p2, p3))
+  lt_({ findTop(p1, p2, p3), findMid(p1, p2, p3), point_t({ 2 * findMid(p1, p2, p3).x - findRight(p1, p2, p3).x, findMid(p1, p2, p3).y }) }),
+  lb_({ point_t({ findTop(p1, p2, p3).x, 2 * findMid(p1, p2, p3).y - findTop(p1, p2, p3).y }), findMid(p1, p2, p3), point_t({ 2 * findMid(p1, p2, p3).x - findRight(p1, p2, p3).x, findMid(p1, p2, p3).y }) }),
+  rt_({ findTop(p1, p2, p3), findMid(p1, p2, p3), findRight(p1, p2, p3) }),
+  rb_({ point_t({ findTop(p1, p2, p3).x, 2 * findMid(p1, p2, p3).y - findTop(p1, p2, p3).y }), findMid(p1, p2, p3), findRight(p1, p2, p3) })
 {
-  BaseTglPoints data(p1, p2, p3);
-  if (!(data.topP.x == data.midP.x && data.rightP.y == data.midP.y))
+  point_t topP = findTop(p1, p2, p3);
+  point_t midP = findMid(p1, p2, p3);
+  point_t rightP = findRight(p1, p2, p3);
+  if (!(topP.x == midP.x && rightP.y == midP.y))
   {
     throw std::logic_error("ERROR:noncorrect diamond parameters");
   }
 }
 double nikonov::Diamond::getArea() const
 {
-  return lt_tgl_.getArea() + lb_tgl_.getArea() + rt_tgl_.getArea() + rb_tgl_.getArea();
+  return lt_.getArea() + lb_.getArea() + rt_.getArea() + rb_.getArea();
 }
 nikonov::rectangle_t nikonov::Diamond::getFrameRect() const
 {
-  double width = lt_tgl_.getFrameRect().width * 2;
-  double height = lt_tgl_.getFrameRect().height * 2;
-  point_t tglCenter = lt_tgl_.getFrameRect().pos;
+  double width = lt_.getFrameRect().width * 2;
+  double height = lt_.getFrameRect().height * 2;
+  point_t tglCenter = lt_.getFrameRect().pos;
   point_t pos = point_t({ tglCenter.x + (width / 4), tglCenter.y - (height / 4) });
   return rectangle_t({ width, height, pos });
 }
@@ -57,18 +44,18 @@ void nikonov::Diamond::move(const point_t &newPos)
 }
 void nikonov::Diamond::move(double x, double y)
 {
-  lt_tgl_.move(x, y);
-  lb_tgl_.move(x, y);
-  rt_tgl_.move(x, y);
-  rb_tgl_.move(x, y);
+  lt_.move(x, y);
+  lb_.move(x, y);
+  rt_.move(x, y);
+  rb_.move(x, y);
 }
 void nikonov::Diamond::scale(double k) noexcept
 {
   rectangle_t crntRect = getFrameRect();
-  ispScale(&lt_tgl_, crntRect.pos.x, crntRect.pos.y, k);
-  ispScale(&lb_tgl_, crntRect.pos.x, crntRect.pos.y, k);
-  ispScale(&rt_tgl_, crntRect.pos.x, crntRect.pos.y, k);
-  ispScale(&rb_tgl_, crntRect.pos.x, crntRect.pos.y, k);
+  ispScale(lt_, crntRect.pos.x, crntRect.pos.y, k);
+  ispScale(lb_, crntRect.pos.x, crntRect.pos.y, k);
+  ispScale(rt_, crntRect.pos.x, crntRect.pos.y, k);
+  ispScale(rb_, crntRect.pos.x, crntRect.pos.y, k);
 }
 nikonov::Shape *nikonov::Diamond::clone() const
 {
@@ -137,29 +124,5 @@ namespace
       edgeP.x = 2 * midP.x - edgeP.x;
     }
     return edgeP;
-  }
-  Triangle findLeftTopTgl(const point_t &p1, const point_t &p2, const point_t &p3)
-  {
-    BaseTglPoints data(p1, p2, p3);
-    point_t leftP({ 2 * data.midP.x - data.rightP.x, data.midP.y });
-    return Triangle({ data.topP, data.midP, leftP });
-  }
-  Triangle findLeftBotTgl(const point_t &p1, const point_t &p2, const point_t &p3)
-  {
-    BaseTglPoints data(p1, p2, p3);
-    point_t botP({ data.topP.x, 2 * data.midP.y - data.topP.y });
-    point_t leftP({ 2 * data.midP.x - data.rightP.x, data.midP.y });
-    return Triangle({ botP, data.midP, leftP });
-  }
-  Triangle findRightTopTgl(const point_t &p1, const point_t &p2, const point_t &p3)
-  {
-    BaseTglPoints data(p1, p2, p3);
-    return Triangle({ data.topP, data.midP, data.rightP });
-  }
-  Triangle findRightBotTgl(const point_t &p1, const point_t &p2, const point_t &p3)
-  {
-    BaseTglPoints data(p1, p2, p3);
-    point_t botP({ data.topP.x, 2 * data.midP.y - data.topP.y });
-    return Triangle({ botP, data.midP, data.rightP });
   }
 }

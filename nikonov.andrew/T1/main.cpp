@@ -1,7 +1,4 @@
 #include <iostream>
-#include <string>
-#include "shape.hpp"
-#include "fabric.hpp"
 #include "additional-utilities.hpp"
 #include "composite-shape.hpp"
 int main()

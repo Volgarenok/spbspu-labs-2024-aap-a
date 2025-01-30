@@ -1,7 +1,5 @@
 #ifndef RECTANGE_HPP
 #define RECTANGE_HPP
-#include "base-types.hpp"
-#include "shape.hpp"
 #include "triangle.hpp"
 namespace nikonov
 {

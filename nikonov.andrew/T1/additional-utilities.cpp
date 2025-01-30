@@ -2,7 +2,6 @@
 #include <limits>
 #include <iomanip>
 #include <cmath>
-#include "shape.hpp"
 #include "fabric.hpp"
 void nikonov::fillShapeCollection(std::istream &input, std::ostream &out, CompositeShape &collection)
 {
@@ -26,23 +25,16 @@ void nikonov::fillShapeCollection(std::istream &input, std::ostream &out, Compos
     }
   }
 }
-void nikonov::destoy(CompositeShape &collection)
-{
-  while (!collection.empty())
-  {
-    collection.pop_back();
-  }
-}
-void nikonov::ispScale(Shape *shp, double x, double y, double k)
+void nikonov::ispScale(Shape &shp, double x, double y, double k)
 {
   point_t S({ x, y });
-  point_t origCenter = shp->getFrameRect().pos;
-  shp->move(S);
-  point_t newCenter = shp->getFrameRect().pos;
+  point_t origCenter = shp.getFrameRect().pos;
+  shp.move(S);
+  point_t newCenter = shp.getFrameRect().pos;
   double diffX = newCenter.x - origCenter.x;
   double diffY = newCenter.y - origCenter.y;
-  shp->scale(k);
-  shp->move(diffX * k * (-1), diffY * k * (-1));
+  shp.scale(k);
+  shp.move(diffX * k * (-1), diffY * k * (-1));
 }
 void nikonov::scaleCollection(CompositeShape &collection, double x, double y, double k)
 {
@@ -52,7 +44,7 @@ void nikonov::scaleCollection(CompositeShape &collection, double x, double y, do
   }
   for (size_t i = 0; i < collection.size(); ++i)
   {
-    ispScale(collection[i], x, y, k);
+    ispScale(*collection[i], x, y, k);
   }
 }
 void nikonov::outputCollection(std::ostream &out, CompositeShape &collection)

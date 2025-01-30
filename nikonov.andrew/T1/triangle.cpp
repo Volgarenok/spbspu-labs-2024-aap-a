@@ -1,7 +1,6 @@
 #include "triangle.hpp"
 #include <stdexcept>
 #include "additional-utilities.hpp"
-#include "base-types.hpp"
 namespace
 {
   nikonov::point_t getCenterOfGravity(const nikonov::point_t &a, const nikonov::point_t &b, const nikonov::point_t &c) noexcept

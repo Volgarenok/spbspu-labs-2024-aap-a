@@ -1,7 +1,5 @@
 #ifndef DIAMOND_HPP
 #define DIAMOND_HPP
-#include "base-types.hpp"
-#include "shape.hpp"
 #include "triangle.hpp"
 namespace nikonov
 {
@@ -16,10 +14,10 @@ namespace nikonov
     void scale(double k) noexcept override;
     Shape *clone() const override;
   private:
-    Triangle lt_tgl_;
-    Triangle lb_tgl_;
-    Triangle rt_tgl_;
-    Triangle rb_tgl_;
+    Triangle lt_;
+    Triangle lb_;
+    Triangle rt_;
+    Triangle rb_;
   };
 }
 #endif
