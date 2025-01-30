@@ -44,6 +44,7 @@ void sharifullina::printCoorRect(std::ostream& out, const Shape* const* shapes, 
     double ry = rect.pos.y + rect.height / 2.0;
     out << lx << " " << ly << " " << rx << " " << ry;
   }
+  std::cout << "\n";
 }
 
 void sharifullina::destroyShapes(Shape ** shapes, size_t n)
