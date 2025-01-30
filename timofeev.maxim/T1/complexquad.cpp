@@ -1,6 +1,6 @@
 #include "complexquad.hpp"
-
-timofeev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4) :
+#include "shapes_tools.hpp"
+timofeev::Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4):
   p1_(p1),
   p2_(p2),
   p3_(p3),
@@ -18,15 +18,15 @@ double timofeev::Complexquad::getArea() const
 
 timofeev::rectangle_t timofeev::Complexquad::getFrameRect() const
 {
-  double left_border = std::min(std::min(std::min(p1_.x, p2_.x), p3_.x), p4_.x);
-  double right_border = std::max(std::max(std::max(p1_.x, p2_.x), p3_.x), p4_.x);
-  double upper_border = std::max(std::max(std::max(p1_.y, p2_.y), p3_.y), p4_.y);
-  double lower_border = std::min(std::min(std::min(p1_.y, p2_.y), p3_.y), p4_.y);
-  rectangle_t frame_rect;
-  frame_rect.height = upper_border - lower_border;
-  frame_rect.width = right_border - left_border;
-  frame_rect.pos.x = left_border + frame_rect.width / 2;
-  frame_rect.pos.y = lower_border + frame_rect.height / 2;
+  double left_border = std::fmin(std::fmin(std::fmin(p1_.x, p2_.x), p3_.x), p4_.x);
+  double right_border = std::fmax(std::fmax(std::fmax(p1_.x, p2_.x), p3_.x), p4_.x);
+  double upper_border = std::fmax(std::fmax(std::fmax(p1_.y, p2_.y), p3_.y), p4_.y);
+  double lower_border = std::fmin(std::fmin(std::fmin(p1_.y, p2_.y), p3_.y), p4_.y);
+  double height = upper_border - lower_border;
+  double width = right_border - left_border;
+  double posx = left_border + width / 2;
+  double posy = lower_border + height / 2;
+  rectangle_t frame_rect{width, height, {posx, posy}};
   return frame_rect;
 }
 

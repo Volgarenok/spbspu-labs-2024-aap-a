@@ -1,24 +1,24 @@
 #include "rectangle.hpp"
 #include <cmath>
 
-timofeev::Rectangle::Rectangle(double ldx, double ldy, double rux, double ruy)
+timofeev::Rectangle::Rectangle(point_t ld, point_t ru):
+  ld_(ld),
+  ru_(ru)
 {
-  ld_.x = ldx;
-  ld_.y = ldy;
-  ru_.x = rux;
-  ru_.y = ruy;
 }
 
-double timofeev::Rectangle::getArea() const {
+double timofeev::Rectangle::getArea() const
+{
   return (ru_.x - ld_.x) * (ru_.y - ld_.y);
 }
 
-timofeev::rectangle_t timofeev::Rectangle::getFrameRect() const {
-  timofeev::rectangle_t frame_rect;
-  frame_rect.height = (ru_.y - ld_.y);
-  frame_rect.width = (ru_.x - ld_.x);
-  frame_rect.pos.x = ld_.x + (frame_rect.width / 2);
-  frame_rect.pos.y = ld_.y + (frame_rect.height / 2);
+timofeev::rectangle_t timofeev::Rectangle::getFrameRect() const
+{
+  double height = (ru_.y - ld_.y);
+  double width = (ru_.x - ld_.x);
+  double posx = ld_.x + (width / 2);
+  double posy = ld_.y + (height / 2);
+  timofeev::rectangle_t frame_rect{width, height, {posx, posy}};
   return frame_rect;
 }
 
@@ -41,7 +41,8 @@ void timofeev::Rectangle::move(double move_x, double move_y)
   ru_.y = ru_.y + move_y;
 }
 
-void timofeev::Rectangle::scale(double factor) {
+void timofeev::Rectangle::scale(double factor)
+{
   point_t pos_an = getFrameRect().pos;
   ld_.x = pos_an.x - (pos_an.x - ld_.x) * factor;
   ru_.x = pos_an.x + (ru_.x - pos_an.x) * factor;

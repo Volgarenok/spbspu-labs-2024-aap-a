@@ -1,13 +1,11 @@
-#ifndef COMPLEXQUAD_H
-#define COMPLEXQUAD_H
+#ifndef COMPLEXQUAD_HPP
+#define COMPLEXQUAD_HPP
 #include "shape.hpp"
 #include "base-types.hpp"
-#include "shapes_tools.hpp"
-#include <iostream>
+#include <cmath>
 
-namespace timofeev
-{
-  class Complexquad : public Shape
+namespace timofeev {
+  class Complexquad final: public Shape
   {
   public:
     Complexquad(point_t p1, point_t p2, point_t p3, point_t p4);

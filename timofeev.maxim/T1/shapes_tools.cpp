@@ -91,12 +91,12 @@ void timofeev::print_frame_rect(Shape** shapes, size_t count)
     std::cout << " " << frame_rect.pos.x + frame_rect.width / 2 << " " << frame_rect.pos.y + frame_rect.height / 2;
   }
 }
-void timofeev::izoscale(Shape** shapes, size_t count, point_t izo_pos, double factor)
+void timofeev::isoscale(Shape** shapes, size_t count, point_t iso_pos, double factor)
 {
   for (size_t i = 0; i < count; ++i)
   {
     timofeev::point_t start = shapes[i]->getFrameRect().pos;
-    shapes[i]->move(izo_pos);
+    shapes[i]->move(iso_pos);
     timofeev::point_t result = shapes[i]->getFrameRect().pos;
     timofeev::point_t vector;
     vector.x = (result.x - start.x);

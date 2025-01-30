@@ -1,13 +1,12 @@
-#ifndef TRIANGLE_H
-#define TRIANGLE_H
+#ifndef TRIANGLE_HPP
+#define TRIANGLE_HPP
 #include "shape.hpp"
 #include "base-types.hpp"
 #include "shapes_tools.hpp"
 #include <iostream>
 
-namespace timofeev
-{
-  class Triangle : public Shape
+namespace timofeev {
+  class Triangle final: public Shape
   {
   public:
     Triangle(point_t p1, point_t p2, point_t p3);

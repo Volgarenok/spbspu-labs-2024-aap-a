@@ -1,14 +1,12 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
-
 #include "shape.hpp"
 #include "base-types.hpp"
 
-namespace timofeev
-{
-  class Rectangle : public Shape {
+namespace timofeev {
+  class Rectangle final: public Shape {
   public:
-    Rectangle(double ldx, double ldy, double rux, double ruy);
+    Rectangle(point_t ld, point_t ru);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t new_pos) override;

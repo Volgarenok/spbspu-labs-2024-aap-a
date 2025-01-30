@@ -1,13 +1,12 @@
-#ifndef CONCAVE_H
-#define CONCAVE_H
+#ifndef CONCAVE_HPP
+#define CONCAVE_HPP
 #include "shape.hpp"
 #include "base-types.hpp"
 #include "shapes_tools.hpp"
 #include <iostream>
 
-namespace timofeev
-{
-  class Concave : public Shape
+namespace timofeev {
+  class Concave final: public Shape
   {
   public:
     Concave(point_t p1, point_t p2, point_t p3, point_t p4);

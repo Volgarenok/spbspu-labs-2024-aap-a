@@ -2,8 +2,7 @@
 #define SHAPE_HPP
 #include "base-types.hpp"
 
-namespace timofeev
-{
+namespace timofeev {
   class Shape {
   public:
     virtual ~Shape() = default;
