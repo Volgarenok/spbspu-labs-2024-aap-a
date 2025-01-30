@@ -26,7 +26,7 @@ zakirov::rectangle_t zakirov::CompositeShape::getFrameRect(size_t id)
   for (size_t i = 1; i < shapes_quantity_; ++i)
   {
     point_t real_p = shapes_[i]->getFrameRect().pos;
-    min_p = (min_p.x >= real_p.x && min_p.y >= real_p.y) ? real_p : min_p;    
+    min_p = (min_p.x >= real_p.x && min_p.y >= real_p.y) ? real_p : min_p;
     max_p = (max_p.x <= real_p.x && max_p.y <= max_p.y) ? real_p : max_p;
   }
 
@@ -78,6 +78,7 @@ zakirov::Shape * zakirov::CompositeShape::at(size_t id)
   {
     throw std::invalid_argument("ERROR: id is greater, than size of array");
   }
+
   return shapes_[id];
 }
 
@@ -100,4 +101,3 @@ size_t zakirov::CompositeShape::size()
 {
   return shapes_quantity_;
 }
-  
