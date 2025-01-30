@@ -23,7 +23,7 @@ namespace
   }
   kiselev::Rectangle* makeRectangle(std::istream& input)
   {
-    const size_t quantity = 4;
+    constexpr size_t quantity = 4;
     double arrCoordinates[quantity] = {};
     kiselev::point_t arrPoint[quantity / 2] = {};
     inputCoordinates(input, arrCoordinates, quantity);
@@ -32,7 +32,7 @@ namespace
   }
   kiselev::Diamond* makeDiamond(std::istream& input)
   {
-    const size_t quantity = 6;
+    constexpr size_t quantity = 6;
     double arrCoordinates[quantity] = {};
     kiselev::point_t arrPoint[quantity / 2] = {};
     inputCoordinates(input, arrCoordinates, quantity);
@@ -41,7 +41,7 @@ namespace
   }
   kiselev::Complexquad* makeComplexquad(std::istream& input)
   {
-    const size_t quantity = 8;
+    constexpr size_t quantity = 8;
     double arrCoordinates[quantity] = {};
     inputCoordinates(input, arrCoordinates, quantity);
     kiselev::point_t arrPoint[quantity / 2] = {};
@@ -51,7 +51,7 @@ namespace
 }
 kiselev::point_t kiselev::makeScale(std::istream& input)
 {
-  const size_t quantity = 2;
+  constexpr size_t quantity = 2;
   double arrCoordinates[quantity] = {};
   inputCoordinates(input, arrCoordinates, quantity);
   return { arrCoordinates[0], arrCoordinates[1] };

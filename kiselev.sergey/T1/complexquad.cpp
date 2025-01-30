@@ -1,7 +1,6 @@
 #include "complexquad.hpp"
 #include <cmath>
 #include <stdexcept>
-#include "base-types.hpp"
 #include "shape.hpp"
 namespace
 {
