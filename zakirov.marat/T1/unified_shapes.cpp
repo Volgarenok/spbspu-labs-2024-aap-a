@@ -264,10 +264,11 @@ double * zakirov::get_data(std::istream & in)
   }
 
   free(shape);
+  size_t start  = 0;
+  size_t finish = 0;
   size_t location = 2;
   double counter = 0.0;
   char * workline = get_string(in, step, '\n');
-  size_t start  = 0, finish = 0;
   while (workline[start] != '\0')
   {
     double * expanded_data = extra_element(data, location);
