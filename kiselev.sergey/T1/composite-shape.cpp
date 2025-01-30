@@ -39,7 +39,8 @@ kiselev::CompositeShape::CompositeShape(CompositeShape&& cmp) noexcept:
   shapes(cmp.shapes)
 {
   cmp.shapes = nullptr;
-  realSize = 0;
+  cmp.realSize = 0;
+  cmp.capacity = 0;
 }
 kiselev::CompositeShape& kiselev::CompositeShape::operator=(const CompositeShape& cmp)
 {
@@ -57,6 +58,7 @@ kiselev::CompositeShape& kiselev::CompositeShape::operator=(CompositeShape&& cmp
   realSize = cmp.realSize;
   cmp.shapes = nullptr;
   cmp.realSize = 0;
+  cmp.capacity = 0;
   return *this;
 }
 void kiselev::CompositeShape::pushBack(Shape* shp)
@@ -86,7 +88,7 @@ const kiselev::Shape* kiselev::CompositeShape::at(size_t id) const
 }
 kiselev::Shape* kiselev::CompositeShape::at(size_t id)
 {
-  return const_cast<Shape*>(static_cast<const CompositeShape&>(*this).at(id));
+  return const_cast< Shape* >(static_cast< const CompositeShape& >(*this).at(id));
 }
 const kiselev::Shape* kiselev::CompositeShape::operator[](size_t id) const noexcept
 {
