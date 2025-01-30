@@ -28,7 +28,6 @@ int main()
       {
         scale = kiselev::makeScale(std::cin);
         std::cin >> ratio;
-        if (ratio <= 0)
         break;
       }
     }
@@ -48,7 +47,7 @@ int main()
   }
   if (isUnknownShape)
   {
-      std::cout << "An unknown figure has been introduced\n";
+    std::cout << "An unknown figure has been introduced\n";
   }
   if (compShp.empty())
   {
@@ -64,9 +63,11 @@ int main()
   {
     std::cout << std::fixed << std::setprecision(1) << compShp.getArea();
     printCoordinatesRect(std::cout, compShp);
+    std::cout << "\n";
     compShp.scale(ratio, scale);
     std::cout << compShp.getArea();
     printCoordinatesRect(std::cout, compShp);
+    std::cout << "\n";
   }
   catch (const std::exception& e)
   {

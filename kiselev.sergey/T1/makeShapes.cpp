@@ -1,60 +1,51 @@
 #include "makeShapes.hpp"
 #include <cmath>
+#include <cstddef>
+#include <istream>
+#include "base-types.hpp"
 #include "complexquad.hpp"
 #include "diamond.hpp"
 #include "rectangle.hpp"
 namespace
 {
-  void inputCoordinates(std::istream& input, double* arr, size_t size)
+  void createPoint(std::istream& input, size_t size, kiselev::point_t* arr)
   {
+    double coordX = 0;
+    double coordY = 0;
     for (size_t i = 0; i < size; ++i)
     {
-      input >> arr[i];
-    }
-  }
-  void createPoint(size_t size, const double* arrCoord, kiselev::point_t* arr)
-  {
-    size_t j = 0;
-    for (size_t i = 0; i < size; i++)
-    {
-      arr[j] = { arrCoord[i], arrCoord[++i] };
-      j++;
+      input >> coordX >> coordY;
+      arr[i] = { coordX, coordY };
     }
   }
   kiselev::Rectangle* makeRectangle(std::istream& input)
   {
-    constexpr size_t quantity = 4;
-    double arrCoordinates[quantity] = {};
-    kiselev::point_t arrPoint[quantity / 2] = {};
-    inputCoordinates(input, arrCoordinates, quantity);
-    createPoint(quantity, arrCoordinates, arrPoint);
+    constexpr size_t quantity = 2;
+    kiselev::point_t arrPoint[quantity] = {};
+    createPoint(input, quantity, arrPoint);
     return new kiselev::Rectangle(arrPoint[0], arrPoint[1]);
   }
   kiselev::Diamond* makeDiamond(std::istream& input)
   {
-    constexpr size_t quantity = 6;
-    double arrCoordinates[quantity] = {};
-    kiselev::point_t arrPoint[quantity / 2] = {};
-    inputCoordinates(input, arrCoordinates, quantity);
-    createPoint(quantity, arrCoordinates, arrPoint);
+    constexpr size_t quantity = 3;
+    kiselev::point_t arrPoint[quantity] = {};
+    createPoint(input, quantity, arrPoint);
     return new kiselev::Diamond(arrPoint[0], arrPoint[1], arrPoint[2]);
   }
   kiselev::Complexquad* makeComplexquad(std::istream& input)
   {
-    constexpr size_t quantity = 8;
-    double arrCoordinates[quantity] = {};
-    inputCoordinates(input, arrCoordinates, quantity);
-    kiselev::point_t arrPoint[quantity / 2] = {};
-    createPoint(quantity, arrCoordinates, arrPoint);
+    constexpr size_t quantity = 4;
+    kiselev::point_t arrPoint[quantity] = {};
+    createPoint(input, quantity, arrPoint);
     return new kiselev::Complexquad(arrPoint[0], arrPoint[1], arrPoint[2], arrPoint[3]);
   }
 }
 kiselev::point_t kiselev::makeScale(std::istream& input)
 {
-  constexpr size_t quantity = 2;
-  double arrCoordinates[quantity] = {};
-  inputCoordinates(input, arrCoordinates, quantity);
-  return { arrCoordinates[0], arrCoordinates[1] };
+  constexpr size_t quantity = 1;
+  kiselev::point_t point[1] = {};
+  createPoint(input, quantity, point);
+  return point[0];
 }
 bool kiselev::makeShape(std::istream& input, const std::string& str, CompositeShape& compShp)
 {

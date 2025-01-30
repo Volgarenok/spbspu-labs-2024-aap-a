@@ -1,4 +1,5 @@
 #include "composite-shape.hpp"
+#include "shape.hpp"
 #include <cmath>
 #include <stdexcept>
 void kiselev::CompositeShape::clear(size_t size) noexcept
@@ -96,7 +97,7 @@ const kiselev::Shape* kiselev::CompositeShape::operator[](size_t id) const noexc
 }
 kiselev::Shape* kiselev::CompositeShape::operator[](size_t id) noexcept
 {
-  return shapes[id];
+  return const_cast< Shape* >(static_cast< const CompositeShape& >(*this).operator[](id));
 }
 bool kiselev::CompositeShape::empty() const noexcept
 {
@@ -177,5 +178,5 @@ kiselev::CompositeShape::~CompositeShape()
 }
 kiselev::CompositeShape kiselev::CompositeShape::clone() const
 {
-  return CompositeShape(*this);
+  return *this;
 }

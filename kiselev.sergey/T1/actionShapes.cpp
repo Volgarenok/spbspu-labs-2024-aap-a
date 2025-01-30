@@ -10,5 +10,4 @@ void kiselev::printCoordinatesRect(std::ostream& output, const CompositeShape& c
     double rightUpY = rect.pos.y + rect.height / 2;
     output << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
   }
-  output << "\n";
 }
