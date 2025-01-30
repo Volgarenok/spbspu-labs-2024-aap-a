@@ -1,6 +1,6 @@
 #ifndef GETLINE_HPP
 #define GETLINE_HPP
-#include "shape.hpp"
+#include "base-types.hpp"
 
 namespace averenkov
 {

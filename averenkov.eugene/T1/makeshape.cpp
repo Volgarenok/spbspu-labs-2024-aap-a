@@ -1,37 +1,46 @@
 #include "makeshape.hpp"
 #include <iostream>
 
-void averenkov::readArray(std::istream& input, double* read, size_t count, bool& error)
+namespace
 {
-  for (size_t i = 0; i < count; i++)
+  void readArray(std::istream& input, double* read, size_t count, bool& error)
   {
-    if (!(input >> read[i]))
+    for (size_t i = 0; i < count; i++)
     {
-      error = true;
-      return;
+      if (!(input >> read[i]))
+      {
+        error = true;
+        return;
+      }
+    }
+  }
+  void readPointsArray(std::istream& input, averenkov::point_t* read, size_t count, bool& error)
+  {
+    for (size_t i = 0; i < count; i++)
+    {
+      if (!(input >> read[i].x >> read[i].y))
+      {
+        error = true;
+        return;
+      }
     }
   }
 }
 
 void averenkov::makeRectangle(averenkov::Shape** shapes, size_t& shapeCount, std::istream& input, bool& errors)
 {
-  double readed[4] = { 0 };
-  readArray(input, readed, 4, errors);
-  point_t a = { readed[0], readed[1] };
-  point_t c = { readed[2], readed[3] };
-  Rectangle* rect = new Rectangle(a, c);
+  point_t points[2] = { 0 };
+  readPointsArray(input, points, 2, errors);
+  Rectangle* rect = new Rectangle(points[0], points[1]);
   shapes[shapeCount++] = rect;
   return;
 }
 
 void averenkov::makeDiamond(averenkov::Shape** shapes, size_t& shapeCount, std::istream& input, bool& errors)
 {
-  double readed[6] = { 0 };
-  readArray(input, readed, 6, errors);
-  point_t a = { readed[0], readed[1] };
-  point_t b = { readed[2], readed[3] };
-  point_t c = { readed[4], readed[5] };
-  Diamond* diam = new Diamond(a, b, c);
+  point_t points[3] = { 0 };
+  readPointsArray(input, points, 3, errors);
+  Diamond* diam = new Diamond(points[0], points[1], points[2]);
   shapes[shapeCount++] = diam;
   return;
 }

@@ -1,5 +1,17 @@
 #include "listCommand.hpp"
-#include "shapeScale.hpp"
+
+namespace
+{
+  averenkov::point_t getLeftBot(const averenkov::rectangle_t& rect)
+  {
+    return { (rect.pos.x - (rect.width / 2)), (rect.pos.y - (rect.height / 2)) };
+  }
+
+  averenkov::point_t getRightTop(const averenkov::rectangle_t& rect)
+  {
+    return { (rect.pos.x + (rect.width / 2)), (rect.pos.y + (rect.height / 2)) };
+  }
+}
 
 void averenkov::destroy(Shape** list, size_t count)
 {
@@ -9,7 +21,7 @@ void averenkov::destroy(Shape** list, size_t count)
   }
 }
 
-double averenkov::calculateTotalArea(Shape** list, size_t count)
+double averenkov::calculateTotalArea(Shape* const * list, size_t count)
 {
   double sum = 0;
   for (size_t i = 0; i < count; i++)
@@ -21,23 +33,36 @@ double averenkov::calculateTotalArea(Shape** list, size_t count)
 
 void averenkov::scaleList(Shape** list, size_t count, point_t scale_center, double factor)
 {
+  if (factor <= 0)
+  {
+    throw std::logic_error("Invalid input");
+  }
   for (size_t i = 0; i < count; ++i)
   {
     list[i]->scale(factor);
-    averenkov::shapeScale(list[i], scale_center, factor);
+    point_t pos = list[i]->getFrameRect().pos;
+    double xplus = scale_center.x - pos.x;
+    double yplus = scale_center.y - pos.y;
+    xplus *= factor;
+    yplus *= factor;
+    point_t newpos =
+    {
+      scale_center.x + (pos.x - scale_center.x) * factor,
+      scale_center.y + (pos.y - scale_center.y) * factor
+    };
+    list[i]->move(newpos);
   }
 }
 
-void averenkov::printList(Shape** list, size_t count)
+void averenkov::printList(Shape* const * list, size_t count)
 {
   std::cout << calculateTotalArea(list, count);
   for (size_t i = 0; i < count; i++)
   {
     averenkov::rectangle_t rect = list[i]->getFrameRect();
-    std::cout << " " << averenkov::getLeftBot(rect).x << " ";
-    std::cout << averenkov::getLeftBot(rect).y << " ";
-    std::cout << averenkov::getRightTop(rect).x << " ";
-    std::cout << averenkov::getRightTop(rect).y;
+    std::cout << " " << getLeftBot(rect).x << " ";
+    std::cout << getLeftBot(rect).y << " ";
+    std::cout << getRightTop(rect).x << " ";
+    std::cout << getRightTop(rect).y;
   }
-  std::cout << "\n";
 }

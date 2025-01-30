@@ -13,12 +13,8 @@ averenkov::Ellipse::Ellipse(const point_t& center, double radius_v, double radiu
   }
 }
 
-void averenkov::Ellipse::scale(double factor)
+void averenkov::Ellipse::scaleNonChecked(double factor)
 {
-  if (factor <= 0)
-  {
-    throw std::logic_error("invalid input");
-  }
   radius_h_ *= factor;
   radius_v_ *= factor;
 }

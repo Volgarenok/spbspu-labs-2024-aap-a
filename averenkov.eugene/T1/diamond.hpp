@@ -10,8 +10,7 @@ namespace averenkov
   public:
     Diamond(const point_t& a, const point_t& b, const point_t& c);
     ~Diamond();
-    Rectangle** buildRectangles(const point_t& a, const point_t& b, const point_t& c);
-    void scale(double factor) override;
+    void scaleNonChecked(double factor) override;
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(const point_t& s) override;

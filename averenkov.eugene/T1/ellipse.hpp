@@ -8,7 +8,7 @@ namespace averenkov
   {
   public:
     Ellipse(const point_t& center, double radius_v, double radius_h);
-    void scale(double factor) override;
+    void scaleNonChecked(double factor) override;
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(const point_t& s) override;

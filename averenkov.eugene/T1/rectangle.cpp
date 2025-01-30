@@ -1,6 +1,5 @@
 #include "rectangle.hpp"
 #include <stdexcept>
-#include "rectanglepoints.hpp"
 #include "base-types.hpp"
 #include "getline.hpp"
 
@@ -25,19 +24,15 @@ averenkov::rectangle_t averenkov::Rectangle::getFrameRect() const
 {
   double width = c_.x - a_.x;
   double height = c_.y - a_.y;
-  point_t pos;
-  pos.x = (a_.x + c_.x) / 2;
-  pos.y = (a_.y + c_.y) / 2;
+  double x = (a_.x + c_.x) / 2;
+  double y = (a_.y + c_.y) / 2;
+  point_t pos = { x, y };
   return { width, height, pos };
 }
 
 
-void averenkov::Rectangle::scale(double factor)
+void averenkov::Rectangle::scaleNonChecked(double factor)
 {
-  if (factor <= 0)
-  {
-    throw std::logic_error("invalid scale");
-  }
   point_t pos = Rectangle::getFrameRect().pos;
   a_.x = pos.x - ((pos.x - a_.x) * factor);
   a_.y = pos.y - ((pos.y - a_.y) * factor);

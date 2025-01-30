@@ -10,7 +10,7 @@ namespace averenkov
     Rectangle(const point_t& a_, const point_t& c_);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void scale(double factor) override;
+    void scaleNonChecked(double factor) override;
     void move(const point_t& s) override;
     void move(double dx, double dy) override;
   private:

@@ -3,7 +3,6 @@
 #include <string>
 #include "dynamicinput.h"
 #include "makeshape.hpp"
-#include "rectanglepoints.hpp"
 #include "listCommand.hpp"
 
 int main()
@@ -55,7 +54,7 @@ int main()
   {
     averenkov::makeScale(factor, scaling_center, std::cin);
   }
-  catch(...)
+  catch (...)
   {
     averenkov::destroy(shapes, shapeCount);
     std::cerr << "Invalid scale\n";
@@ -63,8 +62,17 @@ int main()
   }
   std::cout << std::fixed << std::setprecision(1);
   averenkov::printList(shapes, shapeCount);
-  averenkov::scaleList(shapes, shapeCount, scaling_center, factor);
+  std::cout << "\n";
+  try
+  {
+    averenkov::scaleList(shapes, shapeCount, scaling_center, factor);
+  }
+  catch (...)
+  {
+    std::cerr << "Invalid scale\n";
+  }
   averenkov::printList(shapes, shapeCount);
+  std::cout << "\n";
   averenkov::destroy(shapes, shapeCount);
   if (hasErrors)
   {
