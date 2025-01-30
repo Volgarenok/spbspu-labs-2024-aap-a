@@ -148,4 +148,3 @@ void averenkov::Diamond::move(double dx, double dy)
     rectangles_[i]->move(dx, dy);
   }
 }
-
