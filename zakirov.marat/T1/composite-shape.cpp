@@ -4,9 +4,16 @@
 #include "unified_shapes.hpp"
 
 zakirov::CompositeShape::CompositeShape() :
-  shapes_quantity_(0),
-  shapes_{nullptr}
+  shapes_quantity_(0)
 {
+}
+
+zakirov::CompositeShape::~CompositeShape()
+{
+  for (size_t i = 0; i < shapes_quantity_; ++i)
+  {
+    shapes_[i]->~Shape();
+  }
 }
 
 double zakirov::CompositeShape::getArea()
@@ -14,7 +21,7 @@ double zakirov::CompositeShape::getArea()
   return get_total_area(shapes_, shapes_quantity_);
 }
 
-zakirov::rectangle_t zakirov::CompositeShape::getFrameRect(size_t id)
+zakirov::rectangle_t zakirov::CompositeShape::getFrameRect()
 {
   if (!empty())
   {

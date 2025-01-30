@@ -9,8 +9,9 @@ namespace zakirov
   {
     public:
       CompositeShape();
+      ~CompositeShape();
       double getArea();
-      rectangle_t getFrameRect(size_t id);
+      rectangle_t getFrameRect();
       void move(point_t target);
       void move(double bias_x, double bias_y);
       void scale(double k);
