@@ -9,6 +9,7 @@ namespace duhanina
   {
   public:
     Circle(const point_t& pos, double radius);
+    Circle(const point_t& pos, double radius, size_t count);
     ~Circle();
     double getArea() const override;
     rectangle_t getFrameRect() const override;
@@ -17,7 +18,8 @@ namespace duhanina
     void scaleUnsafe(double k) noexcept override;
 
   private:
-    static constexpr size_t numParts_ = 9;
+    static constexpr size_t defaultNumParts_ = 9;
+    size_t numParts_;
     Shape** ellipses_;
   };
 }

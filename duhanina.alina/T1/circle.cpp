@@ -24,7 +24,12 @@ namespace
 }
 
 duhanina::Circle::Circle(const point_t& pos, double radius):
-  ellipses_(createArray(pos, radius, numParts_))
+  Circle(pos, radius, defaultNumParts_)
+{}
+
+duhanina::Circle::Circle(const point_t& pos, double radius, size_t numParts):
+  numParts_(numParts),
+  ellipses_(createArray(pos, radius, numParts))
 {}
 
 duhanina::Circle::~Circle()
