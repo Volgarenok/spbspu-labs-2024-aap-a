@@ -11,7 +11,8 @@ namespace
 }
 nikonov::Diamond::Diamond(const point_t &p1, const point_t &p2, const point_t &p3):
   lt_({ findTop(p1, p2, p3), findMid(p1, p2, p3), point_t({ 2 * findMid(p1, p2, p3).x - findRight(p1, p2, p3).x, findMid(p1, p2, p3).y }) }),
-  lb_({ point_t({ findTop(p1, p2, p3).x, 2 * findMid(p1, p2, p3).y - findTop(p1, p2, p3).y }), findMid(p1, p2, p3), point_t({ 2 * findMid(p1, p2, p3).x - findRight(p1, p2, p3).x, findMid(p1, p2, p3).y }) }),
+  lb_({ point_t({ findTop(p1, p2, p3).x, 2 * findMid(p1, p2, p3).y - findTop(p1, p2, p3).y }), findMid(p1, p2, p3), \
+    point_t({ 2 * findMid(p1, p2, p3).x - findRight(p1, p2, p3).x, findMid(p1, p2, p3).y }) }),
   rt_({ findTop(p1, p2, p3), findMid(p1, p2, p3), findRight(p1, p2, p3) }),
   rb_({ point_t({ findTop(p1, p2, p3).x, 2 * findMid(p1, p2, p3).y - findTop(p1, p2, p3).y }), findMid(p1, p2, p3), findRight(p1, p2, p3) })
 {
