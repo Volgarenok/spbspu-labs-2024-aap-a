@@ -1,7 +1,6 @@
 #include "rectangle.hpp"
 #include <stdexcept>
 #include "base-types.hpp"
-#include "shape.hpp"
 kiselev::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
   leftDown_(leftDown),
   rightUp_(rightUp)

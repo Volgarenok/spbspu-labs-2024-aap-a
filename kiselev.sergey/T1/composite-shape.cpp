@@ -1,7 +1,5 @@
 #include "composite-shape.hpp"
 #include <cmath>
-#include <cstddef>
-#include <new>
 #include <stdexcept>
 void kiselev::CompositeShape::clear(size_t size) noexcept
 {
@@ -14,13 +12,12 @@ void kiselev::CompositeShape::clear(size_t size) noexcept
 kiselev::CompositeShape::CompositeShape(size_t cap):
   capacity(cap),
   realSize(0),
-  shapes(new Shape *[capacity])
-{
-}
-kiselev::CompositeShape::CompositeShape(const CompositeShape & cmp):
+  shapes(new Shape*[capacity])
+{}
+kiselev::CompositeShape::CompositeShape(const CompositeShape& cmp):
   capacity(cmp.capacity),
   realSize(cmp.realSize),
-  shapes(new Shape *[capacity])
+  shapes(new Shape*[capacity])
 {
   size_t i = 0;
   try
@@ -36,7 +33,7 @@ kiselev::CompositeShape::CompositeShape(const CompositeShape & cmp):
     throw;
   }
 }
-kiselev::CompositeShape::CompositeShape(CompositeShape && cmp) noexcept:
+kiselev::CompositeShape::CompositeShape(CompositeShape&& cmp) noexcept:
   capacity(cmp.capacity),
   realSize(cmp.realSize),
   shapes(cmp.shapes)
@@ -44,7 +41,7 @@ kiselev::CompositeShape::CompositeShape(CompositeShape && cmp) noexcept:
   cmp.shapes = nullptr;
   realSize = 0;
 }
-kiselev::CompositeShape & kiselev::CompositeShape::operator=(const CompositeShape & cmp)
+kiselev::CompositeShape& kiselev::CompositeShape::operator=(const CompositeShape& cmp)
 {
   CompositeShape cpy(cmp);
   std::swap(shapes, cpy.shapes);
@@ -52,7 +49,7 @@ kiselev::CompositeShape & kiselev::CompositeShape::operator=(const CompositeShap
   std::swap(realSize, cpy.realSize);
   return *this;
 }
-kiselev::CompositeShape & kiselev::CompositeShape::operator=(CompositeShape && cmp) noexcept
+kiselev::CompositeShape& kiselev::CompositeShape::operator=(CompositeShape&& cmp) noexcept
 {
   clear(realSize);
   shapes = cmp.shapes;
@@ -62,7 +59,7 @@ kiselev::CompositeShape & kiselev::CompositeShape::operator=(CompositeShape && c
   cmp.realSize = 0;
   return *this;
 }
-void kiselev::CompositeShape::pushBack(Shape * shp)
+void kiselev::CompositeShape::pushBack(Shape* shp)
 {
   if (realSize >= capacity)
   {
@@ -79,7 +76,7 @@ void kiselev::CompositeShape::popBack()
   delete shapes[realSize];
   realSize--;
 }
-const kiselev::Shape * kiselev::CompositeShape::at(size_t id) const
+const kiselev::Shape* kiselev::CompositeShape::at(size_t id) const
 {
   if (id >= realSize)
   {
@@ -87,19 +84,15 @@ const kiselev::Shape * kiselev::CompositeShape::at(size_t id) const
   }
   return shapes[id];
 }
-kiselev::Shape * kiselev::CompositeShape::at(size_t id)
+kiselev::Shape* kiselev::CompositeShape::at(size_t id)
 {
-  if (id >= realSize)
-  {
-    throw std::out_of_range("Index bigger than realSize");
-  }
-  return shapes[id];
+  return const_cast<Shape*>(static_cast<const CompositeShape&>(*this).at(id));
 }
-const kiselev::Shape * kiselev::CompositeShape::operator[](size_t id) const noexcept
+const kiselev::Shape* kiselev::CompositeShape::operator[](size_t id) const noexcept
 {
   return shapes[id];
 }
-kiselev::Shape * kiselev::CompositeShape::operator[](size_t id) noexcept
+kiselev::Shape* kiselev::CompositeShape::operator[](size_t id) noexcept
 {
   return shapes[id];
 }
@@ -157,13 +150,17 @@ void kiselev::CompositeShape::move(double dx, double dy)
 }
 void kiselev::CompositeShape::scale(double k, point_t scale)
 {
+  if (k <= 0)
+  {
+    throw std::logic_error("Incorrect scaling coefficent");
+  }
   for (size_t i = 0; i < realSize; ++i)
   {
-    kiselev::point_t beforeScale = shapes[i]->getFrameRect().pos;
+    point_t beforeScale = shapes[i]->getFrameRect().pos;
     shapes[i]->move(scale);
-    kiselev::point_t afterScale = shapes[i]->getFrameRect().pos;
-    kiselev::point_t vector = { (afterScale.x - beforeScale.x) * k, (afterScale.y - beforeScale.y) * k };
-    shapes[i]->scaleWithCheck(k);
+    point_t afterScale = shapes[i]->getFrameRect().pos;
+    point_t vector = { (afterScale.x - beforeScale.x) * k, (afterScale.y - beforeScale.y) * k };
+    shapes[i]->scale(k);
     shapes[i]->move(-vector.x, -vector.y);
   }
 }
@@ -176,23 +173,7 @@ kiselev::CompositeShape::~CompositeShape()
 {
   clear(realSize);
 }
-kiselev::CompositeShape* kiselev::CompositeShape::clone() const
+kiselev::CompositeShape kiselev::CompositeShape::clone() const
 {
-  CompositeShape* clone = new CompositeShape(capacity);
-  Shape* shape = nullptr;
-  try
-  {
-    for (size_t i = 0; i < realSize; ++i)
-    {
-      shape = shapes[i]->clone();
-      clone->pushBack(shape);
-    }
-  }
-  catch (...)
-  {
-    delete shape;
-    delete clone;
-    throw;
-  }
-  return clone;
+  return CompositeShape(*this);
 }

@@ -1,7 +1,5 @@
 #ifndef DIAMOND_HPP
 #define DIAMOND_HPP
-#include "base-types.hpp"
-#include "shape.hpp"
 #include "complexquad.hpp"
 namespace kiselev
 {

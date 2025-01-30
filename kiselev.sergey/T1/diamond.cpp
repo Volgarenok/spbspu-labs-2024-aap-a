@@ -1,9 +1,6 @@
 #include "diamond.hpp"
 #include <cmath>
 #include <stdexcept>
-#include "base-types.hpp"
-#include "complexquad.hpp"
-#include "shape.hpp"
 namespace
 {
   kiselev::Complexquad createComp(kiselev::point_t p1, kiselev::point_t p2, kiselev::point_t p3, size_t id)
@@ -66,8 +63,7 @@ namespace
 kiselev::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
   comp1(createComp(p1, p2, p3, 1)),
   comp2(createComp(p1, p2, p3, 2))
-{
-}
+{}
 double kiselev::Diamond::getArea() const
 {
   return comp1.getArea() + comp2.getArea();
@@ -81,7 +77,7 @@ void kiselev::Diamond::move(double dx, double dy)
   comp1.move(dx, dy);
   comp2.move(dx, dy);
 }
-void kiselev::Diamond::move(kiselev::point_t a)
+void kiselev::Diamond::move(point_t a)
 {
   point_t center = comp1.getFrameRect().pos;
   double dx = a.x - center.x;

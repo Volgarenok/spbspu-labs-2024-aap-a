@@ -1,5 +1,5 @@
 #include "actionShapes.hpp"
-void kiselev::printCoordinatesRect(std::ostream& output, CompositeShape& cmp)
+void kiselev::printCoordinatesRect(std::ostream& output, const CompositeShape& cmp)
 {
   for (size_t i = 0; i < cmp.size(); ++i)
   {

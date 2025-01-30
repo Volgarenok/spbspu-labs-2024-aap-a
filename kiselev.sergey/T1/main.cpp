@@ -1,8 +1,6 @@
-#include <cstddef>
 #include <exception>
 #include <iomanip>
 #include <iostream>
-#include <stdexcept>
 #include <string>
 #include "actionShapes.hpp"
 #include "composite-shape.hpp"
@@ -25,7 +23,7 @@ int main()
     }
     try
     {
-      isUnknownShape = kiselev::makeShape(std::cin, titleShape, compShp);
+      isUnknownShape = makeShape(std::cin, titleShape, compShp);
       if (titleShape == "SCALE")
       {
         scale = kiselev::makeScale(std::cin);
@@ -65,10 +63,10 @@ int main()
   try
   {
     std::cout << std::fixed << std::setprecision(1) << compShp.getArea();
-    kiselev::printCoordinatesRect(std::cout, compShp);
+    printCoordinatesRect(std::cout, compShp);
     compShp.scale(ratio, scale);
     std::cout << compShp.getArea();
-    kiselev::printCoordinatesRect(std::cout, compShp);
+    printCoordinatesRect(std::cout, compShp);
   }
   catch (const std::exception& e)
   {

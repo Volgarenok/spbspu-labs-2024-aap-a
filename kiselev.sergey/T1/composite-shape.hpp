@@ -7,22 +7,22 @@ namespace kiselev
   class CompositeShape
   {
   public:
-    CompositeShape(const CompositeShape & cmp);
-    CompositeShape(CompositeShape && cmp) noexcept;
+    CompositeShape(const CompositeShape& cmp);
+    CompositeShape(CompositeShape&& cmp) noexcept;
     CompositeShape(size_t cap);
     ~CompositeShape();
-    CompositeShape & operator=(const CompositeShape & cmp);
-    CompositeShape & operator=(CompositeShape && cmp) noexcept;
-    void pushBack(Shape * shp);
+    CompositeShape& operator=(const CompositeShape& cmp);
+    CompositeShape& operator=(CompositeShape&& cmp) noexcept;
+    Shape* operator[](size_t id) noexcept;
+    const Shape* operator[](size_t id) const noexcept;
+    void pushBack(Shape* shp);
     void popBack();
-    const Shape * at(size_t id) const;
-    Shape * at(size_t id);
-    const Shape * operator[](size_t id) const noexcept;
-    Shape * operator[](size_t id) noexcept;
+    Shape* at(size_t id);
+    const Shape* at(size_t id) const;
     bool empty() const noexcept;
     size_t size() const noexcept;
     double getArea() const;
-    CompositeShape* clone() const;
+    CompositeShape clone() const;
     rectangle_t getFrameRect() const;
     void move(point_t a);
     void move(double dx, double dy);
@@ -32,7 +32,7 @@ namespace kiselev
   private:
     size_t capacity;
     size_t realSize;
-    Shape ** shapes;
+    Shape** shapes;
     void clear(size_t size) noexcept;
   };
 }

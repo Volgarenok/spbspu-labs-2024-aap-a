@@ -1,7 +1,7 @@
 #ifndef COMPLEXQUAD_HPP
 #define COMPLEXQUAD_HPP
-#include "shape.hpp"
 #include <cstddef>
+#include "shape.hpp"
 namespace kiselev
 {
   class Complexquad final: public Shape

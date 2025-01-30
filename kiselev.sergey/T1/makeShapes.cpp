@@ -1,9 +1,5 @@
 #include "makeShapes.hpp"
 #include <cmath>
-#include <cstddef>
-#include <iostream>
-#include <istream>
-#include "base-types.hpp"
 #include "complexquad.hpp"
 #include "diamond.hpp"
 #include "rectangle.hpp"
@@ -60,9 +56,9 @@ kiselev::point_t kiselev::makeScale(std::istream& input)
   inputCoordinates(input, arrCoordinates, quantity);
   return { arrCoordinates[0], arrCoordinates[1] };
 }
-bool kiselev::makeShape(std::istream& input, std::string& str, kiselev::CompositeShape& compShp)
+bool kiselev::makeShape(std::istream& input, const std::string& str, CompositeShape& compShp)
 {
-  kiselev::Shape * shape = nullptr;
+  Shape* shape = nullptr;
   try
   {
     if (str == "RECTANGLE")
