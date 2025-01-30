@@ -8,7 +8,16 @@ hismatova::Concave::Concave(const point_t &a, const point_t &b, const point_t &c
   b_(b),
   c_(c),
   d_(d)
-{}
+{
+  double a0 = 0.5 * std::abs(a_.x * (b_.y - c_.y) + b_.x * (c_.y - a_.y) + c_.x * (a_.y - b_.y));
+  double a1 = 0.5 * std::abs(d_.x * (b_.y - c_.y) + b_.x * (c_.y - d_.y) + c_.x * (d_.y - b_.y));
+  double a2 = 0.5 * std::abs(a_.x * (d_.y - c_.y) + d_.x * (c_.y - a_.y) + c_.x * (a_.y - d_.y));
+  double a3 = 0.5 * std::abs(a_.x * (b_.y - d_.y) + b_.x * (d_.y - a_.y) + d_.x * (a_.y - b_.y));
+  if (a0 <= 0 || (a0 != a1 + a2 + a3) || a1 <= 0 || a2 <= 0 || a3 <= 0)
+  {
+    throw std::invalid_argument("concave cannot be built");
+  }
+}
 double hismatova::Concave::getArea() const
 {
   double triangle1Area = 0.5 * std::abs(a_.x * (b_.y - c_.y) + b_.x * (c_.y - a_.y) + c_.x * (a_.y - b_.y));
@@ -48,10 +57,6 @@ void hismatova::Concave::scalePoint(point_t& point, const point_t& center, doubl
 }
 void hismatova::Concave::scale(double index)
 {
-  if (index <= 0)
-  {
-    throw std::invalid_argument("Scale factor must be positive.");
-  }
   point_t center = this->getFrameRect().pos;
   scalePoint(a_, center, index);
   scalePoint(b_, center, index);

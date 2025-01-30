@@ -7,7 +7,12 @@ hismatova::Triangle::Triangle(const point_t &a, const point_t &b, const point_t 
   a_(a),
   b_(b),
   c_(c)
-{}
+{
+  if (0.5 * std::abs(a_.x * (b_.y - c_.y) + b_.x * (c_.y - a_.y) + c_.x * (a_.y - b_.y)) <= 0)
+  {
+    throw std::invalid_argument("triangle cannot be built");
+  }
+}
 double hismatova::Triangle::getArea() const
 {
   return 0.5 * std::abs(a_.x * (b_.y - c_.y) + b_.x * (c_.y - a_.y) + c_.x * (a_.y - b_.y));
@@ -38,10 +43,6 @@ void hismatova::Triangle::move(double dx, double dy)
 }
 void hismatova::Triangle::scale(double index)
 {
-  if (index <= 0)
-  {
-    throw std::invalid_argument("Scale factor must be positive.");
-  }
   point_t centroid = this->getCentroid();
   a_.x = centroid.x + (a_.x - centroid.x) * index;
   a_.y = centroid.y + (a_.y - centroid.y) * index;

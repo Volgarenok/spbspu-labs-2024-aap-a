@@ -5,7 +5,12 @@
 hismatova::Rectangle::Rectangle(const point_t& bottomLeft, const point_t& topRight):
   bottomLeft_(bottomLeft),
   topRight_(topRight)
-{}
+{
+  if ((topRight_.y - bottomLeft_.y) * (topRight_.x - bottomLeft_.x) <= 0 || topRight_.y <= bottomLeft_.y || topRight_.x <= bottomLeft_.x)
+  {
+    throw std::invalid_argument("rectangle cannot be built");
+  }
+}
 double hismatova::Rectangle::getArea() const
 {
   double width = topRight_.x - bottomLeft_.x;
@@ -34,10 +39,6 @@ void hismatova::Rectangle::move(double dx, double dy)
 }
 void hismatova::Rectangle::scale(double index)
 {
-  if (index <= 0)
-  {
-    throw std::invalid_argument("Scale factor must be positive.");
-  }
   point_t center = this->getFrameRect().pos;
   bottomLeft_.x = center.x + (bottomLeft_.x - center.x) * index;
   bottomLeft_.y = center.y + (bottomLeft_.y - center.y) * index;

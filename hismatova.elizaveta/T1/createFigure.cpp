@@ -1,40 +1,38 @@
 #include "createFigure.hpp"
 #include <iostream>
+#include <stdexcept>
 
+namespace hismatova
+{
+  void readPoints(std::istream& in, double* points, int size)
+  {
+    for (int i = 0; i < size; ++i)
+    {
+      if (!(in >> points[i]))
+      {
+        throw std::invalid_argument("Invalid input for points");
+      }
+    }
+  }
+}
 hismatova::Rectangle* hismatova::createRectangle(std::istream& in)
 {
-  double left_x = 0, left_y = 0, right_x = 0, right_y = 0;
-  in >> left_x >> left_y >> right_x >> right_y;
-  if (left_y >= right_y || left_x >= right_x)
-  {
-    throw std::invalid_argument("rectangle cannot be built");
-  }
-  Rectangle* rectangle_ = new Rectangle({ left_x, left_y }, { right_x, right_y });
+  double coordinates[4];
+  readPoints(in, coordinates, 4);
+  Rectangle* rectangle_ = new Rectangle({ coordinates[0], coordinates[1] }, { coordinates[2], coordinates[3] });
   return rectangle_;
 }
 hismatova::Triangle* hismatova::createTriangle(std::istream& in)
 {
-  double x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0;
-  in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-  if (0.5 * std::abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) <= 0)
-  {
-    throw std::invalid_argument("triangle cannot be built");
-  }
-  Triangle* triangle_ = new Triangle({ x1, y1 }, { x2, y2 }, { x3, y3 });
+  double coordinates[6];
+  readPoints(in, coordinates, 6);
+  Triangle* triangle_ = new Triangle({ coordinates[0], coordinates[1] }, { coordinates[2], coordinates[3] }, { coordinates[4], coordinates[5] });
   return triangle_;
 }
 hismatova::Concave* hismatova::createConcave(std::istream& in)
 {
-  double x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0, x4 = 0, y4 = 0;
-  in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
-  double a = 0.5 * std::abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2));
-  double a1 = 0.5 * std::abs(x4 * (y2 - y3) + x2 * (y3 - y4) + x3 * (y4 - y2));
-  double a2 = 0.5 * std::abs(x1 * (y4 - y3) + x4 * (y3 - y1) + x3 * (y1 - y4));
-  double a3 = 0.5 * std::abs(x1 * (y2 - y4) + x2 * (y4 - y1) + x4 * (y1 - y2));
-  if (a > 0 && (a = a1 + a2 + a3) && a1 > 0 && a2 > 0 && a3 > 0)
-  {
-    Concave* concave_ = new Concave( { x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 });
-    return concave_;
-  }
-  throw std::invalid_argument("concave cannot be built");
+  double coordinates[8];
+  readPoints(in, coordinates, 8);
+  Concave* concave_ = new Concave({ coordinates[0], coordinates[1] }, { coordinates[2], coordinates[3] }, { coordinates[4], coordinates[5] }, { coordinates[6], coordinates[7] });
+  return concave_;
 }

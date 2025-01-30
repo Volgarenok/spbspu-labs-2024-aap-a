@@ -11,6 +11,34 @@ namespace hismatova
       delete figures[i];
     }
   }
+  Shape* createFigure(const std::string& name, std::istream& in, bool& errors)
+  {
+    try
+    {
+      if (name == "RECTANGLE")
+      {
+        return createRectangle(in);
+      }
+      else if (name == "TRIANGLE")
+      {
+        return createTriangle(in);
+      }
+      else if (name == "CONCAVE")
+      {
+        return createConcave(in);
+      }
+    }
+    catch (const std::invalid_argument&)
+    {
+      errors = true;
+    }
+    catch (const std::bad_alloc&)
+    {
+      std::cerr << "out of memory\n";
+      exit(1);
+    }
+    return nullptr;
+  }
   void results(std::ostream& out, Shape** const figures, size_t count)
   {
     double sum = 0.0;
@@ -18,7 +46,7 @@ namespace hismatova
     {
       if (figures[i])
       {
-        sum = sum + figures[i]->getArea();
+        sum += figures[i]->getArea();
       }
     }
     out << std::fixed << std::setprecision(1) << sum;
@@ -34,6 +62,7 @@ namespace hismatova
     out << "\n";
   }
 }
+
 int main()
 {
   using namespace hismatova;
@@ -42,99 +71,51 @@ int main()
   bool scales = false;
   Shape* figures[10000];
   std::string nameFigure;
-  while (std::cin >> nameFigure)
+  while (std::cin >> nameFigure && nameFigure != "SCALE")
   {
-    if (nameFigure == "RECTANGLE")
+    Shape* figure = createFigure(nameFigure, std::cin, errors);
+    if (figure)
     {
-      try
-      {
-        figures[count] = createRectangle(std::cin);
-        count++;
-      }
-      catch (const std::invalid_argument&)
-      {
-        errors = true;
-      }
-      catch (const std::bad_alloc&)
-      {
-        std::cerr << "out of memory\n";
-        deleteFigures(figures, count);
-        return 1;
-      }
+      figures[count++] = figure;
     }
-    else if (nameFigure == "TRIANGLE")
+  }
+  if (nameFigure == "SCALE")
+  {
+    if (count == 0)
     {
-      try
-      {
-        figures[count] = createTriangle(std::cin);
-        count++;
-      }
-      catch (const std::invalid_argument&)
-      {
-        errors = true;
-      }
-      catch (const std::bad_alloc&)
-      {
-        std::cerr << "out of memory\n";
-        deleteFigures(figures, count);
-        return 1;
-      }
+      std::cerr << "there is no figures\n";
+      deleteFigures(figures, count);
+      return 1;
     }
-    else if (nameFigure == "CONCAVE")
+    double x = 0, y = 0;
+    point_t point_;
+    std::cin >> x >> y;
+    point_.x = x;
+    point_.y = y;
+    double index = 0;
+    std::cin >> index;
+    if (index <= 0)
     {
-      try
-      {
-        figures[count] = createConcave(std::cin);
-        count++;
-      }
-      catch (const std::invalid_argument&)
-      {
-        errors = true;
-      }
-      catch (const std::bad_alloc&)
-      {
-        std::cerr << "out of memory\n";
-        deleteFigures(figures, count);
-        return 1;
-      }
+      std::cerr << "index must be positive\n";
+      deleteFigures(figures, count);
+      return 1;
     }
-    else if (nameFigure == "SCALE")
+    scales = true;
+    results(std::cout, figures, count);
+    for (size_t i = 0; i < count; i++)
     {
-      if (count == 0)
-      {
-        std::cerr << "there is no figures\n";
-        deleteFigures(figures, count);
-        return 1;
-      }
-      double x = 0, y = 0;
-      point_t point_;
-      std::cin >> x >> y;
-      point_.x = x;
-      point_.y = y;
-      double index = 0;
-      std::cin >> index;
-      if (index <= 0)
-      {
-        std::cerr << "index must be positive\n";
-        deleteFigures(figures, count);
-        return 1;
-      }
-      scales = true;
-      results(std::cout, figures, count);
-      for (size_t i = 0; i < count; i++)
-      {
-        point_t pos = figures[i]->getFrameRect().pos;
-        figures[i]->move(point_);
-        point_t pos2 = figures[i]->getFrameRect().pos;
-        point_t p2;
-        p2.x = (pos2.x - pos.x) * index;
-        p2.y = (pos2.y - pos.y) * index;
-        figures[i]->scale(index);
-        figures[i]->move(-1 * p2.x, -1 * p2.y);
-      }
-      results(std::cout, figures, count);
-      break;
+      point_t pos = figures[i]->getFrameRect().pos;
+      figures[i]->move(point_);
+      point_t pos2 = figures[i]->getFrameRect().pos;
+      point_t p2;
+      p2.x = (pos2.x - pos.x) * index;
+      p2.y = (pos2.y - pos.y) * index;
+      figures[i]->scale(index);
+      figures[i]->move(-1 * p2.x, -1 * p2.y);
     }
+    results(std::cout, figures, count);
+    deleteFigures(figures, count);
+    return 0;
   }
   if (!scales)
   {
@@ -144,7 +125,7 @@ int main()
   }
   else if (errors)
   {
-    std::cerr << "error in parametrs\n";
+    std::cerr << "error in parameters\n";
   }
   deleteFigures(figures, count);
 }
