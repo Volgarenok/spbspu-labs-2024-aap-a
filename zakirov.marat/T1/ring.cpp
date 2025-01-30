@@ -2,8 +2,6 @@
 #include <cmath>
 #include <stdexcept>
 
-#include <iostream>
-
 zakirov::Ring::Ring(point_t center, double ex_radius, double in_radius):
   center_(center),
   ex_radius_(ex_radius),

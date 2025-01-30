@@ -1,51 +1,41 @@
 #include "composite-shape.hpp"
-#include "base-types.hpp"
-#include "unified_shapes.hpp"
+#include <cstring>
 #include <stdexcept>
+#include "unified_shapes.hpp"
 
-zakirov::CompositeShape::CompositeShape(point_t center, double radius)
+zakirov::CompositeShape::CompositeShape() :
+  shapes_quantity_(0),
+  shapes_{nullptr}
 {
-  constexpr size_t possible_quantity = 1000;
-  center_ = center;
-  radius_ = radius;
-  double in_radius = 0.1;
-  double ex_radius = 0.2;
-  while ((radius - in_radius) / (ex_radius - in_radius) > possible_quantity)
-  {
-    ex_radius += 0.1;
-  }
-
-  ring_thickness_ = ex_radius - in_radius;
-  ex_radius_ = in_radius;
-  ring_quantity_ = 0;
-  Shape * shapes[possible_quantity] = {};
-  while (ex_radius_ < radius_)
-  {
-    push_back(shapes);
-  }
-
-  shapes_ = shapes;
 }
 
-double zakirov::CompositeShape::getArea() const
+double zakirov::CompositeShape::getArea()
 {
-  double total_area = 0.0;
-  for (size_t i = 0; i < ring_quantity_; ++i)
-  {
-    total_area += shapes_[i]->getArea();
-  }
-
-  return total_area;
+  return get_total_area(shapes_, shapes_quantity_);
 }
 
-zakirov::rectangle_t zakirov::CompositeShape::getFrameRect() const
+zakirov::rectangle_t zakirov::CompositeShape::getFrameRect(size_t id)
 {
-  return shapes_[ring_quantity_ - 1]->getFrameRect();
+  if (!empty())
+  {
+    throw std::logic_error("ERROR: empty array");
+  }
+
+  point_t min_p = {shapes_[0]->getFrameRect().pos.x, shapes_[0]->getFrameRect().pos.y};
+  point_t max_p = min_p;
+  for (size_t i = 1; i < shapes_quantity_; ++i)
+  {
+    point_t real_p = shapes_[i]->getFrameRect().pos;
+    min_p = (min_p.x >= real_p.x && min_p.y >= real_p.y) ? real_p : min_p;    
+    max_p = (max_p.x <= real_p.x && max_p.y <= max_p.y) ? real_p : max_p;
+  }
+
+  return {max_p.x - min_p.x, max_p.y - min_p.y, get_middle(min_p, max_p)};
 }
 
 void zakirov::CompositeShape::move(point_t target)
 {
-  for (size_t i = 0; i < ring_quantity_; ++i)
+  for (size_t i = 0; i < shapes_quantity_; ++i)
   {
     shapes_[i]->move(target);
   }
@@ -53,7 +43,7 @@ void zakirov::CompositeShape::move(point_t target)
 
 void zakirov::CompositeShape::move(double bias_x, double bias_y)
 {
-  for (size_t i = 0; i < ring_quantity_; ++i)
+  for (size_t i = 0; i < shapes_quantity_; ++i)
   {
     shapes_[i]->move(bias_x, bias_y);
   }
@@ -61,38 +51,34 @@ void zakirov::CompositeShape::move(double bias_x, double bias_y)
 
 void zakirov::CompositeShape::scale(double k)
 {
-  for (size_t i = 0; i < ring_quantity_; ++i)
+  for (size_t i = 0; i < shapes_quantity_; ++i)
   {
     shapes_[i]->scale(k);
   }
 }
 
-void zakirov::CompositeShape::push_back(Shape ** shape)
+void zakirov::CompositeShape::push_back(Shape * shape)
 {
-  shape[ring_quantity_] = zakirov::make_ring(center_.x, center_.y, ex_radius_, ex_radius_ + ring_thickness_);
-  ++ring_quantity_;
-  ex_radius_ += ring_thickness_;
+  shapes_[shapes_quantity_++] = shape;
 }
 
 void zakirov::CompositeShape::pop_back()
 {
-  if(!this->empty())
+  if (!empty())
   {
-    --ring_quantity_;
-    shapes_[ring_quantity_]->~Shape();
+    throw std::logic_error("ERROR: empty array");
   }
+
+  shapes_[--shapes_quantity_]->~Shape();
 }
 
 zakirov::Shape * zakirov::CompositeShape::at(size_t id)
 {
-  if (id < ring_quantity_)
+  if (id >= shapes_quantity_)
   {
-    return shapes_[id];
+    throw std::invalid_argument("ERROR: id is greater, than size of array");
   }
-  else
-  {
-    throw std::out_of_range("Incorrect id");
-  }
+  return shapes_[id];
 }
 
 zakirov::Shape * zakirov::CompositeShape::operator[](size_t id)
@@ -102,17 +88,16 @@ zakirov::Shape * zakirov::CompositeShape::operator[](size_t id)
 
 bool zakirov::CompositeShape::empty()
 {
-  if (ring_quantity_ == 0)
+  if (shapes_quantity_ != 0)
   {
-    return true;
+    return 1;
   }
-  else
-  {
-    return false;
-  }
+
+  return 0;
 }
 
 size_t zakirov::CompositeShape::size()
 {
-  return ring_quantity_;
+  return shapes_quantity_;
 }
+  

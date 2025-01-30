@@ -1,9 +1,9 @@
 #include "unified_shapes.hpp"
+#include <cstddef>
 #include <cstring>
+#include <memory>
 #include <stdexcept>
 #include <resize_line.hpp>
-#include <cstddef>
-#include <memory>
 
 namespace
 {

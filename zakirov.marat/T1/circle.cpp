@@ -2,10 +2,8 @@
 #include <cmath>
 #include <cstddef>
 #include <stdexcept>
-#include "unified_shapes.hpp"
 #include "ring.hpp"
 #include "unified_shapes.hpp"
-#include <iostream>
 
 zakirov::Circle::Circle(point_t center, double radius)
 {

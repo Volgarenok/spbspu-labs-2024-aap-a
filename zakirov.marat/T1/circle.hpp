@@ -17,8 +17,8 @@ namespace zakirov
     void move(double bias_x, double bias_y) override;
     void scale(double k) override;
   private:
-    static constexpr size_t rings_size_ = 10;
-    static constexpr double first_in_radius_ = 0.1;
+    static constexpr size_t rings_size_ = 100;
+    static constexpr double first_in_radius_ = 0.01;
     Ring * rings_[rings_size_];
   };
 }
