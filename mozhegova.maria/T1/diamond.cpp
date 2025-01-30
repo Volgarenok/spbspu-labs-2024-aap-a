@@ -44,8 +44,8 @@ namespace
       throw std::invalid_argument("Incorrect coordinates");
     }
     mozhegova::point_t coor[4] = {};
-    double dx = std::abs(pCent.x - pHori.x);
-    double dy = std::abs(pCent.y - pVert.y);
+    double dx = std::fabs(pCent.x - pHori.x);
+    double dy = std::fabs(pCent.y - pVert.y);
     coor[0] = {pCent.x, pCent.y - dy};
     coor[1] = {pCent.x + dx, pCent.y};
     coor[2] = {pCent.x, pCent.y + dy};
