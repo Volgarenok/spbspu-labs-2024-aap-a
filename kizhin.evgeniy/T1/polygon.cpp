@@ -6,7 +6,7 @@
 namespace kizhin {
   void copy(const point_t*, const point_t*, point_t*);
   bool hasDuplicates(const point_t*, const point_t*);
-  size_t countEqual(const point_t*, const point_t*, const point_t);
+  bool isUnique(const point_t*, const point_t*, const point_t&);
 }
 
 kizhin::Polygon::Polygon(const Polygon& rhs):
@@ -153,19 +153,21 @@ void kizhin::copy(const point_t* first, const point_t* last, point_t* result)
 bool kizhin::hasDuplicates(const point_t* begin, const point_t* end)
 {
   for (const point_t* i = begin; i != end; ++i) {
-    if (countEqual(begin, end, *i) > 1) {
+    if (isUnique(begin, end, *i)) {
       return true;
     }
   }
   return false;
 }
 
-size_t kizhin::countEqual(const point_t* begin, const point_t* end, const point_t val)
+bool kizhin::isUnique(const point_t* begin, const point_t* end, const point_t& val)
 {
-  size_t count = 0;
-  for (; begin != end; ++begin) {
+  for (size_t count = 0; begin != end; ++begin) {
     count += begin->x == val.x && begin->y == val.y;
+    if (count == 2) {
+      return true;
+    }
   }
-  return count;
+  return false;
 }
 
