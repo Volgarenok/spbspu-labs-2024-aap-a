@@ -7,7 +7,7 @@ smirnov::Parallelogram::Parallelogram(point_t p1, point_t p2, point_t p3):
   vertex1{p1},
   vertex2{p2},
   vertex3{p3},
-  vertex4{p1.x + p1.x - p2.x, p1.y + p3.y - p2.y}
+  vertex4{p1.x + p3.x - p2.x, p1.y + p3.y - p2.y}
 {
   if ((p1.x == p3.x && p2.y == p3.y) || (p2.x == p3.x && p1.y == p3.y))
   {
@@ -73,6 +73,6 @@ void smirnov::Parallelogram::scale(double k)
       (vertex2.y - center.y) * k + center.y};
   vertex3 = {(vertex3.x - center.x) * k + center.x,
       (vertex3.y - center.y) * k + center.y};
-  vertex4 = {vertex1.x + vertex3.x - vertex2.x,
-      vertex1.y + vertex3.y - vertex2.y};
+  vertex4 = {vertex1.x + (vertex3.x - vertex2.x),
+      vertex1.y + (vertex3.y - vertex2.y)};
 }
