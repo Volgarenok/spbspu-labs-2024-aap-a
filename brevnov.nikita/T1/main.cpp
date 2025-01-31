@@ -45,6 +45,7 @@ int main()
       scaleCommand = true;
       break;
     }
+  }
     else
     {
       try
