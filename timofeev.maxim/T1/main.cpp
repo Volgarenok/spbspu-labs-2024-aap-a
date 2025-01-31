@@ -84,7 +84,7 @@ int main()
       std::cin >> iso_pos.x >> iso_pos.y >> factor;
       if (factor <= 0)
       {
-        std::cerr  << "factor must be positive\n";
+        std::cerr  << "Factor must be positive\n";
         shape_delete(shapes, count);
         return 1;
       }
