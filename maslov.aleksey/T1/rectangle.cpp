@@ -83,14 +83,11 @@ maslov::rectangle_t maslov::Rectangle::getFrameRect() const
   {
     for (size_t j = 0; j < nWidth_; j++)
     {
-      if (regularArray_[i * 1 + j] != nullptr)
-      {
-        point_t center = regularArray_[i * 1 + j]->getFrameRect().pos;
-        maxX = std::max(maxX, center.x);
-        minX = std::min(minX, center.x);
-        maxY = std::max(maxY, center.y);
-        minY = std::min(minY, center.y);
-      }
+      point_t center = regularArray_[i * 1 + j]->getFrameRect().pos;
+      maxX = std::max(maxX, center.x);
+      minX = std::min(minX, center.x);
+      maxY = std::max(maxY, center.y);
+      minY = std::min(minY, center.y);
     }
   }
   double centerX = (minX + maxX) / 2.0;

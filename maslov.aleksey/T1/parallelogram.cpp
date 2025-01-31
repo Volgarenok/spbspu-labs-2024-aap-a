@@ -39,10 +39,7 @@ void maslov::Parallelogram::move(point_t s)
   point_t center = getFrameRect().pos;
   double dx = s.x - center.x;
   double dy = s.y - center.y;
-  first_ = {first_.x + dx, first_.y + dy};
-  second_ = {second_.x + dx, second_.y + dy};
-  third_ = {third_.x + dx, third_.y + dy};
-  fourth_ = {fourth_.x + dx, fourth_.y + dy};
+  move(dx, dy);
 }
 void maslov::Parallelogram::move(double dx, double dy)
 {

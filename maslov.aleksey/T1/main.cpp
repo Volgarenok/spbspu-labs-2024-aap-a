@@ -7,17 +7,18 @@
 
 int main()
 {
-  maslov::CompositeShape compositeShape;
+  using namespace maslov;
+  CompositeShape compositeShape;
   try
   {
-    maslov::inputShapes(std::cin, compositeShape);
+    inputShapes(std::cin, compositeShape);
   }
   catch (const std::runtime_error & e)
   {
     std::cerr << e.what() << '\n';
     return 1;
   }
-  catch (const std::bad_alloc & e)
+  catch (const std::bad_alloc &)
   {
     std::cerr << "Memory was not allocated\n";
     return 1;
@@ -27,17 +28,17 @@ int main()
   if (scaleFactor <= 0.0)
   {
     std::cerr << "Incorrect scale factor\n";
-    maslov::destroyShapes(compositeShape);
+    destroyShapes(compositeShape);
     return 1;
   }
-  maslov::point_t scaleCoordinate = {centerX, centerY};
+  point_t scaleCoordinate = {centerX, centerY};
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << maslov::getSumArea(compositeShape) << " ";
-  maslov::printCoordinates(std::cout, compositeShape);
+  std::cout << getSumArea(compositeShape) << " ";
+  printCoordinates(std::cout, compositeShape);
   std::cout << "\n";
-  maslov::scaleShapes(compositeShape, scaleCoordinate, scaleFactor);
-  std::cout << maslov::getSumArea(compositeShape) << " ";
-  maslov::printCoordinates(std::cout, compositeShape);
+  scaleShapes(compositeShape, scaleCoordinate, scaleFactor);
+  std::cout << getSumArea(compositeShape) << " ";
+  printCoordinates(std::cout, compositeShape);
   std::cout << "\n";
-  maslov::destroyShapes(compositeShape);
+  destroyShapes(compositeShape);
 }

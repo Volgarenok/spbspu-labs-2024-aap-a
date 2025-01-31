@@ -18,7 +18,8 @@ namespace maslov
     const Shape * operator[](size_t id) const;
     void push_back(Shape * shp);
     void pop_back();
-    Shape * at(size_t id) const;
+    const Shape * at(size_t id) const;
+    Shape * at(size_t id);
     bool empty() const;
     size_t size() const;
     double getArea() const;

@@ -18,7 +18,8 @@ namespace maslov
     Shape * clone() const override;
    private:
     Regular ** regularArray_;
-    size_t n_, nWidth_;
+    size_t n_;
+    size_t nWidth_;
     void clear(size_t count);
   };
 }

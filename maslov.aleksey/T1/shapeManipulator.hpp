@@ -6,12 +6,10 @@
 
 namespace maslov
 {
-  double getSumArea(const CompositeShape & compositeShape);
-  void scaleShapes(CompositeShape & compositeShape,
-      const point_t scaleCoordinate, const double scaleFactor);
-  void printCoordinates(std::ostream & out,
-      const CompositeShape & compositeShape);
-  void destroyShapes(CompositeShape & compositeShape);
+  double getSumArea(const CompositeShape &);
+  void scaleShapes(CompositeShape &, const point_t coordinate, const double factor);
+  void printCoordinates(std::ostream &, const CompositeShape &);
+  void destroyShapes(CompositeShape &);
 }
 
 #endif

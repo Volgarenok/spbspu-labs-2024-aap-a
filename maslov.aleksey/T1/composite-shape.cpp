@@ -26,7 +26,7 @@ maslov::CompositeShape::CompositeShape(CompositeShape && rhs):
 }
 maslov::CompositeShape & maslov::CompositeShape::operator=(const CompositeShape & rhs)
 {
-  if (this != &rhs)
+  if (this != std::addressof(rhs))
   {
     destroyShapes(*this);
     size_ = rhs.size_;
@@ -39,7 +39,7 @@ maslov::CompositeShape & maslov::CompositeShape::operator=(const CompositeShape 
 }
 maslov::CompositeShape & maslov::CompositeShape::operator=(CompositeShape && rhs)
 {
-  if (this != &rhs)
+  if (this != std::addressof(rhs))
   {
     destroyShapes(*this);
     size_ = rhs.size_;
@@ -67,7 +67,15 @@ void maslov::CompositeShape::pop_back()
   }
   delete shapeArray_[--size_];
 }
-maslov::Shape * maslov::CompositeShape::at(size_t id) const
+maslov::Shape * maslov::CompositeShape::at(size_t id)
+{
+  if (id >= size_)
+  {
+    throw std::out_of_range("Index out of range");
+  }
+  return shapeArray_[id];
+}
+const maslov::Shape * maslov::CompositeShape::at(size_t id) const
 {
   if (id >= size_)
   {
@@ -77,18 +85,10 @@ maslov::Shape * maslov::CompositeShape::at(size_t id) const
 }
 maslov::Shape * maslov::CompositeShape::operator[](size_t id)
 {
-  if (id >= size_)
-  {
-    throw std::out_of_range("Index out of range");
-  }
   return shapeArray_[id];
 }
 const maslov::Shape * maslov::CompositeShape::operator[](size_t id) const
 {
-  if (id >= size_)
-  {
-    throw std::out_of_range("Index out of range");
-  }
   return shapeArray_[id];
 }
 bool maslov::CompositeShape::empty() const

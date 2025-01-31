@@ -7,7 +7,7 @@
 
 namespace
 {
-  maslov::Shape * makeShape(std::istream & in, std::string name);
+  maslov::Shape * makeShape(std::istream & in, const std::string & name);
 }
 
 void maslov::inputShapes(std::istream & in, maslov::CompositeShape & compositeShape)
@@ -31,11 +31,11 @@ void maslov::inputShapes(std::istream & in, maslov::CompositeShape & compositeSh
         compositeShape.push_back(shape);
       }
     }
-    catch (const std::invalid_argument & e)
+    catch (const std::invalid_argument &)
     {
       incorrectedFlag = true;
     }
-    catch (const std::bad_alloc & e)
+    catch (const std::bad_alloc &)
     {
       destroyShapes(compositeShape);
       throw;
@@ -50,7 +50,7 @@ void maslov::inputShapes(std::istream & in, maslov::CompositeShape & compositeSh
   {
     std::cerr << "There were wrong shapes\n";
   }
-  if (compositeShape.size() == 0)
+  if (compositeShape.empty())
   {
     throw std::runtime_error("There are no shapes");
   }
@@ -97,7 +97,7 @@ namespace
     maslov::Parallelogram * parallelogram = new maslov::Parallelogram(firstP, secondP, thirdP);
     return parallelogram;
   }
-  maslov::Shape * makeShape(std::istream & in, std::string name)
+  maslov::Shape * makeShape(std::istream & in, const std::string & name)
   {
     if (name == "RECTANGLE")
     {
