@@ -24,7 +24,7 @@ namespace kizhin {
     Shape** data() const noexcept;
     rectangle_t getFrameRect() const;
     double getArea() const;
-    CompositeShape* clone() const;
+    CompositeShape clone() const;
 
     const Shape* at(size_t) const;
     Shape* at(size_t);

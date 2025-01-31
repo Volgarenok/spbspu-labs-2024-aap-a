@@ -115,21 +115,9 @@ double kizhin::CompositeShape::getArea() const
   return totalArea;
 }
 
-kizhin::CompositeShape* kizhin::CompositeShape::clone() const
+kizhin::CompositeShape kizhin::CompositeShape::clone() const
 {
-  CompositeShape* newComposite = new CompositeShape();
-  Shape* clone = nullptr;
-  try {
-    for (const Shape* const* i = begin_; i != end_; ++i) {
-      clone = (*i)->clone();
-      newComposite->push_back(clone);
-    }
-  } catch (...) {
-    delete clone;
-    delete newComposite;
-    throw;
-  }
-  return newComposite;
+  return CompositeShape(*this);
 }
 
 void kizhin::CompositeShape::move(const point_t& newPos)
