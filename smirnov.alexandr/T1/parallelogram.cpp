@@ -50,14 +50,10 @@ void smirnov::Parallelogram::move(point_t newPos)
 
 void smirnov::Parallelogram::move(double dx, double dy)
 {
-  vertex1.x += dx;
-  vertex1.y += dy;
-  vertex2.x += dx;
-  vertex2.y += dy;
-  vertex3.x += dx;
-  vertex3.y += dy;
-  vertex4.x += dx;
-  vertex4.y += dy;
+  applyMove(vertex1, dx, dy);
+  applyMove(vertex2, dx, dy);
+  applyMove(vertex3, dx, dy);
+  applyMove(vertex4, dx, dy);
 }
 
 void smirnov::Parallelogram::scale(double k)
@@ -67,12 +63,8 @@ void smirnov::Parallelogram::scale(double k)
     throw std::invalid_argument("Zoom coefficient must be positive");
   }
   point_t center = getFrameRect().pos;
-  vertex1 = {(vertex1.x - center.x) * k + center.x,
-      (vertex1.y - center.y) * k + center.y};
-  vertex2 = {(vertex2.x - center.x) * k + center.x,
-      (vertex2.y - center.y) * k + center.y};
-  vertex3 = {(vertex3.x - center.x) * k + center.x,
-      (vertex3.y - center.y) * k + center.y};
-  vertex4 = {vertex1.x + (vertex3.x - vertex2.x),
-      vertex1.y + (vertex3.y - vertex2.y)};
+  applyScale(vertex1, center, k);
+  applyScale(vertex2, center, k);
+  applyScale(vertex3, center, k);
+  applyScale(vertex4, center, k);
 }

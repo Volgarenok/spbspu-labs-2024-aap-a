@@ -32,8 +32,7 @@ void smirnov::Square::move(point_t newPos)
 
 void smirnov::Square::move(double dx, double dy)
 {
-  lowerLeft.x += dx;
-  lowerLeft.y += dy;
+  applyMove(lowerLeft, dx, dy);
 }
 
 void smirnov::Square::scale(double k)
@@ -44,6 +43,5 @@ void smirnov::Square::scale(double k)
   }
   point_t center = getFrameRect().pos;
   sideLength *= k;
-  lowerLeft.x = center.x - sideLength / 2;
-  lowerLeft.y = center.y - sideLength / 2;
+  applyScale(lowerLeft, center, k);
 }
