@@ -27,7 +27,15 @@ int main()
     }
     else if (input_shape == "SCALE")
     {
-      scale_p = brevnov::scale(std::cin);
+      try
+      {
+        scale_p = brevnov::scale(std::cin);
+      }
+      catch (const std::invalid_argument& f)
+      {
+        std::cerr << "incorrect scale point\n";
+        return 1;
+      }
       std::cin >> ratio;
       if (ratio <= 0.0 || !scale_p)
       {

@@ -73,7 +73,7 @@ brevnov::point_t brevnov::scale(std::istream & in)
   in >> x >> y;
   if (in.fail())
   {
-    return nullptr;
+    return std::invalid_argument("Not correct parameter");
   }
   return {x, y};
 }
