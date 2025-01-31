@@ -75,7 +75,7 @@ namespace brevnov
     in >> x >> y;
     if (in.fail())
     {
-      return std::invalid_argument("Not correct parameter");
+      throw std::invalid_argument("Not correct parameter");
     }
     return {x, y};
   }

@@ -37,7 +37,7 @@ int main()
         return 1;
       }
       std::cin >> ratio;
-      if (ratio <= 0.0 || !scale_p)
+      if (ratio <= 0.0)
       {
         std::cerr << "Incorrect retio\n";
         return 1;
