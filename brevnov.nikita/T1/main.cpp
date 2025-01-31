@@ -57,15 +57,14 @@ int main()
       }
       catch (const std::bad_alloc & e)
       {
-        std::cerr << "Not enough memory!";
+        std::cerr << "Not enough memory!\n";
         return 1;
       }
-      catch (const std::invalid_argument & f)
+      if (!new_shape)
       {
         isIncorrectParameters = true;
       }
     }
-  }
   if (isIncorrectParameters)
   {
     std::cerr << "Some parameters were incorrect\n";
