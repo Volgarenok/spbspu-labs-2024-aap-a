@@ -17,6 +17,6 @@ int main() {
   constexpr char newChar = 'b';
   std::cout << belobrov::replaceChars(line, oldChar, newChar);
   std::cout << "\n";
-  free(line)
+  free(line);
   return 0;
 }
