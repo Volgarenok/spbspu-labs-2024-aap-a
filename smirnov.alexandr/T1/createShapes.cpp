@@ -40,13 +40,11 @@ smirnov::Diamond * smirnov::createDiamond(std::istream & in)
   constexpr size_t coordinateCount = 6;
   double coordsArray[coordinateCount];
   inputCoords(coordsArray, coordinateCount, in);
-  double x1 = coordsArray[0];
-  double y1 = coordsArray[1];
-  double x2 = coordsArray[2];
-  double y2 = coordsArray[3];
-  double x3 = coordsArray[4];
-  double y3 = coordsArray[5];
-  return new Diamond(x1, y1, x2, y2, x3, y3);
+  point_t p1, p2, p3;
+  p1 = {coordsArray[0], coordsArray[1]};
+  p2 = {coordsArray[2], coordsArray[3]};
+  p3 = {coordsArray[4], coordsArray[5]};
+  return new Diamond(p1, p2, p3);
 }
 
 smirnov::Parallelogram * smirnov::createParallelogram(std::istream & in)
@@ -54,11 +52,9 @@ smirnov::Parallelogram * smirnov::createParallelogram(std::istream & in)
   constexpr size_t coordinateCount = 6;
   double coordsArray[coordinateCount];
   inputCoords(coordsArray, coordinateCount, in);
-  double x1 = coordsArray[0];
-  double y1 = coordsArray[1];
-  double x2 = coordsArray[2];
-  double y2 = coordsArray[3];
-  double x3 = coordsArray[4];
-  double y3 = coordsArray[5];
-  return new Parallelogram(x1, y1, x2, y2, x3, y3);
+  point_t p1, p2, p3;
+  p1 = {coordsArray[0], coordsArray[1]};
+  p2 = {coordsArray[2], coordsArray[3]};
+  p3 = {coordsArray[4], coordsArray[5]};
+  return new Parallelogram(p1, p2, p3);
 }

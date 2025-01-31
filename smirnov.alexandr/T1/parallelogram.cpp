@@ -3,18 +3,17 @@
 #include <algorithm>
 #include <stdexcept>
 
-smirnov::Parallelogram::Parallelogram(double x1, double y1,
-    double x2, double y2, double x3, double y3):
-  vertex1{x1, y1},
-  vertex2{x2, y2},
-  vertex3{x3, y3},
-  vertex4{vertex1.x + vertex3.x - vertex2.x, vertex1.y + vertex3.y - vertex2.y}
+smirnov::Parallelogram::Parallelogram(point_t p1, point_t p2, point_t p3):
+  vertex1{p1},
+  vertex2{p2},
+  vertex3{p3},
+  vertex4{p1.x + p1.x - p2.x, p1.y + p3.y - p2.y}
 {
-  if ((x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3))
+  if ((p1.x == p3.x && p2.y == p3.y) || (p2.x == p3.x && p1.y == p3.y))
   {
     throw std::invalid_argument("Incorrect coordinates for the parallelogram");
   }
-  if (!(y1 == y2 || y1 == y3 || y2 == y3))
+  if (!(p1.y == p2.y || p1.y == p3.y || p2.y == p3.y))
   {
     throw std::invalid_argument("The sides of the parallelogram must be parallel to the X-axis");
   }
