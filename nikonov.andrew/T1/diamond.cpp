@@ -7,17 +7,15 @@ namespace
   point_t findTop(const point_t &p1, const point_t &p2, const point_t &p3);
   point_t findMid(const point_t &p1, const point_t &p2, const point_t &p3);
   point_t findRight(const point_t &p1, const point_t &p2, const point_t &p3);
+  point_t findLeft(const point_t &p1, const point_t &p2, const point_t &p3);
+  point_t findBot(const point_t &p1, const point_t &p2, const point_t &p3);
   bool isEqualPoint(const point_t &p1, const point_t &p2);
 }
 nikonov::Diamond::Diamond(const point_t &p1, const point_t &p2, const point_t &p3):
-  lt_({ findTop(p1, p2, p3), findMid(p1, p2, p3), \
-    point_t({ 2 * findMid(p1, p2, p3).x - findRight(p1, p2, p3).x, findMid(p1, p2, p3).y }) }),
-  lb_({ point_t({ findTop(p1, p2, p3).x, 2 * findMid(p1, p2, p3).y - findTop(p1, p2, p3).y }), \
-    findMid(p1, p2, p3), point_t({ 2 * findMid(p1, p2, p3).x - findRight(p1, p2, p3).x, \
-      findMid(p1, p2, p3).y }) }),
+  lt_({ findTop(p1, p2, p3), findMid(p1, p2, p3), findLeft(p1, p2, p3) }),
+  lb_({ findBot(p1, p2, p3), findMid(p1, p2, p3), findLeft(p1, p2, p3) }),
   rt_({ findTop(p1, p2, p3), findMid(p1, p2, p3), findRight(p1, p2, p3) }),
-  rb_({ point_t({ findTop(p1, p2, p3).x, 2 * findMid(p1, p2, p3).y - findTop(p1, p2, p3).y }),
-  findMid(p1, p2, p3), findRight(p1, p2, p3) })
+  rb_({ findBot(p1, p2, p3), findMid(p1, p2, p3), findRight(p1, p2, p3) })
 {
   point_t topP = findTop(p1, p2, p3);
   point_t midP = findMid(p1, p2, p3);
@@ -128,5 +126,13 @@ namespace
       edgeP.x = 2 * midP.x - edgeP.x;
     }
     return edgeP;
+  }
+  point_t findLeft(const point_t &p1, const point_t &p2, const point_t &p3)
+  {
+    return point_t{ 2 * findMid(p1, p2, p3).x - findRight(p1, p2, p3).x, findMid(p1, p2, p3).y };
+  }
+  point_t findBot(const point_t &p1, const point_t &p2, const point_t &p3)
+  {
+    return point_t{ findTop(p1, p2, p3).x, 2 * findMid(p1, p2, p3).y - findTop(p1, p2, p3).y };
   }
 }

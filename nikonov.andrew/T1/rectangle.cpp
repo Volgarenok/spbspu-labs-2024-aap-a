@@ -2,10 +2,10 @@
 #include <cmath>
 #include "additional-utilities.hpp"
 nikonov::Rectangle::Rectangle(const point_t &lbp, const point_t &rtp):
-  left_({ point_t({ lbp.x, rtp.y }), point_t({ lbp.x, lbp.y }), point_t({ lbp.x + (rtp.x - lbp.x) / 2, lbp.y + (rtp.y - lbp.y) / 2 }) }),
-  right_({ point_t({ rtp.x, rtp.y }), point_t({ rtp.x, lbp.y }), point_t({ lbp.x + (rtp.x - lbp.x) / 2, lbp.y + (rtp.y - lbp.y) / 2 }) }),
-  top_({ point_t({ lbp.x, rtp.y }), point_t({ rtp.x, rtp.y }), point_t({ lbp.x + (rtp.x - lbp.x) / 2, lbp.y + (rtp.y - lbp.y) / 2 }) }),
-  bot_({ point_t({ lbp.x, lbp.y }), point_t({ rtp.x, lbp.y }), point_t({ lbp.x + (rtp.x - lbp.x) / 2, lbp.y + (rtp.y - lbp.y) / 2 }) })
+  left_({ point_t{ lbp.x, rtp.y }, point_t{ lbp.x, lbp.y }, point_t{ (rtp.x + lbp.x) / 2, (rtp.y + lbp.y) / 2 } }),
+  right_({ point_t{ rtp.x, rtp.y }, point_t{ rtp.x, lbp.y }, point_t{ (rtp.x + lbp.x) / 2, (rtp.y + lbp.y) / 2 } }),
+  top_({ point_t{ lbp.x, rtp.y }, point_t{ rtp.x, rtp.y }, point_t{ (rtp.x + lbp.x) / 2, (rtp.y + lbp.y) / 2 } }),
+  bot_({ point_t{ lbp.x, lbp.y }, point_t{ rtp.x, lbp.y }, point_t{ (rtp.x + lbp.x) / 2, (rtp.y + lbp.y) / 2 } })
 {
   if (lbp.x >= rtp.x || lbp.y >= rtp.y)
   {
