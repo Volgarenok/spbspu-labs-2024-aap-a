@@ -3,6 +3,19 @@
 #include <algorithm>
 #include <cmath>
 
+namespace
+{
+  mozhegova::point_t * createPoly(size_t n, const mozhegova::point_t * arr)
+  {
+    mozhegova::point_t * arrCopy = new mozhegova::point_t[n];
+    for (size_t i = 0; i < n; i++)
+    {
+      arrCopy[i] = arr[i];
+    }
+    return arrCopy;
+  }
+}
+
 mozhegova::Polygon::~Polygon()
 {
   delete[] points_;
@@ -10,16 +23,12 @@ mozhegova::Polygon::~Polygon()
 
 mozhegova::Polygon::Polygon(size_t n, const point_t * arr):
   count_(n),
-  points_(new point_t[n])
+  points_(createPoly(n, arr))
 {
   if (count_ < 3)
   {
     delete[] points_;
     throw std::invalid_argument("Incorrect coordinates");
-  }
-  for (size_t i = 0; i < count_; i++)
-  {
-    points_[i] = arr[i];
   }
   for (size_t i = 0; i < count_ - 1; i++)
   {
@@ -75,11 +84,8 @@ void mozhegova::Polygon::move(point_t p)
     sumY += points_[i].y;
   }
   point_t center = {sumX / count_, sumY / count_};
-  for (size_t i = 0; i < count_; i++)
-  {
-    point_t vector = {points_[i].x - center.x, points_[i].y - center.y};
-    points_[i] = {p.x + vector.x, p.y + vector.y};
-  }
+  point_t vector = {p.x - center.x, p.y - center.y};
+  move(vector.x, vector.y);
 }
 
 void mozhegova::Polygon::move(double dx, double dy)

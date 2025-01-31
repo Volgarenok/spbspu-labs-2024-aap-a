@@ -18,16 +18,14 @@ namespace
     constexpr size_t len = 2;
     mozhegova::point_t coor[len] = {};
     inputNum(in, coor, len);
-    mozhegova::Rectangle * rect = new mozhegova::Rectangle(coor[0], coor[1]);
-    return rect;
+    return new mozhegova::Rectangle(coor[0], coor[1]);
   }
   mozhegova::Diamond * makeDiamond(std::istream & in)
   {
     constexpr size_t len = 3;
     mozhegova::point_t coor[len] = {};
     inputNum(in, coor, len);
-    mozhegova::Diamond * diam = new mozhegova::Diamond(coor[0], coor[1], coor[2]);
-    return diam;
+    return new mozhegova::Diamond(coor[0], coor[1], coor[2]);
   }
   mozhegova::Polygon * makePolygon(std::istream & in)
   {
@@ -91,7 +89,7 @@ namespace
   }
 }
 
-mozhegova::Shape * mozhegova::makeShape(std::istream & in, std::string shapeName)
+mozhegova::Shape * mozhegova::makeShape(std::istream & in, const std::string & shapeName)
 {
   if (shapeName == "RECTANGLE")
   {

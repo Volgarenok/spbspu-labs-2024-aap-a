@@ -29,13 +29,17 @@ void mozhegova::printCoorRect(std::ostream & out, const Shape * const * shapes, 
 
 void mozhegova::scaleShapes(Shape ** shapes, size_t n, point_t p, double k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Incorrect scale");
+  }
   for (size_t i = 0; i < n; i++)
   {
     point_t ptr = shapes[i]->getFrameRect().pos;
     shapes[i]->move(p);
     point_t newptr = shapes[i]->getFrameRect().pos;
     point_t vectorMove = {(newptr.x - ptr.x) * k, (newptr.y - ptr.y) * k};
-    shapes[i]->scale(k);
+    shapes[i]->scaleImpl(k);
     shapes[i]->move(-vectorMove.x, -vectorMove.y);
   }
 }

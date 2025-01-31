@@ -15,10 +15,10 @@ namespace mozhegova
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;
     void move(double dx, double dy) override;
+    void scaleImpl(double k) override;
   private:
     size_t count_;
     point_t * points_;
-    void scaleImpl(double k) override;
   };
 }
 

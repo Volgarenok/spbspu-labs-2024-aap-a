@@ -10,8 +10,6 @@ int main()
   size_t count = 0;
   std::string shapeName;
   bool flag = false;
-  double scaleCoef = 0.0;
-  point_t scaleCenter = {0.0, 0.0};
   while (shapeName != "SCALE")
   {
     if (std::cin.eof())
@@ -41,15 +39,9 @@ int main()
       continue;
     }
   }
-  double p1 = 0.0, p2 = 0.0;
+  double p1 = 0.0, p2 = 0.0, scaleCoef = 0.0;
   std::cin >> p1 >> p2 >> scaleCoef;
-  scaleCenter = {p1, p2};
-  if (scaleCoef <= 0)
-  {
-    std::cerr << "Incorrect scale\n";
-    destroy(shapes, count);
-    return 1;
-  }
+
   if (count == 0)
   {
     std::cerr << "There are no shapes\n";
@@ -60,7 +52,19 @@ int main()
   std::cout << sumArea(shapes, count) << " ";
   printCoorRect(std::cout, shapes, count);
   std::cout << '\n';
-  scaleShapes(shapes, count, scaleCenter, scaleCoef);
+
+  point_t scaleCenter = {p1, p2};
+  try
+  {
+    scaleShapes(shapes, count, scaleCenter, scaleCoef);
+  }
+  catch(const std::invalid_argument & e)
+  {
+    std::cerr << e.what() << '\n';
+    destroy(shapes, count);
+    return 1;
+  }
+
   std::cout << sumArea(shapes, count) << " ";
   printCoorRect(std::cout, shapes, count);
   std::cout << '\n';

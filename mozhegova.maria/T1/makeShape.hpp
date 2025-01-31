@@ -7,7 +7,7 @@
 
 namespace mozhegova
 {
-  Shape * makeShape(std::istream & in, std::string shapeName);
+  Shape * makeShape(std::istream & in, const std::string & shapeName);
 }
 
 #endif
