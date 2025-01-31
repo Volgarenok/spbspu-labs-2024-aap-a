@@ -17,7 +17,7 @@ namespace kiselev
 
   private:
     const size_t size;
-    point_t arr[];
+    point_t arr[4];
   };
 }
 #endif
