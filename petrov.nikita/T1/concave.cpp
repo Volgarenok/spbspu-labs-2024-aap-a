@@ -2,7 +2,8 @@
 #include <cmath>
 #include <algorithm>
 #include <stdexcept>
-#include <iostream>
+#include "geometric_calculations.hpp"
+
 petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   triangle_1_(p2, { (p2.x + p1.x) / 2, (p2.y + p1.y) / 2 }, p4),
   triangle_2_(p1, { (p2.x + p1.x) / 2, (p2.y + p1.y) / 2 }, p4),
@@ -15,9 +16,9 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   {
     throw std::invalid_argument("NOTE: Scaling of some figures skipped due to their invalid description\n");
   }
-  double a = std::sqrt(std::pow((p1.x - p2.x), 2) + std::pow((p1.y - p2.y), 2));
-  double b = std::sqrt(std::pow((p3.x - p2.x), 2) + std::pow((p3.y - p2.y), 2));
-  double c = std::sqrt(std::pow((p1.x - p3.x), 2) + std::pow((p1.y - p3.y), 2));
+  double a = calculateDistBtwPoints(p1, p2);
+  double b = calculateDistBtwPoints(p3, p2);
+  double c = calculateDistBtwPoints(p1, p3);
   if (a + b <= c || a + c <= b || b + c <= a)
   {
     throw std::invalid_argument("NOTE: Scaling of some figures skipped due to their invalid description\n");
@@ -34,16 +35,20 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
 }
 
 double petrov::Concave::getArea() const
-{
-  return triangle_1_.getArea() + triangle_2_.getArea()
-            + triangle_3_.getArea() + triangle_4_.getArea();
+{ 
+  double area = 0.0;
+  area += triangle_1_.getArea();
+  area += triangle_2_.getArea();
+  area += triangle_3_.getArea();
+  area += triangle_4_.getArea();
+  return area;
 }
 
 double petrov::Concave::getAreaOfComponent(point_t p1, point_t p2, point_t p3) const
 {
-  double a = std::sqrt(std::pow((p1.x - p2.x), 2) + std::pow((p1.y - p2.y), 2));
-  double b = std::sqrt(std::pow((p3.x - p2.x), 2) + std::pow((p3.y - p2.y), 2));
-  double c = std::sqrt(std::pow((p1.x - p3.x), 2) + std::pow((p1.y - p3.y), 2));
+  double a = calculateDistBtwPoints(p1, p2);
+  double b = calculateDistBtwPoints(p3, p2);
+  double c = calculateDistBtwPoints(p1, p3);
   double p = (a + b + c) / 2;
   return std::sqrt(p * (p - a) * (p - b) * (p - c));
 }
@@ -67,18 +72,17 @@ petrov::rectangle_t petrov::Concave::getFrameRect() const
     ymax = new_ymax > ymax ? new_ymax : ymax;
     ymin = new_ymin < ymin ? new_ymin : ymin;
   }
-  rectangle_t frame_rect = {};
-  frame_rect.width = xmax - xmin;
-  frame_rect.height = ymax - ymin;
-  frame_rect.pos = { ((2 * xmin + xmax - xmin) / 2.0), ((2 * ymin + ymax - ymin) / 2.0) };
-  return frame_rect;
+  double width = xmax - xmin;
+  double height = ymax - ymin;
+  point_t pos = { ((xmin + xmax) / 2.0), ((ymin + ymax) / 2.0) };
+  return { width, height, pos };
 }
 
-void petrov::Concave::move(point_t concrete_point)
+void petrov::Concave::move(const point_t & concrete_point)
 {
-  rectangle_t frame_rect = getFrameRect();
-  double dx = concrete_point.x - frame_rect.pos.x;
-  double dy = concrete_point.y - frame_rect.pos.y;
+  point_t pos = getFrameRect().pos;
+  double dx = concrete_point.x - pos.x;
+  double dy = concrete_point.y - pos.y;
   this->move(dx, dy);
 }
 
@@ -93,14 +97,17 @@ void petrov::Concave::move(double dx, double dy)
 
 void petrov::Concave::scale(double k)
 {
-  rectangle_t frame_rect = getFrameRect();
-  rectangle_t tr_fr_r[4] = { triangle_1_.getFrameRect(), triangle_2_.getFrameRect(),
-                             triangle_3_.getFrameRect(), triangle_4_.getFrameRect() };
+  point_t pos = getFrameRect().pos;
+  point_t pos_1 = triangle_1_.getFrameRect().pos;
+  point_t pos_2 = triangle_2_.getFrameRect().pos;
+  point_t pos_3 = triangle_3_.getFrameRect().pos;
+  point_t pos_4 = triangle_4_.getFrameRect().pos;
+  point_t triangles_pos[4] = { pos_1, pos_2, pos_3, pos_4 };
   Triangle * triangles[4] = { &triangle_1_, &triangle_2_, &triangle_3_, &triangle_4_ };
   for (size_t i = 0; i < 4; i++)
   {
-    double dx_unique = tr_fr_r[i].pos.x - frame_rect.pos.x;
-    double dy_unique = tr_fr_r[i].pos.y - frame_rect.pos.y;
+    double dx_unique = triangles_pos[i].x - pos.x;
+    double dy_unique = triangles_pos[i].y - pos.y;
     triangles[i]->scale(k);
     triangles[i]->move(dx_unique, dy_unique);
   }

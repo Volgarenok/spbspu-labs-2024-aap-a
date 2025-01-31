@@ -7,6 +7,7 @@
 #include "clear_memory.hpp"
 #include "base-types.hpp"
 #include "scale_isotropically_and_output_data.hpp"
+
 int main()
 {
   using namespace petrov;
@@ -25,18 +26,18 @@ int main()
         composite_shape.push_back(ptr_shape);
       }
     }
-    catch(const std::bad_alloc & e)
+    catch (const std::bad_alloc & e)
     {
       clearMemory(ptr_composite_shape);
       std::cerr << "ERROR: Out of memory\n";
       return 2;
     }
-    catch(const std::invalid_argument & e)
+    catch (const std::invalid_argument & e)
     {
       is_description_error = true;
       continue;
     }
-    catch(const std::logic_error & e)
+    catch (const std::logic_error & e)
     {
       continue;
     }

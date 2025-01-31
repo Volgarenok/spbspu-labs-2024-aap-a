@@ -3,6 +3,7 @@
 #include "shape.hpp"
 #include "base-types.hpp"
 #include "triangle.hpp"
+
 namespace petrov
 {
   struct Concave final: Shape
@@ -11,7 +12,7 @@ namespace petrov
     Concave(point_t p1, point_t p2, point_t p3, point_t p4);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void move(point_t concrete_point) override;
+    void move(const point_t & concrete_point) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
     Shape * clone() const override;

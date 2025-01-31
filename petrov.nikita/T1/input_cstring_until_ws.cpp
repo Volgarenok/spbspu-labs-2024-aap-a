@@ -1,5 +1,5 @@
 #include "input_cstring_until_ws.hpp"
-#include <iostream>
+
 char * petrov::inputCStringUntilWS(std::istream & in, size_t & capacity)
 {
   std::noskipws(in);

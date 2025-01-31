@@ -1,10 +1,47 @@
+#include "make_shape.hpp"
 #include <cstring>
 #include "input_cstring_until_ws.hpp"
-#include "make_shape.hpp"
-#include "shape.hpp"
 #include "rectangle.hpp"
 #include "triangle.hpp"
 #include "concave.hpp"
+
+namespace
+{
+  void inputPointsCoordinates(std::istream & in, petrov::point_t * points, size_t number_of_points);
+  petrov::Shape * makeRectangle(std::istream & in);
+  petrov::Shape * makeTriangle(std::istream & in);
+  petrov::Shape * makeConcave(std::istream & in);
+
+  void inputPointsCoordinates(std::istream & in, petrov::point_t * points, size_t number_of_points)
+  {
+    for (size_t i = 0; i < number_of_points; i++)
+    {
+      in >> points[i].x >> points[i].y;
+    }
+  }
+
+  petrov::Shape * makeRectangle(std::istream & in)
+  {
+    petrov::point_t points[2] = {};
+    inputPointsCoordinates(in, points, 2);
+    return new petrov::Rectangle(points[0], points[1]);
+  }
+
+  petrov::Shape * makeTriangle(std::istream & in)
+  {
+    petrov::point_t points[3] = {};
+    inputPointsCoordinates(in, points, 3);
+    return new petrov::Triangle(points[0], points[1], points[2]);
+  }
+
+  petrov::Shape * makeConcave(std::istream & in)
+  {
+    petrov::point_t points[4] = {};
+    inputPointsCoordinates(in, points, 4);
+    return new petrov::Concave(points[0], points[1], points[2], points[3]);
+  }
+}
+
 petrov::Shape * petrov::makeShape(std::istream & in)
 {
   const char RECTANGLE[10] = "RECTANGLE";
@@ -39,33 +76,4 @@ petrov::Shape * petrov::makeShape(std::istream & in)
     delete[] type_of_shape;
     throw std::logic_error("Unsupported\n");
   }
-}
-
-petrov::Shape * petrov::makeRectangle(std::istream & in)
-{
-  petrov::point_t p1 = {};
-  petrov::point_t p2 = {};
-  in >> p1.x >> p1.y >> p2.x >> p2.y;
-  return new petrov::Rectangle(p1, p2);
-}
-
-petrov::Shape * petrov::makeTriangle(std::istream & in)
-{
-  petrov::point_t p1 = {};
-  petrov::point_t p2 = {};
-  petrov::point_t p3 = {};
-  in >> p1.x >> p1.y >> p2.x >> p2.y;
-  in >> p3.x >> p3.y;
-  return new petrov::Triangle(p1, p2, p3);
-}
-
-petrov::Shape * petrov::makeConcave(std::istream & in)
-{
-  petrov::point_t p1 = {};
-  petrov::point_t p2 = {};
-  petrov::point_t p3 = {};
-  petrov::point_t p4 = {};
-  in >> p1.x >> p1.y >> p2.x >> p2.y;
-  in >> p3.x >> p3.y >> p4.x >> p4.y;
-  return new petrov::Concave(p1, p2, p3, p4);
 }
