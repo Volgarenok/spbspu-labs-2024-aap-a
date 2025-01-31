@@ -19,7 +19,7 @@ namespace zakirov
       void pop_back();
       Shape * at(size_t id);
       Shape * operator[](size_t id);
-      bool empty();
+      bool empty() const;
       size_t size();
     private:
       static constexpr size_t shapes_size_ = 10000;
