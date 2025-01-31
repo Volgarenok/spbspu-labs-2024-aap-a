@@ -12,7 +12,7 @@ char * belobrov::inputString(std::istream& input)
   }
 
   size_t currentIndex = 0;
-  std::noskips(input);
+  std::noskipws(input);
 
   char currentChar;
   while (input >> currentChar && !input.eof()) {
@@ -32,7 +32,7 @@ char * belobrov::inputString(std::istream& input)
 
   std::skipws(input);
   buffer[currentIndex] = '\0';
-  return buffer
+  return buffer;
 }
 
 char * belobrov::resizeBuffer(char * oldBuffer, size_t newSize)
