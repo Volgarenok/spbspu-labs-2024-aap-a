@@ -107,11 +107,6 @@ void kizhin::Polygon::unsafeScale(double scalingFactor)
   computeFrameRect();
 }
 
-void kizhin::Polygon::copyAssign(Shape* rhs)
-{
-  *this = *(reinterpret_cast< Polygon* >(rhs));
-}
-
 void kizhin::Polygon::computeFrameRect()
 {
   std::array< double, 4 > edgeCords = computeEdgeCords(vertices_, size_);

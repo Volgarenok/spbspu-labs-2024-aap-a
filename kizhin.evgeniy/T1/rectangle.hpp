@@ -16,7 +16,6 @@ namespace kizhin {
     void move(const point_t&) override;
     void move(double, double) override;
     void unsafeScale(double) override;
-    void copyAssign(Shape*) override;
 
   private:
     rectangle_t data_;

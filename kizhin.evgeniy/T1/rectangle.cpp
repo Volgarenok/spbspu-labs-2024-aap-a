@@ -45,11 +45,6 @@ void kizhin::Rectangle::unsafeScale(double scalingFactor)
   data_.width *= scalingFactor;
 }
 
-void kizhin::Rectangle::copyAssign(Shape* rhs)
-{
-  *this = *(reinterpret_cast< Rectangle* >(rhs));
-}
-
 kizhin::point_t kizhin::Rectangle::computePosition(const point_t& leftDown,
     const point_t& rightUp)
 {

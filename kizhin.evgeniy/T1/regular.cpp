@@ -45,11 +45,6 @@ void kizhin::Regular::unsafeScale(double scalingFactor)
   polygon_.scale(scalingFactor);
 }
 
-void kizhin::Regular::copyAssign(Shape* rhs)
-{
-  *this = *(reinterpret_cast< Regular* >(rhs));
-}
-
 size_t kizhin::computeSize(double innerRadius, double outerRadius)
 {
   const double calculatedSize = pi / std::acos(innerRadius / outerRadius);
@@ -60,8 +55,8 @@ size_t kizhin::computeSize(double innerRadius, double outerRadius)
   return size;
 }
 
-kizhin::point_t* kizhin::computeVerticesArray(const point_t& center, const point_t& vertex,
-    size_t size)
+kizhin::point_t* kizhin::computeVerticesArray(const point_t& center,
+    const point_t& vertex, size_t size)
 {
   point_t* vertices = new point_t[size];
   const double radius = computeDistance(vertex, center);
@@ -77,7 +72,8 @@ kizhin::point_t* kizhin::computeVerticesArray(const point_t& center, const point
   return vertices;
 }
 
-kizhin::Polygon kizhin::createPolygon(const point_t& p1, const point_t& p2, const point_t& p3)
+kizhin::Polygon kizhin::createPolygon(const point_t& p1, const point_t& p2,
+    const point_t& p3)
 {
   if (!isRightTriangle(p1, p2, p3)) {
     throw std::invalid_argument("Invalid triangle for regular construction");

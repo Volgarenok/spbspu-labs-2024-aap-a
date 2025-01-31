@@ -15,7 +15,8 @@ kizhin::CompositeShape::CompositeShape(size_t capacity):
 {
 }
 
-kizhin::CompositeShape::CompositeShape(const CompositeShape& rhs): CompositeShape(rhs.size())
+kizhin::CompositeShape::CompositeShape(const CompositeShape& rhs):
+  CompositeShape(rhs.size())
 {
   copy(rhs.begin_, rhs.end_, begin_);
   end_ = begin_ + rhs.size();
@@ -70,6 +71,11 @@ size_t kizhin::CompositeShape::size() const noexcept
 bool kizhin::CompositeShape::empty() const noexcept
 {
   return begin_ == end_;
+}
+
+kizhin::Shape** kizhin::CompositeShape::data() const noexcept
+{
+  return begin_;
 }
 
 const kizhin::Shape* kizhin::CompositeShape::at(size_t index) const
@@ -147,8 +153,10 @@ void kizhin::CompositeShape::scale(double scalingFactor)
     throw std::logic_error("Scaling factor must be positive");
   }
   const point_t center = getFrameRect().pos;
-  for (Shape* const* i = begin_; i != end_; ++i) {
-    scaleShape(*i, scalingFactor, center);
+  for (Shape** i = begin_; i != end_; ++i) {
+    Shape* scaled = scaleShape(*i, scalingFactor, center);
+    delete *i;
+    *i = scaled;
   }
 }
 

@@ -16,7 +16,6 @@ namespace kizhin {
     void move(double, double) override;
     void move(const point_t&) override;
     void unsafeScale(double) override;
-    void copyAssign(Shape*) override;
 
   private:
     Polygon polygon_;

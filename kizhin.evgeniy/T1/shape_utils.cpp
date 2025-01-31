@@ -11,7 +11,8 @@ namespace kizhin {
   Polygon* createPolygon(const double*);
 }
 
-void kizhin::scaleShape(Shape* shape, double scalingFactor, const point_t& scalingPoint)
+kizhin::Shape* kizhin::scaleShape(Shape* shape, double scalingFactor,
+    const point_t& scalingPoint)
 {
   Shape* tempShape = nullptr;
   try {
@@ -23,12 +24,11 @@ void kizhin::scaleShape(Shape* shape, double scalingFactor, const point_t& scali
     const double dx = (oldFramePos.x - newFramePos.x) * scalingFactor;
     const double dy = (oldFramePos.y - newFramePos.y) * scalingFactor;
     tempShape->move(dx, dy);
-    shape->copyAssign(tempShape);
   } catch (...) {
     delete tempShape;
     throw;
   }
-  delete tempShape;
+  return tempShape;
 }
 
 void kizhin::unsafeScaleShapes(CompositeShape& shapes, const double* params)
@@ -36,7 +36,9 @@ void kizhin::unsafeScaleShapes(CompositeShape& shapes, const double* params)
   const double scalingFactor = params[3];
   const point_t scalingPoint{ params[1], params[2] };
   for (size_t i = 0; i != shapes.size(); ++i) {
-    scaleShape(shapes[i], scalingFactor, scalingPoint);
+    Shape* scaledShape = scaleShape(shapes[i], scalingFactor, scalingPoint);
+    delete shapes[i];
+    *(shapes.data() + i) = scaledShape;
   }
 }
 
@@ -50,7 +52,8 @@ void kizhin::scaleShapes(CompositeShape& shapes, const double* params)
   return unsafeScaleShapes(shapes, params);
 }
 
-kizhin::Shape* kizhin::createShape(const std::string& shapeName, const double* shapeParams)
+kizhin::Shape* kizhin::createShape(const std::string& shapeName,
+    const double* shapeParams)
 {
   if (shapeName == "RECTANGLE") {
     return createRectangle(shapeParams);

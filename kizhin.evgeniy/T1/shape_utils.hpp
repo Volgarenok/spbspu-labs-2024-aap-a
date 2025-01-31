@@ -8,7 +8,7 @@ namespace kizhin {
   Shape* createShape(const std::string&, const double*);
   void scaleShapes(CompositeShape&, const double*);
   void unsafeScaleShapes(CompositeShape&, const double*);
-  void scaleShape(Shape*, double, const point_t&);
+  Shape* scaleShape(Shape*, double, const point_t&);
 }
 
 #endif
