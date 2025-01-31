@@ -35,7 +35,7 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
 }
 
 double petrov::Concave::getArea() const
-{ 
+{
   double area = 0.0;
   area += triangle_1_.getArea();
   area += triangle_2_.getArea();

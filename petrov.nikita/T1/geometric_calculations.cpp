@@ -16,7 +16,8 @@ void petrov::changeCoordinates(petrov::point_t ** points, size_t number_of_point
   }
 }
 
-void petrov::changeCoordinatesDueToScaling(petrov::point_t ** points, const petrov::point_t & pos, size_t number_of_points, double scale_value)
+void petrov::changeCoordinatesDueToScaling(petrov::point_t ** points, const petrov::point_t & pos, 
+                                              size_t number_of_points, double scale_value)
 {
   for (size_t i = 0; i < number_of_points; i++)
   {
