@@ -2,10 +2,13 @@
 #include <cmath>
 #include <cstddef>
 #include <istream>
+#include <stdexcept>
 #include "base-types.hpp"
 #include "complexquad.hpp"
+#include "composite-shape.hpp"
 #include "diamond.hpp"
 #include "rectangle.hpp"
+#include "shape.hpp"
 namespace
 {
   void createPoint(std::istream& input, size_t size, kiselev::point_t* arr)
@@ -47,7 +50,7 @@ kiselev::point_t kiselev::makeScale(std::istream& input)
   createPoint(input, quantity, point);
   return point[0];
 }
-bool kiselev::makeShape(std::istream& input, const std::string& str, CompositeShape& compShp)
+kiselev::Shape* kiselev::makeShape(std::istream& input, const std::string& str)
 {
   Shape* shape = nullptr;
   try
@@ -64,11 +67,15 @@ bool kiselev::makeShape(std::istream& input, const std::string& str, CompositeSh
     {
       shape = makeComplexquad(input);
     }
-    if (shape)
+    else
     {
-      compShp.pushBack(shape);
+      throw std::logic_error("Unknown shape");
     }
-    return !str.empty() && str != "SCALE";
+    return shape;
+  }
+  catch (const std::invalid_argument&)
+  {
+    return nullptr;
   }
   catch (...)
   {

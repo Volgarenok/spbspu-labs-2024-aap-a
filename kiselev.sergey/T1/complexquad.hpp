@@ -16,8 +16,8 @@ namespace kiselev
     void scale(double k) override;
 
   private:
-    static constexpr size_t size = 4;
-    point_t arr[size];
+    const size_t size;
+    point_t arr[];
   };
 }
 #endif
