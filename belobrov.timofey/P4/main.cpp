@@ -1,4 +1,6 @@
 #include <iostream>
+#include "inputString.hpp"
+#include "replaceChars.hpp"
 
 int main() {
   char* line = belobrov::inputString(std::cin);
