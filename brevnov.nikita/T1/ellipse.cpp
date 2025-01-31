@@ -7,7 +7,7 @@ brevnov::Ellipse::Ellipse(point_t center, double r1, double r2):
   r1_(0.0),
   r2_(0.0)
 {
-  if (r1 == 0.0 || r2 == 0.0)
+  if (r1 <= 0.0 || r2 <= 0.0)
   {
     throw std::invalid_argument("Not correct arguments");
   }
