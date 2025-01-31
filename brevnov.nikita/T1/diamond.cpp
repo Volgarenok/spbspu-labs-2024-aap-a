@@ -3,11 +3,53 @@
 #include <stdexcept>
 #include <iostream>
 
-brevnov::Diamond::Diamond(point_t center, point_t horizontal, point_t vertical):
-  center_(center),
-  horizontal_(horizontal),
-  vertical_(vertical)
+brevnov::Diamond::Diamond(point_t a, point_t b, point_t c):
+  center_({0.0, 0.0}),
+  horizontal_({0.0, 0.0}),
+  vertical_({0.0, 0.0})
 {
+  double x1 = a.x, y1 = a.y, x2 = b.x, y2 = b.y, x3 = c.x, y3 = c.y;
+  if ((x1 == x2 &&  y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3)
+    || (x1 != x2 && x1 != x3 && x2 != x3) || (y1 != y2 && y1 != y3 && y2 != y3))
+  {
+    throw std::invalid_argument("Not correct arguments");
+  }
+  if (x1 == x2 && y1 == y3)
+  {
+    center_ = {x1, y1};
+    horizontal_ = {x3, y3};
+    vertical_ = {x2, y2};
+  }
+  else if (x1 == x3 && y1 == y2)
+  {
+    center_ = {x1, y1};
+    horizontal_ = {x2, y2};
+    vertical_ = {x3, y3};
+  }
+  else if (x2 == x1 && y2 == y3)
+  {
+    center_ = {x2, y2};
+    horizontal_ = {x3, y3};
+    vertical_ = {x1, y1};
+  }
+  else if (x2 == x3 && y2 == y1)
+  {
+    center_ = {x2, y2};
+    horizontal_ = {x1, y1};
+    vertical_ = {x3, y3};
+  }
+  else if (x3 == x1 && y3 == y2)
+  {
+    center_ = {x3, y3};
+    horizontal_ = {x2, y2};
+    vertical_ = {x1, y1};
+  }
+  else
+  {
+    center_ = {x3, y3};
+    horizontal_ = {x1, y1};
+    vertical_ = {x2, y2};
+  }
 }
 
 double brevnov::Diamond::getArea() const noexcept

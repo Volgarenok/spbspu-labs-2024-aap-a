@@ -2,9 +2,16 @@
 #include <stdexcept>
 
 brevnov::Rectangle::Rectangle(point_t left, point_t right):
-  left_(left),
-  right_(right)
-{}
+  left_({0.0, 0.0}),
+  right_({0.0, 0.0})
+{
+  if (left.x >= right.x || left.y >= right.y)
+  {
+    throw std::invalid_argument("Not correct arguments");
+  }
+  left_ = left;
+  right_ = right;
+}
 
 double brevnov::Rectangle::getArea() const noexcept
 {

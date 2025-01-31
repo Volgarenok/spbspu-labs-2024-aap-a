@@ -29,7 +29,7 @@ int main()
     {
       scale_p = brevnov::scale(std::cin);
       std::cin >> ratio;
-      if (ratio <= 0.0)
+      if (ratio <= 0.0 || !scale_p)
       {
         std::cerr << "Incorrect retio\n";
         return 1;
