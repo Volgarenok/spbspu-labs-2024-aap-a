@@ -45,7 +45,6 @@ int main()
       scaleCommand = true;
       break;
     }
-  }
     else
     {
       try
@@ -66,6 +65,7 @@ int main()
         isIncorrectParameters = true;
       }
     }
+  }
   if (isIncorrectParameters)
   {
     std::cerr << "Some parameters were incorrect\n";
