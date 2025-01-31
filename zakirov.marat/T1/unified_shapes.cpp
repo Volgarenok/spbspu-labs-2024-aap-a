@@ -327,7 +327,7 @@ void zakirov::scale_all_shapes(Shape ** shapes, point_t target, double k, size_t
   }
 }
 
-void zakirov::scale_composite(CompositeShape shapes, point_t target, double k)
+void zakirov::scale_composite(CompositeShape & shapes, point_t target, double k)
 {
   if (k <= 0)
   {
@@ -342,7 +342,7 @@ void zakirov::scale_composite(CompositeShape shapes, point_t target, double k)
   shapes.move(-bias.x, -bias.y);
 }
 
-void zakirov::output_frame(std::ostream & out, CompositeShape shapes)
+void zakirov::output_frame(std::ostream & out, CompositeShape & shapes)
 {
   for (size_t i = 0; i < shapes.size() - 1; ++i)
   {

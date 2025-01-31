@@ -3,9 +3,13 @@
 #include <stdexcept>
 #include "unified_shapes.hpp"
 #include "base-types.hpp"
-
-#include <iostream>
 #include "ring.hpp"
+#include "rectangle.hpp"
+#include "polygon.hpp"
+#include "circle.hpp"
+#include "shape.hpp"
+#include <iostream>
+
 zakirov::CompositeShape::CompositeShape() :
   shapes_quantity_(0)
 {
@@ -13,10 +17,7 @@ zakirov::CompositeShape::CompositeShape() :
 
 zakirov::CompositeShape::~CompositeShape()
 {
-  for (size_t i = 0; i < shapes_quantity_; ++i)
-  {
-    clear_shapes(shapes_, shapes_quantity_);
-  }
+  clear_shapes(shapes_, shapes_quantity_);
 }
 
 double zakirov::CompositeShape::getArea()
@@ -24,12 +25,13 @@ double zakirov::CompositeShape::getArea()
   return get_total_area(shapes_, shapes_quantity_);
 }
 
-zakirov::rectangle_t zakirov::CompositeShape::getFrameRect()
+zakirov::rectangle_t zakirov::CompositeShape::getFrameRect() const
 {
   if (!empty())
   {
     throw std::logic_error("ERROR: empty array");
   }
+
   double most_top = shapes_[0]->getFrameRect().pos.y;
   double most_low = shapes_[0]->getFrameRect().pos.y;
   double most_left = shapes_[0]->getFrameRect().pos.x;
@@ -78,8 +80,7 @@ void zakirov::CompositeShape::push_back(Shape * shape)
 {
   if (shape)
   {
-    shapes_[shapes_quantity_] = shape;
-    ++shapes_quantity_;
+    shapes_[shapes_quantity_++] = shape;
   }
 }
 
@@ -119,7 +120,7 @@ bool zakirov::CompositeShape::empty() const
   return 0;
 }
 
-size_t zakirov::CompositeShape::size()
+size_t zakirov::CompositeShape::size() const noexcept
 {
   return shapes_quantity_;
 }

@@ -19,10 +19,10 @@ namespace zakirov
   Polygon * make_polygon(size_t points_num, point_t * points);
   double * get_data(std::istream & in);
   void scale_from_point(Shape * mutable_shape, point_t target, double k);
-  void output_frame(std::ostream & out, CompositeShape shapes);
+  void output_frame(std::ostream & out, CompositeShape & shapes);
   void clear_shapes(Shape ** shapes, size_t quantity);
   void scale_all_shapes(Shape ** shapes, point_t target, double k, size_t size);
-  void scale_composite(CompositeShape shapes, point_t target, double k);
+  void scale_composite(CompositeShape & shapes, point_t target, double k);
   double get_total_area(Shape ** shapes, size_t size);
 }
 

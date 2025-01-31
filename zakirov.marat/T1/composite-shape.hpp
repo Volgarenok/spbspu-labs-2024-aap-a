@@ -11,7 +11,7 @@ namespace zakirov
       CompositeShape();
       ~CompositeShape();
       double getArea();
-      rectangle_t getFrameRect();
+      rectangle_t getFrameRect() const;
       void move(point_t target);
       void move(double bias_x, double bias_y);
       void scale(double k);
@@ -20,7 +20,7 @@ namespace zakirov
       Shape * at(size_t id);
       Shape * operator[](size_t id);
       bool empty() const;
-      size_t size();
+      size_t size() const noexcept;
     private:
       static constexpr size_t shapes_size_ = 10000;
       Shape * shapes_[shapes_size_] = {};
