@@ -1,7 +1,7 @@
 #include <iostream>
 
 int main() {
-  char* line = belobrov::inputLine(std::cin);
+  char* line = belobrov::inputString(std::cin);
   if (line == nullptr) {
     std::cerr << "Memory allocation error!\n";
     return 1;
@@ -12,4 +12,11 @@ int main() {
     free(line);
     return 1;
   }
+
+  constexpr char oldChar = 'c';
+  constexpr char newChar = 'b';
+  std::cout << belobrov::replaceChars(line, oldChar, newChar);
+  std::cout << "\n";
+  free(line)
+  return 0;
 }
