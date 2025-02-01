@@ -12,21 +12,18 @@ namespace maslovskiy
   }
   double ComplexQuad::getArea() const
   {
-    point_t intersectionPoint = findIntersectionPoint(vertexA_, vertexB_, vertexC_, vertexD_);
-    double firstTriangleArea = calculateTriangleArea(vertexA_, vertexD_, intersectionPoint);
-    double secondTriangleArea = calculateTriangleArea(intersectionPoint, vertexB_, vertexC_);
-    return firstTriangleArea + secondTriangleArea;
+    point_t center = getFrameRect().pos;
+    return calculateTriangleArea(vertexA_, vertexD_, center) + calculateTriangleArea(vertexB_, vertexC_, center);
   }
+
   rectangle_t ComplexQuad::getFrameRect() const
   {
-    double left_border = std::fmin(std::fmin(std::fmin(vertexA_.x, vertexB_.x), vertexC_.x), vertexD_.x);
-    double right_border = std::fmax(std::fmax(std::fmax(vertexA_.x, vertexB_.x), vertexC_.x), vertexD_.x);
-    double upper_border = std::fmax(std::fmax(std::fmax(vertexA_.y, vertexB_.y), vertexC_.y), vertexD_.y);
-    double lower_border = std::fmin(std::fmin(std::fmin(vertexA_.y, vertexB_.y), vertexC_.y), vertexD_.y);
-    double width = right_border - left_border;
-    double height = upper_border - lower_border;
-    point_t center{left_border + width / 2, lower_border + height / 2};
-    return rectangle_t{width, height, center};
+    double left = std::min({vertexA_.x, vertexB_.x, vertexC_.x, vertexD_.x});
+    double right = std::max({vertexA_.x, vertexB_.x, vertexC_.x, vertexD_.x});
+    double bottom = std::min({vertexA_.y, vertexB_.y, vertexC_.y, vertexD_.y});
+    double top = std::max({vertexA_.y, vertexB_.y, vertexC_.y, vertexD_.y});
+    point_t center = {left + (right - left) / 2, bottom + (top - bottom) / 2};
+    return {right - left, top - bottom, center};
   }
   void ComplexQuad::move(point_t newPos)
   {
