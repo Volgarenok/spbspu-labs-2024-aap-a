@@ -1,12 +1,15 @@
 #include "complexQuad.hpp"
-#include "geomFun.hpp"
 #include <algorithm>
-
+#include "geomFun.hpp"
 namespace maslovskiy
 {
-  ComplexQuad::ComplexQuad(point_t vertexA, point_t vertexB, point_t vertexC, point_t vertexD)
-      : vertexA_(vertexA), vertexB_(vertexB), vertexC_(vertexC), vertexD_(vertexD)
-  {}
+  ComplexQuad::ComplexQuad(point_t vertexA, point_t vertexB, point_t vertexC, point_t vertexD):
+    vertexA_(vertexA),
+    vertexB_(vertexB),
+    vertexC_(vertexC),
+    vertexD_(vertexD)
+  {
+  }
   double ComplexQuad::getArea() const
   {
     point_t intersectionPoint = findIntersectionPoint(vertexA_, vertexB_, vertexC_, vertexD_);
@@ -16,16 +19,14 @@ namespace maslovskiy
   }
   rectangle_t ComplexQuad::getFrameRect() const
   {
-    double left = std::min({vertexA_.x, vertexB_.x, vertexC_.x, vertexD_.x});
-    double right = std::max({vertexA_.x, vertexB_.x, vertexC_.x, vertexD_.x});
-    double top = std::max({vertexA_.y, vertexB_.y, vertexC_.y, vertexD_.y});
-    double bottom = std::min({vertexA_.y, vertexB_.y, vertexC_.y, vertexD_.y});
-    rectangle_t frameRect;
-    frameRect.width = right - left;
-    frameRect.height = top - bottom;
-    frameRect.pos.x = left + frameRect.width / 2;
-    frameRect.pos.y = bottom + frameRect.height / 2;
-    return frameRect;
+    double left_border = std::fmin(std::fmin(std::fmin(vertexA_.x, vertexB_.x), vertexC_.x), vertexD_.x);
+    double right_border = std::fmax(std::fmax(std::fmax(vertexA_.x, vertexB_.x), vertexC_.x), vertexD_.x);
+    double upper_border = std::fmax(std::fmax(std::fmax(vertexA_.y, vertexB_.y), vertexC_.y), vertexD_.y);
+    double lower_border = std::fmin(std::fmin(std::fmin(vertexA_.y, vertexB_.y), vertexC_.y), vertexD_.y);
+    double width = right_border - left_border;
+    double height = upper_border - lower_border;
+    point_t center{left_border + width / 2, lower_border + height / 2};
+    return rectangle_t{width, height, center};
   }
   void ComplexQuad::move(point_t newPos)
   {
