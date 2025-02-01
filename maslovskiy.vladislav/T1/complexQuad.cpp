@@ -25,30 +25,28 @@ namespace maslovskiy
     point_t center = {left + (right - left) / 2, bottom + (top - bottom) / 2};
     return {right - left, top - bottom, center};
   }
+  void ComplexQuad::moveAll(double moveX, double moveY)
+  {
+    auto moveVertex = [moveX, moveY](point_t &vertex)
+    {
+      vertex.x += moveX;
+      vertex.y += moveY;
+    };
+    moveVertex(vertexA_);
+    moveVertex(vertexB_);
+    moveVertex(vertexC_);
+    moveVertex(vertexD_);
+  }
   void ComplexQuad::move(point_t newPos)
   {
     point_t currentCenter = getFrameRect().pos;
     double moveX = newPos.x - currentCenter.x;
     double moveY = newPos.y - currentCenter.y;
-    vertexA_.x += moveX;
-    vertexA_.y += moveY;
-    vertexB_.x += moveX;
-    vertexB_.y += moveY;
-    vertexC_.x += moveX;
-    vertexC_.y += moveY;
-    vertexD_.x += moveX;
-    vertexD_.y += moveY;
+    moveAll(moveX, moveY);
   }
   void ComplexQuad::move(double moveX, double moveY)
   {
-    vertexA_.x += moveX;
-    vertexA_.y += moveY;
-    vertexB_.x += moveX;
-    vertexB_.y += moveY;
-    vertexC_.x += moveX;
-    vertexC_.y += moveY;
-    vertexD_.x += moveX;
-    vertexD_.y += moveY;
+    moveAll(moveX, moveY);
   }
   void ComplexQuad::scale(double factor)
   {

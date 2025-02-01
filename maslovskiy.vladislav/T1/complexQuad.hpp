@@ -13,6 +13,7 @@ namespace maslovskiy
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;
     void move(double dx, double dy) override;
+    void moveAll(double moveX, double moveY);
     void scale(double k) override;
     point_t getCenterComplexQuad() const;
   private:
