@@ -141,7 +141,7 @@ void sveshnikov::CompositeShape::pop_back()
   {
     throw std::logic_error("ERROR: the composition is empty!");
   }
-  shapes_[--size_]->~Shape();
+  delete shapes_[--size_];
 }
 
 bool sveshnikov::CompositeShape::empty() const noexcept
