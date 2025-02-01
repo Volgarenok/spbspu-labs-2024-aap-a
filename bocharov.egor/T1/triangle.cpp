@@ -63,9 +63,10 @@ void bocharov::Triangle::move(double x, double y)
 
 void bocharov::Triangle::scale(double ratio)
 {
-  point_t pos = {0.0L, 0.0L};
-  pos.x = std::abs(a_.x + b_.x + c_.x) / 3.0;
-  pos.y = std::abs(a_.y + b_.y + c_.y) / 3.0;
+  double x = 0, y = 0;
+  x = std::abs(a_.x + b_.x + c_.x) / 3.0;
+  y = std::abs(a_.y + b_.y + c_.y) / 3.0;
+  point_t pos = {x, y};
   a_.x = (a_.x - pos.x) * ratio + pos.x;
   a_.y = (a_.y - pos.y) * ratio + pos.y;
   b_.x = (b_.x - pos.x) * ratio + pos.x;
