@@ -19,12 +19,6 @@ abramov::CompositeShape::CompositeShape(size_t capacity):
   shapes_(0),
   capacity_(capacity),
   shapeptrs_(new Shape*[capacity])
-{
-  for (size_t i = 0; i < size(); ++i)
-  {
-    shapeptrs_[i] = nullptr;
-  }
-}
 
 abramov::CompositeShape::CompositeShape(const CompositeShape &comp_shp):
   shapes_(comp_shp.shapes_),

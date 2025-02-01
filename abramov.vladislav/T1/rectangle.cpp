@@ -32,7 +32,13 @@ abramov::Rectangle::Rectangle(point_t p1, point_t p2):
 
 double abramov::Rectangle::getArea() const noexcept
 {
-  return cmplxqds[0].getArea() + cmplxqds[1].getArea() + cmplxqds[2].getArea() + cmplxqds[3].getArea();
+  double area = 0;
+  constexpr size_t k = 4;
+  for (size_t i = 0; i < k; ++i)
+  {
+    area += cmplxqds[i].getArea();
+  }
+  return area;
 }
 
 abramov::rectangle_t abramov::Rectangle::getFrameRect() const noexcept

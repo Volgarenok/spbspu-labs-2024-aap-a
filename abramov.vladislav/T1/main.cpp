@@ -37,7 +37,7 @@ int main()
     return 1;
   }
   printShapes(std::cout, shapes, p, k, count);
-  if (wrong_figure == true)
+  if (wrong_figure)
   {
     std::cerr << "There was bad figure\n";
   }
