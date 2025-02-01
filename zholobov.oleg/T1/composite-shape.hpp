@@ -8,17 +8,19 @@ namespace zholobov {
 
   class CompositeShape {
   public:
-    CompositeShape();
+    CompositeShape() noexcept;
     CompositeShape(const CompositeShape& other);
-    CompositeShape(CompositeShape&& other);
+    CompositeShape(CompositeShape&& other) noexcept;
     ~CompositeShape();
+
+    CompositeShape& operator=(CompositeShape&& other) noexcept;
 
     void push_back(Shape* shape);
     void pop_back();
     Shape* at(size_t idx) const;
-    Shape* operator[](size_t idx) const;
-    bool empty() const;
-    size_t size() const;
+    Shape* operator[](size_t idx) const noexcept;
+    bool empty() const noexcept;
+    size_t size() const noexcept;
 
     double getArea() const;
     rectangle_t getFrameRect() const;

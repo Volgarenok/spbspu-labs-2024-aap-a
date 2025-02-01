@@ -7,7 +7,7 @@
 #include "rectangle.hpp"
 #include "square.hpp"
 
-zholobov::CompositeShape::CompositeShape():
+zholobov::CompositeShape::CompositeShape() noexcept:
   items_(),
   items_num_(0)
 {}
@@ -34,7 +34,7 @@ zholobov::CompositeShape::CompositeShape(const CompositeShape& other)
   }
 }
 
-zholobov::CompositeShape::CompositeShape(CompositeShape&& other)
+zholobov::CompositeShape::CompositeShape(CompositeShape&& other) noexcept
 {
   for (size_t i = 0; i < other.items_num_; ++i) {
     items_[i] = other.items_[i];
@@ -48,6 +48,19 @@ zholobov::CompositeShape::~CompositeShape()
   for (size_t i = 0; i < items_num_; ++i) {
     delete items_[i];
   }
+}
+
+zholobov::CompositeShape& zholobov::CompositeShape::operator=(zholobov::CompositeShape&& other) noexcept
+{
+  for (size_t i = 0; i < items_num_; ++i) {
+    delete items_[i];
+  }
+  for (size_t i = 0; i < other.items_num_; ++i) {
+    items_[i] = other.items_[i];
+  }
+  items_num_ = other.items_num_;
+  other.items_num_ = 0;
+  return *this;
 }
 
 void zholobov::CompositeShape::push_back(Shape* shape)
@@ -74,17 +87,17 @@ zholobov::Shape* zholobov::CompositeShape::at(size_t idx) const
   return items_[idx];
 }
 
-zholobov::Shape* zholobov::CompositeShape::operator[](size_t idx) const
+zholobov::Shape* zholobov::CompositeShape::operator[](size_t idx) const noexcept
 {
   return items_[idx];
 }
 
-bool zholobov::CompositeShape::empty() const
+bool zholobov::CompositeShape::empty() const noexcept
 {
   return items_num_ == 0;
 }
 
-size_t zholobov::CompositeShape::size() const
+size_t zholobov::CompositeShape::size() const noexcept
 {
   return items_num_;
 }
@@ -101,9 +114,9 @@ double zholobov::CompositeShape::getArea() const
 zholobov::rectangle_t zholobov::CompositeShape::getFrameRect() const
 {
   double left = std::numeric_limits< double >::max();
-  double right = std::numeric_limits< double >::min();
+  double right = std::numeric_limits< double >::lowest();
   double down = std::numeric_limits< double >::max();
-  double up = std::numeric_limits< double >::min();
+  double up = std::numeric_limits< double >::lowest();
 
   for (size_t i = 0; i < items_num_; ++i) {
     rectangle_t cur_rect = items_[i]->getFrameRect();
