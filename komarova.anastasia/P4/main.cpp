@@ -1,8 +1,8 @@
 #include <iostream>
-#include "change.h"
-#include "dynamic.h"
 #include <cstddef>
 #include <cstdlib>
+#include <dynamic.h>
+#include "change.h"
 int main()
 {
   size_t size_str = 20;
