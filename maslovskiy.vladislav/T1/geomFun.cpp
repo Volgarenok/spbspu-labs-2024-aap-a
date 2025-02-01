@@ -45,7 +45,7 @@ namespace maslovskiy
     }
     return false;
   }
-  point_t findIntersectionPoint(point_t p1, point_t p2, point_t p3, point_t p4)
+  bool maslovskiy::findIntersectionPoint(point_t p1, point_t p2, point_t p3, point_t p4, point_t &intersection)
   {
     double a1 = p2.y - p1.y;
     double b1 = p1.x - p2.x;
@@ -53,10 +53,14 @@ namespace maslovskiy
     double a2 = p4.y - p3.y;
     double b2 = p3.x - p4.x;
     double c2 = a2 * p3.x + b2 * p3.y;
-    double det = a1 * b2 - a2 * b1;
-    double x = (b2 * c1 - b1 * c2) / det;
-    double y = (a1 * c2 - a2 * c1) / det;
-    return {x, y};
+    double determinant = a1 * b2 - a2 * b1;
+    if (determinant == 0)
+    {
+      return false;
+    }
+    intersection.x = (b2 * c1 - b1 * c2) / determinant;
+    intersection.y = (a1 * c2 - a2 * c1) / determinant;
+    return true;
   }
   double calculateTotalArea(Shape **shapeList, size_t shapeCount)
   {
