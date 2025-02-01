@@ -3,6 +3,9 @@
 #include "shape.hpp"
 
 namespace zholobov {
+
+  constexpr const size_t max_elem_num = 10000;
+
   class CompositeShape {
   public:
     CompositeShape();
@@ -10,10 +13,10 @@ namespace zholobov {
     CompositeShape(CompositeShape&& other);
     ~CompositeShape();
 
-    void push_back(Shape* shp);
+    void push_back(Shape* shape);
     void pop_back();
-    Shape* at(size_t id) const;
-    Shape* operator[](size_t id) const;
+    Shape* at(size_t idx) const;
+    Shape* operator[](size_t idx) const;
     bool empty() const;
     size_t size() const;
 
@@ -24,8 +27,8 @@ namespace zholobov {
     void scale(double k);
 
   private:
-    Shape* items[10000];
-    size_t items_num;
+    Shape* items_[max_elem_num];
+    size_t items_num_;
   };
 }
 
