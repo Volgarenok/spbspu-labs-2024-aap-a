@@ -76,24 +76,25 @@ tkach::CompositeShape::CompositeShape(const CompositeShape& other):
 
 tkach::CompositeShape& tkach::CompositeShape::operator=(const CompositeShape& other)
 {
-  if (this != std::addressof(other))
+  if (this == std::addressof(other))
   {
-    Shape** new_shapes = new Shape*[other.size_];
-    size_t true_size = 0;
-    try
-    {
-      fillCloneArray(new_shapes, other.shapes_, other.size_, true_size);
-    }
-    catch (const std::bad_alloc&)
-    {
-      deleteShapesFromArray(new_shapes, true_size);
-      delete[] new_shapes;
-      throw;
-    }
-    delete[] shapes_;
-    shapes_ = new_shapes;
-    size_ = other.size_;
+    return *this;
   }
+  Shape** new_shapes = new Shape*[other.size_];
+  size_t true_size = 0;
+  try
+  {
+    fillCloneArray(new_shapes, other.shapes_, other.size_, true_size);
+  }
+  catch (const std::bad_alloc&)
+  {
+    deleteShapesFromArray(new_shapes, true_size);
+    delete[] new_shapes;
+    throw;
+  }
+  delete[] shapes_;
+  shapes_ = new_shapes;
+  size_ = other.size_;
   return *this;
 }
 
@@ -101,12 +102,13 @@ tkach::CompositeShape& tkach::CompositeShape::operator=(CompositeShape&& other) 
 {
   if (this != std::addressof(other))
   {
-    delete[] shapes_;
-    size_ = other.size_;
-    shapes_ = other.shapes_;
-    other.shapes_ = nullptr;
-    other.size_ = 0;
+    return *this;
   }
+  delete[] shapes_;
+  size_ = other.size_;
+  shapes_ = other.shapes_;
+  other.shapes_ = nullptr;
+  other.size_ = 0;
   return *this;
 }
 
