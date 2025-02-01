@@ -1,6 +1,17 @@
 #include "shape_transformations.hpp"
 #include <limits>
 
+namespace
+{
+  void getArray(std::istream &in, double *x, size_t k)
+  {
+    for (size_t i = 0; i < k; ++i)
+    {
+      in >> x[i];
+    }
+  }
+}
+
 void abramov::getShapes(std::istream &in, Composite &shapes, point_t &p, double &k, bool &flag)
 {
   while (in)
@@ -37,14 +48,6 @@ void abramov::getShapes(std::istream &in, Composite &shapes, point_t &p, double 
     {
       in.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
     }
-  }
-}
-
-void getArray(std::istream &in, double *x, size_t k)
-{
-  for (size_t i = 0; i < k; ++i)
-  {
-    in >> x[i];
   }
 }
 

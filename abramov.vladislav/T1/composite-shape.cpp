@@ -4,6 +4,17 @@
 #include <algorithm>
 #include "shape_transformations.hpp"
 
+namespace
+{
+  void getRectCoords(abramov::rectangle_t rect, double &x1, double &y1, double &x2, double &y2)
+  {
+    x1 = std::min(x1, rect.pos.x - rect.width / 2);
+    x2 = std::max(x2, rect.pos.x + rect.width / 2);
+    y1 = std::min(y1, rect.pos.y - rect.height / 2);
+    y2 = std::max(y2, rect.pos.y + rect.height / 2);
+  }
+}
+
 abramov::CompositeShape::CompositeShape(size_t capacity):
   shapes_(0),
   capacity_(capacity),
@@ -81,14 +92,6 @@ double abramov::CompositeShape::getArea() const noexcept
     area += shapeptrs_[i]->getArea();
   }
   return area;
-}
-
-void getRectCoords(abramov::rectangle_t rect, double &x1, double &y1, double &x2, double &y2)
-{
-  x1 = std::min(x1, rect.pos.x - rect.width / 2);
-  x2 = std::max(x2, rect.pos.x + rect.width / 2);
-  y1 = std::min(y1, rect.pos.y - rect.height / 2);
-  y2 = std::max(y2, rect.pos.y + rect.height / 2);
 }
 
 abramov::rectangle_t abramov::CompositeShape::getFrameRect() const

@@ -15,7 +15,7 @@ namespace abramov
     point_t pos;
   };
 
-  double getLength(point_t p1, point_t p2);
+  double getLength(const point_t &p1, const point_t &p2);
   void changePointCoords(point_t &p, double dx, double dy);
 }
 #endif

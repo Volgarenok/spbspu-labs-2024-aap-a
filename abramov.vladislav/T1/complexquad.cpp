@@ -2,69 +2,72 @@
 #include <stdexcept>
 #include <cmath>
 
-void searchInArray(const double *x, double &a, double &b, size_t k)
+namespace
 {
-  if (k >= 1)
+  void searchInArray(const double *x, double &a, double &b, size_t k)
   {
-    a = x[0];
-    b = x[0];
+    if (k >= 1)
+    {
+      a = x[0];
+      b = x[0];
+      for (size_t i = 0; i < k; ++i)
+      {
+        if (x[i] > b)
+        {
+          b = x[i];
+        }
+        if (x[i] < a)
+        {
+          a = x[i];
+        }
+      }
+    }
+  }
+
+  void getCoordsOfIntersection(const abramov::point_t *points, double &x, double &y)
+  {
+    const abramov::point_t A = points[0];
+    const abramov::point_t B = points[1];
+    const abramov::point_t C = points[2];
+    const abramov::point_t D = points[3];
+    const double k1 = (B.y - A.y) / (B.x - A.x);
+    const double b1 = A.y - A.x * k1;
+    const double k2 = (D.y - C.y) / (D.x - C.x);
+    const double b2 = C.y - C.x * k2;
+    if (k1 == k2)
+    {
+      throw std::logic_error("There is no center\n");
+    }
+    x = (b2 - b1) / (k1 - k2);
+    y = k1 * x + b1;
+    if (x == A.x || x == B.x || x == C.x || x == D.x)
+    {
+      throw std::logic_error("There is no center\n");
+    }
+    constexpr size_t k = 4;
+    double xs[k] = {A.x, B.x, C.x, D.x};
+    size_t count = 0;
     for (size_t i = 0; i < k; ++i)
     {
-      if (x[i] > b)
+      if (x > xs[i])
       {
-        b = x[i];
-      }
-      if (x[i] < a)
-      {
-        a = x[i];
+        ++count;
       }
     }
-  }
-}
-
-void getCoordsOfIntersection(const abramov::point_t *points, double &x, double &y)
-{
-  const abramov::point_t A = points[0];
-  const abramov::point_t B = points[1];
-  const abramov::point_t C = points[2];
-  const abramov::point_t D = points[3];
-  const double k1 = (B.y - A.y) / (B.x - A.x);
-  const double b1 = A.y - A.x * k1;
-  const double k2 = (D.y - C.y) / (D.x - C.x);
-  const double b2 = C.y - C.x * k2;
-  if (k1 == k2)
-  {
-    throw std::logic_error("There is no center\n");
-  }
-  x = (b2 - b1) / (k1 - k2);
-  y = k1 * x + b1;
-  if (x == A.x || x == B.x || x == C.x || x == D.x)
-  {
-    throw std::logic_error("There is no center\n");
-  }
-  constexpr size_t k = 4;
-  double xs[k] = {A.x, B.x, C.x, D.x};
-  size_t count = 0;
-  for (size_t i = 0; i < k; ++i)
-  {
-    if (x > xs[i])
+    if (count != 2)
     {
-      ++count;
+      throw std::logic_error("There is no center\n");
     }
   }
-  if (count != 2)
-  {
-    throw std::logic_error("There is no center\n");
-  }
-}
 
-double getTriangleArea(abramov::point_t A, abramov::point_t B, abramov::point_t O)
-{
-  const double a = getLength(A, B);
-  const double b = getLength(B, O);
-  const double c = getLength(O, A);
-  const double p = (a + b + c) / 2;
-  return std::sqrt(p * (p - a) * (p - b) * (p - c));
+  double getTriangleArea(abramov::point_t A, abramov::point_t B, abramov::point_t O)
+  {
+    const double a = getLength(A, B);
+    const double b = getLength(B, O);
+    const double c = getLength(O, A);
+    const double p = (a + b + c) / 2;
+    return std::sqrt(p * (p - a) * (p - b) * (p - c));
+  }
 }
 
 void abramov::createCQs(point_t p1, point_t p2, ComplexQuad &cq1, ComplexQuad &cq2, ComplexQuad &cq3, ComplexQuad &cq4)
