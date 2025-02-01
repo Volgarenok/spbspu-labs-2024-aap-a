@@ -28,61 +28,7 @@ int main()
       return 1;
     }
     std::cin >> shapeType;
-    if (shapeType == "RECTANGLE")
-    {
-      try
-      {
-        shapes[count] = makeRectangle(std::cin);
-        count++;
-      }
-      catch (const std::invalid_argument& e)
-      {
-        flag = true;
-      }
-    }
-    else if (shapeType == "RING")
-    {
-      try
-      {
-        shapes[count] = makeRing(std::cin);
-        count++;
-      }
-      catch (const std::invalid_argument& e)
-      {
-        flag = true;
-      }
-    }
-    else if (shapeType == "CIRCLE")
-    {
-      try
-      {
-        shapes[count] = makeCircle(std::cin);
-        count++;
-      }
-      catch (const std::bad_alloc& e)
-      {
-        std::cerr << "Out of memory\n";
-        destroyShapes(shapes, count);
-        return 1;
-      }
-      catch (const std::invalid_argument& e)
-      {
-        flag = true;
-      }
-    }
-    else if (shapeType == "ELLIPSE")
-    {
-      try
-      {
-        shapes[count] = makeEllipse(std::cin);
-        count++;
-      }
-      catch (const std::invalid_argument&)
-      {
-        flag = true;
-      }
-    }
-    else if (shapeType == "SCALE")
+    if (shapeType == "SCALE")
     {
       double p1 = 0.0;
       double p2 = 0.0;
@@ -90,6 +36,21 @@ int main()
       scaleCenter = {p1, p2};
       std::cin >> scaleK;
       break;
+    }
+    try
+    {
+      shapes[count] = createShape(std::cin, shapeType);
+      count++;
+    }
+    catch (const std::bad_alloc&)
+    {
+      std::cerr << "Out of memory\n";
+      destroyShapes(shapes, count);
+      return 1;
+    }
+    catch (const std::invalid_argument&)
+    {
+      flag = true;
     }
   }
   if (scaleK <= 0)
