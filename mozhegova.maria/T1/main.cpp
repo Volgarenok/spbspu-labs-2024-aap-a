@@ -49,7 +49,7 @@ int main()
   }
   std::cout << std::fixed;
   std::cout.precision(1);
-  std::cout << sumArea(shapes, count) << " ";
+  std::cout << getSumArea(shapes, count) << " ";
   printCoorRect(std::cout, shapes, count);
   std::cout << '\n';
 
@@ -65,7 +65,7 @@ int main()
     return 1;
   }
 
-  std::cout << sumArea(shapes, count) << " ";
+  std::cout << getSumArea(shapes, count) << " ";
   printCoorRect(std::cout, shapes, count);
   std::cout << '\n';
   destroy(shapes, count);

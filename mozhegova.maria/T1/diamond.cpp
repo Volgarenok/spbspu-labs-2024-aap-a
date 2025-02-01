@@ -81,5 +81,5 @@ void mozhegova::Diamond::move(double dx, double dy)
 
 void mozhegova::Diamond::scaleImpl(double k)
 {
-  poly_.scale(k);
+  poly_.scaleImpl(k);
 }

@@ -46,5 +46,5 @@ void mozhegova::Rectangle::move(double dx, double dy)
 
 void mozhegova::Rectangle::scaleImpl(double k)
 {
-  poly_.scale(k);
+  poly_.scaleImpl(k);
 }

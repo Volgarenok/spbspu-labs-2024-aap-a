@@ -19,6 +19,7 @@ namespace mozhegova
   private:
     size_t count_;
     point_t * points_;
+    point_t getCenter() const;
   };
 }
 

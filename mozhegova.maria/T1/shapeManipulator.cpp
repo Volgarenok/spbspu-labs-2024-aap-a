@@ -1,6 +1,6 @@
 #include "shapeManipulator.hpp"
 
-double mozhegova::sumArea(const Shape * const * shapes, size_t n)
+double mozhegova::getSumArea(const Shape * const * shapes, size_t n)
 {
   double sum = 0;
   for (size_t i = 0; i < n; i++)

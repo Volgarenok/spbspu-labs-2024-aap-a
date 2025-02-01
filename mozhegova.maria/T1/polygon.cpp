@@ -76,14 +76,7 @@ mozhegova::rectangle_t mozhegova::Polygon::getFrameRect() const
 
 void mozhegova::Polygon::move(point_t p)
 {
-  double sumX = 0.0;
-  double sumY = 0.0;
-  for (size_t i = 0; i < count_; i++)
-  {
-    sumX += points_[i].x;
-    sumY += points_[i].y;
-  }
-  point_t center = {sumX / count_, sumY / count_};
+  point_t center = getCenter();
   point_t vector = {p.x - center.x, p.y - center.y};
   move(vector.x, vector.y);
 }
@@ -99,14 +92,7 @@ void mozhegova::Polygon::move(double dx, double dy)
 
 void mozhegova::Polygon::scaleImpl(double k)
 {
-  double sumX = 0.0;
-  double sumY = 0.0;
-  for (size_t i = 0; i < count_; i++)
-  {
-    sumX += points_[i].x;
-    sumY += points_[i].y;
-  }
-  point_t center = {sumX / count_, sumY / count_};
+  point_t center = getCenter();
   point_t vector = {0.0, 0.0};
   for (size_t i = 0; i < count_; i++)
   {
@@ -114,4 +100,16 @@ void mozhegova::Polygon::scaleImpl(double k)
     points_[i].x = center.x + vector.x * k;
     points_[i].y = center.y + vector.y * k;
   }
+}
+
+mozhegova::point_t mozhegova::Polygon::getCenter() const
+{
+  double sumX = 0.0;
+  double sumY = 0.0;
+  for (size_t i = 0; i < count_; i++)
+  {
+    sumX += points_[i].x;
+    sumY += points_[i].y;
+  }
+  return {sumX / count_, sumY / count_};
 }
