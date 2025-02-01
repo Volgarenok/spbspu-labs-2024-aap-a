@@ -4,7 +4,7 @@
 
 namespace savintsev
 {
-  class Concave final : public Shape
+  class Concave final: public Shape
   {
   public:
     Concave(point_t p1, point_t p2, point_t p3, point_t p4);

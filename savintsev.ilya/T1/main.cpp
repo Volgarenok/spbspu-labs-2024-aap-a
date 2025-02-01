@@ -28,7 +28,7 @@ int main()
   double params[8] = {};
   point_t scalePoint = {};
   double scaleRatio = 0;
-  while (!was_scale && std::cin.good())
+  while (!was_scale && !std::cin.eof())
   {
     delete[] line;
     line = inputNewlineTerminatedStr(std::cin);

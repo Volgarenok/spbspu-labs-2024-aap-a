@@ -21,9 +21,19 @@ savintsev::CompositeShape::CompositeShape(const CompositeShape & rhs):
   cap_(rhs.cap_),
   lst_(new Shape * [rhs.cap_])
 {
-  for (size_t i = 0; i < amt_; ++i)
+  size_t created = 0;
+  try
   {
-    lst_[i] = rhs.lst_[i]->clone();
+    for (size_t i = 0; i < amt_; ++i)
+    {
+      lst_[i] = rhs.lst_[i]->clone();
+      created++;
+    }
+  }
+  catch (const std::bad_alloc & e)
+  {
+    destroy(lst_, created);
+    throw;
   }
 }
 
@@ -33,33 +43,51 @@ savintsev::CompositeShape::CompositeShape(CompositeShape && rhs) noexcept:
   lst_(rhs.lst_)
 {
   rhs.lst_ = nullptr;
+  rhs.amt_ = 0;
+  rhs.cap_ = 0;
 }
 
 savintsev::CompositeShape & savintsev::CompositeShape::operator=(const CompositeShape & rhs)
 {
-  if (std::addressof(rhs) != this)
+  if (std::addressof(rhs) == this)
   {
-    amt_ = rhs.amt_;
-    cap_ = rhs.cap_;
-    lst_ = new Shape * [rhs.cap_];
+    return *this;
+  }
+  Shape ** new_lst = new Shape * [rhs.cap_];
+  size_t created = 0;
+  try
+  {
     for (size_t i = 0; i < amt_; ++i)
     {
-      lst_[i] = rhs.lst_[i]->clone();
+      new_lst[i] = rhs.lst_[i]->clone();
+      created++;
     }
   }
+  catch (const std::bad_alloc & e)
+  {
+    destroy(new_lst, created);
+    throw;
+  }
+  destroy(lst_, amt_);
+  amt_ = rhs.amt_;
+  cap_ = rhs.cap_;
+  lst_ = new_lst;
   return *this;
 }
 
 savintsev::CompositeShape & savintsev::CompositeShape::operator=(CompositeShape && rhs) noexcept
 {
-  if (std::addressof(rhs) != this)
+  if (std::addressof(rhs) == this)
   {
-    delete[] lst_;
-    amt_ = rhs.amt_;
-    cap_ = rhs.cap_;
-    lst_ = rhs.lst_;
-    rhs.lst_ = nullptr;
+    return *this;
   }
+  destroy(lst_, amt_);
+  amt_ = rhs.amt_;
+  cap_ = rhs.cap_;
+  lst_ = rhs.lst_;
+  rhs.lst_ = nullptr;
+  rhs.amt_ = 0;
+  rhs.cap_ = 0;
   return *this;
 }
 
@@ -73,12 +101,8 @@ double savintsev::CompositeShape::getArea() const
   return area;
 }
 
-savintsev::rectangle_t savintsev::CompositeShape::getFrameRect() const
+savintsev::rectangle_t savintsev::CompositeShape::getFrameRect() const noexcept
 {
-  if (empty())
-  {
-    return {0.0, 0.0, {0.0, 0.0}};
-  }
   rectangle_t rect = lst_[0]->getFrameRect();
   double xmin = rect.pos.x - rect.width / 2;
   double xmax = rect.pos.x + rect.width / 2;
@@ -93,6 +117,15 @@ savintsev::rectangle_t savintsev::CompositeShape::getFrameRect() const
     ymax = std::fmax(ymax, rect.pos.y + rect.height / 2);
   }
   return {xmax - xmin, ymax - ymin, {(xmax + xmin) / 2, (ymax + ymin) / 2}};
+}
+
+savintsev::rectangle_t savintsev::CompositeShape::safeGetFrameRect() const
+{
+  if (empty())
+  {
+    throw std::logic_error("ERROR: CompositeShape is empty");
+  }
+  return getFrameRect();
 }
 
 void savintsev::CompositeShape::move(point_t p)
@@ -114,7 +147,7 @@ void savintsev::CompositeShape::scale(double k)
 {
   if (k <= 0)
   {
-    throw std::invalid_argument("invalid ratio");
+    throw std::invalid_argument("ERROR: Invalid ratio");
   }
   unsafeScale(k);
 }
@@ -127,6 +160,15 @@ void savintsev::CompositeShape::unsafeScale(double k) noexcept
 savintsev::CompositeShape * savintsev::CompositeShape::clone() const
 {
   return new CompositeShape(*this);
+}
+
+void savintsev::CompositeShape::scaleRelativeTo(double k, point_t p)
+{
+  if (k <= 0)
+  {
+    throw std::invalid_argument("ERROR: Invalid ratio");
+  }
+  unsafeScaleRelativeTo(k, p);
 }
 
 void savintsev::CompositeShape::unsafeScaleRelativeTo(double k, point_t p) noexcept

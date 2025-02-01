@@ -19,12 +19,14 @@ namespace savintsev
     CompositeShape & operator=(CompositeShape && rhs) noexcept;
 
     double getArea() const;
-    rectangle_t getFrameRect() const;
+    rectangle_t getFrameRect() const noexcept;
+    rectangle_t safeGetFrameRect() const;
     void move(point_t p);
     void move(double x, double y);
     void scale(double k);
     void unsafeScale(double k) noexcept;
     CompositeShape * clone() const;
+    void scaleRelativeTo(double k, point_t p);
     void unsafeScaleRelativeTo(double k, point_t p) noexcept;
 
     void push_back(Shape * shp);
