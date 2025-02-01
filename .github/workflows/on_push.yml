@@ -51,6 +51,7 @@ jobs:
         with:
           name: labs
           path: ${{ github.workspace }}/out
+          overwrite: true
   acceptance:
     needs: [build]
     runs-on: ubuntu-latest
@@ -69,3 +70,4 @@ jobs:
         with:
           name: labs
           path: ${{ github.workspace }}/out/*/*/acceptance.*
+          overwrite: true
