@@ -1,5 +1,5 @@
 #include "ellipse.hpp"
-#include <cmath>
+#include <math.h>
 #include <stdexcept>
 
 sveshnikov::Ellipse::Ellipse(point_t center, double vert_radius, double horiz_radius):
@@ -15,7 +15,8 @@ sveshnikov::Ellipse::Ellipse(point_t center, double vert_radius, double horiz_ra
 
 double sveshnikov::Ellipse::getArea() const
 {
-  return M_PI * (vert_radius_ * horiz_radius_);
+  double pi = 4.0 * atan(1.0);
+  return pi * (vert_radius_ * horiz_radius_);
 }
 
 sveshnikov::rectangle_t sveshnikov::Ellipse::getFrameRect() const

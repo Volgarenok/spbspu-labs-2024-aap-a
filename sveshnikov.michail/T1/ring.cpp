@@ -1,5 +1,4 @@
 #include "ring.hpp"
-#include <cmath>
 #include <stdexcept>
 
 sveshnikov::Ring::Ring(point_t center, double long_radius, double short_radius):
@@ -43,7 +42,7 @@ void sveshnikov::Ring::unsafe_scale(double k)
   big_ellipse_.scale(k);
 }
 
-sveshnikov::Shape * sveshnikov::Ring::clone() const
+sveshnikov::Shape *sveshnikov::Ring::clone() const
 {
   return new Ring(center_, long_radius_, short_radius_);
 }

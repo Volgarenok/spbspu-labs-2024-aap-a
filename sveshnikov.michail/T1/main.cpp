@@ -40,7 +40,7 @@ int main()
   }
   catch (const std::bad_alloc &e)
   {
-    std::cerr << "ERROR: Memmory did not allocated!\n";
+    std::cerr << e.what() << "\n";
     return 1;
   }
   if (shape_name != "SCALE")

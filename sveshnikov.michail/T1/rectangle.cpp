@@ -18,21 +18,16 @@ double sveshnikov::Rectangle::getArea() const
 
 sveshnikov::rectangle_t sveshnikov::Rectangle::getFrameRect() const
 {
-  rectangle_t frame = {0, 0, {0, 0}};
-  frame.width = up_right_.x - low_left_.x;
-  frame.height = up_right_.y - low_left_.y;
-  frame.pos.x = (low_left_.x + up_right_.x) / 2.0;
-  frame.pos.y = (low_left_.y + up_right_.y) / 2.0;
-  return frame;
+  double width = up_right_.x - low_left_.x;
+  double height = up_right_.y - low_left_.y;
+  double x = (low_left_.x + up_right_.x) / 2.0;
+  double y = (low_left_.y + up_right_.y) / 2.0;
+  return {width, height, {x, y}};
 }
 
 void sveshnikov::Rectangle::move(const point_t p)
 {
-  const point_t center = getFrameRect().pos;
-  up_right_.x += p.x - center.x;
-  up_right_.y += p.y - center.y;
-  low_left_.x += p.x - center.x;
-  low_left_.y += p.y - center.y;
+  move(p.x - getFrameRect().pos.x, p.y - getFrameRect().pos.y);
 }
 
 void sveshnikov::Rectangle::move(double dx, double dy)

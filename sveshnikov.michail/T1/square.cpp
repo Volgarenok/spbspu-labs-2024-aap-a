@@ -25,9 +25,7 @@ sveshnikov::rectangle_t sveshnikov::Square::getFrameRect() const
 
 void sveshnikov::Square::move(const point_t p)
 {
-  double ctr_x = getFrameRect().pos.x, ctr_y = getFrameRect().pos.y;
-  low_left_.x += p.x - ctr_x;
-  low_left_.y += p.y - ctr_y;
+  move(p.x - getFrameRect().pos.x, p.y - getFrameRect().pos.y);
 }
 
 void sveshnikov::Square::move(double dx, double dy)

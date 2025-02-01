@@ -14,8 +14,6 @@ namespace sveshnikov
     virtual void move(double dx, double dy) = 0;
     void scale(double k);
     virtual Shape *clone() const = 0;
-
-  private:
     virtual void unsafe_scale(double k) = 0;
   };
 }
