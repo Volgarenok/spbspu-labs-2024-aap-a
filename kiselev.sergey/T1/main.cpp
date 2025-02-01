@@ -62,12 +62,10 @@ int main()
   }
   try
   {
-    std::cout << std::fixed << std::setprecision(1) << compShp.getArea();
-    printCoordinatesRect(std::cout, compShp);
+    kiselev::printInfo(std::cout, compShp);
     std::cout << "\n";
     compShp.scale(ratio, scale);
-    std::cout << compShp.getArea();
-    printCoordinatesRect(std::cout, compShp);
+    kiselev::printInfo(std::cout, compShp);
     std::cout << "\n";
   }
   catch (const std::exception& e)
