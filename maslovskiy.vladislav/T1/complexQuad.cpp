@@ -27,21 +27,28 @@ namespace maslovskiy
   }
   void ComplexQuad::move(point_t newPos)
   {
-    point_t center = {0.0, 0.0};
-    findIntersectionPoint(vertexA_, vertexB_, vertexC_, vertexD_, center);
-    double deltaX = newPos.x - center.x;
-    double deltaY = newPos.y - center.y;
-    vertexA_ = {vertexA_.x + deltaX, vertexA_.y + deltaY};
-    vertexB_ = {vertexB_.x + deltaX, vertexB_.y + deltaY};
-    vertexC_ = {vertexC_.x + deltaX, vertexC_.y + deltaY};
-    vertexD_ = {vertexD_.x + deltaX, vertexD_.y + deltaY};
+    point_t currentCenter = getFrameRect().pos;
+    double moveX = newPos.x - currentCenter.x;
+    double moveY = newPos.y - currentCenter.y;
+    vertexA_.x += moveX;
+    vertexA_.y += moveY;
+    vertexB_.x += moveX;
+    vertexB_.y += moveY;
+    vertexC_.x += moveX;
+    vertexC_.y += moveY;
+    vertexD_.x += moveX;
+    vertexD_.y += moveY;
   }
-  void ComplexQuad::move(double deltaX, double deltaY)
+  void ComplexQuad::move(double moveX, double moveY)
   {
-    vertexA_ = {vertexA_.x + deltaX, vertexA_.y + deltaY};
-    vertexB_ = {vertexB_.x + deltaX, vertexB_.y + deltaY};
-    vertexC_ = {vertexC_.x + deltaX, vertexC_.y + deltaY};
-    vertexD_ = {vertexD_.x + deltaX, vertexD_.y + deltaY};
+    vertexA_.x += moveX;
+    vertexA_.y += moveY;
+    vertexB_.x += moveX;
+    vertexB_.y += moveY;
+    vertexC_.x += moveX;
+    vertexC_.y += moveY;
+    vertexD_.x += moveX;
+    vertexD_.y += moveY;
   }
   void ComplexQuad::scale(double factor)
   {
