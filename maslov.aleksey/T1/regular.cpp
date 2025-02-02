@@ -121,8 +121,8 @@ size_t maslov::Regular::getVerticals() const
   double value = (x * x - z * z - y * y) / (-2 * y * z);
   double angle = std::acos(value) * 180.0 / maslov::pi;
   double verticals = 360.0 / (angle * 2);
-  double doubleToCheck = std::abs(verticals - std::round(verticals));
-  if (isGreaterDouble(doubleToCheck, maslov::customEpsilon))
+  double doubleToCheck = std::fabs(verticals - std::round(verticals));
+  if (isGreaterDouble(doubleToCheck, maslov::customEpsilonForVerticals))
   {
     return 0;
   }
@@ -134,7 +134,7 @@ bool maslov::Regular::isRegular() const
   double cat1 = getHalfSide();
   double cat2 = getRadiusIncircle();
   double doubleToCheck = std::fabs(hyp * hyp - (cat1 * cat1 + cat2 * cat2));
-  if (isGreaterDouble(doubleToCheck, maslov::customEpsilon))
+  if (isGreaterDouble(doubleToCheck, maslov::customEpsilonForPythagoras))
   {
     if (n_ != 0)
     {
