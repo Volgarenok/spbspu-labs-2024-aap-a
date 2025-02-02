@@ -27,9 +27,8 @@ namespace nikonov
     const Shape *at(size_t id) const;
     bool empty() const noexcept;
     size_t size() const noexcept;
-    void clear();
   private:
-    Shape *shp[10000];
+    Shape *shp_[10000];
     size_t size_;
   };
 }

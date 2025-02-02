@@ -1,7 +1,6 @@
 #include "composite-shape.hpp"
 #include <stdexcept>
 #include <cmath>
-#include <cstring>
 #include <memory>
 #include "additional-utilities.hpp"
 nikonov::CompositeShape::CompositeShape():
@@ -12,7 +11,7 @@ nikonov::CompositeShape::CompositeShape(CompositeShape &copy):
 {
   for (size_t i = 0; i < copy.size(); ++i)
   {
-    shp[i] = copy.shp[i]->clone();
+    shp_[i] = copy.shp_[i]->clone();
   }
 }
 nikonov::CompositeShape::CompositeShape(CompositeShape &&copy):
@@ -20,31 +19,31 @@ nikonov::CompositeShape::CompositeShape(CompositeShape &&copy):
 {
   for (size_t i = 0; i < copy.size(); ++i)
   {
-    shp[i] = copy.shp[i];
-    copy.shp[i] = nullptr;
+    shp_[i] = copy.shp_[i];
+    copy.shp_[i] = nullptr;
   }
   copy.size_ = 0;
 }
 nikonov::CompositeShape::~CompositeShape()
 {
-  clear();
+  destroy(shp_, size());
 }
 nikonov::Shape *nikonov::CompositeShape::operator[](size_t id)
 {
-  return shp[id];
+  return shp_[id];
 }
 const nikonov::Shape *nikonov::CompositeShape::operator[](size_t id) const
 {
-  return shp[id];
+  return shp_[id];
 }
 nikonov::CompositeShape &nikonov::CompositeShape::operator=(const CompositeShape &another)
 {
   if (std::addressof(another) != this)
   {
-    clear();
+    destroy(shp_, size());
     for (size_t i = 0; i < another.size(); ++i)
     {
-      shp[i] = another.shp[i]->clone();
+      shp_[i] = another.shp_[i]->clone();
     }
     size_ = another.size_;
   }
@@ -54,15 +53,15 @@ nikonov::CompositeShape &nikonov::CompositeShape::operator=(CompositeShape &&ano
 {
   if (std::addressof(another) != this)
   {
-    clear();
+    destroy(shp_, size());
     for (size_t i = 0; i < another.size(); ++i)
     {
-      shp[i] = another.shp[i];
-      another.shp[i] = nullptr;
+      shp_[i] = another.shp_[i];
+      another.shp_[i] = nullptr;
     }
     size_ = another.size_;
+    another.~CompositeShape();
     another.size_ = 0;
-    another.clear();
   }
   return *this;
 }
@@ -71,7 +70,7 @@ double nikonov::CompositeShape::getArea() const
   double sumArea = 0;
   for (size_t i = 0; i < size_; ++i)
   {
-    sumArea += shp[i]->getArea();
+    sumArea += shp_[i]->getArea();
   }
   return sumArea;
 }
@@ -81,18 +80,18 @@ nikonov::rectangle_t nikonov::CompositeShape::getFrameRect() const
   {
     throw std::logic_error("ShapeCollection is empty");
   }
-  point_t currCenter = (*shp)->getFrameRect().pos;
-  double currDivWidth = (*shp)->getFrameRect().width / 2;
-  double currDivHeight = (*shp)->getFrameRect().height / 2;
+  point_t currCenter = shp_[0]->getFrameRect().pos;
+  double currDivWidth = shp_[0]->getFrameRect().width / 2;
+  double currDivHeight = shp_[0]->getFrameRect().height / 2;
   double minX = currCenter.x - currDivWidth;
   double minY = currCenter.y - currDivHeight;
   double maxX = currCenter.x + currDivWidth;
   double maxY = currCenter.y + currDivHeight;
   for (size_t i = 0; i < size_; ++i)
   {
-    currCenter = shp[i]->getFrameRect().pos;
-    currDivWidth = shp[i]->getFrameRect().width / 2;
-    currDivHeight = shp[i]->getFrameRect().height / 2;
+    currCenter = shp_[i]->getFrameRect().pos;
+    currDivWidth = shp_[i]->getFrameRect().width / 2;
+    currDivHeight = shp_[i]->getFrameRect().height / 2;
     minX = std::min(minX, currCenter.x - currDivWidth);
     minY = std::min(minY, currCenter.y - currDivHeight);
     maxX = std::max(maxX, currCenter.x + currDivWidth);
@@ -113,21 +112,21 @@ void nikonov::CompositeShape::move(double x, double y)
 {
   for (size_t i = 0; i < size_; ++i)
   {
-    shp[i]->move(x, y);
+    shp_[i]->move(x, y);
   }
 }
 void nikonov::CompositeShape::scale(double k) noexcept
 {
   for (size_t i = 0; i < size_; ++i)
   {
-    point_t S = getFrameRect().pos;
-    point_t origCenter = shp[i]->getFrameRect().pos;
-    shp[i]->move(S);
-    point_t newCenter = shp[i]->getFrameRect().pos;
+    point_t s = getFrameRect().pos;
+    point_t origCenter = shp_[i]->getFrameRect().pos;
+    shp_[i]->move(s);
+    point_t newCenter = shp_[i]->getFrameRect().pos;
     double diffX = newCenter.x - origCenter.x;
     double diffY = newCenter.y - origCenter.y;
-    shp[i]->scale(k);
-    shp[i]->move(diffX * k * (-1), diffY * k * (-1));
+    shp_[i]->scale(k);
+    shp_[i]->move(diffX * k * (-1), diffY * k * (-1));
   }
 }
 void nikonov::CompositeShape::scaleWithCheck(double k)
@@ -140,13 +139,13 @@ void nikonov::CompositeShape::scaleWithCheck(double k)
 }
 void nikonov::CompositeShape::push_back(Shape *newElem)
 {
-  shp[size_] = newElem;
+  shp_[size_] = newElem;
   ++size_;
 }
 void nikonov::CompositeShape::pop_back()
 {
-  delete shp[size_ - 1];
-  shp[size_ - 1] = nullptr;
+  delete shp_[size_ - 1];
+  shp_[size_ - 1] = nullptr;
   --size_;
 }
 nikonov::Shape *nikonov::CompositeShape::at(size_t id)
@@ -155,15 +154,11 @@ nikonov::Shape *nikonov::CompositeShape::at(size_t id)
   {
     throw std::logic_error("noncorrect id");
   }
-  return shp[id];
+  return shp_[id];
 }
 const nikonov::Shape *nikonov::CompositeShape::at(size_t id) const
 {
-  if (id >= size_)
-  {
-    throw std::logic_error("noncorrect id");
-  }
-  return shp[id];
+  return const_cast< CompositeShape * >(this)->at(id);
 }
 bool nikonov::CompositeShape::empty() const noexcept
 {
@@ -172,11 +167,4 @@ bool nikonov::CompositeShape::empty() const noexcept
 size_t nikonov::CompositeShape::size() const noexcept
 {
   return size_;
-}
-void nikonov::CompositeShape::clear()
-{
-  while (size_ > 0)
-  {
-    pop_back();
-  }
 }

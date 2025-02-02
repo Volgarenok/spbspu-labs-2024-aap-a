@@ -1,10 +1,9 @@
 #include "fabric.hpp"
 #include <string>
-#include <exception>
+#include <stdexcept>
 #include "rectangle.hpp"
 #include "additional-utilities.hpp"
 #include "diamond.hpp"
-#include "triangle.hpp"
 namespace
 {
   void getNums(std::istream &input, double *nums, size_t size)
@@ -12,10 +11,10 @@ namespace
     for (size_t i = 0; i < size; ++i)
     {
       input >> nums[i];
-    }
-    if (!input)
-    {
-      throw std::runtime_error("RE:noncorrect figure parameters");
+      if (!input)
+      {
+        throw std::runtime_error("RE:noncorrect figure parameters");
+      }
     }
   }
 }

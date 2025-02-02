@@ -3,7 +3,6 @@
 #include <istream>
 #include "rectangle.hpp"
 #include "diamond.hpp"
-#include "triangle.hpp"
 namespace nikonov
 {
   Shape *make_shape(std::istream &input, const std::string &name);

@@ -25,6 +25,13 @@ void nikonov::fillShapeCollection(std::istream &input, std::ostream &out, Compos
     }
   }
 }
+void nikonov::destroy(Shape **collection, size_t cnt)
+{
+  for (size_t i = 0; i < cnt; ++i)
+  {
+    delete collection[i];
+  }
+}
 void nikonov::ispScale(Shape &shp, double x, double y, double k)
 {
   point_t S({ x, y });

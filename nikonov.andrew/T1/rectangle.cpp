@@ -22,7 +22,7 @@ nikonov::rectangle_t nikonov::Rectangle::getFrameRect() const
   double rectHeight = left_.getFrameRect().height;
   double rectPosX = left_.getFrameRect().pos.x + left_.getFrameRect().width / 2;
   point_t pos = point_t({ rectPosX, left_.getFrameRect().pos.y });
-  return rectangle_t({ rectWidth, rectHeight, pos });
+  return { rectWidth, rectHeight, pos };
 }
 void nikonov::Rectangle::move(const point_t &newPos)
 {

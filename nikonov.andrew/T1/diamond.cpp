@@ -35,7 +35,7 @@ nikonov::rectangle_t nikonov::Diamond::getFrameRect() const
   double height = lt_.getFrameRect().height * 2;
   point_t tglCenter = lt_.getFrameRect().pos;
   point_t pos = point_t({ tglCenter.x + (width / 4), tglCenter.y - (height / 4) });
-  return rectangle_t({ width, height, pos });
+  return { width, height, pos };
 }
 void nikonov::Diamond::move(const point_t &newPos)
 {
@@ -95,10 +95,7 @@ namespace
     {
       return p3;
     }
-    else
-    {
-      throw std::logic_error("non-correct parameters");
-    }
+    throw std::logic_error("non-correct parameters");
   }
   bool isEqualPoint(const point_t &p1, const point_t &p2)
   {
@@ -117,10 +114,7 @@ namespace
     {
       edgeP = p2;
     }
-    else
-    {
-      edgeP = p3;
-    }
+    edgeP = p3;
     if (edgeP.x < midP.x)
     {
       edgeP.x = 2 * midP.x - edgeP.x;
@@ -129,10 +123,10 @@ namespace
   }
   point_t findLeft(const point_t &p1, const point_t &p2, const point_t &p3)
   {
-    return point_t{ 2 * findMid(p1, p2, p3).x - findRight(p1, p2, p3).x, findMid(p1, p2, p3).y };
+    return { 2 * findMid(p1, p2, p3).x - findRight(p1, p2, p3).x, findMid(p1, p2, p3).y };
   }
   point_t findBot(const point_t &p1, const point_t &p2, const point_t &p3)
   {
-    return point_t{ findTop(p1, p2, p3).x, 2 * findMid(p1, p2, p3).y - findTop(p1, p2, p3).y };
+    return { findTop(p1, p2, p3).x, 2 * findMid(p1, p2, p3).y - findTop(p1, p2, p3).y };
   }
 }
