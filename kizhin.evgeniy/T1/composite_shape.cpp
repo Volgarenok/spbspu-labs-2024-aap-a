@@ -4,7 +4,6 @@
 #include "shape_utils.hpp"
 
 namespace kizhin {
-  void copy(Shape* const*, const Shape* const*, Shape**);
   rectangle_t combineRectangles(const rectangle_t&, const rectangle_t&);
 }
 
@@ -18,8 +17,9 @@ kizhin::CompositeShape::CompositeShape(size_t capacity):
 kizhin::CompositeShape::CompositeShape(const CompositeShape& rhs):
   CompositeShape(rhs.size())
 {
-  copy(rhs.begin_, rhs.end_, begin_);
-  end_ = begin_ + rhs.size();
+  for (Shape* const* i = rhs.begin_; i != rhs.end_; ++i, ++end_) {
+    *end_ = (*i)->clone();
+  }
 }
 
 kizhin::CompositeShape::CompositeShape(CompositeShape&& rhs) noexcept:
@@ -166,8 +166,9 @@ void kizhin::CompositeShape::resize(size_t newCapacity)
 {
   CompositeShape tmp(newCapacity);
   const size_t newSize = std::min(size(), newCapacity);
-  copy(begin_, begin_ + newSize, tmp.begin_);
-  tmp.end_ = tmp.begin_ + newSize;
+  for (Shape* const* i = begin_; i != begin_ + newSize; ++i, ++tmp.end_) {
+    *tmp.end_ = (*i)->clone();
+  }
   swap(tmp);
 }
 
@@ -193,13 +194,6 @@ void kizhin::CompositeShape::clear() noexcept
 void kizhin::CompositeShape::throw_out_of_range() const
 {
   throw std::out_of_range("CompositeShape: out of range");
-}
-
-void kizhin::copy(Shape* const* first, const Shape* const* last, Shape** result)
-{
-  for (; first != last; ++first, ++result) {
-    *result = (*first)->clone();
-  }
 }
 
 kizhin::rectangle_t kizhin::combineRectangles(const rectangle_t& rect1,
