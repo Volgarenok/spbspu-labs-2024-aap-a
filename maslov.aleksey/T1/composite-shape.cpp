@@ -34,6 +34,7 @@ maslov::CompositeShape & maslov::CompositeShape::operator=(CompositeShape && rhs
     destroyShapes(*this);
     size_ = rhs.size_;
     fillArrayAndDeleteRhs(rhs);
+    rhs.size_ = 0;
   }
   return *this;
 }

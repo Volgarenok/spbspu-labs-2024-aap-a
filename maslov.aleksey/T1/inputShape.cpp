@@ -75,6 +75,11 @@ namespace
     constexpr size_t numberOfCoordinates = 3;
     maslov::point_t coordinates[numberOfCoordinates] = {};
     inputArray(in, coordinates, numberOfCoordinates);
+    if (coordinates[1].y == coordinates[2].y)
+    {
+      std::swap(coordinates[0].y, coordinates[2].y);
+      std::swap(coordinates[0].x, coordinates[2].x);
+    }
     return new maslov::Parallelogram(coordinates[0], coordinates[1], coordinates[2]);
   }
   maslov::Shape * makeShape(std::istream & in, const std::string & name)

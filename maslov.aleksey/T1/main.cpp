@@ -13,9 +13,9 @@ int main()
   {
     inputShapes(std::cin, compositeShape);
   }
-  catch (const std::bad_alloc &)
+  catch (const std::exception & e)
   {
-    std::cerr << "Memory was not allocated\n";
+    std::cerr << e.what() << "\n";
     destroyShapes(compositeShape);
     return 1;
   }

@@ -2,19 +2,13 @@
 #include <algorithm>
 #include <stdexcept>
 
-maslov::Parallelogram::Parallelogram(point_t first, point_t second, point_t third):
-  points_{first, second, third, {0, 0}}
+maslov::Parallelogram::Parallelogram(point_t p1, point_t p2, point_t p3):
+  points_{p1, p2, p3, {p1.x + p3.x - p2.x, p1.y + p3.y - p2.y}}
 {
-  if ((first.y != second.y && second.y != third.y) || (first.y == third.y))
+  if ((p1.y != p2.y && p2.y != p3.y) || (p1.y == p3.y))
   {
     throw std::invalid_argument("Parallelogram is not parallel");
   }
-  if (second.y == third.y)
-  {
-    std::swap(first.y, third.y);
-    std::swap(first.x, third.x);
-  }
-  points_[3] = {first.x + third.x - second.x, first.y + third.y - second.y};
 }
 double maslov::Parallelogram::getArea() const
 {
