@@ -4,22 +4,6 @@
 #include "shape.hpp"
 #include "base-types.hpp"
 
-namespace
-{
-  const abramov::point_t A{-1.0, -1.0};
-  const abramov::point_t B{-1.0, 1.0};
-  const abramov::point_t C{1.0, 1.0};
-  const abramov::point_t D{1.0, -1.0};
-  const abramov::point_t E{0.0, 1.0};
-  const abramov::point_t F{0.0, -1.0};
-  abramov::ComplexQuad cq1 = abramov::ComplexQuad(A, E, F, B);
-  abramov::ComplexQuad cq2 = abramov::ComplexQuad(B, F, A, E);
-  abramov::ComplexQuad cq3 = abramov::ComplexQuad(F, C, D, E);
-  abramov::ComplexQuad cq4 = abramov::ComplexQuad(E, D, F, C);
-  constexpr size_t k = 4;
-  abramov::ComplexQuad basicCQs[k] = { cq1, cq2, cq3, cq4 };
-}
-
 abramov::Rectangle::Rectangle(point_t p1, point_t p2):
   cmplxqds(new ComplexQuad[4])
 {

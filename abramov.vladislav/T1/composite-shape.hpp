@@ -33,8 +33,8 @@ namespace abramov
     size_t capacity_;
     Shape **shapeptrs_;
 
-    Shape *unsafeGetFigure(size_t id);
-    Shape *getFigure(size_t id);
+    Shape *unsafeGetFigure(size_t id) const;
+    Shape *getFigure(size_t id) const;
     void swap(CompositeShape &comp_shp) noexcept;
   };
 

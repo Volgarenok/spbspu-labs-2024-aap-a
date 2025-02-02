@@ -169,12 +169,12 @@ void abramov::CompositeShape::pop_back() noexcept
   shapeptrs_[shapes_] = nullptr;
 }
 
-abramov::Shape *abramov::CompositeShape::unsafeGetFigure(size_t id)
+abramov::Shape *abramov::CompositeShape::unsafeGetFigure(size_t id) const
 {
   return shapeptrs_[id];
 }
 
-abramov::Shape *abramov::CompositeShape::getFigure(size_t id)
+abramov::Shape *abramov::CompositeShape::getFigure(size_t id) const
 {
   if (id >= shapes_)
   {
