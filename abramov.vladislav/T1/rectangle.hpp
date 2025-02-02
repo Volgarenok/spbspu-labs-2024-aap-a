@@ -15,7 +15,7 @@ namespace abramov
     void scale(double k) override;
     Rectangle *clone() const override;
   private:
-    ComplexQuad cmplxqds[4];
+    ComplexQuad *cmplxqds;
   };
 }
 #endif

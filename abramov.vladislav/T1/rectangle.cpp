@@ -21,7 +21,7 @@ namespace
 }
 
 abramov::Rectangle::Rectangle(point_t p1, point_t p2):
-  cmplxqds(basicCQs)
+  cmplxqds(new ComplexQuad[4])
 {
   if (p1.x >= p2.x || p1.y >= p2.y)
   {

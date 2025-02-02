@@ -18,27 +18,32 @@ void abramov::getShapes(std::istream &in, Composite &shapes, point_t &p, double 
   {
     std::string s1;
     in >> s1;
+    Shape *figure = nullptr;
     try
     {
       if (s1 == "RECTANGLE")
       {
-        Rectangle *rect = makeRectangle(in);
-        shapes.push_back(rect);
+        figure = makeRectangle(in);
+        shapes.push_back(figure);
       }
       else if (s1 == "SQUARE")
       {
-        Square *square = makeSquare(in);
-        shapes.push_back(square);
+        figure = makeSquare(in);
+        shapes.push_back(figure);
       }
       else if (s1 == "COMPLEXQUAD")
       {
-        ComplexQuad *cq = makeComplexQuad(in);
-        shapes.push_back(cq);
+        figure = makeComplexQuad(in);
+        shapes.push_back(figure);
       }
     }
     catch (const std::logic_error &)
     {
       flag = true;
+    }
+    catch (const std::bad_alloc &)
+    {
+      delete figure;
     }
     if (s1 == "SCALE")
     {
