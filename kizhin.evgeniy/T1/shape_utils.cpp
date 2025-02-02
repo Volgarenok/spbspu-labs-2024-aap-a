@@ -69,6 +69,10 @@ kizhin::Shape* kizhin::createShape(const std::string& shapeName,
 
 kizhin::Rectangle* kizhin::createRectangle(const double* params)
 {
+  if (static_cast< size_t >(params[0]) != 4) {
+    throw std::invalid_argument("RECTANGLE requires 4 parameters");
+  }
+
   const point_t leftDown{ params[1], params[2] };
   const point_t rightUp{ params[3], params[4] };
   return new Rectangle{ leftDown, rightUp };
@@ -76,6 +80,9 @@ kizhin::Rectangle* kizhin::createRectangle(const double* params)
 
 kizhin::Regular* kizhin::createRegular(const double* params)
 {
+  if (static_cast< size_t >(params[0]) != 6) {
+    throw std::invalid_argument("REGULAR requires 6 parameters");
+  }
   const point_t p1{ params[1], params[2] };
   const point_t p2{ params[3], params[4] };
   const point_t p3{ params[5], params[6] };
@@ -85,6 +92,9 @@ kizhin::Regular* kizhin::createRegular(const double* params)
 kizhin::Polygon* kizhin::createPolygon(const double* params)
 {
   const size_t size = static_cast< size_t >(params[0]);
+  if (size % 2 != 0) {
+    throw std::invalid_argument("POLYGON requires even number of parameters");
+  }
   const size_t pointCount = size / 2;
   point_t* points = new point_t[pointCount];
   for (size_t i = 0; i < pointCount; ++i) {
