@@ -1,11 +1,13 @@
 #include "diamond.hpp"
 #include <cmath>
 #include <stdexcept>
-
+constexpr double angle = 45.0;
 smirnov::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
-  vertex1{p1},
-  vertex2{p2},
-  vertex3{p3}
+  vertex1(p1),
+  vertex2(p2),
+  vertex3(p3),
+  center(computeCenter(p1, p2, p3)),
+  parallelogram(vertex1, vertex2, vertex3)
 {
   if ((p1.x == p2.x && p1.y == p2.y) && (p1.x == p3.x && p1.y == p3.y))
   {
@@ -16,54 +18,51 @@ smirnov::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
   {
     throw std::invalid_argument("Two vertices cannot coincide");
   }
+  constexpr double angle_rad = angle * M_PI / 180.0;
+  vertex1 = rotatePoint(vertex1, center, angle_rad);
+  vertex2 = rotatePoint(vertex2, center, angle_rad);
+  vertex3 = rotatePoint(vertex3, center, angle_rad);
+  parallelogram = Parallelogram(vertex1, vertex2, vertex3);
+}
+
+smirnov::point_t smirnov::Diamond::computeCenter(const point_t & p1,
+    const point_t & p2, const point_t & p3) const {
+  point_t center;
+  center.x = (p1.x + p2.x + p3.x) / 3;
+  center.y = (p1.y + p2.y + p3.y) / 3;
+  return center;
+}
+
+smirnov::point_t smirnov::Diamond::rotatePoint(const point_t & point,
+    const point_t & center, double angle_rad) const {
+  double x = point.x - center.x;
+  double y = point.y - center.y;
+  double x_rotated = x * std::cos(angle_rad) - y * std::sin(angle_rad);
+  double y_rotated = x * std::sin(angle_rad) + y * std::cos(angle_rad);
+  return {x_rotated + center.x, y_rotated + center.y};
 }
 
 double smirnov::Diamond::getArea() const
 {
-  double d1 = std::abs(vertex2.x - vertex1.x);
-  double d2 = std::abs(vertex3.y - vertex1.y);
-  return 0.5 * d1 * d2;
+  return parallelogram.getArea();
 }
 
 smirnov::rectangle_t smirnov::Diamond::getFrameRect() const
 {
-  point_t center;
-  center.x = (vertex1.x + vertex2.x + vertex3.x) / 3;
-  center.y = (vertex1.x + vertex2.x + vertex3.x) / 3;
-  double width = std::abs(vertex2.x - vertex1.x);
-  double height = std::abs(vertex3.y - vertex1.y);
-  return {center, width, height};
+  return parallelogram.getFrameRect();
 }
 
 void smirnov::Diamond::move(point_t newPos)
 {
-  point_t currentPos = getFrameRect().pos;
-  double dx = newPos.x - currentPos.x;
-  double dy = newPos.y - currentPos.y;
-  move(dx, dy);
+  return parallelogram.move(newPos);
 }
 
 void smirnov::Diamond::move(double dx, double dy)
 {
-  vertex1.x += dx;
-  vertex1.y += dy;
-  vertex2.x += dx;
-  vertex2.y += dy;
-  vertex3.x += dx;
-  vertex3.y += dy;
+  parallelogram.move(dx, dy);
 }
 
 void smirnov::Diamond::scale(double k)
 {
-  if (k < 0)
-  {
-    throw std::invalid_argument("Zoom coefficient must be positive");
-  }
-  point_t center = getFrameRect().pos;
-  vertex1.x = (vertex1.x - center.x) * k + center.x;
-  vertex1.y = (vertex1.y - center.y) * k + center.y;
-  vertex2.x = (vertex2.x - center.x) * k + center.x;
-  vertex2.y = (vertex2.y - center.y) * k + center.y;
-  vertex3.x = (vertex3.x - center.x) * k + center.x;
-  vertex3.y = (vertex3.y - center.y) * k + center.y;
+  parallelogram.scale(k);
 }
