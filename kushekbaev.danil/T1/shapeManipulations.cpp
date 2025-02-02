@@ -1,5 +1,13 @@
 #include "shapeManipulations.hpp"
 
+namespace
+{
+  void scaleUnsafe(kushekbaev::Shape* capacity, kushekbaev::point_t scalePoint, double scaleCoeff)
+  {
+    capacity->scaleEverything(scalePoint, scaleCoeff);
+  }
+}
+
 namespace kushekbaev
 {
   double getTotalArea(Shape** capacity, size_t shapeCounter)
@@ -21,7 +29,7 @@ namespace kushekbaev
     {
       if (capacity[i])
       {
-        capacity[i]->scaleEverything(scalePoint, scaleCoeff);
+        scaleUnsafe(capacity[i], scalePoint, scaleCoeff);
       }
     }
   }
