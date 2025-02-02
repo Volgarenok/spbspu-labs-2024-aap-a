@@ -1,6 +1,5 @@
 #include "fabric.hpp"
 #include <string>
-#include <stdexcept>
 #include "rectangle.hpp"
 #include "additional-utilities.hpp"
 #include "diamond.hpp"

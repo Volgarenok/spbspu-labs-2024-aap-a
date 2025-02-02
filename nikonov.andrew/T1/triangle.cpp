@@ -5,7 +5,7 @@ namespace
 {
   nikonov::point_t getCenterOfGravity(const nikonov::point_t &a, const nikonov::point_t &b, const nikonov::point_t &c) noexcept
   {
-    return nikonov::point_t({ (a.x + b.x + c.x) / 3, ((a.y + b.y + c.y) / 3) });
+    return nikonov::point_t{ (a.x + b.x + c.x) / 3, ((a.y + b.y + c.y) / 3) };
   }
 }
 
@@ -35,7 +35,7 @@ nikonov::rectangle_t nikonov::Triangle::getFrameRect() const
   double minY = std::min(std::min(a_.y, b_.y), c_.y);
   double width = maxX - minX;
   double height = maxY - minY;
-  point_t pos = point_t({ minX + (width / 2), minY + (height / 2) });
+  point_t pos{ minX + (width / 2), minY + (height / 2) };
   return { width, height, pos };
 }
 void nikonov::Triangle::move(const point_t &newPos)
@@ -60,5 +60,5 @@ void nikonov::Triangle::scale(double k) noexcept
 }
 nikonov::Shape *nikonov::Triangle::clone() const
 {
-  return new Triangle({ a_, b_, c_ });
+  return new Triangle{ a_, b_, c_ };
 }

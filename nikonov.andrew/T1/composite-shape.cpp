@@ -1,6 +1,4 @@
 #include "composite-shape.hpp"
-#include <stdexcept>
-#include <cmath>
 #include <memory>
 #include "additional-utilities.hpp"
 nikonov::CompositeShape::CompositeShape():
@@ -60,7 +58,7 @@ nikonov::CompositeShape &nikonov::CompositeShape::operator=(CompositeShape &&ano
       another.shp_[i] = nullptr;
     }
     size_ = another.size_;
-    another.~CompositeShape();
+    destroy(another.shp_, another.size());
     another.size_ = 0;
   }
   return *this;
@@ -99,7 +97,7 @@ nikonov::rectangle_t nikonov::CompositeShape::getFrameRect() const
   }
   double width = maxX - minX;
   double height = maxY - minY;
-  return rectangle_t({ width, height, point_t({ minX + width / 2, minY + height / 2 }) });
+  return { width, height, { minX + width / 2, minY + height / 2 } };
 }
 void nikonov::CompositeShape::move(const point_t &a)
 {
@@ -150,15 +148,15 @@ void nikonov::CompositeShape::pop_back()
 }
 nikonov::Shape *nikonov::CompositeShape::at(size_t id)
 {
+  return const_cast< Shape * >(const_cast< const CompositeShape * >(this)->at(id));
+}
+const nikonov::Shape *nikonov::CompositeShape::at(size_t id) const
+{
   if (id >= size_)
   {
     throw std::logic_error("noncorrect id");
   }
   return shp_[id];
-}
-const nikonov::Shape *nikonov::CompositeShape::at(size_t id) const
-{
-  return const_cast< CompositeShape * >(this)->at(id);
 }
 bool nikonov::CompositeShape::empty() const noexcept
 {

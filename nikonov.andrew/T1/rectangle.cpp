@@ -1,5 +1,4 @@
 #include "rectangle.hpp"
-#include <cmath>
 #include "additional-utilities.hpp"
 nikonov::Rectangle::Rectangle(const point_t &lbp, const point_t &rtp):
   left_({ point_t{ lbp.x, rtp.y }, point_t{ lbp.x, lbp.y }, point_t{ (rtp.x + lbp.x) / 2, (rtp.y + lbp.y) / 2 } }),
@@ -21,7 +20,7 @@ nikonov::rectangle_t nikonov::Rectangle::getFrameRect() const
   double rectWidth = bot_.getFrameRect().width;
   double rectHeight = left_.getFrameRect().height;
   double rectPosX = left_.getFrameRect().pos.x + left_.getFrameRect().width / 2;
-  point_t pos = point_t({ rectPosX, left_.getFrameRect().pos.y });
+  point_t pos{ rectPosX, left_.getFrameRect().pos.y };
   return { rectWidth, rectHeight, pos };
 }
 void nikonov::Rectangle::move(const point_t &newPos)
@@ -49,7 +48,7 @@ void nikonov::Rectangle::scale(double k) noexcept
 nikonov::Shape *nikonov::Rectangle::clone() const
 {
   rectangle_t crntRect = getFrameRect();
-  point_t lbp({ crntRect.pos.x - crntRect.width / 2, crntRect.pos.y - crntRect.height / 2 });
-  point_t rtp({ crntRect.pos.x + crntRect.width / 2, crntRect.pos.y + crntRect.height / 2 });
+  point_t lbp{ crntRect.pos.x - crntRect.width / 2, crntRect.pos.y - crntRect.height / 2 };
+  point_t rtp{ crntRect.pos.x + crntRect.width / 2, crntRect.pos.y + crntRect.height / 2 };
   return new Rectangle(lbp, rtp);
 }

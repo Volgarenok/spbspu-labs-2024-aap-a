@@ -1,5 +1,4 @@
 #include "diamond.hpp"
-#include <cmath>
 #include "additional-utilities.hpp"
 namespace
 {
@@ -62,10 +61,10 @@ void nikonov::Diamond::scale(double k) noexcept
 nikonov::Shape *nikonov::Diamond::clone() const
 {
   rectangle_t crntRect = getFrameRect();
-  point_t topP({ crntRect.pos.x, crntRect.pos.y + crntRect.height / 2 });
-  point_t midP({ crntRect.pos.x, crntRect.pos.y });
-  point_t rightP({ crntRect.pos.x + crntRect.width / 2, crntRect.pos.y});
-  return new Diamond({ topP, midP, rightP });
+  point_t topP{ crntRect.pos.x, crntRect.pos.y + crntRect.height / 2 };
+  point_t midP{ crntRect.pos.x, crntRect.pos.y };
+  point_t rightP{ crntRect.pos.x + crntRect.width / 2, crntRect.pos.y};
+  return new Diamond{ topP, midP, rightP };
 }
 namespace
 {
@@ -105,7 +104,7 @@ namespace
   {
     point_t topP = findTop(p1, p2, p3);
     point_t midP = findMid(p1, p2, p3);
-    point_t edgeP({ 0, 0 });
+    point_t edgeP{ 0, 0 };
     if (!isEqualPoint(p1, topP) && !isEqualPoint(p1, midP))
     {
       edgeP = p1;

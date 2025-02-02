@@ -34,9 +34,9 @@ void nikonov::destroy(Shape **collection, size_t cnt)
 }
 void nikonov::ispScale(Shape &shp, double x, double y, double k)
 {
-  point_t S({ x, y });
+  point_t s({ x, y });
   point_t origCenter = shp.getFrameRect().pos;
-  shp.move(S);
+  shp.move(s);
   point_t newCenter = shp.getFrameRect().pos;
   double diffX = newCenter.x - origCenter.x;
   double diffY = newCenter.y - origCenter.y;
