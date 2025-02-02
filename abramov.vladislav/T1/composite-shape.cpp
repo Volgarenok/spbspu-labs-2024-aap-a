@@ -209,13 +209,6 @@ size_t abramov::CompositeShape::size() const noexcept
 
 abramov::CompositeShape *abramov::CompositeShape::clone() const
 {
-  try
-  {
-    return new CompositeShape(*this);
-  }
-  catch (std::bad_alloc &)
-  {
-    return nullptr;
-  }
+  return new CompositeShape(*this);
 }
 
