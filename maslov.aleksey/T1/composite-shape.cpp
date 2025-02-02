@@ -145,12 +145,8 @@ void maslov::CompositeShape::move(double dx, double dy)
     shapeArray_[i]->move(dx, dy);
   }
 }
-void maslov::CompositeShape::scale(double k)
+void maslov::CompositeShape::scaleWithoutCheck(double k)
 {
-  if (k <= 0.0)
-  {
-    throw std::invalid_argument("Incorrect scale factor");
-  }
   point_t centerComposite =  getFrameRect().pos;
   for (size_t i = 0; i < size_; ++i)
   {
@@ -158,6 +154,6 @@ void maslov::CompositeShape::scale(double k)
     double dx = (centerShape.x - centerComposite.x) * (k - 1);
     double dy = (centerShape.y - centerComposite.y) * (k - 1);
     shapeArray_[i]->move(dx, dy);
-    shapeArray_[i]->scale(k);
+    shapeArray_[i]->scaleWithoutCheck(k);
   }
 }

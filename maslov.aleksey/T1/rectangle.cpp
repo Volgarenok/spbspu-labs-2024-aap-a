@@ -74,10 +74,10 @@ double maslov::Rectangle::getArea() const
 }
 maslov::rectangle_t maslov::Rectangle::getFrameRect() const
 {
-  double minX = std::numeric_limits<double>::max();
-  double minY = std::numeric_limits<double>::max();
-  double maxX = std::numeric_limits<double>::lowest();
-  double maxY = std::numeric_limits<double>::lowest();
+  double minX = std::numeric_limits< double >::max();
+  double minY = std::numeric_limits< double >::max();
+  double maxX = std::numeric_limits< double >::lowest();
+  double maxY = std::numeric_limits< double >::lowest();
   size_t nLength = n_ / nWidth_;
   for (size_t i = 0; i < nLength; i++)
   {
@@ -114,12 +114,8 @@ void maslov::Rectangle::move(double dx, double dy)
     regularArray_[i]->move(dx, dy);
   }
 }
-void maslov::Rectangle::scale(double k)
+void maslov::Rectangle::scaleWithoutCheck(double k)
 {
-  if (k <= 0.0)
-  {
-    throw std::invalid_argument("Incorrect scale factor");
-  }
   point_t center = getFrameRect().pos;
   double centerX = center.x;
   double centerY = center.y;
@@ -132,7 +128,7 @@ void maslov::Rectangle::scale(double k)
     for (size_t j = 0; j < nlength; j++)
     {
       size_t index = i * nlength + j;
-      regularArray_[index]->scale(k);
+      regularArray_[index]->scaleWithoutCheck(k);
       double offsetX = startX + j * squareSize + squareSize / 2.0;
       double offsetY = startY + i * squareSize + squareSize / 2.0;
       point_t centerRegular = regularArray_[index]->getFrameRect().pos;

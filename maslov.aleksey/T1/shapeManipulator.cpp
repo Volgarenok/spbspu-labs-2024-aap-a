@@ -7,19 +7,22 @@ double maslov::getSumArea(const CompositeShape & compositeShape)
 void maslov::scaleShapes(CompositeShape & compositeShape,
     const point_t scaleCoordinate, const double scaleFactor)
 {
+  if (scaleFactor <= 0)
+  {
+    throw std::invalid_argument("Incorrect scale factor");
+  }
   for (size_t i = 0; i < compositeShape.size(); i++)
   {
     point_t centerBefore = compositeShape[i]->getFrameRect().pos;
     compositeShape[i]->move(scaleCoordinate);
     point_t centerAfter = compositeShape[i]->getFrameRect().pos;
-    compositeShape[i]->scale(scaleFactor);
+    compositeShape[i]->scaleWithoutCheck(scaleFactor);
     double newX = (centerAfter.x - centerBefore.x) * scaleFactor;
     double newY = (centerAfter.y - centerBefore.y) * scaleFactor;
     compositeShape[i]->move(-newX, -newY);
   }
 }
-void maslov::printCoordinates(std::ostream & out,
-  const CompositeShape & compositeShape)
+void maslov::printCoordinates(std::ostream & out, const CompositeShape & compositeShape)
 {
   for (size_t i = 0; i < compositeShape.size(); i++)
   {

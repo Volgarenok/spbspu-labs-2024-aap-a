@@ -26,7 +26,7 @@ namespace maslov
     rectangle_t getFrameRect() const;
     void move(point_t s);
     void move(double dx, double dy);
-    void scale(double k);
+    void scaleWithoutCheck(double k);
    private:
     size_t size_;
     Shape * shapeArray_[10000];

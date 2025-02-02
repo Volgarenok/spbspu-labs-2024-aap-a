@@ -14,7 +14,7 @@ namespace maslov
     rectangle_t getFrameRect() const override;
     void move(point_t s) override;
     void move(double dx, double dy) override;
-    void scale(double k) override;
+    void scaleWithoutCheck(double k) override;
     Shape * clone() const override;
    private:
     Regular ** regularArray_;

@@ -25,18 +25,21 @@ int main()
   }
   double centerX = 0.0, centerY = 0.0, scaleFactor = 0.0;
   std::cin >> centerX >> centerY >> scaleFactor;
-  if (scaleFactor <= 0.0)
-  {
-    std::cerr << "Incorrect scale factor\n";
-    destroyShapes(compositeShape);
-    return 1;
-  }
   point_t scaleCoordinate = {centerX, centerY};
   std::cout << std::fixed << std::setprecision(1);
   std::cout << getSumArea(compositeShape) << " ";
   printCoordinates(std::cout, compositeShape);
   std::cout << "\n";
-  scaleShapes(compositeShape, scaleCoordinate, scaleFactor);
+  try
+  {
+    scaleShapes(compositeShape, scaleCoordinate, scaleFactor);
+  }
+  catch (const std::invalid_argument & e)
+  {
+    std::cerr << e.what() << '\n';
+    destroyShapes(compositeShape);
+    return 1;
+  }
   std::cout << getSumArea(compositeShape) << " ";
   printCoordinates(std::cout, compositeShape);
   std::cout << "\n";
