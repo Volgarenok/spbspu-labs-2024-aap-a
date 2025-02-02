@@ -21,7 +21,7 @@ namespace
     std::cout << x2 << " " << y2;
   }
 
-  void printShapes(std::ostream &out, const abramov::Composite &shapes, abramov::point_t p, double k, size_t i)
+  void printShapes(std::ostream &out, const abramov::Composite &shapes, size_t i)
   {
     out << std::fixed << std::setprecision(1);
     double s = shapes.getArea();
@@ -44,10 +44,10 @@ namespace
     }
   }
 
-  void printScaledShapes(std::ostream &out, const abramov::Composite &shapes, abramov::point_t p, double k, size_t i)
+  void printScaledShapes(std::ostream &out, const abramov::Composite &shapes, size_t i)
   {
     out << std::fixed << std::setprecision(1);
-    s = shapes.getArea();
+    double s = shapes.getArea();
     std::cout << s << " ";
     for (size_t j = 0; j < i - 1; ++j)
     {
@@ -156,7 +156,7 @@ void abramov::unsafeScaleFigure(Shape *s, point_t p, double k)
 
 void abramov::printAllShapes(std::ostream &out, abramov::Composite &shapes, abramov::point_t p, double k, size_t i)
 {
-  printShapes(out, shapes, p, k, i);
+  printShapes(out, shapes, i);
   scaleFigures(shapes, p, k, i);
-  printScaledShapes(out, shapes, p, k, i);
+  printScaledShapes(out, shapes, i);
 }
