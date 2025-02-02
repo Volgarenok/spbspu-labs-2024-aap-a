@@ -96,9 +96,6 @@ kizhin::Shape* kizhin::CompositeShape::at(size_t index)
 
 kizhin::rectangle_t kizhin::CompositeShape::getFrameRect() const
 {
-  if (empty()) {
-    throw std::logic_error("CompositeShape is empty");
-  }
   rectangle_t frame = (*begin_)->getFrameRect();
   for (const Shape* const* i = begin_ + 1; i != end_; ++i) {
     frame = combineRectangles(frame, (*i)->getFrameRect());
@@ -160,6 +157,7 @@ void kizhin::CompositeShape::push_back(Shape* shape)
 void kizhin::CompositeShape::pop_back()
 {
   --end_;
+  delete *end_;
 }
 
 void kizhin::CompositeShape::resize(size_t newCapacity)
