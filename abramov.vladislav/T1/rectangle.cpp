@@ -14,6 +14,11 @@ abramov::Rectangle::Rectangle(point_t p1, point_t p2):
   createCQs(p1, p2, cmplxqds[0], cmplxqds[1], cmplxqds[2], cmplxqds[3]);
 }
 
+abramov::Rectangle::~Rectangle()
+{
+  delete[] cmplxqds;
+}
+
 double abramov::Rectangle::getArea() const noexcept
 {
   double area = 0;

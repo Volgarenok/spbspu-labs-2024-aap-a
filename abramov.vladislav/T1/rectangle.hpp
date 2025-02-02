@@ -8,6 +8,7 @@ namespace abramov
   struct Rectangle final: Shape
   {
     Rectangle(point_t p1, point_t p2);
+    ~Rectangle();
     double getArea() const noexcept override;
     rectangle_t getFrameRect() const noexcept override;
     void move(point_t p) override;
