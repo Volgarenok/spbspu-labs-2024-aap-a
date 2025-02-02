@@ -9,6 +9,7 @@ abramov::Rectangle::Rectangle(point_t p1, point_t p2):
 {
   if (p1.x >= p2.x || p1.y >= p2.y)
   {
+    delete[] cmplxqds;
     throw std::logic_error("Impossible to build a rectangle");
   }
   createCQs(p1, p2, cmplxqds[0], cmplxqds[1], cmplxqds[2], cmplxqds[3]);
