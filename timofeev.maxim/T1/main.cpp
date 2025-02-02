@@ -11,7 +11,7 @@
 int main()
 {
   using namespace timofeev;
-  Shape* shapes[9000];
+  Shape* shapes[10000];
   std::string input;
   size_t count = 0;
   bool incorrect_values = false;
