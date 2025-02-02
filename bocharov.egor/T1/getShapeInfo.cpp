@@ -38,11 +38,15 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
   std::string Mystr;
   std::size_t shapesCount = 0;
   bool scaled = false;
+  auto handleError = [&](const std::invalid_argument & e)
+  {
+    error << e.what() << '\n';
+  };
   while (input >> Mystr)
   {
-    if (Mystr == "RECTANGLE")
+    try
     {
-      try
+      if (Mystr == "RECTANGLE")
       {
         point_t down, up;
         input >> down.x;
@@ -52,14 +56,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         myShapes[shapesCount] = new Rectangle{down, up};
         shapesCount++;
       }
-      catch (const std::invalid_argument & e)
-      {
-        error << e.what() << '\n';
-      }
-    }
-    else if (Mystr == "TRIANGLE")
-    {
-      try
+      else if (Mystr == "TRIANGLE")
       {
         point_t a, b, c;
         input >> a.x;
@@ -71,14 +68,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         myShapes[shapesCount] =  new Triangle{a, b, c};
         shapesCount++;
       }
-      catch (const std::invalid_argument & e)
-      {
-        error << e.what() << '\n';
-      }
-    }
-    else if (Mystr == "PARALLELOGRAM")
-    {
-      try
+      else if (Mystr == "PARALLELOGRAM")
       {
         point_t a, b, c;
         input >> a.x;
@@ -95,14 +85,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         myShapes[shapesCount] =  new Parallelogram{a, b, c};
         shapesCount++;
       }
-      catch (const std::invalid_argument & e)
-      {
-        error << e.what() << '\n';
-      }
-    }
-    else if (Mystr == "CONCAVE")
-    {
-      try
+      else if (Mystr == "CONCAVE")
       {
         point_t a, b, c, d;
         input >> a.x;
@@ -116,36 +99,35 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         myShapes[shapesCount] =  new Concave{a, b, c, d};
         shapesCount++;
       }
-      catch (const std::invalid_argument & e)
+      else if (Mystr == "SCALE")
       {
-        error << e.what() << '\n';
+        scaled = true;
+        if (shapesCount == 0)
+        {
+          error << "No shapes for scale\n";
+          return 0;
+        }
+        point_t toCenter;
+        double ratio;
+        input >> toCenter.x;
+        input >> toCenter.y;
+        input >> ratio;
+        try
+        {
+          outputRes(output, myShapes, shapesCount);
+          scaling(myShapes, shapesCount, toCenter, ratio);
+          outputRes(output, myShapes, shapesCount);
+        }
+        catch (const std::invalid_argument & e)
+        {
+          clear(myShapes, shapesCount);
+          return 0;
+        }
       }
     }
-    else if (Mystr == "SCALE")
+    catch (const std::invalid_argument & e)
     {
-      scaled = true;
-      if (shapesCount == 0)
-      {
-        error << "No shapes for scale\n";
-        return 0;
-      }
-      point_t toCenter;
-      double ratio;
-      input >> toCenter.x;
-      input >> toCenter.y;
-      input >> ratio;
-      try
-      {
-        outputRes(output, myShapes, shapesCount);
-        scaling(myShapes, shapesCount, toCenter, ratio);
-        outputRes(output, myShapes, shapesCount);
-      }
-      catch (const std::invalid_argument & e)
-      {
-        error << e.what() << '\n';
-        clear(myShapes, shapesCount);
-        return 0;
-      }
+      handleError(e);
     }
   }
   if (!scaled)
