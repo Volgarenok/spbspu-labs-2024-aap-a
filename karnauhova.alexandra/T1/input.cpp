@@ -122,9 +122,9 @@ bool karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
   std::string name = "uwu";
   while (in >> name && !in.eof())
   {
-    if (name == "RECTANGLE")
+    try
     {
-      try
+      if (name == "RECTANGLE")
       {
         if (!karnauhova::input_rectangle(in, shaps))
         {
@@ -137,14 +137,7 @@ bool karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
           names[shaps.size() - 1] = name;
         }
       }
-      catch (const std::exception& e)
-      {
-        count_error++;
-      }
-    }
-    else if (name == "TRIANGLE")
-    {
-      try
+      else if (name == "TRIANGLE")
       {
         if (!karnauhova::input_triangle(in, shaps))
         {
@@ -157,26 +150,19 @@ bool karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
           names[shaps.size() - 1] = name;
         }
       }
-      catch (const std::exception& e)
+      else if (name == "SCALE")
       {
-        count_error++;
+        if (!karnauhova::input_scale(std::cin, point, k))
+        {
+          in.clear();
+          count_error++;
+        }
+        else
+        {
+          names[shaps.size()] = name;
+        }
       }
-    }
-    else if (name == "SCALE")
-    {
-      if (!karnauhova::input_scale(std::cin, point, k))
-      {
-        in.clear();
-        count_error++;
-      }
-      else
-      {
-        names[shaps.size()] = name;
-      }
-    }
-    else if (name == "POLYGON")
-    {
-      try
+      else if (name == "POLYGON")
       {
         if (!karnauhova::input_polygon(in, shaps))
         {
@@ -186,14 +172,14 @@ bool karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
         else
         {
           names[shaps.size() - 1] = name;
-         }
+        }
       }
-      catch (const std::exception& e)
+      else
       {
         count_error++;
       }
     }
-    else
+    catch (const std::exception& e)
     {
       count_error++;
     }
