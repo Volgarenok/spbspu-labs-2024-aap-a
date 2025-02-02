@@ -137,12 +137,14 @@ void kizhin::CompositeShape::scale(double scalingFactor)
   if (scalingFactor <= 0) {
     throw std::logic_error("Scaling factor must be positive");
   }
-  const point_t center = getFrameRect().pos;
-  for (Shape** i = begin_; i != end_; ++i) {
+  CompositeShape tmp(*this);
+  const point_t center = tmp.getFrameRect().pos;
+  for (Shape** i = tmp.begin_; i != tmp.end_; ++i) {
     Shape* scaled = scaleShape(*i, scalingFactor, center);
     delete *i;
     *i = scaled;
   }
+  swap(tmp);
 }
 
 void kizhin::CompositeShape::push_back(Shape* shape)
