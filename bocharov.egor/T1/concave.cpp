@@ -48,10 +48,10 @@ bool bocharov::isPointInTriangle(point_t a, point_t b, point_t c, point_t d)
 }
 
 bocharov::Concave::Concave(point_t a, point_t b, point_t c, point_t d):
- a_({0.0, 0.0}),
- b_({0.0, 0.0}),
- c_({0.0, 0.0}),
- d_({0.0, 0.0})
+  a_({0.0, 0.0}),
+  b_({0.0, 0.0}),
+  c_({0.0, 0.0}),
+  d_({0.0, 0.0})
 {
   if (!isTriangle(d, b, c) || !isPointInTriangle(a, b, c, d) || isDupePoint(a, b, c, d))
   {
