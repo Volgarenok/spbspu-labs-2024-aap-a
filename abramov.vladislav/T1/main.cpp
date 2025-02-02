@@ -36,7 +36,7 @@ int main()
     std::cerr << "There is no figures\n";
     return 1;
   }
-  printShapes(std::cout, shapes, p, k, count);
+  printAllShapes(std::cout, shapes, p, k, count);
   if (wrong_figure)
   {
     std::cerr << "There was bad figure\n";

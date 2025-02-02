@@ -10,6 +10,54 @@ namespace
       in >> x[i];
     }
   }
+
+  void printFrameRectCoords(const abramov::rectangle_t &r)
+  {
+    const double x1 = r.pos.x - r.width / 2;
+    const double y1 = r.pos.y - r.height / 2;
+    const double x2 = r.pos.x + r.width / 2;
+    const double y2 = r.pos.y + r.height / 2;
+    std::cout << x1 << " " << y1 << " ";
+    std::cout << x2 << " " << y2;
+  }
+
+  void printShapes(std::ostream &out, const abramov::Composite &shapes, abramov::point_t p, double k, size_t i)
+  {
+    out << std::fixed << std::setprecision(1);
+    double s = shapes.getArea();
+    out << s << " ";
+    for (size_t j = 0; j < i - 1; ++j)
+    {
+      printFrameRectCoords(shapes[j]->getFrameRect());
+      out << " ";
+    }
+    printFrameRectCoords(shapes[i - 1]->getFrameRect());
+    out << "\n";
+    out.copyfmt(std::ios(NULL));
+  }
+
+  void scaleFigures(abramov::Composite &shapes, abramov::point_t p, double k, size_t i)
+  {
+    for (size_t j = 0; j < i; ++j)
+    {
+      scaleFigure(shapes[j], p, k);
+    }
+  }
+
+  void printScaledShapes(std::ostream &out, const abramov::Composite &shapes, abramov::point_t p, double k, size_t i)
+  {
+    out << std::fixed << std::setprecision(1);
+    s = shapes.getArea();
+    std::cout << s << " ";
+    for (size_t j = 0; j < i - 1; ++j)
+    {
+      printFrameRectCoords(shapes[j]->getFrameRect());
+      out << " ";
+    }
+    printFrameRectCoords(shapes[i - 1]->getFrameRect());
+    out << "\n";
+    out.copyfmt(std::ios(NULL));
+  }
 }
 
 void abramov::getShapes(std::istream &in, Composite &shapes, point_t &p, double &k, bool &flag)
@@ -80,16 +128,6 @@ abramov::ComplexQuad *abramov::makeComplexQuad(std::istream &in)
   return new ComplexQuad({x[0], x[1]}, {x[2], x[3]}, {x[4], x[5]}, {x[6], x[7]});
 }
 
-void abramov::printFrameRectCoords(const rectangle_t &r)
-{
-  const double x1 = r.pos.x - r.width / 2;
-  const double y1 = r.pos.y - r.height / 2;
-  const double x2 = r.pos.x + r.width / 2;
-  const double y2 = r.pos.y + r.height / 2;
-  std::cout << x1 << " " << y1 << " ";
-  std::cout << x2 << " " << y2;
-}
-
 void abramov::scaleFigure(Shape *s, point_t p, double k)
 {
   const point_t pos1 = s->getFrameRect().pos;
@@ -116,36 +154,9 @@ void abramov::unsafeScaleFigure(Shape *s, point_t p, double k)
   s->move(dx, dy);
 }
 
-void abramov::deleteShapes(Shape **x, size_t i)
+void abramov::printAllShapes(std::ostream &out, abramov::Composite &shapes, abramov::point_t p, double k, size_t i)
 {
-  for (size_t j = 0; j < i; ++j)
-  {
-    delete x[j];
-  }
-}
-
-void abramov::printShapes(std::ostream &out, Composite &shapes, point_t p, double k, size_t i)
-{
-  out << std::fixed << std::setprecision(1);
-  double s = shapes.getArea();
-  out << s << " ";
-  for (size_t j = 0; j < i - 1; ++j)
-  {
-    printFrameRectCoords(shapes[j]->getFrameRect());
-    out << " ";
-    scaleFigure(shapes[j], p, k);
-  }
-  printFrameRectCoords(shapes[i - 1]->getFrameRect());
-  scaleFigure(shapes[i - 1], p, k);
-  out << "\n";
-  s = shapes.getArea();
-  std::cout << s << " ";
-  for (size_t j = 0; j < i - 1; ++j)
-  {
-    printFrameRectCoords(shapes[j]->getFrameRect());
-    out << " ";
-  }
-  printFrameRectCoords(shapes[i - 1]->getFrameRect());
-  out << "\n";
-  out.copyfmt(std::ios(NULL));
+  printShapes(out, shapes, p, k, i);
+  scaleFigures(shapes, p, k, i);
+  printScaledShapes(out, shapes, p, k, i);
 }
