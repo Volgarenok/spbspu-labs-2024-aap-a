@@ -114,7 +114,10 @@ namespace
     {
       edgeP = p2;
     }
-    edgeP = p3;
+    else
+    {
+      edgeP = p3;
+    }
     if (edgeP.x < midP.x)
     {
       edgeP.x = 2 * midP.x - edgeP.x;
