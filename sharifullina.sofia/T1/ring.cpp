@@ -3,40 +3,39 @@
 
 constexpr double PI = 3.1415926535;
 sharifullina::Ring::Ring(point_t center, double inRadius, double outRadius):
-  center_(center),
-  outRadius_(outRadius),
-  inRadius_(inRadius)
+  inner_(center, inRadius),
+  outer_(center, outRadius)
 {
-  if (inRadius_ >= outRadius_)
-  {
-    throw std::invalid_argument("outRadius must be larger than inRadius.");
-  }
-  if (outRadius_ <= 0.0 || inRadius_ <= 0.0)
+  if (inRadius <= 0.0 || outRadius <= 0.0)
   {
     throw std::invalid_argument("Radius must be positive.");
+  }
+  if (inRadius >= outRadius)
+  {
+    throw std::invalid_argument("outRadius must be larger than inRadius.");
   }
 }
 
 double sharifullina::Ring::getArea() const
 {
-  return PI * (outRadius_ * outRadius_ - inRadius_ * inRadius_);
+  return outer_.getArea() - inner_.getArea();
 }
 
 sharifullina::rectangle_t sharifullina::Ring::getFrameRect() const
 {
-  double diameter = 2.0 * outRadius_;
-  return { diameter, diameter, center_ };
+  return outer_.getFrameRect();
 }
 
 void sharifullina::Ring::move(point_t p)
 {
-  center_ = p;
+  inner_.move(p);
+  outer_.move(p);
 }
 
 void sharifullina::Ring::move(double dx, double dy)
 {
-  center_.x += dx;
-  center_.y += dy;
+  inner_.move(dx, dy);
+  outer_.move(dx, dy);
 }
 
 void sharifullina::Ring::scale(double k)
@@ -45,6 +44,6 @@ void sharifullina::Ring::scale(double k)
   {
     throw std::invalid_argument("Scale factor must be positive.");
   }
-  outRadius_ *= k;
-  inRadius_ *= k;
+  inner_.scale(k);
+  outer_.scale(k);
 }

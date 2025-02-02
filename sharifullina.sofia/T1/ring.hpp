@@ -2,6 +2,7 @@
 #define RING_HPP
 
 #include "shape.hpp"
+#include "circle.hpp"
 
 namespace sharifullina
 {
@@ -15,9 +16,8 @@ namespace sharifullina
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    point_t center_;
-    double outRadius_;
-    double inRadius_;
+    Circle inner_;
+    Circle outer_;
   };
 }
 

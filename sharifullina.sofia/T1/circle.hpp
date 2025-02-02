@@ -2,10 +2,11 @@
 #define CIRCLE_HPP
 
 #include "shape.hpp"
+#include "ellipse.hpp"
 
 namespace sharifullina
 {
-  class Circle : public Shape
+  class Circle: public Ellipse
   {
   public:
     Circle(point_t center, double radius);
@@ -14,10 +15,6 @@ namespace sharifullina
     void move(point_t p) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
-
-  private:
-    point_t center_;
-    double radius_;
   };
 }
 
