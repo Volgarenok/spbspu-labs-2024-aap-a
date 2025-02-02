@@ -7,9 +7,10 @@ namespace abramov
 {
   struct CompositeShape
   {
-    CompositeShape(size_t capacity);
     CompositeShape(const CompositeShape &comp_shp);
     CompositeShape(CompositeShape &&comp_shp) noexcept;
+    CompositeShape(size_t capacity);
+    ~CompositeShape();
     CompositeShape &operator=(const CompositeShape &comp_shp);
     CompositeShape &operator=(CompositeShape &&comp_shp) noexcept;
     double getArea() const noexcept;
@@ -18,7 +19,6 @@ namespace abramov
     void move(double dx, double dy);
     void scale(double k);
     void unsafeScale(double k);
-    ~CompositeShape();
     void push_back(Shape *shp);
     void pop_back() noexcept;
     Shape *at(size_t id);
