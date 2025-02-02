@@ -7,7 +7,7 @@ smirnov::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
   vertex2(p2),
   vertex3(p3),
   center(computeCenter(p1, p2, p3)),
-  parallelogram(vertex1, vertex2, vertex3)
+  parallelogram()
 {
   if ((p1.x == p2.x && p1.y == p2.y) && (p1.x == p3.x && p1.y == p3.y))
   {
