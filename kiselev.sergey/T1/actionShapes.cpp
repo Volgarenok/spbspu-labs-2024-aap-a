@@ -14,10 +14,10 @@ namespace
 }
 std::ostream& kiselev::printInfo(std::ostream& output, const CompositeShape &cmp)
 {
-  output << cmp.getArea() << " ";
+  output << cmp.getArea();
   for (size_t i = 0; i <  cmp.size(); ++i)
   {
-    printCoordinatesRect(output, cmp[i]);
+    printCoordinatesRect(output << " ", cmp[i]);
   }
   return output;
 }
