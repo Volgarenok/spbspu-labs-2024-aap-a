@@ -5,6 +5,19 @@
 
 namespace kushekbaev
 {
+  CompositeShape::CompositeShape(CompositeShape && rhs)
+  {
+    array_ = rhs.array_;
+    shapeCounter_ = rhs.shapeCounter_;
+    capacity_ = rhs.capacity_;
+    rhs.array_ = nullptr;
+  }
+
+  CompositeShape::~CompositeShape()
+  {
+    clearMemory(array_, shapeCounter_);
+  }
+
   CompositeShape & CompositeShape::operator=(const CompositeShape & rhs)
   {
     if (&rhs != this)
@@ -22,17 +35,9 @@ namespace kushekbaev
     return *this;
   }
 
-  CompositeShape::CompositeShape(CompositeShape && rhs)
+  Shape* CompositeShape::operator[](size_t id) const noexcept
   {
-    array_ = rhs.array_;
-    shapeCounter_ = rhs.shapeCounter_;
-    capacity_ = rhs.capacity_;
-    rhs.array_ = nullptr;
-  }
-
-  CompositeShape::~CompositeShape()
-  {
-    clearMemory(array_, shapeCounter_);
+    return array_[id];
   }
 
   double CompositeShape::getArea() const
@@ -69,10 +74,7 @@ namespace kushekbaev
   {
     double dx = Z.x - getFrameRect().pos.x;
     double dy = Z.y - getFrameRect().pos.y;
-    for (size_t i = 0; i < shapeCounter_; i++)
-    {
-      array_[i]->move(dx, dy);
-    }
+    move(dx, dy);
   }
 
   void CompositeShape::move(double dx, double dy)
@@ -124,11 +126,6 @@ namespace kushekbaev
     {
       throw std::out_of_range("Out of range\n");
     }
-    return array_[id];
-  }
-
-  Shape* CompositeShape::operator[](size_t id) const noexcept
-  {
     return array_[id];
   }
 
