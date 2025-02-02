@@ -1,11 +1,8 @@
 #include "makeShapes.hpp"
 #include <cmath>
-#include <cstddef>
 #include <istream>
 #include <stdexcept>
-#include "base-types.hpp"
 #include "complexquad.hpp"
-#include "composite-shape.hpp"
 #include "diamond.hpp"
 #include "rectangle.hpp"
 #include "shape.hpp"

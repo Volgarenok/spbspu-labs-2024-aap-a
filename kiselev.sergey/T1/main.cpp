@@ -1,11 +1,9 @@
-#include <exception>
 #include <iomanip>
 #include <iostream>
 #include <string>
 #include "actionShapes.hpp"
 #include "composite-shape.hpp"
 #include "makeShapes.hpp"
-#include "shape.hpp"
 int main()
 {
   constexpr size_t capacity = 100;
@@ -62,11 +60,10 @@ int main()
   }
   try
   {
-    kiselev::printInfo(std::cout, compShp);
-    std::cout << "\n";
+    std::cout << std::fixed << std::setprecision(1);
+    kiselev::printInfo(std::cout, compShp) << "\n";
     compShp.scale(ratio, scale);
-    kiselev::printInfo(std::cout, compShp);
-    std::cout << "\n";
+    kiselev::printInfo(std::cout, compShp) << "\n";
   }
   catch (const std::exception& e)
   {

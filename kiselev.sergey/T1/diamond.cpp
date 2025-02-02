@@ -48,8 +48,8 @@ namespace
     {
       throw std::invalid_argument("Invalid coordinates");
     }
-    kiselev::point_t pHorizontal2 = { center.x + (center.x - pHorizontal.x), pHorizontal.y};
-    kiselev::point_t pVertical2 = {pVertical.x, center.y + (center.y - pVertical.y)};
+    const kiselev::point_t pHorizontal2 = { center.x + (center.x - pHorizontal.x), pHorizontal.y};
+    const kiselev::point_t pVertical2 = { pVertical.x, center.y + (center.y - pVertical.y)};
     if (id == 1)
     {
       return { pHorizontal2, pHorizontal, pVertical, pVertical2 };
@@ -79,9 +79,9 @@ void kiselev::Diamond::move(double dx, double dy)
 }
 void kiselev::Diamond::move(point_t a)
 {
-  point_t center = comp1.getFrameRect().pos;
-  double dx = a.x - center.x;
-  double dy = a.y - center.y;
+  const point_t center = comp1.getFrameRect().pos;
+  const double dx = a.x - center.x;
+  const double dy = a.y - center.y;
   move(dx, dy);
 }
 void kiselev::Diamond::scale(double k)

@@ -16,15 +16,15 @@ double kiselev::Rectangle::getArea() const
 }
 kiselev::rectangle_t kiselev::Rectangle::getFrameRect() const
 {
-  double centreForX = leftDown_.x + (rightUp_.x - leftDown_.x) / 2;
-  double centreForY = leftDown_.y + (rightUp_.y - leftDown_.y) / 2;
+  const double centreForX = leftDown_.x + (rightUp_.x - leftDown_.x) / 2;
+  const double centreForY = leftDown_.y + (rightUp_.y - leftDown_.y) / 2;
   return { rightUp_.x - leftDown_.x, rightUp_.y - leftDown_.y, { centreForX, centreForY } };
 }
 void kiselev::Rectangle::move(point_t a)
 {
-  point_t centre = getFrameRect().pos;
-  double moveX = a.x - centre.x;
-  double moveY = a.y - centre.y;
+  const point_t centre = getFrameRect().pos;
+  const double moveX = a.x - centre.x;
+  const double moveY = a.y - centre.y;
   move(moveX, moveY);
 }
 void kiselev::Rectangle::move(double dx, double dy)
@@ -34,7 +34,7 @@ void kiselev::Rectangle::move(double dx, double dy)
 }
 void kiselev::Rectangle::scale(double k)
 {
-  point_t centre = getFrameRect().pos;
+  const point_t centre = getFrameRect().pos;
   leftDown_ = scalePoint(leftDown_, centre, k);
   rightUp_ = scalePoint(rightUp_, centre, k);
 }

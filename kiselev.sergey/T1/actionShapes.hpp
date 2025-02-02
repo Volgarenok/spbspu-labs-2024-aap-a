@@ -4,6 +4,6 @@
 #include "composite-shape.hpp"
 namespace kiselev
 {
-  void printInfo(std::ostream& output, const CompositeShape& cmp);
+  std::ostream& printInfo(std::ostream& output, const CompositeShape& cmp);
 }
 #endif

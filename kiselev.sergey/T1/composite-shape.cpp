@@ -128,8 +128,8 @@ kiselev::rectangle_t kiselev::CompositeShape::getFrameRect() const
   double rightY = 0;
   for (size_t i = 0; i < realSize; ++i)
   {
-    double width = shapes[i]->getFrameRect().width;
-    double height = shapes[i]->getFrameRect().height;
+    const double width = shapes[i]->getFrameRect().width;
+    const double height = shapes[i]->getFrameRect().height;
     point_t centre = shapes[i]->getFrameRect().pos;
     leftX = std::fmin(leftX, centre.x - width / 2);
     leftY = std::fmin(leftY, centre.y - height / 2);
@@ -140,8 +140,8 @@ kiselev::rectangle_t kiselev::CompositeShape::getFrameRect() const
 }
 void kiselev::CompositeShape::move(point_t a)
 {
-  double moveForX = a.x - getFrameRect().pos.x;
-  double moveForY = a.y - getFrameRect().pos.y;
+  const double moveForX = a.x - getFrameRect().pos.x;
+  const double moveForY = a.y - getFrameRect().pos.y;
   move(moveForX, moveForY);
 }
 void kiselev::CompositeShape::move(double dx, double dy)
