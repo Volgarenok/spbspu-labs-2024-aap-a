@@ -6,7 +6,7 @@ constexpr double PI = 3.1415926535;
 sharifullina::Circle::Circle(point_t center, double radius):
   Ellipse(center, radius, radius)
 {
-  if (radius_ <= 0.0)
+  if (radius <= 0.0)
   {
     throw std::invalid_argument("Radius must be positive.");
   }
