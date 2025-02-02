@@ -3,35 +3,33 @@
 #include <stdexcept>
 
 maslov::Parallelogram::Parallelogram(point_t first, point_t second, point_t third):
-  first_(first),
-  second_(second),
-  third_(third),
-  fourth_({first.x + third.x - second.x, first.y + third.y - second.y})
+  points_{first, second, third, {0, 0}}
 {
-  if ((first_.y != second_.y && second_.y != third_.y) || (first_.y == third_.y))
+  if ((first.y != second.y && second.y != third.y) || (first.y == third.y))
   {
     throw std::invalid_argument("Parallelogram is not parallel");
   }
-  if (second_.y == third_.y)
+  if (second.y == third.y)
   {
-    std::swap(first_.y, third_.y);
-    std::swap(first_.x, third_.x);
+    std::swap(first.y, third.y);
+    std::swap(first.x, third.x);
   }
+  points_[3] = {first.x + third.x - second.x, first.y + third.y - second.y};
 }
 double maslov::Parallelogram::getArea() const
 {
   double heigth = getFrameRect().height;
-  double width = std::abs(first_.x - second_.x);
+  double width = std::abs(points_[0].x - points_[1].x);
   return heigth * width;
 }
 maslov::rectangle_t maslov::Parallelogram::getFrameRect() const
 {
-  double heigth = std::abs(first_.y - third_.y);
-  double maxX = std::max(std::max(first_.x, second_.x), std::max(third_.x,fourth_.x));
-  double minX = std::min(std::min(first_.x, second_.x), std::min(third_.x,fourth_.x));
+  double heigth = std::abs(points_[0].y - points_[2].y);
+  double maxX = std::max(std::max(points_[0].x, points_[1].x), std::max(points_[2].x, points_[3].x));
+  double minX = std::min(std::min(points_[0].x, points_[1].x), std::min(points_[2].x, points_[3].x));
   double width = maxX - minX;
-  double centerX = (first_.x + second_.x + third_.x + fourth_.x) / 4.0;
-  double centerY = (first_.y + second_.y + third_.y + fourth_.y) / 4.0;
+  double centerX = (points_[0].x + points_[1].x + points_[2].x + points_[3].x) / 4.0;
+  double centerY = (points_[0].y + points_[1].y + points_[2].y + points_[3].y) / 4.0;
   return {width, heigth, {centerX, centerY}};
 }
 void maslov::Parallelogram::move(point_t s)
@@ -43,24 +41,26 @@ void maslov::Parallelogram::move(point_t s)
 }
 void maslov::Parallelogram::move(double dx, double dy)
 {
-  first_ = {first_.x + dx, first_.y + dy};
-  second_ = {second_.x + dx, second_.y + dy};
-  third_ = {third_.x + dx, third_.y + dy};
-  fourth_ = {fourth_.x + dx, fourth_.y + dy};
+  points_[0] = {points_[0].x + dx, points_[0].y + dy};
+  points_[1] = {points_[1].x + dx, points_[1].y + dy};
+  points_[2] = {points_[2].x + dx, points_[2].y + dy};
+  points_[3] = {points_[3].x + dx, points_[3].y + dy};
 }
 void maslov::Parallelogram::scaleWithoutCheck(double k)
 {
   point_t center = getFrameRect().pos;
-  first_.x = center.x + (first_.x - center.x) * k;
-  first_.y = center.y + (first_.y - center.y) * k;
-  second_.x = center.x + (second_.x - center.x) * k;
-  second_.y = center.y + (second_.y - center.y) * k;
-  third_.x = center.x + (third_.x - center.x) * k;
-  third_.y = center.y + (third_.y - center.y) * k;
-  fourth_.x = center.x + (fourth_.x - center.x) * k;
-  fourth_.y = center.y + (fourth_.y - center.y) * k;
+  for (size_t i = 0; i < 4; ++i)
+  {
+    points_[i] = scalePoint(points_[i], center, k);
+  }
 }
 maslov::Shape * maslov::Parallelogram::clone() const
 {
-  return new Parallelogram(first_, second_, third_);
+  return new Parallelogram(points_[0], points_[1], points_[2]);
+}
+maslov::point_t maslov::Parallelogram::scalePoint(point_t point, point_t center, double k)
+{
+  point.x = center.x + (point.x - center.x) * k;
+  point.y = center.y + (point.y - center.y) * k;
+  return {point.x, point.y};
 }

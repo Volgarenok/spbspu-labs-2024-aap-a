@@ -9,19 +9,12 @@ maslov::CompositeShape::CompositeShape():
 maslov::CompositeShape::CompositeShape(const CompositeShape & rhs):
   size_(rhs.size_)
 {
-  for (size_t i = 0; i < size_; i++)
-  {
-    shapeArray_[i] = rhs.shapeArray_[i]->clone();
-  }
+  cloneArray(rhs);
 }
 maslov::CompositeShape::CompositeShape(CompositeShape && rhs):
   size_(rhs.size_)
 {
-  for (size_t i = 0; i < size_; i++)
-  {
-    shapeArray_[i] = rhs.shapeArray_[i];
-    rhs.shapeArray_[i] = nullptr;
-  }
+  fillArrayAndDeleteRhs(rhs);
   rhs.size_ = 0;
 }
 maslov::CompositeShape & maslov::CompositeShape::operator=(const CompositeShape & rhs)
@@ -30,10 +23,7 @@ maslov::CompositeShape & maslov::CompositeShape::operator=(const CompositeShape 
   {
     destroyShapes(*this);
     size_ = rhs.size_;
-    for (size_t i = 0; i < size_; i++)
-    {
-      shapeArray_[i] = rhs.shapeArray_[i]->clone();
-    }
+    cloneArray(rhs);
   }
   return *this;
 }
@@ -43,11 +33,7 @@ maslov::CompositeShape & maslov::CompositeShape::operator=(CompositeShape && rhs
   {
     destroyShapes(*this);
     size_ = rhs.size_;
-    for (size_t i = 0; i < size_; i++)
-    {
-      shapeArray_[i] = rhs.shapeArray_[i];
-      rhs.shapeArray_[i] = nullptr;
-    }
+    fillArrayAndDeleteRhs(rhs);
   }
   return *this;
 }
@@ -69,11 +55,7 @@ void maslov::CompositeShape::pop_back()
 }
 maslov::Shape * maslov::CompositeShape::at(size_t id)
 {
-  if (id >= size_)
-  {
-    throw std::out_of_range("Index out of range");
-  }
-  return shapeArray_[id];
+  return const_cast< Shape* >(const_cast< const CompositeShape* >(this)->at(id));
 }
 const maslov::Shape * maslov::CompositeShape::at(size_t id) const
 {
@@ -85,7 +67,7 @@ const maslov::Shape * maslov::CompositeShape::at(size_t id) const
 }
 maslov::Shape * maslov::CompositeShape::operator[](size_t id)
 {
-  return shapeArray_[id];
+  return const_cast< Shape* >(const_cast< const CompositeShape* >(this)->operator[](id));
 }
 const maslov::Shape * maslov::CompositeShape::operator[](size_t id) const
 {
@@ -155,5 +137,28 @@ void maslov::CompositeShape::scaleWithoutCheck(double k)
     double dy = (centerShape.y - centerComposite.y) * (k - 1);
     shapeArray_[i]->move(dx, dy);
     shapeArray_[i]->scaleWithoutCheck(k);
+  }
+}
+void maslov::CompositeShape::scale(double k)
+{
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Incorrect scale factor");
+  }
+  scaleWithoutCheck(k);
+}
+void maslov::CompositeShape::cloneArray(const CompositeShape & rhs)
+{
+  for (size_t i = 0; i < size_; i++)
+  {
+    shapeArray_[i] = rhs.shapeArray_[i]->clone();
+  }
+}
+void maslov::CompositeShape::fillArrayAndDeleteRhs(CompositeShape & rhs)
+{
+  for (size_t i = 0; i < size_; i++)
+  {
+    shapeArray_[i] = rhs.shapeArray_[i];
+    rhs.shapeArray_[i] = nullptr;
   }
 }

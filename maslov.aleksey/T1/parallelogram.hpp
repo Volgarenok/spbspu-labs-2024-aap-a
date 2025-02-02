@@ -15,10 +15,8 @@ namespace maslov
     void scaleWithoutCheck(double k) override;
     Shape * clone() const override;
    private:
-    point_t first_;
-    point_t second_;
-    point_t third_;
-    point_t fourth_;
+    point_t points_[4];
+    point_t scalePoint(point_t point, point_t center, double k);
   };
 }
 

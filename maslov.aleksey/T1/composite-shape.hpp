@@ -27,9 +27,12 @@ namespace maslov
     void move(point_t s);
     void move(double dx, double dy);
     void scaleWithoutCheck(double k);
+    void scale(double k);
    private:
     size_t size_;
     Shape * shapeArray_[10000];
+    void cloneArray(const CompositeShape & rhs);
+    void fillArrayAndDeleteRhs(CompositeShape & rhs);
   };
 }
 

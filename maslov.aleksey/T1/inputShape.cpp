@@ -22,23 +22,14 @@ void maslov::inputShapes(std::istream & in, maslov::CompositeShape & compositeSh
     {
       break;
     }
-    Shape * shape = nullptr;
-    try
+    Shape * shape = makeShape(std::cin, name);
+    if (shape)
     {
-      shape = makeShape(std::cin, name);
-      if (shape)
-      {
-        compositeShape.push_back(shape);
-      }
+      compositeShape.push_back(shape);
     }
-    catch (const std::invalid_argument &)
+    else
     {
       incorrectedFlag = true;
-    }
-    catch (const std::bad_alloc &)
-    {
-      destroyShapes(compositeShape);
-      throw;
     }
   }
   if (in.eof())
@@ -46,13 +37,13 @@ void maslov::inputShapes(std::istream & in, maslov::CompositeShape & compositeSh
     destroyShapes(compositeShape);
     throw std::runtime_error("Error: EOF encountered before SCALE command");
   }
-  if (incorrectedFlag)
-  {
-    std::cerr << "There were wrong shapes\n";
-  }
   if (compositeShape.empty())
   {
     throw std::runtime_error("There are no shapes");
+  }
+  if (incorrectedFlag)
+  {
+    std::cerr << "There were wrong shapes\n";
   }
 }
 
@@ -88,17 +79,24 @@ namespace
   }
   maslov::Shape * makeShape(std::istream & in, const std::string & name)
   {
-    if (name == "RECTANGLE")
+    try
     {
-      return makeRectangle(in);
+      if (name == "RECTANGLE")
+      {
+        return makeRectangle(in);
+      }
+      else if (name == "REGULAR")
+      {
+        return makeRegular(in);
+      }
+      else if (name == "PARALLELOGRAM")
+      {
+        return makeParallelogram(in);
+      }
     }
-    else if (name == "REGULAR")
+    catch (const std::invalid_argument &)
     {
-      return makeRegular(in);
-    }
-    else if (name == "PARALLELOGRAM")
-    {
-      return makeParallelogram(in);
+      return nullptr;
     }
     return nullptr;
   }

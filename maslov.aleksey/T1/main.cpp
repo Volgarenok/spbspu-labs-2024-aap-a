@@ -13,14 +13,10 @@ int main()
   {
     inputShapes(std::cin, compositeShape);
   }
-  catch (const std::runtime_error & e)
-  {
-    std::cerr << e.what() << '\n';
-    return 1;
-  }
   catch (const std::bad_alloc &)
   {
     std::cerr << "Memory was not allocated\n";
+    destroyShapes(compositeShape);
     return 1;
   }
   double centerX = 0.0, centerY = 0.0, scaleFactor = 0.0;
