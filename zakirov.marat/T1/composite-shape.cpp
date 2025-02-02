@@ -43,12 +43,14 @@ zakirov::rectangle_t zakirov::CompositeShape::getFrameRect() const
     double shape_low = frame_rect.height / 2.0 - frame_rect.pos.y;
     double shape_left = frame_rect.width / 2.0 - frame_rect.pos.x;
     double shape_right = frame_rect.width / 2.0 + frame_rect.pos.x;
-    most_top = most_top <= shape_top ? shape_top : most_top;
-    most_low = most_low >= shape_low ? shape_low : most_low;
-    most_left = most_left >= shape_left ? shape_left : most_left;
-    most_right = most_right <= shape_right ? shape_right : most_right;
+    most_top = std::max(most_top, shape_top);
+    most_low = std::min(most_low, shape_low);
+    most_left = std::min(most_left, shape_left);
+    most_right = std::max(most_right, shape_right);
   }
-  point_t center = get_middle({most_right, most_top}, {most_left, most_low});
+  double height = most_top - most_low;
+  double width = most_right - most_left;
+  point_t center = {most_right - width / 2.0, most_top - height / 2.0};
   return {most_right - most_left, most_top - most_low, center};
 }
 
