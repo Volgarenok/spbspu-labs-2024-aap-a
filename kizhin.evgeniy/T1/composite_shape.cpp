@@ -127,9 +127,11 @@ void kizhin::CompositeShape::move(const point_t& newPos)
 
 void kizhin::CompositeShape::move(double dx, double dy)
 {
-  for (Shape* const* i = begin_; i != end_; ++i) {
+  CompositeShape tmp(*this);
+  for (Shape* const* i = tmp.begin_; i != tmp.end_; ++i) {
     (*i)->move(dx, dy);
   }
+  swap(tmp);
 }
 
 void kizhin::CompositeShape::scale(double scalingFactor)
