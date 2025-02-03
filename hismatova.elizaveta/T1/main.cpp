@@ -102,7 +102,8 @@ int main()
     if (index <= 0)
     {
       std::cerr << "index must be positive\n";
-      errors = true;
+      deleteFigures(figures, count);
+      return 1;
     }
     scales = true;
     results(std::cout, figures, count);
