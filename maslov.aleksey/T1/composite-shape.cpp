@@ -9,9 +9,17 @@ maslov::CompositeShape::CompositeShape():
 maslov::CompositeShape::CompositeShape(const CompositeShape & rhs):
   size_(rhs.size_)
 {
-  cloneArray(rhs);
+  try
+  {
+    cloneArray(rhs);
+  }
+  catch(const std::bad_alloc &)
+  {
+    destroyShapes(*this);
+    throw;
+  }
 }
-maslov::CompositeShape::CompositeShape(CompositeShape && rhs):
+maslov::CompositeShape::CompositeShape(CompositeShape && rhs) noexcept:
   size_(rhs.size_)
 {
   fillArrayAndDeleteRhs(rhs);
@@ -21,13 +29,21 @@ maslov::CompositeShape & maslov::CompositeShape::operator=(const CompositeShape 
 {
   if (this != std::addressof(rhs))
   {
-    destroyShapes(*this);
     size_ = rhs.size_;
-    cloneArray(rhs);
+    try
+    {
+      cloneArray(rhs);
+    }
+    catch(const std::bad_alloc &)
+    {
+      destroyShapes(*this);
+      throw;
+    }
+    destroyShapes(*this);
   }
   return *this;
 }
-maslov::CompositeShape & maslov::CompositeShape::operator=(CompositeShape && rhs)
+maslov::CompositeShape & maslov::CompositeShape::operator=(CompositeShape && rhs) noexcept
 {
   if (this != std::addressof(rhs))
   {
@@ -44,6 +60,10 @@ maslov::CompositeShape::~CompositeShape()
 }
 void maslov::CompositeShape::push_back(Shape * shp)
 {
+  if (size_ + 1 > 10000)
+  {
+    throw std::out_of_range("Composite shape out of bounds");
+  }
   shapeArray_[size_++] = shp;
 }
 void maslov::CompositeShape::pop_back()
@@ -74,11 +94,11 @@ const maslov::Shape * maslov::CompositeShape::operator[](size_t id) const
 {
   return shapeArray_[id];
 }
-bool maslov::CompositeShape::empty() const
+bool maslov::CompositeShape::empty() const noexcept
 {
   return size_ == 0;
 }
-size_t maslov::CompositeShape::size() const
+size_t maslov::CompositeShape::size() const noexcept
 {
   return size_;
 }

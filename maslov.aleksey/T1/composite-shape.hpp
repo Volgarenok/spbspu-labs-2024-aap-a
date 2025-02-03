@@ -10,9 +10,9 @@ namespace maslov
   {
     CompositeShape();
     CompositeShape(const CompositeShape & rhs);
-    CompositeShape(CompositeShape && rhs);
+    CompositeShape(CompositeShape && rhs) noexcept;
     CompositeShape & operator=(const CompositeShape & rhs);
-    CompositeShape & operator=(CompositeShape && rhs);
+    CompositeShape & operator=(CompositeShape && rhs) noexcept;
     ~CompositeShape();
     Shape * operator[](size_t id);
     const Shape * operator[](size_t id) const;
@@ -20,8 +20,8 @@ namespace maslov
     void pop_back();
     const Shape * at(size_t id) const;
     Shape * at(size_t id);
-    bool empty() const;
-    size_t size() const;
+    bool empty() const noexcept;
+    size_t size() const noexcept;
     double getArea() const;
     rectangle_t getFrameRect() const;
     void move(point_t s);

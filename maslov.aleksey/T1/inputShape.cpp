@@ -22,14 +22,22 @@ void maslov::inputShapes(std::istream & in, maslov::CompositeShape & compositeSh
     {
       break;
     }
-    Shape * shape = makeShape(std::cin, name);
-    if (shape)
+    Shape* shape = nullptr;
+    try
     {
-      compositeShape.push_back(shape);
+      shape = makeShape(std::cin, name);
+      if (shape)
+      {
+        compositeShape.push_back(shape);
+      }
+      else
+      {
+        incorrectedFlag = true;
+      }
     }
-    else
+    catch (const std::exception &)
     {
-      incorrectedFlag = true;
+      throw;
     }
   }
   if (in.eof())
