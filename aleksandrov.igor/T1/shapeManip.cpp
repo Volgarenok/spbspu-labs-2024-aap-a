@@ -31,13 +31,12 @@ namespace aleksandrov
         params = new double[paramsCount];
         if (!getShapeParams(input, params, paramsCount))
         {
-          delete[] params;
           throw std::logic_error("Incorrect parameters!");
         }
         shapes[count] = makeShape(word, params);
         delete[] params;
       }
-      catch (const std::logic_error& e)
+      catch (const std::logic_error&)
       {
         delete[] params;
         error = true;
@@ -133,7 +132,6 @@ namespace aleksandrov
     for (size_t i = 0; i < count; ++i)
     {
       rectangle_t frameRect = shapes[i]->getFrameRect();
-
       output << frameRect.pos.x - (frameRect.width / 2) << " ";
       output << frameRect.pos.y - (frameRect.height / 2) << " ";
       output << frameRect.pos.x + (frameRect.width / 2) << " ";

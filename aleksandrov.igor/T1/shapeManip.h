@@ -1,7 +1,7 @@
 #ifndef SHAPEMANIP_H
 #define SHAPEMANIP_H
 
-#include <iostream>
+#include <iosfwd>
 #include <string>
 #include "shape.hpp"
 #include "rectangle.hpp"

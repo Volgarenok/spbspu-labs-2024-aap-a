@@ -1,5 +1,6 @@
 #include "ellipse.hpp"
 #include <stdexcept>
+#include <cmath>
 #include "base-types.hpp"
 
 aleksandrov::Ellipse::Ellipse(const point_t& center, double vr, double hr):
@@ -15,7 +16,7 @@ aleksandrov::Ellipse::Ellipse(const point_t& center, double vr, double hr):
 
 double aleksandrov::Ellipse::getArea() const
 {
-  return 3.14159265 * vr_ * hr_;
+  return M_PI * vr_ * hr_;
 }
 
 aleksandrov::rectangle_t aleksandrov::Ellipse::getFrameRect() const
@@ -35,12 +36,8 @@ void aleksandrov::Ellipse::move(double dx, double dy)
   center_.y += dy;
 }
 
-void aleksandrov::Ellipse::scale(double k)
+void aleksandrov::Ellipse::unsafeScale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::logic_error("Incorrect coefficient");
-  }
   vr_ *= k;
   hr_ *= k;
 }

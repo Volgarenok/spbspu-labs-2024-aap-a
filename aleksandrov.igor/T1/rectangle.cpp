@@ -43,12 +43,8 @@ void aleksandrov::Rectangle::move(double dx, double dy)
   b_.y += dy;
 }
 
-void aleksandrov::Rectangle::scale(double k)
+void aleksandrov::Rectangle::unsafeScale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::logic_error("Incorrect coefficient");
-  }
   point_t center = getFrameRect().pos;
   a_.x = center.x + (a_.x - center.x) * k;
   a_.y = center.y + (a_.y - center.y) * k;

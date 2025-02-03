@@ -31,8 +31,8 @@ void aleksandrov::Circle::move(double dx, double dy)
   ellipse_.move(dx, dy);
 }
 
-void aleksandrov::Circle::scale(double k)
+void aleksandrov::Circle::unsafeScale(double k)
 {
-  ellipse_.scale(k);
+  ellipse_.unsafeScale(k);
 }
 

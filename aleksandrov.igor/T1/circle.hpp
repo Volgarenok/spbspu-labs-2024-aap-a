@@ -15,7 +15,7 @@ namespace aleksandrov
     rectangle_t getFrameRect() const override;
     void move(const point_t& centerPoint) override;
     void move(double dx, double dy) override;
-    void scale(double k) override;
+    void unsafeScale(double k) override;
   private:
     Ellipse ellipse_;
   };

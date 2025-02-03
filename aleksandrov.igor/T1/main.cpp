@@ -9,13 +9,12 @@
 
 int main()
 {
-  constexpr const size_t maxShapes = 10000;
+  constexpr size_t maxShapes = 10000;
   aleksandrov::Shape* shapes[maxShapes] = {};
   bool wasDescriptionError = false;
   try
   {
-    size_t count = 0;
-    count = aleksandrov::getShapes(std::cin, shapes, wasDescriptionError);
+    size_t count = aleksandrov::getShapes(std::cin, shapes, wasDescriptionError);
     double x = 0.0;
     double y = 0.0;
     double k = 0.0;
@@ -36,7 +35,7 @@ int main()
     aleksandrov::printFrameRectCoords(std::cout, shapes, count);
     std::cout << "\n";
   }
-  catch (const std::bad_alloc& e)
+  catch (const std::bad_alloc&)
   {
     std::cerr << "ERROR: Out of memory!\n";
     aleksandrov::deleteShapes(shapes);
