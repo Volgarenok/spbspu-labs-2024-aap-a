@@ -13,7 +13,7 @@ maslov::CompositeShape::CompositeShape(const CompositeShape & rhs):
   {
     cloneArray(rhs);
   }
-  catch(const std::bad_alloc &)
+  catch (const std::bad_alloc &)
   {
     destroyShapes(*this);
     throw;
@@ -34,7 +34,7 @@ maslov::CompositeShape & maslov::CompositeShape::operator=(const CompositeShape 
     {
       cloneArray(rhs);
     }
-    catch(const std::bad_alloc &)
+    catch (const std::bad_alloc &)
     {
       destroyShapes(*this);
       throw;
