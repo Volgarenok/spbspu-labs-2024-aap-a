@@ -15,9 +15,7 @@ namespace
 namespace kushekbaev
 {
   Parallelogram::Parallelogram(point_t first, point_t second, point_t third):
-    first_(first),
-    second_(second),
-    third_(third)
+    points_{first, second, third}
   {
     bool isParallelToXflag = isParallelToX(first, second) || isParallelToX (second, third) || isParallelToX(first, third);
     if (!isTriangle(first, second, third) || !isParallelToXflag)
@@ -28,9 +26,9 @@ namespace kushekbaev
 
   double Parallelogram::getArea() const
   {
-    double firstSecondLL = getLineLength(first_, second_);
-    double secondThirdLL = getLineLength(second_, third_);
-    double firstThirdLL = getLineLength(first_, third_);
+    double firstSecondLL = getLineLength(points_[0], points_[1]);
+    double secondThirdLL = getLineLength(points_[1], points_[2]);
+    double firstThirdLL = getLineLength(points_[0], points_[2]);
     double p = (firstSecondLL + secondThirdLL + firstThirdLL) / 2;
     double squaredAreaOfTriangle = (p) * (p - firstSecondLL) * (p - secondThirdLL) * (p - firstThirdLL);
     double areaOfTriangle = std::sqrt(squaredAreaOfTriangle);
@@ -39,14 +37,14 @@ namespace kushekbaev
 
   rectangle_t Parallelogram::getFrameRect() const
   {
-    point_t firstalt({ first_.x + third_.x - second_.x, first_.y + third_.y - second_.y });
+    point_t firstalt({ points_[0].x + points_[2].x - points_[1].x, points_[0].y + points_[2].y - points_[1].y });
 
-    double heigth = std::abs(first_.y - third_.y);
-    double maxX = std::max(std::max(first_.x, second_.x), std::max(third_.x, firstalt.x));
-    double minX = std::min(std::min(first_.x, second_.x), std::min(third_.x, firstalt.x));
+    double heigth = std::abs(points_[0].y - points_[2].y);
+    double maxX = std::max(std::max(points_[0].x, points_[1].x), std::max(points_[2].x, firstalt.x));
+    double minX = std::min(std::min(points_[0].x, points_[1].x), std::min(points_[2].x, firstalt.x));
     double width = maxX - minX;
-    double middleX = (first_.x + second_.x + third_.x + firstalt.x) / 4.0;
-    double middleY = (first_.y + second_.y + third_.y + firstalt.y) / 4.0;
+    double middleX = (points_[0].x + points_[1].x + points_[2].x + firstalt.x) / 4.0;
+    double middleY = (points_[0].y + points_[1].y + points_[2].y + firstalt.y) / 4.0;
     return { width, heigth, { middleX, middleY } };
   }
 
@@ -62,7 +60,7 @@ namespace kushekbaev
   void Parallelogram::move(double dx, double dy)
   {
     size_t size = 3;
-    point_t* points[] = { &first_, &second_, &third_ };
+    point_t* points[] = { &points_[0], &points_[1], &points_[2] };
     movePoints(points, size, dx, dy);
   }
 
@@ -75,7 +73,7 @@ namespace kushekbaev
     point_t middle = getFrameRect().pos;
 
     size_t size = 3;
-    point_t* points[] = { &first_, &second_, &third_ };
+    point_t* points[] = { &points_[0], &points_[1], &points_[2] };
     scalePoints(points, size, scaleCoeff, middle);
   }
 }
