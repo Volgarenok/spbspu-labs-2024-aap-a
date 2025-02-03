@@ -1,7 +1,6 @@
-#include "matrix_checking.hpp"
+#include "matrix_functions.hpp"
 
-
-bool dirti::matrix_checking(int * matrix, size_t m, size_t n)
+bool dirti::matrix_checking(const int * matrix, size_t m, size_t n)
 {
   for (size_t i = 1; i < (m - 1); ++i)
   {

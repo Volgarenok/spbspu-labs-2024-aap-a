@@ -1,6 +1,6 @@
-#include "local_min.hpp"
+#include "matrix_functions.hpp"
 
-int dirti::local_min(int * matrix, size_t m, size_t n)
+int dirti::local_min(const int * matrix, size_t m, size_t n)
 {
   int num = 0;
   for (size_t i = 1; i < (m - 1); ++i)
