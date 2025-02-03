@@ -27,10 +27,10 @@ maslov::rectangle_t maslov::Regular::getFrameRect() const
   double centerY = a_.y;
   double rC = getRadiusCircumcircle();
   double halfSide = getHalfSide();
-  double AB = getDistance(a_, b_);
+  double ab = getDistance(a_, b_);
   double value = halfSide / rC;
   double initialAngle = std::acos(value);
-  if (AB == rC)
+  if (ab == rC)
   {
     if (b_.y == centerY)
     {
@@ -83,23 +83,23 @@ double maslov::Regular::getDistance(point_t A, point_t B) const
 }
 double maslov::Regular::getRadiusIncircle() const
 {
-  double AB = getDistance(a_, b_);
-  double AC = getDistance(a_, c_);
-  double BC = getDistance(b_, c_);
-  return std::max(std::min(AB, AC), BC);
+  double ab = getDistance(a_, b_);
+  double ac = getDistance(a_, c_);
+  double bc = getDistance(b_, c_);
+  return std::max(std::min(ab, ac), bc);
 }
 double maslov::Regular::getRadiusCircumcircle() const
 {
-  double AB = getDistance(a_, b_);
-  double AC = getDistance(a_, c_);
-  return std::max(AB, AC);
+  double ab = getDistance(a_, b_);
+  double ac = getDistance(a_, c_);
+  return std::max(ab, ac);
 }
 double maslov::Regular::getHalfSide() const
 {
-  double AB = getDistance(a_, b_);
-  double AC = getDistance(a_, c_);
-  double BC = getDistance(b_, c_);
-  return std::min(AB, std::min(AC, BC));
+  double ab = getDistance(a_, b_);
+  double ac = getDistance(a_, c_);
+  double bc = getDistance(b_, c_);
+  return std::min(ab, std::min(ac, bc));
 }
 namespace
 {
