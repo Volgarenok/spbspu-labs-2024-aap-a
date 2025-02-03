@@ -4,64 +4,13 @@
 #include <cmath>
 
 maslov::Rectangle::Rectangle(point_t lowerLeftCorner, point_t upperRightCorner):
-  regularArray_(nullptr),
-  n_(0),
-  nWidth_(0)
+  n_(calculateSquares(lowerLeftCorner, upperRightCorner)),
+  nWidth_(calculateSquaresOnSides(lowerLeftCorner, upperRightCorner).x),
+  regularArray_(createRegularArray(lowerLeftCorner, upperRightCorner))
 {
   if (upperRightCorner.x <= lowerLeftCorner.x || upperRightCorner.y <= lowerLeftCorner.y)
   {
     throw std::invalid_argument("Rectangle has incorrect parameters");
-  }
-  double length = std::fabs(lowerLeftCorner.x - upperRightCorner.x);
-  double width = std::fabs(lowerLeftCorner.y - upperRightCorner.y);
-  double w = width;
-  double l = length;
-  constexpr double error = 0.01;
-  while (std::fabs(w) > error)
-  {
-    double temp = w;
-    w = std::fmod(l, w);
-    l = temp;
-  }
-  double square = l;
-  size_t nWidth = width / square;
-  size_t nLength = length / square;
-  size_t total = nWidth * nLength;
-  n_ = total;
-  if (nWidth > nLength)
-  {
-    std::swap(nWidth, nLength);
-  }
-  nWidth_ = nWidth;
-  regularArray_ = new Regular*[n_];
-  for (size_t i = 0; i < nLength; i++)
-  {
-    for (size_t j = 0; j < nWidth; j++)
-    {
-      size_t index = 0;
-      if (i % 2 == 0)
-      {
-        index = i * nWidth + j;
-      }
-      else
-      {
-        index = i * nWidth + (nWidth - 1 - j);
-      }
-      double centerX = lowerLeftCorner.x + j * square + square / 2.0;
-      double centerY = lowerLeftCorner.y + (nLength - 1 - i) * square + square / 2.0;
-      point_t center = {centerX, centerY};
-      point_t inCircle = {center.x, center.y + (square / 2.0)};
-      point_t outCircle = {center.x + square / 2.0, center.y + square / 2.0};
-      try
-      {
-        regularArray_[index] = new Regular(center, inCircle, outCircle);
-      }
-      catch (const std::bad_alloc & e)
-      {
-        clear(index);
-        throw;
-      }
-    }
   }
 }
 maslov::Rectangle::~Rectangle()
@@ -155,4 +104,75 @@ maslov::Shape * maslov::Rectangle::clone() const
   point_t lowerLeft = {center.x - width / 2.0, center.y - height / 2.0};
   point_t upperRight = {center.x + width / 2.0, center.y + height / 2.0};
   return new Rectangle(lowerLeft, upperRight);
+}
+double maslov::Rectangle::calculateSide(point_t lower, point_t upper)
+{
+  double length = std::fabs(lower.x - upper.x);
+  double width = std::fabs(lower.y - upper.y);
+  double w = width;
+  double l = length;
+  constexpr double error = 0.01;
+  while (std::fabs(w) > error)
+  {
+    double temp = w;
+    w = std::fmod(l, w);
+    l = temp;
+  }
+  return l;
+}
+maslov::point_t maslov::Rectangle::calculateSquaresOnSides(point_t lower,
+    point_t upper)
+{
+  double length = std::fabs(lower.x - upper.x);
+  double width = std::fabs(lower.y - upper.y);
+  size_t square = calculateSide(lower, upper);
+  size_t nWidth = width / square;
+  size_t nLength = length / square;
+  if (nWidth > nLength)
+  {
+    std::swap(nWidth, nLength);
+  }
+  return {nWidth, nLength};
+}
+size_t maslov::Rectangle::calculateSquares(point_t lower, point_t upper)
+{
+  point_t squaresOnSides = calculateSquaresOnSides(lower, upper);
+  size_t total = squaresOnSides.x * squaresOnSides.y;
+  return total;
+}
+maslov::Regular ** maslov::Rectangle::createRegularArray(point_t lower, point_t upper)
+{
+  size_t nLength = n_ / nWidth_;
+  double square = calculateSide(lower, upper);
+  Regular ** regularArray = new Regular*[n_];
+  for (size_t i = 0; i < nLength; i++)
+  {
+    for (size_t j = 0; j < nWidth_; j++)
+    {
+      size_t index = 0;
+      if (i % 2 == 0)
+      {
+        index = i * nWidth_ + j;
+      }
+      else
+      {
+        index = i * nWidth_ + (nWidth_ - 1 - j);
+      }
+      double centerX = lower.x + j * square + square / 2.0;
+      double centerY = lower.y + (nLength - 1 - i) * square + square / 2.0;
+      point_t center = {centerX, centerY};
+      point_t inCircle = {center.x, center.y + (square / 2.0)};
+      point_t outCircle = {center.x + square / 2.0, center.y + square / 2.0};
+      try
+      {
+        regularArray_[index] = new Regular(center, inCircle, outCircle);
+      }
+      catch (const std::bad_alloc &)
+      {
+        clear(index);
+        throw;
+      }
+    }
+  }
+  return regularArray;
 }

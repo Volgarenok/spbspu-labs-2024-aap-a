@@ -17,10 +17,14 @@ namespace maslov
     void scaleWithoutCheck(double k) override;
     Shape * clone() const override;
    private:
-    Regular ** regularArray_;
     size_t n_;
     size_t nWidth_;
+    Regular ** regularArray_;
     void clear(size_t count);
+    double calculateSide(point_t lower, point_t upper);
+    size_t calculateSquares(point_t lower, point_t upper);
+    point_t calculateSquaresOnSides(point_t lower, point_t upper);
+    Regular ** createRegularArray(point_t lower, point_t upper);
   };
 }
 

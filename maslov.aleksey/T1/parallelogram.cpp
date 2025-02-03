@@ -52,9 +52,3 @@ maslov::Shape * maslov::Parallelogram::clone() const
 {
   return new Parallelogram(points_[0], points_[1], points_[2]);
 }
-maslov::point_t maslov::Parallelogram::scalePoint(point_t point, point_t center, double k)
-{
-  point.x = center.x + (point.x - center.x) * k;
-  point.y = center.y + (point.y - center.y) * k;
-  return {point.x, point.y};
-}

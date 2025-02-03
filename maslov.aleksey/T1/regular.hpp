@@ -16,9 +16,9 @@ namespace maslov
     void scaleWithoutCheck(double k) override;
     Shape * clone() const override;
    private:
-    point_t A_;
-    point_t B_;
-    point_t C_;
+    point_t a_;
+    point_t b_;
+    point_t c_;
     size_t n_;
     double getDistance(point_t A, point_t B) const;
     double getRadiusIncircle() const;

@@ -5,10 +5,10 @@
 #include <limits>
 #include "costants.hpp"
 
-maslov::Regular::Regular(point_t A, point_t B, point_t C):
-  A_(A),
-  B_(B),
-  C_(C),
+maslov::Regular::Regular(point_t a, point_t b, point_t c):
+  a_(a),
+  b_(b),
+  c_(c),
   n_(getVerticals())
 {
   if (!isRegular())
@@ -24,21 +24,21 @@ double maslov::Regular::getArea() const
 }
 maslov::rectangle_t maslov::Regular::getFrameRect() const
 {
-  double centerX = A_.x;
-  double centerY = A_.y;
+  double centerX = a_.x;
+  double centerY = a_.y;
   double rC = getRadiusCircumcircle();
   double halfSide = getHalfSide();
-  double AB = getDistance(A_, B_);
+  double AB = getDistance(a_, b_);
   double value = halfSide / rC;
   double initialAngle = std::acos(value);
   if (AB == rC)
   {
-    if (B_.y == centerY)
+    if (b_.y == centerY)
     {
       initialAngle = 0;
     }
   }
-  else if (C_.y == centerY)
+  else if (c_.y == centerY)
   {
     initialAngle = 0;
   }
@@ -62,24 +62,20 @@ maslov::rectangle_t maslov::Regular::getFrameRect() const
 }
 void maslov::Regular::move(point_t s)
 {
-  double dx = s.x - A_.x;
-  double dy = s.y - A_.y;
-  A_ = {s.x, s.y};
-  B_ = {B_.x + dx, B_.y + dy};
-  C_ = {C_.x + dx, C_.y + dy};
+  double dx = s.x - a_.x;
+  double dy = s.y - a_.y;
+  move(dx, dy);
 }
 void maslov::Regular::move(double dx, double dy)
 {
-  A_ = {A_.x + dx, A_.y + dy};
-  B_ = {B_.x + dx, B_.y + dy};
-  C_ = {C_.x + dx, C_.y + dy};
+  a_ = {a_.x + dx, a_.y + dy};
+  b_ = {b_.x + dx, b_.y + dy};
+  c_ = {c_.x + dx, c_.y + dy};
 }
 void maslov::Regular::scaleWithoutCheck(double k)
 {
-  B_.x = A_.x + (B_.x - A_.x) * k;
-  B_.y = A_.y + (B_.y - A_.y) * k;
-  C_.x = A_.x + (C_.x - A_.x) * k;
-  C_.y = A_.y + (C_.y - A_.y) * k;
+  b_ = scalePoint(b_, a_, k);
+  c_ = scalePoint(c_, a_, k);
 }
 double maslov::Regular::getDistance(point_t A, point_t B) const
 {
@@ -87,22 +83,22 @@ double maslov::Regular::getDistance(point_t A, point_t B) const
 }
 double maslov::Regular::getRadiusIncircle() const
 {
-  double AB = getDistance(A_, B_);
-  double AC = getDistance(A_, C_);
-  double BC = getDistance(B_, C_);
+  double AB = getDistance(a_, b_);
+  double AC = getDistance(a_, c_);
+  double BC = getDistance(b_, c_);
   return std::max(std::min(AB, AC), BC);
 }
 double maslov::Regular::getRadiusCircumcircle() const
 {
-  double AB = getDistance(A_, B_);
-  double AC = getDistance(A_, C_);
+  double AB = getDistance(a_, b_);
+  double AC = getDistance(a_, c_);
   return std::max(AB, AC);
 }
 double maslov::Regular::getHalfSide() const
 {
-  double AB = getDistance(A_, B_);
-  double AC = getDistance(A_, C_);
-  double BC = getDistance(B_, C_);
+  double AB = getDistance(a_, b_);
+  double AC = getDistance(a_, c_);
+  double BC = getDistance(b_, c_);
   return std::min(AB, std::min(AC, BC));
 }
 namespace
@@ -145,5 +141,5 @@ bool maslov::Regular::isRegular() const
 }
 maslov::Shape * maslov::Regular::clone() const
 {
-  return new Regular(A_, B_, C_);
+  return new Regular(a_, b_, c_);
 }

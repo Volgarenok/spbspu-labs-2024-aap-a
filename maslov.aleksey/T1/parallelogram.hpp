@@ -16,7 +16,6 @@ namespace maslov
     Shape * clone() const override;
    private:
     point_t points_[4];
-    point_t scalePoint(point_t point, point_t center, double k);
   };
 }
 
