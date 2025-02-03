@@ -1,18 +1,21 @@
 #include "str_input.hpp"
 
-char * dirti::new_storage(char * str, size_t & capacity)
+namespace
 {
-  capacity += 1;
-  char * str2 = reinterpret_cast< char * >(malloc(sizeof(char) * capacity));
-  if (str2 == nullptr)
+  char * new_storage(char * str, size_t & capacity)
   {
-    return nullptr;
+    capacity += 1;
+    char * str2 = reinterpret_cast< char * >(malloc(sizeof(char) * capacity));
+    if (str2 == nullptr)
+    {
+      return nullptr;
+    }
+    for (size_t i = 0; i < (capacity - 1); ++i)
+    {
+      str2[i] = str[i];
+    }
+    return str2;
   }
-  for (size_t i = 0; i < (capacity - 1); ++i)
-  {
-    str2[i] = str[i];
-  }
-  return str2;
 }
 
 char * dirti::str_input(std::istream & input, size_t & capacity)
@@ -25,12 +28,7 @@ char * dirti::str_input(std::istream & input, size_t & capacity)
     return nullptr;
   }
   std::noskipws(input);
-  if (input >> c)
-  {
-    str[0] = c;
-    str[1] = '\0';
-  }
-  else
+  if (!input)
   {
     free(str);
     std::skipws(input);

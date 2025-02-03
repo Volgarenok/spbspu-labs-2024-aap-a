@@ -1,8 +1,12 @@
 #include "str_min2.hpp"
+#include "str_min.hpp"
 
-
-char * dirti::str_min2(const char * str, const size_t size)
+char * dirti::str_min2(const char * str, size_t size)
 {
+  if (str == nullptr || size == 0)
+  {
+    return nullptr;
+  }
   size_t sym = 1;
   char * sym_sym = reinterpret_cast< char * >(malloc(sizeof(char) * size));
   if (sym_sym == nullptr)
@@ -16,30 +20,13 @@ char * dirti::str_min2(const char * str, const size_t size)
   }
   sym_sym[0] = str[0];
   sym_num[0] = 1;
-  size_t k = 0;
+  size_t sym = 1;
+  dirti::sym_count(str, sym_name, sym_num, size, sym);
   size_t str_min2_size = 2;
   char * str_min2 = reinterpret_cast< char * >(malloc(sizeof(char) * str_min2_size));
   if (str_min2 == nullptr)
   {
     return nullptr;
-  }
-  for (size_t i = 1; i < size; ++i)
-  {
-    k = 0;
-    for (size_t j = 0; j < sym; ++j)
-    {
-      if (str[i] == sym_sym[j])
-      {
-        sym_num[j] += 1;
-        k++;
-        break;
-      }
-    }
-    if (k == 0)
-    {
-      sym_sym[sym++] = str[i];
-      sym_num[sym - 1] = 1;
-    }
   }
   str_min2[0] = sym_sym[0];
   size_t min = size + 1;
