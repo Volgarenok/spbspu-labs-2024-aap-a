@@ -6,7 +6,7 @@
 
 int main()
 {
-  size_t capacity = 2;
+  size_t capacity = 1;
   char * str = dirti::str_input(std::cin, capacity);
   if (!str)
   {
