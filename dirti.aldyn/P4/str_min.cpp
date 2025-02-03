@@ -1,6 +1,6 @@
 #include "str_min.hpp"
 
-void dirti::sym_count(const char * str, char * sym_name, char * sym_num, size_t size, size_t & sym)
+void dirti::sym_count(const char * str, char * sym_name, size_t * sym_num, size_t size, size_t & sym)
 {
   size_t k = 0;
   for (size_t i = 1; i < size; ++i)
@@ -25,7 +25,7 @@ void dirti::sym_count(const char * str, char * sym_name, char * sym_num, size_t 
 
 char dirti::str_min(const char * str, size_t size)
 {
-  if (str == nullptr || size = 0)
+  if (str == nullptr || size == 0)
   {
     return '\0';
   }
