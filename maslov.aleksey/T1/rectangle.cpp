@@ -125,7 +125,7 @@ maslov::point_t maslov::Rectangle::calculateSquaresOnSides(point_t lower,
 {
   double length = std::fabs(lower.x - upper.x);
   double width = std::fabs(lower.y - upper.y);
-  size_t square = calculateSide(lower, upper);
+  double square = calculateSide(lower, upper);
   size_t nWidth = width / square;
   size_t nLength = length / square;
   if (nWidth > nLength)
