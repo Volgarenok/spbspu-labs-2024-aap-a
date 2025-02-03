@@ -90,6 +90,11 @@ int main()
     double x = 0, y = 0;
     point_t point_;
     std::cin >> x >> y;
+    if (x == 0 && y == 0)
+    {
+      std::cerr << "incorrect point\n";
+      errors = true;
+    }
     point_.x = x;
     point_.y = y;
     double index = 0;
@@ -97,8 +102,7 @@ int main()
     if (index <= 0)
     {
       std::cerr << "index must be positive\n";
-      deleteFigures(figures, count);
-      return 1;
+      errors = true;
     }
     scales = true;
     results(std::cout, figures, count);
@@ -123,7 +127,7 @@ int main()
     deleteFigures(figures, count);
     return 1;
   }
-  else if (errors)
+  if (errors)
   {
     std::cerr << "error in parameters\n";
   }
