@@ -16,10 +16,7 @@ namespace kushekbaev
     void scale(const double scaleCoeff) override;
 
   private:
-    point_t first_;
-    point_t second_;
-    point_t third_;
-    point_t last_;
+    point_t points_[4];
   };
 }
 
