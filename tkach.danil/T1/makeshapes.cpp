@@ -61,5 +61,5 @@ tkach::Shape* tkach::makeShape(std::istream& in, const std::string& shape_name)
   {
     return nullptr;
   }
-  return nullptr;
+  throw std::logic_error("Unsupported figure");
 }

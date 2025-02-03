@@ -61,23 +61,26 @@ int main()
     {
       continue;
     }
+    Shape* shape = nullptr;
     try
     {
-      if (shape_name == "RECTANGLE" || shape_name == "REGULAR" || shape_name == "RING")
+      shape = makeShape(std::cin, shape_name);
+      if (shape != nullptr)
       {
-        Shape* shape = makeShape(std::cin, shape_name);
-        if (shape != nullptr)
-        {
-          shapes_array.pushBack(shape);
-        }
-        else
-        {
-          incorrect_shape = true;
-        }
+        shapes_array.pushBack(shape);
       }
+      else
+      {
+        incorrect_shape = true;
+      }
+    }
+    catch (const std::logic_error&)
+    {
+      continue;
     }
     catch (const std::exception& e)
     {
+      delete shape;
       deleteShapesFromCompositeShape(shapes_array);
       std::cerr << e.what();
       return 1;
