@@ -5,7 +5,8 @@
 
 namespace dirti
 {
-  char str_min(const char * str, const size_t size);
+  void sym_count(const char * str, char * sym_name, size_t * sym_num, size_t size, size_t & sym);
+  char str_min(const char * str, size_t size);
 }
 
 #endif

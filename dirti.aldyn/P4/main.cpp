@@ -5,10 +5,9 @@
 #include "str_min2.hpp"
 #include "str_min_recursed.hpp"
 
-
 int main()
 {
-  size_t capacity = 2;
+  size_t capacity = 1;
   char * str = dirti::str_input(std::cin, capacity);
   if (str == nullptr)
   {
@@ -31,8 +30,7 @@ int main()
   {
     std::cout << str_min << "\n";
   }
-  char * str_min2 = nullptr;
-  str_min2 = dirti::str_min2(str, size);
+  char * str_min2 = dirti::str_min2(str, size);
   if (str_min2 == nullptr)
   {
     std::cerr << "Error: bad_alloc" << "\n";
