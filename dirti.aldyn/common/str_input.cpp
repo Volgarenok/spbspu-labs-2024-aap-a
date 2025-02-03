@@ -21,7 +21,7 @@ namespace
 char * dirti::str_input(std::istream & input, size_t & capacity)
 {
   char c = '\0';
-  size_t size = 1;
+  size_t size = 0;
   char * str = reinterpret_cast< char * >(malloc(sizeof(char) * capacity));
   if (str == nullptr)
   {
