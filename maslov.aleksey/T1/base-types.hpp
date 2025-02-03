@@ -14,6 +14,7 @@ namespace maslov
     double height;
     point_t pos;
   };
+  point_t scalePoint(point_t point, point_t center, double k);
 }
 
 #endif

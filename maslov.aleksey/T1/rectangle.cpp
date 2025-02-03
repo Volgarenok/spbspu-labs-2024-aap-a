@@ -5,7 +5,7 @@
 
 maslov::Rectangle::Rectangle(point_t lowerLeftCorner, point_t upperRightCorner):
   n_(calculateSquares(lowerLeftCorner, upperRightCorner)),
-  nWidth_(calculateSquaresOnSides(lowerLeftCorner, upperRightCorner).x),
+  nWidth_(calculateSquaresOnSides(lowerLeftCorner, upperRightCorner).first),
   regularArray_(createRegularArray(lowerLeftCorner, upperRightCorner))
 {
   if (upperRightCorner.x <= lowerLeftCorner.x || upperRightCorner.y <= lowerLeftCorner.y)
@@ -120,7 +120,7 @@ double maslov::Rectangle::calculateSide(point_t lower, point_t upper)
   }
   return l;
 }
-maslov::point_t maslov::Rectangle::calculateSquaresOnSides(point_t lower,
+std::pair<size_t, size_t> maslov::Rectangle::calculateSquaresOnSides(point_t lower,
     point_t upper)
 {
   double length = std::fabs(lower.x - upper.x);
@@ -132,12 +132,12 @@ maslov::point_t maslov::Rectangle::calculateSquaresOnSides(point_t lower,
   {
     std::swap(nWidth, nLength);
   }
-  return {nWidth, nLength};
+  return std::make_pair(nWidth, nLength);
 }
 size_t maslov::Rectangle::calculateSquares(point_t lower, point_t upper)
 {
-  point_t squaresOnSides = calculateSquaresOnSides(lower, upper);
-  size_t total = squaresOnSides.x * squaresOnSides.y;
+  std::pair<size_t, size_t> squaresOnSides = calculateSquaresOnSides(lower, upper);
+  size_t total = squaresOnSides.first * squaresOnSides.second;
   return total;
 }
 maslov::Regular ** maslov::Rectangle::createRegularArray(point_t lower, point_t upper)

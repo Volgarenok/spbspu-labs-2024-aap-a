@@ -2,6 +2,7 @@
 #define RECTANGLE_HPP
 
 #include "shape.hpp"
+#include <utility>
 #include "regular.hpp"
 
 namespace maslov
@@ -23,7 +24,7 @@ namespace maslov
     void clear(size_t count);
     double calculateSide(point_t lower, point_t upper);
     size_t calculateSquares(point_t lower, point_t upper);
-    point_t calculateSquaresOnSides(point_t lower, point_t upper);
+    std::pair<size_t, size_t> calculateSquaresOnSides(point_t lower, point_t upper);
     Regular ** createRegularArray(point_t lower, point_t upper);
   };
 }
