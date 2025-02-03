@@ -165,7 +165,7 @@ maslov::Regular ** maslov::Rectangle::createRegularArray(point_t lower, point_t 
       point_t outCircle = {center.x + square / 2.0, center.y + square / 2.0};
       try
       {
-        regularArray_[index] = new Regular(center, inCircle, outCircle);
+        regularArray[index] = new Regular(center, inCircle, outCircle);
       }
       catch (const std::bad_alloc &)
       {
