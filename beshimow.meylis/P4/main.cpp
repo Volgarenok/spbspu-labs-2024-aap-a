@@ -1,5 +1,5 @@
 #include <iostream>
-#include "StringProcessor.hpp"
+#include "stringProcessor.hpp"
 
 int main() {
     const size_t MAX_SIZE = 1024;

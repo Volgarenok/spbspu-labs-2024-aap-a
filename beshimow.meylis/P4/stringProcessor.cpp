@@ -1,4 +1,4 @@
-#include "StringProcessor.hpp"
+#include "stringProcessor.hpp"
 #include <iostream>
 #include <cstring>
 #include <cctype>
