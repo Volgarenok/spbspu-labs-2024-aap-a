@@ -34,7 +34,9 @@ namespace kushekbaev
 
     double width = upperRight.x - lowerLeft.x;
     double height = upperRight.y - lowerLeft.y;
-    point_t middle = points_[3];
+    point_t middle;
+    middle.x = lowerLeft.x + width / 2;
+    middle.y = lowerLeft.y + height / 2;
     return { width, height, middle };
   }
 
