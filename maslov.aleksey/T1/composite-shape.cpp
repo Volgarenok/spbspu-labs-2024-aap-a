@@ -56,7 +56,7 @@ void maslov::CompositeShape::pop_back()
 }
 maslov::Shape * maslov::CompositeShape::at(size_t id)
 {
-  return const_cast< Shape* >(const_cast< const CompositeShape* >(this)->at(id));
+  return const_cast< Shape * >(const_cast< const CompositeShape * >(this)->at(id));
 }
 const maslov::Shape * maslov::CompositeShape::at(size_t id) const
 {
@@ -68,7 +68,7 @@ const maslov::Shape * maslov::CompositeShape::at(size_t id) const
 }
 maslov::Shape * maslov::CompositeShape::operator[](size_t id)
 {
-  return const_cast< Shape* >(const_cast< const CompositeShape* >(this)->operator[](id));
+  return const_cast< Shape * >(const_cast< const CompositeShape * >(this)->operator[](id));
 }
 const maslov::Shape * maslov::CompositeShape::operator[](size_t id) const
 {

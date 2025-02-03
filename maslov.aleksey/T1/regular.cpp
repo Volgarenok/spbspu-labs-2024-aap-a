@@ -3,7 +3,6 @@
 #include <cmath>
 #include <algorithm>
 #include <limits>
-#include "costants.hpp"
 
 maslov::Regular::Regular(point_t a, point_t b, point_t c):
   a_(a),
@@ -46,9 +45,10 @@ maslov::rectangle_t maslov::Regular::getFrameRect() const
   double minX = std::numeric_limits< double >::max();
   double maxY = std::numeric_limits< double >::min();
   double minY = std::numeric_limits< double >::max();
+  double pi = 4 * std::atan(1.0);
   for (size_t i = 0; i < n_; ++i)
   {
-    double angle = initialAngle + 2 * maslov::pi * i / n_;
+    double angle = initialAngle + 2 * pi * i / n_;
     double x = std::round((centerX + rC * std::cos(angle)) * 100.0) / 100.0;
     double y = std::round((centerY + rC * std::sin(angle)) * 100.0) / 100.0;
     maxX = std::max(maxX, x);
@@ -103,22 +103,28 @@ double maslov::Regular::getHalfSide() const
 }
 namespace
 {
-  bool isGreaterDouble(double a, double b)
+  bool isEqualForVerticals(double a, double b)
   {
-    return a > b;
+    constexpr double customEpsilonForVerticals = 1e-10;
+    return std::fabs(a - b) > customEpsilonForVerticals;
+  }
+  bool isEqualForPythagoras(double a, double b)
+  {
+    constexpr double customEpsilonForPythagoras = 1e-20;
+    return std::fabs(a - b) > customEpsilonForPythagoras;
   }
 }
 size_t maslov::Regular::getVerticals() const
 {
+  double pi = 4 * std::atan(1.0);
   double hyp = getRadiusCircumcircle();
   double cat1 = getHalfSide();
   double cat2 = getRadiusIncircle();
   double x = cat1, y = cat2, z = hyp;
   double value = (x * x - z * z - y * y) / (-2 * y * z);
-  double angle = std::acos(value) * 180.0 / maslov::pi;
+  double angle = std::acos(value) * 180.0 / pi;
   double verticals = 360.0 / (angle * 2);
-  double doubleToCheck = std::fabs(verticals - std::round(verticals));
-  if (isGreaterDouble(doubleToCheck, maslov::customEpsilonForVerticals))
+  if (isEqualForVerticals(verticals, std::round(verticals)))
   {
     return 0;
   }
@@ -129,8 +135,7 @@ bool maslov::Regular::isRegular() const
   double hyp = getRadiusCircumcircle();
   double cat1 = getHalfSide();
   double cat2 = getRadiusIncircle();
-  double doubleToCheck = std::fabs(hyp * hyp - (cat1 * cat1 + cat2 * cat2));
-  if (isGreaterDouble(doubleToCheck, maslov::customEpsilonForPythagoras))
+  if (isEqualForPythagoras((hyp * hyp), (cat1 * cat1 + cat2 * cat2)))
   {
     if (n_ != 0)
     {
