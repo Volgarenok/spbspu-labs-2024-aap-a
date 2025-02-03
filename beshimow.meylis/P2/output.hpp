@@ -8,4 +8,4 @@ namespace beshimow
     void rowOutput(double x, size_t k, double error);
 }
 
-#endif // ROWOUTPUT_HPP
+#endif
