@@ -27,24 +27,21 @@ sveshnikov::rectangle_t sveshnikov::Rectangle::getFrameRect() const
 
 void sveshnikov::Rectangle::move(const point_t p)
 {
-  move(p.x - getFrameRect().pos.x, p.y - getFrameRect().pos.y);
+  point_t ctr = getFrameRect().pos;
+  move(p.x - ctr.x, p.y - ctr.y);
 }
 
 void sveshnikov::Rectangle::move(double dx, double dy)
 {
-  up_right_.x += dx;
-  up_right_.y += dy;
-  low_left_.x += dx;
-  low_left_.y += dy;
+  up_right_ = move_point(up_right_, dx, dy);
+  low_left_ = move_point(low_left_, dx, dy);
 }
 
 void sveshnikov::Rectangle::unsafe_scale(double k)
 {
   const point_t center = getFrameRect().pos;
-  up_right_.x = center.x + k * (up_right_.x - center.x);
-  up_right_.y = center.y + k * (up_right_.y - center.y);
-  low_left_.x = center.x - k * (center.x - low_left_.x);
-  low_left_.y = center.y - k * (center.y - low_left_.y);
+  up_right_ = scaling_move_point(up_right_, center, k);
+  low_left_ = scaling_move_point(low_left_, center, k);
 }
 
 sveshnikov::Shape *sveshnikov::Rectangle::clone() const

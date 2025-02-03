@@ -28,5 +28,4 @@ void sveshnikov::output_frame(std::ostream &out, const CompositeShape &comp_shp)
       out << " ";
     }
   }
-  out << '\n';
 }

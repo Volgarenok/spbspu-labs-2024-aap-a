@@ -58,6 +58,7 @@ int main()
   std::cout << std::fixed << std::setprecision(1);
   std::cout << comp_shp.getArea() << " ";
   sveshnikov::output_frame(std::cout, comp_shp);
+  std::cout << "\n";
   try
   {
     sveshnikov::isotropic_scaling(comp_shp, zoom_ctr_x, zoom_ctr_y, k);
@@ -69,5 +70,6 @@ int main()
   }
   std::cout << comp_shp.getArea() << " ";
   sveshnikov::output_frame(std::cout, comp_shp);
+  std::cout << "\n";
   return 0;
 }

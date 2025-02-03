@@ -1,35 +1,6 @@
 #include "composite-shape.hpp"
 #include <stdexcept>
-
-namespace
-{
-  double min(double val1, double val2);
-  double max(double val1, double val2);
-
-  double min(double val1, double val2)
-  {
-    if (val1 < val2)
-    {
-      return val1;
-    }
-    else
-    {
-      return val2;
-    }
-  }
-
-  double max(double val1, double val2)
-  {
-    if (val1 > val2)
-    {
-      return val1;
-    }
-    else
-    {
-      return val2;
-    }
-  }
-}
+#include <algorithm>
 
 sveshnikov::CompositeShape::CompositeShape():
   size_(0),
@@ -37,8 +8,7 @@ sveshnikov::CompositeShape::CompositeShape():
 {}
 
 sveshnikov::CompositeShape::CompositeShape(const CompositeShape &copied_shp):
-  size_(copied_shp.size_),
-  shapes_{nullptr}
+  size_(copied_shp.size_)
 {
   for (size_t i = 0; i < size_; i++)
   {
@@ -47,32 +17,25 @@ sveshnikov::CompositeShape::CompositeShape(const CompositeShape &copied_shp):
 }
 
 sveshnikov::CompositeShape::CompositeShape(CompositeShape &&copied_shp):
-  size_(copied_shp.size_),
-  shapes_{nullptr}
+  size_(copied_shp.size_)
 {
   for (size_t i = 0; i < size_; i++)
   {
     push_back(copied_shp.shapes_[i]);
+    copied_shp.shapes_[i] = nullptr;
   }
-  *copied_shp.shapes_ = nullptr;
 }
 
 sveshnikov::CompositeShape::~CompositeShape()
 {
-  for (size_t i = 0; size_ != 0; i++)
-  {
-    pop_back();
-  }
+  clear();
 }
 
 sveshnikov::CompositeShape &sveshnikov::CompositeShape::operator=(const CompositeShape &comp_shp)
 {
   if (this != std::addressof(comp_shp))
   {
-    while (size_ > 0)
-    {
-      pop_back();
-    }
+    clear();
     size_ = comp_shp.size_;
     for (size_t i = 0; i < size_; i++)
     {
@@ -86,23 +49,20 @@ sveshnikov::CompositeShape &sveshnikov::CompositeShape::operator=(CompositeShape
 {
   if (this != std::addressof(comp_shp))
   {
-    while (size_ > 0)
-    {
-      pop_back();
-    }
+    clear();
     size_ = comp_shp.size_;
     for (size_t i = 0; i < size_; i++)
     {
       shapes_[i] = comp_shp.shapes_[i];
+      comp_shp.shapes_[i] = nullptr;
     }
-    *comp_shp.shapes_ = nullptr;
   }
   return *this;
 }
 
 sveshnikov::Shape *sveshnikov::CompositeShape::operator[](size_t id) noexcept
 {
-  return shapes_[id];
+  return const_cast<Shape *>(static_cast<const CompositeShape &>(*this)[id]);
 }
 
 const sveshnikov::Shape *sveshnikov::CompositeShape::operator[](size_t id) const noexcept
@@ -112,11 +72,10 @@ const sveshnikov::Shape *sveshnikov::CompositeShape::operator[](size_t id) const
 
 sveshnikov::Shape *sveshnikov::CompositeShape::at(size_t id)
 {
-  CompositeShape const &const_object = *this;
-  return const_object.at(id);
+  return const_cast<Shape *>(static_cast<const CompositeShape *>(this)->at(id));
 }
 
-sveshnikov::Shape *sveshnikov::CompositeShape::at(size_t id) const
+const sveshnikov::Shape *sveshnikov::CompositeShape::at(size_t id) const
 {
   if (id >= size_)
   {
@@ -183,10 +142,10 @@ sveshnikov::rectangle_t sveshnikov::CompositeShape::getFrameRect() const
   for (size_t i = 0; i != size_; i++)
   {
     rectangle_t frame = shapes_[i]->getFrameRect();
-    low_left_x = min(low_left_x, frame.pos.x - frame.width / 2);
-    low_left_y = min(low_left_y, frame.pos.y - frame.height / 2);
-    up_right_x = max(up_right_x, frame.pos.x + frame.width / 2);
-    up_right_y = max(up_right_y, frame.pos.y + frame.height / 2);
+    low_left_x = std::min(low_left_x, frame.pos.x - frame.width / 2);
+    low_left_y = std::min(low_left_y, frame.pos.y - frame.height / 2);
+    up_right_x = std::max(up_right_x, frame.pos.x + frame.width / 2);
+    up_right_y = std::max(up_right_y, frame.pos.y + frame.height / 2);
   }
   double width = up_right_x - low_left_x;
   double height = up_right_y - low_left_y;
@@ -231,5 +190,13 @@ void sveshnikov::CompositeShape::unsafe_scale(double k)
     dx = k * (pos.x - center.x);
     dy = k * (pos.y - center.y);
     shapes_[i]->move(dx, dy);
+  }
+}
+
+void sveshnikov::CompositeShape::clear() noexcept
+{
+  while (size_ > 0)
+  {
+    pop_back();
   }
 }

@@ -15,7 +15,7 @@ sveshnikov::Ellipse::Ellipse(point_t center, double vert_radius, double horiz_ra
 
 double sveshnikov::Ellipse::getArea() const
 {
-  double pi = 4.0 * atan(1.0);
+  const double pi = 4.0 * atan(1.0);
   return pi * (vert_radius_ * horiz_radius_);
 }
 
@@ -31,8 +31,7 @@ void sveshnikov::Ellipse::move(const point_t p)
 
 void sveshnikov::Ellipse::move(double dx, double dy)
 {
-  center_.x += dx;
-  center_.y += dy;
+  center_ = move_point(center_, dx, dy);
 }
 
 void sveshnikov::Ellipse::unsafe_scale(double k)

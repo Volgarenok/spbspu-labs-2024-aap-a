@@ -12,12 +12,12 @@ namespace sveshnikov
     rectangle_t getFrameRect() const override;
     void move(const point_t p) override;
     void move(double dx, double dy) override;
+    void unsafe_scale(double k) override;
     Shape *clone() const override;
 
   private:
     point_t low_left_;
     double side_;
-    void unsafe_scale(double k) override;
   };
 }
 

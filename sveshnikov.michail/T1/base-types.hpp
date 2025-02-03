@@ -15,6 +15,9 @@ namespace sveshnikov
     double height;
     point_t pos;
   };
+
+  point_t move_point(point_t p, double dx, double dy);
+  point_t scaling_move_point(point_t p, point_t ctr, double k);
 }
 
 #endif

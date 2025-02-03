@@ -7,45 +7,79 @@
 
 namespace
 {
-  void read_params(std::istream &in, const size_t num_params, double *params);
+  double *read_params(std::istream &in, size_t count);
 
-  void read_params(std::istream &in, const size_t num_params, double *params)
+  double *read_params(std::istream &in, size_t count)
   {
-    for (size_t i = 0; i < num_params; i++)
+    double *params = new double[count];
+    for (size_t i = 0; i < count; i++)
     {
-      in >> params[i];
+      if (!(in >> params[i]))
+      {
+        delete[] params;
+        throw std::logic_error("ERROR: Incorrect shape parameters");
+      }
     }
+    return params;
   }
 }
 
 void sveshnikov::build_rectangle(std::istream &in, CompositeShape &comp_shp)
 {
-  constexpr size_t num_params = 4;
-  double params[num_params] = {};
-  read_params(in, num_params, params);
-  comp_shp.push_back(new Rectangle({params[0], params[1]}, {params[2], params[3]}));
+  double *params = read_params(in, 4);
+  try
+  {
+    comp_shp.push_back(new Rectangle({params[0], params[1]}, {params[2], params[3]}));
+  }
+  catch (const std::exception &e)
+  {
+    delete[] params;
+    throw;
+  }
+  delete[] params;
 }
 
 void sveshnikov::build_ring(std::istream &in, CompositeShape &comp_shp)
 {
-  constexpr size_t num_params = 4;
-  double params[num_params] = {};
-  read_params(in, num_params, params);
-  comp_shp.push_back(new Ring({params[0], params[1]}, params[2], params[3]));
+  double *params = read_params(in, 4);
+  try
+  {
+    comp_shp.push_back(new Ring({params[0], params[1]}, params[2], params[3]));
+  }
+  catch (const std::exception &e)
+  {
+    delete[] params;
+    throw;
+  }
+  delete[] params;
 }
 
 void sveshnikov::build_ellipse(std::istream &in, CompositeShape &comp_shp)
 {
-  constexpr size_t num_params = 4;
-  double params[num_params] = {};
-  read_params(in, num_params, params);
-  comp_shp.push_back(new Ellipse({params[0], params[1]}, params[2], params[3]));
+  double *params = read_params(in, 4);
+  try
+  {
+    comp_shp.push_back(new Ellipse({params[0], params[1]}, params[2], params[3]));
+  }
+  catch (const std::exception &e)
+  {
+    delete[] params;
+    throw;
+  }
+  delete[] params;
 }
 
 void sveshnikov::build_square(std::istream &in, CompositeShape &comp_shp)
 {
-  constexpr size_t num_params = 3;
-  double params[num_params] = {};
-  read_params(in, num_params, params);
-  comp_shp.push_back(new Square({params[0], params[1]}, params[2]));
+  double *params = read_params(in, 3);
+  try
+  {
+    comp_shp.push_back(new Square({params[0], params[1]}, params[2]));
+  }
+  catch (const std::exception &e)
+  {
+    delete[] params;
+    throw;
+  }
+  delete[] params;
 }

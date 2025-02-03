@@ -3,12 +3,19 @@
 
 sveshnikov::Ring::Ring(point_t center, double long_radius, double short_radius):
   small_ellipse_(center, short_radius, short_radius),
-  big_ellipse_(center, long_radius, long_radius),
-  center_(center),
-  long_radius_(long_radius),
-  short_radius_(short_radius)
+  big_ellipse_(center, long_radius, long_radius)
 {
   if (!(long_radius > short_radius && short_radius > 0))
+  {
+    throw std::logic_error("ERROR: incorrect radius values of ring");
+  }
+}
+
+sveshnikov::Ring::Ring(Ellipse small_ellipse, Ellipse big_ellipse):
+  small_ellipse_(small_ellipse),
+  big_ellipse_(big_ellipse)
+{
+  if (!(big_ellipse_.getArea() > small_ellipse_.getArea() && small_ellipse_.getArea() > 0))
   {
     throw std::logic_error("ERROR: incorrect radius values of ring");
   }
@@ -44,5 +51,5 @@ void sveshnikov::Ring::unsafe_scale(double k)
 
 sveshnikov::Shape *sveshnikov::Ring::clone() const
 {
-  return new Ring(center_, long_radius_, short_radius_);
+  return new Ring(small_ellipse_, big_ellipse_);
 }

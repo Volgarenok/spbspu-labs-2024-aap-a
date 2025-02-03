@@ -9,15 +9,15 @@ namespace sveshnikov
   {
   public:
     CompositeShape();
-    CompositeShape(const CompositeShape &);
-    CompositeShape(CompositeShape &&);
+    CompositeShape(const CompositeShape &copied_shp);
+    CompositeShape(CompositeShape &&copied_shp);
     ~CompositeShape();
-    CompositeShape &operator=(const CompositeShape &);
-    CompositeShape &operator=(CompositeShape &&);
+    CompositeShape &operator=(const CompositeShape &comp_shp);
+    CompositeShape &operator=(CompositeShape &&comp_shp);
     Shape *operator[](size_t id) noexcept;
     const Shape *operator[](size_t id) const noexcept;
     Shape *at(size_t id);
-    Shape *at(size_t id) const;
+    const Shape *at(size_t id) const;
     void push_back(Shape *shp);
     void pop_back();
     bool empty() const noexcept;
@@ -28,11 +28,12 @@ namespace sveshnikov
     void move(point_t p);
     void move(double dx, double dy) noexcept;
     void scale(double k);
+    void unsafe_scale(double k);
 
   private:
     size_t size_;
     sveshnikov::Shape *shapes_[10000];
-    void unsafe_scale(double k);
+    void clear() noexcept;
   };
 }
 
