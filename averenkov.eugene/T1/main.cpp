@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include "dynamicinput.h"
 #include "makeshape.hpp"
 #include "listCommand.hpp"
 

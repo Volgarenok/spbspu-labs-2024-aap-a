@@ -1,7 +1,14 @@
 #include "rectangle.hpp"
 #include <stdexcept>
 #include "base-types.hpp"
-#include "getline.hpp"
+
+namespace
+{
+  averenkov::point_t scalePoint(const averenkov::point_t& point, const averenkov::point_t& pos, double factor)
+  {
+    return { pos.x + (point.x - pos.x) * factor, pos.y + (point.y - pos.y) * factor };
+  }
+}
 
 averenkov::Rectangle::Rectangle(const point_t& a, const point_t& c):
   a_(a),
@@ -33,11 +40,9 @@ averenkov::rectangle_t averenkov::Rectangle::getFrameRect() const
 
 void averenkov::Rectangle::scaleNonChecked(double factor)
 {
-  point_t pos = Rectangle::getFrameRect().pos;
-  a_.x = pos.x - ((pos.x - a_.x) * factor);
-  a_.y = pos.y - ((pos.y - a_.y) * factor);
-  c_.x = ((c_.x - pos.x) * factor) + pos.x;
-  c_.y = ((c_.y - pos.y) * factor) + pos.y;
+  point_t pos = getFrameRect().pos;
+  a_ = scalePoint(a_, pos, factor);
+  c_ = scalePoint(c_, pos, factor);
 }
 
 void averenkov::Rectangle::move(double dx, double dy)

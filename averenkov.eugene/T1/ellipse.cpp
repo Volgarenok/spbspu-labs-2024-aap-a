@@ -39,6 +39,6 @@ void averenkov::Ellipse::move(const point_t& s)
 
 void averenkov::Ellipse::move(double dx, double dy)
 {
-  center_.x = center_.x + dx;
-  center_.y = center_.y + dy;
+  center_.x += dx;
+  center_.y += dy;
 }

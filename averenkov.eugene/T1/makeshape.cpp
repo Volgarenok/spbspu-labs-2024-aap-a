@@ -16,14 +16,21 @@ namespace
   }
   void readPointsArray(std::istream& input, averenkov::point_t* read, size_t count, bool& error)
   {
-    for (size_t i = 0; i < count; i++)
+    double* coor = new double[count * 2]();
+    readArray(input, coor, count * 2, error);
+    for (size_t i = 0, j = 0; i < count * 2; i++)
     {
-      if (!(input >> read[i].x >> read[i].y))
+      if( i % 2 == 0)
       {
-        error = true;
-        return;
+        read[j].x = coor[i];
+      }
+      else
+      {
+        read[j].y = coor[i];
+        j++;
       }
     }
+    delete[] coor;
   }
 }
 

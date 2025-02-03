@@ -5,6 +5,15 @@
 
 namespace
 {
+  void destroy(averenkov::Rectangle** list)
+  {
+    for (size_t i = 0; i < 40; i++)
+    {
+      delete list[i];
+    }
+    delete[] list;
+  }
+
   averenkov::Rectangle** buildRectangles(const averenkov::point_t& a, const averenkov::point_t& b, const averenkov::point_t& c)
   {
     averenkov::Rectangle** rectangles = new averenkov::Rectangle*[40];
@@ -43,11 +52,7 @@ namespace
         {
           if (index >= 40)
           {
-            for (size_t i = 0; i < 40; i++)
-            {
-              delete rectangles[i];
-            }
-            delete[] rectangles;
+            destroy(rectangles);
             throw std::out_of_range("Too many rectangles for the array.");
           }
           double x_offset = x_dir * (rect_in_level - (3 - level) / 2.0) * widthR_;
@@ -59,7 +64,8 @@ namespace
           }
           catch(...)
           {
-            throw std::bad_alloc();
+            destroy(rectangles);
+            throw std::invalid_argument("Error build rectangles");
           }
           index++;
         }
@@ -79,22 +85,14 @@ averenkov::Diamond::Diamond(const point_t& a, const point_t& b, const point_t& c
     (c.x == a.x && c.y == b.y) ||
     (c.x == b.x && c.y == a.y)))
   {
-    for (size_t i = 0; i < 40; i++)
-    {
-      delete rectangles_[i];
-    }
-    delete[] rectangles_;
+    destroy(rectangles_);
     throw std::invalid_argument("Error in parameters");
   }
 }
 
 averenkov::Diamond::~Diamond()
 {
-  for (size_t i = 0; i < 40; i++)
-  {
-    delete rectangles_[i];
-  }
-  delete[] rectangles_;
+  destroy(rectangles_);
 }
 
 double averenkov::Diamond::getArea() const
@@ -125,11 +123,7 @@ void averenkov::Diamond::scaleNonChecked(double factor)
   point_t a = {center.x + scale_width, center.y};
   point_t b = {center.x, center.y + scale_height};
   Rectangle** rectangles = (buildRectangles(center, a, b));
-  for (size_t i = 0; i < 40; i++)
-  {
-    delete rectangles_[i];
-  }
-  delete[] rectangles_;
+  destroy(rectangles_);
   rectangles_ = rectangles;
 }
 
