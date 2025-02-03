@@ -61,6 +61,12 @@ int main()
     {
       continue;
     }
+    if (shape_name == "SCALE")
+    {
+      std::cin >> scale_point_x >> scale_point_y;
+      std::cin >> scale_coef;
+      continue;
+    }
     Shape* shape = nullptr;
     try
     {
@@ -84,11 +90,6 @@ int main()
       deleteShapesFromCompositeShape(shapes_array);
       std::cerr << e.what();
       return 1;
-    }
-    if (shape_name == "SCALE")
-    {
-      std::cin >> scale_point_x >> scale_point_y;
-      std::cin >> scale_coef;
     }
   }
   if (std::cin.eof())
