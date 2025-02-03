@@ -6,11 +6,18 @@ int main() {
     char input[MAX_SIZE];
 
     std::cout << "Введите строку: ";
-    std::cin.getline(input, MAX_SIZE);
+    if (!std::cin.getline(input, MAX_SIZE)) {
+        std::cerr << "Ошибка: не удалось считать строку." << std::endl;
+        return 1;
+    }
 
     const char* excludeStr = "aeiou";
 
     char* result = excludeCharacters(input, excludeStr);
+    if (result == nullptr) {
+        std::cerr << "Ошибка: не удалось выделить память." << std::endl;
+        return 1;
+    }
 
     std::cout << "Результат: " << result << std::endl;
 
