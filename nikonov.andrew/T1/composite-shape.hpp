@@ -8,13 +8,13 @@ namespace nikonov
   {
   public:
     CompositeShape();
-    CompositeShape(CompositeShape &copy);
+    CompositeShape(const CompositeShape &copy);
     CompositeShape(CompositeShape &&copy);
     ~CompositeShape();
     Shape *operator[](size_t id);
     const Shape *operator[](size_t id) const;
     CompositeShape &operator=(const CompositeShape &another);
-    CompositeShape &operator=(CompositeShape &&another);
+    CompositeShape &operator=(CompositeShape &&another) noexcept;
     double getArea() const;
     rectangle_t getFrameRect() const;
     void move(const point_t &a);

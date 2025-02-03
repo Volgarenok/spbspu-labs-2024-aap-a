@@ -4,12 +4,22 @@
 nikonov::CompositeShape::CompositeShape():
   size_(0)
 {}
-nikonov::CompositeShape::CompositeShape(CompositeShape &copy):
+nikonov::CompositeShape::CompositeShape(const CompositeShape &copy):
   size_(copy.size_)
 {
-  for (size_t i = 0; i < copy.size(); ++i)
+  size_t realSize = 0;
+  try
   {
-    shp_[i] = copy.shp_[i]->clone();
+    for (size_t i = 0; i < copy.size(); ++i)
+    {
+      shp_[i] = copy.shp_[i]->clone();
+      ++realSize;
+    }
+  }
+  catch(const std::exception& e)
+  {
+    destroy(shp_, realSize);
+    throw;
   }
 }
 nikonov::CompositeShape::CompositeShape(CompositeShape &&copy):
@@ -38,27 +48,41 @@ nikonov::CompositeShape &nikonov::CompositeShape::operator=(const CompositeShape
 {
   if (std::addressof(another) != this)
   {
-    destroy(shp_, size());
-    for (size_t i = 0; i < another.size(); ++i)
+    Shape *buffer[10000] = {};
+    size_t buffSize = 0;
+    try
     {
-      shp_[i] = another.shp_[i]->clone();
+      for (size_t i = 0; i < another.size_; ++i)
+      {
+        buffer[i] = another.shp_[i]->clone();
+        ++buffSize;
+      }
+    }
+    catch(const std::exception& e)
+    {
+      destroy(buffer, buffSize);
+      throw;
+    }
+    destroy(shp_, size_);
+    for (size_t i = 0; i < another.size_; ++i)
+    {
+      shp_[i] = buffer[i];
     }
     size_ = another.size_;
   }
   return *this;
 }
-nikonov::CompositeShape &nikonov::CompositeShape::operator=(CompositeShape &&another)
+nikonov::CompositeShape &nikonov::CompositeShape::operator=(CompositeShape &&another) noexcept
 {
   if (std::addressof(another) != this)
   {
-    destroy(shp_, size());
-    for (size_t i = 0; i < another.size(); ++i)
+    destroy(shp_, size_);
+    for (size_t i = 0; i < another.size_; ++i)
     {
       shp_[i] = another.shp_[i];
       another.shp_[i] = nullptr;
     }
     size_ = another.size_;
-    destroy(another.shp_, another.size());
     another.size_ = 0;
   }
   return *this;
@@ -137,13 +161,21 @@ void nikonov::CompositeShape::scaleWithCheck(double k)
 }
 void nikonov::CompositeShape::push_back(Shape *newElem)
 {
+  constexpr size_t maxSize = 10000;
+  if (size_ + 1 > maxSize)
+  {
+    throw std::logic_error("maximum size has been exceeded");
+  }
   shp_[size_] = newElem;
   ++size_;
 }
 void nikonov::CompositeShape::pop_back()
 {
+  if (size_ == 0)
+  {
+    throw std::logic_error("the collection is empty");
+  }
   delete shp_[size_ - 1];
-  shp_[size_ - 1] = nullptr;
   --size_;
 }
 nikonov::Shape *nikonov::CompositeShape::at(size_t id)

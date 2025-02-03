@@ -1,10 +1,17 @@
 #include "rectangle.hpp"
 #include "additional-utilities.hpp"
+namespace
+{
+  nikonov::point_t findMidPt(const nikonov::point_t &lbp, const nikonov::point_t &rtp)
+  {
+    return { (rtp.x + lbp.x) / 2, (rtp.y + lbp.y) / 2 };
+  }
+}
 nikonov::Rectangle::Rectangle(const point_t &lbp, const point_t &rtp):
-  left_({ point_t{ lbp.x, rtp.y }, point_t{ lbp.x, lbp.y }, point_t{ (rtp.x + lbp.x) / 2, (rtp.y + lbp.y) / 2 } }),
-  right_({ point_t{ rtp.x, rtp.y }, point_t{ rtp.x, lbp.y }, point_t{ (rtp.x + lbp.x) / 2, (rtp.y + lbp.y) / 2 } }),
-  top_({ point_t{ lbp.x, rtp.y }, point_t{ rtp.x, rtp.y }, point_t{ (rtp.x + lbp.x) / 2, (rtp.y + lbp.y) / 2 } }),
-  bot_({ point_t{ lbp.x, lbp.y }, point_t{ rtp.x, lbp.y }, point_t{ (rtp.x + lbp.x) / 2, (rtp.y + lbp.y) / 2 } })
+  left_({ point_t{ lbp.x, rtp.y }, point_t{ lbp.x, lbp.y }, findMidPt(lbp, rtp) }),
+  right_({ point_t{ rtp.x, rtp.y }, point_t{ rtp.x, lbp.y }, findMidPt(lbp, rtp) }),
+  top_({ point_t{ lbp.x, rtp.y }, point_t{ rtp.x, rtp.y }, findMidPt(lbp, rtp) }),
+  bot_({ point_t{ lbp.x, lbp.y }, point_t{ rtp.x, lbp.y }, findMidPt(lbp, rtp) })
 {
   if (lbp.x >= rtp.x || lbp.y >= rtp.y)
   {
