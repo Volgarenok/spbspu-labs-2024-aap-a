@@ -43,7 +43,7 @@ int main(int argc, char ** argv)
       dyn_matrix = new int[m * n];
       matrix = dyn_matrix;
     }
-    catch (const std::bad_alloc)
+    catch (const std::bad_alloc & e)
     {
       std::cerr << "Out of memory" << "\n";
       return 2;
