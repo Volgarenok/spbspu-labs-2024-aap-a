@@ -10,6 +10,7 @@ maslov::Rectangle::Rectangle(point_t lowerLeftCorner, point_t upperRightCorner):
 {
   if (upperRightCorner.x <= lowerLeftCorner.x || upperRightCorner.y <= lowerLeftCorner.y)
   {
+    clear(n_);
     throw std::invalid_argument("Rectangle has incorrect parameters");
   }
 }
