@@ -1,32 +1,33 @@
-#include "stringProcessor.hpp"
-#include <cstddef>
+#include "StringProcessor.hpp"
+#include <iostream>
+#include <cstring>
+#include <cctype>
 
-char * beshimow::excludeCharacters(char * str1, const char * str2)
-{
-    char * original = str1;
-    char * result = str1;
-
-    while (*str1)
-    {
-        const char * ptr2 = str2;
-        bool found = false;
-
-        while (*ptr2 && !found)
-        {
-            if (*str1 == *ptr2)
-            {
-                found = true;
-            }
-            ptr2++;
-        }
-
-        if (!found)
-        {
-            *result++ = *str1;
-        }
-        str1++;
+char* excludeCharacters(const char* str1, const char* str2) {
+    if (str1 == nullptr || str2 == nullptr) {
+        return nullptr;
     }
 
-    *result = '\0';
-    return original;
+    char* result = new (std::nothrow) char[MAX_SIZE];
+    if (result == nullptr) {
+        std::cerr << "Ошибка: не удалось выделить память." << std::endl;
+        exit(1);
+    }
+
+    size_t index = 0;
+    for (size_t i = 0; str1[i] != '\0'; ++i) {
+        bool found = false;
+        for (size_t j = 0; str2[j] != '\0'; ++j) {
+            if (str1[i] == str2[j]) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            result[index++] = str1[i];
+        }
+    }
+    result[index] = '\0';
+
+    return result;
 }
