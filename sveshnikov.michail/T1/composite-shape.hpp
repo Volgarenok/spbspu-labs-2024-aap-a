@@ -29,11 +29,11 @@ namespace sveshnikov
     void move(double dx, double dy) noexcept;
     void scale(double k);
     void unsafe_scale(double k);
+    void clear() noexcept;
 
   private:
     size_t size_;
     sveshnikov::Shape *shapes_[10000];
-    void clear() noexcept;
   };
 }
 
