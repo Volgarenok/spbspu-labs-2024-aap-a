@@ -17,22 +17,20 @@ double bocharov::getAllArea(Shape ** myShapes, size_t shapeCount)
 
 void bocharov::scaling(Shape ** myShapes, size_t shapeCount, point_t center, double ratio)
 {
-  try
+  if (ratio <= 0)
   {
-    for (size_t i = 0; i < shapeCount; i++)
-    {
-      point_t cneter = myShapes[i]->getFrameRect().pos;
-      myShapes[i]->move(center);
-      point_t center2 = myShapes[i]->getFrameRect().pos;
-      double diffenceX = (center2.x - cneter.x) * ratio * - 1;
-      double diffenceY = (center2.y - cneter.y) * ratio * - 1;
-      myShapes[i]->scaleCheck(ratio);
-      myShapes[i]->move(diffenceX, diffenceY);
-    }
+    throw std::logic_error("Incorrect ratio");
   }
-  catch (const std::logic_error & e)
+  for (size_t i = 0; i < shapeCount; i++)
   {
-    throw std::logic_error(e.what());
+    point_t cneter = myShapes[i]->getFrameRect().pos;
+    myShapes[i]->move(center);
+    point_t center2 = myShapes[i]->getFrameRect().pos;
+    double diffenceX = (center2.x - cneter.x) * ratio * - 1;
+    double diffenceY = (center2.y - cneter.y) * ratio * - 1;
+    //myShapes[i]->scaleCheck(ratio);
+    myShapes[i]->scale(ratio);
+    myShapes[i]->move(diffenceX, diffenceY);
   }
 }
 
@@ -146,5 +144,4 @@ void bocharov::clear(Shape ** myshape, size_t shapeCount)
   {
     delete myshape[i];
   }
-  delete[] myshape;
 }
