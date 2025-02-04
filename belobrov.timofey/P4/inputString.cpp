@@ -1,9 +1,9 @@
 #include "inputString.hpp"
 #include <cstdlib>
 
-char * belobrov::inputString(std::istream& input)
+char* belobrov::inputString(std::istream& input)
 {
-  char * buffer = nullptr;
+  char* buffer = nullptr;
   size_t bufferSize = 32;
 
   buffer = static_cast<char*>(malloc(bufferSize * sizeof(char)));
@@ -20,7 +20,7 @@ char * belobrov::inputString(std::istream& input)
       buffer[currentIndex] = '\0';
       bufferSize *= 2;
 
-      char * newBuffer = belobrov::resizeBuffer(buffer, bufferSize);
+      char* newBuffer = belobrov::resizeBuffer(buffer, bufferSize);
       if (!newBuffer) {
         free(buffer);
         return nullptr;
@@ -35,9 +35,9 @@ char * belobrov::inputString(std::istream& input)
   return buffer;
 }
 
-char * belobrov::resizeBuffer(char * oldBuffer, size_t newSize)
+char* belobrov::resizeBuffer(char* oldBuffer, size_t newSize)
 {
-  char * newBuffer = static_cast<char*>(realloc(oldBuffer, newSize * sizeof(char)));
+  char* newBuffer = static_cast<char*>(realloc(oldBuffer, newSize * sizeof(char)));
   if (!newBuffer) {
     return nullptr;
   }

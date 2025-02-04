@@ -4,7 +4,7 @@
 
 namespace belobrov
 {
-  char * replaceChars(char * str, char oldChar, char newChar);
+  char* replaceChars(char* str, char oldChar, char newChar);
 }
 
 #endif

@@ -2,7 +2,8 @@
 #include "inputString.hpp"
 #include "replaceChars.hpp"
 
-int main() {
+int main()
+{
   char* line = belobrov::inputString(std::cin);
   if (line == nullptr) {
     std::cerr << "Memory allocation error!\n";
