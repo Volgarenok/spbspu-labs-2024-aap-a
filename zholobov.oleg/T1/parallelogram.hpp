@@ -1,6 +1,8 @@
 #ifndef PARALLELOGRAM_HPP
 #define PARALLELOGRAM_HPP
 
+#include <istream>
+
 #include "shape.hpp"
 
 namespace zholobov {
@@ -13,7 +15,9 @@ namespace zholobov {
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;
     void move(double dx, double dy) override;
-    void scale(double k) override;
+    void scale_no_check(double k) override;
+
+    static Parallelogram* create(std::istream& in);
 
   private:
     point_t pos_;

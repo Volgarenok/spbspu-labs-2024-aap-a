@@ -9,11 +9,9 @@
 
 namespace zholobov {
 
-  Rectangle* create_rectangle(std::istream& in);
-  Square* create_square(std::istream& in);
-  Parallelogram* create_parallelogram(std::istream& in);
-  void process_scale(Shape** shapes, size_t shape_cnt, point_t pos, double scale_factor);
-  void print_shapes(std::ostream& output, Shape** shapes, size_t shape_cnt);
+  Shape* create_shape(const std::string& shape_name, std::istream& input_stream);
+  void process_scale(Shape* const* shapes, size_t shape_cnt, point_t pos, double scale_factor);
+  void print_shapes(std::ostream& output, const Shape* const* shapes, size_t shape_cnt);
   void delete_shapes(Shape** shapes, size_t shape_cnt);
 
 }

@@ -17,8 +17,10 @@ namespace zholobov {
 
     void push_back(Shape* shape);
     void pop_back();
-    Shape* at(size_t idx) const;
-    Shape* operator[](size_t idx) const noexcept;
+    Shape* at(size_t idx);
+    const Shape* at(size_t idx) const;
+    Shape* operator[](size_t idx) noexcept;
+    const Shape* operator[](size_t idx) const noexcept;
     bool empty() const noexcept;
     size_t size() const noexcept;
 
@@ -27,6 +29,9 @@ namespace zholobov {
     void move(point_t p);
     void move(double dx, double dy);
     void scale(double k);
+
+    void print(std::ostream& output) const;
+    void scale_relative(point_t pos, double scale_factor);
 
   private:
     Shape* items_[max_elem_num];

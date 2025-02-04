@@ -2,6 +2,7 @@
 #define SHAPE_HPP
 
 #include <cstddef>
+#include <stdexcept>
 
 #include "base-types.hpp"
 
@@ -14,7 +15,14 @@ namespace zholobov {
     virtual rectangle_t getFrameRect() const = 0;
     virtual void move(point_t p) = 0;
     virtual void move(double dx, double dy) = 0;
-    virtual void scale(double k) = 0;
+    void scale(double k)
+    {
+      if (k <= 0.0) {
+        throw std::invalid_argument("Invalid scale factor");
+      }
+      scale_no_check(k);
+    }
+    virtual void scale_no_check(double k) = 0;
   };
 
 }

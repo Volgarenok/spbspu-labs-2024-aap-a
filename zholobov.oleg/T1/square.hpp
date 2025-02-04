@@ -1,6 +1,8 @@
 #ifndef SQUARE_HPP
 #define SQUARE_HPP
 
+#include <istream>
+
 #include "rectangle.hpp"
 
 namespace zholobov {
@@ -8,6 +10,7 @@ namespace zholobov {
   class Square final: public Rectangle {
   public:
     Square(const point_t& a, double length);
+    static Square* create(std::istream& in);
   };
 
 }

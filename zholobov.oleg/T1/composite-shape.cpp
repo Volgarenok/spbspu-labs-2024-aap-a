@@ -5,6 +5,7 @@
 
 #include "parallelogram.hpp"
 #include "rectangle.hpp"
+#include "shapes_utils.hpp"
 #include "square.hpp"
 
 zholobov::CompositeShape::CompositeShape() noexcept:
@@ -79,7 +80,7 @@ void zholobov::CompositeShape::pop_back()
   delete items_[--items_num_];
 }
 
-zholobov::Shape* zholobov::CompositeShape::at(size_t idx) const
+zholobov::Shape* zholobov::CompositeShape::at(size_t idx)
 {
   if (idx > items_num_) {
     throw std::out_of_range("idx out of range");
@@ -87,7 +88,20 @@ zholobov::Shape* zholobov::CompositeShape::at(size_t idx) const
   return items_[idx];
 }
 
-zholobov::Shape* zholobov::CompositeShape::operator[](size_t idx) const noexcept
+const zholobov::Shape* zholobov::CompositeShape::at(size_t idx) const
+{
+  if (idx > items_num_) {
+    throw std::out_of_range("idx out of range");
+  }
+  return items_[idx];
+}
+
+zholobov::Shape* zholobov::CompositeShape::operator[](size_t idx) noexcept
+{
+  return items_[idx];
+}
+
+const zholobov::Shape* zholobov::CompositeShape::operator[](size_t idx) const noexcept
 {
   return items_[idx];
 }
@@ -155,10 +169,25 @@ void zholobov::CompositeShape::move(double dx, double dy)
 
 void zholobov::CompositeShape::scale(double k)
 {
-  rectangle_t rect = getFrameRect();
+  scale_relative(getFrameRect().pos, k);
+}
+
+void zholobov::CompositeShape::print(std::ostream& output) const
+{
+  print_shapes(output, items_, items_num_);
+}
+
+void zholobov::CompositeShape::scale_relative(point_t pos, double scale_factor)
+{
+  if (scale_factor <= 0.0) {
+    throw std::invalid_argument("Invalid scale factor");
+  }
   for (size_t i = 0; i < items_num_; ++i) {
-    items_[i]->scale(k);
-    rectangle_t cur = items_[i]->getFrameRect();
-    items_[i]->move((cur.pos.x - rect.pos.x) * k, (cur.pos.y - rect.pos.y) * k);
+    items_[i]->scale_no_check(scale_factor);
+    zholobov::rectangle_t rect = items_[i]->getFrameRect();
+    zholobov::point_t new_pos;
+    new_pos.x = (rect.pos.x - pos.x) * scale_factor + pos.x;
+    new_pos.y = (rect.pos.y - pos.y) * scale_factor + pos.y;
+    items_[i]->move(new_pos);
   }
 }
