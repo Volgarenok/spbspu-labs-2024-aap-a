@@ -30,6 +30,7 @@ namespace nikonov
   private:
     Shape *shp_[10000];
     size_t size_;
+    void swap(CompositeShape &another);
   };
 }
 #endif

@@ -3,7 +3,13 @@
 #include "additional-utilities.hpp"
 nikonov::CompositeShape::CompositeShape():
   size_(0)
-{}
+{
+  constexpr size_t maxSize = 10000;
+  for (size_t i = 0; i < maxSize; ++i)
+  {
+    shp_[i] = nullptr;
+  }
+}
 nikonov::CompositeShape::CompositeShape(const CompositeShape &copy):
   size_(copy.size_)
 {
@@ -48,43 +54,14 @@ nikonov::CompositeShape &nikonov::CompositeShape::operator=(const CompositeShape
 {
   if (std::addressof(another) != this)
   {
-    Shape *buffer[10000] = {};
-    size_t buffSize = 0;
-    try
-    {
-      for (size_t i = 0; i < another.size_; ++i)
-      {
-        buffer[i] = another.shp_[i]->clone();
-        ++buffSize;
-      }
-    }
-    catch (const std::exception& e)
-    {
-      destroy(buffer, buffSize);
-      throw;
-    }
-    destroy(shp_, size_);
-    for (size_t i = 0; i < another.size_; ++i)
-    {
-      shp_[i] = buffer[i];
-    }
-    size_ = another.size_;
+    CompositeShape tempObj{ another };
+    swap(tempObj);
   }
   return *this;
 }
 nikonov::CompositeShape &nikonov::CompositeShape::operator=(CompositeShape &&another) noexcept
 {
-  if (std::addressof(another) != this)
-  {
-    destroy(shp_, size_);
-    for (size_t i = 0; i < another.size_; ++i)
-    {
-      shp_[i] = another.shp_[i];
-      another.shp_[i] = nullptr;
-    }
-    size_ = another.size_;
-    another.size_ = 0;
-  }
+  swap(another);
   return *this;
 }
 double nikonov::CompositeShape::getArea() const
@@ -197,4 +174,12 @@ bool nikonov::CompositeShape::empty() const noexcept
 size_t nikonov::CompositeShape::size() const noexcept
 {
   return size_;
+}
+void nikonov::CompositeShape::swap(CompositeShape &another)
+{
+  std::swap(size_, another.size_);
+  for (size_t i = 0; i < std::max(size_, another.size_); ++i)
+  {
+    std::swap(shp_[i], another.shp_[i]);
+  }
 }
