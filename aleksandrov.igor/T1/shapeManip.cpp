@@ -5,21 +5,15 @@
 
 namespace aleksandrov
 {
-  size_t getShapes(std::istream& input, Shape** shapes, bool& error)
+  size_t getShapes(std::istream& input, Shape** shapes, double* params, size_t maxParams, bool& error)
   {
     std::string word;
     size_t count = 0;
 
     while (input >> word)
     {
-      double* params = nullptr;
       try
       {
-        size_t paramsCount = 0;
-        if (!(paramsCount = getParamsCount(word)))
-        {
-          throw std::logic_error("Incorrect input!");
-        }
         if (word == "SCALE" && count)
         {
           return count;
@@ -28,17 +22,15 @@ namespace aleksandrov
         {
           break;
         }
-        params = new double[paramsCount];
-        if (!getShapeParams(input, params, paramsCount))
+        size_t paramsCount = getShapeParams(input, params, maxParams);
+        if (paramsCount != 3 && paramsCount != 4)
         {
-          throw std::logic_error("Incorrect parameters!");
+          throw std::logic_error("Incorrect parameters");
         }
         shapes[count] = makeShape(word, params);
-        delete[] params;
       }
       catch (const std::logic_error&)
       {
-        delete[] params;
         error = true;
         input.clear();
         continue;
@@ -59,7 +51,7 @@ namespace aleksandrov
     throw std::logic_error("Incorrect input!");
   }
 
-  double getAreaSum(Shape** shapes, size_t count)
+  double getAreaSum(const Shape* const* shapes, size_t count)
   {
     double sum = 0.0;
 
@@ -87,34 +79,26 @@ namespace aleksandrov
     return nullptr;
   }
 
-  size_t getParamsCount(const std::string& command)
+  size_t getShapeParams(std::istream& input, double* params, size_t maxParams)
   {
-    if (command == "RECTANGLE" || command == "ELLIPSE")
+    size_t paramsCount = 0;
+    while (paramsCount != maxParams)
     {
-      return 4;
+      if (!(input >> params[paramsCount]))
+      {
+        break;
+      }
+      ++paramsCount;
     }
-    else if (command == "CIRCLE" || command == "SCALE")
+    if (paramsCount == maxParams - 1)
     {
-      return 3;
+      input.clear();
     }
-    return 0;
-  }
-
-  std::istream& getShapeParams(std::istream& input, double* params, size_t paramsCount)
-  {
-    for (size_t i = 0; i < paramsCount; ++i)
-    {
-      input >> params[i];
-    }
-    return input;
+    return paramsCount;
   }
 
   void scaleShapes(Shape** shapes, size_t count, double x, double y, double k)
   {
-    if (k <= 0)
-    {
-      throw std::logic_error("Incorrect coefficient!");
-    }
     for (size_t i = 0; i < count; ++i)
     {
       rectangle_t frameRect = shapes[i]->getFrameRect();
@@ -127,20 +111,24 @@ namespace aleksandrov
     }
   }
 
-  void printFrameRectCoords(std::ostream& output, Shape** shapes, size_t count)
+  void printFrameRectCoords(std::ostream& output, const Shape* const* shapes, size_t count)
   {
-    for (size_t i = 0; i < count; ++i)
+    rectangle_t frameRect = shapes[0]->getFrameRect();
+    printFrameRectPoints(output, frameRect);
+    for (size_t i = 1; i < count; ++i)
     {
       rectangle_t frameRect = shapes[i]->getFrameRect();
-      output << frameRect.pos.x - (frameRect.width / 2) << " ";
-      output << frameRect.pos.y - (frameRect.height / 2) << " ";
-      output << frameRect.pos.x + (frameRect.width / 2) << " ";
-      output << frameRect.pos.y + (frameRect.height / 2);
-      if (i < count - 1)
-      {
-        output << " ";
-      }
+      output << " ";
+      printFrameRectPoints(output, frameRect);
     }
+  }
+
+  void printFrameRectPoints(std::ostream& output, const rectangle_t frameRect)
+  {
+    output << frameRect.pos.x - (frameRect.width / 2);
+    output << " " << frameRect.pos.y - (frameRect.height / 2);
+    output << " " << frameRect.pos.x + (frameRect.width / 2);
+    output << " " << frameRect.pos.y + (frameRect.height / 2);
   }
 
   void deleteShapes(Shape** shapes)

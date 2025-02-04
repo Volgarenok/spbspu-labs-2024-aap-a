@@ -11,10 +11,12 @@ int main()
 {
   constexpr size_t maxShapes = 10000;
   aleksandrov::Shape* shapes[maxShapes] = {};
+  constexpr size_t maxParams = 4;
+  double params[maxParams];
   bool wasDescriptionError = false;
   try
   {
-    size_t count = aleksandrov::getShapes(std::cin, shapes, wasDescriptionError);
+    size_t count = aleksandrov::getShapes(std::cin, shapes, params, maxParams, wasDescriptionError);
     double x = 0.0;
     double y = 0.0;
     double k = 0.0;
