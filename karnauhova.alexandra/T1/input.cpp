@@ -65,6 +65,7 @@ bool karnauhova::input_polygon(std::istream & in, CompositeShape& shaps)
       }
       catch (const std::bad_alloc& e)
       {
+        delete[] a;
         delete[] x_y;
         throw;
       }
