@@ -1,3 +1,4 @@
+#include <common_utils.hpp>
 #include <iostream>
 #include <string>
 
@@ -8,7 +9,6 @@
 int main()
 {
   zholobov::CompositeShape composite_shape;
-  size_t shape_cnt = 0;
   std::string shape_name;
   bool is_scale_processed = false;
   while (std::cin >> shape_name) {
@@ -17,22 +17,20 @@ int main()
       if (shape != nullptr) {
         composite_shape.push_back(shape);
       } else if (shape_name == "SCALE") {
-        if (shape_cnt == 0) {
+        if (composite_shape.empty()) {
           std::cerr << "There are no shapes to scale\n";
           return 1;
         }
         is_scale_processed = true;
-        double x = 0.0;
-        double y = 0.0;
-        double scale_factor = 0.0;
-        std::cin >> x >> y >> scale_factor;
+        double params[3];
+        zholobov::read_array(params, 3, std::cin);
         if (!std::cin) {
           std::cerr << "Error in SCALE paramaters\n";
           return 1;
         }
         composite_shape.print(std::cout);
         std::cout << "\n";
-        composite_shape.scale_relative({x, y}, scale_factor);
+        composite_shape.scale_relative({params[0], params[1]}, params[2]);
         composite_shape.print(std::cout);
         std::cout << "\n";
       } else {

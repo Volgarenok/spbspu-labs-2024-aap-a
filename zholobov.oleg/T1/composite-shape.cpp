@@ -1,5 +1,7 @@
 #include "composite-shape.hpp"
 
+#include <iomanip>
+#include <iostream>
 #include <limits>
 #include <stdexcept>
 
@@ -174,7 +176,16 @@ void zholobov::CompositeShape::scale(double k)
 
 void zholobov::CompositeShape::print(std::ostream& output) const
 {
-  print_shapes(output, items_, items_num_);
+  double total_area = 0.0;
+  for (size_t i = 0; i < items_num_; ++i) {
+    total_area += items_[i]->getArea();
+  }
+  output << std::fixed << std::setprecision(1) << total_area;
+  for (size_t i = 0; i < items_num_; ++i) {
+    rectangle_t rect = items_[i]->getFrameRect();
+    output << " " << rect.pos.x - rect.width / 2.0 << " " << rect.pos.y - rect.height / 2.0;
+    output << " " << rect.pos.x + rect.width / 2.0 << " " << rect.pos.y + rect.height / 2.0;
+  }
 }
 
 void zholobov::CompositeShape::scale_relative(point_t pos, double scale_factor)
