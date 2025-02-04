@@ -1,13 +1,13 @@
 #include "diamond.hpp"
 #include <cmath>
 #include <stdexcept>
-constexpr double angle = 0.0;
+constexpr double angle = 45.0;
 smirnov::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
   vertex1(p1),
   vertex2(p2),
   vertex3(p3),
   center(computeCenter(p1, p2, p3)),
-  parallelogram()
+  parallelogram(vertex1, vertex2, vertex3)
 {
   if ((p1.x == p2.x && p1.y == p2.y) && (p1.x == p3.x && p1.y == p3.y))
   {
@@ -29,7 +29,7 @@ smirnov::point_t smirnov::Diamond::computeCenter(const point_t & p1,
     const point_t & p2, const point_t & p3) const {
   point_t center;
   center.x = (p1.x + p2.x + p3.x) / 3;
-  center.y = (p1.y + p2.y + p3.y) / 3;
+  center.y = (p1.y + p2.y + p3.y) / 3;*/
   return center;
 }
 
