@@ -1,6 +1,5 @@
 #include "ellipse.hpp"
 #include <stdexcept>
-#include <cmath>
 #include "base-types.hpp"
 
 aleksandrov::Ellipse::Ellipse(const point_t& center, double vr, double hr):
@@ -16,7 +15,7 @@ aleksandrov::Ellipse::Ellipse(const point_t& center, double vr, double hr):
 
 double aleksandrov::Ellipse::getArea() const
 {
-  return M_PI * vr_ * hr_;
+  return 3.14159265 * vr_ * hr_;
 }
 
 aleksandrov::rectangle_t aleksandrov::Ellipse::getFrameRect() const
