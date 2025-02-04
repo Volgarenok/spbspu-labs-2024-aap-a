@@ -20,7 +20,7 @@ namespace kushekbaev
     double standart = getAreaOfTriangle(points_[0], points_[1], points_[2]);
     double concavity = getAreaOfTriangle(points_[1], points_[2], points_[3]);
     return standart - concavity;
-  }
+    }
 
   rectangle_t Concave::getFrameRect() const
   {
@@ -42,7 +42,7 @@ namespace kushekbaev
 
   void Concave::move(point_t scalePoint)
   {
-    point_t middle = points_[3];
+    point_t middle = getFrameRect().pos;
     double dx = scalePoint.x - middle.x;
     double dy = scalePoint.y - middle.y;
 
@@ -62,7 +62,7 @@ namespace kushekbaev
     {
       throw std::logic_error("Scale coefficient should be greater than zero\n");
     }
-    point_t middle = points_[3];
+    point_t middle = getFrameRect().pos;
     size_t size = 4;
     point_t* points[] = { &points_[0], &points_[1], &points_[2], &points_[3] };
     scalePoints(points, size, scaleCoeff, middle);
