@@ -191,7 +191,7 @@ void zholobov::CompositeShape::print(std::ostream& output) const
 void zholobov::CompositeShape::scale_relative(point_t pos, double scale_factor)
 {
   if (scale_factor <= 0.0) {
-    throw std::invalid_argument("Invalid scale factor");
+    throw std::out_of_range("Invalid scale factor");
   }
   for (size_t i = 0; i < items_num_; ++i) {
     items_[i]->scale_no_check(scale_factor);

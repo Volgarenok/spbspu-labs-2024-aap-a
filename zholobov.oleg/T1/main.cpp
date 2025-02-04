@@ -36,6 +36,8 @@ int main()
       } else {
         std::cerr << "Unknown shape (" << shape_name << ")\n";
       }
+    } catch (const std::invalid_argument& e) {
+      std::cerr << e.what() << "\n";
     } catch (const std::exception& e) {
       std::cerr << e.what() << "\n";
       return 1;

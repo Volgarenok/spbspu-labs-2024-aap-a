@@ -18,7 +18,7 @@ namespace zholobov {
     void scale(double k)
     {
       if (k <= 0.0) {
-        throw std::invalid_argument("Invalid scale factor");
+        throw std::out_of_range("Invalid scale factor");
       }
       scale_no_check(k);
     }
