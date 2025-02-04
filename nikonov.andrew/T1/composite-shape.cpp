@@ -153,6 +153,7 @@ void nikonov::CompositeShape::pop_back()
     throw std::logic_error("the collection is empty");
   }
   delete shp_[size_ - 1];
+  shp_[size_ - 1] = nullptr;
   --size_;
 }
 nikonov::Shape *nikonov::CompositeShape::at(size_t id)
