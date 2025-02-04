@@ -22,7 +22,7 @@ nikonov::CompositeShape::CompositeShape(const CompositeShape &copy):
       ++realSize;
     }
   }
-  catch(const std::exception& e)
+  catch (const std::exception& e)
   {
     destroy(shp_, realSize);
     throw;
@@ -176,7 +176,7 @@ size_t nikonov::CompositeShape::size() const noexcept
 {
   return size_;
 }
-void nikonov::CompositeShape::swap(CompositeShape &another)
+void nikonov::CompositeShape::swap(CompositeShape &another) noexcept
 {
   std::swap(size_, another.size_);
   for (size_t i = 0; i < std::max(size_, another.size_); ++i)
