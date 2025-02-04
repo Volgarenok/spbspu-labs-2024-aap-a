@@ -22,24 +22,24 @@ int asafov::countUniqLetters(const char* string)
 {
   char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
   size_t count = findUniqLetters(string, alphabet);
-  return 26 - count;
+  return count;
 }
 
 void asafov::getUnusedLetters(const char* string, char* unusedletters)
 {
   char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
-  size_t count = findUniqLetters(string, alphabet);
+  size_t count = 26 - findUniqLetters(string, alphabet);
   size_t lastletter = 0;
   for (size_t pos = 0; pos <=26; pos++)
   {
-    if (alphabet[pos] != '\0')
-    {
-      lastletter++;
-    }
     if (alphabet[pos] != '\0' && lastletter != pos)
     {
       alphabet[lastletter] = alphabet[pos];
       alphabet[pos] = 0;
+      lastletter++;
+    }
+    else if (alphabet[pos] != '\0')
+    {
       lastletter++;
     }
   }
