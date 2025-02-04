@@ -26,14 +26,13 @@ karnauhova::Polygon::Polygon(const point_t* points, size_t count_point):
   triangles_(nullptr),
   count_(0)
 {
+  if (count_point < 3 || !be_polygon(points, count_point))
+  {
+    throw std::logic_error("It's not a polygon");
+  }
   try
   {
     triangles_ = new Shape*[count_point - 2];
-    if (count_point < 3 || !be_polygon(points, count_point))
-    {
-      delete[] triangles_;
-      throw std::logic_error("It's not a polygon");
-    }
     for (size_t i = 0; i < (count_point - 2); i += 2)
     {
       triangles_[count_] = new Triangle(points[i], points[i + 1], points[i + 2]);
