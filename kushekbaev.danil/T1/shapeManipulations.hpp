@@ -1,7 +1,7 @@
 #ifndef SHAPEMANIPULATIONS_HPP
 #define SHAPEMANIPULATIONS_HPP
 
-#include <iosfwd>
+#include <iostream>
 #include "base-types.hpp"
 #include "shape.hpp"
 
