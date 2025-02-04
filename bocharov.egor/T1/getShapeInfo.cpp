@@ -32,7 +32,7 @@ void bocharov::scaling(Shape ** myShapes, size_t shapeCount, point_t center, dou
   }
   catch (const std::logic_error & e)
   {
-    throw;
+    throw std::logic_error(e.what());
   }
 }
 
