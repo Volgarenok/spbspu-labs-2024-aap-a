@@ -99,6 +99,7 @@ karnauhova::point_t* karnauhova::expansion(point_t* a, size_t old, size_t dl)
     newm[i] = a[i];
   }
   delete[] a;
+  a = nullptr;
   return newm;
 }
 
