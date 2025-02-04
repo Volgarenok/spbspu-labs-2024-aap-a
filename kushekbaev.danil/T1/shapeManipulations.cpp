@@ -1,13 +1,5 @@
 #include "shapeManipulations.hpp"
 
-namespace
-{
-  void scaleUnsafe(kushekbaev::Shape* capacity, kushekbaev::point_t scalePoint, double scaleCoeff)
-  {
-    capacity->scaleEverything(scalePoint, scaleCoeff);
-  }
-}
-
 namespace kushekbaev
 {
   double getTotalArea(Shape** capacity, size_t shapeCounter)
@@ -27,11 +19,17 @@ namespace kushekbaev
   {
     for (size_t i = 0; i < shapeCounter; ++i)
     {
-      if (capacity[i])
-      {
-        scaleUnsafe(capacity[i], scalePoint, scaleCoeff);
-      }
+      capacity[i]->scaleEverything(scalePoint, scaleCoeff);
     }
+  }
+
+  void scaleSafe(Shape** capacity, size_t shapeCounter, point_t scalePoint, double scaleCoeff)
+  {
+    if (scaleCoeff <= 0)
+    {
+      throw std::logic_error("Scale coeffitient must be greater than zero\n");
+    }
+    scaleTotal(capacity, shapeCounter, scalePoint, scaleCoeff);
   }
 
   void outputCoord(Shape** capacity, size_t shapeCounter, std::ostream& output)
