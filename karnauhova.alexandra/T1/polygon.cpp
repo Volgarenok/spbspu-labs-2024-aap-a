@@ -28,6 +28,7 @@ karnauhova::Polygon::Polygon(const point_t* points, size_t count_point):
 {
   if (count_point < 3 || !be_polygon(points, count_point))
   {
+    delete[] points;
     throw std::logic_error("It's not a polygon");
   }
   try
