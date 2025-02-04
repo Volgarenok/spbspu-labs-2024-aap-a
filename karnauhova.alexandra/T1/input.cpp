@@ -84,7 +84,7 @@ bool karnauhova::input_polygon(std::istream & in, CompositeShape& shaps)
   }
   catch (const std::exception& e)
   {
-    delete new_polygon;
+//    delete new_polygon;
     throw;
   }
   return true;
