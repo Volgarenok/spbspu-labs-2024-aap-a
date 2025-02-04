@@ -29,7 +29,7 @@ smirnov::point_t smirnov::Diamond::computeCenter(const point_t & p1,
     const point_t & p2, const point_t & p3) const {
   point_t center;
   center.x = (p1.x + p2.x + p3.x) / 3;
-  center.y = (p1.y + p2.y + p3.y) / 3;*/
+  center.y = (p1.y + p2.y + p3.y) / 3;
   return center;
 }
 
