@@ -77,10 +77,9 @@ bool karnauhova::input_polygon(std::istream & in, CompositeShape& shaps)
     count += 1;
   }
   in.clear();
-  Polygon* new_polygon = nullptr;
+  Polygon* new_polygon = new Polygon(x_y, count);
   try
   {
-    new_polygon = new Polygon(x_y, count);
     shaps.push_back(new_polygon);
   }
   catch (const std::exception& e)
