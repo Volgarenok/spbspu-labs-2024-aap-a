@@ -4,7 +4,7 @@
 #include "shape.hpp"
 #include "base-types.hpp"
 
-abramov::Rectangle::Rectangle(point_t p1, point_t p2):
+abramov::Rectangle::Rectangle(const point_t &p1, const point_t &p2):
   cmplxqds(new ComplexQuad[4])
 {
   if (p1.x >= p2.x || p1.y >= p2.y)
@@ -56,7 +56,7 @@ void abramov::Rectangle::move(double dx, double dy)
   }
 }
 
-void abramov::Rectangle::move(point_t p)
+void abramov::Rectangle::move(const point_t &p)
 {
   const point_t center = getFrameRect().pos;
   const double dx = p.x - center.x;

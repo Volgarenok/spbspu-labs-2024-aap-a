@@ -111,7 +111,7 @@ abramov::rectangle_t abramov::CompositeShape::getFrameRect() const
   return rect;
 }
 
-void abramov::CompositeShape::move(abramov::point_t p)
+void abramov::CompositeShape::move(const point_t &p)
 {
   const double dx = p.x - getFrameRect().pos.x;
   const double dy = p.y - getFrameRect().pos.y;

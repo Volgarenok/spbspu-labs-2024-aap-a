@@ -1,7 +1,7 @@
 #include "square.hpp"
 #include <stdexcept>
 
-abramov::Square::Square(point_t p, double len):
+abramov::Square::Square(const point_t &p, double len):
   rect_({ p, { p.x + len, p.y + len } })
 {
   if (len <= 0)
@@ -25,7 +25,7 @@ void abramov::Square::move(double dx, double dy)
   rect_.move(dx, dy);
 }
 
-void abramov::Square::move(point_t p)
+void abramov::Square::move(const point_t &p)
 {
   rect_.move(p);
 }

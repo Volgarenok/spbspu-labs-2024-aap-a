@@ -15,7 +15,7 @@ namespace abramov
     CompositeShape &operator=(CompositeShape &&comp_shp) noexcept;
     double getArea() const noexcept;
     rectangle_t getFrameRect() const;
-    void move(point_t p);
+    void move(const point_t &p);
     void move(double dx, double dy);
     void scale(double k);
     void unsafeScale(double k);

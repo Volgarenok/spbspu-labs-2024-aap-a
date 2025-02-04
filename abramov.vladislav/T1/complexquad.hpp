@@ -9,10 +9,10 @@ namespace abramov
   struct ComplexQuad final: Shape
   {
     ComplexQuad();
-    ComplexQuad(point_t A, point_t B, point_t C, point_t D);
+    ComplexQuad(const point_t &A, const point_t &B, const point_t &C, const point_t &D);
     double getArea() const noexcept override;
     rectangle_t getFrameRect() const noexcept override;
-    void move(point_t p) override;
+    void move(const point_t &p) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
     ComplexQuad *clone() const override;
@@ -26,6 +26,6 @@ namespace abramov
     point_t getCenterComplexQuad() const;
   };
 
-  void createCQs(point_t p1, point_t p2, ComplexQuad &cq1, ComplexQuad &cq2, ComplexQuad &cq3, ComplexQuad &cq4);
+  void createCQs(const point_t &p1, const point_t &p2, ComplexQuad &cq1, ComplexQuad &cq2, ComplexQuad &cq3, ComplexQuad &cq4);
 }
 #endif

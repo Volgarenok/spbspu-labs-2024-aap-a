@@ -70,7 +70,7 @@ namespace
   }
 }
 
-void abramov::createCQs(point_t p1, point_t p2, ComplexQuad &cq1, ComplexQuad &cq2, ComplexQuad &cq3, ComplexQuad &cq4)
+void abramov::createCQs(const point_t &p1, const point_t &p2, ComplexQuad &cq1, ComplexQuad &cq2, ComplexQuad &cq3, ComplexQuad &cq4)
 {
   const double x1 = p1.x;
   const double x2 = p2.x;
@@ -104,7 +104,7 @@ abramov::ComplexQuad::ComplexQuad():
   points{ {0.0, 0.0}, {10.0, 10.0}, {2.0, 0.0}, {0.0, 3.0} }
 {}
 
-abramov::ComplexQuad::ComplexQuad(point_t A, point_t B, point_t C, point_t D):
+abramov::ComplexQuad::ComplexQuad(const point_t &A, const point_t &B, const point_t &C, const point_t &D):
   points{A, B, C, D}
 {
   double x = 0;
@@ -147,7 +147,7 @@ abramov::point_t abramov::ComplexQuad::getCenterComplexQuad() const
   return center;
 }
 
-void abramov::ComplexQuad::move(point_t p)
+void abramov::ComplexQuad::move(const point_t &p)
 {
   const point_t center = getCenterComplexQuad();
   const double dx = p.x - center.x;

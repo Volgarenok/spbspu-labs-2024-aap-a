@@ -36,7 +36,7 @@ namespace
     out.copyfmt(std::ios(NULL));
   }
 
-  void scaleFigures(abramov::Composite &shapes, abramov::point_t p, double k, size_t i)
+  void scaleFigures(abramov::Composite &shapes, const abramov::point_t &p, double k, size_t i)
   {
     for (size_t j = 0; j < i; ++j)
     {
@@ -128,7 +128,7 @@ abramov::ComplexQuad *abramov::makeComplexQuad(std::istream &in)
   return new ComplexQuad({x[0], x[1]}, {x[2], x[3]}, {x[4], x[5]}, {x[6], x[7]});
 }
 
-void abramov::scaleFigure(Shape *s, point_t p, double k)
+void abramov::scaleFigure(Shape *s, const point_t &p, double k)
 {
   const point_t pos1 = s->getFrameRect().pos;
   s->move(p);
@@ -141,7 +141,7 @@ void abramov::scaleFigure(Shape *s, point_t p, double k)
   s->move(dx, dy);
 }
 
-void abramov::unsafeScaleFigure(Shape *s, point_t p, double k)
+void abramov::unsafeScaleFigure(Shape *s, const point_t &p, double k)
 {
   const point_t pos1 = s->getFrameRect().pos;
   s->move(p);
@@ -154,7 +154,7 @@ void abramov::unsafeScaleFigure(Shape *s, point_t p, double k)
   s->move(dx, dy);
 }
 
-void abramov::printAllShapes(std::ostream &out, abramov::Composite &shapes, abramov::point_t p, double k, size_t i)
+void abramov::printAllShapes(std::ostream &out, abramov::Composite &shapes, const abramov::point_t &p, double k, size_t i)
 {
   printShapes(out, shapes, i);
   scaleFigures(shapes, p, k, i);

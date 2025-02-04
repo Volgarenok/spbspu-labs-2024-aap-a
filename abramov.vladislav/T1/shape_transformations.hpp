@@ -16,8 +16,8 @@ namespace abramov
   Rectangle *makeRectangle(std::istream &in);
   Square *makeSquare(std::istream &in);
   ComplexQuad *makeComplexQuad(std::istream &in);
-  void scaleFigure(Shape *s, point_t p, double k);
-  void unsafeScaleFigure(Shape *s, point_t p, double k);
-  void printAllShapes(std::ostream &out, Composite &shapes, point_t p, double k, size_t i);
+  void scaleFigure(Shape *s, const point_t &p, double k);
+  void unsafeScaleFigure(Shape *s, const point_t &p, double k);
+  void printAllShapes(std::ostream &out, Composite &shapes, const point_t &p, double k, size_t i);
 }
 #endif
