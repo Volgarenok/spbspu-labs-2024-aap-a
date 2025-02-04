@@ -43,7 +43,7 @@ namespace
 kiselev::point_t kiselev::makeScale(std::istream& input)
 {
   constexpr size_t quantity = 1;
-  kiselev::point_t point[1] = {};
+  point_t point[1] = {};
   createPoint(input, quantity, point);
   return point[0];
 }
@@ -76,7 +76,6 @@ kiselev::Shape* kiselev::makeShape(std::istream& input, const std::string& str)
   }
   catch (...)
   {
-    delete shape;
     throw;
   }
 }

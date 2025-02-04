@@ -22,7 +22,7 @@ namespace kiselev
     bool empty() const noexcept;
     size_t size() const noexcept;
     double getArea() const;
-    CompositeShape clone() const;
+    CompositeShape* clone() const;
     rectangle_t getFrameRect() const;
     void move(point_t a);
     void move(double dx, double dy);

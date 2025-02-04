@@ -15,8 +15,8 @@ namespace kiselev
     void scale(double k) override;
 
   private:
-    Complexquad comp1;
-    Complexquad comp2;
+    Complexquad comp1_;
+    Complexquad comp2_;
   };
 }
 #endif

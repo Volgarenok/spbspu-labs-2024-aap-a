@@ -6,7 +6,7 @@
 #include "makeShapes.hpp"
 int main()
 {
-  constexpr size_t capacity = 100;
+  constexpr size_t capacity = 1;
   kiselev::CompositeShape compShp(capacity);
   std::string titleShape;
   bool isIncorrectShape = false;
@@ -40,6 +40,10 @@ int main()
     }
     catch (const std::exception& e)
     {
+      if (shape)
+      {
+        delete shape;
+      }
       std::cerr << e.what() << "\n";
       return 1;
     }
