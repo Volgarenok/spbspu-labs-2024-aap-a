@@ -146,4 +146,5 @@ void bocharov::clear(Shape ** myshape, size_t shapeCount)
   {
     delete myshape[i];
   }
+  delete[] myshape;
 }
