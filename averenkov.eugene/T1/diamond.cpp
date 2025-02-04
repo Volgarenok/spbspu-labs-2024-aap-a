@@ -12,23 +12,23 @@ namespace
     {
       check = true;
     }
-    else if(a.x == c.x && a.y == b.y)
+    else if (a.x == c.x && a.y == b.y)
     {
       check = true;
     }
-    else if(b.x == a.x && b.y == c.y)
+    else if (b.x == a.x && b.y == c.y)
     {
       check = true;
     }
-    else if(b.x == c.x && b.y == a.y)
+    else if (b.x == c.x && b.y == a.y)
     {
       check = true;
     }
-    else if(c.x == a.x && c.y == b.y)
+    else if (c.x == a.x && c.y == b.y)
     {
       check = true;
     }
-    else if(c.x == b.x && c.y == a.y)
+    else if (c.x == b.x && c.y == a.y)
     {
       check = true;
     }

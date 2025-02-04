@@ -1,5 +1,5 @@
-#ifndef RECTANGLE
-#define RECTANGLE
+#ifndef RECTANGLE_HPP
+#define RECTANGLE_HPP
 #include "shape.hpp"
 
 namespace averenkov
