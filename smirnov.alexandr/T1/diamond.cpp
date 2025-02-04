@@ -1,7 +1,7 @@
 #include "diamond.hpp"
 #include <cmath>
 #include <stdexcept>
-constexpr double angle = 45.0;
+constexpr double angle = 0.0;
 smirnov::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
   vertex1(p1),
   vertex2(p2),
