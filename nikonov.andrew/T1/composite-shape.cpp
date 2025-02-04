@@ -22,7 +22,7 @@ nikonov::CompositeShape::CompositeShape(const CompositeShape &copy):
     throw;
   }
 }
-nikonov::CompositeShape::CompositeShape(CompositeShape &&copy):
+nikonov::CompositeShape::CompositeShape(CompositeShape &&copy) noexcept:
   size_(copy.size_)
 {
   for (size_t i = 0; i < copy.size(); ++i)
@@ -36,11 +36,11 @@ nikonov::CompositeShape::~CompositeShape()
 {
   destroy(shp_, size());
 }
-nikonov::Shape *nikonov::CompositeShape::operator[](size_t id)
+nikonov::Shape *nikonov::CompositeShape::operator[](size_t id) noexcept
 {
   return shp_[id];
 }
-const nikonov::Shape *nikonov::CompositeShape::operator[](size_t id) const
+const nikonov::Shape *nikonov::CompositeShape::operator[](size_t id) const noexcept
 {
   return shp_[id];
 }
@@ -58,7 +58,7 @@ nikonov::CompositeShape &nikonov::CompositeShape::operator=(const CompositeShape
         ++buffSize;
       }
     }
-    catch(const std::exception& e)
+    catch (const std::exception& e)
     {
       destroy(buffer, buffSize);
       throw;

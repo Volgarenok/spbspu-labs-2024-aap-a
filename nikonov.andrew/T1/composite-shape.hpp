@@ -9,10 +9,10 @@ namespace nikonov
   public:
     CompositeShape();
     CompositeShape(const CompositeShape &copy);
-    CompositeShape(CompositeShape &&copy);
+    CompositeShape(CompositeShape &&copy) noexcept;
     ~CompositeShape();
-    Shape *operator[](size_t id);
-    const Shape *operator[](size_t id) const;
+    Shape *operator[](size_t id) noexcept;
+    const Shape *operator[](size_t id) const noexcept;
     CompositeShape &operator=(const CompositeShape &another);
     CompositeShape &operator=(CompositeShape &&another) noexcept;
     double getArea() const;
