@@ -1,5 +1,5 @@
-#ifndef ELLIPSE
-#define ELLIPSE
+#ifndef ELLIPSE_HPP
+#define ELLIPSE_HPP
 #include "shape.hpp"
 
 namespace averenkov

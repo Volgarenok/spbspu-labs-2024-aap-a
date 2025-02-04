@@ -21,7 +21,7 @@ void averenkov::destroy(Shape** list, size_t count)
   }
 }
 
-double averenkov::calculateTotalArea(const Shape* const * list, size_t count)
+double averenkov::calculateTotalArea(const Shape* const* list, size_t count)
 {
   double sum = 0;
   for (size_t i = 0; i < count; i++)
@@ -63,7 +63,7 @@ void averenkov::printFigure(const Shape* shap)
   std::cout << getRightTop(rect).y;
 }
 
-void averenkov::printList(const Shape* const * list, size_t count)
+void averenkov::printList(const Shape* const* list, size_t count)
 {
   std::cout << calculateTotalArea(list, count);
   for (size_t i = 0; i < count; i++)

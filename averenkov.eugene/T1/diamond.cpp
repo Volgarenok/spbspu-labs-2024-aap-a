@@ -5,6 +5,35 @@
 
 namespace
 {
+  bool checkPoints(const averenkov::point_t& a, const averenkov::point_t& b, const averenkov::point_t& c)
+  {
+    bool check = false;
+    if (a.x == b.x && a.y == c.y)
+    {
+      check = true;
+    }
+    else if(a.x == c.x && a.y == b.y)
+    {
+      check = true;
+    }
+    else if(b.x == a.x && b.y == c.y)
+    {
+      check = true;
+    }
+    else if(b.x == c.x && b.y == a.y)
+    {
+      check = true;
+    }
+    else if(c.x == a.x && c.y == b.y)
+    {
+      check = true;
+    }
+    else if(c.x == b.x && c.y == a.y)
+    {
+      check = true;
+    }
+    return check;
+  }
   void destroy(averenkov::Rectangle** list)
   {
     for (size_t i = 0; i < 40; i++)
@@ -78,12 +107,7 @@ namespace
 averenkov::Diamond::Diamond(const point_t& a, const point_t& b, const point_t& c):
   rectangles_(buildRectangles(a, b, c))
 {
-  if (!((a.x == b.x && a.y == c.y) ||
-    (a.x == c.x && a.y == b.y) ||
-    (b.x == a.x && b.y == c.y) ||
-    (b.x == c.x && b.y == a.y) ||
-    (c.x == a.x && c.y == b.y) ||
-    (c.x == b.x && c.y == a.y)))
+  if (!checkPoints(a, b, c))
   {
     destroy(rectangles_);
     throw std::invalid_argument("Error in parameters");

@@ -34,7 +34,7 @@ namespace
   }
 }
 
-void averenkov::makeRectangle(averenkov::Shape** shapes, size_t& shapeCount, std::istream& input, bool& errors)
+void averenkov::makeRectangle(Shape** shapes, size_t& shapeCount, std::istream& input, bool& errors)
 {
   point_t points[2] = { 0 };
   readPointsArray(input, points, 2, errors);
@@ -43,7 +43,7 @@ void averenkov::makeRectangle(averenkov::Shape** shapes, size_t& shapeCount, std
   return;
 }
 
-void averenkov::makeDiamond(averenkov::Shape** shapes, size_t& shapeCount, std::istream& input, bool& errors)
+void averenkov::makeDiamond(Shape** shapes, size_t& shapeCount, std::istream& input, bool& errors)
 {
   point_t points[3] = { 0 };
   readPointsArray(input, points, 3, errors);
@@ -52,7 +52,7 @@ void averenkov::makeDiamond(averenkov::Shape** shapes, size_t& shapeCount, std::
   return;
 }
 
-void averenkov::makeEllipse(averenkov::Shape** shapes, size_t& shapeCount, std::istream& input, bool& errors)
+void averenkov::makeEllipse(Shape** shapes, size_t& shapeCount, std::istream& input, bool& errors)
 {
   double readed[4] = { 0 };
   readArray(input, readed, 4, errors);
