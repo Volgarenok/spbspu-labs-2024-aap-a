@@ -19,7 +19,10 @@ namespace kushekbaev
   {
     for (size_t i = 0; i < shapeCounter; ++i)
     {
-      capacity[i]->scaleEverything(scalePoint, scaleCoeff);
+      if (capacity[i])
+      {
+       capacity[i]->scaleEverything(scalePoint, scaleCoeff);
+      }
     }
   }
 
