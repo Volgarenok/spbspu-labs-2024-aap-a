@@ -1,12 +1,26 @@
 #include "composite-shape.hpp"
 #include <cmath>
 #include <stdexcept>
+#include "geometric_calculations.hpp"
 #include "scale_isotropically_and_output_data.hpp"
 
+namespace
+{
+  void deleteShapes(petrov::Shape ** ptr_shapes, size_t number_of_shapes);
+
+  void deleteShapes(petrov::Shape ** ptr_shapes, size_t number_of_shapes)
+  {
+    for (size_t i = 0; i < number_of_shapes; i++)
+    {
+      delete ptr_shapes[i];
+    }
+  }
+}
+
 petrov::CompositeShape::CompositeShape():
-capacity_(0),
-size_of_vector_(0),
-shapes_vector_(nullptr)
+  capacity_(0),
+  size_of_vector_(0),
+  shapes_vector_(nullptr)
 {}
 
 petrov::CompositeShape::CompositeShape(const CompositeShape & rhs):
@@ -25,10 +39,7 @@ petrov::CompositeShape::CompositeShape(const CompositeShape & rhs):
   }
   catch (const std::bad_alloc & e)
   {
-    for (size_t i = 0; i < created; i++)
-    {
-      delete shapes_vector_[i];
-    }
+    deleteShapes(shapes_vector_, created);
     throw;
   }
 }
@@ -43,6 +54,11 @@ petrov::CompositeShape::CompositeShape(CompositeShape && rhs) noexcept:
 
 petrov::CompositeShape::~CompositeShape()
 {
+  const size_t size_before_desruction = size_of_vector_;
+  for (size_t i = 0; i < size_before_desruction; i++)
+  {
+    this->pop_back();
+  }
   delete[] shapes_vector_;
 }
 
@@ -60,17 +76,11 @@ petrov::CompositeShape & petrov::CompositeShape::operator=(const CompositeShape 
   }
   catch (const std::bad_alloc & e)
   {
-    for (size_t i = 0; i < created; i++)
-    {
-      delete temp[i];
-    }
+    deleteShapes(temp, created);
     delete[] temp;
     throw;
   }
-  for (size_t i = 0; i < size_of_vector_; i++)
-  {
-    delete shapes_vector_[i];
-  }
+  deleteShapes(shapes_vector_, size_of_vector_);
   delete[] shapes_vector_;
   shapes_vector_ = temp;
   capacity_ = rhs.capacity_;
@@ -98,27 +108,7 @@ double petrov::CompositeShape::getArea() const
 
 petrov::rectangle_t petrov::CompositeShape::getFrameRect() const
 {
-  rectangle_t shape_frame_rect = shapes_vector_[0]->getFrameRect();
-  double xmin = shape_frame_rect.pos.x - shape_frame_rect.width / 2;
-  double ymin = shape_frame_rect.pos.y - shape_frame_rect.height / 2;
-  double xmax = shape_frame_rect.pos.x + shape_frame_rect.width / 2;
-  double ymax = shape_frame_rect.pos.y + shape_frame_rect.height / 2;
-  for (size_t i = 1; i < size_of_vector_; i++)
-  {
-    shape_frame_rect = shapes_vector_[i]->getFrameRect();
-    double temp_xmin = shape_frame_rect.pos.x - shape_frame_rect.width / 2;
-    double temp_ymin = shape_frame_rect.pos.y - shape_frame_rect.height / 2;
-    double temp_xmax = shape_frame_rect.pos.x + shape_frame_rect.width / 2;
-    double temp_ymax = shape_frame_rect.pos.y + shape_frame_rect.height / 2;
-    temp_xmin < xmin ? xmin = temp_xmin : xmin = xmin;
-    temp_ymin < ymin ? ymin = temp_ymin : ymin = ymin;
-    temp_xmax > xmax ? xmax = temp_xmax : xmax = xmax;
-    temp_ymax > ymax ? ymax = temp_ymax : ymax = ymax;
-  }
-  double width = xmax - xmin;
-  double height = ymax - ymin;
-  point_t pos = { ((xmin + xmax) / 2.0), ((ymin + ymax) / 2.0) };
-  return { width, height, pos };
+  return getFrameRectByOtherShapes(shapes_vector_, size_of_vector_);
 }
 
 void petrov::CompositeShape::move(const petrov::point_t & concrete_point)
@@ -140,7 +130,7 @@ void petrov::CompositeShape::move(double dx, double dy)
 void petrov::CompositeShape::scale(double k)
 {
   point_t scale_point = getFrameRect().pos;
-  scaleIsotropicallyAndOutputData(scale_point, k, this);
+  scaleIsotropicallyAndOutputData(scale_point, k, *this);
 }
 
 void petrov::CompositeShape::push_back(Shape * shp)
@@ -176,7 +166,7 @@ void petrov::CompositeShape::pop_back() noexcept
 
 petrov::Shape * petrov::CompositeShape::at(size_t id)
 {
-  return const_cast< Shape * >(const_cast < const CompositeShape * >(this)->at(id));
+  return const_cast< Shape * >(static_cast< const CompositeShape * >(this)->at(id));
 }
 
 const petrov::Shape * petrov::CompositeShape::at(size_t id) const
@@ -193,7 +183,7 @@ const petrov::Shape * petrov::CompositeShape::at(size_t id) const
 
 petrov::Shape * petrov::CompositeShape::operator[](size_t id)
 {
-  return const_cast< Shape * >(const_cast < const CompositeShape * >(this)->operator[](id));
+  return const_cast< Shape * >(static_cast< const CompositeShape * >(this)->operator[](id));
 }
 
 const petrov::Shape * petrov::CompositeShape::operator[](size_t id) const

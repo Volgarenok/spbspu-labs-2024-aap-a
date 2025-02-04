@@ -48,25 +48,24 @@ petrov::Shape * petrov::makeShape(std::istream & in)
   const char TRIANGLE[9] = "TRIANGLE";
   const char CONCAVE[8] = "CONCAVE";
   const char SCALE[6] = "SCALE";
-  char * type_of_shape = nullptr;
   size_t capacity = 1;
-  type_of_shape = inputCStringUntilWS(in, capacity);
-  if (!strcmp(type_of_shape, RECTANGLE))
+  char * type_of_shape = inputCStringUntilWS(in, capacity);
+  if (!std::strcmp(type_of_shape, RECTANGLE))
   {
     delete[] type_of_shape;
     return makeRectangle(in);
   }
-  else if (!strcmp(type_of_shape, TRIANGLE))
+  else if (!std::strcmp(type_of_shape, TRIANGLE))
   {
     delete[] type_of_shape;
     return makeTriangle(in);
   }
-  else if (!strcmp(type_of_shape, CONCAVE))
+  else if (!std::strcmp(type_of_shape, CONCAVE))
   {
     delete[] type_of_shape;
     return makeConcave(in);
   }
-  else if (!strcmp(type_of_shape, SCALE))
+  else if (!std::strcmp(type_of_shape, SCALE))
   {
     delete[] type_of_shape;
     return nullptr;
@@ -74,6 +73,6 @@ petrov::Shape * petrov::makeShape(std::istream & in)
   else
   {
     delete[] type_of_shape;
-    throw std::logic_error("Unsupported\n");
+    throw std::logic_error("Unsupported");
   }
 }

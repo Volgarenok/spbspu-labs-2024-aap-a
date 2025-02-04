@@ -5,6 +5,6 @@
 
 namespace petrov
 {
-  void scaleIsotropicallyAndOutputData(const point_t & scale_point, double k, CompositeShape * composite_shape);
+  void scaleIsotropicallyAndOutputData(const point_t & scale_point, double k, CompositeShape & composite_shape);
 }
 #endif

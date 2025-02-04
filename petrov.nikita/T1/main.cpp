@@ -4,16 +4,14 @@
 #include "composite-shape.hpp"
 #include "shape.hpp"
 #include "make_shape.hpp"
-#include "clear_memory.hpp"
 #include "base-types.hpp"
 #include "scale_isotropically_and_output_data.hpp"
 
 int main()
 {
   using namespace petrov;
-  const char * NOTE_MSG = "NOTE: Scaling of some figures skipped due to their invalid description\n";
+  const char * NOTE_MSG = "NOTE: Scaling of some figures skipped due to their invalid description";
   CompositeShape composite_shape = {};
-  CompositeShape * ptr_composite_shape = &composite_shape;
   Shape * ptr_shape = nullptr;
   bool is_description_error = false;
   do
@@ -28,7 +26,7 @@ int main()
     }
     catch (const std::bad_alloc & e)
     {
-      clearMemory(ptr_composite_shape);
+      delete ptr_shape;
       std::cerr << "ERROR: Out of memory\n";
       return 2;
     }
@@ -45,7 +43,6 @@ int main()
   while ((composite_shape.empty() || ptr_shape != nullptr) && !std::cin.eof() && std::cin);
   if (std::cin.eof())
   {
-    clearMemory(ptr_composite_shape);
     std::cerr << "End of file\n";
     return 1;
   }
@@ -59,15 +56,13 @@ int main()
   std::cin >> scale_point.x >> scale_point.y >> scale_value;
   if (scale_value <= 0)
   {
-    clearMemory(ptr_composite_shape);
     std::cerr << "ERROR: Invalid scale value\n";
     return 3;
   }
   std::cout << std::fixed << std::setprecision(1);
-  scaleIsotropicallyAndOutputData(scale_point, scale_value, ptr_composite_shape);
+  scaleIsotropicallyAndOutputData(scale_point, scale_value, composite_shape);
   if (is_description_error)
   {
-    std::cerr << NOTE_MSG;
+    std::cerr << NOTE_MSG << "\n";
   }
-  clearMemory(ptr_composite_shape);
 }

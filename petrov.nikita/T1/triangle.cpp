@@ -4,7 +4,7 @@
 #include <algorithm>
 #include "geometric_calculations.hpp"
 
-petrov::Triangle::Triangle(const petrov::point_t & p1, const petrov::point_t & p2, const petrov::point_t & p3):
+petrov::Triangle::Triangle(const point_t & p1, const point_t & p2, const point_t & p3):
   p1_(p1),
   p2_(p2),
   p3_(p3)
@@ -14,7 +14,7 @@ petrov::Triangle::Triangle(const petrov::point_t & p1, const petrov::point_t & p
   double c = calculateDistBtwPoints(p1_, p3_);
   if (a + b <= c || a + c <= b || b + c <= a)
   {
-    throw std::invalid_argument("NOTE: Scaling of some figures skipped due to their invalid description\n");
+    throw std::invalid_argument("NOTE: Scaling of some figures skipped due to their invalid description");
   }
 }
 
@@ -39,7 +39,7 @@ petrov::rectangle_t petrov::Triangle::getFrameRect() const
   return { width, height, pos };
 }
 
-void petrov::Triangle::move(const petrov::point_t & concrete_point)
+void petrov::Triangle::move(const point_t & concrete_point)
 {
   point_t pos = getFrameRect().pos;
   double dx = concrete_point.x - pos.x;
