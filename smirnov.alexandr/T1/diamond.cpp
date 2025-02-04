@@ -1,7 +1,7 @@
 #include "diamond.hpp"
 #include <cmath>
 #include <stdexcept>
-constexpr double angle = 45.0;
+constexpr double angle = 0.0;
 smirnov::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
   vertex1(p1),
   vertex2(p2),
@@ -19,9 +19,9 @@ smirnov::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
     throw std::invalid_argument("Two vertices cannot coincide");
   }
   constexpr double angle_rad = angle * M_PI / 180.0;
-  vertex1 = rotatePoint(vertex1, center, angle_rad);
-  vertex2 = rotatePoint(vertex2, center, angle_rad);
-  vertex3 = rotatePoint(vertex3, center, angle_rad);
+  vertex1 = rotatePoint(p1, center, angle_rad);
+  vertex2 = rotatePoint(p2, center, angle_rad);
+  vertex3 = rotatePoint(p3, center, angle_rad);
   parallelogram = Parallelogram(vertex1, vertex2, vertex3);
 }
 
