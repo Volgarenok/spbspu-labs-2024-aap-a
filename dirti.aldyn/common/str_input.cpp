@@ -18,6 +18,7 @@ namespace
   }
 }
 
+
 char * dirti::str_input(std::istream & input, size_t & capacity)
 {
   char c = '\0';
