@@ -15,6 +15,7 @@ char* asafov::inputString()
     std::cin >> ch;
     if(std::cin.fail() || std::cin.eof())
     {
+      string[length] = '\0';
       break;
     }
     string[length] = ch;
