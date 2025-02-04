@@ -4,7 +4,7 @@ void bocharov::Shape::scaleCheck(double k)
 {
   if (k <= 0)
   {
-    throw std::logic_error("Incorrect scaling coefficent");
+    throw std::invalid_argument("Incorrect scaling coefficent");
   }
   scale(k);
 }
