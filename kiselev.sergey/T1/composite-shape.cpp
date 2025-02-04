@@ -1,4 +1,5 @@
 #include "composite-shape.hpp"
+#include "shape.hpp"
 #include <cmath>
 #include <stdexcept>
 void kiselev::CompositeShape::clear(size_t size) noexcept
@@ -65,10 +66,17 @@ void kiselev::CompositeShape::pushBack(Shape* shp)
 {
   if (realSize >= capacity)
   {
-    throw std::out_of_range("Exceeded capacity");
+    size_t newCapacity = capacity * 2;
+    Shape** newShapes = new Shape*[newCapacity];
+    for (size_t i = 0; i < realSize; ++i)
+    {
+      newShapes[i] = shapes[i];
+    }
+    delete[] shapes;
+    shapes = newShapes;
+    capacity = newCapacity;
   }
   shapes[realSize++] = shp;
-  capacity++;
 }
 void kiselev::CompositeShape::popBack()
 {
