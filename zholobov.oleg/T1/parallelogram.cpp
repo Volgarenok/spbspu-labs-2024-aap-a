@@ -10,7 +10,7 @@ zholobov::Parallelogram::Parallelogram(const point_t& p1, const point_t& p2, con
   p1_({p1.x - pos_.x, p1.y - pos_.y}),
   p2_({p2.x - pos_.x, p2.y - pos_.y})
 {
-  if (!((p1.y == p2.y) && (p1.y != p3.y)) || ((p2.y == p3.y) && (p1.y != p2.y))) {
+  if (!(((p1.y == p2.y) && (p1.y != p3.y)) || ((p2.y == p3.y) && (p1.y != p2.y)))) {
     throw std::invalid_argument("Error in PARALLELOGRAM parameters");
   }
 }

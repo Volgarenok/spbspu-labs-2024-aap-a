@@ -25,7 +25,7 @@ int main()
         double params[3];
         zholobov::read_array(params, 3, std::cin);
         if (!std::cin) {
-          std::cerr << "Error in SCALE paramaters\n";
+          std::cerr << "Error reading SCALE paramaters\n";
           return 1;
         }
         composite_shape.print(std::cout);
@@ -36,8 +36,6 @@ int main()
       } else {
         std::cerr << "Unknown shape (" << shape_name << ")\n";
       }
-    } catch (const std::logic_error& e) {
-      std::cerr << e.what() << "\n";
     } catch (const std::exception& e) {
       std::cerr << e.what() << "\n";
       return 1;
