@@ -134,7 +134,6 @@ bool karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
     catch (const std::exception& e)
     {
       in.clear();
-      shaps.pop_back();
       count_error++;
     }
   }
