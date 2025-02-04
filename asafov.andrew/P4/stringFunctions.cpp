@@ -1,7 +1,7 @@
 #include "stringFunctions.hpp"
 #include <cctype>
 
-const int findUniqLetters(const char* string, char* alphabet)
+int findUniqLetters(const char* string, char* alphabet)
 {
   size_t count = 0;
   for(size_t i = 0; string[i]!='\0'; i++)
