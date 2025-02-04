@@ -17,7 +17,7 @@ namespace karnauhova
     Shape* clone() const;
     ~Polygon();
   private:
-    Triangle** triangles_;
+    Shape** triangles_;
     size_t count_;
   };
 }

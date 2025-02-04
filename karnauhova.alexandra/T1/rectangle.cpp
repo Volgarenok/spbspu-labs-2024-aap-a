@@ -19,11 +19,10 @@ double karnauhova::Rectangle::getArea() const
 
 karnauhova::rectangle_t karnauhova::Rectangle::getFrameRect() const
 {
-  rectangle_t rect;
-  rect.width = x2_.x - x4_.x;
-  rect.height = x2_.y - x4_.y;
-  rect.pos.x = x4_.x + (rect.width / 2);
-  rect.pos.y = x4_.y + (rect.height / 2);
+  double width = x2_.x - x4_.x;
+  double height = x2_.y - x4_.y;
+  point_t pos{x4_.x + (width / 2), x4_.y + (height / 2)};
+  rectangle_t rect{width, height, pos};
   return rect;
 }
 

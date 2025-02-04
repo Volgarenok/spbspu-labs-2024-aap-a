@@ -2,9 +2,13 @@
 #include <cmath>
 #include <stdexcept>
 #include "point.hpp"
-namespace details
+namespace
 {
-  void scale_for(karnauhova::point_t& a, const karnauhova::point_t& b, double k);
+  void scale_for(karnauhova::point_t& a, const karnauhova::point_t& b, double k)
+  {
+    a.x = b.x - (b.x - a.x) * k;
+    a.y = b.y - (b.y - a.y) * k;
+  }
 }
 karnauhova::Triangle::Triangle(const point_t& x1, const point_t& x2, const point_t& x3):
   x1_(x1),
@@ -31,11 +35,10 @@ karnauhova::rectangle_t karnauhova::Triangle::getFrameRect() const
   double x_min = std::fmin(std::fmin(x1_.x, x2_.x), x3_.x);
   double y_max = std::fmax(std::fmax(x1_.y, x2_.y), x3_.y);
   double y_min = std::fmin(std::fmin(x1_.y, x2_.y), x3_.y);
-  rectangle_t rect;
-  rect.width = x_max - x_min;
-  rect.height = y_max - y_min;
-  rect.pos.x = x_min + (rect.width / 2);
-  rect.pos.y = y_min + (rect.height / 2);
+  double width = x_max - x_min;
+  double height = y_max - y_min;
+  point_t pos {x_min + (width / 2), y_min + (height / 2)};
+  rectangle_t rect{width, height, pos};
   return rect;
 }
 
@@ -60,18 +63,12 @@ void karnauhova::Triangle::move(const point_t& t)
 void karnauhova::Triangle::scale(double k)
 {
   point_t t = getFrameRect().pos;
-  details::scale_for(x1_, t, k);
-  details::scale_for(x2_, t, k);
-  details::scale_for(x3_, t, k);
+  scale_for(x1_, t, k);
+  scale_for(x2_, t, k);
+  scale_for(x3_, t, k);
 }
 
 karnauhova::Shape* karnauhova::Triangle::clone() const
 {
   return new Triangle(*this);
-}
-
-void details::scale_for(karnauhova::point_t& a, const karnauhova::point_t& b, double k)
-{
-  a.x = b.x - (b.x - a.x) * k;
-  a.y = b.y - (b.y - a.y) * k;
 }

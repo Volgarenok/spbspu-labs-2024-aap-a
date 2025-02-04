@@ -45,11 +45,11 @@ void karnauhova::output(std::ostream & out, CompositeShape& shaps, point_t point
 
 void karnauhova::scale_point(Shape* object, point_t t, double k)
 {
-  point_t centr_rec1 = (*object).getFrameRect().pos;
-  (*object).move(t);
-  point_t centr_rec2 = (*object).getFrameRect().pos;
+  point_t centr_rec1 = object->getFrameRect().pos;
+  object->move(t);
+  point_t centr_rec2 = object->getFrameRect().pos;
   double x = centr_rec2.x - centr_rec1.x;
   double y = centr_rec2.y - centr_rec1.y;
-  (*object).scale(k);
-  (*object).move(-(x * k), -(y * k));
+  object->scale(k);
+  object->move(-(x * k), -(y * k));
 }

@@ -10,19 +10,12 @@
 bool karnauhova::input_rectangle(std::istream & in, CompositeShape& shaps)
 {
   point_t x_y[2] = {};
-  double x = 0, y = 0;
   for (size_t i = 0; i < 2; i++)
   {
-    in >> x;
-    in >> y;
-    if (in)
+    in >> x_y[i].x >> x_y[i].y;
+    if (!in)
     {
-      x_y[i].x = x;
-      x_y[i].y = y;
-    }
-    else
-    {
-      return false;
+      throw std::logic_error("Incorrect points");
     }
   }
   shaps.push_back(new Rectangle(x_y[0], x_y[1]));
@@ -32,19 +25,12 @@ bool karnauhova::input_rectangle(std::istream & in, CompositeShape& shaps)
 bool karnauhova::input_triangle(std::istream & in, CompositeShape& shaps)
 {
   point_t x_y[3] = {};
-  double x = 0, y = 0;
   for (size_t i = 0; i < 3; i++)
   {
-    in >> x;
-    in >> y;
-    if (in)
+    in >> x_y[i].x >> x_y[i].y;
+    if (!in)
     {
-      x_y[i].x = x;
-      x_y[i].y = y;
-    }
-    else
-    {
-      return false;
+      throw std::logic_error("Incorrect points");
     }
   }
   shaps.push_back(new Triangle(x_y[0], x_y[1], x_y[2]));
@@ -53,21 +39,11 @@ bool karnauhova::input_triangle(std::istream & in, CompositeShape& shaps)
 
 bool karnauhova::input_scale(std::istream & in, point_t& point, double& k)
 {
-  double x_y[40000] = {};
-  double x = 0;
-  size_t count = 0;
-  while (in >> x)
+  in >> point.x >> point.y >> k;
+  if (!in)
   {
-    x_y[count] = x;
-    count++;
+    throw std::logic_error("Incorrect points");
   }
-  if (!(count == 3))
-  {
-    return false;
-  }
-  point.x = x_y[0];
-  point.y = x_y[1];
-  k = x_y[2];
   return true;
 }
 
@@ -101,7 +77,18 @@ bool karnauhova::input_polygon(std::istream & in, CompositeShape& shaps)
     count += 1;
   }
   in.clear();
-  shaps.push_back(new Polygon(x_y, count));
+  Polygon* new_polygon = nullptr;
+  try
+  {
+    new_polygon = new Polygon(x_y, count);
+    shaps.push_back(new_polygon);
+  }
+  catch (const std::exception& e)
+  {
+    delete new_polygon;
+    delete[] x_y;
+    throw;
+  }
   return true;
 }
 
@@ -118,7 +105,6 @@ karnauhova::point_t* karnauhova::expansion(point_t* a, size_t old, size_t dl)
 
 bool karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& count_error, point_t& point, double& k)
 {
-  std::string names[10000] = {};
   std::string name = "uwu";
   while (in >> name && !in.eof())
   {
@@ -126,53 +112,19 @@ bool karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
     {
       if (name == "RECTANGLE")
       {
-        if (!karnauhova::input_rectangle(in, shaps))
-        {
-          in.clear();
-          shaps.pop_back();
-          count_error++;
-        }
-        else
-        {
-          names[shaps.size() - 1] = name;
-        }
+        karnauhova::input_rectangle(in, shaps);
       }
       else if (name == "TRIANGLE")
       {
-        if (!karnauhova::input_triangle(in, shaps))
-        {
-          in.clear();
-          shaps.pop_back();
-          count_error++;
-        }
-        else
-        {
-          names[shaps.size() - 1] = name;
-        }
+        karnauhova::input_triangle(in, shaps);
       }
       else if (name == "SCALE")
       {
-        if (!karnauhova::input_scale(std::cin, point, k))
-        {
-          in.clear();
-          count_error++;
-        }
-        else
-        {
-          names[shaps.size()] = name;
-        }
+        karnauhova::input_scale(std::cin, point, k);
       }
       else if (name == "POLYGON")
       {
-        if (!karnauhova::input_polygon(in, shaps))
-        {
-          shaps.pop_back();
-          count_error++;
-        }
-        else
-        {
-          names[shaps.size() - 1] = name;
-        }
+        karnauhova::input_polygon(in, shaps);
       }
       else
       {
@@ -181,15 +133,17 @@ bool karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
     }
     catch (const std::exception& e)
     {
+      in.clear();
+      shaps.pop_back();
       count_error++;
     }
   }
-  if (names[0] == "SCALE" || names[0].empty() || shaps.size() == 0)
+  if (shaps.size() == 0)
   {
     std::cerr << "Error: empty input\n";
     return 1;
   }
-  if (names[shaps.size()] != "SCALE" || k <= 0)
+  if (k <= 0)
   {
     std::cerr << "Error: scale input\n";
     return 1;

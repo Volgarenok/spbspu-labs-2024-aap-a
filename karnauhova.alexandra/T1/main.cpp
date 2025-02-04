@@ -4,10 +4,9 @@
 #include "output.hpp"
 #include "shape.hpp"
 #include "compositeShape.hpp"
-void delet(karnauhova::Shape** shaps, size_t c_shape);
-using namespace karnauhova;
 int main()
 {
+  using namespace karnauhova;
   size_t count_error = 0;
   point_t point {0,0};
   double k = 0;
