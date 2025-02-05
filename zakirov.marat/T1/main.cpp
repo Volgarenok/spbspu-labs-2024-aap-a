@@ -19,6 +19,11 @@ int main()
       std::cerr << "Warning! Some problems getting the string." << '\n';
       return 1;
     }
+    else if (data[0] == 1.0)
+    {
+      scale_data = data;
+      break;
+    }
 
     try
     {
@@ -29,12 +34,6 @@ int main()
       shape_flag = true;
       free(data);
       continue;
-    }
-
-    if (data[0] == 1.0)
-    {
-      scale_data = data;
-      break;
     }
 
     free(data);

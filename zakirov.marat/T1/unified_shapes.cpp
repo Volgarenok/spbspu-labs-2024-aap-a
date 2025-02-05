@@ -207,10 +207,6 @@ zakirov::Shape * zakirov::make_shape(const double * data)
   {
     return make_rectangle(data[2], data[3], data[4], data[5]);
   }
-  else if (data[0] == 1.0)
-  {
-    return nullptr;
-  }
   else
   {
     throw std::invalid_argument("Shapes not defined");
