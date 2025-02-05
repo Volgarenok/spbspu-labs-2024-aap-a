@@ -45,6 +45,11 @@ void zholobov::Parallelogram::scale_no_check(double k)
   p2_.y *= k;
 }
 
+zholobov::Shape* zholobov::Parallelogram::clone() const
+{
+  return new Parallelogram(*this);
+}
+
 zholobov::Parallelogram* zholobov::Parallelogram::create(std::istream& in)
 {
   double params[6];

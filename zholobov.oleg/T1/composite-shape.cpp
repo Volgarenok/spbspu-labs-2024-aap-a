@@ -18,22 +18,7 @@ zholobov::CompositeShape::CompositeShape() noexcept:
 zholobov::CompositeShape::CompositeShape(const CompositeShape& other)
 {
   for (items_num_ = 0; items_num_ < other.items_num_; ++items_num_) {
-    Square* square = dynamic_cast< Square* >(other.items_[items_num_]);
-    if (square != nullptr) {
-      items_[items_num_] = new Square(*square);
-    } else {
-      Rectangle* rect = dynamic_cast< Rectangle* >(other.items_[items_num_]);
-      if (rect != nullptr) {
-        items_[items_num_] = new Rectangle(*rect);
-      } else {
-        Parallelogram* parallelogram = dynamic_cast< Parallelogram* >(other.items_[items_num_]);
-        if (parallelogram != nullptr) {
-          items_[items_num_] = new Parallelogram(*parallelogram);
-        } else {
-          throw std::invalid_argument("Unknown Shape type");
-        }
-      }
-    }
+    items_[items_num_] = other.items_[items_num_]->clone();
   }
 }
 
@@ -51,6 +36,17 @@ zholobov::CompositeShape::~CompositeShape()
   for (size_t i = 0; i < items_num_; ++i) {
     delete items_[i];
   }
+}
+
+zholobov::CompositeShape& zholobov::CompositeShape::operator=(const CompositeShape& other) noexcept
+{
+  for (size_t i = 0; i < items_num_; ++i) {
+    delete items_[i];
+  }
+  for (items_num_ = 0; items_num_ < other.items_num_; ++items_num_) {
+    items_[items_num_] = other.items_[items_num_]->clone();
+  }
+  return *this;
 }
 
 zholobov::CompositeShape& zholobov::CompositeShape::operator=(zholobov::CompositeShape&& other) noexcept

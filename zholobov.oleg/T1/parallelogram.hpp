@@ -16,6 +16,7 @@ namespace zholobov {
     void move(point_t p) override;
     void move(double dx, double dy) override;
     void scale_no_check(double k) override;
+    Shape* clone() const override;
 
     static Parallelogram* create(std::istream& in);
 

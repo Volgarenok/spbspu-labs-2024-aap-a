@@ -23,6 +23,7 @@ namespace zholobov {
       scale_no_check(k);
     }
     virtual void scale_no_check(double k) = 0;
+    virtual Shape* clone() const = 0;
   };
 
 }

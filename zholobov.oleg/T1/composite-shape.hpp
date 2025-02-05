@@ -13,6 +13,7 @@ namespace zholobov {
     CompositeShape(CompositeShape&& other) noexcept;
     ~CompositeShape();
 
+    CompositeShape& operator=(const CompositeShape& other) noexcept;
     CompositeShape& operator=(CompositeShape&& other) noexcept;
 
     void push_back(Shape* shape);

@@ -10,6 +10,7 @@ namespace zholobov {
   class Rectangle: public Parallelogram {
   public:
     Rectangle(const point_t& a, const point_t& c);
+    Shape* clone() const override;
     static Rectangle* create(std::istream& in);
   };
 

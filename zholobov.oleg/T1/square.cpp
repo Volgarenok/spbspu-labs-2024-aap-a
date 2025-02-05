@@ -12,6 +12,11 @@ zholobov::Square::Square(const point_t& a, double length):
   }
 }
 
+zholobov::Shape* zholobov::Square::clone() const
+{
+  return new Square(*this);
+}
+
 zholobov::Square* zholobov::Square::create(std::istream& in)
 {
   double params[3];

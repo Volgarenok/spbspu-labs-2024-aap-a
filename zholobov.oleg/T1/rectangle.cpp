@@ -12,6 +12,11 @@ zholobov::Rectangle::Rectangle(const point_t& a, const point_t& c):
   }
 }
 
+zholobov::Shape* zholobov::Rectangle::clone() const
+{
+  return new Rectangle(*this);
+}
+
 zholobov::Rectangle* zholobov::Rectangle::create(std::istream& in)
 {
   double params[4];
