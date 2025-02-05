@@ -5,7 +5,6 @@
 namespace savintsev
 {
   char * inputNewlineTerminatedStr(std::istream & in);
-  char * createEnlargedCopiedStr(const char * old, size_t m);
 }
 
 #endif

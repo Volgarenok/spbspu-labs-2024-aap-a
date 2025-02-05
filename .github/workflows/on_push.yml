@@ -47,10 +47,11 @@ jobs:
         run: $TEST_DIR/build.sh
         shell: bash
       - name: Build results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: labs
           path: ${{ github.workspace }}/out
+          overwrite: true
   acceptance:
     needs: [build]
     runs-on: ubuntu-latest
@@ -65,7 +66,8 @@ jobs:
           $TEST_DIR/acceptance-tests.sh
         shell: bash
       - name: Build results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: labs
           path: ${{ github.workspace }}/out/*/*/acceptance.*
+          overwrite: true
