@@ -10,7 +10,6 @@ brevnov::BigRectangle::BigRectangle(point_t left, point_t right):
   {
     throw std::invalid_argument("Not correct arguments");
   }
-  shapes_ = new Ellipse *[64];
   double width = right_.x - left_.x;
   double height = right_.y - left_.y;
   double r1 = height / 16.0;
