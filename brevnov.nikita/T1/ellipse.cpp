@@ -43,7 +43,7 @@ brevnov::rectangle_t brevnov::Ellipse::getFrameRect() const noexcept
   point_t pos = center_;
   double width = r2_ * 2.0;
   double height = r1_ * 2.0;
-  rectangle_t result(width, height, pos);
+  rectangle_t result = {width, height, pos};
   return result;
 }
 

@@ -62,7 +62,7 @@ brevnov::rectangle_t brevnov::Diamond::getFrameRect() const noexcept
   point_t pos = center_;
   double width = std::fabs(horizontal_.x - center_.x) * 2;
   double height = std::fabs(vertical_.y - center_.y) * 2;
-  rectangle_t result(width, height, pos);
+  rectangle_t result = {width, height, pos};
   return result;
 }
 

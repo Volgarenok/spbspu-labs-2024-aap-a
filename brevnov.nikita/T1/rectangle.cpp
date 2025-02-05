@@ -23,7 +23,7 @@ brevnov::rectangle_t brevnov::Rectangle::getFrameRect() const noexcept
   double width = right_.x - left_.x;
   double height = right_.y - left_.y;
   point_t pos = {left_.x + width / 2.0, left_.y + height / 2.0};
-  rectangle_t result(width, height, pos);
+  rectangle_t result = {width, height, pos};
   return result;
 }
 
