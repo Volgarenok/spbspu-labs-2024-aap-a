@@ -77,10 +77,13 @@ void brevnov::Diamond::move(point_t new_centre) noexcept
   vertical_.y += ydif;
 }
 
-void brevnov::move_point(double dx, double dy, brevnov::point_t &point)
+namespace brevnov
 {
-  point.x += dx;
-  point.y += dy;
+  void move_point(double dx, double dy, brevnov::point_t &point)
+  {
+    point.x += dx;
+    point.y += dy;
+  }
 }
 
 void brevnov::Diamond::move(double dx, double dy) noexcept
