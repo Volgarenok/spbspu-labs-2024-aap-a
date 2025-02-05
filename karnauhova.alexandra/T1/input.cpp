@@ -47,9 +47,10 @@ void karnauhova::input_scale(std::istream & in, point_t& point, double& k)
 void karnauhova::input_polygon(std::istream & in, CompositeShape& shaps)
 {
   size_t size = 1;
+  double x = 0;
   point_t* x_y = new point_t[size];
   size_t count = 0;
-  while (in >> x_y[count].x)
+  while (in >> x)
   {
     if (count >= size)
     {
@@ -66,6 +67,7 @@ void karnauhova::input_polygon(std::istream & in, CompositeShape& shaps)
       x_y = a;
       size++;
     }
+    x_y[count].x = x;
     in >> x_y[count].y;
     if (!in)
     {
