@@ -1,4 +1,4 @@
-#include "diamond2.hpp"
+#include "diamond.hpp"
 #include <cmath>
 #include <stdexcept>
 #include "triangle.hpp"

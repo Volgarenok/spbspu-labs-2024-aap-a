@@ -3,15 +3,8 @@
 #include <stdexcept>
 #include "base-types.hpp"
 #include "triangle.hpp"
-namespace dribas
-{
-  bool isTriangle(point_t a, point_t b, point_t c);
-  bool isPointInTriangle(point_t a, point_t b, point_t c, point_t d);
-  double getYourArea(point_t a, point_t b, point_t c);
-  bool isDupePoint(point_t p1, point_t p2, point_t p3, point_t p4);
-}
 
-bool dribas::isDupePoint(point_t p1, point_t p2, point_t p3, point_t p4) {
+bool isDupePoint(dribas::point_t p1, dribas::point_t p2, dribas::point_t p3, dribas::point_t p4) {
    if (p1.x == p2.x && p1.y == p2.y) return true;
    if (p1.x == p3.x && p1.y == p3.y) return true;
    if (p1.x == p4.x && p1.y == p4.y) return true;
@@ -21,16 +14,16 @@ bool dribas::isDupePoint(point_t p1, point_t p2, point_t p3, point_t p4) {
    return false;
 }
 
-bool dribas::isTriangle(point_t a, point_t b, point_t c)
+bool isTriangle(dribas::point_t a, dribas::point_t b, dribas::point_t c)
 {
   return !((((a.x == b.x) && (a.x == c.x))) || (( a.y == b.y) && (a.y == c.y)));
 }
 
-double dribas::getYourArea(point_t a, point_t b, point_t c) {
+double getYourArea(dribas::point_t a, dribas::point_t b, dribas::point_t c) {
   return std::abs((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y -b.y)) / 2.0l);
 }
 
-bool dribas::isPointInTriangle(point_t a, point_t b, point_t c, point_t d)
+bool isPointInTriangle(dribas::point_t a, dribas::point_t b, dribas::point_t c, dribas::point_t d)
 {
   double s = getYourArea(a, b, c);
   double s1 = getYourArea(a, b, d);
@@ -39,7 +32,7 @@ bool dribas::isPointInTriangle(point_t a, point_t b, point_t c, point_t d)
   return (s == (s1 + s2 + s3));
 }
 
-dribas::Concave::Concave(point_t a, point_t b, point_t c, point_t d):
+dribas::Concave::Concave(dribas::point_t a, dribas::point_t b, dribas::point_t c, dribas::point_t d):
   a_(Triangle{a, b, c}),
   b_(Triangle{b, c, d})
 {
@@ -62,7 +55,7 @@ void dribas::Concave::move(double x, double y)
   b_.move(x,y);
 }
 
-void dribas::Concave::move(point_t point)
+void dribas::Concave::move(dribas::point_t point)
 {
   a_.move(point);
   b_.move(point);
