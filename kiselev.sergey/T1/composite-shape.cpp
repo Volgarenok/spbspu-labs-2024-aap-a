@@ -1,5 +1,4 @@
 #include "composite-shape.hpp"
-#include "shape.hpp"
 #include <cmath>
 #include <stdexcept>
 void kiselev::CompositeShape::clear(size_t size) noexcept
