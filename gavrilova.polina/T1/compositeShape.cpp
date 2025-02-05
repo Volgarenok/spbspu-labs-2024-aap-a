@@ -174,7 +174,7 @@ void gavrilova::CompositeShape::resize(size_t new_capacity)
   for (size_t i = 0; i < size_; ++i) {
     new_shapes[i] = shapes_[i];
   }
-  delete[] shapes_;
+  clear();
   shapes_ = new_shapes;
   capacity_ = new_capacity;
 }
