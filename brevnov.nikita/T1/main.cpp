@@ -12,7 +12,7 @@ using namespace brevnov;
 int main()
 {
   std::cout << std::fixed << std::setprecision(1);
-  size_t start_count_shape = 30;
+  size_t start_count_shape = 0;
   CompositeShape Cs(start_count_shape);
   std::string input_shape;
   point_t scale_p;
