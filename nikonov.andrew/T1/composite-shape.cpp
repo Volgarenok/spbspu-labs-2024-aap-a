@@ -63,14 +63,8 @@ nikonov::CompositeShape &nikonov::CompositeShape::operator=(CompositeShape &&ano
 {
   if (std::addressof(another) != this)
   {
-    destroy(shp_, size_);
-    for (size_t i = 0; i < another.size_; ++i)
-    {
-      shp_[i] = another.shp_[i];
-      another.shp_[i] = nullptr;
-    }
-    size_ = another.size_;
-    another.size_ = 0;
+    CompositeShape tempObj{ std::move(another) };
+    swap(tempObj);
   }
   return *this;
 }
