@@ -35,14 +35,14 @@ void petrov::Rectangle::move(const point_t & concrete_point)
 
 void petrov::Rectangle::move(double dx, double dy)
 {
-  petrov::point_t * points[2] = { &p1_, &p2_ };
-  petrov::changeCoordinates(points, 2, dx, dy);
+  point_t * points[2] = { &p1_, &p2_ };
+  changeCoordinates(points, 2, dx, dy);
 }
 
 void petrov::Rectangle::scale(double k)
 {
-  petrov::point_t * points[2] = { &p1_, &p2_ };
-  petrov::point_t pos = getFrameRect().pos;
+  point_t * points[2] = { &p1_, &p2_ };
+  point_t pos = getFrameRect().pos;
   changeCoordinatesDueToScaling(points, pos, 2, k);
 }
 

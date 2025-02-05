@@ -54,11 +54,7 @@ petrov::CompositeShape::CompositeShape(CompositeShape && rhs) noexcept:
 
 petrov::CompositeShape::~CompositeShape()
 {
-  const size_t size_before_desruction = size_of_vector_;
-  for (size_t i = 0; i < size_before_desruction; i++)
-  {
-    this->pop_back();
-  }
+  deleteShapes(shapes_vector_, size_of_vector_);
   delete[] shapes_vector_;
 }
 
@@ -181,7 +177,7 @@ const petrov::Shape * petrov::CompositeShape::operator[](size_t id) const
 
 bool petrov::CompositeShape::empty() const noexcept
 {
-  return !size_of_vector_ ? true : false;
+  return !size_of_vector_;
 }
 
 size_t petrov::CompositeShape::size() const noexcept

@@ -10,7 +10,7 @@ petrov::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   triangle_3_(p1, { (p3.x + p1.x) / 2, (p3.y + p1.y) / 2 }, p4),
   triangle_4_(p3, { (p3.x + p1.x) / 2, (p3.y + p1.y) / 2 }, p4)
 {
-  if ( (p1.x == p4.x && p1.y == p4.y) || (p2.x == p4.x && p2.y == p4.y) || (p3.x == p4.x && p3.y == p4.y) )
+  if ((p1.x == p4.x && p1.y == p4.y) || (p2.x == p4.x && p2.y == p4.y) || (p3.x == p4.x && p3.y == p4.y))
   {
     throw std::invalid_argument("NOTE: Scaling of some figures skipped due to their invalid description");
   }

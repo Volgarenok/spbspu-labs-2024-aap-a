@@ -49,14 +49,14 @@ void petrov::Triangle::move(const point_t & concrete_point)
 
 void petrov::Triangle::move(double dx, double dy)
 {
-  petrov::point_t * points[3] = { &p1_, &p2_, &p3_ };
-  petrov::changeCoordinates(points, 3, dx, dy);
+  point_t * points[3] = { &p1_, &p2_, &p3_ };
+  changeCoordinates(points, 3, dx, dy);
 }
 
 void petrov::Triangle::scale(double k)
 {
-  petrov::point_t * points[3] = { &p1_, &p2_, &p3_ };
-  petrov::point_t pos = getFrameRect().pos;
+  point_t * points[3] = { &p1_, &p2_, &p3_ };
+  point_t pos = getFrameRect().pos;
   changeCoordinatesDueToScaling(points, pos, 3, k);
 }
 

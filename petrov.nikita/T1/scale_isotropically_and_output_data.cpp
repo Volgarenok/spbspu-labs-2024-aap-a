@@ -21,7 +21,7 @@ void petrov::scaleIsotropicallyAndOutputData(const point_t & scale_point, double
   std::cout << first_sum_area;
   for (size_t i = 0; i < created; i++)
   {
-    petrov::rectangle_t frame_rect = composite_shape[i]->getFrameRect();
+    rectangle_t frame_rect = composite_shape[i]->getFrameRect();
     outputCoordinatesOfFrameRect(std::cout, frame_rect);
     double mv_dx = frame_rect.pos.x - scale_point.x;
     double mv_dy = frame_rect.pos.y - scale_point.y;
@@ -37,7 +37,7 @@ void petrov::scaleIsotropicallyAndOutputData(const point_t & scale_point, double
   std::cout << second_sum_area;
   for (size_t i = 0; i < created; i++)
   {
-    petrov::rectangle_t frame_rect = composite_shape[i]->getFrameRect();
+    rectangle_t frame_rect = composite_shape[i]->getFrameRect();
     outputCoordinatesOfFrameRect(std::cout, frame_rect);
   }
   std::cout << "\n";
