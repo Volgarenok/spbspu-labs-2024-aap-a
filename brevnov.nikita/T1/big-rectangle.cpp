@@ -28,7 +28,6 @@ brevnov::BigRectangle::BigRectangle(point_t left, point_t right):
         {
           delete shapes_[h];
         }
-        delete[] shapes_;
         throw;
       }
     }
@@ -41,7 +40,6 @@ brevnov::BigRectangle::~BigRectangle()
   {
     delete shapes_[i];
   }
-  delete[] shapes_;
 }
 
 double brevnov::BigRectangle::getArea() const noexcept
