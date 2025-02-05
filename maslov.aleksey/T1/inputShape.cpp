@@ -26,26 +26,20 @@ void maslov::inputShapes(std::istream & in, maslov::CompositeShape & compositeSh
     try
     {
       shape = makeShape(std::cin, name);
+      compositeShape.push_back(shape);
     }
     catch (const std::invalid_argument &)
     {
       incorrectedFlag = true;
     }
-    if (shape)
+    catch (const std::exception &)
     {
-      try
-      {
-        compositeShape.push_back(shape);
-      }
-      catch (const std::exception &)
-      {
-        throw;
-      }
+      delete shape;
+      throw;
     }
   }
   if (in.eof())
   {
-    destroyShapes(compositeShape);
     throw std::runtime_error("Error: EOF encountered before SCALE command");
   }
   if (compositeShape.empty())
@@ -107,6 +101,6 @@ namespace
     {
       return makeParallelogram(in);
     }
-    return nullptr;
+    throw std::runtime_error("Incorrect shape name");
   }
 }
