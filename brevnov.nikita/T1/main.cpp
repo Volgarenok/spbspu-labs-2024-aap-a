@@ -7,17 +7,19 @@
 #include "shape.hpp"
 #include "makeShape.hpp"
 
+using namespace brevnov;
+
 int main()
 {
   std::cout << std::fixed << std::setprecision(1);
   size_t start_count_shape = 30;
-  brevnov::CompositeShape Cs(start_count_shape);
+  CompositeShape Cs(start_count_shape);
   std::string input_shape;
-  brevnov::point_t scale_p;
+  point_t scale_p;
   double ratio = 0.0;
   bool isIncorrectParameters = false;
   bool scaleCommand = false;
-  brevnov::Shape * new_shape = nullptr;
+  Shape * new_shape = nullptr;
   while (std::cin >> input_shape)
   {
     if (std::cin.eof())
@@ -29,7 +31,7 @@ int main()
     {
       try
       {
-        scale_p = brevnov::scale(std::cin);
+        scale_p = scale(std::cin);
       }
       catch (const std::invalid_argument& f)
       {
@@ -49,7 +51,7 @@ int main()
     {
       try
       {
-        new_shape = brevnov::make_shape(input_shape, std::cin);
+        new_shape = make_shape(input_shape, std::cin);
         if (new_shape)
         {
           Cs.push_back(new_shape);
@@ -82,11 +84,11 @@ int main()
   }
   std::cout << std::setprecision(1);
   std::cout << Cs.getArea() << " ";
-  brevnov::print_frame_coordinates(Cs, std::cout);
+  print_frame_coordinates(Cs, std::cout);
   std::cout << "\n";
   Cs.scale(ratio, scale_p);
   std::cout << Cs.getArea() << " ";
-  brevnov::print_frame_coordinates(Cs, std::cout);
+  print_frame_coordinates(Cs, std::cout);
   std::cout << "\n";
   return 0;
 }
