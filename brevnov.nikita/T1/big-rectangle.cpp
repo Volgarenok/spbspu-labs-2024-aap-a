@@ -2,7 +2,7 @@
 #include <cstddef>
 
 brevnov::BigRectangle::BigRectangle(point_t left, point_t right):
-  shapes_(new Ellipse*[64]),
+  shapes_(),
   left_({0.0, 0.0}),
   right_({0.0, 0.0})
 {
