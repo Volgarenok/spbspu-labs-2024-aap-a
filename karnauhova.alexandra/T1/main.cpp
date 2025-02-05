@@ -13,14 +13,15 @@ int main()
   CompositeShape shaps(1);
   try
   {
-    if (input(std::cin, shaps, count_error, point, k))
-    {
-      return 1;
-    }
+    input(std::cin, shaps, count_error, point, k);
   }
   catch (const std::bad_alloc & e)
   {
     std::cerr << "Out of memmory\n";
+    return 1;
+  }
+  catch (const std::logic_error & e)
+  {
     return 1;
   }
   if (count_error > 0)

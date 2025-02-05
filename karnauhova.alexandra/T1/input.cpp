@@ -123,7 +123,7 @@ void karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
   }
 }
 
-bool karnauhova::input(std::istream & in, CompositeShape& shaps, size_t& count_error, point_t& point, double& k)
+void karnauhova::input(std::istream & in, CompositeShape& shaps, size_t& count_error, point_t& point, double& k)
 {
   std::string name = "uwu";
   while (in >> name && !in.eof())
@@ -145,12 +145,11 @@ bool karnauhova::input(std::istream & in, CompositeShape& shaps, size_t& count_e
   if (shaps.size() == 0)
   {
     std::cerr << "Error: empty input\n";
-    return 1;
+    throw std::logic_error("Empty input");
   }
   if (k <= 0)
   {
     std::cerr << "Error: scale input\n";
-    return 1;
+    throw std::logic_error("Incorrect scale");
   }
-  return 0;
 }
