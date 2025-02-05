@@ -61,7 +61,17 @@ nikonov::CompositeShape &nikonov::CompositeShape::operator=(const CompositeShape
 }
 nikonov::CompositeShape &nikonov::CompositeShape::operator=(CompositeShape &&another) noexcept
 {
-  swap(another);
+  if (std::addressof(another) != this)
+  {
+    destroy(shp_, size_);
+    for (size_t i = 0; i < another.size_; ++i)
+    {
+      shp_[i] = another.shp_[i];
+      another.shp_[i] = nullptr;
+    }
+    size_ = another.size_;
+    another.size_ = 0;
+  }
   return *this;
 }
 double nikonov::CompositeShape::getArea() const
