@@ -26,14 +26,15 @@ int main()
       }
     }
     Shape* shp = make_shape(std::cin, shapeTypeOrScale, nError);
-    try {
-      if (shp) {
+    if (shp) {
+      try {
         Shapes.push_back(shp);
+      } catch (const std::exception& e) {
+        std::cerr << e.what();
+        return 1;
       }
-    } catch (const std::exception& e) {
-      std::cerr << e.what();
-      return 1;
     }
+    std::cout << Shapes.size();
   }
 
   if (koef <= 0 || Shapes.empty()) {
