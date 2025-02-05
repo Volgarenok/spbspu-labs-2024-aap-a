@@ -6,12 +6,14 @@ void karnauhova::output(std::ostream & out, CompositeShape& shaps, point_t point
 {
   output_sum(out, shaps);
   output_points(out, shaps);
+  out << "\n";
   for (size_t i = 0; i < shaps.size(); i++)
   {
     scale_point(shaps[i], point, k);
   }
   output_sum(out, shaps);
   output_points(out, shaps);
+  out << "\n";
 }
 
 void karnauhova::output_sum(std::ostream & out, CompositeShape& shaps)
@@ -21,7 +23,7 @@ void karnauhova::output_sum(std::ostream & out, CompositeShape& shaps)
   {
     sum += shaps[i]->getArea();
   }
-  out << sum << " ";
+  out << sum;
 }
 
 void karnauhova::output_points(std::ostream & out, CompositeShape& shaps)
@@ -34,7 +36,7 @@ void karnauhova::output_points(std::ostream & out, CompositeShape& shaps)
     double x2 = rec.pos.x + (rec.width / 2);
     double y2 = rec.pos.y + (rec.height / 2);
     out << std::fixed;
-    out << std::setprecision(1) << x1 << " " << y1 << " " << x2 << " " << y2 << "\n";
+    out << std::setprecision(1) << " " << x1 << " " << y1 << " " << x2 << " " << y2;
   }
 }
 

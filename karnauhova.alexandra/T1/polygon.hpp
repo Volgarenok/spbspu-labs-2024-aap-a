@@ -9,13 +9,13 @@ namespace karnauhova
   {
   public:
     Polygon(const point_t* points, size_t count);
+    ~Polygon();
     void move(double x, double y) override;
     void move(const point_t& t) override;
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void scale(double k) override;
     Shape* clone() const;
-    ~Polygon();
   private:
     Shape** triangles_;
     size_t count_;
