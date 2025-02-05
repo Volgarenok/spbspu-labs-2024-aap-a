@@ -66,7 +66,7 @@ void kiselev::CompositeShape::pushBack(Shape* shp)
 {
   if (realSize >= capacity)
   {
-    size_t newCapacity = capacity * 2;
+    size_t newCapacity = capacity * 2 + 1;
     Shape** newShapes = new Shape*[newCapacity];
     for (size_t i = 0; i < realSize; ++i)
     {
