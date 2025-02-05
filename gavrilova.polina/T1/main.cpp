@@ -30,7 +30,7 @@ int main()
       if (shp) {
         Shapes.push_back(shp);
       }
-    } catch (const std::bad_alloc& e) {
+    } catch (const std::exception& e) {
       std::cerr << e.what();
       return 1;
     }

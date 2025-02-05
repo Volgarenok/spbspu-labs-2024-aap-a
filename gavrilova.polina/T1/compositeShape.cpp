@@ -189,6 +189,7 @@ void gavrilova::CompositeShape::swap(CompositeShape& rhs) noexcept
 void gavrilova::CompositeShape::clear()
 {
   clearShapes(shapes_, size_);
+  delete[] shapes_;
   size_ = 0;
   capacity_ = 0;
 }
