@@ -30,8 +30,7 @@ void karnauhova::output_points(std::ostream & out, CompositeShape& shaps)
   {
     rectangle_t rec = shaps[i]->getFrameRect();
     out << std::fixed;
-    out << std::setprecision(1) << rec.pos.x - (rec.width / 2) << " " << rec.pos.y - (rec.height / 2) << " ";
-    out << std::setprecision(1) << rec.pos.x + (rec.width / 2) << " " << rec.pos.y + (rec.height / 2) << "\n";
+    out << std::setprecision(1) << rec.pos.x - (rec.width / 2) << " " << rec.pos.y - (rec.height / 2) << " " << rec.pos.x + (rec.width / 2) << " " << rec.pos.y + (rec.height / 2) << "\n";
   }
 }
 
