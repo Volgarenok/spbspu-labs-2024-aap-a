@@ -15,19 +15,22 @@ zholobov::CompositeShape::CompositeShape() noexcept:
   items_num_(0)
 {}
 
-zholobov::CompositeShape::CompositeShape(const CompositeShape& other)
+zholobov::CompositeShape::CompositeShape(const CompositeShape& other):
+  items_(),
+  items_num_(0)
 {
   for (items_num_ = 0; items_num_ < other.items_num_; ++items_num_) {
     items_[items_num_] = other.items_[items_num_]->clone();
   }
 }
 
-zholobov::CompositeShape::CompositeShape(CompositeShape&& other) noexcept
+zholobov::CompositeShape::CompositeShape(CompositeShape&& other) noexcept:
+  items_(),
+  items_num_(other.items_num_)
 {
   for (size_t i = 0; i < other.items_num_; ++i) {
     items_[i] = other.items_[i];
   }
-  items_num_ = other.items_num_;
   other.items_num_ = 0;
 }
 
@@ -38,7 +41,7 @@ zholobov::CompositeShape::~CompositeShape()
   }
 }
 
-zholobov::CompositeShape& zholobov::CompositeShape::operator=(const CompositeShape& other) noexcept
+zholobov::CompositeShape& zholobov::CompositeShape::operator=(const CompositeShape& other)
 {
   for (size_t i = 0; i < items_num_; ++i) {
     delete items_[i];
