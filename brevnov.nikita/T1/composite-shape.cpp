@@ -174,7 +174,7 @@ void brevnov::CompositeShape::move(double dx, double dy) noexcept
   }
 }
 
-void brevnov::CompositeShape::scale(double k,  point_t scale) noexcept
+void brevnov::CompositeShape::scale(double k,  point_t scale)
 {
   for (size_t i = 0; i < current_size_; ++i)
   {
@@ -187,7 +187,7 @@ void brevnov::CompositeShape::scale(double k,  point_t scale) noexcept
   }
 }
 
-void brevnov::CompositeShape::scale(double k) noexcept
+void brevnov::CompositeShape::scale(double k)
 {
   point_t scalep = getFrameRect().pos;
   scale(k, scalep);
