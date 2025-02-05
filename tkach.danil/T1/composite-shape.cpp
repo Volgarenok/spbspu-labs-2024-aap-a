@@ -91,11 +91,8 @@ tkach::CompositeShape& tkach::CompositeShape::operator=(CompositeShape&& other) 
   {
     return *this;
   }
-  delete[] shapes_;
-  size_ = other.size_;
-  shapes_ = other.shapes_;
-  other.shapes_ = nullptr;
-  other.size_ = 0;
+  CompositeShape temp(std::move(other));
+  swap(temp);
   return *this;
 }
 
