@@ -7,9 +7,9 @@ double third_point_y(bocharov::point_t leftDown, bocharov::point_t rightUp)
 {
   double AD = rightUp.x - leftDown.x;
   double AB = rightUp.y - leftDown.y;
-  double BD = sqrt(pow(AB, AB) + pow(AD, AD));
+  double BD = sqrt(pow(AB, 2) + pow(AD, 2));
   double AK = (AB * AD) / BD;
-  double BK = sqrt(pow(AB, AB) - pow(AK, AK));
+  double BK = sqrt(pow(AB, 2) - pow(AK, 2));
   double KD = BD - BK;
   double KH = (AK * KD) / AD;
   return KH;
@@ -19,10 +19,10 @@ double third_point_x(bocharov::point_t leftDown, bocharov::point_t rightUp)
 {
   double AD = rightUp.x - leftDown.x;
   double AB = rightUp.y - leftDown.y;
-  double BD = sqrt(pow(AB, AB) + pow(AD, AD));
+  double BD = sqrt(pow(AB, 2) + pow(AD, 2));
   double AK = (AB * AD) / BD;
   double KH = third_point_y(leftDown, rightUp);
-  double AH = sqrt(pow(AK, AK) - pow(KH, KH));
+  double AH = sqrt(pow(AK, 2) - pow(KH, 2));
   return AH;
 }
 
@@ -84,10 +84,8 @@ void bocharov::Rectangle::move(point_t centerP)
 
 void bocharov::Rectangle::scale(double ratio)
 {
-  rectangle_t fremRect = getFrameRect();
-  point_t pos = fremRect.pos;
-  rightUp_.x = pos.x + (rightUp_.x - pos.x) * ratio;
-  rightUp_.y = pos.y + (rightUp_.y - pos.y) * ratio;
-  leftDown_.x = pos.x + (leftDown_.x - pos.x) * ratio;
-  leftDown_.y = pos.y + (leftDown_.y - pos.y) * ratio;
+  a_.scale(ratio);
+  b_.scale(ratio);
+  c_.scale(ratio);
+  d_.scale(ratio);
 }
