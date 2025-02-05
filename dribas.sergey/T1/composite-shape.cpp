@@ -49,7 +49,7 @@ size_t dribas::CompositeShape::size() const
 {
   return size_;
 }
-double dribas::CompositeShape::getArea() const 
+double dribas::CompositeShape::getArea() const
 {
   double area = 0.0;
   for (size_t i = 0; i < size_; i++) {
@@ -63,7 +63,7 @@ dribas::rectangle_t dribas::CompositeShape::getFrameRect() const
   double minX = std::numeric_limits<double>::lowest();
   double maxX = std::numeric_limits<double>::max();
   double maxY = std::numeric_limits<double>::max();
-  
+
   for (size_t i = 0; i < size_; i++) {
     rectangle_t frem = shapes_[size_]->getFrameRect();
     minX = std::min(minX, frem.pos.x - (frem.width / 2.0f));
