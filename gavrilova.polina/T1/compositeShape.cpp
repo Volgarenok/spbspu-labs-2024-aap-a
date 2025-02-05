@@ -3,7 +3,7 @@
 #include "shapeManip.hpp"
 
 gavrilova::CompositeShape::CompositeShape():
-  CompositeShape(10)
+  CompositeShape(1)
 {}
 
 gavrilova::CompositeShape::CompositeShape(size_t capacity):
@@ -17,7 +17,7 @@ gavrilova::CompositeShape::CompositeShape(const CompositeShape& other):
   capacity_(other.capacity_),
   shapes_(new Shape*[capacity_])
 {
-  for (size_t i = 0; i < size_; ++i) {
+  for (size_t i = 0; i < other.size_; ++i) {
     shapes_[i] = other.shapes_[i]->clone();
   }
 }

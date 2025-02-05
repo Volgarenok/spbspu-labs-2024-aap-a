@@ -1,3 +1,4 @@
+
 #include "make_shape.hpp"
 #include <cstdlib>
 #include <cstring>
@@ -66,6 +67,7 @@ gavrilova::Polygon* make_polygon(std::istream& in, size_t& nError)
   while (in) {
     if (!(in >> verteces[nVert].y)) {
       ++nError;
+      delete[] verteces;
       return nullptr;
     }
     ++nVert;
