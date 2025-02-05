@@ -67,7 +67,7 @@ dribas::rectangle_t dribas::CompositeShape::getFrameRect() const
   for (size_t i = 0; i < size_; i++) {
     rectangle_t frem = shapes_[size_]->getFrameRect();
     minX = std::min(minX, frem.pos.x - (frem.width / 2.0f));
-    minY = std::min(minY, frem.pos.y - (frem.height / 2.0f)); 
+    minY = std::min(minY, frem.pos.y - (frem.height / 2.0f));
     maxX = std::max(maxX, frem.pos.x + (frem.width / 2.0f));
     maxY = std::max(maxY, frem.pos.y + (frem.height / 2.0f));
   }

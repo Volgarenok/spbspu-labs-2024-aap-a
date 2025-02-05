@@ -13,7 +13,7 @@ namespace dribas
     CompositeShape(const CompositeShape& shp);
     CompositeShape(CompositeShape&& shp);
     ~CompositeShape();
-    Shape * operator[](size_t id);  
+    Shape * operator[](size_t id);
 
     double getArea() const;
     rectangle_t getFrameRect() const;

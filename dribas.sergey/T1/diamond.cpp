@@ -42,7 +42,7 @@ dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
     if (b.x == a.x && b.y == c.y) {
       weight = std::abs(std::abs(b.x) - std::abs(a.x));
       height = std::abs(std::abs(b.y) - std::abs(c.y));
-    } else { 
+    } else {
       height = std::abs(std::abs(b.y) - std::abs(a.y));
       weight = std::abs(std::abs(b.x) - std::abs(c.x));
     }
