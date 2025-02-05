@@ -35,7 +35,7 @@ int main()
       return 1;
     }
   }
-  
+
   if (koef <= 0 || Shapes.empty()) {
     return 1;
   }
@@ -48,12 +48,10 @@ int main()
   outRectangles(std::cout, Shapes);
   std::cout << "\n";
 
-  
   scaleShapes(Shapes, center, koef);
-  
+
   double commonAreaAfter = Shapes.getArea();
   std::cout << std::fixed << std::setprecision(1) << commonAreaAfter << " ";
   outRectangles(std::cout, Shapes);
   std::cout << "\n";
 }
-
