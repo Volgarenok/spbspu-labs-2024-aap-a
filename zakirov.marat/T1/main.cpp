@@ -40,15 +40,10 @@ int main()
     free(data);
   }
 
-  if (shapes[0] == nullptr)
+  if (!shapes[0] || !scale_data)
   {
-    std::cerr << "Warning! No shapes entered." << '\n';
+    std::cerr << "Warning! No shapes entered or scale is not defined." << '\n';
     free(scale_data);
-    return 1;
-  }
-  else if (!scale_data)
-  {
-    std::cerr << "Warning! Scale is not defined." << '\n';
     free(data);
     return 1;
   }

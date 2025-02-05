@@ -45,8 +45,10 @@ double zakirov::Polygon::getArea() const
 
 zakirov::rectangle_t zakirov::Polygon::getFrameRect() const
 {
-  double min_x = points_[0].x, min_y = points_[0].y;
-  double max_x = points_[0].x, max_y = points_[0].y;
+  double min_x = points_[0].x;
+  double min_y = points_[0].y;
+  double max_x = points_[0].x;
+  double max_y = points_[0].y;
   for (size_t i = 1; i < size_; ++i)
   {
     min_x = std::min(points_[i].x, min_x);
