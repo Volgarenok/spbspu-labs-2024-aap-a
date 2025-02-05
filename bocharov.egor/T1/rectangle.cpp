@@ -84,10 +84,8 @@ void bocharov::Rectangle::move(point_t centerP)
 
 void bocharov::Rectangle::scale(double ratio)
 {
-  rectangle_t fremRect = getFrameRect();
-  point_t pos = fremRect.pos;
-  rightUp_.x = pos.x + (rightUp_.x - pos.x) * ratio;
-  rightUp_.y = pos.y + (rightUp_.y - pos.y) * ratio;
-  leftDown_.x = pos.x + (leftDown_.x - pos.x) * ratio;
-  leftDown_.y = pos.y + (leftDown_.y - pos.y) * ratio;
+  a_.scale(ratio);
+  b_.scale(ratio);
+  c_.scale(ratio);
+  d_.scale(ratio);
 }
