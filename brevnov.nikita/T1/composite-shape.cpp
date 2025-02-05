@@ -53,7 +53,7 @@ brevnov::CompositeShape::CompositeShape(CompositeShape && cos) noexcept:
   cos.capacity_ = 0;
 }
 
-brevnov::CompositeShape & brevnov::CompositeShape::operator=(brevnov::CompositeShape & cos)
+brevnov::CompositeShape & brevnov::CompositeShape::operator=(const brevnov::CompositeShape & cos)
 {
   Shape ** help = new Shape *[cos.capacity_];
   clear();
