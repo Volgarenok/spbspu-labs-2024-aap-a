@@ -29,7 +29,7 @@ void brevnov::Ellipse::updateEllipse(point_t center, double r1, double r2)
 {
   Ellipse * newellipse = new Ellipse(center, r1, r2);
   delete this;
-  *this = newellipse;
+  *this = *newellipse;
 }
 
 double brevnov::Ellipse::getArea() const noexcept
