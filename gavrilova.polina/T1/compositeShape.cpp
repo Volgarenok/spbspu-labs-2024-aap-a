@@ -170,7 +170,12 @@ void gavrilova::CompositeShape::expand()
 
 void gavrilova::CompositeShape::resize(size_t new_capacity)
 {
-  Shape** new_shapes = new Shape*[new_capacity];
+  Shape** new_shapes = nullptr;
+  try {
+    new_shapes = new Shape*[new_capacity];
+  } catch (const std::bad_alloc&) {
+    throw;
+  }
   for (size_t i = 0; i < size_; ++i) {
     new_shapes[i] = shapes_[i];
   }
@@ -190,7 +195,9 @@ void gavrilova::CompositeShape::swap(CompositeShape& rhs) noexcept
 
 void gavrilova::CompositeShape::clear()
 {
-  clearShapes(shapes_, size_);
+  for (size_t i = 0; i < size_; ++i) {
+    delete shapes_[i];
+  }
   delete[] shapes_;
   size_ = 0;
   capacity_ = 0;
