@@ -48,9 +48,7 @@ int main()
     return 1;
   }
 
-  std::cout << std::fixed << std::setprecision(1);
-  std::cout << shapes.getArea() << ' ';
-  output_frame(std::cout, shapes);
+  full_output(std::cout, shapes);
   point_t target{scale_data[2], scale_data[3]};
   double coefficient = scale_data[4];
   try
@@ -64,8 +62,7 @@ int main()
     return 1;
   }
 
-  std::cout << shapes.getArea() << ' ';
-  output_frame(std::cout, shapes);
+  full_output(std::cout, shapes);
   if (shape_flag)
   {
     std::cerr << "Warning! One or more figures are specified incorrectly." << '\n';

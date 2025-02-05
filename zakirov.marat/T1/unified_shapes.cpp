@@ -401,6 +401,6 @@ void zakirov::clear_shapes(Shape ** shapes, size_t quantity)
 void zakirov::full_output(std::ostream & out, CompositeShape & shapes)
 {
   out << std::fixed << std::setprecision(1);
+  out << shapes.getArea() << ' ';
   output_frame(out, shapes);
-
 }
