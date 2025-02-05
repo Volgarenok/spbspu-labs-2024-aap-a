@@ -13,7 +13,7 @@ namespace brevnov
     rectangle_t getFrameRect() const noexcept;
     void move(point_t new_centre) noexcept;
     void move(double dx, double dy) noexcept;
-    void scale(double n) noexcept;
+    void scale(double n);
   private:
     Ellipse ** shapes_;
     point_t left_;

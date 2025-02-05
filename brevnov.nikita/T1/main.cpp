@@ -88,7 +88,15 @@ int main()
   std::cout << comp_sh.getArea() << " ";
   print_frame_coordinates(comp_sh, std::cout);
   std::cout << "\n";
-  comp_sh.scale(ratio, scale_p);
+  try
+  {
+    comp_sh.scale(ratio, scale_p);
+  }
+  catch(const std::bad_alloc& e)
+  {
+    std::cerr << 'Not enough memory for operatopn!\n';
+    return 1;
+  }
   std::cout << comp_sh.getArea() << " ";
   print_frame_coordinates(comp_sh, std::cout);
   std::cout << "\n";

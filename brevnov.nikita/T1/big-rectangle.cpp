@@ -77,7 +77,7 @@ void brevnov::BigRectangle::move(double dx, double dy) noexcept
   }
 }
 
-void brevnov::BigRectangle::scale(double n) noexcept
+void brevnov::BigRectangle::scale(double n)
 {
   point_t center = {left_.x + (right_.x - left_.x) / 2.0, left_.y + (right_.y - left_.y) / 2.0};
   double r1 = shapes_[0]->getR1() * n;
@@ -88,7 +88,14 @@ void brevnov::BigRectangle::scale(double n) noexcept
   {
     for (size_t j = 0; j < 8; j++)
     {
-      shapes_[i * 8 + j]->updateEllipse({left_.x + r2 * (i * 2 + 1), left_.y + r1 * (i * 2 + 1)}, r1, r2);
+      try
+      {
+        shapes_[i * 8 + j]->updateEllipse({left_.x + r2 * (i * 2 + 1), left_.y + r1 * (i * 2 + 1)}, r1, r2);
+      }
+      catch(const std::bad_alloc& e)
+      {
+        throw;
+      }
     }
   }
 }
