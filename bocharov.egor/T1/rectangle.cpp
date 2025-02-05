@@ -27,10 +27,14 @@ double third_point_x(bocharov::point_t leftDown, bocharov::point_t rightUp)
 }
 
 bocharov::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
-  a_(Triangle{leftDown, point_t{rightUp.x, leftDown.y}, point_t{leftDown.x + third_point_x(leftDown, rightUp), leftDown.y + third_point_y(leftDown, rightUp)}}),
-  b_(Triangle{leftDown, point_t{leftDown.x, rightUp.y}, point_t{leftDown.x + third_point_x(leftDown, rightUp), leftDown.y + third_point_y(leftDown, rightUp)}}),
-  c_(Triangle{point_t{leftDown.x, rightUp.y}, rightUp, point_t{rightUp.x - third_point_x(leftDown, rightUp), rightUp.y - third_point_y(leftDown, rightUp)}}),
-  d_(Triangle{rightUp, point_t{rightUp.x, leftDown.y}, point_t{rightUp.x - third_point_x(leftDown, rightUp), rightUp.y - third_point_y(leftDown, rightUp)}}),
+  a_(Triangle{leftDown, point_t{rightUp.x, leftDown.y},
+    point_t{leftDown.x + third_point_x(leftDown, rightUp), leftDown.y + third_point_y(leftDown, rightUp)}}),
+  b_(Triangle{leftDown, point_t{leftDown.x, rightUp.y},
+    point_t{leftDown.x + third_point_x(leftDown, rightUp), leftDown.y + third_point_y(leftDown, rightUp)}}),
+  c_(Triangle{point_t{leftDown.x, rightUp.y}, rightUp,
+    point_t{rightUp.x - third_point_x(leftDown, rightUp), rightUp.y - third_point_y(leftDown, rightUp)}}),
+  d_(Triangle{rightUp, point_t{rightUp.x, leftDown.y}, 
+    point_t{rightUp.x - third_point_x(leftDown, rightUp), rightUp.y - third_point_y(leftDown, rightUp)}}),
   leftDown_({0.0L, 0.0L}),
   rightUp_({0.0L, 0.0L})
 {
