@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 #include "rectangle.hpp"
 #include "diamond.hpp"
 #include "square.hpp"
@@ -19,55 +18,7 @@ int main()
   while (!std::cin.eof() && shapeType != "SCALE")
   {
     std::cin >> shapeType;
-    if (shapeType == "RECTANGLE")
-    {
-      try
-      {
-        shapes[countShapes] = smirnov::createRectangle(std::cin);
-        countShapes++;
-      }
-      catch (const std::invalid_argument & e)
-      {
-        hasError = true;
-      }
-    }
-    else if (shapeType == "DIAMOND")
-    {
-      try
-      {
-        shapes[countShapes] = smirnov::createDiamond(std::cin);
-        countShapes++;
-      }
-      catch (const std::invalid_argument & e)
-      {
-        hasError = true;
-      }
-    }
-    else if (shapeType == "SQUARE")
-    {
-      try
-      {
-        shapes[countShapes] = smirnov::createSquare(std::cin);
-        countShapes++;
-      }
-      catch (const std::invalid_argument & e)
-      {
-        hasError = true;
-      }
-    }
-    else if (shapeType == "PARALLELOGRAM")
-    {
-      try
-      {
-        shapes[countShapes] = smirnov::createParallelogram(std::cin);
-        countShapes++;
-      }
-      catch (const std::invalid_argument & e)
-      {
-        hasError = true;
-      }
-    }
-    else if (shapeType == "SCALE")
+    if (shapeType == "SCALE")
     {
       checkScale = true;
       double xCoord = 0.0;
@@ -84,9 +35,35 @@ int main()
     }
     else if (std::cin.eof())
     {
-      smirnov::destroyShapes(shapes, countShapes);
+      destroyShapes(shapes, countShapes);
       std::cerr << "EOF input\n";
       return 1;
+    }
+    else
+    {
+      try
+      {
+        smirnov::Shape * shape = smirnov::createShapes(std::cin, shapeType);
+        if (shape)
+        {
+          shapes[countShapes] = shape;
+          countShapes++;
+        }
+        else
+        {
+           hasError = true;
+        }
+      }
+      catch (const std::invalid_argument & e)
+      {
+        hasError = true;
+      }
+      catch (const std::bad_alloc &)
+      {
+        std::cerr << "Out of memory\n";
+        destroyShapes(shapes, countShapes);
+        return 1;
+      }
     }
   }
   if (countShapes == 0)
@@ -102,14 +79,23 @@ int main()
   }
   std::cout << std::fixed;
   std::cout.precision(1);
-  std::cout << smirnov::sumArea(shapes, countShapes) << " ";
-  smirnov::printFrameRect(shapes, countShapes, std::cout);
+  std::cout << sumArea(shapes, countShapes) << " ";
+  printFrameRect(shapes, countShapes, std::cout);
   std::cout << "\n";
-  smirnov::scaleShapes(shapes, countShapes, centerPoint, scaleFactor);
-  std::cout << smirnov::sumArea(shapes, countShapes) << " ";
-  smirnov::printFrameRect(shapes, countShapes, std::cout);
+  try
+  {
+    scaleShapes(shapes, countShapes, centerPoint, scaleFactor);
+  }
+  catch (const std::invalid_argument & e)
+  {
+    std::cerr << e.what() << '\n';
+    destroyShapes(shapes, countShapes);
+    return 1;
+  }
+  std::cout << sumArea(shapes, countShapes) << " ";
+  printFrameRect(shapes, countShapes, std::cout);
   std::cout << "\n";
-  smirnov::destroyShapes(shapes, countShapes);
+  destroyShapes(shapes, countShapes);
   if (hasError)
   {
     std::cerr << "Incorrect shape size\n";
