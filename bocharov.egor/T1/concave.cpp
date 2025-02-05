@@ -5,41 +5,41 @@
 
 namespace
 {
-    bool isDupePoint(bocharov::point_t p1, bocharov::point_t p2, bocharov::point_t p3, bocharov::point_t p4)
+  bool isDupePoint(bocharov::point_t p1, bocharov::point_t p2, bocharov::point_t p3, bocharov::point_t p4)
+  {
+    bocharov::point_t points[4] = { p1, p2, p3, p4 };
+    for (std::size_t i = 0; i < 4; i++)
     {
-        bocharov::point_t points[4] = { p1, p2, p3, p4 };
-        for (std::size_t i = 0; i < 4; i++)
+      for (std::size_t j = i + 1; j < 4; j++)
+      {
+        if (points[i].x == points[j].x && points[i].y == points[j].y)
         {
-            for (std::size_t j = i + 1; j < 4; j++)
-            {
-                if (points[i].x == points[j].x && points[i].y == points[j].y)
-                {
-                    return true;
-                }
-            }
+          return true;
         }
-        return false;
+      }
     }
+    return false;
+  }
 
-    bool isTriangle(bocharov::point_t a, bocharov::point_t b, bocharov::point_t c)
-    {
-        return !(((a.x == b.x) && (a.x == c.x)) || ((a.y == b.y) && (a.y == c.y)));
-    }
+  bool isTriangle(bocharov::point_t a, bocharov::point_t b, bocharov::point_t c)
+  {
+    return !(((a.x == b.x) && (a.x == c.x)) || ((a.y == b.y) && (a.y == c.y)));
+  }
 
-    double getMyArea(bocharov::point_t a, bocharov::point_t b, bocharov::point_t c)
-    {
-        return std::abs((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) / 2.0);
-    }
+  double getMyArea(bocharov::point_t a, bocharov::point_t b, bocharov::point_t c)
+  {
+    return std::abs((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) / 2.0);
+  }
 
-    bool isPointInTriangle(bocharov::point_t a, bocharov::point_t b, bocharov::point_t c, bocharov::point_t d)
-    {
-        constexpr double epsilon = 1e-9;
-        double s = getMyArea(a, b, c);
-        double s1 = getMyArea(a, b, d);
-        double s2 = getMyArea(a, d, c);
-        double s3 = getMyArea(d, b, c);
-        return std::abs(s - (s1 + s2 + s3)) < epsilon;
-    }
+  bool isPointInTriangle(bocharov::point_t a, bocharov::point_t b, bocharov::point_t c, bocharov::point_t d)
+  {
+    constexpr double epsilon = 1e-9;
+    double s = getMyArea(a, b, c);
+    double s1 = getMyArea(a, b, d);
+    double s2 = getMyArea(a, d, c);
+    double s3 = getMyArea(d, b, c);
+    return std::abs(s - (s1 + s2 + s3)) < epsilon;
+  }
 }
 
 bocharov::Concave::Concave(point_t a, point_t b, point_t c, point_t d):
