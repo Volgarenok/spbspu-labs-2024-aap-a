@@ -20,7 +20,7 @@ zakirov::CompositeShape::~CompositeShape()
   clear_shapes(shapes_, shapes_quantity_);
 }
 
-double zakirov::CompositeShape::getArea()
+double zakirov::CompositeShape::getArea() noexcept
 {
   return get_total_area(shapes_, shapes_quantity_);
 }
@@ -54,7 +54,7 @@ zakirov::rectangle_t zakirov::CompositeShape::getFrameRect() const
   return {most_right - most_left, most_top - most_low, center};
 }
 
-void zakirov::CompositeShape::move(point_t target)
+void zakirov::CompositeShape::move(point_t target) noexcept
 {
   for (size_t i = 0; i < shapes_quantity_; ++i)
   {
@@ -62,7 +62,7 @@ void zakirov::CompositeShape::move(point_t target)
   }
 }
 
-void zakirov::CompositeShape::move(double bias_x, double bias_y)
+void zakirov::CompositeShape::move(double bias_x, double bias_y) noexcept
 {
   for (size_t i = 0; i < shapes_quantity_; ++i)
   {
@@ -97,7 +97,7 @@ void zakirov::CompositeShape::pop_back()
   free(shapes_[shapes_quantity_]);
 }
 
-zakirov::Shape * zakirov::CompositeShape::at(size_t id)
+zakirov::Shape * zakirov::CompositeShape::at(size_t id) const
 {
   if (id >= shapes_quantity_)
   {
@@ -107,12 +107,12 @@ zakirov::Shape * zakirov::CompositeShape::at(size_t id)
   return shapes_[id];
 }
 
-zakirov::Shape * zakirov::CompositeShape::operator[](size_t id)
+zakirov::Shape * zakirov::CompositeShape::operator[](size_t id) const noexcept
 {
   return shapes_[id];
 }
 
-bool zakirov::CompositeShape::empty() const
+bool zakirov::CompositeShape::empty() const noexcept
 {
   if (shapes_quantity_ != 0)
   {

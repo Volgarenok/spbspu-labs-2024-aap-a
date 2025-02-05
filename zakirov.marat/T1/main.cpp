@@ -1,13 +1,7 @@
 #include <iostream>
-#include <cstddef>
 #include <iomanip>
-#include "base-types.hpp"
-#include "shape.hpp"
-#include "rectangle.hpp"
-#include "circle.hpp"
-#include "ring.hpp"
-#include "unified_shapes.hpp"
 #include "composite-shape.hpp"
+#include "unified_shapes.hpp"
 
 using namespace zakirov;
 

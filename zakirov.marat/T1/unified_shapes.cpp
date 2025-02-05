@@ -128,10 +128,10 @@ zakirov::Rectangle * zakirov::make_rectangle(double bottom_x, double bottom_y, d
     new (rectangle) Rectangle(bottom_left, top_right);
     return rectangle;
   }
-  catch (const std::invalid_argument & e)
+  catch (const std::invalid_argument)
   {
     free(rectangle);
-    throw e;
+    throw;
   }
 }
 
@@ -144,10 +144,10 @@ zakirov::Circle * zakirov::make_circle(double center_x, double center_y, double 
     new (circle) Circle(center, radius);
     return circle;
   }
-  catch (const std::invalid_argument & e)
+  catch (const std::invalid_argument)
   {
     free(circle);
-    throw e;
+    throw;
   }
 }
 
@@ -160,10 +160,10 @@ zakirov::Ring * zakirov::make_ring(double center_x, double center_y, double ex_r
     new (ring) Ring(center, ex_radius, in_radius);
     return ring;
   }
-  catch (const std::invalid_argument & e)
+  catch (const std::invalid_argument)
   {
     free(ring);
-    throw e;
+    throw;
   }
 }
 
@@ -175,11 +175,11 @@ zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t * points)
     new (polygon) Polygon(points_num, points);
     return polygon;
   }
-  catch (const std::invalid_argument & e)
+  catch (const std::invalid_argument)
   {
     free(points);
     free(polygon);
-    throw e;
+    throw;
   }
 
   return new (polygon) Polygon(points_num, points);
