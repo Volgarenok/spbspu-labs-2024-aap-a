@@ -15,7 +15,7 @@ namespace brevnov
     void move(double dx, double dy) noexcept;
     void scale(double n);
   private:
-    Ellipse * shapes_[64];
+    Ellipse (*shapes_)[64];
     point_t left_;
     point_t right_;
   };
