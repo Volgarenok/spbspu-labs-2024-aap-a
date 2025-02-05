@@ -24,19 +24,17 @@ void brevnov::CompositeShape::clear() noexcept
 }
 
 brevnov::CompositeShape::CompositeShape(size_t cus):
-  shapes_(nullptr),
+  shapes_(new Shape *[capacity_]),
   capacity_(cus),
   current_size_(0)
 {
-  shapes_ = new Shape *[capacity_];
 }
 
 brevnov::CompositeShape::CompositeShape(CompositeShape & cos):
-  shapes_(nullptr),
+  shapes_(new Shape *[capacity_];),
   capacity_(cos.capacity_),
   current_size_(cos.current_size_)
 {
-  shapes_ = new Shape *[capacity_];
   for (size_t i = 0; i < current_size_; i++)
   {
     shapes_[i] = cos[i];
