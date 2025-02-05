@@ -5,7 +5,7 @@
 
 namespace zakirov
 {
-  class CompositeShape final
+  class CompositeShape
   {
     public:
       CompositeShape();
