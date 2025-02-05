@@ -20,7 +20,8 @@ int main()
   bool isIncorrectParameters = false;
   bool scaleCommand = false;
   Shape * new_shape = nullptr;
-  while (std::cin >> input_shape)
+  std::cin >> input_shape;
+  while (input_shape && scaleCommand == false)
   {
     if (std::cin.eof())
     {
@@ -67,6 +68,7 @@ int main()
         isIncorrectParameters = true;
       }
     }
+    std::cin >> input_shape;
   }
   if (isIncorrectParameters)
   {
