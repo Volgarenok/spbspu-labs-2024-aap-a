@@ -29,7 +29,7 @@ void maslov::inputShapes(std::istream & in, maslov::CompositeShape & compositeSh
     }
     catch (const std::invalid_argument &)
     {
-      continue;
+      incorrectedFlag = true;
     }
     if (shape)
     {
@@ -41,10 +41,6 @@ void maslov::inputShapes(std::istream & in, maslov::CompositeShape & compositeSh
       {
         throw;
       }
-    }
-    else
-    {
-      incorrectedFlag = true;
     }
   }
   if (in.eof())
