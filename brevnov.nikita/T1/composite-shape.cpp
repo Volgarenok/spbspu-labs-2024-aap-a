@@ -60,7 +60,7 @@ brevnov::CompositeShape & brevnov::CompositeShape::operator=(const brevnov::Comp
   shapes_ = help;
   capacity_ = cos.capacity_;
   current_size_ = cos.current_size_;
-  for (size_t i = 0; i < current_size_; i++)  
+  for (size_t i = 0; i < current_size_; i++)
   {
     shapes_[i] = cos[i];
   }
