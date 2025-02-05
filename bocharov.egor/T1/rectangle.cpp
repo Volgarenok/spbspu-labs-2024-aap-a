@@ -70,10 +70,10 @@ bocharov::rectangle_t bocharov::Rectangle::getFrameRect() const
 
 void bocharov::Rectangle::move(double x, double y)
 {
-  a_.move(x, y);
-  b_.move(x, y);
-  c_.move(x, y);
-  d_.move(x, y);
+  leftDown_.x += x;
+  leftDown_.y += y;
+  rightUp_.x += x;
+  rightUp_.y += y;
 }
 
 void bocharov::Rectangle::move(point_t centerP)
