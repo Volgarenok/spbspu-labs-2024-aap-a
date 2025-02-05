@@ -12,7 +12,6 @@ namespace karnauhova
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void scale(double k) override;
-    ~Rectangle(){}
     Shape* clone() const override;
   private:
     point_t x2_;

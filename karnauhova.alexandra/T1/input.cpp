@@ -84,8 +84,7 @@ bool karnauhova::input_polygon(std::istream & in, CompositeShape& shaps)
   }
   catch (const std::exception& e)
   {
-    delete[] x_y;
-//    delete new_polygon;
+    delete[] new_polygon;
     throw;
   }
   return true;
@@ -130,10 +129,14 @@ bool karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
         count_error++;
       }
     }
-    catch (const std::exception& e)
+    catch (const std::logic_error& e)
     {
       in.clear();
       count_error++;
+    }
+    catch (const std::bad_alloc& e)
+    {
+      throw;
     }
   }
   if (shaps.size() == 0)

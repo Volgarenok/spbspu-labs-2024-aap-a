@@ -13,7 +13,6 @@ namespace karnauhova
     rectangle_t getFrameRect() const override;
     void scale(double k) override;
     Shape* clone() const;
-    ~Triangle(){}
   private:
     point_t x1_;
     point_t x2_;
