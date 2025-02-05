@@ -30,10 +30,12 @@ namespace kiselev
     void scale(double k);
 
   private:
-    size_t capacity;
-    size_t realSize;
-    Shape** shapes;
+    size_t capacity_;
+    size_t realSize_;
+    Shape** shapes_;
     void clear(size_t size) noexcept;
+    void swap(CompositeShape& cmp) noexcept;
+    void resize(size_t newSize);
   };
 }
 #endif

@@ -40,6 +40,8 @@ int main()
     }
     catch (const std::exception& e)
     {
+      delete shape;
+      shape = nullptr;
       std::cerr << e.what() << "\n";
       return 1;
     }
