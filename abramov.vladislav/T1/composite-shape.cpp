@@ -21,7 +21,7 @@ abramov::CompositeShape::CompositeShape(size_t capacity):
   shapeptrs_(new Shape*[capacity])
 {}
 
-abramov::CompositeShape::CompositeShape(const abramov::CompositeShape &comp_shp):
+abramov::CompositeShape::CompositeShape(const CompositeShape &comp_shp):
   shapes_(comp_shp.shapes_),
   capacity_(comp_shp.capacity_),
   shapeptrs_(new Shape*[capacity_])
@@ -41,7 +41,7 @@ abramov::CompositeShape::~CompositeShape()
   delete[] shapeptrs_;
 }
 
-abramov::CompositeShape::CompositeShape(abramov::CompositeShape &&comp_shp) noexcept:
+abramov::CompositeShape::CompositeShape(CompositeShape &&comp_shp) noexcept:
   shapes_(comp_shp.shapes_),
   capacity_(comp_shp.capacity_),
   shapeptrs_(comp_shp.shapeptrs_)
@@ -49,14 +49,14 @@ abramov::CompositeShape::CompositeShape(abramov::CompositeShape &&comp_shp) noex
   comp_shp.shapeptrs_ = nullptr;
 }
 
-void abramov::CompositeShape::swap(abramov::CompositeShape &comp_shp) noexcept
+void abramov::CompositeShape::swap(CompositeShape &comp_shp) noexcept
 {
   std::swap(shapeptrs_, comp_shp.shapeptrs_);
   std::swap(shapes_, comp_shp.shapes_);
   std::swap(capacity_, comp_shp.capacity_);
 }
 
-abramov::CompositeShape &abramov::CompositeShape::operator=(const abramov::CompositeShape &comp_shp)
+abramov::CompositeShape &abramov::CompositeShape::operator=(const CompositeShape &comp_shp)
 {
   CompositeShape copy{comp_shp};
   if (std::addressof(comp_shp) != this)
@@ -66,7 +66,7 @@ abramov::CompositeShape &abramov::CompositeShape::operator=(const abramov::Compo
   return *this;
 }
 
-abramov::CompositeShape &abramov::CompositeShape::operator=(abramov::CompositeShape &&comp_shp) noexcept
+abramov::CompositeShape &abramov::CompositeShape::operator=(CompositeShape &&comp_shp) noexcept
 {
   if (std::addressof(comp_shp) != this)
   {
@@ -151,7 +151,7 @@ abramov::Shape **expandArray(abramov::Shape **arr, size_t capacity)
   }
   return array;
 }
-void abramov::CompositeShape::push_back(abramov::Shape *shp)
+void abramov::CompositeShape::push_back(Shape *shp)
 {
   if (capacity_ == shapes_)
   {
