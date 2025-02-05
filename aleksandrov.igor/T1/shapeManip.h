@@ -16,7 +16,7 @@ namespace aleksandrov
   size_t getShapeParams(std::istream& input, double* params, size_t maxParams);
   void scaleShapes(Shape** shapes, size_t count, double x, double y, double k);
   void printFrameRectCoords(std::ostream& output, const Shape* const* shapes, size_t count);
-  void printFrameRectPoints(std::ostream& output, const rectangle_t frameRect);
+  void printFrameRectPoints(std::ostream& output, rectangle_t frameRect);
   void deleteShapes(Shape** shape);
 }
 

@@ -99,6 +99,10 @@ namespace aleksandrov
 
   void scaleShapes(Shape** shapes, size_t count, double x, double y, double k)
   {
+    if (k <= 0)
+    {
+      throw std::logic_error("Incorrect coefficient");
+    }
     for (size_t i = 0; i < count; ++i)
     {
       rectangle_t frameRect = shapes[i]->getFrameRect();
@@ -106,7 +110,7 @@ namespace aleksandrov
       double dy = y - frameRect.pos.y;
 
       shapes[i]->move({x, y});
-      shapes[i]->scale(k);
+      shapes[i]->unsafeScale(k);
       shapes[i]->move(-dx * k, -dy * k);
     }
   }
