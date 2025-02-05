@@ -1,6 +1,7 @@
 #include "unified_shapes.hpp"
 #include <cstddef>
 #include <cstring>
+#include <iomanip>
 #include <memory>
 #include <stdexcept>
 #include <resize_line.hpp>
@@ -128,7 +129,7 @@ zakirov::Rectangle * zakirov::make_rectangle(double bottom_x, double bottom_y, d
     new (rectangle) Rectangle(bottom_left, top_right);
     return rectangle;
   }
-  catch (const std::invalid_argument)
+  catch (const std::invalid_argument & e)
   {
     free(rectangle);
     throw;
@@ -144,7 +145,7 @@ zakirov::Circle * zakirov::make_circle(double center_x, double center_y, double 
     new (circle) Circle(center, radius);
     return circle;
   }
-  catch (const std::invalid_argument)
+  catch (const std::invalid_argument & e)
   {
     free(circle);
     throw;
@@ -160,7 +161,7 @@ zakirov::Ring * zakirov::make_ring(double center_x, double center_y, double ex_r
     new (ring) Ring(center, ex_radius, in_radius);
     return ring;
   }
-  catch (const std::invalid_argument)
+  catch (const std::invalid_argument & e)
   {
     free(ring);
     throw;
@@ -175,7 +176,7 @@ zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t * points)
     new (polygon) Polygon(points_num, points);
     return polygon;
   }
-  catch (const std::invalid_argument)
+  catch (const std::invalid_argument & e)
   {
     free(points);
     free(polygon);
@@ -395,4 +396,11 @@ void zakirov::clear_shapes(Shape ** shapes, size_t quantity)
     shapes[i]->~Shape();
     free(shapes[i]);
   }
+}
+
+void zakirov::full_output(std::ostream & out, CompositeShape & shapes)
+{
+  out << std::fixed << std::setprecision(1);
+  output_frame(out, shapes);
+
 }

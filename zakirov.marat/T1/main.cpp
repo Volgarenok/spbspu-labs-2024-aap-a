@@ -24,7 +24,7 @@ int main()
     {
       shapes.push_back(make_shape(data));
     }
-    catch (const std::invalid_argument)
+    catch (const std::invalid_argument & e)
     {
       shape_flag = true;
       free(data);
