@@ -53,5 +53,4 @@ void gavrilova::clearShapes(Shape** Shapes, size_t n)
   for (size_t i = 0; i < n; ++i) {
     delete Shapes[i];
   }
-  
 }
