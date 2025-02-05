@@ -13,7 +13,7 @@ int main()
 {
   std::cout << std::fixed << std::setprecision(1);
   size_t start_count_shape = 0;
-  CompositeShape Cs(start_count_shape);
+  CompositeShape comp_sh(start_count_shape);
   std::string input_shape;
   point_t scale_p;
   double ratio = 0.0;
@@ -55,7 +55,7 @@ int main()
         new_shape = make_shape(input_shape, std::cin);
         if (new_shape)
         {
-          Cs.push_back(new_shape);
+          comp_sh.push_back(new_shape);
         }
       }
       catch (const std::bad_alloc & e)
@@ -74,7 +74,7 @@ int main()
   {
     std::cerr << "Some parameters were incorrect\n";
   }
-  if (Cs.empty())
+  if (comp_sh.empty())
   {
     std::cerr << "Not a single figure was read\n";
     return 1;
@@ -85,12 +85,12 @@ int main()
     return 1;
   }
   std::cout << std::setprecision(1);
-  std::cout << Cs.getArea() << " ";
-  print_frame_coordinates(Cs, std::cout);
+  std::cout << comp_sh.getArea() << " ";
+  print_frame_coordinates(comp_sh, std::cout);
   std::cout << "\n";
-  Cs.scale(ratio, scale_p);
-  std::cout << Cs.getArea() << " ";
-  print_frame_coordinates(Cs, std::cout);
+  comp_sh.scale(ratio, scale_p);
+  std::cout << comp_sh.getArea() << " ";
+  print_frame_coordinates(comp_sh, std::cout);
   std::cout << "\n";
   return 0;
 }
