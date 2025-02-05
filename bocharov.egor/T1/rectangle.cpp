@@ -53,9 +53,7 @@ bocharov::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
 
 double bocharov::Rectangle::getArea() const
 {
-  double weight = rightUp_.x - leftDown_.x;
-  double hieght = rightUp_.y - leftDown_.y;
-  return weight * hieght;
+  return a_.getArea() + b_.getArea() + c_.getArea() + d_.getArea();
 }
 
 bocharov::rectangle_t bocharov::Rectangle::getFrameRect() const
@@ -70,18 +68,18 @@ bocharov::rectangle_t bocharov::Rectangle::getFrameRect() const
 
 void bocharov::Rectangle::move(double x, double y)
 {
-  leftDown_.x += x;
-  leftDown_.y += y;
-  rightUp_.x += x;
-  rightUp_.y += y;
+  a_.move(x, y);
+  b_.move(x, y);
+  c_.move(x, y);
+  d_.move(x, y);
 }
 
 void bocharov::Rectangle::move(point_t centerP)
 {
-  point_t pos = getFrameRect().pos;
-  double moveX = centerP.x - pos.x;
-  double moveY = centerP.y - pos.y;
-  move(moveX, moveY);
+  a_.move(centerP);
+  b_.move(centerP);
+  c_.move(centerP);
+  d_.move(centerP);
 }
 
 void bocharov::Rectangle::scale(double ratio)
