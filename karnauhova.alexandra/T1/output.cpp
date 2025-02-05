@@ -23,7 +23,8 @@ void karnauhova::output_sum(std::ostream & out, CompositeShape& shaps)
   {
     sum += shaps[i]->getArea();
   }
-  out << sum;
+  out << std::fixed;
+  out << std::setprecision(1) << sum;
 }
 
 void karnauhova::output_points(std::ostream & out, CompositeShape& shaps)
