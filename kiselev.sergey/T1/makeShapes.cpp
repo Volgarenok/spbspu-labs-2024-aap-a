@@ -74,8 +74,4 @@ kiselev::Shape* kiselev::makeShape(std::istream& input, const std::string& str)
   {
     return nullptr;
   }
-  catch (...)
-  {
-    throw;
-  }
 }

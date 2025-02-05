@@ -65,15 +65,23 @@ void kiselev::CompositeShape::pushBack(Shape* shp)
 {
   if (realSize >= capacity)
   {
-    size_t newCapacity = capacity * 2 + 1;
-    Shape** newShapes = new Shape*[newCapacity];
-    for (size_t i = 0; i < realSize; ++i)
+    try
     {
-      newShapes[i] = shapes[i];
+      size_t newCapacity = capacity * 2 + 1;
+      Shape** newShapes = new Shape*[newCapacity];
+      for (size_t i = 0; i < realSize; ++i)
+      {
+        newShapes[i] = shapes[i];
+      }
+      delete[] shapes;
+      shapes = newShapes;
+      capacity = newCapacity;
     }
-    delete[] shapes;
-    shapes = newShapes;
-    capacity = newCapacity;
+    catch (const std::bad_alloc&)
+    {
+      delete shp;
+      throw;
+    }
   }
   shapes[realSize++] = shp;
 }

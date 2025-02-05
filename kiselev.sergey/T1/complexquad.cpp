@@ -10,10 +10,10 @@ namespace
   }
   bool isTriangle(kiselev::point_t p1, kiselev::point_t p2, kiselev::point_t p3)
   {
-    const double lenght1 = getLengthSide(p1, p2);
-    const double lenght2 = getLengthSide(p1, p3);
-    const double lenght3 = getLengthSide(p3, p2);
-    return lenght1 < lenght2 + lenght3 || lenght2 < lenght1 + lenght3 || lenght3 < lenght1 + lenght2;
+    const double length1 = getLengthSide(p1, p2);
+    const double length2 = getLengthSide(p1, p3);
+    const double length3 = getLengthSide(p3, p2);
+    return length1 < length2 + length3 || length2 < length1 + length3 || length3 < length1 + length2;
   }
   kiselev::point_t findP(kiselev::point_t p1, kiselev::point_t p2, kiselev::point_t p3, kiselev::point_t p4, bool& isIntersect)
   {
@@ -58,16 +58,16 @@ kiselev::rectangle_t kiselev::Complexquad::getFrameRect() const
 double kiselev::Complexquad::getArea() const
 {
   const point_t centre = getFrameRect().pos;
-  const double lenghtP1p4 = getLengthSide(arr_[0], arr_[3]);
-  const double lenghtP1centre = getLengthSide(arr_[0], centre);
-  const double lenghtP4centre = getLengthSide(centre, arr_[3]);
-  const double semiPer1 = (lenghtP1p4 + lenghtP1centre + lenghtP4centre) / 2;
-  const double area1 = std::sqrt(semiPer1 * (semiPer1 - lenghtP1p4) * (semiPer1 - lenghtP1centre) * (semiPer1 - lenghtP4centre));
-  const double lenghtP2p3 = getLengthSide(arr_[2], arr_[1]);
-  const double lenghtP2centre = getLengthSide(centre, arr_[1]);
-  const double lenghtP3centre = getLengthSide(centre, arr_[2]);
-  const double semiPer2 = (lenghtP2p3 + lenghtP2centre + lenghtP3centre) / 2;
-  const double area2 = std::sqrt(semiPer2 * (semiPer2 - lenghtP2p3) * (semiPer2 - lenghtP2centre) * (semiPer2 - lenghtP3centre));
+  const double lengthP1p4 = getLengthSide(arr_[0], arr_[3]);
+  const double lengthP1centre = getLengthSide(arr_[0], centre);
+  const double lengthP4centre = getLengthSide(centre, arr_[3]);
+  const double semiPer1 = (lengthP1p4 + lengthP1centre + lengthP4centre) / 2;
+  const double area1 = std::sqrt(semiPer1 * (semiPer1 - lengthP1p4) * (semiPer1 - lengthP1centre) * (semiPer1 - lengthP4centre));
+  const double lengthP2p3 = getLengthSide(arr_[2], arr_[1]);
+  const double lengthP2centre = getLengthSide(centre, arr_[1]);
+  const double lengthP3centre = getLengthSide(centre, arr_[2]);
+  const double semiPer2 = (lengthP2p3 + lengthP2centre + lengthP3centre) / 2;
+  const double area2 = std::sqrt(semiPer2 * (semiPer2 - lengthP2p3) * (semiPer2 - lengthP2centre) * (semiPer2 - lengthP3centre));
   return area1 + area2;
 }
 void kiselev::Complexquad::move(point_t a)
