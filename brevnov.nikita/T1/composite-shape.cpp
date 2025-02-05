@@ -31,7 +31,7 @@ brevnov::CompositeShape::CompositeShape(size_t cus):
 }
 
 brevnov::CompositeShape::CompositeShape(CompositeShape & cos):
-  shapes_(new Shape *[capacity_];),
+  shapes_(new Shape *[capacity_]),
   capacity_(cos.capacity_),
   current_size_(cos.current_size_)
 {
