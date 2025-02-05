@@ -145,8 +145,11 @@ double brevnov::CompositeShape::getArea() const noexcept
 
 brevnov::rectangle_t brevnov::CompositeShape::getFrameRect() const noexcept
 {
-  double leftx = 0.0, lefty = 0.0, rightx = 0.0, righty = 0.0;
-  for (size_t i = 0; i < current_size_; i++)
+  double leftx = pos.x - shapes_[0]->getFrameRect().width;
+  double lefty = pos.y - shapes_[0]->getFrameRect().height;
+  double rightx = pos.x + shapes_[0]->getFrameRect().width; 
+  double righty = pos.x + shapes_[0]->getFrameRect().height;
+  for (size_t i = 1; i < current_size_; i++)
   {
     double width = shapes_[i]->getFrameRect().width;
     double height = shapes_[i]->getFrameRect().height;
