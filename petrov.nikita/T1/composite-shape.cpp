@@ -64,27 +64,8 @@ petrov::CompositeShape::~CompositeShape()
 
 petrov::CompositeShape & petrov::CompositeShape::operator=(const CompositeShape & rhs)
 {
-  Shape ** temp = new Shape * [rhs.size_of_vector_];
-  size_t created = 0;
-  try
-  {
-    for (size_t i = 0; i < size_of_vector_; i++)
-    {
-      temp[i] = rhs.shapes_vector_[i]->clone();
-      created++;
-    }
-  }
-  catch (const std::bad_alloc & e)
-  {
-    deleteShapes(temp, created);
-    delete[] temp;
-    throw;
-  }
-  deleteShapes(shapes_vector_, size_of_vector_);
-  delete[] shapes_vector_;
-  shapes_vector_ = temp;
-  capacity_ = rhs.capacity_;
-  size_of_vector_ = rhs.size_of_vector_;
+  CompositeShape cpy(rhs);
+  this->swap(cpy);
   return *this;
 }
 
@@ -94,6 +75,13 @@ petrov::CompositeShape & petrov::CompositeShape::operator=(CompositeShape && rhs
   capacity_ = rhs.capacity_;
   size_of_vector_ = rhs.size_of_vector_;
   return *this;
+}
+
+void petrov::CompositeShape::swap(CompositeShape & rhs) noexcept
+{
+  std::swap(capacity_, rhs.capacity_);
+  std::swap(size_of_vector_, rhs.size_of_vector_);
+  std::swap(shapes_vector_, rhs.shapes_vector_);
 }
 
 double petrov::CompositeShape::getArea() const

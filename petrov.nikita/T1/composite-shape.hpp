@@ -15,6 +15,7 @@ namespace petrov
     ~CompositeShape();
     CompositeShape & operator=(const CompositeShape & rhs);
     CompositeShape & operator=(CompositeShape && rhs) noexcept;
+    void swap(CompositeShape & rhs) noexcept;
     double getArea() const;
     rectangle_t getFrameRect() const;
     void move(const point_t & concrete_point);

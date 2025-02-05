@@ -24,12 +24,7 @@ void petrov::changeCoordinatesDueToScaling(point_t ** points, const point_t & po
   }
 }
 
-petrov::rectangle_t petrov::getFrameRectByOtherShapes(Shape ** ptr_shapes, size_t number_of_shapes)
-{
-  return getFrameRectByOtherShapes(const_cast< const Shape ** >(ptr_shapes), number_of_shapes);
-}
-
-petrov::rectangle_t petrov::getFrameRectByOtherShapes(const Shape ** ptr_shapes, size_t number_of_shapes)
+petrov::rectangle_t petrov::getFrameRectByOtherShapes(const Shape * const * ptr_shapes, size_t number_of_shapes)
 {
   rectangle_t shape_frame_rect = ptr_shapes[0]->getFrameRect();
   double xmin = shape_frame_rect.pos.x - shape_frame_rect.width / 2;
