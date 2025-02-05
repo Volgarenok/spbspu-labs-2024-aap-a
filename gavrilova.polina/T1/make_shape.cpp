@@ -129,9 +129,7 @@ gavrilova::Shape* gavrilova::make_shape(std::istream& in, std::string shapeType,
     new_shape = make_polygon(in, nError);
   } else if (shapeType == "ELLIPSE") {
     new_shape = make_ellipse(in, nError);
-  } else {
-
   }
-
+  
   return new_shape;
 }
