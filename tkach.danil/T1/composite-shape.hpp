@@ -33,6 +33,7 @@ namespace tkach
   private:
     size_t size_;
     Shape** shapes_;
+    void swap(CompositeShape&) noexcept;
   };
 }
 

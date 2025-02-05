@@ -80,27 +80,14 @@ tkach::CompositeShape& tkach::CompositeShape::operator=(const CompositeShape& ot
   {
     return *this;
   }
-  Shape** new_shapes = new Shape*[other.size_];
-  size_t true_size = 0;
-  try
-  {
-    fillCloneArray(new_shapes, other.shapes_, other.size_, true_size);
-  }
-  catch (const std::bad_alloc&)
-  {
-    deleteShapesFromArray(new_shapes, true_size);
-    delete[] new_shapes;
-    throw;
-  }
-  delete[] shapes_;
-  shapes_ = new_shapes;
-  size_ = other.size_;
+  CompositeShape temp(other);
+  swap(temp);
   return *this;
 }
 
 tkach::CompositeShape& tkach::CompositeShape::operator=(CompositeShape&& other) noexcept
 {
-  if (this != std::addressof(other))
+  if (this == std::addressof(other))
   {
     return *this;
   }
@@ -185,7 +172,7 @@ void tkach::CompositeShape::popBack()
 
 tkach::Shape* tkach::CompositeShape::at(const size_t id)
 {
-  return const_cast< Shape* >(const_cast< const CompositeShape* >(this)->at(id));
+  return const_cast< Shape* >(static_cast< const CompositeShape* >(this)->at(id));
 }
 
 const tkach::Shape* tkach::CompositeShape::at(const size_t id) const
@@ -199,7 +186,7 @@ const tkach::Shape* tkach::CompositeShape::at(const size_t id) const
 
 tkach::Shape* tkach::CompositeShape::operator[](const size_t id)
 {
-  return const_cast< Shape* >(const_cast< const CompositeShape* >(this)->operator[](id));
+  return const_cast< Shape* >(static_cast< const CompositeShape* >(this)->operator[](id));
 }
 
 const tkach::Shape* tkach::CompositeShape::operator[](const size_t id) const
@@ -215,6 +202,12 @@ bool tkach::CompositeShape::empty() const noexcept
 size_t tkach::CompositeShape::size() const noexcept
 {
   return size_;
+}
+
+void tkach::CompositeShape::swap(CompositeShape& other) noexcept
+{
+  std::swap(size_, other.size_);
+  std::swap(shapes_, other.shapes_);
 }
 
 void tkach::CompositeShape::doUnsafeScale(const double multiplier)
