@@ -34,7 +34,6 @@ int main()
         return 1;
       }
     }
-    std::cout << Shapes.size();
   }
 
   if (koef <= 0 || Shapes.empty()) {
