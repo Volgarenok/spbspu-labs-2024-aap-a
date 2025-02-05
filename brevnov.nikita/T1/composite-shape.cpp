@@ -60,7 +60,7 @@ brevnov::CompositeShape & brevnov::CompositeShape::operator=(const brevnov::Comp
   shapes_ = help;
   capacity_ = cos.capacity_;
   current_size_ = cos.current_size_;
-  for (size_t i = 0; i < current_size_; i++)
+  for (size_t i = 0; i < current_size_; i++)  
   {
     shapes_[i] = cos[i];
   }
@@ -109,7 +109,7 @@ void brevnov::CompositeShape::pop_back()
   delete shapes_[--current_size_];
 }
 
-brevnov::Shape * brevnov::CompositeShape::at(size_t id)
+brevnov::Shape * brevnov::CompositeShape::at(size_t id) const
 {
   if (id >= current_size_)
   {
@@ -118,17 +118,17 @@ brevnov::Shape * brevnov::CompositeShape::at(size_t id)
   return shapes_[id];
 }
 
-brevnov::Shape * brevnov::CompositeShape::operator[](size_t id) noexcept
+brevnov::Shape * brevnov::CompositeShape::operator[](size_t id) const noexcept
 {
   return shapes_[id];
 }
 
-bool brevnov::CompositeShape::empty() noexcept
+bool brevnov::CompositeShape::empty() const noexcept
 {
   return current_size_ == 0;
 }
 
-size_t brevnov::CompositeShape::size() noexcept
+size_t brevnov::CompositeShape::size() const noexcept
 {
   return current_size_;
 }

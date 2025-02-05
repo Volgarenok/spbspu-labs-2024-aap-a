@@ -15,13 +15,13 @@ namespace brevnov
     ~CompositeShape();
     CompositeShape & operator=(const CompositeShape & cos);
     CompositeShape & operator=(CompositeShape && cos) noexcept;
-    Shape * operator[](size_t id) noexcept;
+    Shape * operator[](size_t id) const noexcept;
     void add_memory();
     void push_back(Shape * sp);
     void pop_back();
-    Shape * at(size_t id);
-    bool empty() noexcept;
-    size_t size() noexcept;
+    Shape * at(size_t id) const;
+    bool empty() const noexcept;
+    size_t size() const noexcept;
     double getArea() const noexcept;
     rectangle_t getFrameRect() const noexcept;
     void move(point_t a) noexcept;
