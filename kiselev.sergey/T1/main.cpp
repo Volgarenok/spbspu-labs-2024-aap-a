@@ -29,19 +29,23 @@ int main()
         break;
       }
       shape = kiselev::makeShape(std::cin, titleShape);
-      if (shape)
+      if (!shape)
+      {
+        isIncorrectShape = true;
+        continue;
+      }
+      try
       {
         compShp.pushBack(shape);
       }
-      else
+      catch (const std::bad_alloc&)
       {
-        isIncorrectShape = true;
+        delete shape;
+        std::cerr << "Out of memory";
       }
     }
     catch (const std::exception& e)
     {
-      delete shape;
-      shape = nullptr;
       std::cerr << e.what() << "\n";
       return 1;
     }

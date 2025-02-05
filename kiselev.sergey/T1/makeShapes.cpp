@@ -64,10 +64,6 @@ kiselev::Shape* kiselev::makeShape(std::istream& input, const std::string& str)
     {
       shape = makeComplexquad(input);
     }
-    else
-    {
-      throw std::logic_error("Unknown shape");
-    }
     return shape;
   }
   catch (const std::invalid_argument&)

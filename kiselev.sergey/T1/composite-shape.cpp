@@ -2,7 +2,6 @@
 #include <cmath>
 #include <cstddef>
 #include <stdexcept>
-#include <utility>
 void kiselev::CompositeShape::clear(size_t size) noexcept
 {
   for (size_t i = 0; i < size; ++i)
@@ -20,7 +19,7 @@ void kiselev::CompositeShape::swap(CompositeShape& cmp) noexcept
 void kiselev::CompositeShape::resize(size_t size)
 {
   CompositeShape newCmp(size);
-  for (size_t i = 0; i < realSize_; ++i, ++realSize_)
+  for (size_t i = 0; i < realSize_; ++i, newCmp.realSize_++)
   {
     newCmp.shapes_[i] = shapes_[i]->clone();
   }
@@ -62,9 +61,7 @@ kiselev::CompositeShape::CompositeShape(CompositeShape&& cmp) noexcept:
 kiselev::CompositeShape& kiselev::CompositeShape::operator=(const CompositeShape& cmp)
 {
   CompositeShape cpy(cmp);
-  std::swap(shapes_, cpy.shapes_);
-  std::swap(capacity_, cpy.capacity_);
-  std::swap(realSize_, cpy.realSize_);
+  swap(cpy);
   return *this;
 }
 kiselev::CompositeShape& kiselev::CompositeShape::operator=(CompositeShape&& cmp) noexcept
