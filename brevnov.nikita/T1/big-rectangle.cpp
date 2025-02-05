@@ -3,9 +3,13 @@
 
 brevnov::BigRectangle::BigRectangle(point_t left, point_t right):
   shapes_(nullptr),
-  left_(left),
-  right_(right)
+  left_({0.0, 0.0}),
+  right_({0.0, 0.0})
 {
+  if (left.x >= right.x || left.y >= right.y)
+  {
+    throw std::invalid_argument("Not correct arguments");
+  }
   shapes_ = new Ellipse *[64];
   double width = right_.x - left_.x;
   double height = right_.y - left_.y;
