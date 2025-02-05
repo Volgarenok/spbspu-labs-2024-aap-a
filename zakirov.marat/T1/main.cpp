@@ -24,7 +24,7 @@ int main()
     {
       shapes.push_back(make_shape(data));
     }
-    catch (const std::invalid_argument & e)
+    catch (const std::invalid_argument)
     {
       shape_flag = true;
       free(data);
@@ -62,7 +62,7 @@ int main()
   {
     scale_full_composition(shapes, target, coefficient);
   }
-  catch (const std::invalid_argument& e)
+  catch (const std::invalid_argument)
   {
     std::cerr << "Warning! The figure change coefficient is incorrect." << '\n';
     free(scale_data);

@@ -187,28 +187,32 @@ zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t * points)
 
 zakirov::Shape * zakirov::make_shape(const double * data)
 {
-  if (data[0] == 2.0 && data[1] == 4.0)
-  {
-    return make_rectangle(data[2], data[3], data[4], data[5]);
-  }
-  else if (data[0] == 3.0 && data[1] == 3.0)
-  {
-    return make_circle(data[2], data[3], data[4]);
-  }
-  else if (data[0] == 4.0 && data[1] == 4.0)
-  {
-    return make_ring(data[2], data[3], data[4], data[5]);
-  }
-  else if (data[0] == 5.0)
+  if (data[0] == 5.0)
   {
     point_t * converted_data = convert_polygon(data);
     size_t points_size = static_cast< size_t >(data[1] / 2);
     Polygon * polygon = make_polygon(points_size, converted_data);
     return polygon;
   }
-  else
+  else if (data[0] == 4.0 && data[1] == 4.0)
+  {
+    return make_ring(data[2], data[3], data[4], data[5]);
+  }
+  else if (data[0] == 3.0 && data[1] == 3.0)
+  {
+    return make_circle(data[2], data[3], data[4]);
+  }
+  else if (data[0] == 2.0 && data[1] == 4.0)
+  {
+    return make_rectangle(data[2], data[3], data[4], data[5]);
+  }
+  else if (data[0] == 1.0)
   {
     return nullptr;
+  }
+  else
+  {
+    throw std::invalid_argument("Shapes not defined");
   }
 }
 
