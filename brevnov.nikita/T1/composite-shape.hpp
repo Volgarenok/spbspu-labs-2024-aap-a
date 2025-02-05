@@ -9,16 +9,17 @@ namespace brevnov
   class CompositeShape
   {
   public:
-    CompositeShape(size_t cus);
     CompositeShape(CompositeShape & cos);
     CompositeShape(CompositeShape && cos) noexcept;
+    CompositeShape(size_t cus);
+    ~CompositeShape();
     CompositeShape & operator=(CompositeShape & cos);
     CompositeShape & operator=(CompositeShape && cos) noexcept;
+    Shape * operator[](size_t id) noexcept;
     void add_memory();
     void push_back(Shape * sp);
     void pop_back();
     Shape * at(size_t id);
-    Shape * operator[](size_t id) noexcept;
     bool empty() noexcept;
     size_t size() noexcept;
     double getArea() const noexcept;
@@ -27,7 +28,6 @@ namespace brevnov
     void move(double dx, double dy) noexcept;
     void scale(double k,  point_t scale);
     void scale(double k);
-    ~CompositeShape();
   private:
     Shape ** shapes_;
     size_t capacity_;
