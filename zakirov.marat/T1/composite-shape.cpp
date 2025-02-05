@@ -29,7 +29,7 @@ zakirov::rectangle_t zakirov::CompositeShape::getFrameRect() const
 {
   if (!empty())
   {
-    throw std::logic_error("ERROR: empty array");
+    throw std::logic_error("ERROR: empty composition");
   }
 
   double most_top = shapes_[0]->getFrameRect().pos.y;
@@ -40,8 +40,8 @@ zakirov::rectangle_t zakirov::CompositeShape::getFrameRect() const
   {
     rectangle_t frame_rect = shapes_[i]->getFrameRect();
     double shape_top = frame_rect.height / 2.0 + frame_rect.pos.y;
-    double shape_low = frame_rect.height / 2.0 - frame_rect.pos.y;
-    double shape_left = frame_rect.width / 2.0 - frame_rect.pos.x;
+    double shape_low = -frame_rect.height / 2.0 + frame_rect.pos.y;
+    double shape_left = -frame_rect.width / 2.0 + frame_rect.pos.x;
     double shape_right = frame_rect.width / 2.0 + frame_rect.pos.x;
     most_top = std::max(most_top, shape_top);
     most_low = std::min(most_low, shape_low);

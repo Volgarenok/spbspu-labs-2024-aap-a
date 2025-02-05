@@ -66,7 +66,7 @@ int main()
   double coefficient = scale_data[4];
   try
   {
-    scale_composite(shapes, target, coefficient);
+    scale_full_composition(shapes, target, coefficient);
   }
   catch (const std::invalid_argument& e)
   {

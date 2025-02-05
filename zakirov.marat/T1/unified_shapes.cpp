@@ -327,19 +327,32 @@ void zakirov::scale_all_shapes(Shape ** shapes, point_t target, double k, size_t
   }
 }
 
-void zakirov::scale_composite(CompositeShape & shapes, point_t target, double k)
+void zakirov::scale_element(Shape * shape, point_t target, double k)
 {
   if (k <= 0)
   {
     throw std::invalid_argument("Incorrect coefficient");
   }
 
-  point_t nailed_p1 = shapes.getFrameRect().pos;
-  shapes.move(target);
-  point_t nailed_p2 = shapes.getFrameRect().pos;
+  point_t nailed_p1 = shape->getFrameRect().pos;
+  shape->move(target);
+  point_t nailed_p2 = shape->getFrameRect().pos;
   point_t bias{(nailed_p2.x - nailed_p1.x) * k, (nailed_p2.y - nailed_p1.y) * k};
-  shapes.scale(k);
-  shapes.move(-bias.x, -bias.y);
+  shape->scale(k);
+  shape->move(-bias.x, -bias.y);
+}
+
+void zakirov::scale_full_composition(CompositeShape & shapes, point_t target, double k)
+{
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Incorrect coefficient");
+  }
+
+  for (size_t i = 0; i < shapes.size(); ++i)
+  {
+    scale_element(shapes[i], target, k);
+  }
 }
 
 void zakirov::output_frame(std::ostream & out, CompositeShape & shapes)

@@ -22,7 +22,8 @@ namespace zakirov
   void output_frame(std::ostream & out, CompositeShape & shapes);
   void clear_shapes(Shape ** shapes, size_t quantity);
   void scale_all_shapes(Shape ** shapes, point_t target, double k, size_t size);
-  void scale_composite(CompositeShape & shapes, point_t target, double k);
+  void scale_element(Shape * shape, point_t target, double k);
+  void scale_full_composition(CompositeShape & shapes, point_t target, double k);
   double get_total_area(Shape ** shapes, size_t size);
 }
 
