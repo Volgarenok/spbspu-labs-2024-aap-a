@@ -143,7 +143,7 @@ namespace {
 }
 
 
-gavrilova::Shape* gavrilova::make_shape(std::istream& in, gavrilova::point_t& center, double& koef, size_t& nError)
+gavrilova::Shape* gavrilova::make_Shape(std::istream& in, gavrilova::point_t& center, double& koef, size_t& nError)
 {
   size_t len = 0;
   size_t nSpaces = 0;

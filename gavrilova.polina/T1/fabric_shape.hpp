@@ -3,6 +3,6 @@
 #include <istream>
 #include "shape.hpp"
 namespace gavrilova {
-  Shape* make_shape(std::istream& in, point_t& center, double& koef, size_t& nError);
+  Shape* make_Shape(std::istream& in, point_t& center, double& koef, size_t& nError);
 }
 #endif

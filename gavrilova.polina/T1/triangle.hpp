@@ -5,7 +5,6 @@ namespace gavrilova {
   class Triangle final: public Shape {
   public:
     Triangle(const point_t& a, const point_t& b, const point_t& c);
-    Triangle(const Triangle& other);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(const point_t& p) override;

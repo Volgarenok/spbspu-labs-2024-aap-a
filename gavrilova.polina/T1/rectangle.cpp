@@ -11,11 +11,6 @@ gavrilova::Rectangle::Rectangle(const point_t& pBottomLeft, const point_t& pTopR
   }
 }
 
-gavrilova::Rectangle::Rectangle(const Rectangle& other):
-  pBottomLeft_(other.pBottomLeft_),
-  pTopRight_(other.pTopRight_)
-{}
-
 double gavrilova::Rectangle::getArea() const
 {
   return (pTopRight_.x - pBottomLeft_.x) * (pTopRight_.y - pBottomLeft_.y);

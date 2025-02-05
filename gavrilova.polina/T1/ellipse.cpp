@@ -12,12 +12,6 @@ gavrilova::Ellipse::Ellipse(const point_t& center, double radiusY, double radius
   }
 }
 
-gavrilova::Ellipse::Ellipse(const Ellipse& other):
-  center_(other.center_),
-  radiusY_(other.radiusY_),
-  radiusX_(other.radiusX_)
-{}
-
 double gavrilova::Ellipse::getArea() const
 {
   constexpr double pi = 3.14159;

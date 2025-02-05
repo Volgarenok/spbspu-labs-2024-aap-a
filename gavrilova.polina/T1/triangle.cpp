@@ -21,11 +21,6 @@ gavrilova::Triangle::Triangle(const point_t& a, const point_t& b, const point_t&
     throw std::logic_error("Invalid arguments for triangle");
   }
 }
-gavrilova::Triangle::Triangle(const Triangle& other):
-  a_(other.a_),
-  b_(other.b_),
-  c_(other.c_)
-{}
 
 double gavrilova::Triangle::getArea() const
 {

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "fabric_shape.hpp"
+#include "make_shape.hpp"
 #include "shapeManip.hpp"
 #include <iomanip>
 
@@ -11,15 +11,24 @@ int main()
 {
   using namespace gavrilova;
   Shape* Shapes[1000] = {nullptr};
-  point_t center{0,0};
-  double koef = -1;
+  
   size_t nShapes = 0;
   size_t nError = 0;
   double commonAreaBefore = 0;
+  std::string shapeTypeOrScale;
+  point_t center;
+  double koef = 0;
 
-  while (!std::cin.eof() && std::cin && koef <= 0) {
+  while (!std::cin.eof() && std::cin >> shapeTypeOrScale) {
+    
+    if (shapeTypeOrScale == "SCALE") {
+      if (!(std::cin >> center.x >> center.y >> koef)) {
+          std::cerr << " ";
+      }
+    }
+
     try {
-      Shapes[nShapes] = make_shape(std::cin, center, koef, nError);
+      Shapes[nShapes] = make_shape(std::cin, shapeTypeOrScale, nError);
     } catch (const std::exception& e) {
       std::cerr << e.what();
       return 1;
@@ -57,3 +66,4 @@ int main()
 
   clearShapes(Shapes, nShapes);
 }
+

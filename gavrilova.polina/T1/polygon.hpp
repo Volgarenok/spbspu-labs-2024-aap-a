@@ -9,7 +9,6 @@ namespace gavrilova {
   public:
     ~Polygon();
     Polygon(size_t size, const point_t* verteces);
-    Polygon(const Polygon& other);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(const point_t& p) override;

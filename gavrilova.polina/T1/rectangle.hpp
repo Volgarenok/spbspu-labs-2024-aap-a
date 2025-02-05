@@ -5,7 +5,6 @@ namespace gavrilova {
   class Rectangle final: public Shape {
   public:
     Rectangle(const point_t& pBottomLeft, const point_t& pTopRigh);
-    Rectangle(const Rectangle& other);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(const point_t& p) override;
