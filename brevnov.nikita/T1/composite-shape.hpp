@@ -29,10 +29,10 @@ namespace brevnov
     void scale(double k);
     ~CompositeShape();
   private:
-    void clear() noexcept;
     Shape ** shapes_;
     size_t capacity_;
     size_t current_size_;
+    void clear() noexcept;
   };
   void print_frame_coordinates(CompositeShape& CoSh, std::ostream & out);
 }
