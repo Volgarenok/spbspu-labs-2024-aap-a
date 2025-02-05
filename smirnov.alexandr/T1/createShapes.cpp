@@ -56,5 +56,9 @@ smirnov::Parallelogram * smirnov::createParallelogram(std::istream & in)
   p1 = {coordsArray[0], coordsArray[1]};
   p2 = {coordsArray[2], coordsArray[3]};
   p3 = {coordsArray[4], coordsArray[5]};
+  if (!(p1.y == p2.y || p1.y == p3.y || p2.y == p3.y))
+  {
+    throw std::invalid_argument("The sides of the parallelogram must be parallel to the X-axis");
+  }
   return new Parallelogram(p1, p2, p3);
 }
