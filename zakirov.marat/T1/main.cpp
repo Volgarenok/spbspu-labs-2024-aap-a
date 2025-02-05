@@ -55,7 +55,7 @@ int main()
   {
     scale_full_composition(shapes, target, coefficient);
   }
-  catch (const std::invalid_argument)
+  catch (const std::invalid_argument & e)
   {
     std::cerr << "Warning! The figure change coefficient is incorrect." << '\n';
     free(scale_data);
