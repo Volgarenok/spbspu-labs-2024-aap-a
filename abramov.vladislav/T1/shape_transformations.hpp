@@ -13,9 +13,6 @@
 namespace abramov
 {
   void getShapes(std::istream &in, Composite &shapes, point_t &p, double &k, bool &flag);
-  Rectangle *makeRectangle(std::istream &in);
-  Square *makeSquare(std::istream &in);
-  ComplexQuad *makeComplexQuad(std::istream &in);
   void scaleFigure(Shape *s, const point_t &p, double k);
   void scaleFigures(Composite &shapes, const point_t &p, double k, size_t i);
   void unsafeScaleFigure(Shape *s, const point_t &p, double k);

@@ -11,6 +11,30 @@ namespace
     }
   }
 
+  abramov::Rectangle *makeRectangle(std::istream &in)
+  {
+    constexpr size_t k = 4;
+    double arr[k] = {};
+    getArray(in, arr, k);
+    return new abramov::Rectangle({arr[0], arr[1]}, {arr[2], arr[3]});
+  }
+
+  abramov::Square *makeSquare(std::istream &in)
+  {
+    constexpr size_t k = 3;
+    double arr[k] = {};
+    getArray(in, arr, k);
+    return new abramov::Square({arr[0], arr[1]}, arr[2]);
+  }
+
+  abramov::ComplexQuad *makeComplexQuad(std::istream &in)
+  {
+    constexpr size_t k = 8;
+    double x[k] = {};
+    getArray(in, x, k);
+    return new abramov::ComplexQuad({x[0], x[1]}, {x[2], x[3]}, {x[4], x[5]}, {x[6], x[7]});
+  }
+
   void printFrameRectCoords(const abramov::rectangle_t &r)
   {
     const double x1 = r.pos.x - r.width / 2;
@@ -64,30 +88,6 @@ void abramov::getShapes(std::istream &in, Composite &shapes, point_t &p, double 
       in.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
     }
   }
-}
-
-abramov::Rectangle *abramov::makeRectangle(std::istream &in)
-{
-  constexpr size_t k = 4;
-  double arr[k] = {};
-  getArray(in, arr, k);
-  return new Rectangle({arr[0], arr[1]}, {arr[2], arr[3]});
-}
-
-abramov::Square *abramov::makeSquare(std::istream &in)
-{
-  constexpr size_t k = 3;
-  double arr[k] = {};
-  getArray(in, arr, k);
-  return new Square({arr[0], arr[1]}, arr[2]);
-}
-
-abramov::ComplexQuad *abramov::makeComplexQuad(std::istream &in)
-{
-  constexpr size_t k = 8;
-  double x[k] = {};
-  getArray(in, x, k);
-  return new ComplexQuad({x[0], x[1]}, {x[2], x[3]}, {x[4], x[5]}, {x[6], x[7]});
 }
 
 void abramov::printShapes(std::ostream &out, const Composite &shapes, size_t i)
