@@ -9,14 +9,15 @@ smirnov::Parallelogram::Parallelogram(point_t p1, point_t p2, point_t p3):
   vertex3{p3},
   vertex4{p1.x + p3.x - p2.x, p1.y + p3.y - p2.y}
 {
-  if ((p1.x == p3.x && p2.y == p3.y) || (p2.x == p3.x && p1.y == p3.y))
+  if ((p1.x == p3.x && p2.y == p3.y) || (p2.x == p3.x && p1.y == p3.y)
+      || (p2.x == p3.x && p2.y == p3.y))
   {
     throw std::invalid_argument("Incorrect coordinates for the parallelogram");
   }
-  if (!(p1.y == p2.y || p1.y == p3.y || p2.y == p3.y))
+  /*if (!(p1.y == p2.y || p1.y == p3.y || p2.y == p3.y))
   {
     throw std::invalid_argument("The sides of the parallelogram must be parallel to the X-axis");
-  }
+  }*/
 }
 
 double smirnov::Parallelogram::getArea() const
@@ -30,14 +31,12 @@ double smirnov::Parallelogram::getArea() const
 
 smirnov::rectangle_t smirnov::Parallelogram::getFrameRect() const
 {
-  point_t center;
-  center.x = (vertex1.x + vertex2.x + vertex3.x + vertex4.x) / 4;
-  center.y = (vertex1.y + vertex2.y + vertex3.y + vertex4.y) / 4;
   double minX = std::min({vertex1.x, vertex2.x, vertex3.x, vertex4.x});
   double maxX = std::max({vertex1.x, vertex2.x, vertex3.x, vertex4.x});
   double minY = std::min({vertex1.y, vertex2.y, vertex3.y, vertex4.y});
   double maxY = std::max({vertex1.y, vertex2.y, vertex3.y, vertex4.y});
-  return {center, maxX- minX, maxY - minY};
+  point_t center = {(minX + maxX) / 2, (minY + maxY) / 2};
+  return {center, maxX - minX, maxY - minY};
 }
 
 void smirnov::Parallelogram::move(point_t newPos)

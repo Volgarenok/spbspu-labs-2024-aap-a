@@ -6,14 +6,16 @@
 #include "processShapes.hpp"
 #include "createShapes.hpp"
 
+using namespace smirnov;
+
 int main()
 {
-  smirnov::Shape * shapes[10000] = {};
+  Shape * shapes[10000] = {};
   std::string shapeType = "";
   size_t countShapes = 0;
   bool checkScale = false;
   bool hasError = false;
-  smirnov::point_t centerPoint = {0.0, 0.0};
+  point_t centerPoint = {0.0, 0.0};
   double scaleFactor = 0.0;
   while (!std::cin.eof() && shapeType != "SCALE")
   {
@@ -43,7 +45,7 @@ int main()
     {
       try
       {
-        smirnov::Shape * shape = smirnov::createShapes(std::cin, shapeType);
+        Shape * shape = createShapes(std::cin, shapeType);
         if (shape)
         {
           shapes[countShapes] = shape;
@@ -73,7 +75,7 @@ int main()
   }
   if (!checkScale)
   {
-    smirnov::destroyShapes(shapes, countShapes);
+    destroyShapes(shapes, countShapes);
     std::cerr << "No Scale Command\n";
     return 1;
   }
