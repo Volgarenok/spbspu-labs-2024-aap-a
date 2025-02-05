@@ -77,14 +77,17 @@ void brevnov::Diamond::move(point_t new_centre) noexcept
   vertical_.y += ydif;
 }
 
+void brevnov::move_point(double dx, double dy, brevnov::point_t &point)
+{
+  point.x += dx;
+  point.y += dy;
+}
+
 void brevnov::Diamond::move(double dx, double dy) noexcept
 {
-  center_.x += dx;
-  horizontal_.x += dx;
-  vertical_.x += dx;
-  center_.y += dy;
-  horizontal_.y += dy;
-  vertical_.y += dy;
+  move_point(dx, dy, center_);
+  move_point(dx, dy, horizontal_);
+  move_point(dx, dy, vertical_);
 }
 
 void brevnov::Diamond::scale(double n) noexcept
