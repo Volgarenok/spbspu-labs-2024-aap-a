@@ -53,7 +53,9 @@ bocharov::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
 
 double bocharov::Rectangle::getArea() const
 {
-  return a_.getArea() + b_.getArea() + c_.getArea() + d_.getArea();
+  double weight = rightUp_.x - leftDown_.x;
+  double hieght = rightUp_.y - leftDown_.y;
+  return weight * hieght;
 }
 
 bocharov::rectangle_t bocharov::Rectangle::getFrameRect() const
