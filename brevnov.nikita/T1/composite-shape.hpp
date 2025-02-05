@@ -9,11 +9,11 @@ namespace brevnov
   class CompositeShape
   {
   public:
-    CompositeShape(const CompositeShape & cos);
+    CompositeShape(CompositeShape & cos);
     CompositeShape(CompositeShape && cos) noexcept;
     CompositeShape(size_t cus);
     ~CompositeShape();
-    CompositeShape & operator=(CompositeShape & cos);
+    CompositeShape & operator=(const CompositeShape & cos);
     CompositeShape & operator=(CompositeShape && cos) noexcept;
     Shape * operator[](size_t id) noexcept;
     void add_memory();
