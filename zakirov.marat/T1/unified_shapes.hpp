@@ -22,7 +22,7 @@ namespace zakirov
   void output_frame(std::ostream & out, CompositeShape & shapes);
   void full_output(std::ostream & out, CompositeShape & shapes);
   void clear_shapes(Shape ** shapes, size_t quantity);
-  void check_scale_full_composition(Shape * shape, point_t target, double k);
+  void check_scale_full_composition(CompositeShape & shapes, point_t target, double k);
   void scale_element(Shape * shape, point_t target, double k);
   void scale_full_composition(CompositeShape & shapes, point_t target, double k);
 }
