@@ -11,7 +11,7 @@ int main()
 {
   using namespace gavrilova;
   Shape* Shapes[1000] = {nullptr};
-  
+
   size_t nShapes = 0;
   size_t nError = 0;
   double commonAreaBefore = 0;
@@ -20,7 +20,7 @@ int main()
   double koef = 0;
 
   while (!std::cin.eof() && std::cin >> shapeTypeOrScale) {
-    
+
     if (shapeTypeOrScale == "SCALE") {
       if (!(std::cin >> center.x >> center.y >> koef)) {
           std::cerr << " ";
