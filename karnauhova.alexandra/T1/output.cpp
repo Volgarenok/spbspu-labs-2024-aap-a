@@ -2,45 +2,37 @@
 #include <iostream>
 #include <iomanip>
 #include "shape.hpp"
-#include "rectangle.hpp"
-#include "triangle.hpp"
-#include "polygon.hpp"
 void karnauhova::output(std::ostream & out, CompositeShape& shaps, point_t point, double k)
 {
-  size_t m = 0;
-  double sum1 = 0, sum2 = 0;
-  double out1[10000] = {};
-  double out2[10000] = {};
+  output_sum(out, shaps);
+  output_points(out, shaps);
   for (size_t i = 0; i < shaps.size(); i++)
   {
-    sum1 += shaps[i]->getArea();
-    rectangle_t rec1 = shaps[i]->getFrameRect();
-    out1[m] = rec1.pos.x - (rec1.width / 2);
-    out1[m + 1] = rec1.pos.y - (rec1.height / 2);
-    out1[m + 2] = rec1.pos.x + (rec1.width / 2);
-    out1[m + 3] = rec1.pos.y + (rec1.height / 2);
     scale_point(shaps[i], point, k);
-    sum2 += shaps[i]->getArea();
-    rectangle_t rec2 = shaps[i]->getFrameRect();
-    out2[m] = rec2.pos.x - (rec2.width / 2);
-    out2[m + 1] = rec2.pos.y - (rec2.height / 2);
-    out2[m + 2] = rec2.pos.x + (rec2.width / 2);
-    out2[m + 3] = rec2.pos.y + (rec2.height / 2);
-    m += 4;
   }
-  out << std::fixed;
-  out << std::setprecision(1) << sum1;
-  for (size_t i = 0; i < m; i++)
+  output_sum(out, shaps);
+  output_points(out, shaps);
+}
+
+void karnauhova::output_sum(std::ostream & out, CompositeShape& shaps)
+{
+  double sum = 0;
+  for (size_t i = 0; i < shaps.size(); i++)
   {
-    out << std::setprecision(1) << " " << out1[i];
+    sum += shaps[i]->getArea();
   }
-  out << "\n";
-  out << std::setprecision(1) << sum2;
-  for (size_t i = 0; i < m; i++)
+  out << sum << " ";
+}
+
+void karnauhova::output_points(std::ostream & out, CompositeShape& shaps)
+{
+  for (size_t i = 0; i < shaps.size(); i++)
   {
-    out << std::setprecision(1) << " " << out2[i];
+    rectangle_t rec = shaps[i]->getFrameRect();
+    out << std::fixed;
+    out << std::setprecision(1) << rec.pos.x - (rec.width / 2) << " " << rec.pos.y - (rec.height / 2) << " ";
+    out << std::setprecision(1) << rec.pos.x + (rec.width / 2) << " " << rec.pos.y + (rec.height / 2) << "\n";
   }
-  out << "\n";
 }
 
 void karnauhova::scale_point(Shape* object, point_t t, double k)

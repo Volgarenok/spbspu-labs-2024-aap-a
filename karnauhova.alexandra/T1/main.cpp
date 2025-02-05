@@ -13,7 +13,7 @@ int main()
   CompositeShape shaps(1);
   try
   {
-    if (fabric_input(std::cin, shaps, count_error, point, k))
+    if (input(std::cin, shaps, count_error, point, k))
     {
       return 1;
     }
