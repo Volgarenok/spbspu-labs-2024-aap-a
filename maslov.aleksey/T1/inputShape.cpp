@@ -22,22 +22,29 @@ void maslov::inputShapes(std::istream & in, maslov::CompositeShape & compositeSh
     {
       break;
     }
-    Shape* shape = nullptr;
+    Shape * shape = nullptr;
     try
     {
       shape = makeShape(std::cin, name);
-      if (shape)
+    }
+    catch (const std::invalid_argument &)
+    {
+      continue;
+    }
+    if (shape)
+    {
+      try
       {
         compositeShape.push_back(shape);
       }
-      else
+      catch (const std::exception &)
       {
-        incorrectedFlag = true;
+        throw;
       }
     }
-    catch (const std::exception &)
+    else
     {
-      throw;
+      incorrectedFlag = true;
     }
   }
   if (in.eof())
@@ -92,24 +99,17 @@ namespace
   }
   maslov::Shape * makeShape(std::istream & in, const std::string & name)
   {
-    try
+    if (name == "RECTANGLE")
     {
-      if (name == "RECTANGLE")
-      {
-        return makeRectangle(in);
-      }
-      else if (name == "REGULAR")
-      {
-        return makeRegular(in);
-      }
-      else if (name == "PARALLELOGRAM")
-      {
-        return makeParallelogram(in);
-      }
+      return makeRectangle(in);
     }
-    catch (const std::invalid_argument &)
+    else if (name == "REGULAR")
     {
-      return nullptr;
+      return makeRegular(in);
+    }
+    else if (name == "PARALLELOGRAM")
+    {
+      return makeParallelogram(in);
     }
     return nullptr;
   }

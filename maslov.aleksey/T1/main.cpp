@@ -23,8 +23,7 @@ int main()
   std::cin >> centerX >> centerY >> scaleFactor;
   point_t scaleCoordinate = {centerX, centerY};
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << getSumArea(compositeShape) << " ";
-  printCoordinates(std::cout, compositeShape);
+  printData(std::cout, compositeShape);
   std::cout << "\n";
   try
   {
@@ -36,8 +35,7 @@ int main()
     destroyShapes(compositeShape);
     return 1;
   }
-  std::cout << getSumArea(compositeShape) << " ";
-  printCoordinates(std::cout, compositeShape);
+  printData(std::cout, compositeShape);
   std::cout << "\n";
   destroyShapes(compositeShape);
 }
