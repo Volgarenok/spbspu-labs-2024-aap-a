@@ -94,7 +94,7 @@ int main()
   }
   catch(const std::bad_alloc& e)
   {
-    std::cerr << 'Not enough memory for operatopn!\n';
+    std::cerr << "Not enough memory for operatopn!\n";
     return 1;
   }
   std::cout << comp_sh.getArea() << " ";

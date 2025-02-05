@@ -27,7 +27,7 @@ double brevnov::Ellipse::getR2() const noexcept
 
 void brevnov::Ellipse::updateEllipse(point_t center, double r1, double r2)
 {
-  newellipse = new Ellipse(center, r1, r2);
+  Ellipse * newellipse = new Ellipse(center, r1, r2);
   delete this;
   this = newellipse;
 }
