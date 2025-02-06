@@ -23,7 +23,16 @@ char* asafov::inputString()
     if (count == 0)
     {
       count = length;
-      string = resize(string, length, length);
+      char* newstring = nullptr;
+      try
+      {
+        newstring = resize(string, length, length);
+      }
+      catch (std::bad_alloc)
+      {
+        delete[] string;
+      }
+      string = newstring;
     }
   }
   if (length == 0)
