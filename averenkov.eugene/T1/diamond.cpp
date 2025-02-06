@@ -7,31 +7,12 @@ namespace
 {
   bool checkPoints(const averenkov::point_t& a, const averenkov::point_t& b, const averenkov::point_t& c)
   {
-    bool check = false;
-    if (a.x == b.x && a.y == c.y)
-    {
-      check = true;
-    }
-    else if (a.x == c.x && a.y == b.y)
-    {
-      check = true;
-    }
-    else if (b.x == a.x && b.y == c.y)
-    {
-      check = true;
-    }
-    else if (b.x == c.x && b.y == a.y)
-    {
-      check = true;
-    }
-    else if (c.x == a.x && c.y == b.y)
-    {
-      check = true;
-    }
-    else if (c.x == b.x && c.y == a.y)
-    {
-      check = true;
-    }
+    bool check = (a.x == b.x && a.y == c.y);
+    check = check || (a.x == c.x && a.y == b.y);
+    check = check || (b.x == a.x && b.y == c.y);
+    check = check || (b.x == c.x && b.y == a.y);
+    check = check || (c.x == a.x && c.y == b.y);
+    check = check || (c.x == b.x && c.y == a.y);
     return check;
   }
   void destroy(averenkov::Rectangle** list)
@@ -91,10 +72,10 @@ namespace
           {
             rectangles[index] = new averenkov::Rectangle(rect_a, rect_c);
           }
-          catch(...)
+          catch (...)
           {
             destroy(rectangles);
-            throw std::invalid_argument("Error build rectangles");
+            throw;
           }
           index++;
         }
