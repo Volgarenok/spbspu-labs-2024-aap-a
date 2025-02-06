@@ -5,7 +5,7 @@
 
 namespace dirti
 {
-  char str_min_recursed(const char * str, const size_t size);
+  char str_min_recursed(const char * str, size_t size);
 }
 
 #endif

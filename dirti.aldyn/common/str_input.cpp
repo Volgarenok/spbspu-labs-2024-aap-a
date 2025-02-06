@@ -2,7 +2,7 @@
 
 namespace
 {
-  char * new_storage(char * str, size_t & capacity)
+  char * new_storage(const char * str, size_t & capacity)
   {
     capacity += 1;
     char * str2 = reinterpret_cast< char * >(malloc(sizeof(char) * capacity));
@@ -17,7 +17,6 @@ namespace
     return str2;
   }
 }
-
 
 char * dirti::str_input(std::istream & input, size_t & capacity)
 {
