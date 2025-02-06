@@ -70,7 +70,7 @@ void gavrilova::CompositeShape::pop_back()
   if (size_ == 0) {
     throw std::out_of_range("No shape to pop");
   }
-  delete shapes_[size_--];
+  delete shapes_[--size_];
 }
 
 gavrilova::Shape* gavrilova::CompositeShape::at(size_t id)
