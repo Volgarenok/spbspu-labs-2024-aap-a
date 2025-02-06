@@ -44,7 +44,7 @@ namespace brevnov
     out << leftx << " " << lefty << " " <<  rightx << " " << righty;
   }
 
-  void print_frame_coordinates(Shape* const * shapes, size_t count, std::ostream & out)
+  void print_frame_coordinates(const Shape * const * shapes, size_t count, std::ostream & out)
   {
     find_frame_coordinates(shapes[0]->getFrameRect(), out);
     for (size_t i = 1; i < count; ++i)
