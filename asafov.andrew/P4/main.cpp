@@ -29,7 +29,11 @@ int main()
     delete[] unusedLetters;
     delete[] str;
   }
-  std::cout << unusedLetters << '\n';
+  for (size_t i = 0; unusedLetters[i] != '\0'; i++)
+  {
+    std::cout << unusedLetters[i];
+  }
+  std::cout << '\n';
 
   delete[] unusedLetters;
   delete[] str;
