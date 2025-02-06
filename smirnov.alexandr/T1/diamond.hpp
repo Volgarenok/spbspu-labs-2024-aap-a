@@ -18,10 +18,7 @@ namespace smirnov
     point_t vertex1;
     point_t vertex2;
     point_t vertex3;
-    /*point_t center;*/
     Parallelogram parallelogram;
-    /*point_t rotatePoint(const point_t& point, const point_t& center, double angle_rad) const;
-    point_t computeCenter(const point_t& p1, const point_t& p2, const point_t& p3) const;*/
   };
 }
 #endif
