@@ -26,7 +26,7 @@ int main()
     return 1;
   }
 
-  for (size_t i = 0; i < 26; i++)
+  for (size_t i = 0; unusedLetters[i] != '\0'; i++)
   {
     std::cout << unusedLetters[i];
   }
