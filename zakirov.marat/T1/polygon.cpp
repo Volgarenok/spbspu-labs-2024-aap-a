@@ -80,8 +80,9 @@ void zakirov::Polygon::scale(double k)
 {
   for (size_t i = 0; i < size_; ++i)
   {
-    points_[i].x = getFrameRect().pos.x - (getFrameRect().pos.x - points_[i].x) * k;
-    points_[i].y = getFrameRect().pos.y - (getFrameRect().pos.y - points_[i].y) * k;
+    rectangle_t object_frame = getFrameRect();
+    points_[i].x = object_frame.pos.x - (object_frame.pos.x - points_[i].x) * k;
+    points_[i].y = object_frame.pos.y - (object_frame.pos.y - points_[i].y) * k;
   }
 }
 
