@@ -27,6 +27,9 @@ int main()
       std::cerr << e.what();
       continue;
     }
+    if (!shp) {
+      continue;
+    }
     try {
       shapes.push_back(shp);
     } catch (const std::exception& e) {
