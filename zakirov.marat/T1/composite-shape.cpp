@@ -76,7 +76,7 @@ zakirov::rectangle_t zakirov::CompositeShape::getFrameRect() const
   return {most_right - most_left, most_top - most_low, center};
 }
 
-void zakirov::CompositeShape::move(const point_t & target) noexcept
+void zakirov::CompositeShape::move(const point_t & target)
 {
   for (size_t i = 0; i < shapes_quantity_; ++i)
   {
@@ -84,7 +84,7 @@ void zakirov::CompositeShape::move(const point_t & target) noexcept
   }
 }
 
-void zakirov::CompositeShape::move(double bias_x, double bias_y) noexcept
+void zakirov::CompositeShape::move(double bias_x, double bias_y)
 {
   point_t target = {getFrameRect().pos.x + bias_x, getFrameRect().pos.y + bias_y};
 }

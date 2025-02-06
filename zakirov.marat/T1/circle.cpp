@@ -73,5 +73,7 @@ void zakirov::Circle::scale(double k)
 
 zakirov::Shape * zakirov::Circle::clone() const
 {
-
+  point_t center = getFrameRect().pos;
+  double radius = getFrameRect().width / 2;
+  return make_circle(center.x, center.y, radius);
 }
