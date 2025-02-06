@@ -3,9 +3,9 @@
 #include <stdexcept>
 #include "base-types.hpp"
 
-zakirov::Polygon::Polygon(size_t size, point_t * points):
+zakirov::Polygon::Polygon(size_t size, point_t & points):
   size_(size),
-  points_(points)
+  points_(& points)
 {
   if (size <= 2 || size % 2 != 0)
   {
@@ -14,11 +14,11 @@ zakirov::Polygon::Polygon(size_t size, point_t * points):
 
   for (size_t i = 0; i < (size - 1); ++i)
   {
-    double x = points[i].x;
-    double y = points[i].y;
+    double x = points_[i].x;
+    double y = points_[i].y;
     for (size_t j = (i + 1); j < size; ++j)
     {
-      if ((x == points[j].x) && (y == points[j].y))
+      if ((x == points_[j].x) && (y == points_[j].y))
       {
         throw std::invalid_argument("Incorrect data");
       }
@@ -60,7 +60,7 @@ zakirov::rectangle_t zakirov::Polygon::getFrameRect() const
   return {max_x - min_x, max_y - min_y, get_middle({min_x, min_y}, {max_x, max_y})};
 }
 
-void zakirov::Polygon::move(point_t target)
+void zakirov::Polygon::move(const point_t & target)
 {
   rectangle_t object_frame = getFrameRect();
   point_t bias = {target.x - object_frame.pos.x, target.y - object_frame.pos.y};

@@ -9,11 +9,11 @@ namespace zakirov
   class Polygon final: public Shape
   {
   public:
-    Polygon(size_t size, point_t * points);
+    Polygon(size_t size, point_t & points);
     ~Polygon();
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void move(point_t target) override;
+    void move(const point_t &  target) override;
     void move(double bias_x, double bias_y) override;
     void scale(double k) override;
   private:

@@ -2,13 +2,6 @@
 #include <cstring>
 #include <stdexcept>
 #include "unified_shapes.hpp"
-#include "base-types.hpp"
-#include "ring.hpp"
-#include "rectangle.hpp"
-#include "polygon.hpp"
-#include "circle.hpp"
-#include "shape.hpp"
-#include <iostream>
 
 zakirov::CompositeShape::CompositeShape() :
   shapes_quantity_(0)
@@ -54,7 +47,7 @@ zakirov::rectangle_t zakirov::CompositeShape::getFrameRect() const
   return {most_right - most_left, most_top - most_low, center};
 }
 
-void zakirov::CompositeShape::move(point_t target) noexcept
+void zakirov::CompositeShape::move(const point_t & target) noexcept
 {
   for (size_t i = 0; i < shapes_quantity_; ++i)
   {
@@ -92,6 +85,7 @@ void zakirov::CompositeShape::pop_back()
   {
     throw std::logic_error("ERROR: empty array");
   }
+
   --shapes_quantity_;
   shapes_[shapes_quantity_]->~Shape();
   free(shapes_[shapes_quantity_]);
@@ -114,12 +108,7 @@ zakirov::Shape * zakirov::CompositeShape::operator[](size_t id) const noexcept
 
 bool zakirov::CompositeShape::empty() const noexcept
 {
-  if (shapes_quantity_ != 0)
-  {
-    return 1;
-  }
-
-  return 0;
+  return shapes_quantity_ != 0;
 }
 
 size_t zakirov::CompositeShape::size() const noexcept

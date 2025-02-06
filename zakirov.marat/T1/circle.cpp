@@ -5,7 +5,7 @@
 #include "ring.hpp"
 #include "unified_shapes.hpp"
 
-zakirov::Circle::Circle(point_t center, double radius)
+zakirov::Circle::Circle(const point_t & center, double radius)
 {
   if (radius <= 0)
   {
@@ -42,7 +42,7 @@ zakirov::rectangle_t zakirov::Circle::getFrameRect() const
   return rings_[rings_size_ - 1]->getFrameRect();
 }
 
-void zakirov::Circle::move(point_t target)
+void zakirov::Circle::move(const point_t & target)
 {
   for (size_t i = 0; i < rings_size_; ++i)
   {

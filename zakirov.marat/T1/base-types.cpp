@@ -15,12 +15,7 @@ zakirov::point_t zakirov::get_middle(const point_t & first_p, const point_t & se
   return {middle_x, middle_y};
 }
 
-void zakirov::move_point(point_t & object, point_t target)
-{
-  object = target;
-}
-
 void zakirov::move_point(point_t & object, double bias_x, double bias_y)
 {
-  move_point(object, {object.x + bias_x, object.y + bias_y});
+  object = {object.x + bias_x, object.y + bias_y};
 }

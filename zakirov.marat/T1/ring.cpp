@@ -2,7 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 
-zakirov::Ring::Ring(point_t center, double ex_radius, double in_radius):
+zakirov::Ring::Ring(const point_t & center, double ex_radius, double in_radius):
   center_(center),
   ex_radius_(ex_radius),
   in_radius_(in_radius)
@@ -27,9 +27,9 @@ zakirov::rectangle_t zakirov::Ring::getFrameRect() const
   return {ex_radius_ * 2, ex_radius_ * 2, center_};
 }
 
-void zakirov::Ring::move(point_t target)
+void zakirov::Ring::move(const point_t & target)
 {
-  move_point(center_, target);
+  center_ = target;
 }
 
 void zakirov::Ring::move(double bias_x, double bias_y)

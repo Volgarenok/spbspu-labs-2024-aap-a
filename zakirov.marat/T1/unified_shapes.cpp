@@ -103,19 +103,19 @@ namespace
     return new_array;
   }
 
-  zakirov::point_t * convert_polygon(const double * original_data)
+  zakirov::point_t & convert_polygon(const double & original_data)
   {
-    size_t points_size = static_cast< size_t >(original_data[1] / 2);
+    size_t points_size = static_cast< size_t >((& original_data)[1] / 2);
     zakirov::point_t * converted_data = static_cast< zakirov::point_t * >(malloc(points_size * sizeof(zakirov::point_t)));
     size_t counter = 2;
     for (size_t i = 0; i < points_size; ++i)
     {
-      zakirov::point_t point = {original_data[counter], original_data[counter + 1]};
+      zakirov::point_t point = {(& original_data)[counter], (& original_data)[counter + 1]};
       converted_data[i] = point;
       counter += 2;
     }
-
-    return converted_data;
+    zakirov::point_t & returned_data = * converted_data;
+    return returned_data;
   }
 }
 
@@ -168,7 +168,7 @@ zakirov::Ring * zakirov::make_ring(double center_x, double center_y, double ex_r
   }
 }
 
-zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t * points)
+zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t & points)
 {
   Polygon * polygon = static_cast< Polygon * >(malloc(sizeof(Polygon)));
   try
@@ -178,7 +178,7 @@ zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t * points)
   }
   catch (const std::invalid_argument & e)
   {
-    free(points);
+    free(& points);
     free(polygon);
     throw;
   }
@@ -186,11 +186,11 @@ zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t * points)
   return new (polygon) Polygon(points_num, points);
 }
 
-zakirov::Shape * zakirov::make_shape(const double * data)
+zakirov::Shape * zakirov::make_shape(double * data)
 {
   if (data[0] == 5.0)
   {
-    point_t * converted_data = convert_polygon(data);
+    point_t & converted_data = convert_polygon(* data);
     size_t points_size = static_cast< size_t >(data[1] / 2);
     Polygon * polygon = make_polygon(points_size, converted_data);
     return polygon;
@@ -305,7 +305,7 @@ double * zakirov::get_data(std::istream & in)
   return data;
 }
 
-void zakirov::check_scale_full_composition(CompositeShape & shapes, point_t target, double k)
+void zakirov::check_scale_full_composition(CompositeShape & shapes, const point_t & target, double k)
 {
   if (k <= 0)
   {
@@ -315,7 +315,7 @@ void zakirov::check_scale_full_composition(CompositeShape & shapes, point_t targ
   scale_full_composition(shapes, target, k);
 }
 
-void zakirov::scale_full_composition(CompositeShape & shapes, point_t target, double k)
+void zakirov::scale_full_composition(CompositeShape & shapes, const point_t & target, double k)
 {
   for (size_t i = 0; i < shapes.size(); ++i)
   {
@@ -323,7 +323,7 @@ void zakirov::scale_full_composition(CompositeShape & shapes, point_t target, do
   }
 }
 
-void zakirov::scale_element(Shape * shape, point_t target, double k)
+void zakirov::scale_element(Shape * shape, const point_t & target, double k)
 {
   point_t nailed_p1 = shape->getFrameRect().pos;
   shape->move(target);

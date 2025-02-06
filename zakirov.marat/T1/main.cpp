@@ -3,10 +3,9 @@
 #include "composite-shape.hpp"
 #include "unified_shapes.hpp"
 
-using namespace zakirov;
-
 int main()
 {
+  using namespace zakirov;
   CompositeShape shapes;
   bool shape_flag = false;
   double * scale_data = nullptr;

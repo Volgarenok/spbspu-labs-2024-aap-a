@@ -9,11 +9,11 @@ namespace zakirov
   class Circle final: public Shape
   {
   public:
-    Circle(point_t center, double radius);
+    Circle(const point_t & center, double radius);
     ~Circle();
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void move(point_t target) override;
+    void move(const point_t & target) override;
     void move(double bias_x, double bias_y) override;
     void scale(double k) override;
   private:

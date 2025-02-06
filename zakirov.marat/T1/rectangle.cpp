@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include "base-types.hpp"
 
-zakirov::Rectangle::Rectangle(point_t bottom_left, point_t top_right):
+zakirov::Rectangle::Rectangle(const point_t & bottom_left, const point_t & top_right):
   bottom_left_(bottom_left),
   top_right_(top_right)
 {
@@ -26,7 +26,7 @@ zakirov::rectangle_t zakirov::Rectangle::getFrameRect() const
   return {width, height, position};
 }
 
-void zakirov::Rectangle::move(point_t target)
+void zakirov::Rectangle::move(const point_t & target)
 {
   point_t center = getFrameRect().pos;
   point_t bias = {target.x - center.x, target.y - center.y};
