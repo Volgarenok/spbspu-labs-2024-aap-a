@@ -1,7 +1,7 @@
 #include "shape.hpp"
 #include <stdexcept>
 
-void abramov::Shape::doScale(double k)
+void abramov::Shape::scaleSafe(double k)
 {
   if (k <= 0)
   {
