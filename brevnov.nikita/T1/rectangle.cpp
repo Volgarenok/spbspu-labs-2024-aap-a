@@ -40,7 +40,6 @@ brevnov::Rectangle::~Rectangle()
   {
     delete shapes_[i];
   }
-  delete[] shapes_;
 }
 
 double brevnov::Rectangle::getArea() const noexcept
