@@ -1,6 +1,7 @@
 #include "rectangle.hpp"
 #include <stdexcept>
 #include "base-types.hpp"
+#include "unified_shapes.hpp"
 
 zakirov::Rectangle::Rectangle(const point_t & bottom_left, const point_t & top_right):
   bottom_left_(bottom_left),
@@ -36,8 +37,7 @@ void zakirov::Rectangle::move(const point_t & target)
 
 void zakirov::Rectangle::move(double bias_x, double bias_y)
 {
-  move_point(top_right_, bias_x, bias_y);
-  move_point(bottom_left_, bias_x, bias_y);
+  move({getFrameRect().pos.x + bias_x, getFrameRect().pos.y + bias_y});
 }
 
 void zakirov::Rectangle::scale(double k)
@@ -47,9 +47,13 @@ void zakirov::Rectangle::scale(double k)
     throw std::invalid_argument("Incorrect coefficient");
   }
 
-  point_t center = getFrameRect().pos;
-  point_t bias = {(top_right_.x - center.x) * (k - 1), (top_right_.y - center.y) * (k - 1)};
+  double scale_distance_x = (top_right_.x - getFrameRect().pos.x) * (k - 1);
+  double scale_distance_y = (top_right_.y - getFrameRect().pos.y) * (k - 1);
+  move_point(top_right_, scale_distance_x, scale_distance_y);
+  move_point(bottom_left_, -scale_distance_x, -scale_distance_y);
+}
 
-  move_point(top_right_, bias.x, bias.y);
-  move_point(bottom_left_, -bias.x, -bias.y);
+zakirov::Shape * zakirov::Rectangle::clone() const
+{
+  return make_rectangle(bottom_left_.x, bottom_left_.y, top_right_.x, top_right_.y);
 }

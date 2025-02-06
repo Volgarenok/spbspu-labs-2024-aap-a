@@ -16,6 +16,7 @@ namespace zakirov
     void move(const point_t & target) override;
     void move(double bias_x, double bias_y) override;
     void scale(double k) override;
+    Shape * clone() const override;
   private:
     static constexpr size_t rings_size_ = 100;
     static constexpr double first_in_radius_ = 0.01;

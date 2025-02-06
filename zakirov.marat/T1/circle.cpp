@@ -70,3 +70,8 @@ void zakirov::Circle::scale(double k)
     rings_[i]->scale(k);
   }
 }
+
+zakirov::Shape * zakirov::Circle::clone() const
+{
+
+}

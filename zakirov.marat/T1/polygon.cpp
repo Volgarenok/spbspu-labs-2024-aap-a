@@ -2,6 +2,7 @@
 #include <cstddef>
 #include <stdexcept>
 #include "base-types.hpp"
+#include "unified_shapes.hpp"
 
 zakirov::Polygon::Polygon(size_t size, point_t & points):
   size_(size),
@@ -88,4 +89,9 @@ void zakirov::Polygon::scale(double k)
     points_[i].x = object_frame.pos.x - (object_frame.pos.x - points_[i].x) * k;
     points_[i].y = object_frame.pos.y - (object_frame.pos.y - points_[i].y) * k;
   }
+}
+
+zakirov::Shape * zakirov::Polygon::clone() const
+{
+  return make_polygon(size_, * points_);
 }

@@ -28,11 +28,17 @@ int main()
     {
       shapes.push_back(make_shape(data));
     }
-    catch (const std::invalid_argument)
+    catch (const std::invalid_argument & e)
     {
       shape_flag = true;
       free(data);
       continue;
+    }
+    catch (const std::logic_error & e)
+    {
+      free(data);
+      std::cerr << "Warning! Error in scale composition." << '\n';
+      return 1;
     }
 
     free(data);
@@ -47,6 +53,7 @@ int main()
   }
 
   full_output(std::cout, shapes);
+  std::cout << '\n';
   point_t target{scale_data[2], scale_data[3]};
   double coefficient = scale_data[4];
   try
@@ -61,6 +68,7 @@ int main()
   }
 
   full_output(std::cout, shapes);
+  std::cout << '\n';
   if (shape_flag)
   {
     std::cerr << "Warning! One or more figures are specified incorrectly." << '\n';

@@ -348,7 +348,7 @@ void zakirov::output_frame(std::ostream & out, CompositeShape & shapes)
   point_t frame_bottom_left{frame.pos.x - frame.width / 2, frame.pos.y - frame.height / 2};
   point_t frame_top_right{frame.pos.x + frame.width / 2, frame.pos.y + frame.height / 2};
   out << frame_bottom_left.x << ' ' << frame_bottom_left.y << ' ';
-  out << frame_top_right.x << ' ' << frame_top_right.y << '\n';
+  out << frame_top_right.x << ' ' << frame_top_right.y;
 }
 
 double zakirov::get_total_area(Shape ** shapes, size_t size)

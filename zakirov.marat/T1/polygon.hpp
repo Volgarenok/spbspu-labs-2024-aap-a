@@ -16,6 +16,7 @@ namespace zakirov
     void move(const point_t &  target) override;
     void move(double bias_x, double bias_y) override;
     void scale(double k) override;
+    Shape * clone() const override;
   private:
     size_t size_;
     point_t * points_;

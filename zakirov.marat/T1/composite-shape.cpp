@@ -2,14 +2,44 @@
 #include <stdexcept>
 #include "unified_shapes.hpp"
 
-zakirov::CompositeShape::CompositeShape() :
+zakirov::CompositeShape::CompositeShape():
   shapes_quantity_(0)
-{
-}
+{}
 
 zakirov::CompositeShape::~CompositeShape()
 {
   clear_shapes(shapes_, shapes_quantity_);
+}
+
+zakirov::CompositeShape::CompositeShape(const CompositeShape & copy):
+  shapes_quantity_(copy.shapes_quantity_)
+{
+  size_t new_shapes_quantity = 0;
+  try
+  {
+    for (size_t i = 0; i < copy.size(); ++i)
+    {
+      shapes_[i] = copy.shapes_[i]->clone();
+      ++new_shapes_quantity;
+    }
+  }
+  catch (const std::invalid_argument & e)
+  {
+    clear_shapes(shapes_, new_shapes_quantity);
+    throw;
+  }
+}
+
+zakirov::CompositeShape::CompositeShape(CompositeShape &&copy):
+  shapes_quantity_(copy.shapes_quantity_)
+{
+  for (size_t i = 0; i < copy.size(); ++i)
+  {
+    shapes_[i] = copy.shapes_[i];
+    copy.shapes_[i] = nullptr;
+  }
+
+  copy.shapes_quantity_ = 0;
 }
 
 double zakirov::CompositeShape::getArea() noexcept
@@ -56,10 +86,7 @@ void zakirov::CompositeShape::move(const point_t & target) noexcept
 
 void zakirov::CompositeShape::move(double bias_x, double bias_y) noexcept
 {
-  for (size_t i = 0; i < shapes_quantity_; ++i)
-  {
-    shapes_[i]->move(bias_x, bias_y);
-  }
+  point_t target = {getFrameRect().pos.x + bias_x, getFrameRect().pos.y + bias_y};
 }
 
 void zakirov::CompositeShape::scale(double k)
@@ -72,10 +99,12 @@ void zakirov::CompositeShape::scale(double k)
 
 void zakirov::CompositeShape::push_back(Shape * shape)
 {
-  if (shape)
+  if (!shape || shapes_quantity_ == shapes_size_)
   {
-    shapes_[shapes_quantity_++] = shape;
+    throw std::logic_error("Something went wrong in shapes composition");
   }
+
+  shapes_[shapes_quantity_++] = shape;
 }
 
 void zakirov::CompositeShape::pop_back()
@@ -85,8 +114,7 @@ void zakirov::CompositeShape::pop_back()
     throw std::logic_error("ERROR: empty array");
   }
 
-  --shapes_quantity_;
-  shapes_[shapes_quantity_]->~Shape();
+  shapes_[--shapes_quantity_]->~Shape();
   free(shapes_[shapes_quantity_]);
 }
 

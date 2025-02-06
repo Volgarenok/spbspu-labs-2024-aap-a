@@ -10,10 +10,12 @@ namespace zakirov
   public:
     CompositeShape();
     ~CompositeShape();
+    CompositeShape(const CompositeShape & copy);
+    CompositeShape(CompositeShape &&copy);
     double getArea() noexcept;
     rectangle_t getFrameRect() const;
-    void move(const point_t & target) noexcept;
-    void move(double bias_x, double bias_y) noexcept;
+    void move(const point_t & target);
+    void move(double bias_x, double bias_y);
     void scale(double k);
     void push_back(Shape * shapes);
     void pop_back();
@@ -23,7 +25,7 @@ namespace zakirov
     size_t size() const noexcept;
   private:
     static constexpr size_t shapes_size_ = 10000;
-    Shape * shapes_[shapes_size_] = {};
+    Shape * shapes_[shapes_size_];
     size_t shapes_quantity_;
   };
 }
