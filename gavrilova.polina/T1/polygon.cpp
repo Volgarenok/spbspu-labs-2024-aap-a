@@ -1,20 +1,26 @@
 #include "polygon.hpp"
 #include "shapeManip.hpp"
 
+void clearTriang(gavrilova::Triangle** triangles, size_t n) noexcept {
+  for (size_t i = 0; i < n; ++i) {
+    delete triangles[i];
+  }
+  delete[] triangles;
+}
+
 gavrilova::Polygon::Polygon(size_t nPoints, const point_t* verteces):
-  size_(0),
-  triangles_(nullptr)
+  size_(nPoints - 2),
+  triangles_(new Triangle*[size_])
 {
   if (nPoints < 3) {
     throw std::logic_error("Polygon must have at least 3 vertices.");
   }
-  triangles_ = new Triangle*[nPoints - 2];
-  for (size_t i = 0; i < (nPoints - 2); ++i) {
+
+  for (size_t i = 0; i < size_; ++i) {
     try {
       triangles_[i] = new Triangle(verteces[0], verteces[i + 1], verteces[i + 2]);
-      ++size_;
     } catch (const std::bad_alloc&) {
-      clear();
+      clearTriang(triangles_, size_);
       throw;
     }
   }
@@ -22,9 +28,8 @@ gavrilova::Polygon::Polygon(size_t nPoints, const point_t* verteces):
 
 gavrilova::Polygon::Polygon(const Polygon& other):
   size_(other.size_),
-  triangles_(nullptr)
+  triangles_(new Triangle*[other.size_])
 {
-  triangles_ = new Triangle*[other.size_];
   for (size_t i = 0; i < size_; ++i) {
     triangles_[i] = other.triangles_[i];
   }
@@ -32,7 +37,7 @@ gavrilova::Polygon::Polygon(const Polygon& other):
 
 gavrilova::Polygon::~Polygon()
 {
-  clear();
+  clearTriang(triangles_, size_);
 }
 
 double gavrilova::Polygon::getArea() const
@@ -84,10 +89,3 @@ gavrilova::Shape* gavrilova::Polygon::clone() const
   return new Polygon(*this);
 }
 
-void gavrilova::Polygon::clear() noexcept
-{
-  for (size_t i = 0; i < size_; ++i) {
-    delete triangles_[i];
-  }
-  delete[] triangles_;
-}

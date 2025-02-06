@@ -13,11 +13,11 @@ gavrilova::CompositeShape::CompositeShape(size_t capacity):
 {}
 
 gavrilova::CompositeShape::CompositeShape(const CompositeShape& other):
-  size_(0),
+  size_(other.size_),
   capacity_(other.capacity_),
   shapes_(new Shape*[capacity_])
 {
-  for (size_t i = 0; i < other.size_; ++i) {
+  for (size_t i = 0; i < size_; ++i) {
     shapes_[i] = other.shapes_[i]->clone();
   }
 }
@@ -73,19 +73,33 @@ void gavrilova::CompositeShape::pop_back()
   delete shapes_[--size_];
 }
 
+gavrilova::Shape* gavrilova::CompositeShape::operator[](size_t id) noexcept
+{
+  return shapes_[id];
+}
+
+const gavrilova::Shape* gavrilova::CompositeShape::operator[](size_t id) const noexcept
+{
+  return shapes_[id];
+}
+
 gavrilova::Shape* gavrilova::CompositeShape::at(size_t id)
 {
-  if (id >= size_) {
+  if (id >= size_)
+  {
     throw std::out_of_range("Index out of range");
   }
   return shapes_[id];
 }
 
-gavrilova::Shape* gavrilova::CompositeShape::operator[](size_t id) const noexcept
+const gavrilova::Shape* gavrilova::CompositeShape::at(size_t id) const
 {
+  if (id >= size_)
+  {
+    throw std::out_of_range("Index out of range");
+  }
   return shapes_[id];
 }
-
 
 bool gavrilova::CompositeShape::empty() const noexcept
 {

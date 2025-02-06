@@ -111,7 +111,7 @@ gavrilova::Ellipse* make_ellipse(std::istream& in, size_t& nError)
   try {
     gavrilova::Ellipse* ellipse = new gavrilova::Ellipse(center, radiusX, radiusY);
     return ellipse;
-  } catch (const std::exception&) {
+  } catch (const std::bad_alloc&) {
     ++nError;
     return nullptr;
   }

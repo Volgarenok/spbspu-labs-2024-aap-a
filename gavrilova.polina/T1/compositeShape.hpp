@@ -17,8 +17,10 @@ namespace gavrilova {
 
     void push_back(Shape* shp);
     void pop_back();
-    Shape* operator[](size_t id) const noexcept;
+    Shape* operator[](size_t id) noexcept;
+    const Shape* operator[](size_t id) const noexcept;
     Shape* at(size_t id);
+    const Shape* at(size_t id) const;
     bool empty() const noexcept;
     size_t size() const noexcept;
     void scale(double k);
