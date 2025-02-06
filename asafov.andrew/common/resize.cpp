@@ -1,29 +1,12 @@
 #include "resize.hpp"
 #include <exception>
 
-char* asafov::resize(char* string, size_t length)
+char* asafov::resize(const char* string, size_t length, size_t additionallength)
 {
-  size_t i = 0;
-  char* oldString = string;
-  char* newString = nullptr;
-  try
+  char* newString = new char[length + additionallength];
+  for (size_t i = 0; i < length; i++)
   {
-    newString = new char[length + 8];
+    newString[i] = string[i];
   }
-  catch (const std::bad_alloc & e)
-  {
-    return oldString;
-  }
-  while (i < length)
-  {
-    newString[i] = oldString[i];
-    i++;
-  }
-  while (i < length + 8)
-  {
-    newString[i] = '\0';
-    i++;
-  }
-  delete[] oldString;
   return newString;
 }

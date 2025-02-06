@@ -6,12 +6,8 @@
 char* asafov::inputString()
 {
   size_t length = 0;
-  size_t count = 8;
+  size_t count = 1;
   char* string = new char[count];
-  for(size_t i = 0; i < 8; i++)
-  {
-    string[i] = '\0';
-  }
   char ch = 0;
   while (!std::cin.eof())
   {
@@ -19,15 +15,31 @@ char* asafov::inputString()
     std::cin >> ch;
     if(std::cin.fail() || std::cin.eof())
     {
+      string[length] = '\0';
       break;
     }
     string[length] = ch;
     length++;
     if (count == 0)
     {
-      count = 8;
-      string = asafov::resize(string, length);
+      count = length;
+      char* newstring = nullptr;
+      try
+      {
+        newstring = resize(string, length, length);
+      }
+      catch (const std::bad_alloc& e)
+      {
+        delete[] string;
+        throw e;
+      }
+      delete[] string;
+      string = newstring;
     }
+  }
+  if (length == 0)
+  {
+    string[0] = 0;
   }
   return string;
 }
