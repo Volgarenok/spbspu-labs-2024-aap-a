@@ -42,11 +42,6 @@ void zakirov::Rectangle::move(double bias_x, double bias_y)
 
 void zakirov::Rectangle::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::invalid_argument("Incorrect coefficient");
-  }
-
   double scale_distance_x = (top_right_.x - getFrameRect().pos.x) * (k - 1);
   double scale_distance_y = (top_right_.y - getFrameRect().pos.y) * (k - 1);
   move_point(top_right_, scale_distance_x, scale_distance_y);

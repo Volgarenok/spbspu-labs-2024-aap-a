@@ -60,11 +60,6 @@ void zakirov::Circle::move(double bias_x, double bias_y)
 
 void zakirov::Circle::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::invalid_argument("Incorrect coefficient");
-  }
-
   for (size_t i = 0; i < rings_size_; ++i)
   {
     rings_[i]->scale(k);
