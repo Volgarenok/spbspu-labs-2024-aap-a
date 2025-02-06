@@ -4,11 +4,12 @@
 
 sveshnikov::CompositeShape::CompositeShape():
   size_(0),
-  shapes_{nullptr}
+  shapes_(new Shape *[10000]())
 {}
 
 sveshnikov::CompositeShape::CompositeShape(const CompositeShape &copied_shp):
-  size_(copied_shp.size_)
+  size_(copied_shp.size_),
+  shapes_(new Shape *[10000])
 {
   for (size_t i = 0; i < size_; i++)
   {
@@ -17,18 +18,16 @@ sveshnikov::CompositeShape::CompositeShape(const CompositeShape &copied_shp):
 }
 
 sveshnikov::CompositeShape::CompositeShape(CompositeShape &&copied_shp):
-  size_(copied_shp.size_)
+  size_(copied_shp.size_),
+  shapes_(copied_shp.shapes_)
 {
-  for (size_t i = 0; i < size_; i++)
-  {
-    push_back(copied_shp.shapes_[i]);
-    copied_shp.shapes_[i] = nullptr;
-  }
+  copied_shp.shapes_ = nullptr;
 }
 
 sveshnikov::CompositeShape::~CompositeShape()
 {
   clear();
+  delete[] shapes_;
 }
 
 sveshnikov::CompositeShape &sveshnikov::CompositeShape::operator=(const CompositeShape &comp_shp)
@@ -51,11 +50,8 @@ sveshnikov::CompositeShape &sveshnikov::CompositeShape::operator=(CompositeShape
   {
     clear();
     size_ = comp_shp.size_;
-    for (size_t i = 0; i < size_; i++)
-    {
-      shapes_[i] = comp_shp.shapes_[i];
-      comp_shp.shapes_[i] = nullptr;
-    }
+    shapes_ = comp_shp.shapes_;
+    comp_shp.shapes_ = nullptr;
   }
   return *this;
 }
