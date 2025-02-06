@@ -328,7 +328,7 @@ void zakirov::scale_full_composition(CompositeShape & shapes, const point_t & ta
   }
 }
 
-void zakirov::output_frame(std::ostream & out, CompositeShape & shapes)
+void zakirov::output_frame(std::ostream & out, const CompositeShape & shapes)
 {
   for (size_t i = 0; i < shapes.size() - 1; ++i)
   {
@@ -346,7 +346,7 @@ void zakirov::output_frame(std::ostream & out, CompositeShape & shapes)
   out << frame_top_right.x << ' ' << frame_top_right.y;
 }
 
-double zakirov::get_total_area(Shape ** shapes, size_t size)
+double zakirov::get_total_area(const CompositeShape & shapes, size_t size)
 {
   double total_area = 0.0;
   for (size_t i = 0; i < size; ++i)
@@ -366,7 +366,7 @@ void zakirov::clear_shapes(Shape ** shapes, size_t quantity)
   }
 }
 
-void zakirov::full_output(std::ostream & out, CompositeShape & shapes)
+void zakirov::full_output(std::ostream & out, const CompositeShape & shapes)
 {
   out << std::fixed << std::setprecision(1);
   out << shapes.getArea() << ' ';

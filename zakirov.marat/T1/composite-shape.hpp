@@ -12,7 +12,7 @@ namespace zakirov
     ~CompositeShape();
     CompositeShape(const CompositeShape & copy);
     CompositeShape(CompositeShape &&copy);
-    double getArea() noexcept;
+    double getArea() const noexcept;
     rectangle_t getFrameRect() const;
     void move(const point_t & target);
     void move(double bias_x, double bias_y);

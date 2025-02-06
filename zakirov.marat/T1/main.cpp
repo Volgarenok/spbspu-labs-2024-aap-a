@@ -28,16 +28,16 @@ int main()
     {
       shapes.push_back(make_shape(data));
     }
-    catch (const std::invalid_argument & e)
+    catch (const std::invalid_argument &)
     {
       shape_flag = true;
       free(data);
       continue;
     }
-    catch (const std::logic_error & e)
+    catch (const std::logic_error &)
     {
       free(data);
-      std::cerr << e.what() << '\n';
+      std::cerr << "Warning! Error in scale composition." << '\n';
       return 1;
     }
 
@@ -60,9 +60,9 @@ int main()
   {
     scale_full_composition(shapes, target, coefficient);
   }
-  catch (const std::invalid_argument & e)
+  catch (const std::invalid_argument &)
   {
-    std::cerr << e.what() << '\n';
+    std::cerr << "Warning! The figure change coefficient is incorrect." << '\n';
     free(scale_data);
     return 1;
   }
