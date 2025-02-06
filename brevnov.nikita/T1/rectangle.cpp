@@ -2,15 +2,45 @@
 #include <stdexcept>
 
 brevnov::Rectangle::Rectangle(point_t left, point_t right):
-  left_({0.0, 0.0}),
-  right_({0.0, 0.0})
+  shapes_(),
+  left_(left),
+  right_(right)
 {
   if (left.x >= right.x || left.y >= right.y)
   {
     throw std::invalid_argument("Not correct arguments");
   }
-  left_ = left;
-  right_ = right;
+  double width = right_.x - left_.x;
+  double height = right_.y - left_.y;
+  double r1 = height / 16.0;
+  double r2 = width / 16.0;
+  for (size_t i = 0; i < 8; i++)
+  {
+    for (size_t j = 0; j < 8; j++)
+    {
+      try
+      {
+        shapes_[i * 8 + j] = new Ellipse({left_.x + r2 * (i * 2 + 1), left_.y + r1 * (i * 2 + 1)}, r1, r2);
+      }
+      catch (const std::bad_alloc& e)
+      {
+        for (size_t h = 0; h < i * 8 + j; h++)
+        {
+          delete shapes_[h];
+        }
+        throw;
+      }
+    }
+  }
+}
+
+brevnov::Rectangle::~Rectangle()
+{
+  for (size_t i = 0; i < 64; i++)
+  {
+    delete shapes_[i];
+  }
+  delete[] shapes;
 }
 
 double brevnov::Rectangle::getArea() const noexcept
@@ -27,31 +57,44 @@ brevnov::rectangle_t brevnov::Rectangle::getFrameRect() const noexcept
   return result;
 }
 
-void brevnov::Rectangle::move(point_t new_centre) noexcept
-{
-  point_t old_centre = getFrameRect().pos;
-  double dx = new_centre.x - old_centre.x;
-  double dy = new_centre.y - old_centre.y;
-  move(dx, dy);
-}
-
-void brevnov::move_point(point_t& point, double dx, double dy)
+void brevnov::move_point(point_t& point, double dx, double dy) noexcept
 {
   point.x += dx;
   point.y += dy;
 }
 
-void brevnov::Rectangle::move(double dx, double dy) noexcept
+void brevnov::BigRectangle::move(point_t new_centre) noexcept
 {
-  left_.x += dx;
-  left_.y += dy;
-  right_.x += dx;
-  right_.y += dy;
+  double width = right_.x - left_.x;
+  double height = right_.y - left_.y;
+  point_t start = {left_.x + width / 2.0, left_.y + height / 2.0};
+  double dx = new_centre.x - start.x;
+  double dy = new_centre.y - start.y;
+  move(dx, dy);
+}
+
+void brevnov::BigRectangle::move(double dx, double dy) noexcept
+{
+  for (size_t i = 0; i < 64; i++)
+  {
+    shapes_[i]->move(dx, dy);
+  }
+  move_point(right_, dx, dy);
+  move_point(left_, dx, dy);
 }
 
 void brevnov::Rectangle::scale(double n) noexcept
 {
-  point_t centre = getFrameRect().pos;
-  left_ = {centre.x + (left_.x - centre.x) * n, centre.y + (left_.y - centre.y) * n};
-  right_ = {centre.x + (right_.x - centre.x) * n, centre.y + (right_.y - centre.y) * n};
+  point_t center = {left_.x + (right_.x - left_.x) / 2.0, left_.y + (right_.y - left_.y) / 2.0};
+  double r1 = shapes_[0]->getR1() * n;
+  double r2 = shapes_[0]->getR2() * n;
+  left_ = {center.x - r2 * 4.0, center.y - r1 * 4.0};
+  right_ = {center.x + r2 * 4.0, center.y + r1 * 4.0};
+  for (size_t i = 0; i < 8; i++)
+  {
+    for (size_t j = 0; j < 8; j++)
+    {
+      shapes_[i * 8 + j]->updateEllipse({left_.x + r2 * (i * 2 + 1), left_.y + r1 * (i * 2 + 1)}, r1, r2);
+    }
+  }
 }
