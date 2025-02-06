@@ -11,11 +11,23 @@ namespace
 
   double *read_params(std::istream &in)
   {
-    double *params = new double[5];
+    size_t size = 5;
+    double *params = new double[size];
     size_t i = 0;
     while (in >> params[i])
     {
       i++;
+      if (i == size)
+      {
+        size_t new_size = size + 5;
+        double *new_params = new double[new_size];
+        for (size_t j = 0; j < size; j++)
+        {
+          new_params[j] = params[j];
+        }
+        delete[] params;
+        params = new_params;
+      }
     }
     if (in.fail() && !in.eof())
     {
