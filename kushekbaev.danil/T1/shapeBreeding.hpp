@@ -2,6 +2,7 @@
 #define SHAPEBREEDING_HPP
 
 #include <istream>
+#include <base-types.hpp>
 
 namespace kushekbaev
 {
