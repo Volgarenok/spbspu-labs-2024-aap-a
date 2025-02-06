@@ -53,7 +53,7 @@ gavrilova::Polygon* make_polygon(std::istream& in)
   while (in) {
     if (!(in >> verteces[nVert].y)) {
       delete[] verteces;
-      return nullptr;
+      throw("Errors in polygon input");
     }
     ++nVert;
     if (nVert >= capacityVert) {
