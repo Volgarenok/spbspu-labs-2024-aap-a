@@ -17,11 +17,16 @@ maslevtsov::Shape* maslevtsov::makeShape(std::string figureName, const double* a
 {
   if (figureName == "RECTANGLE")
   {
-    return makeRectangle(arguments);
+    Rectangle* rect = new Rectangle({arguments[0], arguments[1]}, {arguments[2], arguments[3]});
+    return rect;
   }
   if (figureName == "REGULAR")
   {
-    return makeRegular(arguments);
+    point_t pnt1 = {arguments[0], arguments[1]};
+    point_t pnt2 = {arguments[2], arguments[3]};
+    point_t pnt3 = {arguments[4], arguments[5]};
+    Regular* reg = new Regular(pnt1, pnt2, pnt3);
+    return reg;
   }
   if (figureName == "POLYGON")
   {
@@ -30,25 +35,34 @@ maslevtsov::Shape* maslevtsov::makeShape(std::string figureName, const double* a
   throw std::logic_error("not supported");
 }
 
-void maslevtsov::scale(Shape* shape, point_t pnt, double k)
+void maslevtsov::unsafeScale(Shape* shape, point_t pnt, double k)
+{
+  point_t frameCenterBefore = shape->getFrameRect().pos;
+  shape->move(pnt);
+  point_t frameCenterAfter = shape->getFrameRect().pos;
+  point_t offset{(frameCenterAfter.x - frameCenterBefore.x) * k, (frameCenterAfter.y - frameCenterBefore.y) * k};
+  shape->unsafeScale(k);
+  shape->move(-offset.x, -offset.y);
+}
+
+void maslevtsov::safeScale(Shape* shape, point_t pnt, double k)
 {
   if (k <= 0)
   {
     throw std::invalid_argument("invalid coefficient");
   }
-  point_t frameCenterBefore = shape->getFrameRect().pos;
-  shape->move(pnt);
-  point_t frameCenterAfter = shape->getFrameRect().pos;
-  point_t offset{(frameCenterAfter.x - frameCenterBefore.x) * k, (frameCenterAfter.y - frameCenterBefore.y) * k};
-  shape->scale(k);
-  shape->move(-offset.x, -offset.y);
+  unsafeScale(shape, pnt, k);
 }
 
 void maslevtsov::scaleShapes(Shape** shapes, point_t pnt, double k, std::size_t border)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("invalid coefficient");
+  }
   for (std::size_t i = 0; i < border; ++i)
   {
-    scale(shapes[i], pnt, k);
+    unsafeScale(shapes[i], pnt, k);
   }
 }
 
@@ -64,17 +78,18 @@ void maslevtsov::outputAreaSum(std::ostream& out, const Shape* const* shapes, st
 
 void maslevtsov::outputShapes(std::ostream& out, const Shape* const* shapes, std::size_t border)
 {
-  for (std::size_t i = 0; i < border; ++i)
+  rectangle_t rect = shapes[0]->getFrameRect();
+  point_t bottomLeft{rect.pos.x - rect.width / 2, rect.pos.y - rect.height / 2};
+  point_t topRight{rect.pos.x + rect.width / 2, rect.pos.y + rect.height / 2};
+  out << bottomLeft.x << ' ' << bottomLeft.y;
+  out << ' ' << topRight.x << ' ' << topRight.y;
+  for (std::size_t i = 1; i < border; ++i)
   {
     rectangle_t rect = shapes[i]->getFrameRect();
     point_t bottomLeft{rect.pos.x - rect.width / 2, rect.pos.y - rect.height / 2};
     point_t topRight{rect.pos.x + rect.width / 2, rect.pos.y + rect.height / 2};
-    out << bottomLeft.x << ' ' << bottomLeft.y;
+    out << ' ' << bottomLeft.x << ' ' << bottomLeft.y;
     out << ' ' << topRight.x << ' ' << topRight.y;
-    if (i != border - 1 && border > 1)
-    {
-      out << ' ';
-    }
   }
 }
 

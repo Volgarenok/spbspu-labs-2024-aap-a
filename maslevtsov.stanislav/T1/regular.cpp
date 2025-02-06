@@ -2,6 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <limits>
+#include "polygon.hpp"
 
 namespace
 {
@@ -10,9 +11,11 @@ namespace
     double sqrLength1 = std::pow(p1.x - p2.x, 2) + std::pow(p1.y - p2.y, 2);
     double sqrLength2 = std::pow(p2.x - p3.x, 2) + std::pow(p2.y - p3.y, 2);
     double sqrLength3 = std::pow(p1.x - p3.x, 2) + std::pow(p1.y - p3.y, 2);
-    return (sqrLength1 != 0 || sqrLength2 != 0 || sqrLength3 != 0) &&
-           ((sqrLength1 + sqrLength2 == sqrLength3) || (sqrLength2 + sqrLength3 == sqrLength1) ||
-            (sqrLength1 + sqrLength3 == sqrLength2));
+    bool isNonZeroSides = sqrLength1 != 0 && sqrLength2 != 0 && sqrLength3 != 0;
+    bool isPythagoreanTheorem1 = (sqrLength1 + sqrLength2 == sqrLength3);
+    bool isPythagoreanTheorem2 = (sqrLength2 + sqrLength3 == sqrLength1);
+    bool isPythagoreanTheorem3 = (sqrLength1 + sqrLength3 == sqrLength2);
+    return isNonZeroSides && (isPythagoreanTheorem1 || isPythagoreanTheorem2 || isPythagoreanTheorem3);
   }
 
   bool isRightSize(std::size_t nVertices, double smallRadius, double bigRadius)
@@ -59,45 +62,46 @@ namespace
 
     return vertices;
   }
+
+  maslevtsov::Polygon getPolygon(maslevtsov::point_t center, maslevtsov::point_t pnt2, maslevtsov::point_t pnt3)
+  {
+    maslevtsov::point_t* vertices = getVertices(center, pnt2, pnt3);
+    maslevtsov::Polygon polygon(getNVertices(center, pnt2, pnt3), vertices);
+    delete[] vertices;
+    return polygon;
+  }
 }
 
 maslevtsov::Regular::Regular(point_t center, point_t pnt2, point_t pnt3):
-  polygon()
-{
-  std::size_t nVertices = getNVertices(center, pnt2, pnt3);
-  point_t* vertices = getVertices(center, pnt2, pnt3);
-  Polygon tmpPolygon(nVertices, vertices);
-  polygon = tmpPolygon;
-  delete[] vertices;
-}
+  polygon_(getPolygon(center, pnt2, pnt3))
+{}
 
 double maslevtsov::Regular::getArea() const noexcept
 {
-  return polygon.getArea();
+  return polygon_.getArea();
 }
 
 maslevtsov::rectangle_t maslevtsov::Regular::getFrameRect() const noexcept
 {
-  return polygon.getFrameRect();
+  return polygon_.getFrameRect();
 }
 
 void maslevtsov::Regular::move(point_t pnt) noexcept
 {
-  polygon.move(pnt);
+  polygon_.move(pnt);
 }
 
 void maslevtsov::Regular::move(double dx, double dy) noexcept
 {
-  polygon.move(dx, dy);
+  polygon_.move(dx, dy);
 }
 
-void maslevtsov::Regular::scale(double k)
+void maslevtsov::Regular::unsafeScale(double k)
 {
-  polygon.scale(k);
+  polygon_.unsafeScale(k);
 }
 
-maslevtsov::Regular* maslevtsov::makeRegular(const double* arguments)
+void maslevtsov::Regular::safeScale(double k)
 {
-  Regular* reg = new Regular({arguments[0], arguments[1]}, {arguments[2], arguments[3]}, {arguments[4], arguments[5]});
-  return reg;
+  polygon_.safeScale(k);
 }

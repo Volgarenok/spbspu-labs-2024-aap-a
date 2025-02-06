@@ -1,5 +1,5 @@
 #include <stdexcept>
-#include <getline.hpp>
+#include <iostream>
 #include "shape.hpp"
 #include "split.hpp"
 
@@ -19,34 +19,31 @@ int main()
       std::cin >> scalePntX >> scalePntY >> scaleK;
       continue;
     }
-    char* argStr = nullptr;
+    std::string argStr = "";
     double* arguments = nullptr;
     maslevtsov::Shape* shape = nullptr;
     std::size_t splitted = 0;
     try
     {
-      argStr = maslevtsov::getline(std::cin);
-      arguments = maslevtsov::split(argStr, splitted);
+      std::getline(std::cin, argStr);
+      arguments = maslevtsov::split(argStr.substr(1), splitted);
       shape = maslevtsov::makeShape(argument, arguments, splitted);
     }
     catch (const std::bad_alloc& e)
     {
       maslevtsov::clearShapes(shapes, shapeIndex);
       delete[] arguments;
-      delete[] argStr;
       std::cerr << "Error: fail in memory allocation\n";
       return 1;
     }
     catch (const std::logic_error& e)
     {
       isIgnoredShapes = true;
-      delete[] argStr;
       delete[] arguments;
       continue;
     }
     shapes[shapeIndex++] = shape;
     isImplementedShapes = true;
-    delete[] argStr;
     delete[] arguments;
   }
 

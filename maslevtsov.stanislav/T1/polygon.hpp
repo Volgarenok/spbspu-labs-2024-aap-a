@@ -8,7 +8,6 @@ namespace maslevtsov
   struct Polygon final: public Shape
   {
   public:
-    Polygon();
     Polygon(const Polygon& rhs);
     Polygon(std::size_t nVertices, const point_t* vertices);
     ~Polygon() override;
@@ -18,7 +17,8 @@ namespace maslevtsov
     rectangle_t getFrameRect() const noexcept override;
     void move(point_t pnt) noexcept override;
     void move(double dx, double dy) noexcept override;
-    void scale(double k) override;
+    void unsafeScale(double k) override;
+    void safeScale(double k) override;
 
   private:
     std::size_t nVertices_;

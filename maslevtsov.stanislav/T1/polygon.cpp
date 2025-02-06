@@ -43,15 +43,9 @@ namespace
   }
 }
 
-maslevtsov::Polygon::Polygon():
-  nVertices_(0),
-  vertices_(nullptr)
-{}
-
 maslevtsov::Polygon::Polygon(const Polygon& rhs):
-  Polygon()
+  Polygon(rhs.nVertices_, new point_t[rhs.nVertices_])
 {
-  nVertices_ = rhs.nVertices_;
   copy(rhs.vertices_, nVertices_, vertices_);
 }
 
@@ -99,13 +93,17 @@ maslevtsov::rectangle_t maslevtsov::Polygon::getFrameRect() const noexcept
   point_t minPnt{vertices_[0].x, vertices_[0].y}, maxPnt = minPnt;
   for (size_t i = 1; i < nVertices_; ++i)
   {
-    minPnt = {minPnt.x < vertices_[i].x ? minPnt.x : vertices_[i].x,
-             minPnt.y < vertices_[i].y ? minPnt.y : vertices_[i].y};
-    maxPnt = {maxPnt.x > vertices_[i].x ? maxPnt.x : vertices_[i].x,
-             maxPnt.y > vertices_[i].y ? maxPnt.y : vertices_[i].y};
+    double minPntX = minPnt.x < vertices_[i].x ? minPnt.x : vertices_[i].x;
+    double minPntY = minPnt.y < vertices_[i].y ? minPnt.y : vertices_[i].y;
+    minPnt = {minPntX, minPntY};
+    double maxPntX = maxPnt.x > vertices_[i].x ? maxPnt.x : vertices_[i].x;
+    double maxPntY = maxPnt.y > vertices_[i].y ? maxPnt.y : vertices_[i].y;
+    maxPnt = {maxPntX, maxPntY};
   }
-  rectangle_t frameRect = {maxPnt.x - minPnt.x, maxPnt.y - minPnt.y,
-                          {minPnt.x + (frameRect.width) / 2, minPnt.y + (frameRect.height) / 2}};
+  rectangle_t frameRect = {0, 0, {0, 0}};
+  frameRect.width = maxPnt.x - minPnt.x;
+  frameRect.height = maxPnt.y - minPnt.y;
+  frameRect.pos = {minPnt.x + (frameRect.width) / 2, minPnt.y + (frameRect.height) / 2};
   return frameRect;
 }
 
@@ -127,18 +125,24 @@ void maslevtsov::Polygon::move(double dx, double dy) noexcept
   }
 }
 
-void maslevtsov::Polygon::scale(double k)
+void maslevtsov::Polygon::unsafeScale(double k)
+{
+  point_t frameCenter = getFrameRect().pos;
+  for (std::size_t i = 0; i < nVertices_; ++i)
+  {
+    double xDiff = (frameCenter.x - vertices_[i].x) * k;
+    double yDiff = (frameCenter.y - vertices_[i].y) * k;
+    vertices_[i] = {frameCenter.x - xDiff, frameCenter.y - yDiff};
+  }
+}
+
+void maslevtsov::Polygon::safeScale(double k)
 {
   if (k <= 0)
   {
     throw std::invalid_argument("invalid coefficient");
   }
-  point_t frameCenter = getFrameRect().pos;
-  for (std::size_t i = 0; i < nVertices_; ++i)
-  {
-    vertices_[i] = {frameCenter.x - (frameCenter.x - vertices_[i].x) * k,
-                   frameCenter.y - (frameCenter.y - vertices_[i].y) * k};
-  }
+  unsafeScale(k);
 }
 
 maslevtsov::Polygon* maslevtsov::makePolygon(const double* arguments, std::size_t nArguments)
@@ -149,12 +153,7 @@ maslevtsov::Polygon* maslevtsov::makePolygon(const double* arguments, std::size_
   {
     polygon = new Polygon(nArguments / 2, pntArguments);
   }
-  catch (const std::bad_alloc &e)
-  {
-    delete[] pntArguments;
-    throw;
-  }
-  catch (const std::logic_error &e)
+  catch (...)
   {
     delete[] pntArguments;
     throw;

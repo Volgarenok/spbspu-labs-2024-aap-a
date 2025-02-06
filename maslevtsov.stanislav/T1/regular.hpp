@@ -14,13 +14,12 @@ namespace maslevtsov
     rectangle_t getFrameRect() const noexcept override;
     void move(point_t pnt) noexcept override;
     void move(double dx, double dy) noexcept override;
-    void scale(double k) override;
+    void unsafeScale(double k) override;
+    void safeScale(double k) override;
 
   private:
-    Polygon polygon;
+    Polygon polygon_;
   };
-
-  Regular* makeRegular(const double* arguments);
 }
 
 #endif
