@@ -14,15 +14,13 @@ zakirov::Rectangle::Rectangle(point_t bottom_left, point_t top_right):
 
 double zakirov::Rectangle::getArea() const
 {
-  double distance_x = get_distance_x(top_right_, bottom_left_);
-  double distance_y = get_distance_y(top_right_, bottom_left_);
-  return distance_x * distance_y;
+  return (top_right_.x - bottom_left_.x) * (top_right_.y - bottom_left_.y);
 }
 
 zakirov::rectangle_t zakirov::Rectangle::getFrameRect() const
 {
-  double width = get_distance_x(top_right_, bottom_left_);
-  double height = get_distance_y(top_right_, bottom_left_);
+  double width = (top_right_.x - bottom_left_.x);
+  double height = (top_right_.y - bottom_left_.y);
   point_t position = get_middle(top_right_, bottom_left_);
 
   return {width, height, position};
