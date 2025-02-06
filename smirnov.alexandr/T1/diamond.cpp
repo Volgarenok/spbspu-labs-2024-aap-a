@@ -1,7 +1,11 @@
 #include "diamond.hpp"
 #include <cmath>
 #include <stdexcept>
+<<<<<<< HEAD
 constexpr double angle = 90.0;
+=======
+constexpr double angle = 45.0;
+>>>>>>> parent of e19a4c4cc (fix)
 smirnov::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
   vertex1(p1),
   vertex2(p2),
