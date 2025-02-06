@@ -5,29 +5,14 @@
 int main()
 {
   char* str = nullptr;
-  try
-  {
-    str = asafov::inputString();
-  }
-  catch (const std::bad_alloc&)
-  {
-    delete[] str;
-    return 1;
-  }
+  str = asafov::inputString();
   if(str[0] == '\0')
   {
     delete[] str;
     return 1;
   }
-  try
-  {
-    std::cout << asafov::countUniqLetters(str) << '\n';
-  }
-  catch (const std::bad_alloc&)
-  {
-    delete[] str;
-    return 1;
-  }
+
+  std::cout << asafov::countUniqLetters(str) << '\n';
 
   char* unusedLetters = new char[27];
   try
