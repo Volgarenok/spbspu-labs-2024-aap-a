@@ -1,14 +1,18 @@
 #include "rectangle.hpp"
 #include <stdexcept>
 
-brevnov::Rectangle::Rectangle(point_t left, point_t right):
+brevnov::BigRectangle::BigRectangle(point_t left, point_t right):
   shapes_(),
-  left_(left),
-  right_(right)
+  left_({0.0, 0.0}),
+  right_({0.0, 0.0})
 {
   if (left.x >= right.x || left.y >= right.y)
   {
     throw std::invalid_argument("Not correct arguments");
+  }
+  for (size_t i = 0; i < 64; i++)
+  {
+    shapes_[i] = nullptr;
   }
   double width = right_.x - left_.x;
   double height = right_.y - left_.y;
@@ -97,3 +101,4 @@ void brevnov::Rectangle::scale(double n) noexcept
     }
   }
 }
+
