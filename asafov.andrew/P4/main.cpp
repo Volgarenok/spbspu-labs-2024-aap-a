@@ -4,7 +4,16 @@
 
 int main()
 {
-  char* str = asafov::inputString();
+  char* str = nullptr;
+  try
+  {
+    str = asafov::inputString();
+  }
+  catch (const std::bad_alloc)
+  {
+    delete[] str;
+    return 1;
+  }
   if(str[0] == '\0')
   {
     delete[] str;
