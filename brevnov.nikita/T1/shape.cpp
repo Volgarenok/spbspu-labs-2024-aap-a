@@ -9,7 +9,7 @@ namespace brevnov
     {
       delete shapes[i];
     }
-    delete shapes;
+    delete[] shapes;
   }
 
   double get_sum_areas(const Shape * const * shapes, size_t count)
