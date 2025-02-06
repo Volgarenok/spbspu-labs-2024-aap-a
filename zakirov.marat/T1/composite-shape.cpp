@@ -1,5 +1,4 @@
 #include "composite-shape.hpp"
-#include <cstring>
 #include <stdexcept>
 #include "unified_shapes.hpp"
 
