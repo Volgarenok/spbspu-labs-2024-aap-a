@@ -28,7 +28,7 @@ char* asafov::inputString()
       {
         newstring = resize(string, length, length);
       }
-      catch (std::bad_alloc)
+      catch (const std::bad_alloc&)
       {
         delete[] string;
       }
