@@ -2,7 +2,7 @@
 #include <stdexcept>
 
 brevnov::Rectangle::Rectangle(point_t left, point_t right):
-  shapes_(),
+  shapes_(new Ellipse[64]),
   left_(left),
   right_(right)
 {
@@ -22,18 +22,7 @@ brevnov::Rectangle::Rectangle(point_t left, point_t right):
   {
     for (size_t j = 0; j < 8; j++)
     {
-      try
-      {
-        shapes_[i * 8 + j] = new Ellipse({left_.x + r2 * (i * 2 + 1), left_.y + r1 * (i * 2 + 1)}, r1, r2);
-      }
-      catch (const std::bad_alloc& e)
-      {
-        for (size_t h = 0; h < i * 8 + j; h++)
-        {
-          delete shapes_[h];
-        }
-        throw;
-      }
+       shapes_[i * 8 + j] = Ellipse({left_.x + r2 * (i * 2 + 1), left_.y + r1 * (i * 2 + 1)}, r1, r2);
     }
   }
 }
