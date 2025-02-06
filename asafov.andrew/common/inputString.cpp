@@ -33,6 +33,7 @@ char* asafov::inputString()
         delete[] string;
         throw e;
       }
+      delete[] string;
       string = newstring;
     }
   }
