@@ -20,6 +20,7 @@ char* belobrov::inputString(std::istream& input)
       bufferSize *= 2;
 
       char* newBuffer = belobrov::resizeBuffer(buffer, bufferSize);
+      free(oldBuffer);
       if (!newBuffer) {
         free(buffer);
         std::skipws(input);
@@ -47,7 +48,6 @@ char* belobrov::resizeBuffer(const char* oldBuffer, size_t newSize)
     newBuffer[i] = oldBuffer[i];
     i++;
   }
-  free(oldBuffer);
 
   return newBuffer;
 }
