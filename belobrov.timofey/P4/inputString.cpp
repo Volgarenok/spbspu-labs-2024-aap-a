@@ -3,11 +3,10 @@
 
 char* belobrov::inputString(std::istream& input)
 {
-  char* buffer = nullptr;
   size_t bufferSize = 32;
+  char* buffer = static_cast< char* >(malloc(bufferSize * sizeof(char)));
 
-  buffer = static_cast< char* >(malloc(bufferSize * sizeof(char)));
-  if (!buffer) {
+ if (!buffer) {
     return nullptr;
   }
 
@@ -35,7 +34,7 @@ char* belobrov::inputString(std::istream& input)
   return buffer;
 }
 
-char* belobrov::resizeBuffer(char* oldBuffer, size_t newSize)
+char* belobrov::resizeBuffer(const char* oldBuffer, size_t newSize)
 {
   char* newBuffer = static_cast< char* >(malloc(newSize * sizeof(char)));
   if (!newBuffer) {

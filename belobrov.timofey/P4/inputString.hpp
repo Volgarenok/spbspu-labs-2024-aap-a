@@ -6,7 +6,7 @@
 namespace belobrov
 {
     char* inputString(std::istream& input);
-    char* resizeBuffer(char* oldBuffer, size_t newSize);
+    char* resizeBuffer(const char* oldBuffer, size_t newSize);
 }
 
 #endif
