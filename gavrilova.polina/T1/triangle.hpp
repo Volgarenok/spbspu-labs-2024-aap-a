@@ -10,7 +10,7 @@ namespace gavrilova {
     void move(const point_t& p) override;
     void move(double difX, double difY) override;
     Shape* clone() const;
-    void scale_without_check(double k) noexcept override;
+    void scaleWithoutCheck(double k) noexcept override;
   private:
     point_t a_;
     point_t b_;

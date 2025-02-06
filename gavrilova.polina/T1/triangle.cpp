@@ -54,7 +54,7 @@ void gavrilova::Triangle::move(double difX, double difY)
   gavrilova::move(c_, difX, difY);
 }
 
-void gavrilova::Triangle::scale_without_check(double k) noexcept
+void gavrilova::Triangle::scaleWithoutCheck(double k) noexcept
 {
   point_t center =  getFrameRect().pos;
   gavrilova::scaleDistance(a_, center, k);

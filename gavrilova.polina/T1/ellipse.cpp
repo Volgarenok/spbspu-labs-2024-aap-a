@@ -1,6 +1,5 @@
 #include "ellipse.hpp"
-#include <iostream>
-#include "pointManip.hpp"
+ #include "pointManip.hpp"
 
 gavrilova::Ellipse::Ellipse(const point_t& center, double radiusY, double radiusX):
   center_(center),
@@ -36,7 +35,7 @@ void gavrilova::Ellipse::move(double difX, double difY)
   gavrilova::move(center_, difX, difY);
 }
 
-void gavrilova::Ellipse::scale_without_check(double k) noexcept
+void gavrilova::Ellipse::scaleWithoutCheck(double k) noexcept
 {
   radiusX_ *= k;
   radiusY_ *= k;

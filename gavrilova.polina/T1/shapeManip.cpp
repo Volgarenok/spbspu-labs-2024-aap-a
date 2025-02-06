@@ -2,13 +2,13 @@
 #include <iomanip>
 
 
-void gavrilova::scaleShape_without_check(Shape& shape, const point_t& center, double k)
+void gavrilova::scaleShapeWithoutCheck(Shape& shape, const point_t& center, double k)
 {
   point_t pos1 = shape.getFrameRect().pos;
   double difX = center.x - pos1.x;
   double difY = center.y - pos1.y;
   shape.move(center);
-  shape.scale_without_check(k);
+  shape.scaleWithoutCheck(k);
   difX *= k;
   difY *= k;
   shape.move(-difX, -difY);
@@ -18,7 +18,7 @@ void gavrilova::scaleShape(Shape& shape, const point_t& center, double k)
   if (k <= 0) {
     throw std::logic_error("Коэффицент должен быть положительным");
   }
-  scaleShape_without_check(shape, center, k);
+  scaleShapeWithoutCheck(shape, center, k);
 }
 
 void gavrilova::outRectangle(std::ostream& out, const rectangle_t& rect)

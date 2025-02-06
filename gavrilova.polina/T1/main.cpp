@@ -1,8 +1,9 @@
 #include <iostream>
+#include <iomanip>
 #include "make_shape.hpp"
 #include "shapeManip.hpp"
 #include "compositeShape.hpp"
-#include <iomanip>
+
 
 namespace gavrilova {
   void clearShapes(Shape** Shapes, size_t n);
@@ -12,7 +13,7 @@ int main()
 {
   using namespace gavrilova;
 
-  CompositeShape Shapes;
+  CompositeShape shapes;
   size_t nError = 0;
   std::string shapeTypeOrScale;
   point_t center;
@@ -28,7 +29,7 @@ int main()
     Shape* shp = make_shape(std::cin, shapeTypeOrScale, nError);
     if (shp) {
       try {
-        Shapes.push_back(shp);
+        shapes.push_back(shp);
       } catch (const std::exception& e) {
         std::cerr << e.what();
         return 1;
@@ -36,22 +37,22 @@ int main()
     }
   }
 
-  if (koef <= 0 || Shapes.empty()) {
+  if (koef <= 0 || shapes.empty()) {
     return 1;
   }
   if (nError) {
     std::cerr << "Возникли ошибки при вводе фигур\n";
   }
 
-  double commonAreaBefore = Shapes.getArea();
+  double commonAreaBefore = shapes.getArea();
   std::cout << std::fixed << std::setprecision(1) << commonAreaBefore << " ";
-  outRectangles(std::cout, Shapes);
+  outRectangles(std::cout, shapes);
   std::cout << "\n";
 
-  scaleShapes(Shapes, center, koef);
+  scaleShapes(shapes, center, koef);
 
-  double commonAreaAfter = Shapes.getArea();
+  double commonAreaAfter = shapes.getArea();
   std::cout << std::fixed << std::setprecision(1) << commonAreaAfter << " ";
-  outRectangles(std::cout, Shapes);
+  outRectangles(std::cout, shapes);
   std::cout << "\n";
 }

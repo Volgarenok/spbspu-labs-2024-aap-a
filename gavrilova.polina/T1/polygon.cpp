@@ -21,6 +21,16 @@ gavrilova::Polygon::Polygon(size_t nPoints, const point_t* verteces):
   }
 }
 
+gavrilova::Polygon::Polygon(const Polygon& other):
+  size_(other.size_),
+  triangles_(nullptr)
+{
+  triangles_ = new Triangle*[other.size_];
+  for (size_t i = 0; i < size_; ++i) {
+    triangles_[i] = other.triangles_[i];
+  }
+}
+
 gavrilova::Polygon::~Polygon()
 {
   clear();
@@ -63,11 +73,11 @@ void gavrilova::Polygon::move(double difX, double difY)
     triangles_[i]->move(difX, difY);
   }
 }
-void gavrilova::Polygon::scale_without_check(double k) noexcept
+void gavrilova::Polygon::scaleWithoutCheck(double k) noexcept
 {
   point_t center =  getFrameRect().pos;
   for (size_t i = 0; i < size_; ++i) {
-    scaleShape_without_check(*triangles_[i], center, k);
+    scaleShapeWithoutCheck(*triangles_[i], center, k);
   }
 }
 gavrilova::Shape* gavrilova::Polygon::clone() const

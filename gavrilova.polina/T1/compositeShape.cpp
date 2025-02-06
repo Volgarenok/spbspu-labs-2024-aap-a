@@ -73,7 +73,7 @@ void gavrilova::CompositeShape::pop_back()
   delete shapes_[--size_];
 }
 
-gavrilova::Shape* gavrilova::CompositeShape::at(size_t id) const
+gavrilova::Shape* gavrilova::CompositeShape::at(size_t id)
 {
   if (id >= size_) {
     throw std::out_of_range("Index out of range");
@@ -104,7 +104,7 @@ void gavrilova::CompositeShape::scale(double k)
   }
   point_t pos = getFrameRect().pos;
   for (size_t i = 0; i < size_; ++i) {
-    scaleShape_without_check(*shapes_[i], pos, k);
+    scaleShapeWithoutCheck(*shapes_[i], pos, k);
   }
 }
 
@@ -161,7 +161,7 @@ double gavrilova::CompositeShape::getArea() const noexcept
 
 void gavrilova::CompositeShape::expand()
 {
-  if (size_ != capacity_) {
+  if (size_ < capacity_) {
     return;
   }
   const int CONSTANTA_FOR_RESIZE = 10;

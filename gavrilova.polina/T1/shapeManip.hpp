@@ -5,7 +5,7 @@
 #include "compositeShape.hpp"
 
 namespace gavrilova {
-  void scaleShape_without_check(Shape& shape, const point_t& center, double k);
+  void scaleShapeWithoutCheck(Shape& shape, const point_t& center, double k);
   void scaleShape(Shape& shape, const point_t& center, double k);
   void scaleShapes(CompositeShape& Shapes, const point_t& center, double k);
   void outRectangle(std::ostream& out, const rectangle_t& rect);

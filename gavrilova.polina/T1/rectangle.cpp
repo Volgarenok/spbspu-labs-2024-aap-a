@@ -38,7 +38,7 @@ void gavrilova::Rectangle::move(double difX, double difY)
   gavrilova::move(pTopRight_, difX, difY);
 }
 
-void gavrilova::Rectangle::scale_without_check(double k) noexcept
+void gavrilova::Rectangle::scaleWithoutCheck(double k) noexcept
 {
   rectangle_t frameRect = getFrameRect();
   point_t center = frameRect.pos;

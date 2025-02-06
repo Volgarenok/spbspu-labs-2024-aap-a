@@ -1,8 +1,9 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
-#include "base-types.hpp"
 #include <stdexcept>
+#include "base-types.hpp"
+
 
 namespace gavrilova {
   class Shape {
@@ -12,7 +13,7 @@ namespace gavrilova {
     virtual rectangle_t getFrameRect() const = 0;
     virtual void move(const point_t& p) = 0;
     virtual void move(double x, double y) = 0;
-    virtual void scale_without_check(double k) noexcept = 0;
+    virtual void scaleWithoutCheck(double k) noexcept = 0;
     void scale(double k);
     virtual Shape* clone() const = 0;
   };
