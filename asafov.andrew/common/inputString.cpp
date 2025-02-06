@@ -3,12 +3,10 @@
 #include <cstddef>
 #include "resize.hpp"
 
-#define INCREASE 8
-
 char* asafov::inputString()
 {
   size_t length = 0;
-  size_t count = INCREASE;
+  size_t count = 1;
   char* string = new char[count];
   char ch = 0;
   while (!std::cin.eof())
@@ -24,8 +22,8 @@ char* asafov::inputString()
     length++;
     if (count == 0)
     {
-      count = INCREASE;
-      string = resize(string, length, INCREASE);
+      count = length;
+      string = resize(string, length, length);
     }
   }
   if (length == 0)
