@@ -9,7 +9,7 @@ int main()
   {
     str = asafov::inputString();
   }
-  catch (const std::bad_alloc)
+  catch (const std::bad_alloc&)
   {
     delete[] str;
     return 1;
