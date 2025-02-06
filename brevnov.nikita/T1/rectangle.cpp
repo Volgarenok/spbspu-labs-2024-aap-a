@@ -40,7 +40,7 @@ brevnov::Rectangle::~Rectangle()
   {
     delete shapes_[i];
   }
-  delete[] shapes;
+  delete[] shapes_;
 }
 
 double brevnov::Rectangle::getArea() const noexcept
@@ -57,13 +57,13 @@ brevnov::rectangle_t brevnov::Rectangle::getFrameRect() const noexcept
   return result;
 }
 
-void brevnov::move_point(point_t& point, double dx, double dy) noexcept
+void brevnov::move_point(brevnov::point_t& point, double dx, double dy) noexcept
 {
   point.x += dx;
   point.y += dy;
 }
 
-void brevnov::BigRectangle::move(point_t new_centre) noexcept
+void brevnov::Rectangle::move(brevnov::point_t new_centre) noexcept
 {
   double width = right_.x - left_.x;
   double height = right_.y - left_.y;
@@ -73,7 +73,7 @@ void brevnov::BigRectangle::move(point_t new_centre) noexcept
   move(dx, dy);
 }
 
-void brevnov::BigRectangle::move(double dx, double dy) noexcept
+void brevnov::Rectangle::move(double dx, double dy) noexcept
 {
   for (size_t i = 0; i < 64; i++)
   {
