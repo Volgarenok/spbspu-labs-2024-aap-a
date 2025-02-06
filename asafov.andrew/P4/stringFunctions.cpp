@@ -35,10 +35,10 @@ void asafov::getUnusedLetters(const char* string, char* unusedletters)
     if (alphabet[pos] != '\0' && lastletter != pos)
     {
       alphabet[lastletter] = alphabet[pos];
-      alphabet[pos] = 0;
+      alphabet[pos] = '\0';
       lastletter++;
     }
-    else if (alphabet[pos] != '\0')
+    else if (alphabet[pos] != '\0' && lastletter == pos)
     {
       lastletter++;
     }
@@ -47,4 +47,5 @@ void asafov::getUnusedLetters(const char* string, char* unusedletters)
   {
     unusedletters[i] = alphabet[i];
   }
+  unusedletters[count] == '\0';
 }
