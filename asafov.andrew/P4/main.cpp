@@ -19,7 +19,7 @@ int main()
     delete[] str;
   }
 
-  char* unusedLetters = new char[26];
+  char* unusedLetters = new char[27];
   try
   {
     asafov::getUnusedLetters(str, unusedLetters);
