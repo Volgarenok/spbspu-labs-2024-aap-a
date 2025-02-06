@@ -17,9 +17,9 @@ namespace kushekbaev
 
   bool isPointInsideTriangle(point_t first, point_t second, point_t third, point_t last)
   {
-    double firstcheck = (first.x - last.x) * (second.y - first.y) - (second.x - first.x) * (first.y - last.y);
-    double secondcheck = (second.x - last.x) * (third.y - second.y) - (third.x - second.x) * (second.y - last.y);
-    double thirdcheck = (third.x - last.x) * (first.y - third.y) - (first.x - third.x) * (third.y - last.y);
+    double fstcheck = (first.x - last.x) * (second.y - first.y) - (second.x - first.x) * (first.y - last.y);
+    double sndcheck = (second.x - last.x) * (third.y - second.y) - (third.x - second.x) * (second.y - last.y);
+    double trdcheck = (third.x - last.x) * (first.y - third.y) - (first.x - third.x) * (third.y - last.y);
     return ((fstcheck > 0 && sndcheck > 0 && trdcheck > 0) || (fstcheck < 0 && sndcheck < 0 && trdcheck < 0));
   }
 
