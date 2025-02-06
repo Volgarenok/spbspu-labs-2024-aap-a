@@ -21,7 +21,7 @@ int main()
   catch (const std::bad_alloc&)
   {
     delete[] unusedLetters;
-    
+    delete[] str;
   }
   std::cout << unusedLetters << '\n';
 
