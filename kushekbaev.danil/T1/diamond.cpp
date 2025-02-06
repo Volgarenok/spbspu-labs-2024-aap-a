@@ -4,11 +4,10 @@
 
 namespace kushekbaev
 {
-  Diamond::Diamond(const point_t middle, const point_t diffX, const point_t diffY):
-    parallelogram_({ middle.x - diffX.x, middle.y - diffX.y }, { middle.x + diffX.x, middle.y + diffX.y },
-                      { middle.x, middle.y + diffY.y })
+  Diamond::Diamond(const point_t mid, const point_t modX, const point_t modY):
+    parallelogram_({ mid.x - modX.x, mid.y - modX.y }, { mid.x + modX.x, mid.y + modX.y }, { mid.x, mid.y + modY.y })
   {
-    if ((middle.x - diffX.x != middle.x) || (middle.y - diffX.y != middle.y + diffY.y))
+    if ((mid.x - modX.x != mid.x) || (mid.y - modX.y != mid.y + modY.y))
     {
       throw std::invalid_argument("Incorrect diamond\n");
     }

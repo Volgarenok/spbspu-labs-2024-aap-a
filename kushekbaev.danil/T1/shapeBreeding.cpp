@@ -24,11 +24,11 @@ namespace kushekbaev
             (firstcheck < 0 && secondcheck < 0 && thirdcheck < 0));
   }
 
-  point_t makeScale(std::istream& input)
+  point_t makeScale(std::istream& in)
   {
     double x = 0;
     double y = 0;
-    input >> x >> y;
+    in >> x >> y;
     return { x, y };
   }
 }

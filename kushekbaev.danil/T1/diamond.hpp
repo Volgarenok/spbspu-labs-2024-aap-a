@@ -9,7 +9,7 @@ namespace kushekbaev
   class Diamond final: public Shape
   {
   public:
-    Diamond(const point_t middle, const point_t diffX, const point_t diffY);
+    Diamond(const point_t mid, const point_t modX, const point_t modY);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(const point_t scalePoint) override;

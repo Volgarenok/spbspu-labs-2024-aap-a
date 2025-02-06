@@ -34,17 +34,17 @@ namespace kushekbaev
 
     double width = upperRight.x - lowerLeft.x;
     double height = upperRight.y - lowerLeft.y;
-    point_t middle;
-    middle.x = lowerLeft.x + width / 2;
-    middle.y = lowerLeft.y + height / 2;
-    return { width, height, middle };
+    point_t mid;
+    mid.x = lowerLeft.x + width / 2;
+    mid.y = lowerLeft.y + height / 2;
+    return { width, height, mid };
   }
 
   void Concave::move(point_t scalePoint)
   {
-    point_t middle = getFrameRect().pos;
-    double dx = scalePoint.x - middle.x;
-    double dy = scalePoint.y - middle.y;
+    point_t mid = getFrameRect().pos;
+    double dx = scalePoint.x - mid.x;
+    double dy = scalePoint.y - mid.y;
 
     move(dx, dy);
   }
@@ -62,9 +62,9 @@ namespace kushekbaev
     {
       throw std::logic_error("Scale coefficient should be greater than zero\n");
     }
-    point_t middle = getFrameRect().pos;
+    point_t mid = getFrameRect().pos;
     size_t size = 4;
     point_t* points[] = { &points_[0], &points_[1], &points_[2], &points_[3] };
-    scalePoints(points, size, scaleCoeff, middle);
+    scalePoints(points, size, scaleCoeff, mid);
   }
 }

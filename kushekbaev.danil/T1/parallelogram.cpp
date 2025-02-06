@@ -6,7 +6,7 @@
 
 namespace
 {
-  bool isParallelToX(kushekbaev::point_t first, kushekbaev::point_t second)
+  bool isParToX(kushekbaev::point_t first, kushekbaev::point_t second)
   {
     return (first.x == second.x);
   }
@@ -17,8 +17,8 @@ namespace kushekbaev
   Parallelogram::Parallelogram(point_t first, point_t second, point_t third):
     points_{first, second, third}
   {
-    bool isParallelToXflag = isParallelToX(first, second) || isParallelToX (second, third) || isParallelToX(first, third);
-    if (!isTriangle(first, second, third) || !isParallelToXflag)
+    bool isParToXflag = isParToX(first, second) || isParToX (second, third) || isParToX(first, third);
+    if (!isTriangle(first, second, third) || !isParToXflag)
     {
       throw std::invalid_argument("Incorrect parallelogram\n");
     }
@@ -50,9 +50,9 @@ namespace kushekbaev
 
   void Parallelogram::move(point_t scalePoint)
   {
-    point_t middle = getFrameRect().pos;
-    double dx = scalePoint.x - middle.x;
-    double dy = scalePoint.y - middle.y;
+    point_t mid = getFrameRect().pos;
+    double dx = scalePoint.x - mid.x;
+    double dy = scalePoint.y - mid.y;
 
     move(dx, dy);
   }
@@ -70,10 +70,10 @@ namespace kushekbaev
     {
       throw std::logic_error("Scale coefficient should be greater than zero\n");
     }
-    point_t middle = getFrameRect().pos;
+    point_t mid = getFrameRect().pos;
 
     size_t size = 3;
     point_t* points[] = { &points_[0], &points_[1], &points_[2] };
-    scalePoints(points, size, scaleCoeff, middle);
+    scalePoints(points, size, scaleCoeff, mid);
   }
 }
