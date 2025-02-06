@@ -23,41 +23,27 @@ namespace {
   }
 }
 
-gavrilova::Rectangle* make_rectangle(std::istream& in, size_t& nError)
+gavrilova::Rectangle* make_rectangle(std::istream& in)
 {
   gavrilova::point_t point1, point2;
   if (!(in >> point1.x >> point1.y >> point2.x >> point2.y )) {
-    ++nError;
-    return nullptr;
+    throw("Errors in rectangle input");
   }
-  gavrilova::Rectangle* rect = nullptr;
-  try {
-    rect = new gavrilova::Rectangle(point1, point2);
-    return rect;
-  } catch(const std::exception&) {
-    ++nError;
-    return nullptr;
-  }
+  gavrilova::Rectangle* rect = new gavrilova::Rectangle(point1, point2);
+  return rect;
 }
 
-gavrilova::Triangle* make_triangle(std::istream& in, size_t& nError)
+gavrilova::Triangle* make_triangle(std::istream& in)
 {
   gavrilova::point_t point1, point2, point3;
   if (!(in >> point1.x >> point1.y >> point2.x >> point2.y >> point3.x >> point3.y)) {
-    ++nError;
-    return nullptr;
+    throw("Errors in triangle input");
   }
-  gavrilova::Triangle* triang = nullptr;
-  try {
-    triang = new gavrilova::Triangle(point1, point2, point3);
-    return triang;
-  } catch(const std::exception&) {
-    ++nError;
-    return nullptr;
-  }
+  gavrilova::Triangle* triang = new gavrilova::Triangle(point1, point2, point3);
+  return triang;
 }
 
-gavrilova::Polygon* make_polygon(std::istream& in, size_t& nError)
+gavrilova::Polygon* make_polygon(std::istream& in)
 {
   size_t capacityVert = 10;
   size_t nVert = 0;
@@ -66,7 +52,6 @@ gavrilova::Polygon* make_polygon(std::istream& in, size_t& nError)
   in >> verteces[nVert].x;
   while (in) {
     if (!(in >> verteces[nVert].y)) {
-      ++nError;
       delete[] verteces;
       return nullptr;
     }
@@ -82,9 +67,8 @@ gavrilova::Polygon* make_polygon(std::istream& in, size_t& nError)
     }
   }
   if (!nVert || hasSameVerteces(verteces, nVert)) {
-    ++nError;
     delete[] verteces;
-    return nullptr;
+    throw("Errors in polygon input");
   }
 
   gavrilova::Polygon* poligon = nullptr;
@@ -92,43 +76,35 @@ gavrilova::Polygon* make_polygon(std::istream& in, size_t& nError)
     poligon = new gavrilova::Polygon(nVert, verteces);
     delete[] verteces;
     return poligon;
-  }catch (const std::exception&) {
+  }catch (const std::bad_alloc&) {
     delete[] verteces;
-    ++nError;
-    return nullptr;
+    throw;
   }
 }
 
-gavrilova::Ellipse* make_ellipse(std::istream& in, size_t& nError)
+gavrilova::Ellipse* make_ellipse(std::istream& in)
 {
   gavrilova::point_t center;
   double radiusX = 0, radiusY = 0;
   if (!(in >> center.x >> center.y >> radiusX >> radiusY)) {
-    ++nError;
-    return nullptr;
+    throw("Errors in ellipse input");
   }
-
-  try {
-    gavrilova::Ellipse* ellipse = new gavrilova::Ellipse(center, radiusX, radiusY);
-    return ellipse;
-  } catch (const std::bad_alloc&) {
-    ++nError;
-    return nullptr;
-  }
+  gavrilova::Ellipse* ellipse = new gavrilova::Ellipse(center, radiusX, radiusY);
+  return ellipse;
 }
 
-gavrilova::Shape* gavrilova::make_shape(std::istream& in, std::string shapeType, size_t& nError)
+gavrilova::Shape* gavrilova::make_shape(std::istream& in, std::string shapeType)
 {
   Shape* new_shape = nullptr;
 
   if (shapeType == "RECTANGLE") {
-    new_shape = make_rectangle(in, nError);
+    new_shape = make_rectangle(in);
   } else if (shapeType ==  "TRIANGLE") {
-    new_shape = make_triangle(in, nError);
+    new_shape = make_triangle(in);
   } else if (shapeType ==  "POLYGON") {
-    new_shape = make_polygon(in, nError);
+    new_shape = make_polygon(in);
   } else if (shapeType == "ELLIPSE") {
-    new_shape = make_ellipse(in, nError);
+    new_shape = make_ellipse(in);
   }
 
   return new_shape;

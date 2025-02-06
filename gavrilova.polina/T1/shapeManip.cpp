@@ -48,9 +48,3 @@ void gavrilova::scaleShapes(CompositeShape& shapes, const point_t& center, doubl
   }
 }
 
-void gavrilova::clearShapes(Shape** shapes, size_t n)
-{
-  for (size_t i = 0; i < n; ++i) {
-    delete shapes[i];
-  }
-}

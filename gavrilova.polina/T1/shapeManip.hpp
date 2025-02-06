@@ -10,6 +10,5 @@ namespace gavrilova {
   void scaleShapes(CompositeShape& Shapes, const point_t& center, double k);
   void outRectangle(std::ostream& out, const rectangle_t& rect);
   void outRectangles(std::ostream& out, const CompositeShape& Shapes);
-  void clearShapes(Shape** Shapes, size_t n);
 }
 #endif

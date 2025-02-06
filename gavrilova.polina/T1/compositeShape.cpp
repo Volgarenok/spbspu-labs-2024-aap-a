@@ -40,7 +40,7 @@ gavrilova::CompositeShape::~CompositeShape()
 
 gavrilova::CompositeShape& gavrilova::CompositeShape::operator=(const CompositeShape& other)
 {
-  if (this != &other) {
+  if (this != std::addressof(other)) {
     CompositeShape cpy(other);
     swap(cpy);
   }
@@ -184,8 +184,7 @@ void gavrilova::CompositeShape::expand()
 
 void gavrilova::CompositeShape::resize(size_t new_capacity)
 {
-  Shape** new_shapes = nullptr;
-  new_shapes = new Shape*[new_capacity];
+  Shape** new_shapes = new Shape*[new_capacity];
   for (size_t i = 0; i < size_; ++i) {
     new_shapes[i] = shapes_[i];
   }
