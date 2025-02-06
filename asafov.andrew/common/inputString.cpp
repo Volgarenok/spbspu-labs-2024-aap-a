@@ -1,32 +1,32 @@
 #include "inputString.hpp"
 #include <iostream>
 #include <cstddef>
-#include "resize.hpp"
+#include "increaseString.hpp"
 
 char* asafov::inputString()
 {
-  size_t length = 0;
-  size_t count = 1;
-  char* string = new char[count];
+  size_t reallength = 0;
+  size_t possiblelength = 1;
+  char* string = new char[possiblelength];
   char ch = 0;
   while (!std::cin.eof())
   {
-    count--;
+    possiblelength--;
     std::cin >> ch;
-    if(std::cin.fail() || std::cin.eof())
+    if (std::cin.fail() || std::cin.eof())
     {
-      string[length] = '\0';
+      string[reallength] = '\0';
       break;
     }
-    string[length] = ch;
-    length++;
-    if (count == 0)
+    string[reallength] = ch;
+    reallength++;
+    if (possiblelength == 0)
     {
-      count = length;
+      possiblelength = reallength;
       char* newstring = nullptr;
       try
       {
-        newstring = resize(string, length, length);
+        newstring = increaseString(string, reallength, reallength);
       }
       catch (const std::bad_alloc& e)
       {
@@ -37,7 +37,7 @@ char* asafov::inputString()
       string = newstring;
     }
   }
-  if (length == 0)
+  if (reallength == 0)
   {
     string[0] = 0;
   }

@@ -3,11 +3,11 @@
 
 void findUniqLetters(const char* string, char* alphabet)
 {
-  for(size_t i = 0; string[i]!='\0'; i++)
+  for (size_t i = 0; string[i]!='\0'; i++)
   {
-    for(size_t j = 0; j < 26; j++)
+    for (size_t j = 0; j < 26; j++)
     {
-      if(string[i] == alphabet[j])
+      if (std::tolower(string[i]) == alphabet[j])
       {
         alphabet[j] = 0;
       }
@@ -17,7 +17,7 @@ void findUniqLetters(const char* string, char* alphabet)
 
 int asafov::countUniqLetters(const char* string)
 {
-  char alphabet[] = "abcdefghijklmnopqrstuvwxyz\0";
+  char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
   findUniqLetters(string, alphabet);
   size_t count = 0;
   for (size_t i = 0; i < 26; i++)
