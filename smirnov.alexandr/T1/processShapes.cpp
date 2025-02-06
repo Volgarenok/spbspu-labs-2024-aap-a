@@ -48,10 +48,6 @@ void smirnov::scaleShapes(Shape ** shapes, size_t count, point_t p, double facto
     point_t vector;
     vector.x = (newPos.x - startPos.x);
     vector.y = (newPos.y - startPos.y);
-<<<<<<< HEAD
-    shapes[i]->scale(factor);
-=======
->>>>>>> 180f519d0bd7990d0f245d2dcd03e4fec924302a
     shapes[i]->move(-vector.x, -vector.y);
   }
 }
