@@ -15,8 +15,7 @@ namespace maslevtsov
     virtual rectangle_t getFrameRect() const = 0;
     virtual void move(point_t pnt) = 0;
     virtual void move(double dx, double dy) = 0;
-    virtual void unsafeScale(double k) = 0;
-    virtual void safeScale(double k) = 0;
+    virtual void scale(double k) = 0;
   };
 
   void clearShapes(Shape** shapes, std::size_t border);

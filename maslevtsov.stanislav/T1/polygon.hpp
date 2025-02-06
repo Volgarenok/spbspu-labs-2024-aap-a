@@ -17,8 +17,7 @@ namespace maslevtsov
     rectangle_t getFrameRect() const noexcept override;
     void move(point_t pnt) noexcept override;
     void move(double dx, double dy) noexcept override;
-    void unsafeScale(double k) override;
-    void safeScale(double k) override;
+    void scale(double k) override;
 
   private:
     std::size_t nVertices_;

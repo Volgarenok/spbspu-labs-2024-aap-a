@@ -39,7 +39,7 @@ void maslevtsov::Rectangle::move(double dx, double dy) noexcept
   topRight_ = {topRight_.x + dx, topRight_.y + dy};
 }
 
-void maslevtsov::Rectangle::unsafeScale(double k)
+void maslevtsov::Rectangle::scale(double k)
 {
   point_t frameCenter = getFrameRect().pos;
   double leftDiffX = (frameCenter.x - bottomLeft_.x) * k;
@@ -48,13 +48,4 @@ void maslevtsov::Rectangle::unsafeScale(double k)
   double rightDiffY = (topRight_.y - frameCenter.y) * k;
   bottomLeft_ = {frameCenter.x - leftDiffX, frameCenter.y - leftDiffY};
   topRight_ = {frameCenter.x + rightDiffX, frameCenter.y + rightDiffY};
-}
-
-void maslevtsov::Rectangle::safeScale(double k)
-{
-  if (k <= 0)
-  {
-    throw std::invalid_argument("invalid coefficient");
-  }
-  unsafeScale(k);
 }

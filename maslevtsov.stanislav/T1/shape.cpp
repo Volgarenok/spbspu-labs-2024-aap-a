@@ -41,7 +41,7 @@ void maslevtsov::unsafeScale(Shape* shape, point_t pnt, double k)
   shape->move(pnt);
   point_t frameCenterAfter = shape->getFrameRect().pos;
   point_t offset{(frameCenterAfter.x - frameCenterBefore.x) * k, (frameCenterAfter.y - frameCenterBefore.y) * k};
-  shape->unsafeScale(k);
+  shape->scale(k);
   shape->move(-offset.x, -offset.y);
 }
 

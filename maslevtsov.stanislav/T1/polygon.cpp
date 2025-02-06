@@ -125,7 +125,7 @@ void maslevtsov::Polygon::move(double dx, double dy) noexcept
   }
 }
 
-void maslevtsov::Polygon::unsafeScale(double k)
+void maslevtsov::Polygon::scale(double k)
 {
   point_t frameCenter = getFrameRect().pos;
   for (std::size_t i = 0; i < nVertices_; ++i)
@@ -134,15 +134,6 @@ void maslevtsov::Polygon::unsafeScale(double k)
     double yDiff = (frameCenter.y - vertices_[i].y) * k;
     vertices_[i] = {frameCenter.x - xDiff, frameCenter.y - yDiff};
   }
-}
-
-void maslevtsov::Polygon::safeScale(double k)
-{
-  if (k <= 0)
-  {
-    throw std::invalid_argument("invalid coefficient");
-  }
-  unsafeScale(k);
 }
 
 maslevtsov::Polygon* maslevtsov::makePolygon(const double* arguments, std::size_t nArguments)

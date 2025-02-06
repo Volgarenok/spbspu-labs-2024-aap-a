@@ -96,12 +96,7 @@ void maslevtsov::Regular::move(double dx, double dy) noexcept
   polygon_.move(dx, dy);
 }
 
-void maslevtsov::Regular::unsafeScale(double k)
+void maslevtsov::Regular::scale(double k)
 {
-  polygon_.unsafeScale(k);
-}
-
-void maslevtsov::Regular::safeScale(double k)
-{
-  polygon_.safeScale(k);
+  polygon_.scale(k);
 }
