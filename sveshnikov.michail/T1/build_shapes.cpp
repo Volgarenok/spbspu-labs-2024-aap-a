@@ -7,18 +7,19 @@
 
 namespace
 {
-  double *read_params(std::istream &in, size_t count);
+  double *read_params(std::istream &in);
 
-  double *read_params(std::istream &in, size_t count)
+  double *read_params(std::istream &in)
   {
-    double *params = new double[count];
-    for (size_t i = 0; i < count; i++)
+    double *params = new double[5];
+    size_t i = 0;
+    while (in >> params[i])
     {
-      if (!(in >> params[i]))
-      {
-        delete[] params;
-        throw std::logic_error("ERROR: Incorrect shape parameters");
-      }
+      i++;
+    }
+    if (in.fail())
+    {
+      in.clear();
     }
     return params;
   }
@@ -26,7 +27,7 @@ namespace
 
 void sveshnikov::build_rectangle(std::istream &in, CompositeShape &comp_shp)
 {
-  double *params = read_params(in, 4);
+  double *params = read_params(in);
   try
   {
     comp_shp.push_back(new Rectangle({params[0], params[1]}, {params[2], params[3]}));
@@ -41,7 +42,7 @@ void sveshnikov::build_rectangle(std::istream &in, CompositeShape &comp_shp)
 
 void sveshnikov::build_ring(std::istream &in, CompositeShape &comp_shp)
 {
-  double *params = read_params(in, 4);
+  double *params = read_params(in);
   try
   {
     comp_shp.push_back(new Ring({params[0], params[1]}, params[2], params[3]));
@@ -56,7 +57,7 @@ void sveshnikov::build_ring(std::istream &in, CompositeShape &comp_shp)
 
 void sveshnikov::build_ellipse(std::istream &in, CompositeShape &comp_shp)
 {
-  double *params = read_params(in, 4);
+  double *params = read_params(in);
   try
   {
     comp_shp.push_back(new Ellipse({params[0], params[1]}, params[2], params[3]));
@@ -71,7 +72,7 @@ void sveshnikov::build_ellipse(std::istream &in, CompositeShape &comp_shp)
 
 void sveshnikov::build_square(std::istream &in, CompositeShape &comp_shp)
 {
-  double *params = read_params(in, 3);
+  double *params = read_params(in);
   try
   {
     comp_shp.push_back(new Square({params[0], params[1]}, params[2]));
