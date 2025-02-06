@@ -12,8 +12,14 @@ namespace
   double *read_params(std::istream &in, size_t count)
   {
     double *params = new double[count];
-    for (size_t i = 0; i < count && in >> params[i]; i++)
-    {}
+    for (size_t i = 0; i < count; i++)
+    {
+      if (!(in >> params[i]))
+      {
+        delete[] params;
+        throw std::logic_error("ERROR: Incorrect shape parameters");
+      }
+    }
     return params;
   }
 }
