@@ -17,7 +17,7 @@ namespace
     {
       i++;
     }
-    if (in.fail())
+    if (in.fail() && !in.eof())
     {
       in.clear();
     }
