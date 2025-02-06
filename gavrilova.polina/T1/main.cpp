@@ -25,7 +25,6 @@ int main()
       shp = make_shape(std::cin, shapeTypeOrScale);
     } catch (const std::exception& e) {
       std::cerr << e.what();
-      continue;
     }
     if (!shp) {
       continue;
