@@ -26,6 +26,7 @@ int main()
   catch (const std::bad_alloc&)
   {
     delete[] str;
+    return 1;
   }
 
   char* unusedLetters = new char[27];
@@ -37,6 +38,7 @@ int main()
   {
     delete[] unusedLetters;
     delete[] str;
+    return 1;
   }
   for (size_t i = 0; i < 26 || unusedLetters[i] != '\0'; i++)
   {
