@@ -11,7 +11,7 @@ namespace hismatova
       delete figures[i];
     }
   }
-  Shape* createFigure(const std::string& name, std::istream& in, bool& errors)
+  Shape* createFigure(const std::string& name, std::istream& in, bool& errors, bool& memory)
   {
     try
     {
@@ -35,11 +35,11 @@ namespace hismatova
     catch (const std::bad_alloc&)
     {
       std::cerr << "out of memory\n";
-      exit(1);
+      memory = true;
     }
     return nullptr;
   }
-  void results(std::ostream& out, Shape** const figures, size_t count)
+  void results(std::ostream& out, const Shape* const* figures, size_t count)
   {
     double sum = 0.0;
     for (size_t i = 0; i < count; i++)
@@ -69,11 +69,17 @@ int main()
   size_t count = 0;
   bool errors = false;
   bool scales = false;
+  bool memory = false;
   Shape* figures[10000];
   std::string nameFigure;
   while (std::cin >> nameFigure && nameFigure != "SCALE")
   {
-    Shape* figure = createFigure(nameFigure, std::cin, errors);
+    Shape* figure = createFigure(nameFigure, std::cin, errors, memory);
+    if (memory)
+    {
+      deleteFigures(figures, count);
+      return 1;
+    }
     if (figure)
     {
       figures[count++] = figure;
