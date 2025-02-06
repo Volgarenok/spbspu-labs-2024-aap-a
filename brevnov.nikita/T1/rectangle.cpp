@@ -1,10 +1,10 @@
 #include "rectangle.hpp"
 #include <stdexcept>
 
-brevnov::BigRectangle::BigRectangle(point_t left, point_t right):
+brevnov::Rectangle::Rectangle(point_t left, point_t right):
   shapes_(),
-  left_({0.0, 0.0}),
-  right_({0.0, 0.0})
+  left_(left),
+  right_(right)
 {
   if (left.x >= right.x || left.y >= right.y)
   {
