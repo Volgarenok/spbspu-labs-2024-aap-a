@@ -20,7 +20,7 @@ char* belobrov::inputString(std::istream& input)
       bufferSize *= 2;
 
       char* newBuffer = belobrov::resizeBuffer(buffer, bufferSize);
-      free(oldBuffer);
+      free(buffer);
       if (!newBuffer) {
         free(buffer);
         std::skipws(input);
