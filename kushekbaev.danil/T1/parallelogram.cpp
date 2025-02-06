@@ -18,7 +18,7 @@ namespace kushekbaev
     points_{first, second, third}
   {
     bool isParToXflag = isParToX(first, second) || isParToX (second, third) || isParToX(first, third);
-    if (!isTriangle(first, second, third) || !isParToXflag)
+    if (!details::isTriangle(first, second, third) || !isParToXflag)
     {
       throw std::invalid_argument("Incorrect parallelogram\n");
     }

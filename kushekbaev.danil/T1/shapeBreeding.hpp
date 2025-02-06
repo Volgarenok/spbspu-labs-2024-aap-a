@@ -6,8 +6,11 @@
 
 namespace kushekbaev
 {
-  bool isTriangle(const point_t first, const point_t second, const point_t third);
-  bool isPointInsideTriangle(const point_t first, const point_t second, const point_t third, const point_t last);
+  namespace details
+  {
+    bool isTriangle(const point_t first, const point_t second, const point_t third);
+    bool isPointInsideTriangle(const point_t first, const point_t second, const point_t third, const point_t last);
+  }
   point_t makeScale(std::istream& in);
 }
 

@@ -9,7 +9,7 @@ namespace kushekbaev
   Concave::Concave(point_t first, point_t second, point_t third, point_t last):
     points_{first, second, third, last}
   {
-    if (!isTriangle(first, second, third) || !isPointInsideTriangle(first, second, third, last))
+    if (!details::isTriangle(first, second, third) || !details::isPointInsideTriangle(first, second, third, last))
     {
       throw std::invalid_argument("Incorrect concave\n");
     }
