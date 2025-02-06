@@ -6,14 +6,14 @@ char* belobrov::inputString(std::istream& input)
   size_t bufferSize = 32;
   char* buffer = static_cast< char* >(malloc(bufferSize * sizeof(char)));
 
- if (!buffer) {
+  if (!buffer) {
     return nullptr;
   }
 
   size_t currentIndex = 0;
   std::noskipws(input);
 
-  char currentChar;
+  char currentChar = ' ';
   while (input >> currentChar && !input.eof()) {
     if (currentIndex == (bufferSize - 1)) {
       buffer[currentIndex] = '\0';
@@ -22,6 +22,7 @@ char* belobrov::inputString(std::istream& input)
       char* newBuffer = belobrov::resizeBuffer(buffer, bufferSize);
       if (!newBuffer) {
         free(buffer);
+        std::skipws(input);
         return nullptr;
       }
       buffer = newBuffer;
