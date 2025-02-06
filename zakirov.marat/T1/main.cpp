@@ -44,7 +44,7 @@ int main()
     free(data);
   }
 
-  if (!shapes[0] || !scale_data)
+  if (shapes.empty() || !scale_data)
   {
     std::cerr << "Warning! No shapes entered or scale is not defined." << '\n';
     free(scale_data);
