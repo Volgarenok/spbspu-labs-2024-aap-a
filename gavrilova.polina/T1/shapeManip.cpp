@@ -27,30 +27,30 @@ void gavrilova::outRectangle(std::ostream& out, const rectangle_t& rect)
   out << " " << rect.pos.x + rect.width / 2 << " " << rect.pos.y + rect.height / 2;
 }
 
-void gavrilova::outRectangles(std::ostream& out, const CompositeShape& Shapes)
+void gavrilova::outRectangles(std::ostream& out, const CompositeShape& shapes)
 {
-  if (!Shapes.empty()) {
+  if (!shapes.empty()) {
     out << std::setprecision(1);
-    rectangle_t rect = Shapes[0]->getFrameRect();
+    rectangle_t rect = shapes[0]->getFrameRect();
     outRectangle(out, rect);
-    for (size_t i = 1; i < Shapes.size(); ++i) {
-      rectangle_t rect = Shapes[i]->getFrameRect();
+    for (size_t i = 1; i < shapes.size(); ++i) {
+      rectangle_t rect = shapes[i]->getFrameRect();
       out << " ";
       outRectangle(out, rect);
     }
   }
 }
 
-void gavrilova::scaleShapes(CompositeShape& Shapes, const point_t& center, double k)
+void gavrilova::scaleShapes(CompositeShape& shapes, const point_t& center, double k)
 {
-  for (size_t i = 0; i < Shapes.size(); ++i) {
-    scaleShape(*(Shapes[i]), center, k);
+  for (size_t i = 0; i < shapes.size(); ++i) {
+    scaleShape(*(shapes[i]), center, k);
   }
 }
 
-void gavrilova::clearShapes(Shape** Shapes, size_t n)
+void gavrilova::clearShapes(Shape** shapes, size_t n)
 {
   for (size_t i = 0; i < n; ++i) {
-    delete Shapes[i];
+    delete shapes[i];
   }
 }

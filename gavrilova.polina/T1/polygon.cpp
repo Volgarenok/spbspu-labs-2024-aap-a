@@ -1,5 +1,4 @@
 #include "polygon.hpp"
-#include <iostream>
 #include "shapeManip.hpp"
 
 gavrilova::Polygon::Polygon(size_t nPoints, const point_t* verteces):
@@ -11,7 +10,7 @@ gavrilova::Polygon::Polygon(size_t nPoints, const point_t* verteces):
   }
   triangles_ = new Triangle*[nPoints - 2];
   for (size_t i = 0; i < (nPoints - 2); ++i) {
-    try{
+    try {
       triangles_[i] = new Triangle(verteces[0], verteces[i + 1], verteces[i + 2]);
       ++size_;
     } catch (const std::bad_alloc&) {
@@ -85,7 +84,7 @@ gavrilova::Shape* gavrilova::Polygon::clone() const
   return new Polygon(*this);
 }
 
-void gavrilova::Polygon::clear()
+void gavrilova::Polygon::clear() noexcept
 {
   for (size_t i = 0; i < size_; ++i) {
     delete triangles_[i];

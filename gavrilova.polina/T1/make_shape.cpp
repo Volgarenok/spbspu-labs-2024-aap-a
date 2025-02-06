@@ -59,7 +59,8 @@ gavrilova::Triangle* make_triangle(std::istream& in, size_t& nError)
 
 gavrilova::Polygon* make_polygon(std::istream& in, size_t& nError)
 {
-  size_t capacityVert = 10, nVert = 0;
+  size_t capacityVert = 10;
+  size_t nVert = 0;
   gavrilova::point_t* verteces = new gavrilova::point_t[capacityVert];
 
   in >> verteces[nVert].x;

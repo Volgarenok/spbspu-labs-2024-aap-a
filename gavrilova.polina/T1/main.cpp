@@ -23,7 +23,7 @@ int main()
 
     if (shapeTypeOrScale == "SCALE") {
       if (!(std::cin >> center.x >> center.y >> koef)) {
-          std::cerr << " ";
+          std::cerr << "Ошибка ввода парамметров масштабирования!";
       }
     }
     Shape* shp = make_shape(std::cin, shapeTypeOrScale, nError);
@@ -38,6 +38,7 @@ int main()
   }
 
   if (koef <= 0 || shapes.empty()) {
+    std::cerr << "Ошибка! Неправильный коэффицент или фигуры отсутствуют";
     return 1;
   }
   if (nError) {

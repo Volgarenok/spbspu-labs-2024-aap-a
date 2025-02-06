@@ -1,5 +1,4 @@
 #include "rectangle.hpp"
-#include <iostream>
 #include "pointManip.hpp"
 
 gavrilova::Rectangle::Rectangle(const point_t& pBottomLeft, const point_t& pTopRight):

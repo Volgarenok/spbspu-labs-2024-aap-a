@@ -1,5 +1,4 @@
 #include "triangle.hpp"
-#include <iostream>
 #include "pointManip.hpp"
 
 namespace {

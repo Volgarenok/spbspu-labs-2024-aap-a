@@ -70,7 +70,7 @@ void gavrilova::CompositeShape::pop_back()
   if (size_ == 0) {
     throw std::out_of_range("No shape to pop");
   }
-  delete shapes_[--size_];
+  delete shapes_[size_--];
 }
 
 gavrilova::Shape* gavrilova::CompositeShape::at(size_t id)
@@ -171,11 +171,7 @@ void gavrilova::CompositeShape::expand()
 void gavrilova::CompositeShape::resize(size_t new_capacity)
 {
   Shape** new_shapes = nullptr;
-  try {
-    new_shapes = new Shape*[new_capacity];
-  } catch (const std::bad_alloc&) {
-    throw;
-  }
+  new_shapes = new Shape*[new_capacity];
   for (size_t i = 0; i < size_; ++i) {
     new_shapes[i] = shapes_[i];
   }
