@@ -20,8 +20,7 @@ namespace kushekbaev
     double firstcheck = (first.x - last.x) * (second.y - first.y) - (second.x - first.x) * (first.y - last.y);
     double secondcheck = (second.x - last.x) * (third.y - second.y) - (third.x - second.x) * (second.y - last.y);
     double thirdcheck = (third.x - last.x) * (first.y - third.y) - (first.x - third.x) * (third.y - last.y);
-    return ((firstcheck > 0 && secondcheck > 0 && thirdcheck > 0) ||
-            (firstcheck < 0 && secondcheck < 0 && thirdcheck < 0));
+    return ((fstcheck > 0 && sndcheck > 0 && trdcheck > 0) || (fstcheck < 0 && sndcheck < 0 && trdcheck < 0));
   }
 
   point_t makeScale(std::istream& in)
