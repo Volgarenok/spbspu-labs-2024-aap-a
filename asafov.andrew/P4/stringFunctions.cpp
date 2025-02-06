@@ -47,5 +47,4 @@ void asafov::getUnusedLetters(const char* string, char* unusedletters)
   {
     unusedletters[i] = alphabet[i];
   }
-  unusedletters[count] = '\0';
 }

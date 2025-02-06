@@ -10,8 +10,14 @@ int main()
     delete[] str;
     return 1;
   }
-
-  std::cout << asafov::countUniqLetters(str) << '\n';
+  try
+  {
+    std::cout << asafov::countUniqLetters(str) << '\n';
+  }
+  catch (const std::bad_alloc&)
+  {
+    delete[] str;
+  }
 
   char* unusedLetters = new char[26];
   try
