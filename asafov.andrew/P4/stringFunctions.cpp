@@ -8,7 +8,7 @@ int findUniqLetters(const char* string, char* alphabet)
   {
     for(int j = 0; j < 26; j++)
     {
-      if(string[i] - (i>96) ? (0) : (32) == alphabet[j])
+      if(string[i] == alphabet[j])
       {
         alphabet[j] = 0;
         count++;
