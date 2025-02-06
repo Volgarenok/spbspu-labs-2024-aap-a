@@ -26,7 +26,11 @@ int main()
     return 1;
   }
 
-  std::cout << unusedLetters << '\n';
+  for (size_t i = 0; i < 26; i++)
+  {
+    std::cout << unusedLetters[i];
+  }
+  std::cout << '\n';
 
   delete[] unusedLetters;
   delete[] str;
