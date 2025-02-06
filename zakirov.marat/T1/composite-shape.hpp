@@ -19,8 +19,10 @@ namespace zakirov
     void scale(double k);
     void push_back(Shape * shapes);
     void pop_back();
-    Shape * at(size_t id) const;
-    Shape * operator[](size_t id) const noexcept;
+    Shape * at(size_t id);
+    const Shape * at(size_t id) const;
+    Shape * operator[](size_t id) noexcept;
+    const Shape * operator[](size_t id) const noexcept;
     bool empty() const noexcept;
     size_t size() const noexcept;
   private:

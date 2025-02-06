@@ -87,6 +87,7 @@ void zakirov::CompositeShape::move(const point_t & target)
 void zakirov::CompositeShape::move(double bias_x, double bias_y)
 {
   point_t target = {getFrameRect().pos.x + bias_x, getFrameRect().pos.y + bias_y};
+  move(target);
 }
 
 void zakirov::CompositeShape::scale(double k)
@@ -118,7 +119,7 @@ void zakirov::CompositeShape::pop_back()
   free(shapes_[shapes_quantity_]);
 }
 
-zakirov::Shape * zakirov::CompositeShape::at(size_t id) const
+zakirov::Shape * zakirov::CompositeShape::at(size_t id)
 {
   if (id >= shapes_quantity_)
   {
@@ -128,7 +129,22 @@ zakirov::Shape * zakirov::CompositeShape::at(size_t id) const
   return shapes_[id];
 }
 
-zakirov::Shape * zakirov::CompositeShape::operator[](size_t id) const noexcept
+const zakirov::Shape * zakirov::CompositeShape::at(size_t id) const
+{
+  if (id >= shapes_quantity_)
+  {
+    throw std::invalid_argument("ERROR: id is greater, than size of array");
+  }
+
+  return shapes_[id];
+}
+
+zakirov::Shape * zakirov::CompositeShape::operator[](size_t id) noexcept
+{
+  return shapes_[id];
+}
+
+const zakirov::Shape * zakirov::CompositeShape::operator[](size_t id) const noexcept
 {
   return shapes_[id];
 }

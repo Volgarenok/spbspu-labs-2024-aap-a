@@ -28,7 +28,7 @@ int main()
     {
       shapes.push_back(make_shape(data));
     }
-    catch (const std::invalid_argument & e)
+    catch (const std::exception)
     {
       shape_flag = true;
       free(data);
@@ -37,7 +37,7 @@ int main()
     catch (const std::logic_error & e)
     {
       free(data);
-      std::cerr << "Warning! Error in scale composition." << '\n';
+      std::cerr << e.what() << '\n';
       return 1;
     }
 
@@ -62,7 +62,7 @@ int main()
   }
   catch (const std::invalid_argument & e)
   {
-    std::cerr << "Warning! The figure change coefficient is incorrect." << '\n';
+    std::cerr << e.what() << '\n';
     free(scale_data);
     return 1;
   }
