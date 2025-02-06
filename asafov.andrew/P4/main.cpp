@@ -29,7 +29,7 @@ int main()
     delete[] unusedLetters;
     delete[] str;
   }
-  for (size_t i = 0; i < 27 || unusedLetters[i] != '\0'; i++)
+  for (size_t i = 0; i < 26 || unusedLetters[i] != '\0'; i++)
   {
     std::cout << unusedLetters[i];
   }
