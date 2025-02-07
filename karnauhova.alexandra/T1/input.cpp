@@ -10,29 +10,27 @@
 void karnauhova::input_rectangle(std::istream & in, CompositeShape& shaps)
 {
   point_t x_y[2] = {};
-  for (size_t i = 0; i < 2; i++)
-  {
-    in >> x_y[i].x >> x_y[i].y;
-    if (!in)
-    {
-      throw std::logic_error("Incorrect points");
-    }
-  }
+  input_points(in, x_y, 2);
   shaps.push_back(new Rectangle(x_y[0], x_y[1]));
 }
 
 void karnauhova::input_triangle(std::istream & in, CompositeShape& shaps)
 {
   point_t x_y[3] = {};
-  for (size_t i = 0; i < 3; i++)
+  input_points(in, x_y, 3);
+  shaps.push_back(new Triangle(x_y[0], x_y[1], x_y[2]));
+}
+
+void karnauhova::input_points(std::istream & in, point_t* point, size_t count)
+{
+  for (size_t i = 0; i < count; i++)
   {
-    in >> x_y[i].x >> x_y[i].y;
+    in >> point[i].x >> point[i].y;
     if (!in)
     {
       throw std::logic_error("Incorrect points");
     }
   }
-  shaps.push_back(new Triangle(x_y[0], x_y[1], x_y[2]));
 }
 
 void karnauhova::input_scale(std::istream & in, point_t& point, double& k)
@@ -76,13 +74,15 @@ void karnauhova::input_polygon(std::istream & in, CompositeShape& shaps)
     count += 1;
   }
   in.clear();
-  Polygon* new_polygon = new Polygon(x_y, count);
+  Polygon* new_polygon = nullptr;
   try
   {
+    new_polygon = new Polygon(x_y, count);
     shaps.push_back(new_polygon);
   }
   catch (const std::exception& e)
   {
+    delete[] x_y;
     delete new_polygon;
     throw;
   }
@@ -123,9 +123,10 @@ void karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
   }
 }
 
-void karnauhova::input(std::istream & in, CompositeShape& shaps, size_t& count_error, point_t& point, double& k)
+void karnauhova::input(std::istream & in, CompositeShape& shaps, point_t& point, double& k)
 {
   std::string name = "uwu";
+  size_t count_error = 0;
   while (in >> name && !in.eof())
   {
     try
@@ -151,5 +152,9 @@ void karnauhova::input(std::istream & in, CompositeShape& shaps, size_t& count_e
   {
     std::cerr << "Error: scale input\n";
     throw std::logic_error("Incorrect scale");
+  }
+  if (count_error > 0)
+  {
+    throw std::invalid_argument("Incorrect argument");
   }
 }

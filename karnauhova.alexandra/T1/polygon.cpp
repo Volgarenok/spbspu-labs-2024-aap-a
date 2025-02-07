@@ -6,7 +6,7 @@
 #include "point.hpp"
 namespace
 {
-  bool be_polygon(const karnauhova::point_t* points, size_t count)
+  bool is_polygon(const karnauhova::point_t* points, size_t count)
   {
     for (size_t i = 0; i < count; i ++)
     {
@@ -26,7 +26,7 @@ karnauhova::Polygon::Polygon(const point_t* points, size_t count_point):
   triangles_(nullptr),
   count_(0)
 {
-  if (count_point < 3 || !be_polygon(points, count_point))
+  if (count_point < 3 || !is_polygon(points, count_point))
   {
     delete[] points;
     throw std::logic_error("It's not a polygon");
@@ -49,7 +49,6 @@ karnauhova::Polygon::Polygon(const point_t* points, size_t count_point):
       triangles_[count_] = new Triangle(points[0], points[i], points[i + 2]);
       count_++;
     }
-    delete[] points;
   }
   catch (const std::exception& e)
   {
@@ -58,7 +57,6 @@ karnauhova::Polygon::Polygon(const point_t* points, size_t count_point):
       delete triangles_[i];
     }
     delete[] triangles_;
-    delete[] points;
     throw;
   }
 }
