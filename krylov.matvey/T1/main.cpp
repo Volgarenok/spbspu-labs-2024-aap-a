@@ -50,15 +50,11 @@ int main()
         double x = 0.0, y = 0.0, factor = 0.0;
         if (!(std::cin >> x >> y >> factor))
         {
-          krylov::deleteShapes(shapes, shapeCount);
-          std::cerr << "Invalid SCALE parameters\n";
-          return 1;
+          continue;
         }
         if (factor <= 0)
         {
-          krylov::deleteShapes(shapes, shapeCount);
-          std::cerr << "Scale factor must be positive\n";
-          return 1;
+          continue;
         }
 
         double totalAreaBefore = 0.0;
