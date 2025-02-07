@@ -52,13 +52,13 @@ int main()
         {
           krylov::deleteShapes(shapes, shapeCount);
           std::cerr << "Invalid SCALE parameters\n";
-          return 1
+          return 1;
         }
         if (factor <= 0)
         {
           krylov::deleteShapes(shapes, shapeCount);
           std::cerr << "Scale factor must be positive\n";
-          return 1
+          return 1;
         }
 
         double totalAreaBefore = 0.0;
