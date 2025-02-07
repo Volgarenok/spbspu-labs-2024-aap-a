@@ -62,6 +62,7 @@ void karnauhova::input_polygon(std::istream & in, CompositeShape& shaps)
         delete[] x_y;
         throw;
       }
+      delete[] x_y;
       x_y = a;
       size++;
     }
@@ -69,6 +70,7 @@ void karnauhova::input_polygon(std::istream & in, CompositeShape& shaps)
     in >> x_y[count].y;
     if (!in)
     {
+      delete[] x_y;
       throw std::logic_error("Incorrect points");
     }
     count += 1;
@@ -86,6 +88,7 @@ void karnauhova::input_polygon(std::istream & in, CompositeShape& shaps)
     delete new_polygon;
     throw;
   }
+  delete[] x_y;
 }
 
 karnauhova::point_t* karnauhova::expansion(point_t* a, size_t old, size_t dl)
@@ -95,7 +98,6 @@ karnauhova::point_t* karnauhova::expansion(point_t* a, size_t old, size_t dl)
   {
     newm[i] = a[i];
   }
-  delete[] a;
   return newm;
 }
 
