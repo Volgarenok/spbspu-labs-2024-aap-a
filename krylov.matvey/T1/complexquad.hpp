@@ -6,7 +6,7 @@
 
 namespace krylov
 {
-  class Complexquad : public Shape
+  class Complexquad final : public Shape
   {
   public:
     Complexquad(const point_t& a, const point_t& b, const point_t& c, const point_t& d);

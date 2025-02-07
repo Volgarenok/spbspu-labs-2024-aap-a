@@ -4,7 +4,10 @@
 #include <stdexcept>
 
 krylov::Complexquad::Complexquad(const point_t& a, const point_t& b, const point_t& c, const point_t& d):
-a_(a), b_(b), c_(c), d_(d)
+  a_(a),
+  b_(b),
+  c_(c),
+  d_(d)
 {
   if (((a_.x == b_.x && a_.y == b_.y) || (b_.x == c_.x && b_.y == c_.y) || (c_.x == d_.x && c_.y == d_.y)
     || (a_.x == c_.x && a_.y == c_.y) || (a_.x == d_.x && a_.y == d_.y) || (b_.x == d_.x && b_.y == d_.y)))

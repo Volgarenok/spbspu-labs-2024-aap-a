@@ -2,7 +2,9 @@
 #include <stdexcept>
 
 krylov::Ring::Ring(const point_t& center, double outerRadius, double innerRadius):
-  center_(center), outerRadius_(outerRadius), innerRadius_(innerRadius)
+  center_(center),
+  outerRadius_(outerRadius),
+  innerRadius_(innerRadius)
 {
   if (outerRadius <= 0 || innerRadius <= 0 || innerRadius >= outerRadius)
   {

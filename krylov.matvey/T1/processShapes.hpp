@@ -6,7 +6,10 @@
 
 namespace krylov
 {
-  void processShapes();
+  Shape* createRectangle();
+  Shape* createTriangle();
+  Shape* createRing();
+  Shape* createComplexquad();
   void deleteShapes(Shape** shapes, size_t shapeCount);
   void printAreaAndFrameCoords(Shape** shapes, size_t shapeCount, double totalArea);
 }

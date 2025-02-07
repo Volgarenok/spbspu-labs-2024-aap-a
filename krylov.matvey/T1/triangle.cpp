@@ -1,9 +1,12 @@
 #include "triangle.hpp"
 #include <cmath>
+#include <algorithm>
 #include <stdexcept>
 
 krylov::Triangle::Triangle(const point_t& a, const point_t& b, const point_t& c):
-  a_(a), b_(b), c_(c)
+  a_(a),
+  b_(b),
+  c_(c)
 {
   double area = getArea();
   if (area <= 0)
@@ -19,10 +22,10 @@ double krylov::Triangle::getArea() const
 
 krylov::rectangle_t krylov::Triangle::getFrameRect() const
 {
-  double minX = std::fmin(a_.x, std::fmin(b_.x, c_.x));
-  double maxX = std::fmax(a_.x, std::fmax(b_.x, c_.x));
-  double minY = std::fmin(a_.y, std::fmin(b_.y, c_.y));
-  double maxY = std::fmax(a_.y, std::fmax(b_.y, c_.y));
+  double minX = std::min({a_.x, b_.x, c_.x});
+  double maxX = std::max({a_.x, b_.x, c_.x});
+  double minY = std::min({a_.y, b_.y, c_.y});
+  double maxY = std::max({a_.y, b_.y, c_.y});
   point_t center = {minX + (maxX - minX) / 2, minY + (maxY - minY) / 2};
   return rectangle_t{maxX - minX, maxY - minY, center};
 }

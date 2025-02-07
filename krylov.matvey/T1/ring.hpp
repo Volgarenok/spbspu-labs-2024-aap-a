@@ -5,7 +5,7 @@
 
 namespace krylov
 {
-  class Ring : public Shape
+  class Ring final : public Shape
   {
   public:
     Ring(const point_t& center, double outerRadius, double innerRadius);

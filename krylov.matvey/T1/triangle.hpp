@@ -5,7 +5,7 @@
 
 namespace krylov
 {
-  class Triangle : public Shape
+  class Triangle final : public Shape
   {
   public:
     Triangle(const point_t& a, const point_t& b, const point_t& c);
