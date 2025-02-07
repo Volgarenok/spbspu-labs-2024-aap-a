@@ -12,13 +12,15 @@ namespace gavrilova {
     CompositeShape(CompositeShape&& other) noexcept;
     CompositeShape(size_t capacity);
     ~CompositeShape();
+    
     CompositeShape& operator=(const CompositeShape& other);
     CompositeShape& operator=(CompositeShape&& other) noexcept;
+    Shape* operator[](size_t id) noexcept;
+    const Shape* operator[](size_t id) const noexcept;
 
     void push_back(Shape* shp);
     void pop_back();
-    Shape* operator[](size_t id) noexcept;
-    const Shape* operator[](size_t id) const noexcept;
+    
     Shape* at(size_t id);
     const Shape* at(size_t id) const;
     bool empty() const noexcept;

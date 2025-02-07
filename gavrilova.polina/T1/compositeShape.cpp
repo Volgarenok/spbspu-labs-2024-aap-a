@@ -1,5 +1,4 @@
 #include "compositeShape.hpp"
-#include <algorithm>
 #include "shapeManip.hpp"
 
 gavrilova::CompositeShape::CompositeShape():

@@ -27,7 +27,7 @@ gavrilova::Rectangle* make_rectangle(std::istream& in)
 {
   gavrilova::point_t point1, point2;
   if (!(in >> point1.x >> point1.y >> point2.x >> point2.y )) {
-    throw("Errors in rectangle input");
+    throw std::logic_error("Errors in rectangle input");
   }
   gavrilova::Rectangle* rect = new gavrilova::Rectangle(point1, point2);
   return rect;
@@ -35,9 +35,11 @@ gavrilova::Rectangle* make_rectangle(std::istream& in)
 
 gavrilova::Triangle* make_triangle(std::istream& in)
 {
-  gavrilova::point_t point1, point2, point3;
+  gavrilova::point_t point1;
+  gavrilova::point_t point2;
+  gavrilova::point_t point3;
   if (!(in >> point1.x >> point1.y >> point2.x >> point2.y >> point3.x >> point3.y)) {
-    throw("Errors in triangle input");
+    throw std::logic_error("Errors in triangle input");
   }
   gavrilova::Triangle* triang = new gavrilova::Triangle(point1, point2, point3);
   return triang;
@@ -53,7 +55,7 @@ gavrilova::Polygon* make_polygon(std::istream& in)
   while (in) {
     if (!(in >> verteces[nVert].y)) {
       delete[] verteces;
-      return nullptr;
+      throw std::logic_error("Errors in ellipse input");
     }
     ++nVert;
     if (nVert >= capacityVert) {
@@ -68,7 +70,7 @@ gavrilova::Polygon* make_polygon(std::istream& in)
   }
   if (!nVert || hasSameVerteces(verteces, nVert)) {
     delete[] verteces;
-    throw("Errors in polygon input");
+    throw std::logic_error("Errors in polygon input");
   }
 
   gavrilova::Polygon* poligon = nullptr;
@@ -85,9 +87,10 @@ gavrilova::Polygon* make_polygon(std::istream& in)
 gavrilova::Ellipse* make_ellipse(std::istream& in)
 {
   gavrilova::point_t center;
-  double radiusX = 0, radiusY = 0;
+  double radiusX = 0;
+  double radiusY = 0;
   if (!(in >> center.x >> center.y >> radiusX >> radiusY)) {
-    throw("Errors in ellipse input");
+    throw std::logic_error("Errors in ellipse input");
   }
   gavrilova::Ellipse* ellipse = new gavrilova::Ellipse(center, radiusX, radiusY);
   return ellipse;

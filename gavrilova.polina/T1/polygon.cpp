@@ -31,7 +31,8 @@ gavrilova::Polygon::Polygon(const Polygon& other):
   triangles_(new Triangle*[other.size_])
 {
   for (size_t i = 0; i < size_; ++i) {
-    triangles_[i] = other.triangles_[i];
+    Triangle cpy(*other.triangles_[i]);
+    triangles_[i] = &cpy;
   }
 }
 
