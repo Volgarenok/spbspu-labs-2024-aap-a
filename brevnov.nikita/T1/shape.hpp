@@ -20,5 +20,6 @@ namespace brevnov
   void scale_shapes(Shape * const * shapes, size_t count, point_t scale_p, double ratio);
   void print_frame_coordinates(const Shape * const * shapes, size_t count, std::ostream & out);
   void find_frame_coordinates(rectangle_t frame, std::ostream& out);
+  void move_point(double dx, double dy, brevnov::point_t &point);
 }
 #endif

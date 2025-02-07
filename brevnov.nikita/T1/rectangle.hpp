@@ -18,6 +18,5 @@ namespace brevnov
     point_t left_;
     point_t right_;
   };
-  void move_point(point_t& point, double dx, double dy) noexcept;
 }
 #endif

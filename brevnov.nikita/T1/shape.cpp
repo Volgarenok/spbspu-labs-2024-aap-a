@@ -4,6 +4,12 @@
 
 namespace brevnov
 {
+  void move_point(double dx, double dy, brevnov::point_t &point)
+  {
+    point.x += dx;
+    point.y += dy;
+  }
+  
   void Shape::check_scale(double n)
   {
     if (n <= 0.0)

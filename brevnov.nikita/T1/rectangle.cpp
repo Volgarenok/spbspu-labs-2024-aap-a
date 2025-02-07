@@ -49,12 +49,6 @@ brevnov::rectangle_t brevnov::Rectangle::getFrameRect() const noexcept
   return result;
 }
 
-void brevnov::move_point(brevnov::point_t& point, double dx, double dy) noexcept
-{
-  point.x += dx;
-  point.y += dy;
-}
-
 void brevnov::Rectangle::move(brevnov::point_t new_centre) noexcept
 {
   double width = right_.x - left_.x;
@@ -71,8 +65,8 @@ void brevnov::Rectangle::move(double dx, double dy) noexcept
   {
     shapes_[i]->move(dx, dy);
   }
-  move_point(right_, dx, dy);
-  move_point(left_, dx, dy);
+  move_point(dx, dy, right_);
+  move_point(dx, dy, left_);
 }
 
 void brevnov::Rectangle::scale(double n) noexcept
