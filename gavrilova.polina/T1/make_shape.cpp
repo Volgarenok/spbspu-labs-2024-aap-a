@@ -78,7 +78,7 @@ gavrilova::Polygon* make_polygon(std::istream& in)
     poligon = new gavrilova::Polygon(nVert, verteces);
     delete[] verteces;
     return poligon;
-  }catch (const std::bad_alloc&) {
+  } catch (const std::bad_alloc&) {
     delete[] verteces;
     throw;
   }
