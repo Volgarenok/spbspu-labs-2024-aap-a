@@ -14,6 +14,12 @@ int main()
     std::cerr << "Error" << "\n";
     return 1;
   }
+  if (capacity == 1)
+  {
+    std::cout << "Empty input" << "\n";
+    free(str);
+    return 0;
+  }
   size_t size = capacity - 1;
   char str_min = dirti::str_min(str, size);
   if (str_min == '\n')

@@ -3,11 +3,10 @@
 
 void dirti::str_min2(const char * str, size_t size, char * str_min2)
 {
-  char symbols[size] = {'0'};
-  size_t sym_num[size] = {0};
+  char symbols[256] = {'0'};
+  size_t sym_num[256] = {0};
   size_t sym = 1;
   dirti::sym_count(str, symbols, sym_num, size, sym);
-  size_t str_min2_size = 2;
   str_min2[0] = symbols[0];
   size_t min = size + 1;
   for (size_t i = 1; i < sym; ++i)

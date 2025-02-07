@@ -28,8 +28,8 @@ void dirti::sym_count(const char * str, char * symbols, size_t * sym_num, size_t
 
 char dirti::str_min(const char * str, size_t size)
 {
-  char symbols[size] = {'0'};
-  size_t sym_num[size] = {0};
+  char symbols[256] = {'0'};
+  size_t sym_num[256] = {0};
   size_t sym = 1;
   dirti::sym_count(str, symbols, sym_num, size, sym);
   size_t min = size + 1;

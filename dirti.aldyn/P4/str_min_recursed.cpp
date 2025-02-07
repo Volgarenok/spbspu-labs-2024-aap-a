@@ -57,12 +57,12 @@ namespace
 
 char dirti::str_min_recursed(const char * str, size_t size)
 {
-  size_t sym = 1;
-  char symbols[size] = {'0'};
-  size_t sym_num[size] = {0};
+  char symbols[256] = {'0'};
+  size_t sym_num[256] = {0};
   symbols[0] = str[0];
   sym_num[0] = 1;
   size_t i = 1;
+  size_t sym = 1;
   sym_counting(str, symbols, sym_num, i, size, sym);
   if (sym == 1)
   {
