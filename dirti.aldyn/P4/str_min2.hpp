@@ -5,7 +5,7 @@
 
 namespace dirti
 {
-  char * str_min2(const char * str, size_t size);
+  void str_min2(const char * str, size_t size, char * str_min2);
 }
 
 #endif

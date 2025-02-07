@@ -2,7 +2,7 @@
 
 namespace
 {
-  char * new_storage(char * str, size_t & capacity)
+  char * new_storage(const char * str, size_t & capacity)
   {
     capacity += 1;
     char * str2 = reinterpret_cast< char * >(malloc(sizeof(char) * capacity));
@@ -28,12 +28,6 @@ char * dirti::str_input(std::istream & input, size_t & capacity)
     return nullptr;
   }
   std::noskipws(input);
-  if (!input)
-  {
-    free(str);
-    std::skipws(input);
-    return nullptr;
-  }
   while ((input >> c) && (c != '\n'))
   {
     char * str2 = new_storage(str, capacity);
@@ -45,6 +39,12 @@ char * dirti::str_input(std::istream & input, size_t & capacity)
     }
     str = str2;
     str[size++] = c;
+  }
+  if (size == 0)
+  {
+    free(str);
+    std::skipws(input);
+    return nullptr;
   }
   str[size] = '\0';
   std::skipws(input);
