@@ -5,25 +5,25 @@
 
 double third_point_y(bocharov::point_t leftDown, bocharov::point_t rightUp)
 {
-  double AD = rightUp.x - leftDown.x;
-  double AB = rightUp.y - leftDown.y;
-  double BD = sqrt(pow(AB, 2) + pow(AD, 2));
-  double AK = (AB * AD) / BD;
-  double BK = sqrt(pow(AB, 2) - pow(AK, 2));
-  double KD = BD - BK;
-  double KH = (AK * KD) / AD;
-  return KH;
+  double ad = rightUp.x - leftDown.x;
+  double ab = rightUp.y - leftDown.y;
+  double bd = sqrt(pow(ab, 2) + pow(ad, 2));
+  double ak = (ab * ad) / bd;
+  double bk = sqrt(pow(ab, 2) - pow(ak, 2));
+  double kd = bd - bk;
+  double kh = (ak * kd) / ad;
+  return kh;
 }
 
 double third_point_x(bocharov::point_t leftDown, bocharov::point_t rightUp)
 {
-  double AD = rightUp.x - leftDown.x;
-  double AB = rightUp.y - leftDown.y;
-  double BD = sqrt(pow(AB, 2) + pow(AD, 2));
-  double AK = (AB * AD) / BD;
-  double KH = third_point_y(leftDown, rightUp);
-  double AH = sqrt(pow(AK, 2) - pow(KH, 2));
-  return AH;
+  double ad = rightUp.x - leftDown.x;
+  double ab = rightUp.y - leftDown.y;
+  double bd = sqrt(pow(ab, 2) + pow(ad, 2));
+  double ak = (ab * ad) / bd;
+  double kh = third_point_y(leftDown, rightUp);
+  double ah = sqrt(pow(ak, 2) - pow(kh, 2));
+  return ah;
 }
 
 bocharov::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
