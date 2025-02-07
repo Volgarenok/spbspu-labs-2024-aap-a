@@ -6,10 +6,9 @@
 #include "processShapes.hpp"
 #include "createShapes.hpp"
 
-using namespace smirnov;
-
 int main()
 {
+  using namespace smirnov;
   Shape * shapes[10000] = {};
   std::string shapeType = "";
   size_t countShapes = 0;
