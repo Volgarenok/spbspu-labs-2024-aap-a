@@ -22,18 +22,20 @@ void smirnov::destroyShapes(Shape ** shapes, size_t count)
 void smirnov::printFrameRect(const Shape * const * const shapes,
     size_t count, std::ostream & out)
 {
-  for (size_t i = 0; i < count; i++)
+  rectangle_t rectangle = shapes[0]->getFrameRect();
+  double x1 = rectangle.pos.x - rectangle.width / 2.0;
+  double y1 = rectangle.pos.y - rectangle.height / 2.0;
+  double x2 = rectangle.pos.x + rectangle.width / 2.0;
+  double y2 = rectangle.pos.y + rectangle.height / 2.0;
+  out << x1 << " " << y1 << " " << x2 << " " << y2;
+  for (size_t i = 1; i < count; i++)
   {
     rectangle_t rectangle = shapes[i]->getFrameRect();
     double x1 = rectangle.pos.x - rectangle.width / 2.0;
     double y1 = rectangle.pos.y - rectangle.height / 2.0;
     double x2 = rectangle.pos.x + rectangle.width / 2.0;
     double y2 = rectangle.pos.y + rectangle.height / 2.0;
-    out << x1 << " " << y1 << " " << x2 << " " << y2;
-    if (i != count - 1)
-    {
-      out << " ";
-    }
+    out << " " << x1 << " " << y1 << " " << x2 << " " << y2;
   }
 }
 
