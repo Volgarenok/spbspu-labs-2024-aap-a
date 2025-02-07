@@ -55,7 +55,7 @@ void karnauhova::input_polygon(std::istream & in, CompositeShape& shaps)
       point_t* a = nullptr;
       try
       {
-        a = expansion(x_y, size, size + 1);
+        a = expand(x_y, size, size + 1);
       }
       catch (const std::bad_alloc& e)
       {
@@ -91,7 +91,7 @@ void karnauhova::input_polygon(std::istream & in, CompositeShape& shaps)
   delete[] x_y;
 }
 
-karnauhova::point_t* karnauhova::expansion(point_t* a, size_t old, size_t dl)
+karnauhova::point_t* karnauhova::expand(point_t* a, size_t old, size_t dl)
 {
   point_t* newm = new point_t[dl];
   for (size_t i = 0; i < old; i++)
@@ -105,19 +105,19 @@ void karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
 {
   if (name == "RECTANGLE")
   {
-    karnauhova::input_rectangle(in, shaps);
+    input_rectangle(in, shaps);
   }
   else if (name == "TRIANGLE")
   {
-    karnauhova::input_triangle(in, shaps);
+    input_triangle(in, shaps);
   }
   else if (name == "SCALE")
   {
-    karnauhova::input_scale(in, point, k);
+    input_scale(in, point, k);
   }
   else if (name == "POLYGON")
   {
-    karnauhova::input_polygon(in, shaps);
+    input_polygon(in, shaps);
   }
   else
   {
