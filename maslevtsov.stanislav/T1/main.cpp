@@ -1,7 +1,7 @@
 #include <stdexcept>
 #include <iostream>
 #include "shape.hpp"
-#include "split.hpp"
+#include "getline_string_to_doubles.hpp"
 
 int main()
 {
@@ -22,12 +22,11 @@ int main()
     std::string argStr = "";
     double* arguments = nullptr;
     maslevtsov::Shape* shape = nullptr;
-    std::size_t splitted = 0;
+    std::size_t read = 0;
     try
     {
-      std::getline(std::cin, argStr);
-      arguments = maslevtsov::split(argStr.substr(1), splitted);
-      shape = maslevtsov::makeShape(argument, arguments, splitted);
+      arguments = maslevtsov::getlineStringToDoubles(std::cin, read);
+      shape = maslevtsov::makeShape(argument, arguments, read);
     }
     catch (const std::bad_alloc& e)
     {
