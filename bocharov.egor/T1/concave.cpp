@@ -43,10 +43,10 @@ namespace
 }
 
 bocharov::Concave::Concave(point_t a, point_t b, point_t c, point_t d):
-  a_(a),
-  b_(b),
+  a_(b),
+  b_(d),
   c_(c),
-  d_(d)
+  d_(a)
 {
   if (!isTriangle(d, b, c) || !isPointInTriangle(a, b, c, d) || isDupePoint(a, b, c, d))
   {
