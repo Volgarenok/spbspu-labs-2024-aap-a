@@ -50,11 +50,15 @@ int main()
         double x = 0.0, y = 0.0, factor = 0.0;
         if (!(std::cin >> x >> y >> factor))
         {
-          throw std::invalid_argument("Invalid SCALE parameters");
+          krylov::deleteShapes(shapes, shapeCount);
+          std::cerr << "Invalid SCALE parameters\n";
+          return 1
         }
         if (factor <= 0)
         {
-          throw std::invalid_argument("Scale factor must be positive");
+          krylov::deleteShapes(shapes, shapeCount);
+          std::cerr << "Scale factor must be positive\n";
+          return 1
         }
 
         double totalAreaBefore = 0.0;
@@ -92,7 +96,7 @@ int main()
         std::getline(std::cin, skippedLines);
       }
     }
-    catch (const std::exception & e)
+    catch (const std::exception& e)
     {
       invalidDescriptions = true;
       std::string skippedLines = "";
@@ -103,7 +107,8 @@ int main()
   if (!scaleCommandProcessed)
   {
     krylov::deleteShapes(shapes, shapeCount);
-    throw std::invalid_argument("Missing or invalid SCALE command");
+    std::cerr << "Missing or invalid SCALE command\n";
+    return 1;
   }
 
   if (invalidDescriptions)
