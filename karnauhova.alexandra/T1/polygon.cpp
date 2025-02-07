@@ -22,6 +22,15 @@ namespace
   }
 }
 
+void karnauhova::Polygon::clear() noexcept
+{
+  for (size_t i = 0; i < count_; i++)
+  {
+    delete triangles_[i];
+  }
+  delete[] triangles_;
+}
+
 karnauhova::Polygon::Polygon(const point_t* points, size_t count_point):
   triangles_(nullptr),
   count_(0)
@@ -51,11 +60,7 @@ karnauhova::Polygon::Polygon(const point_t* points, size_t count_point):
   }
   catch (const std::exception& e)
   {
-    for (size_t i = 0; i < count_; i++)
-    {
-      delete triangles_[i];
-    }
-    delete[] triangles_;
+    clear();
     throw;
   }
 }
@@ -102,11 +107,7 @@ void karnauhova::Polygon::scale(double k)
 
 karnauhova::Polygon::~Polygon()
 {
-  for (size_t i = 0; i < count_; ++i)
-  {
-    delete triangles_[i];
-  }
-  delete[] triangles_;
+  clear();
 }
 
 karnauhova::Shape* karnauhova::Polygon::clone() const

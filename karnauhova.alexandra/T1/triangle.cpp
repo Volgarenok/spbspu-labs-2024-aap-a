@@ -15,9 +15,9 @@ karnauhova::Triangle::Triangle(const point_t& x1, const point_t& x2, const point
   x2_(x2),
   x3_(x3)
 {
-  double len_1 = karnauhova::getDistance(x1_, x2_);
-  double len_2 = karnauhova::getDistance(x2_, x3_);
-  double len_3 = karnauhova::getDistance(x1_, x3_);
+  double len_1 = getDistance(x1_, x2_);
+  double len_2 = getDistance(x2_, x3_);
+  double len_3 = getDistance(x1_, x3_);
   if (!(len_1 < (len_2 + len_3) && len_2 < (len_1 + len_3) && len_3 < (len_2 + len_1)))
   {
     throw std::logic_error("It's not a triangle");

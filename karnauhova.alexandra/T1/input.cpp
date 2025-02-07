@@ -133,7 +133,7 @@ void karnauhova::input(std::istream & in, CompositeShape& shaps, point_t& point,
   {
     try
     {
-      karnauhova::fabric_input(in, shaps, count_error, point, k, name);
+      fabric_input(in, shaps, count_error, point, k, name);
     }
     catch (const std::logic_error& e)
     {

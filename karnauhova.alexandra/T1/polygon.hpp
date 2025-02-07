@@ -16,6 +16,7 @@ namespace karnauhova
     rectangle_t getFrameRect() const override;
     void scale(double k) override;
     Shape* clone() const;
+    void clear() noexcept;
   private:
     Shape** triangles_;
     size_t count_;

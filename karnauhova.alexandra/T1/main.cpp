@@ -7,7 +7,7 @@
 int main()
 {
   using namespace karnauhova;
-  point_t point {0,0};
+  point_t point{0,0};
   double k = 0;
   CompositeShape shaps(1);
   try

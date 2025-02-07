@@ -1,16 +1,16 @@
 #include "point.hpp"
 #include <cmath>
-double karnauhova::getDistance(point_t a, point_t b)
+double karnauhova::getDistance(const point_t& a, const point_t& b)
 {
   return std::sqrt(std::pow(a.x - b.x, 2) + std::pow(a.y - b.y, 2));
 }
 
-bool karnauhova::isEqual(point_t a, point_t b)
+bool karnauhova::isEqual(const point_t& a, const point_t& b)
 {
   return ((a.x == b.x) && (a.y == b.y));
 }
 
-karnauhova::rectangle_t karnauhova::frameRect(Shape** shapes, size_t count)
+karnauhova::rectangle_t karnauhova::frameRect(Shape ** shapes, size_t count)
 {
   double min_x = shapes[0]->getFrameRect().pos.x - shapes[0]->getFrameRect().width / 2;
   double max_x = shapes[0]->getFrameRect().pos.x + shapes[0]->getFrameRect().width / 2;
