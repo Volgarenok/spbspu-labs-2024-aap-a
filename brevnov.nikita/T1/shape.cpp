@@ -1,8 +1,18 @@
 #include "shape.hpp"
 #include <iomanip>
+#include <stdexcept>
 
 namespace brevnov
 {
+  void Shape::check_scale(double n)
+  {
+    if (n <= 0.0)
+    {
+      throw std::invalid_argument("Not  positive number");
+    }
+    scale(n);
+  }
+
   void destroy_shapes(Shape** shapes, size_t count)
   {
     for (size_t i = 0; i < count; ++i)

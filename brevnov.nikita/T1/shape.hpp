@@ -11,6 +11,7 @@ namespace brevnov
     virtual rectangle_t getFrameRect() const = 0;
     virtual void move(point_t new_centre) = 0;
     virtual void move(double dx, double dy) = 0;
+    void check_scale(double n);
     virtual void scale(double n) = 0;
     virtual ~Shape() = default;
   };

@@ -183,7 +183,7 @@ void brevnov::CompositeShape::scale(double k,  point_t scale)
     shapes_[i]->move(scale);
     point_t end = shapes_[i]->getFrameRect().pos;
     point_t vector = {(end.x - start.x) * k, (end.y - start.y) * k};
-    shapes_[i]->scale(k);
+    shapes_[i]->check_scale(k);
     shapes_[i]->move(-vector.x,  -vector.y);
   }
 }

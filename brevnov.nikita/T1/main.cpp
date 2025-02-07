@@ -30,21 +30,6 @@ int main()
     }
     else if (input_shape == "SCALE")
     {
-      try
-      {
-        scale_p = scale(std::cin);
-      }
-      catch (const std::invalid_argument& f)
-      {
-        std::cerr << "incorrect scale point\n";
-        return 1;
-      }
-      std::cin >> ratio;
-      if (ratio <= 0.0)
-      {
-        std::cerr << "Incorrect retio\n";
-        return 1;
-      }
       scaleCommand = true;
       break;
     }
@@ -84,6 +69,21 @@ int main()
     std::cerr << "No SCALE command!\n";
     return 1;
   }
+  try
+  {
+    scale_p = scale(std::cin);
+  }
+  catch (const std::invalid_argument& f)
+  {
+    std::cerr << "incorrect scale point\n";
+    return 1;
+  }
+  std::cin >> ratio;
+  if (ratio <= 0.0)
+  {
+    std::cerr << "Incorrect retio\n";
+    return 1;
+  }
   std::cout << std::setprecision(1);
   std::cout << comp_sh.getArea() << " ";
   print_frame_coordinates(comp_sh, std::cout);
@@ -92,9 +92,14 @@ int main()
   {
     comp_sh.scale(ratio, scale_p);
   }
-  catch(const std::bad_alloc& e)
+  catch (const std::bad_alloc& e)
   {
     std::cerr << "Not enough memory for operatopn!\n";
+    return 1;
+  }
+  catch (const std::invalid_argument& e)
+  {
+    std::cerr << "Not correct scale!\n";
     return 1;
   }
   std::cout << comp_sh.getArea() << " ";
