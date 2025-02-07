@@ -40,6 +40,12 @@ char * dirti::str_input(std::istream & input, size_t & capacity)
     str = str2;
     str[size++] = c;
   }
+  if (size == 0)
+  {
+    free(str);
+    std::skipws(input);
+    return nullptr;
+  }
   str[size] = '\0';
   std::skipws(input);
   return str;
