@@ -4,15 +4,13 @@
 
 brevnov::Ellipse::Ellipse(point_t center, double r1, double r2):
   center_(center),
-  r1_(0.0),
-  r2_(0.0)
+  r1_(r1),
+  r2_(r2)
 {
   if (r1 <= 0.0 || r2 <= 0.0)
   {
     throw std::invalid_argument("Not correct arguments");
   }
-  r1_ = r1;
-  r2_ = r2;
 }
 
 double brevnov::Ellipse::getR1() const noexcept
