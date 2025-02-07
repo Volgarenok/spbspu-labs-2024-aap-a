@@ -2,6 +2,21 @@
 #include <cmath>
 #include <stdexcept>
 #include <iostream>
+namespace brevnov
+{
+  bool isCorrectDiamond(double x1, double y1, double x2, double y2, double x3, double y3)
+  {
+    if ((x1 == x2 &&  y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3))
+    {
+      return false;
+    }
+    else if ((x1 != x2 && x1 != x3 && x2 != x3) || (y1 != y2 && y1 != y3 && y2 != y3))
+    {
+      return false;
+    }
+    return true;
+  }
+}
 
 brevnov::Diamond::Diamond(point_t a, point_t b, point_t c):
   center_({0.0, 0.0}),
@@ -9,8 +24,7 @@ brevnov::Diamond::Diamond(point_t a, point_t b, point_t c):
   vertical_({0.0, 0.0})
 {
   double x1 = a.x, y1 = a.y, x2 = b.x, y2 = b.y, x3 = c.x, y3 = c.y;
-  if ((x1 == x2 &&  y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3)
-    || (x1 != x2 && x1 != x3 && x2 != x3) || (y1 != y2 && y1 != y3 && y2 != y3))
+  if (!isCorrectDiamond(x1, y1, x2, y2, x3, y3))
   {
     throw std::invalid_argument("Not correct arguments");
   }
