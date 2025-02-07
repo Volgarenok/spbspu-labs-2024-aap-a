@@ -43,19 +43,15 @@ namespace
 }
 
 bocharov::Concave::Concave(point_t a, point_t b, point_t c, point_t d):
-  a_({0.0, 0.0}),
-  b_({0.0, 0.0}),
-  c_({0.0, 0.0}),
-  d_({0.0, 0.0})
+  a_(a),
+  b_(b),
+  c_(c),
+  d_(d)
 {
   if (!isTriangle(d, b, c) || !isPointInTriangle(a, b, c, d) || isDupePoint(a, b, c, d))
   {
     throw std::invalid_argument("Error witch point for concave\n");
   }
-  a_ = b;
-  b_ = d;
-  c_ = c;
-  d_ = a;
 }
 
 double bocharov::Concave::getArea() const

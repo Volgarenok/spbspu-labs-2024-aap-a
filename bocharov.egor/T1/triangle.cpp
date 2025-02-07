@@ -4,19 +4,15 @@
 #include <stdexcept>
 
 bocharov::Triangle::Triangle(point_t a, point_t b, point_t c):
- a_({0.0L, 0.0L}),
- b_({0.0L, 0.0L}),
- c_({0.0L, 0.0L})
+ a_(a),
+ b_(b),
+ c_(c)
 {
   if ((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) == 0)
   {
     throw std::invalid_argument("error arguments for triangle\n");
   }
-  a_ = a;
-  b_ = b;
-  c_ = c;
 }
-
 double bocharov::Triangle::getArea() const
 {
   return std::abs(((b_.x - a_.x) * (c_.y - a_.y) - (c_.x - a_.x) * (b_.y - a_.y))) / 2.0;
@@ -38,17 +34,10 @@ bocharov::rectangle_t bocharov::Triangle::getFrameRect() const
 
 void bocharov::Triangle::move(point_t centerP)
 {
-  point_t pos;
-  pos.x = std::abs(a_.x + b_.x + c_.x) / 3.0;
-  pos.y = std::abs(a_.y + b_.y + c_.y) / 3.0;
+  point_t pos = getFrameRect().pos;
   double moveX = centerP.x - pos.x;
   double moveY = centerP.y - pos.y;
-  a_.x += moveX;
-  a_.y += moveY;
-  b_.x += moveX;
-  b_.y += moveY;
-  c_.x += moveX;
-  c_.y += moveY;
+  move(moveX, moveY);
 }
 
 void bocharov::Triangle::move(double x, double y)
@@ -63,10 +52,7 @@ void bocharov::Triangle::move(double x, double y)
 
 void bocharov::Triangle::scale(double ratio)
 {
-  double x = 0, y = 0;
-  x = std::abs(a_.x + b_.x + c_.x) / 3.0;
-  y = std::abs(a_.y + b_.y + c_.y) / 3.0;
-  point_t pos = {x, y};
+  point_t pos = getFrameRect().pos;
   a_.x = (a_.x - pos.x) * ratio + pos.x;
   a_.y = (a_.y - pos.y) * ratio + pos.y;
   b_.x = (b_.x - pos.x) * ratio + pos.x;

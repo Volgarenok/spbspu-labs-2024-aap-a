@@ -27,25 +27,16 @@ double third_point_x(bocharov::point_t leftDown, bocharov::point_t rightUp)
 }
 
 bocharov::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
-  a_(Triangle{leftDown, point_t{rightUp.x, leftDown.y},
+  ta_(Triangle{leftDown, point_t{rightUp.x, leftDown.y},
     point_t{leftDown.x + third_point_x(leftDown, rightUp), leftDown.y + third_point_y(leftDown, rightUp)}}),
-  b_(Triangle{leftDown, point_t{leftDown.x, rightUp.y},
+  tb_(Triangle{leftDown, point_t{leftDown.x, rightUp.y},
     point_t{leftDown.x + third_point_x(leftDown, rightUp), leftDown.y + third_point_y(leftDown, rightUp)}}),
-  c_(Triangle{point_t{leftDown.x, rightUp.y}, rightUp,
+  tc_(Triangle{point_t{leftDown.x, rightUp.y}, rightUp,
     point_t{rightUp.x - third_point_x(leftDown, rightUp), rightUp.y - third_point_y(leftDown, rightUp)}}),
-  d_(Triangle{rightUp, point_t{rightUp.x, leftDown.y},
-    point_t{rightUp.x - third_point_x(leftDown, rightUp), rightUp.y - third_point_y(leftDown, rightUp)}}),
-  leftDown_({0.0L, 0.0L}),
-  rightUp_({0.0L, 0.0L})
+  td_(Triangle{rightUp, point_t{rightUp.x, leftDown.y},
+    point_t{rightUp.x - third_point_x(leftDown, rightUp), rightUp.y - third_point_y(leftDown, rightUp)}})
 {
-  if (leftDown.x < rightUp.x && leftDown.y < rightUp.y)
-  {
-    rightUp_.x = rightUp.x;
-    rightUp_.y = rightUp.y;
-    leftDown_.x = leftDown.x;
-    leftDown_.y = leftDown.y;
-  }
-  else
+  if (leftDown.x >= rightUp.x || leftDown.y >= rightUp.y)
   {
     throw std::invalid_argument("error with rectangle size\n");
   }
@@ -53,39 +44,38 @@ bocharov::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
 
 double bocharov::Rectangle::getArea() const
 {
-  return a_.getArea() + b_.getArea() + c_.getArea() + d_.getArea();
+  return ta_.getArea() + tb_.getArea() + tc_.getArea() + td_.getArea();
 }
 
 bocharov::rectangle_t bocharov::Rectangle::getFrameRect() const
 {
-  rectangle_t result;
-  result.height = rightUp_.y - leftDown_.y;
-  result.width = rightUp_.x - leftDown_.x;
-  result.pos.x = leftDown_.x + (result.width / 2.0L);
-  result.pos.y = leftDown_.y + (result.height / 2.0L);
-  return result;
+  point_t pos2 = {ta_.getFrameRect().pos.x, (ta_.getFrameRect().pos.y + tc_.getFrameRect().pos.y) / 2};
+  double width2 = ta_.getFrameRect().width;
+  double height2 = tb_.getFrameRect().height;
+  return {width2, height2, pos2};
 }
 
 void bocharov::Rectangle::move(double x, double y)
 {
-  a_.move(x, y);
-  b_.move(x, y);
-  c_.move(x, y);
-  d_.move(x, y);
+  ta_.move(x, y);
+  tb_.move(x, y);
+  tc_.move(x, y);
+  td_.move(x, y);
 }
 
 void bocharov::Rectangle::move(point_t centerP)
 {
-  a_.move(centerP);
-  b_.move(centerP);
-  c_.move(centerP);
-  d_.move(centerP);
+  ta_.move(centerP);
+  tb_.move(centerP);
+  tc_.move(centerP);
+  td_.move(centerP);
 }
 
 void bocharov::Rectangle::scale(double ratio)
 {
-  a_.scale(ratio);
-  b_.scale(ratio);
-  c_.scale(ratio);
-  d_.scale(ratio);
+  ta_.scale(ratio);
+  tb_.scale(ratio);
+  tc_.scale(ratio);
+  td_.scale(ratio);
 }
+

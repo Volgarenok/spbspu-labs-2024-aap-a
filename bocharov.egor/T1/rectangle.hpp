@@ -14,12 +14,10 @@ namespace bocharov
     void move(double x, double y) override;
     void scale(double ratio) override;
   private:
-    Triangle a_{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}};
-    Triangle b_{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}};
-    Triangle c_{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}};
-    Triangle d_{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}};
-    point_t leftDown_;
-    point_t rightUp_;
+    Triangle ta_{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}};
+    Triangle tb_{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}};
+    Triangle tc_{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}};
+    Triangle td_{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}};
   };
 }
 #endif
