@@ -110,7 +110,11 @@ void karnauhova::CompositeShape::pop_back()
 
 const karnauhova::Shape* karnauhova::CompositeShape::at(size_t id) const
 {
-  return const_cast< Shape * >(static_cast< const CompositeShape * >(this)->at(id));
+  if (id >= count_shapes_)
+  {
+    throw std::out_of_range("Index out of range");
+  }
+  return shapes_[id];
 }
 
 karnauhova::Shape* karnauhova::CompositeShape::at(size_t id)
@@ -129,7 +133,7 @@ karnauhova::Shape* karnauhova::CompositeShape::operator[](size_t id) noexcept
 
 const karnauhova::Shape* karnauhova::CompositeShape::operator[](size_t id) const noexcept
 {
-  return const_cast< Shape * >(static_cast< const CompositeShape * >(this)->operator[](id));
+  return shapes_[id];
 }
 
 bool karnauhova::CompositeShape::empty() const noexcept
