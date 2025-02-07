@@ -9,7 +9,7 @@ namespace brevnov
     point.x += dx;
     point.y += dy;
   }
-  
+
   void Shape::check_scale(double n)
   {
     if (n <= 0.0)
