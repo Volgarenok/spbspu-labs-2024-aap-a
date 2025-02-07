@@ -58,7 +58,7 @@ void karnauhova::scale_shapes_with_check(CompositeShape& shaps, const point_t& p
 
 
 
-void karnauhova::scale_point(Shape* object, point_t t, double k)
+void karnauhova::scale_point(Shape* object, const point_t& t, double k)
 {
   point_t centr_rec1 = object->getFrameRect().pos;
   object->move(t);
