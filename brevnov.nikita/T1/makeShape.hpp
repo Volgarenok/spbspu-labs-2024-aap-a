@@ -6,7 +6,6 @@
 #include "ellipse.hpp"
 #include "rectangle.hpp"
 #include "composite-shape.hpp"
-#include "big-rectangle.hpp"
 namespace brevnov
 {
   Shape * make_rectangle(std::istream & in);
