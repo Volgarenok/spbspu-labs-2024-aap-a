@@ -10,6 +10,8 @@ namespace karnauhova
   void scale_point(Shape* object, point_t t, double k);
   void output_points(std::ostream & out, const CompositeShape& shaps);
   void output_sum(std::ostream & out, const CompositeShape& shaps);
+  void scale_shapes_without_check(CompositeShape& shaps, const point_t& point, double k);
+  void scale_shapes_with_check(CompositeShape& shaps, const point_t& point, double k);
 }
 
 #endif

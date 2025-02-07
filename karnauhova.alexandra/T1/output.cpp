@@ -7,10 +7,7 @@ void karnauhova::output(std::ostream & out, CompositeShape& shaps, const point_t
   output_sum(out, shaps);
   output_points(out, shaps);
   out << "\n";
-  for (size_t i = 0; i < shaps.size(); i++)
-  {
-    scale_point(shaps[i], point, k);
-  }
+  scale_shapes_without_check(shaps, point, k);
   output_sum(out, shaps);
   output_points(out, shaps);
   out << "\n";
@@ -40,6 +37,26 @@ void karnauhova::output_points(std::ostream & out, const CompositeShape& shaps)
     out << std::setprecision(1) << " " << x1 << " " << y1 << " " << x2 << " " << y2;
   }
 }
+
+void karnauhova::scale_shapes_without_check(CompositeShape& shaps, const point_t& point, double k)
+{
+  for (size_t i = 0; i < shaps.size(); i++)
+  {
+    scale_point(shaps[i], point, k);
+  }
+}
+
+void karnauhova::scale_shapes_with_check(CompositeShape& shaps, const point_t& point, double k)
+{
+  if (k <= 0)
+  {
+    throw std::logic_error("Incorrect scale");
+  }
+  scale_shapes_without_check(shaps, point, k);
+}
+
+
+
 
 void karnauhova::scale_point(Shape* object, point_t t, double k)
 {
