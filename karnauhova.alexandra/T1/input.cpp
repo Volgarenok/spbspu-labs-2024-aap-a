@@ -11,14 +11,32 @@ void karnauhova::input_rectangle(std::istream & in, CompositeShape& shaps)
 {
   point_t x_y[2] = {};
   input_points(in, x_y, 2);
-  shaps.push_back(new Rectangle(x_y[0], x_y[1]));
+  Rectangle* rect = new Rectangle(x_y[0], x_y[1]);
+  try
+  {
+    shaps.push_back(rect);
+  }
+  catch (const std::exception& e)
+  {
+    delete rect;
+    throw;
+  }
 }
 
 void karnauhova::input_triangle(std::istream & in, CompositeShape& shaps)
 {
   point_t x_y[3] = {};
   input_points(in, x_y, 3);
-  shaps.push_back(new Triangle(x_y[0], x_y[1], x_y[2]));
+  Triangle* triangle = new Triangle(x_y[0], x_y[1], x_y[2]);
+  try
+  {
+    shaps.push_back(triangle);
+  }
+  catch (const std::exception& e)
+  {
+    delete triangle;
+    throw;
+  }
 }
 
 void karnauhova::input_points(std::istream & in, point_t* point, size_t count)
