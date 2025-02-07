@@ -7,12 +7,13 @@ smirnov::Parallelogram::Parallelogram(point_t p1, point_t p2, point_t p3):
   vertex1{p1},
   vertex2{p2},
   vertex3{p3},
-  vertex4{p2.x + p3.x - p1.x, p2.y + p3.y - p1.y}
+  vertex4{p1.x + p3.x - p2.x, p1.y + p3.y - p2.y}
 {
-  if ((p1.x == p3.x && p2.y == p3.y) || (p2.x == p3.x && p1.y == p3.y)
-      || (p2.x == p3.x && p2.y == p3.y))
+  if ((p1.x == p2.x && p1.y == p2.y) ||
+      (p1.x == p3.x && p1.y == p3.y) ||
+      (p2.x == p3.x && p2.y == p3.y))
   {
-    throw std::invalid_argument("Incorrect coordinates for the parallelogram");
+    throw std::invalid_argument("Points must be unique");
   }
 }
 

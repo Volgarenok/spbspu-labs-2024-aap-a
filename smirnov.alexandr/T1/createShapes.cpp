@@ -63,9 +63,9 @@ smirnov::Diamond * smirnov::createDiamond(std::istream & in)
     dx = std::abs(p1.x - p2.x) * 2;
     dy = std::abs(center.y - p3.y) * 2;
   }
-  point_t vertex1 = {center.x + dx / 2, center.y};
+  point_t vertex1 = {center.x - dx / 2, center.y};
   point_t vertex2 = {center.x, center.y + dy / 2};
-  point_t vertex3 = {center.x, center.y - dy / 2};
+  point_t vertex3 = {center.x + dx / 2, center.y};
   return new Diamond(vertex1, vertex2, vertex3);
 }
 
