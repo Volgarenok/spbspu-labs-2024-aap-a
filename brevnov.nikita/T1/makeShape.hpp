@@ -9,10 +9,10 @@
 #include "big-rectangle.hpp"
 namespace brevnov
 {
-  Shape * make_rectangle(double x1, double y1, double x2, double y2);
-  Diamond * make_diamond(double x1, double y1, double x2, double y2, double x3, double y3);
-  Ellipse * make_ellipse(point_t center, double r1, double r2);
+  Shape * make_rectangle(std::istream & in);
+  Diamond * make_diamond(std::istream & in);
+  Ellipse * make_ellipse(std::istream & in);
   point_t scale(std::istream & in);
-  Shape * make_shape(std::string name_shape, std::istream & in);
+  Shape * make_shape(std::istream & in);
 }
 #endif

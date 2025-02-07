@@ -5,7 +5,7 @@
 
 namespace brevnov
 {
-  Shape * make_rectangle(std::string name_shape, std::istream& in)
+  Shape * make_rectangle(std::istream& in)
   {
     double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0;
     in >> x1 >> y1 >> x2 >> y2;
@@ -15,14 +15,7 @@ namespace brevnov
     }
     try
     {
-      if (name_shape == "RECTANGLE")
-      {
-        return new Rectangle({x1, y1}, {x2, y2});
-      }
-      else
-      {
-        return new BigRectangle({x1, y1}, {x2, y2});
-      }
+      return new Rectangle({x1, y1}, {x2, y2});
     }
     catch (const std::invalid_argument& e)
     {
@@ -82,9 +75,9 @@ namespace brevnov
 
   Shape * make_shape(std::string name_shape, std::istream & in)
   {
-    if (name_shape == "RECTANGLE" || name_shape == "BIGRECTANGLE")
+    if (name_shape == "RECTANGLE")
     {
-      return make_rectangle(name_shape, in);
+      return make_rectangle(in);
     }
     if (name_shape == "ELLIPSE")
     {
