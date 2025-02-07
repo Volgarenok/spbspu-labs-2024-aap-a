@@ -33,6 +33,7 @@ namespace maslov
     Shape * shapeArray_[10000];
     void cloneArray(const CompositeShape & rhs);
     void fillArrayAndDeleteRhs(CompositeShape & rhs);
+    void swap(CompositeShape & rhs) noexcept;
   };
 }
 

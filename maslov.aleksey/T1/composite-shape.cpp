@@ -29,17 +29,8 @@ maslov::CompositeShape & maslov::CompositeShape::operator=(const CompositeShape 
 {
   if (this != std::addressof(rhs))
   {
-    size_ = rhs.size_;
-    try
-    {
-      cloneArray(rhs);
-    }
-    catch (const std::bad_alloc &)
-    {
-      destroyShapes(*this);
-      throw;
-    }
-    destroyShapes(*this);
+    CompositeShape copy{rhs};
+    swap(copy);
   }
   return *this;
 }
@@ -181,5 +172,13 @@ void maslov::CompositeShape::fillArrayAndDeleteRhs(CompositeShape & rhs)
   {
     shapeArray_[i] = rhs.shapeArray_[i];
     rhs.shapeArray_[i] = nullptr;
+  }
+}
+void maslov::CompositeShape::swap(CompositeShape & rhs) noexcept
+{
+  std::swap(size_, rhs.size_);
+  for (size_t i = 0; i < size_; i++)
+  {
+    std::swap(shapeArray_[i], rhs.shapeArray_[i]);
   }
 }
