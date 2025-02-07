@@ -177,7 +177,7 @@ void maslov::CompositeShape::fillArrayAndDeleteRhs(CompositeShape & rhs)
 void maslov::CompositeShape::swap(CompositeShape & rhs) noexcept
 {
   std::swap(size_, rhs.size_);
-  for (size_t i = 0; i < size_; i++)
+  for (size_t i = 0; i < std::max(size_, rhs.size_); i++)
   {
     std::swap(shapeArray_[i], rhs.shapeArray_[i]);
   }
