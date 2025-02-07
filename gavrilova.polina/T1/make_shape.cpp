@@ -108,7 +108,7 @@ gavrilova::Shape* gavrilova::make_shape(std::istream& in, std::string shapeType)
     new_shape = make_polygon(in);
   } else if (shapeType == "ELLIPSE") {
     new_shape = make_ellipse(in);
+  } else {
+    throw std::logic_error("Error! Unknown figure entered")
   }
-
-  return new_shape;
 }

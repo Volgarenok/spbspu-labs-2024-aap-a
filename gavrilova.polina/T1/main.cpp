@@ -17,7 +17,7 @@ int main()
 
     if (shapeTypeOrScale == "SCALE") {
       if (!(std::cin >> center.x >> center.y >> koef)) {
-          std::cerr << "Ошибка ввода парамметров масштабирования!";
+          std::cerr << "Error! Invalid scale parametrs.";
       }
     }
     Shape* shp = nullptr;
@@ -36,7 +36,7 @@ int main()
   }
 
   if (koef <= 0 || shapes.empty()) {
-    std::cerr << "Ошибка! Неправильный коэффицент или фигуры отсутствуют";
+    std::cerr << "Error! Invalid koefficient or there are no shapes";
     return 1;
   }
 
