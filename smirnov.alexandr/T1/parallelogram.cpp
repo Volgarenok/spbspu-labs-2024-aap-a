@@ -7,7 +7,7 @@ smirnov::Parallelogram::Parallelogram(point_t p1, point_t p2, point_t p3):
   vertex1{p1},
   vertex2{p2},
   vertex3{p3},
-  vertex4{p1.x + p3.x - p2.x, p1.y + p3.y - p2.y}
+  vertex4{p2.x + p3.x - p1.x, p2.y + p3.y - p1.y}
 {
   if ((p1.x == p3.x && p2.y == p3.y) || (p2.x == p3.x && p1.y == p3.y)
       || (p2.x == p3.x && p2.y == p3.y))
@@ -18,10 +18,10 @@ smirnov::Parallelogram::Parallelogram(point_t p1, point_t p2, point_t p3):
 
 double smirnov::Parallelogram::getArea() const
 {
-  double vector1X = vertex2.x - vertex1.x;
-  double vector1Y = vertex2.y - vertex1.y;
-  double vector2X = vertex3.x - vertex1.x;
-  double vector2Y = vertex3.y - vertex1.y;
+  double vector1X = vertex1.x - vertex2.x;
+  double vector1Y = vertex1.y - vertex2.y;
+  double vector2X = vertex3.x - vertex2.x;
+  double vector2Y = vertex3.y - vertex2.y;
   return std::abs(vector1X * vector2Y - vector1Y * vector2X);
 }
 
