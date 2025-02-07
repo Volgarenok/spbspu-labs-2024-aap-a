@@ -181,6 +181,15 @@ void karnauhova::CompositeShape::scale(double k)
   }
 }
 
+void karnauhova::CompositeShape::scale_with_check(double k)
+{
+  if (k <= 0)
+  {
+    throw std::logic_error("Incorrect coef");
+  }
+  scale(k);
+}
+
 karnauhova::CompositeShape* karnauhova::CompositeShape::clone() const
 {
   return new CompositeShape(*this);

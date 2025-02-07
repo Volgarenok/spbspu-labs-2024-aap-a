@@ -119,7 +119,7 @@ karnauhova::point_t* karnauhova::expand(point_t* a, size_t old, size_t dl)
   return newm;
 }
 
-void karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& count_error, point_t& point, double& k, std::string name)
+void karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, point_t& point, double& k, std::string name)
 {
   if (name == "RECTANGLE")
   {
@@ -139,42 +139,6 @@ void karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, size_t& 
   }
   else
   {
-    count_error++;
-  }
-}
-
-void karnauhova::input(std::istream & in, CompositeShape& shaps, point_t& point, double& k)
-{
-  std::string name = "uwu";
-  size_t count_error = 0;
-  while (in >> name && !in.eof())
-  {
-    try
-    {
-      fabric_input(in, shaps, count_error, point, k, name);
-    }
-    catch (const std::logic_error& e)
-    {
-      in.clear();
-      count_error++;
-    }
-    catch (const std::bad_alloc& e)
-    {
-      throw;
-    }
-  }
-  if (shaps.size() == 0)
-  {
-    std::cerr << "Error: empty input\n";
-    throw std::logic_error("Empty input");
-  }
-  if (k <= 0)
-  {
-    std::cerr << "Error: scale input\n";
-    throw std::logic_error("Incorrect scale");
-  }
-  if (count_error > 0)
-  {
-    throw std::invalid_argument("Incorrect argument");
+    throw std::logic_error("Incorrect name");
   }
 }

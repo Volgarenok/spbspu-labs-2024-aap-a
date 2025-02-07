@@ -10,6 +10,7 @@ namespace karnauhova
     virtual rectangle_t getFrameRect() const = 0;
     virtual void move(double x, double y) = 0;
     virtual void move(const point_t& t) = 0;
+    void scale_with_check(double k);
     virtual void scale(double k) = 0;
     virtual Shape* clone() const = 0;
   };

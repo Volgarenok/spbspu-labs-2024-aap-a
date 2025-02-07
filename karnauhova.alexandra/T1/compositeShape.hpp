@@ -32,6 +32,7 @@ namespace karnauhova
     CompositeShape* clone() const;
 
     void swap(CompositeShape& other) noexcept;
+    void scale_with_check(double k);
     void clear() noexcept;
     void expanse(size_t new_size);
   private:
