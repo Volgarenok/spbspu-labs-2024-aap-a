@@ -4,6 +4,22 @@
 smirnov::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
   parallelogram()
 {
+  if ((p1.x == p2.x && p1.y == p2.y) ||
+      (p1.x == p3.x && p1.y == p3.y) ||
+      (p2.x == p3.x && p2.y == p3.y))
+  {
+    throw std::invalid_argument("Points must be unique");
+  }
+
+  if (!(p1.x == p3.x))
+  {
+    throw std::invalid_argument("Diagonals must be parallel to the coordinate axes");
+  }
+  point_t center = {p1.x, (p1.y + p3.y) / 2};
+  if (center.x == p2.x || center.y != p2.y)
+  {
+    throw std::invalid_argument("Diagonals must intersect at their midpoints");
+  }
   parallelogram = Parallelogram{p1, p2, p3};
 }
 
