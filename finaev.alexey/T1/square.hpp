@@ -2,6 +2,7 @@
 #define SQUARE_HPP
 
 #include "shape.hpp"
+#include "rectangle.hpp"
 
 namespace finaev
 {
@@ -15,8 +16,7 @@ namespace finaev
     void move(double sx, double sy) override;
     void scale(double k) override;
   private:
-    point_t leftDown;
-    double side;
+    Rectangle rect_;
   };
 }
 

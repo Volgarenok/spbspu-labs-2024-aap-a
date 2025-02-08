@@ -2,8 +2,19 @@
 #include <stdexcept>
 #include "base-types.hpp"
 
-finaev::Square::Square(point_t l, double s) :
-  leftDown(l), side(s)
+namespace
+{
+  finaev::Rectangle createSquare(finaev::point_t leftDown, double side)
+  {
+    finaev::point_t rightUp = { (leftDown.x + side), (leftDown.y + side) };
+    finaev::Rectangle rect = finaev::Rectangle(leftDown, rightUp);
+    return rect;
+  }
+}
+
+
+finaev::Square::Square(point_t l, double s):
+  rect_(createSquare(l, s))
 {
   if (s <= 0)
   {
@@ -12,30 +23,21 @@ finaev::Square::Square(point_t l, double s) :
 }
 double finaev::Square::getArea() const
 {
-  return side * side;
+  return rect_.getArea();
 }
 finaev::rectangle_t finaev::Square::getFrameRect() const
 {
-  double x = (side / 2) + leftDown.x;
-  double y = (side / 2) + leftDown.y;
-  double width = side;
-  double height = side;
-  rectangle_t a = {{x, y}, width, height};
-  return a;
+  return rect_.getFrameRect();
 }
 void finaev::Square::move(point_t a)
 {
-  leftDown.x = a.x - (side / 2);
-  leftDown.y = a.y - (side / 2);
+  rect_.move(a);
 }
 void finaev::Square::move(double sx, double sy)
 {
-  leftDown.x += sx;
-  leftDown.y += sy;
+  rect_.move(sx, sy);
 }
 void finaev::Square::scale(double k)
 {
-  leftDown.x -= (side * k - side) / 2;
-  leftDown.y -= (side * k - side) / 2;
-  side *= k;
+  rect_.scale(k);
 }
