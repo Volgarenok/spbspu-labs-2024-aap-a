@@ -37,8 +37,8 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
   bool scaled = false;
   try {
     while (input >> Mystr) {
-      if (Mystr == "RECTANGLE") {
-        try {
+      try {
+        if (Mystr == "RECTANGLE") {
           point_t down, up;
           input >> down.x;
           input >> down.y;
@@ -46,11 +46,7 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
           input >> up.y;
           myShapes[shapesCount] =  new Rectangle{down, up};
           shapesCount++;
-        } catch (const std::invalid_argument& e) {
-          error << e.what() << '\n';
-        }
-      } else if (Mystr == "TRIANGLE") {
-        try {
+        } else if (Mystr == "TRIANGLE") {
           point_t a, b, c;
           input >> a.x;
           input >> a.y;
@@ -60,11 +56,7 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
           input >> c.y;
           myShapes[shapesCount] =  new Triangle{a, b, c};
           shapesCount++;
-        } catch (const std::invalid_argument& e) {
-          error << e.what() << '\n';
-        }
-      } else if (Mystr == "DIAMOND") {
-        try {
+        } else if (Mystr == "DIAMOND") {
           point_t a, b, c;
           input >> a.x;
           input >> a.y;
@@ -74,11 +66,7 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
           input >> c.y;
           myShapes[shapesCount] =  new Diamond{a, b, c};
           shapesCount++;
-        } catch (const std::invalid_argument& e) {
-          error << e.what() << '\n';
-        }
-      } else if (Mystr == "CONCAVE") {
-        try {
+        } else if (Mystr == "CONCAVE") {
           point_t a, b, c, d;
           input >> a.x;
           input >> a.y;
@@ -90,10 +78,11 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
           input >> d.y;
           myShapes[shapesCount] =  new Concave{a, b, c, d};
           shapesCount++;
-        } catch (const std::invalid_argument& e) {
-          error << e.what() << '\n';
         }
-      } else if (Mystr == "SCALE") {
+      } catch(const std::invalid_argument& e) {
+        error << e.what() << '\n';
+      }  
+      if (Mystr == "SCALE") {
         scaled = true;
         if (shapesCount == 0) {
           error << "No shapes for scale\n";
