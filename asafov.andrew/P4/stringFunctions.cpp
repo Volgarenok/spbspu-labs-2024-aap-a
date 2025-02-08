@@ -18,7 +18,7 @@ void findUniqLetters(const char* string, char* alphabet)
 
 int asafov::countUniqLetters(const char* string)
 {
-  char alphabet[26];
+  char alphabet[26] = {};
   findUniqLetters(string, alphabet);
   size_t count = 0;
   for (size_t i = 0; i < 26; i++)
@@ -33,7 +33,7 @@ int asafov::countUniqLetters(const char* string)
 
 void asafov::getUnusedLetters(const char* string, char* unusedletters)
 {
-  char alphabet[26];
+  char alphabet[26] = {};
   findUniqLetters(string, alphabet);
   size_t lastletter = 0;
   for (size_t pos = 0; pos <= 26; pos++)
