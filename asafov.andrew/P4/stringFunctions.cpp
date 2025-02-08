@@ -43,7 +43,7 @@ void asafov::getUnusedLetters(const char* string, char* unusedletters)
   {
     if (alphabet[pos] != '\0')
     {
-      unusedletters[lastletter] = alphabet[pos];
+      unusedletters[lastletter++] = alphabet[pos];
     }
   }
 }
