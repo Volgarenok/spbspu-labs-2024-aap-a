@@ -3,7 +3,10 @@
 
 void findUniqLetters(const char* string, char* alphabet)
 {
-  alphabet = "abcdefghijklmnopqrstuvwxyz";
+  for (size_t i = 0; i < 26; i++)
+  {
+    alphabet[i] = 'a' + i;
+  }
   for (size_t i = 0; string[i]!='\0'; i++)
   {
     for (size_t j = 0; j < 26; j++)
