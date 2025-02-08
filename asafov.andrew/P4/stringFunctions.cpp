@@ -1,60 +1,54 @@
 #include "stringFunctions.hpp"
 #include <cctype>
 
-int asafov::countUniqLetters(const char* string)
+void findUniqLetters(const char* string, char* alphabet)
 {
-  char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
-  size_t count = 0;
-  for(size_t i = 0; string[i]!='\0'; i++)
+  for (size_t i = 0; string[i]!='\0'; i++)
   {
-    if(isalpha(string[i]))
+    for (size_t j = 0; j < 26; j++)
     {
-      for(int j = 0; j < 26; j++)
+      if (std::tolower(string[i]) == alphabet[j])
       {
-        if(string[i] == alphabet[j] || (string[i]-32) == alphabet[j])
-        {
-          alphabet[j] = 0;
-          count++;
-        }
+        alphabet[j] = 0;
       }
     }
   }
-  return 26 - count;
+}
+
+int asafov::countUniqLetters(const char* string)
+{
+  char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
+  findUniqLetters(string, alphabet);
+  size_t count = 0;
+  for (size_t i = 0; i < 26; i++)
+  {
+    if (alphabet[i] == 0)
+    {
+      count++;
+    }
+  }
+  return count;
 }
 
 void asafov::getUnusedLetters(const char* string, char* unusedletters)
 {
   char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
-  size_t count = 0;
-  for(size_t i = 0; string[i]!='\0'; i++)
+  findUniqLetters(string, alphabet);
+  size_t lastletter = 0;
+  for (size_t pos = 0; pos <= 26; pos++)
   {
-    if(isalpha(string[i]))
+    if (alphabet[pos] != '\0' && lastletter != pos)
     {
-      for(int j = 0; j < 26; j++)
-      {
-        if(string[i] == alphabet[j] || (string[i]-32) == alphabet[j])
-        {
-          alphabet[j] = 0;
-          count++;
-        }
-      }
+      alphabet[lastletter] = alphabet[pos];
+      alphabet[pos] = '\0';
+      lastletter++;
+    }
+    else if (alphabet[pos] != '\0' && lastletter == pos)
+    {
+      lastletter++;
     }
   }
-  for (size_t i = 0; i <=26; i++)
-  {
-    if (alphabet[i] == '\0')
-    {
-      for (size_t j = 26; j > i; j--)
-      {
-        if (alphabet[j] != '\0' && alphabet[j - 1] == '\0')
-        {
-          alphabet[j - 1] = alphabet[j];
-          alphabet[j] = '\0';
-        }
-      }
-    }
-  }
-  for (size_t i = 0; i < 26; i++)
+  for (size_t i = 0; unusedletters[i] != 0; i++)
   {
     unusedletters[i] = alphabet[i];
   }
