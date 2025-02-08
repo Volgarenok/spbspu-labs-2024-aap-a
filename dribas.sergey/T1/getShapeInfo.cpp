@@ -81,7 +81,8 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
         }
       } catch(const std::invalid_argument& e) {
         error << e.what() << '\n';
-      }  
+      }
+
       if (Mystr == "SCALE") {
         scaled = true;
         if (shapesCount == 0) {
