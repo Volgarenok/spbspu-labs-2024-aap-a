@@ -20,11 +20,15 @@ double asafov::Complexquad::getArea() const
   double sidea = std::pow(std::pow((one.x - four.x), 2.0) + std::pow((one.y - four.y), 2.0), 0.5);
   double sideb = std::pow(std::pow((four.x - center.x), 2.0) + std::pow((four.y - center.y), 2.0), 0.5);
   double sidec = std::pow(std::pow((one.x - center.x), 2.0) + std::pow((one.y - center.y), 2.0), 0.5);
-  double semiarea = std::pow(((sidea + sideb + sidec) * (sidea + sideb - sidec) * (sidea - sideb + sidec) * (sideb + sidec - sidea) / 16), 0.5);
+  double semiarea = (sidea + sideb + sidec) * (sidea + sideb - sidec) * (sidea - sideb + sidec);
+  semiarea *= (sideb + sidec - sidea) / 16.0;
+  semiarea = std::pow(semiarea, 0.5);
   sidea = std::pow(std::pow((two.x - three.x), 2.0) + std::pow((two.y - three.y), 2.0), 0.5);
   sideb = std::pow(std::pow((two.x - center.x), 2.0) + std::pow((two.y - center.y), 2.0), 0.5);
   sidec = std::pow(std::pow((three.x - center.x), 2.0) + std::pow((three.y - center.y), 2.0), 0.5);
-  return semiarea + std::pow(((sidea + sideb + sidec) * (sidea + sideb - sidec) * (sidea - sideb + sidec) * (sideb + sidec - sidea) / 16), 0.5);
+  double temp = (sidea + sideb + sidec) * (sidea + sideb - sidec) * (sidea - sideb + sidec);
+  temp *= (sideb + sidec - sidea) / 16;
+  return semiarea + std::pow(temp, 0.5);
 }
 
 rectangle_t asafov::Complexquad::getFrameRect() const

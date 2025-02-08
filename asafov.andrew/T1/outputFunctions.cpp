@@ -98,7 +98,6 @@ Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
       }
       Square* squa = new Square(lb, temp);
       return squa;
-
   }
   else if (shapename == "TRIANGLE")
   {
