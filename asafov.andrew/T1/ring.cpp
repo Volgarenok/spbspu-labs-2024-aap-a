@@ -6,7 +6,9 @@ using asafov::point_t;
 using asafov::rectangle_t;
 
 asafov::Ring::Ring(point_t pos, double radi, double rado):
-center(pos), radiusi(radi), radiuso(rado)
+  center(pos),
+  radiusi(radi),
+  radiuso(rado)
 {}
 
 double asafov::Ring::getArea() const
@@ -17,8 +19,8 @@ double asafov::Ring::getArea() const
 rectangle_t asafov::Ring::getFrameRect() const
 {
   rectangle_t frect;
-  frect.height = radiusi * 2;
-  frect.width = radiuso * 2;
+  frect.height = radiusi * 2.0;
+  frect.width = radiuso * 2.0;
   frect.pos = center;
   return frect;
 }

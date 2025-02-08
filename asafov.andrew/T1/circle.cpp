@@ -6,7 +6,8 @@ using asafov::point_t;
 using asafov::rectangle_t;
 
 asafov::Circle::Circle(point_t pos, double rad):
-center(pos), radius(rad)
+  center(pos),
+  radius(rad)
 {}
 
 double asafov::Circle::getArea() const
@@ -18,8 +19,8 @@ rectangle_t asafov::Circle::getFrameRect() const
 {
   rectangle_t frect;
   frect.pos = center;
-  frect.height = 2 * radius;
-  frect.width = 2 * radius;
+  frect.height = 2.0 * radius;
+  frect.width = 2.0 * radius;
   return frect;
 }
 

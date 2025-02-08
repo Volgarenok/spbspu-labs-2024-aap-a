@@ -5,12 +5,13 @@ using asafov::point_t;
 using asafov::rectangle_t;
 
 asafov::Rectangle::Rectangle(point_t a, point_t b):
-lb(a), rt(b)
+  lb(a),
+  rt(b)
 {}
 
 double asafov::Rectangle::getArea() const
 {
-  return pow((lb.x - rt.x)*(lb.x - rt.x), 0.5) * pow((lb.y - rt.y)*(lb.y - rt.y), 0.5);
+  return std::pow((lb.x - rt.x) * (lb.x - rt.x), 0.5) * std::pow((lb.y - rt.y) * (lb.y - rt.y), 0.5);
 }
 
 rectangle_t asafov::Rectangle::getFrameRect() const

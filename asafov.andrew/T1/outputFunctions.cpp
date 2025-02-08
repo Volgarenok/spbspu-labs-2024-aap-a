@@ -14,9 +14,9 @@ using asafov::point_t;
 using asafov::rectangle_t;
 using asafov::Shape;
 
-Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
+Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
 {
-  if (hash == 'R' * 'E' * 'C' * 'T')
+  if (shapename == "RECTANGLE")
   {
     double temp = 0;
     point_t a = {};
@@ -31,12 +31,12 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
     b.y = temp;
     if (a.x > b.x || a.y > b.y)
     {
-      throw std::logic_error("");
+      throw std::logic_error("incorrect figure");
     }
     Rectangle* rect = new Rectangle(a, b);
     return rect;
   }
-  else if (hash == 'C' * 'I' * 'R' * 'C')
+  else if (shapename == "CIRCLE")
   {
     double temp = 0;
     point_t a = {};
@@ -47,12 +47,12 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
     in >> temp;
     if (temp <= 0.0)
     {
-        throw std::logic_error("");
+        throw std::logic_error("incorrect figure");
     }
     Circle* circ = new Circle(a, temp);
     return circ;
   }
-  else if (hash == 'R' * 'I' * 'N' * 'G') {
+  else if (shapename == "RING") {
     double temp = 0;
     point_t a = {};
     in >> temp;
@@ -65,7 +65,7 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
     Ring* ring = new Ring(a, temp, temp2);
     return ring;
   }
-  else if (hash == 'E' * 'L' * 'L' * 'I')
+  else if (shapename == "ELLIPSE")
   {
     double temp = 0;
     point_t a = {};
@@ -78,12 +78,12 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
     in >> temp2;
     if (temp <= 0.0 || temp2 <= 0.0)
     {
-        throw std::logic_error("");
+        throw std::logic_error("incorrect figure");
     }
     Ellipse* elli = new Ellipse(a, temp, temp2);
     return elli;
   }
-  else if (hash == 'S' * 'Q' * 'U' * 'A')
+  else if (shapename == "SQUARE")
   {
       double temp = 0;
       point_t lb = {};
@@ -94,13 +94,13 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
       in >> temp;
       if (temp <= 0.0)
       {
-          throw std::logic_error("");
+          throw std::logic_error("incorrect figure");
       }
       Square* squa = new Square(lb, temp);
       return squa;
 
   }
-  else if (hash == 'T' * 'R' * 'I' * 'A')
+  else if (shapename == "TRIANGLE")
   {
     double temp = 0;
     point_t a = {};
@@ -118,39 +118,18 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
     c.x = temp;
     in >> temp;
     c.y = temp;
-    double sidea = pow(pow((a.x - b.x), 2.0) + pow((a.y - b.y), 2.0), 0.5);
-    double sideb = pow(pow((b.x - c.x), 2.0) + pow((b.y - c.y), 2.0), 0.5);
-    double sidec = pow(pow((a.x - c.x), 2.0) + pow((a.y - c.y), 2.0), 0.5);
-    if ((a.x - b.x + a.y - b.y) * (a.x - c.x + a.y - c.y) *
-    (b.x - c.x + b.y - c.y) == 0 || sidea + sideb == sidec || sidea +
-    sidec == sideb || sideb + sidec == sidea)
+    double sidea = std::pow(std::pow((a.x - b.x), 2.0) + std::pow((a.y - b.y), 2.0), 0.5);
+    double sideb = std::pow(std::pow((b.x - c.x), 2.0) + std::pow((b.y - c.y), 2.0), 0.5);
+    double sidec = std::pow(std::pow((a.x - c.x), 2.0) + std::pow((a.y - c.y), 2.0), 0.5);
+    temp = (a.x - b.x + a.y - b.y) * (a.x - c.x + a.y - c.y) * (b.x - c.x + b.y - c.y);
+    if (temp == 0 || sidea + sideb == sidec || sidea + sidec == sideb || sideb + sidec == sidea)
     {
-        throw std::logic_error("");
+        throw std::logic_error("incorrect figure");
     }
     Triangle* tria = new Triangle(a, b, c);
     return tria;
   }
-  else if (hash == 'P' * 'A' * 'R' * 'A')
-  {
-
-  }
-  else if (hash == 'D' * 'I' * 'A' * 'M')
-  {
-
-  }
-  else if (hash == 'R' * 'E' * 'G' * 'U')
-  {
-
-  }
-  else if (hash == 'P' * 'O' * 'L' * 'Y')
-  {
-
-  }
-  else if (hash == 'C' * 'O' * 'N' * 'C')
-  {
-
-  }
-  else if (hash == 'C' * 'O' * 'M' * 'P')
+  else if (shapename == "COMPLEXQUAD")
   {
     double temp = 0;
     point_t a = {};
@@ -176,7 +155,7 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
     if ((a.x-b.x+a.y-b.y)*(a.x-c.x+a.y-c.y)*(a.x-d.x+a.y-d.y)*
       (b.x-c.x+b.y-c.y)*(b.x-d.x+b.y-d.y)*(c.x-d.x+c.y-d.y)==0)
     {
-        throw std::logic_error("");
+        throw std::logic_error("incorrect figure");
     }
     Complexquad* comp = new Complexquad(a, b, c, d);
     return comp;
@@ -187,30 +166,25 @@ Shape* asafov::ShapeFactory(unsigned long long hash, std::istream& in)
   return circ;
 }
 
-void asafov::isotropicScale(Shape* sh, point_t pos, double scale)
+void asafov::isotropicScale(Shape* sh, point_t pos, double scale) 
 {
-  point_t centr = sh[0].getFrameRect().pos;
-  sh[0].move(pos);
-  double vectorx = scale * centr.x - scale * sh[0].getFrameRect().pos.x;
-  double vectory = scale * centr.y - scale * sh[0].getFrameRect().pos.y;
-  sh[0].scale(scale);
-  sh[0].move(vectorx, vectory);
+  point_t centr = sh->getFrameRect().pos;
+  sh->move(pos);
+  double vectorx = scale * centr.x - scale * sh->getFrameRect().pos.x;
+  double vectory = scale * centr.y - scale * sh->getFrameRect().pos.y;
+  sh->scale(scale);
+  sh->move(vectorx, vectory);
 }
 
-unsigned long asafov::getHash(std::istream& in)
+std::string asafov::getName(std::istream& in)
 {
   std::string str = {};
   in >> str;
-  if (str[0] == '\0' || in.fail() || in.eof())
+  if (in.fail() || in.eof())
   {
-    throw std::logic_error("");
+    str[0] = 0;
   }
-  unsigned long hash = 1;
-  for (unsigned long long i = 0; i < 4; i++)
-  {
-    hash = hash * str[i];
-  }
-  return hash;
+  return str;
 }
 
 void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, double scale, std::ostream& out)
@@ -224,13 +198,13 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
   double area = 0.0;
   for (unsigned long long i = 0; i < count; i++)
   {
-    area += shapes[i][0].getArea();
+    area += shapes[i]->getArea();
   }
   out << std::fixed << std::setprecision(1);
   out << area;
   for (unsigned long long i = 0; i < count; i++)
   {
-    rect = shapes[i][0].getFrameRect();
+    rect = shapes[i]->getFrameRect();
     out << ' ' << rect.pos.x - rect.width / 2;
     out << ' ' << rect.pos.y - rect.height / 2;
     out << ' ' << rect.pos.x + rect.width / 2;
@@ -240,18 +214,27 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
   area = 0;
   for (unsigned long long i = 0; i < count; i++)
   {
-    area += shapes[i][0].getArea();
+    area += shapes[i]->getArea();
   }
   out << '\n';
   out << std::fixed << std::setprecision(1);
   out << area;
   for (unsigned long long i = 0; i < count; i++)
   {
-      rect = shapes[i][0].getFrameRect();
+      rect = shapes[i]->getFrameRect();
     out << ' ' << rect.pos.x - rect.width / 2;
     out << ' ' << rect.pos.y - rect.height / 2;
     out << ' ' << rect.pos.x + rect.width / 2;
     out << ' ' << rect.pos.y + rect.height / 2;
   }
   out << '\n';
+}
+
+void deleteShapes(Shape** shapes, size_t count)
+{
+  for (size_t i = 0; i < count; i++)
+  {
+    delete shapes[i];
+  }
+  delete[] shapes;
 }

@@ -6,7 +6,9 @@ using asafov::point_t;
 using asafov::rectangle_t;
 
 asafov::Ellipse::Ellipse(point_t pos, double radv, double radh):
-center(pos), radiusv(radv), radiush(radh)
+  center(pos),
+  radiusv(radv),
+  radiush(radh)
 {}
 
 double asafov::Ellipse::getArea() const
@@ -17,8 +19,8 @@ double asafov::Ellipse::getArea() const
 rectangle_t asafov::Ellipse::getFrameRect() const
 {
   rectangle_t frect;
-  frect.height = radiusv * 2;
-  frect.width = radiush * 2;
+  frect.height = radiusv * 2.0;
+  frect.width = radiush * 2.0;
   frect.pos = center;
   return frect;
 }

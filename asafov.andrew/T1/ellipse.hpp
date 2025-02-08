@@ -1,8 +1,6 @@
 #ifndef ELLIPSE_HPP
 #define ELLIPSE_HPP
-#include "shape.hpp"
-using asafov::point_t;
-using asafov::rectangle_t;
+#include "../shape.hpp"
 namespace asafov
 {
   class Ellipse : public Shape

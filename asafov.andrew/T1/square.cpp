@@ -5,7 +5,8 @@ using asafov::point_t;
 using asafov::rectangle_t;
 
 asafov::Square::Square(point_t a, double s):
-lb(a), side(s)
+  lb(a),
+  side(s)
 {}
 
 double asafov::Square::getArea() const
@@ -18,8 +19,8 @@ rectangle_t asafov::Square::getFrameRect() const
   rectangle_t frect;
   frect.height = side;
   frect.width = side;
-  frect.pos.x = lb.x + side / 2;
-  frect.pos.y = lb.y + side / 2;
+  frect.pos.x = lb.x + side / 2.0;
+  frect.pos.y = lb.y + side / 2.0;
   return frect;
 }
 

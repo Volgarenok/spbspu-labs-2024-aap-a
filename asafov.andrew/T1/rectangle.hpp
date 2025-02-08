@@ -1,8 +1,6 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
 #include "shape.hpp"
-using asafov::point_t;
-using asafov::rectangle_t;
 namespace asafov
 {
   class Rectangle : public Shape
