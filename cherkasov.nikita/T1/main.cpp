@@ -7,7 +7,6 @@
 #include "diamond.hpp"
 #include "procesShape.hpp"
 #include "makesShape.hpp"
-#include "shapeFactory.hpp"
 
 int main()
 {
@@ -20,37 +19,72 @@ int main()
   bool scalingRequested = false;
   while (std::cin >> inputCommand)
   {
-    if (inputCommand == "SCALE")
-    {
-      scalingRequested = true;
-      std::cin >> p.x >> p.y >> scalingFactor;
-       break;
-    }
-    else
+    if (inputCommand == "RECTANGLE")
     {
       try
       {
-        shapes[shapeCount] = cherkasov::ShapeFactory::createShape(inputCommand, std::cin);
-        if (shapes[shapeCount])
-        {
-          shapeCount++;
-        }
-        else
-        {
-          invalidInput = true;
-        }
+        shapes[shapeCount] = cherkasov::getRectangle(std::cin);
+        shapeCount++;
       }
-      catch (const std::invalid_argument&)
+      catch (const std::invalid_argument& e)
       {
         invalidInput = true;
       }
     }
-  }
-  if (std::cin.eof())
-  {
-    cherkasov::deleteShapes(shapes, shapeCount);
-    std::cerr << "EOF encountered\n";
-    return 1;
+    else if (inputCommand == "SQUARE")
+    {
+      try
+      {
+        shapes[shapeCount] = cherkasov::getSquare(std::cin);
+        shapeCount++;
+      }
+      catch (const std::invalid_argument& e)
+      {
+        invalidInput = true;
+      }
+    }
+    else if (inputCommand == "PARALLELOGRAM")
+    {
+      try
+      {
+        shapes[shapeCount] = cherkasov::getParallelogram(std::cin);
+        shapeCount++;
+      }
+      catch (const std::invalid_argument& e)
+      {
+        invalidInput = true;
+      }
+    }
+    else if (inputCommand == "DIAMOND")
+    {
+      try
+      {
+        shapes[shapeCount] = cherkasov::getDiamond(std::cin);
+        shapeCount++;
+      }
+      catch (const std::invalid_argument& e)
+      {
+        invalidInput = true;
+      }
+    }
+    else if (inputCommand == "SCALE")
+    {
+      scalingRequested = true;
+      std::cin >> p.x >> p.y >> scalingFactor;
+      if (scalingFactor <= 0)
+      {
+        cherkasov::deleteShapes(shapes, shapeCount);
+        std::cerr << "scaling factor must  positive\n";
+        return 1;
+      }
+      break;
+    }
+    else if (std::cin.eof())
+    {
+      deleteShapes(shapes, shapeCount);
+      std::cerr << "EOF encountered\n";
+      return 1;
+    }
   }
   if (shapeCount == 0)
   {
