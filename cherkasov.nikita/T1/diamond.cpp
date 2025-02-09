@@ -1,5 +1,5 @@
 #include "diamond.hpp"
-#include "scalePoint.hpp"
+#include "shapeUtils.hpp"
 #include <stdexcept>
 #include <cmath>
 #include <algorithm>
