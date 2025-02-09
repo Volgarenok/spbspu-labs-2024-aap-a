@@ -13,21 +13,11 @@ int main()
 
   std::cout << asafov::countUniqLetters(str) << '\n';
 
-  char* unusedLetters = new char[26]{0};
-  try
-  {
-    asafov::getUnusedLetters(str, unusedLetters);
-  }
-  catch (const std::bad_alloc&)
-  {
-    delete[] unusedLetters;
-    delete[] str;
-    return 1;
-  }
+  char unusedLetters[26]{0};
+  asafov::getUnusedLetters(str, unusedLetters);
 
   std::cout << unusedLetters << '\n';
-
-  delete[] unusedLetters;
+  
   delete[] str;
   return 0;
 }

@@ -3,6 +3,6 @@
 #include <cstddef>
 namespace asafov
 {
-  char* increaseString(const char* string, size_t length, size_t additionallength);
+  char* resize(const char* string, size_t length);
 }
 #endif
