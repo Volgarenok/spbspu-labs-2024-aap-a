@@ -38,24 +38,26 @@ int main()
       try
       {
         new_shape = make_shape(input_shape, std::cin);
-        if (new_shape)
+        try
         {
-          try
-          {
-            comp_sh.push_back(new_shape);
-          }
-          catch(const std::bad_alloc & e)
-          {
-            delete new_shape;
-            std::cerr << "Not enough memory!\n";
-            return 1;
-          }
+          comp_sh.push_back(new_shape);
         }
+        catch(const std::bad_alloc & e)
+        {
+          delete new_shape;
+          std::cerr << "Not enough memory!\n";
+          return 1;
+        }
+      }
       }
       catch (const std::bad_alloc & e)
       {
         std::cerr << "Not enough memory!\n";
         return 1;
+      }
+      catch (const std::invalid_argument& e)
+      {
+        std::cerr << "Not correct input!\n";
       }
       if (!new_shape)
       {

@@ -11,16 +11,9 @@ namespace brevnov
     in >> x1 >> y1 >> x2 >> y2;
     if (in.fail())
     {
-      return nullptr;
+      throw std::invalid_argument("Fail input");
     }
-    try
-    {
-      return new Rectangle({x1, y1}, {x2, y2});
-    }
-    catch (const std::invalid_argument& e)
-    {
-      return nullptr;
-    }
+    return new Rectangle({x1, y1}, {x2, y2});
   }
 
   Diamond * make_diamond(std::istream& in)
@@ -29,16 +22,9 @@ namespace brevnov
     in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
     if (in.fail())
     {
-      return nullptr;
+      throw std::invalid_argument("Fail input");
     }
-    try
-    {
-      return new Diamond({x1, y1}, {x2, y2}, {x3, y3});
-    }
-    catch (const std::invalid_argument& e)
-    {
-      return nullptr;
-    }
+    return new Diamond({x1, y1}, {x2, y2}, {x3, y3});
   }
 
   Ellipse * make_ellipse(std::istream& in)
@@ -50,16 +36,9 @@ namespace brevnov
     in >> r1 >> r2;
     if (in.fail())
     {
-      return nullptr;
+      throw std::invalid_argument("Fail input");
     }
-    try
-    {
-      return new Ellipse(center, r1, r2);
-    }
-    catch (const std::invalid_argument& e)
-    {
-      return nullptr;
-    }
+    return new Ellipse(center, r1, r2);
   }
 
   point_t scale(std::istream & in)
