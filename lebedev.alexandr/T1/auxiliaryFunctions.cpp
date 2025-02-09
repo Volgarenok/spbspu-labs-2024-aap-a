@@ -37,3 +37,26 @@ lebedev::point_t lebedev::getMiddlePoint(point_t p1, point_t p2)
 {
   return { (p1.x + p2.x) / 2, (p1.y + p2.y) / 2 };
 }
+
+void lebedev::swap(point_t& p1, point_t& p2)
+{
+  point_t temp = p1;
+  p1 = p2;
+  p2 = temp;
+}
+
+void lebedev::sortPoints(point_t& p1, point_t& p2, point_t& p3)
+{
+  if (p1.x > p2.x || (p1.x == p2.x && p1.y > p2.y))
+  {
+    swap(p1, p2);
+  }
+  if (p1.x > p3.x || (p1.x == p3.x && p1.y > p3.y))
+  {
+    swap(p1, p3);
+  }
+  if (p2.x > p3.x || (p2.x == p3.x && p2.y > p3.y))
+  {
+    swap(p2, p3);
+  }
+}

@@ -10,5 +10,7 @@ namespace lebedev
   bool isPointInsideTriangle(point_t p1, point_t p2, point_t p3, point_t p4);
   void deleteShapePtr(Shape** shps, size_t count);
   point_t getMiddlePoint(point_t p1, point_t p2);
+  void swap(point_t& p1, point_t& p2);
+  void sortPoints(point_t& p1, point_t& p2, point_t& p3);
 }
 #endif

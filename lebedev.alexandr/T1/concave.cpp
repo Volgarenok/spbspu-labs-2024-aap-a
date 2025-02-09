@@ -27,19 +27,6 @@ lebedev::rectangle_t lebedev::Concave::getFrameRect() const
   return rect;
 }
 
-void lebedev::Concave::move(point_t p)
-{
-  double dx = p.x - p4_.x;
-  double dy = p.y - p4_.y;
-  p4_ = p;
-  p1_.x += dx;
-  p1_.y += dy;
-  p2_.x += dx;
-  p2_.y += dy;
-  p3_.x += dx;
-  p3_.y += dy;
-}
-
 void lebedev::Concave::move(double dx, double dy)
 {
   p1_.x += dx;
@@ -50,6 +37,11 @@ void lebedev::Concave::move(double dx, double dy)
   p3_.y += dy;
   p4_.x += dx;
   p4_.y += dy;
+}
+
+void lebedev::Concave::move(point_t p)
+{
+  move(p.x - p4_.x, p.y - p4_.y);
 }
 
 void lebedev::Concave::scale(double k)

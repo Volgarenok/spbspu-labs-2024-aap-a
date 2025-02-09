@@ -7,7 +7,7 @@
 
 namespace lebedev
 {
-  point_t createScalePoint(std::istream& input);
+  point_t chooseScalePoint(std::istream& input);
   Rectangle* createRectangle(std::istream& input);
   Diamond* createDiamond(std::istream& input);
   Concave* createConcave(std::istream& input);

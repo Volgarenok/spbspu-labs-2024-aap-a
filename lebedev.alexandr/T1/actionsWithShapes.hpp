@@ -4,8 +4,8 @@
 
 namespace lebedev
 {
-  double getSumArea(lebedev::Shape** shps, size_t count);
-  void scaleForShapes(lebedev::Shape** shps, size_t count, lebedev::point_t scalePoint, double k);
-  void printFrameCoordinates(lebedev::Shape** shps, size_t count);
+  double getSumArea(const Shape** shps, size_t count);
+  void scaleForShapes(Shape** shps, size_t count, point_t scalePoint, double k);
+  void printFrameCoordinates(const Shape** shps, size_t count, std::ostream& output);
 }
 #endif

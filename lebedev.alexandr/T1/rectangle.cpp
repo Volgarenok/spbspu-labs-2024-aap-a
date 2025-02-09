@@ -22,10 +22,7 @@ void lebedev::Rectangle::move(point_t p)
   point_t centre = getFrameRect().pos;
   double dx = p.x - centre.x;
   double dy = p.y - centre.y;
-  leftDown_.x += dx;
-  rightUp_.x += dx;
-  leftDown_.y += dy;
-  rightUp_.y += dy;
+  this->move(dx, dy);
 }
 
 void lebedev::Rectangle::move(double dx, double dy)

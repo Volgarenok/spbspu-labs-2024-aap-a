@@ -95,10 +95,10 @@ int main()
 
     std::cout << std::setprecision(1);
     std::cout << std::fixed << lebedev::getSumArea(shps, count);
-    lebedev::printFrameCoordinates(shps, count);
+    lebedev::printFrameCoordinates(shps, count, std::cout);
     lebedev::scaleForShapes(shps, count, scalePoint, k);
     std::cout << lebedev::getSumArea(shps, count);
-    lebedev::printFrameCoordinates(shps, count);
+    lebedev::printFrameCoordinates(shps, count, std::cout);
     lebedev::deleteShapePtr(shps, count);
   }
   catch (const std::logic_error& e)
