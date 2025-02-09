@@ -9,6 +9,5 @@ namespace alymova
   void makeShape(std::istream& in, CompositeShape& shapes, bool& wrong_shape_flag, double* scale_params);
   void print(std::ostream& out, const Shape* shape);
   void print(std::ostream& out, const CompositeShape& shapes);
-  void clear(Shape** shapes);
 }
 #endif

@@ -68,10 +68,3 @@ void alymova::print(std::ostream& out, const CompositeShape& shapes)
     print(out, shapes[i]);
   }
 }
-void alymova::clear(Shape** shapes)
-{
-  for (size_t i = 0; shapes[i] != nullptr; i++)
-  {
-    delete shapes[i];
-  }
-}
