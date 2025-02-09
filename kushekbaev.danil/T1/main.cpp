@@ -9,7 +9,8 @@
 int main()
 {
   using namespace kushekbaev;
-  CompositeShape compShape[10000];
+  size_t capacity = 10000;
+  CompositeShape compShape(capacity);
   size_t shapeCounter = 0;
   std::string shapeName;
   point_t scalePoint;
@@ -57,7 +58,7 @@ int main()
 
     try
     {
-      compShape->push_back(shape);
+      compShape.push_back(shape);
     }
     catch (const std::bad_alloc&)
     {
@@ -72,30 +73,28 @@ int main()
     }
   }
 
-  kushekbaev::CompositeShape* compShapePtr = compShape;
-  kushekbaev::CompositeShape** compShapePtrPtr = &compShapePtr;
-
+  kushekbaev::CompositeShape* compShapePtr = &compShape;
 
   try
   {
-    std::cout << std::fixed << std::setprecision(1) << getTotalArea(shapeCounter, compShapePtrPtr);
+    std::cout << std::fixed << std::setprecision(1) << getTotalArea(shapeCounter, &compShapePtr);
 
-    outputCoord(shapeCounter, std::cout, compShapePtrPtr);
+    outputCoord(shapeCounter, std::cout, &compShapePtr);
     std::cout << "\n";
 
-    scaleAll(shapeCounter, scalePoint, scaleCoeff, compShapePtrPtr);
-    std::cout << getTotalArea(shapeCounter, compShapePtrPtr);
+    scaleAll(shapeCounter, scalePoint, scaleCoeff, &compShapePtr);
+    std::cout << getTotalArea(shapeCounter, &compShapePtr);
 
-    outputCoord(shapeCounter, std::cout, compShapePtrPtr);
+    outputCoord(shapeCounter, std::cout, &compShapePtr);
     std::cout << "\n";
 
-    clearMemory(shapeCounter, compShapePtrPtr);
+    clearMemory(shapeCounter, &compShapePtr);
   }
 
   catch (const std::logic_error&)
   {
     std::cerr << "Scale coefficient must be greater than zero\n";
-    clearMemory(shapeCounter, compShapePtrPtr);
+    clearMemory(shapeCounter, &compShapePtr);
     return 1;
   }
 
