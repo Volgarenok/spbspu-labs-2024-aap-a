@@ -5,13 +5,13 @@
 namespace cherkasov
 {
   Rectangle::Rectangle(double x1, double y1, double x2, double y2)
-  : left{std::min(x1, x2), std::min(y1, y2)},
-    right{std::max(x1, x2), std::max(y1, y2)}
+  : left {std::min(x1, x2), std::min(y1, y2)},
+    right {std::max(x1, x2), std::max(y1, y2)}
     {}
   double Rectangle::getArea() const
   {
-    double width = std::abs(right.x - left.x);
-    double height = std::abs(right.y - left.y);
+    double width = right.x - left.x;
+    double height = right.y - left.y;
     return width * height;
   }
   rectangle_t Rectangle::getFrameRect() const
@@ -20,8 +20,8 @@ namespace cherkasov
     center.x = (left.x + right.x) / 2.0;
     center.y = (left.y + right.y) / 2.0;
     rectangle_t rect{};
-    rect.width = std::abs(right.x - left.x);
-    rect.height = std::abs(right.y - left.y);
+    rect.width = right.x - left.x;
+    rect.height = right.y - left.y;
     rect.pos = center;
     return rect;
   }

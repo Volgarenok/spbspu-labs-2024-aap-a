@@ -36,7 +36,7 @@ void cherkasov::scaling(Shape** shapes, size_t shape, point_t p, double scalingF
 {
   if (scalingFactor <= 0)
   {
-    std::cerr << "Error: scalingFactor must be positive.\n";
+    std::cerr << "Error: scale must be positive.\n";
     return;
   }
   for (size_t i = 0; i < shape; i++)
