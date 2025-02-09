@@ -1,8 +1,9 @@
 #include "rectangle.hpp"
 #include <stdexcept>
 
+Ellipse[] 
+
 brevnov::Rectangle::Rectangle(point_t left, point_t right):
-  shapes_(),
   left_(left),
   right_(right)
 {
