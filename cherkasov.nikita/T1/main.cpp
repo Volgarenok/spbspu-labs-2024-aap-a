@@ -24,7 +24,7 @@ int main()
     {
       scalingRequested = true;
       std::cin >> p.x >> p.y >> scalingFactor;
-      break;
+       break;
     }
     else
     {
@@ -46,12 +46,11 @@ int main()
       }
     }
   }
-    else if (std::cin.eof())
-    {
-      deleteShapes(shapes, shapeCount);
-      std::cerr << "EOF encountered\n";
-      return 1;
-    }
+  if (std::cin.eof())
+  {
+    cherkasov::deleteShapes(shapes, shapeCount);
+    std::cerr << "EOF encountered\n";
+    return 1;
   }
   if (shapeCount == 0)
   {
@@ -68,12 +67,11 @@ int main()
   {
     std::cerr << "invalid input encountered\n";
   }
-  std::cout << std::fixed;
-  std::cout << std::setprecision(1);
-  std::cout << cherkasov::calculArea(shapes, shapeCount);
+  std::cout << std::fixed << std::setprecision(1);
+  std::cout << cherkasov::calculArea(shapes, shapeCount) << std::endl;
   cherkasov::outputFrameCoordinates(shapes, shapeCount);
   cherkasov::scaling(shapes, shapeCount, p, scalingFactor);
-  std::cout << cherkasov::calculArea(shapes, shapeCount);
+  std::cout << cherkasov::calculArea(shapes, shapeCount) << std::endl;
   cherkasov::outputFrameCoordinates(shapes, shapeCount);
   cherkasov::deleteShapes(shapes, shapeCount);
   return 0;

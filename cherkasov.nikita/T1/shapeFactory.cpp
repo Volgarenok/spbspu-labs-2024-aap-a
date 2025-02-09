@@ -3,25 +3,43 @@
 #include "square.hpp"
 #include "parallelogram.hpp"
 #include "diamond.hpp"
-
-cherkasov::Shape* ShapeFactory::createShape(const std::string& shapeType, std::istream& input)
+#include "makesShape.hpp"
+namespace cherkasov
 {
-  if (shapeType == "RECTANGLE")
+  Shape* ShapeFactory::createShape(std::string& inputCommand, std::istream& input)
   {
-    return getRectangle(input);
+    if (shapeType == "RECTANGLE")
+    {
+      return getRectangle(input);
+    }
+    else if (shapeType == "SQUARE")
+    {
+      return getSquare(input);
+    }
+    else if (shapeType == "PARALLELOGRAM")
+    {
+      return getParallelogram(input);
+    }
+    else if (shapeType == "DIAMOND")
+    {
+      return getDiamond(input);
+    }
+    return nullptr;
   }
-  else if (shapeType == "SQUARE")
+  Shape* ShapeFactory::getRectangle(std::istream& input)
   {
-    return getSquare(input);
+    return new Rectangle(input);
   }
-  else if (shapeType == "PARALLELOGRAM")
+  Shape* ShapeFactory::getSquare(std::istream& input)
   {
-    return getParallelogram(input);
+    return new Square(input);
   }
-  else if (shapeType == "DIAMOND")
+  Shape* ShapeFactory::getParallelogram(std::istream& input)
   {
-    return getDiamond(input);
+    return new Parallelogram(input);
   }
-  return nullptr;
+  Shape* ShapeFactory::getDiamond(std::istream& input)
+  {
+    return new Diamond(input);
+  }
 }
-
