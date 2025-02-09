@@ -6,9 +6,9 @@
 namespace kushekbaev
 {
   CompositeShape::CompositeShape(size_t capacity):
+    array_(new Shape*[capacity]),
     capacity_(capacity),
-    shapeCounter_(0),
-    array_(new Shape*[capacity])
+    shapeCounter_(0)
   {}
 
   CompositeShape::CompositeShape(CompositeShape && rhs)
