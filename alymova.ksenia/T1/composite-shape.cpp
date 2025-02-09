@@ -134,10 +134,10 @@ alymova::rectangle_t alymova::CompositeShape::getFrameRect() const noexcept
 }
 void alymova::CompositeShape::move(point_t point) noexcept
 {
-  for (size_t i = 0; i < size_; i++)
-  {
-    shapes_[i]->move(point);
-  }
+  point_t pos = getFrameRect().pos;
+  double shift_x = point.x - pos.x;
+  double shift_y = point.y - pos.y;
+  move(shift_x, shift_y);
 }
 void alymova::CompositeShape::move(double shift_x, double shift_y) noexcept
 {
@@ -148,44 +148,36 @@ void alymova::CompositeShape::move(double shift_x, double shift_y) noexcept
 }
 void alymova::CompositeShape::scale(double ratio)
 {
-  for (size_t i = 0; i < size_; i++)
-  {
-    shapes_[i]->scale(ratio);
-  }
+  checkRatioScale(ratio);
+  unsafeScale(ratio);
 }
 void alymova::CompositeShape::unsafeScale(double ratio) noexcept
 {
-  for (size_t i = 0; i < size_; i++)
-  {
-    shapes_[i]->unsafeScale(ratio);
-  }
+  point_t pos = getFrameRect().pos;
+  alymova::unsafeScale(*this, pos, ratio);
 }
 void alymova::CompositeShape::push_back(Shape* shp)
 {
   if (size_ == capacity_)
   {
     int ratio = 2;
-    capacity_ *= ratio;
-    Shape** shapes_new = nullptr;
-    try
+    Shape** shapes_new = new Shape*[capacity_ * ratio]();
+    for (size_t i = 0; i < size_; i++)
     {
-      shapes_new = new Shape*[capacity_]();
-      for (size_t i = 0; i < size_; i++)
-      {
-        shapes_new[i] = shapes_[i];
-      }
-      clear(shapes_);
-      shapes_ = shapes_new;
+      shapes_new[i] = shapes_[i];
     }
-    catch (const std::bad_alloc& e)
+    clear(shapes_);
+    shapes_ = shapes_new;
+    capacity_ *= ratio;
+  }
+  shapes_[size_] = shp;
+  size_++;
+    /*catch (const std::bad_alloc& e)
     {
       capacity_ /= ratio;
       clear(shapes_new);
       throw std::runtime_error("Adding element error");
-    }
-  }
-  shapes_[size_] = shp;
-  size_++;
+    }*/
 }
 void alymova::CompositeShape::pop_back() noexcept
 {
