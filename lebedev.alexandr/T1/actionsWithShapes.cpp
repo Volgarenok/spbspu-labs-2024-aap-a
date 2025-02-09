@@ -3,6 +3,10 @@
 
 double lebedev::getSumArea(lebedev::Shape** shps, size_t count)
 {
+  if (shps == nullptr)
+  {
+    return 0;
+  }
   double result = 0;
   for (size_t i = 0; i < count; ++i)
   {
