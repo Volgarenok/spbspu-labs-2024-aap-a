@@ -30,7 +30,7 @@ lebedev::Diamond* lebedev::createDiamond(std::istream& input)
   {
     throw std::invalid_argument("");
   }
-  
+
   lebedev::sortPoints(p1, p2, p3);
 
   if (!((p1.x == p2.x && p3.y == p2.y)
