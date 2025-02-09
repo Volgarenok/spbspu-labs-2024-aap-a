@@ -13,6 +13,8 @@ namespace abramov
     ~CompositeShape();
     CompositeShape &operator=(const CompositeShape &comp_shp);
     CompositeShape &operator=(CompositeShape &&comp_shp) noexcept;
+    Shape *operator[](size_t id) noexcept;
+    const Shape *operator[](size_t id) const noexcept;
     double getArea() const noexcept;
     rectangle_t getFrameRect() const;
     void move(const point_t &p);
@@ -23,8 +25,6 @@ namespace abramov
     void pop_back() noexcept;
     Shape *at(size_t id);
     const Shape *at(size_t id) const;
-    Shape *operator[](size_t id) noexcept;
-    const Shape *operator[](size_t id) const noexcept;
     bool empty() const noexcept;
     size_t size() const noexcept;
     CompositeShape *clone() const;
