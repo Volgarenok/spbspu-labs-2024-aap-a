@@ -16,9 +16,11 @@ namespace alymova
     void unsafeScale(double ratio) noexcept override;
     Shape* clone() const override;
   private:
-    point_t pos_;
-    double radius_;
+    //point_t pos_;
+    //double radius_;
     Regular regular_;
+
+    Regular setRegular(point_t pos, double radius);
   };
 }
 #endif
