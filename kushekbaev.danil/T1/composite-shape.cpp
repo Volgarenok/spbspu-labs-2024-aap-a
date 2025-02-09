@@ -35,7 +35,10 @@ namespace kushekbaev
       {
         throw std::bad_alloc();
       }
-      CompositeShape::~CompositeShape();
+      if (array_)
+      {
+        CompositeShape::~CompositeShape();
+      }
       array_ = new_array;
       shapeCounter_ = rhs.shapeCounter_;
       capacity_ = rhs.capacity_;
@@ -111,17 +114,18 @@ namespace kushekbaev
   {
     if (shapeCounter_ + 1 == capacity_)
     {
-      Shape** new_array = creatingNewArray(array_, capacity_, 2 * capacity_);
+      size_t new_capacity = (capacity_ == 0) ? 1 : 2 * capacity_;
+      Shape** new_array = creatingNewArray(array_, capacity_, new_capacity);
       if (!new_array)
       {
         throw std::bad_alloc();
       }
       if (array_)
       {
-        CompositeShape::~CompositeShape();
+        delete[] array_;
       }
       array_ = new_array;
-      capacity_ = 2 * capacity_;
+      capacity_ = new_capacity;
     }
     array_[shapeCounter_++] = shp;
   }
