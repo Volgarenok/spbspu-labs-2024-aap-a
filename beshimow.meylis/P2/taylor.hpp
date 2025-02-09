@@ -5,7 +5,7 @@
 
 namespace beshimow
 {
-    double taylor(double x, size_t k, double error);
+  double taylor(double x, size_t k, double error);
 }
 
-#endif // TAYLOR_HPP
+#endif
