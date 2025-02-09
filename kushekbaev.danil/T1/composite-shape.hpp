@@ -28,7 +28,7 @@ namespace kushekbaev
     Shape* at(size_t id) const;
     bool empty() const;
     size_t size() const;
-    void CompositeShape::scaleEverything(point_t scalePoint, double scaleCoeff);
+    void scaleEverything(point_t scalePoint, double scaleCoeff);
 
   private:
     Shape** array_;

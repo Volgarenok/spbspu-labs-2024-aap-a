@@ -58,7 +58,6 @@ namespace kushekbaev
   Shape* createShape(std::istream& in, std::string shapeName)
   {
     Shape* shape = nullptr;
-    std::string shapeName;
     try
     {
       if (shapeName == "RECTANGLE")
