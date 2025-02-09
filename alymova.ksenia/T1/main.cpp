@@ -9,6 +9,10 @@ int main()
   try
   {
     alymova::CompositeShape shapes;
+    alymova::CompositeShape comp1(shapes);
+    alymova::CompositeShape comp2{alymova::CompositeShape(shapes)};
+    comp1 = shapes;
+    comp2 = alymova::CompositeShape(comp1);
     bool wrong_shape_flag = false;
     double scale_params[3] = {};
     alymova::makeShape(std::cin, shapes, wrong_shape_flag, scale_params);
