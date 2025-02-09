@@ -20,12 +20,6 @@ namespace kushekbaev
     delete[] array_;
   }
 
-  CompositeShape::~CompositeShape()
-  {
-    delete[] array_;
-    shapeCounter_ = 0;
-  }
-
   CompositeShape & CompositeShape::operator=(const CompositeShape & rhs)
   {
     if (&rhs != this)
