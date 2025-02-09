@@ -14,7 +14,7 @@ namespace brevnov
     void move(double dx, double dy) noexcept override;
     void scale(double n) noexcept override;
   private:
-    Ellipse * shapes_;
+    Ellipse ** shapes_;
     point_t left_;
     point_t right_;
   };
