@@ -70,6 +70,10 @@ abramov::CompositeShape &abramov::CompositeShape::operator=(CompositeShape &&com
 {
   if (std::addressof(comp_shp) != this)
   {
+    for (size_t i = 0; i < shapes_; ++i)
+    {
+      delete shapeptrs_[i];
+    }
     delete[] shapeptrs_;
     shapeptrs_ = comp_shp.shapeptrs_;
     comp_shp.shapeptrs_ = nullptr;
