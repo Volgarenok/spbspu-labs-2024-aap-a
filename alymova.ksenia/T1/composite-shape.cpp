@@ -153,7 +153,7 @@ void alymova::CompositeShape::scale(double ratio)
     shapes_[i]->scale(ratio);
   }
 }
-void alymova::CompositeShape::unsafeScale(double ratio)
+void alymova::CompositeShape::unsafeScale(double ratio) noexcept
 {
   for (size_t i = 0; i < size_; i++)
   {
@@ -235,7 +235,7 @@ void alymova::CompositeShape::swap(CompositeShape& copy) noexcept
     copy.do_null(i);
   }
 }
-void alymova::CompositeShape::do_null(size_t id)
+void alymova::CompositeShape::do_null(size_t id) noexcept
 {
   shapes_[id] = nullptr;
 }

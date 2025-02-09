@@ -22,7 +22,7 @@ namespace alymova
     void move(point_t point) noexcept;
     void move(double shift_x, double shift_y) noexcept;
     void scale(double ratio);
-    void unsafeScale(double ratio);
+    void unsafeScale(double ratio) noexcept;
 
     void push_back(Shape* shp);
     void pop_back() noexcept;
@@ -32,7 +32,7 @@ namespace alymova
   private:
     void copyArray(const Shape* const* other_shapes);
     void swap(CompositeShape& copy) noexcept;
-    void do_null(size_t id);
+    void do_null(size_t id) noexcept;
     void clear(Shape** shapes) noexcept;
 
     size_t size_, capacity_;
