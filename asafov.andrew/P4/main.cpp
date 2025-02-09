@@ -15,9 +15,8 @@ int main()
 
   char unusedLetters[26]{0};
   asafov::getUnusedLetters(str, unusedLetters);
-
   std::cout << unusedLetters << '\n';
-  
+
   delete[] str;
   return 0;
 }
