@@ -7,7 +7,7 @@ namespace kushekbaev
 {
   CompositeShape::CompositeShape()
   {
-    array_ = 0;
+    array_ = nullptr;
     shapeCounter_ = 0;
     capacity_ = 0;
   }
@@ -116,7 +116,10 @@ namespace kushekbaev
       {
         throw std::bad_alloc();
       }
-      CompositeShape::~CompositeShape();
+      if (array_)
+      {
+        CompositeShape::~CompositeShape();
+      }
       array_ = new_array;
       capacity_ = 2 * capacity_;
     }
