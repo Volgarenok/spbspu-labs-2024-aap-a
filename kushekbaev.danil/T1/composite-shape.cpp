@@ -112,7 +112,7 @@ namespace kushekbaev
 
   void CompositeShape::push_back(Shape* shp)
   {
-    if (shapeCounter_ + 1 == capacity_)
+    if (shapeCounter_ + 1 > capacity_)
     {
       size_t new_capacity = (capacity_ == 0) ? 1 : 2 * capacity_;
       Shape** new_array = creatingNewArray(array_, capacity_, new_capacity);
