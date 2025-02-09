@@ -11,12 +11,13 @@ namespace kushekbaev
     shapeCounter_(0)
   {}
 
-  CompositeShape::CompositeShape(CompositeShape && rhs)
+  CompositeShape::~CompositeShape()
   {
-    array_ = rhs.array_;
-    shapeCounter_ = rhs.shapeCounter_;
-    capacity_ = rhs.capacity_;
-    rhs.array_ = nullptr;
+    for (size_t i = 0; i < shapeCounter_; ++i)
+    {
+      delete array_[i];
+    }
+    delete[] array_;
   }
 
   CompositeShape::~CompositeShape()

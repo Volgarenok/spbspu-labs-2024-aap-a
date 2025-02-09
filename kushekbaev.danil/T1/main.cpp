@@ -10,7 +10,7 @@ int main()
 {
   using namespace kushekbaev;
   size_t capacity = 10000;
-  CompositeShape compShape(capacity);
+  CompositeShape* compShape = new CompositeShape(capacity);
   size_t shapeCounter = 0;
   std::string shapeName;
   point_t scalePoint;
@@ -23,6 +23,7 @@ int main()
     if (std::cin.eof())
     {
       std::cerr << "EOF!\n";
+      delete compShape;
       return 1;
     }
 
@@ -58,7 +59,7 @@ int main()
 
     try
     {
-      compShape.push_back(shape);
+      compShape->push_back(shape);
     }
     catch (const std::bad_alloc&)
     {
@@ -69,11 +70,12 @@ int main()
     catch (const std::runtime_error&)
     {
       std::cerr << "Shapeless input\n";
+      delete compShape;
       return 1;
     }
   }
 
-  kushekbaev::CompositeShape* compShapePtr = &compShape;
+  kushekbaev::CompositeShape* compShapePtr = compShape;
 
   try
   {
@@ -89,12 +91,14 @@ int main()
     std::cout << "\n";
 
     clearMemory(shapeCounter, &compShapePtr);
+    delete compShape;
   }
 
   catch (const std::logic_error&)
   {
     std::cerr << "Scale coefficient must be greater than zero\n";
     clearMemory(shapeCounter, &compShapePtr);
+    delete compShape;
     return 1;
   }
 
