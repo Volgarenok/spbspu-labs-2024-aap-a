@@ -29,7 +29,7 @@ void karnauhova::input_points(std::istream& in, point_t* point, size_t count)
   {
     in >> point[i].x >> point[i].y;
     if (!in)
-     {
+    {
       throw std::logic_error("Incorrect points");
     }
   }
