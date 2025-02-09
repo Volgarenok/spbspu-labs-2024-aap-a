@@ -70,7 +70,7 @@ int main()
 
       else if (shapeName == "SCALE")
       {
-        scalePoint = lebedev::createScalePoint(std::cin);
+        scalePoint = lebedev::chooseScalePoint(std::cin);
         std::cin >> k;
         if (k <= 0)
         {

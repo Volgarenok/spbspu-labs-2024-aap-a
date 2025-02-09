@@ -1,7 +1,6 @@
 #include "actionsWithShapes.hpp"
-#include <iostream>
 
-double lebedev::getSumArea(const lebedev::Shape** shps, size_t count)
+double lebedev::getSumArea(lebedev::Shape** shps, size_t count)
 {
   if (shps == nullptr)
   {
@@ -28,7 +27,7 @@ void lebedev::scaleForShapes(lebedev::Shape** shps, size_t count, lebedev::point
   }
 }
 
-void lebedev::printFrameCoordinates(const lebedev::Shape** shps, size_t count, std::ostream& output)
+void lebedev::printFrameCoordinates(lebedev::Shape** shps, size_t count, std::ostream& output)
 {
   for (size_t i = 0; i < count; ++i)
   {
