@@ -7,51 +7,35 @@
 #include "rectangle.hpp"
 #include "polygon.hpp"
 
-void karnauhova::input_rectangle(std::istream & in, CompositeShape& shaps)
+karnauhova::Shape* karnauhova::input_rectangle(std::istream& in)
 {
   point_t x_y[2] = {};
   input_points(in, x_y, 2);
   Rectangle* rect = new Rectangle(x_y[0], x_y[1]);
-  try
-  {
-    shaps.push_back(rect);
-  }
-  catch (const std::exception& e)
-  {
-    delete rect;
-    throw;
-  }
+  return rect;
 }
 
-void karnauhova::input_triangle(std::istream & in, CompositeShape& shaps)
+karnauhova::Shape* karnauhova::input_triangle(std::istream& in)
 {
   point_t x_y[3] = {};
   input_points(in, x_y, 3);
   Triangle* triangle = new Triangle(x_y[0], x_y[1], x_y[2]);
-  try
-  {
-    shaps.push_back(triangle);
-  }
-  catch (const std::exception& e)
-  {
-    delete triangle;
-    throw;
-  }
+  return triangle;
 }
 
-void karnauhova::input_points(std::istream & in, point_t* point, size_t count)
+void karnauhova::input_points(std::istream& in, point_t* point, size_t count)
 {
   for (size_t i = 0; i < count; i++)
   {
     in >> point[i].x >> point[i].y;
     if (!in)
-    {
+     {
       throw std::logic_error("Incorrect points");
     }
   }
 }
 
-void karnauhova::input_scale(std::istream & in, point_t& point, double& k)
+void karnauhova::input_scale(std::istream& in, point_t& point, double& k)
 {
   in >> point.x >> point.y >> k;
   if (!in)
@@ -60,7 +44,7 @@ void karnauhova::input_scale(std::istream & in, point_t& point, double& k)
   }
 }
 
-void karnauhova::input_polygon(std::istream & in, CompositeShape& shaps)
+karnauhova::Shape* karnauhova::input_polygon(std::istream& in)
 {
   size_t size = 1;
   double x = 0;
@@ -98,15 +82,14 @@ void karnauhova::input_polygon(std::istream & in, CompositeShape& shaps)
   try
   {
     new_polygon = new Polygon(x_y, count);
-    shaps.push_back(new_polygon);
   }
   catch (const std::exception& e)
   {
     delete[] x_y;
-    delete new_polygon;
     throw;
   }
   delete[] x_y;
+  return new_polygon;
 }
 
 karnauhova::point_t* karnauhova::expand(point_t* a, size_t old, size_t dl)
@@ -119,15 +102,16 @@ karnauhova::point_t* karnauhova::expand(point_t* a, size_t old, size_t dl)
   return newm;
 }
 
-void karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, point_t& point, double& k, std::string name)
+void karnauhova::fabric_input(std::istream& in, CompositeShape& shaps, point_t& point, double& k, std::string name)
 {
+  Shape* shape = nullptr;
   if (name == "RECTANGLE")
   {
-    input_rectangle(in, shaps);
+    shape = input_rectangle(in);
   }
   else if (name == "TRIANGLE")
   {
-    input_triangle(in, shaps);
+    shape = input_triangle(in);
   }
   else if (name == "SCALE")
   {
@@ -135,10 +119,22 @@ void karnauhova::fabric_input(std::istream & in, CompositeShape& shaps, point_t&
   }
   else if (name == "POLYGON")
   {
-    input_polygon(in, shaps);
+    shape = input_polygon(in);
   }
   else
   {
     throw std::logic_error("Incorrect name");
+  }
+  if (name != "SCALE")
+  {
+    try
+    {
+      shaps.push_back(shape);
+    }
+    catch (const std::exception& e)
+    {
+      delete shape;
+      throw;
+    }
   }
 }

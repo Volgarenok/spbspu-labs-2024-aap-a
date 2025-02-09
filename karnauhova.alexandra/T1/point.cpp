@@ -10,7 +10,7 @@ bool karnauhova::isEqual(const point_t& a, const point_t& b)
   return ((a.x == b.x) && (a.y == b.y));
 }
 
-karnauhova::rectangle_t karnauhova::frameRect(const Shape * const* shapes, size_t count)
+karnauhova::rectangle_t karnauhova::frameRect(const Shape* const* shapes, size_t count)
 {
   double min_x = shapes[0]->getFrameRect().pos.x - shapes[0]->getFrameRect().width / 2;
   double max_x = shapes[0]->getFrameRect().pos.x + shapes[0]->getFrameRect().width / 2;

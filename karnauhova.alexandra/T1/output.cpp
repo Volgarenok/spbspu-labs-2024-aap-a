@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include "shape.hpp"
-void karnauhova::output(std::ostream & out, CompositeShape& shaps, const point_t& point, double k)
+void karnauhova::output(std::ostream& out, CompositeShape& shaps, const point_t& point, double k)
 {
   output_sum(out, shaps);
   output_points(out, shaps);
@@ -13,7 +13,7 @@ void karnauhova::output(std::ostream & out, CompositeShape& shaps, const point_t
   out << "\n";
 }
 
-void karnauhova::output_sum(std::ostream & out, const CompositeShape& shaps)
+void karnauhova::output_sum(std::ostream& out, const CompositeShape& shaps)
 {
   double sum = 0;
   for (size_t i = 0; i < shaps.size(); i++)
@@ -24,7 +24,7 @@ void karnauhova::output_sum(std::ostream & out, const CompositeShape& shaps)
   out << std::setprecision(1) << sum;
 }
 
-void karnauhova::output_points(std::ostream & out, const CompositeShape& shaps)
+void karnauhova::output_points(std::ostream& out, const CompositeShape& shaps)
 {
   for (size_t i = 0; i < shaps.size(); i++)
   {
