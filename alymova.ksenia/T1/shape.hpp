@@ -23,8 +23,10 @@ namespace alymova
   bool isRectanglurTriangle(const point_t& p1, const point_t& p2, const point_t& p3) noexcept;
   double getVector(const point_t& p1, const point_t& p2) noexcept;
 
-  void changeFrameRect(rectangle_t& rect, double low_left_x_new, double low_left_y_new, double upp_right_x_new, double upp_right_y_new);
+  void changeFrameRect(rectangle_t& rect, double low_left_x_new, double low_left_y_new,
+    double upp_right_x_new, double upp_right_y_new);
   rectangle_t getMaxFrameRect();
-  rectangle_t getFrameRectByAngles(double low_left_x, double low_left_y, double upp_right_x, double upp_right_y);
+  rectangle_t getFrameRectByAngles(double low_left_x, double low_left_y,
+    double upp_right_x, double upp_right_y);
 }
 #endif

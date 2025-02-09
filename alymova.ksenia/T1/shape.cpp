@@ -46,7 +46,8 @@ bool alymova::isRectanglurTriangle(const point_t& p1, const point_t& p2, const p
   return (std::abs(std::pow(getVector(p2, p3), 2) + std::pow(getVector(p1, p3), 2)
     - std::pow(getVector(p1, p2), 2)) < inaccuracy);
 }
-void alymova::changeFrameRect(rectangle_t& rect, double low_left_x_new, double low_left_y_new, double upp_right_x_new, double upp_right_y_new)
+void alymova::changeFrameRect(rectangle_t& rect, double low_left_x_new, double low_left_y_new,
+  double upp_right_x_new, double upp_right_y_new)
 {
   double low_left_x = std::min(getLowLeftFrameRect(rect).x, low_left_x_new);
   double low_left_y = std::min(getLowLeftFrameRect(rect).y, low_left_y_new);
@@ -62,7 +63,8 @@ alymova::rectangle_t alymova::getMaxFrameRect()
   double upp_right_y = std::numeric_limits< double >::min();
   return getFrameRectByAngles(low_left_x, low_left_y, upp_right_x, upp_right_y);
 }
-alymova::rectangle_t alymova::getFrameRectByAngles(double low_left_x, double low_left_y, double upp_right_x, double upp_right_y)
+alymova::rectangle_t alymova::getFrameRectByAngles(double low_left_x, double low_left_y,
+  double upp_right_x, double upp_right_y)
 {
   double width = upp_right_x - low_left_x;
   double height = upp_right_y - low_left_y;
