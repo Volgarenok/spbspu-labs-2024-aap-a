@@ -2,14 +2,13 @@
 #include <cmath>
 #include <stdexcept>
 #include <limits>
-double PI = std::acos(-1.0);
-double inaccuracy = 0.0000000001;
+constexpr double PI = std::acos(-1.0);
+constexpr double inaccuracy = 0.0000000001;
 alymova::Regular::Regular(point_t pos, point_t top, point_t other):
   pos_(pos),
   top_(top),
   other_(other),
-  sides_cnt_(0),
-  frame_rect_()
+  sides_cnt_(getCntSides())
 {
   if (!isRectanglurTriangle(pos, top, other))
   {
@@ -20,13 +19,17 @@ alymova::Regular::Regular(point_t pos, point_t top, point_t other):
     top_ = other;
     other_ = top;
   }
-  sides_cnt_ = getCntSides();
   if (sides_cnt_ < 3)
   {
     throw std::logic_error("Incorrect description regular");
   }
-  frame_rect_ = setFrameRect();
 }
+alymova::Regular::Regular(const Regular& other):
+  pos_(other.pos_),
+  top_(other.top_),
+  other_(other.other_),
+  sides_cnt_(other.sides_cnt_)
+{}
 double alymova::Regular::getArea() const noexcept
 {
   double radius_small = getVector(pos_, other_);
@@ -34,59 +37,6 @@ double alymova::Regular::getArea() const noexcept
   return 0.5 * radius_small * other_side * sides_cnt_ * 2.0;
 }
 alymova::rectangle_t alymova::Regular::getFrameRect() const noexcept
-{
-  return frame_rect_;
-}
-void alymova::Regular::move(double shift_x, double shift_y) noexcept
-{
-  point_t shift_point{shift_x, shift_y};
-  pos_ += shift_point;
-  top_ += shift_point;
-  other_ += shift_point;
-  alymova::moveFrameRect(frame_rect_, shift_x, shift_y);
-}
-void alymova::Regular::move(point_t point) noexcept
-{
-  double shift_x = point.x - pos_.x;
-  double shift_y = point.y - pos_.y;
-  move(shift_x, shift_y);
-}
-void alymova::Regular::unsafeScale(double ratio) noexcept
-{
-  top_.x = pos_.x + (top_.x - pos_.x) * ratio;
-  top_.y = pos_.y + (top_.y - pos_.y) * ratio;
-  other_.x = pos_.x + (other_.x - pos_.x) * ratio;
-  other_.y = pos_.y + (other_.y - pos_.y) * ratio;
-  alymova::scaleFrameRect(frame_rect_, ratio);
-}
-alymova::Shape* alymova::Regular::clone() const
-{
-  Regular* reg = nullptr;
-  try
-  {
-    reg = new Regular(pos_, top_, other_);
-    Shape* shape = reg;
-    return shape;
-  }
-  catch (...)
-  {
-    delete reg;
-    throw;
-  }
-}
-size_t alymova::Regular::getCntSides() const noexcept
-{
-  double radius_big = getVector(pos_, top_);
-  double radius_small = getVector(pos_, other_);
-  double sides = PI / (std::acos(radius_small / radius_big));
-  size_t round_sides = std::round(sides);
-  if (std::abs((std::cos(180 / std::round(sides) * PI / 180)) - (radius_small / radius_big)) < inaccuracy)
-  {
-    return round_sides;
-  }
-  return 0;
-}
-alymova::rectangle_t alymova::Regular::setFrameRect() noexcept
 {
   double radius_big = getVector(pos_, top_);
   double other_side = getVector(top_, other_);
@@ -111,4 +61,40 @@ alymova::rectangle_t alymova::Regular::setFrameRect() noexcept
   double height = upp_right_y - low_left_y;
   point_t pos = {(low_left_x + width / 2.0), (upp_right_y - height / 2.0)};
   return rectangle_t{width, height, pos};
+}
+void alymova::Regular::move(double shift_x, double shift_y) noexcept
+{
+  point_t shift_point{shift_x, shift_y};
+  pos_ += shift_point;
+  top_ += shift_point;
+  other_ += shift_point;
+}
+void alymova::Regular::move(point_t point) noexcept
+{
+  double shift_x = point.x - pos_.x;
+  double shift_y = point.y - pos_.y;
+  move(shift_x, shift_y);
+}
+void alymova::Regular::unsafeScale(double ratio) noexcept
+{
+  top_.x = pos_.x + (top_.x - pos_.x) * ratio;
+  top_.y = pos_.y + (top_.y - pos_.y) * ratio;
+  other_.x = pos_.x + (other_.x - pos_.x) * ratio;
+  other_.y = pos_.y + (other_.y - pos_.y) * ratio;
+}
+alymova::Shape* alymova::Regular::clone() const
+{
+  return new Regular(*this);
+}
+size_t alymova::Regular::getCntSides() const noexcept
+{
+  double radius_big = getVector(pos_, top_);
+  double radius_small = getVector(pos_, other_);
+  double sides = PI / (std::acos(radius_small / radius_big));
+  size_t round_sides = std::round(sides);
+  if (std::abs((std::cos(180 / std::round(sides) * PI / 180)) - (radius_small / radius_big)) < inaccuracy)
+  {
+    return round_sides;
+  }
+  return 0;
 }

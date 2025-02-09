@@ -8,7 +8,6 @@ namespace alymova
 
   struct CompositeShape final
   {
-  public:
     CompositeShape();
     CompositeShape(const CompositeShape& comp_shape);
     CompositeShape(const CompositeShape&& comp_shape);
@@ -30,11 +29,12 @@ namespace alymova
     Shape* at(size_t id);
     bool empty() const noexcept;
     size_t size() const noexcept;
+  private:
     void copyArray(const Shape* const* other_shapes);
     void swap(CompositeShape& copy) noexcept;
     void do_null(size_t id);
     void clear(Shape** shapes) noexcept;
-  private:
+
     size_t size_, capacity_;
     Shape** shapes_;
 

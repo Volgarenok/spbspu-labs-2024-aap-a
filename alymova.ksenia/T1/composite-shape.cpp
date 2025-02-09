@@ -1,12 +1,13 @@
 #include "composite-shape.hpp"
-#include "shape.hpp"
 #include <limits>
 #include <stdexcept>
+#include "shape.hpp"
 alymova::CompositeShape::CompositeShape():
   size_(0),
   capacity_(10),
-  shapes_(nullptr)
-{
+  shapes_(new Shape*[capacity_])
+{}
+/*{
   try
   {
     shapes_ = new Shape*[capacity_];
@@ -16,7 +17,7 @@ alymova::CompositeShape::CompositeShape():
     clear(shapes_);
     throw std::runtime_error("Creating composition of shapes error");
   }
-}
+}*/
 alymova::CompositeShape::CompositeShape(const CompositeShape& comp_shape):
   size_(comp_shape.size_),
   capacity_(comp_shape.capacity_),
@@ -204,11 +205,7 @@ alymova::Shape* alymova::CompositeShape::at(size_t id)
 }
 bool alymova::CompositeShape::empty() const noexcept
 {
-  if (size_ == 0)
-  {
-    return true;
-  }
-  return false;
+  return size_ == 0;
 }
 size_t alymova::CompositeShape::size() const noexcept
 {

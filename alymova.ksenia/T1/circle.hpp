@@ -7,8 +7,8 @@ namespace alymova
 {
   struct Circle final: public Shape
   {
-  public:
     Circle(point_t pos, double radius);
+    Circle(const Circle& other);
     double getArea() const noexcept override;
     rectangle_t getFrameRect() const noexcept override;
     void move(double shift_x, double shift_y) noexcept override;

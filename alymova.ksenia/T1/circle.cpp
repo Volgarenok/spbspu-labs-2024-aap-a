@@ -6,14 +6,13 @@ constexpr size_t angles_cnt = 73;
 constexpr double angle_73 = 360.0 / angles_cnt / 2.0 * PII / 180.0;
 alymova::Circle::Circle(point_t pos, double radius):
   pos_(pos),
-  radius_(1.0),
+  radius_(radius),
   regular_()
 {
   if (radius <= 0.0)
   {
     throw std::logic_error("Incorrect description circle");
   }
-  radius_ = radius;
   point_t top = {pos_.x, pos_.y + radius_};
   double catheter = std::cos(angle_73) * radius_;
   double shift_x = std::sin(angle_73) * catheter;
@@ -21,6 +20,11 @@ alymova::Circle::Circle(point_t pos, double radius):
   point_t other = {pos_.x + shift_x, pos_.y + shift_y};
   regular_ = Regular{pos, top, other};
 }
+alymova::Circle::Circle(const Circle& other):
+  pos_(other.pos_),
+  radius_(other.radius_),
+  regular_(other.regular_)
+{}
 double alymova::Circle::getArea() const noexcept
 {
   return regular_.getArea();
@@ -43,16 +47,5 @@ void alymova::Circle::unsafeScale(double ratio) noexcept
 }
 alymova::Shape* alymova::Circle::clone() const
 {
-  Circle* circle = nullptr;
-  try
-  {
-    circle = new Circle(pos_, radius_);
-    Shape* shape = circle;
-    return shape;
-  }
-  catch (...)
-  {
-    delete circle;
-    throw;
-  }
+  return new Circle(*this);
 }

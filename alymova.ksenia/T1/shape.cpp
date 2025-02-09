@@ -4,7 +4,7 @@
 #include <cstddef>
 void alymova::Shape::scale(double ratio)
 {
-  alymova::checkRatioScale(ratio);
+  checkRatioScale(ratio);
   unsafeScale(ratio);
 }
 void alymova::scale(CompositeShape& shapes, point_t s, double ratio)
@@ -43,9 +43,6 @@ double alymova::getVector(point_t p1, point_t p2) noexcept
 }
 bool alymova::isRectanglurTriangle(point_t p1, point_t p2, point_t p3) noexcept
 {
-  if (std::abs(std::pow(getVector(p2, p3), 2) + std::pow(getVector(p1, p3), 2) - std::pow(getVector(p1, p2), 2)) < inaccuracy)
-  {
-    return true;
-  }
-  return false;
+  return (std::abs(std::pow(getVector(p2, p3), 2) + std::pow(getVector(p1, p3), 2) 
+    - std::pow(getVector(p1, p2), 2)) < inaccuracy);
 }
