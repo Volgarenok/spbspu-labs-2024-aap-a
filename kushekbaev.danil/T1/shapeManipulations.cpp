@@ -2,46 +2,46 @@
 
 namespace kushekbaev
 {
-  double getTotalArea(Shape** capacity, size_t shapeCounter)
+  double getTotalArea(size_t shapeCounter, CompositeShape** compShape)
   {
     double total = 0;
     for (size_t i = 0; i < shapeCounter; i++)
     {
-      if (capacity[i])
+      if (compShape[i])
       {
-        total += capacity[i] -> getArea();
+        total += compShape[i] -> getArea();
       }
     }
     return total;
   }
 
-  void scaleTotal(Shape** capacity, size_t shapeCounter, point_t scalePoint, double scaleCoeff)
+  void scaleAll(size_t shapeCounter, point_t scalePoint, double scaleCoeff, CompositeShape** compShape)
   {
-    for (size_t i = 0; i < shapeCounter; ++i)
+    for (size_t i = 0; i < shapeCounter; i++)
     {
-      if (capacity[i])
+      if (compShape[i])
       {
-       capacity[i]->scaleEverything(scalePoint, scaleCoeff);
+        compShape[i]->scaleEverything(scalePoint, scaleCoeff);
       }
     }
   }
 
-  void scaleSafe(Shape** capacity, size_t shapeCounter, point_t scalePoint, double scaleCoeff)
+  void scaleSafe(size_t shapeCounter, point_t scalePoint, double scaleCoeff, CompositeShape** compShape)
   {
     if (scaleCoeff <= 0)
     {
       throw std::logic_error("Scale coeffitient must be greater than zero\n");
     }
-    scaleTotal(capacity, shapeCounter, scalePoint, scaleCoeff);
+    scaleAll(shapeCounter, scalePoint, scaleCoeff, compShape);
   }
 
-  void outputCoord(Shape** capacity, size_t shapeCounter, std::ostream& output)
+  void outputCoord(size_t shapeCounter, std::ostream& output, CompositeShape** compShape)
   {
     for (size_t i = 0; i < shapeCounter; ++i)
     {
-      if (capacity[i])
+      if (compShape[i])
       {
-        rectangle_t rect = capacity[i]->getFrameRect();
+        rectangle_t rect = compShape[i]->getFrameRect();
         double leftDownX = rect.pos.x - rect.width / 2;
         double leftDownY = rect.pos.y - rect.height / 2;
         double rightUpX = rect.pos.x + rect.width / 2;
@@ -51,11 +51,11 @@ namespace kushekbaev
     }
   }
 
-  void clearMemory(Shape** capacity, size_t shapeCounter)
+  void clearMemory(size_t shapeCounter, CompositeShape** compShape)
   {
     for (size_t i = 0; i < shapeCounter; ++i)
     {
-      delete capacity[i];
+      delete compShape[i];
     }
   }
 }

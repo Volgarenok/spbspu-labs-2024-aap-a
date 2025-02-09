@@ -55,63 +55,33 @@ namespace kushekbaev
     return new Diamond({ first, second, third });
   }
 
-  void createShape(std::istream& in, Shape** capacity, size_t& shapeCounter, point_t& scalePoint, double& scaleCoeff)
+  Shape* createShape(std::istream& in, std::string shapeName)
   {
-    bool scale_inputed = false;
+    Shape* shape = nullptr;
+    std::string shapeName;
     try
     {
-      std::string shapeName;
-      while (in >> shapeName)
+      if (shapeName == "RECTANGLE")
       {
-        if (shapeName == "RECTANGLE")
-        {
-          capacity[shapeCounter++] = kushekbaev::makeRectangle(in);
-        }
-          else if (shapeName == "CONCAVE")
-        {
-          capacity[shapeCounter++] = kushekbaev::makeConcave(in);
-        }
-        else if (shapeName == "PARALLELOGRAM")
-        {
-          capacity[shapeCounter++] = kushekbaev::makeParallelogram(in);
-        }
-        else if (shapeName == "DIAMOND")
-        {
-          capacity[shapeCounter++] = kushekbaev::makeDiamond(in);
-        }
-        else if (shapeName == "SCALE")
-        {
-          try
-          {
-            scalePoint = kushekbaev::makeScale(in);
-            in >> scaleCoeff;
-          }
-          catch (const std::logic_error&)
-          {
-            throw std::logic_error("ERROR: Incorrect scale coefficient\n");
-          }
-          scale_inputed = true;
-          break;
-        }
+        shape = makeRectangle(in);
       }
+      else if (shapeName == "CONCAVE")
+      {
+        shape = makeConcave(in);
+      }
+      else if (shapeName == "PARALLELOGRAM")
+      {
+        shape = makeParallelogram(in);
+      }
+      else if (shapeName == "DIAMOND")
+      {
+        shape = makeDiamond(in);
+      }
+      return shape;
     }
     catch (const std::invalid_argument&)
     {
-      throw std::invalid_argument("Some of ined shapes were incorrectly inputed\n");
-    }
-    catch (const std::bad_alloc&)
-    {
-      std::cerr << "ERROR: Bad allocation\n";
-      kushekbaev::clearMemory(capacity, shapeCounter);
-    }
-
-    if (!scale_inputed)
-    {
-      throw std::logic_error("ERROR: there was no scale\n");
-    }
-    if (shapeCounter == 0)
-    {
-      throw std::runtime_error("Shapeless input\n");
+      return nullptr;
     }
   }
 }

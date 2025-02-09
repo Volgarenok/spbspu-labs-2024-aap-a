@@ -4,14 +4,15 @@
 #include <iostream>
 #include "base-types.hpp"
 #include "shape.hpp"
+#include "composite-shape.hpp"
 
 namespace kushekbaev
 {
-  double getTotalArea(Shape** capacity, const size_t shapeCounter);
-  void scaleTotal(Shape** capacity, const size_t shapeCounter, point_t scalePoint, double scaleCoeff);
-  void scaleSafe(Shape** capacity, const size_t shapeCounter, point_t scalePoint, double scaleCoeff);
-  void outputCoord(Shape** capacity, const size_t shapeCounter, std::ostream& output);
-  void clearMemory(Shape** capacity, size_t shapeCounter);
+  double getTotalArea(const size_t shapeCounter, CompositeShape** compShape);
+  void scaleAll(const size_t shapeCounter, point_t scalePoint, double scaleCoeff, CompositeShape** compShape);
+  void scaleSafe(const size_t shapeCounter, point_t scalePoint, double scaleCoeff, CompositeShape** compShape);
+  void outputCoord(const size_t shapeCounter, std::ostream& output, CompositeShape** compShape);
+  void clearMemory(const size_t shapeCounter, CompositeShape** compShape);
 }
 
 #endif

@@ -14,7 +14,7 @@ namespace kushekbaev
   Concave* makeConcave(std::istream& in);
   Parallelogram* makeParallelogram(std::istream& in);
   Diamond* makeDiamond(std::istream& in);
-  void createShape(std::istream& in, Shape** capacity, size_t& shapeCounter, point_t& scalePoint, double& scaleCoeff);
+  Shape* createShape(std::istream& in, std::string shapeName);
 }
 
 #endif

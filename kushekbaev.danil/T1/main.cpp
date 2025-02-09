@@ -1,25 +1,53 @@
 #include <iomanip>
+#include <iostream>
 #include "shapeManipulations.hpp"
 #include "shapeBreeding.hpp"
 #include "shape.hpp"
 #include "shapeCreation.hpp"
+#include "composite-shape.hpp"
 
 int main()
 {
-  kushekbaev::Shape* capacity[10000]{};
+  using namespace kushekbaev;
+  CompositeShape compShape[10000];
   size_t shapeCounter = 0;
   std::string shapeName;
-  kushekbaev::point_t scalePoint;
+  point_t scalePoint;
+  Shape* shape = nullptr;
   double scaleCoeff = 0;
-  bool success = false;
   bool invalid_argument = false;
 
-  while (!success)
+  while (std::cin >> shapeName) //подумать откуда тут вообще цикл, вроде все и без него должно быть
   {
+    if (std::cin.eof())
+    {
+      std::cerr << "EOF!\n";
+      return 1;
+    }
+
     try
     {
-      kushekbaev::createShape(std::cin, capacity, shapeCounter, scalePoint, scaleCoeff);
-      success = true;
+      if (shapeName == "SCALE")
+      {
+        try
+        {
+          scalePoint = makeScale(std::cin);
+          std::cin >> scaleCoeff;
+        }
+        catch (const std::logic_error&)
+        {
+          throw std::logic_error("ERROR: Incorrect scale coefficient\n");
+        }
+        break;
+      }
+
+      shape = createShape(std::cin, shapeName);
+
+      if (!shape)
+      {
+        invalid_argument = true;
+        continue;
+      }
     }
 
     catch (const std::invalid_argument&)
@@ -27,11 +55,14 @@ int main()
       invalid_argument = true;
     }
 
-    catch (const std::logic_error&)
+    try
     {
-      std::cerr << "Bad SCALE command\n";
-      kushekbaev::clearMemory(capacity, shapeCounter);
-      return 1;
+      compShape->push_back(shape);
+    }
+    catch (const std::bad_alloc&)
+    {
+      delete[] shape;
+      std::cerr << "Bad allocation\n";
     }
 
     catch (const std::runtime_error&)
@@ -41,26 +72,30 @@ int main()
     }
   }
 
+  kushekbaev::CompositeShape* compShapePtr = compShape;
+  kushekbaev::CompositeShape** compShapePtrPtr = &compShapePtr;
+
+
   try
   {
-    std::cout << std::fixed << std::setprecision(1) << kushekbaev::getTotalArea(capacity, shapeCounter);
+    std::cout << std::fixed << std::setprecision(1) << getTotalArea(shapeCounter, compShapePtrPtr);
 
-    kushekbaev::outputCoord(capacity, shapeCounter, std::cout);
+    outputCoord(shapeCounter, std::cout, compShapePtrPtr);
     std::cout << "\n";
 
-    kushekbaev::scaleTotal(capacity, shapeCounter, scalePoint, scaleCoeff);
-    std::cout << kushekbaev::getTotalArea(capacity, shapeCounter);
+    scaleAll(shapeCounter, scalePoint, scaleCoeff, compShapePtrPtr);
+    std::cout << getTotalArea(shapeCounter, compShapePtrPtr);
 
-    kushekbaev::outputCoord(capacity, shapeCounter, std::cout);
+    outputCoord(shapeCounter, std::cout, compShapePtrPtr);
     std::cout << "\n";
 
-    kushekbaev::clearMemory(capacity, shapeCounter);
+    clearMemory(shapeCounter, compShapePtrPtr);
   }
 
   catch (const std::logic_error&)
   {
     std::cerr << "Scale coefficient must be greater than zero\n";
-    kushekbaev::clearMemory(capacity, shapeCounter);
+    clearMemory(shapeCounter, compShapePtrPtr);
     return 1;
   }
 
