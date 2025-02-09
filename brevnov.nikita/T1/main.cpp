@@ -49,7 +49,6 @@ int main()
           return 1;
         }
       }
-      }
       catch (const std::bad_alloc & e)
       {
         std::cerr << "Not enough memory!\n";
