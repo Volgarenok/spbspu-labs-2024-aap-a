@@ -62,7 +62,7 @@ gavrilova::rectangle_t gavrilova::Polygon::getFrameRect() const
     minY = std::min(minY, rect.pos.y - rect.height / 2);
     maxY = std::max(maxY, rect.pos.y + rect.height / 2);
   }
-  return {maxX - minX, maxY - minY, { (minX + maxX) / 2, (minY + maxY) / 2 }};
+  return {maxX - minX, maxY - minY, {(minX + maxX) / 2, (minY + maxY) / 2 }};
 }
 
 void gavrilova::Polygon::move(const point_t& p)
@@ -80,7 +80,7 @@ void gavrilova::Polygon::move(double difX, double difY)
 }
 void gavrilova::Polygon::scaleWithoutCheck(double k) noexcept
 {
-  point_t center =  getFrameRect().pos;
+  point_t center = getFrameRect().pos;
   for (size_t i = 0; i < size_; ++i) {
     scaleShapeWithoutCheck(*triangles_[i], center, k);
   }

@@ -1,6 +1,8 @@
 #include "compositeShape.hpp"
 #include "shapeManip.hpp"
 
+void clearShapes(gavrilova::Shape** shapes, size_t n);
+
 gavrilova::CompositeShape::CompositeShape():
   CompositeShape(1)
 {}
@@ -17,7 +19,12 @@ gavrilova::CompositeShape::CompositeShape(const CompositeShape& other):
   shapes_(new Shape*[capacity_])
 {
   for (size_t i = 0; i < size_; ++i) {
-    shapes_[i] = other.shapes_[i]->clone();
+    try {
+      shapes_[i] = other.shapes_[i]->clone();
+    } catch (const std::bad_alloc&) {
+      clearShapes(shapes_, i);
+      throw;
+    }
   }
 }
 
@@ -84,8 +91,7 @@ const gavrilova::Shape* gavrilova::CompositeShape::operator[](size_t id) const n
 
 gavrilova::Shape* gavrilova::CompositeShape::at(size_t id)
 {
-  if (id >= size_)
-  {
+  if (id >= size_) {
     throw std::out_of_range("Index out of range");
   }
   return shapes_[id];
@@ -93,8 +99,7 @@ gavrilova::Shape* gavrilova::CompositeShape::at(size_t id)
 
 const gavrilova::Shape* gavrilova::CompositeShape::at(size_t id) const
 {
-  if (id >= size_)
-  {
+  if (id >= size_) {
     throw std::out_of_range("Index out of range");
   }
   return shapes_[id];
@@ -207,4 +212,12 @@ void gavrilova::CompositeShape::clear()
   delete[] shapes_;
   size_ = 0;
   capacity_ = 0;
+}
+
+void clearShapes(gavrilova::Shape** shapes, size_t n)
+{
+  for (size_t i = 0; i < n; ++i) {
+    delete shapes[i];
+  }
+  delete[] shapes;
 }
