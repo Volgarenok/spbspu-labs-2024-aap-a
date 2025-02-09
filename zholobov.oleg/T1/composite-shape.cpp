@@ -33,12 +33,9 @@ zholobov::CompositeShape::CompositeShape(const CompositeShape& other):
 
 zholobov::CompositeShape::CompositeShape(CompositeShape&& other) noexcept:
   items_(),
-  items_num_(other.items_num_)
+  items_num_(0)
 {
-  for (size_t i = 0; i < other.items_num_; ++i) {
-    items_[i] = other.items_[i];
-  }
-  other.items_num_ = 0;
+  *this = std::move(other);
 }
 
 zholobov::CompositeShape::~CompositeShape()
@@ -52,7 +49,7 @@ zholobov::CompositeShape& zholobov::CompositeShape::operator=(const CompositeSha
 {
   if (this != std::addressof(other)) {
     CompositeShape temp(other);
-    swap(temp);
+    std::swap(*this, temp);
   }
   return *this;
 }
@@ -193,11 +190,4 @@ void zholobov::CompositeShape::scale_relative(point_t pos, double scale_factor)
     new_pos.y = (rect.pos.y - pos.y) * scale_factor + pos.y;
     items_[i]->move(new_pos);
   }
-}
-
-void zholobov::CompositeShape::swap(CompositeShape& other) noexcept
-{
-  CompositeShape temp(std::move(other));
-  other = std::move(*this);
-  *this = std::move(temp);
 }
