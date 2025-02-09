@@ -9,10 +9,6 @@ int main()
   try
   {
     alymova::CompositeShape shapes;
-    alymova::CompositeShape comp1(shapes);
-    alymova::CompositeShape comp2{alymova::CompositeShape(shapes)};
-    comp1 = shapes;
-    comp2 = alymova::CompositeShape(comp1);
     bool wrong_shape_flag = false;
     double scale_params[3] = {};
     alymova::makeShape(std::cin, shapes, wrong_shape_flag, scale_params);
@@ -31,11 +27,6 @@ int main()
       std::cerr << "Incorrect description of the shapes\n";
     }
   }
-  /*catch (const std::runtime_error& e)
-  {
-    std::cerr << e.what();
-    return 1;
-  }*/
   catch (const std::bad_alloc& e)
   {
     std::cerr << "Memory allocate error\n";

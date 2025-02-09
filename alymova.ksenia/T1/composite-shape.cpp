@@ -13,15 +13,16 @@ alymova::CompositeShape::CompositeShape(const CompositeShape& comp_shape):
   shapes_(new Shape*[capacity_]())
 {
   copyArray(comp_shape.shapes_);
-  std::cout << "Constructor coping\n";
 }
 alymova::CompositeShape::CompositeShape(CompositeShape&& comp_shape):
   size_(comp_shape.size_),
   capacity_(comp_shape.capacity_),
-  shapes_(new Shape*[capacity_]())
+  shapes_(comp_shape.shapes_)
 {
-  copyArray(comp_shape.shapes_);
-  std::cout << "Contructor moving\n";
+  for (size_t i = 0; i < comp_shape.size_; i++)
+  {
+    comp_shape.shapes_ = nullptr;
+  }
 }
 alymova::CompositeShape::~CompositeShape()
 {
@@ -29,45 +30,21 @@ alymova::CompositeShape::~CompositeShape()
 }
 alymova::CompositeShape& alymova::CompositeShape::operator=(const CompositeShape& comp_shape)
 {
-  try
+  if (this != &comp_shape)
   {
-    if (this != &comp_shape)
-    {
-      CompositeShape copy{comp_shape};
-      //capacity_ = comp_shape.capacity_;
-      //size_ = comp_shape.size_;
-      clear(shapes_);
-      shapes_ = new Shape*[comp_shape.capacity_];
-      swap(copy);
-    }
-    std::cout << "Operator coping\n";
-    return *this;
-  }
-  catch (const std::bad_alloc& e)
-  {
+    CompositeShape copy{comp_shape};
     clear(shapes_);
-    throw std::runtime_error("Copying assigment error");
+    shapes_ = new Shape*[comp_shape.capacity_]();
+    swap(copy);
   }
+  return *this;
 }
 alymova::CompositeShape& alymova::CompositeShape::operator=(CompositeShape&& comp_shape)
 {
-  try
-  {
-    //CompositeShape move{std::move(comp_shape)};
-    //capacity_ = comp_shape.capacity_;
-    //size_ = comp_shape.size_;
-    clear(shapes_);
-    shapes_ = new Shape*[comp_shape.capacity_];
-    swap(comp_shape);
-    std::cout << "Operator moving\n";
-    return *this;
-  }
-  catch (const std::bad_alloc& e)
-  {
-    clear(shapes_);
-    throw;
-    //throw std::runtime_error("Moving assigment error");
-  }
+  clear(shapes_);
+  shapes_ = new Shape*[comp_shape.capacity_]();
+  swap(comp_shape);
+  return *this;
 }
 alymova::Shape* alymova::CompositeShape::operator[](size_t id) noexcept
 {
@@ -178,13 +155,7 @@ void alymova::CompositeShape::swap(CompositeShape& other) noexcept
   for (size_t i = 0; i < size_; i++)
   {
     std::swap(shapes_[i], other.shapes_[i]);
-    //shapes_[i] = other[i];
-    //other.do_null(i);
   }
-}
-void alymova::CompositeShape::do_null(size_t id) noexcept
-{
-  shapes_[id] = nullptr;
 }
 void alymova::CompositeShape::clear(Shape** shapes) noexcept
 {
