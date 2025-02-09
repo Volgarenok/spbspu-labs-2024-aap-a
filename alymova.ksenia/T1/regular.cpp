@@ -1,7 +1,6 @@
 #include "regular.hpp"
 #include <cmath>
 #include <stdexcept>
-#include <limits>
 constexpr double PI = std::acos(-1.0);
 constexpr double inaccuracy = 0.0000000001;
 alymova::Regular::Regular(const point_t& pos, const point_t& top, const point_t& other):

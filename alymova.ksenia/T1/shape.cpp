@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <cmath>
 #include <cstddef>
+#include <limits>
 void alymova::Shape::scale(double ratio)
 {
   checkRatioScale(ratio);

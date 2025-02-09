@@ -1,5 +1,4 @@
 #include "composite-shape.hpp"
-#include <limits>
 #include <stdexcept>
 #include "shape.hpp"
 alymova::CompositeShape::CompositeShape():
