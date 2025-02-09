@@ -49,17 +49,18 @@ jobs:
         run: $TEST_DIR/build.sh
         shell: bash
       - name: Build results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: labs
           path: ${{ github.workspace }}/out
+          overwrite: true
   acceptance:
     needs: [build]
     runs-on: ubuntu-latest
     container:
       image: volgarenok/cxx-test:latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Acceptance
         working-directory: ${{ github.workspace }}
         run: |
@@ -67,7 +68,8 @@ jobs:
           $TEST_DIR/acceptance-tests.sh
         shell: bash
       - name: Build results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: labs
           path: ${{ github.workspace }}/out/*/*/acceptance.*
+          overwrite: true
