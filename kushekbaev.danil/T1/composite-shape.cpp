@@ -7,7 +7,7 @@ namespace kushekbaev
 {
   CompositeShape::CompositeShape()
   {
-    array_ = nullptr;
+    array_ = 0;
     shapeCounter_ = 0;
     capacity_ = 0;
   }
