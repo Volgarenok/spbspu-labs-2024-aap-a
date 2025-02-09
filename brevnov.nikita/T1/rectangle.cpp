@@ -10,10 +10,6 @@ brevnov::Rectangle::Rectangle(point_t left, point_t right):
   {
     throw std::invalid_argument("Not correct arguments");
   }
-  for (size_t i = 0; i < 64; i++)
-  {
-    shapes_[i] = nullptr;
-  }
   double width = right_.x - left_.x;
   double height = right_.y - left_.y;
   double r1 = height / 16.0;
@@ -22,16 +18,8 @@ brevnov::Rectangle::Rectangle(point_t left, point_t right):
   {
     for (size_t j = 0; j < 8; j++)
     {
-      shapes_[i * 8 + j] = new Ellipse({left_.x + r2 * (i * 2 + 1), left_.y + r1 * (i * 2 + 1)}, r1, r2);
+      shapes_[i * 8 + j] = Ellipse({left_.x + r2 * (i * 2 + 1), left_.y + r1 * (i * 2 + 1)}, r1, r2);
     }
-  }
-}
-
-brevnov::Rectangle::~Rectangle()
-{
-  for (size_t i = 0; i < 64; i++)
-  {
-    delete shapes_[i];
   }
 }
 

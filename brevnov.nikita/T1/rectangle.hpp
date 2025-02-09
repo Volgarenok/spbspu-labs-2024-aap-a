@@ -7,14 +7,14 @@ namespace brevnov
   {
   public:
     Rectangle(point_t left, point_t right);
-    ~Rectangle();
+    ~Rectangle() = default;
     double getArea() const noexcept override;
     rectangle_t getFrameRect() const noexcept override;
     void move(point_t new_centre) noexcept override;
     void move(double dx, double dy) noexcept override;
     void scale(double n) noexcept override;
   private:
-    Ellipse* shapes_[64];
+    Ellipse shapes_[64];
     point_t left_;
     point_t right_;
   };
