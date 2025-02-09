@@ -5,6 +5,17 @@
 #include "regular.hpp"
 #include "polygon.hpp"
 
+namespace
+{
+  std::ostream& outputOneShape(std::ostream& out, const maslevtsov::Shape* shape)
+  {
+    maslevtsov::rectangle_t rect = shape->getFrameRect();
+    maslevtsov::point_t bottomLeft{rect.pos.x - rect.width / 2, rect.pos.y - rect.height / 2};
+    maslevtsov::point_t topRight{rect.pos.x + rect.width / 2, rect.pos.y + rect.height / 2};
+    return out << bottomLeft.x << ' ' << bottomLeft.y << ' ' << topRight.x << ' ' << topRight.y;
+  }
+}
+
 void maslevtsov::clearShapes(Shape** shapes, std::size_t border)
 {
   for (std::size_t i = 0; i < border; ++i)
@@ -78,19 +89,11 @@ void maslevtsov::outputAreaSum(std::ostream& out, const Shape* const* shapes, st
 
 void maslevtsov::outputShapes(std::ostream& out, const Shape* const* shapes, std::size_t border)
 {
-  rectangle_t rect = shapes[0]->getFrameRect();
-  point_t bottomLeft{rect.pos.x - rect.width / 2, rect.pos.y - rect.height / 2};
-  point_t topRight{rect.pos.x + rect.width / 2, rect.pos.y + rect.height / 2};
-  out << bottomLeft.x << ' ' << bottomLeft.y;
-  out << ' ' << topRight.x << ' ' << topRight.y;
-  for (std::size_t i = 1; i < border; ++i)
+  for (std::size_t i = 0; i < border - 1; ++i)
   {
-    rectangle_t rect = shapes[i]->getFrameRect();
-    point_t bottomLeft{rect.pos.x - rect.width / 2, rect.pos.y - rect.height / 2};
-    point_t topRight{rect.pos.x + rect.width / 2, rect.pos.y + rect.height / 2};
-    out << ' ' << bottomLeft.x << ' ' << bottomLeft.y;
-    out << ' ' << topRight.x << ' ' << topRight.y;
+    outputOneShape(out, shapes[i]) << ' ';
   }
+  outputOneShape(out, shapes[border - 1]);
 }
 
 void maslevtsov::outputShapesData(std::ostream& out, const Shape* const* shapes, std::size_t border)
