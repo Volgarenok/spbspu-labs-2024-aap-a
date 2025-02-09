@@ -127,6 +127,15 @@ void maslevtsov::Polygon::move(double dx, double dy) noexcept
 
 void maslevtsov::Polygon::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::invalid_argument("invalid coefficient");
+  }
+  unsafeScale(k);
+}
+
+void maslevtsov::Polygon::unsafeScale(double k) noexcept
+{
   point_t frameCenter = getFrameRect().pos;
   for (std::size_t i = 0; i < nVertices_; ++i)
   {

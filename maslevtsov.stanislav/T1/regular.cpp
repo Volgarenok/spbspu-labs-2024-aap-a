@@ -100,3 +100,8 @@ void maslevtsov::Regular::scale(double k)
 {
   polygon_.scale(k);
 }
+
+void maslevtsov::Regular::unsafeScale(double k) noexcept
+{
+  polygon_.unsafeScale(k);
+}

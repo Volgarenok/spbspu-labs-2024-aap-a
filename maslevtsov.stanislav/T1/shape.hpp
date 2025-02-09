@@ -16,6 +16,7 @@ namespace maslevtsov
     virtual void move(point_t pnt) = 0;
     virtual void move(double dx, double dy) = 0;
     virtual void scale(double k) = 0;
+    virtual void unsafeScale(double k) noexcept = 0;
   };
 
   void clearShapes(Shape** shapes, std::size_t border);

@@ -18,6 +18,7 @@ namespace maslevtsov
     void move(point_t pnt) noexcept override;
     void move(double dx, double dy) noexcept override;
     void scale(double k) override;
+    void unsafeScale(double k) noexcept override;
 
   private:
     std::size_t nVertices_;
