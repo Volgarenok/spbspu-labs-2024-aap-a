@@ -18,7 +18,7 @@ void alymova::makeShape(std::istream& in, CompositeShape& shapes, bool& wrong_sh
     }
     std::string type;
     in >> type;
-    
+
     CreatorRectangle crt0 = CreatorRectangle();
     CreatorCircle crt1 = CreatorCircle();
     CreatorRegular crt2 = CreatorRegular();

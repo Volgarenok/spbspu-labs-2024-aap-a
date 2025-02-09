@@ -42,10 +42,9 @@ int main()
     std::cerr << e.what() << "\n";
     return 1;
   }
-  /*catch (const std::logic_error& e)
+  catch (const std::logic_error& e)
   {
-    wrong_shape_flag = true;
     std::cerr << e.what() << "\n";
     return 1;
-  }*/
+  }
 }
