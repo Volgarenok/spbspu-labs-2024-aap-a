@@ -146,11 +146,11 @@ void abramov::scaleFigures(Composite &shapes, const point_t &p, double k, size_t
   }
   for (size_t j = 0; j < i; ++j)
   {
-    unsafeScaleFigure(shapes[j], p, k);
+    scaleFigureUnsafe(shapes[j], p, k);
   }
 }
 
-void abramov::unsafeScaleFigure(Shape *s, const point_t &p, double k)
+void abramov::scaleFigureUnsafe(Shape *s, const point_t &p, double k)
 {
   const point_t pos1 = s->getFrameRect().pos;
   s->move(p);

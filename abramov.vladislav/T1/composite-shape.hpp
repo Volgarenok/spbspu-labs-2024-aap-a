@@ -18,7 +18,7 @@ namespace abramov
     void move(const point_t &p);
     void move(double dx, double dy);
     void scale(double k);
-    void unsafeScale(double k);
+    void scaleUnsafe(double k);
     void push_back(Shape *shp);
     void pop_back() noexcept;
     Shape *at(size_t id);
@@ -33,7 +33,7 @@ namespace abramov
     size_t capacity_;
     Shape **shapeptrs_;
 
-    Shape *unsafeGetFigure(size_t id) const;
+    Shape *getFigureUnsafe(size_t id) const;
     Shape *getFigure(size_t id) const;
     void swap(CompositeShape &comp_shp) noexcept;
   };

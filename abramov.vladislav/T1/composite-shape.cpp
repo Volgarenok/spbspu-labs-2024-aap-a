@@ -130,15 +130,15 @@ void abramov::CompositeShape::scale(double k)
   }
   for (size_t i = 0; i < shapes_; ++i)
   {
-    unsafeScaleFigure(shapeptrs_[i], getFrameRect().pos, k);
+    scaleFigureUnsafe(shapeptrs_[i], getFrameRect().pos, k);
   }
 }
 
-void abramov::CompositeShape::unsafeScale(double k)
+void abramov::CompositeShape::scaleUnsafe(double k)
 {
   for (size_t i = 0; i < shapes_; ++i)
   {
-    unsafeScaleFigure(shapeptrs_[i], getFrameRect().pos, k);
+    scaleFigureUnsafe(shapeptrs_[i], getFrameRect().pos, k);
   }
 }
 
@@ -169,7 +169,7 @@ void abramov::CompositeShape::pop_back() noexcept
   shapeptrs_[shapes_] = nullptr;
 }
 
-abramov::Shape *abramov::CompositeShape::unsafeGetFigure(size_t id) const
+abramov::Shape *abramov::CompositeShape::getFigureUnsafe(size_t id) const
 {
   return shapeptrs_[id];
 }
@@ -180,7 +180,7 @@ abramov::Shape *abramov::CompositeShape::getFigure(size_t id) const
   {
     throw std::logic_error("There is no such element\n");
   }
-  return unsafeGetFigure(id);
+  return getFigureUnsafe(id);
 }
 
 abramov::Shape *abramov::CompositeShape::at(size_t id)
@@ -195,12 +195,12 @@ const abramov::Shape *abramov::CompositeShape::at(size_t id) const
 
 abramov::Shape *abramov::CompositeShape::operator[](size_t id) noexcept
 {
-  return unsafeGetFigure(id);
+  return getFigureUnsafe(id);
 }
 
 const abramov::Shape *abramov::CompositeShape::operator[](size_t id) const noexcept
 {
-  return unsafeGetFigure(id);
+  return getFigureUnsafe(id);
 }
 
 bool abramov::CompositeShape::empty() const noexcept
