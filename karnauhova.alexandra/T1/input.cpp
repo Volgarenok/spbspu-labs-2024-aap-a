@@ -131,7 +131,7 @@ void karnauhova::fabric_input(std::istream& in, CompositeShape& shaps, point_t& 
     {
       shaps.push_back(shape);
     }
-    catch (const std::exception& e)
+    catch (const std::bad_alloc& e)
     {
       delete shape;
       throw;
