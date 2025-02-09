@@ -5,6 +5,12 @@
 
 namespace kushekbaev
 {
+  CompositeShape::CompositeShape()
+  {
+    shapeCounter_ = 0;
+    capacity_ = 0;
+  }
+
   CompositeShape::CompositeShape(CompositeShape && rhs)
   {
     array_ = rhs.array_;
@@ -15,7 +21,8 @@ namespace kushekbaev
 
   CompositeShape::~CompositeShape()
   {
-    clearMemory(array_, shapeCounter_);
+    delete[] array_;
+    shapeCounter_ = 0;
   }
 
   CompositeShape & CompositeShape::operator=(const CompositeShape & rhs)
@@ -27,7 +34,7 @@ namespace kushekbaev
       {
         throw std::bad_alloc();
       }
-      clearMemory(array_, shapeCounter_);
+      CompositeShape::~CompositeShape();
       array_ = new_array;
       shapeCounter_ = rhs.shapeCounter_;
       capacity_ = rhs.capacity_;
@@ -70,10 +77,10 @@ namespace kushekbaev
            {(upperRightX + lowerLeftX) / 2, (upperRightY + lowerLeftY) / 2}};
   }
 
-  void CompositeShape::move(point_t Z)
+  void CompositeShape::move(point_t scalePoint)
   {
-    double dx = Z.x - getFrameRect().pos.x;
-    double dy = Z.y - getFrameRect().pos.y;
+    double dx = scalePoint.x - getFrameRect().pos.x;
+    double dy = scalePoint.y - getFrameRect().pos.y;
     move(dx, dy);
   }
 
@@ -103,12 +110,12 @@ namespace kushekbaev
   {
     if (shapeCounter_ + 1 == capacity_)
     {
-      Shape ** new_array = creatingNewArray(array_, capacity_, 2 * capacity_);
+      Shape** new_array = creatingNewArray(array_, capacity_, 2 * capacity_);
       if (!new_array)
       {
         throw std::bad_alloc();
       }
-      clearMemory(array_, shapeCounter_);
+      CompositeShape::~CompositeShape();
       array_ = new_array;
       capacity_ = 2 * capacity_;
     }
@@ -137,6 +144,16 @@ namespace kushekbaev
   size_t CompositeShape::size() const
   {
     return shapeCounter_;
+  }
+
+  void CompositeShape::scaleEverything(point_t scalePoint, double scaleCoeff)
+  {
+    point_t beforeScale = getFrameRect().pos;
+    move(scalePoint);
+    point_t afterScale = getFrameRect().pos;
+    point_t vector = { (afterScale.x - beforeScale.x) * scaleCoeff, (afterScale.y - beforeScale.y) * scaleCoeff };
+    scale(scaleCoeff);
+    move(-vector.x, -vector.y);
   }
 
   Shape** CompositeShape::creatingNewArray(Shape** array, size_t old_size, size_t new_size)

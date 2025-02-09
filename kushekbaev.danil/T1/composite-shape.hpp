@@ -10,6 +10,7 @@ namespace kushekbaev
   class CompositeShape
   {
   public:
+    CompositeShape();
     CompositeShape(CompositeShape && rhs);
 
     ~CompositeShape();
@@ -19,14 +20,15 @@ namespace kushekbaev
 
     double getArea() const;
     rectangle_t getFrameRect() const;
-    void move(point_t Z);
+    void move(point_t scalePoint);
     void move(double dx, double dy);
-    void scale(double V);
+    void scale(double scaleCoeff);
     void push_back(Shape* shp);
     void pop_back() noexcept;
     Shape* at(size_t id) const;
     bool empty() const;
     size_t size() const;
+    void CompositeShape::scaleEverything(point_t scalePoint, double scaleCoeff);
 
   private:
     Shape** array_;
