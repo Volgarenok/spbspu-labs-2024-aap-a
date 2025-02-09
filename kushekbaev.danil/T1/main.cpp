@@ -17,7 +17,7 @@ int main()
   double scaleCoeff = 0;
   bool invalid_argument = false;
 
-  while (std::cin >> shapeName) //подумать откуда тут вообще цикл, вроде все и без него должно быть
+  while (std::cin >> shapeName)
   {
     if (std::cin.eof())
     {
