@@ -35,6 +35,8 @@ namespace zholobov {
     void scale_relative(point_t pos, double scale_factor);
 
   private:
+    void swap(CompositeShape& other) noexcept;
+
     Shape* items_[max_elem_num];
     size_t items_num_;
   };

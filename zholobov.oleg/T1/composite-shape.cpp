@@ -19,8 +19,15 @@ zholobov::CompositeShape::CompositeShape(const CompositeShape& other):
   items_(),
   items_num_(0)
 {
-  for (items_num_ = 0; items_num_ < other.items_num_; ++items_num_) {
-    items_[items_num_] = other.items_[items_num_]->clone();
+  try {
+    for (items_num_ = 0; items_num_ < other.items_num_; ++items_num_) {
+      items_[items_num_] = other.items_[items_num_]->clone();
+    }
+  } catch (const std::exception&) {
+    for (size_t i = 0; i < items_num_; ++i) {
+      delete items_[i];
+    }
+    throw;
   }
 }
 
@@ -43,11 +50,9 @@ zholobov::CompositeShape::~CompositeShape()
 
 zholobov::CompositeShape& zholobov::CompositeShape::operator=(const CompositeShape& other)
 {
-  for (size_t i = 0; i < items_num_; ++i) {
-    delete items_[i];
-  }
-  for (items_num_ = 0; items_num_ < other.items_num_; ++items_num_) {
-    items_[items_num_] = other.items_[items_num_]->clone();
+  if (this != std::addressof(other)) {
+    CompositeShape temp(other);
+    swap(temp);
   }
   return *this;
 }
@@ -139,18 +144,10 @@ zholobov::rectangle_t zholobov::CompositeShape::getFrameRect() const
     double cur_right = cur_rect.pos.x + cur_rect.width / 2.0;
     double cur_down = cur_rect.pos.y - cur_rect.height / 2.0;
     double cur_up = cur_rect.pos.y + cur_rect.height / 2.0;
-    if (cur_left < left) {
-      left = cur_left;
-    }
-    if (cur_right > right) {
-      right = cur_right;
-    }
-    if (cur_down < down) {
-      down = cur_down;
-    }
-    if (cur_up > up) {
-      up = cur_up;
-    }
+    left = std::min(cur_left, left);
+    right = std::max(cur_right, right);
+    down = std::min(cur_down, down);
+    up = std::max(cur_up, up);
   }
   return rectangle_t{right - left, up - down, {(right + left) / 2.0, (up + down) / 2.0}};
 }
@@ -175,11 +172,7 @@ void zholobov::CompositeShape::scale(double k)
 
 void zholobov::CompositeShape::print(std::ostream& output) const
 {
-  double total_area = 0.0;
-  for (size_t i = 0; i < items_num_; ++i) {
-    total_area += items_[i]->getArea();
-  }
-  output << std::fixed << std::setprecision(1) << total_area;
+  output << std::fixed << std::setprecision(1) << getArea();
   for (size_t i = 0; i < items_num_; ++i) {
     rectangle_t rect = items_[i]->getFrameRect();
     output << " " << rect.pos.x - rect.width / 2.0 << " " << rect.pos.y - rect.height / 2.0;
@@ -200,4 +193,11 @@ void zholobov::CompositeShape::scale_relative(point_t pos, double scale_factor)
     new_pos.y = (rect.pos.y - pos.y) * scale_factor + pos.y;
     items_[i]->move(new_pos);
   }
+}
+
+void zholobov::CompositeShape::swap(CompositeShape& other) noexcept
+{
+  CompositeShape temp(std::move(other));
+  other = std::move(*this);
+  *this = std::move(temp);
 }

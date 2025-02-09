@@ -13,5 +13,5 @@ zholobov::Shape* zholobov::create_shape(const std::string& shape_name, std::istr
   } else if (shape_name == "PARALLELOGRAM") {
     return zholobov::Parallelogram::create(input_stream);
   }
-  return nullptr;
+  throw std::invalid_argument("Unknown shape (" + shape_name + ")");
 }
