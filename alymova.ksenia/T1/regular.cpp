@@ -7,8 +7,7 @@ constexpr double inaccuracy = 0.0000000001;
 alymova::Regular::Regular(point_t pos, point_t top, point_t other):
   pos_(pos),
   top_(top),
-  other_(other),
-  sides_cnt_(getCntSides())
+  other_(other)
 {
   if (!isRectanglurTriangle(pos, top, other))
   {
@@ -18,9 +17,8 @@ alymova::Regular::Regular(point_t pos, point_t top, point_t other):
     }
     top_ = other;
     other_ = top;
-    sides_cnt_ = getCntSides();
   }
-  if (sides_cnt_ < 3)
+  if (getCntSides() < 3)
   {
     throw std::logic_error("Incorrect description regular");
   }
@@ -28,17 +26,17 @@ alymova::Regular::Regular(point_t pos, point_t top, point_t other):
 alymova::Regular::Regular(const Regular& other):
   pos_(other.pos_),
   top_(other.top_),
-  other_(other.other_),
-  sides_cnt_(other.sides_cnt_)
+  other_(other.other_)
 {}
 double alymova::Regular::getArea() const noexcept
 {
   double radius_small = getVector(pos_, other_);
   double other_side = getVector(top_, other_);
-  return 0.5 * radius_small * other_side * sides_cnt_ * 2.0;
+  return 0.5 * radius_small * other_side * getCntSides() * 2.0;
 }
 alymova::rectangle_t alymova::Regular::getFrameRect() const noexcept
 {
+  size_t sides_cnt = getCntSides();
   double radius_big = getVector(pos_, top_);
   double other_side = getVector(top_, other_);
   double low_left_x = std::numeric_limits< double >::max();
@@ -50,9 +48,9 @@ alymova::rectangle_t alymova::Regular::getFrameRect() const noexcept
   {
     angle_start = 0;
   }
-  for (size_t i = 0; i < sides_cnt_; i++)
+  for (size_t i = 0; i < sides_cnt; i++)
   {
-    double angle_now = angle_start + i * 2 * PI / sides_cnt_;
+    double angle_now = angle_start + i * 2 * PI / sides_cnt;
     low_left_x = std::min(low_left_x, pos_.x + radius_big * std::cos(angle_now));
     low_left_y = std::min(low_left_y, pos_.y + radius_big * std::sin(angle_now));
     upp_right_x = std::max(upp_right_x, pos_.x + radius_big * std::cos(angle_now));

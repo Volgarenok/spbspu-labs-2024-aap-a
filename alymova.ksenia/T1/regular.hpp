@@ -18,7 +18,6 @@ namespace alymova
     Shape* clone() const override;
   private:
     point_t pos_, top_, other_;
-    size_t sides_cnt_;
 
     size_t getCntSides() const noexcept;
   };
