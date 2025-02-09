@@ -3,7 +3,7 @@
 
 
 brevnov::Rectangle::Rectangle(point_t left, point_t right):
-  shapes_(new * Ellipse[64])
+  shapes_(new Ellipse *[64])
   left_(left),
   right_(right)
 {
