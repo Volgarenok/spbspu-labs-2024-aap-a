@@ -32,8 +32,9 @@ namespace kushekbaev
 
   private:
     Shape** array_;
-    size_t shapeCounter_;
     size_t capacity_;
+    size_t shapeCounter_;
+
 
     Shape** creatingNewArray(Shape** array, size_t old_size, size_t new_size);
   };
