@@ -116,23 +116,17 @@ double alymova::CompositeShape::getArea() const noexcept
 }
 alymova::rectangle_t alymova::CompositeShape::getFrameRect() const noexcept
 {
-  double low_left_x = std::numeric_limits< double >::max();
-  double low_left_y = std::numeric_limits< double >::max();
-  double upp_right_x = std::numeric_limits< double >::min();
-  double upp_right_y = std::numeric_limits< double >::min();
+  rectangle_t max_frame_rect = getMaxFrameRect();
   for (size_t i = 0; i < size_; i++)
   {
     rectangle_t rect = {shapes_[i]->getFrameRect()};
-    low_left_x = std::min(low_left_x, getLowLeftFrameRect(rect).x);
-    low_left_y = std::min(low_left_y, getLowLeftFrameRect(rect).y);
-    upp_right_x = std::max(upp_right_x, getUppRightFrameRect(rect).x);
-    upp_right_y = std::max(upp_right_x, getUppRightFrameRect(rect).y);
+    point_t low_left = getLowLeftFrameRect(rect);
+    point_t upp_right = getUppRightFrameRect(rect);
+    changeFrameRect(max_frame_rect, low_left.x, low_left.y, upp_right.x, upp_right.y);
   }
-  double width = upp_right_x - low_left_x;
-  double height = upp_right_y - low_left_y;
-  return rectangle_t{width, height, point_t{upp_right_x - width / 2.0, upp_right_y - height / 2.0}};
+  return max_frame_rect;
 }
-void alymova::CompositeShape::move(point_t point) noexcept
+void alymova::CompositeShape::move(const point_t& point) noexcept
 {
   point_t pos = getFrameRect().pos;
   double shift_x = point.x - pos.x;

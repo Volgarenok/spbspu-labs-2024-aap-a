@@ -4,7 +4,7 @@
 #include <limits>
 constexpr double PI = std::acos(-1.0);
 constexpr double inaccuracy = 0.0000000001;
-alymova::Regular::Regular(point_t pos, point_t top, point_t other):
+alymova::Regular::Regular(const point_t& pos, const point_t& top, const point_t& other):
   pos_(pos),
   top_(top),
   other_(other)
@@ -39,11 +39,8 @@ alymova::rectangle_t alymova::Regular::getFrameRect() const noexcept
   size_t sides_cnt = getCntSides();
   double radius_big = getVector(pos_, top_);
   double other_side = getVector(top_, other_);
-  double low_left_x = std::numeric_limits< double >::max();
-  double low_left_y = std::numeric_limits< double >::max();
-  double upp_right_x = std::numeric_limits< double >::min();
-  double upp_right_y = std::numeric_limits< double >::min();
   double angle_start = std::acos(other_side / radius_big);
+  rectangle_t max_frame_rect = getMaxFrameRect();
   if (top_.y == pos_.y)
   {
     angle_start = 0;
@@ -51,15 +48,10 @@ alymova::rectangle_t alymova::Regular::getFrameRect() const noexcept
   for (size_t i = 0; i < sides_cnt; i++)
   {
     double angle_now = angle_start + i * 2 * PI / sides_cnt;
-    low_left_x = std::min(low_left_x, pos_.x + radius_big * std::cos(angle_now));
-    low_left_y = std::min(low_left_y, pos_.y + radius_big * std::sin(angle_now));
-    upp_right_x = std::max(upp_right_x, pos_.x + radius_big * std::cos(angle_now));
-    upp_right_y = std::max(upp_right_y, pos_.y + radius_big * std::sin(angle_now));
+    changeFrameRect(max_frame_rect, pos_.x + radius_big * std::cos(angle_now), pos_.y + radius_big * std::sin(angle_now),
+      pos_.x + radius_big * std::cos(angle_now), pos_.y + radius_big * std::sin(angle_now));
   }
-  double width = upp_right_x - low_left_x;
-  double height = upp_right_y - low_left_y;
-  point_t pos = {(low_left_x + width / 2.0), (upp_right_y - height / 2.0)};
-  return rectangle_t{width, height, pos};
+  return max_frame_rect;
 }
 void alymova::Regular::move(double shift_x, double shift_y) noexcept
 {
@@ -68,7 +60,7 @@ void alymova::Regular::move(double shift_x, double shift_y) noexcept
   top_ += shift_point;
   other_ += shift_point;
 }
-void alymova::Regular::move(point_t point) noexcept
+void alymova::Regular::move(const point_t& point) noexcept
 {
   double shift_x = point.x - pos_.x;
   double shift_y = point.y - pos_.y;

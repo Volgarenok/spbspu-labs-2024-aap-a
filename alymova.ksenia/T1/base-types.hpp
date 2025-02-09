@@ -6,17 +6,17 @@ namespace alymova
   {
     double x, y;
   };
-  point_t operator+=(point_t& point, point_t shift_point);
+  point_t operator+=(point_t& point, const point_t& shift_point);
   point_t operator*=(point_t& point, double ratio);
-  bool operator<(point_t point1, point_t point2);
+  bool operator<(const point_t& point1, const point_t& point2);
 
   struct rectangle_t
   {
     double width, height;
     point_t pos;
   };
-  point_t getShiftFrameRect(rectangle_t rect1, rectangle_t rect2) noexcept;
-  point_t getLowLeftFrameRect(rectangle_t rect) noexcept;
-  point_t getUppRightFrameRect(rectangle_t rect) noexcept;
+  point_t getShiftFrameRect(const rectangle_t& rect1, const rectangle_t& rect2) noexcept;
+  point_t getLowLeftFrameRect(const rectangle_t& rect) noexcept;
+  point_t getUppRightFrameRect(const rectangle_t& rect) noexcept;
 }
 #endif

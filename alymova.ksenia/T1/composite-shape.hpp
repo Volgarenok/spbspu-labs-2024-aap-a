@@ -19,7 +19,7 @@ namespace alymova
 
     double getArea() const noexcept;
     rectangle_t getFrameRect() const noexcept;
-    void move(point_t point) noexcept;
+    void move(const point_t& point) noexcept;
     void move(double shift_x, double shift_y) noexcept;
     void scale(double ratio);
     void unsafeScale(double ratio) noexcept;

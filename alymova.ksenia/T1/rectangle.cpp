@@ -1,6 +1,6 @@
 #include "rectangle.hpp"
 #include <stdexcept>
-alymova::Rectangle::Rectangle(point_t p1, point_t p2):
+alymova::Rectangle::Rectangle(const point_t& p1, const point_t& p2):
   low_left_(p1),
   upp_right_(p2)
 {
@@ -32,7 +32,7 @@ void alymova::Rectangle::move(double shift_x, double shift_y) noexcept
   low_left_ += shift_point;
   upp_right_ += shift_point;
 }
-void alymova::Rectangle::move(point_t point) noexcept
+void alymova::Rectangle::move(const point_t& point) noexcept
 {
   point_t pos = {getFrameRect().pos};
   double shift_x = point.x - pos.x;
