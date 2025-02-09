@@ -43,6 +43,6 @@ double alymova::getVector(point_t p1, point_t p2) noexcept
 }
 bool alymova::isRectanglurTriangle(point_t p1, point_t p2, point_t p3) noexcept
 {
-  return (std::abs(std::pow(getVector(p2, p3), 2) + std::pow(getVector(p1, p3), 2) 
+  return (std::abs(std::pow(getVector(p2, p3), 2) + std::pow(getVector(p1, p3), 2)
     - std::pow(getVector(p1, p2), 2)) < inaccuracy);
 }
