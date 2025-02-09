@@ -70,7 +70,7 @@ namespace
   }
 }
 
-void abramov::createCQs(const point_t &p1, const point_t &p2, ComplexQuad &cq1, ComplexQuad &cq2, ComplexQuad &cq3, ComplexQuad &cq4)
+abramov::ComplexQuad *abramov::createCQs(const point_t &p1, const point_t &p2)
 {
   const double x1 = p1.x;
   const double x2 = p2.x;
@@ -78,31 +78,32 @@ void abramov::createCQs(const point_t &p1, const point_t &p2, ComplexQuad &cq1, 
   const double y2 = p2.y;
   const point_t a{x1, y2};
   const point_t b{x2, y1};
+  constexpr size_t k = 4;
   if (x2 - x1 >= y2 - y1)
   {
     const double x3 = (x1 + x2) / 2;
     const point_t c{x3, y2};
     const point_t d{x3, y1};
-    cq1 = ComplexQuad(p1, c, d, a);
-    cq2 = ComplexQuad(a, d, p1, c);
-    cq3 = ComplexQuad(d, p2, b, c);
-    cq4 = ComplexQuad(c, b, d, p2);
+    ComplexQuad cq1 = ComplexQuad(p1, c, d, a);
+    ComplexQuad cq2 = ComplexQuad(a, d, p1, c);
+    ComplexQuad cq3 = ComplexQuad(d, p2, b, c);
+    ComplexQuad cq4 = ComplexQuad(c, b, d, p2);
+    ComplexQuad *cqs = new ComplexQuad[k]{ cq1, cq2, cq3, cq4 };
+    return cqs;
   }
   else
   {
     const double y3 = (y1 + y2) / 2;
     const point_t c{x2, y3};
     const point_t d{x1, y3};
-    cq1 = ComplexQuad(a, c, p2, d);
-    cq2 = ComplexQuad(d, p2, a, c);
-    cq3 = ComplexQuad(p1, c, b, d);
-    cq4 = ComplexQuad(p1, c, d, b);
+    ComplexQuad cq1 = ComplexQuad(a, c, p2, d);
+    ComplexQuad cq2 = ComplexQuad(d, p2, a, c);
+    ComplexQuad cq3 = ComplexQuad(p1, c, b, d);
+    ComplexQuad cq4 = ComplexQuad(p1, c, d, b);
+    ComplexQuad *cqs = new ComplexQuad[k]{ cq1, cq2, cq3, cq4 };
+    return cqs;
   }
 }
-
-abramov::ComplexQuad::ComplexQuad():
-  points{ {0.0, 0.0}, {10.0, 10.0}, {2.0, 0.0}, {0.0, 3.0} }
-{}
 
 abramov::ComplexQuad::ComplexQuad(const point_t &A, const point_t &B, const point_t &C, const point_t &D):
   points{A, B, C, D}

@@ -106,6 +106,10 @@ void abramov::getShapes(std::istream &in, Composite &shapes, point_t &p, double 
 
 void abramov::printShapes(std::ostream &out, const Composite &shapes, size_t i)
 {
+  if (i == 0)
+  {
+    throw std::logic_error("There is no figures\n");
+  }
   std::ios stream(NULL);
   stream.copyfmt(out);
   out << std::fixed << std::setprecision(1);

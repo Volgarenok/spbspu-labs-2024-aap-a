@@ -5,14 +5,13 @@
 #include "base-types.hpp"
 
 abramov::Rectangle::Rectangle(const point_t &p1, const point_t &p2):
-  cmplxqds(new ComplexQuad[4])
+  cmplxqds(createCQs(p1, p2))
 {
   if (p1.x >= p2.x || p1.y >= p2.y)
   {
     delete[] cmplxqds;
     throw std::logic_error("Impossible to build a rectangle");
   }
-  createCQs(p1, p2, cmplxqds[0], cmplxqds[1], cmplxqds[2], cmplxqds[3]);
 }
 
 abramov::Rectangle::~Rectangle()
@@ -85,7 +84,7 @@ void abramov::Rectangle::scale(double k)
   const double y1 = center.y - newHeight / 2;
   const point_t p1{x1, y1};
   const point_t p2{x2, y2};
-  createCQs(p1, p2, cmplxqds[0], cmplxqds[1], cmplxqds[2], cmplxqds[3]);
+  cmplxqds = createCQs(p1, p2);
 }
 
 abramov::Rectangle *abramov::Rectangle::clone() const
