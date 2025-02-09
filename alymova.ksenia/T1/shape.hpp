@@ -17,7 +17,7 @@ namespace alymova
     virtual Shape* clone() const = 0;
   };
   void scale(CompositeShape& shapes, const point_t& s, double ratio);
-  void unsafeScale(CompositeShape& shapes, const point_t& s, double ratio);
+  void unsafeScale(CompositeShape& shapes, const point_t& s, double ratio) noexcept;
   void checkRatioScale(double ratio);
 
   bool isRectanglurTriangle(const point_t& p1, const point_t& p2, const point_t& p3) noexcept;

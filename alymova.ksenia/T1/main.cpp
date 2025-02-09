@@ -27,11 +27,11 @@ int main()
       std::cerr << "Incorrect description of the shapes\n";
     }
   }
-  catch (const std::runtime_error& e)
+  /*catch (const std::runtime_error& e)
   {
     std::cerr << e.what();
     return 1;
-  }
+  }*/
   catch (const std::bad_alloc& e)
   {
     std::cerr << "Memory allocate error\n";
@@ -42,9 +42,10 @@ int main()
     std::cerr << e.what() << "\n";
     return 1;
   }
-  catch (const std::logic_error& e)
+  /*catch (const std::logic_error& e)
   {
+    wrong_shape_flag = true;
     std::cerr << e.what() << "\n";
     return 1;
-  }
+  }*/
 }

@@ -13,7 +13,7 @@ void alymova::scale(CompositeShape& shapes, const point_t& s, double ratio)
   checkRatioScale(ratio);
   unsafeScale(shapes, s, ratio);
 }
-void alymova::unsafeScale(CompositeShape& shapes, const point_t& s, double ratio)
+void alymova::unsafeScale(CompositeShape& shapes, const point_t& s, double ratio) noexcept
 {
   for (size_t i = 0; i < shapes.size(); i++)
   {

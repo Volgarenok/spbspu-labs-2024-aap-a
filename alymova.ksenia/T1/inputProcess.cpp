@@ -6,6 +6,7 @@
 #include "rectangle.hpp"
 #include "circle.hpp"
 #include "fabrics.hpp"
+constexpr size_t figures_cnt = 3;
 void alymova::makeShape(std::istream& in, CompositeShape& shapes, bool& wrong_shape_flag, double* scale_params)
 {
   bool scale_flag = false;
@@ -17,30 +18,33 @@ void alymova::makeShape(std::istream& in, CompositeShape& shapes, bool& wrong_sh
     }
     std::string type;
     in >> type;
-    try
+    
+    CreatorRectangle crt0 = CreatorRectangle();
+    CreatorCircle crt1 = CreatorCircle();
+    CreatorRegular crt2 = CreatorRegular();
+    Creator* fabrics[figures_cnt] = {&crt0, &crt1, &crt2};
+    std::string figures[figures_cnt] = {"RECTANGLE", "CIRCLE", "REGULAR"};
+    for (size_t i = 0; i < figures_cnt; i++)
     {
-      if (type == "RECTANGLE")
+      if (type == figures[i])
       {
-        CreatorRectangle crt = CreatorRectangle();
-        Creator* creator = &crt;
-        shapes.push_back(creator->create(in));
+        Shape* shape = nullptr;
+        try
+        {
+          shape = fabrics[i]->create(in);
+          shapes.push_back(shape);
+        }
+        catch (const std::logic_error& e)
+        {
+          wrong_shape_flag = true;
+          break;
+        }
+        catch (const std::bad_alloc& e)
+        {
+          delete shape;
+          throw;
+        }
       }
-      else if (type == "CIRCLE")
-      {
-        CreatorCircle crt = CreatorCircle();
-        Creator* creator = &crt;
-        shapes.push_back(creator->create(in));
-      }
-      else if (type == "REGULAR")
-      {
-        CreatorRegular crt = CreatorRegular();
-        Creator* creator = &crt;
-        shapes.push_back(creator->create(in));
-      }
-    }
-    catch (...)
-    {
-      wrong_shape_flag = true;
     }
     if (type == "SCALE")
     {
