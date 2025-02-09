@@ -4,4 +4,3 @@ int main()
 {
   std::cout << "beshimow.meylis\n";
 }
-
