@@ -84,7 +84,9 @@ void abramov::Rectangle::scale(double k)
   const double y1 = center.y - newHeight / 2;
   const point_t p1{x1, y1};
   const point_t p2{x2, y2};
+  ComplexQuad *oldcqs = cmplxqds;
   cmplxqds = createCQs(p1, p2);
+  delete[] oldcqs;
 }
 
 abramov::Rectangle *abramov::Rectangle::clone() const
