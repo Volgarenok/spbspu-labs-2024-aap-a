@@ -5,8 +5,8 @@
 #include <fstream>
 
 namespace beshimow {
-    std::istream& input(std::istream& inputFile, int* arr, size_t m);
-    bool lwrTriMtx(const int* arr, size_t m);
+  std::istream& input(std::istream& inputFile, int* arr, size_t m);
+  bool lwrTriMtx(const int* arr, size_t m);
 }
 
-#endif // MATRIX_HPP
+#endif
