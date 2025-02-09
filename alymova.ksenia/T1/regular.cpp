@@ -18,6 +18,7 @@ alymova::Regular::Regular(point_t pos, point_t top, point_t other):
     }
     top_ = other;
     other_ = top;
+    sides_cnt_ = getCntSides();
   }
   if (sides_cnt_ < 3)
   {

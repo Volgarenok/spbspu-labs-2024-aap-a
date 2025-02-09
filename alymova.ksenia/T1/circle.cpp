@@ -5,8 +5,6 @@ constexpr double PII = std::acos(-1.0);
 constexpr size_t angles_cnt = 73;
 constexpr double angle_73 = 360.0 / angles_cnt / 2.0 * PII / 180.0;
 alymova::Circle::Circle(point_t pos, double radius):
-  //pos_(pos),
-  //radius_(radius),
   regular_(setRegular(pos, radius))
 {
   if (radius <= 0.0)
@@ -15,8 +13,6 @@ alymova::Circle::Circle(point_t pos, double radius):
   }
 }
 alymova::Circle::Circle(const Circle& other):
-  //pos_(other.pos_),
-  //radius_(other.radius_),
   regular_(other.regular_)
 {}
 double alymova::Circle::getArea() const noexcept
