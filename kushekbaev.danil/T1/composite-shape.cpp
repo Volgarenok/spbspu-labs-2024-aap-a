@@ -5,12 +5,11 @@
 
 namespace kushekbaev
 {
-  CompositeShape::CompositeShape()
-  {
-    array_ = nullptr;
-    shapeCounter_ = 0;
-    capacity_ = 0;
-  }
+  CompositeShape::CompositeShape(size_t capacity):
+    capacity_(capacity),
+    shapeCounter_(0),
+    array_(0)
+  {}
 
   CompositeShape::CompositeShape(CompositeShape && rhs)
   {
