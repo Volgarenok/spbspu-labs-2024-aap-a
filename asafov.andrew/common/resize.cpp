@@ -3,7 +3,7 @@
 
 char* asafov::resize(const char* string, size_t length)
 {
-  char* newString = new char[length];
+  char* newString = new char[length + 1];
   for (size_t i = 0; i < length || string[i] != 0; i++)
   {
     newString[i] = string[i];
