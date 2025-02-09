@@ -8,12 +8,12 @@ namespace alymova
   struct Shape
   {
     virtual ~Shape() = default;
-    virtual double getArea() const = 0;
-    virtual rectangle_t getFrameRect() const = 0;
-    virtual void move(const point_t& point) = 0;
-    virtual void move(double shift_x, double shift_y) = 0;
+    virtual double getArea() const noexcept = 0;
+    virtual rectangle_t getFrameRect() const noexcept = 0;
+    virtual void move(const point_t& point) noexcept = 0;
+    virtual void move(double shift_x, double shift_y) noexcept = 0;
     void scale(double ratio);
-    virtual void unsafeScale(double ratio) = 0;
+    virtual void unsafeScale(double ratio) noexcept = 0;
     virtual Shape* clone() const = 0;
   };
   void scale(CompositeShape& shapes, const point_t& s, double ratio);

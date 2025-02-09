@@ -10,10 +10,10 @@ namespace alymova
   {
     CompositeShape();
     CompositeShape(const CompositeShape& comp_shape);
-    CompositeShape(const CompositeShape&& comp_shape);
+    CompositeShape(CompositeShape&& comp_shape);
     ~CompositeShape();
     CompositeShape& operator=(const CompositeShape& comp_shape);
-    CompositeShape& operator=(const CompositeShape&& comp_shape);
+    CompositeShape& operator=(CompositeShape&& comp_shape);
     Shape* operator[](size_t id) noexcept;
     const Shape* operator[](size_t id) const noexcept;
 
