@@ -16,7 +16,8 @@ namespace
     constexpr size_t k = 4;
     double arr[k] = {};
     getArray(in, arr, k);
-    return new abramov::Rectangle({arr[0], arr[1]}, {arr[2], arr[3]});
+    abramov::Rectangle *rect = new abramov::Rectangle({ { arr[0], arr[1] }, { arr[2], arr[3] } });
+    return rect;
   }
 
   abramov::Square *makeSquare(std::istream &in)
@@ -24,7 +25,8 @@ namespace
     constexpr size_t k = 3;
     double arr[k] = {};
     getArray(in, arr, k);
-    return new abramov::Square({arr[0], arr[1]}, arr[2]);
+    abramov::Square *square = new abramov::Square({ { arr[0], arr[1] }, arr[2] });
+    return square;
   }
 
   abramov::ComplexQuad *makeComplexQuad(std::istream &in)
@@ -32,7 +34,8 @@ namespace
     constexpr size_t k = 8;
     double x[k] = {};
     getArray(in, x, k);
-    return new abramov::ComplexQuad({x[0], x[1]}, {x[2], x[3]}, {x[4], x[5]}, {x[6], x[7]});
+    abramov::ComplexQuad *cq = new abramov::ComplexQuad({ x[0], x[1] }, { x[2], x[3] }, { x[4], x[5] }, { x[6], x[7] });
+    return cq;
   }
 
   abramov::Shape *makeShape(std::string s1, std::istream &in)
