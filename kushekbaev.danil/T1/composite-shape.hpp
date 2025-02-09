@@ -10,7 +10,7 @@ namespace kushekbaev
   class CompositeShape
   {
   public:
-    CompositeShape();
+    CompositeShape(size_t capacity);
     CompositeShape(CompositeShape && rhs);
 
     ~CompositeShape();
