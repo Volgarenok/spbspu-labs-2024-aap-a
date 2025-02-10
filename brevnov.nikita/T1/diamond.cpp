@@ -53,11 +53,11 @@ namespace brevnov
 
   brevnov::point_t getVertical(point_t center, point_t horizontal, point_t a, point_t b, point_t c)
   {
-    if (a != center && a != horizontal)
+    if ((a.x != center.x || a.y != center.y) && (a.x != horizontal.x || a.y != horizontal.y))
     {
       return a;
     }
-    else if (b != center && b != horizontal)
+    else if (b.x != center.x || b.y != center.y) && (b.x != horizontal.x || b.y != horizontal.y)
     {
       return b;
     }
