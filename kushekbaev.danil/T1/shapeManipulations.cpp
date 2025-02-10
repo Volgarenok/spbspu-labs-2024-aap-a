@@ -70,7 +70,7 @@ namespace kushekbaev
     {
       for (size_t i = 0; i < compShape->size(); ++i)
       {
-        rectangle_t frame = compShape->at(i)->getFrameRect(); // Получение ограничивающего прямоугольника фигуры
+        rectangle_t frame = compShape->at(i)->getFrameRect();
         double leftx = frame.pos.x - frame.width / 2.0;
         double lefty = frame.pos.y - frame.height / 2.0;
         double rightx = frame.pos.x + frame.width / 2.0;
