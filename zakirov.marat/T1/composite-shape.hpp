@@ -11,7 +11,7 @@ namespace zakirov
     CompositeShape();
     ~CompositeShape();
     CompositeShape(const CompositeShape & copy);
-    CompositeShape(CompositeShape &&copy);
+    CompositeShape(CompositeShape && copy);
     double getArea() const noexcept;
     rectangle_t getFrameRect() const;
     void move(const point_t & target);

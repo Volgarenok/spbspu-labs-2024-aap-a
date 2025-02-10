@@ -47,7 +47,7 @@ double zakirov::CompositeShape::getArea() const noexcept
   double total_area = 0;
   for (size_t i = 0; i < shapes_quantity_; ++i)
   {
-    total_area = shapes_[i]->getArea();
+    total_area += shapes_[i]->getArea();
   }
 
   return total_area;
