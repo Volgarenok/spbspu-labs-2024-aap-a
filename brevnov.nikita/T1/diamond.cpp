@@ -37,11 +37,11 @@ namespace brevnov
 
   brevnov::point_t getHorizontal(point_t center, point_t a, point_t b, point_t c)
   {
-    if (center.x == a.x && center.y != a.y)
+    if (center.x != a.x && center.y == a.y)
     {
       return a;
     }
-    else if (center.x == b.x && center.y != b.y)
+    else if (center.x != b.x && center.y == b.y)
     {
       return b;
     }
@@ -77,6 +77,7 @@ brevnov::Diamond::Diamond(point_t a, point_t b, point_t c):
   {
     throw std::invalid_argument("Not correct arguments");
   }
+  std::cout << center_.x << " " << center_.y << " " << horizontal_.x << " "<< horizontal_.y << " " << vertical_.x << " " << vertical_.y << "\n";
 }
 
 double brevnov::Diamond::getArea() const noexcept
