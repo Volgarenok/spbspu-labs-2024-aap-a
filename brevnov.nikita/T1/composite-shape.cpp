@@ -115,7 +115,7 @@ void brevnov::CompositeShape::pop_back()
   delete shapes_[--current_size_];
 }
 
-brevnov::Shape * brevnov::CompositeShape::at(size_t id) const
+const brevnov::Shape * brevnov::CompositeShape::at(size_t id) const
 {
   if (id >= current_size_)
   {
@@ -124,7 +124,22 @@ brevnov::Shape * brevnov::CompositeShape::at(size_t id) const
   return shapes_[id];
 }
 
-brevnov::Shape * brevnov::CompositeShape::operator[](size_t id) const noexcept
+brevnov::Shape * brevnov::CompositeShape::at(size_t id)
+{
+  if (id >= current_size_)
+  {
+    throw std::out_of_range("Index out of range");
+  }
+  return shapes_[id];
+}
+
+
+const brevnov::Shape * brevnov::CompositeShape::operator[](size_t id) const noexcept
+{
+  return shapes_[id];
+}
+
+brevnov::Shape * brevnov::CompositeShape::operator[](size_t id) noexcept
 {
   return shapes_[id];
 }
