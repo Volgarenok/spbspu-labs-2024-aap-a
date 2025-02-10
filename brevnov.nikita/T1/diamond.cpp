@@ -77,7 +77,6 @@ brevnov::Diamond::Diamond(point_t a, point_t b, point_t c):
   {
     throw std::invalid_argument("Not correct arguments");
   }
-  std::cout << center_.x << " " << center_.y << " " << horizontal_.x << " "<< horizontal_.y << " " << vertical_.x << " " << vertical_.y << "\n";
 }
 
 double brevnov::Diamond::getArea() const noexcept
