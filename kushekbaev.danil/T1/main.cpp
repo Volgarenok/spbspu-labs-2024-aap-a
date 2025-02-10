@@ -103,9 +103,6 @@ int main()
 
     outputCoord(shapeCounter, std::cout, &compShapePtr);
     std::cout << "\n";
-
-    clearMemory(shapeCounter, &compShapePtr);
-    delete compShape;
   }
 
   catch (const std::logic_error&)
