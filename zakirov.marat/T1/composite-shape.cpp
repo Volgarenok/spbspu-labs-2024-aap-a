@@ -44,7 +44,13 @@ zakirov::CompositeShape::CompositeShape(CompositeShape &&copy):
 
 double zakirov::CompositeShape::getArea() const noexcept
 {
-  return get_total_area(* this, shapes_quantity_);
+  double total_area = 0;
+  for (size_t i = 0; i < shapes_quantity_; ++i)
+  {
+    total_area = shapes_[i]->getArea();
+  }
+
+  return total_area;
 }
 
 zakirov::rectangle_t zakirov::CompositeShape::getFrameRect() const

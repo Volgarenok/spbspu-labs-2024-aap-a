@@ -1,5 +1,5 @@
-#include <cmath>
 #include "base-types.hpp"
+#include <cmath>
 
 double zakirov::get_distance(const point_t & first_p, const point_t & second_p)
 {

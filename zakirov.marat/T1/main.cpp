@@ -24,9 +24,11 @@ int main()
       break;
     }
 
+    Shape * new_shape = nullptr;
     try
     {
-      shapes.push_back(make_shape(data));
+      new_shape = make_shape(data);
+      shapes.push_back(new_shape);
     }
     catch (const std::invalid_argument &)
     {
@@ -37,6 +39,7 @@ int main()
     catch (const std::logic_error &)
     {
       free(data);
+      free(new_shape);
       std::cerr << "Warning! Error in scale composition." << '\n';
       return 1;
     }

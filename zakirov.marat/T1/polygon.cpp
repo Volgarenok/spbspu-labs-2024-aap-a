@@ -4,9 +4,9 @@
 #include "base-types.hpp"
 #include "unified_shapes.hpp"
 
-zakirov::Polygon::Polygon(size_t size, point_t & points):
+zakirov::Polygon::Polygon(size_t size, point_t * points):
   size_(size),
-  points_(& points)
+  points_(points)
 {
   if (size <= 2 || size % 2 != 0)
   {
@@ -88,5 +88,5 @@ void zakirov::Polygon::scale(double k)
 
 zakirov::Shape * zakirov::Polygon::clone() const
 {
-  return make_polygon(size_, * points_);
+  return make_polygon(size_, points_);
 }

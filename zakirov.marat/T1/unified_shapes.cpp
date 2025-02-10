@@ -57,11 +57,11 @@ namespace
       {
         get_part(in, expanded_line, start, finish, interrupt_el);
       }
-      catch (const std::exception& e)
+      catch (const std::exception &)
       {
         free(expanded_line);
         free(line);
-        throw e;
+        throw;
       }
 
       free(line);
@@ -103,19 +103,19 @@ namespace
     return new_array;
   }
 
-  zakirov::point_t & convert_polygon(const double & original_data)
+  zakirov::point_t * convert_polygon(const double * original_data)
   {
-    size_t points_size = static_cast< size_t >((& original_data)[1] / 2);
+    size_t points_size = static_cast< size_t >((original_data)[1] / 2);
     zakirov::point_t * converted_data = static_cast< zakirov::point_t * >(malloc(points_size * sizeof(zakirov::point_t)));
     size_t counter = 2;
     for (size_t i = 0; i < points_size; ++i)
     {
-      zakirov::point_t point = {(& original_data)[counter], (& original_data)[counter + 1]};
+      zakirov::point_t point = {(original_data)[counter], (original_data)[counter + 1]};
       converted_data[i] = point;
       counter += 2;
     }
-    zakirov::point_t & returned_data = * converted_data;
-    return returned_data;
+
+    return converted_data;
   }
 }
 
@@ -168,7 +168,7 @@ zakirov::Ring * zakirov::make_ring(double center_x, double center_y, double ex_r
   }
 }
 
-zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t & points)
+zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t * points)
 {
   Polygon * polygon = static_cast< Polygon * >(malloc(sizeof(Polygon)));
   try
@@ -178,7 +178,7 @@ zakirov::Polygon * zakirov::make_polygon(size_t points_num, point_t & points)
   }
   catch (const std::invalid_argument & e)
   {
-    free(& points);
+    free(points);
     free(polygon);
     throw;
   }
@@ -190,7 +190,7 @@ zakirov::Shape * zakirov::make_shape(double * data)
 {
   if (data[0] == 5.0)
   {
-    point_t & converted_data = convert_polygon(* data);
+    point_t * converted_data = convert_polygon(data);
     size_t points_size = static_cast< size_t >(data[1] / 2);
     Polygon * polygon = make_polygon(points_size, converted_data);
     return polygon;
@@ -328,9 +328,9 @@ void zakirov::scale_full_composition(CompositeShape & shapes, const point_t & ta
   }
 }
 
-void zakirov::output_frame(std::ostream & out, const CompositeShape & shapes)
+void zakirov::output_frame(std::ostream & out, CompositeShape & shapes)
 {
-  for (size_t i = 0; i < shapes.size() - 1; ++i)
+  for (size_t i = 0; i < shapes.size(); ++i)
   {
     rectangle_t frame = shapes[i]->getFrameRect();
     point_t frame_bottom_left{frame.pos.x - frame.width / 2, frame.pos.y - frame.height / 2};
@@ -338,23 +338,6 @@ void zakirov::output_frame(std::ostream & out, const CompositeShape & shapes)
     out << frame_bottom_left.x << ' ' << frame_bottom_left.y << ' ';
     out << frame_top_right.x << ' ' << frame_top_right.y << ' ';
   }
-
-  rectangle_t frame = shapes[shapes.size() - 1]->getFrameRect();
-  point_t frame_bottom_left{frame.pos.x - frame.width / 2, frame.pos.y - frame.height / 2};
-  point_t frame_top_right{frame.pos.x + frame.width / 2, frame.pos.y + frame.height / 2};
-  out << frame_bottom_left.x << ' ' << frame_bottom_left.y << ' ';
-  out << frame_top_right.x << ' ' << frame_top_right.y;
-}
-
-double zakirov::get_total_area(const CompositeShape & shapes, size_t size)
-{
-  double total_area = 0.0;
-  for (size_t i = 0; i < size; ++i)
-  {
-    total_area += shapes[i]->getArea();
-  }
-
-  return total_area;
 }
 
 void zakirov::clear_shapes(Shape ** shapes, size_t quantity)
@@ -366,7 +349,7 @@ void zakirov::clear_shapes(Shape ** shapes, size_t quantity)
   }
 }
 
-void zakirov::full_output(std::ostream & out, const CompositeShape & shapes)
+void zakirov::full_output(std::ostream & out, CompositeShape & shapes)
 {
   out << std::fixed << std::setprecision(1);
   out << shapes.getArea() << ' ';

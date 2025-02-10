@@ -23,6 +23,7 @@ zakirov::Circle::~Circle()
 {
   for (size_t i = 0; i < rings_size_; ++i)
   {
+    rings_[i]->~Ring();
     free(rings_[i]);
   }
 }
