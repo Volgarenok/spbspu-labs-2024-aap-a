@@ -9,7 +9,10 @@ namespace
   {
     for (size_t i = 0; i < size; i++)
     {
-      in >> arr[i];
+      if (!(in >> arr[i]))
+      {
+        throw std::invalid_argument("Invalid input data\n");
+      }
     }
     return *arr;
   }
@@ -76,11 +79,15 @@ namespace kushekbaev
       {
         shape = makeDiamond(in);
       }
-      return shape;
+      else
+      {
+        throw std::invalid_argument("Unsupported shape type\n");
+      }
     }
     catch (const std::invalid_argument&)
     {
       return nullptr;
     }
+    return shape;
   }
 }
