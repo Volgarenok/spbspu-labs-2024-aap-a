@@ -17,7 +17,7 @@ namespace zakirov
   Circle * make_circle(double center_x, double center_y, double radius);
   Ring * make_ring(double center_x, double center_y, double in_radius, double ex_radius);
   Polygon * make_polygon(size_t points_num, point_t * points);
-  char * get_shape_name(std::istream & in);
+  double * get_data(std::istream & in);
   void output_frame(std::ostream & out, CompositeShape & shapes, size_t id);
   void full_output(std::ostream & out, CompositeShape & shapes);
   void clear_shapes(Shape ** shapes, size_t quantity);
