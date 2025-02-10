@@ -17,7 +17,7 @@ namespace kushekbaev
     virtual void move(double dx, double dy) = 0;
     virtual void scale(double scaleCoeff) = 0;
     void scaleEverything(point_t scalePoint, double scaleCoeff);
-    virtual Shape* clone() const = 0;
+    virtual Shape* clone() const noexcept = 0;
   };
 }
 
