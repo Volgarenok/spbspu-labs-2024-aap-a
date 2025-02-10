@@ -19,7 +19,7 @@ namespace brevnov
   }
 
 
-  brevnov::point_t getCenter(point_t a, point b, point_t c)
+  brevnov::point_t getCenter(point_t a, point_t b, point_t c)
   {
     if ((a.x == b.x && a.y == c.y) || (a.y == b.y && a.x == c.x))
     {
@@ -35,7 +35,7 @@ namespace brevnov
     }
   }
 
-  brevnov::point_t getHorizontal(point_t center, point a, point_t b, point_t c)
+  brevnov::point_t getHorizontal(point_t center, point_t a, point_t b, point_t c)
   {
     if (center.x == a.x && center.y != a.y)
     {

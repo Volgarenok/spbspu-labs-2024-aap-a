@@ -19,9 +19,9 @@ namespace brevnov
     point_t horizontal_;
     point_t vertical_;
   };
-  point_t getCenter(point_t a, point b, point_t c);
-  point_t getHorizontal(point_t center, point a, point_t b, point_t c);
-  point_t getVertical(point_t center, point_t horizontal, point a, point_t b, point_t c);
+  point_t getCenter(point_t a, point_t b, point_t c);
+  point_t getHorizontal(point_t center, point_t a, point_t b, point_t c);
+  point_t getVertical(point_t center, point_t horizontal, point_t a, point_t b, point_t c);
   bool isCorrectDiamond(point_t a, point_t b, point_t c);
 }
 #endif
