@@ -57,7 +57,7 @@ namespace brevnov
     {
       return a;
     }
-    else if (b.x != center.x || b.y != center.y) && (b.x != horizontal.x || b.y != horizontal.y)
+    else if ((b.x != center.x || b.y != center.y) && (b.x != horizontal.x || b.y != horizontal.y))
     {
       return b;
     }
