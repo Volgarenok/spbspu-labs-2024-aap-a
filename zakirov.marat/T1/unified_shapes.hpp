@@ -18,7 +18,6 @@ namespace zakirov
   Ring * make_ring(double center_x, double center_y, double in_radius, double ex_radius);
   Polygon * make_polygon(size_t points_num, point_t * points);
   double * get_data(std::istream & in);
-  double get_total_area(CompositeShape & shapes, size_t size);
   void output_frame(std::ostream & out, CompositeShape & shapes, size_t id);
   void full_output(std::ostream & out, CompositeShape & shapes);
   void clear_shapes(Shape ** shapes, size_t quantity);

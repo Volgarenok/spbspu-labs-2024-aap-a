@@ -56,7 +56,6 @@ int main()
   }
 
   full_output(std::cout, shapes);
-  std::cout << '\n';
   point_t target{scale_data[2], scale_data[3]};
   double coefficient = scale_data[4];
   try
