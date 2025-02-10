@@ -70,4 +70,8 @@ namespace kushekbaev
       point->y = middle_.y + (point->y - middle_.y) * V;
     }
   }
+  Shape* Diamond::clone() const noexcept
+  {
+    return new Diamond(*this);
+  }
 }
