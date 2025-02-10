@@ -357,6 +357,4 @@ void zakirov::full_output(std::ostream & out, CompositeShape & shapes)
     std::cout << ' ';
     output_frame(out, shapes, id);
   }
-
-  std::cout << '\n';
 }
