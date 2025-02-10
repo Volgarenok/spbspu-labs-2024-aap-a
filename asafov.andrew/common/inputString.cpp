@@ -1,7 +1,7 @@
 #include "inputString.hpp"
 #include <iostream>
 #include <cstddef>
-#include "increaseString.hpp"
+#include "resize.hpp"
 
 char* asafov::inputString()
 {
@@ -26,7 +26,7 @@ char* asafov::inputString()
       char* newstring = nullptr;
       try
       {
-        newstring = increaseString(string, reallength, reallength);
+        newstring = resize(string, reallength, reallength * 2);
       }
       catch (const std::bad_alloc& e)
       {
