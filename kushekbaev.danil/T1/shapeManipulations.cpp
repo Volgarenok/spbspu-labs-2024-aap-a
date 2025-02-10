@@ -35,18 +35,23 @@ namespace kushekbaev
     scaleAll(shapeCounter, scalePoint, scaleCoeff, compShape);
   }
 
-  void outputCoord(size_t shapeCounter, std::ostream& output, CompositeShape** compShape)
+  void outputCoord(std::ostream& output, CompositeShape** compShape)
   {
-    for (size_t i = 0; i < shapeCounter; ++i)
+    if (compShape && *compShape)
     {
-      if (compShape[i])
+      CompositeShape* compShapePtr = *compShape;
+      size_t shapeCounter = compShapePtr->size();
+      for (size_t i = 0; i < shapeCounter; ++i)
       {
-        rectangle_t rect = compShape[i]->getFrameRect();
-        double leftDownX = rect.pos.x - rect.width / 2;
-        double leftDownY = rect.pos.y - rect.height / 2;
-        double rightUpX = rect.pos.x + rect.width / 2;
-        double rightUpY = rect.pos.y + rect.height / 2;
-        output << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
+        if (compShapePtr->at(i))
+        {
+          rectangle_t rect = compShapePtr->at(i)->getFrameRect();
+          double leftDownX = rect.pos.x - rect.width / 2;
+          double leftDownY = rect.pos.y - rect.height / 2;
+          double rightUpX = rect.pos.x + rect.width / 2;
+          double rightUpY = rect.pos.y + rect.height / 2;
+          output << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
+        }
       }
     }
   }
