@@ -229,7 +229,7 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
   out << '\n';
 }
 
-void deleteShapes(Shape** shapes, size_t count)
+void asafov::deleteShapes(Shape** shapes, size_t count)
 {
   for (size_t i = 0; i < count; i++)
   {
