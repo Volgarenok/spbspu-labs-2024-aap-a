@@ -19,7 +19,7 @@ namespace kushekbaev
     CompositeShape& operator=(const CompositeShape& rhs);
     CompositeShape& operator=(CompositeShape&& rhs) noexcept;
     CompositeShape* clone() const;
-    
+
     Shape* operator[](size_t id) noexcept;
     const Shape* operator[](size_t id) const noexcept;
     Shape* at(size_t id);
