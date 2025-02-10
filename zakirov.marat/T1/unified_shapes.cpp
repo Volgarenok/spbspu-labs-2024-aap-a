@@ -106,12 +106,13 @@ namespace
 
   zakirov::point_t * convert_polygon(const double * original_data)
   {
+    using zakirov::point_t;
     size_t points_size = static_cast< size_t >((original_data)[1] / 2);
-    zakirov::point_t * converted_data = static_cast< zakirov::point_t * >(malloc(points_size * sizeof(zakirov::point_t)));
+    point_t * converted_data = static_cast< point_t * >(malloc(points_size * sizeof(point_t)));
     size_t counter = 2;
     for (size_t i = 0; i < points_size; ++i)
     {
-      zakirov::point_t point = {(original_data)[counter], (original_data)[counter + 1]};
+      point_t point = {(original_data)[counter], (original_data)[counter + 1]};
       converted_data[i] = point;
       counter += 2;
     }

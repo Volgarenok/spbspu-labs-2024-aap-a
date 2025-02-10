@@ -70,7 +70,6 @@ int main()
   }
 
   full_output(std::cout, shapes);
-  std::cout << '\n';
   if (shape_flag)
   {
     std::cerr << "Warning! One or more figures are specified incorrectly." << '\n';
