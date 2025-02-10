@@ -2,6 +2,7 @@
 #include <cmath>
 #include <stdexcept>
 #include <iostream>
+
 namespace brevnov
 {
   bool isCorrectDiamond(point_t a, point_t b, point_t c)
@@ -28,7 +29,7 @@ namespace brevnov
     {
       return b;
     }
-    else 
+    else
     {
       return c;
     }
@@ -44,7 +45,7 @@ namespace brevnov
     {
       return b;
     }
-    else 
+    else
     {
       return c;
     }
