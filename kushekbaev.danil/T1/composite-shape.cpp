@@ -11,6 +11,36 @@ namespace kushekbaev
     shapeCounter_(0)
   {}
 
+  CompositeShape::CompositeShape(const CompositeShape& rhs):
+    capacity_(rhs.capacity_),
+    array_(new Shape*[capacity_]),
+    shapeCounter_(rhs.shapeCounter_)
+  {
+    size_t i = 0;
+    try
+    {
+      for (; i < capacity_; ++i)
+      {
+        array_[i] = rhs[i]->clone();
+      }
+    }
+    catch (const std::bad_alloc&)
+    {
+      CompositeShape::~CompositeShape();
+      throw;
+    }
+  }
+
+  CompositeShape::CompositeShape(CompositeShape&& rhs) noexcept:
+    capacity_(rhs.capacity_),
+    shapeCounter_(rhs.shapeCounter_),
+    array_(rhs.array_)
+  {
+    rhs.array_ = nullptr;
+    rhs.shapeCounter_ = 0;
+    rhs.capacity_ = 0;
+  }
+
   CompositeShape::~CompositeShape()
   {
     for (size_t i = 0; i < shapeCounter_; ++i)
@@ -20,29 +50,33 @@ namespace kushekbaev
     delete[] array_;
   }
 
-  CompositeShape & CompositeShape::operator=(const CompositeShape & rhs)
+  CompositeShape& CompositeShape::operator=(const CompositeShape& rhs)
   {
-    if (&rhs != this)
-    {
-      Shape ** new_array = creatingNewArray(rhs.array_, rhs.capacity_, rhs.capacity_);
-      if (!new_array)
-      {
-        throw std::bad_alloc();
-      }
-      if (array_)
-      {
-        CompositeShape::~CompositeShape();
-      }
-      array_ = new_array;
-      shapeCounter_ = rhs.shapeCounter_;
-      capacity_ = rhs.capacity_;
-    }
+    CompositeShape copy(rhs);
+    swap(copy);
     return *this;
   }
 
-  Shape* CompositeShape::operator[](size_t id) const noexcept
+  CompositeShape& CompositeShape::operator=(CompositeShape&& rhs) noexcept
+  {
+    CompositeShape::~CompositeShape();
+    array_ = rhs.array_;
+    capacity_ = rhs.capacity_;
+    shapeCounter_ = rhs.shapeCounter_;
+    rhs.array_ = nullptr;
+    rhs.shapeCounter_ = 0;
+    rhs.capacity_ = 0;
+    return *this;
+  }
+
+  const Shape* CompositeShape::operator[](size_t id) const noexcept
   {
     return array_[id];
+  }
+
+  Shape* CompositeShape::operator[](size_t id) noexcept
+  {
+    return const_cast< Shape* >(static_cast< const CompositeShape& >(*this).operator[](id));
   }
 
   double CompositeShape::getArea() const
@@ -53,6 +87,11 @@ namespace kushekbaev
       area += array_[i]->getArea();
     }
     return area;
+  }
+
+  CompositeShape* CompositeShape::clone() const
+  {
+    return new CompositeShape(*this);
   }
 
   rectangle_t CompositeShape::getFrameRect() const
@@ -106,44 +145,44 @@ namespace kushekbaev
 
   void CompositeShape::push_back(Shape* shp)
   {
-    if (shapeCounter_ + 1 > capacity_)
+    if (shapeCounter_ >= capacity_)
     {
-      size_t new_capacity = (capacity_ == 0) ? 1 : 2 * capacity_;
-      Shape** new_array = creatingNewArray(array_, capacity_, new_capacity);
-      if (!new_array)
-      {
-        throw std::bad_alloc();
-      }
-      if (array_)
-      {
-        delete[] array_;
-      }
-      array_ = new_array;
-      capacity_ = new_capacity;
+      const size_t newCapacity = capacity_ * 2 + 1;
+      scaleArray(newCapacity);
     }
     array_[shapeCounter_++] = shp;
   }
 
-  void CompositeShape::pop_back() noexcept
+  void CompositeShape::pop_back()
   {
-    delete array_[shapeCounter_--];
+    if (shapeCounter_ == 0)
+    {
+      throw std::out_of_range("No shapes");
+    }
+    delete array_[shapeCounter_];
+    shapeCounter_--;
   }
 
-  Shape* CompositeShape::at(size_t id) const
+  const Shape* CompositeShape::at(size_t id) const
   {
     if (id >= shapeCounter_)
     {
-      throw std::out_of_range("Out of range\n");
+      throw std::out_of_range("Index bigger than realSize");
     }
     return array_[id];
   }
 
-  bool CompositeShape::empty() const
+  Shape* CompositeShape::at(size_t id)
+  {
+    return const_cast< Shape* >(static_cast< const CompositeShape& >(*this).at(id));
+  }
+
+  bool CompositeShape::empty() const noexcept
   {
     return (shapeCounter_ == 0);
   }
 
-  size_t CompositeShape::size() const
+  size_t CompositeShape::size() const noexcept
   {
     return shapeCounter_;
   }
@@ -158,22 +197,20 @@ namespace kushekbaev
     move(-vector.x, -vector.y);
   }
 
-  Shape** CompositeShape::creatingNewArray(Shape** array, size_t old_size, size_t new_size)
+  void CompositeShape::swap(CompositeShape& rhs)
   {
-    Shape** created = nullptr;
-    try
+    std::swap(array_, rhs.array_);
+    std::swap(capacity_, rhs.capacity_);
+    std::swap(shapeCounter_, rhs.shapeCounter_);
+  }
+
+  void CompositeShape::scaleArray(size_t size)
+  {
+    CompositeShape newArray(size);
+    for (size_t i = 0; i < shapeCounter_; ++i, newArray.shapeCounter_++)
     {
-      created = new Shape*[new_size];
-      for (size_t i = 0; i < old_size; ++i)
-        {
-          created[i] = array[i];
-        }
+      newArray.array_[i] = array_[i]->clone();
     }
-    catch (const std::exception&)
-    {
-      delete[] created;
-      return nullptr;
-    }
-    return created;
+    swap(newArray);
   }
 }

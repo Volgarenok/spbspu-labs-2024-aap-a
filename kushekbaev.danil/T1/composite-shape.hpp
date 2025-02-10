@@ -11,23 +11,28 @@ namespace kushekbaev
   {
   public:
     CompositeShape(size_t capacity);
-    CompositeShape(CompositeShape && rhs);
+    CompositeShape(const CompositeShape& rhs);
+    CompositeShape(CompositeShape&& rhs) noexcept;
 
     ~CompositeShape();
 
-    CompositeShape& operator=(const CompositeShape & rhs);
-    Shape* operator[](size_t id) const noexcept;
+    CompositeShape& operator=(const CompositeShape& rhs);
+    CompositeShape& operator=(CompositeShape&& rhs) noexcept;
+    Shape* operator[](size_t id) noexcept;
+    const Shape* operator[](size_t id) const noexcept;
 
     double getArea() const;
+    CompositeShape* clone() const;
     rectangle_t getFrameRect() const;
     void move(point_t scalePoint);
     void move(double dx, double dy);
     void scale(double scaleCoeff);
     void push_back(Shape* shp);
-    void pop_back() noexcept;
-    Shape* at(size_t id) const;
-    bool empty() const;
-    size_t size() const;
+    void pop_back();
+    Shape* at(size_t id);
+    const Shape* at(size_t id) const;
+    bool empty() const noexcept;
+    size_t size() const noexcept;
     void scaleEverything(point_t scalePoint, double scaleCoeff);
 
   private:
@@ -35,8 +40,9 @@ namespace kushekbaev
     size_t capacity_;
     size_t shapeCounter_;
 
-
     Shape** creatingNewArray(Shape** array, size_t old_size, size_t new_size);
+    void swap(CompositeShape& rhs);
+    void scaleArray(size_t size);
   };
 }
 
