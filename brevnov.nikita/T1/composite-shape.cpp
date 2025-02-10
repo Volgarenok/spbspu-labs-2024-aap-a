@@ -43,7 +43,7 @@ brevnov::CompositeShape::CompositeShape(CompositeShape & cos):
     }
     catch (const std::bad_alloc& e)
     {
-      clearShape(shapes_[i], i);
+      clearShape(shapes_, i);
       throw;
     }
   }
