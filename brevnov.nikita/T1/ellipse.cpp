@@ -44,3 +44,8 @@ void brevnov::Ellipse::scale(double n) noexcept
   r1_ *= n;
   r2_ *= n;
 }
+
+brevnov::Shape * brevnov::Ellipse::clone() const override
+{
+  return new Ellipse(*this);
+}

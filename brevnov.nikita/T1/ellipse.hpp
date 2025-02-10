@@ -13,6 +13,7 @@ namespace brevnov
     void move(point_t new_centre) noexcept override;
     void move(double dx, double dy) noexcept override;
     void scale(double n) noexcept override;
+    Shape * clone() const override;
   private:
     point_t center_;
     double r1_;
