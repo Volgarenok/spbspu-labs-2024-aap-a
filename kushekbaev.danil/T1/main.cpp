@@ -93,13 +93,13 @@ int main()
 
   try
   {
-    std::cout << std::fixed << std::setprecision(1) << getTotalArea(shapeCounter, &compShapePtr);
+    std::cout << std::fixed << std::setprecision(1) << compShape->getArea();
 
     outputCoord(shapeCounter, std::cout, &compShapePtr);
     std::cout << "\n";
 
     scaleAll(shapeCounter, scalePoint, scaleCoeff, &compShapePtr);
-    std::cout << getTotalArea(shapeCounter, &compShapePtr);
+    std::cout << compShape->getArea();
 
     outputCoord(shapeCounter, std::cout, &compShapePtr);
     std::cout << "\n";
