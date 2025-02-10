@@ -165,7 +165,7 @@ Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
   return circ;
 }
 
-void asafov::isotropicScale(Shape* sh, point_t pos, double scale) 
+void asafov::isotropicScale(Shape* sh, point_t pos, double scale)
 {
   point_t centr = sh->getFrameRect().pos;
   sh->move(pos);
