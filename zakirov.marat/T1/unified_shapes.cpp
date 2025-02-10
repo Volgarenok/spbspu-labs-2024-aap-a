@@ -13,15 +13,16 @@ namespace
   {
     for (; start < finish; ++start)
     {
+      if (!in)
+      {
+        throw std::logic_error("The stream is broken");
+      }
+
       in >> line[start];
       if (in.eof() || (line[start] == interrupt_el))
       {
         line[start] = '\0';
         break;
-      }
-      else if (!in)
-      {
-        throw std::logic_error("The stream is broken");
       }
     }
   }
@@ -328,16 +329,13 @@ void zakirov::scale_full_composition(CompositeShape & shapes, const point_t & ta
   }
 }
 
-void zakirov::output_frame(std::ostream & out, CompositeShape & shapes)
+void zakirov::output_frame(std::ostream & out, CompositeShape & shapes, size_t id)
 {
-  for (size_t i = 0; i < shapes.size(); ++i)
-  {
-    rectangle_t frame = shapes[i]->getFrameRect();
-    point_t frame_bottom_left{frame.pos.x - frame.width / 2, frame.pos.y - frame.height / 2};
-    point_t frame_top_right{frame.pos.x + frame.width / 2, frame.pos.y + frame.height / 2};
-    out << frame_bottom_left.x << ' ' << frame_bottom_left.y << ' ';
-    out << frame_top_right.x << ' ' << frame_top_right.y << ' ';
-  }
+  rectangle_t frame = shapes[id]->getFrameRect();
+  point_t frame_bottom_left{frame.pos.x - frame.width / 2, frame.pos.y - frame.height / 2};
+  point_t frame_top_right{frame.pos.x + frame.width / 2, frame.pos.y + frame.height / 2};
+  out << frame_bottom_left.x << ' ' << frame_bottom_left.y << ' ';
+  out << frame_top_right.x << ' ' << frame_top_right.y;
 }
 
 void zakirov::clear_shapes(Shape ** shapes, size_t quantity)
@@ -352,6 +350,12 @@ void zakirov::clear_shapes(Shape ** shapes, size_t quantity)
 void zakirov::full_output(std::ostream & out, CompositeShape & shapes)
 {
   out << std::fixed << std::setprecision(1);
-  out << shapes.getArea() << ' ';
-  output_frame(out, shapes);
+  out << shapes.getArea();
+  for (size_t id = 0; id < shapes.size(); ++id)
+  {
+    std::cout << ' ';
+    output_frame(out, shapes, id);
+  }
+
+  std::cout << '\n';
 }

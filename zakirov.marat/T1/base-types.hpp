@@ -5,17 +5,15 @@ namespace zakirov
 {
   struct point_t
   {
-    public:
-      double x;
-      double y;
+    double x;
+    double y;
   };
 
   struct rectangle_t
   {
-    public:
-      double width;
-      double height;
-      point_t pos;
+    double width;
+    double height;
+    point_t pos;
   };
 
   double get_distance(const point_t & first_p, const point_t & second_p);

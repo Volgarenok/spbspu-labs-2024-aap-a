@@ -19,7 +19,7 @@ namespace zakirov
   Polygon * make_polygon(size_t points_num, point_t * points);
   double * get_data(std::istream & in);
   double get_total_area(CompositeShape & shapes, size_t size);
-  void output_frame(std::ostream & out, CompositeShape & shapes);
+  void output_frame(std::ostream & out, CompositeShape & shapes, size_t id);
   void full_output(std::ostream & out, CompositeShape & shapes);
   void clear_shapes(Shape ** shapes, size_t quantity);
   void check_scale_full_composition(CompositeShape & shapes, const point_t & target, double k);
