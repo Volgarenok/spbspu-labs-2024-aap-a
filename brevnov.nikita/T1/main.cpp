@@ -56,10 +56,6 @@ int main()
       }
       catch (const std::invalid_argument& e)
       {
-        std::cerr << "Not correct input!\n";
-      }
-      if (!new_shape)
-      {
         isIncorrectParameters = true;
       }
     }

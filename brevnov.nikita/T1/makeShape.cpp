@@ -66,6 +66,9 @@ namespace brevnov
     {
       return make_diamond(in);
     }
-    return nullptr;
+    else
+    {
+      throw std::invalid_argument("Not correct input!");
+    }
   }
 }
