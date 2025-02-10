@@ -4,65 +4,77 @@
 #include <iostream>
 namespace brevnov
 {
-  bool isCorrectDiamond(double x1, double y1, double x2, double y2, double x3, double y3)
+  bool isCorrectDiamond(point_t a, point_t b, point_t c)
   {
-    if ((x1 == x2 &&  y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3))
+    if ((a.x == b.x &&  a.y == b.y) || (a.x == c.x && a.y == c.y) || (b.x == c.x && b.y == c.y))
     {
       return false;
     }
-    else if ((x1 != x2 && x1 != x3 && x2 != x3) || (y1 != y2 && y1 != y3 && y2 != y3))
+    else if ((a.x != b.x && a.x != c.x && b.x != c.x) || (a.y != b.y && a.y != c.y && b.y != c.y))
     {
       return false;
     }
     return true;
   }
+
+
+  brevnov::point_t getCenter(point_t a, point b, point_t c)
+  {
+    if ((a.x == b.x && a.y == c.y) || (a.y == b.y && a.x == c.x))
+    {
+      return a;
+    }
+    else if ((b.x == a.x && b.y == c.y) || (b.y == a.y && b.x == c.x))
+    {
+      return b;
+    }
+    else 
+    {
+      return c;
+    }
+  }
+
+  brevnov::point_t getHorizontal(point_t center, point a, point_t b, point_t c)
+  {
+    if (center.x == a.x && center.y != a.y)
+    {
+      return a;
+    }
+    else if (center.x == b.x && center.y != b.y)
+    {
+      return b;
+    }
+    else 
+    {
+      return c;
+    }
+  }
+
+  brevnov::point_t getVertical(point_t center, point_t horizontal, point a, point_t b, point_t c)
+  {
+    if (a != center && a != horizontal)
+    {
+      return a;
+    }
+    else if (b != center && b != horizontal)
+    {
+      return b;
+    }
+    else
+    {
+      return c;
+    }
+  }
 }
 
 brevnov::Diamond::Diamond(point_t a, point_t b, point_t c):
-  center_({0.0, 0.0}),
-  horizontal_({0.0, 0.0}),
-  vertical_({0.0, 0.0})
+  center_(getCenter(a, b, c)),
+  horizontal_(getHorizontal(center_, a, b, c)),
+  vertical_(getVertical(center_, horizontal_, a, b, c))
 {
-  double x1 = a.x, y1 = a.y, x2 = b.x, y2 = b.y, x3 = c.x, y3 = c.y;
-  if (!isCorrectDiamond(x1, y1, x2, y2, x3, y3))
+  if (!isCorrectDiamond(a, b, c))
   {
     throw std::invalid_argument("Not correct arguments");
-  }
-  if (x1 == x2 && y1 == y3)
-  {
-    center_ = {x1, y1};
-    horizontal_ = {x3, y3};
-    vertical_ = {x2, y2};
-  }
-  else if (x1 == x3 && y1 == y2)
-  {
-    center_ = {x1, y1};
-    horizontal_ = {x2, y2};
-    vertical_ = {x3, y3};
-  }
-  else if (x2 == x1 && y2 == y3)
-  {
-    center_ = {x2, y2};
-    horizontal_ = {x3, y3};
-    vertical_ = {x1, y1};
-  }
-  else if (x2 == x3 && y2 == y1)
-  {
-    center_ = {x2, y2};
-    horizontal_ = {x1, y1};
-    vertical_ = {x3, y3};
-  }
-  else if (x3 == x1 && y3 == y2)
-  {
-    center_ = {x3, y3};
-    horizontal_ = {x2, y2};
-    vertical_ = {x1, y1};
-  }
-  else
-  {
-    center_ = {x3, y3};
-    horizontal_ = {x1, y1};
-    vertical_ = {x2, y2};
   }
 }
 
