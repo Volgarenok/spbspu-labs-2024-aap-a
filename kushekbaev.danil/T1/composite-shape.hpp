@@ -18,19 +18,20 @@ namespace kushekbaev
 
     CompositeShape& operator=(const CompositeShape& rhs);
     CompositeShape& operator=(CompositeShape&& rhs) noexcept;
+    CompositeShape* clone() const;
+    
     Shape* operator[](size_t id) noexcept;
     const Shape* operator[](size_t id) const noexcept;
+    Shape* at(size_t id);
+    const Shape* at(size_t id) const;
 
     double getArea() const;
-    CompositeShape* clone() const;
     rectangle_t getFrameRect() const;
     void move(point_t scalePoint);
     void move(double dx, double dy);
     void scale(double scaleCoeff);
     void push_back(Shape* shp);
     void pop_back();
-    Shape* at(size_t id);
-    const Shape* at(size_t id) const;
     bool empty() const noexcept;
     size_t size() const noexcept;
     void scaleEverything(point_t scalePoint, double scaleCoeff);

@@ -12,29 +12,30 @@ namespace kushekbaev
   {}
 
   CompositeShape::CompositeShape(const CompositeShape& rhs):
+    array_(new Shape*[rhs.capacity_]),
     capacity_(rhs.capacity_),
-    array_(new Shape*[capacity_]),
     shapeCounter_(rhs.shapeCounter_)
   {
     size_t i = 0;
     try
     {
-      for (; i < capacity_; ++i)
+      for (; i < shapeCounter_; ++i)
       {
-        array_[i] = rhs[i]->clone();
+        array_[i] = rhs.array_[i]->clone();
       }
     }
     catch (const std::bad_alloc&)
     {
       CompositeShape::~CompositeShape();
+      delete[] array_;
       throw;
     }
   }
 
   CompositeShape::CompositeShape(CompositeShape&& rhs) noexcept:
+    array_(rhs.array_),
     capacity_(rhs.capacity_),
-    shapeCounter_(rhs.shapeCounter_),
-    array_(rhs.array_)
+    shapeCounter_(rhs.shapeCounter_)
   {
     rhs.array_ = nullptr;
     rhs.shapeCounter_ = 0;
@@ -52,6 +53,10 @@ namespace kushekbaev
 
   CompositeShape& CompositeShape::operator=(const CompositeShape& rhs)
   {
+    if (this == &rhs)
+    {
+      return *this;
+    }
     CompositeShape copy(rhs);
     swap(copy);
     return *this;
@@ -59,6 +64,10 @@ namespace kushekbaev
 
   CompositeShape& CompositeShape::operator=(CompositeShape&& rhs) noexcept
   {
+    if (this == &rhs)
+    {
+      return *this;
+    }
     CompositeShape::~CompositeShape();
     array_ = rhs.array_;
     capacity_ = rhs.capacity_;
@@ -76,7 +85,7 @@ namespace kushekbaev
 
   Shape* CompositeShape::operator[](size_t id) noexcept
   {
-    return const_cast< Shape* >(static_cast< const CompositeShape& >(*this).operator[](id));
+    return const_cast<Shape*>(static_cast<const CompositeShape&>(*this).operator[](id));
   }
 
   double CompositeShape::getArea() const
@@ -159,7 +168,7 @@ namespace kushekbaev
     {
       throw std::out_of_range("No shapes");
     }
-    delete array_[shapeCounter_];
+    delete array_[shapeCounter_ - 1];
     shapeCounter_--;
   }
 
@@ -174,7 +183,7 @@ namespace kushekbaev
 
   Shape* CompositeShape::at(size_t id)
   {
-    return const_cast< Shape* >(static_cast< const CompositeShape& >(*this).at(id));
+    return const_cast<Shape*>(static_cast<const CompositeShape&>(*this).at(id));
   }
 
   bool CompositeShape::empty() const noexcept
@@ -192,7 +201,7 @@ namespace kushekbaev
     point_t beforeScale = getFrameRect().pos;
     move(scalePoint);
     point_t afterScale = getFrameRect().pos;
-    point_t vector = { (afterScale.x - beforeScale.x) * scaleCoeff, (afterScale.y - beforeScale.y) * scaleCoeff };
+    point_t vector = {(afterScale.x - beforeScale.x) * scaleCoeff, (afterScale.y - beforeScale.y) * scaleCoeff};
     scale(scaleCoeff);
     move(-vector.x, -vector.y);
   }

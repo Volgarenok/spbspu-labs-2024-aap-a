@@ -77,7 +77,7 @@ namespace kushekbaev
     scalePoints(points, size, scaleCoeff, mid);
   }
 
-  Shape* Parallelogram::clone() const
+  Shape* Parallelogram::clone() const noexcept
   {
     return new Parallelogram(*this);
   }

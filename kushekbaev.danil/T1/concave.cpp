@@ -68,7 +68,7 @@ namespace kushekbaev
     scalePoints(points, size, scaleCoeff, mid);
   }
 
-  Shape* Concave::clone() const
+  Shape* Concave::clone() const noexcept
   {
     return new Concave(*this);
   }
