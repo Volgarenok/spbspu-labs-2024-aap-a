@@ -1,6 +1,6 @@
 #ifndef ELLIPSE_HPP
 #define ELLIPSE_HPP
-#include "../shape.hpp"
+#include "shape.hpp"
 namespace asafov
 {
   class Ellipse : public Shape

@@ -1,6 +1,6 @@
 #ifndef CIRCLE_HPP
 #define CIRCLE_HPP
-#include "../shape.hpp"
+#include "shape.hpp"
 namespace asafov
 {
   class Circle : public Shape

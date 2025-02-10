@@ -1,6 +1,6 @@
 #ifndef COMPLEXQUAD_HPP
 #define COMPLEXQUAD_HPP
-#include "../shape.hpp"
+#include "shape.hpp"
 namespace asafov
 {
   class Complexquad : public Shape
