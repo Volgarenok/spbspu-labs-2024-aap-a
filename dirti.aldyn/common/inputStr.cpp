@@ -1,8 +1,8 @@
-#include "str_input.hpp"
+#include "inputStr.hpp"
 
 namespace
 {
-  char * new_storage(const char * str, size_t & capacity)
+  char * allocMemory(const char * str, size_t & capacity)
   {
     capacity += 1;
     char * str2 = reinterpret_cast< char * >(malloc(sizeof(char) * capacity));
@@ -18,7 +18,7 @@ namespace
   }
 }
 
-char * dirti::str_input(std::istream & input, size_t & capacity)
+char * dirti::inputStr(std::istream & input, size_t & capacity)
 {
   char c = '\0';
   size_t size = 0;
@@ -30,7 +30,7 @@ char * dirti::str_input(std::istream & input, size_t & capacity)
   std::noskipws(input);
   while ((input >> c) && (c != '\n'))
   {
-    char * str2 = new_storage(str, capacity);
+    char * str2 = allocMemory(str, capacity);
     free(str);
     if (str2 == nullptr)
     {
