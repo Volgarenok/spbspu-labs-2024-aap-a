@@ -6,7 +6,6 @@ namespace bocharov
   class Parallelogram final: public Shape
   {
   public:
-    Parallelogram();
     Parallelogram(point_t p1, point_t p2, point_t p3);
     double getArea() const  override;
     rectangle_t getFrameRect() const override;
