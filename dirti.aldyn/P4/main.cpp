@@ -14,7 +14,6 @@ int main()
     std::cerr << "Error" << "\n";
     return 1;
   }
-  size_t size = capacity - 1;
   char str_min = dirti::findMin(str);
   std::cout << str_min << "\n";
   char str_min2[2] = {'0', '0'};
