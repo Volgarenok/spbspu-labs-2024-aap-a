@@ -1,10 +1,14 @@
 #include "resize.hpp"
-#include <exception>
 
-char* asafov::resize(const char* string, size_t length, size_t additionallength)
+size_t asafov::ullMin(size_t a, size_t b)
 {
-  char* newString = new char[length + additionallength];
-  for (size_t i = 0; i < length; i++)
+  return (a < b) ? (a) : (b);
+}
+
+char* asafov::resize(const char* string, size_t oldlength, size_t newlength)
+{
+  char* newString = new char[newlength + 1];
+  for (size_t i = 0; i < ullMin(oldlength, newlength); i++)
   {
     newString[i] = string[i];
   }

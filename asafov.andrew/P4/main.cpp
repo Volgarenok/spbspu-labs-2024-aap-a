@@ -4,8 +4,7 @@
 
 int main()
 {
-  char* str = nullptr;
-  str = asafov::inputString();
+  char* str = asafov::inputString();
   if(str[0] == '\0')
   {
     delete[] str;
@@ -14,27 +13,18 @@ int main()
 
   std::cout << asafov::countUniqLetters(str) << '\n';
 
-  char* unusedLetters = new char[27];
-  for (size_t i = 0; i < 27; i++)
-  {
-    unusedLetters[i] = 0;
-  }
+  char* unusedLetters = nullptr;
   try
   {
-    asafov::getUnusedLetters(str, unusedLetters);
+    unusedLetters = new char[26]{0};
   }
   catch (const std::bad_alloc&)
   {
-    delete[] unusedLetters;
     delete[] str;
     return 1;
   }
-
-  for (size_t i = 0; unusedLetters[i] != '\0' ; i++)
-  {
-    std::cout << unusedLetters[i];
-  }
-  std::cout << '\n';
+  asafov::getUnusedLetters(str, unusedLetters);
+  std::cout << unusedLetters << '\n';
 
   delete[] unusedLetters;
   delete[] str;

@@ -1,50 +1,46 @@
 #include "stringFunctions.hpp"
 #include <cctype>
 
-int findUniqLetters(const char* string, char* alphabet)
+void findUniqLetters(const char* string, char* alphabet)
 {
-  size_t count = 0;
-  for(size_t i = 0; string[i]!='\0'; i++)
+  for (size_t i = 0; i < 26; i++)
   {
-    for(int j = 0; j < 26; j++)
+    alphabet[i] = 'a' + i;
+  }
+  for (size_t i = 0; string[i]!='\0'; i++)
+  {
+    if (std::tolower(string[i]) == alphabet[std::tolower(string[i]) - 'a'])
     {
-      if(string[i] == alphabet[j])
-      {
-        alphabet[j] = 0;
-        count++;
-      }
+      alphabet[std::tolower(string[i]) - 'a'] = 0;
     }
   }
-  return count;
 }
 
 int asafov::countUniqLetters(const char* string)
 {
-  char alphabet[] = "abcdefghijklmnopqrstuvwxyz\0";
-  size_t count = findUniqLetters(string, alphabet);
+  char alphabet[26];
+  findUniqLetters(string, alphabet);
+  size_t count = 0;
+  for (size_t i = 0; i < 26; i++)
+  {
+    if (alphabet[i] == 0)
+    {
+      count++;
+    }
+  }
   return count;
 }
 
 void asafov::getUnusedLetters(const char* string, char* unusedletters)
 {
-  char alphabet[] = "abcdefghijklmnopqrstuvwxyz\0";
-  size_t count = 26 - findUniqLetters(string, alphabet);
+  char alphabet[26];
+  findUniqLetters(string, alphabet);
   size_t lastletter = 0;
-  for (size_t pos = 0; pos <=26; pos++)
+  for (size_t pos = 0; pos < 26; pos++)
   {
-    if (alphabet[pos] != '\0' && lastletter != pos)
+    if (alphabet[pos] != '\0')
     {
-      alphabet[lastletter] = alphabet[pos];
-      alphabet[pos] = '\0';
-      lastletter++;
+      unusedletters[lastletter++] = alphabet[pos];
     }
-    else if (alphabet[pos] != '\0' && lastletter == pos)
-    {
-      lastletter++;
-    }
-  }
-  for (size_t i = 0; i < count; i++)
-  {
-    unusedletters[i] = alphabet[i];
   }
 }
