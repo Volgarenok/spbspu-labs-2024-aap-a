@@ -4,13 +4,13 @@
 #include <cmath>
 #include "shape.hpp"
 
-void brevnov::print_frame_coordinates(const brevnov::CompositeShape& CoSh, std::ostream & out)
+void brevnov::print_frame_coordinates(const brevnov::CompositeShape& coSh, std::ostream & out)
 {
-  find_frame_coordinates(CoSh[0]->getFrameRect(), out);
-  for (size_t i = 1; i < CoSh.size(); ++i)
+  find_frame_coordinates(coSh[0]->getFrameRect(), out);
+  for (size_t i = 1; i < coSh.size(); ++i)
   {
     out << " ";
-    find_frame_coordinates(CoSh[i]->getFrameRect(), out);
+    find_frame_coordinates(coSh[i]->getFrameRect(), out);
   }
 }
 
