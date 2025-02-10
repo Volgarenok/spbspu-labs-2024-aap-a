@@ -3,7 +3,7 @@
 
 
 brevnov::Rectangle::Rectangle(point_t left, point_t right):
-  shapes_(new Ellipse *[64]),
+  shapes_(new * Ellipse[64])
   left_(left),
   right_(right)
 {
@@ -28,7 +28,7 @@ brevnov::Rectangle::~Rectangle()
 {
   for (size_t i = 0; i < 64; i++)
   {
-    delete shapes_[i];
+    delete shapes_[];
   }
   delete[] shapes_;
 }
@@ -70,15 +70,18 @@ void brevnov::Rectangle::move(double dx, double dy) noexcept
 void brevnov::Rectangle::scale(double n) noexcept
 {
   point_t center = {left_.x + (right_.x - left_.x) / 2.0, left_.y + (right_.y - left_.y) / 2.0};
-  double r1 = shapes_[0]->getR1() * n;
-  double r2 = shapes_[0]->getR2() * n;
-  left_ = {center.x - r2 * 4.0, center.y - r1 * 4.0};
-  right_ = {center.x + r2 * 4.0, center.y + r1 * 4.0};
+  double a = (right_.x - left_.x) * n;
+  double b = (right_.y - left_.y) * n;
+  double r1 = b / 16.0;
+  double r2 = a / 16.0;
+  left_ = {center.x - a * 0.5, center.y - b * 0.5};
+  right_ = {center.x + a * 0.5, center.y + b * 0.5};
   for (size_t i = 0; i < 8; i++)
   {
     for (size_t j = 0; j < 8; j++)
     {
-      shapes_[i * 8 + j]->updateEllipse({left_.x + r2 * (i * 2 + 1), left_.y + r1 * (i * 2 + 1)}, r1, r2);
+      shapes_[i * 8 + j]->scale(n);
+      shapes_[i * 8 + j]->move({left_.x + r2 * (i * 2 + 1), left_.y + r1 * (i * 2 + 1)});
     }
   }
 }
