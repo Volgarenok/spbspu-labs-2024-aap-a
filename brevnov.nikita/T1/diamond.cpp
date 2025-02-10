@@ -104,7 +104,7 @@ void brevnov::Diamond::scale(double n) noexcept
   vertical_.y = center_.y + (center_.y - vertical_.y) * n;
 }
 
-brevnov::Shape * brevnov::Diamond::clone() const override
+brevnov::Shape * brevnov::Diamond::clone() const
 {
   return new Diamond(*this);
 }

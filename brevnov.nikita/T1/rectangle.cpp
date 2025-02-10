@@ -86,7 +86,7 @@ void brevnov::Rectangle::scale(double n) noexcept
   }
 }
 
-brevnov::Shape * brevnov::Rectangle::clone() const override
+brevnov::Shape * brevnov::Rectangle::clone() const
 {
   return new Rectangle(*this);
 }

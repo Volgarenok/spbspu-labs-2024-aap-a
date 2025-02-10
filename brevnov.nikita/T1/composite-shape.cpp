@@ -37,7 +37,15 @@ brevnov::CompositeShape::CompositeShape(CompositeShape & cos):
 {
   for (size_t i = 0; i < current_size_; i++)
   {
-    shapes_[i] = cos[i];
+    try
+    {
+      shapes_[i] = cos[i]->clone();
+    }
+    catch (const std::bad_alloc& e)
+    {
+      clearShape(shapes_[i], i);
+      throw;
+    }
   }
 }
 
@@ -197,4 +205,13 @@ void brevnov::CompositeShape::scale(double k)
 brevnov::CompositeShape::~CompositeShape()
 {
   clear();
+}
+
+void brevnov::clearShape(brevnov::Shape ** shapes, size_t i)
+{
+  for (size_t j = 0; j < i; j++)
+  {
+    delete shapes[j];
+  }
+  delete[] shapes;
 }
