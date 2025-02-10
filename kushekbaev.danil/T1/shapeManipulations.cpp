@@ -63,4 +63,25 @@ namespace kushekbaev
       delete compShape[i];
     }
   }
+
+  void printFrameCoordinates(std::ostream& out, const CompositeShape* compShape)
+  {
+    if (compShape && compShape->size() > 0)
+    {
+      for (size_t i = 0; i < compShape->size(); ++i)
+      {
+        rectangle_t frame = compShape->at(i)->getFrameRect(); // Получение ограничивающего прямоугольника фигуры
+        double leftx = frame.pos.x - frame.width / 2.0;
+        double lefty = frame.pos.y - frame.height / 2.0;
+        double rightx = frame.pos.x + frame.width / 2.0;
+        double righty = frame.pos.y + frame.height / 2.0;
+        out << leftx << " " << lefty << " " << rightx << " " << righty;
+        if (i < compShape->size() - 1)
+        {
+          out << " ";
+        }
+      }
+    }
+  }
 }
+

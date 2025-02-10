@@ -13,6 +13,7 @@ namespace kushekbaev
   void scaleSafe(const size_t shapeCounter, point_t scalePoint, double scaleCoeff, CompositeShape** compShape);
   void outputCoord(std::ostream& output, CompositeShape** compShape);
   void clearMemory(const size_t shapeCounter, CompositeShape** compShape);
+  void printFrameCoordinates(std::ostream& out, const CompositeShape* compShape);
 }
 
 #endif
