@@ -95,12 +95,14 @@ int main()
   {
     std::cout << std::fixed << std::setprecision(1) << compShape->getArea();
 
+    std::cout << " ";
     printFrameCoordinates(std::cout, compShape);
     std::cout << "\n";
 
     compShape->scaleEverything(scalePoint, scaleCoeff);
     std::cout << compShape->getArea();
 
+    std::cout << " ";
     printFrameCoordinates(std::cout, compShape);
     std::cout << "\n";
 
