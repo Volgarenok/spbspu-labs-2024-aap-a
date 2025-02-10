@@ -35,7 +35,7 @@ namespace kushekbaev
     scaleAll(shapeCounter, scalePoint, scaleCoeff, compShape);
   }
 
-  void outputCoord(std::ostream& output, CompositeShape** compShape)
+  void outputCoord(std::ostream& out, CompositeShape** compShape)
   {
     if (compShape && *compShape)
     {
@@ -50,7 +50,7 @@ namespace kushekbaev
           double leftDownY = rect.pos.y - rect.height / 2;
           double rightUpX = rect.pos.x + rect.width / 2;
           double rightUpY = rect.pos.y + rect.height / 2;
-          output << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
+          out << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
         }
       }
     }
@@ -84,4 +84,3 @@ namespace kushekbaev
     }
   }
 }
-

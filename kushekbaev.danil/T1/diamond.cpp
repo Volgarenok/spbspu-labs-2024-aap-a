@@ -1,13 +1,20 @@
 #include "diamond.hpp"
 #include <cmath>
 #include <stdexcept>
+#include <array>
+#include "shape.hpp"
+#include "shapeBreeding.hpp"
 
 namespace kushekbaev
 {
-  Diamond::Diamond(const point_t mid, const point_t modX, const point_t modY):
-    parallelogram_({ mid.x - modX.x, mid.y - modX.y }, { mid.x + modX.x, mid.y + modX.y }, { mid.x, mid.y + modY.y })
+    Diamond::Diamond(point_t middle,
+    point_t diffX,
+  point_t diffY):
+  middle_(middle),
+  diffX_(diffX),
+  diffY_(diffY)
   {
-    if ((mid.x - modX.x != mid.x) || (mid.y - modX.y != mid.y + modY.y))
+    if (!details::isTriangle(middle, diffX, diffY))
     {
       throw std::invalid_argument("Incorrect diamond\n");
     }
@@ -15,31 +22,52 @@ namespace kushekbaev
 
   double Diamond::getArea() const
   {
-    return parallelogram_.getArea();
+    return std::fabs((middle_.x - diffX_.x) * (middle_.y - diffY_.y) * 2);
   }
 
   rectangle_t Diamond::getFrameRect() const
   {
-    return parallelogram_.getFrameRect();
+    return { std::fabs((middle_.x - diffX_.x)) * 2, std::fabs((middle_.y - diffY_.y) * 2), middle_ };
   }
 
-  void Diamond::move(point_t scalePoint)
+  void Diamond::move(point_t Z)
   {
-    return parallelogram_.move(scalePoint);
+    point_t middle = getFrameRect().pos;
+    double dx = Z.x - middle.x;
+    double dy = Z.y - middle.y;
+
+    std::array<point_t*, 3> points = { &middle_, &diffX_, &diffY_, };
+
+    for (point_t* point : points)
+    {
+      point->x += dx;
+      point->y += dy;
+    }
   }
 
   void Diamond::move(double dx, double dy)
   {
-    return parallelogram_.move(dx, dy);
-  }
+    std::array<point_t*, 3> points = { &middle_, &diffX_, &diffY_, };
 
-  void Diamond::scale(double scaleCoeff)
-  {
-    return parallelogram_.scale(scaleCoeff);
+    for (point_t* point : points)
+    {
+      point->x += dx;
+      point->y += dy;
+    }
   }
-
-  Shape* Diamond::clone() const noexcept
+  void Diamond::scale(double V)
   {
-    return new Diamond(*this);
+     if (V <= 0)
+    {
+      throw std::out_of_range("Scale coefficient should be greater than zero\n");
+    }
+
+    std::array<point_t*, 4> points = { &diffX_, &diffY_,};
+
+    for (point_t* point : points)
+    {
+      point->x = middle_.x + (point->x - middle_.x) * V;
+      point->y = middle_.y + (point->y - middle_.y) * V;
+    }
   }
 }
