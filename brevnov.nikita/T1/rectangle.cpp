@@ -9,6 +9,7 @@ brevnov::Rectangle::Rectangle(point_t left, point_t right):
 {
   if (left.x >= right.x || left.y >= right.y)
   {
+    delete[] shapes_;
     throw std::invalid_argument("Not correct arguments");
   }
   double width = right_.x - left_.x;
