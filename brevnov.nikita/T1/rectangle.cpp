@@ -28,7 +28,7 @@ brevnov::Rectangle::~Rectangle()
 {
   for (size_t i = 0; i < 64; i++)
   {
-    delete shapes_[];
+    delete shapes_[i];
   }
   delete[] shapes_;
 }
