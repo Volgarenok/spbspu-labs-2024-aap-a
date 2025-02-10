@@ -51,7 +51,7 @@ namespace brevnov
     }
   }
 
-  brevnov::point_t getVertical(point_t center, point_t horizontal, point a, point_t b, point_t c)
+  brevnov::point_t getVertical(point_t center, point_t horizontal, point_t a, point_t b, point_t c)
   {
     if (a != center && a != horizontal)
     {
