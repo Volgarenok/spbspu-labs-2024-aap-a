@@ -14,6 +14,7 @@ namespace kushekbaev
     void move(const point_t scalePoint) override;
     void move(const double dx, const double dy) override;
     void scale(const double scaleCoeff) override;
+    Shape* clone() const override;
 
   private:
     point_t points_[4];

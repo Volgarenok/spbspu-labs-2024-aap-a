@@ -29,9 +29,9 @@ namespace kushekbaev
 
   void Rectangle::move(point_t scalePoint)
   {
-    point_t middle = getFrameRect().pos;
-    double dx = scalePoint.x - middle.x;
-    double dy = scalePoint.y - middle.y;
+    point_t mid = getFrameRect().pos;
+    double dx = scalePoint.x - mid.x;
+    double dy = scalePoint.y - mid.y;
 
     move(dx, dy);
   }
@@ -49,10 +49,15 @@ namespace kushekbaev
     {
       throw std::logic_error("Scale coefficient should be greater than zero\n");
     }
-    point_t middle = getFrameRect().pos;
+    point_t mid = getFrameRect().pos;
 
     size_t size = 2;
     point_t* points[] = { &lowerLeft_, &upperRight_ };
-    scalePoints(points, size, scaleCoeff, middle);
+    scalePoints(points, size, scaleCoeff, mid);
+  }
+
+  Shape* Rectangle::clone() const
+  {
+    return new Rectangle(*this);
   }
 }

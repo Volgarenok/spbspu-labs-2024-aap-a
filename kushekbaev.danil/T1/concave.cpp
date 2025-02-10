@@ -14,7 +14,7 @@ namespace kushekbaev
       throw std::invalid_argument("Incorrect concave\n");
     }
   }
-
+  
   double Concave::getArea() const
   {
     double standart = getAreaOfTriangle(points_[0], points_[1], points_[2]);
@@ -66,5 +66,10 @@ namespace kushekbaev
     size_t size = 4;
     point_t* points[] = { &points_[0], &points_[1], &points_[2], &points_[3] };
     scalePoints(points, size, scaleCoeff, mid);
+  }
+
+  Shape* Concave::clone() const
+  {
+    return new Concave(*this);
   }
 }

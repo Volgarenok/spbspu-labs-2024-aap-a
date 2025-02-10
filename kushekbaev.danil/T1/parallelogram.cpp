@@ -76,4 +76,9 @@ namespace kushekbaev
     point_t* points[] = { &points_[0], &points_[1], &points_[2] };
     scalePoints(points, size, scaleCoeff, mid);
   }
+
+  Shape* Parallelogram::clone() const
+  {
+    return new Parallelogram(*this);
+  }
 }

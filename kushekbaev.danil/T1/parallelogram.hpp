@@ -5,7 +5,7 @@
 
 namespace kushekbaev
 {
-  class Parallelogram: public Shape
+  class Parallelogram : public Shape
   {
   public:
     Parallelogram(const point_t first, const point_t second, const point_t third);
@@ -14,6 +14,7 @@ namespace kushekbaev
     void move(const point_t scalePoint) override;
     void move(const double dx, const double dy) override;
     void scale(const double scaleCoeff) override;
+    Shape* clone() const override;
 
   private:
     point_t points_[3];
