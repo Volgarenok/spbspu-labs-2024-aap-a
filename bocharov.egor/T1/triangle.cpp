@@ -24,12 +24,10 @@ bocharov::rectangle_t bocharov::Triangle::getFrameRect() const
   double maxY = std::max(a_.y, std::max(b_.y, c_.y));
   double minX = std::min(a_.x, std::min(b_.x, c_.x));
   double minY = std::min(a_.y, std::min(b_.y, c_.y));
-  rectangle_t result;
-  result.height = maxY - minY;
-  result.width = maxX - minX;
-  result.pos.x = minX + (result.width / 2.0);
-  result.pos.y = minY + (result.height / 2.0);
-  return result;
+  double height = maxY - minY;
+  double width = maxX - minX;
+  point_t pos = {minX + (width / 2.0), minY + (height / 2.0)};
+  return {width, height, pos};
 }
 
 void bocharov::Triangle::move(point_t centerP)
