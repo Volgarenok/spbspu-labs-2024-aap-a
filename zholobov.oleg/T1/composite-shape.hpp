@@ -24,6 +24,7 @@ namespace zholobov {
     const Shape* operator[](size_t idx) const noexcept;
     bool empty() const noexcept;
     size_t size() const noexcept;
+    void clear() noexcept;
 
     double getArea() const;
     rectangle_t getFrameRect() const;
@@ -33,6 +34,8 @@ namespace zholobov {
 
     void print(std::ostream& output) const;
     void scale_relative(point_t pos, double scale_factor);
+
+    void swap(CompositeShape& other) noexcept;
 
   private:
     Shape* items_[max_elem_num];

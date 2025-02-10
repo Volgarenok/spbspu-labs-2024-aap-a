@@ -1,8 +1,9 @@
 #include "square.hpp"
 
-#include <common_utils.hpp>
 #include <istream>
 #include <stdexcept>
+
+#include <common_utils.hpp>
 
 zholobov::Square::Square(const point_t& a, double length):
   Rectangle(a, point_t{a.x + length, a.y + length})

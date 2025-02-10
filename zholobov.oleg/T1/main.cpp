@@ -1,7 +1,7 @@
-#include <common_utils.hpp>
 #include <iostream>
 #include <string>
 
+#include <common_utils.hpp>
 #include "composite-shape.hpp"
 #include "shape.hpp"
 #include "shapes_utils.hpp"
@@ -13,9 +13,13 @@ int main()
   bool is_scale_command = false;
   try {
     while (std::cin >> shape_name) {
+      zholobov::Shape* shape = nullptr;
       try {
-        zholobov::Shape* shape = zholobov::create_shape(shape_name, std::cin);
+        shape = zholobov::create_shape(shape_name, std::cin);
         composite_shape.push_back(shape);
+      } catch (const std::out_of_range& e) {
+        delete shape;
+        throw;
       } catch (const std::invalid_argument& e) {
         if (shape_name == "SCALE") {
           is_scale_command = true;

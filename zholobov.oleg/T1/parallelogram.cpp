@@ -4,7 +4,7 @@
 #include <istream>
 #include <stdexcept>
 
-#include "common_utils.hpp"
+#include <common_utils.hpp>
 
 zholobov::Parallelogram::Parallelogram(const point_t& p1, const point_t& p2, const point_t& p3):
   pos_({(p1.x + p3.x) / 2.0, (p1.y + p3.y) / 2.0}),

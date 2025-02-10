@@ -32,38 +32,31 @@ zholobov::CompositeShape::CompositeShape(const CompositeShape& other):
 }
 
 zholobov::CompositeShape::CompositeShape(CompositeShape&& other) noexcept:
-  items_(),
-  items_num_(0)
+  CompositeShape()
 {
-  *this = std::move(other);
+  swap(other);
 }
 
 zholobov::CompositeShape::~CompositeShape()
 {
-  for (size_t i = 0; i < items_num_; ++i) {
-    delete items_[i];
-  }
+  clear();
 }
 
 zholobov::CompositeShape& zholobov::CompositeShape::operator=(const CompositeShape& other)
 {
   if (this != std::addressof(other)) {
     CompositeShape temp(other);
-    std::swap(*this, temp);
+    swap(temp);
   }
   return *this;
 }
 
 zholobov::CompositeShape& zholobov::CompositeShape::operator=(zholobov::CompositeShape&& other) noexcept
 {
-  for (size_t i = 0; i < items_num_; ++i) {
-    delete items_[i];
+  if (this != std::addressof(other)) {
+    clear();
+    swap(other);
   }
-  for (size_t i = 0; i < other.items_num_; ++i) {
-    items_[i] = other.items_[i];
-  }
-  items_num_ = other.items_num_;
-  other.items_num_ = 0;
   return *this;
 }
 
@@ -117,6 +110,14 @@ bool zholobov::CompositeShape::empty() const noexcept
 size_t zholobov::CompositeShape::size() const noexcept
 {
   return items_num_;
+}
+
+void zholobov::CompositeShape::clear() noexcept
+{
+  for (size_t i = 0; i < items_num_; ++i) {
+    delete items_[i];
+  }
+  items_num_ = 0;
 }
 
 double zholobov::CompositeShape::getArea() const
@@ -190,4 +191,30 @@ void zholobov::CompositeShape::scale_relative(point_t pos, double scale_factor)
     new_pos.y = (rect.pos.y - pos.y) * scale_factor + pos.y;
     items_[i]->move(new_pos);
   }
+}
+
+void zholobov::CompositeShape::swap(CompositeShape& other) noexcept
+{
+  Shape** smaller_array = nullptr;
+  Shape** bigger_array = nullptr;
+  size_t swap_upto_index = 0;
+  size_t move_upto_index = 0;
+  if (items_num_ < other.items_num_) {
+    smaller_array = items_;
+    bigger_array = other.items_;
+    swap_upto_index = items_num_;
+    move_upto_index = other.items_num_;
+  } else {
+    smaller_array = other.items_;
+    bigger_array = items_;
+    swap_upto_index = other.items_num_;
+    move_upto_index = items_num_;
+  }
+  for (size_t i = 0; i < swap_upto_index; ++i) {
+    std::swap(smaller_array[i], bigger_array[i]);
+  }
+  for (size_t i = swap_upto_index; i < move_upto_index; ++i) {
+    smaller_array[i] = bigger_array[i];
+  }
+  std::swap(items_num_, other.items_num_);
 }
