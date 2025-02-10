@@ -98,7 +98,7 @@ int main()
     outputCoord(std::cout, &compShapePtr);
     std::cout << "\n";
 
-    scaleAll(shapeCounter, scalePoint, scaleCoeff, &compShapePtr);
+    compShape->scale(scaleCoeff);
     std::cout << compShape->getArea();
 
     outputCoord(std::cout, &compShapePtr);
