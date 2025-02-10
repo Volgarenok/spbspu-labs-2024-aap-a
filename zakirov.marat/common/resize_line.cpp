@@ -17,20 +17,7 @@ char * zakirov::expand_line(char const * regular_line, size_t real_lenght, size_
   return expanded_line;
 }
 
-void zakirov::get_segment(std::istream & in, char * line, size_t start, size_t finish)
-{
-  for (; start < finish; ++start)
-  {
-    in >> line[start];
-    if (in.eof())
-    {
-      line[start] = '\0';
-      break;
-    }
-  }
-}
-
-void zakirov::get_segment(std::istream & in, char * line, size_t start, size_t finish, char interrupt_el)
+void zakirov::get_segment(std::istream & in, char * line, size_t start, size_t finish, char interrupt_el = '\n')
 {
   for (; start < finish; ++start)
   {
@@ -91,7 +78,7 @@ char * zakirov::get_line(std::istream & in, size_t step)
   return line;
 }
 
-char * zakirov::get_line(std::istream & in, size_t step, char interrupt_el)
+char * zakirov::get_line(std::istream & in, size_t step, char interrupt_el = '\n')
 {
   size_t start = 1, finish = 1;
   char * line = static_cast< char * >(malloc(sizeof(char)));
