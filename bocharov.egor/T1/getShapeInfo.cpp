@@ -32,7 +32,7 @@ void bocharov::scaling(Shape ** myShapes, size_t shapeCount, point_t center, dou
   }
   catch (const std::invalid_argument &)
   {
-    throw;
+    throw std::invalid_argument("under zero ratio with scale\n");
   }
 }
 
