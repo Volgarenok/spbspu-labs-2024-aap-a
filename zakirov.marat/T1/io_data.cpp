@@ -56,7 +56,7 @@ size_t zakirov::get_parameters_series(std::istream & in, double * parameters)
     {
       throw std::logic_error("Error! Not enought memory.");
     }
-    
+
     parameters = expanded_parameters;
     while (workline[finish] != ' ' && workline[finish] != '\n')
     {
