@@ -18,8 +18,7 @@ double smirnov::Rectangle::getArea() const
 
 smirnov::rectangle_t smirnov::Rectangle::getFrameRect() const
 {
-  point_t center = {(lowerLeft.x + upperRight.x) / 2,
-      (lowerLeft.y + upperRight.y) / 2};
+  point_t center = {(lowerLeft.x + upperRight.x) / 2, (lowerLeft.y + upperRight.y) / 2};
   return {center, upperRight.x - lowerLeft.x, upperRight.y - lowerLeft.y};
 }
 

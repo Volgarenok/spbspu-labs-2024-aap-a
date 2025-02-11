@@ -8,7 +8,6 @@ namespace smirnov
   {
   public:
     Parallelogram(point_t p1, point_t p2, point_t p3);
-    Parallelogram() = default;
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t newPos) override;

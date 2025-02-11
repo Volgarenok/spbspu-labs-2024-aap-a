@@ -40,21 +40,9 @@ smirnov::Diamond * smirnov::createDiamond(std::istream & in)
   constexpr size_t coordinateCount = 6;
   double coordsArray[coordinateCount];
   inputCoords(coordsArray, coordinateCount, in);
-  point_t p1, p2, p3;
-  p1 = {coordsArray[0], coordsArray[1]};
-  p2 = {coordsArray[2], coordsArray[3]};
-  p3 = {coordsArray[4], coordsArray[5]};
-  if ((p1.x == p2.x && p1.y == p2.y) ||
-      (p1.x == p3.x && p1.y == p3.y) ||
-      (p2.x == p3.x && p2.y == p3.y))
-  {
-    throw std::invalid_argument("Points must be unique");
-  }
-  if (!(p1.y == p3.y || p1.y == p2.y || p2.y == p3.y) ||
-      !(p1.x == p2.x || p1.x == p3.x || p2.x == p3.x))
-  {
-    throw std::invalid_argument("Diagonals must be parallel to the coordinate axes");
-  }
+  point_t p1 = {coordsArray[0], coordsArray[1]};
+  point_t p2 = {coordsArray[2], coordsArray[3]};
+  point_t p3 = {coordsArray[4], coordsArray[5]};
   point_t center;
   double dx = 0.0, dy = 0.0;
   if (p1.x == p2.x)
@@ -86,10 +74,9 @@ smirnov::Parallelogram * smirnov::createParallelogram(std::istream & in)
   constexpr size_t coordinateCount = 6;
   double coordsArray[coordinateCount];
   inputCoords(coordsArray, coordinateCount, in);
-  point_t p1, p2, p3;
-  p1 = {coordsArray[0], coordsArray[1]};
-  p2 = {coordsArray[2], coordsArray[3]};
-  p3 = {coordsArray[4], coordsArray[5]};
+  point_t p1 = {coordsArray[0], coordsArray[1]};
+  point_t p2 = {coordsArray[2], coordsArray[3]};
+  point_t p3 = {coordsArray[4], coordsArray[5]};
   if (!(p1.y == p2.y || p1.y == p3.y || p2.y == p3.y))
   {
     throw std::invalid_argument("The sides of the parallelogram must be parallel to the X-axis");
