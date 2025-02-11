@@ -12,7 +12,15 @@ alymova::CompositeShape::CompositeShape(const CompositeShape& comp_shape):
   capacity_(comp_shape.capacity_),
   shapes_(new Shape*[capacity_]())
 {
-  copyArray(comp_shape.shapes_);
+  try
+  {
+    copyArray(comp_shape.shapes_);
+  }
+  catch (const std::bad_alloc& e)
+  {
+    clear(shapes_);
+    throw;
+  }
 }
 alymova::CompositeShape::CompositeShape(CompositeShape&& comp_shape):
   size_(comp_shape.size_),
