@@ -5,6 +5,7 @@ namespace belobrov
   const char* checkChar(const char* str, char target);
   const char* checkSign(const char* str);
   const char* idDigit(const char* str);
+  const char* checkUnsigned(const char* str);
 }
 
 const char* belobrov::checkChar(const char* str, char target)
@@ -23,7 +24,7 @@ const char* belobrov::checkSign(const char* str)
   return (checkChar(str, '+') || checkChar(str, '-') ? (str + 1) : nullptr;
 }
 
-const char* smirnov::isDigit(const char* str)
+const char* belobrov::isDigit(const char* str)
 {
   if (!str) {
     return nullptr;
@@ -37,4 +38,18 @@ const char* smirnov::isDigit(const char* str)
     return str + 1;
   }
   return isDigit(str);
+}
+
+const char* belobrov::checkUnsigned(const char* str)
+{
+    if (!str)
+    {
+        return nullptr;
+    }
+    auto next = isDigit(str);
+    if (auto continued = checkUnsigned(next))
+    {
+        return continued;
+    }
+    return next;
 }
