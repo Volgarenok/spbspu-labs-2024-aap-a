@@ -41,6 +41,10 @@ namespace cherkasov
   }
   void Square::scale(double k)
   {
+    if (k < 0)
+    {
+      throw std::invalid_argument("k must be positive");
+    }
     point_t Pos = getFrameRect().pos;
     length *= k;
     left.x = Pos.x - (length / 2);

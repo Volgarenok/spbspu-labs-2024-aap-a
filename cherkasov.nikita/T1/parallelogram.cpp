@@ -63,6 +63,10 @@ namespace cherkasov
   }
   void Parallelogram::scale(double k)
   {
+    if (k < 0)
+    {
+      throw std::invalid_argument("k must be positive");
+    }
     point_t center = getFrameRect().pos;
     vertex1.x = center.x + (vertex1.x - center.x) * k;
     vertex1.y = center.y + (vertex1.y - center.y) * k;

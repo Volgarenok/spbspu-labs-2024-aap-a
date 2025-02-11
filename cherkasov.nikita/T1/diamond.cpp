@@ -53,6 +53,10 @@ namespace cherkasov
   }
   void Diamond::scale(double k)
   {
+    if (k < 0)
+    {
+      throw std::invalid_argument("k must be positive");
+    }
     scalePoint(vertex1, center, k);
     scalePoint(vertex2, center, k);
     scalePoint(vertex3, center, k);
