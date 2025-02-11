@@ -50,5 +50,6 @@ void zakirov::Rectangle::scale(double k)
 
 zakirov::Shape * zakirov::Rectangle::clone() const
 {
-  return make_rectangle(bottom_left_.x, bottom_left_.y, top_right_.x, top_right_.y);
+  Rectangle * rectangle = static_cast< Rectangle * >(malloc(sizeof(Rectangle)));
+  return new (rectangle) Rectangle(bottom_left_, top_right_);
 }

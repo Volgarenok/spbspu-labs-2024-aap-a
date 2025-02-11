@@ -88,5 +88,6 @@ void zakirov::Polygon::scale(double k)
 
 zakirov::Shape * zakirov::Polygon::clone() const
 {
-  return make_polygon(size_, points_);
+  Polygon * polygon = static_cast< Polygon * >(malloc(sizeof(Polygon)));
+  return new (polygon) Polygon(size_, points_);
 }

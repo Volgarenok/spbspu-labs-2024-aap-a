@@ -1,33 +1,37 @@
+#include <cstring>
 #include <iostream>
 #include <iomanip>
 #include "composite-shape.hpp"
-#include "unified_shapes.hpp"
+#include "io_data.hpp"
+#include "shape_factory.hpp"
 
 int main()
 {
   using namespace zakirov;
   CompositeShape shapes;
+  constexpr size_t step = 1;
+  size_t scale_quantity = 0;
   bool shape_flag = false;
   double * scale_data = nullptr;
   double * data = nullptr;
   while (std::cin)
   {
-    double * data = get_data(std::cin);
+    char * data = get_to_symbol(std::cin, step, ' ');
     if (!data)
     {
       std::cerr << "Warning! Some problems getting the string." << '\n';
       return 1;
     }
-    else if (data[0] == 1.0)
+    else if (!std::strcmp(data, "SCALE"))
     {
-      scale_data = data;
+      scale_quantity = get_parameters_series(std::cin, scale_data);
       break;
     }
 
     Shape * new_shape = nullptr;
     try
     {
-      new_shape = make_shape(data);
+      new_shape = make_shape(std::cin, data);
       shapes.push_back(new_shape);
     }
     catch (const std::invalid_argument &)
@@ -47,7 +51,7 @@ int main()
     free(data);
   }
 
-  if (!shapes.empty() || !scale_data)
+  if (!shapes.empty() || !scale_data || scale_quantity != 3)
   {
     std::cerr << "Warning! No shapes entered or scale is not defined." << '\n';
     free(scale_data);

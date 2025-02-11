@@ -30,6 +30,10 @@ namespace zakirov
     Shape * shapes_[shapes_size_];
     size_t shapes_quantity_;
   };
+
+  void scale_full_composition(CompositeShape & shapes, const point_t & target, double k);
+  void check_scale_full_composition(CompositeShape & shapes, const point_t & target, double k);
+  void clear_shapes(Shape ** shapes, size_t quantity);
 }
 
 #endif

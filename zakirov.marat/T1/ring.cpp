@@ -46,5 +46,6 @@ void zakirov::Ring::scale(double k)
 
 zakirov::Shape * zakirov::Ring::clone() const
 {
-  return make_ring(center_.x, center_.y, ex_radius_, in_radius_);
+  Ring * ring = static_cast< Ring * >(malloc(sizeof(Ring)));
+  return new (ring) Ring(center_, ex_radius_, in_radius_);
 }

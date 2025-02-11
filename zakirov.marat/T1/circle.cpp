@@ -15,7 +15,8 @@ zakirov::Circle::Circle(const point_t & center, double radius)
   double step = (radius - first_in_radius_) / rings_size_;
   for (size_t i = 0; i < rings_size_; ++i)
   {
-    rings_[i] = make_ring(center.x, center.y, step * (i + 1) + first_in_radius_, step * i + first_in_radius_);
+    Ring * ring = static_cast< Ring * >(malloc(sizeof(Ring)));
+    rings_[i] = new (ring) Ring(center, step * (i + 1) + first_in_radius_, step * i + first_in_radius_);
   }
 }
 
@@ -71,5 +72,6 @@ zakirov::Shape * zakirov::Circle::clone() const
 {
   point_t center = getFrameRect().pos;
   double radius = getFrameRect().width / 2;
-  return make_circle(center.x, center.y, radius);
+  Circle * circle = static_cast< Circle * >(malloc(sizeof(Circle)));
+  return new (circle) Circle(center, radius);
 }

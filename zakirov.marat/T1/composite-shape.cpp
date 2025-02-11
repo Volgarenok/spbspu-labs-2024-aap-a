@@ -1,6 +1,5 @@
 #include "composite-shape.hpp"
 #include <stdexcept>
-#include "unified_shapes.hpp"
 
 zakirov::CompositeShape::CompositeShape():
   shapes_quantity_(0)
@@ -164,3 +163,37 @@ size_t zakirov::CompositeShape::size() const noexcept
 {
   return shapes_quantity_;
 }
+
+void zakirov::scale_full_composition(CompositeShape & shapes, const point_t & target, double k)
+{
+  for (size_t i = 0; i < shapes.size(); ++i)
+  {
+    point_t nailed_p1 = shapes[i]->getFrameRect().pos;
+    shapes[i]->move(target);
+    point_t nailed_p2 = shapes[i]->getFrameRect().pos;
+    point_t bias{(nailed_p2.x - nailed_p1.x) * k, (nailed_p2.y - nailed_p1.y) * k};
+    shapes[i]->scale(k);
+    shapes[i]->move(-bias.x, -bias.y);
+  }
+}
+
+
+void zakirov::check_scale_full_composition(CompositeShape & shapes, const point_t & target, double k)
+{
+  if (k <= 0)
+  {
+    throw std::invalid_argument("Incorrect coefficient");
+  }
+
+  scale_full_composition(shapes, target, k);
+}
+
+void zakirov::clear_shapes(Shape ** shapes, size_t quantity)
+{
+  for (size_t i = 0; i < quantity; ++i)
+  {
+    shapes[i]->~Shape();
+    free(shapes[i]);
+  }
+}
+
