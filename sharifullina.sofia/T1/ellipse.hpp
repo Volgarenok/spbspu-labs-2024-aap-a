@@ -5,7 +5,7 @@
 
 namespace sharifullina
 {
-  class Ellipse : public Shape
+  class Ellipse: public Shape
   {
   public:
     Ellipse(point_t center, double radiusX, double radiusY);

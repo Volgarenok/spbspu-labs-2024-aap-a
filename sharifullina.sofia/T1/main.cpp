@@ -9,11 +9,11 @@
 #include "ellipse.hpp"
 #include "actionShapes.hpp"
 
-using namespace sharifullina;
 
 int main()
 {
-  Shape * shapes[1000] = {};
+  using namespace sharifullina;
+  Shape * shapes[10000] = {};
   size_t count = 0;
   std::string shapeType;
   bool flag = false;

@@ -4,7 +4,7 @@
 #include "shape.hpp"
 namespace sharifullina
 {
-  class Rectangle : public Shape
+  class Rectangle: public Shape
   {
   public:
     Rectangle(point_t lowLeft, point_t uppRight);
