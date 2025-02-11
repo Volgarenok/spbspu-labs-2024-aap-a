@@ -56,7 +56,7 @@ int main()
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
   cherkasov::getScaling(shapes, shapeCount, p, scalingFactor);
-  std::cout << cherkasov::getSumArea(shapes, shapeCount) << "\n";
+  std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
   cherkasov::deleteShapes(shapes, shapeCount);
   return 0;
