@@ -11,7 +11,8 @@ namespace cherkasov
     vertex2{x2, y2},
     vertex3{x3, y3},
     vertex4{x2 + (x1 - x3), y2 + (y3 - y1)},
-    center{(x1 + x3) / 2, (y1 + y3) / 2} {}
+    center{(x1 + x3) / 2, (y1 + y3) / 2}
+    {}
   double Diamond::getArea() const
   {
     double diag1 = vertex1.y - vertex3.y;

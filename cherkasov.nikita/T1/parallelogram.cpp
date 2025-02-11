@@ -6,7 +6,10 @@
 namespace cherkasov
 {
   Parallelogram::Parallelogram(double x1, double y1, double x2, double y2, double x3, double y3)
-  : vertex1{x1, y1}, vertex2{x2, y2}, vertex3{x3, y3},vertex4{(x1 + x3) - x2, (y1 + y3) - y2}
+  : vertex1{x1, y1},
+    vertex2{x2, y2},
+    vertex3{x3, y3},
+    vertex4{(x1 + x3) - x2, (y1 + y3) - y2}
     {}
   double Parallelogram::getArea() const
   {

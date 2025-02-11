@@ -4,7 +4,8 @@
 namespace cherkasov
 {
   Square::Square(double x1, double y1, double length)
-  : left {x1, y1}, length(length)
+  : left {x1, y1},
+    length(length)
     {}
   double Square::getArea() const
   {

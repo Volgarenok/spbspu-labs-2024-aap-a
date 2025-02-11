@@ -71,12 +71,6 @@ int main()
     {
       scalingRequested = true;
       std::cin >> p.x >> p.y >> scalingFactor;
-      if (scalingFactor <= 0)
-      {
-        cherkasov::deleteShapes(shapes, shapeCount);
-        std::cerr << "scaling factor must  positive\n";
-        return 1;
-      }
       break;
     }
     else if (std::cin.eof())
