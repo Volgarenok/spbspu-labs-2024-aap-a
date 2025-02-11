@@ -12,7 +12,16 @@ namespace cherkasov
     vertex3{x3, y3},
     vertex4{x2 + (x1 - x3), y2 + (y3 - y1)},
     center{(x1 + x3) / 2, (y1 + y3) / 2}
-    {}
+    {
+      if (((x1 == x2 && y1 == y2) && (x1 == x3 && y1 == y3)))
+      {
+        throw std::invalid_argument("no input coordinat");
+      }
+      if ((x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3))
+      {
+        throw std::invalid_argument("the vertices don't have to be equa");
+      }
+    }
   double Diamond::getArea() const
   {
     double diag1 = vertex1.y - vertex3.y;

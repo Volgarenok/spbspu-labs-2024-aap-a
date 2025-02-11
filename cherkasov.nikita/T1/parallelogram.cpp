@@ -10,7 +10,16 @@ namespace cherkasov
     vertex2{x2, y2},
     vertex3{x3, y3},
     vertex4{(x1 + x3) - x2, (y1 + y3) - y2}
-    {}
+    {
+      if ((x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3))
+      {
+        throw std::invalid_argument("no correct coordinat the parallelogram");
+      }
+      if (!(y1 == y2 || y1 == y3 || y2 == y3))
+      {
+        throw std::invalid_argument("sides of the parallelogram must parallel the x");
+      }
+    }
   double Parallelogram::getArea() const
   {
     double vector1x = vertex2.x - vertex1.x;

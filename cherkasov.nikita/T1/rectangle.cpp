@@ -7,7 +7,12 @@ namespace cherkasov
   Rectangle::Rectangle(double x1, double y1, double x2, double y2)
   : left {std::min(x1, x2), std::min(y1, y2)},
     right {std::max(x1, x2), std::max(y1, y2)}
-    {}
+    {
+      if (x1 >= x2 || y1 >= y2)
+      {
+        throw std::invalid_argument("no input coordinate");
+      }
+    }
   double Rectangle::getArea() const
   {
     double width = right.x - left.x;
