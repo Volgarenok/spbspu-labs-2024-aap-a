@@ -1,10 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include "rectangle.hpp"
-#include "square.hpp"
-#include "parallelogram.hpp"
-#include "diamond.hpp"
+#include "shapeFactory.hpp"
 #include "procesShape.hpp"
 #include "makesShape.hpp"
 
@@ -19,55 +16,7 @@ int main()
   bool scalingRequested = false;
   while (std::cin >> inputCommand)
   {
-    if (inputCommand == "RECTANGLE")
-    {
-      try
-      {
-        shapes[shapeCount] = cherkasov::getRectangle(std::cin);
-        shapeCount++;
-      }
-      catch (const std::invalid_argument& e)
-      {
-        invalidInput = true;
-      }
-    }
-    else if (inputCommand == "SQUARE")
-    {
-      try
-      {
-        shapes[shapeCount] = cherkasov::getSquare(std::cin);
-        shapeCount++;
-      }
-      catch (const std::invalid_argument& e)
-      {
-        invalidInput = true;
-      }
-    }
-    else if (inputCommand == "PARALLELOGRAM")
-    {
-      try
-      {
-        shapes[shapeCount] = cherkasov::getParallelogram(std::cin);
-        shapeCount++;
-      }
-      catch (const std::invalid_argument& e)
-      {
-        invalidInput = true;
-      }
-    }
-    else if (inputCommand == "DIAMOND")
-    {
-      try
-      {
-        shapes[shapeCount] = cherkasov::getDiamond(std::cin);
-        shapeCount++;
-      }
-      catch (const std::invalid_argument& e)
-      {
-        invalidInput = true;
-      }
-    }
-    else if (inputCommand == "SCALE")
+    if (inputCommand == "SCALE")
     {
       scalingRequested = true;
       std::cin >> p.x >> p.y >> scalingFactor;
@@ -75,9 +24,17 @@ int main()
     }
     else if (std::cin.eof())
     {
-      deleteShapes(shapes, shapeCount);
+      cherkasov::deleteShapes(shapes, shapeCount);
       std::cerr << "EOF encountered\n";
       return 1;
+    }
+    else
+    {
+      cherkasov::Shape* shape = cherkasov::createShape(inputCommand, std::cin);
+      if (shape)
+      {
+        shapes[shapeCount++] = shape;
+      }
     }
   }
   if (shapeCount == 0)
