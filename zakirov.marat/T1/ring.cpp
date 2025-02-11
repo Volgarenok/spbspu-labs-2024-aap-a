@@ -1,7 +1,6 @@
 #include "ring.hpp"
 #include <cmath>
 #include <stdexcept>
-#include "unified_shapes.hpp"
 
 zakirov::Ring::Ring(const point_t & center, double ex_radius, double in_radius):
   center_(center),

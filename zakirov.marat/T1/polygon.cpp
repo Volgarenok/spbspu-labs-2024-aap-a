@@ -2,7 +2,6 @@
 #include <cstddef>
 #include <stdexcept>
 #include "base-types.hpp"
-#include "unified_shapes.hpp"
 
 zakirov::Polygon::Polygon(size_t size, point_t * points):
   size_(size),

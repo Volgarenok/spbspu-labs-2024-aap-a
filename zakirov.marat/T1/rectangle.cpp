@@ -1,7 +1,6 @@
 #include "rectangle.hpp"
 #include <stdexcept>
 #include "base-types.hpp"
-#include "unified_shapes.hpp"
 
 zakirov::Rectangle::Rectangle(const point_t & bottom_left, const point_t & top_right):
   bottom_left_(bottom_left),

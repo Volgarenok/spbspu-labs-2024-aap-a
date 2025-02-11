@@ -3,7 +3,6 @@
 #include <cstddef>
 #include <stdexcept>
 #include "ring.hpp"
-#include "unified_shapes.hpp"
 
 zakirov::Circle::Circle(const point_t & center, double radius)
 {
