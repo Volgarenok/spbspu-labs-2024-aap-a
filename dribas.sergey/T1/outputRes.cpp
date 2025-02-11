@@ -1,6 +1,6 @@
 #include "outputRes.hpp"
-#include "getShapeInfo.hpp"
 #include <iomanip>
+#include "getShapeInfo.hpp"
 
 void dribas::outputRes(std::ostream & output, Shape ** myShape, size_t shapeSize)
 {
@@ -12,4 +12,5 @@ void dribas::outputRes(std::ostream & output, Shape ** myShape, size_t shapeSize
     output << " " << myShape[i]->getFrameRect().pos.y + (myShape[i]->getFrameRect().height) / 2.0f;
   }
   output << '\n';
+  std::cout << std::defaultfloat;
 }

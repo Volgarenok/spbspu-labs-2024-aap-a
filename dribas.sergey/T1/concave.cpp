@@ -20,17 +20,17 @@ namespace {
     return !(((a.x == b.x) && (a.x == c.x)) || (( a.y == b.y) && (a.y == c.y)));
   }
 
-  double getAllArea(dribas::point_t a, dribas::point_t b, dribas::point_t c)
+  double getTRinagleArea(dribas::point_t a, dribas::point_t b, dribas::point_t c)
   {
     return std::abs((a.x * (b.y - c.y) + b.x * (c.y - a.y) + c.x * (a.y - b.y)) / 2.0);
   }
 
   bool isPointInTriangle(dribas::point_t a, dribas::point_t b, dribas::point_t c, dribas::point_t d)
   {
-    double s = getAllArea(a, b, c);
-    double s1 = getAllArea(a, b, d);
-    double s2 = getAllArea(a, d, c);
-    double s3 = getAllArea(d, b, c);
+    double s = getTRinagleArea(a, b, c);
+    double s1 = getTRinagleArea(a, b, d);
+    double s2 = getTRinagleArea(a, d, c);
+    double s3 = getTRinagleArea(d, b, c);
     return (s == (s1 + s2 + s3));
   }
 }
@@ -40,7 +40,7 @@ dribas::Concave::Concave(dribas::point_t a, dribas::point_t b, dribas::point_t c
   b_(Triangle{b, c, d})
 {
   if (!isTriangle(d, b, c) || !isPointInTriangle(a, b, c, b) || isDupePoint(a, b, c, d)) {
-    throw std::invalid_argument("Error witch point for concave\n");
+    throw std::invalid_argument("Error witch point for concave");
   }
 }
 

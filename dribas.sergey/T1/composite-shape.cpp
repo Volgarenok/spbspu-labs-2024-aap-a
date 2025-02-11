@@ -17,14 +17,14 @@ dribas::CompositeShape::CompositeShape():
 void dribas::CompositeShape::push_back(Shape * shp)
 {
   if (size_ + 1 > 9999) {
-    std::logic_error("STACK IS FULL\n");
+    std::logic_error("MEMROY IS FULL\n");
   }
   shapes_[++size_] = shp;
 }
 void dribas::CompositeShape::pop_back()
 {
   if (size_ == 0) {
-    std::logic_error("STACK IS EMPTY\n");
+    std::logic_error("MEMORY IS EMPTY\n");
   }
   delete shapes_[--size_];
 }
@@ -38,7 +38,7 @@ dribas::Shape* dribas::CompositeShape::at(size_t id) const
 }
 dribas::Shape* dribas::CompositeShape::operator[](size_t id)
 {
-  return at(id);
+  return shapes_[id];
 }
 
 bool dribas::CompositeShape::empty() const

@@ -13,7 +13,6 @@ void scaleTri(dribas::Triangle t, double ratio, dribas::point_t Point)
   double diffenceY = (center2.y - cneter.y) * ratio * - 1;
   t.scale(ratio);
   t.move(diffenceX, diffenceY);
-
 }
 
 dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
@@ -21,9 +20,7 @@ dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
   b_(Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}}),
   c_(Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}}),
   d_(Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}})
-
 {
-  std::cout << "1\n";
   double weight = 0.0;
   double height = 0.0;
   if ((a.x == b.x && a.y == c.y) || (a.y == b.y && a.x == c.x)) {
@@ -38,6 +35,7 @@ dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
     b_ = Triangle{a, {a.x + weight, a.y}, {a.x, a.y + height}};
     c_ = Triangle{a, {a.x + weight, a.y}, {a.x, a.y - height}};
     d_ = Triangle{a, {a.x - weight, a.y}, {a.x, a.y - height}};
+
   } else if ((b.x == a.x && b.y == c.y) || (b.y == a.y && b.x == c.x)) {
     if (b.x == a.x && b.y == c.y) {
       weight = std::abs(std::abs(b.x) - std::abs(a.x));
@@ -58,16 +56,12 @@ dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
       height = std::abs(std::abs(c.y) - std::abs(a.y));
       weight = std::abs(std::abs(c.x) - std::abs(b.x));
     }
-    std::cout << "\n";
     a_ = Triangle{c, {c.x - weight, c.y}, {c.x, c.y + height}};
-    std::cout << "1\n";
     b_ = Triangle{c, {c.x + weight, c.y}, {c.x, c.y + height}};
-    std::cout << "2\n";
     c_ = Triangle{c, {c.x + weight, c.y}, {c.x, c.y - height}};
-    std::cout << "3\n";
     d_ = Triangle{c, {c.x - weight, c.y}, {c.x, c.y - height}};
   } else {
-    throw std::invalid_argument("error with rectangle size\n");
+    throw std::invalid_argument("error with diamond size");
   }
 }
 double dribas::Diamond::getArea() const
@@ -91,18 +85,19 @@ void dribas::Diamond::move(double x, double y)
   b_.move(x, y);
   c_.move(x, y);
   d_.move(x, y);
-
 }
+
 void dribas::Diamond::move(point_t point)
 {
   double moveX = point.x - this->getFrameRect().pos.x;
   double moveY = point.y - this->getFrameRect().pos.y;
   move(moveX, moveY);
 }
+
 void dribas::Diamond::scale(double ratio)
 {
   if (ratio <= 0) {
-    throw std::invalid_argument("under zero ratio\n");
+    throw std::invalid_argument("under zero ratio");
   }
   scaleTri(a_, ratio, this->getFrameRect().pos);
   scaleTri(b_, ratio, this->getFrameRect().pos);

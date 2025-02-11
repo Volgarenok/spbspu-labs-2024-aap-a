@@ -8,7 +8,7 @@ dribas::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
   rightUp_(rightUp)
 {
   if (!(leftDown.x < rightUp.x && leftDown.y < rightUp.y)) {
-    throw std::invalid_argument("error with rectangle size\n");
+    throw std::invalid_argument("error with rectangle size");
   }
 }
 double dribas::Rectangle::getArea() const
@@ -19,12 +19,11 @@ double dribas::Rectangle::getArea() const
 }
 dribas::rectangle_t dribas::Rectangle::getFrameRect() const
 {
-  rectangle_t result;
-  result.height = rightUp_.y - leftDown_.y;
-  result.width = rightUp_.x - leftDown_.x;
-  result.pos.x = leftDown_.x + (result.width / 2.0L);
-  result.pos.y = leftDown_.y + (result.height / 2.0L);
-  return result;
+  double height = rightUp_.y - leftDown_.y;
+  double width = rightUp_.x - leftDown_.x;
+  double posX = leftDown_.x + (width / 2.0L);
+  double posY = leftDown_.y + (height / 2.0L);
+  return rectangle_t{{height}, {width}, {{posX}, {posY}}};
 }
 
 void dribas::Rectangle::move(double x, double y)
@@ -46,7 +45,7 @@ void dribas::Rectangle::move(point_t centerP)
 void dribas::Rectangle::scale(double ratio)
 {
   if (ratio <= 0) {
-    throw std::invalid_argument("under zero ratio with scale\n");
+    throw std::invalid_argument("under zero ratio with scale");
   }
   rectangle_t fremRect = getFrameRect();
   point_t pos = fremRect.pos;
