@@ -7,31 +7,33 @@
 #include <iostream>
 #include <stdexcept>
 
-cherkasov::Shape* createShape(const std::string& command, std::istream& input)
+namespace cherkasov
 {
-  try
+  Shape* createShape(const std::string& command, std::istream& input)
   {
-    if (command == "RECTANGLE")
+    try
     {
-      return cherkasov::getRectangle(input);
+      if (command == "RECTANGLE")
+      {
+        return cherkasov::getRectangle(input);
+      }
+      else if (command == "SQUARE")
+      {
+        return cherkasov::getSquare(input);
+      }
+      else if (command == "PARALLELOGRAM")
+      {
+        return cherkasov::getParallelogram(input);
+      }
+      else if (command == "DIAMOND")
+      {
+        return cherkasov::getDiamond(input);
+      }
     }
-    else if (command == "SQUARE")
+    catch (const std::invalid_argument&)
     {
-      return cherkasov::getSquare(input);
+      std::cerr << "invalid input encountered\n";
     }
-    else if (command == "PARALLELOGRAM")
-    {
-      return cherkasov::getParallelogram(input);
-    }
-    else if (command == "DIAMOND")
-    {
-      return cherkasov::getDiamond(input);
-    }
+    return nullptr;
   }
-  catch (const std::invalid_argument&)
-  {
-    std::cerr << "invalid input encountered\n";
-  }
-  return nullptr;
 }
-
