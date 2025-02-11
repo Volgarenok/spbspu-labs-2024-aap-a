@@ -34,11 +34,6 @@ void cherkasov::getCoordinates(Shape** shapes, size_t shape)
 }
 void cherkasov::getScaling(Shape** shapes, size_t shape, point_t p, double scalingFactor)
 {
-  if (scalingFactor <= 0)
-  {
-    std::cerr << "Error: scale must be positive.\n";
-    return;
-  }
   for (size_t i = 0; i < shape; i++)
   {
     point_t startPoint = shapes[i]->getFrameRect().pos;

@@ -22,6 +22,7 @@ int main()
       std::cin >> p.x >> p.y >> scalingFactor;
       if (scalingFactor <= 0)
       {
+        cherkasov::deleteShapes(shapes, shapeCount);
         std::cerr << "Error: scale must be positive.\n";
         return 1;
       }
