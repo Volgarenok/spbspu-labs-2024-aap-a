@@ -33,9 +33,9 @@ namespace cherkasov
   }
   void Rectangle::move(point_t c)
   {
-    point_t Pos = getFrameRect().pos;
-    double moveX = c.x - Pos.x;
-    double moveY = c.y - Pos.y;
+    point_t currentPos = getFrameRect().pos;
+    double moveX = c.x - currentPos.x;
+    double moveY = c.y - currentPos.y;
     left.x += moveX;
     right.x += moveX;
     left.y += moveY;

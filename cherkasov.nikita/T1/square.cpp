@@ -28,9 +28,9 @@ namespace cherkasov
   }
   void Square::move(point_t c)
   {
-    point_t Pos = getFrameRect().pos;
-    double moveX = c.x - Pos.x;
-    double moveY = c.y - Pos.y;
+    point_t currentPos = getFrameRect().pos;
+    double moveX = c.x - currentPos.x;
+    double moveY = c.y - currentPos.y;
     left.x += moveX;
     left.y += moveY;
   }
@@ -45,9 +45,9 @@ namespace cherkasov
     {
       throw std::invalid_argument("k must be positive");
     }
-    point_t Pos = getFrameRect().pos;
+    point_t currentPos = getFrameRect().pos;
     length *= k;
-    left.x = Pos.x - (length / 2);
-    left.y = Pos.y - (length / 2);
+    left.x = currentPos.x - (length / 2);
+    left.y = currentPos.y - (length / 2);
   }
 }

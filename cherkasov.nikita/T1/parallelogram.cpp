@@ -45,9 +45,9 @@ namespace cherkasov
   }
   void Parallelogram::move(point_t c)
   {
-    point_t Pos = getFrameRect().pos;
-    double dx = c.x - Pos.x;
-    double dy = c.y - Pos.y;
+    point_t currentPos = getFrameRect().pos;
+    double dx = c.x - currentPos.x;
+    double dy = c.y - currentPos.y;
     move(dx, dy);
   }
   void Parallelogram::move(double dx, double dy)
