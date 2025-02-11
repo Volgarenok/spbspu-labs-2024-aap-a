@@ -6,6 +6,7 @@ namespace belobrov
   const char* checkSign(const char* str);
   const char* idDigit(const char* str);
   const char* checkUnsigned(const char* str);
+  const char* checkExponent(const char* str);
 }
 
 const char* belobrov::checkChar(const char* str, char target)
@@ -42,14 +43,24 @@ const char* belobrov::isDigit(const char* str)
 
 const char* belobrov::checkUnsigned(const char* str)
 {
-    if (!str)
-    {
-        return nullptr;
-    }
-    auto next = isDigit(str);
-    if (auto continued = checkUnsigned(next))
-    {
-        return continued;
-    }
-    return next;
+  if (!str) {
+    return nullptr;
+  }
+  auto next = isDigit(str);
+  if (auto continued = checkUnsigned(next)) {
+    return continued;
+  }
+  return next;
+}
+
+const char* belobrov::checkExponent(const char* str)
+{
+  if (!str) {
+    return nullptr;
+  }
+  auto next = checkChar(str, 'E');
+  if (auto continued = checkSign(next)) {
+    return checkUnsigned(continued);
+  }
+  return checkUnsigned(next);
 }
