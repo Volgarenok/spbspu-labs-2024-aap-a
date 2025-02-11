@@ -6,6 +6,7 @@
 #include "ring.hpp"
 #include "circle.hpp"
 #include "ellipse.hpp"
+#include "shape.hpp"
 
 namespace sharifullina
 {

@@ -19,24 +19,8 @@ int main()
   bool flag = false;
   double scaleK = 0.0;
   point_t scaleCenter = {0.0, 0.0};
-  while (shapeType != "SCALE")
+  while (std::cin >> shapeType && shapeType != "SCALE")
   {
-    if (std::cin.eof())
-    {
-      std::cerr << "Incorrect scale\n";
-      destroyShapes(shapes, count);
-      return 1;
-    }
-    std::cin >> shapeType;
-    if (shapeType == "SCALE")
-    {
-      double p1 = 0.0;
-      double p2 = 0.0;
-      std::cin >> p1 >> p2;
-      scaleCenter = {p1, p2};
-      std::cin >> scaleK;
-      break;
-    }
     try
     {
       shapes[count] = createShape(std::cin, shapeType);
@@ -53,12 +37,15 @@ int main()
       flag = true;
     }
   }
-  if (scaleK <= 0)
+  double p1 = 0.0;
+  double p2 = 0.0;
+  if (!(std::cin >> p1 >> p2 >> scaleK) || scaleK <= 0)
   {
     std::cerr << "Incorrect scale\n";
     destroyShapes(shapes, count);
     return 1;
   }
+  scaleCenter = {p1, p2};
   if (count == 0)
   {
     std::cerr << "There are no shapes\n";

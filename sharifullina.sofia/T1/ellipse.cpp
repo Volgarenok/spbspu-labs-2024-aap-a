@@ -35,7 +35,7 @@ void sharifullina::Ellipse::move(double dx, double dy)
   center_.y += dy;
 }
 
-void sharifullina::Ellipse::scale(double k)
+void sharifullina::Ellipse::scaleWithoutCheck(double k)
 {
   radiusX_ *= k;
   radiusY_ *= k;

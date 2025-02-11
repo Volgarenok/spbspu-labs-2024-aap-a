@@ -38,12 +38,8 @@ void sharifullina::Ring::move(double dx, double dy)
   outer_.move(dx, dy);
 }
 
-void sharifullina::Ring::scale(double k)
+void sharifullina::Ring::scaleWithoutCheck(double k)
 {
-  if (k <= 0)
-  {
-    throw std::invalid_argument("Scale factor must be positive.");
-  }
   inner_.scale(k);
   outer_.scale(k);
 }

@@ -13,7 +13,7 @@ namespace sharifullina
     rectangle_t getFrameRect() const override;
     void move(point_t p) override;
     void move(double dx, double dy) override;
-    void scale(double k) override;
+    void scaleWithoutCheck(double k) override;
   private:
     point_t center_;
     double radiusX_;

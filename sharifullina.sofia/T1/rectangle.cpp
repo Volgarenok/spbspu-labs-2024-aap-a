@@ -47,7 +47,7 @@ void sharifullina::Rectangle::move(double dx, double dy)
   uppRight_ = {uppRight_.x + dx, uppRight_.y + dy};
 }
 
-void sharifullina::Rectangle::scale(double k)
+void sharifullina::Rectangle::scaleWithoutCheck(double k)
 {
   point_t center = getFrameRect().pos;
   double xLeft = center.x - (center.x - lowLeft_.x) * k;
