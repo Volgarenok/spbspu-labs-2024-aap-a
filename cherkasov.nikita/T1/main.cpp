@@ -53,10 +53,10 @@ int main()
     std::cerr << "invalid input encountered\n";
   }
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << cherkasov::getSumArea(shapes, shapeCount) << std::endl;
+  std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
   cherkasov::getScaling(shapes, shapeCount, p, scalingFactor);
-  std::cout << cherkasov::getSumArea(shapes, shapeCount) << std::endl;
+  std::cout << cherkasov::getSumArea(shapes, shapeCount) << "\n";
   cherkasov::getCoordinates(shapes, shapeCount);
   cherkasov::deleteShapes(shapes, shapeCount);
   return 0;
