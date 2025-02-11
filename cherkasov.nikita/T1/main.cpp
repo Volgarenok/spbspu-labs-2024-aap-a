@@ -36,10 +36,18 @@ int main()
     }
     else
     {
-      cherkasov::Shape* shape = cherkasov::createShape(inputCommand, std::cin);
-      if (shape)
+      try
       {
-        shapes[shapeCount++] = shape;
+        cherkasov::Shape* shape = cherkasov::createShape(inputCommand, std::cin);
+        if (shape)
+        {
+          shapes[shapeCount++] = shape;
+        }
+      }
+      catch (const std::invalid_argument& e)
+      {
+        std::cerr << "invalid input encountered: " << e.what() << "\n";
+        invalidInput = true;
       }
     }
   }
