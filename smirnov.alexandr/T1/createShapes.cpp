@@ -43,6 +43,12 @@ smirnov::Diamond * smirnov::createDiamond(std::istream & in)
   point_t p1 = {coordsArray[0], coordsArray[1]};
   point_t p2 = {coordsArray[2], coordsArray[3]};
   point_t p3 = {coordsArray[4], coordsArray[5]};
+  bool isHorizontal = (p1.y == p3.y || p1.y == p2.y || p2.y == p3.y);
+  bool isVertical = (p1.x == p2.x || p1.x == p3.x || p2.x == p3.x);
+  if (!(isHorizontal) || !(isVertical))
+  {
+    throw std::invalid_argument("Diagonals must be parallel to the coordinate axes");
+  }
   point_t center;
   double dx = 0.0, dy = 0.0;
   if (p1.x == p2.x)
