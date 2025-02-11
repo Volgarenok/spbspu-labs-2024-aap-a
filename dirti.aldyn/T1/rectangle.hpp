@@ -1,0 +1,20 @@
+#ifndef RECTANGLE_HPP
+#define REVTANGLE_HPP
+#include "shape.hpp"
+
+namespace dirti
+{
+  struct Rectangle: Shape
+  {
+    Rectangle(const point_t left_low, const point_t right_high);
+    double getArea() const override;
+    rectangle_t getFrameRect() const override;
+    void move(point_t point) override;
+    void move(double x, double y) override;
+    void scale(double koef) override;
+  private:
+    point_t left_low_;
+    point_t right_high_;
+  };
+}
+#endif
