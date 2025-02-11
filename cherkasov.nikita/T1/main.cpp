@@ -20,6 +20,11 @@ int main()
     {
       scalingRequested = true;
       std::cin >> p.x >> p.y >> scalingFactor;
+      if (scalingFactor <= 0)
+      {
+        std::cerr << "Error: scale must be positive.\n";
+        return 1;
+      }
       break;
     }
     else if (std::cin.eof())
