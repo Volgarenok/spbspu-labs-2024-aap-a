@@ -10,7 +10,7 @@
 
 int main()
 {
-  cherkasov::Shape* shapes[1000] = {};
+  cherkasov::Shape* shapes[10000] = {};
   std::string inputCommand;
   size_t shapeCount = 0;
   bool invalidInput = false;
@@ -96,11 +96,11 @@ int main()
     std::cerr << "invalid input encountered\n";
   }
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << cherkasov::calculArea(shapes, shapeCount) << std::endl;
-  cherkasov::outputFrameCoordinates(shapes, shapeCount);
-  cherkasov::scaling(shapes, shapeCount, p, scalingFactor);
-  std::cout << cherkasov::calculArea(shapes, shapeCount) << std::endl;
-  cherkasov::outputFrameCoordinates(shapes, shapeCount);
+  std::cout << cherkasov::getSumArea(shapes, shapeCount) << std::endl;
+  cherkasov::getCoordinates(shapes, shapeCount);
+  cherkasov::getScaling(shapes, shapeCount, p, scalingFactor);
+  std::cout << cherkasov::getSumArea(shapes, shapeCount) << std::endl;
+  cherkasov::getCoordinates(shapes, shapeCount);
   cherkasov::deleteShapes(shapes, shapeCount);
   return 0;
 }

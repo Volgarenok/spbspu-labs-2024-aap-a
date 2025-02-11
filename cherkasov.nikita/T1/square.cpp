@@ -1,4 +1,5 @@
 #include "square.hpp"
+#include <stdexcept>
 #include <cmath>
 
 namespace cherkasov

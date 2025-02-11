@@ -5,9 +5,9 @@
 
 namespace cherkasov
 {
-  double calculArea(Shape** shapes, size_t shape);
+  double getSumArea(Shape** shapes, size_t shape);
   void deleteShapes(Shape** shapes, size_t shape);
-  void outputFrameCoordinates(Shape** shapes, size_t shape);
-  void scaling(Shape** shapes, size_t shape, point_t p, double scalingFactor);
+  void getCoordinates(Shape** shapes, size_t shape);
+  void getScaling(Shape** shapes, size_t shape, point_t p, double scalingFactor);
 }
 #endif

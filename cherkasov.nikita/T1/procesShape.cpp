@@ -3,7 +3,7 @@
 #include "rectangle.hpp"
 #include <iostream>
 
-double cherkasov::calculArea(Shape** shapes, size_t shape)
+double cherkasov::getSumArea(Shape** shapes, size_t shape)
 {
   double totalArea = 0;
   for (size_t i = 0; i < shape; i++)
@@ -19,7 +19,7 @@ void cherkasov::deleteShapes(Shape** shapes, size_t shape)
     delete shapes[i];
   }
 }
-void cherkasov::outputFrameCoordinates(Shape** shapes, size_t shape)
+void cherkasov::getCoordinates(Shape** shapes, size_t shape)
 {
   for (size_t i = 0; i < shape; i++)
   {
@@ -32,7 +32,7 @@ void cherkasov::outputFrameCoordinates(Shape** shapes, size_t shape)
   }
   std::cout << "\n";
 }
-void cherkasov::scaling(Shape** shapes, size_t shape, point_t p, double scalingFactor)
+void cherkasov::getScaling(Shape** shapes, size_t shape, point_t p, double scalingFactor)
 {
   if (scalingFactor <= 0)
   {
