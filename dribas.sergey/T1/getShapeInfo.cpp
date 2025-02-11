@@ -29,24 +29,32 @@ void dribas::scaling(dribas::Shape** myShapes, size_t shapeCount, dribas::point_
     myShapes[i]->move(diffenceX, diffenceY);
   }
 }
+bool getPoint(std::istream& in, size_t pointCount, dribas::point_t * points) {
+  size_t i = 0;
+  for (; i < pointCount && in; i++) {
+    double a = 0;
+    double b = 0;
+    in >> a >> b;
+    points[i] = {a,b};
+  }
+  return i == pointCount;
+}
 
 int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream& output, Shape** myShapes)
 {
-  std::string Mystr;
+  std::string InputStr;
   int shapesCount = 0;
   bool scaled = false;
   try {
-    while (input >> Mystr) {
+    while (input >> InputStr) {
       try {
-        if (Mystr == "RECTANGLE") {
-          point_t down, up;
-          input >> down.x;
-          input >> down.y;
-          input >> up.x;
-          input >> up.y;
-          myShapes[shapesCount] =  new Rectangle{down, up};
-          shapesCount++;
-        } else if (Mystr == "TRIANGLE") {
+        if (InputStr == "RECTANGLE") {
+          point_t pointR[2] = {};
+          if (getPoint(std::cin, 2, pointR)) {
+            myShapes[shapesCount] =  new Rectangle{pointR[0], pointR[1]};
+            shapesCount++;
+          }
+        } else if (InputStr == "TRIANGLE") {
           point_t a, b, c;
           input >> a.x;
           input >> a.y;
@@ -56,7 +64,7 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
           input >> c.y;
           myShapes[shapesCount] =  new Triangle{a, b, c};
           shapesCount++;
-        } else if (Mystr == "DIAMOND") {
+        } else if (InputStr == "DIAMOND") {
           point_t a, b, c;
           input >> a.x;
           input >> a.y;
@@ -66,7 +74,7 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
           input >> c.y;
           myShapes[shapesCount] =  new Diamond{a, b, c};
           shapesCount++;
-        } else if (Mystr == "CONCAVE") {
+        } else if (InputStr == "CONCAVE") {
           point_t a, b, c, d;
           input >> a.x;
           input >> a.y;
@@ -83,7 +91,7 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
         error << e.what() << '\n';
       }
 
-      if (Mystr == "SCALE") {
+      if (InputStr == "SCALE") {
         scaled = true;
         if (shapesCount == 0) {
           error << "No shapes for scale\n";

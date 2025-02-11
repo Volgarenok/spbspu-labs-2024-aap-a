@@ -23,7 +23,7 @@ dribas::rectangle_t dribas::Rectangle::getFrameRect() const
   double width = rightUp_.x - leftDown_.x;
   double posX = leftDown_.x + (width / 2.0L);
   double posY = leftDown_.y + (height / 2.0L);
-  return rectangle_t{{height}, {width}, {{posX}, {posY}}};
+  return rectangle_t{{width}, {height}, {{posX}, {posY}}};
 }
 
 void dribas::Rectangle::move(double x, double y)

@@ -14,7 +14,7 @@ dribas::Triangle::Triangle(point_t a, point_t b, point_t c):
 }
 double dribas::Triangle::getArea() const
 {
-  return std::abs((b_.x - a_.x) * (c_.y - a_.y) - (c_.x - a_.x) * (b_.y - a_.y)) / 2.0;
+  return std::abs(((b_.x - a_.x) * (c_.y - a_.y) - (c_.x - a_.x) * (b_.y - a_.y))) / 2.0;
 }
 dribas::rectangle_t dribas::Triangle::getFrameRect() const
 {
@@ -26,7 +26,7 @@ dribas::rectangle_t dribas::Triangle::getFrameRect() const
   double width = maxX - minX;
   double posX = minX + (width / 2.0);
   double posY = minY + (height / 2.0);
-  return rectangle_t{{height}, {width}, {{posX},{posY}}};
+  return rectangle_t{{width}, {height}, {{posX},{posY}}};
 }
 
 void dribas::Triangle::move(double x, double y)
