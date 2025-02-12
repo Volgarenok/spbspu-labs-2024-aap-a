@@ -2,7 +2,7 @@
 #include "shapeManip.hpp"
 
 namespace {
-  bool hasSameVerteces(gavrilova::point_t* verteces, size_t size)
+  bool hasSameVerteces(const gavrilova::point_t* verteces, size_t size)
   {
     for (size_t i = 0; i < (size - 1); ++i) {
       for (size_t j = (i + 1); j < size; ++j) {
@@ -22,8 +22,6 @@ namespace {
 }
 
 
-
-
 gavrilova::Polygon::Polygon(size_t nPoints, const point_t* verteces):
   size_(nPoints - 2),
   triangles_(new Shape*[size_])
@@ -31,7 +29,7 @@ gavrilova::Polygon::Polygon(size_t nPoints, const point_t* verteces):
   if (nPoints < 3) {
     throw std::logic_error("Polygon must have at least 3 vertices.");
   }
-  if (!nVert || hasSameVerteces(verteces, nVert)) {
+  if (!nPoints || ::hasSameVerteces(verteces, nPoints)) {
     throw std::logic_error("Errors in polygon parametrs");
   }
 
