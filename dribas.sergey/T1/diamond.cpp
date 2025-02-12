@@ -3,15 +3,15 @@
 #include <stdexcept>
 #include "triangle.hpp"
 #include "getShapeInfo.hpp"
-
-dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
-  a_(Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}}),
-  b_(Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}}),
-  c_(Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}}),
-  d_(Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}})
+dribas::Triangle * initialDiamond(dribas::point_t a, dribas::point_t b, dribas::point_t c)
 {
   double weight = 0.0;
   double height = 0.0;
+  dribas::Triangle a_ = dribas::Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}};
+  dribas::Triangle b_ = dribas::Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}};
+  dribas::Triangle c_ = dribas::Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}};
+  dribas::Triangle d_ = dribas::Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}};
+
   if ((a.x == b.x && a.y == c.y) || (a.y == b.y && a.x == c.x)) {
     if (a.x == b.x && a.y == c.y) {
       weight = std::abs(std::abs(a.x) - std::abs(b.x));
@@ -20,10 +20,10 @@ dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
       height = std::abs(std::abs(a.y) - std::abs(b.y));
       weight = std::abs(std::abs(a.x) - std::abs(c.x));
     }
-    a_ = Triangle{a, {a.x - weight, a.y}, {a.x, a.y + height}};
-    b_ = Triangle{a, {a.x + weight, a.y}, {a.x, a.y + height}};
-    c_ = Triangle{a, {a.x + weight, a.y}, {a.x, a.y - height}};
-    d_ = Triangle{a, {a.x - weight, a.y}, {a.x, a.y - height}};
+    a_ = dribas::Triangle{a, {a.x - weight, a.y}, {a.x, a.y + height}};
+    b_ = dribas::Triangle{a, {a.x + weight, a.y}, {a.x, a.y + height}};
+    c_ = dribas::Triangle{a, {a.x + weight, a.y}, {a.x, a.y - height}};
+    d_ = dribas::Triangle{a, {a.x - weight, a.y}, {a.x, a.y - height}};
 
   } else if ((b.x == a.x && b.y == c.y) || (b.y == a.y && b.x == c.x)) {
     if (b.x == a.x && b.y == c.y) {
@@ -33,10 +33,10 @@ dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
       height = std::abs(std::abs(b.y) - std::abs(a.y));
       weight = std::abs(std::abs(b.x) - std::abs(c.x));
     }
-    a_ = Triangle{b, {b.x - weight, b.y}, {b.x, b.y + height}};
-    b_ = Triangle{b, {b.x + weight, b.y}, {b.x, b.y + height}};
-    c_ = Triangle{b, {b.x + weight, b.y}, {b.x, b.y - height}};
-    d_ = Triangle{b, {b.x - weight, b.y}, {b.x, b.y - height}};
+    a_ = dribas::Triangle{b, {b.x - weight, b.y}, {b.x, b.y + height}};
+    b_ = dribas::Triangle{b, {b.x + weight, b.y}, {b.x, b.y + height}};
+    c_ = dribas::Triangle{b, {b.x + weight, b.y}, {b.x, b.y - height}};
+    d_ = dribas::Triangle{b, {b.x - weight, b.y}, {b.x, b.y - height}};
   } else if ((c.x == a.x && c.y == b.y) || (c.y == a.y && c.x == b.x)) {
     if (c.x == a.x && c.y == b.y) {
       weight = std::abs(std::abs(c.x) - std::abs(a.x));
@@ -45,14 +45,34 @@ dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
       height = std::abs(std::abs(c.y) - std::abs(a.y));
       weight = std::abs(std::abs(c.x) - std::abs(b.x));
     }
-    a_ = Triangle{c, {c.x - weight, c.y}, {c.x, c.y + height}};
-    b_ = Triangle{c, {c.x + weight, c.y}, {c.x, c.y + height}};
-    c_ = Triangle{c, {c.x + weight, c.y}, {c.x, c.y - height}};
-    d_ = Triangle{c, {c.x - weight, c.y}, {c.x, c.y - height}};
+    a_ = dribas::Triangle{c, {c.x - weight, c.y}, {c.x, c.y + height}};
+    b_ = dribas::Triangle{c, {c.x + weight, c.y}, {c.x, c.y + height}};
+    c_ = dribas::Triangle{c, {c.x + weight, c.y}, {c.x, c.y - height}};
+    d_ = dribas::Triangle{c, {c.x - weight, c.y}, {c.x, c.y - height}};
   } else {
     throw std::invalid_argument("error with diamond size");
   }
+  dribas::Triangle triangle[4] = {a_, b_, c_, d_};
+
+  return triangle;
 }
+dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
+  a_(Triangle{a, b, c}),
+  b_(Triangle{b, a, c}),
+  c_(Triangle{c, a, b}),
+  d_(Triangle{c, b, a})
+{
+  try {
+    Triangle * dmnd = initialDiamond(a, b, c);
+    a_ = dmnd[0];
+    b_ = dmnd[1];
+    c_ = dmnd[2];
+    d_ = dmnd[3];
+  } catch(...) {
+    throw;
+  }
+}
+
 double dribas::Diamond::getArea() const
 {
   return a_.getArea() * 4.0f ;
