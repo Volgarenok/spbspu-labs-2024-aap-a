@@ -49,7 +49,7 @@ bool getPoint(std::istream& in, size_t pointCount, dribas::point_t * points) {
   return i == pointCount;
 }
 
-int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream& output, Shape** Shapes, double* scalingFactor)
+int dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** Shapes, double* scalingFactor)
 {
   std::string InputStr;
   int shapesCount = 0;
@@ -91,21 +91,9 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, std::ostream&
           error << "No shapes for scale\n";
           return -1;
         }
-        point_t toCenter;
-        double ratio;
-        input >> toCenter.x;
-        input >> toCenter.y;
-        input >> ratio;
-        try {
-          outputRes(output, Shapes, shapesCount);
-          scalingAll(Shapes, shapesCount, toCenter, ratio);
-          outputRes(output, Shapes, shapesCount);
-          return shapesCount;
-        } catch (const std::invalid_argument& e) {
-          error << e.what() << '\n';
-          clear(Shapes, shapesCount);
-          return -1;
-        }
+        input >> scalingFactor[0];
+        input >> scalingFactor[1];
+        input >> scalingFactor[2];
       }
     }
   } catch (const std::bad_alloc& e) {

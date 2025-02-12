@@ -7,7 +7,7 @@
 
 namespace dribas
 {
-  int getShapeInfo(std::istream& input, std::ostream& error, std::ostream& output, Shape** myShapes, double* scalingFactor);
+  int getShapeInfo(std::istream& input, std::ostream& error, Shape** myShapes, double* scalingFactor);
   void clear(Shape ** myshape, size_t shapeCount);
   double getAllArea(Shape** myShapes, size_t shapeCount);
   void scalingAll(Shape** myShapes, size_t shapeCount, point_t center, double ratio);
