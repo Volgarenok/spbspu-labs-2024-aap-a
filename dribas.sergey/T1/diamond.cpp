@@ -4,17 +4,6 @@
 #include "triangle.hpp"
 #include "getShapeInfo.hpp"
 
-void scaleTri(dribas::Triangle t, double ratio, dribas::point_t Point)
-{
-  dribas::point_t cneter = t.getFrameRect().pos;
-  t.move(Point);
-  dribas::point_t center2 = t.getFrameRect().pos;
-  double diffenceX = (center2.x - cneter.x) * ratio * - 1;
-  double diffenceY = (center2.y - cneter.y) * ratio * - 1;
-  t.scale(ratio);
-  t.move(diffenceX, diffenceY);
-}
-
 dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
   a_(Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}}),
   b_(Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}}),
@@ -99,8 +88,8 @@ void dribas::Diamond::scale(double ratio)
   if (ratio <= 0) {
     throw std::invalid_argument("under zero ratio");
   }
-  scaleTri(a_, ratio, this->getFrameRect().pos);
-  scaleTri(b_, ratio, this->getFrameRect().pos);
-  scaleTri(c_, ratio, this->getFrameRect().pos);
-  scaleTri(d_, ratio, this->getFrameRect().pos);
+  scaleOne(a_, ratio, this->getFrameRect().pos);
+  scaleOne(b_, ratio, this->getFrameRect().pos);
+  scaleOne(c_, ratio, this->getFrameRect().pos);
+  scaleOne(d_, ratio, this->getFrameRect().pos);
 }

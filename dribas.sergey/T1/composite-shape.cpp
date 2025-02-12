@@ -89,5 +89,5 @@ void dribas::CompositeShape::move(point_t point)
 void dribas::CompositeShape::scale(double ratio)
 {
   point_t center = this->getFrameRect().pos;
-  scaling(shapes_, size_, center, ratio);
+  scalingAll(shapes_, size_, center, ratio);
 }
