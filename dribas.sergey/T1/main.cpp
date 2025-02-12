@@ -29,7 +29,7 @@ int main()
   } catch (const std::invalid_argument& e) {
     std::cerr << e.what() << '\n';
     dribas::clear(shapes, shapeCount);
-    return 1; 
+    return 1;
   }
   dribas::clear(shapes, shapeCount);
   return 0;
