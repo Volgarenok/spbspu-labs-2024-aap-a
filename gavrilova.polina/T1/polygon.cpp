@@ -26,13 +26,12 @@ gavrilova::Polygon::Polygon(size_t nPoints, const point_t* verteces):
 }
 
 gavrilova::Polygon::Polygon(const Polygon& other):
-  size_(0),
+  size_(other.size_),
   triangles_(new Shape*[other.size_])
 {
-  for (size_t i = 0; i < other.size_; ++i) {
+  for (size_t i = 0; i < size_; ++i) {
     try {
       triangles_[i] = other.triangles_[i]->clone();
-      ++size_;
     } catch (const std::bad_alloc&) {
       clear();
       throw;
