@@ -22,10 +22,15 @@ int main()
     return 1;
   }
   dribas::point_t scalePoint = {scalingFactor[0], scalingFactor[1]};
-
-  dribas::outputRes(std::cout, shapes, shapeCount);
-  dribas::scalingAll(shapes, shapeCount, scalePoint, scalingFactor[2]);
-  dribas::outputRes(std::cout, shapes, shapeCount);
+  try {
+    dribas::outputRes(std::cout, shapes, shapeCount);
+    dribas::scalingAll(shapes, shapeCount, scalePoint, scalingFactor[2]);
+    dribas::outputRes(std::cout, shapes, shapeCount);
+  } catch (const std::invalid_argument& e) {
+    std::cerr << e.what() << '\n';
+    dribas::clear(shapes, shapeCount);
+    return 1; 
+  }
   dribas::clear(shapes, shapeCount);
   return 0;
 }
