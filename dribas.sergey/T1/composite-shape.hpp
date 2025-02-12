@@ -10,20 +10,22 @@ namespace dribas
   {
   public:
     CompositeShape();
-    CompositeShape(const CompositeShape& shp);
-    CompositeShape(CompositeShape&& shp);
+    CompositeShape(const CompositeShape& shp) noexcept = default;
+    CompositeShape(CompositeShape&& shp) noexcept = default;
+    CompositeShape & operator=(const CompositeShape & shp) noexcept = default;
+    CompositeShape & operator=(CompositeShape && shp) noexcept = default;
     ~CompositeShape();
     Shape * operator[](size_t id);
 
-    double getArea() const;
+    double getArea() const noexcept;
     rectangle_t getFrameRect() const;
     void push_back(Shape * shp);
-    Shape * at(size_t id) const;
+    Shape * at(size_t id);
     void pop_back();
-    bool empty() const;
-    size_t size() const;
+    bool empty() const noexcept;
+    size_t size() const noexcept;
     void move(point_t point);
-    void move(double x, double y) ;
+    void move(double x, double y);
     void scale(double ratio);
   private:
     Shape* shapes_[10000];

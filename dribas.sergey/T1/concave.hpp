@@ -16,8 +16,8 @@ namespace dribas
     void move(double x, double y) override;
     void scale(double ratio) override;
   private:
-    Triangle a_{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}};
-    Triangle b_{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}};
+    Triangle a_;
+    Triangle b_;
   };
 }
 #endif

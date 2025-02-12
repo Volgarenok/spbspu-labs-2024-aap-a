@@ -5,6 +5,8 @@
 #include "base-types.hpp"
 #include "getShapeInfo.hpp"
 
+const double minDouble = std::numeric_limits<double>::lowest();
+const double maxDouble = std::numeric_limits<double>::max();
 
 dribas::CompositeShape::CompositeShape():
   size_(0)
@@ -17,19 +19,19 @@ dribas::CompositeShape::CompositeShape():
 void dribas::CompositeShape::push_back(Shape * shp)
 {
   if (size_ + 1 > 9999) {
-    std::logic_error("MEMROY IS FULL\n");
+    std::logic_error("MEMROY IS FULL");
   }
   shapes_[++size_] = shp;
 }
 void dribas::CompositeShape::pop_back()
 {
   if (size_ == 0) {
-    std::logic_error("MEMORY IS EMPTY\n");
+    std::logic_error("MEMORY IS EMPTY");
   }
   delete shapes_[--size_];
 }
 
-dribas::Shape* dribas::CompositeShape::at(size_t id) const
+dribas::Shape* dribas::CompositeShape::at(size_t id)
 {
   if (id > size_) {
     throw std::logic_error("ID OUT OF RANGE\n");
@@ -41,15 +43,15 @@ dribas::Shape* dribas::CompositeShape::operator[](size_t id)
   return shapes_[id];
 }
 
-bool dribas::CompositeShape::empty() const
+bool dribas::CompositeShape::empty() const noexcept
 {
   return size_ == 0;
 }
-size_t dribas::CompositeShape::size() const
+size_t dribas::CompositeShape::size() const noexcept
 {
   return size_;
 }
-double dribas::CompositeShape::getArea() const
+double dribas::CompositeShape::getArea() const noexcept
 {
   double area = 0.0;
   for (size_t i = 0; i < size_; i++) {
@@ -59,10 +61,10 @@ double dribas::CompositeShape::getArea() const
 }
 dribas::rectangle_t dribas::CompositeShape::getFrameRect() const
 {
-  double minY = std::numeric_limits<double>::lowest();
-  double minX = std::numeric_limits<double>::lowest();
-  double maxX = std::numeric_limits<double>::max();
-  double maxY = std::numeric_limits<double>::max();
+  double minY = minDouble;
+  double minX = minDouble;
+  double maxX = maxDouble;
+  double maxY = maxDouble;
 
   for (size_t i = 0; i < size_; i++) {
     rectangle_t frem = shapes_[size_]->getFrameRect();
