@@ -67,7 +67,6 @@ gavrilova::Polygon* make_polygon(std::istream& in)
       verteces = new_verteces;
       capacityVert += 10;
     }
-    in >> verteces[nVert].x;
   }
   if (!nVert || hasSameVerteces(verteces, nVert) || !in) {
     delete[] verteces;
