@@ -30,7 +30,6 @@ namespace alymova
     bool empty() const noexcept;
     size_t size() const noexcept;
   private:
-    void copyArray(const Shape* const* other_shapes);
     void swap(CompositeShape& other) noexcept;
     void clear(Shape** shapes) noexcept;
 

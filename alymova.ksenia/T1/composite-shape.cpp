@@ -14,7 +14,11 @@ alymova::CompositeShape::CompositeShape(const CompositeShape& comp_shape):
 {
   try
   {
-    copyArray(comp_shape.shapes_);
+    for (size_t i = 0; i < size_; i++)
+    {
+      delete shapes_[i];
+      shapes_[i] = comp_shape[i]->clone();
+    }
   }
   catch (const std::bad_alloc& e)
   {
@@ -147,14 +151,6 @@ bool alymova::CompositeShape::empty() const noexcept
 size_t alymova::CompositeShape::size() const noexcept
 {
   return size_;
-}
-void alymova::CompositeShape::copyArray(const Shape* const* other_shapes)
-{
-  for (size_t i = 0; i < size_; i++)
-  {
-    delete shapes_[i];
-    shapes_[i] = other_shapes[i]->clone();
-  }
 }
 void alymova::CompositeShape::swap(CompositeShape& other) noexcept
 {
