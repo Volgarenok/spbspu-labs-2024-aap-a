@@ -14,14 +14,13 @@ gavrilova::CompositeShape::CompositeShape(size_t capacity):
 {}
 
 gavrilova::CompositeShape::CompositeShape(const CompositeShape& other):
-  size_(0),
+  size_(other.size_),
   capacity_(other.capacity_),
   shapes_(new Shape*[capacity_])
 {
   for (size_t i = 0; i < size_; ++i) {
     try {
       shapes_[i] = other.shapes_[i]->clone();
-      ++size_;
     } catch (const std::bad_alloc&) {
       clear();
       throw;
