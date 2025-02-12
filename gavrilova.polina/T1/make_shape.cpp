@@ -60,7 +60,13 @@ gavrilova::Polygon* make_polygon(std::istream& in)
     }
     ++nVert;
     if (nVert >= capacityVert) {
-      gavrilova::point_t* new_verteces = new gavrilova::point_t[capacityVert + 10];
+      try {
+        gavrilova::point_t* new_verteces = new gavrilova::point_t[capacityVert + 10];
+      } catch(const std::bad_alloc&) {
+        delete[] verteces;
+        throw;
+      }
+      
       for (size_t i = 0; i < nVert; ++i) {
         new_verteces[i] = verteces[i];
       }
