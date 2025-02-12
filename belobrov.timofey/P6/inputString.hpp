@@ -1,5 +1,5 @@
-#ifndef CHECKSTRING_HPP
-#define CHECKSTRING_HPP
+#ifndef INPUTSTRING_HPP
+#define INPUTSTRING_HPP
 
 #include <iostream>
 
