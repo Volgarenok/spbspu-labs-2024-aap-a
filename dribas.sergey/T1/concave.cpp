@@ -72,3 +72,7 @@ void dribas::Concave::scale(double ratio)
   a_.scale(ratio);
   b_.scale(ratio);
 }
+dribas::Shape* dribas::Concave::clone() const
+{
+  return new Concave(*this);
+}

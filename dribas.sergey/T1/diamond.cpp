@@ -113,3 +113,8 @@ void dribas::Diamond::scale(double ratio)
   scaleOne(c_, ratio, this->getFrameRect().pos);
   scaleOne(d_, ratio, this->getFrameRect().pos);
 }
+
+dribas::Shape* dribas::Diamond::clone() const
+{
+  return new Diamond(*this);
+}

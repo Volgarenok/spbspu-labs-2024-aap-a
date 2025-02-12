@@ -64,3 +64,8 @@ void dribas::Triangle::scale(double ratio)
   c_.x = (c_.x - pos.x) * ratio + pos.x;
   c_.y = (c_.y - pos.y) * ratio + pos.y;
 }
+
+dribas::Shape* dribas::Triangle::clone() const
+{
+  return new Triangle(*this);
+}

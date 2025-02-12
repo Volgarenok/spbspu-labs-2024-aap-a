@@ -10,6 +10,7 @@ namespace dribas
   {
   public:
     Concave(point_t a, point_t b, point_t c, point_t d);
+    Shape* clone() const override;
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t point) override;

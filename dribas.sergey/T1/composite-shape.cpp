@@ -16,6 +16,64 @@ dribas::CompositeShape::CompositeShape():
   }
 }
 
+dribas::CompositeShape::CompositeShape(CompositeShape&& shp) noexcept:
+  size_(shp.size_)
+{
+  for (size_t i = 0; i < shp.size_; i++) {
+    shapes_[i] = shp.shapes_[i];
+    shp.shapes_[i] = nullptr;
+  }
+  shp.size_ = 0; 
+}
+
+dribas::CompositeShape& dribas::CompositeShape::operator=(const CompositeShape& shp)
+{
+  if (this != &shp) {
+    for (size_t i = 0; i < size_; ++i) {
+      delete shapes_[i];
+    }
+    size_ = shp.size_;
+    for (size_t i = 0; i < size_; ++i) {
+      shapes_[i] = shp.shapes_[i]->clone();
+    }
+    for (size_t i = size_; i < 10000; ++i) {
+      shapes_[i] = nullptr;
+    }
+  }
+  return *this;
+}
+
+dribas::CompositeShape& dribas::CompositeShape::operator=(CompositeShape&& shp) noexcept
+{
+  if (this != &shp) {
+    for (size_t i = 0; i < size_; ++i) {
+      delete shapes_[i];
+    }
+    size_ = shp.size_;
+    for (size_t i = 0; i < size_; ++i) {
+      shapes_[i] = shp.shapes_[i];
+      shp.shapes_[i] = nullptr;
+    }
+    shp.size_ = 0;
+  }
+  return *this;
+}
+
+dribas::CompositeShape::CompositeShape(const CompositeShape& shp):
+  size_(shp.size_)
+{
+  try
+  {
+    for (size_t i = 0; i < size_; i++)
+    {
+      shapes_[i] = shp.shapes_[i]->clone();
+    }
+  }
+  catch (const std::exception& e)
+  {
+    throw;
+  }
+}
 void dribas::CompositeShape::push_back(Shape * shp)
 {
   if (size_ + 1 > 9999) {

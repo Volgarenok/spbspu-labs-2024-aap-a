@@ -54,3 +54,7 @@ void dribas::Rectangle::scale(double ratio)
   leftDown_.x = pos.x + (leftDown_.x - pos.x) * ratio;
   leftDown_.y = pos.y + (leftDown_.y - pos.y) * ratio;
 }
+dribas::Shape* dribas::Rectangle::clone() const
+{
+  return new Rectangle(*this);
+}

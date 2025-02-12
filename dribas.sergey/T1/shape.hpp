@@ -14,6 +14,7 @@ namespace dribas
     virtual void move(double x, double y) = 0;
     virtual void scale(double ratio) = 0;
     virtual ~Shape() = default;
+    virtual Shape* clone() const = 0;
   };
 }
 #endif

@@ -10,10 +10,10 @@ namespace dribas
   {
   public:
     CompositeShape();
-    CompositeShape(const CompositeShape& shp) noexcept = default;
-    CompositeShape(CompositeShape&& shp) noexcept = default;
-    CompositeShape & operator=(const CompositeShape & shp) noexcept = default;
-    CompositeShape & operator=(CompositeShape && shp) noexcept = default;
+    CompositeShape(const CompositeShape& shp);
+    CompositeShape(CompositeShape&& shp) noexcept;
+    CompositeShape & operator=(const CompositeShape & shp);
+    CompositeShape & operator=(CompositeShape && shp) noexcept;
     ~CompositeShape();
     Shape * operator[](size_t id);
 
