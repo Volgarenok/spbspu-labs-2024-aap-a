@@ -5,7 +5,7 @@
 #include "concave.hpp"
 #include "outputRes.hpp"
 
-double bocharov::getAllArea(Shape ** myShapes, size_t shapeCount)
+double bocharov::getAllArea(Shape ** const myShapes, size_t shapeCount)
 {
   double allArea = 0.0;
   for (size_t i = 0; i < shapeCount; i++)
