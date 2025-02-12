@@ -23,7 +23,7 @@ dribas::CompositeShape::CompositeShape(CompositeShape&& shp) noexcept:
     shapes_[i] = shp.shapes_[i];
     shp.shapes_[i] = nullptr;
   }
-  shp.size_ = 0; 
+  shp.size_ = 0;
 }
 
 dribas::CompositeShape& dribas::CompositeShape::operator=(const CompositeShape& shp)
