@@ -38,7 +38,7 @@ namespace gavrilova {
     void expand();
     void resize(size_t capacity);
     void swap(CompositeShape& rhs) noexcept;
-    void clear();
+    void clear() noexcept;
   };
 }
 

@@ -14,12 +14,12 @@ namespace gavrilova {
     rectangle_t getFrameRect() const override;
     void move(const point_t& p) override;
     void move(double difX, double difY) override;
-    Shape* clone() const;
+    Shape* clone() const override;
     void scaleWithoutCheck(double k) noexcept override;
   private:
     size_t size_;
     Shape** triangles_;
-    void clear();
+    void clear() noexcept;
   };
 }
 #endif
