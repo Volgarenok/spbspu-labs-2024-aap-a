@@ -38,18 +38,18 @@ void bocharov::scaling(Shape ** myShapes, size_t shapeCount, point_t center, dou
 
 std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, std::ostream & output, Shape ** myShapes)
 {
-  std::string Mystr;
+  std::string myStr;
   std::size_t shapesCount = 0;
   bool scaled = false;
   auto handleError = [&](const std::invalid_argument & e)
   {
     error << e.what() << '\n';
   };
-  while (input >> Mystr)
+  while (input >> myStr)
   {
     try
     {
-      if (Mystr == "RECTANGLE")
+      if (myStr == "RECTANGLE")
       {
         point_t down, up;
         input >> down.x;
@@ -59,7 +59,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         myShapes[shapesCount] = new Rectangle{down, up};
         shapesCount++;
       }
-      else if (Mystr == "TRIANGLE")
+      else if (myStr == "TRIANGLE")
       {
         point_t a, b, c;
         input >> a.x;
@@ -71,7 +71,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         myShapes[shapesCount] =  new Triangle{a, b, c};
         shapesCount++;
       }
-      else if (Mystr == "PARALLELOGRAM")
+      else if (myStr == "PARALLELOGRAM")
       {
         point_t a, b, c;
         input >> a.x;
@@ -88,7 +88,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         myShapes[shapesCount] =  new Parallelogram{a, b, c};
         shapesCount++;
       }
-      else if (Mystr == "CONCAVE")
+      else if (myStr == "CONCAVE")
       {
         point_t a, b, c, d;
         input >> a.x;
@@ -102,7 +102,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         myShapes[shapesCount] =  new Concave{a, b, c, d};
         shapesCount++;
       }
-      else if (Mystr == "SCALE")
+      else if (myStr == "SCALE")
       {
         scaled = true;
         if (shapesCount == 0)
