@@ -90,7 +90,7 @@ gavrilova::Ellipse* make_ellipse(std::istream& in)
   gavrilova::point_t center;
   double radiusX = 0;
   double radiusY = 0;
-  if (!(gavrilova::input_point(in, center) >> radiusX >> radiusY)) {
+  if (!(in >> center >> radiusX >> radiusY)) {
     throw std::logic_error("Errors in ellipse input");
   }
   gavrilova::Ellipse* ellipse = new gavrilova::Ellipse(center, radiusX, radiusY);
