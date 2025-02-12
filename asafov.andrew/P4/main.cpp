@@ -23,6 +23,10 @@ int main()
     delete[] str;
     return 1;
   }
+  for (size_t i = 0; i < 26; i++)
+  {
+    unusedLetters[i] = '\0';
+  }
   asafov::getUnusedLetters(str, unusedLetters);
   std::cout << unusedLetters << '\n';
 
