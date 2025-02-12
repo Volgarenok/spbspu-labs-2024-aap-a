@@ -67,7 +67,6 @@ gavrilova::Polygon* make_polygon(std::istream& in)
         delete[] verteces;
         throw;
       }
-      
       for (size_t i = 0; i < nVert; ++i) {
         new_verteces[i] = verteces[i];
       }
