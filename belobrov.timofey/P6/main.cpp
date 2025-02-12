@@ -16,7 +16,7 @@ int main()
         std::cerr << "Line is empty!\n";
         return 1;
     }
-    std::cout << std::boolalpha << belobrov::isFloatNumber(string) << "\n";
+    std::cout << std::boolalpha << belobrov::validateFloat(string) << "\n";
     free(string);
     return 0;
 }
