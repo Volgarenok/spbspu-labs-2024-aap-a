@@ -1,12 +1,28 @@
 #include "polygon.hpp"
 #include "shapeManip.hpp"
 
-void clearTriang(gavrilova::Shape** triangles, size_t n) noexcept {
-  for (size_t i = 0; i < n; ++i) {
-    delete triangles[i];
+namespace {
+  bool hasSameVerteces(gavrilova::point_t* verteces, size_t size)
+  {
+    for (size_t i = 0; i < (size - 1); ++i) {
+      for (size_t j = (i + 1); j < size; ++j) {
+        if (verteces[i].x == verteces[j].x && verteces[i].y == verteces[j].y) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
-  delete[] triangles;
+  void clearTriang(gavrilova::Shape** triangles, size_t n) noexcept {
+    for (size_t i = 0; i < n; ++i) {
+      delete triangles[i];
+    }
+    delete[] triangles;
+  }
 }
+
+
+
 
 gavrilova::Polygon::Polygon(size_t nPoints, const point_t* verteces):
   size_(nPoints - 2),
@@ -15,6 +31,10 @@ gavrilova::Polygon::Polygon(size_t nPoints, const point_t* verteces):
   if (nPoints < 3) {
     throw std::logic_error("Polygon must have at least 3 vertices.");
   }
+  if (!nVert || hasSameVerteces(verteces, nVert)) {
+    throw std::logic_error("Errors in polygon parametrs");
+  }
+
   for (size_t i = 0; i < size_; ++i) {
     try {
       triangles_[i] = new Triangle(verteces[0], verteces[i + 1], verteces[i + 2]);
@@ -100,3 +120,4 @@ void gavrilova::Polygon::clear() noexcept
   delete[] triangles_;
   size_ = 0;
 }
+

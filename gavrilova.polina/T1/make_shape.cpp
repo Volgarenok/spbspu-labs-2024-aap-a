@@ -9,23 +9,9 @@
 #include "ellipse.hpp"
 #include "shape.hpp"
 
-namespace {
-  bool hasSameVerteces(gavrilova::point_t* verteces, size_t size)
-  {
-    for (size_t i = 0; i < (size - 1); ++i) {
-      for (size_t j = (i + 1); j < size; ++j) {
-        if (verteces[i].x == verteces[j].x && verteces[i].y == verteces[j].y) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
-}
 
 gavrilova::Rectangle* make_rectangle(std::istream& in)
 {
-  //gavrilova::point_t point1, point2;
   gavrilova::point_t arr[2] = {};
   gavrilova::point_t* points = arr;
   if (!(gavrilova::input_points(in, points, 2))) {
@@ -74,10 +60,6 @@ gavrilova::Polygon* make_polygon(std::istream& in)
       verteces = new_verteces;
       capacityVert += 10;
     }
-  }
-  if (!nVert || hasSameVerteces(verteces, nVert) || !in) {
-    delete[] verteces;
-    throw std::logic_error("Errors in polygon input");
   }
 
   gavrilova::Polygon* poligon = nullptr;
