@@ -92,7 +92,7 @@ gavrilova::Shape* gavrilova::Polygon::clone() const
   return new Polygon(*this);
 }
 
-void gavrilova::Polygon::clear()
+void gavrilova::Polygon::clear() noexcept
 {
   for (size_t i = 0; i < size_; ++i) {
     delete triangles_[i];

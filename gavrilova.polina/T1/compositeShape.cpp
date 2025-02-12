@@ -204,7 +204,7 @@ void gavrilova::CompositeShape::swap(CompositeShape& rhs) noexcept
   std::swap(shapes_, rhs.shapes_);
 }
 
-void gavrilova::CompositeShape::clear()
+void gavrilova::CompositeShape::clear() noexcept
 {
   for (size_t i = 0; i < size_; ++i) {
     delete shapes_[i];
