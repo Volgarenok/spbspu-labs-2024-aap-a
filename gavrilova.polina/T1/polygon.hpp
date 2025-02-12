@@ -18,7 +18,8 @@ namespace gavrilova {
     void scaleWithoutCheck(double k) noexcept override;
   private:
     size_t size_;
-    Triangle** triangles_;
+    Shape** triangles_;
+    void clear();
   };
 }
 #endif
