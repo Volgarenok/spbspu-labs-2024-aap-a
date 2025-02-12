@@ -53,8 +53,8 @@ dribas::Triangle * initialDiamond(dribas::point_t a, dribas::point_t b, dribas::
     throw std::invalid_argument("error with diamond size");
   }
   dribas::Triangle triangle[4] = {a_, b_, c_, d_};
-
-  return triangle;
+  dribas::Triangle* trianglePtr = triangle;
+  return trianglePtr;
 }
 dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
   a_(Triangle{a, b, c}),
