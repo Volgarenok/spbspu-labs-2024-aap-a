@@ -12,5 +12,6 @@ namespace gavrilova {
     point_t pos;
   };
   std::istream& input_point(std::istream&, point_t&);
+  std::istream& input_points(std::istream&, point_t* points, size_t n);
 }
 #endif

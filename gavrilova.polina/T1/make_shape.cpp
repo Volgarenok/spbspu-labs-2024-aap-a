@@ -25,23 +25,24 @@ namespace {
 
 gavrilova::Rectangle* make_rectangle(std::istream& in)
 {
-  gavrilova::point_t point1, point2;
-  if (!(in >> point1.x >> point1.y >> point2.x >> point2.y )) {
+  //gavrilova::point_t point1, point2;
+  gavrilova::point_t arr[2] = {};
+  gavrilova::point_t* points = arr;
+  if (!(gavrilova::input_points(in, points, 2))) {
     throw std::logic_error("Errors in rectangle input");
   }
-  gavrilova::Rectangle* rect = new gavrilova::Rectangle(point1, point2);
+  gavrilova::Rectangle* rect = new gavrilova::Rectangle(points[0], points[1]);
   return rect;
 }
 
 gavrilova::Triangle* make_triangle(std::istream& in)
 {
-  gavrilova::point_t point1;
-  gavrilova::point_t point2;
-  gavrilova::point_t point3;
-  if (!(in >> point1.x >> point1.y >> point2.x >> point2.y >> point3.x >> point3.y)) {
+  gavrilova::point_t arr[3] = {};
+  gavrilova::point_t* points = arr;
+  if (!(gavrilova::input_points(in, points, 3))) {
     throw std::logic_error("Errors in triangle input");
   }
-  gavrilova::Triangle* triang = new gavrilova::Triangle(point1, point2, point3);
+  gavrilova::Triangle* triang = new gavrilova::Triangle(points[0], points[1], points[2]);
   return triang;
 }
 
@@ -89,7 +90,7 @@ gavrilova::Ellipse* make_ellipse(std::istream& in)
   gavrilova::point_t center;
   double radiusX = 0;
   double radiusY = 0;
-  if (!(in >> center.x >> center.y >> radiusX >> radiusY)) {
+  if (!(gavrilova::input_point(in, center) >> radiusX >> radiusY)) {
     throw std::logic_error("Errors in ellipse input");
   }
   gavrilova::Ellipse* ellipse = new gavrilova::Ellipse(center, radiusX, radiusY);
