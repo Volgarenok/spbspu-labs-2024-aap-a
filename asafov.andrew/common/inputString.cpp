@@ -28,10 +28,10 @@ char* asafov::inputString()
       {
         newstring = resize(string, reallength, reallength * 2);
       }
-      catch (const std::bad_alloc& e)
+      catch (const std::bad_alloc&)
       {
         delete[] string;
-        throw e;
+        throw;
       }
       delete[] string;
       string = newstring;

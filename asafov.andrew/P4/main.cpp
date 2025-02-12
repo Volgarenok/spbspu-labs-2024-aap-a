@@ -5,7 +5,7 @@
 int main()
 {
   char* str = asafov::inputString();
-  if(str[0] == '\0')
+  if (str[0] == '\0')
   {
     delete[] str;
     return 1;
@@ -16,7 +16,7 @@ int main()
   char* unusedLetters = nullptr;
   try
   {
-    unusedLetters = new char[26]{0};
+    unusedLetters = new char[26];
   }
   catch (const std::bad_alloc&)
   {
