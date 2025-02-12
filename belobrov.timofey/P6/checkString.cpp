@@ -4,9 +4,10 @@ namespace belobrov
 {
   const char* checkChar(const char* str, char target);
   const char* checkSign(const char* str);
-  const char* idDigit(const char* str);
+  const char* isDigit(const char* str);
   const char* checkUnsigned(const char* str);
   const char* checkExponent(const char* str);
+  const char* checkFraction(const char* str);
 }
 
 const char* belobrov::checkChar(const char* str, char target)
@@ -22,7 +23,7 @@ const char* belobrov::checkSign(const char* str)
   if (!str){
     return nullptr;
   }
-  return (checkChar(str, '+') || checkChar(str, '-') ? (str + 1) : nullptr;
+  return (checkChar(str, '+') || checkChar(str, '-')) ? (str + 1) : nullptr;
 }
 
 const char* belobrov::isDigit(const char* str)
@@ -63,4 +64,29 @@ const char* belobrov::checkExponent(const char* str)
     return checkUnsigned(continued);
   }
   return checkUnsigned(next);
+}
+
+const char* belobrov::checkFraction(const char* str)
+{
+  if (!str) {
+    return nullptr;
+  }
+  auto next = str;
+  if (auto continued = checkUnsigned(next)) {
+    next = continued;
+  }
+  next = checkChar(next, '.');
+  return checkUnsigned(next);
+}
+
+bool belobrov::validateFloat(const char* str)
+{
+  if (!str) {
+    return false;
+  }
+  auto next = checkSign(str);
+  if (auto continued = checkFraction(next)) {
+    return checkExponent(continued) && *continued == '\0';
+  }
+  return checkExponent(next) && *next == '\0';
 }

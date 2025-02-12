@@ -3,7 +3,7 @@
 
 namespace belobrov
 {
-    bool isFloatNumber(const char* string);
+  bool smirnov::validateFloat(const char* str)
 }
 
 #endif
