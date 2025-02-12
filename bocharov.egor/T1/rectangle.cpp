@@ -1,5 +1,4 @@
 #include "rectangle.hpp"
-#include <stdlib.h>
 #include <stdexcept>
 #include <cmath>
 
