@@ -28,13 +28,13 @@ const char* belobrov::checkSign(const char* str)
 
 const char* belobrov::isDigit(const char* str)
 {
-  if (string == nullptr) {
+  if (str == nullptr) {
     return nullptr;
   }
 
-  char c = *string;
+  char c = *str;
   if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9') {
-    return string + 1;
+    return str + 1;
   }
 
   return nullptr;
