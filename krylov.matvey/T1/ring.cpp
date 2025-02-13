@@ -34,12 +34,8 @@ void krylov::Ring::move(double dx, double dy)
   center_.y += dy;
 }
 
-void krylov::Ring::scale(double factor)
+void krylov::Ring::unsafeScale(double factor) noexcept
 {
-  if (factor <= 0)
-  {
-    throw std::invalid_argument("Scale factor must be positive");
-  }
   outerRadius_ *= factor;
   innerRadius_ *= factor;
 }

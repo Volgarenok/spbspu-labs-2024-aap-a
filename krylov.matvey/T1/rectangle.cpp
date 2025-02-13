@@ -37,12 +37,8 @@ void krylov::Rectangle::move(double dx, double dy)
   topRight_.y += dy;
 }
 
-void krylov::Rectangle::scale(double factor)
+void krylov::Rectangle::unsafeScale(double factor) noexcept
 {
-  if (factor <= 0)
-  {
-    throw std::invalid_argument("Scale factor must be positive");
-  }
   point_t center = getFrameRect().pos;
   bottomLeft_.x = center.x + (bottomLeft_.x - center.x) * factor;
   bottomLeft_.y = center.y + (bottomLeft_.y - center.y) * factor;

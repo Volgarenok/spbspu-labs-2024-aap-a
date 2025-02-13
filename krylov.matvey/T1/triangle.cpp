@@ -58,12 +58,8 @@ void krylov::Triangle::move(double dx, double dy)
   c_.y += dy;
 }
 
-void krylov::Triangle::scale(double factor)
+void krylov::Triangle::unsafeScale(double factor) noexcept
 {
-  if (factor <= 0)
-  {
-    throw std::invalid_argument("Scale factor must be positive");
-  }
   point_t center = getFrameRect().pos;
   a_.x = center.x + factor * (a_.x - center.x);
   a_.y = center.y + factor * (a_.y - center.y);

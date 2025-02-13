@@ -13,7 +13,7 @@ namespace krylov
     rectangle_t getFrameRect() const override;
     void move(const point_t& point) override;
     void move(double dx, double dy) override;
-    void scale(double factor) override;
+    void unsafeScale(double factor) noexcept override;
     point_t getA() const;
     point_t getB() const;
     point_t getC() const;

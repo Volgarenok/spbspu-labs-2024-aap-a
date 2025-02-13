@@ -71,12 +71,8 @@ void krylov::Complexquad::move(double dx, double dy)
   t3_.move(dx, dy);
   t4_.move(dx, dy);
 }
-void krylov::Complexquad::scale(double factor)
+void krylov::Complexquad::unsafeScale(double factor) noexcept
 {
-  if (factor <= 0)
-  {
-    throw std::invalid_argument("Scale factor must be positive");
-  }
   point_t center = getFrameRect().pos;
   t1_.scale(factor);
   t2_.scale(factor);
