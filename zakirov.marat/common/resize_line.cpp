@@ -54,7 +54,7 @@ char * zakirov::get_to_symbol(std::istream & in, size_t step, char interrupt_sym
     {
       free(expanded_line);
       free(line);
-      throw;
+      return nullptr;
     }
 
     free(line);
