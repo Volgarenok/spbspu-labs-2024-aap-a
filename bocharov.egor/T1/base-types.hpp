@@ -15,5 +15,6 @@ namespace bocharov
   };
   point_t scalePoint(point_t p, point_t pos, double ratio);
   point_t movePoint(point_t p, double dx, double dy);
+  point_t scalePoint(point_t p, double ratio);
 }
 #endif

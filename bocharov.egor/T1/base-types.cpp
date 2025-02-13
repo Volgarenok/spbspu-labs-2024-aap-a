@@ -12,3 +12,10 @@ bocharov::point_t bocharov::movePoint(bocharov::point_t p, double x, double y)
   p.y += y;
   return {p.x, p.y};
 }
+
+bocharov::point_t bocharov::scalePoint(bocharov::point_t p, double ratio)
+{
+  p.x = p.x * ratio;
+  p.y = p.y * ratio;
+  return {p.x, p.y};
+}
