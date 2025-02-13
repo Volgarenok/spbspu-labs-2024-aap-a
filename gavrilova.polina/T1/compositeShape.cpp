@@ -1,8 +1,6 @@
 #include "compositeShape.hpp"
 #include "shapeManip.hpp"
 
-void clearShapes(gavrilova::Shape** shapes, size_t n);
-
 gavrilova::CompositeShape::CompositeShape():
   CompositeShape(1)
 {}
@@ -18,10 +16,13 @@ gavrilova::CompositeShape::CompositeShape(const CompositeShape& other):
   capacity_(other.capacity_),
   shapes_(new Shape*[capacity_])
 {
+  size_t cur_size = 0;
   for (size_t i = 0; i < size_; ++i) {
     try {
       shapes_[i] = other.shapes_[i]->clone();
+      ++cur_size;
     } catch (const std::bad_alloc&) {
+      size_ = cur_size;
       clear();
       throw;
     }
@@ -214,10 +215,3 @@ void gavrilova::CompositeShape::clear() noexcept
   capacity_ = 0;
 }
 
-void clearShapes(gavrilova::Shape** shapes, size_t n)
-{
-  for (size_t i = 0; i < n; ++i) {
-    delete shapes[i];
-  }
-  delete[] shapes;
-}

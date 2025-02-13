@@ -13,12 +13,6 @@ namespace {
     }
     return false;
   }
-  void clearTriang(gavrilova::Shape** triangles, size_t n) noexcept {
-    for (size_t i = 0; i < n; ++i) {
-      delete triangles[i];
-    }
-    delete[] triangles;
-  }
 }
 
 
@@ -32,12 +26,14 @@ gavrilova::Polygon::Polygon(size_t nPoints, const point_t* verteces):
   if (!nPoints || ::hasSameVerteces(verteces, nPoints)) {
     throw std::logic_error("Errors in polygon parametrs");
   }
-
+  size_t cur_size = 0;
   for (size_t i = 0; i < size_; ++i) {
     try {
       triangles_[i] = new Triangle(verteces[0], verteces[i + 1], verteces[i + 2]);
+      ++cur_size;
     } catch (const std::bad_alloc&) {
-      clearTriang(triangles_, size_);
+      size_ = cur_size;
+      clear();
       throw;
     }
   }
@@ -47,10 +43,13 @@ gavrilova::Polygon::Polygon(const Polygon& other):
   size_(other.size_),
   triangles_(new Shape*[other.size_])
 {
+  size_t cur_size = 0;
   for (size_t i = 0; i < size_; ++i) {
     try {
       triangles_[i] = other.triangles_[i]->clone();
+      ++cur_size;
     } catch (const std::bad_alloc&) {
+      size_ = cur_size;
       clear();
       throw;
     }
