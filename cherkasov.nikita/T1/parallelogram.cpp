@@ -11,14 +11,14 @@ namespace cherkasov
     vertex3{x3, y3},
     vertex4{(x1 + x3) - x2, (y1 + y3) - y2}
     {
-      if ((x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3))
+ /*     if ((x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3))
       {
         throw std::invalid_argument("no correct coordinat the parallelogram");
       }
       if (!(y1 == y2 || y1 == y3 || y2 == y3))
       {
         throw std::invalid_argument("sides of the parallelogram must parallel the x");
-      }
+      } */
     }
   double Parallelogram::getArea() const
   {
@@ -37,10 +37,7 @@ namespace cherkasov
     point_t center;
     center.x = (vertex1.x + vertex2.x + vertex3.x + vertex4.x) / 4;
     center.y = (vertex1.y + vertex2.y + vertex3.y + vertex4.y) / 4;
-    rectangle_t rect{};
-    rect.width = maxX - minX;
-    rect.height = maxY - minY;
-    rect.pos = center;
+    rectangle_t rect{maxX - minX, maxY - minY, center};
     return rect;
   }
   void Parallelogram::move(point_t c)

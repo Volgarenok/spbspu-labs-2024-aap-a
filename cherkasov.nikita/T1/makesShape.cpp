@@ -36,7 +36,7 @@ cherkasov::Parallelogram* cherkasov::getParallelogram(std::istream& input)
   double x3 = 0.0;
   double y3 = 0.0;
   input >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-  if (!input)
+  if (!input || (x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3))
   {
     throw std::invalid_argument("no correct coordinat the parallelogram");
   }

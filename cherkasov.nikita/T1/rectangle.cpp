@@ -25,10 +25,7 @@ namespace cherkasov
     point_t center{};
     center.x = (left.x + right.x) / 2.0;
     center.y = (left.y + right.y) / 2.0;
-    rectangle_t rect{};
-    rect.width = right.x - left.x;
-    rect.height = right.y - left.y;
-    rect.pos = center;
+    rectangle_t rect{right.x - left.x, right.y - left.y, center};
     return rect;
   }
   void Rectangle::move(point_t c)
