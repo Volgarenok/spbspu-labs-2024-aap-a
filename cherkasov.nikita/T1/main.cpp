@@ -74,7 +74,7 @@ int main()
   if (invalidInput)
   {
     std::cerr << "invalid input encountered" << "\n";
-    invalidInput = true;
+    return 1;
   }
   std::cout << std::fixed << std::setprecision(1);
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
