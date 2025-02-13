@@ -14,10 +14,10 @@ namespace smirnov
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    point_t vertex1;
-    point_t vertex2;
-    point_t vertex3;
-    point_t vertex4;
+    point_t vertex1_;
+    point_t vertex2_;
+    point_t vertex3_;
+    point_t vertex4_;
   };
 }
 #endif

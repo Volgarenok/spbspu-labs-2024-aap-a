@@ -15,7 +15,7 @@ namespace smirnov
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    Parallelogram parallelogram;
+    Parallelogram parallelogram_;
   };
 }
 #endif

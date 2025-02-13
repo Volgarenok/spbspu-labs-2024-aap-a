@@ -2,9 +2,9 @@
 #include <cmath>
 #include <stdexcept>
 smirnov::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
-  parallelogram(p1, p2, p3)
+  parallelogram_(p1, p2, p3)
 {
-  parallelogram = Parallelogram{p1, p2, p3};
+  parallelogram_ = Parallelogram{p1, p2, p3};
   bool areP1EqualP2 = (p1.x == p2.x && p1.y == p2.y);
   bool areP1EqualP3 = (p1.x == p3.x && p1.y == p3.y);
   bool areP2EqualP3 = (p2.x == p3.x && p2.y == p3.y);
@@ -21,30 +21,29 @@ smirnov::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
   {
     throw std::invalid_argument("Diagonals must intersect at their midpoints");
   }
-  parallelogram = Parallelogram{p1, p2, p3};
 }
 
 double smirnov::Diamond::getArea() const
 {
-  return parallelogram.getArea();
+  return parallelogram_.getArea();
 }
 
 smirnov::rectangle_t smirnov::Diamond::getFrameRect() const
 {
-  return parallelogram.getFrameRect();
+  return parallelogram_.getFrameRect();
 }
 
 void smirnov::Diamond::move(point_t newPos)
 {
-  return parallelogram.move(newPos);
+  return parallelogram_.move(newPos);
 }
 
 void smirnov::Diamond::move(double dx, double dy)
 {
-  parallelogram.move(dx, dy);
+  parallelogram_.move(dx, dy);
 }
 
 void smirnov::Diamond::scale(double k)
 {
-  parallelogram.scale(k);
+  parallelogram_.scale(k);
 }

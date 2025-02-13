@@ -2,8 +2,8 @@
 #include <stdexcept>
 
 smirnov::Square::Square(double x, double y, double length):
-  lowerLeft{x, y},
-  sideLength(length)
+  lowerLeft_{x, y},
+  sideLength_(length)
 {
   if (length <= 0)
   {
@@ -13,13 +13,13 @@ smirnov::Square::Square(double x, double y, double length):
 
 double smirnov::Square::getArea() const
 {
-  return sideLength * sideLength;
+  return sideLength_ * sideLength_;
 }
 
 smirnov::rectangle_t smirnov::Square::getFrameRect() const
 {
-  point_t center = {lowerLeft.x + sideLength / 2, lowerLeft.y + sideLength / 2};
-  return {center, sideLength, sideLength};
+  point_t center = {lowerLeft_.x + sideLength_ / 2, lowerLeft_.y + sideLength_ / 2};
+  return {center, sideLength_, sideLength_};
 }
 
 void smirnov::Square::move(point_t newPos)
@@ -32,7 +32,7 @@ void smirnov::Square::move(point_t newPos)
 
 void smirnov::Square::move(double dx, double dy)
 {
-  applyMove(lowerLeft, dx, dy);
+  applyMove(lowerLeft_, dx, dy);
 }
 
 void smirnov::Square::scale(double k)
@@ -42,6 +42,6 @@ void smirnov::Square::scale(double k)
     throw std::invalid_argument("Zoom coefficient must be positive");
   }
   point_t center = getFrameRect().pos;
-  sideLength *= k;
-  applyScale(lowerLeft, center, k);
+  sideLength_ *= k;
+  applyScale(lowerLeft_, center, k);
 }

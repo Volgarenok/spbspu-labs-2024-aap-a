@@ -2,8 +2,8 @@
 #include <stdexcept>
 
 smirnov::Rectangle::Rectangle(double x1, double y1, double x2, double y2):
-  lowerLeft{x1, y1},
-  upperRight{x2, y2}
+  lowerLeft_{x1, y1},
+  upperRight_{x2, y2}
 {
   if (x1 >= x2 || y1 >= y2)
   {
@@ -13,13 +13,13 @@ smirnov::Rectangle::Rectangle(double x1, double y1, double x2, double y2):
 
 double smirnov::Rectangle::getArea() const
 {
-  return (upperRight.x - lowerLeft.x) * (upperRight.y - lowerLeft.y);
+  return (upperRight_.x - lowerLeft_.x) * (upperRight_.y - lowerLeft_.y);
 }
 
 smirnov::rectangle_t smirnov::Rectangle::getFrameRect() const
 {
-  point_t center = {(lowerLeft.x + upperRight.x) / 2, (lowerLeft.y + upperRight.y) / 2};
-  return {center, upperRight.x - lowerLeft.x, upperRight.y - lowerLeft.y};
+  point_t center = {(lowerLeft_.x + upperRight_.x) / 2, (lowerLeft_.y + upperRight_.y) / 2};
+  return {center, upperRight_.x - lowerLeft_.x, upperRight_.y - lowerLeft_.y};
 }
 
 void smirnov::Rectangle::move(point_t newPos)
@@ -32,8 +32,8 @@ void smirnov::Rectangle::move(point_t newPos)
 
 void smirnov::Rectangle::move(double dx, double dy)
 {
-  applyMove(lowerLeft, dx, dy);
-  applyMove(upperRight, dx, dy);
+  applyMove(lowerLeft_, dx, dy);
+  applyMove(upperRight_, dx, dy);
 }
 
 void smirnov::Rectangle::scale(double k)
@@ -43,6 +43,6 @@ void smirnov::Rectangle::scale(double k)
     throw std::invalid_argument("Zoom coefficient must be positive");
   }
   point_t center = getFrameRect().pos;
-  applyScale(lowerLeft, center, k);
-  applyScale(upperRight, center, k);
+  applyScale(lowerLeft_, center, k);
+  applyScale(upperRight_, center, k);
 }

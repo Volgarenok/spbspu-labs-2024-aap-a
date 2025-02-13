@@ -14,8 +14,8 @@ namespace smirnov
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
-    point_t lowerLeft;
-    double sideLength;
+    point_t lowerLeft_;
+    double sideLength_;
   };
 }
 #endif
