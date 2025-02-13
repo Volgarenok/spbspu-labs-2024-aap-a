@@ -10,5 +10,6 @@ namespace smirnov
   void destroyShapes(Shape ** shapes, size_t count);
   void printFrameRect(const Shape * const * shapes, size_t count, std::ostream & out);
   void scaleShapes(Shape ** shapes, size_t count, point_t p, double factor);
+  void printRectangle(const rectangle_t & rectangle, std::ostream & out);
 }
 #endif
