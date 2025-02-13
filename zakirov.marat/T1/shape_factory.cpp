@@ -100,6 +100,7 @@ zakirov::Polygon * zakirov::make_polygon(std::istream & in)
   catch (const std::invalid_argument & e)
   {
     free(parameters);
+    free(converted_data);
     free(polygon);
     throw;
   }
