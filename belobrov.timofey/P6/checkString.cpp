@@ -32,8 +32,11 @@ const char* belobrov::isDigit(const char* str)
     return nullptr;
   }
 
-  if (*str >= '0' && *str <= '9') {
-    return str + 1;
+  const char* digits = "0123456789";
+  for (const char* d = digits; *d != '\0'; ++d) {
+    if (*str == *d) {
+      return str + 1;
+    }
   }
 
   return nullptr;
@@ -99,6 +102,22 @@ bool belobrov::validateFloat(const char* str)
 {
   if (!str || *str == '\0') {
     return false;
+  }
+
+  const char* validChars = "0123456789+-eE";
+
+  while (*str != '\0') {
+    bool isValid = false;
+    for (const char* valid = validChars; *valid != '\0'; ++valid) {
+      if (*str == *valid) {
+        isValid = true;
+        break;
+      }
+    }
+    if (!isValid) {
+      return false;
+    }
+    ++str;
   }
   auto next = checkSign(str);
   bool hasIntPart = false;
