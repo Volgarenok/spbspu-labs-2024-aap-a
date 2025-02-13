@@ -23,23 +23,20 @@ const char* belobrov::checkSign(const char* str)
   if (!str){
     return nullptr;
   }
-  return (checkChar(str, '+') || checkChar(str, '-')) ? (str + 1) : nullptr;
+  return (checkChar(str, '+') || checkChar(str, '-')) ? (str + 1) : str;
 }
 
 const char* belobrov::isDigit(const char* str)
 {
-  if (!str) {
+  if (!str || *str == '\0') {
     return nullptr;
   }
 
-  const char digits[] = "0123456789";
-  if (digits[0] == '\0') {
-    return nullptr;
-  }
-  if (*str == digits[0]) {
+  if (*str >= '0' && *str <= '9') {
     return str + 1;
   }
-  return isDigit(str);
+
+  return nullptr;
 }
 
 const char* belobrov::checkUnsigned(const char* str)
@@ -48,10 +45,10 @@ const char* belobrov::checkUnsigned(const char* str)
     return nullptr;
   }
   auto next = isDigit(str);
-  if (auto continued = checkUnsigned(next)) {
-    return continued;
+  if (!next) {
+    return nullptr;
   }
-  return next;
+  return checkUnsigned(next);
 }
 
 const char* belobrov::checkExponent(const char* str)
@@ -60,9 +57,17 @@ const char* belobrov::checkExponent(const char* str)
     return nullptr;
   }
   auto next = checkChar(str, 'E');
-  if (auto continued = checkSign(next)) {
-    return checkUnsigned(continued);
+  if (!next) {
+    next = checkChar(str, 'e');
   }
+  if (!next) {
+    return nullptr;
+  }
+  next = checkSign(next);
+  if (!next) {
+    return nullptr;
+  }
+
   return checkUnsigned(next);
 }
 
@@ -71,11 +76,15 @@ const char* belobrov::checkFraction(const char* str)
   if (!str) {
     return nullptr;
   }
-  auto next = str;
-  if (auto continued = checkUnsigned(next)) {
-    next = continued;
+  auto next = checkUnsigned(str);
+  if (!next) {
+    next = str;
   }
   next = checkChar(next, '.');
+  if (!next!) {
+    retun nullptr;
+  }
+
   return checkUnsigned(next);
 }
 
@@ -85,8 +94,16 @@ bool belobrov::validateFloat(const char* str)
     return false;
   }
   auto next = checkSign(str);
-  if (auto continued = checkFraction(next)) {
-    return checkExponent(continued) && *continued == '\0';
+  if (!next) {
+    next = str;
   }
-  return checkExponent(next) && *next == '\0';
+  auto continued = checkFraction(next);
+  if (!continued) {
+    continued = checkUnsigned(next);
+  }
+  if (continued) {
+    continued = checkExponent(continued);
+  }
+
+  return continued && *continued == '\0';
 }
