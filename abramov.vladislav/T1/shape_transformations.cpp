@@ -60,7 +60,7 @@ namespace
     return figure;
   }
 
-  void printFrameRectCoords(const abramov::rectangle_t &r)
+void printFrameRectCoords(const abramov::rectangle_t &r)
   {
     const double x1 = r.pos.x - r.width / 2;
     const double y1 = r.pos.y - r.height / 2;
@@ -89,7 +89,7 @@ void abramov::getShapes(std::istream &in, Composite &shapes, point_t &p, double 
         try
         {
           figure = makeShape(s1, in);
-          shapes.push_back(figure);
+          shapes.pushBack(figure);
         }
         catch (const std::invalid_argument &)
         {
@@ -107,8 +107,9 @@ void abramov::getShapes(std::istream &in, Composite &shapes, point_t &p, double 
   }
 }
 
-void abramov::printShapes(std::ostream &out, const Composite &shapes, size_t i)
+void abramov::printShapes(std::ostream &out, const Composite &shapes)
 {
+  const size_t i = shapes.size();
   if (i == 0)
   {
     throw std::logic_error("There is no figures\n");
@@ -128,31 +129,6 @@ void abramov::printShapes(std::ostream &out, const Composite &shapes, size_t i)
   out.copyfmt(stream);
 }
 
-void abramov::scaleFigure(Shape *s, const point_t &p, double k)
-{
-  const point_t pos1 = s->getFrameRect().pos;
-  s->move(p);
-  const point_t pos2 = s->getFrameRect().pos;
-  double dx = pos2.x - pos1.x;
-  double dy = pos2.y - pos1.y;
-  s->scaleSafe(k);
-  dx *= -1 * k;
-  dy *= -1 * k;
-  s->move(dx, dy);
-}
-
-void abramov::scaleFigures(Composite &shapes, const point_t &p, double k, size_t i)
-{
-  if (k <= 0)
-  {
-    throw std::logic_error("There is incorrect coef\n");
-  }
-  for (size_t j = 0; j < i; ++j)
-  {
-    scaleFigureUnsafe(shapes[j], p, k);
-  }
-}
-
 void abramov::scaleFigureUnsafe(Shape *s, const point_t &p, double k)
 {
   const point_t pos1 = s->getFrameRect().pos;
@@ -164,4 +140,17 @@ void abramov::scaleFigureUnsafe(Shape *s, const point_t &p, double k)
   dx *= -1 * k;
   dy *= -1 * k;
   s->move(dx, dy);
+}
+
+void abramov::scaleFigures(Composite &shapes, const point_t &p, double k)
+{
+  if (k <= 0)
+  {
+    throw std::logic_error("There is incorrect coef\n");
+  }
+  const size_t i = shapes.size();
+  for (size_t j = 0; j < i; ++j)
+  {
+    scaleFigureUnsafe(shapes[j], p, k);
+  }
 }

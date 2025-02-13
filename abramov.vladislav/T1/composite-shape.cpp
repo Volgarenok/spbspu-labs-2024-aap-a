@@ -155,7 +155,7 @@ abramov::Shape **expandArray(abramov::Shape **arr, size_t capacity)
   }
   return array;
 }
-void abramov::CompositeShape::push_back(Shape *shp)
+void abramov::CompositeShape::pushBack(Shape *shp)
 {
   if (capacity_ == shapes_)
   {

@@ -21,7 +21,7 @@ namespace abramov
     void move(double dx, double dy);
     void scale(double k);
     void scaleUnsafe(double k);
-    void push_back(Shape *shp);
+    void pushBack(Shape *shp);
     void pop_back() noexcept;
     Shape *at(size_t id);
     const Shape *at(size_t id) const;

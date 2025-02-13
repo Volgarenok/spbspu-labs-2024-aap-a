@@ -183,23 +183,3 @@ abramov::ComplexQuad *abramov::ComplexQuad::clone() const
 {
   return new ComplexQuad(*this);
 }
-
-abramov::point_t abramov::ComplexQuad::getA() const
-{
-  return points[0];
-}
-
-abramov::point_t abramov::ComplexQuad::getB() const
-{
-  return points[1];
-}
-
-abramov::point_t abramov::ComplexQuad::getC() const
-{
-  return points[2];
-}
-
-abramov::point_t abramov::ComplexQuad::getD() const
-{
-  return points[3];
-}

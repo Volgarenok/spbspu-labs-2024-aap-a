@@ -15,10 +15,6 @@ namespace abramov
     void move(double dx, double dy) override;
     void scale(double k) override;
     ComplexQuad *clone() const override;
-    point_t getA() const;
-    point_t getB() const;
-    point_t getC() const;
-    point_t getD() const;
   private:
     point_t points[4];
 

@@ -2,10 +2,6 @@
 #include <string>
 #include <getString.hpp>
 #include "base-types.hpp"
-#include "shape.hpp"
-#include "rectangle.hpp"
-#include "square.hpp"
-#include "complexquad.hpp"
 #include "shape_transformations.hpp"
 
 int main()
@@ -36,9 +32,9 @@ int main()
     std::cerr << "There is no figures\n";
     return 1;
   }
-  printShapes(std::cout, shapes, count);
-  scaleFigures(shapes, p, k, count);
-  printShapes(std::cout, shapes, count);
+  printShapes(std::cout, shapes);
+  scaleFigures(shapes, p, k);
+  printShapes(std::cout, shapes);
   if (wrong_figure)
   {
     std::cerr << "There was bad figure\n";

@@ -42,8 +42,8 @@ abramov::rectangle_t abramov::Rectangle::getFrameRect() const noexcept
   double height = std::abs(y2 - y1);
   if (height == 0)
   {
-    const double y3 = rect1.pos.y + rect1.width / 2;
-    height = y3 - y1;
+    const double y3 = rect1.pos.y + rect1.height / 2;
+    height = 2 * (y3 - y1);
   }
   point_t pos;
   pos.x = (x1 + x2) / 2;
@@ -81,8 +81,8 @@ void abramov::Rectangle::scale(double k)
   const double dy = std::abs(y2 - y1);
   if (dy == 0)
   {
-    const double y3 = rect1.pos.y + rect1.width / 2;
-    height = y3 - y1;
+    //const double y3 = rect1.pos.y + rect1.height / 2;
+    height = 2 * rect1.height;
   }
   else
   {

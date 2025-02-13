@@ -13,9 +13,8 @@
 namespace abramov
 {
   void getShapes(std::istream &in, Composite &shapes, point_t &p, double &k, bool &flag);
-  void scaleFigure(Shape *s, const point_t &p, double k);
-  void scaleFigures(Composite &shapes, const point_t &p, double k, size_t i);
+  void scaleFigures(Composite &shapes, const point_t &p, double k);
+  void printShapes(std::ostream &out, const Composite &shapes);
   void scaleFigureUnsafe(Shape *s, const point_t &p, double k);
-  void printShapes(std::ostream &out, const Composite &shapes, size_t i);
 }
 #endif
