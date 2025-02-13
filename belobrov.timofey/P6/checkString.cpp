@@ -81,8 +81,8 @@ const char* belobrov::checkFraction(const char* str)
     next = str;
   }
   next = checkChar(next, '.');
-  if (!next!) {
-    retun nullptr;
+  if (!next) {
+    return nullptr;
   }
 
   return checkUnsigned(next);
