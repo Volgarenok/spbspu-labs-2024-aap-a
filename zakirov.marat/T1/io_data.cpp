@@ -48,7 +48,7 @@ double * zakirov::get_parameters_series(std::istream & in)
   size_t finish = 0;
   size_t real_size = 1;
   double size_built_in = 0.0;
-  double * parameters = static_cast< double * >(malloc(real_size));
+  double * parameters = static_cast< double * >(malloc(real_size * sizeof(double)));
   if (!parameters)
   {
     throw std::logic_error("Error! Not enought memory.");
