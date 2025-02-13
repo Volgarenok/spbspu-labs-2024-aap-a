@@ -26,6 +26,7 @@ int main()
     {
       scale_data = get_parameters_series(std::cin);
       scale_quantity = scale_data[0];
+      free(data);
       break;
     }
 
