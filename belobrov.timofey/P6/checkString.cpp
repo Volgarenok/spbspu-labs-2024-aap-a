@@ -48,7 +48,14 @@ const char* belobrov::checkUnsigned(const char* str)
   if (!next) {
     return nullptr;
   }
-  return checkUnsigned(next);
+  while (next) {
+    auto continued = isDigit(next);
+    if (!continued) {
+      break;
+    }
+    next = continued;
+  }
+  return next;
 }
 
 const char* belobrov::checkExponent(const char* str)
@@ -90,20 +97,42 @@ const char* belobrov::checkFraction(const char* str)
 
 bool belobrov::validateFloat(const char* str)
 {
-  if (!str) {
+  if (!str || *str == '\0') {
     return false;
   }
   auto next = checkSign(str);
-  if (!next) {
-    next = str;
-  }
-  auto continued = checkFraction(next);
-  if (!continued) {
-    continued = checkUnsigned(next);
-  }
-  if (continued) {
-    continued = checkExponent(continued);
+  bool hasIntPart = false;
+  if (next) {
+    auto intCheck = checkUnsigned(next);
+    if (intCheck) {
+      hasIntPart = true;
+      next = intCheck;
+    }
   }
 
-  return continued && *continued == '\0';
+  bool hasFrPart = false;
+  if (next && *next == '.') {
+    auto frCheck = checkUnsigned(next+1);
+    if (frCheck) {
+      hasFrPart = true;
+      next = frCheck;
+    } else {
+      return false;
+    }
+  }
+
+  if (!hasIntPart && !hasFrPart) {
+    return false;
+  }
+
+  if (next && (*next == 'E' || *next == 'e')) {
+    auto exponentCheck = checkExponent(next);
+    if (exponentCheck) {
+      next = exponentCheck;
+    } else {
+      return false;
+    }
+  }
+
+  return next && *next == '\0';
 }
