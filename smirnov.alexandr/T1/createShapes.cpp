@@ -43,31 +43,29 @@ smirnov::Diamond * smirnov::createDiamond(std::istream & in)
   point_t p1 = {coordsArray[0], coordsArray[1]};
   point_t p2 = {coordsArray[2], coordsArray[3]};
   point_t p3 = {coordsArray[4], coordsArray[5]};
-  bool isHorizontal = (p1.y == p3.y || p1.y == p2.y || p2.y == p3.y);
-  bool isVertical = (p1.x == p2.x || p1.x == p3.x || p2.x == p3.x);
-  if (!(isHorizontal) || !(isVertical))
-  {
-    throw std::invalid_argument("Diagonals must be parallel to the coordinate axes");
-  }
   point_t center;
   double dx = 0.0, dy = 0.0;
-  if (p1.x == p2.x)
+  if ((p1.x == p2.x) && ((p1.y == p3.y) || (p2.y == p3.y)))
   {
     center = {p1.x, p3.y};
     dx = std::abs(center.x - p3.x) * 2;
     dy = std::abs(p1.y - p2.y) * 2;
   }
-  else if (p1.x == p3.x)
+  else if ((p1.x == p3.x) && ((p1.y == p2.y) || (p2.y == p3.y)))
   {
     center = {p3.x, p2.y};
     dx = std::abs(center.x - p2.x) * 2;
     dy = std::abs(p3.y - p1.y) * 2;
   }
-  else
+  else if ((p2.x == p3.x) && ((p1.y == p2.y) || (p1.y == p3.y)))
   {
     center = {p3.x, p1.y};
     dx = std::abs(p1.x - p2.x) * 2;
     dy = std::abs(center.y - p3.y) * 2;
+  }
+  else
+  {
+    throw std::invalid_argument("Diagonals must be parallel to the coordinate axes");
   }
   point_t vertex1 = {center.x + dx / 2, center.y};
   point_t vertex2 = {center.x, center.y - dy / 2};
