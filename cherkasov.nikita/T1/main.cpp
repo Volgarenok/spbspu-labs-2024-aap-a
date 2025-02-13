@@ -50,7 +50,6 @@ int main()
       }
       catch (const std::invalid_argument& e)
       {
-        std::cerr << "invalid input encountered: " << e.what() << "\n";
         invalidInput = true;
       }
       catch (const std::bad_alloc &)
