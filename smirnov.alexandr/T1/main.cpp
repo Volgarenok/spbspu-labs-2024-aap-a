@@ -12,70 +12,55 @@ int main()
   Shape * shapes[10000] = {};
   std::string shapeType = "";
   size_t countShapes = 0;
-  bool checkScale = false;
   bool hasError = false;
   point_t centerPoint = {0.0, 0.0};
   double scaleFactor = 0.0;
   while (!std::cin.eof() && shapeType != "SCALE")
   {
     std::cin >> shapeType;
-    if (shapeType == "SCALE")
-    {
-      checkScale = true;
-      double xCoord = 0.0;
-      double yCoord = 0.0;
-      std::cin >> xCoord >> yCoord >> scaleFactor;
-      centerPoint = {xCoord, yCoord};
-      if (scaleFactor <= 0)
-      {
-        destroyShapes(shapes, countShapes);
-        std::cerr << "Incorrect scaleFactor\n";
-        return 1;
-      }
-      break;
-    }
-    else if (std::cin.eof())
+    if (std::cin.eof())
     {
       destroyShapes(shapes, countShapes);
       std::cerr << "EOF input\n";
       return 1;
     }
-    else
+    try
     {
-      try
+      Shape * shape = createShapes(std::cin, shapeType);
+      if (shape)
       {
-        Shape * shape = createShapes(std::cin, shapeType);
-        if (shape)
-        {
-          shapes[countShapes] = shape;
-          countShapes++;
-        }
-        else
-        {
-           hasError = true;
-        }
+        shapes[countShapes] = shape;
+        countShapes++;
       }
-      catch (const std::invalid_argument & e)
+      else
       {
         hasError = true;
       }
-      catch (const std::bad_alloc &)
-      {
-        std::cerr << "Out of memory\n";
-        destroyShapes(shapes, countShapes);
-        return 1;
-      }
     }
+    catch (const std::invalid_argument & e)
+    {
+      hasError = true;
+    }
+    catch (const std::bad_alloc &)
+    {
+      std::cerr << "Out of memory\n";
+      destroyShapes(shapes, countShapes);
+      return 1;
+    }
+  }
+  double xCoord = 0.0;
+  double yCoord = 0.0;
+  std::cin >> xCoord >> yCoord >> scaleFactor;
+  centerPoint = {xCoord, yCoord};
+  if (scaleFactor <= 0)
+  {
+    destroyShapes(shapes, countShapes);
+    std::cerr << "Incorrect scaleFactor\n";
+    return 1;
   }
   if (countShapes == 0)
   {
     std::cerr << "No figures found\n";
-    return 1;
-  }
-  if (!checkScale)
-  {
-    destroyShapes(shapes, countShapes);
-    std::cerr << "No Scale Command\n";
     return 1;
   }
   std::cout << std::fixed;
