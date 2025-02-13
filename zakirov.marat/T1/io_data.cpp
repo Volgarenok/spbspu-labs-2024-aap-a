@@ -82,6 +82,7 @@ double * zakirov::get_parameters_series(std::istream & in)
     parameters[0] = ++size_built_in;
   }
 
+  free(workline);
   return parameters;
 }
 
