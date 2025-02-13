@@ -51,10 +51,7 @@ void bocharov::Triangle::move(double x, double y)
 void bocharov::Triangle::scale(double ratio)
 {
   point_t pos = getFrameRect().pos;
-  a_.x = (a_.x - pos.x) * ratio + pos.x;
-  a_.y = (a_.y - pos.y) * ratio + pos.y;
-  b_.x = (b_.x - pos.x) * ratio + pos.x;
-  b_.y = (b_.y - pos.y) * ratio + pos.y;
-  c_.x = (c_.x - pos.x) * ratio + pos.x;
-  c_.y = (c_.y - pos.y) * ratio + pos.y;
+  a_ = scalePoint(a_, pos, ratio);
+  b_ = scalePoint(b_, pos, ratio);
+  c_ = scalePoint(c_, pos, ratio);
 }
