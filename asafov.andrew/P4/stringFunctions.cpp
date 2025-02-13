@@ -7,7 +7,7 @@ void findUniqLetters(const char* string, char* alphabet)
   {
     alphabet[i] = 'a' + i;
   }
-  for (size_t i = 0; string[i]!='\0'; i++)
+  for (size_t i = 0; string[i] != '\0'; i++)
   {
     if (std::tolower(string[i]) == alphabet[std::tolower(string[i]) - 'a'])
     {

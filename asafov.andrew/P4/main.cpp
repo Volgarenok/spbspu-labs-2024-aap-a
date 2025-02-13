@@ -4,7 +4,7 @@
 
 int main()
 {
-  char* str = asafov::inputString();
+  char* str = asafov::inputString(std::cin);
   if (str[0] == '\0')
   {
     delete[] str;
