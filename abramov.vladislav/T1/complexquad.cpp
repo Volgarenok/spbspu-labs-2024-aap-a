@@ -45,7 +45,7 @@ namespace
       throw std::logic_error("There is no center\n");
     }
     constexpr size_t k = 4;
-    double xs[k] = {a.x, b.x, c.x, d.x};
+    double xs[k] = { a.x, b.x, c.x, d.x };
     size_t count = 0;
     for (size_t i = 0; i < k; ++i)
     {
@@ -76,14 +76,14 @@ abramov::ComplexQuad *abramov::createCQs(const point_t &p1, const point_t &p2)
   const double x2 = p2.x;
   const double y1 = p1.y;
   const double y2 = p2.y;
-  const point_t a{x1, y2};
-  const point_t b{x2, y1};
+  const point_t a{ x1, y2 };
+  const point_t b{ x2, y1 };
   constexpr size_t k = 4;
   if (x2 - x1 >= y2 - y1)
   {
     const double x3 = (x1 + x2) / 2;
-    const point_t c{x3, y2};
-    const point_t d{x3, y1};
+    const point_t c{ x3, y2 };
+    const point_t d{ x3, y1 };
     ComplexQuad cq1 = ComplexQuad(p1, c, d, a);
     ComplexQuad cq2 = ComplexQuad(a, d, p1, c);
     ComplexQuad cq3 = ComplexQuad(d, p2, b, c);
@@ -94,8 +94,8 @@ abramov::ComplexQuad *abramov::createCQs(const point_t &p1, const point_t &p2)
   else
   {
     const double y3 = (y1 + y2) / 2;
-    const point_t c{x2, y3};
-    const point_t d{x1, y3};
+    const point_t c{ x2, y3 };
+    const point_t d{ x1, y3 };
     ComplexQuad cq1 = ComplexQuad(a, c, p2, d);
     ComplexQuad cq2 = ComplexQuad(d, p2, a, c);
     ComplexQuad cq3 = ComplexQuad(p1, c, b, d);
@@ -106,7 +106,7 @@ abramov::ComplexQuad *abramov::createCQs(const point_t &p1, const point_t &p2)
 }
 
 abramov::ComplexQuad::ComplexQuad(const point_t &a, const point_t &b, const point_t &c, const point_t &d):
-  points{a, b, c, d}
+  points{ a, b, c, d }
 {
   double x = 0;
   double y = 0;
@@ -126,16 +126,16 @@ abramov::rectangle_t abramov::ComplexQuad::getFrameRect() const noexcept
   const point_t b = points[1];
   const point_t c = points[2];
   const point_t d = points[3];
-  double x[k] = {a.x, b.x, c.x, d.x};
-  double y[k] = {a.y, b.y, c.y, d.y};
+  double x[k] = { a.x, b.x, c.x, d.x };
+  double y[k] = { a.y, b.y, c.y, d.y };
   double max_x = 0;
   double min_x = 0;
   double max_y = 0;
   double min_y = 0;
   searchInArray(x, min_x, max_x, k);
   searchInArray(y, min_y, max_y, k);
-  point_t pos{(max_x + min_x) / 2, (max_y + min_y) / 2};
-  rectangle_t frame_rect{max_x - min_x, max_y - min_y, pos};
+  point_t pos{ (max_x + min_x) / 2, (max_y + min_y) / 2 };
+  rectangle_t frame_rect{ max_x - min_x, max_y - min_y, pos };
   return frame_rect;
 }
 
@@ -144,7 +144,7 @@ abramov::point_t abramov::ComplexQuad::getCenterComplexQuad() const
   double x = 0;
   double y = 0;
   getCoordsOfIntersection(points, x, y);
-  point_t center{x, y};
+  point_t center{ x, y };
   return center;
 }
 

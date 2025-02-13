@@ -32,18 +32,23 @@ double abramov::Rectangle::getArea() const noexcept
 
 abramov::rectangle_t abramov::Rectangle::getFrameRect() const noexcept
 {
-  ComplexQuad cmplxqd1 = cmplxqds[0];
-  ComplexQuad cmplxqd4 = cmplxqds[3];
-  const double width = cmplxqd4.getD().x - cmplxqd1.getA().x;
-  double height = std::abs(cmplxqd4.getD().y - cmplxqd1.getA().y);
+  const rectangle_t rect1 = cmplxqds[0].getFrameRect();
+  const double x1 = rect1.pos.x - rect1.width / 2;
+  const double y1 = rect1.pos.y - rect1.height / 2;
+  const rectangle_t rect2 = cmplxqds[3].getFrameRect();
+  const double x2 = rect2.pos.x + rect2.width / 2;
+  const double y2 = rect2.pos.y + rect2.height / 2;
+  const double width = x2 - x1;
+  double height = std::abs(y2 - y1);
   if (height == 0)
   {
-    height = cmplxqd1.getB().y - cmplxqd1.getA().y;
+    const double y3 = rect1.pos.y + rect1.width / 2;
+    height = y3 - y1;
   }
   point_t pos;
-  pos.x = (cmplxqd1.getA().x + cmplxqd4.getD().x) / 2;
-  pos.y = (cmplxqd1.getA().y + cmplxqd4.getD().y) / 2;
-  rectangle_t frame_rect{width, height, pos};
+  pos.x = (x1 + x2) / 2;
+  pos.y = (y1 + y2) / 2;
+  rectangle_t frame_rect{ width, height, pos };
   return frame_rect;
 }
 
@@ -65,12 +70,19 @@ void abramov::Rectangle::move(const point_t &p)
 
 void abramov::Rectangle::scale(double k)
 {
-  const double newWidth = (cmplxqds[3].getD().x - cmplxqds[0].getA().x) * k;
+  const rectangle_t rect1 = cmplxqds[0].getFrameRect();
+  const double x1 = rect1.pos.x - rect1.width / 2;
+  const double y1 = rect1.pos.y - rect1.height / 2;
+  const rectangle_t rect2 = cmplxqds[3].getFrameRect();
+  const double x2 = rect2.pos.x + rect2.width / 2;
+  const double y2 = rect2.pos.y + rect2.height / 2;
+  const double newWidth = (x2 - x1) * k;
   double height = 0;
-  const double dy = std::abs(cmplxqds[3].getD().y - cmplxqds[0].getA().y);
+  const double dy = std::abs(y2 - y1);
   if (dy == 0)
   {
-    height = cmplxqds[0].getB().y - cmplxqds[0].getA().y;
+    const double y3 = rect1.pos.y + rect1.width / 2;
+    height = y3 - y1;
   }
   else
   {
@@ -78,12 +90,12 @@ void abramov::Rectangle::scale(double k)
   }
   const double newHeight = height * k;
   const point_t center = getFrameRect().pos;
-  const double x2 = center.x + newWidth / 2;
-  const double y2 = center.y + newHeight / 2;
-  const double x1 = center.x - newWidth / 2;
-  const double y1 = center.y - newHeight / 2;
-  const point_t p1{x1, y1};
-  const point_t p2{x2, y2};
+  const double xp2 = center.x + newWidth / 2;
+  const double yp2 = center.y + newHeight / 2;
+  const double xp1 = center.x - newWidth / 2;
+  const double yp1 = center.y - newHeight / 2;
+  const point_t p1{ xp1, yp1 };
+  const point_t p2{ xp2, yp2 };
   ComplexQuad *oldcqs = cmplxqds;
   cmplxqds = createCQs(p1, p2);
   delete[] oldcqs;
