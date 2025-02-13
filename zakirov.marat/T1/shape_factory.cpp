@@ -94,10 +94,12 @@ zakirov::Polygon * zakirov::make_polygon(std::istream & in)
   try
   {
     new (polygon) Polygon(points_size, converted_data);
+    free(parameters);
     return polygon;
   }
   catch (const std::invalid_argument & e)
   {
+    free(parameters);
     free(polygon);
     throw;
   }
