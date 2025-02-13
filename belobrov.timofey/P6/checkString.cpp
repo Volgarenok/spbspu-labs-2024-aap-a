@@ -51,7 +51,8 @@ const char* belobrov::checkExponent(const char* str)
     return str;
   }
   auto next = checkChar(str, 'E');
-  if (const char* continued == checkSign(next)) {
+  auto continued = checkSign(next)
+  if (continued != nullptr) {
     return checkUnsigned(continued);
   }
 
@@ -64,7 +65,8 @@ const char* belobrov::checkFraction(const char* str)
     return str;
   }
   auto next = str;
-  if (const char* continued == checkUnsigned(next)) {
+  auto continued = checkUnsigned(next);
+  if (continued != nullptr) {
     next = continued;
   }
   next = checkChar(next, '.');
