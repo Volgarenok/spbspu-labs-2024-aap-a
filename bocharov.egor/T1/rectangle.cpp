@@ -25,15 +25,21 @@ double third_point_x(bocharov::point_t leftDown, bocharov::point_t rightUp)
   return ah;
 }
 
+bocharov::point_t first_coordinate(bocharov::point_t leftDown, bocharov::point_t rightUp)
+{
+  return {leftDown.x + third_point_x(leftDown, rightUp), leftDown.y + third_point_y(leftDown, rightUp)};
+}
+
+bocharov::point_t second_coordinate(bocharov::point_t leftDown, bocharov::point_t rightUp)
+{
+  return {rightUp.x - third_point_x(leftDown, rightUp), rightUp.y - third_point_y(leftDown, rightUp)};
+}
+
 bocharov::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
-  ta_(Triangle{leftDown, point_t{rightUp.x, leftDown.y},
-    point_t{leftDown.x + third_point_x(leftDown, rightUp), leftDown.y + third_point_y(leftDown, rightUp)}}),
-  tb_(Triangle{leftDown, point_t{leftDown.x, rightUp.y},
-    point_t{leftDown.x + third_point_x(leftDown, rightUp), leftDown.y + third_point_y(leftDown, rightUp)}}),
-  tc_(Triangle{point_t{leftDown.x, rightUp.y}, rightUp,
-    point_t{rightUp.x - third_point_x(leftDown, rightUp), rightUp.y - third_point_y(leftDown, rightUp)}}),
-  td_(Triangle{rightUp, point_t{rightUp.x, leftDown.y},
-    point_t{rightUp.x - third_point_x(leftDown, rightUp), rightUp.y - third_point_y(leftDown, rightUp)}})
+  ta_(Triangle{leftDown, point_t{rightUp.x, leftDown.y}, first_coordinate(leftDown, rightUp)}),
+  tb_(Triangle{leftDown, point_t{leftDown.x, rightUp.y}, first_coordinate(leftDown, rightUp)}),
+  tc_(Triangle{rightUp, point_t{leftDown.x, rightUp.y}, second_coordinate(leftDown, rightUp)}),
+  td_(Triangle{rightUp, point_t{rightUp.x, leftDown.y}, second_coordinate(leftDown, rightUp)})
 {
   if (leftDown.x >= rightUp.x || leftDown.y >= rightUp.y)
   {
