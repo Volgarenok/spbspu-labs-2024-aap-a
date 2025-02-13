@@ -51,7 +51,7 @@ const char* belobrov::checkExponent(const char* str)
     return str;
   }
   auto next = checkChar(str, 'E');
-  auto continued = checkSign(next)
+  auto continued = checkSign(next);
   if (continued != nullptr) {
     return checkUnsigned(continued);
   }
