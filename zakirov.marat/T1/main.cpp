@@ -1,6 +1,7 @@
 #include <cstring>
 #include <iostream>
 #include <iomanip>
+#include <resize_line.hpp>
 #include "composite-shape.hpp"
 #include "io_data.hpp"
 #include "shape_factory.hpp"
@@ -53,23 +54,9 @@ int main()
     free(data);
   }
 
-  if (!shapes.empty())
+  if (!shapes.empty() || !scale_data || scale_quantity != 3)
   {
-    std::cerr << "1" << '\n';
-    free(scale_data);
-    free(data);
-    return 1;
-  }
-  if (!scale_data)
-  {
-    std::cerr << "2" << '\n';
-    free(scale_data);
-    free(data);
-    return 1;
-  }
-  if (scale_quantity != 3)
-  {
-    std::cerr << "3" << '\n';
+    std::cerr << "Some problem in getting shapes" << '\n';
     free(scale_data);
     free(data);
     return 1;

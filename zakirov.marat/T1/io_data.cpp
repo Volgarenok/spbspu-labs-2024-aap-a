@@ -3,44 +3,6 @@
 #include <resize_line.hpp>
 #include "composite-shape.hpp"
 
-namespace
-{
-  void get_part(std::istream & in, char * line, size_t start, size_t finish, char interrupt_el)
-  {
-    for (; start < finish; ++start)
-    {
-      if (!in)
-      {
-        throw std::logic_error("The stream is broken");
-      }
-
-      in >> line[start];
-      if (in.eof() || (line[start] == interrupt_el))
-      {
-        line[start] = '\0';
-        break;
-      }
-    }
-  }
-
-  double * extra_elements(const double * array, size_t size, size_t expansion)
-  {
-    size_t new_size = (size + expansion) * sizeof(double);
-    double * new_array = static_cast< double * >(malloc(new_size));
-    if (new_array == nullptr)
-    {
-      return new_array;
-    }
-
-    for (size_t i = 0; i < size; ++i)
-    {
-      new_array[i] = array[i];
-    }
-
-    return new_array;
-  }
-}
-
 double * zakirov::get_parameters_series(std::istream & in)
 {
   constexpr size_t step = 1;
@@ -55,7 +17,7 @@ double * zakirov::get_parameters_series(std::istream & in)
   }
 
   parameters[0] = size_built_in;
-  char * workline = zakirov::get_to_symbol(in, step, '\n');
+  char * workline = get_to_symbol(in, step, '\n');
   while (workline[start] != '\0')
   {
     double * expanded_parameters = extra_elements(parameters, real_size, step);
@@ -84,66 +46,6 @@ double * zakirov::get_parameters_series(std::istream & in)
 
   free(workline);
   return parameters;
-}
-
-char * zakirov::get_to_symbol(std::istream & in, size_t step, char interrupt_symbol)
-{
-  size_t start = 1, finish = 1;
-  char * line = static_cast< char * >(malloc(sizeof(char)));
-  if (line == nullptr)
-  {
-    return line;
-  }
-  else if (!in)
-  {
-    free(line);
-    return nullptr;
-  }
-
-  char last_symbol = interrupt_symbol;
-  in >> last_symbol >> std::noskipws;
-  line[0] = last_symbol;
-  while (last_symbol != interrupt_symbol && last_symbol != '\0')
-  {
-    char * expanded_line = zakirov::expand_line(line, finish, step);
-    finish += step;
-    if (expanded_line == nullptr)
-    {
-      free(line);
-      return expanded_line;
-    }
-
-    try
-    {
-      get_part(in, expanded_line, start, finish, interrupt_symbol);
-    }
-    catch (const std::exception &)
-    {
-      free(expanded_line);
-      free(line);
-      throw;
-    }
-
-    free(line);
-    line = expanded_line;
-    for (size_t i = start; i < finish; ++i)
-    {
-      if (line[i] == interrupt_symbol || line[i] == '\0')
-      {
-        last_symbol = line[i];
-        break;
-      }
-      else if (i == finish - 1)
-      {
-        last_symbol = line[i];
-      }
-    }
-
-    start += step;
-  }
-
-  in >> std::skipws;
-  return line;
 }
 
 void zakirov::get_parameters(std::istream & in, double * array, size_t size)

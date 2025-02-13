@@ -6,13 +6,18 @@
 int main()
 {
   constexpr size_t step = 1;
-  char * line = zakirov::get_line(std::cin, step);
-  if (line == nullptr)
+  char * line = nullptr;
+  try
+  {
+    char * line = zakirov::get_to_symbol(std::cin, step, '\n');
+  }
+  catch (std::logic_error &)
   {
     std::cerr << "ERROR: Out of memory" << '\n';
     return 1;
   }
-  else if (line[0] == '\0' || line[0] == '\n')
+
+  if (line[0] == '\0' || line[0] == '\n')
   {
     std::cerr << "ERROR: Empty line" << '\n';
     free(line);

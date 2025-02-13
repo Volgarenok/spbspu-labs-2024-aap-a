@@ -5,7 +5,6 @@
 
 namespace zakirov
 {
-  char * get_to_symbol(std::istream & in, size_t step, char interrupt_symbol);
   double * get_parameters_series(std::istream & in);
   void get_parameters(std::istream & in, double * array, size_t size);
   void output_frame(std::ostream & out, CompositeShape & shapes, size_t id);
