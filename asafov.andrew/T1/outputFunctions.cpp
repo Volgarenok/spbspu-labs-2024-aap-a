@@ -173,7 +173,6 @@ void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, 
   {
     throw std::logic_error("nothing to scale");
   }
-  rectangle_t rect = {};
   double area = 0.0;
   for (size_t i = 0; i < count; i++)
   {
