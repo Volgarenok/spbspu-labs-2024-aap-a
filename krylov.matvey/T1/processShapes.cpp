@@ -8,45 +8,45 @@
 #include "complexquad.hpp"
 
 
-krylov::Shape* krylov::createRectangle()
+krylov::Shape* krylov::createRectangle(std::istream& in)
 {
   double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0;
-  if (!(std::cin >> x1 >> y1 >> x2 >> y2))
+  if (!(in >> x1 >> y1 >> x2 >> y2))
   {
     throw std::invalid_argument("Invalid RECTANGLE parameters");
   }
   return new krylov::Rectangle({x1, y1}, {x2, y2});
 }
 
-krylov::Shape* krylov::createTriangle()
+krylov::Shape* krylov::createTriangle(std::istream& in)
 {
   double x1 = 0.0, y1 = 0.0;
   double x2 = 0.0, y2 = 0.0;
   double x3 = 0.0, y3 = 0.0;
-  if (!(std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3))
+  if (!(in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3))
   {
     throw std::invalid_argument("Invalid TRIANGLE parameters");
   }
   return new krylov::Triangle({x1, y1}, {x2, y2}, {x3, y3});
 }
 
-krylov::Shape* krylov::createRing()
+krylov::Shape* krylov::createRing(std::istream& in)
 {
   double x, y, outerRadius, innerRadius;
-  if (!(std::cin >> x >> y >> outerRadius >> innerRadius))
+  if (!(in >> x >> y >> outerRadius >> innerRadius))
   {
     throw std::invalid_argument("Invalid RING parameters");
   }
   return new krylov::Ring({x, y}, outerRadius, innerRadius);
 }
 
-krylov::Shape* krylov::createComplexquad()
+krylov::Shape* krylov::createComplexquad(std::istream& in)
 {
   double x1 = 0.0, y1 = 0.0;
   double x2 = 0.0, y2 = 0.0;
   double x3 = 0.0, y3 = 0.0;
   double x4 = 0.0, y4 = 0.0;
-  if (!(std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4))
+  if (!(in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4))
   {
     throw std::invalid_argument("Invalid COMPLEXQUAD parameters");
   }

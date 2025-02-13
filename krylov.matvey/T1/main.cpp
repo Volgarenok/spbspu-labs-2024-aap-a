@@ -6,6 +6,7 @@
 #include "ring.hpp"
 #include "triangle.hpp"
 #include "complexquad.hpp"
+#include "processLine.hpp"
 
 int main()
 {
@@ -29,44 +30,19 @@ int main()
       {
         if (shapeType == "RECTANGLE")
         {
-          double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0;
-          if (!(std::cin >> x1 >> y1 >> x2 >> y2))
-          {
-            throw std::invalid_argument("Invalid RECTANGLE parameters");
-          }
-          shapes[shapeCount++] = new krylov::Rectangle({x1, y1}, {x2, y2});
+          shapes[shapeCount++] = krylov::createRectangle(std::cin);
         }
         else if (shapeType == "RING")
         {
-          double x, y, outerRadius, innerRadius;
-          if (!(std::cin >> x >> y >> outerRadius >> innerRadius))
-          {
-            throw std::invalid_argument("Invalid RING parameters");
-          }
-          shapes[shapeCount++] = new krylov::Ring({x, y}, outerRadius, innerRadius);
+          shapes[shapeCount++] = krylov::createRing(std::cin);
         }
         else if (shapeType == "TRIANGLE")
         {
-          double x1 = 0.0, y1 = 0.0;
-          double x2 = 0.0, y2 = 0.0;
-          double x3 = 0.0, y3 = 0.0;
-          if (!(std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3))
-          {
-            throw std::invalid_argument("Invalid TRIANGLE parameters");
-          }
-          shapes[shapeCount++] = new krylov::Triangle({x1, y1}, {x2, y2}, {x3, y3});
+          shapes[shapeCount++] = krylov::createTriangle(std::cin);
         }
         else if (shapeType == "COMPLEXQUAD")
         {
-          double x1 = 0.0, y1 = 0.0;
-          double x2 = 0.0, y2 = 0.0;
-          double x3 = 0.0, y3 = 0.0;
-          double x4 = 0.0, y4 = 0.0;
-          if (!(std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4))
-          {
-            throw std::invalid_argument("Invalid COMPLEXQUAD parameters");
-          }
-          shapes[shapeCount++] = new krylov::Complexquad({x1, y1}, {x2, y2}, {x3, y3}, {x4, y4});
+          shapes[shapeCount++] = krylov::createComplexquad(std::cin);
         }
         else if (shapeType == "SCALE")
         {
@@ -116,14 +92,14 @@ int main()
         else
         {
           std::string skippedLines = "";
-          std::getline(std::cin, skippedLines);
+          skippedLines = krylov::inputLine(std::cin);
         }
       }
       catch (const std::exception & e)
       {
         invalidDescriptions = true;
         std::string skippedLines = "";
-        std::getline(std::cin, skippedLines);
+        skippedLines = krylov::inputLine(std::cin);
       }
     }
 
