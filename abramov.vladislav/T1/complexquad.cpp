@@ -82,8 +82,8 @@ abramov::ComplexQuad *abramov::createCQs(const point_t &p1, const point_t &p2)
   if (x2 - x1 >= y2 - y1)
   {
     const double x3 = (x1 + x2) / 2;
-    const point_t c{ x3, y2 };
-    const point_t d{ x3, y1 };
+    const point_t c{x3, y2};
+    const point_t d{x3, y1};
     ComplexQuad cq1 = ComplexQuad(p1, c, d, a);
     ComplexQuad cq2 = ComplexQuad(a, d, p1, c);
     ComplexQuad cq3 = ComplexQuad(d, p2, b, c);
@@ -94,8 +94,8 @@ abramov::ComplexQuad *abramov::createCQs(const point_t &p1, const point_t &p2)
   else
   {
     const double y3 = (y1 + y2) / 2;
-    const point_t c{ x2, y3 };
-    const point_t d{ x1, y3 };
+    const point_t c{x2, y3};
+    const point_t d{x1, y3};
     ComplexQuad cq1 = ComplexQuad(a, c, p2, d);
     ComplexQuad cq2 = ComplexQuad(d, p2, a, c);
     ComplexQuad cq3 = ComplexQuad(p1, c, b, d);
