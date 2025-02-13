@@ -96,6 +96,6 @@ int main()
   {
     std::cerr << "Warning! One or more figures are specified incorrectly." << '\n';
   }
-  shapes.~CompositeShape();
+
   free(scale_data);
 }
