@@ -1,6 +1,6 @@
 #include <iostream>
+#include <inputString.hpp>
 #include "stringFunctions.hpp"
-#include "../../asafov.andrew/common/inputString.hpp"
 
 int main()
 {

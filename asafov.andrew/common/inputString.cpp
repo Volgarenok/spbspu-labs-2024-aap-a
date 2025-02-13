@@ -3,17 +3,17 @@
 #include <cstddef>
 #include "resize.hpp"
 
-char* asafov::inputString()
+char* asafov::inputString(std::istream& in)
 {
   size_t reallength = 0;
   size_t possiblelength = 1;
   char* string = new char[possiblelength];
   char ch = 0;
-  while (!std::cin.eof())
+  while (!in.eof())
   {
     possiblelength--;
-    std::cin >> ch;
-    if (std::cin.fail() || std::cin.eof())
+    in >> ch;
+    if (in.fail() || in.eof())
     {
       string[reallength] = '\0';
       break;
