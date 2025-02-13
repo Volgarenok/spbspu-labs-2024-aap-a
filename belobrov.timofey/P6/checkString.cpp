@@ -8,11 +8,12 @@ namespace belobrov
   const char* checkUnsigned(const char* str);
   const char* checkExponent(const char* str);
   const char* checkFraction(const char* str);
+  bool validateFloat(const char* str);
 }
 
 const char* belobrov::checkChar(const char* str, char target)
 {
-  if (!str){
+  if (str == nullptr) {
     return nullptr;
   }
   return (*str == target) ? (str + 1) : nullptr;
@@ -20,7 +21,7 @@ const char* belobrov::checkChar(const char* str, char target)
 
 const char* belobrov::checkSign(const char* str)
 {
-  if (!str){
+  if (str == nullptr) {
     return nullptr;
   }
   return (checkChar(str, '+') || checkChar(str, '-')) ? (str + 1) : str;
@@ -28,130 +29,86 @@ const char* belobrov::checkSign(const char* str)
 
 const char* belobrov::isDigit(const char* str)
 {
-  if (!str || *str == '\0') {
-    return nullptr;
-  }
-
-  const char* digits = "0123456789";
-  for (const char* d = digits; *d != '\0'; ++d) {
-    if (*str == *d) {
-      return str + 1;
-    }
-  }
-
-  return nullptr;
+  return (str != nullptr && *str != '\0' && (*str - '0' == *str - *str)) ? (str + 1) : nullptr;
 }
 
 const char* belobrov::checkUnsigned(const char* str)
 {
-  if (!str) {
-    return nullptr;
-  }
   auto next = isDigit(str);
-  if (!next) {
-    return nullptr;
-  }
-  while (next) {
-    auto continued = isDigit(next);
-    if (!continued) {
-      break;
-    }
-    next = continued;
+  while (next != nullptr && isDigit(next) != nullptr) {
+    next = isDigit(next);
   }
   return next;
 }
 
 const char* belobrov::checkExponent(const char* str)
 {
-  if (!str) {
+  if (str == nullptr) {
     return nullptr;
   }
   auto next = checkChar(str, 'E');
-  if (!next) {
+  if (next == nullptr) {
     next = checkChar(str, 'e');
   }
-  if (!next) {
+  if (next == nullptr) {
     return nullptr;
   }
   next = checkSign(next);
-  if (!next) {
-    return nullptr;
-  }
-
   return checkUnsigned(next);
 }
 
 const char* belobrov::checkFraction(const char* str)
 {
-  if (!str) {
+  if (str == nullptr) {
     return nullptr;
   }
   auto next = checkUnsigned(str);
-  if (!next) {
+  if (next == nullptr) {
     next = str;
   }
   next = checkChar(next, '.');
-  if (!next) {
+  if (next == nullptr) {
     return nullptr;
   }
-
   return checkUnsigned(next);
 }
 
 bool belobrov::validateFloat(const char* str)
 {
-  if (!str || *str == '\0') {
+  if (str == nullptr || *str == '\0') {
     return false;
   }
 
-  const char* validChars = "0123456789+-eE";
-
-  while (*str != '\0') {
-    bool isValid = false;
-    for (const char* valid = validChars; *valid != '\0'; ++valid) {
-      if (*str == *valid) {
-        isValid = true;
-        break;
-      }
-    }
-    if (!isValid) {
-      return false;
-    }
-    ++str;
+  const char* next = checkSign(str);
+  if (next == nullptr) {
+    next = str;
   }
-  auto next = checkSign(str);
-  bool hasIntPart = false;
-  if (next) {
-    auto intCheck = checkUnsigned(next);
-    if (intCheck) {
-      hasIntPart = true;
-      next = intCheck;
-    }
+
+  bool hasIntPart = (checkUnsigned(next) != nullptr);
+  if (hasIntPart) {
+    next = checkUnsigned(next);
   }
 
   bool hasFrPart = false;
-  if (next && *next == '.') {
-    auto frCheck = checkUnsigned(next+1);
-    if (frCheck) {
+  if (*next == '.') {
+    auto frCheck = checkUnsigned(next + 1);
+    if (frCheck != nullptr) {
       hasFrPart = true;
       next = frCheck;
-    } else {
-      return false;
     }
   }
 
-  if (!hasIntPart && !hasFrPart) {
+  if (hasIntPart == false && hasFrPart == false) {
     return false;
   }
 
-  if (next && (*next == 'E' || *next == 'e')) {
+  if (*next == 'E' || *next == 'e') {
     auto exponentCheck = checkExponent(next);
-    if (exponentCheck) {
-      next = exponentCheck;
-    } else {
+    if (exponentCheck == nullptr) {
       return false;
     }
+    next = exponentCheck;
   }
 
-  return next && *next == '\0';
+  return (*next == '\0');
 }
