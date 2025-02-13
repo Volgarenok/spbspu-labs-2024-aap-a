@@ -23,13 +23,17 @@ int main()
     Shape* shp = nullptr;
     try {
       shp = make_shape(std::cin, shapeTypeOrScale);
-    } catch (const std::exception& e) {
-      std::cerr << e.what();
-      continue;
-    }
-    try {
       shapes.push_back(shp);
-    } catch (const std::exception& e) {
+    } catch (const std::bad_alloc& e) {
+      std::cerr << e.what();
+      if (!shp) {
+        continue;
+      }
+      return 1;
+    } catch (const std::invalid_argument & e) {
+      std::cerr << e.what();
+      return 1;
+    } catch (const std::logic_error & e) {
       std::cerr << e.what();
       return 1;
     }
