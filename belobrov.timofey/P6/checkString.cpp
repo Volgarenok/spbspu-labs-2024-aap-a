@@ -28,18 +28,16 @@ const char* belobrov::checkSign(const char* str)
 
 const char* belobrov::isDigit(const char* str)
 {
-  if (!str) {
-    return str;
+  if (string == nullptr) {
+    return nullptr;
   }
 
-  const char* digits = "0123456789";
-  for (const char* d = digits; *d != '\0'; ++d) {
-    if (*str == *d) {
-      return isDigit(str + 1);
-    } else {
-      return nullptr;
-    }
+  char c = *string;
+  if (c == '0' || c == '1' || c == '2' || c == '3' || c == '4' || c == '5' || c == '6' || c == '7' || c == '8' || c == '9') {
+    return string + 1;
   }
+
+  return nullptr;
 }
 
 const char* belobrov::checkUnsigned(const char* str)
