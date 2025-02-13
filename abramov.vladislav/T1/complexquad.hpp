@@ -8,7 +8,7 @@ namespace abramov
 {
   struct ComplexQuad final: Shape
   {
-    ComplexQuad(const point_t &A, const point_t &B, const point_t &C, const point_t &D);
+    ComplexQuad(const point_t &a, const point_t &b, const point_t &c, const point_t &d);
     double getArea() const noexcept override;
     rectangle_t getFrameRect() const noexcept override;
     void move(const point_t &p) override;
