@@ -71,10 +71,11 @@ int main()
     std::cerr << "scaling was not specified\n";
     return 1;
   }
-/*  if (invalidInput)
+  if (invalidInput)
   {
     std::cerr << "invalid input encountered" << "\n";
-  }*/
+    invalidInput = true;
+  }
   std::cout << std::fixed << std::setprecision(1);
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
