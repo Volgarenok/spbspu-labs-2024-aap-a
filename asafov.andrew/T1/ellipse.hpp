@@ -6,8 +6,8 @@ namespace asafov
   class Ellipse : public Shape
   {
     point_t center;
-    double radiusv;
-    double radiush;
+    double verticalradius;
+    double horizontalradius;
   public:
     Ellipse(point_t pos, double radv, double radh);
     double getArea() const;

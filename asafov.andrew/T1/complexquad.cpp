@@ -33,12 +33,12 @@ double asafov::Complexquad::getArea() const
 
 rectangle_t asafov::Complexquad::getFrameRect() const
 {
-  rectangle_t frect;
-  frect.height = std::max({ one.y, two.y, three.y, four.y }) - std::min({ one.y, two.y, three.y, four.y });
-  frect.width = std::max({ one.x, two.x, three.x, four.x }) - std::min({ one.x, two.x, three.x, four.x });
-  frect.pos.x = std::min({ one.x, two.x, three.x, four.x }) + frect.width / 2.0;
-  frect.pos.y = std::min({ one.y, two.y, three.y, four.x }) + frect.height / 2.0;
-  return frect;
+  rectangle_t rect;
+  rect.height = std::max({ one.y, two.y, three.y, four.y }) - std::min({ one.y, two.y, three.y, four.y });
+  rect.width = std::max({ one.x, two.x, three.x, four.x }) - std::min({ one.x, two.x, three.x, four.x });
+  rect.pos.x = std::min({ one.x, two.x, three.x, four.x }) + rect.width / 2.0;
+  rect.pos.y = std::min({ one.y, two.y, three.y, four.x }) + rect.height / 2.0;
+  return rect;
 }
 
 void asafov::Complexquad::move(double x, double y)
@@ -58,16 +58,14 @@ void asafov::Complexquad::move(point_t pos)
   point_t center = {};
   center.x = std::max({ one.x, two.x, three.x, four.x }) - std::min({ one.x, two.x, three.x, four.x });
   center.y = std::max({ one.y, two.y, three.y, four.y }) - std::min({ one.y, two.y, three.y, four.y });
-  double temp = center.x - pos.x;
-  one.x += temp;
-  two.x += temp;
-  three.x += temp;
-  four.x += temp;
-  temp = center.y - pos.y;
-  one.y += temp;
-  two.y += temp;
-  three.y += temp;
-  four.y += temp;
+  one.x += center.x - pos.x;
+  two.x += center.x - pos.x;
+  three.x += center.x - pos.x;
+  four.x += center.x - pos.x;
+  one.y += center.y - pos.y;
+  two.y += center.y - pos.y;
+  three.y += center.y - pos.y;
+  four.y += center.y - pos.y;
 }
 
 void asafov::Complexquad::scale(double scale)

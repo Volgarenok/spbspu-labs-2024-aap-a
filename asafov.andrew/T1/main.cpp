@@ -52,7 +52,7 @@ int main()
   {
     scaleShapes(shapes, count, pos, scale, std::cout);
   }
-  catch (const std::logic_error & e)
+  catch (const std::logic_error &)
   {
     asafov::deleteShapes(shapes, count);
     return 1;

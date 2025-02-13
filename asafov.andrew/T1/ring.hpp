@@ -6,8 +6,8 @@ namespace asafov
   class Ring : public Shape
   {
     point_t center;
-    double radiusi;
-    double radiuso;
+    double innerradius;
+    double outerradius;
   public:
     Ring(point_t pos, double radi, double rado);
     double getArea() const;

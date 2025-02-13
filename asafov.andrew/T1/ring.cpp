@@ -7,22 +7,22 @@ using asafov::rectangle_t;
 
 asafov::Ring::Ring(point_t pos, double radi, double rado):
   center(pos),
-  radiusi(radi),
-  radiuso(rado)
+  innerradius(radi),
+  outerradius(rado)
 {}
 
 double asafov::Ring::getArea() const
 {
-  return M_PI * (radiuso * radiuso - radiusi * radiusi);
+  return M_PI * (outerradius * outerradius - innerradius * innerradius);
 }
 
 rectangle_t asafov::Ring::getFrameRect() const
 {
-  rectangle_t frect;
-  frect.height = radiusi * 2.0;
-  frect.width = radiuso * 2.0;
-  frect.pos = center;
-  return frect;
+  rectangle_t rect;
+  rect.height = outerradius * 2.0;
+  rect.width = outerradius * 2.0;
+  rect.pos = center;
+  return rect;
 }
 
 void asafov::Ring::move(double x, double y)
@@ -41,6 +41,6 @@ void asafov::Ring::scale(double scale)
   rectangle_t rect = getFrameRect();
   center.x += (center.x - rect.pos.x) * (scale - 1);
   center.y += (center.y - rect.pos.y) * (scale - 1);
-  radiusi *= scale;
-  radiuso *= scale;
+  innerradius *= scale;
+  outerradius *= scale;
 }

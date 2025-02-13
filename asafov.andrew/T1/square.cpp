@@ -16,12 +16,12 @@ double asafov::Square::getArea() const
 
 rectangle_t asafov::Square::getFrameRect() const
 {
-  rectangle_t frect;
-  frect.height = side;
-  frect.width = side;
-  frect.pos.x = lb.x + side / 2.0;
-  frect.pos.y = lb.y + side / 2.0;
-  return frect;
+  rectangle_t rect;
+  rect.height = side;
+  rect.width = side;
+  rect.pos.x = lb.x + side / 2.0;
+  rect.pos.y = lb.y + side / 2.0;
+  return rect;
 }
 
 void asafov::Square::move(double x, double y)
@@ -32,16 +32,14 @@ void asafov::Square::move(double x, double y)
 
 void asafov::Square::move(point_t pos)
 {
-  double temp = pos.x - (lb.x + (side / 2.0));
-  lb.x += temp;
-  temp = pos.y - (lb.y + (side / 2.0));
-  lb.y += temp;
+  lb.x += pos.x - (lb.x + (side / 2.0));
+  lb.y += pos.y - (lb.y + (side / 2.0));
 }
 
 void asafov::Square::scale(double scale)
 {
   rectangle_t rect = getFrameRect();
-  lb.x += (lb.x - rect.pos.x) * (scale - 1);
-  lb.y += (lb.y - rect.pos.y) * (scale - 1);
+  lb.x += (lb.x - rect.pos.x) * (scale - 1.0);
+  lb.y += (lb.y - rect.pos.y) * (scale - 1.0);
   side *= scale;
 }

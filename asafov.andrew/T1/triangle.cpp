@@ -16,17 +16,17 @@ double asafov::Triangle::getArea() const
   double sidea = std::pow(std::pow((one.x - two.x), 2.0) + std::pow((one.y - two.y), 2.0), 0.5);
   double sideb = std::pow(std::pow((two.x - three.x), 2.0) + std::pow((two.y - three.y), 2.0), 0.5);
   double sidec = std::pow(std::pow((one.x - three.x), 2.0) + std::pow((one.y - three.y), 2.0), 0.5);
-  return std::pow(((sidea + sideb + sidec) * (sidea + sideb - sidec) * (sidea - sideb + sidec) * (sideb + sidec - sidea) / 16), 0.5);
+  return std::pow(((sidea + sideb + sidec) * (sidea + sideb - sidec) * (sidea - sideb + sidec) * (sideb + sidec - sidea) / 16.0), 0.5);
 }
 
 rectangle_t asafov::Triangle::getFrameRect() const
 {
-  rectangle_t frect;
-  frect.height = std::max({one.y, two.y, three.y}) - std::min({one.y, two.y, three.y});
-  frect.width = std::max({one.x, two.x, three.x}) - std::min({one.x, two.x, three.x});
-  frect.pos.x = std::min({one.x, two.x, three.x}) + frect.width / 2.0;
-  frect.pos.y = std::min({one.y, two.y, three.y}) + frect.height / 2.0;
-  return frect;
+  rectangle_t rect;
+  rect.height = std::max({one.y, two.y, three.y}) - std::min({one.y, two.y, three.y});
+  rect.width = std::max({one.x, two.x, three.x}) - std::min({one.x, two.x, three.x});
+  rect.pos.x = std::min({one.x, two.x, three.x}) + rect.width / 2.0;
+  rect.pos.y = std::min({one.y, two.y, three.y}) + rect.height / 2.0;
+  return rect;
 }
 
 void asafov::Triangle::move(double x, double y)
@@ -41,13 +41,13 @@ void asafov::Triangle::move(double x, double y)
 
 void asafov::Triangle::move(point_t pos)
 {
-  rectangle_t frect = getFrameRect();
-  one.x += pos.x - frect.pos.x;
-  one.y += pos.y - frect.pos.y;
-  two.x += pos.x - frect.pos.x;
-  two.y += pos.y - frect.pos.y;
-  three.x += pos.x - frect.pos.x;
-  three.y += pos.y - frect.pos.y;
+  rectangle_t rect = getFrameRect();
+  one.x += pos.x - rect.pos.x;
+  one.y += pos.y - rect.pos.y;
+  two.x += pos.x - rect.pos.x;
+  two.y += pos.y - rect.pos.y;
+  three.x += pos.x - rect.pos.x;
+  three.y += pos.y - rect.pos.y;
 }
 
 void asafov::Triangle::scale(double scale)
