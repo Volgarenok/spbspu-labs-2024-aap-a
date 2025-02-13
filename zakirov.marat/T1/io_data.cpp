@@ -23,9 +23,9 @@ namespace
     }
   }
 
-  double * extra_element(const double * array, size_t size)
+  double * extra_elements(const double * array, size_t size, size_t expansion)
   {
-    size_t new_size = size * sizeof(double) + sizeof(double);
+    size_t new_size = (size + expansion) * sizeof(double);
     double * new_array = static_cast< double * >(malloc(new_size));
     if (new_array == nullptr)
     {
@@ -41,16 +41,24 @@ namespace
   }
 }
 
-size_t zakirov::get_parameters_series(std::istream & in, double * parameters)
+double * zakirov::get_parameters_series(std::istream & in)
 {
   constexpr size_t step = 1;
-  size_t counter = 0;
   size_t start = 0;
   size_t finish = 0;
+  size_t real_size = 1;
+  double size_built_in = 0.0;
+  double * parameters = static_cast< double * >(malloc(real_size));
+  if (!parameters)
+  {
+    throw std::logic_error("Error! Not enought memory.");
+  }
+
+  parameters[0] = size_built_in;
   char * workline = zakirov::get_to_symbol(in, step, '\n');
   while (workline[start] != '\0')
   {
-    double * expanded_parameters = extra_element(parameters, counter);
+    double * expanded_parameters = extra_elements(parameters, real_size, step);
     free(parameters);
     if (!expanded_parameters)
     {
@@ -58,12 +66,12 @@ size_t zakirov::get_parameters_series(std::istream & in, double * parameters)
     }
 
     parameters = expanded_parameters;
-    while (workline[finish] != ' ' && workline[finish] != '\n')
+    while (workline[finish] != ' ' && workline[finish] != '\0')
     {
       ++finish;
     }
 
-    parameters[counter++] = std::stod(workline);
+    parameters[real_size++] = std::stod(workline);
     while (start < finish)
     {
       workline[start] = ' ';
@@ -71,9 +79,10 @@ size_t zakirov::get_parameters_series(std::istream & in, double * parameters)
     }
     start = finish;
     ++finish;
+    parameters[0] = ++size_built_in;
   }
 
-  return counter;
+  return parameters;
 }
 
 char * zakirov::get_to_symbol(std::istream & in, size_t step, char interrupt_symbol)

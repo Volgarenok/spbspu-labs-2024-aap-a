@@ -9,10 +9,14 @@ namespace
   zakirov::point_t * convert_polygon(const double * original_data, size_t size)
   {
     using zakirov::point_t;
-    size_t points_size = static_cast< size_t >(size / 2);
-    point_t * converted_data = static_cast< point_t * >(malloc(points_size * sizeof(point_t)));
-    size_t counter = 2;
-    for (size_t i = 0; i < points_size; ++i)
+    point_t * converted_data = static_cast< point_t * >(malloc(size * sizeof(point_t)));
+    if (!converted_data)
+    {
+      throw std::logic_error("Not enough memory");
+    }
+
+    size_t counter = 1;
+    for (size_t i = 0; i < size; ++i)
     {
       point_t point = {(original_data)[counter], (original_data)[counter + 1]};
       converted_data[i] = point;
@@ -82,8 +86,8 @@ zakirov::Ring * zakirov::make_ring(std::istream & in)
 
 zakirov::Polygon * zakirov::make_polygon(std::istream & in)
 {
-  double * parameters = nullptr;
-  size_t points_size = get_parameters_series(in, parameters);
+  double * parameters = get_parameters_series(in);
+  size_t points_size = static_cast< size_t >(parameters[0] / 2.0);
   point_t * converted_data = convert_polygon(parameters, points_size);
 
   Polygon * polygon = static_cast< Polygon * >(malloc(sizeof(Polygon)));

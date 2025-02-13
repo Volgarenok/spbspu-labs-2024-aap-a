@@ -10,9 +10,9 @@ int main()
   using namespace zakirov;
   CompositeShape shapes;
   constexpr size_t step = 1;
-  size_t scale_quantity = 0;
   bool shape_flag = false;
   double * scale_data = nullptr;
+  double scale_quantity = 0;
   double * data = nullptr;
   while (std::cin)
   {
@@ -24,7 +24,8 @@ int main()
     }
     else if (!std::strcmp(data, "SCALE"))
     {
-      scale_quantity = get_parameters_series(std::cin, scale_data);
+      scale_data = get_parameters_series(std::cin);
+      scale_quantity = scale_data[0];
       break;
     }
 
@@ -51,9 +52,23 @@ int main()
     free(data);
   }
 
-  if (!shapes.empty() || !scale_data || scale_quantity != 3)
+  if (!shapes.empty())
   {
-    std::cerr << "Warning! No shapes entered or scale is not defined." << '\n';
+    std::cerr << "1" << '\n';
+    free(scale_data);
+    free(data);
+    return 1;
+  }
+  if (!scale_data)
+  {
+    std::cerr << "2" << '\n';
+    free(scale_data);
+    free(data);
+    return 1;
+  }
+  if (scale_quantity != 3)
+  {
+    std::cerr << "3" << '\n';
     free(scale_data);
     free(data);
     return 1;
@@ -61,8 +76,8 @@ int main()
 
   full_output(std::cout, shapes);
   std::cout << '\n';
-  point_t target{scale_data[2], scale_data[3]};
-  double coefficient = scale_data[4];
+  point_t target{scale_data[1], scale_data[2]};
+  double coefficient = scale_data[3];
   try
   {
     check_scale_full_composition(shapes, target, coefficient);
