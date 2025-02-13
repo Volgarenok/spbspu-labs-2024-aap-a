@@ -42,8 +42,7 @@ void bocharov::Parallelogram::move(point_t point)
 
 void bocharov::Parallelogram::move(double x, double y)
 {
-  pos_.x += x;
-  pos_.y += y;
+  pos_ = movePoint(pos_, x, y);
 }
 
 void bocharov::Parallelogram::scale(double ratio)

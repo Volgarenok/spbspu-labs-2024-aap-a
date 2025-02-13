@@ -73,14 +73,10 @@ bocharov::rectangle_t bocharov::Concave::getFrameRect() const
 }
 void bocharov::Concave::move(double x, double y)
 {
-  a_.x += x;
-  b_.x += x;
-  c_.x += x;
-  d_.x += x;
-  a_.y += y;
-  b_.y += y;
-  c_.y += y;
-  d_.y += y;
+  a_ = movePoint(a_, x, y);
+  b_ = movePoint(b_, x, y);
+  c_ = movePoint(c_, x, y);
+  d_ = movePoint(d_, x, y);
 }
 
 void bocharov::Concave::move(point_t point)

@@ -40,12 +40,9 @@ void bocharov::Triangle::move(point_t centerP)
 
 void bocharov::Triangle::move(double x, double y)
 {
-  a_.x += x;
-  a_.y += y;
-  b_.x += x;
-  b_.y += y;
-  c_.x += x;
-  c_.y += y;
+  a_ = movePoint(a_, x, y);
+  b_ = movePoint(b_, x, y);
+  c_ = movePoint(c_, x, y);
 }
 
 void bocharov::Triangle::scale(double ratio)
