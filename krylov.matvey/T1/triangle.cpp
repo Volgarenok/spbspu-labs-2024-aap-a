@@ -29,15 +29,25 @@ krylov::rectangle_t krylov::Triangle::getFrameRect() const
   point_t center = {minX + (maxX - minX) / 2, minY + (maxY - minY) / 2};
   return rectangle_t{maxX - minX, maxY - minY, center};
 }
-
+krylov::point_t krylov::Triangle::getA() const
+{
+  return a_;
+}
+krylov::point_t krylov::Triangle::getB() const
+{
+  return b_;
+}
+krylov::point_t krylov::Triangle::getC() const
+{
+  return c_;
+}
 void krylov::Triangle::move(const point_t& point)
 {
-  krylov::point_t center = getFrameRect().pos;
+  point_t center = getFrameRect().pos;
   double dx = point.x - center.x;
   double dy = point.y - center.y;
   move(dx, dy);
 }
-
 void krylov::Triangle::move(double dx, double dy)
 {
   a_.x += dx;
@@ -54,7 +64,7 @@ void krylov::Triangle::scale(double factor)
   {
     throw std::invalid_argument("Scale factor must be positive");
   }
-  krylov::point_t center = getFrameRect().pos;
+  point_t center = getFrameRect().pos;
   a_.x = center.x + factor * (a_.x - center.x);
   a_.y = center.y + factor * (a_.y - center.y);
   b_.x = center.x + factor * (b_.x - center.x);
