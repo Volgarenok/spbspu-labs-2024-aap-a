@@ -95,7 +95,12 @@ int main()
           skippedLines = krylov::inputLine(std::cin);
         }
       }
-      catch (const std::exception & e)
+      catch (const std::bad_alloc& e)
+      {
+        krylov::deleteShapes(shapes, shapeCount);
+        throw std::bad_alloc();
+      }
+      catch (const std::exception& e)
       {
         invalidDescriptions = true;
         std::string skippedLines = "";
