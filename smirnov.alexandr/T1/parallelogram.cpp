@@ -55,10 +55,6 @@ void smirnov::Parallelogram::move(double dx, double dy)
 
 void smirnov::Parallelogram::scale(double k)
 {
-  if (k < 0)
-  {
-    throw std::invalid_argument("Zoom coefficient must be positive");
-  }
   point_t center = getFrameRect().pos;
   applyScale(vertex1_, center, k);
   applyScale(vertex2_, center, k);

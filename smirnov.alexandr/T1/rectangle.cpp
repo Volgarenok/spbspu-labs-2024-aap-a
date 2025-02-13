@@ -38,10 +38,6 @@ void smirnov::Rectangle::move(double dx, double dy)
 
 void smirnov::Rectangle::scale(double k)
 {
-  if (k < 0)
-  {
-    throw std::invalid_argument("Zoom coefficient must be positive");
-  }
   point_t center = getFrameRect().pos;
   applyScale(lowerLeft_, center, k);
   applyScale(upperRight_, center, k);

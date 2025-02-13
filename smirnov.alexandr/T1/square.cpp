@@ -37,10 +37,6 @@ void smirnov::Square::move(double dx, double dy)
 
 void smirnov::Square::scale(double k)
 {
-  if (k < 0)
-  {
-    throw std::invalid_argument("Zoom coefficient must be positive");
-  }
   point_t center = getFrameRect().pos;
   sideLength_ *= k;
   applyScale(lowerLeft_, center, k);
