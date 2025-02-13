@@ -1,7 +1,7 @@
 #include "processShapes.hpp"
 #include <iostream>
 
-double smirnov::sumArea(const Shape * const * const shapes, size_t count)
+double smirnov::sumArea(const Shape * const * shapes, size_t count)
 {
   double sumArea = 0;
   for (size_t i = 0; i < count; i++)
@@ -19,8 +19,7 @@ void smirnov::destroyShapes(Shape ** shapes, size_t count)
   }
 }
 
-void smirnov::printFrameRect(const Shape * const * const shapes,
-    size_t count, std::ostream & out)
+void smirnov::printFrameRect(const Shape * const * shapes, size_t count, std::ostream & out)
 {
   rectangle_t rectangle = shapes[0]->getFrameRect();
   double x1 = rectangle.pos.x - rectangle.width / 2.0;

@@ -6,9 +6,9 @@
 
 namespace smirnov
 {
-  double sumArea(const Shape * const * const shapes, size_t count);
+  double sumArea(const Shape * const * shapes, size_t count);
   void destroyShapes(Shape ** shapes, size_t count);
-  void printFrameRect(const Shape * const * const shapes, size_t count, std::ostream & out);
+  void printFrameRect(const Shape * const * shapes, size_t count, std::ostream & out);
   void scaleShapes(Shape ** shapes, size_t count, point_t p, double factor);
 }
 #endif
