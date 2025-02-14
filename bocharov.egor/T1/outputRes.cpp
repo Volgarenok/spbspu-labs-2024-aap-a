@@ -2,7 +2,7 @@
 #include "getShapeInfo.hpp"
 #include <iomanip>
 
-void bocharov::outputRes(std::ostream & output, Shape ** myShape, size_t shapeSize)
+void bocharov::outputRes(std::ostream & output, Shape * const * myShape, size_t shapeSize)
 {
   output << std::fixed << std::setprecision(1) << getAllArea(myShape, shapeSize);
   for (size_t i = 0; i < shapeSize; i++)

@@ -135,6 +135,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
   }
   return shapesCount;
 }
+
 void bocharov::clear(Shape ** myshape, size_t shapeCount)
 {
   for (size_t i = 0; i < shapeCount; i++)
