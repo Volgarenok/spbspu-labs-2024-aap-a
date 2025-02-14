@@ -79,7 +79,7 @@ abramov::ComplexQuad *abramov::createCQs(const point_t &p1, const point_t &p2)
   const point_t a{ x1, y2 };
   const point_t b{ x2, y1 };
   constexpr size_t k = 4;
-  if (x2 - x1 >= y2 - y1)
+  if (2 * (x2 - x1) >= y2 - y1)
   {
     const double x3 = (x1 + x2) / 2;
     const point_t c{x3, y2};

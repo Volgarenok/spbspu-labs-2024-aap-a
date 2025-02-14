@@ -81,7 +81,7 @@ void abramov::Rectangle::scale(double k)
   const double dy = std::abs(y2 - y1);
   if (dy == 0)
   {
-    height = rect1.height;
+    height = 2 * rect1.height;
   }
   else
   {
