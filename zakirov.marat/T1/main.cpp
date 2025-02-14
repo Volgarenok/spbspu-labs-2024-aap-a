@@ -40,7 +40,6 @@ int main()
     catch (const std::invalid_argument &)
     {
       shape_flag = true;
-      free(data);
     }
     catch (const std::logic_error &)
     {
@@ -49,6 +48,8 @@ int main()
       std::cerr << "Warning! Error in scale composition." << '\n';
       return 1;
     }
+
+    free(data);
   }
 
   if (shapes.empty() || !scale_data || scale_quantity != 3)
