@@ -49,6 +49,21 @@ void zakirov::Rectangle::scale(double k)
 
 zakirov::Shape * zakirov::Rectangle::clone() const
 {
-  Rectangle * rectangle = static_cast< Rectangle * >(malloc(sizeof(Rectangle)));
-  return new (rectangle) Rectangle(bottom_left_, top_right_);
+  Rectangle * rectangle = nullptr;
+  try
+  {
+    Rectangle * rectangle = static_cast< Rectangle * >(malloc(sizeof(Rectangle)));
+    if (!rectangle)
+    {
+      throw std::logic_error("Not enought memory");
+    }
+
+    new (rectangle) Rectangle(bottom_left_, top_right_);
+    return rectangle;
+  }
+  catch (std::exception &)
+  {
+    free(rectangle);
+    throw;
+  }
 }

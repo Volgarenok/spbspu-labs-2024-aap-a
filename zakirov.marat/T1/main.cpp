@@ -41,7 +41,6 @@ int main()
     {
       shape_flag = true;
       free(data);
-      continue;
     }
     catch (const std::logic_error &)
     {
@@ -50,11 +49,9 @@ int main()
       std::cerr << "Warning! Error in scale composition." << '\n';
       return 1;
     }
-
-    free(data);
   }
 
-  if (!shapes.empty() || !scale_data || scale_quantity != 3)
+  if (shapes.empty() || !scale_data || scale_quantity != 3)
   {
     std::cerr << "Some problem in getting shapes" << '\n';
     free(scale_data);

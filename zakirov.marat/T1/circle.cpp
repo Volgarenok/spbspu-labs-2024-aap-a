@@ -45,10 +45,7 @@ zakirov::rectangle_t zakirov::Circle::getFrameRect() const
 
 void zakirov::Circle::move(const point_t & target)
 {
-  for (size_t i = 0; i < rings_size_; ++i)
-  {
-    rings_[i]->move(target);
-  }
+  move(target.x - getFrameRect().pos.x, target.y - getFrameRect().pos.y);
 }
 
 void zakirov::Circle::move(double bias_x, double bias_y)
@@ -71,6 +68,21 @@ zakirov::Shape * zakirov::Circle::clone() const
 {
   point_t center = getFrameRect().pos;
   double radius = getFrameRect().width / 2;
-  Circle * circle = static_cast< Circle * >(malloc(sizeof(Circle)));
-  return new (circle) Circle(center, radius);
+  Circle * circle = nullptr;
+  try
+  {
+    Circle * circle = static_cast< Circle * >(malloc(sizeof(Circle)));
+    if (!circle)
+    {
+      throw std::logic_error("Not enought memory");
+    }
+
+    new (circle) Circle(center, radius);
+    return circle;
+  }
+  catch (std::exception &)
+  {
+    free(circle);
+    throw;
+  }
 }

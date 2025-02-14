@@ -45,6 +45,21 @@ void zakirov::Ring::scale(double k)
 
 zakirov::Shape * zakirov::Ring::clone() const
 {
-  Ring * ring = static_cast< Ring * >(malloc(sizeof(Ring)));
-  return new (ring) Ring(center_, ex_radius_, in_radius_);
+  Ring * ring = nullptr;
+  try
+  {
+    Ring * ring = static_cast< Ring * >(malloc(sizeof(Ring)));
+    if (!ring)
+    {
+      throw std::logic_error("Not enought memory");
+    }
+
+    new (ring) Ring(center_, ex_radius_, in_radius_);
+    return ring;
+  }
+  catch (std::exception &)
+  {
+    free(ring);
+    throw;
+  }
 }

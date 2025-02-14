@@ -18,7 +18,7 @@ namespace
     size_t counter = 1;
     for (size_t i = 0; i < size; ++i)
     {
-      point_t point = {(original_data)[counter], (original_data)[counter + 1]};
+      point_t point = {original_data[counter], original_data[counter + 1]};
       converted_data[i] = point;
       counter += 2;
     }
@@ -30,7 +30,7 @@ namespace
 zakirov::Rectangle * zakirov::make_rectangle(std::istream & in)
 {
   constexpr size_t parameters_quantity = 4;
-  double parameters[parameters_quantity];
+  double parameters[parameters_quantity] = {0.0, 0.0, 0.0, 0.0};
   get_parameters(in, parameters, parameters_quantity);
 
   Rectangle * rectangle = static_cast< Rectangle * >(malloc(sizeof(Rectangle)));
@@ -49,7 +49,7 @@ zakirov::Rectangle * zakirov::make_rectangle(std::istream & in)
 zakirov::Circle * zakirov::make_circle(std::istream & in)
 {
   constexpr size_t parameters_quantity = 3;
-  double parameters[parameters_quantity];
+  double parameters[parameters_quantity] = {0.0, 0.0, 0.0};
   get_parameters(in, parameters, parameters_quantity);
 
   Circle * circle = static_cast< Circle * >(malloc(sizeof(Circle)));
@@ -68,7 +68,7 @@ zakirov::Circle * zakirov::make_circle(std::istream & in)
 zakirov::Ring * zakirov::make_ring(std::istream & in)
 {
   constexpr size_t parameters_quantity = 4;
-  double parameters[parameters_quantity];
+  double parameters[parameters_quantity] = {0.0, 0.0, 0.0, 0.0};
   get_parameters(in, parameters, parameters_quantity);
 
   Ring * ring = static_cast< Ring * >(malloc(sizeof(Ring)));
@@ -124,9 +124,6 @@ zakirov::Shape * zakirov::make_shape(std::istream & in, char * shape_name)
   {
     return make_polygon(in);
   }
-  else
-  {
-    throw std::invalid_argument("Shapes not defined");
-  }
-}
 
+  throw std::invalid_argument("Shapes not defined");
+}

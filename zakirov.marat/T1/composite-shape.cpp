@@ -29,7 +29,7 @@ zakirov::CompositeShape::CompositeShape(const CompositeShape & copy):
   }
 }
 
-zakirov::CompositeShape::CompositeShape(CompositeShape &&copy):
+zakirov::CompositeShape::CompositeShape(CompositeShape && copy) noexcept:
   shapes_quantity_(copy.shapes_quantity_)
 {
   for (size_t i = 0; i < copy.size(); ++i)
@@ -45,7 +45,7 @@ zakirov::CompositeShape & zakirov::CompositeShape::operator=(const CompositeShap
 {
   if (std::addressof(copy) == this)
   {
-    return * this;
+    return *this;
   }
 
   CompositeShape temporary_shapes;
@@ -55,7 +55,7 @@ zakirov::CompositeShape & zakirov::CompositeShape::operator=(const CompositeShap
     {
       temporary_shapes.push_back(copy.shapes_[i]->clone());
     }
-    catch(const std::invalid_argument &)
+    catch (const std::invalid_argument &)
     {
       clear_shapes(temporary_shapes.shapes_, temporary_shapes.size());
       throw;
@@ -63,26 +63,26 @@ zakirov::CompositeShape & zakirov::CompositeShape::operator=(const CompositeShap
   }
 
   clear_shapes(shapes_, shapes_quantity_);
-  * this = std::move(temporary_shapes);
-  return * this;
+  *this = std::move(temporary_shapes);
+  return *this;
 }
 
-zakirov::CompositeShape & zakirov::CompositeShape::operator=(CompositeShape && copy)
+zakirov::CompositeShape & zakirov::CompositeShape::operator=(CompositeShape && copy) noexcept
 {
   if (std::addressof(copy) == this)
   {
-    return * this;
+    return *this;
   }
 
   clear_shapes(shapes_, shapes_quantity_);
-  this->shapes_quantity_ = copy.size();
+  shapes_quantity_ = copy.size();
   for (size_t i = 0; i < shapes_quantity_; ++i)
   {
     shapes_[i] = copy.shapes_[i];
     copy.shapes_[i] = nullptr;
   }
 
-  return * this;
+  return *this;
 }
 
 double zakirov::CompositeShape::getArea() const noexcept
@@ -98,7 +98,7 @@ double zakirov::CompositeShape::getArea() const noexcept
 
 zakirov::rectangle_t zakirov::CompositeShape::getFrameRect() const
 {
-  if (!empty())
+  if (empty())
   {
     throw std::logic_error("ERROR: empty composition");
   }
@@ -159,7 +159,7 @@ void zakirov::CompositeShape::push_back(Shape * shape)
 
 void zakirov::CompositeShape::pop_back()
 {
-  if (!empty())
+  if (empty())
   {
     throw std::logic_error("ERROR: empty array");
   }
@@ -200,7 +200,7 @@ const zakirov::Shape * zakirov::CompositeShape::operator[](size_t id) const noex
 
 bool zakirov::CompositeShape::empty() const noexcept
 {
-  return shapes_quantity_ != 0;
+  return shapes_quantity_ == 0;
 }
 
 size_t zakirov::CompositeShape::size() const noexcept
@@ -240,4 +240,3 @@ void zakirov::clear_shapes(Shape ** shapes, size_t quantity)
     free(shapes[i]);
   }
 }
-

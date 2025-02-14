@@ -87,6 +87,21 @@ void zakirov::Polygon::scale(double k)
 
 zakirov::Shape * zakirov::Polygon::clone() const
 {
-  Polygon * polygon = static_cast< Polygon * >(malloc(sizeof(Polygon)));
-  return new (polygon) Polygon(size_, points_);
+  Polygon * polygon = nullptr;
+  try
+  {
+    Polygon * polygon = static_cast< Polygon * >(malloc(sizeof(Polygon)));
+    if (!polygon)
+    {
+      throw std::logic_error("Not enought memory");
+    }
+
+    new (polygon) Polygon(size_, points_);
+    return polygon;
+  }
+  catch (std::exception &)
+  {
+    free(polygon);
+    throw;
+  }
 }
