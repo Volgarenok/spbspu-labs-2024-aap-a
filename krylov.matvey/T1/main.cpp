@@ -30,19 +30,44 @@ int main()
       {
         if (shapeType == "RECTANGLE")
         {
-          shapes[shapeCount++] = krylov::createRectangle(std::cin);
+          double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0;
+          if (!(std::cin >> x1 >> y1 >> x2 >> y2))
+          {
+            throw std::invalid_argument("Invalid RECTANGLE parameters");
+          }
+          shapes[shapeCount++] = new krylov::Rectangle({x1, y1}, {x2, y2});
         }
         else if (shapeType == "RING")
         {
-          shapes[shapeCount++] = krylov::createRing(std::cin);
+          double x, y, outerRadius, innerRadius;
+          if (!(std::cin >> x >> y >> outerRadius >> innerRadius))
+          {
+            throw std::invalid_argument("Invalid RING parameters");
+          }
+          shapes[shapeCount++] = new krylov::Ring({x, y}, outerRadius, innerRadius);
         }
         else if (shapeType == "TRIANGLE")
         {
-          shapes[shapeCount++] = krylov::createTriangle(std::cin);
+          double x1 = 0.0, y1 = 0.0;
+          double x2 = 0.0, y2 = 0.0;
+          double x3 = 0.0, y3 = 0.0;
+          if (!(std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3))
+          {
+            throw std::invalid_argument("Invalid TRIANGLE parameters");
+          }
+          shapes[shapeCount++] = new krylov::Triangle({x1, y1}, {x2, y2}, {x3, y3});
         }
         else if (shapeType == "COMPLEXQUAD")
         {
-          shapes[shapeCount++] = krylov::createComplexquad(std::cin);
+          double x1 = 0.0, y1 = 0.0;
+          double x2 = 0.0, y2 = 0.0;
+          double x3 = 0.0, y3 = 0.0;
+          double x4 = 0.0, y4 = 0.0;
+          if (!(std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4))
+          {
+            throw std::invalid_argument("Invalid COMPLEXQUAD parameters");
+          }
+          shapes[shapeCount++] = new krylov::Complexquad({x1, y1}, {x2, y2}, {x3, y3}, {x4, y4});
         }
         else if (shapeType == "SCALE")
         {
@@ -92,19 +117,14 @@ int main()
         else
         {
           std::string skippedLines = "";
-          skippedLines = krylov::inputLine(std::cin);
+          krylov::simpleGetLine(std::cin, skippedLines);
         }
-      }
-      catch (const std::bad_alloc& e)
-      {
-        krylov::deleteShapes(shapes, shapeCount);
-        throw std::bad_alloc();
       }
       catch (const std::exception& e)
       {
         invalidDescriptions = true;
         std::string skippedLines = "";
-        skippedLines = krylov::inputLine(std::cin);
+        krylov::simpleGetLine(std::cin, skippedLines);
       }
     }
 

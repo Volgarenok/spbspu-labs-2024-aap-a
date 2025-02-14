@@ -5,7 +5,7 @@
 
 namespace krylov
 {
-  class Rectangle: public Shape
+  class Rectangle final: public Shape
   {
   public:
       Rectangle(const point_t& bottomLeft, const point_t& topRight);
