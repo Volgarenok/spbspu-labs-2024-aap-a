@@ -12,7 +12,7 @@ namespace
     point_t * converted_data = static_cast< point_t * >(malloc(size * sizeof(point_t)));
     if (!converted_data)
     {
-      throw std::logic_error("Not enough memory");
+      throw std::bad_alloc();
     }
 
     size_t counter = 1;
@@ -34,6 +34,11 @@ zakirov::Rectangle * zakirov::make_rectangle(std::istream & in)
   get_parameters(in, parameters, parameters_quantity);
 
   Rectangle * rectangle = static_cast< Rectangle * >(malloc(sizeof(Rectangle)));
+  if (!rectangle)
+  {
+    throw std::bad_alloc();
+  }
+
   try
   {
     new (rectangle) Rectangle({parameters[0], parameters[1]}, {parameters[2], parameters[3]});
@@ -53,6 +58,11 @@ zakirov::Circle * zakirov::make_circle(std::istream & in)
   get_parameters(in, parameters, parameters_quantity);
 
   Circle * circle = static_cast< Circle * >(malloc(sizeof(Circle)));
+  if (!circle)
+  {
+    throw std::bad_alloc();
+  }
+
   try
   {
     new (circle) Circle({parameters[0], parameters[1]}, parameters[2]);
@@ -72,6 +82,11 @@ zakirov::Ring * zakirov::make_ring(std::istream & in)
   get_parameters(in, parameters, parameters_quantity);
 
   Ring * ring = static_cast< Ring * >(malloc(sizeof(Ring)));
+  if (!ring)
+  {
+    throw std::bad_alloc();
+  }
+
   try
   {
     new (ring) Ring({parameters[0], parameters[1]}, parameters[2], parameters[3]);
@@ -91,6 +106,11 @@ zakirov::Polygon * zakirov::make_polygon(std::istream & in)
   point_t * converted_data = convert_polygon(parameters, points_size);
 
   Polygon * polygon = static_cast< Polygon * >(malloc(sizeof(Polygon)));
+  if (!polygon)
+  {
+    throw std::bad_alloc();
+  }
+
   try
   {
     new (polygon) Polygon(points_size, converted_data);

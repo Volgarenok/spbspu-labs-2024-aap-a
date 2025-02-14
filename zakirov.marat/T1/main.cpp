@@ -41,6 +41,12 @@ int main()
     {
       shape_flag = true;
     }
+    catch (const std::bad_alloc &)
+    {
+      free(data);
+      std::cerr << "Error! Not enought memory." << '\n';
+      return 1;
+    }
     catch (const std::logic_error &)
     {
       free(data);
