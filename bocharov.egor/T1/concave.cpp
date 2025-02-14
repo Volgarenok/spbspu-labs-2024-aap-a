@@ -88,9 +88,9 @@ void bocharov::Concave::move(point_t point)
 
 void bocharov::Concave::scale(double ratio)
 {
-  a_ = { scalePoint(a_, d_, ratio).x - d_.x, scalePoint(a_, d_, ratio).y - d_.y };
-  b_ = { scalePoint(b_, d_, ratio).x - d_.x, scalePoint(b_, d_, ratio).y - d_.y };
-  c_ = { scalePoint(c_, d_, ratio).x - d_.x, scalePoint(c_, d_, ratio).y - d_.y };
+  a_ = {scalePoint(a_, d_, ratio).x - d_.x, scalePoint(a_, d_, ratio).y - d_.y};
+  b_ = {scalePoint(b_, d_, ratio).x - d_.x, scalePoint(b_, d_, ratio).y - d_.y};
+  c_ = {scalePoint(c_, d_, ratio).x - d_.x, scalePoint(c_, d_, ratio).y - d_.y};
   //a_.x = (a_.x - d_.x) * ratio;
   //b_.x = (b_.x - d_.x) * ratio;
   //c_.x = (c_.x - d_.x) * ratio;
