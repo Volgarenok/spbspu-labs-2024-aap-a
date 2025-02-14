@@ -41,6 +41,50 @@ zakirov::CompositeShape::CompositeShape(CompositeShape &&copy):
   copy.shapes_quantity_ = 0;
 }
 
+zakirov::CompositeShape & zakirov::CompositeShape::operator=(const CompositeShape & copy)
+{
+  if (std::addressof(copy) == this)
+  {
+    return * this;
+  }
+
+  CompositeShape temporary_shapes;
+  for (size_t i = 0; i < copy.size(); ++i)
+  {
+    try
+    {
+      temporary_shapes.push_back(copy.shapes_[i]->clone());
+    }
+    catch(const std::invalid_argument &)
+    {
+      clear_shapes(temporary_shapes.shapes_, temporary_shapes.size());
+      throw;
+    }
+  }
+ 
+  clear_shapes(shapes_, shapes_quantity_);
+  * this = std::move(temporary_shapes);
+  return * this;
+}
+
+zakirov::CompositeShape & zakirov::CompositeShape::operator=(CompositeShape && copy)
+{
+  if (std::addressof(copy) == this)
+  {
+    return * this;
+  }
+
+  clear_shapes(shapes_, shapes_quantity_);
+  this->shapes_quantity_ = copy.size();
+  for (size_t i = 0; i < shapes_quantity_; ++i)
+  {
+    shapes_[i] = copy.shapes_[i];
+    copy.shapes_[i] = nullptr;
+  }
+
+  return * this;
+}
+
 double zakirov::CompositeShape::getArea() const noexcept
 {
   double total_area = 0;
