@@ -44,6 +44,7 @@ int main()
     catch (const std::logic_error &)
     {
       free(data);
+      new_shape->~Shape();
       free(new_shape);
       std::cerr << "Warning! Error in scale composition." << '\n';
       return 1;
@@ -66,7 +67,7 @@ int main()
   double coefficient = scale_data[3];
   try
   {
-    check_scale_full_composition(shapes, target, coefficient);
+    scale_check_full_composition(shapes, target, coefficient);
   }
   catch (const std::invalid_argument &)
   {

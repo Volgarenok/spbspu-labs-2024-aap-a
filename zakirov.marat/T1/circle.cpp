@@ -74,7 +74,7 @@ zakirov::Shape * zakirov::Circle::clone() const
     Circle * circle = static_cast< Circle * >(malloc(sizeof(Circle)));
     if (!circle)
     {
-      throw std::logic_error("Not enought memory");
+      throw std::bad_alloc();
     }
 
     new (circle) Circle(center, radius);

@@ -22,7 +22,7 @@ zakirov::CompositeShape::CompositeShape(const CompositeShape & copy):
       ++new_shapes_quantity;
     }
   }
-  catch (const std::invalid_argument & e)
+  catch (const std::invalid_argument &)
   {
     clear_shapes(shapes_, new_shapes_quantity);
     throw;
@@ -49,16 +49,23 @@ zakirov::CompositeShape & zakirov::CompositeShape::operator=(const CompositeShap
   }
 
   CompositeShape temporary_shapes;
+  Shape * clone_shape = nullptr;
   for (size_t i = 0; i < copy.size(); ++i)
   {
     try
     {
-      temporary_shapes.push_back(copy.shapes_[i]->clone());
+      clone_shape = copy.shapes_[i]->clone();
+      temporary_shapes.push_back(clone_shape);
     }
-    catch (const std::invalid_argument &)
+    catch (const std::bad_alloc &)
     {
       clear_shapes(temporary_shapes.shapes_, temporary_shapes.size());
       throw;
+    }
+    catch (const std::logic_error &)
+    {
+      clone_shape->~Shape();
+      free(clone_shape);
     }
   }
 
@@ -147,6 +154,16 @@ void zakirov::CompositeShape::scale(double k)
   }
 }
 
+void zakirov::CompositeShape::scale_check(double k)
+{
+  if (k <= 0)
+  {
+    throw std::logic_error("Incorrect scale coefficient");
+  }
+
+  scale(k);
+}
+
 void zakirov::CompositeShape::push_back(Shape * shape)
 {
   if (!shape || shapes_quantity_ == shapes_size_)
@@ -222,7 +239,7 @@ void zakirov::scale_full_composition(CompositeShape & shapes, const point_t & ta
 }
 
 
-void zakirov::check_scale_full_composition(CompositeShape & shapes, const point_t & target, double k)
+void zakirov::scale_check_full_composition(CompositeShape & shapes, const point_t & target, double k)
 {
   if (k <= 0)
   {

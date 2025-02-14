@@ -55,7 +55,7 @@ zakirov::Shape * zakirov::Rectangle::clone() const
     Rectangle * rectangle = static_cast< Rectangle * >(malloc(sizeof(Rectangle)));
     if (!rectangle)
     {
-      throw std::logic_error("Not enought memory");
+      throw std::bad_alloc();
     }
 
     new (rectangle) Rectangle(bottom_left_, top_right_);

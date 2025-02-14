@@ -30,7 +30,7 @@ namespace
 zakirov::Rectangle * zakirov::make_rectangle(std::istream & in)
 {
   constexpr size_t parameters_quantity = 4;
-  double parameters[parameters_quantity] = {0.0, 0.0, 0.0, 0.0};
+  double parameters[parameters_quantity] = {};
   get_parameters(in, parameters, parameters_quantity);
 
   Rectangle * rectangle = static_cast< Rectangle * >(malloc(sizeof(Rectangle)));
@@ -39,7 +39,7 @@ zakirov::Rectangle * zakirov::make_rectangle(std::istream & in)
     new (rectangle) Rectangle({parameters[0], parameters[1]}, {parameters[2], parameters[3]});
     return rectangle;
   }
-  catch (const std::invalid_argument & e)
+  catch (const std::invalid_argument &)
   {
     free(rectangle);
     throw;
@@ -49,7 +49,7 @@ zakirov::Rectangle * zakirov::make_rectangle(std::istream & in)
 zakirov::Circle * zakirov::make_circle(std::istream & in)
 {
   constexpr size_t parameters_quantity = 3;
-  double parameters[parameters_quantity] = {0.0, 0.0, 0.0};
+  double parameters[parameters_quantity] = {};
   get_parameters(in, parameters, parameters_quantity);
 
   Circle * circle = static_cast< Circle * >(malloc(sizeof(Circle)));
@@ -58,7 +58,7 @@ zakirov::Circle * zakirov::make_circle(std::istream & in)
     new (circle) Circle({parameters[0], parameters[1]}, parameters[2]);
     return circle;
   }
-  catch (const std::invalid_argument & e)
+  catch (const std::invalid_argument &)
   {
     free(circle);
     throw;
@@ -68,7 +68,7 @@ zakirov::Circle * zakirov::make_circle(std::istream & in)
 zakirov::Ring * zakirov::make_ring(std::istream & in)
 {
   constexpr size_t parameters_quantity = 4;
-  double parameters[parameters_quantity] = {0.0, 0.0, 0.0, 0.0};
+  double parameters[parameters_quantity] = {};
   get_parameters(in, parameters, parameters_quantity);
 
   Ring * ring = static_cast< Ring * >(malloc(sizeof(Ring)));
@@ -77,7 +77,7 @@ zakirov::Ring * zakirov::make_ring(std::istream & in)
     new (ring) Ring({parameters[0], parameters[1]}, parameters[2], parameters[3]);
     return ring;
   }
-  catch (const std::invalid_argument & e)
+  catch (const std::invalid_argument &)
   {
     free(ring);
     throw;
@@ -97,7 +97,7 @@ zakirov::Polygon * zakirov::make_polygon(std::istream & in)
     free(parameters);
     return polygon;
   }
-  catch (const std::invalid_argument & e)
+  catch (const std::invalid_argument &)
   {
     free(parameters);
     free(converted_data);

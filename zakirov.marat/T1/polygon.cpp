@@ -93,7 +93,7 @@ zakirov::Shape * zakirov::Polygon::clone() const
     Polygon * polygon = static_cast< Polygon * >(malloc(sizeof(Polygon)));
     if (!polygon)
     {
-      throw std::logic_error("Not enought memory");
+      throw std::bad_alloc();
     }
 
     new (polygon) Polygon(size_, points_);

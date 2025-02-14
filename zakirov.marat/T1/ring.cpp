@@ -51,7 +51,7 @@ zakirov::Shape * zakirov::Ring::clone() const
     Ring * ring = static_cast< Ring * >(malloc(sizeof(Ring)));
     if (!ring)
     {
-      throw std::logic_error("Not enought memory");
+      throw std::bad_alloc();
     }
 
     new (ring) Ring(center_, ex_radius_, in_radius_);

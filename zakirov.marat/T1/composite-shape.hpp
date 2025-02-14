@@ -9,22 +9,23 @@ namespace zakirov
   {
   public:
     CompositeShape();
-    ~CompositeShape();
     CompositeShape(const CompositeShape & copy);
     CompositeShape(CompositeShape && copy) noexcept;
+    ~CompositeShape();
     CompositeShape & operator=(const CompositeShape & copy);
     CompositeShape & operator=(CompositeShape && copy) noexcept;
+    Shape * operator[](size_t id) noexcept;
+    const Shape * operator[](size_t id) const noexcept;
     double getArea() const noexcept;
     rectangle_t getFrameRect() const;
     void move(const point_t & target);
     void move(double bias_x, double bias_y);
     void scale(double k);
+    void scale_check(double k);
     void push_back(Shape * shapes);
     void pop_back();
     Shape * at(size_t id);
     const Shape * at(size_t id) const;
-    Shape * operator[](size_t id) noexcept;
-    const Shape * operator[](size_t id) const noexcept;
     bool empty() const noexcept;
     size_t size() const noexcept;
   private:
@@ -34,7 +35,7 @@ namespace zakirov
   };
 
   void scale_full_composition(CompositeShape & shapes, const point_t & target, double k);
-  void check_scale_full_composition(CompositeShape & shapes, const point_t & target, double k);
+  void scale_check_full_composition(CompositeShape & shapes, const point_t & target, double k);
   void clear_shapes(Shape ** shapes, size_t quantity);
 }
 
