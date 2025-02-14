@@ -61,7 +61,7 @@ zakirov::CompositeShape & zakirov::CompositeShape::operator=(const CompositeShap
       throw;
     }
   }
- 
+
   clear_shapes(shapes_, shapes_quantity_);
   * this = std::move(temporary_shapes);
   return * this;
