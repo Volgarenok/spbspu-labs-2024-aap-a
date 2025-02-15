@@ -1,14 +1,10 @@
 #include "resize.hpp"
-
-size_t asafov::ullMin(size_t a, size_t b)
-{
-  return (a < b) ? (a) : (b);
-}
+#include <algorithm>
 
 char* asafov::resize(const char* string, size_t oldlength, size_t newlength)
 {
-  char* newString = new char[newlength + 1];
-  for (size_t i = 0; i < ullMin(oldlength, newlength); i++)
+  char* newString = new char[newlength];
+  for (size_t i = 0; i < std::min(newlength, oldlength); i++)
   {
     newString[i] = string[i];
   }
