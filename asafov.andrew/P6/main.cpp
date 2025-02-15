@@ -1,11 +1,11 @@
 #include <iostream>
 #include <cstddef>
-#include "../../asafov.andrew/common/inputString.hpp"
+#include <inputString.hpp>
 #include "isExpression.hpp"
 
 int main()
 {
-  char* str = asafov::inputString();
+  char* str = asafov::inputString(std::cin);
   size_t len = 0;
   for (size_t i = 0; str[i] != '\0'; i++)
   {
