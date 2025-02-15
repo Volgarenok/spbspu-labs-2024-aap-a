@@ -62,16 +62,8 @@ dribas::CompositeShape& dribas::CompositeShape::operator=(CompositeShape&& shp) 
 dribas::CompositeShape::CompositeShape(const CompositeShape& shp):
   size_(shp.size_)
 {
-  try
-  {
-    for (size_t i = 0; i < size_; i++)
-    {
-      shapes_[i] = shp.shapes_[i]->clone();
-    }
-  }
-  catch (const std::exception& e)
-  {
-    throw;
+  for (size_t i = 0; i < size_; i++) {
+    shapes_[i] = shp.shapes_[i]->clone();
   }
 }
 void dribas::CompositeShape::push_back(Shape * shp)
