@@ -20,7 +20,6 @@ namespace finaev
     Rectangle second;
     double first_area_;
     double second_area_;
-    bool isSharp;
   };
 }
 

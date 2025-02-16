@@ -31,28 +31,13 @@ namespace
     double p = (a + b + c) / 2;
     return std::sqrt(p * (p - a) * (p - b) * (p - c));
   }
-  
-  bool Sharp(finaev::point_t f, finaev::point_t s, finaev::point_t t)
-  {
-    if ((f.x > s.x && f.x > t.x) || (f.x < s.x && f.x < t.x))
-    {
-      return 1;
-    }
-    else
-    {
-      return 0;
-    }
-  }
 }
- 
-
 
 finaev::Concave::Concave(point_t f, point_t s, point_t t, point_t i):
   first(createRect(f, s, i)),
   second(createRect(f, t, i)),
   first_area_(areaOnePart(f, s, i)),
-  second_area_(areaOnePart(f, t, i)),
-  isSharp(Sharp(f, s, t))
+  second_area_(areaOnePart(f, t, i))
 {
   if (f == s || f == t || f == i || s == t || s == i || t == i)
   {
@@ -86,7 +71,7 @@ finaev::Concave::Concave(point_t f, point_t s, point_t t, point_t i):
 
 double finaev::Concave::getArea() const
 {
-    return first_area_ + second_area_;
+  return first_area_ + second_area_;
 }
 
 finaev::rectangle_t finaev::Concave::getFrameRect() const
