@@ -9,21 +9,21 @@
 
 namespace cherkasov
 {
-  Shape* createShape(const std::string& command, std::istream& input)
+  Shape* createShape(const std::string& inputCommand, std::istream& input)
   {
-    if (command == "RECTANGLE")
+    if (inputCommand == "RECTANGLE")
     {
       return cherkasov::getRectangle(input);
     }
-    else if (command == "SQUARE")
+    else if (inputCommand == "SQUARE")
     {
       return cherkasov::getSquare(input);
     }
-    else if (command == "PARALLELOGRAM")
+    else if (inputCommand == "PARALLELOGRAM")
     {
       return cherkasov::getParallelogram(input);
     }
-    else if (command == "DIAMOND")
+    else if (inputCommand == "DIAMOND")
     {
       return cherkasov::getDiamond(input);
     }
