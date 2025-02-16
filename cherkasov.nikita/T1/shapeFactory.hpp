@@ -6,6 +6,6 @@
 
 namespace cherkasov
 {
-  Shape* createShape(const std::string& command, std::istream& input);
+  Shape* createShape(const std::string& inputCommand, std::istream& input);
 }
 #endif
