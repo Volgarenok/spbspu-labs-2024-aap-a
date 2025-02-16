@@ -7,18 +7,15 @@ alymova::Shape* alymova::Creator::create(std::string name, std::istream& in)
 {
   if (name == "RECTANGLE")
   {
-    Shape* shape = createRectangle(in);
-    return shape;
+    return createRectangle(in);
   }
   else if (name == "CIRCLE")
   {
-    Shape* shape = createCircle(in);
-    return shape;
+    return createCircle(in);
   }
   else if (name == "REGULAR")
   {
-    Shape* shape = createRegular(in);
-    return shape;
+    return createRegular(in);
   }
   return nullptr;
 }

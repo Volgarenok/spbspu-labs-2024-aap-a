@@ -47,7 +47,7 @@ void alymova::makeShape(std::istream& in, CompositeShape& shapes, bool& wrong_sh
       {
         readParameters(in, scale_params, 3);
         scale_flag = true;
-      } 
+      }
     }
     catch (const std::logic_error& e)
     {
