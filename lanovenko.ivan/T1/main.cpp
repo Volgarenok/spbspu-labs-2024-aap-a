@@ -5,9 +5,10 @@
 #include "delete_shape.hpp"
 #include "scale_functions.hpp"
 
+
 int main()
 {
-	using namespace lanovenko;
+  using namespace lanovenko;
 	bool scale = false;
 	bool errors = false;
 	size_t res = 0;
