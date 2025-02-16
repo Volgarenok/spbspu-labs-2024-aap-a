@@ -10,7 +10,7 @@ lanovenko::Triangle::Triangle(point_t p1, point_t p2, point_t p3):
   double orientedArea = first_.x * (second_.y - third_.y) + second_.x * (third_.y - first_.y) + third_.x * (first_.y - second_.y);
   if (orientedArea == 0)
   {
-    throw std::logic_error("Wrong Triangle parametrs");
+    throw std::invalid_argument("Wrong Triangle parametrs");
   }
 }
 
