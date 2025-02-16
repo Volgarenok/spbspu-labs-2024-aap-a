@@ -20,7 +20,7 @@ gavrilova::Rectangle* gavrilova::make_rectangle(std::istream& in)
 {
   point_t arr[2] = {};
   point_t* points = arr;
-  if (!(input_points(in, points, 2))) {
+  if (!(inputPoints(in, points, 2))) {
     throw std::logic_error("Errors in rectangle input");
   }
   Rectangle* rect = new Rectangle(points[0], points[1]);
@@ -31,7 +31,7 @@ gavrilova::Triangle* gavrilova::make_triangle(std::istream& in)
 {
   point_t arr[3] = {};
   point_t* points = arr;
-  if (!(input_points(in, points, 3))) {
+  if (!(inputPoints(in, points, 3))) {
     throw std::logic_error("Errors in triangle input");
   }
   Triangle* triang = new Triangle(points[0], points[1], points[2]);
@@ -84,7 +84,7 @@ gavrilova::Ellipse* gavrilova::make_ellipse(std::istream& in)
   point_t center{0, 0};
   double radiusX = 0;
   double radiusY = 0;
-  if (!(in >> center >> radiusX >> radiusY)) {
+  if (!(inputPoint(in, center) >> radiusX >> radiusY)) {
     throw std::logic_error("Errors in ellipse input");
   }
   Ellipse* ellipse = new Ellipse(center, radiusX, radiusY);

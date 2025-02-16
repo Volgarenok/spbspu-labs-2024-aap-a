@@ -16,7 +16,7 @@ int main()
   while (!std::cin.eof() && std::cin >> shapeTypeOrScale) {
 
     if (shapeTypeOrScale == "SCALE") {
-      if (!(std::cin >> center.x >> center.y >> koef)) {
+      if (!(inputPoint(std::cin, center) >> koef)) {
           std::cerr << "Error! Invalid scale parametrs.";
       }
     }
