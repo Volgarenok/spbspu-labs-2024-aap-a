@@ -50,7 +50,6 @@ void gavrilova::scaleShapes(CompositeShape& shapes, const point_t& center, doubl
 
 gavrilova::rectangle_t gavrilova::getFrameRectForShapes(const Shape* const* shapes, size_t size) noexcept
 {
-  
   double minX = shapes[0]->getFrameRect().pos.x - shapes[0]->getFrameRect().width / 2;
   double maxX = shapes[0]->getFrameRect().pos.x + shapes[0]->getFrameRect().width / 2;
   double minY = shapes[0]->getFrameRect().pos.y - shapes[0]->getFrameRect().height / 2;
