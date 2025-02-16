@@ -16,6 +16,7 @@ void alymova::makeShape(std::istream& in, CompositeShape& shapes, bool& wrong_sh
   {
     if (in.eof())
     {
+      delete fabric;
       throw std::logic_error("Command SCALE must be described");
     }
     std::string type;
