@@ -5,6 +5,17 @@
 #include "concave.hpp"
 #include "outputRes.hpp"
 
+void createPoint(std::istream & input, size_t size, bocharov::point_t * arr)
+{
+  double coordX = 0;
+  double coordY = 0;
+  for (size_t i = 0; i < size; ++i)
+  {
+    input >> coordX >> coordY;
+    arr[i] = {coordX, coordY};
+  }
+}
+
 double bocharov::getAllArea(const Shape * const * myShapes, size_t shapeCount)
 {
   double allArea = 0.0;
@@ -51,50 +62,62 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
     {
       if (myStr == "RECTANGLE")
       {
-        point_t down, up;
-        input >> down.x;
-        input >> down.y;
-        input >> up.x;
-        input >> up.y;
-        myShapes[shapesCount] = new Rectangle{down, up};
+        //point_t down, up;
+        constexpr size_t quantity = 2;
+        point_t arrPoint[quantity] = {};
+        createPoint(input, quantity, arrPoint);
+        //input >> down.x;
+        //input >> down.y;
+        //input >> up.x;
+        //input >> up.y;
+        myShapes[shapesCount] = new Rectangle{arrPoint[0], arrPoint[1]};
         shapesCount++;
       }
       else if (myStr == "TRIANGLE")
       {
-        point_t a, b, c;
-        input >> a.x;
-        input >> a.y;
-        input >> b.x;
-        input >> b.y;
-        input >> c.x;
-        input >> c.y;
-        myShapes[shapesCount] =  new Triangle{a, b, c};
+        //point_t a, b, c;
+        //input >> a.x;
+        //input >> a.y;
+        //input >> b.x;
+        //input >> b.y;
+        //input >> c.x;
+        //input >> c.y;
+        constexpr size_t quantity = 3;
+        point_t arrPoint[quantity] = {};
+        createPoint(input, quantity, arrPoint);
+        myShapes[shapesCount] = new Triangle{arrPoint[0], arrPoint[1], arrPoint[2]};
         shapesCount++;
       }
       else if (myStr == "PARALLELOGRAM")
       {
-        point_t a, b, c;
-        input >> a.x;
-        input >> a.y;
-        input >> b.x;
-        input >> b.y;
-        input >> c.x;
-        input >> c.y;
-        myShapes[shapesCount] =  new Parallelogram{a, b, c};
+        //point_t a, b, c;
+        //input >> a.x;
+        //input >> a.y;
+        //input >> b.x;
+        //input >> b.y;
+        //input >> c.x;
+        //input >> c.y;
+        constexpr size_t quantity = 3;
+        point_t arrPoint[quantity] = {};
+        createPoint(input, quantity, arrPoint);
+        myShapes[shapesCount] = new Parallelogram{arrPoint[0], arrPoint[1], arrPoint[2]};
         shapesCount++;
       }
       else if (myStr == "CONCAVE")
       {
-        point_t a, b, c, d;
-        input >> a.x;
-        input >> a.y;
-        input >> b.x;
-        input >> b.y;
-        input >> c.x;
-        input >> c.y;
-        input >> d.x;
-        input >> d.y;
-        myShapes[shapesCount] =  new Concave{a, b, c, d};
+        //point_t a, b, c, d;
+        //input >> a.x;
+        //input >> a.y;
+        //input >> b.x;
+        //input >> b.y;
+        //input >> c.x;
+        //input >> c.y;
+        //input >> d.x;
+        //input >> d.y;
+        constexpr size_t quantity = 4;
+        point_t arrPoint[quantity] = {};
+        createPoint(input, quantity, arrPoint);
+        myShapes[shapesCount] = new Concave{arrPoint[0], arrPoint[1], arrPoint[2], arrPoint[3]};
         shapesCount++;
       }
       else if (myStr == "SCALE")
