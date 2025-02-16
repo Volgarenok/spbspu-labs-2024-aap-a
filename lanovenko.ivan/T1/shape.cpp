@@ -3,5 +3,5 @@
 
 void lanovenko::Shape::scale(double k)
 {
-	unsafeScale(k);
+  unsafeScale(k);
 }

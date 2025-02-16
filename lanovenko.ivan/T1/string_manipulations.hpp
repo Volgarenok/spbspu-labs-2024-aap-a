@@ -7,15 +7,15 @@
 
 namespace lanovenko
 {
-	std::string inputStr(std::istream& in);
-	Shape* parseShape(const std::string& str);
-	Shape* parseRectangle(const std::string& str);
-	Shape* parseDiamond(const std::string& str);
-	Shape* parseTriangle(const std::string& str);
-	lanovenko::Shape* parseParallelogram(const std::string& str);
-	std::size_t split(const std::string& str);
-	double* getCoords(const std::string& coords, size_t capacityCoords);
-	double* paraseScale(const std::string& str);
+  std::string inputStr(std::istream& in);
+  Shape* parseShape(const std::string& str);
+  Shape* parseRectangle(const std::string& str);
+  Shape* parseDiamond(const std::string& str);
+  Shape* parseTriangle(const std::string& str);
+  lanovenko::Shape* parseParallelogram(const std::string& str);
+  std::size_t split(const std::string& str);
+  double* getCoords(const std::string& coords, size_t capacityCoords);
+  double* paraseScale(const std::string& str);
 }
 
-#endif 
+#endif

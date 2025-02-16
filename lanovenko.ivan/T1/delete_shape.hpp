@@ -6,8 +6,8 @@
 
 namespace lanovenko
 {
-	void deleteShape(Shape** shapeArray, std::size_t res);
+  void deleteShape(Shape** shapeArray, std::size_t res);
 }
 
-#endif 
+#endif
 
