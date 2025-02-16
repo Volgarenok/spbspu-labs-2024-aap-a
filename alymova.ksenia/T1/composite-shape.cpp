@@ -12,17 +12,17 @@ alymova::CompositeShape::CompositeShape(const CompositeShape& comp_shape):
   capacity_(comp_shape.capacity_),
   shapes_(new Shape*[capacity_]())
 {
+  size_t size_now = 0;
   try
   {
-    for (size_t i = 0; i < size_; i++)
+    for (; size_now < size_; size_now++)
     {
-      delete shapes_[i];
-      shapes_[i] = comp_shape[i]->clone();
+      shapes_[size_now] = comp_shape[size_now]->clone();
     }
   }
   catch (const std::bad_alloc& e)
   {
-    clear(shapes_);
+    clear(size_now);
     throw;
   }
 }
@@ -31,30 +31,24 @@ alymova::CompositeShape::CompositeShape(CompositeShape&& comp_shape):
   capacity_(comp_shape.capacity_),
   shapes_(comp_shape.shapes_)
 {
-  for (size_t i = 0; i < comp_shape.size_; i++)
-  {
-    comp_shape.shapes_ = nullptr;
-  }
+  comp_shape.size_ = 0;
+  comp_shape.shapes_ = nullptr;
 }
 alymova::CompositeShape::~CompositeShape()
 {
-  clear(shapes_);
+  clear();
 }
 alymova::CompositeShape& alymova::CompositeShape::operator=(const CompositeShape& comp_shape)
 {
   if (this != &comp_shape)
   {
     CompositeShape copy{comp_shape};
-    clear(shapes_);
-    shapes_ = new Shape*[comp_shape.capacity_]();
     swap(copy);
   }
   return *this;
 }
 alymova::CompositeShape& alymova::CompositeShape::operator=(CompositeShape&& comp_shape)
 {
-  clear(shapes_);
-  shapes_ = new Shape*[comp_shape.capacity_]();
   swap(comp_shape);
   return *this;
 }
@@ -121,7 +115,7 @@ void alymova::CompositeShape::push_back(Shape* shp)
     {
       shapes_new[i] = shapes_[i];
     }
-    clear(shapes_);
+    clear();
     shapes_ = shapes_new;
     capacity_ *= ratio;
   }
@@ -156,16 +150,17 @@ void alymova::CompositeShape::swap(CompositeShape& other) noexcept
 {
   std::swap(size_, other.size_);
   std::swap(capacity_, other.capacity_);
-  for (size_t i = 0; i < size_; i++)
-  {
-    std::swap(shapes_[i], other.shapes_[i]);
-  }
+  std::swap(shapes_, other.shapes_);
 }
-void alymova::CompositeShape::clear(Shape** shapes) noexcept
+void alymova::CompositeShape::clear() noexcept
 {
-  for (size_t i = 0; i < size_; i++)
+  clear(size_);
+}
+void alymova::CompositeShape::clear(size_t size_now) noexcept
+{
+  for (size_t i = 0; i < size_now; i++)
   {
-    delete shapes[i];
+    delete shapes_[i];
   }
-  delete[] shapes;
+  delete[] shapes_;
 }

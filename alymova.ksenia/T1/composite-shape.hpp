@@ -31,7 +31,8 @@ namespace alymova
     size_t size() const noexcept;
   private:
     void swap(CompositeShape& other) noexcept;
-    void clear(Shape** shapes) noexcept;
+    void clear(size_t size_now) noexcept;
+    void clear() noexcept;
 
     size_t size_, capacity_;
     Shape** shapes_;

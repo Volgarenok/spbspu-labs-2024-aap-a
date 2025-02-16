@@ -27,14 +27,9 @@ int main()
       std::cerr << "Incorrect description of the shapes\n";
     }
   }
-  catch (const std::bad_alloc& e)
-  {
-    std::cerr << "Memory allocate error\n";
-    return 1;
-  }
   catch (const std::exception& e)
   {
-    std::cerr << e.what() << "\n";
+    std::cerr << "Error" << "\n";
     return 1;
   }
 }

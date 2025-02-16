@@ -9,6 +9,12 @@
 constexpr size_t figures_cnt = 3;
 void alymova::makeShape(std::istream& in, CompositeShape& shapes, bool& wrong_shape_flag, double* scale_params)
 {
+  CreatorRectangle crt0 = CreatorRectangle();
+  CreatorCircle crt1 = CreatorCircle();
+  CreatorRegular crt2 = CreatorRegular();
+  Creator* fabrics[figures_cnt] = {&crt0, &crt1, &crt2};
+  std::string figures[figures_cnt] = {"RECTANGLE", "CIRCLE", "REGULAR"};
+
   bool scale_flag = false;
   while (!scale_flag)
   {
@@ -18,12 +24,6 @@ void alymova::makeShape(std::istream& in, CompositeShape& shapes, bool& wrong_sh
     }
     std::string type;
     in >> type;
-
-    CreatorRectangle crt0 = CreatorRectangle();
-    CreatorCircle crt1 = CreatorCircle();
-    CreatorRegular crt2 = CreatorRegular();
-    Creator* fabrics[figures_cnt] = {&crt0, &crt1, &crt2};
-    std::string figures[figures_cnt] = {"RECTANGLE", "CIRCLE", "REGULAR"};
     for (size_t i = 0; i < figures_cnt; i++)
     {
       if (type == figures[i])
