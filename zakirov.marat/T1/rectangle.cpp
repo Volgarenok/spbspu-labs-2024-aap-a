@@ -39,7 +39,7 @@ void zakirov::Rectangle::move(double bias_x, double bias_y)
   move({getFrameRect().pos.x + bias_x, getFrameRect().pos.y + bias_y});
 }
 
-void zakirov::Rectangle::scale(double k) noexcept
+void zakirov::Rectangle::scaleUnsafely(double k) noexcept
 {
   double scale_distance_x = (top_right_.x - getFrameRect().pos.x) * (k - 1);
   double scale_distance_y = (top_right_.y - getFrameRect().pos.y) * (k - 1);

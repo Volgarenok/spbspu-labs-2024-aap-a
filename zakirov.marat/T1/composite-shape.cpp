@@ -147,22 +147,22 @@ void zakirov::CompositeShape::move(double bias_x, double bias_y)
   move(target);
 }
 
-void zakirov::CompositeShape::scale_without_check(double k) noexcept
+void zakirov::CompositeShape::scaleUnsafely(double k) noexcept
 {
   for (size_t i = 0; i < shapes_quantity_; ++i)
   {
-    shapes_[i]->scale(k);
+    shapes_[i]->scaleUnsafely(k);
   }
 }
 
-void zakirov::CompositeShape::scale_with_check(double k)
+void zakirov::CompositeShape::scale(double k)
 {
   if (k <= 0)
   {
     throw std::logic_error("Incorrect scale coefficient");
   }
 
-  scale_without_check(k);
+  scaleUnsafely(k);
 }
 
 void zakirov::CompositeShape::push_back(Shape * shape)

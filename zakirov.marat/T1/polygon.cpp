@@ -2,6 +2,7 @@
 #include <cstddef>
 #include <stdexcept>
 #include "base-types.hpp"
+#include "shape.cpp"
 
 zakirov::Polygon::Polygon(size_t size, point_t * points):
   size_(size),
@@ -75,7 +76,7 @@ void zakirov::Polygon::move(double bias_x, double bias_y)
   }
 }
 
-void zakirov::Polygon::scale(double k) noexcept
+void zakirov::Polygon::scaleUnsafely(double k) noexcept
 {
   rectangle_t object_frame = getFrameRect();
   for (size_t i = 0; i < size_; ++i)
