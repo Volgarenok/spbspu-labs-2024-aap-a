@@ -62,26 +62,14 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
     {
       if (myStr == "RECTANGLE")
       {
-        //point_t down, up;
         constexpr size_t quantity = 2;
         point_t arrPoint[quantity] = {};
         createPoint(input, quantity, arrPoint);
-        //input >> down.x;
-        //input >> down.y;
-        //input >> up.x;
-        //input >> up.y;
         myShapes[shapesCount] = new Rectangle{arrPoint[0], arrPoint[1]};
         shapesCount++;
       }
       else if (myStr == "TRIANGLE")
       {
-        //point_t a, b, c;
-        //input >> a.x;
-        //input >> a.y;
-        //input >> b.x;
-        //input >> b.y;
-        //input >> c.x;
-        //input >> c.y;
         constexpr size_t quantity = 3;
         point_t arrPoint[quantity] = {};
         createPoint(input, quantity, arrPoint);
@@ -90,13 +78,6 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
       }
       else if (myStr == "PARALLELOGRAM")
       {
-        //point_t a, b, c;
-        //input >> a.x;
-        //input >> a.y;
-        //input >> b.x;
-        //input >> b.y;
-        //input >> c.x;
-        //input >> c.y;
         constexpr size_t quantity = 3;
         point_t arrPoint[quantity] = {};
         createPoint(input, quantity, arrPoint);
@@ -105,15 +86,6 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
       }
       else if (myStr == "CONCAVE")
       {
-        //point_t a, b, c, d;
-        //input >> a.x;
-        //input >> a.y;
-        //input >> b.x;
-        //input >> b.y;
-        //input >> c.x;
-        //input >> c.y;
-        //input >> d.x;
-        //input >> d.y;
         constexpr size_t quantity = 4;
         point_t arrPoint[quantity] = {};
         createPoint(input, quantity, arrPoint);
