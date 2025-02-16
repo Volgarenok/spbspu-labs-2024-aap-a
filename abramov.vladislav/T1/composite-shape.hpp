@@ -34,6 +34,7 @@ namespace abramov
     Shape **shapeptrs_;
 
     void swap(CompositeShape &comp_shp) noexcept;
+    void deleteShapes(Shape **shapes);
   };
 
   using Composite = CompositeShape;
