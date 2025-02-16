@@ -9,7 +9,12 @@
 constexpr size_t figures_cnt = 3;
 void alymova::makeShape(std::istream& in, CompositeShape& shapes, bool& wrong_shape_flag, double* scale_params)
 {
-  Creator* fabric = new CreatorSpecial();
+  CreatorRectangle crt0 = CreatorRectangle();
+  CreatorCircle crt1 = CreatorCircle();
+  CreatorRegular crt2 = CreatorRegular();
+  Creator* fabrics[figures_cnt] = {&crt0, &crt1, &crt2};
+  std::string figures[figures_cnt] = {"RECTANGLE", "CIRCLE", "REGULAR"};
+  //Creator* fabric = new CreatorSpecial();
 
   bool scale_flag = false;
   while (!scale_flag)
@@ -24,28 +29,33 @@ void alymova::makeShape(std::istream& in, CompositeShape& shapes, bool& wrong_sh
     Shape* shape = nullptr;
     try
     {
-      shape = fabric->create(type, in);
-      shapes.push_back(shape);
-
-      if (type == "SCALE")
+      for (size_t i = 0; i < figures_cnt; i++)
       {
-        readParameters(in, scale_params, 3);
-        scale_flag = true;
+        if (type == figures[i])
+        {
+          shape = fabrics[i]->create(in);
+          shapes.push_back(shape);
+        }
       }
     }
     catch (const std::logic_error& e)
     {
       wrong_shape_flag = true;
-      break;
+      //break;
     }
     catch (const std::bad_alloc& e)
     {
       delete shape;
-      delete fabric;
+      //delete fabric;
       throw;
     }
+    if (type == "SCALE")
+    {
+      readParameters(in, scale_params, 3);
+      scale_flag = true;
+    }
   }
-  delete fabric;
+  //delete fabric;
 }
 void alymova::print(std::ostream& out, const Shape* shape)
 {
