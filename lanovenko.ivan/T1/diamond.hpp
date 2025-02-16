@@ -2,6 +2,7 @@
 #define DIAMOND_HPP
 
 #include "shape.hpp"
+#include "triangle.hpp"
 
 namespace lanovenko
 {
@@ -16,9 +17,8 @@ namespace lanovenko
     virtual void move(double dx, double dy) override;
     virtual void unsafeScale(double k) override;
   private:
-    point_t center_;
-    point_t vertical_;
-    point_t horizontal_;
+    Triangle first_;
+    Triangle second_;
   };
 }
 
