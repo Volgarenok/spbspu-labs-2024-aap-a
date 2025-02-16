@@ -187,11 +187,5 @@ void gavrilova::CompositeShape::swap(CompositeShape& rhs) noexcept
 
 void gavrilova::CompositeShape::clear() noexcept
 {
-  for (size_t i = 0; i < size_; ++i) {
-    delete shapes_[i];
-  }
-  delete[] shapes_;
-  size_ = 0;
-  capacity_ = 0;
+  clearShapes(shapes_, size_);
 }
-

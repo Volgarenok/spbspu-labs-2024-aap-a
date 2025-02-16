@@ -103,10 +103,5 @@ gavrilova::Shape* gavrilova::Polygon::clone() const
 
 void gavrilova::Polygon::clear() noexcept
 {
-  for (size_t i = 0; i < size_; ++i) {
-    delete triangles_[i];
-  }
-  delete[] triangles_;
-  size_ = 0;
+  clearShapes(triangles_, size_);
 }
-

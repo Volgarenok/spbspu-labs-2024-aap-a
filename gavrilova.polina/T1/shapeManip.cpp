@@ -71,3 +71,10 @@ gavrilova::rectangle_t gavrilova::getFrameRectForShapes(const Shape* const* shap
   };
   return frameRect;
 }
+void gavrilova::clearShapes(Shape** shapes, size_t size)
+{
+   for (size_t i = 0; i < size; ++i) {
+    delete shapes[i];
+  }
+  delete[] shapes;
+}
