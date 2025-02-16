@@ -141,31 +141,12 @@ void gavrilova::CompositeShape::move(double difX, double difY) noexcept
   }
 }
 
-gavrilova::rectangle_t gavrilova::CompositeShape::getFrameRect() const
+gavrilova::rectangle_t gavrilova::CompositeShape::getFrameRect()
 {
   if (empty()) {
     throw std::logic_error("Composite shape is empty.");
   }
-
-  double minX = shapes_[0]->getFrameRect().pos.x - shapes_[0]->getFrameRect().width / 2;
-  double maxX = shapes_[0]->getFrameRect().pos.x + shapes_[0]->getFrameRect().width / 2;
-  double minY = shapes_[0]->getFrameRect().pos.y - shapes_[0]->getFrameRect().height / 2;
-  double maxY = shapes_[0]->getFrameRect().pos.y + shapes_[0]->getFrameRect().height / 2;
-
-  for (size_t i = 1; i < size_; ++i) {
-    auto rect = shapes_[i]->getFrameRect();
-    minX = std::min(minX, rect.pos.x - rect.width / 2);
-    maxX = std::max(maxX, rect.pos.x + rect.width / 2);
-    minY = std::min(minY, rect.pos.y - rect.height / 2);
-    maxY = std::max(maxY, rect.pos.y + rect.height / 2);
-  }
-
-  rectangle_t frameRect = {
-    maxX - minX,
-    maxY - minY,
-    {minX + (maxX - minX) / 2, minY + (maxY - minY) / 2}
-  };
-  return frameRect;
+  return getFrameRectForShapes(shapes_, size_);
 }
 
 double gavrilova::CompositeShape::getArea() const noexcept

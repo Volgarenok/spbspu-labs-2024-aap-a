@@ -28,7 +28,7 @@ namespace gavrilova {
     void scale(double k);
     void move(double difX, double difY) noexcept;
     void move(const point_t& p) noexcept;
-    rectangle_t getFrameRect() const;
+    rectangle_t getFrameRect();
     double getArea() const noexcept;
   private:
     size_t size_;

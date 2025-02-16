@@ -70,18 +70,10 @@ double gavrilova::Polygon::getArea() const
 }
 gavrilova::rectangle_t gavrilova::Polygon::getFrameRect() const
 {
-  double minX = triangles_[0]->getFrameRect().pos.x - triangles_[0]->getFrameRect().width / 2;
-  double maxX = triangles_[0]->getFrameRect().pos.x + triangles_[0]->getFrameRect().width / 2;
-  double minY = triangles_[0]->getFrameRect().pos.y - triangles_[0]->getFrameRect().height / 2;
-  double maxY = triangles_[0]->getFrameRect().pos.y + triangles_[0]->getFrameRect().height / 2;
-  for (size_t i = 1; i < size_; ++i) {
-    rectangle_t rect = triangles_[i]->getFrameRect();
-    minX = std::min(minX, rect.pos.x - rect.width / 2);
-    maxX = std::max(maxX, rect.pos.x + rect.width / 2);
-    minY = std::min(minY, rect.pos.y - rect.height / 2);
-    maxY = std::max(maxY, rect.pos.y + rect.height / 2);
+  if (!size_) {
+    throw std::logic_error("Composite shape is empty.");
   }
-  return {maxX - minX, maxY - minY, {(minX + maxX) / 2, (minY + maxY) / 2 }};
+  return getFrameRectForShapes(triangles_, size_);
 }
 
 void gavrilova::Polygon::move(const point_t& p)

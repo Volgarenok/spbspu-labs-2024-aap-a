@@ -32,7 +32,7 @@ void gavrilova::Ellipse::move(const point_t& p)
 
 void gavrilova::Ellipse::move(double difX, double difY)
 {
-  gavrilova::move(center_, difX, difY);
+  movePoint(center_, difX, difY);
 }
 
 void gavrilova::Ellipse::scaleWithoutCheck(double k) noexcept

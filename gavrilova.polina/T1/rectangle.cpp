@@ -33,8 +33,8 @@ void gavrilova::Rectangle::move(const point_t& p)
 
 void gavrilova::Rectangle::move(double difX, double difY)
 {
-  gavrilova::move(pBottomLeft_, difX, difY);
-  gavrilova::move(pTopRight_, difX, difY);
+  movePoint(pBottomLeft_, difX, difY);
+  movePoint(pTopRight_, difX, difY);
 }
 
 void gavrilova::Rectangle::scaleWithoutCheck(double k) noexcept
