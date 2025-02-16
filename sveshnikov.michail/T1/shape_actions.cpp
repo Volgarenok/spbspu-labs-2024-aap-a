@@ -24,7 +24,7 @@ void sveshnikov::output_one_frame(std::ostream &out, const Shape *shp)
 void sveshnikov::output_frames(std::ostream &out, const CompositeShape &comp_shp)
 {
   output_one_frame(out, comp_shp[0]);
-  for (size_t i = 0; i != comp_shp.size(); i++)
+  for (size_t i = 1; i != comp_shp.size(); i++)
   {
     out << " ";
     output_one_frame(out, comp_shp[i]);
