@@ -75,7 +75,7 @@ gavrilova::Polygon* make_polygon(std::istream& in)
 
 gavrilova::Ellipse* make_ellipse(std::istream& in)
 {
-  gavrilova::point_t center;
+  gavrilova::point_t center{0, 0};
   double radiusX = 0;
   double radiusY = 0;
   if (!(in >> center >> radiusX >> radiusY)) {

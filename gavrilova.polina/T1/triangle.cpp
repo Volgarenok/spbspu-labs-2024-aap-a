@@ -48,17 +48,17 @@ void gavrilova::Triangle::move(const point_t& p)
 
 void gavrilova::Triangle::move(double difX, double difY)
 {
-  gavrilova::move(a_, difX, difY);
-  gavrilova::move(b_, difX, difY);
-  gavrilova::move(c_, difX, difY);
+  movePoint(a_, difX, difY);
+  movePoint(b_, difX, difY);
+  movePoint(c_, difX, difY);
 }
 
 void gavrilova::Triangle::scaleWithoutCheck(double k) noexcept
 {
-  point_t center =  getFrameRect().pos;
-  gavrilova::scaleDistance(a_, center, k);
-  gavrilova::scaleDistance(b_, center, k);
-  gavrilova::scaleDistance(c_, center, k);
+  point_t center = getFrameRect().pos;
+  scaleDistance(a_, center, k);
+  scaleDistance(b_, center, k);
+  scaleDistance(c_, center, k);
 }
 gavrilova::Shape* gavrilova::Triangle::clone() const
 {

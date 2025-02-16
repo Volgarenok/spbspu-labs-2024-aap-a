@@ -19,7 +19,7 @@ gavrilova::rectangle_t gavrilova::Rectangle::getFrameRect() const
 {
   double height = pTopRight_.y - pBottomLeft_.y;
   double width = pTopRight_.x - pBottomLeft_.x;
-  point_t pos{(pTopRight_.x - pBottomLeft_.x) / 2 + pBottomLeft_.x, (pTopRight_.y - pBottomLeft_.y) / 2 + pBottomLeft_.y};
+  point_t pos{width / 2 + pBottomLeft_.x, height / 2 + pBottomLeft_.y};
   return {width, height, pos};
 }
 

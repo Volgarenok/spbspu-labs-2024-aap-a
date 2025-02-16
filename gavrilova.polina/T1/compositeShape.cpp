@@ -44,7 +44,6 @@ gavrilova::CompositeShape::~CompositeShape()
   clear();
 }
 
-
 gavrilova::CompositeShape& gavrilova::CompositeShape::operator=(const CompositeShape& other)
 {
   if (this != std::addressof(other)) {

@@ -1,7 +1,7 @@
 #include "pointManip.hpp"
 #include <cmath>
 
-void gavrilova::move(point_t& p, double difX, double difY) noexcept
+void gavrilova::movePoint(point_t& p, double difX, double difY) noexcept
 {
   p.x += difX;
   p.y += difY;
