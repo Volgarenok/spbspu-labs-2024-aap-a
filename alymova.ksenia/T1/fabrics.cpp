@@ -3,7 +3,23 @@
 #include "base-types.hpp"
 #include "rectangle.hpp"
 #include "circle.hpp"
-alymova::Shape* alymova::CreatorRectangle::create(std::istream& in)
+alymova::Shape* alymova::Creator::create(std::string name, std::istream& in)
+{
+  if (name == "RECTANGLE")
+  {
+    return createRectangle(in);
+  }
+  else if (name == "CIRCLE")
+  {
+    return createCircle(in);
+  }
+  else if (name == "REGULAR")
+  {
+    return createRegular(in);
+  }
+  return nullptr;
+}
+alymova::Shape* alymova::CreatorSpecial::createRectangle(std::istream& in)
 {
   const size_t cnt_params = 4;
   double params[cnt_params] = {};
@@ -12,7 +28,7 @@ alymova::Shape* alymova::CreatorRectangle::create(std::istream& in)
   shape = new Rectangle(point_t{params[0], params[1]}, point_t{params[2], params[3]});
   return shape;
 }
-alymova::Shape* alymova::CreatorCircle::create(std::istream& in)
+alymova::Shape* alymova::CreatorSpecial::createCircle(std::istream& in)
 {
   const size_t cnt_params = 3;
   double params[cnt_params] = {};
@@ -21,7 +37,7 @@ alymova::Shape* alymova::CreatorCircle::create(std::istream& in)
   shape = new Circle(point_t{params[0], params[1]}, params[2]);
   return shape;
 }
-alymova::Shape* alymova::CreatorRegular::create(std::istream& in)
+alymova::Shape* alymova::CreatorSpecial::createRegular(std::istream& in)
 {
   const size_t cnt_params = 6;
   double params[cnt_params] = {};
