@@ -1,15 +1,14 @@
-#ifndef INPUT_SHAPE_HPP
-#define INPUT_SHAPE_HPP
-#include "base-types.hpp"
+#ifndef SCALE_FUNCTIONS_HPP
+#define SCALE_FUNCTIONS_HPP
+
+#include <ostream>
 #include "shape.hpp"
-#include <cstddef>
+
 namespace lanovenko
 {
-  void getPoints(size_t, double*, point_t*);
-  Shape* inputRectangle(const char str[]);
-  Shape* inputTriangle(const char str[]);
-  Shape* inputDiamond(const char str[]);
-  Shape* inputParallelogram(const char str[]);
+	void scaleShapes(Shape* const* shapeArray, double* scaleParametrs, std::ostream& out, size_t ShapesCapacity);
+	void outputScaleResults(Shape* const* shapeArray, size_t shapeCapacity, std::ostream& out);
+	void toScale(Shape* const* shape, point_t center, double k, size_t shapesCapacity);
 }
 
 #endif

@@ -1,152 +1,54 @@
-#include "input_shape.hpp"
-#include <cstddef>
-#include <stdexcept>
-#include <string>
+#include "scale_functions.hpp"
 #include "rectangle.hpp"
-#include "traingle.hpp"
-#include "diamond.hpp"
-#include "parallelogram.hpp"
+#include <iomanip>
 
-void lanovenko::getPoints(const size_t num_points, double* coords_array, point_t* points)
+void lanovenko::scaleShapes(Shape* const* shapeArray, double* scaleParametrs, std::ostream& out, size_t shapesCapacity)
 {
-  for (size_t i = 0; i < num_points; i++)
-  {
-    size_t number = i * 2;
-    points[i] = {coords_array[number], coords_array[number + 1]};
-  }
+	if (shapesCapacity == 0)
+	{
+		return;
+	}
+	if (scaleParametrs[2] < 0)
+	{
+		throw std::invalid_argument("Negative coefficient!\n");
+	}
+	point_t toMoveCenter = { scaleParametrs[0], scaleParametrs[1] };
+	double coefficient = scaleParametrs[2];
+	outputScaleResults(shapeArray, shapesCapacity, out);
+	toScale(shapeArray, toMoveCenter, coefficient, shapesCapacity);
+	outputScaleResults(shapeArray, shapesCapacity, out);
 }
 
-lanovenko::Shape* lanovenko::inputRectangle(const char str[])
+void lanovenko::toScale(Shape* const* shape, point_t toMoveCenter, double k, size_t shapesCapacity)
 {
-  const char* coords_str = str + 10;
-  double coords_array[4]{};
-  size_t pos = 0;
-  for (size_t i = 0; i < 4; i++)
-  {
-    coords_array[i] = std::stod(coords_str, std::addressof(pos));
-    coords_str += pos;
-  }
-  if (*coords_str != '\0')
-  {
-    throw std::invalid_argument("Wrong Rectangle arguments!\n");
-  }
-  constexpr size_t num_points = 2;
-  point_t points[num_points]{};
-  getPoints(num_points, coords_array, points);
-  return new Rectangle(points[0], points[1]);
-}
-
-lanovenko::Shape* lanovenko::inputTriangle(const char str[])
-{
-  const char* coords_str = str + 9;
-  double coords_array[6]{};
-  size_t pos = 0;
-  for (size_t i = 0; i < 6; ++i)
-  {
-    coords_array[i] = std::stod(coords_str, std::addressof(pos));
-    coords_str += pos;
-  }
-    if (*coords_str != '\0')
-    {
-        throw std::invalid_argument("Wronf Traingle arguments");
-    }
-    constexpr size_t num_points = 3;
-    point_t points[num_points]{};
-    getPoints(num_points, coords_array, points);
-    return new Triangle(points[0], points[1], points[2]);
+	for (size_t i = 0; i < shapesCapacity; i++)
+	{
+		point_t initial = shape[i]->getFrameRect().pos;
+		shape[i]->move(toMoveCenter);
+		double deltaX = (shape[i]->getFrameRect().pos.x - initial.x) * k;
+		double deltaY = (shape[i]->getFrameRect().pos.y - initial.y) * k;
+		shape[i]->scale(k);
+		shape[i]->move(-deltaX, -deltaY);
+	}
 }
 
 
-
-
-lanovenko::Shape* lanovenko::inputDiamond(const char str[])
+void lanovenko::outputScaleResults(Shape* const* shapeArray, size_t shapesCapacity, std::ostream& out)
 {
-  const char* coords_str = str + 7;
-  double coords_array[6]{};
-  size_t pos = 0;
-  for (size_t i = 0; i < 6; ++i)
-  {
-    coords_array[i] = std::stod(coords_str, std::addressof(pos));
-    coords_str += pos;
-  }
-  if (coords_array[0] == coords_array[2] && coords_array[1] == coords_array[5])
-  {
-    lanovenko::Diamond* diam = new lanovenko::Diamond
-    ({ coords_array[0], coords_array[1] },
-    { coords_array[2], coords_array[3] },
-    { coords_array[4], coords_array[5] });
-    return diam;
-  }
-  else if (coords_array[0] == coords_array[4] && coords_array[1] == coords_array[3])
-  {
-    lanovenko::Diamond* diam = new lanovenko::Diamond
-    ({ coords_array[0], coords_array[1] },
-    { coords_array[4], coords_array[5] },
-    { coords_array[2], coords_array[3] });
-    return diam;
-  }
-  else if (coords_array[2] == coords_array[0] && coords_array[3] == coords_array[5])
-  {
-    lanovenko::Diamond* diam = new lanovenko::Diamond
-    ({ coords_array[2], coords_array[3] },
-    { coords_array[0], coords_array[1] },
-    { coords_array[4], coords_array[5] });
-    return diam;
-  }
-  else if (coords_array[2] == coords_array[4] && coords_array[3] == coords_array[1])
-  {
-    lanovenko::Diamond* diam = new lanovenko::Diamond
-    ({ coords_array[2], coords_array[3] },
-    { coords_array[4], coords_array[5] },
-    { coords_array[0], coords_array[1] });
-    return diam;
-  }
-  else if (coords_array[4] == coords_array[0] && coords_array[5] == coords_array[3])
-  {
-    lanovenko::Diamond* diam = new lanovenko::Diamond
-    ({ coords_array[4], coords_array[5] },
-    { coords_array[0], coords_array[1] },
-    { coords_array[2], coords_array[3] });
-    return diam;
-  }
-  else if (coords_array[4] == coords_array[2] && coords_array[5] == coords_array[1])
-  {
-    lanovenko::Diamond* diam = new lanovenko::Diamond
-    ({ coords_array[4], coords_array[5] },
-    { coords_array[2], coords_array[3] },
-    { coords_array[0], coords_array[1] });
-    return diam;
-  }
-  else
-  {
-    throw std::invalid_argument("No Diamond!");
-  }
-  if (*coords_str != '\0')
-  {
-    throw std::invalid_argument("Wrog Diamond arguments");
-  }
-  constexpr size_t num_points = 3;
-  point_t points[num_points]{};
-  getPoints(num_points, coords_array, points);
-  return new Diamond(points[0], points[1], points[2]);
-}
-
-lanovenko::Shape* lanovenko::inputParallelogram(const char str[])
-{
-  const char* coords_string = str + 14;
-  double coords_array[6]{};
-  size_t pos = 0;
-  for (size_t i = 0; i < 6; ++i)
-  {
-    coords_array[i] = std::stod(coords_string, std::addressof(pos));
-    coords_string += pos;
-  }
-  if (*coords_string != '\0')
-  {
-    throw std::invalid_argument("Wrong Parallelogram arguments!\n");
-  }
-  constexpr size_t num_points = 3;
-  point_t points[num_points]{};
-  getPoints(num_points, coords_array, points);
-  return new Parallelogram(points[0], points[1], points[2]);
+	double totalArea = 0;
+	for (size_t i = 0; i < shapesCapacity; i++)
+	{
+		totalArea += shapeArray[i]->getArea();
+	}
+	out << std::fixed << std::setprecision(1) << totalArea;
+	for (size_t i = 0; i < shapesCapacity; i++)
+	{
+		rectangle_t temporaryRectangle = shapeArray[i]->getFrameRect();
+		double leftLowerX = temporaryRectangle.pos.x - (temporaryRectangle.width / 2.0);
+		double leftLowerY = temporaryRectangle.pos.y - (temporaryRectangle.height / 2.0);
+		double rightUpperX = temporaryRectangle.pos.x + (temporaryRectangle.width / 2.0);
+		double rightUpeerY = temporaryRectangle.pos.y + (temporaryRectangle.height / 2.0);
+		out << std::fixed << std::setprecision(1) << ' ' << leftLowerX << ' ' << leftLowerY << ' ' << rightUpperX << ' ' << rightUpeerY;
+	}
+	out << '\n';
 }
