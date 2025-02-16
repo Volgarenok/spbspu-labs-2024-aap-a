@@ -8,7 +8,6 @@ namespace asafov
     double x;
     double y;
   };
-
   class rectangle_t
   {
   public:

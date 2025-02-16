@@ -5,42 +5,42 @@
 using asafov::point_t;
 using asafov::rectangle_t;
 
-asafov::Ring::Ring(point_t pos, double radi, double rado):
-  center(pos),
-  innerradius(radi),
-  outerradius(rado)
+asafov::Ring::Ring(point_t center, double innerradius, double outerradius):
+  center_(center),
+  innerradius_(innerradius),
+  outerradius_(outerradius)
 {}
 
 double asafov::Ring::getArea() const
 {
-  return M_PI * (outerradius * outerradius - innerradius * innerradius);
+  return M_PI * (outerradius_ * outerradius_ - innerradius_ * innerradius_);
 }
 
 rectangle_t asafov::Ring::getFrameRect() const
 {
   rectangle_t rect;
-  rect.height = outerradius * 2.0;
-  rect.width = outerradius * 2.0;
-  rect.pos = center;
+  rect.height = outerradius_ * 2.0;
+  rect.width = outerradius_ * 2.0;
+  rect.pos = center_;
   return rect;
 }
 
 void asafov::Ring::move(double x, double y)
 {
-  center.x += x;
-  center.y += y;
+  center_.x += x;
+  center_.y += y;
 }
 
 void asafov::Ring::move(point_t pos)
 {
-  center = pos;
+  center_ = pos;
 }
 
 void asafov::Ring::scale(double scale)
 {
   rectangle_t rect = getFrameRect();
-  center.x += (center.x - rect.pos.x) * (scale - 1);
-  center.y += (center.y - rect.pos.y) * (scale - 1);
-  innerradius *= scale;
-  outerradius *= scale;
+  center_.x += (center_.x - rect.pos.x) * (scale - 1);
+  center_.y += (center_.y - rect.pos.y) * (scale - 1);
+  innerradius_ *= scale;
+  outerradius_ *= scale;
 }

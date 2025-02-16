@@ -3,10 +3,9 @@
 #include "shape.hpp"
 namespace asafov
 {
-  class Square : public Shape
+  class Square final : public Shape
   {
-    point_t lb;
-    double side;
+    
   public:
     Square(point_t a, double side);
     double getArea() const;
@@ -14,6 +13,9 @@ namespace asafov
     void move(point_t pos);
     void move(double x, double y);
     void scale(double scale);
+  private:
+    point_t lb_;
+    double side_;
   };
 }
 #endif

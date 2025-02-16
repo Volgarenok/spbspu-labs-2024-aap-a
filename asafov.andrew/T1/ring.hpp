@@ -3,18 +3,19 @@
 #include "shape.hpp"
 namespace asafov
 {
-  class Ring : public Shape
+  class Ring final : public Shape
   {
-    point_t center;
-    double innerradius;
-    double outerradius;
   public:
-    Ring(point_t pos, double radi, double rado);
+    Ring(point_t center, double innerradius, double outerradius);
     double getArea() const;
     rectangle_t getFrameRect() const;
     void move(point_t pos);
     void move(double x, double y);
     void scale(double scale);
+  private:
+    point_t center_;
+    double innerradius_;
+    double outerradius_;
   };
 }
 #endif
