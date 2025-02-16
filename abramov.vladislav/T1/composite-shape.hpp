@@ -22,7 +22,7 @@ namespace abramov
     void scale(double k);
     void scaleUnsafe(double k);
     void pushBack(Shape *shp);
-    void pop_back() noexcept;
+    void popBack() noexcept;
     Shape *at(size_t id);
     const Shape *at(size_t id) const;
     bool empty() const noexcept;
@@ -34,7 +34,7 @@ namespace abramov
     Shape **shapeptrs_;
 
     void swap(CompositeShape &comp_shp) noexcept;
-    void deleteShapes(Shape **shapes);
+    void deleteShapes();
   };
 
   using Composite = CompositeShape;

@@ -15,13 +15,13 @@ namespace
   }
 }
 
-void abramov::CompositeShape::deleteShapes(Shape **shapes)
+void abramov::CompositeShape::deleteShapes()
 {
   for (size_t i = 0; i < shapes_; ++i)
   {
-    delete shapes[i];
+    delete shapeptrs_[i];
   }
-  delete[] shapes;
+  delete[] shapeptrs_;
 }
 
 abramov::CompositeShape::CompositeShape(size_t capacity):
@@ -44,14 +44,14 @@ abramov::CompositeShape::CompositeShape(const CompositeShape &comp_shp):
   }
   catch (const std::bad_alloc &)
   {
-    deleteShapes(shapeptrs_);
+    deleteShapes();
     throw;
   }
 }
 
 abramov::CompositeShape::~CompositeShape()
 {
-  deleteShapes(shapeptrs_);
+  deleteShapes();
 }
 
 abramov::CompositeShape::CompositeShape(CompositeShape &&comp_shp) noexcept:
@@ -83,7 +83,7 @@ abramov::CompositeShape &abramov::CompositeShape::operator=(CompositeShape &&com
 {
   if (std::addressof(comp_shp) != this)
   {
-    deleteShapes(shapeptrs_);
+    deleteShapes();
     shapeptrs_ = comp_shp.shapeptrs_;
     comp_shp.shapeptrs_ = nullptr;
     shapes_ = comp_shp.shapes_;
@@ -176,7 +176,7 @@ void abramov::CompositeShape::pushBack(Shape *shp)
   shapeptrs_[shapes_++] = shp;
 }
 
-void abramov::CompositeShape::pop_back() noexcept
+void abramov::CompositeShape::popBack() noexcept
 {
   delete shapeptrs_[--shapes_];
   shapeptrs_[shapes_] = nullptr;
