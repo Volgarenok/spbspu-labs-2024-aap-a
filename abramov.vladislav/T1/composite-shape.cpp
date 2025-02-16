@@ -42,7 +42,7 @@ abramov::CompositeShape::CompositeShape(const CompositeShape &comp_shp):
       shapeptrs_[i] = comp_shp.shapeptrs_[i]->clone();
     }
   }
-  catch (const std::bad_alloc &)
+  catch (const std::bad_alloc&)
   {
     deleteShapes();
     throw;
