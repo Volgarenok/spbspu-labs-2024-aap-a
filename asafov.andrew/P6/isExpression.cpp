@@ -29,11 +29,11 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
   {
     if (isDigit(string[pos + 1]))
     {
-      isLastSym(pos, length, string);
+      return isLastSym(pos, length, string);
     }
     else if (isLetter(string[pos + 1]))
     {
-      isLastSym(pos, length, string);
+      return isLastSym(pos, length, string);
     }
     else if (string[pos + 1] == '*')
     {
@@ -67,11 +67,11 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
   {
     if (isDigit(string[pos + 1]))
     {
-      isLastSym(pos, length, string);
+      return isLastSym(pos, length, string);
     }
     else if (isLetter(string[pos + 1]))
     {
-      isLastSym(pos, length, string);
+      return isLastSym(pos, length, string);
     }
     else
     {
@@ -82,11 +82,11 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
   {
     if (isDigit(string[pos + 1]))
     {
-      isLastSym(pos, length, string);
+      return isLastSym(pos, length, string);
     }
     else if (isLetter(string[pos + 1]))
     {
-      isLastSym(pos, length, string);
+      return isLastSym(pos, length, string);
     }
     else
     {
