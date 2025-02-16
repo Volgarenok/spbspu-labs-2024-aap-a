@@ -5,13 +5,12 @@ namespace asafov
 {
   class Square final : public Shape
   {
-    
   public:
-    Square(point_t a, double side);
+    Square(point_t lb, double side);
     double getArea() const;
     rectangle_t getFrameRect() const;
     void move(point_t pos);
-    void move(double x, double y);
+    void move(double dx, double dy);
     void scale(double scale);
   private:
     point_t lb_;
