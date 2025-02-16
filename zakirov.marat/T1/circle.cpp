@@ -61,11 +61,11 @@ void zakirov::Circle::move(double bias_x, double bias_y)
   }
 }
 
-void zakirov::Circle::scale_without_check(double k) noexcept
+void zakirov::Circle::scale(double k) noexcept
 {
   for (size_t i = 0; i < rings_size_; ++i)
   {
-    rings_[i]->scale_without_check(k);
+    rings_[i]->scale(k);
   }
 }
 

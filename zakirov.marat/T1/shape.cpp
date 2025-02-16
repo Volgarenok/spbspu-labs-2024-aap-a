@@ -8,5 +8,5 @@ void zakirov::Shape::scale_with_check(double k)
     throw std::logic_error("Incorrect scale coefficient");
   }
 
-  scale_without_check(k);
+  scale(k);
 }

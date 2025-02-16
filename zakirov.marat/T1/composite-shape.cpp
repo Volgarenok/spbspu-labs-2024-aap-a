@@ -151,7 +151,7 @@ void zakirov::CompositeShape::scale_without_check(double k) noexcept
 {
   for (size_t i = 0; i < shapes_quantity_; ++i)
   {
-    shapes_[i]->scale_without_check(k);
+    shapes_[i]->scale(k);
   }
 }
 
@@ -229,7 +229,7 @@ void zakirov::scale_full_composition(CompositeShape & shapes, const point_t & ta
     shapes[i]->move(target);
     point_t nailed_p2 = shapes[i]->getFrameRect().pos;
     point_t bias{(nailed_p2.x - nailed_p1.x) * k, (nailed_p2.y - nailed_p1.y) * k};
-    shapes[i]->scale_without_check(k);
+    shapes[i]->scale(k);
     shapes[i]->move(-bias.x, -bias.y);
   }
 }

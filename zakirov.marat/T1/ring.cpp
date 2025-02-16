@@ -37,7 +37,7 @@ void zakirov::Ring::move(double bias_x, double bias_y)
   move_point(center_, bias_x, bias_y);
 }
 
-void zakirov::Ring::scale_without_check(double k) noexcept
+void zakirov::Ring::scale(double k) noexcept
 {
   in_radius_ *= k;
   ex_radius_ *= k;
