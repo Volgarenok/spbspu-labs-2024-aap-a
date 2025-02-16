@@ -1,7 +1,7 @@
 #include "shape.hpp"
 #include <stdexcept>
 
-void zakirov::Shape::scale_with_check(double k)
+void zakirov::Shape::scaleWithCheck(double k)
 {
   if (k <= 0)
   {

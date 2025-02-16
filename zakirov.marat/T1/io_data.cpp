@@ -63,7 +63,7 @@ void zakirov::get_parameters(std::istream & in, double * array, size_t size)
   }
 }
 
-void zakirov::output_frame(std::ostream & out, CompositeShape & shapes, size_t id)
+void zakirov::output_frame(std::ostream & out, const CompositeShape & shapes, size_t id)
 {
   rectangle_t frame = shapes[id]->getFrameRect();
   point_t frame_bottom_left{frame.pos.x - frame.width / 2, frame.pos.y - frame.height / 2};
@@ -72,7 +72,7 @@ void zakirov::output_frame(std::ostream & out, CompositeShape & shapes, size_t i
   out << frame_top_right.x << ' ' << frame_top_right.y;
 }
 
-void zakirov::full_output(std::ostream & out, CompositeShape & shapes)
+void zakirov::full_output(std::ostream & out, const CompositeShape & shapes)
 {
   out << std::fixed << std::setprecision(1);
   out << shapes.getArea();

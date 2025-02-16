@@ -13,7 +13,7 @@ namespace zakirov
       virtual void move(const point_t & target) = 0;
       virtual void move(double bias_x, double bias_y) = 0;
       virtual void scale(double k) noexcept = 0;
-      void scale_with_check(double k);
+      void scaleWithCheck(double k);
       virtual Shape * clone() const = 0;
   };
 }

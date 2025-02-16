@@ -41,18 +41,18 @@ int main()
     {
       shape_flag = true;
     }
-    catch (const std::bad_alloc &)
+    catch (const std::bad_alloc & e)
     {
       free(data);
-      std::cerr << "Error! Not enought memory." << '\n';
+      std::cerr << e.what() << '\n';
       return 1;
     }
-    catch (const std::logic_error &)
+    catch (const std::logic_error & e)
     {
       free(data);
       new_shape->~Shape();
       free(new_shape);
-      std::cerr << "Warning! Error in scale composition." << '\n';
+      std::cerr << e.what() << '\n';
       return 1;
     }
 
@@ -75,9 +75,9 @@ int main()
   {
     scale_check_full_composition(shapes, target, coefficient);
   }
-  catch (const std::invalid_argument &)
+  catch (const std::invalid_argument & e)
   {
-    std::cerr << "Warning! The figure change coefficient is incorrect." << '\n';
+    std::cerr << e.what() << '\n';
     free(scale_data);
     return 1;
   }
