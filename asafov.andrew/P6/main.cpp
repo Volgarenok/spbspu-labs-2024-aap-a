@@ -17,6 +17,7 @@ int main()
     delete[] str;
     return 1;
   }
-  std::cout << std::boolalpha << asafov::isExpression(str, 0, len-1) << std::endl;
+  std::cout << std::boolalpha << asafov::isExpression(str, 0, len) << '\n';
   delete[] str;
+  return 0;
 }

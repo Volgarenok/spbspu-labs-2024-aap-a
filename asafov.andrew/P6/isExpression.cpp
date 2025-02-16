@@ -1,44 +1,26 @@
 #include "isExpression.hpp"
 
-bool isBetween(char term1, char term2, char term3)
+bool asafov::isBetween(char letter, char begin, char end)
 {
-  if (term1 == term2)
-  {
-    return true;
-  }
-  else if (term2 == term3)
-  {
-    return false;
-  }
-  else
-  {
-    term2++;
-    return isBetween(term1, term2, term3);
-  }
+  return (begin != end) ? (letter != begin ? isBetween(letter, ++begin, end) : letter == begin) : (begin != end);
 }
 
-bool isDigit(char term)
+bool asafov::isDigit(char term)
 {
-  if (isBetween(term, '0', '9'))
-  {
-    return true;
-  }
-  else
-  {
-    return false;
-  }
+  return isBetween(term, '0', '9');
 }
 
-bool isLetter(char term)
+bool asafov::isLetter(char term)
 {
-  if (isBetween(term, 'a', 'z'))
-  {
+  return isBetween(term, 'a', 'z');
+}
+
+bool asafov::isLastSym(size_t pos, size_t length, const char* string, bool(f)(const char*, size_t, size_t))
+{
+  if (pos + 1 == length){
     return true;
   }
-  else
-  {
-    return false;
-  }
+  return f(string, pos + 1, length);
 }
 
 bool asafov::isExpression(const char* string, size_t pos, size_t length)
@@ -47,25 +29,17 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
   {
     if (isDigit(string[pos + 1]))
     {
-      if (pos + 1 == length)
-      {
-      return true;
-      }
-      return isExpression(string, pos + 1, length);
+      isLastSym(pos, length, string, isExpression);
     }
     else if (isLetter(string[pos + 1]))
     {
-      if (pos + 1 == length)
-      {
-      return true;
-      }
-      return isExpression(string, pos + 1, length);
+      isLastSym(pos, length, string, isExpression);
     }
-    else if (string[pos + 1]=='*')
+    else if (string[pos + 1] == '*')
     {
       return isExpression(string, pos + 1, length);
     }
-    else if (string[pos + 1]=='+' || string[pos + 1]=='-')
+    else if (string[pos + 1] == '+' || string[pos + 1] == '-')
     {
       return isExpression(string, pos + 1, length);
     }
@@ -76,11 +50,11 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
   }
   else if (isLetter(string[pos]))
   {
-    if (string[pos + 1]=='*')
+    if (string[pos + 1] == '*')
     {
       return isExpression(string, pos + 1, length);
     }
-    else if (string[pos + 1]=='+' || string[pos + 1]=='-')
+    else if (string[pos + 1] == '+' || string[pos + 1] == '-')
     {
       return isExpression(string, pos + 1, length);
     }
@@ -93,42 +67,26 @@ bool asafov::isExpression(const char* string, size_t pos, size_t length)
   {
     if (isDigit(string[pos + 1]))
     {
-      if (pos + 1 == length)
-      {
-      return true;
-      }
-      return isExpression(string, pos + 1, length);
+      isLastSym(pos, length, string, isExpression);
     }
     else if (isLetter(string[pos + 1]))
     {
-      if (pos + 1 == length)
-      {
-      return true;
-      }
-      return isExpression(string, pos + 1, length);
+      isLastSym(pos, length, string, isExpression);
     }
     else
     {
       return false;
     }
   }
-  else if (string[pos] == '+' || string[pos]=='-')
+  else if (string[pos] == '+' || string[pos] == '-')
   {
     if (isDigit(string[pos + 1]))
     {
-      if (pos + 1 == length)
-      {
-      return true;
-      }
-      return isExpression(string, pos + 1, length);
+      isLastSym(pos, length, string, isExpression);
     }
     else if (isLetter(string[pos + 1]))
     {
-      if (pos + 1 == length)
-      {
-      return true;
-      }
-      return isExpression(string, pos + 1, length);
+      isLastSym(pos, length, string, isExpression);
     }
     else
     {
