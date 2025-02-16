@@ -10,7 +10,7 @@ namespace cherkasov
     {
       if (length <= 0)
       {
-        throw std::invalid_argument("no input coordinate");
+        throw std::invalid_argument("no input coordinate square");
       }
     }
   double Square::getArea() const
