@@ -22,7 +22,7 @@ zakirov::CompositeShape::CompositeShape(const CompositeShape & copy):
       ++new_shapes_quantity;
     }
   }
-  catch (const std::invalid_argument &)
+  catch (const std::exception &)
   {
     clear_shapes(shapes_, new_shapes_quantity);
     throw;
@@ -66,6 +66,7 @@ zakirov::CompositeShape & zakirov::CompositeShape::operator=(const CompositeShap
     {
       clone_shape->~Shape();
       free(clone_shape);
+      throw;
     }
   }
 
@@ -146,22 +147,22 @@ void zakirov::CompositeShape::move(double bias_x, double bias_y)
   move(target);
 }
 
-void zakirov::CompositeShape::scale(double k)
+void zakirov::CompositeShape::scale_without_check(double k) noexcept
 {
   for (size_t i = 0; i < shapes_quantity_; ++i)
   {
-    shapes_[i]->scale(k);
+    shapes_[i]->scale_without_check(k);
   }
 }
 
-void zakirov::CompositeShape::scale_check(double k)
+void zakirov::CompositeShape::scale_with_check(double k)
 {
   if (k <= 0)
   {
     throw std::logic_error("Incorrect scale coefficient");
   }
 
-  scale(k);
+  scale_without_check(k);
 }
 
 void zakirov::CompositeShape::push_back(Shape * shape)
@@ -187,12 +188,7 @@ void zakirov::CompositeShape::pop_back()
 
 zakirov::Shape * zakirov::CompositeShape::at(size_t id)
 {
-  if (id >= shapes_quantity_)
-  {
-    throw std::invalid_argument("ERROR: id is greater, than size of array");
-  }
-
-  return shapes_[id];
+  return const_cast< Shape * >(const_cast< const CompositeShape * >(this)->at(id));
 }
 
 const zakirov::Shape * zakirov::CompositeShape::at(size_t id) const
@@ -233,7 +229,7 @@ void zakirov::scale_full_composition(CompositeShape & shapes, const point_t & ta
     shapes[i]->move(target);
     point_t nailed_p2 = shapes[i]->getFrameRect().pos;
     point_t bias{(nailed_p2.x - nailed_p1.x) * k, (nailed_p2.y - nailed_p1.y) * k};
-    shapes[i]->scale(k);
+    shapes[i]->scale_without_check(k);
     shapes[i]->move(-bias.x, -bias.y);
   }
 }

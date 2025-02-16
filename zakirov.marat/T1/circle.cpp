@@ -15,6 +15,11 @@ zakirov::Circle::Circle(const point_t & center, double radius)
   for (size_t i = 0; i < rings_size_; ++i)
   {
     Ring * ring = static_cast< Ring * >(malloc(sizeof(Ring)));
+    if (!ring)
+    {
+      throw std::bad_alloc();
+    }
+
     rings_[i] = new (ring) Ring(center, step * (i + 1) + first_in_radius_, step * i + first_in_radius_);
   }
 }
@@ -56,11 +61,11 @@ void zakirov::Circle::move(double bias_x, double bias_y)
   }
 }
 
-void zakirov::Circle::scale(double k)
+void zakirov::Circle::scale_without_check(double k) noexcept
 {
   for (size_t i = 0; i < rings_size_; ++i)
   {
-    rings_[i]->scale(k);
+    rings_[i]->scale_without_check(k);
   }
 }
 
@@ -80,7 +85,7 @@ zakirov::Shape * zakirov::Circle::clone() const
     new (circle) Circle(center, radius);
     return circle;
   }
-  catch (std::exception &)
+  catch (const std::exception &)
   {
     free(circle);
     throw;

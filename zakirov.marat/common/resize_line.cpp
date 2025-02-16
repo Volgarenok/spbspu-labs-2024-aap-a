@@ -61,14 +61,10 @@ char * zakirov::get_to_symbol(std::istream & in, size_t step, char interrupt_sym
     line = expanded_line;
     for (size_t i = start; i < finish; ++i)
     {
+      last_symbol = line[i];
       if (line[i] == interrupt_symbol || line[i] == '\0')
       {
-        last_symbol = line[i];
         break;
-      }
-      else if (i == finish - 1)
-      {
-        last_symbol = line[i];
       }
     }
 

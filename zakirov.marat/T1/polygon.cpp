@@ -75,7 +75,7 @@ void zakirov::Polygon::move(double bias_x, double bias_y)
   }
 }
 
-void zakirov::Polygon::scale(double k)
+void zakirov::Polygon::scale_without_check(double k) noexcept
 {
   rectangle_t object_frame = getFrameRect();
   for (size_t i = 0; i < size_; ++i)
@@ -99,7 +99,7 @@ zakirov::Shape * zakirov::Polygon::clone() const
     new (polygon) Polygon(size_, points_);
     return polygon;
   }
-  catch (std::exception &)
+  catch (const std::exception &)
   {
     free(polygon);
     throw;

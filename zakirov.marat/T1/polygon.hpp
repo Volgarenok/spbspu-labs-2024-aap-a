@@ -15,7 +15,7 @@ namespace zakirov
     rectangle_t getFrameRect() const override;
     void move(const point_t &  target) override;
     void move(double bias_x, double bias_y) override;
-    void scale(double k) override;
+    void scale_without_check(double k) noexcept override;
     Shape * clone() const override;
   private:
     size_t size_;

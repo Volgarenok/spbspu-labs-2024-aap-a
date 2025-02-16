@@ -20,8 +20,8 @@ namespace zakirov
     rectangle_t getFrameRect() const;
     void move(const point_t & target);
     void move(double bias_x, double bias_y);
-    void scale(double k);
-    void scale_check(double k);
+    void scale_without_check(double k) noexcept;
+    void scale_with_check(double k);
     void push_back(Shape * shapes);
     void pop_back();
     Shape * at(size_t id);

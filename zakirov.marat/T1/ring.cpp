@@ -37,7 +37,7 @@ void zakirov::Ring::move(double bias_x, double bias_y)
   move_point(center_, bias_x, bias_y);
 }
 
-void zakirov::Ring::scale(double k)
+void zakirov::Ring::scale_without_check(double k) noexcept
 {
   in_radius_ *= k;
   ex_radius_ *= k;
@@ -57,7 +57,7 @@ zakirov::Shape * zakirov::Ring::clone() const
     new (ring) Ring(center_, ex_radius_, in_radius_);
     return ring;
   }
-  catch (std::exception &)
+  catch (const std::exception &)
   {
     free(ring);
     throw;

@@ -1,12 +1,12 @@
 #include "shape.hpp"
 #include <stdexcept>
 
-void zakirov::Shape::scale_check(double k)
+void zakirov::Shape::scale_with_check(double k)
 {
   if (k <= 0)
   {
     throw std::logic_error("Incorrect scale coefficient");
   }
 
-  scale(k);
+  scale_without_check(k);
 }

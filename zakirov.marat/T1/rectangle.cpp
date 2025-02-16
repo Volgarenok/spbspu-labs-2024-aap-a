@@ -39,7 +39,7 @@ void zakirov::Rectangle::move(double bias_x, double bias_y)
   move({getFrameRect().pos.x + bias_x, getFrameRect().pos.y + bias_y});
 }
 
-void zakirov::Rectangle::scale(double k)
+void zakirov::Rectangle::scale_without_check(double k) noexcept
 {
   double scale_distance_x = (top_right_.x - getFrameRect().pos.x) * (k - 1);
   double scale_distance_y = (top_right_.y - getFrameRect().pos.y) * (k - 1);
@@ -61,7 +61,7 @@ zakirov::Shape * zakirov::Rectangle::clone() const
     new (rectangle) Rectangle(bottom_left_, top_right_);
     return rectangle;
   }
-  catch (std::exception &)
+  catch (const std::exception &)
   {
     free(rectangle);
     throw;
