@@ -32,6 +32,7 @@ int main()
     std::cerr << "There is no figures\n";
     return 1;
   }
+  std::cout << std::fixed << std::setprecision(1);
   printShapes(std::cout, shapes);
   scaleFigures(shapes, p, k);
   printShapes(std::cout, shapes);

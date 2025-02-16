@@ -114,9 +114,6 @@ void abramov::printShapes(std::ostream &out, const Composite &shapes)
   {
     throw std::logic_error("There is no figures\n");
   }
-  std::ios stream(NULL);
-  stream.copyfmt(out);
-  out << std::fixed << std::setprecision(1);
   double s = shapes.getArea();
   out << s << " ";
   for (size_t j = 0; j < i - 1; ++j)
@@ -126,7 +123,6 @@ void abramov::printShapes(std::ostream &out, const Composite &shapes)
   }
   printFrameRectCoords(shapes[i - 1]->getFrameRect());
   out << "\n";
-  out.copyfmt(stream);
 }
 
 void abramov::scaleFigureUnsafe(Shape *s, const point_t &p, double k)
