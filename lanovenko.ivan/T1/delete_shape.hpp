@@ -1,10 +1,13 @@
-#ifndef INPUT_STRING_HPP
-#define INPUT_STRING_HPP
-#include <istream>
+#ifndef DELETE_SHAPE_HPP
+#define DELETE_SHAPE_HPP
+
+#include <cstddef>
+#include "shape.hpp"
 
 namespace lanovenko
 {
-  char* inputStr(std::istream& in);
+	void deleteShape(Shape** shapeArray, std::size_t res);
 }
 
-#endif
+#endif 
+
