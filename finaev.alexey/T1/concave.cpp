@@ -109,6 +109,6 @@ void finaev::Concave::scale(double k)
 {
   first.scale(k);
   second.scale(k);
-  first_area_ *= k;
-  second_area_ *= k;
+  first_area_ *= k*k;
+  second_area_ *= k*k;
 }
