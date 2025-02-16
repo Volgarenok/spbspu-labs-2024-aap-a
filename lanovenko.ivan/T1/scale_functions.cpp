@@ -6,7 +6,7 @@ void lanovenko::scaleShapes(Shape* const* shapeArray, double* scaleParametrs, st
 {
   if (shapesCapacity == 0)
   {
-    return;
+    throw std::invalid_argument("Nothing to scale!\n");
   }
   if (scaleParametrs[2] < 0)
   {
