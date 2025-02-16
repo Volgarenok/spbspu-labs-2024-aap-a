@@ -6,20 +6,21 @@ namespace
 {
   void searchInArray(const double *x, double &a, double &b, size_t k)
   {
-    if (k >= 1)
+    if (k < 2)
     {
-      a = x[0];
-      b = x[0];
-      for (size_t i = 0; i < k; ++i)
+      throw std::logic_error("There is not enough elements\n");
+    }
+    a = x[0];
+    b = x[0];
+    for (size_t i = 0; i < k; ++i)
+    {
+      if (x[i] > b)
       {
-        if (x[i] > b)
-        {
-          b = x[i];
-        }
-        if (x[i] < a)
-        {
-          a = x[i];
-        }
+        b = x[i];
+      }
+      if (x[i] < a)
+      {
+        a = x[i];
       }
     }
   }

@@ -45,9 +45,9 @@ abramov::rectangle_t abramov::Rectangle::getFrameRect() const noexcept
     const double y3 = rect1.pos.y + rect1.height / 2;
     height = 2 * (y3 - y1);
   }
-  point_t pos;
-  pos.x = (x1 + x2) / 2;
-  pos.y = (y1 + y2) / 2;
+  const double px = (x1 + x2) / 2;
+  const double py = (y1 + y2) / 2;
+  point_t pos{ px, py };
   rectangle_t frame_rect{ width, height, pos };
   return frame_rect;
 }
