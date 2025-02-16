@@ -73,37 +73,31 @@ void printFrameRectCoords(const abramov::rectangle_t &r)
 
 void abramov::getShapes(std::istream &in, Composite &shapes, point_t &p, double &k, bool &flag)
 {
-  while (in)
+  std::string s1;
+  while (in && s1 != "SCALE")
   {
-    std::string s1;
     in >> s1;
     Shape *figure = nullptr;
     try
     {
-      if (s1 == "SCALE")
-      {
-        in >> p.x >> p.y >> k;
-      }
-      else
-      {
-        try
-        {
-          figure = makeShape(s1, in);
-          shapes.pushBack(figure);
-        }
-        catch (const std::invalid_argument &)
-        {
-        }
-        catch (const std::logic_error &)
-        {
-          flag = true;
-        }
-      }
+      figure = makeShape(s1, in);
+      shapes.pushBack(figure);
+    }
+    catch (const std::invalid_argument &)
+    {
+    }
+    catch (const std::logic_error &)
+    {
+      flag = true;
     }
     catch (const std::bad_alloc &)
     {
       delete figure;
     }
+  }
+  if (s1 == "SCALE")
+  {
+    in >> p.x >> p.y >> k;
   }
 }
 
