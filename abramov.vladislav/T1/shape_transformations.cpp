@@ -53,10 +53,6 @@ namespace
     {
       figure = makeComplexQuad(in);
     }
-    else
-    {
-      throw std::invalid_argument("Figure is not supported\n");
-    }
     return figure;
   }
 
@@ -81,17 +77,14 @@ void abramov::getShapes(std::istream &in, Composite &shapes, point_t &p, double 
     try
     {
       figure = makeShape(s1, in);
-      shapes.pushBack(figure);
-    }
-    catch (const std::invalid_argument&)
-    {
+      if (figure)
+      {
+        shapes.pushBack(figure);
+      }
     }
     catch (const std::logic_error&)
     {
       flag = true;
-    }
-    catch (const std::bad_alloc&)
-    {
     }
   }
   if (s1 == "SCALE")
