@@ -1,13 +1,14 @@
 #include "min_sum_mdg.hpp"
+
 #include <limits>
+
+#include "common_utils.hpp"
 
 void zholobov::read_matrix(std::istream& input_stream, int* matrix, size_t elements_to_read)
 {
-  while (elements_to_read-- != 0) {
-    input_stream >> *matrix++;
-    if (!input_stream) {
-      throw std::runtime_error("Error occured when reading matrix data");
-    }
+  read_array(matrix, elements_to_read, input_stream);
+  if (!input_stream) {
+    throw std::runtime_error("Error occured when reading matrix data");
   }
 }
 
