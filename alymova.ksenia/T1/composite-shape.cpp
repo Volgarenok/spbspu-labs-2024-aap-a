@@ -1,7 +1,6 @@
 #include "composite-shape.hpp"
 #include <stdexcept>
 #include "shape.hpp"
-#include <iostream>
 alymova::CompositeShape::CompositeShape():
   size_(0),
   capacity_(10),
