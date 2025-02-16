@@ -33,7 +33,7 @@ namespace sveshnikov
   private:
     size_t size_;
     Shape **shapes_;
-    void clear() noexcept;
+    void clear();
     void swap(CompositeShape &rhs) noexcept;
   };
 }

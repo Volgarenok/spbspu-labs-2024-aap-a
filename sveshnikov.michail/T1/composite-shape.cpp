@@ -42,7 +42,6 @@ sveshnikov::CompositeShape &sveshnikov::CompositeShape::operator=(const Composit
 {
   if (this != std::addressof(comp_shp))
   {
-    clear();
     CompositeShape rhs(comp_shp);
     swap(rhs);
   }
@@ -53,10 +52,7 @@ sveshnikov::CompositeShape &sveshnikov::CompositeShape::operator=(CompositeShape
 {
   if (this != std::addressof(comp_shp))
   {
-    clear();
-    size_ = comp_shp.size_;
-    shapes_ = comp_shp.shapes_;
-    comp_shp.shapes_ = nullptr;
+    swap(comp_shp);
   }
   return *this;
 }
@@ -193,7 +189,7 @@ void sveshnikov::CompositeShape::unsafe_scale(double k)
   }
 }
 
-void sveshnikov::CompositeShape::clear() noexcept
+void sveshnikov::CompositeShape::clear()
 {
   while (size_ > 0)
   {
@@ -204,8 +200,5 @@ void sveshnikov::CompositeShape::clear() noexcept
 void sveshnikov::CompositeShape::swap(CompositeShape &rhs) noexcept
 {
   std::swap(size_, rhs.size_);
-  for (size_t i = 0; i < size_; i++)
-  {
-    std::swap(shapes_[i], rhs.shapes_[i]);
-  }
+  std::swap(shapes_, rhs.shapes_);
 }
