@@ -34,6 +34,7 @@ namespace sveshnikov
     size_t size_;
     Shape **shapes_;
     void clear() noexcept;
+    void swap(CompositeShape &rhs) noexcept;
   };
 }
 

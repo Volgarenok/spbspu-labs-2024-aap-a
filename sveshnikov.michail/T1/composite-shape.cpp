@@ -8,12 +8,20 @@ sveshnikov::CompositeShape::CompositeShape():
 {}
 
 sveshnikov::CompositeShape::CompositeShape(const CompositeShape &copied_shp):
-  size_(copied_shp.size_),
+  size_(0),
   shapes_(new Shape *[10000])
 {
-  for (size_t i = 0; i < size_; i++)
+  try
   {
-    push_back(copied_shp.shapes_[i]->clone());
+    for (size_t i = 0; i < copied_shp.size_; i++)
+    {
+      push_back(copied_shp.shapes_[i]->clone());
+    }
+  }
+  catch (const std::exception &e)
+  {
+    clear();
+    throw;
   }
 }
 
@@ -35,11 +43,8 @@ sveshnikov::CompositeShape &sveshnikov::CompositeShape::operator=(const Composit
   if (this != std::addressof(comp_shp))
   {
     clear();
-    size_ = comp_shp.size_;
-    for (size_t i = 0; i < size_; i++)
-    {
-      shapes_[i] = comp_shp.shapes_[i]->clone();
-    }
+    CompositeShape rhs(comp_shp);
+    swap(rhs);
   }
   return *this;
 }
@@ -181,10 +186,9 @@ void sveshnikov::CompositeShape::unsafe_scale(double k)
   {
     point_t pos = shapes_[i]->getFrameRect().pos;
     shapes_[i]->move(center);
-    double dx = 0.0, dy = 0.0;
     shapes_[i]->unsafe_scale(k);
-    dx = k * (pos.x - center.x);
-    dy = k * (pos.y - center.y);
+    double dx = k * (pos.x - center.x);
+    double dy = k * (pos.y - center.y);
     shapes_[i]->move(dx, dy);
   }
 }
@@ -194,5 +198,14 @@ void sveshnikov::CompositeShape::clear() noexcept
   while (size_ > 0)
   {
     pop_back();
+  }
+}
+
+void sveshnikov::CompositeShape::swap(CompositeShape &rhs) noexcept
+{
+  std::swap(size_, rhs.size_);
+  for (size_t i = 0; i < size_; i++)
+  {
+    std::swap(shapes_[i], rhs.shapes_[i]);
   }
 }

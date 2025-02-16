@@ -8,6 +8,7 @@
 namespace
 {
   double *read_params(std::istream &in);
+  void push_back(sveshnikov::Shape *shp, sveshnikov::CompositeShape &comp_shp);
 
   double *read_params(std::istream &in)
   {
@@ -35,6 +36,19 @@ namespace
     }
     return params;
   }
+
+  void push_back(sveshnikov::Shape *shp, sveshnikov::CompositeShape &comp_shp)
+  {
+    try
+    {
+      comp_shp.push_back(shp);
+    }
+    catch (const std::exception &e)
+    {
+      delete shp;
+      throw;
+    }
+  }
 }
 
 void sveshnikov::build_rectangle(std::istream &in, CompositeShape &comp_shp)
@@ -42,7 +56,8 @@ void sveshnikov::build_rectangle(std::istream &in, CompositeShape &comp_shp)
   double *params = read_params(in);
   try
   {
-    comp_shp.push_back(new Rectangle({params[0], params[1]}, {params[2], params[3]}));
+    Rectangle *rectangle = new Rectangle({params[0], params[1]}, {params[2], params[3]});
+    push_back(rectangle, comp_shp);
   }
   catch (const std::exception &e)
   {
@@ -57,7 +72,8 @@ void sveshnikov::build_ring(std::istream &in, CompositeShape &comp_shp)
   double *params = read_params(in);
   try
   {
-    comp_shp.push_back(new Ring({params[0], params[1]}, params[2], params[3]));
+    Ring *ring = new Ring({params[0], params[1]}, params[2], params[3]);
+    push_back(ring, comp_shp);
   }
   catch (const std::exception &e)
   {
@@ -72,7 +88,8 @@ void sveshnikov::build_ellipse(std::istream &in, CompositeShape &comp_shp)
   double *params = read_params(in);
   try
   {
-    comp_shp.push_back(new Ellipse({params[0], params[1]}, params[2], params[3]));
+    Ellipse *ellipse = new Ellipse({params[0], params[1]}, params[2], params[3]);
+    push_back(ellipse, comp_shp);
   }
   catch (const std::exception &e)
   {
@@ -87,7 +104,8 @@ void sveshnikov::build_square(std::istream &in, CompositeShape &comp_shp)
   double *params = read_params(in);
   try
   {
-    comp_shp.push_back(new Square({params[0], params[1]}, params[2]));
+    Square *square = new Square({params[0], params[1]}, params[2]);
+    push_back(square, comp_shp);
   }
   catch (const std::exception &e)
   {

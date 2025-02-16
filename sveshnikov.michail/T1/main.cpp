@@ -4,6 +4,8 @@
 #include "build_shapes.hpp"
 #include "shape_actions.hpp"
 
+void output_comp_shp(std::ostream &out, sveshnikov::CompositeShape &comp_shp);
+
 int main()
 {
   sveshnikov::CompositeShape comp_shp;
@@ -50,15 +52,13 @@ int main()
   }
   if (comp_shp.empty())
   {
-    std::cerr << "ERROR: Nothing To Scale!\n";
+    std::cerr << "ERROR: Nothing to scale!\n";
     return 1;
   }
   double zoom_ctr_x = 0.0, zoom_ctr_y = 0.0, k = 0.0;
   std::cin >> zoom_ctr_x >> zoom_ctr_y >> k;
   std::cout << std::fixed << std::setprecision(1);
-  std::cout << comp_shp.getArea() << " ";
-  sveshnikov::output_frame(std::cout, comp_shp);
-  std::cout << "\n";
+  output_comp_shp(std::cout, comp_shp);
   try
   {
     sveshnikov::isotropic_scaling(comp_shp, zoom_ctr_x, zoom_ctr_y, k);
@@ -68,8 +68,13 @@ int main()
     std::cerr << e.what() << "\n";
     return 1;
   }
-  std::cout << comp_shp.getArea() << " ";
-  sveshnikov::output_frame(std::cout, comp_shp);
-  std::cout << "\n";
+  output_comp_shp(std::cout, comp_shp);
   return 0;
+}
+
+void output_comp_shp(std::ostream &out, sveshnikov::CompositeShape &comp_shp)
+{
+  out << comp_shp.getArea() << " ";
+  sveshnikov::output_frames(out, comp_shp);
+  out << "\n";
 }

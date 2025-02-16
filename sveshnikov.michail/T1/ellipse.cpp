@@ -1,5 +1,5 @@
 #include "ellipse.hpp"
-#include <math.h>
+#include <cmath>
 #include <stdexcept>
 
 sveshnikov::Ellipse::Ellipse(point_t center, double vert_radius, double horiz_radius):

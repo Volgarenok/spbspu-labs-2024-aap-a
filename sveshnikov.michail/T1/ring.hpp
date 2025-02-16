@@ -9,7 +9,6 @@ namespace sveshnikov
   {
   public:
     Ring(point_t center, double long_radius, double short_radius);
-    Ring(Ellipse small_ellipse, Ellipse big_ellipse);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(const point_t p) override;
@@ -20,6 +19,7 @@ namespace sveshnikov
   private:
     Ellipse small_ellipse_;
     Ellipse big_ellipse_;
+    Ring(Ellipse small_ellipse, Ellipse big_ellipse);
   };
 }
 
