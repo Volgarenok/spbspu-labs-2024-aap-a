@@ -15,9 +15,9 @@ namespace
   }
 }
 
-void abramov::CompositeShape::deleteShapes()
+void abramov::CompositeShape::deleteShapes(size_t k)
 {
-  for (size_t i = 0; i < shapes_; ++i)
+  for (size_t i = 0; i < k; ++i)
   {
     delete shapeptrs_[i];
   }
@@ -35,23 +35,25 @@ abramov::CompositeShape::CompositeShape(const CompositeShape &comp_shp):
   capacity_(comp_shp.capacity_),
   shapeptrs_(new Shape*[capacity_])
 {
+  size_t k = 0;
   try
   {
-    for (size_t i = 0; i < shapes_; ++i)
+    while (k < shapes_)
     {
-      shapeptrs_[i] = comp_shp.shapeptrs_[i]->clone();
+      shapeptrs_[k] = comp_shp.shapeptrs_[k]->clone();
+      ++k;
     }
   }
   catch (const std::bad_alloc&)
   {
-    deleteShapes();
+    deleteShapes(k);
     throw;
   }
 }
 
 abramov::CompositeShape::~CompositeShape()
 {
-  deleteShapes();
+  deleteShapes(shapes_);
 }
 
 abramov::CompositeShape::CompositeShape(CompositeShape &&comp_shp) noexcept:
@@ -83,7 +85,7 @@ abramov::CompositeShape &abramov::CompositeShape::operator=(CompositeShape &&com
 {
   if (std::addressof(comp_shp) != this)
   {
-    deleteShapes();
+    deleteShapes(shapes_);
     shapeptrs_ = comp_shp.shapeptrs_;
     comp_shp.shapeptrs_ = nullptr;
     shapes_ = comp_shp.shapes_;
