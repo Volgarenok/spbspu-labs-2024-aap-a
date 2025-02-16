@@ -4,47 +4,81 @@
 #include <stdexcept>
 #include "base-types.hpp"
 
-bool finaev::operator ==(const point_t a, const point_t b)
+namespace
 {
-  return ((a.x == b.x) && (a.y == b.y));
-}
+  bool operator ==(const finaev::point_t a, const finaev::point_t b)
+  {
+    return ((a.x == b.x) && (a.y == b.y));
+  }
 
-double finaev::len(const point_t a, const point_t b)
-{
-  return std::sqrt(std::pow((a.x - b.x), 2) + std::pow((a.y - b.y), 2));
+  double len(const finaev::point_t a, const finaev::point_t b)
+  {
+    return std::sqrt(std::pow((a.x - b.x), 2) + std::pow((a.y - b.y), 2));
+  }
+
+  finaev::Rectangle createRect(finaev::point_t f, finaev::point_t s, finaev::point_t i)
+  {
+    finaev::point_t rightUp = { std::max(f.x, std::max(s.x, i.x)), std::max(f.y, std::max(s.y, i.y)) };
+    finaev::point_t leftDown = { std::min(f.x, std::min(s.x, i.x)), std::min(f.y, std::min(s.y, i.y)) };
+    return { leftDown, rightUp };
+  }
+
+  double areaOnePart(finaev::point_t f, finaev::point_t s, finaev::point_t i)
+  {
+    double a = len(f, s);
+    double b = len(s, i);
+    double c = len(f, i);
+    double p = (a + b + c) / 2;
+    return std::sqrt(p * (p - a) * (p - b) * (p - c));
+  }
+  
+  bool Sharp(finaev::point_t f, finaev::point_t s, finaev::point_t t)
+  {
+    if ((f.x > s.x && f.x > t.x) || (f.x < s.x && f.x < t.x))
+    {
+      return 1;
+    }
+    else
+    {
+      return 0;
+    }
+  }
 }
+ 
+
 
 finaev::Concave::Concave(point_t f, point_t s, point_t t, point_t i):
-  first(f),
-  second(s),
-  third(t),
-  internal(i)
+  first(createRect(f, s, i)),
+  second(createRect(f, t, i)),
+  first_area_(areaOnePart(f, s, i)),
+  second_area_(areaOnePart(f, t, i)),
+  isSharp(Sharp(f, s, t))
 {
-  if (first == second || first == third || first == internal || second == third || second == internal || third == internal)
+  if (f == s || f == t || f == i || s == t || s == i || t == i)
   {
     throw std::logic_error("uncorrect coordinates");
   }
-  else if (((internal.x == first.x) && (internal.x == second.x)) || ((internal.x == third.x) && (internal.x == second.x)))
+  else if (((i.x == f.x) && (i.x == s.x)) || ((i.x == t.x) && (i.x == s.x)))
   {
     throw std::logic_error("uncorrect coordinates");
   }
-  else if (((internal.x == first.x) && (internal.x == third.x)) || ((internal.y == third.y) && (internal.y == second.y)))
+  else if (((i.x == f.x) && (i.x == t.x)) || ((i.y == t.y) && (i.y == s.y)))
   {
     throw std::logic_error("uncorrect coordinates");
   }
-  else if (((internal.y == first.y) && (internal.x == third.x)) || ((internal.y == first.y) && (internal.y == second.y)))
+  else if (((i.y == f.y) && (i.x == t.x)) || ((i.y == f.y) && (i.y == s.y)))
   {
     throw std::logic_error("uncorrect coordinates");
   }
-  else if (len(first, second) + len(first, third) <= len(second, third))
+  else if (len(f, s) + len(f, t) <= len(s, t))
   {
     throw std::logic_error("uncorrect coordinates");
   }
-  else if (len(second, third) + len(first, third) <= len(first, second))
+  else if (len(s, t) + len(f, t) <= len(f, s))
   {
     throw std::logic_error("uncorrect coordinates");
   }
-  else if (len(first, second) + len(second, third) <= len(first, third))
+  else if (len(f, s) + len(s, t) <= len(f, t))
   {
     throw std::logic_error("uncorrect coordinates");
   }
@@ -52,58 +86,44 @@ finaev::Concave::Concave(point_t f, point_t s, point_t t, point_t i):
 
 double finaev::Concave::getArea() const
 {
-  double a1 = len(first, second);
-  double b1 = len(first, third);
-  double c = len(second, third);
-  double p1 = (a1 + b1 + c) / 2;
-  double s1 = std::sqrt(p1 * (p1 - a1) * (p1 - b1) * (p1 - c));
-  double a2 = len(second, internal);
-  double b2 = len(third, internal);
-  double p2 = (a2 + b2 + c) / 2;
-  double s2 = std::sqrt(p2 * (p2 - a2) * (p2 - b2) * (p2 - c));
-  return s1 - s2;
+    return first_area_ + second_area_;
 }
 
 finaev::rectangle_t finaev::Concave::getFrameRect() const
 {
-  double width = std::max(first.x, std::max(second.x, third.x)) - std::min(first.x, std::min(second.x, third.x));
-  double height = std::max(first.y, std::max(second.y, third.y)) - std::min(first.y, std::min(second.y, third.y));
-  double x = std::min(first.x, std::min(second.x, third.x)) + (width / 2);
-  double y = std::min(first.y, std::min(second.y, third.y)) + (height / 2);
-  point_t pos = {x, y};
-  rectangle_t a = {pos, width, height};
-  return a;
+  double leftXfirst = first.getFrameRect().pos.x - first.getFrameRect().width / 2;
+  double leftYfirst = first.getFrameRect().pos.y - first.getFrameRect().height / 2;
+  double leftXsecond = second.getFrameRect().pos.x - second.getFrameRect().width / 2;
+  double leftYsecond = second.getFrameRect().pos.y - second.getFrameRect().height / 2;
+  point_t lDown = {std::min(leftXfirst, leftXsecond), std::min(leftYfirst, leftYsecond)};
+  double rightXfirst = first.getFrameRect().pos.x + first.getFrameRect().width / 2;
+  double rightYfirst = first.getFrameRect().pos.y + first.getFrameRect().height / 2;
+  double rightXsecond = second.getFrameRect().pos.x + second.getFrameRect().width / 2;
+  double rightYsecond = second.getFrameRect().pos.y + second.getFrameRect().height / 2;
+  point_t rUp = {std::max(rightXfirst, rightXsecond), std::max(rightYfirst, rightYsecond)};
+  Rectangle rect = {lDown, rUp};
+  return rect.getFrameRect();
 }
 
 void finaev::Concave::move(double sx, double sy)
 {
-  point_t * point[4] = {&first, &second, &third, &internal};
-  double moveX = 0.0;
-  double moveY = 0.0;
-  for (size_t i = 0; i < 4; i++)
-  {
-    point_t p = *point[i];
-    moveX = p.x + sx;
-    moveY = p.y + sy;
-    *point[i] = {moveX, moveY};
-  }
+  first.move(sx, sy);
+  second.move(sx, sy);
 }
 
 void finaev::Concave::move(point_t a)
 {
-  double changeX = a.x - internal.x;
-  double changeY = a.y - internal.y;
-  this->move(changeX, changeY);
+  point_t t = getFrameRect().pos;
+  double changeX = a.x - t.x;
+  double changeY = a.y - t.y;
+  first.move(changeX, changeY);
+  second.move(changeX, changeY);
 }
 
 void finaev::Concave::scale(double k)
 {
-  double x1 = internal.x - (internal.x * k);
-  double y1 = internal.y - (internal.y * k);
-  first.x = x1 + (first.x * k);
-  first.y = y1 + (first.y * k);
-  second.x = x1 + (second.x * k);
-  second.y = y1 + (second.y * k);
-  third.x = x1 + (third.x * k);
-  third.y = y1 + (third.y * k);
+  first.scale(k);
+  second.scale(k);
+  first_area_ *= k;
+  second_area_ *= k;
 }

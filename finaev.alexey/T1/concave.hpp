@@ -2,6 +2,7 @@
 #define CONCAVE_HPP
 
 #include "shape.hpp"
+#include "rectangle.hpp"
 
 namespace finaev
 {
@@ -15,13 +16,12 @@ namespace finaev
     void move(double sx, double sy) override;
     void scale(double k) override;
   private:
-    point_t first;
-    point_t second;
-    point_t third;
-    point_t internal;
+    Rectangle first;
+    Rectangle second;
+    double first_area_;
+    double second_area_;
+    bool isSharp;
   };
-  double len(const point_t a, const point_t b);
-  bool operator ==(const point_t a, const point_t b);
 }
 
 #endif
