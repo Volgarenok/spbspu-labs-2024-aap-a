@@ -10,7 +10,7 @@ namespace asafov
     double getArea() const;
     rectangle_t getFrameRect() const;
     void move(point_t pos);
-    void move(double x, double y);
+    void move(double dx, double dy);
     void scale(double scale);
   private:
     point_t one_;

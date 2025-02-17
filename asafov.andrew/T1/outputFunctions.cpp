@@ -40,12 +40,13 @@ Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
     in >> r1;
     if (r1 <= 0.0)
     {
-        throw std::logic_error("incorrect figure");
+      throw std::logic_error("incorrect figure");
     }
     Circle* circ = new Circle(a, r1);
     return circ;
   }
-  else if (shapename == "RING") {
+  else if (shapename == "RING")
+  {
     point_t a;
     in >> a.x;
     in >> a.y;
@@ -53,6 +54,10 @@ Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
     in >> r1;
     double r2 = 0;
     in >> r2;
+    if (r1 <= 0.0 || r2 <= 0.0 || r1 >= r2)
+    {
+      throw std::logic_error("incorrect figure");
+    }
     Ring* ring = new Ring(a, r1, r2);
     return ring;
   }
@@ -67,24 +72,24 @@ Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
     in >> r2;
     if (r1 <= 0.0 || r2 <= 0.0)
     {
-        throw std::logic_error("incorrect figure");
+      throw std::logic_error("incorrect figure");
     }
     Ellipse* ellipse = new Ellipse(a, r1, r2);
     return ellipse;
   }
   else if (shapename == "SQUARE")
   {
-      point_t lb;
-      in >> lb.x;
-      in >> lb.y;
-      double side = 0;
-      in >> side;
-      if (side <= 0.0)
-      {
-          throw std::logic_error("incorrect figure");
-      }
-      Square* square = new Square(lb, side);
-      return square;
+    point_t lb;
+    in >> lb.x;
+    in >> lb.y;
+    double side = 0;
+    in >> side;
+    if (side <= 0.0)
+    {
+      throw std::logic_error("incorrect figure");
+    }
+    Square* square = new Square(lb, side);
+    return square;
   }
   else if (shapename == "TRIANGLE")
   {
@@ -103,7 +108,7 @@ Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
     double temp = (a.x - b.x + a.y - b.y) * (a.x - c.x + a.y - c.y) * (b.x - c.x + b.y - c.y);
     if (temp == 0 || sidea + sideb == sidec || sidea + sidec == sideb || sideb + sidec == sidea)
     {
-        throw std::logic_error("incorrect figure");
+      throw std::logic_error("incorrect figure");
     }
     Triangle* triangle = new Triangle(a, b, c);
     return triangle;
@@ -122,10 +127,10 @@ Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
     in >> c.y;
     in >> d.x;
     in >> d.y;
-    if ((a.x - b.x + a.y - b.y) * (a.x - c.x + a.y - c.y) * (a.x - d.x + a.y - d.y) *
-      (b.x - c.x + b.y - c.y) * (b.x - d.x + b.y - d.y) * (c.x - d.x + c.y - d.y) == 0)
+    double temp = (a.x - b.x + a.y - b.y) * (a.x - c.x + a.y - c.y) * (a.x - d.x + a.y - d.y);
+    if (temp * (b.x - c.x + b.y - c.y) * (b.x - d.x + b.y - d.y) * (c.x - d.x + c.y - d.y) == 0)
     {
-        throw std::logic_error("incorrect figure");
+      throw std::logic_error("incorrect figure");
     }
     Complexquad* complexquad = new Complexquad(a, b, c, d);
     return complexquad;
