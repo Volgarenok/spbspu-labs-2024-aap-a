@@ -1,11 +1,12 @@
 #ifndef RECTANGLE_HPP
-#define REVTANGLE_HPP
+#define RECTANGLE_HPP
 #include "shape.hpp"
 
 namespace dirti
 {
-  struct Rectangle: Shape
+  struct Rectangle : public Shape
   {
+  public:
     Rectangle(const point_t left_low, const point_t right_high);
     double getArea() const override;
     rectangle_t getFrameRect() const override;

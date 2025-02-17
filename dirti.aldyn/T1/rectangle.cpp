@@ -10,19 +10,19 @@ double dirti::Rectangle::getArea() const
   return (right_high_.x - left_low_.x) * (right_high_.y - left_low_.y);
 }
 
-rectangle_t dirti::Rectangle::getFrameRect() const
+dirti::rectangle_t dirti::Rectangle::getFrameRect() const
 {
   double width = right_high_.x - left_low_.x;
   double height = right_high_.y - left_low_.y;
-  point_t pos{width / 2 + left_low_.x, height / 2 + left_low_.y};
-  rectangle_t frameRect{width, height, pos};
+  point_t pos{ width / 2 + left_low_.x, height / 2 + left_low_.y };
+  rectangle_t frameRect{ width, height, pos };
   return frameRect;
 }
 
 void dirti::Rectangle::move(double x, double y)
 {
-  left_low_{left_low_.x + x, left_low_.y + y};
-  right_high_{right_high_.x + x, right_high_.y + y};
+  left_low_ = { left_low_.x + x, left_low_.y + y };
+  right_high_ = { right_high_.x + x, right_high_.y + y };
 }
 
 void dirti::Rectangle::move(point_t point)
@@ -35,6 +35,6 @@ void dirti::Rectangle::scale(double koef)
 {
   rectangle_t frameRect = getFrameRect();
   point_t pos_ = frameRect.pos;
-  left_low_{pos_.x - koef * frameRect.width / 2, pos_.y - koef * frameRect.height / 2};
-  right_high_{pos_.x + koef * frameRect.width / 2, pos_.y + koef * frameRect.height / 2};
+  left_low_ = { pos_.x - koef * frameRect.width / 2, pos_.y - koef * frameRect.height / 2 };
+  right_high_ = { pos_.x + koef * frameRect.width / 2, pos_.y + koef * frameRect.height / 2 };
 }
