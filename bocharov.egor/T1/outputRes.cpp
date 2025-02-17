@@ -1,6 +1,6 @@
 #include "outputRes.hpp"
-#include "getShapeInfo.hpp"
 #include <iomanip>
+#include "getShapeInfo.hpp"
 
 void bocharov::outputRes(std::ostream & output, Shape * const * myShape, size_t shapeSize)
 {

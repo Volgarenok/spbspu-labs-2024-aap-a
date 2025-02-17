@@ -6,9 +6,9 @@ double third_point_y(bocharov::point_t leftDown, bocharov::point_t rightUp)
 {
   const double ad = rightUp.x - leftDown.x;
   const double ab = rightUp.y - leftDown.y;
-  const double bd = sqrt(pow(ab, 2) + pow(ad, 2));
+  const double bd = std::sqrt(std::pow(ab, 2) + std::pow(ad, 2));
   const double ak = (ab * ad) / bd;
-  const double bk = sqrt(pow(ab, 2) - pow(ak, 2));
+  const double bk = std::sqrt(std::pow(ab, 2) - std::pow(ak, 2));
   const double kd = bd - bk;
   const double kh = (ak * kd) / ad;
   return kh;
@@ -18,10 +18,10 @@ double third_point_x(bocharov::point_t leftDown, bocharov::point_t rightUp)
 {
   const double ad = rightUp.x - leftDown.x;
   const double ab = rightUp.y - leftDown.y;
-  const double bd = sqrt(pow(ab, 2) + pow(ad, 2));
+  const double bd = std::sqrt(std::pow(ab, 2) + std::pow(ad, 2));
   const double ak = (ab * ad) / bd;
   const double kh = third_point_y(leftDown, rightUp);
-  const double ah = sqrt(pow(ak, 2) - pow(kh, 2));
+  const double ah = std::sqrt(pow(ak, 2) - std::pow(kh, 2));
   return ah;
 }
 
