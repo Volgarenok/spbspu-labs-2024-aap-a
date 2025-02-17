@@ -30,8 +30,7 @@ alymova::CompositeShape::CompositeShape(CompositeShape&& comp_shape):
   capacity_(comp_shape.capacity_),
   shapes_(comp_shape.shapes_)
 {
-  comp_shape.size_ = 0;
-  comp_shape.shapes_ = nullptr;
+  do_default(comp_shape);
 }
 alymova::CompositeShape::~CompositeShape()
 {
@@ -48,7 +47,11 @@ alymova::CompositeShape& alymova::CompositeShape::operator=(const CompositeShape
 }
 alymova::CompositeShape& alymova::CompositeShape::operator=(CompositeShape&& comp_shape)
 {
-  swap(comp_shape);
+  clear();
+  size_ = comp_shape.size_;
+  capacity_ = comp_shape.capacity_;
+  shapes_ = comp_shape.shapes_;
+  do_default(comp_shape);
   return *this;
 }
 alymova::Shape* alymova::CompositeShape::operator[](size_t id) noexcept
@@ -150,6 +153,12 @@ void alymova::CompositeShape::swap(CompositeShape& other) noexcept
   std::swap(size_, other.size_);
   std::swap(capacity_, other.capacity_);
   std::swap(shapes_, other.shapes_);
+}
+void alymova::CompositeShape::do_default(CompositeShape& comp_shape) noexcept
+{
+  comp_shape.size_ = 0;
+  comp_shape.capacity_ = 0;
+  comp_shape.shapes_ = nullptr;
 }
 void alymova::CompositeShape::clear() noexcept
 {
