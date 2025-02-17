@@ -12,11 +12,7 @@ int main()
   {
     shapeCount = bocharov::getShapeInfo(std::cin, std::cerr, std::cout, myShapes);
   }
-  catch (const std::bad_alloc & e)
-  {
-    std::cerr << e.what() << '\n';
-  }
-  catch (const std::logic_error & e)
+  catch (const std::exception & e)
   {
     std::cerr << e.what() << '\n';
   }

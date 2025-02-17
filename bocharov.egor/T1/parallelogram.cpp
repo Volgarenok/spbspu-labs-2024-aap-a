@@ -28,11 +28,10 @@ double bocharov::Parallelogram::getArea() const
 
 bocharov::rectangle_t bocharov::Parallelogram::getFrameRect() const
 {
-  rectangle_t rect;
-  rect.pos = pos_;
-  rect.height = std::abs(p1_.y) * 2.0;
-  rect.width = std::abs(p1_.x) * 2.0;
-  return rect;
+  point_t pos = pos_;
+  double height = std::abs(p1_.y) * 2.0;
+  double width = std::abs(p1_.x) * 2.0;
+  return {width, height, pos};
 }
 
 void bocharov::Parallelogram::move(point_t point)

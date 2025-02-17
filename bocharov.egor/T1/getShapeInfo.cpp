@@ -43,24 +43,24 @@ void bocharov::scaling(Shape ** myShapes, size_t shapeCount, point_t center, dou
   }
   catch (const std::invalid_argument &)
   {
-    throw std::invalid_argument("under zero ratio with scale\n");
+    throw std::invalid_argument("under zero ratio with scale");
   }
 }
 
 std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, std::ostream & output, Shape ** myShapes)
 {
-  std::string myStr;
+  std::string inpStr;
   std::size_t shapesCount = 0;
   bool scaled = false;
   auto handleError = [&](const std::invalid_argument & e)
   {
     error << e.what() << '\n';
   };
-  while (input >> myStr)
+  while (input >> inpStr)
   {
     try
     {
-      if (myStr == "RECTANGLE")
+      if (inpStr == "RECTANGLE")
       {
         constexpr size_t quantity = 2;
         point_t arrPoint[quantity] = {};
@@ -68,7 +68,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         myShapes[shapesCount] = new Rectangle{arrPoint[0], arrPoint[1]};
         shapesCount++;
       }
-      else if (myStr == "TRIANGLE")
+      else if (inpStr == "TRIANGLE")
       {
         constexpr size_t quantity = 3;
         point_t arrPoint[quantity] = {};
@@ -76,7 +76,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         myShapes[shapesCount] = new Triangle{arrPoint[0], arrPoint[1], arrPoint[2]};
         shapesCount++;
       }
-      else if (myStr == "PARALLELOGRAM")
+      else if (inpStr == "PARALLELOGRAM")
       {
         constexpr size_t quantity = 3;
         point_t arrPoint[quantity] = {};
@@ -84,7 +84,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         myShapes[shapesCount] = new Parallelogram{arrPoint[0], arrPoint[1], arrPoint[2]};
         shapesCount++;
       }
-      else if (myStr == "CONCAVE")
+      else if (inpStr == "CONCAVE")
       {
         constexpr size_t quantity = 4;
         point_t arrPoint[quantity] = {};
@@ -92,7 +92,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         myShapes[shapesCount] = new Concave{arrPoint[0], arrPoint[1], arrPoint[2], arrPoint[3]};
         shapesCount++;
       }
-      else if (myStr == "SCALE")
+      else if (inpStr == "SCALE")
       {
         scaled = true;
         if (shapesCount == 0)

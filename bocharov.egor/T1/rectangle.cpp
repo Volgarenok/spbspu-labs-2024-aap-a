@@ -36,14 +36,14 @@ bocharov::point_t second_coordinate(bocharov::point_t leftDown, bocharov::point_
 }
 
 bocharov::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
-  ta_(Triangle{leftDown, point_t{rightUp.x, leftDown.y}, first_coordinate(leftDown, rightUp)}),
-  tb_(Triangle{leftDown, point_t{leftDown.x, rightUp.y}, first_coordinate(leftDown, rightUp)}),
-  tc_(Triangle{rightUp, point_t{leftDown.x, rightUp.y}, second_coordinate(leftDown, rightUp)}),
-  td_(Triangle{rightUp, point_t{rightUp.x, leftDown.y}, second_coordinate(leftDown, rightUp)})
+  ta_(leftDown, point_t{rightUp.x, leftDown.y}, first_coordinate(leftDown, rightUp)),
+  tb_(leftDown, point_t{leftDown.x, rightUp.y}, first_coordinate(leftDown, rightUp)),
+  tc_(rightUp, point_t{leftDown.x, rightUp.y}, second_coordinate(leftDown, rightUp)),
+  td_(rightUp, point_t{rightUp.x, leftDown.y}, second_coordinate(leftDown, rightUp))
 {
   if (leftDown.x >= rightUp.x || leftDown.y >= rightUp.y)
   {
-    throw std::invalid_argument("error with rectangle size\n");
+    throw std::invalid_argument("error with rectangle size");
   }
 }
 

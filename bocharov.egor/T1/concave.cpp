@@ -50,7 +50,7 @@ bocharov::Concave::Concave(point_t a, point_t b, point_t c, point_t d):
 {
   if (!isTriangle(d, b, c) || !isPointInTriangle(a, b, c, d) || isDupePoint(a, b, c, d))
   {
-    throw std::invalid_argument("Error witch point for concave\n");
+    throw std::invalid_argument("Error witch point for concave");
   }
 }
 
@@ -64,12 +64,10 @@ bocharov::rectangle_t bocharov::Concave::getFrameRect() const
   double maxY = std::max(a_.y, std::max(b_.y, std::max(c_.y, d_.y)));
   double minY = std::min(a_.y, std::min(b_.y, std::min(c_.y, d_.y)));
   double minX = std::min(a_.x, std::min(b_.x, std::min(c_.x, d_.x)));
-  rectangle_t result;
-  result.height = maxY - minY;
-  result.width = maxX - minX;
-  result.pos.x = minX + (result.width / 2.0);
-  result.pos.y = minY + (result.height / 2.0);
-  return result;
+  double height = maxY - minY;
+  double width = maxX - minX;
+  point_t pos = {minX + (width / 2.0), minY + (height / 2.0)};
+  return {width, height, pos};
 }
 void bocharov::Concave::move(double x, double y)
 {
@@ -91,11 +89,5 @@ void bocharov::Concave::scale(double ratio)
   a_ = {scalePoint(a_, d_, ratio).x - d_.x, scalePoint(a_, d_, ratio).y - d_.y};
   b_ = {scalePoint(b_, d_, ratio).x - d_.x, scalePoint(b_, d_, ratio).y - d_.y};
   c_ = {scalePoint(c_, d_, ratio).x - d_.x, scalePoint(c_, d_, ratio).y - d_.y};
-  //a_.x = (a_.x - d_.x) * ratio;
-  //b_.x = (b_.x - d_.x) * ratio;
-  //c_.x = (c_.x - d_.x) * ratio;
-  //a_.y = (a_.y - d_.y) * ratio;
-  //b_.y = (b_.y - d_.y) * ratio;
-  //c_.y = (c_.y - d_.y) * ratio;
 }
 
