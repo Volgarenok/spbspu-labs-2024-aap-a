@@ -3,68 +3,65 @@
 #include <stdexcept>
 #include <iostream>
 
-namespace brevnov
+bool brevnov::isCorrectDiamond(point_t a, point_t b, point_t c)
 {
-  bool isCorrectDiamond(point_t a, point_t b, point_t c)
+  if ((a.x == b.x &&  a.y == b.y) || (a.x == c.x && a.y == c.y) || (b.x == c.x && b.y == c.y))
   {
-    if ((a.x == b.x &&  a.y == b.y) || (a.x == c.x && a.y == c.y) || (b.x == c.x && b.y == c.y))
-    {
-      return false;
-    }
-    else if ((a.x != b.x && a.x != c.x && b.x != c.x) || (a.y != b.y && a.y != c.y && b.y != c.y))
-    {
-      return false;
-    }
-    return true;
+    return false;
   }
-
-
-  brevnov::point_t getCenter(point_t a, point_t b, point_t c)
+  else if ((a.x != b.x && a.x != c.x && b.x != c.x) || (a.y != b.y && a.y != c.y && b.y != c.y))
   {
-    if ((a.x == b.x && a.y == c.y) || (a.y == b.y && a.x == c.x))
-    {
-      return a;
-    }
-    else if ((b.x == a.x && b.y == c.y) || (b.y == a.y && b.x == c.x))
-    {
-      return b;
-    }
-    else
-    {
-      return c;
-    }
+    return false;
   }
+  return true;
+}
 
-  brevnov::point_t getHorizontal(point_t center, point_t a, point_t b, point_t c)
+
+brevnov::point_t getCenter(point_t a, point_t b, point_t c)
+{
+  if ((a.x == b.x && a.y == c.y) || (a.y == b.y && a.x == c.x))
   {
-    if (center.x != a.x && center.y == a.y)
-    {
-      return a;
-    }
-    else if (center.x != b.x && center.y == b.y)
-    {
-      return b;
-    }
-    else
-    {
-      return c;
-    }
+    return a;
   }
-
-  brevnov::point_t getVertical(point_t center, point_t horizontal, point_t a, point_t b, point_t c)
+  else if ((b.x == a.x && b.y == c.y) || (b.y == a.y && b.x == c.x))
   {
-    if ((a.x != center.x || a.y != center.y) && (a.x != horizontal.x || a.y != horizontal.y))
-    {
-      return a;
-    }
-    else if ((b.x != center.x || b.y != center.y) && (b.x != horizontal.x || b.y != horizontal.y))
-    {
-      return b;
-    }
-    else
-    {
-      return c;
-    }
+    return b;
+  }
+  else
+  {
+    return c;
+  }
+}
+
+brevnov::point_t getHorizontal(point_t center, point_t a, point_t b, point_t c)
+{
+  if (center.x != a.x && center.y == a.y)
+  {
+    return a;
+  }
+  else if (center.x != b.x && center.y == b.y)
+  {
+    return b;
+  }
+  else
+  {
+    return c;
+  }
+}
+
+brevnov::point_t getVertical(point_t center, point_t horizontal, point_t a, point_t b, point_t c)
+{
+  if ((a.x != center.x || a.y != center.y) && (a.x != horizontal.x || a.y != horizontal.y))
+  {
+    return a;
+  }
+  else if ((b.x != center.x || b.y != center.y) && (b.x != horizontal.x || b.y != horizontal.y))
+  {
+    return b;
+  }
+  else
+  {
+    return c;
   }
 }
 
