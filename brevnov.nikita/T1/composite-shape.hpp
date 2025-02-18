@@ -9,7 +9,7 @@ namespace brevnov
   class CompositeShape
   {
   public:
-    CompositeShape(CompositeShape & cos);
+    CompositeShape(const CompositeShape & cos);
     CompositeShape(CompositeShape && cos) noexcept;
     CompositeShape(size_t cus);
     ~CompositeShape();
