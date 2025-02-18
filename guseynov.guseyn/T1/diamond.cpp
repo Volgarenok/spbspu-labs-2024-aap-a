@@ -1,7 +1,11 @@
 #include "diamond.hpp"
 
-guseynov::Diamond::Diamond(point_t highP, point_t rightP, point_t center) :
-  highP_(highP), rightP_(rightP), center_(center)
+#include <stdexcept>
+
+guseynov::Diamond::Diamond(point_t highP, point_t rightP, point_t center):
+  highP_(highP),
+  rightP_(rightP),
+  center_(center)
 {
 }
 
@@ -19,25 +23,23 @@ void guseynov::Diamond::move(point_t pos)
 {
   double moveX = pos.x - center_.x;
   double moveY = pos.y - center_.y;
-  center_ = pos;
-  highP_.x += moveX;
-  highP_.y += moveY;
-  rightP_.x += moveX;
-  rightP_.y += moveY;
+  assigment({highP_.x + moveX, highP_.y + moveY}, {rightP_.x + moveX, rightP_.y + moveY}, pos);
 }
 
 void guseynov::Diamond::move(double x, double y)
 {
-  center_.x += x;
-  center_.y += y;
-  highP_.x += x;
-  highP_.y += y;
-  rightP_.x += x;
-  rightP_.y += y;
+  assigment({highP_.x + x, highP_.y + y}, {rightP_.x + x, rightP_.y + y}, {center_.x + x, center_.y + y});
 }
 
 void guseynov::Diamond::scale(double k)
 {
   highP_.y = center_.y + (highP_.y - center_.y) * k;
   rightP_.x = center_.x + (rightP_.x - center_.x) * k;
+}
+
+void guseynov::Diamond::assigment(point_t highP, point_t rightP, point_t center)
+{
+  highP_ = highP;
+  rightP_ = rightP;
+  center_ = center;
 }

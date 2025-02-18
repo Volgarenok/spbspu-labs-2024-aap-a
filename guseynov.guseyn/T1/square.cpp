@@ -1,8 +1,15 @@
 #include "square.hpp"
 
-guseynov::Square::Square(point_t leftLowP, double length) :
-  leftLowP_(leftLowP), length_(length)
+#include <stdexcept>
+
+guseynov::Square::Square(point_t leftLowP, double length):
+  leftLowP_(leftLowP),
+  length_(length)
 {
+  if (length <= 0)
+  {
+    throw std::invalid_argument("Error in SQUARE parameters");
+  }
 }
 
 double guseynov::Square::getArea() const
@@ -17,19 +24,21 @@ guseynov::rectangle_t guseynov::Square::getFrameRect() const
 
 void guseynov::Square::move(point_t pos)
 {
-  leftLowP_.x = pos.x - (length_ / 2);
-  leftLowP_.y = pos.y - (length_ / 2);
+  assigment({pos.x - (length_ / 2), pos.y - (length_ / 2)});
 }
 
 void guseynov::Square::move(double x, double y)
 {
-  leftLowP_.x = leftLowP_.x + x;
-  leftLowP_.y = leftLowP_.y + y;
+  assigment({leftLowP_.x + x, leftLowP_.y + y});
 }
 
 void guseynov::Square::scale(double k)
 {
-  leftLowP_.x -= (length_ * k - length_) / 2;
-  leftLowP_.y -= (length_ * k - length_) / 2;
+  assigment({leftLowP_.x - (length_ * k - length_) / 2, leftLowP_.y - (length_ * k - length_) / 2});
   length_ *= k;
+}
+
+void guseynov::Square::assigment(point_t leftLowP)
+{
+  leftLowP_ = leftLowP;
 }

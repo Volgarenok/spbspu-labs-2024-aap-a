@@ -18,6 +18,7 @@ namespace guseynov
     point_t highP_;
     point_t rightP_;
     point_t center_;
+    void assigment(point_t highP, point_t rightP, point_t center);
   };
 }
 

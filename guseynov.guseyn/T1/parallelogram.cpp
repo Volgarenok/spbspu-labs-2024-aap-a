@@ -1,15 +1,17 @@
 #include "parallelogram.hpp"
 
 #include <cmath>
+#include <stdexcept>
 
-guseynov::Parallelogram::Parallelogram(point_t p1, point_t p2, point_t p3)
+guseynov::Parallelogram::Parallelogram(point_t p1, point_t p2, point_t p3):
+  pos_({(p1.x + p3.x) / 2.0, (p1.y + p3.y) / 2.0}),
+  p1_({p1.x - pos_.x, p1.y - pos_.y}),
+  p2_({p2.x - pos_.x, p2.y - pos_.y})
 {
-  pos_.x = (p1.x + p3.x) / 2.0;
-  pos_.y = (p1.y + p3.y) / 2.0;
-  p1_.x = p1.x - pos_.x;
-  p1_.y = p1.y - pos_.y;
-  p2_.x = p2.x - pos_.x;
-  p2_.y = p2.y - pos_.y;
+  if (!(((p1.y == p2.y) && (p1.y != p3.y)) || ((p2.y == p3.y) && (p1.y != p2.y))))
+  {
+    throw std::invalid_argument("Error in PARALLELOGRAM parameters");
+  }
 }
 
 double guseynov::Parallelogram::getArea() const

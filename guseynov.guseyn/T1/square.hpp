@@ -17,6 +17,7 @@ namespace guseynov
   private:
     point_t leftLowP_;
     double length_;
+    void assigment(point_t leftLowP);
   };
 }
 

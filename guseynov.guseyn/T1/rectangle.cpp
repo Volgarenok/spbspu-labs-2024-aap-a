@@ -1,8 +1,15 @@
 #include "rectangle.hpp"
 
-guseynov::Rectangle::Rectangle(point_t leftLowP, point_t rightHighP) :
-  leftLowP_(leftLowP), rightHighP_(rightHighP)
+#include <stdexcept>
+
+guseynov::Rectangle::Rectangle(point_t leftLowP, point_t rightHighP):
+  leftLowP_(leftLowP),
+  rightHighP_(rightHighP)
 {
+  if ((rightHighP.x <= leftLowP.x) || (rightHighP.y <= leftLowP.y))
+  {
+    throw std::invalid_argument("Error in RECTANGLE parameters");
+  }
 }
 
 double guseynov::Rectangle::getArea() const
@@ -22,25 +29,22 @@ void guseynov::Rectangle::move(point_t pos)
   point_t center = getFrameRect().pos;
   double moveX = pos.x - center.x;
   double moveY = pos.y - center.y;
-  leftLowP_.x += moveX;
-  leftLowP_.y += moveY;
-  rightHighP_.x += moveX;
-  rightHighP_.y += moveY;
+  assigment({leftLowP_.x + moveX, leftLowP_.y + moveY}, {rightHighP_.x + moveX, rightHighP_.y + moveY});
 }
 
 void guseynov::Rectangle::move(double x, double y)
 {
-  leftLowP_.x += x;
-  leftLowP_.y += y;
-  rightHighP_.x += x;
-  rightHighP_.y += y;
+  assigment({leftLowP_.x + x, leftLowP_.y + y}, {rightHighP_.x + x, rightHighP_.y + y});
 }
 
 void guseynov::Rectangle::scale(double k)
 {
   point_t center = getFrameRect().pos;
-  leftLowP_.x = center.x + (leftLowP_.x - center.x) * k;
-  leftLowP_.y = center.y + (leftLowP_.y - center.y) * k;
-  rightHighP_.x = center.x + (rightHighP_.x - center.x) * k;
-  rightHighP_.y = center.y + (rightHighP_.y - center.y) * k;
+  assigment({center.x + (leftLowP_.x - center.x) * k, center.y + (leftLowP_.y - center.y) * k}, {center.x + (rightHighP_.x - center.x) * k, center.y + (rightHighP_.y - center.y) * k});
+}
+
+void guseynov::Rectangle::assigment(point_t leftLowP, point_t rightHighP)
+{
+  leftLowP_ = leftLowP;
+  rightHighP_ = rightHighP;
 }
