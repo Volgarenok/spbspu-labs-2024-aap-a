@@ -16,7 +16,7 @@ void brevnov::print_frame_coordinates(const brevnov::CompositeShape& coSh, std::
 
 void brevnov::CompositeShape::clear() noexcept
 {
-  clearShape(shapes-, current_size_);
+  clearShape(shapes_, current_size_);
 }
 
 brevnov::CompositeShape::CompositeShape(size_t cus):
@@ -26,7 +26,7 @@ brevnov::CompositeShape::CompositeShape(size_t cus):
 {
 }
 
-brevnov::CompositeShape::CompositeShape(CompositeShape & cos):
+brevnov::CompositeShape::CompositeShape(const CompositeShape & cos):
   shapes_(new Shape *[cos.capacity_]),
   capacity_(cos.capacity_),
   current_size_(cos.current_size_)
