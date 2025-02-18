@@ -23,12 +23,16 @@ void guseynov::Diamond::move(point_t pos)
 {
   double moveX = pos.x - center_.x;
   double moveY = pos.y - center_.y;
-  assigment({highP_.x + moveX, highP_.y + moveY}, {rightP_.x + moveX, rightP_.y + moveY}, pos);
+  assigment({highP_.x + moveX, highP_.y + moveY},
+  {rightP_.x + moveX, rightP_.y + moveY},
+  pos);
 }
 
 void guseynov::Diamond::move(double x, double y)
 {
-  assigment({highP_.x + x, highP_.y + y}, {rightP_.x + x, rightP_.y + y}, {center_.x + x, center_.y + y});
+  assigment({highP_.x + x, highP_.y + y},
+  {rightP_.x + x, rightP_.y + y},
+  {center_.x + x, center_.y + y});
 }
 
 void guseynov::Diamond::scale(double k)
