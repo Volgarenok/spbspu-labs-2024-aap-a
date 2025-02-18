@@ -17,7 +17,7 @@ bool brevnov::isCorrectDiamond(brevnov::point_t a, brevnov::point_t b, brevnov::
 }
 
 
-brevnov::point_t getCenter(brevnov::point_t a, brevnov::point_t b, brevnov::point_t c)
+brevnov::point_t brevnov::getCenter(brevnov::point_t a, brevnov::point_t b, brevnov::point_t c)
 {
   if ((a.x == b.x && a.y == c.y) || (a.y == b.y && a.x == c.x))
   {
@@ -33,7 +33,7 @@ brevnov::point_t getCenter(brevnov::point_t a, brevnov::point_t b, brevnov::poin
   }
 }
 
-brevnov::point_t getHorizontal(brevnov::point_t center, brevnov::point_t a, brevnov::point_t b, brevnov::point_t c)
+brevnov::point_t brevnov::getHorizontal(brevnov::point_t center, brevnov::point_t a, brevnov::point_t b, brevnov::point_t c)
 {
   if (center.x != a.x && center.y == a.y)
   {
@@ -49,7 +49,7 @@ brevnov::point_t getHorizontal(brevnov::point_t center, brevnov::point_t a, brev
   }
 }
 
-brevnov::point_t getVertical(brevnov::point_t center, brevnov::point_t horizontal,
+brevnov::point_t brevnov::getVertical(brevnov::point_t center, brevnov::point_t horizontal,
   brevnov::point_t a, brevnov::point_t b, brevnov::point_t c)
 {
   if ((a.x != center.x || a.y != center.y) && (a.x != horizontal.x || a.y != horizontal.y))
