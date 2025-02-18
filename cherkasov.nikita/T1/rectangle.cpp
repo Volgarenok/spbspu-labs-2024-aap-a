@@ -11,7 +11,7 @@ namespace cherkasov
     {
       if (x1 >= x2 || y1 >= y2)
       {
-        throw std::invalid_argument("no input coordinate");
+        throw std::invalid_argument("no input coordinate rectangle");
       }
     }
   double Rectangle::getArea() const

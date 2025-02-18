@@ -15,11 +15,7 @@ namespace cherkasov
     {
       if (((x1 == x2 && y1 == y2) && (x1 == x3 && y1 == y3)))
       {
-        throw std::invalid_argument("no input coordinat");
-      }
-      if ((x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3))
-      {
-        throw std::invalid_argument("the vertices don't have to be equa");
+        throw std::invalid_argument("no input coordinat diamond");
       }
     }
   double Diamond::getArea() const
