@@ -35,7 +35,7 @@ void smirnov::Square::move(double dx, double dy)
   applyMove(lowerLeft_, dx, dy);
 }
 
-void smirnov::Square::scale(double k)
+void smirnov::Square::unsafeScale(double k) noexcept
 {
   point_t center = getFrameRect().pos;
   sideLength_ *= k;

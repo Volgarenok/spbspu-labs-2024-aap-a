@@ -13,7 +13,7 @@ namespace smirnov
     rectangle_t getFrameRect() const override;
     void move(point_t newPos) override;
     void move(double dx, double dy) override;
-    void scale(double k) override;
+    void unsafeScale(double k) noexcept override;
   private:
     Parallelogram parallelogram_;
   };

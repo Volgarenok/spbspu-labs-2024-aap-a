@@ -36,7 +36,7 @@ void smirnov::Diamond::move(double dx, double dy)
   parallelogram_.move(dx, dy);
 }
 
-void smirnov::Diamond::scale(double k)
+void smirnov::Diamond::unsafeScale(double k) noexcept
 {
   parallelogram_.scale(k);
 }

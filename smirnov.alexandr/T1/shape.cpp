@@ -1,13 +1,13 @@
 #include "shape.hpp"
 #include <stdexcept>
 
-void smirnov::Shape::arrayScale(double k)
+void smirnov::Shape::scale(double k)
 {
   if (k <= 0)
   {
     throw std::invalid_argument("Incorrect scale");
   }
-  scale(k);
+  unsafeScale(k);
 }
 
 void smirnov::Shape::applyMove(point_t & point, double dx, double dy)

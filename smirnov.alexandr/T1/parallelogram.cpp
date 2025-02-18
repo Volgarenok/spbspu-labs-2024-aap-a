@@ -53,7 +53,7 @@ void smirnov::Parallelogram::move(double dx, double dy)
   applyMove(vertex4_, dx, dy);
 }
 
-void smirnov::Parallelogram::scale(double k)
+void smirnov::Parallelogram::unsafeScale(double k) noexcept
 {
   point_t center = getFrameRect().pos;
   applyScale(vertex1_, center, k);

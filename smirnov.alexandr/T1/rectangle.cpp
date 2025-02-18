@@ -36,7 +36,7 @@ void smirnov::Rectangle::move(double dx, double dy)
   applyMove(upperRight_, dx, dy);
 }
 
-void smirnov::Rectangle::scale(double k)
+void smirnov::Rectangle::unsafeScale(double k) noexcept
 {
   point_t center = getFrameRect().pos;
   applyScale(lowerLeft_, center, k);
