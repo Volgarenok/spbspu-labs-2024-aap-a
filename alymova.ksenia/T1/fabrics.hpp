@@ -16,7 +16,7 @@ namespace alymova
 
     void clear() noexcept;
   };
-  
+
   struct AbstractCreator
   {
     virtual ~AbstractCreator() = default;
