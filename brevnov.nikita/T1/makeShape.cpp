@@ -3,7 +3,7 @@
 #include <string>
 #include <exception>
 
-brevnov::Shape * make_rectangle(std::istream& in)
+brevnov::Shape * brevnov::make_rectangle(std::istream& in)
 {
   double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0;
   in >> x1 >> y1 >> x2 >> y2;
@@ -11,10 +11,10 @@ brevnov::Shape * make_rectangle(std::istream& in)
   {
     throw std::invalid_argument("Fail input");
   }
-  return new Rectangle({x1, y1}, {x2, y2});
+  return new brevnov::Rectangle({x1, y1}, {x2, y2});
 }
 
-brevnov::Diamond * make_diamond(std::istream& in)
+brevnov::Diamond * brevnov::make_diamond(std::istream& in)
 {
   double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0, x3 = 0.0, y3 = 0.0;
   in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
@@ -22,10 +22,10 @@ brevnov::Diamond * make_diamond(std::istream& in)
   {
     throw std::invalid_argument("Fail input");
   }
-  return new Diamond({x1, y1}, {x2, y2}, {x3, y3});
+  return new brevnov::Diamond({x1, y1}, {x2, y2}, {x3, y3});
 }
 
-brevnov::Ellipse * make_ellipse(std::istream& in)
+brevnov::Ellipse * brevnov::make_ellipse(std::istream& in)
 {
   double x = 0.0, y = 0.0;
   in >> x >> y;
@@ -36,10 +36,10 @@ brevnov::Ellipse * make_ellipse(std::istream& in)
   {
     throw std::invalid_argument("Fail input");
   }
-  return new Ellipse(center, r1, r2);
+  return new brevnov::Ellipse(center, r1, r2);
 }
 
-brevnov::point_t scale(std::istream & in)
+brevnov::point_t brevnov::scale(std::istream & in)
 {
   double x = 0.0, y = 0.0;
   in >> x >> y;
@@ -50,19 +50,19 @@ brevnov::point_t scale(std::istream & in)
   return {x, y};
 }
 
-brevnov::Shape * make_shape(std::string name_shape, std::istream & in)
+brevnov::Shape * brevnov::make_shape(std::string name_shape, std::istream & in)
 {
   if (name_shape == "RECTANGLE")
   {
-    return make_rectangle(in);
+    return brevnov::make_rectangle(in);
   }
   if (name_shape == "ELLIPSE")
   {
-    return make_ellipse(in);
+    return brevnov::make_ellipse(in);
   }
   if (name_shape == "DIAMOND")
   {
-    return make_diamond(in);
+    return brevnov::make_diamond(in);
   }
   else
   {

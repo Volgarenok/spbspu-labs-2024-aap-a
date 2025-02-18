@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <iostream>
 
-bool brevnov::isCorrectDiamond(point_t a, point_t b, point_t c)
+bool brevnov::isCorrectDiamond(brevnov::point_t a, brevnov::point_t b, brevnov::point_t c)
 {
   if ((a.x == b.x &&  a.y == b.y) || (a.x == c.x && a.y == c.y) || (b.x == c.x && b.y == c.y))
   {
@@ -17,7 +17,7 @@ bool brevnov::isCorrectDiamond(point_t a, point_t b, point_t c)
 }
 
 
-brevnov::point_t getCenter(point_t a, point_t b, point_t c)
+brevnov::point_t getCenter(brevnov::point_t a, brevnov::point_t b, brevnov::point_t c)
 {
   if ((a.x == b.x && a.y == c.y) || (a.y == b.y && a.x == c.x))
   {
@@ -33,7 +33,7 @@ brevnov::point_t getCenter(point_t a, point_t b, point_t c)
   }
 }
 
-brevnov::point_t getHorizontal(point_t center, point_t a, point_t b, point_t c)
+brevnov::point_t getHorizontal(brevnov::point_t center, brevnov::point_t a, brevnov::point_t b, brevnov::point_t c)
 {
   if (center.x != a.x && center.y == a.y)
   {
@@ -49,7 +49,7 @@ brevnov::point_t getHorizontal(point_t center, point_t a, point_t b, point_t c)
   }
 }
 
-brevnov::point_t getVertical(point_t center, point_t horizontal, point_t a, point_t b, point_t c)
+brevnov::point_t getVertical(brevnov::point_t center, brevnov::point_t horizontal, brevnov::point_t a, brevnov::point_t b, brevnov::point_t c)
 {
   if ((a.x != center.x || a.y != center.y) && (a.x != horizontal.x || a.y != horizontal.y))
   {
@@ -65,7 +65,7 @@ brevnov::point_t getVertical(point_t center, point_t horizontal, point_t a, poin
   }
 }
 
-brevnov::Diamond::Diamond(point_t a, point_t b, point_t c):
+brevnov::Diamond::Diamond(brevnov::point_t a, brevnov::point_t b, brevnov::point_t c):
   center_(getCenter(a, b, c)),
   horizontal_(getHorizontal(center_, a, b, c)),
   vertical_(getVertical(center_, horizontal_, a, b, c))
