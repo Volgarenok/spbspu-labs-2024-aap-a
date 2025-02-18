@@ -6,10 +6,9 @@
 #include "rectangle.hpp"
 #include "circle.hpp"
 #include "fabrics.hpp"
-constexpr size_t figures_cnt = 3;
 void alymova::makeShape(std::istream& in, CompositeShape& shapes, bool& wrong_shape_flag, double* scale_params)
 {
-  Creator* fabric = new CreatorSpecial();
+  Creator* fabric = new Creator();
 
   bool scale_flag = false;
   while (!scale_flag)

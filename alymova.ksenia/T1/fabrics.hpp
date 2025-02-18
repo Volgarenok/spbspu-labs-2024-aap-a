@@ -4,19 +4,32 @@
 #include "shape.hpp"
 namespace alymova
 {
+  struct AbstractCreator
+  {
+    virtual ~AbstractCreator() = default; 
+    virtual Shape* create(std::istream& in) = 0;
+  };
+  struct CreatorRectangle final: public AbstractCreator
+  {
+    Shape* create(std::istream& in) override;
+  };
+  struct CreatorCircle final: public AbstractCreator
+  {
+    Shape* create(std::istream& in) override;
+  };
+  struct CreatorRegular final: public AbstractCreator
+  {
+    Shape* create(std::istream& in) override;
+  };
   struct Creator
   {
-    virtual ~Creator() = default;
+    Creator();
+    ~Creator();
     Shape* create(std::string name, std::istream& in);
-    virtual Shape* createRectangle(std::istream& in) = 0;
-    virtual Shape* createCircle(std::istream& in) = 0;
-    virtual Shape* createRegular(std::istream& in) = 0;
-  };
-  struct CreatorSpecial: public Creator
-  {
-    Shape* createRectangle(std::istream& in) override;
-    Shape* createCircle(std::istream& in) override;
-    Shape* createRegular(std::istream& in) override;
+  private:
+    AbstractCreator** fabrics_;
+
+    void clear() noexcept;
   };
 
   void readParameters(std::istream& in, double* params, size_t size);
