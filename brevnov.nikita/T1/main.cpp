@@ -39,16 +39,7 @@ int main()
       try
       {
         new_shape = make_shape(input_shape, std::cin);
-        try
-        {
-          comp_sh.push_back(new_shape);
-        }
-        catch(const std::bad_alloc & e)
-        {
-          delete new_shape;
-          std::cerr << "Not enough memory!\n";
-          return 1;
-        }
+        comp_sh.push_back(new_shape);
       }
       catch (const std::bad_alloc & e)
       {
@@ -58,6 +49,12 @@ int main()
       catch (const std::invalid_argument& e)
       {
         isIncorrectParameters = true;
+      }
+      catch(const std::future_error & e)
+      {
+        delete new_shape;
+        std::cerr << "Not enough memory!\n";
+        return 1;
       }
     }
     std::cin >> input_shape;

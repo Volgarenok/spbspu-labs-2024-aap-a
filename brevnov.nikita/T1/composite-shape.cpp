@@ -101,7 +101,14 @@ void brevnov::CompositeShape::push_back(Shape * sp)
 {
   if (current_size_ >= capacity_)
   {
-    add_memory();
+    try
+    {
+      add_memory();
+    }
+    catch(const std::bad_alloc& e)
+    {
+      throw std::future_error("Future error!");
+    }
   }
   shapes_[current_size_++] = sp;
 }
