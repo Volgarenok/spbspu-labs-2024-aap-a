@@ -11,6 +11,6 @@ namespace brevnov
   Diamond * make_diamond(std::istream & in);
   Ellipse * make_ellipse(std::istream & in);
   point_t scale(std::istream & in);
-  Shape * make_shape(std::string name_shape, std::istream & in);
+  Shape * make_shape(std::string& name_shape, std::istream & in);
 }
 #endif
