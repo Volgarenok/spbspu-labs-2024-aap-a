@@ -52,6 +52,7 @@ sveshnikov::CompositeShape &sveshnikov::CompositeShape::operator=(CompositeShape
 {
   if (this != std::addressof(comp_shp))
   {
+    CompositeShape temp(std::move(comp_shp));
     swap(comp_shp);
   }
   return *this;
