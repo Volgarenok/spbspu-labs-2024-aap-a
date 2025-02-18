@@ -1,5 +1,6 @@
 #include "rectangle.hpp"
 #include <stdexcept>
+#include "composite-shape.hpp"
 
 
 brevnov::Rectangle::Rectangle(point_t left, point_t right):
@@ -27,11 +28,7 @@ brevnov::Rectangle::Rectangle(point_t left, point_t right):
 
 brevnov::Rectangle::~Rectangle()
 {
-  for (size_t i = 0; i < 64; i++)
-  {
-    delete shapes_[i];
-  }
-  delete[] shapes_;
+  clearShape(shapes_, 64);
 }
 
 double brevnov::Rectangle::getArea() const noexcept

@@ -16,11 +16,7 @@ void brevnov::print_frame_coordinates(const brevnov::CompositeShape& coSh, std::
 
 void brevnov::CompositeShape::clear() noexcept
 {
-  for (size_t i = 0; i < current_size_; i++)
-  {
-    delete shapes_[i];
-  }
-  delete[] shapes_;
+  clearShape(shapes-, current_size_);
 }
 
 brevnov::CompositeShape::CompositeShape(size_t cus):
@@ -107,7 +103,7 @@ void brevnov::CompositeShape::push_back(Shape * sp)
     }
     catch (const std::bad_alloc& e)
     {
-      throw std::length_error("length_error");
+      throw std::length_error("Future error!");
     }
   }
   shapes_[current_size_++] = sp;
