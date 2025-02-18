@@ -1,6 +1,7 @@
 #include "diamond.hpp"
 #include <cmath>
 #include <stdexcept>
+
 smirnov::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
   parallelogram_(p1, p2, p3)
 {

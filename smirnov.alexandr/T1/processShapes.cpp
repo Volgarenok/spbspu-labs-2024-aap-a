@@ -52,4 +52,3 @@ void smirnov::scaleShapes(Shape ** shapes, size_t count, point_t p, double facto
     shapes[i]->move(-vector.x, -vector.y);
   }
 }
-
