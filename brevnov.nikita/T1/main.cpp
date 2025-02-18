@@ -50,7 +50,7 @@ int main()
       {
         isIncorrectParameters = true;
       }
-      catch (const std::future_error& e)
+      catch (const std::length_error& e)
       {
         delete new_shape;
         std::cerr << "Not enough memory!\n";
