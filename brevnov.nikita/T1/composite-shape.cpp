@@ -16,7 +16,7 @@ void brevnov::print_frame_coordinates(const brevnov::CompositeShape& coSh, std::
 
 void brevnov::CompositeShape::clear() noexcept
 {
-  clearShape(shapes-, current_size_);
+  clearShape(shapes_, current_size_);
 }
 
 brevnov::CompositeShape::CompositeShape(size_t cus):
@@ -58,9 +58,9 @@ brevnov::CompositeShape::CompositeShape(CompositeShape && cos) noexcept:
 brevnov::CompositeShape & brevnov::CompositeShape::operator=(const brevnov::CompositeShape & cos)
 {
   CompositeShape help(cos);
-  std::swap(shapes_, cos.shapes_);
-  std::swap(capacity_, cos.capacity_);
-  std::swap(current_size_, cos.current_size_);
+  std::swap(shapes_, help.shapes_);
+  std::swap(capacity_, help.capacity_);
+  std::swap(current_size_, help.current_size_);
   return *this;
 }
 
