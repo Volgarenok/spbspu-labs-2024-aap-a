@@ -2,6 +2,7 @@
 #include <utility>
 #include <stdexcept>
 #include <cmath>
+#include <future>
 #include "shape.hpp"
 
 void brevnov::print_frame_coordinates(const brevnov::CompositeShape& coSh, std::ostream & out)
@@ -105,7 +106,7 @@ void brevnov::CompositeShape::push_back(Shape * sp)
     {
       add_memory();
     }
-    catch(const std::bad_alloc& e)
+    catch (const std::bad_alloc& e)
     {
       throw std::future_error("Future error!");
     }
