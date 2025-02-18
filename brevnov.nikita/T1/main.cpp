@@ -5,6 +5,7 @@
 #include <iomanip>
 #include "base-types.hpp"
 #include "shape.hpp"
+#include "composite-shape.hpp"
 #include "makeShape.hpp"
 
 using namespace brevnov;
