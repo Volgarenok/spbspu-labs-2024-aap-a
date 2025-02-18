@@ -15,7 +15,7 @@ namespace brevnov
     void scale(double n) noexcept override;
     Shape * clone() const;
   private:
-    Ellipse ** shapes_;
+    Shape ** shapes_;
     point_t left_;
     point_t right_;
   };
