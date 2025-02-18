@@ -1,4 +1,5 @@
 #include <cstddef>
+#include <iomanip>
 #include <iostream>
 #include "getShapeInfo.hpp"
 #include "shape.hpp"
@@ -10,6 +11,7 @@ int main()
   int shapeCount = 0;
   try
   {
+    std::cout << std::fixed << std::setprecision(1);
     shapeCount = bocharov::getShapeInfo(std::cin, std::cerr, std::cout, myShapes);
   }
   catch (const std::exception & e)

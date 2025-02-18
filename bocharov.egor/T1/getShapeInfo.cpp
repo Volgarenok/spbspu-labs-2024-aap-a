@@ -108,8 +108,10 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         try
         {
           outputRes(output, myShapes, shapesCount);
+          output << '\n';
           scaling(myShapes, shapesCount, toCenter, ratio);
           outputRes(output, myShapes, shapesCount);
+          output << '\n';
         }
         catch (const std::invalid_argument & e)
         {
