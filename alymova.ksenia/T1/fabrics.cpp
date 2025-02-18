@@ -3,7 +3,7 @@
 #include "base-types.hpp"
 #include "rectangle.hpp"
 #include "circle.hpp"
-const size_t figures_cnt = 3;
+constexpr size_t figures_cnt = 3;
 std::string figures[figures_cnt] = {"RECTANGLE", "CIRCLE", "REGULAR"};
 
 alymova::Creator::Creator():
@@ -31,7 +31,7 @@ alymova::Shape* alymova::Creator::create(std::string name, std::istream& in)
   {
     if (name == figures[i])
     {
-       return fabrics_[i]->create(in);
+      return fabrics_[i]->create(in);
     }
   }
   return nullptr;
