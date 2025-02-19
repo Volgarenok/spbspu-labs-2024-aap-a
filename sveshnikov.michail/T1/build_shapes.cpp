@@ -37,7 +37,7 @@ namespace
   }
 }
 
-sveshnikov::Shape *sveshnikov::buildRectangle(std::istream &in, CompositeShape &comp_shp)
+sveshnikov::Shape *sveshnikov::buildRectangle(std::istream &in)
 {
   double *params = readParams(in);
   try
@@ -53,7 +53,7 @@ sveshnikov::Shape *sveshnikov::buildRectangle(std::istream &in, CompositeShape &
   }
 }
 
-sveshnikov::Shape *sveshnikov::buildRing(std::istream &in, CompositeShape &comp_shp)
+sveshnikov::Shape *sveshnikov::buildRing(std::istream &in)
 {
   double *params = readParams(in);
   try
@@ -69,7 +69,7 @@ sveshnikov::Shape *sveshnikov::buildRing(std::istream &in, CompositeShape &comp_
   }
 }
 
-sveshnikov::Shape *sveshnikov::buildEllipse(std::istream &in, CompositeShape &comp_shp)
+sveshnikov::Shape *sveshnikov::buildEllipse(std::istream &in)
 {
   double *params = readParams(in);
   try
@@ -85,7 +85,7 @@ sveshnikov::Shape *sveshnikov::buildEllipse(std::istream &in, CompositeShape &co
   }
 }
 
-sveshnikov::Shape *sveshnikov::buildSquare(std::istream &in, CompositeShape &comp_shp)
+sveshnikov::Shape *sveshnikov::buildSquare(std::istream &in)
 {
   double *params = readParams(in);
   try

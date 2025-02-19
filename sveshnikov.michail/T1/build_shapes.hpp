@@ -5,10 +5,10 @@
 
 namespace sveshnikov
 {
-  Shape *buildRectangle(std::istream &in, CompositeShape &comp_shp);
-  Shape *buildRing(std::istream &in, CompositeShape &comp_shp);
-  Shape *buildEllipse(std::istream &in, CompositeShape &comp_shp);
-  Shape *buildSquare(std::istream &in, CompositeShape &comp_shp);
+  Shape *buildRectangle(std::istream &in);
+  Shape *buildRing(std::istream &in);
+  Shape *buildEllipse(std::istream &in);
+  Shape *buildSquare(std::istream &in);
 }
 
 #endif

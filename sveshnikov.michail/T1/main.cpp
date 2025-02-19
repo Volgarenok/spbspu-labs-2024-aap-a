@@ -19,19 +19,19 @@ int main()
       sveshnikov::Shape *shp = nullptr;
       if (shape_name == "RECTANGLE")
       {
-        shp = sveshnikov::buildRectangle(std::cin, comp_shp);
+        shp = sveshnikov::buildRectangle(std::cin);
       }
       else if (shape_name == "RING")
       {
-        shp = sveshnikov::buildRing(std::cin, comp_shp);
+        shp = sveshnikov::buildRing(std::cin);
       }
       else if (shape_name == "ELLIPSE")
       {
-        shp = sveshnikov::buildEllipse(std::cin, comp_shp);
+        shp = sveshnikov::buildEllipse(std::cin);
       }
       else if (shape_name == "SQUARE")
       {
-        shp = sveshnikov::buildSquare(std::cin, comp_shp);
+        shp = sveshnikov::buildSquare(std::cin);
       }
       if (shp != nullptr)
       {
