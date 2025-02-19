@@ -21,7 +21,7 @@ namespace kushekbaev
     {
       if (compShape[i])
       {
-        compShape[i]->scaleEverything(**compShape, scalePoint, scaleCoeff);
+        compShape[i]->scaleEverything(*compShape, scalePoint, scaleCoeff);
       }
     }
   }
