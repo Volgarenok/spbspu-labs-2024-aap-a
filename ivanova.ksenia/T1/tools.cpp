@@ -55,7 +55,7 @@ void ivanova::scale(Shape** shps, size_t size, point_t scalePoint, double k)
     ivanova::point_t begin = shps[i]->getFrameRect().pos;
     shps[i]->move(scalePoint);
     ivanova::point_t result = shps[i]->getFrameRect().pos;
-    ivanova::point_t vector = { (result.x - result.x) * k, (result.y - result.y) * k };
+    ivanova::point_t vector = { (result.x - begin.x) * k, (result.y - begin.y) * k };
     shps[i]->scale(k);
     shps[i]->move(-vector.x, -vector.y);
   }
