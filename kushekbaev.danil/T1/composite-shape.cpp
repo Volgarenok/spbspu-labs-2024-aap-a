@@ -198,17 +198,15 @@ namespace kushekbaev
 
   void CompositeShape::scaleEverything(CompositeShape *compShape, point_t scalePoint, double scaleCoeff)
   {
-    for (size_t j = 0; j < compShape->size(); ++j)
+    size_t size = compShape->size();
+    for (size_t i = 0; i < size; i++)
     {
-      const point_t pos1 = compShape->getFrameRect().pos;
-      compShape->move(scalePoint);
-      const point_t pos2 = compShape->getFrameRect().pos;
-      double dx = pos2.x - pos1.x;
-      double dy = pos2.y - pos1.y;
-      compShape->scale(scaleCoeff);
-      dx *= -1 * scaleCoeff;
-      dy *= -1 * scaleCoeff;
-      compShape->move(dx, dy);
+      point_t start = compShape[i].getFrameRect().pos;
+      compShape[i].move(scalePoint);
+      point_t end = compShape[i].getFrameRect().pos;
+      point_t vector = {(end.x - start.x) * scaleCoeff, (end.y - start.y) * scaleCoeff};
+      compShape[i].scale(scaleCoeff);
+      compShape[i].move(-vector.x,  -vector.y);
     }
   }
 
