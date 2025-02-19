@@ -1,5 +1,7 @@
+#include <iomanip>
 #include <iostream>
 #include <string>
+#include "../common/input_string.hpp"
 #include "base-types.hpp"
 #include "circle.hpp"
 #include "make_shape.hpp"
@@ -11,20 +13,7 @@
 
 namespace evstyunichev
 {
-  void skip_to_sign(std::istream &, char end = '\n');
   void destroy_shapes(Shape **, size_t);
-}
-
-void evstyunichev::skip_to_sign(std::istream &in, char end)
-{
-  std::noskipws(in);
-  unsigned char c = (end + 1) % 256;
-  while (c != end)
-  {
-    in >> c;
-  }
-  std::skipws(in);
-  return;
 }
 
 void evstyunichev::destroy_shapes(Shape **shapes, size_t n)
@@ -45,29 +34,15 @@ int main()
   std::cout.precision(1);
   std::cout << std::fixed;
   bool noInputErrors = 1, scaleFlag = 0;
-  while (!(std::cin >> s).eof())
+  while (std::cin >> s)
   {
     bool isSomethingMade = 0;
     non_empty++;
-    if (s == "RECTANGLE")
+    evstyunichev::Shape *cur = evstyunichev::make_shape(std::cin, s);
+    if (cur)
     {
       isSomethingMade = 1;
-      shapes[done] = evstyunichev::make_rectangle(std::cin);
-    }
-    else if (s == "CIRCLE")
-    {
-      isSomethingMade = 1;
-      shapes[done] = evstyunichev::make_circle(std::cin);
-    }
-    else if (s == "RING")
-    {
-      isSomethingMade = 1;
-      shapes[done] = evstyunichev::make_ring(std::cin);
-    }
-    else if (s == "REGULAR")
-    {
-      isSomethingMade = 1;
-      shapes[done] = evstyunichev::make_regular(std::cin);
+      shapes[done] = cur;
     }
     else if (s == "SCALE")
     {
@@ -86,14 +61,14 @@ int main()
         return 1;
       }
       scaleFlag = 1;
-      std::cout << evstyunichev::roundToOneSign(totalSquare) << ' ';
+      std::cout << std::setprecision(1) << totalSquare << ' ';
       evstyunichev::frameOutput(shapes[0]->getFrameRect());
       for (size_t i = 1; i < done; i++)
       {
         std::cout << ' ';
         evstyunichev::frameOutput(shapes[i]->getFrameRect());
       }
-      std::cout << '\n' << evstyunichev::roundToOneSign(totalSquare * k * k) << ' ';
+      std::cout << '\n' << totalSquare * k * k << ' ';
       for (size_t i = 0; i < done; i++)
       {
         evstyunichev::point_t old = shapes[i]->getFrameRect().pos;

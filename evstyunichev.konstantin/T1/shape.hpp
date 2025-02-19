@@ -1,6 +1,6 @@
 #ifndef SHAPE_HPP
-#include "base-types.hpp"
 #define SHAPE_HPP
+#include "base-types.hpp"
 namespace evstyunichev
 {
   struct Shape

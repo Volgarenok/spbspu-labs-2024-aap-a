@@ -4,7 +4,6 @@
 #include "base-types.hpp"
 namespace evstyunichev
 {
-  double roundToOneSign(double);
   void frameOutput(rectangle_t a, std::ostream &out = std::cout);
 }
 #endif

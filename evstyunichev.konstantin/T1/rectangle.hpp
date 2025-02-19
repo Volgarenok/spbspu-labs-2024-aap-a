@@ -5,17 +5,19 @@
 #include "shape.hpp"
 namespace evstyunichev
 {
-  struct Rectangle: public Shape
+  struct Rectangle final: public Shape
   {
     Rectangle(point_t, point_t);
     double getArea() const;
     rectangle_t getFrameRect() const;
-    void move(double, double);
-    void move(point_t);
-    void scale(double k);
+    void move(double, double) override;
+    void move(point_t) override;
+    void scale(double k) override;
+
     private:
+      point_t leftDown_;
+      point_t rightUp_;
       point_t find_mid() const;
-      point_t leftDown_, rightUp_;
   };
 }
 #endif

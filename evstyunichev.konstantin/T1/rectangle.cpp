@@ -2,9 +2,14 @@
 #include <iostream>
 #include "base-types.hpp"
 
-evstyunichev::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
-  leftDown_(leftDown), rightUp_(rightUp)
+evstyunichev::Rectangle::Rectangle(point_t leftDown, point_t rightUp)
 {
+  if ((leftDown.x >= rightUp.x) || (leftDown.y >= rightUp.y))
+  {
+    throw std::invalid_argument("invalid coordinates");
+  }
+  leftDown_ = leftDown;
+  rightUp_ = rightUp;
 }
 
 double evstyunichev::Rectangle::getArea() const
@@ -14,19 +19,17 @@ double evstyunichev::Rectangle::getArea() const
 
 evstyunichev::rectangle_t evstyunichev::Rectangle::getFrameRect() const
 {
-  rectangle_t frame;
-  frame.pos = find_mid();
-  frame.height = rightUp_.y - leftDown_.y;
-  frame.width = rightUp_.x - leftDown_.x;
+  double width = rightUp_.x - leftDown_.x, height = rightUp_.y - leftDown_.y;
+  point_t pos = find_mid();
+  rectangle_t frame{width, height, pos};
   return frame;
 }
 
 void evstyunichev::Rectangle::move(double dx, double dy)
 {
-  leftDown_.x += dx;
-  leftDown_.y += dy;
-  rightUp_.x += dx;
-  rightUp_.y += dy;
+  point_t d{dx, dy};
+  leftDown_ += d;
+  rightUp_ += d;
   return;
 }
 

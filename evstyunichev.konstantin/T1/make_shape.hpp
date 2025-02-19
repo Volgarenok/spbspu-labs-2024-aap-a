@@ -1,6 +1,7 @@
 #ifndef MAKE_SHAPE
 #define MAKE_SHAPE
 #include <iostream>
+#include <string>
 #include "base-types.hpp"
 #include "circle.hpp"
 #include "rectangle.hpp"
@@ -12,5 +13,6 @@ namespace evstyunichev
   Circle * make_circle(std::istream &in);
   Ring * make_ring(std::istream &in);
   Regular * make_regular(std::istream &in);
+  Shape * make_shape(std::istream &in, const std::string &);
 }
 #endif

@@ -5,19 +5,22 @@
 #include "shape.hpp"
 namespace evstyunichev
 {
-  struct Regular: public Shape
+  class Regular final: public Shape
   {
-    Regular(point_t, size_t, double, double);
-    double getArea() const;
-    rectangle_t getFrameRect() const;
-    void move(double, double);
-    void move(point_t);
-    void scale(double k);
+    public:
+      Regular(point_t, point_t, point_t);
+      double getArea() const override;
+      rectangle_t getFrameRect() const override;
+      void move(double, double) override;
+      void move(point_t) override;
+      void scale(double k) override;
+      double getSmall() const;
+      double getBig() const;
+
     private:
       point_t O_;
-      size_t n_;
-      double a_, R_, r_, base_;
+      double alpha_;
+      double a_;
   };
-  double findDist(point_t, point_t);
 }
 #endif

@@ -3,9 +3,15 @@
 #include <iostream>
 #include "base-types.hpp"
 
-evstyunichev::Ring::Ring(point_t mid, double R, double r):
-  mid_(mid), R_(R), r_(r)
+evstyunichev::Ring::Ring(point_t mid, double R, double r)
 {
+  if ((r > R) || (r <= 0))
+  {
+    throw std::invalid_argument("invalid");
+  }
+  mid_ = mid;
+  R_ = R;
+  r_ = r;
 }
 
 double evstyunichev::Ring::getArea() const

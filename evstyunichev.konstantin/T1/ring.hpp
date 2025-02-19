@@ -6,17 +6,20 @@
 #include "shape.hpp"
 namespace evstyunichev
 {
-  struct Ring: public Shape
+  class Ring final: public Shape
   {
-    Ring(point_t, double, double);
-    double getArea() const;
-    rectangle_t getFrameRect() const;
-    void move(double, double);
-    void move(point_t);
-    void scale(double);
+    public:
+      Ring(point_t, double, double);
+      double getArea() const override;
+      rectangle_t getFrameRect() const override;
+      void move(double, double) override;
+      void move(point_t) override;
+      void scale(double) override;
+
     private:
       point_t mid_;
-      double R_, r_;
+      double R_;
+      double r_;
   };
 }
 #endif

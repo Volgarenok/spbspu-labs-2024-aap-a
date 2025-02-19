@@ -5,17 +5,19 @@
 #include "shape.hpp"
 namespace evstyunichev
 {
-  struct Circle: public Shape
+  class Circle: public Shape
   {
-    Circle(point_t, double);
-    double getArea() const;
-    rectangle_t getFrameRect() const;
-    void move(double, double);
-    void move(point_t);
-    void scale(double);
+    public:
+      Circle(point_t, double);
+      double getArea() const override;
+      rectangle_t getFrameRect() const override;
+      void move(double, double) override;
+      void move(point_t) override;
+      void scale(double) override;
+
     private:
-    point_t mid_;
-    double r_;
+      point_t O_;
+      double r_;
   };
 }
 #endif

@@ -2,9 +2,14 @@
 #include <cmath>
 #include <iostream>
 
-evstyunichev::Circle::Circle(point_t mid, double r):
-  mid_(mid), r_(r)
+evstyunichev::Circle::Circle(point_t O, double r)
 {
+  if (r <= 0)
+  {
+    throw std::invalid_argument("invalid");
+  }
+  O_ = O;
+  r_ = r;
 }
 
 double evstyunichev::Circle::getArea() const
@@ -16,7 +21,7 @@ double evstyunichev::Circle::getArea() const
 evstyunichev::rectangle_t evstyunichev::Circle::getFrameRect() const
 {
   rectangle_t ans{};
-  ans.pos = mid_;
+  ans.pos = O_;
   ans.height = 2 * r_;
   ans.width = 2 * r_;
   return ans;
@@ -24,14 +29,14 @@ evstyunichev::rectangle_t evstyunichev::Circle::getFrameRect() const
 
 void evstyunichev::Circle::move(double dx, double dy)
 {
-  mid_.x += dx;
-  mid_.y += dy;
+  O_.x += dx;
+  O_.y += dy;
   return;
 }
 
-void evstyunichev::Circle::move(point_t target)
+void evstyunichev::Circle::move(point_t cds)
 {
-  move(target.x - mid_.x, target.y - mid_.y);
+  O_ += cds;
   return;
 }
 
