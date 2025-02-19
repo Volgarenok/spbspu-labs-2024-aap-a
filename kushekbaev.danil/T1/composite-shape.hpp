@@ -34,7 +34,7 @@ namespace kushekbaev
     void pop_back();
     bool empty() const noexcept;
     size_t size() const noexcept;
-    void scaleEverything(point_t scalePoint, double scaleCoeff);
+    void scaleEverything(point_t scalePoint, double scaleCoeff, CompositeShape* compShape);
 
   private:
     Shape** array_;

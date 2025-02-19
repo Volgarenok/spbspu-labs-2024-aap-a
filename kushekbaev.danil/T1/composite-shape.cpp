@@ -196,14 +196,19 @@ namespace kushekbaev
     return shapeCounter_;
   }
 
-  void CompositeShape::scaleEverything(point_t scalePoint, double scaleCoeff)
+  void CompositeShape::scaleEverything(point_t scalePoint, double scaleCoeff, CompositeShape* compShape)
   {
-    point_t beforeScale = getFrameRect().pos;
-    move(scalePoint);
-    point_t afterScale = getFrameRect().pos;
-    point_t vector = {(afterScale.x - beforeScale.x) * scaleCoeff, (afterScale.y - beforeScale.y) * scaleCoeff};
-    scale(scaleCoeff);
-    move(-vector.x, -vector.y);
+    size_t created = compShape->size();
+    for (size_t i = 0; i < created; i++)
+    {
+      double dx = getFrameRect().pos.x - scalePoint.x;
+      double dy = getFrameRect().pos.y - scalePoint.y;
+      compShape[i].move(scalePoint);
+      compShape[i].scale(scaleCoeff);
+      dx *= scaleCoeff;
+      dy *= scaleCoeff;
+      compShape[i].move(dx, dy);
+    }
   }
 
   void CompositeShape::swap(CompositeShape& rhs)
