@@ -1,42 +1,25 @@
 #include <iostream>
+#include <cmath>
+#include "taylor.hpp"
 #include "output.hpp"
 
-int main()
-{
-  double left = 0.0, right = 0.0;
-  size_t k = 0;
+using namespace beshimow;
 
-  constexpr double error = 0.0029;
-  constexpr double step = 0.1;
+int main() {
+  double start = -0.5, end =
 
-  std::cin >> left >> right >> k;
+0.5;
+  size_t max_terms = 10;
+  double step = 0.1;
+  double error_threshold = 0.001;
 
-  if (!std::cin)
-  {
-  std::cerr << "Input error\n";
-  return 1;
+  print_header();
+  for (double x = start; x <= end; x += step) {
+    double taylor_val = taylor_sin(x, max_terms, error_threshold);
+    double exact_val = std::sin(x);
+    print_line(x, taylor_val, exact_val, std::abs(taylor_val - exact_val) > error_threshold);
   }
-
-  if (left <= -1.0 || right >= 1.0)
-  {
-  std::cerr << "Area error\n";
-  return 1;
-  }
-
-  if (left > right || k <= 0)
-  {
-  std::cerr << "Interval error\n";
-  return 1;
-  }
-
-  for (auto i = left; i < right; i += step)
-  {
-  beshimow::rowOutput(i, k, error);
-  std::cout << "\n";
-  }
-
-  beshimow::rowOutput(right, k, error);
-  std::cout << "\n";
+  print_footer();
 
   return 0;
 }

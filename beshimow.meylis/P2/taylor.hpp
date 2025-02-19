@@ -1,11 +1,10 @@
 #ifndef TAYLOR_HPP
 #define TAYLOR_HPP
 
-#include <cmath>
+#include <cstddef>
 
-namespace beshimow
-{
-  double taylor(double x, size_t k, double error);
+namespace beshimow {
+  double taylor_sin(double x, size_t k, double error);
 }
 
 #endif

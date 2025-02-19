@@ -1,11 +1,10 @@
-#ifndef ROWOUTPUT_HPP
-#define ROWOUTPUT_HPP
+#ifndef BESHIMOW_OUTPUT_HPP
+#define BESHIMOW_OUTPUT_HPP
 
-#include <iostream>
-
-namespace beshimow
-{
-  void rowOutput(double x, size_t k, double error);
+namespace beshimow {
+  void print_header();
+  void print_footer();
+  void print_line(double x, double taylor, double exact, bool error);
 }
 
 #endif
