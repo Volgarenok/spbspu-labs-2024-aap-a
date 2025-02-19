@@ -31,10 +31,7 @@ void alymova::checkRatioScale(double ratio)
   {
     throw std::invalid_argument("The scale ratio should be positive");
   }
-  if (ratio == 1)
-  {
-    return;
-  }
+  return;
 }
 
 constexpr double inaccuracy = 0.0000000001;

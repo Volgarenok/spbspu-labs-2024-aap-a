@@ -4,7 +4,7 @@
 #include "rectangle.hpp"
 #include "circle.hpp"
 constexpr size_t figures_cnt = 3;
-std::string figures[figures_cnt] = {"RECTANGLE", "CIRCLE", "REGULAR"};
+const std::string figures[figures_cnt] = {"RECTANGLE", "CIRCLE", "REGULAR"};
 
 alymova::Creator::Creator():
   fabrics_(new AbstractCreator*[figures_cnt])
@@ -25,7 +25,7 @@ alymova::Creator::~Creator()
 {
   clear();
 }
-alymova::Shape* alymova::Creator::create(std::string name, std::istream& in)
+alymova::Shape* alymova::Creator::create(const std::string& name, std::istream& in)
 {
   for (size_t i = 0; i < figures_cnt; i++)
   {
@@ -48,27 +48,24 @@ alymova::Shape* alymova::CreatorRectangle::create(std::istream& in)
 {
   const size_t cnt_params = 4;
   double params[cnt_params] = {};
-  Rectangle* shape = nullptr;
   readParameters(in, params, cnt_params);
-  shape = new Rectangle(point_t{params[0], params[1]}, point_t{params[2], params[3]});
+  Rectangle* shape = new Rectangle(point_t{params[0], params[1]}, point_t{params[2], params[3]});
   return shape;
 }
 alymova::Shape* alymova::CreatorCircle::create(std::istream& in)
 {
   const size_t cnt_params = 3;
   double params[cnt_params] = {};
-  Circle* shape = nullptr;
   readParameters(in, params, cnt_params);
-  shape = new Circle(point_t{params[0], params[1]}, params[2]);
+  Circle* shape = new Circle(point_t{params[0], params[1]}, params[2]);
   return shape;
 }
 alymova::Shape* alymova::CreatorRegular::create(std::istream& in)
 {
   const size_t cnt_params = 6;
   double params[cnt_params] = {};
-  Regular* shape = nullptr;
   readParameters(in, params, cnt_params);
-  shape = new Regular(point_t{params[0], params[1]}, point_t{params[2], params[3]}, point_t{params[4], params[5]});
+  Regular* shape = new Regular(point_t{params[0], params[1]}, point_t{params[2], params[3]}, point_t{params[4], params[5]});
   return shape;
 }
 void alymova::readParameters(std::istream& in, double* params, size_t size)

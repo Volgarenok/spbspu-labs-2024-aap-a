@@ -38,7 +38,7 @@ alymova::CompositeShape::~CompositeShape()
 }
 alymova::CompositeShape& alymova::CompositeShape::operator=(const CompositeShape& comp_shape)
 {
-  if (this != &comp_shape)
+  if (this != std::addressof(comp_shape))
   {
     CompositeShape copy{comp_shape};
     swap(copy);

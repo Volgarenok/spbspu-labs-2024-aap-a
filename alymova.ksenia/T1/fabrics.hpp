@@ -10,7 +10,7 @@ namespace alymova
   {
     Creator();
     ~Creator();
-    Shape* create(std::string name, std::istream& in);
+    Shape* create(const std::string& name, std::istream& in);
   private:
     AbstractCreator** fabrics_;
 
