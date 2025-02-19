@@ -99,7 +99,7 @@ int main()
     printFrameCoordinates(std::cout, compShape);
     std::cout << "\n";
 
-    compShape->scaleEverything(scalePoint, scaleCoeff, compShape);
+    compShape->scaleEverything(*compShape, scalePoint, scaleCoeff);
     std::cout << compShape->getArea();
 
     std::cout << " ";

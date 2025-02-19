@@ -17,12 +17,11 @@ namespace kushekbaev
 
   void scaleAll(size_t shapeCounter, point_t scalePoint, double scaleCoeff, CompositeShape** compShape)
   {
-    CompositeShape *tmp = *compShape;
     for (size_t i = 0; i < shapeCounter; i++)
     {
       if (compShape[i])
       {
-        compShape[i]->scaleEverything(scalePoint, scaleCoeff, tmp);
+        compShape[i]->scaleEverything(**compShape, scalePoint, scaleCoeff);
       }
     }
   }

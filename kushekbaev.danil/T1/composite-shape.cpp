@@ -166,7 +166,7 @@ namespace kushekbaev
   {
     if (shapeCounter_ == 0)
     {
-      throw std::out_of_range("No shapes");
+      throw std::out_of_range("No compShape");
     }
     delete array_[shapeCounter_ - 1];
     shapeCounter_--;
@@ -196,18 +196,19 @@ namespace kushekbaev
     return shapeCounter_;
   }
 
-  void CompositeShape::scaleEverything(point_t scalePoint, double scaleCoeff, CompositeShape* compShape)
+  void CompositeShape::scaleEverything(CompositeShape compShape, point_t scalePoint, double scaleCoeff)
   {
-    size_t created = compShape->size();
-    for (size_t i = 0; i < created; i++)
+    for (size_t j = 0; j < compShape.size(); ++j)
     {
-      double dx = getFrameRect().pos.x - scalePoint.x;
-      double dy = getFrameRect().pos.y - scalePoint.y;
-      compShape[i].move(scalePoint);
-      compShape[i].scale(scaleCoeff);
-      dx *= scaleCoeff;
-      dy *= scaleCoeff;
-      compShape[i].move(dx, dy);
+      const point_t pos1 = compShape.getFrameRect().pos;
+      compShape.move(scalePoint);
+      const point_t pos2 = compShape.getFrameRect().pos;
+      double dx = pos2.x - pos1.x;
+      double dy = pos2.y - pos1.y;
+      compShape.scale(scaleCoeff);
+      dx *= -1 * scaleCoeff;
+      dy *= -1 * scaleCoeff;
+      compShape.move(dx, dy);
     }
   }
 
