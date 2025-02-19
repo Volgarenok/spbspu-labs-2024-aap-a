@@ -47,7 +47,7 @@ int main()
         }
         catch(std::bad_alloc & e)
         {
-          std::cerr << "Out of memory" << "\n";            
+          std::cerr << "Out of memory" << "\n";
           ivanova::deleteShapes(shapes, size);
           return 1;
         }
@@ -61,7 +61,7 @@ int main()
         }
         catch(std::bad_alloc & e)
         {
-          std::cerr << "Out of memory" << "\n";            
+          std::cerr << "Out of memory" << "\n"; 
           ivanova::deleteShapes(shapes, size);
           return 1;
         }
@@ -75,7 +75,7 @@ int main()
         }
         catch(std::bad_alloc & e)
         {
-          std::cerr << "Out of memory" << "\n";            
+          std::cerr << "Out of memory" << "\n"; 
           ivanova::deleteShapes(shapes, size);
           return 1;
         }

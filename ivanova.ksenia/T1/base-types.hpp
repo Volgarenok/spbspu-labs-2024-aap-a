@@ -8,7 +8,7 @@ namespace ivanova
     double x;
     double y;
   };
-  
+
   struct rectangle_t
   {
     double width;
