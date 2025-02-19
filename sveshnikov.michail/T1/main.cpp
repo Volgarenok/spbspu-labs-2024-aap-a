@@ -4,46 +4,57 @@
 #include "build_shapes.hpp"
 #include "shape_actions.hpp"
 
-void output_comp_shp(std::ostream &out, sveshnikov::CompositeShape &comp_shp);
+void outputCompShp(std::ostream &out, sveshnikov::CompositeShape &comp_shp);
 
 int main()
 {
   sveshnikov::CompositeShape comp_shp;
   std::string shape_name;
-  try
+
+  while (shape_name != "SCALE" && !std::cin.eof())
   {
-    while (shape_name != "SCALE" && !std::cin.eof())
+    std::cin >> shape_name;
+    try
     {
-      std::cin >> shape_name;
-      try
+      sveshnikov::Shape *shp = nullptr;
+      if (shape_name == "RECTANGLE")
       {
-        if (shape_name == "RECTANGLE")
-        {
-          sveshnikov::build_rectangle(std::cin, comp_shp);
-        }
-        else if (shape_name == "RING")
-        {
-          sveshnikov::build_ring(std::cin, comp_shp);
-        }
-        else if (shape_name == "ELLIPSE")
-        {
-          sveshnikov::build_ellipse(std::cin, comp_shp);
-        }
-        else if (shape_name == "SQUARE")
-        {
-          sveshnikov::build_square(std::cin, comp_shp);
-        }
+        shp = sveshnikov::buildRectangle(std::cin, comp_shp);
       }
-      catch (const std::logic_error &e)
+      else if (shape_name == "RING")
       {
-        std::cerr << e.what() << "\n";
+        shp = sveshnikov::buildRing(std::cin, comp_shp);
+      }
+      else if (shape_name == "ELLIPSE")
+      {
+        shp = sveshnikov::buildEllipse(std::cin, comp_shp);
+      }
+      else if (shape_name == "SQUARE")
+      {
+        shp = sveshnikov::buildSquare(std::cin, comp_shp);
+      }
+      if (shp != nullptr)
+      {
+        try
+        {
+          comp_shp.push_back(shp);
+        }
+        catch (const std::exception &e)
+        {
+          delete shp;
+          std::cerr << e.what() << '\n';
+        }
       }
     }
-  }
-  catch (const std::bad_alloc &e)
-  {
-    std::cerr << e.what() << "\n";
-    return 1;
+    catch (const std::logic_error &e)
+    {
+      std::cerr << e.what() << "\n";
+    }
+    catch (const std::bad_alloc &e)
+    {
+      std::cerr << e.what() << "\n";
+      return 1;
+    }
   }
   if (shape_name != "SCALE")
   {
@@ -55,26 +66,27 @@ int main()
     std::cerr << "ERROR: Nothing to scale!\n";
     return 1;
   }
+
   double zoom_ctr_x = 0.0, zoom_ctr_y = 0.0, k = 0.0;
   std::cin >> zoom_ctr_x >> zoom_ctr_y >> k;
   std::cout << std::fixed << std::setprecision(1);
-  output_comp_shp(std::cout, comp_shp);
+  outputCompShp(std::cout, comp_shp);
   try
   {
-    sveshnikov::isotropic_scaling(comp_shp, zoom_ctr_x, zoom_ctr_y, k);
+    sveshnikov::isotropicScaling(comp_shp, zoom_ctr_x, zoom_ctr_y, k);
   }
   catch (const std::logic_error &e)
   {
     std::cerr << e.what() << "\n";
     return 1;
   }
-  output_comp_shp(std::cout, comp_shp);
+  outputCompShp(std::cout, comp_shp);
   return 0;
 }
 
-void output_comp_shp(std::ostream &out, sveshnikov::CompositeShape &comp_shp)
+void outputCompShp(std::ostream &out, sveshnikov::CompositeShape &comp_shp)
 {
   out << comp_shp.getArea() << " ";
-  sveshnikov::output_frames(out, comp_shp);
+  sveshnikov::outputFrames(out, comp_shp);
   out << "\n";
 }

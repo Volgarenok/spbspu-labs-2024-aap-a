@@ -30,13 +30,13 @@ void sveshnikov::Square::move(const point_t p)
 
 void sveshnikov::Square::move(double dx, double dy)
 {
-  low_left_ = move_point(low_left_, dx, dy);
+  low_left_ = movePoint(low_left_, dx, dy);
 }
 
-void sveshnikov::Square::unsafe_scale(double k)
+void sveshnikov::Square::unsafeScale(double k)
 {
   point_t ctr = getFrameRect().pos;
-  low_left_ = scaling_move_point(low_left_, ctr, k);
+  low_left_ = scalingMovePoint(low_left_, ctr, k);
   side_ *= k;
 }
 

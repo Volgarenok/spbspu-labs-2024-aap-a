@@ -31,10 +31,10 @@ void sveshnikov::Ellipse::move(const point_t p)
 
 void sveshnikov::Ellipse::move(double dx, double dy)
 {
-  center_ = move_point(center_, dx, dy);
+  center_ = movePoint(center_, dx, dy);
 }
 
-void sveshnikov::Ellipse::unsafe_scale(double k)
+void sveshnikov::Ellipse::unsafeScale(double k)
 {
   vert_radius_ *= k;
   horiz_radius_ *= k;

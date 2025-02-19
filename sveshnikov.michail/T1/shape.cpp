@@ -7,5 +7,5 @@ void sveshnikov::Shape::scale(double k)
   {
     throw std::logic_error("ERROR: zoom coefficient must be positive!");
   }
-  unsafe_scale(k);
+  unsafeScale(k);
 }

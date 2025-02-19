@@ -16,8 +16,8 @@ namespace sveshnikov
     point_t pos;
   };
 
-  point_t move_point(point_t p, double dx, double dy);
-  point_t scaling_move_point(point_t p, point_t ctr, double k);
+  point_t movePoint(point_t p, double dx, double dy);
+  point_t scalingMovePoint(point_t p, point_t ctr, double k);
 }
 
 #endif

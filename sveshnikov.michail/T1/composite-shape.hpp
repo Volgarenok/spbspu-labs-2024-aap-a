@@ -28,7 +28,7 @@ namespace sveshnikov
     void move(point_t p);
     void move(double dx, double dy) noexcept;
     void scale(double k);
-    void unsafe_scale(double k);
+    void unsafeScale(double k);
 
   private:
     size_t size_;

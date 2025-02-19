@@ -35,7 +35,6 @@ sveshnikov::CompositeShape::CompositeShape(CompositeShape &&copied_shp):
 sveshnikov::CompositeShape::~CompositeShape()
 {
   clear();
-  delete[] shapes_;
 }
 
 sveshnikov::CompositeShape &sveshnikov::CompositeShape::operator=(const CompositeShape &comp_shp)
@@ -60,7 +59,7 @@ sveshnikov::CompositeShape &sveshnikov::CompositeShape::operator=(CompositeShape
 
 sveshnikov::Shape *sveshnikov::CompositeShape::operator[](size_t id) noexcept
 {
-  return const_cast<Shape *>(static_cast<const CompositeShape &>(*this)[id]);
+  return const_cast< Shape * >(static_cast< const CompositeShape & >(*this)[id]);
 }
 
 const sveshnikov::Shape *sveshnikov::CompositeShape::operator[](size_t id) const noexcept
@@ -70,7 +69,7 @@ const sveshnikov::Shape *sveshnikov::CompositeShape::operator[](size_t id) const
 
 sveshnikov::Shape *sveshnikov::CompositeShape::at(size_t id)
 {
-  return const_cast<Shape *>(static_cast<const CompositeShape *>(this)->at(id));
+  return const_cast< Shape * >(static_cast< const CompositeShape * >(this)->at(id));
 }
 
 const sveshnikov::Shape *sveshnikov::CompositeShape::at(size_t id) const
@@ -173,17 +172,17 @@ void sveshnikov::CompositeShape::scale(double k)
   {
     throw std::logic_error("ERROR: zoom coefficient must be positive!");
   }
-  unsafe_scale(k);
+  unsafeScale(k);
 }
 
-void sveshnikov::CompositeShape::unsafe_scale(double k)
+void sveshnikov::CompositeShape::unsafeScale(double k)
 {
   point_t center = getFrameRect().pos;
   for (size_t i = 0; i != size_; i++)
   {
     point_t pos = shapes_[i]->getFrameRect().pos;
     shapes_[i]->move(center);
-    shapes_[i]->unsafe_scale(k);
+    shapes_[i]->unsafeScale(k);
     double dx = k * (pos.x - center.x);
     double dy = k * (pos.y - center.y);
     shapes_[i]->move(dx, dy);
@@ -196,6 +195,7 @@ void sveshnikov::CompositeShape::clear()
   {
     pop_back();
   }
+  delete[] shapes_;
 }
 
 void sveshnikov::CompositeShape::swap(CompositeShape &rhs) noexcept
