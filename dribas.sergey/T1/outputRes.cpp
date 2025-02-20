@@ -12,5 +12,5 @@ void dribas::outputRes(std::ostream & output, const Shape* const* myShape, const
     output << " " << myShape[i]->getFrameRect().pos.y + (myShape[i]->getFrameRect().height) / 2.0f;
   }
   output << '\n';
-  std::cout << std::cout.flags();
+  std::cout.flags();
 }
