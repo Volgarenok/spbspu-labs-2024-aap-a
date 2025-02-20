@@ -21,7 +21,6 @@ void ivanova::deleteShapes(Shape** shps, size_t size)
   {
     delete shps[i];
   }
-  delete[] shps;
 }
 
 double ivanova::getSumArea(Shape **shps, size_t size)
