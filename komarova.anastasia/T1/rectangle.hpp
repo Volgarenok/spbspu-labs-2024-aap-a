@@ -9,6 +9,7 @@ namespace komarova
   {
   public:
     Rectangle(point_t low_left, point_t up_right);
+    ~Rectangle() override;
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(double dx, double dy);
@@ -17,6 +18,9 @@ namespace komarova
   private:
     point_t low_left_;
     point_t up_right_;
+    Shape** triangles_;
+
+    void clear();
   };
 }
 
