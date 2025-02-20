@@ -4,7 +4,10 @@
 
 namespace ivanova
 {
-  bool operator ==(const ivanova::point_t a, const ivanova::point_t b);
+  bool operator==(const ivanova::point_t a, const ivanova::point_t b)
+  {
+    return ((a.x == b.x) && (a.y == b.y));
+  }
 }
 
 double ivanova::vectorLength(point_t a, point_t b)
@@ -18,6 +21,7 @@ void ivanova::deleteShapes(Shape** shps, size_t size)
   {
     delete shps[i];
   }
+  delete[] shps;
 }
 
 double ivanova::getSumArea(Shape **shps, size_t size)

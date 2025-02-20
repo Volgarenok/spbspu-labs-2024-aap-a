@@ -41,10 +41,7 @@ void ivanova::Complexquad::move(point_t point)
   point_t center = getFrameRect().pos;
   double moveX = point.x - center.x;
   double moveY = point.y - center.y;
-  point1_ = {point1_.x + moveX, point1_.y + moveY};
-  point2_ = {point2_.x + moveX, point2_.y + moveY};
-  point3_ = {point3_.x + moveX, point3_.y + moveY};
-  point4_ = {point4_.x + moveX, point4_.y + moveY};
+  move(moveX, moveY);
 }
 
 void ivanova::Complexquad::move(double x, double y)

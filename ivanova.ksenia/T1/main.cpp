@@ -24,66 +24,39 @@ int main()
   {
     while (std::cin >> input)
     {
-      if (input == "RECTANGLE")
+      try
       {
-        try
+        if (input == "RECTANGLE")
         {
           shapes[size] = ivanova::createRectangle(std::cin);
           size++;
         }
-        catch(std::bad_alloc & e)
-        {
-          std::cerr << "Out of memory" << "\n";
-          ivanova::deleteShapes(shapes, size);
-          return 1;
-        }
-      }
-      else if (input == "COMPLEXQUAD")
-      {
-        try
+        else if (input == "COMPLEXQUAD")
         {
           shapes[size] = ivanova::createComplexquad(std::cin);
           size++;
         }
-        catch(std::bad_alloc & e)
-        {
-          std::cerr << "Out of memory" << "\n";
-          ivanova::deleteShapes(shapes, size);
-          return 1;
-        }
-      }
-      else if (input == "CONCAVE")
-      {
-        try
+        else if (input == "CONCAVE")
         {
           shapes[size] = ivanova::createConcave(std::cin);
           size++;
         }
-        catch(std::bad_alloc & e)
-        {
-          std::cerr << "Out of memory" << "\n";
-          ivanova::deleteShapes(shapes, size);
-          return 1;
-        }
-      }
-      else if (input == "DIAMOND")
-      {
-        try
+        else if (input == "DIAMOND")
         {
           shapes[size] = ivanova::createDiamond(std::cin);
           size++;
         }
-        catch(std::bad_alloc & e)
+        else if (std::cin.eof())
         {
-          std::cerr << "Out of memory" << "\n";
           ivanova::deleteShapes(shapes, size);
+          std::cerr << "EOF" << '\n';
           return 1;
         }
       }
-      else if (std::cin.eof())
+      catch (std::bad_alloc & e)
       {
+        std::cerr << "Out of memory" << "\n";
         ivanova::deleteShapes(shapes, size);
-        std::cerr << "EOF" << '\n';
         return 1;
       }
     }
