@@ -27,93 +27,67 @@ void evstyunichev::destroy_shapes(Shape **shapes, size_t n)
 
 int main()
 {
-  evstyunichev::Shape *shapes[10000]{};
+  using namespace evstyunichev;
+  Shape *shapes[10000]{};
   std::string s;
-  size_t done = 0, non_empty = 0;
   double totalSquare = 0;
-  std::cout.precision(1);
-  std::cout << std::fixed;
-  bool noInputErrors = 1, scaleFlag = 0;
+  bool scaleFlag = 0;
+  size_t done = 0;
   while (std::cin >> s)
   {
-    bool isSomethingMade = 0;
-    non_empty++;
-    evstyunichev::Shape *cur = evstyunichev::make_shape(std::cin, s);
-    if (cur)
+    try
     {
-      isSomethingMade = 1;
-      shapes[done] = cur;
-    }
-    else if (s == "SCALE")
-    {
-      evstyunichev::point_t mid{};
-      double k{};
-      std::cin >> mid.x >> mid.y >> k;
-      if (k < 0)
+      Shape *cur = make_shape(std::cin, s);
+      if (cur)
       {
-        evstyunichev::destroy_shapes(shapes, done);
-        std::cerr << "negative k!\n";
-        return 1;
-      }
-      if (!done)
-      {
-        std::cerr << "Nothing to scale!\n";
-        return 1;
-      }
-      scaleFlag = 1;
-      std::cout << std::setprecision(1) << totalSquare << ' ';
-      evstyunichev::frameOutput(shapes[0]->getFrameRect());
-      for (size_t i = 1; i < done; i++)
-      {
-        std::cout << ' ';
-        evstyunichev::frameOutput(shapes[i]->getFrameRect());
-      }
-      std::cout << '\n' << totalSquare * k * k << ' ';
-      for (size_t i = 0; i < done; i++)
-      {
-        evstyunichev::point_t old = shapes[i]->getFrameRect().pos;
-        shapes[i]->move(mid);
-        evstyunichev::point_t cur = shapes[i]->getFrameRect().pos;
-        shapes[i]->scale(k);
-        evstyunichev::point_t v{};
-        v.x = (cur.x - old.x) * k;
-        v.y = (cur.y - old.y) * k;
-        shapes[i]->move(-v.x, -v.y);
-      }
-      evstyunichev::frameOutput(shapes[0]->getFrameRect());
-      for (size_t i = 1; i < done; i++)
-      {
-        std::cout << ' ';
-        evstyunichev::frameOutput(shapes[i]->getFrameRect());
-      }
-      std::cout << '\n';
-    }
-    else
-    {
-      evstyunichev::skip_to_sign(std::cin, '\n');
-    }
-    if (isSomethingMade)
-    {
-      if (!shapes[done])
-      {
-        noInputErrors = 0;
-      }
-      else
-      {
+        shapes[done] = cur;
         totalSquare += shapes[done]->getArea();
         done++;
       }
+      else if (s == "SCALE")
+      {
+        scaleFlag = 1;
+        double x = 0, y = 0, k = 0;
+        std::cin >> x >> y >> k;
+        if (k < 0)
+        {
+          destroy_shapes(shapes, done);
+          std::cerr << "negative k!\n";
+          return 1;
+        }
+        if (!done)
+        {
+          std::cerr << "Nothing to scale!\n";
+          return 1;
+        }
+        point_t O{x, y};
+        std::cout << std::setprecision(1) << totalSquare << ' ';
+        framesOut(shapes, done) << '\n' << totalSquare * k * k << ' ';
+        for (size_t i = 0; i < done; i++)
+        {
+          point_t old = shapes[i]->getFrameRect().pos;
+          shapes[i]->move(O);
+          point_t cur = shapes[i]->getFrameRect().pos;
+          shapes[i]->scale(k);
+          shapes[i]->move(-(cur.x - old.x) * k, -(cur.y - old.y) * k);
+        }
+        framesOut(shapes, done) << '\n';
+      }
+      else
+      {
+        evstyunichev::skip_to_sign(std::cin, '\n');
+      }
+    }
+    catch(std::invalid_argument)
+    {
+      std::cout << "something went wrong\n";
     }
   }
   evstyunichev::destroy_shapes(shapes, done);
-  if (!(non_empty && scaleFlag))
+  if (!(done && scaleFlag))
   {
     std::cout << "((\n";
     return 1;
-  }
-  if (!noInputErrors)
-  {
-    std::cerr << "something went wrong\n";
   }
   return 0;
 }
