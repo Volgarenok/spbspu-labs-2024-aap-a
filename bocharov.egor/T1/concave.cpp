@@ -7,7 +7,7 @@ namespace
 {
   bool isDupePoint(bocharov::point_t p1, bocharov::point_t p2, bocharov::point_t p3, bocharov::point_t p4)
   {
-    bocharov::point_t points[4] = { p1, p2, p3, p4 };
+    bocharov::point_t points[4] = {p1, p2, p3, p4};
     for (std::size_t i = 0; i < 4; i++)
     {
       for (std::size_t j = i + 1; j < 4; j++)
