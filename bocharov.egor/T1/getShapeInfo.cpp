@@ -56,7 +56,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
   {
     error << e.what() << '\n';
   };
-  while (input >> inpStr || inpStr != "SCALE")
+  while (input >> inpStr)
   {
     try
     {
