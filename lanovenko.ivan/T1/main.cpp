@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "shape.hpp"
+#include "strinput.h"
 #include "string_manipulations.hpp"
 #include "delete_shape.hpp"
 #include "scale_functions.hpp"
@@ -14,11 +15,17 @@ int main()
   Shape* shapeArray[10000] = { nullptr };
   while (scale != true)
   {
-    std::string str = "";
+    if (std::cin.eof())
+    {
+      deleteShape(shapeArray, res);
+      std::cerr << "Wrong input!\n";
+      return 1;
+    }
     Shape* currentFigure = nullptr;
+    const char* cStr = nullptr;
     try
     {
-      str = inputStr(std::cin);
+      cStr = input_string(std::cin);
     }
     catch (const std::runtime_error& e)
     {
@@ -26,6 +33,7 @@ int main()
       std::cerr << e.what() << "\n";
       return 1;
     }
+    std::string str{ cStr };
     if (str.find("SCALE") == std::string::npos)
     {
       try
@@ -46,7 +54,7 @@ int main()
         std::cerr << "Out of memmory!\n";
         return 1;
       }
-    }
+     }
     if (str.find("SCALE") != std::string::npos)
     {
       scale = true;
