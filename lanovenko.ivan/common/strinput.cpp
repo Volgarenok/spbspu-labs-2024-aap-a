@@ -1,13 +1,13 @@
 #include "strinput.h"
 
-char* lanovenko::input_string(std::istream& in)
+char* lanovenko::input_string(std::istream& in, const char stop)
 {
   size_t capacity = 10;
   char* str = new char[capacity];
   size_t quantity = 0;
   char c = '\0';
   in >> std::noskipws;
-  while (in >> c && c != '\n')
+  while (in >> c && c != stop)
   {
     if (quantity >= capacity - 1)
     {

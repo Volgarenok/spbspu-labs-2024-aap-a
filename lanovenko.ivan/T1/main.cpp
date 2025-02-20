@@ -25,7 +25,7 @@ int main()
     const char* cStr = nullptr;
     try
     {
-      cStr = input_string(std::cin);
+      cStr = input_string(std::cin, '\n');
     }
     catch (const std::runtime_error& e)
     {

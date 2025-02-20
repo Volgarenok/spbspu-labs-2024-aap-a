@@ -4,7 +4,7 @@
 
 namespace lanovenko
 {
-  char* input_string(std::istream& in);
+  char* input_string(std::istream& in, const char stop);
 }
 
 #endif
