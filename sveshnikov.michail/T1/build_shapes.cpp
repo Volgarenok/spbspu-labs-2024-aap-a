@@ -7,7 +7,79 @@
 
 namespace
 {
+  sveshnikov::Rectangle *buildRectangle(std::istream &in);
+  sveshnikov::Ring *buildRing(std::istream &in);
+  sveshnikov::Ellipse *buildEllipse(std::istream &in);
+  sveshnikov::Square *buildSquare(std::istream &in);
   double *readParams(std::istream &in);
+
+  sveshnikov::Rectangle *buildRectangle(std::istream &in)
+  {
+    double *params = readParams(in);
+    sveshnikov::Rectangle *rectangle = nullptr;
+    try
+    {
+      rectangle = new sveshnikov::Rectangle({params[0], params[1]}, {params[2], params[3]});
+      delete[] params;
+      return rectangle;
+    }
+    catch (const std::exception &e)
+    {
+      delete[] params;
+      throw;
+    }
+  }
+
+  sveshnikov::Ring *buildRing(std::istream &in)
+  {
+    double *params = readParams(in);
+    sveshnikov::Ring *ring = nullptr;
+    try
+    {
+      ring = new sveshnikov::Ring({params[0], params[1]}, params[2], params[3]);
+      delete[] params;
+      return ring;
+    }
+    catch (const std::exception &e)
+    {
+      delete[] params;
+      throw;
+    }
+  }
+
+  sveshnikov::Ellipse *buildEllipse(std::istream &in)
+  {
+    double *params = readParams(in);
+    sveshnikov::Ellipse *ellipse = nullptr;
+    try
+    {
+      ellipse = new sveshnikov::Ellipse({params[0], params[1]}, params[2], params[3]);
+      delete[] params;
+      return ellipse;
+    }
+    catch (const std::exception &e)
+    {
+      delete[] params;
+      throw;
+    }
+  }
+
+  sveshnikov::Square *buildSquare(std::istream &in)
+  {
+    double *params = readParams(in);
+    sveshnikov::Square *square = nullptr;
+    try
+    {
+      square = new sveshnikov::Square({params[0], params[1]}, params[2]);
+      delete[] params;
+      return square;
+    }
+    catch (const std::exception &e)
+    {
+      delete[] params;
+      throw;
+    }
+  }
 
   double *readParams(std::istream &in)
   {
@@ -37,66 +109,23 @@ namespace
   }
 }
 
-sveshnikov::Shape *sveshnikov::buildRectangle(std::istream &in)
+sveshnikov::Shape *sveshnikov::buildShape(std::istream &in, std::string shape_name)
 {
-  double *params = readParams(in);
-  try
+  if (shape_name == "RECTANGLE")
   {
-    Rectangle *rectangle = new Rectangle({params[0], params[1]}, {params[2], params[3]});
-    delete[] params;
-    return rectangle;
+    return buildRectangle(in);
   }
-  catch (const std::exception &e)
+  else if (shape_name == "RING")
   {
-    delete[] params;
-    throw;
+    return buildRing(in);
   }
-}
-
-sveshnikov::Shape *sveshnikov::buildRing(std::istream &in)
-{
-  double *params = readParams(in);
-  try
+  else if (shape_name == "ELLIPSE")
   {
-    Ring *ring = new Ring({params[0], params[1]}, params[2], params[3]);
-    delete[] params;
-    return ring;
+    return buildEllipse(in);
   }
-  catch (const std::exception &e)
+  else if (shape_name == "SQUARE")
   {
-    delete[] params;
-    throw;
+    return buildSquare(in);
   }
-}
-
-sveshnikov::Shape *sveshnikov::buildEllipse(std::istream &in)
-{
-  double *params = readParams(in);
-  try
-  {
-    Ellipse *ellipse = new Ellipse({params[0], params[1]}, params[2], params[3]);
-    delete[] params;
-    return ellipse;
-  }
-  catch (const std::exception &e)
-  {
-    delete[] params;
-    throw;
-  }
-}
-
-sveshnikov::Shape *sveshnikov::buildSquare(std::istream &in)
-{
-  double *params = readParams(in);
-  try
-  {
-    Square *square = new Square({params[0], params[1]}, params[2]);
-    delete[] params;
-    return square;
-  }
-  catch (const std::exception &e)
-  {
-    delete[] params;
-    throw;
-  }
+  throw std::logic_error("Unknown name of the shape");
 }

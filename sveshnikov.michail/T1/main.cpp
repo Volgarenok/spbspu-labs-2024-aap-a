@@ -8,42 +8,25 @@ void outputCompShp(std::ostream &out, sveshnikov::CompositeShape &comp_shp);
 
 int main()
 {
-  sveshnikov::CompositeShape comp_shp;
+  using namespace sveshnikov;
+  CompositeShape comp_shp;
   std::string shape_name;
 
   while (shape_name != "SCALE" && !std::cin.eof())
   {
     std::cin >> shape_name;
+    Shape *shp = nullptr;
     try
     {
-      sveshnikov::Shape *shp = nullptr;
-      if (shape_name == "RECTANGLE")
+      shp = buildShape(std::cin, shape_name);
+      try
       {
-        shp = sveshnikov::buildRectangle(std::cin);
+        comp_shp.push_back(shp);
       }
-      else if (shape_name == "RING")
+      catch (const std::logic_error &e)
       {
-        shp = sveshnikov::buildRing(std::cin);
-      }
-      else if (shape_name == "ELLIPSE")
-      {
-        shp = sveshnikov::buildEllipse(std::cin);
-      }
-      else if (shape_name == "SQUARE")
-      {
-        shp = sveshnikov::buildSquare(std::cin);
-      }
-      if (shp != nullptr)
-      {
-        try
-        {
-          comp_shp.push_back(shp);
-        }
-        catch (const std::exception &e)
-        {
-          delete shp;
-          std::cerr << e.what() << '\n';
-        }
+        shp->~Shape();
+        std::cerr << e.what() << '\n';
       }
     }
     catch (const std::logic_error &e)
@@ -73,7 +56,7 @@ int main()
   outputCompShp(std::cout, comp_shp);
   try
   {
-    sveshnikov::isotropicScaling(comp_shp, zoom_ctr_x, zoom_ctr_y, k);
+    isotropicScaling(comp_shp, zoom_ctr_x, zoom_ctr_y, k);
   }
   catch (const std::logic_error &e)
   {
