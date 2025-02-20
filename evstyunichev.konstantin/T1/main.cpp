@@ -84,7 +84,7 @@ int main()
       makeScale(shapes, std::cin, done, totalSquare);
       if (errorFlag)
       {
-        std::cout << "input errors!\n";
+        std::cerr << "input errors!\n";
       }
     }
     else
