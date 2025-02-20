@@ -92,37 +92,37 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         shapes[shapesCount] = new Concave{arrPoint[0], arrPoint[1], arrPoint[2], arrPoint[3]};
         shapesCount++;
       }
+      else if (inpStr == "SCALE")
+      {
+        scaled = true;
+        if (shapesCount == 0)
+        {
+          error << "No shapes for scale\n";
+          return 0;
+        }
+        point_t toCenter;
+        double ratio;
+        input >> toCenter.x;
+        input >> toCenter.y;
+        input >> ratio;
+        try
+        {
+          outputRes(output, shapes, shapesCount);
+          output << '\n';
+          scaling(shapes, shapesCount, toCenter, ratio);
+          outputRes(output, shapes, shapesCount);
+          output << '\n';
+        }
+        catch (const std::invalid_argument & e)
+        {
+          clear(shapes, shapesCount);
+          return 0;
+        }
+      }
     }
     catch (const std::invalid_argument & e)
     {
       handleError(e);
-    }
-  }
-  if (inpStr == "SCALE")
-  {
-    scaled = true;
-    if (shapesCount == 0)
-    {
-      error << "No shapes for scale\n";
-      return 0;
-    }
-    point_t toCenter;
-    double ratio;
-    input >> toCenter.x;
-    input >> toCenter.y;
-    input >> ratio;
-    try
-    {
-      outputRes(output, shapes, shapesCount);
-      output << '\n';
-      scaling(shapes, shapesCount, toCenter, ratio);
-      outputRes(output, shapes, shapesCount);
-      output << '\n';
-    }
-    catch (const std::invalid_argument & e)
-    {
-      clear(shapes, shapesCount);
-      return 0;
     }
   }
   if (!scaled)
