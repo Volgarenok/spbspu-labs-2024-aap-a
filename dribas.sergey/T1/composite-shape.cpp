@@ -5,8 +5,8 @@
 #include "base-types.hpp"
 #include "getShapeInfo.hpp"
 
-const double minDouble = std::numeric_limits<double>::lowest();
-const double maxDouble = std::numeric_limits<double>::max();
+const double minDouble = std::numeric_limits < double > ::lowest();
+const double maxDouble = std::numeric_limits < double > ::max();
 
 dribas::CompositeShape::CompositeShape():
   size_(0)
@@ -69,7 +69,7 @@ dribas::CompositeShape::CompositeShape(const CompositeShape& shp):
 void dribas::CompositeShape::push_back(Shape * shp)
 {
   if (size_ + 1 > 9999) {
-    std::logic_error("MEMROY IS FULL");
+    std::logic_error("MEMORY IS FULL");
   }
   shapes_[++size_] = shp;
 }

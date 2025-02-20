@@ -3,14 +3,11 @@
 #include <stdexcept>
 #include "triangle.hpp"
 #include "getShapeInfo.hpp"
-dribas::Triangle * initialDiamond(dribas::point_t a, dribas::point_t b, dribas::point_t c)
+dribas::point_t * initialDiamond(dribas::point_t a, dribas::point_t b, dribas::point_t c)
 {
   double weight = 0.0;
   double height = 0.0;
-  dribas::Triangle a_ = dribas::Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}};
-  dribas::Triangle b_ = dribas::Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}};
-  dribas::Triangle c_ = dribas::Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}};
-  dribas::Triangle d_ = dribas::Triangle{{0.0, 0.0}, {1.0, 0.0}, {1.0, 1.0}};
+  dribas::point_t point[3] = {};
 
   if ((a.x == b.x && a.y == c.y) || (a.y == b.y && a.x == c.x)) {
     if (a.x == b.x && a.y == c.y) {
@@ -20,10 +17,9 @@ dribas::Triangle * initialDiamond(dribas::point_t a, dribas::point_t b, dribas::
       height = std::abs(std::abs(a.y) - std::abs(b.y));
       weight = std::abs(std::abs(a.x) - std::abs(c.x));
     }
-    a_ = dribas::Triangle{a, {a.x - weight, a.y}, {a.x, a.y + height}};
-    b_ = dribas::Triangle{a, {a.x + weight, a.y}, {a.x, a.y + height}};
-    c_ = dribas::Triangle{a, {a.x + weight, a.y}, {a.x, a.y - height}};
-    d_ = dribas::Triangle{a, {a.x - weight, a.y}, {a.x, a.y - height}};
+   point[1] = a;
+   point[2] = {a.x, a.y + height};
+   point[3] = {a.x - weight, a.y};
 
   } else if ((b.x == a.x && b.y == c.y) || (b.y == a.y && b.x == c.x)) {
     if (b.x == a.x && b.y == c.y) {
@@ -33,10 +29,9 @@ dribas::Triangle * initialDiamond(dribas::point_t a, dribas::point_t b, dribas::
       height = std::abs(std::abs(b.y) - std::abs(a.y));
       weight = std::abs(std::abs(b.x) - std::abs(c.x));
     }
-    a_ = dribas::Triangle{b, {b.x - weight, b.y}, {b.x, b.y + height}};
-    b_ = dribas::Triangle{b, {b.x + weight, b.y}, {b.x, b.y + height}};
-    c_ = dribas::Triangle{b, {b.x + weight, b.y}, {b.x, b.y - height}};
-    d_ = dribas::Triangle{b, {b.x - weight, b.y}, {b.x, b.y - height}};
+    point[1] = b;
+    point[2] = {b.x, b.y + height};
+    point[3] = {b.x - weight, b.y};
   } else if ((c.x == a.x && c.y == b.y) || (c.y == a.y && c.x == b.x)) {
     if (c.x == a.x && c.y == b.y) {
       weight = std::abs(std::abs(c.x) - std::abs(a.x));
@@ -45,33 +40,22 @@ dribas::Triangle * initialDiamond(dribas::point_t a, dribas::point_t b, dribas::
       height = std::abs(std::abs(c.y) - std::abs(a.y));
       weight = std::abs(std::abs(c.x) - std::abs(b.x));
     }
-    a_ = dribas::Triangle{c, {c.x - weight, c.y}, {c.x, c.y + height}};
-    b_ = dribas::Triangle{c, {c.x + weight, c.y}, {c.x, c.y + height}};
-    c_ = dribas::Triangle{c, {c.x + weight, c.y}, {c.x, c.y - height}};
-    d_ = dribas::Triangle{c, {c.x - weight, c.y}, {c.x, c.y - height}};
+    point[1] = c;
+    point[2] = {c.x, c.y + height};
+    point[3] = {c.x - weight, c.y};
   } else {
     throw std::invalid_argument("error with diamond size");
   }
-  dribas::Triangle triangle[4] = {a_, b_, c_, d_};
-  dribas::Triangle* trianglePtr = triangle;
-  return trianglePtr;
+  dribas::point_t* ptrPoint = point;
+
+  return ptrPoint;
 }
 dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
-  a_(Triangle{a, b, c}),
-  b_(Triangle{b, a, c}),
-  c_(Triangle{c, a, b}),
-  d_(Triangle{c, b, a})
-{
-  try {
-    Triangle * dmnd = initialDiamond(a, b, c);
-    a_ = dmnd[0];
-    b_ = dmnd[1];
-    c_ = dmnd[2];
-    d_ = dmnd[3];
-  } catch(...) {
-    throw;
-  }
-}
+  a_({a, b, c}),
+  b_({a, a, {c.x - 2 * std::abs(std::abs(b.x) - std::abs(a.x)), c.y}}),
+  c_({a, {b.x, b.y - 2 * std::abs(std::abs(a.y) - std::abs(c.y))}, {c.x - std::abs(std::abs(b.x) - std::abs(a.x)), c.y}}),
+  d_({a, {b.x, b.y - 2 * std::abs(std::abs(a.y) - std::abs(c.y))}, c})
+{}
 
 double dribas::Diamond::getArea() const
 {
@@ -80,12 +64,10 @@ double dribas::Diamond::getArea() const
 
 dribas::rectangle_t dribas::Diamond::getFrameRect() const
 {
-  rectangle_t fremRECT = a_.getFrameRect();
-  rectangle_t myFremRect;
-  myFremRect.pos = {fremRECT.pos.x + fremRECT.width / 2.0, fremRECT.pos.y - fremRECT.height / 2.0};
-  fremRECT.width = fremRECT.width * 2.0;
-  fremRECT.height = fremRECT.height * 2.0;
-  return fremRECT;
+  rectangle_t fremRect = a_.getFrameRect();
+  fremRect.width = fremRect.width * 2.0;
+  fremRect.height = fremRect.height * 2.0;
+  return fremRect;
 }
 
 void dribas::Diamond::move(double x, double y)

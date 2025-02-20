@@ -26,16 +26,16 @@ void dribas::scaleOne(Shape& t, double ratio, point_t Point)
   t.scale(ratio);
   t.move(diffenceX, diffenceY);
 }
-void dribas::scalingAll(Shape** Shapes, size_t shapeCount, dribas::point_t center, double ratio)
+void dribas::scalingAll(Shape** shapes, size_t shapeCount, dribas::point_t center, double ratio)
 {
   for (size_t i = 0; i < shapeCount; i++) {
-    dribas::point_t cneter = Shapes[i]->getFrameRect().pos;
-    Shapes[i]->move(center);
-    dribas::point_t center2 = Shapes[i]->getFrameRect().pos;
+    dribas::point_t cneter = shapes[i]->getFrameRect().pos;
+    shapes[i]->move(center);
+    dribas::point_t center2 = shapes[i]->getFrameRect().pos;
     double diffenceX = (center2.x - cneter.x) * ratio * - 1;
     double diffenceY = (center2.y - cneter.y) * ratio * - 1;
-    Shapes[i]->scale(ratio);
-    Shapes[i]->move(diffenceX, diffenceY);
+    shapes[i]->scale(ratio);
+    shapes[i]->move(diffenceX, diffenceY);
   }
 }
 bool getPoint(std::istream& in, size_t pointCount, dribas::point_t * points) {
