@@ -78,7 +78,7 @@ int main()
         evstyunichev::skip_to_sign(std::cin, '\n');
       }
     }
-    catch(std::invalid_argument)
+    catch(const std::invalid_argument &e)
     {
       std::cout << "something went wrong\n";
     }
