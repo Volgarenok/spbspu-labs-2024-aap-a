@@ -54,7 +54,7 @@ int main()
         std::cerr << "Out of memmory!\n";
         return 1;
       }
-     }
+    }
     if (str.find("SCALE") != std::string::npos)
     {
       scale = true;
