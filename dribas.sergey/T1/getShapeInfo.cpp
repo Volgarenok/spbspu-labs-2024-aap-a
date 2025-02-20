@@ -94,7 +94,7 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** Shape
         input >> scalingFactor[0];
         input >> scalingFactor[1];
         input >> scalingFactor[2];
-        if (scalingFactor[0] <= 0) {
+        if (scalingFactor[2] <= 0) {
           throw std::invalid_argument("under zero ratio with scale");
         }
       }
