@@ -49,7 +49,7 @@ int main()
         else if (input == "SCALE")
         {
           double x, y;
-          std::cin >> x >> y;
+          std::cin >> x >> y >> k;
           if (k <= 0)
           {
             std::cerr << "Incorrect scale coefficient!" << '\n';
