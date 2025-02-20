@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include "shapeFactory.hpp"
 #include "procesShape.hpp"
 #include "makesShape.hpp"
 
@@ -52,7 +51,7 @@ int main()
       {
         invalidInput = true;
       }
-      catch (const std::bad_alloc &)
+      catch (const std::bad_alloc&)
       {
         std::cerr << "out memor\n";
         cherkasov::deleteShapes(shapes, shapeCount);
