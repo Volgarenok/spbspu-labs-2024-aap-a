@@ -88,7 +88,13 @@ dribas::Shape* dribas::CompositeShape::at(size_t id)
   }
   return shapes_[id];
 }
+
 dribas::Shape* dribas::CompositeShape::operator[](size_t id)
+{
+  return shapes_[id];
+}
+
+const dribas::Shape * dribas::CompositeShape::operator[](size_t id) const
 {
   return shapes_[id];
 }

@@ -6,7 +6,7 @@
 
 namespace dribas
 {
-  void outputRes(std::ostream & output, Shape* const* myShape, size_t shapeSize);
+  void outputRes(std::ostream & output, const Shape* const* myShape, const size_t shapeSize);
 }
 
 #endif

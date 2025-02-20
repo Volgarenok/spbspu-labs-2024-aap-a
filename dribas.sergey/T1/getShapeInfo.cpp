@@ -26,7 +26,7 @@ void dribas::scaleOne(Shape& t, double ratio, point_t Point)
   t.scale(ratio);
   t.move(diffenceX, diffenceY);
 }
-void dribas::scalingAll(Shape** shapes, size_t shapeCount, dribas::point_t center, double ratio)
+void dribas::scalingAll(Shape** shapes, size_t shapeCount, point_t center, double ratio)
 {
   for (size_t i = 0; i < shapeCount; i++) {
     dribas::point_t cneter = shapes[i]->getFrameRect().pos;
@@ -60,25 +60,25 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** Shape
         if (InputStr == "RECTANGLE") {
           point_t pointR[2] = {};
           if (getPoint(std::cin, 2, pointR)) {
-            Shapes[shapesCount] =  new Rectangle{pointR[0], pointR[1]};
+            Shapes[shapesCount] = new Rectangle{pointR[0], pointR[1]};
             shapesCount++;
           }
         } else if (InputStr == "TRIANGLE") {
           point_t pointT[3] = {};
           if (getPoint(std::cin, 3, pointT)) {
-            Shapes[shapesCount] =  new Triangle{pointT[0], pointT[1], pointT[2]};
+            Shapes[shapesCount] = new Triangle{pointT[0], pointT[1], pointT[2]};
             shapesCount++;
           }
         } else if (InputStr == "DIAMOND") {
           point_t pointD[3] = {};
           if (getPoint(std::cin, 3, pointD)) {
-            Shapes[shapesCount] =  new Diamond{pointD[0], pointD[1], pointD[2]};
+            Shapes[shapesCount] = new Diamond{pointD[0], pointD[1], pointD[2]};
             shapesCount++;
           }
         } else if (InputStr == "CONCAVE") {
           point_t pointC[4] = {};
           if (getPoint(std::cin, 4, pointC)) {
-            Shapes[shapesCount] =  new Concave{pointC[0], pointC[1], pointC[2], pointC[3]};
+            Shapes[shapesCount] = new Concave{pointC[0], pointC[1], pointC[2], pointC[3]};
             shapesCount++;
           }
         }
@@ -94,6 +94,9 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** Shape
         input >> scalingFactor[0];
         input >> scalingFactor[1];
         input >> scalingFactor[2];
+        if (scalingFactor[0] <= 0) {
+          throw std::invalid_argument("under zero ratio with scale");
+        }
       }
     }
   } catch (const std::bad_alloc& e) {

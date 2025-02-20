@@ -16,6 +16,7 @@ namespace dribas
     CompositeShape & operator=(CompositeShape && shp) noexcept;
     ~CompositeShape();
     Shape * operator[](size_t id);
+    const Shape * operator[](size_t id) const;
 
     double getArea() const noexcept;
     rectangle_t getFrameRect() const;

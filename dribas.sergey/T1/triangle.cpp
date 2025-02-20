@@ -8,7 +8,7 @@ dribas::Triangle::Triangle(point_t a, point_t b, point_t c):
   b_(b),
   c_(c)
 {
-  if ((a_.x * (b_.y -c_.y) + b_.x * (c_.y - a_.y) + c_.x * (a_.y - b_.y)) == 0) {
+  if ((a_.x * (b_.y - c_.y) + b_.x * (c_.y - a_.y) + c_.x * (a_.y - b_.y)) == 0) {
     throw std::invalid_argument("error arguments for triangle");
   }
 }
@@ -41,9 +41,9 @@ void dribas::Triangle::move(double x, double y)
 
 void dribas::Triangle::move(point_t centerP)
 {
-  dribas::point_t pos;
-  pos.x = std::abs(a_.x + b_.x + c_.x) / 3.0;
-  pos.y = std::abs(a_.y + b_.y + c_.y) / 3.0;
+  double x = std::abs(a_.x + b_.x + c_.x) / 3.0;
+  double y = std::abs(a_.y + b_.y + c_.y) / 3.0;
+  point_t pos = {x, y};
   double moveX = centerP.x - pos.x;
   double moveY = centerP.y - pos.y;
   this->move(moveX, moveY);
