@@ -16,6 +16,10 @@ smirnov::Parallelogram::Parallelogram(point_t p1, point_t p2, point_t p3):
   {
     throw std::invalid_argument("Points must be unique");
   }
+  if (!(p1.y == p2.y || p1.y == p3.y || p2.y == p3.y) && (p1.y != p3.y))
+  {
+    throw std::invalid_argument("Incorrect coordinates");
+  }
 }
 
 double smirnov::Parallelogram::getArea() const
