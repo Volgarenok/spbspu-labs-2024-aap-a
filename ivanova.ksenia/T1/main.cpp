@@ -46,11 +46,18 @@ int main()
           shapes[size] = ivanova::createDiamond(std::cin);
           size++;
         }
-        else if (std::cin.eof())
+        else if (input == "SCALE")
         {
-          ivanova::deleteShapes(shapes, size);
-          std::cerr << "EOF" << '\n';
-          return 1;
+          double x, y;
+          std::cin >> x >> y;
+          if (k <= 0)
+          {
+            std::cerr << "Incorrect scale coefficient!" << '\n';
+            return 1;
+          }
+        scaleCenter = {x, y};
+        ivanova::scale(shapes, size, scaleCenter, k);
+        isScale = true;
         }
       }
       catch (std::bad_alloc & e)
@@ -59,6 +66,12 @@ int main()
         ivanova::deleteShapes(shapes, size);
         return 1;
       }
+    }
+    if (std::cin.eof())
+    {
+      ivanova::deleteShapes(shapes, size);
+      std::cerr << "EOF" << '\n';
+      return 1;
     }
     if (!isScale)
     {
