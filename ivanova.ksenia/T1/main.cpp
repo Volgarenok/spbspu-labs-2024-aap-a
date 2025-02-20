@@ -24,6 +24,9 @@ int main()
   {
     while (std::cin >> input)
     {
+      if (input.empty())
+        continue;
+
       try
       {
         if (input == "RECTANGLE")
@@ -53,6 +56,7 @@ int main()
           if (k <= 0)
           {
             std::cerr << "Incorrect scale coefficient!" << '\n';
+            ivanova::deleteShapes(shapes, size);
             return 1;
           }
         scaleCenter = {x, y};
