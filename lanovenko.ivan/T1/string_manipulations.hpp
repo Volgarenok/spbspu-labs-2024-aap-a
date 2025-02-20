@@ -7,7 +7,6 @@
 
 namespace lanovenko
 {
-  std::string inputStr(std::istream& in);
   Shape* parseShape(const std::string& str);
   Shape* parseRectangle(const std::string& str);
   Shape* parseDiamond(const std::string& str);

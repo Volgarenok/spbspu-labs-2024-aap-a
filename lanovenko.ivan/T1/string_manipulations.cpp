@@ -4,16 +4,6 @@
 #include "triangle.hpp"
 #include "parallelogram.hpp"
 
-std::string lanovenko::inputStr(std::istream& in)
-{
-  std::string result = "";
-  if (!std::getline(in, result))
-  {
-    throw std::runtime_error("Eof\n");
-  };
-  return result;
-}
-
 lanovenko::Shape* lanovenko::parseShape(const std::string& str)
 {
   if (str.find("RECTANGLE") != std::string::npos)
