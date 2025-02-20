@@ -34,6 +34,7 @@ int main()
       return 1;
     }
     std::string str{ cStr };
+    delete[] cStr;
     if (str.find("SCALE") == std::string::npos)
     {
       try
