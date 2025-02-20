@@ -79,5 +79,6 @@ void evstyunichev::skip_to_sign(std::istream &in, char end)
   {
     in >> c;
   }
+  std::skipws(in);
   return;
 }
