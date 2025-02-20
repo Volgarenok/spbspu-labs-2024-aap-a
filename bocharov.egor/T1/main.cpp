@@ -7,12 +7,12 @@
 int main()
 {
   constexpr size_t shapesSize = 10000;
-  bocharov::Shape * myShapes[shapesSize] = {};
+  bocharov::Shape * shapes[shapesSize] = {};
   int shapeCount = 0;
   try
   {
     std::cout << std::fixed << std::setprecision(1);
-    shapeCount = bocharov::getShapeInfo(std::cin, std::cerr, std::cout, myShapes);
+    shapeCount = bocharov::getShapeInfo(std::cin, std::cerr, std::cout, shapes);
   }
   catch (const std::exception & e)
   {
@@ -22,6 +22,6 @@ int main()
   {
     return 1;
   }
-  bocharov::clear(myShapes, shapeCount);
+  bocharov::clear(shapes, shapeCount);
   return 0;
 }

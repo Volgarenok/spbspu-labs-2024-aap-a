@@ -4,6 +4,6 @@
 #include "shape.hpp"
 namespace bocharov
 {
-  void outputRes(std::ostream & output, const Shape * const * myShape, size_t shapeSize);
+  void outputRes(std::ostream & output, const Shape * const * shapes, size_t shapeSize);
 }
 #endif

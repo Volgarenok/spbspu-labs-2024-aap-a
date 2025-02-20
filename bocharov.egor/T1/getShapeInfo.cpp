@@ -16,29 +16,29 @@ void createPoint(std::istream & input, size_t size, bocharov::point_t * arr)
   }
 }
 
-double bocharov::getAllArea(const Shape * const * myShapes, size_t shapeCount)
+double bocharov::getAllArea(const Shape * const * shapes, size_t shapeCount)
 {
   double allArea = 0.0;
   for (size_t i = 0; i < shapeCount; i++)
   {
-    allArea += myShapes[i]->getArea();
+    allArea += shapes[i]->getArea();
   }
   return allArea;
 }
 
-void bocharov::scaling(Shape ** myShapes, size_t shapeCount, point_t center, double ratio)
+void bocharov::scaling(Shape ** shapes, size_t shapeCount, point_t center, double ratio)
 {
   try
   {
     for (size_t i = 0; i < shapeCount; i++)
     {
-      point_t cneter = myShapes[i]->getFrameRect().pos;
-      myShapes[i]->move(center);
-      point_t center2 = myShapes[i]->getFrameRect().pos;
+      point_t cneter = shapes[i]->getFrameRect().pos;
+      shapes[i]->move(center);
+      point_t center2 = shapes[i]->getFrameRect().pos;
       double diffenceX = (center2.x - cneter.x) * ratio * - 1;
       double diffenceY = (center2.y - cneter.y) * ratio * - 1;
-      myShapes[i]->scaleCheck(ratio);
-      myShapes[i]->move(diffenceX, diffenceY);
+      shapes[i]->scaleCheck(ratio);
+      shapes[i]->move(diffenceX, diffenceY);
     }
   }
   catch (const std::invalid_argument &)
@@ -47,7 +47,7 @@ void bocharov::scaling(Shape ** myShapes, size_t shapeCount, point_t center, dou
   }
 }
 
-std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, std::ostream & output, Shape ** myShapes)
+std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, std::ostream & output, Shape ** shapes)
 {
   std::string inpStr;
   std::size_t shapesCount = 0;
@@ -65,7 +65,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         constexpr size_t quantity = 2;
         point_t arrPoint[quantity] = {};
         createPoint(input, quantity, arrPoint);
-        myShapes[shapesCount] = new Rectangle{arrPoint[0], arrPoint[1]};
+        shapes[shapesCount] = new Rectangle{arrPoint[0], arrPoint[1]};
         shapesCount++;
       }
       else if (inpStr == "TRIANGLE")
@@ -73,7 +73,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         constexpr size_t quantity = 3;
         point_t arrPoint[quantity] = {};
         createPoint(input, quantity, arrPoint);
-        myShapes[shapesCount] = new Triangle{arrPoint[0], arrPoint[1], arrPoint[2]};
+        shapes[shapesCount] = new Triangle{arrPoint[0], arrPoint[1], arrPoint[2]};
         shapesCount++;
       }
       else if (inpStr == "PARALLELOGRAM")
@@ -81,7 +81,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         constexpr size_t quantity = 3;
         point_t arrPoint[quantity] = {};
         createPoint(input, quantity, arrPoint);
-        myShapes[shapesCount] = new Parallelogram{arrPoint[0], arrPoint[1], arrPoint[2]};
+        shapes[shapesCount] = new Parallelogram{arrPoint[0], arrPoint[1], arrPoint[2]};
         shapesCount++;
       }
       else if (inpStr == "CONCAVE")
@@ -89,7 +89,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         constexpr size_t quantity = 4;
         point_t arrPoint[quantity] = {};
         createPoint(input, quantity, arrPoint);
-        myShapes[shapesCount] = new Concave{arrPoint[0], arrPoint[1], arrPoint[2], arrPoint[3]};
+        shapes[shapesCount] = new Concave{arrPoint[0], arrPoint[1], arrPoint[2], arrPoint[3]};
         shapesCount++;
       }
       else if (inpStr == "SCALE")
@@ -107,15 +107,15 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         input >> ratio;
         try
         {
-          outputRes(output, myShapes, shapesCount);
+          outputRes(output, shapes, shapesCount);
           output << '\n';
-          scaling(myShapes, shapesCount, toCenter, ratio);
-          outputRes(output, myShapes, shapesCount);
+          scaling(shapes, shapesCount, toCenter, ratio);
+          outputRes(output, shapes, shapesCount);
           output << '\n';
         }
         catch (const std::invalid_argument & e)
         {
-          clear(myShapes, shapesCount);
+          clear(shapes, shapesCount);
           return 0;
         }
       }
@@ -127,16 +127,16 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
   }
   if (!scaled)
   {
-    clear(myShapes, shapesCount);
+    clear(shapes, shapesCount);
     return 0;
   }
   return shapesCount;
 }
 
-void bocharov::clear(Shape ** myshape, size_t shapeCount)
+void bocharov::clear(Shape ** shapes, size_t shapeCount)
 {
   for (size_t i = 0; i < shapeCount; i++)
   {
-    delete myshape[i];
+    delete shapes[i];
   }
 }
