@@ -36,7 +36,7 @@ void evstyunichev::Circle::move(double dx, double dy)
 
 void evstyunichev::Circle::move(point_t cds)
 {
-  O_ += cds;
+  move(cds.x - O_.x, cds.y - O_.y);
   return;
 }
 

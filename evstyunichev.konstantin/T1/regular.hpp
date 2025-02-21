@@ -21,6 +21,7 @@ namespace evstyunichev
       point_t O_;
       double alpha_;
       double a_;
+      double base_;
   };
 }
 #endif

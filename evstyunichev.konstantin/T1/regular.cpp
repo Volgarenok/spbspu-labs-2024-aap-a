@@ -60,6 +60,7 @@ evstyunichev::Regular::Regular(point_t A, point_t B, point_t C)
   alpha_ = alpha;
   a_ = b * 2.0;
   O_ = A;
+  base_ = std::acos((C.x - A.x) / c);
 }
 
 double evstyunichev::Regular::getArea() const
@@ -73,7 +74,7 @@ evstyunichev::rectangle_t evstyunichev::Regular::getFrameRect() const
   double right = -1e9, left = 1e9, down = 1e9, up = -1e9, width = 0, height = 0;
   double R = getBig();
   point_t cur{};
-  for (double angle = alpha_ / 2.0; !isEqual(angle, alpha_ / 2.0 + 2 * M_PI); angle += alpha_)
+  for (double angle = base_; !isEqual(angle, base_ + 2 * M_PI); angle += alpha_)
   {
     cur.x = O_.x + R * std::cos(angle);
     cur.y = O_.y + R * std::sin(angle);
@@ -97,7 +98,7 @@ void evstyunichev::Regular::move(double dx, double dy)
 
 void evstyunichev::Regular::move(point_t cds)
 {
-  O_ += cds;
+  move(cds.x - O_.x, cds.y - O_.y);
   return;
 }
 

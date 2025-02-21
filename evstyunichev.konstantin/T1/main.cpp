@@ -23,7 +23,6 @@ void evstyunichev::makeScale(Shape **shapes, std::istream &in, size_t done, doub
   in >> x >> y >> k;
   if (k < 0)
   {
-    destroy_shapes(shapes, done);
     throw std::logic_error("negative k!");
   }
   if (!done)
@@ -39,7 +38,7 @@ void evstyunichev::makeScale(Shape **shapes, std::istream &in, size_t done, doub
     shapes[i]->move(O);
     point_t cur = shapes[i]->getFrameRect().pos;
     shapes[i]->scale(k);
-    shapes[i]->move(-k * (cur.x - old.x), -k * (cur.y - old.y));
+    shapes[i]->move(-(k * (cur.x - old.x)), -(k * (cur.y - old.y)));
   }
   framesOut(shapes, done) << '\n';
 }
