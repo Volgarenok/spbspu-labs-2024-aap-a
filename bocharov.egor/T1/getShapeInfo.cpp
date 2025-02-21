@@ -51,6 +51,8 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
 {
   std::string inpStr;
   std::size_t shapesCount = 0;
+  point_t scale;
+  double ratio;
   bool scaled = false;
   auto handleError = [&](const std::invalid_argument & e)
   {
@@ -100,30 +102,29 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
           error << "No shapes for scale\n";
           return 0;
         }
-        point_t toCenter;
-        double ratio;
-        input >> toCenter.x;
-        input >> toCenter.y;
+        input >> scale.x;
+        input >> scale.y;
         input >> ratio;
-        try
-        {
-          outputRes(output, shapes, shapesCount);
-          output << '\n';
-          scaling(shapes, shapesCount, toCenter, ratio);
-          outputRes(output, shapes, shapesCount);
-          output << '\n';
-        }
-        catch (const std::invalid_argument & e)
-        {
-          clear(shapes, shapesCount);
-          return 0;
-        }
+        break;
       }
     }
     catch (const std::invalid_argument & e)
     {
       handleError(e);
     }
+  }
+  try
+  {
+    outputRes(output, shapes, shapesCount);
+    output << '\n';
+    scaling(shapes, shapesCount, scale, ratio);
+    outputRes(output, shapes, shapesCount);
+    output << '\n';
+  }
+  catch (const std::invalid_argument & e)
+  {
+    clear(shapes, shapesCount);
+    return 0;
   }
   if (!scaled)
   {
