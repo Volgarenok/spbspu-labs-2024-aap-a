@@ -1,11 +1,17 @@
 #include "rectangle.hpp"
 #include <cmath>
+#include <stdexcept>
 #include "supportFunctions.hpp"
 
 asafov::Rectangle::Rectangle(point_t lb, point_t rt):
   lb_(lb),
   rt_(rt)
-{}
+{
+  if (lb.x > rt.x || lb.y > rt.y)
+  {
+    throw std::logic_error("incorrect figure");
+  }
+}
 
 double asafov::Rectangle::getArea() const
 {
@@ -42,6 +48,10 @@ void asafov::Rectangle::move(point_t pos)
 
 void asafov::Rectangle::scale(double scale)
 {
+  if (scale <= 0)
+  {
+    throw std::logic_error("incorrect scale");
+  }
   rectangle_t rect = getFrameRect();
   scalePoint(rt_, rect.pos, scale);
   scalePoint(lb_, rect.pos, scale);

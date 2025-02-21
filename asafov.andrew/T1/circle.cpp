@@ -1,6 +1,6 @@
 #include "circle.hpp"
 #include <cmath>
-#include <exception>
+#include <stdexcept>
 #include "supportFunctions.hpp"
 
 #define pi std::atan(1.0) * 4
@@ -8,7 +8,12 @@
 asafov::Circle::Circle(point_t center, double radius):
   center_(center),
   radius_(radius)
-{}
+{
+  if(radius <= 0)
+  {
+    throw std::logic_error("incorrect figure");
+  }
+}
 
 double asafov::Circle::getArea() const
 {

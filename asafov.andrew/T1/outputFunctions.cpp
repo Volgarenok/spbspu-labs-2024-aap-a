@@ -9,38 +9,7 @@
 #include "square.hpp"
 #include "triangle.hpp"
 #include "complexquad.hpp"
-
-namespace asafov
-{
-  point_t getPoint(std::istream& in)
-  {
-    point_t point;
-    in >> point.x;
-    in >> point.y;
-    return point;
-  }
-
-  void isotropicScale(Shape* sh, point_t pos, double scale)
-  {
-    point_t centr = sh->getFrameRect().pos;
-    sh->move(pos);
-    double vectorx = scale * centr.x - scale * sh->getFrameRect().pos.x;
-    double vectory = scale * centr.y - scale * sh->getFrameRect().pos.y;
-    sh->scale(scale);
-    sh->move(vectorx, vectory);
-  }
-
-  void outputFrameRect(Shape* shape, std::ostream& out)
-  {
-    rectangle_t rect = shape->getFrameRect();
-    out << rect.pos.x - rect.width / 2;
-    out << ' ' << rect.pos.y - rect.height / 2;
-    out << ' ' << rect.pos.x + rect.width / 2;
-    out << ' ' << rect.pos.y + rect.height / 2;
-  }
-}
-
-
+#include "supportFunctions.hpp"
 
 asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
 {

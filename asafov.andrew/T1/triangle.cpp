@@ -1,6 +1,7 @@
 #include "triangle.hpp"
 #include <algorithm>
 #include <cmath>
+#include <stdexcept>
 #include "supportFunctions.hpp"
 #include "getLength.hpp"
 
@@ -8,7 +9,16 @@ asafov::Triangle::Triangle(point_t one, point_t two, point_t three):
   one_(one),
   two_(two),
   three_(three)
-{}
+{
+  double sidea = std::pow(std::pow((one.x - two.x), 2.0) + std::pow((one.y - two.y), 2.0), 0.5);
+  double sideb = std::pow(std::pow((two.x - three.x), 2.0) + std::pow((two.y - three.y), 2.0), 0.5);
+  double sidec = std::pow(std::pow((one.x - three.x), 2.0) + std::pow((one.y - three.y), 2.0), 0.5);
+  double temp = (one.x - two.x + one.y - two.y) * (one.x - three.x + one.y - three.y) * (two.x - three.x + two.y - three.y);
+  if (temp == 0 || sidea + sideb <= sidec || sidea + sidec <= sideb || sideb + sidec <= sidea)
+  {
+    throw std::logic_error("incorrect figure");
+  }
+}
 
 double asafov::Triangle::getArea() const
 {
@@ -50,6 +60,10 @@ void asafov::Triangle::move(point_t pos)
 
 void asafov::Triangle::scale(double scale)
 {
+  if (scale <= 0)
+  {
+    throw std::logic_error("incorrect scale");
+  }
   rectangle_t rect = getFrameRect();
   scalePoint(one_, rect.pos, scale);
   scalePoint(two_, rect.pos, scale);

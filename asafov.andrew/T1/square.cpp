@@ -1,11 +1,17 @@
 #include "square.hpp"
 #include <cmath>
+#include <stdexcept>
 #include "supportFunctions.hpp"
 
 asafov::Square::Square(point_t lb, double side):
   lb_(lb),
   side_(side)
-{}
+{
+  if (side <= 0.0)
+  {
+    throw std::logic_error("incorrect figure");
+  }
+}
 
 double asafov::Square::getArea() const
 {
@@ -37,6 +43,10 @@ void asafov::Square::move(point_t pos)
 
 void asafov::Square::scale(double scale)
 {
+  if (scale <= 0)
+  {
+    throw std::logic_error("incorrect scale");
+  }
   rectangle_t rect = getFrameRect();
   scalePoint(lb_, rect.pos, scale);
   side_ *= scale;

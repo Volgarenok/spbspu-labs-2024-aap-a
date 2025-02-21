@@ -1,6 +1,7 @@
 #include "complexquad.hpp"
 #include <algorithm>
 #include <cmath>
+#include <stdexcept>
 #include "supportFunctions.hpp"
 #include "getLength.hpp"
 
@@ -9,7 +10,13 @@ asafov::Complexquad::Complexquad(point_t one, point_t two, point_t three, point_
   two_(two),
   three_(three),
   four_(four)
-{}
+{
+  double temp = (one.x - two.x + one.y - two.y) * (one.x - three.x + one.y - three.y) * (one.x - four.x + one.y - four.y);
+  if (temp * (two.x - three.x + two.y - three.y) * (two.x - four.x + two.y - four.y) * (three.x - four.x + three.y - four.y) == 0)
+  {
+    throw std::logic_error("incorrect figure");
+  }
+}
 
 double asafov::Complexquad::getArea() const
 {
@@ -66,6 +73,10 @@ void asafov::Complexquad::move(point_t pos)
 
 void asafov::Complexquad::scale(double scale)
 {
+  if (scale <= 0)
+  {
+    throw std::logic_error("incorrect scale");
+  }
   rectangle_t rect = getFrameRect();
   scalePoint(one_, rect.pos, scale);
   scalePoint(two_, rect.pos, scale);

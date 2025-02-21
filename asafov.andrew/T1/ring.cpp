@@ -1,5 +1,6 @@
 #include "ring.hpp"
 #include <cmath>
+#include <stdexcept>
 #include "supportFunctions.hpp"
 
 #define pi std::atan(1.0) * 4
@@ -8,7 +9,12 @@ asafov::Ring::Ring(point_t center, double innerradius, double outerradius):
   center_(center),
   innerradius_(innerradius),
   outerradius_(outerradius)
-{}
+{
+  if (innerradius <= 0.0 || outerradius <= 0.0 || innerradius >= outerradius)
+  {
+    throw std::logic_error("incorrect figure");
+  }
+}
 
 double asafov::Ring::getArea() const
 {
@@ -39,6 +45,10 @@ void asafov::Ring::move(point_t pos)
 
 void asafov::Ring::scale(double scale)
 {
+  if (scale <= 0)
+  {
+    throw std::logic_error("incorrect scale");
+  }
   rectangle_t rect = getFrameRect();
   scalePoint(center_, rect.pos, scale);
   innerradius_ *= scale;
