@@ -10,14 +10,14 @@
 #include "triangle.hpp"
 #include "complexquad.hpp"
 
-namespace
+namespace asafov
 {
   asafov::point_t getPoint(std::istream& in);
   void isotropicScale(asafov::Shape* sh, asafov::point_t pos, double scale);
   void outputFrameRect(asafov::Shape* shape, std::ostream& out);
 }
 
-asafov::point_t getPoint(std::istream& in)
+asafov::point_t asafov::getPoint(std::istream& in)
 {
   point_t point;
   in >> point.x;
@@ -137,7 +137,7 @@ std::string asafov::getName(std::istream& in)
   return str;
 }
 
-void asafov::scaleShapes(Shape** shapes, unsigned long long count, point_t pos, double scale, std::ostream& out)
+void asafov::scaleShapes(Shape** shapes, size_t count, point_t pos, double scale, std::ostream& out)
 {
   out << std::fixed << std::setprecision(1);
   if (count == 0)
@@ -176,7 +176,7 @@ void asafov::deleteShapes(Shape** shapes, size_t count)
   delete[] shapes;
 }
 
-void isotropicScale(asafov::Shape* sh, asafov::point_t pos, double scale)
+void asafov::isotropicScale(asafov::Shape* sh, asafov::point_t pos, double scale)
 {
   point_t centr = sh->getFrameRect().pos;
   sh->move(pos);
@@ -186,7 +186,7 @@ void isotropicScale(asafov::Shape* sh, asafov::point_t pos, double scale)
   sh->move(vectorx, vectory);
 }
 
-void outputFrameRect(asafov::Shape* shape, std::ostream& out)
+void asafov::outputFrameRect(asafov::Shape* shape, std::ostream& out)
 {
   rectangle_t rect = shape->getFrameRect();
   out << rect.pos.x - rect.width / 2;
