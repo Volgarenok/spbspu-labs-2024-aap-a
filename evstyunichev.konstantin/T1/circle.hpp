@@ -9,7 +9,7 @@ namespace evstyunichev
   class Circle: public Shape
   {
     public:
-      Circle(point_t, double);
+      Circle(point_t O, double r);
       double getArea() const override;
       rectangle_t getFrameRect() const override;
       void move(double, double) override;
@@ -17,7 +17,7 @@ namespace evstyunichev
       void scale(double) override;
 
     private:
-      Regular *data;
+      Regular data_;
   };
 }
 #endif

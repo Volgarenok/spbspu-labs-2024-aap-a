@@ -63,16 +63,16 @@ evstyunichev::Regular::Regular(point_t A, point_t B, point_t C)
   base_ = std::acos((C.x - A.x) / c);
 }
 
-evstyunichev::Regular::Regular(point_t O, double R, size_t n)
+evstyunichev::Regular::Regular(point_t O, double r, size_t n)
 {
-  if ((R <= 0) || (n < 3))
+  if ((r <= 0) || (n < 3))
   {
     throw std::invalid_argument("invalid arguments");
   }
   O_ = O;
   base_ = 0;
   alpha_ = (2 * M_PI) / n;
-  a_ = std::sin(alpha_ / 2.0) * R * 2.0;
+  a_ = std::sin(alpha_ / 2.0) * r * 2.0;
 }
 
 double evstyunichev::Regular::getArea() const
