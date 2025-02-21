@@ -88,6 +88,6 @@ finaev::Shape* finaev::makeShapes(std::istream& in, const std::string str)
   }
   else
   {
-    throw std::logic_error("Not a name of figure");
+    throw std::invalid_argument("Not a name of figure");
   }
 }
