@@ -51,7 +51,7 @@ evstyunichev::CompositeShape::CompositeShape(const CompositeShape &cmp):
       shapes_[size_] = cmp[size_]->copy();
     }
   }
-  catch (const std::bad_alloc&)
+  catch (const std::bad_alloc &e)
   {
     clear();
     throw;
@@ -70,14 +70,14 @@ evstyunichev::CompositeShape::CompositeShape(CompositeShape &&cmp) noexcept:
   cmp.totalSquare_ = 0;
 }
 
-evstyunichev::CompositeShape &evstyunichev::CompositeShape::operator=(const CompositeShape &cmp)
+evstyunichev::CompositeShape & evstyunichev::CompositeShape::operator=(const CompositeShape &cmp)
 {
   CompositeShape cpy(cmp);
   swap(cpy);
   return *this;
 }
 
-evstyunichev::CompositeShape &evstyunichev::CompositeShape::operator=(CompositeShape &&cmp) noexcept
+evstyunichev::CompositeShape & evstyunichev::CompositeShape::operator=(CompositeShape &&cmp) noexcept
 {
   clear();
   shapes_ = cmp.shapes_;
@@ -112,7 +112,7 @@ void evstyunichev::CompositeShape::popBack()
   size_--;
 }
 
-const evstyunichev::Shape *evstyunichev::CompositeShape::at(size_t id) const
+const evstyunichev::Shape * evstyunichev::CompositeShape::at(size_t id) const
 {
   if (id >= size_)
   {
@@ -121,17 +121,17 @@ const evstyunichev::Shape *evstyunichev::CompositeShape::at(size_t id) const
   return shapes_[id];
 }
 
-evstyunichev::Shape *evstyunichev::CompositeShape::at(size_t id)
+evstyunichev::Shape * evstyunichev::CompositeShape::at(size_t id)
 {
   return const_cast< Shape * >(static_cast< const CompositeShape & >(*this).at(id));
 }
 
-const evstyunichev::Shape *evstyunichev::CompositeShape::operator[](size_t id) const noexcept
+const evstyunichev::Shape * evstyunichev::CompositeShape::operator[](size_t id) const noexcept
 {
   return shapes_[id];
 }
 
-evstyunichev::Shape *evstyunichev::CompositeShape::operator[](size_t id) noexcept
+evstyunichev::Shape * evstyunichev::CompositeShape::operator[](size_t id) noexcept
 {
   return const_cast< Shape * >(static_cast< const CompositeShape & >(*this).operator[](id));
 }

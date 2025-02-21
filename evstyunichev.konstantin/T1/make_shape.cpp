@@ -38,7 +38,7 @@ evstyunichev::Regular * evstyunichev::make_regular(std::istream &in)
   {
     in >> cds[i];
   }
-  Regular *temp = new Regular({cds[0], cds[1]}, {cds[2], cds[3]}, {cds[4], cds[5]});
+  Regular *temp = new Regular({ cds[0], cds[1] }, { cds[2], cds[3] }, { cds[4], cds[5] });
   return temp;
 }
 

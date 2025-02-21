@@ -3,33 +3,28 @@
 #include <string>
 #include "../common/input_string.hpp"
 #include "base-types.hpp"
-#include "circle.hpp"
 #include "composite_shape.hpp"
 #include "make_shape.hpp"
-#include "rectangle.hpp"
-#include "regular.hpp"
-#include "ring.hpp"
 #include "shape.hpp"
 #include "shape_actions.hpp"
-#include "specific_output.hpp"
 
 int main()
 {
   using namespace evstyunichev;
-  CompositeShape compShp(4);
-  std::string s;
+  CompositeShape compShp(2);
+  std::string command;
   bool scaleFlag = 0, errorFlag = 0;
-  while (std::cin >> s)
+  while (std::cin >> command)
   {
     try
     {
       Shape *cur = nullptr;
-      cur = make_shape(std::cin, s);
+      cur = make_shape(std::cin, command);
       if (cur)
       {
         compShp.pushBack(cur);
       }
-      else if (s == "SCALE")
+      else if (command == "SCALE")
       {
         scaleFlag = 1;
         makeScale(compShp, std::cin);
