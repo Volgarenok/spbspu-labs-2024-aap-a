@@ -69,16 +69,16 @@ int main()
     std::cerr << "scaling was not specified\n";
     return 1;
   }
-  if (invalidInput)
-  {
-    std::cerr << "Invalid input encountered" << "\n";
-  }
   std::cout << std::fixed << std::setprecision(1);
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
   cherkasov::getScaling(shapes, shapeCount, p, scalingFactor);
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
+  if (invalidInput)
+  {
+    std::cerr << "Invalid input encountered\n";
+  }
   cherkasov::deleteShapes(shapes, shapeCount);
   return 0;
 }
