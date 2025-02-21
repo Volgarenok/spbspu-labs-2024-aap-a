@@ -72,16 +72,7 @@ int main()
   std::cout << std::fixed << std::setprecision(1);
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
-  try
-  {
-    cherkasov::getScaling(shapes, shapeCount, p, scalingFactor);
-  }
-  catch(const std::invalid_argument& e)
-  {
-    std::cerr << e.what() << "\n";
-    cherkasov::deleteShapes(shapes, shapeCount);
-    return 1;
-  }
+  cherkasov::getScaling(shapes, shapeCount, p, scalingFactor);
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
   if (invalidInput)
