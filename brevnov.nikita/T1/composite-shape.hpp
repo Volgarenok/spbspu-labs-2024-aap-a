@@ -28,7 +28,7 @@ namespace brevnov
     rectangle_t getFrameRect() const noexcept;
     void move(point_t a) noexcept;
     void move(double dx, double dy) noexcept;
-    void scale(double k,  point_t scale);
+    void scale(double k, point_t scale);
     void scale(double k);
   private:
     Shape ** shapes_;
