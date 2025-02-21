@@ -12,25 +12,42 @@
 
 namespace asafov
 {
-  asafov::point_t getPoint(std::istream& in);
-  void isotropicScale(asafov::Shape* sh, asafov::point_t pos, double scale);
-  void outputFrameRect(asafov::Shape* shape, std::ostream& out);
+  asafov::point_t asafov::getPoint(std::istream& in)
+  {
+    point_t point;
+    in >> point.x;
+    in >> point.y;
+    return point;
+  }
+
+  void asafov::isotropicScale(asafov::Shape* sh, asafov::point_t pos, double scale)
+  {
+    point_t centr = sh->getFrameRect().pos;
+    sh->move(pos);
+    double vectorx = scale * centr.x - scale * sh->getFrameRect().pos.x;
+    double vectory = scale * centr.y - scale * sh->getFrameRect().pos.y;
+    sh->scale(scale);
+    sh->move(vectorx, vectory);
+  }
+
+  void asafov::outputFrameRect(asafov::Shape* shape, std::ostream& out)
+  {
+    rectangle_t rect = shape->getFrameRect();
+    out << rect.pos.x - rect.width / 2;
+    out << ' ' << rect.pos.y - rect.height / 2;
+    out << ' ' << rect.pos.x + rect.width / 2;
+    out << ' ' << rect.pos.y + rect.height / 2;
+  }
 }
 
-asafov::point_t asafov::getPoint(std::istream& in)
-{
-  point_t point;
-  in >> point.x;
-  in >> point.y;
-  return point;
-}
+
 
 asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
 {
   if (shapename == "RECTANGLE")
   {
-    point_t lb = ::getPoint(in);
-    point_t rt = ::getPoint(in);
+    point_t lb = getPoint(in);
+    point_t rt = getPoint(in);
     if (lb.x > rt.x || lb.y > rt.y)
     {
       throw std::logic_error("incorrect figure");
@@ -40,7 +57,7 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
   }
   else if (shapename == "CIRCLE")
   {
-    point_t a = ::getPoint(in);
+    point_t a = getPoint(in);
     double r1 = 0;
     in >> r1;
     if (r1 <= 0.0)
@@ -52,7 +69,7 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
   }
   else if (shapename == "RING")
   {
-    point_t a = ::getPoint(in);
+    point_t a = getPoint(in);
     double r1 = 0;
     in >> r1;
     double r2 = 0;
@@ -66,7 +83,7 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
   }
   else if (shapename == "ELLIPSE")
   {
-    point_t a = ::getPoint(in);
+    point_t a = getPoint(in);
     double r1 = 0;
     in >> r1;
     double r2 = 0;
@@ -80,7 +97,7 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
   }
   else if (shapename == "SQUARE")
   {
-    point_t lb = ::getPoint(in);
+    point_t lb = getPoint(in);
     double side = 0;
     in >> side;
     if (side <= 0.0)
@@ -92,9 +109,9 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
   }
   else if (shapename == "TRIANGLE")
   {
-    point_t a = ::getPoint(in);
-    point_t b = ::getPoint(in);
-    point_t c = ::getPoint(in);
+    point_t a = getPoint(in);
+    point_t b = getPoint(in);
+    point_t c = getPoint(in);
     double sidea = std::pow(std::pow((a.x - b.x), 2.0) + std::pow((a.y - b.y), 2.0), 0.5);
     double sideb = std::pow(std::pow((b.x - c.x), 2.0) + std::pow((b.y - c.y), 2.0), 0.5);
     double sidec = std::pow(std::pow((a.x - c.x), 2.0) + std::pow((a.y - c.y), 2.0), 0.5);
@@ -108,10 +125,10 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
   }
   else if (shapename == "COMPLEXQUAD")
   {
-    point_t a = ::getPoint(in);
-    point_t b = ::getPoint(in);
-    point_t c = ::getPoint(in);
-    point_t d = ::getPoint(in);
+    point_t a = getPoint(in);
+    point_t b = getPoint(in);
+    point_t c = getPoint(in);
+    point_t d = getPoint(in);
     double temp = (a.x - b.x + a.y - b.y) * (a.x - c.x + a.y - c.y) * (a.x - d.x + a.y - d.y);
     if (temp * (b.x - c.x + b.y - c.y) * (b.x - d.x + b.y - d.y) * (c.x - d.x + c.y - d.y) == 0)
     {
@@ -152,8 +169,8 @@ void asafov::scaleShapes(Shape** shapes, size_t count, point_t pos, double scale
   out << area << ' ';
   for (size_t i = 0; i < count; i++)
   {
-    ::outputFrameRect(shapes[i], out);
-    ::isotropicScale(shapes[i], pos, scale);
+    outputFrameRect(shapes[i], out);
+    isotropicScale(shapes[i], pos, scale);
   }
   area = 0.0;
   for (size_t i = 0; i < count; i++)
@@ -163,7 +180,7 @@ void asafov::scaleShapes(Shape** shapes, size_t count, point_t pos, double scale
   out << '\n' << area << ' ';
   for (size_t i = 0; i < count; i++)
   {
-    ::outputFrameRect(shapes[i], out);
+    outputFrameRect(shapes[i], out);
   }
 }
 
@@ -174,23 +191,4 @@ void asafov::deleteShapes(Shape** shapes, size_t count)
     delete shapes[i];
   }
   delete[] shapes;
-}
-
-void asafov::isotropicScale(asafov::Shape* sh, asafov::point_t pos, double scale)
-{
-  point_t centr = sh->getFrameRect().pos;
-  sh->move(pos);
-  double vectorx = scale * centr.x - scale * sh->getFrameRect().pos.x;
-  double vectory = scale * centr.y - scale * sh->getFrameRect().pos.y;
-  sh->scale(scale);
-  sh->move(vectorx, vectory);
-}
-
-void asafov::outputFrameRect(asafov::Shape* shape, std::ostream& out)
-{
-  rectangle_t rect = shape->getFrameRect();
-  out << rect.pos.x - rect.width / 2;
-  out << ' ' << rect.pos.y - rect.height / 2;
-  out << ' ' << rect.pos.x + rect.width / 2;
-  out << ' ' << rect.pos.y + rect.height / 2;
 }
