@@ -3,6 +3,7 @@
 #include <iostream>
 #include "base-types.hpp"
 #include "circle.hpp"
+#include "regular.hpp"
 #include "shape.hpp"
 namespace evstyunichev
 {
@@ -17,9 +18,8 @@ namespace evstyunichev
       void scale(double) override;
 
     private:
-      point_t mid_;
-      double R_;
-      double r_;
+      Regular interior_;
+      Regular external_;
   };
 }
 #endif

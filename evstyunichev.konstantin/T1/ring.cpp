@@ -3,48 +3,48 @@
 #include <iostream>
 #include "base-types.hpp"
 
-evstyunichev::Ring::Ring(point_t mid, double R, double r)
+evstyunichev::Ring::Ring(point_t mid, double R, double r):
+  interior_(mid, r, 48UL),
+  external_(mid, R, 48UL)
 {
-  if ((r > R) || (r <= 0))
+  if (R <= r)
   {
-    throw std::invalid_argument("invalid");
+    throw std::invalid_argument("R is not biiger than r");
   }
-  mid_ = mid;
-  R_ = R;
-  r_ = r;
 }
 
 double evstyunichev::Ring::getArea() const
 {
-  double s = M_PI * R_ * R_ - M_PI * r_ * r_;
+  double s = interior_.getArea() + external_.getArea();
   return s;
 }
 
 evstyunichev::rectangle_t evstyunichev::Ring::getFrameRect() const
 {
   rectangle_t ans{};
-  ans.pos = mid_;
-  ans.height = 2 * R_;
-  ans.width = 2 * R_;
+  ans.pos = interior_.getMid();
+  ans.height = 2 * external_.getBig();
+  ans.width = 2 * external_.getBig();
   return ans;
 }
 
 void evstyunichev::Ring::move(double dx, double dy)
 {
-  mid_.x += dx;
-  mid_.y += dy;
+  interior_.move(dx, dy);
+  external_.move(dx, dy);
   return;
 }
 
 void evstyunichev::Ring::move(point_t target)
 {
-  move(target.x - mid_.x, target.y - mid_.y);
+  interior_.move(target);
+  external_.move(target);
   return;
 }
 
 void evstyunichev::Ring::scale(double k)
 {
-  r_ *= k;
-  R_ *= k;
+  interior_.scale(k);
+  external_.scale(k);
   return;
 }
