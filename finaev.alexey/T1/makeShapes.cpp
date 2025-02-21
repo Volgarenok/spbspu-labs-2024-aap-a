@@ -43,7 +43,7 @@ finaev::Concave* finaev::makeConcave(std::istream& in)
 {
   const size_t size = 4;
   point_t arr[size] = {};
-  point_t l = arr[0];
+  addArrPoints(in, arr, size);
   point_t first = arr[0];
   point_t second = arr[1];
   point_t third = arr[2];
