@@ -68,7 +68,7 @@ void dribas::CompositeShape::push_back(Shape * shp)
 {
   if (size_ + 1 > 9999) {
     std::logic_error("MEMORY IS FULL");
-  } else { 
+  } else {
     shapes_[++size_] = shp;
   }
 }
