@@ -12,7 +12,7 @@
 
 namespace asafov
 {
-  asafov::point_t asafov::getPoint(std::istream& in)
+  point_t getPoint(std::istream& in)
   {
     point_t point;
     in >> point.x;
@@ -20,7 +20,7 @@ namespace asafov
     return point;
   }
 
-  void asafov::isotropicScale(asafov::Shape* sh, asafov::point_t pos, double scale)
+  void isotropicScale(Shape* sh, point_t pos, double scale)
   {
     point_t centr = sh->getFrameRect().pos;
     sh->move(pos);
@@ -30,7 +30,7 @@ namespace asafov
     sh->move(vectorx, vectory);
   }
 
-  void asafov::outputFrameRect(asafov::Shape* shape, std::ostream& out)
+  void outputFrameRect(Shape* shape, std::ostream& out)
   {
     rectangle_t rect = shape->getFrameRect();
     out << rect.pos.x - rect.width / 2;
