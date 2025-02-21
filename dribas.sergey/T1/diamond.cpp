@@ -12,7 +12,7 @@ dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
 
 double dribas::Diamond::getArea() const
 {
-  return a_.getArea() * 4.0f ;
+  return a_.getArea() * 4.0f;
 }
 
 dribas::rectangle_t dribas::Diamond::getFrameRect() const

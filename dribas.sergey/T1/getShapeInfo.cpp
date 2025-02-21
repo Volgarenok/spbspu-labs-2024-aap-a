@@ -16,6 +16,7 @@ double dribas::getAllArea(const Shape* const* Shapes, const size_t shapeCount)
   }
   return allArea;
 }
+
 void dribas::scaleOne(Shape& t, double ratio, point_t Point)
 {
   dribas::point_t cneter = t.getFrameRect().pos;
@@ -26,6 +27,7 @@ void dribas::scaleOne(Shape& t, double ratio, point_t Point)
   t.scale(ratio);
   t.move(diffenceX, diffenceY);
 }
+
 void dribas::scalingAll(Shape** shapes, size_t shapeCount, point_t center, double ratio)
 {
   for (size_t i = 0; i < shapeCount; i++) {
@@ -38,6 +40,7 @@ void dribas::scalingAll(Shape** shapes, size_t shapeCount, point_t center, doubl
     shapes[i]->move(diffenceX, diffenceY);
   }
 }
+
 bool getPoint(std::istream& in, size_t pointCount, dribas::point_t * points) {
   size_t i = 0;
   for (; i < pointCount && in; i++) {
@@ -88,8 +91,7 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** Shape
       if (InputStr == "SCALE") {
         scaled = true;
         if (shapesCount == 0) {
-          error << "No shapes for scale\n";
-          return -1;
+          throw std::logic_error("No shapes for scale");
         }
         input >> scalingFactor[0];
         input >> scalingFactor[1];
@@ -99,21 +101,19 @@ int dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** Shape
         }
       }
     }
-  } catch (const std::bad_alloc& e) {
-    error << e.what() << '\n';
+  } catch (const std::exception& e) {
     clear(Shapes, shapesCount);
-    return -1;
-  } catch (const std::logic_error& e) {
-    error << e.what() << '\n';
-    clear(Shapes, shapesCount);
-    return -1;
+    throw e;
+    return 0;
   }
   if (!scaled) {
     clear(Shapes, shapesCount);
-    return -1;
+    throw std::invalid_argument("No Arguments for scale");
+    return 0;
   }
   return shapesCount;
 }
+
 void dribas::clear(Shape ** shape, size_t shapeCount) {
   for (size_t i = 0; i < shapeCount; i++) {
     delete shape[i];
