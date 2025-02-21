@@ -40,7 +40,6 @@ void dirti::findTwoMin(const char * str, char * str_min2)
   size_t sym = 1;
   countSym(str, symbols, sym_num, sym);
   size_t min = 0;
-  char sym_out = 'a';
   for (size_t i = 0; i < sym; ++i)
   {
     if (sym_num[i] <= sym_num[min])
