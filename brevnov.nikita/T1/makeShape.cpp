@@ -50,7 +50,7 @@ brevnov::point_t brevnov::scale(std::istream & in)
   return {x, y};
 }
 
-brevnov::Shape * brevnov::make_shape(std::string& name_shape, std::istream & in)
+brevnov::Shape * brevnov::make_shape(const std::string& name_shape, std::istream & in)
 {
   if (name_shape == "RECTANGLE")
   {
