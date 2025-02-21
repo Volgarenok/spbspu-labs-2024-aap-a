@@ -2,9 +2,11 @@
 #include <iostream>
 #include "base-types.hpp"
 
+constexpr double pi_v = 3.141592653589793238462643;
+
 evstyunichev::Ring::Ring(point_t middle, double R, double r):
-  interior_(middle, r, 148UL),
-  external_(middle, R, 148UL)
+  interior_(middle, r, 48UL),
+  external_(middle, R, 49UL)
 {
   if (R <= r)
   {
@@ -14,7 +16,8 @@ evstyunichev::Ring::Ring(point_t middle, double R, double r):
 
 double evstyunichev::Ring::getArea() const
 {
-  double s = external_.getArea() - interior_.getArea();
+  double R = external_.get_R(), r = interior_.get_R();
+  double s = R * R * pi_v - r * r * pi_v;
   return s;
 }
 
