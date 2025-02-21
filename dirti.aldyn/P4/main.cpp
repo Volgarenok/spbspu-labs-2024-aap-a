@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cstddef>
 #include <inputStr.hpp>
 #include "findMin.hpp"
 #include "findTwoMin.hpp"
@@ -18,7 +17,7 @@ int main()
   std::cout << str_min << "\n";
   char str_min2[2] = {'0', '0'};
   dirti::findTwoMin(str, str_min2);
-  if (str_min2[1] == '\0')
+  if (str_min2[1] == str_min[0])
   {
     std::cout << "There is only one symbol" << "\n";
   }
