@@ -1,11 +1,10 @@
 #include "countFinalResults.hpp"
 #include <iostream>
-#include <iomanip>
 
 double finaev::getSumArea(const Shape* const* shapes, size_t size)
 {
   double res = 0.0;
-  for (size_t i = 0; i < size; i++)
+  for (size_t i = 0; i < size; ++i)
   {
     res += shapes[i]->getArea();
   }

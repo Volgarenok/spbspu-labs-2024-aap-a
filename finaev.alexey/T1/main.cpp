@@ -40,7 +40,8 @@ int main()
     }
     try
     {
-      shapes[size++] = makeShapes(std::cin, str);
+      shapes[size] = makeShapes(std::cin, str);
+      ++size;
     }
     catch (const std::invalid_argument&)
     {
