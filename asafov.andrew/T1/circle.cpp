@@ -1,5 +1,6 @@
 #include "circle.hpp"
 #include <cmath>
+#include <exceptions>
 #include "supportFunctions.hpp"
 
 #define pi std::atan(1.0) * 4
@@ -39,7 +40,7 @@ void asafov::Circle::scale(double scale)
 {
   if (scale <= 0)
   {
-    throw std::logic_error("incorect scale");
+    throw std::logic_error("incorrect figure");
   }
   rectangle_t rect = getFrameRect();
   scalePoint(center_, rect.pos, scale);
