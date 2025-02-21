@@ -37,6 +37,7 @@ namespace brevnov
     size_t current_size_;
     void clear() noexcept;
   };
+  void print_frame_coordinates(const CompositeShape& CoSh, std::ostream & out);
   void clearShape(Shape ** shapes, size_t i);
 }
 #endif
