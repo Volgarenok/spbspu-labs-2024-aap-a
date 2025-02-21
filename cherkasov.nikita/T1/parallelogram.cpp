@@ -15,6 +15,10 @@ namespace cherkasov
       {
         throw std::invalid_argument("no correct coordinat the parallelogram");
       }
+      if (!(y1 == y2 || y1 == y3 || y2 == y3))
+      {
+        throw std::invalid_argument("sides of the parallelogram must parallel the x");
+      }
     }
   double Parallelogram::getArea() const
   {
