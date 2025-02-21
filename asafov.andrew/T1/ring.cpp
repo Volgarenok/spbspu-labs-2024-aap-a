@@ -1,9 +1,8 @@
 #include "ring.hpp"
-#define _USE_MATH_DEFINES
 #include <cmath>
+#include "supportFunctions.hpp"
 
-using asafov::point_t;
-using asafov::rectangle_t;
+#define pi std::atan(1.0) * 4
 
 asafov::Ring::Ring(point_t center, double innerradius, double outerradius):
   center_(center),
@@ -13,22 +12,24 @@ asafov::Ring::Ring(point_t center, double innerradius, double outerradius):
 
 double asafov::Ring::getArea() const
 {
-  return M_PI * (outerradius_ * outerradius_ - innerradius_ * innerradius_);
+  return pi * (outerradius_ * outerradius_ - innerradius_ * innerradius_);
 }
 
-rectangle_t asafov::Ring::getFrameRect() const
+asafov::rectangle_t asafov::Ring::getFrameRect() const
 {
+  double height = outerradius_ * 2.0;
+  double width = outerradius_ * 2.0;
   rectangle_t rect;
-  rect.height = outerradius_ * 2.0;
-  rect.width = outerradius_ * 2.0;
+  rect.height = height;
+  rect.width = width;
   rect.pos = center_;
   return rect;
 }
 
-void asafov::Ring::move(double x, double y)
+void asafov::Ring::move(double dx, double dy)
 {
-  center_.x += x;
-  center_.y += y;
+  center_.x += dx;
+  center_.y += dy;
 }
 
 void asafov::Ring::move(point_t pos)
@@ -39,8 +40,7 @@ void asafov::Ring::move(point_t pos)
 void asafov::Ring::scale(double scale)
 {
   rectangle_t rect = getFrameRect();
-  center_.x += (center_.x - rect.pos.x) * (scale - 1);
-  center_.y += (center_.y - rect.pos.y) * (scale - 1);
+  scalePoint(center_, rect.pos, scale);
   innerradius_ *= scale;
   outerradius_ *= scale;
 }

@@ -3,14 +3,14 @@
 #include "shape.hpp"
 namespace asafov
 {
-  class Circle final : public Shape
+  class Circle final: public Shape
   {
   public:
     Circle(point_t center, double radius);
     double getArea() const;
     rectangle_t getFrameRect() const;
     void move(point_t pos);
-    void move(double x, double y);
+    void move(double dx, double dy);
     void scale(double scale);
   private:
     point_t center_;

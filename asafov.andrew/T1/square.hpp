@@ -3,7 +3,7 @@
 #include "shape.hpp"
 namespace asafov
 {
-  class Square final : public Shape
+  class Square final: public Shape
   {
   public:
     Square(point_t lb, double side);

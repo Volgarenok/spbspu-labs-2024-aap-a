@@ -51,6 +51,7 @@ int main()
   try
   {
     scaleShapes(shapes, count, pos, scale, std::cout);
+    std::cout << '\n';
   }
   catch (const std::logic_error &)
   {

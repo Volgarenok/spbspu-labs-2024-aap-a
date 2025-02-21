@@ -1,9 +1,8 @@
 #include "ellipse.hpp"
-#define _USE_MATH_DEFINES
 #include <cmath>
+#include "supportFunctions.hpp"
 
-using asafov::point_t;
-using asafov::rectangle_t;
+#define pi std::atan(1.0) * 4
 
 asafov::Ellipse::Ellipse(point_t center, double verticalradius, double horizontalradius):
   center_(center),
@@ -13,14 +12,16 @@ asafov::Ellipse::Ellipse(point_t center, double verticalradius, double horizonta
 
 double asafov::Ellipse::getArea() const
 {
-  return M_PI * verticalradius_ * horizontalradius_;
+  return pi * verticalradius_ * horizontalradius_;
 }
 
-rectangle_t asafov::Ellipse::getFrameRect() const
+asafov::rectangle_t asafov::Ellipse::getFrameRect() const
 {
+  double height = verticalradius_ * 2.0;
+  double width = horizontalradius_ * 2.0;
   rectangle_t frect;
-  frect.height = verticalradius_ * 2.0;
-  frect.width = horizontalradius_ * 2.0;
+  frect.height = height;
+  frect.width = width;
   frect.pos = center_;
   return frect;
 }
@@ -39,8 +40,7 @@ void asafov::Ellipse::move(point_t pos)
 void asafov::Ellipse::scale(double scale)
 {
   rectangle_t rect = getFrameRect();
-  center_.x += (center_.x - rect.pos.x) * (scale - 1);
-  center_.y += (center_.y - rect.pos.y) * (scale - 1);
+  scalePoint(center_, rect.pos, scale);
   verticalradius_ *= scale;
   horizontalradius_ *= scale;
 }

@@ -1,9 +1,8 @@
 #include "circle.hpp"
-#define _USE_MATH_DEFINES
 #include <cmath>
+#include "supportFunctions.hpp"
 
-using asafov::point_t;
-using asafov::rectangle_t;
+#define pi std::atan(1.0) * 4
 
 asafov::Circle::Circle(point_t center, double radius):
   center_(center),
@@ -12,15 +11,16 @@ asafov::Circle::Circle(point_t center, double radius):
 
 double asafov::Circle::getArea() const
 {
-  return radius_ * radius_ * M_PI;
+  return radius_ * radius_ * pi;
 }
 
-rectangle_t asafov::Circle::getFrameRect() const
+asafov::rectangle_t asafov::Circle::getFrameRect() const
 {
+  double height = 2.0 * radius_;
   rectangle_t frect;
   frect.pos = center_;
-  frect.height = 2.0 * radius_;
-  frect.width = 2.0 * radius_;
+  frect.height = height;
+  frect.width = height;
   return frect;
 }
 
@@ -38,7 +38,6 @@ void asafov::Circle::move(point_t pos)
 void asafov::Circle::scale(double scale)
 {
   rectangle_t rect = getFrameRect();
-  center_.x += (center_.x - rect.pos.x) * (scale - 1);
-  center_.y += (center_.y - rect.pos.y) * (scale - 1);
+  scalePoint(center_, rect.pos, scale);
   radius_ *= scale;
 }
