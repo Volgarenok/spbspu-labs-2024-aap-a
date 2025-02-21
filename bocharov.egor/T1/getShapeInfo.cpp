@@ -113,16 +113,17 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
       handleError(e);
     }
   }
+  if(!scaled)
+  {
+    throw std::logic_error("Not entered Scale");
+  }
   try
   {
     outputRes(output, shapes, shapesCount);
     output << '\n';
-    if(scaled)
-    {
-      scaling(shapes, shapesCount, scale, ratio);
-      outputRes(output, shapes, shapesCount);
-      output << '\n';
-    }
+    scaling(shapes, shapesCount, scale, ratio);
+    outputRes(output, shapes, shapesCount);
+    output << '\n';
   }
   catch (const std::invalid_argument & e)
   {
