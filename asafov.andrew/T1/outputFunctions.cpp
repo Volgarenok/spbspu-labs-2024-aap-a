@@ -17,10 +17,6 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
   {
     point_t lb = getPoint(in);
     point_t rt = getPoint(in);
-    if (lb.x > rt.x || lb.y > rt.y)
-    {
-      throw std::logic_error("incorrect figure");
-    }
     Rectangle* rectangle = new Rectangle(lb, rt);
     return rectangle;
   }
@@ -29,10 +25,6 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
     point_t a = getPoint(in);
     double r1 = 0;
     in >> r1;
-    if (r1 <= 0.0)
-    {
-      throw std::logic_error("incorrect figure");
-    }
     Circle* circ = new Circle(a, r1);
     return circ;
   }
@@ -43,10 +35,6 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
     in >> r1;
     double r2 = 0;
     in >> r2;
-    if (r1 <= 0.0 || r2 <= 0.0 || r1 >= r2)
-    {
-      throw std::logic_error("incorrect figure");
-    }
     Ring* ring = new Ring(a, r1, r2);
     return ring;
   }
@@ -57,10 +45,6 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
     in >> r1;
     double r2 = 0;
     in >> r2;
-    if (r1 <= 0.0 || r2 <= 0.0)
-    {
-      throw std::logic_error("incorrect figure");
-    }
     Ellipse* ellipse = new Ellipse(a, r1, r2);
     return ellipse;
   }
@@ -69,10 +53,6 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
     point_t lb = getPoint(in);
     double side = 0;
     in >> side;
-    if (side <= 0.0)
-    {
-      throw std::logic_error("incorrect figure");
-    }
     Square* square = new Square(lb, side);
     return square;
   }
@@ -81,14 +61,6 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
     point_t a = getPoint(in);
     point_t b = getPoint(in);
     point_t c = getPoint(in);
-    double sidea = std::pow(std::pow((a.x - b.x), 2.0) + std::pow((a.y - b.y), 2.0), 0.5);
-    double sideb = std::pow(std::pow((b.x - c.x), 2.0) + std::pow((b.y - c.y), 2.0), 0.5);
-    double sidec = std::pow(std::pow((a.x - c.x), 2.0) + std::pow((a.y - c.y), 2.0), 0.5);
-    double temp = (a.x - b.x + a.y - b.y) * (a.x - c.x + a.y - c.y) * (b.x - c.x + b.y - c.y);
-    if (temp == 0 || sidea + sideb <= sidec || sidea + sidec <= sideb || sideb + sidec <= sidea)
-    {
-      throw std::logic_error("incorrect figure");
-    }
     Triangle* triangle = new Triangle(a, b, c);
     return triangle;
   }
@@ -98,11 +70,6 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
     point_t b = getPoint(in);
     point_t c = getPoint(in);
     point_t d = getPoint(in);
-    double temp = (a.x - b.x + a.y - b.y) * (a.x - c.x + a.y - c.y) * (a.x - d.x + a.y - d.y);
-    if (temp * (b.x - c.x + b.y - c.y) * (b.x - d.x + b.y - d.y) * (c.x - d.x + c.y - d.y) == 0)
-    {
-      throw std::logic_error("incorrect figure");
-    }
     Complexquad* complexquad = new Complexquad(a, b, c, d);
     return complexquad;
   }
