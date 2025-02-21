@@ -30,13 +30,13 @@ namespace brevnov
     void move(double dx, double dy) noexcept;
     void scale(double k, point_t scale);
     void scale(double k);
+    friend void print_frame_coordinates(const CompositeShape& CoSh, std::ostream & out);
   private:
     Shape ** shapes_;
     size_t capacity_;
     size_t current_size_;
     void clear() noexcept;
   };
-  void print_frame_coordinates(const CompositeShape& CoSh, std::ostream & out);
   void clearShape(Shape ** shapes, size_t i);
 }
 #endif
