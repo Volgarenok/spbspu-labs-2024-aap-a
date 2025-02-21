@@ -6,8 +6,8 @@
 int main()
 {
   constexpr size_t step = 1;
-  char * line = zakirov::get_line(std::cin, step);
-  if (line == nullptr)
+  char * line = zakirov::get_to_symbol(std::cin, step, '\n');
+  if (!line)
   {
     std::cerr << "ERROR: Out of memory" << '\n';
     return 1;
