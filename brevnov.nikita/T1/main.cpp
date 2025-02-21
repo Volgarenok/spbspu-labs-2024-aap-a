@@ -8,10 +8,9 @@
 #include "composite-shape.hpp"
 #include "makeShape.hpp"
 
-using namespace brevnov;
-
 int main()
 {
+  using namespace brevnov;
   std::cout << std::fixed << std::setprecision(1);
   size_t start_count_shape = 0;
   CompositeShape comp_sh(start_count_shape);
