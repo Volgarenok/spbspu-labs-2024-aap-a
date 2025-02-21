@@ -3,7 +3,7 @@
 
 namespace
 {
-  size_t addArrPoints(std::istream& in, finaev::point_t* arr, size_t size)
+  void addArrPoints(std::istream& in, finaev::point_t* arr, size_t size)
   {
     for (size_t i = 0; i < size; ++i)
     {
@@ -11,28 +11,18 @@ namespace
       double b = 0.0;
       in >> a;
       in >> b;
-      if (!std::cin.good())
-      {
-        return i;
-      }
       arr[i] = {a, b};
     }
-    return size;
   }
 }
 
 finaev::Rectangle* finaev::makeRectangle(std::istream& in)
 {
   const size_t size = 2;
-  point_t* arr = new point_t[size];
-  if (addArrPoints(in, arr, size) != size)
-  {
-    delete[] arr;
-    throw std::length_error("Incomplete input");
-  }
+  point_t arr[size] = {};
+  addArrPoints(in, arr, size);
   point_t l = arr[0];
   point_t r = arr[1];
-  delete[] arr;
   Rectangle* rect = new Rectangle(l, r);
   return rect;
 }
@@ -40,16 +30,11 @@ finaev::Rectangle* finaev::makeRectangle(std::istream& in)
 finaev::Square* finaev::makeSquare(std::istream& in)
 {
   const size_t size = 1;
-  point_t* arr = new point_t[size];
-  if (addArrPoints(in, arr, size) != size)
-  {
-    delete[] arr;
-    throw std::length_error("Incomplete input");
-  }
+  point_t arr[size] = {};
+  addArrPoints(in, arr, size);
+  point_t l = arr[0];
   double side = 0;
   in >> side;
-  point_t l = arr[0];
-  delete[] arr;
   Square* square = new Square(l, side);
   return square;
 }
@@ -57,17 +42,12 @@ finaev::Square* finaev::makeSquare(std::istream& in)
 finaev::Concave* finaev::makeConcave(std::istream& in)
 {
   const size_t size = 4;
-  point_t* arr = new point_t[size];
-  if (addArrPoints(in, arr, size) != size)
-  {
-    delete[] arr;
-    throw std::length_error("Incomplete input");
-  }
+  point_t arr[size] = {};
+  point_t l = arr[0];
   point_t first = arr[0];
   point_t second = arr[1];
   point_t third = arr[2];
   point_t internal = arr[3];
-  delete[] arr;
   Concave* concave = new Concave(first, second, third, internal);
   return concave;
 }

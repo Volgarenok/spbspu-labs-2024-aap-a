@@ -46,12 +46,6 @@ int main()
     {
       isCorrect = true;
     }
-    catch (const std::length_error& e)
-    {
-      deleteShapes(shapes, size);
-      std::cerr << e.what();
-      return 1;
-    }
     catch (const std::bad_alloc&)
     {
       deleteShapes(shapes, size);
@@ -97,5 +91,3 @@ int main()
   deleteShapes(shapes, size);
   return 0;
 }
-
-
