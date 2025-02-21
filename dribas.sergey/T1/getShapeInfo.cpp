@@ -49,10 +49,10 @@ bool getPoint(std::istream& in, size_t pointCount, dribas::point_t * points) {
   return i == pointCount;
 }
 
-size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** Shapes, double* scalingFactor)
+int dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** Shapes, double* scalingFactor)
 {
   std::string InputStr;
-  size_t shapesCount = 0;
+  int shapesCount = 0;
   bool scaled = false;
   try {
     while (input >> InputStr) {
@@ -88,8 +88,8 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** Sh
       if (InputStr == "SCALE") {
         scaled = true;
         if (shapesCount == 0) {
-          throw("No shapes for scale");
-          return shapesCount;
+          error << "No shapes for scale\n";
+          return -1;
         }
         input >> scalingFactor[0];
         input >> scalingFactor[1];
@@ -99,21 +99,23 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** Sh
         }
       }
     }
-  } catch (const std::exception& e) {
+  } catch (const std::bad_alloc& e) {
     error << e.what() << '\n';
     clear(Shapes, shapesCount);
-    throw(e.what());
-    return 0;
+    return -1;
+  } catch (const std::logic_error& e) {
+    error << e.what() << '\n';
+    clear(Shapes, shapesCount);
+    return -1;
   }
   if (!scaled) {
     clear(Shapes, shapesCount);
-    throw("No shapes for scale");
-    return 0;
+    return -1;
   }
   return shapesCount;
 }
-void dribas::clear(Shape ** myshape, size_t shapeCount) {
+void dribas::clear(Shape ** shape, size_t shapeCount) {
   for (size_t i = 0; i < shapeCount; i++) {
-    delete myshape[i];
+    delete shape[i];
   }
 }
