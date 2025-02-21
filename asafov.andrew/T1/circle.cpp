@@ -37,6 +37,10 @@ void asafov::Circle::move(point_t pos)
 
 void asafov::Circle::scale(double scale)
 {
+  if (scale <= 0)
+  {
+    throw std::logic_error("incorect scale");
+  }
   rectangle_t rect = getFrameRect();
   scalePoint(center_, rect.pos, scale);
   radius_ *= scale;

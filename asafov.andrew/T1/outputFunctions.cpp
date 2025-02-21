@@ -116,7 +116,7 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
     double sideb = std::pow(std::pow((b.x - c.x), 2.0) + std::pow((b.y - c.y), 2.0), 0.5);
     double sidec = std::pow(std::pow((a.x - c.x), 2.0) + std::pow((a.y - c.y), 2.0), 0.5);
     double temp = (a.x - b.x + a.y - b.y) * (a.x - c.x + a.y - c.y) * (b.x - c.x + b.y - c.y);
-    if (temp == 0 || sidea + sideb < sidec || sidea + sidec < sideb || sideb + sidec < sidea)
+    if (temp == 0 || sidea + sideb <= sidec || sidea + sidec <= sideb || sideb + sidec <= sidea)
     {
       throw std::logic_error("incorrect figure");
     }
