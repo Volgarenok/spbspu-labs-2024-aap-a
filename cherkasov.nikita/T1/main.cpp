@@ -17,7 +17,6 @@ int main()
   {
     if (inputCommand == "SCALE")
     {
-      scalingRequested = true;
       std::cin >> p.x >> p.y >> scalingFactor;
       if (scalingFactor <= 0)
       {
@@ -25,7 +24,7 @@ int main()
         std::cerr << "Error: scale must be positive.\n";
         return 1;
       }
-      break;
+      scalingRequested = true;
     }
     else if (std::cin.eof())
     {
@@ -57,10 +56,6 @@ int main()
         cherkasov::deleteShapes(shapes, shapeCount);
         return 1;
       }
-      if (invalidInput)
-      {
-        std::cerr << "Invalid input encountered" << "\n";
-      }
     }
   }
   if (shapeCount == 0)
@@ -73,6 +68,10 @@ int main()
     cherkasov::deleteShapes(shapes, shapeCount);
     std::cerr << "scaling was not specified\n";
     return 1;
+  }
+  if (invalidInput)
+  {
+    std::cerr << "Invalid input encountered" << "\n";
   }
   std::cout << std::fixed << std::setprecision(1);
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
