@@ -109,8 +109,8 @@ void evstyunichev::CompositeShape::popBack()
   {
     throw std::out_of_range("No shapes");
   }
+  totalSquare_ -= shapes_[--size_]->getArea();
   delete shapes_[size_];
-  size_--;
 }
 
 const evstyunichev::Shape * evstyunichev::CompositeShape::at(size_t id) const
