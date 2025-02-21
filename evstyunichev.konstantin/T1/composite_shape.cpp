@@ -27,6 +27,7 @@ void evstyunichev::CompositeShape::resize(size_t size)
   {
     newCmp.shapes_[i] = shapes_[i]->copy();
   }
+  newCmp.totalSquare_ = totalSquare_;
   swap(newCmp);
 }
 
@@ -99,7 +100,7 @@ void evstyunichev::CompositeShape::pushBack(Shape *shp)
     resize(newMxSize);
   }
   shapes_[size_++] = shp;
-  totalSquare_ += shapes_[size_ - 1]->getArea();
+  totalSquare_ += shp->getArea();
 }
 
 void evstyunichev::CompositeShape::popBack()
