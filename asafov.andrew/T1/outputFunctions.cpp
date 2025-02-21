@@ -178,9 +178,10 @@ void asafov::scaleShapes(Shape** shapes, size_t count, point_t pos, double scale
   {
     area += shapes[i]->getArea();
   }
-  out << '\n' << area << ' ';
+  out << '\n' << area;
   for (size_t i = 0; i < count; i++)
   {
+    out << ' ';
     outputFrameRect(shapes[i], out);
   }
 }
