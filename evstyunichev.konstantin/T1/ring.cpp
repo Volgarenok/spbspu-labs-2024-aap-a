@@ -1,5 +1,4 @@
 #include "ring.hpp"
-#include <cmath>
 #include <iostream>
 #include "base-types.hpp"
 

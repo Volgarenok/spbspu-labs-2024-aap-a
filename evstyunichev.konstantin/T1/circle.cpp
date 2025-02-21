@@ -1,21 +1,17 @@
 #include "circle.hpp"
-#include <cmath>
 #include <iostream>
 #include "regular.hpp"
 
+constexpr double pi_v = 3.141592653589793238462643;
+
 evstyunichev::Circle::Circle(point_t O, double r):
   data_(O, r, 48UL)
-{
-  if (r <= 0)
-  {
-    throw std::invalid_argument("invalid");
-  }
-}
+{}
 
 double evstyunichev::Circle::getArea() const
 {
-  double r = data_.getBig();
-  double s = M_PI * r * r;
+  double r = data_.get_r();
+  double s = pi_v * r * r;
   return s;
 }
 

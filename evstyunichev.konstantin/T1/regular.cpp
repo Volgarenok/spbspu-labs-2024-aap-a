@@ -3,6 +3,8 @@
 #include <iostream>
 #include "base-types.hpp"
 
+constexpr double pi_v = 3.141592653589793238462643;
+
 namespace
 {
   const double prec = 0.0000001;
@@ -30,18 +32,18 @@ namespace
     {
       return 0;
     }
-    return isInt(2.0 * M_PI / alpha) * alpha * 2.0;
+    return isInt(2.0 * pi_v / alpha) * alpha * 2.0;
   }
 }
 
 double evstyunichev::Regular::get_R() const
 {
-  return (a_ / 2.0) / std::cos((M_PI - alpha_) / 2.0);
+  return (a_ / 2.0) / std::cos((pi_v - alpha_) / 2.0);
 }
 
 double evstyunichev::Regular::get_r() const
 {
-  return (a_ / 2.0) * std::tan((M_PI - alpha_) / 2.0);
+  return (a_ / 2.0) * std::tan((pi_v - alpha_) / 2.0);
 }
 
 evstyunichev::Regular::Regular(point_t A, point_t B, point_t C)
@@ -71,13 +73,13 @@ evstyunichev::Regular::Regular(point_t O, double r, size_t n)
   }
   middle_ = O;
   base_ = 0;
-  alpha_ = (2 * M_PI) / n;
+  alpha_ = (2 * pi_v) / n;
   a_ = std::sin(alpha_ / 2.0) * r * 2.0;
 }
 
 double evstyunichev::Regular::getArea() const
 {
-  double ans = get_r() * a_  * M_PI / alpha_;
+  double ans = get_r() * a_  * pi_v / alpha_;
   return ans;
 }
 
@@ -86,7 +88,7 @@ evstyunichev::rectangle_t evstyunichev::Regular::getFrameRect() const
   double right = -1e9, left = 1e9, down = 1e9, up = -1e9, width = 0, height = 0;
   double R = get_R();
   point_t cur{};
-  for (double angle = base_; !isEqual(angle, base_ + 2 * M_PI); angle += alpha_)
+  for (double angle = base_; !isEqual(angle, base_ + 2 * pi_v); angle += alpha_)
   {
     cur.x = middle_.x + R * std::cos(angle);
     cur.y = middle_.y + R * std::sin(angle);

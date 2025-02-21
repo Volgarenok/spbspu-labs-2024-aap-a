@@ -20,7 +20,7 @@ double evstyunichev::Rectangle::getArea() const
 evstyunichev::rectangle_t evstyunichev::Rectangle::getFrameRect() const
 {
   double width = rightUp_.x - leftDown_.x, height = rightUp_.y - leftDown_.y;
-  point_t pos = find_mid();
+  point_t pos = getMiddle();
   rectangle_t frame{width, height, pos};
   return frame;
 }
@@ -35,12 +35,12 @@ void evstyunichev::Rectangle::move(double dx, double dy)
 
 void evstyunichev::Rectangle::move(point_t cds)
 {
-  point_t mid = find_mid();
+  point_t mid = getMiddle();
   move(cds.x - mid.x, cds.y - mid.y);
   return;
 }
 
-evstyunichev::point_t evstyunichev::Rectangle::find_mid() const
+evstyunichev::point_t evstyunichev::Rectangle::getMiddle() const
 {
   point_t mid{};
   mid.x = (rightUp_.x + leftDown_.x) / 2.0;
@@ -50,7 +50,7 @@ evstyunichev::point_t evstyunichev::Rectangle::find_mid() const
 
 void evstyunichev::Rectangle::scale(double k)
 {
-  point_t mid = find_mid();
+  point_t mid = getMiddle();
   double w = (rightUp_.x - leftDown_.x) * k, h = (rightUp_.y - leftDown_.y) * k;
   leftDown_.x = mid.x - w / 2.0;
   rightUp_.x = mid.x + w / 2.0;
