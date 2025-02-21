@@ -2,6 +2,13 @@
 #include <stdlib.h>
 #include <stdexcept>
 #include <cmath>
+namespace
+{
+  double getPoint(double center, double angle, double ratio)
+  {
+  return center + (angle - center) * ratio;
+  }
+}
 
 dribas::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
   leftDown_(leftDown),
@@ -49,11 +56,12 @@ void dribas::Rectangle::scale(double ratio)
   }
   rectangle_t fremRect = getFrameRect();
   point_t pos = fremRect.pos;
-  rightUp_.x = pos.x + (rightUp_.x - pos.x) * ratio;
-  rightUp_.y = pos.y + (rightUp_.y - pos.y) * ratio;
-  leftDown_.x = pos.x + (leftDown_.x - pos.x) * ratio;
-  leftDown_.y = pos.y + (leftDown_.y - pos.y) * ratio;
+  rightUp_.x = getPoint(pos.x, rightUp_.x, ratio);
+  rightUp_.y = getPoint(pos.y, rightUp_.y, ratio);
+  leftDown_.x = getPoint(pos.x, leftDown_.x, ratio);
+  leftDown_.y = getPoint(pos.y, leftDown_.y, ratio);
 }
+
 dribas::Shape* dribas::Rectangle::clone() const
 {
   return new Rectangle(*this);

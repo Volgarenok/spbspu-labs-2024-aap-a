@@ -48,10 +48,12 @@ double dribas::Concave::getArea() const
 {
   return a_.getArea() - b_.getArea();
 }
+
 dribas::rectangle_t dribas::Concave::getFrameRect() const
 {
   return a_.getFrameRect();
 }
+
 void dribas::Concave::move(double x, double y)
 {
   a_.move(x,y);
@@ -72,6 +74,7 @@ void dribas::Concave::scale(double ratio)
   a_.scale(ratio);
   b_.scale(ratio);
 }
+
 dribas::Shape* dribas::Concave::clone() const
 {
   return new Concave(*this);

@@ -8,6 +8,7 @@ namespace dribas
     double x;
     double y;
   };
+
   struct rectangle_t
   {
     double width;

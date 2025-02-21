@@ -17,9 +17,11 @@ int main()
   dribas::Shape * shapes[shapesSize] = {};
   double scalingFactor[3] = {};
   int shapeCount = 0;
-  shapeCount = dribas::getShapeInfo(std::cin, std::cerr, shapes, scalingFactor);
-  if (shapeCount == -1) {
-    return 1;
+  try {
+    shapeCount = dribas::getShapeInfo(std::cin, std::cerr, shapes, scalingFactor);
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << '\n';
+    dribas::clear(shapes, shapeCount);
   }
   dribas::point_t scalePoint = {scalingFactor[0], scalingFactor[1]};
   try {

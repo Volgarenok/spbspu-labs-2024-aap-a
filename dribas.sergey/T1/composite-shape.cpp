@@ -103,10 +103,12 @@ bool dribas::CompositeShape::empty() const noexcept
 {
   return size_ == 0;
 }
+
 size_t dribas::CompositeShape::size() const noexcept
 {
   return size_;
 }
+
 double dribas::CompositeShape::getArea() const noexcept
 {
   double area = 0.0;
@@ -115,6 +117,7 @@ double dribas::CompositeShape::getArea() const noexcept
   }
   return area;
 }
+
 dribas::rectangle_t dribas::CompositeShape::getFrameRect() const
 {
   double minY = minDouble;
@@ -133,17 +136,20 @@ dribas::rectangle_t dribas::CompositeShape::getFrameRect() const
 
   return rectangle_t{std::abs(maxX - minX), std::abs(maxY - minY), center };
 }
+
 void dribas::CompositeShape::move(double x, double y)
 {
   for (size_t i = 0; i < size_; i++) {
     shapes_[i]->move(x, y);
   }
 }
+
 void dribas::CompositeShape::move(point_t point)
 {
   point_t center = getFrameRect().pos;
   move(point.x - center.x, point.y - center.y);
 }
+
 void dribas::CompositeShape::scale(double ratio)
 {
   point_t center = this->getFrameRect().pos;
