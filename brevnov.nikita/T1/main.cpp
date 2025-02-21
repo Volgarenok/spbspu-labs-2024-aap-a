@@ -21,7 +21,7 @@ int main()
   bool scaleCommand = false;
   Shape * new_shape = nullptr;
   std::cin >> input_shape;
-  while ((input_shape != "") && (!scaleCommand))
+  while ((!std::cin.eof()) && (!scaleCommand))
   {
     if (std::cin.eof())
     {
@@ -31,7 +31,6 @@ int main()
     else if (input_shape == "SCALE")
     {
       scaleCommand = true;
-      break;
     }
     else
     {
