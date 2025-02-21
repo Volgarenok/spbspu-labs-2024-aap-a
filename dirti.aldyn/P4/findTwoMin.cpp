@@ -1,4 +1,5 @@
 #include "findTwoMin.hpp"
+#include <cstddef>
 
 namespace
 {
@@ -34,8 +35,8 @@ namespace
 void dirti::findTwoMin(const char * str, char * str_min2)
 {
   str_min2[0] = str[0];
-  char symbols[256] = { '0' };
-  size_t sym_num[256] = { 0 };
+  char symbols[256] = {'0'};
+  size_t sym_num[256] = {0};
   size_t sym = 1;
   countSym(str, symbols, sym_num, sym);
   size_t min = 0;
