@@ -11,9 +11,9 @@
 
 void evstyunichev::frameOutput(rectangle_t a, std::ostream &out)
 {
-  out << std::fixed << std::setprecision(1) << std::round(a.pos.x  - a.width * 0.5) << ' ' <<
-    std::round(a.pos.y - a.height * 0.5) << ' ' << std::round(a.pos.x + a.width * 0.5) << ' ' <<
-    std::round(a.pos.y + a.height * 0.5);
+  out << std::fixed << std::setprecision(1) << (a.pos.x  - a.width * 0.5) << ' ' <<
+    (a.pos.y - a.height * 0.5) << ' ' << (a.pos.x + a.width * 0.5) << ' ' <<
+    (a.pos.y + a.height * 0.5);
   return;
 }
 
