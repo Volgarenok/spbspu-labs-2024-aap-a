@@ -5,14 +5,16 @@
 #include "shape.hpp"
 namespace evstyunichev
 {
-  struct Rectangle final: public Shape
+  class Rectangle final: public Shape
   {
-    Rectangle(point_t, point_t);
-    double getArea() const;
-    rectangle_t getFrameRect() const;
-    void move(double, double) override;
-    void move(point_t) override;
-    void scale(double k) override;
+    public:
+      Rectangle(point_t, point_t);
+      double getArea() const;
+      rectangle_t getFrameRect() const;
+      void move(double, double) override;
+      void move(point_t) override;
+      void scale(double k) override;
+      Shape * copy() const override;
 
     private:
       point_t leftDown_;

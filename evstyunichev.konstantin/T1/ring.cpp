@@ -23,11 +23,9 @@ double evstyunichev::Ring::getArea() const
 
 evstyunichev::rectangle_t evstyunichev::Ring::getFrameRect() const
 {
-  rectangle_t ans{};
-  ans.pos = interior_.getMiddle();
-  ans.height = 2 * external_.get_R();
-  ans.width = 2 * external_.get_R();
-  return ans;
+  point_t pos = interior_.getMiddle();
+  double width = 2 * external_.get_R(), height = 2 * external_.get_R();
+  return rectangle_t{width, height, pos};
 }
 
 void evstyunichev::Ring::move(double dx, double dy)
@@ -49,4 +47,9 @@ void evstyunichev::Ring::scale(double k)
   interior_.scale(k);
   external_.scale(k);
   return;
+}
+
+evstyunichev::Shape * evstyunichev::Ring::copy() const
+{
+  return new Ring(*this);
 }

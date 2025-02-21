@@ -4,6 +4,7 @@
 #include <iostream>
 #include "base-types.hpp"
 #include "circle.hpp"
+#include "composite_shape.hpp"
 #include "rectangle.hpp"
 #include "regular.hpp"
 #include "ring.hpp"
@@ -17,13 +18,13 @@ void evstyunichev::frameOutput(rectangle_t a, std::ostream &out)
   return;
 }
 
-std::ostream & evstyunichev::framesOut(Shape **shapes, size_t size, std::ostream &out)
+std::ostream &evstyunichev::framesOut(CompositeShape &cmp, std::ostream &out)
 {
-  frameOutput(shapes[0]->getFrameRect());
-  for (size_t i = 1; i < size; i++)
+  frameOutput(cmp[0]->getFrameRect());
+  for (size_t i = 1; i < cmp.size(); i++)
   {
     out << ' ';
-    frameOutput(shapes[i]->getFrameRect());
+    frameOutput(cmp[i]->getFrameRect());
   }
   return out;
 }

@@ -3,12 +3,12 @@
 
 #include <iostream>
 #include "base-types.hpp"
+#include "composite_shape.hpp"
 #include "shape.hpp"
 
 namespace evstyunichev
 {
-  void destroy_shapes(Shape **, size_t);
-  void makeScale(Shape **, std::istream &, size_t, double &);
+  void makeScale(CompositeShape &, std::istream &);
 }
 
 #endif

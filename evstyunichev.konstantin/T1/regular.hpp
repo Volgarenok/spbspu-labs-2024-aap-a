@@ -18,6 +18,7 @@ namespace evstyunichev
       double get_r() const;
       double get_R() const;
       point_t getMiddle() const;
+      Shape * copy() const override;
 
     private:
       point_t middle_;

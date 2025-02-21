@@ -4,6 +4,7 @@
 #include "../common/input_string.hpp"
 #include "base-types.hpp"
 #include "circle.hpp"
+#include "composite_shape.hpp"
 #include "make_shape.hpp"
 #include "rectangle.hpp"
 #include "regular.hpp"
@@ -15,11 +16,9 @@
 int main()
 {
   using namespace evstyunichev;
-  Shape *shapes[10000]{};
+  CompositeShape compShp(4);
   std::string s;
-  double totalSquare = 0;
   bool scaleFlag = 0, errorFlag = 0;
-  size_t done = 0;
   while (std::cin >> s)
   {
     try
@@ -28,14 +27,12 @@ int main()
       cur = make_shape(std::cin, s);
       if (cur)
       {
-        shapes[done] = cur;
-        totalSquare += shapes[done]->getArea();
-        done++;
+        compShp.pushBack(cur);
       }
       else if (s == "SCALE")
       {
         scaleFlag = 1;
-        makeScale(shapes, std::cin, done, totalSquare);
+        makeScale(compShp, std::cin);
         if (errorFlag)
         {
           std::cerr << "input errors!\n";
@@ -53,18 +50,15 @@ int main()
     catch (const std::logic_error &e)
     {
       std::cerr << e.what() << "\n";
-      destroy_shapes(shapes, done);
       return 1;
     }
     catch (const std::bad_alloc &e)
     {
       std::cerr << e.what() << '\n';
-      destroy_shapes(shapes, done);
       return 2;
     }
   }
-  destroy_shapes(shapes, done);
-  if (!(done && scaleFlag))
+  if (compShp.empty() && !scaleFlag)
   {
     std::cout << "((\n";
     return 1;

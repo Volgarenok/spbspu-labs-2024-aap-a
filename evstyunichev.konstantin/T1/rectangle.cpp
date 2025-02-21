@@ -58,3 +58,8 @@ void evstyunichev::Rectangle::scale(double k)
   rightUp_.y = mid.y + h / 2.0;
   return;
 }
+
+evstyunichev::Shape * evstyunichev::Rectangle::copy() const
+{
+  return new Rectangle(*this);
+}

@@ -13,6 +13,7 @@ namespace evstyunichev
       virtual void move(point_t) = 0;
       virtual void scale(double) = 0;
       virtual ~Shape() = default;
+      virtual Shape *copy() const = 0;
   };
 }
 #endif

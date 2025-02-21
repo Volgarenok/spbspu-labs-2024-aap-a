@@ -65,13 +65,13 @@ evstyunichev::Regular::Regular(point_t A, point_t B, point_t C)
   base_ = std::acos((C.x - A.x) / c);
 }
 
-evstyunichev::Regular::Regular(point_t O, double r, size_t n)
+evstyunichev::Regular::Regular(point_t middle, double r, size_t n)
 {
   if ((r <= 0) || (n < 3))
   {
     throw std::invalid_argument("invalid arguments");
   }
-  middle_ = O;
+  middle_ = middle;
   base_ = 0;
   alpha_ = (2 * pi_v) / n;
   a_ = std::sin(alpha_ / 2.0) * r * 2.0;
@@ -125,4 +125,9 @@ void evstyunichev::Regular::scale(double k)
 evstyunichev::point_t evstyunichev::Regular::getMiddle() const
 {
   return middle_;
+}
+
+evstyunichev::Shape * evstyunichev::Regular::copy() const
+{
+  return new Regular(*this);
 }

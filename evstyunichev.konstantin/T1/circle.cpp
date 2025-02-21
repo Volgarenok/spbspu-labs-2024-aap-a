@@ -37,3 +37,8 @@ void evstyunichev::Circle::scale(double k)
   data_.scale(k);
   return;
 }
+
+evstyunichev::Shape * evstyunichev::Circle::copy() const
+{
+  return new Circle(*this);
+}
