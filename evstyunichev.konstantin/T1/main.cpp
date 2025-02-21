@@ -58,7 +58,7 @@ int main()
       return 2;
     }
   }
-  if (compShp.empty() && !scaleFlag)
+  if (compShp.empty() || !scaleFlag)
   {
     std::cout << "((\n";
     return 1;

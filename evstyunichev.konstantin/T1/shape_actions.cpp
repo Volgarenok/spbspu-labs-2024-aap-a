@@ -7,6 +7,10 @@
 
 void evstyunichev::makeScale(CompositeShape &cmp, std::istream &in)
 {
+  if (cmp.empty())
+  {
+    throw std::logic_error("nothing to scale!");
+  }
   double x = 0, y = 0, k = 0;
   in >> x >> y >> k;
   point_t O{x, y};
