@@ -6,7 +6,7 @@
 
 namespace finaev
 {
-  void scale(Shape** shapes, const size_t size, point_t scaleCenter, double k);
+  void scale(Shape** shapes, size_t size, const point_t scaleCenter, double k);
 }
 
 #endif

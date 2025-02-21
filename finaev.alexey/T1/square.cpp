@@ -7,8 +7,7 @@ namespace
   finaev::Rectangle createSquare(finaev::point_t leftDown, double side)
   {
     finaev::point_t rightUp = { (leftDown.x + side), (leftDown.y + side) };
-    finaev::Rectangle rect = finaev::Rectangle(leftDown, rightUp);
-    return rect;
+    return {leftDown, rightUp};
   }
 }
 
@@ -18,7 +17,7 @@ finaev::Square::Square(point_t l, double s):
 {
   if (s <= 0)
   {
-    throw std::logic_error("The figure does not exist!");
+    throw std::invalid_argument("The figure does not exist!");
   }
 }
 double finaev::Square::getArea() const

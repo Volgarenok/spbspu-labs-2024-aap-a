@@ -16,8 +16,8 @@ namespace finaev
     void move(double sx, double sy) override;
     void scale(double k) override;
   private:
-    Rectangle first;
-    Rectangle second;
+    Rectangle first_;
+    Rectangle second_;
     double first_area_;
     double second_area_;
   };

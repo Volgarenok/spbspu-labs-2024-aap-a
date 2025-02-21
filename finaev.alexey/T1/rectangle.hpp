@@ -15,8 +15,8 @@ namespace finaev
     void move(double sx, double sy) override;
     void scale(double k) override;
   private:
-    point_t leftDown;
-    point_t rightUp;
+    point_t leftDown_;
+    point_t rightUp_;
   };
 }
 

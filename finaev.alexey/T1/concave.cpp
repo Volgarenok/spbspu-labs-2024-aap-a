@@ -34,38 +34,38 @@ namespace
 }
 
 finaev::Concave::Concave(point_t f, point_t s, point_t t, point_t i):
-  first(createRect(f, s, i)),
-  second(createRect(f, t, i)),
+  first_(createRect(f, s, i)),
+  second_(createRect(f, t, i)),
   first_area_(areaOnePart(f, s, i)),
   second_area_(areaOnePart(f, t, i))
 {
   if (f == s || f == t || f == i || s == t || s == i || t == i)
   {
-    throw std::logic_error("uncorrect coordinates");
+    throw std::invalid_argument("uncorrect coordinates");
   }
   else if (((i.x == f.x) && (i.x == s.x)) || ((i.x == t.x) && (i.x == s.x)))
   {
-    throw std::logic_error("uncorrect coordinates");
+    throw std::invalid_argument("uncorrect coordinates");
   }
   else if (((i.x == f.x) && (i.x == t.x)) || ((i.y == t.y) && (i.y == s.y)))
   {
-    throw std::logic_error("uncorrect coordinates");
+    throw std::invalid_argument("uncorrect coordinates");
   }
   else if (((i.y == f.y) && (i.x == t.x)) || ((i.y == f.y) && (i.y == s.y)))
   {
-    throw std::logic_error("uncorrect coordinates");
+    throw std::invalid_argument("uncorrect coordinates");
   }
   else if (len(f, s) + len(f, t) <= len(s, t))
   {
-    throw std::logic_error("uncorrect coordinates");
+    throw std::invalid_argument("uncorrect coordinates");
   }
   else if (len(s, t) + len(f, t) <= len(f, s))
   {
-    throw std::logic_error("uncorrect coordinates");
+    throw std::invalid_argument("uncorrect coordinates");
   }
   else if (len(f, s) + len(s, t) <= len(f, t))
   {
-    throw std::logic_error("uncorrect coordinates");
+    throw std::invalid_argument("uncorrect coordinates");
   }
 }
 
@@ -76,15 +76,15 @@ double finaev::Concave::getArea() const
 
 finaev::rectangle_t finaev::Concave::getFrameRect() const
 {
-  double leftXfirst = first.getFrameRect().pos.x - first.getFrameRect().width / 2;
-  double leftYfirst = first.getFrameRect().pos.y - first.getFrameRect().height / 2;
-  double leftXsecond = second.getFrameRect().pos.x - second.getFrameRect().width / 2;
-  double leftYsecond = second.getFrameRect().pos.y - second.getFrameRect().height / 2;
+  double leftXfirst = first_.getFrameRect().pos.x - first_.getFrameRect().width / 2;
+  double leftYfirst = first_.getFrameRect().pos.y - first_.getFrameRect().height / 2;
+  double leftXsecond = second_.getFrameRect().pos.x - second_.getFrameRect().width / 2;
+  double leftYsecond = second_.getFrameRect().pos.y - second_.getFrameRect().height / 2;
   point_t lDown = {std::min(leftXfirst, leftXsecond), std::min(leftYfirst, leftYsecond)};
-  double rightXfirst = first.getFrameRect().pos.x + first.getFrameRect().width / 2;
-  double rightYfirst = first.getFrameRect().pos.y + first.getFrameRect().height / 2;
-  double rightXsecond = second.getFrameRect().pos.x + second.getFrameRect().width / 2;
-  double rightYsecond = second.getFrameRect().pos.y + second.getFrameRect().height / 2;
+  double rightXfirst = first_.getFrameRect().pos.x + first_.getFrameRect().width / 2;
+  double rightYfirst = first_.getFrameRect().pos.y + first_.getFrameRect().height / 2;
+  double rightXsecond = second_.getFrameRect().pos.x + second_.getFrameRect().width / 2;
+  double rightYsecond = second_.getFrameRect().pos.y + second_.getFrameRect().height / 2;
   point_t rUp = {std::max(rightXfirst, rightXsecond), std::max(rightYfirst, rightYsecond)};
   Rectangle rect = {lDown, rUp};
   return rect.getFrameRect();
@@ -92,8 +92,8 @@ finaev::rectangle_t finaev::Concave::getFrameRect() const
 
 void finaev::Concave::move(double sx, double sy)
 {
-  first.move(sx, sy);
-  second.move(sx, sy);
+  first_.move(sx, sy);
+  second_.move(sx, sy);
 }
 
 void finaev::Concave::move(point_t a)
@@ -101,14 +101,14 @@ void finaev::Concave::move(point_t a)
   point_t t = getFrameRect().pos;
   double changeX = a.x - t.x;
   double changeY = a.y - t.y;
-  first.move(changeX, changeY);
-  second.move(changeX, changeY);
+  first_.move(changeX, changeY);
+  second_.move(changeX, changeY);
 }
 
 void finaev::Concave::scale(double k)
 {
-  first.scale(k);
-  second.scale(k);
-  first_area_ *= k*k;
-  second_area_ *= k*k;
+  first_.scale(k);
+  second_.scale(k);
+  first_area_ *= k * k;
+  second_area_ *= k * k;
 }

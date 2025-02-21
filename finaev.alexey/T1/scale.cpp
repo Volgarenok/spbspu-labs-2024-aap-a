@@ -1,6 +1,6 @@
 #include "scale.hpp"
 
-void finaev::scale(Shape** shapes, const size_t size, point_t scaleCenter, double k)
+void finaev::scale(Shape** shapes, size_t size, point_t scaleCenter, double k)
 {
   for (size_t i = 0; i < size; i++)
   {

@@ -10,15 +10,13 @@
 #include "countFinalResults.hpp"
 #include "scale.hpp"
 
-using namespace finaev;
 int main()
 {
+  using namespace finaev;
   constexpr size_t capacity = 10000;
   Shape* shapes[capacity] = {};
   std::string str = "";
   size_t size = 0;
-  double k = 0.0;
-  point_t scaleCenter = {0, 0};
   std::string coordinates = "";
   bool isCorrect = false;
   bool isScale = false;
@@ -37,38 +35,46 @@ int main()
     }
     else if (str == "SCALE")
     {
-      isScale = true;
-      std::cin >> scaleCenter.x;
-      std::cin >> scaleCenter.y;
-      std::cin >> k;
-      if (k <= 0)
-      {
-        std::cerr << "Uncorrect scale coefficient!\n";
-        deleteShapes(shapes, size);
-        return 1;
-      }
+      isScale = 1;
       break;
     }
     try
     {
-      shapes[size] = makeShapes(std::cin, str);
-      if (shapes[size] != nullptr)
-      {
-        size++;
-      }
+      shapes[size++] = makeShapes(std::cin, str);
     }
-    catch (std::logic_error& e)
+    catch (const std::invalid_argument&)
     {
       isCorrect = true;
     }
-    catch (std::exception& e)
+    catch (const std::length_error& e)
     {
       deleteShapes(shapes, size);
+      std::cerr << e.what();
+      return 1;
+    }
+    catch (const std::bad_alloc&)
+    {
+      deleteShapes(shapes, size);
+      std::cerr << "No memory\n";
+      return 1;
     }
   }
   if (!isScale)
   {
     std::cerr << "no scale!\n";
+    deleteShapes(shapes, size);
+    return 1;
+  }
+  double scaleX = 0.0;
+  double scaleY = 0.0;
+  std::cin >> scaleX;
+  std::cin >> scaleY;
+  point_t scaleCenter = {scaleX, scaleY};
+  double k = 0.0;
+  std::cin >> k;
+  if (k <= 0)
+  {
+    std::cerr << "Uncorrect scale coefficient!\n";
     deleteShapes(shapes, size);
     return 1;
   }

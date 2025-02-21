@@ -1,32 +1,73 @@
 #include "makeShapes.hpp"
+#include <iostream>
+
+namespace
+{
+  size_t addArrPoints(std::istream& in, finaev::point_t* arr, size_t size)
+  {
+    for (size_t i = 0; i < size; ++i)
+    {
+      double a = 0.0;
+      double b = 0.0;
+      in >> a;
+      in >> b;
+      if (!std::cin.good())
+      {
+        return i;
+      }
+      arr[i] = {a, b};
+    }
+    return size;
+  }
+}
 
 finaev::Rectangle* finaev::makeRectangle(std::istream& in)
 {
-  double x0 = 0, y0 = 0, x1 = 0, y1 = 0;
-  in >> x0 >> y0 >> x1 >> y1;
-  point_t l = {x0, y0};
-  point_t r = {x1, y1};
-  Rectangle* rectangle = new Rectangle(l, r);
-  return rectangle;
+  const size_t size = 2;
+  point_t* arr = new point_t[size];
+  if (addArrPoints(in, arr, size) != size)
+  {
+    delete[] arr;
+    throw std::length_error("Incomplete input");
+  }
+  point_t l = arr[0];
+  point_t r = arr[1];
+  delete[] arr;
+  Rectangle* rect = new Rectangle(l, r);
+  return rect;
 }
 
 finaev::Square* finaev::makeSquare(std::istream& in)
 {
-  double x0, y0, side;
-  in >> x0 >> y0 >> side;
-  point_t l = {x0, y0};
+  const size_t size = 1;
+  point_t* arr = new point_t[size];
+  if (addArrPoints(in, arr, size) != size)
+  {
+    delete[] arr;
+    throw std::length_error("Incomplete input");
+  }
+  double side = 0;
+  in >> side;
+  point_t l = arr[0];
+  delete[] arr;
   Square* square = new Square(l, side);
   return square;
 }
 
 finaev::Concave* finaev::makeConcave(std::istream& in)
 {
-  double x1, y1, x2, y2, x3, y3, x4, y4;
-  in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
-  point_t first = {x1, y1};
-  point_t second = {x2, y2};
-  point_t third = {x3, y3};
-  point_t internal = {x4, y4};
+  const size_t size = 4;
+  point_t* arr = new point_t[size];
+  if (addArrPoints(in, arr, size) != size)
+  {
+    delete[] arr;
+    throw std::length_error("Incomplete input");
+  }
+  point_t first = arr[0];
+  point_t second = arr[1];
+  point_t third = arr[2];
+  point_t internal = arr[3];
+  delete[] arr;
   Concave* concave = new Concave(first, second, third, internal);
   return concave;
 }
@@ -45,5 +86,8 @@ finaev::Shape* finaev::makeShapes(std::istream& in, const std::string str)
   {
     return makeConcave(in);
   }
-  return nullptr;
+  else
+  {
+    throw std::logic_error("Not a name of figure");
+  }
 }
