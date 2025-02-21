@@ -17,7 +17,7 @@ namespace evstyunichev
     private:
       point_t leftDown_;
       point_t rightUp_;
-      point_t find_mid() const;
+      point_t getMiddle() const;
   };
 }
 #endif

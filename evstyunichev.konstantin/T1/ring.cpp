@@ -3,9 +3,9 @@
 #include <iostream>
 #include "base-types.hpp"
 
-evstyunichev::Ring::Ring(point_t mid, double R, double r):
-  interior_(mid, r, 48UL),
-  external_(mid, R, 48UL)
+evstyunichev::Ring::Ring(point_t middle, double R, double r):
+  interior_(middle, r, 48UL),
+  external_(middle, R, 48UL)
 {
   if (R <= r)
   {
@@ -22,9 +22,9 @@ double evstyunichev::Ring::getArea() const
 evstyunichev::rectangle_t evstyunichev::Ring::getFrameRect() const
 {
   rectangle_t ans{};
-  ans.pos = interior_.getMid();
-  ans.height = 2 * external_.getBig();
-  ans.width = 2 * external_.getBig();
+  ans.pos = interior_.getMiddle();
+  ans.height = 2 * external_.get_R();
+  ans.width = 2 * external_.get_R();
   return ans;
 }
 

@@ -15,12 +15,12 @@ namespace evstyunichev
       void move(double, double) override;
       void move(point_t) override;
       void scale(double k) override;
-      double getSmall() const;
-      double getBig() const;
-      point_t getMid() const;
+      double get_r() const;
+      double get_R() const;
+      point_t getMiddle() const;
 
     private:
-      point_t O_;
+      point_t middle_;
       double alpha_;
       double a_;
       double base_;
