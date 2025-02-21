@@ -24,7 +24,7 @@ void evstyunichev::makeScale(Shape **shapes, std::istream &in, size_t done, doub
   if (k < 0)
   {
     destroy_shapes(shapes, done);
-    throw std::invalid_argument("negative k!");
+    throw std::logic_error("negative k!");
   }
   if (!done)
   {
@@ -39,7 +39,7 @@ void evstyunichev::makeScale(Shape **shapes, std::istream &in, size_t done, doub
     shapes[i]->move(O);
     point_t cur = shapes[i]->getFrameRect().pos;
     shapes[i]->scale(k);
-    shapes[i]->move(-(cur.x - old.x) * k, -(cur.y - old.y) * k);
+    shapes[i]->move(-k * (cur.x - old.x), -k * (cur.y - old.y));
   }
   framesOut(shapes, done) << '\n';
 }
@@ -63,36 +63,42 @@ int main()
   size_t done = 0;
   while (std::cin >> s)
   {
-    Shape *cur = nullptr;
     try
     {
+      Shape *cur = nullptr;
       cur = make_shape(std::cin, s);
+      if (cur)
+      {
+        shapes[done] = cur;
+        totalSquare += shapes[done]->getArea();
+        done++;
+      }
+      else if (s == "SCALE")
+      {
+        scaleFlag = 1;
+        makeScale(shapes, std::cin, done, totalSquare);
+        if (errorFlag)
+        {
+          std::cerr << "input errors!\n";
+        }
+      }
+      else
+      {
+        skip_to_sign(std::cin, '\n');
+      }
     }
-    catch(const std::invalid_argument& e)
+    catch (const std::invalid_argument &e)
     {
       errorFlag = 1;
     }
-    if (cur)
+    catch (const std::logic_error &e)
     {
-      shapes[done] = cur;
-      totalSquare += shapes[done]->getArea();
-      done++;
-    }
-    else if (s == "SCALE")
-    {
-      scaleFlag = 1;
-      makeScale(shapes, std::cin, done, totalSquare);
-      if (errorFlag)
-      {
-        std::cerr << "input errors!\n";
-      }
-    }
-    else
-    {
-      skip_to_sign(std::cin, '\n');
+      std::cerr << "SCALE ERROR!\n";
+      destroy_shapes(shapes, done);
+      return 1;
     }
   }
-  evstyunichev::destroy_shapes(shapes, done);
+  destroy_shapes(shapes, done);
   if (!(done && scaleFlag))
   {
     std::cout << "((\n";

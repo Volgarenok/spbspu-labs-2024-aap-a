@@ -64,7 +64,7 @@ evstyunichev::Regular::Regular(point_t A, point_t B, point_t C)
 
 double evstyunichev::Regular::getArea() const
 {
-  double ans = getSmall() * a_ * 2.0 * M_PI / alpha_;
+  double ans = getSmall() * a_  * M_PI / alpha_;
   return ans;
 }
 
