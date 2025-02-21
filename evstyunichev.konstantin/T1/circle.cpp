@@ -1,6 +1,7 @@
 #include "circle.hpp"
 #include <cmath>
 #include <iostream>
+#include "regular.hpp"
 
 evstyunichev::Circle::Circle(point_t O, double r)
 {
@@ -8,40 +9,40 @@ evstyunichev::Circle::Circle(point_t O, double r)
   {
     throw std::invalid_argument("invalid");
   }
-  O_ = O;
-  r_ = r;
+  data = new Regular(O, r, 48);
 }
 
 double evstyunichev::Circle::getArea() const
 {
-  double s = M_PI * r_ * r_;
+  double r = data->getBig();
+  double s = M_PI * r * r;
   return s;
 }
 
 evstyunichev::rectangle_t evstyunichev::Circle::getFrameRect() const
 {
   rectangle_t ans{};
-  ans.pos = O_;
-  ans.height = 2 * r_;
-  ans.width = 2 * r_;
+  double r = data->getBig();
+  ans.pos = data->getMid();
+  ans.height = 2 * r;
+  ans.width = 2 * r;
   return ans;
 }
 
 void evstyunichev::Circle::move(double dx, double dy)
 {
-  O_.x += dx;
-  O_.y += dy;
+  data->move(dx, dy);
   return;
 }
 
 void evstyunichev::Circle::move(point_t cds)
 {
-  move(cds.x - O_.x, cds.y - O_.y);
+  data->move(cds);
   return;
 }
 
 void evstyunichev::Circle::scale(double k)
 {
-  r_ *= k;
+  data->scale(k);
   return;
 }

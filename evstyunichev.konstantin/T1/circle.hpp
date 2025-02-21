@@ -2,6 +2,7 @@
 #define CIRCLE_HPP
 #include <iostream>
 #include "base-types.hpp"
+#include "regular.hpp"
 #include "shape.hpp"
 namespace evstyunichev
 {
@@ -16,8 +17,7 @@ namespace evstyunichev
       void scale(double) override;
 
     private:
-      point_t O_;
-      double r_;
+      Regular *data;
   };
 }
 #endif

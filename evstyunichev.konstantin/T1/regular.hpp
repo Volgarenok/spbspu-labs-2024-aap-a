@@ -9,6 +9,7 @@ namespace evstyunichev
   {
     public:
       Regular(point_t, point_t, point_t);
+      Regular(point_t, double, size_t);
       double getArea() const override;
       rectangle_t getFrameRect() const override;
       void move(double, double) override;
@@ -16,6 +17,7 @@ namespace evstyunichev
       void scale(double k) override;
       double getSmall() const;
       double getBig() const;
+      point_t getMid() const;
 
     private:
       point_t O_;
