@@ -21,41 +21,33 @@ int main()
   bool scaleCommand = false;
   Shape * new_shape = nullptr;
   std::cin >> input_shape;
-  while ((!std::cin.eof()) && (!scaleCommand))
+  while ((std::cin.good()) && (!scaleCommand))
   {
-    if (std::cin.eof())
+    try
     {
-      std::cerr << "EOF!!\n";
+      new_shape = make_shape(input_shape, std::cin);
+      comp_sh.push_back(new_shape);
+    }
+    catch (const std::bad_alloc & e)
+    {
+      std::cerr << "Not enough memory!\n";
       return 1;
     }
-    else if (input_shape == "SCALE")
+    catch (const std::invalid_argument& e)
+    {
+      isIncorrectParameters = true;
+    }
+    catch (const std::length_error& e)
+    {
+      delete new_shape;
+      std::cerr << "Not enough memory!\n";
+      return 1;
+    }
+    std::cin >> input_shape;
+    if (input_shape == "SCALE")
     {
       scaleCommand = true;
     }
-    else
-    {
-      try
-      {
-        new_shape = make_shape(input_shape, std::cin);
-        comp_sh.push_back(new_shape);
-      }
-      catch (const std::bad_alloc & e)
-      {
-        std::cerr << "Not enough memory!\n";
-        return 1;
-      }
-      catch (const std::invalid_argument& e)
-      {
-        isIncorrectParameters = true;
-      }
-      catch (const std::length_error& e)
-      {
-        delete new_shape;
-        std::cerr << "Not enough memory!\n";
-        return 1;
-      }
-    }
-    std::cin >> input_shape;
   }
   if (isIncorrectParameters)
   {
