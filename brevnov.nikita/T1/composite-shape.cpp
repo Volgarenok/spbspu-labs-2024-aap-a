@@ -6,7 +6,7 @@
 
 void brevnov::print_frame_coordinates(const brevnov::CompositeShape& coSh, std::ostream & out)
 {
-  void print_frame_coordinates(coSh.shapes_, coSh.current_size_, out);
+  print_frame_coordinates(coSh.shapes_, coSh.current_size_, out);
 }
 
 void brevnov::CompositeShape::clear() noexcept
