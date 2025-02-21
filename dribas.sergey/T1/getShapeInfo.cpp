@@ -52,7 +52,7 @@ bool getPoint(std::istream& in, size_t pointCount, dribas::point_t * points) {
   return i == pointCount;
 }
 
-int dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** Shapes, double* scalingFactor)
+size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** Shapes, double* scalingFactor)
 {
   std::string InputStr;
   int shapesCount = 0;

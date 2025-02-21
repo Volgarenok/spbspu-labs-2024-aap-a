@@ -18,6 +18,7 @@ dribas::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
     throw std::invalid_argument("error with rectangle size");
   }
 }
+
 double dribas::Rectangle::getArea() const
 {
   double weight = rightUp_.x - leftDown_.x;

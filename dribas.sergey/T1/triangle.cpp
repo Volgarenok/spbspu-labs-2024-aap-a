@@ -12,10 +12,12 @@ dribas::Triangle::Triangle(point_t a, point_t b, point_t c):
     throw std::invalid_argument("error arguments for triangle");
   }
 }
+
 double dribas::Triangle::getArea() const
 {
   return std::abs((b_.x - a_.x) * (c_.y - a_.y) - (c_.x - a_.x) * (b_.y - a_.y)) / 2.0;
 }
+
 dribas::rectangle_t dribas::Triangle::getFrameRect() const
 {
   double maxX = std::max(a_.x, std::max(b_.x, c_.x));

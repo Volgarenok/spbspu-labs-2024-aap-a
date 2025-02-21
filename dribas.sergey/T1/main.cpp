@@ -16,7 +16,7 @@ int main()
   constexpr size_t shapesSize = 10000;
   dribas::Shape * shapes[shapesSize] = {};
   double scalingFactor[3] = {};
-  int shapeCount = 0;
+  size_t shapeCount = 0;
   try {
     shapeCount = dribas::getShapeInfo(std::cin, std::cerr, shapes, scalingFactor);
   } catch(const std::exception& e) {
