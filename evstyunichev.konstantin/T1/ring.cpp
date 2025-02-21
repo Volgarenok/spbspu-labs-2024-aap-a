@@ -3,8 +3,8 @@
 #include "base-types.hpp"
 
 evstyunichev::Ring::Ring(point_t middle, double R, double r):
-  interior_(middle, r, 48UL),
-  external_(middle, R, 48UL)
+  interior_(middle, r, 148UL),
+  external_(middle, R, 148UL)
 {
   if (R <= r)
   {
@@ -14,7 +14,7 @@ evstyunichev::Ring::Ring(point_t middle, double R, double r):
 
 double evstyunichev::Ring::getArea() const
 {
-  double s = interior_.getArea() + external_.getArea();
+  double s = external_.getArea() - interior_.getArea();
   return s;
 }
 

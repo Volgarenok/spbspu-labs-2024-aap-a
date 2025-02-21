@@ -5,7 +5,7 @@
 constexpr double pi_v = 3.141592653589793238462643;
 
 evstyunichev::Circle::Circle(point_t O, double r):
-  data_(O, r, 48UL)
+  data_(O, r, 148UL)
 {}
 
 double evstyunichev::Circle::getArea() const
