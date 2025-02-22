@@ -89,7 +89,7 @@ bool belobrov::validateFloat(const char* str)
     return str;
   }
   auto next = checkSign(str);
-  if(auto continued = checkFraction(next)) {
+  if (auto continued = checkFraction(next)) {
     return checkExponent(continued);
   }
   return checkExponent(next);
