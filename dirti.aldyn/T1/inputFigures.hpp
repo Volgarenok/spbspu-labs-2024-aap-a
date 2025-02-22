@@ -7,5 +7,4 @@ namespace dirti
 {
   Rectangle* makeRectangle(std::istream& in);
 }
-
 #endif
