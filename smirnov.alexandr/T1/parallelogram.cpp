@@ -3,16 +3,21 @@
 #include <algorithm>
 #include <stdexcept>
 
+bool smirnov::Parallelogram::arePointsUnique(const point_t & p1, const point_t & p2, const point_t & p3)
+{
+  bool condition = (p1.x == p2.x && p1.y == p2.y);
+  condition = condition || (p1.x == p3.x && p1.y == p3.y);
+  condition = condition || (p2.x == p3.x && p2.y == p3.y);
+  return condition;
+}
+
 smirnov::Parallelogram::Parallelogram(point_t p1, point_t p2, point_t p3):
   vertex1_{p1},
   vertex2_{p2},
   vertex3_{p3},
   vertex4_{p1.x + p3.x - p2.x, p1.y + p3.y - p2.y}
 {
-  bool condition = (p1.x == p2.x && p1.y == p2.y);
-  condition = condition || (p1.x == p3.x && p1.y == p3.y);
-  condition = condition || (p2.x == p3.x && p2.y == p3.y);
-  if (condition)
+  if (arePointsUnique(p1, p2, p3))
   {
     throw std::invalid_argument("Points must be unique");
   }

@@ -18,6 +18,7 @@ namespace smirnov
     point_t vertex2_;
     point_t vertex3_;
     point_t vertex4_;
+    bool arePointsUnique(const point_t & p1, const point_t & p2, const point_t & p3);
   };
 }
 #endif
