@@ -25,7 +25,7 @@ int main()
       }
       catch (const std::logic_error &e)
       {
-        shp->~Shape();
+        delete shp;
         std::cerr << e.what() << '\n';
       }
     }
