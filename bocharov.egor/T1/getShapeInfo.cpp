@@ -111,6 +111,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
     input >> scale.x;
     input >> scale.y;
     input >> ratio;
+    break;
   }
   if (!scaled)
   {
