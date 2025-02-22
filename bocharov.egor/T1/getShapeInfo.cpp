@@ -58,7 +58,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
   {
     error << e.what() << '\n';
   };
-  while (input >> inpStr)
+  while (input >> inpStr || inpStr != "SCALE")
   {
     try
     {
@@ -94,26 +94,25 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
         shapes[shapesCount] = new Concave{arrPoint[0], arrPoint[1], arrPoint[2], arrPoint[3]};
         shapesCount++;
       }
-      else if (inpStr == "SCALE")
-      {
-        scaled = true;
-        if (shapesCount == 0)
-        {
-          error << "No shapes for scale\n";
-          return 0;
-        }
-        input >> scale.x;
-        input >> scale.y;
-        input >> ratio;
-        break;
-      }
     }
     catch (const std::invalid_argument & e)
     {
       handleError(e);
     }
   }
-  if(!scaled)
+  if (inpStr == "SCALE")
+  {
+    scaled = true;
+    if (shapesCount == 0)
+    {
+      error << "No shapes for scale\n";
+      return 0;
+    }
+    input >> scale.x;
+    input >> scale.y;
+    input >> ratio;
+  }
+  if (!scaled)
   {
     clear(shapes, shapesCount);
     throw std::logic_error("Not entered Scale");
