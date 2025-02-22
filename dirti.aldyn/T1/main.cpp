@@ -48,13 +48,19 @@ int main()
     if (figure == "SCALE")
     {
       std::cin >> scale_pos.x >> scale_pos.y >> koef;
-      if (koef <= 0.0)
+      if (koef <= 0.0 || num == 0)
       {
         std::cerr << "Error" << "\n";
         clearShapes(shapes);
         return 1;
       }
     }
+  }
+  if (figure != "SCALE")
+  {
+    std::cerr << "Error" << "\n";
+    clearShapes(shapes);
+    return 1;
   }
   std::cout << sum_area;
   outputFigures(shapes, std::cout);
@@ -64,7 +70,7 @@ int main()
   {
     point_t move_point = {};
     move_point.x = scale_pos.x + (shapes[i]->getFrameRect().pos.x - scale_pos.x) * koef;
-    move_point.x = scale_pos.y + (shapes[i]->getFrameRect().pos.y - scale_pos.y) * koef;
+    move_point.y = scale_pos.y + (shapes[i]->getFrameRect().pos.y - scale_pos.y) * koef;
     shapes[i]->move(move_point);
     shapes[i]->scale(koef);
   }
