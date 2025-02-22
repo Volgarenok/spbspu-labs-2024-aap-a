@@ -3,12 +3,12 @@
 double arcsinTaylor(double x, size_t n, double error) {
     if (n > 10) throw invalid_argument("Maximum iterations exceeded");
     double sum = 0;
-    double term = 0;
-    double term1 = 0;
-    double term2 = 0;
+    double element_summirovania = 0;
+    double p1 = 0;
+    double p2 = 0;
     for (size_t i = 0; i < n; ++i) {
-	int factorial = 1;
-	int factorial2 = 1;
+	long int factorial = 1;
+	long int factorial2 = 1;
 	if (i == 0){
 	    factorial = 0;
 	    factorial2 = 0;
@@ -25,11 +25,23 @@ double arcsinTaylor(double x, size_t n, double error) {
                 factorial2 *= j;
             }
 	} 
-        term1 = (pow(-1, i) * factorial2) / (pow(2, (2 * i)) * factorial * factorial);
-        term2 = pow(x, (2 * i + 1)) / (2 * n + 1);
-	term = term1 * term2;
-	sum += term;
-        if (fabs(term) < error) break;
+        p1 = (pow(-1, i) * factorial2) / (pow(2, (2 * i)) * factorial * factorial);
+        p2 = pow(x, (2 * i + 1)) / (2 * n + 1);
+	element_summirovania = term1 * term2;
+	sum += element_summirovania;
+        if (fabs(element_summirovania) < error) break;
+    }
+    return sum;
+}
+
+double arctanTaylor(double x, size_t n, double error) {
+    if (n > 10) throw invalid_argument("Maximum iterations exceeded");
+    double sum = 0;
+    double element_summirovania = 0;
+    for (size_t i = 0; i < n; ++i) {
+	element_summirovania = pow(x, (2 * i + 1)) / (2 * i + 1);
+	sum += element_summirovania;
+        if (fabs(element_summirovania) < error) break;
     }
     return sum;
 }
