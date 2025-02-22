@@ -1,7 +1,8 @@
 #include <cmath>
+#include <stdexcept>
 
 double arcsinTaylor(double x, size_t n, double error) {
-    if (n > 10) throw invalid_argument("Maximum iterations exceeded");
+    if (n > 10) throw std::invalid_argument("Maximum iterations exceeded");
     double sum = 0;
     double element_summirovania = 0;
     double p1 = 0;
@@ -27,7 +28,7 @@ double arcsinTaylor(double x, size_t n, double error) {
 	} 
         p1 = (pow(-1, i) * factorial2) / (pow(2, (2 * i)) * factorial * factorial);
         p2 = pow(x, (2 * i + 1)) / (2 * n + 1);
-	element_summirovania = term1 * term2;
+	element_summirovania = p1 * p2;
 	sum += element_summirovania;
         if (fabs(element_summirovania) < error) break;
     }
@@ -35,7 +36,7 @@ double arcsinTaylor(double x, size_t n, double error) {
 }
 
 double arctanTaylor(double x, size_t n, double error) {
-    if (n > 10) throw invalid_argument("Maximum iterations exceeded");
+    if (n > 10) throw std::invalid_argument("Maximum iterations exceeded");
     double sum = 0;
     double element_summirovania = 0;
     for (size_t i = 0; i < n; ++i) {
