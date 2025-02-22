@@ -15,4 +15,5 @@ namespace dirti
     point_t pos;
   };
 }
+
 #endif
