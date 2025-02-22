@@ -96,7 +96,7 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
       }
       else if (inpStr == "SCALE")
       {
-        break;
+        scaled = true;
       }
     }
     catch (const std::invalid_argument & e)
@@ -104,23 +104,20 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
       handleError(e);
     }
   }
-  if (inpStr == "SCALE")
-  {
-    scaled = true;
-    if (shapesCount == 0)
-    {
-      error << "No shapes for scale\n";
-      return 0;
-    }
-    input >> scale.x;
-    input >> scale.y;
-    input >> ratio;
-  }
   if (!scaled)
   {
     clear(shapes, shapesCount);
     throw std::logic_error("Not entered Scale");
   }
+  scaled = true;
+  if (shapesCount == 0)
+  {
+    error << "No shapes for scale\n";
+    return 0;
+  }
+  input >> scale.x;
+  input >> scale.y;
+  input >> ratio;
   try
   {
     outputRes(output, shapes, shapesCount);
