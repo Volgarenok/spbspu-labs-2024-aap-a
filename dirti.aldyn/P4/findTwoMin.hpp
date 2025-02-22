@@ -1,7 +1,5 @@
 #ifndef FINDTWOMIN_HPP
 #define FINDTWOMIN_HPP
-#include <iostream>
-#include <cstddef>
 
 namespace dirti
 {
