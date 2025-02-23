@@ -60,7 +60,7 @@ namespace cherkasov
     }
     return new Diamond(x1, y1, x2, y2, x3, y3);
   }
-  Shape* createShape(const std::string& inputCommand, const std::istream& input)
+  Shape* createShape(const std::string& inputCommand, std::istream& input)
   {
     if (inputCommand == "RECTANGLE")
     {
