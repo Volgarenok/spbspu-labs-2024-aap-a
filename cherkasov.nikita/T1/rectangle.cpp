@@ -1,4 +1,5 @@
 #include "rectangle.hpp"
+#include "shapeUtils.hpp"
 #include <stdexcept>
 #include <cmath>
 #include <algorithm>
@@ -40,10 +41,8 @@ namespace cherkasov
   }
   void Rectangle::move(double dx, double dy)
   {
-    left.x += dx;
-    right.x += dx;
-    left.y += dy;
-    right.y += dy;
+    moveVertex(left, dx, dy);
+    moveVertex(right, dx, dy);
   }
   void Rectangle::scale(double k)
   {
@@ -52,9 +51,7 @@ namespace cherkasov
       throw std::logic_error("k must be positive");
     }
     point_t center = getFrameRect().pos;
-    left.x = center.x + (left.x - center.x) * k;
-    left.y = center.y + (left.y - center.y) * k;
-    right.x = center.x + (right.x - center.x) * k;
-    right.y = center.y + (right.y - center.y) * k;
+    scalePoint(left, center, k);
+    scalePoint(right, center, k);
   }
 }

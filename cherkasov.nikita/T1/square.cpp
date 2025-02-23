@@ -1,4 +1,5 @@
 #include "square.hpp"
+#include "shapeUtils.hpp"
 #include <stdexcept>
 #include <cmath>
 
@@ -36,8 +37,7 @@ namespace cherkasov
   }
   void Square::move(double dx, double dy)
   {
-    left.x += dx;
-    left.y += dy;
+    moveVertex(left, dx, dy);
   }
   void Square::scale(double k)
   {
@@ -47,7 +47,6 @@ namespace cherkasov
     }
     point_t currentPos = getFrameRect().pos;
     length *= k;
-    left.x = currentPos.x - (length / 2);
-    left.y = currentPos.y - (length / 2);
+    scalePoint(left, currentPos, k);
   }
 }

@@ -9,13 +9,13 @@ void cherkasov::Shape::scale(double k)
   }
   scale(k);
 }
-void cherkasov::scalePoint(point_t& vertex, const point_t& center, double k)
+void cherkasov::scalePoint(point_t& point, const point_t& center, double k)
 {
-  vertex.x = center.x + (vertex.x - center.x) * k;
-  vertex.y = center.y + (vertex.y - center.y) * k;
+  point.x = center.x + (point.x - center.x) * k;
+  point.y = center.y + (point.y - center.y) * k;
 }
-void cherkasov::moveVertex(point_t& vertex, double moveX, double moveY)
+void cherkasov::moveVertex(point_t& point, double moveX, double moveY)
 {
-  vertex.x += moveX;
-  vertex.y += moveY;
+  point.x += moveX;
+  point.y += moveY;
 }
