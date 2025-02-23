@@ -12,59 +12,50 @@ int main()
   bool invalidInput = false;
   cherkasov::point_t p = {0.0, 0.0};
   double scalingFactor = 0.0;
- // bool scalingRequested = false;
   while (!std::cin.eof() && inputCommand != "SCALE")
   {
-    std::cin >> invalidInput;
-    if (std::cin.eof())
-    {
-      cherkasov::deleteShapes(shapes, shapeCount);
-      std::cerr << "EOF encountered\n";
-      return 1;
-    }
+  std::cin >> invalidInput;
+  if (std::cin.eof())
+  {
+    cherkasov::deleteShapes(shapes, shapeCount);
+    std::cerr << "EOF encountered\n";
+    return 1;
+  }
     try
+    {
+      cherkasov::Shape* shape = cherkasov::createShape(inputCommand, std::cin);
+      if (shape)
       {
-        cherkasov::Shape* shape = cherkasov::createShape(inputCommand, std::cin);
-        if (shape)
-        {
-          shapes[shapeCount++] = shape;
-        }
-        else
-        {
-          invalidInput = true;
-        }
+        shapes[shapeCount++] = shape;
       }
-      catch (const std::invalid_argument& e)
+      else
       {
         invalidInput = true;
       }
-      catch (const std::bad_alloc&)
-      {
-        std::cerr << "out memor\n";
-        cherkasov::deleteShapes(shapes, shapeCount);
-        return 1;
-      }
+    }
+    catch (const std::invalid_argument& e)
+    {
+      invalidInput = true;
+    }
+    catch (const std::bad_alloc&)
+    {
+      std::cerr << "out memor\n";
+      cherkasov::deleteShapes(shapes, shapeCount);
+      return 1;
+    }
   }
   if (shapeCount == 0)
   {
     std::cerr << "no shapes specified\n";
     return 1;
   }
-  //if (inputCommand == "SCALE")
-  //{}
-    std::cin >> p.x >> p.y >> scalingFactor;
-    if (scalingFactor <= 0)
-    {
-      cherkasov::deleteShapes(shapes, shapeCount);
-      std::cerr << "Error: scale must be positive.\n";
-      return 1;
-    }
-  /*if (!scalingRequested)
+  std::cin >> p.x >> p.y >> scalingFactor;
+  if (scalingFactor <= 0)
   {
     cherkasov::deleteShapes(shapes, shapeCount);
-    std::cerr << "scaling was not specified\n";
+    std::cerr << "Error: scale must be positive.\n";
     return 1;
-  }*/
+  }
   std::cout << std::fixed << std::setprecision(1);
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
