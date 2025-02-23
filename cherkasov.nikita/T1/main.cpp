@@ -13,20 +13,9 @@ int main()
   cherkasov::point_t p = {0.0, 0.0};
   double scalingFactor = 0.0;
   bool scalingRequested = false;
-  while (std::cin >> inputCommand)
+  while (std::cin >> inputCommand && inputCommand != "SCALLE")
   {
-    if (inputCommand == "SCALE")
-    {
-      std::cin >> p.x >> p.y >> scalingFactor;
-      if (scalingFactor <= 0)
-      {
-        cherkasov::deleteShapes(shapes, shapeCount);
-        std::cerr << "Error: scale must be positive.\n";
-        return 1;
-      }
-      scalingRequested = true;
-    }
-    else if (std::cin.eof())
+    if (std::cin.eof())
     {
       cherkasov::deleteShapes(shapes, shapeCount);
       std::cerr << "EOF encountered\n";
@@ -62,6 +51,17 @@ int main()
   {
     std::cerr << "no shapes specified\n";
     return 1;
+  }
+  if (inputCommand == "SCALE")
+  {
+    std::cin >> p.x >> p.y >> scalingFactor;
+    if (scalingFactor <= 0)
+    {
+      cherkasov::deleteShapes(shapes, shapeCount);
+      std::cerr << "Error: scale must be positive.\n";
+      return 1;
+    }
+    scalingRequested = true;
   }
   if (!scalingRequested)
   {
