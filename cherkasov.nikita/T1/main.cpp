@@ -40,7 +40,7 @@ int main()
     std::cerr << "incorrect scalingFator\n";
     cherkasov::deleteShapes(shapes, shapeCount);
     return 1;
-  } 
+  }
   if (shapeCount == 0)
   {
     std::cerr << "no shapes specified\n";
