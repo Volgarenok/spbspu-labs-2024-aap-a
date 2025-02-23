@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <stdexcept>
 #include "procesShape.hpp"
 #include "makesShape.hpp"
 
@@ -62,7 +61,7 @@ int main()
   cherkasov::getCoordinates(shapes, shapeCount);
   try
   {
-    cherkasov::getScaling(shapes, shapeCount, p, scalingFactor); 
+    cherkasov::getScaling(shapes, shapeCount, p, scalingFactor);
   }
   catch(const std::logic_error& e)
   {
