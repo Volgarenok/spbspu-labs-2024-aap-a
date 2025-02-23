@@ -28,7 +28,7 @@ void sharifullina::scaleOfShapes(Shape ** shapes, size_t n, point_t p, double k)
   }
 }
 
-void printRect(std::ostream& out, const rectangle_t& rect)
+void sharifullina::printRect(std::ostream& out, const rectangle_t& rect)
 {
   double lx = rect.pos.x - rect.width / 2.0;
   double ly = rect.pos.y - rect.height / 2.0;
@@ -39,11 +39,8 @@ void printRect(std::ostream& out, const rectangle_t& rect)
 
 void sharifullina::printCoorRect(std::ostream& out, const Shape* const* shapes, size_t n)
 {
-  if (n == 0)
-  {
-    return;
-  }
   printRect(out, shapes[0]->getFrameRect());
+
   for (size_t i = 1; i < n; i++)
   {
     out << " ";

@@ -40,5 +40,6 @@ void sharifullina::Ring::move(double dx, double dy)
 
 void sharifullina::Ring::scaleWithoutCheck(double k)
 {
-  scaleWithoutCheck(k);
+  inner_.scale(k);
+  outer_.scale(k);
 }

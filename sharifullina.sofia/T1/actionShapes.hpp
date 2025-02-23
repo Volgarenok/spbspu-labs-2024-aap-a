@@ -7,6 +7,7 @@
 
 namespace sharifullina
 {
+  void printRect(std::ostream & out, const rectangle_t & rect);
   double getSumArea(const Shape * const * shapes, size_t n);
   void printCoorRect(std::ostream & out, const Shape * const * shapes, size_t n);
   void scaleOfShapes(Shape ** shapes, size_t n, point_t p, double k);
