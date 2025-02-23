@@ -24,8 +24,8 @@ namespace cherkasov
     }
   double Diamond::getArea() const
   {
-    double diag1 = vertex1.y - vertex3.y;
-    double diag2 = vertex2.x - vertex4.x;
+    double diag1 = std::sqrt((vertex1.x - vertex3.x) * (vertex1.x - vertex3.x) + (vertex1.y - vertex3.y) * (vertex1.y - vertex3.y));
+    double diag2 = std::sqrt((vertex2.x - vertex4.x) * (vertex2.x - vertex4.x) + (vertex2.y - vertex4.y) * (vertex2.y - vertex4.y));
     return (diag1 * diag2) / 2;
   }
   rectangle_t Diamond::getFrameRect() const
