@@ -1,4 +1,5 @@
 #include "actionShapes.hpp"
+#include "shape.hpp"
 
 double sharifullina::getSumArea(const Shape* const* shapes, size_t n)
 {
