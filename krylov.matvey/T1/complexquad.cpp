@@ -32,8 +32,9 @@ krylov::Complexquad::Complexquad(const point_t& a, const point_t& b, const point
 }
 bool krylov::Complexquad::isPointOnSegment(const point_t& point, const point_t& segStart, const point_t& segEnd) const
 {
-  return std::min(segStart.x, segEnd.x) <= point.x && point.x <= std::max(segStart.x, segEnd.x)
-    && std::min(segStart.y, segEnd.y) <= point.y && point.y <= std::max(segStart.y, segEnd.y);
+  bool isXCorrect = std::min(segStart.x, segEnd.x) <= point.x && point.x <= std::max(segStart.x, segEnd.x);
+  bool isYCorrect = std::min(segStart.y, segEnd.y) <= point.y && point.y <= std::max(segStart.y, segEnd.y);
+  return isXCorrect && isYCorrect;
 }
 krylov::point_t krylov::Complexquad::findIntersection(const point_t& a, const point_t& b, const point_t& c, const point_t& d) const
 {
