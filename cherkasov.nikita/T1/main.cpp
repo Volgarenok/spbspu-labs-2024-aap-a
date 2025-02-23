@@ -16,15 +16,7 @@ int main()
   {
     try
     {
-      cherkasov::Shape* shape = cherkasov::createShape(inputCommand, std::cin);
-      if (shape)
-      {
-        shapes[shapeCount++] = shape;
-      }
-      else
-      {
-        invalidInput = true;
-      }
+        shapes[shapeCount] = cherkasov::createShape(inputCommand, std::cin);
     }
     catch (const std::invalid_argument& e)
     {
@@ -43,25 +35,21 @@ int main()
       return 1;
     }
   }
+  if (!(std::cin >> p.x >> p.y >> scalingFactor) || scalingFactor <= 0)
+  {
+    std::cerr << "incorrect scalingFator\n";
+    cherkasov::deleteShapes(shapes, shapeCount);
+    return 1;
+  } 
   if (shapeCount == 0)
   {
     std::cerr << "no shapes specified\n";
     return 1;
   }
-  std::cin >> p.x >> p.y >> scalingFactor;
   std::cout << std::fixed << std::setprecision(1);
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
-  try
-  {
-    cherkasov::getScaling(shapes, shapeCount, p, scalingFactor);
-  }
-  catch(const std::logic_error& e)
-  {
-    std::cerr << e.what() << '\n';
-    cherkasov::deleteShapes(shapes, shapeCount);
-    return 1;
-  }
+  cherkasov::getScaling(shapes, shapeCount, p, scalingFactor);
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
   cherkasov::deleteShapes(shapes, shapeCount);
