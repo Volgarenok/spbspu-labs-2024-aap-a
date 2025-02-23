@@ -1,6 +1,5 @@
 #include <cmath>
 #include <stdexcept>
-
 double arcsinTaylor(double x, size_t n, double error) {
     if (n > 10) throw std::invalid_argument("Maximum iterations exceeded");
     double sum = 0;
@@ -34,7 +33,6 @@ double arcsinTaylor(double x, size_t n, double error) {
     }
     return sum;
 }
-
 double arctanTaylor(double x, size_t n, double error) {
     if (n > 10) throw std::invalid_argument("Maximum iterations exceeded");
     double sum = 0;
