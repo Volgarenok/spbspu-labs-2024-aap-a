@@ -43,7 +43,7 @@ namespace cherkasov
   {
     if (k < 0)
     {
-      throw std::invalid_argument("k must be positive");
+      throw std::logic_error("k must be positive");
     }
     point_t currentPos = getFrameRect().pos;
     length *= k;

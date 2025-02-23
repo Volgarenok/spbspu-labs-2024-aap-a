@@ -51,7 +51,7 @@ namespace cherkasov
   {
     if (k < 0)
     {
-      throw std::invalid_argument("k must be positive");
+      throw std::logic_error("k must be positive");
     }
     scalePoint(vertex1, center, k);
     scalePoint(vertex2, center, k);
