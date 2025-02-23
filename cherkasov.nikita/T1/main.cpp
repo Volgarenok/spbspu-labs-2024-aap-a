@@ -12,15 +12,8 @@ int main()
   bool invalidInput = false;
   cherkasov::point_t p = {0.0, 0.0};
   double scalingFactor = 0.0;
-  while (!std::cin.eof() && inputCommand != "SCALE")
+  while (std::cin >> inputCommand && inputCommand != "SCALE")
   {
-  std::cin >> inputCommand;
-  if (std::cin.eof())
-  {
-    cherkasov::deleteShapes(shapes, shapeCount);
-    std::cerr << "EOF encountered\n";
-    return 1;
-  }
     try
     {
       cherkasov::Shape* shape = cherkasov::createShape(inputCommand, std::cin);
@@ -41,6 +34,12 @@ int main()
     {
       std::cerr << "out memor\n";
       cherkasov::deleteShapes(shapes, shapeCount);
+      return 1;
+    }
+    if (std::cin.eof())
+    {
+      cherkasov::deleteShapes(shapes, shapeCount);
+      std::cerr << "EOF encountered\n";
       return 1;
     }
   }
