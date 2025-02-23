@@ -1,7 +1,7 @@
 #include "complexquad.hpp"
-#include "triangle.hpp"
 #include <algorithm>
 #include <stdexcept>
+#include "triangle.hpp"
 
 krylov::Complexquad::Complexquad(const point_t& a, const point_t& b, const point_t& c, const point_t& d):
   t1_(a, b, c),

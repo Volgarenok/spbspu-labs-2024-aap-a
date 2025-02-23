@@ -7,13 +7,13 @@ krylov::Rectangle::Rectangle(const point_t& bottomLeft, const point_t& topRight)
 {
   if (bottomLeft_.x >= topRight_.x || bottomLeft_.y >= topRight_.y)
   {
-      throw std::invalid_argument("Invalid rectangle coordinates");
+    throw std::invalid_argument("Invalid rectangle coordinates");
   }
 }
 
 double krylov::Rectangle::getArea() const
 {
-    return (topRight_.x - bottomLeft_.x) * (topRight_.y - bottomLeft_.y);
+  return (topRight_.x - bottomLeft_.x) * (topRight_.y - bottomLeft_.y);
 }
 
 krylov::rectangle_t krylov::Rectangle::getFrameRect() const
