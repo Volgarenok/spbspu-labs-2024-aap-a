@@ -7,16 +7,14 @@ namespace cherkasov
 {
   Rectangle* getRectangle(std::istream& input)
   {
-    double x1 = 0.0;
-    double y1 = 0.0;
-    double x2 = 0.0;
-    double y2 = 0.0;
-    input >> x1 >> y1 >> x2 >> y2;
+    point_t left;
+    point_t right;
+    input >> left.x >> left.y >> right.x >> right.y;
     if (!input)
     {
       throw std::invalid_argument("no input coordinate");
     }
-    return new Rectangle(x1, y1, x2, y2);
+    return new Rectangle(left, right);
   }
   Square* getSquare(std::istream& input)
   {
