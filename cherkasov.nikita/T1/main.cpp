@@ -16,7 +16,7 @@ int main()
   {
     try
     {
-        shapes[shapeCount] = cherkasov::createShape(inputCommand, std::cin);
+      shapes[shapeCount] = cherkasov::createShape(inputCommand, std::cin);
     }
     catch (const std::invalid_argument& e)
     {

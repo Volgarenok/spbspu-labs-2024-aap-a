@@ -36,7 +36,7 @@ void cherkasov::getScaling(Shape** shapes, size_t shape, point_t p, double scali
 {
   if (scalingFactor <= 0)
   {
-    throw std::logic_error("scalingFactor must be positiv");
+    throw std::invalid_argument("scalingFactor must be positiv");
   }
   for (size_t i = 0; i < shape; i++)
   {

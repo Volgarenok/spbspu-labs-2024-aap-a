@@ -5,7 +5,7 @@ void cherkasov::Shape::scale(double k)
 {
   if (k < 0)
   {
-    throw std::logic_error("k must be positive");
+    throw std::invalid_argument("k must be positive");
   }
   scale(k);
 }
