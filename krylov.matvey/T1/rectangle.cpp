@@ -18,7 +18,9 @@ double krylov::Rectangle::getArea() const
 
 krylov::rectangle_t krylov::Rectangle::getFrameRect() const
 {
-  point_t rectangleCenter = {bottomLeft_.x + ((topRight_.x - bottomLeft_.x) / 2.0), bottomLeft_.y + ((topRight_.y - bottomLeft_.y) / 2.0)};
+  double rectangleCenterX = bottomLeft_.x + ((topRight_.x - bottomLeft_.x) / 2.0);
+  double rectangleCenterY = bottomLeft_.y + ((topRight_.y - bottomLeft_.y) / 2.0);
+  point_t rectangleCenter = {rectangleCenterX, rectangleCenterY};
   return rectangle_t{(topRight_.x - bottomLeft_.x), (topRight_.y - bottomLeft_.y), rectangleCenter};
 }
 

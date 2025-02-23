@@ -65,18 +65,19 @@ void krylov::deleteShapes(krylov::Shape** shapes, size_t shapeCount)
 void krylov::printAreaAndFrameCoords(Shape** shapes, size_t shapeCount, double totalArea)
 {
   std::cout << std::fixed << std::setprecision(1) << totalArea << ' ';
-  for (size_t i = 0; i < shapeCount; ++i)
+  for (size_t i = 0; i < --shapeCount; ++i)
   {
-    krylov::rectangle_t frame = shapes[i]->getFrameRect();
+    rectangle_t frame = shapes[i]->getFrameRect();
     std::cout << frame.pos.x - frame.width / 2 << ' ';
     std::cout << frame.pos.y - frame.height / 2 << ' ';
     std::cout << frame.pos.x + frame.width / 2 << ' ';
-    std::cout << frame.pos.y + frame.height / 2;
-    if (i < shapeCount - 1)
-    {
-      std::cout << ' ';
-    }
+    std::cout << frame.pos.y + frame.height / 2 << ' ';
   }
+  rectangle_t frame = shapes[--shapeCount]->getFrameRect();
+  std::cout << frame.pos.x - frame.width / 2 << ' ';
+  std::cout << frame.pos.y - frame.height / 2 << ' ';
+  std::cout << frame.pos.x + frame.width / 2 << ' ';
+  std::cout << frame.pos.y + frame.height / 2;
 }
 std::istream& krylov::simpleGetLine(std::istream& in, std::string& str)
 {
