@@ -50,12 +50,6 @@ int main()
     return 1;
   }
   std::cin >> p.x >> p.y >> scalingFactor;
-  if (scalingFactor <= 0)
-  {
-    cherkasov::deleteShapes(shapes, shapeCount);
-    std::cerr << "Error: scale must be positive.\n";
-    return 1;
-  }
   std::cout << std::fixed << std::setprecision(1);
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
