@@ -26,26 +26,26 @@ namespace cherkasov
   }
   rectangle_t Diamond::getFrameRect() const
   {
-    double minX = std::min({ vertex1.x, vertex2.x, vertex3.x, vertex4.x });
-    double maxX = std::max({ vertex1.x, vertex2.x, vertex3.x, vertex4.x });
-    double minY = std::min({ vertex1.y, vertex2.y, vertex3.y, vertex4.y });
-    double maxY = std::max({ vertex1.y, vertex2.y, vertex3.y, vertex4.y });
+    double minX = std::min({vertex1.x, vertex2.x, vertex3.x, vertex4.x});
+    double maxX = std::max({vertex1.x, vertex2.x, vertex3.x, vertex4.x});
+    double minY = std::min({vertex1.y, vertex2.y, vertex3.y, vertex4.y});
+    double maxY = std::max({vertex1.y, vertex2.y, vertex3.y, vertex4.y});
     rectangle_t rect{maxX - minX, maxY - minY, center};
     return rect;
   }
   void Diamond::move(point_t c)
   {
-    double moveX = c.x - center.x;
-    double moveY = c.y - center.y;
-    moveVertex(vertex1, moveX, moveY);
-    moveVertex(vertex2, moveX, moveY);
-    moveVertex(vertex3, moveX, moveY);
-    moveVertex(vertex4, moveX, moveY);
-    center = c;
+    point_t currentPos = getFrameRect().pos;
+    double dx = c.x - currentPos.x;
+    double dy = c.y - currentPos.y;
+    move(dx, dy);
   }
   void Diamond::move(double dx, double dy)
   {
-    move({center.x + dx, center.y + dy});
+    moveVertex(vertex1, dx, dy);
+    moveVertex(vertex2, dx, dy);
+    moveVertex(vertex3, dx, dy);
+    moveVertex(vertex4, dx, dy);
   }
   void Diamond::scale(double k)
   {

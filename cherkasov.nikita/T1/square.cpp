@@ -30,10 +30,9 @@ namespace cherkasov
   void Square::move(point_t c)
   {
     point_t currentPos = getFrameRect().pos;
-    double moveX = c.x - currentPos.x;
-    double moveY = c.y - currentPos.y;
-    left.x += moveX;
-    left.y += moveY;
+    double dx = c.x - currentPos.x;
+    double dy = c.y - currentPos.y;
+    move(dx, dy);
   }
   void Square::move(double dx, double dy)
   {
