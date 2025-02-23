@@ -1,6 +1,7 @@
 #ifndef SHAPE_UTILS
 #define SHAPE_UTILS
 #include "base-types.hpp"
+#include "shape.hpp"
 
 namespace cherkasov
 {

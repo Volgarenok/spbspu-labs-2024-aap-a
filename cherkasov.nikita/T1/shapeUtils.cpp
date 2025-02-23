@@ -1,5 +1,14 @@
 #include "shapeUtils.hpp"
+#include <stdexcept>
 
+void cherkasov::Shape::scale(double k)
+{
+  if (k < 0)
+  {
+    throw std::logic_error("k must be positive");
+  }
+  scale(k);
+}
 void cherkasov::scalePoint(point_t& vertex, const point_t& center, double k)
 {
   vertex.x = center.x + (vertex.x - center.x) * k;

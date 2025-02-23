@@ -16,6 +16,10 @@ namespace cherkasov
       {
         throw std::invalid_argument("no correct coordinat the parallelogram");
       }
+      if(!(y1 == y2 || y1 == y3 || y2 == y3))
+      {
+        throw std::invalid_argument("no correct coordonat");
+      }
     }
   double Parallelogram::getArea() const
   {
@@ -53,14 +57,10 @@ namespace cherkasov
   }
   void Parallelogram::scale(double k)
   {
-    if (k < 0)
-    {
-      throw std::logic_error("k must be positive");
-    }
     point_t center = getFrameRect().pos;
     scalePoint(vertex1, center, k);
     scalePoint(vertex2, center, k);
     scalePoint(vertex3, center, k);
-    vertex4 = {vertex1.x + vertex3.x - vertex2.x, vertex1.y + vertex3.y - vertex2.y};
+    scalePoint(vertex4, center, k);
   }
 }
