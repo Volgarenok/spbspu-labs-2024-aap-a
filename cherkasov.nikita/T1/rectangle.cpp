@@ -7,8 +7,8 @@
 namespace cherkasov
 {
   Rectangle::Rectangle(double x1, double y1, double x2, double y2)
-  : right(right),
-    left(left)
+  : left(left),
+    right(right)
     {
       if (left.x >= right.x || left.y >= right.y)
       {
