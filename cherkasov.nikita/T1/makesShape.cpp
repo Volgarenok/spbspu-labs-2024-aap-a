@@ -80,7 +80,7 @@ namespace cherkasov
     }
     else
     {
-      return nullptr;
+      throw std::invalid_argument("incorrect shape");
     }
   }
 }

@@ -6,7 +6,7 @@
 
 int main()
 {
-  cherkasov::Shape* shapes[1000] = {};
+  cherkasov::Shape* shapes[10000] = {};
   std::string inputCommand;
   size_t shapeCount = 0;
   bool invalidInput = false;
