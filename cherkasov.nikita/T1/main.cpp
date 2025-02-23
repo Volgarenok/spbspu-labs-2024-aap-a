@@ -65,10 +65,9 @@ int main()
   }
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
+  cherkasov::deleteShapes(shapes, shapeCount);
   if (invalidInput)
   {
     std::cerr << "invalid input encountered\n";
   }
-  cherkasov::deleteShapes(shapes, shapeCount);
-  return 0;
 }

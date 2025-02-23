@@ -39,7 +39,7 @@ namespace cherkasov
     double x3 = 0.0;
     double y3 = 0.0;
     input >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-    if (!(input) && !(y1 == y2 || y1 == y3 || y2 == y3))
+    if (!(input))
     {
       throw std::invalid_argument("no correct coordinat the parallelogram");
     }
@@ -54,13 +54,13 @@ namespace cherkasov
     double x3 = 0.0;
     double y3 = 0.0;
     input >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-    if (!(input) && ((x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3)))
+    if (!(input))
     {
       throw std::invalid_argument("no input coordinat");
     }
     return new Diamond(x1, y1, x2, y2, x3, y3);
   }
-  Shape* createShape(const std::string& inputCommand, std::istream& input)
+  Shape* createShape(const std::string& inputCommand, const std::istream& input)
   {
     if (inputCommand == "RECTANGLE")
     {
