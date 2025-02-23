@@ -54,10 +54,6 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
   point_t scale;
   double ratio = 0;
   bool scaled = false;
-  //auto handleError = [&](const std::invalid_argument & e)
-  //{
-    //error << e.what() << '\n';
-  //};
   while (input >> inpStr)
   {
     try
@@ -103,7 +99,6 @@ std::size_t bocharov::getShapeInfo(std::istream & input, std::ostream & error, s
     catch (const std::invalid_argument & e)
     {
       error << e.what() << '\n';
-      //handleError(e);
     }
   }
   if (!scaled)
