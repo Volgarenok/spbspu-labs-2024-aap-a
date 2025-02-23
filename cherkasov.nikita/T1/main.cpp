@@ -13,7 +13,7 @@ int main()
   cherkasov::point_t p = {0.0, 0.0};
   double scalingFactor = 0.0;
   bool scalingRequested = false;
-  while (std::cin >> inputCommand && inputCommand != "SCALLE")
+  while (std::cin >> inputCommand && inputCommand != "SCALE")
   {
     if (std::cin.eof())
     {
