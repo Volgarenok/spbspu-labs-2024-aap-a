@@ -14,7 +14,7 @@ int main()
   double scalingFactor = 0.0;
   while (!std::cin.eof() && inputCommand != "SCALE")
   {
-  std::cin >> invalidInput;
+  std::cin >> inputCommand;
   if (std::cin.eof())
   {
     cherkasov::deleteShapes(shapes, shapeCount);
