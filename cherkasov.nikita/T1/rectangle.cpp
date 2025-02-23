@@ -7,9 +7,18 @@
 namespace cherkasov
 {
   Rectangle::Rectangle(double x1, double y1, double x2, double y2)
-  : left {std::min(x1, x2), std::min(y1, y2)},
-    right {std::max(x1, x2), std::max(y1, y2)}
-    {}
+  : right(right),
+    left(left)
+    {
+      if (left.x >= right.x || left.y >= right.y)
+      {
+        throw std::invalid_argument("incorrect coordinats");
+      }
+      if (left.x == right.x || left.y == right.y)
+      {
+        throw std::invalid_argument("coordinats must not match");
+      }
+    }
   double Rectangle::getArea() const
   {
     double width = right.x - left.x;
