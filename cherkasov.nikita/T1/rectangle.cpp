@@ -46,10 +46,6 @@ namespace cherkasov
   }
   void Rectangle::scale(double k)
   {
-    if (k < 0)
-    {
-      throw std::logic_error("k must be positive");
-    }
     point_t center = getFrameRect().pos;
     scalePoint(left, center, k);
     scalePoint(right, center, k);
