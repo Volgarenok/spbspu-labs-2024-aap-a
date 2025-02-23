@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <stdexcept>
 #include "procesShape.hpp"
 #include "makesShape.hpp"
 
