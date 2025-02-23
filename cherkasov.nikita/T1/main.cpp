@@ -12,7 +12,7 @@ int main()
   bool invalidInput = false;
   cherkasov::point_t p = {0.0, 0.0};
   double scalingFactor = 0.0;
-  bool scalingRequested = false;
+ // bool scalingRequested = false;
   while (!std::cin.eof() && inputCommand != "SCALE")
   {
     std::cin >> invalidInput;
@@ -22,9 +22,7 @@ int main()
       std::cerr << "EOF encountered\n";
       return 1;
     }
-    else
-    {
-      try
+    try
       {
         cherkasov::Shape* shape = cherkasov::createShape(inputCommand, std::cin);
         if (shape)
@@ -46,15 +44,14 @@ int main()
         cherkasov::deleteShapes(shapes, shapeCount);
         return 1;
       }
-    }
   }
   if (shapeCount == 0)
   {
     std::cerr << "no shapes specified\n";
     return 1;
   }
-  /*if (inputCommand == "SCALE")
-  {
+  //if (inputCommand == "SCALE")
+  //{}
     std::cin >> p.x >> p.y >> scalingFactor;
     if (scalingFactor <= 0)
     {
@@ -62,14 +59,12 @@ int main()
       std::cerr << "Error: scale must be positive.\n";
       return 1;
     }
-    scalingRequested = true;
-  }*/
-  if (!scalingRequested)
+  /*if (!scalingRequested)
   {
     cherkasov::deleteShapes(shapes, shapeCount);
     std::cerr << "scaling was not specified\n";
     return 1;
-  }
+  }*/
   std::cout << std::fixed << std::setprecision(1);
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
