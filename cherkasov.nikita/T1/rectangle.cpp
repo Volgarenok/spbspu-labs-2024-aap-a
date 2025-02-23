@@ -6,7 +6,7 @@
 
 namespace cherkasov
 {
-  Rectangle::Rectangle(double x1, double y1, double x2, double y2)
+  Rectangle::Rectangle(point_t left, point_t right)
   : left(left),
     right(right)
     {
