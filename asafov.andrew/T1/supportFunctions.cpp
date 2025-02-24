@@ -40,7 +40,7 @@ double asafov::pi()
   return std::atan(1.0) * 4;
 }
 
-void asafov::increaseDelta(point_t point, double dx, double dy)
+void asafov::increaseDelta(point_t& point, double dx, double dy)
 {
   point.x += dx;
   point.y += dy;

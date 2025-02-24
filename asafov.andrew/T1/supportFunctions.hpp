@@ -10,7 +10,7 @@ namespace asafov
   void isotropicScale(Shape* sh, point_t pos, double scale);
   void outputFrameRect(Shape* shape, std::ostream& out);
   double pi();
-  void increaseDelta(point_t point, double dx, double dy);
+  void increaseDelta(point_t& point, double dx, double dy);
   double getCenterDelta(double one, double two, double three);
   double getCenterDelta(double one, double two, double three, double four);
   double getLength(point_t one, point_t two);
