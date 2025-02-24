@@ -16,9 +16,9 @@ namespace cherkasov
       {
         throw std::invalid_argument("no correct coordinat the parallelogram");
       }
-      if (getArea == 0)
+      if (!(y1 == y2 || y1 == y3 || y2 == y3) && (y1 != y3))
       {
-        throw std::invalid_argument("coordinates do not form a valid parallelogram");
+        throw std::invalid_argument("Incorrect coordinates");
       }
     }
   double Parallelogram::getArea() const
