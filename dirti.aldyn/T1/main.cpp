@@ -22,12 +22,8 @@ int main()
   std::string figure;
   size_t num = 0;
   double sum_area = 0.0;
-  while (!std::cin.eof() && std::cin >> figure)
+  while (!std::cin.eof() && std::cin >> figure && figure != "SCALE")
   {
-    if (figure == "SCALE")
-    {
-      break;
-    }
     if (figure == "RECTANGLE")
     {
       try
