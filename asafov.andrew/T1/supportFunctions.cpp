@@ -1,4 +1,5 @@
 #include "supportFunctions.hpp"
+#include <algorithm>
 #include "cmath"
 
 void asafov::scalePoint(asafov::point_t& point, asafov::point_t fpoint, double scale)
