@@ -117,10 +117,7 @@ void asafov::scaleShapes(Shape** shapes, size_t count, point_t pos, double scale
     out << ' ';
     outputFrameRect(shapes[i], out);
   }
-  std::cout << 123;
   std::ios::Init();
-  std::cout << 123;
-
 }
 
 void asafov::deleteShapes(Shape** shapes, size_t count)
