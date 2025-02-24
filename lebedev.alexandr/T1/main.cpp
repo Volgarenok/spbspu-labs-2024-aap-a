@@ -14,19 +14,12 @@ int main()
   lebedev::Shape* shps[10000] = {};
   size_t count = 0;
   std::string shapeName;
-  bool isIncorrectSize = false;
+  bool isIncorrectSize = false, thereIsScaleCommand = false;
   lebedev::point_t scalePoint;
   double k = 0;
 
   while (std::cin >> shapeName)
   {
-    if (std::cin.eof())
-    {
-      std::cerr << "Eof before scale command!\n";
-      lebedev::deleteShapePtr(shps, count);
-      return 1;
-    }
-
     try
     {
       if (shapeName == "RECTANGLE")
@@ -66,8 +59,16 @@ int main()
         lebedev::deleteShapePtr(shps, count);
         return 1;
       }
+      thereIsScaleCommand = true;
       break;
     }
+  }
+
+  if (std::cin.eof() && !thereIsScaleCommand)
+  {
+    std::cerr << "Eof before scale command!\n";
+    lebedev::deleteShapePtr(shps, count);
+    return 1;
   }
 
   if (isIncorrectSize)
