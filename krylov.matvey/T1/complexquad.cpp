@@ -4,15 +4,15 @@
 #include "triangle.hpp"
 
 krylov::Complexquad::Complexquad(const point_t& a, const point_t& b, const point_t& c, const point_t& d):
-  t1_(a, findIntersection(a, b, c, d), {(a.x + d.x) / 2, (a.y + d.y) / 2}),
-  t2_(d, findIntersection(a, b, c, d), {(a.x + d.x) / 2, (a.y + d.y) / 2}),
-  t3_(c, findIntersection(a, b, c, d), {(b.x + c.x) / 2, (b.y + c.y) / 2}),
-  t4_(b, findIntersection(a, b, c, d), {(b.x + c.x) / 2, (b.y + c.y) / 2})
+  t1_(a, krylov::findIntersection(a, b, c, d), {(a.x + d.x) / 2, (a.y + d.y) / 2}),
+  t2_(d, krylov::findIntersection(a, b, c, d), {(a.x + d.x) / 2, (a.y + d.y) / 2}),
+  t3_(c, krylov::findIntersection(a, b, c, d), {(b.x + c.x) / 2, (b.y + c.y) / 2}),
+  t4_(b, krylov::findIntersection(a, b, c, d), {(b.x + c.x) / 2, (b.y + c.y) / 2})
 {
-  const point_t p = findIntersection(a, b, c, d);
+  const point_t p = krylov::findIntersection(a, b, c, d);
   bool isComplexquad = (((a.x == b.x && a.y == b.y) || (b.x == c.x && b.y == c.y) || (c.x == d.x && c.y == d.y)
     || (a.x == c.x && a.y == c.y) || (a.x == d.x && a.y == d.y) || (b.x == d.x && b.y == d.y))
-      && (!(isPointOnSegment(p, a, b) && isPointOnSegment(p, c, d))) && (!((p.x == a.x && p.y == a.y)
+      && (!(krylov::isPointOnSegment(p, a, b) && krylov::isPointOnSegment(p, c, d))) && (!((p.x == a.x && p.y == a.y)
         || (p.x == b.x && p.y == b.y) || (p.x == c.x && p.y == c.y) || (p.x == d.x && p.y == d.y))));
   if (isComplexquad)
   {
@@ -23,21 +23,6 @@ krylov::Complexquad::Complexquad(const point_t& a, const point_t& b, const point
   t3Center_ = t3_.getFrameRect().pos;
   t4Center_ = t4_.getFrameRect().pos;
   complexquadFrameCenter_ = getFrameRect().pos;
-}
-bool krylov::Complexquad::isPointOnSegment(const point_t& point, const point_t& segStart, const point_t& segEnd) const
-{
-  bool isXCorrect = std::min(segStart.x, segEnd.x) <= point.x && point.x <= std::max(segStart.x, segEnd.x);
-  bool isYCorrect = std::min(segStart.y, segEnd.y) <= point.y && point.y <= std::max(segStart.y, segEnd.y);
-  return isXCorrect && isYCorrect;
-}
-krylov::point_t krylov::Complexquad::findIntersection(const point_t& a, const point_t& b, const point_t& c, const point_t& d) const
-{
-  const double m1 = (b.y - a.y) / (b.x - a.x);
-  const double m2 = (d.y - c.y) / (d.x - c.x);
-  const double b1 = a.y - m1 * a.x;
-  const double b2 = c.y - m2 * c.x;
-  const point_t intersectionPoint = {(b2 - b1) / (m1 - m2), m1 * ((b2 - b1) / (m1 - m2)) + b1};
-  return intersectionPoint;
 }
 double krylov::Complexquad::getArea() const
 {
@@ -81,3 +66,18 @@ void krylov::Complexquad::unsafeScale(double factor) noexcept
   t4_.move((t4Center_.x - center.x) * factor - dx, (t4Center_.y - center.y) * factor - dy);
 }
 
+bool krylov::isPointOnSegment(const point_t& point, const point_t& segStart, const point_t& segEnd)
+{
+  bool isXCorrect = std::min(segStart.x, segEnd.x) <= point.x && point.x <= std::max(segStart.x, segEnd.x);
+  bool isYCorrect = std::min(segStart.y, segEnd.y) <= point.y && point.y <= std::max(segStart.y, segEnd.y);
+  return isXCorrect && isYCorrect;
+}
+krylov::point_t krylov::findIntersection(const point_t& a, const point_t& b, const point_t& c, const point_t& d)
+{
+  const double m1 = (b.y - a.y) / (b.x - a.x);
+  const double m2 = (d.y - c.y) / (d.x - c.x);
+  const double b1 = a.y - m1 * a.x;
+  const double b2 = c.y - m2 * c.x;
+  const point_t intersectionPoint = {(b2 - b1) / (m1 - m2), m1 * ((b2 - b1) / (m1 - m2)) + b1};
+  return intersectionPoint;
+}
