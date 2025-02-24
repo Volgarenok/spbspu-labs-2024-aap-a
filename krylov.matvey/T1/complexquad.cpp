@@ -4,10 +4,10 @@
 #include "triangle.hpp"
 
 krylov::Complexquad::Complexquad(const point_t& a, const point_t& b, const point_t& c, const point_t& d):
-  t1_(a, b, c),
-  t2_(c, d, a),
-  t3_(b, c, d),
-  t4_(d, a, b)
+  t1_(a, findIntersection(a, b, c, d), {(a.x + d.x) / 2, (a.y + d.y) / 2}),
+  t2_(d, findIntersection(a, b, c, d), {(a.x + d.x) / 2, (a.y + d.y) / 2}),
+  t3_(c, findIntersection(a, b, c, d), {(b.x + c.x) / 2, (b.y + c.y) / 2}),
+  t4_(b, findIntersection(a, b, c, d), {(b.x + c.x) / 2, (b.y + c.y) / 2})
 {
   const point_t p = findIntersection(a, b, c, d);
   bool isComplexquad = (((a.x == b.x && a.y == b.y) || (b.x == c.x && b.y == c.y) || (c.x == d.x && c.y == d.y)
@@ -18,12 +18,6 @@ krylov::Complexquad::Complexquad(const point_t& a, const point_t& b, const point
   {
     throw std::invalid_argument("Invalid complexquad coordinates");
   }
-  const point_t m1 = {(a.x + d.x) / 2, (a.y + d.y) / 2};
-  const point_t m2 = {(b.x + c.x) / 2, (b.y + c.y) / 2};
-  t1_ = Triangle(a, p, m1);
-  t2_ = Triangle(d, p, m1);
-  t3_ = Triangle(c, p, m2);
-  t4_ = Triangle(b, p, m2);
   t1Center_ = t1_.getFrameRect().pos;
   t2Center_ = t2_.getFrameRect().pos;
   t3Center_ = t3_.getFrameRect().pos;
