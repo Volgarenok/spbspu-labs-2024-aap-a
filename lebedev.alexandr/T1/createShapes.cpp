@@ -41,7 +41,7 @@ lebedev::Diamond* lebedev::createDiamond(std::istream& input)
     throw std::invalid_argument("");
   }
 
-  return new lebedev::Diamond(p1, p2, p3);
+  return new lebedev::Diamond(p2, p3, p1);
 }
 
 lebedev::Concave* lebedev::createConcave(std::istream& input)
