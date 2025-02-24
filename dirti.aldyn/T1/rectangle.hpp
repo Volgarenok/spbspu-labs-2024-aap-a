@@ -1,10 +1,11 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
 #include "shape.hpp"
+#include <stdexcept>
 
 namespace dirti
 {
-  struct Rectangle final : public Shape
+  struct Rectangle final: public Shape
   {
   public:
     Rectangle(const point_t left_low, const point_t right_high);

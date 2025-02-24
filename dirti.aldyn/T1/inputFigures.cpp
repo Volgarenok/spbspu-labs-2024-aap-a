@@ -2,13 +2,14 @@
 
 dirti::Rectangle* dirti::makeRectangle(std::istream& in)
 {
-  point_t left_low = {};
-  point_t right_high = {};
-  in >> left_low.x >> left_low.y >> right_high.x >> right_high.y;
-  if (left_low.x >= right_high.x || left_low.y >= right_high.y)
+  double leftX = 0.0, leftY = 0.0;
+  double rightX = 0.0, rightY = 0.0;
+  Rectangle* newRectangle = nullptr;
+  if (in >> leftX >> leftY >> rightX >> rightY)
   {
-    throw std::logic_error("Wrong shape");
+    point_t left_low = { leftX, leftY };
+    point_t right_high = { rightX, rightY };
+    newRectangle = new Rectangle(left_low, right_high);
   }
-  Rectangle* newRectangle = new Rectangle(left_low, right_high);
   return newRectangle;
 }

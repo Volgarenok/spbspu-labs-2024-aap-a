@@ -1,9 +1,14 @@
 #include "rectangle.hpp"
 
-dirti::Rectangle::Rectangle(const point_t left_low, const point_t right_high) :
+dirti::Rectangle::Rectangle(const point_t left_low, const point_t right_high):
   left_low_(left_low),
   right_high_(right_high)
-{}
+{
+  if (left_low.x >= right_high.x || left_low.y >= right_high.y)
+  {
+    throw std::logic_error("Wrong shape");
+  }
+}
 
 double dirti::Rectangle::getArea() const
 {

@@ -5,6 +5,7 @@
 
 namespace dirti
 {
-  void outputFigures(Shape** shapes, std::ostream& out);
+  std::ostream& outputFigures(Shape** shapes, std::ostream& out);
 }
+
 #endif
