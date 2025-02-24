@@ -1,4 +1,5 @@
 #include "checkString.hpp"
+#include <inputString.hpp>
 
 namespace belobrov
 {

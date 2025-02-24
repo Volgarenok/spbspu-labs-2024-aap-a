@@ -2,7 +2,6 @@
 #include "inputString.hpp"
 #include "checkString.hpp"
 
-
 int main()
 {
   char* string = belobrov::inputString(std::cin);
