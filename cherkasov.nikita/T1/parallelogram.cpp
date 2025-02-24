@@ -18,7 +18,7 @@ namespace cherkasov
       }
       if (!(y1 == y2 || y1 == y3 || y2 == y3) && (y1 != y3))
       {
-        throw std::invalid_argument("Incorrect coordinates");
+        throw std::invalid_argument("incorrect coordinates");
       }
     }
   double Parallelogram::getArea() const
