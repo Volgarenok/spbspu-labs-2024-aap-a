@@ -10,16 +10,16 @@ namespace cherkasov
   : vertex1{x1, y1},
     vertex2{x2, y2},
     vertex3{x3, y3},
-    vertex4{x2 + (x1 - x3), y2 + (y3 - y1)},
+    vertex4{x2 + (x1 - x3), y2 + (y1 - y3)},
     center{(x1 + x3) / 2, (y1 + y3) / 2}
     {
-      if ((x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3))
+      if (x1 == x2 && y1 == y2 && x1 == x3 && y1 == y3)
       {
-        throw std::invalid_argument("no correct coordinat the parallelogram");
+        throw std::invalid_argument("no input coordinat diamond");
       }
-      if (!(y1 == y2 || y1 == y3 || y2 == y3) && (y1 != y3))
+      if (((x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3)))
       {
-        throw std::invalid_argument("incorrect coordinates");
+        throw std::invalid_argument("no input coordinat");
       }
     }
   double Diamond::getArea() const
