@@ -34,10 +34,8 @@ asafov::rectangle_t asafov::Rectangle::getFrameRect() const
 
 void asafov::Rectangle::move(double dx, double dy)
 {
-  lb_.x += dx;
-  rt_.x += dx;
-  lb_.y += dy;
-  rt_.y += dy;
+  increaseDelta(lb_, dx, dy);
+  increaseDelta(rt_, dx, dy);
 }
 
 void asafov::Rectangle::move(point_t pos)
