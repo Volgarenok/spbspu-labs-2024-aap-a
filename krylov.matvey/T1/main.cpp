@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <iomanip>
+#include <limits>
 #include "processShapes.hpp"
 #include "rectangle.hpp"
 #include "ring.hpp"
@@ -16,7 +17,7 @@ int main()
     size_t shapeCount = 0;
     bool scaleCommandProcessed = false;
     bool invalidDescriptions = false;
-    while (!std::cin.eof())
+    while (!std::cin.eof() && !scaleCommandProcessed)
     {
       std::string shapeType = "";
       std::cin >> shapeType;
@@ -116,15 +117,13 @@ int main()
         }
         else
         {
-          std::string skippedLines = "";
-          krylov::simpleGetLine(std::cin, skippedLines);
+          std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
         }
       }
       catch (const std::exception& e)
       {
         invalidDescriptions = true;
-        std::string skippedLines = "";
-        krylov::simpleGetLine(std::cin, skippedLines);
+        std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
       }
     }
 
