@@ -16,6 +16,10 @@ namespace cherkasov
       {
         throw std::invalid_argument("no correct coordinat the parallelogram");
       }
+      if (getArea == 0)
+      {
+        throw std::invalid_argument("coordinates do not form a valid parallelogram");
+      }
     }
   double Parallelogram::getArea() const
   {
