@@ -67,7 +67,7 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
   {
     point_t points[4];
     getPoints(points, 4, in);
-    Complexquad* complexquad = new Complexquad(points[0], points[1], points[2], points[3]); 
+    Complexquad* complexquad = new Complexquad(points[0], points[1], points[2], points[3]);
     return complexquad;
   }
   else
