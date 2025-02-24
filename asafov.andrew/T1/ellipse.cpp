@@ -3,8 +3,6 @@
 #include <stdexcept>
 #include "supportFunctions.hpp"
 
-#define pi std::atan(1.0) * 4
-
 asafov::Ellipse::Ellipse(point_t center, double verticalradius, double horizontalradius):
   center_(center),
   verticalradius_(verticalradius),
@@ -18,24 +16,20 @@ asafov::Ellipse::Ellipse(point_t center, double verticalradius, double horizonta
 
 double asafov::Ellipse::getArea() const
 {
-  return pi * verticalradius_ * horizontalradius_;
+  return pi() * verticalradius_ * horizontalradius_;
 }
 
 asafov::rectangle_t asafov::Ellipse::getFrameRect() const
 {
   double height = verticalradius_ * 2.0;
   double width = horizontalradius_ * 2.0;
-  rectangle_t frect;
-  frect.height = height;
-  frect.width = width;
-  frect.pos = center_;
+  rectangle_t frect{width, height, center_};
   return frect;
 }
 
 void asafov::Ellipse::move(double dx, double dy)
 {
-  center_.x += dx;
-  center_.y += dy;
+  increaseDelta(center_, dx, dy);
 }
 
 void asafov::Ellipse::move(point_t pos)

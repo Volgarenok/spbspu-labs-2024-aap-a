@@ -1,4 +1,5 @@
 #include "supportFunctions.hpp"
+#include "cmath"
 
 void asafov::scalePoint(asafov::point_t& point, asafov::point_t fpoint, double scale)
 {
@@ -31,4 +32,38 @@ void asafov::outputFrameRect(Shape* shape, std::ostream& out)
   out << ' ' << rect.pos.y - rect.height / 2;
   out << ' ' << rect.pos.x + rect.width / 2;
   out << ' ' << rect.pos.y + rect.height / 2;
+}
+
+double asafov::pi()
+{
+  return std::atan(1.0) * 4;
+}
+
+void asafov::increaseDelta(point_t point, double dx, double dy)
+{
+  point.x += dx;
+  point.y += dy;
+}
+
+double asafov::getCenterDelta(double one, double two, double three)
+{
+  return std::max({one, two, three}) - std::min({one, two, three});
+}
+
+double asafov::getCenterDelta(double one, double two, double three, double four)
+{
+  return std::max({one, two, three, four}) - std::min({one, two, three, four});
+}
+
+void asafov::getPoints(point_t* points, size_t size, std::istream& in)
+{
+  for (size_t i = 0; i < size; i++)
+  {
+    points[i] = getPoint(in);
+  }
+}
+
+double asafov::getLength(point_t one, point_t two)
+{
+  return std::pow(std::pow((one.x - two.x), 2.0) + std::pow((one.y - two.y), 2.0), 0.5);
 }

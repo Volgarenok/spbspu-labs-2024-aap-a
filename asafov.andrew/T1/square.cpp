@@ -22,18 +22,13 @@ asafov::rectangle_t asafov::Square::getFrameRect() const
 {
   double x = lb_.x + side_ / 2.0;
   double y = lb_.y + side_ / 2.0;
-  rectangle_t rect;
-  rect.height = side_;
-  rect.width = side_;
-  rect.pos.x = x;
-  rect.pos.y = y;
+  rectangle_t rect{side_, side_, {x, y}};
   return rect;
 }
 
 void asafov::Square::move(double dx, double dy)
 {
-  lb_.x += dx;
-  lb_.y += dy;
+  increaseDelta(lb_, dx, dy);
 }
 
 void asafov::Square::move(point_t pos)

@@ -3,16 +3,13 @@
 #include <cmath>
 #include <stdexcept>
 #include "supportFunctions.hpp"
-#include "getLength.hpp"
 
 asafov::Triangle::Triangle(point_t one, point_t two, point_t three):
-  one_(one),
-  two_(two),
-  three_(three)
+  points_{one, two, three}
 {
-  double sidea = std::pow(std::pow((one.x - two.x), 2.0) + std::pow((one.y - two.y), 2.0), 0.5);
-  double sideb = std::pow(std::pow((two.x - three.x), 2.0) + std::pow((two.y - three.y), 2.0), 0.5);
-  double sidec = std::pow(std::pow((one.x - three.x), 2.0) + std::pow((one.y - three.y), 2.0), 0.5);
+  double sidea = getLength(one, two);
+  double sideb = getLength(two, three);
+  double sidec = getLength(one, three);
   double temp = (one.x - two.x + one.y - two.y) * (one.x - three.x + one.y - three.y) * (two.x - three.x + two.y - three.y);
   if (temp == 0 || sidea + sideb <= sidec || sidea + sidec <= sideb || sideb + sidec <= sidea)
   {
@@ -22,34 +19,28 @@ asafov::Triangle::Triangle(point_t one, point_t two, point_t three):
 
 double asafov::Triangle::getArea() const
 {
-  double sidea = std::pow(std::pow((one_.x - two_.x), 2.0) + std::pow((one_.y - two_.y), 2.0), 0.5);
-  double sideb = std::pow(std::pow((two_.x - three_.x), 2.0) + std::pow((two_.y - three_.y), 2.0), 0.5);
-  double sidec = std::pow(std::pow((one_.x - three_.x), 2.0) + std::pow((one_.y - three_.y), 2.0), 0.5);
+  double sidea = getLength(points_[0], points_[1]);
+  double sideb = getLength(points_[1], points_[2]);
+  double sidec = getLength(points_[0], points_[2]);;
   return std::pow(((sidea + sideb + sidec) * (sidea + sideb - sidec) * (sidea - sideb + sidec) * (sideb + sidec - sidea) / 16.0), 0.5);
 }
 
 asafov::rectangle_t asafov::Triangle::getFrameRect() const
 {
-  double height = asafov::getLength({one_.y, two_.y, three_.y});
-  double width = asafov::getLength({one_.x, two_.x, three_.x});
-  double x = std::min({one_.x, two_.x, three_.x}) + width / 2.0;
-  double y = std::min({one_.y, two_.y, three_.y}) + height / 2.0;
-  rectangle_t rect;
-  rect.height = height;
-  rect.width = width;
-  rect.pos.x = x;
-  rect.pos.y = y;
+  double height = asafov::getCenterDelta(points_[0].y, points_[1].y, points_[2].y);
+  double width = asafov::getCenterDelta(points_[0].x, points_[1].x, points_[2].x);
+  double x = std::min({points_[0].x, points_[1].x, points_[2].x}) + width / 2.0;
+  double y = std::min({points_[0].y, points_[1].y, points_[2].y}) + height / 2.0;
+  rectangle_t rect{width, height, {x, y}};
   return rect;
 }
 
 void asafov::Triangle::move(double dx, double dy)
 {
-  one_.x += dx;
-  one_.y += dy;
-  two_.x += dx;
-  two_.y += dy;
-  three_.x += dx;
-  three_.y += dy;
+  for (size_t i = 0; i < 3; i++)
+  {
+    increaseDelta(points_[i], dx, dy);
+  }
 }
 
 void asafov::Triangle::move(point_t pos)
@@ -65,7 +56,8 @@ void asafov::Triangle::scale(double scale)
     throw std::logic_error("incorrect scale");
   }
   rectangle_t rect = getFrameRect();
-  scalePoint(one_, rect.pos, scale);
-  scalePoint(two_, rect.pos, scale);
-  scalePoint(three_, rect.pos, scale);
+  for (size_t i = 0; i < 3; i++)
+  {
+    scalePoint(points_[i], rect.pos, scale);
+  }
 }

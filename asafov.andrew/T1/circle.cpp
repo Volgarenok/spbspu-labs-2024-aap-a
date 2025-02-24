@@ -3,8 +3,6 @@
 #include <stdexcept>
 #include "supportFunctions.hpp"
 
-#define pi std::atan(1.0) * 4
-
 asafov::Circle::Circle(point_t center, double radius):
   center_(center),
   radius_(radius)
@@ -17,23 +15,19 @@ asafov::Circle::Circle(point_t center, double radius):
 
 double asafov::Circle::getArea() const
 {
-  return radius_ * radius_ * pi;
+  return radius_ * radius_ * pi();
 }
 
 asafov::rectangle_t asafov::Circle::getFrameRect() const
 {
   double height = 2.0 * radius_;
-  rectangle_t frect;
-  frect.pos = center_;
-  frect.height = height;
-  frect.width = height;
+  rectangle_t frect{height, height, center_};
   return frect;
 }
 
 void asafov::Circle::move(double dx, double dy)
 {
-  center_.x += dx;
-  center_.y += dy;
+  increaseDelta(center_, dx, dy);
 }
 
 void asafov::Circle::move(point_t pos)

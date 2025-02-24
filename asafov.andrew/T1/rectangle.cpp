@@ -24,20 +24,14 @@ asafov::rectangle_t asafov::Rectangle::getFrameRect() const
   double width = rt_.x - lb_.x;
   double x = lb_.x + (rt_.x - lb_.x) / 2.0;
   double y = lb_.y + (rt_.y - lb_.y) / 2.0;
-  rectangle_t rect;
-  rect.height = height;
-  rect.width = width;
-  rect.pos.x = x;
-  rect.pos.y = y;
+  rectangle_t rect{width, height, {x, y}};
   return rect;
 }
 
 void asafov::Rectangle::move(double dx, double dy)
 {
-  lb_.x += dx;
-  rt_.x += dx;
-  lb_.y += dy;
-  rt_.y += dy;
+  increaseDelta(lb_, dx, dy);
+  increaseDelta(rt_, dx, dy);
 }
 
 void asafov::Rectangle::move(point_t pos)

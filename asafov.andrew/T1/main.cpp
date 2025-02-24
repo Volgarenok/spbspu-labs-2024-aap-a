@@ -2,19 +2,14 @@
 #include <iostream>
 #include "outputFunctions.hpp"
 
-using asafov::getName;
-using asafov::ShapeFactory;
-using asafov::scaleShapes;
-using asafov::Shape;
-
 int main()
 {
-  Shape** shapes = new Shape*[10000];
+  asafov::Shape** shapes = new asafov::Shape*[10000];
   size_t count = 0;
   std::string name = {};
   while (name != "SCALE")
   {
-    name = getName(std::cin);
+    name = asafov::getName(std::cin);
     if (name[0] == '\0')
     {
       asafov::deleteShapes(shapes, count);
@@ -29,7 +24,7 @@ int main()
     {
       try
       {
-        shapes[count] = ShapeFactory(name, std::cin);
+        shapes[count] = asafov::ShapeFactory(name, std::cin);
       }
       catch (const std::logic_error &)
       {

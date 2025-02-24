@@ -58,19 +58,16 @@ asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
   }
   else if (shapename == "TRIANGLE")
   {
-    point_t a = getPoint(in);
-    point_t b = getPoint(in);
-    point_t c = getPoint(in);
-    Triangle* triangle = new Triangle(a, b, c);
+    point_t points[3];
+    getPoints(points, 3, in);
+    Triangle* triangle = new Triangle(points[0], points[1], points[2]);
     return triangle;
   }
   else if (shapename == "COMPLEXQUAD")
   {
-    point_t a = getPoint(in);
-    point_t b = getPoint(in);
-    point_t c = getPoint(in);
-    point_t d = getPoint(in);
-    Complexquad* complexquad = new Complexquad(a, b, c, d);
+    point_t points[4];
+    getPoints(points, 4, in);
+    Complexquad* complexquad = new Complexquad(points[0], points[1], points[2], points[3]); 
     return complexquad;
   }
   else
@@ -120,6 +117,10 @@ void asafov::scaleShapes(Shape** shapes, size_t count, point_t pos, double scale
     out << ' ';
     outputFrameRect(shapes[i], out);
   }
+  std::cout << 123;
+  std::ios::Init();
+  std::cout << 123;
+
 }
 
 void asafov::deleteShapes(Shape** shapes, size_t count)

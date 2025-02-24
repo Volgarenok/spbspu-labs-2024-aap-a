@@ -13,9 +13,7 @@ namespace asafov
     void move(double dx, double dy);
     void scale(double scale);
   private:
-    point_t one_;
-    point_t two_;
-    point_t three_;
+    point_t points_[3];
   };
 }
 #endif

@@ -3,13 +3,9 @@
 #include <cmath>
 #include <stdexcept>
 #include "supportFunctions.hpp"
-#include "getLength.hpp"
 
 asafov::Complexquad::Complexquad(point_t one, point_t two, point_t three, point_t four):
-  one_(one),
-  two_(two),
-  three_(three),
-  four_(four)
+  points_{one, two, three, four}
 {
   double temp = (one.x - two.x + one.y - two.y) * (one.x - three.x + one.y - three.y) * (one.x - four.x + one.y - four.y);
   if (temp * (two.x - three.x + two.y - three.y) * (two.x - four.x + two.y - four.y) * (three.x - four.x + three.y - four.y) == 0)
@@ -21,17 +17,17 @@ asafov::Complexquad::Complexquad(point_t one, point_t two, point_t three, point_
 double asafov::Complexquad::getArea() const
 {
   point_t center = {};
-  center.x = getLength({one_.x, two_.x, three_.x, four_.x});
-  center.y = getLength({one_.y, two_.y, three_.y, four_.y});
-  double sidea = std::pow(std::pow((one_.x - four_.x), 2.0) + std::pow((one_.y - four_.y), 2.0), 0.5);
-  double sideb = std::pow(std::pow((four_.x - center.x), 2.0) + std::pow((four_.y - center.y), 2.0), 0.5);
-  double sidec = std::pow(std::pow((one_.x - center.x), 2.0) + std::pow((one_.y - center.y), 2.0), 0.5);
+  center.x = getCenterDelta(points_[0].x, points_[1].x, points_[2].x, points_[3].x);
+  center.y = getCenterDelta(points_[0].y, points_[1].y, points_[2].y, points_[3].y);
+  double sidea = getLength(points_[0], points_[3]);
+  double sideb = getLength(points_[0], center);
+  double sidec = getLength(points_[3], center);
   double semiarea = (sidea + sideb + sidec) * (sidea + sideb - sidec) * (sidea - sideb + sidec);
   semiarea *= (sideb + sidec - sidea) / 16.0;
   semiarea = std::pow(semiarea, 0.5);
-  sidea = std::pow(std::pow((two_.x - three_.x), 2.0) + std::pow((two_.y - three_.y), 2.0), 0.5);
-  sideb = std::pow(std::pow((two_.x - center.x), 2.0) + std::pow((two_.y - center.y), 2.0), 0.5);
-  sidec = std::pow(std::pow((three_.x - center.x), 2.0) + std::pow((three_.y - center.y), 2.0), 0.5);
+  sidea = getLength(points_[1], points_[2]);
+  sideb = getLength(points_[1], center);
+  sidec = getLength(points_[2], center);
   double temp = (sidea + sideb + sidec) * (sidea + sideb - sidec) * (sidea - sideb + sidec);
   temp *= (sideb + sidec - sidea) / 16;
   return semiarea + std::pow(temp, 0.5);
@@ -39,36 +35,27 @@ double asafov::Complexquad::getArea() const
 
 asafov::rectangle_t asafov::Complexquad::getFrameRect() const
 {
-  double height = getLength({one_.x, two_.x, three_.x, four_.x});
-  double width = getLength({one_.y, two_.y, three_.y, four_.y});
-  double x = std::min({ one_.x, two_.x, three_.x, four_.x }) + width / 2.0;
-  double y = std::min({ one_.y, two_.y, three_.y, four_.y }) + height / 2.0;
-  rectangle_t rect;
-  rect.height = height;
-  rect.width = width;
-  rect.pos.x = x;
-  rect.pos.y = y;
+  double height = getCenterDelta(points_[0].x, points_[1].x, points_[2].x, points_[3].x);
+  double width = getCenterDelta(points_[0].y, points_[1].y, points_[2].y, points_[3].y);
+  double x = std::min({ points_[0].x, points_[1].x, points_[2].x, points_[3].x }) + width / 2.0;
+  double y = std::min({ points_[0].y, points_[1].y, points_[2].y, points_[3].y }) + height / 2.0;
+  rectangle_t rect{width, height, {x, y}};
   return rect;
 }
 
 void asafov::Complexquad::move(double dx, double dy)
 {
-  one_.x += dx;
-  one_.y += dy;
-  two_.x += dx;
-  two_.y += dy;
-  three_.x += dx;
-  three_.y += dy;
-  four_.x += dx;
-  four_.y += dy;
+  for (size_t i = 0; i < 4; i++)
+  {
+    increaseDelta(points_[i], dx, dy);
+  }
 }
 
 void asafov::Complexquad::move(point_t pos)
 {
-  point_t center = {};
-  center.x = getLength({one_.y, two_.y, three_.y, four_.y});
-  center.y = getLength({one_.y, two_.y, three_.y, four_.y});
-  move(center.x - pos.x, center.y - pos.y);
+  double centerx = getCenterDelta(points_[0].x, points_[1].x, points_[2].x, points_[3].x);
+  double centery = getCenterDelta(points_[0].y, points_[1].y, points_[2].y, points_[3].y);
+  move(centerx - pos.x, centery - pos.y);
 }
 
 void asafov::Complexquad::scale(double scale)
@@ -78,8 +65,8 @@ void asafov::Complexquad::scale(double scale)
     throw std::logic_error("incorrect scale");
   }
   rectangle_t rect = getFrameRect();
-  scalePoint(one_, rect.pos, scale);
-  scalePoint(two_, rect.pos, scale);
-  scalePoint(three_, rect.pos, scale);
-  scalePoint(four_, rect.pos, scale);
+  for (size_t i = 0; i < 4; i++)
+  {
+    scalePoint(points_[i], rect.pos, scale);
+  }
 }
