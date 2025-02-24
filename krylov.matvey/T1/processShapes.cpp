@@ -52,7 +52,7 @@ krylov::Shape* krylov::createComplexquad(std::istream& in)
   return new krylov::Complexquad({x1, y1}, {x2, y2}, {x3, y3}, {x4, y4});
 }
 
-void krylov::deleteShapes(krylov::Shape** shapes, size_t shapeCount)
+void krylov::deleteShapes(krylov::Shape** shapes, const size_t shapeCount)
 {
   for (size_t i = 0; i < shapeCount; ++i)
   {
@@ -62,7 +62,7 @@ void krylov::deleteShapes(krylov::Shape** shapes, size_t shapeCount)
     }
   }
 }
-void krylov::printAreaAndFrameCoords(Shape** shapes, size_t shapeCount, double totalArea)
+void krylov::printAreaAndFrameCoords(Shape** shapes, const size_t shapeCount, const double totalArea)
 {
   std::cout << std::fixed << std::setprecision(1) << totalArea << ' ';
   for (size_t i = 0; i < shapeCount - 1; ++i)
@@ -78,18 +78,4 @@ void krylov::printAreaAndFrameCoords(Shape** shapes, size_t shapeCount, double t
   std::cout << frame.pos.y - frame.height / 2 << ' ';
   std::cout << frame.pos.x + frame.width / 2 << ' ';
   std::cout << frame.pos.y + frame.height / 2;
-}
-std::istream& krylov::simpleGetLine(std::istream& in, std::string& str)
-{
-  str.clear();
-  char ch = '\0';
-  while (in.get(ch))
-  {
-    if (ch == '\n')
-    {
-      break;
-    }
-    str += ch;
-  }
-  return in;
 }

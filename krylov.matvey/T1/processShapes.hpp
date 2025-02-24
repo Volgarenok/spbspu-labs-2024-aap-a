@@ -11,9 +11,8 @@ namespace krylov
   Shape* createTriangle(std::istream &in);
   Shape* createRing(std::istream &in);
   Shape* createComplexquad(std::istream &in);
-  std::istream& simpleGetLine(std::istream& in, std::string& str);
-  void deleteShapes(Shape** shapes, size_t shapeCount);
-  void printAreaAndFrameCoords(Shape** shapes, size_t shapeCount, double totalArea);
+  void deleteShapes(Shape** shapes, const size_t shapeCount);
+  void printAreaAndFrameCoords(Shape** shapes, const size_t shapeCount, const double totalArea);
 }
 
 #endif
