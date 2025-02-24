@@ -22,10 +22,12 @@ int main()
   std::string figure;
   size_t num = 0;
   double sum_area = 0.0;
-  point_t scale_pos = {};
-  double koef = 0.0;
   while (!std::cin.eof() && std::cin >> figure)
   {
+    if (figure == "SCALE")
+    {
+      break;
+    }
     if (figure == "RECTANGLE")
     {
       try
@@ -45,10 +47,6 @@ int main()
         return 1;
       }
     }
-    if (figure == "SCALE")
-    {
-      break;
-    }
   }
   if (std::cin.eof() && figure != "SCALE")
   {
@@ -56,7 +54,10 @@ int main()
     clearShapes(shapes);
     return 1;
   }
-  std::cin >> scale_pos.x >> scale_pos.y >> koef;
+  double scale_x = 0.0, scale_y = 0.0;
+  double koef = 0.0;
+  std::cin >> scale_x >> scale_y >> koef;
+  point_t scale_pos = { scale_x, scale_y };
   if (koef <= 0.0 || num == 0)
   {
     std::cerr << "Error" << "\n";
