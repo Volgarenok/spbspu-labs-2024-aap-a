@@ -26,7 +26,7 @@ int main()
       lebedev::deleteShapePtr(shps, count);
       return 1;
     }
-    
+
     try
     {
       if (shapeName == "RECTANGLE")
