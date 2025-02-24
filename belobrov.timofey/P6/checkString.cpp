@@ -33,7 +33,10 @@ const char* belobrov::isDigit(const char* str, size_t i)
     return nullptr;
   }
 
-  const char* digit = "0123456789";
+  const char* digit = "0123456789\0";
+  if (digit[i] == '\0') {
+    return nullptr;
+  }
   if (*str != digit[i]) {
     return isDigit(str, i + 1);
   }
