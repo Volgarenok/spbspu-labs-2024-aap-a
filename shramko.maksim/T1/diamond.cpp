@@ -1,58 +1,20 @@
 #include "diamond.hpp"
+#include "triangle.hpp"
 #include <stdexcept>
 #include <cmath>
 
-shramko::Diamond::Diamond(point_t one, point_t two, point_t three): one_({0.0, 0.0}), two_({0.0, 0.0}), three_({0.0, 0.0})
+shramko::Diamond::Diamond(point_t one, point_t two, point_t three):
+  triangles(new Triangle[8])
 {
-  if ((one.x == two.x && one.y == three.y) || (one.y == two.y && one.x == three.x))
-  {
-    one_ = one;
-    if (one_.x == two.x)
-    {
-      two_ = two;
-      three_ = three;
-    }
-    else
-    {
-      two_ = three;
-      three_ = two;
-    }
-  }
-
-  else if ((two.x == one.x && two.y == three.y) || (two.y == one.y && two.x == three.x))
-  {
-    one_ = two;
-    if (one_.x == one.x)
-    {
-      two_ = one;
-      three_ = three;
-    }
-    else
-    {
-      two_ = three;
-      three_ = one;
-    }
-  }
-
-  else if ((three.x == two.x && three.y == one.y) || (three.y == two.y && three.x == one.x))
-  {
-    one_ = three;
-    if (one_.x == two.x)
-    {
-      two_ = two;
-      three_ = one;
-    }
-    else
-    {
-      two_ = one;
-      three_ = two;
-    }
-  }
-
-  else
-  {
-    throw std::invalid_argument("Diamond size err\n");
-  }
+  triangles[0] = Triangle(one, {(one.x + two.x)/2, (one.y + two.y)/2}, three);
+  triangles[1] = Triangle(one, two, three);
+  triangles[2] = Triangle(one, two, three);
+  triangles[3] = Triangle(one, two, three);
+  triangles[4] = Triangle(one, two, three);
+  triangles[5] = Triangle(one, two, three);
+  triangles[6] = Triangle(one, two, three);
+  triangles[7] = Triangle(one, two, three);
+  triangles[8] = Triangle(one, two, three);
 }
 
 double shramko::Diamond::getArea() const

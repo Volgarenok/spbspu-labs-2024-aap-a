@@ -2,6 +2,7 @@
 #define DIAMOND_HPP
 
 #include "shape.hpp"
+#include "triangle.hpp"
 
 namespace shramko
 {
@@ -15,9 +16,7 @@ namespace shramko
     void move(double x, double y) override;
     void scale(double k) override;
   private:
-    point_t one_;
-    point_t two_;
-    point_t three_;
+    Triangle* triangles;
   };
 }
 

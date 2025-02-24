@@ -36,6 +36,13 @@ shramko::rectangle_t shramko::Triangle::getFrameRect() const
   return rectFrame;
 }
 
+shramko::Triangle& shramko::Triangle::operator=(shramko::Triangle&& rhs)
+{
+  one_ = rhs.one_;
+  two_ = rhs.two_;
+  three_ = rhs.three_;
+} 
+
 void shramko::Triangle::move(point_t point)
 {
   shramko::point_t pos;
@@ -45,12 +52,7 @@ void shramko::Triangle::move(point_t point)
   double xMove = point.x - pos.x;
   double yMove = point.y - pos.y;
 
-  one_.x += xMove;
-  one_.y += yMove;
-  two_.x += xMove;
-  two_.y += yMove;
-  three_.x += xMove;
-  three_.y += yMove;
+  this->move(xMove, yMove);
 }
 
 void shramko::Triangle::move(double x, double y)
