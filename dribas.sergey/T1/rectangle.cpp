@@ -7,7 +7,7 @@ namespace
 {
   dribas::point_t getPoint(dribas::point_t center, dribas::point_t angle, double ratio)
   {
-  return {center.x + (angle.x - center.y) * ratio, center.y + (angle.x - center.y) * ratio};
+  return {center.x + (angle.x - center.x) * ratio, center.y + (angle.y - center.y) * ratio};
   }
 }
 
@@ -51,11 +51,8 @@ void dribas::Rectangle::move(point_t centerP)
   move(moveX, moveY);
 }
 
-void dribas::Rectangle::scale(double ratio)
+void dribas::Rectangle::scaleSilent(double ratio)
 {
-  if (ratio <= 0) {
-    throw std::invalid_argument("under zero ratio with scale");
-  }
   rectangle_t fremRect = getFrameRect();
   point_t pos = fremRect.pos;
   rightUp_ = getPoint(pos, rightUp_, ratio);

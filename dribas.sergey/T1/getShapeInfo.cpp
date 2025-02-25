@@ -19,9 +19,9 @@ double dribas::getAllArea(const Shape* const* Shapes, size_t shapeCount)
 
 void dribas::scaleOne(Shape& t, double ratio, point_t Point)
 {
-  dribas::point_t cneter = t.getFrameRect().pos;
+  point_t cneter = t.getFrameRect().pos;
   t.move(Point);
-  dribas::point_t center2 = t.getFrameRect().pos;
+  point_t center2 = t.getFrameRect().pos;
   double diffenceX = (center2.x - cneter.x) * ratio * - 1;
   double diffenceY = (center2.y - cneter.y) * ratio * - 1;
   t.scale(ratio);
@@ -31,9 +31,9 @@ void dribas::scaleOne(Shape& t, double ratio, point_t Point)
 void dribas::scalingAll(Shape** shapes, size_t shapeCount, point_t center, double ratio)
 {
   for (size_t i = 0; i < shapeCount; i++) {
-    dribas::point_t cneter = shapes[i]->getFrameRect().pos;
+    point_t cneter = shapes[i]->getFrameRect().pos;
     shapes[i]->move(center);
-    dribas::point_t center2 = shapes[i]->getFrameRect().pos;
+    point_t center2 = shapes[i]->getFrameRect().pos;
     double diffenceX = (center2.x - cneter.x) * ratio * - 1;
     double diffenceY = (center2.y - cneter.y) * ratio * - 1;
     shapes[i]->scale(ratio);

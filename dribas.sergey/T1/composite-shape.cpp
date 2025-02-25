@@ -66,7 +66,7 @@ dribas::CompositeShape::CompositeShape(const CompositeShape& shp):
 }
 void dribas::CompositeShape::push_back(Shape * shp)
 {
-  if (size_ + 1 > 9999) {
+  if (size_ == 10000) {
     std::logic_error("MEMORY IS FULL");
   } else {
     shapes_[++size_] = shp;
@@ -158,7 +158,7 @@ void dribas::CompositeShape::move(point_t point)
   move(point.x - center.x, point.y - center.y);
 }
 
-void dribas::CompositeShape::scale(double ratio)
+void dribas::CompositeShape::scaleSilent(double ratio)
 {
   point_t center = getFrameRect().pos;
   scalingAll(shapes_, size_, center, ratio);

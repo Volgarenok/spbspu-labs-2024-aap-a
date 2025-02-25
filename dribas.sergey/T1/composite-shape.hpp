@@ -21,7 +21,6 @@ namespace dribas
     size_t size() const noexcept;
     void move(point_t point);
     void move(double x, double y);
-    void scale(double ratio);
 
     void push_back(Shape * shp);
     void pop_back();
@@ -31,6 +30,7 @@ namespace dribas
     const Shape * operator[](size_t id) const;
     bool empty() const noexcept;
   private:
+    void scaleSilent(double ratio);
     Shape* shapes_[10000];
     size_t size_;
   };

@@ -51,11 +51,8 @@ void dribas::Triangle::move(point_t centerP)
   this->move(moveX, moveY);
 }
 
-void dribas::Triangle::scale(double ratio)
+void dribas::Triangle::scaleSilent(double ratio)
 {
-  if (ratio <= 0) {
-    throw std::invalid_argument("under zero ratio");
-  }
   point_t pos;
   pos.x = std::abs(a_.x + b_.x + c_.x) / 3.0;
   pos.y = std::abs(a_.y + b_.y + c_.y) / 3.0;

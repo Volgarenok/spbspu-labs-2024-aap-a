@@ -14,9 +14,9 @@ namespace dribas
     rectangle_t getFrameRect() const override;
     void move(point_t point) override;
     void move(double x, double y) override;
-    void scale(double ratio) override;
     Shape* clone() const override;
   private:
+    void scaleSilent(double ratio) override;
     Triangle a_;
     Triangle b_;
     Triangle c_;

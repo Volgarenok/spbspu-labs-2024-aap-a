@@ -39,11 +39,8 @@ void dribas::Diamond::move(point_t point)
   move(moveX, moveY);
 }
 
-void dribas::Diamond::scale(double ratio)
+void dribas::Diamond::scaleSilent(double ratio)
 {
-  if (ratio <= 0) {
-    throw std::invalid_argument("under zero ratio");
-  }
   scaleOne(a_, ratio, this->getFrameRect().pos);
   scaleOne(b_, ratio, this->getFrameRect().pos);
   scaleOne(c_, ratio, this->getFrameRect().pos);
