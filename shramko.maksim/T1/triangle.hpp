@@ -5,7 +5,7 @@
 
 namespace shramko
 {
-  class Triangle : public Shape
+  class Triangle final: public Shape
   {
   public:
     Triangle() = default;

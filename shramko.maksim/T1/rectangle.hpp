@@ -5,7 +5,7 @@
 
 namespace shramko
 {
-  class Rectangle : public Shape
+  class Rectangle final: public Shape
   {
   public:
     Rectangle(point_t leftBottom, point_t rightTop);

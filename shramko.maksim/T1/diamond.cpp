@@ -7,8 +7,8 @@ shramko::Diamond::Diamond(point_t one, point_t two, point_t three):
   triangles(new Triangle[8])
 {
   triangles[0] = Triangle(one, {(one.x + two.x)/2, (one.y + two.y)/2}, three);
-  triangles[1] = Triangle(one, two, three);
-  triangles[2] = Triangle(one, two, three);
+  triangles[1] = Triangle({(one.x + two.x)/2, (one.y + two.y)/2}, two, three);
+  triangles[2] = Triangle(two, two, three);
   triangles[3] = Triangle(one, two, three);
   triangles[4] = Triangle(one, two, three);
   triangles[5] = Triangle(one, two, three);
