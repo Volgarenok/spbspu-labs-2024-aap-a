@@ -37,8 +37,8 @@ asafov::rectangle_t asafov::Complexquad::getFrameRect() const
 {
   double height = getCenterDelta(points_[0].x, points_[1].x, points_[2].x, points_[3].x);
   double width = getCenterDelta(points_[0].y, points_[1].y, points_[2].y, points_[3].y);
-  double x = std::min({points_[0].x, points_[1].x, points_[2].x, points_[3].x}) + width / 2.0;
-  double y = std::min({points_[0].y, points_[1].y, points_[2].y, points_[3].y}) + height / 2.0;
+  double x = std::min( { points_[0].x, points_[1].x, points_[2].x, points_[3].x } ) + width / 2.0;
+  double y = std::min( { points_[0].y, points_[1].y, points_[2].y, points_[3].y } ) + height / 2.0;
   rectangle_t rect{width, height, {x, y}};
   return rect;
 }

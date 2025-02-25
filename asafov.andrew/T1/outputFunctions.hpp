@@ -8,7 +8,7 @@ using asafov::rectangle_t;
 namespace asafov
 {
   std::string getName(std::istream& in);
-  Shape* ShapeFactory(std::string shapename, std::istream& in);
+  Shape* makeShape(std::string shapename, std::istream& in);
   void scaleShapes(Shape** shapes, size_t count, point_t pos, double scale, std::ostream& out);
   void deleteShapes(Shape** shapes, size_t count);
 }

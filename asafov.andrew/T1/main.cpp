@@ -6,7 +6,7 @@ int main()
 {
   asafov::Shape** shapes = new asafov::Shape*[10000];
   size_t count = 0;
-  std::string name = {};
+  std::string name;
   while (name != "SCALE")
   {
     name = asafov::getName(std::cin);
@@ -24,7 +24,7 @@ int main()
     {
       try
       {
-        shapes[count] = asafov::ShapeFactory(name, std::cin);
+        shapes[count] = asafov::makeShape(name, std::cin);
       }
       catch (const std::logic_error &)
       {

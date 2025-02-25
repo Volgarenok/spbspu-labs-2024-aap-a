@@ -11,7 +11,7 @@
 #include "complexquad.hpp"
 #include "supportFunctions.hpp"
 
-asafov::Shape* asafov::ShapeFactory(std::string shapename, std::istream& in)
+asafov::Shape* asafov::makeShape(std::string shapename, std::istream& in)
 {
   if (shapename == "RECTANGLE")
   {

@@ -7,7 +7,7 @@ asafov::Circle::Circle(point_t center, double radius):
   center_(center),
   radius_(radius)
 {
-  if(radius <= 0)
+  if (radius <= 0)
   {
     throw std::logic_error("incorrect figure");
   }
@@ -15,7 +15,7 @@ asafov::Circle::Circle(point_t center, double radius):
 
 double asafov::Circle::getArea() const
 {
-  return radius_ * radius_ * pi();
+  return radius_ * radius_ * getPi();
 }
 
 asafov::rectangle_t asafov::Circle::getFrameRect() const

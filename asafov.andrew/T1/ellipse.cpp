@@ -16,7 +16,7 @@ asafov::Ellipse::Ellipse(point_t center, double verticalradius, double horizonta
 
 double asafov::Ellipse::getArea() const
 {
-  return pi() * verticalradius_ * horizontalradius_;
+  return getPi() * verticalradius_ * horizontalradius_;
 }
 
 asafov::rectangle_t asafov::Ellipse::getFrameRect() const

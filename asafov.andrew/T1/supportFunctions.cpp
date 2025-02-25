@@ -35,7 +35,7 @@ void asafov::outputFrameRect(Shape* shape, std::ostream& out)
   out << ' ' << rect.pos.y + rect.height / 2;
 }
 
-double asafov::pi()
+double asafov::getPi()
 {
   return std::atan(1.0) * 4;
 }
