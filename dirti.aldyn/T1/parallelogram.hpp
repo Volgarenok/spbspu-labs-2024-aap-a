@@ -5,7 +5,7 @@
 
 namespace dirti
 {
-  struct Parallelogram final : public Shape
+  struct Parallelogram final: public Shape
   {
   public:
     Parallelogram(const point_t p1, const point_t p2, const point_t p3);

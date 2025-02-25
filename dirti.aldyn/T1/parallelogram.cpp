@@ -1,7 +1,7 @@
 #include "parallelogram.hpp"
 #include <cmath>
 
-dirti::Parallelogram::Parallelogram(const point_t p1, const point_t p2, const point_t p3) :
+dirti::Parallelogram::Parallelogram(const point_t p1, const point_t p2, const point_t p3):
   p1_(p1),
   p2_(p2),
   p3_(p3)

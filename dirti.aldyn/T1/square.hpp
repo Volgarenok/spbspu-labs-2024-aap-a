@@ -5,7 +5,7 @@
 
 namespace dirti
 {
-  struct Square final : public Shape
+  struct Square final: public Shape
   {
   public:
     Square(const point_t left_low, const double length);
