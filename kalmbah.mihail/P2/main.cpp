@@ -5,7 +5,10 @@
 #include "taylor_functions.h"
 int main() {
   try {
-    double start, end;
+    double start = 0;
+    double end = 0;
+    size_t maxIter = 10;
+    double epsilon = 1e-6;
     std::cout << "Enter the interval boundaries (-0.5 and 0.5:)\n";
     std::cin >> start >> end;
     if (!(std::cin >> start)||!(std::cin >> end)) {
@@ -16,8 +19,6 @@ int main() {
       std::cerr << "Invalid interval!\n";
       return 1;
     }
-    size_t maxIter = 10;
-    double epsilon = 1e-6;
     std::cout << std::left << std::setw(10) << "x"
               << std::setw(15) << "Arcsin(Taylor)"
               << std::setw(15) << "Arctan(Taylor)"
