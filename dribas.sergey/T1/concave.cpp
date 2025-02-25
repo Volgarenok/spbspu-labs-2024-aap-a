@@ -8,11 +8,11 @@ namespace {
   bool isDupePoint(dribas::point_t p1, dribas::point_t p2, dribas::point_t p3, dribas::point_t p4)
   {
     return (p1.x == p2.x && p1.y == p2.y) ||
-    (p1.x == p3.x && p1.y == p3.y) ||
-    (p1.x == p4.x && p1.y == p4.y) ||
-    (p2.x == p3.x && p2.y == p3.y) ||
-    (p2.x == p4.x && p2.y == p4.y) ||
-    (p3.x == p4.x && p3.y == p4.y);
+      (p1.x == p3.x && p1.y == p3.y) ||
+      (p1.x == p4.x && p1.y == p4.y) ||
+      (p2.x == p3.x && p2.y == p3.y) ||
+      (p2.x == p4.x && p2.y == p4.y) ||
+      (p3.x == p4.x && p3.y == p4.y);
   }
 
   bool isTriangle(dribas::point_t a, dribas::point_t b, dribas::point_t c)

@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include "triangle.hpp"
 #include "getShapeInfo.hpp"
+
 dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
   a_({a, b, c}),
   b_({a, a, {c.x - 2 * std::abs(std::abs(b.x) - std::abs(a.x)), c.y}}),

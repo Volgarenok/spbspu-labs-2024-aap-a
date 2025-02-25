@@ -28,7 +28,7 @@ dribas::CompositeShape::CompositeShape(CompositeShape&& shp) noexcept:
 
 dribas::CompositeShape& dribas::CompositeShape::operator=(const CompositeShape& shp)
 {
-  if (this != &shp) {
+  if (std::addressof(shp) != this) {
     for (size_t i = 0; i < size_; ++i) {
       delete shapes_[i];
     }

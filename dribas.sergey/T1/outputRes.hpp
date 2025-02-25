@@ -8,5 +8,4 @@ namespace dribas
 {
   void outputRes(std::ostream & output, const Shape* const* shape, const size_t shapeSize);
 }
-
 #endif

@@ -8,7 +8,7 @@
 #include "outputRes.hpp"
 #include "shape.hpp"
 
-double dribas::getAllArea(const Shape* const* Shapes, const size_t shapeCount)
+double dribas::getAllArea(const Shape* const* Shapes, size_t shapeCount)
 {
   double allArea = 0.0;
   for (size_t i = 0; i < shapeCount; i++) {

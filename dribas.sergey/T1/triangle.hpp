@@ -21,5 +21,4 @@ namespace dribas
     point_t c_;
   };
 }
-
 #endif
