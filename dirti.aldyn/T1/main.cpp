@@ -23,13 +23,15 @@ int main()
   Shape* shapes[10000] = {};
   std::string figure;
   size_t num = 0;
+  double sum_area = 0.0;
   while (!std::cin.eof() && std::cin >> figure && figure != "SCALE")
   {
     if (figure == "RECTANGLE")
     {
       try
       {
-        shapes[num++] = makeRectangle(std::cin);
+        shapes[num] = makeRectangle(std::cin);
+        sum_area += shapes[num++]->getArea();
       }
       catch (std::logic_error&)
       {
@@ -46,7 +48,8 @@ int main()
     {
       try
       {
-        shapes[num++] = makeSquare(std::cin);
+        shapes[num] = makeSquare(std::cin);
+        sum_area += shapes[num++]->getArea();
       }
       catch (std::logic_error&)
       {
@@ -63,7 +66,8 @@ int main()
     {
       try
       {
-        shapes[num++] = makeParallelogram(std::cin);
+        shapes[num] = makeParallelogram(std::cin);
+        sum_area += shapes[num++]->getArea();
       }
       catch (std::logic_error&)
       {
@@ -92,11 +96,6 @@ int main()
     std::cerr << "Error" << "\n";
     clearShapes(shapes);
     return 1;
-  }
-  double sum_area = 0.0;
-  for (size_t i = 0; i < num; ++i)
-  {
-    sum_area += shapes[i]->getArea();
   }
   std::cout << sum_area << " ";
   outputFigures(shapes, std::cout) << "\n";
