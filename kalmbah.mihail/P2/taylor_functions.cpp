@@ -24,7 +24,7 @@ double arcsinTaylor(double x, size_t n, double error) {
       for (size_t j = 1; j <= (2 * i); ++j){
         factorial2 *= j;
       }
-    } 
+    }
     p1 = (pow(-1, i) * factorial2) / (pow(2, (2 * i)) * factorial * factorial);
     p2 = pow(x, (2 * i + 1)) / (2 * n + 1);
     element_summirovania = p1 * p2;
