@@ -19,4 +19,5 @@ namespace dirti
     point_t p3_;
   };
 }
+
 #endif

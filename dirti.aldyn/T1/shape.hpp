@@ -16,4 +16,5 @@ namespace dirti
     virtual ~Shape() = default;
   };
 }
+
 #endif

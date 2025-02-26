@@ -18,4 +18,5 @@ namespace dirti
     point_t right_high_;
   };
 }
+
 #endif
