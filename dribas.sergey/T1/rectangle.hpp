@@ -15,9 +15,9 @@ namespace dribas
     void move(point_t point) override;
     void move(double x, double y) override;
   private:
-    void scaleSilent(double ratio) override;
     point_t leftDown_;
     point_t rightUp_;
+    void scaleSilent(double ratio) override;
   };
 }
 #endif

@@ -16,11 +16,11 @@ namespace dribas
     void move(double x, double y) override;
     Shape* clone() const override;
   private:
-    void scaleSilent(double ratio) override;
     Triangle a_;
     Triangle b_;
     Triangle c_;
     Triangle d_;
+    void scaleSilent(double ratio) override;
   };
 }
 #endif
