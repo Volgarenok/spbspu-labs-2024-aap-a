@@ -45,7 +45,7 @@ void dribas::Triangle::move(point_t centerP)
 {
   double x = std::abs(a_.x + b_.x + c_.x) / 3.0;
   double y = std::abs(a_.y + b_.y + c_.y) / 3.0;
-  point_t pos = {x, y};
+  point_t pos = { x, y };
   double moveX = centerP.x - pos.x;
   double moveY = centerP.y - pos.y;
   move(moveX, moveY);
