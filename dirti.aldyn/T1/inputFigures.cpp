@@ -25,7 +25,6 @@ dirti::Square* dirti::makeSquare(std::istream& in)
   in >> leftX >> leftY >> length;
   point_t left_low = { leftX, leftY };
   Square* newSquare = new Square(left_low, length);
-  newSquare = new Square(left_low, length);
   return newSquare;
 }
 
