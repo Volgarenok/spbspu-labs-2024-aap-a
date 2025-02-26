@@ -45,7 +45,7 @@ int main()
       return 1;
     }
   }
-  if (std::cin.eof() && figure != "SCALE" || num == 0)
+  if ((std::cin.eof() && figure != "SCALE") || num == 0)
   {
     std::cerr << "Error" << "\n";
     clearShapes(shapes);
