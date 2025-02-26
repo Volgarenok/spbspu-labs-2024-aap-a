@@ -48,7 +48,7 @@ void dribas::Triangle::move(point_t centerP)
   point_t pos = {x, y};
   double moveX = centerP.x - pos.x;
   double moveY = centerP.y - pos.y;
-  this->move(moveX, moveY);
+  move(moveX, moveY);
 }
 
 void dribas::Triangle::scaleSilent(double ratio)

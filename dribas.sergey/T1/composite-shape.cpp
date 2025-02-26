@@ -29,9 +29,7 @@ dribas::CompositeShape::CompositeShape(CompositeShape&& shp) noexcept:
 dribas::CompositeShape& dribas::CompositeShape::operator=(const CompositeShape& shp)
 {
   if (std::addressof(shp) != this) {
-    for (size_t i = 0; i < size_; ++i) {
-      delete shapes_[i];
-    }
+    clear(shapes_, size_);
     size_ = shp.size_;
     for (size_t i = 0; i < size_; ++i) {
       shapes_[i] = shp.shapes_[i]->clone();
@@ -67,7 +65,7 @@ dribas::CompositeShape::CompositeShape(const CompositeShape& shp):
 void dribas::CompositeShape::push_back(Shape * shp)
 {
   if (size_ == 10000) {
-    std::logic_error("MEMORY IS FULL");
+    throw std::logic_error("MEMORY IS FULL");
   } else {
     shapes_[++size_] = shp;
   }
@@ -76,7 +74,7 @@ void dribas::CompositeShape::push_back(Shape * shp)
 void dribas::CompositeShape::pop_back()
 {
   if (size_ == 0) {
-    std::logic_error("MEMORY IS EMPTY");
+    throw std::logic_error("MEMORY IS EMPTY");
   }
   delete shapes_[--size_];
 }
@@ -84,7 +82,7 @@ void dribas::CompositeShape::pop_back()
 dribas::Shape* dribas::CompositeShape::at(size_t id)
 {
   if (id > size_) {
-    throw std::logic_error("ID OUT OF RANGE\n");
+    throw std::out_of_range("ID OUT OF RANGE\n");
   }
   return const_cast< Shape* >(static_cast< const CompositeShape* >(this)->at(id));
 }
@@ -128,10 +126,10 @@ double dribas::CompositeShape::getArea() const noexcept
 
 dribas::rectangle_t dribas::CompositeShape::getFrameRect() const
 {
-  double minY = minDouble;
-  double minX = minDouble;
-  double maxX = maxDouble;
-  double maxY = maxDouble;
+  double minY = std::numeric_limits < double > ::lowest();
+  double minX = std::numeric_limits < double > ::lowest();
+  double maxX = std::numeric_limits < double > ::max();
+  double maxY = std::numeric_limits < double > ::max();
 
   for (size_t i = 0; i < size_; i++) {
     rectangle_t frem = shapes_[size_]->getFrameRect();

@@ -68,9 +68,6 @@ void dribas::Concave::move(dribas::point_t point)
 
 void dribas::Concave::scaleSilent(double ratio)
 {
-  if (ratio <= 0) {
-    throw std::invalid_argument("under zero ratio\n");
-  }
   a_.scale(ratio);
   b_.scale(ratio);
 }
