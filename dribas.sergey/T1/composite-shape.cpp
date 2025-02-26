@@ -62,7 +62,8 @@ dribas::CompositeShape::CompositeShape(const CompositeShape& shp):
     shapes_[i] = shp.shapes_[i]->clone();
   }
 }
-void dribas::CompositeShape::push_back(Shape * shp)
+
+void dribas::CompositeShape::push_back(Shape* shp)
 {
   if (size_ == 10000) {
     throw std::logic_error("MEMORY IS FULL");
@@ -100,7 +101,7 @@ dribas::Shape* dribas::CompositeShape::operator[](size_t id)
   return const_cast< Shape* >(static_cast< const CompositeShape* >(this)->operator[](id));
 }
 
-const dribas::Shape * dribas::CompositeShape::operator[](size_t id) const
+const dribas::Shape* dribas::CompositeShape::operator[](size_t id) const
 {
   return shapes_[id];
 }
@@ -133,14 +134,14 @@ dribas::rectangle_t dribas::CompositeShape::getFrameRect() const
 
   for (size_t i = 0; i < size_; i++) {
     rectangle_t frem = shapes_[size_]->getFrameRect();
-    minX = std::min(minX, frem.pos.x - (frem.width / 2.0f));
-    minY = std::min(minY, frem.pos.y - (frem.height / 2.0f));
-    maxX = std::max(maxX, frem.pos.x + (frem.width / 2.0f));
-    maxY = std::max(maxY, frem.pos.y + (frem.height / 2.0f));
+    minX = std::min(minX, frem.pos.x - (frem.width / 2.0));
+    minY = std::min(minY, frem.pos.y - (frem.height / 2.0));
+    maxX = std::max(maxX, frem.pos.x + (frem.width / 2.0));
+    maxY = std::max(maxY, frem.pos.y + (frem.height / 2.0));
   }
-  point_t center = {minX + (maxX - minX) / 2.0f, minY + (maxY - minY) / 2.0f};
+  point_t center = { minX + (maxX - minX) / 2.0, minY + (maxY - minY) / 2.0 };
 
-  return rectangle_t{std::abs(maxX - minX), std::abs(maxY - minY), center};
+  return rectangle_t { std::abs(maxX - minX), std::abs(maxY - minY), center };
 }
 
 void dribas::CompositeShape::move(double x, double y)

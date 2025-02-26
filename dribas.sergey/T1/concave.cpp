@@ -9,10 +9,10 @@ namespace {
   {
     return (p1.x == p2.x && p1.y == p2.y) ||
       (p1.x == p3.x && p1.y == p3.y) ||
-      (p1.x == p4.x && p1.y == p4.y) ||
-      (p2.x == p3.x && p2.y == p3.y) ||
-      (p2.x == p4.x && p2.y == p4.y) ||
-      (p3.x == p4.x && p3.y == p4.y);
+        (p1.x == p4.x && p1.y == p4.y) ||
+          (p2.x == p3.x && p2.y == p3.y) ||
+            (p2.x == p4.x && p2.y == p4.y) ||
+              (p3.x == p4.x && p3.y == p4.y);
   }
 
   bool isTriangle(dribas::point_t a, dribas::point_t b, dribas::point_t c)
@@ -35,9 +35,9 @@ namespace {
   }
 }
 
-dribas::Concave::Concave(dribas::point_t a, dribas::point_t b, dribas::point_t c, dribas::point_t d):
-  a_(Triangle{a, b, c}),
-  b_(Triangle{b, c, d})
+dribas::Concave::Concave(point_t a, point_t b, point_t c, point_t d):
+  a_(a, b, c),
+  b_(b, c, d)
 {
   if (!isTriangle(d, b, c) || !isPointInTriangle(a, b, c, b) || isDupePoint(a, b, c, d)) {
     throw std::invalid_argument("Error witch point for concave");
@@ -56,8 +56,8 @@ dribas::rectangle_t dribas::Concave::getFrameRect() const
 
 void dribas::Concave::move(double x, double y)
 {
-  a_.move(x,y);
-  b_.move(x,y);
+  a_.move(x, y);
+  b_.move(x, y);
 }
 
 void dribas::Concave::move(dribas::point_t point)

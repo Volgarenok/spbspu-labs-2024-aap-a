@@ -28,7 +28,7 @@ dribas::rectangle_t dribas::Triangle::getFrameRect() const
   double width = maxX - minX;
   double posX = minX + (width / 2.0);
   double posY = minY + (height / 2.0);
-  return rectangle_t{{width}, {height}, {{posX},{posY}}};
+  return rectangle_t {{ width }, { height }, {{ posX }, { posY }}};
 }
 
 void dribas::Triangle::move(double x, double y)
@@ -53,9 +53,9 @@ void dribas::Triangle::move(point_t centerP)
 
 void dribas::Triangle::scaleSilent(double ratio)
 {
-  point_t pos;
-  pos.x = std::abs(a_.x + b_.x + c_.x) / 3.0;
-  pos.y = std::abs(a_.y + b_.y + c_.y) / 3.0;
+  double x = std::abs(a_.x + b_.x + c_.x) / 3.0;
+  double y = std::abs(a_.y + b_.y + c_.y) / 3.0;
+  point_t pos = { x, y };
   a_.x = (a_.x - pos.x) * ratio + pos.x;
   a_.y = (a_.y - pos.y) * ratio + pos.y;
   b_.x = (b_.x - pos.x) * ratio + pos.x;

@@ -7,7 +7,7 @@ namespace
 {
   dribas::point_t getPoint(dribas::point_t center, dribas::point_t angle, double ratio)
   {
-  return {center.x + (angle.x - center.x) * ratio, center.y + (angle.y - center.y) * ratio};
+  return { center.x + (angle.x - center.x) * ratio, center.y + (angle.y - center.y) * ratio };
   }
 }
 
@@ -26,13 +26,14 @@ double dribas::Rectangle::getArea() const
   double hieght = rightUp_.y - leftDown_.y;
   return weight * hieght;
 }
+
 dribas::rectangle_t dribas::Rectangle::getFrameRect() const
 {
   double height = rightUp_.y - leftDown_.y;
   double width = rightUp_.x - leftDown_.x;
   double posX = leftDown_.x + (width / 2.0L);
   double posY = leftDown_.y + (height / 2.0L);
-  return rectangle_t{{width}, {height}, {{posX}, {posY}}};
+  return rectangle_t {{ width }, { height }, {{ posX}, { posY }}};
 }
 
 void dribas::Rectangle::move(double x, double y)

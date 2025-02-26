@@ -14,7 +14,7 @@ void clearStr(char** stack, size_t stackSize)
 int main()
 {
   constexpr size_t shapesSize = 10000;
-  dribas::Shape * shapes[shapesSize] = {};
+  dribas::Shape* shapes[shapesSize] = {};
   double scalingFactor[3] = {};
   size_t shapeCount = 0;
   try {
@@ -23,7 +23,7 @@ int main()
     std::cerr << e.what() << '\n';
     return 1;
   }
-  dribas::point_t scalePoint = {scalingFactor[0], scalingFactor[1]};
+  dribas::point_t scalePoint = { scalingFactor[0], scalingFactor[1] };
   try {
     dribas::outputRes(std::cout, shapes, shapeCount);
     std::cout << '\n';

@@ -6,9 +6,9 @@
 
 dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
   a_(a, b, c),
-  b_(a, a, {c.x - 2 * std::abs(std::abs(b.x) - std::abs(a.x)), c.y}),
-  c_(a, {b.x, b.y - 2 * std::abs(std::abs(a.y) - std::abs(c.y))}, {c.x - std::abs(std::abs(b.x) - std::abs(a.x)), c.y}),
-  d_(a, {b.x, b.y - 2 * std::abs(std::abs(a.y) - std::abs(c.y))}, c)
+  b_(a, a, { c.x - 2 * std::abs(std::abs(b.x) - std::abs(a.x)), c.y }),
+  c_(a, { b.x, b.y - 2 * std::abs(std::abs(a.y) - std::abs(c.y))}, { c.x - std::abs(std::abs(b.x) - std::abs(a.x)), c.y }),
+  d_(a, { b.x, b.y - 2 * std::abs(std::abs(a.y) - std::abs(c.y))}, c)
 {}
 
 double dribas::Diamond::getArea() const

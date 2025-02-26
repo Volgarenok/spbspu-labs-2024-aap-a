@@ -44,8 +44,6 @@ void dribas::scalingAll(Shape** shapes, size_t shapeCount, point_t center, doubl
 bool getPoint(std::istream& in, size_t pointCount, dribas::point_t* points) {
   size_t i = 0;
   for (; i < pointCount && in; i++) {
-    double a = 0;
-    double b = 0;
     in >> points[i].x >> points[i].y;
   }
   return i == pointCount;
