@@ -86,22 +86,22 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** sh
         error << e.what() << '\n';
       }
     }
+    if (InputStr == "SCALE") {
+      scaled = true;
+      if (shapesCount == 0) {
+        throw std::logic_error("No shapes for scale");
+      }
+      input >> scalingFactor[0];
+      input >> scalingFactor[1];
+      input >> scalingFactor[2];
+      if (scalingFactor[2] <= 0) {
+        throw std::invalid_argument("under zero ratio with scale");
+      }
+    }
   } catch (const std::exception& e) {
     clear(shapes, shapesCount);
     throw e;
     return 0;
-  }
-  if (InputStr == "SCALE") {
-    scaled = true;
-    if (shapesCount == 0) {
-      throw std::logic_error("No shapes for scale");
-    }
-    input >> scalingFactor[0];
-    input >> scalingFactor[1];
-    input >> scalingFactor[2];
-    if (scalingFactor[2] <= 0) {
-      throw std::invalid_argument("under zero ratio with scale");
-    }
   }
   if (!scaled) {
     clear(shapes, shapesCount);
