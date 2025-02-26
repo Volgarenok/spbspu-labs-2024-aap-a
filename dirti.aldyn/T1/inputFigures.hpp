@@ -10,6 +10,7 @@ namespace dirti
   Rectangle* makeRectangle(std::istream& in);
   Square* makeSquare(std::istream& in);
   Parallelogram* makeParallelogram(std::istream& in);
+  Shape* makeShape(std::istream& in, std::string figure);
 }
 
 #endif

@@ -12,8 +12,7 @@ dirti::Parallelogram::Parallelogram(const point_t p1, const point_t p2, const po
   }
   if (p2.y == p3.y)
   {
-    p1_ = p3;
-    p3_ = p1;
+    std::swap(p1_, p3_);
   }
 }
 
@@ -44,7 +43,7 @@ void dirti::Parallelogram::move(point_t point)
   move(point.x - pos_.x, point.y - pos_.y);
 }
 
-void dirti::Parallelogram::scale(double koef)
+void dirti::Parallelogram::unsafeScale(double koef)
 {
   point_t pos_ = getFrameRect().pos;
   p1_ = { pos_.x - (pos_.x - p1_.x) * koef, pos_.y - (pos_.y - p1_.y) * koef };

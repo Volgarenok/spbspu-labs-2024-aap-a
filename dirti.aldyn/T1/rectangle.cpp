@@ -36,7 +36,7 @@ void dirti::Rectangle::move(point_t point)
   move(point.x - pos_.x, point.y - pos_.y);
 }
 
-void dirti::Rectangle::scale(double koef)
+void dirti::Rectangle::unsafeScale(double koef)
 {
   rectangle_t frameRect = getFrameRect();
   point_t pos_ = frameRect.pos;

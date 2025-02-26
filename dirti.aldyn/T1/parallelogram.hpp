@@ -1,7 +1,6 @@
 #ifndef PARALLELOGRAM_HPP
 #define PARALLELOGRAM_HPP
 #include "shape.hpp"
-#include <stdexcept>
 
 namespace dirti
 {
@@ -13,7 +12,7 @@ namespace dirti
     rectangle_t getFrameRect() const override;
     void move(point_t point) override;
     void move(double x, double y) override;
-    void scale(double koef) override;
+    void unsafeScale(double koef) override;
   private:
     point_t p1_;
     point_t p2_;
