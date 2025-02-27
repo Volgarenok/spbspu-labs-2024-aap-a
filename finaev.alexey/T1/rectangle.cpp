@@ -23,7 +23,7 @@ finaev::rectangle_t finaev::Rectangle::getFrameRect() const
   double y = leftDown_.y + (rightUp_.y - leftDown_.y) / 2;
   double width = rightUp_.x - leftDown_.x;
   double height = rightUp_.y - leftDown_.y;
-  return {{x, y}, width, height};
+  return { { x, y }, width, height };
 }
 
 void finaev::Rectangle::move(double sx, double sy)

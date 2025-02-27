@@ -7,7 +7,7 @@ namespace
   finaev::Rectangle createSquare(finaev::point_t leftDown, double side)
   {
     finaev::point_t rightUp = { (leftDown.x + side), (leftDown.y + side) };
-    return {leftDown, rightUp};
+    return { leftDown, rightUp };
   }
 }
 

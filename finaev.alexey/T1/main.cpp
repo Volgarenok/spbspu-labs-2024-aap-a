@@ -64,7 +64,7 @@ int main()
   double scaleY = 0.0;
   std::cin >> scaleX;
   std::cin >> scaleY;
-  point_t scaleCenter = {scaleX, scaleY};
+  point_t scaleCenter = { scaleX, scaleY };
   double k = 0.0;
   std::cin >> k;
   if (k <= 0)

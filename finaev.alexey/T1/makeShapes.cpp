@@ -11,14 +11,14 @@ namespace
       double b = 0.0;
       in >> a;
       in >> b;
-      arr[i] = {a, b};
+      arr[i] = { a, b };
     }
   }
 }
 
 finaev::Rectangle* finaev::makeRectangle(std::istream& in)
 {
-  const size_t size = 2;
+  constexpr size_t size = 2;
   point_t arr[size] = {};
   addArrPoints(in, arr, size);
   point_t l = arr[0];
@@ -29,7 +29,7 @@ finaev::Rectangle* finaev::makeRectangle(std::istream& in)
 
 finaev::Square* finaev::makeSquare(std::istream& in)
 {
-  const size_t size = 1;
+  constexpr size_t size = 1;
   point_t arr[size] = {};
   addArrPoints(in, arr, size);
   point_t l = arr[0];
@@ -41,7 +41,7 @@ finaev::Square* finaev::makeSquare(std::istream& in)
 
 finaev::Concave* finaev::makeConcave(std::istream& in)
 {
-  const size_t size = 4;
+  constexpr size_t size = 4;
   point_t arr[size] = {};
   addArrPoints(in, arr, size);
   point_t first = arr[0];
@@ -52,7 +52,7 @@ finaev::Concave* finaev::makeConcave(std::istream& in)
   return concave;
 }
 
-finaev::Shape* finaev::makeShapes(std::istream& in, const std::string str)
+finaev::Shape* finaev::makeShapes(std::istream& in, std::string str)
 {
   if (str == "RECTANGLE")
   {

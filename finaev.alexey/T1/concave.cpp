@@ -80,13 +80,13 @@ finaev::rectangle_t finaev::Concave::getFrameRect() const
   double leftYfirst = first_.getFrameRect().pos.y - first_.getFrameRect().height / 2;
   double leftXsecond = second_.getFrameRect().pos.x - second_.getFrameRect().width / 2;
   double leftYsecond = second_.getFrameRect().pos.y - second_.getFrameRect().height / 2;
-  point_t lDown = {std::min(leftXfirst, leftXsecond), std::min(leftYfirst, leftYsecond)};
+  point_t lDown = { std::min(leftXfirst, leftXsecond), std::min(leftYfirst, leftYsecond) };
   double rightXfirst = first_.getFrameRect().pos.x + first_.getFrameRect().width / 2;
   double rightYfirst = first_.getFrameRect().pos.y + first_.getFrameRect().height / 2;
   double rightXsecond = second_.getFrameRect().pos.x + second_.getFrameRect().width / 2;
   double rightYsecond = second_.getFrameRect().pos.y + second_.getFrameRect().height / 2;
-  point_t rUp = {std::max(rightXfirst, rightXsecond), std::max(rightYfirst, rightYsecond)};
-  Rectangle rect = {lDown, rUp};
+  point_t rUp = { std::max(rightXfirst, rightXsecond), std::max(rightYfirst, rightYsecond) };
+  Rectangle rect = { lDown, rUp };
   return rect.getFrameRect();
 }
 

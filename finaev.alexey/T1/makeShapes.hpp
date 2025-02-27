@@ -13,7 +13,7 @@ namespace finaev
   Rectangle* makeRectangle(std::istream& in);
   Square* makeSquare(std::istream& in);
   Concave* makeConcave(std::istream& in);
-  Shape* makeShapes(std::istream& in, const std::string str);
+  Shape* makeShapes(std::istream& in, std::string str);
 }
 
 #endif
