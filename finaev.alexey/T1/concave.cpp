@@ -6,12 +6,12 @@
 
 namespace
 {
-  bool operator ==(const finaev::point_t a, const finaev::point_t b)
+  bool operator ==(finaev::point_t a, finaev::point_t b)
   {
     return ((a.x == b.x) && (a.y == b.y));
   }
 
-  double len(const finaev::point_t a, const finaev::point_t b)
+  double len(finaev::point_t a, finaev::point_t b)
   {
     return std::sqrt(std::pow((a.x - b.x), 2) + std::pow((a.y - b.y), 2));
   }
