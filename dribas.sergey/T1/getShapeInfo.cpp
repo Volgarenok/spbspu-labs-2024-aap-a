@@ -36,7 +36,7 @@ void dribas::scalingAll(Shape** shapes, size_t shapeCount, point_t center, doubl
     point_t center2 = shapes[i]->getFrameRect().pos;
     double diffenceX = (center2.x - cneter.x) * ratio * - 1;
     double diffenceY = (center2.y - cneter.y) * ratio * - 1;
-    shapes[i]->scale(ratio);
+    shapes[i]->scaleSilent(ratio);
     shapes[i]->move(diffenceX, diffenceY);
   }
 }
@@ -101,12 +101,10 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** sh
   } catch (const std::exception& e) {
     clear(shapes, shapesCount);
     throw e;
-    return 0;
   }
   if (!scaled) {
     clear(shapes, shapesCount);
     throw std::invalid_argument("No Arguments for scale");
-    return 0;
   }
   return shapesCount;
 }

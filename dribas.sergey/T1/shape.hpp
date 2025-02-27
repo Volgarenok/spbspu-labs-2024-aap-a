@@ -15,7 +15,6 @@ namespace dribas
     void scale(double ratio);
     virtual ~Shape() = default;
     virtual Shape* clone() const = 0;
-  private:
     virtual void scaleSilent(double ratio) = 0;
   };
 }

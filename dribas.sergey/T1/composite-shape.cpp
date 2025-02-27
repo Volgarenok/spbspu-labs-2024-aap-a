@@ -82,9 +82,6 @@ void dribas::CompositeShape::pop_back()
 
 dribas::Shape* dribas::CompositeShape::at(size_t id)
 {
-  if (id > size_) {
-    throw std::out_of_range("ID OUT OF RANGE\n");
-  }
   return const_cast< Shape* >(static_cast< const CompositeShape* >(this)->at(id));
 }
 
