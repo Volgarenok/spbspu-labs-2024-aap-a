@@ -14,7 +14,7 @@ asafov::point_t asafov::getPoint(std::istream& in)
   in >> x;
   double y = 0;
   in >> y;
-  point_t point{x, y};
+  point_t point = { x, y };
   return point;
 }
 

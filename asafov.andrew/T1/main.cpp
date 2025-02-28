@@ -35,9 +35,11 @@ int main()
     }
   }
 
-  point_t pos;
   double scale = 0;
-  std::cin >> pos.x >> pos.y >> scale;
+  double x = 0;
+  double y = 0;
+  std::cin >> x >> y >> scale;
+  asafov::point_t pos = { x, y };
   if (scale <= 0)
   {
     asafov::deleteShapes(shapes, count);
