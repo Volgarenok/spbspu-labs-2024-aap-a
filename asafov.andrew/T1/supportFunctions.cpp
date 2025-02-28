@@ -10,9 +10,11 @@ void asafov::scalePoint(asafov::point_t& point, asafov::point_t fpoint, double s
 
 asafov::point_t asafov::getPoint(std::istream& in)
 {
-  point_t point;
-  in >> point.x;
-  in >> point.y;
+  double x = 0;
+  in >> x;
+  double y = 0;
+  in >> y;
+  point_t point{x, y};
   return point;
 }
 

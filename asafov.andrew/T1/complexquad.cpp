@@ -16,9 +16,9 @@ asafov::Complexquad::Complexquad(point_t one, point_t two, point_t three, point_
 
 double asafov::Complexquad::getArea() const
 {
-  point_t center = {};
-  center.x = getCenterDelta(points_[0].x, points_[1].x, points_[2].x, points_[3].x);
-  center.y = getCenterDelta(points_[0].y, points_[1].y, points_[2].y, points_[3].y);
+  double cx = getCenterDelta(points_[0].x, points_[1].x, points_[2].x, points_[3].x);
+  double cy = getCenterDelta(points_[0].y, points_[1].y, points_[2].y, points_[3].y);
+  point_t center = {cx, cy};
   double sidea = getLength(points_[0], points_[3]);
   double sideb = getLength(points_[0], center);
   double sidec = getLength(points_[3], center);

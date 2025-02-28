@@ -3,8 +3,6 @@
 #include <fstream>
 #include <string>
 #include "shape.hpp"
-using asafov::point_t;
-using asafov::rectangle_t;
 namespace asafov
 {
   std::string getName(std::istream& in);

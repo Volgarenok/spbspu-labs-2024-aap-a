@@ -21,7 +21,7 @@ double asafov::Circle::getArea() const
 asafov::rectangle_t asafov::Circle::getFrameRect() const
 {
   double height = 2.0 * radius_;
-  rectangle_t frect{height, height, center_};
+  rectangle_t frect = { height, height, center_ };
   return frect;
 }
 
