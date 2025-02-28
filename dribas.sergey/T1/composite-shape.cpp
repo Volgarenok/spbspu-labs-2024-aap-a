@@ -5,9 +5,6 @@
 #include "base-types.hpp"
 #include "getShapeInfo.hpp"
 
-const double minDouble = std::numeric_limits < double > ::lowest();
-const double maxDouble = std::numeric_limits < double > ::max();
-
 dribas::CompositeShape::CompositeShape():
   size_(0)
 {
@@ -29,7 +26,7 @@ dribas::CompositeShape::CompositeShape(CompositeShape&& shp) noexcept:
 dribas::CompositeShape& dribas::CompositeShape::operator=(const CompositeShape& shp)
 {
   if (std::addressof(shp) != this) {
-    clear(shapes_, size_);
+    clear();
     size_ = shp.size_;
     for (size_t i = 0; i < size_; ++i) {
       shapes_[i] = shp.shapes_[i]->clone();
@@ -44,7 +41,7 @@ dribas::CompositeShape& dribas::CompositeShape::operator=(const CompositeShape& 
 dribas::CompositeShape& dribas::CompositeShape::operator=(CompositeShape&& shp) noexcept
 {
   if (std::addressof(shp) != this) {
-    clear(shapes_, size_);
+    clear();
     size_ = shp.size_;
     for (size_t i = 0; i < size_; ++i) {
       shapes_[i] = shp.shapes_[i];
@@ -157,5 +154,22 @@ void dribas::CompositeShape::move(point_t point)
 void dribas::CompositeShape::scaleSilent(double ratio)
 {
   point_t center = getFrameRect().pos;
+  scaleWithCenter(center, ratio);
+}
+
+void dribas::CompositeShape::scaleWithCenter(point_t center, double ratio)
+{
   scalingAll(shapes_, size_, center, ratio);
+}
+
+dribas::CompositeShape::~CompositeShape()
+{
+  clear();
+}
+
+void dribas::CompositeShape::clear() noexcept
+{
+  while (!empty()) {
+    pop_back(); 
+  }
 }

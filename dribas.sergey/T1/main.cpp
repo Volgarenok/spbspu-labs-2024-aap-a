@@ -3,6 +3,7 @@
 #include "getShapeInfo.hpp"
 #include "shape.hpp"
 #include "outputRes.hpp"
+#include "composite-shape.hpp"
 
 void clearStr(char** stack, size_t stackSize)
 {
@@ -13,8 +14,7 @@ void clearStr(char** stack, size_t stackSize)
 
 int main()
 {
-  constexpr size_t shapesSize = 10000;
-  dribas::Shape* shapes[shapesSize] = {};
+  dribas::CompositeShape shapes;
   double scalingFactor[3] = {};
   size_t shapeCount = 0;
   try {
@@ -27,14 +27,12 @@ int main()
   try {
     dribas::outputRes(std::cout, shapes, shapeCount);
     std::cout << '\n';
-    dribas::scalingAll(shapes, shapeCount, scalePoint, scalingFactor[2]);
+    shapes.scaleWithCenter(scalePoint, scalingFactor[2]);
     dribas::outputRes(std::cout, shapes, shapeCount);
     std::cout << '\n';
   } catch (const std::invalid_argument& e) {
     std::cerr << e.what() << '\n';
-    dribas::clear(shapes, shapeCount);
     return 1;
   }
-  dribas::clear(shapes, shapeCount);
   return 0;
 }

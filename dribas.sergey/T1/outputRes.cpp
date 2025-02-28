@@ -2,9 +2,9 @@
 #include <iomanip>
 #include "getShapeInfo.hpp"
 
-void dribas::outputRes(std::ostream& output, const Shape* const* shape, size_t shapeSize)
+void dribas::outputRes(std::ostream& output, CompositeShape shape, size_t shapeSize)
 {
-  output << std::fixed << std::setprecision(1) << getAllArea(shape, shapeSize);
+  output << std::fixed << std::setprecision(1) << shape.getArea();
   for (size_t i = 0; i < shapeSize; i++) {
     output << " ";
     output << shape[i]->getFrameRect().pos.x - (shape[i]->getFrameRect().width) / 2.0f << " ";

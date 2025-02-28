@@ -7,6 +7,7 @@
 #include "concave.hpp"
 #include "outputRes.hpp"
 #include "shape.hpp"
+#include "composite-shape.hpp"
 
 double dribas::getAllArea(const Shape* const* Shapes, size_t shapeCount)
 {
@@ -49,7 +50,7 @@ bool getPoint(std::istream& in, size_t pointCount, dribas::point_t* points) {
   return i == pointCount;
 }
 
-size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** shapes, double* scalingFactor)
+size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, CompositeShape shapes, double* scalingFactor)
 {
   std::string InputStr;
   int shapesCount = 0;
@@ -58,27 +59,27 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** sh
     while (input >> InputStr && InputStr != "SCALE") {
       try {
         if (InputStr == "RECTANGLE") {
-          point_t pointR[2] = {0, 0};
+          point_t pointR[2] = { 0, 0 };
           if (getPoint(std::cin, 2, pointR)) {
-            shapes[shapesCount] = new Rectangle { pointR[0], pointR[1] };
+            shapes.push_back(new Rectangle { pointR[0], pointR[1] });
             shapesCount++;
           }
         } else if (InputStr == "TRIANGLE") {
-          point_t pointT[3] = {0, 0};
+          point_t pointT[3] = { 0, 0 };
           if (getPoint(std::cin, 3, pointT)) {
-            shapes[shapesCount] = new Triangle { pointT[0], pointT[1], pointT[2] };
+            shapes.push_back(new Triangle { pointT[0], pointT[1], pointT[2] });
             shapesCount++;
           }
         } else if (InputStr == "DIAMOND") {
-          point_t pointD[3] = {0, 0};
+          point_t pointD[3] = { 0, 0 };
           if (getPoint(std::cin, 3, pointD)) {
-            shapes[shapesCount] = new Diamond { pointD[0], pointD[1], pointD[2] };
+            shapes.push_back(new Diamond { pointD[0], pointD[1], pointD[2] });
             shapesCount++;
           }
         } else if (InputStr == "CONCAVE") {
-          point_t pointC[4] = {0, 0};
+          point_t pointC[4] = { 0, 0 };
           if (getPoint(std::cin, 4, pointC)) {
-            shapes[shapesCount] = new Concave { pointC[0], pointC[1], pointC[2], pointC[3] };
+            shapes.push_back(new Concave { pointC[0], pointC[1], pointC[2], pointC[3] }) ;
             shapesCount++;
           }
         }
@@ -99,18 +100,11 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, Shape** sh
       }
     }
   } catch (const std::exception& e) {
-    clear(shapes, shapesCount);
     throw e;
   }
   if (!scaled) {
-    clear(shapes, shapesCount);
     throw std::invalid_argument("No Arguments for scale");
   }
   return shapesCount;
 }
 
-void dribas::clear(Shape** shape, size_t shapeCount) {
-  for (size_t i = 0; i < shapeCount; i++) {
-    delete shape[i];
-  }
-}

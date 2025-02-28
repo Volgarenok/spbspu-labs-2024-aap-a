@@ -29,10 +29,12 @@ namespace dribas
     void push_back(Shape* shp);
     void pop_back();
     bool empty() const noexcept;
+    void clear() noexcept;
+    void scaleSilent(double ratio);
+    void scaleWithCenter(point_t center, double ratio);
   private:
     Shape* shapes_[10000];
     size_t size_;
-    void scaleSilent(double ratio);
   };
 }
 #endif
