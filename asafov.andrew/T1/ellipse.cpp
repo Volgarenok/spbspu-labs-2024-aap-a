@@ -23,7 +23,7 @@ asafov::rectangle_t asafov::Ellipse::getFrameRect() const
 {
   double height = verticalradius_ * 2.0;
   double width = horizontalradius_ * 2.0;
-  rectangle_t frect{width, height, center_};
+  rectangle_t frect = { width, height, center_ };
   return frect;
 }
 

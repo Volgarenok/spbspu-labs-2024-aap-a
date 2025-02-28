@@ -5,6 +5,7 @@ namespace asafov
 {
   class Circle final: public Shape
   {
+    virtual void unsafeScale(double scale) = 0;
   public:
     Circle(point_t center, double radius);
     double getArea() const;

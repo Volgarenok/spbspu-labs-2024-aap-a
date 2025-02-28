@@ -22,7 +22,7 @@ asafov::rectangle_t asafov::Square::getFrameRect() const
 {
   double x = lb_.x + side_ / 2.0;
   double y = lb_.y + side_ / 2.0;
-  rectangle_t rect{side_, side_, {x, y}};
+  rectangle_t rect = { side_, side_, { x, y } };
   return rect;
 }
 

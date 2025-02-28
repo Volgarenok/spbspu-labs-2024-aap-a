@@ -31,7 +31,7 @@ asafov::rectangle_t asafov::Triangle::getFrameRect() const
   double width = asafov::getCenterDelta(points_[0].x, points_[1].x, points_[2].x);
   double x = std::min( { points_[0].x, points_[1].x, points_[2].x } ) + width / 2.0;
   double y = std::min( { points_[0].y, points_[1].y, points_[2].y } ) + height / 2.0;
-  rectangle_t rect{width, height, {x, y}};
+  rectangle_t rect = { width, height, { x, y } };
   return rect;
 }
 

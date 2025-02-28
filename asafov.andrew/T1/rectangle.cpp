@@ -24,7 +24,7 @@ asafov::rectangle_t asafov::Rectangle::getFrameRect() const
   double width = rt_.x - lb_.x;
   double x = lb_.x + (rt_.x - lb_.x) / 2.0;
   double y = lb_.y + (rt_.y - lb_.y) / 2.0;
-  rectangle_t rect{width, height, {x, y}};
+  rectangle_t rect = { width, height, { x, y } };
   return rect;
 }
 

@@ -5,6 +5,7 @@ namespace asafov
 {
   class Triangle final: public Shape
   {
+    virtual void unsafeScale(double scale) = 0;
   public:
     Triangle(point_t one, point_t two, point_t three);
     double getArea() const;

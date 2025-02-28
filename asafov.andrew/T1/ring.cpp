@@ -22,7 +22,7 @@ double asafov::Ring::getArea() const
 asafov::rectangle_t asafov::Ring::getFrameRect() const
 {
   double side = outerradius_ * 2.0;
-  rectangle_t rect{side, side, center_};
+  rectangle_t rect = { side, side, center_ };
   return rect;
 }
 
@@ -36,12 +36,8 @@ void asafov::Ring::move(point_t pos)
   center_ = pos;
 }
 
-void asafov::Ring::scale(double scale)
+void asafov::Ring::unsafeScale(double scale)
 {
-  if (scale <= 0)
-  {
-    throw std::logic_error("incorrect scale");
-  }
   rectangle_t rect = getFrameRect();
   scalePoint(center_, rect.pos, scale);
   innerradius_ *= scale;
