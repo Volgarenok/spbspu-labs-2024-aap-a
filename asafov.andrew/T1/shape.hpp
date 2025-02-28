@@ -5,7 +5,6 @@ namespace asafov
 {
   class Shape
   {
-    virtual void unsafeScale(double scale) = 0;
   public:
     virtual double getArea() const = 0;
     virtual rectangle_t getFrameRect() const = 0;
@@ -13,6 +12,7 @@ namespace asafov
     virtual void move(double x, double y) = 0;
     void scale(double scale);
     virtual ~Shape() = default;
+    virtual void unsafeScale(double scale) = 0;
   };
 }
 #endif

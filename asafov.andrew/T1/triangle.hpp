@@ -5,7 +5,6 @@ namespace asafov
 {
   class Triangle final: public Shape
   {
-    void unsafeScale(double scale);
   public:
     Triangle(point_t one, point_t two, point_t three);
     double getArea() const;
@@ -13,6 +12,7 @@ namespace asafov
     void move(point_t pos);
     void move(double dx, double dy);
     void scale(double scale);
+    void unsafeScale(double scale);
   private:
     point_t points_[3];
   };

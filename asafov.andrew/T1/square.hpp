@@ -5,7 +5,6 @@ namespace asafov
 {
   class Square final: public Shape
   {
-    void unsafeScale(double scale);
   public:
     Square(point_t lb, double side);
     double getArea() const;
@@ -13,6 +12,7 @@ namespace asafov
     void move(point_t pos);
     void move(double dx, double dy);
     void scale(double scale);
+    void unsafeScale(double scale);
   private:
     point_t lb_;
     double side_;

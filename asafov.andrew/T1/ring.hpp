@@ -5,7 +5,6 @@ namespace asafov
 {
   class Ring final: public Shape
   {
-    void unsafeScale(double scale);
   public:
     Ring(point_t center, double innerradius, double outerradius);
     double getArea() const;
@@ -13,6 +12,7 @@ namespace asafov
     void move(point_t pos);
     void move(double dx, double dy);
     void scale(double scale);
+    void unsafeScale(double scale);
   private:
     point_t center_;
     double innerradius_;
