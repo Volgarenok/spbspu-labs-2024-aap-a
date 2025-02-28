@@ -50,10 +50,9 @@ bool getPoint(std::istream& in, size_t pointCount, dribas::point_t* points) {
   return i == pointCount;
 }
 
-size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, CompositeShape shapes, double* scalingFactor)
+void dribas::getShapeInfo(std::istream& input, std::ostream& error, CompositeShape shapes, double* scalingFactor)
 {
   std::string InputStr;
-  int shapesCount = 0;
   bool scaled = false;
   try {
     while (input >> InputStr && InputStr != "SCALE") {
@@ -62,25 +61,21 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, CompositeS
           point_t pointR[2] = { 0, 0 };
           if (getPoint(std::cin, 2, pointR)) {
             shapes.push_back(new Rectangle { pointR[0], pointR[1] });
-            shapesCount++;
           }
         } else if (InputStr == "TRIANGLE") {
           point_t pointT[3] = { 0, 0 };
           if (getPoint(std::cin, 3, pointT)) {
             shapes.push_back(new Triangle { pointT[0], pointT[1], pointT[2] });
-            shapesCount++;
           }
         } else if (InputStr == "DIAMOND") {
           point_t pointD[3] = { 0, 0 };
           if (getPoint(std::cin, 3, pointD)) {
             shapes.push_back(new Diamond { pointD[0], pointD[1], pointD[2] });
-            shapesCount++;
           }
         } else if (InputStr == "CONCAVE") {
           point_t pointC[4] = { 0, 0 };
           if (getPoint(std::cin, 4, pointC)) {
             shapes.push_back(new Concave { pointC[0], pointC[1], pointC[2], pointC[3] }) ;
-            shapesCount++;
           }
         }
       } catch(const std::invalid_argument& e) {
@@ -89,7 +84,7 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, CompositeS
     }
     if (InputStr == "SCALE") {
       scaled = true;
-      if (shapesCount == 0) {
+      if (shapes.size() == 0) {
         throw std::logic_error("No shapes for scale");
       }
       input >> scalingFactor[0];
@@ -105,6 +100,5 @@ size_t dribas::getShapeInfo(std::istream& input, std::ostream& error, CompositeS
   if (!scaled) {
     throw std::invalid_argument("No Arguments for scale");
   }
-  return shapesCount;
 }
 

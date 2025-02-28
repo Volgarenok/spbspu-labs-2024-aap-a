@@ -6,6 +6,6 @@
 
 namespace dribas
 {
-  void outputRes(std::ostream& output, CompositeShape shape, const size_t shapeSize);
+  void outputRes(std::ostream& output, CompositeShape shape);
 }
 #endif
