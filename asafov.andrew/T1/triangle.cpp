@@ -49,12 +49,8 @@ void asafov::Triangle::move(point_t pos)
   move(pos.x - rect.pos.x, pos.y - rect.pos.y);
 }
 
-void asafov::Triangle::scale(double scale)
+void asafov::Triangle::unsafeScale(double scale)
 {
-  if (scale <= 0)
-  {
-    throw std::logic_error("incorrect scale");
-  }
   rectangle_t rect = getFrameRect();
   for (size_t i = 0; i < 3; i++)
   {
