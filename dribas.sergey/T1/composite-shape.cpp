@@ -170,6 +170,6 @@ dribas::CompositeShape::~CompositeShape()
 void dribas::CompositeShape::clear() noexcept
 {
   while (!empty()) {
-    pop_back(); 
+    pop_back();
   }
 }
