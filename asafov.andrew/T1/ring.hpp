@@ -11,7 +11,7 @@ namespace asafov
     rectangle_t getFrameRect() const;
     void move(point_t pos);
     void move(double dx, double dy);
-    void unsafeScale(double scale);
+    void unsafeScale(double k);
   private:
     point_t center_;
     double innerradius_;

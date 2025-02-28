@@ -10,9 +10,9 @@ namespace asafov
     virtual rectangle_t getFrameRect() const = 0;
     virtual void move(point_t pos) = 0;
     virtual void move(double x, double y) = 0;
-    void scale(double scale);
+    void scale(double k);
     virtual ~Shape() = default;
-    virtual void unsafeScale(double scale) = 0;
+    virtual void unsafeScale(double k) = 0;
   };
 }
 #endif
