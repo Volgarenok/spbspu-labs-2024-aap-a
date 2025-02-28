@@ -5,7 +5,7 @@ namespace asafov
 {
   class Complexquad final: public Shape
   {
-    virtual void unsafeScale(double scale) = 0;
+    void unsafeScale(double scale);
   public:
     Complexquad(point_t one, point_t two, point_t three, point_t four);
     double getArea() const;

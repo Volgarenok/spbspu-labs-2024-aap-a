@@ -5,7 +5,7 @@ namespace asafov
 {
   class Ellipse final: public Shape
   {
-    virtual void unsafeScale(double scale) = 0;
+    void unsafeScale(double scale);
   public:
     Ellipse(point_t center, double verticalradius, double horizontalradius);
     double getArea() const;

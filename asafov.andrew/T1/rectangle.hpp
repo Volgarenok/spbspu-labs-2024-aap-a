@@ -5,7 +5,7 @@ namespace asafov
 {
   class Rectangle final: public Shape
   {
-    virtual void unsafeScale(double scale) = 0;
+    void unsafeScale(double scale);
   public:
     Rectangle(point_t lb, point_t rt);
     double getArea() const;
