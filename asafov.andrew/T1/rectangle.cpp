@@ -40,13 +40,9 @@ void asafov::Rectangle::move(point_t pos)
   move(pos.x - rect.pos.x, pos.y - rect.pos.y);
 }
 
-void asafov::Rectangle::scale(double scale)
+void asafov::Rectangle::unsafeScale(double k)
 {
-  if (scale <= 0)
-  {
-    throw std::logic_error("incorrect scale");
-  }
   rectangle_t rect = getFrameRect();
-  scalePoint(rt_, rect.pos, scale);
-  scalePoint(lb_, rect.pos, scale);
+  scalePoint(rt_, rect.pos, k);
+  scalePoint(lb_, rect.pos, k);
 }

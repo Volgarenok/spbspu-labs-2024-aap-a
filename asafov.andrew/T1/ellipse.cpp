@@ -37,14 +37,10 @@ void asafov::Ellipse::move(point_t pos)
   center_ = pos;
 }
 
-void asafov::Ellipse::scale(double scale)
+void asafov::Ellipse::unsafeScale(double k)
 {
-  if (scale <= 0)
-  {
-    throw std::logic_error("incorrect scale");
-  }
   rectangle_t rect = getFrameRect();
-  scalePoint(center_, rect.pos, scale);
-  verticalradius_ *= scale;
-  horizontalradius_ *= scale;
+  scalePoint(center_, rect.pos, k);
+  verticalradius_ *= k;
+  horizontalradius_ *= k;
 }

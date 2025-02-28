@@ -1,11 +1,11 @@
 #include "shape.hpp"
 #include <stdexcept>
 
-void asafov::Shape::scale(double scale)
+void asafov::Shape::scale(double k)
 {
-  if (scale <= 0)
+  if (k <= 0)
   {
     throw std::logic_error("incorrect scale");
   }
-  unsafeScale(scale);
+  unsafeScale(k);
 }

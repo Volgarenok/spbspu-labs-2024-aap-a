@@ -49,11 +49,11 @@ void asafov::Triangle::move(point_t pos)
   move(pos.x - rect.pos.x, pos.y - rect.pos.y);
 }
 
-void asafov::Triangle::unsafeScale(double scale)
+void asafov::Triangle::unsafeScale(double k)
 {
   rectangle_t rect = getFrameRect();
   for (size_t i = 0; i < 3; i++)
   {
-    scalePoint(points_[i], rect.pos, scale);
+    scalePoint(points_[i], rect.pos, k);
   }
 }

@@ -58,15 +58,11 @@ void asafov::Complexquad::move(point_t pos)
   move(centerx - pos.x, centery - pos.y);
 }
 
-void asafov::Complexquad::scale(double scale)
+void asafov::Complexquad::unsafeScale(double k)
 {
-  if (scale <= 0)
-  {
-    throw std::logic_error("incorrect scale");
-  }
   rectangle_t rect = getFrameRect();
   for (size_t i = 0; i < 4; i++)
   {
-    scalePoint(points_[i], rect.pos, scale);
+    scalePoint(points_[i], rect.pos, k);
   }
 }
