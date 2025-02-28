@@ -1,6 +1,5 @@
 #include "strinput.h"
-#include <cstddef>
-#include <cstring>
+
 char* lanovenko::input_string(std::istream& in, const char stop)
 {
   size_t capacity = 10;
@@ -18,7 +17,7 @@ char* lanovenko::input_string(std::istream& in, const char stop)
       {
         new_str = new char[capacity];
       }
-      catch (const std::bad_alloc & e)
+      catch (const std::bad_alloc& e)
       {
         delete[] str;
         throw;
