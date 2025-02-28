@@ -17,7 +17,7 @@ int main()
   dribas::CompositeShape shapes;
   double scalingFactor[3] = {};
   try {
-    dribas::getShapeInfo(std::cin, std::cerr, shapes, scalingFactor);
+    shapes = dribas::getShapeInfo(std::cin, std::cerr, shapes, scalingFactor);
   } catch(const std::exception& e) {
     std::cerr << e.what() << '\n';
     return 1;

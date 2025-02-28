@@ -50,7 +50,7 @@ bool getPoint(std::istream& in, size_t pointCount, dribas::point_t* points) {
   return i == pointCount;
 }
 
-void dribas::getShapeInfo(std::istream& input, std::ostream& error, CompositeShape shapes, double* scalingFactor)
+dribas::CompositeShape dribas::getShapeInfo(std::istream& input, std::ostream& error, CompositeShape shapes, double* scalingFactor)
 {
   std::string InputStr;
   bool scaled = false;
@@ -100,5 +100,6 @@ void dribas::getShapeInfo(std::istream& input, std::ostream& error, CompositeSha
   if (!scaled) {
     throw std::invalid_argument("No Arguments for scale");
   }
+  return shapes;
 }
 
