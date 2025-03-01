@@ -6,7 +6,7 @@
 #include "getShapeInfo.hpp"
 
 dribas::CompositeShape::CompositeShape() :
-    size_(0)
+  size_(0)
 {
   for (size_t i = 0; i < 10000; i++) {
     shapes_[i] = nullptr;
@@ -14,7 +14,7 @@ dribas::CompositeShape::CompositeShape() :
 }
 
 dribas::CompositeShape::CompositeShape(CompositeShape&& shp) noexcept :
-    size_(shp.size_)
+  size_(shp.size_)
 {
   for (size_t i = 0; i < shp.size_; i++) {
     shapes_[i] = shp.shapes_[i];
