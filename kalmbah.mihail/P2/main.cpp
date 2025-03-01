@@ -11,11 +11,7 @@ int main() {
     double epsilon = 1e-6;
     std::cout << "Enter the interval boundaries (-0.5 and 0.5:)\n";
     std::cin >> start >> end;
-    if (!(std::cin >> start)||!(std::cin >> end)) {
-      std::cerr << "Invalid interval!\n";
-      return 1;
-    }
-    if (start >= end || start < -0.5 || end > 0.5) {
+    if (!(std::cin >> start) || !(std::cin >> end || start >= end || start < -0.5 || end > 0.5)) {
       std::cerr << "Invalid interval!\n";
       return 1;
     }
