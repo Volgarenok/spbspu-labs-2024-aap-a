@@ -53,7 +53,7 @@ dribas::CompositeShape& dribas::CompositeShape::operator=(CompositeShape&& shp) 
 }
 
 dribas::CompositeShape::CompositeShape(const CompositeShape& shp) :
-    size_(shp.size_)
+  size_(shp.size_)
 {
   for (size_t i = 0; i < size_; i++) {
     shapes_[i] = shp.shapes_[i]->clone();
