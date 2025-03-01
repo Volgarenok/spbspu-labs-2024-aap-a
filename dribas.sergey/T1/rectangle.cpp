@@ -1,17 +1,17 @@
 #include "rectangle.hpp"
-#include <stdlib.h>
-#include <stdexcept>
 #include <cmath>
+#include <stdexcept>
+#include <stdlib.h>
 
 namespace
 {
   dribas::point_t getPoint(dribas::point_t center, dribas::point_t angle, double ratio)
   {
-  return { center.x + (angle.x - center.x) * ratio, center.y + (angle.y - center.y) * ratio };
+    return { center.x + (angle.x - center.x) * ratio, center.y + (angle.y - center.y) * ratio };
   }
 }
 
-dribas::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
+dribas::Rectangle::Rectangle(point_t leftDown, point_t rightUp) :
   leftDown_(leftDown),
   rightUp_(rightUp)
 {
@@ -33,7 +33,7 @@ dribas::rectangle_t dribas::Rectangle::getFrameRect() const
   double width = rightUp_.x - leftDown_.x;
   double posX = leftDown_.x + (width / 2.0L);
   double posY = leftDown_.y + (height / 2.0L);
-  return rectangle_t {{ width }, { height }, {{ posX}, { posY }}};
+  return rectangle_t { { width }, { height }, { { posX }, { posY } } };
 }
 
 void dribas::Rectangle::move(double x, double y)

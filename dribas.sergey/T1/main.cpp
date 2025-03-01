@@ -1,16 +1,9 @@
 #include <cstddef>
 #include <iostream>
-#include "getShapeInfo.hpp"
-#include "shape.hpp"
-#include "outputRes.hpp"
 #include "composite-shape.hpp"
-
-void clearStr(char** stack, size_t stackSize)
-{
-  for (size_t i = 0; *(stack + i) && i < stackSize; i++) {
-    delete(stack + i);
-  }
-}
+#include "getShapeInfo.hpp"
+#include "outputRes.hpp"
+#include "shape.hpp"
 
 int main()
 {
@@ -18,7 +11,7 @@ int main()
   double scalingFactor[3] = {};
   try {
     shapes = dribas::getShapeInfo(std::cin, std::cerr, shapes, scalingFactor);
-  } catch(const std::exception& e) {
+  } catch (const std::exception& e) {
     std::cerr << e.what() << '\n';
     return 1;
   }

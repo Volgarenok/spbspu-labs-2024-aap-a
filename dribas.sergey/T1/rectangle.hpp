@@ -5,7 +5,7 @@
 
 namespace dribas
 {
-  class Rectangle final: public Shape
+  class Rectangle final : public Shape
   {
   public:
     Rectangle(point_t leftDown, point_t rightUp);
@@ -14,6 +14,7 @@ namespace dribas
     rectangle_t getFrameRect() const override;
     void move(point_t point) override;
     void move(double x, double y) override;
+
   private:
     point_t leftDown_;
     point_t rightUp_;

@@ -4,20 +4,17 @@
 #include "base-types.hpp"
 #include "triangle.hpp"
 
-namespace {
+namespace
+{
   bool isDupePoint(dribas::point_t p1, dribas::point_t p2, dribas::point_t p3, dribas::point_t p4)
   {
-    return (p1.x == p2.x && p1.y == p2.y) ||
-      (p1.x == p3.x && p1.y == p3.y) ||
-        (p1.x == p4.x && p1.y == p4.y) ||
-          (p2.x == p3.x && p2.y == p3.y) ||
-            (p2.x == p4.x && p2.y == p4.y) ||
-              (p3.x == p4.x && p3.y == p4.y);
+    return (p1.x == p2.x && p1.y == p2.y) || (p1.x == p3.x && p1.y == p3.y) || (p1.x == p4.x && p1.y == p4.y) ||
+      (p2.x == p3.x && p2.y == p3.y) || (p2.x == p4.x && p2.y == p4.y) || (p3.x == p4.x && p3.y == p4.y);
   }
 
   bool isTriangle(dribas::point_t a, dribas::point_t b, dribas::point_t c)
   {
-    return !(((a.x == b.x) && (a.x == c.x)) || (( a.y == b.y) && (a.y == c.y)));
+    return !(((a.x == b.x) && (a.x == c.x)) || ((a.y == b.y) && (a.y == c.y)));
   }
 
   double getTRinagleArea(dribas::point_t a, dribas::point_t b, dribas::point_t c)
@@ -35,7 +32,7 @@ namespace {
   }
 }
 
-dribas::Concave::Concave(point_t a, point_t b, point_t c, point_t d):
+dribas::Concave::Concave(point_t a, point_t b, point_t c, point_t d) :
   a_(a, b, c),
   b_(b, c, d)
 {

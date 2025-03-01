@@ -3,7 +3,7 @@
 #include <cmath>
 #include <stdexcept>
 
-dribas::Triangle::Triangle(point_t a, point_t b, point_t c):
+dribas::Triangle::Triangle(point_t a, point_t b, point_t c) :
   a_(a),
   b_(b),
   c_(c)
@@ -28,7 +28,7 @@ dribas::rectangle_t dribas::Triangle::getFrameRect() const
   double width = maxX - minX;
   double posX = minX + (width / 2.0);
   double posY = minY + (height / 2.0);
-  return rectangle_t {{ width }, { height }, {{ posX }, { posY }}};
+  return rectangle_t { { width }, { height }, { { posX }, { posY } } };
 }
 
 void dribas::Triangle::move(double x, double y)

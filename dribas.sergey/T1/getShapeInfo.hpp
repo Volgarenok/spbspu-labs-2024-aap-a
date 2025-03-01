@@ -1,10 +1,10 @@
 #ifndef GETSHAPEINFO_HPP
 #define GETSHAPEINFO_HPP
 
-#include <iostream>
 #include <cstddef>
-#include "shape.hpp"
+#include <iostream>
 #include "composite-shape.hpp"
+#include "shape.hpp"
 
 namespace dribas
 {

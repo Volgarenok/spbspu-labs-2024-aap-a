@@ -5,7 +5,7 @@
 
 namespace dribas
 {
-  class Triangle final: public Shape
+  class Triangle final : public Shape
   {
   public:
     Triangle(point_t a, point_t b, point_t c);
@@ -14,6 +14,7 @@ namespace dribas
     void move(point_t point) override;
     void move(double x, double y) override;
     Shape* clone() const override;
+
   private:
     point_t a_;
     point_t b_;

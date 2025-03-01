@@ -1,20 +1,20 @@
 #include "composite-shape.hpp"
-#include <stdexcept>
-#include <limits>
 #include <algorithm>
+#include <limits>
+#include <stdexcept>
 #include "base-types.hpp"
 #include "getShapeInfo.hpp"
 
-dribas::CompositeShape::CompositeShape():
-  size_(0)
+dribas::CompositeShape::CompositeShape() :
+    size_(0)
 {
   for (size_t i = 0; i < 10000; i++) {
     shapes_[i] = nullptr;
   }
 }
 
-dribas::CompositeShape::CompositeShape(CompositeShape&& shp) noexcept:
-  size_(shp.size_)
+dribas::CompositeShape::CompositeShape(CompositeShape&& shp) noexcept :
+    size_(shp.size_)
 {
   for (size_t i = 0; i < shp.size_; i++) {
     shapes_[i] = shp.shapes_[i];
@@ -52,8 +52,8 @@ dribas::CompositeShape& dribas::CompositeShape::operator=(CompositeShape&& shp) 
   return *this;
 }
 
-dribas::CompositeShape::CompositeShape(const CompositeShape& shp):
-  size_(shp.size_)
+dribas::CompositeShape::CompositeShape(const CompositeShape& shp) :
+    size_(shp.size_)
 {
   for (size_t i = 0; i < size_; i++) {
     shapes_[i] = shp.shapes_[i]->clone();
@@ -121,10 +121,10 @@ double dribas::CompositeShape::getArea() const noexcept
 
 dribas::rectangle_t dribas::CompositeShape::getFrameRect() const
 {
-  double minY = std::numeric_limits < double > ::lowest();
-  double minX = std::numeric_limits < double > ::lowest();
-  double maxX = std::numeric_limits < double > ::max();
-  double maxY = std::numeric_limits < double > ::max();
+  double minY = std::numeric_limits< double >::lowest();
+  double minX = std::numeric_limits< double >::lowest();
+  double maxX = std::numeric_limits< double >::max();
+  double maxY = std::numeric_limits< double >::max();
 
   for (size_t i = 0; i < size_; i++) {
     rectangle_t frem = shapes_[size_]->getFrameRect();

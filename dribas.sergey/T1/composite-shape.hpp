@@ -15,7 +15,7 @@ namespace dribas
     ~CompositeShape();
 
     CompositeShape& operator=(const CompositeShape& shp);
-    CompositeShape& operator=(CompositeShape && shp) noexcept;
+    CompositeShape& operator=(CompositeShape&& shp) noexcept;
     Shape* at(size_t id);
     Shape* operator[](size_t id);
     const Shape* at(size_t id) const;
@@ -32,6 +32,7 @@ namespace dribas
     void clear() noexcept;
     void scaleSilent(double ratio);
     void scaleWithCenter(point_t center, double ratio);
+
   private:
     Shape* shapes_[10000];
     size_t size_;
