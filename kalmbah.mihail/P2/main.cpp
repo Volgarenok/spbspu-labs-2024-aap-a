@@ -2,18 +2,27 @@
 #include <cmath>
 #include <iomanip>
 #include <stdexcept>
+#include <sstream>
+#include <string>
 #include "taylor_functions.h"
 int main() {
   try {
-    double start = 0;
-    double end = 0;
-    size_t maxIter = 10;
-    double epsilon = 1e-6;
     std::cout << "Enter the interval boundaries (-0.5 and 0.5:)\n";
-    std::cin >> start >> end;
-    if (!(std::cin >> start) || !(std::cin >> end || start >= end || start < -0.5 || end > 0.5)) {
-      std::cerr << "Invalid interval!\n";
-      return 1;
+    std::string input;
+    std::getline(std::cin, input);
+    std::istringstream iss(input);
+    double start, end; //Инициализация start и end
+    if (!(iss >> start)) { // Пробуем прочитать первое число
+        std::cerr << "Incorrect interval start format\n";
+        return 1;
+    }
+    if (!(iss >> end)) { // Пробуем прочитать второе число
+        std::cerr << "incorrect interval end format\n";
+        return 1;
+    }
+    if (iss >> start) { // Проверяем, есть ли еще одно число после второго
+        std::cerr << "incorrect interval\n";
+        return 1;
     }
     std::cout << std::left << std::setw(10) << "x"
               << std::setw(15) << "Arcsin(Taylor)"
@@ -22,6 +31,8 @@ int main() {
               << std::setw(15) << "Arcsin(cmath)"
               << std::setw(15) << "Arctan(cmath)"
               << std::setw(15) << "Sum(cmath)\n";
+    const size_t maxIter = 10;
+    const double epsilon = 1e-6;
     for (double x = start; x <= end; x += 0.1) {
       double arcsinT = arcsinTaylor(x, maxIter, epsilon);
       double arctanT = arctanTaylor(x, maxIter, epsilon);
