@@ -24,6 +24,11 @@ int main() {
         std::cerr << "incorrect interval\n";
         return 1;
     }
+    const double granInterval = 0.5;
+    if (start < -granInterval || end > granInterval) { // Проверка допустимого интервала
+      std::cerr << "Going beyond the allowed interval";
+      return 1;
+    }
     std::cout << std::left << std::setw(10) << "x" // Ввод имён столбцов таблицы
               << std::setw(15) << "Arcsin(Taylor)"
               << std::setw(15) << "Arctan(Taylor)"
