@@ -11,6 +11,8 @@ namespace shramko
   public:
     Diamond(point_t one, point_t two, point_t three);
     ~Diamond();
+    Diamond(const Diamond&) = delete;
+    Diamond& operator=(const Diamond&) = delete;
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t point) override;
