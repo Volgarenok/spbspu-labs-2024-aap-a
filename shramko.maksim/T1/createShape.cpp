@@ -19,6 +19,7 @@ void shramko::scaling(Shape** shape, size_t count, point_t centre, double k)
   for (size_t i = 0; i < count; i++)
   {
     point_t center = shape[i]->getFrameRect().pos;
+    shape[i]->move(centre);
     point_t centreTwo = shape[i]->getFrameRect().pos;
 
     double diffX = (centreTwo.x - center.x) * k * - 1;
