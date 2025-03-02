@@ -102,6 +102,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
         try
         {
           scaling(shape, count, goCentre, k);
+          outRes(out, shape, count);
         }
         catch (const std::invalid_argument& e)
         {
