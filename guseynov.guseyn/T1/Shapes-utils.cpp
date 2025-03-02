@@ -1,5 +1,7 @@
 #include "Shapes-utils.hpp"
 
+#include <algorithm>
+
 double guseynov::getSumArea(const CompositeShape & compositeShape)
 {
   return compositeShape.getArea();
