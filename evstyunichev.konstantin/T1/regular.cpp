@@ -7,6 +7,7 @@ constexpr double pi_v = 3.141592653589793238462643;
 
 namespace
 {
+  using evstyunichev::point_t;
   const double prec = 0.0000001;
   bool isEqual(double, double, double p = prec);
   bool isInt(double);
@@ -36,17 +37,7 @@ namespace
   }
 }
 
-double evstyunichev::Regular::get_R() const
-{
-  return (a_ / 2.0) / std::cos((pi_v - alpha_) / 2.0);
-}
-
-double evstyunichev::Regular::get_r() const
-{
-  return (a_ / 2.0) * std::tan((pi_v - alpha_) / 2.0);
-}
-
-evstyunichev::Regular::Regular(point_t A, point_t B, point_t C)
+double * evstyunichev::createDataRegular(point_t A, point_t B, point_t C)
 {
   double a = findDist(A, B), b = findDist(B, C), c = findDist(A, C);
   if (a > c)
@@ -59,22 +50,42 @@ evstyunichev::Regular::Regular(point_t A, point_t B, point_t C)
   {
     throw std::invalid_argument("invalid");
   }
-  alpha_ = alpha;
-  a_ = b * 2.0;
-  middle_ = A;
-  base_ = std::acos((C.x - A.x) / c);
+  double *data = new double[5]{A.x, A.y, alpha, b * 2.0, std::acos((C.x - A.x) / c)};
+  return data;
 }
 
-evstyunichev::Regular::Regular(point_t middle, double r, size_t n)
+evstyunichev::Regular::Regular(double *data):
+  middle_{data[0], data[1]},
+  alpha_(data[2]),
+  a_(data[3]),
+  base_(data[4])
+{
+  if (data[2] == 0)
+  {
+    throw std::invalid_argument("bad angle!");
+  }
+}
+
+double evstyunichev::Regular::get_R() const
+{
+  return (a_ / 2.0) / std::cos((pi_v - alpha_) / 2.0);
+}
+
+double evstyunichev::Regular::get_r() const
+{
+  return (a_ / 2.0) * std::tan((pi_v - alpha_) / 2.0);
+}
+
+evstyunichev::Regular::Regular(point_t middle, double r, size_t n):
+  middle_(middle),
+  alpha_(2.0 * pi_v / n),
+  a_(std::sin(alpha_ / 2.0) * r * 2.0),
+  base_(0)
 {
   if ((r <= 0) || (n < 3))
   {
     throw std::invalid_argument("invalid arguments");
   }
-  middle_ = middle;
-  base_ = 0;
-  alpha_ = (2 * pi_v) / n;
-  a_ = std::sin(alpha_ / 2.0) * r * 2.0;
 }
 
 double evstyunichev::Regular::getArea() const
@@ -85,7 +96,8 @@ double evstyunichev::Regular::getArea() const
 
 evstyunichev::rectangle_t evstyunichev::Regular::getFrameRect() const
 {
-  double right = -1e9, left = 1e9, down = 1e9, up = -1e9, width = 0, height = 0;
+  double angle = base_, R = get_R(), left = middle_.x + R * std::cos(angle), right = left;
+  double down = middle_.y + R * std::sin(angle), up = down, width = 0, height = 0;
   double R = get_R();
   point_t cur{};
   for (double angle = base_; !isEqual(angle, base_ + 2 * pi_v); angle += alpha_)
@@ -118,6 +130,10 @@ void evstyunichev::Regular::move(point_t cds)
 
 void evstyunichev::Regular::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::logic_error("negative k!");
+  }
   a_ *= k;
   return;
 }
@@ -127,7 +143,7 @@ evstyunichev::point_t evstyunichev::Regular::getMiddle() const
   return middle_;
 }
 
-evstyunichev::Shape * evstyunichev::Regular::copy() const
+evstyunichev::Shape * evstyunichev::Regular::clone() const
 {
   return new Regular(*this);
 }

@@ -16,15 +16,12 @@ int main()
   bool scaleFlag = 0, errorFlag = 0;
   while (std::cin >> command)
   {
+    Shape *cur = nullptr;
     try
     {
-      Shape *cur = nullptr;
       cur = make_shape(std::cin, command);
-      if (cur)
-      {
-        compShp.pushBack(cur);
-      }
-      else if (command == "SCALE")
+      compShp.pushBack(cur);
+      if (command == "SCALE")
       {
         scaleFlag = 1;
         makeScale(compShp, std::cin);
@@ -49,6 +46,7 @@ int main()
     }
     catch (const std::bad_alloc &e)
     {
+      delete cur;
       std::cerr << e.what() << '\n';
       return 2;
     }

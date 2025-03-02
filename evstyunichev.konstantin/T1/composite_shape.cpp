@@ -10,6 +10,10 @@ void evstyunichev::CompositeShape::clear() noexcept
     delete shapes_[i];
   }
   delete[] shapes_;
+  shapes_ = nullptr;
+  size_ = 0;
+  mxSize_ = 0;
+  totalSquare_ = 0;
 }
 
 void evstyunichev::CompositeShape::swap(CompositeShape &cmp) noexcept
@@ -25,7 +29,7 @@ void evstyunichev::CompositeShape::resize(size_t size)
   CompositeShape newCmp(size);
   for (size_t i = 0; i < size_; i++, newCmp.size_++)
   {
-    newCmp.shapes_[i] = shapes_[i]->copy();
+    newCmp.shapes_[i] = shapes_[i]->clone();
   }
   newCmp.totalSquare_ = totalSquare_;
   swap(newCmp);
@@ -49,7 +53,7 @@ evstyunichev::CompositeShape::CompositeShape(const CompositeShape &cmp):
   {
     for (; size_ < mxSize_; size_++)
     {
-      shapes_[size_] = cmp[size_]->copy();
+      shapes_[size_] = cmp[size_]->clone();
     }
   }
   catch (const std::bad_alloc &e)
@@ -65,10 +69,7 @@ evstyunichev::CompositeShape::CompositeShape(CompositeShape &&cmp) noexcept:
   totalSquare_(cmp.totalSquare_),
   shapes_(cmp.shapes_)
 {
-  cmp.shapes_ = nullptr;
-  cmp.size_ = 0;
-  cmp.mxSize_ = 0;
-  cmp.totalSquare_ = 0;
+  cmp.clear();
 }
 
 evstyunichev::CompositeShape & evstyunichev::CompositeShape::operator=(const CompositeShape &cmp)
@@ -81,19 +82,17 @@ evstyunichev::CompositeShape & evstyunichev::CompositeShape::operator=(const Com
 evstyunichev::CompositeShape & evstyunichev::CompositeShape::operator=(CompositeShape &&cmp) noexcept
 {
   clear();
-  shapes_ = cmp.shapes_;
-  mxSize_ = cmp.mxSize_;
-  size_ = cmp.size_;
-  totalSquare_ = cmp.totalSquare_;
-  cmp.shapes_ = nullptr;
-  cmp.size_ = 0;
-  cmp.mxSize_ = 0;
-  cmp.totalSquare_ = 0;
+  swap(cmp);
+  cmp.clear();
   return *this;
 }
 
 void evstyunichev::CompositeShape::pushBack(Shape *shp)
 {
+  if (!shp)
+  {
+    return;
+  }
   if (size_ >= mxSize_)
   {
     const size_t newMxSize = mxSize_ * 2 + 1;
@@ -194,7 +193,7 @@ evstyunichev::CompositeShape::~CompositeShape()
   clear();
 }
 
-evstyunichev::CompositeShape* evstyunichev::CompositeShape::copy() const
+evstyunichev::CompositeShape * evstyunichev::CompositeShape::clone() const
 {
   return new CompositeShape(*this);
 }

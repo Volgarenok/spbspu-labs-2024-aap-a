@@ -2,14 +2,14 @@
 #include <iostream>
 #include "base-types.hpp"
 
-evstyunichev::Rectangle::Rectangle(point_t leftDown, point_t rightUp)
+evstyunichev::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
+  leftDown_(leftDown),
+  rightUp_(rightUp)
 {
   if ((leftDown.x >= rightUp.x) || (leftDown.y >= rightUp.y))
   {
     throw std::invalid_argument("invalid coordinates");
   }
-  leftDown_ = leftDown;
-  rightUp_ = rightUp;
 }
 
 double evstyunichev::Rectangle::getArea() const
@@ -21,8 +21,7 @@ evstyunichev::rectangle_t evstyunichev::Rectangle::getFrameRect() const
 {
   double width = rightUp_.x - leftDown_.x, height = rightUp_.y - leftDown_.y;
   point_t pos = getMiddle();
-  rectangle_t frame{width, height, pos};
-  return frame;
+  return rectangle_t{width, height, pos};
 }
 
 void evstyunichev::Rectangle::move(double dx, double dy)
@@ -50,6 +49,10 @@ evstyunichev::point_t evstyunichev::Rectangle::getMiddle() const
 
 void evstyunichev::Rectangle::scale(double k)
 {
+  if (k <= 0)
+  {
+    throw std::logic_error("negative k!");
+  }
   point_t mid = getMiddle();
   double w = (rightUp_.x - leftDown_.x) * k, h = (rightUp_.y - leftDown_.y) * k;
   leftDown_.x = mid.x - w / 2.0;
@@ -59,7 +62,7 @@ void evstyunichev::Rectangle::scale(double k)
   return;
 }
 
-evstyunichev::Shape * evstyunichev::Rectangle::copy() const
+evstyunichev::Shape * evstyunichev::Rectangle::clone() const
 {
   return new Rectangle(*this);
 }

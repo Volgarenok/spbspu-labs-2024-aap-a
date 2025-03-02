@@ -9,10 +9,9 @@
 #include "ring.hpp"
 namespace evstyunichev
 {
-  Rectangle * make_rectangle(std::istream &in);
-  Circle * make_circle(std::istream &in);
-  Ring * make_ring(std::istream &in);
-  Regular * make_regular(std::istream &in);
-  Shape * make_shape(std::istream &in, const std::string &s);
+  Rectangle * make_rectangle(std::istream &);
+  Circle * make_circle(std::istream &);
+  Ring * make_ring(std::istream &);
+  Shape * make_shape(std::istream &, const std::string &);
 }
 #endif

@@ -16,7 +16,7 @@ namespace evstyunichev
       void move(double, double) override;
       void move(point_t) override;
       void scale(double) override;
-      Shape * copy() const override;
+      Shape * clone() const override;
 
     private:
       Regular interior_;

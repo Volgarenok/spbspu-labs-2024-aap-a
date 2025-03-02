@@ -9,36 +9,47 @@
 
 evstyunichev::Rectangle * evstyunichev::make_rectangle(std::istream &in)
 {
-  double x1{}, y1{}, x2{}, y2{};
-  in >> x1 >> y1 >> x2 >> y2;
-  Rectangle *temp = new Rectangle({x1, y1}, {x2, y2});
+  double data[4]{};
+  for (size_t i = 0; i < 4; i++)
+  {
+    in >> data[i];
+  }
+  Rectangle *temp = new Rectangle({data[0], data[1]}, {data[2], data[3]});
   return temp;
 }
 
 evstyunichev::Circle * evstyunichev::make_circle(std::istream &in)
 {
-  double x{}, y{}, r{};
-  in >> x >> y >> r;
-  Circle *temp = new Circle({x, y}, r);
+  double data[3]{};
+  for (size_t i = 0; i < 3; i++)
+  {
+    in >> data[i];
+  }
+  Circle *temp = new Circle({data[0], data[1]}, data[2]);
   return temp;
 }
 
 evstyunichev::Ring * evstyunichev::make_ring(std::istream &in)
 {
-  double x{}, y{}, R{}, r{};
-  in >> x >> y >> R >> r;
-  Ring *temp = new Ring({x, y}, R, r);
+  double data[4]{};
+  for (size_t i = 0; i < 4; i++)
+  {
+    in >> data[i];
+  }
+  Ring *temp = new Ring({data[0], data[1]}, data[2], data[3]);
   return temp;
 }
 
 evstyunichev::Regular * evstyunichev::make_regular(std::istream &in)
 {
-  double cds[6];
+  double cds[6]{};
   for (size_t i = 0; i < 6; i++)
   {
     in >> cds[i];
   }
-  Regular *temp = new Regular({ cds[0], cds[1] }, { cds[2], cds[3] }, { cds[4], cds[5] });
+  double *data = createDataRegular({ cds[0], cds[1] }, { cds[2], cds[3] }, { cds[4], cds[5] });
+  Regular *temp = new Regular(data);
+  delete[] data;
   return temp;
 }
 

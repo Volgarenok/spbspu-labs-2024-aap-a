@@ -22,7 +22,7 @@ namespace evstyunichev
       bool empty() const noexcept;
       size_t size() const noexcept;
       double getArea() const;
-      CompositeShape * copy() const;
+      CompositeShape * clone() const;
       rectangle_t getFrameRect() const;
       void scale(double, point_t);
 
