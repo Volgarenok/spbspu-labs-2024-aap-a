@@ -42,49 +42,25 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
     {
       if (str == "RECTANGLE")
       {
-        try
-        {
-          point_t top, bottom;
-          in >> bottom.x >> bottom.y >> top.x >> top.y;
-          shape[count] = new Rectangle{bottom, top};
-          count++;
-        }
-        catch (const std::invalid_argument& e)
-        {
-          err << e.what() << '\n';
-        }
+        point_t top, bottom;
+        in >> bottom.x >> bottom.y >> top.x >> top.y;
+        shape[count++] = new Rectangle{bottom, top};
       }
       else if (str == "TRIANGLE")
       {
-        try
-        {
-          point_t one, two, three;
-          in >> one.x >> one.y;
-          in >> two.x >> two.y;
-          in >> three.x >> three.y;
-          shape[count] = new Triangle{one, two, three};
-          count++;
-        }
-        catch (const std::invalid_argument& e)
-        {
-          err << e.what() << '\n';
-        }
+        point_t one, two, three;
+        in >> one.x >> one.y;
+        in >> two.x >> two.y;
+        in >> three.x >> three.y;
+        shape[count++] = new Triangle{one, two, three};
       }
       else if (str == "DIAMOND")
       {
-        try
-        {
-          point_t one, two, three;
-          in >> one.x >> one.y;
-          in >> two.x >> two.y;
-          in >> three.x >> three.y;
-          shape[count] = new Diamond{one, two, three};
-          count++;
-        }
-        catch (const std::invalid_argument& e)
-        {
-          err << e.what() << '\n';
-        }
+        point_t one, two, three;
+        in >> one.x >> one.y;
+        in >> two.x >> two.y;
+        in >> three.x >> three.y;
+        shape[count++] = new Diamond{one, two, three};
       }
       else if (str == "SCALE")
       {
@@ -98,22 +74,12 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
         point_t goCentre;
         double k;
         in >> goCentre.x >> goCentre.y >> k;
-
-        try
-        {
-          outRes(out, shape, count);
-          scaling(shape, count, goCentre, k);
-        }
-        catch (const std::invalid_argument& e)
-        {
-          err << e.what() << '\n';
-          destroy(shape, count);
-          return -1;
-        }
+        outRes(out, shape, count);
+        scaling(shape, count, goCentre, k);
       }
     }
   }
-  catch (const std::runtime_error& e)
+  catch (const std::exception& e)
   {
     err << e.what() << '\n';
     destroy(shape, count);
