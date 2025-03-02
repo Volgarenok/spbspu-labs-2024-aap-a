@@ -6,7 +6,7 @@
 
 namespace shramko
 {
-  double calcLength(const point_t p1, const point_t p2);
+  double calcLength(point_t p1, point_t p2);
 }
 
 #endif
