@@ -28,7 +28,7 @@ dribas::rectangle_t dribas::Triangle::getFrameRect() const
   double width = maxX - minX;
   double posX = minX + (width / 2.0);
   double posY = minY + (height / 2.0);
-  return rectangle_t { { width }, { height }, { { posX }, { posY } } };
+  return rectangle_t{ { width }, { height }, { { posX }, { posY } } };
 }
 
 void dribas::Triangle::move(double x, double y)

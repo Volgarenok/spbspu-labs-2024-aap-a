@@ -3,7 +3,6 @@
 #include <limits>
 #include <stdexcept>
 #include "base-types.hpp"
-#include "getShapeInfo.hpp"
 
 dribas::CompositeShape::CompositeShape() :
   size_(0)
@@ -159,7 +158,15 @@ void dribas::CompositeShape::scaleSilent(double ratio)
 
 void dribas::CompositeShape::scaleWithCenter(point_t center, double ratio)
 {
-  scalingAll(shapes_, size_, center, ratio);
+  for (size_t i = 0; i < size_; i++) {
+    point_t cneter = shapes_[i]->getFrameRect().pos;
+    shapes_[i]->move(center);
+    point_t center2 = shapes_[i]->getFrameRect().pos;
+    double diffenceX = (center2.x - cneter.x) * ratio * -1;
+    double diffenceY = (center2.y - cneter.y) * ratio * -1;
+    shapes_[i]->scaleSilent(ratio);
+    shapes_[i]->move(diffenceX, diffenceY);
+  }
 }
 
 dribas::CompositeShape::~CompositeShape()

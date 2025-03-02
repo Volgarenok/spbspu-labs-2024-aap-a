@@ -23,5 +23,5 @@ namespace dribas
     Triangle d_;
     void scaleSilent(double ratio) override;
   };
-}
+} 
 #endif
