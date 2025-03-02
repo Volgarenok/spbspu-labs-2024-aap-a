@@ -79,7 +79,13 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
       }
     }
   }
-  catch (const std::exception& e)
+  catch (const std::invalid_argument& e)
+  {
+    err << e.what() << '\n';
+    destroy(shape, count);
+    return -1;
+  }
+  catch (const std::runtime_error& e)
   {
     err << e.what() << '\n';
     destroy(shape, count);
