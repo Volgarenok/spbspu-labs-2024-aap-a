@@ -19,7 +19,6 @@ void shramko::scaling(Shape** shape, size_t count, point_t centre, double k)
   for (size_t i = 0; i < count; i++)
   {
     point_t center = shape[i]->getFrameRect().pos;
-    shape[i]->move(centre);
     point_t centreTwo = shape[i]->getFrameRect().pos;
 
     double diffX = (centreTwo.x - center.x) * k * - 1;
@@ -32,22 +31,20 @@ void shramko::scaling(Shape** shape, size_t count, point_t centre, double k)
 
 int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out, Shape** shape)
 {
-  std::string stri;
+  std::string str;
   int count = 0;
   bool isScaled = false;
+
   try
   {
-    while (in >> stri)
+    while (in >> str)
     {
-      if (stri == "RECTANGLE")
+      if (str == "RECTANGLE")
       {
         try
         {
           point_t top, bottom;
-          in >> bottom.x;
-          in >> bottom.y;
-          in >> top.x;
-          in >> top.y;
+          in >> bottom.x >> bottom.y >> top.x >> top.y;
           shape[count] = new Rectangle{bottom, top};
           count++;
         }
@@ -56,17 +53,14 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
           err << e.what() << '\n';
         }
       }
-      else if (stri == "TRIANGLE")
+      else if (str == "TRIANGLE")
       {
         try
         {
           point_t one, two, three;
-          in >> one.x;
-          in >> one.y;
-          in >> two.x;
-          in >> two.y;
-          in >> three.x;
-          in >> three.y;
+          in >> one.x >> one.y;
+          in >> two.x >> two.y;
+          in >> three.x >> three.y;
           shape[count] = new Triangle{one, two, three};
           count++;
         }
@@ -75,17 +69,14 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
           err << e.what() << '\n';
         }
       }
-      else if (stri == "DIAMOND")
+      else if (str == "DIAMOND")
       {
         try
         {
           point_t one, two, three;
-          in >> one.x;
-          in >> one.y;
-          in >> two.x;
-          in >> two.y;
-          in >> three.x;
-          in >> three.y;
+          in >> one.x >> one.y;
+          in >> two.x >> two.y;
+          in >> three.x >> three.y;
           shape[count] = new Diamond{one, two, three};
           count++;
         }
@@ -94,7 +85,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
           err << e.what() << '\n';
         }
       }
-      else if (stri == "SCALE")
+      else if (str == "SCALE")
       {
         isScaled = true;
         if (count == 0)
@@ -105,15 +96,11 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
 
         point_t goCentre;
         double k;
-        in >> goCentre.x;
-        in >> goCentre.y;
-        in >> k;
+        in >> goCentre.x >> goCentre.y >> k;
 
         try
         {
-          outRes(out, shape, count);
           scaling(shape, count, goCentre, k);
-          outRes(out, shape, count);
         }
         catch (const std::invalid_argument& e)
         {
@@ -124,25 +111,19 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
       }
     }
   }
-  catch (const std::bad_alloc& e)
-  {
-    err << e.what() << '\n';
-    destroy(shape, count);
-    return -1;
-  }
-  catch (const std::logic_error& e)
+  catch (const std::runtime_error& e)
   {
     err << e.what() << '\n';
     destroy(shape, count);
     return -1;
   }
 
-  if (!isScaled)
+  if (isScaled)
   {
-    destroy(shape, count);
-    return -1;
+    outRes(out, shape, count);
   }
 
+  destroy(shape, count);
   return count;
 }
 
