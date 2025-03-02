@@ -9,6 +9,11 @@ shramko::Diamond::Diamond(point_t one, point_t two, point_t three):
   two_(two),
   three_(three)
 {
+  if (!triangles)
+  {
+    throw std::bad_alloc();
+  }
+
   point_t mid1 = {(one.x + two.x)/2, (one.y + two.y)/2};
   point_t mid2 = {(one.x + three.x)/2, (one.y + three.y)/2};
   point_t mid3 = {(two.x + three.x)/2, (two.y + three.y)/2};
