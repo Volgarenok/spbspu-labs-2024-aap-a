@@ -44,7 +44,7 @@ int main() {
       double sumT = arcsinT + arctanT;
       double sumC = arcsinC + arctanC;
       if (arcsinT == 100.0 && arctanT == 100.0) {
-        std::cout << std::fixed << std::setprecision(6) << std::left << std::setw(15) << x // Вывод результатов в случие не соответсвии точности в arcsinT
+        std::cout << std::fixed << std::setprecision(6) << std::left << std::setw(15) << x // Вывод результатов с учётом не соответсвия точности
                 << std::setw(15) << "<MATH ERROR>"
                 << std::setw(15) << "<MATH ERROR>"
                 << std::setw(15) << "<MATH ERROR>"
@@ -53,7 +53,7 @@ int main() {
                 << std::setw(15) << sumC << "\n";
       }
       else if (arctanT == 100.0) {
-        std::cout << std::fixed << std::setprecision(6) << std::left << std::setw(15) << x // Вывод результатов в случие не соответсвии точност>
+        std::cout << std::fixed << std::setprecision(6) << std::left << std::setw(15) << x
                 << std::setw(15) << arcsinT
                 << std::setw(15) << "<MATH ERROR>"
                 << std::setw(15) << "<MATH ERROR>"
