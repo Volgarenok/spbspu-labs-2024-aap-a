@@ -11,7 +11,7 @@ int main()
   size_t count = 0;
   count = shramko::createShape(std::cin, std::cerr, std::cout, shape);
 
-  if (count == -1)
+  if (count == static_cast< size_t >(-1))
   {
     return 1;
   }
