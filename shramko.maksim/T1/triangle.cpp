@@ -34,7 +34,7 @@ shramko::Triangle& shramko::Triangle::operator=(shramko::Triangle&& rhs)
   one_ = rhs.one_;
   two_ = rhs.two_;
   three_ = rhs.three_;
-} 
+}
 
 void shramko::Triangle::move(point_t point)
 {
