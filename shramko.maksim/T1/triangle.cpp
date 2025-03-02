@@ -13,7 +13,7 @@ shramko::Triangle::Triangle(point_t one, point_t two, point_t three):
 
   if (!(lenOne < (lenTwo + lenThree) && lenTwo < (lenOne + lenThree) && lenThree < (lenOne + lenTwo)))
   {
-    throw std::invalid_argument("Triangle size err");
+    throw std::invalid_argument("Triangle size err\n");
   }
 }
 
