@@ -99,7 +99,7 @@ size_t guseynov::CompositeShape::size() const noexcept
 double guseynov::CompositeShape::getArea() const
 {
   double sum = 0.0;
-  for (size_t i = 0; i < size_; i++)
+  for (size_t i = 0; i < size_; ++i)
   {
     sum += shapeArray_[i]->getArea();
   }
