@@ -4,22 +4,40 @@
 #include <cmath>
 
 shramko::Diamond::Diamond(point_t one, point_t two, point_t three):
-  triangles(new Triangle[8])
+  triangles(new Triangle[8]),
+  one_(one),
+  two_(two),
+  three_(three)
 {
-  triangles[0] = Triangle(one, {(one.x + two.x)/2, (one.y + two.y)/2}, three);
-  triangles[1] = Triangle({(one.x + two.x)/2, (one.y + two.y)/2}, two, three);
-  triangles[2] = Triangle(two, two, three);
-  triangles[3] = Triangle(one, two, three);
-  triangles[4] = Triangle(one, two, three);
-  triangles[5] = Triangle(one, two, three);
-  triangles[6] = Triangle(one, two, three);
-  triangles[7] = Triangle(one, two, three);
-  triangles[8] = Triangle(one, two, three);
+  point_t mid1 = {(one.x + two.x)/2, (one.y + two.y)/2};
+  point_t mid2 = {(one.x + three.x)/2, (one.y + three.y)/2};
+  point_t mid3 = {(two.x + three.x)/2, (two.y + three.y)/2};
+  point_t midCent = {(mid1.x + mid2.x + mid3.x)/3, (mid1.y + mid2.y + mid3.y)/3};
+
+  triangles[0] = Triangle(one, mid1, midCent);
+  triangles[1] = Triangle(mid1, two, midCent);
+  triangles[2] = Triangle(two, mid3, midCent);
+  triangles[3] = Triangle(mid3, one, midCent);
+  triangles[4] = Triangle(one, mid1, mid2);
+  triangles[5] = Triangle(mid1, two, mid2);
+  triangles[6] = Triangle(two, mid3, mid2);
+  triangles[7] = Triangle(mid3, one, mid2);
+}
+
+shramko::Diamond::~Diamond()
+{
+  delete[] triangles;
 }
 
 double shramko::Diamond::getArea() const
 {
-  return std::abs(one_.x - two_.x + one_.x - three_.x) * std::abs(one_.y - two_.y + one_.y - three_.y) * 2.0L;
+  double area = 0.0;
+  for (size_t i = 0; i < 8; ++i)
+  {
+    area += triangles[i].getArea();
+  }
+
+  return area;
 }
 
 shramko::rectangle_t shramko::Diamond::getFrameRect() const
@@ -60,6 +78,14 @@ void shramko::Diamond::scale(double k)
     throw std::invalid_argument("Diamond scale err\n");
   }
 
-  two_.y = (one_.y - two_.y) * k + one_.y;
-  three_.x = (one_.x - three_.x) * k + one_.x;
+  point_t cent = {(one_.x + two_.x + three_.x)/3, (one_.y + two_.y + three_.y)/3};
+
+  one_.x = cent.x + (one_.x + cent.x) * k;
+  one_.y = cent.y + (one_.y + cent.y) * k;
+
+  two_.x = cent.x + (two_.x + cent.x) * k;
+  two_.y = cent.y + (two_.y + cent.y) * k;
+
+  three_.x = cent.x + (three_.x + cent.x) * k;
+  three_.y = cent.y + (three_.y + cent.y) * k;
 }
