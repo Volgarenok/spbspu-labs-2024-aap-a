@@ -7,5 +7,5 @@ void asafov::Shape::scale(double k)
   {
     throw std::logic_error("incorrect scale");
   }
-  unsafeScale(k);
+  doUnsafeScale(k);
 }

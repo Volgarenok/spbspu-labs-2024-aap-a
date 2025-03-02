@@ -36,7 +36,7 @@ void asafov::Square::move(point_t pos)
   move(pos.x - (lb_.x + (side_ / 2.0)), pos.y - (lb_.y + (side_ / 2.0)));
 }
 
-void asafov::Square::unsafeScale(double k)
+void asafov::Square::doUnsafeScale(double k)
 {
   rectangle_t rect = getFrameRect();
   scalePoint(lb_, rect.pos, k);

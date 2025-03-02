@@ -37,7 +37,7 @@ void asafov::Ellipse::move(point_t pos)
   center_ = pos;
 }
 
-void asafov::Ellipse::unsafeScale(double k)
+void asafov::Ellipse::doUnsafeScale(double k)
 {
   rectangle_t rect = getFrameRect();
   scalePoint(center_, rect.pos, k);

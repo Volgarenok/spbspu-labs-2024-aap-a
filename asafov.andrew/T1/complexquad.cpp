@@ -5,7 +5,7 @@
 #include "supportFunctions.hpp"
 
 asafov::Complexquad::Complexquad(point_t one, point_t two, point_t three, point_t four):
-  points_{one, two, three, four}
+  points_{ one, two, three, four }
 {
   double temp = (one.x - two.x + one.y - two.y) * (one.x - three.x + one.y - three.y) * (one.x - four.x + one.y - four.y);
   if (temp * (two.x - three.x + two.y - three.y) * (two.x - four.x + two.y - four.y) * (three.x - four.x + three.y - four.y) == 0)
@@ -18,7 +18,7 @@ double asafov::Complexquad::getArea() const
 {
   double cx = getCenterDelta(points_[0].x, points_[1].x, points_[2].x, points_[3].x);
   double cy = getCenterDelta(points_[0].y, points_[1].y, points_[2].y, points_[3].y);
-  point_t center = {cx, cy};
+  point_t center = { cx, cy };
   double sidea = getLength(points_[0], points_[3]);
   double sideb = getLength(points_[0], center);
   double sidec = getLength(points_[3], center);
@@ -58,7 +58,7 @@ void asafov::Complexquad::move(point_t pos)
   move(centerx - pos.x, centery - pos.y);
 }
 
-void asafov::Complexquad::unsafeScale(double k)
+void asafov::Complexquad::doUnsafeScale(double k)
 {
   rectangle_t rect = getFrameRect();
   for (size_t i = 0; i < 4; i++)

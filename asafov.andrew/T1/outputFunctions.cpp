@@ -78,7 +78,7 @@ asafov::Shape* asafov::makeShape(std::string shapename, std::istream& in)
 
 std::string asafov::getName(std::istream& in)
 {
-  std::string str = {};
+  std::string str;
   in >> str;
   if (in.fail() || in.eof())
   {
@@ -87,31 +87,25 @@ std::string asafov::getName(std::istream& in)
   return str;
 }
 
-void asafov::scaleShapes(Shape** shapes, size_t count, point_t pos, double scale, std::ostream& out)
+void asafov::scaleShapes(Shape** shapes, size_t count, point_t pos, double k, std::ostream& out)
 {
+  if (k <= 0)
+  {
+    throw std::logic_error("incorrect scale");
+  }
   out << std::fixed << std::setprecision(1);
   if (count == 0)
   {
     throw std::logic_error("nothing to scale");
   }
-  double area = 0.0;
-  for (size_t i = 0; i < count; i++)
-  {
-    area += shapes[i]->getArea();
-  }
-  out << area;
+  out << getTotalArea(shapes, count);
   for (size_t i = 0; i < count; i++)
   {
     out << ' ';
     outputFrameRect(shapes[i], out);
-    isotropicScale(shapes[i], pos, scale);
+    doUnsafeIsotropicScale(shapes[i], pos, k);
   }
-  area = 0.0;
-  for (size_t i = 0; i < count; i++)
-  {
-    area += shapes[i]->getArea();
-  }
-  out << '\n' << area;
+  out << '\n' << getTotalArea(shapes, count);
   for (size_t i = 0; i < count; i++)
   {
     out << ' ';

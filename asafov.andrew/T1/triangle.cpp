@@ -5,7 +5,7 @@
 #include "supportFunctions.hpp"
 
 asafov::Triangle::Triangle(point_t one, point_t two, point_t three):
-  points_{one, two, three}
+  points_{ one, two, three }
 {
   double sidea = getLength(one, two);
   double sideb = getLength(two, three);
@@ -49,7 +49,7 @@ void asafov::Triangle::move(point_t pos)
   move(pos.x - rect.pos.x, pos.y - rect.pos.y);
 }
 
-void asafov::Triangle::unsafeScale(double k)
+void asafov::Triangle::doUnsafeScale(double k)
 {
   rectangle_t rect = getFrameRect();
   for (size_t i = 0; i < 3; i++)

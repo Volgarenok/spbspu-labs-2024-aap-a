@@ -36,7 +36,7 @@ void asafov::Ring::move(point_t pos)
   center_ = pos;
 }
 
-void asafov::Ring::unsafeScale(double k)
+void asafov::Ring::doUnsafeScale(double k)
 {
   rectangle_t rect = getFrameRect();
   scalePoint(center_, rect.pos, k);

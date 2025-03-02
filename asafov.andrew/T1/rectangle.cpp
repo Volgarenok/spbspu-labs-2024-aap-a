@@ -40,7 +40,7 @@ void asafov::Rectangle::move(point_t pos)
   move(pos.x - rect.pos.x, pos.y - rect.pos.y);
 }
 
-void asafov::Rectangle::unsafeScale(double k)
+void asafov::Rectangle::doUnsafeScale(double k)
 {
   rectangle_t rect = getFrameRect();
   scalePoint(rt_, rect.pos, k);

@@ -6,8 +6,10 @@ namespace asafov
 {
   void scalePoint(asafov::point_t& point, asafov::point_t fpoint, double scale);
   point_t getPoint(std::istream& in);
+  double getTotalArea(asafov::Shape** shapes, size_t count);
   void getPoints(point_t* points, size_t size, std::istream& in);
   void isotropicScale(Shape* sh, point_t pos, double scale);
+  void doUnsafeIsotropicScale(Shape* sh, point_t pos, double scale);
   void outputFrameRect(Shape* shape, std::ostream& out);
   double getPi();
   void increaseDelta(point_t& point, double dx, double dy);

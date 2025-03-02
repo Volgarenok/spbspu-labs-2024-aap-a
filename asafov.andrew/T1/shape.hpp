@@ -12,7 +12,7 @@ namespace asafov
     virtual void move(double x, double y) = 0;
     void scale(double k);
     virtual ~Shape() = default;
-    virtual void unsafeScale(double k) = 0;
+    virtual void doUnsafeScale(double k) = 0;
   };
 }
 #endif
