@@ -101,6 +101,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
 
         try
         {
+          outRes(out, shape, count);
           scaling(shape, count, goCentre, k);
           outRes(out, shape, count);
         }
@@ -120,12 +121,11 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
     return -1;
   }
 
-  if (isScaled)
+  if (!isScaled)
   {
-    outRes(out, shape, count);
+    destroy(shape, count);
+    return -1;
   }
-
-  destroy(shape, count);
   return count;
 }
 
