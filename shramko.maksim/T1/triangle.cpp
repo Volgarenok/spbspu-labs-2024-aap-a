@@ -25,7 +25,7 @@ shramko::rectangle_t shramko::Triangle::getFrameRect() const
   double yMax = std::max(one_.y, std::max(two_.y, three_.y));
   double xMin = std::min(one_.x, std::min(two_.x, three_.x));
   double yMin = std::min(one_.y, std::min(two_.y, three_.y));
-  
+
   return {yMax -  yMin, xMax - xMin, {(xMin + xMax) / 2.0, (yMin + yMax) / 2.0}};
 }
 
@@ -52,8 +52,10 @@ void shramko::Triangle::move(double x, double y)
 {
   one_.x += x;
   one_.y += y;
+
   two_.x += x;
   two_.y += y;
+
   three_.x += x;
   three_.y += y;
 }
@@ -71,8 +73,10 @@ void shramko::Triangle::scale(double k)
 
   one_.x = (one_.x - pos.x) * k + pos.x;
   one_.y = (one_.y - pos.y) * k + pos.y;
+
   two_.x = (two_.x - pos.x) * k + pos.x;
   two_.y = (two_.y - pos.y) * k + pos.y;
+
   three_.x = (three_.x - pos.x) * k + pos.x;
   three_.y = (three_.y - pos.y) * k + pos.y;
 }
