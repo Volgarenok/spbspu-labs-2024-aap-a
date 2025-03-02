@@ -29,7 +29,7 @@ shramko::rectangle_t shramko::Triangle::getFrameRect() const
   double xMin = std::min(one_.x, std::min(two_.x, three_.x));
   double yMin = std::min(one_.y, std::min(two_.y, three_.y));
 
-  return {yMax -  yMin, xMax - xMin, {(xMin + xMax) / 2.0, (yMin + yMax) / 2.0}};
+  return {xMax - xMin, yMax -  yMin, {(xMin + xMax) / 2.0, (yMin + yMax) / 2.0}};
 }
 
 shramko::Triangle& shramko::Triangle::operator=(shramko::Triangle&& rhs)
