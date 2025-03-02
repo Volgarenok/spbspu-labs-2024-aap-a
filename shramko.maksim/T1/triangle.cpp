@@ -1,4 +1,5 @@
 #include "triangle.hpp"
+#include "calcLength.hpp"
 #include <stdexcept>
 #include <algorithm>
 #include <cmath>
@@ -8,9 +9,11 @@ shramko::Triangle::Triangle(point_t one, point_t two, point_t three):
   two_(two),
   three_(three)
 {
-  if ((one.x * (two.y - three.y) + two.x * (three.y - one.y) + three.x * (one.y - two.y)) == 0)
+  double lenOne = calcLength(one_, two_), lenTwo = calcLength(two_, three_), lenThree = calcLength(one_, three_);
+
+  if (!(lenOne < (lenTwo + lenThree) && lenTwo < (lenOne + lenThree) && lenThree < (lenOne + lenTwo)))
   {
-    throw std::invalid_argument("Triangle size err\n");
+    throw std::invalid_argument("Triangle size err");
   }
 }
 
