@@ -19,7 +19,7 @@ shramko::Triangle::Triangle(point_t one, point_t two, point_t three):
 
 double shramko::Triangle::getArea() const
 {
-  return std::abs(((two_.x - one_.x) * (three_.y - one_.y) - (three_.x - one_.x) * (two_.y - one_.y))) / 2.0;
+  return std::abs(((one_.x * (two_.y - three_.y) + two_.x * (three_.y - one_.y) + three_.x * (one_.y - two_.y))) / 2.0);
 }
 
 shramko::rectangle_t shramko::Triangle::getFrameRect() const
