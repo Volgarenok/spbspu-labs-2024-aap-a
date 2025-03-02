@@ -65,7 +65,7 @@ void guseynov::CompositeShape::pop_back()
   {
     throw std::out_of_range("Composite shape is empty");
   }
-  delete shapeArray_[--size_];
+  delete shapeArray_[size_--];
 }
 guseynov::Shape * guseynov::CompositeShape::at(size_t id)
 {
