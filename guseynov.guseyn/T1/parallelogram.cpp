@@ -6,7 +6,10 @@
 guseynov::Parallelogram::Parallelogram(point_t p1, point_t p2, point_t p3):
   pos_({(p1.x + p3.x) / 2.0, (p1.y + p3.y) / 2.0}),
   p1_({p1.x - pos_.x, p1.y - pos_.y}),
-  p2_({p2.x - pos_.x, p2.y - pos_.y})
+  p2_({p2.x - pos_.x, p2.y - pos_.y}),
+  pt1_(p1),
+  pt2_(p2),
+  pt3_(p3)
 {
   if (!(((p1.y == p2.y) && (p1.y != p3.y)) || ((p2.y == p3.y) && (p1.y != p2.y))))
   {
@@ -46,10 +49,15 @@ void guseynov::Parallelogram::move(double x, double y)
   pos_.y += y;
 }
 
-void guseynov::Parallelogram::scale(double k)
+void guseynov::Parallelogram::scaleWithoutCheck(double k)
 {
   p1_.x *= k;
   p1_.y *= k;
   p2_.x *= k;
   p2_.y *= k;
+}
+
+guseynov::Shape * guseynov::Parallelogram::clone() const
+{
+  return new Parallelogram(pt1_, pt2_, pt3_);
 }

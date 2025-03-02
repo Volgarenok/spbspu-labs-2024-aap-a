@@ -39,7 +39,7 @@ void guseynov::Rectangle::move(double x, double y)
   {rightHighP_.x + x, rightHighP_.y + y});
 }
 
-void guseynov::Rectangle::scale(double k)
+void guseynov::Rectangle::scaleWithoutCheck(double k)
 {
   point_t center = getFrameRect().pos;
   assigment({center.x + (leftLowP_.x - center.x) * k, center.y + (leftLowP_.y - center.y) * k},
@@ -50,4 +50,9 @@ void guseynov::Rectangle::assigment(point_t leftLowP, point_t rightHighP)
 {
   leftLowP_ = leftLowP;
   rightHighP_ = rightHighP;
+}
+
+guseynov::Shape * guseynov::Rectangle::clone() const
+{
+  return new Rectangle(leftLowP_, rightHighP_);
 }

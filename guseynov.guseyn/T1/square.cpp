@@ -32,7 +32,7 @@ void guseynov::Square::move(double x, double y)
   assigment({leftLowP_.x + x, leftLowP_.y + y});
 }
 
-void guseynov::Square::scale(double k)
+void guseynov::Square::scaleWithoutCheck(double k)
 {
   assigment({leftLowP_.x - (length_ * k - length_) / 2, leftLowP_.y - (length_ * k - length_) / 2});
   length_ *= k;
@@ -41,4 +41,9 @@ void guseynov::Square::scale(double k)
 void guseynov::Square::assigment(point_t leftLowP)
 {
   leftLowP_ = leftLowP;
+}
+
+guseynov::Shape * guseynov::Square::clone() const
+{
+  return new Square(leftLowP_, length_);
 }

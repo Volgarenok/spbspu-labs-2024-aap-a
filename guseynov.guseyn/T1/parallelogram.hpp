@@ -5,7 +5,7 @@
 
 namespace guseynov
 {
-  class Parallelogram : public Shape
+  class Parallelogram final : public Shape
   {
   public:
     Parallelogram(point_t leftLowP, point_t leftHighP, point_t rightLowP);
@@ -13,11 +13,15 @@ namespace guseynov
     rectangle_t getFrameRect() const override;
     void move(guseynov::point_t pos) override;
     void move(double x, double y) override;
-    void scale(double k) override;
+    void scaleWithoutCheck(double k) override;
+    Shape * clone() const override;
   private:
     point_t pos_;
     point_t p1_;
     point_t p2_;
+    point_t pt1_;
+    point_t pt2_;
+    point_t pt3_;
   };
 }
 

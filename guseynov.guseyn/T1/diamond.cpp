@@ -35,7 +35,7 @@ void guseynov::Diamond::move(double x, double y)
   {center_.x + x, center_.y + y});
 }
 
-void guseynov::Diamond::scale(double k)
+void guseynov::Diamond::scaleWithoutCheck(double k)
 {
   highP_.y = center_.y + (highP_.y - center_.y) * k;
   rightP_.x = center_.x + (rightP_.x - center_.x) * k;
@@ -46,4 +46,9 @@ void guseynov::Diamond::assigment(point_t highP, point_t rightP, point_t center)
   highP_ = highP;
   rightP_ = rightP;
   center_ = center;
+}
+
+guseynov::Shape * guseynov::Diamond::clone() const
+{
+  return new Diamond(highP_, rightP_, center_);
 }

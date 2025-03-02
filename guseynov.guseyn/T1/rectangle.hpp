@@ -5,7 +5,7 @@
 
 namespace guseynov
 {
-  class Rectangle : public Shape
+  class Rectangle final : public Shape
   {
   public:
     Rectangle(point_t leftLowP, point_t rightHighP);
@@ -13,7 +13,8 @@ namespace guseynov
     rectangle_t getFrameRect() const override;
     void move(point_t pos) override;
     void move(double x, double y) override;
-    void scale(double k) override;
+    void scaleWithoutCheck(double k) override;
+    Shape * clone() const override;
   private:
     point_t leftLowP_;
     point_t rightHighP_;
