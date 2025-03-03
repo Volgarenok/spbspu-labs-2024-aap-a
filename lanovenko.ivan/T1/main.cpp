@@ -39,26 +39,24 @@ int main()
       {
         currentFigure = parseShape(cStr);
         shapeArray[res++] = currentFigure;
-        delete[] cStr;
       }
       catch (const std::bad_alloc& e)
       {
-        deleteShape(shapeArray, res);
         delete[] cStr;
+        deleteShape(shapeArray, res);
         std::cerr << "Out of memmory!\n";
         return 1;
       }
       catch (const std::invalid_argument& e)
       {
-        delete[] cStr;
         errors = true;
       }
       catch (const std::logic_error& e)
       {
-        delete[] cStr;
         continue;
       }
-     }
+      delete[] cStr;
+    }
     else
     {
       scale = true;
@@ -67,15 +65,15 @@ int main()
       {
         parseScale(scaleParametrs, cStr);
         scaleShapes(shapeArray, scaleParametrs, std::cout, res);
-        delete[] cStr;
       }
       catch (const std::invalid_argument& e)
       {
-        deleteShape(shapeArray, res);
         delete[] cStr;
+        deleteShape(shapeArray, res);
         std::cerr << e.what() << "\n";
         return 1;
       }
+      delete[] cStr;
     }
   }
   if (errors == true)
