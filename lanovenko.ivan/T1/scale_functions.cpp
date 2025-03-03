@@ -2,7 +2,7 @@
 #include "rectangle.hpp"
 #include <iomanip>
 
-void lanovenko::scaleShapes(Shape* const* shapeArray, double* scaleParametrs, std::ostream& out, size_t shapesCapacity)
+void lanovenko::scaleShapes(Shape* const* shapeArray, const double* scaleParametrs, std::ostream& out, size_t shapesCapacity)
 {
   if (shapesCapacity == 0)
   {
@@ -29,7 +29,7 @@ void lanovenko::toScale(Shape* const* shape, point_t toMoveCenter, double k, siz
 }
 
 
-void lanovenko::outputScaleResults(Shape* const* shapeArray, size_t shapesCapacity, std::ostream& out)
+void lanovenko::outputScaleResults(const Shape* const* shapeArray, size_t shapesCapacity, std::ostream& out)
 {
   double totalArea = 0;
   for (size_t i = 0; i < shapesCapacity; i++)
