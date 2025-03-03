@@ -61,8 +61,8 @@ dribas::CompositeShape::CompositeShape(const CompositeShape& shp):
 
 void dribas::CompositeShape::push_back(Shape* shp)
 {
-  if (size_ == 10000) {
-    throw std::logic_error("MEMORY IS FULL");
+  if (size_ == 100) {
+    throw std::overflow_error("MEMORY IS FULL");
   } else {
     shapes_[size_++] = shp;
   }

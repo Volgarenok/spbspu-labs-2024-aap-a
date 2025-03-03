@@ -70,26 +70,25 @@ dribas::CompositeShape dribas::getShapeInfo(std::istream& input, std::ostream& e
     if (inputStr == "SCALE") {
       scaled = true;
       if (shapes.size() == 0) {
-        delete shape;
-        shapes.clear();
         throw std::logic_error("No shapes for scale");
       }
       input >> scalingFactor[0];
       input >> scalingFactor[1];
       input >> scalingFactor[2];
       if (scalingFactor[2] <= 0) {
-        delete shape;
         shapes.clear();
         throw std::invalid_argument("under zero ratio with scale");
       }
     }
-  } catch (const std::exception& e) {
+  } catch (const std::overflow_error& e) {
     delete shape;
+    shapes.clear();
+    throw e;
+  } catch (const std::exception& e) {
     shapes.clear();
     throw e;
   }
   if (!scaled) {
-    delete shape;
     shapes.clear();
     throw std::invalid_argument("No Arguments for scale");
   }
