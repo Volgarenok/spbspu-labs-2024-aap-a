@@ -2,9 +2,8 @@
 #define RING_HPP
 #include <iostream>
 #include "base-types.hpp"
-#include "circle.hpp"
-#include "regular.hpp"
 #include "shape.hpp"
+#include "regular.hpp"
 namespace evstyunichev
 {
   class Ring final: public Shape

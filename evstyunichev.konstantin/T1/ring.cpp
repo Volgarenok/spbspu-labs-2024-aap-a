@@ -42,10 +42,6 @@ void evstyunichev::Ring::move(point_t target)
 
 void evstyunichev::Ring::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::logic_error("negative k!");
-  }
   interior_.scale(k);
   external_.scale(k);
   return;

@@ -25,7 +25,7 @@ evstyunichev::Circle * evstyunichev::make_circle(std::istream &in)
   {
     in >> data[i];
   }
-  Circle *temp = new Circle({data[0], data[1]}, data[2]);
+  Circle *temp = new Circle({ data[0], data[1] }, data[2]);
   return temp;
 }
 
@@ -47,9 +47,7 @@ evstyunichev::Regular * evstyunichev::make_regular(std::istream &in)
   {
     in >> cds[i];
   }
-  double *data = createDataRegular({ cds[0], cds[1] }, { cds[2], cds[3] }, { cds[4], cds[5] });
-  Regular *temp = new Regular(data);
-  delete[] data;
+  Regular *temp = new Regular({ cds[0], cds[1] }, { cds[2], cds[3] }, { cds[4], cds[5] });
   return temp;
 }
 

@@ -12,6 +12,7 @@ namespace evstyunichev
   Rectangle * make_rectangle(std::istream &);
   Circle * make_circle(std::istream &);
   Ring * make_ring(std::istream &);
+  Regular * make_regular(std::istream &);
   Shape * make_shape(std::istream &, const std::string &);
 }
 #endif

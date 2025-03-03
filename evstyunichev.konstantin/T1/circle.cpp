@@ -39,10 +39,6 @@ void evstyunichev::Circle::move(point_t cds)
 
 void evstyunichev::Circle::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::logic_error("negative k!");
-  }
   data_.scale(k);
   return;
 }
