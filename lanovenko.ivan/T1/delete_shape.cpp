@@ -7,4 +7,3 @@ void lanovenko::deleteShape(Shape** shapeArray, std::size_t res)
     delete shapeArray[i];
   }
 }
-
