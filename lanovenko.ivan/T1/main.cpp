@@ -1,7 +1,6 @@
 #include <iostream>
-#include <string>
+#include <cstring>
 #include "shape.hpp"
-#include "strinput.h"
 #include "string_manipulations.hpp"
 #include "delete_shape.hpp"
 #include "scale_functions.hpp"
@@ -27,52 +26,55 @@ int main()
     {
       cStr = input_string(std::cin, '\n');
     }
-    catch (const std::runtime_error& e)
+    catch (const std::bad_alloc& e)
     {
       deleteShape(shapeArray, res);
       std::cerr << e.what() << "\n";
       return 1;
     }
-    std::string str{ cStr };
-    delete[] cStr;
-    if (str.find("SCALE") == std::string::npos)
+    if (std::strstr(cStr, "SCALE") == nullptr)
     {
       try
       {
-        currentFigure = parseShape(str);
-        if (currentFigure != nullptr)
-        {
-          shapeArray[res++] = currentFigure;
-        }
-        else
-        {
-          errors = true;
-        }
+        currentFigure = parseShape(cStr);
+        shapeArray[res++] = currentFigure;
+        delete[] cStr;
       }
       catch (const std::bad_alloc& e)
       {
         deleteShape(shapeArray, res);
+        delete[] cStr;
         std::cerr << "Out of memmory!\n";
         return 1;
       }
-    }
-    if (str.find("SCALE") != std::string::npos)
+      catch (const std::invalid_argument& e)
+      {
+        delete[] cStr;
+        errors = true;
+      }
+      catch (const std::logic_error& e)
+      {
+        delete[] cStr;
+        continue;
+      }
+     }
+    if (std::strstr(cStr, "SCALE"))
     {
       scale = true;
-      double* scaleParametrs = nullptr;
-      scaleParametrs = paraseScale(str);
+      double scaleParametrs[3];
       try
       {
+        parseScale(scaleParametrs, cStr);
         scaleShapes(shapeArray, scaleParametrs, std::cout, res);
+        delete[] cStr;
       }
       catch (const std::invalid_argument& e)
       {
         deleteShape(shapeArray, res);
-        delete[] scaleParametrs;
+        delete[] cStr;
         std::cerr << e.what() << "\n";
         return 1;
       }
-      delete[] scaleParametrs;
     }
   }
   if (errors == true)
