@@ -76,4 +76,3 @@ void lanovenko::Diamond::unsafeScale(double k)
   first_.scale(k);
   second_.scale(k);
 }
-
