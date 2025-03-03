@@ -29,7 +29,7 @@ void lebedev::Rectangle::move(point_t p)
   point_t centre = getFrameRect().pos;
   double dx = p.x - centre.x;
   double dy = p.y - centre.y;
-  this->move(dx, dy);
+  move(dx, dy);
 }
 
 void lebedev::Rectangle::move(double dx, double dy)
