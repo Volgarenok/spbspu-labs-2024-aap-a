@@ -22,8 +22,8 @@ namespace evstyunichev
 
     private:
       point_t middle_;
-      double a_;
       double alpha_;
+      double a_;
       double base_;
   };
 }

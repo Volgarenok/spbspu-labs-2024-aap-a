@@ -10,7 +10,7 @@ evstyunichev::Ring::Ring(point_t middle, double R, double r):
 {
   if (R <= r)
   {
-    throw std::invalid_argument("R is not biiger than r");
+    throw std::invalid_argument("R is not bigger than r");
   }
 }
 

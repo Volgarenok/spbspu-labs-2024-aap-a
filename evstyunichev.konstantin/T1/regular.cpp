@@ -51,8 +51,8 @@ double evstyunichev::Regular::get_r() const
 
 evstyunichev::Regular::Regular(point_t A, point_t B, point_t C):
   middle_(A),
-  a_(0),
   alpha_(0),
+  a_(0),
   base_(0)
 {
   double a = findDist(A, B), b = findDist(B, C), c = findDist(A, C);
@@ -73,8 +73,8 @@ evstyunichev::Regular::Regular(point_t A, point_t B, point_t C):
 
 evstyunichev::Regular::Regular(point_t middle, double r, size_t n):
   middle_(middle),
-  a_(std::sin(alpha_ / 2.0) * r * 2.0),
   alpha_(2.0 * pi_v / n),
+  a_(std::sin(alpha_ / 2.0) * r * 2.0),
   base_(0)
 {
   if ((r <= 0) || (n < 3))
