@@ -31,7 +31,7 @@ bool getPoint(std::istream& in, size_t pointCount, dribas::point_t* points)
 
 dribas::CompositeShape dribas::getShapeInfo(std::istream& input, std::ostream& error, double* scalingFactor)
 {
-  CompositeShape shapes; 
+  CompositeShape shapes;
   std::string inputStr;
   bool scaled = false;
   Shape* shape = nullptr;
