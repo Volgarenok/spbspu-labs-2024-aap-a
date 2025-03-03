@@ -9,15 +9,6 @@
 #include "shape.hpp"
 #include "triangle.hpp"
 
-double dribas::getAllArea(const Shape* const* Shapes, size_t shapeCount)
-{
-  double allArea = 0.0;
-  for (size_t i = 0; i < shapeCount; i++) {
-    allArea += Shapes[i]->getArea();
-  }
-  return allArea;
-}
-
 void dribas::scaleOne(Shape& t, double ratio, point_t Point)
 {
   point_t cneter = t.getFrameRect().pos;

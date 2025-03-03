@@ -3,7 +3,7 @@
 #include <cmath>
 #include <stdexcept>
 
-dribas::Triangle::Triangle(point_t a, point_t b, point_t c) :
+dribas::Triangle::Triangle(point_t a, point_t b, point_t c):
   a_(a),
   b_(b),
   c_(c)

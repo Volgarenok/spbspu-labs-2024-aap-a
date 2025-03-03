@@ -34,7 +34,7 @@ namespace
   }
 }
 
-dribas::Concave::Concave(point_t a, point_t b, point_t c, point_t d) :
+dribas::Concave::Concave(point_t a, point_t b, point_t c, point_t d):
   a_(a, b, c),
   b_(b, c, d)
 {

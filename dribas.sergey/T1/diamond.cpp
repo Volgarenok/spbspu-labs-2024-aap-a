@@ -1,14 +1,27 @@
 #include "diamond.hpp"
 #include <cmath>
 #include <stdexcept>
-#include "getShapeInfo.hpp"
 #include "triangle.hpp"
-dribas::Diamond::Diamond(point_t a, point_t b, point_t c) :
-    a_(a, b, c),
-    b_(a, a, { c.x - 2 * std::abs(std::abs(b.x) - std::abs(a.x)), c.y }),
-    c_(a, { b.x, b.y - 2 * std::abs(std::abs(a.y) - std::abs(c.y)) },
-      { c.x - std::abs(std::abs(b.x) - std::abs(a.x)), c.y }),
-    d_(a, { b.x, b.y - 2 * std::abs(std::abs(a.y) - std::abs(c.y)) }, c)
+
+namespace
+{
+  void scaleOne(dribas::Triangle& t, double ratio, dribas::point_t point)
+  {
+    dribas::point_t cneter = t.getFrameRect().pos;
+    t.move(point);
+    dribas::point_t center2 = t.getFrameRect().pos;
+    double diffenceX = (center2.x - cneter.x) * ratio * -1;
+    double diffenceY = (center2.y - cneter.y) * ratio * -1;
+    t.scale(ratio);
+    t.move(diffenceX, diffenceY);
+  }
+}
+
+dribas::Diamond::Diamond(point_t a, point_t b, point_t c):
+  a_(a, b, c),
+  b_(a, a, { c.x - 2 * std::abs(std::abs(b.x) - std::abs(a.x)), c.y }),
+  c_(a, { b.x, b.y - 2 * std::abs(std::abs(a.y) - std::abs(c.y)) }, { c.x - std::abs(std::abs(b.x) - std::abs(a.x)), c.y }),
+  d_(a, { b.x, b.y - 2 * std::abs(std::abs(a.y) - std::abs(c.y)) }, c)
 {}
 
 double dribas::Diamond::getArea() const

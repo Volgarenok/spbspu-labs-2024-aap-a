@@ -11,7 +11,7 @@ namespace
   }
 }
 
-dribas::Rectangle::Rectangle(point_t leftDown, point_t rightUp) :
+dribas::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
   leftDown_(leftDown),
   rightUp_(rightUp)
 {

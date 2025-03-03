@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include "base-types.hpp"
 
-dribas::CompositeShape::CompositeShape() :
+dribas::CompositeShape::CompositeShape():
   size_(0)
 {
   for (size_t i = 0; i < 10000; i++) {
@@ -12,7 +12,7 @@ dribas::CompositeShape::CompositeShape() :
   }
 }
 
-dribas::CompositeShape::CompositeShape(CompositeShape&& shp) noexcept :
+dribas::CompositeShape::CompositeShape(CompositeShape&& shp) noexcept:
   size_(shp.size_)
 {
   for (size_t i = 0; i < shp.size_; i++) {
@@ -51,7 +51,7 @@ dribas::CompositeShape& dribas::CompositeShape::operator=(CompositeShape&& shp) 
   return *this;
 }
 
-dribas::CompositeShape::CompositeShape(const CompositeShape& shp) :
+dribas::CompositeShape::CompositeShape(const CompositeShape& shp):
   size_(shp.size_)
 {
   for (size_t i = 0; i < size_; i++) {
