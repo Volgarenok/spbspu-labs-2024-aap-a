@@ -9,13 +9,14 @@
 #include "shape.hpp"
 #include "auxiliaryFunctions.hpp"
 
+using namespace lebedev;
 int main()
 {
-  lebedev::Shape* shps[10000] = {};
+  Shape* shps[10000] = {};
   size_t count = 0;
   std::string shapeName;
   bool isIncorrectSize = false, thereIsScaleCommand = false;
-  lebedev::point_t scalePoint;
+  point_t scalePoint;
   double k = 0;
 
   while (std::cin >> shapeName)
@@ -24,23 +25,23 @@ int main()
     {
       if (shapeName == "RECTANGLE")
       {
-        shps[count] = lebedev::createRectangle(std::cin);
+        shps[count] = createRectangle(std::cin);
         count++;
       }
       else if (shapeName == "DIAMOND")
       {
-        shps[count] = lebedev::createDiamond(std::cin);
+        shps[count] = createDiamond(std::cin);
         count++;
       }
       else if (shapeName == "CONCAVE")
       {
-        shps[count] = lebedev::createConcave(std::cin);
+        shps[count] = createConcave(std::cin);
         count++;
       }
     }
     catch (const std::bad_alloc& e)
     {
-      lebedev::deleteShapePtr(shps, count);
+      deleteShapePtr(shps, count);
       std::cerr << "Memory allocation error!\n";
       return 2;
     }
@@ -51,12 +52,12 @@ int main()
 
     if (shapeName == "SCALE")
     {
-      scalePoint = lebedev::chooseScalePoint(std::cin);
+      scalePoint = chooseScalePoint(std::cin);
       std::cin >> k;
       if (k <= 0)
       {
         std::cerr << "Incorrect scale coefficient!\n";
-        lebedev::deleteShapePtr(shps, count);
+        deleteShapePtr(shps, count);
         return 1;
       }
       thereIsScaleCommand = true;
@@ -67,7 +68,7 @@ int main()
   if (std::cin.eof() && !thereIsScaleCommand)
   {
     std::cerr << "Eof before scale command!\n";
-    lebedev::deleteShapePtr(shps, count);
+    deleteShapePtr(shps, count);
     return 1;
   }
 
@@ -83,10 +84,10 @@ int main()
   }
 
   std::cout << std::setprecision(1);
-  std::cout << std::fixed << lebedev::getSumArea(shps, count);
-  lebedev::printFrameCoordinates(shps, count, std::cout);
-  lebedev::scaleForShapes(shps, count, scalePoint, k);
-  std::cout << lebedev::getSumArea(shps, count);
-  lebedev::printFrameCoordinates(shps, count, std::cout);
-  lebedev::deleteShapePtr(shps, count);
+  std::cout << std::fixed << getSumArea(shps, count);
+  printFrameCoordinates(shps, count, std::cout);
+  scaleForShapes(shps, count, scalePoint, k);
+  std::cout << getSumArea(shps, count);
+  printFrameCoordinates(shps, count, std::cout);
+  deleteShapePtr(shps, count);
 }

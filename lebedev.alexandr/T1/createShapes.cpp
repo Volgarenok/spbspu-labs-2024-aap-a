@@ -13,12 +13,7 @@ lebedev::Rectangle* lebedev::createRectangle(std::istream& input)
 {
   double x1 = 0, y1 = 0, x2 = 0, y2 = 0;
   input >> x1 >> y1 >> x2 >> y2;
-  if (x1 >= x2 || y1 >= y2)
-  {
-    throw std::invalid_argument("Incorrect parameters!");
-  }
-  lebedev::Rectangle* rect = new lebedev::Rectangle({ x1, y1 }, { x2, y2 });
-  return rect;
+  return new lebedev::Rectangle({ x1, y1 }, { x2, y2 });
 }
 
 lebedev::Diamond* lebedev::createDiamond(std::istream& input)
@@ -26,21 +21,16 @@ lebedev::Diamond* lebedev::createDiamond(std::istream& input)
   point_t p1, p2, p3;
   input >> p1.x >> p1.y >> p2.x >> p2.y >> p3.x >> p3.y;
 
-  if ((p1.x == p2.x && p1.y == p2.y) || (p1.x == p3.x && p1.y == p3.y) || (p2.x == p3.x && p2.y == p3.y))
-  {
-    throw std::invalid_argument("");
-  }
-
   lebedev::sortPoints(p1, p2, p3);
-
-  if (!((p1.x == p2.x && p3.y == p2.y)
+  bool isValidConfiguration = ((p1.x == p2.x && p3.y == p2.y)
       || (p1.y == p2.y && p3.x == p2.x)
       || (p1.x == p3.x && p2.y == p3.y)
-      || (p1.y == p3.y && p2.x == p3.x)))
+      || (p1.y == p3.y && p2.x == p3.x));
+
+  if (!isValidConfiguration)
   {
     throw std::invalid_argument("");
   }
-
   return new lebedev::Diamond(p2, p3, p1);
 }
 

@@ -2,14 +2,21 @@
 #include <stdexcept>
 #include "base-types.hpp"
 
-lebedev::Rectangle::Rectangle(lebedev::point_t leftDown, lebedev::point_t rightUp):
-  leftDown_(leftDown),
-  rightUp_(rightUp)
-{}
+lebedev::Rectangle::Rectangle(lebedev::point_t leftDown, lebedev::point_t rightUp)
+{
+  if (leftDown.x >= rightUp.x || leftDown.y >= rightUp.y)
+  {
+    throw std::invalid_argument("");
+  }
+  leftDown_ = leftDown;
+  rightUp_ = rightUp;
+}
+
 double lebedev::Rectangle::getArea() const
 {
   return (rightUp_.x - leftDown_.x) * (rightUp_.y - leftDown_.y);
 }
+
 lebedev::rectangle_t lebedev::Rectangle::getFrameRect() const
 {
   double centreX = leftDown_.x + (rightUp_.x - leftDown_.x) / 2;
