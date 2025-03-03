@@ -29,32 +29,38 @@ bool getPoint(std::istream& in, size_t pointCount, dribas::point_t* points)
   return i == pointCount;
 }
 
-dribas::CompositeShape dribas::getShapeInfo(std::istream& input, std::ostream& error, CompositeShape shapes, double* scalingFactor)
+dribas::CompositeShape dribas::getShapeInfo(std::istream& input, std::ostream& error, double* scalingFactor)
 {
+  CompositeShape shapes; 
   std::string inputStr;
   bool scaled = false;
+  Shape* shape = nullptr;
   try {
     while (input >> inputStr && inputStr != "SCALE") {
       try {
         if (inputStr == "RECTANGLE") {
          point_t pointR[2] = { 0, 0 };
           if (getPoint(std::cin, 2, pointR)) {
-            shapes.push_back(new Rectangle(pointR[0], pointR[1]));
+            shape = new Rectangle(pointR[0], pointR[1]);
+            shapes.push_back(shape);
           }
         } else if (inputStr == "TRIANGLE") {
           point_t pointT[3] = { 0, 0 };
           if (getPoint(std::cin, 3, pointT)) {
-            shapes.push_back(new Triangle(pointT[0], pointT[1], pointT[2]));
+            shape = new Triangle(pointT[0], pointT[1], pointT[2]);
+            shapes.push_back(shape);
           }
         } else if (inputStr == "DIAMOND") {
           point_t pointD[3] = { 0, 0 };
           if (getPoint(std::cin, 3, pointD)) {
-            shapes.push_back(new Diamond(pointD[0], pointD[1], pointD[2]));
+            shape = new Diamond(pointD[0], pointD[1], pointD[2]);
+            shapes.push_back(shape);
           }
         } else if (inputStr == "CONCAVE") {
           point_t pointC[4] = { 0, 0 };
           if (getPoint(std::cin, 4, pointC)) {
-            shapes.push_back(new Concave(pointC[0], pointC[1], pointC[2], pointC[3]));
+            shape = new Concave(pointC[0], pointC[1], pointC[2], pointC[3]);
+            shapes.push_back(shape);
           }
         }
       } catch (const std::invalid_argument& e) {
@@ -64,19 +70,27 @@ dribas::CompositeShape dribas::getShapeInfo(std::istream& input, std::ostream& e
     if (inputStr == "SCALE") {
       scaled = true;
       if (shapes.size() == 0) {
+        delete shape;
+        shapes.clear();
         throw std::logic_error("No shapes for scale");
       }
       input >> scalingFactor[0];
       input >> scalingFactor[1];
       input >> scalingFactor[2];
       if (scalingFactor[2] <= 0) {
+        delete shape;
+        shapes.clear();
         throw std::invalid_argument("under zero ratio with scale");
       }
     }
   } catch (const std::exception& e) {
+    delete shape;
+    shapes.clear();
     throw e;
   }
   if (!scaled) {
+    delete shape;
+    shapes.clear();
     throw std::invalid_argument("No Arguments for scale");
   }
   return shapes;

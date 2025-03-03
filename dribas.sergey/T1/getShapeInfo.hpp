@@ -8,7 +8,7 @@
 
 namespace dribas
 {
-  CompositeShape getShapeInfo(std::istream& input, std::ostream& error, CompositeShape shapes, double* scalingFactor);
+  CompositeShape getShapeInfo(std::istream& input, std::ostream& error, double* scalingFactor);
   void scaleOne(Shape& t, double ratio, point_t point);
 }
 #endif
