@@ -53,6 +53,7 @@ int main()
       }
       catch (const std::logic_error& e)
       {
+        delete[] cStr;
         continue;
       }
       delete[] cStr;
