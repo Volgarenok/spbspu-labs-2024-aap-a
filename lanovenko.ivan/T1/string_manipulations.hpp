@@ -2,19 +2,22 @@
 #define STRING_MANIPULATIONS_HPP
 
 #include <istream>
-#include <string>
+#include <cstring>
 #include "shape.hpp"
 
 namespace lanovenko
 {
-  Shape* parseShape(const std::string& str);
-  Shape* parseRectangle(const std::string& str);
-  Shape* parseDiamond(const std::string& str);
-  Shape* parseTriangle(const std::string& str);
-  lanovenko::Shape* parseParallelogram(const std::string& str);
-  std::size_t split(const std::string& str);
-  double* getCoords(const std::string& coords, size_t capacityCoords);
-  double* paraseScale(const std::string& str);
+	char* input_string(std::istream& in, const char end);
+	Shape* parseShape(const char* str);
+	Shape* parseRectangle(const char* str);
+	Shape* parseDiamond(const char* str);
+	Shape* parseTriangle(const char* str);
+	Shape* parseParallelogram(const char* str);
+	size_t split(const char* str);
+	size_t getNameLength(const char* str);
+	void getCoords(double* array, const char* str, size_t capacityCoords);
+	void parseScale(double* array, const char* str);
 }
 
-#endif
+#endif 
+

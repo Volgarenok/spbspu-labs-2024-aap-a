@@ -4,153 +4,147 @@
 #include "triangle.hpp"
 #include "parallelogram.hpp"
 
-lanovenko::Shape* lanovenko::parseShape(const std::string& str)
+char* lanovenko::input_string(std::istream& in, const char stop)
 {
-  if (str.find("RECTANGLE") != std::string::npos)
+  size_t capacity = 10;
+  char* str = new char[capacity];
+  size_t quantity = 0;
+  char c = '\0';
+  in >> std::noskipws;
+  while (in >> c && c != stop)
+  {
+    if (quantity >= capacity - 1)
+    {
+      capacity *= 2;
+      char* new_str = nullptr;
+      try
+      {
+        new_str = new char[capacity];
+      }
+      catch (const std::bad_alloc& e)
+      {
+        delete[] str;
+        throw;
+      }
+      for (size_t i = 0; i < quantity; i++)
+      {
+        new_str[i] = str[i];
+      }
+      delete[] str;
+      str = new_str;
+    }
+    str[quantity++] = c;
+  }
+  str[quantity] = '\0';
+  in >> std::skipws;
+  return str;
+}
+
+lanovenko::Shape* lanovenko::parseShape(const char* str)
+{
+  if (std::strstr(str, "RECTANGLE"))
   {
     Shape* Rectangle = parseRectangle(str);
     return Rectangle;
   }
-  if (str.find("DIAMOND") != std::string::npos)
+  if (std::strstr(str, "DIAMOND"))
   {
     Shape* Diamond = parseDiamond(str);
     return Diamond;
   }
-  if (str.find("TRIANGLE") != std::string::npos)
+  if (std::strstr(str, "TRIANGLE"))
   {
     Shape* Triangle = parseTriangle(str);
     return Triangle;
   }
-  if (str.find("PARALLELOGRAM") != std::string::npos)
+  if (std::strstr(str, "PARALLELOGRAM"))
   {
     Shape* Parallelogram = parseParallelogram(str);
     return Parallelogram;
   }
-  return nullptr;
+  else
+  {
+    throw std::logic_error("Wrond name of figure");
+  }
 }
 
-lanovenko::Shape* lanovenko::parseRectangle(const std::string& str)
+lanovenko::Shape* lanovenko::parseRectangle(const char* str)
 {
-  std::string coordsStr = "";
-  std::size_t parseCount = 0;
-  double* coords = nullptr;
-  for (size_t i = 0; i < str.length() - 10; i++)
-  {
-    coordsStr += str[i + 10];
-  }
-  parseCount = split(coordsStr);
+  size_t nameLength = lanovenko::getNameLength(str);
+  const char* coordsStr = str + nameLength;
+  double coords[4]{};
+  size_t parseCount = split(coordsStr);
   if (parseCount != 4)
   {
-    return nullptr;
+    throw std::logic_error("Wrong coords capacity");
   }
-  coords = getCoords(coordsStr, parseCount);
+  getCoords(coords, coordsStr, parseCount);
   point_t leftLower = { coords[0], coords[1] };
   point_t rigthUpper = { coords[2], coords[3] };
-  delete[] coords;
-  try
-  {
-    return new Rectangle{ leftLower, rigthUpper };
-  }
-  catch (const std::invalid_argument& e)
-  {
-    return nullptr;
-  }
+  return new Rectangle{ leftLower, rigthUpper };
 }
 
-lanovenko::Shape* lanovenko::parseDiamond(const std::string& str)
+lanovenko::Shape* lanovenko::parseDiamond(const char* str)
 {
-  std::string coordsStr = "";
-  std::size_t parseCount = 0;
-  double* coords = nullptr;
-  for (size_t i = 0; i < str.length() - 8; i++)
-  {
-    coordsStr += str[i + 8];
-  }
+  size_t nameLength = lanovenko::getNameLength(str);
+  const char* coordsStr = str + nameLength;
+  double coords[6]{};
+  size_t parseCount = split(coordsStr);
   parseCount = split(coordsStr);
   if (parseCount != 6)
   {
-    return nullptr;
+    throw std::logic_error("Wrong coords capacity");
   }
-  coords = getCoords(coordsStr, parseCount);
+  getCoords(coords,coordsStr, parseCount);
   point_t p1 = { coords[0], coords[1] };
   point_t p2 = { coords[2], coords[3] };
   point_t p3 = { coords[4], coords[5] };
-  delete[] coords;
-  try
-  {
-    return new Diamond{ p1, p2, p3 };
-  }
-  catch (const std::invalid_argument& e)
-  {
-    return nullptr;
-  }
+  return new Diamond{ p1, p2, p3 };
 }
 
-lanovenko::Shape* lanovenko::parseTriangle(const std::string& str)
+lanovenko::Shape* lanovenko::parseTriangle(const char* str)
 {
-  std::string coordsStr = "";
-  std::size_t parseCount = 0;
-  double* coords = nullptr;
-  for (size_t i = 0; i < str.length() - 9; i++)
-  {
-    coordsStr += str[i + 9];
-  }
+  size_t nameLength = lanovenko::getNameLength(str);
+  const char* coordsStr = str + nameLength;
+  double coords[6]{};
+  size_t parseCount = split(coordsStr);
   parseCount = split(coordsStr);
   if (parseCount != 6)
   {
-    return nullptr;
+    throw std::logic_error("Wrong coords capacity");
   }
-  coords = getCoords(coordsStr, parseCount);
+  getCoords(coords, coordsStr, parseCount);
   point_t p1 = { coords[0], coords[1] };
   point_t p2 = { coords[2], coords[3] };
   point_t p3 = { coords[4], coords[5] };
-  delete[] coords;
-  try
-  {
-    return new Triangle{ p1, p2, p3 };
-  }
-  catch (const std::invalid_argument& e)
-  {
-    return nullptr;
-  }
+  return new Triangle{ p1, p2, p3 };
 }
 
-lanovenko::Shape* lanovenko::parseParallelogram(const std::string& str)
+lanovenko::Shape* lanovenko::parseParallelogram(const char* str)
 {
-  std::string coordsStr = "";
-  std::size_t parseCount = 0;
-  double* coords = nullptr;
-  for (size_t i = 0; i < str.length() - 14; i++)
-  {
-    coordsStr += str[i + 14];
-  }
+  size_t nameLength = lanovenko::getNameLength(str);
+  const char* coordsStr = str + nameLength;
+  double coords[6]{};
+  size_t parseCount = split(coordsStr);
   parseCount = split(coordsStr);
   if (parseCount != 6)
   {
-    return nullptr;
+    throw std::logic_error("Wrong coords capacity");
   }
-  coords = getCoords(coordsStr, parseCount);
+  getCoords(coords, coordsStr, parseCount);
   point_t p1 = { coords[0], coords[1] };
   point_t p2 = { coords[2], coords[3] };
   point_t p3 = { coords[4], coords[5] };
-  delete[] coords;
-  try
-  {
-    return new Parallelogram{ p1, p2, p3 };
-  }
-  catch (const std::invalid_argument& e)
-  {
-    return nullptr;
-  }
+  return new Parallelogram{ p1, p2, p3 };
 }
 
-std::size_t lanovenko::split(const std::string& str)
+std::size_t lanovenko::split(const char* str)
 {
   std::size_t res = 0;
-  for (size_t i = 0; i < str.length(); i++)
+  for (size_t i = 0; i < strlen(str); i++)
   {
     std::string b = " ";
-    while (str[i] != ' ' && i < str.length())
+    while (str[i] != ' ' && i < strlen(str))
     {
       i++;
     }
@@ -159,29 +153,42 @@ std::size_t lanovenko::split(const std::string& str)
   return res;
 }
 
-double* lanovenko::getCoords(const std::string& coords, size_t capacityCoords)
+size_t lanovenko::getNameLength(const char* str)
+{
+  size_t res = 0;
+  for (size_t i = 0; i < strlen(str); i++)
+  {
+    if (std::isalpha(str[i]))
+    {
+      res++;
+    }
+  }
+  return res + 1;
+}
+
+void lanovenko::getCoords(double* array, const char* str, size_t capacityCoords)
 {
   size_t pos = 0;
   size_t nextPos = 0;
-  double* array = new double[capacityCoords];
+  const char* currentPos = str;
+  char* endPos = nullptr;
   for (size_t i = 0; i < capacityCoords; i++)
   {
-    array[i] = std::stod(coords.substr(pos), &nextPos);
-    pos += nextPos;
+    double value = std::strtod(currentPos, &endPos);
+    array[i] = value;
+    currentPos = endPos;
   }
-  return array;
 }
 
-double* lanovenko::paraseScale(const std::string& str)
+void lanovenko::parseScale(double* arr, const char* str)
 {
-  std::string coordsStr = "";
-  std::size_t praseCount = 0;
-  double* coords = nullptr;
-  for (size_t i = 0; i < str.length() - 6; i++)
+  size_t nameLength = lanovenko::getNameLength(str);
+  const char* coordsStr = str + nameLength;
+  std::size_t parseCount = 0;
+  parseCount = split(coordsStr);
+  if (parseCount != 3)
   {
-    coordsStr += str[i + 6];
+    throw std::invalid_argument("Wrong coord count");
   }
-  praseCount = split(coordsStr);
-  coords = getCoords(coordsStr, praseCount);
-  return coords;
+  getCoords(arr, coordsStr, parseCount);
 }
