@@ -59,7 +59,7 @@ int main()
         continue;
       }
      }
-    if (std::strstr(cStr, "SCALE"))
+    else
     {
       scale = true;
       double scaleParametrs[3];
