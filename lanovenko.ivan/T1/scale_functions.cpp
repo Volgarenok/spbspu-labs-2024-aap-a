@@ -8,10 +8,6 @@ void lanovenko::scaleShapes(Shape* const* shapeArray, double* scaleParametrs, st
   {
     throw std::invalid_argument("Nothing to scale!\n");
   }
-  if (scaleParametrs[2] < 0)
-  {
-    throw std::invalid_argument("Negative coefficient!\n");
-  }
   point_t toMoveCenter = { scaleParametrs[0], scaleParametrs[1] };
   double coefficient = scaleParametrs[2];
   outputScaleResults(shapeArray, shapesCapacity, out);

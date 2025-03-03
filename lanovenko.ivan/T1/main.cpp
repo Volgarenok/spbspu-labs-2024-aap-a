@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include "strinput.h"
 #include "shape.hpp"
 #include "string_manipulations.hpp"
 #include "delete_shape.hpp"
