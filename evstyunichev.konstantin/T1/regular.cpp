@@ -74,7 +74,7 @@ evstyunichev::Regular::Regular(point_t A, point_t B, point_t C):
 evstyunichev::Regular::Regular(point_t middle, double r, size_t n):
   middle_(middle),
   alpha_(2.0 * pi_v / n),
-  a_(std::sin(alpha_ / 2.0) * r * 2.0),
+  a_(std::sin(pi_v / n) * r * 2.0),
   base_(0)
 {
   if ((r <= 0) || (n < 3))
