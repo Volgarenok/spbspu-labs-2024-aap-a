@@ -38,49 +38,58 @@ int main()
               << std::setw(15) << "Sum(cmath)\n";
     const double epsilon = 1e-6;
     for (double x = start; x <= end; x += 0.1) {
-      double arcsinT = arcsinTaylor(x, maxNumber_of_iter, epsilon);
-      double arctanT = arctanTaylor(x, maxNumber_of_iter, epsilon);
       double arcsinC = std::asin(x);
       double arctanC = std::atan(x);
-      double sumT = arcsinT + arctanT;
       double sumC = arcsinC + arctanC;
-      if (arcsinT == 100.0 && arctanT == 100.0) {
-        std::cout << std::fixed << std::setprecision(6) << std::left << std::setw(15) << x
-                << std::setw(15) << "<MATH ERROR>"
-                << std::setw(15) << "<MATH ERROR>"
-                << std::setw(15) << "<MATH ERROR>"
-                << std::setw(15) << arcsinC
-                << std::setw(15) << arctanC
-                << std::setw(15) << sumC << "\n";
-      } else if (arctanT == 100.0) {
-        std::cout << std::fixed << std::setprecision(6) << std::left << std::setw(15) << x
-                << std::setw(15) << arcsinT
-                << std::setw(15) << "<MATH ERROR>"
-                << std::setw(15) << "<MATH ERROR>"
-                << std::setw(15) << arcsinC
-                << std::setw(15) << arctanC
-                << std::setw(15) << sumC << "\n";
-      } else if (arcsinT == 100.0) {
-        std::cout << std::fixed << std::setprecision(6) << std::left << std::setw(15) << x
-                << std::setw(15) << "<MATH ERROR>"
-                << std::setw(15) << arctanT
-                << std::setw(15) << "<MATH ERROR>"
-                << std::setw(15) << arcsinC
-                << std::setw(15) << arctanC
-                << std::setw(15) << sumC << "\n";
-      } else {
-        std::cout << std::fixed << std::setprecision(6) << std::left << std::setw(15) << x
-                  << std::setw(15) << arcsinT
-                  << std::setw(15) << arctanT
-                  << std::setw(15) << sumT
-                  << std::setw(15) << arcsinC
-                  << std::setw(15) << arctanC
-                  << std::setw(15) << sumC << "\n";
+      try {
+        double arcsinT = kalmbah::arcsinTaylor(x, maxNumber_of_iter, epsilon);
+        try {
+          double arctanT = kalmbah::arctanTaylor(x, maxNumber_of_iter, epsilon);
+          double sumT = arcsinT + arctanT;
+          std::cout << std::fixed << std::setprecision(6)
+                    << std::left << std::setw(15) << x
+                    << std::setw(15) << arcsinT
+                    << std::setw(15) << arctanT
+                    << std::setw(15) << sumT
+                    << std::setw(15) << arcsinC
+                    << std::setw(15) << arctanC
+                    << std::setw(15) << sumC << "\n";
+        } catch (const std::runtime_error& e) {
+          std::cout << std::fixed << std::setprecision(6)
+                    << std::left << std::setw(15) << x
+                    << std::setw(15) << arcsinT
+                    << std::setw(15) << e.what()
+                    << std::setw(15) << e.what()
+                    << std::setw(15) << arcsinC
+                    << std::setw(15) << arctanC
+                    << std::setw(15) << sumC << "\n";
+        }
+      } catch (const std::runtime_error& e) {
+        try {
+          double arctanT = kalmbah::arctanTaylor(x, maxNumber_of_iter, epsilon);
+          std::cout << std::fixed << std::setprecision(6)
+                    << std::left << std::setw(15) << x
+                    << std::setw(15) << e.what()
+                    << std::setw(15) << arctanT
+                    << std::setw(15) << e.what()
+                    << std::setw(15) << arcsinC
+                    << std::setw(15) << arctanC
+                    << std::setw(15) << sumC << "\n";
+        } catch (const std::runtime_error& e) {
+          std::cout << std::fixed << std::setprecision(6)
+                    << std::left << std::setw(15) << x
+                    << std::setw(15) << e.what()
+                    << std::setw(15) << e.what()
+                    << std::setw(15) << e.what()
+                    << std::setw(15) << arcsinC
+                    << std::setw(15) << arctanC
+                    << std::setw(15) << sumC << "\n";
+        }
       }
     }
     return 0;
-  } catch (const std::exception &e) {
-    std::cerr << "Error: " << e.what() << "\n";
+  } catch (const std::exception &t) {
+    std::cerr << "Error: " << t.what() << "\n";
     return 1;
   }
 }
