@@ -13,14 +13,8 @@ int main()
   bool errors = false;
   size_t res = 0;
   Shape* shapeArray[10000] = { nullptr };
-  while (scale != true)
+  while (scale != true && !std::cin.eof())
   {
-    if (std::cin.eof())
-    {
-      deleteShape(shapeArray, res);
-      std::cerr << "Wrong input!\n";
-      return 1;
-    }
     Shape* currentFigure = nullptr;
     const char* cStr = nullptr;
     try
@@ -76,6 +70,11 @@ int main()
       }
       delete[] cStr;
     }
+  }
+  if(scale != true)
+  {
+    deleteShape(shapeArray, res);
+    return 1;
   }
   if (errors == true)
   {
