@@ -11,7 +11,7 @@ namespace dirti
     virtual rectangle_t getFrameRect() const = 0;
     virtual void move(point_t point) = 0;
     virtual void move(double x, double y) = 0;
-    virtual void unsafeScale(double koef) = 0;
+    virtual void scaleUnsafe(double koef) = 0;
     void scale(double koef);
     virtual ~Shape() = default;
   };

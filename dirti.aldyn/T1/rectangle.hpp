@@ -4,7 +4,7 @@
 
 namespace dirti
 {
-  struct Rectangle final: public Shape
+  struct Rectangle final : public Shape
   {
   public:
     Rectangle(const point_t left_low, const point_t right_high);
@@ -12,7 +12,7 @@ namespace dirti
     rectangle_t getFrameRect() const override;
     void move(point_t point) override;
     void move(double x, double y) override;
-    void unsafeScale(double koef) override;
+    void scaleUnsafe(double koef) override;
   private:
     point_t left_low_;
     point_t right_high_;

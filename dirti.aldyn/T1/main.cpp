@@ -23,7 +23,6 @@ int main()
   Shape* shapes[10000] = {};
   std::string figure;
   size_t num = 0;
-  double sum_area = 0.0;
   while (!std::cin.eof() && std::cin >> figure && figure != "SCALE")
   {
     try
@@ -31,7 +30,7 @@ int main()
       shapes[num] = makeShape(std::cin, figure);
       if (shapes[num] != nullptr)
       {
-        sum_area += shapes[num++]->getArea();
+        num++;
       }
     }
     catch (std::logic_error&)
@@ -45,7 +44,7 @@ int main()
       return 1;
     }
   }
-  if ((std::cin.eof() && figure != "SCALE") || num == 0)
+  if (std::cin.eof() && figure != "SCALE" || num == 0)
   {
     std::cerr << "Error" << "\n";
     clearShapes(shapes);
@@ -55,6 +54,11 @@ int main()
   double koef = 0.0;
   std::cin >> scale_x >> scale_y >> koef;
   point_t scale_pos = { scale_x, scale_y };
+  double sum_area = 0.0;
+  for (size_t i = 0; i < num; ++i)
+  {
+    sum_area += shapes[i]->getArea();
+  }
   std::cout << sum_area << " ";
   outputFigures(shapes, std::cout) << "\n";
   try

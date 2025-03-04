@@ -6,5 +6,5 @@ void dirti::Shape::scale(double koef)
   {
     throw std::invalid_argument("Wrong koef");
   }
-  unsafeScale(koef);
+  scaleUnsafe(koef);
 }

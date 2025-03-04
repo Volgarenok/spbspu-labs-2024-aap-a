@@ -1,6 +1,6 @@
 #include "square.hpp"
 
-dirti::Square::Square(const point_t left_low, const double length):
+dirti::Square::Square(const point_t left_low, const double length) :
   left_low_(left_low),
   length_(length)
 {
@@ -35,7 +35,7 @@ void dirti::Square::move(point_t point)
   move(point.x - pos_.x, point.y - pos_.y);
 }
 
-void dirti::Square::unsafeScale(double koef)
+void dirti::Square::scaleUnsafe(double koef)
 {
   rectangle_t frameRect = getFrameRect();
   point_t pos_ = frameRect.pos;

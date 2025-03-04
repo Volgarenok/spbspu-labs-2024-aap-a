@@ -1,6 +1,6 @@
 #include "rectangle.hpp"
 
-dirti::Rectangle::Rectangle(const point_t left_low, const point_t right_high):
+dirti::Rectangle::Rectangle(const point_t left_low, const point_t right_high) :
   left_low_(left_low),
   right_high_(right_high)
 {
@@ -36,7 +36,7 @@ void dirti::Rectangle::move(point_t point)
   move(point.x - pos_.x, point.y - pos_.y);
 }
 
-void dirti::Rectangle::unsafeScale(double koef)
+void dirti::Rectangle::scaleUnsafe(double koef)
 {
   rectangle_t frameRect = getFrameRect();
   point_t pos_ = frameRect.pos;
