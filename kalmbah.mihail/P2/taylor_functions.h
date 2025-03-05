@@ -2,11 +2,10 @@
 #define TAYLOR_FUNCTIONS_H
 #include <cstddef>
 
-namespace kalmbah
-{
-  unsigned long long factorial(size_t n);
-  double arcsinTaylor(double x, size_t n, double error);
-  double arctanTaylor(double x, size_t n, double error);
+namespace kalmbah {
+  unsigned long long getFactorial(size_t n);
+  double getArcsinTaylor(double x, size_t n, double error);
+  double getArctanTaylor(double x, size_t n, double error);
 }
 
 #endif
