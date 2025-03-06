@@ -85,10 +85,10 @@ void shramko::Diamond::scale(double k)
 
   one_.x = cent.x + (one_.x - cent.x) * k;
   one_.y = cent.y + (one_.y - cent.y) * k;
-  
+
   two_.x = cent.x + (two_.x - cent.x) * k;
   two_.y = cent.y + (two_.y - cent.y) * k;
-  
+
   three_.x = cent.x + (three_.x - cent.x) * k;
   three_.y = cent.y + (three_.y - cent.y) * k;
 }
