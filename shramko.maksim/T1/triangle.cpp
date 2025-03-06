@@ -9,11 +9,20 @@ shramko::Triangle::Triangle(point_t one, point_t two, point_t three):
   two_(two),
   three_(three)
 {
-  double lenOne = calcLength(one_, two_), lenTwo = calcLength(two_, three_), lenThree = calcLength(one_, three_);
+  double lenOne = calcLength(one_, two_);
+  double lenTwo = calcLength(two_, three_);
+  double lenThree = calcLength(one_, three_);
 
-  if (!(lenOne < (lenTwo + lenThree) && lenTwo < (lenOne + lenThree) && lenThree < (lenOne + lenTwo)))
+  if (lenOne + lenTwo <= lenThree || lenTwo + lenThree <= lenOne || lenOne + lenThree <= lenTwo)
   {
-    throw std::invalid_argument("Triangle size err\n");
+    if (lenOne == 0 && lenTwo == 0 && lenThree == 0)
+    {
+      return;
+    }
+    else
+    {
+      throw std::invalid_argument("Triangle size err\n");
+    }
   }
 }
 

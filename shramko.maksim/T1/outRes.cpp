@@ -8,10 +8,11 @@ void shramko::outRes(std::ostream& out, Shape** shape, size_t size)
 
   for (size_t i = 0; i < size; i++)
   {
-    out << " " << shape[i]->getFrameRect().pos.x - (shape[i]->getFrameRect().width) / 2.0f;
-    out << " " << shape[i]->getFrameRect().pos.y - (shape[i]->getFrameRect().height) / 2.0f;
-    out << " " << shape[i]->getFrameRect().pos.x + (shape[i]->getFrameRect().width) / 2.0f;
-    out << " " << shape[i]->getFrameRect().pos.y + (shape[i]->getFrameRect().height) / 2.0f;
+    rectangle_t frame = shape[i]->getFrameRect();
+    out << " " << frame.pos.x - (frame.width / 2.0);
+    out << " " << frame.pos.y - (frame.height / 2.0);
+    out << " " << frame.pos.x + (frame.width / 2.0);
+    out << " " << frame.pos.y + (frame.height / 2.0);
   }
 
   out << '\n';

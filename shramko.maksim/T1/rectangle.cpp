@@ -7,7 +7,7 @@ shramko::Rectangle::Rectangle(point_t leftBottom, point_t rightTop):
   leftBottom_(leftBottom),
   rightTop_(rightTop)
 {
-  if (leftBottom.x <= rightTop.x && leftBottom.y <= rightTop.y)
+  if (leftBottom.x < rightTop.x && leftBottom.y < rightTop.y)
   {
     leftBottom_.x = leftBottom.x;
     leftBottom_.y = leftBottom.y;

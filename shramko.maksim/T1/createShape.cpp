@@ -34,6 +34,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
 {
   std::string str;
   int count = 0;
+  bool isScaled = false;
 
   try
   {
@@ -63,6 +64,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
       }
       else if (str == "SCALE")
       {
+        isScaled = true;
         if (count == 0)
         {
           err << "Nothing to scale\n";
@@ -74,6 +76,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
         in >> goCentre.x >> goCentre.y >> k;
         outRes(out, shape, count);
         scaling(shape, count, goCentre, k);
+        outRes(out, shape, count);
       }
     }
   }
@@ -81,16 +84,21 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
   {
     err << e.what() << '\n';
     destroy(shape, count);
-    return -1;
+    return 1;
   }
   catch (const std::runtime_error& e)
   {
     err << e.what() << '\n';
     destroy(shape, count);
-    return -1;
+    return 1;
   }
 
-  return count;
+  if (!isScaled)
+  {
+    destroy(shape, count);
+    return -1;
+  }
+  return 0;
 }
 
 void shramko::destroy(Shape** shape, size_t count)
