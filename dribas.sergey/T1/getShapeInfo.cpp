@@ -35,58 +35,55 @@ dribas::CompositeShape dribas::getShapeInfo(std::istream& input, std::ostream& e
   std::string inputStr;
   bool scaled = false;
   Shape* shape = nullptr;
-  try {
-    while (input >> inputStr && inputStr != "SCALE") {
-      try {
-        if (inputStr == "RECTANGLE") {
-         point_t pointR[2] = { 0, 0 };
-          if (getPoint(std::cin, 2, pointR)) {
-            shape = new Rectangle(pointR[0], pointR[1]);
-            shapes.push_back(shape);
-          }
-        } else if (inputStr == "TRIANGLE") {
-          point_t pointT[3] = { 0, 0 };
-          if (getPoint(std::cin, 3, pointT)) {
-            shape = new Triangle(pointT[0], pointT[1], pointT[2]);
-            shapes.push_back(shape);
-          }
-        } else if (inputStr == "DIAMOND") {
-          point_t pointD[3] = { 0, 0 };
-          if (getPoint(std::cin, 3, pointD)) {
-            shape = new Diamond(pointD[0], pointD[1], pointD[2]);
-            shapes.push_back(shape);
-          }
-        } else if (inputStr == "CONCAVE") {
-          point_t pointC[4] = { 0, 0 };
-          if (getPoint(std::cin, 4, pointC)) {
-            shape = new Concave(pointC[0], pointC[1], pointC[2], pointC[3]);
-            shapes.push_back(shape);
-          }
+  while (input >> inputStr && inputStr != "SCALE") {
+    try {
+      if (inputStr == "RECTANGLE") {
+        point_t pointR[2] = { 0, 0 };
+        if (getPoint(std::cin, 2, pointR)) {
+          shape = new Rectangle(pointR[0], pointR[1]);
+          shapes.push_back(shape);
         }
-      } catch (const std::invalid_argument& e) {
-        error << e.what() << '\n';
+      } else if (inputStr == "TRIANGLE") {
+        point_t pointT[3] = { 0, 0 };
+        if (getPoint(std::cin, 3, pointT)) {
+          shape = new Triangle(pointT[0], pointT[1], pointT[2]);
+          shapes.push_back(shape);
+        }
+      } else if (inputStr == "DIAMOND") {
+        point_t pointD[3] = { 0, 0 };
+        if (getPoint(std::cin, 3, pointD)) {
+          shape = new Diamond(pointD[0], pointD[1], pointD[2]);
+          shapes.push_back(shape);
+        }
+      } else if (inputStr == "CONCAVE") {
+        point_t pointC[4] = { 0, 0 };
+        if (getPoint(std::cin, 4, pointC)) {
+          shape = new Concave(pointC[0], pointC[1], pointC[2], pointC[3]);
+          shapes.push_back(shape);
+        }
       }
+    } catch (const std::invalid_argument& e) {
+      error << e.what() << '\n';
+    } catch (const std::overflow_error& e) {
+      delete shape;
+      throw e;
+    } catch (const std::exception& e) {
+      shapes.clear();
+      throw e;
     }
-    if (inputStr == "SCALE") {
-      scaled = true;
-      if (shapes.size() == 0) {
-        throw std::logic_error("No shapes for scale");
-      }
-      input >> scalingFactor[0];
-      input >> scalingFactor[1];
-      input >> scalingFactor[2];
-      if (scalingFactor[2] <= 0) {
-        shapes.clear();
-        throw std::invalid_argument("under zero ratio with scale");
-      }
+  }
+  if (inputStr == "SCALE") {
+    scaled = true;
+    if (shapes.size() == 0) {
+      throw std::logic_error("No shapes for scale");
     }
-  } catch (const std::overflow_error& e) {
-    delete shape;
-    shapes.clear();
-    throw e;
-  } catch (const std::exception& e) {
-    shapes.clear();
-    throw e;
+    input >> scalingFactor[0];
+    input >> scalingFactor[1];
+    input >> scalingFactor[2];
+    if (scalingFactor[2] <= 0) {
+      shapes.clear();
+      throw std::invalid_argument("under zero ratio with scale");
+    }
   }
   if (!scaled) {
     shapes.clear();
