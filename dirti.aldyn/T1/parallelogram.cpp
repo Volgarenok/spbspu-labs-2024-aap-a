@@ -39,7 +39,7 @@ void dirti::Parallelogram::move(point_t point)
   move(point.x - pos_.x, point.y - pos_.y);
 }
 
-point_t dirti::Parallelogram::scaledPoint(point_t point, point_t pos, double koef)
+dirti::point_t dirti::Parallelogram::scaledPoint(point_t point, point_t pos, double koef)
 {
   return { pos.x - (pos.x - point.x) * koef, pos.y - (pos.y - point.y) * koef };
 }
