@@ -96,6 +96,7 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
 
   if (!isScaled)
   {
+    destroy(shape, count);
     return -1;
   }
   return 0;
@@ -103,8 +104,17 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
 
 void shramko::destroy(Shape** shape, size_t count)
 {
-  for (size_t i = 0; i < count; i++)
+  if (shape == nullptr || count == 0)
   {
-    delete shape[i];
+    return;
+  }
+
+  for (size_t i = 0; i < count; ++i)
+  {
+    if (shape[i] != nullptr)
+    {
+      delete shape[i];
+      shape[i] = nullptr;
+    }
   }
 }
