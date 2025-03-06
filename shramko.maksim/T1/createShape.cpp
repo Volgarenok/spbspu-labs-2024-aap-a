@@ -34,7 +34,6 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
 {
   std::string str;
   int count = 0;
-  bool isScaled = false;
 
   try
   {
@@ -64,7 +63,6 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
       }
       else if (str == "SCALE")
       {
-        isScaled = true;
         if (count == 0)
         {
           err << "Nothing to scale\n";
