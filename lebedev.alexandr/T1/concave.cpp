@@ -1,5 +1,6 @@
 #include "concave.hpp"
 #include <algorithm>
+#include <stdexcept>
 #include "auxiliaryFunctions.hpp"
 #include "base-types.hpp"
 
@@ -8,18 +9,23 @@ lebedev::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
   p2_(p2),
   p3_(p3),
   p4_(p4)
-{}
+{
+  if (!isTriangle(p1, p2, p3) || !isPointInsideTriangle(p1, p2, p3, p4))
+  {
+    throw std::invalid_argument("");
+  }
+}
 
 double lebedev::Concave::getArea() const
 {
-  double s1 = lebedev::triangleArea(p1_, p2_, p3_);
-  double s2 = lebedev::triangleArea(p2_, p3_, p4_);
+  double s1 = triangleArea(p1_, p2_, p3_);
+  double s2 = triangleArea(p2_, p3_, p4_);
   return s1 - s2;
 }
 
 lebedev::rectangle_t lebedev::Concave::getFrameRect() const
 {
-  lebedev::rectangle_t rect;
+  rectangle_t rect;
   rect.width = std::max({ p1_.x, p2_.x, p3_.x }) - std::min({ p1_.x, p2_.x, p3_.x });
   rect.height = std::max({ p1_.y, p2_.y, p3_.y }) - std::min({ p1_.y, p2_.y, p3_.y });
   rect.pos.x = std::min({ p1_.x, p2_.x, p3_.x }) + rect.width / 2;

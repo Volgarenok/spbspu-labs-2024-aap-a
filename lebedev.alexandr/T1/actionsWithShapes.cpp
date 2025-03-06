@@ -1,6 +1,6 @@
 #include "actionsWithShapes.hpp"
 
-double lebedev::getSumArea(lebedev::Shape** shps, size_t count)
+double lebedev::getSumArea(Shape** shps, size_t count)
 {
   double result = 0;
   for (size_t i = 0; i < count; ++i)
@@ -10,24 +10,24 @@ double lebedev::getSumArea(lebedev::Shape** shps, size_t count)
   return result;
 }
 
-void lebedev::scaleForShapes(lebedev::Shape** shps, size_t count, lebedev::point_t scalePoint, double k)
+void lebedev::scaleForShapes(Shape** shps, size_t count, point_t scalePoint, double k)
 {
   for (size_t i = 0; i < count; ++i)
   {
-    lebedev::point_t beforeScale = shps[i]->getFrameRect().pos;
+    point_t beforeScale = shps[i]->getFrameRect().pos;
     shps[i]->move(scalePoint);
-    lebedev::point_t afterScale = shps[i]->getFrameRect().pos;
-    lebedev::point_t vector = { (afterScale.x - beforeScale.x) * k, (afterScale.y - beforeScale.y) * k };
+    point_t afterScale = shps[i]->getFrameRect().pos;
+    point_t vector = { (afterScale.x - beforeScale.x) * k, (afterScale.y - beforeScale.y) * k };
     shps[i]->scale(k);
     shps[i]->move(-vector.x, -vector.y);
   }
 }
 
-void lebedev::printFrameCoordinates(lebedev::Shape** shps, size_t count, std::ostream& output)
+void lebedev::printFrameCoordinates(Shape** shps, size_t count, std::ostream& output)
 {
   for (size_t i = 0; i < count; ++i)
   {
-    lebedev::rectangle_t rect = shps[i]->getFrameRect();
+    rectangle_t rect = shps[i]->getFrameRect();
     double leftDownX = rect.pos.x - rect.width / 2;
     double leftDownY = rect.pos.y - rect.height / 2;
     double rightUpX = rect.pos.x + rect.width / 2;

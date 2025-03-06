@@ -8,7 +8,7 @@ double lebedev::triangleArea(point_t p1, point_t p2, point_t p3)
 
 bool lebedev::isTriangle(point_t p1, point_t p2, point_t p3)
 {
-  double area = lebedev::triangleArea(p1, p2, p3);
+  double area = triangleArea(p1, p2, p3);
   if (area == 0)
   {
     return false;
@@ -18,14 +18,14 @@ bool lebedev::isTriangle(point_t p1, point_t p2, point_t p3)
 
 bool lebedev::isPointInsideTriangle(point_t p1, point_t p2, point_t p3, point_t p4)
 {
-  double s = lebedev::triangleArea(p1, p2, p3);
-    double s1 = lebedev::triangleArea(p1, p2, p4);
-    double s2 = lebedev::triangleArea(p2, p3, p4);
-    double s3 = lebedev::triangleArea(p1, p3, p4);
-    return ((s == s1 + s2 + s3) && (s1 != 0 && s2 != 0 && s3 != 0));
+  double s = triangleArea(p1, p2, p3);
+  double s1 = triangleArea(p1, p2, p4);
+  double s2 = triangleArea(p2, p3, p4);
+  double s3 = triangleArea(p1, p3, p4);
+  return ((s == s1 + s2 + s3) && (s1 != 0 && s2 != 0 && s3 != 0));
 }
 
-void lebedev::deleteShapePtr(lebedev::Shape** shps, size_t count)
+void lebedev::deleteShapePtr(Shape** shps, size_t count)
 {
   for (size_t i = 0; i < count; ++i)
   {

@@ -2,7 +2,7 @@
 #include <stdexcept>
 #include "base-types.hpp"
 
-lebedev::Rectangle::Rectangle(lebedev::point_t leftDown, lebedev::point_t rightUp)
+lebedev::Rectangle::Rectangle(point_t leftDown, point_t rightUp)
 {
   if (leftDown.x >= rightUp.x || leftDown.y >= rightUp.y)
   {

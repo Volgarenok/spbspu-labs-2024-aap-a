@@ -9,9 +9,9 @@
 #include "shape.hpp"
 #include "auxiliaryFunctions.hpp"
 
-using namespace lebedev;
 int main()
 {
+  using namespace lebedev;
   Shape* shps[10000] = {};
   size_t count = 0;
   std::string shapeName;

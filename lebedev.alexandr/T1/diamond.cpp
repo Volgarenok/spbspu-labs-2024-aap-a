@@ -11,9 +11,10 @@ lebedev::Diamond::Diamond(point_t centre, point_t vert, point_t horiz):
   concaveCount_(0),
   capacity_(0)
 {
-  if ((vert.x == horiz.x && vert.y == horiz.y)
+  if (((vert.x == horiz.x && vert.y == horiz.y)
       || (vert.x == centre.x && vert.y == centre.y)
       || (horiz.x == centre.x && horiz.y == centre.y))
+      || !(vert.x == centre.x && horiz.y == centre.y))
   {
     throw std::invalid_argument("");
   }
@@ -35,8 +36,8 @@ lebedev::Diamond::~Diamond()
 
 double lebedev::Diamond::getArea() const
 {
-  lebedev::rectangle_t rect1 = concaves_[0]->getFrameRect();
-  lebedev::rectangle_t rect2 = concaves_[1]->getFrameRect();
+  rectangle_t rect1 = concaves_[0]->getFrameRect();
+  rectangle_t rect2 = concaves_[1]->getFrameRect();
   double d1 = rect1.height + rect2.height;
   double d2 = rect1.width;
   return (d1 * d2) / 2;
@@ -44,9 +45,9 @@ double lebedev::Diamond::getArea() const
 
 lebedev::rectangle_t lebedev::Diamond::getFrameRect() const
 {
-  lebedev::rectangle_t rect1 = concaves_[0]->getFrameRect();
-  lebedev::rectangle_t rect2 = concaves_[1]->getFrameRect();
-  return { rect1.width, (rect1.height + rect2.height), lebedev::getMiddlePoint(rect1.pos, rect2.pos) };
+  rectangle_t rect1 = concaves_[0]->getFrameRect();
+  rectangle_t rect2 = concaves_[1]->getFrameRect();
+  return { rect1.width, (rect1.height + rect2.height), getMiddlePoint(rect1.pos, rect2.pos) };
 }
 
 void lebedev::Diamond::move(point_t p)
@@ -76,21 +77,14 @@ void lebedev::Diamond::scale(double k)
 void lebedev::Diamond::expandArray()
 {
   size_t newCapacity = (capacity_ == 0) ? 2 : capacity_ * 2;
-  try
+  lebedev::Concave** newArray = new Concave*[newCapacity];
+  for (size_t i = 0; i < concaveCount_; i++)
   {
-    lebedev::Concave** newArray = new Concave*[newCapacity];
-    for (size_t i = 0; i < concaveCount_; i++)
-    {
-      newArray[i] = concaves_[i];
-    }
-    delete[] concaves_;
-    concaves_ = newArray;
-    capacity_ = newCapacity;
+    newArray[i] = concaves_[i];
   }
-  catch (const std::bad_alloc& e)
-  {
-    throw;
-  }
+  delete[] concaves_;
+  concaves_ = newArray;
+  capacity_ = newCapacity;
 }
 
 void lebedev::Diamond::divideIntoConcaves(point_t centre, point_t vert, point_t horiz)
@@ -105,24 +99,15 @@ void lebedev::Diamond::divideIntoConcaves(point_t centre, point_t vert, point_t 
 
   while (totalArea - coveredArea > TOLERANCE)
   {
-    point_t quarter1, quarter2;
-    lebedev::Concave* cncv1;
-    lebedev::Concave* cncv2;
+    point_t start1 = isVerticalNext ? d1Start : d2Start;
+    point_t end1 = isVerticalNext ? d1End : d2End;
+    point_t start2 = isVerticalNext ? d2Start : d1Start;
+    point_t end2 = isVerticalNext ? d2End : d1End;
 
-    if (isVerticalNext)
-    {
-      quarter1 = lebedev::getMiddlePoint(d1Start, centre);
-      quarter2 = lebedev::getMiddlePoint(d1End, centre);
-      cncv1 = new lebedev::Concave(d1Start, d2Start, d2End, quarter1);
-      cncv2 = new lebedev::Concave(d1End, d2Start, d2End, quarter2);
-    }
-    else
-    {
-      quarter1 = lebedev::getMiddlePoint(d2Start, centre);
-      quarter2 = lebedev::getMiddlePoint(d2End, centre);
-      cncv1 = new lebedev::Concave(d2Start, d1Start, d1End, quarter1);
-      cncv2 = new lebedev::Concave(d2End, d1Start, d1End, quarter2);
-    }
+    point_t quarter1 = getMiddlePoint(start1, centre);
+    point_t quarter2 = getMiddlePoint(end1, centre);
+    lebedev::Concave* cncv1 = new lebedev::Concave(start1, start2, end2, quarter1);
+    lebedev::Concave* cncv2 = new lebedev::Concave(end1, start2, end2, quarter2);
 
     if (concaveCount_ == capacity_)
     {
