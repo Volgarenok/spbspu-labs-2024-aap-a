@@ -43,8 +43,8 @@ shramko::Triangle& shramko::Triangle::operator=(shramko::Triangle&& rhs)
 void shramko::Triangle::move(point_t point)
 {
   point_t pos;
-  pos.x = std::abs(one_.x + two_.x + three_.x) / 3.0;
-  pos.y = std::abs(one_.y + two_.y + three_.y) / 3.0;
+  pos.x = (one_.x + two_.x + three_.x) / 3.0;
+  pos.y = (one_.y + two_.y + three_.y) / 3.0;
 
   double xMove = point.x - pos.x;
   double yMove = point.y - pos.y;

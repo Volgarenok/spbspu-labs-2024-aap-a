@@ -1,6 +1,7 @@
 #include "diamond.hpp"
 #include "triangle.hpp"
 #include <stdexcept>
+#include <algorithm>
 #include <cmath>
 
 shramko::Diamond::Diamond(point_t one, point_t two, point_t three):
@@ -38,10 +39,17 @@ double shramko::Diamond::getArea() const
 shramko::rectangle_t shramko::Diamond::getFrameRect() const
 {
   rectangle_t rectFrame;
-  rectFrame.pos = one_;
 
-  rectFrame.width = std::abs(three_.x - one_.x) * 2;
-  rectFrame.height = std::abs(two_.y - one_.y) * 2;
+  double xMin = std::min({one_.x, two_.x, three_.x});
+  double xMax = std::max({one_.x, two_.x, three_.x});
+  double yMin = std::min({one_.y, two_.y, three_.y});
+  double yMax = std::max({one_.y, two_.y, three_.y});
+
+  rectFrame.width = xMax - xMin;
+  rectFrame.height = yMax - yMin;
+
+  rectFrame.pos.x = (xMin + xMax) / 2.0;
+  rectFrame.pos.y = (yMin + yMax) / 2.0;
 
   return rectFrame;
 }
@@ -75,12 +83,12 @@ void shramko::Diamond::scale(double k)
 
   point_t cent = {(one_.x + two_.x + three_.x)/3, (one_.y + two_.y + three_.y)/3};
 
-  one_.x = cent.x + (one_.x + cent.x) * k;
-  one_.y = cent.y + (one_.y + cent.y) * k;
-
-  two_.x = cent.x + (two_.x + cent.x) * k;
-  two_.y = cent.y + (two_.y + cent.y) * k;
-
-  three_.x = cent.x + (three_.x + cent.x) * k;
-  three_.y = cent.y + (three_.y + cent.y) * k;
+  one_.x = cent.x + (one_.x - cent.x) * k;
+  one_.y = cent.y + (one_.y - cent.y) * k;
+  
+  two_.x = cent.x + (two_.x - cent.x) * k;
+  two_.y = cent.y + (two_.y - cent.y) * k;
+  
+  three_.x = cent.x + (three_.x - cent.x) * k;
+  three_.y = cent.y + (three_.y - cent.y) * k;
 }

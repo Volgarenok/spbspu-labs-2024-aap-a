@@ -22,8 +22,8 @@ void shramko::scaling(Shape** shape, size_t count, point_t centre, double k)
     shape[i]->move(centre);
     point_t centreTwo = shape[i]->getFrameRect().pos;
 
-    double diffX = (centreTwo.x - center.x) * k * - 1;
-    double diffY = (centreTwo.y - center.y) * k * - 1;
+    double diffX = (centreTwo.x - center.x) * k * -1;
+    double diffY = (centreTwo.y - center.y) * k * -1;
 
     shape[i]->scale(k);
     shape[i]->move(diffX, diffY);
@@ -92,11 +92,6 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
     return -1;
   }
 
-  if (!isScaled)
-  {
-    destroy(shape, count);
-    return -1;
-  }
   return count;
 }
 
