@@ -14,7 +14,7 @@ int main()
   {
     count = shramko::createShape(std::cin, std::cerr, std::cout, shape);
 
-    if (count == 0)
+    if (count == static_cast< size_t >(-1))
     {
       shramko::destroy(shape, count);
       return 1;

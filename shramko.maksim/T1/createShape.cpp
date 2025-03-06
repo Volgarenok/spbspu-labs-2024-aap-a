@@ -9,7 +9,10 @@ double shramko::getEveryArea(Shape** shape, size_t count)
   double everyArea = 0.0;
   for (size_t i = 0; i < count; i++)
   {
-    everyArea += shape[i]->getArea();
+    if (shape[i] != nullptr)
+    {
+      everyArea += shape[i]->getArea();
+    }
   }
   return everyArea;
 }
