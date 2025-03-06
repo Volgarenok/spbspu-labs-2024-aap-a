@@ -1,9 +1,7 @@
 #ifndef INPUT_FIGURES_HPP
 #define INPUT_FIGURES_HPP
 #include <istream>
-#include "rectangle.hpp"
-#include "square.hpp"
-#include "parallelogram.hpp"
+#include "shape.hpp"
 
 namespace dirti
 {

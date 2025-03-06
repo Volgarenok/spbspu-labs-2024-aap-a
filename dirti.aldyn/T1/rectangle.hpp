@@ -4,7 +4,7 @@
 
 namespace dirti
 {
-  struct Rectangle final : public Shape
+  struct Rectangle final: public Shape
   {
   public:
     Rectangle(const point_t left_low, const point_t right_high);

@@ -1,4 +1,7 @@
 #include "outputFigures.hpp"
+#include "rectangle.hpp"
+#include "square.hpp"
+#include "parallelogram.hpp"
 
 std::ostream& dirti::outputFigures(Shape** shapes, std::ostream& out)
 {

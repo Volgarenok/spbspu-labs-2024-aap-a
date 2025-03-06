@@ -1,6 +1,6 @@
 #include "square.hpp"
 
-dirti::Square::Square(const point_t left_low, const double length) :
+dirti::Square::Square(const point_t left_low, const double length):
   left_low_(left_low),
   length_(length)
 {

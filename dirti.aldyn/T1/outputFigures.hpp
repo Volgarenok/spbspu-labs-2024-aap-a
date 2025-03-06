@@ -1,9 +1,7 @@
 #ifndef OUTPUTFIGURES_HPP
 #define OUTPUTFIGURES_HPP
 #include <ostream>
-#include "rectangle.hpp"
-#include "square.hpp"
-#include "parallelogram.hpp"
+#include "shape.hpp"
 
 namespace dirti
 {

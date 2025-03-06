@@ -1,16 +1,7 @@
 #include "parallelogram.hpp"
 #include <cmath>
 
-namespace
-{
-  using namespace dirti;
-  point_t scaledPoint(point_t point, point_t pos, double koef)
-  {
-    return { pos.x - (pos.x - point.x) * koef, pos.y - (pos.y - point.y) * koef };
-  }
-}
-
-dirti::Parallelogram::Parallelogram(const point_t p1, const point_t p2, const point_t p3) :
+dirti::Parallelogram::Parallelogram(const point_t p1, const point_t p2, const point_t p3):
   p1_(p1),
   p2_(p2),
   p3_(p3)
@@ -46,6 +37,11 @@ void dirti::Parallelogram::move(point_t point)
 {
   point_t pos_ = getFrameRect().pos;
   move(point.x - pos_.x, point.y - pos_.y);
+}
+
+point_t dirti::Parallelogram::scaledPoint(point_t point, point_t pos, double koef)
+{
+  return { pos.x - (pos.x - point.x) * koef, pos.y - (pos.y - point.y) * koef };
 }
 
 void dirti::Parallelogram::scaleUnsafe(double koef)

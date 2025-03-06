@@ -1,4 +1,7 @@
 #include "inputFigures.hpp"
+#include "rectangle.hpp"
+#include "square.hpp"
+#include "parallelogram.hpp"
 
 namespace
 {
