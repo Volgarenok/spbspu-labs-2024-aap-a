@@ -52,11 +52,10 @@ void lebedev::Concave::move(point_t p)
 
 void lebedev::Concave::scale(double k)
 {
-  p1_.x = p4_.x + (p4_.x - p1_.x) * k;
-  p1_.y = p4_.y + (p4_.y - p1_.y) * k;
-  p2_.x = p4_.x + (p4_.x - p2_.x) * k;
-  p2_.y = p4_.y + (p4_.y - p2_.y) * k;
-  p3_.x = p4_.x + (p4_.x - p3_.x) * k;
-  p3_.y = p4_.y + (p4_.y - p3_.y) * k;
+  p1_.x = p4_.x + (p1_.x - p4_.x) * k;
+  p1_.y = p4_.y + (p1_.y - p4_.y) * k;
+  p2_.x = p4_.x + (p2_.x - p4_.x) * k;
+  p2_.y = p4_.y + (p2_.y - p4_.y) * k;
+  p3_.x = p4_.x + (p3_.x - p4_.x) * k;
+  p3_.y = p4_.y + (p3_.y - p4_.y) * k;
 }
-
