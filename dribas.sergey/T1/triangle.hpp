@@ -5,7 +5,7 @@
 
 namespace dribas
 {
-  class Triangle final : public Shape
+  class Triangle final: public Shape
   {
   public:
     Triangle(point_t a, point_t b, point_t c);

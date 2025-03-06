@@ -5,7 +5,7 @@
 
 namespace dribas
 {
-  class Rectangle final : public Shape
+  class Rectangle final: public Shape
   {
   public:
     Rectangle(point_t leftDown, point_t rightUp);

@@ -6,7 +6,7 @@
 
 namespace dribas
 {
-  class Concave final : public Shape
+  class Concave final: public Shape
   {
   public:
     Concave(point_t a, point_t b, point_t c, point_t d);
