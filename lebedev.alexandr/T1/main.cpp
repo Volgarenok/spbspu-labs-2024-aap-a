@@ -90,4 +90,5 @@ int main()
   std::cout << getSumArea(shps, count);
   printFrameCoordinates(shps, count, std::cout);
   deleteShapePtr(shps, count);
+  return 0;
 }
