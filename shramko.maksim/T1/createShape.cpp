@@ -96,7 +96,6 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
 
   if (!isScaled)
   {
-    destroy(shape, count);
     return -1;
   }
   return 0;
