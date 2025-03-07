@@ -39,6 +39,17 @@ namespace kushekbaev
     }
   }
 
+  void scaleToPoint(Shape* object, const point_t& t, double scaleCoeff)
+  {
+    point_t centr_rec1 = object->getFrameRect().pos;
+    object->move(t);
+    point_t centr_rec2 = object->getFrameRect().pos;
+    double x = centr_rec2.x - centr_rec1.x;
+    double y = centr_rec2.y - centr_rec1.y;
+    object->scale(scaleCoeff);
+    object->move(-(x * scaleCoeff), -(y * scaleCoeff));
+  }
+
   void scaleNoCheck(CompositeShape& compShape, const point_t& scalePoint, double scaleCoeff)
   {
     for (size_t i = 0; i < compShape.size(); i++)
@@ -54,16 +65,5 @@ namespace kushekbaev
       throw std::logic_error("Incorrect scale");
     }
     scaleNoCheck(compShape, scalePoint, scaleCoeff);
-  }
-
-  void scaleToPoint(Shape* object, const point_t& t, double scaleCoeff)
-  {
-    point_t centr_rec1 = object->getFrameRect().pos;
-    object->move(t);
-    point_t centr_rec2 = object->getFrameRect().pos;
-    double x = centr_rec2.x - centr_rec1.x;
-    double y = centr_rec2.y - centr_rec1.y;
-    object->scale(scaleCoeff);
-    object->move(-(x * scaleCoeff), -(y * scaleCoeff));
   }
 }
