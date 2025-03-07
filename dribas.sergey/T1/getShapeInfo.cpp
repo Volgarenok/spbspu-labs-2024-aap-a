@@ -66,7 +66,7 @@ dribas::CompositeShape dribas::getShapeInfo(std::istream& input, std::ostream& e
       error << e.what() << '\n';
     } catch (const std::overflow_error& e) {
       delete shape;
-      throw e;
+      error << e.what() << '\n';
     } catch (const std::exception& e) {
       shapes.clear();
       throw e;
