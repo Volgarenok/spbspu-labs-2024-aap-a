@@ -67,39 +67,39 @@ namespace kushekbaev
     }
   }
 
-  void createShape(std::istream& in, CompositeShape& compShape, point_t& scalePoint, double& scaleCoeff, std::string shapeName)
+  void createShape(std::istream& in, CompositeShape& cShape, point_t& scaleP, double& scaleC, std::string sName)
   {
     Shape* shape = nullptr;
 
-    if (shapeName == "RECTANGLE")
+    if (sName == "RECTANGLE")
     {
       shape = makeRectangle(in);
     }
-    else if (shapeName == "CONCAVE")
+    else if (sName == "CONCAVE")
     {
       shape = makeConcave(in);
     }
-    else if (shapeName == "PARALLELOGRAM")
+    else if (sName == "PARALLELOGRAM")
     {
       shape = makeParallelogram(in);
     }
-    else if (shapeName == "DIAMOND")
+    else if (sName == "DIAMOND")
     {
       shape = makeDiamond(in);
     }
-    else if (shapeName == "SCALE")
+    else if (sName == "SCALE")
     {
-      makeScale(in, scalePoint, scaleCoeff);
+      makeScale(in, scaleP, scaleC);
     }
     else
     {
       throw std::logic_error("Unsupported shape type\n");
     }
-    if (shapeName != "SCALE")
+    if (sName != "SCALE")
     {
       try
       {
-        compShape.push_back(shape);
+        cShape.push_back(shape);
       }
       catch (const std::bad_alloc& e)
       {
