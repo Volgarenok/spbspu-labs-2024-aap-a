@@ -125,6 +125,13 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
     destroy(shape, count);
     return -1;
   }
+  
+  if (!isScaled)
+  {
+    destroy(shape, count);
+    return -1;
+  }
+  return count;
 }
 
 void shramko::destroy(Shape** shape, size_t count)

@@ -17,7 +17,7 @@ namespace shramko
     void move(double x, double y) override;
     void scale(double k) override;
   private:
-    std::vector<Triangle > triangles;
+    std::vector< Triangle > triangles;
     point_t one_;
     point_t two_;
     point_t three_;
