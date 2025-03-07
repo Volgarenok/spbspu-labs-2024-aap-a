@@ -25,10 +25,6 @@ int main()
       {
         scaleFlag = 1;
         makeScale(compShp, std::cin);
-        if (errorFlag)
-        {
-          std::cerr << "input errors!\n";
-        }
       }
       else
       {
@@ -50,6 +46,10 @@ int main()
       std::cerr << e.what() << '\n';
       return 2;
     }
+  }
+  if (errorFlag)
+  {
+    std::cerr << "input errors!\n";
   }
   if (compShp.empty() || !scaleFlag)
   {
