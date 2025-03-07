@@ -40,83 +40,91 @@ void shramko::scaling(Shape** shape, size_t count, point_t centre, double k)
 
 int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out, Shape** shape)
 {
-
-  constexpr size_t MAX_SHAPES = 10000;
+  std::string str;
   int count = 0;
   bool isScaled = false;
-
   try
   {
-    std::string str;
-    while (in >> str && count < MAX_SHAPES)
+    while (in >> str)
     {
       if (str == "RECTANGLE")
       {
-        point_t top, bottom;
-        if (!(in >> bottom.x >> bottom.y >> top.x >> top.y))
+        try
         {
-          err << "Invalid rectangle input\n";
-          destroy(shape, count);
-          return -1;
+          point_t top, bottom;
+          in >> bottom.x >> bottom.y >> top.x >> top.y;
+          shape[count] = new Rectangle{bottom, top};
+          count++;
         }
-        shape[count++] = new Rectangle{bottom, top};
+        catch (const std::invalid_argument& e)
+        {
+          err << e.what() << '\n';
+        }
       }
       else if (str == "TRIANGLE")
       {
-        point_t one, two, three;
-        if (!(in >> one.x >> one.y >> two.x >> two.y >> three.x >> three.y))
+        try
         {
-          err << "Invalid triangle input\n";
-          destroy(shape, count);
-          return -1;
+          point_t one, two, three;
+          in >> one.x >> one.y;
+          in >> two.x >> two.y;
+          in >> three.x >> three.y;
+          shape[count] = new Triangle{one, two, three};
+          count++;
         }
-        shape[count++] = new Triangle{one, two, three};
+        catch (const std::invalid_argument& e)
+        {
+          err << e.what() << '\n';
+        }
       }
       else if (str == "DIAMOND")
       {
-        point_t one, two, three;
-        if (!(in >> one.x >> one.y >> two.x >> two.y >> three.x >> three.y))
+        try
         {
-          err << "Invalid diamond input\n";
-          destroy(shape, count);
-          return -1;
+          point_t one, two, three;
+          in >> one.x >> one.y;
+          in >> two.x >> two.y;
+          in >> three.x >> three.y;
+          shape[count] = new Diamond{one, two, three};
+          count++;
         }
-        shape[count++] = new Diamond{one, two, three};
+        catch (const std::invalid_argument& e)
+        {
+          err << e.what() << '\n';
+        }
       }
       else if (str == "SCALE")
       {
         isScaled = true;
-        point_t goCentre;
-        double k;
         if (count == 0)
         {
           err << "Nothing to scale\n";
-          destroy(shape, count);
           return -1;
         }
-        if (!(in >> goCentre.x >> goCentre.y >> k))
+        point_t goCentre;
+        double k;
+        in >> goCentre.x >> goCentre.y >> k;
+        try
         {
-          err << "Invalid scale parameters\n";
+          outRes(out, shape, count);
+          scaling(shape, count, goCentre, k);
+          outRes(out, shape, count);
+        }
+        catch (const std::invalid_argument& e)
+        {
+          err << e.what() << '\n';
           destroy(shape, count);
           return -1;
         }
-        scaling(shape, count, goCentre, k);
       }
     }
   }
-  catch (const std::invalid_argument& e)
+  catch (const std::runtime_error& e)
   {
     err << e.what() << '\n';
     destroy(shape, count);
-    return 1;
-  }
-
-  if (!isScaled)
-  {
-    destroy(shape, count);
     return -1;
   }
-  return 0;
 }
 
 void shramko::destroy(Shape** shape, size_t count)
