@@ -6,5 +6,6 @@ namespace evstyunichev
   char * get_string(std::istream &, char end = '\n');
   char * resize_str(size_t, const char *old = nullptr);
   size_t copy(const char *, char *);
+  void skip_to_sign(std::istream &, char end = '\n');
 }
 #endif
