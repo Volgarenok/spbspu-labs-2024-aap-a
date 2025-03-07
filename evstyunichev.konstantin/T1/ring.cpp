@@ -12,6 +12,10 @@ evstyunichev::Ring::Ring(point_t middle, double R, double r):
   {
     throw std::invalid_argument("R is not bigger than r");
   }
+  else if (r <= 0)
+  {
+    throw std::invalid_argument("invalid radius!");
+  }
 }
 
 double evstyunichev::Ring::getArea() const

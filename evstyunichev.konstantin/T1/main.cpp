@@ -25,6 +25,7 @@ int main()
       {
         scaleFlag = 1;
         makeScale(compShp, std::cin);
+        break;
       }
       else
       {

@@ -14,7 +14,7 @@ namespace evstyunichev
       void move(double, double) override;
       void move(point_t) override;
       void scale(double k) override;
-      Shape *clone() const override;
+      Shape * clone() const override;
 
     private:
       point_t leftDown_;
