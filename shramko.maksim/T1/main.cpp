@@ -16,7 +16,6 @@ int main()
 
     if (count == static_cast< size_t >(-1))
     {
-      shramko::destroy(shape, count);
       return 1;
     }
 
