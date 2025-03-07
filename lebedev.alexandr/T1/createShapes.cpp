@@ -13,7 +13,7 @@ lebedev::Rectangle* lebedev::createRectangle(std::istream& input)
 {
   double x1 = 0, y1 = 0, x2 = 0, y2 = 0;
   input >> x1 >> y1 >> x2 >> y2;
-  return new lebedev::Rectangle({ x1, y1 }, { x2, y2 });
+  return new Rectangle({ x1, y1 }, { x2, y2 });
 }
 
 lebedev::Diamond* lebedev::createDiamond(std::istream& input)
@@ -22,7 +22,7 @@ lebedev::Diamond* lebedev::createDiamond(std::istream& input)
   input >> p1.x >> p1.y >> p2.x >> p2.y >> p3.x >> p3.y;
 
   sortPoints(p1, p2, p3);
-  return new lebedev::Diamond(p2, p3, p1);
+  return new Diamond(p2, p3, p1);
 }
 
 lebedev::Concave* lebedev::createConcave(std::istream& input)
@@ -30,6 +30,5 @@ lebedev::Concave* lebedev::createConcave(std::istream& input)
   double x1 = 0, y1 = 0, x2 = 0, y2 = 0, x3 = 0, y3 = 0, x4 = 0, y4 = 0;
   input >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
 
-  lebedev::Concave* cncv = new lebedev::Concave({ x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 });
-  return cncv;
+  return new Concave({ x1, y1 }, { x2, y2 }, { x3, y3 }, { x4, y4 });
 }

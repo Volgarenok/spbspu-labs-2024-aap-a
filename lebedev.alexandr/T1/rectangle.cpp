@@ -2,14 +2,14 @@
 #include <stdexcept>
 #include "base-types.hpp"
 
-lebedev::Rectangle::Rectangle(point_t leftDown, point_t rightUp)
+lebedev::Rectangle::Rectangle(point_t leftDown, point_t rightUp):
+  leftDown_(leftDown),
+  rightUp_(rightUp)
 {
   if (leftDown.x >= rightUp.x || leftDown.y >= rightUp.y)
   {
     throw std::invalid_argument("");
   }
-  leftDown_ = leftDown;
-  rightUp_ = rightUp;
 }
 
 double lebedev::Rectangle::getArea() const

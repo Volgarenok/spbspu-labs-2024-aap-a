@@ -1,7 +1,7 @@
 #ifndef ACTIONSWITHSHAPES_HPP
 #define ACTIONSWITHSHAPES_HPP
-#include "shape.hpp"
 #include <ostream>
+#include "shape.hpp"
 
 namespace lebedev
 {
