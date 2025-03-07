@@ -8,12 +8,12 @@
 
 namespace kushekbaev
 {
-  double getTotalArea(const size_t shapeCounter, const CompositeShape** compShape);
-  void scaleAll(const size_t shapeCounter, point_t scalePoint, const double scaleCoeff, const CompositeShape** compShape);
-  void scaleSafe(const size_t shapeCounter, point_t scalePoint, const double scaleCoeff, const CompositeShape** compShape);
-  void outputCoord(std::ostream& out, const CompositeShape** compShape);
-  void clearMemory(const size_t shapeCounter, CompositeShape** compShape);
-  void printFrameCoordinates(std::ostream& out, const CompositeShape* compShape);
+  void output(std::ostream& out, CompositeShape& shaps, const point_t& point, double k);
+  void scale_point(Shape* object, const point_t& t, double k);
+  void output_points(std::ostream& out, const CompositeShape& shaps);
+  void output_sum(std::ostream& out, const CompositeShape& shaps);
+  void scaleNoCheck(CompositeShape& shaps, const point_t& point, double k);
+  void scaleCheck(CompositeShape& shaps, const point_t& point, double k);
 }
 
 #endif

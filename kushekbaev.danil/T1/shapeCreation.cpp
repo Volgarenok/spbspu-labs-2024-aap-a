@@ -58,6 +58,15 @@ namespace kushekbaev
     return new Diamond({ first, second, third });
   }
 
+  void makeScale(std::istream& in, point_t& scalePoint, double& scaleCoeff)
+  {
+    in >> scalePoint.x >> scalePoint.y >> scaleCoeff;
+    if (!in)
+    {
+      throw std::logic_error("Error while reading scale params\n");
+    }
+  }
+
   void createShape(std::istream& in, CompositeShape compShape, point_t& scalePoint, double& scaleCoeff, std::string shapeName)
   {
     Shape* shape = nullptr;
@@ -77,6 +86,10 @@ namespace kushekbaev
     else if (shapeName == "DIAMOND")
     {
       shape = makeDiamond(in);
+    }
+    else if (shapeName == "SCALE")
+    {
+      makeScale(in, scalePoint, scaleCoeff);
     }
     else
     {

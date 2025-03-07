@@ -1,86 +1,69 @@
 #include "shapeManipulations.hpp"
+#include <iomanip>
 
 namespace kushekbaev
 {
-  double getTotalArea(size_t shapeCounter, CompositeShape** compShape)
+  void output(std::ostream& out, CompositeShape& compShape, const point_t& scalePoint, double scaleCoeff)
   {
-    double total = 0;
-    for (size_t i = 0; i < shapeCounter; i++)
-    {
-      if (compShape[i])
-      {
-        total += compShape[i] -> getArea();
-      }
-    }
-    return total;
+    output_sum(out, compShape);
+    output_points(out, compShape);
+    out << "\n";
+    scaleNoCheck(compShape, scalePoint, scaleCoeff);
+    output_sum(out, compShape);
+    output_points(out, compShape);
+    out << "\n";
   }
 
-  void scaleAll(size_t shapeCounter, point_t scalePoint, double scaleCoeff, CompositeShape** compShape)
+  void output_sum(std::ostream& out, const CompositeShape& compShape)
   {
-    for (size_t i = 0; i < shapeCounter; i++)
+    double sum = 0;
+    for (size_t i = 0; i < compShape.size(); i++)
     {
-      if (compShape[i])
-      {
-        compShape[i]->scaleEverything(*compShape, scalePoint, scaleCoeff);
-      }
+      sum += compShape[i]->getArea();
+    }
+    out << std::fixed;
+    out << std::setprecision(1) << sum;
+  }
+
+  void output_points(std::ostream& out, const CompositeShape& compShape)
+  {
+    for (size_t i = 0; i < compShape.size(); i++)
+    {
+      rectangle_t rec = compShape[i]->getFrameRect();
+      double x1 = rec.pos.x - (rec.width / 2);
+      double y1 = rec.pos.y - (rec.height / 2);
+      double x2 = rec.pos.x + (rec.width / 2);
+      double y2 = rec.pos.y + (rec.height / 2);
+      out << std::fixed;
+      out << std::setprecision(1) << " " << x1 << " " << y1 << " " << x2 << " " << y2;
     }
   }
 
-  void scaleSafe(size_t shapeCounter, point_t scalePoint, double scaleCoeff, CompositeShape** compShape)
+  void scaleNoCheck(CompositeShape& compShape, const point_t& scalePoint, double scaleCoeff)
+  {
+    for (size_t i = 0; i < compShape.size(); i++)
+    {
+      scaleToPoint(compShape[i], scalePoint, scaleCoeff);
+    }
+  }
+
+  void scaleCheck(CompositeShape& compShape, const point_t& scalePoint, double scaleCoeff)
   {
     if (scaleCoeff <= 0)
     {
-      throw std::logic_error("Scale coeffitient must be greater than zero\n");
+      throw std::logic_error("Incorrect scale");
     }
-    scaleAll(shapeCounter, scalePoint, scaleCoeff, compShape);
+    scaleNoCheck(compShape, scalePoint, scaleCoeff);
   }
 
-  void outputCoord(std::ostream& out, CompositeShape** compShape)
+  void scaleToPoint(Shape* object, const point_t& t, double scaleCoeff)
   {
-    if (compShape && *compShape)
-    {
-      CompositeShape* compShapePtr = *compShape;
-      size_t shapeCounter = compShapePtr->size();
-      for (size_t i = 0; i < shapeCounter; ++i)
-      {
-        if (compShapePtr->at(i))
-        {
-          rectangle_t rect = compShapePtr->at(i)->getFrameRect();
-          double leftDownX = rect.pos.x - rect.width / 2;
-          double leftDownY = rect.pos.y - rect.height / 2;
-          double rightUpX = rect.pos.x + rect.width / 2;
-          double rightUpY = rect.pos.y + rect.height / 2;
-          out << " " << leftDownX << " " << leftDownY << " " << rightUpX << " " << rightUpY;
-        }
-      }
-    }
-  }
-
-  void clearMemory(size_t shapeCounter, CompositeShape** compShape)
-  {
-    for (size_t i = 0; i < shapeCounter; ++i)
-    {
-      delete compShape[i];
-    }
-  }
-
-  void printFrameCoordinates(std::ostream& out, const CompositeShape* compShape)
-  {
-    if (compShape && compShape->size() > 0)
-    {
-      for (size_t i = 0; i < compShape->size(); ++i)
-      {
-        rectangle_t frame = compShape->at(i)->getFrameRect();
-        double leftx = frame.pos.x - frame.width / 2.0;
-        double lefty = frame.pos.y - frame.height / 2.0;
-        double rightx = frame.pos.x + frame.width / 2.0;
-        double righty = frame.pos.y + frame.height / 2.0;
-        out << leftx << " " << lefty << " " << rightx << " " << righty;
-        if (i < compShape->size() - 1)
-        {
-          out << " ";
-        }
-      }
-    }
+    point_t centr_rec1 = object->getFrameRect().pos;
+    object->move(t);
+    point_t centr_rec2 = object->getFrameRect().pos;
+    double x = centr_rec2.x - centr_rec1.x;
+    double y = centr_rec2.y - centr_rec1.y;
+    object->scale(scaleCoeff);
+    object->move(-(x * scaleCoeff), -(y * scaleCoeff));
   }
 }

@@ -7,6 +7,7 @@
 #include "rectangle.hpp"
 #include "diamond.hpp"
 #include "parallelogram.hpp"
+#include "composite-shape.hpp"
 
 namespace kushekbaev
 {
@@ -14,6 +15,7 @@ namespace kushekbaev
   Concave* makeConcave(std::istream& in);
   Parallelogram* makeParallelogram(std::istream& in);
   Diamond* makeDiamond(std::istream& in);
+  void makeScale(std::istream& in, point_t& scalePoint, double& scaleCoeff);
   void createShape(std::istream& in, CompositeShape compShape, point_t& scalePoint, double& scaleCoeff, std::string shapeName);
 }
 
