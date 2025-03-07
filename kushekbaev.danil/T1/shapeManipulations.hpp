@@ -8,12 +8,12 @@
 
 namespace kushekbaev
 {
-  void output(std::ostream& out, CompositeShape& shaps, const point_t& point, double k);
-  void scaleToPoint(Shape* object, const point_t& t, double k);
-  void outputPoints(std::ostream& out, const CompositeShape& shaps);
-  void outputSum(std::ostream& out, const CompositeShape& shaps);
-  void scaleNoCheck(CompositeShape& shaps, const point_t& point, double k);
-  void scaleCheck(CompositeShape& shaps, const point_t& point, double k);
+  void output(std::ostream& out, CompositeShape& compShape, const point_t& scalePoint, double scaleCoeff);
+  void outputSum(std::ostream& out, const CompositeShape& compShape);
+  void outputPoints(std::ostream& out, const CompositeShape& compShape);
+  void scaleToPoint(Shape* object, const point_t& t, double scaleCoeff);
+  void scaleNoCheck(CompositeShape& compShape, const point_t& scalePoint, double scaleCoeff);
+  void scaleCheck(CompositeShape& compShape, const point_t& scalePoint, double scaleCoeff);
 }
 
 #endif
