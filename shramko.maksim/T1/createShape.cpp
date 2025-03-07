@@ -3,41 +3,29 @@
 #include "triangle.hpp"
 #include "diamond.hpp"
 #include "outRes.hpp"
-
 double shramko::getEveryArea(Shape** shape, size_t count)
 {
   double everyArea = 0.0;
-  for (size_t i = 0; i < count; ++i)
+  for (size_t i = 0; i < count; i++)
   {
-    if (shape[i])
-    {
-      everyArea += shape[i]->getArea();
-    }
+    everyArea += shape[i]->getArea();
   }
   return everyArea;
 }
-
 void shramko::scaling(Shape** shape, size_t count, point_t centre, double k)
 {
   for (size_t i = 0; i < count; i++)
   {
-    if (!shape[i])
-    {
-      continue;
-    }
-
     point_t center = shape[i]->getFrameRect().pos;
     shape[i]->move(centre);
     point_t centreTwo = shape[i]->getFrameRect().pos;
 
-    double diffX = (centreTwo.x - center.x) * k * -1;
-    double diffY = (centreTwo.y - center.y) * k * -1;
-
+    double diffX = (centreTwo.x - center.x) * k * - 1;
+    double diffY = (centreTwo.y - center.y) * k * - 1;
     shape[i]->scale(k);
     shape[i]->move(diffX, diffY);
   }
 }
-
 int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out, Shape** shape)
 {
   std::string str;
@@ -106,7 +94,6 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
         in >> goCentre.x >> goCentre.y >> k;
         try
         {
-          outRes(out, shape, count);
           scaling(shape, count, goCentre, k);
           outRes(out, shape, count);
         }
@@ -125,28 +112,17 @@ int shramko::createShape(std::istream& in, std::ostream& err, std::ostream& out,
     destroy(shape, count);
     return -1;
   }
-
-  if (!isScaled)
+  if (isScaled)
   {
-    destroy(shape, count);
-    return -1;
+    outRes(out, shape, count);
   }
+  destroy(shape, count);
   return count;
 }
-
 void shramko::destroy(Shape** shape, size_t count)
 {
-  if (!shape || count == 0)
+  for (size_t i = 0; i < count; i++)
   {
-    return;
-  }
-
-  for (size_t i = 0; i < count; ++i)
-  {
-    if (shape[i] != nullptr)
-    {
-      delete shape[i];
-      shape[i] = nullptr;
-    }
+    delete shape[i];
   }
 }
