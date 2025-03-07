@@ -58,36 +58,41 @@ namespace kushekbaev
     return new Diamond({ first, second, third });
   }
 
-  Shape* createShape(std::istream& in, std::string shapeName)
+  void createShape(std::istream& in, CompositeShape compShape, point_t& scalePoint, double& scaleCoeff, std::string shapeName)
   {
     Shape* shape = nullptr;
-    try
+
+    if (shapeName == "RECTANGLE")
     {
-      if (shapeName == "RECTANGLE")
+      shape = makeRectangle(in);
+    }
+    else if (shapeName == "CONCAVE")
+    {
+      shape = makeConcave(in);
+    }
+    else if (shapeName == "PARALLELOGRAM")
+    {
+      shape = makeParallelogram(in);
+    }
+    else if (shapeName == "DIAMOND")
+    {
+      shape = makeDiamond(in);
+    }
+    else
+    {
+      throw std::logic_error("Unsupported shape type\n");
+    }
+    if (shapeName != "SCALE")
+    {
+      try
       {
-        shape = makeRectangle(in);
+        compShape.push_back(shape);
       }
-      else if (shapeName == "CONCAVE")
+      catch (const std::bad_alloc& e)
       {
-        shape = makeConcave(in);
-      }
-      else if (shapeName == "PARALLELOGRAM")
-      {
-        shape = makeParallelogram(in);
-      }
-      else if (shapeName == "DIAMOND")
-      {
-        shape = makeDiamond(in);
-      }
-      else
-      {
-        throw std::invalid_argument("Unsupported shape type\n");
+        delete shape;
+        throw;
       }
     }
-    catch (const std::invalid_argument&)
-    {
-      return nullptr;
-    }
-    return shape;
   }
 }

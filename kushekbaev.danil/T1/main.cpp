@@ -1,126 +1,55 @@
-#include <iomanip>
+#include <string>
 #include <iostream>
-#include "shapeManipulations.hpp"
 #include "shapeBreeding.hpp"
-#include "shape.hpp"
 #include "shapeCreation.hpp"
+#include "shapeManipulations.hpp"
+#include "shape.hpp"
 #include "composite-shape.hpp"
 
 int main()
 {
   using namespace kushekbaev;
-  size_t capacity = 10000;
-  CompositeShape* compShape = new CompositeShape(capacity);
-  size_t shapeCounter = 0;
-  std::string shapeName;
-  point_t scalePoint;
-  Shape* shape = nullptr;
+  point_t scalePoint{0, 0};
   double scaleCoeff = 0;
   bool invalid_argument = false;
-  bool scaleCommandFound = false;
-
-  while (std::cin >> shapeName)
+  CompositeShape compShape(100);
+  std::string shapeName;
+  while (std::cin >> shapeName && !std::cin.eof())
   {
-    if (std::cin.eof())
-    {
-      std::cerr << "EOF!\n";
-      delete compShape;
-      return 1;
-    }
-
-    if (shapeName == "SCALE")
-    {
-      scaleCommandFound = true;
-      try
-      {
-        scalePoint = makeScale(std::cin);
-        std::cin >> scaleCoeff;
-        if (scaleCoeff <= 0)
-        {
-          throw std::logic_error("ERROR: Incorrect scale coefficient\n");
-        }
-      }
-      catch (const std::logic_error&)
-      {
-        std::cerr << "ERROR: Incorrect scale coefficient\n";
-        delete compShape;
-        return 1;
-      }
-      break;
-    }
-
-    shape = createShape(std::cin, shapeName);
-
-    if (!shape)
-    {
-      invalid_argument = true;
-      continue;
-    }
-
     try
     {
-      compShape->push_back(shape);
-    }
-    catch (const std::bad_alloc&)
-    {
-      delete shape;
-      std::cerr << "Bad allocation\n";
+      createShape(std::cin, compShape, scalePoint, scaleCoeff, shapeName);
     }
 
-    catch (const std::runtime_error&)
+    catch (const std::logic_error& e)
     {
-      std::cerr << "Shapeless input\n";
-      delete compShape;
+      std::cin.clear();
+      invalid_argument = true;
+    }
+
+    catch (const std::bad_alloc& e)
+    {
+      std::cerr << "Bad alloc\n";
       return 1;
     }
   }
 
-  if (!scaleCommandFound)
+  if (compShape.size() == 0)
   {
-    std::cerr << "ERROR: No SCALE command found\n";
-    delete compShape;
+    std::cerr << "Shapeless input\n";
     return 1;
   }
 
-  if (compShape->empty())
+  if (scaleCoeff <= 0)
   {
-    std::cerr << "ERROR: No shapes to scale\n";
-    delete compShape;
-    return 1;
-  }
-
-  kushekbaev::CompositeShape* compShapePtr = compShape;
-
-  try
-  {
-    std::cout << std::fixed << std::setprecision(1) << compShape->getArea();
-
-    std::cout << " ";
-    printFrameCoordinates(std::cout, compShape);
-    std::cout << "\n";
-
-    compShape->scaleEverything(compShape, scalePoint, scaleCoeff);
-    std::cout << compShape->getArea();
-
-    std::cout << " ";
-    printFrameCoordinates(std::cout, compShape);
-    std::cout << "\n";
-
-    clearMemory(shapeCounter, &compShapePtr);
-    delete compShape;
-  }
-
-  catch (const std::logic_error&)
-  {
-    std::cerr << "Scale coefficient must be greater than zero\n";
-    clearMemory(shapeCounter, &compShapePtr);
-    delete compShape;
+    std::cerr << "There was no SCALE command\n";
     return 1;
   }
 
   if (invalid_argument)
   {
-    std::cerr << "Some of inputed shapes were inputed incorrectly\n";
+    std::cerr << "Some shapes were inputed incorrectly\n";
   }
-  return 0;
+
+  output(std::cout, compShape, scalePoint, scaleCoeff);
 }
