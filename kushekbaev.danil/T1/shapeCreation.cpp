@@ -67,7 +67,7 @@ namespace kushekbaev
     }
   }
 
-  void createShape(std::istream& in, CompositeShape compShape, point_t& scalePoint, double& scaleCoeff, std::string shapeName)
+  void createShape(std::istream& in, CompositeShape& compShape, point_t& scalePoint, double& scaleCoeff, std::string shapeName)
   {
     Shape* shape = nullptr;
 

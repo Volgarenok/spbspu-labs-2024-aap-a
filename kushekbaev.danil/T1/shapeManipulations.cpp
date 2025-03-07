@@ -5,16 +5,16 @@ namespace kushekbaev
 {
   void output(std::ostream& out, CompositeShape& compShape, const point_t& scalePoint, double scaleCoeff)
   {
-    output_sum(out, compShape);
-    output_points(out, compShape);
+    outputSum(out, compShape);
+    outputPoints(out, compShape);
     out << "\n";
     scaleNoCheck(compShape, scalePoint, scaleCoeff);
-    output_sum(out, compShape);
-    output_points(out, compShape);
+    outputSum(out, compShape);
+    outputPoints(out, compShape);
     out << "\n";
   }
 
-  void output_sum(std::ostream& out, const CompositeShape& compShape)
+  void outputSum(std::ostream& out, const CompositeShape& compShape)
   {
     double sum = 0;
     for (size_t i = 0; i < compShape.size(); i++)
@@ -25,7 +25,7 @@ namespace kushekbaev
     out << std::setprecision(1) << sum;
   }
 
-  void output_points(std::ostream& out, const CompositeShape& compShape)
+  void outputPoints(std::ostream& out, const CompositeShape& compShape)
   {
     for (size_t i = 0; i < compShape.size(); i++)
     {
