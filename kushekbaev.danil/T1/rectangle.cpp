@@ -56,7 +56,7 @@ namespace kushekbaev
     scalePoints(points, size, scaleCoeff, mid);
   }
 
-  Shape* Rectangle::clone() const noexcept
+  Shape* Rectangle::clone() const
   {
     return new Rectangle(*this);
   }

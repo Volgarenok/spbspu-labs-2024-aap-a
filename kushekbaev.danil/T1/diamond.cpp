@@ -38,7 +38,7 @@ namespace kushekbaev
     return parallelogram_.scale(scaleCoeff);
   }
 
-  Shape* Diamond::clone() const noexcept
+  Shape* Diamond::clone() const
   {
     return new Diamond(*this);
   }

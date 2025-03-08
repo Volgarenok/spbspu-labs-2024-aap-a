@@ -21,13 +21,13 @@ int main()
       createShape(std::cin, compShape, scalePoint, scaleCoeff, shapeName);
     }
 
-    catch (const std::logic_error& e)
+    catch (const std::logic_error&)
     {
       std::cin.clear();
       invalid_argument = true;
     }
 
-    catch (const std::bad_alloc& e)
+    catch (const std::bad_alloc&)
     {
       std::cerr << "Bad alloc\n";
       return 1;

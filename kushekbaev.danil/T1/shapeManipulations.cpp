@@ -1,6 +1,11 @@
 #include "shapeManipulations.hpp"
 #include <iomanip>
 
+namespace
+{
+  const auto default_precision{std::cout.precision()};
+}
+
 namespace kushekbaev
 {
   void output(std::ostream& out, CompositeShape& compShape, const point_t& scalePoint, double scaleCoeff)
@@ -21,8 +26,9 @@ namespace kushekbaev
     {
       sum += compShape[i]->getArea();
     }
-    out << std::fixed;
-    out << std::setprecision(1) << sum;
+    out << std::fixed << std::setprecision(1);
+    out << sum;
+    out << std::defaultfloat << std::setprecision(default_precision);
   }
 
   void outputPoints(std::ostream& out, const CompositeShape& compShape)
@@ -34,8 +40,9 @@ namespace kushekbaev
       double y1 = rec.pos.y - (rec.height / 2);
       double x2 = rec.pos.x + (rec.width / 2);
       double y2 = rec.pos.y + (rec.height / 2);
-      out << std::fixed;
-      out << std::setprecision(1) << " " << x1 << " " << y1 << " " << x2 << " " << y2;
+      out << std::fixed << std::setprecision(1);
+      out << " " << x1 << " " << y1 << " " << x2 << " " << y2;
+      out << std::defaultfloat << std::setprecision(default_precision);
     }
   }
 
