@@ -27,7 +27,6 @@ namespace kushekbaev
     catch (const std::bad_alloc&)
     {
       CompositeShape::~CompositeShape();
-      delete[] array_;
       throw;
     }
   }
@@ -51,30 +50,23 @@ namespace kushekbaev
     delete[] array_;
   }
 
-  CompositeShape& CompositeShape::operator=(const CompositeShape& rhs)
+  kushekbaev::CompositeShape& kushekbaev::CompositeShape::operator=(const CompositeShape& rhs)
   {
-    if (this == &rhs)
+    if (&rhs != this)
     {
-      return *this;
+      CompositeShape cs(rhs);
+      swap(cs);
     }
-    CompositeShape copy(rhs);
-    swap(copy);
     return *this;
   }
 
-  CompositeShape& CompositeShape::operator=(CompositeShape&& rhs) noexcept
+kushekbaev::CompositeShape& kushekbaev::CompositeShape::operator=(CompositeShape&& rhs) noexcept
   {
-    if (this == &rhs)
+    if (std::addressof(rhs) != this)
     {
-      return *this;
+      CompositeShape::~CompositeShape();
+      swap(rhs);
     }
-    CompositeShape::~CompositeShape();
-    array_ = rhs.array_;
-    capacity_ = rhs.capacity_;
-    shapeCounter_ = rhs.shapeCounter_;
-    rhs.array_ = nullptr;
-    rhs.shapeCounter_ = 0;
-    rhs.capacity_ = 0;
     return *this;
   }
 
@@ -85,8 +77,8 @@ namespace kushekbaev
 
   Shape* CompositeShape::operator[](size_t id) noexcept
   {
-    return const_cast<Shape*>(static_cast<const CompositeShape&>(*this).operator[](id));
-  }
+    return const_cast< Shape* >(static_cast< const CompositeShape& >(*this).operator[](id));
+    }
 
   double CompositeShape::getArea() const
   {
@@ -105,22 +97,21 @@ namespace kushekbaev
 
   rectangle_t CompositeShape::getFrameRect() const
   {
-    double lowerLeftX = 0;
-    double lowerLeftY = 0;
-    double upperRightX = 0;
-    double upperRightY = 0;
+    double lLX = 0;
+    double lLY = 0;
+    double uRX = 0;
+    double uRY = 0;
     for (size_t i = 0; i < shapeCounter_; i++)
     {
       double height = array_[i]->getFrameRect().height;
       double width = array_[i]->getFrameRect().width;
       point_t scaleCoeff = array_[i]->getFrameRect().pos;
-      lowerLeftX = std::fmin(lowerLeftX, scaleCoeff.x - width / 2);
-      lowerLeftY = std::fmin(lowerLeftY, scaleCoeff.y - height / 2);
-      upperRightX = std::fmax(upperRightX, scaleCoeff.x + width / 2);
-      upperRightY = std::fmax(upperRightY, scaleCoeff.y + height / 2);
+      lLX = std::fmin(lLX, scaleCoeff.x - width / 2);
+      lLY = std::fmin(lLY, scaleCoeff.y - height / 2);
+      uRX = std::fmax(uRX, scaleCoeff.x + width / 2);
+      uRY = std::fmax(uRY, scaleCoeff.y + height / 2);
     }
-    return {upperRightX - lowerLeftX, upperRightY - lowerLeftY,
-           {(upperRightX + lowerLeftX) / 2, (upperRightY + lowerLeftY) / 2}};
+    return { uRX - lLX, uRY - lLY, { (uRX + lLX) / 2, (uRY + lLY) / 2} };
   }
 
   void CompositeShape::move(point_t scalePoint)
@@ -146,7 +137,7 @@ namespace kushekbaev
       point_t beforeScale = array_[i]->getFrameRect().pos;
       array_[i]->move(scalePoint);
       point_t afterScale = array_[i]->getFrameRect().pos;
-      point_t vector = {(afterScale.x - beforeScale.x) * scaleCoeff, (afterScale.y - beforeScale.y) * scaleCoeff};
+      point_t vector = { (afterScale.x - beforeScale.x) * scaleCoeff, (afterScale.y - beforeScale.y) * scaleCoeff };
       array_[i]->scale(scaleCoeff);
       array_[i]->move(-vector.x, -vector.y);
     }
@@ -204,7 +195,7 @@ namespace kushekbaev
       point_t start = compShape[i].getFrameRect().pos;
       compShape[i].move(scalePoint);
       point_t end = compShape[i].getFrameRect().pos;
-      point_t vector = {(end.x - start.x) * scaleCoeff, (end.y - start.y) * scaleCoeff};
+      point_t vector = { (end.x - start.x) * scaleCoeff, (end.y - start.y) * scaleCoeff };
       compShape[i].scale(scaleCoeff);
       compShape[i].move(-vector.x,  -vector.y);
     }

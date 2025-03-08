@@ -12,9 +12,7 @@ namespace kushekbaev
       double side1 = getLineLength(first, second);
       double side2 = getLineLength(second, third);
       double side3 = getLineLength(first, third);
-      return((side1 + side2 > side3) &&
-            (side1 + side3 > side2) &&
-            (side2 + side3 > side1));
+      return((side1 + side2 > side3) && (side1 + side3 > side2) && (side2 + side3 > side1));
     }
 
     bool isPointInsideTriangle(point_t first, point_t second, point_t third, point_t last)

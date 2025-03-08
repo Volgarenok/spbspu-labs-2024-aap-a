@@ -40,8 +40,6 @@ namespace kushekbaev
     Shape** array_;
     size_t capacity_;
     size_t shapeCounter_;
-
-    Shape** creatingNewArray(Shape** array, size_t old_size, size_t new_size);
     void swap(CompositeShape& rhs);
     void scaleArray(size_t size);
   };
