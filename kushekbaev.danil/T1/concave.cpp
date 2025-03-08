@@ -15,7 +15,7 @@ namespace kushekbaev
       throw std::invalid_argument("Incorrect concave\n");
     }
   }
-  
+
   double Concave::getArea() const
   {
     double standart = getAreaOfTriangle(points_[0], points_[1], points_[2]);
