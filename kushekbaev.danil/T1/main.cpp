@@ -9,7 +9,7 @@
 int main()
 {
   using namespace kushekbaev;
-  point_t scalePoint{0, 0};
+  point_t scalePoint{ 0, 0 };
   double scaleCoeff = 0;
   bool invalid_argument = false;
   CompositeShape compShape(100);

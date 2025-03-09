@@ -50,7 +50,7 @@ namespace kushekbaev
     delete[] array_;
   }
 
-  kushekbaev::CompositeShape& kushekbaev::CompositeShape::operator=(const CompositeShape& rhs)
+  CompositeShape& CompositeShape::operator=(const CompositeShape& rhs)
   {
     if (&rhs != this)
     {
@@ -60,7 +60,7 @@ namespace kushekbaev
     return *this;
   }
 
-kushekbaev::CompositeShape& kushekbaev::CompositeShape::operator=(CompositeShape&& rhs) noexcept
+  CompositeShape& CompositeShape::operator=(CompositeShape&& rhs) noexcept
   {
     if (std::addressof(rhs) != this)
     {
@@ -174,7 +174,7 @@ kushekbaev::CompositeShape& kushekbaev::CompositeShape::operator=(CompositeShape
 
   Shape* CompositeShape::at(size_t id)
   {
-    return const_cast<Shape*>(static_cast<const CompositeShape&>(*this).at(id));
+    return const_cast< Shape* >(static_cast< const CompositeShape& >(*this).at(id));
   }
 
   bool CompositeShape::empty() const noexcept

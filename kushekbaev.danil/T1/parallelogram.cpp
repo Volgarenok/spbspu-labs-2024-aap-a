@@ -15,7 +15,7 @@ namespace
 namespace kushekbaev
 {
   Parallelogram::Parallelogram(point_t first, point_t second, point_t third):
-    points_{first, second, third}
+    points_{ first, second, third }
   {
     bool isParToXflag = isParToX(first, second) || isParToX (second, third) || isParToX(first, third);
     if (!details::isTriangle(first, second, third) || !isParToXflag)

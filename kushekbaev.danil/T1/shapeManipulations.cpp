@@ -3,7 +3,7 @@
 
 namespace
 {
-  const auto default_precision{std::cout.precision()};
+  const auto default_precision{ std::cout.precision() };
 }
 
 namespace kushekbaev
