@@ -2,7 +2,6 @@
 #include <stdexcept>
 #include <algorithm>
 #include "base-types.hpp"
-#include "shapeBreeding.hpp"
 #include "shapeUtils.hpp"
 
 namespace kushekbaev

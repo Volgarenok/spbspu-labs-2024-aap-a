@@ -1,7 +1,6 @@
 #include "parallelogram.hpp"
 #include <stdexcept>
 #include <cmath>
-#include "shapeBreeding.hpp"
 #include "shapeUtils.hpp"
 
 namespace
