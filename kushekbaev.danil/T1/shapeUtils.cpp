@@ -30,7 +30,7 @@ namespace kushekbaev
       points[i]->y += dy;
     }
   }
-  
+
   void scalePoints(point_t** points, size_t size, double scaleCoeff, point_t mid)
   {
     for (size_t i = 0; i < size; i++)
