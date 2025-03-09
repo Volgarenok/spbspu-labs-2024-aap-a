@@ -42,9 +42,12 @@ dribas::CompositeShape& dribas::CompositeShape::operator=(CompositeShape&& shp) 
   if (std::addressof(shp) != this) {
     clear();
     size_ = shp.size_;
-    for (size_t i = 0; i < size_; ++i) {
+    for (size_t i = 0; i < size_; i++) {
       shapes_[i] = shp.shapes_[i];
       shp.shapes_[i] = nullptr;
+    }
+    for (size_t i = size_; i < 10000; i++) {
+      shapes_[i] = nullptr;
     }
     shp.size_ = 0;
   }
