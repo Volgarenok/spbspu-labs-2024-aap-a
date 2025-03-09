@@ -34,15 +34,11 @@ int main()
     }
   }
 
+  std::cin >> scalePoint.x >> scalePoint.y >> scaleCoeff;
+
   if (scaleCoeff <= 0)
   {
     std::cerr << "There was no SCALE command\n";
-    return 1;
-  }
-
-  if (!(std::cin >> scalePoint.x >> scalePoint.y >> scaleCoeff))
-  {
-    std::cerr << "Error while reading params\n";
     return 1;
   }
 
