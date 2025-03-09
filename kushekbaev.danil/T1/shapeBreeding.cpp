@@ -23,12 +23,4 @@ namespace kushekbaev
       return ((fstcheck > 0 && sndcheck > 0 && trdcheck > 0) || (fstcheck < 0 && sndcheck < 0 && trdcheck < 0));
     }
   }
-
-  point_t makeScale(std::istream& in)
-  {
-    double x = 0;
-    double y = 0;
-    in >> x >> y;
-    return { x, y };
-  }
 }
