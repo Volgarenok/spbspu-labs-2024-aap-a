@@ -1,6 +1,5 @@
 #include <string>
 #include <iostream>
-#include "shapeUtils.hpp"
 #include "shapeCreation.hpp"
 #include "shapeManipulations.hpp"
 #include "shape.hpp"

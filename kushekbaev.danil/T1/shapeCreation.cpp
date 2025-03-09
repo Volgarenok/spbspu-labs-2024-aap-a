@@ -1,6 +1,4 @@
 #include "shapeCreation.hpp"
-#include <iomanip>
-#include "shapeUtils.hpp"
 #include "shapeManipulations.hpp"
 
 namespace
