@@ -5,7 +5,7 @@
 
 namespace kushekbaev
 {
-  class Parallelogram : public Shape
+  class Parallelogram: public Shape
   {
   public:
     Parallelogram(const point_t first, const point_t second, const point_t third);
