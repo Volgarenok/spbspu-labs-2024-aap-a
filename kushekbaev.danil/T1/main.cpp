@@ -34,20 +34,21 @@ int main()
     }
   }
 
+  if (scaleCoeff <= 0)
+  {
+    std::cerr << "There was no SCALE command\n";
+    return 1;
+  }
+
   if (!(std::cin >> scalePoint.x >> scalePoint.y >> scaleCoeff))
   {
-    throw std::logic_error("Error while reading scale params\n");
+    std::cerr << "Error while reading params\n";
+    return 1;
   }
 
   if (compShape.size() == 0)
   {
     std::cerr << "Shapeless input\n";
-    return 1;
-  }
-
-  if (scaleCoeff <= 0)
-  {
-    std::cerr << "There was no SCALE command\n";
     return 1;
   }
 
