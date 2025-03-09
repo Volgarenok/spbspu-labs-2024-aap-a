@@ -18,7 +18,7 @@ int main()
   {
     try
     {
-      createShape(std::cin, compShape, scalePoint, scaleCoeff, shapeName);
+      createShape(std::cin, compShape, shapeName);
     }
 
     catch (const std::logic_error&)
