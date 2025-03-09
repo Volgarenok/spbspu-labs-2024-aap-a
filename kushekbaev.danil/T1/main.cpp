@@ -14,7 +14,7 @@ int main()
   bool invalid_argument = false;
   CompositeShape compShape(100);
   std::string shapeName;
-  while (std::cin >> shapeName && !std::cin.eof())
+  while ((std::cin >> shapeName && shapeName != "SCALE") && !std::cin.eof())
   {
     try
     {
@@ -32,6 +32,11 @@ int main()
       std::cerr << "Bad alloc\n";
       return 1;
     }
+  }
+
+  if (!(std::cin >> scalePoint.x >> scalePoint.y >> scaleCoeff))
+  {
+    throw std::logic_error("Error while reading scale params\n");
   }
 
   if (compShape.size() == 0)
