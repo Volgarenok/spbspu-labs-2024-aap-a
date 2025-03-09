@@ -32,6 +32,7 @@ namespace dribas
     void clear() noexcept;
     void scaleSilent(double ratio);
     void scaleWithCenter(point_t center, double ratio);
+    void swap(CompositeShape& rhs);
 
   private:
     Shape* shapes_[10000];

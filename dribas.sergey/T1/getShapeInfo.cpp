@@ -9,10 +9,10 @@
 #include "shape.hpp"
 #include "triangle.hpp"
 
-void dribas::scaleOne(Shape& t, double ratio, point_t Point)
+void dribas::scaleOne(Shape& t, double ratio, point_t point)
 {
   point_t cneter = t.getFrameRect().pos;
-  t.move(Point);
+  t.move(point);
   point_t center2 = t.getFrameRect().pos;
   double diffenceX = (center2.x - cneter.x) * ratio * -1;
   double diffenceY = (center2.y - cneter.y) * ratio * -1;
