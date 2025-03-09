@@ -1,6 +1,7 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
 #include "shape.hpp"
+#include "parallelogram.hpp"
 
 namespace dirti
 {
@@ -14,8 +15,7 @@ namespace dirti
     void move(double x, double y) override;
     void scaleUnsafe(double koef) override;
   private:
-    point_t left_low_;
-    point_t right_high_;
+    Parallelogram parallelogram;
   };
 }
 

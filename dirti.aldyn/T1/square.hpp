@@ -1,6 +1,7 @@
 #ifndef SQUARE_HPP
 #define SQUARE_HPP
 #include "shape.hpp"
+#include "rectangle.hpp"
 
 namespace dirti
 {
@@ -14,8 +15,7 @@ namespace dirti
     void move(double x, double y) override;
     void scaleUnsafe(double koef) override;
   private:
-    point_t left_low_;
-    double length_;
+    Rectangle rectangle;
   };
 }
 
