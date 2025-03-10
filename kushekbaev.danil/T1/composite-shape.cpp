@@ -225,11 +225,12 @@ namespace kushekbaev
     delete[] array_;
   }
 
-  void cloneArray(Shape** destination, const Shape** source, size_t size)
+  void cloneArray(Shape** destination, Shape** source, size_t size)
   {
     for (size_t i = 0; i < size; ++i)
     {
-      destination[i] = source[i].clone();
+      destination[i] = source[i]->clone();
     }
   }
 }
+
