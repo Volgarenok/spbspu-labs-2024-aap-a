@@ -1,11 +1,6 @@
 #include "shapeManipulations.hpp"
 #include <iomanip>
 
-namespace
-{
-  std::ios_base::fmtflags f( std::cout.flags() );
-}
-
 namespace kushekbaev
 {
   void output(std::ostream& out, CompositeShape& compShape, const point_t& scalePoint, double scaleCoeff)
@@ -28,7 +23,7 @@ namespace kushekbaev
     }
     out << std::fixed << std::setprecision(1);
     out << sum;
-    std::cout.flags( f );
+    std::cout.unsetf(std::ios_base::fixed);
   }
 
   void outputPoints(std::ostream& out, const CompositeShape& compShape)
@@ -42,7 +37,7 @@ namespace kushekbaev
       double y2 = rec.pos.y + (rec.height / 2);
       out << std::fixed << std::setprecision(1);
       out << " " << x1 << " " << y1 << " " << x2 << " " << y2;
-      std::cout.flags( f );
+      std::cout.unsetf(std::ios_base::fixed);
     }
   }
 

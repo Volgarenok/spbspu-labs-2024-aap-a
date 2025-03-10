@@ -3,6 +3,15 @@
 #include <cmath>
 #include "shapeManipulations.hpp"
 
+template < typename T >
+void cloneArray(T* destination, const T* source, size_t size)
+{
+  for (size_t i = 0; i < size; ++i)
+  {
+    destination[i] = source[i]->clone();
+  }
+}
+
 namespace kushekbaev
 {
   CompositeShape::CompositeShape(size_t capacity):
@@ -16,22 +25,13 @@ namespace kushekbaev
     capacity_(rhs.capacity_),
     shapeCounter_(rhs.shapeCounter_)
   {
-    size_t i = 0;
     try
     {
-      for (; i < shapeCounter_; ++i)
-      {
-        array_[i] = rhs.array_[i]->clone();
-      }
+      cloneArray(array_, rhs.array_, shapeCounter_);
     }
     catch (const std::bad_alloc&)
     {
-      for (size_t i = 0; i < shapeCounter_; ++i)
-      {
-        delete array_[i];
-      }
-      delete[] array_;
-      throw;
+      clear();
     }
   }
 
@@ -47,11 +47,7 @@ namespace kushekbaev
 
   CompositeShape::~CompositeShape()
   {
-    for (size_t i = 0; i < shapeCounter_; ++i)
-    {
-      delete array_[i];
-    }
-    delete[] array_;
+    clear();
   }
 
   CompositeShape& CompositeShape::operator=(const CompositeShape& rhs)
@@ -68,11 +64,7 @@ namespace kushekbaev
   {
     if (std::addressof(rhs) != this)
     {
-      for (size_t i = 0; i < shapeCounter_; ++i)
-      {
-        delete array_[i];
-      }
-      delete[] array_;
+      clear();
       swap(rhs);
     }
     return *this;
@@ -219,10 +211,25 @@ namespace kushekbaev
   void CompositeShape::scaleArray(size_t size)
   {
     CompositeShape newArray(size);
-    for (size_t i = 0; i < shapeCounter_; ++i, newArray.shapeCounter_++)
-    {
-      newArray.array_[i] = array_[i]->clone();
-    }
+    cloneArray(newArray.array_, array_, shapeCounter_);
+    newArray.shapeCounter_ += shapeCounter_;
     swap(newArray);
+  }
+
+  void CompositeShape::clear()
+  {
+    for (size_t i = 0; i < shapeCounter_; ++i)
+    {
+      delete array_[i];
+    }
+    delete[] array_;
+  }
+
+  void cloneArray(Shape** destination, const Shape* source, size_t size)
+  {
+    for (size_t i = 0; i < size; ++i)
+    {
+      destination[i] = source[i].clone();
+    }
   }
 }
