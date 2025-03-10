@@ -3,15 +3,6 @@
 #include <cmath>
 #include "shapeManipulations.hpp"
 
-template < typename T >
-void cloneArray(T* destination, const T* source, size_t size)
-{
-  for (size_t i = 0; i < size; ++i)
-  {
-    destination[i] = source[i]->clone();
-  }
-}
-
 namespace kushekbaev
 {
   CompositeShape::CompositeShape(size_t capacity):
