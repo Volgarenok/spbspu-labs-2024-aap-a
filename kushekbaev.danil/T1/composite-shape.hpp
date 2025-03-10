@@ -43,7 +43,7 @@ namespace kushekbaev
     void swap(CompositeShape& rhs);
     void scaleArray(size_t size);
     void clear();
-    void cloneArray(Shape** destination, const Shape* source, size_t size);
+    void cloneArray(Shape** destination, const Shape** source, size_t size);
   };
 }
 
