@@ -81,8 +81,7 @@ namespace
     leftLowP.y = y0;
     rightHighP.x = x1;
     rightHighP.y = y1;
-    Rectangle *rectangle = new Rectangle(leftLowP, rightHighP);
-    return rectangle;
+    return new Rectangle(leftLowP, rightHighP);
   }
 
   guseynov::Square* makeSquare(std::istream& in)
@@ -97,8 +96,7 @@ namespace
     point_t leftLowP;
     leftLowP.x = x0;
     leftLowP.y = y0;
-    Square *square = new Square(leftLowP, length);
-    return square;
+    return new Square(leftLowP, length);
   }
 
   guseynov::Parallelogram* makeParallelogram(std::istream& in)
@@ -117,8 +115,7 @@ namespace
     leftHighP.y = y2;
     rightLowP.x = x1;
     rightLowP.y = y1;
-    Parallelogram *parallelogram = new Parallelogram(leftLowP, rightLowP, leftHighP);
-    return parallelogram;
+    return new Parallelogram(leftLowP, rightLowP, leftHighP);
   }
 
   guseynov::Diamond* makeDiamond(std::istream& in)
@@ -169,8 +166,7 @@ namespace
     rightP.y = y1;
     center.x = x2;
     center.y = y2;
-    Diamond *diamond = new Diamond(highP, rightP, center);
-    return diamond;
+    return new Diamond(highP, rightP, center);
   }
   guseynov::Shape* makeShape(std::istream & in, const std::string & name)
   {
