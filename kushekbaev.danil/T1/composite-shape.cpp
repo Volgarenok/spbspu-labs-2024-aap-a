@@ -216,7 +216,7 @@ namespace kushekbaev
     delete[] array_;
   }
 
-  void cloneArray(Shape** destination, Shape** source, size_t size)
+  void CompositeShape::cloneArray(Shape** destination, Shape** source, size_t size)
   {
     for (size_t i = 0; i < size; ++i)
     {
@@ -224,4 +224,3 @@ namespace kushekbaev
     }
   }
 }
-
