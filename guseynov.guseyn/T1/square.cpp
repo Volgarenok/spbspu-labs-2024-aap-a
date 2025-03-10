@@ -12,6 +12,7 @@ guseynov::Square::Square(point_t leftLowP, double length):
     throw std::invalid_argument("Error in SQUARE parameters");
   }
   createArrayRectangle(leftLowP, length, n_, 0);
+  length_ = rectangleArray_[0]->getFrameRect().width * 3;
 }
 
 guseynov::Square::~Square()
@@ -31,14 +32,12 @@ double guseynov::Square::getArea() const
 
 guseynov::rectangle_t guseynov::Square::getFrameRect() const
 {
-  double length = rectangleArray_[0]->getFrameRect().width * 3;
-  return {length, length, {leftLowP_.x + (length / 2), leftLowP_.y + (length / 2)}};
+  return {length_, length_, {leftLowP_.x + (length_ / 2), leftLowP_.y + (length_ / 2)}};
 }
 
 void guseynov::Square::move(point_t pos)
 {
-  double length = rectangleArray_[0]->getFrameRect().width * 3;
-  assigment({pos.x - (length / 2), pos.y - (length / 2)});
+  assigment({pos.x - (length_ / 2), pos.y - (length_ / 2)});
 }
 
 void guseynov::Square::move(double x, double y)
@@ -48,27 +47,27 @@ void guseynov::Square::move(double x, double y)
 
 void guseynov::Square::scaleWithoutCheck(double k)
 {
-  double length = rectangleArray_[0]->getFrameRect().width * 3;
-  assigmentPlusLength({leftLowP_.x - (length * k - length) / 2, leftLowP_.y - (length * k - length) / 2}, length * k);
+  assigment({leftLowP_.x - (length_ * k - length_) / 2, leftLowP_.y - (length_ * k - length_) / 2}, length_ * k);
 }
 
 void guseynov::Square::assigment(point_t leftLowP)
 {
-  double length = rectangleArray_[0]->getFrameRect().width * 3;
+  leftLowP_ = leftLowP;
   clear(n_);
-  createArrayRectangle(leftLowP, length, n_, 0);
+  createArrayRectangle(leftLowP, length_, n_, 0);
 }
 
-void guseynov::Square::assigmentPlusLength(point_t leftLowP, double length)
+void guseynov::Square::assigment(point_t leftLowP, double length)
 {
+  leftLowP_ = leftLowP;
+  length_ = length;
   clear(n_);
-  createArrayRectangle(leftLowP, length, n_, 0);
+  createArrayRectangle(leftLowP, length_, n_, 0);
 }
 
 guseynov::Shape * guseynov::Square::clone() const
 {
-  double length = rectangleArray_[0]->getFrameRect().width * 3;
-  return new Square(leftLowP_, length);
+  return new Square(leftLowP_, length_);
 }
 
 size_t guseynov::Square::determinateNum(double squareLength)

@@ -22,10 +22,11 @@ namespace guseynov
   private:
     point_t leftLowP_;
     size_t n_;
+    double length_;
     guseynov::Rectangle ** rectangleArray_;
     void assigment(point_t leftLowP);
     void createArrayRectangle(point_t lower, double squareLength, const size_t m, size_t n);
-    void assigmentPlusLength(point_t leftLowP, double length);
+    void assigment(point_t leftLowP, double length);
     size_t determinateNum(double squareLength);
     void clear(size_t count);
   };
