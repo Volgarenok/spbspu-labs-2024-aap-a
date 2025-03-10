@@ -95,10 +95,14 @@ void guseynov::Square::createArrayRectangle(guseynov::point_t lower, double squa
     double twoThirdLength = squareLength * 2 / 3;
     try
     {
-      rectangleArray_[n++] = new Rectangle(lower, {lower.x + oneThirdLength, lower.y + twoThirdLength});
-      rectangleArray_[n++] = new Rectangle({lower.x, lower.y + twoThirdLength}, {lower.x + twoThirdLength, lower.y + squareLength});
-      rectangleArray_[n++] = new Rectangle({lower.x + twoThirdLength, lower.y + oneThirdLength}, {lower.x + squareLength, lower.y + squareLength});
-      rectangleArray_[n++] = new Rectangle({lower.x + oneThirdLength, lower.y}, {lower.x + squareLength, lower.y + oneThirdLength});
+      rectangleArray_[n++] = new Rectangle(lower,
+      {lower.x + oneThirdLength, lower.y + twoThirdLength});
+      rectangleArray_[n++] = new Rectangle({lower.x, lower.y + twoThirdLength},
+      {lower.x + twoThirdLength, lower.y + squareLength});
+      rectangleArray_[n++] = new Rectangle({lower.x + twoThirdLength, lower.y + oneThirdLength},
+      {lower.x + squareLength, lower.y + squareLength});
+      rectangleArray_[n++] = new Rectangle({lower.x + oneThirdLength, lower.y},
+      {lower.x + squareLength, lower.y + oneThirdLength});
     }
     catch(const std::bad_alloc &)
     {
