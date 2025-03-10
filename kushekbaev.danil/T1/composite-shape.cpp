@@ -68,7 +68,11 @@ namespace kushekbaev
   {
     if (std::addressof(rhs) != this)
     {
-      CompositeShape::~CompositeShape();
+      for (size_t i = 0; i < shapeCounter_; ++i)
+      {
+        delete array_[i];
+      }
+      delete[] array_;
       swap(rhs);
     }
     return *this;
