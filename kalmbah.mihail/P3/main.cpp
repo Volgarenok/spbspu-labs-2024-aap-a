@@ -5,7 +5,8 @@
 #include "matrix_operations.h"
 
 int main(int argc, char* argv[]) {
-  if (argc != 3) {
+  const char maxArguments = 3;
+  if (argc != maxArguments) {
     std::cerr << "Usage: " << argv[0] << " <input_file> <output_file>\n";
     return 1;
   }
