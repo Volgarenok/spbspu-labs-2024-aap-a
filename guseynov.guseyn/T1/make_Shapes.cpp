@@ -74,7 +74,7 @@ namespace
     in >> x0 >> y0 >> x1 >> y1;
     if (x0 >= x1 || y0 >= y1)
     {
-      return nullptr;
+      throw std::invalid_argument("Rectangle has incorrect parameters");
     }
     point_t leftLowP, rightHighP;
     leftLowP.x = x0;
@@ -91,7 +91,7 @@ namespace
     in >> x0 >> y0 >> length;
     if (length <= 0)
     {
-      return nullptr;
+      throw std::invalid_argument("Square length is incorrect");
     }
     point_t leftLowP;
     leftLowP.x = x0;
@@ -106,7 +106,7 @@ namespace
     in >> x0 >> y0 >> x1 >> y1 >> x2 >> y2;
     if (!(((y0 == y1) && (y0 != y2)) || ((y1 == y2) && (y0 != y1))))
     {
-      return nullptr;
+      throw std::invalid_argument("Parallelogram is not parallel");
     }
     point_t leftLowP, leftHighP, rightLowP;
     leftLowP.x = x0;
@@ -136,7 +136,7 @@ namespace
       }
       else
       {
-        return nullptr;
+        throw std::invalid_argument("Diamond parametrs is incorrect");
       }
     }
     else if (x1 == x2)
@@ -152,12 +152,12 @@ namespace
       }
       else
       {
-        return nullptr;
+        throw std::invalid_argument("Diamond parametrs is incorrect");
       }
     }
     else if (x0 != x2)
     {
-      return nullptr;
+      throw std::invalid_argument("Diamond parametrs is incorrect");
     }
     point_t highP, rightP, center;
     highP.x = x0;
