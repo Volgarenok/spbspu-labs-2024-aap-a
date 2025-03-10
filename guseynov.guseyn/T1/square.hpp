@@ -20,10 +20,11 @@ namespace guseynov
     void scaleWithoutCheck(double k) override;
     Shape * clone() const override;
   private:
+    point_t leftLowP_;
     size_t n_;
     guseynov::Rectangle ** rectangleArray_;
     void assigment(point_t leftLowP);
-    Rectangle ** createArrayRectangle(point_t lower, double squareLength);
+    void createArrayRectangle(point_t lower, double squareLength);
     void assigmentPlusLength(point_t leftLowP, double length);
     size_t determinateNum(double squareLength);
     void clear(size_t count);
