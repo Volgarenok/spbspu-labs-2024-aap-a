@@ -24,7 +24,7 @@ namespace guseynov
     size_t n_;
     guseynov::Rectangle ** rectangleArray_;
     void assigment(point_t leftLowP);
-    void createArrayRectangle(point_t lower, double squareLength);
+    void createArrayRectangle(point_t lower, double squareLength, const size_t m, size_t n);
     void assigmentPlusLength(point_t leftLowP, double length);
     size_t determinateNum(double squareLength);
     void clear(size_t count);

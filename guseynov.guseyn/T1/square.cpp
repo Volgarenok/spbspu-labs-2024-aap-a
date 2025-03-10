@@ -11,7 +11,7 @@ guseynov::Square::Square(point_t leftLowP, double length):
   {
     throw std::invalid_argument("Error in SQUARE parameters");
   }
-  createArrayRectangle(leftLowP, length);
+  createArrayRectangle(leftLowP, length, n_, 0);
 }
 
 guseynov::Square::~Square()
@@ -56,13 +56,13 @@ void guseynov::Square::assigment(point_t leftLowP)
 {
   double length = rectangleArray_[0]->getFrameRect().width * 3;
   clear(n_);
-  createArrayRectangle(leftLowP, length);
+  createArrayRectangle(leftLowP, length, n_, 0);
 }
 
 void guseynov::Square::assigmentPlusLength(point_t leftLowP, double length)
 {
   clear(n_);
-  createArrayRectangle(leftLowP, length);
+  createArrayRectangle(leftLowP, length, n_, 0);
 }
 
 guseynov::Shape * guseynov::Square::clone() const
@@ -82,14 +82,13 @@ size_t guseynov::Square::determinateNum(double squareLength)
   return n;
 }
 
-void guseynov::Square::createArrayRectangle(guseynov::point_t lower, double squareLength)
+void guseynov::Square::createArrayRectangle(guseynov::point_t lower, double squareLength, const size_t m, size_t n)
 {
-  static size_t n = 0;
   if (n == 0)
   {
-    rectangleArray_ = new guseynov::Rectangle*[n_];
+    rectangleArray_ = new guseynov::Rectangle*[m];
   }
-  if (n_ != n)
+  if (m != n)
   {
     double oneThirdLength = squareLength / 3;
     double twoThirdLength = squareLength * 2 / 3;
@@ -109,7 +108,7 @@ void guseynov::Square::createArrayRectangle(guseynov::point_t lower, double squa
       clear(n);
       throw;
     }
-    createArrayRectangle({lower.x + oneThirdLength, lower.y + oneThirdLength}, oneThirdLength);
+    createArrayRectangle({lower.x + oneThirdLength, lower.y + oneThirdLength}, oneThirdLength, m, n);
   }
 }
 
