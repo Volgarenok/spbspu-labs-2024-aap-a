@@ -3,7 +3,7 @@
 
 namespace
 {
-  const auto default_precision{ std::cout.precision() };
+  std::ios_base::fmtflags f( std::cout.flags() );
 }
 
 namespace kushekbaev
@@ -28,7 +28,7 @@ namespace kushekbaev
     }
     out << std::fixed << std::setprecision(1);
     out << sum;
-    out << std::defaultfloat << std::setprecision(default_precision);
+    std::cout.flags( f );
   }
 
   void outputPoints(std::ostream& out, const CompositeShape& compShape)
@@ -42,7 +42,7 @@ namespace kushekbaev
       double y2 = rec.pos.y + (rec.height / 2);
       out << std::fixed << std::setprecision(1);
       out << " " << x1 << " " << y1 << " " << x2 << " " << y2;
-      out << std::defaultfloat << std::setprecision(default_precision);
+      std::cout.flags( f );
     }
   }
 

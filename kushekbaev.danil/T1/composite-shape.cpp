@@ -26,7 +26,11 @@ namespace kushekbaev
     }
     catch (const std::bad_alloc&)
     {
-      CompositeShape::~CompositeShape();
+      for (size_t i = 0; i < shapeCounter_; ++i)
+      {
+        delete array_[i];
+      }
+      delete[] array_;
       throw;
     }
   }
@@ -78,7 +82,7 @@ namespace kushekbaev
   Shape* CompositeShape::operator[](size_t id) noexcept
   {
     return const_cast< Shape* >(static_cast< const CompositeShape& >(*this).operator[](id));
-    }
+  }
 
   double CompositeShape::getArea() const
   {

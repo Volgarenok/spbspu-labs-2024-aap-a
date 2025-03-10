@@ -86,7 +86,7 @@ namespace kushekbaev
       {
         compShape.push_back(shape);
       }
-      catch (const std::bad_alloc& e)
+      catch (const std::bad_alloc&)
       {
         delete shape;
         throw;
