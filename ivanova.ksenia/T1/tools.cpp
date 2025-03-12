@@ -19,7 +19,10 @@ void ivanova::deleteShapes(Shape** shps, size_t size)
 {
   for (size_t i = 0; i < size; ++i)
   {
-    delete shps[i];
+    if (shps[i] != nullptr)
+    {
+      delete shps[i];
+    }
   }
 }
 
@@ -40,12 +43,15 @@ void ivanova::printFrameRect(Shape** shps, size_t size)
 {
   for (size_t i = 0; i < size; ++i)
   {
-    ivanova::rectangle_t rect = shps[i]->getFrameRect();
-    double leftDownX = rect.pos.x - rect.width / 2;
-    double leftDownY = rect.pos.y - rect.height / 2;
-    double rightUpX = rect.pos.x + rect.width / 2;
-    double rightUpY = rect.pos.y + rect.height / 2;
-    std::cout << ' ' << leftDownX << ' ' << leftDownY << ' ' << rightUpX << ' ' << rightUpY;
+    if (shps[i] != nullptr)
+    {
+      ivanova::rectangle_t rect = shps[i]->getFrameRect();
+      double leftDownX = rect.pos.x - rect.width / 2;
+      double leftDownY = rect.pos.y - rect.height / 2;
+      double rightUpX = rect.pos.x + rect.width / 2;
+      double rightUpY = rect.pos.y + rect.height / 2;
+      std::cout << ' ' << leftDownX << ' ' << leftDownY << ' ' << rightUpX << ' ' << rightUpY;
+    }
   }
   std::cout << '\n';
 }
@@ -54,9 +60,12 @@ void ivanova::scale(Shape** shps, size_t size, point_t scalePoint, double k)
 {
   for (size_t i = 0; i < size; ++i)
   {
-    ivanova::point_t begin = shps[i]->getFrameRect().pos;
-    ivanova::point_t offset = {begin.x - scalePoint.x, begin.y - scalePoint.y};
-    shps[i]->scale(k);
-    shps[i]->move(scalePoint.x - (begin.x - offset.x * k), scalePoint.y - (begin.y - offset.y * k));
+    if (shps[i] != nullptr)
+    {
+      ivanova::point_t begin = shps[i]->getFrameRect().pos;
+      ivanova::point_t offset = {begin.x - scalePoint.x, begin.y - scalePoint.y};
+      shps[i]->scale(k);
+      shps[i]->move(scalePoint.x - (begin.x - offset.x * k), scalePoint.y - (begin.y - offset.y * k));
+    }
   }
 }

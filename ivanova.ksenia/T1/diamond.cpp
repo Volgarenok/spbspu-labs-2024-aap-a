@@ -1,5 +1,6 @@
 #include "diamond.hpp"
 #include <cmath>
+#include <stdexcept>
 
 ivanova::Diamond::Diamond(point_t topPoint, point_t bottomPoint, point_t center):
   topPoint_(topPoint), bottomPoint_(bottomPoint), center_(center)

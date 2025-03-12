@@ -1,9 +1,14 @@
 #include "rectangle.hpp"
+#include <stdexcept>
 
 ivanova::Rectangle::Rectangle(point_t leftBottom, point_t rightTop):
  leftBottom_(leftBottom),
  rightTop_(rightTop)
 {
+  if (leftBottom.x >= rightTop.x || leftBottom.y >= rightTop.y)
+  {
+    throw std::invalid_argument("Invalid rectangle parameters: bottomLeft must be less than topRight.");
+  }
 }
 
 double ivanova::Rectangle::getArea() const

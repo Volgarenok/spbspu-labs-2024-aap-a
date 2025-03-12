@@ -25,8 +25,9 @@ int main()
     while (std::cin >> input)
     {
       if (input.empty())
+      {
         continue;
-
+      }
       try
       {
         if (input == "RECTANGLE")
@@ -96,9 +97,12 @@ int main()
     std::cout << std::setprecision(1);
     std::cout << ivanova::getSumArea(shapes, size);
     ivanova::printFrameRect(shapes, size);
+
     ivanova::scale(shapes, size, scaleCenter, k);
+
     std::cout << ivanova::getSumArea(shapes, size);
     ivanova::printFrameRect(shapes, size);
+    
     ivanova::deleteShapes(shapes, size);
     return 0;
   }
