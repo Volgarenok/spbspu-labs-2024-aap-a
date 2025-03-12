@@ -17,7 +17,6 @@ int main()
   double k = 0.0;
   ivanova::point_t scaleCenter = {0, 0};
   std::string coordinates = "";
-  bool isCorrect = false;
   bool isScale = false;
 
   try
@@ -64,6 +63,12 @@ int main()
         ivanova::scale(shapes, size, scaleCenter, k);
         isScale = true;
         }
+        else
+        {
+          std::cerr << "Unknown command: " << input << '\n';
+          ivanova::deleteShapes(shapes, size);
+          return 1;
+        }
       }
       catch (std::bad_alloc & e)
       {
@@ -84,15 +89,12 @@ int main()
       ivanova::deleteShapes(shapes, size);
       return 1;
     }
-    if (isCorrect)
-    {
-      std::cerr << "Input has uncorrects figures!\n";
-    }
     if (size == 0)
     {
       std::cerr << "No figure was entered!" << '\n';
       return 1;
     }
+
     std::cout << std::fixed;
     std::cout << std::setprecision(1);
     std::cout << ivanova::getSumArea(shapes, size);
