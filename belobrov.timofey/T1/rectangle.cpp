@@ -2,7 +2,7 @@
 
 namespace belobrov
 {
-  Rectangle::Rectangle(double x1, double y1, double x2, double y2)
+  Rectangle::Rectangle(const point_t& lowerLeft, const point_t& upperRight)
   {
     lowerLeft_.x = x1;
     lowerLeft_.y = y1;

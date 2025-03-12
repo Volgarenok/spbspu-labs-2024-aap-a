@@ -1,5 +1,6 @@
 #ifndef GEOM_FUNC_HPP
 #define GEOM_FUNC_HPP
+#include <cstddef>
 #include "shape.hpp"
 
 namespace belobrov
