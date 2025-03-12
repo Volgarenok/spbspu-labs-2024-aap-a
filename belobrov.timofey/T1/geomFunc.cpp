@@ -20,4 +20,17 @@ namespace belobrov
       std::cout << " " << frame.pos.x + frame.width / 2 << " " << frame.pos.y + frame.height / 2;
     }
   }
+  double calculateTotalArea(Shape** shapes, size_t count) {
+    double totalArea = 0.0;
+    for (size_t i = 0; i < count; ++i) {
+        totalArea += shapes[i]->getArea();
+    }
+    return totalArea;
+  }
+  void applyIsoScaling(Shape** shapes, size_t count, const point_t& center, double factor) {
+    for (size_t i = 0; i < count; ++i) {
+      shapes[i]->scale(factor);
+      shapes[i]->move(center);
+    }
+  }
 }
