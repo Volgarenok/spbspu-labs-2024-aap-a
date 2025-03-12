@@ -1,4 +1,5 @@
 #include "lungu.h"
+
 namespace lungu
 {
   bool validateArguments(int argc, char *argv[])
