@@ -1,21 +1,27 @@
 #include "taylor.hpp"
+#include <cmath>
 #include <stdexcept>
 
-double beshimow::taylor(double x, size_t k, double error)
+namespace beshimow
 {
-  double taylor = 1;
-  double adding = 1;
-
-  for (size_t i = 1; i < k; i += 2)
+  double taylor_sin(double x, size_t k, double error)
   {
-    adding = -(x * x * adding) / ((i + 1) * (i + 2));
-    taylor += adding;
-  }
+    double sum = 0.0;
+    double term = x;
 
-  if (std::abs(adding) > error)
-  {
-    throw std::logic_error("math-error");
-  }
+    for (size_t n = 1; n <= k; ++n)
+    {
+      sum += term;
+      double nextTerm = -term * x * x / ((2 * n) * (2 * n + 1));
 
-  return taylor;
+      if (std::abs(nextTerm) < error)
+      {
+        break;
+      }
+
+      term = nextTerm;
+    }
+
+    return sum;
+  }
 }
