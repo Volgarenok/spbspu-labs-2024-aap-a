@@ -1,36 +1,30 @@
 #include "rectangle.hpp"
+#include <cmath>
 
 namespace belobrov
 {
   Rectangle::Rectangle(const point_t& lowerLeft, const point_t& upperRight)
   {
-    lowerLeft_.x = x1;
-    lowerLeft_.y = y1;
-    upperRight_.x = x2;
-    upperRight_.y = y2;
+    :lowerLeft_(lowerLeft), upperRight(upperRight) {}
   }
   double Rectangle::getArea() const
   {
-    return (upperRight_.x - lowerLeft_.x) * (upperRight_.y - lowerLeft_.y);
+    return std::abs((upperRight_.x - lowerLeft_.x) * (upperRight_.y - lowerLeft_.y));
   }
   rectangle_t Rectangle::getFrameRect() const
   {
-    rectangle_t frameRect;
-    frameRect.height = upperRight_.y - lowerLeft_.y;
-    frameRect.width = upperRight_.x - lowerLeft_.x;
-    frameRect.pos.x = lowerLeft_.x + (frameRect.width / 2);
-    frameRect.pos.y = lowerLeft_.y + (frameRect.height / 2);
-    return frameRect;
+    return {
+    std::abs(upperRight_.x - lowerLeft_.x),
+    std::abs(upperRight_.y - lowerLeft_.y),
+    { (lowerLeft_.x + upperRight_.x) / 2, (lowerLeft_.y + upperRight_.y) / 2 }
+    };
   }
   void Rectangle::move(point_t newPos)
   {
-    point_t currentPos = getFrameRect().pos;
-    double moveX = newPos.x - currentPos.x;
-    double moveY = newPos.y - currentPos.y;
-    lowerLeft_.x += moveX;
-    upperRight_.x += moveX;
-    lowerLeft_.y += moveY;
-    upperRight_.y += moveY;
+    point_t center = { (lowerLeft_.x + upperRight_.x) / 2, (lowerLeft_.y + upperRight_.y) / 2 };
+    double dx = point.x - center.x;
+    double dy = point.y - center.y;
+    move(dx, dy);
   }
   void Rectangle::move(double dx, double dy)
   {
@@ -41,10 +35,10 @@ namespace belobrov
   }
   void Rectangle::scale(double k)
   {
-    point_t currentPos = getFrameRect().pos;
-    lowerLeft_.x = currentPos.x - (currentPos.x - lowerLeft_.x) * k;
-    upperRight_.x = currentPos.x + (upperRight_.x - currentPos.x) * k;
-    lowerLeft_.y = currentPos.y - (currentPos.y - lowerLeft_.y) * k;
-    upperRight_.y = currentPos.y + (upperRight_.y - currentPos.y) * k;
+    point_t center = { (lowerLeft_.x + upperRight_.x) / 2, (lowerLeft_.y + upperRight_.y) / 2 };
+    lowerLeft_.x = center.x + (lowerLeft_.x - center.x) * coefficient;
+    lowerLeft_.y = center.y + (lowerLeft_.y - center.y) * coefficient;
+    upperRight_.x = center.x + (upperRight_.x - center.x) * coefficient;
+    upperRight_.y = center.y + (upperRight_.y - center.y) * coefficient;
   }
 }
