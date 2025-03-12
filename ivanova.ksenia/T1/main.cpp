@@ -102,7 +102,7 @@ int main()
 
     std::cout << ivanova::getSumArea(shapes, size);
     ivanova::printFrameRect(shapes, size);
-    
+
     ivanova::deleteShapes(shapes, size);
     return 0;
   }
