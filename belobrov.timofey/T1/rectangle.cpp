@@ -38,10 +38,12 @@ namespace belobrov
 
   void Rectangle::scale(double k)
   {
-    point_t center = { (lowerLeft_.x + upperRight_.x) / 2, (lowerLeft_.y + upperRight_.y) / 2 };
-    lowerLeft_.x = center.x + (lowerLeft_.x - center.x) * k;
-    lowerLeft_.y = center.y + (lowerLeft_.y - center.y) * k;
-    upperRight_.x = center.x + (upperRight_.x - center.x) * k;
-    upperRight_.y = center.y + (upperRight_.y - center.y) * k;
+    double centerX = (x1 + x2) / 2.0;
+    double centerY = (y1 + y2) / 2.0;
+
+    x1 = centerX + (x1 - centerX) * k;
+    y1 = centerY + (y1 - centerY) * k;
+    x2 = centerX + (x2 - centerX) * k;
+    y2 = centerY + (y2 - centerY) * k;
   }
 }
