@@ -41,7 +41,7 @@ namespace belobrov
       if (shapes[i] != nullptr) {
         point_t isCenter = shapes[i]->getFrameRect().pos;
         shapes[i]->scale(factor);
-        shapes[i]->move(center.x - isCenter.x, center.y - isCenter.y);
+        shapes[i]->move((isCenter.x - center.x) * (factor - 1), (isCenter.y - center.y) * (factor - 1));
       }
     }
   }
