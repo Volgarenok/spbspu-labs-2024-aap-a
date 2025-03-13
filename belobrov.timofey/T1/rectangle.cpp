@@ -1,43 +1,51 @@
 #include "rectangle.hpp"
 #include <cmath>
+#include <stdexcept>
 
 namespace belobrov
 {
-  Rectangle::Rectangle(const point_t& lowerLeft, const point_t& upperRight)
-    : lowerLeft_(lowerLeft), upperRight_(upperRight) {}
+  Rectangle::Rectangle(double x1, double y1, double x2, double y2)
+    : x1_(x1), y1_(y1), x2_(x2), y2_(y2) {
+    if (x1_ >= x2_ || y1_ >= y2_) {
+      throw std::invalid_argument("Invalid rectangle coordinates");
+    }
+  }
 
   double Rectangle::getArea() const
   {
-    return std::abs((upperRight_.x - lowerLeft_.x) * (upperRight_.y - lowerLeft_.y));
+    return std::abs((x2_ - x1_) * (y2_ - y1_));
   }
 
   rectangle_t Rectangle::getFrameRect() const
   {
-    return {
-      std::abs(upperRight_.x - lowerLeft_.x),
-      std::abs(upperRight_.y - lowerLeft_.y),
-      { (lowerLeft_.x + upperRight_.x) / 2, (lowerLeft_.y + upperRight_.y) / 2 }
-    };
+    double width = std::abs(x2_ - x1_);
+    double height = std::abs(y2_ - y1_);
+    point_t center = { (x1_ + x2_) / 2, (y1_ + y2_) / 2 };
+    return {width, height, center};
   }
 
   void Rectangle::move(const point_t& newPos)
   {
-    point_t center = { (lowerLeft_.x + upperRight_.x) / 2, (lowerLeft_.y + upperRight_.y) / 2 };
-    double dx = newPos.x - center.x;
-    double dy = newPos.y - center.y;
+    double centerX = (x1_ + x2_) / 2.0;
+    double centerY = (y1_ + y2_) / 2.0;
+    double dx = newPos.x - centerX;
+    double dy = newPos.y - centerY;
     move(dx, dy);
   }
 
   void Rectangle::move(double dx, double dy)
   {
-    lowerLeft_.x += dx;
-    upperRight_.x += dx;
-    lowerLeft_.y += dy;
-    upperRight_.y += dy;
+    x1_ += dx;
+    y1_ += dy;
+    x2_ += dx;
+    y2_ += dy;
   }
 
   void Rectangle::scale(double k)
   {
+    if (k <= 0) {
+      throw std::invalid_argument("Scaling factor must be positive");
+    }
     double centerX = (x1 + x2) / 2.0;
     double centerY = (y1 + y2) / 2.0;
 
