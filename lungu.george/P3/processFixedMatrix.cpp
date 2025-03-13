@@ -1,4 +1,5 @@
 #include "lungu.h"
+#include <utility>
 
 namespace lungu
 {
@@ -6,8 +7,13 @@ namespace lungu
   {
     const int maxSize = 10000;
     int matrix[maxSize];
-    auto [rows, cols] = readMatrixFromFile(inputFilename, matrix, maxSize);
+
+    std::pair<int, int> dimensions = readMatrixFromFile(inputFilename, matrix, maxSize);
+    int rows = dimensions.first;
+    int cols = dimensions.second;
+
     transformMatrix(matrix, rows, cols);
+
     writeMatrixToFile(outputFilename, matrix, rows, cols);
   }
 }
