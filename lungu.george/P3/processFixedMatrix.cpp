@@ -13,7 +13,6 @@ namespace lungu
     int cols = dimensions.second;
 
     transformMatrix(matrix, rows, cols);
-
     writeMatrixToFile(outputFilename, matrix, rows, cols);
   }
 }
