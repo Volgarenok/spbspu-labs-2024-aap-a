@@ -30,7 +30,13 @@ int main() {
         std::cerr << "Invalid rectangle coordinates: lower-left must be less than upper-right.\n";
         continue;
       }
-      shapes[shapeCount++] = new Rectangle({x1, y1}, {x2, y2});
+      shapes[shapeCount] = new Rectangle({x1, y1}, {x2, y2});
+      if (shapes[shapeCount] == nullptr) {
+        std::cerr << "Memory allocation failed for rectangle.\n";
+        deleteShapes(shapes, shapeCount);
+        return 1;
+      }
+      shapeCount++;
     } else if (inputCommand == "SCALE") {
       std::cin >> isoCenter.x >> isoCenter.y >> scalingFactor;
       if (scalingFactor <= 0) {
@@ -64,7 +70,7 @@ int main() {
 
   applyIsoScaling(shapes, shapeCount, isoCenter, scalingFactor);
 
-  std::cout << calculateTotalArea(shapes, shapeCount);
+  std::cout << calculateTotalArea(shapes, shapeCount) << " ";
   outputFrameCoordinates(shapes, shapeCount);
   std::cout << "\n";
 
