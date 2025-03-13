@@ -39,9 +39,9 @@ namespace belobrov
   void applyIsoScaling(Shape** shapes, size_t count, const point_t& center, double factor) {
     for (size_t i = 0; i < count; ++i) {
       if (shapes[i] != nullptr) {
-        point_t center = shapes[i]->getFrameRect().pos;
-        shapes[i]->scale(scaleFactor);
-        shapes[i]->move(isoCenter.x - center.x, isoCenter.y - center.y);
+        point_t isCenter = shapes[i]->getFrameRect().pos;
+        shapes[i]->scale(factor);
+        shapes[i]->move(center.x - isCenter.x, center.y - isCenter.y);
       }
     }
   }
