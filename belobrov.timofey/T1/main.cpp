@@ -15,6 +15,9 @@ int main() {
   bool scalingRequested = false;
 
   while (std::cin >> inputCommand) {
+    if (inputCommand.empty()) {
+      continue;
+    }
     if (inputCommand == "RECTANGLE") {
       if (shapeCount >= 1000) {
         std::cerr << "Maximum number of shapes (1000) reached.\n";
@@ -25,8 +28,7 @@ int main() {
       std::cin >> x1 >> y1 >> x2 >> y2;
       if (x1 >= x2 || y1 >= y2) {
         std::cerr << "Invalid rectangle coordinates: lower-left must be less than upper-right.\n";
-        deleteShapes(shapes, shapeCount);
-        return 1;
+        continue;
       }
       shapes[shapeCount++] = new Rectangle({x1, y1}, {x2, y2});
     } else if (inputCommand == "SCALE") {
@@ -56,7 +58,7 @@ int main() {
     return 1;
   }
 
-  std::cout << std::fixed << std::setprecision(1) << calculateTotalArea(shapes, shapeCount);
+  std::cout << std::fixed << std::setprecision(1) << calculateTotalArea(shapes, shapeCount) << " ";
   outputFrameCoordinates(shapes, shapeCount);
   std::cout << "\n";
 
