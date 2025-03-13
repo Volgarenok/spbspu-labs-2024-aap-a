@@ -30,7 +30,7 @@ int main() {
         std::cerr << "Invalid rectangle coordinates: lower-left must be less than upper-right.\n";
         continue;
       }
-      shapes[shapeCount] = new Rectangle({x1, y1}, {x2, y2});
+      shapes[shapeCount] = new Rectangle(x1, y1, x2, y2);
       if (shapes[shapeCount] == nullptr) {
         std::cerr << "Memory allocation failed for rectangle.\n";
         deleteShapes(shapes, shapeCount);

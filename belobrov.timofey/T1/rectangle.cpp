@@ -46,12 +46,12 @@ namespace belobrov
     if (k <= 0) {
       throw std::invalid_argument("Scaling factor must be positive");
     }
-    double centerX = (x1 + x2) / 2.0;
-    double centerY = (y1 + y2) / 2.0;
+    double centerX = (x1_ + x2_) / 2.0;
+    double centerY = (y1_ + y2_) / 2.0;
 
-    x1 = centerX + (x1 - centerX) * k;
-    y1 = centerY + (y1 - centerY) * k;
-    x2 = centerX + (x2 - centerX) * k;
-    y2 = centerY + (y2 - centerY) * k;
+    x1_ = centerX + (x1_ - centerX) * k;
+    y1_ = centerY + (y1_ - centerY) * k;
+    x2_ = centerX + (x2_ - centerX) * k;
+    y2_ = centerY + (y2_ - centerY) * k;
   }
 }
