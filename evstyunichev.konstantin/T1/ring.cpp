@@ -2,11 +2,9 @@
 #include <iostream>
 #include "base-types.hpp"
 
-constexpr double pi_v = 3.141592653589793238462643;
-
 evstyunichev::Ring::Ring(point_t middle, double R, double r):
-  interior_(middle, r, 48UL),
-  external_(middle, R, 49UL)
+  interior_(middle, r, 148UL),
+  external_(middle, R, 149UL)
 {
   if (R <= r)
   {

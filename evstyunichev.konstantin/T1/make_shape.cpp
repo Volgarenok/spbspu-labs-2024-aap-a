@@ -10,8 +10,6 @@
 
 namespace
 {
-  using evstyunichev::pi_v;
-  using evstyunichev::prec;
   using evstyunichev::point_t;
 
   void form_array(double *, size_t, std::istream &);
@@ -56,7 +54,7 @@ evstyunichev::Ring * evstyunichev::make_ring(std::istream &in)
 {
   double data[4]{};
   form_array(data, 4, in);
-  Ring *temp = new Ring({data[0], data[1]}, data[2], data[3]);
+  Ring *temp = new Ring({ data[0], data[1] }, data[2], data[3]);
   return temp;
 }
 

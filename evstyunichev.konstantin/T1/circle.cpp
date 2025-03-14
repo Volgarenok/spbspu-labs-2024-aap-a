@@ -1,9 +1,8 @@
 #include "circle.hpp"
 #include "regular.hpp"
-#include "spec_def.hpp"
 
 evstyunichev::Circle::Circle(point_t O, double r):
-  data_(O, r, 47UL)
+  data_(O, r, 147UL)
 {
   if (r <= 0)
   {
@@ -13,9 +12,7 @@ evstyunichev::Circle::Circle(point_t O, double r):
 
 double evstyunichev::Circle::getArea() const
 {
-  double R = data_.get_R();
-  double s = R * R * pi_v;
-  return s;
+  return data_.getArea();
 }
 
 evstyunichev::rectangle_t evstyunichev::Circle::getFrameRect() const
