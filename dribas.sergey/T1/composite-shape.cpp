@@ -19,12 +19,16 @@ dribas::CompositeShape::CompositeShape(CompositeShape&& shp) noexcept:
     shapes_[i] = shp.shapes_[i];
     shp.shapes_[i] = nullptr;
   }
+  for (size_t i = size_; i < 10000; i++) {
+    shapes_[i] = nullptr;
+  }
   shp.size_ = 0;
 }
 
 dribas::CompositeShape& dribas::CompositeShape::operator=(const CompositeShape& shp)
 {
   if (std::addressof(shp) != this) {
+    clear();
     CompositeShape copy(shp);
     swap(copy);
   }
@@ -55,10 +59,16 @@ dribas::CompositeShape& dribas::CompositeShape::operator=(CompositeShape&& shp) 
 }
 
 dribas::CompositeShape::CompositeShape(const CompositeShape& shp):
-  size_(shp.size_)
+  size_(0)
 {
-  for (size_t i = 0; i < size_; i++) {
-    shapes_[i] = shp.shapes_[i]->clone();
+  for (size_t i = 0; i < shp.size_; i++) {
+    try {
+      shapes_[i] = shp.shapes_[i]->clone();
+      size_++;
+    } catch (const std::bad_alloc&) {
+      clear();
+      throw;
+    }
   }
   for (size_t i = size_; i < 10000; i++) {
     shapes_[i] = nullptr;
