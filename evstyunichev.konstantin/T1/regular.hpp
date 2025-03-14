@@ -25,8 +25,11 @@ namespace evstyunichev
       double alpha_;
       double a_;
       double base_;
+      double bestAngle(double) const;
+      point_t bestValue(bool) const;
   };
 
   double angle_check(double);
+
 }
 #endif

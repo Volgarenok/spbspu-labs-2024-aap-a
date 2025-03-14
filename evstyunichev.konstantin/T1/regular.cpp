@@ -45,21 +45,8 @@ double evstyunichev::Regular::getArea() const
 
 evstyunichev::rectangle_t evstyunichev::Regular::getFrameRect() const
 {
-  double angle = base_, R = get_R(), left = middle_.x + R * std::cos(angle), right = left;
-  double down = middle_.y + R * std::sin(angle), up = down, width = 0, height = 0;
-  point_t cur{};
-  for (double angle = base_; !is_equal(angle, base_ + 2 * pi_v); angle += alpha_)
-  {
-    cur.x = middle_.x + R * std::cos(angle);
-    cur.y = middle_.y + R * std::sin(angle);
-    left = std::min(left, cur.x);
-    right = std::max(right, cur.x);
-    down = std::min(down, cur.y);
-    up = std::max(up, cur.y);
-  }
-  height = up - down;
-  width = right - left;
-  rectangle_t temp{width, height, middle_};
+  point_t leftDown = bestValue(1), rightUp = bestValue(0);
+  rectangle_t temp{ rightUp.x - leftDown.x, rightUp.y - leftDown.y, middle_ };
   return temp;
 }
 
@@ -94,6 +81,51 @@ evstyunichev::point_t evstyunichev::Regular::getMiddle() const
 evstyunichev::Shape * evstyunichev::Regular::clone() const
 {
   return new Regular(*this);
+}
+
+double evstyunichev::Regular::bestAngle(double target) const
+{
+  double base = base_;
+  if (base > 0)
+  {
+    base -= std::ceil(base / alpha_) * alpha_;
+  }
+  double ans = 0;
+  size_t l = 0, r = (2 * pi_v / alpha_);
+  while (l <= r)
+  {
+    size_t mid = (l + r) / 2;
+    if (base + mid * alpha_ <= target)
+    {
+      ans = base + mid * alpha_;
+      l = mid + 1;
+    }
+    else
+    {
+      r = mid - 1;
+    }
+  }
+  return ans;
+}
+
+evstyunichev::point_t evstyunichev::Regular::bestValue(bool is_smaller) const
+{
+  double a = middle_.x, b = middle_.y, angle = 0, R = get_R();
+  if (is_smaller)
+  {
+    angle = bestAngle(pi_v);
+    a += R * std::min(std::cos(angle), std::cos(angle + alpha_));
+    angle = bestAngle(pi_v * 1.5);
+    b += R * std::min(std::sin(angle), std::sin(angle + alpha_));
+  }
+  else
+  {
+    angle = bestAngle(0);
+    a += R * std::max(std::cos(angle), std::cos(angle + alpha_));
+    angle = bestAngle(pi_v / 2.0);
+    b += R * std::max(std::sin(angle), std::sin(angle + alpha_));
+  }
+  return { a, b };
 }
 
 double evstyunichev::angle_check(double alpha)
