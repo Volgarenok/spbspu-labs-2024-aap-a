@@ -15,8 +15,6 @@ namespace evstyunichev
       void move(double, double) override;
       void move(point_t) override;
       void scale(double k) override;
-      double get_r() const;
-      double get_R() const;
       point_t getMiddle() const;
       Shape * clone() const override;
 
@@ -25,6 +23,8 @@ namespace evstyunichev
       double alpha_;
       double a_;
       double base_;
+      double get_r() const;
+      double get_R() const;
       double bestAngle(double) const;
       point_t bestValue(bool) const;
   };
