@@ -1,6 +1,5 @@
 #include "lungu.h"
 #include <utility>
-
 namespace lungu
 {
   void processFixedSizeMatrix(const std::string &inputFilename, const std::string &outputFilename)
