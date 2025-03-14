@@ -1,5 +1,4 @@
 #include "rectangle.hpp"
-#include <iostream>
 #include "base-types.hpp"
 
 evstyunichev::Rectangle::Rectangle(point_t leftDown, point_t rightUp):

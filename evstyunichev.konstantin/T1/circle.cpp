@@ -1,4 +1,5 @@
 #include "circle.hpp"
+#include <stdexcept>
 #include "regular.hpp"
 
 evstyunichev::Circle::Circle(point_t O, double r):

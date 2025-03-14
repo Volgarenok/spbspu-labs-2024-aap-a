@@ -1,6 +1,7 @@
 #include "make_shape.hpp"
 #include <cmath>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 #include "circle.hpp"
 #include "rectangle.hpp"

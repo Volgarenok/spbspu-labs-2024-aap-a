@@ -1,6 +1,6 @@
 #ifndef REGULAR_HPP
 #define REGULAR_HPP
-#include <iostream>
+#include <cstddef>
 #include "base-types.hpp"
 #include "shape.hpp"
 namespace evstyunichev

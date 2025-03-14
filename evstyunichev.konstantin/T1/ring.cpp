@@ -1,5 +1,4 @@
 #include "ring.hpp"
-#include <iostream>
 #include "base-types.hpp"
 
 evstyunichev::Ring::Ring(point_t middle, double R, double r):

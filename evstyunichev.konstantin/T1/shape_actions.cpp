@@ -11,11 +11,14 @@ void evstyunichev::makeScale(CompositeShape &cmp, std::istream &in)
   {
     throw std::logic_error("nothing to scale!");
   }
-  double x = 0, y = 0, k = 0;
-  in >> x >> y >> k;
-  point_t O{x, y};
+  double d[3];
+  for (size_t i = 0; i < 3; i++)
+  {
+    in >> d[i];
+  }
+  point_t O{ d[0], d[1] };
   std::cout << std::fixed << std::setprecision(1) << cmp.getArea() << ' ';
-  framesOut(cmp) << '\n' << cmp.getArea() * k * k << ' ';
-  cmp.scale(k, O);
+  framesOut(cmp) << '\n' << cmp.getArea() * d[2] * d[2] << ' ';
+  cmp.scale(d[2], O);
   framesOut(cmp) << '\n';
 }

@@ -1,6 +1,5 @@
 #ifndef RING_HPP
 #define RING_HPP
-#include <iostream>
 #include "base-types.hpp"
 #include "shape.hpp"
 #include "regular.hpp"

@@ -1,6 +1,7 @@
 #include "regular.hpp"
 #include <cmath>
-#include <iostream>
+#include <cstddef>
+#include <stdexcept>
 #include "base-types.hpp"
 #include "spec_def.hpp"
 
