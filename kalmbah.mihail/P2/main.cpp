@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <sstream>
 #include <string>
-#include "taylor_functions.h"
+#include "get_taylor_functions.h"
 
 int main()
 {
