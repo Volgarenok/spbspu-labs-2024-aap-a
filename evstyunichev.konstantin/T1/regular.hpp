@@ -23,6 +23,7 @@ namespace evstyunichev
       double alpha_;
       double a_;
       double base_;
+      void setBase();
       double get_r() const;
       double get_R() const;
       double bestAngle(double) const;

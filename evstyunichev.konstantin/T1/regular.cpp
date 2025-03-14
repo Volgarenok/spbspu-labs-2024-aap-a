@@ -24,6 +24,7 @@ evstyunichev::Regular::Regular(point_t A, double alpha, double a, double base):
   {
     throw std::invalid_argument("");
   }
+  setBase();
 }
 
 evstyunichev::Regular::Regular(point_t middle, double r, size_t n):
@@ -85,19 +86,14 @@ evstyunichev::Shape * evstyunichev::Regular::clone() const
 
 double evstyunichev::Regular::bestAngle(double target) const
 {
-  double base = base_;
-  if (base > 0)
-  {
-    base -= std::ceil(base / alpha_) * alpha_;
-  }
   double ans = 0;
   size_t l = 0, r = (2 * pi_v / alpha_);
   while (l <= r)
   {
     size_t mid = (l + r) / 2;
-    if (base + mid * alpha_ <= target)
+    if (base_ + mid * alpha_ <= target)
     {
-      ans = base + mid * alpha_;
+      ans = base_ + mid * alpha_;
       l = mid + 1;
     }
     else
@@ -135,4 +131,14 @@ double evstyunichev::angle_check(double alpha)
     throw std::invalid_argument("invalid argument!");
   }
   return is_int(2.0 * pi_v / alpha) * alpha * 2.0;
+}
+
+void evstyunichev::Regular::setBase()
+{
+  base_ -= std::ceil(base_ / alpha_) * alpha_;
+  if (base_ > 0)
+  {
+    base_ -= alpha_;
+  }
+  return;
 }
