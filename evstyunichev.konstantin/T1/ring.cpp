@@ -20,9 +20,7 @@ evstyunichev::Ring::Ring(point_t middle, double R, double r):
 
 double evstyunichev::Ring::getArea() const
 {
-  double R = external_.get_R(), r = interior_.get_R();
-  double s = R * R * pi_v - r * r * pi_v;
-  return s;
+  return external_.getArea() - interior_.getArea();
 }
 
 evstyunichev::rectangle_t evstyunichev::Ring::getFrameRect() const

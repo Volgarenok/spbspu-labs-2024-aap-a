@@ -8,7 +8,7 @@ namespace evstyunichev
   class Regular final: public Shape
   {
     public:
-      Regular(point_t, point_t, point_t);
+      Regular(point_t, double, double, double);
       Regular(point_t, double, size_t);
       double getArea() const override;
       rectangle_t getFrameRect() const override;
@@ -26,5 +26,7 @@ namespace evstyunichev
       double a_;
       double base_;
   };
+
+  double angle_check(double);
 }
 #endif

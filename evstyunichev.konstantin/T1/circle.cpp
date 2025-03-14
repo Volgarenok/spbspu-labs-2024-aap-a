@@ -1,8 +1,6 @@
 #include "circle.hpp"
-#include <iostream>
 #include "regular.hpp"
-
-constexpr double pi_v = 3.141592653589793238462643;
+#include "spec_def.hpp"
 
 evstyunichev::Circle::Circle(point_t O, double r):
   data_(O, r, 47UL)

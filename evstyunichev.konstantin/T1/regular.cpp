@@ -2,42 +2,7 @@
 #include <cmath>
 #include <iostream>
 #include "base-types.hpp"
-
-constexpr double pi_v = 3.141592653589793238462643;
-
-namespace
-{
-  using evstyunichev::point_t;
-  using evstyunichev::findDist;
-  const double prec = 0.0000001;
-  bool is_equal(double, double, double p = prec);
-  bool is_int(double);
-  double angle_check(double);
-
-  bool is_equal(double a, double b, double p)
-  {
-    if (std::abs(a - b) <= p)
-    {
-      return 1;
-    }
-    return 0;
-  }
-
-  bool is_int(double d)
-  {
-    return (std::abs(d - std::round(d)) <= prec);
-  }
-
-  double angle_check(double alpha)
-  {
-    if (alpha <= 0)
-    {
-      throw std::invalid_argument("invalid argument!");
-    }
-    return is_int(2.0 * pi_v / alpha) * alpha * 2.0;
-  }
-
-}
+#include "spec_def.hpp"
 
 double evstyunichev::Regular::get_R() const
 {
@@ -49,26 +14,16 @@ double evstyunichev::Regular::get_r() const
   return (a_ / 2.0) * std::tan((pi_v - alpha_) / 2.0);
 }
 
-evstyunichev::Regular::Regular(point_t A, point_t B, point_t C):
+evstyunichev::Regular::Regular(point_t A, double alpha, double a, double base):
   middle_(A),
-  alpha_(0),
-  a_(0),
-  base_(0)
+  alpha_(alpha),
+  a_(a),
+  base_(base)
 {
-  double a = findDist(A, B), b = findDist(B, C), c = findDist(A, C);
-  if (a > c)
+  if (!angle_check(alpha / 2.0) || (a <= 0))
   {
-    std::swap(B, C);
-    std::swap(a, c);
+    throw std::invalid_argument("");
   }
-  double alpha = angle_check(std::acos(a / c));
-  if (!is_equal(std::pow(c, 2), std::pow(a, 2) + std::pow(b, 2)) || (alpha == 0))
-  {
-    throw std::invalid_argument("invalid");
-  }
-  alpha_ = alpha;
-  a_ = b * 2.0;
-  base_ = std::acos((C.x - A.x) / c);
 }
 
 evstyunichev::Regular::Regular(point_t middle, double r, size_t n):
@@ -139,4 +94,13 @@ evstyunichev::point_t evstyunichev::Regular::getMiddle() const
 evstyunichev::Shape * evstyunichev::Regular::clone() const
 {
   return new Regular(*this);
+}
+
+double evstyunichev::angle_check(double alpha)
+{
+  if (alpha <= 0)
+  {
+    throw std::invalid_argument("invalid argument!");
+  }
+  return is_int(2.0 * pi_v / alpha) * alpha * 2.0;
 }

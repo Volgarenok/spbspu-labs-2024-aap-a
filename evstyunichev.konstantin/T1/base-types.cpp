@@ -18,6 +18,15 @@ evstyunichev::point_t evstyunichev::point_t::operator-(const point_t &b) const
   return point_t{x - b.x, y - b.y};
 }
 
+bool is_equal(double a, double b, double p)
+{
+  if (std::abs(a - b) <= p)
+  {
+    return 1;
+  }
+  return 0;
+}
+
 double evstyunichev::findDist(point_t A, point_t B)
 {
   double a = A.x - B.x, b = A.y - B.y;

@@ -13,7 +13,7 @@ int main()
   using namespace evstyunichev;
   CompositeShape compShp(2);
   std::string command;
-  bool scaleFlag = 0, errorFlag = 0;
+  bool errorFlag = 0;
   while (std::cin >> command)
   {
     Shape *cur = nullptr;
@@ -23,8 +23,6 @@ int main()
       compShp.pushBack(cur);
       if (command == "SCALE")
       {
-        scaleFlag = 1;
-        makeScale(compShp, std::cin);
         break;
       }
       else
@@ -36,11 +34,6 @@ int main()
     {
       errorFlag = 1;
     }
-    catch (const std::logic_error &e)
-    {
-      std::cerr << e.what() << "\n";
-      return 1;
-    }
     catch (const std::bad_alloc &e)
     {
       delete cur;
@@ -48,13 +41,30 @@ int main()
       return 2;
     }
   }
-  if (errorFlag)
+  try
   {
-    std::cerr << "input errors!\n";
+    if (command == "SCALE")
+    {
+      if (compShp.empty())
+      {
+        std::cout << "no shapes!\n";
+        return 1;
+      }
+      makeScale(compShp, std::cin);
+      if (errorFlag)
+      {
+        std::cerr << "input errors!\n";
+      }
+    }
+    else
+    {
+      std::cout << "no SCALE\n";
+      return 1;
+    }
   }
-  if (compShp.empty() || !scaleFlag)
+  catch(const std::logic_error& e)
   {
-    std::cout << "((\n";
+    std::cerr << e.what() << '\n';
     return 1;
   }
   return 0;
