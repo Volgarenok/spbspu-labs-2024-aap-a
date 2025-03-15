@@ -7,17 +7,16 @@
 
 int main()
 {
-  using namespace kushekbaev;
   point_t scalePoint{ 0, 0 };
   double scaleCoeff = 0;
   bool invalid_argument = false;
-  CompositeShape compShape(100);
+  kushekbaev::CompositeShape compShape(100);
   std::string shapeName;
   while ((std::cin >> shapeName && shapeName != "SCALE") && !std::cin.eof())
   {
     try
     {
-      createShape(std::cin, compShape, shapeName);
+      kushekbaev::createShape(std::cin, compShape, shapeName);
     }
 
     catch (const std::logic_error&)
@@ -52,5 +51,5 @@ int main()
     std::cerr << "Some shapes were inputed incorrectly\n";
   }
 
-  output(std::cout, compShape, scalePoint, scaleCoeff);
+  kushekbaev::output(std::cout, compShape, scalePoint, scaleCoeff);
 }
