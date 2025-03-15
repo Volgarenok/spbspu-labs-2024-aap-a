@@ -16,7 +16,7 @@ namespace
   }
 }
 
-kushekbaev::Rectangle* makeRectangle(std::istream& in)
+kushekbaev::Rectangle* kushekbaev::makeRectangle(std::istream& in)
 {
   const size_t size = 4;
   double arr[size];
@@ -24,7 +24,7 @@ kushekbaev::Rectangle* makeRectangle(std::istream& in)
   return new kushekbaev::Rectangle({ arr[0], arr[1] }, { arr[2], arr[3] });
 }
 
-kushekbaev::Concave* makeConcave(std::istream& in)
+kushekbaev::Concave* kushekbaev::makeConcave(std::istream& in)
 {
   const size_t size = 8;
   double arr[size];
@@ -32,7 +32,7 @@ kushekbaev::Concave* makeConcave(std::istream& in)
   return new kushekbaev::Concave({ arr[0], arr[1] }, { arr[2], arr[3] }, { arr[4], arr[5] }, { arr[6], arr[7] });
 }
 
-kushekbaev::Parallelogram* makeParallelogram(std::istream& in)
+kushekbaev::Parallelogram* kushekbaev::makeParallelogram(std::istream& in)
 {
   const size_t size = 6;
   double arr[size];
@@ -43,7 +43,7 @@ kushekbaev::Parallelogram* makeParallelogram(std::istream& in)
   return new kushekbaev::Parallelogram({ first, second, third });
 }
 
-kushekbaev::Diamond* makeDiamond(std::istream& in)
+kushekbaev::Diamond* kushekbaev::makeDiamond(std::istream& in)
 {
   const size_t size = 6;
   double arr[size];

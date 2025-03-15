@@ -9,13 +9,13 @@ namespace kushekbaev
   class Diamond final: public Shape
   {
   public:
-    Diamond(const point_t mid, const point_t modX, const point_t modY);
+    Diamond(point_t mid, point_t modX, point_t modY);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void move(const point_t scalePoint) override;
-    void move(const double dx, const double dy) override;
-    void scale(const double scaleCoeff) override;
-    Shape* clone() const override;
+    void move(point_t scalePoint) override;
+    void move(double dx, double dy) override;
+    void scale(double scaleCoeff) override;
+    Shape* clone() const noexcept override;
 
   private:
     Parallelogram parallelogram_;

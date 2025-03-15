@@ -20,7 +20,7 @@ double kushekbaev::Concave::getArea() const
   return standart - concavity;
 }
 
-rectangle_t kushekbaev::Concave::getFrameRect() const
+kushekbaev::rectangle_t kushekbaev::Concave::getFrameRect() const
 {
   double lowerLeftx = std::min({ points_[0].x, points_[1].x, points_[2].x, points_[3].x });
   double lowerLefty = std::min({ points_[0].y, points_[1].y, points_[2].y, points_[3].y});
