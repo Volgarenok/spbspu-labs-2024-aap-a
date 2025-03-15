@@ -11,12 +11,12 @@ lebedev::Diamond::Diamond(point_t centre, point_t vert, point_t horiz):
   concaveCount_(0),
   capacity_(0)
 {
-  bool isValidArguments = !((vert.x == horiz.x && vert.y == horiz.y)
+  bool isCollision = ((vert.x == horiz.x && vert.y == horiz.y)
       || (vert.x == centre.x && vert.y == centre.y)
-      || (horiz.x == centre.x && horiz.y == centre.y))
-      || (vert.x == centre.x && horiz.y == centre.y);
+      || (horiz.x == centre.x && horiz.y == centre.y));
+  bool isValidArguments = (vert.x == centre.x && horiz.y == centre.y);
 
-  if (!isValidArguments)
+  if (!isCollision && isValidArguments)
   {
     throw std::invalid_argument("");
   }
@@ -91,7 +91,7 @@ void lebedev::Diamond::expandArray()
 
 void lebedev::Diamond::divideIntoConcaves(point_t centre, point_t vert, point_t horiz)
 {
-  double totalArea = Diamond::getCurrentDiamondArea(centre, vert, horiz);
+  double totalArea = getCurrentDiamondArea(centre, vert, horiz);
   double coveredArea = 0;
   point_t d1Start = vert;
   point_t d1End = { vert.x, 2 * centre.y - vert.y };
