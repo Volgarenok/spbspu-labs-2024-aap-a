@@ -32,7 +32,7 @@ int main()
     }
   }
 
-  std::cin >> kushekbaev::scalePoint.x >> kushekbaev::scalePoint.y >> scaleCoeff;
+  std::cin >> scalePoint.x >> scalePoint.y >> scaleCoeff;
 
   if (scaleCoeff <= 0)
   {
