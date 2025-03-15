@@ -7,7 +7,7 @@
 
 int main()
 {
-  point_t scalePoint{ 0, 0 };
+  kushekbaev::point_t scalePoint{ 0, 0 };
   double scaleCoeff = 0;
   bool invalid_argument = false;
   kushekbaev::CompositeShape compShape(100);
@@ -32,7 +32,7 @@ int main()
     }
   }
 
-  std::cin >> scalePoint.x >> scalePoint.y >> scaleCoeff;
+  std::cin >> kushekbaev::scalePoint.x >> kushekbaev::scalePoint.y >> scaleCoeff;
 
   if (scaleCoeff <= 0)
   {
