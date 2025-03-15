@@ -1,12 +1,13 @@
 #include "concave.hpp"
 #include <stdexcept>
+#include <algorithm>
 #include "base-types.hpp"
 #include "shapeUtils.hpp"
 
 namespace kushekbaev
 {
   Concave::Concave(point_t first, point_t second, point_t third, point_t last):
-    points_{first, second, third, last}
+    points_{ first, second, third, last }
   {
     if (!isTriangle(first, second, third) || !isPointInsideTriangle(first, second, third, last))
     {
@@ -19,23 +20,23 @@ namespace kushekbaev
     double standart = getAreaOfTriangle(points_[0], points_[1], points_[2]);
     double concavity = getAreaOfTriangle(points_[1], points_[2], points_[3]);
     return standart - concavity;
-    }
+  }
 
   rectangle_t Concave::getFrameRect() const
   {
-    double lowerLeftx = std::min(std::min(std::min(points_[0].x, points_[1].x), points_[2].x), points_[3].x);
-    double lowerLefty = std::min(std::min(std::min(points_[0].y, points_[1].y), points_[2].y), points_[3].y);
-    double upperRightx = std::max(std::max(std::max(points_[0].x, points_[1].x), points_[2].x), points_[3].x);
-    double upperRighty = std::max(std::max(std::max(points_[0].y, points_[1].y), points_[2].y), points_[3].y);
+    double lowerLeftx = std::min({ points_[0].x, points_[1].x, points_[2].x, points_[3].x });
+    double lowerLefty = std::min({ points_[0].y, points_[1].y, points_[2].y, points_[3].y});
+    double upperRightx = std::max({ points_[0].x, points_[1].x, points_[2].x, points_[3].x });
+    double upperRighty = std::max({ points_[0].y, points_[1].y, points_[2].y, points_[3].y });
 
     point_t lowerLeft { lowerLeftx, lowerLefty };
     point_t upperRight { upperRightx, upperRighty };
 
     double width = upperRight.x - lowerLeft.x;
     double height = upperRight.y - lowerLeft.y;
-    point_t mid;
-    mid.x = lowerLeft.x + width / 2;
-    mid.y = lowerLeft.y + height / 2;
+    double midX = lowerLeft.x + width / 2;
+    double midY = lowerLeft.y + height / 2;
+    point_t mid { midX, midY };
     return { width, height, mid };
   }
 
@@ -65,5 +66,10 @@ namespace kushekbaev
     size_t size = 4;
     point_t* points[] = { &points_[0], &points_[1], &points_[2], &points_[3] };
     scalePoints(points, size, scaleCoeff, mid);
+  }
+
+  Shape* Concave::clone() const
+  {
+    return new Concave(*this);
   }
 }
