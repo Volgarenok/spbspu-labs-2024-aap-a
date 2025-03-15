@@ -103,7 +103,7 @@ kushekbaev::rectangle_t kushekbaev::CompositeShape::getFrameRect() const
   return { uRX - lLX, uRY - lLY, { (uRX + lLX) / 2, (uRY + lLY) / 2} };
 }
 
-kushekbaev::void kushekbaev::CompositeShape::move(point_t scalePoint)
+void kushekbaev::CompositeShape::move(point_t scalePoint)
 {
   double dx = scalePoint.x - getFrameRect().pos.x;
   double dy = scalePoint.y - getFrameRect().pos.y;

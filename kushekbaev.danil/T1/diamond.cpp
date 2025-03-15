@@ -38,5 +38,5 @@ void kushekbaev::Diamond::scale(double scaleCoeff)
 
 kushekbaev::Shape* kushekbaev::Diamond::clone() const noexcept
 {
-  return new Diamond(*this);
+  return new kushekbaev::Diamond(*this);
 }

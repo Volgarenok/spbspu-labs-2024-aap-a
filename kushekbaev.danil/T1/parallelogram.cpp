@@ -32,7 +32,7 @@ double kushekbaev::Parallelogram::getArea() const
   return 2 * areaOfTriangle;
 }
 
-kushekbaev::rectangle_t Parallelogram::getFrameRect() const
+kushekbaev::rectangle_t kushekbaev::Parallelogram::getFrameRect() const
 {
   point_t firstalt({ points_[0].x + points_[2].x - points_[1].x, points_[0].y + points_[2].y - points_[1].y });
 
@@ -74,7 +74,7 @@ void kushekbaev::Parallelogram::scale(double scaleCoeff)
   scalePoints(points, size, scaleCoeff, mid);
 }
 
-Shape* kushekbaev::Parallelogram::clone() const
+kushekbaev::Shape* kushekbaev::Parallelogram::clone() const
 {
   return new Parallelogram(*this);
 }
