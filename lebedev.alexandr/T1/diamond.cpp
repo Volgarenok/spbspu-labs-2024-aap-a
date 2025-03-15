@@ -16,7 +16,7 @@ lebedev::Diamond::Diamond(point_t centre, point_t vert, point_t horiz):
       || (horiz.x == centre.x && horiz.y == centre.y));
   bool isValidArguments = (vert.x == centre.x && horiz.y == centre.y);
 
-  if (!isCollision && isValidArguments)
+  if (isCollision || !isValidArguments)
   {
     throw std::invalid_argument("");
   }
