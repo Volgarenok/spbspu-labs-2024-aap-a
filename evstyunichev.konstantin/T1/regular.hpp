@@ -26,8 +26,7 @@ namespace evstyunichev
       void setBase();
       double get_r() const;
       double get_R() const;
-      double bestAngle(double) const;
-      point_t bestValue(bool) const;
+      double bestAngle(double, double) const;
   };
 
   double angle_check(double);

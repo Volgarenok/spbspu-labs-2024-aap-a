@@ -47,9 +47,17 @@ double evstyunichev::Regular::getArea() const
 
 evstyunichev::rectangle_t evstyunichev::Regular::getFrameRect() const
 {
-  point_t leftDown = bestValue(1), rightUp = bestValue(0);
-  rectangle_t temp{ rightUp.x - leftDown.x, rightUp.y - leftDown.y, middle_ };
-  return temp;
+  double R = get_R(), angle = base_;
+  double left = middle_.x, down = middle_.y, right = middle_.x, up = middle_.y;
+  double sector = floor((pi_v / 2.0) / alpha_) * alpha_;
+  right += R * std::max(std::cos(angle), std::cos(angle + alpha_));
+  angle = bestAngle(angle + sector, pi_v * 0.5);
+  up += R * std::max(std::sin(angle), std::sin(angle + alpha_));
+  angle = bestAngle(angle + sector, pi_v);
+  left += R * std::min(std::cos(angle), std::cos(angle + alpha_));
+  angle = bestAngle(angle + sector, pi_v * 1.5);
+  down += R * std::min(std::sin(angle), std::sin(angle + alpha_));
+  return { right - left, up - down, middle_ };
 }
 
 void evstyunichev::Regular::move(double dx, double dy)
@@ -85,44 +93,14 @@ evstyunichev::Shape * evstyunichev::Regular::clone() const
   return new Regular(*this);
 }
 
-double evstyunichev::Regular::bestAngle(double target) const
+double evstyunichev::Regular::bestAngle(double cur, double target) const
 {
-  double ans = 0;
-  size_t l = 0, r = (2 * pi_v / alpha_);
-  while (l <= r)
+  cur += alpha_;
+  if (cur > target)
   {
-    size_t mid = (l + r) / 2;
-    if (base_ + mid * alpha_ <= target)
-    {
-      ans = base_ + mid * alpha_;
-      l = mid + 1;
-    }
-    else
-    {
-      r = mid - 1;
-    }
+    cur -= alpha_;
   }
-  return ans;
-}
-
-evstyunichev::point_t evstyunichev::Regular::bestValue(bool is_smaller) const
-{
-  double a = middle_.x, b = middle_.y, angle = 0, R = get_R();
-  if (is_smaller)
-  {
-    angle = bestAngle(pi_v);
-    a += R * std::min(std::cos(angle), std::cos(angle + alpha_));
-    angle = bestAngle(pi_v * 1.5);
-    b += R * std::min(std::sin(angle), std::sin(angle + alpha_));
-  }
-  else
-  {
-    angle = bestAngle(0);
-    a += R * std::max(std::cos(angle), std::cos(angle + alpha_));
-    angle = bestAngle(pi_v / 2.0);
-    b += R * std::max(std::sin(angle), std::sin(angle + alpha_));
-  }
-  return { a, b };
+  return cur;
 }
 
 double evstyunichev::angle_check(double alpha)
