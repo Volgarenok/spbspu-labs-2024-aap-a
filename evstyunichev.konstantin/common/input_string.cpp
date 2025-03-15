@@ -70,3 +70,15 @@ char * evstyunichev::get_string(std::istream &in, const char end)
   str[sz] = 0;
   return str;
 }
+
+void evstyunichev::skip_to_sign(std::istream &in, char end)
+{
+  std::noskipws(in);
+  unsigned char c = (end + 1) % 256;
+  while (c != end)
+  {
+    in >> c;
+  }
+  std::skipws(in);
+  return;
+}
