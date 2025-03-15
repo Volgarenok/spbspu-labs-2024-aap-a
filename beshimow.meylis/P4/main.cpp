@@ -38,6 +38,13 @@ int main()
   }
   input[size] = '\0';
 
+  if (size == 0)
+  {
+    std::cerr << "Ошибка: пустая строка" << std::endl;
+    std::free(input);
+    return 1;
+  }
+
   const char* excludeStr = "abc";
   excludeCharacters(input, excludeStr);
 
