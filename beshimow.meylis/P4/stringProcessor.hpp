@@ -1,10 +1,6 @@
-#ifndef STRINGPROCESSOR_HPP
-#define STRINGPROCESSOR_HPP
+#ifndef STRING_UTILS_HPP
+#define STRING_UTILS_HPP
 
-#include <cstddef>
-
-constexpr size_t MAX_SIZE = 1024;
-
-char* excludeCharacters(const char* str1, const char* str2);
+void excludeCharacters(char* str1, const char* str2);
 
 #endif
