@@ -106,6 +106,7 @@ void shramko::printRectangleShapes(Shape** shapes, size_t size)
     r.print();
     std::cout << " ";
   }
+  std::cout << "\b";
 }
 
 void shramko::scaleShapes(Shape **shapes, size_t size, double k, point_t new_center)
