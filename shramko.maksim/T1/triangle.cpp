@@ -64,7 +64,7 @@ void shramko::Triangle::scale(double k)
 
   two_.x *= k;
   two_.y *= k;
-  
+
   three_.x *= k;
   three_.y *= k;
 }
