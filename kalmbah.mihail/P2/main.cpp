@@ -2,32 +2,27 @@
 #include <cmath>
 #include <iomanip>
 #include <stdexcept>
-#include <sstream>
-#include <string>
 #include "get_taylor_functions.h"
 
 int main()
 {
-  try {
+  try
+  {
     std::cout << "Enter the interval boundaries (-0.5 and 0.5) and max number of sum value:\n";
-    std::string input;
-    std::getline(std::cin, input);
-    std::istringstream iss(input);
+    double start = 0.0, end = 0.0;
+    size_t maxNumberOfIter = 0;
+    std::cin >> start >> end >> maxNumberOfIter;
+    if (!std::cin)
+    {
+      std::cerr << "<INPUT_ERROR>" << "\n";
+      return 1;
+    }
 
-    double start, end;
-    size_t maxNumberOfIter;
-    if (!(iss >> start) || !(iss >> end) || !(iss >> maxNumberOfIter)) {
-      std::cerr << "Incorrect value format\n";
-      return 1;
-    }
-    if (iss >> start) {
-      std::cerr << "A lot of value\n";
-      return 1;
-    }
     const size_t maxIter = 10;
     const double minGranInterval = -0.5;
     const double maxGranInterval = 0.5;
-    if (start < minGranInterval || end > maxGranInterval || maxNumberOfIter > maxIter) {
+    if (start < minGranInterval || end > maxGranInterval || maxNumberOfIter > maxIter)
+    {
       std::cerr << "Going beyond the allowed interval";
       return 1;
     }
@@ -42,13 +37,16 @@ int main()
 
     const double epsilon = 1e-6;
     const double step = 0.1;
-    for (double x = start; x <= end; x += step ) {
+    for (double x = start; x <= end; x += step )
+    {
       double arcsinCmath = std::asin(x);
       double arctanCmath = std::atan(x);
       double sumCmath = arcsinCmath + arctanCmath;
-      try {
+      try
+      {
         double arcsinTaylor = kalmbah::computeArcsinTaylor(x, maxNumberOfIter, epsilon);
-        try {
+        try
+        {
           double arctanTaylor = kalmbah::computeArctanTaylor(x, maxNumberOfIter, epsilon);
           double sumTaylor = arcsinTaylor + arctanTaylor;
           std::cout << std::fixed << std::setprecision(6)
@@ -59,7 +57,9 @@ int main()
                     << std::setw(15) << arcsinCmath
                     << std::setw(15) << arctanCmath
                     << std::setw(15) << sumCmath << "\n";
-        } catch (const std::runtime_error& e) {
+        }
+        catch (const std::runtime_error& e)
+        {
           std::cout << std::fixed << std::setprecision(6)
                     << std::left << std::setw(15) << x
                     << std::setw(15) << arcsinTaylor
@@ -69,8 +69,11 @@ int main()
                     << std::setw(15) << arctanCmath
                     << std::setw(15) << sumCmath << "\n";
         }
-      } catch (const std::runtime_error& e) {
-        try {
+      }
+      catch (const std::runtime_error& e)
+      {
+        try
+        {
           double arctanTaylor = kalmbah::computeArctanTaylor(x, maxNumberOfIter, epsilon);
           std::cout << std::fixed << std::setprecision(6)
                     << std::left << std::setw(15) << x
@@ -80,7 +83,9 @@ int main()
                     << std::setw(15) << arcsinCmath
                     << std::setw(15) << arctanCmath
                     << std::setw(15) << sumCmath << "\n";
-        } catch (const std::runtime_error& e) {
+        }
+        catch (const std::runtime_error& e)
+        {
           std::cout << std::fixed << std::setprecision(6)
                     << std::left << std::setw(15) << x
                     << std::setw(15) << e.what()
@@ -93,7 +98,9 @@ int main()
       }
     }
     return 0;
-  } catch (const std::exception &prog) {
+  }
+  catch (const std::exception &prog)
+  {
     std::cerr << "Error: " << prog.what() << "\n";
     return 2;
   }
