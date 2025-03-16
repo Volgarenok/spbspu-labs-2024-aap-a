@@ -1,7 +1,8 @@
 #include "rectangle.hpp"
+
+#include <iostream>
 #include <stdexcept>
-#include <stdlib.h>
-#include <cmath>
+
 
 shramko::Rectangle::Rectangle(point_t leftBottom, point_t rightTop):
   leftBottom_(leftBottom),
@@ -13,6 +14,8 @@ shramko::Rectangle::Rectangle(point_t leftBottom, point_t rightTop):
     leftBottom_.y = leftBottom.y;
     rightTop_.x = rightTop.x;
     rightTop_.y = rightTop.y;
+    center_.x = leftBottom_.x+(rightTop_.x - leftBottom_.x)/2;
+    center_.y = leftBottom.y +(rightTop_.y - leftBottom_.y)/2;
   }
   else
   {
@@ -31,21 +34,11 @@ double shramko::Rectangle::getArea() const
 shramko::rectangle_t shramko::Rectangle::getFrameRect() const
 {
   rectangle_t rectFrame;
-
   rectFrame.height = rightTop_.y - leftBottom_.y;
   rectFrame.width = rightTop_.x - leftBottom_.x;
-  rectFrame.pos.x = leftBottom_.x + (rectFrame.width / 2.0L);
-  rectFrame.pos.y = leftBottom_.y + (rectFrame.height / 2.0L);
+  rectFrame.center = center_;
 
   return rectFrame;
-}
-
-void shramko::Rectangle::move(point_t point)
-{
-  point_t pos = getFrameRect().pos;
-  double xMove = point.x - pos.x;
-  double yMove = point.y - pos.y;
-  move(xMove, yMove);
 }
 
 void shramko::Rectangle::move(double x, double y)
@@ -54,6 +47,8 @@ void shramko::Rectangle::move(double x, double y)
   leftBottom_.y += y;
   rightTop_.x += x;
   rightTop_.y += y;
+  center_.x += x;
+  center_.y += y;
 }
 
 void shramko::Rectangle::scale(double k)
@@ -62,11 +57,9 @@ void shramko::Rectangle::scale(double k)
   {
     throw std::invalid_argument("Rect scale err\n");
   }
-  rectangle_t rectFrame = getFrameRect();
-  point_t pos = rectFrame.pos;
 
-  leftBottom_.x = pos.x + (leftBottom_.x - pos.x) * k;
-  leftBottom_.y = pos.y + (leftBottom_.y - pos.y) * k;
-  rightTop_.x = pos.x + (rightTop_.x - pos.x) * k;
-  rightTop_.y = pos.y + (rightTop_.y - pos.y) * k;
+  leftBottom_.x *= k;
+  rightTop_.x *= k;
+  rightTop_.y *= k;
+  leftBottom_.y *= k;
 }

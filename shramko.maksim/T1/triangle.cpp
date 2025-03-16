@@ -1,95 +1,63 @@
-#include "triangle.hpp"
-#include "calcLength.hpp"
+#include "rectangle.hpp"
+
+#include <iostream>
 #include <stdexcept>
-#include <algorithm>
-#include <cmath>
 
-shramko::Triangle::Triangle(point_t one, point_t two, point_t three):
-  one_(one),
-  two_(two),
-  three_(three)
+shramko::Rectangle::Rectangle(point_t leftBottom, point_t rightTop):
+  leftBottom_(leftBottom),
+  rightTop_(rightTop)
 {
-  double lenOne = calcLength(one_, two_);
-  double lenTwo = calcLength(two_, three_);
-  double lenThree = calcLength(one_, three_);
-
-  if (lenOne + lenTwo <= lenThree || lenTwo + lenThree <= lenOne || lenOne + lenThree <= lenTwo)
+  if (leftBottom.x < rightTop.x && leftBottom.y < rightTop.y)
   {
-    if (lenOne == 0 && lenTwo == 0 && lenThree == 0)
-    {
-      return;
-    }
-    else
-    {
-      throw std::invalid_argument("Triangle size err\n");
-    }
+    leftBottom_.x = leftBottom.x;
+    leftBottom_.y = leftBottom.y;
+    rightTop_.x = rightTop.x;
+    rightTop_.y = rightTop.y;
+    center_.x = leftBottom_.x+(rightTop_.x - leftBottom_.x) / 2;
+    center_.y = leftBottom.y +(rightTop_.y - leftBottom_.y) / 2;
+  }
+  else{
+    throw std::invalid_argument("Rect size err\n");
   }
 }
 
-double shramko::Triangle::getArea() const
+double shramko::Rectangle::getArea() const
 {
-  return std::abs(((one_.x * (two_.y - three_.y) + two_.x * (three_.y - one_.y) + three_.x * (one_.y - two_.y))) / 2.0);
+  double weight = rightTop_.x - leftBottom_.x;
+  double height = rightTop_.y - leftBottom_.y;
+
+  return weight * height;
 }
 
-shramko::rectangle_t shramko::Triangle::getFrameRect() const
+shramko::rectangle_t shramko::Rectangle::getFrameRect() const
 {
-  double xMax = std::max(one_.x, std::max(two_.x, three_.x));
-  double yMax = std::max(one_.y, std::max(two_.y, three_.y));
-  double xMin = std::min(one_.x, std::min(two_.x, three_.x));
-  double yMin = std::min(one_.y, std::min(two_.y, three_.y));
+  rectangle_t rectFrame;
+  rectFrame.height = rightTop_.y - leftBottom_.y;
+  rectFrame.width = rightTop_.x - leftBottom_.x;
+  rectFrame.center = center_;
 
-  return {xMax - xMin, yMax -  yMin, {(xMin + xMax) / 2.0, (yMin + yMax) / 2.0}};
+  return rectFrame;
 }
 
-shramko::Triangle& shramko::Triangle::operator=(shramko::Triangle&& rhs)
+void shramko::Rectangle::move(double x, double y)
 {
-  one_ = rhs.one_;
-  two_ = rhs.two_;
-  three_ = rhs.three_;
-  return *this;
+  leftBottom_.x += x;
+  leftBottom_.y += y;
+  rightTop_.x += x;
+  rightTop_.y += y;
+  center_.x += x;
+  center_.y += y;
 }
 
-void shramko::Triangle::move(point_t point)
-{
-  point_t pos;
-  pos.x = std::abs(one_.x + two_.x + three_.x) / 3.0;
-  pos.y = std::abs(one_.y + two_.y + three_.y) / 3.0;
-
-  double xMove = point.x - pos.x;
-  double yMove = point.y - pos.y;
-
-  this->move(xMove, yMove);
-}
-
-void shramko::Triangle::move(double x, double y)
-{
-  one_.x += x;
-  one_.y += y;
-
-  two_.x += x;
-  two_.y += y;
-
-  three_.x += x;
-  three_.y += y;
-}
-
-void shramko::Triangle::scale(double k)
+void shramko::Rectangle::scale(double k)
 {
   if (k <= 0)
   {
-    throw std::invalid_argument("Triangle scale err\n");
+    throw std::invalid_argument("Rect scale err\n");
   }
 
-  point_t pos;
-  pos.x = std::abs(one_.x + two_.x + three_.x) / 3.0;
-  pos.y = std::abs(one_.y + two_.y + three_.y) / 3.0;
-
-  one_.x = (one_.x - pos.x) * k + pos.x;
-  one_.y = (one_.y - pos.y) * k + pos.y;
-
-  two_.x = (two_.x - pos.x) * k + pos.x;
-  two_.y = (two_.y - pos.y) * k + pos.y;
-
-  three_.x = (three_.x - pos.x) * k + pos.x;
-  three_.y = (three_.y - pos.y) * k + pos.y;
+  leftBottom_.x *= k;
+  rightTop_.x *= k;
+  rightTop_.y *= k;
+  leftBottom_.y *= k;
 }

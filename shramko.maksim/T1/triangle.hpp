@@ -7,13 +7,12 @@ namespace shramko
 {
   class Triangle final: public Shape
   {
+  friend class Diamond;
   public:
     Triangle() = default;
     Triangle(point_t one, point_t two, point_t three);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    Triangle& operator=(Triangle&& rhs);
-    void move(point_t point) override;
     void move(double x, double y) override;
     void scale(double k) override;
   private:

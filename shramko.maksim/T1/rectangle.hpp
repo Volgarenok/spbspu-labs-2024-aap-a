@@ -11,7 +11,6 @@ namespace shramko
     Rectangle(point_t leftBottom, point_t rightTop);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void move(point_t point) override;
     void move(double x, double y) override;
     void scale(double k) override;
   private:
