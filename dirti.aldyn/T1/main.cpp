@@ -23,6 +23,7 @@ int main()
   Shape* shapes[10000] = {};
   std::string figure;
   size_t num = 0;
+  bool areWrongShapes = false;
   while (!std::cin.eof() && std::cin >> figure && figure != "SCALE")
   {
     try
@@ -33,11 +34,11 @@ int main()
         num++;
       }
     }
-    catch (std::logic_error&)
+    catch (const std::logic_error&)
     {
-      std::cerr << "Wrong shape" << "\n";
+      areWrongShapes = true;
     }
-    catch (std::bad_alloc&)
+    catch (const std::bad_alloc&)
     {
       std::cerr << "Error" << "\n";
       clearShapes(shapes);
@@ -65,9 +66,9 @@ int main()
   {
     for (size_t i = 0; i < num; ++i)
     {
-      point_t move_point = {};
-      move_point.x = scale_pos.x + (shapes[i]->getFrameRect().pos.x - scale_pos.x) * koef;
-      move_point.y = scale_pos.y + (shapes[i]->getFrameRect().pos.y - scale_pos.y) * koef;
+      double mv_x = scale_pos.x + (shapes[i]->getFrameRect().pos.x - scale_pos.x) * koef;
+      double mv_y = scale_pos.y + (shapes[i]->getFrameRect().pos.y - scale_pos.y) * koef;
+      point_t move_point = {mv_x, mv_y};
       shapes[i]->scale(koef);
       shapes[i]->move(move_point);
     }
@@ -77,6 +78,10 @@ int main()
     std::cerr << "Error" << "\n";
     clearShapes(shapes);
     return 1;
+  }
+  if (areWrongShapes)
+  {
+    std::cerr << "There are wrong descriptions for figures" << "\n";
   }
   sum_area = sum_area * koef * koef;
   std::cout << sum_area << " ";

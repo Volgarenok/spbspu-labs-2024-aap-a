@@ -3,7 +3,7 @@
 #include "square.hpp"
 #include "parallelogram.hpp"
 
-std::ostream& dirti::outputFigures(Shape** shapes, std::ostream& out)
+std::ostream& dirti::outputFigures(const Shape* const* shapes, std::ostream& out)
 {
   rectangle_t frameRect = shapes[0]->getFrameRect();
   point_t pos_ = frameRect.pos;
