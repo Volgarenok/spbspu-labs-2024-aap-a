@@ -51,13 +51,13 @@ int main()
     return 2;
   }
 
-  std::cout << total_area << " ";
+  std::cout << total_area;
   printRectangleShapes(shapes, top);
   std::cout << "\n";
 
   shramko::scaleShapes(shapes, top, k, {x, y});
   total_area = totalArea(shapes, top);
-  std::cout << total_area << " ";
+  std::cout << total_area;
   shramko::printRectangleShapes(shapes, top);
   destroyShapes(shapes, top);
 
