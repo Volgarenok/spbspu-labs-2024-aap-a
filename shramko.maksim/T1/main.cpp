@@ -1,5 +1,4 @@
 #include <iostream>
-
 #include "diamond.hpp"
 #include "rectangle.hpp"
 #include "shape.hpp"
@@ -30,7 +29,7 @@ int main()
         total_area += shape->getArea();
         shapes[top++] = shape;
       }
-    } 
+    }
     catch (std::exception& e)
     {
       std::cerr << e.what() << "\n";
@@ -63,7 +62,7 @@ int main()
   return 0;
 }
 
-shramko::Shape* shramko::readShape(std::istream & in, const std::string& name) 
+shramko::Shape* shramko::readShape(std::istream & in, const std::string& name)
 {
   if (name == "RECTANGLE")
   {
@@ -107,7 +106,7 @@ void shramko::printRectangleShapes(Shape** shapes, int size)
   }
 }
 
-void shramko::scaleShapes(Shape **shapes, int size, double k, point_t new_center) 
+void shramko::scaleShapes(Shape **shapes, int size, double k, point_t new_center)
 {
   for (int i = 0; i < size; ++i)
   {

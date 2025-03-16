@@ -15,7 +15,7 @@ namespace shramko
     double width;
     double height;
     point_t center;
-    void print() 
+    void print()
     {
       std::cout << center.x - width / 2 << " " << center.y - height / 2 << " ";
       std::cout << center.x + width / 2 << " " << center.y + height / 2 << " ";
