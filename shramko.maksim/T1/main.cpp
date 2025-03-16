@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "diamond.hpp"
 #include "rectangle.hpp"
 #include "shape.hpp"
@@ -15,6 +16,7 @@ namespace shramko
 
 int main()
 {
+  std::cout << std::fixed << std::setprecision(1);
   std::string name;
   int top = 0;
   shramko::Shape *shapes[10000] = {};
