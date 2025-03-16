@@ -9,25 +9,27 @@ shramko::Diamond::Diamond(point_t one, point_t two, point_t three):
   double B = distance(two, three);
   double C = distance(three, one);
 
-  double max_side = std::max(A,std::max(B,C));
+  double max_side = std::max(A, std::max(B, C));
   if (A == max_side)
   {
     center_ = three;
-    if (std::abs((one.x-center_.x) * (two.x-center_.x)) > 10e-6)
+    if (std::abs((one.x - center_.x) * (two.x - center_.x)) > 10e-6)
     {
       throw std::invalid_argument("invalid diamond\n");
     }
-  } else if (B == max_side)
+  }
+  else if (B == max_side)
   {
     center_ = one;
-    if (std::abs((three.x-center_.x) * (two.x-center_.x)) > 10e-6)
+    if (std::abs((three.x - center_.x) * (two.x - center_.x)) > 10e-6)
     {
       throw std::invalid_argument("invalid diamond\n");
     }
-  } else if (C == max_side)
+  }
+  else if (C == max_side)
   {
     center_ = two;
-    if (std::abs((one.y-center_.y) * (three.y-center_.y)) > 10e-6)
+    if (std::abs((one.y - center_.y) * (three.y - center_.y)) > 10e-6)
     {
       throw std::invalid_argument("invalid diamond\n");
     }
@@ -50,16 +52,19 @@ shramko::rectangle_t shramko::Diamond::getFrameRect() const
 
   if (x_max != center_.x)
   {
-    rectFrame.width = (x_max - center_.x)*2;
-  } else {
-    rectFrame.width = (center_.x-x_min)*2;
+    rectFrame.width = (x_max - center_.x) * 2;
+  }
+  else
+  {
+    rectFrame.width = (center_.x - x_min) * 2;
   }
   if (y_max != center_.y)
   {
-    rectFrame.height = (y_max - center_.y)*2;
-  } else
+    rectFrame.height = (y_max - center_.y) * 2;
+  }
+  else
   {
-    rectFrame.height = (center_.y-y_min)*2;
+    rectFrame.height = (center_.y - y_min) * 2;
   }
 
   return rectFrame;
