@@ -6,11 +6,11 @@
 
 namespace shramko
 {
-  Shape* readShape(std::istream & in,const std::string & name);
-  void printRectangleShapes(Shape** shapes, int size);
-  void scaleShapes(Shape** shapes, int size,double k,point_t center);
-  double totalArea (Shape** shapes, int size);
-  void destroyShapes(Shape** shapes, int size);
+  Shape* readShape(std::istream & in, const std::string & name);
+  void printRectangleShapes(Shape** shapes, size_t size);
+  void scaleShapes(Shape** shapes, size_t size, double k, point_t center);
+  double totalArea (Shape** shapes, size_t size);
+  void destroyShapes(Shape** shapes, size_t size);
 }
 
 int main()
@@ -23,7 +23,7 @@ int main()
   {
     try
     {
-      shramko::Shape* shape = shramko::readShape(std::cin,name);
+      shramko::Shape* shape = shramko::readShape(std::cin, name);
       if (shape != nullptr)
       {
         total_area += shape->getArea();
@@ -50,14 +50,14 @@ int main()
   }
 
   std::cout << total_area << " ";
-  printRectangleShapes(shapes,top);
+  printRectangleShapes(shapes, top);
   std::cout << "\n";
 
-  shramko::scaleShapes(shapes,top,k,{x,y});
-  total_area = totalArea(shapes,top);
+  shramko::scaleShapes(shapes, top, k, {x, y});
+  total_area = totalArea(shapes, top);
   std::cout << total_area << " ";
-  shramko::printRectangleShapes(shapes,top);
-  destroyShapes(shapes,top);
+  shramko::printRectangleShapes(shapes, top);
+  destroyShapes(shapes, top);
 
   return 0;
 }
@@ -96,9 +96,9 @@ shramko::Shape* shramko::readShape(std::istream & in, const std::string& name)
   return nullptr;
 }
 
-void shramko::printRectangleShapes(Shape** shapes, int size)
+void shramko::printRectangleShapes(Shape** shapes, size_t size)
 {
-  for (int i = 0; i < size; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
     auto r = shapes[i]->getFrameRect();
     r.print();
@@ -106,9 +106,9 @@ void shramko::printRectangleShapes(Shape** shapes, int size)
   }
 }
 
-void shramko::scaleShapes(Shape **shapes, int size, double k, point_t new_center)
+void shramko::scaleShapes(Shape **shapes, size_t size, double k, point_t new_center)
 {
-  for (int i = 0; i < size; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
     point_t c = shapes[i]->getFrameRect().center;
     shapes[i]->move(new_center);
@@ -122,10 +122,10 @@ void shramko::scaleShapes(Shape **shapes, int size, double k, point_t new_center
   }
 }
 
-double shramko::totalArea(Shape **shapes, int size)
+double shramko::totalArea(Shape **shapes, size_t size)
 {
   double total_area = 0;
-  for (int i = 0; i < size; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
     total_area += shapes[i]->getArea();
   }
@@ -133,9 +133,9 @@ double shramko::totalArea(Shape **shapes, int size)
   return total_area;
 }
 
-void shramko::destroyShapes(Shape **shapes, int size)
+void shramko::destroyShapes(Shape **shapes, size_t size)
 {
-  for (int i = 0; i < size; ++i)
+  for (size_t i = 0; i < size; ++i)
   {
     delete shapes[i];
   }
