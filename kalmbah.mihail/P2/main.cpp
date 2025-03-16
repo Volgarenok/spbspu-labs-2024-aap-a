@@ -47,9 +47,9 @@ int main()
       double arctanCmath = std::atan(x);
       double sumCmath = arcsinCmath + arctanCmath;
       try {
-        double arcsinTaylor = kalmbah::getArcsinTaylor(x, maxNumberOfIter, epsilon);
+        double arcsinTaylor = kalmbah::computeArcsinTaylor(x, maxNumberOfIter, epsilon);
         try {
-          double arctanTaylor = kalmbah::getArctanTaylor(x, maxNumberOfIter, epsilon);
+          double arctanTaylor = kalmbah::computeArctanTaylor(x, maxNumberOfIter, epsilon);
           double sumTaylor = arcsinTaylor + arctanTaylor;
           std::cout << std::fixed << std::setprecision(6)
                     << std::left << std::setw(15) << x
@@ -71,7 +71,7 @@ int main()
         }
       } catch (const std::runtime_error& e) {
         try {
-          double arctanTaylor = kalmbah::getArctanTaylor(x, maxNumberOfIter, epsilon);
+          double arctanTaylor = kalmbah::computeArctanTaylor(x, maxNumberOfIter, epsilon);
           std::cout << std::fixed << std::setprecision(6)
                     << std::left << std::setw(15) << x
                     << std::setw(15) << e.what()

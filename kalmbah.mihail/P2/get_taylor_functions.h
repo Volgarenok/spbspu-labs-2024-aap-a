@@ -4,9 +4,9 @@
 #include <cstddef>
 
 namespace kalmbah {
-  unsigned long long getFactorial(size_t n);
-  double getArcsinTaylor(double x, size_t n, double error);
-  double getArctanTaylor(double x, size_t n, double error);
+  unsigned long long computeFactorial(size_t n);
+  double computeArcsinTaylor(double x, size_t n, double error);
+  double computeArctanTaylor(double x, size_t n, double error);
 }
 
 #endif
