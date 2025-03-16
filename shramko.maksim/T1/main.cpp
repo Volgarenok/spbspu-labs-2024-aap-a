@@ -124,7 +124,7 @@ void shramko::scaleShapes(Shape **shapes, size_t size, double k, point_t new_cen
 
 double shramko::totalArea(Shape **shapes, size_t size)
 {
-  double total_area = 0;
+  double total_area = 0.0;
   for (size_t i = 0; i < size; ++i)
   {
     total_area += shapes[i]->getArea();
