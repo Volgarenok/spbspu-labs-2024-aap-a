@@ -105,6 +105,7 @@ void shramko::printRectangleShapes(Shape** shapes, size_t size)
     auto r = shapes[i]->getFrameRect();
     r.print();
   }
+  std::cout << "\b";
 }
 
 void shramko::scaleShapes(Shape **shapes, size_t size, double k, point_t new_center)
