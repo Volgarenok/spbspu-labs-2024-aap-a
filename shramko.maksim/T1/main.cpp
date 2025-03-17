@@ -7,7 +7,7 @@
 
 namespace shramko
 {
-  Shape* readShape(std::istream & in, const std::string & name);
+  Shape* readShape(std::istream& in, const std::string& name);
   void printRectangleShapes(Shape** shapes, size_t size);
   void scaleShapes(Shape** shapes, size_t size, double k, point_t center);
   double totalArea (Shape** shapes, size_t size);
@@ -21,7 +21,7 @@ int main()
   int top = 0;
   shramko::Shape *shapes[10000] = {};
   double total_area = 0.0;
-  while (std::cin >> name and name != "SCALE")
+  while (std::cin >> name && name != "SCALE")
   {
     try
     {
@@ -64,7 +64,7 @@ int main()
   return 0;
 }
 
-shramko::Shape* shramko::readShape(std::istream & in, const std::string& name)
+shramko::Shape* shramko::readShape(std::istream& in, const std::string& name)
 {
   if (name == "RECTANGLE")
   {
@@ -108,7 +108,7 @@ void shramko::printRectangleShapes(Shape** shapes, size_t size)
   std::cout << "\b";
 }
 
-void shramko::scaleShapes(Shape **shapes, size_t size, double k, point_t new_center)
+void shramko::scaleShapes(Shape** shapes, size_t size, double k, point_t new_center)
 {
   for (size_t i = 0; i < size; ++i)
   {
@@ -124,7 +124,7 @@ void shramko::scaleShapes(Shape **shapes, size_t size, double k, point_t new_cen
   }
 }
 
-double shramko::totalArea(Shape **shapes, size_t size)
+double shramko::totalArea(Shape** shapes, size_t size)
 {
   double total_area = 0.0;
   for (size_t i = 0; i < size; ++i)
