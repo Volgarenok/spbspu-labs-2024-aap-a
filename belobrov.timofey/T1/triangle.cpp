@@ -1,4 +1,5 @@
 #include "triangle.hpp"
+#include "geomFunc.hpp"
 
 namespace belobrov
 {
