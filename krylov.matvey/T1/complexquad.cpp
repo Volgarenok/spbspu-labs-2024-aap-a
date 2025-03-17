@@ -1,23 +1,37 @@
 #include "complexquad.hpp"
 #include <algorithm>
+#include <iostream>
 #include <stdexcept>
 #include "triangle.hpp"
 
 krylov::Complexquad::Complexquad(const point_t& a, const point_t& b, const point_t& c, const point_t& d):
-  t1_(a, krylov::findIntersection(a, b, c, d), {(a.x + d.x) / 2, (a.y + d.y) / 2}),
-  t2_(d, krylov::findIntersection(a, b, c, d), {(a.x + d.x) / 2, (a.y + d.y) / 2}),
-  t3_(c, krylov::findIntersection(a, b, c, d), {(b.x + c.x) / 2, (b.y + c.y) / 2}),
-  t4_(b, krylov::findIntersection(a, b, c, d), {(b.x + c.x) / 2, (b.y + c.y) / 2})
+  t1_(a, b, c),
+  t2_(a, b, c),
+  t3_(a, b, c),
+  t4_(a, b, c)
 {
   const point_t p = krylov::findIntersection(a, b, c, d);
-  bool isComplexquad = (((a.x == b.x && a.y == b.y) || (b.x == c.x && b.y == c.y) || (c.x == d.x && c.y == d.y)
-    || (a.x == c.x && a.y == c.y) || (a.x == d.x && a.y == d.y) || (b.x == d.x && b.y == d.y))
-      && (!(krylov::isPointOnSegment(p, a, b) && krylov::isPointOnSegment(p, c, d))) && (!((p.x == a.x && p.y == a.y)
-        || (p.x == b.x && p.y == b.y) || (p.x == c.x && p.y == c.y) || (p.x == d.x && p.y == d.y))));
+  bool condition = (a.x == b.x && a.y == b.y) || (b.x == c.x && b.y == c.y);
+  condition = condition || (c.x == d.x && c.y == d.y) || (a.x == c.x && a.y == c.y);
+  condition = condition || (a.x == d.x && a.y == d.y) || (b.x == d.x && b.y == d.y);
+
+  bool isNotOnSegments = !(krylov::isPointOnSegment(p, a, b) && krylov::isPointOnSegment(p, c, d));
+  condition = condition && isNotOnSegments;
+
+  bool isNotSamePoint = !(p.x == a.x && p.y == a.y) || (p.x == b.x && p.y == b.y);
+  isNotSamePoint = isNotSamePoint || (p.x == c.x && p.y == c.y) || (p.x == d.x && p.y == d.y);
+  condition = condition && isNotSamePoint;
+  bool isComplexquad = condition;
   if (isComplexquad)
   {
     throw std::invalid_argument("Invalid complexquad coordinates");
   }
+  const point_t m1 = {(a.x + d.x) / 2, (a.y + d.y) / 2};
+  const point_t m2 = {(b.x + c.x) / 2, (b.y + c.y) / 2};
+  t1_ = Triangle(a, p, m1);
+  t2_ = Triangle(d, p, m1);
+  t3_ = Triangle(c, p, m2);
+  t4_ = Triangle(b, p, m2);
   t1Center_ = t1_.getFrameRect().pos;
   t2Center_ = t2_.getFrameRect().pos;
   t3Center_ = t3_.getFrameRect().pos;
@@ -30,10 +44,14 @@ double krylov::Complexquad::getArea() const
 }
 krylov::rectangle_t krylov::Complexquad::getFrameRect() const
 {
-  double minX = std::min({t1_.getA().x, t2_.getA().x, t3_.getA().x, t4_.getA().x});
-  double maxX = std::max({t1_.getA().x, t2_.getA().x, t3_.getA().x, t4_.getA().x});
-  double maxY = std::max({t1_.getA().y, t2_.getA().y, t3_.getA().y, t4_.getA().y});
-  double minY = std::min({t1_.getA().y, t2_.getA().y, t3_.getA().y, t4_.getA().y});
+  rectangle_t f1 = t1_.getFrameRect();
+  rectangle_t f2 = t2_.getFrameRect();
+  rectangle_t f3 = t3_.getFrameRect();
+  rectangle_t f4 = t4_.getFrameRect();
+  double minX = std::min({f1.pos.x - f1.width / 2, f2.pos.x - f2.width / 2, f3.pos.x - f3.width / 2, f4.pos.x - f4.width / 2});
+  double maxX = std::max({f1.pos.x + f1.width / 2, f2.pos.x + f2.width / 2, f3.pos.x + f3.width / 2, f4.pos.x + f4.width / 2});
+  double maxY = std::max({f1.pos.y + f1.height / 2, f2.pos.y + f2.height / 2, f3.pos.y + f3.height / 2, f4.pos.y + f4.height / 2});
+  double minY = std::min({f1.pos.y - f1.height / 2, f2.pos.y - f2.height / 2, f3.pos.y - f3.height / 2, f4.pos.y - f4.height / 2});
   point_t center = {minX + (maxX - minX) / 2, minY + (maxY - minY) / 2};
   return rectangle_t{maxX - minX, maxY - minY, center};
 }
@@ -78,6 +96,6 @@ krylov::point_t krylov::findIntersection(const point_t& a, const point_t& b, con
   const double m2 = (d.y - c.y) / (d.x - c.x);
   const double b1 = a.y - m1 * a.x;
   const double b2 = c.y - m2 * c.x;
-  const point_t intersectionPoint = {(b2 - b1) / (m1 - m2), m1 * ((b2 - b1) / (m1 - m2)) + b1};
+  point_t intersectionPoint = {(b2 - b1) / (m1 - m2), m1 * ((b2 - b1) / (m1 - m2)) + b1};
   return intersectionPoint;
 }
