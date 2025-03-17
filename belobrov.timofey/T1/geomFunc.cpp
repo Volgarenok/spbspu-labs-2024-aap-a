@@ -52,7 +52,7 @@ namespace belobrov
     double sideCA = std::sqrt(std::pow((v1.x - v3.x), 2) + std::pow((v1.y - v3.y), 2));
     return (sideAB + sideBC > sideCA) && (sideAB + sideCA > sideBC) && (sideBC + sideCA > sideAB);
   }
-  double calculateTriangleArea(point_t vertexA, point_t vertexB, point_t vertexC)
+  double calculateTriangleArea(point_t v1, point_t v2, point_t v3)
   {
     double sideAB = std::sqrt(std::pow((v2.x - v1.x), 2) + std::pow((v2.y - v1.y), 2));
     double sideBC = std::sqrt(std::pow((v3.x - v2.x), 2) + std::pow((v3.y - v2.y), 2));
