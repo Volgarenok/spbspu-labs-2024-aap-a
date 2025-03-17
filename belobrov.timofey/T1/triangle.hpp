@@ -5,8 +5,9 @@
 #include "base-types.hpp"
 #include <stdexcept>
 #include <cmath>
+#include <algorithm>
 
-namespace maslovskiy
+namespace belobrov
 {
   class Triangle : public Shape
   {
