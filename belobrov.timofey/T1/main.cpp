@@ -37,6 +37,23 @@ int main() {
         return 1;
       }
       shapeCount++;
+    } else if (inputCommand == "TRIANGLE") {
+      double x1, y1, x2, y2, x3, y3;
+      std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+      if (!isCorrectTriangle({x1, y1}, {x2, y2}, {x3, y3}))
+      {
+        invalidInput = true;
+      }
+      elseelse if (inputCommand == "TRIANGLE")
+    {
+      double x1, y1, x2, y2, x3, y3;
+      std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+      if (!isCorrectTriangle({x1, y1}, {x2, y2}, {x3, y3}))
+      {
+        std::cerr << "Invalid rectangle coordinates: lower-left must be less than upper-right.\n";
+        continue;
+      }
+      shapeArray[shapeCount++] = new Triangle({x1, y1}, {x2, y2}, {x3, y3});
     } else if (inputCommand == "SCALE") {
       std::cin >> isoCenter.x >> isoCenter.y >> scalingFactor;
       if (scalingFactor <= 0) {

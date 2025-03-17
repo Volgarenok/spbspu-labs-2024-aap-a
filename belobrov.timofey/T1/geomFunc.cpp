@@ -45,4 +45,27 @@ namespace belobrov
       }
     }
   }
+  bool isCorrectTriangle(point_t v1, point_t v2, point_t v3)
+  {
+    double sideAB = std::sqrt(std::pow((v2.x - v1.x), 2) + std::pow((v2.y - v1.y), 2));
+    double sideBC = std::sqrt(std::pow((v3.x - v2.x), 2) + std::pow((v3.y - v2.y), 2));
+    double sideCA = std::sqrt(std::pow((v1.x - v3.x), 2) + std::pow((v1.y - v3.y), 2));
+    return (sideAB + sideBC > sideCA) && (sideAB + sideCA > sideBC) && (sideBC + sideCA > sideAB);
+  }
+  double calculateTriangleArea(point_t vertexA, point_t vertexB, point_t vertexC)
+  {
+    double sideAB = std::sqrt(std::pow((v2.x - v1.x), 2) + std::pow((v2.y - v1.y), 2));
+    double sideBC = std::sqrt(std::pow((v3.x - v2.x), 2) + std::pow((v3.y - v2.y), 2));
+    double sideCA = std::sqrt(std::pow((v1.x - v3.x), 2) + std::pow((v1.y - v3.y), 2));
+    double semiPerimeter = (sideAB + sideBC + sideCA) / 2;
+    return std::sqrt(semiPerimeter * (semiPerimeter - sideAB) * (semiPerimeter - sideBC) * (semiPerimeter - sideCA));
+  }
+  bool isPointInTriangle(point_t v1, point_t v2, point_t v3, point_t point)
+  {
+    double totalArea = calculateTriangleArea(v1, v2, v3);
+    double area1 = calculateTriangleArea(point, v1, v2);
+    double area2 = calculateTriangleArea(point, v2, v3);
+    double area3 = calculateTriangleArea(point, v3, v1);
+    return totalArea == (area1 + area2 + area3);
+  }
 }
