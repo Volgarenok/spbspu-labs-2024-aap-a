@@ -38,8 +38,7 @@ int main() {
         return 1;
       }
       shapeCount++;
-    } else if (inputCommand == "TRIANGLE")
-    {
+    } else if (inputCommand == "TRIANGLE") {
       double x1, y1, x2, y2, x3, y3;
       std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
       if (!isCorrectTriangle({x1, y1}, {x2, y2}, {x3, y3}))
@@ -48,6 +47,12 @@ int main() {
         continue;
       }
       shapes[shapeCount++] = new Triangle(x1, y1, x2, y2, x3, y3);
+      shapeCount++;
+    } else if (inputCommand == "CIRCLE") {
+      double x, y, radius;
+      std::cin >> x >> y >> radius;
+      shapes[shapeCommand++] = new Circle(x, y, radius)
+      shapeCount++;
     } else if (inputCommand == "SCALE") {
       std::cin >> isoCenter.x >> isoCenter.y >> scalingFactor;
       if (scalingFactor <= 0) {
