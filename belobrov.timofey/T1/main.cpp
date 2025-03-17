@@ -3,6 +3,7 @@
 #include "geomFunc.hpp"
 #include "shape.hpp"
 #include "rectangle.hpp"
+#include "triangle.hpp"
 
 using namespace belobrov;
 
@@ -46,7 +47,7 @@ int main() {
         std::cerr << "Invalid triangle coordinates.\n";
         continue;
       }
-      shapeArray[shapeCount++] = new Triangle({x1, y1}, {x2, y2}, {x3, y3});
+      shapes[shapeCount++] = new Triangle(v1, v2, v3);
     } else if (inputCommand == "SCALE") {
       std::cin >> isoCenter.x >> isoCenter.y >> scalingFactor;
       if (scalingFactor <= 0) {
