@@ -1,6 +1,11 @@
 #ifndef CIRCLE_HPP
 #define CIRCLE_HPP
 
+#include "shape.hpp"
+#include "base-types.hpp"
+#include <stdexcept>
+#include <cmath>
+
 namespace belobrov
 {
   class Circle : public Shape
