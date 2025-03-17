@@ -51,7 +51,11 @@ int main() {
     } else if (inputCommand == "CIRCLE") {
       double x, y, radius;
       std::cin >> x >> y >> radius;
-      shapes[shapeCount++] = new Circle(x, y, radius);
+      try {
+        shapes[shapeCount++] = new Circle(x, y, radius);
+      } catch (const std::invalid_argument& e) {
+        std::cerr << e.what() << std::endl;
+      }
     } else if (inputCommand == "SCALE") {
       std::cin >> isoCenter.x >> isoCenter.y >> scalingFactor;
       if (scalingFactor <= 0) {
