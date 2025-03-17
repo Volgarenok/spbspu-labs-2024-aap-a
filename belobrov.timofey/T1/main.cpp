@@ -47,11 +47,11 @@ int main() {
         std::cerr << "Invalid triangle coordinates.\n";
         continue;
       }
-      shapes[shapeCount++] = new Triangle(x1, y1, x2, y2, x3, y3)
+      shapes[shapeCount++] = new Triangle(x1, y1, x2, y2, x3, y3);
     } else if (inputCommand == "CIRCLE") {
       double x, y, radius;
       std::cin >> x >> y >> radius;
-      shapes[shapeCount++] = new Circle(x, y, radius)
+      shapes[shapeCount++] = new Circle(x, y, radius);
     } else if (inputCommand == "SCALE") {
       std::cin >> isoCenter.x >> isoCenter.y >> scalingFactor;
       if (scalingFactor <= 0) {
