@@ -1,5 +1,6 @@
 #include "geomFunc.hpp"
 #include <iostream>
+#include <cmath>
 
 namespace belobrov
 {
