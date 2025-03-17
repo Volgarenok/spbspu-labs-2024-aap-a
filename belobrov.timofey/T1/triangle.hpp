@@ -16,7 +16,7 @@ namespace belobrov
     double getArea() const override;
     point_t getCentroid() const;
     rectangle_t getFrameRect() const override;
-    void move(point_t p) override;
+    void move(const point_t& p) override;
     void move(double dx, double dy) override;
     void scale(double k) override;
   private:
