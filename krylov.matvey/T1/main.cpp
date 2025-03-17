@@ -68,6 +68,20 @@ int main()
           {
             throw std::invalid_argument("Invalid COMPLEXQUAD parameters");
           }
+          krylov::point_t a = {x1, y1};
+          krylov::point_t b = {x2, y2};
+          krylov::point_t c = {x3, y3};
+          krylov::point_t d = {x4, y4};
+          const krylov::point_t p = krylov::findIntersection(a, b, c, d);
+          bool isComplexquad = (((a.x == b.x && a.y == b.y) || (b.x == c.x && b.y == c.y) || (c.x == d.x && c.y == d.y)
+            || (a.x == c.x && a.y == c.y) || (a.x == d.x && a.y == d.y) || (b.x == d.x && b.y == d.y))
+              && (!(krylov::isPointOnSegment(p, a, b) && krylov::isPointOnSegment(p, c, d))) && (!((p.x == a.x && p.y == a.y)
+                || (p.x == b.x && p.y == b.y) || (p.x == c.x && p.y == c.y) || (p.x == d.x && p.y == d.y))));
+          if (isComplexquad)
+          {
+            std::cout << "error\n";
+            throw std::invalid_argument("Invalid complexquad coordinates");
+          }
           shapes[shapeCount++] = new krylov::Complexquad({x1, y1}, {x2, y2}, {x3, y3}, {x4, y4});
         }
         else if (shapeType == "SCALE")
