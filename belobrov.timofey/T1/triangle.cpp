@@ -26,8 +26,9 @@ namespace belobrov
     double maxX = std::max({v1_.x, v2_.x, v3_.x});
     double minY = std::min({v1_.y, v2_.y, v3_.y});
     double maxY = std::max({v1_.y, v2_.y, v3_.y});
+    point_t center = {(minX + maxX) / 2, (minY + maxY) / 2};
 
-    return { maxX - minX, maxY - minY, getCentroid() };
+    return { maxX - minX, maxY - minY, center};
   }
 
   point_t Triangle::getCentroid() const
