@@ -8,8 +8,8 @@ namespace belobrov
     double side1 = std::hypot(x2 - x1, y2 - y1);
     double side2 = std::hypot(x3 - x2, y3 - y2);
     double side3 = std::hypot(x3 - x1, y3 - y1);
-
-    if (side1 + side2 <= side3 || side1 + side3 <= side2 || side2 + side3 <= side1)
+    double area = getArea();
+    if (side1 + side2 <= side3 || side1 + side3 <= side2 || side2 + side3 <= side1 || area <= 0)
     {
       throw std::invalid_argument("Invalid triangle");
     }
