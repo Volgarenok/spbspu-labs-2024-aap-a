@@ -5,10 +5,10 @@
 #include "triangle.hpp"
 
 krylov::Complexquad::Complexquad(const point_t& a, const point_t& b, const point_t& c, const point_t& d):
-  t1_(a, b, c),
-  t2_(a, b, c),
-  t3_(a, b, c),
-  t4_(a, b, c)
+  t1_(a, krylov::findIntersection(a, b, c, d), {(a.x + d.x) / 2, (a.y + d.y) / 2}),
+  t2_(d, krylov::findIntersection(a, b, c, d), {(a.x + d.x) / 2, (a.y + d.y) / 2}),
+  t3_(c, krylov::findIntersection(a, b, c, d), {(b.x + c.x) / 2, (b.y + c.y) / 2}),
+  t4_(b, krylov::findIntersection(a, b, c, d), {(b.x + c.x) / 2, (b.y + c.y) / 2})
 {
   const point_t p = krylov::findIntersection(a, b, c, d);
   bool condition = (a.x == b.x && a.y == b.y) || (b.x == c.x && b.y == c.y);
@@ -16,22 +16,16 @@ krylov::Complexquad::Complexquad(const point_t& a, const point_t& b, const point
   condition = condition || (a.x == d.x && a.y == d.y) || (b.x == d.x && b.y == d.y);
 
   bool isNotOnSegments = !(krylov::isPointOnSegment(p, a, b) && krylov::isPointOnSegment(p, c, d));
-  condition = condition && isNotOnSegments;
+  condition = condition || isNotOnSegments;
 
-  bool isNotSamePoint = !(p.x == a.x && p.y == a.y) || (p.x == b.x && p.y == b.y);
+  bool isNotSamePoint = (p.x == a.x && p.y == a.y) || (p.x == b.x && p.y == b.y);
   isNotSamePoint = isNotSamePoint || (p.x == c.x && p.y == c.y) || (p.x == d.x && p.y == d.y);
-  condition = condition && isNotSamePoint;
+  condition = condition || isNotSamePoint;
   bool isComplexquad = condition;
   if (isComplexquad)
   {
     throw std::invalid_argument("Invalid complexquad coordinates");
   }
-  const point_t m1 = {(a.x + d.x) / 2, (a.y + d.y) / 2};
-  const point_t m2 = {(b.x + c.x) / 2, (b.y + c.y) / 2};
-  t1_ = Triangle(a, p, m1);
-  t2_ = Triangle(d, p, m1);
-  t3_ = Triangle(c, p, m2);
-  t4_ = Triangle(b, p, m2);
   t1Center_ = t1_.getFrameRect().pos;
   t2Center_ = t2_.getFrameRect().pos;
   t3Center_ = t3_.getFrameRect().pos;

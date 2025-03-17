@@ -14,9 +14,6 @@ namespace krylov
     void move(const point_t& point) override;
     void move(double dx, double dy) override;
     void unsafeScale(double factor) noexcept override;
-    point_t getA() const;
-    point_t getB() const;
-    point_t getC() const;
   private:
     point_t a_;
     point_t b_;

@@ -29,18 +29,6 @@ krylov::rectangle_t krylov::Triangle::getFrameRect() const
   point_t center = {minX + (maxX - minX) / 2, minY + (maxY - minY) / 2};
   return rectangle_t{maxX - minX, maxY - minY, center};
 }
-krylov::point_t krylov::Triangle::getA() const
-{
-  return a_;
-}
-krylov::point_t krylov::Triangle::getB() const
-{
-  return b_;
-}
-krylov::point_t krylov::Triangle::getC() const
-{
-  return c_;
-}
 void krylov::Triangle::move(const point_t& point)
 {
   point_t center = getFrameRect().pos;
