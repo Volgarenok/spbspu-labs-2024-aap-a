@@ -17,12 +17,16 @@ namespace belobrov
   {
     for (size_t i = 0; i < count; ++i) {
       if (shapes[i] != nullptr) {
-        rectangle_t frame = shapes[i]->getFrameRect();
-        if (i > 0) {
-          std::cout << " ";
+        try {
+          rectangle_t frame = shapes[i]->getFrameRect();
+          if (i > 0) {
+            std::cout << " ";
+          }
+          std::cout << frame.pos.x - frame.width / 2 << " " << frame.pos.y - frame.height / 2;
+          std::cout << " " << frame.pos.x + frame.width / 2 << " " << frame.pos.y + frame.height / 2;
+        } catch (const std::invalid_argument& e) {
+          continue;
         }
-        std::cout << frame.pos.x - frame.width / 2 << " " << frame.pos.y - frame.height / 2;
-        std::cout << " " << frame.pos.x + frame.width / 2 << " " << frame.pos.y + frame.height / 2;
       }
     }
   }
