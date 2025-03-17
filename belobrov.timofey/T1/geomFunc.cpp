@@ -25,6 +25,7 @@ namespace belobrov
           std::cout << frame.pos.x - frame.width / 2 << " " << frame.pos.y - frame.height / 2;
           std::cout << " " << frame.pos.x + frame.width / 2 << " " << frame.pos.y + frame.height / 2;
         } catch (const std::invalid_argument& e) {
+          std::cerr << "Invalid";
           continue;
         }
       }
@@ -49,6 +50,7 @@ namespace belobrov
           shapes[i]->scale(factor);
           shapes[i]->move((isCenter.x - center.x) * (factor - 1), (isCenter.y - center.y) * (factor - 1));
         } catch (const std::invalid_argument& e) {
+          std::cerr << "Invalid";
           continue;
         }
       }
