@@ -11,10 +11,10 @@ lebedev::Diamond::Diamond(point_t centre, point_t vert, point_t horiz):
   concaveCount_(0),
   capacity_(0)
 {
-  bool isCollision = ((vert.x == horiz.x && vert.y == horiz.y)
+  bool isValidArguments = !((vert.x == horiz.x && vert.y == horiz.y)
       || (vert.x == centre.x && vert.y == centre.y)
       || (horiz.x == centre.x && horiz.y == centre.y));
-  bool isValidArguments = !isCollision || (vert.x == centre.x && horiz.y == centre.y);
+  isValidArguments = isValidArguments && (vert.x == centre.x && horiz.y == centre.y);
 
   if (!isValidArguments)
   {
