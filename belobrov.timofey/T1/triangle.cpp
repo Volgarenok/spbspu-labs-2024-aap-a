@@ -17,7 +17,7 @@ namespace belobrov
 
   double Triangle::getArea() const
   {
-    return 0.5 * std::abs(v1_.x * (v2_.y - v3_.y) + v2_.x * (v3_.y - v1_.y) + v3_.x * (v1_.y - v2_.y));
+    return calculateTriangleArea(v1_, v2_, v3_);
   }
 
   rectangle_t Triangle::getFrameRect() const
