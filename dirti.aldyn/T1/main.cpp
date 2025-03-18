@@ -68,7 +68,7 @@ int main()
     {
       double mv_x = scale_pos.x + (shapes[i]->getFrameRect().pos.x - scale_pos.x) * koef;
       double mv_y = scale_pos.y + (shapes[i]->getFrameRect().pos.y - scale_pos.y) * koef;
-      point_t move_point = {mv_x, mv_y};
+      point_t move_point = { mv_x, mv_y };
       shapes[i]->scale(koef);
       shapes[i]->move(move_point);
     }
