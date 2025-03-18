@@ -23,7 +23,7 @@ namespace belobrov
     double minY = std::min({v1_.y, v2_.y, v3_.y});
     double maxY = std::max({v1_.y, v2_.y, v3_.y});
 
-    return {maxX - minX, maxY - minY, {(maxX + minX) / 2, (maxY + minY) / 2};
+    return {maxX - minX, maxY - minY, {(maxX + minX) / 2, (maxY + minY) / 2} };
   }
 
   void Triangle::move(const point_t& point)
