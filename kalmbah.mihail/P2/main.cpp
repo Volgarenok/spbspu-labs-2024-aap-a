@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iomanip>
 #include <stdexcept>
-#include "compute_giperbol_functions.hpp"
+#include "compute_hyperbol_functions.h"
 
 int main()
 {
