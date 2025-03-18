@@ -23,7 +23,7 @@ void lebedev::scaleForShapes(Shape** shps, size_t count, point_t scalePoint, dou
   }
 }
 
-void lebedev::printFrameCoordinates(Shape** shps, size_t count, std::ostream& output)
+void lebedev::printFrameCoordinates(const Shape* const* shps, size_t count, std::ostream& output)
 {
   for (size_t i = 0; i < count; ++i)
   {
@@ -35,4 +35,12 @@ void lebedev::printFrameCoordinates(Shape** shps, size_t count, std::ostream& ou
     output << ' ' << leftDownX << ' ' << leftDownY << ' ' << rightUpX << ' ' << rightUpY;
   }
   output << '\n';
+}
+
+void lebedev::deleteShapePtr(Shape** shps, size_t count)
+{
+  for (size_t i = 0; i < count; ++i)
+  {
+    delete shps[i];
+  }
 }

@@ -2,7 +2,6 @@
 #include <cmath>
 #include <stdexcept>
 #include "base-types.hpp"
-#include "auxiliaryFunctions.hpp"
 
 constexpr double TOLERANCE = 0.1;
 
@@ -11,12 +10,12 @@ lebedev::Diamond::Diamond(point_t centre, point_t vert, point_t horiz):
   concaveCount_(0),
   capacity_(0)
 {
-  bool isValidArguments = !((vert.x == horiz.x && vert.y == horiz.y)
-      || (vert.x == centre.x && vert.y == centre.y)
-      || (horiz.x == centre.x && horiz.y == centre.y));
-  isValidArguments = isValidArguments && (vert.x == centre.x && horiz.y == centre.y);
+  bool isInvalidArguments = (vert.x == horiz.x && vert.y == horiz.y);
+  isInvalidArguments = isInvalidArguments || (vert.x == centre.x && vert.y == centre.y);
+  isInvalidArguments = isInvalidArguments || (horiz.x == centre.x && horiz.y == centre.y);
+  isInvalidArguments = isInvalidArguments || !(vert.x == centre.x && horiz.y == centre.y);
 
-  if (!isValidArguments)
+  if (isInvalidArguments)
   {
     throw std::invalid_argument("");
   }
@@ -87,6 +86,11 @@ void lebedev::Diamond::expandArray()
   delete[] concaves_;
   concaves_ = newArray;
   capacity_ = newCapacity;
+}
+
+lebedev::point_t lebedev::Diamond::getMiddlePoint(point_t p1, point_t p2) const
+{
+  return { (p1.x + p2.x) / 2, (p1.y + p2.y) / 2 };
 }
 
 void lebedev::Diamond::divideIntoConcaves(point_t centre, point_t vert, point_t horiz)

@@ -21,6 +21,7 @@ namespace lebedev
     size_t concaveCount_;
     size_t capacity_;
     void expandArray();
+    point_t getMiddlePoint(point_t p1, point_t p2) const;
     void divideIntoConcaves(point_t centre, point_t vert, point_t horiz);
     double getCurrentDiamondArea(point_t centre, point_t vert, point_t horiz) const;
   };

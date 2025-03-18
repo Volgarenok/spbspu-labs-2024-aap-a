@@ -1,7 +1,7 @@
 #include "concave.hpp"
 #include <algorithm>
 #include <stdexcept>
-#include "auxiliaryFunctions.hpp"
+#include "triangleOperations.hpp"
 #include "base-types.hpp"
 
 lebedev::Concave::Concave(point_t p1, point_t p2, point_t p3, point_t p4):
@@ -25,12 +25,11 @@ double lebedev::Concave::getArea() const
 
 lebedev::rectangle_t lebedev::Concave::getFrameRect() const
 {
-  rectangle_t rect;
-  rect.width = std::max({ p1_.x, p2_.x, p3_.x }) - std::min({ p1_.x, p2_.x, p3_.x });
-  rect.height = std::max({ p1_.y, p2_.y, p3_.y }) - std::min({ p1_.y, p2_.y, p3_.y });
-  rect.pos.x = std::min({ p1_.x, p2_.x, p3_.x }) + rect.width / 2;
-  rect.pos.y = std::min({ p1_.y, p2_.y, p3_.y }) + rect.height / 2;
-  return rect;
+  double width = std::max({ p1_.x, p2_.x, p3_.x }) - std::min({ p1_.x, p2_.x, p3_.x });
+  double height = std::max({ p1_.y, p2_.y, p3_.y }) - std::min({ p1_.y, p2_.y, p3_.y });
+  double centreX = std::min({ p1_.x, p2_.x, p3_.x }) + width / 2;
+  double centreY = std::min({ p1_.y, p2_.y, p3_.y }) + height / 2;
+  return { width, height, { centreX, centreY } };
 }
 
 void lebedev::Concave::move(double dx, double dy)

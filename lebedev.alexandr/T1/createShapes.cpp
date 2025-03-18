@@ -1,6 +1,20 @@
 #include "createShapes.hpp"
-#include "concave.hpp"
-#include "auxiliaryFunctions.hpp"
+
+void lebedev::sortPoints(point_t& p1, point_t& p2, point_t& p3)
+{
+  if (p1.x > p2.x || (p1.x == p2.x && p1.y > p2.y))
+  {
+    std::swap(p1, p2);
+  }
+  if (p1.x > p3.x || (p1.x == p3.x && p1.y > p3.y))
+  {
+    std::swap(p1, p3);
+  }
+  if (p2.x > p3.x || (p2.x == p3.x && p2.y > p3.y))
+  {
+    std::swap(p2, p3);
+  }
+}
 
 lebedev::point_t lebedev::chooseScalePoint(std::istream& input)
 {
