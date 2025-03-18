@@ -6,7 +6,7 @@ namespace belobrov
   Triangle::Triangle(double x1, double y1, double x2, double y2, double x3, double y3)
     : v1_{x1, y1}, v2_{x2, y2}, v3_{x3, y3}
   {
-    if (!isCorrectTriangle(v1_, v2_, v3_) {
+    if (!isCorrectTriangle(v1_, v2_, v3_)) {
       throw std::invalid_argument("Invalid triangle");
     }
   }
@@ -22,9 +22,8 @@ namespace belobrov
     double maxX = std::max({v1_.x, v2_.x, v3_.x});
     double minY = std::min({v1_.y, v2_.y, v3_.y});
     double maxY = std::max({v1_.y, v2_.y, v3_.y});
-    point_t center = {(minX + maxX) / 2, (minY + maxY) / 2};
 
-    return {ninX + ((maxX - minX) / 2), minY + ((maxY - minY) / 2)};
+    return {minX + ((maxX - minX) / 2), minY + ((maxY - minY) / 2)};
   }
 
   void Triangle::move(const point_t& point)
