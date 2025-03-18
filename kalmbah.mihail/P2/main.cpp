@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iomanip>
 #include <stdexcept>
-#include "get_taylor_functions.h"
+#include "compute_giperbol_functions.hpp"
 
 int main()
 {

@@ -1,5 +1,6 @@
-#ifndef GET_TAYLOR_FUNCTIONS_H
-#define GET_TAYLOR_FUNCTIONS_H
+#ifndef COMPUTE_GIPERBOL_FUNCTIONS_H
+#define COMPUTE_GIPERBOL_FUNCTIONS_H
+
 #include <cstddef>
 
 namespace kalmbah

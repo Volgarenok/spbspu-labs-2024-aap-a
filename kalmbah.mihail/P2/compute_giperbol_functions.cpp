@@ -1,7 +1,7 @@
 #include <stdexcept>
 #include <cstddef>
 #include <cmath>
-#include "get_taylor_functions.h"
+#include "compute_giperbol_functions.hpp"
 
 unsigned long long kalmbah::computeFactorial(size_t n)
 {
