@@ -24,7 +24,7 @@ double kalmbah::computeArcsinTaylor(double x, size_t n, double error)
     }
     else if (i == 1)
     {
-      sum += (-2.0 / 4.0 ) * (std::pow(x, 3) / 3.0);
+      sum += (-2.0 / 4.0) * (std::pow(x, 3) / 3.0);
     }
     else
     {
