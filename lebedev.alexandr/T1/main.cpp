@@ -18,7 +18,7 @@ int main()
   point_t scalePoint;
   double k = 0;
 
-  while (std::cin >> shapeName)
+  while (std::cin >> shapeName && shapeName != "SCALE")
   {
     try
     {
@@ -48,20 +48,19 @@ int main()
     {
       isIncorrectSize = true;
     }
+  }
 
-    if (shapeName == "SCALE")
+  if (shapeName == "SCALE")
+  {
+    scalePoint = chooseScalePoint(std::cin);
+    std::cin >> k;
+    if (k <= 0)
     {
-      scalePoint = chooseScalePoint(std::cin);
-      std::cin >> k;
-      if (k <= 0)
-      {
-        std::cerr << "Incorrect scale coefficient!\n";
-        deleteShapePtr(shps, count);
-        return 1;
-      }
-      thereIsScaleCommand = true;
-      break;
+      std::cerr << "Incorrect scale coefficient!\n";
+      deleteShapePtr(shps, count);
+      return 1;
     }
+    thereIsScaleCommand = true;
   }
 
   if (std::cin.eof() && !thereIsScaleCommand)

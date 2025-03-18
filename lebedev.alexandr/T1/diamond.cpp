@@ -112,12 +112,23 @@ void lebedev::Diamond::divideIntoConcaves(point_t centre, point_t vert, point_t 
 
     point_t quarter1 = getMiddlePoint(start1, centre);
     point_t quarter2 = getMiddlePoint(end1, centre);
-    Concave* cncv1 = new Concave(start1, start2, end2, quarter1);
-    Concave* cncv2 = new Concave(end1, start2, end2, quarter2);
 
-    if (concaveCount_ == capacity_)
+    Concave* cncv1 = nullptr;
+    Concave* cncv2 = nullptr;
+    try
     {
-      expandArray();
+      cncv1 = new Concave(start1, start2, end2, quarter1);
+      cncv2 = new Concave(end1, start2, end2, quarter2);
+      if (concaveCount_ == capacity_)
+      {
+        expandArray();
+      }
+    }
+    catch (const std::bad_alloc& e)
+    {
+      delete cncv1;
+      delete cncv2;
+      throw;
     }
 
     concaves_[concaveCount_++] = cncv1;
