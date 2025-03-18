@@ -73,7 +73,7 @@ int main()
       shapes[i]->move(move_point);
     }
   }
-  catch (std::invalid_argument&)
+  catch (const std::invalid_argument&)
   {
     std::cerr << "Error" << "\n";
     clearShapes(shapes);
