@@ -77,12 +77,6 @@ int main()
         return 1;
       }
     }
-    if (std::cin.eof())
-    {
-      ivanova::deleteShapes(shapes, size);
-      std::cerr << "EOF" << '\n';
-      return 1;
-    }
     if (!isScale)
     {
       std::cerr << "Incorrect scale!" << '\n';
