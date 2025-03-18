@@ -46,11 +46,8 @@ int main() {
       {
         std::cerr << "Invalid triangle coordinates.\n";
         continue;
-      }
-      try {
+      } else {
         shapes[shapeCount++] = new Triangle(x1, y1, x2, y2, x3, y3);
-      } catch (const std::invalid_argument& e) {
-        std::cerr << e.what() << std::endl;
       }
     } else if (inputCommand == "CIRCLE") {
       double x, y, radius;

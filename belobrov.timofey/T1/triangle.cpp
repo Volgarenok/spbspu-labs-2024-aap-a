@@ -6,12 +6,7 @@ namespace belobrov
   Triangle::Triangle(double x1, double y1, double x2, double y2, double x3, double y3)
     : v1_{x1, y1}, v2_{x2, y2}, v3_{x3, y3}
   {
-    double side1 = std::hypot(x2 - x1, y2 - y1);
-    double side2 = std::hypot(x3 - x2, y3 - y2);
-    double side3 = std::hypot(x3 - x1, y3 - y1);
-    double area = getArea();
-    if (side1 + side2 <= side3 || side1 + side3 <= side2 || side2 + side3 <= side1 || area <= 0)
-    {
+    if (!isCorrectTriangle(v1_, v2_, v3_) {
       throw std::invalid_argument("Invalid triangle");
     }
   }
@@ -29,19 +24,14 @@ namespace belobrov
     double maxY = std::max({v1_.y, v2_.y, v3_.y});
     point_t center = {(minX + maxX) / 2, (minY + maxY) / 2};
 
-    return { maxX - minX, maxY - minY, center};
-  }
-
-  point_t Triangle::getCentroid() const
-  {
-    return { (v1_.x + v2_.x + v3_.x) / 3.0, (v1_.y + v2_.y + v3_.y) / 3.0 };
+    return {ninX + ((maxX - minX) / 2), minY + ((maxY - minY) / 2)};
   }
 
   void Triangle::move(const point_t& point)
   {
-    point_t centroid = getCentroid();
-    double dx = point.x - centroid.x;
-    double dy = point.y - centroid.y;
+    point_t curCenter = getFrameRect().pos;
+    double dx = point.x - curCenter.x;
+    double dy = point.y - curCenter.y;
     move(dx, dy);
   }
 
@@ -57,18 +47,17 @@ namespace belobrov
 
   void Triangle::scale(double k)
   {
-    if (k <= 0)
-    {
+    if (k <= 0) {
       throw std::invalid_argument("Scaling factor must be positive");
     }
 
-    point_t centroid = getCentroid();
+    point_t center = getFrameRect().pos;
 
-    v1_.x = centroid.x + (v1_.x - centroid.x) * k;
-    v1_.y = centroid.y + (v1_.y - centroid.y) * k;
-    v2_.x = centroid.x + (v2_.x - centroid.x) * k;
-    v2_.y = centroid.y + (v2_.y - centroid.y) * k;
-    v3_.x = centroid.x + (v3_.x - centroid.x) * k;
-    v3_.y = centroid.y + (v3_.y - centroid.y) * k;
+    v1_.x = center.x + (v1_.x - center.x) * k;
+    v1_.y = center.y + (v1_.y - center.y) * k;
+    v2_.x = center.x + (v2_.x - center.x) * k;
+    v2_.y = center.y + (v2_.y - center.y) * k;
+    v3_.x = center.x + (v3_.x - center.x) * k;
+    v3_.y = center.y + (v3_.y - center.y) * k;
   }
 }
