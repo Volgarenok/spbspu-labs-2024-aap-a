@@ -8,7 +8,7 @@ namespace dirti
   struct Rectangle final: public Shape
   {
   public:
-    Rectangle(const point_t left_low, const point_t right_high);
+    Rectangle(point_t left_low, point_t right_high);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t point) override;
