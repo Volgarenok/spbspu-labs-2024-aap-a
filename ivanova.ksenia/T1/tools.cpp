@@ -56,18 +56,19 @@ void ivanova::printFrameRect(Shape** shps, size_t size)
   std::cout << '\n';
 }
 
-void ivanova::scale(Shape** shps, size_t size, double k)
+void ivanova::scale(Shape** shps, size_t size, point_t scalePoint, double k)
 {
   for (size_t i = 0; i < size; ++i)
   {
     if (shps[i] != nullptr)
     {
       ivanova::point_t begin = shps[i]->getFrameRect().pos;
-
-      shps[i]->scale(k);
-
+      shps[i]->move(scalePoint);
       ivanova::point_t newCenter = shps[i]->getFrameRect().pos;
-      shps[i]->move(begin.x - newCenter.x, begin.y - newCenter.y);
+
+      ivanova::point_t offset = {k * (begin.x - newCenter.x),k * (begin.y - newCenter.y)};
+      shps[i]->scale(k);
+      shps[i]->move(offset);
     }
   }
 }
