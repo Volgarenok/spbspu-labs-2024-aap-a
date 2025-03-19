@@ -11,106 +11,94 @@
 
 int main()
 {
-  try
+  krylov::Shape* shapes[10000] = {nullptr};
+  size_t shapeCount = 0;
+  bool scaleCommandProcessed = false;
+  bool invalidDescriptions = false;
+  while (!std::cin.eof() && !scaleCommandProcessed)
   {
-    krylov::Shape* shapes[10000] = {nullptr};
-    size_t shapeCount = 0;
-    bool scaleCommandProcessed = false;
-    bool invalidDescriptions = false;
-    while (!std::cin.eof() && !scaleCommandProcessed)
+    std::string shapeType = "";
+    std::cin >> shapeType;
+    if (std::cin.eof())
     {
-      std::string shapeType = "";
-      std::cin >> shapeType;
-      if (std::cin.eof())
+      krylov::deleteShapes(shapes, shapeCount);
+      std::cerr << "Missing SCALE before EOF\n";
+      return 1;
+    }
+    try
+    {
+      if (shapeType == "RING" || shapeType == "TRIANGLE" || shapeType == "COMPLEXQUAD" || shapeType == "RECTANGLE")
       {
-        krylov::deleteShapes(shapes, shapeCount);
-        std::cerr << "Missing SCALE before EOF\n";
-        return 1;
+        krylov::Shape* newShape = krylov::makeShape(shapeType, std::cin);
+        shapes[shapeCount++] = newShape;
       }
-      try
+      else if (shapeType == "SCALE")
       {
-        if (shapeType == "RING" || shapeType == "TRIANGLE" || shapeType == "COMPLEXQUAD" || shapeType == "RECTANGLE")
+        if (shapeCount == 0)
         {
-          krylov::Shape* newShape = krylov::makeShape(shapeType, std::cin);
-          shapes[shapeCount++] = newShape;
+          std::cerr << "Error: Nothing to scale\n";
+          return 1;
         }
-        else if (shapeType == "SCALE")
+        double x = 0.0, y = 0.0, factor = 0.0;
+        if (!(std::cin >> x >> y >> factor))
         {
-          if (shapeCount == 0)
-          {
-            throw std::logic_error("Nothing to scale");
-          }
-          double x = 0.0, y = 0.0, factor = 0.0;
-          if (!(std::cin >> x >> y >> factor))
-          {
-            throw std::invalid_argument("Invalid SCALE parameters");
-          }
-          double totalAreaBefore = 0.0;
-          for (size_t i = 0; i < shapeCount; ++i)
-          {
-            if (shapes[i] == nullptr)
-            {
-              std::cout << "ERROR\n";
-            }
-            else
-            {
-              totalAreaBefore += shapes[i]->getArea();
-            }
-          }
-          krylov::printAreaAndFrameCoords(shapes, shapeCount, totalAreaBefore);
-          std::cout << '\n';
-
-          krylov::point_t scaleCenter = {x, y};
-          for (size_t i = 0; i < shapeCount; ++i)
-          {
-            krylov::rectangle_t frameBefore = shapes[i]->getFrameRect();
-            shapes[i]->move(scaleCenter);
-            shapes[i]->scale(factor);
-            krylov::rectangle_t frameAfter = shapes[i]->getFrameRect();
-            shapes[i]->move((frameBefore.pos.x - frameAfter.pos.x) * factor, (frameBefore.pos.y - frameAfter.pos.y) * factor);
-          }
-
-          double totalAreaAfter = 0.0;
-          for (size_t i = 0; i < shapeCount; ++i)
-          {
-            totalAreaAfter += shapes[i]->getArea();
-          }
-          krylov::printAreaAndFrameCoords(shapes, shapeCount, totalAreaAfter);
-          std::cout << '\n';
-
-          scaleCommandProcessed = true;
-          break;
+          std::cerr << "Error: Invalid SCALE parameters\n";
+          return 1;
         }
-        else
+        double totalAreaBefore = 0.0;
+        for (size_t i = 0; i < shapeCount; ++i)
         {
-          std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
+          totalAreaBefore += shapes[i]->getArea();
         }
+        krylov::printAreaAndFrameCoords(shapes, shapeCount, totalAreaBefore);
+        std::cout << '\n';
+
+        krylov::point_t scaleCenter = {x, y};
+        for (size_t i = 0; i < shapeCount; ++i)
+        {
+          krylov::rectangle_t frameBefore = shapes[i]->getFrameRect();
+          shapes[i]->move(scaleCenter);
+          shapes[i]->scale(factor);
+          krylov::rectangle_t frameAfter = shapes[i]->getFrameRect();
+          shapes[i]->move((frameBefore.pos.x - frameAfter.pos.x) * factor, (frameBefore.pos.y - frameAfter.pos.y) * factor);
+        }
+
+        double totalAreaAfter = 0.0;
+        for (size_t i = 0; i < shapeCount; ++i)
+        {
+          totalAreaAfter += shapes[i]->getArea();
+        }
+        krylov::printAreaAndFrameCoords(shapes, shapeCount, totalAreaAfter);
+        std::cout << '\n';
+
+        scaleCommandProcessed = true;
+        break;
       }
-      catch (const std::exception& e)
+      else
       {
-        invalidDescriptions = true;
         std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
       }
     }
-
-    if (!scaleCommandProcessed)
+    catch (const std::exception& e)
     {
-      krylov::deleteShapes(shapes, shapeCount);
-      throw std::invalid_argument("Missing or invalid SCALE command");
+      invalidDescriptions = true;
+      std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
     }
-
-    if (invalidDescriptions)
-    {
-      std::cerr << "Warning: Some shapes had invalid descriptions\n";
-    }
-    krylov::deleteShapes(shapes, shapeCount);
-    return 0;
   }
-  catch (const std::exception& e)
+
+  if (!scaleCommandProcessed)
   {
-    std::cerr << "Error: " << e.what() << '\n';
+    krylov::deleteShapes(shapes, shapeCount);
+    std::cerr << "Error: Missing or invalid SCALE command\n";
     return 1;
   }
+
+  if (invalidDescriptions)
+  {
+    std::cerr << "Warning: Some shapes had invalid descriptions\n";
+  }
+  krylov::deleteShapes(shapes, shapeCount);
+  return 0;
 }
 
 
