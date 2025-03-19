@@ -13,7 +13,7 @@ int main() {
   size_t shapeCount = 0;
   std::string inputCommand;
   point_t isoCenter;
-  double scalingFactor = 0.0;
+  double k = 0.0;
   bool scalingRequested = false;
 
   while (std::cin >> inputCommand) {
@@ -58,8 +58,8 @@ int main() {
         std::cerr << e.what() << std::endl;
       }
     } else if (inputCommand == "SCALE") {
-      std::cin >> isoCenter.x >> isoCenter.y >> scalingFactor;
-      if (scalingFactor <= 0) {
+      std::cin >> isoCenter.x >> isoCenter.y >> k;
+      if (k <= 0) {
         std::cerr << "Scaling factor must be positive.\n";
         deleteShapes(shapes, shapeCount);
         return 1;
@@ -88,7 +88,7 @@ int main() {
   outputFrameCoordinates(shapes, shapeCount);
   std::cout << "\n";
 
-  applyIsoScaling(shapes, shapeCount, isoCenter, scalingFactor);
+  applyIsoScaling(shapes, shapeCount, isoCenter, k);
 
   std::cout << calculateTotalArea(shapes, shapeCount) << " ";
   outputFrameCoordinates(shapes, shapeCount);
