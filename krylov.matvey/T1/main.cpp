@@ -34,6 +34,14 @@ int main()
       }
       else if (shapeType == "SCALE")
       {
+        if (shapeCount == 0)
+        {
+          std::cerr << "Error: Nothing to scale\n";
+          return 1;
+        }
+        krylov::printInfoAboutShapes(shapes, shapeCount);
+        krylov::isoScale(std::cin, shapes, shapeCount);
+        krylov::printInfoAboutShapes(shapes, shapeCount);
         scaleCommandProcessed = true;
         break;
       }
@@ -48,14 +56,6 @@ int main()
       std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
     }
   }
-  if (shapeCount == 0)
-  {
-    std::cerr << "Error: Nothing to scale\n";
-    return 1;
-  }
-  krylov::printInfoAboutShapes(shapes, shapeCount);
-  krylov::isoScale(std::cin, shapes, shapeCount);
-  krylov::printInfoAboutShapes(shapes, shapeCount);
   if (!scaleCommandProcessed)
   {
     krylov::deleteShapes(shapes, shapeCount);
