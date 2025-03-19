@@ -14,8 +14,8 @@ namespace kushekbaev
     rectangle_t getFrameRect() const override;
     void move(point_t scalePoint) override;
     void move(double dx, double dy) override;
-    void scale(double scaleCoeff) override;
     Shape* clone() const noexcept override;
+    virtual void doUnsafeScale(double scaleCoeff) override;
 
   private:
     Parallelogram parallelogram_;

@@ -34,7 +34,6 @@ namespace kushekbaev
     void pop_back();
     bool empty() const noexcept;
     size_t size() const noexcept;
-    void scaleEverything(CompositeShape* compShape, point_t scalePoint, double scaleCoeff);
 
   private:
     Shape** array_;
@@ -43,7 +42,7 @@ namespace kushekbaev
     void swap(CompositeShape& rhs);
     void scaleArray(size_t size);
     void clear();
-    void cloneArray(Shape** destination, Shape** source, size_t size);
+    void scaleEverything(CompositeShape* compShape, point_t scalePoint, double scaleCoeff);
   };
 }
 

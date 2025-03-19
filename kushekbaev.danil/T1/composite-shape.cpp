@@ -3,6 +3,17 @@
 #include <cmath>
 #include "shapeManipulations.hpp"
 
+namespace
+{
+  void cloneArray(kushekbaev::Shape** destination, kushekbaev::Shape** source, size_t size)
+  {
+    for (size_t i = 0; i < size; ++i)
+    {
+      destination[i] = source[i]->clone();
+    }
+  }
+}
+
 kushekbaev::CompositeShape::CompositeShape(size_t capacity):
   array_(new Shape*[capacity]),
   capacity_(capacity),
@@ -21,6 +32,7 @@ kushekbaev::CompositeShape::CompositeShape(const CompositeShape& rhs):
   catch (const std::bad_alloc&)
   {
     clear();
+    throw;
   }
 }
 
@@ -176,20 +188,6 @@ size_t kushekbaev::CompositeShape::size() const noexcept
   return shapeCounter_;
 }
 
-void kushekbaev::CompositeShape::scaleEverything(CompositeShape *compShape, point_t scalePoint, double scaleCoeff)
-{
-  size_t size = compShape->size();
-  for (size_t i = 0; i < size; i++)
-  {
-    point_t start = compShape[i].getFrameRect().pos;
-    compShape[i].move(scalePoint);
-    point_t end = compShape[i].getFrameRect().pos;
-    point_t vector = { (end.x - start.x) * scaleCoeff, (end.y - start.y) * scaleCoeff };
-    compShape[i].scale(scaleCoeff);
-    compShape[i].move(-vector.x,  -vector.y);
-  }
-}
-
 void kushekbaev::CompositeShape::swap(CompositeShape& rhs)
 {
   std::swap(array_, rhs.array_);
@@ -214,10 +212,16 @@ void kushekbaev::CompositeShape::clear()
   delete[] array_;
 }
 
-void kushekbaev::CompositeShape::cloneArray(Shape** destination, Shape** source, size_t size)
+void kushekbaev::CompositeShape::scaleEverything(CompositeShape *compShape, point_t scalePoint, double scaleCoeff)
 {
-  for (size_t i = 0; i < size; ++i)
+  size_t size = compShape->size();
+  for (size_t i = 0; i < size; i++)
   {
-    destination[i] = source[i]->clone();
+    point_t start = compShape[i].getFrameRect().pos;
+    compShape[i].move(scalePoint);
+    point_t end = compShape[i].getFrameRect().pos;
+    point_t vector = { (end.x - start.x) * scaleCoeff, (end.y - start.y) * scaleCoeff };
+    compShape[i].scale(scaleCoeff);
+    compShape[i].move(-vector.x,  -vector.y);
   }
 }

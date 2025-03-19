@@ -17,7 +17,7 @@ kushekbaev::Parallelogram::Parallelogram(point_t first, point_t second, point_t 
   bool isParToXflag = isParToX(first, second) || isParToX (second, third) || isParToX(first, third);
   if (!isTriangle(first, second, third) || !isParToXflag)
   {
-    throw std::invalid_argument("Incorrect parallelogram\n");
+    throw std::invalid_argument("Incorrect parallelogram");
   }
 }
 
@@ -61,20 +61,15 @@ void kushekbaev::Parallelogram::move(double dx, double dy)
   movePoints(points, size, dx, dy);
 }
 
-void kushekbaev::Parallelogram::scale(double scaleCoeff)
-{
-  if (scaleCoeff <= 0)
-  {
-    throw std::logic_error("Scale coefficient should be greater than zero\n");
-  }
-  point_t mid = getFrameRect().pos;
-
-  size_t size = 3;
-  point_t* points[] = { &points_[0], &points_[1], &points_[2] };
-  scalePoints(points, size, scaleCoeff, mid);
-}
-
 kushekbaev::Shape* kushekbaev::Parallelogram::clone() const
 {
   return new Parallelogram(*this);
+}
+
+void kushekbaev::Parallelogram::doUnsafeScale(double scaleCoeff)
+{
+  kushekbaev::point_t mid = kushekbaev::Parallelogram::getFrameRect().pos;
+  size_t size = 3;
+  kushekbaev::point_t* points[] = { &points_[0], &points_[1], &points_[2] };
+  scalePoints(points, size, scaleCoeff, mid);
 }

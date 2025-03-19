@@ -9,7 +9,7 @@ kushekbaev::Concave::Concave(point_t first, point_t second, point_t third, point
 {
   if (!isTriangle(first, second, third) || !isPointInsideTriangle(first, second, third, last))
   {
-    throw std::invalid_argument("Incorrect concave\n");
+    throw std::invalid_argument("Incorrect concave");
   }
 }
 
@@ -54,19 +54,15 @@ void kushekbaev::Concave::move(double dx, double dy)
   movePoints(points, size, dx, dy);
 }
 
-void kushekbaev::Concave::scale(double scaleCoeff)
-{
-  if (scaleCoeff <= 0)
-  {
-    throw std::logic_error("Scale coefficient should be greater than zero\n");
-  }
-  point_t mid = getFrameRect().pos;
-  size_t size = 4;
-  point_t* points[] = { &points_[0], &points_[1], &points_[2], &points_[3] };
-  scalePoints(points, size, scaleCoeff, mid);
-}
-
 kushekbaev::Shape* kushekbaev::Concave::clone() const
 {
   return new Concave(*this);
+}
+
+void kushekbaev::Concave::doUnsafeScale(double scaleCoeff)
+{
+  kushekbaev::point_t mid = kushekbaev::Concave::getFrameRect().pos;
+  size_t size = 4;
+  kushekbaev::point_t* points[] = { &points_[0], &points_[1], &points_[2], &points_[3] };
+  scalePoints(points, size, scaleCoeff, mid);
 }

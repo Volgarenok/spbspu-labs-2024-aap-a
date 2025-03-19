@@ -1,5 +1,6 @@
 #include "rectangle.hpp"
 #include <stdexcept>
+#include <memory>
 #include "base-types.hpp"
 #include "shapeUtils.hpp"
 
@@ -9,7 +10,7 @@ kushekbaev::Rectangle::Rectangle(point_t lowerLeft, point_t upperRight):
 {
   if (lowerLeft.x >= upperRight.x || lowerLeft.y >= upperRight.x)
   {
-    throw std::invalid_argument("Incorrect rectangle\n");
+    throw std::invalid_argument("Incorrect rectangle");
   }
 }
 
@@ -41,20 +42,15 @@ void kushekbaev::Rectangle::move(double dx, double dy)
   movePoints(points, size, dx, dy);
 }
 
-void kushekbaev::Rectangle::scale(double scaleCoeff)
-{
-  if (scaleCoeff <= 0)
-  {
-    throw std::logic_error("Scale coefficient should be greater than zero\n");
-  }
-  point_t mid = getFrameRect().pos;
-
-  size_t size = 2;
-  point_t* points[] = { &lowerLeft_, &upperRight_ };
-  scalePoints(points, size, scaleCoeff, mid);
-}
-
 kushekbaev::Shape* kushekbaev::Rectangle::clone() const
 {
   return new Rectangle(*this);
+}
+
+void kushekbaev::Rectangle::doUnsafeScale(double scaleCoeff)
+{
+  kushekbaev::point_t mid = kushekbaev::Rectangle::getFrameRect().pos;
+  size_t size = 2;
+  kushekbaev::point_t* points[] = { std::addressof(lowerLeft_), std::addressof(upperRight_) };
+  scalePoints(points, size, scaleCoeff, mid);
 }

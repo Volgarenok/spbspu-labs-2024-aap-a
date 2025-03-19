@@ -27,7 +27,7 @@ int main()
 
     catch (const std::bad_alloc&)
     {
-      std::cerr << "Bad alloc\n";
+      std::cerr << "Bad alloc";
       return 1;
     }
   }
@@ -36,19 +36,19 @@ int main()
 
   if (scaleCoeff <= 0)
   {
-    std::cerr << "There was no SCALE command\n";
+    std::cerr << "There was no SCALE command";
     return 1;
   }
 
   if (compShape.size() == 0)
   {
-    std::cerr << "Shapeless input\n";
+    std::cerr << "Shapeless input";
     return 1;
   }
 
   if (invalid_argument)
   {
-    std::cerr << "Some shapes were inputed incorrectly\n";
+    std::cerr << "Some shapes were inputed incorrectly";
   }
 
   kushekbaev::output(std::cout, compShape, scalePoint, scaleCoeff);

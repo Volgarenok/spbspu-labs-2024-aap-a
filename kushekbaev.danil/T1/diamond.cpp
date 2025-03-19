@@ -7,7 +7,7 @@ kushekbaev::Diamond::Diamond(const point_t mid, const point_t modX, const point_
 {
   if ((mid.x - modX.x != mid.x) || (mid.y - modX.y != mid.y + modY.y))
   {
-    throw std::invalid_argument("Incorrect diamond\n");
+    throw std::invalid_argument("Incorrect diamond");
   }
 }
 
@@ -31,12 +31,12 @@ void kushekbaev::Diamond::move(double dx, double dy)
   return parallelogram_.move(dx, dy);
 }
 
-void kushekbaev::Diamond::scale(double scaleCoeff)
-{
-  return parallelogram_.scale(scaleCoeff);
-}
-
 kushekbaev::Shape* kushekbaev::Diamond::clone() const noexcept
 {
   return new kushekbaev::Diamond(*this);
+}
+
+void kushekbaev::Diamond::doUnsafeScale(double scaleCoeff)
+{
+  parallelogram_.doUnsafeScale(scaleCoeff);
 }

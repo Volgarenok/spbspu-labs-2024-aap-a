@@ -9,7 +9,7 @@ namespace
     {
       if (!(in >> arr[i]))
       {
-        throw std::invalid_argument("Invalid input data\n");
+        throw std::invalid_argument("Invalid input data");
       }
     }
     return *arr;
@@ -18,7 +18,7 @@ namespace
 
 kushekbaev::Rectangle* kushekbaev::makeRectangle(std::istream& in)
 {
-  const size_t size = 4;
+  constexpr size_t size = 4;
   double arr[size];
   readDoubleInput(size, arr, in);
   return new kushekbaev::Rectangle({ arr[0], arr[1] }, { arr[2], arr[3] });
@@ -26,7 +26,7 @@ kushekbaev::Rectangle* kushekbaev::makeRectangle(std::istream& in)
 
 kushekbaev::Concave* kushekbaev::makeConcave(std::istream& in)
 {
-  const size_t size = 8;
+  constexpr size_t size = 8;
   double arr[size];
   readDoubleInput(size, arr, in);
   return new kushekbaev::Concave({ arr[0], arr[1] }, { arr[2], arr[3] }, { arr[4], arr[5] }, { arr[6], arr[7] });
@@ -34,7 +34,7 @@ kushekbaev::Concave* kushekbaev::makeConcave(std::istream& in)
 
 kushekbaev::Parallelogram* kushekbaev::makeParallelogram(std::istream& in)
 {
-  const size_t size = 6;
+  constexpr size_t size = 6;
   double arr[size];
   readDoubleInput(size, arr, in);
   point_t first { arr[0], arr[1] };
@@ -45,7 +45,7 @@ kushekbaev::Parallelogram* kushekbaev::makeParallelogram(std::istream& in)
 
 kushekbaev::Diamond* kushekbaev::makeDiamond(std::istream& in)
 {
-  const size_t size = 6;
+  constexpr size_t size = 6;
   double arr[size];
   readDoubleInput(size, arr, in);
   point_t first { arr[0], arr[1] };
@@ -76,18 +76,17 @@ void kushekbaev::createShape(std::istream& in, CompositeShape& compShape, std::s
   }
   else
   {
-    throw std::logic_error("Unsupported shape type\n");
+    throw std::logic_error("Unsupported shape type");
   }
-  if (shapeName != "SCALE")
+
+  try
   {
-    try
-    {
-      compShape.push_back(shape);
-    }
-    catch (const std::bad_alloc&)
-    {
-      delete shape;
-      throw;
-    }
+    compShape.push_back(shape);
+  }
+
+  catch (const std::bad_alloc&)
+  {
+    delete shape;
+    throw;
   }
 }
