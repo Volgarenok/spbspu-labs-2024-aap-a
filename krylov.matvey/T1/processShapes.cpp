@@ -107,7 +107,7 @@ krylov::Shape* krylov::makeShape(std::string str, std::istream& in)
   return figure;
 }
 
-void krylov::deleteShapes(krylov::Shape** shapes, const size_t shapeCount)
+void krylov::deleteShapes(Shape** shapes, const size_t shapeCount)
 {
   for (size_t i = 0; i < shapeCount; ++i)
   {
