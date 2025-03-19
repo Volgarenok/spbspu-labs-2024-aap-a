@@ -2,13 +2,37 @@
 #include <cmath>
 #include <stdexcept>
 
-kushekbaev::Diamond::Diamond(const point_t mid, const point_t modX, const point_t modY):
-  parallelogram_({ mid.x - modX.x, mid.y - modX.y }, { mid.x + modX.x, mid.y + modX.y }, { mid.x, mid.y + modY.y })
+kushekbaev::Diamond::Diamond(point_t p1, point_t p2, point_t p3):
+  parallelogram_(p1, p2, p3)
 {
-  if ((mid.x - modX.x != mid.x) || (mid.y - modX.y != mid.y + modY.y))
+  point_t mid;
+  double dx = 0.0, dy = 0.0;
+  if ((p1.x == p2.x) && ((p1.y == p3.y) || (p2.y == p3.y)))
   {
-    throw std::invalid_argument("Incorrect diamond");
+    mid = {p1.x, p3.y};
+    dx = std::abs(mid.x - p3.x) * 2;
+    dy = std::abs(p1.y - p2.y) * 2;
   }
+  else if ((p1.x == p3.x) && ((p1.y == p2.y) || (p2.y == p3.y)))
+  {
+    mid = {p3.x, p2.y};
+    dx = std::abs(mid.x - p2.x) * 2;
+    dy = std::abs(p3.y - p1.y) * 2;
+  }
+  else if ((p2.x == p3.x) && ((p1.y == p2.y) || (p1.y == p3.y)))
+  {
+    mid = {p3.x, p1.y};
+    dx = std::abs(p1.x - p2.x) * 2;
+    dy = std::abs(mid.y - p3.y) * 2;
+  }
+  else
+  {
+    throw std::invalid_argument("Diagonals must be parallel to the coordinate axes");
+  }
+  point_t point1 = {mid.x + dx / 2, mid.y};
+  point_t point2 = {mid.x, mid.y - dy / 2};
+  point_t point3 = {mid.x - dx / 2, mid.y};
+  parallelogram_ = Parallelogram(point1, point2, point3);
 }
 
 double kushekbaev::Diamond::getArea() const

@@ -2,6 +2,7 @@
 #define CONCAVE_HPP
 
 #include "shape.hpp"
+#include "parallelogram.hpp"
 
 namespace kushekbaev
 {
@@ -18,6 +19,8 @@ namespace kushekbaev
 
   private:
     point_t points_[4];
+    Parallelogram mainpar_;
+    Parallelogram concpar_;
   };
 }
 
