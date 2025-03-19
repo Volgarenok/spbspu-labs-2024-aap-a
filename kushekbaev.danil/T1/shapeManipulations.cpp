@@ -1,7 +1,7 @@
 #include "shapeManipulations.hpp"
 #include <iomanip>
 
-void kushekbaev::output(std::ostream& out, CompositeShape& compShape, point_t& scalePoint, double scaleCoeff)
+void kushekbaev::output(std::ostream& out, CompositeShape& compShape, const point_t& scalePoint, double scaleCoeff)
 {
   outputSum(out, compShape);
   outputPoints(out, compShape);
@@ -12,7 +12,7 @@ void kushekbaev::output(std::ostream& out, CompositeShape& compShape, point_t& s
   out << "\n";
 }
 
-void kushekbaev::outputSum(std::ostream& out, CompositeShape& compShape)
+void kushekbaev::outputSum(std::ostream& out, const CompositeShape& compShape)
 {
   double sum = 0;
   for (size_t i = 0; i < compShape.size(); i++)
@@ -24,7 +24,7 @@ void kushekbaev::outputSum(std::ostream& out, CompositeShape& compShape)
   std::cout.unsetf(std::ios_base::fixed);
 }
 
-void kushekbaev::outputPoints(std::ostream& out, CompositeShape& compShape)
+void kushekbaev::outputPoints(std::ostream& out, const CompositeShape& compShape)
 {
   for (size_t i = 0; i < compShape.size(); i++)
   {
@@ -39,7 +39,7 @@ void kushekbaev::outputPoints(std::ostream& out, CompositeShape& compShape)
   }
 }
 
-void kushekbaev::scaleToPoint(Shape* object, point_t& t, double scaleCoeff)
+void kushekbaev::scaleToPoint(Shape* object, const point_t& t, double scaleCoeff)
 {
   point_t centr_rec1 = object->getFrameRect().pos;
   object->move(t);
@@ -50,7 +50,7 @@ void kushekbaev::scaleToPoint(Shape* object, point_t& t, double scaleCoeff)
   object->move(-(x * scaleCoeff), -(y * scaleCoeff));
 }
 
-void kushekbaev::scaleNoCheck(CompositeShape& compShape, point_t& scalePoint, double scaleCoeff)
+void kushekbaev::scaleNoCheck(CompositeShape& compShape, const point_t& scalePoint, double scaleCoeff)
 {
   for (size_t i = 0; i < compShape.size(); i++)
   {
@@ -58,7 +58,7 @@ void kushekbaev::scaleNoCheck(CompositeShape& compShape, point_t& scalePoint, do
   }
 }
 
-void kushekbaev::scaleCheck(CompositeShape& compShape, point_t& scalePoint, double scaleCoeff)
+void kushekbaev::scaleCheck(CompositeShape& compShape, const point_t& scalePoint, double scaleCoeff)
 {
   if (scaleCoeff <= 0)
   {
