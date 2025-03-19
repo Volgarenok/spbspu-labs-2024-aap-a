@@ -5,8 +5,7 @@ namespace belobrov
   Circle::Circle(double x, double y, double radius)
     : center_{x, y}, radius_(radius)
   {
-    if (radius_ <= 0)
-    {
+    if (radius_ <= 0) {
       throw std::invalid_argument("Radius must be positive");
     }
   }
@@ -34,8 +33,7 @@ namespace belobrov
 
   void Circle::scale(double k)
   {
-    if (k <= 0)
-    {
+    if (k <= 0) {
       throw std::invalid_argument("Scaling factor must be positive");
     }
     radius_ *= k;

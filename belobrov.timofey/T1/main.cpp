@@ -39,16 +39,17 @@ int main() {
         return 1;
       }
       shapeCount++;
+
     } else if (inputCommand == "TRIANGLE") {
       double x1, y1, x2, y2, x3, y3;
       std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
-      if (!isCorrectTriangle({x1, y1}, {x2, y2}, {x3, y3}))
-      {
+      if (!isCorrectTriangle({x1, y1}, {x2, y2}, {x3, y3})) {
         std::cerr << "Invalid triangle coordinates.\n";
         continue;
       } else {
         shapes[shapeCount++] = new Triangle(x1, y1, x2, y2, x3, y3);
       }
+
     } else if (inputCommand == "CIRCLE") {
       double x, y, radius;
       std::cin >> x >> y >> radius;
@@ -57,6 +58,7 @@ int main() {
       } catch (const std::invalid_argument& e) {
         std::cerr << e.what() << std::endl;
       }
+
     } else if (inputCommand == "SCALE") {
       std::cin >> isoCenter.x >> isoCenter.y >> k;
       if (k <= 0) {
@@ -66,6 +68,7 @@ int main() {
       }
       scalingRequested = true;
       break;
+
     } else {
       std::cerr << "Unknown command: " << inputCommand << "\n";
       deleteShapes(shapes, shapeCount);
