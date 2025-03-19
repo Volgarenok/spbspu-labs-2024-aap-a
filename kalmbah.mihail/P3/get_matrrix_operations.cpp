@@ -77,7 +77,7 @@ void createSymmetricMatrices(const int* matrix, int* result, int rows, int cols)
   {
     for (int j = 0; j < cols; ++j)
     {
-      result[(2 * rows - 1 - i) * (2 * cols) + (2 * cols - 1 - j)] = matrix[i * cols + j];
+      result[( 2 * rows - 1 - i) * (2 * cols) + (2 * cols - 1 - j)] = matrix[i * cols + j];
     }
   }
 }
