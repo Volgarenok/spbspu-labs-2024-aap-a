@@ -19,8 +19,8 @@ krylov::Rectangle* krylov::makeRectangle(std::istream &in)
 {
   constexpr size_t k = 4;
   double arr[k] = {};
-  krylov::getArray(in, arr, k);
-  krylov::Rectangle* rect = new krylov::Rectangle({arr[0], arr[1]}, {arr[2], arr[3]});
+  getArray(in, arr, k);
+  Rectangle* rect = new Rectangle({arr[0], arr[1]}, {arr[2], arr[3]});
   return rect;
 }
 
@@ -28,8 +28,8 @@ krylov::Triangle* krylov::makeTriangle(std::istream &in)
 {
   constexpr size_t k = 6;
   double arr[k] = {};
-  krylov::getArray(in, arr, k);
-  krylov::Triangle* triangle = new krylov::Triangle({arr[0], arr[1]}, {arr[2], arr[3]}, {arr[4], arr[5]});
+  getArray(in, arr, k);
+  Triangle* triangle = new Triangle({arr[0], arr[1]}, {arr[2], arr[3]}, {arr[4], arr[5]});
   return triangle;
 }
 
@@ -37,8 +37,8 @@ krylov::Complexquad* krylov::makeComplexquad(std::istream &in)
 {
   constexpr size_t k = 8;
   double arr[k] = {};
-  krylov::getArray(in, arr, k);
-  krylov::Complexquad* cq = new krylov::Complexquad({arr[0], arr[1]}, {arr[2], arr[3]}, {arr[4], arr[5]}, {arr[6], arr[7]});
+  getArray(in, arr, k);
+  Complexquad* cq = new Complexquad({arr[0], arr[1]}, {arr[2], arr[3]}, {arr[4], arr[5]}, {arr[6], arr[7]});
   return cq;
 }
 
@@ -46,14 +46,41 @@ krylov::Ring* krylov::makeRing(std::istream &in)
 {
   constexpr size_t k = 4;
   double arr[k] = {};
-  krylov::getArray(in, arr, k);
-  krylov::Ring* ring = new krylov::Ring({arr[0], arr[1]}, arr[2], arr[3]);
+  getArray(in, arr, k);
+  Ring* ring = new Ring({arr[0], arr[1]}, arr[2], arr[3]);
   return ring;
+}
+
+void krylov::isoScale(std::istream &in, Shape** shapes, const size_t shapeCount)
+{
+  constexpr size_t k = 3;
+  double arr[k] = {};
+  getArray(in, arr, k);
+  point_t scaleCenter = {arr[0], arr[1]};
+  for (size_t i = 0; i < shapeCount; ++i)
+  {
+    rectangle_t frameBefore = shapes[i]->getFrameRect();
+    shapes[i]->move(scaleCenter);
+    shapes[i]->scale(arr[2]);
+    rectangle_t frameAfter = shapes[i]->getFrameRect();
+    shapes[i]->move((frameBefore.pos.x - frameAfter.pos.x) * arr[2], (frameBefore.pos.y - frameAfter.pos.y) * arr[2]);
+  }
+}
+
+void krylov::printInfoAboutShapes(Shape** shapes, const size_t shapeCount)
+{
+  double totalArea = 0.0;
+  for (size_t i = 0; i < shapeCount; ++i)
+  {
+    totalArea += shapes[i]->getArea();
+  }
+  printAreaAndFrameCoords(shapes, shapeCount, totalArea);
+  std::cout << '\n';
 }
 
 krylov::Shape* krylov::makeShape(std::string str, std::istream& in)
 {
-  krylov::Shape* figure = nullptr;
+  Shape* figure = nullptr;
   try
   {
     if (str == "RECTANGLE")

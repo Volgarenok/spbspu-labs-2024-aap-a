@@ -39,39 +39,9 @@ int main()
           std::cerr << "Error: Nothing to scale\n";
           return 1;
         }
-        double x = 0.0, y = 0.0, factor = 0.0;
-        std::cin >> x >> y >> factor;
-        //if (!(std::cin >> x >> y >> factor))
-        //{
-          //std::cerr << "Error: Invalid SCALE parameters\n";
-          //return 1;
-        //}
-        double totalAreaBefore = 0.0;
-        for (size_t i = 0; i < shapeCount; ++i)
-        {
-          totalAreaBefore += shapes[i]->getArea();
-        }
-        krylov::printAreaAndFrameCoords(shapes, shapeCount, totalAreaBefore);
-        std::cout << '\n';
-
-        krylov::point_t scaleCenter = {x, y};
-        for (size_t i = 0; i < shapeCount; ++i)
-        {
-          krylov::rectangle_t frameBefore = shapes[i]->getFrameRect();
-          shapes[i]->move(scaleCenter);
-          shapes[i]->scale(factor);
-          krylov::rectangle_t frameAfter = shapes[i]->getFrameRect();
-          shapes[i]->move((frameBefore.pos.x - frameAfter.pos.x) * factor, (frameBefore.pos.y - frameAfter.pos.y) * factor);
-        }
-
-        double totalAreaAfter = 0.0;
-        for (size_t i = 0; i < shapeCount; ++i)
-        {
-          totalAreaAfter += shapes[i]->getArea();
-        }
-        krylov::printAreaAndFrameCoords(shapes, shapeCount, totalAreaAfter);
-        std::cout << '\n';
-
+        krylov::printInfoAboutShapes(shapes, shapeCount);
+        krylov::isoScale(std::cin, shapes, shapeCount);
+        krylov::printInfoAboutShapes(shapes, shapeCount);
         scaleCommandProcessed = true;
         break;
       }
