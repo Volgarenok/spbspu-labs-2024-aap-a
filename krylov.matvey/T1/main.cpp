@@ -29,46 +29,10 @@ int main()
       }
       try
       {
-        if (shapeType == "RECTANGLE")
+        if (shapeType == "RING" || shapeType == "TRIANGLE" || shapeType == "COMPLEXQUAD" || shapeType == "RECTANGLE")
         {
-          double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0;
-          if (!(std::cin >> x1 >> y1 >> x2 >> y2))
-          {
-            throw std::invalid_argument("Invalid RECTANGLE parameters");
-          }
-          shapes[shapeCount++] = new krylov::Rectangle({x1, y1}, {x2, y2});
-        }
-        else if (shapeType == "RING")
-        {
-          double x, y, outerRadius, innerRadius;
-          if (!(std::cin >> x >> y >> outerRadius >> innerRadius))
-          {
-            throw std::invalid_argument("Invalid RING parameters");
-          }
-          shapes[shapeCount++] = new krylov::Ring({x, y}, outerRadius, innerRadius);
-        }
-        else if (shapeType == "TRIANGLE")
-        {
-          double x1 = 0.0, y1 = 0.0;
-          double x2 = 0.0, y2 = 0.0;
-          double x3 = 0.0, y3 = 0.0;
-          if (!(std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3))
-          {
-            throw std::invalid_argument("Invalid TRIANGLE parameters");
-          }
-          shapes[shapeCount++] = new krylov::Triangle({x1, y1}, {x2, y2}, {x3, y3});
-        }
-        else if (shapeType == "COMPLEXQUAD")
-        {
-          double x1 = 0.0, y1 = 0.0;
-          double x2 = 0.0, y2 = 0.0;
-          double x3 = 0.0, y3 = 0.0;
-          double x4 = 0.0, y4 = 0.0;
-          if (!(std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4))
-          {
-            throw std::invalid_argument("Invalid COMPLEXQUAD parameters");
-          }
-          shapes[shapeCount++] = new krylov::Complexquad({x1, y1}, {x2, y2}, {x3, y3}, {x4, y4});
+          krylov::Shape* newShape = krylov::makeShape(shapeType, std::cin);
+          shapes[shapeCount++] = newShape;
         }
         else if (shapeType == "SCALE")
         {
@@ -81,15 +45,17 @@ int main()
           {
             throw std::invalid_argument("Invalid SCALE parameters");
           }
-          if (factor <= 0)
-          {
-            throw std::invalid_argument("Scale factor must be positive");
-          }
-
           double totalAreaBefore = 0.0;
           for (size_t i = 0; i < shapeCount; ++i)
           {
-            totalAreaBefore += shapes[i]->getArea();
+            if (shapes[i] == nullptr)
+            {
+              std::cout << "ERROR\n";
+            }
+            else
+            {
+              totalAreaBefore += shapes[i]->getArea();
+            }
           }
           krylov::printAreaAndFrameCoords(shapes, shapeCount, totalAreaBefore);
           std::cout << '\n';

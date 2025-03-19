@@ -4,13 +4,19 @@
 #include <cstddef>
 #include <istream>
 #include "shape.hpp"
+#include "rectangle.hpp"
+#include "ring.hpp"
+#include "complexquad.hpp"
+#include "triangle.hpp"
 
 namespace krylov
 {
-  Shape* createRectangle(std::istream &in);
-  Shape* createTriangle(std::istream &in);
-  Shape* createRing(std::istream &in);
-  Shape* createComplexquad(std::istream &in);
+  void getArray(std::istream &in, double *array, const size_t k);
+  Rectangle* makeRectangle(std::istream &in);
+  Triangle* makeTriangle(std::istream &in);
+  Complexquad* makeComplexquad(std::istream &in);
+  Ring* makeRing(std::istream &in);
+  Shape* makeShape(std::string str, std::istream& in);
   void deleteShapes(Shape** shapes, const size_t shapeCount);
   void printAreaAndFrameCoords(Shape** shapes, const size_t shapeCount, const double totalArea);
 }

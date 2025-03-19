@@ -7,49 +7,77 @@
 #include "triangle.hpp"
 #include "complexquad.hpp"
 
-krylov::Shape* krylov::createRectangle(std::istream& in)
+void krylov::getArray(std::istream &in, double *array, const size_t k)
 {
-  double x1 = 0.0, y1 = 0.0, x2 = 0.0, y2 = 0.0;
-  if (!(in >> x1 >> y1 >> x2 >> y2))
+  for (size_t i = 0; i < k; ++i)
   {
-    throw std::invalid_argument("Invalid RECTANGLE parameters");
+    in >> array[i];
   }
-  return new krylov::Rectangle({x1, y1}, {x2, y2});
 }
 
-krylov::Shape* krylov::createTriangle(std::istream& in)
+krylov::Rectangle* krylov::makeRectangle(std::istream &in)
 {
-  double x1 = 0.0, y1 = 0.0;
-  double x2 = 0.0, y2 = 0.0;
-  double x3 = 0.0, y3 = 0.0;
-  if (!(in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3))
-  {
-    throw std::invalid_argument("Invalid TRIANGLE parameters");
-  }
-  return new krylov::Triangle({x1, y1}, {x2, y2}, {x3, y3});
+  constexpr size_t k = 4;
+  double arr[k] = {};
+  krylov::getArray(in, arr, k);
+  krylov::Rectangle* rect = new krylov::Rectangle({arr[0], arr[1]}, {arr[2], arr[3]});
+  return rect;
 }
 
-krylov::Shape* krylov::createRing(std::istream& in)
+krylov::Triangle* krylov::makeTriangle(std::istream &in)
 {
-  double x, y, outerRadius, innerRadius;
-  if (!(in >> x >> y >> outerRadius >> innerRadius))
-  {
-    throw std::invalid_argument("Invalid RING parameters");
-  }
-  return new krylov::Ring({x, y}, outerRadius, innerRadius);
+  constexpr size_t k = 6;
+  double arr[k] = {};
+  krylov::getArray(in, arr, k);
+  krylov::Triangle* triangle = new krylov::Triangle({arr[0], arr[1]}, {arr[2], arr[3]}, {arr[4], arr[5]});
+  return triangle;
 }
 
-krylov::Shape* krylov::createComplexquad(std::istream& in)
+krylov::Complexquad* krylov::makeComplexquad(std::istream &in)
 {
-  double x1 = 0.0, y1 = 0.0;
-  double x2 = 0.0, y2 = 0.0;
-  double x3 = 0.0, y3 = 0.0;
-  double x4 = 0.0, y4 = 0.0;
-  if (!(in >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4))
+  constexpr size_t k = 8;
+  double arr[k] = {};
+  krylov::getArray(in, arr, k);
+  krylov::Complexquad* cq = new krylov::Complexquad({arr[0], arr[1]}, {arr[2], arr[3]}, {arr[4], arr[5]}, {arr[6], arr[7]});
+  return cq;
+}
+
+krylov::Ring* krylov::makeRing(std::istream &in)
+{
+  constexpr size_t k = 4;
+  double arr[k] = {};
+  krylov::getArray(in, arr, k);
+  krylov::Ring* ring = new krylov::Ring({arr[0], arr[1]}, arr[2], arr[3]);
+  return ring;
+}
+
+krylov::Shape* krylov::makeShape(std::string str, std::istream& in)
+{
+  krylov::Shape* figure = nullptr;
+  try
   {
-    throw std::invalid_argument("Invalid COMPLEXQUAD parameters");
+    if (str == "RECTANGLE")
+    {
+      figure = makeRectangle(in);
+    }
+    else if (str == "TRIANGLE")
+    {
+      figure = makeTriangle(in);
+    }
+    else if (str == "COMPLEXQUAD")
+    {
+      figure = makeComplexquad(in);
+    }
+    else if (str == "RING")
+    {
+      figure = makeRing(in);
+    }
   }
-  return new krylov::Complexquad({x1, y1}, {x2, y2}, {x3, y3}, {x4, y4});
+  catch (const std::exception& e)
+  {
+    throw;
+  }
+  return figure;
 }
 
 void krylov::deleteShapes(krylov::Shape** shapes, const size_t shapeCount)
@@ -62,6 +90,7 @@ void krylov::deleteShapes(krylov::Shape** shapes, const size_t shapeCount)
     }
   }
 }
+
 void krylov::printAreaAndFrameCoords(Shape** shapes, const size_t shapeCount, const double totalArea)
 {
   std::cout << std::fixed << std::setprecision(1) << totalArea << ' ';
