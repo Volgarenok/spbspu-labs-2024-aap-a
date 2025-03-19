@@ -49,8 +49,8 @@ kushekbaev::Shape* kushekbaev::Rectangle::clone() const
 
 void kushekbaev::Rectangle::doUnsafeScale(double scaleCoeff)
 {
-  kushekbaev::point_t mid = kushekbaev::Rectangle::getFrameRect().pos;
+  point_t mid = Rectangle::getFrameRect().pos;
   size_t size = 2;
-  kushekbaev::point_t* points[] = { std::addressof(lowerLeft_), std::addressof(upperRight_) };
+  point_t* points[] = { std::addressof(lowerLeft_), std::addressof(upperRight_) };
   scalePoints(points, size, scaleCoeff, mid);
 }

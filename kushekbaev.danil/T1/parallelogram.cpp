@@ -1,6 +1,7 @@
 #include "parallelogram.hpp"
 #include <stdexcept>
 #include <cmath>
+#include <memory>
 #include "shapeUtils.hpp"
 
 namespace
@@ -57,7 +58,7 @@ void kushekbaev::Parallelogram::move(point_t scalePoint)
 void kushekbaev::Parallelogram::move(double dx, double dy)
 {
   size_t size = 3;
-  point_t* points[] = { &points_[0], &points_[1], &points_[2] };
+  point_t* points[] = { std::addressof(points_[0]), std::addressof(points_[1]), std::addressof(points_[2]) };
   movePoints(points, size, dx, dy);
 }
 
@@ -68,8 +69,8 @@ kushekbaev::Shape* kushekbaev::Parallelogram::clone() const
 
 void kushekbaev::Parallelogram::doUnsafeScale(double scaleCoeff)
 {
-  kushekbaev::point_t mid = kushekbaev::Parallelogram::getFrameRect().pos;
+  point_t mid = getFrameRect().pos;
   size_t size = 3;
-  kushekbaev::point_t* points[] = { &points_[0], &points_[1], &points_[2] };
+  point_t* points[] = { std::addressof(points_[0]), std::addressof(points_[1]), std::addressof(points_[2]) };
   scalePoints(points, size, scaleCoeff, mid);
 }

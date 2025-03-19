@@ -50,7 +50,8 @@ void kushekbaev::Concave::move(point_t scalePoint)
 void kushekbaev::Concave::move(double dx, double dy)
 {
   size_t size = 4;
-  point_t* points[] = { &points_[0], &points_[1], &points_[2], &points_[3] };
+  point_t* points[] = { std::addressof(points_[0]), std::addressof(points_[1]), std::addressof(points_[2]),
+    std::addressof(points_[3]) };
   movePoints(points, size, dx, dy);
 }
 
@@ -61,8 +62,9 @@ kushekbaev::Shape* kushekbaev::Concave::clone() const
 
 void kushekbaev::Concave::doUnsafeScale(double scaleCoeff)
 {
-  kushekbaev::point_t mid = kushekbaev::Concave::getFrameRect().pos;
+  point_t mid = getFrameRect().pos;
   size_t size = 4;
-  kushekbaev::point_t* points[] = { &points_[0], &points_[1], &points_[2], &points_[3] };
+  point_t* points[] = { std::addressof(points_[0]), std::addressof(points_[1]), std::addressof(points_[2]),
+    std::addressof(points_[3]) };
   scalePoints(points, size, scaleCoeff, mid);
 }
