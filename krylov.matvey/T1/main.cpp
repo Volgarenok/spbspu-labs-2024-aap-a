@@ -40,11 +40,12 @@ int main()
           return 1;
         }
         double x = 0.0, y = 0.0, factor = 0.0;
-        if (!(std::cin >> x >> y >> factor))
-        {
-          std::cerr << "Error: Invalid SCALE parameters\n";
-          return 1;
-        }
+        std::cin >> x >> y >> factor;
+        //if (!(std::cin >> x >> y >> factor))
+        //{
+          //std::cerr << "Error: Invalid SCALE parameters\n";
+          //return 1;
+        //}
         double totalAreaBefore = 0.0;
         for (size_t i = 0; i < shapeCount; ++i)
         {
