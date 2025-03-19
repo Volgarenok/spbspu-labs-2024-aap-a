@@ -14,8 +14,8 @@ double ivanova::Diamond::getArea() const
 
 ivanova::rectangle_t ivanova::Diamond::getFrameRect() const
 {
-  double width = std::fabs(center_.x - bottomPoint_.x) * 2;
-  double height = std::fabs(center_.y - topPoint_.y) * 2;
+  double width = std::fabs(bottomPoint_.x - center_.x) * 2;
+  double height = std::fabs(topPoint_.y - center_.y) * 2;
   return { width, height, center_ };
 }
 
@@ -37,6 +37,12 @@ void ivanova::Diamond::move(double x, double y)
 
 void ivanova::Diamond::scale(double ratio)
 {
+  if (ratio <= 0)
+  {
+    throw std::invalid_argument("Scale ratio must be positive.");
+  }
+  topPoint_.x = center_.x + (topPoint_.x - center_.x) * ratio;
   topPoint_.y = center_.y + (topPoint_.y - center_.y) * ratio;
   bottomPoint_.x = center_.x + (bottomPoint_.x - center_.x) * ratio;
+  bottomPoint_.y = center_.y + (bottomPoint_.y - center_.y) * ratio;
 }

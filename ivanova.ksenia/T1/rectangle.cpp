@@ -23,13 +23,14 @@ ivanova::rectangle_t ivanova::Rectangle::getFrameRect() const
   double width = rightTop_.x - leftBottom_.x;
   double height = rightTop_.y - leftBottom_.y;
   ivanova::point_t pos = { leftBottom_.x + width / 2.0, leftBottom_.y + height / 2.0 };
-  return {height, width, pos};
+  return {width, height, pos};
 }
 
 void ivanova::Rectangle::move(point_t point)
 {
-  double moveX = point.x - getFrameRect().pos.x;
-  double moveY = point.y - getFrameRect().pos.y;
+  point_t center = getFrameRect().pos;
+  double moveX = point.x - center.x;
+  double moveY = point.y - center.y;
   leftBottom_ = {leftBottom_.x + moveX, leftBottom_.y + moveY};
   rightTop_ = {rightTop_.x + moveX, rightTop_.y + moveY};
 }
@@ -42,6 +43,10 @@ void ivanova::Rectangle::move(double x, double y)
 
 void ivanova::Rectangle::scale(double ratio)
 {
+  if (ratio <= 0)
+  {
+    throw std::invalid_argument("Scale ratio must be positive.");
+  }
   point_t center = getFrameRect().pos;
   leftBottom_.x = center.x + (leftBottom_.x - center.x) * ratio;
   leftBottom_.y = center.y + (leftBottom_.y - center.y) * ratio;

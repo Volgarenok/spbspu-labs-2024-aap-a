@@ -54,13 +54,17 @@ void ivanova::Concave::move(double x, double y)
 
 void ivanova::Concave::scale(double ratio)
 {
+  if (ratio <= 0)
+  {
+    throw std::invalid_argument("Scale ratio must be positive.");
+  }
   point_t pos = getFrameRect().pos;
-  cnPoint1_.x = pos.x - (pos.x - cnPoint1_.x) * ratio;
-  cnPoint1_.y = pos.y - (pos.y - cnPoint1_.y) * ratio;
-  cnPoint2_.x = pos.x - (pos.x - cnPoint2_.x) * ratio;
-  cnPoint2_.y = pos.y - (pos.y - cnPoint2_.y) * ratio;
-  cnPoint3_.x = pos.x - (pos.x - cnPoint3_.x) * ratio;
-  cnPoint3_.y = pos.y - (pos.y - cnPoint3_.y) * ratio;
-  cnPoint4_.x = pos.x - (pos.x - cnPoint4_.x) * ratio;
-  cnPoint4_.y = pos.y - (pos.y - cnPoint4_.y) * ratio;
+  cnPoint1_.x = pos.x + (cnPoint1_.x - pos.x) * ratio;
+  cnPoint1_.y = pos.y + (cnPoint1_.y - pos.y) * ratio;
+  cnPoint2_.x = pos.x + (cnPoint2_.x - pos.x) * ratio;
+  cnPoint2_.y = pos.y + (cnPoint2_.y - pos.y) * ratio;
+  cnPoint3_.x = pos.x + (cnPoint3_.x - pos.x) * ratio;
+  cnPoint3_.y = pos.y + (cnPoint3_.y - pos.y) * ratio;
+  cnPoint4_.x = pos.x + (cnPoint4_.x - pos.x) * ratio;
+  cnPoint4_.y = pos.y + (cnPoint4_.y - pos.y) * ratio;
 }

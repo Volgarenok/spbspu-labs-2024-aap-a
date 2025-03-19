@@ -60,7 +60,7 @@ void ivanova::scale(Shape** shps, size_t size, point_t scalePoint, double k)
 {
   if (k <= 0)
   {
-    throw std::invalid_argument("Invalid scale ratio: ratio must be positive.");
+    throw std::invalid_argument("Invalid scale ratio!");
   }
   for (size_t i = 0; i < size; ++i)
   {

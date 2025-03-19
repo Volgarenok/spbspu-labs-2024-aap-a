@@ -54,13 +54,17 @@ void ivanova::Complexquad::move(double x, double y)
 
 void ivanova::Complexquad::scale(double ratio)
 {
+  if (ratio <= 0)
+  {
+    throw std::invalid_argument("Scale ratio must be positive.");
+  }
   point_t pos = getFrameRect().pos;
-  point1_.x = pos.x - (pos.x - point1_.x) * ratio;
-  point1_.y = pos.y - (pos.y - point1_.y) * ratio;
-  point2_.x = pos.x - (pos.x - point2_.x) * ratio;
-  point2_.y = pos.y - (pos.y - point2_.y) * ratio;
-  point3_.x = pos.x - (pos.x - point3_.x) * ratio;
-  point3_.y = pos.y - (pos.y - point3_.y) * ratio;
-  point4_.x = pos.x - (pos.x - point4_.x) * ratio;
-  point4_.y = pos.y - (pos.y - point4_.y) * ratio;
+  point1_.x = pos.x + (point1_.x - pos.x) * ratio;
+  point1_.y = pos.y + (point1_.y - pos.y) * ratio;
+  point2_.x = pos.x + (point2_.x - pos.x) * ratio;
+  point2_.y = pos.y + (point2_.y - pos.y) * ratio;
+  point3_.x = pos.x + (point3_.x - pos.x) * ratio;
+  point3_.y = pos.y + (point3_.y - pos.y) * ratio;
+  point4_.x = pos.x + (point4_.x - pos.x) * ratio;
+  point4_.y = pos.y + (point4_.y - pos.y) * ratio;
 }
