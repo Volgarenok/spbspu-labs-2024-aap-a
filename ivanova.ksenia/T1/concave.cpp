@@ -82,16 +82,3 @@ void ivanova::Concave::scale(double ratio)
   cnPoint3_.x = cnPoint4_.x + (cnPoint3_.x - cnPoint4_.x) * ratio;
   cnPoint3_.y = cnPoint4_.y + (cnPoint3_.y - cnPoint4_.y) * ratio;
 }
-void ivanova::Concave::scale(double ratio)
-{
-  if (ratio <= 0)
-  {
-    throw std::invalid_argument("Scale ratio must be positive.");
-  }
-  cnPoint1_.x = cnPoint4_.x + (cnPoint1_.x - cnPoint4_.x) * ratio;
-  cnPoint1_.y = cnPoint4_.y + (cnPoint1_.y - cnPoint4_.y) * ratio;
-  cnPoint2_.x = cnPoint4_.x + (cnPoint2_.x - cnPoint4_.x) * ratio;
-  cnPoint2_.y = cnPoint4_.y + (cnPoint2_.y - cnPoint4_.y) * ratio;
-  cnPoint3_.x = cnPoint4_.x + (cnPoint3_.x - cnPoint4_.x) * ratio;
-  cnPoint3_.y = cnPoint4_.y + (cnPoint3_.y - cnPoint4_.y) * ratio;
-}
