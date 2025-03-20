@@ -23,7 +23,7 @@ ivanova::Concave* ivanova::createConcave(std::istream& input)
   double A = (p1.x-p4.x)*(p2.y-p1.y)-(p2.x-p1.x)*(p1.y-p4.y);
   double B = (p2.x-p4.x)*(p3.y-p2.y)-(p3.x-p2.x)*(p2.y-p4.y);
   double C = (p3.x-p4.x)*(p1.y-p3.y)-(p1.x-p3.x)*(p3.y-p4.y);
-  if (!((A > 0) && (B > 0) && (C > 0) || (A < 0) && (B < 0) && (C < 0)))
+  if (!(((A > 0) && (B > 0) && (C > 0)) || ((A < 0) && (B < 0) && (C < 0))))
   {
     throw std::invalid_argument("Point p4 is not inside the triangle formed by p1, p2, p3");
   }
