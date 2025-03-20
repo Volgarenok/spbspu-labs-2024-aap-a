@@ -2,9 +2,71 @@
 #include <cmath>
 #include <stdexcept>
 
-ivanova::Diamond::Diamond(point_t topPoint, point_t bottomPoint, point_t center):
-  topPoint_(topPoint), bottomPoint_(bottomPoint), center_(center)
+
+ivanova::Diamond::Diamond(point_t topPoint, point_t bottomPoint, point_t center)
+    : topPoint_(topPoint), bottomPoint_(bottomPoint), center_(center)
 {
+    if (topPoint.x == bottomPoint.x)
+    {
+        if (topPoint.y == bottomPoint.y)
+        {
+            throw std::invalid_argument("All points are the same");
+        }
+        else if (topPoint.y == center.y)
+        {
+            *this = Diamond(bottomPoint, center, topPoint);
+        }
+        else if (bottomPoint.y == center.y)
+        {
+            *this = Diamond(topPoint, center, bottomPoint);
+        }
+        else
+        {
+            throw std::invalid_argument("Invalid configuration of points");
+        }
+    }
+    else if (topPoint.x == center.x)
+    {
+        if (topPoint.y == bottomPoint.y)
+        {
+            *this = Diamond(center, bottomPoint, topPoint);
+        }
+        else if (topPoint.y == center.y)
+        {
+            throw std::invalid_argument("Two points are the same");
+        }
+        else if (bottomPoint.y == center.y)
+        {
+            *this = Diamond(topPoint, bottomPoint, center);
+        }
+        else
+        {
+            throw std::invalid_argument("Invalid configuration of points");
+        }
+    }
+    else if (bottomPoint.x == center.x)
+    {
+        if (topPoint.y == bottomPoint.y)
+        {
+            *this = Diamond(center, topPoint, bottomPoint);
+        }
+        else if (topPoint.y == center.y)
+        {
+            *this = Diamond(bottomPoint, topPoint, center);
+        }
+        else if (bottomPoint.y == center.y)
+        {
+            throw std::invalid_argument("Two points are the same");
+        }
+        else
+        {
+            throw std::invalid_argument("Invalid configuration of points");
+        }
+    }
+    else
+    {
+        throw std::invalid_argument("Invalid configuration of points");
+    }
 }
 
 double ivanova::Diamond::getArea() const

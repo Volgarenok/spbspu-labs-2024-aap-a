@@ -8,6 +8,23 @@ ivanova::Concave::Concave(point_t cnPoint1, point_t cnPoint2, point_t cnPoint3, 
  cnPoint3_(cnPoint3),
  cnPoint4_(cnPoint4)
 {
+  double l12 = vectorLength(cnPoint1_, cnPoint2_);
+  double l13 = vectorLength(cnPoint1_, cnPoint3_);
+  double l23 = vectorLength(cnPoint2_, cnPoint3_);
+  if ((l12 >= l23 + l13) || (l23 >= l12 + l13) || (l13 >= l12 + l23))
+  {
+    throw std::invalid_argument("Points p1, p2, p3 do not form a valid triangle");
+  }
+  double A = (cnPoint1_.x - cnPoint4_.x) *
+  (cnPoint2_.y - cnPoint1_.y) - (cnPoint2_.x - cnPoint1_.x) * (cnPoint1_.y - cnPoint4_.y);
+  double B = (cnPoint2_.x - cnPoint4_.x) *
+  (cnPoint3_.y - cnPoint2_.y) - (cnPoint3_.x - cnPoint2_.x) * (cnPoint2_.y - cnPoint4_.y);
+  double C = (cnPoint3_.x - cnPoint4_.x) *
+  (cnPoint1_.y - cnPoint3_.y) - (cnPoint1_.x - cnPoint3_.x) * (cnPoint3_.y - cnPoint4_.y);
+  if (!(((A > 0) && (B > 0) && (C > 0)) || ((A < 0) && (B < 0) && (C < 0))))
+  {
+    throw std::invalid_argument("Point p4 is not inside the triangle formed by p1, p2, p3");
+  }
 }
 
 double ivanova::Concave::getArea() const
@@ -52,6 +69,19 @@ void ivanova::Concave::move(double x, double y)
   cnPoint4_ = {cnPoint4_.x + x, cnPoint4_.y + y};
 }
 
+void ivanova::Concave::scale(double ratio)
+{
+  if (ratio <= 0)
+  {
+    throw std::invalid_argument("Scale ratio must be positive.");
+  }
+  cnPoint1_.x = cnPoint4_.x + (cnPoint1_.x - cnPoint4_.x) * ratio;
+  cnPoint1_.y = cnPoint4_.y + (cnPoint1_.y - cnPoint4_.y) * ratio;
+  cnPoint2_.x = cnPoint4_.x + (cnPoint2_.x - cnPoint4_.x) * ratio;
+  cnPoint2_.y = cnPoint4_.y + (cnPoint2_.y - cnPoint4_.y) * ratio;
+  cnPoint3_.x = cnPoint4_.x + (cnPoint3_.x - cnPoint4_.x) * ratio;
+  cnPoint3_.y = cnPoint4_.y + (cnPoint3_.y - cnPoint4_.y) * ratio;
+}
 void ivanova::Concave::scale(double ratio)
 {
   if (ratio <= 0)
