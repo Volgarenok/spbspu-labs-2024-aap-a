@@ -8,6 +8,10 @@ ivanova::Complexquad::Complexquad(point_t point1, point_t point2, point_t point3
   point3_(point3),
   point4_(point4)
 {
+  if (!areSegmentsIntersecting(point1_, point2_, point3_, point4_))
+  {
+    throw std::invalid_argument("Segments do not intersect");
+  }
 }
 
 double ivanova::Complexquad::getArea() const

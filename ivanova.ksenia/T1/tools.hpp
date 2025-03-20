@@ -7,6 +7,7 @@
 
 namespace ivanova
 {
+  bool areSegmentsIntersecting(const point_t& p1, const point_t& p2, const point_t& p3, const point_t& p4);
   double vectorLength(point_t a, point_t b);
   void deleteShapes(Shape** shps, const size_t size);
   double getSumArea(Shape **shp, size_t size);

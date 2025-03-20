@@ -21,7 +21,7 @@ ivanova::Concave::Concave(point_t cnPoint1, point_t cnPoint2, point_t cnPoint3, 
   (cnPoint3_.y - cnPoint2_.y) - (cnPoint3_.x - cnPoint2_.x) * (cnPoint2_.y - cnPoint4_.y);
   double C = (cnPoint3_.x - cnPoint4_.x) *
   (cnPoint1_.y - cnPoint3_.y) - (cnPoint1_.x - cnPoint3_.x) * (cnPoint3_.y - cnPoint4_.y);
-  if (!(((A > 0) && (B > 0) && (C > 0)) || ((A < 0) && (B < 0) && (C < 0))))
+  if (!((A > 0 && B > 0 && C > 0) || (A < 0 && B < 0 && C < 0)))
   {
     throw std::invalid_argument("Point p4 is not inside the triangle formed by p1, p2, p3");
   }
