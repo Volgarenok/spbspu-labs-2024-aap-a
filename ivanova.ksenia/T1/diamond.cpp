@@ -9,7 +9,9 @@ ivanova::Diamond::Diamond(point_t topPoint, point_t bottomPoint, point_t center)
 
 double ivanova::Diamond::getArea() const
 {
-  return std::fabs((topPoint_.y - center_.y) * (bottomPoint_.x - center_.x) * 2);
+  double d1 = std::fabs(topPoint_.y - bottomPoint_.y);
+  double d2 = std::fabs(bottomPoint_.x - center_.x) * 2;
+  return (d1 * d2) / 2;
 }
 
 ivanova::rectangle_t ivanova::Diamond::getFrameRect() const
