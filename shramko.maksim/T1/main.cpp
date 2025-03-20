@@ -104,7 +104,7 @@ void shramko::printRectangleShapes(Shape** shapes, size_t size)
   {
     auto r = shapes[i]->getFrameRect();
     r.print();
-    if (i != size - 1) 
+    if (i != size - 1)
     {
       std::cout << " ";
     }
