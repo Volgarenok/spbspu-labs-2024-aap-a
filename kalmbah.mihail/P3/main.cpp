@@ -51,6 +51,12 @@ int main(int argc, char ** argv)
   std::getline(inputFile, line);
 
   char * token = std::strtok(const_cast<char*>(line.c_str()), " ");
+  if (!token)
+  {
+    std::cerr << "Error: Input file is empty or has invalid format.\n";
+    return 2;
+  }
+
   int rows = std::stoi(token);
   token = std::strtok(nullptr, " ");
   int cols = std::stoi(token);
