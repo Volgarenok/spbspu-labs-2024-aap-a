@@ -53,7 +53,6 @@ int main()
 
   std::cout << total_area << " ";
   printRectangleShapes(shapes, top);
-  std::cout << "\n";
 
   shramko::scaleShapes(shapes, top, k, {x, y});
   total_area = totalArea(shapes, top);
@@ -105,7 +104,7 @@ void shramko::printRectangleShapes(Shape** shapes, size_t size)
     auto r = shapes[i]->getFrameRect();
     std::cout << r;
   }
-  std::cout << "\b";
+  std::cout << "\b" << "\n";
 }
 
 void shramko::scaleShapes(Shape** shapes, size_t size, double k, point_t new_center)
