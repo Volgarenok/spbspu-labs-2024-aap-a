@@ -51,7 +51,7 @@ int main()
     return 2;
   }
 
-  std::cout << total_area ;
+  std::cout << total_area << " ";
   printRectangleShapes(shapes, top);
   std::cout << "\n";
 
@@ -104,6 +104,10 @@ void shramko::printRectangleShapes(Shape** shapes, size_t size)
   {
     auto r = shapes[i]->getFrameRect();
     r.print();
+    if (i != size - 1) 
+    {
+      std::cout << " ";
+    }
   }
 }
 
