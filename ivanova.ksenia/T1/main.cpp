@@ -60,7 +60,6 @@ int main()
             return 1;
           }
         scaleCenter = {x, y};
-        ivanova::scale(shapes, size, scaleCenter, k);
         isScale = true;
         }
         else
@@ -93,6 +92,8 @@ int main()
     std::cout << std::setprecision(1);
     std::cout << ivanova::getSumArea(shapes, size);
     ivanova::printFrameRect(shapes, size);
+
+    ivanova::scale(shapes, size, scaleCenter, k);
 
     std::cout << ivanova::getSumArea(shapes, size);
     ivanova::printFrameRect(shapes, size);
