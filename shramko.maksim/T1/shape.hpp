@@ -28,13 +28,6 @@ namespace shramko
     virtual void scale(double k) = 0;
     virtual ~Shape() = default;
   };
-
-  std::ostream& operator<<(std::ostream& out, const rectangle_t& rect)
-  {
-    out << rect.center.x - rect.width / 2 << " " << rect.center.y - rect.height / 2 << " ";
-    out << rect.center.x + rect.width / 2 << " " << rect.center.y + rect.height / 2 << " ";
-    return out;
-  }
 }
 
 #endif
