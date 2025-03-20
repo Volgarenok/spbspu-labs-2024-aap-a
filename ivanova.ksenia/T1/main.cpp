@@ -60,7 +60,6 @@ int main()
             return 1;
           }
         scaleCenter = {x, y};
-        ivanova::scale(shapes, size, scaleCenter, k);
         isScale = true;
         }
         else
