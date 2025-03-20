@@ -22,7 +22,7 @@ double ivanova::Complexquad::getArea() const
   double b = vectorLength(point3_, center);
   double c = vectorLength(point4_, center);
   double p2 = (a + b + c) / 2;
-  double S2 = std::sqrt(p2 * (p2 - a) * (p2 - b) * (p2 - C));
+  double S2 = std::sqrt(p2 * (p2 - a) * (p2 - b) * (p2 - c));
   return S1 + S2;
 }
 
