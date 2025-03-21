@@ -16,7 +16,7 @@ ivanova::Complexquad::Complexquad(point_t point1, point_t point2, point_t point3
 
 double ivanova::Complexquad::getArea() const
 {
-  point_t center = getIntersection(point1_, point3_, point2_, point4_);
+  point_t center = ivanova::getIntersection(point1_, point3_, point2_, point4_);
 
   double A = vectorLength(point1_, point2_);
   double B = vectorLength(point1_, center);
@@ -65,7 +65,7 @@ void ivanova::Complexquad::scale(double ratio)
   {
     throw std::invalid_argument("Scale ratio must be positive.");
   }
-  point_t pos = getIntersection(point1_, point3_, point2_, point4_);
+  point_t pos = ivanova::getIntersection(point1_, point3_, point2_, point4_);
   point1_.x = pos.x + (point1_.x - pos.x) * ratio;
   point1_.y = pos.y + (point1_.y - pos.y) * ratio;
   point2_.x = pos.x + (point2_.x - pos.x) * ratio;
