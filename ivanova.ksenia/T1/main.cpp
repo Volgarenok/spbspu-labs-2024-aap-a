@@ -75,6 +75,10 @@ int main()
         ivanova::deleteShapes(shapes, size);
         return 1;
       }
+      catch (const std::invalid_argument& e)
+      {
+        std::cerr << "Incorrect shape size" << '\n';
+      }
     }
     if (!isScale)
     {
@@ -102,7 +106,6 @@ int main()
       ivanova::deleteShapes(shapes, size);
       return 1;
     }
-
     std::cout << ivanova::getSumArea(shapes, size);
     ivanova::printFrameRect(shapes, size);
 

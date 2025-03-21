@@ -109,8 +109,8 @@ void ivanova::scale(Shape** shps, size_t size, point_t scalePoint, double k)
     {
       ivanova::point_t begin = shps[i]->getFrameRect().pos;
       ivanova::point_t offset = {scalePoint.x + k * (begin.x - scalePoint.x),scalePoint.y + k * (begin.y - scalePoint.y)};
-      shps[i]->scale(k);
       shps[i]->move(offset);
+      shps[i]->scale(k);
     }
   }
 }
