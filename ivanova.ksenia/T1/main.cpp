@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <limits>
 #include "shapemaking.hpp"
 #include "shape.hpp"
 #include "base-types.hpp"
@@ -65,7 +66,7 @@ int main()
         else
         {
           std::cerr << "Unknown command: " << input << '\n';
-          continue;;
+          std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
         }
       }
       catch (std::bad_alloc & e)
