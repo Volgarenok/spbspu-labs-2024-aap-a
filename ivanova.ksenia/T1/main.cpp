@@ -65,7 +65,6 @@ int main()
         else
         {
           std::cerr << "Unknown command: " << input << '\n';
-          ivanova::deleteShapes(shapes, size);
           continue;;
         }
       }
