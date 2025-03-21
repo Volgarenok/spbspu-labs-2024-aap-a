@@ -62,6 +62,12 @@ int main()
         scaleCenter = {x, y};
         isScale = true;
         }
+        else
+        {
+          std::cerr << "Unknown command: " << input << '\n';
+          ivanova::deleteShapes(shapes, size);
+          continue;;
+        }
       }
       catch (std::bad_alloc & e)
       {
