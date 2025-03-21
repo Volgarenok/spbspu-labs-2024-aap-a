@@ -33,6 +33,7 @@ ivanova::Concave::Concave(point_t cnPoint1, point_t cnPoint2, point_t cnPoint3, 
   } catch (const std::invalid_argument& e)
   {
     std::cerr << "Error in Concave constructor: " << e.what() << '\n';
+    throw;
   }
 }
 

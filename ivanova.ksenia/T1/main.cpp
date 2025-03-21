@@ -92,8 +92,16 @@ int main()
     std::cout << std::setprecision(1);
     std::cout << ivanova::getSumArea(shapes, size);
     ivanova::printFrameRect(shapes, size);
-
-    ivanova::scale(shapes, size, scaleCenter, k);
+    try
+    {
+      ivanova::scale(shapes, size, scaleCenter, k);
+    }
+    catch(const std::invalid_argument& e)
+    {
+      std::cerr << "Incorrect scale!" << '\n';
+      ivanova::deleteShapes(shapes, size);
+      return 1;
+    }
 
     std::cout << ivanova::getSumArea(shapes, size);
     ivanova::printFrameRect(shapes, size);
