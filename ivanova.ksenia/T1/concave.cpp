@@ -55,11 +55,10 @@ void ivanova::Concave::move(point_t point)
 {
   double moveX = point.x - cnPoint4_.x;
   double moveY = point.y - cnPoint4_.y;
-
   cnPoint1_ = {cnPoint1_.x + moveX, cnPoint1_.y + moveY};
   cnPoint2_ = {cnPoint2_.x + moveX, cnPoint2_.y + moveY};
   cnPoint3_ = {cnPoint3_.x + moveX, cnPoint3_.y + moveY};
-  cnPoint4_ = point;
+  cnPoint4_ = {cnPoint4_.x + moveX, cnPoint4_.y + moveY};
 }
 
 void ivanova::Concave::move(double x, double y)
