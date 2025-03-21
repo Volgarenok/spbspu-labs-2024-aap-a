@@ -30,7 +30,6 @@ namespace ivanova
     {
       return true;
     }
-
     if (o1 == 0 && isOnSegment(p1, p2, p3))
     {
       return true;
@@ -48,6 +47,27 @@ namespace ivanova
       return true;
     }
     return false;
+  }
+  point_t getIntersection(point_t A, point_t B, point_t C, point_t D)
+  {
+    double a1 = B.y - A.y;
+    double b1 = A.x - B.x;
+    double c1 = a1 * A.x + b1 * A.y;
+
+    double a2 = D.y - C.y;
+    double b2 = C.x - D.x;
+    double c2 = a2 * C.x + b2 * C.y;
+
+    double determinant = a1 * b2 - a2 * b1;
+
+    if (determinant == 0) {
+        throw std::invalid_argument("Diagonals do not intersect");
+    }
+
+    double x = (c1 * b2 - c2 * b1) / determinant;
+    double y = (a1 * c2 - a2 * c1) / determinant;
+
+    return {x, y};
   }
 }
 

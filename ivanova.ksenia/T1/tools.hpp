@@ -13,6 +13,7 @@ namespace ivanova
   double getSumArea(Shape **shp, size_t size);
   void printFrameRect(Shape** shps, size_t size);
   void scale(Shape** shps, size_t size, point_t scalePoint, double k);
+  point_t getIntersection(point_t A, point_t B, point_t C, point_t D);
 }
 
 #endif

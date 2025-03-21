@@ -12,12 +12,11 @@ ivanova::Complexquad::Complexquad(point_t point1, point_t point2, point_t point3
   {
     throw std::invalid_argument("Segments do not intersect");
   }
+  center = ivanova::getIntersection(point1_, point3_, point2_, point4_);
 }
 
 double ivanova::Complexquad::getArea() const
 {
-  point_t center = ivanova::getIntersection(point1_, point3_, point2_, point4_);
-
   double A = vectorLength(point1_, point2_);
   double B = vectorLength(point1_, center);
   double C = vectorLength(point2_, center);
@@ -39,8 +38,8 @@ ivanova::rectangle_t ivanova::Complexquad::getFrameRect() const
   double rightest = std::fmax(std::fmax(point1_.x, point2_.x), std::fmax(point3_.x, point4_.x));
   double lowest = std::fmin(std::fmin(point1_.y, point2_.y), std::fmin(point3_.y, point4_.y));
   double highest = std::fmax(std::fmax(point1_.y, point2_.y), std::fmax(point3_.y, point4_.y));
-  point_t center = {leftest + (rightest - leftest) / 2, lowest + (highest - lowest) / 2};
-  return {rightest - leftest, highest - lowest, center};
+  point_t center_ = {leftest + (rightest - leftest) / 2, lowest + (highest - lowest) / 2};
+  return {rightest - leftest, highest - lowest, center_};
 }
 
 void ivanova::Complexquad::move(point_t point)
@@ -65,13 +64,12 @@ void ivanova::Complexquad::scale(double ratio)
   {
     throw std::invalid_argument("Scale ratio must be positive.");
   }
-  point_t pos = ivanova::getIntersection(point1_, point3_, point2_, point4_);
-  point1_.x = pos.x + (point1_.x - pos.x) * ratio;
-  point1_.y = pos.y + (point1_.y - pos.y) * ratio;
-  point2_.x = pos.x + (point2_.x - pos.x) * ratio;
-  point2_.y = pos.y + (point2_.y - pos.y) * ratio;
-  point3_.x = pos.x + (point3_.x - pos.x) * ratio;
-  point3_.y = pos.y + (point3_.y - pos.y) * ratio;
-  point4_.x = pos.x + (point4_.x - pos.x) * ratio;
-  point4_.y = pos.y + (point4_.y - pos.y) * ratio;
+  point1_.x = center.x + (point1_.x - center.x) * ratio;
+  point1_.y = center.y + (point1_.y - center.y) * ratio;
+  point2_.x = center.x + (point2_.x - center.x) * ratio;
+  point2_.y = center.y + (point2_.y - center.y) * ratio;
+  point3_.x = center.x + (point3_.x - center.x) * ratio;
+  point3_.y = center.y + (point3_.y - center.y) * ratio;
+  point4_.x = center.x + (point4_.x - center.x) * ratio;
+  point4_.y = center.y + (point4_.y - center.y) * ratio;
 }

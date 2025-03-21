@@ -22,6 +22,7 @@ namespace ivanova
     point_t point2_;
     point_t point3_;
     point_t point4_;
+    point_t center;
   };
 }
 
