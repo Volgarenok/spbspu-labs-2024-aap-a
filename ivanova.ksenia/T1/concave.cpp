@@ -1,6 +1,7 @@
 #include "concave.hpp"
 #include "tools.hpp"
 #include <cmath>
+#include <iostream>
 
 ivanova::Concave::Concave(point_t cnPoint1, point_t cnPoint2, point_t cnPoint3, point_t cnPoint4):
  cnPoint1_(cnPoint1),
@@ -8,22 +9,31 @@ ivanova::Concave::Concave(point_t cnPoint1, point_t cnPoint2, point_t cnPoint3, 
  cnPoint3_(cnPoint3),
  cnPoint4_(cnPoint4)
 {
-  double l12 = vectorLength(cnPoint1_, cnPoint2_);
-  double l13 = vectorLength(cnPoint1_, cnPoint3_);
-  double l23 = vectorLength(cnPoint2_, cnPoint3_);
-  if ((l12 >= l23 + l13) || (l23 >= l12 + l13) || (l13 >= l12 + l23))
+  try
   {
-    throw std::invalid_argument("Points p1, p2, p3 do not form a valid triangle");
-  }
-  double A = (cnPoint1_.x - cnPoint4_.x) *
-  (cnPoint2_.y - cnPoint1_.y) - (cnPoint2_.x - cnPoint1_.x) * (cnPoint1_.y - cnPoint4_.y);
-  double B = (cnPoint2_.x - cnPoint4_.x) *
-  (cnPoint3_.y - cnPoint2_.y) - (cnPoint3_.x - cnPoint2_.x) * (cnPoint2_.y - cnPoint4_.y);
-  double C = (cnPoint3_.x - cnPoint4_.x) *
-  (cnPoint1_.y - cnPoint3_.y) - (cnPoint1_.x - cnPoint3_.x) * (cnPoint3_.y - cnPoint4_.y);
-  if (!((A > 0 && B > 0 && C > 0) || (A < 0 && B < 0 && C < 0)))
+    double l12 = vectorLength(cnPoint1_, cnPoint2_);
+    double l13 = vectorLength(cnPoint1_, cnPoint3_);
+    double l23 = vectorLength(cnPoint2_, cnPoint3_);
+    if ((l12 >= l23 + l13) || (l23 >= l12 + l13) || (l13 >= l12 + l23))
+    {
+        throw std::invalid_argument("Points cnPoint1, cnPoint2, cnPoint3 do not form a valid triangle");
+    }
+
+    double A = (cnPoint1_.x - cnPoint4_.x) * (cnPoint2_.y - cnPoint1_.y) -
+               (cnPoint2_.x - cnPoint1_.x) * (cnPoint1_.y - cnPoint4_.y);
+    double B = (cnPoint2_.x - cnPoint4_.x) * (cnPoint3_.y - cnPoint2_.y) -
+               (cnPoint3_.x - cnPoint2_.x) * (cnPoint2_.y - cnPoint4_.y);
+    double C = (cnPoint3_.x - cnPoint4_.x) * (cnPoint1_.y - cnPoint3_.y) -
+               (cnPoint1_.x - cnPoint3_.x) * (cnPoint3_.y - cnPoint4_.y);
+
+    if (!((A > 0 && B > 0 && C > 0) || (A < 0 && B < 0 && C < 0)))
+    {
+        throw std::invalid_argument("Point cnPoint4 is not inside the triangle formed by cnPoint1, cnPoint2, cnPoint3");
+    }
+  } catch (const std::invalid_argument& e)
   {
-    throw std::invalid_argument("Point p4 is not inside the triangle formed by p1, p2, p3");
+    std::cerr << "Error in Concave constructor: " << e.what() << '\n';
+    throw;
   }
 }
 
