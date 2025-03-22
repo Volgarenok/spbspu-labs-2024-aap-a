@@ -32,6 +32,7 @@ int main(int argc, char** argv)
   }
 
   input >> cols >> rows;
+
   if (cols == 0 || rows == 0)
   {
     std::cerr << "Empty file or invalid matrix size\n";
