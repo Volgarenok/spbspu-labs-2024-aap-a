@@ -48,7 +48,6 @@ namespace kalmbah
   void combineMatrices(const int* original, int* result, size_t columns, size_t rows)
   {
     const size_t newCols = columns * 2;
-    const size_t newRows = rows * 2;
 
     for (size_t i = 0; i < rows; ++i)
     {
