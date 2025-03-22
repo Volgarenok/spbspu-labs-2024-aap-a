@@ -60,6 +60,14 @@ int main(int argc, char** argv)
     return 2;
   }
 
+  int dummy;
+  if (input >> dummy)
+  {
+    std::cerr << "Extra data in input file\n";
+    delete[] matrix;
+    return 2;
+  }
+
   const size_t newCols = cols * 2;
   const size_t newRows = rows * 2;
   int* result = new int[newCols * newRows]{};
