@@ -3,7 +3,8 @@
 
 bool checkArgs(int argc, const char** argv)
 {
-  if (argc != 4)
+  const int numberOfArguments = 4;
+  if (argc != numberOfArguments)
   {
     std::cerr << "Usage: " << argv[0] << " <1|2> <input> <output>\n";
     return false;
