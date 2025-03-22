@@ -1,4 +1,4 @@
-#include "matrixOperation.hpp"
+#include "matrix_operation.hpp"
 #include <stdexcept>
 
 namespace kalmbah

@@ -1,5 +1,5 @@
 #include <fstream>
-#include "matrixOperation.hpp"
+#include "matrix_operation.hpp"
 
 bool checkArgs(int argc, const char** argv)
 {
@@ -41,8 +41,9 @@ int main(int argc, char** argv)
 
   if (cols == 0 || rows == 0)
   {
-    std::cerr << "Empty file or invalid matrix size\n";
-    return 2;
+    std::ofstream output(argv[3]);
+    output << "0 0\n";
+    return 0;
   }
 
   int* matrix = nullptr;
@@ -63,14 +64,6 @@ int main(int argc, char** argv)
   catch (const std::exception&)
   {
     std::cerr << "Invalid matrix data\n";
-    delete[] matrix;
-    return 2;
-  }
-
-  int dummy;
-  if (input >> dummy)
-  {
-    std::cerr << "Extra data in input file\n";
     delete[] matrix;
     return 2;
   }
