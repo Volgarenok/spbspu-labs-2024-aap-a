@@ -1,147 +1,75 @@
-#include <iostream>
 #include <fstream>
-#include <cstring>
-#include "get_matrix_operations.h"
-#include "input_checks.h"
+#include "matrixOperation.hpp"
 
-int main(int argc, char ** argv)
+bool checkArgs(int argc, const char** argv)
 {
-  const int maxNumbArg = 4;
-  if (argc != maxNumbArg)
+  if (argc != 4)
   {
-    std::cerr << "Usage: " << argv[0] << " <num> <input_file> <output_file>\n";
+    std::cerr << "Usage: " << argv[0] << " <1|2> <input> <output>\n";
+    return false;
+  }
+  if ((argv[1][0] != '1' && argv[1][0] != '2') || argv[1][1] != '\0')
+  {
+    std::cerr << "First argument must be 1 or 2\n";
+    return false;
+  }
+  return true;
+}
+
+int main(int argc, char** argv)
+{
+  if (!checkArgs(argc, const_cast<const char**>(argv)))
+  {
     return 1;
   }
 
-  std::string numStr = argv[1];
-  if (!kalmbah::isNumber(numStr))
+  size_t cols = 0, rows = 0;
+  std::ifstream input(argv[2]);
+  if (!input.is_open())
   {
-    std::cerr << "Error: num must be an integer (1 or 2).\n";
-    return 1;
-  }
-
-  int num = std::stoi(numStr);
-  if (num != 1 && num != 2)
-  {
-    std::cerr << "Error: num must be 1 (fixed size) or 2 (dynamic size).\n";
-    return 1;
-  }
-
-  std::ifstream inputFile(argv[2]);
-  if (!inputFile)
-  {
-    std::cerr << "Error: Could not open input file.\n";
+    std::cerr << "Cannot open input file\n";
     return 2;
   }
 
-  if (kalmbah::isInputFileEmpty(inputFile))
+  input >> cols >> rows;
+  if (cols == 0 || rows == 0)
   {
-    std::cerr << "Error: Input file is empty.\n";
-    return 2;
-  }
-
-  std::ofstream outputFile(argv[3]);
-  if (!outputFile)
-  {
-    std::cerr << "Error: Could not open output file.\n";
-    return 2;
-  }
-
-  std::string line;
-  std::getline(inputFile, line);
-
-  char * token = std::strtok(const_cast<char*>(line.c_str()), " ");
-  if (!token)
-  {
-    std::cerr << "Error: Input file is empty or has invalid format.\n";
-    return 2;
-  }
-
-  int rows = std::stoi(token);
-  token = std::strtok(nullptr, " ");
-  int cols = std::stoi(token);
-
-  if (!kalmbah::isValidMatrixSize(rows, cols))
-  {
-    std::cerr << "Error: Matrix dimensions cannot be negative.\n";
-    return 2;
-  }
-
-  const int nullMatrix = 0;
-  if (rows == nullMatrix || cols == nullMatrix)
-  {
-    outputFile << "0\n";
+    std::ofstream output(argv[3]);
+    output << "0 0\n";
     return 0;
   }
 
-  const int fixedMaxSize = 10000;
-  if (num == 1 && rows * cols > fixedMaxSize)
+  int* matrix = nullptr;
+  try
   {
-    std::cerr << "Error: Fixed size array cannot exceed 10000 elements.\n";
+    matrix = (argv[1][0] == '1') ? new int[10000]{} : new int[cols * rows]{};
+  }
+  catch (const std::bad_alloc&)
+  {
+    std::cerr << "Memory allocation failed\n";
+    return 1;
+  }
+
+  try
+  {
+    kalmbah::inputMtx(input, matrix, cols, rows);
+  }
+  catch (const std::exception&)
+  {
+    std::cerr << "Invalid matrix data\n";
+    delete[] matrix;
     return 2;
   }
 
-  if (num == 1)
-  {
-    const int maxRows = 100;
-    const int maxCols = 100;
-    int matrix[maxRows][maxCols] = {0};
-    for (int i = 0; i < rows; ++i)
-    {
-      for (int j = 0; j < cols; ++j)
-      {
-        token = std::strtok(nullptr, " ");
-        if (!token)
-        {
-          std::cerr << "Error: Invalid input format. Expected integer for matrix element.\n";
-          return 2;
-        }
-        int value = std::stoi(token);
-        if (!kalmbah::isValidMatrixElement(value))
-        {
-          std::cerr << "Error: Matrix element exceeds int range.\n";
-          return 2;
-        }
-        matrix[i][j] = value;
-      }
-    }
+  const size_t newCols = cols * 2;
+  const size_t newRows = rows * 2;
+  int* result = new int[newCols * newRows]{};
+  kalmbah::combineMatrices(matrix, result, cols, rows);
 
-    int result[200][200];
-    kalmbah::createSymmetricMatrices(matrix, result, rows, cols);
-    kalmbah::printMatrix(result, 2 * rows, 2 * cols, outputFile);
-  }
-  else
-  {
-    int * matrix = new int[rows * cols];
-    for (int i = 0; i < rows; ++i)
-    {
-      for (int j = 0; j < cols; ++j)
-      {
-        token = std::strtok(nullptr, " ");
-        if (!token)
-        {
-          std::cerr << "Error: Invalid input format. Expected integer for matrix element.\n";
-          delete[] matrix;
-          return 2;
-        }
-        int value = std::stoi(token);
-        if (!kalmbah::isValidMatrixElement(value))
-        {
-          std::cerr << "Error: Matrix element exceeds int range.\n";
-          delete[] matrix;
-          return 2;
-        }
-        matrix[i * cols + j] = value;
-      }
-    }
+  std::ofstream output(argv[3]);
+  kalmbah::outputMtx(output, result, newCols, newRows);
 
-    int * result = new int[4 * rows * cols];
-    kalmbah::createSymmetricMatrices(matrix, result, rows, cols);
-    kalmbah::printMatrix(result, 2 * rows, 2 * cols, outputFile);
-
-    delete[] matrix;
-    delete[] result;
-  }
-
+  delete[] matrix;
+  delete[] result;
   return 0;
 }
