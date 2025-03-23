@@ -1,6 +1,6 @@
 #include "actionsWithShapes.hpp"
 
-double lebedev::getSumArea(Shape** shps, size_t count)
+double lebedev::getSumArea(const Shape* const* shps, size_t count)
 {
   double result = 0;
   for (size_t i = 0; i < count; ++i)
