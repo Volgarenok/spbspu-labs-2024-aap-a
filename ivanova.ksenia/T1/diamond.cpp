@@ -6,67 +6,22 @@
 ivanova::Diamond::Diamond(point_t topPoint, point_t bottomPoint, point_t center)
     : topPoint_(topPoint), bottomPoint_(bottomPoint), center_(center)
 {
-    if (topPoint.x == bottomPoint.x)
-    {
-        if (topPoint.y == bottomPoint.y)
-        {
-            throw std::invalid_argument("All points are the same");
-        }
-        else if (topPoint.y == center.y)
-        {
-            *this = Diamond(bottomPoint, center, topPoint);
-        }
-        else if (bottomPoint.y == center.y)
-        {
-            *this = Diamond(topPoint, center, bottomPoint);
-        }
-        else
-        {
-            throw std::invalid_argument("Invalid configuration of points");
-        }
-    }
-    else if (topPoint.x == center.x)
-    {
-        if (topPoint.y == bottomPoint.y)
-        {
-            *this = Diamond(center, bottomPoint, topPoint);
-        }
-        else if (topPoint.y == center.y)
-        {
-            throw std::invalid_argument("Two points are the same");
-        }
-        else if (bottomPoint.y == center.y)
-        {
-            *this = Diamond(topPoint, bottomPoint, center);
-        }
-        else
-        {
-            throw std::invalid_argument("Invalid configuration of points");
-        }
-    }
-    else if (bottomPoint.x == center.x)
-    {
-        if (topPoint.y == bottomPoint.y)
-        {
-            *this = Diamond(center, topPoint, bottomPoint);
-        }
-        else if (topPoint.y == center.y)
-        {
-            *this = Diamond(bottomPoint, topPoint, center);
-        }
-        else if (bottomPoint.y == center.y)
-        {
-            throw std::invalid_argument("Two points are the same");
-        }
-        else
-        {
-            throw std::invalid_argument("Invalid configuration of points");
-        }
-    }
-    else
-    {
-        throw std::invalid_argument("Invalid configuration of points");
-    }
+  if ((topPoint.x == bottomPoint.x && topPoint.y == bottomPoint.y) ||
+    (topPoint.x == center.x && topPoint.y == center.y) ||
+    (bottomPoint.x == center.x && bottomPoint.y == center.y))
+  {
+    throw std::invalid_argument("Some points are the same");
+  }
+
+  double dx1 = topPoint_.x - bottomPoint_.x;
+  double dy1 = topPoint_.y - bottomPoint_.y;
+  double dx2 = center_.x - (topPoint_.x + bottomPoint_.x) / 2;
+  double dy2 = center_.y - (topPoint_.y + bottomPoint_.y) / 2;
+
+  if (std::abs(dx1 * dx2 + dy1 * dy2) > 1e-6)
+  {
+    throw std::invalid_argument("Invalid diamond shape: diagonals are not perpendicular");
+  }
 }
 
 double ivanova::Diamond::getArea() const

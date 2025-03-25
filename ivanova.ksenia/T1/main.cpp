@@ -12,7 +12,7 @@
 
 int main()
 {
-  ivanova::Shape* shapes[1000] = {};
+  ivanova::Shape* shapes[10000] = {};
   std::string input = "";
   size_t size = 0;
   double k = 0.0;
