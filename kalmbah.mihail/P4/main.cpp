@@ -48,6 +48,7 @@ int main()
   }
 
   std::cout << result << '\n';
+
   delete[] result;
   return 0;
 }
