@@ -7,20 +7,31 @@
 namespace cherkasov
 {
   Diamond::Diamond(double x1, double y1, double x2, double y2, double x3, double y3)
-  : vertex1{x1, y1},
-    vertex2{x2, y2},
-    vertex3{x3, y3},
-    vertex4{x2 + (x1 - x3), y2 + (y1 - y3)},
-    center{(x1 + x3) / 2, (y1 + y3) / 2}
     {
-      if (x1 == x2 && y1 == y2 && x1 == x3 && y1 == y3)
+      if ((x1 == x2 && y1 == y3) || (y1 == y2 && x1 == x3))
       {
-        throw std::invalid_argument("no input coordinat diamond");
+        center = {x1, y1};
+        vertex1 = {x2, y2};
+        vertex2 = {x3, y3};
       }
-      if (((x1 == x2 && y1 == y2) || (x1 == x3 && y1 == y3) || (x2 == x3 && y2 == y3)))
+      else if ((x1 == x2 && y2 == y3) || (y1 == y2 && x2 == x3))
+      {
+        center = {x2, y2};
+        vertex1 = {x1, y1};
+        vertex2 = {x3, y3};
+      }
+      else if ((x3 == x2 && y1 == y3) || (y3 == y2 && x1 == x3))
+      {
+        center = {x3, y3};
+        vertex1 = {x2, y2};
+        vertex2 = {x1, y1};
+      }
+      else
       {
         throw std::invalid_argument("no input coordinat");
       }
+      vertex3 = {2.0 * center.x - vertex1.x, 2.0 * center.y - vertex1.y};
+      vertex4 = {2.0 * center.x - vertex2.x, 2.0 * center.y - vertex2.y};
     }
   double Diamond::getArea() const
   {

@@ -20,6 +20,7 @@ namespace cherkasov
     point_t vertex3;
     point_t vertex4;
     point_t center;
+    bool areDiagonalsPerpendicular(const point_t &p1, const point_t &p3, const point_t &p2, const point_t &p4) const;
   };
 }
 #endif
