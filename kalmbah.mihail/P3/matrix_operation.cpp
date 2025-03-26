@@ -3,19 +3,7 @@
 
 namespace kalmbah
 {
-  std::istream& inputMtx(std::istream& in, int* mtx, size_t columns, size_t rows)
-  {
-    for (size_t i = 0; i < columns * rows; ++i)
-    {
-      if (!(in >> mtx[i]))
-      {
-        throw std::runtime_error("Input error");
-      }
-    }
-    return in;
-  }
-
-  void mirrorHorizontal(const int* src, int* dest, size_t columns, size_t rows)
+  static void mirrorHorizontal(const int* src, int* dest, size_t columns, size_t rows)
   {
     for (size_t i = 0; i < rows; ++i)
     {
@@ -26,7 +14,7 @@ namespace kalmbah
     }
   }
 
-  void mirrorVertical(const int* src, int* dest, size_t columns, size_t rows)
+  static void mirrorVertical(const int* src, int* dest, size_t columns, size_t rows)
   {
     for (size_t i = 0; i < rows; ++i)
     {
@@ -37,12 +25,24 @@ namespace kalmbah
     }
   }
 
-  void mirrorCorner(const int* src, int* dest, size_t columns, size_t rows)
+  static void mirrorCorner(const int* src, int* dest, size_t columns, size_t rows)
   {
-    int* temp = new int[columns * rows]{};
+    int* temp = new int[columns * rows];
     mirrorHorizontal(src, temp, columns, rows);
     mirrorVertical(temp, dest, columns, rows);
     delete[] temp;
+  }
+
+  std::istream& inputMtx(std::istream& in, int* mtx, size_t columns, size_t rows)
+  {
+    for (size_t i = 0; i < columns * rows; ++i)
+    {
+      if (!(in >> mtx[i]))
+      {
+        throw std::runtime_error("Input error");
+      }
+    }
+    return in;
   }
 
   void combineMatrices(const int* original, int* result, size_t columns, size_t rows)
@@ -57,7 +57,7 @@ namespace kalmbah
       }
     }
 
-    int* vertical = new int[columns * rows]{};
+    int* vertical = new int[columns * rows];
     mirrorVertical(original, vertical, columns, rows);
     for (size_t i = 0; i < rows; ++i)
     {
@@ -68,7 +68,7 @@ namespace kalmbah
     }
     delete[] vertical;
 
-    int* horizontal = new int[columns * rows]{};
+    int* horizontal = new int[columns * rows];
     mirrorHorizontal(original, horizontal, columns, rows);
     for (size_t i = 0; i < rows; ++i)
     {
@@ -79,7 +79,7 @@ namespace kalmbah
     }
     delete[] horizontal;
 
-    int* corner = new int[columns * rows]{};
+    int* corner = new int[columns * rows];
     mirrorCorner(original, corner, columns, rows);
     for (size_t i = 0; i < rows; ++i)
     {

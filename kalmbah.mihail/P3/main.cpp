@@ -1,10 +1,9 @@
 #include <fstream>
 #include "matrix_operation.hpp"
 
-bool checkArgs(int argc, const char** argv)
+bool checkArgs(int argc, char** argv)
 {
-  const int numberOfArguments = 4;
-  if (argc != numberOfArguments)
+  if (argc != 4)
   {
     std::cerr << "Usage: " << argv[0] << " <1|2> <input> <output>\n";
     return false;
@@ -19,7 +18,7 @@ bool checkArgs(int argc, const char** argv)
 
 int main(int argc, char** argv)
 {
-  if (!checkArgs(argc, const_cast<const char**>(argv)))
+  if (!checkArgs(argc, argv))
   {
     return 1;
   }
@@ -33,7 +32,6 @@ int main(int argc, char** argv)
   }
 
   input >> cols >> rows;
-
   if (input.fail())
   {
     std::cerr << "Empty file or invalid matrix size\n";
@@ -48,14 +46,27 @@ int main(int argc, char** argv)
   }
 
   int* matrix = nullptr;
-  try
+  int staticMatrix[10000] = {};
+  int* dynamicMatrix = nullptr;
+
+  if (argv[1][0] == '1')
   {
-    matrix = (argv[1][0] == '1') ? new int[10000]{} : new int[cols * rows]{};
+    if (cols * rows > 10000)
+    {
+      std::cerr << "Matrix size exceeds static array limit\n";
+      return 2;
+    }
+    matrix = staticMatrix;
   }
-  catch (const std::bad_alloc&)
+  else
   {
-    std::cerr << "Memory allocation failed\n";
-    return 1;
+    dynamicMatrix = new (std::nothrow) int[cols * rows];
+    if (!dynamicMatrix)
+    {
+      std::cerr << "Memory allocation failed\n";
+      return 1;
+    }
+    matrix = dynamicMatrix;
   }
 
   try
@@ -65,19 +76,26 @@ int main(int argc, char** argv)
   catch (const std::exception&)
   {
     std::cerr << "Invalid matrix data\n";
-    delete[] matrix;
+    if (argv[1][0] == '2') delete[] dynamicMatrix;
     return 2;
   }
 
   const size_t newCols = cols * 2;
   const size_t newRows = rows * 2;
-  int* result = new int[newCols * newRows]{};
+  int* result = new (std::nothrow) int[newCols * newRows];
+  if (!result)
+  {
+    std::cerr << "Memory allocation failed\n";
+    if (argv[1][0] == '2') delete[] dynamicMatrix;
+    return 1;
+  }
+
   kalmbah::combineMatrices(matrix, result, cols, rows);
 
   std::ofstream output(argv[3]);
   kalmbah::outputMtx(output, result, newCols, newRows);
 
-  delete[] matrix;
+  if (argv[1][0] == '2') delete[] dynamicMatrix;
   delete[] result;
   return 0;
 }
