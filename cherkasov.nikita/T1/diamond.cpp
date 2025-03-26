@@ -14,13 +14,15 @@ namespace cherkasov
         vertex1 = {x2, y2};
         vertex2 = {x3, y3};
       }
-      else if ((x1 == x2 && y2 == y3) || (y1 == y2 && x2 == x3))
+      //else if ((x1 == x2 && y2 == y3) || (y1 == y2 && x2 == x3))
+      else if ((x2 == x3 && y2 == y1) || (y2 == y3 && x2 == x1))
       {
         center = {x2, y2};
         vertex1 = {x1, y1};
         vertex2 = {x3, y3};
       }
-      else if ((x3 == x2 && y1 == y3) || (y3 == y2 && x1 == x3))
+      //else if ((x3 == x2 && y1 == y3) || (y3 == y2 && x1 == x3))
+      else if ((x3 == x1 && y3 == y2) || (y3 == y1 && x3 == x2))
       {
         center = {x3, y3};
         vertex1 = {x2, y2};
@@ -35,8 +37,8 @@ namespace cherkasov
     }
   double Diamond::getArea() const
   {
-    double diag1 = std::sqrt((vertex1.x - vertex3.x) * (vertex1.x - vertex3.x) + (vertex1.y - vertex3.y) * (vertex1.y - vertex3.y));
-    double diag2 = std::sqrt((vertex2.x - vertex4.x) * (vertex2.x - vertex4.x) + (vertex2.y - vertex4.y) * (vertex2.y - vertex4.y));
+    double diag1 = std::hypot(vertex1.x - vertex3.x, vertex1.y - vertex3.y);
+    double diag2 = std::hypot(vertex2.x - vertex4.x, vertex2.y - vertex4.y);
     return (diag1 * diag2) / 2;
   }
   rectangle_t Diamond::getFrameRect() const
@@ -45,7 +47,7 @@ namespace cherkasov
     double maxX = std::max({vertex1.x, vertex2.x, vertex3.x, vertex4.x});
     double minY = std::min({vertex1.y, vertex2.y, vertex3.y, vertex4.y});
     double maxY = std::max({vertex1.y, vertex2.y, vertex3.y, vertex4.y});
-    rectangle_t rect{maxX - minX, maxY - minY, center};
+    rectangle_t rect{maxX - minX, maxY - minY, {(minX + maxX) / 2, (minY + maxY) / 2}};
     return rect;
   }
   void Diamond::move(point_t c)
@@ -64,6 +66,7 @@ namespace cherkasov
   }
   void Diamond::scale(double k)
   {
+    point_t center = getFrameRect().pos;
     scalePoint(vertex1, center, k);
     scalePoint(vertex2, center, k);
     scalePoint(vertex3, center, k);
