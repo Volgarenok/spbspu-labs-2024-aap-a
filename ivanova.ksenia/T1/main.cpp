@@ -65,7 +65,6 @@ int main()
         }
         else
         {
-          std::cerr << "Unknown command: " << input << '\n';
           std::cin.ignore(std::numeric_limits<std::streamsize>::max(),'\n');
         }
       }
