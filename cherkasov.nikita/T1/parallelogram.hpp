@@ -5,7 +5,7 @@
 
 namespace cherkasov
 {
-  class Parallelogram final : public Shape
+  class Parallelogram final: public Shape
   {
   public:
     Parallelogram(double x1, double y1, double x2, double y2, double x3, double y3);

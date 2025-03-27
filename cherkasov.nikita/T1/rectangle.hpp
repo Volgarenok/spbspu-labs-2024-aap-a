@@ -5,7 +5,7 @@
 
 namespace cherkasov
 {
-  class Rectangle final : public Shape
+  class Rectangle final: public Shape
   {
   public:
     Rectangle(point_t left, point_t right);

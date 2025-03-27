@@ -1,8 +1,7 @@
 #include "rectangle.hpp"
-#include "shapeUtils.hpp"
 #include <stdexcept>
 #include <cmath>
-#include <algorithm>
+#include "shapeUtils.hpp"
 
 namespace cherkasov
 {

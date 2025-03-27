@@ -5,7 +5,7 @@
 
 namespace cherkasov
 {
-  class Square final : public Shape
+  class Square final: public Shape
   {
   public:
     Square(double x1, double x2, double length);
