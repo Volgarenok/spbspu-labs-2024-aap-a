@@ -6,26 +6,27 @@
 
 namespace cherkasov
 {
-  Diamond::Diamond(double x1, double y1, double x2, double y2, double x3, double y3)
+  Diamond::Diamond(point_t vertex1, point_t vertex2, point_t vertex3):
+    vertex{ vertex1, vertex2, vertex3 }
     {
       point_t center{};
-      if ((x1 == x2 && y1 == y3) || (y1 == y2 && x1 == x3))
+      if ((vertex1.x == vertex2.x && vertex1.y == vertex3.y) || (vertex1.y == vertex2.y && vertex1.x == vertex3.x))
       {
-        center = { x1, y1 };
-        vertex[0] = { x2, y2 };
-        vertex[1] = { x3, y3 };
+        center = { vertex1.x, vertex1.y };
+        vertex[0] = { vertex2.x, vertex2.y };
+        vertex[1] = { vertex3.x, vertex3.y };
       }
-      else if ((x1 == x2 && y2 == y3) || (y1 == y2 && x2 == x3))
+      else if ((vertex1.x == vertex2.x && vertex2.y == vertex3.y) || (vertex1.y == vertex2.y && vertex2.x == vertex3.x))
       {
-        center = { x2, y2 };
-        vertex[0] = { x1, y1 };
-        vertex[1] = { x3, y3 };
+        center = { vertex2.x, vertex2.y };
+        vertex[0] = { vertex1.x, vertex1.y };
+        vertex[1] = { vertex3.x, vertex3.y };
       }
-      else if ((x3 == x2 && y1 == y3) || (y3 == y2 && x1 == x3))
+      else if ((vertex3.x == vertex2.x && vertex1.y == vertex3.y) || (vertex3.y == vertex2.y && vertex1.x == vertex3.x))
       {
-        center = { x3, y3 };
-        vertex[0] = { x2, y2 };
-        vertex[1] = { x1, y1 };
+        center = { vertex3.x, vertex3.y };
+        vertex[0] = { vertex2.x, vertex2.y };
+        vertex[1] = { vertex1.x, vertex1.y };
       }
       else
       {

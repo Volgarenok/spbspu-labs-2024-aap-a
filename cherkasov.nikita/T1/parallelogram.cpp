@@ -6,35 +6,33 @@
 
 namespace cherkasov
 {
-  Parallelogram::Parallelogram(double x1, double y1, double x2, double y2, double x3, double y3):
-    vertex1{ x1, y1 },
-    vertex2{ x2, y2 },
-    vertex3{ x3, y3 },
-    vertex4{ (x1 + x3) - x2, (y1 + y3) - y2}
+  Parallelogram::Parallelogram(point_t vertex1, point_t vertex2, point_t vertex3):
+    vertex{ vertex1, vertex2, vertex3 }
     {
-      if (((x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3)) ||
-         (!(y1 == y2 || y1 == y3 || y2 == y3) && (y1 != y3)))
+      if (((vertex1.x == vertex3.x && vertex2.y == vertex3.y) || (vertex2.x == vertex3.x && vertex1.y == vertex3.y)) ||
+         (!(vertex1.y == vertex2.y || vertex1.y == vertex3.y || vertex2.y == vertex3.y) && (vertex1.y != vertex3.y)))
       {
         throw std::invalid_argument("no correct coordinat the parallelogram");
       }
+      vertex[3] = { (vertex1.x + vertex3.x) - vertex2.x, (vertex1.y + vertex3.y) - vertex2.y };
     }
   double Parallelogram::getArea() const
   {
-    double vector1x = vertex2.x - vertex1.x;
-    double vector1y = vertex2.y - vertex1.y;
-    double vector2x = vertex3.x - vertex1.x;
-    double vector2y = vertex4.y - vertex1.y;
+    double vector1x = vertex[1].x - vertex[0].x;
+    double vector1y = vertex[1].y - vertex[0].y;
+    double vector2x = vertex[2].x - vertex[0].x;
+    double vector2y = vertex[2].y - vertex[0].y;
     return std::abs(vector1x * vector2y - vector1y * vector2x);
   }
   rectangle_t Parallelogram::getFrameRect() const
   {
-    double minX = std::min({ vertex1.x, vertex2.x, vertex3.x, vertex4.x });
-    double maxX = std::max({ vertex1.x, vertex2.x, vertex4.x, vertex4.x });
-    double minY = std::min({ vertex1.y, vertex2.y, vertex4.y, vertex4.y });
-    double maxY = std::max({ vertex1.y, vertex2.y, vertex4.y, vertex4.y });
+    double minX = std::min({ vertex[0].x, vertex[1].x, vertex[2].x, vertex[3].x });
+    double maxX = std::max({ vertex[0].x, vertex[1].x, vertex[2].x, vertex[3].x });
+    double minY = std::min({ vertex[0].y, vertex[1].y, vertex[2].y, vertex[3].y });
+    double maxY = std::max({ vertex[0].y, vertex[1].y, vertex[2].y, vertex[3].y });
     point_t center{};
-    center.x = (vertex1.x + vertex2.x + vertex3.x + vertex4.x) / 4;
-    center.y = (vertex1.y + vertex2.y + vertex4.y + vertex4.y) / 4;
+    center.x = (vertex[0].x + vertex[1].x + vertex[2].x + vertex[3].x) / 4;
+    center.y = (vertex[0].y + vertex[1].y + vertex[2].y + vertex[3].y) / 4;
     double width = maxX - minX;
     double height = maxY - minY;
     rectangle_t rect {width, height, center};
@@ -49,17 +47,17 @@ namespace cherkasov
   }
   void Parallelogram::move(double dx, double dy)
   {
-    moveVertex(vertex1, dx, dy);
-    moveVertex(vertex2, dx, dy);
-    moveVertex(vertex3, dx, dy);
-    moveVertex(vertex4, dx, dy);
+    moveVertex(vertex[0], dx, dy);
+    moveVertex(vertex[1], dx, dy);
+    moveVertex(vertex[2], dx, dy);
+    moveVertex(vertex[3], dx, dy);
   }
   void Parallelogram::scalingFactor(double k)
   {
     point_t center = getFrameRect().pos;
-    scalePoint(vertex1, center, k);
-    scalePoint(vertex2, center, k);
-    scalePoint(vertex3, center, k);
-    scalePoint(vertex4, center, k);
+    scalePoint(vertex[0], center, k);
+    scalePoint(vertex[1], center, k);
+    scalePoint(vertex[2], center, k);
+    scalePoint(vertex[3], center, k);
   }
 }

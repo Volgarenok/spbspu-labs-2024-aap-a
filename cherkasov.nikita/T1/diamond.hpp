@@ -8,7 +8,7 @@ namespace cherkasov
   class Diamond final: public Shape
   {
   public:
-    Diamond(double x1, double y1, double x2, double y2, double x3, double y3);
+    Diamond(point_t vertex1, point_t vertex2, point_t vertex3);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t c) override;
