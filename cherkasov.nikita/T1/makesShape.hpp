@@ -9,6 +9,8 @@
 
 namespace cherkasov
 {
+  point_t getPoint(std::istream& input);
+  void getPoints(point_t* vertex, size_t size, std::istream& input);
   Rectangle* getRectangle(std::istream& input);
   Square* getSquare(std::istream& input);
   Parallelogram* getParallelogram(std::istream& input);

@@ -5,55 +5,52 @@
 
 namespace cherkasov
 {
-  Rectangle* getRectangle(std::istream& input)
+  point_t readPoint(std::istream& input)
   {
-    point_t left;
-    point_t right;
-    input >> left.x >> left.y >> right.x >> right.y;
+    double x = 0.0;
+    double y = 0.0;
+    input >> x >> y;
     if (!input)
     {
       throw std::invalid_argument("no input coordinate");
     }
+    point_t point = { x, y };
+    return point;
+  }
+  void readPoints(point_t* vertex, size_t size, std::istream& input)
+  {
+    for (size_t i = 0; i < size; i++)
+    {
+      vertex[i] = readPoint(input);
+    }
+  }
+  Rectangle* getRectangle(std::istream& input)
+  {
+    point_t left = readPoint(input);
+    point_t right = readPoint(input);
     Rectangle* rectangle = new Rectangle(left, right);
     return rectangle;
   }
   Square* getSquare(std::istream& input)
   {
-    double x = 0.0;
-    double y = 0.0;
+    point_t left = readPoint(input);
     double length = 0.0;
-    input >> x >> y >> length;
-    if (!input)
-    {
-      throw std::invalid_argument("no input coordinate");
-    }
-    Square* square = new Square(x, y, length);
+    input >> length;
+    Square* square = new Square(left, length);
     return square;
   }
   Parallelogram* getParallelogram(std::istream& input)
   {
-    point_t vertex1;
-    point_t vertex2;
-    point_t vertex3;
-    input >> vertex1.x >> vertex1.y >> vertex2.x >> vertex2.y >> vertex3.x >> vertex3.y;
-    if (!(input))
-    {
-      throw std::invalid_argument("no correct coordinat the parallelogram");
-    }
-    Parallelogram* parallelogram = new Parallelogram(vertex1, vertex2, vertex3);
+    point_t vertex[3];
+    readPoints(vertex, 3, input);
+    Parallelogram* parallelogram = new Parallelogram(vertex[0], vertex[1], vertex[2]);
     return parallelogram;
   }
   Diamond* getDiamond(std::istream& input)
   {
-    point_t vertex1;
-    point_t vertex2;
-    point_t vertex3;
-    input >> vertex1.x >> vertex1.y >> vertex2.x >> vertex2.y >> vertex3.x >> vertex3.y;
-    if (!(input))
-    {
-      throw std::invalid_argument("no input coordinat");
-    }
-    Diamond* diamond = new Diamond(vertex1, vertex2, vertex3);
+    point_t vertex[3];
+    readPoints(vertex, 3, input);
+    Diamond* diamond = new Diamond(vertex[0], vertex[1], vertex[2]);
     return diamond;
   }
   Shape* createShape(const std::string& inputCommand, std::istream& input)

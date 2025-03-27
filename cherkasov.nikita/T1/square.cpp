@@ -5,8 +5,8 @@
 
 namespace cherkasov
 {
-  Square::Square(double x1, double y1, double length):
-    left{ x1, y1 },
+  Square::Square(point_t left, double length):
+    left(left),
     length(length)
     {
       if (length <= 0)

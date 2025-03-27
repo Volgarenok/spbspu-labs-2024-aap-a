@@ -38,7 +38,7 @@ int main()
   }
   if (!(std::cin >> p.x >> p.y >> k) || k <= 0)
   {
-    std::cerr << "incorrect scalingFator\n";
+    std::cerr << "incorrect k\n";
     cherkasov::deleteShapes(shapes, shapeCount);
     return 1;
   }

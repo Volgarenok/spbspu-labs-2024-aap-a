@@ -47,7 +47,10 @@ namespace cherkasov
     double maxX = std::max({ vertex[0].x, vertex[1].x, vertex[2].x, vertex[3].x });
     double minY = std::min({ vertex[0].y, vertex[1].y, vertex[2].y, vertex[3].y });
     double maxY = std::max({ vertex[0].y, vertex[1].y, vertex[2].y, vertex[3].y });
-    rectangle_t rect { maxX - minX, maxY - minY, { (minX + maxX) / 2, (minY + maxY) / 2 } };
+    double width = maxX - minX;
+    double height = maxY - minY;
+    point_t center { (minX + maxX) / 2, (minY + maxY) / 2 };
+    rectangle_t rect { width, height, center };
     return rect;
   }
   void Diamond::move(point_t c)

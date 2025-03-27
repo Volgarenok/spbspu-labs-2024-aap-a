@@ -35,7 +35,7 @@ namespace cherkasov
     center.y = (vertex[0].y + vertex[1].y + vertex[2].y + vertex[3].y) / 4;
     double width = maxX - minX;
     double height = maxY - minY;
-    rectangle_t rect {width, height, center};
+    rectangle_t rect { width, height, center };
     return rect;
   }
   void Parallelogram::move(point_t c)
