@@ -27,7 +27,8 @@ krylov::Complexquad::Complexquad(const point_t& a, const point_t& b, const point
   t1_(a, findIntersection(a, b, c, d), {(a.x + d.x) / 2, (a.y + d.y) / 2}),
   t2_(d, findIntersection(a, b, c, d), {(a.x + d.x) / 2, (a.y + d.y) / 2}),
   t3_(c, findIntersection(a, b, c, d), {(b.x + c.x) / 2, (b.y + c.y) / 2}),
-  t4_(b, findIntersection(a, b, c, d), {(b.x + c.x) / 2, (b.y + c.y) / 2})
+  t4_(b, findIntersection(a, b, c, d), {(b.x + c.x) / 2, (b.y + c.y) / 2}),
+  intersectionPoint_(findIntersection(a, b, c, d))
 {
   const point_t p = findIntersection(a, b, c, d);
   bool condition = (a.x == b.x && a.y == b.y) || (b.x == c.x && b.y == c.y);
@@ -46,10 +47,12 @@ krylov::Complexquad::Complexquad(const point_t& a, const point_t& b, const point
     throw std::invalid_argument("Invalid complexquad coordinates");
   }
 }
+
 double krylov::Complexquad::getArea() const
 {
   return t1_.getArea() + t2_.getArea() + t3_.getArea() + t4_.getArea();
 }
+
 krylov::rectangle_t krylov::Complexquad::getFrameRect() const
 {
   rectangle_t f1 = t1_.getFrameRect();
@@ -63,6 +66,7 @@ krylov::rectangle_t krylov::Complexquad::getFrameRect() const
   point_t center = {minX + (maxX - minX) / 2, minY + (maxY - minY) / 2};
   return rectangle_t{maxX - minX, maxY - minY, center};
 }
+
 void krylov::Complexquad::move(const point_t& point)
 {
   point_t center = getFrameRect().pos;
@@ -72,18 +76,41 @@ void krylov::Complexquad::move(const point_t& point)
   t2_.move(dx, dy);
   t3_.move(dx, dy);
   t4_.move(dx, dy);
+  intersectionPoint_.x += dx;
+  intersectionPoint_.y += dy;
 }
+
 void krylov::Complexquad::move(double dx, double dy)
 {
   t1_.move(dx, dy);
   t2_.move(dx, dy);
   t3_.move(dx, dy);
   t4_.move(dx, dy);
+  intersectionPoint_.x += dx;
+  intersectionPoint_.y += dy;
 }
+
 void krylov::Complexquad::unsafeScale(double factor) noexcept
 {
   t1_.scale(factor);
   t2_.scale(factor);
   t3_.scale(factor);
   t4_.scale(factor);
+  point_t t1Cent = t1_.getFrameRect().pos;
+  point_t t2Cent = t2_.getFrameRect().pos;
+  point_t t3Cent = t3_.getFrameRect().pos;
+  point_t t4Cent = t4_.getFrameRect().pos;
+  point_t t1IP = {t1Cent.x + factor * (intersectionPoint_.x - t1Cent.x), t1Cent.y + factor * (intersectionPoint_.y - t1Cent.y)};
+  point_t t2IP = {t2Cent.x + factor * (intersectionPoint_.x - t2Cent.x), t2Cent.y + factor * (intersectionPoint_.y - t2Cent.y)};
+  point_t t3IP = {t3Cent.x + factor * (intersectionPoint_.x - t3Cent.x), t3Cent.y + factor * (intersectionPoint_.y - t3Cent.y)};
+  point_t t4IP = {t4Cent.x + factor * (intersectionPoint_.x - t4Cent.x), t4Cent.y + factor * (intersectionPoint_.y - t4Cent.y)};
+  t1_.move(intersectionPoint_.x - t1IP.x, intersectionPoint_.y - t1IP.y);
+  t2_.move(intersectionPoint_.x - t2IP.x, intersectionPoint_.y - t2IP.y);
+  t3_.move(intersectionPoint_.x - t3IP.x, intersectionPoint_.y - t3IP.y);
+  t4_.move(intersectionPoint_.x - t4IP.x, intersectionPoint_.y - t4IP.y);
+  point_t frameBeforeScale = getFrameRect().pos;
+  t1_.move((intersectionPoint_.x - frameBeforeScale.x) / factor, (intersectionPoint_.y - frameBeforeScale.y) / factor);
+  t2_.move((intersectionPoint_.x - frameBeforeScale.x) / factor, (intersectionPoint_.y - frameBeforeScale.y) / factor);
+  t3_.move((intersectionPoint_.x - frameBeforeScale.x) / factor, (intersectionPoint_.y - frameBeforeScale.y) / factor);
+  t4_.move((intersectionPoint_.x - frameBeforeScale.x) / factor, (intersectionPoint_.y - frameBeforeScale.y) / factor);
 }

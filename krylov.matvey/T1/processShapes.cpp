@@ -60,9 +60,11 @@ void krylov::isoScale(std::istream &in, Shape** shapes, const size_t shapeCount)
   for (size_t i = 0; i < shapeCount; ++i)
   {
     rectangle_t frameBefore = shapes[i]->getFrameRect();
+    std::cout << "Frame center of comp: " << frameBefore.pos.x << " " << frameBefore.pos.y << "\n";
     shapes[i]->move(scaleCenter);
     shapes[i]->scale(arr[2]);
     rectangle_t frameAfter = shapes[i]->getFrameRect();
+    std::cout << "Frame center of comp: " << frameAfter.pos.x << " " << frameAfter.pos.y << "\n";
     shapes[i]->move((frameBefore.pos.x - frameAfter.pos.x) * arr[2], (frameBefore.pos.y - frameAfter.pos.y) * arr[2]);
   }
 }

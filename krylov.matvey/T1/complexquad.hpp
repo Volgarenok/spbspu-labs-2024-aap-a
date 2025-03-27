@@ -20,6 +20,7 @@ namespace krylov
     Triangle t2_;
     Triangle t3_;
     Triangle t4_;
+    point_t intersectionPoint_;
   };
 }
 
