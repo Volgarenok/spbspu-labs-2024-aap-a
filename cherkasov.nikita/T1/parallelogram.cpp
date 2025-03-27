@@ -6,19 +6,16 @@
 
 namespace cherkasov
 {
-  Parallelogram::Parallelogram(double x1, double y1, double x2, double y2, double x3, double y3)
-  : vertex1{x1, y1},
+  Parallelogram::Parallelogram(double x1, double y1, double x2, double y2, double x3, double y3):
+    vertex1{x1, y1},
     vertex2{x2, y2},
     vertex3{x3, y3},
     vertex4{(x1 + x3) - x2, (y1 + y3) - y2}
     {
-      if ((x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3))
+      if (((x1 == x3 && y2 == y3) || (x2 == x3 && y1 == y3)) ||
+         (!(y1 == y2 || y1 == y3 || y2 == y3) && (y1 != y3)))
       {
         throw std::invalid_argument("no correct coordinat the parallelogram");
-      }
-      if (!(y1 == y2 || y1 == y3 || y2 == y3) && (y1 != y3))
-      {
-        throw std::invalid_argument("incorrect coordinates");
       }
     }
   double Parallelogram::getArea() const
@@ -38,7 +35,9 @@ namespace cherkasov
     point_t center;
     center.x = (vertex1.x + vertex2.x + vertex3.x + vertex4.x) / 4;
     center.y = (vertex1.y + vertex2.y + vertex3.y + vertex4.y) / 4;
-    rectangle_t rect{maxX - minX, maxY - minY, center};
+    double width = maxX - minX;
+    double height = maxY - minY;
+    rectangle_t rect {width, height, center};
     return rect;
   }
   void Parallelogram::move(point_t c)
