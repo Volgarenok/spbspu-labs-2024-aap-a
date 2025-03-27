@@ -14,7 +14,8 @@ namespace cherkasov
     {
       throw std::invalid_argument("no input coordinate");
     }
-    return new Rectangle(left, right);
+    Rectangle* rectangle = new Rectangle(left, right);
+    return rectangle;
   }
   Square* getSquare(std::istream& input)
   {
@@ -26,7 +27,8 @@ namespace cherkasov
     {
       throw std::invalid_argument("no input coordinate");
     }
-    return new Square(x, y, length);
+    Square* square = new Square(x, y, length);
+    return square;
   }
   Parallelogram* getParallelogram(std::istream& input)
   {
@@ -38,7 +40,8 @@ namespace cherkasov
     {
       throw std::invalid_argument("no correct coordinat the parallelogram");
     }
-    return new Parallelogram(vertex1, vertex2, vertex3);
+    Parallelogram* parallelogram = new Parallelogram(vertex1, vertex2, vertex3);
+    return parallelogram;
   }
   Diamond* getDiamond(std::istream& input)
   {
@@ -50,7 +53,8 @@ namespace cherkasov
     {
       throw std::invalid_argument("no input coordinat");
     }
-    return new Diamond(vertex1, vertex2, vertex3);
+    Diamond* diamond = new Diamond(vertex1, vertex2, vertex3);
+    return diamond;
   }
   Shape* createShape(const std::string& inputCommand, std::istream& input)
   {
