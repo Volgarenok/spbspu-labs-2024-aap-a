@@ -29,7 +29,7 @@ namespace cherkasov
     point_t center{};
     center.x = (left.x + right.x) / 2.0;
     center.y = (left.y + right.y) / 2.0;
-    rectangle_t rect{right.x - left.x, right.y - left.y, center};
+    rectangle_t rect { right.x - left.x, right.y - left.y, center };
     return rect;
   }
   void Rectangle::move(point_t c)
@@ -44,7 +44,7 @@ namespace cherkasov
     moveVertex(left, dx, dy);
     moveVertex(right, dx, dy);
   }
-  void Rectangle::scale(double k)
+  void Rectangle::scalingFactor(double k)
   {
     point_t center = getFrameRect().pos;
     scalePoint(left, center, k);

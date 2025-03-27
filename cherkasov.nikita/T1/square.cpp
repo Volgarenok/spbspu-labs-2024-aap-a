@@ -6,7 +6,7 @@
 namespace cherkasov
 {
   Square::Square(double x1, double y1, double length):
-    left {x1, y1},
+    left{ x1, y1 },
     length(length)
     {
       if (length <= 0)
@@ -38,7 +38,7 @@ namespace cherkasov
   {
     moveVertex(left, dx, dy);
   }
-  void Square::scale(double k)
+  void Square::scalingFactor(double k)
   {
     point_t currentPos = getFrameRect().pos;
     length *= k;

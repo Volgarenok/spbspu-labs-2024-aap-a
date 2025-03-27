@@ -13,13 +13,12 @@ namespace cherkasov
     rectangle_t getFrameRect() const override;
     void move(point_t c) override;
     void move(double dx, double dy) override;
-    void scale(double k) override;
+    void scalingFactor(double k) override;
   private:
     point_t vertex1;
     point_t vertex2;
     point_t vertex3;
     point_t vertex4;
-    point_t center;
   };
 }
 #endif

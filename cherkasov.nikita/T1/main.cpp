@@ -11,7 +11,7 @@ int main()
   size_t shapeCount = 0;
   bool invalidInput = false;
   cherkasov::point_t p = {0.0, 0.0};
-  double scalingFactor = 0.0;
+  double k = 0.0;
   while (std::cin >> inputCommand && inputCommand != "SCALE")
   {
     try
@@ -36,7 +36,7 @@ int main()
       return 1;
     }
   }
-  if (!(std::cin >> p.x >> p.y >> scalingFactor) || scalingFactor <= 0)
+  if (!(std::cin >> p.x >> p.y >> k) || k <= 0)
   {
     std::cerr << "incorrect scalingFator\n";
     cherkasov::deleteShapes(shapes, shapeCount);
@@ -51,7 +51,7 @@ int main()
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
   std::cout << "\n";
-  cherkasov::getScaling(shapes, shapeCount, p, scalingFactor);
+  cherkasov::getScaling(shapes, shapeCount, p, k);
   std::cout << cherkasov::getSumArea(shapes, shapeCount);
   cherkasov::getCoordinates(shapes, shapeCount);
   std::cout << "\n";

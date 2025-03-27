@@ -11,8 +11,9 @@ namespace cherkasov
     virtual rectangle_t getFrameRect() const = 0;
     virtual void move(point_t p) = 0;
     virtual void move(double x, double y) = 0;
-    virtual void scale(double k) = 0;
+    virtual void scale(double k);
     virtual ~Shape() = default;
+    virtual void scalingFactor(double k) = 0;
   };
 }
 #endif

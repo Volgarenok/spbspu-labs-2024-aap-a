@@ -29,14 +29,13 @@ void cherkasov::getCoordinates(Shape** shapes, size_t shape)
     double x2 = rectangle.pos.x + rectangle.width / 2.0;
     double y2 = rectangle.pos.y + rectangle.height / 2.0;
     std::cout << " " << x1 << " " << y1 << " " << x2 << " " << y2;
-    //std::cout << "\n";
   }
 }
-void cherkasov::getScaling(Shape** shapes, size_t shape, point_t p, double scalingFactor)
+void cherkasov::getScaling(Shape** shapes, size_t shape, point_t p, double k)
 {
-  if (scalingFactor <= 0)
+  if (k <= 0)
   {
-    throw std::invalid_argument("scalingFactor must be positiv");
+    throw std::invalid_argument("k must be positiv");
   }
   for (size_t i = 0; i < shape; i++)
   {
@@ -44,9 +43,9 @@ void cherkasov::getScaling(Shape** shapes, size_t shape, point_t p, double scali
     shapes[i]->move(p);
     point_t newPoint = shapes[i]->getFrameRect().pos;
     point_t newVector{};
-    newVector.x = (newPoint.x - startPoint.x) * scalingFactor;
-    newVector.y = (newPoint.y - startPoint.y) * scalingFactor;
-    shapes[i]->scale(scalingFactor);
+    newVector.x = (newPoint.x - startPoint.x) * k;
+    newVector.y = (newPoint.y - startPoint.y) * k;
+    shapes[i]->scale(k);
     shapes[i]->move(-newVector.x, -newVector.y);
   }
 }
