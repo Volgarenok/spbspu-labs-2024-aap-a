@@ -20,7 +20,7 @@ namespace krylov
   void isoScale(std::istream &in, Shape** shapes, size_t shapeCount);
   void printInfoAboutShapes(const Shape* const* shapes, size_t shapeCount);
   void deleteShapes(Shape** shapes, size_t shapeCount);
-  void printAreaAndFrameCoords(const Shape* const* shapes, size_t shapeCount, double totalArea);
+  void printAreaAndFrameCoords(const rectangle_t& frame);
 }
 
 #endif

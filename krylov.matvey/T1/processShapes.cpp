@@ -74,8 +74,14 @@ void krylov::printInfoAboutShapes(const Shape* const* shapes, const size_t shape
   {
     totalArea += shapes[i]->getArea();
   }
-  printAreaAndFrameCoords(shapes, shapeCount, totalArea);
-  std::cout << '\n';
+  std::cout << std::fixed << std::setprecision(1) << totalArea << " ";
+  for (size_t i = 0; i < shapeCount - 1; ++i)
+  {
+    printAreaAndFrameCoords(shapes[i]->getFrameRect());
+    std::cout << " ";
+  }
+  printAreaAndFrameCoords(shapes[shapeCount-1]->getFrameRect());
+  std::cout << "\n";
 }
 
 krylov::Shape* krylov::makeShape(std::string str, std::istream& in)
@@ -115,18 +121,8 @@ void krylov::deleteShapes(Shape** shapes, const size_t shapeCount)
   }
 }
 
-void krylov::printAreaAndFrameCoords(const Shape* const* shapes, const size_t shapeCount, const double totalArea)
+void krylov::printAreaAndFrameCoords(const rectangle_t& frame)
 {
-  std::cout << std::fixed << std::setprecision(1) << totalArea << ' ';
-  for (size_t i = 0; i < shapeCount - 1; ++i)
-  {
-    rectangle_t frame = shapes[i]->getFrameRect();
-    std::cout << frame.pos.x - frame.width / 2 << ' ';
-    std::cout << frame.pos.y - frame.height / 2 << ' ';
-    std::cout << frame.pos.x + frame.width / 2 << ' ';
-    std::cout << frame.pos.y + frame.height / 2 << ' ';
-  }
-  rectangle_t frame = shapes[shapeCount - 1]->getFrameRect();
   std::cout << frame.pos.x - frame.width / 2 << ' ';
   std::cout << frame.pos.y - frame.height / 2 << ' ';
   std::cout << frame.pos.x + frame.width / 2 << ' ';

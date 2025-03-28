@@ -1,13 +1,7 @@
 #include <iostream>
 #include <stdexcept>
-#include <iomanip>
 #include <limits>
 #include "processShapes.hpp"
-#include "rectangle.hpp"
-#include "ring.hpp"
-#include "triangle.hpp"
-#include "complexquad.hpp"
-#include "processLine.hpp"
 
 int main()
 {
@@ -65,6 +59,3 @@ int main()
   krylov::deleteShapes(shapes, shapeCount);
   return 0;
 }
-
-
-
