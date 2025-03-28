@@ -67,7 +67,7 @@ void krylov::isoScale(std::istream &in, Shape** shapes, const size_t shapeCount)
   }
 }
 
-void krylov::printInfoAboutShapes(Shape** shapes, const size_t shapeCount)
+void krylov::printInfoAboutShapes(const Shape* const* shapes, const size_t shapeCount)
 {
   double totalArea = 0.0;
   for (size_t i = 0; i < shapeCount; ++i)
@@ -81,28 +81,25 @@ void krylov::printInfoAboutShapes(Shape** shapes, const size_t shapeCount)
 krylov::Shape* krylov::makeShape(std::string str, std::istream& in)
 {
   Shape* figure = nullptr;
-  try
+  if (str == "RECTANGLE")
   {
-    if (str == "RECTANGLE")
-    {
-      figure = makeRectangle(in);
-    }
-    else if (str == "TRIANGLE")
-    {
-      figure = makeTriangle(in);
-    }
-    else if (str == "COMPLEXQUAD")
-    {
-      figure = makeComplexquad(in);
-    }
-    else if (str == "RING")
-    {
-      figure = makeRing(in);
-    }
+    figure = makeRectangle(in);
   }
-  catch (const std::exception& e)
+  else if (str == "TRIANGLE")
   {
-    throw;
+    figure = makeTriangle(in);
+  }
+  else if (str == "COMPLEXQUAD")
+  {
+    figure = makeComplexquad(in);
+  }
+  else if (str == "RING")
+  {
+    figure = makeRing(in);
+  }
+  else
+  {
+    throw std::logic_error("Unknown figure");
   }
   return figure;
 }
@@ -118,7 +115,7 @@ void krylov::deleteShapes(Shape** shapes, const size_t shapeCount)
   }
 }
 
-void krylov::printAreaAndFrameCoords(Shape** shapes, const size_t shapeCount, const double totalArea)
+void krylov::printAreaAndFrameCoords(const Shape* const* shapes, const size_t shapeCount, const double totalArea)
 {
   std::cout << std::fixed << std::setprecision(1) << totalArea << ' ';
   for (size_t i = 0; i < shapeCount - 1; ++i)

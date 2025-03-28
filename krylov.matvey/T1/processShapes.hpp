@@ -17,10 +17,10 @@ namespace krylov
   Complexquad* makeComplexquad(std::istream &in);
   Ring* makeRing(std::istream &in);
   Shape* makeShape(std::string str, std::istream& in);
-  void isoScale(std::istream &in, Shape** shapes, const size_t shapeCount);
-  void printInfoAboutShapes(Shape** shapes, const size_t shapeCount);
-  void deleteShapes(Shape** shapes, const size_t shapeCount);
-  void printAreaAndFrameCoords(Shape** shapes, const size_t shapeCount, const double totalArea);
+  void isoScale(std::istream &in, Shape** shapes, size_t shapeCount);
+  void printInfoAboutShapes(const Shape* const* shapes, size_t shapeCount);
+  void deleteShapes(Shape** shapes, size_t shapeCount);
+  void printAreaAndFrameCoords(const Shape* const* shapes, size_t shapeCount, double totalArea);
 }
 
 #endif

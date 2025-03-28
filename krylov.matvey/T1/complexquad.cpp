@@ -108,9 +108,13 @@ void krylov::Complexquad::unsafeScale(double factor) noexcept
   t2_.move(intersectionPoint_.x - t2IP.x, intersectionPoint_.y - t2IP.y);
   t3_.move(intersectionPoint_.x - t3IP.x, intersectionPoint_.y - t3IP.y);
   t4_.move(intersectionPoint_.x - t4IP.x, intersectionPoint_.y - t4IP.y);
-  point_t frameBeforeScale = getFrameRect().pos;
-  t1_.move((intersectionPoint_.x - frameBeforeScale.x) / factor, (intersectionPoint_.y - frameBeforeScale.y) / factor);
-  t2_.move((intersectionPoint_.x - frameBeforeScale.x) / factor, (intersectionPoint_.y - frameBeforeScale.y) / factor);
-  t3_.move((intersectionPoint_.x - frameBeforeScale.x) / factor, (intersectionPoint_.y - frameBeforeScale.y) / factor);
-  t4_.move((intersectionPoint_.x - frameBeforeScale.x) / factor, (intersectionPoint_.y - frameBeforeScale.y) / factor);
+  point_t frame = getFrameRect().pos;
+  double dx = (intersectionPoint_.x - frame.x) / factor;
+  double dy = (intersectionPoint_.y - frame.y) / factor;
+  t1_.move(dx, dy);
+  t2_.move(dx, dy);
+  t3_.move(dx, dy);
+  t4_.move(dx, dy);
+  intersectionPoint_.x += dx;
+  intersectionPoint_.y += dy;
 }
