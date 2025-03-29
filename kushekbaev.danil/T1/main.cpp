@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include "shapeCreation.hpp"
 #include "shapeManipulations.hpp"
 #include "shape.hpp"
@@ -18,13 +19,11 @@ int main()
     {
       kushekbaev::createShape(std::cin, compShape, shapeName);
     }
-
     catch (const std::logic_error&)
     {
       std::cin.clear();
       invalid_argument = true;
     }
-
     catch (const std::bad_alloc&)
     {
       std::cerr << "Bad alloc";
@@ -39,17 +38,17 @@ int main()
     std::cerr << "There was no SCALE command";
     return 1;
   }
-
   if (compShape.size() == 0)
   {
     std::cerr << "Shapeless input";
     return 1;
   }
-
   if (invalid_argument)
   {
     std::cerr << "Some shapes were inputed incorrectly";
   }
 
+  std::cout << std::fixed << std::setprecision(1);
   kushekbaev::output(std::cout, compShape, scalePoint, scaleCoeff);
+  std::cout.unsetf(std::ios_base::fixed);
 }

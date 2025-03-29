@@ -53,7 +53,7 @@ kushekbaev::CompositeShape::~CompositeShape()
 
 kushekbaev::CompositeShape& kushekbaev::CompositeShape::operator=(const CompositeShape& rhs)
 {
-  if (&rhs != this)
+  if (std::addressof(rhs) != this)
   {
     CompositeShape cs(rhs);
     swap(cs);
@@ -212,7 +212,7 @@ void kushekbaev::CompositeShape::clear()
   delete[] array_;
 }
 
-void kushekbaev::CompositeShape::scaleEverything(CompositeShape *compShape, point_t scalePoint, double scaleCoeff)
+void kushekbaev::scaleEverything(CompositeShape *compShape, point_t scalePoint, double scaleCoeff)
 {
   size_t size = compShape->size();
   for (size_t i = 0; i < size; i++)

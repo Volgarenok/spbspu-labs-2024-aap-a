@@ -1,5 +1,4 @@
 #include "shapeManipulations.hpp"
-#include <iomanip>
 
 void kushekbaev::output(std::ostream& out, CompositeShape& compShape, const point_t& scalePoint, double scaleCoeff)
 {
@@ -19,9 +18,7 @@ void kushekbaev::outputSum(std::ostream& out, const CompositeShape& compShape)
   {
     sum += compShape[i]->getArea();
   }
-  out << std::fixed << std::setprecision(1);
   out << sum;
-  std::cout.unsetf(std::ios_base::fixed);
 }
 
 void kushekbaev::outputPoints(std::ostream& out, const CompositeShape& compShape)
@@ -33,9 +30,7 @@ void kushekbaev::outputPoints(std::ostream& out, const CompositeShape& compShape
     double y1 = rec.pos.y - (rec.height / 2);
     double x2 = rec.pos.x + (rec.width / 2);
     double y2 = rec.pos.y + (rec.height / 2);
-    out << std::fixed << std::setprecision(1);
     out << " " << x1 << " " << y1 << " " << x2 << " " << y2;
-    std::cout.unsetf(std::ios_base::fixed);
   }
 }
 

@@ -42,8 +42,9 @@ namespace kushekbaev
     void swap(CompositeShape& rhs);
     void scaleArray(size_t size);
     void clear();
-    void scaleEverything(CompositeShape* compShape, point_t scalePoint, double scaleCoeff);
   };
+
+  void scaleEverything(CompositeShape* compShape, point_t scalePoint, double scaleCoeff);
 }
 
 #endif
