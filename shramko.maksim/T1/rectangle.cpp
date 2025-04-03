@@ -33,12 +33,12 @@ double shramko::Rectangle::getArea() const
 
 shramko::rectangle_t shramko::Rectangle::getFrameRect() const
 {
-  rectangle_t rectFrame;
-  rectFrame.height = rightTop_.y - leftBottom_.y;
-  rectFrame.width = rightTop_.x - leftBottom_.x;
-  rectFrame.pos = center_;
+  double height = rightTop_.y - leftBottom_.y;
+  double width = rightTop_.x - leftBottom_.x;
+  double x_ = leftBottom_.x + (width / 2.0);
+  double y_ = leftBottom_.y + (height / 2.0);
 
-  return rectFrame;
+  return {width, height, {x_, y_}};
 }
 
 void shramko::Rectangle::move(double x, double y)
