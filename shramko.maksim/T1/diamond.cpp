@@ -43,13 +43,13 @@ double shramko::Diamond::getArea() const
 
 shramko::rectangle_t shramko::Diamond::getFrameRect() const
 {
-  rectangle_t rectFrame;
-  rectFrame.pos = center_;
   double x_max = std::max(triangle_.one_.x, std::max(triangle_.two_.x,triangle_.three_.x));
   double x_min = std::min(triangle_.one_.x, std::min(triangle_.two_.x,triangle_.three_.x));
   double y_max = std::max(triangle_.one_.y, std::max(triangle_.two_.y,triangle_.three_.y));
   double y_min = std::min(triangle_.one_.y, std::min(triangle_.two_.y,triangle_.three_.y));
 
+  rectangle_t rectFrame;
+  rectFrame.pos = center_;
   if (x_max != center_.x)
   {
     rectFrame.width = (x_max - center_.x) * 2;
