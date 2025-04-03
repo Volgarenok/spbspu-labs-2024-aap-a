@@ -14,18 +14,18 @@ namespace shramko
   {
     double width;
     double height;
-    point_t center;
+    point_t pos;
     void print()
     {
-      std::cout << center.x - width / 2 << " " << center.y - height / 2 << " ";
-      std::cout << center.x + width / 2 << " " << center.y + height / 2;
+      std::cout << pos.x - width / 2 << " " << pos.y - height / 2 << " ";
+      std::cout << pos.x + width / 2 << " " << pos.y + height / 2;
     }
   };
 
   inline std::ostream& operator<<(std::ostream& out, const rectangle_t& rect)
   {
-    out << rect.center.x - rect.width / 2 << " " << rect.center.y - rect.height / 2 << " ";
-    out << rect.center.x + rect.width / 2 << " " << rect.center.y + rect.height / 2;
+    out << rect.pos.x - rect.width / 2 << " " << rect.pos.y - rect.height / 2 << " ";
+    out << rect.pos.x + rect.width / 2 << " " << rect.pos.y + rect.height / 2;
     return out;
   }
 }

@@ -116,9 +116,9 @@ void shramko::scaleShapes(Shape** shapes, size_t size, double k, point_t new_cen
 {
   for (size_t i = 0; i < size; ++i)
   {
-    point_t c = shapes[i]->getFrameRect().center;
+    point_t c = shapes[i]->getFrameRect().pos;
     shapes[i]->move(new_center);
-    point_t new_c = shapes[i]->getFrameRect().center;
+    point_t new_c = shapes[i]->getFrameRect().pos;
     shapes[i]->scale(k);
 
     point_t offset;

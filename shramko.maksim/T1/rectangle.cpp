@@ -36,7 +36,7 @@ shramko::rectangle_t shramko::Rectangle::getFrameRect() const
   rectangle_t rectFrame;
   rectFrame.height = rightTop_.y - leftBottom_.y;
   rectFrame.width = rightTop_.x - leftBottom_.x;
-  rectFrame.center = center_;
+  rectFrame.pos = center_;
 
   return rectFrame;
 }
