@@ -59,6 +59,7 @@ int main()
   total_area = totalArea(shapes, top);
   std::cout << total_area << " ";
   shramko::printRectangleShapes(shapes, top);
+  std::cout << "\n";
   destroyShapes(shapes, top);
 
   return 0;
