@@ -2,6 +2,7 @@
 #define RECTANGLE_HPP
 #include "base-types.hpp"
 #include "shape.hpp"
+#include "parallelogram.hpp"
 
 namespace cherkasov
 {
@@ -15,8 +16,9 @@ namespace cherkasov
     void move(double dx, double dy) override;
     void scalingFactor(double k) override;
   private:
-    point_t left;
-    point_t right;
+    /*point_t left;
+    point_t right;*/
+    Parallelogram parallelogram;
   };
 }
 #endif
