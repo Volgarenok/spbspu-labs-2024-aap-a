@@ -6,7 +6,7 @@
 namespace cherkasov
 {
   Rectangle::Rectangle(point_t left, point_t right):
-    parallelogram(left, { right.x, left.y }, { left.x, right.y })
+  parallelogram({ left.x, left.y }, { right.x, left.y }, { right.x, right.y })
     {
       if (left.x >= right.x || left.y >= right.y)
       {
