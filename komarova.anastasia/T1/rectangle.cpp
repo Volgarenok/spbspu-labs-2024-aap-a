@@ -7,14 +7,14 @@ constexpr size_t cnt_trg = 8;
 komarova::Rectangle::Rectangle(point_t low_left, point_t up_right):
   low_left_(low_left),
   up_right_(up_right),
-  triangles_(new Shape*[cnt_trg])
+  triangles_(new Shape*[cnt_trg]{})
 {
-  if (low_left_.x >= up_right_.x || low_left_.y >= up_right_.y)
-  {
-    throw std::logic_error("incorrect coordinates");
-  }
   try
   {
+    if (low_left_.x >= up_right_.x || low_left_.y >= up_right_.y)
+    {
+      throw std::logic_error("incorrect coordinates");
+    }
     double width = up_right_.x - low_left_.x;
     double height = up_right_.y - low_left_.y;
     point_t up_left_ = {low_left_.x, up_right_.y};
@@ -29,7 +29,7 @@ komarova::Rectangle::Rectangle(point_t low_left, point_t up_right):
     triangles_[6] = new Triangle(low_right_, center, {low_right_.x, low_right_.y + height / 2.0});
     triangles_[7] = new Triangle(up_right_, center, {low_right_.x, low_right_.y + height / 2.0});
   }
-  catch(const std::bad_alloc& e)
+  catch(const std::exception& e)
   {
     clear();
     throw;
