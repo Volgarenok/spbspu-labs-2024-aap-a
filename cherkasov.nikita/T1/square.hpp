@@ -2,6 +2,7 @@
 #define SQUARE_HPP
 #include "shape.hpp"
 #include "base-types.hpp"
+#include "parallelogram.hpp"
 
 namespace cherkasov
 {
@@ -15,8 +16,9 @@ namespace cherkasov
     void move(double dx, double dy) override;
     void scalingFactor(double k) override;
   private:
-    point_t left;
-    double length;
+    /*point_t left;
+    double length;*/
+    Parallelogram parallelogram;
   };
 }
 #endif
