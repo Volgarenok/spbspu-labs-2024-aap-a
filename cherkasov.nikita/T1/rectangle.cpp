@@ -1,7 +1,5 @@
 #include "rectangle.hpp"
 #include <stdexcept>
-#include <cmath>
-#include "shapeUtils.hpp"
 
 namespace cherkasov
 {
@@ -12,10 +10,6 @@ namespace cherkasov
       {
         throw std::invalid_argument("incorrect coordinats");
       }
-      /*if (left.x == right.x || left.y == right.y)
-      {
-        throw std::invalid_argument("coordinats must not match");
-      }*/
     }
   double Rectangle::getArea() const
   {

@@ -16,8 +16,6 @@ namespace cherkasov
     void move(double dx, double dy) override;
     void scalingFactor(double k) override;
   private:
-    /*point_t left;
-    double length;*/
     Parallelogram parallelogram;
   };
 }
