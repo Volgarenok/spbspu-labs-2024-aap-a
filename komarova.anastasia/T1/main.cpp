@@ -41,16 +41,10 @@ int main()
     }
     komarova::delete_shapes(shapes);
   }
-  catch (const std::bad_alloc& e)
+  catch (const std::exception& e)
   {
     delete_shapes(shapes);
-    std::cerr << "no memory allocated \n";
-    return 1;
-  }
-  catch (const std::logic_error& e)
-  {
-    delete_shapes(shapes);
-    std::cerr << e.what() << "\n";
+    std::cerr << e.what() << '\n';
     return 1;
   }
 }

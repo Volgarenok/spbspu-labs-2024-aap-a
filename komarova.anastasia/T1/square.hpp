@@ -15,8 +15,6 @@ namespace komarova
     void move(double dx, double dy) override;
     void scale(double coef) override;
   private:
-    //point_t low_left_;
-    //double len_;
     Rectangle rect_;
   };
 }

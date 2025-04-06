@@ -5,8 +5,6 @@
 #include "triangle.hpp"
 constexpr size_t cnt_trg = 8;
 komarova::Rectangle::Rectangle(point_t low_left, point_t up_right):
-  //low_left_(low_left),
-  //up_right_(up_right),
   triangles_(new Shape*[cnt_trg]{})
 {
   try
@@ -42,9 +40,6 @@ komarova::Rectangle::~Rectangle()
 double komarova::Rectangle::getArea() const
 {
   return triangles_[0]->getArea() * 8;
-  /*double width_ = up_right_.x - low_left_.x;
-  double height_ = up_right_.y - low_left_.y;
-  return (width_ * height_);*/
 }
 komarova::rectangle_t komarova::Rectangle::getFrameRect() const
 {
@@ -60,10 +55,6 @@ void komarova::Rectangle::move(point_t point)
   {
     triangles_[i]->move(point);
   }
-  /*double dx = point.x - getFrameRect().pos.x;
-  double dy = point.y - getFrameRect().pos.y;
-  low_left_ = {low_left_.x + dx, low_left_.y + dy};
-  up_right_ = {up_right_.x + dx, up_right_.y + dy};*/
 }
 void komarova::Rectangle::move(double dx, double dy)
 {
@@ -71,8 +62,6 @@ void komarova::Rectangle::move(double dx, double dy)
   {
     triangles_[i]->move(dx, dy);
   }
-  /*low_left_ = {low_left_.x + dx, low_left_.y + dy};
-  up_right_ = {up_right_.x + dx, up_right_.y + dy};*/
 }
 void komarova::Rectangle::scale(double coef)
 {
@@ -82,12 +71,7 @@ void komarova::Rectangle::scale(double coef)
   }
   for (size_t i = 0; i < cnt_trg; i++)
   {
-    //point_t center = triangles_[i]->getFrameRect().pos;
     triangles_[i]->scale(coef);
-    /*low_left_.x = center.x + (low_left_.x - center.x) * coef;
-    low_left_.y = center.y + (low_left_.y - center.y) * coef;
-    up_right_.x = center.x + (up_right_.x - center.x) * coef;
-    up_right_.y = center.y + (up_right_.y - center.y) * coef;*/
   }
 }
 void komarova::Rectangle::clear()
