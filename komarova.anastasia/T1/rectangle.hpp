@@ -16,8 +16,8 @@ namespace komarova
     void move(point_t point) override;
     void scale(double coef) override;
   private:
-    point_t low_left_;
-    point_t up_right_;
+    //point_t low_left_;
+    //point_t up_right_;
     Shape** triangles_;
 
     void clear();

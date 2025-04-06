@@ -5,29 +5,29 @@
 #include "triangle.hpp"
 constexpr size_t cnt_trg = 8;
 komarova::Rectangle::Rectangle(point_t low_left, point_t up_right):
-  low_left_(low_left),
-  up_right_(up_right),
+  //low_left_(low_left),
+  //up_right_(up_right),
   triangles_(new Shape*[cnt_trg]{})
 {
   try
   {
-    if (low_left_.x >= up_right_.x || low_left_.y >= up_right_.y)
+    if (low_left.x >= up_right.x || low_left.y >= up_right.y)
     {
       throw std::logic_error("incorrect coordinates");
     }
-    double width = up_right_.x - low_left_.x;
-    double height = up_right_.y - low_left_.y;
-    point_t up_left_ = {low_left_.x, up_right_.y};
-    point_t low_right_ = {up_right_.x, low_left_.y};
-    point_t center = {(low_left_.x + width / 2.0), (low_left_.y + height / 2.0)};
-    triangles_[0] = new Triangle(up_right_, center, {up_right_.x - width / 2.0, up_right_.y});
-    triangles_[1] = new Triangle(up_left_, center, {up_right_.x - width / 2.0, up_right_.y});
-    triangles_[2] = new Triangle(up_left_, center, {low_left_.x, low_left_.y + height / 2.0});
-    triangles_[3] = new Triangle(low_left_, center, {low_left_.x, low_left_.y + height / 2.0});
-    triangles_[4] = new Triangle(low_left_, center, {low_left_.x + width / 2.0, low_left_.y});
-    triangles_[5] = new Triangle(low_right_, center, {low_left_.x + width / 2.0, low_left_.y});
-    triangles_[6] = new Triangle(low_right_, center, {low_right_.x, low_right_.y + height / 2.0});
-    triangles_[7] = new Triangle(up_right_, center, {low_right_.x, low_right_.y + height / 2.0});
+    double width = up_right.x - low_left.x;
+    double height = up_right.y - low_left.y;
+    point_t up_left = {low_left.x, up_right.y};
+    point_t low_right = {up_right.x, low_left.y};
+    point_t center = {(low_left.x + width / 2.0), (low_left.y + height / 2.0)};
+    triangles_[0] = new Triangle(up_right, center, {up_right.x - width / 2.0, up_right.y});
+    triangles_[1] = new Triangle(up_left, center, {up_right.x - width / 2.0, up_right.y});
+    triangles_[2] = new Triangle(up_left, center, {low_left.x, low_left.y + height / 2.0});
+    triangles_[3] = new Triangle(low_left, center, {low_left.x, low_left.y + height / 2.0});
+    triangles_[4] = new Triangle(low_left, center, {low_left.x + width / 2.0, low_left.y});
+    triangles_[5] = new Triangle(low_right, center, {low_left.x + width / 2.0, low_left.y});
+    triangles_[6] = new Triangle(low_right, center, {low_right.x, low_right.y + height / 2.0});
+    triangles_[7] = new Triangle(up_right, center, {low_right.x, low_right.y + height / 2.0});
   }
   catch(const std::exception& e)
   {
@@ -41,22 +41,18 @@ komarova::Rectangle::~Rectangle()
 }
 double komarova::Rectangle::getArea() const
 {
-  double sum = 0;
-  for (size_t i = 0; i < cnt_trg; i++)
-  {
-    sum += triangles_[i]->getArea();
-  }
-  return sum;
+  return triangles_[0]->getArea() * 8;
   /*double width_ = up_right_.x - low_left_.x;
   double height_ = up_right_.y - low_left_.y;
   return (width_ * height_);*/
 }
 komarova::rectangle_t komarova::Rectangle::getFrameRect() const
 {
-  double width_ = up_right_.x - low_left_.x;
-  double height_ = up_right_.y - low_left_.y;
-  point_t pos_ = {(low_left_.x + width_ / 2.0), (low_left_.y + height_ / 2.0)};
-  return {width_, height_, pos_};
+  rectangle_t tmp = triangles_[0]->getFrameRect();
+  double width = tmp.width * 2;
+  double height = tmp.height * 2;
+  point_t pos = {(tmp.pos.x - tmp.width / 2.0), (tmp.pos.y - tmp.height / 2.0)};
+  return {width, height, pos};
 }
 void komarova::Rectangle::move(point_t point)
 {
