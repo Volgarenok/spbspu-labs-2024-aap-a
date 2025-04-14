@@ -39,7 +39,7 @@ int main()
   }
   if (name != "SCALE")
   {
-    std::cerr << "scale command not found" << "\n";
+    std::cerr << "scale command not found\n";
     return 1;
   }
 
@@ -49,6 +49,12 @@ int main()
   {
     std::cerr << "k must be positive\n";
     return 2;
+  }
+
+  if (top == 0)
+  {
+    std::cerr << "Nothing to scale\n";
+    return 3;
   }
 
   std::cout << total_area << " ";
