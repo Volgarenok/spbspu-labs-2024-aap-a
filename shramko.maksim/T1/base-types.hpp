@@ -25,7 +25,7 @@ namespace shramko
     return out;
   }
 
-  double distance(const point_t& p1, const point_t& p2)
+  inline double distance(const point_t& p1, const point_t& p2)
   {
     return std::hypot(p1.x - p2.x, p1.y - p2.y);
   }
