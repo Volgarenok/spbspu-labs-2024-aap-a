@@ -79,9 +79,5 @@ void shramko::Diamond::move(double x, double y)
 
 void shramko::Diamond::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::invalid_argument("Diamond scale err\n");
-  }
   triangle_.scale(k);
 }

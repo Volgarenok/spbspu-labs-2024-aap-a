@@ -1,6 +1,7 @@
 #ifndef BASE_TYPES_HPP
 #define BASE_TYPES_HPP
 
+#include <cmath>
 #include <iostream>
 
 namespace shramko
@@ -22,6 +23,11 @@ namespace shramko
     out << rect.pos.x - rect.width / 2 << " " << rect.pos.y - rect.height / 2 << " ";
     out << rect.pos.x + rect.width / 2 << " " << rect.pos.y + rect.height / 2;
     return out;
+  }
+
+  double distance(const point_t& p1, const point_t& p2)
+  {
+    return std::hypot(p1.x - p2.x, p1.y - p2.y);
   }
 }
 

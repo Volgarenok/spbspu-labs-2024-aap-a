@@ -1,33 +1,37 @@
 #ifndef SHAPE_HPP
 #define SHAPE_HPP
 
-#include <istream>
-#include <cmath>
 #include "base-types.hpp"
 
 namespace shramko
 {
   class Shape
   {
-  protected:
-      double distance(point_t p1, point_t p2)
-      {
-          return std::sqrt(std::pow(p1.x - p2.x, 2) + std::pow(p1.y - p2.y, 2));
-      }
-      point_t center_;
   public:
     virtual double getArea() const = 0;
     virtual rectangle_t getFrameRect() const = 0;
-    virtual void move(point_t point)
+    void move(const point_t point)
     {
-        double xMove = point.x - center_.x;
-        double yMove = point.y - center_.y;
-        this->move(xMove, yMove);
+      double xMove = point.x - center_.x;
+      double yMove = point.y - center_.y;
+      this->move(xMove, yMove);
     }
     virtual void move(double x, double y) = 0;
-    virtual void scale(double k) = 0;
+    void scale(double k)
+    {
+      if (k <= 0)
+      {
+        throw std::invalid_argument("Scale must be positive!");
+      }
+      doScale(k);
+    }
     virtual ~Shape() = default;
+    virtual point_t getCenter() const = 0;
+  protected:
+    point_t center_;
+    virtual void doScale(double k) = 0;
   };
+  double distance(const point_t& p1, const point_t& p2);
 }
 
 #endif

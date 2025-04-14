@@ -53,11 +53,6 @@ void shramko::Rectangle::move(double x, double y)
 
 void shramko::Rectangle::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::invalid_argument("Rect scale err\n");
-  }
-
   leftBottom_.x *= k;
   rightTop_.x *= k;
   rightTop_.y *= k;

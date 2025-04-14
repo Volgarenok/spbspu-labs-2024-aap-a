@@ -54,11 +54,6 @@ void shramko::Triangle::move(double x, double y)
 
 void shramko::Triangle::scale(double k)
 {
-  if (k <= 0)
-  {
-    throw std::invalid_argument("Triangle scale err\n");
-  }
-
   one_.x *= k;
   one_.y *= k;
 
