@@ -77,7 +77,16 @@ void shramko::Diamond::move(double x, double y)
   center_.y += y;
 }
 
-void shramko::Diamond::scale(double k)
+void shramko::Diamond::doScale(double k)
 {
-  triangle_.scale(k);
+  const point_t center = center_;
+
+  triangle_.one_.x = center.x + (triangle_.one_.x - center.x) * k;
+  triangle_.one_.y = center.y + (triangle_.one_.y - center.y) * k;
+
+  triangle_.two_.x = center.x + (triangle_.two_.x - center.x) * k;
+  triangle_.two_.y = center.y + (triangle_.two_.y - center.y) * k;
+
+  triangle_.three_.x = center.x + (triangle_.three_.x - center.x) * k;
+  triangle_.three_.y = center.y + (triangle_.three_.y - center.y) * k;
 }

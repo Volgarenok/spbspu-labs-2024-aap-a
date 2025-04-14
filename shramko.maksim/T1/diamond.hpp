@@ -13,9 +13,9 @@ namespace shramko
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(double x, double y) override;
-    void scale(double k);
   private:
     Triangle triangle_;
+    void doScale(double k) override;
   };
 }
 
