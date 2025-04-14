@@ -58,3 +58,14 @@ void shramko::Rectangle::scale(double k)
   rightTop_.y *= k;
   leftBottom_.y *= k;
 }
+
+void shramko::Rectangle::doScale(double k)
+{
+  const point_t center = getFrameRect().pos;
+  
+  leftBottom_.x = center.x + (leftBottom_.x - center.x) * k;
+  leftBottom_.y = center.y + (leftBottom_.y - center.y) * k;
+
+  rightTop_.x = center.x + (rightTop_.x - center.x) * k;
+  rightTop_.y = center.y + (rightTop_.y - center.y) * k;
+}

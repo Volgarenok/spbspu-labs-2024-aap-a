@@ -19,6 +19,7 @@ namespace shramko
     point_t one_;
     point_t two_;
     point_t three_;
+    void doScale(double k) override;
   };
 }
 

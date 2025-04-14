@@ -26,12 +26,10 @@ namespace shramko
       doScale(k);
     }
     virtual ~Shape() = default;
-    virtual point_t getCenter() const = 0;
   protected:
     point_t center_;
     virtual void doScale(double k) = 0;
   };
-  double distance(const point_t& p1, const point_t& p2);
 }
 
 #endif
