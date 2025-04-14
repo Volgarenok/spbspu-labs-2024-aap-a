@@ -23,17 +23,20 @@ int main()
   double total_area = 0.0;
   while (std::cin >> name && name != "SCALE")
   {
+    shramko::Shape* shape = nullptr;
     try
     {
-      shramko::Shape* shape = shramko::readShape(std::cin, name);
+      shape = shramko::readShape(std::cin, name);
       if (shape != nullptr)
       {
         total_area += shape->getArea();
         shapes[top++] = shape;
+        shape = nullptr;
       }
     }
     catch (const std::exception& e)
     {
+      delete shape;
       std::cerr << e.what() << "\n";
     }
   }
