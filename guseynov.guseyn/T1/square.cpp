@@ -42,10 +42,7 @@ void guseynov::Square::move(point_t pos)
 
 void guseynov::Square::move(double x, double y)
 {
-  for (size_t i = 0; i < n_; i++)
-  {
-    rectangleArray_[i]->move(x, y);
-  }
+  assigment({leftLowP_.x + x, leftLowP_.y + y});
 }
 
 void guseynov::Square::scaleWithoutCheck(double k)
