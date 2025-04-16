@@ -3,8 +3,6 @@
 #include <stdexcept>
 #include <cmath>
 
-
-
 guseynov::Square::Square(point_t leftLowP, double length):
   leftLowP_(leftLowP),
   n_{determinateNum(length)}
@@ -39,10 +37,8 @@ guseynov::rectangle_t guseynov::Square::getFrameRect() const
 
 void guseynov::Square::move(point_t pos)
 {
-  for (size_t i = 0; i < n_; i++)
-  {
-    rectangleArray_[i]->move(pos);
-  }
+  double length_ = rectangleArray_[0]->getFrameRect().width * 3;
+  assigment({pos.x - (length_ / 2), pos.y - (length_ / 2)});
 }
 
 void guseynov::Square::move(double x, double y)
@@ -57,6 +53,14 @@ void guseynov::Square::scaleWithoutCheck(double k)
 {
   double length_ = rectangleArray_[0]->getFrameRect().width * 3;
   assigment({leftLowP_.x - (length_ * k - length_) / 2, leftLowP_.y - (length_ * k - length_) / 2}, length_ * k);
+}
+
+void guseynov::Square::assigment(point_t leftLowP)
+{
+  double length_ = rectangleArray_[0]->getFrameRect().width * 3;
+  leftLowP_ = leftLowP;
+  clear(n_);
+  createArrayRectangle(leftLowP, length_, n_, 0);
 }
 
 void guseynov::Square::assigment(point_t leftLowP, double length)
