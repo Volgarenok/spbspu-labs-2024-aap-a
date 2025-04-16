@@ -67,105 +67,119 @@ void guseynov::inputShapes(std::istream & in, guseynov::CompositeShape & composi
 
 namespace
 {
+  void inputArray(std::istream & in, guseynov::point_t * coordinates, size_t count)
+  {
+    for (size_t i = 0; i < count; ++i)
+    {
+      in >> coordinates[i].x >> coordinates[i].y;
+    }
+  }
+
   guseynov::Rectangle* makeRectangle(std::istream& in)
   {
     using namespace guseynov;
-    double x0 = 0, y0 = 0, x1 = 0, y1 = 0;
-    in >> x0 >> y0 >> x1 >> y1;
-    if (x0 >= x1 || y0 >= y1)
+    constexpr size_t numberOfCoordinates = 2;
+    point_t coordinates[numberOfCoordinates] = {};
+    inputArray(in, coordinates, numberOfCoordinates);
+    if (coordinates[0].x >= coordinates[1].x || coordinates[0].y >= coordinates[1].y)
     {
       throw std::invalid_argument("Rectangle has incorrect parameters");
     }
     point_t leftLowP, rightHighP;
-    leftLowP.x = x0;
-    leftLowP.y = y0;
-    rightHighP.x = x1;
-    rightHighP.y = y1;
+    leftLowP.x = coordinates[0].x;
+    leftLowP.y = coordinates[0].y;
+    rightHighP.x = coordinates[1].x;
+    rightHighP.y = coordinates[1].y;
     return new Rectangle(leftLowP, rightHighP);
   }
 
   guseynov::Square* makeSquare(std::istream& in)
   {
     using namespace guseynov;
-    double x0, y0, length;
-    in >> x0 >> y0 >> length;
+    double length;
+    constexpr size_t numberOfCoordinates = 1;
+    point_t coordinates[numberOfCoordinates] = {};
+    inputArray(in, coordinates, numberOfCoordinates);
+    in >> length;
     if (length <= 0)
     {
       throw std::invalid_argument("Square length is incorrect");
     }
     point_t leftLowP;
-    leftLowP.x = x0;
-    leftLowP.y = y0;
+    leftLowP.x = coordinates[0].x;
+    leftLowP.y = coordinates[0].y;
     return new Square(leftLowP, length);
   }
 
   guseynov::Parallelogram* makeParallelogram(std::istream& in)
   {
     using namespace guseynov;
-    double x0, y0, x1, y1, x2, y2;
-    in >> x0 >> y0 >> x1 >> y1 >> x2 >> y2;
-    if (!(((y0 == y1) && (y0 != y2)) || ((y1 == y2) && (y0 != y1))))
+    constexpr size_t numberOfCoordinates = 3;
+    point_t coordinates[numberOfCoordinates] = {};
+    inputArray(in, coordinates, numberOfCoordinates);
+    if (!(((coordinates[0].y == coordinates[1].y) && (coordinates[0].y != coordinates[2].y)) || ((coordinates[1].y == coordinates[2].y) && (coordinates[0].y != coordinates[1].y))))
     {
       throw std::invalid_argument("Parallelogram is not parallel");
     }
     point_t leftLowP, leftHighP, rightLowP;
-    leftLowP.x = x0;
-    leftLowP.y = y0;
-    leftHighP.x = x2;
-    leftHighP.y = y2;
-    rightLowP.x = x1;
-    rightLowP.y = y1;
+    leftLowP.x = coordinates[0].x;
+    leftLowP.y = coordinates[0].y;
+    leftHighP.x = coordinates[2].x;
+    leftHighP.y = coordinates[2].y;
+    rightLowP.x = coordinates[1].x;
+    rightLowP.y = coordinates[1].y;
     return new Parallelogram(leftLowP, rightLowP, leftHighP);
   }
 
   guseynov::Diamond* makeDiamond(std::istream& in)
   {
     using namespace guseynov;
-    double x0, y0, x1, y1, x2, y2;
-    in >> x0 >> y0 >> x1 >> y1 >> x2 >> y2;
-    if (x0 == x1)
+    constexpr size_t numberOfCoordinates = 3;
+    point_t coordinates[numberOfCoordinates] = {};
+    inputArray(in, coordinates, numberOfCoordinates);
+    if (coordinates[0].x == coordinates[1].x)
     {
-     if (y0 > y1)
+     if (coordinates[0].y > coordinates[1].y)
       {
-        rakirovka(x1, x2, y1, y2);
+        rakirovka(coordinates[1].x, coordinates[2].x, coordinates[1].y, coordinates[2].y);
       }
-      else if (y1 > y0)
+      else if (coordinates[1].y > coordinates[0].y)
       {
-        rakirovka(x1, x2, y1, y2);
-        rakirovka(x0, x2, y0, y2);
+        rakirovka(coordinates[1].x, coordinates[2].x, coordinates[1].y, coordinates[2].y);
+        rakirovka(coordinates[0].x, coordinates[2].x, coordinates[0].y, coordinates[2].y);
       }
       else
       {
         throw std::invalid_argument("Diamond parametrs is incorrect");
       }
     }
-    else if (x1 == x2)
+    else if (coordinates[1].x == coordinates[2].x)
     {
-      if (y1 > y2)
+      if (coordinates[1].y > coordinates[2].y)
       {
-        rakirovka(x0, x1, y0, y1);
+        rakirovka(coordinates[0].x, coordinates[1].x, coordinates[0].y, coordinates[1].y);
       }
-      else if (y2 > y1)
+      else if (coordinates[2].y > coordinates[1].y)
       {
-        rakirovka(x1, x2, y1, y2);
-        rakirovka(x0, x1, y0, y1);
+        rakirovka(coordinates[1].x, coordinates[2].x, coordinates[1].y, coordinates[2].y);
+        rakirovka(coordinates[0].x, coordinates[1].x, coordinates[0].y, coordinates[1].y);
       }
       else
       {
         throw std::invalid_argument("Diamond parametrs is incorrect");
       }
     }
-    else if (x0 != x2)
+    else if (coordinates[0].x != coordinates[2].x)
     {
       throw std::invalid_argument("Diamond parametrs is incorrect");
     }
     point_t highP, rightP, center;
-    highP.x = x0;
-    highP.y = y0;
-    rightP.x = x1;
-    rightP.y = y1;
-    center.x = x2;
-    center.y = y2;
+    highP.x = coordinates[0].x;
+    highP.y = coordinates[0].y;
+    rightP.x = coordinates[1].x;
+    rightP.y = coordinates[1].y;
+    center.x = coordinates[2].x;
+    center.y = coordinates[2].y;
     return new Diamond(highP, rightP, center);
   }
   guseynov::Shape* makeShape(std::istream & in, const std::string & name)

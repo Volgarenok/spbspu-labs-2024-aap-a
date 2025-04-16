@@ -8,7 +8,7 @@
 
 namespace guseynov
 {
-  class Square : public Shape
+  class Square final : public Shape
   {
   public:
     Square(point_t leftLowP, double length);
@@ -22,10 +22,8 @@ namespace guseynov
   private:
     point_t leftLowP_;
     size_t n_;
-    double length_;
     guseynov::Rectangle ** rectangleArray_;
-    void assigment(point_t leftLowP);
-    void createArrayRectangle(point_t lower, double squareLength, const size_t m, size_t n);
+    void createArrayRectangle(point_t lower, double squareLength, size_t m, size_t n);
     void assigment(point_t leftLowP, double length);
     size_t determinateNum(double squareLength);
     void clear(size_t count);
