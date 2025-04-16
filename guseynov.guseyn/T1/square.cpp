@@ -60,8 +60,9 @@ void guseynov::Square::assigment(point_t leftLowP)
 void guseynov::Square::assigment(point_t leftLowP, double length)
 {
   leftLowP_ = leftLowP;
+  length_ = length;
   clear(n_);
-  createArrayRectangle(leftLowP, length, n_, 0);
+  createArrayRectangle(leftLowP, length_, n_, 0);
 }
 
 guseynov::Shape * guseynov::Square::clone() const
