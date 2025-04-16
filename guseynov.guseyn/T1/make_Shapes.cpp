@@ -117,7 +117,11 @@ namespace
     constexpr size_t numberOfCoordinates = 3;
     point_t coordinates[numberOfCoordinates] = {};
     inputArray(in, coordinates, numberOfCoordinates);
-    if (!(((coordinates[0].y == coordinates[1].y) && (coordinates[0].y != coordinates[2].y)) || ((coordinates[1].y == coordinates[2].y) && (coordinates[0].y != coordinates[1].y))))
+    bool f1 = coordinates[0].y == coordinates[1].y;
+    bool f2 = coordinates[0].y != coordinates[2].y;
+    bool f3 = coordinates[1].y == coordinates[2].y;
+    bool f4 = coordinates[0].y != coordinates[1].y;
+    if (!(((f1) && (f2)) || ((f3) && (f4))))
     {
       throw std::invalid_argument("Parallelogram is not parallel");
     }
