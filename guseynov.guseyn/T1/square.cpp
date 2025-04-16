@@ -12,6 +12,7 @@ guseynov::Square::Square(point_t leftLowP, double length):
     throw std::invalid_argument("Error in SQUARE parameters");
   }
   createArrayRectangle(leftLowP, length, n_, 0);
+  length_ = rectangleArray_[0]->getFrameRect().width * 3;
 }
 
 guseynov::Square::~Square()
@@ -31,13 +32,11 @@ double guseynov::Square::getArea() const
 
 guseynov::rectangle_t guseynov::Square::getFrameRect() const
 {
-  double length_ = rectangleArray_[0]->getFrameRect().width * 3;
   return {length_, length_, {leftLowP_.x + (length_ / 2), leftLowP_.y + (length_ / 2)}};
 }
 
 void guseynov::Square::move(point_t pos)
 {
-  double length_ = rectangleArray_[0]->getFrameRect().width * 3;
   assigment({pos.x - (length_ / 2), pos.y - (length_ / 2)});
 }
 
@@ -51,13 +50,11 @@ void guseynov::Square::move(double x, double y)
 
 void guseynov::Square::scaleWithoutCheck(double k)
 {
-  double length_ = rectangleArray_[0]->getFrameRect().width * 3;
   assigment({leftLowP_.x - (length_ * k - length_) / 2, leftLowP_.y - (length_ * k - length_) / 2}, length_ * k);
 }
 
 void guseynov::Square::assigment(point_t leftLowP)
 {
-  double length_ = rectangleArray_[0]->getFrameRect().width * 3;
   leftLowP_ = leftLowP;
   clear(n_);
   createArrayRectangle(leftLowP, length_, n_, 0);
@@ -72,7 +69,6 @@ void guseynov::Square::assigment(point_t leftLowP, double length)
 
 guseynov::Shape * guseynov::Square::clone() const
 {
-  double length_ = rectangleArray_[0]->getFrameRect().width * 3;
   return new Square(leftLowP_, length_);
 }
 
