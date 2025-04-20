@@ -1,0 +1,27 @@
+#ifndef RECTANGLE_HPP
+#define RECTANGLE_HPP
+#include <cstddef>
+#include "base-types.hpp"
+#include "shape.hpp"
+
+namespace komarova
+{
+  struct Rectangle final: public Shape
+  {
+  public:
+    Rectangle(point_t low_left, point_t up_right);
+    ~Rectangle() override;
+    double getArea() const override;
+    rectangle_t getFrameRect() const override;
+    void move(double dx, double dy);
+    void move(point_t point) override;
+    void unsafeScale(double coef) override;
+  private:
+    Shape** triangles_;
+
+    void clear();
+    void clear(size_t cnt);
+  };
+}
+
+#endif
