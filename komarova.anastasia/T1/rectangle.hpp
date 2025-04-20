@@ -1,5 +1,6 @@
 #ifndef RECTANGLE_HPP
 #define RECTANGLE_HPP
+#include <cstddef>
 #include "base-types.hpp"
 #include "shape.hpp"
 
@@ -19,6 +20,7 @@ namespace komarova
     Shape** triangles_;
 
     void clear();
+    void clear(size_t cnt);
   };
 }
 

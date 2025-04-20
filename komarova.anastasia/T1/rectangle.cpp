@@ -7,6 +7,7 @@ constexpr size_t cnt_trg = 8;
 komarova::Rectangle::Rectangle(point_t low_left, point_t up_right):
   triangles_(new Shape*[cnt_trg])
 {
+  size_t trg_now = 0;
   try
   {
     if (low_left.x >= up_right.x || low_left.y >= up_right.y)
@@ -19,17 +20,25 @@ komarova::Rectangle::Rectangle(point_t low_left, point_t up_right):
     point_t low_right = {up_right.x, low_left.y};
     point_t center = {(low_left.x + width / 2.0), (low_left.y + height / 2.0)};
     triangles_[0] = new Triangle(up_right, center, {up_right.x - width / 2.0, up_right.y});
+    trg_now++;
     triangles_[1] = new Triangle(up_left, center, {up_right.x - width / 2.0, up_right.y});
+    trg_now++;
     triangles_[2] = new Triangle(up_left, center, {low_left.x, low_left.y + height / 2.0});
+    trg_now++;
     triangles_[3] = new Triangle(low_left, center, {low_left.x, low_left.y + height / 2.0});
+    trg_now++;
     triangles_[4] = new Triangle(low_left, center, {low_left.x + width / 2.0, low_left.y});
+    trg_now++;
     triangles_[5] = new Triangle(low_right, center, {low_left.x + width / 2.0, low_left.y});
+    trg_now++;
     triangles_[6] = new Triangle(low_right, center, {low_right.x, low_right.y + height / 2.0});
+    trg_now++;
     triangles_[7] = new Triangle(up_right, center, {low_right.x, low_right.y + height / 2.0});
+    trg_now++;
   }
   catch(const std::exception& e)
   {
-    clear();
+    clear(trg_now);
     throw;
   }
 }
@@ -72,7 +81,11 @@ void komarova::Rectangle::unsafeScale(double coef)
 }
 void komarova::Rectangle::clear()
 {
-  for (size_t i = 0; i < cnt_trg; i++)
+  clear(cnt_trg);
+}
+void komarova::Rectangle::clear(size_t cnt)
+{
+  for (size_t i = 0; i < cnt; i++)
   {
     delete triangles_[i];
   }
