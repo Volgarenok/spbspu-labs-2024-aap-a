@@ -1,9 +1,8 @@
 #include "square.hpp"
 #include <stdexcept>
 #include "base-types.hpp"
-#include "shape.hpp"
 
-komarova::Square::Square(point_t low_left, double len) :
+komarova::Square::Square(point_t low_left, double len):
   rect_(low_left, {low_left.x + len, low_left.y + len})
 {
   if (len <= 0.0)
@@ -27,11 +26,7 @@ void komarova::Square::move(double dx, double dy)
 {
   rect_.move(dx, dy);
 }
-void komarova::Square::scale(double coef)
+void komarova::Square::unsafeScale(double coef)
 {
-  if (coef <= 0)
-  {
-    throw std::logic_error("incorrect coef");
-  }
   rect_.scale(coef);
 }

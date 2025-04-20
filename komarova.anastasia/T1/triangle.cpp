@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <stdexcept>
 #include "base-types.hpp"
-#include "shape.hpp"
 
 komarova::Triangle::Triangle(point_t a, point_t b, point_t c):
   a_(a),
@@ -40,12 +39,8 @@ void komarova::Triangle::move(double dx, double dy)
   b_ = {b_.x + dx, b_.y + dy};
   c_ = {c_.x + dx, c_.y + dy};
 }
-void komarova::Triangle::scale(double coef)
+void komarova::Triangle::unsafeScale(double coef)
 {
-  if (coef <= 0)
-  {
-    throw std::logic_error("incorrect coef");
-  }
   point_t center = getFrameRect().pos;
   a_.x = center.x + (a_.x - center.x) * coef;
   a_.y = center.y + (a_.y - center.y) * coef;

@@ -1,11 +1,11 @@
 #include "rectangle.hpp"
 #include <stdexcept>
 #include "base-types.hpp"
-#include "shape.hpp"
 #include "triangle.hpp"
+
 constexpr size_t cnt_trg = 8;
 komarova::Rectangle::Rectangle(point_t low_left, point_t up_right):
-  triangles_(new Shape*[cnt_trg]{})
+  triangles_(new Shape*[cnt_trg])
 {
   try
   {
@@ -63,12 +63,8 @@ void komarova::Rectangle::move(double dx, double dy)
     triangles_[i]->move(dx, dy);
   }
 }
-void komarova::Rectangle::scale(double coef)
+void komarova::Rectangle::unsafeScale(double coef)
 {
-  if (coef <= 0)
-  {
-    throw std::logic_error("incorrect coef");
-  }
   for (size_t i = 0; i < cnt_trg; i++)
   {
     triangles_[i]->scale(coef);

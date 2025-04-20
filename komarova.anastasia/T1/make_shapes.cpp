@@ -9,15 +9,11 @@
 #include "triangle.hpp"
 #include "square.hpp"
 
-void komarova::make_shapes(std::istream& input, Shape** shapes, bool& wrong_shape, size_t& count, double& x_sc, double& y_sc, double& coef)
+void komarova::makeShapes(std::istream& input, Shape** shapes, bool& wrong_shape, size_t& count, double& x_sc, double& y_sc, double& coef)
 {
   bool sc_flag = false;
-  while (!sc_flag)
+  while (!sc_flag && input)
   {
-    if (input.eof())
-    {
-      throw std::logic_error("SCALE Error");
-    }
     std::string figure;
     input >> figure;
     try
@@ -66,8 +62,12 @@ void komarova::make_shapes(std::istream& input, Shape** shapes, bool& wrong_shap
       wrong_shape = true;
     }
   }
+  if (input.eof() && !sc_flag)
+  {
+    throw std::logic_error("SCALE Error");
+  }
 }
-void komarova::area_sum(std::ostream& output, Shape** shapes)
+void komarova::sumArea(std::ostream& output, Shape** shapes)
 {
   double sum = 0.0;
   for (size_t i = 0; shapes[i] != nullptr; i++)
@@ -76,7 +76,7 @@ void komarova::area_sum(std::ostream& output, Shape** shapes)
   }
   output << sum;
 }
-void komarova::frame_rect_xy(std::ostream& output, Shape** shapes)
+void komarova::getFramerectXY(std::ostream& output, Shape** shapes)
 {
   for (size_t i = 0; shapes[i] != nullptr; i++)
   {
@@ -93,17 +93,21 @@ void komarova::scale(Shape** shapes, point_t point, double coef)
   {
     throw std::logic_error("incorrect coefficient");
   }
+  unsafeScale(shapes, point, coef);
+}
+void komarova::unsafeScale(Shape** shapes, point_t point, double coef)
+{
   for (size_t i = 0; shapes[i] != nullptr; i++)
   {
     point_t p = shapes[i]->getFrameRect().pos;
     shapes[i]->move(point);
     point_t new_p = shapes[i]->getFrameRect().pos;
     point_t vector = {(new_p.x - p.x) * coef, (new_p.y - p.y) * coef};
-    shapes[i]->scale(coef);
+    shapes[i]->unsafeScale(coef);
     shapes[i]->move(-vector.x, -vector.y);
   }
 }
-void komarova::delete_shapes(Shape** shapes)
+void komarova::deleteShapes(Shape** shapes)
 {
   for (size_t i = 0; shapes[i] != nullptr; i++)
   {

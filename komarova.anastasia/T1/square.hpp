@@ -3,6 +3,7 @@
 #include "base-types.hpp"
 #include "shape.hpp"
 #include "rectangle.hpp"
+
 namespace komarova
 {
   struct Square final: public Shape
@@ -13,7 +14,7 @@ namespace komarova
     rectangle_t getFrameRect() const override;
     void move(point_t point) override;
     void move(double dx, double dy) override;
-    void scale(double coef) override;
+    void unsafeScale(double coef) override;
   private:
     Rectangle rect_;
   };
