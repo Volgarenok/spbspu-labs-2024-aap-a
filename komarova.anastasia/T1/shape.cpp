@@ -9,3 +9,4 @@ void komarova::Shape::scale(double coef)
   }
   unsafeScale(coef);
 }
+
