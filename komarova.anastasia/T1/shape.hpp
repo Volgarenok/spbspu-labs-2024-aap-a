@@ -12,14 +12,7 @@ namespace komarova
     virtual rectangle_t getFrameRect() const = 0;
     virtual void move(point_t point) = 0;
     virtual void move(double dx, double dy) = 0;
-    void scale(double coef)
-    {
-      if (coef <= 0)
-      {
-        throw std::logic_error("incorrect coef");
-      }
-      unsafeScale(coef);
-    }
+    void scale(double coef);
     virtual void unsafeScale(double coef) = 0;
   };
 }
