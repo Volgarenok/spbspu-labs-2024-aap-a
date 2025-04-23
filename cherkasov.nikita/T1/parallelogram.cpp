@@ -7,14 +7,14 @@
 namespace cherkasov
 {
   Parallelogram::Parallelogram(point_t vertex1, point_t vertex2, point_t vertex3):
-    vertex{ vertex1, vertex2, vertex3 }
+    vertex{ vertex1, vertex2, vertex3, { (vertex1.x + vertex3.x) - vertex2.x, (vertex1.y + vertex3.y) - vertex2.y } }
     {
       if (((vertex1.x == vertex3.x && vertex2.y == vertex3.y) || (vertex2.x == vertex3.x && vertex1.y == vertex3.y)) ||
          (!(vertex1.y == vertex2.y || vertex1.y == vertex3.y || vertex2.y == vertex3.y) && (vertex1.y != vertex3.y)))
       {
         throw std::invalid_argument("no correct coordinat the parallelogram");
       }
-      vertex[3] = { (vertex1.x + vertex3.x) - vertex2.x, (vertex1.y + vertex3.y) - vertex2.y };
+    //vertex[3] = { (vertex1.x + vertex3.x) - vertex2.x, (vertex1.y + vertex3.y) - vertex2.y };
     }
   double Parallelogram::getArea() const
   {

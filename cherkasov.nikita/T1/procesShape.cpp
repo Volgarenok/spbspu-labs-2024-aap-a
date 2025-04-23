@@ -1,6 +1,4 @@
 #include "procesShape.hpp"
-#include "base-types.hpp"
-#include "rectangle.hpp"
 #include <iostream>
 
 double cherkasov::getSumArea(const Shape * const * shapes, size_t shape)
@@ -28,15 +26,11 @@ void cherkasov::getCoordinates(const Shape * const* shapes, size_t shape)
     double y1 = rectangle.pos.y - rectangle.height / 2.0;
     double x2 = rectangle.pos.x + rectangle.width / 2.0;
     double y2 = rectangle.pos.y + rectangle.height / 2.0;
-    std::cout << x1 << " " << y1 << " " << x2 << " " << y2;
+    std::cout << " " << x1 << " " << y1 << " " << x2 << " " << y2;
   }
 }
 void cherkasov::getScaling(Shape ** shapes, size_t shape, point_t p, double k)
 {
- /* if (k <= 0)
-  {
-    throw std::invalid_argument("k must be positiv");
-  }*/
   for (size_t i = 0; i < shape; i++)
   {
     point_t startPoint = shapes[i]->getFrameRect().pos;
