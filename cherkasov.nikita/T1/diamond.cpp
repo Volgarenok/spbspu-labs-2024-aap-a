@@ -1,8 +1,8 @@
 #include "diamond.hpp"
-#include "shapeUtils.hpp"
 #include <stdexcept>
 #include <cmath>
 #include <algorithm>
+#include "shapeUtils.hpp"
 
 namespace cherkasov
 {
@@ -12,28 +12,28 @@ namespace cherkasov
       point_t center{};
       if ((vertex1.x == vertex2.x && vertex1.y == vertex3.y) || (vertex1.y == vertex2.y && vertex1.x == vertex3.x))
       {
-        center = { vertex1.x, vertex1.y };
-        vertex[0] = { vertex2.x, vertex2.y };
-        vertex[1] = { vertex3.x, vertex3.y };
+        center = vertex1;
+        vertex[0] = vertex2;
+        vertex[1] = vertex3;
       }
       else if ((vertex1.x == vertex2.x && vertex2.y == vertex3.y) || (vertex1.y == vertex2.y && vertex2.x == vertex3.x))
       {
-        center = { vertex2.x, vertex2.y };
-        vertex[0] = { vertex1.x, vertex1.y };
-        vertex[1] = { vertex3.x, vertex3.y };
+        center = vertex2;
+        vertex[0] = vertex1;
+        vertex[1] = vertex3;
       }
       else if ((vertex3.x == vertex2.x && vertex1.y == vertex3.y) || (vertex3.y == vertex2.y && vertex1.x == vertex3.x))
       {
-        center = { vertex3.x, vertex3.y };
-        vertex[0] = { vertex2.x, vertex2.y };
-        vertex[1] = { vertex1.x, vertex1.y };
+        center = vertex3;
+        vertex[0] = vertex2;
+        vertex[1] = vertex1;
       }
       else
       {
         throw std::invalid_argument("no input coordinat");
       }
-      vertex[2] = { 2.0 * center.x - vertex[0].x, 2.0 * center.y - vertex[0].y };
-      vertex[3] = { 2.0 * center.x - vertex[1].x, 2.0 * center.y - vertex[1].y };
+    vertex[2] = { 2.0 * center.x - vertex[0].x, 2.0 * center.y - vertex[0].y };
+    vertex[3] = { 2.0 * center.x - vertex[1].x, 2.0 * center.y - vertex[1].y };
     }
   double Diamond::getArea() const
   {

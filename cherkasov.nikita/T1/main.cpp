@@ -10,7 +10,7 @@ int main()
   std::string inputCommand;
   size_t shapeCount = 0;
   bool invalidInput = false;
-  cherkasov::point_t p = {0.0, 0.0};
+  cherkasov::point_t p = { 0.0, 0.0 };
   double k = 0.0;
   while (std::cin >> inputCommand && inputCommand != "SCALE")
   {
@@ -19,7 +19,7 @@ int main()
       shapes[shapeCount] = cherkasov::createShape(inputCommand, std::cin);
       shapeCount++;
     }
-    catch (const std::invalid_argument& e)
+    catch (const std::invalid_argument&)
     {
       invalidInput = true;
     }
