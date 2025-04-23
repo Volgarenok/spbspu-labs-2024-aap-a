@@ -14,7 +14,6 @@ namespace cherkasov
       {
         throw std::invalid_argument("no correct coordinat the parallelogram");
       }
-    //vertex[3] = { (vertex1.x + vertex3.x) - vertex2.x, (vertex1.y + vertex3.y) - vertex2.y };
     }
   double Parallelogram::getArea() const
   {
@@ -30,7 +29,8 @@ namespace cherkasov
     double maxX = std::max({ vertex[0].x, vertex[1].x, vertex[2].x, vertex[3].x });
     double minY = std::min({ vertex[0].y, vertex[1].y, vertex[2].y, vertex[3].y });
     double maxY = std::max({ vertex[0].y, vertex[1].y, vertex[2].y, vertex[3].y });
-    point_t center{ (vertex[0].x + vertex[1].x + vertex[2].x + vertex[3].x) / 4, (vertex[0].y + vertex[1].y + vertex[2].y + vertex[3].y) / 4 };
+    point_t center{ (vertex[0].x + vertex[1].x + vertex[2].x + vertex[3].x) / 4,
+      (vertex[0].y + vertex[1].y + vertex[2].y + vertex[3].y) / 4 };
     double width = maxX - minX;
     double height = maxY - minY;
     rectangle_t rect { width, height, center };
