@@ -76,35 +76,41 @@ int main()
 
 shramko::Shape* shramko::readShape(std::istream& in, const std::string& name)
 {
-  if (name == "RECTANGLE")
+  try
   {
-    point_t top, bottom;
+    if (name == "RECTANGLE")
+    {
+      point_t top, bottom;
 
-    in >> bottom.x >> bottom.y >> top.x >> top.y;
+      in >> bottom.x >> bottom.y >> top.x >> top.y;
 
-    return new Rectangle{bottom, top};
+      return new Rectangle{bottom, top};
+    }
+    else if (name == "TRIANGLE")
+    {
+      point_t one, two, three;
+
+      in >> one.x >> one.y;
+      in >> two.x >> two.y;
+      in >> three.x >> three.y;
+
+      return new Triangle{one, two, three};
+    }
+    else if (name == "DIAMOND")
+    {
+      point_t one, two, three;
+
+      in >> one.x >> one.y;
+      in >> two.x >> two.y;
+      in >> three.x >> three.y;
+
+      return new Diamond{one, two, three};
+    }
   }
-  else if (name == "TRIANGLE")
+  catch (const std::exception& e)
   {
-    point_t one, two, three;
-
-    in >> one.x >> one.y;
-    in >> two.x >> two.y;
-    in >> three.x >> three.y;
-
-    return new Triangle{one, two, three};
+    return nullptr;
   }
-  else if (name == "DIAMOND")
-  {
-    point_t one, two, three;
-
-    in >> one.x >> one.y;
-    in >> two.x >> two.y;
-    in >> three.x >> three.y;
-
-    return new Diamond{one, two, three};
-  }
-
   return nullptr;
 }
 
