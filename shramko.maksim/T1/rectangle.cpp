@@ -14,7 +14,7 @@ shramko::Rectangle::Rectangle(point_t leftBottom, point_t rightTop):
     leftBottom_.y = leftBottom.y;
     rightTop_.x = rightTop.x;
     rightTop_.y = rightTop.y;
-    center_.x = leftBottom_.x+(rightTop_.x - leftBottom_.x)/2;
+    center_.x = leftBottom_.x + (rightTop_.x - leftBottom_.x)/2;
     center_.y = leftBottom.y +(rightTop_.y - leftBottom_.y)/2;
   }
   else
@@ -49,14 +49,6 @@ void shramko::Rectangle::move(double x, double y)
   rightTop_.y += y;
   center_.x += x;
   center_.y += y;
-}
-
-void shramko::Rectangle::scale(double k)
-{
-  leftBottom_.x *= k;
-  rightTop_.x *= k;
-  rightTop_.y *= k;
-  leftBottom_.y *= k;
 }
 
 void shramko::Rectangle::doScale(double k)

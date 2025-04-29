@@ -12,7 +12,6 @@ namespace shramko
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(double x, double y) override;
-    void scale(double k);
   private:
     point_t leftBottom_;
     point_t rightTop_;
