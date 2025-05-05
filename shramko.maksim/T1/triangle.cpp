@@ -8,6 +8,11 @@ shramko::Triangle::Triangle(point_t one, point_t two, point_t three):
   two_(two),
   three_(three)
 {
+  if (getArea() < std::numeric_limits< double >::epsilon())
+  {
+    throw std::invalid_argument("Triangle is degenerate");
+  }
+
   double A = distance(one_, two_);
   double B = distance(two_, three_);
   double C = distance(one_, three_);
