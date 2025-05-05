@@ -14,11 +14,11 @@ namespace shramko
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(double x, double y) override;
+    void doScale(double k) override;
   private:
     point_t one_;
     point_t two_;
     point_t three_;
-    void doScale(double k) override;
   };
 }
 
