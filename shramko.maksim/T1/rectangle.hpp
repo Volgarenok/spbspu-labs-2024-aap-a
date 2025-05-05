@@ -8,7 +8,6 @@ namespace shramko
   class Rectangle final: public Shape
   {
   public:
-    ~Rectangle() override = default;
     Rectangle(point_t leftBottom, point_t rightTop);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
