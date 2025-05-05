@@ -76,6 +76,7 @@ int main()
 
 shramko::Shape* shramko::readShape(std::istream& in, const std::string& name)
 {
+  shramko::Shape* shape = nullptr;
   try
   {
     if (name == "RECTANGLE")
@@ -84,7 +85,7 @@ shramko::Shape* shramko::readShape(std::istream& in, const std::string& name)
 
       in >> bottom.x >> bottom.y >> top.x >> top.y;
 
-      return new Rectangle{bottom, top};
+      shape = new Rectangle{bottom, top};
     }
     else if (name == "TRIANGLE")
     {
@@ -94,7 +95,7 @@ shramko::Shape* shramko::readShape(std::istream& in, const std::string& name)
       in >> two.x >> two.y;
       in >> three.x >> three.y;
 
-      return new Triangle{one, two, three};
+      shape = new Triangle{one, two, three};
     }
     else if (name == "DIAMOND")
     {
@@ -104,14 +105,15 @@ shramko::Shape* shramko::readShape(std::istream& in, const std::string& name)
       in >> two.x >> two.y;
       in >> three.x >> three.y;
 
-      return new Diamond{one, two, three};
+      shape = new Diamond{one, two, three};
     }
   }
   catch (const std::exception& e)
   {
-    return nullptr;
+    delete shape;
+    throw;
   }
-  return nullptr;
+  return shape;
 }
 
 void shramko::printRectangleShapes(Shape** shapes, size_t size)
