@@ -8,11 +8,6 @@ shramko::Triangle::Triangle(point_t one, point_t two, point_t three):
   two_(two),
   three_(three)
 {
-  if (getArea() < std::numeric_limits< double >::epsilon())
-  {
-    throw std::invalid_argument("Triangle is degenerate");
-  }
-
   double A = distance(one_, two_);
   double B = distance(two_, three_);
   double C = distance(one_, three_);
@@ -26,8 +21,8 @@ shramko::Triangle::Triangle(point_t one, point_t two, point_t three):
     throw std::invalid_argument("Triangle size err\n");
   }
 
-  center_.x = std::abs(one_.x + two_.x + three_.x) / 3.0;
-  center_.y = std::abs(one_.y + two_.y + three_.y) / 3.0;
+  center_.x = (one_.x + two_.x + three_.x) / 3.0;
+  center_.y = (one_.y + two_.y + three_.y) / 3.0;
 }
 
 double shramko::Triangle::getArea() const
@@ -59,7 +54,11 @@ void shramko::Triangle::move(double x, double y)
 
 void shramko::Triangle::doScale(double k)
 {
-  const point_t center = getFrameRect().pos;
+  const point_t center
+  {
+    center_.x = (one_.x + two_.x + three_.x) / 3.0,
+    center_.y = (one_.y + two_.y + three_.y) / 3.0
+  };
 
   one_.x = center.x + (one_.x - center.x) * k;
   one_.y = center.y + (one_.y - center.y) * k;
