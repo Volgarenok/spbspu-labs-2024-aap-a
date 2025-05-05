@@ -9,6 +9,7 @@ namespace shramko
   {
   friend class Diamond;
   public:
+    ~Triangle() override = default;
     Triangle() = default;
     Triangle(point_t one, point_t two, point_t three);
     double getArea() const override;

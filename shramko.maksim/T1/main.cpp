@@ -37,6 +37,7 @@ int main()
     catch (const std::exception& e)
     {
       delete shape;
+      shape = nullptr;
       std::cerr << e.what() << "\n";
     }
   }
@@ -111,6 +112,7 @@ shramko::Shape* shramko::readShape(std::istream& in, const std::string& name)
   catch (const std::exception& e)
   {
     delete shape;
+    shape = nullptr;
     throw;
   }
   return shape;
@@ -133,15 +135,23 @@ void shramko::scaleShapes(Shape** shapes, size_t size, double k, point_t new_cen
 {
   for (size_t i = 0; i < size; ++i)
   {
-    point_t c = shapes[i]->getFrameRect().pos;
-    shapes[i]->move(new_center);
-    point_t new_c = shapes[i]->getFrameRect().pos;
-    shapes[i]->scale(k);
-
-    point_t offset;
-    offset.x = (new_c.x - c.x) * k;
-    offset.y = (new_c.y - c.y) * k;
-    shapes[i]->move(-offset.x, -offset.y);
+    try
+    {
+      const point_t orig_center = shapes[i]->getFrameRect().pos;
+      shapes[i]->move(new_center.x, new_center.y);
+      const point_t new_center = shapes[i]->getFrameRect().pos;
+      
+      const point_t offset
+      {
+        new_center.x - orig_center.x * k,
+        new_center.y - orig_center.y * k
+      };
+      shapes[i]->move(-offset.x, -offset.y);
+    }
+    catch (const std::exception& e)
+    {
+      std::cerr << "Error scaling shape " << i << ": " << e.what() << "\n";
+    }
   }
 }
 
