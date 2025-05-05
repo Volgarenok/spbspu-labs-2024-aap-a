@@ -141,7 +141,7 @@ void shramko::scaleShapes(Shape** shapes, size_t size, double k, point_t new_cen
       shapes[i]->move(new_center);
       point_t new_c = shapes[i]->getFrameRect().pos;
       shapes[i]->scale(k);
-      
+
       const point_t offset
       {
         new_c.x - c.x * k,
