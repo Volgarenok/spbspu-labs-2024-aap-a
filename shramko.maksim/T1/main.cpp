@@ -44,6 +44,7 @@ int main()
   if (name != "SCALE")
   {
     std::cerr << "scale command not found\n";
+    destroyShapes(shapes, top);
     return 1;
   }
 
@@ -52,12 +53,14 @@ int main()
   if (k < 0)
   {
     std::cerr << "k must be positive\n";
+    destroyShapes(shapes, top);
     return 2;
   }
 
   if (top == 0)
   {
     std::cerr << "Nothing to scale\n";
+    destroyShapes(shapes, top);
     return 3;
   }
 
