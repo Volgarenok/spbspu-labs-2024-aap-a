@@ -31,7 +31,7 @@ namespace shramko
     double yMin = points_[0].y;
     double yMax = points_[0].y;
 
-    for (size_t i = 1; i < 4; ++i) 
+    for (size_t i = 1; i < 4; ++i)
     {
       xMin = std::min(xMin, points_[i].x);
       xMax = std::max(xMax, points_[i].x);
@@ -44,7 +44,7 @@ namespace shramko
 
   void Complexquad::move(double x, double y)
   {
-    for (int i = 0; i < 4; ++i) 
+    for (int i = 0; i < 4; ++i)
     {
       points_[i].x += x;
       points_[i].y += y;
@@ -55,7 +55,7 @@ namespace shramko
 
   void Complexquad::doScale(double k)
   {
-    for (int i = 0; i < 4; ++i) 
+    for (int i = 0; i < 4; ++i)
     {
       points_[i].x = center_.x + (points_[i].x - center_.x) * k;
       points_[i].y = center_.y + (points_[i].y - center_.y) * k;
@@ -64,12 +64,20 @@ namespace shramko
 
   void Complexquad::validateConvex() const
   {
-    const double cross1 = (points_[1].x - points_[0].x) * (points_[2].y - points_[1].y) - (points_[1].y - points_[0].y) * (points_[2].x - points_[1].x);
-    const double cross2 = (points_[2].x - points_[1].x) * (points_[3].y - points_[2].y) - (points_[2].y - points_[1].y) * (points_[3].x - points_[2].x);
-    const double cross3 = (points_[3].x - points_[2].x) * (points_[0].y - points_[3].y) - (points_[3].y - points_[2].y) * (points_[0].x - points_[3].x);
-    const double cross4 = (points_[0].x - points_[3].x) * (points_[1].y - points_[0].y) - (points_[0].y - points_[3].y) * (points_[1].x - points_[0].x);
+    const double cross1 = (points_[1].x - points_[0].x) * (points_[2].y - points_[1].y)
+                        - (points_[1].y - points_[0].y) * (points_[2].x - points_[1].x);
 
-    if (!((cross1 >= 0 && cross2 >= 0 && cross3 >= 0 && cross4 >= 0) || (cross1 <= 0 && cross2 <= 0 && cross3 <= 0 && cross4 <= 0))) 
+    const double cross2 = (points_[2].x - points_[1].x) * (points_[3].y - points_[2].y)
+                        - (points_[2].y - points_[1].y) * (points_[3].x - points_[2].x);
+
+    const double cross3 = (points_[3].x - points_[2].x) * (points_[0].y - points_[3].y)
+                        - (points_[3].y - points_[2].y) * (points_[0].x - points_[3].x);
+
+    const double cross4 = (points_[0].x - points_[3].x) * (points_[1].y - points_[0].y)
+                        - (points_[0].y - points_[3].y) * (points_[1].x - points_[0].x);
+
+    if (!((cross1 >= 0 && cross2 >= 0 && cross3 >= 0 && cross4 >= 0)
+       || (cross1 <= 0 && cross2 <= 0 && cross3 <= 0 && cross4 <= 0)))
     {
       throw std::invalid_argument("Points don't form convex quadrilateral");
     }
