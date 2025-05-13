@@ -121,7 +121,7 @@ shramko::Shape* shramko::readShape(std::istream& in, const std::string& name)
       in >> p2.x >> p2.y;
       in >> p3.x >> p3.y;
       in >> p4.x >> p4.y;
-      
+
       shape = new Complexquad{p1, p2, p3, p4};
     }
   }
