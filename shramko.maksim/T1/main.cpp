@@ -115,14 +115,14 @@ shramko::Shape* shramko::readShape(std::istream& in, const std::string& name)
     }
     else if (name == "COMPLEXQUAD")
     {
-      point_t p1, p2, p3, p4;
+      point_t one, two, three, four;
 
-      in >> p1.x >> p1.y;
-      in >> p2.x >> p2.y;
-      in >> p3.x >> p3.y;
-      in >> p4.x >> p4.y;
+      in >> one.x >> one.y;
+      in >> two.x >> two.y;
+      in >> three.x >> three.y;
+      in >> four.x >> four.y;
 
-      shape = new Complexquad{p1, p2, p3, p4};
+      shape = new Complexquad{one, two, three, four};
     }
   }
   catch (const std::exception& e)

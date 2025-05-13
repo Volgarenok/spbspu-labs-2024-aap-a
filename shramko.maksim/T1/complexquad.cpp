@@ -4,17 +4,17 @@
 
 namespace shramko
 {
-  Complexquad::Complexquad(point_t p1, point_t p2, point_t p3, point_t p4)
+  Complexquad::Complexquad(point_t one, point_t two, point_t three, point_t four)
   {
-    points_[0] = p1;
-    points_[1] = p2;
-    points_[2] = p3;
-    points_[3] = p4;
+    points_[0] = one;
+    points_[1] = two;
+    points_[2] = three;
+    points_[3] = four;
 
     validateConvex();
 
-    center_.x = (p1.x + p2.x + p3.x + p4.x) / 4;
-    center_.y = (p1.y + p2.y + p3.y + p4.y) / 4;
+    center_.x = (one.x + two.x + three.x + four.x) / 4;
+    center_.y = (one.y + two.y + three.y + four.y) / 4;
   }
 
   double Complexquad::getArea() const
