@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "diamond.hpp"
 #include "rectangle.hpp"
+#include "complexquad.hpp"
 #include "shape.hpp"
 #include "triangle.hpp"
 
@@ -70,11 +71,12 @@ int main()
 
   shramko::scaleShapes(shapes, top, k, {x, y});
   total_area = totalArea(shapes, top);
+
   std::cout << total_area << " ";
   shramko::printRectangleShapes(shapes, top);
   std::cout << "\n";
-  destroyShapes(shapes, top);
 
+  destroyShapes(shapes, top);
   return 0;
 }
 
@@ -110,6 +112,17 @@ shramko::Shape* shramko::readShape(std::istream& in, const std::string& name)
       in >> three.x >> three.y;
 
       shape = new Diamond{one, two, three};
+    }
+    else if (name == "COMPLEXQUAD")
+    {
+      point_t p1, p2, p3, p4;
+
+      in >> p1.x >> p1.y;
+      in >> p2.x >> p2.y;
+      in >> p3.x >> p3.y;
+      in >> p4.x >> p4.y;
+      
+      shape = new Complexquad{p1, p2, p3, p4};
     }
   }
   catch (const std::exception& e)
