@@ -19,7 +19,7 @@ int main()
 {
   std::cout << std::fixed << std::setprecision(1);
   std::string name;
-  int top = 0;
+  size_t top = 0;
   shramko::Shape *shapes[10000] = {};
   double total_area = 0.0;
   while (std::cin >> name && name != "SCALE")
