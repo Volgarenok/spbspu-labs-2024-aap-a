@@ -92,7 +92,7 @@ namespace shramko
       y_max = std::max(y_max, vertices_[i].y);
     }
 
-    return { x_max - x_min, y_max - y_min, { (x_min + x_max)/2, (y_min + y_max)/2 } };
+    return { x_max - x_min, y_max - y_min, { (x_min + x_max) / 2, (y_min + y_max) / 2 } };
   }
 
   void Diamond::move(double x, double y)
