@@ -11,6 +11,19 @@ namespace shramko
     return { (a.x + b.x) / 2, (a.y + b.y) / 2 };
   }
 
+  void Diamond::validate() const
+  {
+    point_t diag1 = { vertices_[1].x - vertices_[0].x, vertices_[1].y - vertices_[0].y };
+    point_t diag2 = { vertices_[3].x - vertices_[2].x, vertices_[3].y - vertices_[2].y };
+
+    double dot = diag1.x * diag2.x + diag1.y * diag2.y;
+
+    if (std::abs(dot) > 1e-6)
+    {
+      throw std::invalid_argument("Diagonals are not perpendicular");
+    }
+  }
+
   Diamond::Diamond(point_t one, point_t two, point_t three)
   {
     center_.x = (one.x + two.x) / 2;
@@ -30,6 +43,8 @@ namespace shramko
     vertices_[1] = two;
     vertices_[2] = three;
     vertices_[3] = four;
+
+    validate();
 
     triangles_ = new Triangle*[TRIANGLE_COUNT];
     try
@@ -93,7 +108,7 @@ namespace shramko
       y_max = std::max(y_max, vertices_[i].y);
     }
 
-    return { x_max - x_min, y_max - y_min, { (x_min + x_max)/2, (y_min + y_max)/2 } };
+    return { x_max - x_min, y_max - y_min, { (x_min + x_max) / 2, (y_min + y_max) / 2 } };
   }
 
   void Diamond::move(double x, double y)

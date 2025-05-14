@@ -21,6 +21,7 @@ namespace shramko
     point_t center_;
     void doScale(double k) override;
     point_t midpoint(const point_t& a, const point_t& b) const;
+    void validate() const;
   };
 }
 
