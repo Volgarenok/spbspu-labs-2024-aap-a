@@ -20,7 +20,7 @@ namespace shramko
     point_t diag1_vec = { two.x - one.x, two.y - one.y };
     point_t diag2_vec = { four.x - three.x, four.y - three.y };
     double dot = diag1_vec.x * diag2_vec.x + diag1_vec.y * diag2_vec.y;
-    if (std::abs(dot) > 1e-6)
+    if (std::abs(dot) > 1e-5)
     {
       throw std::invalid_argument("invalid diamond\n");
     }
