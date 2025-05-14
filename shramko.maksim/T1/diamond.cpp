@@ -8,7 +8,7 @@ namespace shramko
 {
   point_t Diamond::midpoint(const point_t& a, const point_t& b) const
   {
-    return { (a.x + b.x) / 2, (a.y + b.y) / 2 };
+    return { (a.x + b.x) / 2.0, (a.y + b.y) / 2.0 };
   }
 
   void Diamond::validate() const
@@ -24,50 +24,38 @@ namespace shramko
     }
   }
 
-  Diamond::Diamond(point_t one, point_t two, point_t three)
+  Diamond::Diamond(const point_t& one, const point_t& two, const point_t& three)
   {
-    center_.x = (one.x + two.x) / 2;
-    center_.y = (one.y + two.y) / 2;
-    point_t four = { 2 * center_.x - three.x, 2 * center_.y - three.y };
-
-    point_t diag1_vec = { two.x - one.x, two.y - one.y };
-    point_t diag2_vec = { four.x - three.x, four.y - three.y };
-
-    double dot = diag1_vec.x * diag2_vec.x + diag1_vec.y * diag2_vec.y;
-    if (std::abs(dot) > 1e-6)
-    {
-      throw std::invalid_argument("invalid diamond\n");
-    }
-
+    center_ = midpoint(one, two);
     vertices_[0] = one;
     vertices_[1] = two;
     vertices_[2] = three;
-    vertices_[3] = four;
+    vertices_[3] = { 2 * center_.x - three.x, 2 * center_.y - three.y };
 
     validate();
 
     triangles_ = new Triangle*[TRIANGLE_COUNT];
     try
     {
-      point_t midAB = midpoint(one, two);
-      point_t midBC = midpoint(two, three);
-      point_t midCD = midpoint(three, four);
-      point_t midDA = midpoint(four, one);
+      point_t mid01 = midpoint(vertices_[0], vertices_[1]);
+      point_t mid12 = midpoint(vertices_[1], vertices_[2]);
+      point_t mid23 = midpoint(vertices_[2], vertices_[3]);
+      point_t mid30 = midpoint(vertices_[3], vertices_[0]);
 
-      triangles_[0] = new Triangle(one, midAB, center_);
-      triangles_[1] = new Triangle(midAB, two, center_);
-      triangles_[2] = new Triangle(two, midBC, center_);
-      triangles_[3] = new Triangle(midBC, three, center_);
-      triangles_[4] = new Triangle(three, midCD, center_);
-      triangles_[5] = new Triangle(midCD, four, center_);
-      triangles_[6] = new Triangle(four, midDA, center_);
-      triangles_[7] = new Triangle(midDA, one, center_);
+      triangles_[0] = new Triangle(vertices_[0], mid01, center_);
+      triangles_[1] = new Triangle(mid01, vertices_[1], center_);
+      triangles_[2] = new Triangle(vertices_[1], mid12, center_);
+      triangles_[3] = new Triangle(mid12, vertices_[2], center_);
+      triangles_[4] = new Triangle(vertices_[2], mid23, center_);
+      triangles_[5] = new Triangle(mid23, vertices_[3], center_);
+      triangles_[6] = new Triangle(vertices_[3], mid30, center_);
+      triangles_[7] = new Triangle(mid30, vertices_[0], center_);
     }
     catch (...)
     {
-      for (size_t j = 0; j < TRIANGLE_COUNT; ++j)
+      for (size_t i = 0; i < TRIANGLE_COUNT; ++i)
       {
-        delete triangles_[j];
+        delete triangles_[i];
       }
       delete[] triangles_;
       throw;

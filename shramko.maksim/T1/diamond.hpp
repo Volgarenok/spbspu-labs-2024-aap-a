@@ -9,7 +9,7 @@ namespace shramko
   class Diamond final: public Shape
   {
   public:
-    Diamond(point_t one, point_t two, point_t three);
+    Diamond(const point_t& one, const point_t& two, const point_t& three);
     ~Diamond() override;
     double getArea() const override;
     rectangle_t getFrameRect() const override;
