@@ -13,7 +13,7 @@ namespace shramko
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(double x, double y) override;
-
+    bool isConvex(const point_t& a, const point_t& b, const point_t& c, const point_t& d) const;
   private:
     point_t points_[4];
     void doScale(double k) override;

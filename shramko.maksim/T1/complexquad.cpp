@@ -6,6 +6,11 @@ namespace shramko
 {
   Complexquad::Complexquad(point_t one, point_t two, point_t three, point_t four)
   {
+    if (!isConvex(one, two, three, four))
+    {
+      throw std::invalid_argument("Points don't form convex quadrilateral");
+    }
+
     points_[0] = one;
     points_[1] = two;
     points_[2] = three;
@@ -16,6 +21,17 @@ namespace shramko
     center_.x = (one.x + two.x + three.x + four.x) / 4;
     center_.y = (one.y + two.y + three.y + four.y) / 4;
   }
+
+  bool Complexquad::isConvex(const point_t& a, const point_t& b, const point_t& c, const point_t& d) const
+  {
+    double cross1 = (b.x - a.x) * (c.y - b.y) - (b.y - a.y) * (c.x - b.x);
+    double cross2 = (c.x - b.x) * (d.y - c.y) - (c.y - b.y) * (d.x - c.x);
+    double cross3 = (d.x - c.x) * (a.y - d.y) - (d.y - c.y) * (a.x - d.x);
+    double cross4 = (a.x - d.x) * (b.y - a.y) - (a.y - d.y) * (b.x - a.x);
+
+    return (cross1 >= 0 && cross2 >= 0 && cross3 >= 0 && cross4 >= 0) ||
+           (cross1 <= 0 && cross2 <= 0 && cross3 <= 0 && cross4 <= 0);
+}
 
   double Complexquad::getArea() const
   {
