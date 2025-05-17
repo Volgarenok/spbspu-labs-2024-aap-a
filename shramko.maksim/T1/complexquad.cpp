@@ -24,24 +24,6 @@ namespace shramko
 
   bool Complexquad::isConvex(const point_t& a, const point_t& b, const point_t& c, const point_t& d) const
   {
-    auto cross = [](const point_t& p1, const point_t& p2, const point_t& p3)
-    {
-      return (p2.x - p1.x) * (p3.y - p2.y) - (p2.y - p1.y) * (p3.x - p2.x);
-    };
-
-    double c1 = cross(a, b, c);
-    double c2 = cross(b, c, d);
-    double c3 = cross(c, d, a);
-    double c4 = cross(d, a, b);
-
-    bool all_non_neg = (c1 >= 0) && (c2 >= 0) && (c3 >= 0) && (c4 >= 0);
-    bool all_non_pos = (c1 <= 0) && (c2 <= 0) && (c3 <= 0) && (c4 <= 0);
-
-    return all_non_neg || all_non_pos;
-  }
-
-  bool Complexquad::isConvex(const point_t& a, const point_t& b, const point_t& c, const point_t& d) const
-  {
     auto orientation = [](const point_t& p1, const point_t& p2, const point_t& p3)
     {
       double val = (p2.y - p1.y) * (p3.x - p2.x) - (p2.x - p1.x) * (p3.y - p2.y);
@@ -62,6 +44,7 @@ namespace shramko
 
     return true;
   }
+
 
   double Complexquad::getArea() const
   {
