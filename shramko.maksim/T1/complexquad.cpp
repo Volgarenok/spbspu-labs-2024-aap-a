@@ -24,7 +24,7 @@ namespace shramko
     t1_(a, b, c),
     t2_(c, d, a),
     t3_(b, c, d),
-    t4_(a, d, b) 
+    t4_(a, d, b)
   {
     points_[0] = a;
     points_[1] = b;
