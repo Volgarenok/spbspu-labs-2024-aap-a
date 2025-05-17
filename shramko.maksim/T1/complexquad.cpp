@@ -38,7 +38,30 @@ namespace shramko
     bool all_non_pos = (c1 <= 0) && (c2 <= 0) && (c3 <= 0) && (c4 <= 0);
 
     return all_non_neg || all_non_pos;
-}
+  }
+
+  bool Complexquad::isConvex(const point_t& a, const point_t& b, const point_t& c, const point_t& d) const
+  {
+    auto orientation = [](const point_t& p1, const point_t& p2, const point_t& p3)
+    {
+      double val = (p2.y - p1.y) * (p3.x - p2.x) - (p2.x - p1.x) * (p3.y - p2.y);
+
+      if (std::abs(val) < 1e-6) return 0;
+      return (val > 0) ? 1 : 2;
+    };
+
+    int o1 = orientation(a, b, c);
+    int o2 = orientation(b, c, d);
+    int o3 = orientation(c, d, a);
+    int o4 = orientation(d, a, b);
+
+    if (o1 != o2 && o2 != o3 && o3 != o4 && o1 != o3 && o1 != o4 && o2 != o4)
+    {
+      return false;
+    }
+
+    return true;
+  }
 
   double Complexquad::getArea() const
   {
