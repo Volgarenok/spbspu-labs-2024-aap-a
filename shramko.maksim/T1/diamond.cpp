@@ -23,7 +23,7 @@ namespace shramko
     {
       throw std::invalid_argument("Invalid diamond");
     }
-    
+
     triangles_ = new Triangle*[TRIANGLE_COUNT];
     try
     {
