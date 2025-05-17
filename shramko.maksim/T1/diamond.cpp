@@ -9,22 +9,21 @@ namespace shramko
     return {(a.x + b.x) / 2.0, (a.y + b.y) / 2.0};
   }
 
-  Diamond::Diamond(point_t one, point_t two, point_t three)
+  Diamond::Diamond(point_t one, point_t two, point_t center)
   {
-    center_ = midpoint(one, two);
     vertices_[0] = one;
     vertices_[1] = two;
-    vertices_[2] = three;
-    vertices_[3] = {2 * center_.x - three.x, 2 * center_.y - three.y};
+    vertices_[2] = {2 * center.x - two.x, 2 * center.y - two.y};
+    vertices_[3] = {2 * center.x - one.x, 2 * center.y - one.y};
 
     point_t diag1 = {vertices_[1].x - vertices_[0].x, vertices_[1].y - vertices_[0].y};
     point_t diag2 = {vertices_[3].x - vertices_[2].x, vertices_[3].y - vertices_[2].y};
     double dot = diag1.x * diag2.x + diag1.y * diag2.y;
     if (std::abs(dot) > 1e-6)
     {
-      throw std::invalid_argument("Diagonals are not perpendicular");
+      throw std::invalid_argument("Invalid diamond");
     }
-
+    
     triangles_ = new Triangle*[TRIANGLE_COUNT];
     try
     {

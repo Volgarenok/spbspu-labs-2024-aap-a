@@ -24,20 +24,13 @@ namespace shramko
 
   bool Complexquad::isConvex(const point_t& a, const point_t& b, const point_t& c, const point_t& d) const
   {
-    auto cross = [](const point_t& p1, const point_t& p2, const point_t& p3)
-    {
-      return (p2.x - p1.x) * (p3.y - p2.y) - (p2.y - p1.y) * (p3.x - p2.x);
-    };
+    double cross1 = (b.x - a.x) * (c.y - b.y) - (b.y - a.y) * (c.x - b.x);
+    double cross2 = (c.x - b.x) * (d.y - c.y) - (c.y - b.y) * (d.x - c.x);
+    double cross3 = (d.x - c.x) * (a.y - d.y) - (d.y - c.y) * (a.x - d.x);
+    double cross4 = (a.x - d.x) * (b.y - a.y) - (a.y - d.y) * (b.x - a.x);
 
-    double c1 = cross(a, b, c);
-    double c2 = cross(b, c, d);
-    double c3 = cross(c, d, a);
-    double c4 = cross(d, a, b);
-
-    bool all_non_neg = (c1 >= -1e-6 && c2 >= -1e-6 && c3 >= -1e-6 && c4 >= -1e-6);
-    bool all_non_pos = (c1 <= 1e-6 && c2 <= 1e-6 && c3 <= 1e-6 && c4 <= 1e-6);
-
-    return all_non_neg || all_non_pos;
+    return (cross1 >= -1e-6 && cross2 >= -1e-6 && cross3 >= -1e-6 && cross4 >= -1e-6) ||
+           (cross1 <= 1e-6 && cross2 <= 1e-6 && cross3 <= 1e-6 && cross4 <= 1e-6);
   }
 
   double Complexquad::getArea() const
