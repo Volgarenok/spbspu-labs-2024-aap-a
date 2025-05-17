@@ -4,105 +4,86 @@
 
 namespace shramko
 {
-  Complexquad::Complexquad(point_t one, point_t two, point_t three, point_t four)
+  bool Complexquad::isConvex() const
   {
-    if (!isConvex(one, two, three, four))
+    auto cross = [](const point_t& a, const point_t& b, const point_t& c)
+    {
+      return (b.x - a.x) * (c.y - b.y) - (b.y - a.y) * (c.x - b.x);
+    };
+
+    double c1 = cross(points_[0], points_[1], points_[2]);
+    double c2 = cross(points_[1], points_[2], points_[3]);
+    double c3 = cross(points_[2], points_[3], points_[0]);
+    double c4 = cross(points_[3], points_[0], points_[1]);
+
+    return (c1 >= -1e-6 && c2 >= -1e-6 && c3 >= -1e-6 && c4 >= -1e-6) ||
+           (c1 <= 1e-6 && c2 <= 1e-6 && c3 <= 1e-6 && c4 <= 1e-6);
+  }
+
+  Complexquad::Complexquad(point_t a, point_t b, point_t c, point_t d):
+    t1_(a, b, c),
+    t2_(c, d, a),
+    t3_(b, c, d),
+    t4_(a, d, b) 
+  {
+    points_[0] = a;
+    points_[1] = b;
+    points_[2] = c;
+    points_[3] = d;
+
+    if (!isConvex())
     {
       throw std::invalid_argument("Points don't form convex quadrilateral");
     }
-
-    points_[0] = one;
-    points_[1] = two;
-    points_[2] = three;
-    points_[3] = four;
-
-    validateConvex();
-
-    center_.x = (one.x + two.x + three.x + four.x) / 4;
-    center_.y = (one.y + two.y + three.y + four.y) / 4;
-  }
-
-  bool Complexquad::isConvex(const point_t& a, const point_t& b, const point_t& c, const point_t& d) const
-  {
-    auto cross = [](const point_t& p1, const point_t& p2, const point_t& p3)
-    {
-      return (p2.x - p1.x) * (p3.y - p2.y) - (p2.y - p1.y) * (p3.x - p2.x);
-    };
-
-    double c1 = cross(a, b, c);
-    double c2 = cross(b, c, d);
-    double c3 = cross(c, d, a);
-    double c4 = cross(d, a, b);
-
-    bool all_non_neg = (c1 >= -1e-6 && c2 >= -1e-6 && c3 >= -1e-6 && c4 >= -1e-6);
-    bool all_non_pos = (c1 <= 1e-6 && c2 <= 1e-6 && c3 <= 1e-6 && c4 <= 1e-6);
-
-    return all_non_neg || all_non_pos;
   }
 
   double Complexquad::getArea() const
   {
-    Triangle t1(points_[0], points_[1], points_[2]);
-    Triangle t2(points_[0], points_[2], points_[3]);
-    return t1.getArea() + t2.getArea();
+    return t1_.getArea() + t2_.getArea() + t3_.getArea() + t4_.getArea();
   }
 
   rectangle_t Complexquad::getFrameRect() const
   {
-    double xMin = points_[0].x;
-    double xMax = points_[0].x;
-    double yMin = points_[0].y;
-    double yMax = points_[0].y;
+    double x_min = points_[0].x;
+    double x_max = points_[0].x;
+    double y_min = points_[0].y;
+    double y_max = points_[0].y;
 
-    for (size_t i = 1; i < 4; ++i)
+    for (const auto& point : points_)
     {
-      xMin = std::min(xMin, points_[i].x);
-      xMax = std::max(xMax, points_[i].x);
-      yMin = std::min(yMin, points_[i].y);
-      yMax = std::max(yMax, points_[i].y);
+      x_min = std::min(x_min, point.x);
+      x_max = std::max(x_max, point.x);
+      y_min = std::min(y_min, point.y);
+      y_max = std::max(y_max, point.y);
     }
 
-    return {xMax - xMin, yMax - yMin, { (xMin + xMax) / 2, (yMin + yMax) / 2 }};
+    return {x_max - x_min, y_max - y_min, {(x_min + x_max)/2, (y_min + y_max)/2}};
   }
 
   void Complexquad::move(double x, double y)
   {
-    for (int i = 0; i < 4; ++i)
+    for (auto& point : points_)
     {
-      points_[i].x += x;
-      points_[i].y += y;
+      point.x += x;
+      point.y += y;
     }
-    center_.x += x;
-    center_.y += y;
+    t1_.move(x, y);
+    t2_.move(x, y);
+    t3_.move(x, y);
+    t4_.move(x, y);
   }
 
   void Complexquad::doScale(double k)
   {
-    for (int i = 0; i < 4; ++i)
+    const point_t center = getFrameRect().pos;
+    for (auto& point : points_)
     {
-      points_[i].x = center_.x + (points_[i].x - center_.x) * k;
-      points_[i].y = center_.y + (points_[i].y - center_.y) * k;
+      point.x = center.x + (point.x - center.x) * k;
+      point.y = center.y + (point.y - center.y) * k;
     }
-  }
-
-  void Complexquad::validateConvex() const
-  {
-    const double cross1 = (points_[1].x - points_[0].x) * (points_[2].y - points_[1].y)
-                        - (points_[1].y - points_[0].y) * (points_[2].x - points_[1].x);
-
-    const double cross2 = (points_[2].x - points_[1].x) * (points_[3].y - points_[2].y)
-                        - (points_[2].y - points_[1].y) * (points_[3].x - points_[2].x);
-
-    const double cross3 = (points_[3].x - points_[2].x) * (points_[0].y - points_[3].y)
-                        - (points_[3].y - points_[2].y) * (points_[0].x - points_[3].x);
-
-    const double cross4 = (points_[0].x - points_[3].x) * (points_[1].y - points_[0].y)
-                        - (points_[0].y - points_[3].y) * (points_[1].x - points_[0].x);
-
-    if (!((cross1 >= 0 && cross2 >= 0 && cross3 >= 0 && cross4 >= 0)
-       || (cross1 <= 0 && cross2 <= 0 && cross3 <= 0 && cross4 <= 0)))
-    {
-      throw std::invalid_argument("Points don't form convex quadrilateral");
-    }
+    t1_ = Triangle(points_[0], points_[1], points_[2]);
+    t2_ = Triangle(points_[2], points_[3], points_[0]);
+    t3_ = Triangle(points_[1], points_[2], points_[3]);
+    t4_ = Triangle(points_[0], points_[3], points_[1]);
   }
 }

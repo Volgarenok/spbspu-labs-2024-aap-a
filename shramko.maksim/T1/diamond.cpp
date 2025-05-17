@@ -9,19 +9,25 @@ namespace shramko
     return {(a.x + b.x) / 2.0, (a.y + b.y) / 2.0};
   }
 
-  Diamond::Diamond(point_t one, point_t two, point_t center)
+  bool Diamond::areDiagonalsPerpendicular() const
   {
-    vertices_[0] = one;
-    vertices_[1] = two;
-    vertices_[2] = {2 * center.x - two.x, 2 * center.y - two.y};
-    vertices_[3] = {2 * center.x - one.x, 2 * center.y - one.y};
-
     point_t diag1 = {vertices_[1].x - vertices_[0].x, vertices_[1].y - vertices_[0].y};
     point_t diag2 = {vertices_[3].x - vertices_[2].x, vertices_[3].y - vertices_[2].y};
     double dot = diag1.x * diag2.x + diag1.y * diag2.y;
-    if (std::abs(dot) > 1e-6)
+    return std::abs(dot) < 1e-6;
+  }
+
+  Diamond::Diamond(point_t one, point_t two, point_t three)
+  {
+    center_ = midpoint(one, two);
+    vertices_[0] = one;
+    vertices_[1] = two;
+    vertices_[2] = three;
+    vertices_[3] = {2 * center_.x - three.x, 2 * center_.y - three.y};
+
+    if (!areDiagonalsPerpendicular())
     {
-      throw std::invalid_argument("Invalid diamond");
+      throw std::invalid_argument("Diagonals are not perpendicular");
     }
 
     triangles_ = new Triangle*[TRIANGLE_COUNT];
@@ -32,18 +38,21 @@ namespace shramko
       point_t mid23 = midpoint(vertices_[2], vertices_[3]);
       point_t mid30 = midpoint(vertices_[3], vertices_[0]);
 
-      triangles_[0] = new Triangle{vertices_[0], mid01, center_};
-      triangles_[1] = new Triangle{mid01, vertices_[1], center_};
-      triangles_[2] = new Triangle{vertices_[1], mid12, center_};
-      triangles_[3] = new Triangle{mid12, vertices_[2], center_};
-      triangles_[4] = new Triangle{vertices_[2], mid23, center_};
-      triangles_[5] = new Triangle{mid23, vertices_[3], center_};
-      triangles_[6] = new Triangle{vertices_[3], mid30, center_};
-      triangles_[7] = new Triangle{mid30, vertices_[0], center_};
+      triangles_[0] = new Triangle(vertices_[0], mid01, center_);
+      triangles_[1] = new Triangle(mid01, vertices_[1], center_);
+      triangles_[2] = new Triangle(vertices_[1], mid12, center_);
+      triangles_[3] = new Triangle(mid12, vertices_[2], center_);
+      triangles_[4] = new Triangle(vertices_[2], mid23, center_);
+      triangles_[5] = new Triangle(mid23, vertices_[3], center_);
+      triangles_[6] = new Triangle(vertices_[3], mid30, center_);
+      triangles_[7] = new Triangle(mid30, vertices_[0], center_);
     }
     catch (...)
     {
-      for (size_t i = 0; i < TRIANGLE_COUNT; ++i) delete triangles_[i];
+      for (size_t i = 0; i < TRIANGLE_COUNT; ++i)
+      {
+        delete triangles_[i];
+      }
       delete[] triangles_;
       throw;
     }
@@ -72,12 +81,12 @@ namespace shramko
     double y_min = vertices_[0].y;
     double y_max = vertices_[0].y;
 
-    for (size_t i = 1; i < 4; ++i)
+    for (const auto& vertex : vertices_)
     {
-      x_min = std::min(x_min, vertices_[i].x);
-      x_max = std::max(x_max, vertices_[i].x);
-      y_min = std::min(y_min, vertices_[i].y);
-      y_max = std::max(y_max, vertices_[i].y);
+      x_min = std::min(x_min, vertex.x);
+      x_max = std::max(x_max, vertex.x);
+      y_min = std::min(y_min, vertex.y);
+      y_max = std::max(y_max, vertex.y);
     }
 
     return {x_max - x_min, y_max - y_min, {(x_min + x_max)/2, (y_min + y_max)/2}};
@@ -89,10 +98,8 @@ namespace shramko
     {
       triangles_[i]->move(x, y);
     }
-
     center_.x += x;
     center_.y += y;
-
     for (auto& vertex : vertices_)
     {
       vertex.x += x;
@@ -102,7 +109,7 @@ namespace shramko
 
   void Diamond::doScale(double k)
   {
-    for (auto& vertex : vertices_)
+    for (auto& vertex: vertices_)
     {
       vertex.x = center_.x + (vertex.x - center_.x) * k;
       vertex.y = center_.y + (vertex.y - center_.y) * k;
@@ -113,13 +120,13 @@ namespace shramko
     point_t mid23 = midpoint(vertices_[2], vertices_[3]);
     point_t mid30 = midpoint(vertices_[3], vertices_[0]);
 
-    *triangles_[0] = Triangle{vertices_[0], mid01, center_};
-    *triangles_[1] = Triangle{mid01, vertices_[1], center_};
-    *triangles_[2] = Triangle{vertices_[1], mid12, center_};
-    *triangles_[3] = Triangle{mid12, vertices_[2], center_};
-    *triangles_[4] = Triangle{vertices_[2], mid23, center_};
-    *triangles_[5] = Triangle{mid23, vertices_[3], center_};
-    *triangles_[6] = Triangle{vertices_[3], mid30, center_};
-    *triangles_[7] = Triangle{mid30, vertices_[0], center_};
+    *triangles_[0] = Triangle(vertices_[0], mid01, center_);
+    *triangles_[1] = Triangle(mid01, vertices_[1], center_);
+    *triangles_[2] = Triangle(vertices_[1], mid12, center_);
+    *triangles_[3] = Triangle(mid12, vertices_[2], center_);
+    *triangles_[4] = Triangle(vertices_[2], mid23, center_);
+    *triangles_[5] = Triangle(mid23, vertices_[3], center_);
+    *triangles_[6] = Triangle(vertices_[3], mid30, center_);
+    *triangles_[7] = Triangle(mid30, vertices_[0], center_);
   }
 }

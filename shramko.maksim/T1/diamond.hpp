@@ -9,7 +9,7 @@ namespace shramko
   class Diamond final: public Shape
   {
   public:
-    Diamond(point_t one, point_t two, point_t center);
+    Diamond(point_t one, point_t two, point_t three);
     ~Diamond() override;
     double getArea() const override;
     rectangle_t getFrameRect() const override;
@@ -21,6 +21,7 @@ namespace shramko
     point_t center_;
     void doScale(double k) override;
     point_t midpoint(const point_t& a, const point_t& b) const;
+    bool areDiagonalsPerpendicular() const;
   };
 }
 
