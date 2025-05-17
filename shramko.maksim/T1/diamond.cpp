@@ -17,8 +17,8 @@ namespace shramko
     vertices_[2] = three;
     vertices_[3] = {2 * center_.x - three.x, 2 * center_.y - three.y};
 
-    point_t diag1 = {two.x - one.x, two.y - one.y};
-    point_t diag2 = {vertices_[3].x - three.x, vertices_[3].y - three.y};
+    point_t diag1 = {vertices_[1].x - vertices_[0].x, vertices_[1].y - vertices_[0].y};
+    point_t diag2 = {vertices_[3].x - vertices_[2].x, vertices_[3].y - vertices_[2].y};
     double dot = diag1.x * diag2.x + diag1.y * diag2.y;
     if (std::abs(dot) > 1e-6)
     {
