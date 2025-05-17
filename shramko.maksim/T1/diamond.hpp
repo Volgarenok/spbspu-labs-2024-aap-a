@@ -1,7 +1,9 @@
 #ifndef DIAMOND_HPP
 #define DIAMOND_HPP
+
 #include "shape.hpp"
 #include "triangle.hpp"
+
 namespace shramko
 {
   class Diamond final: public Shape
