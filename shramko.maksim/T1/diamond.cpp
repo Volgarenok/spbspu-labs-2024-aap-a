@@ -1,150 +1,92 @@
 #include "diamond.hpp"
 #include "triangle.hpp"
 #include <stdexcept>
-#include <algorithm>
-#include <cmath>
 
-namespace shramko
+shramko::Diamond::Diamond(point_t one, point_t two, point_t three):
+  triangle_(one, two, three)
 {
-  point_t Diamond::midpoint(const point_t& a, const point_t& b) const
+  double A = distance(one, two);
+  double B = distance(two, three);
+  double C = distance(three, one);
+
+  double max_side = std::max(A, std::max(B, C));
+  if (A == max_side)
   {
-    return { (a.x + b.x) / 2, (a.y + b.y) / 2 };
-  }
-
-  Diamond::Diamond(point_t one, point_t two, point_t three)
-  {
-    center_ = midpoint(one, two);
-
-    point_t four = {2 * center_.x - three.x, 2 * center_.y - three.y};
-
-    double side1 = distance(one, two);
-    double side2 = distance(two, three);
-    double side3 = distance(three, four);
-    double side4 = distance(four, one);
-
-    if (std::abs(side1 - side2) > 1e-6 ||
-        std::abs(side2 - side3) > 1e-6 ||
-        std::abs(side3 - side4) > 1e-6)
+    center_ = three;
+    if (std::abs((one.x - center_.x) * (two.x - center_.x)) > 10e-6)
     {
-      throw std::invalid_argument("All sides of diamond must be equal");
-    }
-
-    vertices_[0] = one;
-    vertices_[1] = two;
-    vertices_[2] = three;
-    vertices_[3] = four;
-
-    triangles_ = new Triangle*[TRIANGLE_COUNT];
-    try
-    {
-      point_t midAB = midpoint(one, two);
-      point_t midBC = midpoint(two, three);
-      point_t midCD = midpoint(three, four);
-      point_t midDA = midpoint(four, one);
-
-      triangles_[0] = new Triangle(one, midAB, center_);
-      triangles_[1] = new Triangle(midAB, two, center_);
-      triangles_[2] = new Triangle(two, midBC, center_);
-      triangles_[3] = new Triangle(midBC, three, center_);
-      triangles_[4] = new Triangle(three, midCD, center_);
-      triangles_[5] = new Triangle(midCD, four, center_);
-      triangles_[6] = new Triangle(four, midDA, center_);
-      triangles_[7] = new Triangle(midDA, one, center_);
-    }
-    catch (...)
-    {
-      for (size_t j = 0; j < TRIANGLE_COUNT; ++j)
-      {
-        delete triangles_[j];
-      }
-      delete[] triangles_;
-      throw;
+      throw std::invalid_argument("invalid diamond\n");
     }
   }
-
-  Diamond::~Diamond()
+  else if (B == max_side)
   {
-    for (size_t i = 0; i < TRIANGLE_COUNT; ++i)
+    center_ = one;
+    if (std::abs((three.x - center_.x) * (two.x - center_.x)) > 10e-6)
     {
-      delete triangles_[i];
-    }
-    delete[] triangles_;
-  }
-
-  double Diamond::getArea() const
-  {
-    double area = 0.0;
-    for (size_t i = 0; i < TRIANGLE_COUNT; ++i)
-    {
-      area += triangles_[i]->getArea();
-    }
-    return area;
-  }
-
-  rectangle_t Diamond::getFrameRect() const
-  {
-    double x_min = vertices_[0].x;
-    double x_max = vertices_[0].x;
-    double y_min = vertices_[0].y;
-    double y_max = vertices_[0].y;
-
-    for (size_t i = 1; i < 4; ++i)
-    {
-      x_min = std::min(x_min, vertices_[i].x);
-      x_max = std::max(x_max, vertices_[i].x);
-      y_min = std::min(y_min, vertices_[i].y);
-      y_max = std::max(y_max, vertices_[i].y);
-    }
-
-    return { x_max - x_min, y_max - y_min, { (x_min + x_max) / 2, (y_min + y_max) / 2 } };
-  }
-
-  void Diamond::move(double x, double y)
-  {
-    for (size_t i = 0; i < TRIANGLE_COUNT; ++i)
-    {
-      triangles_[i]->move(x, y);
-    }
-    center_.x += x;
-    center_.y += y;
-    for (size_t i = 0; i < 4; ++i)
-    {
-      vertices_[i].x += x;
-      vertices_[i].y += y;
+      throw std::invalid_argument("invalid diamond\n");
     }
   }
-
-  void Diamond::doScale(double k)
+  else if (C == max_side)
   {
-    const point_t center = center_;
-    for (size_t i = 0; i < 4; ++i)
+    center_ = two;
+    if (std::abs((one.y - center_.y) * (three.y - center_.y)) > 10e-6)
     {
-      vertices_[i].x = center.x + (vertices_[i].x - center.x) * k;
-      vertices_[i].y = center.y + (vertices_[i].y - center.y) * k;
+      throw std::invalid_argument("invalid diamond\n");
     }
-
-    for (size_t i = 0; i < TRIANGLE_COUNT; ++i)
-    {
-      delete triangles_[i];
-    }
-
-    point_t one = vertices_[0];
-    point_t two = vertices_[1];
-    point_t three = vertices_[2];
-    point_t four = vertices_[3];
-
-    point_t midAB = midpoint(one, two);
-    point_t midBC = midpoint(two, three);
-    point_t midCD = midpoint(three, four);
-    point_t midDA = midpoint(four, one);
-
-    triangles_[0] = new Triangle(one, midAB, center);
-    triangles_[1] = new Triangle(midAB, two, center);
-    triangles_[2] = new Triangle(two, midBC, center);
-    triangles_[3] = new Triangle(midBC, three, center);
-    triangles_[4] = new Triangle(three, midCD, center);
-    triangles_[5] = new Triangle(midCD, four, center);
-    triangles_[6] = new Triangle(four, midDA, center);
-    triangles_[7] = new Triangle(midDA, one, center);
   }
+}
+
+double shramko::Diamond::getArea() const
+{
+  return triangle_.getArea() * 4;
+}
+
+shramko::rectangle_t shramko::Diamond::getFrameRect() const
+{
+  double x_max = std::max(triangle_.one_.x, std::max(triangle_.two_.x,triangle_.three_.x));
+  double x_min = std::min(triangle_.one_.x, std::min(triangle_.two_.x,triangle_.three_.x));
+  double y_max = std::max(triangle_.one_.y, std::max(triangle_.two_.y,triangle_.three_.y));
+  double y_min = std::min(triangle_.one_.y, std::min(triangle_.two_.y,triangle_.three_.y));
+
+  rectangle_t rectFrame;
+  rectFrame.pos = center_;
+  if (x_max != center_.x)
+  {
+    rectFrame.width = (x_max - center_.x) * 2;
+  }
+  else
+  {
+    rectFrame.width = (center_.x - x_min) * 2;
+  }
+  if (y_max != center_.y)
+  {
+    rectFrame.height = (y_max - center_.y) * 2;
+  }
+  else
+  {
+    rectFrame.height = (center_.y - y_min) * 2;
+  }
+
+  return rectFrame;
+}
+
+void shramko::Diamond::move(double x, double y)
+{
+  triangle_.move(x, y);
+  center_.x += x;
+  center_.y += y;
+}
+
+void shramko::Diamond::doScale(double k)
+{
+  const point_t center = center_;
+
+  triangle_.one_.x = center.x + (triangle_.one_.x - center.x) * k;
+  triangle_.one_.y = center.y + (triangle_.one_.y - center.y) * k;
+
+  triangle_.two_.x = center.x + (triangle_.two_.x - center.x) * k;
+  triangle_.two_.y = center.y + (triangle_.two_.y - center.y) * k;
+
+  triangle_.three_.x = center.x + (triangle_.three_.x - center.x) * k;
+  triangle_.three_.y = center.y + (triangle_.three_.y - center.y) * k;
 }
