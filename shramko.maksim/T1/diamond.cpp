@@ -22,11 +22,11 @@ namespace shramko
     double side3 = distance(three, four);
     double side4 = distance(four, one);
 
-    if (std::abs(side1 - side2) > 1e-6 || 
+    if (std::abs(side1 - side2) > 1e-6 ||
         std::abs(side2 - side3) > 1e-6 ||
         std::abs(side3 - side4) > 1e-6)
     {
-        throw std::invalid_argument("All sides of diamond must be equal");
+      throw std::invalid_argument("All sides of diamond must be equal");
     }
 
     vertices_[0] = one;
