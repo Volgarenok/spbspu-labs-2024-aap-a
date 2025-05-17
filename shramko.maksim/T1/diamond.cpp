@@ -14,16 +14,19 @@ namespace shramko
   Diamond::Diamond(point_t one, point_t two, point_t three)
   {
     center_ = midpoint(one, two);
+
     point_t four = {2 * center_.x - three.x, 2 * center_.y - three.y};
 
-    point_t diag1_vec = {two.x - one.x, two.y - one.y};
-    point_t diag2_vec = {four.x - three.x, four.y - three.y};
+    double side1 = distance(one, two);
+    double side2 = distance(two, three);
+    double side3 = distance(three, four);
+    double side4 = distance(four, one);
 
-    double dot = diag1_vec.x * diag2_vec.x + diag1_vec.y * diag2_vec.y;
-
-    if (std::abs(dot) > 1e-6)
+    if (std::abs(side1 - side2) > 1e-6 || 
+        std::abs(side2 - side3) > 1e-6 ||
+        std::abs(side3 - side4) > 1e-6)
     {
-      throw std::invalid_argument("invalid diamond");
+        throw std::invalid_argument("All sides of diamond must be equal");
     }
 
     vertices_[0] = one;
