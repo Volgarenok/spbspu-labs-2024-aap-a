@@ -16,6 +16,7 @@ namespace komarova
     double height;
     point_t pos;
   };
+  point_t scalePoint(point_t p, point_t center, double coef);
 }
 
 #endif

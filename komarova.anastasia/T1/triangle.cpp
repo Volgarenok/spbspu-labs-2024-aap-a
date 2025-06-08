@@ -42,10 +42,7 @@ void komarova::Triangle::move(double dx, double dy)
 void komarova::Triangle::unsafeScale(double coef)
 {
   point_t center = getFrameRect().pos;
-  a_.x = center.x + (a_.x - center.x) * coef;
-  a_.y = center.y + (a_.y - center.y) * coef;
-  b_.x = center.x + (b_.x - center.x) * coef;
-  b_.y = center.y + (b_.y - center.y) * coef;
-  c_.x = center.x + (c_.x - center.x) * coef;
-  c_.y = center.y + (c_.y - center.y) * coef;
+  a_ = scalePoint(a_, center, coef);
+  b_ = scalePoint(b_, center, coef);
+  c_ = scalePoint(c_, center, coef);
 }
