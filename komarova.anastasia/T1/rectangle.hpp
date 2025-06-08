@@ -17,8 +17,8 @@ namespace komarova
     void move(point_t point) override;
     void unsafeScale(double coef) override;
   private:
-    Shape** triangles_;
     const size_t cnt_trg = 8;
+    Shape** triangles_;
 
     void clear();
     void clear(size_t cnt);

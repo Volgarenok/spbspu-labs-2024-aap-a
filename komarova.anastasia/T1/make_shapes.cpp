@@ -11,11 +11,10 @@
 
 void komarova::makeShapes(std::istream& input, Shape** shapes, bool& wrong_shape, size_t& count, double& x_sc, double& y_sc, double& coef)
 {
-  bool sc_flag = false;
-  while (!sc_flag && input)
+  //bool sc_flag = false;
+  std::string figure;
+  while (input >> figure && figure != "SCALE")
   {
-    std::string figure;
-    input >> figure;
     try
     {
       if (figure == "RECTANGLE")
@@ -51,21 +50,23 @@ void komarova::makeShapes(std::istream& input, Shape** shapes, bool& wrong_shape
         shapes[count] = new Square(low_left, len);
         count++;
       }
-      else if (figure == "SCALE")
+    }
+      /*else if (figure == "SCALE")
       {
         sc_flag = true;
         input >> x_sc >> y_sc >> coef;
-      }
-    }
+      }*/
     catch (const std::logic_error& e)
     {
       wrong_shape = true;
     }
   }
-  if (input.eof() && !sc_flag)
+  if (input.eof() && figure != "SCALE")
   {
     throw std::logic_error("SCALE Error");
   }
+  //sc_flag = true;
+  input >> x_sc >> y_sc >> coef;
 }
 void komarova::sumArea(std::ostream& output, Shape** shapes)
 {
