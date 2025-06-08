@@ -3,7 +3,7 @@
 #include "base-types.hpp"
 
 komarova::Square::Square(point_t low_left, double len):
-  rect_(low_left, {low_left.x + len, low_left.y + len})
+  rect_(low_left, { low_left.x + len, low_left.y + len })
 {
   if (len <= 0.0)
   {

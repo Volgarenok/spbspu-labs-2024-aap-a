@@ -18,7 +18,7 @@ double komarova::Circle::getArea() const
 }
 komarova::rectangle_t komarova::Circle::getFrameRect() const
 {
-  return {2 * radius_, 2 * radius_, point_c_};
+  return { 2 * radius_, 2 * radius_, point_c_ };
 }
 void komarova::Circle::move(point_t point)
 {
@@ -26,7 +26,7 @@ void komarova::Circle::move(point_t point)
 }
 void komarova::Circle::move(double dx, double dy)
 {
-  point_c_ = {point_c_.x + dx, point_c_.y + dy};
+  point_c_ = { point_c_.x + dx, point_c_.y + dy };
 }
 void komarova::Circle::unsafeScale(double coef)
 {
