@@ -15,7 +15,7 @@ namespace komarova
     rectangle_t getFrameRect() const override;
     void move(double dx, double dy);
     void move(point_t point) override;
-    void unsafeScale(double coef) override;
+    void scaleUnsafe(double coef) override;
   private:
     const size_t cnt_trg = 8;
     Shape** triangles_;

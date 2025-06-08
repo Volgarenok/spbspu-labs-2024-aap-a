@@ -89,9 +89,9 @@ void komarova::scale(Shape** shapes, point_t point, double coef)
   {
     throw std::logic_error("incorrect coefficient");
   }
-  unsafeScale(shapes, point, coef);
+  scaleUnsafe(shapes, point, coef);
 }
-void komarova::unsafeScale(Shape** shapes, point_t point, double coef)
+void komarova::scaleUnsafe(Shape** shapes, point_t point, double coef)
 {
   for (size_t i = 0; shapes[i] != nullptr; i++)
   {
@@ -99,7 +99,7 @@ void komarova::unsafeScale(Shape** shapes, point_t point, double coef)
     shapes[i]->move(point);
     point_t new_p = shapes[i]->getFrameRect().pos;
     point_t vector = {(new_p.x - p.x) * coef, (new_p.y - p.y) * coef};
-    shapes[i]->unsafeScale(coef);
+    shapes[i]->scaleUnsafe(coef);
     shapes[i]->move(-vector.x, -vector.y);
   }
 }

@@ -36,7 +36,7 @@ void komarova::Rectangle::move(double dx, double dy)
     triangles_[i]->move(dx, dy);
   }
 }
-void komarova::Rectangle::unsafeScale(double coef)
+void komarova::Rectangle::scaleUnsafe(double coef)
 {
   for (size_t i = 0; i < cnt_trg; i++)
   {

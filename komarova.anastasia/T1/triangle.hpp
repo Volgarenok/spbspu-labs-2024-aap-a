@@ -13,7 +13,7 @@ namespace komarova
     rectangle_t getFrameRect() const override;
     void move(double dx, double dy) override;
     void move(point_t point) override;
-    void unsafeScale(double coef) override;
+    void scaleUnsafe(double coef) override;
   private:
     point_t a_, b_, c_;
   };

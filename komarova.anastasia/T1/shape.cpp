@@ -7,5 +7,5 @@ void komarova::Shape::scale(double coef)
   {
     throw std::logic_error("incorrect coef");
   }
-  unsafeScale(coef);
+  scaleUnsafe(coef);
 }

@@ -28,7 +28,7 @@ void komarova::Circle::move(double dx, double dy)
 {
   point_c_ = { point_c_.x + dx, point_c_.y + dy };
 }
-void komarova::Circle::unsafeScale(double coef)
+void komarova::Circle::scaleUnsafe(double coef)
 {
   radius_ *= coef;
 }
