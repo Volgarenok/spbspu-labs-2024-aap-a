@@ -22,6 +22,7 @@ namespace komarova
 
     void clear();
     void clear(size_t cnt);
+    Shape** initialiseTriangles(point_t low_left, point_t up_right);
   };
 }
 
