@@ -1,4 +1,5 @@
 #include "shape.hpp"
+#include <stdexcept>
 
 void komarova::Shape::scale(double coef)
 {

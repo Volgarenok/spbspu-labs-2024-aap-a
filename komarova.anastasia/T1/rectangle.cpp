@@ -3,7 +3,6 @@
 #include "base-types.hpp"
 #include "triangle.hpp"
 
-constexpr size_t cnt_trg = 8;
 komarova::Rectangle::Rectangle(point_t low_left, point_t up_right):
   triangles_(new Shape*[cnt_trg])
 {

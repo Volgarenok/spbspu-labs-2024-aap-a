@@ -18,6 +18,7 @@ namespace komarova
     void unsafeScale(double coef) override;
   private:
     Shape** triangles_;
+    const size_t cnt_trg = 8;
 
     void clear();
     void clear(size_t cnt);
