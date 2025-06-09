@@ -26,7 +26,7 @@ void komarova::Square::move(double dx, double dy)
 {
   rect_.move(dx, dy);
 }
-void komarova::Square::unsafeScale(double coef)
+void komarova::Square::scaleUnsafe(double coef)
 {
   rect_.scale(coef);
 }
