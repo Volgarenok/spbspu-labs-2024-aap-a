@@ -110,7 +110,7 @@ namespace shramko
 
     try
     {
-      for (auto& vertex: vertices_)
+      for (auto& vertex : vertices_)
       {
         vertex.x = center_.x + (vertex.x - center_.x) * k;
         vertex.y = center_.y + (vertex.y - center_.y) * k;
