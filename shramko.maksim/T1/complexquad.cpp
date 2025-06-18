@@ -1,6 +1,7 @@
 #include "complexquad.hpp"
 #include <stdexcept>
 #include <cmath>
+#include <algorithm>
 
 namespace shramko
 {
@@ -71,14 +72,33 @@ namespace shramko
   void Complexquad::doScale(double k)
   {
     const point_t center = getFrameRect().pos;
-    for (auto& point : points_)
+
+    point_t new_points[4];
+    std::copy(std::begin(points_), std::end(points_), std::begin(new_points));
+
+    try
     {
-      point.x = center.x + (point.x - center.x) * k;
-      point.y = center.y + (point.y - center.y) * k;
+      for (auto& point : new_points)
+      {
+        point.x = center.x + (point.x - center.x) * k;
+        point.y = center.y + (point.y - center.y) * k;
+      }
+
+      Triangle new_t1(new_points[0], new_points[1], new_points[2]);
+      Triangle new_t2(new_points[2], new_points[3], new_points[0]);
+      Triangle new_t3(new_points[1], new_points[2], new_points[3]);
+      Triangle new_t4(new_points[0], new_points[3], new_points[1]);
+
+      t1_ = new_t1;
+      t2_ = new_t2;
+      t3_ = new_t3;
+      t4_ = new_t4;
+
+      std::copy(std::begin(new_points), std::end(new_points), std::begin(points_));
     }
-    t1_ = Triangle(points_[0], points_[1], points_[2]);
-    t2_ = Triangle(points_[2], points_[3], points_[0]);
-    t3_ = Triangle(points_[1], points_[2], points_[3]);
-    t4_ = Triangle(points_[0], points_[3], points_[1]);
+    catch (...)
+    {
+      throw;
+    }
   }
 }

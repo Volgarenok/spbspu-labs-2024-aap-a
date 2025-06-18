@@ -151,15 +151,22 @@ void shramko::scaleShapes(Shape** shapes, size_t size, double k, point_t new_cen
 {
   for (size_t i = 0; i < size; ++i)
   {
-    const point_t c = shapes[i]->getFrameRect().pos;
-    shapes[i]->move(new_center);
-    point_t new_c = shapes[i]->getFrameRect().pos;
-    shapes[i]->scale(k);
+    try
+    {
+      const point_t c = shapes[i]->getFrameRect().pos;
+      shapes[i]->move(new_center);
+      point_t new_c = shapes[i]->getFrameRect().pos;
+      shapes[i]->scale(k);
 
-    point_t offset;
-    offset.x = (new_c.x - c.x) * k;
-    offset.y = (new_c.y - c.y) * k;
-    shapes[i]->move(-offset.x, -offset.y);
+      point_t offset;
+      offset.x = (new_c.x - c.x) * k;
+      offset.y = (new_c.y - c.y) * k;
+      shapes[i]->move(-offset.x, -offset.y);
+    }
+    catch (const std::exception& e)
+    {
+      std::cerr << e.what() << "\n";
+    }
   }
 }
 

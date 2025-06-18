@@ -1,6 +1,7 @@
 #include "diamond.hpp"
 #include <stdexcept>
 #include <cmath>
+#include <algorithm>
 
 namespace shramko
 {
@@ -25,7 +26,7 @@ namespace shramko
     vertices_[2] = three;
     vertices_[3] = {2 * center_.x - three.x, 2 * center_.y - three.y};
 
-    triangles_ = new Triangle*[TRIANGLE_COUNT];
+    triangles_ = new Triangle*[TRIANGLE_COUNT]();
     try
     {
       point_t mid01 = midpoint(vertices_[0], vertices_[1]);
@@ -104,24 +105,35 @@ namespace shramko
 
   void Diamond::doScale(double k)
   {
-    for (auto& vertex: vertices_)
+    point_t old_vertices[4];
+    std::copy(std::begin(vertices_), std::end(vertices_), std::begin(old_vertices));
+
+    try
     {
-      vertex.x = center_.x + (vertex.x - center_.x) * k;
-      vertex.y = center_.y + (vertex.y - center_.y) * k;
+      for (auto& vertex: vertices_)
+      {
+        vertex.x = center_.x + (vertex.x - center_.x) * k;
+        vertex.y = center_.y + (vertex.y - center_.y) * k;
+      }
+
+      point_t mid01 = midpoint(vertices_[0], vertices_[1]);
+      point_t mid12 = midpoint(vertices_[1], vertices_[2]);
+      point_t mid23 = midpoint(vertices_[2], vertices_[3]);
+      point_t mid30 = midpoint(vertices_[3], vertices_[0]);
+
+      *triangles_[0] = Triangle(vertices_[0], mid01, center_);
+      *triangles_[1] = Triangle(mid01, vertices_[1], center_);
+      *triangles_[2] = Triangle(vertices_[1], mid12, center_);
+      *triangles_[3] = Triangle(mid12, vertices_[2], center_);
+      *triangles_[4] = Triangle(vertices_[2], mid23, center_);
+      *triangles_[5] = Triangle(mid23, vertices_[3], center_);
+      *triangles_[6] = Triangle(vertices_[3], mid30, center_);
+      *triangles_[7] = Triangle(mid30, vertices_[0], center_);
     }
-
-    point_t mid01 = midpoint(vertices_[0], vertices_[1]);
-    point_t mid12 = midpoint(vertices_[1], vertices_[2]);
-    point_t mid23 = midpoint(vertices_[2], vertices_[3]);
-    point_t mid30 = midpoint(vertices_[3], vertices_[0]);
-
-    *triangles_[0] = Triangle(vertices_[0], mid01, center_);
-    *triangles_[1] = Triangle(mid01, vertices_[1], center_);
-    *triangles_[2] = Triangle(vertices_[1], mid12, center_);
-    *triangles_[3] = Triangle(mid12, vertices_[2], center_);
-    *triangles_[4] = Triangle(vertices_[2], mid23, center_);
-    *triangles_[5] = Triangle(mid23, vertices_[3], center_);
-    *triangles_[6] = Triangle(vertices_[3], mid30, center_);
-    *triangles_[7] = Triangle(mid30, vertices_[0], center_);
+    catch (...)
+    {
+      std::copy(std::begin(old_vertices), std::end(old_vertices), std::begin(vertices_));
+      throw;
+    }
   }
 }
