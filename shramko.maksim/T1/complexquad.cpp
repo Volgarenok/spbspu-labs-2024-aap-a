@@ -30,11 +30,6 @@ namespace shramko
     points_[1] = b;
     points_[2] = c;
     points_[3] = d;
-
-    if (!isConvex())
-    {
-      throw std::invalid_argument("Points don't form convex quadrilateral");
-    }
   }
 
   double Complexquad::getArea() const

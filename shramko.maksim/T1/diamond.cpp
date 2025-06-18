@@ -25,11 +25,6 @@ namespace shramko
     vertices_[2] = three;
     vertices_[3] = {2 * center_.x - three.x, 2 * center_.y - three.y};
 
-    if (!areDiagonalsPerpendicular())
-    {
-      throw std::invalid_argument("Diagonals are not perpendicular");
-    }
-
     triangles_ = new Triangle*[TRIANGLE_COUNT];
     try
     {
