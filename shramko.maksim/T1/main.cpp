@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <limits>
 #include "diamond.hpp"
 #include "rectangle.hpp"
 #include "complexquad.hpp"
@@ -40,6 +41,8 @@ int main()
       delete shape;
       shape = nullptr;
       std::cerr << e.what() << "\n";
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits< std::streamsize >::max(), '\n');
     }
   }
   if (name != "SCALE")
@@ -87,42 +90,51 @@ shramko::Shape* shramko::readShape(std::istream& in, const std::string& name)
   {
     if (name == "RECTANGLE")
     {
-      point_t top, bottom;
-
-      in >> bottom.x >> bottom.y >> top.x >> top.y;
-
-      shape = new Rectangle{bottom, top};
+      point_t bottom, top;
+      if (in >> bottom.x >> bottom.y >> top.x >> top.y)
+      {
+        shape = new Rectangle{bottom, top};
+      }
+      else
+      {
+        throw std::invalid_argument("Rectangle read error");
+      }
     }
     else if (name == "TRIANGLE")
     {
       point_t one, two, three;
-
-      in >> one.x >> one.y;
-      in >> two.x >> two.y;
-      in >> three.x >> three.y;
-
-      shape = new Triangle{one, two, three};
+      if (in >> one.x >> one.y >> two.x >> two.y >> three.x >> three.y)
+      {
+        shape = new Triangle{one, two, three};
+      }
+      else
+      {
+        throw std::invalid_argument("Triangle read error");
+      }
     }
     else if (name == "DIAMOND")
     {
       point_t one, two, three;
-
-      in >> one.x >> one.y;
-      in >> two.x >> two.y;
-      in >> three.x >> three.y;
-
-      shape = new Diamond{one, two, three};
+      if (in >> one.x >> one.y >> two.x >> two.y >> three.x >> three.y)
+      {
+        shape = new Diamond{one, two, three};
+      }
+      else
+      {
+        throw std::invalid_argument("Diamond read error");
+      }
     }
     else if (name == "COMPLEXQUAD")
     {
       point_t one, two, three, four;
-
-      in >> one.x >> one.y;
-      in >> two.x >> two.y;
-      in >> three.x >> three.y;
-      in >> four.x >> four.y;
-
-      shape = new Complexquad{one, two, three, four};
+      if (in >> one.x >> one.y >> two.x >> two.y >> three.x >> three.y >> four.x >> four.y)
+      {
+        shape = new Complexquad{one, two, three, four};
+      }
+      else
+      {
+        throw std::invalid_argument("Complexquad read error");
+      }
     }
   }
   catch (const std::exception& e)
