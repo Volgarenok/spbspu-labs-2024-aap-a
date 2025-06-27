@@ -32,7 +32,7 @@ namespace shramko
     {
       for (size_t j = i + 1; j < 4; ++j)
       {
-        if (std::abs(points_[i].x - points_[j].x) < eps && std::abs(points_[i].y - points_[j].y) < eps) 
+        if (std::abs(points_[i].x - points_[j].x) < eps && std::abs(points_[i].y - points_[j].y) < eps)
         {
           throw std::invalid_argument("Complexquad has duplicate points");
         }
