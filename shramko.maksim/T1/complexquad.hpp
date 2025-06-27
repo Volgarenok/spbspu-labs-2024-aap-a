@@ -14,6 +14,7 @@ namespace shramko
     rectangle_t getFrameRect() const override;
     void move(double x, double y) override;
   private:
+    Triangle t1_, t2_, t3_, t4_;
     point_t points_[4];
     void doScale(double k) override;
     bool isConvex() const;
