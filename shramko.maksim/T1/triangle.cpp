@@ -56,8 +56,8 @@ void shramko::Triangle::doScale(double k)
 {
   const point_t center
   {
-    center_.x = (one_.x + two_.x + three_.x) / 3.0,
-    center_.y = (one_.y + two_.y + three_.y) / 3.0
+    (one_.x + two_.x + three_.x) / 3.0,
+    (one_.y + two_.y + three_.y) / 3.0
   };
 
   one_.x = center.x + (one_.x - center.x) * k;
@@ -67,5 +67,5 @@ void shramko::Triangle::doScale(double k)
   two_.y = center.y + (two_.y - center.y) * k;
 
   three_.x = center.x + (three_.x - center.x) * k;
-  three_.y = center.x + (three_.y - center.y) * k;
+  three_.y = center.y + (three_.y - center.y) * k;
 }
