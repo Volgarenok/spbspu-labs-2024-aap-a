@@ -31,6 +31,9 @@ namespace shramko
     points_[1] = b;
     points_[2] = c;
     points_[3] = d;
+
+    center_.x = (a.x + b.x + c.x + d.x) / 4.0;
+    center_.y = (a.y + b.y + c.y + d.y) / 4.0;
   }
 
   double Complexquad::getArea() const
@@ -67,6 +70,9 @@ namespace shramko
     t2_.move(x, y);
     t3_.move(x, y);
     t4_.move(x, y);
+
+    center_.x += x;
+    center_.y += y;
   }
 
   void Complexquad::doScale(double k)
@@ -95,6 +101,9 @@ namespace shramko
       t4_ = new_t4;
 
       std::copy(std::begin(new_points), std::end(new_points), std::begin(points_));
+
+      center_.x = (new_points[0].x + new_points[1].x + new_points[2].x + new_points[3].x) / 4.0;
+      center_.y = (new_points[0].y + new_points[1].y + new_points[2].y + new_points[3].y) / 4.0;
     }
     catch (...)
     {
