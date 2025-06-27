@@ -17,8 +17,7 @@ namespace shramko
     double c3 = cross(points_[2], points_[3], points_[0]);
     double c4 = cross(points_[3], points_[0], points_[1]);
 
-    return (c1 >= 0 && c2 >= 0 && c3 >= 0 && c4 >= 0) ||
-           (c1 <= 0 && c2 <= 0 && c3 <= 0 && c4 <= 0);
+    return (c1 >= 0 && c2 >= 0 && c3 >= 0 && c4 >= 0) || (c1 <= 0 && c2 <= 0 && c3 <= 0 && c4 <= 0);
   }
 
   Complexquad::Complexquad(point_t a, point_t b, point_t c, point_t d)
@@ -33,8 +32,7 @@ namespace shramko
     {
       for (size_t j = i + 1; j < 4; ++j)
       {
-        if (std::abs(points_[i].x - points_[j].x) < eps && 
-            std::abs(points_[i].y - points_[j].y) < eps)
+        if (std::abs(points_[i].x - points_[j].x) < eps && std::abs(points_[i].y - points_[j].y) < eps)
         {
           throw std::invalid_argument("Complexquad has duplicate points");
         }
@@ -53,14 +51,14 @@ namespace shramko
   double Complexquad::getArea() const
   {
     double area1 = 0.5 * std::abs(
-        (points_[0].x * (points_[1].y - points_[2].y)) +
-        (points_[1].x * (points_[2].y - points_[0].y)) +
-        (points_[2].x * (points_[0].y - points_[1].y))
+      (points_[0].x * (points_[1].y - points_[2].y)) +
+      (points_[1].x * (points_[2].y - points_[0].y)) +
+      (points_[2].x * (points_[0].y - points_[1].y))
     );
     double area2 = 0.5 * std::abs(
-        (points_[0].x * (points_[2].y - points_[3].y)) +
-        (points_[2].x * (points_[3].y - points_[0].y)) +
-        (points_[3].x * (points_[0].y - points_[2].y))
+      (points_[0].x * (points_[2].y - points_[3].y)) +
+      (points_[2].x * (points_[3].y - points_[0].y)) +
+      (points_[3].x * (points_[0].y - points_[2].y))
     );
     return area1 + area2;
   }
