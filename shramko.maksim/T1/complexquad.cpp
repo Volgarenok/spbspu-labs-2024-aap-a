@@ -51,10 +51,10 @@ namespace shramko
   double Complexquad::getArea() const
   {
     return 0.5 * std::abs(
-        (points_[0].x * points_[1].y - points_[1].x * points_[0].y) +
-        (points_[1].x * points_[2].y - points_[2].x * points_[1].y) +
-        (points_[2].x * points_[3].y - points_[3].x * points_[2].y) +
-        (points_[3].x * points_[0].y - points_[0].x * points_[3].y)
+      (points_[0].x * points_[1].y - points_[1].x * points_[0].y) +
+      (points_[1].x * points_[2].y - points_[2].x * points_[1].y) +
+      (points_[2].x * points_[3].y - points_[3].x * points_[2].y) +
+      (points_[3].x * points_[0].y - points_[0].x * points_[3].y)
     );
   }
 
