@@ -22,7 +22,7 @@ namespace shramko
     point_t diag2 = {vertices_[3].x - vertices_[2].x, vertices_[3].y - vertices_[2].y};
     double dot = diag1.x * diag2.x + diag1.y * diag2.y;
 
-    if (std::abs(dot) > 1e-6)
+    if (std::abs(dot) > 1e-3)
     {
       throw std::invalid_argument("Diagonals are not perpendicular");
     }

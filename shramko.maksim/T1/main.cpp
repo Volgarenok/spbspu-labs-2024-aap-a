@@ -112,6 +112,14 @@ shramko::Shape* shramko::readShape(std::istream& in, const std::string& name)
         shape = new Diamond{a, b, c};
       }
     }
+    else if (name == "COMPLEXQUAD")
+    {
+      point_t a, b, c, d;
+      if (in >> a.x >> a.y >> b.x >> b.y >> c.x >> c.y >> d.x >> d.y)
+      {
+        shape = new Complexquad{a, b, c, d};
+      }
+    }
     else
     {
       std::string line;
@@ -119,9 +127,9 @@ shramko::Shape* shramko::readShape(std::istream& in, const std::string& name)
       return nullptr;
     }
 
-    if (!shape)
+    if (!shape && (name == "RECTANGLE" || name == "TRIANGLE" || name == "DIAMOND"))
     {
-      throw std::invalid_argument("Invalid shape parameters");
+      throw std::invalid_argument("Invalid parameters for " + name);
     }
   }
   catch (const std::exception& e)
