@@ -118,7 +118,7 @@ shramko::Shape* shramko::readShape(std::istream& in, const std::string& name)
       std::getline(in, line);
       return nullptr;
     }
-    
+
     if (!shape)
     {
       throw std::invalid_argument("Invalid shape parameters");
