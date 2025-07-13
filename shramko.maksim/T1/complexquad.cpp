@@ -20,24 +20,16 @@ namespace shramko
     return (c1 >= -1e-6 && c2 >= -1e-6 && c3 >= -1e-6 && c4 >= -1e-6) || (c1 <= 1e-6 && c2 <= 1e-6 && c3 <= 1e-6 && c4 <= 1e-6);
   }
 
-  Complexquad::Complexquad(point_t a, point_t b, point_t c, point_t d)
+  Complexquad::Complexquad(point_t a, point_t b, point_t c, point_t d):
+    t1_(a, b, c),
+    t2_(c, d, a),
+    t3_(b, c, d),
+    t4_(a, d, b)
   {
     points_[0] = a;
     points_[1] = b;
     points_[2] = c;
     points_[3] = d;
-
-    const double eps = 1e-6;
-    for (size_t i = 0; i < 4; ++i)
-    {
-      for (size_t j = i + 1; j < 4; ++j)
-      {
-        if (std::abs(points_[i].x - points_[j].x) < eps && std::abs(points_[i].y - points_[j].y) < eps)
-        {
-          throw std::invalid_argument("Complexquad has duplicate points");
-        }
-      }
-    }
 
     if (!isConvex())
     {
@@ -50,12 +42,7 @@ namespace shramko
 
   double Complexquad::getArea() const
   {
-    return 0.5 * std::abs(
-      (points_[0].x * points_[1].y - points_[1].x * points_[0].y) +
-      (points_[1].x * points_[2].y - points_[2].x * points_[1].y) +
-      (points_[2].x * points_[3].y - points_[3].x * points_[2].y) +
-      (points_[3].x * points_[0].y - points_[0].x * points_[3].y)
-    );
+    return t1_.getArea() + t2_.getArea() + t3_.getArea() + t4_.getArea();
   }
 
   rectangle_t Complexquad::getFrameRect() const
@@ -83,6 +70,11 @@ namespace shramko
       point.x += x;
       point.y += y;
     }
+    t1_.move(x, y);
+    t2_.move(x, y);
+    t3_.move(x, y);
+    t4_.move(x, y);
+
     center_.x += x;
     center_.y += y;
   }
