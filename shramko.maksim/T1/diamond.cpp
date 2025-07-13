@@ -53,7 +53,7 @@ namespace shramko
     {
       throw std::invalid_argument("First diagonal has zero length");
     }
-    
+
     if (std::hypot(vertices_[2].x - vertices_[3].x, vertices_[2].y - vertices_[3].y) < 1e-6)
     {
       throw std::invalid_argument("Second diagonal has zero length");
