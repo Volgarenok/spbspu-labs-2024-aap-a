@@ -95,52 +95,38 @@ shramko::Shape* shramko::readShape(std::istream& in, const std::string& name)
       {
         shape = new Rectangle{bottom, top};
       }
-      else
-      {
-        throw std::invalid_argument("Rectangle read error");
-      }
     }
     else if (name == "TRIANGLE")
     {
-      point_t one, two, three;
-      if (in >> one.x >> one.y >> two.x >> two.y >> three.x >> three.y)
+      point_t a, b, c;
+      if (in >> a.x >> a.y >> b.x >> b.y >> c.x >> c.y)
       {
-        shape = new Triangle{one, two, three};
-      }
-      else
-      {
-        throw std::invalid_argument("Triangle read error");
+        shape = new Triangle{a, b, c};
       }
     }
     else if (name == "DIAMOND")
     {
-      point_t one, two, three;
-      if (in >> one.x >> one.y >> two.x >> two.y >> three.x >> three.y)
+      point_t a, b, c;
+      if (in >> a.x >> a.y >> b.x >> b.y >> c.x >> c.y)
       {
-        shape = new Diamond{one, two, three};
-      }
-      else
-      {
-        throw std::invalid_argument("Diamond read error");
+        shape = new Diamond{a, b, c};
       }
     }
-    else if (name == "COMPLEXQUAD")
+    else
     {
-      point_t one, two, three, four;
-      if (in >> one.x >> one.y >> two.x >> two.y >> three.x >> three.y >> four.x >> four.y)
-      {
-        shape = new Complexquad{one, two, three, four};
-      }
-      else
-      {
-        throw std::invalid_argument("Complexquad read error");
-      }
+      std::string line;
+      std::getline(in, line);
+      return nullptr;
+    }
+    
+    if (!shape)
+    {
+      throw std::invalid_argument("Invalid shape parameters");
     }
   }
   catch (const std::exception& e)
   {
     delete shape;
-    shape = nullptr;
     throw;
   }
   return shape;

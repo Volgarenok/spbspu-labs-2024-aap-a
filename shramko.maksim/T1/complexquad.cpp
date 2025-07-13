@@ -17,7 +17,19 @@ namespace shramko
     double c3 = cross(points_[2], points_[3], points_[0]);
     double c4 = cross(points_[3], points_[0], points_[1]);
 
-    return (c1 >= -1e-6 && c2 >= -1e-6 && c3 >= -1e-6 && c4 >= -1e-6) || (c1 <= 1e-6 && c2 <= 1e-6 && c3 <= 1e-6 && c4 <= 1e-6);
+    bool has_positive = false;
+    bool has_negative = false;
+
+    if (c1 > 1e-6) has_positive = true;
+    if (c1 < -1e-6) has_negative = true;
+    if (c2 > 1e-6) has_positive = true;
+    if (c2 < -1e-6) has_negative = true;
+    if (c3 > 1e-6) has_positive = true;
+    if (c3 < -1e-6) has_negative = true;
+    if (c4 > 1e-6) has_positive = true;
+    if (c4 < -1e-6) has_negative = true;
+
+    return !(has_positive && has_negative);
   }
 
   Complexquad::Complexquad(point_t a, point_t b, point_t c, point_t d):

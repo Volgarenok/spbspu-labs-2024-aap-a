@@ -18,10 +18,8 @@ namespace shramko
     static const size_t TRIANGLE_COUNT = 8;
     Triangle** triangles_;
     point_t vertices_[4];
-    point_t center_;
     void doScale(double k) override;
     point_t midpoint(const point_t& a, const point_t& b) const;
-    bool areDiagonalsPerpendicular() const;
   };
 }
 
