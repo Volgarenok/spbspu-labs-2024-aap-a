@@ -26,6 +26,39 @@ namespace shramko
     vertices_[2] = three;
     vertices_[3] = {2 * center_.x - three.x, 2 * center_.y - three.y};
 
+    bool diag1_horiz = std::abs(vertices_[0].y - vertices_[1].y) < 1e-6;
+    bool diag1_vert = std::abs(vertices_[0].x - vertices_[1].x) < 1e-6;
+
+    if (!diag1_horiz && !diag1_vert)
+    {
+      throw std::invalid_argument("Diamond diagonals not aligned with axes");
+    }
+
+    if (diag1_horiz)
+    {
+      if (std::abs(vertices_[2].x - vertices_[3].x) > 1e-6)
+      {
+        throw std::invalid_argument("Second diagonal not vertical");
+      }
+    }
+    else
+    {
+      if (std::abs(vertices_[2].y - vertices_[3].y) > 1e-6)
+      {
+        throw std::invalid_argument("Second diagonal not horizontal");
+      }
+    }
+
+    if (std::hypot(vertices_[0].x - vertices_[1].x, vertices_[0].y - vertices_[1].y) < 1e-6)
+    {
+      throw std::invalid_argument("First diagonal has zero length");
+    }
+    
+    if (std::hypot(vertices_[2].x - vertices_[3].x, vertices_[2].y - vertices_[3].y) < 1e-6)
+    {
+      throw std::invalid_argument("Second diagonal has zero length");
+    }
+
     triangles_ = new Triangle*[TRIANGLE_COUNT]();
     try
     {

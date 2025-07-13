@@ -22,9 +22,7 @@ namespace shramko
 
   Complexquad::Complexquad(point_t a, point_t b, point_t c, point_t d):
     t1_(a, b, c),
-    t2_(c, d, a),
-    t3_(b, c, d),
-    t4_(a, d, b)
+    t2_(a, c, d)
   {
     points_[0] = a;
     points_[1] = b;
@@ -42,7 +40,7 @@ namespace shramko
 
   double Complexquad::getArea() const
   {
-    return t1_.getArea() + t2_.getArea() + t3_.getArea() + t4_.getArea();
+    return t1_.getArea() + t2_.getArea();
   }
 
   rectangle_t Complexquad::getFrameRect() const
@@ -72,9 +70,6 @@ namespace shramko
     }
     t1_.move(x, y);
     t2_.move(x, y);
-    t3_.move(x, y);
-    t4_.move(x, y);
-
     center_.x += x;
     center_.y += y;
   }
@@ -87,6 +82,16 @@ namespace shramko
     {
       point.x = center.x + (point.x - center.x) * k;
       point.y = center.y + (point.y - center.y) * k;
+    }
+
+    try
+    {
+      t1_ = Triangle(points_[0], points_[1], points_[2]);
+      t2_ = Triangle(points_[0], points_[2], points_[3]);
+    }
+    catch (...)
+    {
+      throw;
     }
 
     center_.x = (points_[0].x + points_[1].x + points_[2].x + points_[3].x) / 4.0;
