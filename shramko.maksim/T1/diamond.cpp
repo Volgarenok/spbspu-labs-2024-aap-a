@@ -5,13 +5,10 @@
 
 namespace shramko
 {
-  Diamond::Diamond(point_t one, point_t two, point_t three) : center_(two)
+  Diamond::Diamond(point_t one, point_t two, point_t three) : 
+    center_(two),
+    vertices_({{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}}})
   {
-    for (auto& vertex : vertices_)
-    {
-      vertex = {0.0, 0.0};
-    }
-
     vertices_[0] = one;
     vertices_[1] = three;
     vertices_[2] = {2 * two.x - one.x, 2 * two.y - one.y};
@@ -73,10 +70,10 @@ namespace shramko
 
     for (size_t i = 1; i < 4; ++i)
     {
-      x_min = std::min(x_min, vertices_[i].x);
-      x_max = std::max(x_max, vertices_[i].x);
-      y_min = std::min(y_min, vertices_[i].y);
-      y_max = std::max(y_max, vertices_[i].y);
+      if (vertices_[i].x < x_min) x_min = vertices_[i].x;
+      if (vertices_[i].x > x_max) x_max = vertices_[i].x;
+      if (vertices_[i].y < y_min) y_min = vertices_[i].y;
+      if (vertices_[i].y > y_max) y_max = vertices_[i].y;
     }
 
     return {x_max - x_min, y_max - y_min, {(x_min + x_max)/2, (y_min + y_max)/2}};
@@ -101,8 +98,7 @@ namespace shramko
 
   void Diamond::doScale(double k)
   {
-    point_t old_vertices[4];
-    std::copy(std::begin(vertices_), std::end(vertices_), std::begin(old_vertices));
+    std::array<point_t, 4> old_vertices = vertices_;
 
     try
     {
@@ -119,7 +115,7 @@ namespace shramko
     }
     catch (...)
     {
-      std::copy(std::begin(old_vertices), std::end(old_vertices), std::begin(vertices_));
+      vertices_ = old_vertices;
       throw;
     }
   }

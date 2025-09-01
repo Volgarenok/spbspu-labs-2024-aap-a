@@ -3,6 +3,7 @@
 
 #include "shape.hpp"
 #include "triangle.hpp"
+#include <array>
 
 namespace shramko
 {
@@ -17,7 +18,7 @@ namespace shramko
   private:
     static const size_t TRIANGLE_COUNT = 4;
     Triangle** triangles_;
-    point_t vertices_[4];
+    std::array< point_t, 4 > vertices_;
     point_t center_;
     void doScale(double k) override;
   };
