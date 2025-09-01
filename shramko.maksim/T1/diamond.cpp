@@ -5,14 +5,9 @@
 
 namespace shramko
 {
-  point_t Diamond::midpoint(const point_t& a, const point_t& b) const
-  {
-    return {(a.x + b.x) / 2.0, (a.y + b.y) / 2.0};
-  }
-
   Diamond::Diamond(point_t one, point_t two, point_t three)
   {
-    center_ = midpoint(one, two);
+    center_ = {(one.x + two.x) / 2.0, (one.y + two.y) / 2.0};
     vertices_[0] = one;
     vertices_[1] = two;
     vertices_[2] = three;
@@ -26,49 +21,13 @@ namespace shramko
     {
       throw std::invalid_argument("Diagonals are not perpendicular");
     }
-
-    triangles_ = new Triangle*[TRIANGLE_COUNT]();
-    try
-    {
-      point_t mid01 = midpoint(vertices_[0], vertices_[1]);
-      point_t mid12 = midpoint(vertices_[1], vertices_[2]);
-      point_t mid23 = midpoint(vertices_[2], vertices_[3]);
-      point_t mid30 = midpoint(vertices_[3], vertices_[0]);
-
-      triangles_[0] = new Triangle(vertices_[0], mid01, center_);
-      triangles_[1] = new Triangle(mid01, vertices_[1], center_);
-      triangles_[2] = new Triangle(vertices_[1], mid12, center_);
-      triangles_[3] = new Triangle(mid12, vertices_[2], center_);
-      triangles_[4] = new Triangle(vertices_[2], mid23, center_);
-      triangles_[5] = new Triangle(mid23, vertices_[3], center_);
-      triangles_[6] = new Triangle(vertices_[3], mid30, center_);
-      triangles_[7] = new Triangle(mid30, vertices_[0], center_);
-    }
-    catch (...)
-    {
-      for (size_t i = 0; i < TRIANGLE_COUNT; ++i)
-      {
-        delete triangles_[i];
-      }
-      delete[] triangles_;
-      throw;
-    }
-  }
-
-  Diamond::~Diamond()
-  {
-    for (size_t i = 0; i < TRIANGLE_COUNT; ++i) delete triangles_[i];
-    delete[] triangles_;
   }
 
   double Diamond::getArea() const
   {
-    double area = 0.0;
-    for (size_t i = 0; i < TRIANGLE_COUNT; ++i)
-    {
-      area += triangles_[i]->getArea();
-    }
-    return area;
+    double diag1 = distance(vertices_[0], vertices_[1]);
+    double diag2 = distance(vertices_[2], vertices_[3]);
+    return (diag1 * diag2) / 2.0;
   }
 
   rectangle_t Diamond::getFrameRect() const
@@ -91,50 +50,21 @@ namespace shramko
 
   void Diamond::move(double x, double y)
   {
-    for (size_t i = 0; i < TRIANGLE_COUNT; ++i)
-    {
-      triangles_[i]->move(x, y);
-    }
-    center_.x += x;
-    center_.y += y;
     for (auto& vertex : vertices_)
     {
       vertex.x += x;
       vertex.y += y;
     }
+    center_.x += x;
+    center_.y += y;
   }
 
   void Diamond::doScale(double k)
   {
-    point_t old_vertices[4];
-    std::copy(std::begin(vertices_), std::end(vertices_), std::begin(old_vertices));
-
-    try
+    for (auto& vertex : vertices_)
     {
-      for (auto& vertex : vertices_)
-      {
-        vertex.x = center_.x + (vertex.x - center_.x) * k;
-        vertex.y = center_.y + (vertex.y - center_.y) * k;
-      }
-
-      point_t mid01 = midpoint(vertices_[0], vertices_[1]);
-      point_t mid12 = midpoint(vertices_[1], vertices_[2]);
-      point_t mid23 = midpoint(vertices_[2], vertices_[3]);
-      point_t mid30 = midpoint(vertices_[3], vertices_[0]);
-
-      *triangles_[0] = Triangle(vertices_[0], mid01, center_);
-      *triangles_[1] = Triangle(mid01, vertices_[1], center_);
-      *triangles_[2] = Triangle(vertices_[1], mid12, center_);
-      *triangles_[3] = Triangle(mid12, vertices_[2], center_);
-      *triangles_[4] = Triangle(vertices_[2], mid23, center_);
-      *triangles_[5] = Triangle(mid23, vertices_[3], center_);
-      *triangles_[6] = Triangle(vertices_[3], mid30, center_);
-      *triangles_[7] = Triangle(mid30, vertices_[0], center_);
-    }
-    catch (...)
-    {
-      std::copy(std::begin(old_vertices), std::end(old_vertices), std::begin(vertices_));
-      throw;
+      vertex.x = center_.x + (vertex.x - center_.x) * k;
+      vertex.y = center_.y + (vertex.y - center_.y) * k;
     }
   }
 }
