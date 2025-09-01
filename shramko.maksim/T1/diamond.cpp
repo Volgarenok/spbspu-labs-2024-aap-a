@@ -5,7 +5,7 @@
 
 namespace shramko
 {
-  Diamond::Diamond(point_t one, point_t two, point_t three) : 
+  Diamond::Diamond(point_t one, point_t two, point_t three) :
     center_(two),
     vertices_({{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}}})
   {
