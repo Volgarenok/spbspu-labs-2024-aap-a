@@ -42,7 +42,7 @@ namespace shramko
 
   Diamond::~Diamond()
   {
-    for (size_t i = 0; i < TRIANGLE_COUNT; ++i) 
+    for (size_t i = 0; i < TRIANGLE_COUNT; ++i)
     {
       delete triangles_[i];
     }
