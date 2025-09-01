@@ -5,19 +5,31 @@
 
 namespace shramko
 {
-  namespace
+  bool Complexquad::isConvex() const
   {
-    point_t intersect(const point_t& a, const point_t& b, const point_t& c, const point_t& d)
+    auto cross = [](const point_t& a, const point_t& b, const point_t& c)
     {
-      double denom = (a.x - b.x) * (c.y - d.y) - (a.y - b.y) * (c.x - d.x);
-      if (std::abs(denom) < 1e-10)
-      {
-        throw std::invalid_argument("Diagonals are parallel");
-      }
-      double x = ((a.x * b.y - a.y * b.x) * (c.x - d.x) - (a.x - b.x) * (c.x * d.y - c.y * d.x)) / denom;
-      double y = ((a.x * b.y - a.y * b.x) * (c.y - d.y) - (a.y - b.y) * (c.x * d.y - c.y * d.x)) / denom;
-      return {x, y};
-    }
+      return (b.x - a.x) * (c.y - b.y) - (b.y - a.y) * (c.x - b.x);
+    };
+
+    double c1 = cross(points_[0], points_[1], points_[2]);
+    double c2 = cross(points_[1], points_[2], points_[3]);
+    double c3 = cross(points_[2], points_[3], points_[0]);
+    double c4 = cross(points_[3], points_[0], points_[1]);
+
+    bool has_positive = false;
+    bool has_negative = false;
+
+    if (c1 > 1e-6) has_positive = true;
+    if (c1 < -1e-6) has_negative = true;
+    if (c2 > 1e-6) has_positive = true;
+    if (c2 < -1e-6) has_negative = true;
+    if (c3 > 1e-6) has_positive = true;
+    if (c3 < -1e-6) has_negative = true;
+    if (c4 > 1e-6) has_positive = true;
+    if (c4 < -1e-6) has_negative = true;
+
+    return !(has_positive && has_negative);
   }
 
   Complexquad::Complexquad(point_t a, point_t b, point_t c, point_t d):
@@ -29,14 +41,13 @@ namespace shramko
     points_[2] = c;
     points_[3] = d;
 
-    try
+    if (!isConvex())
     {
-      center_ = intersect(a, c, b, d);
+      throw std::invalid_argument("Complexquad is not convex");
     }
-    catch (const std::invalid_argument& e)
-    {
-      throw std::invalid_argument("Complexquad is not valid: " + std::string(e.what()));
-    }
+
+    center_.x = (a.x + b.x + c.x + d.x) / 4.0;
+    center_.y = (a.y + b.y + c.y + d.y) / 4.0;
   }
 
   double Complexquad::getArea() const
@@ -77,13 +88,25 @@ namespace shramko
 
   void Complexquad::doScale(double k)
   {
+    const point_t center = getFrameRect().pos;
+
     for (auto& point : points_)
     {
-      point.x = center_.x + (point.x - center_.x) * k;
-      point.y = center_.y + (point.y - center_.y) * k;
+      point.x = center.x + (point.x - center.x) * k;
+      point.y = center.y + (point.y - center.y) * k;
     }
 
-    t1_ = Triangle(points_[0], points_[1], points_[2]);
-    t2_ = Triangle(points_[0], points_[2], points_[3]);
+    try
+    {
+      t1_ = Triangle(points_[0], points_[1], points_[2]);
+      t2_ = Triangle(points_[0], points_[2], points_[3]);
+    }
+    catch (...)
+    {
+      throw;
+    }
+
+    center_.x = (points_[0].x + points_[1].x + points_[2].x + points_[3].x) / 4.0;
+    center_.y = (points_[0].y + points_[1].y + points_[2].y + points_[3].y) / 4.0;
   }
 }

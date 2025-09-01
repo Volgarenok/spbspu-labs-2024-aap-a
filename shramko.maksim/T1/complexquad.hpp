@@ -17,7 +17,7 @@ namespace shramko
     Triangle t1_, t2_;
     point_t points_[4];
     void doScale(double k) override;
-    point_t center_;
+    bool isConvex() const;
   };
 }
 
