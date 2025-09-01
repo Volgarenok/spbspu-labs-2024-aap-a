@@ -5,9 +5,10 @@
 
 namespace shramko
 {
-  Diamond::Diamond(point_t one, point_t two, point_t three) :
+  Diamond::Diamond(point_t one, point_t two, point_t three):
+    vertices_({{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}}}),
     center_(two),
-    vertices_({{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}}})
+    triangles_(nullptr)
   {
     vertices_[0] = one;
     vertices_[1] = three;
