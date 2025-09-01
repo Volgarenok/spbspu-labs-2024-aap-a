@@ -18,7 +18,6 @@ namespace shramko
   private:
     static const size_t TRIANGLE_COUNT = 4;
     std::array<point_t, 4> vertices_;
-    point_t center_;
     Triangle** triangles_;
     void doScale(double k) override;
   };

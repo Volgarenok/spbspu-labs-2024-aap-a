@@ -7,7 +7,6 @@ namespace shramko
 {
   Diamond::Diamond(point_t one, point_t two, point_t three):
     vertices_({{{0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}, {0.0, 0.0}}}),
-    center_(two),
     triangles_(nullptr)
   {
     vertices_[0] = one;
@@ -23,6 +22,9 @@ namespace shramko
     {
       throw std::invalid_argument("Diagonals are not perpendicular");
     }
+
+    center_.x = two.x;
+    center_.y = two.y;
 
     triangles_ = new Triangle*[TRIANGLE_COUNT]();
     try
