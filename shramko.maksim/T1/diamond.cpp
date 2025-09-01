@@ -5,8 +5,13 @@
 
 namespace shramko
 {
-  Diamond::Diamond(point_t one, point_t two, point_t three): center_(two)
+  Diamond::Diamond(point_t one, point_t two, point_t three) : center_(two)
   {
+    for (auto& vertex : vertices_)
+    {
+      vertex = {0.0, 0.0};
+    }
+
     vertices_[0] = one;
     vertices_[1] = three;
     vertices_[2] = {2 * two.x - one.x, 2 * two.y - one.y};
@@ -66,12 +71,12 @@ namespace shramko
     double y_min = vertices_[0].y;
     double y_max = vertices_[0].y;
 
-    for (const auto& vertex : vertices_)
+    for (size_t i = 1; i < 4; ++i)
     {
-      x_min = std::min(x_min, vertex.x);
-      x_max = std::max(x_max, vertex.x);
-      y_min = std::min(y_min, vertex.y);
-      y_max = std::max(y_max, vertex.y);
+      x_min = std::min(x_min, vertices_[i].x);
+      x_max = std::max(x_max, vertices_[i].x);
+      y_min = std::min(y_min, vertices_[i].y);
+      y_max = std::max(y_max, vertices_[i].y);
     }
 
     return {x_max - x_min, y_max - y_min, {(x_min + x_max)/2, (y_min + y_max)/2}};
@@ -96,15 +101,26 @@ namespace shramko
 
   void Diamond::doScale(double k)
   {
-    for (auto& vertex : vertices_)
-    {
-      vertex.x = center_.x + (vertex.x - center_.x) * k;
-      vertex.y = center_.y + (vertex.y - center_.y) * k;
-    }
+    point_t old_vertices[4];
+    std::copy(std::begin(vertices_), std::end(vertices_), std::begin(old_vertices));
 
-    *triangles_[0] = Triangle(center_, vertices_[0], vertices_[1]);
-    *triangles_[1] = Triangle(center_, vertices_[1], vertices_[2]);
-    *triangles_[2] = Triangle(center_, vertices_[2], vertices_[3]);
-    *triangles_[3] = Triangle(center_, vertices_[3], vertices_[0]);
+    try
+    {
+      for (auto& vertex : vertices_)
+      {
+        vertex.x = center_.x + (vertex.x - center_.x) * k;
+        vertex.y = center_.y + (vertex.y - center_.y) * k;
+      }
+
+      *triangles_[0] = Triangle(center_, vertices_[0], vertices_[1]);
+      *triangles_[1] = Triangle(center_, vertices_[1], vertices_[2]);
+      *triangles_[2] = Triangle(center_, vertices_[2], vertices_[3]);
+      *triangles_[3] = Triangle(center_, vertices_[3], vertices_[0]);
+    }
+    catch (...)
+    {
+      std::copy(std::begin(old_vertices), std::end(old_vertices), std::begin(vertices_));
+      throw;
+    }
   }
 }
