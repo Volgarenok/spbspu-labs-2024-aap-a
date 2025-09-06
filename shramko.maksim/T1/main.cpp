@@ -12,7 +12,7 @@ namespace shramko
   Shape* readShape(std::istream& in, const std::string& name);
   void printRectangleShapes(Shape** shapes, size_t size);
   void scaleShapes(Shape** shapes, size_t size, double k, point_t center);
-  double totalArea (Shape** shapes, size_t size);
+  double totalArea(Shape** shapes, size_t size);
   void destroyShapes(Shape** shapes, size_t size);
 }
 
@@ -183,7 +183,6 @@ double shramko::totalArea(Shape** shapes, size_t size)
   {
     total_area += shapes[i]->getArea();
   }
-
   return total_area;
 }
 

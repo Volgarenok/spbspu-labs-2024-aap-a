@@ -1,7 +1,6 @@
 #include "diamond.hpp"
 #include <stdexcept>
 #include <cmath>
-#include <algorithm>
 
 namespace shramko
 {
@@ -66,51 +65,24 @@ namespace shramko
 
   rectangle_t Diamond::getFrameRect() const
   {
-    double x_min = vertices_[0].x;
-    double x_max = vertices_[0].x;
-    double y_min = vertices_[0].y;
-    double y_max = vertices_[0].y;
-
-    for (size_t i = 1; i < 4; ++i)
-    {
-      if (vertices_[i].x < x_min) x_min = vertices_[i].x;
-      if (vertices_[i].x > x_max) x_max = vertices_[i].x;
-      if (vertices_[i].y < y_min) y_min = vertices_[i].y;
-      if (vertices_[i].y > y_max) y_max = vertices_[i].y;
-    }
-
-    return {x_max - x_min, y_max - y_min, {(x_min + x_max)/2, (y_min + y_max)/2}};
+    return calculateFrameRect(vertices_.data(), vertices_.size());
   }
 
   void Diamond::move(double x, double y)
   {
+    movePoints(vertices_.data(), vertices_.size(), x, y);
     for (size_t i = 0; i < TRIANGLE_COUNT; ++i)
     {
       triangles_[i]->move(x, y);
-    }
-
-    center_.x += x;
-    center_.y += y;
-
-    for (auto& vertex : vertices_)
-    {
-      vertex.x += x;
-      vertex.y += y;
     }
   }
 
   void Diamond::doScale(double k)
   {
     std::array<point_t, 4> old_vertices = vertices_;
-
     try
     {
-      for (auto& vertex : vertices_)
-      {
-        vertex.x = center_.x + (vertex.x - center_.x) * k;
-        vertex.y = center_.y + (vertex.y - center_.y) * k;
-      }
-
+      scalePoints(vertices_.data(), vertices_.size(), k, center_);
       *triangles_[0] = Triangle(center_, vertices_[0], vertices_[1]);
       *triangles_[1] = Triangle(center_, vertices_[1], vertices_[2]);
       *triangles_[2] = Triangle(center_, vertices_[2], vertices_[3]);

@@ -2,6 +2,7 @@
 #define SHAPE_HPP
 
 #include "base-types.hpp"
+#include <stdexcept>
 
 namespace shramko
 {
@@ -29,6 +30,24 @@ namespace shramko
   protected:
     point_t center_;
     virtual void doScale(double k) = 0;
+    void movePoints(point_t* points, size_t count, double x, double y)
+    {
+      for (size_t i = 0; i < count; ++i)
+      {
+        points[i].x += x;
+        points[i].y += y;
+      }
+      center_.x += x;
+      center_.y += y;
+    }
+    void scalePoints(point_t* points, size_t count, double k, const point_t& center)
+    {
+      for (size_t i = 0; i < count; ++i)
+      {
+        points[i].x = center.x + (points[i].x - center.x) * k;
+        points[i].y = center.y + (points[i].y - center.y) * k;
+      }
+    }
   };
 }
 

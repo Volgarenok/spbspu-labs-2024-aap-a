@@ -1,7 +1,6 @@
 #include "complexquad.hpp"
 #include <stdexcept>
 #include <cmath>
-#include <algorithm>
 
 namespace shramko
 {
@@ -57,45 +56,19 @@ namespace shramko
 
   rectangle_t Complexquad::getFrameRect() const
   {
-    double x_min = points_[0].x;
-    double x_max = points_[0].x;
-    double y_min = points_[0].y;
-    double y_max = points_[0].y;
-
-    for (const auto& point : points_)
-    {
-      x_min = std::min(x_min, point.x);
-      x_max = std::max(x_max, point.x);
-      y_min = std::min(y_min, point.y);
-      y_max = std::max(y_max, point.y);
-    }
-
-    return {x_max - x_min, y_max - y_min, {(x_min + x_max)/2, (y_min + y_max)/2}};
+    return calculateFrameRect(points_, 4);
   }
 
   void Complexquad::move(double x, double y)
   {
-    for (auto& point : points_)
-    {
-      point.x += x;
-      point.y += y;
-    }
+    movePoints(points_, 4, x, y);
     t1_.move(x, y);
     t2_.move(x, y);
-    center_.x += x;
-    center_.y += y;
   }
 
   void Complexquad::doScale(double k)
   {
-    const point_t center = getFrameRect().pos;
-
-    for (auto& point : points_)
-    {
-      point.x = center.x + (point.x - center.x) * k;
-      point.y = center.y + (point.y - center.y) * k;
-    }
-
+    scalePoints(points_, 4, k, center_);
     try
     {
       t1_ = Triangle(points_[0], points_[1], points_[2]);
@@ -105,7 +78,6 @@ namespace shramko
     {
       throw;
     }
-
     center_.x = (points_[0].x + points_[1].x + points_[2].x + points_[3].x) / 4.0;
     center_.y = (points_[0].y + points_[1].y + points_[2].y + points_[3].y) / 4.0;
   }

@@ -17,7 +17,7 @@ namespace shramko
     void move(double x, double y) override;
   private:
     static const size_t TRIANGLE_COUNT = 4;
-    std::array<point_t, 4> vertices_;
+    std::array< point_t, 4 > vertices_;
     Triangle** triangles_;
     void doScale(double k) override;
   };
