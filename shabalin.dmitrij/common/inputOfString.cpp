@@ -1,4 +1,4 @@
-#include "inputOfString.h"
+#include "inputOfString.hpp"
 
 char *shabalin::inputOfString(std::istream &input, char end)
 {
@@ -43,3 +43,4 @@ char *shabalin::inputOfString(std::istream &input, char end)
   initialString[index] = '\0';
   return initialString;
 }
+

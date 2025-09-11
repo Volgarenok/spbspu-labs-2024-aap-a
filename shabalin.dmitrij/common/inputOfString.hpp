@@ -1,6 +1,5 @@
-#ifndef INPUTOFSTRING_H
-#define INPUTOFSTRING_H
-#include <cstddef>
+#ifndef INPUTOFSTRING_HPP
+#define INPUTOFSTRING_HPP
 #include <iostream>
 
 namespace shabalin
@@ -9,3 +8,4 @@ namespace shabalin
 }
 
 #endif
+
