@@ -32,28 +32,60 @@ double guseynov::Square::getArea() const
 
 guseynov::rectangle_t guseynov::Square::getFrameRect() const
 {
-  return {length_, length_, {leftLowP_.x + (length_ / 2), leftLowP_.y + (length_ / 2)}};
-}
-
-void guseynov::Square::move(double x, double y)
-{
-  for (size_t i = 0; i < n_; i++)
+  if (n_ == 0)
+    return {0, 0, {0, 0}};
+  rectangle_t firstRect = rectangleArray_[0]->getFrameRect();
+  double minX = firstRect.pos.x - firstRect.width / 2;
+  double maxX = firstRect.pos.x + firstRect.width / 2;
+  double minY = firstRect.pos.y - firstRect.height / 2;
+  double maxY = firstRect.pos.y + firstRect.height / 2;
+  for (size_t i = 1; i < n_; i++)
   {
     if (rectangleArray_[i] != nullptr)
     {
-      rectangleArray_[i]->move(x, y);
+      rectangle_t rect = rectangleArray_[i]->getFrameRect();
+      double rectMinX = rect.pos.x - rect.width / 2;
+      double rectMaxX = rect.pos.x + rect.width / 2;
+      double rectMinY = rect.pos.y - rect.height / 2;
+      double rectMaxY = rect.pos.y + rect.height / 2;
+      minX = std::min(minX, rectMinX);
+      maxX = std::max(maxX, rectMaxX);
+      minY = std::min(minY, rectMinY);
+      maxY = std::max(maxY, rectMaxY);
     }
   }
+  return {maxX - minX, maxY - minY, {(minX + maxX) / 2, (minY + maxY) / 2}};
 }
 
 void guseynov::Square::move(point_t newPos)
 {
   if (n_ == 0 || rectangleArray_[0] == nullptr)
     return;
-  point_t currentPos = rectangleArray_[0]->getFrameRect().pos;
-  double dx = newPos.x - currentPos.x;
-  double dy = newPos.y - currentPos.y;
-  move(dx, dy);
+  rectangle_t currentFrame = getFrameRect();
+  double dx = newPos.x - currentFrame.pos.x;
+  double dy = newPos.y - currentFrame.pos.y;
+  for (size_t i = 0; i < n_; i++)
+  {
+    if (rectangleArray_[i] != nullptr)
+    {
+      rectangleArray_[i]->move(dx, dy);
+    }
+  }
+  leftLowP_.x += dx;
+  leftLowP_.y += dy;
+}
+
+void guseynov::Square::move(double dx, double dy)
+{
+  for (size_t i = 0; i < n_; i++)
+  {
+    if (rectangleArray_[i] != nullptr)
+    {
+      rectangleArray_[i]->move(dx, dy);
+    }
+  }
+  leftLowP_.x += dx;
+  leftLowP_.y += dy;
 }
 
 void guseynov::Square::scaleWithoutCheck(double k)
@@ -75,6 +107,7 @@ void guseynov::Square::scaleWithoutCheck(double k)
       rectangleArray_[i]->move(newPos);
     }
   }
+  length_ *= k;
 }
 
 guseynov::Shape * guseynov::Square::clone() const
