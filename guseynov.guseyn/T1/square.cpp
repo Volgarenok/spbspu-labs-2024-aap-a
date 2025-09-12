@@ -35,18 +35,18 @@ guseynov::rectangle_t guseynov::Square::getFrameRect() const
   return {length_, length_, {leftLowP_.x + (length_ / 2), leftLowP_.y + (length_ / 2)}};
 }
 
-void guseynov::Square::move(double dx, double dy)
+void guseynov::Square::move(double x, double y)
 {
   for (size_t i = 0; i < n_; i++)
   {
     if (rectangleArray_[i] != nullptr)
     {
-      rectangleArray_[i]->move(dx, dy);
+      rectangleArray_[i]->move(x, y);
     }
   }
 }
 
-void guseynov::Square::move(const point_t& newPos)
+void guseynov::Square::move(point_t newPos)
 {
   if (n_ == 0 || rectangleArray_[0] == nullptr)
     return;

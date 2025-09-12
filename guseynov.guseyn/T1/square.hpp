@@ -15,7 +15,7 @@ namespace guseynov
     ~Square() override;
     double getArea() const override;
     rectangle_t getFrameRect() const override;
-    void move(point_t pos) override;
+    void move(point_t newPos) override;
     void move(double x, double y) override;
     void scaleWithoutCheck(double k) override;
     Shape * clone() const override;
