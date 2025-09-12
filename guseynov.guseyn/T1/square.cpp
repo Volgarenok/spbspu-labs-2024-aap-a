@@ -35,34 +35,38 @@ guseynov::rectangle_t guseynov::Square::getFrameRect() const
   return {length_, length_, {leftLowP_.x + (length_ / 2), leftLowP_.y + (length_ / 2)}};
 }
 
-void guseynov::Square::move(point_t pos)
+void guseynov::Square::move(double dx, double dy)
 {
-  assigment({pos.x - (length_ / 2), pos.y - (length_ / 2)});
+  for (size_t i = 0; i < n_; i++)
+  {
+    if (rectangleArray_[i] != nullptr)
+    {
+      rectangleArray_[i]->move(dx, dy);
+    }
+  }
 }
 
-void guseynov::Square::move(double x, double y)
+void guseynov::Square::move(const point_t& newPos)
 {
-  assigment({leftLowP_.x + x, leftLowP_.y + y});
+  if (n_ == 0 || rectangleArray_[0] == nullptr)
+    return;
+  point_t currentPos = rectangleArray_[0]->getFrameRect().pos;
+  double dx = newPos.x - currentPos.x;
+  double dy = newPos.y - currentPos.y;
+  move(dx, dy);
 }
 
-void guseynov::Square::scaleWithoutCheck(double k)
+void guseynov::Square::scaleWithoutCheck(double coefficient)
 {
-  assigment({leftLowP_.x - (length_ * k - length_) / 2, leftLowP_.y - (length_ * k - length_) / 2}, length_ * k);
-}
-
-void guseynov::Square::assigment(point_t leftLowP)
-{
-  leftLowP_ = leftLowP;
-  clear(n_);
-  createArrayRectangle(leftLowP, length_, n_, 0);
-}
-
-void guseynov::Square::assigment(point_t leftLowP, double length)
-{
-  leftLowP_ = leftLowP;
-  length_ = length;
-  clear(n_);
-  createArrayRectangle(leftLowP, length_, n_, 0);
+  point_t center = rectangleArray_[0]->getFrameRect().pos;
+  for (size_t i = 0; i < n_; i++)
+  {
+    rectangleArray_[i]->scale(coefficient);
+    point_t currentPos = rectangleArray_[i]->getFrameRect().pos;
+    double dx = (currentPos.x - center.x) * coefficient;
+    double dy = (currentPos.y - center.y) * coefficient;
+    rectangleArray_[i]->move({center.x + dx, center.y + dy});
+  }
 }
 
 guseynov::Shape * guseynov::Square::clone() const
