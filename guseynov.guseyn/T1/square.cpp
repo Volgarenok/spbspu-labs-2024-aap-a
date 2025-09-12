@@ -56,16 +56,24 @@ void guseynov::Square::move(point_t newPos)
   move(dx, dy);
 }
 
-void guseynov::Square::scaleWithoutCheck(double coefficient)
+void guseynov::Square::scaleWithoutCheck(double k)
 {
-  point_t center = rectangleArray_[0]->getFrameRect().pos;
+  if (n_ == 0 || rectangleArray_[0] == nullptr)
+    return;
+  point_t center = getFrameRect().pos;
   for (size_t i = 0; i < n_; i++)
   {
-    rectangleArray_[i]->scale(coefficient);
-    point_t currentPos = rectangleArray_[i]->getFrameRect().pos;
-    double dx = (currentPos.x - center.x) * coefficient;
-    double dy = (currentPos.y - center.y) * coefficient;
-    rectangleArray_[i]->move({center.x + dx, center.y + dy});
+    if (rectangleArray_[i] != nullptr)
+    {
+      point_t currentPos = rectangleArray_[i]->getFrameRect().pos;
+      double dx = currentPos.x - center.x;
+      double dy = currentPos.y - center.y;
+      dx *= k;
+      dy *= k;
+      point_t newPos = {center.x + dx, center.y + dy};
+      rectangleArray_[i]->scale(k);
+      rectangleArray_[i]->move(newPos);
+    }
   }
 }
 
