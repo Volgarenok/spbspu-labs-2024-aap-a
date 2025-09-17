@@ -10,16 +10,6 @@
 
 namespace
 {
-  void rakirovka(double& x, double& x2, double& y, double& y2)
-  {
-    double timeX, timeY;
-    timeX = x2;
-    x2 = x;
-    x = timeX;
-    timeY = y2;
-    y2 = y;
-    y = timeY;
-  }
   guseynov::Shape* makeShape(std::istream & in, const std::string & name);
 }
 
@@ -141,50 +131,7 @@ namespace
     constexpr size_t numberOfCoordinates = 3;
     point_t coordinates[numberOfCoordinates] = {};
     inputArray(in, coordinates, numberOfCoordinates);
-    if (coordinates[0].x == coordinates[1].x)
-    {
-     if (coordinates[0].y > coordinates[1].y)
-      {
-        rakirovka(coordinates[1].x, coordinates[2].x, coordinates[1].y, coordinates[2].y);
-      }
-      else if (coordinates[1].y > coordinates[0].y)
-      {
-        rakirovka(coordinates[1].x, coordinates[2].x, coordinates[1].y, coordinates[2].y);
-        rakirovka(coordinates[0].x, coordinates[2].x, coordinates[0].y, coordinates[2].y);
-      }
-      else
-      {
-        throw std::invalid_argument("Diamond parametrs is incorrect");
-      }
-    }
-    else if (coordinates[1].x == coordinates[2].x)
-    {
-      if (coordinates[1].y > coordinates[2].y)
-      {
-        rakirovka(coordinates[0].x, coordinates[1].x, coordinates[0].y, coordinates[1].y);
-      }
-      else if (coordinates[2].y > coordinates[1].y)
-      {
-        rakirovka(coordinates[1].x, coordinates[2].x, coordinates[1].y, coordinates[2].y);
-        rakirovka(coordinates[0].x, coordinates[1].x, coordinates[0].y, coordinates[1].y);
-      }
-      else
-      {
-        throw std::invalid_argument("Diamond parametrs is incorrect");
-      }
-    }
-    else if (coordinates[0].x != coordinates[2].x)
-    {
-      throw std::invalid_argument("Diamond parametrs is incorrect");
-    }
-    point_t highP, rightP, center;
-    highP.x = coordinates[0].x;
-    highP.y = coordinates[0].y;
-    rightP.x = coordinates[1].x;
-    rightP.y = coordinates[1].y;
-    center.x = coordinates[2].x;
-    center.y = coordinates[2].y;
-    return new Diamond(highP, rightP, center);
+    return new Diamond(coordinates[0], coordinates[1], coordinates[2]);
   }
   guseynov::Shape* makeShape(std::istream & in, const std::string & name)
   {

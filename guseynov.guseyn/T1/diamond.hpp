@@ -8,7 +8,7 @@ namespace guseynov
   class Diamond final : public Shape
   {
   public:
-    Diamond(point_t highP, point_t rightP, point_t centerP);
+    Diamond(point_t p1, point_t p2, point_t p3);
     double getArea() const override;
     rectangle_t getFrameRect() const override;
     void move(point_t pos) override;
@@ -19,9 +19,7 @@ namespace guseynov
     point_t highP_;
     point_t rightP_;
     point_t center_;
-    void assigment(point_t highP, point_t rightP, point_t center);
   };
 }
-
 
 #endif
