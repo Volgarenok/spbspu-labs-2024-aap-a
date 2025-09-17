@@ -43,7 +43,8 @@ namespace
     return c;
   }
 
-  guseynov::point_t getVertical(guseynov::point_t center, guseynov::point_t horizontal, guseynov::point_t a, guseynov::point_t b, guseynov::point_t c)
+  guseynov::point_t getVertical(guseynov::point_t center, guseynov::point_t horizontal,
+    guseynov::point_t a, guseynov::point_t b, guseynov::point_t c)
   {
     if ((a.x != center.x || a.y != center.y) && (a.x != horizontal.x || a.y != horizontal.y))
     {
