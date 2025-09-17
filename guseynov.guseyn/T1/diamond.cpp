@@ -1,88 +1,111 @@
 #include "diamond.hpp"
 #include <cmath>
 #include <stdexcept>
-#include <algorithm>
 
-guseynov::Diamond::Diamond(point_t p1, point_t p2, point_t p3)
+namespace
 {
-  point_t points[3] = {p1, p2, p3};
-  std::sort(points, points + 3, [](const point_t& a, const point_t& b) {
-    return a.x < b.x || (a.x == b.x && a.y < b.y);
-  });
-
-  if (points[0].x == points[1].x && points[1].x != points[2].x)
+  bool isCorrectDiamond(guseynov::point_t a, guseynov::point_t b, guseynov::point_t c)
   {
-    if (points[0].y == points[1].y)
+    if ((a.x == b.x && a.y == b.y) || (a.x == c.x && a.y == c.y) || (b.x == c.x && b.y == c.y))
     {
-      throw std::invalid_argument("Invalid diamond parameters");
+      return false;
     }
-    highP_ = (points[0].y > points[1].y) ? points[0] : points[1];
-    rightP_ = points[2];
-    center_ = {points[0].x, points[2].y};
-  }
-  else if (points[1].x == points[2].x && points[0].x != points[1].x)
-  {
-    if (points[1].y == points[2].y)
+    if ((a.x != b.x && a.x != c.x && b.x != c.x) || (a.y != b.y && a.y != c.y && b.y != c.y))
     {
-      throw std::invalid_argument("Invalid diamond parameters");
+      return false;
     }
-    highP_ = (points[1].y > points[2].y) ? points[1] : points[2];
-    rightP_ = points[0];
-    center_ = {points[1].x, points[0].y};
-  }
-  else
-  {
-    throw std::invalid_argument("Invalid diamond parameters");
+    return true;
   }
 
-  if (highP_.x != center_.x || rightP_.y != center_.y)
+  guseynov::point_t getCenter(guseynov::point_t a, guseynov::point_t b, guseynov::point_t c)
+  {
+    if ((a.x == b.x && a.y == c.y) || (a.y == b.y && a.x == c.x))
+    {
+      return a;
+    }
+    if ((b.x == a.x && b.y == c.y) || (b.y == a.y && b.x == c.x))
+    {
+      return b;
+    }
+    return c;
+  }
+
+  guseynov::point_t getHorizontal(guseynov::point_t center, guseynov::point_t a, guseynov::point_t b, guseynov::point_t c)
+  {
+    if (center.x != a.x && center.y == a.y)
+    {
+      return a;
+    }
+    if (center.x != b.x && center.y == b.y)
+    {
+      return b;
+    }
+    return c;
+  }
+
+  guseynov::point_t getVertical(guseynov::point_t center, guseynov::point_t horizontal, guseynov::point_t a, guseynov::point_t b, guseynov::point_t c)
+  {
+    if ((a.x != center.x || a.y != center.y) && (a.x != horizontal.x || a.y != horizontal.y))
+    {
+      return a;
+    }
+    if ((b.x != center.x || b.y != center.y) && (b.x != horizontal.x || b.y != horizontal.y))
+    {
+      return b;
+    }
+    return c;
+  }
+}
+
+guseynov::Diamond::Diamond(point_t a, point_t b, point_t c):
+  center_(getCenter(a, b, c)),
+  horizontal_(getHorizontal(center_, a, b, c)),
+  vertical_(getVertical(center_, horizontal_, a, b, c))
+{
+  if (!isCorrectDiamond(a, b, c))
   {
     throw std::invalid_argument("Invalid diamond parameters");
   }
 }
 
-double guseynov::Diamond::getArea() const
+double guseynov::Diamond::getArea() const noexcept
 {
-  double diag1 = 2 * std::abs(highP_.y - center_.y);
-  double diag2 = 2 * std::abs(rightP_.x - center_.x);
-  return (diag1 * diag2) / 2.0;
+  return std::fabs((horizontal_.x - center_.x) * (vertical_.y - center_.y) * 2);
 }
 
-guseynov::rectangle_t guseynov::Diamond::getFrameRect() const
+guseynov::rectangle_t guseynov::Diamond::getFrameRect() const noexcept
 {
-  double width = 2 * std::abs(rightP_.x - center_.x);
-  double height = 2 * std::abs(highP_.y - center_.y);
+  double width = std::fabs(horizontal_.x - center_.x) * 2;
+  double height = std::fabs(vertical_.y - center_.y) * 2;
   return {width, height, center_};
 }
 
-void guseynov::Diamond::move(point_t pos)
+void guseynov::Diamond::move(point_t new_center) noexcept
 {
-  double moveX = pos.x - center_.x;
-  double moveY = pos.y - center_.y;
-  highP_.x += moveX;
-  highP_.y += moveY;
-  rightP_.x += moveX;
-  rightP_.y += moveY;
-  center_ = pos;
+  double xOffset = horizontal_.x - center_.x;
+  double yOffset = vertical_.y - center_.y;
+  center_ = new_center;
+  horizontal_ = {center_.x + xOffset, center_.y};
+  vertical_ = {center_.x, center_.y + yOffset};
 }
 
-void guseynov::Diamond::move(double x, double y)
+void guseynov::Diamond::move(double dx, double dy) noexcept
 {
-  highP_.x += x;
-  highP_.y += y;
-  rightP_.x += x;
-  rightP_.y += y;
-  center_.x += x;
-  center_.y += y;
+  center_.x += dx;
+  center_.y += dy;
+  horizontal_.x += dx;
+  horizontal_.y += dy;
+  vertical_.x += dx;
+  vertical_.y += dy;
 }
 
-void guseynov::Diamond::scaleWithoutCheck(double k)
+void guseynov::Diamond::scaleWithoutCheck(double n)
 {
-  highP_.y = center_.y + (highP_.y - center_.y) * k;
-  rightP_.x = center_.x + (rightP_.x - center_.x) * k;
+  horizontal_.x = center_.x + (horizontal_.x - center_.x) * n;
+  vertical_.y = center_.y + (vertical_.y - center_.y) * n;
 }
 
 guseynov::Shape * guseynov::Diamond::clone() const
 {
-  return new Diamond(highP_, rightP_, center_);
+  return new Diamond(center_, horizontal_, vertical_);
 }
